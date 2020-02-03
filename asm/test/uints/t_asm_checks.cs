@@ -152,7 +152,7 @@ namespace Z0
             var name = nameof(dinx.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
 
-            var provider = ImmOpProviders.provider(HK.vk256<ushort>(),HK.opk(n2));
+            var provider = ImmOpProviders.provider(HK.vk256<ushort>(),HK.opfk(n2));
             var x = Random.CpuVector<ushort>(w);
             var y = Random.CpuVector<ushort>(w);
             
@@ -172,7 +172,7 @@ namespace Z0
         void CheckBinaryImm<T>(IAsmExecBuffer buffer, N128 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = ImmOpProviders.provider(HK.vk128<T>(), HK.opk(n2));
+            var provider = ImmOpProviders.provider(HK.vk128<T>(), HK.opfk(n2));
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -194,7 +194,7 @@ namespace Z0
         void CheckBinaryImm<T>(IAsmExecBuffer buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opk(n2));
+            var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opfk(n2));
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -217,7 +217,7 @@ namespace Z0
             where T : unmanaged
         {            
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
-            var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opk(n1));
+            var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opfk(n1));
 
             
             var dynop = provider.CreateOp(method,imm);
@@ -545,8 +545,8 @@ namespace Z0
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = OpIdentities.define(name, kind, false);
-            var gId = OpIdentities.define(name, kind, true);
+            var dId = OpIdentities.identify(name, kind, false);
+            var gId = OpIdentities.identify(name, kind, true);
 
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);
@@ -563,8 +563,8 @@ namespace Z0
         {
             var catalog = typeof(dinx).Assembly.OperationCatalog().CatalogName;
             
-            var idD = OpIdentities.segmented(name, w, kind, false);
-            var idG = OpIdentities.segmented(name, w, kind, true);
+            var idD = OpIdentities.identify(name, w, kind, false);
+            var idG = OpIdentities.identify(name, w, kind, true);
 
             var d = Context.CodeArchive(catalog, nameof(dinx)).Read(idD).Single();
             var g = Context.CodeArchive(catalog, nameof(ginx)).Read(idG).Single();

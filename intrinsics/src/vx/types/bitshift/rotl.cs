@@ -21,7 +21,7 @@ namespace Z0
 
             public static Rotl128<T> Op => default;
 
-            public Moniker Moniker => moniker(Name,hk);
+            public Moniker Moniker => identify(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
                 => DynopImm.UnaryOp<T>(hk, Moniker, gApiMethod(hk,Name),count);
@@ -44,7 +44,7 @@ namespace Z0
 
             public static Rotl256<T> Op => default;
 
-            public Moniker Moniker => moniker(Name,hk);
+            public Moniker Moniker => identify(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
                 => DynopImm.UnaryOp<T>(hk, Moniker, gApiMethod(hk,Name),count);

@@ -232,7 +232,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e, name.Text);
+                errout(e, name.Identifier);
                 succeeded = false;
             }
             finally

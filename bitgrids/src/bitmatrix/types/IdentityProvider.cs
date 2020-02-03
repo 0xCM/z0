@@ -11,18 +11,18 @@ namespace Z0
 
     readonly struct BitMatrixIdentityProvider : ITypeIdentityProvider
     {
-        public Option<Moniker> DefineIdentity(Type src)
+        public Option<TypeIdentity> DefineIdentity(Type src)
         {
             const string prefix = "bm";
             
             var t = src.EffectiveType();
             if(t.ContainsGenericParameters && t.GenericDefinition() == typeof(BitMatrix<>))
-                return Moniker.Parse($"{prefix}[T]");
+                return TypeIdentity.Define($"{prefix}[T]");
             
             if(t.IsConstructedGenericType && t.GetGenericTypeDefinition() ==typeof(BitMatrix<>))
             {
                 var kind = t.GetGenericArguments().Single().NumericKind();
-                return Moniker.Parse(concat(prefix, kind.Width().ToString(), Moniker.SegSep, NumericType.signature(kind)));                
+                return TypeIdentity.Define(concat(prefix, kind.Width().ToString(), TypeIdentity.SegSep, NumericType.signature(kind)));                
             }
             else
             {
@@ -55,10 +55,10 @@ namespace Z0
                 }
 
                 if(kind.IsSome() && width.IsSome())
-                    return Moniker.Parse(concat(prefix, width.Format(), Moniker.SegSep, NumericType.signature(kind)));
+                    return TypeIdentity.Define(concat(prefix, width.Format(), TypeIdentity.SegSep, NumericType.signature(kind)));
             }
 
-            return Moniker.Parse($"{prefix}err");                        
+            return TypeIdentity.Define($"{prefix}err");                        
                   
         }
     }

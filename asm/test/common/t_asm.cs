@@ -119,13 +119,13 @@ namespace Z0
         protected AsmCode<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
-                => Context.CodeArchive(catalog,subject).Read<T>(OpIdentities.segmented(opname, NumericType.kind<T>(), w)).Require(); 
+                => Context.CodeArchive(catalog,subject).Read<T>(OpIdentities.identify(opname, w, NumericType.kind<T>())).Require(); 
 
         protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, HK.Numeric<byte> kind)
         {
             var w = n8;
 
-            var moniker = OpIdentities.define(name, kind);                        
+            var moniker = OpIdentities.identify(name, kind);                        
             var f0 = Dynop.BinOp(primal, kind);
 
             var f1 = Dynop.BinOp(generic, kind);
@@ -142,7 +142,7 @@ namespace Z0
         {
             var w = n8;
 
-            var moniker = OpIdentities.define(name, kind);                        
+            var moniker = OpIdentities.identify(name, kind);                        
             var f0 = Dynop.BinOp(primal, kind);
 
             var f1 = Dynop.BinOp(generic, kind);
@@ -159,7 +159,7 @@ namespace Z0
         {
             var w = n16;
 
-            var moniker = OpIdentities.define(name, kind);                        
+            var moniker = OpIdentities.identify(name, kind);                        
             var f0 = Dynop.BinOp(primal, kind);
 
             var f1 = Dynop.BinOp(generic, kind);
@@ -177,7 +177,7 @@ namespace Z0
         {
             var w = n16;
 
-            var moniker = OpIdentities.define(name, kind);                        
+            var moniker = OpIdentities.identify(name, kind);                        
             var f0 = Dynop.BinOp(primal, kind);
 
             var f1 = Dynop.BinOp(generic, kind);
@@ -194,7 +194,7 @@ namespace Z0
         {
             var w = n32;
 
-            var moniker = OpIdentities.define(name, kind);                        
+            var moniker = OpIdentities.identify(name, kind);                        
             var f0 = Dynop.BinOp(primal, kind);
 
             var f1 = Dynop.BinOp(generic, kind);
@@ -210,7 +210,7 @@ namespace Z0
         protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, HK.Numeric<int> kind)
         {
             var w = n32;
-            var moniker = OpIdentities.define(name, kind);                        
+            var moniker = OpIdentities.identify(name, kind);                        
             var f0 = Dynop.BinOp(primal, kind);
 
             var f1 = Dynop.BinOp(generic, kind);
@@ -226,7 +226,7 @@ namespace Z0
         protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, HK.Numeric<long> kind)
         {            
             var w = n64;
-            var moniker = OpIdentities.define(name, kind);                        
+            var moniker = OpIdentities.identify(name, kind);                        
             var f0 = Dynop.BinOp(primal, kind);
 
             var f1 = Dynop.BinOp(generic, kind);
@@ -243,7 +243,7 @@ namespace Z0
         {            
             var w = n64;
 
-            var moniker = OpIdentities.define(name, kind);                        
+            var moniker = OpIdentities.identify(name, kind);                        
             var f0 = Dynop.BinOp(primal, kind);
 
             var f1 = Dynop.BinOp(generic, kind);

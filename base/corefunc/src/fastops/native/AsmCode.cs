@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="id">The identity to confer</param>
         public static AsmCode<T> Parse<T>(string data, Moniker id, T t = default)
             where T : unmanaged
-                => new AsmCode<T>(id, MemoryRange.Empty, id.Text, Hex.parsebytes(data).ToArray());
+                => new AsmCode<T>(id, MemoryRange.Empty, id.Identifier, Hex.parsebytes(data).ToArray());
                 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)

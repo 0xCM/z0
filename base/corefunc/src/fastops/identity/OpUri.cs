@@ -32,7 +32,7 @@ namespace Z0
             {
                 var catalog = parts[0];
                 var subject = parts[1];
-                var id = Moniker.Parse(parts[2]);
+                var id = Moniker.Define(parts[2]);
                 return Define(catalog, subject, id);
             }
             return none<OpUri>();
@@ -51,7 +51,7 @@ namespace Z0
         }
         
         public string Format()
-            => concat(Catalog, fslash(), Subject, fslash(), Id.Text);
+            => concat(Catalog, fslash(), Subject, fslash(), Id.Identifier);
         
         public override string ToString()
             => Format();

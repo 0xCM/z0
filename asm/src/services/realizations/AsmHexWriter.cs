@@ -37,7 +37,7 @@ namespace Z0
 
         public void Write(AsmCode[] src, int? idpad = null)
         {
-            var pad = idpad ?? src.Select(code => code.Id.Text.Length).Max() + 1;
+            var pad = idpad ?? src.Select(code => code.Id.Identifier.Length).Max() + 1;
             foreach(var item in src)
                 Write(item,pad);
         }
@@ -48,7 +48,7 @@ namespace Z0
         public void Write(CapturedMember[] src, int? idpad = null)
         {
             var members = src.ToArray();
-            var pad =  idpad ?? members.Select(m => m.Code.Id.Text.Length).Max() + 1;
+            var pad =  idpad ?? members.Select(m => m.Code.Id.Identifier.Length).Max() + 1;
             foreach(var member in members)
                 Write(member.Code, pad);
         }

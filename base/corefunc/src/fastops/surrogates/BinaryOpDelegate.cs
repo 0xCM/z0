@@ -22,7 +22,7 @@ namespace Z0
             this.Name = name;
         }
         
-        public Moniker Moniker => moniker<T>(Name);
+        public Moniker Moniker => identify<T>(Name);
 
         [MethodImpl(Inline)]
         public T Invoke(T a, T b) => F(a, b);

@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "bitslice";
 
-            public Moniker Moniker => moniker<T>(Name);
+            public Moniker Moniker => identify<T>(Name);
 
             public T Invoke(T a, byte k1, byte k2) => gbits.bitslice(a,k1,k2);
         }

@@ -36,38 +36,43 @@ namespace Z0
 
         public void capture_constants()
         {
+            var svc = Context.Capture();
+
+            using var hex = HexTestWriter();
             using var asm = AsmTestWriter();            
+        
             var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
-            Context.CaptureMethod(f, asm);
+        
+            svc.SaveBits(f,hex);
+            svc.SaveAsm(f, asm);
         }
 
         public void capture_shifter()
         {
-            using var native = NativeTestWriter();
-            using var asm = AsmTestWriter();
-            var fmt = AsmFormat;
+            var svc = Context.Capture();
 
+            using var hex = HexTestWriter();
+            using var asm = AsmTestWriter();
 
             var f = shifter(4);
-            NativeCapture.capture(f,native);
-            Context.CaptureDelegate(f,asm);
-
+            svc.SaveBits(f, hex);
+            svc.SaveAsm(f, asm);            
         }
 
         public void capture_shuffler()
         {
-            using var native = NativeTestWriter();
+            var svc = Context.Capture();
+
+            using var hex = HexTestWriter();
             using var asm = AsmTestWriter();
-            var fmt = AsmFormat;
 
             var f = shuffler<uint>(n2);
-            NativeCapture.capture(f,native);
-            Context.CaptureDelegate(f,asm);
+            svc.SaveBits(f, hex);
+            svc.SaveAsm(f, asm);            
 
             var g = shuffler(n3);
-            NativeCapture.capture(g,native);
-            Context.CaptureDelegate(g,asm);
-
+            svc.SaveBits(g, hex);
+            svc.SaveAsm(g, asm);            
         }
 
     }

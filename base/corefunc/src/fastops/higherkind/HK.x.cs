@@ -55,5 +55,50 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> OfKind(this IEnumerable<MethodInfo> src, HK.Vec256 hk, bool total = false)
             => src.Where(m => m.IsKind(hk,total));
+
+        [MethodImpl(Inline)]
+        public static bool IsOperator(this IFunc f)
+            => (f.Kind & FunctionKind.Operator) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsEmitter(this IFunc f)
+            => (f.Kind & FunctionKind.Emitter) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsMeasure(this IFunc f)
+            => (f.Kind & FunctionKind.Measure) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsUnary(this IFunc f)
+            => (f.Kind & FunctionKind.UnaryFunc) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsBinary(this IFunc f)
+            => (f.Kind & FunctionKind.BinaryFunc) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsVectorized(this IFunc f)
+            => (f.Kind & FunctionKind.Vectorized) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsPredicate(this IFunc f)
+            => (f.Kind & FunctionKind.Predicate) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool AcceptsImmediate(this IFunc f)
+            => (f.Kind & FunctionKind.Imm) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool AcceptsV128(this IFunc f)
+            => (f.Kind & FunctionKind.V128) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool AcceptsV256(this IFunc f)
+            => (f.Kind & FunctionKind.V256) != 0;
+        
+        [MethodImpl(Inline)]
+        public static bool IsImm8Resolver(this IFunc f)
+            => f is IImm8Resolver;
+
     }
 }

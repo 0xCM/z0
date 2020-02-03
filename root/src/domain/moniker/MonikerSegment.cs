@@ -6,11 +6,13 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     public readonly struct MonikerSegment
     {        
         public static MonikerSegment Empty => Define(FixedWidth.None, FixedWidth.None, NumericIndicator.None);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MonikerSegment Define(FixedWidth total, FixedWidth segment, NumericIndicator indicator)
             => new MonikerSegment(total,segment,indicator);
 
@@ -67,6 +69,7 @@ namespace Z0
         public static implicit operator MonikerSegment((FixedWidth w, FixedWidth t, NumericIndicator i) src)                
             => new MonikerSegment(src.w, src.t,src.i);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         MonikerSegment(FixedWidth dominant, FixedWidth segwidth, NumericIndicator indicator)
         {
             this.TotalWidth = dominant;

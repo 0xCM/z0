@@ -19,7 +19,7 @@ namespace Z0
 
             [MethodImpl(Inline)]            
             public DynamicDelegate CreateOp(MethodInfo src, byte imm)
-                => DynopImm.OpBuilder(HK.vk128(), HK.opk(n2), src)(imm);
+                => DynopImm.OpBuilder(HK.vk128(), HK.opfk(n2), src)(imm);
         }
 
         readonly struct ImmBinaryV128<T> : IImmOpProvider<BinaryOp<Vector128<T>>>

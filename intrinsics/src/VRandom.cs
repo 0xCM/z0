@@ -19,7 +19,7 @@ namespace Z0
 
         readonly IPolyrand Random;
 
-        public Moniker Moniker => moniker(Name,w);
+        public Moniker Moniker => identify(Name,w);
 
         [MethodImpl(Inline)]
         internal VRandom128(IPolyrand random)            
@@ -38,7 +38,7 @@ namespace Z0
 
         static N256 w => default;
 
-        public Moniker Moniker => moniker(Name,w);
+        public Moniker Moniker => identify(Name,w);
 
         [MethodImpl(Inline)]
         internal VRandom256(IPolyrand random)            

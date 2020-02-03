@@ -21,7 +21,7 @@ namespace Z0
 
             public static Sllr128<T> Op => default;
 
-            public Moniker Moniker => moniker(Name,hk);
+            public Moniker Moniker => identify(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets) 
@@ -41,7 +41,7 @@ namespace Z0
 
             public static Sllr256<T> Op => default;
              
-            public Moniker Moniker => moniker(Name,hk);
+            public Moniker Moniker => identify(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offset) 

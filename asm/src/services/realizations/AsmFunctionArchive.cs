@@ -72,7 +72,7 @@ namespace Z0
         {
             try
             {
-                var idpad = src.Members.Select(f => f.Id.Text.Length).Max() + 1;
+                var idpad = src.Members.Select(f => f.Id.Identifier.Length).Max() + 1;
                 using var writer = new StreamWriter(HexPath(src.Id).FullPath, append);
                 foreach(var f in src.Members)
                     writer.WriteLine(f.Code.Format(idpad));

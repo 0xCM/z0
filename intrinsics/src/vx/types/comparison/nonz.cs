@@ -22,7 +22,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => identify<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x) => ginx.vnonz(x);
@@ -46,7 +46,7 @@ namespace Z0
 
             public static NonZ256<T> Op => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => identify<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x) => ginx.vnonz(x);

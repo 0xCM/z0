@@ -21,7 +21,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => identify<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vreverse(x);
@@ -37,7 +37,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => identify<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => ginx.vreverse(x);

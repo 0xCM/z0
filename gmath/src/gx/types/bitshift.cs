@@ -19,7 +19,7 @@ namespace Z0
 
             public static Srl<T> Op => default;
 
-            public Moniker Moniker => moniker<T>(Name);
+            public Moniker Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, byte offset) => gmath.srl(a, offset);
@@ -41,7 +41,7 @@ namespace Z0
 
             public static Sll<T> Op => default;
 
-            public Moniker Moniker => moniker<T>(Name);
+            public Moniker Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, byte offset) => gmath.sll(a, offset);

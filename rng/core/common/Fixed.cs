@@ -27,7 +27,7 @@ namespace Z0
         
         readonly EmitterSurrogate<F> f;
 
-        public Moniker Moniker => OpIdentities.define(Name,Width,NumericKind);
+        public Moniker Moniker => OpIdentities.identify(Name,Width,NumericKind);
 
         [MethodImpl(Inline)]
         internal FixedEmitter(IPolyrand random, EmitterSurrogate<F> f)      

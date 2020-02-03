@@ -9,29 +9,29 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static BitGridKind;
+    using static GridKind;
 
     readonly struct BitGridIdentity : ITypeIdentityProvider
     {        
-        public Option<Moniker> DefineIdentity(Type src)
+        public Option<TypeIdentity> DefineIdentity(Type src)
         {
             var kind = src.GridKind().ValueOrDefault();
             if(!kind.IsSome())
-                return none<Moniker>();
+                return none<TypeIdentity>();
             if(src.IsOpenGeneric())
-                return Moniker.Parse(kind.Indicator());
+                return TypeIdentity.Define(kind.Indicator());
             
             var closures = src.GridClosures();
             if(!closures.IsSome())
-                return none<Moniker>();
+                return none<TypeIdentity>();
             
-            var segsep = Moniker.SegSep.ToString();
+            var segsep = TypeIdentity.SegSep.ToString();
             var count = closures.NonEmptyCount();
 
             if(count == 1)
-                return Moniker.Parse(concat(kind.Indicator(), closures.C.Format()));
+                return TypeIdentity.Define(concat(kind.Indicator(), closures.C.Format()));
             else if(count == 3)
-                return Moniker.Parse(concat(
+                return TypeIdentity.Define(concat(
                         kind.Indicator(), segsep, 
                         kind.Width().Format(), segsep, 
                         closures.A.Format(), segsep,
@@ -39,13 +39,13 @@ namespace Z0
                         closures.C.Format()
                         ));
             else 
-                return none<Moniker>();
+                return none<TypeIdentity>();
             
         }
     }
 
     [Flags]
-    public enum BitGridCategory : uint
+    public enum GridCategory : uint
     {
         None = 0,
 
@@ -59,7 +59,7 @@ namespace Z0
 
         Subgrid = Pow2.T20,
 
-        Primal = Pow2.T21,
+        Numeric = Pow2.T21,
         
         GenericUnfixed = Generic | Unfixed,
 
@@ -69,41 +69,41 @@ namespace Z0
 
         FixedSubgrid = FixedNatural | Subgrid,
 
-        PrimalGeneric = Fixed | Primal | Generic,        
+        NumericGeneric = Fixed | Numeric | Generic,        
     }
 
     [Flags]
-    public enum BitGridKind : uint
+    public enum GridKind : uint
     {
         None = 0,
 
-        Generic = BitGridCategory.Generic,
+        Generic = GridCategory.Generic,
         
-        Natural = BitGridCategory.Natural,
+        Natural = GridCategory.Natural,
 
-        Fixed = BitGridCategory.Fixed,
+        Fixed = GridCategory.Fixed,
 
-        Unfixed = BitGridCategory.Unfixed,
+        Unfixed = GridCategory.Unfixed,
 
-        Subgrid = BitGridCategory.Subgrid,
+        Subgrid = GridCategory.Subgrid,
 
-        Primal = BitGridCategory.Primal,
+        Numeric = GridCategory.Numeric,
         
-        GenericUnfixed = BitGridCategory.GenericUnfixed,
+        GenericUnfixed = GridCategory.GenericUnfixed,
 
-        NaturalUnfixed = BitGridCategory.NaturalUnfixed,
+        NaturalUnfixed = GridCategory.NaturalUnfixed,
 
-        FixedNatural = BitGridCategory.FixedNatural,
+        FixedNatural = GridCategory.FixedNatural,
 
-        FixedSubgrid = BitGridCategory.FixedSubgrid,
+        FixedSubgrid = GridCategory.FixedSubgrid,
 
-        PrimalGeneric = BitGridCategory.PrimalGeneric,
+        NumericGeneric = GridCategory.NumericGeneric,
         
-        Primal16 = 16 | PrimalGeneric,
+        Numeric16 = 16 | NumericGeneric,
 
-        Primal32 = 32 | PrimalGeneric,
+        Numeric32 = 32 | NumericGeneric,
 
-        Primal64 = 64 | PrimalGeneric,
+        Numeric64 = 64 | NumericGeneric,
 
         Natural16 = 16 | FixedNatural,
 
@@ -124,58 +124,56 @@ namespace Z0
         Subgrid128 = 128 | FixedSubgrid,
 
         Subgrid256 = 256 | FixedSubgrid,
-
     }
 
-
-    public class BitGridIndicators
+    public class GridIndicators
     {   
-        public const string Generic = "bgg";
+        public const string Natural = "bgnu";
 
-        public const string Natural = "bgn";
+        public const string Generic = "bgu";
 
-        public const string PrimalGeneric = "bgpg";
+        public const string PrimalGeneric = "bg";
 
-        public const string FixedNatural = "bgfn";
+        public const string FixedNatural = "bgn";
 
-        public const string FixedSubgrid = "bgsg";
+        public const string FixedSubgrid = "bgs";
     }
 
     public static class BitGridIdentityX
     {
         [MethodImpl(Inline)]
-        public static bool IsPrimalGeneric(this BitGridKind k)
-            => (k & PrimalGeneric) != 0;
+        public static bool IsPrimalGeneric(this GridKind k)
+            => (k & NumericGeneric) != 0;
 
         [MethodImpl(Inline)]
-        public static bool IsFixedNatural(this BitGridKind k)
+        public static bool IsFixedNatural(this GridKind k)
             => (k & FixedNatural) != 0;
 
         [MethodImpl(Inline)]
-        public static bool IsSubGrid(this BitGridKind k)
+        public static bool IsSubGrid(this GridKind k)
             => (k & FixedSubgrid) != 0;
 
         [MethodImpl(Inline)]
-        public static FixedWidth Width(this BitGridKind k)
+        public static FixedWidth Width(this GridKind k)
             => (FixedWidth)((ushort)k);
 
         [MethodImpl(Inline)]
-        public static BitGridCategory Category(this BitGridKind k)
-            => (BitGridCategory)(((uint)k >> 16) << 16);
+        public static GridCategory Category(this GridKind k)
+            => (GridCategory)(((uint)k >> 16) << 16);
 
 
         [MethodImpl(Inline)]
-        public static bool IsSome(this BitGridKind k)
-            => k != BitGridKind.None;
+        public static bool IsSome(this GridKind k)
+            => k != Z0.GridKind.None;
 
-        public static string Indicator(this BitGridKind k)
-            => k.IsPrimalGeneric() ? BitGridIndicators.PrimalGeneric
-             : k.IsSubGrid() ? BitGridIndicators.FixedSubgrid 
-             : k.IsFixedNatural() ? BitGridIndicators.FixedNatural
-             : (k & BitGridKind.Generic) != 0 ? BitGridIndicators.Generic
-             : (k & BitGridKind.GenericUnfixed) != 0 ? BitGridIndicators.Generic 
-             : (k & BitGridKind.Natural) != 0 ? BitGridIndicators.Natural 
-             : (k & BitGridKind.NaturalUnfixed) != 0 ? BitGridIndicators.Natural 
+        public static string Indicator(this GridKind k)
+            => k.IsPrimalGeneric() ? GridIndicators.PrimalGeneric
+             : k.IsSubGrid() ? GridIndicators.FixedSubgrid 
+             : k.IsFixedNatural() ? GridIndicators.FixedNatural
+             : (k & Z0.GridKind.Generic) != 0 ? GridIndicators.Generic
+             : (k & Z0.GridKind.GenericUnfixed) != 0 ? GridIndicators.Generic 
+             : (k & Z0.GridKind.Natural) != 0 ? GridIndicators.Natural 
+             : (k & Z0.GridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural 
              :  k.ToString();
             
 
@@ -206,44 +204,44 @@ namespace Z0
         public static int NonEmptyCount(this Triple<FixedWidth,FixedWidth,NumericKind> src)
             => (src.A.IsSome() ? 1 : 0) + (src.B.IsSome() ? 1 : 0)  + (src.C.IsSome() ? 1 : 0);
 
-        public static Option<BitGridKind> GridKind(this Type src)
+        public static Option<GridKind> GridKind(this Type src)
         {
             var def =  src.GenericDefinition().ValueOrDefault();
             if(def == null)
-                return none<BitGridKind>();
+                return none<GridKind>();
 
             if(def == typeof(BitGrid<>))
-                return BitGridKind.PrimalGeneric;
+                return Z0.GridKind.NumericGeneric;
             else if(def == typeof(BitGrid<,,>))
-                return BitGridKind.NaturalUnfixed;
+                return Z0.GridKind.NaturalUnfixed;
             if(def == typeof(BitGrid16<>))
-                return BitGridKind.Primal16;
+                return Z0.GridKind.Numeric16;
             else if(def == typeof(BitGrid32<>))
-                return BitGridKind.Primal32;
+                return Z0.GridKind.Numeric32;
             else if(def == typeof(BitGrid64<>))
-                return BitGridKind.Primal64;
+                return Z0.GridKind.Numeric64;
             else if(def == typeof(BitGrid16<,,>))
-                return BitGridKind.Natural16;
+                return Z0.GridKind.Natural16;
             else if(def == typeof(BitGrid32<,,>))
-                return BitGridKind.Natural32;
+                return Z0.GridKind.Natural32;
             else if(def == typeof(BitGrid64<,,>))
-                return BitGridKind.Natural64;
+                return Z0.GridKind.Natural64;
             else if(def == typeof(BitGrid128<,,>))
-                return BitGridKind.Natural128;
+                return Z0.GridKind.Natural128;
             else if(def == typeof(BitGrid256<,,>))
-                return BitGridKind.Natural256;
+                return Z0.GridKind.Natural256;
             else if(def == typeof(SubGrid16<,,>))
-                return BitGridKind.Subgrid16;
+                return Z0.GridKind.Subgrid16;
             else if(def == typeof(SubGrid32<,,>))
-                return BitGridKind.Subgrid32;
+                return Z0.GridKind.Subgrid32;
             else if(def == typeof(SubGrid64<,,>))
-                return BitGridKind.Subgrid64;
+                return Z0.GridKind.Subgrid64;
             else if(def == typeof(SubGrid128<,,>))
-                return BitGridKind.Subgrid128;
+                return Z0.GridKind.Subgrid128;
             else if(def == typeof(SubGrid256<,,>))
-                return BitGridKind.Subgrid256;
+                return Z0.GridKind.Subgrid256;
             else
-                return none<BitGridKind>();
+                return none<GridKind>();
         }
 
         [MethodImpl(Inline)]

@@ -18,7 +18,7 @@ namespace Z0
 
         readonly IPolyrand Random;
 
-        public Moniker Moniker => moniker<T>(Name);
+        public Moniker Moniker => identify<T>(Name);
 
         [MethodImpl(Inline)]
         internal PrimalEmitter(IPolyrand random)            

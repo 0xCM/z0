@@ -101,10 +101,10 @@ namespace Z0
         protected string CaseName<W,C>(string root, W w = default, C t = default)
             where W : unmanaged, ITypeNat
             where C : unmanaged
-                => $"{GetType().Name}/{moniker(root,w,t)}";
+                => $"{GetType().Name}/{identify(root,w,t)}";
 
         protected static Moniker SubjectId(string opname, NumericKind kind)
-            => OpIdentities.define($"{opname}_subject",kind);
+            => OpIdentities.identify($"{opname}_subject",kind);
 
         protected static Moniker SubjectId<T>(string opname, T t = default)
             where T : unmanaged
@@ -112,7 +112,7 @@ namespace Z0
 
         protected static Moniker BaselineId<K>(string opname,K t = default)
             where K : unmanaged
-                => moniker<K>($"{opname}_baseline");
+                => identify<K>($"{opname}_baseline");
 
         protected virtual bool TraceEnabled
             => true;

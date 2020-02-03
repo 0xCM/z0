@@ -17,7 +17,7 @@ namespace Z0
     {        
         public static IEnumerable<(Moniker id, Type type)> All
             => from p in type<NatSpanCases>().Properties().Where(p => p.Name != nameof(All))
-                let id = Moniker.Parse(p.DisplayName())
+                let id = Moniker.Define(p.DisplayName())
                 let type = p.PropertyType
                 select (id,type);   
 

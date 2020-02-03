@@ -12,7 +12,6 @@ namespace Z0
 
     partial class HK
     {
-
         /// <summary>
         /// Reifies an emitter
         /// </summary>
@@ -55,19 +54,18 @@ namespace Z0
         public static FuncType<T1,T2,T3,R> fk<T1,T2,T3,R>(T1 t1 = default, T2 t2 = default, T3 t3 = default, R r = default)
             => default;
 
-        public readonly struct FuncType : IFuncKind<FuncType>
+        public readonly struct FuncKindType : IFuncKind
         {
             public const FunctionKind Kind = FunctionKind.None;
 
             [MethodImpl(Inline)]
-            public static implicit operator FunctionKind(FuncType src)
+            public static implicit operator FunctionKind(FuncKindType src)
                 =>  src.Classifier;
 
             public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
-
         }
 
-        public readonly struct FuncType<R> : IFuncKind<FuncType<R>,N1>
+        public readonly struct FuncType<R> : IFuncKind<R>
         {
             public const FunctionKind Kind = FunctionKind.Func0;
 
@@ -76,14 +74,14 @@ namespace Z0
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
-            public static implicit operator FuncType(FuncType<R> src)
+            public static implicit operator FuncKindType(FuncType<R> src)
                 =>  default;
 
             public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
         }
 
-        public readonly struct FuncType<T1,R> : IFuncKind<FuncType<T1,R>,N1>
+        public readonly struct FuncType<T1,R> : IFuncKind<T1,R>
         {
             public const FunctionKind Kind = FunctionKind.Func1;
 
@@ -92,14 +90,14 @@ namespace Z0
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
-            public static implicit operator FuncType(FuncType<T1,R> src)
+            public static implicit operator FuncKindType(FuncType<T1,R> src)
                 =>  default;
 
             public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
         }
 
-        public readonly struct FuncType<T1,T2,R> : IFuncKind<FuncType<T1,T2,R>,N2>
+        public readonly struct FuncType<T1,T2,R> : IFuncKind<T1,T2,R>
         {
             public const FunctionKind Kind = FunctionKind.Func2;
 
@@ -109,14 +107,14 @@ namespace Z0
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
-            public static implicit operator FuncType(FuncType<T1,T2,R> src)
+            public static implicit operator FuncKindType(FuncType<T1,T2,R> src)
                 =>  default;
 
             public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
         }
 
-        public readonly struct FuncType<T1,T2,T3,R> : IFuncKind<FuncType<T1,T2,T3,R>,N3>
+        public readonly struct FuncType<T1,T2,T3,R> : IFuncKind<T1,T2,T3,R>
         {
             public const FunctionKind Kind = FunctionKind.Func3;
 
@@ -125,13 +123,13 @@ namespace Z0
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
-            public static implicit operator FuncType(FuncType<T1,T2,T3,R> src)
+            public static implicit operator FuncKindType(FuncType<T1,T2,T3,R> src)
                 =>  default;
 
             public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
 
-        public readonly struct UnaryFunc : IFuncKind<UnaryFunc,N1>
+        public readonly struct UnaryFunc : IFuncKind, IFuncArity<N1>
         {
             public const FunctionKind Kind = FunctionKind.UnaryFunc;
 
@@ -140,13 +138,13 @@ namespace Z0
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
-            public static implicit operator FuncType(UnaryFunc src)
+            public static implicit operator FuncKindType(UnaryFunc src)
                 =>  default;
 
             public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
 
-        public readonly struct BinaryFunc : IFuncKind<BinaryFunc,N2>
+        public readonly struct BinaryFunc : IFuncKind, IFuncArity<N2>
         {
             public const FunctionKind Kind = FunctionKind.BinaryFunc;
 
@@ -157,7 +155,7 @@ namespace Z0
             public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
 
-        public readonly struct TernaryFunc : IFuncKind<TernaryFunc>
+        public readonly struct TernaryFunc : IFuncKind, IFuncArity<N3>
         {
             public const FunctionKind Kind = FunctionKind.TernaryFunc;
 
@@ -168,7 +166,7 @@ namespace Z0
 
 
             [MethodImpl(Inline)]
-            public static implicit operator FuncType(TernaryFunc src)
+            public static implicit operator FuncKindType(TernaryFunc src)
                 =>  default;
 
             public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}

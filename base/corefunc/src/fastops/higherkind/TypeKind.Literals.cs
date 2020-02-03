@@ -54,14 +54,14 @@ namespace Z0
         public TypeKind Classifier {get;}
     }
 
-    public readonly struct TypeKind<N,T> : ITypeKind<TypeKind<N,T>,N,T>
+    public readonly struct TypeKindN1<N,T> : ITypeKindN1<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        public static TypeKind<N,T> None => default;
+        public static TypeKindN1<N,T> None => default;
 
         [MethodImpl(Inline)]
-        public TypeKind(TypeKind k)
+        public TypeKindN1(TypeKind k)
         {
             this.Classifier = k;
         }
@@ -69,15 +69,15 @@ namespace Z0
         public TypeKind Classifier {get;}
     }
 
-    public readonly struct TypeKind<M,N,T> : ITypeKind<TypeKind<M,N,T>,M,N,T>
+    public readonly struct TypeKindN2<M,N,T> : ITypeKindN2<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        public static TypeKind<M,N,T> None => default;
+        public static TypeKindN2<M,N,T> None => default;
 
         [MethodImpl(Inline)]
-        public TypeKind(TypeKind k)
+        public TypeKindN2(TypeKind k)
         {
             this.Classifier = k;
         }

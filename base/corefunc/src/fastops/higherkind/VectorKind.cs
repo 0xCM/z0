@@ -66,7 +66,8 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        public readonly struct Vec : ITypeKind<Vec>
+
+        public readonly struct Vec : IVecKind
         {
             public const TypeKind Kind = TypeKind.VectorType; 
 
@@ -77,7 +78,7 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct Vec<T> : ITypeKind<Vec<T>,T> 
+        public readonly struct Vec<T> : IVecKind<T> 
             where T : unmanaged
         {
             public const TypeKind Kind = TypeKind.VectorType; 
@@ -99,7 +100,7 @@ namespace Z0
                 => vk256<T>();
         }
 
-        public readonly struct Vec128 : ITypeKind<Vec128>, IFixedClass<Fixed128>
+        public readonly struct Vec128 : IFixedVecKind<Fixed128>
         {
             public const TypeKind Kind = TypeKind.VectorType; 
 
@@ -127,7 +128,7 @@ namespace Z0
                 
         }        
 
-        public readonly struct Vec128<T> : ITypeKind<Vec128<T>>, IFixedClass<Fixed128,T>
+        public readonly struct Vec128<T> : IVecKind<Vector128<T>,T>, IFixedVecKind<Fixed128>
             where T : unmanaged
         {
             public const TypeKind Kind = TypeKind.VectorType; 
@@ -160,7 +161,7 @@ namespace Z0
 
         }        
 
-        public readonly struct Vec256 : ITypeKind<Vec256>, IFixedClass<Fixed256>
+        public readonly struct Vec256 : IFixedVecKind<Fixed256>
         {
             public const TypeKind Kind = TypeKind.VectorType; 
 
@@ -188,7 +189,7 @@ namespace Z0
 
         }        
 
-        public readonly struct Vec256<T> : ITypeKind<Vec256<T>>, IFixedClass<Fixed256,T>
+        public readonly struct Vec256<T> : IVecKind<Vector256<T>,T>, IFixedVecKind<Fixed256>
             where T : unmanaged
         {
             public const TypeKind Kind = TypeKind.VectorType; 
@@ -216,7 +217,7 @@ namespace Z0
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Vec<W,T> : ITypeKind<Vec<W,T>,W,T>
+        public readonly struct Vec<W,T> : IVecKind<T>, IFixedNatWidth<W>
             where T : unmanaged
             where W : unmanaged, ITypeNat
         {
@@ -235,8 +236,8 @@ namespace Z0
                 =>  new TypeKind<T>(src.Classifier);
 
             [MethodImpl(Inline)]
-            public static implicit operator TypeKind<W,T>(Vec<W,T> src)
-                =>  new TypeKind<W,T>(src.Classifier);
+            public static implicit operator TypeKindN1<W,T>(Vec<W,T> src)
+                =>  new TypeKindN1<W,T>(src.Classifier);
 
             [MethodImpl(Inline)]
             public static implicit operator Vec(Vec<W,T> src)

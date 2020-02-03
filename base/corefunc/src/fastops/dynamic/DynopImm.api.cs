@@ -17,16 +17,16 @@ namespace Z0
 
     public static class DynopImm
     {
-        public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec128 vk, HK.UnaryOp opk, MethodInfo src)
+        public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec128 vk, HK.UnaryOpFunc opk, MethodInfo src)
             => imm8 => UnaryOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
-        public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec256 vk, HK.UnaryOp opk, MethodInfo src)
+        public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec256 vk, HK.UnaryOpFunc opk, MethodInfo src)
             => imm8 => UnaryOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
-        public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec128 vk, HK.BinaryOp opk, MethodInfo src)
+        public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec128 vk, HK.BinaryOpFunc opk, MethodInfo src)
             => imm8 => BinaryOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
-        public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec256 vk, HK.BinaryOp opk, MethodInfo src)
+        public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec256 vk, HK.BinaryOpFunc opk, MethodInfo src)
             => imm8 => BinaryOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
         public static Func<byte,DynamicDelegate> UnaryOpProvider(HK.Vec128 k, Moniker id, MethodInfo src, Type component)

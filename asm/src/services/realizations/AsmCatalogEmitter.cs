@@ -67,7 +67,7 @@ namespace Z0
             if(FunctionType.vunaryImm(op.Root))
             {                                                
                 var resolutions = op.Close()
-                    .Select(closure => Context.UnaryImmCapture(closure.ClosedMethod, closure.Id))
+                    .Select(closure => Context.ImmCapture(closure.ClosedMethod, closure.Id, n1))
                     .SelectMany(svc => svc.Capture(ImmSelection)).ToArray();                
 
                 if(resolutions.Length != 0)
@@ -77,7 +77,7 @@ namespace Z0
             else if(FunctionType.vbinaryImm(op.Root))
             {
                 var resolutions = op.Close()
-                    .Select(closure => Context.BinaryImmCapture(closure.ClosedMethod, closure.Id))
+                    .Select(closure => Context.ImmCapture(closure.ClosedMethod, closure.Id,n2))
                     .SelectMany(svc => svc.Capture(ImmSelection)).ToArray();                
 
                 if(resolutions.Length != 0)
@@ -90,7 +90,7 @@ namespace Z0
         {
             foreach(var member in op.Members.Where(m => FunctionType.vunaryImm(m.Root)))
             {
-                var resolutions = Context.UnaryImmCapture(member.Root, member.Id).Capture(ImmSelection);
+                var resolutions = Context.ImmCapture(member.Root, member.Id,n1).Capture(ImmSelection);
                 var group = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
                 foreach(var r in dst.Save(group,true))
                     yield return r;                
@@ -98,7 +98,7 @@ namespace Z0
 
             foreach(var member in op.Members.Where(m => FunctionType.vbinaryImm(m.Root)))
             {
-                var resolutions = Context.BinaryImmCapture(member.Root, member.Id).Capture(ImmSelection);
+                var resolutions = Context.ImmCapture(member.Root, member.Id,n2).Capture(ImmSelection);
                 var group = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
                 foreach(var r in dst.Save(group,true))
                     yield return r;                

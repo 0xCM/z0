@@ -12,7 +12,6 @@ namespace Z0
 
     public static partial class HK
     {
-
         [MethodImpl(Inline)]
         public static UserType upk()
             => default;
@@ -21,7 +20,6 @@ namespace Z0
         public static UserType<T> upk<T>(T t = default)
             where T : unmanaged
                 => default;
-
 
         [MethodImpl(Inline)]
         public static BitMatrixType<T> bm<T>(T t = default)
@@ -34,7 +32,7 @@ namespace Z0
             where W : unmanaged, ITypeNat
                 => default;
 
-        public readonly struct UserType : ITypeKind<UserType>
+        public readonly struct UserType : ITypeKind
         {
             [MethodImpl(Inline)]
             public static implicit operator TypeKind(UserType src)
@@ -45,7 +43,7 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct UserType<T> : ITypeKind<UserType<T>,T> 
+        public readonly struct UserType<T> : ITypeKind<T> 
             where T : unmanaged
         {
 
@@ -66,7 +64,7 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }                
 
-        public readonly struct BitVectorType : ITypeKind<BitVectorType>
+        public readonly struct BitVectorType : ITypeKind
         {
             [MethodImpl(Inline)]
             public static implicit operator TypeKind(BitVectorType src)
@@ -77,7 +75,7 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct BitVectorType<T> : ITypeKind<BitVectorType<T>,T> 
+        public readonly struct BitVectorType<T> : ITypeKind<T> 
             where T : unmanaged
         {
             public static FixedWidth Width => (FixedWidth)bitsize<T>();
@@ -98,7 +96,7 @@ namespace Z0
 
         }        
 
-        public readonly struct BitMatrixType<T> : ITypeKind<BitMatrixType<T>,T> 
+        public readonly struct BitMatrixType<T> : ITypeKind<T> 
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -110,7 +108,7 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct BitMatrixType<N,T> : ITypeKind<BitMatrixType<N,T>,N,T> 
+        public readonly struct BitMatrixType<N,T> : ITypeKindN1<N,T> 
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -127,7 +125,7 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct BitGridType<T> : ITypeKind<BitGridType<T>,T> 
+        public readonly struct BitGridType<T> : ITypeKind<T> 
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -138,7 +136,7 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct BitGridType<M,N,T> : ITypeKind<BitGridType<M,N,T>,M,N,T> 
+        public readonly struct BitGridType<M,N,T> : ITypeKindN2<M,N,T> 
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
@@ -148,8 +146,8 @@ namespace Z0
                 =>  new TypeKind<T>(src.Classifier);
 
             [MethodImpl(Inline)]
-            public static implicit operator TypeKind<M,N,T>(BitGridType<M,N,T> src)
-                =>  new TypeKind<M,N,T>(src.Classifier);
+            public static implicit operator TypeKindN2<M,N,T>(BitGridType<M,N,T> src)
+                =>  new TypeKindN2<M,N,T>(src.Classifier);
 
             [MethodImpl(Inline)]
             public static implicit operator BitGridType<T>(BitGridType<M,N,T> src)

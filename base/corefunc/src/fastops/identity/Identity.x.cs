@@ -70,7 +70,7 @@ namespace Z0
 
         public static Option<byte> ParseImm(this Moniker src)            
         {
-            if(src.HasImm && byte.TryParse(src.Text.RightOfLast(Moniker.Imm), out var immval))
+            if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(Moniker.Imm), out var immval))
                 return immval;
             else
                 return none<byte>();
@@ -79,11 +79,11 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Moniker SegmentMoniker<W>(this NumericKind k, W w = default)
             where W : unmanaged, ITypeNat
-                => Moniker.Parse($"{w}{Moniker.SegSep}{NumericType.signature(k)}");
+                => Moniker.Define($"{w}{Moniker.SegSep}{NumericType.signature(k)}");
 
         [MethodImpl(Inline)]   
         public static Moniker SegmentMoniker(this NumericKind k, FixedWidth w)
-            => Moniker.Parse($"{w.Format()}{Moniker.SegSep}{NumericType.signature(k)}");
+            => Moniker.Define($"{w.Format()}{Moniker.SegSep}{NumericType.signature(k)}");
 
         public static Option<MonikerScalar> ParseScalar(this MonikerPart part)
         {
@@ -129,10 +129,10 @@ namespace Z0
         /// Clears the immediate attached to the moniker, if any
         /// </summary>
         public static Moniker WithoutImm(this Moniker src)
-            => src.ParseImm().MapValueOrDefault(immval => Moniker.Parse(src.Text.Remove(ImmSuffix(immval))), src);
+            => src.ParseImm().MapValueOrDefault(immval => Moniker.Define(src.Identifier.Remove(ImmSuffix(immval))), src);
     
         public static Moniker WithImm(this Moniker src, byte imm)
-            => Moniker.Parse(concat(src.WithoutImm().Text, ImmSuffix(imm)));
+            => Moniker.Define(concat(src.WithoutImm().Identifier, ImmSuffix(imm)));
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports

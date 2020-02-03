@@ -23,14 +23,14 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        public readonly struct FixedType<F> : IFixedClass<F>
+        public readonly struct FixedType<F> : IFixedKind<F>
             where F : unmanaged, IFixed
         {
+            public static int BitCount => (int)Width;
+
             public const TypeKind Kind = TypeKind.FixedType;      
 
             public static FixedWidth Width => default(F).Width;
-
-            public static int BitCount => (int)Width;
 
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
@@ -38,7 +38,7 @@ namespace Z0
 
         }
 
-        public readonly struct FixedType<F,T> : IFixedClass<F,T>
+        public readonly struct FixedType<F,T> : IFixedKind<F,T>
             where F : unmanaged, IFixed
             where T : unmanaged
         {

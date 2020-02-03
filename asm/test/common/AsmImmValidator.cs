@@ -30,7 +30,7 @@ namespace Z0
             this.Context = context;
             this.AsmBuffer = NativeServices.ExecBuffer();
             this.RandomEmitter = context.Random.VectorEmitter<T>(n128);
-            this.AsmProducer = context.ImmProducer(HK.vk128(), HK.opk(n1));
+            this.AsmProducer = context.ImmBuilder(HK.vk128(), n1);
 
         }
 

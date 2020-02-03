@@ -36,74 +36,12 @@ namespace Z0
         public static IAsmHexReader HexReader(this IAsmContext context, char? idsep = null, char? bytesep = null)
             => AsmHexReader.Create(context,idsep,bytesep);
 
-        /// <summary>
-        /// Instantiates a service that produces immediate-specific code for supported function types that require immediate values
-        /// </summary>
-        /// <param name="context">The context shared with the created service</param>
-        /// <typeparam name="T">The primitive type over which the delegate will be instantiated</typeparam>
-        /// <typeparam name="D">The delegate type</typeparam>
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder<D> ImmProducer<T,D>(this IAsmContext context)
-            where D : Delegate
-            where T : unmanaged
-                => AsmImmFunctionBuilder.Define<T, D>(context);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec128 vk, HK.Operator<N1> opk)
-            => AsmImmFunctionBuilder.Define(context, vk, opk);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec256 vk, HK.Operator<N1> opk)
-            => AsmImmFunctionBuilder.Define(context, vk, opk);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec128 vk, HK.Operator<N2> opk)
-            => AsmImmFunctionBuilder.Define(context, vk, opk);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec256 vk, HK.Operator<N2> opk)
-            => AsmImmFunctionBuilder.Define(context, vk, opk);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec128 vk, HK.Operator<N1> opk)
-            => AsmImmFunctionBuilder.Define(context, vk,opk);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Operator<N1> opk)
-            => AsmImmFunctionBuilder.Define(context, vk,opk);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec128 vk, HK.Operator<N2> opk)
-            => AsmImmFunctionBuilder.Define(context, vk,opk);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Operator<N2> opk)
-            => AsmImmFunctionBuilder.Define(context, vk,opk);
-
-        public static void CaptureDelegate(this IAsmContext context, Delegate src, IAsmFunctionWriter dst)
-        {            
-            var capture = NativeReader.read(src.Identify(), src,dst.TakeBuffer());
-            var decoded = context.Decoder().DecodeFunction(capture);
-            dst.Write(decoded);
-        }
-
-        public static void CaptureMethod(this IAsmContext context, MethodInfo src, IAsmFunctionWriter dst)
-        {
-            var capture = NativeReader.read(src.Identify(), src,dst.TakeBuffer());
-            var decoded = context.Decoder().DecodeFunction(capture);
-            dst.Write(decoded);
-        }
-
-        public static void CaptureMethod(this IAsmContext context, MethodInfo src, Type[] args, IAsmFunctionWriter dst)
-        {
-            var capture = Z0.NativeCapture.capture(src, args, dst.TakeBuffer());
-            var decoded = context.Decoder().DecodeFunction(capture);         
-            dst.Write(decoded);
-        }
-
-        public static void CaptureMethods(this IAsmContext context, IEnumerable<MethodInfo> methods, Type[] args, IAsmFunctionWriter dst)
-            => iter(methods, m => context.CaptureMethod(m, args, dst));
-
+        public static IAsmImmBuilder ImmBuilder<V,N>(this IAsmContext context, V vk, N arity)
+            where V : unmanaged, IFixedVecKind
+            where N : unmanaged, ITypeNat
+                => AsmImmBuilder.Create(context, vk, arity);
+    
         public static IAsmImmCapture<T> ImmCapture<T>(this IAsmContext context, IImm8Resolver<T> resolver)
             where T : unmanaged        
             => resolver switch {
@@ -114,30 +52,19 @@ namespace Z0
                 _ => throw unsupported(resolver.GetType())
             };   
 
+        
         [MethodImpl(Inline)]
-        public static IAsmImmCapture UnaryImmCapture(this IAsmContext context, MethodInfo src, Moniker baseid)
-            => AsmImmCapture.UnaryCapture(context, src,baseid);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmCapture BinaryImmCapture(this IAsmContext context, MethodInfo src, Moniker baseid)
-            => AsmImmCapture.BinaryCapture(context, src, baseid);
-
-        [MethodImpl(Inline)]
-        public static IAsmImmCapture UnaryImmCapture(this IAsmContext context, MethodInfo src)
-            => AsmImmCapture.UnaryCapture(context, src, src.Identify());
-
-        [MethodImpl(Inline)]
-        public static IAsmImmCapture BinaryImmCapture(this IAsmContext context, MethodInfo src)
-            => AsmImmCapture.BinaryCapture(context, src, src.Identify());
-
-        [MethodImpl(Inline)]
-        public static AsmFunction BinaryImmCapture(this IAsmContext context, MethodInfo src, byte imm)
-            => context.BinaryImmCapture(src).Capture(imm);
-
-        [MethodImpl(Inline)]
-        public static AsmFunction UnaryImmCapture(this IAsmContext context, MethodInfo src, byte imm)
-            => context.UnaryImmCapture(src).Capture(imm);
-
+        public static IAsmImmCapture ImmCapture<Arity>(this IAsmContext context, MethodInfo src, Moniker baseid, Arity arity = default)
+            where Arity : unmanaged, ITypeNat
+        {
+            if(typeof(Arity) == typeof(N1))
+               return AsmImmCapture.UnaryCapture(context, src, baseid); 
+            else if(typeof(Arity) == typeof(N2))
+                return AsmImmCapture.BinaryCapture(context, src, baseid);
+            else
+                throw unsupported<Arity>();
+        }
+        
         /// <summary>
         /// Instantiates an internal/first-round asm formatter service
         /// </summary>
@@ -253,5 +180,4 @@ namespace Z0
         public static IAsmExecBuffer ExecBuffer(this IAsmContext context, int? size = null)
             => AsmExecBuffer.Create(context, size);
     }
-
 }

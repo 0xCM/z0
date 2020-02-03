@@ -34,7 +34,7 @@ namespace Z0
                 id += Moniker.PartSep;                    
                 id += args[i];
             }
-            return Moniker.Parse(id);
+            return Moniker.Define(id);
         }
 
         public Moniker GenericIdentity(MethodInfo method)            
@@ -66,16 +66,13 @@ namespace Z0
                     else if(argtype.IsBlocked())
                         last = concat(Moniker.Block, argtype.Width().Format());
                     else if(argtype.IsSpan())
-                        last = Moniker.Span;
+                        last = Moniker.Span;                        
                 }
-                else
-                    last = Arg(args[i]);
                 
                 id += last;
-
             }
 
-            return Moniker.Parse(id);        
+            return Moniker.Define(id);        
         }
 
         /// <summary>
@@ -94,7 +91,7 @@ namespace Z0
         {
             var pt = p.ParameterType;
             return !p.IsParametric()
-                ? pt.EffectiveType().ProvidedIdentity().MapValueOrDefault(m => concat(m.Text,p.Variance().Format()), string.Empty)
+                ? pt.EffectiveType().provided().MapValueOrDefault(m => concat(m.Identifier,p.Variance().Format()), string.Empty)
                 : string.Empty;                                                
         }
 
@@ -123,7 +120,7 @@ namespace Z0
 
             id += string.Join(Moniker.PartSep, Args(method));
 
-            return Moniker.Parse(id);
+            return Moniker.Define(id);
         }        
     }
 }

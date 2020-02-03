@@ -57,126 +57,134 @@ namespace Z0
     /// </summary>
     public interface ITypeKind : IKind<TypeKind>
     {        
+    }
+    
+    public interface IParametricTypeKind : ITypeKind
+    {
 
     }
-
-    public interface ITypeKind<K> : ITypeKind
-        where K : ITypeKind<K>
+    
+    public interface ITypeKind<T> : IParametricTypeKind
     {
 
     }
 
-    public interface ITypeKind<K,T> : ITypeKind<K>
-        where T : unmanaged
-        where K : ITypeKind<K,T>
+    public interface ITypeKind<T1,T2> : IParametricTypeKind
     {
 
     }
 
-    public interface ITypeKind<K,N,T> : ITypeKind<K,T>
-        where T : unmanaged
-        where K : ITypeKind<K,N,T>
+    public interface ITypeKind<T1,T2,T3> : IParametricTypeKind
+    {
+
+    }
+
+    public interface ITypeKindN<N> : ITypeKind
+        where N : unmanaged, ITypeNat
+    {
+        int NaturalArity
+        {
+            [MethodImpl(Inline)]
+            get => (int)nateval<N>();
+        }
+    }
+    public interface ITypeKindN1<N> : ITypeKindN<N1>, ITypeKind<N>
         where N : unmanaged, ITypeNat
     {
 
     }
 
-    public interface ITypeKind<K,M,N,T> : ITypeKind<K,T>
-        where K : ITypeKind<K,M,N,T>
-        where T : unmanaged
+    public interface ITypeKindN1<N,T> : ITypeKindN<N1>, ITypeKind<N,T>
+        where N : unmanaged, ITypeNat
+    {
+
+    }
+
+    public interface ITypeKindN1<N,T1,T2> : ITypeKindN<N1>, ITypeKind<N,T1,T2>
+        where N : unmanaged, ITypeNat
+    {
+
+    }
+
+    public interface ITypeKindN2<M,N> : ITypeKindN<N2>, ITypeKind<M,N>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
     {
 
     }
 
-    /// <summary>
-    /// Characterizes a higher-kinded function representation
-    /// </summary>
-    public interface IFuncKind : IKind<FunctionKind>
-    {
-
-    }
-
-    public interface IFuncKind<K> : IFuncKind
-        where K : IFuncKind<K>
-    {
-
-    }
-
-    public interface IFuncKind<K,N> : IFuncKind<K>
-        where K : IFuncKind<K,N>
+    public interface ITypeKindN2<M,N,T> : ITypeKindN<N2>, ITypeKind<M,N>
+        where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
     {
-        int Arity 
-            => (int)default(N).NatValue;
+
     }
 
-
-
-    /// <summary>
-    /// Characterizes types/kinds with which a fixed bit-width is associated
-    /// </summary>
-    public interface IFixedClass : IKind
+    public interface IFixedWidth
     {
-
         FixedWidth FixedWidth {get;}
     }
 
-    public interface IFixedClass<F> : IFixedClass, IKind<FixedKind>
-        where F : unmanaged, IFixed
+    /// <summary>
+    /// Characterizes a realization that is naturally-parametric with natural widths that can be specified as a fixed-width
+    /// </summary>
+    /// <typeparam name="W">The natural width type</typeparam>
+    public interface IFixedNatWidth<W> : IFixedWidth
+        where W : unmanaged, ITypeNat
     {
-        FixedWidth IFixedClass.FixedWidth 
+        FixedWidth IFixedWidth.FixedWidth
         {
             [MethodImpl(Inline)]
-            get =>  (FixedWidth)bitsize<F>();
+            get => (FixedWidth)nateval<W>();
         }
-   
-        FixedKind IKind<FixedKind>.Classifier 
-        {
-             [MethodImpl(Inline)]
-             get  => (FixedKind)FixedWidth;
-        }
+
     }
 
-    public interface IFixedClass<F,T> : IFixedClass, IKind<FixedKind,NumericKind>
+    
+
+    public interface IVecKind : ITypeKind
+    {
+
+    }
+
+    public interface IFixedVecKind : IVecKind, IFixedWidth
+    {
+
+    }    
+    public interface IFixedVecKind<F> : IFixedVecKind, IFixedKind<F>
         where F : unmanaged, IFixed
+    {
+
+    }
+    public interface IVecKind<T> : ITypeKind<T>
         where T : unmanaged
     {
-        FixedWidth IFixedClass.FixedWidth 
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)bitsize<F>();
-        }
 
-        /// <summary>
-        /// The classification value
-        /// </summary>
-        FixedKind IKind<FixedKind,NumericKind>.Class1 
-        {
-            [MethodImpl(Inline)]
-            get => (FixedKind)FixedWidth;
-        }
-
-        /// <summary>
-        /// The classification value
-        /// </summary>
-        NumericKind IKind<FixedKind,NumericKind>.Class2 
-        {
-            [MethodImpl(Inline)]
-            get => NumericType.kind<T>();
-        }
     }
 
-    public interface IBlockClass : IKind<BlockKind>
+    public interface IVecKind<V,T> : ITypeKind<T>, IFixedVecKind
+        where T : unmanaged
+        where V : struct
     {
 
+    }
+
+
+    public interface IBlockedKind : IKind<BlockKind>
+    {
 
     }
 
-    public interface IBlockClass<W,T> : IBlockClass
+    public interface IBlockedKind<W,T> : IBlockedKind, IFixedNatWidth<W>
         where W : unmanaged, ITypeNat
         where T : unmanaged
+    {
+
+    }
+
+    public interface IFixedBlockKind<W,F> : IBlockedKind<W,F>
+        where W : unmanaged, ITypeNat
+        where F : unmanaged, IFixed
     {
 
     }

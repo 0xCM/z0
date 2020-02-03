@@ -63,7 +63,6 @@ namespace Z0
         public CapturedMember ExtractBits(MethodInfo src, params Type[] args)
             => src.IsOpenGeneric() ? CaptureBits(src.Reify(args)) : CaptureBits(src);
 
-
         public CapturedMember[] ExtractBits(MethodInfo[] methods)
         {
             var targets = new CapturedMember[methods.Length];

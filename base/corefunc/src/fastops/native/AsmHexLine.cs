@@ -32,7 +32,7 @@ namespace Z0
         {
             try
             {
-                var id = Moniker.Parse(formatted.TakeBefore(idsep).Trim());
+                var id = Moniker.Define(formatted.TakeBefore(idsep).Trim());
                 var encoded = array(formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(Hex.parsebyte));
                 return Define(id,encoded);
                 
@@ -60,7 +60,7 @@ namespace Z0
         public readonly byte[] Encoded;
 
         public string Format(int idpad = 0)
-            => concat(Id.Text.PadRight(idpad), space(), Encoded.FormatAsmHex());
+            => concat(Id.Identifier.PadRight(idpad), space(), Encoded.FormatAsmHex());
         
         public override string ToString()
             => Format();

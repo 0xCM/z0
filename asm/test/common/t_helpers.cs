@@ -19,8 +19,8 @@ namespace Z0
             if(src.TextComponents.Skip(1).First()[0] == Moniker.Generic)
                 return src;
             else
-               return Moniker.Parse(
-                   concat(src.Text.LeftOf(Moniker.PartSep), Moniker.PartSep, Moniker.Generic,  src.Text.RightOf(Moniker.PartSep)));
+               return Moniker.Define(
+                   concat(src.Identifier.LeftOf(Moniker.PartSep), Moniker.PartSep, Moniker.Generic,  src.Identifier.RightOf(Moniker.PartSep)));
         }
 
         /// <summary>
@@ -44,10 +44,10 @@ namespace Z0
         /// </summary>
         public static Moniker WithAsm(this Moniker src)
         {
-            if(src.Text.Contains(Moniker.AsmLocator))
+            if(src.Identifier.Contains(Moniker.AsmLocator))
                 return src;
             else
-                return Moniker.Parse(src.Text + Moniker.AsmLocator);
+                return Moniker.Define(src.Identifier + Moniker.AsmLocator);
         }            
     }
 }

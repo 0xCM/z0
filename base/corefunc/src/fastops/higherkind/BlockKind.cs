@@ -269,101 +269,101 @@ namespace Z0
         public static Block512x64f bk512x64f()
             => default;
 
-        public readonly struct Block16x8u : IBlockClass<N16,byte> { public const BlockKind Kind = BlockKind.Block16x8u; public BlockKind Classifier => Kind;}
+        public readonly struct Block16x8u : IBlockedKind<N16,byte> { public const BlockKind Kind = BlockKind.Block16x8u; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block16x8i : IBlockClass<N16,sbyte> { public const BlockKind Kind = BlockKind.Block16x8i; public BlockKind Classifier => Kind;}
+        public readonly struct Block16x8i : IBlockedKind<N16,sbyte> { public const BlockKind Kind = BlockKind.Block16x8i; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block16x16u : IBlockClass<N16,ushort> { public const BlockKind Kind = BlockKind.Block16x16u; public BlockKind Classifier => Kind;}
+        public readonly struct Block16x16u : IBlockedKind<N16,ushort> { public const BlockKind Kind = BlockKind.Block16x16u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block16x16i : IBlockClass<N16,short> { public const BlockKind Kind = BlockKind.Block16x16i; public BlockKind Classifier => Kind;}
+        public readonly struct Block16x16i : IBlockedKind<N16,short> { public const BlockKind Kind = BlockKind.Block16x16i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block32x8u : IBlockClass<N32,byte> { public const BlockKind Kind = BlockKind.Block32x8u; public BlockKind Classifier => Kind;}
+        public readonly struct Block32x8u : IBlockedKind<N32,byte> { public const BlockKind Kind = BlockKind.Block32x8u; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block32x8i : IBlockClass<N32,sbyte> { public const BlockKind Kind = BlockKind.Block32x8i; public BlockKind Classifier => Kind;}
+        public readonly struct Block32x8i : IBlockedKind<N32,sbyte> { public const BlockKind Kind = BlockKind.Block32x8i; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block32x16u : IBlockClass<N32,ushort> { public const BlockKind Kind = BlockKind.Block32x16u; public BlockKind Classifier => Kind;}
+        public readonly struct Block32x16u : IBlockedKind<N32,ushort> { public const BlockKind Kind = BlockKind.Block32x16u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block32x16i : IBlockClass<N32,short> { public const BlockKind Kind = BlockKind.Block32x16i; public BlockKind Classifier => Kind;}
+        public readonly struct Block32x16i : IBlockedKind<N32,short> { public const BlockKind Kind = BlockKind.Block32x16i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block32x32u : IBlockClass<N32,uint> { public const BlockKind Kind = BlockKind.Block32x32u; public BlockKind Classifier => Kind;}
+        public readonly struct Block32x32u : IBlockedKind<N32,uint> { public const BlockKind Kind = BlockKind.Block32x32u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block32x32i : IBlockClass<N32,int> { public const BlockKind Kind = BlockKind.Block32x32i; public BlockKind Classifier => Kind;}
+        public readonly struct Block32x32i : IBlockedKind<N32,int> { public const BlockKind Kind = BlockKind.Block32x32i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block64x8u : IBlockClass<N64,byte> { public const BlockKind Kind = BlockKind.Block64x8u; public BlockKind Classifier => Kind;}
+        public readonly struct Block64x8u : IBlockedKind<N64,byte> { public const BlockKind Kind = BlockKind.Block64x8u; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block64x8i : IBlockClass<N64,sbyte> { public const BlockKind Kind = BlockKind.Block64x8i; public BlockKind Classifier => Kind;}
+        public readonly struct Block64x8i : IBlockedKind<N64,sbyte> { public const BlockKind Kind = BlockKind.Block64x8i; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block64x16u : IBlockClass<N64,ushort> { public const BlockKind Kind = BlockKind.Block64x16u; public BlockKind Classifier => Kind;}
+        public readonly struct Block64x16u : IBlockedKind<N64,ushort> { public const BlockKind Kind = BlockKind.Block64x16u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block64x16i : IBlockClass<N64,short> { public const BlockKind Kind = BlockKind.Block64x16i; public BlockKind Classifier => Kind;}
+        public readonly struct Block64x16i : IBlockedKind<N64,short> { public const BlockKind Kind = BlockKind.Block64x16i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block64x32u : IBlockClass<N64,uint> { public const BlockKind Kind = BlockKind.Block64x32u; public BlockKind Classifier => Kind;}
+        public readonly struct Block64x32u : IBlockedKind<N64,uint> { public const BlockKind Kind = BlockKind.Block64x32u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block64x32i : IBlockClass<N64,int> { public const BlockKind Kind = BlockKind.Block64x32i; public BlockKind Classifier => Kind;}
+        public readonly struct Block64x32i : IBlockedKind<N64,int> { public const BlockKind Kind = BlockKind.Block64x32i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block64x64u : IBlockClass<N64,ulong> { public const BlockKind Kind = BlockKind.Block64x64u; public BlockKind Classifier => Kind;}
+        public readonly struct Block64x64u : IBlockedKind<N64,ulong> { public const BlockKind Kind = BlockKind.Block64x64u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block64x64i : IBlockClass<N64,long> { public const BlockKind Kind = BlockKind.Block128x64i; public BlockKind Classifier => Kind;}
+        public readonly struct Block64x64i : IBlockedKind<N64,long> { public const BlockKind Kind = BlockKind.Block128x64i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block128x8u : IBlockClass { public const BlockKind Kind = BlockKind.Block128x8u; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x8u : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x8u; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block128x8i : IBlockClass { public const BlockKind Kind = BlockKind.Block128x8i; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x8i : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x8i; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block128x16u : IBlockClass { public const BlockKind Kind = BlockKind.Block128x16u; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x16u : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x16u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block128x16i : IBlockClass { public const BlockKind Kind = BlockKind.Block128x16i; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x16i : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x16i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block128x32u : IBlockClass { public const BlockKind Kind = BlockKind.Block128x32u; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x32u : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x32u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block128x32i : IBlockClass { public const BlockKind Kind = BlockKind.Block128x32i; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x32i : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x32i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block128x64u : IBlockClass { public const BlockKind Kind = BlockKind.Block128x64u; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x64u : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x64u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block128x64i : IBlockClass { public const BlockKind Kind = BlockKind.Block128x64i; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x64i : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x64i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block128x32f : IBlockClass { public const BlockKind Kind = BlockKind.Block128x32f; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x32f : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x32f; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block128x64f : IBlockClass { public const BlockKind Kind = BlockKind.Block128x64f; public BlockKind Classifier => Kind;}
+        public readonly struct Block128x64f : IBlockedKind { public const BlockKind Kind = BlockKind.Block128x64f; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block256x8u : IBlockClass { public const BlockKind Kind = BlockKind.Block256x8u; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x8u : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x8u; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block256x8i : IBlockClass { public const BlockKind Kind = BlockKind.Block256x8i; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x8i : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x8i; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block256x16u : IBlockClass { public const BlockKind Kind = BlockKind.Block256x16u; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x16u : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x16u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block256x16i : IBlockClass { public const BlockKind Kind = BlockKind.Block256x16i; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x16i : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x16i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block256x32u : IBlockClass { public const BlockKind Kind = BlockKind.Block256x32u; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x32u : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x32u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block256x32i : IBlockClass { public const BlockKind Kind = BlockKind.Block256x32i; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x32i : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x32i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block256x64u : IBlockClass { public const BlockKind Kind = BlockKind.Block256x64u; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x64u : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x64u; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block256x64i : IBlockClass { public const BlockKind Kind = BlockKind.Block256x64i; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x64i : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x64i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block256x32f : IBlockClass { public const BlockKind Kind = BlockKind.Block256x32f; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x32f : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x32f; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block256x64f : IBlockClass { public const BlockKind Kind = BlockKind.Block256x64f; public BlockKind Classifier => Kind;}
+        public readonly struct Block256x64f : IBlockedKind { public const BlockKind Kind = BlockKind.Block256x64f; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block512x8u : IBlockClass { public const BlockKind Kind = BlockKind.Block512x8u; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x8u : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x8u; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block512x8i : IBlockClass { public const BlockKind Kind = BlockKind.Block512x8i; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x8i : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x8i; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block512x16u : IBlockClass { public const BlockKind Kind = BlockKind.Block512x16u; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x16u : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x16u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block512x16i : IBlockClass { public const BlockKind Kind = BlockKind.Block512x16i; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x16i : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x16i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block512x32u : IBlockClass { public const BlockKind Kind = BlockKind.Block512x32u; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x32u : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x32u; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block512x32i : IBlockClass { public const BlockKind Kind = BlockKind.Block512x32i; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x32i : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x32i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block512x64u : IBlockClass { public const BlockKind Kind = BlockKind.Block512x64u; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x64u : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x64u; public BlockKind Classifier => Kind;}
         
-        public readonly struct Block512x64i : IBlockClass { public const BlockKind Kind = BlockKind.Block512x64i; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x64i : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x64i; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block512x32f : IBlockClass { public const BlockKind Kind = BlockKind.Block512x32f; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x32f : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x32f; public BlockKind Classifier => Kind;}
 
-        public readonly struct Block512x64f : IBlockClass { public const BlockKind Kind = BlockKind.Block512x64f; public BlockKind Classifier => Kind;}
+        public readonly struct Block512x64f : IBlockedKind { public const BlockKind Kind = BlockKind.Block512x64f; public BlockKind Classifier => Kind;}
 
         public readonly struct Blocked : ITypeKind<Blocked>
         {
@@ -376,7 +376,7 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct Blocked16 : ITypeKind<Blocked16>, IFixedClass<Fixed16>
+        public readonly struct Blocked16 : ITypeKind<Blocked16>, IFixedKind<Fixed16>
         {
             public const TypeKind Kind = TypeKind.BlockedType; 
 
@@ -397,7 +397,7 @@ namespace Z0
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked32 : ITypeKind<Blocked32>, IFixedClass<Fixed32>
+        public readonly struct Blocked32 : ITypeKind<Blocked32>, IFixedKind<Fixed32>
         {
             public const TypeKind Kind = TypeKind.BlockedType; 
 
@@ -419,7 +419,7 @@ namespace Z0
             
         }        
 
-        public readonly struct Blocked64 : ITypeKind<Blocked64>, IFixedClass<Fixed64>
+        public readonly struct Blocked64 : ITypeKind<Blocked64>, IFixedKind<Fixed64>
         {
             public const TypeKind Kind = TypeKind.BlockedType; 
 
@@ -440,7 +440,7 @@ namespace Z0
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked128 : ITypeKind<Blocked128>, IFixedClass<Fixed128>
+        public readonly struct Blocked128 : ITypeKind<Blocked128>, IFixedKind<Fixed128>
         {
             public const TypeKind Kind = TypeKind.BlockedType; 
 
@@ -462,7 +462,7 @@ namespace Z0
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked256 : ITypeKind<Blocked256>, IFixedClass<Fixed256>
+        public readonly struct Blocked256 : ITypeKind<Blocked256>, IFixedKind<Fixed256>
         {
             public const TypeKind Kind = TypeKind.BlockedType; 
 
@@ -484,13 +484,17 @@ namespace Z0
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked512 : ITypeKind<Blocked512>, IFixedClass<Fixed512>
+        public readonly struct Blocked512 : ITypeKind<Blocked512>, IFixedKind<Fixed512>
         {
             public const TypeKind Kind = TypeKind.BlockedType; 
 
             public const FixedWidth Width = FixedWidth.W512;
 
             public static N512 W => default;
+
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+
+            public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
 
             [MethodImpl(Inline)]
             public static implicit operator TypeKind(Blocked512 src)
@@ -500,14 +504,14 @@ namespace Z0
             public static implicit operator Blocked(Blocked512 src)
                 =>  default;
                     
-            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
-
-            public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked<T> : ITypeKind<Blocked<T>,T> 
+        public readonly struct Blocked<T> : ITypeKind<T> 
             where T : unmanaged
         {
+            public const TypeKind Kind = TypeKind.BlockedType; 
+                    
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             [MethodImpl(Inline)]
             public static implicit operator Blocked(Blocked<T> src)
@@ -520,12 +524,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator TypeKind<T>(Blocked<T> src)
                 =>  new TypeKind<T>(src.Classifier);
-            public const TypeKind Kind = TypeKind.BlockedType; 
-                    
-            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct Blocked<W,T> : ITypeKind<Blocked<W,T>,W,T>
+        public readonly struct Blocked<W,T> : ITypeKindN1<W,T>
             where T : unmanaged
             where W : unmanaged, ITypeNat
         {
@@ -541,8 +542,8 @@ namespace Z0
                 =>  new TypeKind<T>(src.Classifier);
 
             [MethodImpl(Inline)]
-            public static implicit operator TypeKind<W,T>(Blocked<W,T> src)
-                =>  new TypeKind<W,T>(src.Classifier);
+            public static implicit operator TypeKindN1<W,T>(Blocked<W,T> src)
+                =>  new TypeKindN1<W,T>(src.Classifier);
 
             [MethodImpl(Inline)]
             public static implicit operator Blocked(Blocked<W,T> src)

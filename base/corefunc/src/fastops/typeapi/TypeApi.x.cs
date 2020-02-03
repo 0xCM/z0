@@ -37,7 +37,7 @@ namespace Z0
         public static Option<ulong> NatValue(this Type t)
             => t.IsNat() ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : default;
 
-        public static Option<Moniker> NatSpanIdentity(this Type src)
+        public static Option<string> NatSpanIdentity(this Type src)
         {
             if(src.IsNatSpan())
             {
@@ -46,7 +46,7 @@ namespace Z0
                 text += typeargs[0].NatValue();
                 text += Moniker.SegSep;
                 text += NumericType.signature(typeargs[1]);
-                return Moniker.Parse(text);
+                return text;
             }
             else
                 return default;
