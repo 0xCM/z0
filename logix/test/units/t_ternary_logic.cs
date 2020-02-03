@@ -148,7 +148,7 @@ namespace Z0.Logix
                 BitVector<T> v = ScalarOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
-                    PostMessage($"Equivalence failed for ternary op {kind}:{numericid<T>()}");
+                    PostMessage($"Equivalence failed for ternary op {kind}:{Identity.numericid<T>()}");
 
                 Claim.eq(u,v);
 

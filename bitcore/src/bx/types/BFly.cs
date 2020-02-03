@@ -19,7 +19,7 @@ namespace Z0
 
             public static Bfly<N,T> Op => default;
 
-            public OpIdentity Moniker => identify<N,T>(Name);
+            public OpIdentity Moniker => Identity.operation<N,T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.bfly<N,T>(a);

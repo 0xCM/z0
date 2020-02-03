@@ -19,7 +19,7 @@ namespace Z0
 
             public static Parse<T> Op => default;
 
-            public OpIdentity Moniker => identify<T>(Name);
+            public OpIdentity Moniker => Identity.operation<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(string a) => gmath.parse<T>(a);

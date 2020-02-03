@@ -21,7 +21,7 @@ namespace Z0
 
             public static TakeMask128<T> Op => default;
 
-            public OpIdentity Moniker => identify(Name,hk);
+            public OpIdentity Moniker => Identity.operation(Name,hk);
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x) 
@@ -37,7 +37,7 @@ namespace Z0
 
             public static TakeMask256<T> Op => default;
 
-            public OpIdentity Moniker => identify(Name,hk);
+            public OpIdentity Moniker => Identity.operation(Name,hk);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x) 

@@ -13,14 +13,22 @@ namespace Z0
 
     public static class OpSpecs
     {
-        public static IOpSpecifier<GenericOpSpec> Generic
-            => default(GenericSvc);
+        public static IEnumerable<DirectOpSpec> direct(Type host)
+            => from m in host.DeclaredMethods().Attributed<OpAttribute>().NonGeneric()
+                select DirectOpSpec.Define(Identity.identify(m), m);
 
-        public static IOpSpecifier<DirectOpGroupSpec> DirectGroups
-            => default(DirectGroupSvc);
+        public static IEnumerable<DirectOpGroupSpec> groups(Type host)
+            => from d in direct(host).GroupBy(op => op.Id.Name)
+                let id = OpIdentity.Define(d.Key)
+                select DirectOpGroupSpec.Define(id, d);                    
 
-        public static IOpSpecifier<DirectOpSpec> Direct
-            => default(DirectSvc);
+        public static IEnumerable<GenericOpSpec> generic(Type host)
+            => from m in host.DeclaredMethods().Attributed<OpAttribute>().OpenGeneric()
+                let def = m.GetGenericMethodDefinition()
+                let closures = m.NumericClosures().ToArray()
+                let id = Identity.generic(m)
+                where closures.Length != 0
+                select GenericOpSpec.Define(id, def, closures);
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
@@ -30,34 +38,26 @@ namespace Z0
             => from k in op.Kinds
                 let pt = k.ToClrType()
                 where pt.IsSome()
-                let id = OpIdentities.Provider.DefineIdentity(op.Root, k)
+                let id = Identity.identify(op.Root, k)
                 where !id.IsEmpty
                 select OpClosureInfo.Define(id, k, op.Root.MakeGenericMethod(pt.Value)); 
 
         readonly struct DirectSvc : IOpSpecifier<DirectOpSpec>
         {
             public IEnumerable<DirectOpSpec> FromHost(Type host)
-                => from m in host.DeclaredMethods().Attributed<OpAttribute>().NonGeneric()
-                    select DirectOpSpec.Define(OpIdentities.Provider.DefineIdentity(m), m);
+                => direct(host);
         }
 
         readonly struct DirectGroupSvc : IOpSpecifier<DirectOpGroupSpec>
         {
             public IEnumerable<DirectOpGroupSpec> FromHost(Type host)
-                => from d in default(DirectSvc).FromHost(host).GroupBy(op => op.Id.Name)
-                    let id = OpIdentity.Define(d.Key)
-                    select DirectOpGroupSpec.Define(id, d);                    
+                => groups(host);
         }
 
         readonly struct GenericSvc : IOpSpecifier<GenericOpSpec>
         {
             public IEnumerable<GenericOpSpec> FromHost(Type host)
-                => from m in host.DeclaredMethods().Attributed<OpAttribute>().OpenGeneric()
-                    let def = m.GetGenericMethodDefinition()
-                    let closures = m.NumericClosures().ToArray()
-                    let id = OpIdentities.Provider.GenericIdentity(m)
-                    where closures.Length != 0
-                    select GenericOpSpec.Define(id, def, closures);
+                => generic(host);
         }
     }
 }

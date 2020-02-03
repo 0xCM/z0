@@ -44,21 +44,6 @@ namespace Z0
         public static Option<ulong> NatValue(this Type t)
             => t.IsNat() ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : default;
 
-        public static Option<string> NatSpanIdentity(this Type src)
-        {
-            if(src.IsNatSpan())
-            {
-                var typeargs = src.GetGenericArguments().ToArray();                    
-                var text = "ns";
-                text += typeargs[0].NatValue();
-                text += OpIdentity.SegSep;
-                text += NumericType.signature(typeargs[1]);
-                return text;
-            }
-            else
-                return default;
-        }
-
         /// <summary>
         /// Determines whether a type is parametric over the natural numbers
         /// </summary>
@@ -122,7 +107,6 @@ namespace Z0
             => src != TernaryBitLogicKind.XFF 
                 ? (TernaryBitLogicKind)((uint)(src) + 1u)
                 : TernaryBitLogicKind.X00;        
-
 
         /// <summary>
         /// Determines whether a supplied type is predicated on a double, including enums, nullable wrappers and references
@@ -344,7 +328,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> TernaryOps(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsTernaryOp());
-             
+            => src.Where(x => x.IsTernaryOp());             
     }
 }

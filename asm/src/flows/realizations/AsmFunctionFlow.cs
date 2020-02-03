@@ -93,12 +93,12 @@ namespace Z0
             => FunctionType.immneeds(op.Root) ? FlowImm(op,pipe) : Flow(op,pipe);
 
         IEnumerable<AsmFunction> FlowGeneric(Type host, IAsmFunctionPipe pipe)
-            => from op in OpSpecs.Generic.FromHost(host)
+            => from op in OpSpecs.generic(host)
                from emission in BranchImm(op, pipe)
                 select emission.WithCil(ClrIndex.FincCil(op.Root));
         
         IEnumerable<AsmFunction> FlowDirect(Type host, IAsmFunctionPipe pipe)
-            => from op in OpSpecs.Direct.FromHost(host)
+            => from op in OpSpecs.direct(host)
                from emission in BranchImm(op, pipe)
                 select emission;
 

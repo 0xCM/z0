@@ -10,6 +10,18 @@ namespace Z0
     
     using static zfunc;
 
+    public interface INativeWriter : IDisposable
+    {
+        void WriteHeader();
+
+        void WriteData(CapturedMember src);        
+    
+        void WriteData(CapturedMember src, NativeFormatConfig config);     
+
+        void WriteLine(string data);   
+
+        byte[] TakeBuffer();        
+    }
 
     public interface INativeExecBuffer : IDisposable
     {

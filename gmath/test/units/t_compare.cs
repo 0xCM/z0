@@ -9,8 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    using static OpSurrogates;
-    using static SurrogateTypes;
+    using static OpSurrogate;
 
     public class t_compare : t_gmath<t_compare>
     {     

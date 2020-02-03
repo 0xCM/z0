@@ -85,7 +85,7 @@ namespace Z0
 		Option<CapturedMember> CaptureNative(MethodInfo method, ClrMethod runtime)
 		{
 			var codeInfo = runtime.HotColdInfo;	
-            var id = OpIdentities.Provider.DefineIdentity(method);
+            var id = Identity.identify(method);
             var address = codeInfo.HotStart;
             var size = codeInfo.HotSize;            
 

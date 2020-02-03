@@ -306,7 +306,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check,CaseName(identify<T>("bsparse")));
+            CheckAction(check,CaseName(Identity.operation<T>("bsparse")));
         }
 
         void bitspan_check(Span<byte> packed, BitSpan bitspan)

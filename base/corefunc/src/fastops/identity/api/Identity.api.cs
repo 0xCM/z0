@@ -13,6 +13,15 @@ namespace Z0
     using static zfunc;
     using static OpIdentity;
 
+    public enum IdentityKind
+    {
+        None = 0,
+
+        Type,
+
+        Operation,
+    }
+
     public static class Identity
     {
         /// <summary>
@@ -34,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static TypeIdentity identify(Type t)
-            => TypeIdentityProvider.from(t).DefineIdentity(t);
+            => TypeIdentities.identify(t);
 
         /// <summary>
         /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
@@ -262,18 +271,18 @@ namespace Z0
             where T : unmanaged
                 => operation(opname,typeof(T).NumericKind());
 
-        /// <summary>
-        /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="w">The covering bit width representative</param>
-        /// <param name="t">A primal cell type representative</param>
-        /// <typeparam name="W">The bit width type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static OpIdentity operation<W>(string opname, W w, NumericKind k)
-            where W : unmanaged, ITypeNat            
-                => operation(opname, (FixedWidth)nateval<W>(), k, false);
+        // /// <summary>
+        // /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
+        // /// </summary>
+        // /// <param name="opname">The base operator name</param>
+        // /// <param name="w">The covering bit width representative</param>
+        // /// <param name="t">A primal cell type representative</param>
+        // /// <typeparam name="W">The bit width type</typeparam>
+        // /// <typeparam name="T">The cell type</typeparam>
+        // [MethodImpl(Inline)]   
+        // public static OpIdentity operation<W>(string opname, W w, NumericKind k)
+        //     where W : unmanaged, ITypeNat            
+        //         => operation(opname, (FixedWidth)nateval<W>(), k, false);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_{w}{typesig(nk)}
@@ -298,11 +307,51 @@ namespace Z0
                 => operation(opname, n256, NumericType.kind<T>());
 
 
+        /// <summary>
+        /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="w">The covering bit width representative</param>
+        /// <param name="t">A primal cell type representative</param>
+        /// <typeparam name="W">The bit width type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation<T>(string opname, N128 w, T t = default)
+            where T : unmanaged
+                => Identity.operation(opname,w, NumericType.kind<T>());
+
+        /// <summary>
+        /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="w">The covering bit width representative</param>
+        /// <param name="t">A primal cell type representative</param>
+        /// <typeparam name="W">The bit width type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation<T>(string opname, N256 w, T t = default)
+            where T : unmanaged
+                => Identity.operation(opname,w, NumericType.kind<T>());
+
+        /// <summary>
+        /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="w">The covering bit width representative</param>
+        /// <param name="t">A primal cell type representative</param>
+        /// <typeparam name="W">The bit width type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation<W,T>(string opname, W w = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+                => operation(opname,w, NumericType.kind<T>());
+
         public static Option<ScalarIdentity> scalar(OpIdentityPart part)
         {
             if(part.PartKind == OpIdentityPartKind.Scalar)
             {
-                return from k in NumericType.ParseKind(part.PartText)
+                return from k in NumericType.parseKind(part.PartText)
                     let scalar = ScalarIdentity.Define((FixedWidth)k.Width(), k.Indicator())
                     select scalar;
             }
@@ -362,5 +411,71 @@ namespace Z0
         public static string host(Type t)
             => t.CustomAttribute<OpHostAttribute>().MapValueOrDefault(a => a.Name, t.Name.ToLower());
 
+        /// <summary>
+        /// Produces the name of the test case for the specified function
+        /// </summary>
+        /// <param name="f">The function</param>
+        public static string testcase(Type host, IFunc f)
+            => $"{host.Name}/{f.Moniker}";
+
+        /// <summary>
+        /// Produces the name of the test case predicated on fully-specified name, exluding the host name
+        /// </summary>
+        /// <param name="m">Moniker that identifies the operation under test</param>
+        public static string testcase(Type host, OpIdentity m)
+            => $"{host.Name}/{m}";
+
+        /// <summary>
+        /// Produces the name of the test case predicated on fully-specified name, exluding the host name
+        /// </summary>
+        /// <param name="fullname">The full name of the test</param>
+        public static string testcase(Type host,string fullname)
+            => $"{host.Name}/{fullname}";
+
+        /// <summary>
+        /// Produces the name of the test case predicated on a root name and parametric type
+        /// </summary>
+        /// <param name="root">The root name</param>
+        public static string testcase<C>(Type host, string root, C t = default)
+            where C : unmanaged
+            => $"{host.Name}/{root}_{Identity.numericid(t)}";
+
+        public static string testcase<W,C>(Type host, string root, W w = default, C t = default)
+            where W : unmanaged, ITypeNat
+            where C : unmanaged
+                => $"{host.Name}/{Identity.operation(root,w,t)}";
+
+        public static OpIdentity subject(string opname, NumericKind kind)
+            => Identity.operation($"{opname}_subject",kind);
+
+        public static OpIdentity subject<T>(string opname, T t = default)
+            where T : unmanaged
+                => subject(opname, NumericType.kind<T>());
+ 
+        public static Option<IOpIdentityProvider> provider(IdentityKind kind)
+            => kind switch
+            {
+                IdentityKind.Operation => default(OpIdentityProvider),
+                _ => default
+            };
+
+        public static ITypeIdentityProvider provider(Type t)
+            => TypeIdentities.provider(t);
+
+        readonly struct OpIdentityProvider : IOpIdentityProvider
+        {
+            public OpIdentity DefineIdentity(MethodInfo src, NumericKind k)
+                => Identity.identify(src,k);
+
+            public OpIdentity GroupIdentity(MethodInfo src)            
+                => Identity.group(src);
+
+            public OpIdentity GenericIdentity(MethodInfo src)            
+                => Identity.generic(src);
+
+            OpIdentity IOpIdentityProvider.DefineIdentity(MethodInfo src)
+                => Identity.identify(src);
+        }
+ 
     }
 }

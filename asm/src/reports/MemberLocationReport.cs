@@ -17,11 +17,10 @@ namespace Z0
     {
         public static MemberLocationReport Create(AssemblyId assemblyid, IEnumerable<MethodInfo> methods)
         {   
-            var identity = OpIdentities.Provider;
             var src = (from m in methods
                       let id = m.IsGenericMethodDefinition 
-                        ? identity.GenericIdentity(m) : 
-                          identity.DefineIdentity(m)
+                        ? Identity.generic(m) : 
+                          Identity.identify(m)
                       let address = MemoryAddress.Define(m.MethodHandle.GetFunctionPointer())
                       orderby address.Origin
                       select (id,address)).ToArray();

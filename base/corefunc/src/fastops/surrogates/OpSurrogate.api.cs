@@ -11,12 +11,11 @@ namespace Z0
     using System.Security;
 
     using static zfunc;
-    using static SurrogateTypes;
     
     /// <summary>
     /// Defines api surface for creating surrogate operator delegates
     /// </summary>
-    public static class OpSurrogates
+    public static class OpSurrogate
     {
         /// <summary>
         /// Captures a delegate and presents it as a unary operator
@@ -83,11 +82,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static EmitterSurrogate<T> emitter<T>(Func<T> f, string name, T t = default)
             => new EmitterSurrogate<T>(f,name);        
-    }
-
-    public static partial class SurrogateTypes
-    {
-
-
     }
 }

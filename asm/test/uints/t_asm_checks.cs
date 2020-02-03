@@ -315,7 +315,7 @@ namespace Z0
 
         void CheckUnaryFunc(IAsmExecBuffer buffer, AsmCode src)
         {            
-            var nk =  NumericType.ParseKind(src.Id.TextComponents.Second()).Require();
+            var nk =  NumericType.parseKind(src.Id.TextComponents.Second()).Require();
             switch(nk)
             {
                 case NumericKind.I8:
@@ -355,7 +355,7 @@ namespace Z0
 
         void CheckBinaryFunc(IAsmExecBuffer buffer, AsmCode src)
         {
-            var kind = NumericType.ParseKind(src.Id.TextComponents.Last());
+            var kind = NumericType.parseKind(src.Id.TextComponents.Last());
             if(kind.IsNone())
                 return;
 

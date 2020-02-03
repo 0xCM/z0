@@ -11,7 +11,6 @@ namespace Z0
 
     using static zfunc;
     using static Z0.As;
-    using static SurrogateTypes;
 
     readonly struct FixedEmitter<F,T> : IFixedEmitter<F, T>
         where F : unmanaged, IFixed         
@@ -116,29 +115,29 @@ namespace Z0
                 switch(kind)
                 {
                     case NumericKind.I8:
-                        return OpSurrogates.emitter<F>(f8i, name);
+                        return OpSurrogate.emitter<F>(f8i, name);
                     case NumericKind.U8:
-                        return OpSurrogates.emitter<F>(f8u, name);
+                        return OpSurrogate.emitter<F>(f8u, name);
                     case NumericKind.I16:
-                        return OpSurrogates.emitter<F>(f16i, name);
+                        return OpSurrogate.emitter<F>(f16i, name);
                     case NumericKind.U16:
-                        return OpSurrogates.emitter<F>(f16u, name);
+                        return OpSurrogate.emitter<F>(f16u, name);
                     case NumericKind.I32:
-                        return OpSurrogates.emitter<F>(f32i, name);
+                        return OpSurrogate.emitter<F>(f32i, name);
                     case NumericKind.U32:
-                        return OpSurrogates.emitter<F>(f32u, name);
+                        return OpSurrogate.emitter<F>(f32u, name);
                     case NumericKind.I64:
-                        return OpSurrogates.emitter<F>(f64i, name);
+                        return OpSurrogate.emitter<F>(f64i, name);
                     case NumericKind.U64:
-                        return OpSurrogates.emitter<F>(f64u, name);
+                        return OpSurrogate.emitter<F>(f64u, name);
                     case NumericKind.F32:
-                        return OpSurrogates.emitter<F>(f32f, name);
+                        return OpSurrogate.emitter<F>(f32f, name);
                     case NumericKind.F64:
-                        return OpSurrogates.emitter<F>(f64f, name);
+                        return OpSurrogate.emitter<F>(f64f, name);
                 }   
             }
 
-            return OpSurrogates.emitter<F>(() => default, name);            
+            return OpSurrogate.emitter<F>(() => default, name);            
         }
 
         public static IFixedEmitter<F,T> FixedEmitter<F,T>(this IPolyrand random)

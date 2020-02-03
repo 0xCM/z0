@@ -19,7 +19,6 @@ namespace Z0
         public void check_blocks()
         {
             var methods = typeof(vblocks).Methods().Attributed<OpAttribute>().WithName("add");
-            var provider = OpIdentities.Provider;
             foreach(var method in methods)
             {                
                 foreach(var t in method.ParameterTypes())
@@ -28,7 +27,7 @@ namespace Z0
                     Claim.yea(t.Width() == FixedWidth.W128 || t.Width() == FixedWidth.W256);
                 }
                     
-                var id = provider.GenericIdentity(method);
+                var id = Identity.generic(method);
                 TraceCaller(id);
             }
         }
@@ -43,7 +42,7 @@ namespace Z0
         public void handle_test()
         {   const byte imm8 = 9;
             var method = typeof(ginx).Methods().WithName(nameof(ginx.vbsll)).OfKind(HK.vk128()).Single();
-            var op = DynopImm.UnaryOp(HK.vk128<uint>(), OpIdentities.Provider.DefineIdentity(method), method,imm8);
+            var op = DynopImm.UnaryOp(HK.vk128<uint>(), Identity.identify(method), method,imm8);
             var handle = GetMethodHandle(op.DynamicMethod);
             PostMessage(handle.Value.ToString());
 

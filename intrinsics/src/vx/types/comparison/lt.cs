@@ -22,7 +22,7 @@ namespace Z0
 
             public static Lt128<T> Op => default;
 
-            public OpIdentity Moniker => identify<T>(Name,w);
+            public OpIdentity Moniker => Identity.operation<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vlt(x,y);
@@ -46,7 +46,7 @@ namespace Z0
 
             public static Lt256<T> Op => default;
 
-            public OpIdentity Moniker => identify<T>(Name,w);
+            public OpIdentity Moniker => Identity.operation<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vlt(x,y);

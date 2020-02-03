@@ -14,6 +14,7 @@ namespace Z0
 
     public static class NumericType
     {
+
         /// <summary>
         /// Determines the number of bytes covered by a k-kinded type
         /// </summary>
@@ -174,7 +175,7 @@ namespace Z0
         /// Attempts to parse a numeric kind from a string in the form {width}{indicator} 
         /// </summary>
         /// <param name="src">The source text</param>
-        public static Option<NumericKind> ParseKind(string src)
+        public static Option<NumericKind> parseKind(string src)
         {
             var fail = none<NumericKind>();
             var input = src.Trim();
@@ -199,6 +200,14 @@ namespace Z0
             
             return kind;                            
         }
+
+        public static IEnumerable<NumericKind> parseKinds(IEnumerable<string> kinds)
+         => from part in kinds
+            let x = part.StartsWith(OpIdentity.GenericLocator)
+                    ? parseKind(part.Substring(1, part.Length - 1)) 
+                    : parseKind(part)
+            where x.IsSome()
+            select x.Value;
 
         [MethodImpl(Inline)]
         public static FixedWidth width(Type t)

@@ -74,21 +74,21 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function</param>
         public string CaseName(IFunc f)
-            => $"{GetType().Name}/{f.Moniker}";
+            => Identity.testcase(GetType(),f);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
-        /// <param name="m">Moniker that identifies the operation under test</param>
-        public string CaseName(OpIdentity m)
-            => $"{GetType().Name}/{m}";
+        /// <param name="id">Moniker that identifies the operation under test</param>
+        public string CaseName(OpIdentity id)
+            => Identity.testcase(GetType(),id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         public string CaseName(string fullname)
-            => $"{GetType().Name}/{fullname}";
+            => Identity.testcase(GetType(),fullname);
 
         /// <summary>
         /// Produces the name of the test case predicated on a root name and parametric type
@@ -96,23 +96,23 @@ namespace Z0
         /// <param name="root">The root name</param>
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
-            => $"{GetType().Name}/{root}_{numericid(t)}";
+            => Identity.testcase(GetType(),root, t);
 
         protected string CaseName<W,C>(string root, W w = default, C t = default)
             where W : unmanaged, ITypeNat
             where C : unmanaged
-                => $"{GetType().Name}/{identify(root,w,t)}";
+                => Identity.testcase(GetType(),root, w, t);
 
         protected static OpIdentity SubjectId(string opname, NumericKind kind)
-            => Identity.operation($"{opname}_subject",kind);
+            => Identity.subject(opname,kind);
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
-                => SubjectId(opname, NumericType.kind<T>());
+                => Identity.subject(opname,t);
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
-                => identify<K>($"{opname}_baseline");
+                => Identity.operation<K>($"{opname}_baseline");
 
         protected virtual bool TraceEnabled
             => true;
@@ -179,7 +179,6 @@ namespace Z0
             if(TraceEnabled)
                 PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}",SeverityLevel.Info));
         }
-
 
         /// <summary>
         /// Submits a diagnostic message to the message queue

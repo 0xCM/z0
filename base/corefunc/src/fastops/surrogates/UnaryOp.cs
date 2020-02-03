@@ -10,25 +10,26 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Captures a delegate that is exposed as an emitter
+    /// Captures a delegate that is exposed as a unary operator
     /// </summary>
-    public readonly struct EmitterSurrogate<T> : IEmitter<T>
+    public readonly struct UnaryOpSurrogate<T> : IUnaryOp<T>
     {
         public readonly string Name;
 
-        readonly Func<T> f;
+        readonly Func<T,T> f;
 
         [MethodImpl(Inline)]
-        internal EmitterSurrogate(Func<T> f, string name)            
+        internal UnaryOpSurrogate(Func<T,T> f, string name)            
         {
             this.f = f;
             this.Name = name;
         }
         
-        public OpIdentity Moniker => identify<T>(Name);
+        public OpIdentity Moniker => Identity.operation<T>(Name);
 
         [MethodImpl(Inline)]
-        public T Invoke() => f();
+        public T Invoke(T a) => f(a);
     }
+
 
 }

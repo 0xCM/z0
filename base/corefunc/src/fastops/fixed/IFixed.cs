@@ -26,7 +26,5 @@ namespace Z0
     {
         W NatWidth => default;
         
-    }
-
- 
+    } 
 }

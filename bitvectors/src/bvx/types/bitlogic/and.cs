@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "bvand";
 
-            public OpIdentity Moniker => identify<T>(Name);
+            public OpIdentity Moniker => Identity.operation<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.and(a,b);

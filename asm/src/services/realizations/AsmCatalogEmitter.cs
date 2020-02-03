@@ -34,7 +34,7 @@ namespace Z0
         IEnumerable<AsmEmissionToken> EmitDirectImm()
             => from h in Catalog.DirectApiHosts
                let archive = HostImmArchive(h)
-               from g in OpSpecs.DirectGroups.FromHost(h)
+               from g in OpSpecs.groups(h)
                let immg = ImmGroup(g)
                where !immg.IsEmpty
                from emission in EmitImm(immg,archive)
@@ -43,7 +43,7 @@ namespace Z0
         IEnumerable<AsmEmissionToken> EmitGenericImm()
             => from h in Catalog.GenericApiHosts
                let archive = HostImmArchive(h)
-               from op in OpSpecs.Generic.FromHost(h)
+               from op in OpSpecs.generic(h)
                where FunctionType.immneeds(op.Root)
                from emission in EmitImm(op,archive)
                select emission;
@@ -81,14 +81,6 @@ namespace Z0
             ClearArchives(false);
             return EmitDirectPrimary().Union(EmitGenericPrimary());
         }
-
-        // public IEnumerable<AsmEmissionToken> EmitCatalog()
-        // {
-        //     var primary = EmitPrimary();
-        //     var imm = EmitImm();
-        //     return primary.Union(imm);
-        // }
-
 
         IEnumerable<AsmEmissionToken> Emit(DirectOpGroupSpec group, IAsmFunctionArchive dst)
         {
@@ -161,7 +153,7 @@ namespace Z0
         {
             var primary = HostArchive(host);
             var immediate = HostImmArchive(host);
-            var specs = OpSpecs.DirectGroups.FromHost(host);
+            var specs = OpSpecs.groups(host);
 
             var ePrimary =
                 from spec in specs
@@ -180,7 +172,7 @@ namespace Z0
         {
             var primary = HostArchive(host);
             var immediate = HostImmArchive(host);
-            var specs = OpSpecs.Generic.FromHost(host);
+            var specs = OpSpecs.generic(host);
 
             var ePrimary = 
                 from spec in specs
