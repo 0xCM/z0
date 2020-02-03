@@ -13,11 +13,8 @@ namespace Z0
 
     public class AsmEmissionReport : IReport<AsmEmissionRecord>
     {
-        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionToken[] emissions)
+        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionToken[] emissions, string suffix = null)
         {
-            if(ExcludeImm)
-                emissions = emissions.Where(e => !e.Uri.Id.HasImm).ToArray();
-
             var count = emissions.Length;
             if(count == 0)
                 return default;
@@ -30,28 +27,29 @@ namespace Z0
             for(var i =0; i<count; i++)
                 records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmEmissionToken?)null);            
             
-            return new AsmEmissionReport(id, records);
+            return new AsmEmissionReport(id, records, suffix);
         }
 
-        AsmEmissionReport(AssemblyId id, AsmEmissionRecord[] records)
+        AsmEmissionReport(AssemblyId id, AsmEmissionRecord[] records, string suffix)
         {
             this.id = id;
             this.Records = records;
+            this.Suffix = string.IsNullOrWhiteSpace(suffix) ? string.Empty :  $"-{suffix}";
         }
 
         public readonly AssemblyId id;
         
         public AsmEmissionRecord[] Records {get;}
 
-        static bool ExcludeImm => true;
-
         public string Subject
-            => "emissions";
+            => ".emissions";
+
+        string Suffix {get;}
 
         public FileExtension Ext
             => FileExtensions.Csv;
 
         public Option<FilePath> Save()
-            => Records.Save(Paths.AsmReportRoot + FolderName.Define(Subject) + FileName.Define(id.Format(), Ext));
+            => Records.Save(Paths.AsmDataRoot + FolderName.Define(Subject) + FileName.Define($"{id.Format()}{Suffix}", Ext));
     }
 }

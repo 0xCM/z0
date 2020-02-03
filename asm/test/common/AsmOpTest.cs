@@ -29,7 +29,7 @@ namespace Z0
             => "anon";
 
         protected OpIdentity TestOpMoniker(NumericKind kind)
-            => OpIdentities.identify($"{OpName}_asm",kind);
+            => Identity.operation($"{OpName}_asm",kind);
 
         protected OpIdentity TestOpName<T>(T t = default)
             where T : unmanaged

@@ -14,13 +14,13 @@ namespace Z0
 
     public enum ParamVariance
     {
-        None, 
+        None = 0, 
 
-        In,
+        In = 1,
 
-        Out,
+        Out = 2,
 
-        Ref
+        Ref = 3
     }
 
 

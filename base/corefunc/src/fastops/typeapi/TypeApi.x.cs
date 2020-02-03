@@ -17,6 +17,13 @@ namespace Z0
     partial class FastOpX
     {
         /// <summary>
+        /// Closes generic operations over the set of primal types that each operation supports
+        /// </summary>
+        /// <param name="generics">Metadata for generic operations</param>
+        public static IEnumerable<OpClosureInfo> Close(this GenericOpSpec op)
+            => OpSpecs.close(op);
+
+        /// <summary>
         /// Determines whether a type is parametric over the natural numbers
         /// </summary>
         /// <param name="t">The type to examine</param>
@@ -205,14 +212,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static MethodSig Signature(this MethodInfo src)
             => MethodSig.Define(src);
-
-        /// <summary>
-        /// Determines the variance of a function parameter
-        /// </summary>
-        /// <param name="src">The source parameter</param>
-        [MethodImpl(Inline)]
-        public static ParamDirection Direction(this ParameterInfo src)
-            => FunctionType.direction(src);
 
         /// <summary>
         /// Determines whether a method defines a unary function

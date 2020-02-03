@@ -13,26 +13,6 @@ namespace Z0
 
     public static class TypeIdentities
     {           
-        /// <summary>
-        /// Produces an identifier of the form {width(nk)}{u | i | f} for a numeric type
-        /// </summary>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static TypeIdentity identify(NumericKind nk)
-            => TypeIdentity.Define(NumericType.signature(nk));
-
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w}x{kind.Signature()}");
-        
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Signature()}");   
-
-        [MethodImpl(Inline)]
-        public static TypeIdentity identify(Type t)
-            => TypeIdentityProvider.from(t).DefineIdentity(t);
             
         /// <summary>
         /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
@@ -48,7 +28,7 @@ namespace Z0
         {
             if(arg.IsPointer)
                 return from id in arg.Unwrap().CommonIdentity()
-                let idptr = concat(id, parenthetical(OpIdentity.Pointer))
+                let idptr = concat(id, TypeIdentity.Modifier, TypeIdentity.Pointer)
                 select idptr;    
             else
             {                        
@@ -129,6 +109,5 @@ namespace Z0
                 let nk = arg.NumericKind()
                 where segwidth.IsSome() && argwidth.IsSome() && nk.IsSome()
                 select $"{i}{segwidth.Format()}{OpIdentity.SegSep}{argwidth.Format()}{nk.Indicator().Format()}";
-
     }
 }

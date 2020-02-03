@@ -249,9 +249,8 @@ namespace Z0
         public static bool primal(this MethodInfo m)
             => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.NumericKind() != NumericKind.None);
 
-
-        public static ParamDirection direction(ParameterInfo src)
-            => src.IsIn ? ParamDirection.In : src.IsOut ? ParamDirection.Out : ParamDirection.Default;
+        public static ParamVariance variance(ParameterInfo src)
+            => src.Variance(); //src.IsIn ? ParamDirection.In : src.IsOut ? ParamDirection.Out : ParamDirection.Default;
 
     }
 }

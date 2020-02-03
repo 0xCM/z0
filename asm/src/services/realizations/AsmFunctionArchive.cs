@@ -52,7 +52,7 @@ namespace Z0
             HexPath(src.Id).WriteText(src.Code.Format());
             AsmPath(src.Id).WriteText(DefaultFormatter.FormatDetail(src));
             src.Cil.OnSome(cil => CilPath(src.Id).WriteText(CilFormatter.Format(cil)));
-            return AsmEmissionToken.Define(OpUri.Define(Catalog, Subject, src.Id), src.Location);
+            return AsmEmissionToken.Define(OpUri.Asm(Catalog, Subject, src.Id), src.Location);
         }
 
         public IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup src, bool append)
@@ -117,7 +117,7 @@ namespace Z0
                 {
                     var f = src.Members[i];
                     writer.Write(GroupFormatter.FormatDetail(f));
-                    var uri = OpUri.Define(Catalog, Subject, f.Id);
+                    var uri = OpUri.Asm(Catalog, Subject, src.Id, f.Id);
                     tokens[i] = AsmEmissionToken.Define(uri, f.Location);
                 }
                 return tokens;

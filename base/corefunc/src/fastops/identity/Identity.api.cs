@@ -11,13 +11,356 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;
-
+    using static OpIdentity;
 
     public static class Identity
     {
+        /// <summary>
+        /// Produces an identifier of the form {width(nk)}{u | i | f} for a numeric type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static TypeIdentity identify(NumericKind nk)
+            => TypeIdentity.Define(NumericType.signature(nk));
 
+        [MethodImpl(Inline)]
+        public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
+            => TypeIdentity.Define($"{basename}{w}x{kind.Signature()}");
         
+        [MethodImpl(Inline)]
+        public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
+            => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Signature()}");   
+
+        [MethodImpl(Inline)]
+        public static TypeIdentity identify(Type t)
+            => TypeIdentityProvider.from(t).DefineIdentity(t);
+
+        /// <summary>
+        /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static TypeIdentity numericid<T>(T t = default)
+            where T : unmanaged
+                => TypeIdentity.Define(NumericType.signature(typeof(T)));
+
+        /// <summary>
+        /// Identifies the method
+        /// </summary>
+        /// <param name="m">The method to identify</param>
+        public static OpIdentity identify(MethodInfo src)
+        {            
+            if(src.IsOpenGeneric())
+                return Identity.generic(src);
+            else
+                return Identity.constructed(src);
+        }            
+
+        /// <summary>
+        /// Identifies the delegate
+        /// </summary>
+        /// <param name="m">The method to identify</param>
+        public static OpIdentity identify(Delegate m)
+            => identify(m.Method);
+
+        public static OpIdentity identify(MethodInfo src, NumericKind k)
+        {
+            var pt = k.ToClrType();
+            if(src.IsOpenGeneric() && pt.IsSome())
+                return identify(src.MakeGenericMethod(pt.Value));
+            else
+                return identify(src);
+        }
+
+        static string format(ParamVariance src)
+            => src.IsSome() ? (AsciSym.Tilde + src.Keyword()) : string.Empty;      
+
+        public static string identify(ParameterInfo p)
+        {
+            var pt = p.ParameterType;
+            if(!p.IsParametric())
+            {
+                var id = Identity.identify(pt.EffectiveType());
+                if(!id.IsEmpty)
+                    return concat(id.Identifier, format(p.Variance()));                
+            }
+            return string.Empty;                        
+        }
+
+        public static IEnumerable<string> parameters(MethodInfo method)
+        {
+            var args = method.GetParameters();
+            var argtypes = method.ParameterTypes(true).ToArray();
+            for(var i=0; i<argtypes.Length; i++)
+            {                                
+                var argtext = identify(args[i]);
+                if(argtext.IsNotBlank())
+                    yield return argtext;
+            }
+        }
+
+        public static string name(MethodInfo m)
+        {
+            var attrib = m.CustomAttribute<OpAttribute>();
+            if(attrib.IsNone())
+                return m.Name;
+        
+            var sep = AsciSym.Tilde;
+            var attribVal = attrib.Value;  
+            var customName = attribVal.Name;
+            var combine = attribVal.CombineCustomName;
+            
+            var name = string.Empty;
+
+            if(customName.IsNotBlank())
+            {
+                name += customName;
+
+                if(combine)
+                {
+                    name += sep;
+                    name += m.Name;
+                }
+            }
+            else
+                name += m.Name;
+                
+            return name;            
+        }
+
+        public static OpIdentity constructed(MethodInfo src)
+        {
+            var id = src.OpName();
+            var argtypes = src.ParameterTypes(true).ToArray();
+            var args = src.GetParameters();
+
+            id += PartSep;
+
+            if(src.IsConstructedGenericMethod)
+                id += OpIdentity.Generic;                           
+
+            id += string.Join(PartSep, Identity.parameters(src));
+
+            return OpIdentity.Define(id);
+        }        
+
+        /// <summary>
+        /// Defines the identity of a generic method
+        /// </summary>
+        /// <param name="src">The source method</param>
+        public static OpIdentity generic(MethodInfo src)            
+        {
+            if(!src.IsGenericMethod)
+                return OpIdentity.Empty;
+                        
+            var id = src.OpName();
+            id += PartSep; 
+            id += Generic;
+
+            var args = src.GetParameters();
+            var argtypes = src.ParameterTypes(true).ToArray();
+            var last = string.Empty;
+            for(var i=0; i<argtypes.Length; i++)
+            {
+                var argtype = argtypes[i];
+                if(i != 0 && last.IsNotBlank())
+                    id += PartSep;
+
+                last = string.Empty;                    
+
+                if(args[i].IsParametric())
+                    last = Identity.identify(args[i]);
+                else if(argtype.IsOpenGeneric())
+                {
+                    if(argtype.IsVector())
+                        last = concat(OpIdentity.Vector,argtype.Width().Format());
+                    else if(argtype.IsBlocked())
+                        last = concat(OpIdentity.Block, argtype.Width().Format());
+                    else if(argtype.IsSpan())
+                        last = OpIdentity.Span;                        
+                }
+                
+                id += last;
+            }
+
+            return OpIdentity.Define(id);        
+        }
+
+        public static OpIdentity group(MethodInfo method)            
+        {
+            var id = method.OpName();
+            var args = Identity.parameters(method).ToArray();
+            for(var i=0; i<args.Length; i++)            
+            {
+                id += OpIdentity.PartSep;                    
+                id += args[i];
+            }
+            return OpIdentity.Define(id);
+        }
+ 
+        /// <summary>
+        /// Defines an operation identifier of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_suffix} to identify 
+        /// an operation over a segmented type of bitwidth w over a primal kind k
+        /// </summary>
+        /// <param name="opname">The base operator name/operator classifier</param>
+        /// <param name="w">The total bit-widht of the segmented type</param>
+        /// <param name="k">The primal cell kind</param>
+        /// <param name="generic">Whether a generic operation is identified</param>
+        /// <param name="asm">Whether the moniker has an asm suffix</param>
+        public static OpIdentity operation(string opname, FixedWidth w, NumericKind k, bool generic, string suffix = null)
+        {
+            var g = generic ? $"{Generic}" : string.Empty;
+            var suffixPart = string.IsNullOrWhiteSpace(suffix) ?  string.Empty : $"{SuffixSep}{suffix}";
+
+            if(generic && k == NumericKind.None)
+                return OpIdentity.Define(concat(opname, PartSep, Generic, suffixPart));            
+            else if(w.IsSome())
+                return OpIdentity.Define(concat(opname, PartSep, $"{g}{w.Format()}{SegSep}{NumericType.signature(k)}", suffixPart));
+            else
+                return OpIdentity.Define(concat($"{opname}_{g}{NumericType.signature(k)}{suffixPart}"));
+        }
+
+        /// <summary>
+        /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="k">The primal kind over which the identifier is deined</param>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation(string opname, NumericKind k)
+            => operation(opname, FixedWidth.None, k, false);
+
+        /// <summary>
+        /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="k">The primal kind over which the identifier is deined</param>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation(string opname, NumericKind k, bool generic)
+            => operation(opname, FixedWidth.None, k, generic);
+
+        /// <summary>
+        /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation<T>(string opname, T t = default)
+            => operation(opname,typeof(T).NumericKind());
+
+        /// <summary>
+        /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an
+        /// operation over a primal type of bit width N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation<T>(string opname, HK.Numeric<T> hk)
+            where T : unmanaged
+                => operation(opname,typeof(T).NumericKind());
+
+        /// <summary>
+        /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="w">The covering bit width representative</param>
+        /// <param name="t">A primal cell type representative</param>
+        /// <typeparam name="W">The bit width type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation<W>(string opname, W w, NumericKind k)
+            where W : unmanaged, ITypeNat            
+                => operation(opname, (FixedWidth)nateval<W>(), k, false);
+
+        /// <summary>
+        /// Produces an identifier of the form {opname}_{w}{typesig(nk)}
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="k">The primal kind over which the identifier is deined</param>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation(string opname, FixedWidth w, NumericKind nk)
+            => operation(opname,w,nk,false);
+
+        /// <summary>
+        /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="w">The covering bit width representative</param>
+        /// <param name="t">A primal cell type representative</param>
+        /// <typeparam name="W">The bit width type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity operation<T>(string opname, HK.Vec256<T> hk)
+            where T : unmanaged
+                => operation(opname, n256, NumericType.kind<T>());
+
+
+        public static Option<ScalarIdentity> scalar(OpIdentityPart part)
+        {
+            if(part.PartKind == OpIdentityPartKind.Scalar)
+            {
+                return from k in NumericType.ParseKind(part.PartText)
+                    let scalar = ScalarIdentity.Define((FixedWidth)k.Width(), k.Indicator())
+                    select scalar;
+            }
+            else
+                return none<ScalarIdentity>();                
+        }
+
+        public static Option<OpIdentityPart> part(OpIdentity src, int partidx)
+        {
+            var parts = src.Parts.ToArray();
+            if(partidx <= parts.Length - 1)
+                return parts[partidx];
+            else
+                return none<OpIdentityPart>();
+        }
+
+        public static Option<OpIdentitySegment> segment(OpIdentityPart part)
+        {
+            if(part.PartKind == OpIdentityPartKind.Segment)
+            {
+                if(OpIdentitySegment.TryParse(part.PartText, out var seg))
+                    return seg;                
+            }
+
+            return none<OpIdentitySegment>();                
+        }
+
+        public static Option<OpIdentitySegment> segment(OpIdentity src, int partidx)
+            => from p in part(src, partidx)
+                from s in segment(p)
+                select s;
+
+        public static string imm8(byte immval)            
+            => $"{OpIdentity.SuffixSep}{OpIdentity.Imm}{immval}";
+
+        public static Option<byte> imm8(OpIdentity src)            
+        {
+            if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(OpIdentity.Imm), out var immval))
+                return immval;
+            else
+                return none<byte>();
+        }
+
+        /// <summary>        
+        /// Clears the immediate attached to the moniker, if any
+        /// </summary>
+        public static OpIdentity imm8Remove(OpIdentity src)
+            => imm8(src).MapValueOrDefault(immval => OpIdentity.Define(src.Identifier.Remove(imm8(immval))), src);
+
+        public static OpIdentity imm8Add(OpIdentity src, byte immval)
+            => OpIdentity.Define(concat(imm8Remove(src).Identifier, imm8(immval)));
+
+        /// <summary>
+        /// Gets the name of a method to which to Op attribute is applied
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static string host(Type t)
+            => t.CustomAttribute<OpHostAttribute>().MapValueOrDefault(a => a.Name, t.Name.ToLower());
+
     }
-
-
 }

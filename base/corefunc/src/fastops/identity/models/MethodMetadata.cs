@@ -73,5 +73,4 @@ namespace Z0
         public NumericKind SegKind
             => typeof(T).NumericKind();
     }
-
 }

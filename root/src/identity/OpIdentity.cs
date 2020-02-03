@@ -232,8 +232,6 @@ namespace Z0
 
         public const string Imm = "imm";
 
-        public const string Pointer = "ptr";
-
         public const string ImmLocator = "-imm";
 
         public const string AsmLocator = "-asm";

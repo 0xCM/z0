@@ -89,7 +89,7 @@ namespace Z0
             gen.Emit(OpCodes.Ldarg_1);
             gen.EmitCall(OpCodes.Call, reified, null);
             gen.Emit(OpCodes.Ret);
-            return method.CreateDelegate<UnaryBlockedOp128<T>>(id.WithImm(imm8), reified);
+            return method.CreateDelegate<UnaryBlockedOp128<T>>(id.WithImm8(imm8), reified);
         }
 
         public static DynamicDelegate<UnaryOp<Vector128<T>>> UnaryOp<T>(HK.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
@@ -99,7 +99,7 @@ namespace Z0
             var operand = typeof(Vector128<T>); 
             var wrapper = method(reified.Name, reified.DeclaringType, operand, operand);            
             wrapper.GetILGenerator().EmitUnaryImmCall(reified, imm8);
-            return wrapper.CreateDelegate<UnaryOp<Vector128<T>>>(id.WithImm(imm8), reified);
+            return wrapper.CreateDelegate<UnaryOp<Vector128<T>>>(id.WithImm8(imm8), reified);
         }
 
         public static DynamicDelegate<UnaryOp<Vector256<T>>> UnaryOp<T>(HK.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
@@ -109,7 +109,7 @@ namespace Z0
             var operand = typeof(Vector256<T>);                        
             var wrapper = method(reified.Name, reified.DeclaringType, operand, operand);            
             wrapper.GetILGenerator().EmitUnaryImmCall(reified,imm8);
-            return wrapper.CreateDelegate<UnaryOp<Vector256<T>>>(id.WithImm(imm8), reified);
+            return wrapper.CreateDelegate<UnaryOp<Vector256<T>>>(id.WithImm8(imm8), reified);
         }
 
         public static DynamicDelegate<BinaryOp<Vector128<T>>> BinaryOp<T>(HK.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
@@ -119,7 +119,7 @@ namespace Z0
             var operand = typeof(Vector128<T>);                        
             var wrapper = method(reified.Name, reified.DeclaringType, operand, operand, operand);            
             wrapper.GetILGenerator().EmitBinaryImmCall(reified,imm8);
-            return wrapper.CreateDelegate<BinaryOp<Vector128<T>>>(id.WithImm(imm8), reified);
+            return wrapper.CreateDelegate<BinaryOp<Vector128<T>>>(id.WithImm8(imm8), reified);
         }
 
         public static DynamicDelegate<BinaryOp<Vector256<T>>> BinaryOp<T>(HK.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
@@ -130,7 +130,7 @@ namespace Z0
             var wrapper = method(reified.Name, reified.DeclaringType, operand, operand, operand);            
             var gen = wrapper.GetILGenerator();
             wrapper.GetILGenerator().EmitBinaryImmCall(reified,imm8);
-            return wrapper.CreateDelegate<BinaryOp<Vector256<T>>>(id.WithImm(imm8),reified);
+            return wrapper.CreateDelegate<BinaryOp<Vector256<T>>>(id.WithImm8(imm8),reified);
         }
 
         static DynamicDelegate unaryimm(HK.Vec k, Type typedef, OpIdentity id, MethodInfo inner, byte imm8, Type component)
@@ -140,7 +140,7 @@ namespace Z0
             var target = typeof(UnaryOp<>).MakeGenericType(operand);
             var wrapper = method(reified.Name, reified.DeclaringType, operand, operand);            
             wrapper.GetILGenerator().EmitUnaryImmCall(reified, imm8);
-            return wrapper.CreateDelegate(id.WithImm(imm8), reified, target);
+            return wrapper.CreateDelegate(id.WithImm8(imm8), reified, target);
         }
 
         static DynamicDelegate UnaryOp(HK.Vec128 k, OpIdentity id, MethodInfo src, byte imm8, Type seg)
@@ -157,7 +157,7 @@ namespace Z0
             var wrapper = method(reified.Name, reified.DeclaringType, operand, operand, operand);            
             var gen = wrapper.GetILGenerator();
             wrapper.GetILGenerator().EmitBinaryImmCall(reified,imm8);
-            return wrapper.CreateDelegate(id.WithImm(imm8),reified, target);
+            return wrapper.CreateDelegate(id.WithImm8(imm8),reified, target);
         }
 
         static DynamicDelegate BinaryOp(HK.Vec256 k, OpIdentity id, MethodInfo src, byte imm8, Type component)
@@ -168,7 +168,7 @@ namespace Z0
             var wrapper = method(reified.Name, reified.DeclaringType, operand, operand, operand);            
             var gen = wrapper.GetILGenerator();
             wrapper.GetILGenerator().EmitBinaryImmCall(reified,imm8);
-            return wrapper.CreateDelegate(id.WithImm(imm8),reified, target);
+            return wrapper.CreateDelegate(id.WithImm8(imm8),reified, target);
         }
 
         static Func<byte,DynamicDelegate> UnaryOpFactory(HK.Vec k, MethodInfo method, OpIdentity baseid)

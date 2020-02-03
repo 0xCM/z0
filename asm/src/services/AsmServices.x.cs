@@ -29,16 +29,20 @@ namespace Z0
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
             => AsmInstructionSource.FromProducer(() => GetInstructions(archive));
 
-        public static void EmitCatalog(this IAsmContext context, IOperationCatalog cat)
-        {
-            var emitter = context.CatalogEmitter(cat);
-            var emitted = emitter.EmitCatalog().ToArray();
-            var er = AsmReports.CreateEmissionReport(cat.AssemblyId, emitted);
-            er.Save().OnSome(_ => print(CatalogEmitted(cat)))
-                        .OnNone(() => print(CatalogEmissionFailed(cat)));
-            var lr = AsmReports.CreateMemberLocationReport(cat.AssemblyId, cat.DeclaringAssembly);
-            lr.Save().Require();
-        }
+        // public static Option<FilePath> SaveEmissionReport(this IAsmContext context, IOperationCatalog cat, AsmEmissionToken[] tokens, string suffix = null)
+        // {
+        //     var er = AsmReports.CreateEmissionReport(cat.AssemblyId, tokens, suffix);
+        //     return er.Save().OnSome(_ => print(CatalogEmitted(cat)))
+        //                     .OnNone(() => print(CatalogEmissionFailed(cat)));            
+        // }
+
+        // public static void EmitCatalog(this IAsmContext context, IOperationCatalog cat)
+        // {
+        //     var emitter = context.CatalogEmitter(cat);            
+        //     context.CreateEmissionReport(cat, emitter.EmitPrimary().ToArray());
+        //     context.CreateEmissionReport(cat, emitter.EmitImm().ToArray(), OpIdentity.Imm);
+        //     AsmReports.CreateMemberLocationReport(cat.AssemblyId, cat.DeclaringAssembly).Save().Require();
+        // }
 
         public static R Eval<X0,X1,R>(this IAsmExecBuffer buffer, AsmCode src, X0 x0, X1 x1, R r = default)
             where X0 : unmanaged, IFixed

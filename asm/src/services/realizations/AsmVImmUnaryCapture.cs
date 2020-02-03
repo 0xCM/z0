@@ -36,7 +36,7 @@ namespace Z0
             var moniker = Resolver.Moniker;
             var f = Resolver.@delegate(imm8);
             var buffer = new byte[NativeServices.DefaultBufferLen];
-            return Context.Decoder().DecodeFunction(NativeReader.read(moniker.WithImm(imm8), f, buffer));
+            return Context.Decoder().DecodeFunction(NativeReader.read(moniker.WithImm8(imm8), f, buffer));
         }
     }
 
@@ -64,7 +64,7 @@ namespace Z0
             var moniker = Resolver.Moniker;
             var f = Resolver.@delegate(imm8);
             var buffer = new byte[NativeServices.DefaultBufferLen];
-            return Context.Decoder().DecodeFunction(NativeReader.read(moniker.WithImm(imm8), f, buffer));
+            return Context.Decoder().DecodeFunction(NativeReader.read(moniker.WithImm8(imm8), f, buffer));
         }
     }
 }

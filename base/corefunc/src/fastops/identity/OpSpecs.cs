@@ -22,6 +22,18 @@ namespace Z0
         public static IOpSpecifier<DirectOpSpec> Direct
             => default(DirectSvc);
 
+        /// <summary>
+        /// Closes generic operations over the set of primal types that each operation supports
+        /// </summary>
+        /// <param name="generics">Metadata for generic operations</param>
+        public static IEnumerable<OpClosureInfo> close(GenericOpSpec op)
+            => from k in op.Kinds
+                let pt = k.ToClrType()
+                where pt.IsSome()
+                let id = OpIdentities.Provider.DefineIdentity(op.Root, k)
+                where !id.IsEmpty
+                select OpClosureInfo.Define(id, k, op.Root.MakeGenericMethod(pt.Value)); 
+
         readonly struct DirectSvc : IOpSpecifier<DirectOpSpec>
         {
             public IEnumerable<DirectOpSpec> FromHost(Type host)

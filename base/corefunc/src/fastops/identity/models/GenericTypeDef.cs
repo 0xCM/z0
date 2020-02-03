@@ -12,7 +12,6 @@ namespace Z0
 
     using static zfunc;
 
-
     public readonly struct GenericTypeDef : IGeneric<Type>
     {
         [MethodImpl(Inline)]
@@ -45,5 +44,4 @@ namespace Z0
         public override string ToString() 
             => Element.DisplayName();
     }
-
 }

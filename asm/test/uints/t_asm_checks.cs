@@ -75,14 +75,14 @@ namespace Z0
                 var dHex = hexD[k.WithoutGeneric()];
                 var pairing = pair(gHex, dHex);
 
-                var gcell = from seg in gHex.Id.ParseSegment(1)
+                var gcell = from seg in gHex.Id.Segment(1)
                             let t = seg.NumericKind()
                             select t;
-                var dcell = from seg in dHex.Id.ParseSegment(1)
+                var dcell = from seg in dHex.Id.Segment(1)
                             let t = seg.NumericKind()
                             select t;
 
-                var dseg = dHex.Id.ParseSegment(1);
+                var dseg = dHex.Id.Segment(1);
                 Trace($"{gcell} :: {dcell}");
             }
             
@@ -545,8 +545,8 @@ namespace Z0
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = OpIdentities.identify(name, kind, false);
-            var gId = OpIdentities.identify(name, kind, true);
+            var dId = Identity.operation(name, kind, false);
+            var gId = Identity.operation(name, kind, true);
 
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);
@@ -563,8 +563,8 @@ namespace Z0
         {
             var catalog = typeof(dinx).Assembly.OperationCatalog().CatalogName;
             
-            var idD = OpIdentities.identify(name, w, kind, false);
-            var idG = OpIdentities.identify(name, w, kind, true);
+            var idD = Identity.operation(name, w, kind, false);
+            var idG = Identity.operation(name, w, kind, true);
 
             var d = Context.CodeArchive(catalog, nameof(dinx)).Read(idD).Single();
             var g = Context.CodeArchive(catalog, nameof(ginx)).Read(idG).Single();

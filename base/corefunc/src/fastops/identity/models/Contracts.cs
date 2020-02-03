@@ -17,6 +17,12 @@ namespace Z0
         E Element {get;}
     }
 
+    public interface IGeneric<T> : IClrMetadata<T>
+    {        
+
+        GenericKind Kind {get;}
+    }
+
     public interface IMethodMetadata : IClrMetadata<MethodInfo>
     {        
     
@@ -35,16 +41,5 @@ namespace Z0
         
     }
 
-    public interface ITypeMetadata : IClrMetadata<Type>
-    {
-        
-    }
-
-
-    public interface IGeneric<T> : IClrMetadata<T>
-    {        
-
-        GenericKind Kind {get;}
-    }
 
 }

@@ -53,7 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(AsmEmissionToken rhs)
-            => Origin.CompareTo(rhs.Origin);
+            => this.Uri.CompareTo(rhs.Uri);
     }
 
 }

@@ -11,7 +11,5 @@ namespace Z0
     public interface ITypeIdentityProvider
     {
         TypeIdentity DefineIdentity(Type src);        
-
-        
     }
 }

@@ -104,7 +104,7 @@ namespace Z0
                 => $"{GetType().Name}/{identify(root,w,t)}";
 
         protected static OpIdentity SubjectId(string opname, NumericKind kind)
-            => OpIdentities.identify($"{opname}_subject",kind);
+            => Identity.operation($"{opname}_subject",kind);
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged

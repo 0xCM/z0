@@ -17,17 +17,17 @@ namespace Z0
     /// </summary>
     public class MethodParameter : ClrArtifact
     {        
-        public MethodParameter(TypeSig Type, ParamDirection Direction, string ParamName, int Position)
+        public MethodParameter(TypeSig Type, ParamVariance Variance, string ParamName, int Position)
             : base(ParamName)            
         {
             this.Type = Type;
-            this.Direction = Direction;
+            this.Variance = Variance;
             this.Position = Position;
         }
 
         public TypeSig Type {get;}
 
-        public ParamDirection Direction {get;}
+        public ParamVariance Variance {get;}
         
         public int Position {get;}
 

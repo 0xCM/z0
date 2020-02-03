@@ -66,7 +66,11 @@ namespace Z0
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
 
-       public const char SegSep = 'x';
+        public const char SegSep = 'x';
+
+        public const string Pointer = "ptr";
+
+        public const string Modifier = "~";
 
     }
 }

@@ -13,7 +13,12 @@ namespace Z0
 
     public interface IAsmCatalogEmitter : IAsmService
     {
-       IEnumerable<AsmEmissionToken> EmitCatalog();
+        IEnumerable<AsmEmissionToken> EmitPrimary();          
+
+        IEnumerable<AsmEmissionToken> EmitImm();  
+
+        IEnumerable<AsmEmissionToken> EmitCatalog()
+            => EmitPrimary().Union(EmitImm());
        
     }
 }

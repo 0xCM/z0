@@ -5,17 +5,20 @@
 namespace Z0
 {        
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-    public readonly struct OpUri : IEquatable<OpUri>
+    public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>
     {
         public readonly string Catalog;
 
         public readonly string Subject;
 
-        public readonly OpIdentity Id;
+        public readonly OpIdentity OpId;
+
+        public readonly string UriText;
 
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
@@ -25,33 +28,26 @@ namespace Z0
         public static bool operator!=(OpUri a, OpUri b)
             => !a.Equals(b);
 
-        public static Option<OpUri> Parse(string src)
-        {
-            var parts = src.Split(fslash());
-            if(parts.Length == 3)
-            {
-                var catalog = parts[0];
-                var subject = parts[1];
-                var id = OpIdentity.Define(parts[2]);
-                return Define(catalog, subject, id);
-            }
-            return none<OpUri>();
-        }
-        
         [MethodImpl(Inline)]
-        public static OpUri Define(string catalog, string subject, OpIdentity id)        
-            => new OpUri(catalog,subject, id);
+        public static OpUri Asm(string catalog, string subject, OpIdentity opid)        
+            => new OpUri("asm", catalog, subject, string.Empty, opid);
 
         [MethodImpl(Inline)]
-        OpUri(string catalog, string subject, OpIdentity id)
+        public static OpUri Asm(string catalog, string subject, string group, OpIdentity opid)        
+            => new OpUri("asm", catalog, subject, group, opid);
+
+        [MethodImpl(Inline)]
+        OpUri(string scheme, string catalog, string subject, string group, OpIdentity opid)
         {
             this.Catalog = catalog;
             this.Subject = subject;
-            this.Id = id;
+            this.OpId = opid;
+            var groupPart = string.IsNullOrWhiteSpace(group) ? string.Empty : $"{group}?";
+            this.UriText = concat(scheme, colon(), fslash(), fslash(), Catalog, fslash(), Subject, fslash(), groupPart, OpId.Identifier);
         }
         
         public string Format()
-            => concat(Catalog, fslash(), Subject, fslash(), Id.Identifier);
+            => UriText;
         
         public override string ToString()
             => Format();
@@ -64,6 +60,10 @@ namespace Z0
             => obj is OpUri x && Equals(x);
          
         public override int GetHashCode()
-            => HashCode.Combine(Catalog,Subject,Id);
+            => HashCode.Combine(Catalog,Subject,OpId);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(OpUri other)
+            => this.UriText.CompareTo(other.UriText);
     }
 }

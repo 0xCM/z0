@@ -57,11 +57,26 @@ namespace Z0
                     select (d.Id, d.DeclaringAssembly, d.Catalog);
             
             var res = FindCatalog(AssemblyId.Data).Require().Resources;
-            var rr = AsmReports.CreateResourceReport(res);
-            rr.Save().Require();
+            AsmReports.CreateResourceReport(res).Save().Require();
 
             foreach(var (id, a, cat) in designates)
-                AsmContext.New(ClrMetadataIndex.Create(a), res).EmitCatalog(cat);
+            {             
+                var metadata = ClrMetadataIndex.Create(a);
+                var context = AsmContext.New(metadata, res);
+                var emitter = context.CatalogEmitter(cat);      
+                
+                var primary = array(emitter.EmitPrimary());  
+                if(primary.Length != 0)    
+                    AsmReports.CreateEmissionReport(id, primary).Save().Require();
+
+                var imm = array(emitter.EmitImm());
+                if(imm.Length != 0)                
+                    AsmReports.CreateEmissionReport(id, imm, OpIdentity.Imm).Save().Require();
+                
+                AsmReports.CreateMemberLocationReport(id, a).Save().Require();                
+            }
+
+            
         }
     }
 }

@@ -18,7 +18,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static TypeIdentity numericid<T>(T t = default)
         where T : unmanaged
-            => TypeIdentities.numericid(t); 
+            => Identity.numericid(t); 
 
     /// <summary>
     /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an
@@ -29,7 +29,7 @@ partial class zfunc
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static OpIdentity identify<T>(string opname, T t = default)
-        => OpIdentities.identify<T>(opname);
+        => Identity.operation<T>(opname);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -43,7 +43,7 @@ partial class zfunc
     public static OpIdentity identify<W,T>(string opname, W w = default, T t = default)
         where W : unmanaged, ITypeNat
         where T : unmanaged
-            => OpIdentities.identify(opname,w, NumericType.kind<T>());
+            => Identity.operation(opname,w, NumericType.kind<T>());
 
     /// <summary>
     /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
@@ -56,7 +56,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static OpIdentity identify<T>(string opname, N128 w, T t = default)
         where T : unmanaged
-            => OpIdentities.identify(opname,w, NumericType.kind<T>());
+            => Identity.operation(opname,w, NumericType.kind<T>());
 
     /// <summary>
     /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
@@ -69,7 +69,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static OpIdentity identify<T>(string opname, HK.Vec128<T> hk)
         where T : unmanaged
-            => OpIdentities.identify(opname, n128, NumericType.kind<T>());
+            => Identity.operation(opname, n128, NumericType.kind<T>());
 
     /// <summary>
     /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -82,7 +82,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static OpIdentity identify<T>(string opname, N256 w, T t = default)
         where T : unmanaged
-            => OpIdentities.identify(opname,w, NumericType.kind<T>());
+            => Identity.operation(opname,w, NumericType.kind<T>());
 
     /// <summary>
     /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -95,6 +95,6 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static OpIdentity identify<T>(string opname, HK.Vec256<T> hk)
         where T : unmanaged
-            => OpIdentities.identify(opname, n256, NumericType.kind<T>());
+            => Identity.operation(opname, n256, NumericType.kind<T>());
 
 }
