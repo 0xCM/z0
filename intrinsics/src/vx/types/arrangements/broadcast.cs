@@ -37,7 +37,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public Moniker Moniker => identify<T>($"{Name}_{primalsig<S>()}",w);
+            public Moniker Moniker => identify<T>($"{Name}_{numericid<S>()}",w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(S a) => CpuVector.vbroadcast(n128, convert<S,T>(a));            
@@ -68,7 +68,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public Moniker Moniker => identify<T>($"{Name}_{primalsig<S>()}",w);
+            public Moniker Moniker => identify<T>($"{Name}_{numericid<S>()}",w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(S a) => CpuVector.vbroadcast(n256, convert<S,T>(a));

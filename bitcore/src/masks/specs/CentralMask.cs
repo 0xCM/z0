@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
-    using static zfunc;
+    
+    using static zfunc;    
 
     /// <summary>
     /// Defines a specification for producing Central-oriented masks
@@ -58,7 +59,7 @@ namespace Z0
                 => default;
 
         public string Format()
-            => $"central(f:{nateval<F>()}, d:{nateval<D>()}, t:{primalsig<T>()})";
+            => $"central(f:{nateval<F>()}, d:{nateval<D>()}, t:{numericid<T>()})";
 
         public override string ToString()
             => Format();

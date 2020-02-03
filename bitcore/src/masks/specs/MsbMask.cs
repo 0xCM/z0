@@ -59,7 +59,7 @@ namespace Z0
                 => default;
 
         public string Format()
-            => $"msb(f:{natval<F>()}, d:{natval<D>()}, t:{primalsig<T>()})";
+            => $"msb(f:{natval<F>()}, d:{natval<D>()}, t:{numericid<T>()})";
 
         public override string ToString()
             => Format();

@@ -292,7 +292,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {            
-            var opname = $"bvdot_n{n}x{primalsig<T>()}";
+            var opname = $"bvdot_n{n}x{numericid<T>()}";
 
             void check()
             {

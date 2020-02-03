@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="root">The root name</param>
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
-            => $"{GetType().Name}/{root}_{primalsig(t)}";
+            => $"{GetType().Name}/{root}_{numericid(t)}";
 
         protected string CaseName<W,C>(string root, W w = default, C t = default)
             where W : unmanaged, ITypeNat

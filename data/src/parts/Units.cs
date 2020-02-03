@@ -62,16 +62,16 @@ namespace Z0
             var index = UnitsIndex;
 
             w = n128;
-            Register(index++, TypeIdentities.resid(basename, w, NumericKind.U8), Units128x8u);
-            Register(index++, TypeIdentities.resid(basename, w, NumericKind.U16), Units128x16u);
-            Register(index++, TypeIdentities.resid(basename, w, NumericKind.U32), Units128x32u);
-            Register(index++, TypeIdentities.resid(basename, w, NumericKind.U64), Units128x64u);
+            Register(index++, TypeIdentities.resource(basename, w, NumericKind.U8), Units128x8u);
+            Register(index++, TypeIdentities.resource(basename, w, NumericKind.U16), Units128x16u);
+            Register(index++, TypeIdentities.resource(basename, w, NumericKind.U32), Units128x32u);
+            Register(index++, TypeIdentities.resource(basename, w, NumericKind.U64), Units128x64u);
             
             w = n256;
-            Register(index++, TypeIdentities.resid(basename, w, NumericKind.U8), Units256x8u);
-            Register(index++, TypeIdentities.resid(basename, w, NumericKind.U16), Units256x16u);
-            Register(index++, TypeIdentities.resid(basename, w, NumericKind.U32), Units256x32u);
-            Register(index++, TypeIdentities.resid(basename, w, NumericKind.U64), Units256x64u);
+            Register(index++, TypeIdentities.resource(basename, w, NumericKind.U8), Units256x8u);
+            Register(index++, TypeIdentities.resource(basename, w, NumericKind.U16), Units256x16u);
+            Register(index++, TypeIdentities.resource(basename, w, NumericKind.U32), Units256x32u);
+            Register(index++, TypeIdentities.resource(basename, w, NumericKind.U64), Units256x64u);
         }
 
     }

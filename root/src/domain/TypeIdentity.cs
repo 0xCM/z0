@@ -14,6 +14,8 @@ namespace Z0
     {
         public string Identifier {get;}
 
+        public static TypeIdentity Empty => Define(string.Empty);
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TypeIdentity Define(string identifier)
             => new TypeIdentity(identifier);
@@ -41,6 +43,12 @@ namespace Z0
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         TypeIdentity(string id)
             => Identifier = id;
+
+        public bool IsEmpty
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => string.IsNullOrWhiteSpace(Identifier);
+        }
 
         public override string ToString()
             => Identifier;

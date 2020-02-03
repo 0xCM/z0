@@ -16,9 +16,9 @@ partial class zfunc
     /// <param name="t">A primal type representative</param>
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
-    public static string primalsig<T>(T t = default)
+    public static TypeIdentity numericid<T>(T t = default)
         where T : unmanaged
-            => NumericType.signature(typeof(T));
+            => TypeIdentities.numericid(t); 
 
     /// <summary>
     /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an

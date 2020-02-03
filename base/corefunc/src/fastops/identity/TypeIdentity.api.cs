@@ -13,16 +13,25 @@ namespace Z0
 
     public static class TypeIdentities
     {           
+        /// <summary>
+        /// Produces an identifier of the form {width(nk)}{u | i | f} for a numeric type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static TypeIdentity identify(NumericKind nk)
+            => TypeIdentity.Define(NumericType.signature(nk));
+
         [MethodImpl(Inline)]
-        public static TypeIdentity resid(string basename, ITypeNat w, NumericKind kind)
+        public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w}x{kind.Signature()}");
         
         [MethodImpl(Inline)]
-        public static TypeIdentity resid(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
+        public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Signature()}");   
 
         [MethodImpl(Inline)]
-        public static Option<TypeIdentity> provided(this Type t)
+        public static Option<TypeIdentity> identify(Type t)
             => TypeIdentityProvider.from(t).DefineIdentity(t);
             
         /// <summary>
@@ -31,18 +40,9 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static TypeIdentity numeric<T>(T t = default)
+        public static TypeIdentity numericid<T>(T t = default)
             where T : unmanaged
                 => TypeIdentity.Define(NumericType.signature(typeof(T)));
-
-        /// <summary>
-        /// Produces an identifier of the form {width(nk)}{u | i | f} for a numeric type
-        /// </summary>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static TypeIdentity from(NumericKind nk)
-            => TypeIdentity.Define(NumericType.signature(nk));
 
         static Option<string> CommonIdentity(this Type arg)
         {

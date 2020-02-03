@@ -66,6 +66,4 @@ namespace Z0
         public override int GetHashCode()
             => HashCode.Combine(Catalog,Subject,Id);
     }
-
-
 }

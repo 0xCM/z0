@@ -68,7 +68,11 @@ namespace Z0
         /// Indicates whether the moniker is emtpy
         /// </summary>
         public bool IsEmpty
-            => string.IsNullOrWhiteSpace(Identifier);
+        {
+            
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => string.IsNullOrWhiteSpace(Identifier);
+        }
 
         /// <summary>
         /// Specifies whether the operation was reified from a generic definition 

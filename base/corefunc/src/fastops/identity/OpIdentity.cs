@@ -90,9 +90,14 @@ namespace Z0
         static string Arg(ParameterInfo p)
         {
             var pt = p.ParameterType;
-            return !p.IsParametric()
-                ? pt.EffectiveType().provided().MapValueOrDefault(m => concat(m.Identifier,p.Variance().Format()), string.Empty)
-                : string.Empty;                                                
+            if(!p.IsParametric())
+            {
+                var id = TypeIdentities.identify(pt.EffectiveType()).Require();
+                return concat(id.Identifier, p.Variance().Format());                
+            }
+            else
+                return string.Empty;            
+            
         }
 
         static IEnumerable<string> Args(MethodInfo method)
