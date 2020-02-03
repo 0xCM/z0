@@ -66,21 +66,21 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        public readonly struct Vec : IHKType<Vec>
+        public readonly struct Vec : ITypeKind<Vec>
         {
-            public const HKTypeKind Kind = HKTypeKind.VectorType; 
+            public const TypeKind Kind = TypeKind.VectorType; 
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Vec src)
+            public static implicit operator TypeKind(Vec src)
                 =>  src.Classifier;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct Vec<T> : IHKType<Vec<T>,T> 
+        public readonly struct Vec<T> : ITypeKind<Vec<T>,T> 
             where T : unmanaged
         {
-            public const HKTypeKind Kind = HKTypeKind.VectorType; 
+            public const TypeKind Kind = TypeKind.VectorType; 
 
             [MethodImpl(Inline)]
             public static implicit operator Vec(Vec<T> src)
@@ -90,7 +90,7 @@ namespace Z0
             public static implicit operator TypeKind<T>(Vec<T> src)
                 =>  new TypeKind<T>(src.Classifier);
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public Vec128<T> Promote(Vec128 hk)
                 => vk128<T>();
@@ -99,9 +99,9 @@ namespace Z0
                 => vk256<T>();
         }
 
-        public readonly struct Vec128 : IHKType<Vec128>, IFixedClass<Fixed128>
+        public readonly struct Vec128 : ITypeKind<Vec128>, IFixedClass<Fixed128>
         {
-            public const HKTypeKind Kind = HKTypeKind.VectorType; 
+            public const TypeKind Kind = TypeKind.VectorType; 
 
             public const FixedWidth Width = FixedWidth.W128;
 
@@ -118,19 +118,19 @@ namespace Z0
                 =>  default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Vec128 src)
+            public static implicit operator TypeKind(Vec128 src)
                 =>  src.Classifier;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
                 
         }        
 
-        public readonly struct Vec128<T> : IHKType<Vec128<T>>, IFixedClass<Fixed128,T>
+        public readonly struct Vec128<T> : ITypeKind<Vec128<T>>, IFixedClass<Fixed128,T>
             where T : unmanaged
         {
-            public const HKTypeKind Kind = HKTypeKind.VectorType; 
+            public const TypeKind Kind = TypeKind.VectorType; 
 
             public const FixedWidth Width = FixedWidth.W128;
 
@@ -151,18 +151,18 @@ namespace Z0
                 =>  default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Vec128<T> src)
+            public static implicit operator TypeKind(Vec128<T> src)
                 =>  src.Classifier;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
 
         }        
 
-        public readonly struct Vec256 : IHKType<Vec256>, IFixedClass<Fixed256>
+        public readonly struct Vec256 : ITypeKind<Vec256>, IFixedClass<Fixed256>
         {
-            public const HKTypeKind Kind = HKTypeKind.VectorType; 
+            public const TypeKind Kind = TypeKind.VectorType; 
 
             public const FixedWidth Width = FixedWidth.W256;
 
@@ -179,19 +179,19 @@ namespace Z0
                 =>  default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Vec256 src)
+            public static implicit operator TypeKind(Vec256 src)
                 =>  src.Classifier;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
 
         }        
 
-        public readonly struct Vec256<T> : IHKType<Vec256<T>>, IFixedClass<Fixed256,T>
+        public readonly struct Vec256<T> : ITypeKind<Vec256<T>>, IFixedClass<Fixed256,T>
             where T : unmanaged
         {
-            public const HKTypeKind Kind = HKTypeKind.VectorType; 
+            public const TypeKind Kind = TypeKind.VectorType; 
 
             public const FixedWidth Width = FixedWidth.W256;
 
@@ -208,26 +208,26 @@ namespace Z0
                 =>  default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Vec256<T> src)
+            public static implicit operator TypeKind(Vec256<T> src)
                 =>  src.Classifier;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Vec<W,T> : IHKType<Vec<W,T>,W,T>
+        public readonly struct Vec<W,T> : ITypeKind<Vec<W,T>,W,T>
             where T : unmanaged
             where W : unmanaged, ITypeNat
         {
-            public const HKTypeKind Kind = HKTypeKind.VectorType;      
+            public const TypeKind Kind = TypeKind.VectorType;      
 
             public static FixedWidth Width => (FixedWidth)nateval<W>();
 
             public static int BitCount => (int)nateval<W>();
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Vec<W,T> src)
+            public static implicit operator TypeKind(Vec<W,T> src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
@@ -246,7 +246,7 @@ namespace Z0
             public static implicit operator Vec<T>(Vec<W,T> src)
                 =>  default;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
 

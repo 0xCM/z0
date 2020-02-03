@@ -68,7 +68,7 @@ namespace Z0
     public interface IVTernaryOp128<T> : IVTernaryOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryOp | HKFunctionKind.V128;
+        FunctionKind IFunc.Kind => FunctionKind.TernaryOp | FunctionKind.V128;
 
     }
 
@@ -80,7 +80,7 @@ namespace Z0
     public interface IVTernaryOp256<T> : IVTernaryOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryOp | HKFunctionKind.V256;
+        FunctionKind IFunc.Kind => FunctionKind.TernaryOp | FunctionKind.V256;
         
     }
 

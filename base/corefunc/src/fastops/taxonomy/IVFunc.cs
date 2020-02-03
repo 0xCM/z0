@@ -16,7 +16,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IVFunc : IFunc
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.Vectorized;
 
     }
 
@@ -47,7 +47,7 @@ namespace Z0
         where T1 : unmanaged
         where T2 : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryFunc | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.Vectorized;
 
     }
 
@@ -75,7 +75,7 @@ namespace Z0
         where T2 : unmanaged
         where T3 : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryFunc | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryFunc | FunctionKind.Vectorized;
 
     }
 
@@ -109,7 +109,7 @@ namespace Z0
         where T3 : unmanaged
         where T4 : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryFunc | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.TernaryFunc | FunctionKind.Vectorized;
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
     public interface IVReducer256<T> : IVFunc<N256,N128,Vector256<T>,Vector128<T>,T,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.V256 | HKFunctionKind.UnaryConverter;
+        FunctionKind IFunc.Kind => FunctionKind.V256 | FunctionKind.UnaryConverter;
     }
 
 }

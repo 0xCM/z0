@@ -10,7 +10,6 @@ namespace Z0.OpCodes
     using System.Runtime.Intrinsics;
  
     using static zfunc;
-    using static Classifiers;
 
     /// <summary>
     /// Opcodes for bitcore-defined operations
@@ -20,7 +19,7 @@ namespace Z0.OpCodes
     {        
 
         public static BitPos<uint> bitpos_u32(int index)
-            => gbits.bitpos(index, u32);
+            => gbits.bitpos(index, HK.u32);
 
         public static BitPos<uint> bitpos_u32_x(int index)
             => gbits.bitpos<uint>(index);

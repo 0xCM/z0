@@ -75,9 +75,6 @@ namespace Z0
 
         }
 
-        public static uint xor_u32(uint a, uint b)
-            => GX.eval(Classifiers.fXor,a,b);
-
         public static Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
             =>  dinx.vbsrl(x, 0);
 

@@ -10,7 +10,7 @@ namespace Z0
     /// Defines higher-kinded function classifications
     /// </summary>
     [Flags]
-    public enum HKFunctionKind : ulong
+    public enum FunctionKind : ulong
     {
         None = 0,
 

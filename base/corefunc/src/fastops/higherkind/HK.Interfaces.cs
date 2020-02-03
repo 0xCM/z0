@@ -11,6 +11,9 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Identifies a higher-kinded representation
+    /// </summary>
     public interface IKind
     {
 
@@ -47,6 +50,66 @@ namespace Z0
 
         Pair<K1,K2> IKind<Pair<K1,K2>>.Classifier
             => paired(Class1,Class2);
+    }
+
+    /// <summary>
+    /// Characterizes a higher-kinded type representation
+    /// </summary>
+    public interface ITypeKind : IKind<TypeKind>
+    {        
+
+    }
+
+    public interface ITypeKind<K> : ITypeKind
+        where K : ITypeKind<K>
+    {
+
+    }
+
+    public interface ITypeKind<K,T> : ITypeKind<K>
+        where T : unmanaged
+        where K : ITypeKind<K,T>
+    {
+
+    }
+
+    public interface ITypeKind<K,N,T> : ITypeKind<K,T>
+        where T : unmanaged
+        where K : ITypeKind<K,N,T>
+        where N : unmanaged, ITypeNat
+    {
+
+    }
+
+    public interface ITypeKind<K,M,N,T> : ITypeKind<K,T>
+        where K : ITypeKind<K,M,N,T>
+        where T : unmanaged
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a higher-kinded function representation
+    /// </summary>
+    public interface IFuncKind : IKind<FunctionKind>
+    {
+
+    }
+
+    public interface IFuncKind<K> : IFuncKind
+        where K : IFuncKind<K>
+    {
+
+    }
+
+    public interface IFuncKind<K,N> : IFuncKind<K>
+        where K : IFuncKind<K,N>
+        where N : unmanaged, ITypeNat
+    {
+        int Arity 
+            => (int)default(N).NatValue;
     }
 
 
@@ -118,38 +181,15 @@ namespace Z0
 
     }
 
-    public interface IOpClass
+    public interface IOperatorKind
     {
         string Name {get;}
     }
 
-    public interface IOpClass<K> : IOpClass
-        where K : unmanaged, IOpClass<K>
+    public interface IOperatorKind<K> : IOperatorKind
+        where K : unmanaged, IOperatorKind<K>
     {
-        string IOpClass.Name => typeof(K).Name.ToLower();
+        string IOperatorKind.Name => typeof(K).Name.ToLower();
     }    
 
-
-    public interface IPrimalClass : IKind<NumericKind>
-    {
-
-    }
-
-    public interface IPrimalClass<T> : IPrimalClass
-        where T : unmanaged
-    {
-
-    }
-
-    public interface IVectorClass : IKind<VectorKind>
-    {
-
-    }
-
-    public interface IVectorClass<W,T> : IVectorClass
-        where W : unmanaged, ITypeNat
-        where T : unmanaged
-    {
-
-    }    
 }

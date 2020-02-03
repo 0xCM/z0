@@ -34,18 +34,18 @@ namespace Z0
             where W : unmanaged, ITypeNat
                 => default;
 
-        public readonly struct UserType : IHKType<UserType>
+        public readonly struct UserType : ITypeKind<UserType>
         {
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(UserType src)
+            public static implicit operator TypeKind(UserType src)
                 =>  src.Classifier;
 
-            public const HKTypeKind Kind = HKTypeKind.UserType; 
+            public const TypeKind Kind = TypeKind.UserType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct UserType<T> : IHKType<UserType<T>,T> 
+        public readonly struct UserType<T> : ITypeKind<UserType<T>,T> 
             where T : unmanaged
         {
 
@@ -54,30 +54,30 @@ namespace Z0
                 =>  default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(UserType<T> src)
+            public static implicit operator TypeKind(UserType<T> src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator TypeKind<T>(UserType<T> src)
                 =>  new TypeKind<T>(src.Classifier);
             
-            public const HKTypeKind Kind = HKTypeKind.UserType; 
+            public const TypeKind Kind = TypeKind.UserType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }                
 
-        public readonly struct BitVectorType : IHKType<BitVectorType>
+        public readonly struct BitVectorType : ITypeKind<BitVectorType>
         {
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(BitVectorType src)
+            public static implicit operator TypeKind(BitVectorType src)
                 =>  src.Classifier;
 
-            public const HKTypeKind Kind = HKTypeKind.BitVectorType; 
+            public const TypeKind Kind = TypeKind.BitVectorType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct BitVectorType<T> : IHKType<BitVectorType<T>,T> 
+        public readonly struct BitVectorType<T> : ITypeKind<BitVectorType<T>,T> 
             where T : unmanaged
         {
             public static FixedWidth Width => (FixedWidth)bitsize<T>();
@@ -90,27 +90,27 @@ namespace Z0
             public static implicit operator BitVectorType(BitVectorType<T> src)
                 =>  default;
 
-            public const HKTypeKind Kind = HKTypeKind.BitVectorType; 
+            public const TypeKind Kind = TypeKind.BitVectorType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
 
         }        
 
-        public readonly struct BitMatrixType<T> : IHKType<BitMatrixType<T>,T> 
+        public readonly struct BitMatrixType<T> : ITypeKind<BitMatrixType<T>,T> 
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public static implicit operator TypeKind<T>(BitMatrixType<T> src)
                 =>  new TypeKind<T>(src.Classifier);
             
-            public const HKTypeKind Kind = HKTypeKind.BitMatrixType; 
+            public const TypeKind Kind = TypeKind.BitMatrixType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct BitMatrixType<N,T> : IHKType<BitMatrixType<N,T>,N,T> 
+        public readonly struct BitMatrixType<N,T> : ITypeKind<BitMatrixType<N,T>,N,T> 
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -122,23 +122,23 @@ namespace Z0
             public static implicit operator BitMatrixType<T>(BitMatrixType<N,T> src)
                 =>  default;
 
-            public const HKTypeKind Kind = HKTypeKind.BitMatrixType; 
+            public const TypeKind Kind = TypeKind.BitMatrixType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct BitGridType<T> : IHKType<BitGridType<T>,T> 
+        public readonly struct BitGridType<T> : ITypeKind<BitGridType<T>,T> 
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public static implicit operator TypeKind<T>(BitGridType<T> src)
                 =>  new TypeKind<T>(src.Classifier);
-            public const HKTypeKind Kind = HKTypeKind.BitGridType; 
+            public const TypeKind Kind = TypeKind.BitGridType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct BitGridType<M,N,T> : IHKType<BitGridType<M,N,T>,M,N,T> 
+        public readonly struct BitGridType<M,N,T> : ITypeKind<BitGridType<M,N,T>,M,N,T> 
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
@@ -155,9 +155,9 @@ namespace Z0
             public static implicit operator BitGridType<T>(BitGridType<M,N,T> src)
                 =>  default;
 
-            public const HKTypeKind Kind = HKTypeKind.BitGridType; 
+            public const TypeKind Kind = TypeKind.BitGridType; 
 
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
     }
 }

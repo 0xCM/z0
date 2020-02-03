@@ -26,7 +26,7 @@ namespace Z0
     public interface IUnaryMeasure<A,K> : IMeasure, IFunc<A,K>
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryMeasure;        
+        FunctionKind IFunc.Kind => FunctionKind.UnaryMeasure;        
     }
 
     /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
     public interface IBinaryMeasure<A,B,K> : IMeasure, IFunc<A,B,K>
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryMeasure;        
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure;        
 
     }
 }

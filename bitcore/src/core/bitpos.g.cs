@@ -9,7 +9,6 @@ namespace Z0
 
     using static zfunc;
     using static As;
-    using static Classifiers;
 
     partial class gbits
     {
@@ -24,7 +23,7 @@ namespace Z0
                 => BitPos.FromBitIndex<T>((uint)index);
 
         [MethodImpl(Inline)]
-        public static BitPos<T> bitpos<T>(int index, PrimalClass<T> k)
+        public static BitPos<T> bitpos<T>(int index, HK.Numeric<T> k)
             where T : unmanaged
                 => bitpos<T>(index);
 

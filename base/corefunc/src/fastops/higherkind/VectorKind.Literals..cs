@@ -35,17 +35,17 @@ namespace Z0
         /// <summary>
         /// A 128-bit vector
         /// </summary>
-        v128 = VectorWidth.W128,
+        v128 = FixedWidth.W128,
 
         /// <summary>
         /// A 256-bit vector
         /// </summary>
-        v256 = VectorWidth.W256,
+        v256 = FixedWidth.W256,
 
         /// <summary>
         /// A 512-bit vector
         /// </summary>
-        v512 = VectorWidth.W512,
+        v512 = FixedWidth.W512,
 
         /// <summary>
         /// A vector defined over 8-bit unsigned segments

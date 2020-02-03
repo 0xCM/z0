@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using static Classifiers;
 
     using static zfunc;
     public abstract class t_asm<U> : UnitTest<U>, IDisposable
@@ -122,7 +121,7 @@ namespace Z0
             where W : unmanaged, ITypeNat
                 => Context.CodeArchive(catalog,subject).Read<T>(OpIdentities.segmented(opname, NumericType.kind<T>(), w)).Require(); 
 
-        protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalClass<byte> kind)
+        protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, HK.Numeric<byte> kind)
         {
             var w = n8;
 
@@ -139,7 +138,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, PrimalClass<sbyte> kind)
+        protected void megacheck(string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, HK.Numeric<sbyte> kind)
         {
             var w = n8;
 
@@ -156,7 +155,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, PrimalClass<ushort> kind)
+        protected void megacheck(string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, HK.Numeric<ushort> kind)
         {
             var w = n16;
 
@@ -174,7 +173,7 @@ namespace Z0
         }
 
 
-        protected void megacheck(string name, Func<short,short,short> primal, Func<short,short,short> generic, PrimalClass<short> kind)
+        protected void megacheck(string name, Func<short,short,short> primal, Func<short,short,short> generic, HK.Numeric<short> kind)
         {
             var w = n16;
 
@@ -191,7 +190,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, PrimalClass<uint> kind)
+        protected void megacheck(string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, HK.Numeric<uint> kind)
         {
             var w = n32;
 
@@ -208,7 +207,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, PrimalClass<int> kind)
+        protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, HK.Numeric<int> kind)
         {
             var w = n32;
             var moniker = OpIdentities.define(name, kind);                        
@@ -224,7 +223,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, PrimalClass<long> kind)
+        protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, HK.Numeric<long> kind)
         {            
             var w = n64;
             var moniker = OpIdentities.define(name, kind);                        
@@ -240,7 +239,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, PrimalClass<ulong> kind)
+        protected void megacheck(string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, HK.Numeric<ulong> kind)
         {            
             var w = n64;
 

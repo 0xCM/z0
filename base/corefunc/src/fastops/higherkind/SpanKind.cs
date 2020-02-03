@@ -10,9 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using static zfunc;
 
-    public static partial class HK
+    partial class HK
     {
-
         /// <summary>
         /// Reifies a non-parametric span kind
         /// </summary>
@@ -28,21 +27,21 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        public readonly struct SpanType : IHKType<SpanType>
+        public readonly struct SpanType : ITypeKind<SpanType>
         {
-            public const HKTypeKind Kind = HKTypeKind.SpanType; 
+            public const TypeKind Kind = TypeKind.SpanType; 
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(SpanType src)
+            public static implicit operator TypeKind(SpanType src)
                 =>  src.Classifier;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct SpanType<T> : IHKType<SpanType<T>,T> 
+        public readonly struct SpanType<T> : ITypeKind<SpanType<T>,T> 
             where T : unmanaged
         {
-            public const HKTypeKind Kind = HKTypeKind.SpanType; 
+            public const TypeKind Kind = TypeKind.SpanType; 
 
             [MethodImpl(Inline)]
             public static implicit operator SpanType(SpanType<T> src)
@@ -52,7 +51,7 @@ namespace Z0
             public static implicit operator TypeKind<T>(SpanType<T> src)
                 =>  new TypeKind<T>(src.Classifier);
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
     }
 }

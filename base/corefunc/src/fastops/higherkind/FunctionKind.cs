@@ -55,115 +55,115 @@ namespace Z0
         public static FuncType<T1,T2,T3,R> fk<T1,T2,T3,R>(T1 t1 = default, T2 t2 = default, T3 t3 = default, R r = default)
             => default;
 
-        public readonly struct FuncType : IHKFunc<FuncType>
+        public readonly struct FuncType : IFuncKind<FuncType>
         {
-            public const HKFunctionKind Kind = HKFunctionKind.None;
+            public const FunctionKind Kind = FunctionKind.None;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKFunctionKind(FuncType src)
+            public static implicit operator FunctionKind(FuncType src)
                 =>  src.Classifier;
 
-            public HKFunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
         }
 
-        public readonly struct FuncType<R> : IHKFunc<FuncType<R>,N1>
+        public readonly struct FuncType<R> : IFuncKind<FuncType<R>,N1>
         {
-            public const HKFunctionKind Kind = HKFunctionKind.Func0;
+            public const FunctionKind Kind = FunctionKind.Func0;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKFunctionKind(FuncType<R> src)
+            public static implicit operator FunctionKind(FuncType<R> src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType(FuncType<R> src)
                 =>  default;
 
-            public HKFunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
         }
 
-        public readonly struct FuncType<T1,R> : IHKFunc<FuncType<T1,R>,N1>
+        public readonly struct FuncType<T1,R> : IFuncKind<FuncType<T1,R>,N1>
         {
-            public const HKFunctionKind Kind = HKFunctionKind.Func1;
+            public const FunctionKind Kind = FunctionKind.Func1;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKFunctionKind(FuncType<T1,R> src)
+            public static implicit operator FunctionKind(FuncType<T1,R> src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType(FuncType<T1,R> src)
                 =>  default;
 
-            public HKFunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
         }
 
-        public readonly struct FuncType<T1,T2,R> : IHKFunc<FuncType<T1,T2,R>,N2>
+        public readonly struct FuncType<T1,T2,R> : IFuncKind<FuncType<T1,T2,R>,N2>
         {
-            public const HKFunctionKind Kind = HKFunctionKind.Func2;
+            public const FunctionKind Kind = FunctionKind.Func2;
 
 
             [MethodImpl(Inline)]
-            public static implicit operator HKFunctionKind(FuncType<T1,T2,R> src)
+            public static implicit operator FunctionKind(FuncType<T1,T2,R> src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType(FuncType<T1,T2,R> src)
                 =>  default;
 
-            public HKFunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
         }
 
-        public readonly struct FuncType<T1,T2,T3,R> : IHKFunc<FuncType<T1,T2,T3,R>,N3>
+        public readonly struct FuncType<T1,T2,T3,R> : IFuncKind<FuncType<T1,T2,T3,R>,N3>
         {
-            public const HKFunctionKind Kind = HKFunctionKind.Func3;
+            public const FunctionKind Kind = FunctionKind.Func3;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKFunctionKind(FuncType<T1,T2,T3,R> src)
+            public static implicit operator FunctionKind(FuncType<T1,T2,T3,R> src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType(FuncType<T1,T2,T3,R> src)
                 =>  default;
 
-            public HKFunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
 
-        public readonly struct UnaryFunc : IHKFunc<UnaryFunc,N1>
+        public readonly struct UnaryFunc : IFuncKind<UnaryFunc,N1>
         {
-            public const HKFunctionKind Kind = HKFunctionKind.UnaryFunc;
+            public const FunctionKind Kind = FunctionKind.UnaryFunc;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKFunctionKind(UnaryFunc src)
+            public static implicit operator FunctionKind(UnaryFunc src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType(UnaryFunc src)
                 =>  default;
 
-            public HKFunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
 
-        public readonly struct BinaryFunc : IHKFunc<BinaryFunc,N2>
+        public readonly struct BinaryFunc : IFuncKind<BinaryFunc,N2>
         {
-            public const HKFunctionKind Kind = HKFunctionKind.BinaryFunc;
+            public const FunctionKind Kind = FunctionKind.BinaryFunc;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKFunctionKind(BinaryFunc src)
+            public static implicit operator FunctionKind(BinaryFunc src)
                 =>  src.Classifier;
 
-            public HKFunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
 
-        public readonly struct TernaryFunc : IHKFunc<TernaryFunc>
+        public readonly struct TernaryFunc : IFuncKind<TernaryFunc>
         {
-            public const HKFunctionKind Kind = HKFunctionKind.TernaryFunc;
+            public const FunctionKind Kind = FunctionKind.TernaryFunc;
 
 
             [MethodImpl(Inline)]
-            public static implicit operator HKFunctionKind(TernaryFunc src)
+            public static implicit operator FunctionKind(TernaryFunc src)
                 =>  src.Classifier;
 
 
@@ -171,7 +171,7 @@ namespace Z0
             public static implicit operator FuncType(TernaryFunc src)
                 =>  default;
 
-            public HKFunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
 
     }

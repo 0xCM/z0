@@ -33,7 +33,7 @@ namespace Z0
         where F : unmanaged, IFixed
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter | HKFunctionKind.Fixed;
+        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.Fixed;
 
         NumericKind IFixedEmitter.SegmentKind => typeof(T).NumericKind();
     }
@@ -51,20 +51,20 @@ namespace Z0
         where V : struct
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.Vectorized;
     }
 
     [SuppressUnmanagedCodeSecurity]
     public interface IVEmitter128<T> : IVEmitter<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter | HKFunctionKind.V128;
+        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.V128;
     }
 
     [SuppressUnmanagedCodeSecurity]
     public interface IVEmitter256<T> : IVEmitter<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter | HKFunctionKind.V256;
+        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.V256;
     }    
 }

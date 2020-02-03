@@ -13,7 +13,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;
-    using static Classifiers;
+    using static HK;
     using AsmSpecs;
 
     public class t_asm_checks : t_asm<t_asm_checks>, IDisposable

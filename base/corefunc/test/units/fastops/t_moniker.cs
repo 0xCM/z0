@@ -10,7 +10,6 @@ namespace Z0
 
     using System.Runtime.CompilerServices;
     using static zfunc;
-    using static Classifiers;
 
     public sealed class t_moniker : t_fastop<t_moniker>
     {

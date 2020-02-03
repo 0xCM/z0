@@ -24,7 +24,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryMeasure | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.UnaryMeasure | FunctionKind.Vectorized;
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryMeasure | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.Vectorized;
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryMeasure | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.Vectorized;
 
     }
 
@@ -88,7 +88,7 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryMeasure | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.TernaryMeasure | FunctionKind.Vectorized;
 
     }
 
@@ -115,7 +115,7 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryMeasure | HKFunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.TernaryMeasure | FunctionKind.Vectorized;
 
     }
 
@@ -129,7 +129,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryMeasure | HKFunctionKind.V128;
+        FunctionKind IFunc.Kind => FunctionKind.UnaryMeasure | FunctionKind.V128;
     }
 
     /// <summary>
@@ -142,7 +142,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryMeasure | HKFunctionKind.V128;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.V128;
 
     }
 
@@ -275,7 +275,7 @@ namespace Z0
         where K : unmanaged
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryMeasure | HKFunctionKind.V256;
+        FunctionKind IFunc.Kind => FunctionKind.UnaryMeasure | FunctionKind.V256;
 
     }
 
@@ -289,7 +289,7 @@ namespace Z0
         where K : unmanaged
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryMeasure | HKFunctionKind.V256;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.V256;
 
     }
 
@@ -331,7 +331,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryMeasure | HKFunctionKind.V256;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.V256;
     }    
 
     /// <summary>
@@ -358,7 +358,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryMeasure | HKFunctionKind.V256;
+        FunctionKind IFunc.Kind => FunctionKind.TernaryMeasure | FunctionKind.V256;
     }    
 
     /// <summary>

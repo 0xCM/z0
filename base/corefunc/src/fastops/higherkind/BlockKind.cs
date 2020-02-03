@@ -365,84 +365,84 @@ namespace Z0
 
         public readonly struct Block512x64f : IBlockClass { public const BlockKind Kind = BlockKind.Block512x64f; public BlockKind Classifier => Kind;}
 
-        public readonly struct Blocked : IHKType<Blocked>
+        public readonly struct Blocked : ITypeKind<Blocked>
         {
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked src)
+            public static implicit operator TypeKind(Blocked src)
                 =>  src.Classifier;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct Blocked16 : IHKType<Blocked16>, IFixedClass<Fixed16>
+        public readonly struct Blocked16 : ITypeKind<Blocked16>, IFixedClass<Fixed16>
         {
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
 
             public const FixedWidth Width = FixedWidth.W16;
 
             public static N16 W => default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked16 src)
+            public static implicit operator TypeKind(Blocked16 src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator Blocked(Blocked16 src)
                 =>  default;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked32 : IHKType<Blocked32>, IFixedClass<Fixed32>
+        public readonly struct Blocked32 : ITypeKind<Blocked32>, IFixedClass<Fixed32>
         {
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
 
             public const FixedWidth Width = FixedWidth.W32;                        
 
             public static N32 W => default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked32 src)
+            public static implicit operator TypeKind(Blocked32 src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator Blocked(Blocked32 src)
                 =>  default;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
             
         }        
 
-        public readonly struct Blocked64 : IHKType<Blocked64>, IFixedClass<Fixed64>
+        public readonly struct Blocked64 : ITypeKind<Blocked64>, IFixedClass<Fixed64>
         {
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
 
             public const FixedWidth Width = FixedWidth.W64;            
 
             public static N64 W => default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked64 src)
+            public static implicit operator TypeKind(Blocked64 src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator Blocked(Blocked64 src)
                 =>  default;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked128 : IHKType<Blocked128>, IFixedClass<Fixed128>
+        public readonly struct Blocked128 : ITypeKind<Blocked128>, IFixedClass<Fixed128>
         {
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
 
             public const FixedWidth Width = FixedWidth.W128;
 
@@ -450,21 +450,21 @@ namespace Z0
             public static N128 W => default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked128 src)
+            public static implicit operator TypeKind(Blocked128 src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator Blocked(Blocked128 src)
                 =>  default;
 
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked256 : IHKType<Blocked256>, IFixedClass<Fixed256>
+        public readonly struct Blocked256 : ITypeKind<Blocked256>, IFixedClass<Fixed256>
         {
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
 
             public const FixedWidth Width = FixedWidth.W256;
 
@@ -472,40 +472,40 @@ namespace Z0
             public static N256 W => default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked256 src)
+            public static implicit operator TypeKind(Blocked256 src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator Blocked(Blocked256 src)
                 =>  default;
 
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked512 : IHKType<Blocked512>, IFixedClass<Fixed512>
+        public readonly struct Blocked512 : ITypeKind<Blocked512>, IFixedClass<Fixed512>
         {
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
 
             public const FixedWidth Width = FixedWidth.W512;
 
             public static N512 W => default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked512 src)
+            public static implicit operator TypeKind(Blocked512 src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator Blocked(Blocked512 src)
                 =>  default;
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Blocked<T> : IHKType<Blocked<T>,T> 
+        public readonly struct Blocked<T> : ITypeKind<Blocked<T>,T> 
             where T : unmanaged
         {
 
@@ -514,18 +514,18 @@ namespace Z0
                 =>  default;
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked<T> src)
+            public static implicit operator TypeKind(Blocked<T> src)
                 =>  src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator TypeKind<T>(Blocked<T> src)
                 =>  new TypeKind<T>(src.Classifier);
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
         }        
 
-        public readonly struct Blocked<W,T> : IHKType<Blocked<W,T>,W,T>
+        public readonly struct Blocked<W,T> : ITypeKind<Blocked<W,T>,W,T>
             where T : unmanaged
             where W : unmanaged, ITypeNat
         {
@@ -533,7 +533,7 @@ namespace Z0
             public static FixedWidth Width => (FixedWidth)nateval<W>();
 
             [MethodImpl(Inline)]
-            public static implicit operator HKTypeKind(Blocked<W,T> src)
+            public static implicit operator TypeKind(Blocked<W,T> src)
                 =>  src.Classifier;
             
             [MethodImpl(Inline)]
@@ -552,9 +552,9 @@ namespace Z0
             public static implicit operator Blocked<T>(Blocked<W,T> src)
                 =>  default;
 
-            public const HKTypeKind Kind = HKTypeKind.BlockedType; 
+            public const TypeKind Kind = TypeKind.BlockedType; 
                     
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}            
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}            
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
        }        

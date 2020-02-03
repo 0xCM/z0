@@ -13,9 +13,7 @@ namespace Z0
     using System.Reflection.Emit;
 
     using static zfunc;
-    using static Classifiers;
     
-
     public static class Dynop
     {
         public static FixedDelegate UnaryOp(Moniker id, IntPtr src,  Type operatorType, Type operandType)        
@@ -26,19 +24,6 @@ namespace Z0
 
         public static FixedDelegate TernaryOp(Moniker id, IntPtr src,  Type operatorType, Type operandType)        
             => FixedFunc(id,src, functype:operatorType, result:operandType, args: array(operandType, operandType,operandType));
-
-        // {
-        //     var argTypes = new Type[]{operandType,operandType};
-        //     var returnType = operandType;
-        //     var method = new DynamicMethod(id, returnType, argTypes, operandType.Module);            
-        //     var g = method.GetILGenerator();
-        //     g.Emit(OpCodes.Ldarg_0);
-        //     g.Emit(OpCodes.Ldarg_1);
-        //     g.Emit(OpCodes.Ldc_I8, (long)src);
-        //     g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
-        //     g.Emit(OpCodes.Ret);
-        //     return FixedDelegate.Define(id, src, method, method.CreateDelegate(operatorType));
-        // }
 
         /// <summary>
         /// Manufactures a fixed unary function with a native body
@@ -126,22 +111,22 @@ namespace Z0
                 => (BinaryOp<T>)BinaryOp(id,address, typeof(BinaryOp<T>), typeof(T));
 
         [MethodImpl(Inline)]
-        public static UnaryOp128 UnaryOp<T>(Func<Vector128<T>,Vector128<T>> f, VectorClass128<T> k = default)
+        public static UnaryOp128 UnaryOp<T>(Func<Vector128<T>,Vector128<T>> f, HK.Vec128<T> k = default)
             where T : unmanaged
                 => (Fixed128 a) =>f(a.ToVector<T>()).ToFixed();
 
         [MethodImpl(Inline)]
-        public static UnaryOp256 UnaryOp<T>(Func<Vector256<T>,Vector256<T>> f, VectorClass256<T> k = default)
+        public static UnaryOp256 UnaryOp<T>(Func<Vector256<T>,Vector256<T>> f, HK.Vec256<T> k = default)
             where T : unmanaged
                 => (Fixed256 a) =>f(a.ToVector<T>()).ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp128 BinOp<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f, VectorClass128<T> k = default)
+        public static BinaryOp128 BinOp<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f, HK.Vec128<T> k = default)
             where T : unmanaged
                 => (Fixed128 a, Fixed128 b) =>f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp256 BinOp<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f, VectorClass256<T> k = default)
+        public static BinaryOp256 BinOp<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f, HK.Vec256<T> k = default)
             where T : unmanaged
                 => (Fixed256 a, Fixed256 b) =>f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();              
 
@@ -254,83 +239,83 @@ namespace Z0
             => (BinaryOp256)BinaryOp(id,address, typeof(BinaryOp256), typeof(Fixed256));
 
         [MethodImpl(Inline)]
-        public static UnaryOp8 UnaryOp(Func<byte,byte> f, PrimalClass<byte> k = default)
+        public static UnaryOp8 UnaryOp(Func<byte,byte> f, HK.Numeric<byte> k = default)
             => (Fixed8 a) =>f(a.X0);
 
         [MethodImpl(Inline)]
-        public static UnaryOp8 UnaryOp(Func<sbyte,sbyte> f, PrimalClass<sbyte> k = default)
+        public static UnaryOp8 UnaryOp(Func<sbyte,sbyte> f, HK.Numeric<sbyte> k = default)
             => (Fixed8 a) =>f((sbyte)a.X0);
 
         [MethodImpl(Inline)]
-        public static UnaryOp16 UnaryOp(Func<ushort,ushort> f, PrimalClass<ushort> k = default)
+        public static UnaryOp16 UnaryOp(Func<ushort,ushort> f, HK.Numeric<ushort> k = default)
             => (Fixed16 a) =>f(a.X0);
 
         [MethodImpl(Inline)]
-        public static UnaryOp16 UnaryOp(Func<short,short> f, PrimalClass<short> k = default)
+        public static UnaryOp16 UnaryOp(Func<short,short> f, HK.Numeric<short> k = default)
             => (Fixed16 a) =>f((short)a.X0);
 
         [MethodImpl(Inline)]
-        public static UnaryOp32 UnaryOp(Func<uint,uint> f, PrimalClass<uint> k = default)
+        public static UnaryOp32 UnaryOp(Func<uint,uint> f, HK.Numeric<uint> k = default)
             => (Fixed32 a) =>f(a.X0);
 
         [MethodImpl(Inline)]
-        public static UnaryOp32 UnaryOp(Func<int,int> f, PrimalClass<int> k = default)
+        public static UnaryOp32 UnaryOp(Func<int,int> f, HK.Numeric<int> k = default)
             => (Fixed32 a) =>f((int)a.X0);
 
         [MethodImpl(Inline)]
-        public static UnaryOp64 UnaryOp(Func<ulong,ulong> f, PrimalClass<ulong> k = default)
+        public static UnaryOp64 UnaryOp(Func<ulong,ulong> f, HK.Numeric<ulong> k = default)
             => (Fixed64 a) =>f(a.X0);
 
         [MethodImpl(Inline)]
-        public static UnaryOp64 UnaryOp(Func<long,long> f, PrimalClass<long> k = default)
+        public static UnaryOp64 UnaryOp(Func<long,long> f, HK.Numeric<long> k = default)
             => (Fixed64 a) =>f((long)a.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 BinOp(Func<byte,byte,byte> f, PrimalClass<byte> k = default)
+        public static BinaryOp8 BinOp(Func<byte,byte,byte> f, HK.Numeric<byte> k = default)
             => (Fixed8 a, Fixed8 b) =>f(a.X0, b.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 BinOp(Func<sbyte,sbyte,sbyte> f, PrimalClass<sbyte> k = default)
+        public static BinaryOp8 BinOp(Func<sbyte,sbyte,sbyte> f, HK.Numeric<sbyte> k = default)
             => (Fixed8 a, Fixed8 b) =>f((sbyte)a.X0, (sbyte)b.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 BinOp(Func<ushort,ushort,ushort> f, PrimalClass<ushort> t = default)
+        public static BinaryOp16 BinOp(Func<ushort,ushort,ushort> f, HK.Numeric<ushort> t = default)
             => (Fixed16 a, Fixed16 b) =>f(a.X0, b.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 BinOp(Func<short,short,short> f, PrimalClass<short> k = default)
+        public static BinaryOp16 BinOp(Func<short,short,short> f, HK.Numeric<short> k = default)
             => (Fixed16 a, Fixed16 b) =>f((short)a.X0, (short)b.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 BinOp(Func<uint,uint,uint> f, PrimalClass<uint> k = default)
+        public static BinaryOp32 BinOp(Func<uint,uint,uint> f, HK.Numeric<uint> k = default)
             => (Fixed32 a, Fixed32 b) =>f(a.X0, b.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 BinOp(Func<int,int,int> f, PrimalClass<int> k = default)
+        public static BinaryOp32 BinOp(Func<int,int,int> f, HK.Numeric<int> k = default)
             => (Fixed32 a, Fixed32 b) =>f((int)a.X0, (int)b.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 BinOp(Func<ulong,ulong,ulong> f, PrimalClass<ulong> k = default)
+        public static BinaryOp64 BinOp(Func<ulong,ulong,ulong> f, HK.Numeric<ulong> k = default)
             => (Fixed64 a, Fixed64 b) =>f(a.X0, b.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 BinOp(Func<long,long,long> f, PrimalClass<long> k = default)
+        public static BinaryOp64 BinOp(Func<long,long,long> f, HK.Numeric<long> k = default)
             => (Fixed64 a, Fixed64 b) =>f((long)a.X0, (long)b.X0);
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 BinOp(MethodInfo f, PrimalClass<byte> k)
+        public static BinaryOp8 BinOp(MethodInfo f, HK.Numeric<byte> k)
             => BinOp(f.CreateDelegate<Func<byte,byte,byte>>(),k);
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 BinOp(MethodInfo f, PrimalClass<ushort> k)
+        public static BinaryOp16 BinOp(MethodInfo f, HK.Numeric<ushort> k)
             => BinOp(f.CreateDelegate<Func<ushort,ushort,ushort>>(),k);
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 BinOp(MethodInfo f, PrimalClass<uint> k)
+        public static BinaryOp32 BinOp(MethodInfo f, HK.Numeric<uint> k)
             => BinOp(f.CreateDelegate<Func<uint,uint,uint>>(),k);
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 BinOp(MethodInfo f, PrimalClass<ulong> k)
+        public static BinaryOp64 BinOp(MethodInfo f, HK.Numeric<ulong> k)
             => BinOp(f.CreateDelegate<Func<ulong,ulong,ulong>>(),k);
 
 

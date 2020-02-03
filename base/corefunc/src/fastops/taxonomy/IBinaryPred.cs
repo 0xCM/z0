@@ -78,7 +78,7 @@ namespace Z0
     public interface IVBinPred128<T> : IVBinaryPred<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryPred | HKFunctionKind.V128;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryPred | FunctionKind.V128;
 
     }
 
@@ -90,7 +90,7 @@ namespace Z0
     public interface IVBinPred256<T> : IVBinaryPred<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryPred | HKFunctionKind.V256;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryPred | FunctionKind.V256;
         
     }
 

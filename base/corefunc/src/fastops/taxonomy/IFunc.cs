@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// Specifies the function kind classification
         /// </summary>
-        HKFunctionKind Kind => HKFunctionKind.None;       
+        FunctionKind Kind => FunctionKind.None;       
     }
 
 
@@ -40,7 +40,7 @@ namespace Z0
     {
         A Invoke();
 
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter;
+        FunctionKind IFunc.Kind => FunctionKind.Emitter;
         
     }
 
@@ -54,7 +54,7 @@ namespace Z0
     {
         B Invoke(A a);
 
-        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryFunc;
+        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc;
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="c">The third operand</param>
         C Invoke(A a, B b);
 
-        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryFunc;
+        FunctionKind IFunc.Kind => FunctionKind.BinaryFunc;
 
     }
 
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="c">The third operand</param>
         D Invoke(A a, B b, C c);
 
-        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryFunc;
+        FunctionKind IFunc.Kind => FunctionKind.TernaryFunc;
 
     }
 }

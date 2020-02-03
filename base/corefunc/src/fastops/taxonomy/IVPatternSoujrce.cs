@@ -29,7 +29,7 @@ namespace Z0
         where V : struct
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter | HKFunctionKind.Vectorized;        
+        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.Vectorized;        
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
     public interface IVPatternSource128<T> : IVPatternSource<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter | HKFunctionKind.V128;        
+        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.V128;        
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
     public interface IVPatternSource256<T> : IVPatternSource<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter | HKFunctionKind.V256;        
+        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.V256;        
         
     }
 }

@@ -26,13 +26,13 @@ namespace Z0
         public readonly struct FixedType<F> : IFixedClass<F>
             where F : unmanaged, IFixed
         {
-            public const HKTypeKind Kind = HKTypeKind.FixedType;      
+            public const TypeKind Kind = TypeKind.FixedType;      
 
             public static FixedWidth Width => default(F).Width;
 
             public static int BitCount => (int)Width;
 
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
 
@@ -46,13 +46,13 @@ namespace Z0
             public static implicit operator FixedType<F>(FixedType<F,T> src)
                 =>  default;
 
-            public const HKTypeKind Kind = HKTypeKind.FixedTypeSeg;      
+            public const TypeKind Kind = TypeKind.FixedTypeSeg;      
 
             public static FixedWidth Width => default(F).Width;
 
             public static int BitCount => (int)Width;
 
-            public HKTypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
 
