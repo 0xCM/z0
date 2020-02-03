@@ -401,7 +401,6 @@ namespace Z0
                     && (src.Name.Contains("AnonymousType") || src.Name.Contains("AnonType"))
                     && src.GetTypeInfo().GetCustomAttributes(typeof(CompilerGeneratedAttribute)).Any();
 
-
         /// <summary>
         /// Determines whether the type is an option type and if so returns the underlying option
         /// type encapsulated within an option ( ! ). Otherwise, none

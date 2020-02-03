@@ -13,16 +13,20 @@ namespace Z0
         FixedWidth Width {get;}
     }
 
-    public interface IFixed<W> : IFixed
-        where W : unmanaged, ITypeNat
+    public interface IFixedSeg<F,T> : IFixed        
+        where F : unmanaged, IFixed
+        where T : struct        
     {
-        W NatWidth => default;
+        FixedWidth IFixed.Width => (FixedWidth)bitsize<T>();   
     }
 
-    public interface IFixed<F,W> : IFixed<W>
+    public interface IFixed<F,W> : IFixed
         where F : unmanaged, IFixed<F,W>
         where W : unmanaged, ITypeNat
     {
+        W NatWidth => default;
         
     }
+
+ 
 }

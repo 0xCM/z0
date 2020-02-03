@@ -28,6 +28,10 @@ namespace Z0
             => new Fixed32((uint)x0);
 
         [MethodImpl(Inline)]
+        public static implicit operator Fixed32(float x0)
+            => new Fixed32(BitConvert.ToUInt32(x0));
+
+        [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed32 x)
             => (sbyte)x.X0;
 

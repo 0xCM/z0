@@ -32,6 +32,10 @@ namespace Z0
             => new Fixed64(x0);
 
         [MethodImpl(Inline)]
+        public static implicit operator Fixed64(double x0)
+            => new Fixed64(BitConvert.ToUInt64(x0));
+
+        [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed64 x)
             => (sbyte)x.X0;
 

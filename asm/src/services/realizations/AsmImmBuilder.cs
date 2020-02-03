@@ -33,38 +33,38 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder Define(IAsmContext context, HK.Vec128 vk, HK.Op<N1> opk)
+        public static IAsmImmBuilder Define(IAsmContext context, HK.Vec128 vk, HK.Operator<N1> opk)
             => new AsmImmFunctionBuilder(context,vk,opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder Define(IAsmContext context, HK.Vec256 vk, HK.Op<N1> opk)
+        public static IAsmImmBuilder Define(IAsmContext context, HK.Vec256 vk, HK.Operator<N1> opk)
             => new AsmImmFunctionBuilder(context,vk,opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder Define(IAsmContext context, HK.Vec128 vk, HK.Op<N2> opk)
+        public static IAsmImmBuilder Define(IAsmContext context, HK.Vec128 vk, HK.Operator<N2> opk)
             => new AsmImmFunctionBuilder(context,vk,opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder Define(IAsmContext context, HK.Vec256 vk, HK.Op<N2> opk)
+        public static IAsmImmBuilder Define(IAsmContext context, HK.Vec256 vk, HK.Operator<N2> opk)
             => new AsmImmFunctionBuilder(context,vk,opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder<UnaryOp<Vector128<T>>> Define<T>(IAsmContext context, HK.Vec128<T> vk, HK.Op<N1,T> opk)
+        public static IAsmImmBuilder<UnaryOp<Vector128<T>>> Define<T>(IAsmContext context, HK.Vec128<T> vk, HK.Operator<N1,T> opk)
             where T : unmanaged
                 => new AsmImmProducer<UnaryOp<Vector128<T>>>(context, ImmOpProviders.provider(HK.vk128<T>(), HK.opk(n1)));
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder<UnaryOp<Vector256<T>>> Define<T>(IAsmContext context, HK.Vec256<T> vk, HK.Op<N1,T> opk)
+        public static IAsmImmBuilder<UnaryOp<Vector256<T>>> Define<T>(IAsmContext context, HK.Vec256<T> vk, HK.Operator<N1,T> opk)
             where T : unmanaged
                 => new AsmImmProducer<UnaryOp<Vector256<T>>>(context, ImmOpProviders.provider(HK.vk256<T>(), HK.opk(n1)));
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder<BinaryOp<Vector128<T>>> Define<T>(IAsmContext context, HK.Vec128<T> vk, HK.Op<N2,T> opk)
+        public static IAsmImmBuilder<BinaryOp<Vector128<T>>> Define<T>(IAsmContext context, HK.Vec128<T> vk, HK.Operator<N2,T> opk)
             where T : unmanaged
                 => new AsmImmProducer<BinaryOp<Vector128<T>>>(context, ImmOpProviders.provider(HK.vk128<T>(), HK.opk(n2)));
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder<BinaryOp<Vector256<T>>> Define<T>(IAsmContext context, HK.Vec256<T> vk, HK.Op<N2,T> opk)
+        public static IAsmImmBuilder<BinaryOp<Vector256<T>>> Define<T>(IAsmContext context, HK.Vec256<T> vk, HK.Operator<N2,T> opk)
             where T : unmanaged
                 => new AsmImmProducer<BinaryOp<Vector256<T>>>(context, ImmOpProviders.provider(HK.vk256<T>(), HK.opk(n2)));
     
@@ -75,7 +75,7 @@ namespace Z0
         readonly IImmOpProvider ImmOpProvider;
 
         [MethodImpl(Inline)]
-        AsmImmFunctionBuilder(IAsmContext context, HK.Vec128 vk, HK.Op<N1> opk)
+        AsmImmFunctionBuilder(IAsmContext context, HK.Vec128 vk, HK.Operator<N1> opk)
         {
             this.Context = context;
             this.Decoder = context.Decoder();
@@ -83,7 +83,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        AsmImmFunctionBuilder(IAsmContext context, HK.Vec256 vk, HK.Op<N1> opk)
+        AsmImmFunctionBuilder(IAsmContext context, HK.Vec256 vk, HK.Operator<N1> opk)
         {
             this.Context = context;
             this.Decoder = context.Decoder();
@@ -91,7 +91,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        AsmImmFunctionBuilder(IAsmContext context, HK.Vec128 vk, HK.Op<N2> opk)
+        AsmImmFunctionBuilder(IAsmContext context, HK.Vec128 vk, HK.Operator<N2> opk)
         {
             this.Context = context;
             this.Decoder = context.Decoder();
@@ -99,7 +99,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        AsmImmFunctionBuilder(IAsmContext context, HK.Vec256 vk, HK.Op<N2> opk)
+        AsmImmFunctionBuilder(IAsmContext context, HK.Vec256 vk, HK.Operator<N2> opk)
         {
             this.Context = context;
             this.Decoder = context.Decoder();

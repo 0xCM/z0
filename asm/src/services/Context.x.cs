@@ -49,35 +49,35 @@ namespace Z0
                 => AsmImmFunctionBuilder.Define<T, D>(context);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec128 vk, HK.Op<N1> opk)
+        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec128 vk, HK.Operator<N1> opk)
             => AsmImmFunctionBuilder.Define(context, vk, opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec256 vk, HK.Op<N1> opk)
+        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec256 vk, HK.Operator<N1> opk)
             => AsmImmFunctionBuilder.Define(context, vk, opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec128 vk, HK.Op<N2> opk)
+        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec128 vk, HK.Operator<N2> opk)
             => AsmImmFunctionBuilder.Define(context, vk, opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec256 vk, HK.Op<N2> opk)
+        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec256 vk, HK.Operator<N2> opk)
             => AsmImmFunctionBuilder.Define(context, vk, opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec128 vk, HK.Op<N1> opk)
+        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec128 vk, HK.Operator<N1> opk)
             => AsmImmFunctionBuilder.Define(context, vk,opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Op<N1> opk)
+        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Operator<N1> opk)
             => AsmImmFunctionBuilder.Define(context, vk,opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec128 vk, HK.Op<N2> opk)
+        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec128 vk, HK.Operator<N2> opk)
             => AsmImmFunctionBuilder.Define(context, vk,opk);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Op<N2> opk)
+        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Operator<N2> opk)
             => AsmImmFunctionBuilder.Define(context, vk,opk);
 
         public static void CaptureDelegate(this IAsmContext context, Delegate src, IAsmFunctionWriter dst)

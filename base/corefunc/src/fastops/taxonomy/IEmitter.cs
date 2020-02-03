@@ -10,7 +10,6 @@ namespace Z0
 
     using static zfunc;
 
-
     /// <summary>
     /// Chracterizes an operation that produces a value that does not depend on arguments
     /// </summary>

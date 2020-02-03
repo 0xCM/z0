@@ -10,9 +10,20 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
-    using static HK;
 
-    partial class Classifiers
+   
+   public readonly struct FixedSeg<F,T> : IFixedSeg<F,T>
+        where F : unmanaged, IFixed
+        where T : struct        
     {
+        
+        [MethodImpl(Inline)]
+        internal FixedSeg(F value)
+        {
+            this.FixedValue = value;
+        }
+
+        public readonly F FixedValue;
     }
+
 }

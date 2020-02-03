@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Security;
 
     using static zfunc;
 
@@ -25,11 +24,9 @@ namespace Z0
         public static implicit operator Fixed256(Vector256<byte> x)
             => x.ToFixed();
 
-
         [MethodImpl(Inline)]
         public static implicit operator Fixed256(Vector256<ushort> x)
             => x.ToFixed();
-
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed256(Vector256<uint> x)
@@ -84,6 +81,5 @@ namespace Z0
 
         public override string ToString() 
             => array(X0,X1).FormatList();
-
     }
 }

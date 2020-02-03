@@ -8,10 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Security;
 
     using static zfunc;
-
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Fixed128 : IFixed<Fixed128,N128>, IEquatable<Fixed128>

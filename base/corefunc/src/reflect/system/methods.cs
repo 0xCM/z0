@@ -81,7 +81,6 @@ namespace Z0
         /// Determines whether a method is an implict or explicit conversion operation
         /// </summary>
         /// <param name="m"></param>
-        /// <returns></returns>
         public static bool IsConversionOp(this MethodInfo m)
             => m.IsExplicitConverter() || m.IsImplicitConverter();
 

@@ -34,6 +34,46 @@ namespace Z0
                 => Unsafe.As<Vector256<T>,Fixed256>(ref x);
 
         [MethodImpl(Inline)]
+        public static Fixed8 ToFixed(this byte src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed8 ToFixed(this sbyte src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed16 ToFixed(this ushort src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed16 ToFixed(this short src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed32 ToFixed(this int src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed32 ToFixed(this uint src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed64 ToFixed(this long src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed64 ToFixed(this ulong src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed32 ToFixed(this float src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed64 ToFixed(this double src)
+            => src;
+
+        [MethodImpl(Inline)]
         public static Vector256<T> Apply<T>(this UnaryOp256 f, Vector256<T> x)
            where T : unmanaged
                 => f(x.ToFixed()).ToVector<T>();
@@ -90,7 +130,5 @@ namespace Z0
         public static string FormatBits<T>(this T src)
             where T : unmanaged, IFixed
                 => BitConvert.GetBytes(in src).FormatBits();
-
     }
-
 }

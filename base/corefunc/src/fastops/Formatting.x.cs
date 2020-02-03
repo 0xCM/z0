@@ -159,31 +159,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Constructs a display name for a method parameter
-        /// </summary>
-        /// <param name="type">Describes the parameter type</param>
-        /// <param name="name">The parameter display name</param>
-        public static string DisplayName(this ParameterInfo param)
-        {
-            var modifier = string.Empty;
-            if(param.IsIn)
-                modifier = "in ";
-            else if(param.IsOut)
-                modifier = "out ";
-            else if(param.ParameterType.IsByRef)
-                modifier = "ref ";
-            var t = param.ParameterType.GetElementType();
-            return concat(param.Name, colon(), modifier + (t.IsGenericType ? t.FormatGeneric() : t.FormatSimple()));
-        }
-
-        public static string FormatReference(this Type src, bool isIn = false, bool isOut = false)            
-        {
-            var dst = isIn ? "in " : isOut ? "out " : "ref ";
-            dst = dst + src.GetElementType().DisplayName();
-            return dst;
-        }
-
-        /// <summary>
         /// Constructs a display name for a method
         /// </summary>
         /// <param name="src">The source method</param>
@@ -218,15 +193,6 @@ namespace Z0
             var argFmt = args.Count != 0 ? args.Select(t => t.DisplayName()).Concat(", ") : string.Empty;            
             var typeName = memberName.Replace($"`{args.Count}", string.Empty);
             return typeName + (args.Count != 0 ? angled(argFmt) : string.Empty);
-        }
-
-        static string FormatSimple(this Type src)
-        {
-            var attrib = src.GetCustomAttribute<DisplayNameAttribute>();
-            if (attrib != null)
-                return attrib.DisplayName;
-            else
-                return src.PrimalKeyword().IfBlank(src.Name);
         }
 
         static string FormatGeneric(this Type src)

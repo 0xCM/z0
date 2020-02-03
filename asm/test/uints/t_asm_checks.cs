@@ -68,7 +68,7 @@ namespace Z0
             var hexD = hex.Where(h => !h.Id.IsGeneric).ToDictionary(x => x.Id);
             var hexG = hex.Where(h => h.Id.IsGeneric).ToDictionary(x => x.Id);
 
-            Random.VectorEmitter()
+            
             foreach(var k in hexG.Keys)
             {
                 var gHex = hexG[k];

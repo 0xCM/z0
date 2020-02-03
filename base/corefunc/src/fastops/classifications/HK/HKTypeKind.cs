@@ -19,20 +19,24 @@ namespace Z0
     {    
         None = 0,
         
-        SystemPrimitive = Pow2.T00,
+        NumericType = Pow2.T00,
 
-        SystemSpan = Pow2.T01,
+        SpanType = Pow2.T01,
         
-        Block = Pow2.T10,
+        FixedType = Pow2.T08,
 
-        Vector = Pow2.T11,
+        FixedTypeSeg = Pow2.T09,
 
-        UserPrimitive = Pow2.T12,
+        BlockedType = Pow2.T10,
 
-        BitVector = Pow2.T15,
+        VectorType = Pow2.T11,
 
-        BitMatrix = Pow2.T16,
+        UserType = Pow2.T12,
 
-        BitGrid = Pow2.T17,
+        BitVectorType = Pow2.T15,
+
+        BitMatrixType = Pow2.T16,
+
+        BitGridType = Pow2.T17,
     }
 }

@@ -11,6 +11,7 @@ namespace Z0
 
     using static zfunc;
     using static Z0.As;
+    using static SurrogateTypes;
 
     readonly struct FixedEmitter<F,T> : IFixedEmitter<F, T>
         where F : unmanaged, IFixed         
@@ -23,12 +24,13 @@ namespace Z0
         public static NumericKind NumericKind => typeof(T).NumericKind();
         
         readonly IPolyrand Random;
-        readonly SurrogateTypes.EmitterSurrogate<F> f;
+        
+        readonly EmitterSurrogate<F> f;
 
         public Moniker Moniker => OpIdentities.define(Name,Width,NumericKind);
 
         [MethodImpl(Inline)]
-        internal FixedEmitter(IPolyrand random, SurrogateTypes.EmitterSurrogate<F> f)      
+        internal FixedEmitter(IPolyrand random, EmitterSurrogate<F> f)      
         {      
             this.Random = random;
             this.f = f;
@@ -41,11 +43,102 @@ namespace Z0
 
     partial class RngX
     {
-        static Func<F> CreateEmissionFunc<F,T>(IPolyrand random)
+        static EmitterSurrogate<F> CreateEmissionFunc<F,T>(IPolyrand random)
             where F : unmanaged, IFixed
             where T : unmanaged
         {
-            return () => default;
+            const string name = "fixedrand";
+            var width = default(F).Width;
+            var kind = typeof(T).NumericKind();
+
+            F f8u()
+            {                
+                var next = random.Next<byte>();
+                return Unsafe.As<byte,F>(ref next);
+            }
+
+            F f8i()
+            {
+                var next = random.Next<sbyte>();
+                return Unsafe.As<sbyte,F>(ref next);
+            }
+
+            F f16u()
+            {                
+                var next = random.Next<ushort>();
+                return Unsafe.As<ushort,F>(ref next);
+            }
+
+            F f16i()
+            {
+                var next = random.Next<short>();
+                return Unsafe.As<short,F>(ref next);
+            }
+
+            F f32u()
+            {                
+                var next = random.Next<uint>();
+                return Unsafe.As<uint,F>(ref next);
+            }
+
+            F f32i()
+            {
+                var next = random.Next<int>();
+                return Unsafe.As<int,F>(ref next);
+            }
+
+            F f64u()
+            {                
+                var next = random.Next<ulong>();
+                return Unsafe.As<ulong,F>(ref next);
+            }
+
+            F f64i()
+            {
+                var next = random.Next<long>();
+                return Unsafe.As<long,F>(ref next);
+            }
+
+            F f32f()
+            {                
+                var next = random.Next<float>();
+                return Unsafe.As<float,F>(ref next);
+            }
+
+            F f64f()
+            {
+                var next = random.Next<double>();
+                return Unsafe.As<double,F>(ref next);
+            }
+
+            if(width <= FixedWidth.W64)
+            {
+                switch(kind)
+                {
+                    case NumericKind.I8:
+                        return OpSurrogates.emitter<F>(f8i, name);
+                    case NumericKind.U8:
+                        return OpSurrogates.emitter<F>(f8u, name);
+                    case NumericKind.I16:
+                        return OpSurrogates.emitter<F>(f16i, name);
+                    case NumericKind.U16:
+                        return OpSurrogates.emitter<F>(f16u, name);
+                    case NumericKind.I32:
+                        return OpSurrogates.emitter<F>(f32i, name);
+                    case NumericKind.U32:
+                        return OpSurrogates.emitter<F>(f32u, name);
+                    case NumericKind.I64:
+                        return OpSurrogates.emitter<F>(f64i, name);
+                    case NumericKind.U64:
+                        return OpSurrogates.emitter<F>(f64u, name);
+                    case NumericKind.F32:
+                        return OpSurrogates.emitter<F>(f32f, name);
+                    case NumericKind.F64:
+                        return OpSurrogates.emitter<F>(f64f, name);
+                }   
+            }
+
+            return OpSurrogates.emitter<F>(() => default, name);            
         }
 
         public static IFixedEmitter<F,T> FixedEmitter<F,T>(this IPolyrand random)
@@ -193,8 +286,5 @@ namespace Z0
                 yield return Unsafe.As<Fixed256, T>(ref next);
             }
         }
-
-
     }
-
 }

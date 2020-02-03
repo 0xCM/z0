@@ -10,9 +10,25 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
-    using static HK;
 
-    partial class Classifiers
+    public enum FixedKind : uint
     {
+        None = 0,
+        
+        Fixed8,
+
+        Fixed16,
+
+        Fixed32,
+
+        Fixed64,
+
+        Fixed128,
+
+        Fixed256,
+        
+        Fixed512,
+
     }
+
 }
