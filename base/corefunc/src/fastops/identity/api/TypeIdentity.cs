@@ -131,10 +131,7 @@ namespace Z0
             return 
                 from info in arg.SpanInfo()
                 from cell in info.celltype.CommonIdentity()
-                select concat(info.kind.Indicator(), cell);
-            
-            // return arg.IsSpan() ? arg.GetGenericArguments().Single().CommonIdentity().MapValueOrDefault(x => concat(OpIdentity.Span,x))
-            //  : none<string>();
+                select concat(info.kind.Indicator(), cell);            
         }
                                 
         static Option<string> SegIndicator(this Type t)
