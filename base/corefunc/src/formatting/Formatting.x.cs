@@ -27,6 +27,7 @@ namespace Z0
         /// Formats any object, using a custom configurable formatter if it exists or invoking ToString() if not
         /// </summary>
         /// <param name="src">The object to format</param>
+        /// <param name="src">The format configuration</param>
         [MethodImpl(Inline)]
         public static string Format(this object src, IFormatConfig config)
             => Formatting.format(src, config);

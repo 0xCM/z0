@@ -11,10 +11,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    public static partial class RootX
+    partial class RootX
     {
-        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
         public static bool Designator(this Assembly a, out IAssemblyDesignator designator)
         {
             designator = null;
@@ -34,5 +32,6 @@ namespace Z0
             else 
                 return new EmptyCatalog();
         }
+
     }
 }

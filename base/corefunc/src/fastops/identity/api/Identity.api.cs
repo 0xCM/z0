@@ -83,8 +83,6 @@ namespace Z0
                 return identify(src);
         }
 
-        static string format(ParamVariance src)
-            => src.IsSome() ? (AsciSym.Tilde + src.Keyword()) : string.Empty;      
 
         public static string identify(ParameterInfo p)
         {
@@ -93,7 +91,7 @@ namespace Z0
             {
                 var id = Identity.identify(pt.EffectiveType());
                 if(!id.IsEmpty)
-                    return concat(id.Identifier, format(p.Variance()));                
+                    return concat(id.Identifier, p.Variance().Format());                
             }
             return string.Empty;                        
         }
@@ -184,11 +182,11 @@ namespace Z0
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = concat(OpIdentity.Vector,argtype.Width().Format());
+                        last = concat(TypeIdentity.Vector,argtype.Width().Format());
                     else if(argtype.IsBlocked())
-                        last = concat(OpIdentity.Block, argtype.Width().Format());
+                        last = concat(TypeIdentity.Block, argtype.Width().Format());
                     else if(argtype.IsSpan())
-                        last = OpIdentity.Span;                        
+                        last = argtype.SpanKind().Format();
                 }
                 
                 id += last;
@@ -226,7 +224,7 @@ namespace Z0
             if(generic && k == NumericKind.None)
                 return OpIdentity.Define(concat(opname, PartSep, Generic, suffixPart));            
             else if(w.IsSome())
-                return OpIdentity.Define(concat(opname, PartSep, $"{g}{w.Format()}{SegSep}{NumericType.signature(k)}", suffixPart));
+                return OpIdentity.Define(concat(opname, PartSep, $"{g}{w.Format()}{TypeIdentity.SegSep}{NumericType.signature(k)}", suffixPart));
             else
                 return OpIdentity.Define(concat($"{opname}_{g}{NumericType.signature(k)}{suffixPart}"));
         }
@@ -270,19 +268,6 @@ namespace Z0
         public static OpIdentity operation<T>(string opname, HK.Numeric<T> hk)
             where T : unmanaged
                 => operation(opname,typeof(T).NumericKind());
-
-        // /// <summary>
-        // /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
-        // /// </summary>
-        // /// <param name="opname">The base operator name</param>
-        // /// <param name="w">The covering bit width representative</param>
-        // /// <param name="t">A primal cell type representative</param>
-        // /// <typeparam name="W">The bit width type</typeparam>
-        // /// <typeparam name="T">The cell type</typeparam>
-        // [MethodImpl(Inline)]   
-        // public static OpIdentity operation<W>(string opname, W w, NumericKind k)
-        //     where W : unmanaged, ITypeNat            
-        //         => operation(opname, (FixedWidth)nateval<W>(), k, false);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_{w}{typesig(nk)}
@@ -346,6 +331,10 @@ namespace Z0
             where T : unmanaged
                 => operation(opname,w, NumericType.kind<T>());
 
+        /// <summary>
+        /// Transforms a nonspecific identity part into a specialized scalar part, if the source part is indeed a scalar identity
+        /// </summary>
+        /// <param name="part">The source part</param>
         public static Option<ScalarIdentity> scalar(OpIdentityPart part)
         {
             if(part.PartKind == OpIdentityPartKind.Scalar)
@@ -358,6 +347,11 @@ namespace Z0
                 return none<ScalarIdentity>();                
         }
 
+        /// <summary>
+        /// Extracts an index-identified operation identity part from an operation identity
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="partidx">The 0-based part index</param>
         public static Option<OpIdentityPart> part(OpIdentity src, int partidx)
         {
             var parts = src.Parts.ToArray();
@@ -367,6 +361,10 @@ namespace Z0
                 return none<OpIdentityPart>();
         }
 
+        /// <summary>
+        /// Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
+        /// </summary>
+        /// <param name="part">The source part</param>
         public static Option<OpIdentitySegment> segment(OpIdentityPart part)
         {
             if(part.PartKind == OpIdentityPartKind.Segment)
@@ -378,14 +376,27 @@ namespace Z0
             return none<OpIdentitySegment>();                
         }
 
+        /// <summary>
+        /// Extracts an index-identified segmented identity part from an operation identity
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="partidx">The 0-based part index</param>
         public static Option<OpIdentitySegment> segment(OpIdentity src, int partidx)
             => from p in part(src, partidx)
                 from s in segment(p)
                 select s;
 
+        /// <summary>
+        /// Defines an 8-bit immediate suffix predicated on an immediate value
+        /// </summary>
+        /// <param name="immval">The source value</param>
         public static string imm8(byte immval)            
             => $"{OpIdentity.SuffixSep}{OpIdentity.Imm}{immval}";
 
+        /// <summary>
+        /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none
+        /// </summary>
+        /// <param name="src">The source identity</param>
         public static Option<byte> imm8(OpIdentity src)            
         {
             if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(OpIdentity.Imm), out var immval))
@@ -395,11 +406,16 @@ namespace Z0
         }
 
         /// <summary>        
-        /// Clears the immediate attached to the moniker, if any
+        /// Clears an attached immediate suffix, if any
         /// </summary>
         public static OpIdentity imm8Remove(OpIdentity src)
             => imm8(src).MapValueOrDefault(immval => OpIdentity.Define(src.Identifier.Remove(imm8(immval))), src);
 
+        /// <summary>        
+        /// Attaches an immediate suffix to an identity, removing an existing immediate suffix if necessary
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="immval">The immediate value to attach</param>
         public static OpIdentity imm8Add(OpIdentity src, byte immval)
             => OpIdentity.Define(concat(imm8Remove(src).Identifier, imm8(immval)));
 

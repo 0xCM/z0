@@ -108,11 +108,11 @@ namespace Z0
             => t.HasCommonIdentityRaw() || t.Unwrap().HasCommonIdentityRaw();
 
         static Option<string> EnumIdentity(this Type arg)
-            => $"enum{OpIdentity.SegSep}{NumericType.signature(arg.GetEnumUnderlyingType())}";
+            => $"enum{TypeIdentity.SegSep}{NumericType.signature(arg.GetEnumUnderlyingType())}";
                 
         static Option<string> NatIdentity(this Type arg)
             => from v in arg.NatValue() 
-                let id = concat(OpIdentity.Nat, v.ToString())
+                let id = concat(TypeIdentity.Nat, v.ToString())
                 select id;
 
         static Option<string> NumericIdentity(this Type arg)
@@ -121,25 +121,21 @@ namespace Z0
                 : default;
 
 
-        static string Indicator(this SpanKind kind)
-            => kind.IsSome() ? 
-                (kind == SpanKind.Mutable ? MSpan : ImSpan) 
-                : string.Empty;
         
         static Option<string> SpanIdentity(this Type arg)
         {
             return 
                 from info in arg.SpanInfo()
                 from cell in info.celltype.CommonIdentity()
-                select concat(info.kind.Indicator(), cell);            
+                select concat(info.kind.Format(), cell);            
         }
                                 
         static Option<string> SegIndicator(this Type t)
         {
             if(t.IsBlocked())
-                return $"{OpIdentity.Block}";
+                return $"{TypeIdentity.Block}";
             else if(t.IsVector())
-                return $"{OpIdentity.Vector}";
+                return $"{TypeIdentity.Vector}";
             else return none<string>();
         }
 
@@ -149,7 +145,7 @@ namespace Z0
                 let argwidth = arg.Width()
                 let nk = arg.NumericKind()
                 where segwidth.IsSome() && argwidth.IsSome() && nk.IsSome()
-                select $"{i}{segwidth.Format()}{OpIdentity.SegSep}{argwidth.Format()}{nk.Indicator().Format()}";
+                select $"{i}{segwidth.Format()}{TypeIdentity.SegSep}{argwidth.Format()}{nk.Indicator().Format()}";
  
         static readonly ITypeIdentityProvider DefaultProvider
             = new FunctionalProvider(defaultid);

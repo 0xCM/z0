@@ -13,9 +13,6 @@ namespace Z0
 
     public sealed class t_moniker : t_fastop<t_moniker>
     {
-        static ref readonly Block128<T> add<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
-            where T : unmanaged
-            => ref c;
 
 
 

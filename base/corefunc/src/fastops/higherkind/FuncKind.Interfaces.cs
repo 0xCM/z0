@@ -19,6 +19,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (int)nateval<A>();
         }
+            
     }
 
     /// <summary>
@@ -29,26 +30,48 @@ namespace Z0
 
     }
 
+    public interface IEmitterFuncKind : IFuncKind, IFuncArity<N0>
+    {
+
+    }
+
+    public interface IUnaryFuncKind : IFuncKind, IFuncArity<N1>
+    {
+
+    }
+
+    public interface IBinaryFuncKind : IFuncKind, IFuncArity<N2>
+    {
+
+        
+    }
+
+    public interface ITernaryFuncKind : IFuncKind, IFuncArity<N3>
+    {
+
+        
+    }
+
     /// <summary>
     /// Characterizes a R-parametric emitter emitter
     /// </summary>
     /// <typeparam name="R">The emission type</typeparam>
-    public interface IFuncKind<R> : IFuncKind, IFuncArity<N0>
+    public interface IFuncKind<R> : IEmitterFuncKind
     {
     
     }
 
-    public interface IFuncKind<T1,R> : IFuncKind, IFuncArity<N1>
+    public interface IFuncKind<T1,R> : IUnaryFuncKind
     {
     
     }
 
-    public interface IFuncKind<T1,T2,R> : IFuncKind, IFuncArity<N2>
+    public interface IFuncKind<T1,T2,R> : IBinaryFuncKind
     {
     
     }
 
-    public interface IFuncKind<T1,T2,T3,R> : IFuncKind, IFuncArity<N3>
+    public interface IFuncKind<T1,T2,T3,R> : ITernaryFuncKind
     {
     
     }

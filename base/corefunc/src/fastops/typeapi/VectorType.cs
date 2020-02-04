@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
         public static bit unsigned(VectorKind k)
-            => (k & VectorKind.Unsigned) != 0;
+            => (k & VectorKind.vUnsigned) != 0;
 
         /// <summary>
         /// Determines whether a classfied vector is defined over primal signed integer components
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
         public static bit signed(VectorKind k)
-            => (k & VectorKind.Signed) != 0;
+            => (k & VectorKind.vSigned) != 0;
 
         /// <summary>
         /// Determines whether a classfied vector is defined over floating-point components
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
         public static bit floating(VectorKind k)
-            => (k & VectorKind.Fractional) != 0;
+            => (k & VectorKind.vFloat) != 0;
 
         /// <summary>
         /// Determines whether a classfied vector is defined over primal integer components
@@ -109,73 +109,73 @@ namespace Z0
         {
             var t = src.EffectiveType();
             if(t == typeof(Vector128<byte>))
-                return VectorKind.Vector128x8u;
+                return VectorKind.v128x8u;
             else if(t == typeof(Vector128<ushort>))
-                return VectorKind.Vector128x16u;
+                return VectorKind.v128x16u;
             else if(t == typeof(Vector128<uint>))
-                return VectorKind.Vector128x32u;
+                return VectorKind.v128x32u;
             else if(t == typeof(Vector128<ulong>))
-                return VectorKind.Vector128x64u;
+                return VectorKind.v128x64u;
 
             else if(t == typeof(Vector128<sbyte>))
-                return VectorKind.Vector128x8i;
+                return VectorKind.v128x8i;
             else if(t == typeof(Vector128<short>))
-                return VectorKind.Vector128x16i;
+                return VectorKind.v128x16i;
             else if(t == typeof(Vector128<int>))
-                return VectorKind.Vector128x32i;
+                return VectorKind.v128x32i;
             else if(t == typeof(Vector128<long>))            
-                return VectorKind.Vector128x64i;
+                return VectorKind.v128x64i;
                 
             else if(t == typeof(Vector128<float>))
-                return VectorKind.Vector128x32f;
+                return VectorKind.v128x32f;
             else if(t == typeof(Vector128<double>))
-                return VectorKind.Vector128x64f;
+                return VectorKind.v128x64f;
 
             else if(t == typeof(Vector256<byte>))
-                return VectorKind.Vector256x8u;
+                return VectorKind.v256x8u;
             else if(t == typeof(Vector256<ushort>))
-                return VectorKind.Vector256x16u;
+                return VectorKind.v256x16u;
             else if(t == typeof(Vector256<uint>))
-                return VectorKind.Vector256x32u;
+                return VectorKind.v256x32u;
             else if(t == typeof(Vector256<ulong>))
-                return VectorKind.Vector256x64u;
+                return VectorKind.v256x64u;
 
             else if(t == typeof(Vector256<sbyte>))
-                return VectorKind.Vector256x8i;
+                return VectorKind.v256x8i;
             else if(t == typeof(Vector256<short>))
-                return VectorKind.Vector256x16i;
+                return VectorKind.v256x16i;
             else if(t == typeof(Vector256<int>))
                 return VectorKind.Vector256x32i;
             else if(t == typeof(Vector256<long>))
-                return VectorKind.Vector256x64i;
+                return VectorKind.v256x64i;
 
             else if(t == typeof(Vector256<float>))
-                return VectorKind.Vector256x32f;
+                return VectorKind.v256x32f;
             else if(t == typeof(Vector256<double>))
-                return VectorKind.Vector256x64f;
+                return VectorKind.v256x64f;
 
             else if(t == typeof(Vector512<byte>))
-                return VectorKind.Vector512x8u;
+                return VectorKind.v512x8u;
             else if(t == typeof(Vector512<ushort>))
-                return VectorKind.Vector512x16u;
+                return VectorKind.v512x16u;
             else if(t == typeof(Vector512<uint>))
-                return VectorKind.Vector512x32u;
+                return VectorKind.v512x32u;
             else if(t == typeof(Vector512<ulong>))
-                return VectorKind.Vector512x64u;
+                return VectorKind.v512x64u;
 
             else if(t == typeof(Vector512<sbyte>))
-                return VectorKind.Vector512x8i;
+                return VectorKind.v512x8i;
             else if(t == typeof(Vector512<short>))
-                return VectorKind.Vector512x16i;
+                return VectorKind.v512x16i;
             else if(t == typeof(Vector512<int>))
-                return VectorKind.Vector512x32i;
+                return VectorKind.v512x32i;
             else if(t == typeof(Vector512<long>))
-                return VectorKind.Vector512x64i;
+                return VectorKind.v512x64i;
 
             else if(t == typeof(Vector512<float>))
-                return VectorKind.Vector512x32f;
+                return VectorKind.v512x32f;
             else if(t == typeof(Vector512<double>))
-                return VectorKind.Vector512x64f;
+                return VectorKind.v512x64f;
             else    
                 return VectorKind.None;
         }
@@ -241,13 +241,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return VectorKind.Vector128x8u;
+                return VectorKind.v128x8u;
             else if(typeof(T) == typeof(ushort))
-                return VectorKind.Vector128x16u;
+                return VectorKind.v128x16u;
             else if(typeof(T) == typeof(uint))
-                return VectorKind.Vector128x32u;
+                return VectorKind.v128x32u;
             else if(typeof(T) == typeof(ulong))
-                return VectorKind.Vector128x64u;
+                return VectorKind.v128x64u;
             else
                 return kind_i(w,t);
         }
@@ -257,13 +257,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return VectorKind.Vector128x8i;
+                return VectorKind.v128x8i;
             else if(typeof(T) == typeof(short))
-                return VectorKind.Vector128x16i;
+                return VectorKind.v128x16i;
             else if(typeof(T) == typeof(int))
-                return VectorKind.Vector128x32i;
+                return VectorKind.v128x32i;
             else if(typeof(T) == typeof(long))
-                return VectorKind.Vector128x64i;
+                return VectorKind.v128x64i;
             else
                 return kind_f(w, t);
         }
@@ -273,9 +273,9 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return VectorKind.Vector128x32f;
+                return VectorKind.v128x32f;
             else if(typeof(T) == typeof(double))
-                return VectorKind.Vector128x64f;
+                return VectorKind.v128x64f;
             else
                 return VectorKind.None;
         }
@@ -285,13 +285,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return VectorKind.Vector256x8u;
+                return VectorKind.v256x8u;
             else if(typeof(T) == typeof(ushort))
-                return VectorKind.Vector256x16u;
+                return VectorKind.v256x16u;
             else if(typeof(T) == typeof(uint))
-                return VectorKind.Vector256x32u;
+                return VectorKind.v256x32u;
             else if(typeof(T) == typeof(ulong))
-                return VectorKind.Vector256x64u;
+                return VectorKind.v256x64u;
             else
                 return kind_i(w,t);
         }
@@ -301,13 +301,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return VectorKind.Vector256x8i;
+                return VectorKind.v256x8i;
             else if(typeof(T) == typeof(short))
-                return VectorKind.Vector256x16i;
+                return VectorKind.v256x16i;
             else if(typeof(T) == typeof(int))
                 return VectorKind.Vector256x32i;
             else if(typeof(T) == typeof(long))
-                return VectorKind.Vector256x64i;
+                return VectorKind.v256x64i;
             else
                 return kind_f(w, t);
         }
@@ -317,9 +317,9 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return VectorKind.Vector256x32f;
+                return VectorKind.v256x32f;
             else if(typeof(T) == typeof(double))
-                return VectorKind.Vector256x64f;
+                return VectorKind.v256x64f;
             else
                 return VectorKind.None;
         }
@@ -329,13 +329,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return VectorKind.Vector512x8u;
+                return VectorKind.v512x8u;
             else if(typeof(T) == typeof(ushort))
-                return VectorKind.Vector512x16u;
+                return VectorKind.v512x16u;
             else if(typeof(T) == typeof(uint))
-                return VectorKind.Vector512x32u;
+                return VectorKind.v512x32u;
             else if(typeof(T) == typeof(ulong))
-                return VectorKind.Vector512x64u;
+                return VectorKind.v512x64u;
             else
                 return kind_i(w,t);
         }
@@ -345,13 +345,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return VectorKind.Vector512x8i;
+                return VectorKind.v512x8i;
             else if(typeof(T) == typeof(short))
-                return VectorKind.Vector512x16i;
+                return VectorKind.v512x16i;
             else if(typeof(T) == typeof(int))
-                return VectorKind.Vector512x32i;
+                return VectorKind.v512x32i;
             else if(typeof(T) == typeof(long))
-                return VectorKind.Vector512x64i;
+                return VectorKind.v512x64i;
             else
                 return kind_f(w, t);
         }
@@ -361,9 +361,9 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return VectorKind.Vector512x32f;
+                return VectorKind.v512x32f;
             else if(typeof(T) == typeof(double))
-                return VectorKind.Vector512x64f;
+                return VectorKind.v512x64f;
             else
                 return VectorKind.None;
         }
@@ -373,13 +373,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector128<byte>))
-                return VectorKind.Vector128x8u;
+                return VectorKind.v128x8u;
             else if(typeof(T) == typeof(Vector128<ushort>))
-                return VectorKind.Vector128x16u;
+                return VectorKind.v128x16u;
             else if(typeof(T) == typeof(Vector128<uint>))
-                return VectorKind.Vector128x32u;
+                return VectorKind.v128x32u;
             else if(typeof(T) == typeof(Vector128<ulong>))
-                return VectorKind.Vector128x64u;
+                return VectorKind.v128x64u;
             else
                 return vkind128_i(t);
         }
@@ -389,13 +389,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector128<sbyte>))
-                return VectorKind.Vector128x8i;
+                return VectorKind.v128x8i;
             else if(typeof(T) == typeof(Vector128<short>))
-                return VectorKind.Vector128x16i;
+                return VectorKind.v128x16i;
             else if(typeof(T) == typeof(Vector128<int>))
-                return VectorKind.Vector128x32i;
+                return VectorKind.v128x32i;
             else if(typeof(T) == typeof(Vector128<long>))
-                return VectorKind.Vector128x64i;
+                return VectorKind.v128x64i;
             else
                 return vkind128_f(t);
         }
@@ -405,9 +405,9 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector128<float>))
-                return VectorKind.Vector128x32f;
+                return VectorKind.v128x32f;
             else if(typeof(T) == typeof(Vector128<double>))
-                return VectorKind.Vector128x64f;
+                return VectorKind.v128x64f;
             else
                 return vkind256_u<T>();
         }
@@ -418,13 +418,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector256<byte>))
-                return VectorKind.Vector256x8u;
+                return VectorKind.v256x8u;
             else if(typeof(T) == typeof(Vector256<ushort>))
-                return VectorKind.Vector256x16u;
+                return VectorKind.v256x16u;
             else if(typeof(T) == typeof(Vector256<uint>))
-                return VectorKind.Vector256x32u;
+                return VectorKind.v256x32u;
             else if(typeof(T) == typeof(Vector256<ulong>))
-                return VectorKind.Vector256x64u;
+                return VectorKind.v256x64u;
             else
                 return vkind256_i(t);
         }
@@ -434,13 +434,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector256<sbyte>))
-                return VectorKind.Vector256x8i;
+                return VectorKind.v256x8i;
             else if(typeof(T) == typeof(Vector256<short>))
-                return VectorKind.Vector256x16i;
+                return VectorKind.v256x16i;
             else if(typeof(T) == typeof(Vector256<int>))
                 return VectorKind.Vector256x32i;
             else if(typeof(T) == typeof(Vector256<long>))
-                return VectorKind.Vector256x64i;
+                return VectorKind.v256x64i;
             else
                 return vkind256_f(t);
         }
@@ -450,9 +450,9 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector256<float>))
-                return VectorKind.Vector256x32f;
+                return VectorKind.v256x32f;
             else if(typeof(T) == typeof(Vector256<double>))
-                return VectorKind.Vector256x64f;
+                return VectorKind.v256x64f;
             else
                 return vkind512_u<T>();
         }
@@ -462,13 +462,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector512<byte>))
-                return VectorKind.Vector512x8u;
+                return VectorKind.v512x8u;
             else if(typeof(T) == typeof(Vector512<ushort>))
-                return VectorKind.Vector512x16u;
+                return VectorKind.v512x16u;
             else if(typeof(T) == typeof(Vector512<uint>))
-                return VectorKind.Vector512x32u;
+                return VectorKind.v512x32u;
             else if(typeof(T) == typeof(Vector512<ulong>))
-                return VectorKind.Vector512x64u;
+                return VectorKind.v512x64u;
             else
                 return vkind512_i(t);
         }
@@ -478,13 +478,13 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector512<sbyte>))
-                return VectorKind.Vector512x8i;
+                return VectorKind.v512x8i;
             else if(typeof(T) == typeof(Vector512<short>))
-                return VectorKind.Vector512x16i;
+                return VectorKind.v512x16i;
             else if(typeof(T) == typeof(Vector512<int>))
-                return VectorKind.Vector512x32i;
+                return VectorKind.v512x32i;
             else if(typeof(T) == typeof(Vector512<long>))
-                return VectorKind.Vector512x64i;
+                return VectorKind.v512x64i;
             else
                 return vkind512_f(t);
         }
@@ -494,13 +494,11 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(Vector512<float>))
-                return VectorKind.Vector512x32f;
+                return VectorKind.v512x32f;
             else if(typeof(T) == typeof(Vector512<double>))
-                return VectorKind.Vector512x64f;
+                return VectorKind.v512x64f;
             else
                 return VectorKind.None;            
         }
-
     }
-
 }

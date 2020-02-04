@@ -12,6 +12,11 @@ namespace Z0
 
     public static class Enums
     {
+        [MethodImpl(Inline)]
+        public static E zero<E>()
+            where E : unmanaged, Enum
+            => (E)typeof(E).GetEnumUnderlyingType().NumericKind().Zero().Value;
+
         /// <summary>
         /// Reads a generic value from a generic enum. 
         /// </summary>

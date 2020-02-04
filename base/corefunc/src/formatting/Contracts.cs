@@ -35,13 +35,11 @@ namespace Z0
     /// </summary>
     public interface IFormatter<T> : IFormatter
     {
-
         /// <summary>
         /// Renders an object as text
         /// </summary>
         /// <param name="src">The source object</param>
         string Format(T src);
-
 
         /// <summary>
         /// Default untyped implemntation predicated on a typed implementation
@@ -52,10 +50,9 @@ namespace Z0
             => Format(src);
     }
 
-
     /// <summary>
-    /// Identifies formattable things to prevent excluding extant "Format" extension methods 
-    /// that are independent of the formatting onfrastructure
+    /// Identifies formattable things to prevent including extant "Format" extension methods that are 
+    /// independent of the formatting infrastructure
     /// </summary>
     public interface ICustomFormattable
     {
@@ -88,7 +85,7 @@ namespace Z0
         string Format(T src, IFormatConfig config);
 
         /// <summary>
-        /// Default untyped implemntation predicated on a typed implementation
+        /// Default untyped implementation predicated on a typed implementation
         /// </summary>
         /// <param name="src">The source object</param>
         [MethodImpl(Inline)]
@@ -96,7 +93,7 @@ namespace Z0
             => Format(src);
 
         /// <summary>
-        /// Default untyped implemntation predicated on a typed implementation
+        /// Default untyped implementation predicated on a typed implementation
         /// </summary>
         /// <param name="src">The source object</param>
         /// <param name="configuration">The format configuration</param>
@@ -118,5 +115,4 @@ namespace Z0
         /// </summary>
         public Type Realization {get;}
     }
-
 }

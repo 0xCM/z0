@@ -20,352 +20,352 @@ namespace Z0
         /// <summary>
         /// A block defined over signed integers
         /// </summary>        
-        Signed = NumericKind.Signed,
+        bSigned = NumericKind.Signed,
 
         /// <summary>
         /// A block defined over unsigned integers
         /// </summary>        
-        Unsigned = NumericKind.Unsigned,
+        bUnsigned = NumericKind.Unsigned,
 
         /// <summary>
         /// A block defined over floating-points
         /// </summary>        
-        Fractional = NumericKind.Fractional,
+        bFloat = NumericKind.Float,
 
         /// <summary>
         /// A 16-bit block
         /// </summary>
-        B16 = FixedWidth.W16,
+        b16 = FixedWidth.W16,
 
         /// <summary>
         /// A 32-bit block
         /// </summary>
-        B32 = FixedWidth.W32,
+        b32 = FixedWidth.W32,
 
         /// <summary>
         /// A 64-bit block
         /// </summary>
-        B64 = FixedWidth.W64,
+        b64 = FixedWidth.W64,
 
         /// <summary>
         /// A 128-bit block
         /// </summary>
-        B128 = FixedWidth.W128,
+        b128 = FixedWidth.W128,
 
         /// <summary>
         /// A 256-bit block
         /// </summary>
-        B256 = FixedWidth.W256,
+        b256 = FixedWidth.W256,
 
         /// <summary>
         /// A 512-bit block
         /// </summary>
-        B512 = FixedWidth.W512,
+        b512 = FixedWidth.W512,
 
         /// <summary>
         /// A block defined over 8-bit unsigned segments
         /// </summary>
-        B8u = PrimitiveId.U8 | Unsigned,
+        b8u = PrimitiveId.U8 | bUnsigned,
 
         /// <summary>
         /// A block defined over 8-bit signed segments
         /// </summary>
-        B8i = PrimitiveId.I8 | Signed,
+        b8i = PrimitiveId.I8 | bSigned,
 
         /// <summary>
         /// A block defined over 16-bit unsigned segments
         /// </summary>
-        B16u = PrimitiveId.U16 | Unsigned,
+        b16u = PrimitiveId.U16 | bUnsigned,
 
         /// <summary>
         /// A block defined over 16-bit signed segments
         /// </summary>
-        B16i = PrimitiveId.I16 | Signed,
+        b16i = PrimitiveId.I16 | bSigned,
 
         /// <summary>
         /// A block defined over 32-bit unsigned segments
         /// </summary>
-        B32u = PrimitiveId.U32 | Unsigned,
+        b32u = PrimitiveId.U32 | bUnsigned,
 
         /// <summary>
         /// A block defined over 32-bit signed segments
         /// </summary>
-        B32i = PrimitiveId.I32 | Signed,
+        b32i = PrimitiveId.I32 | bSigned,
 
         /// <summary>
         /// A block defined over 64-bit unsigned segments
         /// </summary>
-        B64u = PrimitiveId.U64 | Unsigned,
+        b64u = PrimitiveId.U64 | bUnsigned,
 
         /// <summary>
         /// A block defined over 64-bit signed segments
         /// </summary>
-        B64i = PrimitiveId.I64 | Signed,
+        b64i = PrimitiveId.I64 | bSigned,
 
         /// <summary>
         /// A block defined over 32-bit floating-point segments
         /// </summary>
-        B32f = PrimitiveId.F32 | Fractional,
+        b32f = PrimitiveId.F32 | bFloat,
 
         /// <summary>
         /// A block defined over 64-bit floating-point segments
         /// </summary>
-        B64f = PrimitiveId.F64 | Fractional,
+        b64f = PrimitiveId.F64 | bFloat,
 
         /// <summary>
         /// A 16-bit block covering 2 unsigned 8-bit segments
         /// </summary>
-        Block16x8u = B16 | B8u,
+        b16x8u = b16 | b8u,
 
         /// <summary>
         /// A 16-bit block covering 2 signed 8-bit segments
         /// </summary>
-        Block16x8i = B16 | B8i,
+        b16x8i = b16 | b8i,
 
         /// <summary>
         /// A 16-bit block covering an unsigned 16-bit segment
         /// </summary>
-        Block16x16u = B16 | B16u,
+        b16x16u = b16 | b16u,
 
         /// <summary>
         /// A 16-bit block covering an unsigned 16-bit segment
         /// </summary>
-        Block16x16i = B16 | B16i,
+        b16x16i = b16 | b16i,
 
         /// <summary>
         /// A 32-bit block covering 4 unsigned 8-bit segments
         /// </summary>
-        Block32x8u = B32 | B8u,
+        b32x8u = b32 | b8u,
 
         /// <summary>
         /// A 32-bit block covering 4 unsigned 8-bit segments
         /// </summary>
-        Block32x8i = B32 | B8i,
+        b32x8i = b32 | b8i,
 
         /// <summary>
         /// A 32-bit block covering 2 unsigned 16-bit segments
         /// </summary>
-        Block32x16u = B32 | B16u,
+        b32x16u = b32 | b16u,
 
         /// <summary>
         /// A 32-bit block covering 2 signed 16-bit segments
         /// </summary>
-        Block32x16i = B32 | B16i,
+        b32x16i = b32 | b16i,
 
         /// <summary>
         /// A 32-bit block covering an unsigned 32-bit segment
         /// </summary>
-        Block32x32u = B32 | B32u,
+        b32x32u = b32 | b32u,
 
         /// <summary>
         /// A 32-bit block covering a signed 32-bit segment
         /// </summary>
-        Block32x32i = B32 | B32i,
+        b32x32i = b32 | b32i,
      
         /// <summary>
         /// A 32-bit block covering a floating-point 32-bit segment
         /// </summary>
-        Block32x32f = B32 | B32f,
+        b32x32f = b32 | b32f,
 
         /// <summary>
         /// A 64-bit block covering 8 unsigned 8-bit segments
         /// </summary>
-        Block64x8u = B64 | B8u,
+        b64x8u = b64 | b8u,
 
         /// <summary>
         /// A 64-bit block covering 8 signed 8-bit segments
         /// </summary>
-        Block64x8i = B64 | B8i,
+        b64x8i = b64 | b8i,
 
         /// <summary>
         /// A 64-bit block covering 4 unsigned 16-bit segments
         /// </summary>
-        Block64x16u = B64 | B16u,
+        b64x16u = b64 | b16u,
 
         /// <summary>
         /// A 64-bit block covering 4 signed 16-bit segments
         /// </summary>
-        Block64x16i = B64 | B16i,
+        b64x16i = b64 | b16i,
 
         /// <summary>
         /// A 64-bit block covering 2 unsigned 32-bit segments
         /// </summary>
-        Block64x32u = B64 | B32u,
+        b64x32u = b64 | b32u,
 
         /// <summary>
         /// A 64-bit block covering 2 signed 32-bit segments
         /// </summary>
-        Block64x32i = B64 | B32i,
+        b64x32i = b64 | b32i,
 
         /// <summary>
         /// A 64-bit block covering an unsigned 64-bit segment
         /// </summary>
-        Block64x64u = B64 | B64u,
+        b64x64u = b64 | b64u,
         
         /// <summary>
         /// A 64-bit block covering a signed 64-bit segment
         /// </summary>
-        Block64x64i = B64 | B64i,
+        b64x64i = b64 | b64i,
 
         /// <summary>
         /// A 64-bit block covering 2 32-bit floating-point segments
         /// </summary>
-        Block64x32f = B64 | B32f,
+        b64x32f = b64 | b32f,
 
         /// <summary>
         /// A 64-bit block covering a 64-bit floating-point segment
         /// </summary>
-        Block64x64f = B64 | B64f,
+        b64x64f = b64 | b64f,
 
         /// <summary>
         /// A 128-bit block covering 16 8-bit unsigned segments
         /// </summary>
-        Block128x8u = B128 | B8u,
+        b128x8u = b128 | b8u,
 
         /// <summary>
         /// A 128-bit block covering 16 8-bit signed segments
         /// </summary>
-        Block128x8i = B128 | B8i,
+        b128x8i = b128 | b8i,
 
         /// <summary>
         /// A 128-bit block covering 8 16-bit unsigned segments
         /// </summary>
-        Block128x16u = B128 | B16u,
+        b128x16u = b128 | b16u,
 
         /// <summary>
         /// A 128-bit block covering 8 16-bit signed segments
         /// </summary>
-        Block128x16i = B128 | B16i,
+        b128x16i = b128 | b16i,
 
         /// <summary>
         /// A 128-bit block covering 4 32-bit unsigned segments
         /// </summary>
-        Block128x32u = B128 | B32u,
+        b128x32u = b128 | b32u,
 
         /// <summary>
         /// A 128-bit block covering 4 32-bit signed segments
         /// </summary>
-        Block128x32i = B128 | B32i,
+        b128x32i = b128 | b32i,
 
         /// <summary>
         /// A 128-bit block covering 2 64-bit unsigned segments
         /// </summary>
-        Block128x64u = B128 | B64u,
+        b128x64u = b128 | b64u,
         
         /// <summary>
         /// A 128-bit block covering 2 64-bit signed segments
         /// </summary>
-        Block128x64i = B128 | B64i,
+        b128x64i = b128 | b64i,
 
         /// <summary>
         /// A 128-bit block covering 4 32-bit floating-point segments
         /// </summary>
-        Block128x32f = B128 | B32f,
+        b128x32f = b128 | b32f,
 
         /// <summary>
         /// A 128-bit block covering 2 64-bit floating-point segments
         /// </summary>
-        Block128x64f = B128 | B64f,
+        b128x64f = b128 | b64f,
 
         /// <summary>
         /// A 256-bit block covering 32 8-bit unsigned segments
         /// </summary>
-        Block256x8u = B256 | B8u,
+        b256x8u = b256 | b8u,
 
         /// <summary>
         /// A 256-bit block covering 32 8-bit signed segments
         /// </summary>
-        Block256x8i = B256 | B8i,
+        b256x8i = b256 | b8i,
 
         /// <summary>
         /// A 256-bit block covering 16 16-bit unsigned segments
         /// </summary>
-        Block256x16u = B256 | B16u,
+        b256x16u = b256 | b16u,
 
         /// <summary>
         /// A 256-bit block covering 16 16-bit signed segments
         /// </summary>
-        Block256x16i = B256 | B16i,
+        b256x16i = b256 | b16i,
 
         /// <summary>
         /// A 256-bit block covering 8 32-bit unsigned segments
         /// </summary>
-        Block256x32u = B256 | B32u,
+        b256x32u = b256 | b32u,
 
         /// <summary>
         /// A 256-bit block covering 8 32-bit signed segments
         /// </summary>
-        Block256x32i = B256 | B32i,
+        b256x32i = b256 | b32i,
 
         /// <summary>
         /// A 256-bit block covering 4 64-bit unsigned segments
         /// </summary>
-        Block256x64u = B256 | B64u,
+        b256x64u = b256 | b64u,
 
         /// <summary>
         /// A 256-bit block covering 4 64-bit signed segments
         /// </summary>
-        Block256x64i = B256 | B64i,
+        b256x64i = b256 | b64i,
 
         /// <summary>
         /// A 256-bit block covering 8 32-bit floating-point segments
         /// </summary>
-        Block256x32f = B256 | B32f,
+        b256x32f = b256 | b32f,
 
         /// <summary>
         /// A 256-bit block covering 4 64-bit floating-point segments
         /// </summary>
-        Block256x64f = B256 | B64f,
+        b256x64f = b256 | b64f,
 
         /// <summary>
         /// A 512-bit block covering 32 8-bit unsigned segments
         /// </summary>
-        Block512x8u = B512 | B8u,
+        b512x8u = b512 | b8u,
 
         /// <summary>
         /// A 512-bit block covering 32 8-bit signed segments
         /// </summary>
-        Block512x8i = B512 | B8i,
+        b512x8i = b512 | b8i,
 
         /// <summary>
         /// A 512-bit block covering 16 16-bit unsigned segments
         /// </summary>
-        Block512x16u = B512 | B16u,
+        b512x16u = b512 | b16u,
 
         /// <summary>
         /// A 512-bit block covering 16 16-bit signed segments
         /// </summary>
-        Block512x16i = B512 | B16i,
+        b512x16i = b512 | b16i,
 
         /// <summary>
         /// A 512-bit block covering 8 32-bit unsigned segments
         /// </summary>
-        Block512x32u = B512 | B32u,
+        b512x32u = b512 | b32u,
 
         /// <summary>
         /// A 512-bit block covering 8 32-bit signed segments
         /// </summary>
-        Block512x32i = B512 | B32i,
+        b512x32i = b512 | b32i,
 
         /// <summary>
         /// A 512-bit block covering 4 64-bit unsigned segments
         /// </summary>
-        Block512x64u = B512 | B64u,
+        b512x64u = b512 | b64u,
 
         /// <summary>
         /// A 512-bit block covering 4 64-bit signed segments
         /// </summary>
-        Block512x64i = B512 | B64i,
+        b512x64i = b512 | b64i,
 
         /// <summary>
         /// A 512-bit block covering 8 32-bit floating-point segments
         /// </summary>
-        Block512x32f = B512 | B32f,
+        b512x32f = b512 | b32f,
 
         /// <summary>
         /// A 512-bit block covering 4 64-bit floating-point segments
         /// </summary>
-        Block512x64f = B512 | B64f,
+        b512x64f = b512 | b64f,
          
     }
 }

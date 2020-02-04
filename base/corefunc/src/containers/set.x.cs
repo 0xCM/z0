@@ -51,8 +51,11 @@ namespace Z0
         /// <param name="set">The set to which items will be added</param>
         /// <param name="items">The items to add</param>
         [MethodImpl(Inline)]
-        public static void AddRange<T>(this ISet<T> set, IEnumerable<T> items)
-            => items.Iterate(item => set.Add(item));
+        public static ISet<T> AddRange<T>(this ISet<T> set, IEnumerable<T> items)
+        {
+            items.Iterate(item => set.Add(item));
+            return set;
+        }
 
         /// <summary>
         /// Determines whether a set is empty
@@ -86,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static HashSet<T> ToSet<T>(this Span<T> src)        
+        public static ISet<T> ToSet<T>(this Span<T> src)        
             where T : unmanaged
                 => set(src.ReadOnly());
 
@@ -95,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static HashSet<T> ToSet<T>(this ReadOnlySpan<T> src)        
+        public static ISet<T> ToSet<T>(this ReadOnlySpan<T> src)        
             where T : unmanaged
                 => set(src);
 
@@ -104,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static HashSet<T> ToSet<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)        
+        public static ISet<T> ToSet<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)        
             where T : unmanaged
                 => set(a,b);
 
@@ -113,11 +116,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static HashSet<T> ToSet<T>(this Span<T> src, ReadOnlySpan<T> b)        
+        public static ISet<T> ToSet<T>(this Span<T> src, ReadOnlySpan<T> b)        
             where T : unmanaged
                 => src.ReadOnly().ToSet(b);
 
-        public static HashSet<T> SetUnion<T>(this HashSet<T> a, params HashSet<T>[]  sets)
+        [MethodImpl(Inline)]   
+        public static ISet<T> Intersection<T>(this ISet<T> s1, ISet<T> s2)
+        {
+            var dst = new HashSet<T>(s1);
+            dst.IntersectWith(s2);
+            return dst;        
+        }
+
+        public static ISet<T> Unions<T>(this ISet<T> a, params ISet<T>[]  sets)
         {
             for(var i=0; i<sets.Length; i++)
             foreach(var item in sets[i])

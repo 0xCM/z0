@@ -88,6 +88,7 @@ namespace Z0
             get => (int)nateval<N>();
         }
     }
+
     public interface ITypeKindN1<N> : ITypeKindN<N1>, ITypeKind<N>
         where N : unmanaged, ITypeNat
     {
@@ -140,10 +141,33 @@ namespace Z0
 
     }
 
-    
+    public interface INatKind : ITypeKind
+    {
+
+        TypeKind IKind<TypeKind>.Classifier
+        {
+            [MethodImpl(Inline)]
+            get => TypeKind.NatType;
+        }
+    }
+
+    public interface INatKind<N> : INatKind
+        where N : unmanaged, ITypeNat
+    {
+        ulong Value 
+        {
+            [MethodImpl(Inline)]
+            get => nateval<N>();
+        }
+    }
 
     public interface IVecKind : ITypeKind
     {
+        TypeKind IKind<TypeKind>.Classifier
+        {
+            [MethodImpl(Inline)]
+            get => TypeKind.VectorType;
+        }
 
     }
 
@@ -169,9 +193,13 @@ namespace Z0
 
     }
 
-
-    public interface IBlockedKind : IKind<BlockKind>
+    public interface IBlockedKind : IKind<BlockKind>, ITypeKind
     {
+        TypeKind IKind<TypeKind>.Classifier
+        {
+            [MethodImpl(Inline)]
+            get => TypeKind.BlockedType;
+        }
 
     }
 
@@ -199,5 +227,4 @@ namespace Z0
     {
         string IOperatorKind.Name => typeof(K).Name.ToLower();
     }    
-
 }

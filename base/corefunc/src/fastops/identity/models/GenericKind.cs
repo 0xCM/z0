@@ -5,7 +5,8 @@
 namespace Z0
 {
     using System;
-    
+    using System.Runtime.CompilerServices;
+
     using static zfunc;
 
     public enum GenericKind
@@ -19,4 +20,11 @@ namespace Z0
         Definition
     }
 
+    partial class FastOpX
+    {            
+
+        [MethodImpl(Inline)]
+        public static bool IsSome(this GenericKind kind)
+            => kind != GenericKind.None;
+    }
 }

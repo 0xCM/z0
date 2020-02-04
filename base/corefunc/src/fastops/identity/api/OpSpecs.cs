@@ -11,6 +11,12 @@ namespace Z0
 
     using static zfunc;
 
+    public interface IOpSpecifier<S>    
+        where S : OpSpec
+    {
+        IEnumerable<S> FromHost(Type host);
+    }    
+
     public static class OpSpecs
     {
         public static IEnumerable<DirectOpSpec> direct(Type host)

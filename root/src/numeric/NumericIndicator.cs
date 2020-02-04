@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     /// <summary>
-    /// Defines a fundamental primitive type partitioning
+    /// Defines character representations of the partitions identified by the NumericClass kind
     /// </summary>
     public enum NumericIndicator : ushort
     {
@@ -30,8 +30,5 @@ namespace Z0
         /// Indicates an unsigned integral type
         /// </summary>
         Unsigned =  (ushort)'u',
-
     }
-
- 
 }

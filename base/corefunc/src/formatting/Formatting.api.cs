@@ -77,7 +77,7 @@ namespace Z0
         readonly struct DefautFormatConfig : IFormatConfig {}
 
         /// <summary>
-        /// Reifies an formatter via Object.ToString()
+        /// Reifies a formatter via Object.ToString()
         /// </summary>
         readonly struct DefaultFormatter : IFormatter
         {

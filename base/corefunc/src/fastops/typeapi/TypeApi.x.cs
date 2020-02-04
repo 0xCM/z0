@@ -11,6 +11,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
+    using System.ComponentModel;
 
     using static zfunc;
 
@@ -23,6 +24,13 @@ namespace Z0
         /// <param name="generics">Metadata for generic operations</param>
         public static IEnumerable<OpClosureInfo> Close(this GenericOpSpec op)
             => OpSpecs.close(op);
+
+        /// <summary>
+        /// Gets the name of a method to which to Op attribute is applied
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static string HostName(this Type t)
+            => Identity.host(t);
 
         /// <summary>
         /// Determines whether a type is parametric over the natural numbers
@@ -39,28 +47,30 @@ namespace Z0
             => t.Realizes<ITypeNat>();
 
         /// <summary>
-        /// For a type that encodes a natural number, returns the corresponding value; otherwise, returns null
+        /// For a type that encodes a natural number, returns the corresponding value; otherwise, returns none
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static Option<ulong> NatValue(this Type t)
             => t.IsNat() ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : default;
 
-
         /// <summary>
-        /// Determines whether kind has a nonzero value
+        /// Defines an identity for a type-natural span type
         /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSome(this BlockKind k)
-            => k != BlockKind.None;
-
-        /// <summary>
-        /// Determines whether a type is blocked memory store
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsBlocked(this Type t)
-            => BlockedType.test(t);
+        /// <param name="src">The type to examin</param>
+        public static Option<string> NatSpanIdentity(this Type src)
+        {
+            if(src.IsNatSpan())
+            {
+                var typeargs = src.SuppliedTypeArgs().ToArray();                    
+                var text = TypeIdentity.NatSpan;
+                text += typeargs[0].NatValue();
+                text += TypeIdentity.SegSep;
+                text += NumericType.signature(typeargs[1]);
+                return text;
+            }
+            else
+                return default;
+        }
 
         /// <summary>
         /// Returns true if the source type is intrinsic or blocked
@@ -68,7 +78,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static bool IsSegmented(this Type t)
-            => BlockedType.test(t) || VectorType.test(t);
+            => t.IsBlocked() || t.IsVector();
 
         /// <summary>
         /// Divines the bit-width of a specified type, if possible
@@ -93,8 +103,8 @@ namespace Z0
         /// If type is intrinsic or blocked, returns the primal type over which the segmentation is defined; otherwise, returns none
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static Option<Type> SegType(this Type t)
-            => t.IsSegmented() ? t.GenericTypeArguments[0] : default;        
+        public static Option<Type> SegmentType(this Type t)
+            => t.IsSegmented() && t.IsClosedGeneric() ? t.SuppliedTypeArgs().Single() : default;        
 
         [MethodImpl(Inline)]
         public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
@@ -184,144 +194,54 @@ namespace Z0
             => src.IsPrimalNumeric() || src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString();
 
         /// <summary>
-        /// Derives a signature from reflected method metadata
+        /// Constructs a display name for a type
         /// </summary>
-        /// <param name="src">The source method</param>
-        [MethodImpl(Inline)]
-        public static MethodSig Signature(this MethodInfo src)
-            => MethodSig.Define(src);
+        /// <param name="src">The source type</param>
+        public static string DisplayName(this Type src)
+        {
+            if(src == null)
+                throw new ArgumentNullException(nameof(src));
+                
+            if(Attribute.IsDefined(src, typeof(DisplayNameAttribute)))
+                return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
 
-        /// <summary>
-        /// Determines whether a method defines a unary function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsUnaryFunc(this MethodInfo m)
-            => FunctionType.unary(m);
+            if(src.IsEnum)
+                return src.Name + AsciSym.Colon + src.GetEnumUnderlyingType().DisplayName();
 
-        /// <summary>
-        /// Determines whether a method defines a binary function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBinaryFunc(this MethodInfo m)
-            => FunctionType.binary(m);
+            if(src.IsPointer)
+                return $"{src.GetElementType().DisplayName()}*";
+            
+            if(src.IsPrimal())
+                return src.PrimalKeyword().IfBlank(src.Name);
 
-        /// <summary>
-        /// Determines whether a method defines a binary function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsTernaryFunc(this MethodInfo m)
-            => FunctionType.ternary(m);
+            if(src.IsGenericType && !src.IsRef())
+                return src.FormatGeneric();
 
-        /// <summary>
-        /// Determines whether a method is a unary operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsUnaryOp(this MethodInfo m)
-            => FunctionType.unaryop(m);
+            if(src.IsRef())
+                return src.GetElementType().DisplayName();
 
-        /// <summary>
-        /// Determines whether a method is a binary operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBinaryOp(this MethodInfo m)
-            => FunctionType.binaryop(m);
+            return src.Name;
+        }
 
-        /// <summary>
-        /// Determines whether a method is a ternary operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsTernaryOp(this MethodInfo m)
-            => FunctionType.ternaryop(m);
+        static string FormatGeneric(this Type src)
+        {
+            var name = src.Name;                
+            var args = src.GetGenericArguments();
+            if(args.Length != 0)
+            {
+                name = name.Replace($"`{args.Length}", string.Empty);
+                name += "<";
+                for(var i= 0; i< args.Length; i++)
+                {
+                    name += args[i].DisplayName();
+                    if(i != args.Length - 1)
+                        name += ",";
+                }                                
+                name += ">";
+            }
+            return name;
+        } 
 
-        /// <summary>
-        /// Determines whether a method is an action
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsAction(this MethodInfo m)
-            => m.ReturnType == typeof(void);
 
-        /// <summary>
-        /// Determines whether a method is a function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsFunction(this MethodInfo m)
-            => FunctionType.function(m);
-
-        /// <summary>
-        /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsEmitter(this MethodInfo m)
-            => FunctionType.emitter(m);
-
-        /// <summary>
-        /// Determines whether a method defines an operator over a (common) domain
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsOperator(this MethodInfo m)
-            => FunctionType.isoperator(m);
-
-        /// <summary>
-        /// Determines whether a method accepts and/or returns at least one memory block parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBlocked(this MethodInfo m)
-            => FunctionType.blocked(m);        
-
-        /// <summary>
-        /// Determines whether a method is segmentation-centric
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsSegmented(this MethodInfo m)
-            => m.IsVectorized() || m.IsBlocked();
-
-        /// <summary>
-        /// Determines whether a method is classified as a span op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsSpanOp(this MethodInfo m)
-            => FunctionType.spanned(m);
-
-        /// <summary>
-        /// Determines whether a method defines a predicate that returns a bit or bool value
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsPredicate(this MethodInfo m)        
-            => FunctionType.predicate(m);
-
-        /// <summary>
-        /// Determines whether a method is a primal shift operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsPrimalShift(this MethodInfo m)        
-            => FunctionType.primalshift(m);
-
-        /// <summary>
-        /// Determines whether a parameters is an immediate
-        /// </summary>
-        /// <param name="param">The parameter to examine</param>
-        public static bool IsImmediate(this ParameterInfo param)
-            => FunctionType.immneeds(param);
-
-        /// <summary>
-        /// Selects unary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> UnaryOps(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsUnaryOp());
-
-        /// <summary>
-        /// Selects binary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> BinaryOps(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsBinaryOp());
-
-        /// <summary>
-        /// Selects ternary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> TernaryOps(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsTernaryOp());             
     }
 }

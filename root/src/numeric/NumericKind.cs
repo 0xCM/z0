@@ -20,67 +20,67 @@ namespace Z0
         /// <summary>
         /// When enabled, indicates a signed integral type
         /// </summary>
-        Signed = 1u << 31,
+        Signed = NumericClass.Signed,
 
         /// <summary>
         /// When enabled, indicates a floating-point type
         /// </summary>
-        Fractional = 1u << 30,
+        Float = NumericClass.Float,
 
         /// <summary>
         /// When enabled, indicates an unsigned integral type
         /// </summary>
-        Unsigned = 1u << 29,
+        Unsigned = NumericClass.Unsigned,
 
         /// <summary>
         /// Identifies an unsigned 8-bit integral type
         /// </summary>
-        U8 = PrimitiveId.U8 | FixedWidth.W8 | Unsigned,
+        U8 = NumericId.U8 | FixedWidth.W8 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 8-bit integral type
         /// </summary>
-        I8 = PrimitiveId.I8 | FixedWidth.W8 | Signed,
+        I8 = NumericId.I8 | FixedWidth.W8 | Signed,
 
         /// <summary>
         /// Identifies an usigned 16-bit integral type
         /// </summary>
-        U16 = PrimitiveId.U16 | FixedWidth.W16 | Unsigned,
+        U16 = NumericId.U16 | FixedWidth.W16 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 16-bit integral type
         /// </summary>
-        I16 = PrimitiveId.I16 | FixedWidth.W16 | Signed,
+        I16 = NumericId.I16 | FixedWidth.W16 | Signed,
 
         /// <summary>
         /// Identifies an usigned 32-bit integral type
         /// </summary>
-        U32 = PrimitiveId.U32 | FixedWidth.W32 | Unsigned, 
+        U32 = NumericId.U32 | FixedWidth.W32 | Unsigned, 
 
         /// <summary>
         /// Identifies a signed 32-bit integral type
         /// </summary>
-        I32 = PrimitiveId.I32 | FixedWidth.W32 | Signed,
+        I32 = NumericId.I32 | FixedWidth.W32 | Signed,
 
         /// <summary>
         /// Identifies an usigned 64-bit integral type
         /// </summary>
-        U64 = PrimitiveId.U64 | FixedWidth.W64 | Unsigned,
+        U64 = NumericId.U64 | FixedWidth.W64 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 64-bit integral type
         /// </summary>
-        I64 = PrimitiveId.I64 | FixedWidth.W64 | Signed,
+        I64 = NumericId.I64 | FixedWidth.W64 | Signed,
 
         /// <summary>
         /// Identifies a 32-bit floating-point type
         /// </summary>
-        F32 = PrimitiveId.F32 | FixedWidth.W32 | Fractional,
+        F32 = NumericId.F32 | FixedWidth.W32 | Float,
         
         /// <summary>
         /// Identifies a 64-bit floating-point type
         /// </summary>
-        F64 = PrimitiveId.F64 | FixedWidth.W64 | Fractional, 
+        F64 = NumericId.F64 | FixedWidth.W64 | Float, 
         
         /// <summary>
         /// Defines a classification that includes all signed primal integral types and no others

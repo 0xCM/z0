@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<GenericMethod> From(MethodInfo src)
         {
-            var kind = src.GetGenericKind(false);
+            var kind = src.GenericKind(false);
             return kind.IsSome() ? new GenericMethod(src,kind) : none<GenericMethod>();
         }
         

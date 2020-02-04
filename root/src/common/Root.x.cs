@@ -5,27 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
-    public enum ParamVariance
+    public static partial class RootX
     {
-        None = 0, 
-
-        In = 1,
-
-        Out = 2,
-
-        Ref = 3
-    }
-
-    partial class FastOpX
-    {
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
     }
-
 }

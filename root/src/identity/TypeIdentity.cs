@@ -22,7 +22,6 @@ namespace Z0
         public static TypeIdentity Define(string identifier)
             => new TypeIdentity(identifier);
         
-
         [MethodImpl(Inline)]
         public static TypeIdentity operator +(TypeIdentity lhs, string rhs)
             => Define($"{lhs}{rhs}");
@@ -68,6 +67,12 @@ namespace Z0
 
         public const char SegSep = 'x';
 
+        public const char Vector = 'v';
+
+        public const char Block = 'b';
+
+        public const char Nat = 'n';
+
         public const string Pointer = "ptr";
 
         public const string Modifier = "~";
@@ -76,6 +81,6 @@ namespace Z0
 
         public const string ImSpan = "imspan";
 
-
+        public const string NatSpan = "nspan";
     }
 }

@@ -28,7 +28,7 @@ namespace Z0
                     break;
                 }
             }
-            var parts = src.Substring(startidx).Split(OpIdentity.SegSep,StringSplitOptions.RemoveEmptyEntries);
+            var parts = src.Substring(startidx).Split(TypeIdentity.SegSep,StringSplitOptions.RemoveEmptyEntries);
             if(parts.Length == 2)
             {
                 var part0 = parts[0];
@@ -89,7 +89,7 @@ namespace Z0
                 Indicator == NumericIndicator.None;
 
         public string Format()
-            => $"{(int)TotalWidth}{OpIdentity.SegSep}{(int)SegWidth}{(char)Indicator}";
+            => $"{(int)TotalWidth}{TypeIdentity.SegSep}{(int)SegWidth}{(char)Indicator}";
 
         public override string ToString()
             => Format();

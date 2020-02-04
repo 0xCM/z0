@@ -9,6 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Collections.Generic;
+    
+    using static RootShare;
 
     public readonly struct OpIdentity : IIdentity<OpIdentity>
     {            
@@ -32,23 +34,23 @@ namespace Z0
         public static OpIdentity FromParts(params OpIdentityPart[] parts)
             => new OpIdentity(string.Join(PartSep, parts.Select(x =>x.PartText)));
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)
             => src.Identifier;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static implicit operator OpIdentity(OpIdentityPart[] src)
             => FromParts(src);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static bool operator==(OpIdentity a, OpIdentity b)
             => a.Equals(b);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static bool operator!=(OpIdentity a, OpIdentity b)
             => !a.Equals(b);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         OpIdentity(string text)
             => this.Identifier = text ?? 0.ToString();
 
@@ -70,7 +72,7 @@ namespace Z0
         public bool IsEmpty
         {
             
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(Inline)]
             get => string.IsNullOrWhiteSpace(Identifier);
         }
 
@@ -104,7 +106,7 @@ namespace Z0
         public override int GetHashCode()
             => Identifier.GetHashCode();
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public bool Equals(OpIdentity src)
             => string.Equals(src.Identifier, Identifier, StringComparison.InvariantCultureIgnoreCase);
 
@@ -155,7 +157,7 @@ namespace Z0
                         partkind = OpIdentityPartKind.Name;
                     else
                     {
-                        if(part.Contains(SegSep))
+                        if(part.Contains(TypeIdentity.SegSep))
                             partkind = OpIdentityPartKind.Segment;
                         else
                         {
@@ -212,22 +214,13 @@ namespace Z0
             return found != -1 ? s.Substring(found + 1) : s;
         }
 
-        public const char SegSep = 'x';
-
         public const char PartSep = '_';
 
         public const char SuffixSep = '-';
 
         public const char Generic = 'g';
 
-        public const char Vector = 'v';
-
-        public const char Block = 'b';
-
-        public const char Nat = 'n';
-
         public const string Span = "span";
-
 
         public const string Asm = "asm";
 
@@ -236,10 +229,6 @@ namespace Z0
         public const string ImmLocator = "-imm";
 
         public const string AsmLocator = "-asm";
-
-        public const string GenericBlockLocator = "_gb";
-
-        public const string GenericVectorLocator = "_gv";
 
         public const string GenericLocator = "_g";
     }

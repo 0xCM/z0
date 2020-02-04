@@ -11,6 +11,14 @@ namespace Z0
 
     public sealed class t_enums : UnitTest<t_enums>
     {
+        public void check_mapping_function()
+        {
+            var bk = BlockKind.b256x32i;
+            var x = bk.MapSomeOrElse(kind => kind.ToString(), () => string.Empty);
+            Claim.eq(x,bk.ToString());
+
+        }
+
         public enum Choices8u : byte
         {
             C0, C1, C2, C3, C4, C5

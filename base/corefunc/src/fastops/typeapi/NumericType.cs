@@ -29,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
         public static bit floating(NumericKind k)
-            => (k & NumericKind.Fractional) != 0;
+            => (k & NumericKind.Float) != 0;
 
         /// <summary>
         /// Determines whether a kind is one of the signed integer types

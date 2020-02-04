@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
+    using static RootShare;
 
-    using static zfunc;
-
-
-    public interface IOpSpecifier<S>    
-        where S : OpSpec
+    public interface INumeric : IComparable, IConvertible, IFormattable
     {
-        IEnumerable<S> FromHost(Type host);
-    }    
+
+    }
+
+    public interface INumeric<T> : IComparable<T>, IConvertible, IFormattable, IEquatable<T>
+        where T : unmanaged
+    {
+        
+    }
 }

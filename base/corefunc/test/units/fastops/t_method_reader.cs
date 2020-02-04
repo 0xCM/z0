@@ -41,7 +41,7 @@ namespace Z0
         public void capture_vectorized_generics()
         {
             using var writer = NativeTestWriter();
-            var types = NumericKind.All.PrimalTypes();
+            var types = NumericKind.All.DistinctTypes();
             var methods = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
             iter(types, 
                 t => iter(methods, 

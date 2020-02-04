@@ -21,45 +21,31 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        public readonly struct Numeric : ITypeKind<Numeric>
+        public readonly struct Numeric : INumeric
         {
-            public const TypeKind Kind = TypeKind.NumericType; 
-
             [MethodImpl(Inline)]
             public static implicit operator TypeKind(Numeric src)
-                =>  src.Classifier;
-                    
-            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
+                => INumeric.TypeClass;                                
         }        
-
-        public readonly struct Numeric<T> : ITypeKind<Numeric<T>,T> 
+    
+        public readonly struct Numeric<T> : INumeric<T> 
             where T : unmanaged
         {
-            public const TypeKind Kind = TypeKind.NumericType; 
-
-            public static FixedWidth Width => (FixedWidth)bitsize<T>();
-
-            public static NumericKind NumericKind { [MethodImpl(Inline)] get=> NumericType.kind<T>();}
-
             [MethodImpl(Inline)]
             public static implicit operator TypeKind(Numeric<T> src)
-                =>  src.Classifier;
+                =>  INumeric.TypeClass;
 
             [MethodImpl(Inline)]
             public static implicit operator NumericKind(Numeric<T> src)
-                => NumericKind;
+                => NumericType.kind<T>();
 
             [MethodImpl(Inline)]
             public static implicit operator TypeKind<T>(Numeric<T> src)
-                =>  new TypeKind<T>(src.Classifier);
+                =>  new TypeKind<T>(INumeric.TypeClass);
 
             [MethodImpl(Inline)]
             public static implicit operator Numeric(Numeric<T> src)
-                =>  default;
-                    
-            public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
-
-            public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
+                =>  default;                    
         }
 
         public static Numeric<byte> u8

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Clasifies types
+    /// Classifies types
     /// </summary>
     [Flags]
     public enum TypeKind : uint
@@ -22,6 +22,8 @@ namespace Z0
         NumericType = Pow2.T00,
 
         SpanType = Pow2.T01,
+
+        NatType = Pow2.T02,
         
         FixedType = Pow2.T08,
 
@@ -39,49 +41,4 @@ namespace Z0
 
         BitGridType = Pow2.T17,
     }
-
-    public readonly struct TypeKind<T> : ITypeKind<TypeKind<T>,T>
-        where T : unmanaged
-    {
-        public static TypeKind<T> None => default;
-
-        [MethodImpl(Inline)]
-        public TypeKind(TypeKind k)
-        {
-            this.Classifier = k;
-        }
-
-        public TypeKind Classifier {get;}
-    }
-
-    public readonly struct TypeKindN1<N,T> : ITypeKindN1<N,T>
-        where N : unmanaged, ITypeNat
-        where T : unmanaged
-    {
-        public static TypeKindN1<N,T> None => default;
-
-        [MethodImpl(Inline)]
-        public TypeKindN1(TypeKind k)
-        {
-            this.Classifier = k;
-        }
-        
-        public TypeKind Classifier {get;}
-    }
-
-    public readonly struct TypeKindN2<M,N,T> : ITypeKindN2<M,N,T>
-        where M : unmanaged, ITypeNat
-        where N : unmanaged, ITypeNat
-        where T : unmanaged
-    {
-        public static TypeKindN2<M,N,T> None => default;
-
-        [MethodImpl(Inline)]
-        public TypeKindN2(TypeKind k)
-        {
-            this.Classifier = k;
-        }
-
-        public TypeKind Classifier {get;}
-    }        
 }
