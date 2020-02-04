@@ -305,8 +305,7 @@ namespace Z0
         public static OpIdentity operation<T>(string opname, HK.Vec256<T> hk)
             where T : unmanaged
                 => operation(opname, n256, NumericType.kind<T>());
-
-
+                
         /// <summary>
         /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
         /// </summary>

@@ -12,6 +12,7 @@ namespace Z0
 
     using static zfunc;
 
+    [IdentityProvider(typeof(BitIdentityProvider))]
     public readonly struct bit
     {
         readonly uint state;
@@ -23,8 +24,6 @@ namespace Z0
         public const char Zero = '0';
 
         public const char One = '1';
-
-
         
         static string[] OnLabels => new string[]{"on", "1", "enabled", "true", "yes"};
         
@@ -620,6 +619,11 @@ namespace Z0
         [MethodImpl(Inline)]
         static bit SafeWrap(ulong state)
             => new bit((uint)state & 1);
+    }
 
+    readonly struct BitIdentityProvider : ITypeIdentityProvider
+    {
+        public TypeIdentity DefineIdentity(Type src)
+            => src == typeof(bit) ? TypeIdentity.Define("1u") : TypeIdentity.Empty;
     }
 }

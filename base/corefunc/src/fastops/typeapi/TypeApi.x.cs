@@ -13,7 +13,8 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;
-    
+
+
     partial class FastOpX
     {
         /// <summary>
@@ -44,14 +45,7 @@ namespace Z0
         public static Option<ulong> NatValue(this Type t)
             => t.IsNat() ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : default;
 
-        /// <summary>
-        /// Determines whether a type is parametric over the natural numbers
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSpan(this Type t, bool includeReadOnly = true)
-            => (t.GenericDefinition() == typeof(Span<>))||(includeReadOnly && t.GenericDefinition() == typeof(ReadOnlySpan<>));
-            
+
         /// <summary>
         /// Determines whether kind has a nonzero value
         /// </summary>

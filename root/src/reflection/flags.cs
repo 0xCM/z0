@@ -105,9 +105,4 @@ namespace Z0
 
     }
 
-    public enum MemberInstanceType
-    {
-        Instance = 0,
-        Static = 1
-    }
 }

@@ -12,22 +12,24 @@ namespace Z0
 
     using static zfunc;
 
+    using static TypeIdentity;
+
     public static class TypeIdentities
     {
+        /// <summary>
+        /// Defines a source type identifier, intended to be unique within a caller-determined scope
+        /// </summary>
+        /// <param name="t">The source type</param>
         [MethodImpl(Inline)]
         public static TypeIdentity identify(Type t)
             => provider(t).DefineIdentity(t);
 
         /// <summary>
-        /// Attempts to create a type identity prodiver as directed by an attributed type
-        /// or by a type that realizes the required interface
+        /// Retrieves a cached identity provider, if found; otherwise, creates and caches the identity provider for the source type
         /// </summary>
         /// <param name="t">The source type</param>
         internal static ITypeIdentityProvider provider(Type src)
-        {
-            var t = src.EffectiveType();
-            return t.FromCache().ValueOrElse(() => t.CreateProvider());            
-        }
+            => IdentityProviders.find(src, CreateProvider);
 
         static ITypeIdentityProvider CreateProvider(this Type t)
         {
@@ -39,7 +41,7 @@ namespace Z0
                 provider = t.FromHost().ValueOrElse(DefaultProvider);
             else
                 provider = DefaultProvider;
-            return t.Cache(provider);
+            return provider;
         }
 
         /// <summary>
@@ -56,17 +58,6 @@ namespace Z0
             => from a in t.CustomAttribute<IdentityProviderAttribute>()
                from tid in FromHost(a.Host)
                select tid;
-
-        [MethodImpl(Inline)]
-        static Option<ITypeIdentityProvider> FromCache(this Type t)
-            => CachedProviders.TryFind(t);
-        
-        [MethodImpl(Inline)]
-        static ITypeIdentityProvider Cache(this Type t, ITypeIdentityProvider provider)
-        {
-            CachedProviders.TryAdd(t,provider);
-            return provider;
-        }
 
         static TypeIdentity defaultid(this Type arg)
         { 
@@ -105,8 +96,6 @@ namespace Z0
                     return arg.SpanIdentity();
                 else if(arg.IsNatSpan())
                     return arg.NatSpanIdentity();
-                else if(arg == typeof(bit))
-                    return "1u";                
             }
 
             return default;
@@ -131,9 +120,22 @@ namespace Z0
                 ? NumericType.signature(arg) 
                 : default;
 
+
+        static string Indicator(this SpanKind kind)
+            => kind.IsSome() ? 
+                (kind == SpanKind.Mutable ? MSpan : ImSpan) 
+                : string.Empty;
+        
         static Option<string> SpanIdentity(this Type arg)
-            => arg.IsSpan() ? arg.GetGenericArguments().Single().CommonIdentity().MapValueOrDefault(x => concat(OpIdentity.Span,x))
-             : none<string>();
+        {
+            return 
+                from info in arg.SpanInfo()
+                from cell in info.celltype.CommonIdentity()
+                select concat(info.kind.Indicator(), cell);
+            
+            // return arg.IsSpan() ? arg.GetGenericArguments().Single().CommonIdentity().MapValueOrDefault(x => concat(OpIdentity.Span,x))
+            //  : none<string>();
+        }
                                 
         static Option<string> SegIndicator(this Type t)
         {
@@ -155,8 +157,6 @@ namespace Z0
         static readonly ITypeIdentityProvider DefaultProvider
             = new FunctionalProvider(defaultid);
 
-        static ConcurrentDictionary<Type, ITypeIdentityProvider> CachedProviders 
-            = new ConcurrentDictionary<Type, ITypeIdentityProvider>();
 
         readonly struct FunctionalProvider : ITypeIdentityProvider
         {     

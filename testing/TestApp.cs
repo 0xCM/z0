@@ -58,11 +58,11 @@ namespace Z0
 
         IEnumerable<Type> CandidateTypes()
             =>  from t in typeof(A).Assembly.Types().Realize<IUnitTest>()
-                where t.Reified() && t.Unattributed<IgnoreAttribute>()
+                where t.Concrete() && t.Unattributed<IgnoreAttribute>()
                 select t;
         
         IEnumerable<Type> Hosts()
-            => CandidateTypes().Concrete().OrderBy(t => t.DisplayName());
+            => CandidateTypes().OrderBy(t => t.DisplayName());
 
         bool HasAny(Type host, string[] filters)        
         {

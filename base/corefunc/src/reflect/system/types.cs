@@ -16,40 +16,17 @@ namespace Z0
     using static zfunc;
     using static ReflectionFlags;
 
+    public enum MemberInstanceType
+    {
+        Instance = 0,
+        Static = 1
+    }
+
     partial class Reflections
     {        
+        public static bool IsClosedGeneric(this Type t, bool effective = true)
+            => effective ? t.EffectiveType().IsConstructedGenericType : t.IsConstructedGenericType;
 
-        /// <summary>
-        /// Returns true if the source type is either non-generic or a generic type that has been closed over all parameters
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static bool Reified(this Type src)
-            => !src.ContainsGenericParameters && !src.IsGenericParameter;
-
-        /// <summary>
-        /// Determines whether the type is a (memory) reference
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static bool IsRef(this Type src)
-            => src.UnderlyingSystemType.IsByRef;
-
-        /// <summary>
-        /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static Type EffectiveType(this Type src)
-            =>  src.IsRef()  ? src.GetElementType() : src;
-
-        public static Type Unwrap(this Type src)
-            => src.GetElementType() ?? src;
-
-        /// <summary>
-        /// Determines whether a type is a reference to a generic type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static bool IsGenericRef(this Type t)
-            => t.IsRef() && t.GetElementType().IsGenericType;
-        
         /// <summary>
         /// For a generic type or reference to a generic type, retrieves the generic type definition;
         /// otherwise, returns none
@@ -65,9 +42,6 @@ namespace Z0
             else
                 return default;            
         }
-
-        public static bool IsClosedGeneric(this Type t, bool effective = true)
-            => effective ? t.EffectiveType().IsConstructedGenericType : t.IsConstructedGenericType;
 
         /// <summary>
         /// Determines whether a type is an open generic type
@@ -135,12 +109,6 @@ namespace Z0
         public static IEnumerable<Type> Realize<T>(this IEnumerable<Type> src)
             => src.Where(t => t.Interfaces().Contains(typeof(T)));
 
-        /// <summary>
-        /// Selects the concrete (not abstract) types from a stream
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        public static IEnumerable<Type> Concrete(this IEnumerable<Type> src)
-            => src.Where(t => !t.IsAbstract);
 
         /// <summary>
         /// Selects the abstract types from a stream

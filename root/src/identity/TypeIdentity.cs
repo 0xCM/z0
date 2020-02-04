@@ -72,5 +72,10 @@ namespace Z0
 
         public const string Modifier = "~";
 
+        public const string MSpan = "span";
+
+        public const string ImSpan = "imspan";
+
+
     }
 }

@@ -12,7 +12,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static NumericKind;
-    using PId = PrimitiveId;
 
     partial class RootX
     {
@@ -130,21 +129,7 @@ namespace Z0
         /// <param name="k">The primal kind</param>
         public static IEnumerable<Type> PrimalTypes(this NumericKind k)
             => k.DistinctKinds().Select(x => x.ToPrimalType());         
- 
-        /// <summary>
-        /// Determines whether the type is a (memory) reference
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        static bool IsRef(this Type src)
-            => src.UnderlyingSystemType.IsByRef;
-
-        /// <summary>
-        /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        static Type EffectiveType(this Type src)
-            =>  src.IsRef() ? src.GetElementType() : src;
- 
+  
         /// <summary>
         /// Determines the numeric kind of a type, possibly none
         /// </summary>
