@@ -28,6 +28,8 @@ namespace Z0.Designators
         public override IEnumerable<IAssemblyDesignator> Designates
             => items<IAssemblyDesignator>(            
             
+            D.Root.Designated,
+            
             D.TypeNats.Designated,
             D.TypeNatsTest.Designated,            
             
@@ -78,17 +80,13 @@ namespace Z0.Designators
             D.StatDist.Designated
             );               
 
-        public IEnumerable<IOperationCatalog> Catalogs
-            => from d in Designated.Designates 
-                where d is ICatalogProvider
-                select (d as ICatalogProvider).Catalog;
 
         public Option<IOperationCatalog> FindCatalog(AssemblyId id)
         {
             var catalog =(from d in Designated.Designates
                 where d is ICatalogProvider && d.Id == id
                 select (d as ICatalogProvider).Catalog).FirstOrDefault();
-            if(catalog != null)
+            if(catalog != null && !catalog.IsEmpty)
                 return some(catalog);
             else
                 return default;

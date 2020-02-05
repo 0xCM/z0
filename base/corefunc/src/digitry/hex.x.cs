@@ -258,8 +258,7 @@ namespace Z0
             => (specifier && prespec ? "0x" : string.Empty) 
              + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad64, '0') 
                      : src.ToString(HexFmtSpec(uppercase)))
-             + (specifier && !prespec  ? "h" : string.Empty);
-    
+             + (specifier && !prespec  ? "h" : string.Empty);    
 
         /// <summary>
         /// Formats a scalar stream as a hex string
@@ -462,5 +461,58 @@ namespace Z0
         public static string FormatHex<T>(this Vector256<T> src, bool bracket = false, char? sep = null, bool specifier = false)
              where T : unmanaged
                 => src.ToSpan().FormatHex(bracket,sep, specifier);                 
+
+        /// <summary>
+        /// Formats the source data with optional line length/numbering
+        /// </summary>
+        /// <param name="data">The source data</param>
+        /// <param name="fmt">The format options</param>
+        public static IReadOnlyList<string> FormatHexLines(this byte[] data, HexLineFormat? fmt = null)
+        {
+            var dst = text();
+            var configured = fmt ?? HexLineFormat.Default;  
+            var lines = new List<string>();
+            var line = text();
+            for(ushort i=0; i< data.Length; i++)
+            {                
+                if(i % configured.BytesPerLine == 0)
+                {
+                    if(i != 0)
+                    {                        
+                        dst.AppendLine();
+                        
+                        line.AppendLine();
+                        lines.Add(line.ToString());
+                        line.Clear();
+                    }
+
+                    if(configured.LineLabels)
+                    {
+                        dst.Append(i.FormatHex(true,false));
+                        dst.Append(AsciLower.h);
+                        dst.Append(AsciSym.Space);
+
+                        line.Append(i.FormatHex(true,false));
+                        line.Append(AsciLower.h);
+                        line.Append(AsciSym.Space);
+
+                    }
+                }
+
+                dst.Append(data[i].FormatHex(true, true));
+                dst.Append(AsciSym.Space);
+
+                line.Append(data[i].FormatHex(true, true));
+                line.Append(AsciSym.Space);
+            }
+            var last = line.ToString();
+            if(last.IsNotBlank())
+                lines.Add(last);   
+
+            dst.AppendLine();
+            return lines;
+            
+            //return dst.ToString();
+        }
     }
 }

@@ -5,7 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
+    
+    using static RootShare;
 
     public enum IdentityIndicator : ushort
     {
@@ -50,5 +54,20 @@ namespace Z0
         /// Indicates an unsigned integral type
         /// </summary>
         Unsigned = (ushort)NumericIndicator.Unsigned,
+    }
+
+    partial class RootKindExtensions
+    {
+        [MethodImpl(Inline)]
+        public static string Format(this IdentityIndicator kind)
+            => kind.IsSome() ? $"{(char)kind}" : string.Empty;
+
+        [MethodImpl(Inline)]
+        public static bool IsSome(this IdentityIndicator kind)
+            => kind != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsNone(this IdentityIndicator kind)
+            => kind == 0;
     }
 }

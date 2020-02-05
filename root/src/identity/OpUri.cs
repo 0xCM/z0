@@ -8,7 +8,7 @@ namespace Z0
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static RootShare;
 
     public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>
     {
@@ -42,10 +42,15 @@ namespace Z0
             this.Catalog = catalog;
             this.Subject = subject;
             this.OpId = opid;
-            var groupPart = string.IsNullOrWhiteSpace(group) ? string.Empty : $"{group}?";
-            this.UriText = concat(scheme, colon(), fslash(), fslash(), Catalog, fslash(), Subject, fslash(), groupPart, OpId.Identifier);
+            var groupPart = string.IsNullOrWhiteSpace(group) ? string.Empty : $"{group}#";
+            this.UriText = BuildUriText(scheme, catalog, subject,groupPart,opid);
+            //concat(scheme, colon(), fslash(), fslash(), Catalog, fslash(), Subject, fslash(), groupPart, OpId.Identifier);
         }
         
+        [MethodImpl(Inline)]
+        static string BuildUriText(string scheme, string catalog, string subject, string group, OpIdentity opid)
+            => $"{scheme}://{catalog}/{subject}?{group}{opid.Identifier}";
+
         public string Format()
             => UriText;
         

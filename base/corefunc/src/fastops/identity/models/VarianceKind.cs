@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     using static zfunc;
 
@@ -21,11 +17,6 @@ namespace Z0
         Out = 2,
 
         Ref = 3
-    }
-
-    partial class FastOpX
-    {
-
     }
 
 }

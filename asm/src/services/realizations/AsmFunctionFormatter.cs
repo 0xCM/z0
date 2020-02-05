@@ -126,8 +126,16 @@ namespace Z0
             return dst;
         }
 
+
+        /// <summary>
+        /// Formats the function body encoding as a comma-separated list of hex values
+        /// </summary>
+        /// <param name="src">The source function</param>
+        static string EmbraceHex(AsmCode src)
+            => embrace(src.Encoded.FormatHex(AsciSym.Comma, true, true, true));
+
         static string FormatEncodingProp(AsmCode src)
-            => Comment($"static ReadOnlySpan<byte> {src.Id}_Bytes => new byte[{src.Encoded.Length}]{embrace(src.FormatNativeHex())};");
+            => Comment($"static ReadOnlySpan<byte> {src.Id}_Bytes => new byte[{src.Encoded.Length}]{EmbraceHex(src)};");
 
         string FormatHeaderCode(AsmCode code)
         {

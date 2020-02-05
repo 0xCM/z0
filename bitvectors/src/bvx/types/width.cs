@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "bvwidth";
 
-            public OpIdentity Moniker => Identity.operation<T>(Name);
+            public OpIdentity Moniker => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly int Invoke(BitVector<T> a) => BitVector.width(a);

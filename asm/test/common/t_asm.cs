@@ -119,7 +119,7 @@ namespace Z0
         protected AsmCode<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
-                => Context.CodeArchive(catalog,subject).Read<T>(Identity.operation(opname, w, NumericType.kind<T>())).Require(); 
+                => Context.CodeArchive(catalog,subject).Read<T>(Identity.contracted(opname, w, NumericType.kind<T>())).Require(); 
 
         protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, HK.Numeric<byte> kind)
         {

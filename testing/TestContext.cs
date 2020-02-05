@@ -98,10 +98,10 @@ namespace Z0
             where C : unmanaged
             => Identity.testcase(GetType(),root, t);
 
-        protected string CaseName<W,C>(string root, W w = default, C t = default)
+        protected string CaseName<W,C>(string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where C : unmanaged
-                => Identity.testcase(GetType(),root, w, t);
+                => Identity.testcase(GetType(),root, w, t, generic);
 
         protected static OpIdentity SubjectId(string opname, NumericKind kind)
             => Identity.subject(opname,kind);
@@ -112,7 +112,7 @@ namespace Z0
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
-                => Identity.operation<K>($"{opname}_baseline");
+                => Identity.contracted<K>($"{opname}_baseline");
 
         protected virtual bool TraceEnabled
             => true;

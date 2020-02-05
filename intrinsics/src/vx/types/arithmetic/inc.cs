@@ -22,7 +22,7 @@ namespace Z0
 
             public static Inc128<T> Op => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) 
@@ -47,7 +47,7 @@ namespace Z0
 
             public static Inc256<T> Op => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x)

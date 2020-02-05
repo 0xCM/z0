@@ -8,11 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Collections.Concurrent;
 
     using static zfunc;
-
-    using static TypeIdentity;
 
     public static class TypeIdentities
     {
@@ -31,19 +28,6 @@ namespace Z0
         internal static ITypeIdentityProvider provider(Type src)
             => IdentityProviders.find(src, CreateProvider);
 
-        static ITypeIdentityProvider CreateProvider(this Type t)
-        {
-            var provider = default(ITypeIdentityProvider);   
-
-            if(t.IsAttributed<IdentityProviderAttribute>())
-                provider = t.FromAttributed().ValueOrElse(DefaultProvider);
-            else if(t.Realizes<ITypeIdentityProvider>())
-                provider = t.FromHost().ValueOrElse(DefaultProvider);
-            else
-                provider = DefaultProvider;
-            return provider;
-        }
-
         /// <summary>
         /// Creates a type identity provider from a host type that realizes the required interface, if possible;
         /// otherwise, returns none
@@ -59,96 +43,111 @@ namespace Z0
                from tid in FromHost(a.Host)
                select tid;
 
-        static TypeIdentity defaultid(this Type arg)
-        { 
-            Option<string> text = default;
-
-            if(arg.HasCommonIdentity())
-                text = arg.CommonIdentity();
-            else if(arg.IsConstructedGenericType)              
-            {
-                var typeargs = arg.SuppliedTypeArgs().ToArray();
-                var typearg = typeargs[0];                
-                if(arg.HasCommonIdentity())
-                    text = arg.CommonIdentity();
-                else if(arg.IsSegmented())
-                    text = arg.SegmentedIdentity(typearg).ValueOrDefault();
-            }   
-                
-            return text.MapValueOrElse(t => TypeIdentity.Define(t), () => TypeIdentity.Empty);
-        } 
-
-        static Option<string> CommonIdentity(this Type arg)
+        static Option<TypeIdentity> CommonIdentity(this Type arg)
         {
             if(arg.IsPointer)
                 return from id in arg.Unwrap().CommonIdentity()
                 let idptr = concat(id, TypeIdentity.Modifier, TypeIdentity.Pointer)
-                select idptr;    
+                select TypeIdentity.Define(idptr);    
             else
             {                        
                 if(arg.IsNat())
                     return arg.NatIdentity();
-                else if(NumericType.test(arg))
-                    return arg.NumericIdentity();
+                else if(arg.IsPrimal())
+                    return arg.PrimalIdentity();
                 else if(arg.IsEnum)
                     return arg.EnumIdentity();
+                else if(arg.IsSegmented())
+                    return arg.SegmentedIdentity();
                 else if(arg.IsSpan())
                     return arg.SpanIdentity();
                 else if(arg.IsNatSpan())
                     return arg.NatSpanIdentity();
             }
 
-            return default;
+                return none<TypeIdentity>();
         }
 
-        static bool HasCommonIdentityRaw(this Type t)
-            => t.IsNat() || NumericType.test(t) || t.IsEnum || t.IsSpan() || t.IsNatSpan();
-
-        static bool HasCommonIdentity(this Type t)
-            => t.HasCommonIdentityRaw() || t.Unwrap().HasCommonIdentityRaw();
-
-        static Option<string> EnumIdentity(this Type arg)
-            => $"enum{TypeIdentity.SegSep}{NumericType.signature(arg.GetEnumUnderlyingType())}";
+        static Option<TypeIdentity> EnumIdentity(this Type t)
+            =>  TypeIdentity.Define($"{t.Name}{TypeIdentity.Modifier}{NumericType.signature(t.GetEnumUnderlyingType())}");
                 
-        static Option<string> NatIdentity(this Type arg)
+        static Option<TypeIdentity> NatIdentity(this Type arg)
             => from v in arg.NatValue() 
                 let id = concat(TypeIdentity.Nat, v.ToString())
-                select id;
-
-        static Option<string> NumericIdentity(this Type arg)
-            => NumericType.test(arg) 
-                ? NumericType.signature(arg) 
-                : default;
-
-
+                select TypeIdentity.Define(id);
         
-        static Option<string> SpanIdentity(this Type arg)
+        static Option<TypeIdentity> PrimalIdentity(this Type arg)
+        {
+            if(arg.IsPrimalNumeric())
+                return TypeIdentity.Define(NumericType.signature(arg));
+            else if(arg.IsPrimalNonNumeric())
+                return TypeIdentity.Define(arg.PrimitiveKeyword());
+            else
+                return none<TypeIdentity>();
+        }
+
+        static Option<TypeIdentity> SpanIdentity(this Type arg)
         {
             return 
                 from info in arg.SpanInfo()
                 from cell in info.celltype.CommonIdentity()
-                select concat(info.kind.Format(), cell);            
+                select TypeIdentity.Define(concat(info.kind.Format(), cell));            
         }
                                 
-        static Option<string> SegIndicator(this Type t)
+        static Option<TypeIdentity> SegIndicator(this Type t)
         {
             if(t.IsBlocked())
-                return $"{TypeIdentity.Block}";
+                return TypeIdentity.Define($"{TypeIdentity.Block}");
             else if(t.IsVector())
-                return $"{TypeIdentity.Vector}";
-            else return none<string>();
+                return TypeIdentity.Define($"{TypeIdentity.Vector}");
+            else 
+                return none<TypeIdentity>();
         }
 
-        static Option<string> SegmentedIdentity(this Type t, Type arg)
+        /// <summary>
+        /// Defines an identity for a type-natural span type
+        /// </summary>
+        /// <param name="src">The type to examin</param>
+        public static Option<TypeIdentity> NatSpanIdentity(this Type src)
+        {
+            if(src.IsNatSpan())
+            {
+                var typeargs = src.SuppliedTypeArgs().ToArray();                    
+                var text = TypeIdentity.NatSpan;
+                text += typeargs[0].NatValue();
+                text += TypeIdentity.SegSep;
+                text += NumericType.signature(typeargs[1]);
+                return TypeIdentity.Define(text);
+            }
+            else
+                return none<TypeIdentity>();
+        }
+
+        static Option<TypeIdentity> SegmentedIdentity(this Type t)
             => from i in t.SegIndicator()
                 let segwidth = t.Width()
+                let arg = t.GetGenericArguments().Single()
                 let argwidth = arg.Width()
                 let nk = arg.NumericKind()
-                where segwidth.IsSome() && argwidth.IsSome() && nk.IsSome()
-                select $"{i}{segwidth.Format()}{TypeIdentity.SegSep}{argwidth.Format()}{nk.Indicator().Format()}";
- 
+                where 
+                    segwidth.IsSome() && argwidth.IsSome() && nk.IsSome()
+                select 
+                    TypeIdentity.Define($"{i}{segwidth.Format()}{TypeIdentity.SegSep}{argwidth.Format()}{nk.Indicator().Format()}");
+
         static readonly ITypeIdentityProvider DefaultProvider
-            = new FunctionalProvider(defaultid);
+            = new FunctionalProvider(arg => arg.CommonIdentity().ValueOrElse(() => TypeIdentity.Empty));
+
+        static ITypeIdentityProvider CreateProvider(this Type t)
+        {
+            var provider = none<ITypeIdentityProvider>();   
+
+            if(t.IsAttributed<IdentityProviderAttribute>())
+                provider = t.FromAttributed();
+            else if(t.Realizes<ITypeIdentityProvider>())
+                provider = t.FromHost();
+
+            return provider.ValueOrElse(() => DefaultProvider);
+        }
 
 
         readonly struct FunctionalProvider : ITypeIdentityProvider

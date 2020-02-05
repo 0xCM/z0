@@ -11,6 +11,17 @@ namespace Z0
     using System.Reflection;
 
     /// <summary>
+    /// Characterizes a type that provides access to an operation catalog
+    /// </summary>
+    public interface ICatalogProvider
+    {
+        /// <summary>
+        /// The provided catalog
+        /// </summary>
+        IOperationCatalog Catalog {get;}
+    }
+
+    /// <summary>
     /// Characterizes a type that supports operation discovery
     /// </summary>
     public interface IOperationCatalog
@@ -53,7 +64,7 @@ namespace Z0
         /// <summary>
         /// The assembly that implements the operations described by the catalog
         /// </summary>
-        Assembly DeclaringAssembly {get;}    
+        Assembly HostAssembly {get;}    
                          
         /// <summary>
         /// Identifies the declaring assembly
@@ -64,7 +75,5 @@ namespace Z0
         /// Specifies whether the catalog is vacuous
         /// </summary>
         bool IsEmpty {get;}
-
-
     }
 }

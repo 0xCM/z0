@@ -12,7 +12,7 @@ namespace Z0
     
     using static RootShare;
 
-    public readonly struct OpIdentity : IIdentity<OpIdentity>
+    public readonly partial struct OpIdentity : IIdentity<OpIdentity>
     {            
         /// <summary>
         /// The moniker text
@@ -31,7 +31,7 @@ namespace Z0
         public static OpIdentity Define(string src)
             => new OpIdentity(src);
 
-        public static OpIdentity FromParts(params OpIdentityPart[] parts)
+        public static OpIdentity FromParts(params IdentityPart[] parts)
             => new OpIdentity(string.Join(PartSep, parts.Select(x =>x.PartText)));
 
         [MethodImpl(Inline)]
@@ -39,7 +39,7 @@ namespace Z0
             => src.Identifier;
 
         [MethodImpl(Inline)]
-        public static implicit operator OpIdentity(OpIdentityPart[] src)
+        public static implicit operator OpIdentity(IdentityPart[] src)
             => FromParts(src);
 
         [MethodImpl(Inline)]
@@ -142,7 +142,7 @@ namespace Z0
             }
         }
 
-        public IEnumerable<OpIdentityPart> Parts
+        public IEnumerable<IdentityPart> Parts
         {
             get
             {
@@ -151,21 +151,21 @@ namespace Z0
                for(;i<parts.Length; i++)
                {                   
                    var part = parts[i];
-                   var partkind = OpIdentityPartKind.None;
+                   var partkind = IdentityPartKind.None;
 
                    if(i == 0)
-                        partkind = OpIdentityPartKind.Name;
+                        partkind = IdentityPartKind.Name;
                     else
                     {
                         if(part.Contains(TypeIdentity.SegSep))
-                            partkind = OpIdentityPartKind.Segment;
+                            partkind = IdentityPartKind.Segment;
                         else
                         {
-                            partkind = OpIdentityPartKind.UserType;
+                            partkind = IdentityPartKind.UserType;
                             if(i == 1 && part[0] == OpIdentity.Generic && Char.IsDigit(TakeAfter(part, OpIdentity.Generic).First()))
-                                partkind = OpIdentityPartKind.Scalar;
+                                partkind = IdentityPartKind.Scalar;
                             else if(Char.IsDigit(part.First()))
-                                partkind = OpIdentityPartKind.Scalar;                                
+                                partkind = IdentityPartKind.Scalar;                                
                         }
                     }
                     yield return (i, partkind, part);
@@ -173,7 +173,7 @@ namespace Z0
 
                var suffixes = SuffixText.ToArray();
                for(var j=0; j< suffixes.Length; j++, i++)
-                    yield return (i, OpIdentityPartKind.Suffix, suffixes[j]);
+                    yield return (i, IdentityPartKind.Suffix, suffixes[j]);
             }
         }
 

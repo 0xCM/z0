@@ -76,10 +76,10 @@ namespace Z0
                 var pairing = pair(gHex, dHex);
 
                 var gcell = from seg in gHex.Id.Segment(1)
-                            let t = seg.NumericKind()
+                            let t = seg.SegmentKind()
                             select t;
                 var dcell = from seg in dHex.Id.Segment(1)
-                            let t = seg.NumericKind()
+                            let t = seg.SegmentKind()
                             select t;
 
                 var dseg = dHex.Id.Segment(1);
@@ -142,8 +142,6 @@ namespace Z0
             
             TraceCaller($"{listcount} instruction lists were processed out of {source.Instructions.Count()} available");
             TraceCaller($"Trigger activate {activations} times");
-
-
         }
 
         void CheckBinaryImm(IAsmExecBuffer buffer)

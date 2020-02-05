@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -31,10 +30,19 @@ namespace Z0
         public virtual string Name
             => Assembly.GetName().Name;
 
+        public bool IsNoneOrEmpty
+            => Id == AssemblyId.None || Id == AssemblyId.Empty;
+
+        public IEnumerable<IOperationCatalog> DesignateCatalogs
+            => from d in Designated.Designates 
+                where d is ICatalogProvider
+                select (d as ICatalogProvider).Catalog;
+
         public virtual AssemblyId Id 
             => AssemblyId.None;
         
         public virtual IEnumerable<IAssemblyDesignator> Designates {get;}
+            = new IAssemblyDesignator[]{};
 
         public virtual IOperationCatalog Catalog {get;}
             = new EmptyCatalog();

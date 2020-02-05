@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Reflection;
     using System.Linq;
 
@@ -16,7 +17,32 @@ namespace Z0
     public readonly struct ValueMember
     {    
         public static IReadOnlyList<ValueMember> Get<T>()
-            => (typeof(T)).ValueMembers();
+            => ValueMemberCache.GetOrAdd(typeof(T), t =>
+            {
+                var members = new List<ValueMember>();        
+                members.AddRange(AutoProps(t));
+                var fieldMembers = t.PublicImmutableFields(MemberInstanceType.Instance).Select(x => new ValueMember(x));
+                members.AddRange(fieldMembers);
+                var propMembers = t.PublicPropertySearch(false, true).Where(x => x.CanRead && x.CanWrite).Select(x => new ValueMember(x));
+                members.AddRange(propMembers);
+                return members;
+            });
+
+        static IReadOnlyList<ValueMember> AutoProps(Type t)
+        {
+            var afquery = from f in t.RestrictedImmutableFields()
+                        where f.IsCompilerGenerated() && f.Name.EndsWith("__BackingField")
+                        select f;
+            var backingFields = afquery.ToList();
+            var propertyidx = t.PublicPropertySearch(true, false).ToDictionary(x => x.Name);
+            var candidates = propertyidx.Keys.Select(x =>
+                    (prop: propertyidx[x], Name:  $"\u003C{x}\u003Ek__BackingField"));
+            var autoprops = new List<ValueMember>();
+            foreach (var candidate in candidates)
+                backingFields.TryFind(f => f.Name == candidate.Name)
+                            .OnSome(f => autoprops.Add(new ValueMember(candidate.prop, f)));
+            return autoprops;       
+        }
 
         public static implicit operator ValueMember(PropertyInfo Member) 
             => new ValueMember(Member);
@@ -100,5 +126,8 @@ namespace Z0
 
         public override string ToString()
             => Member.ToString();
+
+        static readonly ConcurrentDictionary<Type, IReadOnlyList<ValueMember>> ValueMemberCache
+            = new ConcurrentDictionary<Type, IReadOnlyList<ValueMember>>();
     }
 }

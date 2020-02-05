@@ -18,7 +18,7 @@ namespace Z0
 
         readonly IPolyrand Random;
 
-        public OpIdentity Moniker => Identity.operation<T>(Name);
+        public OpIdentity Moniker => Identity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
         internal PrimalEmitter(IPolyrand random)            

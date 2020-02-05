@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using static RootShare;
 
     /// <summary>
     /// Defines fixed bit-width classifiers/identifiers
@@ -70,5 +72,40 @@ namespace Z0
         /// Indicates a bit-width of 1024
         /// </summary>
         W1024 = 1024
+    }
+
+    partial class RootX
+    {
+        /// <summary>
+        /// Determines whether the kind has a nonzero value
+        /// </summary>
+        /// <param name="src">The source kind</param>
+        [MethodImpl(Inline)]
+        public static bool IsSome(this FixedWidth src)
+            => src != 0;
+
+        /// <summary>
+        /// Determines whether the kind is zero-valued
+        /// </summary>
+        /// <param name="src">The source kind</param>
+        [MethodImpl(Inline)]
+        public static bool IsNone(this FixedWidth src)
+            => src == 0;
+
+        /// <summary>
+        /// Converts a fixed width kind to an integer corresponding to the with represented by the kind
+        /// </summary>
+        /// <param name="src">The source kind</param>
+        [MethodImpl(Inline)]
+        public static int ToInteger(this FixedWidth src)
+            => Numeric.@int(src);
+
+        /// <summary>
+        /// Produces a canonical text representation of the source kind
+        /// </summary>
+        /// <param name="src">The source kind</param>
+        [MethodImpl(Inline)]
+        public static string Format(this FixedWidth src)
+            => Numeric.format(src);
     }
 }

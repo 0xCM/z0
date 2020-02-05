@@ -69,5 +69,24 @@ namespace Z0
 
         public CapturedMember Replicate()
             => new CapturedMember(Id, Label, Delegate.ValueOrDefault(), Method, Origin, Code.Encoded.Replicate(), CaptureInfo);
+
+	    public string FormatHexLines(HexLineFormat? fmt = null)
+        {
+            var data = this;
+            if(data.IsEmpty)
+                return "<no_data>";
+            
+            var src = data.Code;
+            var dst = text();
+			dst.AppendLine($"; label   : {data.Method.Signature().Format()}");
+			dst.AppendLine($"; location: {src.Origin.Format()}, length: {src.Origin.Length} bytes");
+            var lines = src.Encoded.FormatHexLines(fmt);
+            dst.Append(lines.Concat(AsciEscape.Eol));
+            dst.AppendLine(MethodSep);
+            return dst.ToString();
+        }         
+ 
+        static string MethodSep => new string('_',80);
+
     }
 }

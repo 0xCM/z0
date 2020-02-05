@@ -12,11 +12,30 @@ namespace Z0
 
     using static RootShare;
 
-    public readonly struct TypeIdentity : IIdentity<TypeIdentity>
+    public readonly struct TypeIdentity : ITypeIdentity<TypeIdentity>
     {
         public string Identifier {get;}
 
         public static TypeIdentity Empty => Define(string.Empty);
+
+        /// <summary>
+        /// Defines a scalar type identity
+        /// </summary>
+        /// <param name="width">The scalar bit-width</param>
+        /// <param name="indicator"></param>
+        [MethodImpl(Inline)]
+        public static ScalarIdentity Scalar(FixedWidth width, NumericIndicator indicator)
+            => ScalarIdentity.Define(width, indicator);
+
+        /// <summary>
+        /// Defines a segmented type identity
+        /// </summary>
+        /// <param name="total">The total bit-width of the type</param>
+        /// <param name="segwidth">The width of each segment</param>
+        /// <param name="indicator"></param>
+        [MethodImpl(Inline)]
+        public static SegmentedIdentity Segmented(FixedWidth total, FixedWidth segwidth, NumericIndicator indicator)
+            => SegmentedIdentity.Define(total,segwidth,indicator);
 
         [MethodImpl(Inline)]
         public static TypeIdentity Define(string identifier)

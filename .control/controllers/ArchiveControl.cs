@@ -11,7 +11,6 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using static AsmServiceMessages;
     
     class ArchiveControl : Controller<ArchiveControl>
     {                
@@ -29,25 +28,6 @@ namespace Z0
             return emitter();            
         }
                         
-        static IEnumerable<AssemblyId> EnabledAssemblies
-        {
-            get
-            {
-                var settings = AppSettings.Load(typeof(ArchiveControl).Assembly.GetSimpleName()).Pairs;
-                foreach(var (key,value) in settings)
-                {
-                    var index = key.Split(colon());            
-                    if(index.Length == 2 && bit.Parse(index[1]))
-                    {
-                        var id = Enums.parse<AssemblyId>(value);
-                        if(id != AssemblyId.None)
-                            yield return id;                        
-                    }
-                }
-            }
-        }
-
-
         public override void Execute()
         {             
             var designates = 
@@ -61,6 +41,7 @@ namespace Z0
 
             foreach(var (id, a, cat) in designates)
             {             
+                
                 var metadata = ClrMetadataIndex.Create(a);
                 var context = AsmContext.New(metadata, res);
                 var emitter = context.CatalogEmitter(cat);      
@@ -74,9 +55,7 @@ namespace Z0
                     AsmReports.CreateEmissionReport(id, imm, OpIdentity.Imm).Save().Require();
                 
                 AsmReports.CreateMemberLocationReport(id, a).Save().Require();                
-            }
-
-            
+            }            
         }
     }
 }

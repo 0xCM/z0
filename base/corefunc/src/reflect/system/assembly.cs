@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
@@ -117,5 +118,6 @@ namespace Z0
 
         public static IEnumerable<Type> NonPublicTypes(this Assembly a)
             => a.GetTypes().NonPublic();
+
     }
 }

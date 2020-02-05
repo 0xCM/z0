@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "byteswap";
 
-            public OpIdentity Moniker => Identity.operation<T>(Name);
+            public OpIdentity Moniker => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.byteswap(a);

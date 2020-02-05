@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
-
+    
     /// <summary>
-    /// Characterizes a type that provides access to an operation catalog
+    /// Applies to an element to exclude it from metadata discovery processes
     /// </summary>
-    public interface ICatalogProvider
+    public class IgnoreAttribute : Attribute
     {
-        /// <summary>
-        /// The provided catalog
-        /// </summary>
-        IOperationCatalog Catalog {get;}
+
     }
+
 }

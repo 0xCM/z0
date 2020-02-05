@@ -16,7 +16,7 @@ namespace Z0
 
         void WriteData(CapturedMember src);        
     
-        void WriteData(CapturedMember src, NativeFormatConfig config);     
+        void WriteData(CapturedMember src, HexLineFormat config);     
 
         void WriteLine(string data);   
 

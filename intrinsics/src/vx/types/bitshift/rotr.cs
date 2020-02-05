@@ -21,7 +21,7 @@ namespace Z0
 
             public static Rotr128<T> Op => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
                 => DynopImm.UnaryOp<T>(hk, Moniker, gApiMethod(hk,Name),imm8);
@@ -44,7 +44,7 @@ namespace Z0
 
             public static Rotr256<T> Op => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
                 => DynopImm.UnaryOp<T>(hk, Moniker, gApiMethod(hk,Name),count);

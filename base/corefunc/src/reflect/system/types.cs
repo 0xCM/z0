@@ -109,7 +109,6 @@ namespace Z0
         public static IEnumerable<Type> Realize<T>(this IEnumerable<Type> src)
             => src.Where(t => t.Interfaces().Contains(typeof(T)));
 
-
         /// <summary>
         /// Selects the abstract types from a stream
         /// </summary>
@@ -195,15 +194,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsStatic(this Type t)
             => t.IsAbstract && t.IsSealed;
-
-        /// <summary>
-        /// Determines whether a type is static
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsAttributed<A>(this Type t)
-            where A : Attribute
-                => t.CustomAttribute<A>().IsSome();
 
         /// <summary>
         /// Determines whether a type has a public default constructor
@@ -821,7 +811,6 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         /// <param name="InstanceType">Whether to selct static or instance </param>
-        /// <returns></returns>
         public static IEnumerable<MethodInfo> DeclaredStaticMethods(this Type t, string name)
             => t.GetMethods(BF_DeclaredStatic).Where(m => m.Name == name);
 
@@ -830,7 +819,6 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         /// <param name="InstanceType">Whether to selct static or instance </param>
-        /// <returns></returns>
         public static IEnumerable<MethodInfo> DeclaredInstanceMethods(this Type t)
             => t.GetMethods(BF_DeclaredInstance);
 
@@ -904,52 +892,6 @@ namespace Z0
             => t.GetMethod(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 
         /// <summary>
-        /// Discovers a type's automatic properties
-        /// </summary>
-        /// <param name="t"></param>
-        static IReadOnlyList<ValueMember> AutoProps(this Type t)
-        {
-            var afquery = from f in t.RestrictedImmutableFields()
-                        where f.IsCompilerGenerated() && f.Name.EndsWith("__BackingField")
-                        select f;
-            var backingFields = afquery.ToList();// .ToReadOnlySet();
-
-            var propertyidx = t.PublicPropertySearch(true, false).ToDictionary(x => x.Name);
-            var candidates = propertyidx.Keys.Select(x =>
-                    (prop: propertyidx[x], Name:  $"\u003C{x}\u003Ek__BackingField"));
-            var autoprops = new List<ValueMember>();
-            foreach (var candidate in candidates)
-            {
-                backingFields.TryFind(f => f.Name == candidate.Name)
-                            .OnSome(f => autoprops.Add(new ValueMember(candidate.prop, f)));
-            }
-            return autoprops;       
-        }
-
-        /// <summary>
-        /// Gets the members of a type that can contain/represent data (properties and fields)
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static IReadOnlyList<ValueMember> ValueMembers(this Type src)
-            => ValueMemberCache.GetOrAdd(src, t =>
-            {
-                var members = new List<ValueMember>();        
-                members.AddRange(src.AutoProps());
-                var fieldMembers = t.PublicImmutableFields(MemberInstanceType.Instance).Select(x => new ValueMember(x));
-                members.AddRange(fieldMembers);
-                var propMembers = t.PublicPropertySearch(false, true).Where(x => x.CanRead && x.CanWrite).Select(x => new ValueMember(x));
-                members.AddRange(propMembers);
-                return members;
-            });
-
-        /// <summary>
-        /// If non-nullable, returns the supplied type. If nullable, returns the underlying type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static Type GetNonNullableType(this Type t)
-            => nonNullable(t);
-
-        /// <summary>
         /// Retrieves the values of a type's public instance properties
         /// </summary>
         /// <param name="t">The type to examine</param>
@@ -1007,19 +949,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T CreateInstance<T>(this Type t, params object[] args)
             => (T)Activator.CreateInstance(t, args);
- 
-        /// <summary>
-        /// Specifies the set of all primal numeric types
-        /// </summary>
-        static readonly HashSet<Type> _PrimalNumericCache = 
-            new HashSet<Type>(new Type[]{
-                typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
-                typeof(sbyte), typeof(short), typeof(int), typeof(long),
-                typeof(float),typeof(double)
-                });
-
-        [MethodImpl(Inline)]
-        public static bool IsPrimalNumeric(this Type src)
-            => _PrimalNumericCache.Contains(src.EffectiveType()) || _PrimalNumericCache.Contains(src.EffectiveType().GetUnderlyingType());
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
 
             public static HK.Vec128<T> hk => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
                 => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
@@ -41,7 +41,7 @@ namespace Z0
 
             public static Blend4x64x256<T> Op => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
                 => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
@@ -60,7 +60,7 @@ namespace Z0
 
             public static HK.Vec128<T> hk => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
                 => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
@@ -79,7 +79,7 @@ namespace Z0
 
             public static HK.Vec256<T> hk => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
                 => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
@@ -99,7 +99,7 @@ namespace Z0
 
             public static HK.Vec128<T> hk => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
                 => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
@@ -118,7 +118,7 @@ namespace Z0
 
             public static Blend8x16x256<T> Op => default;
 
-            public OpIdentity Moniker => Identity.operation(Name,hk);
+            public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
                 => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);

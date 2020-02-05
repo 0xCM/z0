@@ -22,7 +22,7 @@ namespace Z0
             this.Name = name;
         }
         
-        public OpIdentity Moniker => Identity.operation<T>(Name);
+        public OpIdentity Moniker => Identity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
         public T Invoke(T a, T b) => F(a, b);

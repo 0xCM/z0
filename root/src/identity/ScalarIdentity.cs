@@ -10,7 +10,7 @@ namespace Z0
 
     using static RootShare;
 
-    public readonly struct ScalarIdentity  : IIdentity<ScalarIdentity>
+    public readonly struct ScalarIdentity  : ITypeIdentity<ScalarIdentity>
     {
         [MethodImpl(Inline)]
         public static ScalarIdentity Define(FixedWidth width, NumericIndicator indicator)

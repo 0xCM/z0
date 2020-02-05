@@ -6,8 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
+
+    using static RootShare;
+
+    using NK = NumericKind;
 
     /// <summary>
     /// Clasifies system-defined numeric primitive types
@@ -106,5 +108,118 @@ namespace Z0
         /// Defines a classification that includes all kinds
         /// </summary>
         All = Integers | Floats,
+    }
+
+    partial class RootKindExtensions
+    {
+        /// <summary>
+        /// Determines whether kind has a nonzero value
+        /// </summary>
+        /// <param name="k">The kind to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsSome(this NumericKind k)
+            => k != 0;
+
+        /// <summary>
+        /// Determines whether kind is zero-valued
+        /// </summary>
+        /// <param name="k">The kind to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsNone(this NumericKind k)
+            => k == 0;
+
+        /// <summary>
+        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// </summary>
+        [MethodImpl(Inline),Op]
+        public static string Keyword(this NumericKind k)
+            => k switch {
+                NK.U8 => "byte",
+                NK.I8 => "sbyte",
+                NK.U16 => "ushort",
+                NK.I16 => "short",
+                NK.U32 => "uint",
+                NK.I32 => "int",
+                NK.I64 => "long",
+                NK.U64 => "ulong",
+                NK.F32 => "float",
+                NK.F64 => "double",
+                 _ => throw new NotSupportedException(k.ToString())
+           };
+
+        /// <summary>
+        /// Determines the primal identifer of a numeric kind
+        /// </summary>
+        /// <param name="k">The primal classifier</param>
+        [MethodImpl(Inline)]
+        public static NumericId GetNumericId(this NumericKind k)
+        {
+            var noclass = ((uint)k << 3) >> 3;
+            var nowidth = (noclass >> 16) << 16;
+            return (NumericId)nowidth;            
+        }
+
+        /// <summary>
+        /// Determines the width of the represented kind in bits
+        /// </summary>
+        /// <param name="k">The kind to examine</param>
+        [MethodImpl(Inline)]
+        public static int Width(this NumericKind k)
+            => (int)(ushort)k;
+
+        /// <summary>
+        /// Determines the width of the represented kind in bits
+        /// </summary>
+        /// <param name="k">The kind to examine</param>
+        [MethodImpl(Inline)]
+        public static FixedWidth WidthKind(this NumericKind k)
+            => (FixedWidth)(ushort)k;
+
+        [MethodImpl(Inline)]
+        public static NumericClass GetNumericClass(this NumericKind kind)
+            => (NumericClass)((uint)kind >> 29);
+
+        [MethodImpl(Inline)]
+        public static NumericKind SegmentKind(this SegmentedIdentity src)
+        {
+            const NumericIndicator i = NumericIndicator.Signed;
+            const NumericIndicator u = NumericIndicator.Unsigned;
+            const NumericIndicator f = NumericIndicator.Float;
+
+            switch(src.SegWidth)
+            {
+                case FixedWidth.W8:
+                    if(src.Indicator ==  i)
+                        return Z0.NumericKind.I8;
+                    else if(src.Indicator == u)
+                        return Z0.NumericKind.U8;
+                break;
+                case FixedWidth.W16:
+                    if(src.Indicator == i)
+                        return Z0.NumericKind.I16;
+                    else if(src.Indicator == u)
+                        return Z0.NumericKind.U16;
+                break;
+                case FixedWidth.W32:
+                    if(src.Indicator ==  i)
+                        return Z0.NumericKind.I32;
+                    else if(src.Indicator == u)
+                        return Z0.NumericKind.U32;
+                    else if(src.Indicator == f)
+                        return Z0.NumericKind.F32;
+                break;
+                case FixedWidth.W64:
+                    if(src.Indicator ==  i)
+                        return Z0.NumericKind.I64;
+                    else if(src.Indicator == u)
+                        return Z0.NumericKind.U64;
+                    else if(src.Indicator == f)
+                        return Z0.NumericKind.F64;
+                break;
+ 
+            }            
+ 
+            throw unsupported((src.Indicator, src.SegWidth));
+        }
     }
 }

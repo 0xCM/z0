@@ -5,6 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    
+    using static RootShare;
 
     /// <summary>
     /// Defines identifiers for known system assemblies
@@ -13,17 +18,19 @@ namespace Z0
     {
         None = 0,
         
-        Root = 1,
+        Empty = 1,
+        
+        Root = 2,
 
-        TypeNats = 2,
+        TypeNats = 4,
 
-        CoreData = 4,
+        CoreData = 8,
 
-        CoreFunc = 8,
+        CoreFunc = 16,
 
-        GMath = 16,
+        GMath = 32,
 
-        Intrinsics = 32,
+        Intrinsics = 64,
 
         BitCore,
 
@@ -55,5 +62,12 @@ namespace Z0
 
         Control
     }
-    
+
+    partial class RootKindExtensions
+    {
+
+        [MethodImpl(Inline)]
+        public static string Format(this AssemblyId id)
+            => id.ToString().ToLower();
+    }    
 }

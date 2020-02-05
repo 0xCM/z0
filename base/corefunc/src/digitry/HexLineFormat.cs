@@ -8,11 +8,11 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct NativeFormatConfig
+    public readonly struct HexLineFormat
     {
-        public static NativeFormatConfig Default => new NativeFormatConfig(4,true);
+        public static HexLineFormat Default => new HexLineFormat(4,true);
         
-        public NativeFormatConfig(int linebytes, bool linelabels)
+        public HexLineFormat(int linebytes, bool linelabels)
         {
             this.BytesPerLine = linebytes;
             this.LineLabels = linelabels;
@@ -22,10 +22,10 @@ namespace Z0
 
         public readonly bool LineLabels;
 
-        public NativeFormatConfig WithBytesPerLine(int count)
-            => new NativeFormatConfig(count,LineLabels);
+        public HexLineFormat WithBytesPerLine(int count)
+            => new HexLineFormat(count,LineLabels);
 
-        public NativeFormatConfig WithLineLabels(bool labels)
-            => new NativeFormatConfig(BytesPerLine,labels);
+        public HexLineFormat WithLineLabels(bool labels)
+            => new HexLineFormat(BytesPerLine,labels);
     }
 }

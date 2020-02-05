@@ -91,35 +91,6 @@ partial class zfunc
         => Try(parms, args => (O)Activator.CreateInstance(typeof(O), args));
 
     /// <summary>
-    /// Gets the public constructors defined on the supplied type
-    /// </summary>
-    /// <typeparam name="T">The type to examine</typeparam>
-    [MethodImpl(Inline)]
-    public static IReadOnlyList<ConstructorInfo> constructors<T>(T t = default)
-        => _constructorCache.GetOrAdd(typeof(T), t => t.GetConstructors());
-
-    /// <summary>
-    /// If nullable non-enumeration type, returns the type on which the type is based
-    /// If nullable or non-nullable enumeration type, returns the underlying type of the enumeration
-    /// If non-nullable non-enumeration type, returns the incoming type
-    /// </summary>
-    /// <param name="t">The type to query</param>
-    [MethodImpl(Inline)]
-    public static Type underlying(Type t)
-        => _ulTypeCache.GetOrAdd(t, _t => _t.GetUnderlyingType());
-
-    /// <summary>
-    /// If nullable non-enumeration type, returns the type on which the type is based
-    /// If nullable or non-nullable enumeration type, returns the underlying type of the enumeration
-    /// If non-nullable non-enumeration type, returns the incoming type
-    /// </summary>
-    /// <param name="t">A type representative</param>
-    /// <typeparam name="T">The type to examine</typeparam>
-    [MethodImpl(Inline)]
-    public static Type underlying<T>(T t = default)
-        => _ulTypeCache.GetOrAdd(typeof(T), _t => _t.GetUnderlyingType());
-
-    /// <summary>
     /// Gets the type's classification code
     /// </summary>
     /// <param name="t">The type to examine</param>
@@ -178,19 +149,10 @@ partial class zfunc
            select v;
 
     /// <summary>
-    /// Gets the public constructors defined on an object instance
-    /// </summary>
-    /// <param name="o">The instance to examine</param>
-    [MethodImpl(Inline)]
-    public static IReadOnlyList<ConstructorInfo> constructors(object o)
-        => _constructorCache.GetOrAdd(o.GetType(), t => t.GetConstructors());
-
-    /// <summary>
     /// Retrieves the identified <see cref="PropertyInfo"/>
     /// </summary>
     /// <param name="o">The object on which the property is defined</param>
     /// <param name="propname"></param>
-    /// <returns></returns>
     static PropertyInfo GetProperty(object o, string propname)
         => o.GetType().GetProperty(propname, BF_Instance);
 
@@ -212,14 +174,6 @@ partial class zfunc
     public static PropertyInfo[] props(Type type)
         => _propsCache.GetOrAdd(type, t => t.GetProperties(BF_AllPublicInstance));
 
-    /// <summary>
-    /// Gets the public properties defined on, or inherited by, the supplied type
-    /// </summary>
-    /// <typeparam name="T">The type to examine</typeparam>
-    [MethodImpl(Inline)]
-    public static PropertyInfo[] props<T>()
-        => _propsCache.GetOrAdd(typeof(T),
-                t => t.GetProperties(BF_AllPublicInstance));
 
     /// <summary>
     /// Attempts the retrieve a named property declared on a type
@@ -306,14 +260,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static int callerline([CallerLineNumber] int? line = null)
         => line ?? 0;
-
-    /// <summary>
-    /// If non-nullable, returns the supplied type. If nullable, returns the underlying type
-    /// </summary>
-    /// <param name="t">The type to examine</param>
-    [MethodImpl(Inline)]
-    public static Type nonNullable(Type t)
-        => _nnTypeCache.GetOrAdd(t, x => x.IsNullableType() ? Nullable.GetUnderlyingType(x) : x);
 
     /// <summary>
     /// Retrieves metadata for a name-identifed method on an object instance

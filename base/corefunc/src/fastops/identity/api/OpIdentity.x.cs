@@ -47,7 +47,7 @@ namespace Z0
         /// Transforms a nonspecific identity part into a specialized scalar part, if the source part is indeed a scalar identity
         /// </summary>
         /// <param name="part">The source part</param>
-        public static Option<ScalarIdentity> Scalar(this OpIdentityPart part)
+        public static Option<ScalarIdentity> Scalar(this IdentityPart part)
             => Identity.scalar(part);
 
         /// <summary>
@@ -55,14 +55,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source identity</param>
         /// <param name="partidx">The 0-based part index</param>
-        public static Option<OpIdentityPart> Part(this OpIdentity src, int partidx)
+        public static Option<IdentityPart> Part(this OpIdentity src, int partidx)
             => Identity.part(src,partidx);
 
         /// <summary>
         /// Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
         /// </summary>
         /// <param name="part">The source part</param>
-        public static Option<OpIdentitySegment> Segment(this OpIdentityPart part)
+        public static Option<SegmentedIdentity> Segment(this IdentityPart part)
             => Identity.segment(part);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source identity</param>
         /// <param name="partidx">The 0-based part index</param>
-        public static Option<OpIdentitySegment> Segment(this OpIdentity src, int partidx)
+        public static Option<SegmentedIdentity> Segment(this OpIdentity src, int partidx)
             => Identity.segment(src,partidx);
 
         /// <summary>
@@ -342,5 +342,21 @@ namespace Z0
             return slots.Length == 0 ? src.Name : GenericMemberDisplayName(src.Name, slots);            
         }
 
+        /// <summary>
+        /// Constructs a display name for a generic method specialized for a specified type
+        /// </summary>
+        /// <typeparam name="T">The relative type</typeparam>
+        /// <param name="src">The source method</param> 
+        [MethodImpl(Inline)]
+        public static string SpecializeName<T>(this MethodBase src)
+            => src.DeclaringType.DisplayName() + "/" + src.Name + "<" + typeof(T).DisplayName() + ">";
+                
+        /// <summary>
+        /// Constructs a display name for a method
+        /// </summary>
+        /// <param name="src">The source method</param>
+        [MethodImpl(Inline)]
+        public static string FullDisplayName(this MethodInfo src)
+            => $"{src.DeclaringType.DisplayName()}/{src.DisplayName()}";
     }
 }

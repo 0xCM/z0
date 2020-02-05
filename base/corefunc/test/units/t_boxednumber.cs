@@ -44,21 +44,6 @@ namespace Z0
 
             x = NumericKind.F64.Zero();
             Trace($"{x.Value}:{x.Kind.Format()}");            
-
-            // var x = BoxedNumber.Define(13ul);
-            // Trace($"{x.Value}:{x.Kind.Format()}");
-            // x = x.Convert(NumericKind.I16);
-            // Trace($"{x.Value}:{x.Kind.Format()}");
-            // x = x.Convert(NumericKind.I8);
-            // Trace($"{x.Value}:{x.Kind.Format()}");
-            // x = x.Convert(NumericKind.U8);
-            // Trace($"{x.Value}:{x.Kind.Format()}");
-            // x = x.Convert(NumericKind.F32);
-            // Trace($"{x.Value}:{x.Kind.Format()}");
-            
         }
-
-
     }
-
 }

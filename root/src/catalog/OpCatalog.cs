@@ -13,21 +13,10 @@ namespace Z0
         where C : OpCatalog<C>
     {
 
-        protected OpCatalog()
-        {
-            if(DeclaringAssembly.Designator(out var designator))
-                AssemblyId = designator.Id;
-            else
-                AssemblyId = AssemblyId.None;
-            this.CatalogName = AssemblyId.Format();
-            
-        }
-
         protected OpCatalog(AssemblyId id)
         {
             AssemblyId = id;
-            CatalogName = id.ToString().ToLower();
-
+            CatalogName = id.Format();
         }
         
         protected OpCatalog(AssemblyId id, DataResourceIndex resources)
@@ -36,15 +25,15 @@ namespace Z0
             Resources = resources;
         }
 
-        public Assembly DeclaringAssembly {get;} 
+        public Assembly HostAssembly {get;} 
             = typeof(C).Assembly;
 
-        public virtual AssemblyId AssemblyId {get;}
+        public AssemblyId AssemblyId {get;}
 
         public virtual string CatalogName {get;}
 
-        public virtual bool IsEmpty {get;}
-            = false;
+        public bool IsEmpty
+            => AssemblyId == AssemblyId.Empty || AssemblyId == AssemblyId.None;
 
         public virtual IEnumerable<GenericOpSpec> GenericOps 
             => new GenericOpSpec[]{};
@@ -77,14 +66,5 @@ namespace Z0
         
         void Merge(DataResourceIndex src)        
             => Resources.Merge(src);
-    }
-
-    public sealed class EmptyCatalog : OpCatalog<EmptyCatalog>
-    {
-        public override bool IsEmpty => true;
-
-        public override string CatalogName => "empty";
-
-        public override AssemblyId AssemblyId => AssemblyId.None;        
     }
 }

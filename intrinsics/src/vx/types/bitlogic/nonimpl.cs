@@ -22,7 +22,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public OpIdentity Moniker => Identity.operation<T>(Name,w);
+            public OpIdentity Moniker => Identity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vnonimpl(x,y);
@@ -46,7 +46,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public OpIdentity Moniker => Identity.operation<T>(Name,w);
+            public OpIdentity Moniker => Identity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vnonimpl(x,y);

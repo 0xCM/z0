@@ -5,39 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Linq;    
-    using System.Collections.Generic;
     using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
 
     using static RootShare;
-
-    public interface ITypeIdentityProvider
-    {
-        TypeIdentity DefineIdentity(Type src);        
-    }
-    
-    public interface IOpIdentityProvider
-    {
-        OpIdentity DefineIdentity(MethodInfo method);
-
-        OpIdentity GroupIdentity(MethodInfo method);                    
-
-        OpIdentity GenericIdentity(MethodInfo method);                    
-
-        OpIdentity DefineIdentity(MethodInfo method, NumericKind k);
-    }
-
-    public class IdentityProviderAttribute : Attribute
-    {
-        public IdentityProviderAttribute(Type host)
-        {
-            this.Host = host;
-        }
-
-        public Type Host;
-    }
 
     public static class IdentityProviders
     {

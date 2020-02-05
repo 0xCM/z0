@@ -29,6 +29,11 @@ namespace Z0
         Assembly DeclaringAssembly {get;}
 
         /// <summary>
+        /// Specifies whther the reification is empty
+        /// </summary>
+        bool IsNoneOrEmpty {get;}
+
+        /// <summary>
         /// The assembly role
         /// </summary>
         AssemblyRole Role

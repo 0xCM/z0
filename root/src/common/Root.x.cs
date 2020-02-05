@@ -15,5 +15,17 @@ namespace Z0
     {
         const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
+        /// <summary>
+        /// Determines whether an attribute of parametric type is applied to a source type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static bool IsAttributed<A>(this Type src)
+            where A : Attribute
+                => Attribute.IsDefined(src,typeof(A));
+
+        public static bool Ignore(this Type src)
+            => src.IsAttributed<IgnoreAttribute>();
+
     }
 }

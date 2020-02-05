@@ -53,24 +53,6 @@ namespace Z0
         public static Option<ulong> NatValue(this Type t)
             => t.IsNat() ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : default;
 
-        /// <summary>
-        /// Defines an identity for a type-natural span type
-        /// </summary>
-        /// <param name="src">The type to examin</param>
-        public static Option<string> NatSpanIdentity(this Type src)
-        {
-            if(src.IsNatSpan())
-            {
-                var typeargs = src.SuppliedTypeArgs().ToArray();                    
-                var text = TypeIdentity.NatSpan;
-                text += typeargs[0].NatValue();
-                text += TypeIdentity.SegSep;
-                text += NumericType.signature(typeargs[1]);
-                return text;
-            }
-            else
-                return default;
-        }
 
         /// <summary>
         /// Returns true if the source type is intrinsic or blocked
@@ -152,8 +134,9 @@ namespace Z0
         public static bool IsChar(this Type t)
             => t.IsTypeOf<Char>();
 
+
         [MethodImpl(Inline)]
-        public static string PrimalKeyword(this Type src)
+        public static string PrimitiveKeyword(this Type src)
         {
             if(src.IsSByte())
                 return "sbyte";
@@ -190,8 +173,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static bool IsPrimalNonNumeric(this Type src)
+            => src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString();
+
+        [MethodImpl(Inline)]
+        public static bool IsPrimalNumeric(this Type src)
+            => NumericType.test(src);
+
+        [MethodImpl(Inline)]
         public static bool IsPrimal(this Type src)
-            => src.IsPrimalNumeric() || src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString();
+            => src.IsPrimalNumeric() || src.IsPrimalNonNumeric();
 
         /// <summary>
         /// Constructs a display name for a type
@@ -212,7 +203,7 @@ namespace Z0
                 return $"{src.GetElementType().DisplayName()}*";
             
             if(src.IsPrimal())
-                return src.PrimalKeyword().IfBlank(src.Name);
+                return src.PrimitiveKeyword().IfBlank(src.Name);
 
             if(src.IsGenericType && !src.IsRef())
                 return src.FormatGeneric();

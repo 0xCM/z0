@@ -44,14 +44,14 @@ namespace Z0
             WriteLine(new string(AsciSym.Dash, 80));
         }
 
-        public void WriteData(CapturedMember src, NativeFormatConfig config)
+        public void WriteData(CapturedMember src, HexLineFormat config)
         {
-            Write(src.Format(config));                            
+            Write(src.FormatHexLines(config));                            
         }
 
         public void WriteData(CapturedMember src)
         {
-            Write(src.Format(null));                            
+            Write(src.FormatHexLines(null));                            
         }
     }
 }

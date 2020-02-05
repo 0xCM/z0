@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    public enum OpIdentityPartKind : byte
+    public enum IdentityPartKind : byte
     {
         None = 0,
                 

@@ -21,25 +21,16 @@ namespace Z0
             => this.Value = src ?? 0ul;
 
         public NumericKind Kind
-            => Value.GetType().NumericKind();
+            => Numeric.kind(Value.GetType());
 
         public bool IsSignedInt
-        {
-            [MethodImpl(Inline)]
-            get => Value is sbyte || Value is short || Value is int || Value is long;
-        }
+            => Numeric.signed(Value);
 
         public bool IsUnsignedInt
-        {
-            [MethodImpl(Inline)]
-            get => Value is byte || Value is ushort || Value is uint || Value is ulong;
-        }
+            => Numeric.unsigned(Value);
 
         public bool IsFloat
-        {
-            [MethodImpl(Inline)]
-            get => Value is float || Value is double;
-        }
+            => Numeric.floating(Value);
 
         public NumericClass Class
         {

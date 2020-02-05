@@ -90,7 +90,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var capture = NativeReader.read(src[i].Identify(), src[i], buffer);
-                PostMessage(capture.Format());
+                PostMessage(capture.FormatHexLines());
                 buffer.Clear();
             }
         }

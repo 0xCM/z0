@@ -5,138 +5,30 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
- 
-    using static NumericKind;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Collections.Concurrent;
+
+    using static RootShare;
 
     using NK = NumericKind;
+    using TC = System.TypeCode;
+    using FW = FixedWidth;
+    using NI = NumericIndicator;
+    using NC = NumericClass;
+    using ID = NumericId;
 
-    partial class RootX
+    [OpHost]
+    public static class Numeric
     {
-        /// <summary>
-        /// Determines the width of the represented kind in bits
-        /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline)]
-        public static int Width(this NumericKind k)
-            => (ushort)k;
-
-        /// <summary>
-        /// Determines the numeric kind of a type, possibly none
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this Type t)
-            => Type.GetTypeCode(t.EffectiveType()) 
-            switch
-            {
-                TypeCode.Byte => U8,
-                TypeCode.SByte => I8,
-                TypeCode.Int16 => I16,
-                TypeCode.UInt16 => U16,
-                TypeCode.Int32 => I32,
-                TypeCode.UInt32 => U32,
-                TypeCode.Int64 => I64,
-                TypeCode.UInt64 => U64,
-                TypeCode.Single => F32,
-                TypeCode.Double => F64,
-                _ => None
-            };
-
-        /// <summary>
-        /// Determines the width of the represented kind in bits
-        /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline)]
-        public static FixedWidth WidthKind(this NumericKind k)
-            => (FixedWidth)k.Width();
-
-        /// <summary>
-        /// Determines whether kind has a nonzero value
-        /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSome(this NumericKind k)
-            => k != None;
-
-        /// <summary>
-        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static string Keyword(this NumericKind k)
-            => k switch {
-                U8 => "byte",
-                I8 => "sbyte",
-                U16 => "ushort",
-                I16 => "short",
-                U32 => "uint",
-                I32 => "int",
-                I64 => "long",
-                U64 => "ulong",
-                F32 => "float",
-                F64 => "double",
-                 _ => throw new NotSupportedException(k.ToString())
-           };
-
-        [MethodImpl(Inline)]
-        public static BoxedNumber Zero(this NumericKind kind)
-            => BoxedNumber.Define(0).Convert(kind);
-
-
-        /// <summary>
-        /// Determines the primal identifer of a numeric kind
-        /// </summary>
-        /// <param name="k">The primal classifier</param>
-        [MethodImpl(Inline)]
-        public static NumericId GetNumericId(this NumericKind k)
+        [Op]
+        public static object convert(NumericKind dst, object src)
         {
-            var noclass = ((uint)k << 3) >> 3;
-            var nowidth = (noclass >> 16) << 16;
-            return (NumericId)nowidth;            
-        }
-
-        /// <summary>
-        /// Tests whether the source kind, considered as a bitfield, contains the match kind
-        /// </summary>
-        /// <param name="k">The source kind</param>
-        /// <param name="match">The kind to match</param>
-        [MethodImpl(Inline)]
-        public static bool Is(this NumericKind k, NumericKind match)        
-            => k.GetDistinctKinds().Contains(match);
-
-        /// <summary>
-        /// Tests whether the source kind, considered as a bitfield, contains the match id
-        /// </summary>
-        /// <param name="k">The source kind</param>
-        /// <param name="match">The kind to match</param>
-        [MethodImpl(Inline)]
-        public static bool Is(this NumericKind k, NumericId match)        
-            => ((uint)k & (uint)match) != 0;
-
-        /// <summary>
-        /// Enumerates the distinct numeric kinds represented by the (bitfield) source kind
-        /// </summary>
-        /// <param name="k">The kind to evaluate</param>
-        public static ISet<NumericKind> DistinctKinds(this NumericKind k)  
-            => k.GetDistinctKinds();     
-
-        /// <summary>
-        /// Computes the primal types identified by a specified kind
-        /// </summary>
-        /// <param name="k">The primal kind</param>
-        public static ISet<Type> DistinctTypes(this NumericKind k)
-            => k.GetDistinctTypes();
-
-        public static object Convert(this NumericKind dst, object src)
-        {
-            switch((src?.GetType() ?? typeof(void)).NumericKind())
+            var tc = Type.GetTypeCode(src?.GetType());
+            switch(tc)
             {
-                case NK.I8:
+                case TC.SByte:
                 {
                     switch(dst)
                     {
@@ -164,7 +56,7 @@ namespace Z0
                 }
                 break;
 
-                case NK.U8:
+                case TC.Byte:
                 {
                     switch(dst)
                     {
@@ -191,7 +83,7 @@ namespace Z0
                     }
                 }
                 break;
-                case NK.I16:
+                case TC.Int16:
                 {
                     switch(dst)
                     {
@@ -218,7 +110,7 @@ namespace Z0
                     }
                 }
                 break;
-                case NK.U16:
+                case TC.UInt16:
                 {
                     switch(dst)
                     {
@@ -245,7 +137,7 @@ namespace Z0
                     }
                 }
                 break;
-                case NK.I32:
+                case TC.Int32:
                 {
                     switch(dst)
                     {
@@ -272,7 +164,7 @@ namespace Z0
                     }
                 }
                 break;
-                case NK.U32:
+                case TC.UInt32:
                 {
                     switch(dst)
                     {
@@ -299,7 +191,7 @@ namespace Z0
                     }
                 }
                 break;
-                case NK.I64:
+                case TC.Int64:
                 {
                     switch(dst)
                     {
@@ -326,7 +218,7 @@ namespace Z0
                     }
                 }
                 break;
-                case NK.U64:
+                case TC.UInt64:
                 {
                     switch(dst)
                     {
@@ -353,7 +245,7 @@ namespace Z0
                     }
                 }
                 break;
-                case NK.F32:
+                case TC.Single:
                 {
                     switch(dst)
                     {
@@ -380,7 +272,7 @@ namespace Z0
                     }
                 }
                 break;
-                case NK.F64:
+                case TC.Double:
                 {
                     switch(dst)
                     {
@@ -411,77 +303,223 @@ namespace Z0
             return src;
         }
 
+        [Op]
+        public static NumericKind from(FixedWidth width, NumericIndicator indicator)
+            => indicator switch {
+                NI.Signed 
+                    => width switch {                    
+                        FW.W8  => NK.I8,
+                        FW.W16 => NK.I16,
+                        FW.W32 => NK.I32,
+                        FW.W64 => NK.I64,
+                        _ => NK.None
+                    },
+                NI.Unsigned 
+                    => width switch {
+                        FW.W8  => NK.U8,
+                        FW.W16 => NK.U16,
+                        FW.W32 => NK.U32,
+                        FW.W64 => NK.U64,
+                        _ => NK.None
+                    },
+                NI.Float 
+                    => width switch {
+                        FW.W32 => NK.F32,
+                        FW.W64 => NK.F64,
+                        _ => NK.None
+                    },
+                _ => NK.None
+            };
 
-        static HashSet<NumericKind> CreateDistinct(NumericKind k)       
-        {
-            var dst = new HashSet<NumericKind>();
-            if(k.Is(NumericId.U8))
-                dst.Add(U8);
+        [Op]
+        public static NumericKind from(FixedWidth width, NumericClass c)
+            => c switch {
+                NC.Signed 
+                    => width switch {                    
+                        FW.W8  => NK.I8,
+                        FW.W16 => NK.I16,
+                        FW.W32 => NK.I32,
+                        FW.W64 => NK.I64,
+                        _ => NK.None
+                    },
+                NC.Unsigned 
+                    => width switch {
+                        FW.W8  => NK.U8,
+                        FW.W16 => NK.U16,
+                        FW.W32 => NK.U32,
+                        FW.W64 => NK.U64,
+                        _ => NK.None
+                    },
+                NC.Float 
+                    => width switch {
+                        FW.W32 => NK.F32,
+                        FW.W64 => NK.F64,
+                        _ => NK.None
+                    },
+                _ => NK.None
+            };
 
-            if(k.Is(NumericId.I8))
-                dst.Add(I8);
 
-            if(k.Is(NumericId.U16))
-                dst.Add(U16);
-
-            if(k.Is(NumericId.I16))
-                dst.Add(I16);
-
-            if(k.Is(NumericId.U32))
-                dst.Add(U32);
-
-            if(k.Is(NumericId.I32))
-                dst.Add(I32);
-
-            if(k.Is(NumericId.U64))
-                dst.Add(U64);
-
-            if(k.Is(NumericId.I64))
-                dst.Add(I64);
-
-            if(k.Is(NumericId.F32))
-                dst.Add(F32);
-
-            if(k.Is(NumericId.F64))
-                dst.Add(F64);
-            return dst;
-        }
 
         /// <summary>
         /// Returns a kind-identified system type if possible; throws an exception otherwise
         /// </summary>
         /// <param name="k">The identifying kind</param>
-        static Type NumericType(this NumericKind k)
+        [Op]
+        public static Type type(NumericKind k)
             => k switch {
-                U8 => typeof(byte),
-                I8 => typeof(sbyte),
-                U16 => typeof(ushort),
-                I16 => typeof(short),
-                U32 => typeof(uint),
-                I32 => typeof(int),
-                I64 => typeof(long),
-                U64 => typeof(ulong),
-                F32 => typeof(float),
-                F64 => typeof(double),
+                NK.U8 => typeof(byte),
+                NK.I8 => typeof(sbyte),
+                NK.U16 => typeof(ushort),
+                NK.I16 => typeof(short),
+                NK.U32 => typeof(uint),
+                NK.I32 => typeof(int),
+                NK.I64 => typeof(long),
+                NK.U64 => typeof(ulong),
+                NK.F32 => typeof(float),
+                NK.F64 => typeof(double),
                 _ => throw new NotSupportedException(k.ToString())
             };
 
+        /// <summary>
+        /// Determines the numeric kind of a type, possibly none
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline),Op]
+        public static NumericKind kind(Type t)
+            =>  t.IsEnum 
+                ? NumericKind.None 
+                : Type.GetTypeCode(t.EffectiveType()) 
+                    switch
+                    {
+                        TC.Byte => NK.U8,
+                        TC.SByte => NK.I8,
+                        TC.Int16 => NK.I16,
+                        TC.UInt16 => NK.U16,
+                        TC.Int32 => NK.I32,
+                        TC.UInt32 => NK.U32,
+                        TC.Int64 => NK.I64,
+                        TC.UInt64 => NK.U64,
+                        TC.Single => NK.F32,
+                        TC.Double => NK.F64,
+                        _ => NK.None
+                    };
+
+
+        [MethodImpl(Inline),Op]
+        public static bool signed(object value)
+            => value is sbyte || value is short || value is int || value is long;
+        
+        [MethodImpl(Inline),Op]
+        public static bool unsigned(object value)
+            => value is byte || value is ushort || value is uint || value is ulong;
+        
+        [MethodImpl(Inline),Op]
+        public static bool floating(object value)
+            => value is float || value is double;
+
+        /// <summary>
+        /// Converts a fixed width kind to an integer corresponding to the with represented by the kind
+        /// </summary>
+        /// <param name="src">The source kind</param>
+        [MethodImpl(Inline),Op]
+        public static int @int(FixedWidth src)
+            => (int)src;
+
+        /// <summary>
+        /// Produces a canonical text representation of the source kind
+        /// </summary>
+        /// <param name="src">The source kind</param>
+        [MethodImpl(Inline),Op]
+        public static string format(FixedWidth src)
+            => $"{@int(src)}";
+
+        /// <summary>
+        /// Computes the primal types identified by a specified kind
+        /// </summary>
+        /// <param name="k">The primal kind</param>
+        [MethodImpl(Inline),Op]
+        public static ISet<Type> typeset(NumericKind k)
+            => typesetAcquire(k);
+
+        /// <summary>
+        /// Computes the primal types identified by a specified kind
+        /// </summary>
+        /// <param name="k">The primal kind</param>
+        [MethodImpl(Inline),Op]
+        public static ISet<NumericKind> kindset(NumericKind k)
+            => kindsetAcquire(k);
+
+        /// <summary>
+        /// Tests whether the source kind, considered as a bitfield, contains the match kind
+        /// </summary>
+        /// <param name="k">The source kind</param>
+        /// <param name="match">The kind to match</param>
+        [MethodImpl(Inline),Op]
+        public static bool @is(NumericKind k, NumericKind match)        
+            => kindset(k).Contains(match);
+
+        /// <summary>
+        /// Tests whether the source kind, considered as a bitfield, contains the match id
+        /// </summary>
+        /// <param name="k">The source kind</param>
+        /// <param name="match">The kind to match</param>
         [MethodImpl(Inline)]
-        static HashSet<NumericKind> GetDistinctKinds(this NumericKind kind)
-            => DistinctKindCache.GetOrAdd(kind, CreateDistinct);
+        public static bool @is(NumericKind k, NumericId match)        
+            => ((uint)k & (uint)match) != 0;
 
-        static HashSet<Type> CreateDistinctTypeSet(this NumericKind k)
-            => k.GetDistinctKinds().Select(x => x.NumericType()).ToHashSet();         
+        [Op]
+        static HashSet<NumericKind> kindsetCreate(NumericKind k)       
+        {
+            var dst = new HashSet<NumericKind>();
+            if(@is(k, ID.U8))
+                dst.Add(NK.U8);
+
+            if(@is(k, ID.I8))
+                dst.Add(NK.I8);
+
+            if(@is(k, ID.U16))
+                dst.Add(NK.U16);
+
+            if(@is(k, ID.I16))
+                dst.Add(NK.I16);
+
+            if(@is(k, ID.U32))
+                dst.Add(NK.U32);
+
+            if(@is(k, ID.I32))
+                dst.Add(NK.I32);
+
+            if(@is(k, ID.U64))
+                dst.Add(NK.U64);
+
+            if(@is(k, ID.I64))
+                dst.Add(NK.I64);
+
+            if(@is(k, ID.F32))
+                dst.Add(NK.F32);
+
+            if(@is(k, ID.F64))
+                dst.Add(NK.F64);
+            
+            return dst;
+        }
+
+        static HashSet<Type> typesetCreate(NumericKind k)
+            => kindsetAcquire(k).Select(type).ToHashSet();         
 
         [MethodImpl(Inline)]
-        static ISet<Type> GetDistinctTypes(this NumericKind kind)
-            => DistinctTypeCache.GetOrAdd(kind,CreateDistinctTypeSet);            
+        static HashSet<NumericKind> kindsetAcquire(NumericKind kind)
+            => KindsetCache.GetOrAdd(kind, kindsetCreate);
 
-        static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> DistinctKindCache {get;}       
+        [MethodImpl(Inline)]
+        static ISet<Type> typesetAcquire(NumericKind kind)
+            => TypesetCache.GetOrAdd(kind,typesetCreate);            
+
+        static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> KindsetCache {get;}       
             = new ConcurrentDictionary<NumericKind, HashSet<NumericKind>>();
 
-        static ConcurrentDictionary<NumericKind, HashSet<Type>> DistinctTypeCache {get;}       
+        static ConcurrentDictionary<NumericKind, HashSet<Type>> TypesetCache {get;}       
             = new ConcurrentDictionary<NumericKind, HashSet<Type>>();
-
     }
 }

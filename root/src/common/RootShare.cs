@@ -28,5 +28,16 @@ namespace Z0
         public static int IdentityHashCode<T>(in T src)     
             where T : struct, IIdentity<T>
                 => src.Identifier.GetHashCode();
+
+        [MethodImpl(Inline)]
+        public static NotSupportedException unsupported(object value)
+            => new NotSupportedException($"{value}");
+    }
+
+
+    public static partial class RootKindExtensions
+    {
+
+
     }
 }

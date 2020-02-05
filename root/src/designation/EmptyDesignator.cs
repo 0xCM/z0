@@ -5,23 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
+    using System.Linq;
+    using System.Reflection;
 
-    using static zfunc;
-
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class OpHostAttribute : Attribute
+    [Ignore]
+    sealed class EmptyDesignator : AssemblyDesignator<EmptyDesignator>
     {
-        public OpHostAttribute(string Name)
+
+        public EmptyDesignator()
         {
-            this.Name = Name;
+
         }
 
-        public string Name {get;}
+        public override AssemblyId Id => AssemblyId.Empty;
 
     }
-
 }
-
