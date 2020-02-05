@@ -14,5 +14,11 @@ namespace Z0
         {
 
         }        
+
+        public override IEnumerable<Type> DirectApiHosts
+            => new Type[]{typeof(DataBlocks)};
+
+        public override IEnumerable<Type> GenericApiHosts
+            => new Type[]{typeof(DataBlocks)};
     }
 }

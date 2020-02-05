@@ -65,9 +65,13 @@ namespace Z0
             var selected = direct.Union(generic).ToArray();            
             var path = Capture(selected,name);
             var hex = Context.HexReader().Read(path);
+            
             var hexD = hex.Where(h => !h.Id.IsGeneric).ToDictionary(x => x.Id);
             var hexG = hex.Where(h => h.Id.IsGeneric).ToDictionary(x => x.Id);
 
+            
+            
+            
             
             foreach(var k in hexG.Keys)
             {
@@ -76,14 +80,14 @@ namespace Z0
                 var pairing = pair(gHex, dHex);
 
                 var gcell = from seg in gHex.Id.Segment(1)
-                            let t = seg.SegmentKind()
+                            let t = seg.SegKind
                             select t;
                 var dcell = from seg in dHex.Id.Segment(1)
-                            let t = seg.SegmentKind()
+                            let t = seg.SegKind
                             select t;
 
                 var dseg = dHex.Id.Segment(1);
-                Trace($"{gcell} :: {dcell}");
+                //Trace($"{gcell} :: {dcell}");
             }
             
         }

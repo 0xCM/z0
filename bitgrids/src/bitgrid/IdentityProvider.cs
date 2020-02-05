@@ -25,7 +25,7 @@ namespace Z0
             if(!closures.IsSome())
                 return TypeIdentity.Empty;
             
-            var segsep = TypeIdentity.SegSep.ToString();
+            var segsep = IDI.SegSep.ToString();
             var count = closures.NonEmptyCount();
 
             if(count == 1)

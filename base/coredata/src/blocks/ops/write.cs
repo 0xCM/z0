@@ -12,7 +12,6 @@ namespace Z0
 
     partial class DataBlocks
     {
-
         /// <summary>
         /// Writes a specified number of bytes to a block beginning at a byte-relative offset
         /// </summary>

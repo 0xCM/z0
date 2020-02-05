@@ -320,28 +320,28 @@ namespace Z0
         const NumericIndicator i = NumericIndicator.Signed;
         const NumericIndicator u = NumericIndicator.Unsigned;
 
-        public static SegmentedIdentity ToMonikerSegment(this MemorySize src)
+        public static SegmentedIdentity ToMonikerSegment(this MemorySize src, char si)
             => src switch {
-                    MemorySize.Packed128_Int8 => (W128, W8, i),
-                    MemorySize.Packed128_UInt8 => (W128, W8, u),
-                    MemorySize.Packed128_Int16 => (W128, W16, i),
-                    MemorySize.Packed128_UInt16 => (W128, W16, u),
-                    MemorySize.Packed128_Int32 => (W128, W32, i),
-                    MemorySize.Packed128_UInt32 => (W128, W32, u),
-                    MemorySize.Packed128_Int64 => (W128, W64, i),
-                    MemorySize.Packed128_UInt64 => (W128, W64, u),
-                    MemorySize.Packed128_Float32 => (W128, W32, f),
-                    MemorySize.Packed128_Float64 => (W128, W64, f),
-                    MemorySize.Packed256_Int8 => (W256, W8, i),
-                    MemorySize.Packed256_UInt8 => (W256, W8, u),
-                    MemorySize.Packed256_Int16 => (W256, W16, i),
-                    MemorySize.Packed256_UInt16 => (W256, W16, u),
-                    MemorySize.Packed256_Int32 => (W256, W32, i),
-                    MemorySize.Packed256_UInt32 => (W256, W32, u),
-                    MemorySize.Packed256_Int64 => (W256, W64, i),
-                    MemorySize.Packed256_UInt64 => (W256, W64, u),
-                    MemorySize.Packed256_Float32 => (W256, W32, f),
-                    MemorySize.Packed256_Float64 => (W256, W64, f),
+                    MemorySize.Packed128_Int8 => (si, W128, W8, i),
+                    MemorySize.Packed128_UInt8 => (si, W128, W8, u),
+                    MemorySize.Packed128_Int16 => (si, W128, W16, i),
+                    MemorySize.Packed128_UInt16 => (si, W128, W16, u),
+                    MemorySize.Packed128_Int32 => (si, W128, W32, i),
+                    MemorySize.Packed128_UInt32 => (si, W128, W32, u),
+                    MemorySize.Packed128_Int64 => (si, W128, W64, i),
+                    MemorySize.Packed128_UInt64 => (si, W128, W64, u),
+                    MemorySize.Packed128_Float32 => (si, W128, W32, f),
+                    MemorySize.Packed128_Float64 => (si, W128, W64, f),
+                    MemorySize.Packed256_Int8 => (si, W256, W8, i),
+                    MemorySize.Packed256_UInt8 => (si, W256, W8, u),
+                    MemorySize.Packed256_Int16 => (si, W256, W16, i),
+                    MemorySize.Packed256_UInt16 => (si, W256, W16, u),
+                    MemorySize.Packed256_Int32 => (si, W256, W32, i),
+                    MemorySize.Packed256_UInt32 => (si, W256, W32, u),
+                    MemorySize.Packed256_Int64 => (si, W256, W64, i),
+                    MemorySize.Packed256_UInt64 => (si, W256, W64, u),
+                    MemorySize.Packed256_Float32 => (si, W256, W32, f),
+                    MemorySize.Packed256_Float64 => (si, W256, W64, f),
                     _ => SegmentedIdentity.Empty
             };
     }

@@ -24,7 +24,7 @@ namespace Z0
 
         public static Option<NatSpanSig> Parse(string src)
         {
-            var parts = src.Split(TypeIdentity.SegSep);
+            var parts = src.Split(IDI.SegSep);
             if(parts.Length == 2)
             {
                 var part1 = parts[0];
@@ -32,9 +32,9 @@ namespace Z0
                 var n = ulong.MaxValue;
                 var w = int.MaxValue;                
                 var indicator = AsciSym.Question;
-                if(part1[0] == TypeIdentity.Nat)
+                if(part1[0] == IDI.Nat)
                 {
-                    var number =  part1.TakeAfter(TypeIdentity.Nat);
+                    var number =  part1.TakeAfter(IDI.Nat);
                     ulong.TryParse(number, out n);
                     
                     var digits = string.Empty;
@@ -88,6 +88,6 @@ namespace Z0
             => obj is NatSpanSig s && Equals(s);
         
         public override string ToString()
-            => concat(TypeIdentity.Nat, Length.ToString(), TypeIdentity.SegSep, CellWidth.ToString(), Indicator);
+            => concat(IDI.Nat, Length.ToString(), IDI.SegSep, CellWidth.ToString(), Indicator);
     }
 }

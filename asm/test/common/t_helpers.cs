@@ -16,11 +16,11 @@ namespace Z0
         /// </summary>
         public static OpIdentity WithGeneric(this OpIdentity src)
         {
-            if(src.TextComponents.Skip(1).First()[0] == OpIdentity.Generic)
+            if(src.TextComponents.Skip(1).First()[0] == IDI.Generic)
                 return src;
             else
                return OpIdentity.Define(
-                   concat(src.Identifier.LeftOf(OpIdentity.PartSep), OpIdentity.PartSep, OpIdentity.Generic,  src.Identifier.RightOf(OpIdentity.PartSep)));
+                   concat(src.Identifier.LeftOf(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOf(IDI.PartSep)));
         }
 
         /// <summary>
@@ -32,10 +32,10 @@ namespace Z0
             if(parts.Length < 2)
                 return src;
             
-            if(parts[1].PartText[0] != OpIdentity.Generic)
+            if(parts[1].Identifier[0] != IDI.Generic)
                 return src;
 
-            parts[1] = parts[1].WithText(parts[1].PartText.Substring(1));
+            parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
             return parts;
         }
 

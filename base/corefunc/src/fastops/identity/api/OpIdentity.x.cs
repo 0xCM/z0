@@ -95,7 +95,6 @@ namespace Z0
         public static OpIdentity WithImm8(this OpIdentity src, byte immval)
             => Identity.imm8Add(src,immval);
 
-
         /// <summary>
         /// Derives a signature from reflected method metadata
         /// </summary>

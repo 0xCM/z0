@@ -15,34 +15,6 @@ namespace Z0
 
     partial class Identity
     {
-        /// <summary>
-        /// Identifies the method
-        /// </summary>
-        /// <param name="m">The method to identify</param>
-        public static OpIdentity identify(MethodInfo src)
-        {            
-            if(src.IsOpenGeneric())
-                return Identity.generic(src);
-            else
-                return Identity.constructed(src);
-        }            
-
-        /// <summary>
-        /// Identifies the delegate
-        /// </summary>
-        /// <param name="m">The method to identify</param>
-        public static OpIdentity identify(Delegate m)
-            => identify(m.Method);
-
-        public static OpIdentity identify(MethodInfo src, NumericKind k)
-        {
-            var pt = k.ToClrType();
-            if(src.IsOpenGeneric() && pt.IsSome())
-                return identify(src.MakeGenericMethod(pt.Value));
-            else
-                return identify(src);
-        }
-
         public static string identify(ParameterInfo p)
         {
             var pt = p.ParameterType;
@@ -102,12 +74,12 @@ namespace Z0
             var argtypes = src.ParameterTypes(true).ToArray();
             var args = src.GetParameters();
 
-            id += PartSep;
+            id += IDI.PartSep;
 
             if(src.IsConstructedGenericMethod)
-                id += OpIdentity.Generic;                           
+                id += IDI.Generic;                           
 
-            id += string.Join(PartSep, Identity.parameters(src));
+            id += string.Join(IDI.PartSep, Identity.parameters(src));
 
             return OpIdentity.Define(id);
         }        
@@ -122,8 +94,8 @@ namespace Z0
                 return OpIdentity.Empty;
                         
             var id = src.OpName();
-            id += PartSep; 
-            id += Generic;
+            id += IDI.PartSep; 
+            id += IDI.Generic;
 
             var args = src.GetParameters();
             var argtypes = src.ParameterTypes(true).ToArray();
@@ -132,7 +104,7 @@ namespace Z0
             {
                 var argtype = argtypes[i];
                 if(i != 0 && last.IsNotBlank())
-                    id += PartSep;
+                    id += IDI.PartSep;
 
                 last = string.Empty;                    
 
@@ -141,9 +113,9 @@ namespace Z0
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = concat(TypeIdentity.Vector,argtype.Width().Format());
+                        last = concat(IDI.Vector,argtype.Width().Format());
                     else if(argtype.IsBlocked())
-                        last = concat(TypeIdentity.Block, argtype.Width().Format());
+                        last = concat(IDI.Block, argtype.Width().Format());
                     else if(argtype.IsSpan())
                         last = argtype.SpanKind().Format();
                 }
@@ -160,7 +132,7 @@ namespace Z0
             var args = Identity.parameters(method).ToArray();
             for(var i=0; i<args.Length; i++)            
             {
-                id += OpIdentity.PartSep;                    
+                id += IDI.PartSep;                    
                 id += args[i];
             }
             return OpIdentity.Define(id);

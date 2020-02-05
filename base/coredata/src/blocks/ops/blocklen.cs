@@ -12,15 +12,13 @@ namespace Z0
     using static nfunc;
 
     partial class DataBlocks
-    {
-        
-
+    {        
         /// <summary>
         /// Computes the number of cells that comprise a single 8-bit block
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8)]
         public static int blocklen<T>(N8 w, T t = default)
             where T : unmanaged
                 => Unsafe.SizeOf<T>();
@@ -30,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
         public static int blocklen<T>(N16 w, T t = default)
             where T : unmanaged
                 => 2/Unsafe.SizeOf<T>();
@@ -40,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
         public static int blocklen<T>(N32 w, T t = default)
             where T : unmanaged
                 => 4/Unsafe.SizeOf<T>();
@@ -50,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
         public static int blocklen<T>(N64 w, T t = default)
             where T : unmanaged
                 => 8/Unsafe.SizeOf<T>();
@@ -60,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
         public static int blocklen<T>(N128 w, T t = default)
             where T : unmanaged
                 => 16/Unsafe.SizeOf<T>();
@@ -70,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
         public static int blocklen<T>(N256 w, T t = default)
             where T : unmanaged
                 => 32/Unsafe.SizeOf<T>();
@@ -80,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
         public static int blocklen<T>(N512 w, T t = default)
             where T : unmanaged
                 => 64/Unsafe.SizeOf<T>();

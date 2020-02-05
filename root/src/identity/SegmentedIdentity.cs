@@ -12,45 +12,33 @@ namespace Z0
 
     public readonly partial struct SegmentedIdentity : ITypeIdentity<SegmentedIdentity>
     {        
-        public readonly FixedWidth TotalWidth;
+        public readonly char TypeIndicator;
 
-        public readonly FixedWidth SegWidth;
+        public readonly FixedWidth TypeWidth;
 
-        public readonly NumericIndicator Indicator;
+        public readonly NumericKind SegKind;  
 
         public string Identifier {get;}
 
-        public static SegmentedIdentity Empty => Define(FixedWidth.None, FixedWidth.None, NumericClass.None);
+        public static SegmentedIdentity Empty => Define('q', FixedWidth.None, NumericKind.None);
 
         [MethodImpl(Inline)]
-        public static SegmentedIdentity Define(FixedWidth total, FixedWidth segment, NumericClass @class)
-            => new SegmentedIdentity(total,segment,@class);
+        public static SegmentedIdentity Define(char indicator, FixedWidth typewidth, NumericKind segkind)
+            => new SegmentedIdentity(indicator, typewidth,segkind);
 
         [MethodImpl(Inline)]
-        public static SegmentedIdentity Define(FixedWidth total, FixedWidth segment, NumericIndicator indicator)
-            => new SegmentedIdentity(total,segment, indicator);
-
-        [MethodImpl(Inline)]
-        SegmentedIdentity(FixedWidth dominant, FixedWidth segwidth, NumericClass @class)
+        SegmentedIdentity(char indicator, FixedWidth typewidth, NumericKind segkind)
         {
-            this.TotalWidth = dominant;
-            this.SegWidth = segwidth;
-            this.Indicator = @class.ToNumericIndicator();
-            var empty = TotalWidth.IsNone() && SegWidth.IsNone() && Indicator.IsNone();
-            this.Identifier = empty ? string.Empty : $"{(int)TotalWidth}{TypeIdentity.SegSep}{(int)SegWidth}{(char)Indicator}";            
+            this.TypeIndicator = indicator;
+            this.TypeWidth = typewidth;
+            this.SegKind = segkind;
+            this.Identifier 
+                = (TypeWidth.IsNone() && segkind.IsNone()) 
+                ? string.Empty 
+                : $"{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.GetNumericIndicator()}";
+
         }
 
-        [MethodImpl(Inline)]
-        SegmentedIdentity(FixedWidth dominant, FixedWidth segwidth, NumericIndicator indicator)
-        {
-            this.TotalWidth = dominant;
-            this.SegWidth = segwidth;
-            this.Indicator = indicator;
-            var empty = TotalWidth.IsNone() && SegWidth.IsNone() && Indicator.IsNone();
-            this.Identifier = empty ? string.Empty : $"{(int)TotalWidth}{TypeIdentity.SegSep}{(int)SegWidth}{(char)Indicator}";
-        }
-
-            
         [MethodImpl(Inline)]
         public bool Equals(TypeIdentity src)
             => IdentityEquals(this, src);

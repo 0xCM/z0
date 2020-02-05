@@ -36,7 +36,7 @@ namespace Z0
     {
 
     }
-
+    
     public interface IOpIdentity : IIdentity
     {
 

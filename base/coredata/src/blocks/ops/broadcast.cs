@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
         public static void broadcast<T>(T data, in Block16<T> dst)
             where T : unmanaged        
                 => dst.data.Fill(data);
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
         public static void broadcast<T>(T data, in Block32<T> dst)
             where T : unmanaged        
                 => dst.data.Fill(data);
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
         public static void broadcast<T>(T data, in Block64<T> dst)
             where T : unmanaged        
                 => dst.data.Fill(data);
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
         public static void broadcast<T>(T data, in Block128<T> dst)
             where T : unmanaged        
                 => dst.data.Fill(data);
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
         public static void broadcast<T>(T data, in Block256<T> dst)
             where T : unmanaged        
                 => dst.data.Fill(data); 
@@ -74,10 +74,9 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
         public static void broadcast<T>(T data, in Block512<T> dst)
             where T : unmanaged        
                 => dst.data.Fill(data); 
-
     }
 }

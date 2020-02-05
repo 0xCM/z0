@@ -34,6 +34,7 @@ namespace Z0
 
         ZEDx7_RET,
 
+        // 00 48 ff e0 00 00 19
         JMP_RAX,
 
         MSDIAG,

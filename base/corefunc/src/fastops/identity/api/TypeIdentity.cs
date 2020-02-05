@@ -10,6 +10,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;
+    using static TypeIdentity;
 
     public static class TypeIdentities
     {
@@ -47,7 +48,7 @@ namespace Z0
         {
             if(arg.IsPointer)
                 return from id in arg.Unwrap().CommonIdentity()
-                let idptr = concat(id, TypeIdentity.Modifier, TypeIdentity.Pointer)
+                let idptr = concat(id, IDI.Modifier, IDI.Pointer)
                 select TypeIdentity.Define(idptr);    
             else
             {                        
@@ -69,11 +70,11 @@ namespace Z0
         }
 
         static Option<TypeIdentity> EnumIdentity(this Type t)
-            =>  TypeIdentity.Define($"{t.Name}{TypeIdentity.Modifier}{NumericType.signature(t.GetEnumUnderlyingType())}");
+            =>  TypeIdentity.Define($"{t.Name}{IDI.Modifier}{NumericType.signature(t.GetEnumUnderlyingType())}");
                 
         static Option<TypeIdentity> NatIdentity(this Type arg)
             => from v in arg.NatValue() 
-                let id = concat(TypeIdentity.Nat, v.ToString())
+                let id = concat(IDI.Nat, v.ToString())
                 select TypeIdentity.Define(id);
         
         static Option<TypeIdentity> PrimalIdentity(this Type arg)
@@ -94,28 +95,28 @@ namespace Z0
                 select TypeIdentity.Define(concat(info.kind.Format(), cell));            
         }
                                 
-        static Option<TypeIdentity> SegIndicator(this Type t)
+        static Option<char> SegIndicator(this Type t)
         {
             if(t.IsBlocked())
-                return TypeIdentity.Define($"{TypeIdentity.Block}");
+                return IDI.Block;
             else if(t.IsVector())
-                return TypeIdentity.Define($"{TypeIdentity.Vector}");
+                return IDI.Vector;
             else 
-                return none<TypeIdentity>();
+                return none<char>();
         }
 
         /// <summary>
         /// Defines an identity for a type-natural span type
         /// </summary>
         /// <param name="src">The type to examin</param>
-        public static Option<TypeIdentity> NatSpanIdentity(this Type src)
+        static Option<TypeIdentity> NatSpanIdentity(this Type src)
         {
             if(src.IsNatSpan())
             {
                 var typeargs = src.SuppliedTypeArgs().ToArray();                    
-                var text = TypeIdentity.NatSpan;
+                var text = IDI.NatSpan;
                 text += typeargs[0].NatValue();
-                text += TypeIdentity.SegSep;
+                text += IDI.SegSep;
                 text += NumericType.signature(typeargs[1]);
                 return TypeIdentity.Define(text);
             }
@@ -123,16 +124,21 @@ namespace Z0
                 return none<TypeIdentity>();
         }
 
+        //$"{(int)TotalWidth}{TypeIdentity.SegSep}{(int)SegWidth}{(char)Indicator}";
         static Option<TypeIdentity> SegmentedIdentity(this Type t)
-            => from i in t.SegIndicator()
-                let segwidth = t.Width()
+            =>  from i in t.SegIndicator()
+                let segwidth = t.Width()                
+                where segwidth.IsSome()
+                let segfmt = segwidth.Format()
                 let arg = t.GetGenericArguments().Single()
-                let argwidth = arg.Width()
+                let argwidth = arg.Width()                
+                where   argwidth.IsSome()
+                let argfmt = argwidth.Format()
                 let nk = arg.NumericKind()
-                where 
-                    segwidth.IsSome() && argwidth.IsSome() && nk.IsSome()
-                select 
-                    TypeIdentity.Define($"{i}{segwidth.Format()}{TypeIdentity.SegSep}{argwidth.Format()}{nk.Indicator().Format()}");
+                where  nk.IsSome()                
+                let nki = nk.Indicator().Format()
+                let identifer = concat(i,segfmt,IDI.SegSep,argfmt, nki)                
+                select TypeIdentity.Define(identifer);
 
         static readonly ITypeIdentityProvider DefaultProvider
             = new FunctionalProvider(arg => arg.CommonIdentity().ValueOrElse(() => TypeIdentity.Empty));

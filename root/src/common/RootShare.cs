@@ -16,6 +16,10 @@ namespace Z0
             => string.Equals(lhs, rhs, StringComparison.InvariantCultureIgnoreCase);        
 
         [MethodImpl(Inline)]
+        public static int IdentityCompare(IIdentity lhs, IIdentity rhs)
+            => lhs.Identifier.CompareTo(rhs.Identifier);
+
+        [MethodImpl(Inline)]
         public static bool IdentityEquals(IIdentity lhs, object rhs)
             => rhs is IIdentity i && IdentityEquals(lhs.Identifier, i.Identifier);        
 

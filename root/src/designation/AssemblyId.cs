@@ -24,7 +24,7 @@ namespace Z0
 
         TypeNats = 4,
 
-        CoreData = 8,
+        DataCore = 8,
 
         CoreFunc = 16,
 

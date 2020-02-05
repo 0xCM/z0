@@ -10,7 +10,7 @@ namespace Z0
 
     using static RootShare;
 
-    public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>
+    public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>
     {
         public readonly string Catalog;
 
@@ -18,7 +18,11 @@ namespace Z0
 
         public readonly OpIdentity OpId;
 
-        public readonly string UriText;
+        public string Identifier {get;}
+
+        [MethodImpl(Inline)]
+        public static string DefineUriText(string scheme, string catalog, string subject, string group, OpIdentity opid)
+            => $"{scheme}://{catalog}/{subject}?{group}{opid.Identifier}";
 
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
@@ -43,32 +47,27 @@ namespace Z0
             this.Subject = subject;
             this.OpId = opid;
             var groupPart = string.IsNullOrWhiteSpace(group) ? string.Empty : $"{group}#";
-            this.UriText = BuildUriText(scheme, catalog, subject,groupPart,opid);
-            //concat(scheme, colon(), fslash(), fslash(), Catalog, fslash(), Subject, fslash(), groupPart, OpId.Identifier);
+            this.Identifier = DefineUriText(scheme, catalog, subject,groupPart,opid);
         }
         
-        [MethodImpl(Inline)]
-        static string BuildUriText(string scheme, string catalog, string subject, string group, OpIdentity opid)
-            => $"{scheme}://{catalog}/{subject}?{group}{opid.Identifier}";
-
         public string Format()
-            => UriText;
+            => Identifier;
         
-        public override string ToString()
-            => Format();
-
         [MethodImpl(Inline)]
         public bool Equals(OpUri src)
-            => string.Compare(Format(), src.Format()) == 0;
-        
-        public override bool Equals(object obj)
-            => obj is OpUri x && Equals(x);
-         
+            => IdentityEquals(this, src);
+
+        public override string ToString()
+            => Identifier;
+ 
         public override int GetHashCode()
-            => HashCode.Combine(Catalog,Subject,OpId);
+            => IdentityHashCode(this);
+
+        public override bool Equals(object obj)
+            => IdentityEquals(this, obj);
 
         [MethodImpl(Inline)]
         public int CompareTo(OpUri other)
-            => this.UriText.CompareTo(other.UriText);
+            => IdentityCompare(this, other);
     }
 }

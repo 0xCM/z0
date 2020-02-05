@@ -12,14 +12,6 @@ namespace Z0
 
     partial class Identity
     {
-        /// <summary>
-        /// Produces an identifier of the form {width(nk)}{u | i | f} for a numeric type
-        /// </summary>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static TypeIdentity identify(NumericKind nk)
-            => TypeIdentity.Define(NumericType.signature(nk));
 
         [MethodImpl(Inline)]
         public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
@@ -28,10 +20,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Signature()}");   
-
-        [MethodImpl(Inline)]
-        public static TypeIdentity identify(Type t)
-            => TypeIdentities.identify(t);
 
         /// <summary>
         /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
@@ -51,8 +39,8 @@ namespace Z0
         {
             if(part.PartKind == IdentityPartKind.Scalar)
             {
-                return from k in NumericType.parseKind(part.PartText)
-                    let scalar = ScalarIdentity.Define((FixedWidth)k.Width(), k.Indicator())
+                return from k in NumericType.parseKind(part.Identifier)
+                    let scalar = ScalarIdentity.Define(k)
                     select scalar;
             }
             else
@@ -67,7 +55,7 @@ namespace Z0
         {
             if(part.PartKind == IdentityPartKind.Segment)
             {
-                if(SegmentedIdentity.TryParse(part.PartText, out var seg))
+                if(SegmentedIdentity.TryParse(part.Identifier, out var seg))
                     return seg;                
             }
 

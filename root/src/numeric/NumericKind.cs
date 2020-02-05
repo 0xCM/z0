@@ -108,6 +108,25 @@ namespace Z0
         /// Defines a classification that includes all kinds
         /// </summary>
         All = Integers | Floats,
+
+        /// <summary>
+        /// Defines a classification that includes kinds of width 8
+        /// </summary>
+        Width8 = U8 | I8,
+
+        /// <summary>
+        /// Defines a classification that includes kinds of width 16
+        /// </summary>
+        Width16 = U16 | I16,
+
+        /// <summary>
+        /// Defines a classification that includes kinds of width 32
+        /// </summary>
+        Width32 = U32 | I32 | F32,
+
+        /// Defines a classification that includes kinds of width 64
+        /// </summary>
+        Width64 = U64 | I64 | F64
     }
 
     partial class RootKindExtensions
@@ -180,46 +199,8 @@ namespace Z0
             => (NumericClass)((uint)kind >> 29);
 
         [MethodImpl(Inline)]
-        public static NumericKind SegmentKind(this SegmentedIdentity src)
-        {
-            const NumericIndicator i = NumericIndicator.Signed;
-            const NumericIndicator u = NumericIndicator.Unsigned;
-            const NumericIndicator f = NumericIndicator.Float;
+        public static NumericIndicator GetNumericIndicator(this NumericKind kind)
+            => kind.GetNumericClass().ToNumericIndicator();
 
-            switch(src.SegWidth)
-            {
-                case FixedWidth.W8:
-                    if(src.Indicator ==  i)
-                        return Z0.NumericKind.I8;
-                    else if(src.Indicator == u)
-                        return Z0.NumericKind.U8;
-                break;
-                case FixedWidth.W16:
-                    if(src.Indicator == i)
-                        return Z0.NumericKind.I16;
-                    else if(src.Indicator == u)
-                        return Z0.NumericKind.U16;
-                break;
-                case FixedWidth.W32:
-                    if(src.Indicator ==  i)
-                        return Z0.NumericKind.I32;
-                    else if(src.Indicator == u)
-                        return Z0.NumericKind.U32;
-                    else if(src.Indicator == f)
-                        return Z0.NumericKind.F32;
-                break;
-                case FixedWidth.W64:
-                    if(src.Indicator ==  i)
-                        return Z0.NumericKind.I64;
-                    else if(src.Indicator == u)
-                        return Z0.NumericKind.U64;
-                    else if(src.Indicator == f)
-                        return Z0.NumericKind.F64;
-                break;
- 
-            }            
- 
-            throw unsupported((src.Indicator, src.SegWidth));
-        }
     }
 }

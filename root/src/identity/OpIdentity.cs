@@ -32,7 +32,7 @@ namespace Z0
             => new OpIdentity(src);
 
         public static OpIdentity FromParts(params IdentityPart[] parts)
-            => new OpIdentity(string.Join(PartSep, parts.Select(x =>x.PartText)));
+            => new OpIdentity(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)
@@ -58,13 +58,13 @@ namespace Z0
         /// The unqualified operation name
         /// </summary>
         public string Name
-            => TakeBefore(Identifier, PartSep);
+            => TakeBefore(Identifier, IDI.PartSep);
 
         /// <summary>
         /// The moniker's suffix, if any
         /// </summary>
         string Suffix
-            => HasSuffix ? TakeAfter(Identifier,SuffixSep) : string.Empty;
+            => HasSuffix ? TakeAfter(Identifier, IDI.SuffixSep) : string.Empty;
 
         /// <summary>
         /// Indicates whether the moniker is emtpy
@@ -80,25 +80,25 @@ namespace Z0
         /// Specifies whether the operation was reified from a generic definition 
         /// </summary>
         public bool IsGeneric
-            => TakeAfter(Identifier,PartSep)[0] == Generic;
+            => TakeAfter(Identifier, IDI.PartSep)[0] == IDI.Generic;
 
         /// <summary>
         /// Specifies whether the operation is specialized for an immediate value
         /// </summary>
         public bool HasImm
-            => Suffix.Contains(Imm);
+            => Suffix.Contains(IDI.Imm);
 
         /// <summary>
         /// Specifies whether the moniker has a suffix
         /// </summary>
         public bool HasSuffix
-            => Identifier.Contains(SuffixSep);
+            => Identifier.Contains(IDI.SuffixSep);
 
         /// <summary>
         /// The moniker parts, as determined by part delimiters
         /// </summary>
         public IEnumerable<string> TextComponents
-            => Identifier.Split(PartSep, StringSplitOptions.RemoveEmptyEntries);
+            => Identifier.Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
 
         public override string ToString()
             => Identifier;
@@ -117,12 +117,12 @@ namespace Z0
         {
             get
             {
-                if(Identifier.Contains(SuffixSep))
+                if(Identifier.Contains(IDI.SuffixSep))
                 {
-                    var suffixes = TakeAfter(Identifier,SuffixSep);
+                    var suffixes = TakeAfter(Identifier,IDI.SuffixSep);
                     if(!string.IsNullOrWhiteSpace(suffixes))
                     {
-                        var seperated = suffixes.Split(SuffixSep, StringSplitOptions.RemoveEmptyEntries);
+                        var seperated = suffixes.Split(IDI.SuffixSep, StringSplitOptions.RemoveEmptyEntries);
                         foreach(var suffix in seperated)
                             yield return suffix;
                     }
@@ -134,7 +134,9 @@ namespace Z0
         {
             get
             {
-                 var parts = (Identifier.Contains(SuffixSep) ? TakeBefore(Identifier, SuffixSep) : Identifier).Split(PartSep, StringSplitOptions.RemoveEmptyEntries);
+                 var parts = (Identifier.Contains(IDI.SuffixSep) 
+                    ? TakeBefore(Identifier, IDI.SuffixSep) 
+                    : Identifier).Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
                  {
                      foreach(var part in parts)
                          yield return part;                     
@@ -157,12 +159,12 @@ namespace Z0
                         partkind = IdentityPartKind.Name;
                     else
                     {
-                        if(part.Contains(TypeIdentity.SegSep))
+                        if(part.Contains(IDI.SegSep))
                             partkind = IdentityPartKind.Segment;
                         else
                         {
                             partkind = IdentityPartKind.UserType;
-                            if(i == 1 && part[0] == OpIdentity.Generic && Char.IsDigit(TakeAfter(part, OpIdentity.Generic).First()))
+                            if(i == 1 && part[0] == IDI.Generic && Char.IsDigit(TakeAfter(part, IDI.Generic).First()))
                                 partkind = IdentityPartKind.Scalar;
                             else if(Char.IsDigit(part.First()))
                                 partkind = IdentityPartKind.Scalar;                                
@@ -213,20 +215,6 @@ namespace Z0
             }
             return found != -1 ? s.Substring(found + 1) : s;
         }
-
-        public const char PartSep = '_';
-
-        public const char SuffixSep = '-';
-
-        public const char Generic = 'g';
-
-        public const string Span = "span";
-
-        public const string Asm = "asm";
-
-        public const string Imm = "imm";
-
-        public const string ImmLocator = "-imm";
 
         public const string AsmLocator = "-asm";
 

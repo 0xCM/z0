@@ -11,9 +11,9 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class CoreData : AssemblyDesignator<CoreData>
+    public sealed class DataCore : AssemblyDesignator<DataCore>
     {
-        const AssemblyId Identity = AssemblyId.CoreData;
+        const AssemblyId Identity = AssemblyId.DataCore;
 
         public override AssemblyId Id 
             => Identity;

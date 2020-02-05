@@ -22,20 +22,19 @@ namespace Z0
         /// Defines a scalar type identity
         /// </summary>
         /// <param name="width">The scalar bit-width</param>
-        /// <param name="indicator"></param>
         [MethodImpl(Inline)]
-        public static ScalarIdentity Scalar(FixedWidth width, NumericIndicator indicator)
-            => ScalarIdentity.Define(width, indicator);
+        public static ScalarIdentity Scalar(NumericKind kind)
+            => ScalarIdentity.Define(kind);
 
         /// <summary>
         /// Defines a segmented type identity
         /// </summary>
-        /// <param name="total">The total bit-width of the type</param>
-        /// <param name="segwidth">The width of each segment</param>
-        /// <param name="indicator"></param>
+        /// <param name="indicator">Classifies the segmented type</param>
+        /// <param name="typewidth">The total bit-width of the type</param>
+        /// <param name="segkind">The segment kind</param>
         [MethodImpl(Inline)]
-        public static SegmentedIdentity Segmented(FixedWidth total, FixedWidth segwidth, NumericIndicator indicator)
-            => SegmentedIdentity.Define(total,segwidth,indicator);
+        public static SegmentedIdentity Segmented(char indicator, FixedWidth typewidth, NumericKind segkind)
+            => SegmentedIdentity.Define(indicator, typewidth,segkind);
 
         [MethodImpl(Inline)]
         public static TypeIdentity Define(string identifier)
@@ -83,23 +82,5 @@ namespace Z0
 
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
-
-        public const char SegSep = 'x';
-
-        public const char Vector = 'v';
-
-        public const char Block = 'b';
-
-        public const char Nat = 'n';
-
-        public const string Pointer = "ptr";
-
-        public const string Modifier = "~";
-
-        public const string MSpan = "span";
-
-        public const string ImSpan = "imspan";
-
-        public const string NatSpan = "nspan";
     }
 }

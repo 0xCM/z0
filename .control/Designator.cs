@@ -33,7 +33,7 @@ namespace Z0.Designators
             D.TypeNats.Designated,
             D.TypeNatsTest.Designated,            
             
-            D.CoreData.Designated,            
+            D.DataCore.Designated,            
             
             D.CoreFunc.Designated, 
             D.CoreFuncTest.Designated, 

@@ -52,7 +52,7 @@ namespace Z0
 
                 var imm = array(emitter.EmitImm());
                 if(imm.Length != 0)                
-                    AsmReports.CreateEmissionReport(id, imm, OpIdentity.Imm).Save().Require();
+                    AsmReports.CreateEmissionReport(id, imm, IDI.Imm).Save().Require();
                 
                 AsmReports.CreateMemberLocationReport(id, a).Save().Require();                
             }            

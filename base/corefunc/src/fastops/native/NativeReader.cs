@@ -138,23 +138,27 @@ namespace Z0
             && c.x == c.y 
             && d.x == d.y;
 
-        static ReadOnlySpan<byte> JmpRaxCheck => new byte[]{0x0, 0x48, 0xff, 0xe0, 0x0, 0x0, 0x19};
+        static ReadOnlySpan<byte> JmpRaxCheck7A => new byte[]{0x00, 0x00, 0x48, 0xff, 0xe0};
+        
+        static ReadOnlySpan<byte> JmpRaxCheck7B => new byte[]{0x0, 0x48, 0xff, 0xe0, 0x0, 0x0, 0x19};
 
         static ReadOnlySpan<byte> RetZedSbb => new byte[]{0x0c, 0, 0x19};
 
         [MethodImpl(Inline)]
-        static bit CheckJmpRax(Span<byte> lookback, out CaptureTermCode termcode, out int takeback)        
+        static bit CheckJmpRax7A(Span<byte> lookback, out CaptureTermCode termcode, out int takeback)        
         {            
-            const int ValidBytes = 4;
-            termcode = lookback.StartsWith(JmpRaxCheck) ? CaptureTermCode.JMP_RAX : CaptureTermCode.None;            
-            takeback = termcode != CaptureTermCode.None ? -JmpRaxCheck.Length - 1 - ValidBytes : 0;
+            const int ValidBytes = 5;
+            termcode = lookback.StartsWith(JmpRaxCheck7A) ? CaptureTermCode.JMP_RAX : CaptureTermCode.None;            
+            takeback = termcode != CaptureTermCode.None ? -JmpRaxCheck7A.Length - 1 - ValidBytes : 0;
             return termcode != CaptureTermCode.None;
         }
 
         [MethodImpl(Inline)]
-        static bit CheckRetZedSbb(Span<byte> lookback, out CaptureTermCode termcode)        
-        {
-            termcode = lookback.StartsWith(RetZedSbb) ? CaptureTermCode.RET_ZED_SBB : CaptureTermCode.None;            
+        static bit CheckJmpRax7B(Span<byte> lookback, out CaptureTermCode termcode, out int takeback)        
+        {            
+            const int ValidBytes = 4;
+            termcode = lookback.StartsWith(JmpRaxCheck7B) ? CaptureTermCode.JMP_RAX : CaptureTermCode.None;            
+            takeback = termcode != CaptureTermCode.None ? -JmpRaxCheck7B.Length - 1 - ValidBytes : 0;
             return termcode != CaptureTermCode.None;
         }
 
@@ -228,8 +232,11 @@ namespace Z0
                         return Capture(lookback, -2);
                 }
             
-                if(CheckJmpRax(lookback, out tc, out int takeback))
-                    return Capture(lookback, takeback);
+                if(CheckJmpRax7A(lookback, out tc, out int tb7a))
+                    return Capture(lookback, tb7a);
+
+                if(CheckJmpRax7B(lookback, out tc, out int tb7b))
+                    return Capture(lookback, tb7b);
 
                 if(offset >= Lookback_Count 
                     && (dst[offset - 6] == ZED) 

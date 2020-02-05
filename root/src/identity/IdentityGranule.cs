@@ -10,38 +10,33 @@ namespace Z0
 
     using static RootShare;
 
-    public readonly struct ScalarIdentity  : ITypeIdentity<ScalarIdentity>
-    {
-        [MethodImpl(Inline)]
-        public static ScalarIdentity Define(NumericKind kind)
-            => new ScalarIdentity(kind);
+    public readonly struct IdentityGranule : IIdentity<IdentityGranule>
+    {                
+        public string Identifier {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator string(ScalarIdentity src)
+        public static IdentityGranule Define(string atomic)
+            => new IdentityGranule(atomic);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(IdentityGranule src)
             => src.Identifier;
 
         [MethodImpl(Inline)]
-        public static bool operator==(ScalarIdentity a, ScalarIdentity b)
+        public static bool operator==(IdentityGranule a, IdentityGranule b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(ScalarIdentity a, ScalarIdentity b)
+        public static bool operator!=(IdentityGranule a, IdentityGranule b)
             => !a.Equals(b);
 
-        [MethodImpl(Inline)]
-        ScalarIdentity(NumericKind kind)
+        IdentityGranule(string atomic)
         {
-            this.NumericKind = kind;
-            this.Identifier = $"{kind.WidthKind().Format()}{NumericKind.GetNumericIndicator().Format()}";
+            this.Identifier = atomic;
         }
-     
-        public string Identifier {get;}            
-
-        public NumericKind NumericKind {get;}
-           
 
         [MethodImpl(Inline)]
-        public bool Equals(ScalarIdentity src)
+        public bool Equals(IdentityGranule src)
              => IdentityEquals(this, src);
 
         public override string ToString()
@@ -53,4 +48,5 @@ namespace Z0
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
     }
+
 }
