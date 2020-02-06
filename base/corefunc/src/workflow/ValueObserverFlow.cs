@@ -20,7 +20,7 @@ namespace Z0
                 yield return pipe.Flow(in value);
         }
 
-        IEnumerable<T> Flow(IValueProvider<T> src, IValueObserverPipe<T> pipe)
+        IEnumerable<T> Flow(IValueSource<T> src, IValueObserverPipe<T> pipe)
             => Flow(src.Emitter(),pipe);
 
         IEnumerable<T> IValueFlow<T>.Flow(IEnumerable<T> src, IValuePipe<T> pipe)

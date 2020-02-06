@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.CompilerServices;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -58,8 +59,12 @@ namespace Z0
             => AppMsg.Define($"{msg ?? "The source value is is not false"}", SeverityLevel.Error, caller, file, line);
         public static AppMsg CountMismatch(int lhs, int rhs, string caller, string file, int? line)
             => AppMsg.Define($"Count mismatch: {lhs} != {rhs}", SeverityLevel.Error, caller, file, line);
+        
         public static AppMsg EmptySourceSpan(string caller, string file, int? line)
             => AppMsg.Define($"The source span was empty", SeverityLevel.Error, caller, file, line);
+
+        public static AppMsg NonGenericMethod(MethodInfo t, string caller, string file, int? line)
+            => AppMsg.Define($"The method {t.DisplayName()} is nongeneric", SeverityLevel.Error, caller, file, line);
 
         public static AppMsg LengthMismatch(int lhs, int rhs, string caller, string file, int? line)
             => AppMsg.Define($"Length mismatch: {lhs} != {rhs}", SeverityLevel.Error, caller, file, line);

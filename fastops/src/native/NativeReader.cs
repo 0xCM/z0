@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -23,7 +20,7 @@ namespace Z0
         {            
             try
             {
-                var pSrc = Jit.jit(src);
+                var pSrc = jit(src);
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
                 var result = capture(pSrc, dst);            
@@ -41,7 +38,7 @@ namespace Z0
 
         static unsafe CapturedMember read(OpIdentity id, DynamicDelegate src, Span<byte> dst)
         {
-            var pSrc = Jit.jit(src);
+            var pSrc = jit(src);
             var pSrcCurrent = pSrc;
             var start = (ulong)pSrc;       
             var result =  capture(pSrc, dst);   
@@ -50,12 +47,13 @@ namespace Z0
             var code = dst.Slice(0, bytesRead).ToArray();
             return CapturedMember.Define(id, src, (start, end), code, result);
         }
-            
+
+
         static unsafe CapturedMember read(OpIdentity id, Delegate src, Span<byte> dst)
         {
             try
             {
-                var pSrc = Jit.jit(src);
+                var pSrc = jit(src);
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
                 var result = capture(pSrc, dst);
@@ -201,5 +199,27 @@ namespace Z0
             }
             return NativeCaptureInfo.Define((ulong)pSrc, (ulong)pSrcCurrent, CTC_BUFFER_OUT, lookback.ToArray());           
         }
+
+        [MethodImpl(Inline)]
+        static byte* jit(MethodInfo m)
+        {   
+            RuntimeHelpers.PrepareMethod(m.MethodHandle);
+            var ptr = m.MethodHandle.GetFunctionPointer();
+            return (byte*)ptr.ToPointer();
+        }    
+
+        [MethodImpl(Inline)]
+        static byte* jit(DynamicDelegate d)
+        {   
+            RuntimeHelpers.PrepareDelegate(d.DynamicOp);
+            return d.GetDynamicPointer().BytePtr;
+        }
+
+        [MethodImpl(Inline)]
+        static byte* jit(Delegate d)
+        {   
+            RuntimeHelpers.PrepareDelegate(d);
+            return (byte*)d.Method.MethodHandle.GetFunctionPointer();
+        }    
     }
 }

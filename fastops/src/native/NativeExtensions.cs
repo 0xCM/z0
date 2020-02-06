@@ -35,5 +35,19 @@ namespace Z0
             => from code in src
                 where code.ParameterCount() == count
                 select code;
+
+
+        [MethodImpl(Inline)]
+        public static ICaptureStateSink ToCaptureSink(this IPointSink<CaptureState> sink)
+            => CaptureStateSink.From(sink);
+
+        [MethodImpl(Inline)]
+        public static CaptureExchange CreateExchange(this ICaptureControl control)
+            => NativeServices.CaptureExchange(control);
+
+        [MethodImpl(Inline)]
+        public static CaptureExchange CreateExchange(this ICaptureControl control, Span<byte> target, Span<byte> state)
+            => NativeServices.CaptureExchange(control, target, state);
+
     }
 }

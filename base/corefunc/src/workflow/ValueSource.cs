@@ -22,7 +22,7 @@ namespace Z0
     /// Characterizes a value emission facility
     /// </summary>
     /// <typeparam name="T">The emission type</typeparam>
-    public interface IValueProvider<T> : IDataProvider
+    public interface IValueSource<T> : IDataSource
         where T : struct
     {
         
@@ -31,19 +31,19 @@ namespace Z0
         IEnumerable<T> Values
             => Emitter();
 
-        IEnumerable<object> IDataProvider.Data
+        IEnumerable<object> IDataSource.Data
             => Values.Cast<object>();
     }
 
-    readonly struct ValueProvider<T> : IValueProvider<T>
+    readonly struct ValueSource<T> : IValueSource<T>
         where T : struct
     {
         [MethodImpl(Inline)]
-        public ValueProvider(ValueEmitter<T> emitter)
+        public ValueSource(ValueEmitter<T> emitter)
             => Emitter = emitter;
 
         [MethodImpl(Inline)]
-        public ValueProvider(IEnumerable<T> stream)
+        public ValueSource(IEnumerable<T> stream)
             => Emitter = () => stream;
 
         public ValueEmitter<T> Emitter {get;}

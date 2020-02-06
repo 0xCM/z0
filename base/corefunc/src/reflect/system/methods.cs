@@ -194,11 +194,48 @@ namespace Z0
             => src.Where(t => t.IsPublic);
 
         /// <summary>
+        /// For a generic method, retrieves the definition; otherwis, an error is raised
+        /// </summary>
+        /// <param name="src">The source method</param>
+        public static MethodInfo GenericDefintion(this MethodInfo src)
+        {
+            if(src.IsNonGeneric())
+                throw Errors.NonGenericMethod(src);
+            else 
+                return src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();
+        }
+
+        /// <summary>
+        /// Reifies a 1-parameter generic method with a parametric type argument
+        /// </summary>
+        /// <param name="src">The source method</param>
+        /// <param name="args">The type arguments</param>
+        public static MethodInfo CloseGenericMethod<T>(this MethodInfo src)
+            => src.GenericDefintion().MakeGenericMethod(typeof(T));
+
+        /// <summary>
+        /// Reifies a 2-parameter generic method with a parametric type argument
+        /// </summary>
+        /// <param name="src">The source method</param>
+        /// <param name="args">The type arguments</param>
+        public static MethodInfo CloseGenericMethod<T1,T2>(this MethodInfo src)
+            => src.GenericDefintion().MakeGenericMethod(typeof(T1), typeof(T2));
+
+        /// <summary>
+        /// Reifies a generic method with supplied type arguments
+        /// </summary>
+        /// <param name="src">The source method</param>
+        /// <param name="args">The type arguments</param>
+        public static MethodInfo CloseGenericMethod(this MethodInfo src, params Type[] args)
+            => src.GenericDefintion().MakeGenericMethod(args);
+
+        /// <summary>
         /// For the generic methods in a stream, selects their respective definitions
         /// </summary>
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> GenericMethodDefinitions(this IEnumerable<MethodInfo> src)
             => src.Where(m => m.IsOpenGeneric() || m.IsClosedGeneric()).Select(m => m.GetGenericMethodDefinition()).Distinct();
+
         public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type arg)
             => from def in src.GenericMethodDefinitions()
                select def.MakeGenericMethod(arg);

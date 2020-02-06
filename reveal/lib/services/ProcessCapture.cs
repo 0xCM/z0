@@ -54,7 +54,7 @@ namespace Z0
         public IEnumerable<AsmFunction> CaptureFunctions(IEnumerable<MethodInfo> methods)
         {
             foreach(var m in methods)
-                Jit.jitsafe(m);
+                Jit.jit(m);
 
             foreach(var m in methods)
             {

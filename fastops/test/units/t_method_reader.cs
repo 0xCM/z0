@@ -15,7 +15,7 @@ namespace Z0
     using static NativeTestCases;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     
-    public sealed class t_native_reader : t_fastop<t_native_reader>
+    public sealed class t_native_reader : t_fastops<t_native_reader>
     {
         protected override bool TraceEnabled => true;
         

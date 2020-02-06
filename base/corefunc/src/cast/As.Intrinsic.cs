@@ -10,6 +10,15 @@ namespace Z0
     
     using static zfunc;
 
+
+    partial class xfunc
+    {
+        [MethodImpl(Inline)]
+        public static unsafe T* ToPointer<T>(this IntPtr src)
+            where T : unmanaged
+                => (T*)src.ToPointer();
+    }
+    
     partial class As
     {
         /// <summary>

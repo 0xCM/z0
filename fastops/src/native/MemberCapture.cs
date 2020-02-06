@@ -11,39 +11,17 @@ namespace Z0
     using static zfunc;
     using static CaptureTermCode;
 
-    public interface IMemberCapture
-    {
-        CapturedMember Capture(OpIdentity id, MethodInfo src, Span<byte> dst);
-
-        CapturedMember Capture(OpIdentity id, DynamicDelegate src, Span<byte> dst);
-
-        CapturedMember Capture(OpIdentity id, Delegate src, Span<byte> dst);
-
-        void Capture(Delegate src, INativeWriter dst) 
-            => dst.WriteData(Capture(src.Identify(), src, dst.TakeBuffer()));           
-
-        void Capture(MethodInfo src, INativeWriter dst)
-            => dst.WriteData(Capture(src.Identify(), src,dst.TakeBuffer()));
-
-        void Capture(OpIdentity id, MethodInfo src, INativeWriter dst)
-            => dst.WriteData(Capture(id, src, dst.TakeBuffer()));
-    }
 
     unsafe readonly struct MemberCapture : IMemberCapture
     {
-        /// <summary>
-        /// Runs the jitter on a reflected method and captures the emitted binary assembly data
-        /// </summary>
-        /// <param name="src">The method to read</param>
-        /// <param name="dst">The target buffer</param>
-        public CapturedMember Capture(OpIdentity id, MethodInfo src, Span<byte> dst)
-        {            
+        public CapturedMember Capture(OpIdentity id, MethodInfo src, in CaptureExchange exchange)
+        {
             try
             {
                 var pSrc = Jit.jit(src);
-                var pSrcCurrent = pSrc;            
+                var dst = exchange.TargetBuffer;
                 var start = (ulong)pSrc;
-                var result = capture(pSrc, dst);            
+                var result = capture(pSrc, exchange);            
                 var end = result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
@@ -54,38 +32,38 @@ namespace Z0
                 errout(e);
                 return CapturedMember.Empty;                    
             }
+
         }
 
-        /// <summary>
-        /// Captures native code produced by the JIT for a dynamic delegate
-        /// </summary>
-        /// <param name="src">The dynamic delegate</param>
-        /// <param name="dst">The target buffer</param>
-        public CapturedMember Capture(OpIdentity id, DynamicDelegate src, Span<byte> dst)
+        public CapturedMember Capture(OpIdentity id, DynamicDelegate src, in CaptureExchange exchange)
         {
-            var pSrc = Jit.jit(src);
-            var pSrcCurrent = pSrc;
-            var start = (ulong)pSrc;       
-            var result =  capture(pSrc, dst);   
-            var end = result.End;
-            var bytesRead = (int)(end - start);
-            var code = dst.Slice(0, bytesRead).ToArray();
-            return CapturedMember.Define(id, src, (start, end), code, result);
+            try
+            {
+                var pSrc = Jit.jit(src).Ptr;
+                var dst = exchange.TargetBuffer;
+                var start = (ulong)pSrc;       
+                var result =  capture(pSrc, exchange);   
+                var end = result.End;
+                var bytesRead = (int)(end - start);
+                var code = dst.Slice(0, bytesRead).ToArray();
+                return CapturedMember.Define(id, src, (start, end), code, result);
+
+            }
+            catch(Exception e)
+            {
+                errout(e);
+                return CapturedMember.Empty;
+            }
         }
-            
-        /// <summary>
-        /// Runs the jitter on a delegate and captures the emitted binary assembly data
-        /// </summary>
-        /// <param name="m">The method to read</param>
-        /// <param name="dst">The target buffer</param>
-        public CapturedMember Capture(OpIdentity id, Delegate src, Span<byte> dst)
+
+        public CapturedMember Capture(OpIdentity id, Delegate src, in CaptureExchange exchange)
         {
             try
             {
                 var pSrc = Jit.jit(src);
-                var pSrcCurrent = pSrc;            
+                var dst = exchange.TargetBuffer;
                 var start = (ulong)pSrc;
-                var result = capture(pSrc, dst);
+                var result = capture(pSrc, exchange);
                 var end = result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
@@ -98,7 +76,7 @@ namespace Z0
             }
         }
 
-        NativeCaptureInfo capture(byte* pSrc, Span<byte> dst)
+        NativeCaptureInfo capture(IntPtr src, in CaptureExchange exchange)
         {
             const byte ZED = 0;
             const byte RET = 0xc3;
@@ -106,6 +84,9 @@ namespace Z0
             const byte SBB = 0x19;
             const int Lookback_Count = 16;
  
+            var pSrc = src.ToPointer<byte>();
+            var dst = exchange.TargetBuffer;
+
             var maxcount = dst.Length - 1;
             var pSrcCurrent = pSrc;    
             var offset = 0;
@@ -124,6 +105,7 @@ namespace Z0
             {
                 byte code = 0;                
                 dst[offset++] = Read(pSrcCurrent++, ref code);  
+                exchange.Junction.Accept((offset, (ulong)pSrcCurrent, code), exchange);
                 
                 var lookstart = offset < Lookback_Count ? 0 : offset - Lookback_Count;
                 lookback = dst.Slice(lookstart, Lookback_Count);

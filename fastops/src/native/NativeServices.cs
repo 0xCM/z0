@@ -24,6 +24,26 @@ namespace Z0
         public static IMemberCapture MemberCapture()
             => default(MemberCapture);
 
+        [MethodImpl(Inline)]
+        public static ICaptureControl CaptureControl()
+            => Z0.CaptureControl.Create();
+
+        [MethodImpl(Inline)]
+        public static ICaptureControl CaptureControl(IPointSink<CaptureState> sink)
+            => Z0.CaptureControl.Create(sink.ToCaptureSink());
+
+        [MethodImpl(Inline)]
+        public static ICaptureControl CaptureControl(PointReceiver<CaptureState> receiver)
+            => CaptureControl(receiver.ToPointSink());
+
+        [MethodImpl(Inline)]
+        public static CaptureExchange CaptureExchange(ICaptureControl control, Span<byte> target, Span<byte> state)
+            => Z0.CaptureExchange.Define(control, target, state);
+
+        [MethodImpl(Inline)]
+        public static CaptureExchange CaptureExchange(ICaptureControl control)
+            => CaptureExchange(control, new byte[NativeServices.DefaultBufferLen], new byte[NativeServices.DefaultBufferLen]);
+
         /// <summary>
         /// Allocates a caller-disposed native text writer
         /// </summary>

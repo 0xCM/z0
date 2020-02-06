@@ -8,6 +8,7 @@ namespace Z0
 
     using System.Runtime.Serialization;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static zfunc;
 
@@ -48,6 +49,9 @@ namespace Z0
         public static AppException EmptySourceSpan([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(ErrorMessages.EmptySourceSpan(caller,file,line));
 
+        public static AppException NonGenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.NonGenericMethod(method,caller,file,line));
+
         public static AppException KindUnsupported<T>(T kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : Enum
                 => AppException.Define(ErrorMessages.KindUnsupported(kind, caller, file, line));
@@ -86,6 +90,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static void Throw(string reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw AppException.Define(reason, caller,file,line);
+
 
         [MethodImpl(NotInline)]
         public static bool ThrowInvariantFailure(string reason)

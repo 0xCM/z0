@@ -24,8 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe DynamicPointer ToDynamicPtr(this DynamicDelegate src)
         {
-            var ptr = src.DynamicMethod.NativePointer();
-            return new DynamicPointer(src, (byte*)ptr.ToPointer());
+            return new DynamicPointer(src, src.DynamicMethod.NativePointer());
         }
 
         /// <summary>
@@ -36,8 +35,7 @@ namespace Z0
         public static unsafe DynamicPointer ToDynamicPtr<D>(this DynamicDelegate<D> src)
             where D : Delegate
         {
-            var ptr = src.DynamicMethod.NativePointer();
-            return new DynamicPointer(src, (byte*)ptr.ToPointer());
+            return new DynamicPointer(src, src.DynamicMethod.NativePointer());
         }
 
         public static ILGenerator EmitImmLoad(this ILGenerator g, byte imm)

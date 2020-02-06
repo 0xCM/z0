@@ -32,11 +32,7 @@ namespace Z0
         public static bool Attributed<T>(this MemberInfo m) 
             where T : Attribute
                 => System.Attribute.IsDefined(m, typeof(T));
-
-        // public static IEnumerable<MethodInfo> Attributed<A>(this IEnumerable<MethodInfo> src)
-        //     where A : Attribute
-        //         => src.Where(t => t.Attributed<A>());
-
+        
         /// <summary>
         /// Retrieves the value of an attached attribute paired with the subject
         /// </summary>

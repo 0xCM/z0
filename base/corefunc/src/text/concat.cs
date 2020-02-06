@@ -161,70 +161,17 @@ partial class zfunc
     public static string concat(char c1, char c2, string s1)
         => $"{c1}{c2}{s1}";
 
-    /// <summary>
-    /// Concatenates two strings and a character
-    /// </summary>
-    /// <param name="s1">The first string</param>
-    /// <param name="s2">The second string</param>
-    /// <param name="c1">The character</param>
-    [MethodImpl(Inline)]
-    public static string concat(string s1, string s2, char c1)
-        => $"{s1}{s2}{c1}";
-
-    /// <summary>
-    /// Concatenates two strings and two characters
-    /// </summary>
-    /// <param name="s1">The first string</param>
-    /// <param name="s2">The second string</param>
-    /// <param name="c1">The first character</param>
-    /// <param name="c2">The second character</param>
-    [MethodImpl(Inline)]
-    public static string concat(string s1, string s2, char c1, char c2)
-        => $"{s1}{s2}{c1}{c2}";
-
-    /// <summary>
-    /// Concatenates two strings, a character and a string
-    /// </summary>
-    /// <param name="s1">The first string</param>
-    /// <param name="s2">The second string</param>
-    /// <param name="c1">The first character</param>
-    /// <param name="s3">The third string</param>
-    [MethodImpl(Inline)]
-    public static string concat(string s1, string s2, char c1, string s3)
-        => $"{s1}{s2}{c1}{s3}";
-
     [MethodImpl(Inline)]
     public static string concat(char c1, string s1, char c2, string s2, char c3)
         => $"{c1}{s1}{c2}{s2}{c3}";
 
-    /// <summary>
-    /// Concatenates 3 (char,string) pairs
-    /// </summary>    
     [MethodImpl(Inline)]
     public static string concat(char c1, string s1, char c2, string s2, char c3, string s3)
         => $"{c1}{s1}{c2}{s2}{c3}{s3}";
 
-    /// <summary>
-    /// Concatenates 3 (string,char) pairs
-    /// </summary>
     [MethodImpl(Inline)]
-    public static string concat(string s1, char c1, string s2, char c2, string s3, char c3)
-        => $"{s1}{c1}{s2}{c2}{s3}{c3}";
-
-    /// <summary>
-    /// Concatenates 4 (string,char) pairs
-    /// </summary>
-    [MethodImpl(Inline)]
-    public static string concat(string s1, char c1, string s2, char c2, string s3, char c3, string s4, char c4)
-        => $"{s1}{c1}{s2}{c2}{s3}{c3}{s4}{c4}";
-
-    /// <summary>
-    /// Concatenates 4 (char,string) pairs
-    /// </summary>
-    [MethodImpl(Inline)]
-    public static string concat(char c1, string s1, char c2, string s2, char c3, string s3, char c4, string s4)
-        => $"{c1}{s1}{c2}{s2}{c3}{s3}{c4}{s4}";
-
+    public static string concat(char c1, string s1, char c2, string s2, char c3, string s3, char c4, params string[] more)
+        => $"{c1}{s1}{c2}{s2}{c3}{s3}{c4}" + string.Join(' ', more);
     
     [MethodImpl(Inline)]
     public static string concat(char c1, char c2, char c3, params string[] items)
@@ -235,25 +182,44 @@ partial class zfunc
         => $"{c1}{c2}{c3}{c4}"  + concat(items);
 
     [MethodImpl(Inline)]
-    public static string concat(string s1, char c1, char c2, char c3, params string[] items)
-        => $"{s1}{c1}{c2}{c3}" + concat(items);
-
-    [MethodImpl(Inline)]
-    public static string concat(string s1, char c1, char c2, string s2)
-        => $"{s1}{c1}{c2}{s2}";
-
-
-    [MethodImpl(Inline)]
-    public static string concat(string s1, char c1, params string[] items)
-        => $"{s1}{c1}" + concat(items);
-
-    [MethodImpl(Inline)]
     public static string concat(char c1, string s, char c2, params string[] items)
         => $"{c1}{s}{c2}" + concat(items);
 
     [MethodImpl(Inline)]
     public static string concat(char c1, char c2, string s, char c3, params string[] items)
         => $"{c1}{c2}{s}{c3}" + concat(items);
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, char c1, char c2, string s2)
+        => $"{s1}{c1}{c2}{s2}";
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, char c1, params string[] items)
+        => $"{s1}{c1}" + concat(items);
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, char c1, char c2, char c3, params string[] items)
+        => $"{s1}{c1}{c2}{c3}" + concat(items);
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, char c1, string s2, char c2, params string[] more)
+        => $"{s1}{c1}{s2}{c2}" + string.Join(' ',more);
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, char c1, string s2, char c2, string s3, char c3, string s4, char c4, params string[] more)
+        => $"{s1}{c1}{s2}{c2}{s3}{c3}{s4}{c4}" + string.Join(' ', more);
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, string s2, char c1)
+        => $"{s1}{s2}{c1}";
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, string s2, char c1, char c2)
+        => $"{s1}{s2}{c1}{c2}";
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, string s2, char c1, string s3)
+        => $"{s1}{s2}{c1}{s3}";
 
     [MethodImpl(Inline)]
     public static string concat(string s1, params char[] items)

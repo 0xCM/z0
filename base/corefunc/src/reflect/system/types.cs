@@ -949,5 +949,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T CreateInstance<T>(this Type t, params object[] args)
             => (T)Activator.CreateInstance(t, args);
+
+        public static Option<Type> CloseGenericType(this Type model, params Type[] args)
+            => model.GenericDefinition().TryMap(t => t.MakeGenericType(args));
+
     }
 }

@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-
     using System.Runtime.CompilerServices;
+    
     using static zfunc;
 
-    public sealed class t_moniker : t_fastop<t_moniker>
+    public abstract class t_fastops<U> : UnitTest<U>
+        where U : t_fastops<U>
     {
-
-
 
     }
 

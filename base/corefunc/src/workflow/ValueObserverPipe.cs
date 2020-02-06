@@ -11,8 +11,6 @@ namespace Z0
 
     using static zfunc;
 
-    public delegate void ValueReceiver<T>(in T src)
-        where T : struct;
 
     public delegate ref readonly T ValueRelay<T>(in T src)
         where T : struct;
@@ -25,7 +23,7 @@ namespace Z0
     public interface IValueObserverPipe<T> : IValueObserverPipe, IValuePipe<T>
         where T : struct
     {
-        ValueReceiver<T> Receiver {get;}
+        PointReceiver<T> Receiver {get;}
 
         [MethodImpl(Inline)]
         ref readonly T Flow(in T src)
@@ -52,13 +50,13 @@ namespace Z0
         where T : struct
     {
         [MethodImpl(Inline)]
-        public static ValueObserverPipe<T> Create(ValueReceiver<T> receiver)
+        public static ValueObserverPipe<T> Create(PointReceiver<T> receiver)
             => new ValueObserverPipe<T>(receiver);
                 
         [MethodImpl(Inline)]
-        ValueObserverPipe(ValueReceiver<T> receiver)
+        ValueObserverPipe(PointReceiver<T> receiver)
             => this.Receiver = receiver;
         
-        public readonly ValueReceiver<T> Receiver {get;}
+        public readonly PointReceiver<T> Receiver {get;}
     }
 }

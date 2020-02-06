@@ -42,7 +42,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a data emission facility
     /// </summary>
-    public interface IDataProvider
+    public interface IDataSource
     {
         IEnumerable<object> Data {get;}
     }

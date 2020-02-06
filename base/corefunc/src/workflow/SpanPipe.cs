@@ -49,11 +49,11 @@ namespace Z0
             => Flow(source.Data, pipe);
     }
 
-    public interface ISpanSource<T> : IDataProvider
+    public interface ISpanSource<T> : IDataSource
     {
         new Span<T> Data {get;}   
 
-        IEnumerable<object> IDataProvider.Data
+        IEnumerable<object> IDataSource.Data
             => Data.ToArray().Cast<object>();
     }
 
