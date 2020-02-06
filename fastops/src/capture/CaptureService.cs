@@ -14,7 +14,6 @@ namespace Z0
 
     unsafe readonly struct CaptureService : ICaptureService
     {
-
         public CapturedMember Capture(OpIdentity id, MethodInfo src, in CaptureExchange exchange)
         {
             try

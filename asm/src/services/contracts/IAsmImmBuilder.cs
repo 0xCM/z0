@@ -9,12 +9,10 @@ namespace Z0
     using System.Reflection;
 
     using Z0.AsmSpecs;
-
     
     public interface IAsmImmBuilder : IAsmService
     {
         AsmFunction CreateFunction(MethodInfo method, byte imm);
-
     }
 
     public interface IAsmImmBuilder<D> : IAsmImmBuilder
@@ -22,5 +20,4 @@ namespace Z0
     {
 
     }
-
 }

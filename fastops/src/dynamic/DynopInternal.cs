@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Runtime.Intrinsics.X86;
-    using System.Runtime.InteropServices;
     
     using static zfunc;    
     using static As;

@@ -69,5 +69,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(OpUri other)
             => IdentityCompare(this, other);
+
+        public int CompareTo(IIdentity other)
+            => IdentityCompare(this, other);
+
     }
 }

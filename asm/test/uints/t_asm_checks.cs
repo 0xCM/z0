@@ -22,22 +22,22 @@ namespace Z0
         internal void RunExplicit()
         {
 
-            Workflow();
+            CheckImm();
+            CheckCapture();
+            RunPipe();
+            add_megacheck();
+            //Run50();
+            //vadd_check();
 
         }
 
         void CheckImm()
         {
-            using var buffer = Context.ExecBuffer();
+            using var buffer = OS.AllocExec(512);
 
             CheckBinaryImm<uint>(buffer, n128, nameof(dinx.vblend4x32), (byte)Blend4x32.LRLR);    
             CheckBinaryImm<uint>(buffer, n256, nameof(dinx.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
             CheckUnaryImm<ushort>(buffer,n256, nameof(dinx.vbsll), 3);        
-
-        }
-
-        void Workflow()
-        {
 
         }
 
@@ -152,7 +152,7 @@ namespace Z0
             TraceCaller($"Trigger activate {activations} times");
         }
 
-        void CheckBinaryImm(IAsmExecBuffer buffer)
+        void CheckBinaryImm(ExecBufferToken buffer)
         {
             var w = n256;
             var name = nameof(dinx.vblend8x16);
@@ -175,7 +175,7 @@ namespace Z0
             Claim.eq(z1,z3);
         }
 
-        void CheckBinaryImm<T>(IAsmExecBuffer buffer, N128 w, string name, byte imm)
+        void CheckBinaryImm<T>(ExecBufferToken buffer, N128 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = ImmOpProviders.provider(HK.vk128<T>(), HK.opfk(n2));
@@ -197,7 +197,7 @@ namespace Z0
             Claim.eq(z1,z2);
         }
 
-        void CheckBinaryImm<T>(IAsmExecBuffer buffer, N256 w, string name, byte imm)
+        void CheckBinaryImm<T>(ExecBufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opfk(n2));
@@ -219,7 +219,7 @@ namespace Z0
             Claim.eq(z1,z2);
         }
 
-        void CheckUnaryImm<T>(IAsmExecBuffer buffer, N256 w, string name, byte imm)
+        void CheckUnaryImm<T>(ExecBufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
@@ -236,7 +236,7 @@ namespace Z0
             Trace(capture.Id);
             iter(capture.Instructions, i => Trace(i));  
 
-            var f = buffer.UnaryOp<Fixed256>(capture.Code);
+            var f = ExecBuffer.UnaryOp<Fixed256>(capture.Code);
             var z2 = f(x.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -244,8 +244,8 @@ namespace Z0
 
         void Run50()
         {
-            using var lBuffer = Context.ExecBuffer();
-            using var rBuffer = Context.ExecBuffer();
+            var lbuffer = LeftBuffer;
+            var rbuffer = RightBuffer;
             var id = AssemblyId.GMath;
             var direct = Context.CodeArchive(id, nameof(math));
             var generic = Context.CodeArchive(id, nameof(gmath));
@@ -256,26 +256,26 @@ namespace Z0
                 {
                     var af = a.ToFixed<Fixed8>();
                     var bf = a.ToFixed<Fixed8>();
-                    CheckUnaryOp(lBuffer, af, rBuffer, bf);
+                    CheckUnaryOp(LeftBuffer, af, RightBuffer, bf);
                 }
                 if(a.AcceptsParameter(NumericKind.U32))
                 {
                     var af = a.ToFixed<Fixed32>();
                     var bf = a.ToFixed<Fixed32>();
-                    CheckUnaryOp(lBuffer, af, rBuffer, bf);
+                    CheckUnaryOp(LeftBuffer, af, RightBuffer, bf);
                 }
                 else if(a.AcceptsParameter(NumericKind.U64))
                 {
                     var af = a.ToFixed<Fixed64>();
                     var bf = a.ToFixed<Fixed64>();
-                    CheckUnaryOp(lBuffer, af, rBuffer, bf);
+                    CheckUnaryOp(LeftBuffer, af, RightBuffer, bf);
                 }
 
             }
 
         }
 
-        void RunCheckers(IAsmExecBuffer buffer)
+        void RunCheckers(ExecBufferToken buffer)
         {
             var id = AssemblyId.GMath;
             var subject = nameof(math);
@@ -283,18 +283,18 @@ namespace Z0
             RunChecker(id, subject, nameof(math.add), buffer, CheckBinaryFunc);
         }
 
-        void CheckUnaryOp<T>(IAsmExecBuffer buffer, AsmCode src, Func<T,T> f)
+        void CheckUnaryOp<T>(ExecBufferToken buffer, AsmCode src, Func<T,T> f)
             where T : unmanaged, IFixed
 
         {            
             TraceCaller($"Checking {src.Id}");
-            var g = (FixedFunc<T,T>)Dynop.UnaryOp(src.Id, buffer.Load(src),typeof(FixedFunc<T,T>),typeof(T));
+            var g = (FixedFunc<T,T>)buffer.Load(src).UnaryOp(src.Id, typeof(FixedFunc<T,T>),typeof(T));
             var points = Random.Fixed<T>().Take(RepCount);
             iter(points, x => Claim.eq(f(x), g(x)));            
             
         }   
 
-        void RunChecker(AssemblyId id, string subject, string function, IAsmExecBuffer buffer, Action<IAsmExecBuffer,AsmCode> checker)
+        void RunChecker(AssemblyId id, string subject, string function, ExecBufferToken buffer, Action<ExecBufferToken,AsmCode> checker)
         {
             Trace($"Checking {function} group");
             var archive = Context.CodeArchive(id, subject);
@@ -306,20 +306,24 @@ namespace Z0
 
         }
         
-        void CheckUnaryOp<T>(IAsmExecBuffer lbuffer, in FixedAsm<T> a, IAsmExecBuffer rbuffer, in FixedAsm<T> b)
+        void CheckUnaryOp<T>(ExecBufferToken lbuffer, in FixedAsm<T> a, ExecBufferToken rbuffer, in FixedAsm<T> b)
             where T : unmanaged, IFixed
         {            
             TraceCaller($"Checking {a.Id} == {b.Id} match");
             
-            var f = (FixedFunc<T,T>)Dynop.UnaryOp(a.Id, lbuffer.Load(a.Code),typeof(FixedFunc<T,T>),typeof(T));
-            var g = (FixedFunc<T,T>)Dynop.UnaryOp(b.Id, rbuffer.Load(b.Code),typeof(FixedFunc<T,T>),typeof(T));
+            var f = (FixedFunc<T,T>)lbuffer.Load(a.Code).UnaryOp(a.Id, typeof(FixedFunc<T,T>),typeof(T));
+            var g = (FixedFunc<T,T>)rbuffer.Load(b.Code).UnaryOp(b.Id, typeof(FixedFunc<T,T>),typeof(T));
 
-            var points = Random.Fixed<T>().Take(RepCount);
+            var stream = Random.Fixed<T>();
+            if(stream == null)
+                Claim.fail($"random stream null!");
+
+            var points = stream.Take(RepCount);
             iter(points, x => Claim.eq(f(x), g(x)));            
 
         }
 
-        void CheckUnaryFunc(IAsmExecBuffer buffer, AsmCode src)
+        void CheckUnaryFunc(ExecBufferToken buffer, AsmCode src)
         {            
             var nk =  NumericType.parseKind(src.Id.TextComponents.Second()).Require();
             switch(nk)
@@ -359,7 +363,7 @@ namespace Z0
             }
         }
 
-        void CheckBinaryFunc(IAsmExecBuffer buffer, AsmCode src)
+        void CheckBinaryFunc(ExecBufferToken buffer, AsmCode src)
         {
             var kind = NumericType.parseKind(src.Id.TextComponents.Last());
             if(kind.IsNone())
@@ -430,14 +434,37 @@ namespace Z0
         public void add_megacheck()
         {
             var name = nameof(math.add);
-            megacheck(name, math.add, gmath.add, u8);              
-            megacheck(name, math.add, gmath.add, i8);              
-            megacheck(name, math.add, gmath.add, u16);              
-            megacheck(name, math.add, gmath.add, i16);              
-            megacheck(name, math.add, gmath.add, u32);            
-            megacheck(name, math.add, gmath.add, i32);            
-            megacheck(name, math.add, gmath.add, u64);            
-            megacheck(name, math.add, gmath.add, i64);            
+            
+            var dArchive = Context.CodeArchive(AssemblyId.GMath, nameof(math));
+            var gArchive = Context.CodeArchive(AssemblyId.GMath, nameof(gmath));
+            var dAdd = dArchive.Read("add").ToArray();
+            var gAdd = gArchive.Read("add_g").Select(code => code.WithIdentity(code.Id.WithoutGeneric())).ToArray();
+            Claim.eq(dAdd.Length, gAdd.Length);
+            for(var i=0; i< dAdd.Length; i++)
+            {
+                var d = dAdd[i];
+                var g = gAdd[i];
+                var opname = d.Id;
+                switch(opname)
+                {
+                    case "add_8i_8i":
+                        megacheck(name, d, g, math.add, gmath.add, i8);
+                        Trace($"Verified {d}");
+                    break;                       
+                }
+                
+            }
+
+
+
+            // megacheck(name, math.add, gmath.add, u8);              
+            // megacheck(name, math.add, gmath.add, i8);              
+            // megacheck(name, math.add, gmath.add, u16);              
+            // megacheck(name, math.add, gmath.add, i16);              
+            // megacheck(name, math.add, gmath.add, u32);            
+            // megacheck(name, math.add, gmath.add, i32);            
+            // megacheck(name, math.add, gmath.add, u64);            
+            // megacheck(name, math.add, gmath.add, i64);            
         }
 
         public void sub_megacheck()
@@ -644,8 +671,8 @@ namespace Z0
 
         protected void binop_match(N128 w, AsmCode a, AsmCode b)
         {
-            using var fBuffer = AsmExecBuffer.Create();
-            using var gBuffer = AsmExecBuffer.Create();
+            using var fBuffer = Context.ExecBuffer();
+            using var gBuffer = Context.ExecBuffer();
 
             var f = fBuffer.BinaryOp(w, a);
             var g = gBuffer.BinaryOp(w, b);
@@ -654,8 +681,8 @@ namespace Z0
 
         protected void binop_match(N256 w, AsmCode a, AsmCode b)
         {
-            using var fBuffer = AsmExecBuffer.Create();
-            using var gBuffer = AsmExecBuffer.Create();
+            using var fBuffer = Context.ExecBuffer();
+            using var gBuffer = Context.ExecBuffer();
 
             var f = fBuffer.BinaryOp(w, a);
             var g = gBuffer.BinaryOp(w, b);

@@ -7,63 +7,58 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
-    using static As;
 
     /// <summary>
-    /// Defines an unmanaged/immovable buffer that requires explicit allocation as disposal
+    /// Defines an unmanaged/immovable buffer that requires explicit allocation and disposal
     /// </summary>
     public unsafe readonly ref struct SpanBuffer
     {
         /// <summary>
-        /// Allocates a a zero-filled unmanged buffer of specified size
+        /// The native allocation reference
         /// </summary>
-        /// <param name="size">The buffer size in bytes</param>
-        [MethodImpl(Inline)]
-        public static SpanBuffer Alloc(ByteSize size)
-            => new SpanBuffer(size);        
+        public readonly IntPtr Handle;
 
         /// <summary>
-        /// Allocates and fills an unmanaged buffer
+        /// Retrieves the span-covered allocation
         /// </summary>
-        /// <param name="size">The buffer size in bytes</param>
         [MethodImpl(Inline)]
-        public static SpanBuffer Alloc(ReadOnlySpan<byte> content)
-            => new SpanBuffer(content);        
-
-        readonly IntPtr pMem;
-
-        readonly Span<byte> content;
-
-        [MethodImpl(Inline)]
-        SpanBuffer(ByteSize size)
-        {
-            this.pMem = Marshal.AllocHGlobal(size);         
-            this.content = new Span<byte>(pMem.ToPointer(), size);
-            Clear();
-        }
-
-        [MethodImpl(Inline)]
-        SpanBuffer(ReadOnlySpan<byte> content)
-            : this(content.Length)
-        {            
-            Fill(content);
-        }
+        public Span<byte> GetContent()
+            => Content;
 
         /// <summary>
-        /// Specifies the size of the buffer
+        /// The span-covered allocation
         /// </summary>
-        public readonly ByteSize Length
+        readonly Span<byte> Content;
+
+        /// <summary>
+        /// The length, in bytes, of the allocated buffer
+        /// </summary>
+        public readonly int Length
         {
             [MethodImpl(Inline)]
-            get => content.Length;
+            get => Content.Length;
         }
 
-        public IntPtr Pointer
-            => pMem;
+        /// <summary>
+        /// Allocates a non-gc'd buffer with user-managed lifecycle
+        /// </summary>
+        /// <param name="length">The buffer length in bytes</param>
+        [MethodImpl(Inline)]
+        public static SpanBuffer Alloc(int length)
+            => OS.SpanAlloc(length);
+
+        internal static SpanBuffer Own(IntPtr handle, Span<byte> content)
+            => new SpanBuffer(handle, content);
+
+        [MethodImpl(Inline)]
+        SpanBuffer(IntPtr handle, Span<byte> content)
+        {
+            this.Handle = handle;
+            this.Content = content;
+        }
+
 
         /// <summary>
         /// Presents buffer content as span of specified cell type
@@ -72,23 +67,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> As<T>()
             where T : unmanaged
-                => content.As<T>();
+                => Content.As<T>();
 
         /// <summary>
         /// Zero-fills the buffer
         /// </summary>
         [MethodImpl(Inline)]
         public void Clear()
-            => content.Clear();
-
-        /// <summary>
-        /// The first memory cell in the buffer, presented as a specified type
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        ref T Head<T>()
-            where T :unmanaged
-                => ref head(As<T>());
+            => Content.Clear();
 
         /// <summary>
         /// Replaces the buffer content with content from a source span
@@ -99,14 +85,14 @@ namespace Z0
             where T : unmanaged
         {
             var src = content.AsBytes();
-            if(src.Length <=  this.content.Length)
+            if(src.Length <=  this.Content.Length)
             {
-                if(src.Length < this.content.Length)
+                if(src.Length < this.Content.Length)
                     Clear();
-                src.CopyTo(this.content);
+                src.CopyTo(this.Content);
             }
             else
-                src.Slice(Length).CopyTo(this.content);        
+                src.Slice(Length).CopyTo(this.Content);        
         }
 
         /// <summary>
@@ -118,10 +104,9 @@ namespace Z0
             where T : unmanaged
                 => Fill(content.AsSpan().ReadOnly());
 
-
         public void Dispose()
         {
-            Marshal.FreeHGlobal(pMem);
+            Marshal.FreeHGlobal(Handle);
         }
     }
 }

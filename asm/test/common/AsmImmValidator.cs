@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
@@ -28,7 +26,7 @@ namespace Z0
         public AsmImmBinOpValidator128(IAsmContext context)
         {
             this.Context = context;
-            this.AsmBuffer = AsmExecBuffer.Create();
+            this.AsmBuffer = Context.ExecBuffer();
             this.RandomEmitter = context.Random.VectorEmitter<T>(n128);
             this.AsmProducer = context.ImmBuilder(HK.vk128(), n1);
 
@@ -44,20 +42,14 @@ namespace Z0
             var z = f(x.ToFixed(), y.ToFixed()).ToVector<T>();
             
 
-
-
             //var z1 = dynop.DynamicOp;
             // var z2 = f(x.ToFixed(), y.ToFixed()).ToVector<T>();
             
             
-
-
             // var f = buffer.BinaryOp<Fixed128>(asm.Code);
             // Claim.eq(z1,z2);
         }
-
-        
-
+    
 
         public void Dispose()
         {

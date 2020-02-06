@@ -17,7 +17,6 @@ namespace Z0
     {   
         static int LastId = 0;
 
-
         public static IAsmContext New()
             => New(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
 
@@ -86,7 +85,6 @@ namespace Z0
             var copy = Replicate();            
             copy.Data.WithClrIndex(ClrMetadataIndex.Create(src.Modules.ToArray()));
             return copy;
-
         }
 
         AsmContext Replicate()

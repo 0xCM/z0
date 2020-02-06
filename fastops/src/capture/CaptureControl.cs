@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Reflection;
-
     using System.Runtime.CompilerServices;
+    
     using static zfunc;
 
     readonly struct CaptureControl : ICaptureControl
@@ -54,13 +54,11 @@ namespace Z0
             EventSink.Accept(info);
         }
 
-
         readonly struct CaptureEventSink : ICaptureEventSink
         {
             public static ICaptureEventSink Empty = default(CaptureEventSink);
             
             public void Accept(in CaptureEventInfo info) {}
         }
-
     }
 }

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Collections.Specialized;
 
     using AsmSpecs;
 
@@ -18,7 +17,6 @@ namespace Z0
         IEnumerable<AsmEmissionToken> EmitImm();  
 
         IEnumerable<AsmEmissionToken> EmitCatalog()
-            => EmitPrimary().Union(EmitImm());
-       
+            => EmitPrimary().Union(EmitImm());      
     }
 }

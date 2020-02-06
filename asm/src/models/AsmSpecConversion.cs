@@ -15,7 +15,6 @@ namespace Z0
 
     using Iced = Iced.Intel;
 
-
     public static class AsmSpecConversion
     {
         public static AsmInstructionCode InstructionCode(this Iced.Instruction src)
@@ -208,7 +207,6 @@ namespace Z0
                 Segment = src.Segment.ToSpec(),
                 Formatted = src.ToString()
             };
-
 
         static InstructionInfo ToSpec(this Iced.InstructionInfo src)
         {

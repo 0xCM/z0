@@ -15,5 +15,4 @@ namespace Z0
     {
         void EmitFunctions(Type host);
     }
-
 }

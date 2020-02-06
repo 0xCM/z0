@@ -218,7 +218,6 @@ namespace Z0
             return default;
         }
 
-
         /// <summary>
         /// Extracts immediate information, if applicable, from an instruction operand
         /// </summary>
@@ -317,7 +316,9 @@ namespace Z0
                 );
         
         const NumericIndicator f = NumericIndicator.Float;
+        
         const NumericIndicator i = NumericIndicator.Signed;
+        
         const NumericIndicator u = NumericIndicator.Unsigned;
 
         public static SegmentedIdentity ToMonikerSegment(this MemorySize src, char si)

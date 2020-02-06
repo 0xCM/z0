@@ -117,7 +117,7 @@ namespace Z0
         /// <summary>
         /// Instantiates a <cref="IAsmFunctionEmitter"/> service
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">The soruce context</param>
         [MethodImpl(Inline)]
         public static IAsmFunctionEmitter AsmEmitter(this IAsmContext context)
             => AsmFunctionEmitter.Create(context);
@@ -180,9 +180,6 @@ namespace Z0
             => Z0.CilFormatter.Create(context);
 
         public static IAsmExecBuffer ExecBuffer(this IAsmContext context, int? size = null)
-            => AsmExecBuffer.Create(size);
-
-        // public static INativeExecBuffer NativeExecBuffer(this IAsmContext context, int? size = null)            
-        //     => Z0.NativeExecBuffer.Create(size);
+            => AsmExecBuffer.Create(context,size);
     }
 }

@@ -19,7 +19,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static CaptureExchange CreateExchange(this ICaptureControl control, Span<byte> target, Span<byte> state)
             => CaptureServices.Exchange(control, target, state);
-
     }
-
 }

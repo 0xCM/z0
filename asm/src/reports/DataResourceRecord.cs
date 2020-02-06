@@ -26,7 +26,6 @@ namespace Z0
             this.Id = id;
         }
 
-
         [ReportField(OffsetPad)]
         public ushort Offset {get;set;}
 
@@ -35,7 +34,6 @@ namespace Z0
 
         [ReportField(LengthPad)]
         public int Length {get;set;}
-
 
         [ReportField]
         public string Id {get;set;}
@@ -57,7 +55,6 @@ namespace Z0
         }
 
         public IReadOnlyList<string> GetHeaders()
-            => Record.ReportHeaders(GetType());        
-
+            => Record.ReportHeaders(GetType());
     }
 }

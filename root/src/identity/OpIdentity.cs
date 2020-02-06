@@ -104,14 +104,17 @@ namespace Z0
             => Identifier;
 
         public override int GetHashCode()
-            => Identifier.GetHashCode();
+            => IdentityHashCode(this);
 
         [MethodImpl(Inline)]
         public bool Equals(OpIdentity src)
-            => string.Equals(src.Identifier, Identifier, StringComparison.InvariantCultureIgnoreCase);
+            => IdentityEquals(this, src);
 
-        public override bool Equals(object obj)
-            => obj is OpIdentity m && Equals(m);
+        public override bool Equals(object src)
+            => IdentityEquals(this, src);
+
+        public int CompareTo(IIdentity other)
+            => IdentityCompare(this, other);
 
         public IEnumerable<string> SuffixText
         {

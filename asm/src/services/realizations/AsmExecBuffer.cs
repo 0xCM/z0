@@ -13,44 +13,32 @@ namespace Z0
     /// <summary>
     /// Wraps an executable non-GC'd buffer to hold assembly instruction code
     /// </summary>
-    public readonly struct AsmExecBuffer : IAsmExecBuffer
+    readonly struct AsmExecBuffer : IAsmExecBuffer
     {
         public const int DefaultSize = 512;
 
-        readonly IMemoryBuffer Buffer;
-
         public IAsmContext Context {get;}
+
+        public ExecBufferToken Token {get;}
         
-        public static IAsmExecBuffer Create(int? size = null)
-            => new AsmExecBuffer(null, size);
+        public IntPtr Handle {get;}
+
+        public int Length {get;}
 
         public static IAsmExecBuffer Create(IAsmContext context, int? size = null)
             => new AsmExecBuffer(context, size);
 
-        public IntPtr Handle
-        {
-            [MethodImpl(Inline)]
-            get => Buffer.Handle;
-        }
-
         AsmExecBuffer(IAsmContext context, int? size = null)
         {
-            Context = context;
-            Buffer = MemoryBuffer.Alloc(size ?? DefaultSize);
+            Context = context;            
+            var buffer = OS.AllocExec(size ?? DefaultSize);
+            Handle = buffer.Handle;
+            Length = buffer.Length;
+            Token = buffer;
         }
 
-        /// <summary>
-        /// Loads the assembly code into the execution buffer
-        /// </summary>
-        /// <param name="src">The asm code</param>
         [MethodImpl(Inline)]
-        public IntPtr Load(in AsmCode src)
-        {
-            Buffer.Fill(src.Encoded);
-            return Handle;
-        }
-
         public void Dispose()
-            => Buffer.Dispose();
+            => ExecBuffer.Own(Token).Dispose();
     }
 }

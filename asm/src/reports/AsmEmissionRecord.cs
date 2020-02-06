@@ -20,8 +20,6 @@ namespace Z0
 
         AsmEmissionRecord(MemoryAddress @base, AsmEmissionToken src)
         {
-            // this.Offset = src.Origin.Start != 0 ? src.Origin.Start - @base : 0ul;
-            // this.Origin = src.Origin;
             this.Size = src.Origin.Length;
             this.Uri = src.Uri;
         }
@@ -29,18 +27,7 @@ namespace Z0
         AsmEmissionRecord(MemoryAddress @base, AsmEmissionToken src, AsmEmissionToken? prior)
             : this(@base,src)
         {
-            //var gap = prior.Map(p =>  src.Origin.Start - p.Origin.End);
-            //this.Gap = gap > ushort.MaxValue ? ushort.MaxValue : (ushort)gap;
         }
-
-        // [ReportField(OffsetPad)]
-        // public ulong Offset {get;set;}
-
-        // [ReportField(GapPad)]
-        // public ushort Gap {get;set;}
-
-        // [ReportField(OriginPad)]
-        // public MemoryRange Origin {get;set;}
 
         [ReportField(SizePad)]
         public ByteSize Size {get;}

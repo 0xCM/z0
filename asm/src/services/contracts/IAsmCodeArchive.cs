@@ -27,7 +27,6 @@ namespace Z0
         /// Purges all files from the archive
         /// </summary>
         T Clear();        
-
     }
 
     public interface IAsmCodeArchive : IAsmArchive<IAsmCodeArchive>

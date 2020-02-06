@@ -38,7 +38,6 @@ namespace Z0
         byte[] TakeBuffer();        
     }
 
-
     public interface ICaptureService
     {        
         CapturedMember Capture(OpIdentity id, MethodInfo src, in CaptureExchange exchange);

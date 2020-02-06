@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
@@ -52,5 +53,8 @@ namespace Z0
 
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
+
+        public int CompareTo(IIdentity other)
+            => IdentityCompare(this, other);
     }
 }

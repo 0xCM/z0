@@ -86,47 +86,75 @@ namespace Z0
             }
         }
 
-        static void ThrowLiberationError(IntPtr pCode, ReadOnlySpan<byte> src)
+        /// <summary>
+        /// Deallocates a native allocation
+        /// </summary>
+        /// <param name="handle"></param>
+        [MethodImpl(Inline)]
+        public static void Release(IntPtr handle)
+            => Marshal.FreeHGlobal(handle);            
+
+        /// <summary>
+        /// Allocates a non-gc'd buffer with user-managed lifecycle
+        /// </summary>
+        /// <param name="length">The buffer length in bytes</param>
+        [MethodImpl(Inline)]
+        public static NativeBuffer NativeAlloc(int length)
+            => NativeBuffer.Own((OS.Liberate(Marshal.AllocHGlobal(length), length),length));
+
+        [MethodImpl(Inline)]
+        public static SpanBuffer SpanAlloc(int length)
         {
-            var start = (ulong)pCode;
-            var end = start + (ulong)src.Length;            
-            throw new Exception($"Attempting to liberate the memory range [{start.FormatHex(false)},{end.FormatHex(false)}] ({src.Length} bytes) for execution failed");     
+            var handle = Liberate(Marshal.AllocHGlobal(length), length);            
+            var content = new Span<byte>(handle.ToPointer(), length);
+            content.Clear();
+            return SpanBuffer.Own(handle,content);
         }
 
-        static void ThrowLiberationError(IntPtr pCode, ByteSize Length)
+        /// <summary>
+        /// Allocates an execution buffer
+        /// </summary>
+        /// <param name="length">The buffer length in bytes</param>
+        [MethodImpl(Inline)]
+        public static ExecBuffer AllocExec(int length)
+            => ExecBuffer.Own((OS.Liberate(Marshal.AllocHGlobal(length), length), length));        
+
+        /// <summary>
+        /// Enables an executable memory segment
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="length"></param>
+        [MethodImpl(Inline)]
+        public static IntPtr Liberate(IntPtr src, int length)
         {
-            var start = (ulong)pCode;
-            var end = start + (ulong)Length;            
-            throw new Exception($"Attempting to liberate the memory range [{start.FormatHex(false)},{end.FormatHex(false)}] ({Length} bytes) for execution failed");     
+            if (!OS.VirtualProtectEx(CurrentProcess, src, (UIntPtr)(ulong)length, 0x40, out uint _))
+                ThrowLiberationError(src, length);
+            return src;
+        }
+
+        /// <summary>
+        /// Enables en executable memory segment
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="length"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline)]
+        public static IntPtr Liberate<T>(ref T src, int length)
+            where T : unmanaged
+        {
+            IntPtr buffer = (IntPtr)Unsafe.AsPointer(ref src);
+            if (!OS.VirtualProtectEx(CurrentProcess, buffer, (UIntPtr)length, 0x40, out uint _))
+                ThrowLiberationError(buffer, length);
+            return buffer;
         }
 
         [MethodImpl(Inline)]
         public static IntPtr Liberate(ReadOnlySpan<byte> src)
-        {
-            var pCode = (IntPtr)ptr(ref mutable(in src[0]));
-            if (!OS.VirtualProtectEx(CurrentProcess, pCode, (UIntPtr)src.Length, 0x40, out uint _))
-                ThrowLiberationError(pCode, src);
-            return pCode;
-        }
+            => Liberate(ref mutable(in head(src)), src.Length);
 
         [MethodImpl(Inline)]
-        public static IntPtr Liberate(IntPtr ptr, int length)
-        {
-            if (!OS.VirtualProtectEx(CurrentProcess, ptr, (UIntPtr)(ulong)length, 0x40, out uint _))
-                ThrowLiberationError(ptr, length);
-            return ptr;
-        }
-
-
-        [MethodImpl(Inline)]
-        public static IntPtr Liberate(SpanBuffer buffer)
-            => Liberate(buffer.Pointer, buffer.Length);
-
-        // {
-        //     if (!OS.VirtualProtectEx(CurrentProcess, buffer.Pointer, (UIntPtr)(ulong)buffer.Length, 0x40, out uint _))
-        //         ThrowLiberationError(buffer.Pointer, buffer.Length);
-        //     return buffer.Pointer;
-        // }
+        public static IntPtr Liberate(Span<byte> src)
+            => Liberate(ref head(src), src.Length);
 
         static OS()
         {
@@ -183,8 +211,23 @@ namespace Z0
         [DllImport("kernel32.dll")]
         public static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags); 
 
+        static void ThrowLiberationError(IntPtr pCode, ReadOnlySpan<byte> src)
+        {
+            var start = (ulong)pCode;
+            var end = start + (ulong)src.Length;            
+            throw new Exception($"Attempting to liberate the memory range [{start.FormatHex(false)},{end.FormatHex(false)}] ({src.Length} bytes) for execution failed");     
+        }
+
+        static void ThrowLiberationError(IntPtr pCode, ByteSize Length)
+        {
+            var start = (ulong)pCode;
+            var end = start + (ulong)Length;            
+            throw new Exception($"Attempting to liberate the memory range [{start.FormatHex(false)},{end.FormatHex(false)}] ({Length} bytes) for execution failed");     
+        }
+
+
         [MethodImpl(Inline)]
-        public static T* Liberate<T>(T* pBuffer, ulong length)
+        static T* Liberate<T>(T* pBuffer, int length)
             where T : unmanaged
         {
             IntPtr buffer = (IntPtr)(void*)pBuffer;

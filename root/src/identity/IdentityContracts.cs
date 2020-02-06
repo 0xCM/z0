@@ -10,7 +10,7 @@ namespace Z0
 
     using static RootShare;
 
-    public interface IIdentity
+    public interface IIdentity : IComparable<IIdentity>
     {
         string Identifier {get;}
 

@@ -64,6 +64,10 @@ namespace Z0
 
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
+
+        public int CompareTo(IIdentity other)
+            => IdentityCompare(this, other);
+
         
     }
 }
