@@ -96,9 +96,5 @@ namespace Z0
         public static bool AcceptsV256(this IFunc f)
             => (f.Kind & FunctionKind.V256) != 0;
         
-        [MethodImpl(Inline)]
-        public static bool IsImm8Resolver(this IFunc f)
-            => f is IImm8Resolver;
-
     }
 }

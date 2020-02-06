@@ -49,18 +49,6 @@ namespace Z0
 
         public string Label => Code.Label;
          
-        /// <summary>
-        /// Defines the inclusive lower bound of the source location
-        /// </summary>
-        public ulong StartAddress 
-            => Origin.Start;
-
-        /// <summary>
-        /// Defines the inclusive upper bound of source location
-        /// </summary>
-        public ulong EndAddress 
-            => Origin.End;
-
         public ulong Length 
             => Origin.Length;
 
@@ -87,6 +75,5 @@ namespace Z0
         }         
  
         static string MethodSep => new string('_',80);
-
     }
 }

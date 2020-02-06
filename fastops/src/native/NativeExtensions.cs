@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class FastOpX
+    public static partial class NativeX
     {
         public static bool AcceptsParameter(this AsmCode src, NumericKind kind)
             => NumericType.parseKinds(src.Id.TextComponents.Skip(1)).Contains(kind);

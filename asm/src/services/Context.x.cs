@@ -152,7 +152,9 @@ namespace Z0
             {
                 var collector = new  AsmStatsCollector();
                 var pipe = AsmStatsPipe.Create(collector);
+
                 var flow = context.Flow(catalog);
+
                 flow.Flow(pipe).Force();
                 return collector.Collected;
             }

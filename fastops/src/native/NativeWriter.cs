@@ -9,12 +9,25 @@ namespace Z0
 
     using static zfunc;
 
-    public class NativeWriter : StreamWriter, INativeWriter
+    public interface INativeWriter : IDisposable
+    {
+        void WriteHeader();
+
+        void WriteData(CapturedMember src);        
+    
+        void WriteData(CapturedMember src, HexLineFormat config);     
+
+        void WriteLine(string data);   
+
+        byte[] TakeBuffer();        
+    }
+
+    class NativeWriter : StreamWriter, INativeWriter
     {
         public static INativeWriter Create(FilePath dst, bool append = false)
             => new NativeWriter(dst,append);
 
-        public NativeWriter(FilePath path, bool append = false)
+        NativeWriter(FilePath path, bool append = false)
             : base(path.FullPath, append)
         {
 

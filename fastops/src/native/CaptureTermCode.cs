@@ -16,34 +16,24 @@ namespace Z0
     {
         None,
 
-        RET_SBB,
+        CTC_RET_SBB,
         
-        RET_INTR,
+        CTC_RET_INTR,
 
-        RET_INTRx2,
-
-        RET_ZED_SBB,
+        CTC_RET_ZED_SBB,
         
-        RET_ZEDx3,
+        CTC_RET_Zx3,
 
-        INTRx2,
+        CTC_INTRx2,
 
-        ZEDx2_SBB,
+        CTC_Zx7_000,
 
-        ZEDx7_000,
+        CTC_Zx7_RET,
 
-        ZEDx7_RET,
+        CTC_JMP_RAX,
 
-        // 00 48 ff e0 00 00 19
-        JMP_RAX,
-
-        MSDIAG,
+        CTC_MSDIAG,
         
-        /// <summary>
-        /// Decoded all instructions
-        /// </summary>
-        DAI,
-
-        BUFFER_OUT
+        CTC_BUFFER_OUT
     }
 }

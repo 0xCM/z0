@@ -126,9 +126,9 @@ namespace Z0
             var w = n8;
 
             var moniker = Identity.operation(name, kind);                        
-            var f0 = Dynop.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = Dynop.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -143,9 +143,9 @@ namespace Z0
             var w = n8;
 
             var moniker = Identity.operation(name, kind);                        
-            var f0 = Dynop.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = Dynop.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -160,9 +160,9 @@ namespace Z0
             var w = n16;
 
             var moniker = Identity.operation(name, kind);                        
-            var f0 = Dynop.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = Dynop.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -178,9 +178,9 @@ namespace Z0
             var w = n16;
 
             var moniker = Identity.operation(name, kind);                        
-            var f0 = Dynop.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = Dynop.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -195,9 +195,9 @@ namespace Z0
             var w = n32;
 
             var moniker = Identity.operation(name, kind);                        
-            var f0 = Dynop.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = Dynop.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -211,9 +211,9 @@ namespace Z0
         {
             var w = n32;
             var moniker = Identity.operation(name, kind);                        
-            var f0 = Dynop.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = Dynop.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math ,moniker));
@@ -227,9 +227,9 @@ namespace Z0
         {            
             var w = n64;
             var moniker = Identity.operation(name, kind);                        
-            var f0 = Dynop.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = Dynop.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math ,moniker));
@@ -244,9 +244,9 @@ namespace Z0
             var w = n64;
 
             var moniker = Identity.operation(name, kind);                        
-            var f0 = Dynop.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = Dynop.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));

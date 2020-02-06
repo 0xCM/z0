@@ -41,17 +41,23 @@ namespace Z0
         public void capture_vectorized_generics()
         {
             using var writer = NativeTestWriter();
+            var svc = NativeServices.MemberCapture();
+
             var types = NumericKind.All.DistinctTypes();
             var methods = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
             iter(types, 
                 t => iter(methods, 
-                    m => NativeCapture.capture(m.MakeGenericMethod(t), writer)));
+                    m => svc.Capture(m.MakeGenericMethod(t), writer)));
         }
 
         public void capture_direct()
         {
             using var target = NativeTestWriter();
-            NativeCapture.capture(typeof(DirectMethodCases), target);
+            var svc = NativeServices.MemberCapture();
+            foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
+            {
+                svc.Capture(m,target);
+            }            
         }
 
         static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
@@ -63,23 +69,24 @@ namespace Z0
         public void capture_delegates()
         {
             using var target = NativeTestWriter();
+            var svc = NativeServices.MemberCapture();
 
             Span<byte> buffer = new byte[100];
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            NativeCapture.capture(dAnd,target);
+            svc.Capture(dAnd,target);
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            NativeCapture.capture(mAnd,target);
+            svc.Capture(mAnd,target);
 
             var dShuffle = shuffler(4);
-            NativeCapture.capture(dShuffle,target);
+            svc.Capture(dShuffle,target);
 
             var dShift = shifter(4);
-            NativeCapture.capture(dShift,target);
+            svc.Capture(dShift,target);
 
 
             iter(typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition()), 
-                def => NativeCapture.capture(def.MakeGenericMethod(typeof(uint)),target));
+                def => svc.Capture(def.MakeGenericMethod(typeof(uint)),target));
             
         }
 
@@ -87,9 +94,11 @@ namespace Z0
         {
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
             Span<byte> buffer = new byte[128];
+            var svc = NativeServices.MemberCapture();
+
             for(var i=0; i<src.Length; i++)
             {
-                var capture = NativeReader.read(src[i].Identify(), src[i], buffer);
+                var capture = svc.Capture(src[i].Identify(), src[i], buffer);
                 PostMessage(capture.FormatHexLines());
                 buffer.Clear();
             }

@@ -18,6 +18,13 @@ namespace Z0
             => NativeExecBuffer.Create(size);
 
         /// <summary>
+        /// Intantiates the member capture service that jits and collects native member data
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static IMemberCapture MemberCapture()
+            => default(MemberCapture);
+
+        /// <summary>
         /// Allocates a caller-disposed native text writer
         /// </summary>
         /// <param name="dst">The target path</param>
@@ -27,8 +34,7 @@ namespace Z0
         {
             dst.FolderPath.CreateIfMissing();            
             var exists = dst.Exists();
-            var writer = NativeWriter.Create(dst,append);
-            
+            var writer = NativeWriter.Create(dst,append);            
             if(!exists || !append && header)
                 writer.WriteHeader();
             return writer;

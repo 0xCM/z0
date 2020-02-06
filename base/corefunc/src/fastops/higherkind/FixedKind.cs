@@ -35,7 +35,6 @@ namespace Z0
             public TypeKind Classifier { [MethodImpl(Inline)] get=> Kind;}
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
-
         }
 
         public readonly struct FixedType<F,T> : IFixedKind<F,T>
@@ -56,9 +55,7 @@ namespace Z0
 
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
 
-            public FixedKind Class1 { [MethodImpl(Inline)] get => (FixedKind)Width;}
 
-            public NumericKind Class2 { [MethodImpl(Inline)] get => NumericType.kind<T>();}
         }
     }
 }

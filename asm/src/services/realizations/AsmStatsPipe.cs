@@ -48,17 +48,16 @@ namespace Z0
         public static IAsmFunctionPipe Create(AsmStatsCollector dst)
             => new AsmStatsPipe(dst);
 
-        readonly AsmStatsCollector Target;
-        
+
+        public ObjectReceiver<AsmFunction> Receiver {get;}
+
         AsmStatsPipe(AsmStatsCollector dst)
         {
-            this.Target = dst;
-        }
-        
-        public AsmFunction Flow(AsmFunction f)
-        {
-            Target.IncrementFunctionCount();    
-            return f;
+
+            void Receive(in AsmFunction f)        
+                => dst.IncrementFunctionCount();                
+
+            this.Receiver = Receive;
         }
     }
 

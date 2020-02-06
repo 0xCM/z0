@@ -14,12 +14,12 @@ namespace Z0
     /// <summary>
     /// Characterizes types/kinds with which a fixed bit-width is associated
     /// </summary>
-    public interface IFixedKind : IKind<FixedKind>
+    public interface IFixedKind : IKind<FixedWidth>
     {
         
     }
 
-    public interface IFixedNumericKind : IKind<FixedKind,NumericKind>
+    public interface IFixedNumericKind : IKind<FixedWidth>, IKind<NumericKind>
     {
 
     }
@@ -33,11 +33,9 @@ namespace Z0
             get =>  (FixedWidth)bitsize<F>();
         }
    
-        FixedKind IKind<FixedKind>.Classifier 
-        {
-             [MethodImpl(Inline)]
-             get  => (FixedKind)FixedWidth;
-        }
+        FixedWidth IKind<FixedWidth>.Classifier 
+            => (FixedWidth)bitsize<F>();
+
     }
 
     public interface IFixedKind<F,T> : IFixedNumericKind, IFixedWidth
@@ -50,23 +48,13 @@ namespace Z0
             get => (FixedWidth)bitsize<F>();
         }
 
-        /// <summary>
-        /// The classification value
-        /// </summary>
-        FixedKind IKind<FixedKind,NumericKind>.Class1 
-        {
-            [MethodImpl(Inline)]
-            get => (FixedKind)FixedWidth;
-        }
+        FixedWidth IKind<FixedWidth>.Classifier 
+            => (FixedWidth)bitsize<F>();
 
-        /// <summary>
-        /// The classification value
-        /// </summary>
-        NumericKind IKind<FixedKind,NumericKind>.Class2 
-        {
-            [MethodImpl(Inline)]
-            get => NumericType.kind<T>();
-        }
+        NumericKind IKind<NumericKind>.Classifier 
+            => NumericType.kind<T>();
+
+
     }
 
 }

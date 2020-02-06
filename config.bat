@@ -7,6 +7,9 @@ dotnet sln add base/coredata/src/z0.coredata.csproj
 dotnet sln add base/corefunc/src/z0.corefunc.csproj
 dotnet sln add base/corefunc/test/z0.corefunc.test.csproj
 
+dotnet sln add fastops/src/z0.fastops.csproj
+dotnet sln add fastops/test/z0.fastops.test.csproj
+
 dotnet sln add data/src/z0.data.csproj
 
 dotnet sln add gmath/src/z0.gmath.csproj

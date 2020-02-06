@@ -22,7 +22,7 @@ namespace Z0
         internal void RunExplicit()
         {
 
-            CheckCapture();
+            Workflow();
 
         }
 
@@ -35,6 +35,12 @@ namespace Z0
             CheckUnaryImm<ushort>(buffer,n256, nameof(dinx.vbsll), 3);        
 
         }
+
+        void Workflow()
+        {
+
+        }
+
 
         static int activations;
         
@@ -70,9 +76,7 @@ namespace Z0
             var hexG = hex.Where(h => h.Id.IsGeneric).ToDictionary(x => x.Id);
 
             
-            
-            
-            
+                                
             foreach(var k in hexG.Keys)
             {
                 var gHex = hexG[k];

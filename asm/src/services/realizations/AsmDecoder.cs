@@ -33,6 +33,8 @@ namespace Z0
             this._Buffer = new byte[bufferlen ?? NativeServices.DefaultBufferLen];
         }
         
+        IMemberCapture CaptureSvc => NativeServices.MemberCapture();
+
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
@@ -73,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The cource capture</param>
         public AsmFunction DecodeFunction(OpIdentity id, MethodInfo src)
-            => DecodeFunction(NativeReader.read(id, src, TakeBuffer()));
+            => DecodeFunction(CaptureSvc.Capture(id, src, TakeBuffer()));
 
         /// <summary>
         /// Decodes an assembly function from a dynamic delegate
@@ -81,7 +83,7 @@ namespace Z0
         /// <param name="id">The identity to confer</param>
         /// <param name="src">The source delegate</param>
         public AsmFunction DecodeFunction(DynamicDelegate src)
-            => DecodeFunction(NativeReader.read(src.Id, src, TakeBuffer()));
+            => DecodeFunction(CaptureSvc.Capture(src.Id, src, TakeBuffer()));
 
         AsmFunction BuildFunction(AsmInstructionBlock src)
         {

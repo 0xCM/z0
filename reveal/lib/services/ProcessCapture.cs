@@ -54,7 +54,7 @@ namespace Z0
         public IEnumerable<AsmFunction> CaptureFunctions(IEnumerable<MethodInfo> methods)
         {
             foreach(var m in methods)
-                NativeCapture.jit(m);
+                Jit.jitsafe(m);
 
             foreach(var m in methods)
             {
@@ -117,7 +117,7 @@ namespace Z0
             }
 
             var location = MemoryRange.Define(address, address + size);            
-            var result = NativeCaptureInfo.Define(location.Start, location.End, CaptureTermCode.MSDIAG, buffer);
+            var result = NativeCaptureInfo.Define(location.Start, location.End, CaptureTermCode.CTC_MSDIAG, buffer);
 			return CapturedMember.Define(id, method, location, buffer, result);                    
         }
     }

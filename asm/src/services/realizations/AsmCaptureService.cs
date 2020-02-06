@@ -5,17 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
-    using System.Reflection.Emit;
     
     using Z0.AsmSpecs;
     
     using static zfunc;
     
-
     readonly struct AsmCaptureService : IAsmCaptureService
     {
         readonly byte[] buffer; 
@@ -48,14 +43,16 @@ namespace Z0
 
         IAsmDecoder Decoder => Context.Decoder();        
 
+        IMemberCapture CaptureSvc => NativeServices.MemberCapture();
+
         public CapturedMember ExtractBits(OpIdentity id, DynamicDelegate src)
-            => NativeReader.read(id,src,TakeBuffer());
+            => CaptureSvc.Capture(id,src,TakeBuffer());
 
         public CapturedMember ExtractBits(OpIdentity id, MethodInfo src)
-            => NativeReader.read(id, src, TakeBuffer());
+            => CaptureSvc.Capture(id, src, TakeBuffer());
 
         public CapturedMember ExtractBits(OpIdentity id, Delegate src)
-            => NativeReader.read(id, src, TakeBuffer());
+            => CaptureSvc.Capture(id, src, TakeBuffer());
 
         public CapturedMember ExtractBits(Delegate src)
             => ExtractBits(src.Identify(), src);
@@ -69,7 +66,7 @@ namespace Z0
             for(var i = 0; i<methods.Length; i++)
             {
                 var m = methods[i];
-                targets[i] = NativeReader.read(m.Identify(), m, TakeBuffer()).Replicate();                                 
+                targets[i] = CaptureSvc.Capture(m.Identify(), m, TakeBuffer()).Replicate();                                 
                 ExtractBits(m);
             }
             return targets;
@@ -93,7 +90,7 @@ namespace Z0
         }
 
         public void SaveBits(MethodInfo src, IAsmHexWriter dst)
-            => dst.Write(NativeReader.read(src.Identify(), src, TakeBuffer()));
+            => dst.Write(CaptureSvc.Capture(src.Identify(), src, TakeBuffer()));
 
         public void SaveBits(MethodInfo src, Type[] args, IAsmHexWriter dst)
             => dst.Write(ExtractBits(src,args));
@@ -119,6 +116,6 @@ namespace Z0
             => iter(ExtractAsm(src,args),dst.Write);
                 
         CapturedMember CaptureBits(MethodInfo m)
-            => NativeReader.read(m.Identify(), m, TakeBuffer()); 
+            => CaptureSvc.Capture(m.Identify(), m, TakeBuffer()); 
     }
 }

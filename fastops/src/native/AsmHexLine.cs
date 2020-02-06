@@ -34,8 +34,7 @@ namespace Z0
             {
                 var id = OpIdentity.Define(formatted.TakeBefore(idsep).Trim());
                 var encoded = array(formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(Hex.parsebyte));
-                return Define(id,encoded);
-                
+                return Define(id,encoded);                
             }
             catch(Exception e)
             {

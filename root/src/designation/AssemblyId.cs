@@ -60,7 +60,9 @@ namespace Z0
         
         MklApi,
 
-        Control
+        Control,
+
+        FastOps
     }
 
     partial class RootKindExtensions
