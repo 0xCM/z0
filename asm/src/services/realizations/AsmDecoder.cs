@@ -30,10 +30,10 @@ namespace Z0
         AsmDecoder(IAsmContext context, int? bufferlen)
         {
             this.Context = context;
-            this._Buffer = new byte[bufferlen ?? NativeServices.DefaultBufferLen];
+            this._Buffer = new byte[bufferlen ?? CaptureServices.DefaultBufferLen];
         }
         
-        IMemberCapture CaptureSvc => NativeServices.MemberCapture();
+        ICaptureService CaptureSvc => CaptureServices.Capture();
 
         /// <summary>
         /// Decodes an instruction list

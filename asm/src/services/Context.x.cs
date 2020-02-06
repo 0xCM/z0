@@ -180,6 +180,9 @@ namespace Z0
             => Z0.CilFormatter.Create(context);
 
         public static IAsmExecBuffer ExecBuffer(this IAsmContext context, int? size = null)
-            => AsmExecBuffer.Create(context, size);
+            => AsmExecBuffer.Create(size);
+
+        // public static INativeExecBuffer NativeExecBuffer(this IAsmContext context, int? size = null)            
+        //     => Z0.NativeExecBuffer.Create(size);
     }
 }

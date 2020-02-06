@@ -86,8 +86,8 @@ namespace Z0
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)
             where T : unmanaged
         {
-            using var buffer = NativeServices.ExecBuffer();
-            var g = buffer.BinaryOp(asm.As<T>());
+            using var buffer = AsmExecBuffer.Create();
+            var g = buffer.BinaryOp(asm.Typed<T>());
 
             void check()
             {
@@ -101,15 +101,15 @@ namespace Z0
             CheckAction(check, CaseName(asm.Id));
         }
 
-        protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode<T> asm)
+        protected void CheckAsmMatch<T>(BinaryOp<T> f, TypedAsm<T> asm)
             where T : unmanaged
                 => CheckAsmMatch(f,asm.Untyped);
         
         protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode asm)
             where T : unmanaged
         {
-            using var buffer = NativeServices.ExecBuffer();
-            var g = buffer.UnaryOp(asm.As<T>());
+            using var buffer = AsmExecBuffer.Create();
+            var g = buffer.UnaryOp(asm.Typed<T>());
 
             void check()
             {
@@ -123,7 +123,7 @@ namespace Z0
             CheckAction(check, CaseName(asm.Id));
         }
 
-        protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode<T> asm)
+        protected void CheckAsmMatch<T>(UnaryOp<T> f, TypedAsm<T> asm)
             where T : unmanaged
                 => CheckAsmMatch(f, asm.Untyped);
 

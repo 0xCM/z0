@@ -13,15 +13,68 @@ namespace Z0
     using static zfunc;
     using static As;
 
+    public interface IMemoryBuffer : IDisposable
+    {
+        /// <summary>
+        /// The native handle
+        /// </summary>
+        IntPtr Handle {get;}
+
+        /// <summary>
+        /// The allocation length in bytes
+        /// </summary>
+        int Length {get;}        
+
+        /// <summary>
+        /// Fills the buffer with supplied content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        /// <typeparam name="T">The content cell type</typeparam>
+        void Fill<T>(ReadOnlySpan<T> content)
+            where T : unmanaged;        
+
+        /// <summary>
+        /// Fills the buffer with supplied content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        /// <typeparam name="T">The content cell type</typeparam>
+        [MethodImpl(Inline)]
+        void Fill<T>(Span<T> content)
+            where T : unmanaged        
+                => Fill(content.ReadOnly());
+
+        /// <summary>
+        /// Fills the buffer with supplied content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        /// <typeparam name="T">The content cell type</typeparam>
+        [MethodImpl(Inline)]
+        void Fill<T>(T[] content)   
+            where T : unmanaged
+                => Fill(content.AsSpan().ReadOnly());
+
+        /// <summary>
+        /// Zero-fills the buffer
+        /// </summary>
+        void Clear();
+
+        /// <summary>
+        /// Presents buffer content as span of specified cell type
+        /// </summary>
+        /// <typeparam name="T">The cell type</typeparam>
+        Span<T> Data<T>()
+            where T : unmanaged;
+    }
+
     /// <summary>
     /// Defines an unmanaged/immovable buffer that requires explicit allocation as disposal
     /// </summary>
-    public unsafe readonly struct MemoryBuffer : IDisposable
+    public unsafe readonly struct MemoryBuffer : IMemoryBuffer
     {
         /// <summary>
         /// The global memory reference
         /// </summary>
-        public readonly IntPtr Handle;
+        public IntPtr Handle {get;}
 
         /// <summary>
         /// The global memory reference as a byte pointer
@@ -31,7 +84,7 @@ namespace Z0
         /// <summary>
         /// The length, in bytes, of the allocated buffer
         /// </summary>
-        public readonly int Length;
+        public int Length {get;}
 
         /// <summary>
         /// Allocates a a zero-filled unmanged buffer of specified size
@@ -72,15 +125,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Presents buffer content as span of specified cell type
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public Span<T> As<T>()
-            where T : unmanaged
-                => Content.As<T>();
-
-        /// <summary>
         /// Zero-fills the buffer
         /// </summary>
         [MethodImpl(Inline)]
@@ -88,13 +132,13 @@ namespace Z0
             => Content.Clear();
 
         /// <summary>
-        /// The first memory cell in the buffer, presented as a specified type
+        /// Presents buffer content as span of specified cell type
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        ref T Head<T>()
-            where T :unmanaged
-                => ref head(As<T>());
+        public Span<T> Data<T>()
+            where T : unmanaged
+                => Content.As<T>();
 
         /// <summary>
         /// Replaces the buffer content with content from a source span
@@ -115,15 +159,14 @@ namespace Z0
                 src.Slice(Length).CopyTo(this.Content);        
         }
 
-        /// <summary>
-        /// Replaces buffer content with content from supplied source
-        /// </summary>
-        /// <param name="content">The source content</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        public void Fill<T>(T[] content)
-            where T : unmanaged
-                => Fill(content.AsSpan().ReadOnly());
-        
+        // public void Fill<T>(Span<T> content)
+        //     where T : unmanaged
+        //         => Fill(content.ReadOnly());
+
+        // public void Fill<T>(T[] content)
+        //     where T : unmanaged
+        //         => Fill(content.AsSpan().ReadOnly());
+
         public void Dispose()
         {
             Marshal.FreeHGlobal(Handle);

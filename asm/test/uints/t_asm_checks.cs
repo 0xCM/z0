@@ -254,20 +254,20 @@ namespace Z0
             {                
                 if(a.AcceptsParameter(NumericKind.U8))
                 {
-                    var af = a.AsFixed<Fixed8>();
-                    var bf = a.AsFixed<Fixed8>();
+                    var af = a.ToFixed<Fixed8>();
+                    var bf = a.ToFixed<Fixed8>();
                     CheckUnaryOp(lBuffer, af, rBuffer, bf);
                 }
                 if(a.AcceptsParameter(NumericKind.U32))
                 {
-                    var af = a.AsFixed<Fixed32>();
-                    var bf = a.AsFixed<Fixed32>();
+                    var af = a.ToFixed<Fixed32>();
+                    var bf = a.ToFixed<Fixed32>();
                     CheckUnaryOp(lBuffer, af, rBuffer, bf);
                 }
                 else if(a.AcceptsParameter(NumericKind.U64))
                 {
-                    var af = a.AsFixed<Fixed64>();
-                    var bf = a.AsFixed<Fixed64>();
+                    var af = a.ToFixed<Fixed64>();
+                    var bf = a.ToFixed<Fixed64>();
                     CheckUnaryOp(lBuffer, af, rBuffer, bf);
                 }
 
@@ -576,7 +576,6 @@ namespace Z0
             var g = Context.CodeArchive(catalog, nameof(ginx)).Read(idG).Single();
 
             Claim.yea(binop_match(w,d,g));
-
         }
 
         bit binop_match(FixedWidth w, AsmCode a, AsmCode b)
@@ -645,8 +644,8 @@ namespace Z0
 
         protected void binop_match(N128 w, AsmCode a, AsmCode b)
         {
-            using var fBuffer = NativeServices.ExecBuffer();
-            using var gBuffer = NativeServices.ExecBuffer();
+            using var fBuffer = AsmExecBuffer.Create();
+            using var gBuffer = AsmExecBuffer.Create();
 
             var f = fBuffer.BinaryOp(w, a);
             var g = gBuffer.BinaryOp(w, b);
@@ -655,22 +654,22 @@ namespace Z0
 
         protected void binop_match(N256 w, AsmCode a, AsmCode b)
         {
-            using var fBuffer = NativeServices.ExecBuffer();
-            using var gBuffer = NativeServices.ExecBuffer();
+            using var fBuffer = AsmExecBuffer.Create();
+            using var gBuffer = AsmExecBuffer.Create();
 
             var f = fBuffer.BinaryOp(w, a);
             var g = gBuffer.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
         
-        void vadd_check<T>(N128 w, AsmCode<T> asm)
+        void vadd_check<T>(N128 w, TypedAsm<T> asm)
             where T : unmanaged
         {            
             var f = AsmBuffer.BinaryOp(w,asm);            
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
-        void vadd_check<T>(N256 w, AsmCode<T> asm)
+        void vadd_check<T>(N256 w, TypedAsm<T> asm)
             where T : unmanaged
         {            
             var f = AsmBuffer.BinaryOp(w,asm);

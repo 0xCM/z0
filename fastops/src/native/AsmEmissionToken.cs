@@ -10,7 +10,12 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct AsmEmissionToken : IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>
+    public interface IAsmEmissionToken : IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>
+    {
+
+    }
+
+    public readonly struct AsmEmissionToken : IAsmEmissionToken
     {
         public readonly OpUri Uri;
 
@@ -55,5 +60,4 @@ namespace Z0
         public int CompareTo(AsmEmissionToken rhs)
             => this.Uri.CompareTo(rhs.Uri);
     }
-
 }

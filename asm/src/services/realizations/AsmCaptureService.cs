@@ -32,7 +32,7 @@ namespace Z0
         AsmCaptureService(IAsmContext context, int? buffersize)
         {
             Context = context;
-            buffer = new byte[buffersize ?? NativeServices.DefaultBufferLen];
+            buffer = new byte[buffersize ?? CaptureServices.DefaultBufferLen];
         }
 
         Span<byte> TakeBuffer()
@@ -43,7 +43,7 @@ namespace Z0
 
         IAsmDecoder Decoder => Context.Decoder();        
 
-        IMemberCapture CaptureSvc => NativeServices.MemberCapture();
+        ICaptureService CaptureSvc => CaptureServices.Capture();
 
         public CapturedMember ExtractBits(OpIdentity id, DynamicDelegate src)
             => CaptureSvc.Capture(id,src,TakeBuffer());

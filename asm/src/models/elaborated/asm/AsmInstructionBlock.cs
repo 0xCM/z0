@@ -20,10 +20,10 @@ namespace Z0.AsmSpecs
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static AsmInstructionBlock Define(AsmCode encoded, Instruction[] decoded, NativeCaptureInfo captureinfo)
+        public static AsmInstructionBlock Define(AsmCode encoded, Instruction[] decoded, CaptureCompletion captureinfo)
             => new AsmInstructionBlock(encoded, decoded, captureinfo);
 
-        AsmInstructionBlock(AsmCode encoded, Instruction[] decoded, NativeCaptureInfo captureinfo)
+        AsmInstructionBlock(AsmCode encoded, Instruction[] decoded, CaptureCompletion captureinfo)
         {
             this.Label = encoded.Label;
             this.NativeCode = encoded;
@@ -49,7 +49,7 @@ namespace Z0.AsmSpecs
         /// <summary>
         /// Describes the capture outcome
         /// </summary>
-        public NativeCaptureInfo CaptureInfo {get;}
+        public CaptureCompletion CaptureInfo {get;}
 
         /// <summary>
         /// Queries/Manipulates an index-identified instruction

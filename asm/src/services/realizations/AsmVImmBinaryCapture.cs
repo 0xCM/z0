@@ -34,8 +34,8 @@ namespace Z0
         {
             var moniker = Resolver.Moniker;
             var f = Resolver.@delegate(imm8);
-            var buffer = new byte[NativeServices.DefaultBufferLen];
-            return Context.Decoder().DecodeFunction(NativeServices.MemberCapture().Capture(moniker.WithImm8(imm8), f, buffer));
+            var buffer = new byte[CaptureServices.DefaultBufferLen];
+            return Context.Decoder().DecodeFunction(CaptureServices.Capture().Capture(moniker.WithImm8(imm8), f, buffer));
         }
     }
 
@@ -63,8 +63,8 @@ namespace Z0
         {
             var moniker = Resolver.Moniker;
             var f = Resolver.@delegate(imm8);
-            var buffer = new byte[NativeServices.DefaultBufferLen];
-            return Context.Decoder().DecodeFunction(NativeServices.MemberCapture().Capture(moniker.WithImm8(imm8), f, buffer));
+            var buffer = new byte[CaptureServices.DefaultBufferLen];
+            return Context.Decoder().DecodeFunction(CaptureServices.Capture().Capture(moniker.WithImm8(imm8), f, buffer));
         }
     }
 }

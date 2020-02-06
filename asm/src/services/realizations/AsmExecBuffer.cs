@@ -9,24 +9,34 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-
-    readonly struct AsmExecBuffer : IAsmExecBuffer
+    
+    /// <summary>
+    /// Wraps an executable non-GC'd buffer to hold assembly instruction code
+    /// </summary>
+    public readonly struct AsmExecBuffer : IAsmExecBuffer
     {
         public const int DefaultSize = 512;
 
-        readonly MemoryBuffer Buffer;
+        readonly IMemoryBuffer Buffer;
 
         public IAsmContext Context {get;}
         
-        [MethodImpl(Inline)]
-        public static AsmExecBuffer Create(IAsmContext context, int? size = null)
-            => new AsmExecBuffer(context, size ?? DefaultSize);
+        public static IAsmExecBuffer Create(int? size = null)
+            => new AsmExecBuffer(null, size);
 
-        [MethodImpl(Inline)]
-        AsmExecBuffer(IAsmContext context, int size)
+        public static IAsmExecBuffer Create(IAsmContext context, int? size = null)
+            => new AsmExecBuffer(context, size);
+
+        public IntPtr Handle
+        {
+            [MethodImpl(Inline)]
+            get => Buffer.Handle;
+        }
+
+        AsmExecBuffer(IAsmContext context, int? size = null)
         {
             Context = context;
-            Buffer = MemoryBuffer.Alloc(size);
+            Buffer = MemoryBuffer.Alloc(size ?? DefaultSize);
         }
 
         /// <summary>
@@ -37,31 +47,8 @@ namespace Z0
         public IntPtr Load(in AsmCode src)
         {
             Buffer.Fill(src.Encoded);
-            return Buffer.Handle;
+            return Handle;
         }
- 
-         [MethodImpl(Inline)]
-         public FixedFunc<X0,R> F<X0,R>(in AsmCode src)
-            where X0 : unmanaged, IFixed
-            where R : unmanaged, IFixed             
-                => Dynop.Func<X0,R>(src.Id, Load(src));                                
-
-         [MethodImpl(Inline)]
-         public FixedFunc<X0,X1,R> F<X0,X1,R>(in AsmCode src)
-            where X0 : unmanaged, IFixed
-            where X1 : unmanaged, IFixed
-            where R : unmanaged, IFixed
-                => Dynop.Func<X0,X1,R>(src.Id, Load(src));                
-        
-         [MethodImpl(Inline)]
-         public FixedFunc<T,T> UnaryOp<T>(in AsmCode src)
-            where T : unmanaged, IFixed
-                => F<T,T>(src);
-
-         [MethodImpl(Inline)]
-         public FixedFunc<T,T,T> BinaryOp<T>(in AsmCode src)
-            where T : unmanaged, IFixed
-                => F<T,T,T>(src);
 
         public void Dispose()
             => Buffer.Dispose();

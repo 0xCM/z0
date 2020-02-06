@@ -19,10 +19,10 @@ namespace Z0
     {
         protected override bool TraceEnabled => true;
         
-        INativeWriter NativeTestWriter([Caller] string test = null)
+        ICaptureWriter NativeTestWriter([Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.HexExt);    
-            return  NativeServices.Writer(path);
+            return  CaptureServices.Writer(path);
         }
 
         public void parse_address_segment()
@@ -41,7 +41,7 @@ namespace Z0
         public void capture_vectorized_generics()
         {
             using var writer = NativeTestWriter();
-            var svc = NativeServices.MemberCapture();
+            var svc = CaptureServices.Capture();
 
             var types = NumericKind.All.DistinctTypes();
             var methods = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
@@ -53,7 +53,7 @@ namespace Z0
         public void capture_direct()
         {
             using var target = NativeTestWriter();
-            var svc = NativeServices.MemberCapture();
+            var svc = CaptureServices.Capture();
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
             {
                 svc.Capture(m,target);
@@ -69,7 +69,7 @@ namespace Z0
         public void capture_delegates()
         {
             using var target = NativeTestWriter();
-            var svc = NativeServices.MemberCapture();
+            var svc = CaptureServices.Capture();
 
             Span<byte> buffer = new byte[100];
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
@@ -94,7 +94,7 @@ namespace Z0
         {
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
             Span<byte> buffer = new byte[128];
-            var svc = NativeServices.MemberCapture();
+            var svc = CaptureServices.Capture();
 
             for(var i=0; i<src.Length; i++)
             {

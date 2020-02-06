@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Security;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
-
-    using Z0.AsmSpecs;
 
     using static zfunc;
 
@@ -66,8 +62,7 @@ namespace Z0
         /// </summary>
         IEnumerable<FilePath> Files 
             => Root.Files(FileExtensions.Hex,true);
-            
-        
+                    
         /// <summary>
         /// Reads a hex-line formatted file
         /// </summary>
@@ -75,15 +70,7 @@ namespace Z0
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
         public IEnumerable<AsmCode> Read(FilePath src, char idsep, char bytesep)
-        {
-            return Context.HexReader(idsep,bytesep).Read(src);
-            // foreach(var line in src.ReadLines())
-            // {
-            //     var hex = AsmHexLine.Parse(line,idsep,bytesep);
-            //     if(hex.OnNone(() => errout($"Could not parse the line {line} from {src}")))
-            //         yield return hex.MapRequired(h => AsmCode.Define(h.Id, h.Encoded));
-            // }
-        }
+            => Context.HexReader(idsep,bytesep).Read(src);
 
         public IEnumerable<AsmCode> Read(string name)
             => Read(fn => fn.NoExtension == name);
@@ -105,14 +92,14 @@ namespace Z0
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
         public IEnumerable<AsmCode> Read(FilePath src)
-            => Read(src, AsmHexLine.DefaultIdSep, AsmHexLine.DefaultByteSep);
+            => Read(src, HexLine.DefaultIdSep, HexLine.DefaultByteSep);
 
         /// <summary>
         /// Reads a moniker-identified, default-formatted hex-line file
         /// </summary>
         /// <param name="id">The identifying moniker</param>
         public IEnumerable<AsmCode> Read(OpIdentity id)
-            => Read(Root + FileName.Define(id, AsmHexLine.FileExt));
+            => Read(Root + FileName.Define(id, HexLine.FileExt));
 
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
@@ -120,13 +107,22 @@ namespace Z0
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="id">The identifying moniker</param>
-        public Option<AsmCode<T>> Read<T>(OpIdentity id, T t = default)
+        public Option<TypedAsm<T>> Read<T>(OpIdentity id, T t = default)
             where T : unmanaged
                 => Read(Root,id, t);
         
-        static Option<AsmCode<T>> Read<T>(FolderPath location, OpIdentity m, T t = default)
+        /// <summary>
+        /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
+        /// </summary>
+        /// <param name="data">The encoded assembly</param>
+        /// <param name="id">The identity to confer</param>
+        static TypedAsm<T> Parse<T>(string data, OpIdentity id, T t = default)
             where T : unmanaged
-                => Try(() => AsmCode.Parse(Paths.AsmHexPath(location, m).ReadText(),m,t));
+                => new TypedAsm<T>(id, MemoryRange.Empty, id.Identifier, Hex.parsebytes(data).ToArray());
+
+        static Option<TypedAsm<T>> Read<T>(FolderPath location, OpIdentity m, T t = default)
+            where T : unmanaged
+                => Try(() => Parse<T>(Paths.AsmHexPath(location, m).ReadText(),m,t));
 
         public IAsmCodeArchive Clear()
         {

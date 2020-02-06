@@ -14,10 +14,10 @@ namespace Z0.AsmSpecs
     /// </summary>
     public class AsmFunction
     {   
-        public static AsmFunction Define(MemoryRange origin, AsmCode code, NativeCaptureInfo ci, AsmInstructionList instructions)
+        public static AsmFunction Define(MemoryRange origin, AsmCode code, CaptureCompletion ci, AsmInstructionList instructions)
             => new AsmFunction(origin, code, ci, instructions);
 
-        AsmFunction(MemoryRange address, AsmCode code, NativeCaptureInfo ci, AsmInstructionList instructions)
+        AsmFunction(MemoryRange address, AsmCode code, CaptureCompletion ci, AsmInstructionList instructions)
         {
             this.Id = code.Id;
             this.Name = code.Id;
@@ -66,7 +66,7 @@ namespace Z0.AsmSpecs
         /// <summary>
         /// Describes the capture outcome
         /// </summary>
-        public NativeCaptureInfo CaptureInfo {get;}
+        public CaptureCompletion CaptureInfo {get;}
 
         /// <summary>
         /// The number of encoded instructions

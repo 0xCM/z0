@@ -19,7 +19,7 @@ namespace Z0
 
         public IAsmContext Context {get;}
 
-        readonly INativeExecBuffer AsmBuffer;
+        readonly IAsmExecBuffer AsmBuffer;
 
         readonly IVEmitter128<T> RandomEmitter {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         public AsmImmBinOpValidator128(IAsmContext context)
         {
             this.Context = context;
-            this.AsmBuffer = NativeServices.ExecBuffer();
+            this.AsmBuffer = AsmExecBuffer.Create();
             this.RandomEmitter = context.Random.VectorEmitter<T>(n128);
             this.AsmProducer = context.ImmBuilder(HK.vk128(), n1);
 

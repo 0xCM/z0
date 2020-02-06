@@ -14,19 +14,19 @@ namespace Z0
     public abstract class t_asm<U> : UnitTest<U>, IDisposable
         where U : t_asm<U>
     {
-        protected INativeExecBuffer AsmBuffer;
+        protected IAsmExecBuffer AsmBuffer;
 
         protected IAsmContext Context;
 
-        INativeExecBuffer[] AsmBuffers;
+        IAsmExecBuffer[] AsmBuffers;
         
         public t_asm()
         {
             Context = AsmContext.New(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
-            AsmBuffer = NativeServices.ExecBuffer();
-            AsmBuffers = new INativeExecBuffer[]{
-                NativeServices.ExecBuffer(),
-                NativeServices.ExecBuffer()
+            AsmBuffer = AsmExecBuffer.Create();
+            AsmBuffers = new IAsmExecBuffer[]{
+                AsmExecBuffer.Create(),
+                AsmExecBuffer.Create()
             };
         }
 
@@ -37,10 +37,10 @@ namespace Z0
             AsmBuffers[1].Dispose();
         }
 
-        protected INativeExecBuffer LeftBuffer
+        protected IAsmExecBuffer LeftBuffer
             => AsmBuffers[0];
 
-        protected INativeExecBuffer RightBuffer
+        protected IAsmExecBuffer RightBuffer
             => AsmBuffers[1];
 
         protected string Math
@@ -58,10 +58,10 @@ namespace Z0
             return  Context.HexWriter(dst);
         }
 
-        protected INativeWriter NativeTestWriter([Caller] string test = null)
+        protected ICaptureWriter NativeTestWriter([Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
-            return  NativeServices.Writer(dst);
+            return  CaptureServices.Writer(dst);
         }
 
         protected IAsmFunctionWriter AsmTestWriter([Caller] string test = null)
@@ -74,7 +74,7 @@ namespace Z0
             where T : unmanaged
         {
                       
-            var g = AsmBuffer.BinaryOp(asm.As<T>());
+            var g = AsmBuffer.BinaryOp(asm.Typed<T>());
 
             void check()
             {
@@ -88,14 +88,14 @@ namespace Z0
             CheckAction(check, asm.Id);
         }
 
-        protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode<T> asm)
+        protected void CheckAsmMatch<T>(BinaryOp<T> f, TypedAsm<T> asm)
             where T : unmanaged
                 => CheckAsmMatch(f,asm.Untyped);
 
         protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode asm)
             where T : unmanaged
         {
-            var g = AsmBuffer.UnaryOp(asm.As<T>());
+            var g = AsmBuffer.UnaryOp(asm.Typed<T>());
 
             void check()
             {
@@ -109,14 +109,14 @@ namespace Z0
             CheckAction(check, asm.Id);
         }
 
-        protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode<T> asm)
+        protected void CheckAsmMatch<T>(UnaryOp<T> f, TypedAsm<T> asm)
             where T : unmanaged
                 => CheckAsmMatch(f, asm.Untyped);
 
         protected AsmCode ReadAsm(string catalog, string subject, OpIdentity m)
             => Context.CodeArchive(catalog,subject).Read(m).Single();
 
-        protected AsmCode<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
+        protected TypedAsm<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
                 => Context.CodeArchive(catalog,subject).Read<T>(Identity.contracted(opname, w, NumericType.kind<T>())).Require(); 

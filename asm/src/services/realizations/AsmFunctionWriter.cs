@@ -25,7 +25,7 @@ namespace Z0
         public IAsmContext Context {get;}
 
         byte[] Buffer {get; set;}
-            = new byte[NativeServices.DefaultBufferLen];
+            = new byte[CaptureServices.DefaultBufferLen];
 
         public void Write(AsmFunction src)
         {

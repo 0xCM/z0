@@ -12,7 +12,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static zfunc;
 
-    class CaptureStatsSink : AppService, ICaptureStateSink
+    class CaptureStatsSink : AppService, ICaptureEventSink
     {
         public CaptureStatsSink(ITestContext context)
             : base(context)
@@ -20,9 +20,9 @@ namespace Z0
 
         }
 
-        public void Accept(in CaptureState src)
+        public void Accept(in CaptureEventInfo info)
         {
-            AppContext.PostMessage(src.ToString());
+            AppContext.PostMessage(info.CaptureState.ToString());
         }
     }
 
@@ -38,7 +38,7 @@ namespace Z0
         public void capture_1()
         {
             var src = Intrinsics.DirectMethods.Where(m => m.Name == nameof(dinx.vand));
-            var control = NativeServices.CaptureControl(new CaptureStatsSink(this));
+            var control = CaptureServices.Control(new CaptureStatsSink(this));
             var exchange = control.CreateExchange();
             
             

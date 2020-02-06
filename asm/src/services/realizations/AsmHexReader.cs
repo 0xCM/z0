@@ -24,15 +24,15 @@ namespace Z0
         AsmHexReader(IAsmContext context, char? idsep = null, char? bytesep = null)
         {
             this.Context = context;
-            this.IdSep = idsep ?? AsmHexLine.DefaultIdSep;
-            this.ByteSep = bytesep ?? AsmHexLine.DefaultByteSep;
+            this.IdSep = idsep ?? HexLine.DefaultIdSep;
+            this.ByteSep = bytesep ?? HexLine.DefaultByteSep;
         }
 
         public IEnumerable<AsmCode> Read(FilePath src)
         {
             foreach(var line in src.ReadLines())
             {
-                var hex = AsmHexLine.Parse(line,IdSep,ByteSep);
+                var hex = HexLine.Parse(line,IdSep,ByteSep);
                 if(hex.OnNone(() => errout($"Could not parse the line {line} from {src}")))
                     yield return hex.MapRequired(h => AsmCode.Define(h.Id, h.Encoded));
             }

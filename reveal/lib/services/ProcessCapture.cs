@@ -51,10 +51,17 @@ namespace Z0
                let f = Decoder.DecodeFunction(capture)
                select f;
 
+        [MethodImpl(Inline)]
+        static IntPtr jit(MethodInfo src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
+        }
+
         public IEnumerable<AsmFunction> CaptureFunctions(IEnumerable<MethodInfo> methods)
         {
             foreach(var m in methods)
-                Jit.jit(m);
+                jit(m);
 
             foreach(var m in methods)
             {
@@ -117,7 +124,7 @@ namespace Z0
             }
 
             var location = MemoryRange.Define(address, address + size);            
-            var result = NativeCaptureInfo.Define(location.Start, location.End, CaptureTermCode.CTC_MSDIAG, buffer);
+            var result = CaptureCompletion.Define(location.Start, location.End, CaptureTermCode.CTC_MSDIAG, buffer);
 			return CapturedMember.Define(id, method, location, buffer, result);                    
         }
     }
