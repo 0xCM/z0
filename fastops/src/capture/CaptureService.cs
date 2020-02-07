@@ -131,13 +131,18 @@ namespace Z0
                 && (exchange.Target(offset - 1) == ZED)                     
                 && (exchange.Target(offset - 0) == ZED);                     
 
-        static CaptureTermCode? CalcTerm(in CaptureExchange exchange, int offset, int? ret_offset)
+        static CaptureTermCode? CalcTerm(in CaptureExchange exchange, int offset, int? ret_offset, out int delta)
         {
+            delta = 0;
+
             if(offset >= 4)
             {
                 var tc = Scan4(exchange, offset);
                 if(tc != null)
+                {
+                    delta = -2;
                     return tc;
+                }
             }
 
             if(offset >= 5)
@@ -150,8 +155,11 @@ namespace Z0
             if(offset >= 7 && Zx7(exchange,offset))
             {
                 if(ret_offset == null)
+                {
+                    delta = -6;
                     return CTC_Zx7_000;
-                
+                }
+                delta = -(offset - ret_offset.Value);
                 return CTC_Zx7_RET;
             }
             
@@ -177,30 +185,11 @@ namespace Z0
                 exchange.Accept(CaptureState.Define(offset, (ulong)pSrcCurrent, code));                
 
                 if(ret_offset == null && code == RET)
-                    ret_offset = offset; 
+                    ret_offset = offset;                 
 
-                if(offset >= 4)
-                {
-                    var tc = Scan4(exchange, offset);
-                    if(tc != null)
-                        return Complete(tc.Value,-2);
-                }
-
-                if(offset >= 5)
-                {
-                    var tc = Scan5(exchange, offset);
-                    if(tc != null)
-                        return Complete(CTC_JMP_RAX,0);
-                }
-                        
-                if(offset >= 7 && Zx7(exchange,offset))
-                {
-                    if(ret_offset == null)
-                        return Complete(CTC_Zx7_000,-6);
-                    
-                    var delta = -(offset - ret_offset.Value);
-                    return Complete(CTC_Zx7_RET, delta);
-                }
+                var tc = CalcTerm(exchange, offset,ret_offset, out var delta);
+                if(tc != null)                
+                    return Complete(tc.Value, delta);
             }
             return Complete(CTC_BUFFER_OUT,0);
         }
