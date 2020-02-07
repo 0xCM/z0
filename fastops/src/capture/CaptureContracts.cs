@@ -27,15 +27,16 @@ namespace Z0
 
     public interface ICaptureOps
     {
-        CapturedMember Capture(OpIdentity id, MethodInfo method, in CaptureExchange exchange);        
+        CapturedMember Capture(in OpIdentity id, MethodInfo src, in CaptureExchange exchange);        
         
-        CapturedMember Capture(OpIdentity id, DynamicDelegate src, in CaptureExchange exchange);
+        CapturedMember Capture(in OpIdentity id, in DynamicDelegate src, in CaptureExchange exchange);
 
-        CapturedMember Capture(OpIdentity id, Delegate src, in CaptureExchange exchange);
+        CapturedMember Capture(in OpIdentity id, Delegate src, in CaptureExchange exchange);
 
+        Option<CapturedOpData> Capture(in OpIdentity id, Span<byte> src, in CaptureExchange exchange);        
 
-        CapturedMember Capture(MethodInfo method, in CaptureExchange exchange)
-            => Capture(method.Identify(), method, exchange);
+        CapturedMember Capture(MethodInfo src, in CaptureExchange exchange)
+            => Capture(src.Identify(), src, exchange);
     }
 
     public interface ICaptureControl : ICaptureOps, ICaptureJunction, ICaptureEventSink
@@ -58,16 +59,16 @@ namespace Z0
 
     public interface ICaptureService : ICaptureOps
     {        
-        CapturedMember Capture(OpIdentity id, DynamicDelegate src, Span<byte> dst)
+        CapturedMember Capture(in OpIdentity id, in DynamicDelegate src, Span<byte> dst)
             => Capture(id,src,CaptureExchange.Define(dst));
 
-        CapturedMember Capture(OpIdentity id, Delegate src, Span<byte> dst)
+        CapturedMember Capture(in OpIdentity id, Delegate src, Span<byte> dst)
             => Capture(id,src,CaptureExchange.Define(dst));
 
         CapturedMember Capture(MethodInfo src, Span<byte> dst)
             => Capture(src.Identify(),src, CaptureExchange.Define(dst));
 
-        CapturedMember Capture(OpIdentity id, MethodInfo src, Span<byte> dst)
+        CapturedMember Capture(in OpIdentity id, MethodInfo src, Span<byte> dst)
             => Capture(id,src, CaptureExchange.Define(dst));
  
         CapturedMember Capture(MethodInfo src, Type[] args, Span<byte> dst)

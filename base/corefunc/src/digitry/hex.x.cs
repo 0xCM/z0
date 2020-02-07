@@ -102,11 +102,11 @@ namespace Z0
             return sb.ToString();
         }
         
-        // public static string FormatHexBytes(this byte[] src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
-        //     bool uppercase = false, bool prespec = true, int? segwidth = null)
-        //         => src.AsSpan().ReadOnly().FormatHexBytes(sep,zpad,specifier,uppercase,prespec,segwidth);
 
         public static string FormatAsmHex(this ulong src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;    
+
+        public static string FormatAsmHex(this long src, int? zpad = null)
             => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;    
 
         public static string FormatAsmHex(this uint src, int? zpad = null)        

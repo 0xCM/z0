@@ -16,6 +16,26 @@ namespace Z0
     /// </summary>
     public readonly struct DynamicDelegate
     {
+        /// <summary>
+        /// The delegate identity
+        /// </summary>
+        public readonly OpIdentity Id;
+
+        /// <summary>
+        /// The method invoked by the dynamic operator that provides the substance of the operation
+        /// </summary>
+        public readonly MethodInfo SourceMethod;
+
+        /// <summary>
+        /// The dynamic operation
+        /// </summary>
+        public readonly Delegate DynamicOp;
+
+        /// <summary>
+        /// The dynamically-generated method that backs the dynamic operator
+        /// </summary>
+        public readonly DynamicMethod DynamicMethod;
+
         [MethodImpl(Inline)]
         public static DynamicDelegate<D> Define<D>(OpIdentity id, MethodInfo src, DynamicMethod dst, D op)
             where D : Delegate
@@ -43,24 +63,5 @@ namespace Z0
             this.DynamicOp = op;
         }
 
-        /// <summary>
-        /// The delegate identity
-        /// </summary>
-        public readonly OpIdentity Id;
-
-        /// <summary>
-        /// The method invoked by the dynamic operator that provides the substance of the operation
-        /// </summary>
-        public readonly MethodInfo SourceMethod;
-
-        /// <summary>
-        /// The dynamic operation
-        /// </summary>
-        public readonly Delegate DynamicOp;
-
-        /// <summary>
-        /// The dynamically-generated method that backs the dynamic operator
-        /// </summary>
-        public readonly DynamicMethod DynamicMethod;
     }
 }

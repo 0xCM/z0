@@ -70,12 +70,18 @@ namespace Z0
             => TargetBuffer.Slice(start, length);
 
         [MethodImpl(Inline)]
-        public void Complete(in CapturedMember captured)
-            => Junction.Complete(captured, this);
+        public ref readonly CapturedMember Complete(in CapturedMember captured)
+        {
+            Junction.Complete(captured, this);
+            return ref captured;
+        }
 
         [MethodImpl(Inline)]
-        public void Accept(in CaptureState state)
-            => Junction.Accept(state, this);
+        public ref readonly CaptureState Accept(in CaptureState state)
+        {
+            Junction.Accept(state, this);
+            return ref state;
+        }
 
         public int BufferLength 
         {

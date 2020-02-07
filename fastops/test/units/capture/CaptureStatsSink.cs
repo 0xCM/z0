@@ -94,7 +94,7 @@ namespace Z0
         static (int offset, byte value) Record(in CaptureEventInfo info)
         {
             var offset = Offset(info);
-            var value =info.CaptureState.LastValue;
+            var value =info.CaptureState.Data;
             info[offset] = value;
             return (offset, value);
         }
@@ -109,7 +109,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static byte Value(in CaptureEventInfo src)
-            => src.CaptureState.LastValue;
+            => src.CaptureState.Data;
 
             
     }

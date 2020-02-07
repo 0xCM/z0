@@ -24,14 +24,21 @@ namespace Z0
         public static CaptureControl Create()
             => new CaptureControl(null);
 
-        public CapturedMember Capture(OpIdentity id, DynamicDelegate src, in CaptureExchange exchange)
+        [MethodImpl(Inline)]
+        public CapturedMember Capture(in OpIdentity id, in DynamicDelegate src, in CaptureExchange exchange)
             => Service.Capture(id,src,exchange);
 
-        public CapturedMember Capture(OpIdentity id, Delegate src, in CaptureExchange exchange)
+        [MethodImpl(Inline)]
+        public CapturedMember Capture(in OpIdentity id, Delegate src, in CaptureExchange exchange)
             => Service.Capture(id,src,exchange);
 
-        public CapturedMember Capture(OpIdentity id, MethodInfo method, in CaptureExchange exchange)
-            => Service.Capture(id, method, exchange);                                    
+        [MethodImpl(Inline)]
+        public CapturedMember Capture(in OpIdentity id, MethodInfo src, in CaptureExchange exchange)
+            => Service.Capture(id, src, exchange);                                    
+
+        [MethodImpl(Inline)]
+        public Option<CapturedOpData> Capture(in OpIdentity id, Span<byte> src, in CaptureExchange exchange)
+            => Service.Capture(id,src,exchange);
 
         CaptureControl(ICaptureEventSink sink)
         {
@@ -56,6 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Complete(in CapturedMember captured, in CaptureExchange exchange)
             => EventSink.Complete(captured);
+
 
         readonly struct CaptureEventSink : ICaptureEventSink
         {

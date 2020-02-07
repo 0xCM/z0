@@ -11,6 +11,27 @@ namespace Z0
  
     using static zfunc;
 
+    public readonly struct CapturedOpData
+    {
+        
+        public static CapturedOpData Define(OpIdentity id, CaptureCompletion info, byte[] content)
+            => new CapturedOpData(id,info,content);
+
+        CapturedOpData(OpIdentity id, CaptureCompletion info, byte[] content)
+        {
+            this.Id = id;
+            this.CaptureInfo = info;
+            this.Content = content;
+        }
+        
+        public readonly OpIdentity Id;
+
+        public readonly CaptureCompletion CaptureInfo;
+
+        public readonly byte[] Content;
+
+    }
+
     /// <summary>
     ///  Encapsulates all aspects of a member capture operation
     /// </summary>

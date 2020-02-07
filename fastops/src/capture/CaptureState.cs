@@ -13,36 +13,36 @@ namespace Z0
     public readonly struct CaptureState
     {
         [MethodImpl(Inline)]
-        public static implicit operator CaptureState((int offset, ulong location, byte value) src)
+        public static implicit operator CaptureState((int offset, long location, byte value) src)
             => Define(src.offset, src.location, src.value);
 
         [MethodImpl(Inline)]
-        public static CaptureState Define(int offset, ulong location, byte value)
+        public static CaptureState Define(int offset, long location, byte value)
             => new CaptureState(offset,location,value);
         
         [MethodImpl(Inline)]
-        CaptureState(int offset, ulong location, byte value)
+        CaptureState(int offset, long location, byte value)
         {
             this.Offset = offset - 1;
             this.Location = location - 1;
-            this.LastValue = value;
+            this.Data = value;
         }
 
         public readonly int Offset;
 
-        public readonly ulong Location;
+        public readonly long Location;
 
-        public readonly byte LastValue;
+        public readonly byte Data;
 
         [MethodImpl(Inline)]
-        public void Deconstruct(out int offset, out ulong location, out byte value)        
+        public void Deconstruct(out int offset, out long location, out byte value)        
         {
             offset = Offset;
             location = Location;
-            value = LastValue;
+            value = Data;
         }
 
         public override string ToString() 
-            => concat(Offset.FormatAsmHex(4), space(), Location.FormatAsmHex(14), space(), LastValue.FormatHex());
+            => concat(Offset.FormatAsmHex(4), space(), Location.FormatAsmHex(14), space(), Data.FormatHex());
     }
 }
