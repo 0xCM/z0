@@ -19,9 +19,9 @@ namespace Z0
             try
             {
                 var pSrc = jit(src);
-                var dst = exchange.TargetBuffer;
+                //var dst = exchange.TargetBuffer;
                 var cr = capture(pSrc, exchange);            
-                var bytes = dst.Slice(0, cr.ByteCount).ToArray();
+                var bytes = exchange.Target(0, cr.ByteCount).ToArray();
                 var captured = CapturedMember.Define(id, src, cr.Range, bytes, cr);                
                 exchange.Complete(captured);
                 return captured;
@@ -38,9 +38,9 @@ namespace Z0
             try
             {
                 var pSrc = jit(src).Ptr;
-                var dst = exchange.TargetBuffer;
+                //var dst = exchange.TargetBuffer;
                 var cr =  capture(pSrc, exchange);   
-                var bytes = dst.Slice(0, cr.ByteCount).ToArray();
+                var bytes = exchange.Target(0, cr.ByteCount).ToArray();
                 var captured = CapturedMember.Define(id, src, cr.Range, bytes, cr);                
                 exchange.Complete(captured);
                 return captured;
@@ -58,9 +58,9 @@ namespace Z0
             try
             {
                 var pSrc = jit(src);
-                var dst = exchange.TargetBuffer;
+                //var dst = exchange.TargetBuffer;
                 var cr = capture(pSrc, exchange);
-                var bytes = dst.Slice(0, cr.ByteCount).ToArray();
+                var bytes = exchange.Target(0, cr.ByteCount).ToArray();
                 var captured = CapturedMember.Define(id, src, cr.Range, bytes, cr);  
                 exchange.Complete(captured);
                 return captured;
@@ -72,98 +72,137 @@ namespace Z0
             }
         }
 
+        const byte ZED = 0;
+        
+        const byte RET = 0xc3;
+        
+        const byte INTR = 0xcc;
+        
+        const byte SBB = 0x19;
+        
+        const byte FF = 0xff;
+
+        [MethodImpl(Inline)]
+        static CaptureTermCode? Scan4(in CaptureExchange exchange, int offset)
+        {
+
+            var x0 = exchange.Target(offset - 3);
+            var x1 = exchange.Target(offset - 2);
+            var x2 = exchange.Target(offset - 1);
+            var x3 = exchange.Target(offset);
+            var delta = -2;
+
+            if(match((x0,RET), (x1, SBB)))
+                return CTC_RET_SBB;
+            else if(match((x0, RET), (x1, INTR)))
+                return CTC_RET_INTR;
+            else if(match((x0, RET), (x1, ZED), (x2,SBB)))
+                return CTC_RET_ZED_SBB;
+            else if(match((x0, RET), (x1, ZED), (x2,ZED), (x3,ZED)))
+                return CTC_RET_Zx3;
+            else if(match((x0,INTR), (x1, INTR)))
+                return CTC_INTRx2;
+            else
+                return null;
+        }
+
+        [MethodImpl(Inline)]
+        static CaptureTermCode? Scan5(in CaptureExchange exchange, int offset)
+        {
+            var x0 = exchange.Target(offset - 5);
+            var x1 = exchange.Target(offset - 4);
+            var x2 = exchange.Target(offset - 3);
+            var x3 = exchange.Target(offset - 2);
+            var x4 = exchange.Target(offset - 1);
+            
+            if(match((x0,ZED), (x1,ZED), (x2,0x48), (x3,FF), (x4,0xe0)))
+                return CTC_JMP_RAX;
+            else
+                return null;
+        }
+
+        [MethodImpl(Inline)]
+        static bool Zx7(in CaptureExchange exchange, int offset)
+            =>      exchange.Target(offset - 6) == ZED 
+                && (exchange.Target(offset - 5) == ZED) 
+                && (exchange.Target(offset - 4) == ZED) 
+                && (exchange.Target(offset - 3) == ZED) 
+                && (exchange.Target(offset - 2) == ZED) 
+                && (exchange.Target(offset - 1) == ZED)                     
+                && (exchange.Target(offset - 0) == ZED);                     
+
+        static CaptureTermCode? CalcTerm(in CaptureExchange exchange, int offset, int? ret_offset)
+        {
+            if(offset >= 4)
+            {
+                var tc = Scan4(exchange, offset);
+                if(tc != null)
+                    return tc;
+            }
+
+            if(offset >= 5)
+            {
+                var tc = Scan5(exchange, offset);
+                if(tc != null)
+                    return CTC_JMP_RAX;
+            }
+                    
+            if(offset >= 7 && Zx7(exchange,offset))
+            {
+                if(ret_offset == null)
+                    return CTC_Zx7_000;
+                
+                return CTC_Zx7_RET;
+            }
+            
+            return null;
+        }
+
         CaptureCompletion capture(IntPtr src, in CaptureExchange exchange)
         {
-            const byte ZED = 0;
-            const byte RET = 0xc3;
-            const byte INTR = 0xcc;
-            const byte SBB = 0x19;
-            const int Lookback_Count = 16;
  
             var pSrc = src.ToPointer<byte>();
-            var dst = exchange.TargetBuffer;
-
-            var maxcount = dst.Length - 1;
+            var limit = exchange.BufferLength - 1;
             var pSrcCurrent = pSrc;    
-            var offset = 0;
-            
-            var ret_found = false;
-            var ret_offset = 0ul;
-            var takeback = 0;
+            var offset = 0;            
+            int? ret_offset = null;
 
-            var tc = None;
-            Span<byte> lookback = new byte[Lookback_Count];            
-                       
-            CaptureCompletion Capture(Span<byte> lookback, int delta)
-                => CaptureCompletion.Define((ulong)pSrc, (ulong)((long)pSrcCurrent + delta), tc, lookback.ToArray());
+            CaptureCompletion Complete(CaptureTermCode tc, int delta)
+                => CaptureCompletion.Define((ulong)pSrc, (ulong)((long)pSrcCurrent + delta), tc);
 
-            while(offset < maxcount)
+            while(offset < limit)
             {
                 byte code = 0;                
-                exchange.Target(offset++) =Read(pSrcCurrent++, ref code);  
-                exchange.Accept(CaptureState.Define(offset, (ulong)pSrcCurrent, code));
-                
-                var lookstart = offset < Lookback_Count ? 0 : offset - Lookback_Count;
-                lookback = dst.Slice(lookstart, Lookback_Count);
+                exchange.Target(offset++) = Read(pSrcCurrent++, ref code);  
+                exchange.Accept(CaptureState.Define(offset, (ulong)pSrcCurrent, code));                
 
-                if(!ret_found)
-                {
-                    ret_found = (code == RET);
-                    if(ret_found)
-                        ret_offset = (ulong)offset;
-                }
+                if(ret_offset == null && code == RET)
+                    ret_offset = offset; 
 
                 if(offset >= 4)
                 {
-                    var x0 = dst[offset - 3];
-                    var x1 = dst[offset - 2];
-                    var x2 = dst[offset - 1];
-                    var x3 = dst[offset];
-                    var end = 0ul;
-
-                    if(match((x0,RET), (x1, SBB)))
-                        tc = CTC_RET_SBB;
-                    else if(match((x0, RET), (x1, INTR)))
-                        tc = CTC_RET_INTR;
-                    else if(match((x0, RET), (x1, ZED), (x2,SBB)))
-                        tc = CTC_RET_ZED_SBB;
-                    else if(match((x0, RET), (x1, ZED), (x2,ZED), (x3,ZED)))
-                        tc = CTC_RET_Zx3;
-                    else if(match((x0,INTR), (x1, INTR)))
-                        tc = CTC_INTRx2;
-
-                    if(tc != None)
-                        return Capture(lookback, -2);
+                    var tc = Scan4(exchange, offset);
+                    if(tc != null)
+                        return Complete(tc.Value,-2);
                 }
-            
-                if(CheckJmpRax(lookback, out tc, out takeback))
-                    return Capture(lookback, takeback);
 
-                if(offset >= Lookback_Count 
-                    && (dst[offset - 6] == ZED) 
-                    && (dst[offset - 5] == ZED) 
-                    && (dst[offset - 4] == ZED) 
-                    && (dst[offset - 3] == ZED) 
-                    && (dst[offset - 2] == ZED) 
-                    && (dst[offset - 1] == ZED)                     
-                    && (dst[offset - 0] == ZED)                     
-                    )
+                if(offset >= 5)
                 {
-                    var end = 0ul;
-                    tc = CTC_Zx7_000;
-
-                    if(ret_found)
-                    {
-                        end = (ulong)pSrc + ret_offset;
-                        tc = CTC_Zx7_RET;
-                    }
-                    else
-                        end = (ulong)pSrcCurrent - 6;
+                    var tc = Scan5(exchange, offset);
+                    if(tc != null)
+                        return Complete(CTC_JMP_RAX,0);
+                }
+                        
+                if(offset >= 7 && Zx7(exchange,offset))
+                {
+                    if(ret_offset == null)
+                        return Complete(CTC_Zx7_000,-6);
                     
-                    return CaptureCompletion.Define((ulong)pSrc, end, tc, lookback.ToArray());
+                    var delta = -(offset - ret_offset.Value);
+                    return Complete(CTC_Zx7_RET, delta);
                 }
             }
-            return CaptureCompletion.Define((ulong)pSrc, (ulong)pSrcCurrent, CTC_BUFFER_OUT, lookback.ToArray());           
+            return Complete(CTC_BUFFER_OUT,0);
         }
                      
         [MethodImpl(Inline)]
@@ -194,17 +233,25 @@ namespace Z0
             && b.x == b.y 
             && c.x == c.y 
             && d.x == d.y;
-        
-        static ReadOnlySpan<byte> JmpRaxCheck => new byte[]{0x00, 0x00, 0x48, 0xff, 0xe0};        
 
         [MethodImpl(Inline)]
-        static bit CheckJmpRax(Span<byte> lookback, out CaptureTermCode termcode, out int takeback)        
-        {            
-            const int ValidBytes = 5;
-            termcode = lookback.StartsWith(JmpRaxCheck) ? CTC_JMP_RAX : 0;            
-            takeback = termcode != 0 ? -JmpRaxCheck.Length - 1 - ValidBytes : 0;
-            return termcode != 0;
-        }    
+        static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c, (byte x, byte y) d, (byte x, byte y) e)
+            => a.x == a.y 
+            && b.x == b.y 
+            && c.x == c.y 
+            && d.x == d.y
+            && e.x == e.y;
+
+        //static ReadOnlySpan<byte> JmpRaxCheck => new byte[]{0x00, 0x00, 0x48, 0xff, 0xe0};        
+
+        // [MethodImpl(Inline)]
+        // static bit CheckJmpRax(Span<byte> lookback, out CaptureTermCode termcode, out int takeback)        
+        // {            
+        //     const int ValidBytes = 5;
+        //     termcode = lookback.StartsWith(JmpRaxCheck) ? CTC_JMP_RAX_OLD : 0;            
+        //     takeback = termcode != 0 ? -JmpRaxCheck.Length - 1 - ValidBytes : 0;
+        //     return termcode != 0;
+        // }    
 
         /// <summary>
         /// Jits the methd and returns a pointer to the resulting method

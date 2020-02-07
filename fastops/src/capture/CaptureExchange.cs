@@ -32,6 +32,7 @@ namespace Z0
 
         CaptureExchange(ICaptureJunction juntion, Span<byte> capture, Span<byte> state)            
         {
+            require(capture.Length == state.Length);
             this.TargetBuffer = capture;
             this.StateBuffer = state;
             this.Junction = juntion;
@@ -59,6 +60,15 @@ namespace Z0
         public ref byte Target(int index)
             => ref seek(TargetBuffer, index);
 
+        /// <summary>
+        /// Slices a seection of the target buffer
+        /// </summary>
+        /// <param name="start">The start index</param>
+        /// <param name="length">The slice length</param>
+        [MethodImpl(Inline)]
+        public Span<byte> Target(int start, int length)
+            => TargetBuffer.Slice(start, length);
+
         [MethodImpl(Inline)]
         public void Complete(in CapturedMember captured)
             => Junction.Complete(captured, this);
@@ -66,6 +76,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Accept(in CaptureState state)
             => Junction.Accept(state, this);
+
+        public int BufferLength 
+        {
+            [MethodImpl(Inline)]
+            get => TargetBuffer.Length;
+        }
 
         readonly struct EmptyJunction : ICaptureJunction
         {

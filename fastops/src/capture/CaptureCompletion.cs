@@ -15,8 +15,11 @@ namespace Z0
     {
         public static CaptureCompletion Empty => Define(0,0, CaptureTermCode.None, new byte[]{});
 
-        public static CaptureCompletion Define(ulong start, ulong end,  CaptureTermCode cc, byte[] lookback)
-            => new CaptureCompletion(start, end, cc,lookback);
+        public static CaptureCompletion Define(ulong start, ulong end,  CaptureTermCode cc, Span<byte> lookback)
+            => new CaptureCompletion(start, end, cc, new byte[]{});
+
+        public static CaptureCompletion Define(ulong start, ulong end,  CaptureTermCode cc)
+            => new CaptureCompletion(start, end, cc, new byte[]{});
 
         CaptureCompletion(ulong start, ulong end, CaptureTermCode cc, byte[] lookback)
         {   
