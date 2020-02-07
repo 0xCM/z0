@@ -10,12 +10,21 @@ namespace Z0
 
     using static zfunc;
 
+    public interface IAsmEmissionToken : IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>
+    {
+
+    }
+
+    public interface IAsmEmissionSink : IPointSink<AsmEmissionGroup>
+    {
+        
+    }
+
     public interface ICaptureJunction
     {
-        void Accept(in CaptureState state, in CaptureExchange exchange);   
+        void Accept(in CaptureExchange exchange, in CaptureState state);   
 
-        void Complete(in CapturedMember captured, in CaptureExchange exchange);
-        
+        void Complete(in CaptureExchange exchange, in CapturedMember captured);        
     }
 
     public interface ICaptureEventSink
@@ -26,17 +35,14 @@ namespace Z0
     }
 
     public interface ICaptureOps
-    {
-        CapturedMember Capture(in OpIdentity id, MethodInfo src, in CaptureExchange exchange);        
-        
-        CapturedMember Capture(in OpIdentity id, in DynamicDelegate src, in CaptureExchange exchange);
+    {               
+        CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, MethodInfo src);            
 
-        CapturedMember Capture(in OpIdentity id, Delegate src, in CaptureExchange exchange);
-
-        Option<CapturedOpData> Capture(in OpIdentity id, Span<byte> src, in CaptureExchange exchange);        
-
-        CapturedMember Capture(MethodInfo src, in CaptureExchange exchange)
-            => Capture(src.Identify(), src, exchange);
+        CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, in DynamicDelegate src);
+            
+        CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src);
+            
+        Option<CapturedOpData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src);
     }
 
     public interface ICaptureControl : ICaptureOps, ICaptureJunction, ICaptureEventSink
@@ -55,29 +61,5 @@ namespace Z0
         void WriteLine(string data);   
 
         byte[] TakeBuffer();        
-    }
-
-    public interface ICaptureService : ICaptureOps
-    {        
-        CapturedMember Capture(in OpIdentity id, in DynamicDelegate src, Span<byte> dst)
-            => Capture(id,src,CaptureExchange.Define(dst));
-
-        CapturedMember Capture(in OpIdentity id, Delegate src, Span<byte> dst)
-            => Capture(id,src,CaptureExchange.Define(dst));
-
-        CapturedMember Capture(MethodInfo src, Span<byte> dst)
-            => Capture(src.Identify(),src, CaptureExchange.Define(dst));
-
-        CapturedMember Capture(in OpIdentity id, MethodInfo src, Span<byte> dst)
-            => Capture(id,src, CaptureExchange.Define(dst));
- 
-        CapturedMember Capture(MethodInfo src, Type[] args, Span<byte> dst)
-            => Capture(src.CloseGenericMethod(args), dst);
-
-        void Capture(Delegate src, ICaptureWriter dst) 
-            => dst.WriteData(Capture(src.Identify(), src, dst.TakeBuffer()));           
-
-        void Capture(MethodInfo src, ICaptureWriter dst)
-            => dst.WriteData(Capture(src.Identify(), src,dst.TakeBuffer()));
     }
 }

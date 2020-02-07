@@ -17,7 +17,7 @@ namespace Z0
         public static MemberLocationReport CreateMemberLocationReport(AssemblyId id, Assembly src)
             => MemberLocationReport.Create(id, src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps());
 
-        public static AsmEmissionReport CreateEmissionReport(AssemblyId id, AsmEmissionToken[] emissions, string suffix = null)
+        public static AsmEmissionReport CreateEmissionReport(AssemblyId id, AsmEmissionGroup[] emissions, string suffix = null)
             => AsmEmissionReport.Create(id,emissions, suffix);
 
         public static DataResourceReport CreateResourceReport(DataResourceIndex resources)

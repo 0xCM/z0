@@ -13,109 +13,89 @@ namespace Z0
     
     readonly struct AsmCaptureService : IAsmCaptureService
     {
-        readonly byte[] buffer; 
-
         public IAsmContext Context {get;}
 
-        public static IAsmCaptureService Create(IAsmContext context, int? buffersize = null)
-            => new AsmCaptureService(context, buffersize);
+        public static IAsmCaptureService Create(IAsmContext context)
+            => new AsmCaptureService(context);
 
-        public static IAsmCaptureService Create(IAsmContext context, byte[] buffer)
-            => new AsmCaptureService(context, buffer);
-
-        AsmCaptureService(IAsmContext context, byte[] buffer)
+        AsmCaptureService(IAsmContext context)
         {
             Context = context;
-            this.buffer = buffer;
         }
-
-        AsmCaptureService(IAsmContext context, int? buffersize)
-        {
-            Context = context;
-            buffer = new byte[buffersize ?? CaptureServices.DefaultBufferLen];
-        }
-
-        Span<byte> TakeBuffer()
-        {
-            buffer.Clear();
-            return buffer;
-        }   
 
         IAsmDecoder Decoder => Context.Decoder();        
 
-        ICaptureService CaptureSvc => CaptureServices.Capture();
+        ICaptureOps Operations => CaptureServices.Operations;
 
-        public CapturedMember ExtractBits(OpIdentity id, DynamicDelegate src)
-            => CaptureSvc.Capture(id,src,TakeBuffer());
+        public CapturedMember ExtractBits(in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
+            => Operations.Capture(in exchange, id,src);
 
-        public CapturedMember ExtractBits(OpIdentity id, MethodInfo src)
-            => CaptureSvc.Capture(id, src, TakeBuffer());
+        public CapturedMember ExtractBits(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
+            => Operations.Capture(in exchange, id, src);
 
-        public CapturedMember ExtractBits(OpIdentity id, Delegate src)
-            => CaptureSvc.Capture(id, src, TakeBuffer());
+        public CapturedMember ExtractBits(in CaptureExchange exchange, OpIdentity id, Delegate src)
+            => Operations.Capture(in exchange, id, src);
 
-        public CapturedMember ExtractBits(Delegate src)
-            => ExtractBits(src.Identify(), src);
+        public CapturedMember ExtractBits(in CaptureExchange exchange, Delegate src)
+            => ExtractBits(in exchange, src.Identify(), src);
 
-        public CapturedMember ExtractBits(MethodInfo src, params Type[] args)
-            => src.IsOpenGeneric() ? CaptureBits(src.Reify(args)) : CaptureBits(src);
+        public CapturedMember ExtractBits(in CaptureExchange exchange, MethodInfo src, params Type[] args)
+            => src.IsOpenGeneric() ? CaptureBits(in exchange, src.Reify(args)) : CaptureBits(in exchange, src);
 
-        public CapturedMember[] ExtractBits(MethodInfo[] methods)
+        public CapturedMember[] ExtractBits(in CaptureExchange exchange, MethodInfo[] methods)
         {
             var targets = new CapturedMember[methods.Length];
             for(var i = 0; i<methods.Length; i++)
             {
                 var m = methods[i];
-                targets[i] = CaptureSvc.Capture(m.Identify(), m, TakeBuffer()).Replicate();                                 
-                ExtractBits(m);
+                targets[i] = Operations.Capture(in exchange, m.Identify(), m).Replicate();                                 
+                ExtractBits(exchange,m);
             }
             return targets;
         }
 
-        public AsmFunction ExtractAsm(Delegate src)
-            => Decoder.DecodeFunction(ExtractBits(src));
+        public AsmFunction ExtractAsm(in CaptureExchange exchange, Delegate src)
+            => Decoder.DecodeFunction(ExtractBits(exchange, src));
 
-        public AsmFunction ExtractAsm(MethodInfo src)
-            => Decoder.DecodeFunction(CaptureBits(src));
+        public AsmFunction ExtractAsm(in CaptureExchange exchange, MethodInfo src)
+            => Decoder.DecodeFunction(CaptureBits(exchange, src));
 
-        public AsmFunction ExtractAsm(MethodInfo src, params Type[] args)
-            => Decoder.DecodeFunction(ExtractBits(src,args));
+        public AsmFunction ExtractAsm(in CaptureExchange exchange, MethodInfo src, params Type[] args)
+            => Decoder.DecodeFunction(ExtractBits(exchange, src,args));
 
-        public AsmFunction[] ExtractAsm(MethodInfo[] src, params Type[] args)
+        public AsmFunction[] ExtractAsm(in CaptureExchange exchange, MethodInfo[] src)
         {
             var dst = new AsmFunction[src.Length];            
             for(var i=0; i<dst.Length; i++)
-                dst[i] = ExtractAsm(src[i],args);
+                dst[i] = ExtractAsm(exchange, src[i]);
             return dst;                
         }
 
-        public void SaveBits(MethodInfo src, IAsmHexWriter dst)
-            => dst.Write(CaptureSvc.Capture(src.Identify(), src, TakeBuffer()));
+        public void SaveBits(in CaptureExchange exchange, MethodInfo src, IAsmHexWriter dst)
+            => dst.Write(Operations.Capture(in exchange, src.Identify(), src));
 
-        public void SaveBits(MethodInfo src, Type[] args, IAsmHexWriter dst)
-            => dst.Write(ExtractBits(src,args));
+        public void SaveBits(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmHexWriter dst)
+            => dst.Write(ExtractBits(exchange, src,args));
 
-        public void SaveBits(MethodInfo[] methods, IAsmHexWriter dst)
-            => dst.Write(ExtractBits(methods));
-        public void SaveBits(Delegate src, IAsmHexWriter dst)
-            => dst.Write(ExtractBits(src));    
+        public void SaveBits(in CaptureExchange exchange, MethodInfo[] methods, IAsmHexWriter dst)
+            => dst.Write(ExtractBits(exchange, methods));
 
-        public void SaveAsm(Delegate src, IAsmFunctionWriter dst)
-            => dst.Write(ExtractAsm(src));
+        public void SaveBits(in CaptureExchange exchange, Delegate src, IAsmHexWriter dst)
+            => dst.Write(ExtractBits(exchange, src));    
 
-        public void SaveAsm(MethodInfo src, IAsmFunctionWriter dst)
-            => dst.Write(ExtractAsm(src));
+        public void SaveAsm(in CaptureExchange exchange, Delegate src, IAsmFunctionWriter dst)
+            => dst.Write(ExtractAsm(exchange, src));
 
-        public void SaveAsm(MethodInfo src, Type[] args, IAsmFunctionWriter dst)
-            => dst.Write(ExtractAsm(src,args));
+        public void SaveAsm(in CaptureExchange exchange,MethodInfo src, IAsmFunctionWriter dst)
+            => dst.Write(ExtractAsm(exchange, src));
+
+        public void SaveAsm(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmFunctionWriter dst)
+            => dst.Write(ExtractAsm(exchange, src,args));
         
-        public void SaveAsm(MethodInfo[] src, IAsmFunctionWriter dst)
-            => iter(ExtractAsm(src),dst.Write);
-
-        public void SaveAsm(MethodInfo[] src, Type[] args, IAsmFunctionWriter dst)
-            => iter(ExtractAsm(src,args),dst.Write);
+        public void SaveAsm(in CaptureExchange exchange, MethodInfo[] src, IAsmFunctionWriter dst)
+            => iter(ExtractAsm(exchange, src),dst.Write);
                 
-        CapturedMember CaptureBits(MethodInfo m)
-            => CaptureSvc.Capture(m.Identify(), m, TakeBuffer()); 
+        CapturedMember CaptureBits(in CaptureExchange exchange, MethodInfo m)
+            => Operations.Capture(in exchange, m.Identify(), m); 
     }
 }

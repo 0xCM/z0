@@ -5,22 +5,31 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     
     using static zfunc;    
 
-    public abstract class ConsoleApp<A> : Context<A>
+
+    public interface IConsoleApp : IAssemblyComposition, IContext
+    {
+        void RunApp(params string[] args);   
+             
+    }
+
+    public abstract class ConsoleApp<A> : Context<A>, IConsoleApp
         where A : ConsoleApp<A>, new()
     {
         protected ConsoleApp(IPolyrand random)
             : base(random)
-        {
-            
+        {            
 
         }
 
         protected abstract void Execute(params string[] args);
 
-        protected virtual void RunApp(params string[] args)
+        public abstract IAssemblyDesignator[] Resolved {get;}
+
+        public void RunApp(params string[] args)
         {
             try
             {            

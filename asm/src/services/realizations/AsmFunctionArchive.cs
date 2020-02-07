@@ -55,11 +55,11 @@ namespace Z0
             return AsmEmissionToken.Define(OpUri.Asm(Catalog, Subject, src.Id), src.Location);
         }
 
-        public IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup src, bool append)
+        public Option<AsmEmissionGroup> Save(AsmFunctionGroup src, bool append)
         {            
             WriteHex(src,append).OnSome(e => errout(e));
             WriteCil(src,append).OnSome(e => errout(e));
-            return WriteAsm(src,append).ValueOrDefault(array<AsmEmissionToken>());
+            return WriteAsm(src,append);
         }
 
         public IAsmFunctionArchive Clear()
@@ -107,7 +107,7 @@ namespace Z0
             }
         }
 
-        Option<AsmEmissionToken[]> WriteAsm(AsmFunctionGroup src, bool append)
+        Option<AsmEmissionGroup> WriteAsm(AsmFunctionGroup src, bool append)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace Z0
                     var uri = OpUri.Asm(Catalog, Subject, src.Id, f.Id);
                     tokens[i] = AsmEmissionToken.Define(uri, f.Location);
                 }
-                return tokens;
+                return tokens.ToGroup();
             }
             catch(Exception e)
             {

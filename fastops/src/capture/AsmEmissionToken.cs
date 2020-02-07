@@ -10,16 +10,15 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IAsmEmissionToken : IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>
-    {
-
-    }
-
     public readonly struct AsmEmissionToken : IAsmEmissionToken
     {
         public readonly OpUri Uri;
 
         public readonly MemoryRange Origin;
+
+        [MethodImpl(Inline)]
+        public static AsmEmissionToken Define(OpUri uri, MemoryRange origin)        
+            => new AsmEmissionToken(uri, origin);
 
         [MethodImpl(Inline)]
         public static bool operator==(AsmEmissionToken a, AsmEmissionToken b)
@@ -28,10 +27,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(AsmEmissionToken a, AsmEmissionToken b)
             => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static AsmEmissionToken Define(OpUri uri, MemoryRange origin)        
-            => new AsmEmissionToken(uri, origin);
 
         [MethodImpl(Inline)]
         AsmEmissionToken(OpUri uri, MemoryRange origin)
@@ -51,7 +46,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(AsmEmissionToken src)
-            => Uri == src.Uri && Origin == src.Origin;
+            => Uri == src.Uri 
+            && Origin == src.Origin;
         
         public override bool Equals(object src)
             => src is AsmEmissionToken d && Equals(d);

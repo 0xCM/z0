@@ -13,12 +13,13 @@ namespace Z0
 
     public class AsmEmissionReport : IReport<AsmEmissionRecord>
     {
-        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionToken[] emissions, string suffix = null)
+        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionGroup[] groups, string suffix = null)
         {
-            var count = emissions.Length;
+            var count = groups.Length;
             if(count == 0)
                 return default;
-
+            
+            var emissions = groups.SelectMany(g => g.Tokens).ToArray();
             Array.Sort(emissions);
 
             var records = new AsmEmissionRecord[count];

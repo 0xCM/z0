@@ -6,22 +6,24 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    class Controller : ConsoleApp<Controller>
+    class ConsoleControl : ConsoleApp<ConsoleControl>
     {
-
-        public Controller()
+        public ConsoleControl()
             : base(Rng.WyHash64(Seed64.Seed00))
         {
-
+            Resolved = Designators.Control.Designated.Designates.ToArray();
+            AsmCtx = AsmContext.New(AssemblyComposition.Define(Resolved));
         }
+
+        readonly IAsmContext AsmCtx;
 
         protected override void Execute(params string[] args)
-        {
-            
-            //(new TestController()).Execute();
-            (new ArchiveControl()).Execute();
-        }
+            => AsmArchiveControl.Create(AsmCtx).Execute();            
+
+        public override IAssemblyDesignator[] Resolved{get;}
 
         static void Main(params string[] args)
             => Run(args);

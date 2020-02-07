@@ -41,23 +41,29 @@ namespace Z0
         public void capture_vectorized_generics()
         {
             using var writer = NativeTestWriter();
-            var svc = CaptureServices.Capture();
+
+            var control = CaptureServices.Control();
+            var exchange = control.CreateExchange();
 
             var types = NumericKind.All.DistinctTypes();
-            var methods = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
-            iter(types, 
-                t => iter(methods, 
-                    m => svc.Capture(m.MakeGenericMethod(t), writer)));
+            var defintions = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
+            foreach(var t in types)
+            {
+                foreach(var def in defintions)
+                {
+                    var m = def.MakeGenericMethod(t);
+                    writer.WriteData(control.Capture(in exchange,m.Identify(), m));
+                }
+            }
         }
 
         public void capture_direct()
         {
             using var target = NativeTestWriter();
-            var svc = CaptureServices.Capture();
+            var control = CaptureServices.Control();
+            var exchange = control.CreateExchange();
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
-            {
-                svc.Capture(m,target);
-            }            
+                target.WriteData(control.Capture(in exchange, m.Identify(), m));
         }
 
         static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
@@ -69,38 +75,38 @@ namespace Z0
         public void capture_delegates()
         {
             using var target = NativeTestWriter();
-            var svc = CaptureServices.Capture();
+            var control = CaptureServices.Control();
+            var exchange = control.CreateExchange();
 
-            Span<byte> buffer = new byte[100];
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            svc.Capture(dAnd,target);
+            target.WriteData(control.Capture(in exchange, dAnd.Identify(), dAnd));
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            svc.Capture(mAnd,target);
+            target.WriteData(control.Capture(in exchange, mAnd.Identify(), mAnd));
 
             var dShuffle = shuffler(4);
-            svc.Capture(dShuffle,target);
+            target.WriteData(control.Capture(in exchange, dShuffle.Identify(), dShuffle));
 
             var dShift = shifter(4);
-            svc.Capture(dShift,target);
+            target.WriteData(control.Capture(in exchange, dShift.Identify(), dShift));
 
-
-            iter(typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition()), 
-                def => svc.Capture(def.MakeGenericMethod(typeof(uint)),target));
+            var methods = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();
+            
+            foreach(var m in methods)
+                target.WriteData(control.Capture(in exchange, m.Identify(), m));
             
         }
 
         public void read_library()
         {
+            var control = CaptureServices.Control();
+            var exchange = control.CreateExchange();
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
-            Span<byte> buffer = new byte[128];
-            var svc = CaptureServices.Capture();
 
             for(var i=0; i<src.Length; i++)
             {
-                var capture = svc.Capture(src[i].Identify(), src[i], buffer);
+                var capture = control.Capture(in exchange, src[i].Identify(), src[i]);
                 PostMessage(capture.FormatHexLines());
-                buffer.Clear();
             }
         }
     }

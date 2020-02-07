@@ -13,6 +13,8 @@ namespace Z0
 
     using static zfunc;
 
+    #if FunctionFlow
+
     class AsmFunctionFlow : IAsmFunctionFlow
     {
         public static IAsmFunctionFlow Create(IAsmContext context, IOperationCatalog catalog)
@@ -46,7 +48,7 @@ namespace Z0
         static ReadOnlySpan<byte> ImmSelection => new byte[]{5,9,13};
 
         IAsmImmCapture UnaryImmCapture(MethodInfo src, OpIdentity baseid)
-            => Context.ImmCapture(src, baseid,n1);
+            => Context.ImmUnaryCapture(src, baseid);
 
         AsmFunction Flow(AsmFunction src, IAsmFunctionPipe dst)
         {
@@ -115,4 +117,5 @@ namespace Z0
         public IEnumerable<AsmFunction> Flow(IAsmFunctionPipe pipe)
             => FlowDirect(pipe).Union(FlowGeneric(pipe));
     }
+    #endif
 }

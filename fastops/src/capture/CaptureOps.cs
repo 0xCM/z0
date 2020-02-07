@@ -13,9 +13,9 @@ namespace Z0
     using static CaptureTermCode;
     using static CaptureHelpers;
 
-    unsafe readonly struct CaptureService : ICaptureService
+    unsafe readonly struct CaptureOps : ICaptureOps
     {
-        public Option<CapturedOpData> Capture(in OpIdentity id, Span<byte> src, in CaptureExchange exchange)
+        public Option<CapturedOpData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Z0
             }
         }
 
-        public CapturedMember Capture(in OpIdentity id, MethodInfo src, in CaptureExchange exchange)
+        public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, MethodInfo src)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Z0
             }
         }
 
-        public CapturedMember Capture(in OpIdentity id, in DynamicDelegate src, in CaptureExchange exchange)
+        public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, in DynamicDelegate src)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Z0
             }
         }
 
-        public CapturedMember Capture(in OpIdentity id, Delegate src, in CaptureExchange exchange)
+        public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
         {
             try
             {
@@ -129,8 +129,6 @@ namespace Z0
                     return Complete(tc.Value, start,end, delta);
             }
             return Complete(CTC_BUFFER_OUT,start,end,0);
-
-        }
-                     
+        }                    
     }
 }

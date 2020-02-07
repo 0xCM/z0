@@ -21,6 +21,8 @@ namespace Z0
 
         CilFormatConfig CilFormat {get;}
 
+        IAssemblyComposition Assemblies {get;}
+
         DataResourceIndex Resources {get;}
 
         IAsmContext WithFormat(AsmFormatConfig config);

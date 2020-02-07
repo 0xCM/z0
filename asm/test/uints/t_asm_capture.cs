@@ -33,47 +33,45 @@ namespace Z0
         AsmFormatConfig AsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-
-        public void capture_constants()
+        void capture_constants(in CaptureExchange exchange)
         {
-            var svc = Context.Capture();
+            var svc = Context.AsmCapture();
 
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();            
         
             var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
         
-            svc.SaveBits(f,hex);
-            svc.SaveAsm(f, asm);
+            svc.SaveBits(exchange, f,hex);
+            svc.SaveAsm(exchange, f, asm);
         }
 
-        public void capture_shifter()
+        void capture_shifter(in CaptureExchange exchange)
         {
-            var svc = Context.Capture();
+            var svc = Context.AsmCapture();
 
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();
 
             var f = shifter(4);
-            svc.SaveBits(f, hex);
-            svc.SaveAsm(f, asm);            
+            svc.SaveBits(exchange, f, hex);
+            svc.SaveAsm(exchange, f, asm);            
         }
 
-        public void capture_shuffler()
+        void capture_shuffler(in CaptureExchange exchange)
         {
-            var svc = Context.Capture();
+            var svc = Context.AsmCapture();
 
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();
 
             var f = shuffler<uint>(n2);
-            svc.SaveBits(f, hex);
-            svc.SaveAsm(f, asm);            
+            svc.SaveBits(exchange, f, hex);
+            svc.SaveAsm(exchange, f, asm);            
 
             var g = shuffler(n3);
-            svc.SaveBits(g, hex);
-            svc.SaveAsm(g, asm);            
+            svc.SaveBits(exchange, g, hex);
+            svc.SaveAsm(exchange, g, asm);            
         }
-
     }
 }

@@ -27,9 +27,6 @@ namespace Z0
         public static CaptureExchange Define(ICaptureJunction junction, Span<byte> capture, Span<byte> state)
             => new CaptureExchange(junction,capture,state);
 
-        public static CaptureExchange Define(Span<byte> capture)
-            => new CaptureExchange(EmptyJunction.Empty, capture, capture.Replicate());
-
         CaptureExchange(ICaptureJunction juntion, Span<byte> capture, Span<byte> state)            
         {
             require(capture.Length == state.Length);
@@ -72,14 +69,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref readonly CapturedMember Complete(in CapturedMember captured)
         {
-            Junction.Complete(captured, this);
+            Junction.Complete(this, captured);
             return ref captured;
         }
 
         [MethodImpl(Inline)]
         public ref readonly CaptureState Accept(in CaptureState state)
         {
-            Junction.Accept(state, this);
+            Junction.Accept(this, state);
             return ref state;
         }
 
@@ -93,9 +90,9 @@ namespace Z0
         {
             public static EmptyJunction Empty => default;
                     
-            public void Accept(in CaptureState state, in CaptureExchange exchange){}
+            public void Accept(in CaptureExchange exchange, in CaptureState state){}
 
-            public void Complete(in CapturedMember captured, in CaptureExchange exchange) {}
+            public void Complete(in CaptureExchange exchange, in CapturedMember captured) {}
         }
     }
 }

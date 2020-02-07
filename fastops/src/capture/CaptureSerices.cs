@@ -14,12 +14,11 @@ namespace Z0
     {
         public const int DefaultBufferLen = 1024*8;
         
-        /// <summary>
-        /// Intantiates the member capture service that jits and collects native member data
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static ICaptureService Capture()
-            => default(CaptureService);
+        public static ICaptureOps Operations
+        {
+            [MethodImpl(Inline)]
+            get => default(CaptureOps);
+        }
 
         [MethodImpl(Inline)]
         public static ICaptureControl Control()
@@ -36,6 +35,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static CaptureExchange Exchange(ICaptureControl control)
             => Exchange(control, new byte[CaptureServices.DefaultBufferLen], new byte[CaptureServices.DefaultBufferLen]);
+
+        [MethodImpl(Inline)]
+        public static CaptureExchange Exchange(Span<byte> target, Span<byte> state)
+            => Exchange(Control(), target,state);
+
+        [MethodImpl(Inline)]
+        public static CaptureExchange Exchange()
+            => Exchange(Control());
+
+        [MethodImpl(Inline)]
+        public static IAsmEmissionSink EmissionSink(Action<AsmEmissionGroup> receiver)
+            => AmsEmissionSink.Create(receiver);
 
         /// <summary>
         /// Allocates a caller-disposed capture writer

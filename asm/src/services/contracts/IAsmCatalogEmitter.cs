@@ -5,18 +5,11 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using AsmSpecs;
 
     public interface IAsmCatalogEmitter : IAsmService
     {
-        IEnumerable<AsmEmissionToken> EmitPrimary();          
+        void EmitPrimary(in CaptureExchange exchange, Action<AsmEmissionGroup> receipt);          
 
-        IEnumerable<AsmEmissionToken> EmitImm();  
-
-        IEnumerable<AsmEmissionToken> EmitCatalog()
-            => EmitPrimary().Union(EmitImm());      
+        void EmitImm(in CaptureExchange exchange, Action<AsmEmissionGroup> receipt);  
     }
 }

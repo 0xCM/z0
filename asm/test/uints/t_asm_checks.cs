@@ -21,9 +21,11 @@ namespace Z0
 
         internal void RunExplicit()
         {
+            CC = CaptureServices.Control();
+            var exchange = CC.CreateExchange();
 
-            CheckImm();
-            CheckCapture();
+            CheckImm(exchange);
+            //CheckCapture();
             RunPipe();
             add_megacheck();
             //Run50();
@@ -31,16 +33,17 @@ namespace Z0
 
         }
 
-        void CheckImm()
+        void CheckImm(in CaptureExchange exchange)
         {
             using var buffer = OS.AllocExec(512);
 
-            CheckBinaryImm<uint>(buffer, n128, nameof(dinx.vblend4x32), (byte)Blend4x32.LRLR);    
-            CheckBinaryImm<uint>(buffer, n256, nameof(dinx.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
-            CheckUnaryImm<ushort>(buffer,n256, nameof(dinx.vbsll), 3);        
+            CheckBinaryImm<uint>(exchange, buffer, n128, nameof(dinx.vblend4x32), (byte)Blend4x32.LRLR);    
+            CheckBinaryImm<uint>(exchange, buffer, n256, nameof(dinx.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
+            CheckUnaryImm<ushort>(exchange, buffer,n256, nameof(dinx.vbsll), 3);        
 
         }
 
+        ICaptureControl CC;
 
         static int activations;
         
@@ -61,7 +64,7 @@ namespace Z0
         AsmFormatConfig AsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-        public void CheckCapture()
+        public void CheckCapture(in CaptureExchange exchange)
         {
             var name = nameof(ginx.vcimpl);         
             var width = n256;                        
@@ -69,7 +72,7 @@ namespace Z0
             var generic = Intrinsics.VectorizedGeneric(width,name).CloseGenericMethods(args);
             var direct = Intrinsics.VectorizedDirect(width,name);
             var selected = direct.Union(generic).ToArray();            
-            var path = Capture(selected,name);
+            var path = Capture(exchange, selected,name);
             var hex = Context.HexReader().Read(path);
             
             var hexD = hex.Where(h => !h.Id.IsGeneric).ToDictionary(x => x.Id);
@@ -96,35 +99,34 @@ namespace Z0
             
         }
 
-        FilePath Capture(MethodInfo[] methods, string subject)
+        FilePath Capture(in CaptureExchange exchange, MethodInfo[] methods, string subject)
         {
             using var hex = HexTestWriter(subject);
             using var asm = AsmTestWriter(subject);
 
-            var capture = Context.Capture();
+            var capture = Context.AsmCapture();
             
-            capture.SaveBits(methods,hex);
-            capture.SaveAsm(methods,asm);
+            capture.SaveBits(exchange, methods,hex);
+            capture.SaveAsm(exchange, methods,asm);
             return hex.TargetPath;            
         }
 
-        FilePath Capture(MethodInfo[] defs, Type[] args, string subject)
+        FilePath Capture(in CaptureExchange exchange, MethodInfo[] defs, Type[] args, string subject)
         {
             using var hex = HexTestWriter(subject);
             using var asm = AsmTestWriter(subject);
 
-            var capture = Context.Capture();
+            var capture = Context.AsmCapture();
                                     
             var selection = from def in defs
                             from arg in args                            
                             select def.MakeGenericMethod(arg);
             var selected = selection.ToArray();
             
-            capture.SaveBits(selected,hex);
-            capture.SaveAsm(selected,asm);
+            capture.SaveBits(exchange, selected,hex);
+            capture.SaveAsm(exchange, selected,asm);
             return hex.TargetPath;            
         }
-
 
         void RunPipe()
         {
@@ -152,7 +154,7 @@ namespace Z0
             TraceCaller($"Trigger activate {activations} times");
         }
 
-        void CheckBinaryImm(ExecBufferToken buffer)
+        void CheckBinaryImm(in CaptureExchange exchange, ExecBufferToken buffer)
         {
             var w = n256;
             var name = nameof(dinx.vblend8x16);
@@ -166,8 +168,11 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var f = dynop.DynamicOp;
             var z1 = f.Invoke(x,y);
+            var decoder = Context.Decoder();
+            var captured = CC.Capture(in exchange, dynop.Id, dynop);
+            var asm = decoder.DecodeFunction(captured);        
 
-            var asm = Context.Decoder().DecodeFunction(dynop);
+            //var asm = Context.Decoder().DecodeFunction(dynop);
             iter(asm.Instructions, i => Trace(i));  
 
             var g = buffer.BinaryOp<Fixed256>(asm.Code);
@@ -175,7 +180,7 @@ namespace Z0
             Claim.eq(z1,z3);
         }
 
-        void CheckBinaryImm<T>(ExecBufferToken buffer, N128 w, string name, byte imm)
+        void CheckBinaryImm<T>(in CaptureExchange exchange, ExecBufferToken buffer, N128 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = ImmOpProviders.provider(HK.vk128<T>(), HK.opfk(n2));
@@ -186,8 +191,9 @@ namespace Z0
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
-            
-            var asm = Context.Decoder().DecodeFunction(dynop);
+            var decoder = Context.Decoder();
+            var captured = CC.Capture(in exchange, dynop.Id, dynop);            
+            var asm = decoder.DecodeFunction(captured);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
@@ -197,7 +203,7 @@ namespace Z0
             Claim.eq(z1,z2);
         }
 
-        void CheckBinaryImm<T>(ExecBufferToken buffer, N256 w, string name, byte imm)
+        void CheckBinaryImm<T>(in CaptureExchange exchange, ExecBufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opfk(n2));
@@ -209,7 +215,9 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
             
-            var asm = Context.Decoder().DecodeFunction(dynop);
+            var decoder = Context.Decoder();
+            var captured = CC.Capture(in exchange, dynop.Id, dynop);            
+            var asm = decoder.DecodeFunction(captured);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
@@ -219,7 +227,7 @@ namespace Z0
             Claim.eq(z1,z2);
         }
 
-        void CheckUnaryImm<T>(ExecBufferToken buffer, N256 w, string name, byte imm)
+        void CheckUnaryImm<T>(in CaptureExchange exchange, ExecBufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
@@ -231,10 +239,12 @@ namespace Z0
             var x = Random.CpuVector<T>(w);
             var z1 = dynop.DynamicOp.Invoke(x);
             
-            var capture = Context.Decoder().DecodeFunction(dynop);
+            var decoder = Context.Decoder();
+            var capture = CC.Capture(in exchange, dynop.Id, dynop);            
+            var asm = decoder.DecodeFunction(capture);
 
-            Trace(capture.Id);
-            iter(capture.Instructions, i => Trace(i));  
+            Trace(asm.Id);
+            iter(asm.Instructions, i => Trace(i));  
 
             var f = ExecBuffer.UnaryOp<Fixed256>(capture.Code);
             var z2 = f(x.ToFixed()).ToVector<T>();
@@ -303,7 +313,6 @@ namespace Z0
                 Trace($"Checking {entry.Id} group");
                 checker(buffer,entry);
             }
-
         }
         
         void CheckUnaryOp<T>(ExecBufferToken lbuffer, in FixedAsm<T> a, ExecBufferToken rbuffer, in FixedAsm<T> b)

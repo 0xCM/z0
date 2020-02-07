@@ -21,12 +21,8 @@ namespace Z0
             => AsmDecoder.Create(context, bufferlen);                        
 
         [MethodImpl(Inline)]
-        public static IAsmCaptureService Capture(this IAsmContext context, int? bufferlen = null)
-            => AsmCaptureService.Create(context, bufferlen);
-
-        [MethodImpl(Inline)]
-        public static IAsmCaptureService Capture(this IAsmContext context, byte[] buffer)
-            => AsmCaptureService.Create(context, buffer);
+        public static IAsmCaptureService AsmCapture(this IAsmContext context)
+            => AsmCaptureService.Create(context);
 
         [MethodImpl(Inline)]
         public static IAsmHexWriter HexWriter(this IAsmContext context, FilePath dst, bool append = false)
@@ -37,12 +33,12 @@ namespace Z0
             => AsmHexReader.Create(context,idsep,bytesep);
 
         [MethodImpl(Inline)]
-        public static IAsmImmBuilder ImmBuilder<V,N>(this IAsmContext context, V vk, N arity)
+        public static IDynamicImmediate ImmBuilder<V,N>(this IAsmContext context, V vk, N arity)
             where V : unmanaged, IFixedVecKind
             where N : unmanaged, ITypeNat
-                => AsmImmBuilder.Create(context, vk, arity);
+                => DynamicImmediate.Create(context, vk, arity);
     
-        public static IAsmImmCapture<T> ImmCapture<T>(this IAsmContext context, IImm8Resolver<T> resolver)
+        public static IAsmImmCapture<T> ImmCaptureService<T>(this IAsmContext context, IImm8Resolver<T> resolver)
             where T : unmanaged        
             => resolver switch {
                 IVUnaryImm8Resolver128<T> r => AsmV128ImmUnaryCapture<T>.Create(context,r),
@@ -52,19 +48,26 @@ namespace Z0
                 _ => throw unsupported(resolver.GetType())
             };   
 
-        
+        /// <summary>
+        /// Defines capture service for a specified unary operator
+        /// </summary>
+        /// <param name="context">The context</param>
+        /// <param name="src">The soruce method</param>
+        /// <param name="baseid">The base identifier that will be suffixed when identifying productions</param>
         [MethodImpl(Inline)]
-        public static IAsmImmCapture ImmCapture<Arity>(this IAsmContext context, MethodInfo src, OpIdentity baseid, Arity arity = default)
-            where Arity : unmanaged, ITypeNat
-        {
-            if(typeof(Arity) == typeof(N1))
-               return AsmImmCapture.UnaryCapture(context, src, baseid); 
-            else if(typeof(Arity) == typeof(N2))
-                return AsmImmCapture.BinaryCapture(context, src, baseid);
-            else
-                throw unsupported<Arity>();
-        }
-        
+        public static IAsmImmCapture ImmUnaryCaptureService(this IAsmContext context, MethodInfo src, OpIdentity baseid)
+            => AsmImmUnaryCapture.Create(context,src,baseid);
+
+        /// <summary>
+        /// Defines capture service for a specified binary operator
+        /// </summary>
+        /// <param name="context">The context</param>
+        /// <param name="src">The soruce method</param>
+        /// <param name="baseid">The base identifier that will be suffixed when identifying productions</param>
+        [MethodImpl(Inline)]
+        public static IAsmImmCapture ImmBinaryCaptureService(this IAsmContext context, MethodInfo src, OpIdentity baseid)
+            => AsmImmBinaryCapture.Create(context,src,baseid);
+
         /// <summary>
         /// Instantiates an internal/first-round asm formatter service
         /// </summary>
@@ -145,21 +148,6 @@ namespace Z0
         /// <param name="context">The context that specifies the catalog over which the emitter will be created</param>
         public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog)
             => AsmCatalogEmitter.Create(context,catalog);
-
-        public static Func<AsmStats> StatsEmitter(this IAsmContext context, IOperationCatalog catalog)
-        {
-            AsmStats collect()
-            {
-                var collector = new  AsmStatsCollector();
-                var pipe = AsmStatsPipe.Create(collector);
-
-                var flow = context.Flow(catalog);
-
-                flow.Flow(pipe).Force();
-                return collector.Collected;
-            }
-            return collect;
-        }
 
         public static IEnumerable<AssemblyId> ActiveAssemblies(this IAsmContext context)
         {

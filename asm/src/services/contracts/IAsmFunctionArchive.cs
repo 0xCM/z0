@@ -5,8 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using Z0.AsmSpecs;
 
@@ -23,12 +21,11 @@ namespace Z0
         /// <param name="src">The source function</param>
         AsmEmissionToken Save(AsmFunction src);
 
-
         /// <summary>
         /// Saves a group of related functtions to the archive
         /// </summary>
         /// <param name="group">The source group</param>
-        IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup group, bool append);
+        Option<AsmEmissionGroup> Save(AsmFunctionGroup group, bool append);
 
     }    
 }

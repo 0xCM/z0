@@ -5,19 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Reflection;
 
-    using Z0.AsmSpecs;
-    
-    public interface IAsmImmBuilder : IAsmService
+    public interface IOperationProvider
     {
-        AsmFunction CreateFunction(MethodInfo method, byte imm);
-    }
+        AssemblyId HostId {get;}
 
-    public interface IAsmImmBuilder<D> : IAsmImmBuilder
-        where D : Delegate
-    {
+        Assembly HostAssembly {get;}
+
+        IOperationCatalog Catalog {get;}
 
     }
 }

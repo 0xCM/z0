@@ -80,16 +80,15 @@ namespace Z0.Designators
             D.StatDist.Designated
             );               
 
-
-        public Option<IOperationCatalog> FindCatalog(AssemblyId id)
-        {
-            var catalog =(from d in Designated.Designates
-                where d is ICatalogProvider && d.Id == id
-                select (d as ICatalogProvider).Catalog).FirstOrDefault();
-            if(catalog != null && !catalog.IsEmpty)
-                return some(catalog);
-            else
-                return default;
-        }            
+        // public Option<IOperationCatalog> FindCatalog(AssemblyId id)
+        // {
+        //     var catalog =(from d in Designated.Designates
+        //         where d is ICatalogProvider && d.Id == id
+        //         select (d as ICatalogProvider).Catalog).FirstOrDefault();
+        //     if(catalog != null && !catalog.IsEmpty)
+        //         return some(catalog);
+        //     else
+        //         return default;
+        // }            
    }
 }

@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     readonly struct CaptureControl : ICaptureControl
-    {
-        readonly ICaptureService Service;
-                    
+    {                    
         readonly ICaptureEventSink EventSink;
 
         public static CaptureControl Create(ICaptureEventSink sink)
@@ -24,27 +20,29 @@ namespace Z0
         public static CaptureControl Create()
             => new CaptureControl(null);
 
-        [MethodImpl(Inline)]
-        public CapturedMember Capture(in OpIdentity id, in DynamicDelegate src, in CaptureExchange exchange)
-            => Service.Capture(id,src,exchange);
-
-        [MethodImpl(Inline)]
-        public CapturedMember Capture(in OpIdentity id, Delegate src, in CaptureExchange exchange)
-            => Service.Capture(id,src,exchange);
-
-        [MethodImpl(Inline)]
-        public CapturedMember Capture(in OpIdentity id, MethodInfo src, in CaptureExchange exchange)
-            => Service.Capture(id, src, exchange);                                    
-
-        [MethodImpl(Inline)]
-        public Option<CapturedOpData> Capture(in OpIdentity id, Span<byte> src, in CaptureExchange exchange)
-            => Service.Capture(id,src,exchange);
-
         CaptureControl(ICaptureEventSink sink)
         {
             this.EventSink = sink ?? CaptureEventSink.Empty;
-            this.Service = CaptureServices.Capture();
         }
+
+        ICaptureOps Operations
+            => CaptureServices.Operations;
+
+        [MethodImpl(Inline)]
+        public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, in DynamicDelegate src)
+            => Operations.Capture(exchange,id, src);
+
+        [MethodImpl(Inline)]
+        public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
+            => Operations.Capture(exchange, id,src);
+
+        [MethodImpl(Inline)]
+        public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, MethodInfo src)
+            => Operations.Capture(exchange, id, src);                                    
+
+        [MethodImpl(Inline)]
+        public Option<CapturedOpData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src)
+            => Operations.Capture(exchange, id, src);
 
         ICaptureEventSink ControlSink
         {
@@ -53,7 +51,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void ICaptureJunction.Accept(in CaptureState src, in CaptureExchange exchange)
+        void ICaptureJunction.Accept(in CaptureExchange exchange, in CaptureState src)
             => ControlSink.Accept(CaptureEventInfo.Define(src, exchange.StateBuffer));
 
         [MethodImpl(Inline)]
@@ -61,9 +59,8 @@ namespace Z0
             => EventSink.Accept(info);
 
         [MethodImpl(Inline)]
-        public void Complete(in CapturedMember captured, in CaptureExchange exchange)
+        public void Complete(in CaptureExchange exchange, in CapturedMember captured)
             => EventSink.Complete(captured);
-
 
         readonly struct CaptureEventSink : ICaptureEventSink
         {

@@ -21,7 +21,7 @@ namespace Z0
 
         readonly IVEmitter128<T> RandomEmitter {get;}
 
-        readonly IAsmImmBuilder AsmProducer;
+        readonly IDynamicImmediate AsmProducer;
 
         public AsmImmBinOpValidator128(IAsmContext context)
         {
@@ -29,19 +29,17 @@ namespace Z0
             this.AsmBuffer = Context.ExecBuffer();
             this.RandomEmitter = context.Random.VectorEmitter<T>(n128);
             this.AsmProducer = context.ImmBuilder(HK.vk128(), n1);
-
         }
-
 
         public void Validate(MethodInfo method, byte imm)
         {
             var x = RandomEmitter.Invoke();
             var y = RandomEmitter.Invoke();
-            var asm = AsmProducer.CreateFunction(method, imm);
-            var f = AsmBuffer.BinaryOp(n128, asm.Code);
-            var z = f(x.ToFixed(), y.ToFixed()).ToVector<T>();
-            
+            var dynamic = AsmProducer.Specialize(method, imm);
 
+            // var f = AsmBuffer.BinaryOp(n128, asm.Code);
+            // var z = f(x.ToFixed(), y.ToFixed()).ToVector<T>();
+            
             //var z1 = dynop.DynamicOp;
             // var z2 = f(x.ToFixed(), y.ToFixed()).ToVector<T>();
             

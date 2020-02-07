@@ -21,6 +21,7 @@ namespace Z0
         public static bool AcceptsParameter(this AsmCode src, NumericKind kind)
             => NumericType.parseKinds(src.Id.TextComponents.Skip(1)).Contains(kind);
 
+        [MethodImpl(Inline)]
         public static int ParameterCount(this AsmCode src)
             => src.Id.TextComponents.Count() - 1;
 

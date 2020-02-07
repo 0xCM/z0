@@ -8,15 +8,13 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
+ 
     using Z0.AsmSpecs;
     
     using static AsmServiceMessages;
     using static zfunc;
     
     using Iced = Iced.Intel;
-
 
     class AsmDecoder : IAsmDecoder
     {
@@ -32,9 +30,7 @@ namespace Z0
             this.Context = context;
             this._Buffer = new byte[bufferlen ?? CaptureServices.DefaultBufferLen];
         }
-        
-        ICaptureService CaptureSvc => CaptureServices.Capture();
-
+    
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
@@ -70,21 +66,6 @@ namespace Z0
             return BuildFunction(block).WithCil(cil);            
         }
 
-        /// <summary>
-        /// Decodes a function from a method
-        /// </summary>
-        /// <param name="src">The cource capture</param>
-        public AsmFunction DecodeFunction(OpIdentity id, MethodInfo src)
-            => DecodeFunction(CaptureSvc.Capture(id, src, TakeBuffer()));
-
-        /// <summary>
-        /// Decodes an assembly function from a dynamic delegate
-        /// </summary>
-        /// <param name="id">The identity to confer</param>
-        /// <param name="src">The source delegate</param>
-        public AsmFunction DecodeFunction(DynamicDelegate src)
-            => DecodeFunction(CaptureSvc.Capture(src.Id, src, TakeBuffer()));
-
         AsmFunction BuildFunction(AsmInstructionBlock src)
         {
             var dst = new AsmInstructionInfo[src.InstructionCount];
@@ -106,12 +87,6 @@ namespace Z0
                 throw error(InstructionBlockSizeMismatch(src.Origin, src.NativeCode.Length, blocklen));
 
             return AsmFunction.Define(src.Origin, src.NativeCode, src.CaptureInfo, src.Decoded);
-        }
-
-        byte[] TakeBuffer()
-        {
-            _Buffer.Clear();
-            return _Buffer;
         }
     }
 }

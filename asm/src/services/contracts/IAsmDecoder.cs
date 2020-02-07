@@ -27,18 +27,5 @@ namespace Z0
         /// </summary>
         /// <param name="src">The cource capture</param>
         AsmFunction DecodeFunction(CapturedMember src);    
-
-        /// <summary>
-        /// Decodes a function from a method
-        /// </summary>
-        /// <param name="src">The cource capture</param>
-        AsmFunction DecodeFunction(OpIdentity id, MethodInfo src);      
-
-        /// <summary>
-        /// Decodes an assembly function from a dynamic delegate
-        /// </summary>
-        /// <param name="id">The identity to confer</param>
-        /// <param name="src">The source delegate</param>
-        AsmFunction DecodeFunction(DynamicDelegate src);
     }
 }

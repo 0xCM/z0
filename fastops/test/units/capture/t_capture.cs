@@ -23,29 +23,23 @@ namespace Z0
         {
             
         }
-
     }
 
-
     public sealed class t_capture : t_fastops<t_capture>
-    {
-     
+    {    
         public void capture_1()
         {
             var src = Intrinsics.Direct.Where(m => m.Name == nameof(dinx.vand));
             var stats = CaptureStatsSink.Create(stats => Trace(stats));
-            //var control = CaptureServices.Control(new TestEventSink(this));
             var control = CaptureServices.Control(stats);
             var exchange = control.CreateExchange();            
             
             foreach(var method in src)
             {
                 Trace(method.Identify());
-                control.Capture(method,exchange);
+                control.Capture(exchange, method.Identify(), method);
             }
 
         }
-
     }
-
 }
