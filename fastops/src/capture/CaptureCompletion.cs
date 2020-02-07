@@ -22,6 +22,7 @@ namespace Z0
         {   
             this.Start = start;
             this.End = end;
+            this.ByteCount = (int)(end - start);
             this.TermCode = cc;
             this.Lookback = lookback;
         }
@@ -29,8 +30,13 @@ namespace Z0
         public readonly ulong Start;
 
         public readonly ulong End;
-        
+
+        public readonly int ByteCount;
+
         public readonly CaptureTermCode TermCode;
+
+        public MemoryRange Range
+            => (Start,End);
 
         public readonly byte[] Lookback;
 

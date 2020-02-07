@@ -13,16 +13,34 @@ namespace Z0
     public interface ICaptureJunction
     {
         void Accept(in CaptureState state, in CaptureExchange exchange);   
+
+        void Complete(in CapturedMember captured, in CaptureExchange exchange);
+        
     }
 
     public interface ICaptureEventSink
     {
         void Accept(in CaptureEventInfo info);
+
+        void Complete(in CapturedMember captured){}
     }
 
-    public interface ICaptureControl : ICaptureJunction, ICaptureEventSink
+    public interface ICaptureOps
     {
-        CapturedMember RunCapture(MethodInfo method, in CaptureExchange exchange);   
+        CapturedMember Capture(OpIdentity id, MethodInfo method, in CaptureExchange exchange);        
+        
+        CapturedMember Capture(OpIdentity id, DynamicDelegate src, in CaptureExchange exchange);
+
+        CapturedMember Capture(OpIdentity id, Delegate src, in CaptureExchange exchange);
+
+
+        CapturedMember Capture(MethodInfo method, in CaptureExchange exchange)
+            => Capture(method.Identify(), method, exchange);
+    }
+
+    public interface ICaptureControl : ICaptureOps, ICaptureJunction, ICaptureEventSink
+    {
+
     }
 
     public interface ICaptureWriter : IDisposable
@@ -38,14 +56,8 @@ namespace Z0
         byte[] TakeBuffer();        
     }
 
-    public interface ICaptureService
+    public interface ICaptureService : ICaptureOps
     {        
-        CapturedMember Capture(OpIdentity id, MethodInfo src, in CaptureExchange exchange);
-
-        CapturedMember Capture(OpIdentity id, DynamicDelegate src, in CaptureExchange exchange);
-
-        CapturedMember Capture(OpIdentity id, Delegate src, in CaptureExchange exchange);
-
         CapturedMember Capture(OpIdentity id, DynamicDelegate src, Span<byte> dst)
             => Capture(id,src,CaptureExchange.Define(dst));
 

@@ -20,12 +20,11 @@ namespace Z0
             {
                 var pSrc = jit(src);
                 var dst = exchange.TargetBuffer;
-                var start = (ulong)pSrc;
-                var result = capture(pSrc, exchange);            
-                var end = result.End;
-                var bytesRead = (int)(end - start);
-                var code = dst.Slice(0, bytesRead).ToArray();
-                return CapturedMember.Define(id, src, (start, end), code, result);         
+                var cr = capture(pSrc, exchange);            
+                var bytes = dst.Slice(0, cr.ByteCount).ToArray();
+                var captured = CapturedMember.Define(id, src, cr.Range, bytes, cr);                
+                exchange.Complete(captured);
+                return captured;
             }
             catch(Exception e)
             {
@@ -40,12 +39,11 @@ namespace Z0
             {
                 var pSrc = jit(src).Ptr;
                 var dst = exchange.TargetBuffer;
-                var start = (ulong)pSrc;       
-                var result =  capture(pSrc, exchange);   
-                var end = result.End;
-                var bytesRead = (int)(end - start);
-                var code = dst.Slice(0, bytesRead).ToArray();
-                return CapturedMember.Define(id, src, (start, end), code, result);
+                var cr =  capture(pSrc, exchange);   
+                var bytes = dst.Slice(0, cr.ByteCount).ToArray();
+                var captured = CapturedMember.Define(id, src, cr.Range, bytes, cr);                
+                exchange.Complete(captured);
+                return captured;
 
             }
             catch(Exception e)
@@ -61,12 +59,11 @@ namespace Z0
             {
                 var pSrc = jit(src);
                 var dst = exchange.TargetBuffer;
-                var start = (ulong)pSrc;
-                var result = capture(pSrc, exchange);
-                var end = result.End;
-                var bytesRead = (int)(end - start);
-                var code = dst.Slice(0, bytesRead).ToArray();
-                return CapturedMember.Define(id, src, (start, end), code, result);
+                var cr = capture(pSrc, exchange);
+                var bytes = dst.Slice(0, cr.ByteCount).ToArray();
+                var captured = CapturedMember.Define(id, src, cr.Range, bytes, cr);  
+                exchange.Complete(captured);
+                return captured;
             }
             catch(Exception e)
             {
@@ -103,8 +100,8 @@ namespace Z0
             while(offset < maxcount)
             {
                 byte code = 0;                
-                dst[offset++] = Read(pSrcCurrent++, ref code);  
-                exchange.Junction.Accept((offset, (ulong)pSrcCurrent, code), exchange);
+                exchange.Target(offset++) =Read(pSrcCurrent++, ref code);  
+                exchange.Accept(CaptureState.Define(offset, (ulong)pSrcCurrent, code));
                 
                 var lookstart = offset < Lookback_Count ? 0 : offset - Lookback_Count;
                 lookback = dst.Slice(lookstart, Lookback_Count);

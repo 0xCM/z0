@@ -57,15 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         public static bool homogenous(MethodInfo m)
-        {
-            var inputs = m.ParameterTypes().ToSet();
-            if(inputs.Count == 1)
-                return inputs.Single() == m.ReturnType;
-            else if(inputs.Count == 0)
-                return m.ReturnType == typeof(void);
-            else
-                return false;
-        }
+            => m.IsHomogenous();
 
         /// <summary>
         /// Determines whether a method is a unary operator
@@ -247,10 +239,10 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool primal(this MethodInfo m)
-            => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.NumericKind() != NumericKind.None);
+            => m.Arity() != 0 && m.ParameterTypes().All(t => t.NumericKind() != NumericKind.None);
 
         public static ParamVariance variance(ParameterInfo src)
-            => src.Variance(); //src.IsIn ? ParamDirection.In : src.IsOut ? ParamDirection.Out : ParamDirection.Default;
+            => src.Variance();
 
     }
 }

@@ -19,13 +19,6 @@ namespace Z0
         /// Returns a method's parameter types
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> ParameterTypes(this MethodInfo m)
-            => m.GetParameters().Select(p => p.ParameterType);
-
-        /// <summary>
-        /// Returns a method's parameter types
-        /// </summary>
-        /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool effective)
             => effective ? m.ParameterTypes().Select(t => t.EffectiveType()) : m.ParameterTypes();
  

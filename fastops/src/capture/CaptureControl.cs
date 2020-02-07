@@ -18,17 +18,20 @@ namespace Z0
                     
         readonly ICaptureEventSink EventSink;
 
-        ICaptureEventSink ControlSink
-        {
-            [MethodImpl(Inline)]
-            get => this;
-        }
-
         public static CaptureControl Create(ICaptureEventSink sink)
             => new CaptureControl(sink);
 
         public static CaptureControl Create()
             => new CaptureControl(null);
+
+        public CapturedMember Capture(OpIdentity id, DynamicDelegate src, in CaptureExchange exchange)
+            => Service.Capture(id,src,exchange);
+
+        public CapturedMember Capture(OpIdentity id, Delegate src, in CaptureExchange exchange)
+            => Service.Capture(id,src,exchange);
+
+        public CapturedMember Capture(OpIdentity id, MethodInfo method, in CaptureExchange exchange)
+            => Service.Capture(id, method, exchange);                                    
 
         CaptureControl(ICaptureEventSink sink)
         {
@@ -36,23 +39,23 @@ namespace Z0
             this.Service = CaptureServices.Capture();
         }
 
-        [MethodImpl(Inline)]
-        public void Accept(in CaptureState src, in CaptureExchange exchange)
+        ICaptureEventSink ControlSink
         {
-            ControlSink.Accept(CaptureEventInfo.Define(src, exchange.StateBuffer));
-        }
-
-        public CapturedMember RunCapture(MethodInfo method, in CaptureExchange exchange)
-        {            
-            return Service.Capture(method.Identify(), method, exchange);                                    
+            [MethodImpl(Inline)]
+            get => this;
         }
 
         [MethodImpl(Inline)]
-        public void Accept(in CaptureEventInfo info)
-        {
+        void ICaptureJunction.Accept(in CaptureState src, in CaptureExchange exchange)
+            => ControlSink.Accept(CaptureEventInfo.Define(src, exchange.StateBuffer));
 
-            EventSink.Accept(info);
-        }
+        [MethodImpl(Inline)]
+        void ICaptureEventSink.Accept(in CaptureEventInfo info)
+            => EventSink.Accept(info);
+
+        [MethodImpl(Inline)]
+        public void Complete(in CapturedMember captured, in CaptureExchange exchange)
+            => EventSink.Complete(captured);
 
         readonly struct CaptureEventSink : ICaptureEventSink
         {

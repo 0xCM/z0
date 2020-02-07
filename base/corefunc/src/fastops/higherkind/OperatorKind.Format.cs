@@ -10,14 +10,8 @@ namespace Z0
 
     using static zfunc;
 
-    public static class LiteralFormatting
+    public static class OpKindFormatting
     {
-        public static string Format(this VectorKind k)
-            => k.IsSome() ? k.ToString() : string.Empty;
-
-        public static string Format(this BlockKind k)
-            => k.IsSome() ? k.ToString() : string.Empty;
-
         [MethodImpl(Inline)]
         public static string Format(this NumericKind k)
             => $"{k.Width()}{k.Indicator().Format()}";
@@ -94,4 +88,5 @@ namespace Z0
         public static string Format<S,T>(this ShiftOpKind kind, S arg1, T arg2)
             => $"{arg1} {kind.Format()} {arg2}"; 
     }
+
 }

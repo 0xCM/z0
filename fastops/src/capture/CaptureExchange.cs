@@ -22,13 +22,13 @@ namespace Z0
         /// </summary>
         public readonly Span<byte> StateBuffer;
 
-        public readonly ICaptureJunction Junction;
+        readonly ICaptureJunction Junction;
 
         public static CaptureExchange Define(ICaptureJunction junction, Span<byte> capture, Span<byte> state)
             => new CaptureExchange(junction,capture,state);
 
         public static CaptureExchange Define(Span<byte> capture)
-            => new CaptureExchange(EmptyJunction.Empty, capture,default);
+            => new CaptureExchange(EmptyJunction.Empty, capture, capture.Replicate());
 
         CaptureExchange(ICaptureJunction juntion, Span<byte> capture, Span<byte> state)            
         {
@@ -59,11 +59,21 @@ namespace Z0
         public ref byte Target(int index)
             => ref seek(TargetBuffer, index);
 
+        [MethodImpl(Inline)]
+        public void Complete(in CapturedMember captured)
+            => Junction.Complete(captured, this);
+
+        [MethodImpl(Inline)]
+        public void Accept(in CaptureState state)
+            => Junction.Accept(state, this);
+
         readonly struct EmptyJunction : ICaptureJunction
         {
             public static EmptyJunction Empty => default;
                     
             public void Accept(in CaptureState state, in CaptureExchange exchange){}
+
+            public void Complete(in CapturedMember captured, in CaptureExchange exchange) {}
         }
     }
 }

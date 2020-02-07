@@ -16,28 +16,12 @@ namespace Z0
     public static partial class FastOpX
     {
         /// <summary>
-        /// Determines whether kind has a nonzero value
-        /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSome(this VectorKind k)
-            => k != VectorKind.None;
-
-        /// <summary>
         /// Determines whether a type is an intrinsic vector
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static bool IsVector(this Type t)
             => VectorType.test(t);
-
-        /// <summary>
-        /// Specifies the bit-width of a classified cpu vector
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static int BitWidth(this VectorKind k)
-            => VectorType.width(k);
 
         /// <summary>
         /// Determines whether a type is a 128-bit intrinsic vector

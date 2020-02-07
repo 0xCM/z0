@@ -6,13 +6,25 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+    using System.ComponentModel;
+    using System.Collections.Concurrent;
+
+    public static partial class RootReflections
+    {
+
+
+    }
 
     /// <summary>
     /// Defines useful collection of reflection binding flags
     /// </summary>
     public static class ReflectionFlags
     {
+
         public const BindingFlags BF_Instance
             = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
@@ -58,12 +70,6 @@ namespace Z0
         public const BindingFlags BF_All
             = BF_AllInstance | BF_AllStatic;
         
-        /// <summary>
-        ///  All declared non-public instance members
-        /// </summary>
-        public const BindingFlags BF_DeclaredRestrictedInstance
-            = BindingFlags.DeclaredOnly | BindingFlags.NonPublic | BindingFlags.Instance;
-
         public const BindingFlags BF_DeclaredPublicInstance
             = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
 
@@ -97,6 +103,9 @@ namespace Z0
         public const BindingFlags BF_Declared
             = BF_DeclaredInstance | BF_DeclaredStatic;
 
+        /// <summary>
+        /// Public, non-public, instance and static members
+        /// </summary>
         public const BindingFlags AnyVisibilityOrInstanceType
             = BindingFlags.Public
             | BindingFlags.NonPublic

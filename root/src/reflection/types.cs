@@ -13,7 +13,7 @@ namespace Z0
     using System.ComponentModel;
     using System.Collections.Concurrent;
 
-    partial class RootX
+    public static partial class RootReflections
     {
         /// <summary>
         /// Returns true if the source type is either non-generic or a generic type that has been closed over all parameters

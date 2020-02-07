@@ -11,9 +11,12 @@ namespace Z0
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
+        public const StringComparison IgnoreCase = StringComparison.InvariantCultureIgnoreCase;
+
+
         [MethodImpl(Inline)]
         public static bool IdentityEquals(string lhs, string rhs)
-            => string.Equals(lhs, rhs, StringComparison.InvariantCultureIgnoreCase);        
+            => string.Equals(lhs, rhs, IgnoreCase);        
 
         [MethodImpl(Inline)]
         public static int IdentityCompare(IIdentity lhs, IIdentity rhs)

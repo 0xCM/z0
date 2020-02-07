@@ -60,6 +60,15 @@ namespace Z0
             where T : unmanaged
                 => onTrue(x.HasValue, () => action(x.Value));
 
+        [MethodImpl(Inline)]
+        public static bool IsSome<T>(this T? x, Action<T> action)
+            where T : unmanaged, Enum
+                => x.HasValue;
+
+        [MethodImpl(Inline)]
+        public static bool IsNone<T>(this T? x, Action<T> action)
+            where T : unmanaged, Enum
+                => !x.HasValue;
 
         [MethodImpl(Inline)]
         public static IEnumerable<Option<T>> Condense<T>(this IEnumerable<IEnumerable<Option<T>>> options)

@@ -40,49 +40,6 @@ namespace Z0
             return baseMethodDefinition.DeclaringType != thisMethodDefinition.DeclaringType;
         }
 
-        /// <summary>
-        /// Determines whether a method has a speicied arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="arity">The arity to match</param>
-        public static bool HasArity(this MethodInfo m, int arity)
-            => m.Arity() == arity;
-
-        /// <summary>
-        /// Determines the number of parameters defined by a method
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static int Arity(this MethodInfo m)
-            => m.GetParameters().Length;
-
-        /// <summary>
-        /// Determines the type of an index-identified parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="index">The parameter index</param>
-        public static Type ParameterType(this MethodInfo m, int index)
-            => m.Arity() >= index + 1 ? m.GetParameters()[index].ParameterType : typeof(void);
-
-        /// <summary>
-        /// Determines whether the method is an implicit conversion operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsImplicitConverter(this MethodInfo m)
-            => string.Equals(m.Name, "op_Implicit", StringComparison.InvariantCultureIgnoreCase);
-
-        /// <summary>
-        /// Determines whether the method is an explicit conversion operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsExplicitConverter(this MethodInfo m)
-            => string.Equals(m.Name, "op_Explicit", StringComparison.InvariantCultureIgnoreCase);
-
-        /// <summary>
-        /// Determines whether a method is an implict or explicit conversion operation
-        /// </summary>
-        /// <param name="m"></param>
-        public static bool IsConversionOp(this MethodInfo m)
-            => m.IsExplicitConverter() || m.IsImplicitConverter();
 
         /// <summary>
         /// Searches a type for any method that matches the supplied signature
@@ -94,62 +51,6 @@ namespace Z0
             => paramTypes.Length != 0
                 ? declarer.GetMethod(name, bindingAttr: AnyVisibilityOrInstanceType, binder: null, types: paramTypes, modifiers: null)
                 : declarer.GetMethod(name, AnyVisibilityOrInstanceType);
-
-        /// <summary>
-        /// If a method is non-generic, returns an emtpy list.
-        /// If a method is open generic, returns a list describing the open parameters
-        /// If a method is closed generic, returns a list describing the closed parameters
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="effective">Whether to yield effective types or types as reported by the framework reflection api</param>
-        public static Type[] GenericParameters(this MethodInfo m, bool effective)
-        {
-            var dst = array<Type>();
-            if((!m.IsGenericMethod && !m.IsGenericMethodDefinition))
-                return dst;
-            else return 
-                (m.IsConstructedGenericMethod 
-                ? m.GetGenericArguments() 
-                : m.GetGenericMethodDefinition().GetGenericArguments()).Map(arg => effective ? arg.EffectiveType() : arg);                             
-        }
-
-        /// <summary>
-        /// For a non-constructed generic method or a generic method definition, returns an array of the method's type parameters; otherwise, returns an empty array
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static Type[] OpenTypeParameters(this MethodInfo m, bool effective)
-            => (m.ContainsGenericParameters ? m.GetGenericMethodDefinition().GetGenericArguments()
-             : m.IsGenericMethodDefinition ? m.GetGenericArguments()
-             : array<Type>()).Map(arg => effective ? arg.EffectiveType() : arg);
-
-        /// <summary>
-        /// For a closed generic method, returns the supplied arguments; otherwise, returns an empty array
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="effective">Whether to yield effective types or types as reported by the framework reflection api</param>
-        public static Type[] SuppliedTypeArgs(this MethodInfo m, bool effective = true)
-            => m.IsConstructedGenericMethod ? m.GenericParameters(effective) : array<Type>();
-
-        /// <summary>
-        /// Returns true if the method has unspecified generic parameters, false otherwise
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsOpenGeneric(this MethodInfo m)
-            => m.ContainsGenericParameters;
-
-        /// <summary>
-        /// Returns true if the method has unspecified generic parameters, false otherwise
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsClosedGeneric(this MethodInfo m)
-            => m.IsConstructedGenericMethod;
-
-        /// <summary>
-        /// Returns true if the method has unspecified generic parameters, false otherwise
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNonGeneric(this MethodInfo m)
-            => !m.IsGenericMethod && !m.IsConstructedGenericMethod;
 
         /// <summary>
         /// Selects the concrete (not abstract) methods from a stream
@@ -165,141 +66,6 @@ namespace Z0
         public static IEnumerable<MethodInfo> NonSpecial(this IEnumerable<MethodInfo> src)
             => src.Where(t => !t.IsSpecialName && !t.Name.Contains(AsciSym.Pipe) && !t.Name.Contains(AsciSym.Lt));
 
-        /// <summary>
-        /// Selects the abstract methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Abstract(this IEnumerable<MethodInfo> src)
-            => src.Where(t => t.IsAbstract);
-
-        /// <summary>
-        /// Selects the static methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Static(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsStatic);
-
-        /// <summary>
-        /// Selects the instance methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Instance(this IEnumerable<MethodInfo> src)
-            => src.Where(t => !t.IsStatic);
-
-        /// <summary>
-        /// Selects the public methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Public(this IEnumerable<MethodInfo> src)
-            => src.Where(t => t.IsPublic);
-
-        /// <summary>
-        /// For a generic method, retrieves the definition; otherwis, an error is raised
-        /// </summary>
-        /// <param name="src">The source method</param>
-        public static MethodInfo GenericDefintion(this MethodInfo src)
-        {
-            if(src.IsNonGeneric())
-                throw Errors.NonGenericMethod(src);
-            else 
-                return src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();
-        }
-
-        /// <summary>
-        /// Reifies a 1-parameter generic method with a parametric type argument
-        /// </summary>
-        /// <param name="src">The source method</param>
-        /// <param name="args">The type arguments</param>
-        public static MethodInfo CloseGenericMethod<T>(this MethodInfo src)
-            => src.GenericDefintion().MakeGenericMethod(typeof(T));
-
-        /// <summary>
-        /// Reifies a 2-parameter generic method with a parametric type argument
-        /// </summary>
-        /// <param name="src">The source method</param>
-        /// <param name="args">The type arguments</param>
-        public static MethodInfo CloseGenericMethod<T1,T2>(this MethodInfo src)
-            => src.GenericDefintion().MakeGenericMethod(typeof(T1), typeof(T2));
-
-        /// <summary>
-        /// Reifies a generic method with supplied type arguments
-        /// </summary>
-        /// <param name="src">The source method</param>
-        /// <param name="args">The type arguments</param>
-        public static MethodInfo CloseGenericMethod(this MethodInfo src, params Type[] args)
-            => src.GenericDefintion().MakeGenericMethod(args);
-
-        /// <summary>
-        /// For the generic methods in a stream, selects their respective definitions
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> GenericMethodDefinitions(this IEnumerable<MethodInfo> src)
-            => src.Where(m => m.IsOpenGeneric() || m.IsClosedGeneric()).Select(m => m.GetGenericMethodDefinition()).Distinct();
-
-        public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type arg)
-            => from def in src.GenericMethodDefinitions()
-               select def.MakeGenericMethod(arg);
-
-        public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type arg1, Type arg2)
-            => from def in src.GenericMethodDefinitions()
-               select def.MakeGenericMethod(arg1, arg2);
-
-        public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type arg1, Type arg2, Type arg3)
-            => from def in src.GenericMethodDefinitions()
-               select def.MakeGenericMethod(arg1, arg2, arg3);
-
-        /// <summary>
-        /// Closes each 1-parameter generic methods over each supplied argument
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="args"></param>
-        public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type[] args)
-            => from def in src.GenericMethodDefinitions()
-                from arg in args
-                select def.MakeGenericMethod(arg);
-
-        /// <summary>
-        /// Selects the open generic methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> OpenGeneric(this IEnumerable<MethodInfo> src)
-            => src.Where(IsOpenGeneric);
-
-        /// <summary>
-        /// Selects the open generic methods from a stream with a specified argument count
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        /// <param name="args">The target argument count</param>
-        public static IEnumerable<MethodInfo> OpenGeneric(this IEnumerable<MethodInfo> src, int args)
-            => src.OpenGeneric().Where(m => m.GetGenericArguments().Length == args);
-
-        /// <summary>
-        /// Selects the conversion operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> ConversionOps(this IEnumerable<MethodInfo> src)
-            => src.Where(IsConversionOp);
-
-        /// <summary>
-        /// Reomoves any conversion operations from the stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> WithoutConversionOps(this IEnumerable<MethodInfo> src)
-            => src.Where(m => !m.IsConversionOp());
-
-        /// <summary>
-        /// Selects the closed generic methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> ClosedGeneric(this IEnumerable<MethodInfo> src)
-            => src.Where(t => t.IsConstructedGenericMethod);
-
-        /// <summary>
-        /// Selects the non-generic methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> NonGeneric(this IEnumerable<MethodInfo> src)
-            => src.Where(t => !t.ContainsGenericParameters && !t.IsConstructedGenericMethod);        
 
         /// <summary>
         /// Selects the methods that are adorned with parametrically-identified attribute
@@ -310,29 +76,17 @@ namespace Z0
             where A : Attribute
                 => src.Where(m => m.Attributed<A>());
 
-        /// <summary>
-        /// Reifies a method if it is open generic; otherwise, returns the original method
-        /// </summary>
-        /// <param name="m"></param>
-        /// <param name="args"></param>
-        public static MethodInfo Reify(this MethodInfo m, params Type[] args)
+        
+        public static bool IsHomogenous(this MethodInfo m)
         {
-            if(m.IsGenericMethodDefinition)
-                return m.MakeGenericMethod(args);            
-            else if(m.IsConstructedGenericMethod)
-                return m;
-            else if(m.IsGenericMethod)
-                return m.GetGenericMethodDefinition().MakeGenericMethod(args);
+            var inputs = m.ParameterTypes().ToSet();
+            if(inputs.Count == 1)
+                return inputs.Single() == m.ReturnType;
+            else if(inputs.Count == 0)
+                return m.ReturnType == typeof(void);
             else
-                return m;                
+                return false;
         }
-
-        /// <summary>
-        /// Determines the number of parameters defined by the method
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static int ParameterCount(this MethodInfo m)          
-            => m.GetParameters().Count();
 
         /// <summary>
         /// Selects functions from a stream
@@ -340,13 +94,6 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> Functions(this IEnumerable<MethodInfo> src)
             => src.Where(x => x.IsFunction());
-
-        /// <summary>
-        /// Selects functions from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> WithArity(this IEnumerable<MethodInfo> src, int arity)
-            => src.Where(m => m.HasArity(arity));
 
         /// <summary>
         /// Selects the non-public methods from a stream
@@ -369,22 +116,5 @@ namespace Z0
         /// <param name="rt">The method return type</param>
         public static IEnumerable<MethodInfo> Returns(this IEnumerable<MethodInfo> src, Type rt)
             => src.Where(x => x.ReturnType == rt);
-
-        /// <summary>
-        ///  Selects methods from a stream that declare a parameter that has a specifid type
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        /// <param name="t">The parameter type to match</param>
-        public static IEnumerable<MethodInfo> WithParameterType(this IEnumerable<MethodInfo> src, Type t)
-            => src.Where(m => m.GetParameters().Length != 0 && m.GetParameters().Any(p => p.ParameterType == t));
-
-        /// <summary>
-        /// Selects generic methods from a stream that have a specified generic type definition parameter
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        /// <param name="typedef">The type definition to match</param>
-        public static IEnumerable<MethodInfo> WithGenericParameterType(this IEnumerable<MethodInfo> src, Type typedef)
-            => src.Where(m => m.GetParameters().Length != 0 && m.GetParameters()
-                  .Any(p => p.ParameterType.IsGenericTypeDefinition && p.ParameterType == typedef));
     }
 }

@@ -6,24 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static zfunc;
 
     partial class FastOpX
     {
-        /// <summary>
-        /// Determines whether kind has a nonzero value
-        /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSome(this BlockKind k)
-            => k != BlockKind.None;
-
         /// <summary>
         /// Determines whether a type is blocked memory store
         /// </summary>

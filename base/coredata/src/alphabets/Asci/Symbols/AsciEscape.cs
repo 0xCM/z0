@@ -22,5 +22,4 @@ namespace Z0
         /// </summary>
         public const string Eol = "\r\n";
     }
-
 }
