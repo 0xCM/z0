@@ -31,7 +31,8 @@ namespace Z0
         {
             //iter(Context.Assemblies.Catalogs, c => Trace(c.CatalogName));
             var archive = Context.Archiver();
-            archive.Archive(AssemblyId.Intrinsics);
+            archive.Archive(AssemblyId.DataCore);
+            archive.Archive(AssemblyId.Root);
         }
 
         [MethodImpl(Inline)]

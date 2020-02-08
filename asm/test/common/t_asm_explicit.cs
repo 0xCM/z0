@@ -29,7 +29,13 @@ namespace Z0
                 Designators.Data.Designated,
                 Designators.GMath.Designated,
                 Designators.Intrinsics.Designated,
-                Designators.BitCore.Designated);
+                Designators.BitCore.Designated,
+                Designators.BitGrids.Designated,
+                Designators.Logix.Designated,
+                Designators.CoreFunc.Designated,
+                Designators.Root.Designated,
+                Designators.DataCore.Designated
+                );
         }
    
         public void Execute()
