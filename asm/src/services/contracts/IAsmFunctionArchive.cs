@@ -10,6 +10,18 @@ namespace Z0
 
     using static zfunc;
 
+    public enum AsmArchiveFileKind
+    {
+        None = 0,
+
+        Hex = 1,
+
+        Asm = 2,
+
+        Cil = 3,
+        
+    }
+
     /// <summary>
     /// Defines asm archival service operations
     /// </summary>

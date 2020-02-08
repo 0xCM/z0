@@ -12,13 +12,24 @@ namespace Z0
 
     public readonly struct AsmEmissionToken : IAsmEmissionToken
     {
+        /// <summary>
+        /// Specifies the reason for capture termination
+        /// </summary>
+        public readonly CaptureTermCode TermCode;
+
+        /// <summary>
+        /// Defines a uri relataive to the global asm data root
+        /// </summary>
         public readonly OpUri Uri;
 
+        /// <summary>
+        /// The memory range from which the defining code was extracted
+        /// </summary>
         public readonly MemoryRange Origin;
 
         [MethodImpl(Inline)]
-        public static AsmEmissionToken Define(OpUri uri, MemoryRange origin)        
-            => new AsmEmissionToken(uri, origin);
+        public static AsmEmissionToken Define(CaptureCompletion cc, OpUri uri)        
+            => new AsmEmissionToken(cc, uri);
 
         [MethodImpl(Inline)]
         public static bool operator==(AsmEmissionToken a, AsmEmissionToken b)
@@ -29,10 +40,11 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        AsmEmissionToken(OpUri uri, MemoryRange origin)
+        AsmEmissionToken(CaptureCompletion cc, OpUri uri)
         {
+            this.TermCode = cc.TermCode;
             this.Uri = uri;
-            this.Origin = origin;
+            this.Origin = cc.Range;
         }
 
         public string Format()
@@ -46,7 +58,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(AsmEmissionToken src)
-            => Uri == src.Uri 
+            => TermCode == src.TermCode
+            && Uri == src.Uri 
             && Origin == src.Origin;
         
         public override bool Equals(object src)

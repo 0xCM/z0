@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="dst">The file path</param>
         public static StreamWriter Writer(this FilePath dst)
         {
-            return new StreamWriter(dst.CreateFolderIfMissing().FullPath, false);
+            return new StreamWriter(dst.CreateParentIfMissing().FullPath, false);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
             if(!string.IsNullOrWhiteSpace(src))
             {
                 
-                File.WriteAllText(dst.CreateFolderIfMissing().FullPath, src);
+                File.WriteAllText(dst.CreateParentIfMissing().FullPath, src);
             }
         }
 
@@ -125,7 +125,7 @@ namespace Z0
         public static int Overwrite(this FilePath dst, params string[] lines)
         {         
             var count = 0;
-            using var writer = new StreamWriter(dst.CreateFolderIfMissing().FullPath,false);            
+            using var writer = new StreamWriter(dst.CreateParentIfMissing().FullPath,false);            
             foreach(var line in lines)
             {
                 writer.WriteLine(line);
@@ -140,7 +140,7 @@ namespace Z0
         public static int Append(this FilePath dst, IEnumerable<string> src)
         {
             var count = 0;
-            using var writer = new StreamWriter(dst.CreateFolderIfMissing().FullPath,true);            
+            using var writer = new StreamWriter(dst.CreateParentIfMissing().FullPath,true);            
             foreach(var line in src)
             {
                 writer.WriteLine(line);
@@ -155,7 +155,7 @@ namespace Z0
         public static IEnumerable<FilePath> WithExtensions(this IEnumerable<FilePath> src, params FileExtension[] extensions)
             => src.Where(path => extensions.Any(e => e == path.Extension));
 
-        public static FilePath CreateFolderIfMissing(this FilePath src)
+        public static FilePath CreateParentIfMissing(this FilePath src)
         {
             src.FolderPath.CreateIfMissing();
             return src;

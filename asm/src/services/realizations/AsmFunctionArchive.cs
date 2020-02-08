@@ -15,9 +15,8 @@ namespace Z0
 
     using static zfunc;
 
-
     class AsmFunctionArchive : IAsmFunctionArchive
-    {
+    {        
         public FolderPath Root {get;}
         
         readonly AsmFormatConfig GroupFormatConfig;
@@ -30,19 +29,27 @@ namespace Z0
 
         public IAsmContext Context {get;}
 
-        public string Catalog {get;}
+        public AssemblyId Catalog {get;}
 
         public string Subject {get;}
 
-        public static IAsmFunctionArchive Create(IAsmContext context, string catalog, string subject)
+        public static IAsmFunctionArchive Create(IAsmContext context, AssemblyId catalog, string subject)
             => new AsmFunctionArchive(context, catalog,subject);
 
-        AsmFunctionArchive(IAsmContext context, string catalog, string subject)
+        public static FilePath ArchiveFilePath(AsmArchiveFileKind kind, AssemblyId catalog, string subject, OpIdentity id)
+            => kind switch {
+                AsmArchiveFileKind.Hex  => HexFilePath(catalog, subject, id),
+                AsmArchiveFileKind.Asm  => AsmFilePath(catalog, subject, id),
+                AsmArchiveFileKind.Cil  => CilFilPath(catalog, subject, id),
+                _                       => FilePath.Empty,
+            };
+
+        AsmFunctionArchive(IAsmContext context, AssemblyId catalog, string subject)
         {
             this.Context = context;
             this.Catalog = catalog;
             this.Subject = subject;
-            this.Root = Paths.AsmDataDir(RelativeLocation.Define(catalog, subject));
+            this.Root = Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), subject));
             this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
             this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
@@ -54,9 +61,8 @@ namespace Z0
             HexPath(src.Id).WriteText(src.Code.Format());
             AsmPath(src.Id).WriteText(DefaultFormatter.FormatDetail(src));
             src.Cil.OnSome(cil => CilPath(src.Id).WriteText(CilFormatter.Format(cil)));
-            return AsmEmissionToken.Define(OpUri.Asm(Catalog, Subject, src.Id), src.Location);
+            return AsmEmissionToken.Define(src.CaptureInfo, OpUri.Asm(Catalog.Format(), Subject, src.Id));
         }
-
 
         public Option<AsmEmissionGroup> Save(AsmFunctionGroup src, bool append)
         {            
@@ -125,9 +131,9 @@ namespace Z0
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
-                    var uri = OpUri.Asm(Catalog, Subject, src.Id, f.Id);
+                    var uri = OpUri.Asm(Catalog.Format(), Subject, src.Id, f.Id);
                     writer.Write(GroupFormatter.FormatDetail(f));
-                    tokens[i] = AsmEmissionToken.Define(uri, f.Location);
+                    tokens[i] = AsmEmissionToken.Define(f.CaptureInfo, uri);
                 }
                 return tokens.ToGroup(src.Id);
             }
@@ -138,14 +144,6 @@ namespace Z0
             }
         }
 
-        FilePath HexPath(OpIdentity m)
-            => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmHexFile(m);
-
-        FilePath AsmPath(OpIdentity m)
-            => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmDetailFile(m);
-
-        FilePath CilPath(OpIdentity m)
-            => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.CilFile(m);
  
         void OnEmitting(AsmFunctionGroup src)
         {
@@ -161,6 +159,24 @@ namespace Z0
         {
             print(EmissionMismatch(id,incount,outcount));
         }
- 
+
+        FilePath HexPath(OpIdentity id)
+            => ArchiveFilePath(AsmArchiveFileKind.Hex, Catalog, Subject, id).CreateParentIfMissing();
+
+        FilePath AsmPath(OpIdentity id)
+            => ArchiveFilePath(AsmArchiveFileKind.Asm, Catalog, Subject, id).CreateParentIfMissing();
+
+        FilePath CilPath(OpIdentity id)
+            => ArchiveFilePath(AsmArchiveFileKind.Cil, Catalog, Subject, id).CreateParentIfMissing();
+
+        static FilePath HexFilePath(AssemblyId catalog, string subject, OpIdentity id)
+            => Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), subject)) + Paths.AsmHexFile(id);
+
+        static FilePath AsmFilePath(AssemblyId catalog, string subject, OpIdentity id)
+            => Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), subject)) + Paths.AsmDetailFile(id);
+
+        static FilePath CilFilPath(AssemblyId catalog, string subject, OpIdentity id)
+            => Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), subject)).CreateIfMissing() + Paths.CilFile(id);
+
     }
 }

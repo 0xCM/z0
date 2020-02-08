@@ -32,8 +32,8 @@ namespace Z0
         IEnumerable<AssemblyId> ActiveAssemblies
             => Context.ActiveAssemblies();
 
-        Option<FilePath> CreateEmissionReport(AssemblyId src, AsmEmissionGroup[] emitted, bool imm)
-            => AsmReports.CreateEmissionReport(src, emitted, imm ? "imm" : "").Save();
+        Option<FilePath> ReportEmissions(AssemblyId src, AsmEmissionGroup[] emitted, AsmEmissionKind kind)
+            => AsmReports.Emissions(src, emitted, kind).Save();
 
         AsmEmissionGroup[] EmitPrimary(in CaptureExchange exchange, IOperationProvider src,  IAsmCatalogEmitter emitter)
         {
@@ -61,7 +61,7 @@ namespace Z0
 
         Option<FilePath> EmitLocations(IOperationProvider src)
         {
-            return AsmReports.CreateMemberLocationReport(src.HostId, src.HostAssembly).Save();
+            return AsmReports.MemberLocations(src.HostId, src.HostAssembly).Save();
         }
 
         void Completed(Option<FilePath> report)
@@ -79,11 +79,11 @@ namespace Z0
 
             var primary = EmitPrimary(exchange, src, emitter);
             if(primary.Length != 0)
-                Completed(CreateEmissionReport(src.HostId, primary, false));
+                Completed(ReportEmissions(src.HostId, primary, AsmEmissionKind.Primary));
             
             var imm = EmitImm(exchange, src, emitter);
             if(imm.Length != 0)
-                Completed(CreateEmissionReport(src.HostId, imm, true));
+                Completed(ReportEmissions(src.HostId, imm, AsmEmissionKind.Imm));
 
             
             Completed(EmitLocations(src));
@@ -108,7 +108,7 @@ namespace Z0
             foreach(var src in providers)
                 Archive(exchange, src);
 
-            AsmReports.CreateResourceReport(Resources).Save().Require();
+            AsmReports.Resources(AssemblyId.Data, Resources).Save().Require();
         }
     }
 }

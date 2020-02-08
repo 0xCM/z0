@@ -13,21 +13,17 @@ namespace Z0
     /// </summary>
     public readonly struct CaptureCompletion
     {
-        public static CaptureCompletion Empty => Define(0,0, CaptureTermCode.None, new byte[]{});
+        public static CaptureCompletion Empty => Define(0,0, CaptureTermCode.None);
 
-        public static CaptureCompletion Define(ulong start, ulong end,  CaptureTermCode cc, Span<byte> lookback)
-            => new CaptureCompletion(start, end, cc, new byte[]{});
+        public static CaptureCompletion Define(ulong start, ulong end, CaptureTermCode cc)
+            => new CaptureCompletion(start, end, cc);
 
-        public static CaptureCompletion Define(ulong start, ulong end,  CaptureTermCode cc)
-            => new CaptureCompletion(start, end, cc, new byte[]{});
-
-        CaptureCompletion(ulong start, ulong end, CaptureTermCode cc, byte[] lookback)
+        CaptureCompletion(ulong start, ulong end, CaptureTermCode cc)
         {   
             this.Start = start;
             this.End = end;
             this.ByteCount = (int)(end - start);
             this.TermCode = cc;
-            this.Lookback = lookback;
         }
          
         public readonly ulong Start;
@@ -41,7 +37,6 @@ namespace Z0
         public MemoryRange Range
             => (Start,End);
 
-        public readonly byte[] Lookback;
 
         public bool IsEmpty
             => End - Start == 0 && TermCode == CaptureTermCode.None;        

@@ -24,15 +24,21 @@ namespace Z0
             capture_shifter(buffers);
             capture_shuffler(buffers);
             capture_archived(buffers);
-            run_archive(buffers);
+            archive_context(buffers);
         }
 
-        void run_archive(in AsmBuffers buffers)
+        void archive_context(in AsmBuffers buffers)
         {
-            //iter(Context.Assemblies.Catalogs, c => Trace(c.CatalogName));
             var archive = Context.Archiver();
-            archive.Archive(AssemblyId.DataCore);
-            archive.Archive(AssemblyId.Root);
+            var selection = from c in Context.Assemblies.Catalogs
+                            where !c.IsEmpty && c.AssemblyId != AssemblyId.Data
+                            orderby c.AssemblyId
+                            select c.AssemblyId;
+            foreach(var id in selection)
+                archive.Archive(id);    
+
+            // archive.Archive(AssemblyId.GMath);
+            // archive.Archive(AssemblyId.Intrinsics);
         }
 
         [MethodImpl(Inline)]

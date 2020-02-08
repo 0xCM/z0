@@ -15,41 +15,34 @@ namespace Z0
     /// </summary>
     public class AsmEmissionRecord : IRecord<AsmEmissionRecord>
     {    
-        public static AsmEmissionRecord Define(MemoryAddress @base, AsmEmissionToken src, AsmEmissionToken? prior = null)
-            => new AsmEmissionRecord(@base, src, prior);
+        public static AsmEmissionRecord Define(AsmEmissionToken src)
+            => new AsmEmissionRecord(src);
 
-        AsmEmissionRecord(MemoryAddress @base, AsmEmissionToken src)
+        AsmEmissionRecord(AsmEmissionToken src)
         {
-            this.Size = src.Origin.Length;
+            this.TermCode = src.TermCode;
+            this.Size = (int)src.Origin.Length;
             this.Uri = src.Uri;
         }
-
-        AsmEmissionRecord(MemoryAddress @base, AsmEmissionToken src, AsmEmissionToken? prior)
-            : this(@base,src)
-        {
-        }
+        
+        [ReportField(TermCodePad)]
+        public CaptureTermCode TermCode {get;}
 
         [ReportField(SizePad)]
-        public ByteSize Size {get;}
+        public int Size {get;}
 
         [ReportField]
         public OpUri Uri {get;}
 
-        const int OffsetPad = 12;
-
-        const int GapPad  = 8;
+        const int TermCodePad = 20;
 
         const int SizePad = 8;
-
-        const int OriginPad = 32;
 
         public string DelimitedText(char delimiter)
         {
             var dst = text();
-            // dst.AppendField(Offset.FormatAsmHex(8), OffsetPad);
-            // dst.DelimitField(Gap.ToString(), GapPad, delimiter);
-            // dst.DelimitField(concat(Origin.Start.FormatAsmHex(), spaced(colon()), Origin.End.FormatAsmHex()), OriginPad, delimiter);
-            dst.AppendField(Size.ToString(), SizePad);
+            dst.AppendField(TermCode.ToString(), TermCodePad);
+            dst.DelimitField(Size.ToString(), SizePad, delimiter);
             dst.DelimitField(Uri.Format(),delimiter);
             return dst.ToString();
         }

@@ -3,18 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
 
-    public sealed class EmptyCatalog : OpCatalog<EmptyCatalog>
+    using static zfunc;
+
+    public partial interface IAsmArchiveSearch : IAsmService
     {
-        public EmptyCatalog()
-            : base(AssemblyId.Empty)
-        {
 
-        }               
     }
+
 }

@@ -165,14 +165,12 @@ namespace Z0
 
             lines.Add(FormatHeaderCode(src.Code));
                 
-            if(Config.EmitCaptureTermCode || Config.EmitCaptureLookback)
+            if(Config.EmitCaptureTermCode)
             {
                 var ci = src.CaptureInfo;
                 var cidesc = string.Empty;
                 if(Config.EmitCaptureTermCode)
                     cidesc += concat(nameof(ci.TermCode), spaced(AsciSym.Eq), ci.TermCode.ToString());
-                if(Config.EmitCaptureLookback)
-                    cidesc += concat(rspace(comma()), nameof(ci.Lookback), spaced(AsciSym.Eq), embrace(ci.Lookback.FormatAsmHex()));
 
                 lines.Add(Comment(cidesc));
             }

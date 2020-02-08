@@ -53,11 +53,6 @@ namespace Z0
         {            
             foreach(var host in Catalog.DirectApiHosts)
                 EmitDirectPrimary(exchange, host, receipt);
-            
-            // return 
-            //     from host in Catalog.DirectApiHosts
-            //     from emission in EmitDirect(host,false)
-            //     select Emitted(emission);
         }
 
         void EmitDirectImm(in CaptureExchange exchange, Action<AsmEmissionGroup> receipt)
@@ -73,15 +68,6 @@ namespace Z0
                 foreach(var g in specs)
                     EmitDirectImm(exchange, g, archive, receipt);
             }
-
-            // return 
-            //     from h in Catalog.DirectApiHosts
-            //     let archive = HostImmArchive(h)
-            //     from g in OpSpecs.groups(h)
-            //     let immg = ImmGroup(g)
-            //     where !immg.IsEmpty
-            //     from emission in EmitImm(immg,archive)
-            //     select emission;
         }
 
         void EmitGenericPrimary(in CaptureExchange exchange, Action<AsmEmissionGroup> receipt)
@@ -100,15 +86,7 @@ namespace Z0
 
                 foreach(var spec in specs)
                     EmitGenericImm(exchange, spec, archive, receipt);                
-            }
-        
-            // return 
-            //     from h in Catalog.GenericApiHosts
-            //     let archive = HostImmArchive(h)
-            //     from op in OpSpecs.generic(h)
-            //     where FunctionType.immneeds(op.Root)
-            //     from emission in EmitImm(op,archive)
-            //     select emission;        
+            }        
         }
 
         void EmitDirectPrimary(in CaptureExchange exchange, Type host, Action<AsmEmissionGroup> receipt)
@@ -119,19 +97,6 @@ namespace Z0
 
             foreach(var spec in specs)
                 Emit(exchange, PrimaryGroup(spec), primary, receipt);
-
-
-            // var ePrimary =
-            //     from spec in specs
-            //     from token in Emit(PrimaryGroup(spec), primary, receipt)
-            //     select token;
-
-            // var eImm =
-            //     from spec in specs
-            //     from token in EmitImm(ImmGroup(spec), immediate, receipt)
-            //     select token;
-
-            //return !imm ? ePrimary : ePrimary.Union(eImm);
         }
 
         void EmitGenericPrimary(in CaptureExchange exchange, Type host, Action<AsmEmissionGroup> receipt)
@@ -142,25 +107,10 @@ namespace Z0
 
             foreach(var spec in specs.Where(spec => !FunctionType.immneeds(spec.Root)))
                 Emit(exchange, spec, primary, receipt);
-
-            // var ePrimary = 
-            //     from spec in specs
-            //     where !FunctionType.immneeds(spec.Root)
-            //     from token in Emit(spec, primary, receipt)
-            //     select token;
-
-            // var eImm =
-            //     from spec in specs
-            //     where FunctionType.immneeds(spec.Root)
-            //     from token in EmitImm(spec, immediate, receipt)
-            //     select token;
-
-            //return !imm ? ePrimary : ePrimary.Union(eImm);
         }        
 
         void Emit(in CaptureExchange exchange, DirectOpGroupSpec group, IAsmFunctionArchive dst, Action<AsmEmissionGroup> receipt)
         {                        
-            //var tokens = new List<AsmEmissionToken>();
             var functions = new List<AsmFunction>();
             foreach(var spec in group.Members)
                 functions.Add(Decode(exchange, spec.Id, spec.Root));
@@ -170,15 +120,7 @@ namespace Z0
                 var fGroup = AsmFunctionGroup.Define(group.Id, functions.ToArray());
                 var tGroup = dst.Save(fGroup,true);
                 tGroup.OnSome(receipt);
-            }
-                        
-            // var functions = group.Members.Map(m => Decode(m.Id, m.Root));
-            // for(var i=0; i<functions.Length; i++)
-            //     tokens.AddRange(dst.Save(AsmFunctionGroup.Define(group.Id, functions),true));
-
-            //receipt(tokens.ToGroup());
-            
-            //return tokens.ToArray();
+            }                        
         }
 
         void Emit(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, Action<AsmEmissionGroup> receipt)
@@ -192,20 +134,10 @@ namespace Z0
                 var tGroup = dst.Save(fGroup,true);
                 tGroup.OnSome(receipt);
             }
-            
-            // var functions = op.Close().Map(closure => Decoder.DecodeFunction(closure.Id, closure.ClosedMethod));
-            // var tokens = new List<AsmEmissionToken>();
-            
-            // for(var i=0; i<functions.Length; i++)
-            //     tokens.AddRange(dst.Save(AsmFunctionGroup.Define(op.Id, functions),true));
-            
-            // receipt(tokens.ToGroup());
-            
         }
 
         void EmitGenericImm(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, Action<AsmEmissionGroup> receipt)
         {
-            //var tokens = new List<AsmEmissionToken>();
             if(FunctionType.vunaryImm(op.Root))
             {                                                
                 foreach(var closure in op.Close())
@@ -219,13 +151,6 @@ namespace Z0
                         tGroup.OnSome(receipt);
                     }
                 }
-
-                // var resolutions = op.Close()
-                //     .Select(closure => Context.ImmCapture(closure.ClosedMethod, closure.Id, n1))
-                //     .SelectMany(svc => svc.Capture(ImmSelection)).ToArray();  
-                
-                // foreach(var resolution in resolutions)              
-                //     tokens.AddRange(dst.Save(AsmFunctionGroup.Define(op.Id, resolutions),true));
             }
             else if(FunctionType.vbinaryImm(op.Root))
             {
@@ -240,15 +165,7 @@ namespace Z0
                         tGroup.OnSome(receipt);
                     }
                 }
-                
-                // var resolutions = op.Close()
-                //     .Select(closure => Context.ImmCapture(closure.ClosedMethod, closure.Id,n2))
-                //     .SelectMany(svc => svc.Capture(ImmSelection)).ToArray();                
-
-                // foreach(var resolution in resolutions)              
-                //     tokens.AddRange(dst.Save(AsmFunctionGroup.Define(op.Id, resolutions),true));
             }
-            //return tokens.ToArray();
         }
 
         void EmitDirectImm(in CaptureExchange exchange, DirectOpGroupSpec op, IAsmFunctionArchive dst, Action<AsmEmissionGroup> receipt)
@@ -277,7 +194,6 @@ namespace Z0
             }
 
             receipt(tokens.ToGroup(op.Id));
-            //return tokens.ToArray();
         }                    
 
         DirectOpGroupSpec PrimaryGroup(DirectOpGroupSpec g)
@@ -313,7 +229,7 @@ namespace Z0
             => Archive(ArchiveSubject(host,true));
 
         IAsmFunctionArchive Archive(string subject)
-            => Context.FunctionArchive(Catalog.CatalogName, subject);
+            => Context.FunctionArchive(Catalog.AssemblyId, subject);
 
         AsmFunction Decode(in CaptureExchange exchange, OpIdentity id, MethodInfo method)
             => Decoder.DecodeFunction(exchange, id, method);            

@@ -11,46 +11,54 @@ namespace Z0
 
     using static zfunc;
 
-    public class AsmEmissionReport : IReport<AsmEmissionRecord>
+    public enum AsmEmissionKind
     {
-        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionGroup[] groups, string suffix = null)
-        {
-            if(groups.Length == 0)
-                return default;
-            
-            var emissions = groups.SelectMany(g => g.Tokens).ToArray();
-            Array.Sort(emissions);
-            var count = emissions.Length;
-            var records = new AsmEmissionRecord[count];
-            
-            MemoryAddress @base = emissions[0].Origin.Start;
+        None = 0,
 
-            for(var i =0; i<count; i++)
-                records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmEmissionToken?)null);            
-            
-            return new AsmEmissionReport(id, records, suffix);
-        }
+        Primary = 1,
 
-        AsmEmissionReport(AssemblyId id, AsmEmissionRecord[] records, string suffix)
-        {
-            this.id = id;
-            this.Records = records;
-            this.Suffix = string.IsNullOrWhiteSpace(suffix) ? string.Empty :  $"-{suffix}";
-        }
+        Imm = 2
+    }
 
-        public readonly AssemblyId id;
+    public readonly struct AsmEmissionReport : IAsmReport<AsmEmissionRecord>
+    {             
+        public const AsmReportKind Kind = AsmReportKind.Emissions;
+
+        public AsmReportKind ReportKind 
+            => Kind;
+
+        public AssemblyId Id {get;}
         
         public AsmEmissionRecord[] Records {get;}
 
-        public string Subject
-            => ".emissions";
+        public AsmEmissionKind EmissionKind {get;}
 
-        string Suffix {get;}
+        public FilePath ReportPath 
+            => AsmReports.EmissionsPath(Id, EmissionKind);
+                
+        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionGroup[] emitted, AsmEmissionKind kind)
+        {
+            if(emitted.Length == 0)
+                return default;
+            
+            var emissions = emitted.SelectMany(g => g.Tokens).ToArray();
+            Array.Sort(emissions);
+            var count = emissions.Length;
+            var records = new AsmEmissionRecord[count];            
+            for(var i =0; i<count; i++)
+                records[i] = AsmEmissionRecord.Define(emissions[i]);            
+            
+            return new AsmEmissionReport(id, records, kind);
+        }
 
-        public FileExtension Ext
-            => FileExtensions.Csv;
+        AsmEmissionReport(AssemblyId id, AsmEmissionRecord[] records, AsmEmissionKind kind)
+        {
+            this.Id = id;
+            this.Records = records;            
+            this.EmissionKind = kind;
+        }
 
         public Option<FilePath> Save()
-            => Records.Save(Paths.AsmDataRoot + FolderName.Define(Subject) + FileName.Define($"{id.Format()}{Suffix}", Ext));
+            => Records.Save(ReportPath); 
     }
 }

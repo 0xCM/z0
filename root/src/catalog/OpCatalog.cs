@@ -16,7 +16,6 @@ namespace Z0
         protected OpCatalog(AssemblyId id)
         {
             AssemblyId = id;
-            CatalogName = id.Format();
         }
         
         protected OpCatalog(AssemblyId id, DataResourceIndex resources)
@@ -30,7 +29,8 @@ namespace Z0
 
         public AssemblyId AssemblyId {get;}
 
-        public virtual string CatalogName {get;}
+        public string CatalogName
+            => AssemblyId.Format();
 
         public bool IsEmpty
             => AssemblyId == AssemblyId.Empty || AssemblyId == AssemblyId.None;

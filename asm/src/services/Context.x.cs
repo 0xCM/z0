@@ -114,17 +114,17 @@ namespace Z0
         /// <summary>
         /// Instantiates a subject-specific function catalog archive service
         /// </summary>
-        /// <param name="catalog">The catalog name</param>
+        /// <param name="catalog">The catalog identity</param>
         /// <param name="subject">The subject</param>
         /// <param name="config">The archive configuration</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(this IAsmContext context, string catalog, string subject)
-            => AsmFunctionArchive.Create(context, catalog,subject);
+        public static IAsmFunctionArchive FunctionArchive(this IAsmContext context, AssemblyId catalog, string subject)
+            => AsmFunctionArchive.Create(context, catalog, subject);
 
         /// <summary>
-        /// Instantiates a <cref="IAsmFunctionEmitter"/> service
+        /// Instantiates a function emitter service
         /// </summary>
-        /// <param name="context">The soruce context</param>
+        /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
         public static IAsmFunctionEmitter AsmEmitter(this IAsmContext context)
             => AsmFunctionEmitter.Create(context);

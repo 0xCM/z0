@@ -19,7 +19,7 @@ namespace Z0
             => new AsmHexWriter(context, dst,append);
 
         AsmHexWriter(IAsmContext context, FilePath path, bool append)
-            : base(path.CreateFolderIfMissing().FullPath, append)
+            : base(path.CreateParentIfMissing().FullPath, append)
         {
             this.Context = context;
             this.TargetPath = path;

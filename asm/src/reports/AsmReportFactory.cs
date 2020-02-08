@@ -12,16 +12,17 @@ namespace Z0
 
     using static zfunc;
 
-    public static class AsmReports
+
+    public static partial class AsmReports
     {
-        public static MemberLocationReport CreateMemberLocationReport(AssemblyId id, Assembly src)
+        public static MemberLocationReport MemberLocations(AssemblyId id, Assembly src)
             => MemberLocationReport.Create(id, src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps());
 
-        public static AsmEmissionReport CreateEmissionReport(AssemblyId id, AsmEmissionGroup[] emissions, string suffix = null)
-            => AsmEmissionReport.Create(id,emissions, suffix);
+        public static AsmEmissionReport Emissions(AssemblyId id, AsmEmissionGroup[] emissions, AsmEmissionKind kind)
+            => AsmEmissionReport.Create(id,emissions, kind);
 
-        public static DataResourceReport CreateResourceReport(DataResourceIndex resources)
-            => DataResourceReport.Create(resources);
+        public static DataResourceReport Resources(AssemblyId id, DataResourceIndex resources)
+            => DataResourceReport.Create(id, resources);
 
     }
 }
