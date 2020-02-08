@@ -31,7 +31,7 @@ namespace Z0
         {
             //iter(Context.Assemblies.Catalogs, c => Trace(c.CatalogName));
             var archive = Context.Archiver();
-            archive.Archive(AssemblyId.GMath);
+            archive.Archive(AssemblyId.Intrinsics);
         }
 
         [MethodImpl(Inline)]

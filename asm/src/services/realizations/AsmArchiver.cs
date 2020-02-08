@@ -32,8 +32,8 @@ namespace Z0
         IEnumerable<AssemblyId> ActiveAssemblies
             => Context.ActiveAssemblies();
 
-        Option<FilePath> CreateEmissionReport(AssemblyId src, AsmEmissionGroup[] emitted)
-            => AsmReports.CreateEmissionReport(src, emitted).Save();
+        Option<FilePath> CreateEmissionReport(AssemblyId src, AsmEmissionGroup[] emitted, bool imm)
+            => AsmReports.CreateEmissionReport(src, emitted, imm ? "imm" : "").Save();
 
         AsmEmissionGroup[] EmitPrimary(in CaptureExchange exchange, IOperationProvider src,  IAsmCatalogEmitter emitter)
         {
@@ -79,11 +79,12 @@ namespace Z0
 
             var primary = EmitPrimary(exchange, src, emitter);
             if(primary.Length != 0)
-                Completed(CreateEmissionReport(src.HostId, primary));
+                Completed(CreateEmissionReport(src.HostId, primary, false));
             
             var imm = EmitImm(exchange, src, emitter);
             if(imm.Length != 0)
-                Completed(CreateEmissionReport(src.HostId, imm));
+                Completed(CreateEmissionReport(src.HostId, imm, true));
+
             
             Completed(EmitLocations(src));
         }
