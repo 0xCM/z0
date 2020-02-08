@@ -25,15 +25,6 @@ namespace Z0
             => m.GetCustomAttribute<A>();
 
         /// <summary>
-        /// Determines whether an attribute is applied to a subject
-        /// </summary>
-        /// <param name="m">The subject to examine</param>
-        /// <typeparam name="T">The type of attribute for which to check</typeparam>
-        public static bool Attributed<T>(this MemberInfo m) 
-            where T : Attribute
-                => System.Attribute.IsDefined(m, typeof(T));
-        
-        /// <summary>
         /// Retrieves the value of an attached attribute paired with the subject
         /// </summary>
         /// <param name="m">The member to query</param>
@@ -42,32 +33,6 @@ namespace Z0
             where A : Attribute
                 => (m,(A)m.GetCustomAttribute(typeof(A)));
 
-        /// <summary>
-        /// Returns true if a parametrically-identified attribute is not applied to the subject
-        /// </summary>
-        /// <param name="m">The subject to examine</param>
-        /// <typeparam name="T">The type of attribute for which to check</typeparam>
-        public static bool Unattributed<T>(this MemberInfo m) 
-            where T : Attribute
-                => !m.Attributed<T>();
-
-        /// <summary>
-        /// Determines whether an attribute of specified type is attached to a member
-        /// </summary>
-        /// <param name="m">The member to test</param>
-        /// <param name="t">The target attribute type</param>
-        [MethodImpl(Inline)]
-        public static bool Attributed(this MemberInfo m, Type t)
-            => Attribute.IsDefined(m,t);
-
-        /// <summary>
-        /// Determines whether a parameter has a parametrically-identified attribute
-        /// </summary>
-        /// <param name="p">The parameter to examine</param>
-        /// <typeparam name="A">The attribute type to check</typeparam>
-        public static bool Attributed<A>(this ParameterInfo p)
-            where A : Attribute
-                => Attribute.IsDefined(p,typeof(A));
 
         /// <summary>
         /// Retrieves type attribution values from a stream of types
@@ -124,26 +89,6 @@ namespace Z0
                     let attrib = p.GetCustomAttribute<A>()
                     select (p,attrib)
                     );
-
-        /// <summary>
-        /// Gets the type attributions for the specified assembly
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        /// <typeparam name="A">The attribute type</typeparam>
-        public static IDictionary<Type, A> TypeAttributions<A>(this Assembly a, Func<Type,bool> pred = null)
-            where A : Attribute
-        {
-            var f = pred ?? (t => true);
-            var q = from t in a.GetTypes()
-                    where Attribute.IsDefined(t, typeof(A)) && f(t)
-                    let attrib = t.GetCustomAttribute<A>()
-                    select new
-                    {
-                        Type = t,
-                        Attribute = attrib
-                    };
-            return q.ToDictionary(x => x.Type, x => x.Attribute);
-        }
 
         /// <summary>
         /// Gets the type attributions for the specified assembly

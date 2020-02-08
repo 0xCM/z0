@@ -25,7 +25,7 @@ namespace Z0.Logix
                 typeof(BitMatrixOpApi), typeof(BitMatrixOps), 
                 typeof(BitVectorOpApi), typeof(BitVectorOps),
                 typeof(ScalarOpApi), typeof(ScalarOps), 
-                typeof(VectorizedOpApi), typeof(VectorizedOps),
+                typeof(VectorOpApi), typeof(VectorizedOps),
                 typeof(PredicateApi), typeof(LogicEngine),
                 typeof(CmpExprEval), typeof(ArithExprEval),
                 typeof(ScalarExprEval), 

@@ -49,8 +49,18 @@ namespace Z0
         public static AppException EmptySourceSpan([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(ErrorMessages.EmptySourceSpan(caller,file,line));
 
+
+        /// <summary>
+        /// Raised when a method is non-genric and should be
+        /// </summary>
         public static AppException NonGenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(ErrorMessages.NonGenericMethod(method,caller,file,line));
+
+        /// <summary>
+        /// Raised when a method is generic and should not be
+        /// </summary>
+        public static AppException GenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.GenericMethod(method,caller,file,line));
 
         public static AppException KindUnsupported<T>(T kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : Enum

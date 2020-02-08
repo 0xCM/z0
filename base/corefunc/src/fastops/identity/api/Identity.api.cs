@@ -36,8 +36,10 @@ namespace Z0
         {            
             if(src.IsOpenGeneric())
                 return Identity.generic(src);
-            else
+            else if(src.IsConstructedGenericMethod)
                 return Identity.constructed(src);
+            else
+                return Identity.nongeneric(src);
         }            
 
         /// <summary>

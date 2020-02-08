@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format(this SpanKind kind)
-            => kind.IsSome() ? (kind == SpanKind.Mutable ? IDI.Span : IDI.ImSpan) : string.Empty;
+            => kind.IsSome() ? (kind == SpanKind.Mutable ? IDI.Span : IDI.USpan) : string.Empty;
 
         public static string Format(this ParamVariance src)
             => src.IsSome() ? (AsciSym.Tilde + src.Keyword()) : string.Empty;      

@@ -159,6 +159,7 @@ namespace Z0
             where S : unmanaged
                 => new Block256<S>(MemoryMarshal.Cast<T,S>(data)); 
 
+
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
             => data.GetEnumerator();

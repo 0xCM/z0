@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static Block128<T> unsafeload<T>(N128 w, Span<T> src)
+        public static Block128<T> unsafeload<T>(N128 w, Span<T> src)
             where T : unmanaged
                 => new Block128<T>(src);
 

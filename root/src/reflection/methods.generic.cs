@@ -27,16 +27,35 @@ namespace Z0
         /// <summary>
         /// Returns true if the method has unspecified generic parameters, false otherwise
         /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsClosedGeneric(this MethodInfo m)
-            => m.IsConstructedGenericMethod;
+        /// <param name="src">The method to examine</param>
+        public static bool IsClosedGeneric(this MethodInfo src)
+            => src.IsConstructedGenericMethod;
 
         /// <summary>
         /// Returns true if the method has unspecified generic parameters, false otherwise
         /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNonGeneric(this MethodInfo m)
-            => !m.IsGenericMethod && !m.IsConstructedGenericMethod;
+        /// <param name="src">The method to examine</param>
+        public static bool IsNonGeneric(this MethodInfo src)
+            => !src.IsGenericMethod && !src.IsConstructedGenericMethod;
+
+        /// <summary>
+        /// Returns the arguments supplied to a constructed generic method; if the method is 
+        /// nongeneric, a generic type definition or some other variant, an empty result is returned
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        public static IEnumerable<Type> GenericArguments(this MethodInfo src)
+            => src.IsConstructedGenericMethod ? src.GetGenericArguments() : new Type[]{};
+
+        /// <summary>
+        /// Returns the generic parameters specified by a generic method definition or, if constructed,
+        /// the parameters specified by the definition on which the construction was predicated. If nongeneric,
+        /// returns an empty result
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        public static IEnumerable<Type> GenericParameters(this MethodInfo src)
+            => src.IsConstructedGenericMethod ? src.GetGenericMethodDefinition().GetGenericArguments()
+             : src.IsGenericMethodDefinition ? src.GetGenericArguments()            
+             : new Type[]{};
 
         /// <summary>
         /// Selects the open generic methods from a stream

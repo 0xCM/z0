@@ -37,6 +37,7 @@ namespace Z0
                 return OpIdentity.Define(concat($"{opname}_{g}{NumericType.signature(k)}{suffixPart}"));
         }
 
+
         /// <summary>
         /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
         /// </summary>

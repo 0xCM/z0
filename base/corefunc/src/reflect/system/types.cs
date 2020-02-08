@@ -135,8 +135,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         /// <param name="declared">Whether a literal is rquired to be declared by the type</param>
-        public static IEnumerable<FieldInfo> LiteralFields(this Type src, bool declared = true)
-            => src.Fields(declared).Literal();
+        public static IEnumerable<FieldInfo> LiteralFields(this Type src)
+            => src.DeclaredFields().Literal();
 
         /// <summary>
         /// Enumerates the literals defined by a type indexed by declaration order
@@ -403,30 +403,16 @@ namespace Z0
             => src.Where(t => t.Namespace == match);
 
         /// <summary>
-        /// Selects all instance/static and public/non-public fields declared by a type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static IEnumerable<FieldInfo> DeclaredFields(this Type src)
-            => src.GetFields(BF_Declared);
-
-        /// <summary>
-        /// Selects all instance/static and public/non-public fields declared by a type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static IEnumerable<FieldInfo> Fields(this Type src, bool declared = false)
-            => src.GetFields(declared ? BF_Declared : BF_All);
-
-        /// <summary>
         /// Attempts to retrieve a name-identified field from a type
         /// </summary>
         /// <param name="src">The type to examine</param>
         /// <param name="name">The name of the field</param>
-        /// <param name="declared"></param>
-        public static Option<FieldInfo> Field(this Type src, string name, bool declared = false)
-            => src.Fields(declared).FirstOrDefault(f => f.Name == name);
+        /// <param name="declared">Whether the field is required to be declared by the source type</param>
+        public static Option<FieldInfo> Field(this Type src, string name)
+            => src.Fields().FirstOrDefault(f => f.Name == name);
 
         public static object FieldValue(this Type src, string name, object instance = null)
-            => src.Fields(false).FirstOrDefault(f => f.Name == name)?.GetValue(instance);
+            => src.Fields().FirstOrDefault(f => f.Name == name)?.GetValue(instance);
 
         /// <summary>
         /// Selects the public immutable  fields defined by the type
@@ -439,12 +425,6 @@ namespace Z0
             where f.IsInitOnly || f.IsLiteral
             select f;
 
-        /// <summary>
-        /// Selects all instance/static and public/non-public fields declared and/or inheritied by the type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static IEnumerable<FieldInfo> AllFields(this Type t)
-            => t.GetFields(BF_All);
 
         /// <summary>
         /// Selects the public and non-public static fields declared by a type
@@ -454,18 +434,11 @@ namespace Z0
             => t.GetFields(BF_DeclaredInstance);
 
         /// <summary>
-        /// Selects the public and nonpublic immutable fields defined by the type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        static IEnumerable<FieldInfo> DeclaredImmutableFields(this Type t)
-              => t.Fields().Immutable();
-
-        /// <summary>
         /// Selects all instance/static and public/non-public fields inhertited by a type
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static IEnumerable<FieldInfo> InheritedFields(this Type t)
-            => t.Fields(false).Except(t.Fields(true));
+            => t.Fields().Except(t.DeclaredFields());
 
         /// <summary>
         /// Selects the public fields declared by a type
@@ -481,12 +454,10 @@ namespace Z0
         public static IEnumerable<FieldInfo> DeclaredNonPublicFields(this Type src)
             => src.GetFields(BF_DeclaredPublic);
 
-
         /// <summary>
         /// Retrieves the public instance Fields declared by a supertype
         /// </summary>
         /// <param name="src">The type to examine</param>
-        /// <returns></returns>
         public static IEnumerable<FieldInfo> InheritedPublicFields(this Type src)
             => src.BaseType?.GetFields(BF_AllPublicInstance) ?? new FieldInfo[] { };
 
@@ -503,8 +474,7 @@ namespace Z0
         /// <param name="t">The declaring type</param>
         /// <param name="name">The name of the method</param>
         public static Option<FieldInfo> DeclaredStaticField(this Type t, string name) 
-            => t.Fields().Static().Where(f => f.Name == name).FirstOrDefault();
-
+            => t.DeclaredFields().Static().Where(f => f.Name == name).FirstOrDefault();
 
         /// <summary>
         /// Retrieves a public or non-public setter for a property if it exists
@@ -653,7 +623,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static IEnumerable<FieldInfo> RestrictedImmutableFields(this Type t)
-            => t.GetInheritedRestrictedImmutableFields().Union(t.Fields().NonPublic().Immutable().Instance());
+            => t.GetInheritedRestrictedImmutableFields().Union(t.DeclaredFields().NonPublic().Immutable().Instance());
 
         /// <summary>
         /// Retrieves the public properties declared by a type
@@ -952,6 +922,26 @@ namespace Z0
 
         public static Option<Type> CloseGenericType(this Type model, params Type[] args)
             => model.GenericDefinition().TryMap(t => t.MakeGenericType(args));
+
+        /// <summary>
+        /// Finds (attempts to find?) properties that have compiler-generated backing fields
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static IReadOnlyList<ValueMember> AutoProps(this Type t)
+        {
+            var afquery = from f in t.RestrictedImmutableFields()
+                        where f.IsCompilerGenerated() && f.Name.EndsWith("__BackingField")
+                        select f;
+            var backingFields = afquery.ToList();
+            var propertyidx = t.PublicPropertySearch(true, false).ToDictionary(x => x.Name);
+            var candidates = propertyidx.Keys.Select(x =>
+                    (prop: propertyidx[x], Name:  $"\u003C{x}\u003Ek__BackingField"));
+            var autoprops = new List<ValueMember>();
+            foreach (var candidate in candidates)
+                backingFields.TryFind(f => f.Name == candidate.Name)
+                            .OnSome(f => autoprops.Add(new ValueMember(candidate.prop, f)));
+            return autoprops;       
+        }
 
     }
 }

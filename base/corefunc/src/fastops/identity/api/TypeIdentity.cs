@@ -48,7 +48,7 @@ namespace Z0
         {
             if(arg.IsPointer)
                 return from id in arg.Unwrap().CommonIdentity()
-                let idptr = concat(id, IDI.Modifier, IDI.Pointer)
+                let idptr = concat(id, IDI.ModSep, IDI.Pointer)
                 select TypeIdentity.Define(idptr);    
             else
             {                        
@@ -70,7 +70,7 @@ namespace Z0
         }
 
         static Option<TypeIdentity> EnumIdentity(this Type t)
-            =>  TypeIdentity.Define($"{t.Name}{IDI.Modifier}{NumericType.signature(t.GetEnumUnderlyingType())}");
+            =>  TypeIdentity.Define($"{t.Name}{IDI.ModSep}{NumericType.signature(t.GetEnumUnderlyingType())}");
                 
         static Option<TypeIdentity> NatIdentity(this Type arg)
             => from v in arg.NatValue() 
@@ -114,7 +114,7 @@ namespace Z0
             if(src.IsNatSpan())
             {
                 var typeargs = src.SuppliedTypeArgs().ToArray();                    
-                var text = IDI.NatSpan;
+                var text = IDI.NSpan;
                 text += typeargs[0].NatValue();
                 text += IDI.SegSep;
                 text += NumericType.signature(typeargs[1]);

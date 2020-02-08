@@ -225,7 +225,7 @@ namespace Z0.Logix
         public void check_ternary_ops()
         {
             iter(set(
-                VectorizedOpApi.TernaryBitLogicKinds, 
+                VectorOpApi.TernaryBitLogicKinds, 
                 ScalarOpApi.TernaryBitLogicKinds),
                     check_ternary_ops);
         }
@@ -256,8 +256,8 @@ namespace Z0.Logix
         {
             var BL = LogicOpApi.lookup(id);
             var SC = ScalarOpApi.lookup<T>(id);
-            var V128 = VectorizedOpApi.lookup<T>(n128,id);
-            var V256 = VectorizedOpApi.lookup<T>(n256,id);
+            var V128 = VectorOpApi.lookup<T>(n128,id);
+            var V256 = VectorOpApi.lookup<T>(n256,id);
             check_op_identity<T>(id);
 
             for(var sample = 0; sample< RepCount; sample++)
@@ -340,7 +340,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n128);
                 v1.Set(a);   
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = VectorizedOpApi.eval(op,a);
+                Vector128<T> expect = VectorOpApi.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -356,7 +356,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n256);
                 v1.Set(a);   
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = VectorizedOpApi.eval(op,a);
+                Vector256<T> expect = VectorOpApi.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -375,7 +375,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 v2.Set(b);
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = VectorizedOpApi.eval(op,a,b);
+                Vector128<T> expect = VectorOpApi.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -395,7 +395,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 v2.Set(b);
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = VectorizedOpApi.eval(op,a,b);
+                Vector256<T> expect = VectorOpApi.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }

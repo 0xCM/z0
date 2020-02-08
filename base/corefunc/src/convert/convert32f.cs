@@ -13,7 +13,7 @@ namespace Z0
     partial class Converter
     {
 
-        [MethodImpl(Inline), Op("convert32f"), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T convert<T>(float src)
             where T : unmanaged
                 => convert_u<T>(src);

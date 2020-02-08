@@ -20,7 +20,7 @@ namespace Z0.Logix
     /// Defines services for 128-bit instrinsic operators
     /// </summary>
     [OpHost("vector.api")]
-    public static partial class VectorizedOpApi
+    public static partial class VectorOpApi
     {
         /// <summary>
         /// Advertises the supported unary bitlogic operators

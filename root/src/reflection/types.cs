@@ -13,7 +13,9 @@ namespace Z0
     using System.ComponentModel;
     using System.Collections.Concurrent;
 
-    public static partial class RootReflections
+    using static ReflectionFlags;
+
+    partial class RootReflections
     {
         /// <summary>
         /// Returns true if the source type is either non-generic or a generic type that has been closed over all parameters
@@ -56,5 +58,42 @@ namespace Z0
         /// <param name="src">The source type</param>
         public static Type Unwrap(this Type src)
             => src.GetElementType() ?? src;
+
+        /// <summary>
+        /// Selects all instance/static and public/non-public fields declared or inherited by a type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static IEnumerable<FieldInfo> Fields(this Type src)
+            => src.GetFields(BF_All);
+
+        /// <summary>
+        /// Selects all instance/static and public/non-public fields declared by a type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static IEnumerable<FieldInfo> DeclaredFields(this Type src)
+            => src.GetFields(BF_Declared);
+
+        /// <summary>
+        /// Selects the fields accessible via a type but which the type itself does nto declare
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static IEnumerable<FieldInfo> UndeclaredFields(this Type src)
+            => src.Fields().Except(src.DeclaredFields());
+
+        /// <summary>
+        /// Retrieves the type's fields together with applied attributes
+        /// </summary>
+        /// <typeparam name="A">The attribute type</typeparam>
+        /// <param name="t">The type to examine</param>
+        public static IDictionary<FieldInfo, A> FieldAttributions<A>(this Type t) 
+            where A : Attribute
+        {
+            var selection = from f in t.DeclaredFields()
+                            where f.Attributed<A>()
+                            let a = f.GetCustomAttribute<A>()
+                            select (f,a);
+            return selection.ToDictionary();
+        }
+
     }
 }

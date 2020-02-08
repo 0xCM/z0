@@ -20,11 +20,18 @@ namespace Z0
     {
         protected override void OnExecute(in AsmBuffers buffers)
         {
-            capture_constants(buffers);
-            capture_shifter(buffers);
-            capture_shuffler(buffers);
-            capture_archived(buffers);
+            // capture_constants(buffers);
+            // capture_shifter(buffers);
+            // capture_shuffler(buffers);
+            // capture_archived(buffers);
             archive_context(buffers);
+            //archive_selected(buffers);
+        }
+
+        void archive_selected(in AsmBuffers buffers)
+        {
+            var archive = Context.Archiver();
+            archive.Archive(AssemblyId.CoreFunc);
         }
 
         void archive_context(in AsmBuffers buffers)
@@ -100,8 +107,8 @@ namespace Z0
 
         void capture_archived(in AsmBuffers buffers)
         {
-            var code = ArchivedCode(nameof(gmath), nameof(math), OpIdentity.Define(nameof(math.and)));
-            iter(code, c => Trace(c));
+            // var code = ArchivedCode(nameof(gmath), nameof(math), OpIdentity.Define(nameof(math.and)));
+            // iter(code, c => Trace(c));
         }
 
          

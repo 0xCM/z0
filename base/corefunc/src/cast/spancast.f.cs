@@ -16,7 +16,6 @@ partial class zfunc
     /// </summary>
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The source value type</typeparam>
-    [MethodImpl(Inline)]
     public static Span<byte> bytes<T>(Span<T> src)
         where T : unmanaged
             => MemoryMarshal.AsBytes(src);

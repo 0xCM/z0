@@ -139,7 +139,6 @@ partial class zfunc
         else
             throw unsupported<T>();
     }
-
     
     /// <summary>
     /// If possible, applies the conversion sbyte -> T

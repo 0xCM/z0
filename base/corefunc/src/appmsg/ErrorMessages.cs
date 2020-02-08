@@ -66,6 +66,9 @@ namespace Z0
         public static AppMsg NonGenericMethod(MethodInfo t, string caller, string file, int? line)
             => AppMsg.Define($"The method {t.DisplayName()} is nongeneric", SeverityLevel.Error, caller, file, line);
 
+        public static AppMsg GenericMethod(MethodInfo t, string caller, string file, int? line)
+            => AppMsg.Define($"The method {t.DisplayName()} is generic", SeverityLevel.Error, caller, file, line);
+
         public static AppMsg LengthMismatch(int lhs, int rhs, string caller, string file, int? line)
             => AppMsg.Define($"Length mismatch: {lhs} != {rhs}", SeverityLevel.Error, caller, file, line);
 

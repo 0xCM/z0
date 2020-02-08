@@ -33,7 +33,7 @@ namespace Z0.Logix
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
             var result = default(Vector128<T>);
-            var kinds = VectorizedOpApi.BinaryBitLogicKinds.ToArray();
+            var kinds = VectorOpApi.BinaryBitLogicKinds.ToArray();
             var opcount = 0;
 
             clock.Start();
@@ -44,7 +44,7 @@ namespace Z0.Logix
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
-                    result = VectorizedOpApi.lookup<T>(n128,kinds[k])(x, y);
+                    result = VectorOpApi.lookup<T>(n128,kinds[k])(x, y);
                     y = x;
                     x = result;
                 }
@@ -55,7 +55,7 @@ namespace Z0.Logix
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
-                    result = VectorizedOpApi.eval(kinds[k],x, y);
+                    result = VectorOpApi.eval(kinds[k],x, y);
                     y = x;
                     x = result;
                 }
@@ -74,7 +74,7 @@ namespace Z0.Logix
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
             var result = default(Vector256<T>);
-            var kinds = VectorizedOpApi.BinaryBitLogicKinds.ToArray();
+            var kinds = VectorOpApi.BinaryBitLogicKinds.ToArray();
             var opcount = 0;
 
             clock.Start();
@@ -85,7 +85,7 @@ namespace Z0.Logix
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
-                    result = VectorizedOpApi.lookup<T>(n256,kinds[k])(x, y);
+                    result = VectorOpApi.lookup<T>(n256,kinds[k])(x, y);
                     y = x;
                     x = result;
                 }
@@ -97,7 +97,7 @@ namespace Z0.Logix
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
-                    result = VectorizedOpApi.eval(kinds[k],x, y);
+                    result = VectorOpApi.eval(kinds[k],x, y);
                     y = x;
                     x = result;
                 }

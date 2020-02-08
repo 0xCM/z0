@@ -18,30 +18,15 @@ namespace Z0
     /// </summary>
     public static class IDI
     {
-        public static IIK ParseKind(string src)
-        {
-            return src switch
-            {
-                IDI.PartSepText => IIK.PartSep,
-                IDI.SuffixSepText => IIK.SuffixSep,
-                IDI.SegSepText => IIK.SegSep,
-                IDI.SignedText => IIK.Signed,
-                IDI.UnsignedText => IIK.Unsigned,
-                IDI.FloatText => IIK.Float,
-                IDI.VectorText => IIK.Vector,
-              
-                _ => IIK.None
-            };
-        }
-
         /// <summary>
         /// An identity part delimiter
         /// </summary>
         public const char PartSep = '_';
 
         /// <summary>
-        /// An identity part delimiter
+        /// An identity part delimiter expressed as text
         /// </summary>
+        [IdentityIndicator(IIK.PartSep)]
         public const string PartSepText = "_";
 
         /// <summary>
@@ -50,8 +35,9 @@ namespace Z0
         public const char SuffixSep = '-';
 
         /// <summary>
-        /// A suffix part delimiter
+        /// A suffix part delimiter expressed as text
         /// </summary>
+        [IdentityIndicator(IIK.SuffixSep)]
         public const string SuffixSepText = "-";
 
         /// <summary>
@@ -60,9 +46,32 @@ namespace Z0
         public const char SegSep = 'x';        
 
         /// <summary>
-        /// A separator between the bit width of a segmented type and the width of each segment
+        /// A separator between the bit width of a segmented type and the width of each segment expressed as text
         /// </summary>
+        [IdentityIndicator(IIK.SegSep)]
         public const string SegSepText = "x";        
+
+        /// <summary>
+        /// A separator between an identifier body and an applied modifier
+        /// </summary>
+        public const char ModSep = '~';
+
+        /// <summary>
+        /// A separator between an identifier body and an applied modifier expressed as text
+        /// </summary>
+        [IdentityIndicator(IIK.ModSep)]
+        public const string ModSepText = "~";
+
+        /// <summary>
+        /// A type or value argument delimiter
+        /// </summary>
+        public const char ArgSep = ',';
+
+        /// <summary>
+        /// The argument delimiter as text
+        /// </summary>
+        [IdentityIndicator(IIK.ArgSep)]
+        public const string ArgSepText = ",";
 
         /// <summary>
         /// Indicates a signed integral type
@@ -70,8 +79,9 @@ namespace Z0
         public const char Signed = (char)NumericIndicator.Signed;
 
         /// <summary>
-        /// Indicates a signed integral type
+        /// Indicates a signed integral type expressed as text
         /// </summary>
+        [IdentityIndicator(IIK.Signed)]
         public const string SignedText = "i";
 
         /// <summary>
@@ -80,8 +90,9 @@ namespace Z0
         public const char Unsigned = (char)NumericIndicator.Unsigned;
 
         /// <summary>
-        /// Indicates an unsigned integral type
+        /// Indicates an unsigned integral type expressed as text
         /// </summary>
+        [IdentityIndicator(IIK.Unsigned)]
         public const string UnsignedText = "u";
 
         /// <summary>
@@ -90,8 +101,9 @@ namespace Z0
         public const char Float = (char)NumericIndicator.Float;
 
         /// <summary>
-        /// Indicates a floating-point type
+        /// Indicates a floating-point type expressed as text
         /// </summary>
+        [IdentityIndicator(IIK.Float)]
         public const string FloatText = "f";
 
         /// <summary>
@@ -100,8 +112,9 @@ namespace Z0
         public const char Vector = 'v';
 
         /// <summary>
-        /// Indicates an intrinsic vector
+        /// Indicates an intrinsic vector expressed as text
         /// </summary>        
+        [IdentityIndicator(IIK.Vector)]
         public const string VectorText = "v";
 
         /// <summary>
@@ -110,9 +123,10 @@ namespace Z0
         public const char Block = 'b';
 
         /// <summary>
-        /// Indicates a blocked type
+        /// A block type indicator expressed as text
         /// </summary>        
-        public const string BlockText= "b";
+        [IdentityIndicator(IIK.Block)]
+        public const string BlockText = "b";
 
         /// <summary>
         /// Indicates a natural number type
@@ -120,9 +134,21 @@ namespace Z0
         public const char Nat = 'n';
 
         /// <summary>
+        /// A nat type indicator expressed as text
+        /// </summary>        
+        [IdentityIndicator(IIK.Nat)]
+        public const string NatText = "n";
+
+        /// <summary>
         /// Indicates a generic type or method
         /// </summary>
         public const char Generic = 'g';
+
+        /// <summary>
+        /// A generic indicator expressed as text
+        /// </summary>
+        [IdentityIndicator(IIK.Generic)]
+        public const string GenericText = "g";
 
         /// <summary>
         /// Indicates a nongeneric type or method
@@ -130,34 +156,54 @@ namespace Z0
         public const char NonGeneric = 'd';
 
         /// <summary>
-        /// A separator between an identifier body and an applied modifier
+        /// A nongeneric indicator expressed as text
         /// </summary>
-        public const string Modifier = "~";
+        [IdentityIndicator(IIK.NonGeneric)]
+        public const string NonGenericText = "d";
 
         /// <summary>
-        /// Indicats a pointer
+        /// Indicates a pointer
         /// </summary>
+        [IdentityIndicator(IIK.Pointer)]
         public const string Pointer = "ptr";
 
         /// <summary>
         /// Indicates a span
         /// </summary>
+        [IdentityIndicator(IIK.Span)]
         public const string Span = "span";
 
         /// <summary>
-        /// Indicates a readonly span
+        /// Indicates an unmodifiable (readonly, immutable, etc) span
         /// </summary>
-        public const string ImSpan = "imspan";
+        [IdentityIndicator(IIK.USpan)]
+        public const string USpan = "uspan";
 
         /// <summary>
         /// Indicates a natural span
         /// </summary>
-        public const string NatSpan = "nspan";
+        [IdentityIndicator(IIK.NSpan)]
+        public const string NSpan = "nspan";
 
         /// <summary>
         /// An identifier suffix indicating that an immediate value is required
         /// </summary>
+        [IdentityIndicator(IIK.Imm)]
         public const string Imm = "imm";        
+
+
+        public const char ValueArgsOpen = '(';
+
+        public const char ValueArgsClose = ')';
+
+        public const char TypeArgsOpen = '[';
+
+        public const char TypeArgsClose = ']';
+
+        public const char SizeArgOpen = '{';
+
+        public const char SizeArgClose = '}';
+
     }
 
     public enum IdentityIndicatorKind
@@ -178,6 +224,16 @@ namespace Z0
         /// A separator between the bit width of a segmented type and the width of each segment
         /// </summary>
         SegSep,
+
+        /// <summary>
+        /// A separator between an identifier body and an applied modifier
+        /// </summary>
+        ModSep,
+
+        /// <summary>
+        /// A separator between type arguments
+        /// </summary>
+        ArgSep,
 
         /// <summary>
         /// Indicates a signed integral type
@@ -220,12 +276,7 @@ namespace Z0
         NonGeneric,
 
         /// <summary>
-        /// A separator between an identifier body and an applied modifier
-        /// </summary>
-        Modifier,
-
-        /// <summary>
-        /// Indicats a pointer
+        /// Indicates a pointer
         /// </summary>
         Pointer,
 
@@ -237,18 +288,26 @@ namespace Z0
         /// <summary>
         /// Indicates a readonly span
         /// </summary>
-        ImSpan,
+        USpan,
 
         /// <summary>
         /// Indicates a natural span
         /// </summary>
-        NatSpan,
+        NSpan,
 
         /// <summary>
         /// An identifier suffix indicating that an immediate value is required
         /// </summary>
         Imm,
+    }
 
+    [AttributeUsage(AttributeTargets.Field)]
+    class IdentityIndicatorAttribute : Attribute
+    {
+        public IdentityIndicatorAttribute(IdentityIndicatorKind kind)        
+            => this.IndicatorKind = kind;
+        
+        public IdentityIndicatorKind IndicatorKind {get;}
     }
 
     partial class RootKindExtensions
@@ -261,43 +320,29 @@ namespace Z0
         public static bool IsNone(this IdentityIndicatorKind kind)
             => kind == 0;
 
+        [MethodImpl(Inline)]
         public static string Format(this IdentityIndicatorKind kind)
-            => kind switch
-             {
-                IIK.PartSep => $"{IDI.PartSep}",
+            => IndicatorFormats.TryGetValue(kind, out var fmt) ? fmt : string.Empty;
 
-                IIK.SuffixSep => $"{IDI.SuffixSep}",
+        static Dictionary<IdentityIndicatorKind,string> IndicatorFormats {get;}
+            = IndexFormats();
 
-                IIK.SegSep => $"{IDI.SegSep}",
-
-                IIK.Signed => $"{IDI.Signed}",
-
-                IIK.Unsigned => $"{IDI.Unsigned}",
-
-                IIK.Float => $"{IDI.Float}",
-
-                IIK.Vector => $"{IDI.Vector}",
-
-                IIK.Block => $"{IDI.Block}",
-
-                IIK.Nat => $"{IDI.Nat}",
-
-                IIK.Generic => $"{IDI.Generic}",
-
-                IIK.NonGeneric => $"{IDI.NonGeneric}",
-
-                IIK.Modifier => $"{IDI.Modifier}",
-
-                IIK.Pointer => $"{IDI.Pointer}",
-
-                IIK.Span => $"{IDI.Span}",
-
-                IIK.ImSpan => $"{IDI.ImSpan}",
-
-                IIK.NatSpan => $"{IDI.NatSpan}",
-
-                IIK.Imm => $"{IDI.Imm}",
-                _ => "unk",
-            };
+        static Dictionary<IdentityIndicatorKind,string> IndexFormats()
+        {
+            try
+            {
+                var fields = from f in typeof(IDI).FieldAttributions<IdentityIndicatorAttribute>()
+                            let kind = f.Value.IndicatorKind
+                            let format = (f.Key.GetRawConstantValue()?.ToString()) ?? string.Empty
+                            select (kind,format);                                      
+                return fields.ToDictionary();
+            }
+            catch(Exception e)
+            {
+                Console.Error.WriteLine(e.ToString());
+                return new Dictionary<IIK, string>();
+            }
+            
+        }
     }
 }
