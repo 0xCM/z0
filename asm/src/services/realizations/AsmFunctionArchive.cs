@@ -11,8 +11,10 @@ namespace Z0
 
     using Z0.AsmSpecs;
 
+    using static AsmServiceMessages;
 
     using static zfunc;
+
 
     class AsmFunctionArchive : IAsmFunctionArchive
     {
@@ -55,11 +57,18 @@ namespace Z0
             return AsmEmissionToken.Define(OpUri.Asm(Catalog, Subject, src.Id), src.Location);
         }
 
+
         public Option<AsmEmissionGroup> Save(AsmFunctionGroup src, bool append)
         {            
-            WriteHex(src,append).OnSome(e => errout(e));
-            WriteCil(src,append).OnSome(e => errout(e));
-            return WriteAsm(src,append);
+            OnEmitting(src);
+            WriteHex(src, append).OnSome(e => errout(e));
+            WriteCil(src, append).OnSome(e => errout(e));            
+            var emissions = WriteAsm(src,append);
+            var incount = src.Members.Length;
+            var outcount = emissions.MapValueOrDefault(t => t.Tokens.Length);
+            if(incount != outcount)
+               OnInOutMismatch(src.Id, incount, outcount);                
+            return emissions.OnSome(OnEmitted);
         }
 
         public IAsmFunctionArchive Clear()
@@ -116,16 +125,16 @@ namespace Z0
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
-                    writer.Write(GroupFormatter.FormatDetail(f));
                     var uri = OpUri.Asm(Catalog, Subject, src.Id, f.Id);
+                    writer.Write(GroupFormatter.FormatDetail(f));
                     tokens[i] = AsmEmissionToken.Define(uri, f.Location);
                 }
-                return tokens.ToGroup();
+                return tokens.ToGroup(src.Id);
             }
             catch(Exception e)
             {
                 errout(e);
-                return default;
+                return none<AsmEmissionGroup>();
             }
         }
 
@@ -137,5 +146,21 @@ namespace Z0
 
         FilePath CilPath(OpIdentity m)
             => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.CilFile(m);
+ 
+        void OnEmitting(AsmFunctionGroup src)
+        {
+            print(Emitting(src));
+        }
+
+        void OnEmitted(AsmEmissionGroup emitted)
+        {
+            print(Emitted(emitted));            
+        }
+
+        void OnInOutMismatch(OpIdentity id, int incount, int outcount)
+        {
+            print(EmissionMismatch(id,incount,outcount));
+        }
+ 
     }
 }

@@ -52,7 +52,7 @@ namespace Z0
         void EmitDirectPrimary(in CaptureExchange exchange, Action<AsmEmissionGroup> receipt)
         {            
             foreach(var host in Catalog.DirectApiHosts)
-                EmitDirect(exchange, host,false,receipt);
+                EmitDirect(exchange, host, false, receipt);
             
             // return 
             //     from host in Catalog.DirectApiHosts
@@ -163,7 +163,6 @@ namespace Z0
             //return !imm ? ePrimary : ePrimary.Union(eImm);
         }        
 
-
         void Emit(in CaptureExchange exchange, DirectOpGroupSpec group, IAsmFunctionArchive dst, Action<AsmEmissionGroup> receipt)
         {                        
             //var tokens = new List<AsmEmissionToken>();
@@ -263,7 +262,7 @@ namespace Z0
                 tGroup.OnSome(t => tokens.AddRange(t.Tokens));
             }
 
-            receipt(tokens.ToGroup());
+            receipt(tokens.ToGroup(op.Id));
             //return tokens.ToArray();
         }                    
 

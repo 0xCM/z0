@@ -23,11 +23,11 @@ namespace Z0
         
         CTC_RET_Zx3,
 
+        CTC_RET_Zx7,
+
         CTC_INTRx2,
 
-        CTC_Zx7_000,
-
-        CTC_Zx7_RET,
+        CTC_Zx7,
 
         CTC_JMP_RAX,
 

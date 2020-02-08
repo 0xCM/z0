@@ -27,16 +27,14 @@ namespace Z0
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
             => AsmInstructionSource.FromProducer(() => GetInstructions(archive));
 
-        static ICaptureOps CaptureOps => CaptureServices.Operations;
-
         public static AsmFunction DecodeFunction(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, MethodInfo src)
-            => decoder.DecodeFunction(CaptureOps.Capture(in exchange, id, src));
+            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src));
 
         public static AsmFunction DecodeFunction(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
-            => decoder.DecodeFunction(CaptureOps.Capture(in exchange, id, src));
+            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src));
 
         public static AsmFunction DecodeFunction(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, Delegate src)
-            => decoder.DecodeFunction(CaptureOps.Capture(in exchange, id, src));
+            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src));
 
         public static R Eval<X0,X1,R>(this IAsmExecBuffer buffer, AsmCode src, X0 x0, X1 x1, R r = default)
             where X0 : unmanaged, IFixed

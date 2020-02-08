@@ -12,47 +12,28 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
-    public abstract class t_asm<U> : UnitTest<U>, IDisposable
+
+
+    public abstract class t_asm<U> : UnitTest<U>
         where U : t_asm<U>
     {
-        protected IAsmExecBuffer AsmBuffer;
-
-        protected ExecBufferToken ExecBuffer;
-
         protected IAsmContext Context;
-
-        IAsmExecBuffer[] AsmBuffers;
         
         public t_asm()
         {
             Context = AsmContext.New(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);            
-            AsmBuffer = Context.ExecBuffer();
-            ExecBuffer = OS.AllocExec(512);
-            AsmBuffers = new IAsmExecBuffer[]{
-                Context.ExecBuffer(),
-                Context.ExecBuffer()
-            };
         }
 
         public void Dispose()
         {
-            AsmBuffer.Dispose();
-            AsmBuffers[0].Dispose();
-            AsmBuffers[1].Dispose();
+
         }
-
-        protected ExecBufferToken LeftBuffer
-            => AsmBuffers[0].Token;
-
-        protected ExecBufferToken RightBuffer
-            => AsmBuffers[1].Token;
 
         protected string Math
             => nameof(math);
         
         protected string GMath
             => nameof(gmath);
-
 
         protected OpIdentity TestOpName<T>(string basename, T t = default)
             where T : unmanaged
@@ -86,7 +67,7 @@ namespace Z0
         /// <param name="g">The second operator, often interpreted as the operator under test</param>
         /// <param name="name">The operator name</param>
         /// <typeparam name="T">The operator domain type</typeparam>
-        protected void CheckMatch<T>(string basename, UnaryOp<T> f, UnaryOp<T> g)
+        protected void CheckMatch<T>(in AsmBuffers buffers, string basename, UnaryOp<T> f, UnaryOp<T> g)
             where T :unmanaged
         {
             void check()
@@ -101,7 +82,6 @@ namespace Z0
             CheckAction(check, CaseName(TestOpName<T>(basename)));
         }    
 
-
         /// <summary>
         /// Evaluates a pair of binary operators and asserts their equality over a random sequence
         /// </summary>
@@ -109,7 +89,7 @@ namespace Z0
         /// <param name="g">The second operator, often interpreted as the operator under test</param>
         /// <param name="name">The operator name</param>
         /// <typeparam name="T">The operator domain type</typeparam>
-        protected void CheckMatch<T>(string opname, BinaryOp<T> f, BinaryOp<T> g)
+        protected void CheckMatch<T>(in AsmBuffers buffers, string opname, BinaryOp<T> f, BinaryOp<T> g)
             where T :unmanaged
         {
             void check()
@@ -124,12 +104,12 @@ namespace Z0
             CheckAction(check, CaseName(TestOpName<T>(opname)));
         }
 
-        protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode src)
+        protected void CheckAsmMatch<T>(in AsmBuffers buffers, UnaryOp<T> f, AsmCode src)
             where T : unmanaged
         {
             //var g = AsmBuffer.UnaryOp(src.Typed<T>());
 
-            var g = ExecBuffer.Load(src).UnaryOp<T>(src.Id);            
+            var g = buffers.MainExec.Load(src).UnaryOp<T>(src.Id);            
 
             void check()
             {
@@ -143,16 +123,16 @@ namespace Z0
             CheckAction(check, src.Id);
         }
 
-        protected void CheckAsmMatch<T>(UnaryOp<T> f, TypedAsm<T> asm)
+        protected void CheckAsmMatch<T>(in AsmBuffers buffers, UnaryOp<T> f, TypedAsm<T> asm)
             where T : unmanaged
-                => CheckAsmMatch(f, asm.Untyped);
+                => CheckAsmMatch(buffers, f, asm.Untyped);
 
-        protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode src)
+        protected void CheckAsmMatch<T>(in AsmBuffers buffers, BinaryOp<T> f, AsmCode src)
             where T : unmanaged
         {
                       
             //var g = AsmBuffer.BinaryOp(asm.Typed<T>());
-            var g = ExecBuffer.BinaryOp<T>(src.Id);
+            var g = buffers.MainExec.BinaryOp<T>(src.Id);
 
             void check()
             {
@@ -166,9 +146,9 @@ namespace Z0
             CheckAction(check, src.Id);
         }
 
-        protected void CheckAsmMatch<T>(BinaryOp<T> f, TypedAsm<T> asm)
+        protected void CheckAsmMatch<T>(in AsmBuffers buffers, BinaryOp<T> f, TypedAsm<T> asm)
             where T : unmanaged
-                => CheckAsmMatch(f,asm.Untyped);
+                => CheckAsmMatch(buffers, f,asm.Untyped);
 
         protected AsmCode ReadAsm(string catalog, string subject, OpIdentity m)
             => Context.CodeArchive(catalog,subject).Read(m).Single();
@@ -186,7 +166,7 @@ namespace Z0
             return result.Require();
         }
 
-        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g)
+        protected void CheckMatch<T>(in AsmBuffers buffers, BinaryOp<Vector128<T>> f, BinaryOp128 g)
             where T : unmanaged
         {
             var w = n128;
@@ -199,7 +179,7 @@ namespace Z0
             }            
         }
 
-        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g)
+        protected void CheckMatch<T>(in AsmBuffers buffers, BinaryOp<Vector256<T>> f, BinaryOp256 g)
             where T : unmanaged
         {
             var w = n256;
@@ -212,7 +192,7 @@ namespace Z0
             }            
         }
 
-        protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, HK.Numeric<byte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, HK.Numeric<byte> kind)
         {
             var w = n8;
 
@@ -222,15 +202,15 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w,ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w,ReadAsm(GMath, Math, moniker));
 
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, HK.Numeric<sbyte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, HK.Numeric<sbyte> kind)
         {
             var w = n8;
 
@@ -240,14 +220,14 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, in AsmCode dCode, in AsmCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, HK.Numeric<sbyte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, in AsmCode dCode, in AsmCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, HK.Numeric<sbyte> kind)
         {
             var w = n8;
 
@@ -257,14 +237,14 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, id, f1, id.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w, dCode);
+            var f2 = buffers.MainExec.BinaryOp(w, dCode);
             CheckMatch(f0, id, f2, id.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, gCode);
+            var f3 = buffers.MainExec.BinaryOp(w, gCode);
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, HK.Numeric<ushort> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, HK.Numeric<ushort> kind)
         {
             var w = n16;
 
@@ -274,15 +254,15 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
 
-        protected void megacheck(string name, Func<short,short,short> primal, Func<short,short,short> generic, HK.Numeric<short> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<short,short,short> primal, Func<short,short,short> generic, HK.Numeric<short> kind)
         {
             var w = n16;
 
@@ -292,14 +272,14 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, HK.Numeric<uint> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, HK.Numeric<uint> kind)
         {
             var w = n32;
 
@@ -309,14 +289,14 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, HK.Numeric<int> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, HK.Numeric<int> kind)
         {
             var w = n32;
             var moniker = Identity.operation(name, kind);                        
@@ -325,14 +305,14 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, HK.Numeric<long> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, HK.Numeric<long> kind)
         {            
             var w = n64;
             var moniker = Identity.operation(name, kind);                        
@@ -341,14 +321,14 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, HK.Numeric<ulong> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, HK.Numeric<ulong> kind)
         {            
             var w = n64;
 
@@ -358,10 +338,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = ExecBuffer.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
     }

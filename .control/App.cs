@@ -21,7 +21,7 @@ namespace Z0
         readonly IAsmContext AsmCtx;
 
         protected override void Execute(params string[] args)
-            => AsmArchiveControl.Create(AsmCtx).Execute();            
+            => AsmCtx.Archiver().Execute();
 
         public override IAssemblyDesignator[] Resolved{get;}
 

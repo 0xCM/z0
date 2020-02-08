@@ -71,28 +71,28 @@ namespace Z0
             return dst;                
         }
 
-        public void SaveBits(in CaptureExchange exchange, MethodInfo src, IAsmHexWriter dst)
+        public void CaptureBits(in CaptureExchange exchange, MethodInfo src, IAsmHexWriter dst)
             => dst.Write(Operations.Capture(in exchange, src.Identify(), src));
 
-        public void SaveBits(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmHexWriter dst)
+        public void CaptureBits(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmHexWriter dst)
             => dst.Write(ExtractBits(exchange, src,args));
 
-        public void SaveBits(in CaptureExchange exchange, MethodInfo[] methods, IAsmHexWriter dst)
+        public void CaptureBits(in CaptureExchange exchange, MethodInfo[] methods, IAsmHexWriter dst)
             => dst.Write(ExtractBits(exchange, methods));
 
-        public void SaveBits(in CaptureExchange exchange, Delegate src, IAsmHexWriter dst)
+        public void CaptureBits(in CaptureExchange exchange, Delegate src, IAsmHexWriter dst)
             => dst.Write(ExtractBits(exchange, src));    
 
-        public void SaveAsm(in CaptureExchange exchange, Delegate src, IAsmFunctionWriter dst)
+        public void CaptureAsm(in CaptureExchange exchange, Delegate src, IAsmFunctionWriter dst)
             => dst.Write(ExtractAsm(exchange, src));
 
-        public void SaveAsm(in CaptureExchange exchange,MethodInfo src, IAsmFunctionWriter dst)
+        public void CaptureAsm(in CaptureExchange exchange,MethodInfo src, IAsmFunctionWriter dst)
             => dst.Write(ExtractAsm(exchange, src));
 
-        public void SaveAsm(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmFunctionWriter dst)
+        public void CaptureAsm(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmFunctionWriter dst)
             => dst.Write(ExtractAsm(exchange, src,args));
         
-        public void SaveAsm(in CaptureExchange exchange, MethodInfo[] src, IAsmFunctionWriter dst)
+        public void CaptureAsm(in CaptureExchange exchange, MethodInfo[] src, IAsmFunctionWriter dst)
             => iter(ExtractAsm(exchange, src),dst.Write);
                 
         CapturedMember CaptureBits(in CaptureExchange exchange, MethodInfo m)

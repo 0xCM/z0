@@ -15,14 +15,14 @@ namespace Z0
     {
         public static AsmEmissionReport Create(AssemblyId id, AsmEmissionGroup[] groups, string suffix = null)
         {
-            var count = groups.Length;
-            if(count == 0)
+            if(groups.Length == 0)
                 return default;
             
             var emissions = groups.SelectMany(g => g.Tokens).ToArray();
             Array.Sort(emissions);
-
+            var count = emissions.Length;
             var records = new AsmEmissionRecord[count];
+            
             MemoryAddress @base = emissions[0].Origin.Start;
 
             for(var i =0; i<count; i++)

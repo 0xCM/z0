@@ -11,16 +11,16 @@ namespace Z0
 
     using static zfunc;
     
-    readonly struct AsmArchiveControl :  IAsmService, IExecutable
+    readonly struct AsmArchiver :  IAsmArchiver
     {                
         public IAsmContext Context {get;}
 
         readonly DataResourceIndex Resources;
 
-        public static AsmArchiveControl Create(IAsmContext context)
-            => new AsmArchiveControl(context);
+        public static AsmArchiver Create(IAsmContext context)
+            => new AsmArchiver(context);
 
-        AsmArchiveControl(IAsmContext context)
+        AsmArchiver(IAsmContext context)
         {
             Context = context;
             Resources = Context.Assemblies.FindCatalog(AssemblyId.Data).Require().Resources;
@@ -32,35 +32,31 @@ namespace Z0
         IEnumerable<AssemblyId> ActiveAssemblies
             => Context.ActiveAssemblies();
 
-        Option<FilePath> EmitPrimary(in CaptureExchange exchange, IOperationProvider src,  IAsmCatalogEmitter emitter)
+        Option<FilePath> CreateEmissionReport(AssemblyId src, AsmEmissionGroup[] emitted)
+            => AsmReports.CreateEmissionReport(src, emitted).Save();
+
+        AsmEmissionGroup[] EmitPrimary(in CaptureExchange exchange, IOperationProvider src,  IAsmCatalogEmitter emitter)
         {
-            var emissions = new List<AsmEmissionGroup>();   
+            var emissions = new List<AsmEmissionGroup>(); 
+
             void OnEmission(AsmEmissionGroup emission)
                 => emissions.Add(emission);            
             
             emitter.EmitPrimary(exchange,OnEmission);
 
-            var emitted = emissions.ToArray();
+            return emissions.ToArray();
+        }        
 
-            if(emitted.Length != 0)    
-                return AsmReports.CreateEmissionReport(src.HostId, emitted).Save();
-            else
-                return none<FilePath>();
-        }
-
-        Option<FilePath> EmitImm(in CaptureExchange exchange, IOperationProvider src, IAsmCatalogEmitter emitter)
+        AsmEmissionGroup[] EmitImm(in CaptureExchange exchange, IOperationProvider src, IAsmCatalogEmitter emitter)
         {
             var emissions = new List<AsmEmissionGroup>();   
+            
             void OnEmission(AsmEmissionGroup emission)
                 => emissions.Add(emission);
 
-            emitter.EmitImm(exchange,OnEmission);
+            emitter.EmitImm(exchange, OnEmission);
 
-            var emitted = emissions.ToArray();                
-            if(emitted.Length != 0)                
-                return AsmReports.CreateEmissionReport(src.HostId, emitted, IDI.Imm).Save();
-            else
-                return none<FilePath>();
+            return emissions.ToArray();                
         }
 
         Option<FilePath> EmitLocations(IOperationProvider src)
@@ -75,15 +71,31 @@ namespace Z0
             report.Require();
         }
 
-        void Emit(in CaptureExchange exchange, IOperationProvider src)
+        void Archive(in CaptureExchange exchange, IOperationProvider src)
         {
             var metadata = ClrMetadataIndex.Create(src.HostAssembly);
             var context = AsmContext.New(metadata, Resources);
-            var emitter = context.CatalogEmitter(src.Catalog);      
+            var emitter = context.CatalogEmitter(src.Catalog);
+
+            var primary = EmitPrimary(exchange, src, emitter);
+            if(primary.Length != 0)
+                Completed(CreateEmissionReport(src.HostId, primary));
             
-            Completed(EmitPrimary(exchange, src, emitter));
-            Completed(EmitImm(exchange, src, emitter));
+            var imm = EmitImm(exchange, src, emitter);
+            if(imm.Length != 0)
+                Completed(CreateEmissionReport(src.HostId, imm));
+            
             Completed(EmitLocations(src));
+        }
+
+        public void Archive(AssemblyId id)
+        {
+            var provider = Resolved.OperationProvider(id);
+            if(provider.IsSome())
+            {
+                var exchange = CaptureServices.Exchange();
+                Archive(in exchange, provider.Value);
+            }
         }
 
         public void Execute()
@@ -93,7 +105,7 @@ namespace Z0
             var providers = Resolved.OperationProviders(ActiveAssemblies);
             
             foreach(var src in providers)
-                Emit(exchange, src);
+                Archive(exchange, src);
 
             AsmReports.CreateResourceReport(Resources).Save().Require();
         }

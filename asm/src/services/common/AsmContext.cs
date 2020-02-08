@@ -17,9 +17,23 @@ namespace Z0
     {   
         static int LastId = 0;
 
+        /// <summary>
+        /// Creates a new context with selected assemblies
+        /// </summary>
+        /// <param name="assemblies">The assemblies to share with the context</param>
+        public static IAsmContext New(params IAssemblyDesignator[] assemblies)
+            => New(AssemblyComposition.Define(assemblies));
+
+        /// <summary>
+        /// Creates a new context with an assembly composition
+        /// </summary>
+        /// <param name="assemblies">A composition of assemblies to share with the context</param>
         public static IAsmContext New(IAssemblyComposition assemblies)
             => new AsmContext(assemblies, ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
 
+        /// <summary>
+        /// Creates an empty context
+        /// </summary>
         public static IAsmContext New()
             => New(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
 

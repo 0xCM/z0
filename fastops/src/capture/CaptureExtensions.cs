@@ -22,7 +22,7 @@ namespace Z0
         public static CaptureExchange CreateExchange(this ICaptureControl control, Span<byte> target, Span<byte> state)
             => CaptureServices.Exchange(control, target, state);
     
-        public static AsmEmissionGroup ToGroup(this IEnumerable<AsmEmissionToken> tokens)
-            => AsmEmissionGroup.Define(tokens.ToArray());
+        public static AsmEmissionGroup ToGroup(this IEnumerable<AsmEmissionToken> tokens, OpIdentity groupid)
+            => AsmEmissionGroup.Define(groupid, tokens.ToArray());
     }
 }

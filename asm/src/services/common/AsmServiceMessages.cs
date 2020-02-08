@@ -27,6 +27,12 @@ namespace Z0
         public static AppMsg Emitting(Type host)
             => appMsg($"Emitting operations defined by {host.Name}", SeverityLevel.Babble);
 
+        public static AppMsg Emitting(AsmFunctionGroup src)
+            => appMsg($"{src.Id}: Emitting {src.Members.Length} members");
+
+        public static AppMsg Emitted(AsmEmissionGroup src)
+            => appMsg($"{src.Id}: Emitted {src.Tokens.Length} members");
+
         public static AppMsg Emitting(GenericOpSpec op)        
             => appMsg($"Emitting operation {op.Id}", SeverityLevel.Babble);
 
@@ -35,6 +41,9 @@ namespace Z0
 
         public static AppMsg Emitting(DirectOpSpec op)        
             => appMsg($"Emitting operation {op.Id}", SeverityLevel.Babble);
+
+        public static AppMsg EmissionMismatch(OpIdentity id, int incount, int outcount)
+            => appMsg($"In/out mismatch on function group {id}, in = {incount}, out = {outcount}", SeverityLevel.Warning);
 
         public static AppMsg EmittingCatalog(IOperationCatalog catalog)        
             => appMsg($"Emitting catalog {catalog.CatalogName} from catalog emitter", SeverityLevel.Info);

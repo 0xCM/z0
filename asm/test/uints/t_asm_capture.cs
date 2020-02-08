@@ -14,8 +14,12 @@ namespace Z0
 
     using static zfunc;
     
-    public class t_asm_delegates: t_asm<t_asm_delegates>
+    public class t_asm_delegates: t_asm<t_asm_delegates>, IExplicitTest
     {
+        public void Execute()
+        {
+                        
+        }
 
         [MethodImpl(Inline)]
         static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
@@ -35,43 +39,43 @@ namespace Z0
 
         void capture_constants(in CaptureExchange exchange)
         {
-            var svc = Context.AsmCapture();
+            var svc = Context.Capture();
 
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();            
         
             var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
         
-            svc.SaveBits(exchange, f,hex);
-            svc.SaveAsm(exchange, f, asm);
+            svc.CaptureBits(exchange, f, hex);
+            svc.CaptureAsm(exchange, f, asm);
         }
 
         void capture_shifter(in CaptureExchange exchange)
         {
-            var svc = Context.AsmCapture();
+            var svc = Context.Capture();
 
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();
 
             var f = shifter(4);
-            svc.SaveBits(exchange, f, hex);
-            svc.SaveAsm(exchange, f, asm);            
+            svc.CaptureBits(exchange, f, hex);
+            svc.CaptureAsm(exchange, f, asm);            
         }
 
         void capture_shuffler(in CaptureExchange exchange)
         {
-            var svc = Context.AsmCapture();
+            var svc = Context.Capture();
 
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();
 
             var f = shuffler<uint>(n2);
-            svc.SaveBits(exchange, f, hex);
-            svc.SaveAsm(exchange, f, asm);            
+            svc.CaptureBits(exchange, f, hex);
+            svc.CaptureAsm(exchange, f, asm);            
 
             var g = shuffler(n3);
-            svc.SaveBits(exchange, g, hex);
-            svc.SaveAsm(exchange, g, asm);            
+            svc.CaptureBits(exchange, g, hex);
+            svc.CaptureAsm(exchange, g, asm);            
         }
     }
 }

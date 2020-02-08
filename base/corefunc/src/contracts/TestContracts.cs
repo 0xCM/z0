@@ -33,6 +33,7 @@ namespace Z0
         
     }
 
+
     public interface ITestContext : IContext, ITestResultSink, ITestResultSource, IBenchResultSink, IBenchResultSource
     {
         ITestConfig Config {get;}
@@ -54,6 +55,11 @@ namespace Z0
 
         
 
+    }
+
+    public interface IExplicitTest : IUnitTest, IExecutable
+    {
+        
     }
 
 

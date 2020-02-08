@@ -42,6 +42,14 @@ namespace Z0
         }
 
         /// <summary>
+        /// Replaces the current junction with another
+        /// </summary>
+        /// <param name="junction">The replacement junction</param>
+        [MethodImpl(Inline)]
+        public CaptureExchange Rejunction(ICaptureJunction junction)
+            => new CaptureExchange(junction, TargetBuffer, StateBuffer);
+
+        /// <summary>
         /// Queries and manipulates an index-identified state buffer byte
         /// </summary>
         /// <param name="index">The cell index to query/manipulate</param>

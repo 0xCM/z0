@@ -17,11 +17,15 @@ namespace Z0
     public static partial class AsmExtend
     {
         [MethodImpl(Inline)]
+        public static IAsmArchiver Archiver(this IAsmContext context)
+            => AsmArchiver.Create(context);
+
+        [MethodImpl(Inline)]
         public static IAsmDecoder Decoder(this IAsmContext context, int? bufferlen = null)
             => AsmDecoder.Create(context, bufferlen);                        
 
         [MethodImpl(Inline)]
-        public static IAsmCaptureService AsmCapture(this IAsmContext context)
+        public static IAsmCaptureService Capture(this IAsmContext context)
             => AsmCaptureService.Create(context);
 
         [MethodImpl(Inline)]

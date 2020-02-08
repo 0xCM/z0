@@ -13,7 +13,6 @@ namespace Z0
     
     using static zfunc;    
 
-
     /// <summary>
     /// Base type for test applications
     /// </summary>
@@ -95,13 +94,19 @@ namespace Z0
                 var runtimer = stopwatch();
                 var name = host.DisplayName();
 
-                Trace(AppMsg.Define($"Creating unit {host.Name}", SeverityLevel.Babble));
+                Trace(AppMsg.Define($"Creating test {host.Name}", SeverityLevel.Babble));
                 unit = host.CreateInstance<IUnitTest>();
-                unit.Configure(Config);                
-
-                if(unit.Enabled)
-                    iter(Tests(host), t =>  execTime += Run(unit, name, t, results));                
-                Enqueue(unit.TakeBenchmarks().ToArray());
+                unit.Configure(Config); 
+                if(unit is IExplicitTest et)  
+                {             
+                    RunExplicit(et, host.Name,results);
+                }
+                else
+                {
+                    if(unit.Enabled)
+                        iter(Tests(host), t =>  execTime += RunUnit(unit, name, t, results));                
+                    Enqueue(unit.TakeBenchmarks().ToArray());
+                }
                 
                 print(AppMsg.Define($"{host.Name} exectime {execTime.Ms} ms, runtime = {snapshot(runtimer).Ms} ms", SeverityLevel.Info));
 
@@ -159,9 +164,6 @@ namespace Z0
 
         void Run(bool concurrent, params string[] filters)
             => iter(Hosts(), h =>  Run(h,filters), concurrent);
-
-        protected virtual bool PersistResults
-            => false;
         
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
@@ -179,7 +181,61 @@ namespace Z0
             yield return AppMsg.Define($"{name} failed.", SeverityLevel.Error);
         }
 
-        Duration Run(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseRecord> results)
+
+        AppMsg[] CollectMessages(IUnitTest src, string testName, Duration runtime, Exception e = null)
+        {
+            var messages = new List<AppMsg>();
+            messages.AddRange(src.DequeuePosts());
+            if(e != null)
+                messages.AddRange(GetErrorMessages(testName,e));
+            else
+                messages.Add(AppMsg.Define($"{testName} executed. {runtime}", SeverityLevel.Info));
+            return messages.ToArray();
+        }
+
+        TestCaseRecord[] CollectOutcomes(IExplicitTest unit, string testName, Duration runtime, Exception e = null)
+        {
+            var outcomes = new List<TestCaseRecord>();
+            if(e!= null)
+                outcomes.Add(TestCaseRecord.Define(testName,false,runtime));
+            else
+            {
+                outcomes.AddRange(unit.TakeOutcomes());
+                if(outcomes.Count == 0)
+                    outcomes.Add(TestCaseRecord.Define(testName,true,runtime));
+            }
+            return outcomes.ToArray();
+        }
+
+        Duration RunExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
+        {
+            var time = counter(false);
+            var messages = array<AppMsg>();
+            var testName = $"{hostpath}/{unit.GetType().DisplayName()}/{nameof(IExplicitTest.Execute)}";
+            try
+            {
+                time.Start();
+                unit.Execute();
+                time.Stop();
+                messages = CollectMessages(unit, testName,time);
+                results.AppendRange(CollectOutcomes(unit,testName, time));                
+
+            }
+            catch(Exception e)
+            {
+                time.Stop();
+                messages = CollectMessages(unit, testName, time, e);
+                results.AppendRange(CollectOutcomes(unit,testName, time,e));
+            }
+            finally
+            {            
+                print(messages);
+            }
+
+            return time;
+        }
+
+        Duration RunUnit(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseRecord> results)
         {
             var exectime = Duration.Zero;
             var messages = new List<AppMsg>();
