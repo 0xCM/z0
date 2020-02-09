@@ -16,15 +16,16 @@ namespace Z0
     {
         const int DefaultSize = 512;
 
-        public static AsmBuffers Create(IAsmContext context, int? size = null)
-            => new AsmBuffers(context,size);
+        public static AsmBuffers Create(IAsmContext context, ICaptureEventSink sink, int? size = null)
+            => new AsmBuffers(context,sink,size);
 
-        AsmBuffers(IAsmContext context, int? size = null)
+        AsmBuffers(IAsmContext context, ICaptureEventSink sink, int? size = null)
         {
             AsmContext = context;
             CaptureTarget = new byte[size ?? DefaultSize];
             CaptureState = new byte[size ?? DefaultSize];
-            Exchange = CaptureServices.Exchange(CaptureTarget, CaptureState);        
+            Capture = CaptureServices.Control(sink);   
+            Exchange = CaptureServices.Exchange(Capture, CaptureTarget, CaptureState);     
             MBuffer = OS.AllocExec(size ?? DefaultSize);            
             LBuffer = OS.AllocExec(size ?? DefaultSize);
             RBuffer = OS.AllocExec(size ?? DefaultSize);            
@@ -51,6 +52,8 @@ namespace Z0
         public ExecBufferToken RightExec
             => RBuffer;
 
+        public readonly ICaptureControl Capture;
+
         public readonly CaptureExchange Exchange;
 
         public void Dispose()
@@ -63,7 +66,7 @@ namespace Z0
 
     public static class BufferX
     {    
-        public static AsmBuffers Buffers(this IAsmContext context, int? size = null)
-            => AsmBuffers.Create(context,size);
+        public static AsmBuffers Buffers(this IAsmContext context, ICaptureEventSink sink, int? size = null)
+            => AsmBuffers.Create(context,sink,size);
     }
 }

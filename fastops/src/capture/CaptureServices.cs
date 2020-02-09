@@ -24,6 +24,7 @@ namespace Z0
         public static ICaptureControl Control()
             => CaptureControl.Create();
 
+
         [MethodImpl(Inline)]
         public static ICaptureControl Control(ICaptureEventSink sink)
             => CaptureControl.Create(sink);
@@ -44,17 +45,9 @@ namespace Z0
         public static CaptureExchange Exchange()
             => Exchange(Control());
 
+
         [MethodImpl(Inline)]
         public static IAsmEmissionSink EmissionSink(Action<AsmEmissionGroup> receiver)
             => AmsEmissionSink.Create(receiver);
-
-        /// <summary>
-        /// Allocates a caller-disposed capture writer
-        /// </summary>
-        /// <param name="dst">The target path</param>
-        /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
-        /// <param name="append">Whether to append to or overwrite an existing file</param>
-        public static ICaptureWriter Writer(FilePath dst, bool header = true, bool append = false)
-            => CaptureWriter.Create(dst,header,append);
     }
 }

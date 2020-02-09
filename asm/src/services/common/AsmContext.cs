@@ -86,13 +86,6 @@ namespace Z0
             return copy;
         }
 
-        public IAsmContext WithFormat(CilFormatConfig config)
-        {
-            var copy = Replicate();
-            Data = copy.Data.WithFormat(config);
-            return copy;
-        }
-
         public IAsmContext WithEmptyClrIndex()
         {
             var copy = Replicate();
@@ -100,19 +93,6 @@ namespace Z0
             return copy;
         }
 
-        public IAsmContext WithAssemblies(IAssemblyComposition assemblies)
-        {
-            var copy = Replicate();
-            copy.Data = copy.Data.WithAssemblies(assemblies);
-            return copy;
-        }
-
-        public IAsmContext WithClrIndex(Assembly src)
-        {
-            var copy = Replicate();            
-            copy.Data.WithClrIndex(ClrMetadataIndex.Create(src.Modules.ToArray()));
-            return copy;
-        }
 
         AsmContext Replicate()
             => new AsmContext(ContextId, Data ,Random);

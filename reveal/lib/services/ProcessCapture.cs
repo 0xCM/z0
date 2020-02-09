@@ -124,7 +124,7 @@ namespace Z0
             }
 
             var location = MemoryRange.Define(address, address + size);            
-            var result = CaptureCompletion.Define(location.Start, location.End, CaptureTermCode.CTC_MSDIAG);
+            var result = CaptureOutcome.Define(CaptureState.Empty, location.Start, location.End, CaptureTermCode.CTC_MSDIAG);
 			return CapturedMember.Define(id, method, location, buffer, result);                    
         }
     }

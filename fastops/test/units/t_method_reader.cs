@@ -19,10 +19,10 @@ namespace Z0
     {
         protected override bool TraceEnabled => true;
         
-        ICaptureWriter NativeTestWriter([Caller] string test = null)
+        StreamWriter NativeTestWriter([Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.HexExt);    
-            return  CaptureServices.Writer(path);
+            return  new StreamWriter(path.CreateParentIfMissing().FullPath);
         }
 
         public void parse_address_segment()
@@ -52,7 +52,7 @@ namespace Z0
                 foreach(var def in defintions)
                 {
                     var m = def.MakeGenericMethod(t);
-                    writer.WriteData(control.Capture(in exchange,m.Identify(), m));
+                    writer.WriteMember(control.Capture(in exchange,m.Identify(), m));
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace Z0
             var control = CaptureServices.Control();
             var exchange = control.CreateExchange();
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
-                target.WriteData(control.Capture(in exchange, m.Identify(), m));
+                target.WriteMember(control.Capture(in exchange, m.Identify(), m));
         }
 
         static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
@@ -79,21 +79,21 @@ namespace Z0
             var exchange = control.CreateExchange();
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            target.WriteData(control.Capture(in exchange, dAnd.Identify(), dAnd));
+            target.WriteMember(control.Capture(in exchange, dAnd.Identify(), dAnd));
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            target.WriteData(control.Capture(in exchange, mAnd.Identify(), mAnd));
+            target.WriteMember(control.Capture(in exchange, mAnd.Identify(), mAnd));
 
             var dShuffle = shuffler(4);
-            target.WriteData(control.Capture(in exchange, dShuffle.Identify(), dShuffle));
+            target.WriteMember(control.Capture(in exchange, dShuffle.Identify(), dShuffle));
 
             var dShift = shifter(4);
-            target.WriteData(control.Capture(in exchange, dShift.Identify(), dShift));
+            target.WriteMember(control.Capture(in exchange, dShift.Identify(), dShift));
 
             var methods = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();
             
             foreach(var m in methods)
-                target.WriteData(control.Capture(in exchange, m.Identify(), m));
+                target.WriteMember(control.Capture(in exchange, m.Identify(), m));
             
         }
 
@@ -106,7 +106,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var capture = control.Capture(in exchange, src[i].Identify(), src[i]);
-                PostMessage(capture.FormatHexLines());
+                PostMessage(capture.FormatCode());
             }
         }
     }

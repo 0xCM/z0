@@ -10,6 +10,9 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Accepts and then relays emission groups to a specified receiver
+    /// </summary>
     readonly struct AmsEmissionSink : IAsmEmissionSink
     {
         readonly Action<AsmEmissionGroup> Receiver;        

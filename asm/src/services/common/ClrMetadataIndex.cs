@@ -46,7 +46,7 @@ namespace Z0
             iter(modules, IndexClrModule);
         }
 
-        public Option<CilFunction> FincCil(MethodInfo mi)
+        public Option<CilFunction> FindCil(MethodInfo mi)
             => IsEmpty ? default : 
                 from m in MethodDefIndex.TryFind(mi.MetadataToken)
                 from f in GetCilFunction(m)

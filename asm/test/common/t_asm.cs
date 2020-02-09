@@ -48,12 +48,6 @@ namespace Z0
             return  Context.HexWriter(dst);
         }
 
-        protected ICaptureWriter NativeTestWriter([Caller] string test = null)
-        {
-            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
-            return  CaptureServices.Writer(dst);
-        }
-
         protected IAsmFunctionWriter AsmTestWriter([Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Asm);    

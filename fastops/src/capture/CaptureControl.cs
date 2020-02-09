@@ -14,59 +14,106 @@ namespace Z0
     {                    
         readonly ICaptureEventSink EventSink;
 
-        public static CaptureControl Create(ICaptureEventSink sink)
+        readonly ICaptureEventSink StateSink;
+
+
+        public static ICaptureControl Create(ICaptureEventSink sink)
             => new CaptureControl(sink);
+                    
+        public static ICaptureControl Create(ICaptureEventSink events, ICaptureEventSink state)
+            => new CaptureControl(events,state);
 
-        public static CaptureControl Create()
-            => new CaptureControl(null);
+        public static ICaptureControl Create()
+            => new CaptureControl(CaptureEventSink.Empty);
 
-        CaptureControl(ICaptureEventSink sink)
+
+        CaptureControl(ICaptureEventSink events, ICaptureEventSink state)
         {
-            this.EventSink = sink ?? CaptureEventSink.Empty;
+            this.EventSink = events;
+            this.StateSink = state;
         }
 
-        ICaptureOps Operations
-            => CaptureServices.Operations;
+
+        CaptureControl(ICaptureEventSink events)
+        {
+            this.EventSink = events;
+            this.StateSink = CaptureStateSink.Create(EventSink);
+        }
 
         [MethodImpl(Inline)]
         public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, in DynamicDelegate src)
-            => Operations.Capture(exchange,id, src);
+            => CaptureServices.Operations.Capture(exchange,id, src);
 
         [MethodImpl(Inline)]
         public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src)
-            => Operations.Capture(exchange, id,src);
+            => CaptureServices.Operations.Capture(exchange, id,src);
 
         [MethodImpl(Inline)]
         public CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, MethodInfo src)
-            => Operations.Capture(exchange, id, src);                                    
+            => CaptureServices.Operations.Capture(exchange, id, src);                                    
 
         [MethodImpl(Inline)]
-        public Option<CapturedOpData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src)
-            => Operations.Capture(exchange, id, src);
+        public Option<CapturedData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src)
+            => CaptureServices.Operations.Capture(exchange, id, src);
 
-        ICaptureEventSink ControlSink
+        [MethodImpl(Inline)]
+        void ForwardEvent(in CaptureEventData data)
         {
-            [MethodImpl(Inline)]
-            get => this;
+            EventSink.Accept(data);
+            StateSink.Accept(data);
         }
 
         [MethodImpl(Inline)]
-        void ICaptureJunction.Accept(in CaptureExchange exchange, in CaptureState src)
-            => ControlSink.Accept(CaptureEventInfo.Define(src, exchange.StateBuffer));
+        void ForwardCompletion(in CaptureEventData data)
+        {
+            EventSink.Complete(data);
+            //StateSink.Complete(data);
+        }
+
+        /// <summary>
+        /// Relays the completion event to the sink specified upon creation
+        /// </summary>
+        /// <param name="data">The event data</param>
+        [MethodImpl(Inline)]
+        void ICaptureEventSink.Complete(in CaptureEventData data)
+            => ForwardCompletion(data);
+
+        /// <summary>
+        /// Relays the event to the sink specified upon creation
+        /// </summary>
+        /// <param name="data">The event data</param>
+        [MethodImpl(Inline)]
+        void ICaptureEventSink.Accept(in CaptureEventData data)
+            => ForwardEvent(data);
 
         [MethodImpl(Inline)]
-        void ICaptureEventSink.Accept(in CaptureEventInfo info)
-            => EventSink.Accept(info);
+        void ICaptureJunction.Accept(in CaptureExchange exchange, in CaptureState state)
+            => ForwardEvent(CaptureEventData.Define(state, exchange.StateBuffer));
 
         [MethodImpl(Inline)]
-        public void Complete(in CaptureExchange exchange, in CapturedMember captured)
-            => EventSink.Complete(captured);
+        void ICaptureJunction.Complete(in CaptureExchange exchange, in CaptureState state, in CapturedMember captured)
+            => ForwardCompletion(CaptureEventData.Define(state, exchange.StateBuffer, captured));
 
         readonly struct CaptureEventSink : ICaptureEventSink
         {
+            readonly Option<ICaptureEventSink> Relay;
+
             public static ICaptureEventSink Empty = default(CaptureEventSink);
             
-            public void Accept(in CaptureEventInfo info) {}
+            CaptureEventSink(ICaptureEventSink relay)
+                => this.Relay = relay != null ? some(relay) : none<ICaptureEventSink>();
+
+            [MethodImpl(Inline)]
+            public void Accept(in CaptureEventData data) 
+            {
+                if(Relay.IsSome())
+                    Relay.Value.Accept(data);
+            }
+
+            public void Complete(in CaptureEventData data) {}
+
+            public static ICaptureEventSink WithRelay(ICaptureEventSink dst)
+                => new CaptureEventSink(dst);
         }
     }
 }

@@ -97,7 +97,7 @@ namespace Z0
         DynamicImmediate(IAsmContext context, HK.Vec128 vk, HK.OperatorFunc<N1> opk)
         {
             this.Context = context;
-            this.Decoder = context.Decoder();
+            this.Decoder = context.Decoder(false);
             this.ImmOpProvider = ImmOpProviders.provider(vk,opk);
         }
 
@@ -105,7 +105,7 @@ namespace Z0
         DynamicImmediate(IAsmContext context, HK.Vec256 vk, HK.OperatorFunc<N1> opk)
         {
             this.Context = context;
-            this.Decoder = context.Decoder();
+            this.Decoder = context.Decoder(false);
             this.ImmOpProvider = ImmOpProviders.provider(vk,opk);
         }
 
@@ -121,7 +121,7 @@ namespace Z0
         DynamicImmediate(IAsmContext context, HK.Vec256 vk, HK.OperatorFunc<N2> opk)
         {
             this.Context = context;
-            this.Decoder = context.Decoder();
+            this.Decoder = context.Decoder(false);
             this.ImmOpProvider = ImmOpProviders.provider(vk,opk);
         }
 
@@ -144,7 +144,7 @@ namespace Z0
         public DynamicImmediate(IAsmContext context, IImmOpProvider<D> factory)
         {
             this.Context = context;
-            this.Decoder = context.Decoder();
+            this.Decoder = context.Decoder(false);
             this.ImmProvider = factory;
         }
 

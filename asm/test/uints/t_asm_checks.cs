@@ -86,7 +86,7 @@ namespace Z0
             using var hex = HexTestWriter(subject);
             using var asm = AsmTestWriter(subject);
 
-            var capture = Context.Capture();
+            var capture = Context.Capture(buffers.Capture);
             
             capture.CaptureBits(buffers.Exchange, methods,hex);
             capture.CaptureAsm(buffers.Exchange, methods,asm);
@@ -98,7 +98,7 @@ namespace Z0
             using var hex = HexTestWriter(subject);
             using var asm = AsmTestWriter(subject);
 
-            var capture = Context.Capture();
+            var capture = Context.Capture(buffers.Capture);
                                     
             var selection = from def in defs
                             from arg in args                            
@@ -129,7 +129,6 @@ namespace Z0
                         count++;
                 }
             }
-
             
             TraceCaller($"{listcount} instruction lists were processed out of {source.Instructions.Count()} available");
             TraceCaller($"Trigger activate {activations} times");
@@ -149,7 +148,7 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var f = dynop.DynamicOp;
             var z1 = f.Invoke(x,y);
-            var decoder = Context.Decoder();
+            var decoder = Context.Decoder(false);
             var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);
             var asm = decoder.DecodeFunction(captured);        
 
@@ -171,7 +170,7 @@ namespace Z0
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
-            var decoder = Context.Decoder();
+            var decoder = Context.Decoder(false);
             var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured);
 
@@ -195,7 +194,7 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
             
-            var decoder = Context.Decoder();
+            var decoder = Context.Decoder(false);
             var captured = CaptureServices.Operations.Capture(in exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured);
 
@@ -219,7 +218,7 @@ namespace Z0
             var x = Random.CpuVector<T>(w);
             var z1 = dynop.DynamicOp.Invoke(x);
             
-            var decoder = Context.Decoder();
+            var decoder = Context.Decoder(false);
             var capture = CaptureServices.Operations.Capture(in buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(capture);
 

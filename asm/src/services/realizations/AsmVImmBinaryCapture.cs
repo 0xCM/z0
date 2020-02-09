@@ -29,16 +29,8 @@ namespace Z0
             this.Resolver = resolver;
         }
         
-        // public AsmFunction CaptureBinary(byte imm8)
-        // {
-        //     var moniker = Resolver.Moniker;
-        //     var f = Resolver.@delegate(imm8);
-        //     var buffer = new byte[CaptureServices.DefaultBufferLen];
-        //     return Context.Decoder().DecodeFunction(CaptureServices.Capture().Capture(moniker.WithImm8(imm8), f, buffer));
-        // }
-
         public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-            => Context.Decoder().DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
+            => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
     }
 
     readonly struct AsmV256ImmBinaryCapture<T> : IAsmImmBinaryCapture<T>
@@ -59,16 +51,8 @@ namespace Z0
             this.Resolver = resolver;
         }
 
-        // public AsmFunction CaptureBinary(byte imm8)
-        // {
-        //     var moniker = Resolver.Moniker;
-        //     var f = Resolver.@delegate(imm8);
-        //     var buffer = new byte[CaptureServices.DefaultBufferLen];
-        //     return Context.Decoder().DecodeFunction(CaptureServices.Capture().Capture(moniker.WithImm8(imm8), f, buffer));
-        // }
-
         [MethodImpl(Inline)]
         public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-            => Context.Decoder().DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
+            => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
     }
 }

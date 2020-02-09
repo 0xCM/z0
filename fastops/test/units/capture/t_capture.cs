@@ -12,18 +12,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static zfunc;
 
-    class TestEventSink : AppService, ICaptureEventSink
-    {
-        public TestEventSink(ITestContext context)
-            : base(context)
-        {
-
-        }
-        public void Accept(in CaptureEventInfo info)
-        {
-            
-        }
-    }
 
     public sealed class t_capture : t_fastops<t_capture>
     {    

@@ -22,6 +22,9 @@ namespace Z0
         /// </summary>
         public readonly Span<byte> StateBuffer;
 
+        /// <summary>
+        /// The junction to which events will be relayed
+        /// </summary>
         readonly ICaptureJunction Junction;
 
         public static CaptureExchange Define(ICaptureJunction junction, Span<byte> capture, Span<byte> state)
@@ -75,9 +78,9 @@ namespace Z0
             => TargetBuffer.Slice(start, length);
 
         [MethodImpl(Inline)]
-        public ref readonly CapturedMember Complete(in CapturedMember captured)
+        public ref readonly CapturedMember Complete(in CaptureState state, in CapturedMember captured)
         {
-            Junction.Complete(this, captured);
+            Junction.Complete(this, state, captured);
             return ref captured;
         }
 
@@ -100,7 +103,7 @@ namespace Z0
                     
             public void Accept(in CaptureExchange exchange, in CaptureState state){}
 
-            public void Complete(in CaptureExchange exchange, in CapturedMember captured) {}
+            public void Complete(in CaptureExchange exchange, in CaptureState state, in CapturedMember captured) {}
         }
     }
 }

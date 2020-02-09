@@ -11,7 +11,7 @@ namespace Z0
 
     using System.Runtime.CompilerServices;
     using static zfunc;
-
+    using Z0;
 
     readonly struct CaptureStats
     {
@@ -36,6 +36,7 @@ namespace Z0
         }
     }
 
+
     readonly struct CaptureStatsSink : ICaptureEventSink
     {                
         readonly Action<CaptureStats> OnComplete;
@@ -52,7 +53,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Accept(in CaptureEventInfo info)
+        public void Accept(in CaptureEventData info)
         {
             (var offset, var value) = Record(info);
             Classify(offset,value);
@@ -91,27 +92,30 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        static (int offset, byte value) Record(in CaptureEventInfo info)
+        static (int offset, byte value) Record(in CaptureEventData info)
         {
             var offset = Offset(info);
-            var value =info.CaptureState.Data;
+            var value =info.CaptureState.Payload;
             info[offset] = value;
             return (offset, value);
         }
 
         [MethodImpl(Inline)]
-        static Span<byte> State(in CaptureEventInfo src)
+        static Span<byte> State(in CaptureEventData src)
             => src.StateBuffer;
 
         [MethodImpl(Inline)]
-        static int Offset(in CaptureEventInfo src)        
+        static int Offset(in CaptureEventData src)        
             => src.CaptureState.Offset;        
 
         [MethodImpl(Inline)]
-        static byte Value(in CaptureEventInfo src)
-            => src.CaptureState.Data;
+        static byte Value(in CaptureEventData src)
+            => src.CaptureState.Payload;
 
+        public void Complete(in CaptureEventData data)
+        {
             
+        }
     }
 
     enum CaptureByteCode : byte

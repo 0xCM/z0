@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, OpIdentity baseid)
-            => new AsmImmUnaryCapture(context.WithEmptyClrIndex(), src,baseid);
+            => new AsmImmUnaryCapture(context, src,baseid);
 
         [MethodImpl(Inline)]
         AsmImmUnaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
@@ -32,7 +32,7 @@ namespace Z0
             this.Context = context;
             this.Method = method;
             this.BaseId = baseid;
-            this.Decoder = context.Decoder();
+            this.Decoder = context.Decoder(false);
         }
 
         public AsmFunction Capture(in CaptureExchange exchange, byte imm)
@@ -54,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, OpIdentity baseid)
-            => new AsmImmBinaryCapture(context.WithEmptyClrIndex(), src,baseid);
+            => new AsmImmBinaryCapture(context, src,baseid);
 
         [MethodImpl(Inline)]
         AsmImmBinaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
@@ -62,7 +62,7 @@ namespace Z0
             this.Context = context;
             this.Method = method;
             this.BaseId = baseid;
-            this.Decoder = context.Decoder();
+            this.Decoder = context.Decoder(false);
         }
 
         public AsmFunction Capture(in CaptureExchange exchange, byte imm)

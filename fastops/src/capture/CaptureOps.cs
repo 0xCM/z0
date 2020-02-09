@@ -15,18 +15,19 @@ namespace Z0
 
     unsafe readonly struct CaptureOps : ICaptureOps
     {
-        public Option<CapturedOpData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src)
+        public Option<CapturedData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src)
         {
             try
             {
-                var result = capture(ref head(src), exchange);            
-                var bytes = exchange.Target(0, result.ByteCount).ToArray();
-                return CapturedOpData.Define(id,result, bytes);                
+                var outcome = capture(ref head(src), exchange);            
+                var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
+                var state = outcome.State;
+                return CapturedData.Define(id, outcome, bytes);                
             }
             catch(Exception e)
             {
                 errout(e);
-                return none<CapturedOpData>();
+                return none<CapturedData>();
             }
         }
 
@@ -35,10 +36,11 @@ namespace Z0
             try
             {
                 var pSrc = jit(src);
-                var result = capture(pSrc, exchange);            
-                var bytes = exchange.Target(0, result.ByteCount).ToArray();
-                var captured = CapturedMember.Define(id, src, result.Range, bytes, result);                
-                return exchange.Complete(captured);
+                var outcome = capture(pSrc, exchange);            
+                var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
+                var captured = CapturedMember.Define(id, src, outcome.Range, bytes, outcome);                
+                var state = outcome.State;
+                return exchange.Complete(state,captured);
             }
             catch(Exception e)
             {
@@ -52,10 +54,11 @@ namespace Z0
             try
             {
                 var pSrc = jit(src).Ptr;
-                var result =  capture(pSrc, exchange);   
-                var bytes = exchange.Target(0, result.ByteCount).ToArray();
-                var captured = CapturedMember.Define(id, src, result.Range, bytes, result);                
-                return exchange.Complete(captured);
+                var outcome =  capture(pSrc, exchange);   
+                var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
+                var captured = CapturedMember.Define(id, src, outcome.Range, bytes, outcome);                
+                var state = outcome.State;
+                return exchange.Complete(state,captured);
 
             }
             catch(Exception e)
@@ -70,10 +73,11 @@ namespace Z0
             try
             {
                 var pSrc = jit(src);
-                var result = capture(pSrc, exchange);
-                var bytes = exchange.Target(0, result.ByteCount).ToArray();
-                var captured = CapturedMember.Define(id, src, result.Range, bytes, result);  
-                return exchange.Complete(captured);
+                var outcome = capture(pSrc, exchange);
+                var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
+                var captured = CapturedMember.Define(id, src, outcome.Range, bytes, outcome);  
+                var state = outcome.State;
+                return exchange.Complete(state,captured);
             }
             catch(Exception e)
             {
@@ -96,39 +100,40 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static CaptureCompletion Complete(CaptureTermCode tc, long start, long end, int delta)
-            => CaptureCompletion.Define((ulong)start, (ulong)(end + delta), tc);
+        static CaptureOutcome Complete(in CaptureState state, CaptureTermCode tc, long start, long end, int delta)
+            => CaptureOutcome.Define(state, (ulong)start, (ulong)(end + delta), tc);
 
         [MethodImpl(Inline)]
-        CaptureCompletion capture(ref byte src, in CaptureExchange exchange)
+        CaptureOutcome capture(ref byte src, in CaptureExchange exchange)
             => capture((byte*)Unsafe.AsPointer(ref src), exchange);
 
         [MethodImpl(Inline)]
-        CaptureCompletion capture(IntPtr src, in CaptureExchange exchange)
+        CaptureOutcome capture(IntPtr src, in CaptureExchange exchange)
             => capture(src.ToPointer<byte>(), exchange);
 
         [MethodImpl(Inline)]
-        CaptureCompletion capture(byte* pSrc, in CaptureExchange exchange)
+        CaptureOutcome capture(byte* pSrc, in CaptureExchange exchange)
         {
             var limit = exchange.BufferLength - 1;
             var start = (long)pSrc;
             var offset = 0;            
             int? ret_offset = null;
             var end = (long)pSrc;
+            var state = default(CaptureState);
 
             while(offset < limit)
             {
-                var state = Step(exchange, ref offset, ref end, ref pSrc);                                
+                state = Step(exchange, ref offset, ref end, ref pSrc);                                
                 exchange.Accept(state);                
 
-                if(ret_offset == null && state.Data == RET)
+                if(ret_offset == null && state.Payload == RET)
                     ret_offset = offset;                 
 
                 var tc = CalcTerm(exchange, offset, ret_offset, out var delta);
                 if(tc != null)                
-                    return Complete(tc.Value, start,end, delta);
+                    return Complete(state, tc.Value, start,end, delta);
             }
-            return Complete(CTC_BUFFER_OUT,start,end,0);
+            return Complete(state, CTC_BUFFER_OUT,start,end,0);
         }                    
     }
 }

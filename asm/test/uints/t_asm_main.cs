@@ -15,24 +15,91 @@ namespace Z0
     using static zfunc;
     using static HK;
     using AsmSpecs;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
 
     class t_asm_main : t_asm_explicit<t_asm_main>
     {
+        protected static IAsmHexWriter HexTestWriter<T>(IAsmContext context, [Caller] string test = null)
+        {
+            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(T).Name), test, FileExtensions.Hex);    
+            return  context.HexWriter(dst);
+        }
+
+        protected static IAsmHexWriter StateTestWriter<T>(IAsmContext context, [Caller] string test = null)
+        {
+            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(T).Name), test, FileExtensions.HexState);    
+            return  context.HexWriter(dst);
+        }
+
+        protected static IAsmFunctionWriter AsmTestWriter<T>(IAsmContext context, [Caller] string test = null)
+        {
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(T).Name), test, FileExtensions.Asm);
+            var format = AsmFormatConfig.Default.WithFunctionTimestamp();
+            return context.WithFormat(format).AsmWriter(path);
+        }
+
         protected override void OnExecute(in AsmBuffers buffers)
         {
-            // capture_constants(buffers);
+            
+            
+            //capture_constants(buffers);
+            TestClient(Context);
             // capture_shifter(buffers);
             // capture_shuffler(buffers);
             // capture_archived(buffers);
-            archive_context(buffers);
-            //archive_selected(buffers);
+            archive_selected(buffers);
+            //archive_context(buffers);
+        }
+
+        static void TestClient(IAsmContext context)
+        {
+            var state = new List<CaptureState>();
+            var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
+
+            using var hexout = HexTestWriter<t_asm_main>(context);
+            using var asmout = AsmTestWriter<t_asm_main>(context);            
+            using var stateout = StateTestWriter<t_asm_main>(context);
+                        
+            void OnExecute(in AsmBuffers buffers)
+            {            
+                var capture = context.Capture(buffers.Capture);
+                capture.CaptureBits(buffers.Exchange, f, hexout);
+                capture.CaptureAsm(buffers.Exchange, f, asmout);
+            }
+
+            void OnCaptureEvent(in CaptureEventData data)
+            {
+                print($"{data.CaptureState}", SeverityLevel.HiliteBL);
+                state.Add(data.CaptureState);
+            }
+
+            var composition = context.BufferedClient(OnExecute);
+            var sink = CaptureReceiptSink.Create(OnCaptureEvent);
+            using var buffers = context.Buffers(sink);
+            composition.Execute(buffers);
+
+            var bytes = state.Select(s => s.Payload).ToArray();
+            var code = AsmCode.Define(f.Identify(), bytes);
+            stateout.Write(code);            
+        }
+
+        public override void Accept(in CaptureEventData data)
+        {
+            //Trace($"{data.CaptureState}");
+        }
+
+        public override void Complete(in CaptureEventData data)
+        {
+
         }
 
         void archive_selected(in AsmBuffers buffers)
         {
             var archive = Context.Archiver();
-            archive.Archive(AssemblyId.CoreFunc);
+            archive.Archive(AssemblyId.Intrinsics);
         }
+
 
         void archive_context(in AsmBuffers buffers)
         {
@@ -43,9 +110,6 @@ namespace Z0
                             select c.AssemblyId;
             foreach(var id in selection)
                 archive.Archive(id);    
-
-            // archive.Archive(AssemblyId.GMath);
-            // archive.Archive(AssemblyId.Intrinsics);
         }
 
         [MethodImpl(Inline)]
@@ -69,7 +133,7 @@ namespace Z0
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();            
         
-            var capture = Context.Capture();
+            var capture = Context.Capture(buffers.Capture);
 
             var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
         
@@ -82,7 +146,7 @@ namespace Z0
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();
          
-            var capture = Context.Capture();
+            var capture = Context.Capture(buffers.Capture);
 
             var f = shifter(4);
             capture.CaptureBits(buffers.Exchange, f, hex);
@@ -94,7 +158,7 @@ namespace Z0
             using var hex = HexTestWriter();
             using var asm = AsmTestWriter();
 
-            var capture = Context.Capture();
+            var capture = Context.Capture(buffers.Capture);
 
             var f = shuffler<uint>(n2);
             capture.CaptureBits(buffers.Exchange, f, hex);

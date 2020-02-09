@@ -21,12 +21,12 @@ namespace Z0
             => AsmArchiver.Create(context);
 
         [MethodImpl(Inline)]
-        public static IAsmDecoder Decoder(this IAsmContext context, int? bufferlen = null)
-            => AsmDecoder.Create(context, bufferlen);                        
+        public static IAsmDecoder Decoder(this IAsmContext context, bool emitcil = true)
+            => AsmDecoder.Create(context, emitcil);                        
 
         [MethodImpl(Inline)]
-        public static IAsmCaptureService Capture(this IAsmContext context)
-            => AsmCaptureService.Create(context);
+        public static IAsmCaptureService Capture(this IAsmContext context, ICaptureControl control)
+            => AsmCaptureService.Create(context,control);
 
         [MethodImpl(Inline)]
         public static IAsmHexWriter HexWriter(this IAsmContext context, FilePath dst, bool append = false)
@@ -173,5 +173,8 @@ namespace Z0
 
         public static IAsmExecBuffer ExecBuffer(this IAsmContext context, int? size = null)
             => AsmExecBuffer.Create(context,size);
+        
+        public static IAsmBufferedClient BufferedClient(this IAsmContext context, AsmBufferClient client)
+            => AsmBufferedClient.Create(context, client);
     }
 }

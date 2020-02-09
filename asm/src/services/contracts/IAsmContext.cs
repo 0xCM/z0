@@ -11,22 +11,36 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Defines a nexus of shared state and services for assembly-related services
+    /// </summary>
     public interface IAsmContext : IOpContext
     {
         int ContextId {get;}
         
         IClrIndex ClrIndex {get;}
 
+        /// <summary>
+        /// The default asm formatting configuration
+        /// </summary>
         AsmFormatConfig AsmFormat {get;}
 
+        /// <summary>
+        /// The default cil formatting configuration
+        /// </summary>
         CilFormatConfig CilFormat {get;}
 
+        /// <summary>
+        /// The assemblies available to the context
+        /// </summary>
         IAssemblyComposition Assemblies {get;}
 
-        DataResourceIndex Resources {get;}
-
+        /// <summary>
+        /// Changes the default asm formatting configuration
+        /// </summary>
+        /// <param name="config">The new formatting configuration</param>
         IAsmContext WithFormat(AsmFormatConfig config);
-
+               
         IAsmContext WithEmptyClrIndex();
     }
 }

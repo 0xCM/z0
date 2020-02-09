@@ -9,66 +9,47 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
  
-    using static zfunc;
-
-    public readonly struct CapturedOpData
-    {
-        
-        public static CapturedOpData Define(OpIdentity id, CaptureCompletion info, byte[] content)
-            => new CapturedOpData(id,info,content);
-
-        CapturedOpData(OpIdentity id, CaptureCompletion info, byte[] content)
-        {
-            this.Id = id;
-            this.CaptureInfo = info;
-            this.Content = content;
-        }
-        
-        public readonly OpIdentity Id;
-
-        public readonly CaptureCompletion CaptureInfo;
-
-        public readonly byte[] Content;
-
-    }
+    using static zfunc;    
 
     /// <summary>
     ///  Encapsulates all aspects of a member capture operation
     /// </summary>
-    public sealed class CapturedMember
+    public readonly struct CapturedMember
     {        
         public static CapturedMember Empty => default;
 
-        public static CapturedMember Define(OpIdentity id, MethodInfo src, MemoryRange origin, byte[] content, CaptureCompletion result)
+        public static CapturedMember Define(OpIdentity id, MethodInfo src, MemoryRange origin, byte[] content, CaptureOutcome result)
             => new CapturedMember(id, src.Signature().Format(), null, src, origin, content, result);
 
-        public static CapturedMember Define(OpIdentity id, Delegate src, MemoryRange origin, byte[] content, CaptureCompletion result)
+        public static CapturedMember Define(OpIdentity id, Delegate src, MemoryRange origin, byte[] content, CaptureOutcome result)
             => new CapturedMember(id, id, src, src.Method, origin, content, result);
 
         [MethodImpl(Inline)]
-        CapturedMember(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange origin, byte[] content, CaptureCompletion result)
+        CapturedMember(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange origin, byte[] content, CaptureOutcome result)
         {
             require((int)origin.Length == content.Length);
             this.Delegate = src;
             this.Method = method;
             this.Origin = origin;
             this.Code = AsmCode.Define(id, origin, label, content);
-            this.CaptureInfo = result;
+            this.Outcome = result;
         }
 
-        public Option<Delegate> Delegate;
+        public readonly Option<Delegate> Delegate;
 
-        public MethodInfo Method {get;}
+        public readonly MethodInfo Method;
 
-        public MemoryRange Origin {get;}
+        public readonly MemoryRange Origin;
 
-        public AsmCode Code {get;}
+        public readonly AsmCode Code;
 
-        public CaptureCompletion CaptureInfo {get;}
+        public readonly CaptureOutcome Outcome;
 
-        public OpIdentity Id => Code.Id;
+        public OpIdentity Id 
+            => Code.Id;
 
-        public string Label => Code.Label;
+        public string Label 
+            => Code.Label;
          
         public ulong Length 
             => Origin.Length;
@@ -77,24 +58,6 @@ namespace Z0
             => Length == 0;
 
         public CapturedMember Replicate()
-            => new CapturedMember(Id, Label, Delegate.ValueOrDefault(), Method, Origin, Code.Encoded.Replicate(), CaptureInfo);
-
-	    public string FormatHexLines(HexLineFormat? fmt = null)
-        {
-            var data = this;
-            if(data.IsEmpty)
-                return "<no_data>";
-            
-            var src = data.Code;
-            var dst = text();
-			dst.AppendLine($"; label   : {data.Method.Signature().Format()}");
-			dst.AppendLine($"; location: {src.Origin.Format()}, length: {src.Origin.Length} bytes");
-            var lines = src.Encoded.FormatHexLines(fmt);
-            dst.Append(lines.Concat(AsciEscape.Eol));
-            dst.AppendLine(MethodSep);
-            return dst.ToString();
-        }         
- 
-        static string MethodSep => new string('_',80);
+            => new CapturedMember(Id, Label, Delegate.ValueOrDefault(), Method, Origin, Code.Encoded.Replicate(), Outcome);
     }
 }

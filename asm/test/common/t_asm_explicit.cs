@@ -17,15 +17,16 @@ namespace Z0
     using AsmSpecs;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Z0;
 
-    public abstract class t_asm_explicit<E> : UnitTest<E>, IExplicitTest
+    public abstract class t_asm_explicit<E> : UnitTest<E>, IExplicitTest, ICaptureEventSink
         where E : t_asm_explicit<E>
     {
         protected IAsmContext Context;
 
         public t_asm_explicit()
         {
-            Context = AsmContext.New( 
+            Context = AsmContext.New(
                 Designators.Data.Designated,
                 Designators.GMath.Designated,
                 Designators.Intrinsics.Designated,
@@ -36,11 +37,17 @@ namespace Z0
                 Designators.Root.Designated,
                 Designators.DataCore.Designated
                 );
+                                    
         }
    
         public void Execute()
         {
-            using var buffers = Context.Buffers();
+            void OnCaptureEvent(in CaptureEventData data)
+            {
+                Trace($"{data.CaptureState}");
+            }
+
+            using var buffers = Context.Buffers(CaptureReceiptSink.Create(OnCaptureEvent));
             OnExecute(buffers);
         }
 
@@ -58,16 +65,22 @@ namespace Z0
             return  Context.HexWriter(dst);
         }
 
-        protected ICaptureWriter NativeTestWriter([Caller] string test = null)
-        {
-            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
-            return  CaptureServices.Writer(dst);
-        }
 
         protected IAsmFunctionWriter AsmTestWriter([Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Asm);    
             return Context.WithFormat(DefaultAsmFormat).AsmWriter(path);
-        }        
+        }
+
+
+        public virtual void Accept(in CaptureEventData data)
+        {
+            
+        }
+
+        public virtual void Complete(in CaptureEventData data)
+        {
+            
+        }
     }
 }

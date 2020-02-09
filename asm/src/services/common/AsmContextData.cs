@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    struct AsmContextData
+    class AsmContextData
     {
         public static AsmContextData Create(
                 IAssemblyComposition assemblies, 

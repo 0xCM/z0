@@ -16,7 +16,7 @@ namespace Z0
 
     public interface IClrIndex
     {
-        Option<CilFunction> FincCil(MethodInfo mi);
+        Option<CilFunction> FindCil(MethodInfo mi);
 
         Option<Type> FindType(int id);
 

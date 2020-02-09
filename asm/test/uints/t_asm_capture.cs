@@ -37,45 +37,45 @@ namespace Z0
         AsmFormatConfig AsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-        void capture_constants(in CaptureExchange exchange)
-        {
-            var svc = Context.Capture();
+        // void capture_constants(in CaptureExchange exchange)
+        // {
+        //     var svc = Context.Capture();
 
-            using var hex = HexTestWriter();
-            using var asm = AsmTestWriter();            
+        //     using var hex = HexTestWriter();
+        //     using var asm = AsmTestWriter();            
         
-            var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
+        //     var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
         
-            svc.CaptureBits(exchange, f, hex);
-            svc.CaptureAsm(exchange, f, asm);
-        }
+        //     svc.CaptureBits(exchange, f, hex);
+        //     svc.CaptureAsm(exchange, f, asm);
+        // }
 
-        void capture_shifter(in CaptureExchange exchange)
-        {
-            var svc = Context.Capture();
+        // void capture_shifter(in CaptureExchange exchange)
+        // {
+        //     var svc = Context.Capture();
 
-            using var hex = HexTestWriter();
-            using var asm = AsmTestWriter();
+        //     using var hex = HexTestWriter();
+        //     using var asm = AsmTestWriter();
 
-            var f = shifter(4);
-            svc.CaptureBits(exchange, f, hex);
-            svc.CaptureAsm(exchange, f, asm);            
-        }
+        //     var f = shifter(4);
+        //     svc.CaptureBits(exchange, f, hex);
+        //     svc.CaptureAsm(exchange, f, asm);            
+        // }
 
-        void capture_shuffler(in CaptureExchange exchange)
-        {
-            var svc = Context.Capture();
+        // void capture_shuffler(in CaptureExchange exchange)
+        // {
+        //     var svc = Context.Capture();
 
-            using var hex = HexTestWriter();
-            using var asm = AsmTestWriter();
+        //     using var hex = HexTestWriter();
+        //     using var asm = AsmTestWriter();
 
-            var f = shuffler<uint>(n2);
-            svc.CaptureBits(exchange, f, hex);
-            svc.CaptureAsm(exchange, f, asm);            
+        //     var f = shuffler<uint>(n2);
+        //     svc.CaptureBits(exchange, f, hex);
+        //     svc.CaptureAsm(exchange, f, asm);            
 
-            var g = shuffler(n3);
-            svc.CaptureBits(exchange, g, hex);
-            svc.CaptureAsm(exchange, g, asm);            
-        }
+        //     var g = shuffler(n3);
+        //     svc.CaptureBits(exchange, g, hex);
+        //     svc.CaptureAsm(exchange, g, asm);            
+        // }
     }
 }

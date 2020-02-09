@@ -10,6 +10,10 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Describes the capture and subsequent emission of single routine, such
+    /// as a member function or a delegate
+    /// </summary>
     public readonly struct AsmEmissionToken : IAsmEmissionToken
     {
         /// <summary>
@@ -28,7 +32,7 @@ namespace Z0
         public readonly MemoryRange Origin;
 
         [MethodImpl(Inline)]
-        public static AsmEmissionToken Define(CaptureCompletion cc, OpUri uri)        
+        public static AsmEmissionToken Define(CaptureOutcome cc, OpUri uri)        
             => new AsmEmissionToken(cc, uri);
 
         [MethodImpl(Inline)]
@@ -40,7 +44,7 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        AsmEmissionToken(CaptureCompletion cc, OpUri uri)
+        AsmEmissionToken(CaptureOutcome cc, OpUri uri)
         {
             this.TermCode = cc.TermCode;
             this.Uri = uri;

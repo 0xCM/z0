@@ -20,6 +20,8 @@ namespace Z0
 
         public static FileExtension Hex =>  FileExtension.Define("hex");
 
+        public static FileExtension HexState =>  FileExtension.Define("hex.state");
+
         public static FileExtension Cs =>  FileExtension.Define("cs");
         
 

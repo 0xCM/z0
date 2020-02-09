@@ -18,17 +18,20 @@ namespace Z0
 
     class AsmDecoder : IAsmDecoder
     {
-        public static IAsmDecoder Create(IAsmContext context, int? bufferlen = null)
-            => new AsmDecoder(context, bufferlen);
-
-        readonly byte[] _Buffer;
-
         public IAsmContext Context {get;}
 
-        AsmDecoder(IAsmContext context, int? bufferlen)
+        readonly byte[] Buffer;
+
+        readonly bool EmitCil;
+
+        public static IAsmDecoder Create(IAsmContext context, bool emitcil = true)
+            => new AsmDecoder(context, CaptureServices.DefaultBufferLen, emitcil);
+
+        AsmDecoder(IAsmContext context, int bufferlen, bool cil)
         {
             this.Context = context;
-            this._Buffer = new byte[bufferlen ?? CaptureServices.DefaultBufferLen];
+            this.EmitCil = cil;
+            this.Buffer = new byte[bufferlen];
         }
     
         /// <summary>
@@ -61,9 +64,16 @@ namespace Z0
         public AsmFunction DecodeFunction(CapturedMember src)
         {
             var list = DecodeInstructions(src.Code);
-            var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.CaptureInfo);
-            var cil = Context.ClrIndex.FincCil(src.Method).ValueOrDefault();
-            return BuildFunction(block).WithCil(cil);            
+            var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.Outcome);
+            var f = BuildFunction(block);
+
+            if(EmitCil)
+            {
+                var cil = Context.ClrIndex.FindCil(src.Method).ValueOrDefault();
+                return f.WithCil(cil);            
+            }
+            else
+                return f;
         }
 
         AsmFunction BuildFunction(AsmInstructionBlock src)
