@@ -24,6 +24,9 @@ namespace Z0
         public static ICaptureControl Control()
             => CaptureControl.Create();
 
+        [MethodImpl(Inline)]
+        public static ICaptureEventSink OnReceipt(OnCaptureReceipt observer)
+            => CaptureReceiptSink.Create(observer);
 
         [MethodImpl(Inline)]
         public static ICaptureControl Control(ICaptureEventSink sink)

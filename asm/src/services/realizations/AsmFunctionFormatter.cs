@@ -17,15 +17,14 @@ namespace Z0
 
     using Iced = Iced.Intel;
 
-    readonly struct AsmFunctionFormatter : IAsmFunctionFormatter, IBaseAsmFormatter
+    readonly struct AsmFunctionFormatter : IAsmFunctionFormatter, IAsmInstructionFormatter
     {        
         public AsmFormatConfig Config {get;}
 
         public IAsmContext Context {get;}
-
         
         [MethodImpl(Inline)]
-        public static IBaseAsmFormatter BaseFormatter(IAsmContext config)
+        public static IAsmInstructionFormatter BaseFormatter(IAsmContext config)
             => new AsmFunctionFormatter(config);
 
         [MethodImpl(Inline)]
@@ -68,7 +67,7 @@ namespace Z0
             return lines.ToArray();
         }    
 
-        public ReadOnlySpan<string> CaptureBaseFormat(Iced.InstructionList src, ulong baseaddress)
+        public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong baseaddress)
         {            
             static string LineLabel(ulong src)
                 => concat(src.FormatSmallHex(), Hex.PostSpec, space());
@@ -125,7 +124,6 @@ namespace Z0
             }
             return dst;
         }
-
 
         /// <summary>
         /// Formats the function body encoding as a comma-separated list of hex values
@@ -232,4 +230,3 @@ namespace Z0
         }
     }
 }
-

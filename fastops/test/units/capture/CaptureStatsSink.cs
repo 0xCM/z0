@@ -36,7 +36,6 @@ namespace Z0
         }
     }
 
-
     readonly struct CaptureStatsSink : ICaptureEventSink
     {                
         readonly Action<CaptureStats> OnComplete;

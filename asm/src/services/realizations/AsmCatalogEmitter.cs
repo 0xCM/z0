@@ -8,21 +8,28 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     using Z0.AsmSpecs;
 
+    using static AsmServiceMessages;
+
     using static zfunc;
+    using Z0;
 
-    class AsmCatalogEmitter : IAsmCatalogEmitter
+    class AsmCatalogEmitter : IAsmCatalogEmitter, IAsmEmissionSink
     {
-        public static IAsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog)
-            => new AsmCatalogEmitter(context,catalog);
+        [MethodImpl(Inline)]
+        public static IAsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog, IAsmEmissionSink observer)
+            => new AsmCatalogEmitter(context,catalog,observer);
 
-        AsmCatalogEmitter(IAsmContext context, IOperationCatalog catalog)
+        [MethodImpl(Inline)]
+        AsmCatalogEmitter(IAsmContext context, IOperationCatalog catalog, IAsmEmissionSink observer)
         {
             this.Context = context;
             this.Catalog = catalog;
             this.Decoder = Context.Decoder();
+            this.Observer = observer != null ? some(observer) : none<IAsmEmissionSink>();
         }
 
         public IAsmContext Context {get;}
@@ -31,7 +38,13 @@ namespace Z0
 
         readonly IAsmDecoder Decoder;
 
-        readonly IAsmEmissionSink EmissionSink;
+        readonly Option<IAsmEmissionSink> Observer;
+
+        IAsmEmissionSink Sink
+        {
+            [MethodImpl(Inline)]
+            get => this;
+        }
         
         void IAsmCatalogEmitter.EmitPrimary(in CaptureExchange exchange, Action<AsmEmissionGroup> receipt)
         {
@@ -110,7 +123,7 @@ namespace Z0
         }        
 
         void Emit(in CaptureExchange exchange, DirectOpGroupSpec group, IAsmFunctionArchive dst, Action<AsmEmissionGroup> receipt)
-        {                        
+        {                                    
             var functions = new List<AsmFunction>();
             foreach(var spec in group.Members)
                 functions.Add(Decode(exchange, spec.Id, spec.Root));
@@ -118,8 +131,8 @@ namespace Z0
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(group.Id, functions.ToArray());
-                var tGroup = dst.Save(fGroup,true);
-                tGroup.OnSome(receipt);
+                OnSave(dst.Save(fGroup, true), receipt);
+                //tGroup.OnSome(receipt).OnSome(g => Sink.Accept(g));
             }                        
         }
 
@@ -131,8 +144,10 @@ namespace Z0
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(op.Id, functions.ToArray());
-                var tGroup = dst.Save(fGroup,true);
-                tGroup.OnSome(receipt);
+                OnSave(dst.Save(fGroup, true), receipt);
+
+            //var tGroup = dst.Save(fGroup, true);
+               // tGroup.OnSome(receipt).OnSome(g => Sink.Accept(g));
             }
         }
 
@@ -142,13 +157,14 @@ namespace Z0
             {                                                
                 foreach(var closure in op.Close())
                 {
-                    var svc = Context.ImmUnaryCaptureService(closure.ClosedMethod, closure.Id);
+                    var svc = Context.UnaryImmCapture(closure.ClosedMethod, closure.Id);
                     var functions = svc.Capture(in exchange, ImmSelection);
                     if(functions.Length != 0)
                     {
                         var fGroup = AsmFunctionGroup.Define(op.Id, functions);
-                        var tGroup = dst.Save(fGroup,true);
-                        tGroup.OnSome(receipt);
+                        OnSave(dst.Save(fGroup, true), receipt);
+                        //var tGroup = dst.Save(fGroup, true);                        
+                        //tGroup.OnSome(receipt).OnSome(g => Sink.Accept(g));
                     }
                 }
             }
@@ -156,13 +172,14 @@ namespace Z0
             {
                 foreach(var closure in op.Close())
                 {
-                    var svc = Context.ImmBinaryCaptureService(closure.ClosedMethod, closure.Id);
+                    var svc = Context.BinaryImmCapture(closure.ClosedMethod, closure.Id);
                     var functions = svc.Capture(in exchange, ImmSelection);
                     if(functions.Length != 0)
                     {
                         var fGroup = AsmFunctionGroup.Define(op.Id, functions);
-                        var tGroup = dst.Save(fGroup, true);
-                        tGroup.OnSome(receipt);
+                        OnSave(dst.Save(fGroup, true), receipt);
+                        // var tGroup = dst.Save(fGroup, true);                        
+                        // tGroup.OnSome(receipt).OnSome(g => Sink.Accept(g));
                     }
                 }
             }
@@ -173,27 +190,28 @@ namespace Z0
             var tokens = new List<AsmEmissionToken>();
             foreach(var member in op.Members.Where(m => FunctionType.vunaryImm(m.Root)))
             {
-                var resolutions = Context.ImmUnaryCaptureService(member.Root, member.Id).Capture(in exchange, ImmSelection);
+                var resolutions = Context.UnaryImmCapture(member.Root, member.Id).Capture(in exchange, ImmSelection);
                 if(resolutions.Length != 0)
                 {
                     var fGroup = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
-                    var tGroup = dst.Save(fGroup,true);
-                    tGroup.OnSome(t => tokens.AddRange(t.Tokens));
+                    var tGroup = dst.Save(fGroup, true);
+                    tGroup.OnSome(t => tokens.AddRange(t.Tokens)).OnSome(g => Sink.Accept(g));
                 }
             }
 
             foreach(var member in op.Members.Where(m => FunctionType.vbinaryImm(m.Root)))
             {
-                var resolutions = Context.ImmBinaryCaptureService(member.Root, member.Id).Capture(in exchange, ImmSelection);
+                var resolutions = Context.BinaryImmCapture(member.Root, member.Id).Capture(in exchange, ImmSelection);
                 if(resolutions.Length != 0)
                 {
                     var fGroup = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
-                    var tGroup = dst.Save(fGroup,true);
-                    tGroup.OnSome(t => tokens.AddRange(t.Tokens));
+                    var tGroup = dst.Save(fGroup, true);
+                    tGroup.OnSome(t => tokens.AddRange(t.Tokens)).OnSome(g => Sink.Accept(g));
                 }
             }
 
-            receipt(tokens.ToGroup(op.Id));
+            if(tokens.Count != 0)
+                receipt(tokens.ToGroup(tokens[0].Uri.GroupUri));
         }                    
 
         DirectOpGroupSpec PrimaryGroup(DirectOpGroupSpec g)
@@ -213,10 +231,22 @@ namespace Z0
                 iter(ApiHosts.Select(HostArchive), a => a.Clear());
         }    
 
-        ref readonly AsmEmissionToken Emitted(in AsmEmissionToken src)
+        void OnSave(Option<AsmEmissionGroup> g, Action<AsmEmissionGroup> receipt)
         {
-            print(AsmServiceMessages.Emitted(src));            
-            return ref src;
+            g.OnSome(receipt).OnSome(g => Sink.Accept(g));
+        }
+
+        void IPointSink<AsmEmissionGroup>.Accept(in AsmEmissionGroup src)
+        {
+            if(Observer.IsSome())
+                Observer.Value.Accept(src);
+            else
+            {
+                foreach(var t in src.Tokens)
+                    print(Emitted(t));
+                //print(AsmServiceMessages.Emitted(src));
+            }
+
         }
 
         string ArchiveSubject(Type host, bool imm)
@@ -232,7 +262,7 @@ namespace Z0
             => Context.FunctionArchive(Catalog.AssemblyId, subject);
 
         AsmFunction Decode(in CaptureExchange exchange, OpIdentity id, MethodInfo method)
-            => Decoder.DecodeFunction(exchange, id, method);            
+            => Decoder.DecodeFunction(exchange, id, method);
 
         static byte[] ImmSelection => new byte[]{5,9,13};
     }

@@ -42,8 +42,5 @@ namespace Z0
         public static AppMsg CollectingStats(IOperationCatalog catalog)        
             => appMsg($"Collecting {catalog.CatalogName} catalog statistics", SeverityLevel.Info);
 
-        public static AppMsg CollectedStats(IOperationCatalog catalog, AsmStats stats)        
-            => appMsg($"Collected {catalog.CatalogName} catalog statistics: {stats}", SeverityLevel.Info);
-
     }
 }

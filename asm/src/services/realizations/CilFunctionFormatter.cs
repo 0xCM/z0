@@ -5,27 +5,24 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.IO;
-    using AsmSpecs;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-    readonly struct CilFormatter : ICilFormatter
+    readonly struct CilFunctionFormatter : ICilFunctionFormatter
     {
+        public IAsmContext Context {get;}
+
         [MethodImpl(Inline)]
-        public static ICilFormatter Create(IAsmContext context)
-            => new CilFormatter(context);
+        public static ICilFunctionFormatter Create(IAsmContext context)
+            => new CilFunctionFormatter(context);
         
-        CilFormatter(IAsmContext context)
+        [MethodImpl(Inline)]
+        CilFunctionFormatter(IAsmContext context)
         {
             this.Context = context;
         }
-
-        public IAsmContext Context {get;}
-
+        
         public string Format(CilFunction f)
         {
             var rendered = text();
@@ -45,5 +42,3 @@ namespace Z0
         }
     }
 }
-
-

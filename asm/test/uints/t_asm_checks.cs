@@ -57,7 +57,7 @@ namespace Z0
             var direct = Intrinsics.VectorizedDirect(width,name);
             var selected = direct.Union(generic).ToArray();            
             var path = Capture(buffers, selected,name);
-            var hex = Context.HexReader().Read(path);
+            var hex = Context.CodeReader().Read(path);
             
             var hexD = hex.Where(h => !h.Id.IsGeneric).ToDictionary(x => x.Id);
             var hexG = hex.Where(h => h.Id.IsGeneric).ToDictionary(x => x.Id);
@@ -388,7 +388,7 @@ namespace Z0
 
         public void vadd_check(in AsmBuffers buffers)
         {
-            var catalog = typeof(dinx).Assembly.OperationCatalog().CatalogName;
+            var catalog = AssemblyId.Intrinsics;
             var subject = nameof(dinx);
             var name = nameof(dinx.vadd);
 
@@ -419,10 +419,8 @@ namespace Z0
                         megacheck(buffers, name, d, g, math.add, gmath.add, i8);
                         Trace($"Verified {d}");
                     break;                       
-                }
-                
+                }                
             }
-
         }
 
         public void sub_megacheck(in AsmBuffers buffers)
@@ -532,7 +530,7 @@ namespace Z0
 
         void primal_match(in AsmBuffers buffers, string name, FixedWidth w, NumericKind kind)
         {
-            var catalog = nameof(gmath);
+            var catalog = AssemblyId.GMath;
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
@@ -552,7 +550,7 @@ namespace Z0
 
         void vector_match(in AsmBuffers buffers, string name, FixedWidth w, NumericKind kind)
         {
-            var catalog = typeof(dinx).Assembly.OperationCatalog().CatalogName;
+            var catalog = AssemblyId.Intrinsics;
             
             var idD = Identity.operation(name, w, kind, false);
             var idG = Identity.operation(name, w, kind, true);
@@ -629,21 +627,15 @@ namespace Z0
 
         protected void binop_match(in AsmBuffers buffers, N128 w, AsmCode a, AsmCode b)
         {
-            using var fBuffer = Context.ExecBuffer();
-            using var gBuffer = Context.ExecBuffer();
-
-            var f = fBuffer.BinaryOp(w, a);
-            var g = gBuffer.BinaryOp(w, b);
+            var f = buffers.LeftExec.BinaryOp(w, a);
+            var g = buffers.RightExec.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N256 w, AsmCode a, AsmCode b)
         {
-            using var fBuffer = Context.ExecBuffer();
-            using var gBuffer = Context.ExecBuffer();
-
-            var f = fBuffer.BinaryOp(w, a);
-            var g = gBuffer.BinaryOp(w, b);
+            var f = buffers.LeftExec.BinaryOp(w, a);
+            var g = buffers.RightExec.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
         

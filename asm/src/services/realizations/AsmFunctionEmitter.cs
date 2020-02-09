@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using System.IO;
     using AsmSpecs;
 
@@ -16,16 +17,15 @@ namespace Z0
     {
         public IAsmContext Context {get;}
 
-        public static AsmFunctionEmitter Create(IAsmContext context)
+        [MethodImpl(Inline)]
+        public static IAsmFunctionEmitter Create(IAsmContext context)
             => new AsmFunctionEmitter(context);
 
+        [MethodImpl(Inline)]
         AsmFunctionEmitter(IAsmContext context)
         {
             this.Context = context;
         }
-
-        public Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst)
-            => Context.CilWriter(dst).WriteCil(functions);
 
         public Option<Exception> EmitAsm(IEnumerable<AsmFunction> src, FilePath file)        
         {            

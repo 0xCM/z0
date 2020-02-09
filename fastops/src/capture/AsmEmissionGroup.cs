@@ -11,30 +11,30 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a grouping construct for emission of related functions
+    /// Defines a grouping construct that serves as evidence for emission of related functions
     /// </summary>
     public readonly struct AsmEmissionGroup
     {
         /// <summary>
         /// Defines a group of related emissions
         /// </summary>
-        /// <param name="groupid">The group identifier</param>
+        /// <param name="uri">The group uri</param>
         /// <param name="tokens">The group members</param>
         [MethodImpl(Inline)]
-        public static AsmEmissionGroup Define(OpIdentity groupid, AsmEmissionToken[] tokens)
-            => new AsmEmissionGroup(groupid, tokens);
-            
+        public static AsmEmissionGroup Define(OpUri uri, AsmEmissionToken[] tokens)
+            => new AsmEmissionGroup(uri, tokens);
+
         [MethodImpl(Inline)]
-        AsmEmissionGroup(OpIdentity groupid, AsmEmissionToken[] tokens)
+        AsmEmissionGroup(OpUri groupUri, AsmEmissionToken[] tokens)
         {
             this.Tokens = tokens;
-            this.Id = groupid;
+            this.Uri = groupUri;
         }
 
         /// <summary>
-        /// The group identity
+        /// The group uri
         /// </summary>
-        public readonly OpIdentity Id;
+        public readonly OpUri Uri;
         
         /// <summary>
         /// The group members

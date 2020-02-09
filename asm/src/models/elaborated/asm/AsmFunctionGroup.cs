@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a group of related assembly functions
     /// </summary>
     public readonly struct AsmFunctionGroup
-    {
+    {        
         public static AsmFunctionGroup Define(OpIdentity id, AsmFunction[] members)
         {            
             if(members.Length == 0)
@@ -29,10 +29,12 @@ namespace Z0
             this.Id = id;
             this.Members = members;            
         }
-        
+
         public readonly OpIdentity Id;
 
         public readonly AsmFunction[] Members;
-    }
 
+        public override string ToString() 
+            => Id;
+    }
 }

@@ -51,7 +51,7 @@ namespace Z0
 			}
 
             var dst = new AsmSpecs.Instruction[decoded.Count];
-            var formatted = Context.BaseAsmFormatter().CaptureBaseFormat(decoded,src.Origin.Start);
+            var formatted = Context.InstructionFormatter().FormatInstructions(decoded,src.Origin.Start);
             for(var i=0; i<dst.Length; i++)
                 dst[i] =  decoded[i].ToSpec(formatted[i]);
             return AsmInstructionList.Create(dst);

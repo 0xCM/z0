@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IAsmImmCapture
+    public interface IAsmImmCapture : IAsmService
     {
         AsmFunction Capture(in CaptureExchange exchange, byte imm8);
 
@@ -21,8 +21,7 @@ namespace Z0
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Capture(in exchange, immediates[i]);
             return dst;
-        }            
-        
+        }                    
     }
 
     public interface IAsmImmCapture<T> : IAsmImmCapture
@@ -31,22 +30,12 @@ namespace Z0
 
     }
 
-    public interface IAsmImmUnaryCapture : IAsmImmCapture
-    {
-        
-    }    
-
-    public interface IAsmImmBinaryCapture : IAsmImmCapture
-    {        
-                
-    }    
-
-    public interface IAsmImmUnaryCapture<T> : IAsmImmCapture<T>, IAsmImmUnaryCapture
+    public interface IAsmImmUnaryCapture<T> : IAsmImmCapture<T>, IAsmImmCapture
         where T : unmanaged        
     {
     }
 
-    public interface IAsmImmBinaryCapture<T> : IAsmImmCapture<T>,  IAsmImmBinaryCapture
+    public interface IAsmImmBinaryCapture<T> : IAsmImmCapture<T>,  IAsmImmCapture
         where T : unmanaged        
     {
     }

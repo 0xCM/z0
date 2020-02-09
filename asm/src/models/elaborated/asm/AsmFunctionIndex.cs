@@ -31,7 +31,6 @@ namespace Z0
         
         Dictionary<OpIdentity,AsmFunction> index;
 
-
         OpIdentity Id {get;}
         
         Option<AsmFunction> Lookup(OpIdentity id)

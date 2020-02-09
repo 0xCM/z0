@@ -10,8 +10,14 @@ namespace Z0
 
     using static zfunc;
 
-    public interface ICilWriter
+    /// <summary>
+    /// Defines service contract for persistent emission of cil functions that accompany asm functions
+    /// </summary>
+    public interface ICilFunctionWriter : IAsmService
     {
+        /// <summary>
+        /// The writer's destintation path
+        /// </summary>
         FilePath Target {get;}        
         
         Option<Exception> WriteCil(IEnumerable<AsmFunction> functions);     

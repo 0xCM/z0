@@ -12,63 +12,70 @@ namespace Z0
 
     using static zfunc;
 
-    readonly struct AsmImmUnaryCapture : IAsmImmCapture
+    public static class AsmImmCapture
     {
-        public IAsmContext Context {get;}
-        
-        readonly MethodInfo Method;
-
-        readonly OpIdentity BaseId;
-
-        readonly IAsmDecoder Decoder;
-
         [MethodImpl(Inline)]
-        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, OpIdentity baseid)
+        public static IAsmImmCapture Unary(IAsmContext context, MethodInfo src, OpIdentity baseid)
             => new AsmImmUnaryCapture(context, src,baseid);
 
         [MethodImpl(Inline)]
-        AsmImmUnaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
-        {            
-            this.Context = context;
-            this.Method = method;
-            this.BaseId = baseid;
-            this.Decoder = context.Decoder(false);
-        }
-
-        public AsmFunction Capture(in CaptureExchange exchange, byte imm)
-        {
-            var op = DynopImm.UnaryOp(HK.vk(), Method, BaseId, imm);
-            return Decoder.DecodeFunction(exchange, op.Id, op);
-        }
-    }
-
-    readonly struct AsmImmBinaryCapture : IAsmImmCapture
-    {
-        public IAsmContext Context {get;}
-        
-        readonly MethodInfo Method;
-
-        readonly OpIdentity BaseId;
-
-        readonly IAsmDecoder Decoder;
-
-        [MethodImpl(Inline)]
-        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, OpIdentity baseid)
+        public static IAsmImmCapture Binary(IAsmContext context, MethodInfo src, OpIdentity baseid)
             => new AsmImmBinaryCapture(context, src,baseid);
 
-        [MethodImpl(Inline)]
-        AsmImmBinaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
-        {            
-            this.Context = context;
-            this.Method = method;
-            this.BaseId = baseid;
-            this.Decoder = context.Decoder(false);
+        readonly struct AsmImmUnaryCapture : IAsmImmCapture
+        {
+            public IAsmContext Context {get;}
+            
+            readonly MethodInfo Method;
+
+            readonly OpIdentity BaseId;
+
+            readonly IAsmDecoder Decoder;
+
+            [MethodImpl(Inline)]
+            public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, OpIdentity baseid)
+                => new AsmImmUnaryCapture(context, src,baseid);
+
+            [MethodImpl(Inline)]
+            public AsmImmUnaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
+            {            
+                this.Context = context;
+                this.Method = method;
+                this.BaseId = baseid;
+                this.Decoder = context.Decoder(false);
+            }
+
+            public AsmFunction Capture(in CaptureExchange exchange, byte imm)
+            {
+                var op = DynopImm.UnaryOp(HK.vk(), Method, BaseId, imm);
+                return Decoder.DecodeFunction(exchange, op.Id, op);
+            }
         }
 
-        public AsmFunction Capture(in CaptureExchange exchange, byte imm)
+        readonly struct AsmImmBinaryCapture : IAsmImmCapture
         {
-           var op = DynopImm.BinaryOp(HK.vk(), Method, BaseId, imm);
-           return Decoder.DecodeFunction(exchange, op.Id, op);
+            public IAsmContext Context {get;}
+            
+            readonly MethodInfo Method;
+
+            readonly OpIdentity BaseId;
+
+            readonly IAsmDecoder Decoder;
+
+            [MethodImpl(Inline)]
+            public AsmImmBinaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
+            {            
+                this.Context = context;
+                this.Method = method;
+                this.BaseId = baseid;
+                this.Decoder = context.Decoder(false);
+            }
+
+            public AsmFunction Capture(in CaptureExchange exchange, byte imm)
+            {
+                var op = DynopImm.BinaryOp(HK.vk(), Method, BaseId, imm);
+                return Decoder.DecodeFunction(exchange, op.Id, op);
+            }
         }
     }
 }

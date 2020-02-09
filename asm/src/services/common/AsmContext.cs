@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Threading;
-    using System.Reflection;
-    using System.Linq;
 
     using static zfunc;
 
@@ -30,12 +27,6 @@ namespace Z0
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
         public static IAsmContext New(IAssemblyComposition assemblies)
             => new AsmContext(assemblies, ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
-
-        /// <summary>
-        /// Creates an empty context
-        /// </summary>
-        public static IAsmContext New()
-            => New(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
 
         public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
             => new AsmContext(AssemblyComposition.Empty, clrindex, resources, format, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
@@ -66,9 +57,6 @@ namespace Z0
 
         public IClrIndex ClrIndex 
             => Data.ClrIndex;
-
-        public DataResourceIndex Resources
-            => Data.Resources;
         
         public AsmFormatConfig AsmFormat 
             => Data.AsmFormat;
@@ -81,20 +69,8 @@ namespace Z0
 
         public IAsmContext WithFormat(AsmFormatConfig config)
         {
-            var copy = Replicate();
-            Data = copy.Data.WithFormat(config);
-            return copy;
+            var d = AsmContextData.Create(Assemblies, ClrIndex, Data.Resources, config, CilFormat);            
+            return new AsmContext(ContextId, d ,Random);            
         }
-
-        public IAsmContext WithEmptyClrIndex()
-        {
-            var copy = Replicate();
-            copy.Data = copy.Data.WithEmptyClrIndex();            
-            return copy;
-        }
-
-
-        AsmContext Replicate()
-            => new AsmContext(ContextId, Data ,Random);
     }   
 }

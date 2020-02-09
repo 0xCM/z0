@@ -53,5 +53,4 @@ namespace Z0
             where T : ICustomFormattable
                 => Formatting.format(src, config);
     }
-
 }

@@ -10,10 +10,16 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IAsmHexReader : IAsmService
+    /// <summary>
+    /// Defines service contract to support reading text-formatted encoded x86 asm data
+    /// </summary>
+    public interface IAsmCodeReader : IAsmService
     {
+        /// <summary>
+        /// Reads the content of a source file
+        /// </summary>
+        /// <param name="src">The source file path</param>
         IEnumerable<AsmCode> Read(FilePath src);
     }
-
 
 }

@@ -11,14 +11,9 @@ namespace Z0
 
     using Z0.AsmSpecs;
 
-    public interface IAsmFunctionWriter : IDisposable
+    public interface IAsmFunctionWriter : IAsmServiceAllocation
     {
-
         void Write(AsmFunction src);
-
-        void Write(AsmFunctionGroup src);
-        
-        byte[] TakeBuffer();   
 
     }
 }

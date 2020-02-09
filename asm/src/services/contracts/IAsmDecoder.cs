@@ -6,15 +6,15 @@ namespace Z0
 {        
     using System;
     using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using Z0.AsmSpecs;
 
     using static zfunc;
 
-    public interface IAsmDecoder
+    /// <summary>
+    /// Defines service contract for the decoding phase of the asm capture workflow
+    /// </summary>
+    public interface IAsmDecoder : IAsmService
     {
         /// <summary>
         /// Decodes an instruction list

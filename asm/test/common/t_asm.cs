@@ -42,10 +42,10 @@ namespace Z0
         protected AsmFormatConfig DefaultAsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-        protected IAsmHexWriter HexTestWriter([Caller] string test = null)
+        protected IAsmCodeWriter HexTestWriter([Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
-            return  Context.HexWriter(dst);
+            return  Context.CodeWriter(dst);
         }
 
         protected IAsmFunctionWriter AsmTestWriter([Caller] string test = null)
@@ -144,22 +144,22 @@ namespace Z0
             where T : unmanaged
                 => CheckAsmMatch(buffers, f,asm.Untyped);
 
-        protected AsmCode ReadAsm(string catalog, string subject, OpIdentity m)
-            => Context.CodeArchive(catalog,subject).Read(m).Single();
+        protected AsmCode ReadAsm(AssemblyId id, string host, OpIdentity m)
+            => Context.CodeArchive(id,host).Read(m).Single();
 
-        protected TypedAsm<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
+        protected TypedAsm<T> ReadAsm<W,T>(AssemblyId catalog, string host, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
         {
-            var archive = Context.CodeArchive(catalog,subject);
+            var archive = Context.CodeArchive(catalog,host);
             var id = Identity.contracted(opname, w, NumericType.kind<T>());
             Trace($"{id}");
-            var result = Context.CodeArchive(catalog,subject).Read<T>(id);
+            var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)
-                Claim.failwith($"Could not find {id} in the archive at {archive.Root}");
+                Claim.failwith($"Could not find {id} in the archive at {archive.RootFolder}");
             return result.Require();
         }
-
+        
         protected void CheckMatch<T>(in AsmBuffers buffers, BinaryOp<Vector128<T>> f, BinaryOp128 g)
             where T : unmanaged
         {
@@ -196,11 +196,11 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = buffers.MainExec.BinaryOp(w,ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w,ReadAsm(AssemblyId.GMath, Math, moniker));
 
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -214,10 +214,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -248,10 +248,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -266,10 +266,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -283,10 +283,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -299,10 +299,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -315,10 +315,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -332,10 +332,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, Math, moniker));
+            var f2 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(GMath, GMath, moniker.WithGeneric()));
+            var f3 = buffers.MainExec.BinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
     }

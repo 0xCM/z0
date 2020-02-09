@@ -20,16 +20,16 @@ namespace Z0
 
     class t_asm_main : t_asm_explicit<t_asm_main>
     {
-        protected static IAsmHexWriter HexTestWriter<T>(IAsmContext context, [Caller] string test = null)
+        protected static IAsmCodeWriter HexTestWriter<T>(IAsmContext context, [Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(T).Name), test, FileExtensions.Hex);    
-            return  context.HexWriter(dst);
+            return  context.CodeWriter(dst);
         }
 
-        protected static IAsmHexWriter StateTestWriter<T>(IAsmContext context, [Caller] string test = null)
+        protected static IAsmCodeWriter StateTestWriter<T>(IAsmContext context, [Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(T).Name), test, FileExtensions.HexState);    
-            return  context.HexWriter(dst);
+            return  context.CodeWriter(dst);
         }
 
         protected static IAsmFunctionWriter AsmTestWriter<T>(IAsmContext context, [Caller] string test = null)
@@ -40,16 +40,14 @@ namespace Z0
         }
 
         protected override void OnExecute(in AsmBuffers buffers)
-        {
-            
-            
+        {                    
             //capture_constants(buffers);
             TestClient(Context);
             // capture_shifter(buffers);
             // capture_shuffler(buffers);
             // capture_archived(buffers);
-            archive_selected(buffers);
-            //archive_context(buffers);
+            //archive_selected(buffers);
+            archive_context(buffers);
         }
 
         static void TestClient(IAsmContext context)
@@ -75,7 +73,7 @@ namespace Z0
             }
 
             var composition = context.BufferedClient(OnExecute);
-            var sink = CaptureReceiptSink.Create(OnCaptureEvent);
+            var sink = CaptureServices.OnReceipt(OnCaptureEvent);
             using var buffers = context.Buffers(sink);
             composition.Execute(buffers);
 
@@ -173,8 +171,6 @@ namespace Z0
         {
             // var code = ArchivedCode(nameof(gmath), nameof(math), OpIdentity.Define(nameof(math.and)));
             // iter(code, c => Trace(c));
-        }
-
-         
+        }         
     }
 }

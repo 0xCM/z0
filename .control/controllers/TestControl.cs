@@ -24,7 +24,7 @@ namespace Z0
         
         public TestController()
         {
-            this.Context = AsmContext.New();
+            this.Context = AsmContext.New(C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x).ToArray());
         }
 
         static IEnumerable<IAssemblyDesignator> TestHosts

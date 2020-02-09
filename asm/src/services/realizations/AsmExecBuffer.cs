@@ -25,9 +25,11 @@ namespace Z0
 
         public int Length {get;}
 
+        [MethodImpl(Inline)]
         public static IAsmExecBuffer Create(IAsmContext context, int? size = null)
             => new AsmExecBuffer(context, size);
 
+        [MethodImpl(Inline)]
         AsmExecBuffer(IAsmContext context, int? size = null)
         {
             Context = context;            

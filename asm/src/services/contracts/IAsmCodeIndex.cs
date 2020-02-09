@@ -9,14 +9,18 @@ namespace Z0
     using System.Collections.Generic;
 
     using AsmSpecs;
-
-    public interface IAsmVCodeIndex
-    {
-
-    }
     
-    public interface IAsmCodeIndex : IAsmVCodeIndex
+    public interface IAsmCodeIndex
     {
-
+        /// <summary>
+        /// Searches for an index entry
+        /// </summary>
+        /// <param name="id">The targeted operation identifier</param>
+        Option<AsmCode> Lookup(OpIdentity id);
+        
+        /// <summary>
+        /// Enumerates all index entries
+        /// </summary>
+        IEnumerable<AsmCode> Entries {get;}
     }
 }

@@ -18,4 +18,9 @@ namespace Z0
 
         AsmFunction[] CaptureFunctions(Type src);                
     }
+
+    public interface IAsmProcessEmitter
+    {
+        void EmitFunctions(Type host);
+    }    
 }

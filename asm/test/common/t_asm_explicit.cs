@@ -47,31 +47,26 @@ namespace Z0
                 Trace($"{data.CaptureState}");
             }
 
-            using var buffers = Context.Buffers(CaptureReceiptSink.Create(OnCaptureEvent));
+            using var buffers = Context.Buffers(CaptureServices.OnReceipt(OnCaptureEvent));
             OnExecute(buffers);
         }
 
         protected abstract void OnExecute(in AsmBuffers buffers);
 
-        protected IEnumerable<AsmCode> ArchivedCode(string catalog, string subject, OpIdentity id)
-            => Context.CodeArchive(catalog,subject).Read(id);
-
         protected AsmFormatConfig DefaultAsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-        protected IAsmHexWriter HexTestWriter([Caller] string test = null)
+        protected IAsmCodeWriter HexTestWriter([Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
-            return  Context.HexWriter(dst);
+            return  Context.CodeWriter(dst);
         }
-
 
         protected IAsmFunctionWriter AsmTestWriter([Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Asm);    
             return Context.WithFormat(DefaultAsmFormat).AsmWriter(path);
         }
-
 
         public virtual void Accept(in CaptureEventData data)
         {

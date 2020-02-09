@@ -5,14 +5,11 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
-
-    using AsmSpecs;
 
     using static zfunc;
-    
-    public interface IAsmProcessEmitter
+
+    public interface ICilFunctionFormatter
     {
-        void EmitFunctions(Type host);
+        string Format(CilFunction f);
     }
 }

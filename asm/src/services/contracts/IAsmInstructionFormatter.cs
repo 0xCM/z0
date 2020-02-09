@@ -11,9 +11,11 @@ namespace Z0
 
     using Iced = Iced.Intel;
 
-    interface IBaseAsmFormatter
+    /// <summary>
+    /// Internal contract for instruction-level formatting
+    /// </summary>
+    interface IAsmInstructionFormatter
     {
-        ReadOnlySpan<string> CaptureBaseFormat(Iced.InstructionList src, ulong baseaddress);
+        ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong baseaddress);
     }
-
 }

@@ -12,28 +12,28 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// A very thin wrapper around a dictionary
+    /// </summary>
     readonly struct AsmCodeIndex : IAsmCodeIndex
-    {
-        readonly bool generic;
-        
-        readonly Dictionary<OpIdentity, AsmCode> index;
+    {        
+        readonly Dictionary<OpIdentity, AsmCode> Index;
 
-        public static AsmCodeIndex Create(IEnumerable<AsmCode> src, bool generic)
-            => new AsmCodeIndex(src,generic);
+        [MethodImpl(Inline)]
+        public static AsmCodeIndex Create(IEnumerable<AsmCode> src)
+            => new AsmCodeIndex(src);
 
-        AsmCodeIndex(IEnumerable<AsmCode> src, bool generic)
+        AsmCodeIndex(IEnumerable<AsmCode> src)
         {
-            this.generic = generic;
-            this.index = new Dictionary<OpIdentity, AsmCode>();
-         
+            this.Index = new Dictionary<OpIdentity, AsmCode>();
+            foreach(var item in src)
+                Index.TryAdd(item.Id, item);         
         }
         
         public Option<AsmCode> Lookup(OpIdentity id)
-            => index.TryFind(id);
+            => Index.TryFind(id);
         
-
         public IEnumerable<AsmCode> Entries
-            => index.Values;
-
+            => Index.Values;
     }
 }

@@ -6,22 +6,24 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
-    using AsmSpecs;
+    using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-    readonly struct AsmHexReader : IAsmHexReader
+    readonly struct AsmCodeReader : IAsmCodeReader
     {
-        public static IAsmHexReader Create(IAsmContext context, char? idsep = null, char? bytesep = null)
-            => new AsmHexReader(context, idsep, bytesep);
-
         public IAsmContext Context {get;}
 
         readonly char IdSep;
         
         readonly char ByteSep;
 
-        AsmHexReader(IAsmContext context, char? idsep = null, char? bytesep = null)
+        [MethodImpl(Inline)]
+        public static IAsmCodeReader Create(IAsmContext context, char? idsep = null, char? bytesep = null)
+            => new AsmCodeReader(context, idsep, bytesep);
+
+        [MethodImpl(Inline)]
+        AsmCodeReader(IAsmContext context, char? idsep = null, char? bytesep = null)
         {
             this.Context = context;
             this.IdSep = idsep ?? HexLine.DefaultIdSep;
@@ -36,9 +38,6 @@ namespace Z0
                 if(hex.OnNone(() => errout($"Could not parse the line {line} from {src}")))
                     yield return hex.MapRequired(h => AsmCode.Define(h.Id, h.Encoded));
             }
-        }
-        
+        }        
     }
-
-
 }

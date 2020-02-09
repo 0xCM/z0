@@ -35,7 +35,7 @@ namespace Z0
             using var capture = AsmProcessServices.Capture(context);
             var functions = capture.CaptureFunctions(host); 
             context.AsmEmitter().EmitAsm(functions, asmfile).OnSome(e => throw e);
-            context.AsmEmitter().EmitCil(functions, cilfile).OnSome(e => throw e);
+            context.CilEmitter().EmitCil(functions, cilfile).OnSome(e => throw e);
 
         }
     }

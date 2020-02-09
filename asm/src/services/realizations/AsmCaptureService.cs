@@ -6,18 +6,19 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
+    using System.Linq;
+
     using Z0.AsmSpecs;
     
     using static zfunc;
     
-    readonly struct AsmCaptureService : IAsmCaptureService
+    readonly struct AsmCaptureService : ICaptureService
     {
         public IAsmContext Context {get;}
 
         readonly ICaptureControl Control;
 
-        public static IAsmCaptureService Create(IAsmContext context, ICaptureControl control)
+        public static ICaptureService Create(IAsmContext context, ICaptureControl control)
             => new AsmCaptureService(context, control);
 
         AsmCaptureService(IAsmContext context, ICaptureControl control)
@@ -72,17 +73,17 @@ namespace Z0
             return dst;                
         }
 
-        public void CaptureBits(in CaptureExchange exchange, MethodInfo src, IAsmHexWriter dst)
-            => dst.Write(Control.Capture(in exchange, src.Identify(), src));
+        public void CaptureBits(in CaptureExchange exchange, MethodInfo src, IAsmCodeWriter dst)
+            => dst.Write(Control.Capture(in exchange, src.Identify(), src).Code);
 
-        public void CaptureBits(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmHexWriter dst)
-            => dst.Write(ExtractBits(exchange, src,args));
+        public void CaptureBits(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmCodeWriter dst)
+            => dst.Write(ExtractBits(exchange, src,args).Code);
 
-        public void CaptureBits(in CaptureExchange exchange, MethodInfo[] methods, IAsmHexWriter dst)
-            => dst.Write(ExtractBits(exchange, methods));
-
-        public void CaptureBits(in CaptureExchange exchange, Delegate src, IAsmHexWriter dst)
-            => dst.Write(ExtractBits(exchange, src));    
+        public void CaptureBits(in CaptureExchange exchange, MethodInfo[] methods, IAsmCodeWriter dst)
+            => dst.Write(ExtractBits(exchange, methods).Map(x => x.Code));
+            
+        public void CaptureBits(in CaptureExchange exchange, Delegate src, IAsmCodeWriter dst)
+            => dst.Write(ExtractBits(exchange, src).Code);    
 
         public void CaptureAsm(in CaptureExchange exchange, Delegate src, IAsmFunctionWriter dst)
             => dst.Write(ExtractAsm(exchange, src));

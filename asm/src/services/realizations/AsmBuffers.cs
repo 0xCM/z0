@@ -12,9 +12,22 @@ namespace Z0
 
     using static zfunc;
     
+    /// <summary>
+    /// Gathers a set of frequently-used buffers that is a by-convention asm service
+    /// </summary>
     public readonly ref struct AsmBuffers
     {
         const int DefaultSize = 512;
+
+        readonly Span<byte> CaptureTarget;
+
+        readonly Span<byte> CaptureState;
+
+        readonly ExecBuffer MBuffer;
+        
+        readonly ExecBuffer LBuffer;
+
+        readonly ExecBuffer RBuffer;
 
         public static AsmBuffers Create(IAsmContext context, ICaptureEventSink sink, int? size = null)
             => new AsmBuffers(context,sink,size);
@@ -30,16 +43,6 @@ namespace Z0
             LBuffer = OS.AllocExec(size ?? DefaultSize);
             RBuffer = OS.AllocExec(size ?? DefaultSize);            
         }
-
-        readonly Span<byte> CaptureTarget;
-
-        readonly Span<byte> CaptureState;
-
-        readonly ExecBuffer MBuffer;
-        
-        readonly ExecBuffer LBuffer;
-
-        readonly ExecBuffer RBuffer;
 
         public readonly IAsmContext AsmContext;
 
@@ -62,11 +65,5 @@ namespace Z0
             LBuffer.Dispose();
             RBuffer.Dispose();
         }
-    }
-
-    public static class BufferX
-    {    
-        public static AsmBuffers Buffers(this IAsmContext context, ICaptureEventSink sink, int? size = null)
-            => AsmBuffers.Create(context,sink,size);
     }
 }

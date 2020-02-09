@@ -28,28 +28,28 @@ namespace Z0
             => appMsg($"Emitting operations defined by {host.Name}", SeverityLevel.Babble);
 
         public static AppMsg Emitting(AsmFunctionGroup src)
-            => appMsg($"{src.Id}: Emitting {src.Members.Length} members");
+            => appMsg($"Emitting {src.Id}");
 
         public static AppMsg Emitted(AsmEmissionGroup src)
-            => appMsg($"{src.Id}: Emitted {src.Tokens.Length} members");
+            => appMsg($"Emitted {src.Uri}");
+
+        public static AppMsg Emitted(AsmEmissionToken src)
+            => appMsg($"Emitted {src.Uri}", SeverityLevel.Babble);
 
         public static AppMsg Emitting(GenericOpSpec op)        
             => appMsg($"Emitting operation {op.Id}", SeverityLevel.Babble);
 
         public static AppMsg Emitting(OpClosureInfo closure)        
-            => appMsg($"Emitting operation closure {closure.Id}", SeverityLevel.Babble);
+            => appMsg($"Emitting closure {closure.Id}", SeverityLevel.Babble);
 
         public static AppMsg Emitting(DirectOpSpec op)        
-            => appMsg($"Emitting operation {op.Id}", SeverityLevel.Babble);
+            => appMsg($"Emitting {op.Id}", SeverityLevel.Babble);
 
         public static AppMsg EmissionMismatch(OpIdentity id, int incount, int outcount)
             => appMsg($"In/out mismatch on function group {id}, in = {incount}, out = {outcount}", SeverityLevel.Warning);
 
         public static AppMsg EmittingCatalog(IOperationCatalog catalog)        
             => appMsg($"Emitting catalog {catalog.CatalogName} from catalog emitter", SeverityLevel.Info);
-
-        public static AppMsg Emitted(AsmEmissionToken descriptor)        
-            => appMsg($"Emitted {descriptor.Uri}", SeverityLevel.Babble);
 
         public static AppMsg CapturingImmediates(GenericOpSpec op)        
             => appMsg($"Capturing {op.Id} generic immediates for kinds {op.Kinds.Select(k => k.ToString()).Concat(comma())}", SeverityLevel.Babble);

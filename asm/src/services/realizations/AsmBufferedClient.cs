@@ -9,22 +9,17 @@ namespace Z0
 
     using static zfunc;
 
-    public delegate void AsmBufferClient(in AsmBuffers buffers);
-
-    public interface IAsmBufferedClient : IAsmService
-    {
-        void Execute(in AsmBuffers buffers);
-    }
-
     readonly struct AsmBufferedClient : IAsmBufferedClient
     {
         public IAsmContext Context {get;}
 
         readonly AsmBufferClient Client;
 
+        [MethodImpl(Inline)]
         public static IAsmBufferedClient Create(IAsmContext context, AsmBufferClient client)
             => new AsmBufferedClient(context, client);
         
+        [MethodImpl(Inline)]
         AsmBufferedClient(IAsmContext context, AsmBufferClient client)
         {
             this.Context = context;
@@ -36,5 +31,4 @@ namespace Z0
             Client(buffers);
         }
     }
-
 }

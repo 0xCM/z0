@@ -7,10 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using Z0.ClrSpecs;
 
     using static zfunc;
 

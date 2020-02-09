@@ -19,7 +19,10 @@ namespace Z0
         /// <param name="id">The identity to confer</param>
         /// <param name="members">The members of the group</param>
         public static DirectOpGroupSpec Define(OpIdentity id, IEnumerable<DirectOpSpec> src)  
-            => new DirectOpGroupSpec(id, src.ToArray());
+        {
+            var members = src.ToArray();
+            return new DirectOpGroupSpec(id, members);
+        }
 
         DirectOpGroupSpec(OpIdentity id, DirectOpSpec[] members)
             : base(id,members)

@@ -27,44 +27,15 @@ namespace Z0
             this.CilFormat = cilFormat;
         }
 
-        public IClrIndex ClrIndex {get; set;}
+        public IClrIndex ClrIndex {get;}
 
-        public DataResourceIndex Resources {get;set;}
-        
-        public AsmFormatConfig AsmFormat {get;set;}
+        public DataResourceIndex Resources {get;}
 
-        public CilFormatConfig CilFormat {get;set;}
+        public IAssemblyComposition Assemblies {get;}
 
-        public IAssemblyComposition Assemblies {get;set;}
+        public CilFormatConfig CilFormat {get;}
 
-        public AsmContextData WithFormat(AsmFormatConfig config)
-        {
-            this.AsmFormat = config;
-            return this;
-        }                
+        public AsmFormatConfig AsmFormat {get;}
 
-        public AsmContextData WithAssemblies(IAssemblyComposition assemblies)
-        {
-            Assemblies = assemblies;
-            return this;
-        }                
-
-        public AsmContextData WithFormat(CilFormatConfig config)
-        {
-            CilFormat = config;
-            return this;
-        }
-
-        public AsmContextData WithEmptyClrIndex()
-        {
-            ClrIndex = ClrMetadataIndex.Empty;
-            return this;
-        }                
-
-        public AsmContextData WithClrIndex(IClrIndex index)
-        {
-            ClrIndex = index;
-            return this;
-        }                
     }
 }

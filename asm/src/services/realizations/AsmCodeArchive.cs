@@ -11,57 +11,43 @@ namespace Z0
 
     using static zfunc;
 
-    /// <summary>
-    /// Defines lookup capability over the asm archive logs
-    /// </summary>
-    public readonly struct AsmCodeArchive : IAsmCodeArchive
+    readonly struct AsmCodeArchive : IAsmCodeArchive
     {
-        public FolderPath Root {get;}
+        public FolderPath RootFolder {get;}
 
         public IAsmContext Context {get;}
         
-        readonly string Catalog;
+        public AssemblyId Origin {get;}
 
-        readonly string Subject;
-
-        public static IAsmCodeArchive Create(IAsmContext context, string catalog, string subject)
-            => new AsmCodeArchive(context, catalog, subject);
+        public string ApiHost {get;}
 
         public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog)
             => new AsmCodeArchive(context, catalog);
 
-        public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog, string subject)
-            => new AsmCodeArchive(context, catalog, subject);
+        public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog, string host)
+            => new AsmCodeArchive(context, catalog, host);
 
-        AsmCodeArchive(IAsmContext context, AssemblyId catalog, string subject)
+        AsmCodeArchive(IAsmContext context, AssemblyId catalog, string host)
         {
-            this.Catalog = catalog.ToString().ToLower();
-            this.Subject = subject;
             this.Context = context;
-            this.Root = LogPaths.The.AsmDataDir(RelativeLocation.Define(Catalog, subject));
+            this.Origin = catalog;
+            this.ApiHost = host;
+            this.RootFolder = LogPaths.The.AsmDataDir(RelativeLocation.Define(Origin.Format(), host));
         }
 
         AsmCodeArchive(IAsmContext context, AssemblyId catalog)
         {
-            this.Catalog = catalog.ToString().ToLower();
-            this.Subject = string.Empty;
             this.Context = context;
-            this.Root = LogPaths.The.AsmDataDir(FolderName.Define(Catalog));
-        }
-
-        AsmCodeArchive(IAsmContext context, string catalog, string subject)
-        {
-            this.Context = context;
-            this.Catalog = catalog;
-            this.Subject = subject;
-            this.Root = LogPaths.The.AsmDataDir(RelativeLocation.Define(catalog, subject));
+            this.Origin = catalog;
+            this.ApiHost = string.Empty;
+            this.RootFolder = LogPaths.The.AsmDataDir(FolderName.Define(Origin.Format()));
         }
 
         /// <summary>
         /// Enumerates the files in the archive
         /// </summary>
         IEnumerable<FilePath> Files 
-            => Root.Files(FileExtensions.Hex,true);
+            => RootFolder.Files(FileExtensions.Hex,true);
                     
         /// <summary>
         /// Reads a hex-line formatted file
@@ -70,7 +56,7 @@ namespace Z0
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
         public IEnumerable<AsmCode> Read(FilePath src, char idsep, char bytesep)
-            => Context.HexReader(idsep,bytesep).Read(src);
+            => Context.CodeReader(idsep,bytesep).Read(src);
 
         public IEnumerable<AsmCode> Read(string name)
             => Read(fn => fn.NoExtension == name);
@@ -99,7 +85,7 @@ namespace Z0
         /// </summary>
         /// <param name="id">The identifying moniker</param>
         public IEnumerable<AsmCode> Read(OpIdentity id)
-            => Read(Root + FileName.Define(id, HexLine.FileExt));
+            => Read(RootFolder + FileName.Define(id, HexLine.FileExt));
 
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
@@ -109,7 +95,7 @@ namespace Z0
         /// <param name="id">The identifying moniker</param>
         public Option<TypedAsm<T>> Read<T>(OpIdentity id, T t = default)
             where T : unmanaged
-                => Read(Root,id, t);
+                => Read(RootFolder,id, t);
         
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
@@ -126,7 +112,7 @@ namespace Z0
 
         public IAsmCodeArchive Clear()
         {
-            iter(Root.Files(Paths.HexExt), f => f.Delete());
+            iter(RootFolder.Files(Paths.HexExt), f => f.Delete());
             return this;
         }
     }

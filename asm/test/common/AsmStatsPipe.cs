@@ -7,15 +7,25 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.IO;
+    using System.Runtime.CompilerServices;
 
     using Z0.AsmSpecs;
 
     using static zfunc;
 
-    public class AsmStats
+    public readonly struct AsmStats
     {
-        public int FunctionCount {get;set;}
+        [MethodImpl(Inline)]
+        public static AsmStats Create(int FunctionCount)
+            => new AsmStats(FunctionCount);
+        
+        [MethodImpl(Inline)]
+        AsmStats(int FunctionCount)
+        {
+            this.FunctionCount = FunctionCount;
+        }
+
+        public readonly int FunctionCount;
 
         public override string ToString() 
         {
@@ -37,17 +47,13 @@ namespace Z0
         /// Retrieves the collection statistics
         /// </summary>
         public AsmStats Collected
-            => new AsmStats
-            {
-                FunctionCount = FunctionCount,
-            };
+            => AsmStats.Create(FunctionCount);
     }
 
     readonly struct AsmStatsPipe : IAsmFunctionPipe
     {
         public static IAsmFunctionPipe Create(AsmStatsCollector dst)
             => new AsmStatsPipe(dst);
-
 
         public ObjectReceiver<AsmFunction> Receiver {get;}
 

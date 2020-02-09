@@ -13,15 +13,15 @@ namespace Z0
 
     using static zfunc;
 
-    readonly struct CilWriter : ICilWriter
+    readonly struct CilFunctionWriter : ICilFunctionWriter
     {
         public IAsmContext Context {get;}
         
         public FilePath Target {get;}
         
         [MethodImpl(Inline)]
-        public static CilWriter Create(IAsmContext context, FilePath dst)
-            => new CilWriter(context,dst);
+        public static CilFunctionWriter Create(IAsmContext context, FilePath dst)
+            => new CilFunctionWriter(context,dst);
 
         public Option<Exception> WriteCil(AsmFunctionGroup src)        
             => Write(src.Members.Where(f => f.Cil.IsSome()).Select(x => x.Cil.Require()).ToArray());
@@ -30,7 +30,7 @@ namespace Z0
             => Write(functions.Where(f => f.Cil.IsSome()).Select(x => x.Cil.Require()).ToArray());
 
         [MethodImpl(Inline)]
-        CilWriter(IAsmContext context, FilePath dst)            
+        CilFunctionWriter(IAsmContext context, FilePath dst)            
         {
             this.Context = context;
             this.Target = dst;

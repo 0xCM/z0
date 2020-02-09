@@ -3,39 +3,30 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using AsmSpecs;
 
     using static zfunc;
 
-    /// <summary>
-    /// Defines lookup capability over all archived files
-    /// </summary>
-    readonly struct AsmArchiveSearch : IAsmArchiveSearch
+    readonly struct CilFunctionEmitter : ICilFunctionEmitter
     {
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmArchiveSearch Create(IAsmContext context)
-            => new AsmArchiveSearch(context);
-        
+        public static ICilFunctionEmitter Create(IAsmContext context)
+            => new CilFunctionEmitter(context);
+
         [MethodImpl(Inline)]
-        AsmArchiveSearch(IAsmContext context)
+        CilFunctionEmitter(IAsmContext context)
         {
             this.Context = context;
         }
+
+        public Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst)
+            => Context.CilWriter(dst).WriteCil(functions);
     }
-
-    partial interface IAsmArchiveSearch
-    {
-        // static IEnumerable<FilePath> HexFiles(AssemblyId assembly, string subject)
-        // {
-
-        // }
-
-    }
-
 }

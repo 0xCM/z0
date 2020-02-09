@@ -11,12 +11,19 @@ namespace Z0
 
     using static zfunc;
     
-    public interface IAsmFunctionEmitter
+    public interface IFunctionEmitter
     {
+        
+    }
 
+    public interface ICilFunctionEmitter : IFunctionEmitter
+    {
         Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst);
 
+    }
 
+    public interface IAsmFunctionEmitter : IFunctionEmitter
+    {
         Option<Exception> EmitAsm(IEnumerable<AsmFunction> disassembly, FilePath file);
     }
 }

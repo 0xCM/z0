@@ -5,24 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using Z0.AsmSpecs;
 
     using static zfunc;
 
-    public interface IAsmHexWriter : IDisposable, IAsmService
+    /// <summary>
+    /// Defines serivce contract for persting text-formatted x86 encoded assembly 
+    /// </summary>
+    public interface IAsmCodeWriter : IAsmServiceAllocation
     {
         void Write(AsmCode src, int? idpad = null);
         
         void Write(AsmCode[] src, int? idpad = null);        
         
-        void Write(CapturedMember src, int? idpad = null);
-
-        void Write(CapturedMember[] src, int? idpad = null);
-
+        /// <summary>
+        /// The path to which data is writting
+        /// </summary>
         FilePath TargetPath {get;}
 
     }
