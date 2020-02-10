@@ -5,21 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static zfunc;
     using static HK;
-    using AsmSpecs;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Z0;
 
-    public abstract class t_asm_explicit<E> : UnitTest<E>, IExplicitTest, ICaptureEventSink
+    public abstract class t_asm_explicit<E> : UnitTest<E>, IExplicitTest
         where E : t_asm_explicit<E>
     {
         protected IAsmContext Context;
@@ -47,7 +40,7 @@ namespace Z0
                 Trace($"{data.CaptureState}");
             }
 
-            using var buffers = Context.Buffers(CaptureServices.OnReceipt(OnCaptureEvent));
+            using var buffers = Context.Buffers(OnCaptureEvent);
             OnExecute(buffers);
         }
 
@@ -68,14 +61,5 @@ namespace Z0
             return Context.WithFormat(DefaultAsmFormat).AsmWriter(path);
         }
 
-        public virtual void Accept(in CaptureEventData data)
-        {
-            
-        }
-
-        public virtual void Complete(in CaptureEventData data)
-        {
-            
-        }
     }
 }

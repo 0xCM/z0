@@ -15,38 +15,29 @@ namespace Z0
     /// <summary>
     /// A capture event relay
     /// </summary>
-    readonly struct CaptureEventRelay : ICaptureEventSink
+    readonly struct CaptureEventRelay
     {
         readonly int[] Stats;
 
-        readonly ICaptureEventSink Observer;
+        readonly CaptureEventObserver Observer;
         
-        public static CaptureEventRelay Create(ICaptureEventSink observer)
+        public static CaptureEventRelay Create(CaptureEventObserver observer)
             => new CaptureEventRelay(observer);
 
-        CaptureEventRelay(ICaptureEventSink observer)
+        CaptureEventRelay(CaptureEventObserver observer)
         {
             this.Observer = observer;
             this.Stats = new int[1];
         }   
 
         [MethodImpl(Inline)]
-        public void Accept(in CaptureEventData info)
+        public void Accept(in CaptureEventData data)
         {            
-            Receive(info);
-        }
-
-        [MethodImpl(Inline)]
-        public void Complete(in CaptureEventData data)
-        {
-            // Completion.Complete(data);
+            Receive(data);
+            Observer(data);
         }
 
         const int CountIndex = 0;
-
-        [MethodImpl(Inline)]
-        static Span<byte> State(in CaptureEventData src)
-            => src.StateBuffer;
 
         [MethodImpl(Inline)]
         static int Offset(in CaptureEventData src)        

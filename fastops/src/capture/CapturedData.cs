@@ -11,26 +11,24 @@ namespace Z0
  
     using static zfunc;    
 
-    /// <summary>
-    /// Defines a capture outcome/content package to collect capture results for subjects not known as members
-    /// </summary>
     public readonly struct CapturedData
     {        
-        public static CapturedData Define(OpIdentity id, CaptureOutcome info, byte[] content)
-            => new CapturedData(id,info,content);
+        public static CapturedData Define(OpIdentity id, CaptureOutcome outcome, byte[] content)
+            => new CapturedData(id,outcome,content);
 
         CapturedData(OpIdentity id, CaptureOutcome info, byte[] content)
         {
             this.Id = id;
-            this.CaptureInfo = info;
+            this.Outcome = info;
             this.Content = content;
         }
         
         public readonly OpIdentity Id;
 
-        public readonly CaptureOutcome CaptureInfo;
+        public readonly CaptureOutcome Outcome;
 
         public readonly byte[] Content;
     }
+
 
 }

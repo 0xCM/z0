@@ -40,10 +40,15 @@ namespace Z0
 
         public void capture_vectorized_generics()
         {
+            void OnCaptureEvent(in CaptureEventData data)
+            {
+
+            }
+
             using var writer = NativeTestWriter();
 
-            var control = CaptureServices.Control();
-            var exchange = control.CreateExchange();
+            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var ops  = exchange.Operations;
 
             var types = NumericKind.All.DistinctTypes();
             var defintions = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
@@ -52,18 +57,25 @@ namespace Z0
                 foreach(var def in defintions)
                 {
                     var m = def.MakeGenericMethod(t);
-                    writer.WriteMember(control.Capture(in exchange,m.Identify(), m));
+                    writer.WriteMember(ops.Capture(in exchange,m.Identify(), m));
                 }
             }
         }
 
         public void capture_direct()
         {
+            void OnCaptureEvent(in CaptureEventData data)
+            {
+
+            }            
+            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var ops  = exchange.Operations;
+
+
+
             using var target = NativeTestWriter();
-            var control = CaptureServices.Control();
-            var exchange = control.CreateExchange();
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
-                target.WriteMember(control.Capture(in exchange, m.Identify(), m));
+                target.WriteMember(ops.Capture(in exchange, m.Identify(), m));
         }
 
         static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
@@ -74,39 +86,51 @@ namespace Z0
 
         public void capture_delegates()
         {
+            void OnCaptureEvent(in CaptureEventData data)
+            {
+
+            }
+
+            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var ops  = exchange.Operations;
+
             using var target = NativeTestWriter();
-            var control = CaptureServices.Control();
-            var exchange = control.CreateExchange();
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            target.WriteMember(control.Capture(in exchange, dAnd.Identify(), dAnd));
+            target.WriteMember(ops.Capture(in exchange, dAnd.Identify(), dAnd));
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            target.WriteMember(control.Capture(in exchange, mAnd.Identify(), mAnd));
+            target.WriteMember(ops.Capture(in exchange, mAnd.Identify(), mAnd));
 
             var dShuffle = shuffler(4);
-            target.WriteMember(control.Capture(in exchange, dShuffle.Identify(), dShuffle));
+            target.WriteMember(ops.Capture(in exchange, dShuffle.Identify(), dShuffle));
 
             var dShift = shifter(4);
-            target.WriteMember(control.Capture(in exchange, dShift.Identify(), dShift));
+            target.WriteMember(ops.Capture(in exchange, dShift.Identify(), dShift));
 
             var methods = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();
             
             foreach(var m in methods)
-                target.WriteMember(control.Capture(in exchange, m.Identify(), m));
+                target.WriteMember(ops.Capture(in exchange, m.Identify(), m));
             
         }
 
         public void read_library()
         {
-            var control = CaptureServices.Control();
-            var exchange = control.CreateExchange();
+            void OnCaptureEvent(in CaptureEventData data)
+            {
+
+            }
+
+            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var ops  = exchange.Operations;
+
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
 
             for(var i=0; i<src.Length; i++)
             {
-                var capture = control.Capture(in exchange, src[i].Identify(), src[i]);
-                PostMessage(capture.FormatCode());
+                var capture = ops.Capture(in exchange, src[i].Identify(), src[i]);
+                //PostMessage(capture.FormatCode());
             }
         }
     }

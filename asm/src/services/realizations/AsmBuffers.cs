@@ -29,16 +29,16 @@ namespace Z0
 
         readonly ExecBuffer RBuffer;
 
-        public static AsmBuffers Create(IAsmContext context, ICaptureEventSink sink, int? size = null)
-            => new AsmBuffers(context,sink,size);
+        public static AsmBuffers Create(IAsmContext context, CaptureEventObserver observer, int? size = null)
+            => new AsmBuffers(context, observer, size);
 
-        AsmBuffers(IAsmContext context, ICaptureEventSink sink, int? size = null)
+        AsmBuffers(IAsmContext context, CaptureEventObserver observer, int? size = null)
         {
             AsmContext = context;
-            CaptureTarget = new byte[size ?? DefaultSize];
-            CaptureState = new byte[size ?? DefaultSize];
-            Capture = CaptureServices.Control(sink);   
-            Exchange = CaptureServices.Exchange(Capture, CaptureTarget, CaptureState);     
+            Exchange = CaptureServices.Exchange(observer, size);     
+            Capture = Exchange.Operations;
+            CaptureTarget = Exchange.TargetBuffer;
+            CaptureState = Exchange.StateBuffer;
             MBuffer = OS.AllocExec(size ?? DefaultSize);            
             LBuffer = OS.AllocExec(size ?? DefaultSize);
             RBuffer = OS.AllocExec(size ?? DefaultSize);            
@@ -55,7 +55,7 @@ namespace Z0
         public ExecBufferToken RightExec
             => RBuffer;
 
-        public readonly ICaptureControl Capture;
+        public readonly ICaptureOps Capture;
 
         public readonly CaptureExchange Exchange;
 

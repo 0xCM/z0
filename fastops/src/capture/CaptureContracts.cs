@@ -20,7 +20,14 @@ namespace Z0
         
     }
 
-    public delegate void OnCaptureReceipt(in CaptureEventData data);
+    public enum CaptureEventKind
+    {
+        None = 0,
+
+        Step = 1,
+
+        Complete = 2
+    }
 
     /// <summary>
     /// Defines contract for external observation of the capture workflow
@@ -28,13 +35,11 @@ namespace Z0
     public interface ICaptureEventSink : ISink
     {
         void Accept(in CaptureEventData data);
-
-        void Complete(in CaptureEventData data);
     }
 
     /// <summary>
     /// Defines a source for events that originate within a capture exchange context. This
-    /// device is used as a means to compensate that the exchange itself, which is a
+    /// device is used as a means to compensate for the fact that the exchange itself, which is a
     /// ref struct, cannot be contracted.
     /// </summary>
     public interface ICaptureJunction
@@ -44,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source exchange</param>
         /// <param name="state">The new state</param>
-        void Accept(in CaptureExchange src, in CaptureState state);   
+        void OnCaptureStep(in CaptureExchange src, in CaptureState state);   
 
         /// <summary>
         /// Invoked by the exchange to relay a capture completion event
@@ -52,7 +57,7 @@ namespace Z0
         /// <param name="src">The source exchange</param>
         /// <param name="state">The final state</param>
         /// <param name="captured">The captured member</param>
-        void Complete(in CaptureExchange src, in CaptureState state, in CapturedMember captured);        
+        void OnCaptureComplete(in CaptureExchange src, in CaptureState state, in CapturedMember captured);        
     }
 
     /// <summary>
@@ -69,14 +74,8 @@ namespace Z0
         Option<CapturedData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src);
     }
 
-    public interface ICaptureClient : ICaptureEventSink
-    {
-        ICaptureControl Control {get;}
-    }
-
-    public interface ICaptureControl : ICaptureOps, ICaptureJunction, ICaptureEventSink
+    public interface ICaptureControl : ICaptureOps, ICaptureJunction
     {
 
     }
-
 }

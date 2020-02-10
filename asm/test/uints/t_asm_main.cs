@@ -73,23 +73,13 @@ namespace Z0
             }
 
             var composition = context.BufferedClient(OnExecute);
-            var sink = CaptureServices.OnReceipt(OnCaptureEvent);
-            using var buffers = context.Buffers(sink);
+            //var sink = CaptureServices.EventSink(OnCaptureEvent);
+            using var buffers = context.Buffers(OnCaptureEvent);
             composition.Execute(buffers);
 
             var bytes = state.Select(s => s.Payload).ToArray();
             var code = AsmCode.Define(f.Identify(), bytes);
             stateout.Write(code);            
-        }
-
-        public override void Accept(in CaptureEventData data)
-        {
-            //Trace($"{data.CaptureState}");
-        }
-
-        public override void Complete(in CaptureEventData data)
-        {
-
         }
 
         void archive_selected(in AsmBuffers buffers)

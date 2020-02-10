@@ -18,10 +18,15 @@ namespace Z0
         /// <summary>
         /// The empty state
         /// </summary>
-        public static CaptureState Empty => new CaptureState(0,0,0);
+        public static CaptureState Empty => new CaptureState(OpIdentity.Empty, 0,0,0);
 
         /// <summary>
-        /// The zero-based, and strictly monotonically-increasing, state index
+        /// The subject identifier
+        /// </summary>
+        public readonly OpIdentity Subject;
+
+        /// <summary>
+        /// The zero-based and monotonically-increasing state index
         /// </summary>
         public readonly int Offset;
 
@@ -35,10 +40,6 @@ namespace Z0
         /// </summary>
         public readonly byte Payload;
 
-        [MethodImpl(Inline)]
-        public static implicit operator CaptureState((int offset, long location, byte payload) src)
-            => Define(src.offset, src.location, src.payload);
-
         /// <summary>
         /// Defines a capture state
         /// </summary>
@@ -47,23 +48,16 @@ namespace Z0
         /// <param name="location">The memory location from which data was extracted</param>
         /// <param name="payload">The extracted data</param>
         [MethodImpl(Inline)]
-        public static CaptureState Define(int offset, long location, byte payload)
-            => new CaptureState(offset,location,payload);
+        public static CaptureState Define(OpIdentity subject, int offset, long location, byte payload)
+            => new CaptureState(subject,offset,location,payload);
         
         [MethodImpl(Inline)]
-        CaptureState(int offset, long location, byte payload)
+        CaptureState(OpIdentity subject, int offset, long location, byte payload)
         {
+            this.Subject = subject;
             this.Offset = offset - 1;
             this.Location = location - 1;
             this.Payload = payload;
-        }
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out int offset, out long location, out byte value)        
-        {
-            offset = Offset;
-            location = Location;
-            value = Payload;
         }
 
         public bool IsEmpty
@@ -73,6 +67,6 @@ namespace Z0
         }
 
         public override string ToString() 
-            => concat(Offset.FormatAsmHex(4), space(), Location.FormatAsmHex(14), space(), Payload.FormatHex());
+            => concat(Subject.ToString(), space(), Offset.FormatAsmHex(4), space(), Location.FormatAsmHex(14), space(), Payload.FormatHex());
     }
 }

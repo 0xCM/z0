@@ -26,6 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         CaptureEventData(CaptureState state, Span<byte> buffer, in CapturedMember captured)
         {
+            this.EventKind = CaptureEventKind.Complete;
             this.CaptureState = state;
             this.StateBuffer = buffer;
             this.Captured = captured;
@@ -36,8 +37,14 @@ namespace Z0
         {
             this.CaptureState = state;
             this.StateBuffer = buffer;
+            this.EventKind = CaptureEventKind.Step;
             this.Captured = none<CapturedMember>();
         }
+
+        /// <summary>
+        /// The event classification
+        /// </summary>
+        public readonly CaptureEventKind EventKind;
 
         /// <summary>
         /// The capture state when the even occurred
@@ -47,7 +54,7 @@ namespace Z0
         /// <summary>
         /// The state buffer
         /// </summary>
-        public readonly Span<byte> StateBuffer;
+        readonly Span<byte> StateBuffer;
 
         /// <summary>
         /// If a completion event, the captured member
@@ -62,6 +69,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref seek(StateBuffer, index);
         }
-    }
-   
+    }   
 }

@@ -15,14 +15,12 @@ namespace Z0
         /// Emits non-immediate captures
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
-        /// <param name="receipt">The emission evidence receiver</param>
-        void EmitPrimary(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt);          
+        void EmitPrimary(in CaptureExchange exchange, CaptureEmissionObserver observer);          
 
         /// <summary>
         /// Emits immediate captures
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
-        /// <param name="receipt">The emission evidence receiver</param>
-        void EmitImm(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt);  
+        void EmitImm(in CaptureExchange exchange, CaptureEmissionObserver observer);  
     }
 }

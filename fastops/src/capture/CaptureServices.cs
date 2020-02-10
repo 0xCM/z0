@@ -20,32 +20,12 @@ namespace Z0
             get => default(CaptureOps);
         }
 
-        [MethodImpl(Inline)]
-        public static ICaptureControl Control()
-            => CaptureControl.Create();
-
-        [MethodImpl(Inline)]
-        public static ICaptureControl Control(ICaptureEventSink events)
-            => CaptureControl.Create(events);
-
-        [MethodImpl(Inline)]
-        public static CaptureExchange Exchange(ICaptureControl control, Span<byte> target, Span<byte> state)
-            => CaptureExchange.Define(control, target, state);
-
-        [MethodImpl(Inline)]
-        public static CaptureExchange Exchange(ICaptureControl control)
-            => CaptureExchange.Define(control, new byte[CaptureServices.DefaultBufferLen], new byte[CaptureServices.DefaultBufferLen]);
-
-        [MethodImpl(Inline)]
-        public static CaptureExchange Exchange()
-            => CaptureExchange.Define(Control(),new byte[CaptureServices.DefaultBufferLen], new byte[CaptureServices.DefaultBufferLen]);
-
-        [MethodImpl(Inline)]
-        public static ICaptureEventSink OnReceipt(OnCaptureReceipt observer)
-            => CaptureReceiptSink.Create(observer);
-
-        [MethodImpl(Inline)]
-        public static ICaptureTokenSink EmissionSink(Action<CaptureTokenGroup> receiver)
-            => CaptureTokenSink.Create(receiver);
+        public static CaptureExchange Exchange(CaptureEventObserver observer, int? size = null)
+        {
+            var control = CaptureControl.Create(observer);
+            var cBuffer = new byte[size ?? CaptureServices.DefaultBufferLen];
+            var sBuffer = new byte[size ?? CaptureServices.DefaultBufferLen];
+            return CaptureExchange.Define(control, cBuffer, sBuffer);
+        }        
     }
 }

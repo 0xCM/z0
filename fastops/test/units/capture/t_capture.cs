@@ -17,16 +17,18 @@ namespace Z0
     {    
         public void capture_1()
         {
-            var stats1 = CaptureStatsSink.Create(stats => Trace($"stats1: {stats}"));
-
-            var control = CaptureServices.Control(stats1);
-            var exchange = control.CreateExchange();            
-            
-            var src = Intrinsics.Direct.Where(m => m.Name == nameof(dinx.vand));
-            foreach(var method in src)
+            void OnEvent(in CaptureEventData data)
             {
-                control.Capture(exchange, method.Identify(), method);
+                var state = data.CaptureState;
+                data.Captured.OnSome(s => Trace(s.Outcome.TermCode)).OnNone(() => Trace(state));
             }
+            
+            var exchange = CaptureServices.Exchange(OnEvent);
+            var control = exchange.Operations;
+            
+            
+            var src = Intrinsics.Direct.Where(m => m.Name == nameof(dinx.vand)).First();
+            control.Capture(exchange, src.Identify(), src);
 
         }
     }

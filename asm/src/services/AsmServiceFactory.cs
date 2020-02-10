@@ -34,8 +34,8 @@ namespace Z0
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static ICaptureService Capture(this IAsmContext context, ICaptureControl control)
-            => AsmCaptureService.Create(context,control);
+        public static ICaptureService Capture(this IAsmContext context, ICaptureOps ops)
+            => AsmCaptureService.Create(context, ops);
 
         /// <summary>
         /// Instantiates a contextual immediate capture service for a unary operator
@@ -96,15 +96,14 @@ namespace Z0
             => AsmBufferedClient.Create(context, client);
 
         /// <summary>
-        /// Creates an asm buffer set, which is considered an asm service but cannot be contracted since it
-        /// is a ref struct
+        /// Creates an asm buffer set, which is considered an asm service but cannot be contracted since it is a ref struct
         /// </summary>
         /// <param name="context">The context assubmed by the buffers</param>
         /// <param name="sink">The target to which capture events are routed</param>
         /// <param name="size">The (uniform) buffer length</param>
         [MethodImpl(Inline)]
-        public static AsmBuffers Buffers(this IAsmContext context, ICaptureEventSink sink, int? size = null)
-            => AsmBuffers.Create(context,sink,size);
+        public static AsmBuffers Buffers(this IAsmContext context, CaptureEventObserver observer, int? size = null)
+            => AsmBuffers.Create(context,observer,size);
 
         /// <summary>
         /// Instantiates a contextual asm formatter service
@@ -157,13 +156,13 @@ namespace Z0
         /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
         public static IAsmFunctionWriter AsmWriter(this IAsmContext context, FilePath dst)
             => AsmFunctionWriter.Create(context, dst);
- 
+
         /// <summary>
         /// Instantiates a contextual catalog-level emitter service
         /// </summary>
         /// <param name="context">The source context</param>
-        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, ICaptureTokenSink observer = null)
-            => AsmCatalogEmitter.Create(context,catalog, observer);
+        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, CaptureEmissionObserver observer)
+            => AsmCatalogEmitter.Create(context, catalog, observer);
 
         /// <summary>
         /// Instantiates a contextual cil formatter

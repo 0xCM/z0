@@ -20,16 +20,16 @@ namespace Z0
     class AsmCatalogEmitter : IAsmCatalogEmitter, ICaptureTokenSink
     {
         [MethodImpl(Inline)]
-        public static IAsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog, ICaptureTokenSink observer)
+        public static IAsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog, CaptureEmissionObserver observer)
             => new AsmCatalogEmitter(context,catalog,observer);
 
         [MethodImpl(Inline)]
-        AsmCatalogEmitter(IAsmContext context, IOperationCatalog catalog, ICaptureTokenSink observer)
+        AsmCatalogEmitter(IAsmContext context, IOperationCatalog catalog, CaptureEmissionObserver observer)
         {
             this.Context = context;
             this.Catalog = catalog;
             this.Decoder = Context.Decoder();
-            this.Observer = observer != null ? some(observer) : none<ICaptureTokenSink>();
+            this.Observer = observer;
         }
 
         public IAsmContext Context {get;}
@@ -38,7 +38,7 @@ namespace Z0
 
         readonly IAsmDecoder Decoder;
 
-        readonly Option<ICaptureTokenSink> Observer;
+        readonly CaptureEmissionObserver Observer;
 
         ICaptureTokenSink Sink
         {
@@ -46,29 +46,27 @@ namespace Z0
             get => this;
         }
         
-        void IAsmCatalogEmitter.EmitPrimary(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt)
+        void IAsmCatalogEmitter.EmitPrimary(in CaptureExchange exchange, CaptureEmissionObserver observer)
         {
-            var sink = CaptureServices.EmissionSink(receipt);
             ClearArchives(false);
-            EmitDirectPrimary(exchange,receipt);
-            EmitGenericPrimary(exchange,receipt);
+            EmitDirectPrimary(exchange,observer);
+            EmitGenericPrimary(exchange,observer);
         }
 
-        void IAsmCatalogEmitter.EmitImm(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt)
+        void IAsmCatalogEmitter.EmitImm(in CaptureExchange exchange, CaptureEmissionObserver observer)
         {
-            var sink = CaptureServices.EmissionSink(receipt);
             ClearArchives(true);
-            EmitDirectImm(exchange,receipt);
-            EmitGenericImm(exchange,receipt);
+            EmitDirectImm(exchange,observer);
+            EmitGenericImm(exchange,observer);
         }
 
-        void EmitDirectPrimary(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt)
+        void EmitDirectPrimary(in CaptureExchange exchange, CaptureEmissionObserver observer)
         {            
             foreach(var host in Catalog.DirectApiHosts)
-                EmitDirectPrimary(exchange, host, receipt);
+                EmitDirectPrimary(exchange, host, observer);
         }
 
-        void EmitDirectImm(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt)
+        void EmitDirectImm(in CaptureExchange exchange, CaptureEmissionObserver observer)
         {
             foreach(var host in Catalog.DirectApiHosts)
             {
@@ -79,50 +77,49 @@ namespace Z0
                              select immg;
                 
                 foreach(var g in specs)
-                    EmitDirectImm(exchange, g, archive, receipt);
+                    EmitDirectImm(exchange, g, archive, observer);
             }
         }
 
-        void EmitGenericPrimary(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt)
+        void EmitGenericPrimary(in CaptureExchange exchange, CaptureEmissionObserver observer)
         {
             foreach(var host in Catalog.GenericApiHosts)                
-                EmitGenericPrimary(exchange, host, receipt);
+                EmitGenericPrimary(exchange, host, observer);
         }
 
-        void EmitGenericImm(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt)
-        {
-        
+        void EmitGenericImm(in CaptureExchange exchange, CaptureEmissionObserver observer)
+        {        
             foreach(var host in Catalog.GenericApiHosts)
             {
                 var archive = HostImmArchive(host);
                 var specs = OpSpecs.generic(host).Where(op => FunctionType.immneeds(op.Root));
 
                 foreach(var spec in specs)
-                    EmitGenericImm(exchange, spec, archive, receipt);                
+                    EmitGenericImm(exchange, spec, archive, observer);                
             }        
         }
 
-        void EmitDirectPrimary(in CaptureExchange exchange, Type host, Action<CaptureTokenGroup> receipt)
+        void EmitDirectPrimary(in CaptureExchange exchange, Type host, CaptureEmissionObserver observer)
         {
             var primary = HostArchive(host);
             var immediate = HostImmArchive(host);
             var specs = OpSpecs.groups(host);
 
             foreach(var spec in specs)
-                Emit(exchange, PrimaryGroup(spec), primary, receipt);
+                Emit(exchange, PrimaryGroup(spec), primary, observer);
         }
 
-        void EmitGenericPrimary(in CaptureExchange exchange, Type host, Action<CaptureTokenGroup> receipt)
+        void EmitGenericPrimary(in CaptureExchange exchange, Type host, CaptureEmissionObserver observer)
         {
             var primary = HostArchive(host);
             var immediate = HostImmArchive(host);
             var specs = OpSpecs.generic(host);
 
             foreach(var spec in specs.Where(spec => !FunctionType.immneeds(spec.Root)))
-                Emit(exchange, spec, primary, receipt);
+                Emit(exchange, spec, primary, observer);
         }        
 
-        void Emit(in CaptureExchange exchange, DirectOpGroupSpec group, IAsmFunctionArchive dst, Action<CaptureTokenGroup> receipt)
+        void Emit(in CaptureExchange exchange, DirectOpGroupSpec group, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {                                    
             var functions = new List<AsmFunction>();
             foreach(var spec in group.Members)
@@ -131,12 +128,11 @@ namespace Z0
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(group.Id, functions.ToArray());
-                OnSave(dst.Save(fGroup, true), receipt);
-                //tGroup.OnSome(receipt).OnSome(g => Sink.Accept(g));
+                OnSave(dst.Save(fGroup, true), observer);
             }                        
         }
 
-        void Emit(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, Action<CaptureTokenGroup> receipt)
+        void Emit(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {
             var functions = new List<AsmFunction>();
             foreach(var closure in op.Close())                        
@@ -144,14 +140,11 @@ namespace Z0
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(op.Id, functions.ToArray());
-                OnSave(dst.Save(fGroup, true), receipt);
-
-            //var tGroup = dst.Save(fGroup, true);
-               // tGroup.OnSome(receipt).OnSome(g => Sink.Accept(g));
+                OnSave(dst.Save(fGroup, true), observer);
             }
         }
 
-        void EmitGenericImm(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, Action<CaptureTokenGroup> receipt)
+        void EmitGenericImm(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {
             if(FunctionType.vunaryImm(op.Root))
             {                                                
@@ -162,9 +155,7 @@ namespace Z0
                     if(functions.Length != 0)
                     {
                         var fGroup = AsmFunctionGroup.Define(op.Id, functions);
-                        OnSave(dst.Save(fGroup, true), receipt);
-                        //var tGroup = dst.Save(fGroup, true);                        
-                        //tGroup.OnSome(receipt).OnSome(g => Sink.Accept(g));
+                        OnSave(dst.Save(fGroup, true), observer);
                     }
                 }
             }
@@ -177,15 +168,13 @@ namespace Z0
                     if(functions.Length != 0)
                     {
                         var fGroup = AsmFunctionGroup.Define(op.Id, functions);
-                        OnSave(dst.Save(fGroup, true), receipt);
-                        // var tGroup = dst.Save(fGroup, true);                        
-                        // tGroup.OnSome(receipt).OnSome(g => Sink.Accept(g));
+                        OnSave(dst.Save(fGroup, true), observer);
                     }
                 }
             }
         }
 
-        void EmitDirectImm(in CaptureExchange exchange, DirectOpGroupSpec op, IAsmFunctionArchive dst, Action<CaptureTokenGroup> receipt)
+        void EmitDirectImm(in CaptureExchange exchange, DirectOpGroupSpec op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {
             var tokens = new List<CaptureToken>();
             foreach(var member in op.Members.Where(m => FunctionType.vunaryImm(m.Root)))
@@ -211,7 +200,7 @@ namespace Z0
             }
 
             if(tokens.Count != 0)
-                receipt(tokens.ToGroup(tokens[0].Uri.GroupUri));
+                observer(tokens.ToGroup(tokens[0].Uri.GroupUri));
         }                    
 
         DirectOpGroupSpec PrimaryGroup(DirectOpGroupSpec g)
@@ -231,22 +220,19 @@ namespace Z0
                 iter(ApiHosts.Select(HostArchive), a => a.Clear());
         }    
 
-        void OnSave(Option<CaptureTokenGroup> g, Action<CaptureTokenGroup> receipt)
+        void OnSave(Option<CaptureTokenGroup> g, CaptureEmissionObserver observer)
         {
-            g.OnSome(receipt).OnSome(g => Sink.Accept(g));
+            if(g.IsSome())
+            {
+                observer(g.Value);            
+                foreach(var t in g.Value.Tokens)
+                    print(Emitted(t));
+            }
         }
 
         void IPointSink<CaptureTokenGroup>.Accept(in CaptureTokenGroup src)
         {
-            if(Observer.IsSome())
-                Observer.Value.Accept(src);
-            else
-            {
-                foreach(var t in src.Tokens)
-                    print(Emitted(t));
-                //print(AsmServiceMessages.Emitted(src));
-            }
-
+            Observer(src);
         }
 
         string ArchiveSubject(Type host, bool imm)

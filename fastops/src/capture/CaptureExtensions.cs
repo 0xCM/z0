@@ -15,14 +15,6 @@ namespace Z0
 
     public static class CaptureExtensions
     {
-        [MethodImpl(Inline)]
-        public static CaptureExchange CreateExchange(this ICaptureControl control)
-            => CaptureServices.Exchange(control);
-
-        [MethodImpl(Inline)]
-        public static CaptureExchange CreateExchange(this ICaptureControl control, Span<byte> target, Span<byte> state)
-            => CaptureServices.Exchange(control, target, state);
-    
         public static CaptureTokenGroup ToGroup(this IEnumerable<CaptureToken> tokens, OpUri groupUri)
             => CaptureTokenGroup.Define(groupUri, tokens.ToArray());
 

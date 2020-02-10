@@ -15,18 +15,18 @@ namespace Z0
     /// </summary>
     readonly struct CaptureTokenSink : ICaptureTokenSink
     {
-        readonly Action<CaptureTokenGroup> Receiver;        
+        readonly CaptureEmissionObserver Observer;        
                 
         [MethodImpl(Inline)]
-        public static ICaptureTokenSink Create(Action<CaptureTokenGroup> receiver)
-            => new CaptureTokenSink(receiver);
+        public static ICaptureTokenSink Create(CaptureEmissionObserver observer)
+            => new CaptureTokenSink(observer);
         
         [MethodImpl(Inline)]
-        CaptureTokenSink(Action<CaptureTokenGroup> receiver)
-            => Receiver = receiver;
+        CaptureTokenSink(CaptureEmissionObserver observer)
+            => this.Observer = observer;
         
         [MethodImpl(Inline)]
         public void Accept(in CaptureTokenGroup src)
-            => Receiver(src);
+            => Observer(src);
     }
 }

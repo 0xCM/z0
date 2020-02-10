@@ -16,27 +16,27 @@ namespace Z0
     {
         public IAsmContext Context {get;}
 
-        readonly ICaptureControl Control;
+        readonly ICaptureOps Ops;
 
-        public static ICaptureService Create(IAsmContext context, ICaptureControl control)
+        public static ICaptureService Create(IAsmContext context, ICaptureOps control)
             => new AsmCaptureService(context, control);
 
-        AsmCaptureService(IAsmContext context, ICaptureControl control)
+        AsmCaptureService(IAsmContext context, ICaptureOps control)
         {
             Context = context;
-            Control = control;            
+            Ops = control;            
         }
 
         IAsmDecoder Decoder => Context.Decoder();                
 
         public CapturedMember ExtractBits(in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
-            => Control.Capture(in exchange, id,src);
+            => Ops.Capture(in exchange, id,src);
 
         public CapturedMember ExtractBits(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
-            => Control.Capture(in exchange, id, src);
+            => Ops.Capture(in exchange, id, src);
 
         public CapturedMember ExtractBits(in CaptureExchange exchange, OpIdentity id, Delegate src)
-            => Control.Capture(in exchange, id, src);
+            => Ops.Capture(in exchange, id, src);
 
         public CapturedMember ExtractBits(in CaptureExchange exchange, Delegate src)
             => ExtractBits(in exchange, src.Identify(), src);
@@ -50,7 +50,7 @@ namespace Z0
             for(var i = 0; i<methods.Length; i++)
             {
                 var m = methods[i];
-                targets[i] = Control.Capture(in exchange, m.Identify(), m).Replicate();                                 
+                targets[i] = Ops.Capture(in exchange, m.Identify(), m).Replicate();                                 
                 ExtractBits(exchange,m);
             }
             return targets;
@@ -74,7 +74,7 @@ namespace Z0
         }
 
         public void CaptureBits(in CaptureExchange exchange, MethodInfo src, IAsmCodeWriter dst)
-            => dst.Write(Control.Capture(in exchange, src.Identify(), src).Code);
+            => dst.Write(Ops.Capture(in exchange, src.Identify(), src).Code);
 
         public void CaptureBits(in CaptureExchange exchange, MethodInfo src, Type[] args, IAsmCodeWriter dst)
             => dst.Write(ExtractBits(exchange, src,args).Code);
@@ -98,6 +98,6 @@ namespace Z0
             => iter(ExtractAsm(exchange, src),dst.Write);
                 
         CapturedMember CaptureBits(in CaptureExchange exchange, MethodInfo m)
-            => Control.Capture(in exchange, m.Identify(), m); 
+            => Ops.Capture(in exchange, m.Identify(), m); 
     }
 }

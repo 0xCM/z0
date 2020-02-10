@@ -19,10 +19,9 @@ namespace Z0
         {
             try
             {
-                var outcome = capture(ref head(src), exchange);            
+                var outcome = Capture(exchange, id, ref head(src)).Outcome;            
                 var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
-                var state = outcome.State;
-                return CapturedData.Define(id, outcome, bytes);                
+                return CapturedData.Define(id, outcome, bytes);
             }
             catch(Exception e)
             {
@@ -36,11 +35,10 @@ namespace Z0
             try
             {
                 var pSrc = jit(src);
-                var outcome = capture(pSrc, exchange);            
+                var outcome = Capture(exchange, id, pSrc).Outcome;            
                 var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
                 var captured = CapturedMember.Define(id, src, outcome.Range, bytes, outcome);                
-                var state = outcome.State;
-                return exchange.Complete(state,captured);
+                return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
@@ -54,11 +52,10 @@ namespace Z0
             try
             {
                 var pSrc = jit(src).Ptr;
-                var outcome =  capture(pSrc, exchange);   
+                var outcome =  Capture(exchange,id, pSrc).Outcome;   
                 var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
                 var captured = CapturedMember.Define(id, src, outcome.Range, bytes, outcome);                
-                var state = outcome.State;
-                return exchange.Complete(state,captured);
+                return exchange.CaptureComplete(outcome.State, captured);
 
             }
             catch(Exception e)
@@ -73,11 +70,10 @@ namespace Z0
             try
             {
                 var pSrc = jit(src);
-                var outcome = capture(pSrc, exchange);
+                var outcome = Capture(exchange,id, pSrc).Outcome;
                 var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
                 var captured = CapturedMember.Define(id, src, outcome.Range, bytes, outcome);  
-                var state = outcome.State;
-                return exchange.Complete(state,captured);
+                return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
@@ -91,28 +87,36 @@ namespace Z0
             => Unsafe.Read<byte>(pSrc);
 
         [MethodImpl(Inline)]
-        static CaptureState Step(in CaptureExchange exchange, ref int offset, ref long location, ref byte* pSrc)
-        {
-            var code = Read(pSrc++);
-            exchange.Target(offset++) = code;
-            location = (long)pSrc;
-            return CaptureState.Define(offset,location,code);
-        }
-
-        [MethodImpl(Inline)]
         static CaptureOutcome Complete(in CaptureState state, CaptureTermCode tc, long start, long end, int delta)
             => CaptureOutcome.Define(state, (ulong)start, (ulong)(end + delta), tc);
 
         [MethodImpl(Inline)]
-        CaptureOutcome capture(ref byte src, in CaptureExchange exchange)
-            => capture((byte*)Unsafe.AsPointer(ref src), exchange);
+        static CaptureDataset Dataset(in CaptureExchange exchange, in CaptureState state, OpIdentity id, CaptureTermCode tc, long start, long end, int delta)
+        {
+            var outcome = Complete(state, tc, start, end, delta);
+            var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
+            var buffer = exchange.Target(0, (int)(end - start)).ToArray();
+            return CaptureDataset.Define(id, outcome, buffer, trimmed);
+        }
 
         [MethodImpl(Inline)]
-        CaptureOutcome capture(IntPtr src, in CaptureExchange exchange)
-            => capture(src.ToPointer<byte>(), exchange);
+        CaptureDataset Capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
+            => capture(exchange, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
-        CaptureOutcome capture(byte* pSrc, in CaptureExchange exchange)
+        CaptureDataset Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
+            => capture(exchange, id, src.ToPointer<byte>());
+
+        // [MethodImpl(Inline)]
+        // CaptureOutcome capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
+        //     => capture(exchange, id, (byte*)Unsafe.AsPointer(ref src));
+
+        // [MethodImpl(Inline)]
+        // CaptureOutcome capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)        
+        //     => capture(exchange, id, src.ToPointer<byte>());
+
+        [MethodImpl(Inline)]
+        CaptureDataset capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
         {
             var limit = exchange.BufferLength - 1;
             var start = (long)pSrc;
@@ -123,17 +127,31 @@ namespace Z0
 
             while(offset < limit)
             {
-                state = Step(exchange, ref offset, ref end, ref pSrc);                                
-                exchange.Accept(state);                
+                state = Step(exchange, id, ref offset, ref end, ref pSrc);                                
+                exchange.CaptureStep(state);                
 
                 if(ret_offset == null && state.Payload == RET)
                     ret_offset = offset;                 
 
                 var tc = CalcTerm(exchange, offset, ret_offset, out var delta);
-                if(tc != null)                
-                    return Complete(state, tc.Value, start,end, delta);
+                if(tc != null)         
+                {       
+                    return Dataset(exchange, state, id, tc.Value, start, end, delta);
+                    //return Complete(state, tc.Value, start, end, delta);
+                }
             }
-            return Complete(state, CTC_BUFFER_OUT,start,end,0);
+            return Dataset(exchange, state, id, CTC_BUFFER_OUT, start, end, 0);
+
+            //return Complete(state, CTC_BUFFER_OUT, start, end, 0);
         }                    
+
+        [MethodImpl(Inline)]
+        static CaptureState Step(in CaptureExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
+        {
+            var code = Read(pSrc++);
+            exchange.Target(offset++) = code;
+            location = (long)pSrc;
+            return CaptureState.Define(id, offset, location,code);
+        }
     }
 }

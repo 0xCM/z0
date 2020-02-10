@@ -56,14 +56,6 @@ namespace Z0
             this.CilFormatter = context.CilFormatter();
         }
 
-        // public AsmEmissionToken Save(AsmFunction src)
-        // {
-        //     HexPath(src.Id).WriteText(src.Code.Format());
-        //     AsmPath(src.Id).WriteText(DefaultFormatter.FormatDetail(src));
-        //     src.Cil.OnSome(cil => CilPath(src.Id).WriteText(CilFormatter.Format(cil)));
-        //     return AsmEmissionToken.Define(src.CaptureInfo, OpUri.Asm(Catalog, Subject, src.Id));
-        // }
-
         public Option<CaptureTokenGroup> Save(AsmFunctionGroup src, bool append)
         {            
             OnEmitting(src);
@@ -147,7 +139,7 @@ namespace Z0
  
         void OnEmitting(AsmFunctionGroup src)
         {
-            print(Emitting(src));
+            
         }
 
         void OnEmitted(CaptureTokenGroup emitted)
@@ -177,6 +169,5 @@ namespace Z0
 
         static FilePath CilFilPath(AssemblyId catalog, string host, OpIdentity id)
             => Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), host)).CreateIfMissing() + Paths.CilFile(id);
-
     }
 }

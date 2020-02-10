@@ -23,19 +23,25 @@ namespace Z0
         public readonly Span<byte> StateBuffer;
 
         /// <summary>
+        /// The juncture-coincident operation set 
+        /// </summary>
+        public readonly ICaptureOps Operations;
+
+        /// <summary>
         /// The junction to which events will be relayed
         /// </summary>
         readonly ICaptureJunction Junction;
 
-        public static CaptureExchange Define(ICaptureJunction junction, Span<byte> capture, Span<byte> state)
-            => new CaptureExchange(junction,capture,state);
+        public static CaptureExchange Define(ICaptureControl control, Span<byte> capture, Span<byte> state)
+            => new CaptureExchange(control,capture,state);
 
-        CaptureExchange(ICaptureJunction juntion, Span<byte> capture, Span<byte> state)            
+        CaptureExchange(ICaptureControl control, Span<byte> capture, Span<byte> state)            
         {
             require(capture.Length == state.Length);
             this.TargetBuffer = capture;
             this.StateBuffer = state;
-            this.Junction = juntion;
+            this.Junction = control as ICaptureJunction;
+            this.Operations = control;
         }
 
         public void ClearBuffers()
@@ -43,14 +49,6 @@ namespace Z0
             TargetBuffer.Clear();
             StateBuffer.Clear();
         }
-
-        /// <summary>
-        /// Replaces the current junction with another
-        /// </summary>
-        /// <param name="junction">The replacement junction</param>
-        [MethodImpl(Inline)]
-        public CaptureExchange Rejunction(ICaptureJunction junction)
-            => new CaptureExchange(junction, TargetBuffer, StateBuffer);
 
         /// <summary>
         /// Queries and manipulates an index-identified state buffer byte
@@ -69,7 +67,7 @@ namespace Z0
             => ref seek(TargetBuffer, index);
 
         /// <summary>
-        /// Slices a seection of the target buffer
+        /// Slices a section of the target buffer
         /// </summary>
         /// <param name="start">The start index</param>
         /// <param name="length">The slice length</param>
@@ -78,16 +76,16 @@ namespace Z0
             => TargetBuffer.Slice(start, length);
 
         [MethodImpl(Inline)]
-        public ref readonly CapturedMember Complete(in CaptureState state, in CapturedMember captured)
+        public ref readonly CapturedMember CaptureComplete(in CaptureState state, in CapturedMember captured)
         {
-            Junction.Complete(this, state, captured);
+            Junction.OnCaptureComplete(this, state, captured);
             return ref captured;
         }
 
         [MethodImpl(Inline)]
-        public ref readonly CaptureState Accept(in CaptureState state)
+        public ref readonly CaptureState CaptureStep(in CaptureState state)
         {
-            Junction.Accept(this, state);
+            Junction.OnCaptureStep(this, state);
             return ref state;
         }
 
@@ -95,15 +93,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => TargetBuffer.Length;
-        }
-
-        readonly struct EmptyJunction : ICaptureJunction
-        {
-            public static EmptyJunction Empty => default;
-                    
-            public void Accept(in CaptureExchange exchange, in CaptureState state){}
-
-            public void Complete(in CaptureExchange exchange, in CaptureState state, in CapturedMember captured) {}
         }
     }
 }

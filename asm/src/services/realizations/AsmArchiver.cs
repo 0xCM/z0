@@ -39,8 +39,7 @@ namespace Z0
         {
             var emissions = new List<CaptureTokenGroup>(); 
 
-            void OnEmission(CaptureTokenGroup emission)
-                => emissions.Add(emission);            
+            void OnEmission(in CaptureTokenGroup emission) => emissions.Add(emission);            
             
             emitter.EmitPrimary(exchange,OnEmission);
 
@@ -51,10 +50,9 @@ namespace Z0
         {
             var emissions = new List<CaptureTokenGroup>();   
             
-            void OnEmission(CaptureTokenGroup emission)
-                => emissions.Add(emission);
+            void OnEmission(in CaptureTokenGroup emission) => emissions.Add(emission);
 
-            emitter.EmitImm(exchange, OnEmission);
+            emitter.EmitImm(exchange,OnEmission);
 
             return emissions.ToArray();                
         }
@@ -73,9 +71,13 @@ namespace Z0
 
         void Archive(in CaptureExchange exchange, IOperationProvider src)
         {
+            void OnEmission(in CaptureTokenGroup data)
+            {
+
+            }
             var metadata = ClrMetadataIndex.Create(src.HostAssembly);
             var context = AsmContext.New(metadata, Resources);
-            var emitter = context.CatalogEmitter(src.Catalog);
+            var emitter = context.CatalogEmitter(src.Catalog, OnEmission);
 
             var primary = EmitPrimary(exchange, src, emitter);
             if(primary.Length != 0)
@@ -84,25 +86,33 @@ namespace Z0
             var imm = EmitImm(exchange, src, emitter);
             if(imm.Length != 0)
                 Completed(ReportEmissions(src.HostId, imm, AsmEmissionKind.Imm));
-
             
             Completed(EmitLocations(src));
         }
 
         public void Archive(AssemblyId id)
         {
+            void OnCaptureEvent(in CaptureEventData data)
+            {
+
+            }
+
             var provider = Resolved.OperationProvider(id);
             if(provider.IsSome())
             {
-                var exchange = CaptureServices.Exchange();
+                var exchange = CaptureServices.Exchange(OnCaptureEvent);
                 Archive(in exchange, provider.Value);
             }
         }
 
         public void Execute()
         {             
-            var control = CaptureServices.Control();
-            var exchange = CaptureServices.Exchange(control);
+            void OnCaptureEvent(in CaptureEventData data)
+            {
+
+            }
+
+            var exchange = CaptureServices.Exchange(OnCaptureEvent);
             var providers = Resolved.OperationProviders(ActiveAssemblies);
             
             foreach(var src in providers)

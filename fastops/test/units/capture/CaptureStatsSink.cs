@@ -36,16 +36,18 @@ namespace Z0
         }
     }
 
-    readonly struct CaptureStatsSink : ICaptureEventSink
+    public delegate void OnCaptureStatsCollected();
+
+    readonly struct CaptureStatsSink
     {                
-        readonly Action<CaptureState> Observer;
+        readonly CaptureEventObserver Observer;
         
         readonly Dictionary<int,CaptureByteCode> Classified;
 
-        public static CaptureStatsSink Create(Action<CaptureState> observer)
+        public static CaptureStatsSink Create(CaptureEventObserver observer)
             => new CaptureStatsSink(observer);
 
-        CaptureStatsSink(Action<CaptureState> observer)
+        CaptureStatsSink(CaptureEventObserver observer)
         {
             Observer = observer;
             Classified = new Dictionary<int, CaptureByteCode>();
@@ -54,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Accept(in CaptureEventData info)
         {
-            Observer(info.CaptureState);
+            Observer(info);
             (var offset, var value) = Record(info);
             Classify(offset,value);
         }
@@ -90,7 +92,7 @@ namespace Z0
         static (int offset, byte value) Record(in CaptureEventData data)
         {
             var offset = Offset(data);
-            var value =data.CaptureState.Payload;
+            var value = data.CaptureState.Payload;
             data[offset] = value;
             return (offset, value);
         }
@@ -98,12 +100,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static int Offset(in CaptureEventData src)        
             => src.CaptureState.Offset;        
-
-        public void Complete(in CaptureEventData data)
-        {
-            Observer(data.CaptureState);
-            
-        }
     }
 
     enum CaptureByteCode : byte
