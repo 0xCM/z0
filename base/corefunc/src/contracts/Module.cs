@@ -101,5 +101,4 @@ namespace Z0
         /// <param name="r">The ring individual type, i.e., the scalar type</param>
         G RightScale(G m, R r);
     }
-
 }

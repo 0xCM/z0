@@ -36,26 +36,13 @@ namespace Z0
         /// </summary>
         public readonly DynamicMethod DynamicMethod;
 
-        [MethodImpl(Inline)]
-        public static DynamicDelegate<D> Define<D>(OpIdentity id, MethodInfo src, DynamicMethod dst, D op)
-            where D : Delegate
-                => new DynamicDelegate<D>(id, src, dst,op);
-
-        [MethodImpl(Inline)]
-        public static DynamicDelegate Define(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
-            => new DynamicDelegate(id,src, dst,op);
-
-        [MethodImpl(Inline)]
-        internal static DynamicDelegate From<D>(DynamicDelegate<D> src)
-            where D : Delegate
-                => new DynamicDelegate(src.Id,src.SourceMethod, src.DynamicMethod,src.DynamicOp);
 
         [MethodImpl(Inline)]
         public static implicit operator Delegate(DynamicDelegate d)
             => d.DynamicOp;
 
         [MethodImpl(Inline)]
-        DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
+        internal DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
         {
             this.Id = id;
             this.SourceMethod = src;

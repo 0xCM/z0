@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
     /// <summary>
     /// Characterizes a partial order, i.e. a reflexive, transitive and 
     /// antisymmetric binary operator
@@ -18,7 +15,6 @@ namespace Z0
     {
 
     }
-
 
     /// <summary>
     /// Characterizes a set equipped with a partial order
@@ -37,7 +33,4 @@ namespace Z0
         /// <returns>Returns true if either a ~ b or b ~ a and false oterwise</returns>
         bool Comparable(T x, T y);
     }
-
-
-
 }

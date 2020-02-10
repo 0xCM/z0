@@ -64,7 +64,7 @@ namespace Z0
         //     return AsmEmissionToken.Define(src.CaptureInfo, OpUri.Asm(Catalog, Subject, src.Id));
         // }
 
-        public Option<AsmEmissionGroup> Save(AsmFunctionGroup src, bool append)
+        public Option<CaptureTokenGroup> Save(AsmFunctionGroup src, bool append)
         {            
             OnEmitting(src);
             WriteHex(src, append).OnSome(e => errout(e));
@@ -123,25 +123,25 @@ namespace Z0
             }
         }
 
-        Option<AsmEmissionGroup> WriteAsm(AsmFunctionGroup src, bool append)
+        Option<CaptureTokenGroup> WriteAsm(AsmFunctionGroup src, bool append)
         {
             try
             {
-                var tokens = new AsmEmissionToken[src.Members.Length];
+                var tokens = new CaptureToken[src.Members.Length];
                 using var writer = new StreamWriter(AsmPath(src.Id).FullPath, append);            
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
                     var uri = OpUri.AsmOp(Origin, ApiHost, src.Id, f.Id);
                     writer.Write(GroupFormatter.FormatDetail(f));
-                    tokens[i] = AsmEmissionToken.Define(f.CaptureInfo, uri);
+                    tokens[i] = CaptureToken.Define(f.CaptureInfo, uri);
                 }
                 return tokens.ToGroup(OpUri.AsmGroup(Origin, ApiHost, src.Id));
             }
             catch(Exception e)
             {
                 errout(e);
-                return none<AsmEmissionGroup>();
+                return none<CaptureTokenGroup>();
             }
         }
  
@@ -150,7 +150,7 @@ namespace Z0
             print(Emitting(src));
         }
 
-        void OnEmitted(AsmEmissionGroup emitted)
+        void OnEmitted(CaptureTokenGroup emitted)
         {
             print(Emitted(emitted));            
         }

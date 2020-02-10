@@ -16,6 +16,10 @@ namespace Z0
     public unsafe readonly struct DynamicPointer
     {
         [MethodImpl(Inline)]
+        public static DynamicPointer Define(DynamicDelegate dynamicOp, IntPtr pointer)
+            => new DynamicPointer(dynamicOp, pointer);
+
+        [MethodImpl(Inline)]
         public DynamicPointer(DynamicDelegate dynamicOp, IntPtr pointer)
         {
             Ptr = pointer;

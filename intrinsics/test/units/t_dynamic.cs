@@ -42,7 +42,7 @@ namespace Z0
         public void handle_test()
         {   const byte imm8 = 9;
             var method = typeof(ginx).Methods().WithName(nameof(ginx.vbsll)).OfKind(HK.vk128()).Single();
-            var op = DynopImm.UnaryOp(HK.vk128<uint>(), Identity.identify(method), method,imm8);
+            var op = Dynop.UnaryOpImm(HK.vk128<uint>(), Identity.identify(method), method,imm8);
             var handle = GetMethodHandle(op.DynamicMethod);
             PostMessage(handle.Value.ToString());
 

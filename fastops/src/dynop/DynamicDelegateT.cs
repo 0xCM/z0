@@ -18,8 +18,8 @@ namespace Z0
         where D : Delegate
     {
         [MethodImpl(Inline)]
-        public static implicit operator DynamicDelegate(DynamicDelegate<D> d)
-            => DynamicDelegate.From(d);
+        public static implicit operator DynamicDelegate(DynamicDelegate<D> src)
+            => new DynamicDelegate(src.Id, src.SourceMethod, src.DynamicMethod, src.DynamicOp);
 
         [MethodImpl(Inline)]
         public static implicit operator D(DynamicDelegate<D> d)

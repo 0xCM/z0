@@ -14,6 +14,17 @@ namespace Z0
 
     public static class AsmCodeExtensions
     {
+        /// <summary>
+        /// Loads native code into the buffer for execution
+        /// </summary>
+        /// <param name="src">The source code (pun intended)</param>
+        [MethodImpl(Inline)]
+        public static ExecBufferToken Load(this ExecBufferToken buffer, in AsmCode src)
+        {
+            buffer.Fill(src.Encoded);
+            return buffer;
+        }
+
         [MethodImpl(Inline)]
         public static AsmCode WithIdentity(this AsmCode src, OpIdentity id)
             => AsmCode.Define(id, src.Origin, src.Label, src.Encoded);

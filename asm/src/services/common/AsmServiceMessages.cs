@@ -30,10 +30,10 @@ namespace Z0
         public static AppMsg Emitting(AsmFunctionGroup src)
             => appMsg($"Emitting {src.Id}");
 
-        public static AppMsg Emitted(AsmEmissionGroup src)
+        public static AppMsg Emitted(CaptureTokenGroup src)
             => appMsg($"Emitted {src.Uri}");
 
-        public static AppMsg Emitted(AsmEmissionToken src)
+        public static AppMsg Emitted(CaptureToken src)
             => appMsg($"Emitted {src.Uri}", SeverityLevel.Babble);
 
         public static AppMsg Emitting(GenericOpSpec op)        
@@ -60,7 +60,7 @@ namespace Z0
         public static AppMsg Decoding(OpIdentity id, MethodInfo m)        
             => appMsg($"Decoding  method {m.DisplayName()} with identity {id}", SeverityLevel.Babble);
 
-        public static AppMsg DescriptorConflit(AsmEmissionToken src)
+        public static AppMsg DescriptorConflit(CaptureToken src)
             => appMsg($"The descriptor with uri {src.Uri} conflicts with an existing descriptor", SeverityLevel.Warning);
             
         public static AppMsg EmittingImmSpecializations(OpSpec op, IEnumerable<byte> immediates)        

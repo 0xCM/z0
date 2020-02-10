@@ -13,21 +13,20 @@ namespace Z0
     /// <summary>
     /// Accepts and then relays emission groups to a specified receiver
     /// </summary>
-    readonly struct AmsEmissionSink : IAsmEmissionSink
+    readonly struct CaptureTokenSink : ICaptureTokenSink
     {
-        readonly Action<AsmEmissionGroup> Receiver;        
+        readonly Action<CaptureTokenGroup> Receiver;        
                 
         [MethodImpl(Inline)]
-        public static IAsmEmissionSink Create(Action<AsmEmissionGroup> receiver)
-            => new AmsEmissionSink(receiver);
+        public static ICaptureTokenSink Create(Action<CaptureTokenGroup> receiver)
+            => new CaptureTokenSink(receiver);
         
         [MethodImpl(Inline)]
-        AmsEmissionSink(Action<AsmEmissionGroup> receiver)
+        CaptureTokenSink(Action<CaptureTokenGroup> receiver)
             => Receiver = receiver;
         
         [MethodImpl(Inline)]
-        public void Accept(in AsmEmissionGroup src)
+        public void Accept(in CaptureTokenGroup src)
             => Receiver(src);
     }
-
 }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Concurrent;
     using System.Linq;
@@ -15,23 +14,10 @@ namespace Z0
     
     using static zfunc;
 
-
     public interface IConcurrentLookup<K,V>
     {
         V Acquire(K key, Func<K,V> factory);
-        void Add(K key, V value);
-        
-    }
-
-    public static class ConcurrentLookup
-    {
-        [MethodImpl(Inline)]
-        public static IConcurrentLookup<K,V> Cached<K,V>()
-            => ConcurrentCache<K,V>.TheOnly;
-
-        [MethodImpl(Inline)]
-        public static IConcurrentLookup<K,V> New<K,V>()
-            => new ConcurrentLookup<K, V>();
+        void Add(K key, V value);        
     }
 
     readonly struct ConcurrentCache<K,V> : IConcurrentLookup<K,V>
@@ -48,8 +34,6 @@ namespace Z0
         public void Add(K key, V value)
             => Index.Add(key,value);
     }
-
-    
 
     class ConcurrentLookup<K,V> : IConcurrentLookup<K,V>
     {
@@ -90,8 +74,7 @@ namespace Z0
                 finally
                 {
                     mylock.Release();
-                }
-                
+                }                
             }
             return cacheEntry;
         }
@@ -125,9 +108,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Add(K key, V value)        
-            => TryAdd(key, value).Wait();
-        
-            
-
+            => TryAdd(key, value).Wait();                
     }
 }

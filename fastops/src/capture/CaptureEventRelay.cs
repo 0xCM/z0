@@ -13,18 +13,18 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// The default implementation of the state buffer client
+    /// A capture event relay
     /// </summary>
-    readonly struct CaptureStateSink : ICaptureEventSink
+    readonly struct CaptureEventRelay : ICaptureEventSink
     {
         readonly int[] Stats;
 
         readonly ICaptureEventSink Observer;
         
-        public static CaptureStateSink Create(ICaptureEventSink observer)
-            => new CaptureStateSink(observer);
+        public static CaptureEventRelay Create(ICaptureEventSink observer)
+            => new CaptureEventRelay(observer);
 
-        CaptureStateSink(ICaptureEventSink observer)
+        CaptureEventRelay(ICaptureEventSink observer)
         {
             this.Observer = observer;
             this.Stats = new int[1];
@@ -62,6 +62,4 @@ namespace Z0
             return (offset, value);
         }
     }
-
-
 }

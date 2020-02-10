@@ -40,19 +40,19 @@ namespace Z0
         /// <summary>
         /// Instantiates a contextual immediate capture service for a unary operator
         /// </summary>
-        /// <param name="context">The context</param>
-        /// <param name="src">The soruce method</param>
-        /// <param name="baseid">The base identifier that will be suffixed when identifying productions</param>
+        /// <param name="context">The source context</param>
+        /// <param name="src">A unary operator that requires an immediate value</param>
+        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
         [MethodImpl(Inline)]
         public static IAsmImmCapture UnaryImmCapture(this IAsmContext context, MethodInfo src, OpIdentity baseid)
             => AsmImmCapture.Unary(context,src,baseid);
 
         /// <summary>
-        /// Instantiates a contextual immediate capture service specialized for an indicated binary operator
+        /// Instantiates a contextual immediate capture service for a binary operator
         /// </summary>
         /// <param name="context">The source context</param>
-        /// <param name="src">The soruce method</param>
-        /// <param name="baseid">The base identifier that will be suffixed when identifying productions</param>
+        /// <param name="src">A unary operator that requires an immediate value</param>
+        /// <param name="baseid">The identity to use as a basis for immediate-specialized identities</param>
         [MethodImpl(Inline)]
         public static IAsmImmCapture BinaryImmCapture(this IAsmContext context, MethodInfo src, OpIdentity baseid)
             => AsmImmCapture.Binary(context,src,baseid);
@@ -162,7 +162,7 @@ namespace Z0
         /// Instantiates a contextual catalog-level emitter service
         /// </summary>
         /// <param name="context">The source context</param>
-        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, IAsmEmissionSink observer = null)
+        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, ICaptureTokenSink observer = null)
             => AsmCatalogEmitter.Create(context,catalog, observer);
 
         /// <summary>

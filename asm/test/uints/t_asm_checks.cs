@@ -639,14 +639,14 @@ namespace Z0
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
         
-        void vadd_check<T>(in AsmBuffers buffers, N128 w, TypedAsm<T> asm)
+        void vadd_check<T>(in AsmBuffers buffers, N128 w, AsmCode<T> asm)
             where T : unmanaged
         {            
             var f = buffers.MainExec.BinaryOp(w,asm);            
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
-        void vadd_check<T>(in AsmBuffers buffers, N256 w, TypedAsm<T> asm)
+        void vadd_check<T>(in AsmBuffers buffers, N256 w, AsmCode<T> asm)
             where T : unmanaged
         {            
             var f = buffers.MainExec.BinaryOp(w,asm);

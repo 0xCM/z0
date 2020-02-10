@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-
     public interface IEquivalenceClass<T>
     {
         /// <summary>
@@ -16,7 +15,6 @@ namespace Z0
         /// </summary>
         T Rep {get;}
     }
-
 
     /// <summary>
     /// Characterizes an equivalence class, i.e. a segment of a partition effected via 
@@ -45,6 +43,4 @@ namespace Z0
     public interface IFiniteEquivalenceClass<S,T> : IDiscreteEqivalenceClass<S,T>//, FiniteSet<S,T> 
         where S : IFiniteEquivalenceClass<S,T>, new()
     { }
-
-
 }

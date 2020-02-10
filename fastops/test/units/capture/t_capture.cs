@@ -17,14 +17,14 @@ namespace Z0
     {    
         public void capture_1()
         {
-            var src = Intrinsics.Direct.Where(m => m.Name == nameof(dinx.vand));
-            var stats = CaptureStatsSink.Create(stats => Trace(stats));
-            var control = CaptureServices.Control(stats);
+            var stats1 = CaptureStatsSink.Create(stats => Trace($"stats1: {stats}"));
+
+            var control = CaptureServices.Control(stats1);
             var exchange = control.CreateExchange();            
             
+            var src = Intrinsics.Direct.Where(m => m.Name == nameof(dinx.vand));
             foreach(var method in src)
             {
-                Trace(method.Identify());
                 control.Capture(exchange, method.Identify(), method);
             }
 

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
@@ -36,6 +35,7 @@ namespace Z0
             this.data = src.ToArray();
             this.nonempty = true;
         }
+
         readonly bool nonempty;
 
         readonly T[] data;
@@ -51,7 +51,6 @@ namespace Z0
 
         public T this[int i] 
             => data[i];
-
 
         [MethodImpl(Inline)]
         public bool Equals(FiniteSeq<T> rhs)

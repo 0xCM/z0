@@ -14,8 +14,7 @@ namespace Z0
     /// is either Negative, Positive or Neutral=0.
     /// </remaks>
     public enum Sign : int
-    {
-        
+    {        
         /// <summary>
         /// Specifies negative polarity and can be interpreted as mathematical sign
         /// </summary>
@@ -26,8 +25,7 @@ namespace Z0
         /// a sign classification to the number 0.
         /// </summary>
         None = 0,
-        
-        
+            
         /// <summary>
         /// Specifies positive polarity and can be interpreted as mathematical sign
         /// </summary>
@@ -57,7 +55,5 @@ namespace Z0
         /// Determines the sign of the structure
         /// </summary>
         Sign Sign();
-
     }
-
 }

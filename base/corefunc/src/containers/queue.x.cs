@@ -5,18 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static zfunc;
 
     partial class xfunc
     {
-
         /// <summary>
         /// Enqueues a stream
         /// </summary>
@@ -52,7 +46,5 @@ namespace Z0
         /// <param name="q">the queue</param>
         public static Option<T> TryPop<T>(this Queue<T> q)
             => q.IsEmpty() ? none<T>() : some(q.Dequeue());
-
     }
-
 }

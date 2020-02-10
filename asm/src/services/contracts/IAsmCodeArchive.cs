@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="m">The identifying moniker</param>
-        Option<TypedAsm<T>> Read<T>(OpIdentity m, T t = default)
+        Option<AsmCode<T>> Read<T>(OpIdentity m, T t = default)
             where T : unmanaged;
 
         /// <summary>

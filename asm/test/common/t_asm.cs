@@ -117,7 +117,7 @@ namespace Z0
             CheckAction(check, src.Id);
         }
 
-        protected void CheckAsmMatch<T>(in AsmBuffers buffers, UnaryOp<T> f, TypedAsm<T> asm)
+        protected void CheckAsmMatch<T>(in AsmBuffers buffers, UnaryOp<T> f, AsmCode<T> asm)
             where T : unmanaged
                 => CheckAsmMatch(buffers, f, asm.Untyped);
 
@@ -140,14 +140,14 @@ namespace Z0
             CheckAction(check, src.Id);
         }
 
-        protected void CheckAsmMatch<T>(in AsmBuffers buffers, BinaryOp<T> f, TypedAsm<T> asm)
+        protected void CheckAsmMatch<T>(in AsmBuffers buffers, BinaryOp<T> f, AsmCode<T> asm)
             where T : unmanaged
                 => CheckAsmMatch(buffers, f,asm.Untyped);
 
         protected AsmCode ReadAsm(AssemblyId id, string host, OpIdentity m)
             => Context.CodeArchive(id,host).Read(m).Single();
 
-        protected TypedAsm<T> ReadAsm<W,T>(AssemblyId catalog, string host, string opname, W w = default, T t = default)
+        protected AsmCode<T> ReadAsm<W,T>(AssemblyId catalog, string host, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
         {

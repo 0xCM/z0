@@ -30,33 +30,33 @@ namespace Z0
         static IEnumerable<IAssemblyDesignator> TestHosts
             => C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x);
 
-        AsmFunction[] ResolveExample<T>(in CaptureExchange exchange, N128 w, T t = default)
-            where T : unmanaged
-        {
-            var imm = new byte[]{199,205};
-            var c1 = Context.ImmCaptureService(VX.vbsll(w,t));
-            var r1 = c1.Capture(exchange, imm);
+        // AsmFunction[] ResolveExample<T>(in CaptureExchange exchange, N128 w, T t = default)
+        //     where T : unmanaged
+        // {
+        //     var imm = new byte[]{199,205};
+        //     var c1 = Context.ImmCaptureService(VX.vbsll(w,t));
+        //     var r1 = c1.Capture(exchange, imm);
 
-            var c2 = Context.ImmCaptureService(VX.vsrl(w,t));
-            var r2 = c2.Capture(exchange, imm);
+        //     var c2 = Context.ImmCaptureService(VX.vsrl(w,t));
+        //     var r2 = c2.Capture(exchange, imm);
 
-            var c3 = Context.ImmCaptureService(VX.vblend8x16(w,t));
-            var r3 = c3.Capture(exchange, imm);
-            return r1.Union(r2).Union(r3).ToArray();
-        }
+        //     var c3 = Context.ImmCaptureService(VX.vblend8x16(w,t));
+        //     var r3 = c3.Capture(exchange, imm);
+        //     return r1.Union(r2).Union(r3).ToArray();
+        // }
 
-        AsmFunction[] ResolveExample<T>(in CaptureExchange exchange, N256 w, T t = default)
-            where T : unmanaged
-        {
-            var imm = new byte[]{199,205};
-            var c1 = Context.ImmCaptureService(VX.vbsll(w,t));
-            var r1 = c1.Capture(exchange,imm);
+        // AsmFunction[] ResolveExample<T>(in CaptureExchange exchange, N256 w, T t = default)
+        //     where T : unmanaged
+        // {
+        //     var imm = new byte[]{199,205};
+        //     var c1 = Context.ImmCaptureService(VX.vbsll(w,t));
+        //     var r1 = c1.Capture(exchange,imm);
 
-            var c2 = Context.ImmCaptureService(VX.vsrl(w,t));
-            var r2 = c2.Capture(exchange,imm);
+        //     var c2 = Context.ImmCaptureService(VX.vsrl(w,t));
+        //     var r2 = c2.Capture(exchange,imm);
 
-            return r1.Union(r2).ToArray();            
-        }
+        //     return r1.Union(r2).ToArray();            
+        // }
 
         static double RunTests(IAssemblyDesignator host)
         {

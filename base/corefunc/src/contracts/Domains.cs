@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public enum Ordering
     {
         LT = -1,
         EQ = 0,
         GT = 1
     }
-
-
 
     /// <summary>
     /// Characterizes an integral domain, which is a nonzero commutative ring
@@ -27,7 +24,6 @@ namespace Z0
         
     }
 
-
     /// <summary>
     /// Characterizes a GCD domain
     /// </summary>
@@ -37,13 +33,11 @@ namespace Z0
         where T : unmanaged, IGcdDomainOps<T>
     {
 
-
     }
 
     public interface IModularOps<T>
     {
         T Mod(T lhs, T rhs);
-
     }
 
     public interface IDivisiveOps<T> : IModularOps<T>
@@ -63,7 +57,6 @@ namespace Z0
     public interface IUniqueFactorDomainOps<T> : IGcdDomainOps<T>
         where T : unmanaged, IUniqueFactorDomainOps<T>
     {
-
         
     }
 
@@ -74,7 +67,6 @@ namespace Z0
     public interface IPrincipalIdealDomainOps<T> : IUniqueFactorDomainOps<T>
         where T : unmanaged, IPrincipalIdealDomainOps<T>
     {
-
         
     }
 
@@ -100,8 +92,6 @@ namespace Z0
         S Div(S rhs);        
 
         S Gcd(S rhs);
-
-
     }
 
     public interface IDivisive<S,T> : IDivisive<S>
@@ -109,5 +99,4 @@ namespace Z0
     {
 
     }        
-
 }

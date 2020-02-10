@@ -25,7 +25,7 @@ namespace Z0
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
+                => Dynop.BinaryOpImm<T>(hk, Moniker, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -44,7 +44,7 @@ namespace Z0
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
+                => Dynop.BinaryOpImm<T>(hk, Moniker, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
@@ -63,7 +63,7 @@ namespace Z0
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
+                => Dynop.BinaryOpImm<T>(hk, Moniker, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -82,7 +82,7 @@ namespace Z0
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
+                => Dynop.BinaryOpImm<T>(hk, Moniker, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
@@ -102,7 +102,7 @@ namespace Z0
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
+                => Dynop.BinaryOpImm<T>(hk, Moniker, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -121,7 +121,7 @@ namespace Z0
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => DynopImm.BinaryOp<T>(hk, Moniker, gApiMethod(hk,Name),spec);
+                => Dynop.BinaryOpImm<T>(hk, Moniker, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 

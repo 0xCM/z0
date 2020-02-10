@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     /// <summary>
     /// Characterizes semiring operations
     /// </summary>
@@ -26,6 +25,4 @@ namespace Z0
      {
         S MulAdd(S y, S z);
      }
-
-
 }

@@ -12,32 +12,17 @@ namespace Z0
 
     readonly struct CaptureControl : ICaptureControl
     {                    
-        readonly ICaptureEventSink EventSink;
-
-        readonly ICaptureEventSink StateSink;
-
-
-        public static ICaptureControl Create(ICaptureEventSink sink)
-            => new CaptureControl(sink);
-                    
-        public static ICaptureControl Create(ICaptureEventSink events, ICaptureEventSink state)
-            => new CaptureControl(events,state);
+        readonly ICaptureEventSink Observer;
 
         public static ICaptureControl Create()
             => new CaptureControl(CaptureEventSink.Empty);
 
-
-        CaptureControl(ICaptureEventSink events, ICaptureEventSink state)
+        public static ICaptureControl Create(ICaptureEventSink observer)
+            => new CaptureControl(observer);
+                    
+        CaptureControl(ICaptureEventSink observer)
         {
-            this.EventSink = events;
-            this.StateSink = state;
-        }
-
-
-        CaptureControl(ICaptureEventSink events)
-        {
-            this.EventSink = events;
-            this.StateSink = CaptureStateSink.Create(EventSink);
+            this.Observer = observer;
         }
 
         [MethodImpl(Inline)]
@@ -59,15 +44,13 @@ namespace Z0
         [MethodImpl(Inline)]
         void ForwardEvent(in CaptureEventData data)
         {
-            EventSink.Accept(data);
-            StateSink.Accept(data);
+            Observer.Accept(data);
         }
 
         [MethodImpl(Inline)]
         void ForwardCompletion(in CaptureEventData data)
         {
-            EventSink.Complete(data);
-            //StateSink.Complete(data);
+            Observer.Complete(data);
         }
 
         /// <summary>
@@ -95,25 +78,13 @@ namespace Z0
             => ForwardCompletion(CaptureEventData.Define(state, exchange.StateBuffer, captured));
 
         readonly struct CaptureEventSink : ICaptureEventSink
-        {
-            readonly Option<ICaptureEventSink> Relay;
-
+        {        
             public static ICaptureEventSink Empty = default(CaptureEventSink);
             
-            CaptureEventSink(ICaptureEventSink relay)
-                => this.Relay = relay != null ? some(relay) : none<ICaptureEventSink>();
-
-            [MethodImpl(Inline)]
-            public void Accept(in CaptureEventData data) 
-            {
-                if(Relay.IsSome())
-                    Relay.Value.Accept(data);
-            }
+            public void Accept(in CaptureEventData data) {}
 
             public void Complete(in CaptureEventData data) {}
 
-            public static ICaptureEventSink WithRelay(ICaptureEventSink dst)
-                => new CaptureEventSink(dst);
         }
     }
 }

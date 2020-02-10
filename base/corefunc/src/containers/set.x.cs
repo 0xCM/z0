@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
@@ -135,6 +132,5 @@ namespace Z0
                 a.Add(item);
             return a;
         }
-
     }
 }

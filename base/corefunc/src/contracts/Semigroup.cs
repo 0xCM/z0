@@ -16,7 +16,6 @@ namespace Z0
         /// <param name="lhs">The first operand</param>
         /// <param name="rhs">The second operand</param>
         bool Equals(T lhs, T rhs);
-
     }
 
     public interface ISemigroupAOps<T> : ISemigroupOps<T>, IAdditiveOps<T>
@@ -76,6 +75,4 @@ namespace Z0
         /// <param name="hasher">The hash function to use, if specified</param>
         IEqualityComparer<T> Comparer(Func<T,int> hasher = null);
     }
-
-
-}    
+}

@@ -50,7 +50,6 @@ namespace Z0
             where S : unmanaged
                     => new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<T>()).As<byte,T>();
 
-
         /// <summary>
         /// Formats a span as a table
         /// </summary>

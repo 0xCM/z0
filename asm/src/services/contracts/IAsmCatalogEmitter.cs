@@ -16,13 +16,13 @@ namespace Z0
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="receipt">The emission evidence receiver</param>
-        void EmitPrimary(in CaptureExchange exchange, Action<AsmEmissionGroup> receipt);          
+        void EmitPrimary(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt);          
 
         /// <summary>
         /// Emits immediate captures
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="receipt">The emission evidence receiver</param>
-        void EmitImm(in CaptureExchange exchange, Action<AsmEmissionGroup> receipt);  
+        void EmitImm(in CaptureExchange exchange, Action<CaptureTokenGroup> receipt);  
     }
 }

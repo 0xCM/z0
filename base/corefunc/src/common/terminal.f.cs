@@ -40,7 +40,6 @@ partial class zfunc
     public static void print(object msg, SeverityLevel? severity = null)
         => terminal.WriteLine(msg, severity ?? SeverityLevel.Info);
 
-
     /// <summary>
     /// Writes an empty line to the console
     /// </summary>
@@ -245,5 +244,4 @@ partial class zfunc
 
     public static void print(string content, SeverityLevel severity)
         => print(AppMsg.Define(content, severity));
-
 }

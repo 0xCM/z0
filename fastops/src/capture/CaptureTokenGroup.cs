@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a grouping construct that serves as evidence for emission of related functions
     /// </summary>
-    public readonly struct AsmEmissionGroup
+    public readonly struct CaptureTokenGroup
     {
         /// <summary>
         /// Defines a group of related emissions
@@ -21,11 +21,11 @@ namespace Z0
         /// <param name="uri">The group uri</param>
         /// <param name="tokens">The group members</param>
         [MethodImpl(Inline)]
-        public static AsmEmissionGroup Define(OpUri uri, AsmEmissionToken[] tokens)
-            => new AsmEmissionGroup(uri, tokens);
+        public static CaptureTokenGroup Define(OpUri uri, CaptureToken[] tokens)
+            => new CaptureTokenGroup(uri, tokens);
 
         [MethodImpl(Inline)]
-        AsmEmissionGroup(OpUri groupUri, AsmEmissionToken[] tokens)
+        CaptureTokenGroup(OpUri groupUri, CaptureToken[] tokens)
         {
             this.Tokens = tokens;
             this.Uri = groupUri;
@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The group members
         /// </summary>
-        public readonly AsmEmissionToken[] Tokens;                
+        public readonly CaptureToken[] Tokens;                
     }
     
 }

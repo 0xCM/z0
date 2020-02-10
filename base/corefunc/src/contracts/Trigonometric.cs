@@ -59,8 +59,6 @@ namespace Z0
 
         S Atan();
 
-        S Atanh();
-    
+        S Atanh();    
     }
-
 }

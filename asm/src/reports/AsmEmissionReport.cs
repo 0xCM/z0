@@ -36,7 +36,7 @@ namespace Z0
         public FilePath ReportPath 
             => AsmReports.EmissionsPath(Id, EmissionKind);
                 
-        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionGroup[] emitted, AsmEmissionKind kind)
+        public static AsmEmissionReport Create(AssemblyId id, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
         {
             if(emitted.Length == 0)
                 return default;

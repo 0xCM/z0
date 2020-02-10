@@ -12,16 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class AsmExtend
-    {
-        [MethodImpl(Inline)]
-        public static TypedAsm<T> Typed<T>(this AsmCode src)
-            where T : unmanaged
-                => new TypedAsm<T>(src);
-
-    }
-
-    public readonly struct TypedAsm<T>
+    public readonly struct AsmCode<T>
         where T : unmanaged
     {
         readonly AsmCode Code;
@@ -39,21 +30,21 @@ namespace Z0
             => Code.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmCode(TypedAsm<T> src)
+        public static implicit operator AsmCode(AsmCode<T> src)
             => src.Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(TypedAsm<T> src)
+        public static implicit operator ReadOnlySpan<byte>(AsmCode<T> src)
             => src.Data;
         
         [MethodImpl(Inline)]
-        public TypedAsm(AsmCode src)
+        public AsmCode(AsmCode src)
         {
             this.Code = src;
         }
 
         [MethodImpl(Inline)]
-        public TypedAsm(OpIdentity id, MemoryRange origin, string label, byte[] data)
+        public AsmCode(OpIdentity id, MemoryRange origin, string label, byte[] data)
         {
             Code = AsmCode.Define(id, origin,label,data);
         }
@@ -68,9 +59,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TypedAsm<S> As<S>()
+        public AsmCode<S> As<S>()
             where S : unmanaged
-                => new TypedAsm<S>(Code);
+                => new AsmCode<S>(Code);
     
         public AsmCode Untyped  
         {
@@ -81,5 +72,4 @@ namespace Z0
         public string Format()
             => Code.Format();
     }
-
 }

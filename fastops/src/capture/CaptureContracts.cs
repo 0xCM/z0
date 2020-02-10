@@ -10,12 +10,12 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IAsmEmissionToken : IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>
+    public interface ICaptureToken : IEquatable<CaptureToken>, IComparable<CaptureToken>
     {
 
     }
 
-    public interface IAsmEmissionSink : IPointSink<AsmEmissionGroup>
+    public interface ICaptureTokenSink : IPointSink<CaptureTokenGroup>
     {
         
     }

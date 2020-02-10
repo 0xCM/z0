@@ -14,7 +14,7 @@ namespace Z0
     /// Describes the capture and subsequent emission of single routine, such
     /// as a member function or a delegate
     /// </summary>
-    public readonly struct AsmEmissionToken : IAsmEmissionToken
+    public readonly struct CaptureToken : ICaptureToken
     {
         /// <summary>
         /// Specifies the reason for capture termination
@@ -32,19 +32,19 @@ namespace Z0
         public readonly MemoryRange Origin;
 
         [MethodImpl(Inline)]
-        public static AsmEmissionToken Define(CaptureOutcome cc, OpUri uri)        
-            => new AsmEmissionToken(cc, uri);
+        public static CaptureToken Define(CaptureOutcome cc, OpUri uri)        
+            => new CaptureToken(cc, uri);
 
         [MethodImpl(Inline)]
-        public static bool operator==(AsmEmissionToken a, AsmEmissionToken b)
+        public static bool operator==(CaptureToken a, CaptureToken b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(AsmEmissionToken a, AsmEmissionToken b)
+        public static bool operator!=(CaptureToken a, CaptureToken b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        AsmEmissionToken(CaptureOutcome cc, OpUri uri)
+        CaptureToken(CaptureOutcome cc, OpUri uri)
         {
             this.TermCode = cc.TermCode;
             this.Uri = uri;
@@ -61,16 +61,16 @@ namespace Z0
             => HashCode.Combine(Uri,Origin);
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmEmissionToken src)
+        public bool Equals(CaptureToken src)
             => TermCode == src.TermCode
             && Uri == src.Uri 
             && Origin == src.Origin;
         
         public override bool Equals(object src)
-            => src is AsmEmissionToken d && Equals(d);
+            => src is CaptureToken d && Equals(d);
 
         [MethodImpl(Inline)]
-        public int CompareTo(AsmEmissionToken rhs)
+        public int CompareTo(CaptureToken rhs)
             => this.Uri.CompareTo(rhs.Uri);
     }
 }

@@ -38,31 +38,27 @@ namespace Z0
 
     readonly struct CaptureStatsSink : ICaptureEventSink
     {                
-        readonly Action<CaptureStats> OnComplete;
+        readonly Action<CaptureState> Observer;
         
         readonly Dictionary<int,CaptureByteCode> Classified;
 
-        public static CaptureStatsSink Create(Action<CaptureStats> completion)
-            => new CaptureStatsSink(completion);
+        public static CaptureStatsSink Create(Action<CaptureState> observer)
+            => new CaptureStatsSink(observer);
 
-        CaptureStatsSink(Action<CaptureStats> completion)
+        CaptureStatsSink(Action<CaptureState> observer)
         {
-            this.OnComplete = completion;
+            Observer = observer;
             Classified = new Dictionary<int, CaptureByteCode>();
         }
 
         [MethodImpl(Inline)]
         public void Accept(in CaptureEventData info)
         {
+            Observer(info.CaptureState);
             (var offset, var value) = Record(info);
             Classify(offset,value);
         }
 
-        public void Complete(in CapturedMember captured)
-        {
-            var values = Classified.Values.Select(x => x).ToArray();
-            OnComplete(new CaptureStats(values));
-        }        
 
         [MethodImpl(Inline)]
         void Classify(int offset, byte value)
@@ -91,28 +87,21 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        static (int offset, byte value) Record(in CaptureEventData info)
+        static (int offset, byte value) Record(in CaptureEventData data)
         {
-            var offset = Offset(info);
-            var value =info.CaptureState.Payload;
-            info[offset] = value;
+            var offset = Offset(data);
+            var value =data.CaptureState.Payload;
+            data[offset] = value;
             return (offset, value);
         }
-
-        [MethodImpl(Inline)]
-        static Span<byte> State(in CaptureEventData src)
-            => src.StateBuffer;
 
         [MethodImpl(Inline)]
         static int Offset(in CaptureEventData src)        
             => src.CaptureState.Offset;        
 
-        [MethodImpl(Inline)]
-        static byte Value(in CaptureEventData src)
-            => src.CaptureState.Payload;
-
         public void Complete(in CaptureEventData data)
         {
+            Observer(data.CaptureState);
             
         }
     }

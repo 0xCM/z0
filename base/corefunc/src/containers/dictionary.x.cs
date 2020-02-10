@@ -5,18 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
     partial class xfunc
     {
-
         /// <summary>
         /// Addes the entries of the source dictionary to the destination dictionary
         /// </summary>

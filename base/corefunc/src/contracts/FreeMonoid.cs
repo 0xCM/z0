@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     /// <summary>
     /// Characterizes free moinoidial operations
     /// </summary>
@@ -18,7 +17,6 @@ namespace Z0
         where T : unmanaged
     {
         T IsEmpty {get;}
-
     }
 
     /// <summary>
@@ -38,6 +36,4 @@ namespace Z0
     {
 
     }
-
-
 }

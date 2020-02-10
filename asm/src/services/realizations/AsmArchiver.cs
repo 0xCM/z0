@@ -32,14 +32,14 @@ namespace Z0
         IEnumerable<AssemblyId> ActiveAssemblies
             => Context.ActiveAssemblies();
 
-        Option<FilePath> ReportEmissions(AssemblyId src, AsmEmissionGroup[] emitted, AsmEmissionKind kind)
+        Option<FilePath> ReportEmissions(AssemblyId src, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
             => AsmReports.Emissions(src, emitted, kind).Save();
 
-        AsmEmissionGroup[] EmitPrimary(in CaptureExchange exchange, IOperationProvider src,  IAsmCatalogEmitter emitter)
+        CaptureTokenGroup[] EmitPrimary(in CaptureExchange exchange, IOperationProvider src,  IAsmCatalogEmitter emitter)
         {
-            var emissions = new List<AsmEmissionGroup>(); 
+            var emissions = new List<CaptureTokenGroup>(); 
 
-            void OnEmission(AsmEmissionGroup emission)
+            void OnEmission(CaptureTokenGroup emission)
                 => emissions.Add(emission);            
             
             emitter.EmitPrimary(exchange,OnEmission);
@@ -47,11 +47,11 @@ namespace Z0
             return emissions.ToArray();
         }        
 
-        AsmEmissionGroup[] EmitImm(in CaptureExchange exchange, IOperationProvider src, IAsmCatalogEmitter emitter)
+        CaptureTokenGroup[] EmitImm(in CaptureExchange exchange, IOperationProvider src, IAsmCatalogEmitter emitter)
         {
-            var emissions = new List<AsmEmissionGroup>();   
+            var emissions = new List<CaptureTokenGroup>();   
             
-            void OnEmission(AsmEmissionGroup emission)
+            void OnEmission(CaptureTokenGroup emission)
                 => emissions.Add(emission);
 
             emitter.EmitImm(exchange, OnEmission);

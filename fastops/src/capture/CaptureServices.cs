@@ -25,12 +25,8 @@ namespace Z0
             => CaptureControl.Create();
 
         [MethodImpl(Inline)]
-        public static ICaptureEventSink OnReceipt(OnCaptureReceipt observer)
-            => CaptureReceiptSink.Create(observer);
-
-        [MethodImpl(Inline)]
-        public static ICaptureControl Control(ICaptureEventSink sink)
-            => CaptureControl.Create(sink);
+        public static ICaptureControl Control(ICaptureEventSink events)
+            => CaptureControl.Create(events);
 
         [MethodImpl(Inline)]
         public static CaptureExchange Exchange(ICaptureControl control, Span<byte> target, Span<byte> state)
@@ -38,19 +34,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static CaptureExchange Exchange(ICaptureControl control)
-            => Exchange(control, new byte[CaptureServices.DefaultBufferLen], new byte[CaptureServices.DefaultBufferLen]);
-
-        [MethodImpl(Inline)]
-        public static CaptureExchange Exchange(Span<byte> target, Span<byte> state)
-            => Exchange(Control(), target,state);
+            => CaptureExchange.Define(control, new byte[CaptureServices.DefaultBufferLen], new byte[CaptureServices.DefaultBufferLen]);
 
         [MethodImpl(Inline)]
         public static CaptureExchange Exchange()
-            => Exchange(Control());
-
+            => CaptureExchange.Define(Control(),new byte[CaptureServices.DefaultBufferLen], new byte[CaptureServices.DefaultBufferLen]);
 
         [MethodImpl(Inline)]
-        public static IAsmEmissionSink EmissionSink(Action<AsmEmissionGroup> receiver)
-            => AmsEmissionSink.Create(receiver);
+        public static ICaptureEventSink OnReceipt(OnCaptureReceipt observer)
+            => CaptureReceiptSink.Create(observer);
+
+        [MethodImpl(Inline)]
+        public static ICaptureTokenSink EmissionSink(Action<CaptureTokenGroup> receiver)
+            => CaptureTokenSink.Create(receiver);
     }
 }
