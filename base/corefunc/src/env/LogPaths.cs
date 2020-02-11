@@ -68,6 +68,9 @@ namespace Z0
         public FileExtension HexExt
             => FileExtension.Define("hex");
 
+        public FileExtension RawExt
+            => FileExtension.Define("raw");
+
         public FileExtension CilExt
             => FileExtension.Define("il");
 
@@ -79,6 +82,9 @@ namespace Z0
 
         public FileName AsmHexFile(OpIdentity m)
             => FileName.Define(m, HexExt);
+
+        public FileName AsmRawFile(OpIdentity m)
+            => FileName.Define(m, RawExt);
 
         public FileName CilFile(OpIdentity m)
             => FileName.Define(m, CilExt);

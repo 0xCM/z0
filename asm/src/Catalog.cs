@@ -16,8 +16,7 @@ namespace Z0
 
         }
         
-
-        public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(AsmSpecs.AsmConstructs));               
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => items(ApiHost.Define(AssemblyId, typeof(AsmSpecs.AsmConstructs)));               
     }
 }

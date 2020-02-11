@@ -49,16 +49,23 @@ namespace Z0
         protected AsmFormatConfig DefaultAsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-        protected IAsmCodeWriter HexTestWriter([Caller] string test = null)
+        protected static IAsmCodeWriter HexTestWriter(IAsmContext context, [Caller] string test = null)
         {
-            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
-            return  Context.CodeWriter(dst);
+            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Hex);    
+            return  context.CodeWriter(dst);
         }
 
-        protected IAsmFunctionWriter AsmTestWriter([Caller] string test = null)
+        protected static IAsmRawWriter RawTestWriter(IAsmContext context, [Caller] string test = null)
         {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Asm);    
-            return Context.WithFormat(DefaultAsmFormat).AsmWriter(path);
+            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Raw);    
+            return  context.RawWriter(dst);
+        }
+
+        protected static IAsmFunctionWriter AsmTestWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Asm);
+            var format = AsmFormatConfig.Default.WithFunctionTimestamp();
+            return context.WithFormat(format).AsmWriter(path);
         }
 
     }

@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Defines a grouping construct for relating non-generic operations
     /// </summary>
-    public sealed class DirectOpGroupSpec : GroupOpSpec<DirectOpSpec>
+    public sealed class DirectOpGroupSpec : OpSpec
     {        
         /// <summary>
         /// Creates a group of direct operations
@@ -20,15 +20,28 @@ namespace Z0
         /// <param name="members">The members of the group</param>
         public static DirectOpGroupSpec Define(OpIdentity id, IEnumerable<DirectOpSpec> src)  
         {
-            var members = src.ToArray();
-            return new DirectOpGroupSpec(id, members);
+            return new DirectOpGroupSpec(ApiHost.Empty, id, src.ToArray());
         }
 
-        DirectOpGroupSpec(OpIdentity id, DirectOpSpec[] members)
-            : base(id,members)
+        public static DirectOpGroupSpec Define(ApiHost host, OpIdentity id, IEnumerable<DirectOpSpec> src)  
         {
-
+            return new DirectOpGroupSpec(host,id, src.ToArray());
         }
+
+        DirectOpGroupSpec(ApiHost host, OpIdentity id, DirectOpSpec[] members)
+            : base(id)
+        {
+            this.Host = host;
+            this.Members = members;
+        }
+
+
+        public ApiHost Host;
+
+        public DirectOpSpec[] Members {get;}
+
+        public bool IsEmpty 
+            => Members.Length == 0;
 
     }
 }

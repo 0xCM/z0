@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    
     using static zfunc;
 
     class Catalog : OpCatalog<Catalog>
@@ -19,10 +21,10 @@ namespace Z0
         public override IEnumerable<Type> ServiceHosts
             => typeof(BCTypes).GetNestedTypes().Realize<IFunc>();
 
-        public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(gbits));
+        public override IEnumerable<ApiHost> GenericApiHosts
+            => items(ApiHost.Define(AssemblyId,typeof(gbits)));
 
-        public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(Bits));               
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => items(ApiHost.Define(AssemblyId,typeof(Bits)));
     }
 }

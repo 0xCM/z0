@@ -13,7 +13,7 @@ namespace Z0.Logix
     using static BitVectorOps;
     using static OpHelpers;
 
-    [OpHost("bitvector.api")]
+    [ApiHost("bitvector.api")]
     public static class BitVectorOpApi
     {
         /// <summary>

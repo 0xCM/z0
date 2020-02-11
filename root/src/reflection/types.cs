@@ -95,5 +95,138 @@ namespace Z0
             return selection.ToDictionary();
         }
 
+        /// <summary>
+        /// Selects any source types that have a parametrically-identified attribution
+        /// </summary>
+        /// <param name="src">The source stypes</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static IEnumerable<Type> Attributed<A>(this IEnumerable<Type> src)
+            where A : Attribute
+                => src.Where(t => Attribute.IsDefined(t, typeof(A)));
+
+        /// <summary>
+        /// Determines whether a type is a struct
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsStruct(this Type t)
+            => t.IsValueType && !t.IsEnum;
+
+        /// <summary>
+        /// Determines whether the specified type is a delegate type
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsDelegate(this Type t)
+            => t.IsSubclassOf(typeof(Delegate));
+
+       /// <summary>
+        /// Returns all interfaces realized by the type, including those inherited from
+        /// supertypes
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static IEnumerable<Type> Interfaces(this Type t)
+            => t.GetInterfaces() ?? new Type[]{};
+
+        /// <summary>
+        /// Returns all source types which ar interfaces
+        /// </summary>
+        /// <param name="src">The source types</param>
+        public static IEnumerable<Type> Interfaces(this IEnumerable<Type> src)
+            => src.Where(t => t.IsInterface);
+
+        /// <summary>
+        /// Returns all source types which are classes
+        /// </summary>
+        /// <param name="src">The source types</param>
+        public static IEnumerable<Type> Classes(this IEnumerable<Type> src)
+            => src.Where(t => t.IsClass);
+
+        /// <summary>
+        /// Returns all source types which are structs
+        /// </summary>
+        /// <param name="src">The source types</param>
+        public static IEnumerable<Type> Structs(this IEnumerable<Type> src)
+            => src.Where(t => t.IsStruct());
+
+        /// <summary>
+        /// Returns all source types which are delegates
+        /// </summary>
+        /// <param name="src">The source types</param>
+        public static IEnumerable<Type> Delegates(this IEnumerable<Type> src)
+            => src.Where(t => t.IsDelegate());
+
+        /// <summary>
+        /// Returns all source types which are enums
+        /// </summary>
+        /// <param name="src">The source types</param>
+        public static IEnumerable<Type> Enums(this IEnumerable<Type> src)
+            => src.Where(t => t.IsEnum);
+
+        /// <summary>
+        /// Determines whether a type implements a specified interface
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <param name="interfaceType">The interface type</param>
+        public static bool Realizes(this Type t, Type interfaceType)
+            => interfaceType.IsInterface && t.Interfaces().Contains(interfaceType);
+
+        /// <summary>
+        /// Determines whether a type implements a specific interface
+        /// </summary>
+        /// <typeparam name="T">The interface type</typeparam>
+        /// <param name="t">The type to examine</param>
+        public static bool Realizes<T>(this Type t)        
+            => typeof(T).IsInterface && t.Interfaces().Contains(typeof(T)); 
+
+        /// <summary>
+        /// Determines whether a method is an action
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsAction(this MethodInfo m)
+            => m.ReturnType == typeof(void);
+
+        /// <summary>
+        /// Determines whether a method is a function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsFunction(this MethodInfo m)
+            => m.ReturnType != typeof(void);
+
+        /// <summary>
+        /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsEmitter(this MethodInfo m)
+            => m.IsFunction() && m.HasArity(0);
+
+        /// <summary>
+        /// Selects the public/non-public static/instance methods declared by a type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static IEnumerable<MethodInfo> DeclaredMethods(this Type src)
+            => src.GetMethods(BF_Declared);
+
+        /// <summary>
+        /// Selects the public/non-public static/instance methods declared by a type that have a specific name
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static IEnumerable<MethodInfo> DeclaredMethods(this Type src, string name)
+            => src.GetMethods(BF_Declared).Where(m => m.Name == name);
+
+        /// <summary>
+        /// Selects the public/non-public static/instance methods declared or exposed by a type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static IEnumerable<MethodInfo> Methods(this Type src, bool declared = true)
+            => declared ? src.GetMethods(BF_Declared) : src.GetMethods(BF_All);
+ 
+        /// <summary>
+        /// Selects the public/non-public static/instance methods declared by a stream of types
+        /// </summary>
+        /// <param name="src">The types to examine</param>
+        public static IEnumerable<MethodInfo> DeclaredMethods(this IEnumerable<Type> src)
+            => src.Select(x => x.DeclaredMethods()).SelectMany(x => x);
+
+        public static IEnumerable<MethodInfo> Methods(this IEnumerable<Type> src, bool declared)
+            => src.Select(x => x.Methods(declared)).SelectMany(x => x);
     }
 }

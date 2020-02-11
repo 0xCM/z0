@@ -36,6 +36,18 @@ namespace Z0
             this.Target = dst;
         }
 
+        ICilFunctionFormatter Formatter
+        {
+            [MethodImpl(Inline)]
+            get => Context.CilFormatter();
+        }
+
+        public void Write(CilFunction src)
+        {
+
+
+        }
+
         Option<Exception> Write(CilFunction[] cilfuncs)
         {
             try
@@ -48,10 +60,9 @@ namespace Z0
                     if(Context.CilFormat.EmitFileHeader)                        
                         writer.WriteLine($"; {now().ToLexicalString()}"); 
                     
-                    var formatter = Context.CilFormatter();
                     foreach(var f in cilfuncs)
                     {
-                        writer.WriteLine(formatter.Format(f));
+                        writer.WriteLine(Formatter.Format(f));
                         if(Context.CilFormat.EmitSectionDelimiter)
                             writer.WriteLine(Context.CilFormat.SectionDelimiter);
                     }

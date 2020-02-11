@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static zfunc;    
     using static As;
 
-    [OpHost("bitmatrix.ops")]
+    [ApiHost("bitmatrix.ops")]
     public static class BitMatrixOps
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]

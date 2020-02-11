@@ -16,7 +16,7 @@ namespace Z0
     using static HK;
     using AsmSpecs;
 
-    public class t_asm_checks : t_asm<t_asm_checks>, IExplicitTest
+    public class t_asm_checks : t_asm<t_asm_checks>
     {           
         public void Execute()
         {
@@ -77,8 +77,19 @@ namespace Z0
 
                 var dseg = dHex.Id.Segment(1);
                 //Trace($"{gcell} :: {dcell}");
+            }            
+        }
+
+        static void RunCapture(ICaptureService capture, IAsmDecoder decoder, in CaptureExchange exchange, MethodInfo[] src, IAsmCodeWriter codeDst, IAsmFunctionWriter asmDst)
+        {
+            foreach(var method in src)
+            {
+                var data = capture.Capture(exchange, method.Identify(), method);
+                codeDst.Write(data);
+                var asm = decoder.Decode(data);
+                asmDst.Write(asm);
+
             }
-            
         }
 
         FilePath Capture(in AsmBuffers buffers, MethodInfo[] methods, string subject)
@@ -87,26 +98,9 @@ namespace Z0
             using var asm = AsmTestWriter(subject);
 
             var capture = Context.Capture(buffers.Capture);
-            
-            capture.CaptureBits(buffers.Exchange, methods,hex);
-            capture.CaptureAsm(buffers.Exchange, methods,asm);
-            return hex.TargetPath;            
-        }
-
-        FilePath Capture(in AsmBuffers buffers, MethodInfo[] defs, Type[] args, string subject)
-        {
-            using var hex = HexTestWriter(subject);
-            using var asm = AsmTestWriter(subject);
-
-            var capture = Context.Capture(buffers.Capture);
-                                    
-            var selection = from def in defs
-                            from arg in args                            
-                            select def.MakeGenericMethod(arg);
-            var selected = selection.ToArray();
-            
-            capture.CaptureBits(buffers.Exchange, selected,hex);
-            capture.CaptureAsm(buffers.Exchange, selected,asm);
+            var decoder = Context.Decoder();
+            RunCapture(Context.Capture(buffers.Capture), Context.Decoder(), buffers.Exchange, methods, hex, asm);
+                        
             return hex.TargetPath;            
         }
 
@@ -134,30 +128,6 @@ namespace Z0
             TraceCaller($"Trigger activate {activations} times");
         }
 
-        void CheckBinaryImm(in AsmBuffers buffers)
-        {
-            var w = n256;
-            var name = nameof(dinx.vblend8x16);
-            var imm = (byte)Blend8x16.LRLRLRLR;
-
-            var provider = ImmOpProviders.provider(HK.vk256<ushort>(),HK.opfk(n2));
-            var x = Random.CpuVector<ushort>(w);
-            var y = Random.CpuVector<ushort>(w);
-            
-            var method = Intrinsics.Vectorized<ushort>(w, false, name).Single();            
-            var dynop = provider.CreateOp(method,imm);
-            var f = dynop.DynamicOp;
-            var z1 = f.Invoke(x,y);
-            var decoder = Context.Decoder(false);
-            var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);
-            var asm = decoder.DecodeFunction(captured);        
-
-            iter(asm.Instructions, i => Trace(i));  
-
-            var g = buffers.MainExec.BinaryOp<Fixed256>(asm.Code);
-            var z3 = g(x,y).ToVector<ushort>();
-            Claim.eq(z1,z3);
-        }
 
         void CheckBinaryImm<T>(in AsmBuffers buffers, N128 w, string name, byte imm)
             where T : unmanaged
@@ -172,7 +142,7 @@ namespace Z0
             var z1 = dynop.DynamicOp.Invoke(x,y);
             var decoder = Context.Decoder(false);
             var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(captured);
+            var asm = decoder.Decode(captured);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
@@ -196,7 +166,7 @@ namespace Z0
             
             var decoder = Context.Decoder(false);
             var captured = CaptureServices.Operations.Capture(in exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(captured);
+            var asm = decoder.Decode(captured);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
@@ -220,7 +190,7 @@ namespace Z0
             
             var decoder = Context.Decoder(false);
             var capture = CaptureServices.Operations.Capture(in buffers.Exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(capture);
+            var asm = decoder.Decode(capture);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  

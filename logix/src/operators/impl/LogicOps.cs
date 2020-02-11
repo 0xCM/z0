@@ -15,7 +15,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
     /// </summary>
-    [OpHost("logic.ops")]
+    [ApiHost("logic.ops")]
     public static class LogicOps
     {        
         [MethodImpl(Inline)]

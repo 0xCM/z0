@@ -16,31 +16,6 @@ namespace Z0
         public Type Host;
     }
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class OpHostAttribute : Attribute
-    {
-        public OpHostAttribute(string Name, bool generic)
-        {
-            this.Name = Name;
-            this.Generic = generic;
-        }
-
-        public OpHostAttribute(string Name)
-            : this(Name, false)
-        {
-        }
-
-        public OpHostAttribute()
-            : this(string.Empty, false)
-        {
-        }
-
-        public string Name {get;}
-
-
-        public bool Generic {get;}
-
-    }
 
     /// <summary>
     /// Identifies a formal operation for inclusing in the identity assignment and catalog system

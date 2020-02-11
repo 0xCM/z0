@@ -10,7 +10,7 @@ namespace Z0.Logix
 
     using static zfunc;    
 
-    [OpHost("vector.ops")]
+    [ApiHost("vector.ops")]
     public static partial class VectorizedOps
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]

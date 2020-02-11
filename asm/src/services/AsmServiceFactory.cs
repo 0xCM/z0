@@ -12,7 +12,9 @@ namespace Z0
     using static zfunc;
 
     public static class AsmServices
-    {                                
+    {   
+                     
+
         /// <summary>
         /// Instantiates a contextual archive service
         /// </summary>
@@ -64,8 +66,18 @@ namespace Z0
         /// <param name="dst">The target path</param>
         /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeWriter CodeWriter(this IAsmContext context, FilePath dst, bool append = false)
-            => AsmCodeWriter.Create(context, dst, append);
+        public static IAsmCodeWriter CodeWriter(this IAsmContext context, FilePath dst)
+            => AsmCodeWriter.Create(context, dst);
+
+        /// <summary>
+        /// Instantiates a contextual raw buffer writer services that targets a specified file path
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="dst">The target path</param>
+        /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
+        [MethodImpl(Inline)]
+        public static IAsmRawWriter RawWriter(this IAsmContext context, FilePath dst)
+            => AsmRawWriter.Create(context, dst);
 
         /// <summary>
         /// Instantiates a contextual code reader service

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static zfunc;
 
@@ -17,10 +18,12 @@ namespace Z0
 
         }
         
-        public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(BitMatrix), typeof(BitGrid));
+        public override IEnumerable<ApiHost> GenericApiHosts
+            => from t in items(typeof(BitMatrix), typeof(BitGrid))
+                select ApiHost.Define(AssemblyId, t);
 
-        public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(BitMatrix), typeof(BitGrid));               
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => from t in items(typeof(BitMatrix), typeof(BitGrid))
+                select ApiHost.Define(AssemblyId, t);
     }
 }

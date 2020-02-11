@@ -71,7 +71,7 @@ namespace Z0
             foreach(var host in Catalog.DirectApiHosts)
             {
                 var archive = HostImmArchive(host);
-                var specs = from g in OpSpecs.groups(host)
+                var specs = from g in OpSpecs.direct(host)
                              let immg = ImmGroup(g)
                              where !immg.IsEmpty
                              select immg;
@@ -99,17 +99,17 @@ namespace Z0
             }        
         }
 
-        void EmitDirectPrimary(in CaptureExchange exchange, Type host, CaptureEmissionObserver observer)
+        void EmitDirectPrimary(in CaptureExchange exchange, ApiHost host, CaptureEmissionObserver observer)
         {
             var primary = HostArchive(host);
             var immediate = HostImmArchive(host);
-            var specs = OpSpecs.groups(host);
+            var specs = OpSpecs.direct(host);
 
             foreach(var spec in specs)
                 Emit(exchange, PrimaryGroup(spec), primary, observer);
         }
 
-        void EmitGenericPrimary(in CaptureExchange exchange, Type host, CaptureEmissionObserver observer)
+        void EmitGenericPrimary(in CaptureExchange exchange, ApiHost host, CaptureEmissionObserver observer)
         {
             var primary = HostArchive(host);
             var immediate = HostImmArchive(host);
@@ -136,7 +136,7 @@ namespace Z0
         {
             var functions = new List<AsmFunction>();
             foreach(var closure in op.Close())                        
-                functions.Add(Decoder.DecodeFunction(in exchange, closure.Id, closure.ClosedMethod));
+                functions.Add(Decoder.Decode(in exchange, closure.Id, closure.ClosedMethod));
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(op.Id, functions.ToArray());
@@ -209,7 +209,7 @@ namespace Z0
         DirectOpGroupSpec ImmGroup(DirectOpGroupSpec g)
             => DirectOpGroupSpec.Define(g.Id, g.Members.Where(m => FunctionType.immneeds(m.Root)));
 
-        IEnumerable<Type> ApiHosts
+        IEnumerable<ApiHost> ApiHosts
             => Catalog.DirectApiHosts.Union(Catalog.GenericApiHosts);
 
         void ClearArchives(bool imm)
@@ -235,20 +235,20 @@ namespace Z0
             Observer(src);
         }
 
-        string ArchiveSubject(Type host, bool imm)
-            =>  host.HostName() + (imm ?  "_imm" : string.Empty);
+        string ArchiveSubject(ApiHost host, bool imm)
+            =>  host.Name + (imm ?  "_imm" : string.Empty);
 
-        IAsmFunctionArchive HostArchive(Type host)
+        IAsmFunctionArchive HostArchive(ApiHost host)
             => Archive(ArchiveSubject(host,false));
 
-        IAsmFunctionArchive HostImmArchive(Type host)
+        IAsmFunctionArchive HostImmArchive(ApiHost host)
             => Archive(ArchiveSubject(host,true));
 
         IAsmFunctionArchive Archive(string subject)
             => Context.FunctionArchive(Catalog.AssemblyId, subject);
 
         AsmFunction Decode(in CaptureExchange exchange, OpIdentity id, MethodInfo method)
-            => Decoder.DecodeFunction(exchange, id, method);
+            => Decoder.Decode(exchange, id, method);
 
         static byte[] ImmSelection => new byte[]{5,9,13};
     }

@@ -8,7 +8,18 @@ namespace Z0
     using System.Reflection;
 
 
-    public abstract class OpSpec
+    public interface IOpSpec
+    {
+        OpIdentity Id {get;}            
+    }
+
+    public interface IRootedOpSpec : IOpSpec
+    {
+        MethodInfo Root {get;}        
+    }
+
+
+    public abstract class OpSpec : IOpSpec
     {        
         public OpIdentity Id {get;}            
 
@@ -21,26 +32,8 @@ namespace Z0
             => Id;
     }
 
-    public abstract class GroupOpSpec<S> : OpSpec
-        where S : OpSpec
-    {
-        protected GroupOpSpec(OpIdentity id, S[] members)
-            : base(id)
-        {
-            this.Members = members;
-        }
 
-        /// <summary>
-        /// The group members
-        /// </summary>
-        public S[] Members {get;}
-
-        public bool IsEmpty 
-            => Members.Length == 0;
-
-    }
-
-    public abstract class RootedOpSpec : OpSpec
+    public abstract class RootedOpSpec : OpSpec, IRootedOpSpec
     {
         protected RootedOpSpec(OpIdentity id, MethodInfo method)
             : base(id)

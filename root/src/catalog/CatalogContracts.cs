@@ -49,12 +49,12 @@ namespace Z0
         /// <summary>
         /// The known generic api hosts
         /// </summary>
-        IEnumerable<Type> GenericApiHosts {get;}
+        IEnumerable<ApiHost> GenericApiHosts {get;}
 
         /// <summary>
         /// The known direct api hosts
         /// </summary>
-        IEnumerable<Type> DirectApiHosts {get;}
+        IEnumerable<ApiHost> DirectApiHosts {get;}
 
         /// <summary>
         /// Th global data resource index

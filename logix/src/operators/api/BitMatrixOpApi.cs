@@ -19,7 +19,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines services for bitmatrix operators
     /// </summary>
-    [OpHost("bitmatrix.api")]
+    [ApiHost("bitmatrix.api")]
     public static class BitMatrixOpApi
     {
         /// <summary>

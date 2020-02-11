@@ -11,13 +11,19 @@ namespace Z0
     public class GenericOpSpec : RootedOpSpec
     {            
         public static GenericOpSpec Define(OpIdentity id, MethodInfo method, NumericKind[] kinds)            
-            => new GenericOpSpec(id,method, kinds);
+            => new GenericOpSpec(ApiHost.Empty, id,method, kinds);
 
-        GenericOpSpec(OpIdentity id, MethodInfo method, NumericKind[] kinds)
+        public static GenericOpSpec Define(ApiHost host, OpIdentity id, MethodInfo method, NumericKind[] kinds)            
+            => new GenericOpSpec(host, id,method, kinds);
+
+        GenericOpSpec(ApiHost host, OpIdentity id, MethodInfo method, NumericKind[] kinds)
             : base(id, method)
         {
             this.Kinds = kinds;
+            this.Host = host;
         }
+
+        public ApiHost Host;
     
         public NumericKind[] Kinds {get;}       
     }

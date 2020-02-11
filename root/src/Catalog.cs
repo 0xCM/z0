@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
 
     class Catalog : OpCatalog<Catalog>
@@ -16,8 +17,9 @@ namespace Z0
 
         }
 
-        public override IEnumerable<Type> DirectApiHosts
-            => new Type[]{typeof(Numeric)};
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => from t in (new Type[]{typeof(Numeric)})
+                select ApiHost.Define(AssemblyId,t);
 
     }
 }

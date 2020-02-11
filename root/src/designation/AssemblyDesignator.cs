@@ -30,13 +30,8 @@ namespace Z0
         public virtual string Name
             => Assembly.GetName().Name;
 
-        public bool IsNoneOrEmpty
-            => Id == AssemblyId.None || Id == AssemblyId.Empty;
-
-        public IEnumerable<IOperationCatalog> DesignateCatalogs
-            => from d in Designated.Designates 
-                where d is ICatalogProvider
-                select (d as ICatalogProvider).Catalog;
+        public bool IsNonEmpty
+            => Id != AssemblyId.None && Id != AssemblyId.Empty;
 
         public virtual AssemblyId Id 
             => AssemblyId.None;
@@ -51,5 +46,8 @@ namespace Z0
         {
             Console.WriteLine("Assembly has no executor");
         }
+
+        public override string ToString()
+            => Id.Format();
     }
 }

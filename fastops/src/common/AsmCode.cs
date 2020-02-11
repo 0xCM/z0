@@ -96,7 +96,7 @@ namespace Z0
         }
                 
         public string Format(int idpad = 0)
-            => HexLine.Define(Id,Encoded).Format(idpad);
+            => HexLine.Define(Id, Encoded).Format(idpad);
 
         public override string ToString()
             => Format();         

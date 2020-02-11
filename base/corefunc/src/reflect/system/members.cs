@@ -13,13 +13,12 @@ namespace Z0
     using static zfunc;
 
     partial class Reflections
-    {        
-                
+    {                        
         /// Selects the members with a particular name
         /// </summary>
         /// <param name="src">The members to examine</param>
         /// <param name="name">The name to match</param>
-        public static IEnumerable<T> WithAttributions<T>(this IEnumerable<T> src, Type attrib)
+        public static IEnumerable<T> Attributed<T>(this IEnumerable<T> src, Type attrib)
             where T : MemberInfo
                 => src.Where(m => m.Attributed(attrib));
 

@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static zfunc;
     using static OpHelpers;
 
-    [OpHost("expr.arith.eval")]
+    [ApiHost("expr.arith.eval")]
     public static class ArithExprEval
     {
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)

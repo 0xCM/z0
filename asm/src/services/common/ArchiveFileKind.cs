@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Enumerates the kinds of files one finds in the asm archive
     /// </summary>
-    public enum AsmArchiveFileKind
+    public enum ArchiveFileKind
     {
         None = 0,
     
@@ -19,7 +19,7 @@ namespace Z0
         Hex = 1,
 
         /// <summary>
-        /// Indicates text format x86-decoded assembly data
+        /// Indicates text format for x86-decoded assembly data
         /// </summary>
         Asm = 2,
 
@@ -27,5 +27,16 @@ namespace Z0
         /// Indicates text format .net cil instructions
         /// </summary>
         Cil = 3,        
+
+        /// <summary>
+        /// Indicates text format for raw x86-encoded buffer data
+        /// </summary>
+        Raw = 4,
+    }
+
+    partial class AsmExtend
+    {
+        public static FileExtension Extension(this ArchiveFileKind kind)
+            => FileExtension.Define(kind.ToString().ToLower());
     }
 }

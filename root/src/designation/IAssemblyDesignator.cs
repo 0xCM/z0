@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// Specifies whther the reification is empty
         /// </summary>
-        bool IsNoneOrEmpty {get;}
+        bool IsNonEmpty {get;}
 
         /// <summary>
         /// The assembly role

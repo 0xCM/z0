@@ -22,10 +22,12 @@ namespace Z0
         public override IEnumerable<Type> ServiceHosts
             => typeof(GXTypes).GetNestedTypes().Realize<IFunc>();
 
-        public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(gmath), typeof(mathspan), typeof(gfp));
+        public override IEnumerable<ApiHost> GenericApiHosts
+            => from t in items(typeof(gmath), typeof(mathspan), typeof(gfp))
+                select ApiHost.Define(AssemblyId,t);
 
-        public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(math), typeof(fmath));               
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => from t in items(typeof(math), typeof(fmath))
+                select ApiHost.Define(AssemblyId,t);
     }
 }

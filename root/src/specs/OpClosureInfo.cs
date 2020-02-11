@@ -20,16 +20,22 @@ namespace Z0
         /// <param name="id">The assigned identity</param>
         /// <param name="kind">The primal kind over which the subject was closed</param>
         /// <param name="closed">The closed method</param>
-        public static OpClosureInfo Define(OpIdentity id, NumericKind kind, MethodInfo closed)
-            => new OpClosureInfo(id,kind,closed);
+        public static OpClosureInfo Define(ApiHost host, OpIdentity id, NumericKind kind, MethodInfo closed)
+            => new OpClosureInfo(host, id,kind,closed);
 
-        OpClosureInfo(OpIdentity id, NumericKind kind, MethodInfo method)
+        OpClosureInfo(ApiHost host, OpIdentity id, NumericKind kind, MethodInfo method)
         {
+            this.Host = host;
             this.Id = id;
             this.Kind = kind;
             this.ClosedMethod = method;
         }
-    
+
+        /// <summary>
+        /// The delcaring host
+        /// </summary>
+        public ApiHost Host {get;}
+
         /// <summary>
         /// The closure identity
         /// </summary>

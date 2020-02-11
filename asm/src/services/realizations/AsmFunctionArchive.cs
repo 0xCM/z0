@@ -36,14 +36,6 @@ namespace Z0
         public static IAsmFunctionArchive Create(IAsmContext context, AssemblyId catalog, string host)
             => new AsmFunctionArchive(context, catalog,host);
 
-        public static FilePath ArchiveFilePath(AsmArchiveFileKind kind, AssemblyId catalog, string host, OpIdentity id)
-            => kind switch {
-                AsmArchiveFileKind.Hex  => HexFilePath(catalog, host, id),
-                AsmArchiveFileKind.Asm  => AsmFilePath(catalog, host, id),
-                AsmArchiveFileKind.Cil  => CilFilPath(catalog, host, id),
-                _                       => FilePath.Empty,
-            };
-
         AsmFunctionArchive(IAsmContext context, AssemblyId catalog, string host)
         {
             this.Context = context;
@@ -153,21 +145,12 @@ namespace Z0
         }
 
         FilePath HexPath(OpIdentity id)
-            => ArchiveFilePath(AsmArchiveFileKind.Hex, Origin, ApiHost, id).CreateParentIfMissing();
+            => ArchiveFileKind.Hex.ArchivePath(Origin, ApiHost, id).CreateParentIfMissing();
 
         FilePath AsmPath(OpIdentity id)
-            => ArchiveFilePath(AsmArchiveFileKind.Asm, Origin, ApiHost, id).CreateParentIfMissing();
+            => ArchiveFileKind.Asm.ArchivePath(Origin, ApiHost, id).CreateParentIfMissing();
 
         FilePath CilPath(OpIdentity id)
-            => ArchiveFilePath(AsmArchiveFileKind.Cil, Origin, ApiHost, id).CreateParentIfMissing();
-
-        static FilePath HexFilePath(AssemblyId catalog, string host, OpIdentity id)
-            => Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), host)) + Paths.AsmHexFile(id);
-
-        static FilePath AsmFilePath(AssemblyId catalog, string host, OpIdentity id)
-            => Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), host)) + Paths.AsmDetailFile(id);
-
-        static FilePath CilFilPath(AssemblyId catalog, string host, OpIdentity id)
-            => Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), host)).CreateIfMissing() + Paths.CilFile(id);
+            => ArchiveFileKind.Cil.ArchivePath(Origin, ApiHost, id).CreateParentIfMissing();
     }
 }

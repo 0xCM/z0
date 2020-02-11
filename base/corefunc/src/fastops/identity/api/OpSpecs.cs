@@ -17,24 +17,25 @@ namespace Z0
         IEnumerable<S> FromHost(Type host);
     }    
 
+
     public static class OpSpecs
     {
-        public static IEnumerable<DirectOpSpec> direct(Type host)
-            => from m in host.DeclaredMethods().Attributed<OpAttribute>().NonGeneric()
-                select DirectOpSpec.Define(Identity.identify(m), m);
+        static IEnumerable<DirectOpSpec> individuals(ApiHost host)
+            => from m in host.DeclaredMethods.Attributed<OpAttribute>().NonGeneric()
+                select DirectOpSpec.Define(host,Identity.identify(m), m);
 
-        public static IEnumerable<DirectOpGroupSpec> groups(Type host)
-            => from d in direct(host).GroupBy(op => op.Id.Name)
+        public static IEnumerable<DirectOpGroupSpec> direct(ApiHost host)
+            => from d in individuals(host).GroupBy(op => op.Id)
                 let id = OpIdentity.Define(d.Key)
-                select DirectOpGroupSpec.Define(id, d);                    
+                select DirectOpGroupSpec.Define(host, id, d);                    
 
-        public static IEnumerable<GenericOpSpec> generic(Type host)
-            => from m in host.DeclaredMethods().Attributed<OpAttribute>().OpenGeneric()
+        public static IEnumerable<GenericOpSpec> generic(ApiHost host)
+            => from m in host.DeclaredMethods.Attributed<OpAttribute>().OpenGeneric()
                 let def = m.GetGenericMethodDefinition()
                 let closures = m.NumericClosures().ToArray()
                 let id = Identity.generic(m)
                 where closures.Length != 0
-                select GenericOpSpec.Define(id, def, closures);
+                select GenericOpSpec.Define(host,id, def, closures);
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
@@ -46,24 +47,6 @@ namespace Z0
                 where pt.IsSome()
                 let id = Identity.identify(op.Root, k)
                 where !id.IsEmpty
-                select OpClosureInfo.Define(id, k, op.Root.MakeGenericMethod(pt.Value)); 
-
-        readonly struct DirectSvc : IOpSpecifier<DirectOpSpec>
-        {
-            public IEnumerable<DirectOpSpec> FromHost(Type host)
-                => direct(host);
-        }
-
-        readonly struct DirectGroupSvc : IOpSpecifier<DirectOpGroupSpec>
-        {
-            public IEnumerable<DirectOpGroupSpec> FromHost(Type host)
-                => groups(host);
-        }
-
-        readonly struct GenericSvc : IOpSpecifier<GenericOpSpec>
-        {
-            public IEnumerable<GenericOpSpec> FromHost(Type host)
-                => generic(host);
-        }
+                select OpClosureInfo.Define(op.Host, id, k, op.Root.MakeGenericMethod(pt.Value)); 
     }
 }

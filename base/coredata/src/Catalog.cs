@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.CompilerServices;
     using static zfunc;
 
@@ -17,11 +18,13 @@ namespace Z0
 
         }        
 
-        public override IEnumerable<Type> DirectApiHosts
-            => new Type[]{typeof(DataBlocks)};
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => from t in (new Type[]{typeof(DataBlocks)})
+                select ApiHost.Define(AssemblyId,t);
 
-        public override IEnumerable<Type> GenericApiHosts
-            => new Type[]{typeof(DataBlocks), typeof(Symbolic)};
+        public override IEnumerable<ApiHost> GenericApiHosts
+            => from t in (new Type[]{typeof(DataBlocks), typeof(Symbolic)})
+                select ApiHost.Define(AssemblyId, t);
     }
 
     static class Symbolic

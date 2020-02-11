@@ -28,9 +28,16 @@ namespace Z0
         public static AssemblyId AssemblyId(this Assembly a)
             => a.GetDesignator().Id;
 
+        public static IEnumerable<IAssemblyDesignator> Designates(this Assembly a)
+            => a.Designator().Designates;
+
+        public static IEnumerable<ApiHost> ApiHosts(this Assembly src)
+            => from t in src.GetTypes()
+                where t.Attributed<ApiHostAttribute>()
+                select ApiHost.Define(t);
+
         static IAssemblyDesignator GetDesignator(this Assembly a)
         {
-
             static IAssemblyDesignator factory(Assembly a)
             {                
                 try

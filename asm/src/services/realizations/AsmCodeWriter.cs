@@ -8,7 +8,6 @@ namespace Z0
     using System.IO;
     using System.Linq;
     using System.Runtime.CompilerServices;
-
     using static zfunc;
 
     readonly struct AsmCodeWriter : IAsmCodeWriter
@@ -20,27 +19,19 @@ namespace Z0
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmCodeWriter Create(IAsmContext context, FilePath dst, bool append)
-            => new AsmCodeWriter(context, dst,append);
+        public static IAsmCodeWriter Create(IAsmContext context, FilePath dst)
+            => new AsmCodeWriter(context, dst);
 
         [MethodImpl(Inline)]
-        AsmCodeWriter(IAsmContext context, FilePath path, bool append)
+        AsmCodeWriter(IAsmContext context, FilePath path)
         {
             this.Context = context;
             this.TargetPath = path;
-            this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,append);
+            this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        public void Write(AsmCode src, int? idpad = null)
-            => StreamOut.WriteLine(src.Format(idpad ?? 0));
-
-        public void Write(AsmCode[] src, int? idpad = null)
-        {
-            var pad = idpad ?? src.Select(code => code.Id.Identifier.Length).Max() + 1;
-            foreach(var item in src)
-                Write(item,pad);
-        }
-
+        public void Write(in CapturedMember src, int? idpad = null)
+            => StreamOut.WriteLine(src.Code.Format(idpad ?? 0));
         public void Dispose()
         {
             StreamOut.Flush();

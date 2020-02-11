@@ -6,37 +6,34 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Runtime.CompilerServices;
-
-    using Z0.AsmSpecs;
-
+    
     using static zfunc;
 
-    readonly struct AsmFunctionWriter : IAsmFunctionWriter
+    readonly struct AsmRawWriter : IAsmRawWriter
     {        
-        readonly StreamWriter StreamOut;
-
         public IAsmContext Context {get;}
+
+        readonly StreamWriter StreamOut;
 
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter Create(IAsmContext context, FilePath dst)
-            => new AsmFunctionWriter(context, dst);
-                    
+        public static IAsmRawWriter Create(IAsmContext context, FilePath dst)
+            => new AsmRawWriter(context, dst);
+
         [MethodImpl(Inline)]
-        AsmFunctionWriter(IAsmContext context, FilePath path)
+        AsmRawWriter(IAsmContext context, FilePath path)
         {
-            this.TargetPath = path;
             this.Context = context;
+            this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
-    
-        public void Write(AsmFunction src)
-        {
-            StreamOut.Write(Context.AsmFormatter().FormatDetail(src));
-        }
 
+        public void Write(in CapturedMember src, int? idpad = null)
+            => StreamOut.WriteLine(HexLine.Define(src.Id,src.RawBits).Format(idpad ?? 0));
+        
         public void Dispose()
         {
             StreamOut.Flush();

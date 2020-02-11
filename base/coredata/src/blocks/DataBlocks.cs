@@ -10,7 +10,7 @@ namespace Z0
         
     using static zfunc;
 
-    [OpHost("blocks",true)]
+    [ApiHost("blocks",HostedOpKind.Generic)]
     public static partial class DataBlocks
     {
 

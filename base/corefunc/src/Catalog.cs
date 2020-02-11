@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     
     using static zfunc;
@@ -17,8 +18,9 @@ namespace Z0
 
         }
         
-        public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(Converter), typeof(AsIn), typeof(As));
+        public override IEnumerable<ApiHost> GenericApiHosts
+            => from t in items(typeof(Converter), typeof(AsIn), typeof(As))
+                select ApiHost.Define(AssemblyId, t);
                
     }
 }

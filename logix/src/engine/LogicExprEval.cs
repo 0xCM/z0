@@ -11,7 +11,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    [OpHost("expr.logic.eval")]
+    [ApiHost("expr.logic.eval")]
     public static class LogicExprEval
     {
         [Op]

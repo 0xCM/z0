@@ -14,6 +14,7 @@ namespace Z0
     using System.Collections.Concurrent;
 
     using static RootShare;
+    using static ReflectionFlags;
     
     partial class RootReflections
     {
@@ -124,28 +125,6 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> Public(this IEnumerable<MethodInfo> src)
             => src.Where(t => t.IsPublic);
-
-        /// <summary>
-        /// Determines whether a method is an action
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsAction(this MethodInfo m)
-            => m.ReturnType == typeof(void);
-
-        /// <summary>
-        /// Determines whether a method is a function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsFunction(this MethodInfo m)
-            => m.ReturnType != typeof(void);
-
-        /// <summary>
-        /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsEmitter(this MethodInfo m)
-            => m.IsFunction() && m.HasArity(0);
-
 
     }
 

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static zfunc;
 
@@ -20,10 +21,10 @@ namespace Z0
         public override IEnumerable<Type> ServiceHosts
             => typeof(BVTypes).GetNestedTypes().Realize<IFunc>();
 
-        public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(BitVector));
+        public override IEnumerable<ApiHost> GenericApiHosts
+            => items(ApiHost.Define(AssemblyId,typeof(BitVector)));
 
-        public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(BitVector));               
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => items(ApiHost.Define(AssemblyId,typeof(BitVector)));
     }
 }

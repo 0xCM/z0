@@ -72,6 +72,7 @@ namespace Z0
         CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src);
             
         Option<CapturedData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src);
+
     }
 
     public interface ICaptureControl : ICaptureOps, ICaptureJunction

@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static zfunc;
     using static OpHelpers;
 
-    [OpHost("expr.vector.eval")]
+    [ApiHost("expr.vector.eval")]
     static class VectorExprEval
     {
         [Op, NumericClosures(NumericKind.Integers)]

@@ -48,7 +48,7 @@ namespace Z0
         Option<AsmFunction> CaptureFunction(MethodInfo method)
             => from runtime in GetRuntimeMethod(method)
                from capture in CaptureNative(method, runtime)
-               let f = Decoder.DecodeFunction(capture)
+               let f = Decoder.Decode(capture)
                select f;
 
         [MethodImpl(Inline)]
@@ -125,7 +125,8 @@ namespace Z0
 
             var location = MemoryRange.Define(address, address + size);            
             var result = CaptureOutcome.Define(CaptureState.Empty, location.Start, location.End, CaptureTermCode.CTC_MSDIAG);
-			return CapturedMember.Define(id, method, location, buffer, result);                    
+            var bits = CaptureBits.Define(buffer,buffer);
+			return CapturedMember.Define(id, method, location, bits, result);                    
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
     using NC = NumericClass;
     using ID = NumericId;
 
-    [OpHost]
+    [ApiHost]
     public static class Numeric
     {
         [Op]

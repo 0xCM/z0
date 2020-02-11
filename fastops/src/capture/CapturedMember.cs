@@ -18,23 +18,28 @@ namespace Z0
     {        
         public static CapturedMember Empty => default;
 
-        public static CapturedMember Define(OpIdentity id, MethodInfo src, MemoryRange origin, byte[] content, CaptureOutcome result)
-            => new CapturedMember(id, src.Signature().Format(), null, src, origin, content, result);
-
-        public static CapturedMember Define(OpIdentity id, Delegate src, MemoryRange origin, byte[] content, CaptureOutcome result)
-            => new CapturedMember(id, id, src, src.Method, origin, content, result);
+        [MethodImpl(Inline)]
+        public static CapturedMember Define(OpIdentity id, MethodInfo src, MemoryRange origin, CaptureBits bits, CaptureOutcome result)
+            => new CapturedMember(id, src.Signature().Format(), null, src, origin, bits, result);
 
         [MethodImpl(Inline)]
-        CapturedMember(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange origin, byte[] content, CaptureOutcome result)
+        public static CapturedMember Define(OpIdentity id, Delegate src, MemoryRange origin, CaptureBits bits, CaptureOutcome result)
+            => new CapturedMember(id, id, src, src.Method, origin, bits, result);
+
+        [MethodImpl(Inline)]
+        CapturedMember(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange origin, CaptureBits bits, CaptureOutcome result)
         {
-            require((int)origin.Length == content.Length);
+            require((int)origin.Length == bits.Trimmed.Length);
             this.Delegate = src;
             this.Method = method;
             this.Origin = origin;
-            this.Code = AsmCode.Define(id, origin, label, content);
+            this.Code = AsmCode.Define(id, origin, label, bits.Trimmed);
             this.Outcome = result;
+            this.RawBits = bits.Raw;
         }
 
+        public readonly byte[] RawBits {get;}
+        
         public readonly Option<Delegate> Delegate;
 
         public readonly MethodInfo Method;
@@ -42,9 +47,9 @@ namespace Z0
         public readonly MemoryRange Origin;
 
         public readonly AsmCode Code;
-
+        
         public readonly CaptureOutcome Outcome;
-
+             
         public OpIdentity Id 
             => Code.Id;
 
@@ -56,8 +61,5 @@ namespace Z0
 
         public bool IsEmpty 
             => Length == 0;
-
-        public CapturedMember Replicate()
-            => new CapturedMember(Id, Label, Delegate.ValueOrDefault(), Method, Origin, Code.Encoded.Replicate(), Outcome);
     }
 }

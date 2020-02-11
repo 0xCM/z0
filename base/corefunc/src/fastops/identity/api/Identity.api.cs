@@ -65,7 +65,7 @@ namespace Z0
         public static string host(Type t)
         {
             var defaultName = t.Name.ToLower();
-            var query = from a in t.CustomAttribute<OpHostAttribute>()
+            var query = from a in t.CustomAttribute<ApiHostAttribute>()
                         where a.Name.IsNotBlank()
                         select a.Name;
             return query.ValueOrDefault(defaultName);            

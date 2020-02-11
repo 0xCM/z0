@@ -7,11 +7,13 @@ namespace Z0
     
     using System;
     
+    [ApiHost(HostedOpKind.Generic)]
     public static partial class gmath
     {
 
     }
 
+    [ApiHost(HostedOpKind.Direct)]
     public static partial class math
     {
 
@@ -20,6 +22,7 @@ namespace Z0
     /// <summary>
     /// Defines generic floating-point operations
     /// </summary>
+    [ApiHost(HostedOpKind.Generic)]
     public static partial class gfp
     {
 
@@ -28,6 +31,7 @@ namespace Z0
     /// <summary>
     /// Defines floating-point operations
     /// </summary>
+    [ApiHost(HostedOpKind.Direct)]
     public static partial class fmath
     {
 
@@ -47,6 +51,7 @@ namespace Z0
     }
 
 
+    [ApiHost(HostedOpKind.Generic)]
     public static partial class mathspan
     {    
 

@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static zfunc;    
     using static As;
 
-    [OpHost("scalar.ops")]
+    [ApiHost("scalar.ops")]
     public static class ScalarOps
     {        
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]

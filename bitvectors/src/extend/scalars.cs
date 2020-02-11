@@ -94,14 +94,5 @@ namespace Z0
         public static BitVector24 ToBitVector(this ulong src, N24 n)
             => (uint)src;
 
-        /// <summary>
-        /// Converts an enumeration value to a bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The enumeration type</typeparam>
-        [MethodImpl(Inline)]   
-        public static BitVector24 ToBitVector<T>(this T src, N24 n)
-            where T : unmanaged, Enum
-                => evalue<T,uint>(src);
    }
 }

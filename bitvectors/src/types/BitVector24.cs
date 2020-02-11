@@ -13,7 +13,11 @@ namespace Z0
     /// Defines a 32-bit bitvector
     /// </summary>
     public struct BitVector24 
-    {
+    {        
+        [MethodImpl(Inline)]   
+        public static BitVector24 FromEnum<T>(T src)
+            where T : unmanaged, Enum
+                => evalue<T,uint>(src);
         const uint MaxValue = uint.MaxValue >> 8;
 
         internal uint data;

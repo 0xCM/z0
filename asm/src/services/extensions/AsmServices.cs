@@ -21,19 +21,19 @@ namespace Z0
         {            
             var decoder = archive.Context.Decoder();
             foreach(var codeblock in archive.Read())
-                yield return decoder.DecodeInstructions(codeblock);                
+                yield return decoder.Decode(codeblock);                
         }
 
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
             => AsmInstructionSource.FromProducer(() => GetInstructions(archive));
 
-        public static AsmFunction DecodeFunction(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, MethodInfo src)
-            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src));
+        public static AsmFunction Decode(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, MethodInfo src)
+            => decoder.Decode(CaptureServices.Operations.Capture(in exchange, id, src));
 
-        public static AsmFunction DecodeFunction(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
-            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src));
+        public static AsmFunction Decode(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
+            => decoder.Decode(CaptureServices.Operations.Capture(in exchange, id, src));
 
-        public static AsmFunction DecodeFunction(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, Delegate src)
-            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src));
+        public static AsmFunction Decode(this IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, Delegate src)
+            => decoder.Decode(CaptureServices.Operations.Capture(in exchange, id, src));
     }
 }

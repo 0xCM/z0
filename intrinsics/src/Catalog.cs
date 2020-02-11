@@ -28,11 +28,13 @@ namespace Z0
         public override IEnumerable<Type> ServiceHosts
             => typeof(VXTypes).GetNestedTypes().Realize<IFunc>();
 
-        public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(ginx),typeof(vblocks),typeof(VPattern), typeof(BitPack), typeof(CpuVector));
+        public override IEnumerable<ApiHost> GenericApiHosts
+            => from t in items(typeof(ginx),typeof(vblocks),typeof(VPattern), typeof(BitPack), typeof(CpuVector))
+                select ApiHost.Define(AssemblyId,t);
 
-        public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(dinx), typeof(BitPack), typeof(CpuVector));
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => from t in items(typeof(dinx), typeof(BitPack), typeof(CpuVector))
+                select ApiHost.Define(AssemblyId,t);
     }
 
     public static class Intrinsics
@@ -42,12 +44,12 @@ namespace Z0
                 
         public static IEnumerable<MethodInfo> Generic
             => from host in Catalog.GenericApiHosts
-                from m in host.Methods().OpenGeneric()
+                from m in host.DeclaredMethods.OpenGeneric()
                 select m;
 
         public static IEnumerable<MethodInfo> Direct
             => from host in Catalog.DirectApiHosts
-                from m in host.Methods().NonGeneric()
+                from m in host.DeclaredMethods.NonGeneric()
                 select m;
 
         public static IEnumerable<MethodInfo> VectorizedGeneric(N128 w)
@@ -89,14 +91,14 @@ namespace Z0
         public static IEnumerable<MethodInfo> Vectorized<T>(N128 w, bool generic)
             where T : unmanaged
                 => from host in (generic ? Catalog.GenericApiHosts : Catalog.DirectApiHosts)
-                    from m in host.Methods().VectorizedDirect<T>(w)                    
+                    from m in host.DeclaredMethods.VectorizedDirect<T>(w)                    
                     where m.IsGenericMethod == generic
                     select m;
 
         public static IEnumerable<MethodInfo> Vectorized<T>(N256 w, bool generic)
             where T : unmanaged
                 => from host in (generic ? Catalog.GenericApiHosts : Catalog.DirectApiHosts)
-                    from m in host.Methods().VectorizedDirect<T>(w)
+                    from m in host.DeclaredMethods.VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
                     select m;
 

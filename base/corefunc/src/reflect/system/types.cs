@@ -216,77 +216,9 @@ namespace Z0
         /// Determines whether the member instance classification is equivalent to static
         /// </summary>
         /// <param name="mit">The instance classification</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static bool IsStaticType(this MemberInstanceType mit)
             => mit == MemberInstanceType.Static;
-
-        /// <summary>
-        /// Returns all interfaces realized by the type, including those inherited from
-        /// supertypes
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static IEnumerable<Type> Interfaces(this Type t)
-            => t.GetInterfaces() ?? new Type[]{};
-
-        /// <summary>
-        /// Returns all source types which ar interfaces
-        /// </summary>
-        /// <param name="src">The source types</param>
-        [MethodImpl(Inline)]
-        public static IEnumerable<Type> Interfaces(this IEnumerable<Type> src)
-            => src.Where(t => t.IsInterface);
-
-        /// <summary>
-        /// Returns all source types which are classes
-        /// </summary>
-        /// <param name="src">The source types</param>
-        [MethodImpl(Inline)]
-        public static IEnumerable<Type> Classes(this IEnumerable<Type> src)
-            => src.Where(t => t.IsClass);
-
-        /// <summary>
-        /// Returns all source types which are structs
-        /// </summary>
-        /// <param name="src">The source types</param>
-        [MethodImpl(Inline)]
-        public static IEnumerable<Type> Structs(this IEnumerable<Type> src)
-            => src.Where(t => t.IsStruct());
-
-        /// <summary>
-        /// Returns all source types which are delegates
-        /// </summary>
-        /// <param name="src">The source types</param>
-        [MethodImpl(Inline)]
-        public static IEnumerable<Type> Delegates(this IEnumerable<Type> src)
-            => src.Where(t => t.IsDelegate());
-
-        /// <summary>
-        /// Returns all source types which are enums
-        /// </summary>
-        /// <param name="src">The source types</param>
-        [MethodImpl(Inline)]
-        public static IEnumerable<Type> Enums(this IEnumerable<Type> src)
-            => src.Where(t => t.IsEnum);
-
-        /// <summary>
-        /// Determines whether a type implements a specified interface
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        /// <param name="interfaceType">The interface type</param>
-        [MethodImpl(Inline)]
-        public static bool Realizes(this Type t, Type interfaceType)
-            => interfaceType.IsInterface && t.Interfaces().Contains(interfaceType);
-
-        /// <summary>
-        /// Determines whether a type implements a specific interface
-        /// </summary>
-        /// <typeparam name="T">The interface type</typeparam>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool Realizes<T>(this Type t)
-            => typeof(T).IsInterface && t.Interfaces().Contains(typeof(T));
 
         /// <summary>
         /// Determines whether a type is nullable
@@ -376,21 +308,6 @@ namespace Z0
         public static bool IsNamed(this Type t)
             => !t.IsAnonymous();
 
-        /// <summary>
-        /// Determines whether a type is a struct
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsStruct(this Type t)
-            => t.IsValueType && !t.IsEnum;
-
-        /// <summary>
-        /// Determines whether the specified type is a delegate type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsDelegate(this Type t)
-            => t.IsSubclassOf(typeof(Delegate));
 
         static readonly ConcurrentDictionary<Type, IReadOnlyList<ValueMember>> ValueMemberCache
             = new ConcurrentDictionary<Type, IReadOnlyList<ValueMember>>();
@@ -526,36 +443,6 @@ namespace Z0
         public static Option<MethodInfo> Method(this Type src, string name)
             => src.DeclaredMethods().WithName(name).FirstOrDefault();
 
-        /// <summary>
-        /// Selects the public/non-public static/instance methods declared by a type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static IEnumerable<MethodInfo> DeclaredMethods(this Type src)
-            => src.GetMethods(BF_Declared);
-
-        /// <summary>
-        /// Selects the public/non-public static/instance methods declared by a type that have a specific name
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static IEnumerable<MethodInfo> DeclaredMethods(this Type src, string name)
-            => src.GetMethods(BF_Declared).Where(m => m.Name == name);
-
-        /// <summary>
-        /// Selects the public/non-public static/instance methods declared or exposed by a type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static IEnumerable<MethodInfo> Methods(this Type src, bool declared = true)
-            => declared ? src.GetMethods(BF_Declared) : src.GetMethods(BF_All);
- 
-        /// <summary>
-        /// Selects the public/non-public static/instance methods declared by stream of types
-        /// </summary>
-        /// <param name="src">The types to examine</param>
-        public static IEnumerable<MethodInfo> DeclaredMethods(this IEnumerable<Type> src)
-            => src.Select(x => x.DeclaredMethods()).SelectMany(x => x);
-
-        public static IEnumerable<MethodInfo> Methods(this IEnumerable<Type> src, bool declared)
-            => src.Select(x => x.Methods(declared)).SelectMany(x => x);
 
         public static IEnumerable<object> Values(this IEnumerable<FieldInfo> src, object o = null)
             => src.Select(x => x.GetValue(o));

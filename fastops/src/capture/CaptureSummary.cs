@@ -11,12 +11,14 @@ namespace Z0
  
     using static zfunc;    
 
-    public readonly struct CaptureDataset
+    public readonly struct CaptureSummary
     {        
-        public static CaptureDataset Define(OpIdentity id, CaptureOutcome outcome, byte[] consumed, byte[] trimmed)
-            => new CaptureDataset(id,outcome, consumed,trimmed);
+        [MethodImpl(Inline)]
+        public static CaptureSummary Define(OpIdentity id, CaptureOutcome outcome, CaptureBits bits)
+            => new CaptureSummary(id,outcome, bits);
 
-        CaptureDataset(OpIdentity id, CaptureOutcome outcome, byte[] buffer, byte[] trimmed)
+        [MethodImpl(Inline)]
+        CaptureSummary(OpIdentity id, CaptureOutcome outcome, CaptureBits bits)
         {
             this.Id = id;
             this.FinalState = outcome.State;
@@ -24,8 +26,8 @@ namespace Z0
             this.End = outcome.End;
             this.ByteCount = outcome.ByteCount;
             this.TermCode = outcome.TermCode;
-            this.Consumed = buffer;
-            this.Trimmed = trimmed;
+            this.Bits = bits;
+
         }
         
         public readonly OpIdentity Id;
@@ -43,9 +45,7 @@ namespace Z0
 
         public readonly CaptureTermCode TermCode;
 
-        public readonly byte[] Consumed;
-
-        public readonly byte[] Trimmed;
+        public readonly CaptureBits Bits;
 
         public CaptureOutcome Outcome
             => CaptureOutcome.Define(FinalState, Start, End, TermCode);

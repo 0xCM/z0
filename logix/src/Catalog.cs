@@ -6,6 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     using static zfunc;    
 
@@ -17,11 +18,12 @@ namespace Z0.Logix
 
         }
         
-        public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(LogicOpApi), typeof(LogicExprEval), typeof(LogicOps));
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => from t in items(typeof(LogicOpApi), typeof(LogicExprEval), typeof(LogicOps))
+            select ApiHost.Define(AssemblyId, t);
 
-        public override IEnumerable<Type> GenericApiHosts
-            => items(
+        public override IEnumerable<ApiHost> GenericApiHosts
+            => from t in items(
                 typeof(BitMatrixOpApi), typeof(BitMatrixOps), 
                 typeof(BitVectorOpApi), typeof(BitVectorOps),
                 typeof(ScalarOpApi), typeof(ScalarOps), 
@@ -30,6 +32,7 @@ namespace Z0.Logix
                 typeof(CmpExprEval), typeof(ArithExprEval),
                 typeof(ScalarExprEval), 
                 typeof(VectorExprEval)
-                );               
+                )
+                select ApiHost.Define(AssemblyId, t);               
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
 
         }
 
-        public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(libm));
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => items(ApiHost.Define(AssemblyId, typeof(libm)));
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    [OpHost("logic.engine")]
+    [ApiHost("logic.engine")]
     public static partial class LogicEngine
     {
         /// <summary>

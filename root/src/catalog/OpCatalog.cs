@@ -47,11 +47,11 @@ namespace Z0
         public virtual IEnumerable<Type> ServiceHosts
             => new Type[]{};
 
-        public virtual IEnumerable<Type> GenericApiHosts
-            => new Type[]{};
+        public virtual IEnumerable<ApiHost> GenericApiHosts
+            => new ApiHost[]{};
 
-        public virtual IEnumerable<Type> DirectApiHosts
-            => new Type[]{};
+        public virtual IEnumerable<ApiHost> DirectApiHosts
+            => new ApiHost[]{};
 
         public DataResourceIndex Resources  {get; private set;}
             = DataResourceIndex.Empty;
