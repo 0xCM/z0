@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
         public static TypeIdentity identify(NumericKind nk)
-            => TypeIdentity.Define(NumericType.signature(nk));
+            => TypeIdentity.Define(nk.Signature());
 
         [MethodImpl(Inline)]
         public static TypeIdentity identify(Type t)

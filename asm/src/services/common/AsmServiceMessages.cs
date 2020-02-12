@@ -39,7 +39,7 @@ namespace Z0
         public static AppMsg Emitting(GenericOpSpec op)        
             => appMsg($"Emitting operation {op.Id}", SeverityLevel.Babble);
 
-        public static AppMsg Emitting(OpClosureInfo closure)        
+        public static AppMsg Emitting(ClosedOpSpec closure)        
             => appMsg($"Emitting closure {closure.Id}", SeverityLevel.Babble);
 
         public static AppMsg Emitting(DirectOpSpec op)        
@@ -63,7 +63,7 @@ namespace Z0
         public static AppMsg DescriptorConflit(CaptureToken src)
             => appMsg($"The descriptor with uri {src.Uri} conflicts with an existing descriptor", SeverityLevel.Warning);
             
-        public static AppMsg EmittingImmSpecializations(OpSpec op, IEnumerable<byte> immediates)        
+        public static AppMsg EmittingImmSpecializations(IOpSpec op, IEnumerable<byte> immediates)        
             => appMsg($"Emitting immediates specializations {immediates.FormatHexList()} for {op.Id}", SeverityLevel.Babble);
         
         public static AppMsg InstructionSizeMismatch(MemoryAddress location, int offset, int actual, int reported)

@@ -19,7 +19,7 @@ partial class zfunc
     /// Defines an application exception reporting the conent of an application message
     /// </summary>
     /// <param name="msg">The source message</param>
-    public static AppException error(AppMsg msg)           
+    public static AppException appFail(AppMsg msg)           
         =>  AppException.Define(msg);
 
 }

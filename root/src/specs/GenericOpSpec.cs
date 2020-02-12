@@ -5,26 +5,32 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    public class GenericOpSpec : RootedOpSpec
+    using static RootShare;
+
+    public class GenericOpSpec : IGenericOpSpec
     {            
-        public static GenericOpSpec Define(OpIdentity id, MethodInfo method, NumericKind[] kinds)            
-            => new GenericOpSpec(ApiHost.Empty, id,method, kinds);
+        public ApiHost Host {get;}
+    
+        public OpIdentity Id {get;}            
 
+        public NumericKind[] Kinds {get;}
+
+        public MethodInfo MethodDefinition {get;}
+
+        [MethodImpl(Inline)]
         public static GenericOpSpec Define(ApiHost host, OpIdentity id, MethodInfo method, NumericKind[] kinds)            
             => new GenericOpSpec(host, id,method, kinds);
 
+        [MethodImpl(Inline)]
         GenericOpSpec(ApiHost host, OpIdentity id, MethodInfo method, NumericKind[] kinds)
-            : base(id, method)
         {
             this.Kinds = kinds;
             this.Host = host;
+            this.Id = id;
+            this.MethodDefinition = method;
         }
-
-        public ApiHost Host;
-    
-        public NumericKind[] Kinds {get;}       
     }
 }

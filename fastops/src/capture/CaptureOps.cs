@@ -83,10 +83,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static byte Read(byte* pSrc)
-            => Unsafe.Read<byte>(pSrc);
-
-        [MethodImpl(Inline)]
         static CaptureOutcome Complete(in CaptureState state, CaptureTermCode tc, long start, long end, int delta)
             => CaptureOutcome.Define(state, (ulong)start, (ulong)(end + delta), tc);
 
@@ -136,10 +132,10 @@ namespace Z0
         [MethodImpl(Inline)]
         static CaptureState Step(in CaptureExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
         {
-            var code = Read(pSrc++);
+            var code = Unsafe.Read<byte>(pSrc++);
             exchange.Target(offset++) = code;
             location = (long)pSrc;
-            return CaptureState.Define(id, offset, location,code);
+            return CaptureState.Define(id, offset, location, code);
         }
     }
 }

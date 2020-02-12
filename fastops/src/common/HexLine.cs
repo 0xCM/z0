@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a line of text that contains an identifier and a sequence encoded assembly bytes
+    /// Defines a line of text that contains an identifier and a sequence of bytes
     /// </summary>
     public readonly struct HexLine
     {

@@ -71,8 +71,8 @@ namespace Z0
             foreach(var host in Catalog.DirectApiHosts)
             {
                 var archive = HostImmArchive(host);
-                var specs = from g in OpSpecs.direct(host)
-                             let immg = ImmGroup(g)
+                var specs = from g in host.DirectOps()
+                             let immg = ImmGroup(host,g)
                              where !immg.IsEmpty
                              select immg;
                 
@@ -92,7 +92,7 @@ namespace Z0
             foreach(var host in Catalog.GenericApiHosts)
             {
                 var archive = HostImmArchive(host);
-                var specs = OpSpecs.generic(host).Where(op => FunctionType.immneeds(op.Root));
+                var specs = host.GenericOps().Where(op => op.MethodDefinition.AcceptsImmediate());
 
                 foreach(var spec in specs)
                     EmitGenericImm(exchange, spec, archive, observer);                
@@ -103,40 +103,46 @@ namespace Z0
         {
             var primary = HostArchive(host);
             var immediate = HostImmArchive(host);
-            var specs = OpSpecs.direct(host);
+            var specs = host.DirectOps();
 
             foreach(var spec in specs)
-                Emit(exchange, PrimaryGroup(spec), primary, observer);
+                Emit(exchange, PrimaryGroup(host,spec), primary, observer);
         }
 
         void EmitGenericPrimary(in CaptureExchange exchange, ApiHost host, CaptureEmissionObserver observer)
         {
             var primary = HostArchive(host);
             var immediate = HostImmArchive(host);
-            var specs = OpSpecs.generic(host);
+            var specs = host.GenericOps();
 
-            foreach(var spec in specs.Where(spec => !FunctionType.immneeds(spec.Root)))
+            foreach(var spec in specs.Where(spec => !spec.MethodDefinition.AcceptsImmediate()))
                 Emit(exchange, spec, primary, observer);
         }        
 
-        void Emit(in CaptureExchange exchange, DirectOpGroupSpec group, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
+        void Emit(in CaptureExchange exchange, DirectOpGroup group, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {                                    
             var functions = new List<AsmFunction>();
             foreach(var spec in group.Members)
-                functions.Add(Decode(exchange, spec.Id, spec.Root));
+                functions.Add(Decode(Decoder, exchange, spec));
             
             if(functions.Count != 0)
             {
-                var fGroup = AsmFunctionGroup.Define(group.Id, functions.ToArray());
+                var fGroup = AsmFunctionGroup.Define(group.GroupId, functions.ToArray());
                 OnSave(dst.Save(fGroup, true), observer);
             }                        
         }
+
+        static AsmFunction Decode(IAsmDecoder decoder, in CaptureExchange exchange, DirectOpSpec src)
+            => decoder.Decode(CaptureServices.Operations.Capture(in exchange, src.Id, src.ConcreteMethod));
+
+        static AsmFunction Decode(IAsmDecoder decoder, in CaptureExchange exchange, ClosedOpSpec closure)
+            => decoder.Decode(CaptureServices.Operations.Capture(in exchange, closure.Id, closure.ClosedMethod));
 
         void Emit(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {
             var functions = new List<AsmFunction>();
             foreach(var closure in op.Close())                        
-                functions.Add(Decoder.Decode(in exchange, closure.Id, closure.ClosedMethod));
+                functions.Add(Decode(Decoder, in exchange, closure));
             if(functions.Count != 0)
             {
                 var fGroup = AsmFunctionGroup.Define(op.Id, functions.ToArray());
@@ -146,7 +152,7 @@ namespace Z0
 
         void EmitGenericImm(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {
-            if(FunctionType.vunaryImm(op.Root))
+            if(op.MethodDefinition.IsVectorizedUnaryImm())
             {                                                
                 foreach(var closure in op.Close())
                 {
@@ -159,7 +165,7 @@ namespace Z0
                     }
                 }
             }
-            else if(FunctionType.vbinaryImm(op.Root))
+            else if(op.MethodDefinition.IsVectorizedBinaryImm())
             {
                 foreach(var closure in op.Close())
                 {
@@ -174,26 +180,26 @@ namespace Z0
             }
         }
 
-        void EmitDirectImm(in CaptureExchange exchange, DirectOpGroupSpec op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
+        void EmitDirectImm(in CaptureExchange exchange, DirectOpGroup op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {
             var tokens = new List<CaptureToken>();
-            foreach(var member in op.Members.Where(m => FunctionType.vunaryImm(m.Root)))
+            foreach(var member in op.Members.Where(m => m.ConcreteMethod.IsVectorizedUnaryImm()))
             {
-                var resolutions = Context.UnaryImmCapture(member.Root, member.Id).Capture(in exchange, ImmSelection);
+                var resolutions = Context.UnaryImmCapture(member.ConcreteMethod, member.Id).Capture(in exchange, ImmSelection);
                 if(resolutions.Length != 0)
                 {
-                    var fGroup = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
+                    var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
                     var tGroup = dst.Save(fGroup, true);
                     tGroup.OnSome(t => tokens.AddRange(t.Tokens)).OnSome(g => Sink.Accept(g));
                 }
             }
 
-            foreach(var member in op.Members.Where(m => FunctionType.vbinaryImm(m.Root)))
+            foreach(var member in op.Members.Where(m => m.ConcreteMethod.IsVectorizedBinaryImm()))
             {
-                var resolutions = Context.BinaryImmCapture(member.Root, member.Id).Capture(in exchange, ImmSelection);
+                var resolutions = Context.BinaryImmCapture(member.ConcreteMethod, member.Id).Capture(in exchange, ImmSelection);
                 if(resolutions.Length != 0)
                 {
-                    var fGroup = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
+                    var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
                     var tGroup = dst.Save(fGroup, true);
                     tGroup.OnSome(t => tokens.AddRange(t.Tokens)).OnSome(g => Sink.Accept(g));
                 }
@@ -203,11 +209,11 @@ namespace Z0
                 observer(tokens.ToGroup(tokens[0].Uri.GroupUri));
         }                    
 
-        DirectOpGroupSpec PrimaryGroup(DirectOpGroupSpec g)
-            => DirectOpGroupSpec.Define(g.Id, g.Members.Where(m => !FunctionType.immneeds(m.Root)));
+        DirectOpGroup PrimaryGroup(ApiHost host, DirectOpGroup g)
+            => DirectOpGroup.Define(host, g.GroupId, g.Members.Where(m => !m.ConcreteMethod.AcceptsImmediate()));
 
-        DirectOpGroupSpec ImmGroup(DirectOpGroupSpec g)
-            => DirectOpGroupSpec.Define(g.Id, g.Members.Where(m => FunctionType.immneeds(m.Root)));
+        DirectOpGroup ImmGroup(ApiHost host, DirectOpGroup g)
+            => DirectOpGroup.Define(host, g.GroupId, g.Members.Where(m => m.ConcreteMethod.AcceptsImmediate()));
 
         IEnumerable<ApiHost> ApiHosts
             => Catalog.DirectApiHosts.Union(Catalog.GenericApiHosts);
@@ -247,8 +253,6 @@ namespace Z0
         IAsmFunctionArchive Archive(string subject)
             => Context.FunctionArchive(Catalog.AssemblyId, subject);
 
-        AsmFunction Decode(in CaptureExchange exchange, OpIdentity id, MethodInfo method)
-            => Decoder.Decode(exchange, id, method);
 
         static byte[] ImmSelection => new byte[]{5,9,13};
     }

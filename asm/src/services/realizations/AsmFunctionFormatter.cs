@@ -117,7 +117,7 @@ namespace Z0
                 var instruction = src.Instructions[i];
                 
                 if(src.Code.Length < offset + instruction.ByteLength)
-                    throw error(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
+                    throw appFail(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
             
                 dst[i] = instruction.SummarizeInstruction(src.Code.Encoded, instruction.FormattedInstruction, offset, src.Code.Origin.Start);
                 offset += (ushort)instruction.ByteLength;

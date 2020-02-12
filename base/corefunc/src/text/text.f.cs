@@ -245,6 +245,13 @@ partial class zfunc
         => AsciSym.Pipe;
 
     /// <summary>
+    /// Produces a '-' character
+    /// </summary>
+    [MethodImpl(Inline)]
+    public static char dash()
+        => AsciSym.Dash;
+
+    /// <summary>
     /// Produces a ',' character
     /// </summary>
     [MethodImpl(Inline)]

@@ -6,22 +6,31 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    public sealed class DirectOpSpec : RootedOpSpec
+    using static RootShare;
+
+    public readonly struct DirectOpSpec : IDirectOpSpec
     {        
+        public ApiHost Host {get;}
+
+        public OpIdentity Id {get;}            
+
+        public MethodInfo ConcreteMethod {get;}        
+
+        [MethodImpl(Inline)]
         public static DirectOpSpec Define(ApiHost host, OpIdentity id, MethodInfo method)            
             => new DirectOpSpec(host, id,method);
 
-        public static DirectOpSpec Define(OpIdentity id, MethodInfo method)            
-            => new DirectOpSpec(ApiHost.Empty, id,method);
-
+        [MethodImpl(Inline)]
         DirectOpSpec(ApiHost host, OpIdentity id, MethodInfo method)
-            : base(id, method)
         {
             Host = host;
+            Id = id;
+            ConcreteMethod = method;
         }
 
-        public ApiHost Host;
-
+        public override string ToString()
+            => Id;
     }
 }

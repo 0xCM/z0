@@ -116,7 +116,7 @@ namespace Z0
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
-                    var uri = OpUri.AsmOp(Origin, ApiHost, src.Id, f.Id);
+                    var uri = OpUri.Asm(Origin, ApiHost, src.Id, f.Id);
                     writer.Write(GroupFormatter.FormatDetail(f));
                     tokens[i] = CaptureToken.Define(f.CaptureInfo, uri);
                 }

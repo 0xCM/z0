@@ -16,11 +16,14 @@ namespace Z0.Designators
             => AssemblyRole.Test;
     
         public override IEnumerable<IAssemblyDesignator> Designates
-            => items<IAssemblyDesignator>(
-                Intrinsics.Designated, 
+            => new IAssemblyDesignator[]{                
                 GMath.Designated,
-                BitCore.Designated
-                );
+                Intrinsics.Designated, 
+                BitCore.Designated,
+                BitGrids.Designated,
+                Logix.Designated
+            };
+
         public override void Run(params string[] args)
             => App.Run(args);
     }

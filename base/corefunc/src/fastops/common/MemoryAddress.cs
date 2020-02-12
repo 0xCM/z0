@@ -94,5 +94,9 @@ namespace Z0
         public int CompareTo([AllowNull] MemoryAddress other)
             => this == other ? 0 : this < other ? -1 : 1;
 
+        [MethodImpl(Inline)]
+        public unsafe T* ToPointer<T>()
+            where T : unmanaged
+                => (T*)Origin;         
     }
 }

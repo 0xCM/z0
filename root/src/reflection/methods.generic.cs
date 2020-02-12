@@ -8,36 +8,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.ComponentModel;
-    using System.Collections.Concurrent;
 
     using static RootShare;
  
     partial class RootReflections
     {
-        /// <summary>
-        /// Returns true if the method has unspecified generic parameters, false otherwise
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsOpenGeneric(this MethodInfo m)
-            => m.ContainsGenericParameters;
-
-        /// <summary>
-        /// Returns true if the method has unspecified generic parameters, false otherwise
-        /// </summary>
-        /// <param name="src">The method to examine</param>
-        public static bool IsClosedGeneric(this MethodInfo src)
-            => src.IsConstructedGenericMethod;
-
-        /// <summary>
-        /// Returns true if the method has unspecified generic parameters, false otherwise
-        /// </summary>
-        /// <param name="src">The method to examine</param>
-        public static bool IsNonGeneric(this MethodInfo src)
-            => !src.IsGenericMethod && !src.IsConstructedGenericMethod;
-
         /// <summary>
         /// Returns the arguments supplied to a constructed generic method; if the method is 
         /// nongeneric, a generic type definition or some other variant, an empty result is returned

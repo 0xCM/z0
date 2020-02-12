@@ -14,14 +14,7 @@ namespace Z0
     using static zfunc;
 
     partial class Reflections
-    {        
-        /// <summary>
-        /// Returns a method's parameter types
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool effective)
-            => effective ? m.ParameterTypes().Select(t => t.EffectiveType()) : m.ParameterTypes();
- 
+    {         
         /// <summary>
         /// Selects the method parameters that satisfy a predicate
         /// </summary>

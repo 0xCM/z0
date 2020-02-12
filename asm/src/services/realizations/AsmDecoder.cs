@@ -86,7 +86,7 @@ namespace Z0
                 var instruction = src[i];
                 
                 if(src.NativeCode.Length < offset + instruction.ByteLength)
-                    throw error(InstructionSizeMismatch(instruction.IP, offset, src.NativeCode.Length, instruction.ByteLength));                
+                    throw appFail(InstructionSizeMismatch(instruction.IP, offset, src.NativeCode.Length, instruction.ByteLength));                
             
                 dst[i] = instruction.SummarizeInstruction(src.NativeCode.Encoded, instruction.FormattedInstruction, offset, src.Origin.Start);
                 offset += (ushort)instruction.ByteLength;
@@ -94,7 +94,7 @@ namespace Z0
 
             var blocklen = src.Decoded.Select(i => i.ByteLength).Sum();
             if(blocklen != src.NativeCode.Length)
-                throw error(InstructionBlockSizeMismatch(src.Origin, src.NativeCode.Length, blocklen));
+                throw appFail(InstructionBlockSizeMismatch(src.Origin, src.NativeCode.Length, blocklen));
 
             return AsmFunction.Define(src.Origin, src.NativeCode, src.CaptureInfo, src.Decoded);
         }

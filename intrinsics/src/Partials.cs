@@ -51,13 +51,10 @@ namespace Z0
     {        
         public static IEnumerable<MethodInfo> BinOps()
         {
-            return typeof(ginx).Methods().Public().OpenGeneric().Where(x => x.ParameterTypes().Count() == 2);
+            return typeof(ginx).DeclaredMethods().Public().OpenGeneric().Where(x => x.ParameterTypes().Count() == 2);
         }
 
     }
-
-
-
 
     /// <summary>
     /// Vectorized operators

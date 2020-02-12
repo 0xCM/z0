@@ -7,12 +7,10 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
 
     public abstract class OpCatalog<C> : IOperationCatalog
         where C : OpCatalog<C>
     {
-
         protected OpCatalog(AssemblyId id)
         {
             AssemblyId = id;
@@ -24,26 +22,8 @@ namespace Z0
             Resources = resources;
         }
 
-        public Assembly HostAssembly {get;} 
-            = typeof(C).Assembly;
-
         public AssemblyId AssemblyId {get;}
-
-        public string CatalogName
-            => AssemblyId.Format();
-
-        public bool IsEmpty
-            => AssemblyId == AssemblyId.Empty || AssemblyId == AssemblyId.None;
-
-        public virtual IEnumerable<GenericOpSpec> GenericOps 
-            => new GenericOpSpec[]{};
-
-        public virtual IEnumerable<DirectOpSpec> DirectOps 
-            => new DirectOpSpec[]{};
-
-        public virtual IEnumerable<GenericOpSpec> SpanOps 
-            => new GenericOpSpec[]{};
-
+    
         public virtual IEnumerable<Type> ServiceHosts
             => new Type[]{};
 

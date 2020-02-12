@@ -67,9 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The file path</param>
         public static StreamWriter Writer(this FilePath dst)
-        {
-            return new StreamWriter(dst.CreateParentIfMissing().FullPath, false);
-        }
+            => new StreamWriter(dst.CreateParentIfMissing().FullPath, false);
 
         /// <summary>
         /// Creates or overwrites a file with supplied text

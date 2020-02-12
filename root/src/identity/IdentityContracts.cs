@@ -48,6 +48,18 @@ namespace Z0
 
     }    
 
+    
+    public interface IApiHostIdentity : IIdentity
+    {
+
+    }
+    
+    public interface IApiHostIdentity<T> : IApiHostIdentity, IIdentity<T>
+        where T : struct, IApiHostIdentity<T>    
+    {
+
+    }
+
     public interface IIdentityProvider
     {
         IdentityKind ProviderKind {get;}   

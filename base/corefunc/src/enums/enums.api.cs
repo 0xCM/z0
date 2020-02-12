@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe E member<E,T>(T v, E e = default)
+        public static unsafe E member<T,E>(T v, E e = default)
             where E : unmanaged, Enum
             where T : unmanaged
                 => Unsafe.Read<E>((E*)&v);

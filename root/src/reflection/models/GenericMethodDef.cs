@@ -10,38 +10,37 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static RootShare;
 
-    public readonly struct GenericMethodDef : IGeneric<MethodInfo>
+
+    public readonly struct GenericMethodDef
     {
         [MethodImpl(Inline)]
-        public static Option<GenericMethodDef> From(MethodInfo src)
+        public static GenericMethodDef? From(MethodInfo src)
         {
             if(src.IsGenericMethodDefinition)
                 return new GenericMethodDef(src);
             else if(src.IsConstructedGenericMethod || src.ContainsGenericParameters)
                 return new GenericMethodDef(src.GetGenericMethodDefinition());
             else
-                return none<GenericMethodDef>();                        
+                return null;
         }
         
         [MethodImpl(Inline)]
         public static implicit operator MethodInfo(GenericMethodDef src)
-            => src.Element;
+            => src.Definition;
 
         [MethodImpl(Inline)]
         GenericMethodDef(MethodInfo src)
         {
-            this.Element = src;
+            this.Definition = src;
             this.Kind = GenericKind.Definition;
         }
 
-        public MethodInfo Element  {get;}
+        public MethodInfo Definition  {get;}
 
         public GenericKind Kind {get;}
 
-        public override string ToString() 
-            => Element.Signature().ToString();
     }
 
 }

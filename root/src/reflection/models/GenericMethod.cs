@@ -8,30 +8,29 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static RootShare;
 
-    public readonly struct GenericType : IGeneric<Type>
+    public readonly struct GenericMethod
     {
         [MethodImpl(Inline)]
-        public static Option<GenericType> From(Type src)
+        public static GenericMethod? From(MethodInfo src)
         {
             var kind = src.GenericKind(false);
-            return kind.IsSome() ? new GenericType(src,kind) : none<GenericType>();
+            if(kind.IsSome())
+                return new GenericMethod(src,kind);
+            else
+                return null;            
         }
         
         [MethodImpl(Inline)]
-        GenericType(Type src, GenericKind kind)
+        GenericMethod(MethodInfo src, GenericKind kind)
         {
             this.Element = src;
             this.Kind = kind;
-                
         }
-
-        public Type Element  {get;}
+        public MethodInfo Element  {get;}
 
         public GenericKind Kind {get;}
 
-        public override string ToString() 
-            => Element.DisplayName();         
     }
 }

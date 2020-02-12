@@ -60,7 +60,6 @@ namespace Z0
             return baseMethodDefinition.DeclaringType != thisMethodDefinition.DeclaringType;
         }
 
-
         /// <summary>
         /// Searches a type for any method that matches the supplied signature
         /// </summary>
@@ -87,54 +86,12 @@ namespace Z0
             => src.Where(t => !t.IsSpecialName && !t.Name.Contains(AsciSym.Pipe) && !t.Name.Contains(AsciSym.Lt));
 
 
-        /// <summary>
-        /// Selects the methods that are adorned with parametrically-identified attribute
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        /// <typeparam name="A">The attribute type</typeparam>
-        public static IEnumerable<MethodInfo> Attributed<A>(this IEnumerable<MethodInfo> src)
-            where A : Attribute
-                => src.Where(m => m.Attributed<A>());
-
-        
-        public static bool IsHomogenous(this MethodInfo m)
+        [MethodImpl(Inline)]
+        public static IntPtr Jit(this MethodInfo src)            
         {
-            var inputs = m.ParameterTypes().ToSet();
-            if(inputs.Count == 1)
-                return inputs.Single() == m.ReturnType;
-            else if(inputs.Count == 0)
-                return m.ReturnType == typeof(void);
-            else
-                return false;
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
         }
 
-        /// <summary>
-        /// Selects functions from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Functions(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsFunction());
-
-        /// <summary>
-        /// Selects the non-public methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> NonPublic(this IEnumerable<MethodInfo> src)
-            => src.Where(t => !t.IsPublic);
-
-        /// <summary>
-        /// Selects the methods from a stream that return a particular type of value
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Returns<T>(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.ReturnType == typeof(T));
-
-        /// <summary>
-        /// Selects methods from a stream that return a particular type of value
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        /// <param name="rt">The method return type</param>
-        public static IEnumerable<MethodInfo> Returns(this IEnumerable<MethodInfo> src, Type rt)
-            => src.Where(x => x.ReturnType == rt);
     }
 }

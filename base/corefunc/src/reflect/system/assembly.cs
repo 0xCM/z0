@@ -75,49 +75,7 @@ namespace Z0
         /// <param name="a">The source assembly</param>
         public static Option<string> DefaultAlias(this Assembly a)
             => from x in a.TryGetAttribute<AssemblyDefaultAliasAttribute>() select x.DefaultAlias;
-
-        /// <summary>
-        /// Gets the simple name of an assembly
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        public static string GetSimpleName(this Assembly a)
-            => a?.GetName()?.Name ?? string.Empty;
-
         public static T Reification<T>(this Type src, params object[] args)
             => (T)Activator.CreateInstance(src, args);
-
-        public static IEnumerable<Type> Types(this Assembly a)
-            => a.GetTypes();
-
-        public static IEnumerable<Type> Interfaces(this Assembly a)
-            => a.GetTypes().Interfaces();
-
-        public static IEnumerable<Type> Classes(this Assembly a)
-            => a.GetTypes().Classes();
-
-        public static IEnumerable<Type> Classes(this Assembly a, string name)
-            => a.Classes().Where(c => c.Name == name);
-
-        public static IEnumerable<Type> Enums(this Assembly a)
-            => a.GetTypes().Enums();
-
-        public static IEnumerable<Type> Structs(this Assembly a)
-            => a.GetTypes().Structs();
-
-        public static IEnumerable<Type> Delegates(this Assembly a)
-            => a.GetTypes().Delegates();
-
-        public static IEnumerable<Type> NestedTypes(this Assembly a)
-            => a.GetTypes().Nested();
-
-        public static IEnumerable<Type> StaticTypes(this Assembly a)
-            => a.GetTypes().Static();
-
-        public static IEnumerable<Type> PublicTypes(this Assembly a)
-            => a.GetTypes().Public();
-
-        public static IEnumerable<Type> NonPublicTypes(this Assembly a)
-            => a.GetTypes().NonPublic();
-
     }
 }

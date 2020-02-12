@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsKind(this MethodInfo m, HK.Vec hk, bool total = false)        
-            => FunctionType.vectorized(m,total);
+            => m.IsVectorized(total);
 
         /// <summary>
         /// Determines whether a method has intrinsic paremeters or return type of specified width
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="width">The required vector width</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
         public static bool IsKind(this MethodInfo m, HK.Vec128 hk, bool total)        
-            => FunctionType.vectorized(m,128,total);
+            => m.IsVectorized(128,total);
 
         /// <summary>
         /// Determines whether a method has intrinsic paremeters or return type of specified width
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="width">The required vector width</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
         public static bool IsKind(this MethodInfo m, HK.Vec256 hk, bool total)        
-            => FunctionType.vectorized(m,256,total);
+            => m.IsVectorized(256,total);
 
         /// <summary>
         /// Selects methods from a stream that accept and/or return intrinsic vectors

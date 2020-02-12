@@ -202,5 +202,8 @@ namespace Z0
         public static NumericIndicator GetNumericIndicator(this NumericKind kind)
             => kind.GetNumericClass().ToNumericIndicator();
 
+        [MethodImpl(Inline)]
+        public static bool IsNumeric(this Type src)
+            => src.NumericKind().IsSome();
     }
 }

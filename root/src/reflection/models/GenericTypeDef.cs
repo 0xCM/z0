@@ -7,15 +7,13 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static RootShare;
 
-    public readonly struct GenericTypeDef : IGeneric<Type>
+    public readonly struct GenericTypeDef
     {
         [MethodImpl(Inline)]
-        public static Option<GenericTypeDef> From(Type src)
+        public static GenericTypeDef? From(Type src)
         {
             var t = src.EffectiveType();
             if(t.IsGenericTypeDefinition)
@@ -23,25 +21,22 @@ namespace Z0
             else if(t.IsConstructedGenericType || t.ContainsGenericParameters)
                 return new GenericTypeDef(t.GetGenericTypeDefinition());
             else
-                return none<GenericTypeDef>();                        
+                return null;
         }
         
         [MethodImpl(Inline)]
         public static implicit operator Type(GenericTypeDef src)
-            => src.Element;
+            => src.Definition;
 
         [MethodImpl(Inline)]
         GenericTypeDef(Type src)
         {
-            this.Element = src;
+            this.Definition = src;
             this.Kind = GenericKind.Definition;
         }
 
-        public Type Element  {get;}
+        public Type Definition  {get;}
 
         public GenericKind Kind {get;}
-
-        public override string ToString() 
-            => Element.DisplayName();
     }
 }

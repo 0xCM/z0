@@ -162,11 +162,22 @@ namespace Z0
             && t.IsVector(w);
 
         /// <summary>
+        /// Determines whether a method has intrinsic paremeters or return type of specified width
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="width">The required vector width</param>
+        /// <param name="total">Whether all parameters and return type must be intrinsic</param>
+        public static bool IsVectorized(this MethodInfo m, int? width, bool total)        
+            => total ? (VectorType.vector(m.ReturnType,width) && m.ParameterTypes().All(t => VectorType.vector(t,width))) 
+                     : (VectorType.vector(m.ReturnType,width) || m.ParameterTypes().Any(t => VectorType.vector(t,width)));
+
+        /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool IsVectorized(this MethodInfo m)        
-            => FunctionType.vectorized(m, false);
+        public static bool IsVectorized(this MethodInfo m, bool total = false)        
+            => total ? (VectorType.test(m.ReturnType) && m.ParameterTypes().All(VectorType.test)) 
+                     : (VectorType.test(m.ReturnType) || m.ParameterTypes().Any(VectorType.test));
 
         /// <summary>
         /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
@@ -174,7 +185,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
         public static bool IsVectorized(this MethodInfo m, N128 w)        
-            => FunctionType.vectorized(m, false) && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
 
         /// <summary>
         /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
@@ -182,7 +193,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
         public static bool IsVectorized(this MethodInfo m, N256 w)        
-            => FunctionType.vectorized(m, false) && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
 
         /// <summary>
         /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
@@ -190,7 +201,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
         public static bool IsVectorized(this MethodInfo m, N512 w)        
-            => FunctionType.vectorized(m, false) && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
 
         /// <summary>
         /// Determines whether a method has at least one 128-bit intrinsic vector parameter closed over a specified type
@@ -198,7 +209,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
         public static bool IsVectorized(this MethodInfo m, N128 w, Type celltype)        
-            => FunctionType.vectorized(m, false) && m.Parameters(p => p.ParameterType.IsVector(w,celltype)).Count() != 0;
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,celltype)).Count() != 0;
 
         /// <summary>
         /// Determines whether a method has at least one 256-bit intrinsic vector parameter closed over a specified type
@@ -206,7 +217,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
         public static bool IsVectorized(this MethodInfo m, N256 w, Type celltype)        
-            => FunctionType.vectorized(m, false) && m.Parameters(p => p.ParameterType.IsVector(w,celltype)).Count() != 0;
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,celltype)).Count() != 0;
 
         /// <summary>
         /// Determines whether a method has at least one 512-bit intrinsic vector parameter closed over a specified type
@@ -214,21 +225,21 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
         public static bool IsVectorized(this MethodInfo m, N512 w, Type celltype)        
-            => FunctionType.vectorized(m, false) && m.Parameters(p => p.ParameterType.IsVector(w,celltype)).Count() != 0;
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,celltype)).Count() != 0;
 
         /// <summary>
         /// Determines whether a method produces, but does not accept, vector values
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsVectorFactory(this MethodInfo m)        
-            => FunctionType.vectorfactory(m);
+            => m.ParameterTypes(true).Where(t => t.IsVector()).Count() == 0 && m.ReturnType.IsVector();
 
         /// <summary>
         /// Determines whether a method defines a vectorized operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsVectorOp(this MethodInfo m)        
-            => FunctionType.vectorized(m) && FunctionType.isoperator(m);
+            => m.IsVectorized() && m.IsOperator();
 
         /// <summary>
         /// Returns true if a method parameter is a closed 128-bit intrinsic vector
@@ -280,6 +291,31 @@ namespace Z0
         /// <param name="arg">The argument type to match</param>
         public static bool IsVector(this ParameterInfo param, N512 w, Type arg)
             => param.ParameterType.IsVector(w,arg);
+
+        /// <summary>
+        /// Determines whether a method represents a vectorized unary operation that requires an immediate value
+        /// </summary>
+        /// <param name="method">The method to examine</param>
+        public static bool IsVectorizedUnaryImm(this MethodInfo method)
+        {
+            var parameters = method.GetParameters().ToArray();
+            return parameters.Length == 2 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].IsImmediate();
+        }
+
+        /// <summary>
+        /// Determines whether a method represents a vectorized binary operation that requires an immediate value
+        /// </summary>
+        /// <param name="method">The method to examine</param>
+        public static bool IsVectorizedBinaryImm(this MethodInfo method)
+        {
+            var parameters = method.GetParameters().ToArray();
+            return parameters.Length == 3 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].ParameterType.IsVector() 
+                && parameters[2].IsImmediate();
+        }
 
         /// <summary>
         /// Selects open generic source methods that have at least one 128-bit vector parameter

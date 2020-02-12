@@ -6,24 +6,27 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Runtime.CompilerServices;
+
+    using static RootShare;
 
     /// <summary>
-    /// Captures identifying/descriptive information about a closure
+    /// Captures identifying/descriptive information about a generic closure
     /// </summary>
-    public class OpClosureInfo 
+    public readonly struct ClosedOpSpec : IClosedOpSpec 
     {
         /// <summary>
-        /// Creates a closure description
+        /// Creates a closure specification
         /// </summary>
         /// <param name="id">The assigned identity</param>
         /// <param name="kind">The primal kind over which the subject was closed</param>
         /// <param name="closed">The closed method</param>
-        public static OpClosureInfo Define(ApiHost host, OpIdentity id, NumericKind kind, MethodInfo closed)
-            => new OpClosureInfo(host, id,kind,closed);
+        [MethodImpl(Inline)]
+        public static ClosedOpSpec Define(ApiHost host, OpIdentity id, NumericKind kind, MethodInfo closed)
+            => new ClosedOpSpec(host, id,kind,closed);
 
-        OpClosureInfo(ApiHost host, OpIdentity id, NumericKind kind, MethodInfo method)
+        [MethodImpl(Inline)]
+        ClosedOpSpec(ApiHost host, OpIdentity id, NumericKind kind, MethodInfo method)
         {
             this.Host = host;
             this.Id = id;

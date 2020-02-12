@@ -19,13 +19,6 @@ namespace Z0
     partial class FastOpX
     {
         /// <summary>
-        /// Closes generic operations over the set of primal types that each operation supports
-        /// </summary>
-        /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<OpClosureInfo> Close(this GenericOpSpec op)
-            => OpSpecs.close(op);
-
-        /// <summary>
         /// Gets the name of a method to which to Op attribute is applied
         /// </summary>
         /// <param name="m">The source method</param>
@@ -53,7 +46,6 @@ namespace Z0
         public static Option<ulong> NatValue(this Type t)
             => t.IsNat() ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : default;
 
-
         /// <summary>
         /// Returns true if the source type is intrinsic or blocked
         /// </summary>
@@ -71,8 +63,8 @@ namespace Z0
         {
             if(VectorType.test(t))
                 return VectorType.width(t);
-            else if(BlockedType.test(t))
-                return BlockedType.width(t);
+            else if(t.IsBlocked())
+                return DataBlocks.width(t);
             if(NumericType.test(t))
                 return NumericType.width(t);
             else if(t == typeof(bit))
@@ -93,47 +85,6 @@ namespace Z0
             => src != TernaryBitLogicKind.XFF 
                 ? (TernaryBitLogicKind)((uint)(src) + 1u)
                 : TernaryBitLogicKind.X00;        
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a double, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsDecimal(this Type t)
-            => t.IsTypeOf<decimal>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a bool, including nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsBool(this Type t)
-            => t.IsTypeOf<bool>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a string, including references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsString(this Type t)
-            => t.IsTypeOf<string>();
-
-        /// <summary>
-        /// Determines whether a supplied type is of type Void
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsVoid(this Type t)
-            => t == typeof(void);
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a char, including nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsChar(this Type t)
-            => t.IsTypeOf<Char>();
-
 
         [MethodImpl(Inline)]
         public static string PrimitiveKeyword(this Type src)
@@ -171,18 +122,6 @@ namespace Z0
             else 
                 return default;
         }
-
-        [MethodImpl(Inline)]
-        public static bool IsPrimalNonNumeric(this Type src)
-            => src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString();
-
-        [MethodImpl(Inline)]
-        public static bool IsPrimalNumeric(this Type src)
-            => NumericType.test(src);
-
-        [MethodImpl(Inline)]
-        public static bool IsPrimal(this Type src)
-            => src.IsPrimalNumeric() || src.IsPrimalNonNumeric();
 
         /// <summary>
         /// Constructs a display name for a type

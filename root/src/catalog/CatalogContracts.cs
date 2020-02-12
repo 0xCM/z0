@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Reflection;
+    using System.Linq;
 
     /// <summary>
     /// Characterizes a type that provides access to an operation catalog
@@ -26,21 +27,6 @@ namespace Z0
     /// </summary>
     public interface IOperationCatalog
     {
-        /// <summary>
-        /// The name of the catalog, unique with respect to known catalogs
-        /// </summary>
-        string CatalogName {get;}
-
-        /// <summary>
-        /// The known generic operations
-        /// </summary>
-        IEnumerable<GenericOpSpec> GenericOps {get;}                       
-
-        /// <summary>
-        /// The known direct operations
-        /// </summary>
-        IEnumerable<DirectOpSpec> DirectOps {get;}       
-
         /// <summary>
         /// The known types that reify contracted operation services
         /// </summary>
@@ -62,11 +48,6 @@ namespace Z0
         DataResourceIndex Resources {get;}
 
         /// <summary>
-        /// The assembly that implements the operations described by the catalog
-        /// </summary>
-        Assembly HostAssembly {get;}    
-                         
-        /// <summary>
         /// Identifies the declaring assembly
         /// </summary>
         AssemblyId AssemblyId {get;}
@@ -74,6 +55,16 @@ namespace Z0
         /// <summary>
         /// Specifies whether the catalog is vacuous
         /// </summary>
-        bool IsEmpty {get;}
+        bool IsEmpty
+            => AssemblyId == AssemblyId.Empty || AssemblyId == AssemblyId.None;
+            
+        /// <summary>
+        /// The name of the catalog, which should be unique with respect to known catalogs
+        /// </summary>
+        string CatalogName
+            => AssemblyId.Format();
+        
+        IEnumerable<ApiHost> ApiHosts
+            => DirectApiHosts.Union(GenericApiHosts);
     }
 }

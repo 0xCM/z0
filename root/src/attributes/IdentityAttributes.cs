@@ -16,7 +16,6 @@ namespace Z0
         public Type Host;
     }
 
-
     /// <summary>
     /// Identifies a formal operation for inclusing in the identity assignment and catalog system
     /// </summary>

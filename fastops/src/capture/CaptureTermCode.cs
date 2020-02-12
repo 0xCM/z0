@@ -11,9 +11,9 @@ namespace Z0
     /// <summary>
     /// Defines literals that indicate the reason for catpture termination
     /// </summary>
-    public enum CaptureTermCode
+    public enum CaptureTermCode : byte
     {
-        None,
+        None = 0,
 
         CTC_RET_SBB,
         

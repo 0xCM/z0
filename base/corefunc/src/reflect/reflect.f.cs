@@ -287,5 +287,5 @@ partial class zfunc
     /// <typeparam name="T">The declaring type</typeparam>
     [MethodImpl(Inline)]
     public static MethodInfo method<T>(string name, T t = default)
-        => typeof(T).Methods().First(m => m.Name == name);
+        => typeof(T).DeclaredMethods().First(m => m.Name == name);
 }

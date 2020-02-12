@@ -12,7 +12,6 @@ namespace Z0
 
     partial class Identity
     {
-
         [MethodImpl(Inline)]
         public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w}x{kind.Signature()}");
@@ -29,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static TypeIdentity numericid<T>(T t = default)
             where T : unmanaged
-                => TypeIdentity.Define(NumericType.signature(typeof(T)));
+                => TypeIdentity.Define(typeof(T).NumericKind().Signature());
 
         /// <summary>
         /// Transforms a nonspecific identity part into a specialized scalar part, if the source part is indeed a scalar identity

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static RootShare;
 
     public enum GenericKind
     {
@@ -20,7 +20,7 @@ namespace Z0
         Definition
     }
 
-    partial class FastOpX
+    partial class RootKindExtensions
     {            
 
         [MethodImpl(Inline)]

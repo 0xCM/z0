@@ -24,5 +24,17 @@ namespace Z0
                     ? FileName.Define($"{id.Format()}-imm", FileExtensions.Csv) 
                     : FileName.Define($"{id.Format()}", FileExtensions.Csv));
 
+
+        static FolderPath LocationRoot
+            =>  Paths.AsmReportRoot + FolderName.Define("locations");   
+        
+        static FileExtension LocationExtension
+            => FileExtensions.Csv;
+
+        public static FilePath HostLocation(ApiHost host)
+            => LocationRoot + FileName.Define(concat(host.Owner.Format(), dash(), host.Name), LocationExtension);
+
+        public static FilePath AssemblyLocation(AssemblyId assembly)
+            => LocationRoot + FileName.Define(assembly.Format(), LocationExtension);
     }
 }

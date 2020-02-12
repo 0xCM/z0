@@ -20,7 +20,7 @@ namespace Z0
         public static AsmFunctionGroup Define(OpIdentity id, AsmFunction[] members)
         {            
             if(members.Length == 0)
-                throw error(appMsg($"{id}: Empty groups are disallowed"));            
+                throw appFail(appMsg($"{id}: Empty groups are disallowed"));            
             return new AsmFunctionGroup(id, members);
         }
         

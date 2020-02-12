@@ -14,81 +14,31 @@ namespace Z0
 
     public static class NumericType
     {
+        /// <summary>
+        /// Returns true if the source type is a primal signed type, false otherwise
+        /// </summary>
+        /// <typeparam name="T">The primal source type</typeparam>
+        public static bool signed(Type t)
+            => t == typeof(sbyte) 
+            || t == typeof(short) 
+            || t == typeof(int) 
+            || t == typeof(long);
 
         /// <summary>
-        /// Determines the number of bytes covered by a k-kinded type
+        /// Returns true if the source type is a primal unsigned type, false otherwise
         /// </summary>
-        /// <param name="k">The type kine</param>
-        [MethodImpl(Inline)]
-        public static int size(NumericKind kind)
-            => kind.Width()/8;
+        public static bool unsigned(Type t)
+            => t == typeof(byte) 
+            || t == typeof(ushort) 
+            || t == typeof(uint) 
+            || t == typeof(ulong);
 
         /// <summary>
-        /// Determines whether a type is a primal float
+        /// Returns true if the source type is a primal floating point type, false otherwise
         /// </summary>
-        /// <typeparam name="T">The type to test</typeparam>
-        [MethodImpl(Inline)]
-        public static bit floating(NumericKind k)
-            => (k & NumericKind.Float) != 0;
-
-        /// <summary>
-        /// Determines whether a kind is one of the signed integer types
-        /// </summary>
-        /// <typeparam name="T">The type to test</typeparam>
-        [MethodImpl(Inline)]
-        public static bit signed(NumericKind k)
-            => (k & NumericKind.Signed) != 0;
-
-        /// <summary>
-        /// Determines whether a kind is one of the signed integer types
-        /// </summary>
-        /// <typeparam name="T">The type to test</typeparam>
-        [MethodImpl(Inline)]
-        public static bit unsigned(NumericKind k)
-            => (k & NumericKind.Unsigned) != 0;        
-
-        /// <summary>
-        /// Produces a character {i | u | f} indicating whether the source type is signed, unsigned or float
-        /// </summary>
-        /// <param name="k">The primal classifier</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NumericIndicator indicator(NumericKind k)
-        {
-            if(unsigned(k))
-                return NumericIndicator.Unsigned;
-            else if(signed(k))
-                return NumericIndicator.Signed;
-            else if(floating(k))
-                return NumericIndicator.Float;
-            else
-                return NumericIndicator.None;
-        }
-
-        /// <summary>
-        /// Determines the kind identifier
-        /// </summary>
-        /// <param name="k">The primal classifier</param>
-        [MethodImpl(Inline)]   
-        public static PrimitiveId id(NumericKind k)
-            => (PrimitiveId)((((uint)k << 8) >> 24) << 16);
-
-        /// <summary>
-        /// Produces an identifier {bitsize(k)}{u | i | f} for a primal kind k
-        /// </summary>
-        /// <param name="k">The primal kind</param>
-        [MethodImpl(Inline)]   
-        public static string signature(NumericKind k)
-            => $"{k.Width()}{indicator(k).Format()}";        
-
-        /// <summary>
-        /// Produces a canonical designator of the form {bitsize[T]}{u | i | f} for a primal type
-        /// </summary>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static string signature(Type t)
-            => signature(t.NumericKind());
+        public static bool floating(Type t)
+            => t == typeof(float) 
+            || t == typeof(double);
 
         /// <summary>
         /// Returns true if the primal source type is signed, false otherwise
@@ -103,17 +53,6 @@ namespace Z0
             || typeof(T) == typeof(long);
 
         /// <summary>
-        /// Returns true if the source type is a primal signed type, false otherwise
-        /// </summary>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static bool signed(Type t)
-            => t == typeof(sbyte) 
-            || t == typeof(short) 
-            || t == typeof(int) 
-            || t == typeof(long);
-
-        /// <summary>
         /// Returns true if the specified type is an unsigned primal integral type
         /// </summary>
         /// <typeparam name="T">The type to evaluate</typeparam>
@@ -126,16 +65,6 @@ namespace Z0
             || typeof(T) == typeof(ulong);
 
         /// <summary>
-        /// Returns true if the source type is a primal unsigned type, false otherwise
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static bool unsigned(Type t)
-            => t == typeof(byte) 
-            || t == typeof(ushort) 
-            || t == typeof(uint) 
-            || t == typeof(ulong);
-
-        /// <summary>
         /// Returns true if the spedified type is a 32-bit or 64-bit floating point
         /// </summary>
         /// <typeparam name="T">The type to evaluate</typeparam>
@@ -144,14 +73,6 @@ namespace Z0
             where T : unmanaged
                 => typeof(T) == typeof(float) 
                 || typeof(T) == typeof(double);
-
-        /// <summary>
-        /// Returns true if the source type is a primal floating point type, false otherwise
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static bool floating(Type t)
-            => t == typeof(float) 
-            || t == typeof(double);
 
         /// <summary>
         /// Determines whether a type is classified as primal

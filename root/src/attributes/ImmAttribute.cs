@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
-
     /// <summary>
     /// Identifies a parameter that accepts an immediate value
     /// </summary>

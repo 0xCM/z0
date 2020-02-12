@@ -104,60 +104,11 @@ namespace Z0
             => MethodSig.Define(src);
 
         /// <summary>
-        /// Determines whether a method defines a unary function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsUnaryFunc(this MethodInfo m)
-            => FunctionType.unary(m);
-
-        /// <summary>
-        /// Determines whether a method defines a binary function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBinaryFunc(this MethodInfo m)
-            => FunctionType.binary(m);
-
-        /// <summary>
-        /// Determines whether a method defines a binary function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsTernaryFunc(this MethodInfo m)
-            => FunctionType.ternary(m);
-
-        /// <summary>
-        /// Determines whether a method is a unary operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsUnaryOp(this MethodInfo m)
-            => FunctionType.unaryop(m);
-
-        /// <summary>
-        /// Determines whether a method is a binary operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBinaryOp(this MethodInfo m)
-            => FunctionType.binaryop(m);
-
-        /// <summary>
-        /// Determines whether a method is a ternary operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsTernaryOp(this MethodInfo m)
-            => FunctionType.ternaryop(m);
-
-        /// <summary>
-        /// Determines whether a method defines an operator over a (common) domain
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsOperator(this MethodInfo m)
-            => FunctionType.isoperator(m);
-
-        /// <summary>
         /// Determines whether a method accepts and/or returns at least one memory block parameter
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBlocked(this MethodInfo m)
-            => FunctionType.blocked(m);        
+            => m.Attributed<BlockedOpAttribute>();
 
         /// <summary>
         /// Determines whether a method is segmentation-centric
@@ -171,49 +122,15 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsSpanOp(this MethodInfo m)
-            => FunctionType.spanned(m);
+            => m.Attributed<SpanOpAttribute>();
 
         /// <summary>
         /// Determines whether a method defines a predicate that returns a bit or bool value
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsPredicate(this MethodInfo m)        
-            => FunctionType.predicate(m);
-
-        /// <summary>
-        /// Determines whether a method is a primal shift operator
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsPrimalShift(this MethodInfo m)        
-            => FunctionType.primalshift(m);
-
-        /// <summary>
-        /// Determines whether a parameters is an immediate
-        /// </summary>
-        /// <param name="param">The parameter to examine</param>
-        public static bool IsImmediate(this ParameterInfo param)
-            => FunctionType.immneeds(param);
-
-        /// <summary>
-        /// Selects unary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> UnaryOps(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsUnaryOp());
-
-        /// <summary>
-        /// Selects binary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> BinaryOps(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsBinaryOp());
-
-        /// <summary>
-        /// Selects ternary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> TernaryOps(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsTernaryOp());             
+            => m.ParameterTypes().Distinct().Count() == 1 
+            && (m.ReturnType == typeof(bit) || m.ReturnType == typeof(bool));
 
         /// <summary>
         /// Describes a method's type parameters, if any
@@ -221,26 +138,6 @@ namespace Z0
         /// <param name="method">The method to examine</param>
         public static TypeParameter[] TypeParameters(this MethodInfo method)
             => method.GenericParameters(false).Mapi((i,t) => TypeParameter.Define(t.DisplayName(), i, t.IsGenericType));
-
-        /// <summary>
-        /// Retrives the primal kind of the first type parameter, if any
-        /// </summary>
-        /// <param name="method">The method to test</param>
-        /// <param name="n">The generic parameter selector</param>
-        [MethodImpl(Inline)]
-        public static NumericKind TypeParameterKind(this MethodInfo method, N1 n)
-            => (method.IsGenericMethod ? method.GetGenericArguments() : array<Type>()).FirstOrDefault()?.NumericKind() ?? Z0.NumericKind.None;
-
-        [MethodImpl(Inline)]
-        public static ParamVariance Variance(this ParameterInfo src)        
-            => src.IsIn 
-            ? Z0.ParamVariance.In  : src.IsOut 
-            ? Z0.ParamVariance.Out : src.ParameterType.IsByRef 
-            ? Z0.ParamVariance.Ref : Z0.ParamVariance.None;
-
-        [MethodImpl(Inline)]
-        public static bool IsSome(this ParamVariance src)        
-            => src != ParamVariance.None;
 
         [MethodImpl(Inline)]
         public static bool IsSome<E>(this E src)        

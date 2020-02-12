@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static RootShare;
+    using NK = NumericKind;
 
     partial class RootX
     {
@@ -18,25 +19,25 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this Type t)
+        public static NK NumericKind(this Type t)
             => Numeric.kind(t);
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
         /// </summary>
         /// <param name="k">The primal kind</param>
-        public static ISet<Type> DistinctTypes(this NumericKind k)
+        public static ISet<Type> DistinctTypes(this NK k)
             => Numeric.typeset(k);
 
-        public static object Convert(this NumericKind dst, object src)
+        public static object Convert(this NK dst, object src)
             => Numeric.convert(dst,src);
 
         [MethodImpl(Inline)]
-        public static NumericKind ToNumericKind(this FixedWidth w, NumericIndicator i) 
+        public static NK ToNumericKind(this FixedWidth w, NumericIndicator i) 
             => Numeric.from(w, i);
 
         [MethodImpl(Inline)]
-        public static BoxedNumber Zero(this NumericKind kind)
+        public static BoxedNumber Zero(this NK kind)
             => BoxedNumber.From(Numeric.convert(kind, 0)); 
             
         /// <summary>
@@ -45,7 +46,7 @@ namespace Z0
         /// <param name="k">The source kind</param>
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline)]
-        public static bool Is(this NumericKind k, NumericKind match)        
+        public static bool Is(this NumericKind k, NK match)        
             => Numeric.@is(k,match);
 
         /// <summary>
@@ -54,14 +55,57 @@ namespace Z0
         /// <param name="k">The source kind</param>
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline)]
-        public static bool Is(this NumericKind k, NumericId match)        
+        public static bool Is(this NK k, NumericId match)        
             => Numeric.@is(k,match);
 
         /// <summary>
         /// Enumerates the distinct numeric kinds represented by the (bitfield) source kind
         /// </summary>
         /// <param name="k">The kind to evaluate</param>
-        public static ISet<NumericKind> DistinctKinds(this NumericKind k)  
+        public static ISet<NK> DistinctKinds(this NK k)  
             => Numeric.kindset(k);    
+
+        /// <summary>
+        /// Determines whether a type is a primal float
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bool IsFloat(this NK k)
+            => (k & NK.Float) != 0;
+
+        /// <summary>
+        /// Determines whether a kind is one of the signed integer types
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bool IsSigned(this NK k)
+            => (k & NK.Signed) != 0;
+
+        /// <summary>
+        /// Determines whether a kind is one of the signed integer types
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bool IsUnsigned(this NK k)
+            => (k & NK.Unsigned) != 0;        
+
+        /// <summary>
+        /// Produces a character {i | u | f} indicating whether the source type is signed, unsigned or float
+        /// </summary>
+        /// <param name="k">The primal classifier</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]   
+        public static NumericIndicator Indicator(this NK k)
+        {
+            if(k.IsUnsigned())
+                return NumericIndicator.Unsigned;
+            else if(k.IsSigned())
+                return NumericIndicator.Signed;
+            else if(k.IsFloat())
+                return NumericIndicator.Float;
+            else
+                return NumericIndicator.None;
+        }
+
     }
 }

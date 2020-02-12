@@ -24,12 +24,106 @@ namespace Z0
             // capture_shuffler(buffers);
             // capture_constants(buffers);
             // binary_imm(buffers);
+            //archive_selected(buffers);
+        
+            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts);                        
+            iter(hosts, CreateLocationReports);            
+            
+        }
+
+        static unsafe int Read(ref byte* pSrc, int count, Span<byte> dst)
+        {
+            var offset = 0;
+            ref var target = ref head(dst);
+            var zcount = 0;
+            while(offset < count && zcount < 10)        
+            {
+                var value = Unsafe.Read<byte>(pSrc++);
+                seek(ref target, offset++) = value;
+                if(value != 0)
+                    zcount = 0;
+                else
+                    zcount++;
+            }
+            return offset;
+        }
+        
+        unsafe void CreateLocationReports(ApiHost host)
+        {
+            print(host);
+            var report = MemberLocationReport.HostReport(host);
+            if(report.IsNonEmpty)
+            {
+                var reportPath = report.Save().Require();
+                var datapath = reportPath.WithExtension(FileExtensions.Raw);
+                EmitData(report, datapath).OnSome(ParseData);
+            }
+        }
+
+        void ParseData(FilePath srcpath)
+        {
+            var dstpath = srcpath.WithExtension(FileExtension.Define("parsed.csv"));
+
+            using var writer = dstpath.Writer();
+            writer.WriteLine("OpId".PadRight(50) + "| Status".PadRight(16) + "  | Code");
+            var hex = HexFile.Read(srcpath);
+            var parser = ByteParser.Create(Pow2.T14);
+            for(var i=0; i<hex.Lines.Length; i++)
+            {
+                var line = hex.Lines[i];
+                var status = parser.Parse(line.Encoded);
+                writer.WriteLine($"{line.Id.ToString().PadRight(50)}| {status.ToString().PadRight(16)}| {parser.Result}");                               
+            }
+            
+        }
+        
+        unsafe Option<FilePath> EmitData(in MemberLocationReport report, FilePath dstpath)
+        {
+            const int IdPad = 50;
+            try
+            {
+                var reader = ByteReader.Create();
+                var membercount = report.Records.Length;
+                using var writer = Context.RawWriter(dstpath);
+                Span<byte> buffer = new byte[Pow2.T14];
+                for(var i=0; i < membercount; i++)
+                {
+                    buffer.Clear();
+                    var current = report.Records[i];                
+                    var pSrc = current.Location.ToPointer<byte>();
+                    var maxbytes = 
+                        i != membercount - 1 
+                        ? Math.Min((int)(report.Records[i + 1].Location - current.Location), buffer.Length) 
+                        : buffer.Length;
+                    var readbytes = reader.Read(ref pSrc, maxbytes, buffer);
+                    writer.Write(current.Member, buffer.Slice(0, readbytes), IdPad);
+                }
+                return dstpath;
+            }
+            catch(Exception e)
+            {
+                errout($"Failed to emit data for {report.ApiHost}");
+                errout(e);
+                return none<FilePath>();
+            }
+        }
+
+        void ParseHexBytes(FilePath path)
+        {
+            var data = HexFile.Read(path);
+            foreach(var line in data.Lines)
+            {
+                var id = line.Id;
+                Trace($"Parsing {id}");
+            }
         }
 
         static void buffer_client(IAsmContext context)
         {
             var state = new List<CaptureState>();
-            var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
+            var f = typeof(gmath).Method(nameof(gmath.alteven))
+                                 .MapRequired(m => m.GetGenericMethodDefinition()
+                                 .MakeGenericMethod(typeof(byte)));
 
             var decoder = context.Decoder(); 
 

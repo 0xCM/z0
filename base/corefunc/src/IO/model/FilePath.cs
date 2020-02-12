@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Collections;
     using System.IO;
 
     using static zfunc;
@@ -62,6 +59,6 @@ namespace Z0
             => FolderPath + src;
     
         public FilePath WithExtension(FileExtension ext)
-            => Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));                
+            => FolderPath + FileName.Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));                
     }
 }

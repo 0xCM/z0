@@ -70,7 +70,7 @@ namespace Z0
         }
 
         static Option<TypeIdentity> EnumIdentity(this Type t)
-            =>  TypeIdentity.Define($"{t.Name}{IDI.ModSep}{NumericType.signature(t.GetEnumUnderlyingType())}");
+            =>  TypeIdentity.Define($"{t.Name}{IDI.ModSep}{t.GetEnumUnderlyingType().NumericKind().Signature()}");
                 
         static Option<TypeIdentity> NatIdentity(this Type arg)
             => from v in arg.NatValue() 
@@ -79,8 +79,8 @@ namespace Z0
         
         static Option<TypeIdentity> PrimalIdentity(this Type arg)
         {
-            if(arg.IsPrimalNumeric())
-                return TypeIdentity.Define(NumericType.signature(arg));
+            if(arg.IsNumeric())
+                return TypeIdentity.Define(arg.NumericKind().Signature());
             else if(arg.IsPrimalNonNumeric())
                 return TypeIdentity.Define(arg.PrimitiveKeyword());
             else
@@ -117,7 +117,7 @@ namespace Z0
                 var text = IDI.NSpan;
                 text += typeargs[0].NatValue();
                 text += IDI.SegSep;
-                text += NumericType.signature(typeargs[1]);
+                text += typeargs[1].NumericKind().Signature();
                 return TypeIdentity.Define(text);
             }
             else

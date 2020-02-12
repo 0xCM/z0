@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using static RootShare;
+
     /// <summary>
     /// Describes an embedded data resource
     /// </summary>
@@ -26,15 +28,15 @@ namespace Z0
         /// </summary>
         /// <param name="id">The resource id</param>
         /// <param name="src">The resource data</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static DataResource Define(string id, ReadOnlySpan<byte> src)
             => new DataResource(id, src.Length, location(src));
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static DataResource Define(string id, int Length, ulong location)
             => new DataResource(id,Length,location);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         internal DataResource(string Id, int Length, ulong Location)
         {
             this.Id = Id;
@@ -42,15 +44,15 @@ namespace Z0
             this.Location = Location;
         }
          
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public unsafe ReadOnlySpan<byte> GetBytes()
             => new ReadOnlySpan<byte>((void*)Location, Length);       
     
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static ref readonly T head<T>(ReadOnlySpan<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         static unsafe ulong location(ReadOnlySpan<byte> src)
             => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
     }

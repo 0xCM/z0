@@ -32,7 +32,7 @@ namespace Z0
                     return tc;
             }
                     
-            if(offset >= 7 && Zx7(exchange,offset))
+            if(offset >= 7 && Zx7(exchange, offset))
             {
                 if(ret_offset == null)
                 {
@@ -55,6 +55,10 @@ namespace Z0
         const byte SBB = 0x19;
         
         const byte FF = 0xff;
+
+        const byte E0 = 0xe0;
+
+        const byte J48 = 0x48;
 
 
         [MethodImpl(Inline)]
@@ -90,7 +94,7 @@ namespace Z0
             var x4 = exchange.Target(offset - 1);
             delta = 0;
             
-            if(match((x0,ZED), (x1,ZED), (x2,0x48), (x3,FF), (x4,0xe0)))
+            if(match((x0,ZED), (x1,ZED), (x2,J48), (x3,FF), (x4,E0)))
                 return CTC_JMP_RAX;
             else
                 return null;

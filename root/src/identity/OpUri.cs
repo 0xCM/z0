@@ -9,13 +9,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static RootShare;
-
     
     public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>
     {
         const string AsmScheme = "asm";
 
-        public readonly string Scheme;
+        public readonly OpUriScheme Scheme;
         
         public readonly AssemblyId Catalog;
 
@@ -32,24 +31,12 @@ namespace Z0
             => $"{scheme}://{catalog.Format()}/{subject}";
 
         [MethodImpl(Inline)]
-        public static string QueryText(string scheme, AssemblyId catalog, string subject, string group)
-            => $"{scheme}://{catalog.Format()}/{subject}?{group}";
+        public static string QueryText(OpUriScheme scheme, AssemblyId catalog, string subject, string group)
+            => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}";
 
         [MethodImpl(Inline)]
-        public static string UriText(string scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
-            => $"{scheme}://{catalog.Format()}/{subject}?{group}#{opid.Identifier}";
-
-        [MethodImpl(Inline)]
-        public static string AsmPathText(AssemblyId catalog, string subject)
-            => PathText(AsmScheme, catalog, subject);
-
-        [MethodImpl(Inline)]
-        public static string AsmQueryText(AssemblyId catalog, string subject, string group)
-            => QueryText(AsmScheme, catalog,subject,group);
-
-        [MethodImpl(Inline)]
-        public static string AsmUriText(AssemblyId catalog, string subject, string group, OpIdentity opid)
-            => UriText(AsmScheme,catalog,subject,group,opid);
+        public static string UriText(OpUriScheme scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
+            => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}#{opid.Identifier}";
 
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
@@ -60,15 +47,24 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static OpUri AsmOp(AssemblyId catalog, string subject, string group, OpIdentity opid)        
-            => new OpUri("asm", catalog, subject, group, opid);
+        public static OpUri Asm(AssemblyId catalog, string subject, string group, OpIdentity opid)        
+            => new OpUri(OpUriScheme.Asm, catalog, subject, group, opid);
 
         [MethodImpl(Inline)]
         public static OpUri AsmGroup(AssemblyId catalog, string subject, string group)        
-            => new OpUri("asm", catalog, subject, group, OpIdentity.Empty);
+            => new OpUri(OpUriScheme.Asm, catalog, subject, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
-        OpUri(string scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
+        public static OpUri Hex(AssemblyId catalog, string subject, string group, OpIdentity opid)        
+            => new OpUri(OpUriScheme.Hex, catalog, subject, group, opid);
+
+        [MethodImpl(Inline)]
+        public static OpUri HexGroup(AssemblyId catalog, string subject, string group)        
+            => new OpUri(OpUriScheme.Hex, catalog, subject, group, OpIdentity.Empty);
+
+
+        [MethodImpl(Inline)]
+        OpUri(OpUriScheme scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
         {
             this.Scheme = scheme;
             this.Catalog = catalog;

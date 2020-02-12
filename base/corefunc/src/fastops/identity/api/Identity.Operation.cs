@@ -32,9 +32,9 @@ namespace Z0
             if(generic && k == NumericKind.None)
                 return OpIdentity.Define(concat(opname, IDI.PartSep, IDI.Generic, suffixPart));            
             else if(w.IsSome())
-                return OpIdentity.Define(concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{NumericType.signature(k)}", suffixPart));
+                return OpIdentity.Define(concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Signature()}", suffixPart));
             else
-                return OpIdentity.Define(concat($"{opname}_{g}{NumericType.signature(k)}{suffixPart}"));
+                return OpIdentity.Define(concat($"{opname}_{g}{k.Signature()}{suffixPart}"));
         }
 
 

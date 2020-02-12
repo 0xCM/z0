@@ -8,10 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.ComponentModel;
-    using System.Collections.Concurrent;
 
     using static RootShare;
     using static ReflectionFlags;
@@ -19,49 +15,12 @@ namespace Z0
     partial class RootReflections
     {
         /// <summary>
-        /// Determines the number of parameters defined by a method
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static int Arity(this MethodInfo m)
-            => m.GetParameters().Length;
-
-        /// <summary>
         /// Determines whether a method has a speicied arity
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="arity">The arity to match</param>
         public static bool HasArity(this MethodInfo m, int arity)
             => m.Arity() == arity;
-
-        /// <summary>
-        /// Selects functions from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> WithArity(this IEnumerable<MethodInfo> src, int arity)
-            => src.Where(m => m.HasArity(arity));
-
-        /// <summary>
-        ///  Selects methods from a stream that declare a parameter that has a specifid type
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        /// <param name="t">The parameter type to match</param>
-        public static IEnumerable<MethodInfo> WithParameterType(this IEnumerable<MethodInfo> src, Type t)
-            => src.Where(m => m.GetParameters().Any(p => p.ParameterType == t));
-
-        /// <summary>
-        /// Returns a method's parameter types
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> ParameterTypes(this MethodInfo m)
-            => m.GetParameters().Select(p => p.ParameterType);
-
-        /// <summary>
-        /// Determines the type of an index-identified parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="index">The parameter index</param>
-        public static Type ParameterType(this MethodInfo m, int index)
-            => m.Arity() >= index + 1 ? m.GetParameters()[index].ParameterType : typeof(void);
 
         /// <summary>
         /// Determines whether the method is an implicit conversion operator
@@ -85,47 +44,39 @@ namespace Z0
             => m.IsExplicitConverter() || m.IsImplicitConverter();
 
         /// <summary>
-        /// Selects the conversion operators from a stream
+        /// Determines the number of parameters defined by a method
         /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> ConversionOps(this IEnumerable<MethodInfo> src)
-            => src.Where(IsConversionOp);
+        /// <param name="m">The method to examine</param>
+        public static int Arity(this MethodInfo m)
+            => m.GetParameters().Length;
 
         /// <summary>
-        /// Reomoves any conversion operations from the stream
+        /// Returns a method's parameter types
         /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> WithoutConversionOps(this IEnumerable<MethodInfo> src)
-            => src.Where(m => !m.IsConversionOp());
+        /// <param name="m">The method to examine</param>
+        public static IEnumerable<Type> ParameterTypes(this MethodInfo m)
+            => m.GetParameters().Select(p => p.ParameterType);
 
         /// <summary>
-        /// Selects the abstract methods from a stream
+        /// Returns a method's parameter types
         /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Abstract(this IEnumerable<MethodInfo> src)
-            => src.Where(t => t.IsAbstract);
+        /// <param name="m">The method to examine</param>
+        public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool effective)
+            => effective ? m.ParameterTypes().Select(t => t.EffectiveType()) : m.ParameterTypes();
 
         /// <summary>
-        /// Selects the static methods from a stream
+        /// Determines the type of an index-identified parameter
         /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Static(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsStatic);
+        /// <param name="m">The method to examine</param>
+        /// <param name="index">The parameter index</param>
+        public static Type ParameterType(this MethodInfo m, int index)
+            => m.Arity() >= index + 1 ? m.GetParameters()[index].ParameterType : typeof(void);
 
         /// <summary>
-        /// Selects the instance methods from a stream
+        /// Returns a method's parameter types
         /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Instance(this IEnumerable<MethodInfo> src)
-            => src.Where(t => !t.IsStatic);
-
-        /// <summary>
-        /// Selects the public methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Public(this IEnumerable<MethodInfo> src)
-            => src.Where(t => t.IsPublic);
-
-    }
-
+        /// <param name="m">The method to examine</param>
+        public static IEnumerable<Type> ImmediateParameters(this MethodInfo m)
+            => m.GetParameters().Where(p => p.Attributed<ImmAttribute>()).Select(p => p.ParameterType);
+   }
 }

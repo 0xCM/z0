@@ -12,26 +12,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static GenericKind;
     using static SpanKind;
 
     public static class TypeKindX
     {
-        /// <summary>
-        /// If type is a vector, determines its classification, otherwise returns none
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static VectorKind VectorKind(this Type t)
-            => VectorType.kind(t);
-
-        /// <summary>
-        /// If type is blocked, determines its classification, otherwise returns none
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static BlockKind BlockKind(this Type t)
-            => BlockedType.kind(t);
 
         /// <summary>
         /// Determines whether a type is parametric over the natural numbers
@@ -65,18 +49,5 @@ namespace Z0
         public static bool IsSpan(this Type t)
             => t.SpanKind().IsSome();
 
-        [MethodImpl(Inline)]
-        public static GenericKind GenericKind(this Type src, bool effective)
-            =>   src.IsOpenGeneric(false) ? Open 
-               : src.IsClosedGeneric(false) ? Closed 
-               : src.IsGenericTypeDefinition ? Definition 
-               : 0;
-
-        [MethodImpl(Inline)]
-        public static GenericKind GenericKind(this MethodInfo src, bool effective)
-            =>   src.IsOpenGeneric() ? Open 
-               : src.IsClosedGeneric() ? Closed 
-               : src.IsGenericMethodDefinition ? Definition 
-               : 0;
     }
 }
