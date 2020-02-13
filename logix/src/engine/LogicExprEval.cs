@@ -14,7 +14,7 @@ namespace Z0.Logix
     [ApiHost("expr.logic.eval")]
     public static class LogicExprEval
     {
-        [Op]
+        [Op("eval_logic_expr", false)]
         internal static bit eval(ILogicExpr expr)
         {
             switch(expr)               
@@ -37,7 +37,7 @@ namespace Z0.Logix
         /// Evaluates a logical operator expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op]
+        [Op("eval_logic_op", false)]
         static bit eval(ILogicOp expr)
         {
             switch(expr)               

@@ -75,7 +75,7 @@ namespace Z0
             var srcLabel = $"m{srcWidth}x{srcType}";
             var dstLabel = $"v{dstWidth}x{dstType}";
             var label = $"{srcLabel}_{dstLabel}";
-            var formatted = $"{label}:{x.Data.FormatHex(true)} -> {y.FormatHex(true)}";
+            var formatted = $"{label}:{x.Data.FormatHex(true,' ',false)} -> {y.FormatHex(true,' ',false)}";
             return formatted;
         }
 

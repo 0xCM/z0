@@ -36,7 +36,6 @@ namespace Z0
         /// </summary>
         public readonly DynamicMethod DynamicMethod;
 
-
         [MethodImpl(Inline)]
         public static implicit operator Delegate(DynamicDelegate d)
             => d.DynamicOp;
@@ -49,6 +48,5 @@ namespace Z0
             this.DynamicMethod = dst;
             this.DynamicOp = op;
         }
-
     }
 }

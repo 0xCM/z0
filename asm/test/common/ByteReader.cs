@@ -16,15 +16,14 @@ namespace Z0
         public static ByteReader Create()
             => default;
 
-        public unsafe int Read(ref byte* pSrc, int count, Span<byte> dst)
+        public unsafe int Read(ref byte* pSrc, int count, ref byte dst)
         {
             var offset = 0;
-            ref var target = ref head(dst);
             var zcount = 0;
             while(offset < count && zcount < 10)        
             {
                 var value = Unsafe.Read<byte>(pSrc++);
-                seek(ref target, offset++) = value;
+                seek(ref dst, offset++) = value;
                 if(value != 0)
                     zcount = 0;
                 else
@@ -33,7 +32,15 @@ namespace Z0
             return offset;
         }
 
+        [MethodImpl(Inline)]
+        public unsafe int Read(ref byte* pSrc, int count, Span<byte> dst)
+            => Read(ref pSrc, count, ref head(dst));
+
+        [MethodImpl(Inline)]
+        public unsafe int Read(MemoryAddress src, int count, Span<byte> dst)
+        {
+            var pSrc = src.ToPointer<byte>();
+            return Read(ref pSrc, count, dst);
+        }
     }
-
-
 }

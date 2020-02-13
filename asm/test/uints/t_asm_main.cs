@@ -26,28 +26,14 @@ namespace Z0
             // binary_imm(buffers);
             //archive_selected(buffers);
         
-            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts);                        
-            iter(hosts, CreateLocationReports);            
-            
-        }
+            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts).Where(c => c.HostingType != typeof(CpuVector));                        
+            //iter(hosts, CreateLocationReports);            
 
-        static unsafe int Read(ref byte* pSrc, int count, Span<byte> dst)
-        {
-            var offset = 0;
-            ref var target = ref head(dst);
-            var zcount = 0;
-            while(offset < count && zcount < 10)        
-            {
-                var value = Unsafe.Read<byte>(pSrc++);
-                seek(ref target, offset++) = value;
-                if(value != 0)
-                    zcount = 0;
-                else
-                    zcount++;
-            }
-            return offset;
+            iter(hosts, EncodingParser.Parse);            
         }
         
+
+
         unsafe void CreateLocationReports(ApiHost host)
         {
             print(host);
@@ -55,24 +41,24 @@ namespace Z0
             if(report.IsNonEmpty)
             {
                 var reportPath = report.Save().Require();
-                var datapath = reportPath.WithExtension(FileExtensions.Raw);
+                var datapath = reportPath.WithExtension(FileExtensions.Hex);
                 EmitData(report, datapath).OnSome(ParseData);
             }
         }
 
         void ParseData(FilePath srcpath)
         {
-            var dstpath = srcpath.WithExtension(FileExtension.Define("parsed.csv"));
+            var parsedpath = srcpath.WithExtension(FileExtension.Define("parsed.csv"));
 
-            using var writer = dstpath.Writer();
-            writer.WriteLine("OpId".PadRight(50) + "| Status".PadRight(16) + "  | Code");
+            using var parseOut = parsedpath.Writer();
+            parseOut.WriteLine("OpId".PadRight(50) + "| Status".PadRight(16) + "  | Code");
             var hex = HexFile.Read(srcpath);
-            var parser = ByteParser.Create(Pow2.T14);
+            var parser = EncodingParser.Create(Pow2.T14);
             for(var i=0; i<hex.Lines.Length; i++)
             {
                 var line = hex.Lines[i];
                 var status = parser.Parse(line.Encoded);
-                writer.WriteLine($"{line.Id.ToString().PadRight(50)}| {status.ToString().PadRight(16)}| {parser.Result}");                               
+                parseOut.WriteLine($"{line.Id.ToString().PadRight(50)}| {status.ToString().PadRight(16)}| {parser.Result}");                               
             }
             
         }

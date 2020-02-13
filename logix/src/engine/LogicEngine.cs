@@ -27,7 +27,7 @@ namespace Z0.Logix
         /// Evalutates a typed logic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op("eval_logic_expr",false), NumericClosures(NumericKind.Integers)]
         public static bit eval<T>(ILogicExpr<T> expr)
             where T : unmanaged
                 => LogicExprEval.eval(expr);
@@ -36,7 +36,7 @@ namespace Z0.Logix
         /// Evalutates a typed scalar expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op("eval_scalar_expr",false), NumericClosures(NumericKind.Integers)]
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged                
                 => ScalarExprEval.eval(expr);
@@ -47,17 +47,17 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The predicate to evaluate</param>
         /// <typeparam name="T">The type over which the comparison is defined</typeparam>
-        [Op, NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
+        [Op("eval_cmp_expr",false), NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => CmpExprEval.eval(expr);
 
-        [Op, NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
+        [Op("eval_vcmp_expr128",false), NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
                 => CmpExprEval.eval(expr);
 
-        [Op, NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
+        [Op("eval_vcmp_expr256",false), NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
                 => CmpExprEval.eval(expr);
@@ -68,7 +68,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The predicate to evaluate</param>
         /// <typeparam name="T">The type over which the comparison is defined</typeparam>
-        [Op, NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
+        [Op("eval_cmp_pred",false), NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static bit eval<T>(IComparisonPred<T> expr)
             where T : unmanaged
                 => CmpExprEval.eval(expr);
@@ -77,7 +77,7 @@ namespace Z0.Logix
         /// Evalutates a typed scalar expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op("eval_arith_expr",false), NumericClosures(NumericKind.Integers)]
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged
                 => ArithExprEval.eval(expr);
@@ -86,7 +86,7 @@ namespace Z0.Logix
         /// Evalutates a typed 128-bit intrinsic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op("eval_vector_expr128",false), NumericClosures(NumericKind.Integers)]
         public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
@@ -95,7 +95,7 @@ namespace Z0.Logix
         /// Evalutates a typed 256-bit intrinsic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op, NumericClosures(NumericKind.Integers)]
+        [Op("eval_vector_expr256",false), NumericClosures(NumericKind.Integers)]
         public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);

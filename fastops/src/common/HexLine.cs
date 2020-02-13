@@ -58,8 +58,14 @@ namespace Z0
 
         public readonly byte[] Encoded;
 
+        public void Deconstruct(out OpIdentity id, out byte[] data)
+        {
+            id = Id;
+            data = Encoded;
+        }
+
         public string Format(int idpad = 0)
-            => concat(Id.Identifier.PadRight(idpad), space(), Encoded.FormatAsmHex());
+            => concat(Id.Identifier.PadRight(idpad), space(), Encoded.FormatHex());
         
         public override string ToString()
             => Format();

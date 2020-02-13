@@ -189,7 +189,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="x0">Receiver for the lo part of the exracted lane</param>
         /// <param name="x1">Receiver for the hi part of the exracted lane</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static ref Pair<ulong> vhi(Vector256<ulong> src, ref Pair<ulong> dst)
         {
             var x = vhi(src);

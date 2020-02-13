@@ -124,7 +124,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">Receiver for the lo part of the exracted lane</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static ref Pair<ulong> vlo(Vector256<ulong> src, ref Pair<ulong> dst)
         {            
             dst.A = src.GetElement(0);
