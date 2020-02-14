@@ -17,7 +17,7 @@ namespace Z0
         {
             public const string Name = "vbyteswap";
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public static ByteSwap128<T> Op => default;
 
@@ -35,7 +35,7 @@ namespace Z0
         {
             public const string Name = "vbyteswap";
 
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public static ByteSwap256<T> Op => default;
 

@@ -38,7 +38,7 @@ namespace Z0
         NumericKind IMaskSpec.K 
         {
             [MethodImpl(Inline)]
-            get => NumericType.kind<T>();
+            get => Numeric.kind<T>();
         }
 
         uint IBitFrequency.F 

@@ -13,6 +13,16 @@ namespace Z0
 
     partial class ginx
     {
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static void vstore<T>(Vector128<T> src, ref Fixed128 dst)
+            where T : unmanaged
+                => vstore(src, ref Fixed.head<T>(ref dst));
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static void vstore<T>(Vector256<T> src, ref Fixed256 dst)
+            where T : unmanaged
+                => vstore(src, ref Fixed.head<T>(ref dst));
+
         /// <summary>
         /// Stores vector content to a span
         /// </summary>
@@ -20,7 +30,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector128<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
                 => vstore(src, ref head(dst), offset);
@@ -32,7 +42,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector256<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
                 => vstore(src, ref head(dst), offset);
@@ -44,7 +54,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector512<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
                 => vstore(src, ref head(dst), offset);
@@ -55,7 +65,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector128<T> src, in Block128<T> dst)
             where T : unmanaged
                 => vstore(src, ref dst.Head);
@@ -67,7 +77,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector128<T> src, in Block128<T> dst, int block)
             where T : unmanaged
                 => vstore(src, ref dst.BlockRef(block));
@@ -78,7 +88,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector256<T> src, in Block256<T> dst)
             where T : unmanaged
                 => vstore(src, ref dst.Head);
@@ -90,7 +100,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector256<T> src, in Block256<T> dst, int block)
             where T : unmanaged
                 => vstore(src, ref dst.BlockRef(block));
@@ -102,7 +112,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector512<T> src, in Block512<T> dst, int block)
             where T : unmanaged
                 => vstore(src, ref dst.BlockRef(block));
@@ -114,7 +124,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector128<T> src, ref T dst, int offset = 0)
             where T : unmanaged
         {
@@ -139,7 +149,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector256<T> src, ref T dst, int offset = 0)
             where T : unmanaged
         {
@@ -157,7 +167,7 @@ namespace Z0
                 vstore256_f(src, ref dst, offset);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector512<T> src, ref T dst, int offset = 0)
             where T : unmanaged
         {

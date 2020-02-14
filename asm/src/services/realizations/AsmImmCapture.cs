@@ -58,7 +58,7 @@ namespace Z0
 
             public AsmFunction Capture(in CaptureExchange exchange, byte imm)
             {
-                var op = Dynop.UnaryOpImm(HK.vk(), Method, BaseId, imm);
+                var op = Dynop.UnaryOpImm(VK.vk(), Method, BaseId, imm);
                 return Decode(Decoder, exchange, op.Id, op);
             }
         }
@@ -84,7 +84,7 @@ namespace Z0
 
             public AsmFunction Capture(in CaptureExchange exchange, byte imm)
             {
-                var op = Dynop.BinaryOpImm(HK.vk(), Method, BaseId, imm);
+                var op = Dynop.BinaryOpImm(VK.vk(), Method, BaseId, imm);
                 return Decode(Decoder, exchange, op.Id, op);
             }
         }

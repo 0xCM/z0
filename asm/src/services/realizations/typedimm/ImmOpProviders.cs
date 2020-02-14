@@ -11,42 +11,43 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
+    using static FKT;
 
     public static partial class ImmOpProviders
     {        
         [MethodImpl(Inline)]
-        public static IImmOpProvider provider(HK.Vec128 hk, HK.UnaryOpFunc opk)
+        public static IImmOpProvider provider(VKT.Vec128 hk, UnaryOpType opk)
             => default(ImmUnaryV128);
 
         [MethodImpl(Inline)]
-        public static IImmOpProvider provider(HK.Vec256 hk, HK.UnaryOpFunc opk)
+        public static IImmOpProvider provider(VKT.Vec256 hk, UnaryOpType opk)
             => default(ImmUnaryV256);
 
         [MethodImpl(Inline)]
-        public static IImmOpProvider provider(HK.Vec128 hk, HK.BinaryOpFunc opk)
+        public static IImmOpProvider provider(VKT.Vec128 hk, BinaryOpType opk)
             => default(ImmBinaryV128);
 
         [MethodImpl(Inline)]
-        public static IImmOpProvider provider(HK.Vec256 hk, HK.BinaryOpFunc opk)
+        public static IImmOpProvider provider(VKT.Vec256 hk, BinaryOpType opk)
             => default(ImmBinaryV256);
 
         [MethodImpl(Inline)]
-        public static IImmOpProvider<UnaryOp<Vector128<T>>> provider<T>(HK.Vec128<T> vk, HK.UnaryOpFunc opk)
+        public static IImmOpProvider<UnaryOp<Vector128<T>>> provider<T>(VKT.Vec128<T> vk, UnaryOpType opk)
             where T : unmanaged
                 => default(ImmUnaryV128<T>);
 
         [MethodImpl(Inline)]
-        public static IImmOpProvider<UnaryOp<Vector256<T>>> provider<T>(HK.Vec256<T> vk, HK.UnaryOpFunc opk)
+        public static IImmOpProvider<UnaryOp<Vector256<T>>> provider<T>(VKT.Vec256<T> vk, UnaryOpType opk)
             where T : unmanaged
                 => default(ImmUnaryV256<T>);
 
         [MethodImpl(Inline)]
-        public static IImmOpProvider<BinaryOp<Vector128<T>>> provider<T>(HK.Vec128<T> vk, HK.BinaryOpFunc opk)
+        public static IImmOpProvider<BinaryOp<Vector128<T>>> provider<T>(VKT.Vec128<T> vk, BinaryOpType opk)
             where T : unmanaged
                 => default(ImmBinaryV128<T>);
 
         [MethodImpl(Inline)]
-        public static IImmOpProvider<BinaryOp<Vector256<T>>> provider<T>(HK.Vec256<T> vk, HK.BinaryOpFunc opk)
+        public static IImmOpProvider<BinaryOp<Vector256<T>>> provider<T>(VKT.Vec256<T> vk, BinaryOpType opk)
             where T : unmanaged
                 => default(ImmBinaryV256<T>);
 

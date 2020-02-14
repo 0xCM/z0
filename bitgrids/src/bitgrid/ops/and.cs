@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.U16)]
         public static BitGrid16<T> and<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
                 => init16<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.U32)]
         public static BitGrid32<T> and<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
                 => init32<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
@@ -41,11 +41,43 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.U64)]
         public static BitGrid64<T> and<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
                 => init64<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
-         
+
+        /// <summary>
+        /// Computes the bitwise AND between generic bitgrids and stores the result to a caller-supplied target
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <param name="gz">The target grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        public static ref readonly BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
+            where T : unmanaged
+        {
+            var blocks = gz.BlockCount;
+            for(var i=0; i<blocks; i++)
+                gz[i] = ginx.vand(gx[i],gy[i]);
+            return ref gz;
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between generic bitgrids and returns the allocated result
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        public static BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+            where T : unmanaged
+        {
+            var gz = alloc<T>(gx.RowCount, gx.ColCount);
+            and(gx,gy,gz);
+            return gz;
+        }
+
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
@@ -147,36 +179,5 @@ namespace Z0
             return gz;
         }
 
-        /// <summary>
-        /// Computes the bitwise AND between generic bitgrids and stores the result to a caller-supplied target
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <param name="gz">The target grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static ref readonly BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
-            where T : unmanaged
-        {
-            var blocks = gz.BlockCount;
-            for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vand(gx[i],gy[i]);
-            return ref gz;
-        }
-
-        /// <summary>
-        /// Computes the bitwise AND between generic bitgrids and returns the allocated result
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy)
-            where T : unmanaged
-        {
-            var gz = alloc<T>(gx.RowCount, gx.ColCount);
-            and(gx,gy,gz);
-            return gz;
-        }
     }
 }

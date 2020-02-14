@@ -10,11 +10,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static OpIdentity;
 
     partial class Identity
     {
-
         /// <summary>
         /// Defines an operation identifier of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_suffix} to identify 
         /// an operation over a segmented type of bitwidth w over a primal kind k
@@ -32,11 +30,10 @@ namespace Z0
             if(generic && k == NumericKind.None)
                 return OpIdentity.Define(concat(opname, IDI.PartSep, IDI.Generic, suffixPart));            
             else if(w.IsSome())
-                return OpIdentity.Define(concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Signature()}", suffixPart));
+                return OpIdentity.Define(concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}", suffixPart));
             else
-                return OpIdentity.Define(concat($"{opname}_{g}{k.Signature()}{suffixPart}"));
+                return OpIdentity.Define(concat($"{opname}_{g}{k.Format()}{suffixPart}"));
         }
-
 
         /// <summary>
         /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
@@ -64,7 +61,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity operation<T>(string opname, HK.Numeric<T> hk)
+        public static OpIdentity operation<T>(string opname, NumericType<T> hk)
             where T : unmanaged
                 => operation(opname,typeof(T).NumericKind());
 
@@ -133,6 +130,5 @@ namespace Z0
         /// <param name="immval">The immediate value to attach</param>
         public static OpIdentity imm8Add(OpIdentity src, byte immval)
               => OpIdentity.Define(concat(imm8Remove(src).Identifier, imm8(immval)));
-
     }
 }

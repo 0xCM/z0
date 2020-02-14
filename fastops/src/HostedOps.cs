@@ -13,10 +13,6 @@ namespace Z0
 
     public static class HostedOps
     {
-        static IEnumerable<DirectOpSpec> direct(ApiHost host)
-            => from m in host.DeclaredMethods.Attributed<OpAttribute>().NonGeneric()
-                select DirectOpSpec.Define(host, Identity.identify(m), m);
-
         /// <summary>
         /// Determines the direct operations available through an api host
         /// </summary>
@@ -49,5 +45,16 @@ namespace Z0
                 let id = Identity.identify(op.MethodDefinition, k)
                 where !id.IsEmpty
                 select ClosedOpSpec.Define(op.Host, id, k, op.MethodDefinition.MakeGenericMethod(pt.Value)); 
+
+       static IEnumerable<DirectOpSpec> direct(ApiHost host)
+            => from m in host.DeclaredMethods.Attributed<OpAttribute>().NonGeneric()
+                select DirectOpSpec.Define(host, Identity.identify(m), m);
+
+ 
+        static IEnumerable<NumericKind> NumericClosures(this MemberInfo m)
+            => m.CustomAttribute<NumericClosuresAttribute>()
+                .MapValueOrElse(
+                    a => a.NumericPrimitive.DistinctKinds(), 
+                    () => items<NumericKind>());
     }
 }

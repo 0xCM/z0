@@ -42,11 +42,7 @@ namespace Z0
             get => Value?.GetType()?.NumericKind() ?? NumericKind.None;
         }
 
-        public string Format() => $"{Name}({Value}:{Kind.Keyword()}) := " + enquote(Text);
-
         public override string ToString()
-            => Format();
+            => this.Format();
     }
-
-
 }

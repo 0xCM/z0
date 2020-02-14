@@ -23,9 +23,8 @@ namespace Z0
                 => BitPos.FromBitIndex<T>((uint)index);
 
         [MethodImpl(Inline)]
-        public static BitPos<T> bitpos<T>(int index, HK.Numeric<T> k)
+        public static BitPos<T> bitpos<T>(int index, NumericType<T> k)
             where T : unmanaged
                 => bitpos<T>(index);
-
     }
 }

@@ -10,16 +10,22 @@ namespace Z0
 
     using static zfunc;
 
-    partial class xfunc
-    {
-        /// <summary>
-        /// Determines whether the enum value corresponds to a defined literal
-        /// </summary>
-        /// <param name="src">The enum value to check</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        public static bool IsLiteral<E>(this E src)
-            where E : Enum
-                => Enum.IsDefined(typeof(E), src);
 
+    public static class EnumX
+    {
+        [MethodImpl(Inline)]
+        public static bool IsSome<E>(this E src)        
+            where E : unmanaged, Enum            
+                => !Enums.zero<E>().Equals(src);
+
+        [MethodImpl(Inline)]
+        public static bool IsNone<E>(this E src)        
+            where E : unmanaged, Enum            
+                => Enums.zero<E>().Equals(src);
+
+        [MethodImpl(Inline)]
+        public static T MapSomeOrElse<E,T>(this E kind, Func<E,T> ifSome, Func<T> ifNone)
+            where E : unmanaged, Enum
+                => kind.IsSome() ? ifSome(kind) : ifNone();
     }
 }

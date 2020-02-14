@@ -11,32 +11,28 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IArtifactModel
-    {
-        string Name {get;}
-    }
     
-    public interface ITypeModel : IArtifactModel
+    public interface ITypeInfo : IArtifactModel
     {
-        IEnumerable<ITypeModel> NestedTypes {get;}
+        IEnumerable<ITypeInfo> NestedTypes {get;}
 
         TypeFacets Facets {get;}
 
-        IEnumerable<IMemberModel> Members {get;}
+        IEnumerable<IMemberInfo> Members {get;}
     }
 
-    public interface IMemberModel : IArtifactModel
+    public interface IMemberInfo : IArtifactModel
     {
         MemberFacets Facets {get;}
     }
 
-    public abstract class ArtifactModel<B,F> : IArtifactModel
-        where B : ArtifactModel<B,F>
+    public abstract class ArtifactInfo<B,F> : IArtifactModel
+        where B : ArtifactInfo<B,F>
         where F : unmanaged, Enum
     {
         public string Name {get;}
 
-        protected ArtifactModel(string name, F facets)
+        protected ArtifactInfo(string name, F facets)
         {
             this.Name = name;
             this.Facets = facets;
@@ -45,54 +41,54 @@ namespace Z0
         public F Facets {get;}
     }
 
-    public abstract class MemberModel<B,F> : ArtifactModel<B,F>, IMemberModel
+    public abstract class MemberInfo<B,F> : ArtifactInfo<B,F>, IMemberInfo
         where F : unmanaged, Enum
-        where B : MemberModel<B,F>
+        where B : MemberInfo<B,F>
     {
-        protected MemberModel(string name, F facets)
+        protected MemberInfo(string name, F facets)
             : base(name,facets)
         {
 
         }
 
-        MemberFacets IMemberModel.Facets 
+        MemberFacets IMemberInfo.Facets 
             => (MemberFacets)(object)Facets;
     }
     
-    public abstract class TypeModel<B,F> : ArtifactModel<B,F>, ITypeModel
+    public abstract class TypeInfo<B,F> : ArtifactInfo<B,F>, ITypeInfo
         where F : unmanaged, Enum
-        where B : TypeModel<B,F>
+        where B : TypeInfo<B,F>
     {
-        protected TypeModel(string ns, string name, F facets)
+        protected TypeInfo(string ns, string name, F facets)
             : base(name,facets)
         {
             this.Namespace = ns;
         }
 
-        List<ITypeModel> types {get;}
-            = new List<ITypeModel>();
+        List<ITypeInfo> types {get;}
+            = new List<ITypeInfo>();
 
-        List<IMemberModel> members {get;}
-            = new List<IMemberModel>();
+        List<IMemberInfo> members {get;}
+            = new List<IMemberInfo>();
 
-        public IEnumerable<ITypeModel> NestedTypes
+        public IEnumerable<ITypeInfo> NestedTypes
             => types;
         
         public string Namespace {get;}
 
-        TypeFacets ITypeModel.Facets 
+        TypeFacets ITypeInfo.Facets 
             => (TypeFacets)(object)Facets;
 
-        public IEnumerable<IMemberModel> Members 
+        public IEnumerable<IMemberInfo> Members 
             => members;
 
-        public TypeModel<B,F> WithNestedTypes(IEnumerable<ITypeModel> src)
+        public TypeInfo<B,F> WithNestedTypes(IEnumerable<ITypeInfo> src)
         {
             types.AddRange(src);
             return this;
         }
 
-        public TypeModel<B,F> WithMembers(IEnumerable<IMemberModel> src)
+        public TypeInfo<B,F> WithMembers(IEnumerable<IMemberInfo> src)
         {
             members.AddRange(src);
             return this;

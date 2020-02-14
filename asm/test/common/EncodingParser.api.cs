@@ -32,6 +32,11 @@ namespace Z0
 
         static void Capture(ApiHost host, FilePath dstpath)
         {
+            
+        }
+        
+        static void Capture0(ApiHost host, FilePath dstpath)
+        {
             var methods = host.EncodedMethods().ToArray();
 
             var distinct = methods.Select(x => x.Id).ToSet();
@@ -118,7 +123,7 @@ namespace Z0
             var hexpath = AsmReports.HostLocation(host).WithExtension(FileExtensions.Hex);
             var csvpath = hexpath.WithExtension(FileExtensions.Csv);
             
-            Capture(host, hexpath);            
+            Capture0(host, hexpath);            
             Parse(hexpath, csvpath);
         }
     }

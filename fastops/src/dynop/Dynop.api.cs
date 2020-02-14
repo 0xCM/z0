@@ -14,6 +14,7 @@ namespace Z0
     using System.Linq;
 
     using static zfunc;
+    using static FKT;
 
     public static partial class Dynop
     {
@@ -209,7 +210,7 @@ namespace Z0
         /// <param name="method">The method that defines a unary operator that accepts an immediate value in the second operand</param>
         /// <param name="baseid">The identity upon which the dynamic immediate will be predicated</param>
         /// <param name="imm">The immediate value to capture</param>
-        public static DynamicDelegate UnaryOpImm(HK.Vec k, MethodInfo method, OpIdentity baseid, byte imm)
+        public static DynamicDelegate UnaryOpImm(VKT.Vec k, MethodInfo method, OpIdentity baseid, byte imm)
             => UnaryImmOpFactory(k,method,baseid)(imm);
 
         /// <summary>
@@ -219,24 +220,24 @@ namespace Z0
         /// <param name="method">The method that defines a unary operator that accepts an immediate value in the third operand</param>
         /// <param name="baseid">The identity upon which the dynamic immediate will be predicated</param>
         /// <param name="imm">The immediate value to capture</param>
-        public static DynamicDelegate BinaryOpImm(HK.Vec k, MethodInfo method, OpIdentity baseid, byte imm)
+        public static DynamicDelegate BinaryOpImm(VKT.Vec k, MethodInfo method, OpIdentity baseid, byte imm)
             => BinaryImmOpFactory(k,method,baseid)(imm);
 
         [MethodImpl(Inline)]            
         public static DynamicDelegate UnaryOpV128Imm(MethodInfo src, byte imm)
-            => ImmOpBuilder(HK.vk128(), HK.opfk(n1), src)(imm);
+            => ImmOpBuilder(VK.vk128(), FK.op(n1), src)(imm);
 
         [MethodImpl(Inline)]            
         public static DynamicDelegate UnaryOpV256Imm(MethodInfo src, byte imm)
-            => ImmOpBuilder(HK.vk256(), HK.opfk(n1), src)(imm);
+            => ImmOpBuilder(VK.vk256(), FK.op(n1), src)(imm);
 
         [MethodImpl(Inline)]            
         public static DynamicDelegate BinaryOpV256Imm(MethodInfo src, byte imm)
-            => ImmOpBuilder(HK.vk256(), HK.opfk(n2), src)(imm);
+            => ImmOpBuilder(VK.vk256(), FK.op(n2), src)(imm);
 
         [MethodImpl(Inline)]            
         public static DynamicDelegate BinaryV128Imm(MethodInfo src, byte imm)
-            => ImmOpBuilder(HK.vk128(), HK.opfk(n2), src)(imm);
+            => ImmOpBuilder(VK.vk128(), FK.op(n2), src)(imm);
 
         [MethodImpl(Inline)]
         public static CilFunctionBody CilFunc(this DynamicMethod src)
@@ -259,7 +260,7 @@ namespace Z0
                 owner: owner,
                 skipVisibility: false);       
 
-        internal static DynamicDelegate UnaryImmOpDelegate(HK.Vec k, Type typedef, OpIdentity id, MethodInfo inner, byte imm8, Type component)
+        internal static DynamicDelegate UnaryImmOpDelegate(VKT.Vec k, Type typedef, OpIdentity id, MethodInfo inner, byte imm8, Type component)
         {
             var reified = inner.Reify(component);
             var operand = typedef.MakeGenericType(component); 
@@ -269,7 +270,7 @@ namespace Z0
             return wrapper.CreateDelegate(id.WithImm8(imm8), reified, target);
         }
 
-        internal static DynamicDelegate BinaryImmOpDelegate(HK.Vec128 k, OpIdentity id, MethodInfo src, byte imm8, Type component)
+        internal static DynamicDelegate BinaryImmOpDelegate(VKT.Vec128 k, OpIdentity id, MethodInfo src, byte imm8, Type component)
         {
             var reified = src.Reify(component);
             var operand = typeof(Vector128<>).MakeGenericType(component);  
@@ -280,7 +281,7 @@ namespace Z0
             return wrapper.CreateDelegate(id.WithImm8(imm8),reified, target);
         }
 
-        internal static DynamicDelegate BinaryImmOpDelegate(HK.Vec256 k, OpIdentity id, MethodInfo src, byte imm8, Type component)
+        internal static DynamicDelegate BinaryImmOpDelegate(VKT.Vec256 k, OpIdentity id, MethodInfo src, byte imm8, Type component)
         {
             var reified = src.Reify(component);
             var operand = typeof(Vector256<>).MakeGenericType(component);  
@@ -291,31 +292,31 @@ namespace Z0
             return wrapper.CreateDelegate(id.WithImm8(imm8),reified, target);
         }
      
-        internal static DynamicDelegate UnaryImmOp(HK.Vec128 k, OpIdentity id, MethodInfo src, byte imm8, Type seg)
+        internal static DynamicDelegate UnaryImmOp(VKT.Vec128 k, OpIdentity id, MethodInfo src, byte imm8, Type seg)
             => UnaryImmOpDelegate(k, typeof(Vector128<>), id, src, imm8, seg);
 
-        internal static DynamicDelegate UnaryImmOp(HK.Vec256 k, OpIdentity id, MethodInfo src, byte imm8, Type seg)
+        internal static DynamicDelegate UnaryImmOp(VKT.Vec256 k, OpIdentity id, MethodInfo src, byte imm8, Type seg)
             => UnaryImmOpDelegate(k, typeof(Vector256<>), id, src, imm8, seg);
 
-        internal static Func<byte,DynamicDelegate> ImmOpBuilder(HK.Vec128 vk, HK.UnaryOpFunc opk, MethodInfo src)
+        internal static Func<byte,DynamicDelegate> ImmOpBuilder(VKT.Vec128 vk, UnaryOpType opk, MethodInfo src)
             => imm8 => UnaryImmOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
-        internal static Func<byte,DynamicDelegate> ImmOpBuilder(HK.Vec256 vk, HK.UnaryOpFunc opk, MethodInfo src)
+        internal static Func<byte,DynamicDelegate> ImmOpBuilder(VKT.Vec256 vk, UnaryOpType opk, MethodInfo src)
             => imm8 => UnaryImmOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
-        internal static Func<byte,DynamicDelegate> ImmOpBuilder(HK.Vec128 vk, HK.BinaryOpFunc opk, MethodInfo src)
+        internal static Func<byte,DynamicDelegate> ImmOpBuilder(VKT.Vec128 vk, BinaryOpType opk, MethodInfo src)
             => imm8 => BinaryImmOpDelegate(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
-        internal static Func<byte,DynamicDelegate> ImmOpBuilder(HK.Vec256 vk, HK.BinaryOpFunc opk, MethodInfo src)
+        internal static Func<byte,DynamicDelegate> ImmOpBuilder(VKT.Vec256 vk, BinaryOpType opk, MethodInfo src)
             => imm8 => BinaryImmOpDelegate(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
-        internal static Func<byte,DynamicDelegate> UnaryImmOpProvider(HK.Vec128 k, OpIdentity id, MethodInfo src, Type component)
+        internal static Func<byte,DynamicDelegate> UnaryImmOpProvider(VKT.Vec128 k, OpIdentity id, MethodInfo src, Type component)
             => imm8 => UnaryImmOp(k,id,src,imm8,component);
 
-        internal static Func<byte,DynamicDelegate> UnaryImmOpProvider(HK.Vec256 k, OpIdentity id, MethodInfo src, Type component)
+        internal static Func<byte,DynamicDelegate> UnaryImmOpProvider(VKT.Vec256 k, OpIdentity id, MethodInfo src, Type component)
             => imm8 => UnaryImmOp(k, id, src,imm8,component);
 
-        internal static Func<byte,DynamicDelegate> UnaryImmOpFactory(HK.Vec k, MethodInfo method, OpIdentity baseid)
+        internal static Func<byte,DynamicDelegate> UnaryImmOpFactory(VKT.Vec k, MethodInfo method, OpIdentity baseid)
         {
             (var celltype, var width) = method.ParameterTypes()
                     .Where(p => p.IsVector())
@@ -323,20 +324,20 @@ namespace Z0
                     .FirstOrDefault();            
 
             var factory = width switch{
-                FixedWidth.W128 => UnaryImmOpProvider(HK.vk128(), baseid, method, celltype),
-                FixedWidth.W256 => UnaryImmOpProvider(HK.vk256(), baseid, method, celltype),
+                FixedWidth.W128 => UnaryImmOpProvider(VK.vk128(), baseid, method, celltype),
+                FixedWidth.W256 => UnaryImmOpProvider(VK.vk256(), baseid, method, celltype),
                 _ => throw new NotSupportedException(width.ToString())
             };
             return factory;
         }
 
-        internal static Func<byte,DynamicDelegate> BinaryImmOpProvider(HK.Vec128 k, OpIdentity id, MethodInfo src, Type component)
+        internal static Func<byte,DynamicDelegate> BinaryImmOpProvider(VKT.Vec128 k, OpIdentity id, MethodInfo src, Type component)
             => imm8 => BinaryImmOpDelegate(k,id,src,imm8,component);
 
-        internal static Func<byte,DynamicDelegate> BinaryImmOpProvider(HK.Vec256 k, OpIdentity id, MethodInfo src, Type component)
+        internal static Func<byte,DynamicDelegate> BinaryImmOpProvider(VKT.Vec256 k, OpIdentity id, MethodInfo src, Type component)
             => imm8 => BinaryImmOpDelegate(k, id, src,imm8,component);
 
-        internal static Func<byte,DynamicDelegate> BinaryImmOpFactory(HK.Vec k, MethodInfo method, OpIdentity baseid)
+        internal static Func<byte,DynamicDelegate> BinaryImmOpFactory(VKT.Vec k, MethodInfo method, OpIdentity baseid)
         {
             (var celltype, var width) = method.ParameterTypes()
                     .Where(p => p.IsVector())
@@ -344,8 +345,8 @@ namespace Z0
                     .FirstOrDefault();            
 
             var factory = width switch{
-                FixedWidth.W128 => BinaryImmOpProvider(HK.vk128(), baseid, method, celltype),
-                FixedWidth.W256 => BinaryImmOpProvider(HK.vk256(), baseid, method, celltype),
+                FixedWidth.W128 => BinaryImmOpProvider(VK.vk128(), baseid, method, celltype),
+                FixedWidth.W256 => BinaryImmOpProvider(VK.vk256(), baseid, method, celltype),
                 _ => throw new NotSupportedException(width.ToString())
             };
             return factory;

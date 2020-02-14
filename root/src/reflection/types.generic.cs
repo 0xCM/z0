@@ -68,5 +68,22 @@ namespace Z0
 
         public static bool IsClosedGeneric(this Type t, bool effective = true)
             => effective ? t.EffectiveType().IsConstructedGenericType : t.IsConstructedGenericType;
+
+        /// <summary>
+        /// For a generic type or reference to a generic type, retrieves the generic type definition;
+        /// otherwise, returns the void type
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static Type GenericDefinition2(this Type t)
+        {
+            var effective = t.EffectiveType();
+            if(effective.IsConstructedGenericType)
+                return effective.GetGenericTypeDefinition();
+            else if(effective.IsGenericTypeDefinition)
+                return effective;
+            else
+                return typeof(void);            
+        }
+
     }
 }

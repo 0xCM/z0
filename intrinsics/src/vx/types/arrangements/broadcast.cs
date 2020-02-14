@@ -17,7 +17,7 @@ namespace Z0
         {
             public const string Name = "vbroadcast";
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public static Broadcast128<T> Op => default;
 
@@ -48,7 +48,7 @@ namespace Z0
         {
             public const string Name = "vbroadcast";
 
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public static Broadcast256<T> Op => default;
 

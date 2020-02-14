@@ -21,13 +21,12 @@ namespace Z0
 
         FixedWidth OperandWidth => FixedWidth.None;
 
-        SegmentationKind Segmentation => SegmentationKind.None;
     }
 
     public interface IImmResolver<T> : IImmResolver
         where T : unmanaged
     {
-        NumericKind IImmResolver.ImmKind => NumericType.kind<T>();
+        NumericKind IImmResolver.ImmKind => Numeric.kind<T>();
     }
 
     [SuppressUnmanagedCodeSecurity]

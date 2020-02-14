@@ -18,7 +18,7 @@ namespace Z0
     {
         public const string Name = "fixedrand";
 
-        public static FixedWidth Width => default(F).Width;
+        public static FixedWidth Width => default(F).FixedWidth;
 
         public static NumericKind NumericKind => typeof(T).NumericKind();
         
@@ -47,7 +47,7 @@ namespace Z0
             where T : unmanaged
         {
             const string name = "fixedrand";
-            var width = default(F).Width;
+            var width = default(F).FixedWidth;
             var kind = typeof(T).NumericKind();
 
             F f8u()
@@ -178,7 +178,7 @@ namespace Z0
         public static IEnumerable<T> Fixed<T>(this IPolyrand random, T t = default)
             where T :unmanaged, IFixed
         {
-            switch(t.Width)
+            switch(t.FixedWidth)
             {
                 case FixedWidth.W8: return random.FixedStream<T>(n8);
                 case FixedWidth.W16: return random.FixedStream<T>(n16);

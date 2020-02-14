@@ -105,11 +105,11 @@ namespace Z0
                 => Identity.testcase(GetType(),root, w, t, generic);
 
         protected static OpIdentity SubjectId(string opname, NumericKind kind)
-            => Identity.subject(opname,kind);
+            => Identity.operation(opname,kind);
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
-                => Identity.subject(opname,t);
+                => Identity.operation(opname,Numeric.kind<T>());
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged

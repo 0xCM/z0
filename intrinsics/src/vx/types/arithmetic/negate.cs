@@ -18,7 +18,7 @@ namespace Z0
         {
             public const string Name = "vnegate";
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public static Negate128<T> Op => default;
 
@@ -43,7 +43,7 @@ namespace Z0
         {
             public const string Name = "vnegate";
 
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public static Negate256<T> Op => default;
 
@@ -60,7 +60,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
                 => ref vblocks.vnegate(a,c);
-
         }
     }
 }

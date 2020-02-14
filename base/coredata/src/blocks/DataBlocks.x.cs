@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Reflection;
 
     using static zfunc;
 
@@ -36,5 +37,27 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => NatSpan.load(src,n);
+
+        /// <summary>
+        /// Determines whether a type is blocked memory store
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsBlocked(this Type t)
+            => BK.test(t);
+
+        /// <summary>
+        /// Determines whether a method accepts and/or returns at least one memory block parameter
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsBlocked(this MethodInfo m)
+            => m.Attributed<BlockedOpAttribute>();
+
+        /// <summary>
+        /// Determines whether a method is segmentation-centric
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsSegmented(this MethodInfo m)
+            => m.IsVectorized() || m.IsBlocked();
     }
 }

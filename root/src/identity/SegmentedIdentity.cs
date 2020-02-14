@@ -35,7 +35,7 @@ namespace Z0
             this.Identifier 
                 = (TypeWidth.IsNone() && segkind.IsNone()) 
                 ? string.Empty 
-                : $"{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.GetNumericIndicator()}";
+                : $"{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
 
         }
 

@@ -42,7 +42,7 @@ namespace Z0
         public static string testcase<W,C>(Type host, string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where C : unmanaged
-                => $"{host.Name}/{operation(root, (FixedWidth)w.NatValue, NumericType.kind<C>(), generic)}";
+                => $"{host.Name}/{operation(root, (FixedWidth)w.NatValue, Numeric.kind<C>(), generic)}";
     }
 
 }

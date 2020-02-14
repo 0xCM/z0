@@ -20,7 +20,7 @@ namespace Z0
 
             public static Bsll128<T> Op => default;
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
@@ -41,7 +41,7 @@ namespace Z0
         {
             public const string Name = "vbsll";
 
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public static Bsll256<T> Op => default;
 

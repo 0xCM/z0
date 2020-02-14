@@ -47,14 +47,14 @@ namespace Z0
             return fmt;
         }
 
-        public static string Format(this IMemberModel src)
+        public static string Format(this IMemberInfo src)
         {
             return src switch{
                 FieldModel x => x.Format(),
                 _ => string.Empty
             };
         }
-        public static string Format(this ITypeModel src, int offset)
+        public static string Format(this ITypeInfo src, int offset)
         {
             var indent = new string(AsciSym.Space, offset);
             var fmt = text();

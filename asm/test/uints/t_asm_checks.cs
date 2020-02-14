@@ -11,10 +11,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
-    using static zfunc;
-    using static HK;
+
     using AsmSpecs;
+
+    using static zfunc;
+    using static NKT;
 
     public class t_asm_checks : t_asm<t_asm_checks>
     {           
@@ -132,7 +133,7 @@ namespace Z0
         void CheckBinaryImm<T>(in AsmBuffers buffers, N128 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = ImmOpProviders.provider(HK.vk128<T>(), HK.opfk(n2));
+            var provider = ImmOpProviders.provider(VK.vk128<T>(), FK.op(n2));
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -155,7 +156,7 @@ namespace Z0
         void CheckBinaryImm<T>(in CaptureExchange exchange, ExecBufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opfk(n2));
+            var provider = ImmOpProviders.provider<T>(VK.vk256<T>(), FK.op(n2));
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -180,7 +181,7 @@ namespace Z0
             where T : unmanaged
         {            
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
-            var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opfk(n1));
+            var provider = ImmOpProviders.provider<T>(VK.vk256<T>(), FK.op(n1));
 
             
             var dynop = provider.CreateOp(method,imm);
@@ -263,7 +264,7 @@ namespace Z0
 
         void CheckUnaryFunc(in AsmBuffers buffers, AsmCode src)
         {            
-            var nk =  NumericType.parseKind(src.Id.TextComponents.Second()).Require();
+            var nk =  Numeric.kind(src.Id.TextComponents.Second());
             switch(nk)
             {
                 case NumericKind.I8:
@@ -297,17 +298,19 @@ namespace Z0
                 case NumericKind.U64:
                     var f64u = buffers.MainExec.UnaryOp<Fixed64>(src);
                     Trace(f64u((ulong) 63));
-                    break;                                    
+                    break;   
+                default:
+                    throw new Exception($"Unanticipated numeric kind {nk}");                                 
             }
         }
 
         void CheckBinaryFunc(in AsmBuffers buffers, AsmCode src)
         {
-            var kind = NumericType.parseKind(src.Id.TextComponents.Last());
+            var kind = Numeric.kind(src.Id.TextComponents.Last());
             if(kind.IsNone())
                 return;
 
-            switch(kind.Value)
+            switch(kind)
             {
                 case NumericKind.I8:
                     var f8i = buffers.MainExec.BinaryOp<Fixed8>(src);

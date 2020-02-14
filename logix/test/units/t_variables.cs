@@ -110,7 +110,7 @@ namespace Z0.Logix
             var v1_name = v1.Format(false);
             var v2_name = v2.Format(false);
             var v3_name = v3.Format(false);
-            var method = MethodInfo.GetCurrentMethod().SpecializeName<T>();
+            var method = MethodInfo.GetCurrentMethod().DisplayName<T>();
             var msg = appMsg($"{method}");
             PostMessage(msg);
                         

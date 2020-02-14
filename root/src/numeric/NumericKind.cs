@@ -194,16 +194,5 @@ namespace Z0
         public static FixedWidth WidthKind(this NumericKind k)
             => (FixedWidth)(ushort)k;
 
-        [MethodImpl(Inline)]
-        public static NumericClass GetNumericClass(this NumericKind kind)
-            => (NumericClass)((uint)kind >> 29);
-
-        [MethodImpl(Inline)]
-        public static NumericIndicator GetNumericIndicator(this NumericKind kind)
-            => kind.GetNumericClass().ToNumericIndicator();
-
-        [MethodImpl(Inline)]
-        public static bool IsNumeric(this Type src)
-            => src.NumericKind().IsSome();
     }
 }

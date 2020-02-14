@@ -39,6 +39,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NotSupportedException unsupported(object value)
             => new NotSupportedException($"{value}");
+
+        [MethodImpl(Inline)]
+        public static int bitsize<T>()            
+            where T : unmanaged
+                => Unsafe.SizeOf<T>()*8;
     }
 
 

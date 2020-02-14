@@ -17,7 +17,7 @@ namespace Z0
         {
             public const string Name = "vsllx";
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public static Sllx128<T> Op => default;
 
@@ -36,7 +36,7 @@ namespace Z0
         {
             public const string Name = "vsllx";
 
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public static Sllx256<T> Op => default;
             

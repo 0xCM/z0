@@ -9,10 +9,11 @@ namespace Z0
         
     using static zfunc;
     using static GXTypes;
+    
+    using OT = OpTypes;    
 
     partial class GX
     {
-
        [MethodImpl(Inline)]
        public static And<T> and<T>(T t = default)
             where T : unmanaged        
@@ -76,23 +77,23 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T eval<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOperatorKind      
+            where K : unmanaged, IKnownOpType      
                 => eval_1(kind,a,b);
 
         [MethodImpl(Inline)]
         public static T eval<T,K>(K kind, T a)
             where T : unmanaged  
-            where K : unmanaged, IOperatorKind      
+            where K : unmanaged, IKnownOpType      
             => eval_1(kind,a);
 
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a)
             where T : unmanaged  
-            where K : unmanaged, IOperatorKind      
+            where K : unmanaged, IKnownOpType      
         {
-            if(typeof(K) == typeof(HK.Negate))
+            if(typeof(K) == typeof(OT.Negate))
                 return negate<T>().Invoke(a);
-            else if(typeof(K) == typeof(HK.Not))
+            else if(typeof(K) == typeof(OT.Not))
                 return not<T>().Invoke(a);
             else 
                 throw unsupported<T>();
@@ -102,19 +103,19 @@ namespace Z0
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOperatorKind      
+            where K : unmanaged, IKnownOpType      
         {
-            if(typeof(K) == typeof(HK.And))
+            if(typeof(K) == typeof(OT.And))
                 return and<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(HK.Or))
+            else if(typeof(K) == typeof(OT.Or))
                 return or<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(HK.Xor))
+            else if(typeof(K) == typeof(OT.Xor))
                 return xor<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(HK.Nand))
+            else if(typeof(K) == typeof(OT.Nand))
                 return nand<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(HK.Nor))
+            else if(typeof(K) == typeof(OT.Nor))
                 return nor<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(HK.Xnor))
+            else if(typeof(K) == typeof(OT.Xnor))
                 return xnor<T>().Invoke(a,b);
             else
                 return eval_2(kind,a,b);
@@ -123,19 +124,18 @@ namespace Z0
         [MethodImpl(Inline)]
         static T eval_2<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOperatorKind      
+            where K : unmanaged, IKnownOpType      
         {
-            if(typeof(K) == typeof(HK.Impl))
+            if(typeof(K) == typeof(OT.Impl))
                 return impl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(HK.NonImpl))
+            else if(typeof(K) == typeof(OT.NonImpl))
                 return nonimpl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(HK.CImpl))
+            else if(typeof(K) == typeof(OT.CImpl))
                 return cimpl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(HK.CNonImpl))
+            else if(typeof(K) == typeof(OT.CNonImpl))
                 return cnonimpl<T>().Invoke(a,b);
             else
                 throw unsupported<K>();
         }
-
     }
 }

@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="t">A target type representative</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), NumericClosures(NumericKind.UnsignedInts)]
         public static T replicate<T>(byte src)
             where T : unmanaged
                 => convert<T>(Bits.replicate((ulong)src, 0, 7, bitsize<T>() / 8));

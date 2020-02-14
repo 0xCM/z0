@@ -18,7 +18,7 @@ namespace Z0
         {
             public const string Name = "vabs";
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public static Abs128<T> Op => default;
              
@@ -44,7 +44,7 @@ namespace Z0
             public const string Name = "vabs";
             
  
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public static Abs256<T> Op => default;
 

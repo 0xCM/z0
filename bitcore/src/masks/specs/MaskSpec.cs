@@ -24,7 +24,7 @@ namespace Z0
             where F : unmanaged, ITypeNat
             where D : unmanaged, ITypeNat
             where T : unmanaged
-                => new MaskSpec(m, NumericType.kind<T>(), (uint)nateval<F>(),(uint)nateval<D>());
+                => new MaskSpec(m, Numeric.kind<T>(), (uint)nateval<F>(),(uint)nateval<D>());
 
         [MethodImpl(Inline)]
         MaskSpec(MaskKind m, NumericKind k, uint f, uint d)
@@ -44,6 +44,6 @@ namespace Z0
         public NumericKind K {get;}
 
         public string Format()
-            => K.Signature();
+            => K.Format();
     }
 }

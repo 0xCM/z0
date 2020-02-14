@@ -32,5 +32,12 @@ namespace Z0
                 where f.Attributed<BinaryLiteralAttribute>()
                let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, f.GetValue(null), a.Text);
+
+        public static string Format(this BinaryLiteral src) 
+            => $"{src.Name}({src.Value}:{src.Kind.Keyword()}) := " + enquote(src.Text);
+
+        public static string Format<T>(this BinaryLiteral<T> src) 
+            where T : unmanaged
+                => $"{src.Name}({src.Value}:{src.Kind.Keyword()}) := " + enquote(src.Text);
     }
 }

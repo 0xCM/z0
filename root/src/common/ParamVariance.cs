@@ -21,12 +21,23 @@ namespace Z0
         Ref = 3
     }
 
-    partial class RootKindExtensions
+    public static class ParamVarianceOps
     {
 
         [MethodImpl(Inline)]
         public static bool IsSome(this ParamVariance src)        
             => src != ParamVariance.None;
-    }
 
+
+        public static string Keyword(this ParamVariance src)        
+            => src switch{
+                ParamVariance.In => "in",
+                ParamVariance.Out => "out",
+                ParamVariance.Ref => "ref",    
+                _ => string.Empty
+            };
+
+        public static string Format(this ParamVariance src)
+            => src.IsSome() ? ('~' + src.Keyword()) : string.Empty;      
+    }
 }

@@ -26,10 +26,9 @@ namespace Z0
             // binary_imm(buffers);
             //archive_selected(buffers);
         
-            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts).Where(c => c.HostingType != typeof(CpuVector));                        
-            //iter(hosts, CreateLocationReports);            
-
-            iter(hosts, EncodingParser.Parse);            
+            archive_context(buffers);
+            // var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts).Where(c => c.HostingType != typeof(CpuVector));
+            // iter(hosts, EncodingParser.Parse);            
         }
         
 
@@ -240,7 +239,7 @@ namespace Z0
             var name = nameof(dinx.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
 
-            var provider = ImmOpProviders.provider(HK.vk256<ushort>(),HK.opfk(n2));
+            var provider = ImmOpProviders.provider(VK.vk256<ushort>(),FK.op(n2));
             var x = Random.CpuVector<ushort>(w);
             var y = Random.CpuVector<ushort>(w);
             

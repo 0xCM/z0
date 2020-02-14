@@ -152,7 +152,7 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             var archive = Context.CodeArchive(catalog,host);
-            var id = Identity.contracted(opname, w, NumericType.kind<T>());
+            var id = Identity.contracted(opname, w, Numeric.kind<T>());
             Trace($"{id}");
             var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)
@@ -186,7 +186,7 @@ namespace Z0
             }            
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, HK.Numeric<byte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, NumericType<byte> kind)
         {
             var w = n8;
 
@@ -204,7 +204,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, HK.Numeric<sbyte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericType<sbyte> kind)
         {
             var w = n8;
 
@@ -221,7 +221,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, in AsmCode dCode, in AsmCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, HK.Numeric<sbyte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, in AsmCode dCode, in AsmCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericType<sbyte> kind)
         {
             var w = n8;
 
@@ -238,7 +238,7 @@ namespace Z0
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, HK.Numeric<ushort> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, NumericType<ushort> kind)
         {
             var w = n16;
 
@@ -256,7 +256,7 @@ namespace Z0
         }
 
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<short,short,short> primal, Func<short,short,short> generic, HK.Numeric<short> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<short,short,short> primal, Func<short,short,short> generic, NumericType<short> kind)
         {
             var w = n16;
 
@@ -273,7 +273,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, HK.Numeric<uint> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, NumericType<uint> kind)
         {
             var w = n32;
 
@@ -290,7 +290,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, HK.Numeric<int> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, NumericType<int> kind)
         {
             var w = n32;
             var moniker = Identity.operation(name, kind);                        
@@ -306,7 +306,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, HK.Numeric<long> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, NumericType<long> kind)
         {            
             var w = n64;
             var moniker = Identity.operation(name, kind);                        
@@ -322,7 +322,7 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, HK.Numeric<ulong> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, NumericType<ulong> kind)
         {            
             var w = n64;
 

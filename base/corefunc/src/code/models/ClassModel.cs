@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class ClassModel : TypeModel<ClassModel,ClassFacets>
+    public class ClassModel : TypeInfo<ClassModel,ClassFacets>
     {
         public static ClassModel Define(string ns, string name, ClassFacets facets)
             => new ClassModel(ns,name, facets);

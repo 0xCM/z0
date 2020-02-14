@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a constant field
     /// </summary>
-    public sealed class FieldModel : MemberModel<FieldModel, FieldFacets>
+    public sealed class FieldModel : MemberInfo<FieldModel, FieldFacets>
     {
         public static FieldModel Define(string name, string typename, object constval, FieldFacets facets)
             => new FieldModel(name, typename, constval, facets);

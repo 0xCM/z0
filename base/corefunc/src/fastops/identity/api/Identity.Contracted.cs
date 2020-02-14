@@ -34,7 +34,7 @@ namespace Z0
         public static OpIdentity contracted<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => operation(opname,(FixedWidth)nateval<W>(), NumericType.kind<T>(), generic);
+                => operation(opname,(FixedWidth)nateval<W>(), Numeric.kind<T>(), generic);
                 
         /// <summary>
         /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity contracted<T>(string opname, N128 w, bool generic = true)
             where T : unmanaged
-                => contracted(opname,w, NumericType.kind<T>(), generic);
+                => contracted(opname,w, Numeric.kind<T>(), generic);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -60,6 +60,6 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity contracted<T>(string opname, N256 w, bool generic = true)
             where T : unmanaged
-                => contracted(opname, w, NumericType.kind<T>(), generic);
+                => contracted(opname, w, Numeric.kind<T>(), generic);
     }
 }

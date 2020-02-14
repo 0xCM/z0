@@ -20,12 +20,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         /// <typeparam name="A">The attribute type</typeparam>
+        [MethodImpl(Inline)]
         public static bool IsAttributed<A>(this Type src)
             where A : Attribute
                 => Attribute.IsDefined(src,typeof(A));
 
+        [MethodImpl(Inline)]
         public static bool Ignore(this Type src)
             => src.IsAttributed<IgnoreAttribute>();
 
+        /// <summary>
+        /// Determines whether the enum value corresponds to a defined literal
+        /// </summary>
+        /// <param name="src">The enum value to check</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool IsLiteral<E>(this E src)
+            where E : Enum
+                => Enum.IsDefined(typeof(E), src);
     }
 }

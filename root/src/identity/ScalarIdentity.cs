@@ -33,17 +33,20 @@ namespace Z0
         ScalarIdentity(NumericKind kind)
         {
             this.NumericKind = kind;
-            this.Identifier = $"{kind.WidthKind().Format()}{NumericKind.GetNumericIndicator().Format()}";
+            this.Identifier = $"{kind.WidthKind().Format()}{NumericKind.Indicator().Format()}";
         }
      
         public string Identifier {get;}            
 
-        public NumericKind NumericKind {get;}
-           
+        public NumericKind NumericKind {get;}           
 
         [MethodImpl(Inline)]
         public bool Equals(ScalarIdentity src)
              => IdentityEquals(this, src);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(IIdentity other)
+            => IdentityCompare(this, other);
 
         public override string ToString()
             => Identifier;
@@ -53,8 +56,5 @@ namespace Z0
 
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
-
-        public int CompareTo(IIdentity other)
-            => IdentityCompare(this, other);
     }
 }

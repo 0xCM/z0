@@ -37,7 +37,7 @@ namespace Z0
         protected void testbit_check<T>(T t = default)
             where T : unmanaged
         {
-            if(NumericType.unsigned<T>())
+            if(Numeric.unsigned<T>())
             {
                 var src = gmath.maxval<T>();
                 for(var i=0; i< bitsize<T>(); i++)

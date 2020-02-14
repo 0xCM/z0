@@ -19,7 +19,7 @@ namespace Z0.OpCodes
     {        
 
         public static BitPos<uint> bitpos_u32(int index)
-            => gbits.bitpos(index, HK.u32);
+            => gbits.bitpos(index, NKT.u32);
 
         public static BitPos<uint> bitpos_u32_x(int index)
             => gbits.bitpos<uint>(index);

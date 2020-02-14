@@ -19,7 +19,7 @@ namespace Z0
                 let pair = (nat: args[0], cell: args[1])
                 let w = (int)pair.cell.Width()
                 from n in pair.nat.NatValue()
-                from i in pair.cell.NumericTypeIndicator()
+                from i in pair.cell.NumericIndicator()
                 select Define((int)n, w, i);
 
         public static Option<NatSpanSig> Parse(string src)

@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class StructModel : TypeModel<StructModel, StructFacets>
+    public class StructModel : TypeInfo<StructModel, StructFacets>
     {
         public static StructModel Define(string ns, string name, StructFacets facets)
             => new StructModel(ns,name, facets);

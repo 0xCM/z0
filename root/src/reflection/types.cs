@@ -8,11 +8,21 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     using static ReflectionFlags;
+    using static RootShare;
 
     partial class RootReflections
     {
+        /// <summary>
+        /// Returns true if the source type is non-null and non-void; otherwise, returns false
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsSome(this Type src)
+            => src != null && src != typeof(void);
+
         /// <summary>
         /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
         /// </summary>
@@ -209,6 +219,42 @@ namespace Z0
                 return t.IsEnum ? t.GetEnumUnderlyingType() : t;
         }
 
+        [MethodImpl(Inline)]
+        public static string PrimitiveKeyword(this Type src)
+        {
+            if(src.IsSByte())
+                return "sbyte";
+            else if(src.IsByte())
+                return "byte";
+            else if(src.IsUInt16())
+                return "ushort";
+            else if(src.IsInt16())
+                return "short";
+            else if(src.IsInt32())
+                return "int";
+            else if(src.IsUInt32())
+                return "uint";
+            else if(src.IsInt64())
+                return "long";
+            else if(src.IsUInt64())
+                return "ulong";
+            else if(src.IsSingle())
+                return "float";
+            else if(src.IsDouble())
+                return "double";
+            else if(src.IsDecimal())
+                return "decimal";
+            else if(src.IsBool())
+                return "bool";
+            else if(src.IsChar())
+                return "char";
+            else if(src.IsString())
+                return "string";
+            else if(src.IsVoid())
+                return "void";
+            else 
+                return default;
+        }
 
     }
 }

@@ -14,6 +14,22 @@ namespace Z0
 
     partial class xfunc
     {
+        public static string Format<T>(this Vector512<T> src, char sep = ',', int pad = 0)
+            where T : unmanaged
+            => bracket(concat(
+                    src.Lo.Format(sep:sep, pad:pad, bracketed:false), 
+                    $"{sep} ",
+                    src.Hi.Format(sep:sep, pad:pad, bracketed:false)));
+
+        public static string Format<T>(this Vector1024<T> src, char sep = ',', int pad = 0)
+            where T : unmanaged
+            => bracket(concat(
+                    src.A.Format(sep:AsciSym.Comma, bracketed:false), $"{sep} ",
+                    src.B.Format(sep:AsciSym.Comma,bracketed:false), $"{sep} ",
+                    src.C.Format(sep:AsciSym.Comma,bracketed:false), $"{sep} ",
+                    src.D.Format(sep:AsciSym.Comma,bracketed:false))
+                    );
+
         /// <summary>
         /// Fills an array with the element type's default value
         /// </summary>
@@ -40,17 +56,6 @@ namespace Z0
                 Array.Copy(src, dst, dst.Length);
             return dst;
         }
-
-        /// <summary>
-        /// Formats an array as a delimited list
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="delimiter">The delimiter</param>
-        /// <param name="offset">The position at which formatting should begin</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]        
-        public static string FormatList<T>(this T[] src, char delimiter = ',', int offset = 0)
-            => src.ToSpan().FormatList(delimiter, offset);
 
         /// <summary>
         /// Constructs an array of specified length from a stream

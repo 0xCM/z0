@@ -165,44 +165,6 @@ namespace Z0
             => src.ReadOnly().FormatLines();
 
         /// <summary>
-        /// Formats a span as a delimited list
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="sep">The delimiter</param>
-        /// <param name="offset">The position at which formatting should begin</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static string FormatList<T>(this ReadOnlySpan<T> src, char sep = ',', int offset = 0, int pad = 0, bool bracketed = true)
-        {
-            if(src.Length == 0)
-                return string.Empty;
-
-            var sb = new StringBuilder();
-            
-            for(var i = offset; i< src.Length; i++)
-            {
-                var item =$"{src[i]}";
-                sb.Append(pad != 0 ? item.PadLeft(pad) : item);                
-                if(i != src.Length - 1)
-                {
-                    sb.Append(sep);
-                    sb.Append(AsciSym.Space);
-                }
-            }
-            return bracketed ? bracket(sb.ToString()) : sb.ToString();
-        }
-
-        /// <summary>
-        /// Formats a span as a delimited list
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="delimiter">The delimiter</param>
-        /// <param name="offset">The position at which formatting should begin</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]        
-        public static string FormatList<T>(this Span<T> src, char delimiter = ',', int offset = 0, int pad = 0, bool bracketed = true)
-            => src.ReadOnly().FormatList(delimiter, offset, pad, bracketed);
-
-        /// <summary>
         /// Formats a readonly span of characters by forming the implied string
         /// </summary>
         /// <param name="src">The source span</param>

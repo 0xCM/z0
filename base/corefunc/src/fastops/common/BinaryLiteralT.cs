@@ -31,13 +31,11 @@ namespace Z0
         public NumericKind Kind 
         {
             [MethodImpl(Inline)]
-            get => NumericType.kind<T>();
+            get => Numeric.kind<T>();
         }
 
-        public string Format() => $"{Name}({Value}:{Kind.Keyword()}) := " + enquote(Text);
-
         public override string ToString()
-            => Format();
+            => this.Format();
     }
 
 }

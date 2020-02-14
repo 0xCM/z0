@@ -26,8 +26,6 @@ namespace Z0
     {
         DynamicDelegate<UnaryOp<V>>  @delegate(byte imm8);  
 
-        SegmentationKind IImmResolver.Segmentation => SegmentationKind.Vectorized;
-
         FixedWidth IImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
         OpArityKind IImmResolver.ResolvedArity => OpArityKind.Unary;           
@@ -39,8 +37,6 @@ namespace Z0
         where W : unmanaged, ITypeNat
     {
         DynamicDelegate<BinaryOp<V>>  @delegate(byte imm8);  
-
-        SegmentationKind IImmResolver.Segmentation => SegmentationKind.Vectorized;
 
         FixedWidth IImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 

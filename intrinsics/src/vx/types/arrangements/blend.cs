@@ -20,7 +20,7 @@ namespace Z0
 
             public static Blend2x64x128<T> Op => default;
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
@@ -37,7 +37,7 @@ namespace Z0
         {
             public const string Name = "vblend4x64";
 
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public static Blend4x64x256<T> Op => default;
 
@@ -58,7 +58,7 @@ namespace Z0
 
             public static Blend4x32x128<T> Op => default;
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
@@ -77,7 +77,7 @@ namespace Z0
 
             public static Blend8x32x256<T> Op => default;
 
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
@@ -97,7 +97,7 @@ namespace Z0
 
             public static Blend8x16x128<T> Op => default;
 
-            public static HK.Vec128<T> hk => default;
+            public static VKT.Vec128<T> hk => default;
 
             public OpIdentity Moniker => Identity.contracted(Name,hk);
 
@@ -114,7 +114,7 @@ namespace Z0
         {
             public const string Name = "vblend8x16";
 
-            public static HK.Vec256<T> hk => default;
+            public static VKT.Vec256<T> hk => default;
 
             public static Blend8x16x256<T> Op => default;
 

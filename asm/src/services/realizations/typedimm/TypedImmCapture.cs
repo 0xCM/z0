@@ -13,8 +13,8 @@ namespace Z0
     using Z0.AsmSpecs;
     
     using static zfunc;
+    using static FKT;
     
-
     static class TypedImmCapture
     {
         readonly struct DynamicImmediate : IDynamicImmediate
@@ -35,20 +35,20 @@ namespace Z0
                 where T : unmanaged
             {
                 if(typeof(D) == typeof(UnaryOp<Vector128<T>>))
-                    return (IDynamicImmediate<D>)Create<T>(context, HK.vk128<T>(), HK.opfk<T>(n1));
+                    return (IDynamicImmediate<D>)Create<T>(context, VK.vk128<T>(), FK.op<T>(n1));
                 else if(typeof(D) == typeof(UnaryOp<Vector256<T>>))
-                    return (IDynamicImmediate<D>)Create<T>(context, HK.vk256<T>(), HK.opfk<T>(n1));
+                    return (IDynamicImmediate<D>)Create<T>(context, VK.vk256<T>(), FK.op<T>(n1));
                 else if(typeof(D) == typeof(BinaryOp<Vector128<T>>))
-                    return (IDynamicImmediate<D>)Create<T>(context, HK.vk128<T>(), HK.opfk<T>(n2));
+                    return (IDynamicImmediate<D>)Create<T>(context, VK.vk128<T>(), FK.op<T>(n2));
                 else if(typeof(D) == typeof(BinaryOp<Vector256<T>>))
-                    return (IDynamicImmediate<D>)Create<T>(context, HK.vk256<T>(), HK.opfk<T>(n2));
+                    return (IDynamicImmediate<D>)Create<T>(context, VK.vk256<T>(), FK.op<T>(n2));
 
                 return default;
             }
 
             [MethodImpl(Inline)]
             static DynamicImmediate Create<V,N>(IAsmContext context, V vk, N arity)
-                where V : unmanaged, IFixedVecKind
+                where V : unmanaged, IFixedVectorType
                 where N : unmanaged, ITypeNat
             {
                 if(typeof(N) == typeof(N1))
@@ -61,28 +61,28 @@ namespace Z0
 
             [MethodImpl(Inline)]
             static DynamicImmediate BuildUnary<V>(IAsmContext context, V vk)
-                where V : unmanaged, IFixedVecKind
+                where V : unmanaged, IFixedVectorType
             {
-                var opkind = HK.opfk(n1);
+                var opkind = FK.op(n1);
                 if(vk.FixedWidth == FixedWidth.W128)
-                    return new DynamicImmediate(context,HK.vk128(), opkind);
+                    return new DynamicImmediate(context,VK.vk128(), opkind);
                 else 
-                    return new DynamicImmediate(context,HK.vk256(), opkind);
+                    return new DynamicImmediate(context,VK.vk256(), opkind);
             }
 
             [MethodImpl(Inline)]
             static DynamicImmediate BuildBinary<V>(IAsmContext context, V vk)
-                where V : unmanaged, IFixedVecKind
+                where V : unmanaged, IFixedVectorType
             {
-                var opkind = HK.opfk(n2);
+                var opkind = FK.op(n2);
                 if(vk.FixedWidth == FixedWidth.W128)
-                    return new DynamicImmediate(context, HK.vk128(), opkind);
+                    return new DynamicImmediate(context, VK.vk128(), opkind);
                 else 
-                    return new DynamicImmediate(context, HK.vk256(), opkind);
+                    return new DynamicImmediate(context, VK.vk256(), opkind);
             }
 
             [MethodImpl(Inline)]
-            DynamicImmediate(IAsmContext context, HK.Vec128 vk, HK.OperatorFunc<N1> opk)
+            DynamicImmediate(IAsmContext context, VKT.Vec128 vk, OperatorType<N1> opk)
             {
                 this.Context = context;
                 this.Decoder = context.Decoder(false);
@@ -90,7 +90,7 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            DynamicImmediate(IAsmContext context, HK.Vec256 vk, HK.OperatorFunc<N1> opk)
+            DynamicImmediate(IAsmContext context, VKT.Vec256 vk, OperatorType<N1> opk)
             {
                 this.Context = context;
                 this.Decoder = context.Decoder(false);
@@ -98,7 +98,7 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            DynamicImmediate(IAsmContext context, HK.Vec128 vk, HK.OperatorFunc<N2> opk)
+            DynamicImmediate(IAsmContext context, VKT.Vec128 vk, OperatorType<N2> opk)
             {
                 this.Context = context;
                 this.Decoder = context.Decoder();
@@ -106,7 +106,7 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            DynamicImmediate(IAsmContext context, HK.Vec256 vk, HK.OperatorFunc<N2> opk)
+            DynamicImmediate(IAsmContext context, VKT.Vec256 vk, OperatorType<N2> opk)
             {
                 this.Context = context;
                 this.Decoder = context.Decoder(false);
@@ -114,24 +114,24 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            static IDynamicImmediate<UnaryOp<Vector128<T>>> Create<T>(IAsmContext context, HK.Vec128<T> vk, HK.OperatorFunc<N1,T> opk)
+            static IDynamicImmediate<UnaryOp<Vector128<T>>> Create<T>(IAsmContext context, VKT.Vec128<T> vk, OperatorType<N1,T> opk)
                 where T : unmanaged
-                    => new DynamicImmediate<UnaryOp<Vector128<T>>>(context, ImmOpProviders.provider(HK.vk128<T>(), HK.opfk(n1)));
+                    => new DynamicImmediate<UnaryOp<Vector128<T>>>(context, ImmOpProviders.provider(VK.vk128<T>(), FK.op(n1)));
 
             [MethodImpl(Inline)]
-            static IDynamicImmediate<UnaryOp<Vector256<T>>> Create<T>(IAsmContext context, HK.Vec256<T> vk, HK.OperatorFunc<N1,T> opk)
+            static IDynamicImmediate<UnaryOp<Vector256<T>>> Create<T>(IAsmContext context, VKT.Vec256<T> vk, OperatorType<N1,T> opk)
                 where T : unmanaged
-                    => new DynamicImmediate<UnaryOp<Vector256<T>>>(context, ImmOpProviders.provider(HK.vk256<T>(), HK.opfk(n1)));
+                    => new DynamicImmediate<UnaryOp<Vector256<T>>>(context, ImmOpProviders.provider(VK.vk256<T>(), FK.op(n1)));
 
             [MethodImpl(Inline)]
-            static IDynamicImmediate<BinaryOp<Vector128<T>>> Create<T>(IAsmContext context, HK.Vec128<T> vk, HK.OperatorFunc<N2,T> opk)
+            static IDynamicImmediate<BinaryOp<Vector128<T>>> Create<T>(IAsmContext context, VKT.Vec128<T> vk, OperatorType<N2,T> opk)
                 where T : unmanaged
-                    => new DynamicImmediate<BinaryOp<Vector128<T>>>(context, ImmOpProviders.provider(HK.vk128<T>(), HK.opfk(n2)));
+                    => new DynamicImmediate<BinaryOp<Vector128<T>>>(context, ImmOpProviders.provider(VK.vk128<T>(), FK.op(n2)));
 
             [MethodImpl(Inline)]
-            static IDynamicImmediate<BinaryOp<Vector256<T>>> Create<T>(IAsmContext context, HK.Vec256<T> vk, HK.OperatorFunc<N2,T> opk)
+            static IDynamicImmediate<BinaryOp<Vector256<T>>> Create<T>(IAsmContext context, VKT.Vec256<T> vk, OperatorType<N2,T> opk)
                 where T : unmanaged
-                    => new DynamicImmediate<BinaryOp<Vector256<T>>>(context, ImmOpProviders.provider(HK.vk256<T>(), HK.opfk(n2)));
+                    => new DynamicImmediate<BinaryOp<Vector256<T>>>(context, ImmOpProviders.provider(VK.vk256<T>(), FK.op(n2)));
         }    
 
         readonly struct DynamicImmediate<D> : IDynamicImmediate<D>

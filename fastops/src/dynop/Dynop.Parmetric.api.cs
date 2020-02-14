@@ -16,7 +16,7 @@ namespace Z0
 
     public static partial class Dynop
     {
-        public static DynamicDelegate<UnaryOp<Vector128<T>>> UnaryOpImm<T>(HK.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryOp<Vector128<T>>> UnaryOpImm<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var reified = src.Reify(typeof(T));
@@ -26,7 +26,7 @@ namespace Z0
             return wrapper.CreateDelegate<UnaryOp<Vector128<T>>>(id.WithImm8(imm8), reified);
         }
 
-        public static DynamicDelegate<UnaryOp<Vector256<T>>> UnaryOpImm<T>(HK.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryOp<Vector256<T>>> UnaryOpImm<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var reified = src.Reify(typeof(T));
@@ -36,7 +36,7 @@ namespace Z0
             return wrapper.CreateDelegate<UnaryOp<Vector256<T>>>(id.WithImm8(imm8), reified);
         }
 
-        public static DynamicDelegate<BinaryOp<Vector128<T>>> BinaryOpImm<T>(HK.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<BinaryOp<Vector128<T>>> BinaryOpImm<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var reified = src.Reify(typeof(T));
@@ -46,7 +46,7 @@ namespace Z0
             return wrapper.CreateDelegate<BinaryOp<Vector128<T>>>(id.WithImm8(imm8), reified);
         }
 
-        public static DynamicDelegate<BinaryOp<Vector256<T>>> BinaryOpImm<T>(HK.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<BinaryOp<Vector256<T>>> BinaryOpImm<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var reified = src.Reify(typeof(T));
@@ -57,7 +57,7 @@ namespace Z0
             return wrapper.CreateDelegate<BinaryOp<Vector256<T>>>(id.WithImm8(imm8),reified);
         }
 
-        public static DynamicDelegate<UnaryBlockedOp128<T>> UnaryOpImm<T>(HK.Blocked128 k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryBlockedOp128<T>> UnaryOpImm<T>(BKT.Blocked128 k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var reified = src.Reify(typeof(T));
@@ -192,44 +192,44 @@ namespace Z0
                 => (BinaryOp<T>)buffer.BinaryOp(id,typeof(BinaryOp<T>), typeof(T));
 
         [MethodImpl(Inline)]
-        public static UnaryOp128 UnaryOp<T>(Func<Vector128<T>,Vector128<T>> f, HK.Vec128<T> k = default)
+        public static UnaryOp128 UnaryOp<T>(Func<Vector128<T>,Vector128<T>> f, VKT.Vec128<T> k = default)
             where T : unmanaged
                 => (Fixed128 a) =>f(a.ToVector<T>()).ToFixed();
 
         [MethodImpl(Inline)]
-        public static UnaryOp256 UnaryOp<T>(Func<Vector256<T>,Vector256<T>> f, HK.Vec256<T> k = default)
+        public static UnaryOp256 UnaryOp<T>(Func<Vector256<T>,Vector256<T>> f, VKT.Vec256<T> k = default)
             where T : unmanaged
                 => (Fixed256 a) =>f(a.ToVector<T>()).ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp128 BinaryOp<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f, HK.Vec128<T> k = default)
+        public static BinaryOp128 BinaryOp<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f, VKT.Vec128<T> k = default)
             where T : unmanaged
                 => (Fixed128 a, Fixed128 b) =>f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp256 BinaryOp<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f, HK.Vec256<T> k = default)
+        public static BinaryOp256 BinaryOp<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f, VKT.Vec256<T> k = default)
             where T : unmanaged
                 => (Fixed256 a, Fixed256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();
 
         [MethodImpl(Inline)]            
         public static DynamicDelegate<UnaryOp<Vector128<T>>> UnaryOpV128Imm<T>(MethodInfo src, byte imm)
             where T : unmanaged
-                => UnaryOpProvider(HK.vk128<T>(), src.Identify(), src)(imm);
+                => UnaryOpProvider(VK.vk128<T>(), src.Identify(), src)(imm);
 
         [MethodImpl(Inline)]            
         public static DynamicDelegate<BinaryOp<Vector128<T>>> BinaryOpV128Imm<T>(MethodInfo src, byte imm)
             where T : unmanaged
-                => BinaryOpProvider(HK.vk128<T>(), src.Identify(), src)(imm);
+                => BinaryOpProvider(VK.vk128<T>(), src.Identify(), src)(imm);
 
         [MethodImpl(Inline)]            
         public static DynamicDelegate<UnaryOp<Vector256<T>>> UnaryOpV256Imm<T>(MethodInfo src, byte imm)
             where T : unmanaged
-                => UnaryOpProvider(HK.vk256<T>(), src.Identify(), src)(imm);
+                => UnaryOpProvider(VK.vk256<T>(), src.Identify(), src)(imm);
 
         [MethodImpl(Inline)]            
         public static DynamicDelegate<BinaryOp<Vector256<T>>> BinaryOpV256Imm<T>(MethodInfo src, byte imm)
             where T : unmanaged
-                => BinaryOpProvider(HK.vk256<T>(), src.Identify(), src)(imm);
+                => BinaryOpProvider(VK.vk256<T>(), src.Identify(), src)(imm);
 
         [MethodImpl(Inline)]
         public static AsmCode<T> Typed<T>(this AsmCode src)
@@ -250,19 +250,19 @@ namespace Z0
             where D : Delegate
                 => CilFunctionBody.From(src); 
 
-        internal static Func<byte,DynamicDelegate<UnaryOp<Vector128<T>>>> UnaryOpProvider<T>(HK.Vec128<T> k, OpIdentity id, MethodInfo src)
+        internal static Func<byte,DynamicDelegate<UnaryOp<Vector128<T>>>> UnaryOpProvider<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src)
             where T : unmanaged
             => imm8 => Dynop.UnaryOpImm(k,id, src,imm8);
 
-        internal static Func<byte,DynamicDelegate<UnaryOp<Vector256<T>>>> UnaryOpProvider<T>(HK.Vec256<T> k, OpIdentity id, MethodInfo src)
+        internal static Func<byte,DynamicDelegate<UnaryOp<Vector256<T>>>> UnaryOpProvider<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src)
             where T : unmanaged
                 => imm8 => Dynop.UnaryOpImm(k, id, src,imm8);
 
-        internal static Func<byte,DynamicDelegate<BinaryOp<Vector128<T>>>> BinaryOpProvider<T>(HK.Vec128<T> k, OpIdentity id, MethodInfo src)
+        internal static Func<byte,DynamicDelegate<BinaryOp<Vector128<T>>>> BinaryOpProvider<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src)
             where T : unmanaged
             => imm8 => Dynop.BinaryOpImm(k,id, src,imm8);
 
-        internal static Func<byte,DynamicDelegate<BinaryOp<Vector256<T>>>> BinaryOpProvider<T>(HK.Vec256<T> k, OpIdentity id, MethodInfo src)
+        internal static Func<byte,DynamicDelegate<BinaryOp<Vector256<T>>>> BinaryOpProvider<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src)
             where T : unmanaged
                 => imm8 => Dynop.BinaryOpImm(k, id, src,imm8);
     }

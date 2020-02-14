@@ -15,6 +15,36 @@ namespace Z0
 
     partial class Identity
     {
+        /// <summary>
+        /// Identifies the method
+        /// </summary>
+        /// <param name="m">The method to identify</param>
+        public static OpIdentity identify(MethodInfo src)
+        {            
+            if(src.IsOpenGeneric())
+                return Identity.generic(src);
+            else if(src.IsConstructedGenericMethod)
+                return Identity.constructed(src);
+            else
+                return Identity.nongeneric(src);
+        }            
+
+        public static OpIdentity identify(MethodInfo src, NumericKind k)
+        {
+            var pt = k.ToClrType();
+            if(src.IsOpenGeneric() && pt.IsSome())
+                return identify(src.MakeGenericMethod(pt.Value));
+            else
+                return identify(src);
+        }
+        
+        /// <summary>
+        /// Identifies the delegate
+        /// </summary>
+        /// <param name="m">The method to identify</param>
+        public static OpIdentity identify(Delegate m)
+            => identify(m.Method);
+
         public static string identify(ParameterInfo p)
         {
             var pt = p.ParameterType;
@@ -69,7 +99,7 @@ namespace Z0
         }
 
         public static IEnumerable<string> TypeArgIdentities(this MethodInfo src)
-            => src.GenericArguments().Select(targ => TypeIdentities.identify(targ).Identifier);
+            => src.GenericArguments().Select(targ => Identity.identify(targ).Identifier);
 
         public static string FormatParameterIdentity(this MethodInfo src)
             => formatargs(IDI.ValueArgsOpen, IDI.ValueArgsClose, IDI.ArgSep, src.ParameterIdentities());
@@ -92,7 +122,6 @@ namespace Z0
             return OpIdentity.Define(id);
         }        
 
-
         public static OpIdentity nongeneric(MethodInfo src)
         {
             src.RequireNonGeneric();
@@ -100,8 +129,6 @@ namespace Z0
             
             id += src.OpName();            
             id += IDI.PartSep;
-            //id += src.FormatParameterIdentity();           
-
             id += formatargs(IDI.ValueArgsOpen, IDI.ValueArgsClose, IDI.ArgSep, src.ParameterIdentities());
 
             return OpIdentity.Define(id);
@@ -163,6 +190,5 @@ namespace Z0
 
         static string formatargs(char open, char close, char sep, IEnumerable<string> args)
             => concat(open, string.Join(sep,args), close);
-
     }
 }
