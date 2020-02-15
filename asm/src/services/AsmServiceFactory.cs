@@ -12,9 +12,7 @@ namespace Z0
     using static zfunc;
 
     public static class AsmServices
-    {   
-                     
-
+    {                       
         /// <summary>
         /// Instantiates a contextual archive service
         /// </summary>
@@ -211,12 +209,16 @@ namespace Z0
         public static ICilFunctionWriter CilWriter(this IAsmContext context, FilePath dst)
             => CilFunctionWriter.Create(context,dst);
 
+        [MethodImpl(Inline)]
+        public static IExecutable CaptureWorkflow(this IAsmContext context)
+            => Z0.AsmCaptureFlow.Create(context);
+
         /// <summary>
         /// Instantiates an internal instruction formatter service
         /// </summary>
         /// <param name="context">The configuration to use</param>
         [MethodImpl(Inline)]
         internal static IAsmInstructionFormatter InstructionFormatter(this IAsmContext context)
-            => AsmFunctionFormatter.BaseFormatter(context);
+            => AsmFunctionFormatter.BaseFormatter(context);        
     }
 }

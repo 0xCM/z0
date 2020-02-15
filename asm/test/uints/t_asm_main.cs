@@ -30,70 +30,9 @@ namespace Z0
             //archive_context(buffers);            
             //iter(hosts, EncodingParser.Parse);            
 
-            RunCaptureWorkflow();
+            var workflow = Context.CaptureWorkflow();
+            workflow.Execute();
         }
-        
-        void RunCaptureWorkflow()
-        {
-            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts).Where(c => c.HostingType != typeof(CpuVector));
-            var extractor = Context.EncodingExtractor();
-            var parser = Context.EncodingParser();
-            var decoder = Context.Decoder();
-            var config = Context.AsmFormat.WithSectionDelimiter();
-
-            foreach(var host in hosts)
-            {
-                var rawDst = AsmReports.EncodingExtract(host);
-                
-                // var codeDst = AsmReports.EncodingParse(host);
-                // var asmDst = AsmReports.EncodingDecoded(host);
-                var codeDst = Paths.ParsedEncoding(host);
-                var asmDst = Paths.DecodedEncoding(host);
-
-                var extracted = extractor.Extract(host);
-                extracted.Save(rawDst)
-                         .OnSome(file => print($"Emitted {host} encodings to {file}"))
-                         .OnNone(() => errout($"Error emitting {host} encodings"));                       
-                
-                var encodings = parser.Parse(host,extracted);
-                encodings.Save(codeDst)
-                         .OnSome(file => print($"Emitted parsed {host} encodings to {file}"))
-                         .OnNone(() => errout($"Error parsing {host} encodings"));                       
-
-                require(extracted.RecordCount == encodings.RecordCount);
-
-                using var asmWriter = Context.AsmWriter(config,asmDst);
-
-                for(var i=0; i< extracted.RecordCount; i++)
-                {
-                    var extract = extracted[i];
-                    var encoded = encodings[i];
-                    
-                    var op = extract.GetOpInfo();
-                    var bits = CaptureBits.Define(extract.Data, encoded.Data);
-                    var count = encoded.Length;
-                    var range = MemoryRange.Define(@extract.Address, extract.Address + (ulong)count);
-                    var tc = encoded.TermCode;
-
-                    var final = CaptureState.Define(op.Id, count, range.End, bits.Trimmed.Last());
-                    var outcome = CaptureOutcome.Define(final, range, tc);
-                    var summary = CaptureSummary.Define(outcome, bits);
-                    asmWriter.Write(decoder.DecodeFunction(op, summary));
-                }
-
-            }
-        }
-
-        void ParseHexBytes(FilePath path)
-        {
-            var data = HexFile.Read(path);
-            foreach(var line in data.Lines)
-            {
-                var id = line.Id;
-                Trace($"Parsing {id}");
-            }
-        }
-
 
         static void buffer_client(IAsmContext context)
         {

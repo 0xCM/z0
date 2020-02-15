@@ -5,7 +5,8 @@
 namespace Z0
 {
     using System;
-    
+    using System.Collections.Generic;
+
     using static zfunc;
 
     class Catalog : OpCatalog<Catalog>
@@ -15,5 +16,9 @@ namespace Z0
         {
 
         }
+
+        public override IEnumerable<ApiHost> DirectApiHosts
+            => new ApiHost[]{ApiHost.Define(typeof(Data))};
+        
     }
 }
