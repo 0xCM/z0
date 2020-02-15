@@ -9,6 +9,24 @@ namespace Z0
 
     using static zfunc;
 
+    public readonly struct UnaryFuncSurrogate<A,B> : IUnaryFunc<A,B>
+    {
+        readonly Func<A,B> f;
+
+        [MethodImpl(Inline)]
+        internal UnaryFuncSurrogate(Func<A,B> f, OpIdentity id)            
+        {
+            this.f = f;
+            this.Moniker = id;
+        }
+
+        public OpIdentity Moniker {get;}
+
+        [MethodImpl(Inline)]
+        public B Invoke(A a) => f(a);
+
+    }
+
     /// <summary>
     /// Captures a delegate that is exposed as a unary operator
     /// </summary>

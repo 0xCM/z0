@@ -98,8 +98,7 @@ namespace Z0
     public interface IVBinOp256<T> : IVBinOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryOp | FunctionKind.V256;
-        
+        FunctionKind IFunc.Kind => FunctionKind.BinaryOp | FunctionKind.V256;        
     }
 
     /// <summary>

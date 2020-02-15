@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
 
@@ -90,8 +89,7 @@ namespace Z0
     public interface IVBinPred256<T> : IVBinaryPred<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryPred | FunctionKind.V256;
-        
+        FunctionKind IFunc.Kind => FunctionKind.BinaryPred | FunctionKind.V256;        
     }
 
     /// <summary>

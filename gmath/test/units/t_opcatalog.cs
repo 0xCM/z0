@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    using static OpSurrogate;
+    using static OpSurrogates;
 
     public class t_opcatalog : t_gmath<t_opcatalog>
     {     

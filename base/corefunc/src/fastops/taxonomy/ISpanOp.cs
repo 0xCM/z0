@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Security;
     
     using static zfunc;
@@ -90,6 +88,4 @@ namespace Z0
     {
         Span<T> Invoke(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
     }
-
-
 }

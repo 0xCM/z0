@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Security;
-    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
@@ -38,7 +37,6 @@ namespace Z0
     public interface IBinaryMeasure<A,B,K> : IMeasure, IFunc<A,B,K>
         where K : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure;        
-
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure;
     }
 }

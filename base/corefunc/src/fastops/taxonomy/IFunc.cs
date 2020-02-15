@@ -24,7 +24,6 @@ namespace Z0
         FunctionKind Kind => FunctionKind.None;       
     }
 
-
     [SuppressUnmanagedCodeSecurity]
     public interface IAction<A> : IFunc
     {
@@ -97,6 +96,5 @@ namespace Z0
         D Invoke(A a, B b, C c);
 
         FunctionKind IFunc.Kind => FunctionKind.TernaryFunc;
-
     }
 }

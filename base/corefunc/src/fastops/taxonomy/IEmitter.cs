@@ -23,9 +23,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IFixedEmitter : IFunc
     {
-
         NumericKind SegmentKind {get;}
-
     }
 
     [SuppressUnmanagedCodeSecurity]

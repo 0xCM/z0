@@ -6,12 +6,33 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Security;
     
     using static zfunc;
 
+    [SuppressUnmanagedCodeSecurity]
+    public delegate ref readonly Block128<T> UnaryBlockedOp128<T>(in Block128<T> src, in Block128<T> dst)
+        where T : unmanaged;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate ref readonly Block256<T> UnaryBlockedOp256<T>(in Block256<T> src, in Block256<T> dst)
+        where T : unmanaged;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate ref readonly Block128<T> BinaryBlockedOp128<T>(in Block128<T> a, in Block128<T> b, in Block128<T> dst)
+        where T : unmanaged;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate ref readonly Block256<T> BinaryBlockedOp256<T>(in Block256<T> a, in Block256<T> b, in Block256<T> dst)
+        where T : unmanaged;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate ref readonly Block128<T> UnaryBlockedOp128Imm8<T>(in Block128<T> src, byte imm8, in Block128<T> dst)
+        where T : unmanaged;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate ref readonly Block256<T> UnaryBlockedOp256Imm8<T>(in Block256<T> src, byte imm8, in Block256<T> dst)
+        where T : unmanaged;
 
     /// <summary>
     /// Base interface for block-oriented operations
@@ -289,5 +310,4 @@ namespace Z0
     {
         ref readonly Block512<T> Invoke(in Block512<T> src, byte imm8, in Block512<T> dst);
     }
-
 }

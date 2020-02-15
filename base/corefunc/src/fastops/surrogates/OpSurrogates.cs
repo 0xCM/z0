@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines api surface for creating surrogate operator delegates
     /// </summary>
-    public static class OpSurrogate
+    public static class OpSurrogates
     {
         /// <summary>
         /// Captures a delegate and presents it as a unary operator

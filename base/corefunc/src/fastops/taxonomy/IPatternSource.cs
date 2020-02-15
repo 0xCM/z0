@@ -51,7 +51,6 @@ namespace Z0
     public interface IVPatternSource256<T> : IVPatternSource<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.V256;        
-        
+        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.V256;
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    using static OpSurrogate;
+    using static OpSurrogates;
     
     public class t_arithmetic : t_gmath<t_arithmetic>
     {

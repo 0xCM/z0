@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
 
@@ -19,8 +18,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryPred<A> : IUnaryFunc<A,bit>
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred;
-        
+        FunctionKind IFunc.Kind => FunctionKind.UnaryPred;        
     }
 
     /// <summary>
@@ -45,7 +43,6 @@ namespace Z0
         where V : struct
     {
         FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.Vectorized;
-
     }
 
     /// <summary>
@@ -71,8 +68,7 @@ namespace Z0
     public interface IVUnaryPred128<T> : IVUnaryPred<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.V128;
-    
+        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.V128;   
     }
 
     /// <summary>

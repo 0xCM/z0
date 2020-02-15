@@ -6,10 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Security;
-
 
     /// <summary>
     /// Characterizes a ternary function
@@ -32,7 +29,5 @@ namespace Z0
     public interface ITernaryOp<A> : ITernaryFunc<A,A,A,A>
     {
 
-    }
-
- 
+    } 
 }

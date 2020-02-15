@@ -11,8 +11,9 @@ namespace Z0
 
     partial class GXTypes
     {
+
         [NumericClosures(NumericKind.All)]
-        public readonly struct Parse<T>  : IParser<T>
+        public readonly struct Parse<T>  : INumericParser<T>
             where T : unmanaged        
         {
             public const string Name = "parse";
