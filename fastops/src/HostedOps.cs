@@ -50,7 +50,6 @@ namespace Z0
             => from m in host.DeclaredMethods.Attributed<OpAttribute>().NonGeneric()
                 select DirectOpSpec.Define(host, Identity.identify(m), m);
 
- 
         static IEnumerable<NumericKind> NumericClosures(this MemberInfo m)
             => m.CustomAttribute<NumericClosuresAttribute>()
                 .MapValueOrElse(

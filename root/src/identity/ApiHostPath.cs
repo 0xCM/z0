@@ -9,22 +9,14 @@ namespace Z0
 
     using static RootShare;
 
-    public readonly struct ApiHostPath : IIdentity<ApiHostPath>
+    [Parser]
+    public readonly struct ApiHostPath : IIdentity<ApiHostPath>, IParser<ApiHostPath>
     {
         public readonly AssemblyId Owner;
 
         public readonly string Name;
 
         public string Identifier {get;}
-
-        public static ApiHostPath Parse(string text)
-        {
-            var parts = text.Split('/');
-            if(parts.Length == 2 && Enum.TryParse(text,true, out AssemblyId owner))
-                return Define(owner, parts[1]);
-            else
-                return Define(AssemblyId.None, $"error/{text}");
-        }
         
         [MethodImpl(Inline)]
         public static ApiHostPath Define(AssemblyId owner, string name)
@@ -35,7 +27,7 @@ namespace Z0
         {
             this.Owner = owner;
             this.Name = name;
-            this.Identifier =$"{Owner.Format()}/{Name}";
+            this.Identifier = $"{Owner.Format()}/{Name}";
         }
 
         [MethodImpl(Inline)]
@@ -54,5 +46,14 @@ namespace Z0
 
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
+        
+        ApiHostPath IParser<ApiHostPath>.Parse(string text)
+        {
+            var parts = text.Split('/');
+            if(parts.Length == 2 && Enum.TryParse(text,true, out AssemblyId owner))
+                return Define(owner, parts[1]);
+            else
+                return Define(AssemblyId.None, $"error/{text}");
+        }
     }
 }

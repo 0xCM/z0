@@ -6,17 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.IO;
     
     using static zfunc;
-
-    public interface IEncodingExtractor : IAppService
-    {
-        CapturedEncodings Extract(ApiHost src);
-    }
 
     readonly struct EncodingExtractor : IEncodingExtractor
     {
@@ -37,26 +30,26 @@ namespace Z0
 
         public CapturedEncodings Extract(ApiHost src)
         {
-            var methods = src.EncodedMethods().ToArray();
-            var dst = new CapturedEncoding[methods.Length];
+            var ops = src.EncodedOps().ToArray();
+            var dst = new CapturedEncoding[ops.Length];
             var buffer = span<byte>(BufferLength);
             var reader = Context.ByteReader();
 
-            for(var i=0; i< methods.Length; i++)
+            for(var i=0; i< ops.Length; i++)
             {
                 buffer.Clear();                
 
-                var method = methods[i];
-                var length = reader.Read(method.Location, BufferLength, buffer);                
+                var op = ops[i];
+                var length = reader.Read(op.Location, BufferLength, buffer);                
                 var record = new CapturedEncoding
                 {
                     Sequence = i,
                     Length = length,
                     Host = src.Path,
-                    Address = method.Location,
-                    OpSig = method.Source.Signature().Format(),
-                    OpId = method.Id,
-                    OpName = method.Source.Name,
+                    Address = op.Location,
+                    OpSig = op.Source.Signature().Format(),
+                    OpId = op.Id,
+                    OpName = op.Source.Name,
                     Data = buffer.Slice(0,length).ToArray()
                 };
                 dst[i] = record;

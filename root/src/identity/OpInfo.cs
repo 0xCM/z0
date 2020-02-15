@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static RootShare;
@@ -32,8 +30,6 @@ namespace Z0
             => Uri.HostPath;
         
         public OpIdentity Id
-            => Uri.OpId;
-        
+            => Uri.OpId;        
     }
-
 }

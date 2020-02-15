@@ -5,26 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    
+    using System.Reflection;
+
     using static RootShare;
 
-    public enum TypeIndicatorKind
+    public interface IOpIdentity : IIdentity
     {
-        None = 0,
 
-        Vector,
-
-        Block,
-
-        Span,
-
-        BitGrid,
-
-        BitMatrix
-    
     }
+    
+    public interface IOpIdentity<T> : IOpIdentity, IIdentity<T>
+        where T : struct, IOpIdentity<T>    
+    {
 
+    }    
 }

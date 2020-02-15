@@ -50,7 +50,6 @@ namespace Z0
         
         public IdentityPart WithText(string src)
             => Define(PartIndex, PartKind, src);
-
         
         [MethodImpl(Inline)]
         public bool Equals(IdentityPart src)
@@ -66,8 +65,6 @@ namespace Z0
             => IdentityEquals(this, obj);
 
         public int CompareTo(IIdentity other)
-            => IdentityCompare(this, other);
-
-        
+            => IdentityCompare(this, other);        
     }
 }

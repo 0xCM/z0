@@ -27,7 +27,7 @@ namespace Z0
         
         public void Execute()
         {
-            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts).Where(c => c.HostingType.Name != "CpuVector");
+            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts);//.Where(c => c.HostingType.Name != "CpuVector");
             var extractor = Context.EncodingExtractor();
             var parser = Context.EncodingParser();
             var decoder = Context.Decoder();
@@ -73,7 +73,6 @@ namespace Z0
 
             require(captured.RecordCount == parsed.RecordCount);
             return parsed;
-
         }
 
         void Decode(ApiHost host, CapturedEncodings captured, ParsedEncodings parsed)

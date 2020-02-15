@@ -26,7 +26,6 @@ namespace Z0
             => Format();
     }
 
-
     /// <summary>
     /// Characterizes a type that provides intrinsic formatting capability
     /// </summary>
@@ -36,7 +35,6 @@ namespace Z0
         
     }    
 
-    
     /// <summary>
     /// Characterizes a type that transforms objects to a text-based representation
     /// </summary>

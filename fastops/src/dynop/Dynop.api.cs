@@ -240,16 +240,16 @@ namespace Z0
             => ImmOpBuilder(VK.vk128(), FK.op(n2), src)(imm);
 
         [MethodImpl(Inline)]
-        public static CilFunctionBody CilFunc(this DynamicMethod src)
-            => CilFunctionBody.From(src);
+        public static CilBody CilFunc(this DynamicMethod src)
+            => CilBody.From(src);
 
         [MethodImpl(Inline)]
-        public static CilFunctionBody CilFunc(this MethodInfo src)
-            => CilFunctionBody.From(src);
+        public static CilBody CilFunc(this MethodInfo src)
+            => CilBody.From(src);
 
         [MethodImpl(Inline)]
-        public static CilFunctionBody CilFunc(this DynamicDelegate src)
-            => CilFunctionBody.From(src);
+        public static CilBody CilFunc(this DynamicDelegate src)
+            => CilBody.From(src);
 
         internal static DynamicMethod method(string name, Type owner, Type @return, params Type[] args)
             => new DynamicMethod(name: name, 

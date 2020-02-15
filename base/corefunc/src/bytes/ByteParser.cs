@@ -118,7 +118,7 @@ namespace Z0
                 if(matched)
                 {
                     mc = match;
-                    delta = Patterns.PatternDelta(match);
+                    delta = Patterns.PatternValue(match);
                     return true;
                 }
                 

@@ -62,6 +62,44 @@ namespace Z0
         CTC_MSDIAG = CaptureTermCode.CTC_MSDIAG
     }
 
+    public enum EncodingPatternDelta : int
+    {
+        None = 0,
+        
+        RET_SBB = -1,           
+        
+        RET_INT = -1,
+
+        RET_ZED_SBB = -2,
+
+        RET_Zx3 = -2,
+
+        RET_INTRx2 = -2,
+
+        JMP_RAX = None,
+
+        Z7 = -7,
+
+        RET_Zx7 = -6,
+    }
+    
+    public static class EncodingPatternTokens
+    {
+        public const byte ZED = 0;
+        
+        public const byte RET = 0xc3;
+        
+        public const byte INTR = 0xcc;
+        
+        public const byte SBB = 0x19;
+        
+        public const byte FF = 0xff;
+
+        public const byte E0 = 0xe0;
+
+        public const byte J48 = 0x48;
+    }
+
     public static class EncodingPatternKindOps
     {
         [MethodImpl(Inline)]

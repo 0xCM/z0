@@ -10,11 +10,11 @@ namespace Z0
 
     using static zfunc;
 
-    public class CilFunctionBody
+    public class CilBody
     {
-        public static CilFunctionBody From(MethodInfo method)
+        public static CilBody From(MethodInfo method)
         {
-            return new CilFunctionBody
+            return new CilBody
             {
                 Name = method.Name,
                 Data = method.GetMethodBody().GetILAsByteArray(),
@@ -22,9 +22,9 @@ namespace Z0
             };
         }
 
-        public static CilFunctionBody From(DynamicMethod method)
+        public static CilBody From(DynamicMethod method)
         {
-            return new CilFunctionBody
+            return new CilBody
             {
                 Name = method.Name,
                 Data = CilBytes(method),
@@ -32,7 +32,7 @@ namespace Z0
             };
         }
 
-        public static CilFunctionBody From(DynamicDelegate src)
+        public static CilBody From(DynamicDelegate src)
             => From(src.DynamicMethod);
         
         /// <summary>

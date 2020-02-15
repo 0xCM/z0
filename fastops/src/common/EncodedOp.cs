@@ -10,14 +10,14 @@ namespace Z0
 
     using static zfunc;
         
-    public readonly struct EncodedMethod
+    public readonly struct EncodedOp
     {
         [MethodImpl(Inline)]
-        public static EncodedMethod Define(OpIdentity id, MethodInfo src,  MemoryAddress location)
-            => new EncodedMethod(id, src, location);
+        public static EncodedOp Define(OpIdentity id, MethodInfo src, MemoryAddress location)
+            => new EncodedOp(id, src, location);
         
         [MethodImpl(Inline)]
-        EncodedMethod(OpIdentity id, MethodInfo src, MemoryAddress location)
+        EncodedOp(OpIdentity id, MethodInfo src, MemoryAddress location)
         {
             this.Id = id;
             this.Source = src;
@@ -35,13 +35,5 @@ namespace Z0
             id = Id;
             location = Location;
         }
-
-        public void Deconstruct(out OpIdentity id, out MethodInfo src, out MemoryAddress location)
-        {
-            id = Id;
-            src = Source;
-            location = Location;
-        }
-
     }
 }

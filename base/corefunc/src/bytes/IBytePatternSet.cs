@@ -18,13 +18,24 @@ namespace Z0
         int PatternCount {get;}
     }
 
-   public interface IBytePatternSet<T> : IBytePatternSet
-        where T : unmanaged, Enum
+   public interface IBytePatternSet<P> : IBytePatternSet
+        where P : unmanaged, Enum
     {
-        ReadOnlySpan<T> PatternKinds {get;}
+        ReadOnlySpan<P> PatternKinds {get;}
 
-        ReadOnlySpan<byte> Pattern(T kind);   
+        ReadOnlySpan<byte> Pattern(P kind);   
         
-        int PatternDelta(T kind);     
+        int PatternValue(P kind);     
     }
+
+   public interface IBytePatternSet<P,C> : IBytePatternSet<P>
+        where P : unmanaged, Enum
+        where C : unmanaged, Enum
+    {
+        new C PatternValue(P kind);     
+
+        int IBytePatternSet<P>.PatternValue(P kind)
+            => evalue<C,int>(PatternValue(kind));
+    }
+
 }

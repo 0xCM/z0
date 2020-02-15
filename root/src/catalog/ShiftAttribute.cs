@@ -9,16 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     /// <summary>
-    /// Identifies a parameter that accepts an immediate value
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Parameter)]
-    public class ImmAttribute : Attribute
-    {
-
-
-    }
-
-    /// <summary>
     /// Identifies a parameter that accepts an immediate shift count
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]

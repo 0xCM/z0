@@ -11,6 +11,9 @@ namespace Z0
     
     using static zfunc;
     using static EncodingPatternKind;
+    using static EncodingPatternTokens;
+    
+    using D = EncodingPatternDelta;
 
     public readonly struct EncodingPatterns : IBytePatternSet<EncodingPatternKind>
     {
@@ -49,72 +52,41 @@ namespace Z0
                 _ => Empty
             };
 
-        int IBytePatternSet<EncodingPatternKind>.PatternDelta(EncodingPatternKind code)
+        int IBytePatternSet<EncodingPatternKind>.PatternValue(EncodingPatternKind code)
             => code switch{
-                CTC_RET_SBB => RET_SBB_DELTA,
-                CTC_RET_INTR => RET_INT_DELTA,
-                CTC_RET_ZED_SBB => RET_ZED_SBB_DELTA,              
-                CTC_RET_Zx3 => RET_Zx3_DELTA,
-                CTC_INTRx2 => RET_INTRx2_DELTA,
-                CTC_JMP_RAX => JMP_RAX_DELTA,
-                CTC_Zx7 => Z7_DELTA,
-                CTC_RET_Zx7 => RET_Zx7_Delta,
+                CTC_RET_SBB => (int)D.RET_SBB,
+                CTC_RET_INTR => (int)D.RET_INT,
+                CTC_RET_ZED_SBB => (int)D.RET_ZED_SBB,              
+                CTC_RET_Zx3 => (int)D.RET_Zx3,
+                CTC_INTRx2 => (int)D.RET_INTRx2,
+                CTC_JMP_RAX => (int)D.JMP_RAX,
+                CTC_Zx7 => (int)D.Z7,
+                CTC_RET_Zx7 => (int)D.RET_Zx7,
                 _ => 0
             };
-
-        const byte ZED = 0;
-        
-        const byte RET = 0xc3;
-        
-        const byte INTR = 0xcc;
-        
-        const byte SBB = 0x19;
-        
-        const byte FF = 0xff;
-
-        const byte E0 = 0xe0;
-
-        const byte J48 = 0x48;
 
         static ReadOnlySpan<byte> RET_SBB 
             => new byte[]{RET,SBB};
 
-        const int RET_SBB_DELTA = -1;
-
         static ReadOnlySpan<byte> RET_INT 
             => new byte[]{RET,INTR};
-
-        const int RET_INT_DELTA = -1;
 
         static ReadOnlySpan<byte> RET_ZED_SBB
             => new byte[]{RET,ZED,SBB};
 
-        const int RET_ZED_SBB_DELTA = -2;
-
         static ReadOnlySpan<byte> RET_Zx2
             => new byte[]{RET,ZED,ZED};
-
-        const int RET_Zx3_DELTA = -2;
 
         static ReadOnlySpan<byte> INTRx2
             => new byte[]{INTR,INTR};
 
-        const int RET_INTRx2_DELTA = -2;
-
         static ReadOnlySpan<byte> JMP_RAX
             => new byte[]{ZED,ZED,J48,FF,E0};
-
-        const int JMP_RAX_DELTA = 0;
 
         static ReadOnlySpan<byte> Z7
             => new byte[]{ZED,ZED,ZED,ZED,ZED,ZED,ZED};
 
-        const int Z7_DELTA = -7;
-
-        const int RET_Zx7_Delta = -6;
-
         static ReadOnlySpan<byte> Empty
-            => new byte[]{};
+            => new byte[]{};        
     }
-
 }

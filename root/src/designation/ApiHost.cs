@@ -59,7 +59,7 @@ namespace Z0
         }
         
         public IEnumerable<MethodInfo> DeclaredMethods
-            =>  HostingType.DeclaredMethods();
+            => HostingType.DeclaredMethods(false);
 
         public bool IsEmtpy 
             => Owner == AssemblyId.None && HostingType == typeof(void);

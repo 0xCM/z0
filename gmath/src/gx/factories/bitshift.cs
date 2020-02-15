@@ -23,9 +23,9 @@ namespace Z0
                 => Srl<T>.Op;
 
         [MethodImpl(Inline)]
-        public static Parse<T> parse<T>(T t = default)
+        public static GXTypes.Parse<T> parse<T>(T t = default)
             where T : unmanaged        
-                => Parse<T>.Op;
+                => GXTypes.Parse<T>.Op;
     }
 
 }

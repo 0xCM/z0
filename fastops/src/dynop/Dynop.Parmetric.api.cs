@@ -246,9 +246,9 @@ namespace Z0
                 => src.ToDynamicPtr();
 
         [MethodImpl(Inline)]
-        public static CilFunctionBody CilFunc<D>(this DynamicDelegate<D> src)
+        public static CilBody CilFunc<D>(this DynamicDelegate<D> src)
             where D : Delegate
-                => CilFunctionBody.From(src); 
+                => CilBody.From(src); 
 
         internal static Func<byte,DynamicDelegate<UnaryOp<Vector128<T>>>> UnaryOpProvider<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src)
             where T : unmanaged

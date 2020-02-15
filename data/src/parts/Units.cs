@@ -10,44 +10,52 @@ namespace Z0
  
     public static partial class Data
     {
+        [Op]
         public static ReadOnlySpan<byte> Units128x8u
             => new byte[16]{
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
                 };
 
+        [Op]
         public static ReadOnlySpan<byte> Units128x16u
             => new byte[16]{
                 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0
                 };
 
+        [Op]
         public static ReadOnlySpan<byte> Units128x32u
             => new byte[16]{
                 1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0
                 };
 
+        [Op]
         public static ReadOnlySpan<byte> Units128x64u
             => new byte[16]{
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
                 };
 
+        [Op]
         public static ReadOnlySpan<byte> Units256x8u
             => new byte[32]{
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
                 };
 
+        [Op]
         public static ReadOnlySpan<byte> Units256x16u
             => new byte[32]{
                 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,
                 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0
                 };
 
+        [Op]
         public static ReadOnlySpan<byte> Units256x32u
             => new byte[32]{
                 1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,
                 1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0
                 };
 
+        [Op]
         public static ReadOnlySpan<byte> Units256x64u
             => new byte[32]{
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
@@ -73,7 +81,5 @@ namespace Z0
             Register(index++, Identity.resource(basename, w, NumericKind.U32), Units256x32u);
             Register(index++, Identity.resource(basename, w, NumericKind.U64), Units256x64u);
         }
-
     }
-
 }

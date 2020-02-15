@@ -213,6 +213,14 @@ namespace Z0
         public static IExecutable CaptureWorkflow(this IAsmContext context)
             => Z0.AsmCaptureFlow.Create(context);
 
+        [MethodImpl(Inline)]
+        public static IEncodingExtractor EncodingExtractor(this IContext context, int? bufferlen = null)
+            => Z0.EncodingExtractor.Create(context, bufferlen);
+
+        [MethodImpl(Inline)]
+        public static IEncodingParser EncodingParser(this IContext context, int? bufferlen = null)
+            => Z0.EncodingParser.Create(context, bufferlen);
+
         /// <summary>
         /// Instantiates an internal instruction formatter service
         /// </summary>

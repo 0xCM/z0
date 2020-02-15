@@ -12,12 +12,11 @@ namespace Z0
 
     using static zfunc;
 
-
     public class MemberLocationReport : IReport<MemberLocationRecord>
     {
         public static MemberLocationReport HostReport(ApiHost host)
         {
-            var src = host.EncodedMethods().ToArray();
+            var src = host.EncodedOps().ToArray();
             var records = new MemberLocationRecord[src.Length];
             var lastaddress = 0ul;
             for(var i=0; i< src.Length; i++)
@@ -86,6 +85,5 @@ namespace Z0
 
         public Option<FilePath> Save()
             => Records.Save(ApiHost.MapValueOrElse(AsmReports.HostLocation,() => AsmReports.AssemblyLocation(AssemblyId)));
-
     }
 }

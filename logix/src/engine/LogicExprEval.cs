@@ -5,8 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -14,7 +12,7 @@ namespace Z0.Logix
     [ApiHost("expr.logic.eval")]
     public static class LogicExprEval
     {
-        [Op("eval_logic_expr", false)]
+        [Op("eval_logic_expr")]
         internal static bit eval(ILogicExpr expr)
         {
             switch(expr)               
@@ -37,7 +35,7 @@ namespace Z0.Logix
         /// Evaluates a logical operator expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op("eval_logic_op", false)]
+        [Op("eval_logic_op")]
         static bit eval(ILogicOp expr)
         {
             switch(expr)               
@@ -52,5 +50,4 @@ namespace Z0.Logix
             }
         }
     }
-
 }

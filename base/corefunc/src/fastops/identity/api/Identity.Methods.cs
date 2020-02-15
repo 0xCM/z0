@@ -74,26 +74,10 @@ namespace Z0
             var attrib = m.CustomAttribute<OpAttribute>();
             if(attrib.IsNone())
                 return m.Name;
-        
-            var sep = AsciSym.Tilde;
+
             var attribVal = attrib.Value;  
-            var customName = attribVal.Name;
-            var combine = attribVal.CombineCustomName;
             
-            var name = string.Empty;
-
-            if(customName.IsNotBlank())
-            {
-                name += customName;
-
-                if(combine)
-                {
-                    name += sep;
-                    name += m.Name;
-                }
-            }
-            else
-                name += m.Name;
+            var name = attribVal.Name.IsNotBlank() ? attribVal.Name : m.Name;
                 
             return name;            
         }
