@@ -57,6 +57,25 @@ namespace Z0
             => new Fixed256(x.x0,x.x1);
 
         [MethodImpl(Inline)]
+        public static implicit operator Fixed256(in Pair<Fixed128> x)
+            => new Fixed256(x.A,x.B);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed256(in ConstPair<Fixed128> x)
+            => new Fixed256(x.A,x.B);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed256(in ConstQuad<ulong> x)
+            => new Fixed256(x);
+
+        [MethodImpl(Inline)]
+        internal Fixed256(in ConstQuad<ulong> src)
+        {
+            this.X0 = (src.A, src.B);
+            this.X1 = (src.C, src.D);
+        }
+
+        [MethodImpl(Inline)]
         internal Fixed256(Fixed128 x0, Fixed128 x1)
         {
             this.X0 = x0;

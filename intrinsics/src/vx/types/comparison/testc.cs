@@ -22,7 +22,7 @@ namespace Z0
 
             public static TestC128<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => Identity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x, Vector128<T> y) => ginx.vtestc(x,y);
@@ -45,7 +45,7 @@ namespace Z0
 
             public static TestC256<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => Identity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x, Vector256<T> y) => ginx.vtestc(x,y);

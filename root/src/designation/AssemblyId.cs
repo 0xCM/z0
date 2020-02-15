@@ -62,7 +62,9 @@ namespace Z0
 
         Control,
 
-        FastOps
+        FastOps,
+
+        Validation
     }
 
     partial class RootKindExtensions

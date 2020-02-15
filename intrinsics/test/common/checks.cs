@@ -12,7 +12,6 @@ namespace Z0
 
     public static partial class Checks
     {   
-
         public static bit vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -32,8 +31,6 @@ namespace Z0
 
     public static partial class CheckSpecs
     {   
-
-
 
     }
 

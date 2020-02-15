@@ -28,16 +28,6 @@ namespace Z0
             => SysRand.From(rng);
 
         /// <summary>
-        /// Creates a primal emitter predicated on a random source
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static PrimalEmitter<T> Emitter<T>(this IPolyrand random)
-            where T : unmanaged
-                => Rng.Emitter<T>(random);
-
-        /// <summary>
         /// Creates a polyrand based on a specified source
         /// </summary>
         /// <param name="src">The random source</param>

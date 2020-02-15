@@ -240,7 +240,7 @@ namespace Z0
         {            
             TraceCaller($"Checking {src.Id}");
             var g = (FixedFunc<T,T>)buffers.MainExec.Load(src).UnaryOp(src.Id, typeof(FixedFunc<T,T>),typeof(T));
-            var points = Random.Fixed<T>().Take(RepCount);
+            var points = Random.FixedStream<T>().Take(RepCount);
             iter(points, x => Claim.eq(f(x), g(x)));            
             
         }   
@@ -253,7 +253,7 @@ namespace Z0
             var f = (FixedFunc<T,T>)buffers.LeftExec.Load(a.Code).UnaryOp(a.Id, typeof(FixedFunc<T,T>),typeof(T));
             var g = (FixedFunc<T,T>)buffers.RightExec.Load(b.Code).UnaryOp(b.Id, typeof(FixedFunc<T,T>),typeof(T));
 
-            var stream = Random.Fixed<T>();
+            var stream = Random.FixedStream<T>();
             if(stream == null)
                 Claim.fail($"random stream null!");
 

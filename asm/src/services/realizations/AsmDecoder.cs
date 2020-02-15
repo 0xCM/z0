@@ -33,7 +33,27 @@ namespace Z0
             this.EmitCil = cil;
             this.Buffer = new byte[bufferlen];
         }
-    
+
+        public AsmInstructionList DecodeInstructions(AsmCode src, ulong @base)
+        {
+            var decoded = new Iced.InstructionList();
+            var reader = new Iced.ByteArrayCodeReader(src.Encoded);
+			var decoder =Iced.Decoder.Create(IntPtr.Size * 8, reader);
+            decoder.IP = @base;
+			while (reader.CanReadByte) 
+			{
+				ref var instruction = ref decoded.AllocUninitializedElement();
+				decoder.Decode(out instruction); 
+			}
+
+            var dst = new AsmSpecs.Instruction[decoded.Count];
+            var formatted = Context.InstructionFormatter().FormatInstructions(decoded, @base);
+            for(var i=0; i<dst.Length; i++)
+                dst[i] =  decoded[i].ToSpec(formatted[i]);
+            return AsmInstructionList.Create(dst);
+
+        }
+
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
@@ -43,7 +63,7 @@ namespace Z0
             var decoded = new Iced.InstructionList();
             var reader = new Iced.ByteArrayCodeReader(src.Encoded);
 			var decoder =Iced.Decoder.Create(IntPtr.Size * 8, reader);
-            decoder.IP = src.Origin.Start;
+            decoder.IP = src.MemorySource.Start;
 			while (reader.CanReadByte) 
 			{
 				ref var instruction = ref decoded.AllocUninitializedElement();
@@ -51,17 +71,17 @@ namespace Z0
 			}
 
             var dst = new AsmSpecs.Instruction[decoded.Count];
-            var formatted = Context.InstructionFormatter().FormatInstructions(decoded,src.Origin.Start);
+            var formatted = Context.InstructionFormatter().FormatInstructions(decoded, src.MemorySource.Start);
             for(var i=0; i<dst.Length; i++)
                 dst[i] =  decoded[i].ToSpec(formatted[i]);
             return AsmInstructionList.Create(dst);
         }
 
-        public AsmFunction DecodeFunction(OpInfo op, CaptureSummary summary)
+        public AsmFunction DecodeFunction(OpInfo src, CaptureSummary summary)
         {
-            var code = AsmCode.Define(op.Id, summary.Range, op.Signature, summary.Bits.Trimmed);
-            var instructions = DecodeInstructions(code);
-            return AsmFunction.Define(summary.Range, code, summary.Outcome, instructions);
+            var code = AsmCode.Define(src.Id, summary.Range, summary.Bits.Trimmed);
+            var instructions = DecodeInstructions(code, summary.Range.Start);
+            return AsmFunction.Define(src, summary.Range, code, summary.Outcome, instructions);
         }
 
         /// <summary>
@@ -70,9 +90,9 @@ namespace Z0
         /// <param name="src">The cource capture</param>
         public AsmFunction DecodeFunction(CapturedMember src)
         {
-            var list = DecodeInstructions(src.Code);
+            var list = DecodeInstructions(src.Code, src.SourceMemory.Start);
             var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.Outcome);
-            var f = BuildFunction(block);
+            var f = BuildFunction(src.SourceOp, block);
 
             if(EmitCil)
             {
@@ -83,7 +103,7 @@ namespace Z0
                 return f;
         }
 
-        AsmFunction BuildFunction(AsmInstructionBlock src)
+        AsmFunction BuildFunction(OpInfo op, AsmInstructionBlock src)
         {
             var info = new AsmInstructionInfo[src.InstructionCount];
             var offset = (ushort)0;
@@ -103,7 +123,7 @@ namespace Z0
             if(blocklen != src.NativeCode.Length)
                 throw appFail(InstructionBlockSizeMismatch(src.Origin, src.NativeCode.Length, blocklen));
 
-            return AsmFunction.Define(src.Origin, src.NativeCode, src.CaptureInfo, src.Decoded);
+            return AsmFunction.Define(op, src.Origin, src.NativeCode, src.CaptureInfo, src.Decoded);
         }
     }
 }

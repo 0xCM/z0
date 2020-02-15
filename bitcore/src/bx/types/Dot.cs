@@ -18,11 +18,10 @@ namespace Z0
 
             public const string Name = "dot";
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) => gbits.dot(a,b);
         }
     }
-
 }

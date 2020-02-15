@@ -221,6 +221,10 @@ namespace Z0
         public static IEncodingParser EncodingParser(this IContext context, int? bufferlen = null)
             => Z0.EncodingParser.Create(context, bufferlen);
 
+        [MethodImpl(Inline)]
+        public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostPath host)
+            => AsmHostArchive.Create(context, host);
+    
         /// <summary>
         /// Instantiates an internal instruction formatter service
         /// </summary>

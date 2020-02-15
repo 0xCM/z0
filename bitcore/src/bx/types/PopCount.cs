@@ -18,11 +18,10 @@ namespace Z0
 
             public const string Name = "popcount";
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(T a) => gbits.pop(a);
         }
     }
-
 }

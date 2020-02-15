@@ -67,7 +67,7 @@ namespace Z0
             return lines.ToArray();
         }    
 
-        public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong baseaddress)
+        public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base)
         {            
             static string LineLabel(ulong src)
                 => concat(src.FormatSmallHex(), Hex.PostSpec, space());
@@ -92,7 +92,7 @@ namespace Z0
             var dst = new string[src.Count];
             var sb = text();
             var writer = new StringWriter(sb);
-            var output = new AsmOutput(writer, baseaddress);
+            var output = new AsmOutput(writer, @base);
             for(var i = 0; i < src.Count; i++)
             {
                 ref readonly var instruction = ref src[i];
@@ -119,7 +119,7 @@ namespace Z0
                 if(src.Code.Length < offset + instruction.ByteLength)
                     throw appFail(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
             
-                dst[i] = instruction.SummarizeInstruction(src.Code.Encoded, instruction.FormattedInstruction, offset, src.Code.Origin.Start);
+                dst[i] = instruction.SummarizeInstruction(src.Code.Encoded, instruction.FormattedInstruction, offset, src.Code.MemorySource.Start);
                 offset += (ushort)instruction.ByteLength;
             }
             return dst;
@@ -139,9 +139,9 @@ namespace Z0
         {
             var dataline = Comment(code.Id);
             if(Config.EmitFunctionOrigin)
-                dataline += code.Origin.Format();
+                dataline += code.MemorySource.Format();
 
-            dataline += bracket(code.Origin.Length);
+            dataline += bracket(code.MemorySource.Length);
 
             if(Config.EmitFunctionEncoding)
                 dataline += concat(spaced(AsciSym.Eq), embrace(code.Encoded.FormatHex()));            

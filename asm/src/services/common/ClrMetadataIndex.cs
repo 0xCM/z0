@@ -48,8 +48,8 @@ namespace Z0
 
         public Option<CilFunction> FindCil(MethodInfo mi)
             => IsEmpty ? default : 
-                from m in MethodDefIndex.TryFind(mi.MetadataToken)
-                from f in GetCilFunction(m)
+                from def in MethodDefIndex.TryFind(mi.MetadataToken)
+                from f in GetCilFunction(def)
                 select f.WithSig(mi.Signature());
 
         public Option<Type> FindType(int id)

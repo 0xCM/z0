@@ -11,7 +11,6 @@ namespace Z0
 
     partial class GXTypes
     {
-
         [NumericClosures(NumericKind.All)]
         public readonly struct Parse<T>  : INumericParser<T>
             where T : unmanaged        
@@ -20,7 +19,7 @@ namespace Z0
 
             public static Parse<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(string a) => gmath.parse<T>(a);

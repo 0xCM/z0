@@ -11,7 +11,6 @@ namespace Z0
 
     partial class GXTypes
     {
-
         [NumericClosures(NumericKind.Integers)]
         public readonly struct And<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
@@ -20,7 +19,7 @@ namespace Z0
 
             public static And<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
 
             [MethodImpl(Inline)]
@@ -39,7 +38,7 @@ namespace Z0
 
             public static Or<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.or(a,b);
@@ -57,7 +56,7 @@ namespace Z0
 
             public static Xor<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
 
             [MethodImpl(Inline)]
@@ -76,7 +75,7 @@ namespace Z0
 
             public static Nand<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nand(a,b);
@@ -94,7 +93,7 @@ namespace Z0
 
             public static Nor<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nor(a,b);
@@ -112,7 +111,7 @@ namespace Z0
 
             public static Xnor<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.xnor(a, b);
@@ -130,7 +129,7 @@ namespace Z0
 
             public static Select<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T c) => gmath.select(a, b, c);
@@ -149,7 +148,7 @@ namespace Z0
 
             public static Not<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.not(a);
@@ -167,7 +166,7 @@ namespace Z0
 
             public static Impl<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.impl(a,b);
@@ -185,7 +184,7 @@ namespace Z0
 
             public static NonImpl<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nonimpl(a,b);
@@ -204,7 +203,7 @@ namespace Z0
 
             public static CImpl<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.cimpl(a,b);
@@ -223,7 +222,7 @@ namespace Z0
 
             public static CNonImpl<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.cnonimpl(a,b);

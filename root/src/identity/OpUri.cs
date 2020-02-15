@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static RootShare;
     
-    public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>
+    public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>, IParser<OpUri>
     {
         public readonly OpUriScheme Scheme;
         
@@ -39,12 +40,20 @@ namespace Z0
             => new OpUri(OpUriScheme.Hex, host, group, opid);
 
         [MethodImpl(Inline)]
+        public static OpUri Hex(OpIdentity opid, MethodInfo src)        
+            => new OpUri(OpUriScheme.Hex, ApiHostPath.FromHost(src.DeclaringType), src.Name, opid);
+
+        [MethodImpl(Inline)]
         public static OpUri Asm(ApiHostPath host, string group)        
             => new OpUri(OpUriScheme.Asm, host, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
         public static OpUri Asm(ApiHostPath host, string group, OpIdentity opid)        
             => new OpUri(OpUriScheme.Asm, host, group, opid);
+
+        [MethodImpl(Inline)]
+        public static OpUri Asm(OpIdentity opid, MethodInfo src)        
+            => new OpUri(OpUriScheme.Asm, ApiHostPath.FromHost(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
         OpUri(OpUriScheme scheme, ApiHostPath host, string group, OpIdentity opid)
@@ -97,5 +106,10 @@ namespace Z0
         [MethodImpl(Inline)]
         static string UriText(OpUriScheme scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
             => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}#{opid.Identifier}";
+
+        OpUri IParser<OpUri>.Parse(string text)
+        {
+            return default;
+        }
     }
 }

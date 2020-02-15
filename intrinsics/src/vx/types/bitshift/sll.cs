@@ -21,10 +21,10 @@ namespace Z0
 
             public static Sll128<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted(Name,hk);
+            public OpIdentity Id => Identity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
-                => Dynop.UnaryOpImm<T>(hk, Moniker, gApiMethod(hk,Name),count);
+                => Dynop.UnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);
             
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte count) 
@@ -45,10 +45,10 @@ namespace Z0
 
             public static Sll256<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted(Name,hk);
+            public OpIdentity Id => Identity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
-                => Dynop.UnaryOpImm<T>(hk, Moniker, gApiMethod(hk,Name),count);
+                => Dynop.UnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte count) 

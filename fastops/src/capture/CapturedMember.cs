@@ -16,48 +16,45 @@ namespace Z0
     /// </summary>
     public readonly struct CapturedMember
     {        
-        public static CapturedMember Empty => default;
+        public readonly OpIdentity Id; 
 
-        [MethodImpl(Inline)]
-        public static CapturedMember Define(OpIdentity id, MethodInfo src, MemoryRange origin, CaptureBits bits, CaptureOutcome result)
-            => new CapturedMember(id, src.Signature().Format(), null, src, origin, bits, result);
+        public readonly OpInfo SourceOp;
 
-        [MethodImpl(Inline)]
-        public static CapturedMember Define(OpIdentity id, Delegate src, MemoryRange origin, CaptureBits bits, CaptureOutcome result)
-            => new CapturedMember(id, id, src, src.Method, origin, bits, result);
-
-        [MethodImpl(Inline)]
-        CapturedMember(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange origin, CaptureBits bits, CaptureOutcome result)
-        {
-            require((int)origin.Length == bits.Trimmed.Length);
-            this.Delegate = src;
-            this.Method = method;
-            this.Origin = origin;
-            this.Code = AsmCode.Define(id, origin, label, bits.Trimmed);
-            this.Outcome = result;
-            this.RawBits = bits.Raw;
-        }
-
-        public readonly byte[] RawBits {get;}
-        
-        public readonly Option<Delegate> Delegate;
-
-        public readonly MethodInfo Method;
-
-        public readonly MemoryRange Origin;
+        public readonly MemoryRange SourceMemory;
 
         public readonly AsmCode Code;
         
         public readonly CaptureOutcome Outcome;
-             
-        public OpIdentity Id 
-            => Code.Id;
 
-        public string Label 
-            => Code.Label;
-         
+        public readonly byte[] RawBits {get;}
+                
+        public readonly MethodInfo Method;
+
+        public static CapturedMember Empty => default;
+
+        [MethodImpl(Inline)]
+        public static CapturedMember Define(OpIdentity id, MethodInfo src, MemoryRange memsrc, CaptureBits bits, CaptureOutcome result)
+            => new CapturedMember(id, src.Signature().Format(), null, src, memsrc, bits, result);
+
+        [MethodImpl(Inline)]
+        public static CapturedMember Define(OpIdentity id, Delegate src, MemoryRange memsrc, CaptureBits bits, CaptureOutcome result)
+            => new CapturedMember(id, id, src, src.Method, memsrc, bits, result);
+
+        [MethodImpl(Inline)]
+        CapturedMember(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange memsrc, CaptureBits bits, CaptureOutcome result)
+        {
+            require((int)memsrc.Length == bits.Trimmed.Length);    
+            this.Id = id;        
+            this.SourceOp = OpInfo.Define(OpUri.Hex(ApiHostPath.FromHost(method.DeclaringType), method.Name, id), method.Signature().Format());
+            this.Method = method;
+            this.SourceMemory = memsrc;
+            this.Code = AsmCode.Define(id, memsrc, bits.Trimmed);
+            this.Outcome = result;
+            this.RawBits = bits.Raw;
+        }
+                     
         public ulong Length 
-            => Origin.Length;
+            => SourceMemory.Length;
 
         public bool IsEmpty 
             => Length == 0;

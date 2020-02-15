@@ -14,10 +14,7 @@ namespace Z0.OpCodes
 
     [OpCodeProvider]
     public static class gxops
-    {
-     
-
-
+    {    
         public static uint bl_and32(uint a, uint b)
             => GX.bitlogic<uint>().and(a,b);
 
@@ -43,7 +40,7 @@ namespace Z0.OpCodes
             => GX.eq<ushort>().Invoke(a,b);
 
         public static string eq_moniker()
-            => GX.eq<ushort>().Moniker;
+            => GX.eq<ushort>().Id;
                      
         const string name = "thename";
 

@@ -14,34 +14,28 @@ namespace Z0.AsmSpecs
     /// </summary>
     public class AsmFunction
     {   
-        public static AsmFunction Define(MemoryRange origin, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
-            => new AsmFunction(origin, code, ci, instructions);
+        public static AsmFunction Define(OpInfo op, MemoryRange memory, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
+            => new AsmFunction(op, memory, code, ci, instructions);
 
-        AsmFunction(MemoryRange address, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
+        AsmFunction(OpInfo op, MemoryRange address, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
         {
             this.Id = code.Id;
-            this.Name = code.Id;
-            this.Label = code.Label;
+            this.SourceOp = op;
             this.Instructions = instructions;
             this.Code = code;            
-            this.Location = address;
+            this.SourceMemory = address;
             this.CaptureInfo = ci;
         }
+
+        /// <summary>
+        /// The defining operation
+        /// </summary>
+        public OpInfo SourceOp {get;}
 
         /// <summary>
         /// The function identifier
         /// </summary>
         public OpIdentity Id {get;}
-
-        /// <summary>
-        /// The function name
-        /// </summary>
-        public string Name {get;}
-        
-        /// <summary>
-        /// Descriptive text such as a function signature
-        /// </summary>
-        public string Label {get;}
 
         /// <summary>
         /// The function encoding
@@ -51,7 +45,7 @@ namespace Z0.AsmSpecs
         /// <summary>
         /// The memory location from which the code was taken
         /// </summary>
-        public MemoryRange Location {get;}
+        public MemoryRange SourceMemory {get;}
 
         /// <summary>
         /// The encoded instructions
@@ -67,6 +61,12 @@ namespace Z0.AsmSpecs
         /// Describes the capture outcome
         /// </summary>
         public CaptureOutcome CaptureInfo {get;}
+
+        /// <summary>
+        /// Descriptive text such as a function signature
+        /// </summary>
+        public string Label 
+            => SourceOp.Signature;
 
         /// <summary>
         /// The number of encoded instructions
@@ -85,6 +85,5 @@ namespace Z0.AsmSpecs
             this.Cil = cil;
             return this;
         }
-
     }
 }

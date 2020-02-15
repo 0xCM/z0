@@ -25,16 +25,10 @@ namespace Z0.AsmSpecs
 
         AsmInstructionBlock(AsmCode encoded, Instruction[] decoded, CaptureOutcome captureinfo)
         {
-            this.Label = encoded.Label;
             this.NativeCode = encoded;
             this.Decoded = decoded;
             this.CaptureInfo = captureinfo;
         }
-
-        /// <summary>
-        /// A description for the block
-        /// </summary>
-        public string Label {get;}
 
         /// <summary>
         /// Encoded assembly
@@ -61,8 +55,6 @@ namespace Z0.AsmSpecs
             => Decoded.Length;     
 
         public MemoryRange Origin
-            => NativeCode.Origin;   
- 
+            => NativeCode.MemorySource;    
     }
-
 }

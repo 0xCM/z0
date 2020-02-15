@@ -126,7 +126,7 @@ partial class zfunc
     /// <param name="src">The string to evaluate</param>
     [MethodImpl(Inline)]
     public static bool nonempty(string src)
-        => ! String.IsNullOrWhiteSpace(src);
+        => !String.IsNullOrWhiteSpace(src);
 
     /// <summary>
     /// Determines whether a string 2-tuple consists of only the empty string

@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static RootShare;
 
     public readonly struct OpInfo
-    {
+    {        
         [MethodImpl(Inline)]
         public static OpInfo Define(OpUri uri, string sig)
             => new OpInfo(uri,sig);

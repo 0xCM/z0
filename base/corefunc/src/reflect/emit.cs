@@ -16,7 +16,6 @@ namespace Z0
 
     partial class Reflections
     {
-
         /// <summary>
         /// Creates a binary operator delegate from a conforming method
         /// </summary>
@@ -79,9 +78,5 @@ namespace Z0
             gen.Emit(OpCodes.Ret);
             return (Func<T,T,T>) method.CreateDelegate(typeof(Func<T,T,T>));
         }
-
-
-
-
     }
 }

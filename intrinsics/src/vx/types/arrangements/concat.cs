@@ -19,7 +19,7 @@ namespace Z0
 
             public static Concat2x128<T> Op => default;
 
-            public OpIdentity Moniker 
+            public OpIdentity Id 
                 => OpIdentity.Define($"{Name}_2x128x{Identity.numericid<T>()}");
 
             [MethodImpl(Inline)]

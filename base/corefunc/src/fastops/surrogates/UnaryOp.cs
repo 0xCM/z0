@@ -17,14 +17,13 @@ namespace Z0
         internal UnaryFuncSurrogate(Func<A,B> f, OpIdentity id)            
         {
             this.f = f;
-            this.Moniker = id;
+            this.Id = id;
         }
 
-        public OpIdentity Moniker {get;}
+        public OpIdentity Id {get;}
 
         [MethodImpl(Inline)]
         public B Invoke(A a) => f(a);
-
     }
 
     /// <summary>
@@ -43,11 +42,9 @@ namespace Z0
             this.Name = name;
         }
         
-        public OpIdentity Moniker => Identity.contracted<T>(Name);
+        public OpIdentity Id => Identity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
         public T Invoke(T a) => f(a);
     }
-
-
 }

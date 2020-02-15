@@ -25,8 +25,8 @@ namespace Z0
         {            
             var data = src.Code;
             var dst = text();
-			dst.AppendLine($"; label   : {src.Method.Signature().Format()}");
-			dst.AppendLine($"; location: {src.Origin.Format()}, length: {src.Origin.Length} bytes");
+			dst.AppendLine($"; label   : {src.SourceOp.Signature.Format()}");
+			dst.AppendLine($"; location: {src.SourceMemory.Format()}, length: {src.SourceMemory.Length} bytes");
             var lines = data.Encoded.FormatHexLines(null);
             dst.Append(lines.Concat(AsciEscape.Eol));
             dst.AppendLine(new string('_',80));

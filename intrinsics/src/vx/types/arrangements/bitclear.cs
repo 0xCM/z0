@@ -22,7 +22,7 @@ namespace Z0
 
             public static BitClear128<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted(Name,hk);
+            public OpIdentity Id => Identity.contracted(Name,hk);
 
 
             [MethodImpl(Inline)]
@@ -44,7 +44,7 @@ namespace Z0
 
             public static BitClear256<T> Op => default;
 
-            public OpIdentity Moniker => Identity.contracted(Name,hk);
+            public OpIdentity Id => Identity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) 

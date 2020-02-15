@@ -158,7 +158,7 @@ namespace  Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Pair<T> NextPair<T>(this IPolyrand random, T t = default)
+        public static ConstPair<T> NextPair<T>(this IPolyrand random, T t = default)
             where T : unmanaged
                 => (random.Next<T>(), random.Next<T>());
 
@@ -170,9 +170,57 @@ namespace  Z0
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Pair<T> NextPair<T>(this IPolyrand random, T min, T max)
+        public static ConstPair<T> NextPair<T>(this IPolyrand random, T min, T max)
             where T : unmanaged
                 => (random.Next<T>(min,max), random.Next<T>(min,max));
+
+        /// <summary>
+        /// Produces the next triple of random primal values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="a">The first element in the pair</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstTriple<T> NextTriple<T>(this IPolyrand random, T t = default)
+            where T : unmanaged
+                => (random.Next<T>(), random.Next<T>(),random.Next<T>());
+
+        /// <summary>
+        /// Produces the next triple of random primal values within a specified range
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="min">The inclusive minimum value</param>
+        /// <param name="max">The exclusive maximum value</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstTriple<T> NextTriple<T>(this IPolyrand random, T min, T max)
+            where T : unmanaged
+                => (random.Next<T>(min,max), random.Next<T>(min,max),random.Next<T>(min,max));
+
+        /// <summary>
+        /// Produces the next triple of random primal values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="a">The first element in the pair</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstQuad<T> NextQuad<T>(this IPolyrand random, T t = default)
+            where T : unmanaged
+                => (random.NextPair<T>(), random.NextPair<T>());
+
+        /// <summary>
+        /// Produces the next triple of random primal values within a specified range
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="min">The inclusive minimum value</param>
+        /// <param name="max">The exclusive maximum value</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstQuad<T> NextQuad<T>(this IPolyrand random, T min, T max)
+            where T : unmanaged
+                => (random.NextPair<T>(min,max), random.NextPair<T>(min,max));
 
         /// <summary>
         /// Produces a random power of 2 within the primal type domain
@@ -216,7 +264,5 @@ namespace  Z0
         [MethodImpl(Inline)]
         public static System.Random ToSystemRand(this IPolyrand random)
             => SysRand.From(random);
-
-
     }
 }

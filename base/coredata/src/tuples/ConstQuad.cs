@@ -35,8 +35,12 @@ namespace Z0
         public readonly T D;
 
         [MethodImpl(Inline)]
-        public static implicit operator ConstQuad<T>((T a, T b, T c, T d) src)
+        public static implicit operator ConstQuad<T>(in (T a, T b, T c, T d) src)
             => new ConstQuad<T>(src.a,src.b,src.c,src.d);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ConstQuad<T>(in (ConstPair<T> a, ConstPair<T> b) src)
+            => new ConstQuad<T>(src.a.A,src.a.B, src.b.A,src.b.B);
 
         [MethodImpl(Inline)]
         public static bool operator ==(in ConstQuad<T> a, in ConstQuad<T> b)        

@@ -19,6 +19,10 @@ namespace Z0
         public string Identifier {get;}
         
         [MethodImpl(Inline)]
+        public static ApiHostPath FromHost(Type host)
+            => new ApiHostPath(host.Assembly.AssemblyId(), host.Name);
+                
+        [MethodImpl(Inline)]
         public static ApiHostPath Define(AssemblyId owner, string name)
             => new ApiHostPath(owner,name);
      

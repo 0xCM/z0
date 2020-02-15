@@ -204,7 +204,7 @@ namespace Z0
                 clock.Stop();
             }
 
-            ReportBenchmark(f.Moniker, ops, clock);
+            ReportBenchmark(f.Id, ops, clock);
         }
 
         void vbinop_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
@@ -228,7 +228,7 @@ namespace Z0
                 clock.Stop();
             }
 
-            ReportBenchmark(f.Moniker, ops, clock);
+            ReportBenchmark(f.Id, ops, clock);
         }
 
         void vshift_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)
@@ -252,7 +252,7 @@ namespace Z0
                 clock.Stop();
             }
             
-            ReportBenchmark(f.Moniker,  ops, clock);
+            ReportBenchmark(f.Id,  ops, clock);
         }
 
         void vshift_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
@@ -276,7 +276,7 @@ namespace Z0
                 clock.Stop();
             }
             
-            ReportBenchmark(f.Moniker,  ops, clock);
+            ReportBenchmark(f.Id,  ops, clock);
         }
 
         public void bitspan_scalar32_bench()

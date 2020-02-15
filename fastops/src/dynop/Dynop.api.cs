@@ -165,7 +165,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static BinaryOp16 BinaryOp(this ExecBufferToken buffer,N16 w, OpIdentity id)
+        public static BinaryOp16 BinaryOp(this ExecBufferToken buffer, N16 w, OpIdentity id)
             => (BinaryOp16)buffer.BinaryOp(id, typeof(BinaryOp16), typeof(Fixed16));
 
         /// <summary>

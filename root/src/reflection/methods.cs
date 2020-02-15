@@ -8,6 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.ComponentModel;
 
     using static RootShare;
     using static ReflectionFlags;
@@ -78,5 +79,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ImmediateParameters(this MethodInfo m)
             => m.GetParameters().Where(p => p.Attributed<ImmAttribute>()).Select(p => p.ParameterType);
+
    }
 }

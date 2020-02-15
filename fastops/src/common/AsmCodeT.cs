@@ -19,12 +19,6 @@ namespace Z0
 
         public OpIdentity Id
             => Code.Id;
-
-        public MemoryRange Origin
-            => Code.Origin;
-
-        public string Label
-            => Code.Label;
          
         public ReadOnlySpan<byte> Data
             => Code.Encoded;
@@ -44,9 +38,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmCode(OpIdentity id, MemoryRange origin, string label, byte[] data)
+        public AsmCode(OpIdentity id,  byte[] data)
         {
-            Code = AsmCode.Define(id, origin,label,data);
+            Code = AsmCode.Define(id, MemoryRange.Empty, data);
         }
 
         /// <summary>

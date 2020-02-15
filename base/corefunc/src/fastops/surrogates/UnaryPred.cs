@@ -22,10 +22,9 @@ namespace Z0
             this.Name = name;
         }
         
-        public OpIdentity Moniker => Identity.contracted<T>(Name);
+        public OpIdentity Id => Identity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
         public bit Invoke(T a) => F(a);
     }
-
 }

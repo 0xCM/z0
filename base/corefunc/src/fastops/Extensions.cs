@@ -57,55 +57,6 @@ namespace Z0
             => t.IsNat() ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : default;
 
         /// <summary>
-        /// Constructs a display name for a type
-        /// </summary>
-        /// <param name="src">The source type</param>
-        public static string DisplayName(this Type src)
-        {
-            if(src == null)
-                throw new ArgumentNullException(nameof(src));
-                
-            if(Attribute.IsDefined(src, typeof(DisplayNameAttribute)))
-                return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
-
-            if(src.IsEnum)
-                return src.Name + AsciSym.Colon + src.GetEnumUnderlyingType().DisplayName();
-
-            if(src.IsPointer)
-                return $"{src.GetElementType().DisplayName()}*";
-            
-            if(src.IsPrimal())
-                return src.PrimitiveKeyword().IfBlank(src.Name);
-
-            if(src.IsGenericType && !src.IsRef())
-                return src.FormatGeneric();
-
-            if(src.IsRef())
-                return src.GetElementType().DisplayName();
-
-            return src.Name;
-        }
-
-        static string FormatGeneric(this Type src)
-        {
-            var name = src.Name;                
-            var args = src.GetGenericArguments();
-            if(args.Length != 0)
-            {
-                name = name.Replace($"`{args.Length}", string.Empty);
-                name += "<";
-                for(var i= 0; i< args.Length; i++)
-                {
-                    name += args[i].DisplayName();
-                    if(i != args.Length - 1)
-                        name += ",";
-                }                                
-                name += ">";
-            }
-            return name;
-        } 
-
-        /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>
         /// <param name="m">The method to examine</param>
@@ -218,6 +169,5 @@ namespace Z0
                     throw unsupported(kind);
             }
         }
-
     }
 }

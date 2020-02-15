@@ -15,7 +15,7 @@ namespace Z0
         {
             protected abstract string GetOpName();
 
-            public virtual OpIdentity Moniker => Identity.contracted<A>(GetOpName());
+            public virtual OpIdentity Id => Identity.contracted<A>(GetOpName());
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
 
             protected static T t => default;
 
-            public override OpIdentity Moniker => Identity.contracted<W,T>(GetOpName());
+            public override OpIdentity Id => Identity.contracted<W,T>(GetOpName());
         }
     }
 }

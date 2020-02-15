@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static HK;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 

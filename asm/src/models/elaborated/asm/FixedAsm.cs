@@ -42,11 +42,6 @@ namespace Z0
         public OpIdentity Id
             => Code.Id;
 
-        /// <summary>
-        /// The originating memory location
-        /// </summary>
-        public MemoryRange Origin
-            => Code.Origin;
 
         /// <summary>
         /// The encoded asm bytes

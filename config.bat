@@ -15,6 +15,9 @@ dotnet sln add data/src/z0.data.csproj
 dotnet sln add gmath/src/z0.gmath.csproj
 dotnet sln add gmath/test/z0.gmath.test.csproj
 
+dotnet sln add validation/src/z0.validation.csproj
+dotnet sln add validation/test/z0.validation.test.csproj
+
 dotnet sln add mathobj/src/z0.mathobj.csproj
 
 dotnet sln add intrinsics/src/z0.intrinsics.csproj

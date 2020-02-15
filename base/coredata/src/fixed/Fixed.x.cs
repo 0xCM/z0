@@ -32,6 +32,11 @@ namespace Z0
                 => Unsafe.As<Fixed256,Vector256<T>>(ref Unsafe.AsRef(in src));
 
         [MethodImpl(Inline)]
+        public static Vector512<T> ToVector<T>(this in Fixed512 src)
+            where T : unmanaged
+                => Unsafe.As<Fixed512,Vector512<T>>(ref Unsafe.AsRef(in src));
+
+        [MethodImpl(Inline)]
         public static Fixed128 ToFixed<T>(this Vector128<T> x)
             where T : unmanaged
                 => Unsafe.As<Vector128<T>,Fixed128>(ref x);
@@ -40,6 +45,11 @@ namespace Z0
         public static Fixed256 ToFixed<T>(this Vector256<T> x)
             where T : unmanaged
                 => Unsafe.As<Vector256<T>,Fixed256>(ref x);
+
+        [MethodImpl(Inline)]
+        public static Fixed512 ToFixed<T>(this Vector512<T> x)
+            where T : unmanaged
+                => Unsafe.As<Vector512<T>,Fixed512>(ref x);
 
         [MethodImpl(Inline)]
         public static Fixed8 ToFixed(this byte src)
@@ -96,5 +106,4 @@ namespace Z0
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
     }
-
 }

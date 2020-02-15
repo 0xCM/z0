@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BCTypes
     {
-
         public readonly struct ByteSwap<T> : IUnaryOp<T>
             where T : unmanaged        
         {
@@ -19,7 +18,7 @@ namespace Z0
 
             public const string Name = "byteswap";
 
-            public OpIdentity Moniker => Identity.contracted<T>(Name);
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.byteswap(a);

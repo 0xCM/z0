@@ -29,6 +29,10 @@ namespace Z0
             => new Fixed128(x.A,x.B);
         
         [MethodImpl(Inline)]
+        public static implicit operator Fixed128(in ConstPair<ulong> x)
+            => new Fixed128(x.A,x.B);
+        
+        [MethodImpl(Inline)]
         public static implicit operator Fixed128(Vector128<byte> x)
             => x.ToFixed();
 

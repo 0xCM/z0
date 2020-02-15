@@ -25,12 +25,7 @@ namespace Z0
         /// <summary>
         /// The originating memory location
         /// </summary>
-        public readonly MemoryRange Origin;
-
-        /// <summary>
-        /// Descriptive text
-        /// </summary>
-        public readonly string Label;
+        public readonly MemoryRange MemorySource;
 
         /// <summary>
         /// The encoded asm bytes
@@ -43,7 +38,7 @@ namespace Z0
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static AsmCode Empty => new AsmCode(OpIdentity.Empty, MemoryRange.Empty, string.Empty,  new byte[]{0});
+        public static AsmCode Empty => new AsmCode(OpIdentity.Empty, MemoryRange.Empty, new byte[]{0});
 
         /// <summary>
         /// Defines a fully-specified code block
@@ -53,8 +48,8 @@ namespace Z0
         /// <param name="label">Descriptive text</param>
         /// <param name="data">The code bytes</param>
         [MethodImpl(Inline)]
-        public static AsmCode Define(OpIdentity id, MemoryRange origin, string label, byte[] data)
-            => new AsmCode(id, origin, label, data);
+        public static AsmCode Define(OpIdentity id, MemoryRange origin, byte[] data)
+            => new AsmCode(id, origin, data);
 
         /// <summary>
         /// Defines a minimally-specified code block
@@ -63,7 +58,7 @@ namespace Z0
         /// <param name="data">The code bytes</param>
         [MethodImpl(Inline)]
         public static AsmCode Define(OpIdentity id, byte[] data)
-            => new AsmCode(id, MemoryRange.Empty, id, data);
+            => new AsmCode(id, MemoryRange.Empty, data);
 
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
@@ -71,18 +66,17 @@ namespace Z0
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
         public static AsmCode Parse(OpIdentity id, string data)
-            => Define(id, Hex.parsebytes(data).ToArray());
+            => new AsmCode(id, MemoryRange.Empty, Hex.parsebytes(data).ToArray());
                 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)
             => code.Encoded;
 
         [MethodImpl(Inline)]
-        internal AsmCode(OpIdentity id, MemoryRange origin,  string label, byte[] encoded)
+        internal AsmCode(OpIdentity id, MemoryRange origin, byte[] encoded)
         {
             this.Id = id;
-            this.Origin = origin;
-            this.Label = label;
+            this.MemorySource = origin;
             this.Encoded = encoded;
         }
 

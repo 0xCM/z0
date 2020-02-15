@@ -63,9 +63,6 @@ namespace Z0
             return dst.ToString();
         }
 
-        public AsmCode GetAsmCode(MemoryAddress @base, string label)
-            => AsmCode.Define(Uri.OpId, MemoryRange.Define(@base, @base + (ulong)Data.Length), label,Data);
-
         public IReadOnlyList<string> GetHeaders()
             => Record.ReportHeaders(GetType());
 
@@ -84,6 +81,13 @@ namespace Z0
 
             Data = 1
         }    
+    }
+
+    partial class AsmExtend
+    {
+        public static AsmCode GetAsmCode(this ParsedEncoding encoding, MemoryAddress @base)
+            => AsmCode.Define(encoding.Uri.OpId, MemoryRange.Define(@base, @base + (ulong)encoding.Data.Length), encoding.Data);
+
     }
 
 }
