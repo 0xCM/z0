@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines the state of the routine capture workflow at a given step
     /// </summary>
-    public readonly struct CaptureState
+    public readonly struct CaptureState : IFormattable<CaptureState>
     {
         /// <summary>
         /// The empty state
@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The subject identifier
         /// </summary>
-        public readonly OpIdentity Subject;
+        public readonly OpIdentity OpId;
 
         /// <summary>
         /// The zero-based and monotonically-increasing state index
@@ -33,7 +33,7 @@ namespace Z0
         /// <summary>
         /// The memory address from which the state payload was extracted
         /// </summary>
-        public readonly long Location;
+        public readonly MemoryAddress Location;
 
         /// <summary>
         /// The captured data
@@ -43,20 +43,29 @@ namespace Z0
         /// <summary>
         /// Defines a capture state
         /// </summary>
-        /// <param name="offset">A zero-based and capture-relative index that identifes a state in 
-        /// the context of a capture workflow</param>
+        /// <param name="offset">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
         /// <param name="location">The memory location from which data was extracted</param>
         /// <param name="payload">The extracted data</param>
         [MethodImpl(Inline)]
-        public static CaptureState Define(OpIdentity subject, int offset, long location, byte payload)
-            => new CaptureState(subject,offset,location,payload);
-        
+        public static CaptureState Define(OpIdentity opid, int offset, long location, byte payload)
+            => new CaptureState(opid,offset,location,payload);
+
+        /// <summary>
+        /// Defines a capture state
+        /// </summary>
+        /// <param name="offset">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
+        /// <param name="location">The memory location from which data was extracted</param>
+        /// <param name="payload">The extracted data</param>
         [MethodImpl(Inline)]
-        CaptureState(OpIdentity subject, int offset, long location, byte payload)
+        public static CaptureState Define(OpIdentity opid, int offset, MemoryAddress location, byte payload)
+            => new CaptureState(opid,offset,location,payload);
+
+        [MethodImpl(Inline)]
+        CaptureState(OpIdentity opid, int offset, long location, byte payload)
         {
-            this.Subject = subject;
+            this.OpId = opid;
             this.Offset = offset - 1;
-            this.Location = location - 1;
+            this.Location = MemoryAddress.Define((ulong)location - 1ul);
             this.Payload = payload;
         }
 
@@ -66,7 +75,10 @@ namespace Z0
             get => Offset == 0 && Location == 0 && Payload == 0;
         }
 
+        public string Format()
+            => concat(OpId.ToString(), space(), Offset.FormatAsmHex(4), space(), Location.Format(), space(), Payload.FormatHex());
+
         public override string ToString() 
-            => concat(Subject.ToString(), space(), Offset.FormatAsmHex(4), space(), Location.FormatAsmHex(14), space(), Payload.FormatHex());
+            => Format();
     }
 }

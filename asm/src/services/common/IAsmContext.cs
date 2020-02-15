@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IOpContext
+    public interface IAsmContext : IContext
     {
         int ContextId {get;}
         

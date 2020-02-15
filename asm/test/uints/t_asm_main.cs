@@ -11,7 +11,9 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Linq;
-    
+
+    using Z0.AsmSpecs;
+
     using static zfunc;
 
     class t_asm_main : t_asm_explicit<t_asm_main>
@@ -24,72 +26,61 @@ namespace Z0
             // capture_shuffler(buffers);
             // capture_constants(buffers);
             // binary_imm(buffers);
-            //archive_selected(buffers);
-        
-            archive_context(buffers);
-            // var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts).Where(c => c.HostingType != typeof(CpuVector));
-            // iter(hosts, EncodingParser.Parse);            
+            //archive_selected(buffers);        
+            //archive_context(buffers);            
+            //iter(hosts, EncodingParser.Parse);            
+
+            RunCaptureWorkflow();
         }
         
-
-
-        unsafe void CreateLocationReports(ApiHost host)
+        void RunCaptureWorkflow()
         {
-            print(host);
-            var report = MemberLocationReport.HostReport(host);
-            if(report.IsNonEmpty)
-            {
-                var reportPath = report.Save().Require();
-                var datapath = reportPath.WithExtension(FileExtensions.Hex);
-                EmitData(report, datapath).OnSome(ParseData);
-            }
-        }
+            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts).Where(c => c.HostingType != typeof(CpuVector));
+            var extractor = Context.EncodingExtractor();
+            var parser = Context.EncodingParser();
+            var decoder = Context.Decoder();
+            var config = Context.AsmFormat.WithSectionDelimiter();
 
-        void ParseData(FilePath srcpath)
-        {
-            var parsedpath = srcpath.WithExtension(FileExtension.Define("parsed.csv"));
+            foreach(var host in hosts)
+            {
+                var rawDst = AsmReports.EncodingExtract(host);
+                
+                // var codeDst = AsmReports.EncodingParse(host);
+                // var asmDst = AsmReports.EncodingDecoded(host);
+                var codeDst = Paths.ParsedEncoding(host);
+                var asmDst = Paths.DecodedEncoding(host);
 
-            using var parseOut = parsedpath.Writer();
-            parseOut.WriteLine("OpId".PadRight(50) + "| Status".PadRight(16) + "  | Code");
-            var hex = HexFile.Read(srcpath);
-            var parser = EncodingParser.Create(Pow2.T14);
-            for(var i=0; i<hex.Lines.Length; i++)
-            {
-                var line = hex.Lines[i];
-                var status = parser.Parse(line.Encoded);
-                parseOut.WriteLine($"{line.Id.ToString().PadRight(50)}| {status.ToString().PadRight(16)}| {parser.Result}");                               
-            }
-            
-        }
-        
-        unsafe Option<FilePath> EmitData(in MemberLocationReport report, FilePath dstpath)
-        {
-            const int IdPad = 50;
-            try
-            {
-                var reader = ByteReader.Create();
-                var membercount = report.Records.Length;
-                using var writer = Context.RawWriter(dstpath);
-                Span<byte> buffer = new byte[Pow2.T14];
-                for(var i=0; i < membercount; i++)
+                var extracted = extractor.Extract(host);
+                extracted.Save(rawDst)
+                         .OnSome(file => print($"Emitted {host} encodings to {file}"))
+                         .OnNone(() => errout($"Error emitting {host} encodings"));                       
+                
+                var encodings = parser.Parse(host,extracted);
+                encodings.Save(codeDst)
+                         .OnSome(file => print($"Emitted parsed {host} encodings to {file}"))
+                         .OnNone(() => errout($"Error parsing {host} encodings"));                       
+
+                require(extracted.RecordCount == encodings.RecordCount);
+
+                using var asmWriter = Context.AsmWriter(config,asmDst);
+
+                for(var i=0; i< extracted.RecordCount; i++)
                 {
-                    buffer.Clear();
-                    var current = report.Records[i];                
-                    var pSrc = current.Location.ToPointer<byte>();
-                    var maxbytes = 
-                        i != membercount - 1 
-                        ? Math.Min((int)(report.Records[i + 1].Location - current.Location), buffer.Length) 
-                        : buffer.Length;
-                    var readbytes = reader.Read(ref pSrc, maxbytes, buffer);
-                    writer.Write(current.Member, buffer.Slice(0, readbytes), IdPad);
+                    var extract = extracted[i];
+                    var encoded = encodings[i];
+                    
+                    var op = extract.GetOpInfo();
+                    var bits = CaptureBits.Define(extract.Data, encoded.Data);
+                    var count = encoded.Length;
+                    var range = MemoryRange.Define(@extract.Address, extract.Address + (ulong)count);
+                    var tc = encoded.TermCode;
+
+                    var final = CaptureState.Define(op.Id, count, range.End, bits.Trimmed.Last());
+                    var outcome = CaptureOutcome.Define(final, range, tc);
+                    var summary = CaptureSummary.Define(outcome, bits);
+                    asmWriter.Write(decoder.DecodeFunction(op, summary));
                 }
-                return dstpath;
-            }
-            catch(Exception e)
-            {
-                errout($"Failed to emit data for {report.ApiHost}");
-                errout(e);
-                return none<FilePath>();
+
             }
         }
 
@@ -102,6 +93,7 @@ namespace Z0
                 Trace($"Parsing {id}");
             }
         }
+
 
         static void buffer_client(IAsmContext context)
         {
@@ -122,7 +114,7 @@ namespace Z0
                 var captured = capture.Capture(buffers.Exchange, f);
                 hexout.Write(captured);
                 rawout.Write(captured);
-                asmout.Write(decoder.Decode(captured));
+                asmout.Write(decoder.DecodeFunction(captured));
                 Claim.eq(captured.RawBits.Length, state.Count);
             }
 
@@ -189,7 +181,7 @@ namespace Z0
             var data = capture.Capture(buffers.Exchange, src);        
             hexout.Write(data);
             rawout.Write(data);
-            asmout.Write(decoder.Decode(data));
+            asmout.Write(decoder.DecodeFunction(data));
         }
 
         void capture_shifter(in AsmBuffers buffers)
@@ -206,7 +198,7 @@ namespace Z0
             var data = capture.Capture(buffers.Exchange, src.Identify(), src);
             hexout.Write(data);
             rawout.Write(data);
-            asmout.Write(decoder.Decode(data));
+            asmout.Write(decoder.DecodeFunction(data));
             
         }
 
@@ -225,12 +217,12 @@ namespace Z0
             var fData = capture.Capture(buffers.Exchange, f.Identify(), f);
             hexout.Write(fData);
             rawout.Write(fData);
-            asmout.Write(decoder.Decode(fData));
+            asmout.Write(decoder.DecodeFunction(fData));
 
             var gData = capture.Capture(buffers.Exchange, g.Identify(), g);
             hexout.Write(gData);
             rawout.Write(fData);
-            asmout.Write(decoder.Decode(gData));
+            asmout.Write(decoder.DecodeFunction(gData));
         }
 
         void binary_imm(in AsmBuffers buffers)
@@ -249,7 +241,7 @@ namespace Z0
             var z1 = f.Invoke(x,y);
             var decoder = Context.Decoder(false);
             var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);
-            var asm = decoder.Decode(captured);        
+            var asm = decoder.DecodeFunction(captured);        
 
             iter(asm.Instructions, i => Trace(i));  
 

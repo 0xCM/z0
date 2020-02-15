@@ -133,10 +133,10 @@ namespace Z0
         }
 
         static AsmFunction Decode(IAsmDecoder decoder, in CaptureExchange exchange, DirectOpSpec src)
-            => decoder.Decode(CaptureServices.Operations.Capture(in exchange, src.Id, src.ConcreteMethod));
+            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, src.Id, src.ConcreteMethod));
 
         static AsmFunction Decode(IAsmDecoder decoder, in CaptureExchange exchange, ClosedOpSpec closure)
-            => decoder.Decode(CaptureServices.Operations.Capture(in exchange, closure.Id, closure.ClosedMethod));
+            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, closure.Id, closure.ClosedMethod));
 
         void Emit(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)
         {
@@ -252,7 +252,6 @@ namespace Z0
 
         IAsmFunctionArchive Archive(string subject)
             => Context.FunctionArchive(Catalog.AssemblyId, subject);
-
 
         static byte[] ImmSelection => new byte[]{5,9,13};
     }

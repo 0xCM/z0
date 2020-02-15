@@ -21,7 +21,7 @@ namespace Z0
         {            
             var decoder = archive.Context.Decoder();
             foreach(var codeblock in archive.Read())
-                yield return decoder.Decode(codeblock);                
+                yield return decoder.DecodeInstructions(codeblock);                
         }
 
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)

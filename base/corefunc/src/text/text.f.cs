@@ -248,8 +248,8 @@ partial class zfunc
     /// Produces a '-' character
     /// </summary>
     [MethodImpl(Inline)]
-    public static char dash()
-        => AsciSym.Dash;
+    public static string dash()
+        => AsciSym.Dash.ToString();
 
     /// <summary>
     /// Produces a ',' character

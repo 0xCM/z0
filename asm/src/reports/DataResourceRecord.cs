@@ -27,16 +27,16 @@ namespace Z0
         }
 
         [ReportField(OffsetPad)]
-        public ushort Offset {get;set;}
+        public ushort Offset {get; set;}
 
         [ReportField(LocationPad)]
-        public ulong Location {get;set;}
+        public ulong Location {get; set;}
 
         [ReportField(LengthPad)]
-        public int Length {get;set;}
+        public int Length {get; set;}
 
         [ReportField]
-        public string Id {get;set;}
+        public string Id {get; set;}
 
         const int OffsetPad = 8;
         

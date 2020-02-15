@@ -65,7 +65,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an event orignator
     /// </summary>
-    public interface IEventEmitter : ISysemAgent
+    public interface IEventEmitter : ISystemAgent
     {        
 
     }

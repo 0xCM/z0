@@ -24,12 +24,23 @@ namespace Z0
                     ? FileName.Define($"{id.Format()}-imm", FileExtensions.Csv) 
                     : FileName.Define($"{id.Format()}", FileExtensions.Csv));
 
-
         static FolderPath LocationRoot
             =>  Paths.AsmReportRoot + FolderName.Define("locations");   
         
         static FileExtension LocationExtension
             => FileExtensions.Csv;
+
+        static FolderPath CaptureRoot
+            =>  Paths.AsmReportRoot + FolderName.Define("capture");   
+
+        public static FilePath EncodingExtract(ApiHost host)
+            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.Name, dash(), "extract"), FileExtensions.Csv);
+
+        public static FilePath EncodingParse(ApiHost host)
+            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.Name, dash(), "parsed"), FileExtensions.Csv);
+
+        public static FilePath EncodingDecoded(ApiHost host)
+            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.Name, dash(), "decoded"), FileExtensions.Asm);
 
         public static FilePath HostLocation(ApiHost host)
             => LocationRoot + FileName.Define(concat(host.Owner.Format(), dash(), host.Name), LocationExtension);

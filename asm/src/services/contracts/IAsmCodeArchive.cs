@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// An optional api host name - that usually corresponds the the name of a type that defines the operations of interest
         /// </summary>
-        string ApiHost {get;}        
+        string HostName {get;}        
     }
 
     public interface IAsmArchive<T> : IAsmArchive

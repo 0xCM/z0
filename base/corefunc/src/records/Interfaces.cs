@@ -40,5 +40,11 @@ namespace Z0
 
         IReadOnlyList<string> IReport.HeaderFields 
             =>  Record.ReportHeaders<T>();
+
+        T this[int index]
+            => Records[index];
+        
+        int RecordCount
+            => Records.Length;
     }
 }

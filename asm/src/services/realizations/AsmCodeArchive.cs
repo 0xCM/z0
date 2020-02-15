@@ -19,7 +19,7 @@ namespace Z0
         
         public AssemblyId Origin {get;}
 
-        public string ApiHost {get;}
+        public string HostName {get;}
 
         public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog)
             => new AsmCodeArchive(context, catalog);
@@ -31,7 +31,7 @@ namespace Z0
         {
             this.Context = context;
             this.Origin = catalog;
-            this.ApiHost = host;
+            this.HostName = host;
             this.RootFolder = LogPaths.The.AsmDataDir(RelativeLocation.Define(Origin.Format(), host));
         }
 
@@ -39,7 +39,7 @@ namespace Z0
         {
             this.Context = context;
             this.Origin = catalog;
-            this.ApiHost = string.Empty;
+            this.HostName = string.Empty;
             this.RootFolder = LogPaths.The.AsmDataDir(FolderName.Define(Origin.Format()));
         }
 

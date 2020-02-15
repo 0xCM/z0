@@ -12,9 +12,7 @@ namespace Z0
     using static zfunc;
  
     public readonly struct DataResourceReport : IAsmReport<DataResourceRecord>
-    {
-        public const AsmReportKind Kind = AsmReportKind.DataResource;
-        
+    {        
         public readonly AssemblyId Id;
 
         public DataResourceRecord[] Records {get;}
@@ -22,9 +20,6 @@ namespace Z0
         public readonly FilePath ReportPath
             => AsmReports.ResourcePath(Id);
         
-        public AsmReportKind ReportKind
-            => Kind;
-
         readonly DataResourceIndex Index;        
 
         public static DataResourceReport Create(AssemblyId id, DataResourceIndex resources)
@@ -55,35 +50,5 @@ namespace Z0
             }
             return records.ToArray();
         }
-
-        // public Option<FilePath> Save()
-        // {            
-        //     var dst = AsmReports.ResourcePath(Id).CreateParentIfMissing();
-        //     var delimter = spaced(pipe());
-        //     var header = concat(
-        //         "Offset".PadRight(8), delimter,
-        //         "Location".PadRight(16), delimter,  
-        //         "Length".PadRight(10), delimter, 
-        //         "Id") ;
-
-        //     var start = 0ul;
-        //     using var writer = new StreamWriter(dst.Name, false);  
-        //     writer.WriteLine(header);         
-        //     foreach(var r in Index.Indexed.OrderBy(x => x.Location))
-        //     {
-        //         if(start == 0)
-        //             start = r.Location;
-                    
-        //         var offset = r.Location - start;
-                
-        //         var description = concat(
-        //                 offset.FormatAsmHex(4).PadRight(8), delimter,
-        //                 r.Location.FormatAsmHex().PadRight(16), delimter, 
-        //                 r.Length.FormatAsmHex(4).PadRight(10), delimter, 
-        //                 r.Id);
-        //         writer.WriteLine(description);
-        //     }
-        //     return dst;
-        // }
-    }
+   }
 }

@@ -11,8 +11,7 @@ namespace Z0
     using static zfunc;
 
     public abstract class Context : IContext
-    {        
-        
+    {                
         protected Context(IPolyrand rng)
         {
             this.Random = rng;            
@@ -56,4 +55,14 @@ namespace Z0
         public void PostMessage(string msg, SeverityLevel? severity = null)
             => PostMessage(AppMsg.Define($"{msg}", severity ?? SeverityLevel.Babble));
     }
+
+    public abstract class Context<C> : Context, IContext<C>
+        where C : Context<C>
+    {                
+        protected Context(IPolyrand random)
+            : base(random)            
+        {
+
+        }
+    }           
 }

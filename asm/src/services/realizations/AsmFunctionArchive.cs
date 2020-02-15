@@ -31,17 +31,20 @@ namespace Z0
 
         public AssemblyId Origin {get;}
 
-        public string ApiHost {get;}
+        public string HostName {get;}
+
+        public ApiHostPath HostPath {get;}
 
         public static IAsmFunctionArchive Create(IAsmContext context, AssemblyId catalog, string host)
             => new AsmFunctionArchive(context, catalog,host);
 
-        AsmFunctionArchive(IAsmContext context, AssemblyId catalog, string host)
+        AsmFunctionArchive(IAsmContext context, AssemblyId catalog, string hostname)
         {
             this.Context = context;
             this.Origin = catalog;
-            this.ApiHost = host;
-            this.RootFolder = Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), host));
+            this.HostName = hostname;
+            this.HostPath = ApiHostPath.Define(catalog, hostname);
+            this.RootFolder = Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), hostname));
             this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
             this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
@@ -116,11 +119,13 @@ namespace Z0
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
-                    var uri = OpUri.Asm(Origin, ApiHost, src.Id, f.Id);
+                    //var uri = OpUri.Asm(Origin, HostName, src.Id, f.Id);
+                    var uri = OpUri.Asm(HostPath, src.Id, f.Id);
                     writer.Write(GroupFormatter.FormatDetail(f));
                     tokens[i] = CaptureToken.Define(f.CaptureInfo, uri);
                 }
-                return tokens.ToGroup(OpUri.AsmGroup(Origin, ApiHost, src.Id));
+                return tokens.ToGroup(OpUri.Asm(HostPath, src.Id));
+                //return tokens.ToGroup(OpUri.AsmGroup(Origin, HostName, src.Id));
             }
             catch(Exception e)
             {
@@ -145,12 +150,12 @@ namespace Z0
         }
 
         FilePath HexPath(OpIdentity id)
-            => ArchiveFileKind.Hex.ArchivePath(Origin, ApiHost, id).CreateParentIfMissing();
+            => ArchiveFileKind.Hex.ArchivePath(Origin, HostName, id).CreateParentIfMissing();
 
         FilePath AsmPath(OpIdentity id)
-            => ArchiveFileKind.Asm.ArchivePath(Origin, ApiHost, id).CreateParentIfMissing();
+            => ArchiveFileKind.Asm.ArchivePath(Origin, HostName, id).CreateParentIfMissing();
 
         FilePath CilPath(OpIdentity id)
-            => ArchiveFileKind.Cil.ArchivePath(Origin, ApiHost, id).CreateParentIfMissing();
+            => ArchiveFileKind.Cil.ArchivePath(Origin, HostName, id).CreateParentIfMissing();
     }
 }

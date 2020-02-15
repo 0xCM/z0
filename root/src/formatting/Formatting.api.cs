@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static zfunc;
+    using static RootShare;
 
     public static class Formatting
     {             
@@ -49,27 +50,51 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static IFormatter CreateFormatter(Type realization)
-            => Try(() => (IFormatter)Activator.CreateInstance(realization)).ValueOrDefault(default(DefaultFormatter));
+        {
+            try
+            {
+                return (IFormatter)Activator.CreateInstance(realization);
+            }
+            catch(Exception)
+            {
+                return default(DefaultFormatter);
+            }
+
+        }
 
         [MethodImpl(Inline)]
         static IConfiguredFormatter CreateConfigured(Type realization)
-            => Try(() => (IConfiguredFormatter)Activator.CreateInstance(realization)).ValueOrDefault(default(DefaultConfiguredFormatter));
+        {
+            try
+            {
+                return (IConfiguredFormatter)Activator.CreateInstance(realization);
+            }
+            catch(Exception)
+            {
+                return default(DefaultConfiguredFormatter);
+            }
+
+        }
 
         [MethodImpl(Inline)]
         static IFormatter GetFormatter(this object src)
-            => src == null 
-             ? default(DefaultFormatter) 
-             : src.GetType().CustomAttribute<FormatterAttribute>()
-                            .TryMap(a => CreateFormatter(a.Realization))
-                            .ValueOrDefault(default(DefaultFormatter));                          
+        {
+            var attrib = src?.GetType()?.GetCustomAttribute<FormatterAttribute>();
+            if(attrib != null)
+                return CreateFormatter(attrib.Realization);
+            else
+                return default(DefaultFormatter);
+        }
 
         [MethodImpl(Inline)]
         static IConfiguredFormatter GetConfiguredFormatter(this object src)
-            => src == null 
-             ? default(DefaultConfiguredFormatter) 
-             : src.GetType().CustomAttribute<FormatterAttribute>()
-                            .TryMap(a => CreateConfigured(a.Realization))
-                            .ValueOrDefault(default(DefaultConfiguredFormatter));                          
+        {
+            var attrib = src?.GetType()?.GetCustomAttribute<FormatterAttribute>();
+            if(attrib != null)
+                return CreateConfigured(attrib.Realization);
+            else
+                return default(DefaultConfiguredFormatter);             
+        }
 
         /// <summary>
         /// Reifies a meaningless implementation of IFormatConfig

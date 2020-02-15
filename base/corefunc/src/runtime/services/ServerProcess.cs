@@ -22,10 +22,10 @@ namespace Z0
         /// <param name="Context">The context to which the server process will be assigned</param>
         /// <param name="ServerId">The server id</param>
         /// <param name="ServerAgents">The agents to be managed on behalf of the server</param>
-        public static ServerProcess Define(AgentContext Context, uint ServerId, uint CoreNumber, params ISysemAgent[] ServerAgents)
+        public static ServerProcess Define(AgentContext Context, uint ServerId, uint CoreNumber, params ISystemAgent[] ServerAgents)
             => new ServerProcess(Context, ServerId, CoreNumber, ServerAgents);
 
-        ServerProcess(AgentContext Context, uint ServerId, uint CoreNumber, params ISysemAgent[] ServerAgents)
+        ServerProcess(AgentContext Context, uint ServerId, uint CoreNumber, params ISystemAgent[] ServerAgents)
             : base(Context, (ServerId, 1u))
         {
             this.Agents = ServerAgents.ToList();
@@ -37,11 +37,11 @@ namespace Z0
         /// <summary>
         /// Exposes a readonly stream of the agents under management on behalf of the server
         /// </summary>
-        public IEnumerable<ISysemAgent> ServerAgents
+        public IEnumerable<ISystemAgent> ServerAgents
             => Agents;
 
-        List<ISysemAgent> Agents {get;}
-            = new List<ISysemAgent>();
+        List<ISystemAgent> Agents {get;}
+            = new List<ISystemAgent>();
         
         protected override void OnStart()
         {            

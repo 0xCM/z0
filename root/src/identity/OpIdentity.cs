@@ -70,8 +70,7 @@ namespace Z0
         /// Indicates whether the moniker is emtpy
         /// </summary>
         public bool IsEmpty
-        {
-            
+        {            
             [MethodImpl(Inline)]
             get => string.IsNullOrWhiteSpace(Identifier);
         }
@@ -99,7 +98,7 @@ namespace Z0
         /// </summary>
         public IEnumerable<string> TextComponents
             => Identifier.Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
-
+            
         public override string ToString()
             => Identifier;
 

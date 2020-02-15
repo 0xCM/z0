@@ -12,31 +12,15 @@ namespace Z0
     
     public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>
     {
-        const string AsmScheme = "asm";
-
         public readonly OpUriScheme Scheme;
         
-        public readonly AssemblyId Catalog;
-
-        public readonly string Subject;
-
-        public readonly string GroupName;
+        public readonly ApiHostPath HostPath;
+        
+        public readonly string Group;
 
         public readonly OpIdentity OpId;
 
         public string Identifier {get;}
-
-        [MethodImpl(Inline)]
-        public static string PathText(string scheme, AssemblyId catalog, string subject)
-            => $"{scheme}://{catalog.Format()}/{subject}";
-
-        [MethodImpl(Inline)]
-        public static string QueryText(OpUriScheme scheme, AssemblyId catalog, string subject, string group)
-            => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}";
-
-        [MethodImpl(Inline)]
-        public static string UriText(OpUriScheme scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
-            => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}#{opid.Identifier}";
 
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
@@ -47,35 +31,36 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static OpUri Asm(AssemblyId catalog, string subject, string group, OpIdentity opid)        
-            => new OpUri(OpUriScheme.Asm, catalog, subject, group, opid);
+        public static OpUri Hex(ApiHostPath host, string group)        
+            => new OpUri(OpUriScheme.Hex, host, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
-        public static OpUri AsmGroup(AssemblyId catalog, string subject, string group)        
-            => new OpUri(OpUriScheme.Asm, catalog, subject, group, OpIdentity.Empty);
+        public static OpUri Hex(ApiHostPath host, string group, OpIdentity opid)        
+            => new OpUri(OpUriScheme.Hex, host, group, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri Hex(AssemblyId catalog, string subject, string group, OpIdentity opid)        
-            => new OpUri(OpUriScheme.Hex, catalog, subject, group, opid);
+        public static OpUri Asm(ApiHostPath host, string group)        
+            => new OpUri(OpUriScheme.Asm, host, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
-        public static OpUri HexGroup(AssemblyId catalog, string subject, string group)        
-            => new OpUri(OpUriScheme.Hex, catalog, subject, group, OpIdentity.Empty);
-
+        public static OpUri Asm(ApiHostPath host, string group, OpIdentity opid)        
+            => new OpUri(OpUriScheme.Asm, host, group, opid);
 
         [MethodImpl(Inline)]
-        OpUri(OpUriScheme scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
+        OpUri(OpUriScheme scheme, ApiHostPath host, string group, OpIdentity opid)
         {
             this.Scheme = scheme;
-            this.Catalog = catalog;
-            this.Subject = subject;
+            this.HostPath = host;
             this.OpId = opid;
-            this.GroupName = group;
-            this.Identifier = opid.IsEmpty ? QueryText(scheme, catalog,subject,group) : UriText(scheme, catalog, subject, GroupName, opid);
+            this.Group = group;
+            this.Identifier = 
+                opid.IsEmpty 
+                ? QueryText(scheme, host.Owner, host.Name,group) 
+                : UriText(scheme, host.Owner, host.Name, Group, opid);
         }
-        
+
         public OpUri GroupUri
-            => new OpUri(Scheme, Catalog, Subject, GroupName, OpIdentity.Empty);
+            => new OpUri(Scheme, HostPath, Group, OpIdentity.Empty);
 
         public string Format()
             => Identifier;
@@ -97,7 +82,20 @@ namespace Z0
         public int CompareTo(OpUri other)
             => IdentityCompare(this, other);
 
+        [MethodImpl(Inline)]
         public int CompareTo(IIdentity other)
             => IdentityCompare(this, other);
+
+        [MethodImpl(Inline)]
+        static string PathText(string scheme, AssemblyId catalog, string subject)
+            => $"{scheme}://{catalog.Format()}/{subject}";
+
+        [MethodImpl(Inline)]
+        static string QueryText(OpUriScheme scheme, AssemblyId catalog, string subject, string group)
+            => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}";
+
+        [MethodImpl(Inline)]
+        static string UriText(OpUriScheme scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
+            => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}#{opid.Identifier}";
     }
 }

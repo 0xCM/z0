@@ -15,6 +15,16 @@ namespace Z0
 
     public readonly struct ApiHost : IApiHostIdentity<ApiHost>
     {
+        public string Name {get;}
+
+        public readonly AssemblyId Owner;
+
+        public ApiHostPath Path {get;}
+
+        public string Identifier {get;}            
+        
+        public readonly Type HostingType;
+
         public static ApiHost Empty = new ApiHost(AssemblyId.None, typeof(void));
         
         [MethodImpl(Inline)]
@@ -47,21 +57,12 @@ namespace Z0
             this.Path = ApiHostPath.Define(Owner, HostingType.Name);
             this.Identifier = Path.Format();
         }
-
-        public string Name {get;}
-
-        public readonly AssemblyId Owner;
-
-        public ApiHostPath Path {get;}
-
-        public string Identifier {get;}            
         
-        public readonly Type HostingType;
-
         public IEnumerable<MethodInfo> DeclaredMethods
             =>  HostingType.DeclaredMethods();
 
-        public bool IsEmtpy => Owner == AssemblyId.None && HostingType == typeof(void);
+        public bool IsEmtpy 
+            => Owner == AssemblyId.None && HostingType == typeof(void);
 
         public override string ToString() 
             => Identifier;

@@ -25,6 +25,18 @@ namespace Z0
         public static FilePath CilFilePath(this AssemblyId catalog, string host, OpIdentity id)
             => Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), host)) + Paths.CilFile(id);
 
+        public static FilePath HexFilePath(this ApiHostPath host, OpIdentity id)
+            => Paths.AsmDataDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + Paths.AsmHexFile(id);
+
+        public static FilePath RawFilePath(this ApiHostPath host, OpIdentity id)
+            => Paths.AsmDataDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + Paths.AsmRawFile(id);
+
+        public static FilePath AsmFilePath(this ApiHostPath host, OpIdentity id)
+            => Paths.AsmDataDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + Paths.AsmDetailFile(id);
+
+        public static FilePath CilFilePath(this ApiHostPath host, OpIdentity id)
+            => Paths.AsmDataDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + Paths.CilFile(id);
+
         public static FilePath ArchivePath(this ArchiveFileKind kind, AssemblyId origin, string host, OpIdentity id)
             => kind switch {
                 ArchiveFileKind.Hex  => origin.HexFilePath(host, id),
@@ -33,5 +45,15 @@ namespace Z0
                 ArchiveFileKind.Cil  => origin.CilFilePath(host, id),
                 _  => FilePath.Empty,
             };
+
+        public static FilePath ArchivePath(this ArchiveFileKind kind, ApiHostPath host, OpIdentity id)
+            => kind switch {
+                ArchiveFileKind.Hex  => host.HexFilePath(id),
+                ArchiveFileKind.Raw  => host.RawFilePath(id),
+                ArchiveFileKind.Asm  => host.AsmFilePath(id),
+                ArchiveFileKind.Cil  => host.CilFilePath(id),
+                _  => FilePath.Empty,
+            };
+
     }
 }

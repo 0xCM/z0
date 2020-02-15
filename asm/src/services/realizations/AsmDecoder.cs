@@ -38,7 +38,7 @@ namespace Z0
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        public AsmInstructionList Decode(AsmCode src)
+        public AsmInstructionList DecodeInstructions(AsmCode src)
         {
             var decoded = new Iced.InstructionList();
             var reader = new Iced.ByteArrayCodeReader(src.Encoded);
@@ -57,13 +57,20 @@ namespace Z0
             return AsmInstructionList.Create(dst);
         }
 
+        public AsmFunction DecodeFunction(OpInfo op, CaptureSummary summary)
+        {
+            var code = AsmCode.Define(op.Id, summary.Range, op.Signature, summary.Bits.Trimmed);
+            var instructions = DecodeInstructions(code);
+            return AsmFunction.Define(summary.Range, code, summary.Outcome, instructions);
+        }
+
         /// <summary>
         /// Decodes a function from a native capture
         /// </summary>
         /// <param name="src">The cource capture</param>
-        public AsmFunction Decode(CapturedMember src)
+        public AsmFunction DecodeFunction(CapturedMember src)
         {
-            var list = Decode(src.Code);
+            var list = DecodeInstructions(src.Code);
             var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.Outcome);
             var f = BuildFunction(block);
 
@@ -78,17 +85,17 @@ namespace Z0
 
         AsmFunction BuildFunction(AsmInstructionBlock src)
         {
-            var dst = new AsmInstructionInfo[src.InstructionCount];
+            var info = new AsmInstructionInfo[src.InstructionCount];
             var offset = (ushort)0;
 
-            for(var i=0; i<dst.Length; i++)
+            for(var i=0; i<info.Length; i++)
             {
                 var instruction = src[i];
                 
                 if(src.NativeCode.Length < offset + instruction.ByteLength)
                     throw appFail(InstructionSizeMismatch(instruction.IP, offset, src.NativeCode.Length, instruction.ByteLength));                
             
-                dst[i] = instruction.SummarizeInstruction(src.NativeCode.Encoded, instruction.FormattedInstruction, offset, src.Origin.Start);
+                info[i] = instruction.SummarizeInstruction(src.NativeCode.Encoded, instruction.FormattedInstruction, offset, src.Origin.Start);
                 offset += (ushort)instruction.ByteLength;
             }
 

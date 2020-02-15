@@ -22,10 +22,6 @@ namespace Z0
 
     public readonly struct AsmEmissionReport : IAsmReport<AsmEmissionRecord>
     {             
-        public const AsmReportKind Kind = AsmReportKind.Emissions;
-
-        public AsmReportKind ReportKind 
-            => Kind;
 
         public AssemblyId Id {get;}
         

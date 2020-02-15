@@ -8,6 +8,11 @@ namespace Z0
 
     public struct AgentStats
     {
+        public AgentStats(int count)
+        {
+            this.AgentCount = count;
+        }
+        
         public int AgentCount;
     }
 

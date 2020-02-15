@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines base system agent abstraction
     /// </summary>    
-    public abstract class SystemAgent : ISysemAgent
+    public abstract class SystemAgent : ISystemAgent<AgentContext>
     {
         protected SystemAgent(AgentContext Context, AgentIdentity Identity)
         {
@@ -74,7 +74,7 @@ namespace Z0
             }
         }
 
-        protected AgentContext Context {get;}
+        public AgentContext Context {get;}
 
         public event OnAgentTransition StateChanged;
 

@@ -36,7 +36,7 @@ namespace Z0
             var src = (from m in methods
                       let id = m.IsGenericMethodDefinition ? Identity.generic(m) : Identity.identify(m)
                       let address = MemoryAddress.Define(m.MethodHandle.GetFunctionPointer())
-                      orderby address.Origin
+                      orderby address.Location
                       select (id,address)).ToArray();
 
             var records = new MemberLocationRecord[src.Length];

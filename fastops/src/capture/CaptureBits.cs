@@ -13,6 +13,10 @@ namespace Z0
 
     public readonly struct CaptureBits
     {
+        public readonly byte[] Raw;
+
+        public readonly byte[] Trimmed;
+
         [MethodImpl(Inline)]
         public static CaptureBits Define(byte[] raw, byte[] trimmed)
             => new CaptureBits(raw,trimmed);
@@ -24,8 +28,10 @@ namespace Z0
             this.Trimmed = trimmed;
         }
 
-        public readonly byte[] Raw;
+        public int RawLength
+            => Raw.Length;
 
-        public readonly byte[] Trimmed;
+        public int TrimmedLength
+            => Trimmed.Length;
     }
 }

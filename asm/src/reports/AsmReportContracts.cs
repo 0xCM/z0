@@ -11,21 +11,10 @@ namespace Z0
     using System.Linq;
 
     using static zfunc;
-
-    public enum AsmReportKind
-    {
-        None = 0,
-
-        Emissions = 1,
-
-        DataResource = 2,
-
-        Locations = 3
-    }
     
     public interface IAsmReport : IReport
     {
-        AsmReportKind ReportKind {get;}
+
     }
 
     public interface IAsmReport<R> : IAsmReport,  IReport<R>

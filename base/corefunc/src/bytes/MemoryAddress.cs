@@ -12,27 +12,29 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct MemoryAddress : IEquatable<MemoryAddress>, IComparable<MemoryAddress>
+    public readonly struct MemoryAddress : IEquatable<MemoryAddress>, IComparable<MemoryAddress>, IFormattable<MemoryAddress>
     {
         public static MemoryAddress Zero => default;
 
-        public readonly ulong Origin;
-
-        public readonly ushort Local;
+        public readonly ulong Location;
 
         public bool NonZero
         {
             [MethodImpl(Inline)]
-            get => Origin != 0;
+            get => Location != 0;
         }
-        
-        [MethodImpl(Inline)]
-        public static MemoryAddress Define(ulong origin, ulong local = 0)
-            => new MemoryAddress(origin, local);
 
         [MethodImpl(Inline)]
-        public static MemoryAddress Define(IntPtr origin, ulong local = 0)
-            => new MemoryAddress((ulong)origin.ToInt64(), local);
+        public static MemoryAddress Define(long location)
+            => new MemoryAddress((ulong)location);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress Define(ulong location)
+            => new MemoryAddress(location);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress Define(IntPtr location)
+            => new MemoryAddress((ulong)location.ToInt64());
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(ulong src)
@@ -40,7 +42,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ulong(MemoryAddress src)
-            => src.Origin;
+            => src.Location;
+
+        [MethodImpl(Inline)]
+        public static implicit operator long(MemoryAddress src)
+            => (long)src.Location;
 
         [MethodImpl(Inline)]
         public static bool operator==(MemoryAddress a, MemoryAddress b)
@@ -52,51 +58,49 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator<(MemoryAddress a, MemoryAddress b)
-            => a.Origin < b.Origin;
+            => a.Location < b.Location;
 
         [MethodImpl(Inline)]
         public static bool operator>(MemoryAddress a, MemoryAddress b)
-            => a.Origin > b.Origin;
+            => a.Location > b.Location;
 
         [MethodImpl(Inline)]
         public static bool operator<=(MemoryAddress a, MemoryAddress b)
-            => a.Origin <= b.Origin;
+            => a.Location <= b.Location;
 
         [MethodImpl(Inline)]
         public static bool operator>=(MemoryAddress a, MemoryAddress b)
-            => a.Origin >= b.Origin;
+            => a.Location >= b.Location;
             
         [MethodImpl(Inline)]
-        MemoryAddress(ulong absolute, ulong relative)
+        MemoryAddress(ulong absolute)
         {
-            this.Origin = absolute;
-            this.Local = relative == 0 ? (ushort)0 : (ushort)(absolute - relative);
+            this.Location = absolute;
         }
         
-        public string Format(bool hex = true)
-            => hex  ? (Local != 0 ? concat(this.Local.FormatSmallHex(true), spaced(pipe()), this.Origin.FormatAsmHex()) : Origin.FormatAsmHex())
-                    : (Local != 0 ? concat(this.Local.ToString().PadLeft(5, AsciDigits.A0), spaced(pipe()), this.Origin.ToString()) : this.Origin.ToString());
+        public string Format()
+            => Location.FormatAsmHex();
 
         public override string ToString()
             => Format();         
 
         public override int GetHashCode()
-            => Origin.GetHashCode();
+            => Location.GetHashCode();
 
         [MethodImpl(Inline)]
         public bool Equals(MemoryAddress src)
-            => Origin == src.Origin;
+            => Location == src.Location;
 
         public override bool Equals(object obj)
             => obj is MemoryAddress a && Equals(a);                    
 
         [MethodImpl(Inline)]
-        public int CompareTo([AllowNull] MemoryAddress other)
+        public int CompareTo(MemoryAddress other)
             => this == other ? 0 : this < other ? -1 : 1;
 
         [MethodImpl(Inline)]
         public unsafe T* ToPointer<T>()
             where T : unmanaged
-                => (T*)Origin;         
+                => (T*)Location;         
     }
 }

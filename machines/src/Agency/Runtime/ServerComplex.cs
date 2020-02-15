@@ -63,7 +63,7 @@ namespace Z0
             Servers = new SystemServer[]{};
         }
 
-        public void Configure(IEnumerable<ServerConfig> Configs, ISysemAgent EventSink)
+        public void Configure(IEnumerable<ServerConfig> Configs, ISystemAgent EventSink)
         {
             var configs = Configs.ToArray();
             Servers = new SystemServer[configs.Length];
@@ -75,7 +75,7 @@ namespace Z0
 
         SystemServer[] Servers;
 
-        ISysemAgent EventSink;
+        ISystemAgent EventSink;
 
         protected override async void OnStart()
         {

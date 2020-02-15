@@ -17,7 +17,6 @@ partial class zfunc
     /// </summary>
     /// <param name="src">The source sequence</param>
     /// <typeparam name="T">The item type</typeparam>
-    [MethodImpl(Inline)]
     public static IEnumerable<IEnumerable<T>> singletons<T>(IEnumerable<T> src)
         => from item in src select items(item);
 
@@ -35,8 +34,6 @@ partial class zfunc
     /// </summary>
     /// <param name="left">The left sequence</param>
     /// <param name="right">The right sequence</param>
-    /// <returns></returns>
-    [MethodImpl(Inline)]   
     public static (IEnumerator<T> left, IEnumerator<T> right) enumerator<T>(IEnumerable<T> lhs, IEnumerable<T> rhs)
         => (lhs.GetEnumerator(),rhs.GetEnumerator());
 

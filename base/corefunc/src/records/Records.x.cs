@@ -63,14 +63,14 @@ namespace Z0
             sb.Append($"{content}");
         }
 
-        public static void DelimitField(this StringBuilder sb, object content, int pad, char delimiter)
-        {
-            sb.Append(rspace(delimiter));            
+        public static void AppendField(this StringBuilder sb, object content, int pad)
+        {            
             sb.Append($"{content}".PadRight(pad));
         }
 
-        public static void AppendField(this StringBuilder sb, object content, int pad)
-        {            
+        public static void DelimitField(this StringBuilder sb, object content, int pad, char delimiter)
+        {
+            sb.Append(rspace(delimiter));            
             sb.Append($"{content}".PadRight(pad));
         }
 
@@ -78,6 +78,51 @@ namespace Z0
         {
             sb.Append(rspace(delimiter));                        
             sb.Append(content);
+        }
+
+        public static void AppendField<T>(this StringBuilder sb, object content, T pad)
+            where T : unmanaged, Enum
+        {                        
+            sb.Append($"{content}".PadRight(evalue<T,int>(pad)));
+        }
+
+        public static void DelimitField<T>(this StringBuilder sb, object content, T pad, char delimiter)
+            where T : unmanaged, Enum
+        {
+            if(sb == null)
+                throw new Exception("Your string buildler is null!!");
+
+            sb.Append(rspace(delimiter));            
+            sb.Append($"{content}".PadRight(evalue<T,int>(pad)));
+        }
+
+        public static void AppendField<F>(this StringBuilder sb, F content, int pad)
+            where F : ICustomFormattable
+        {            
+            sb.Append($"{content?.Format()}".PadRight(pad));
+        }
+
+        public static void DelimitField<F>(this StringBuilder sb, F content, int pad, char delimiter)
+            where F : ICustomFormattable
+        {
+            sb.Append(rspace(delimiter));            
+            sb.Append($"{content?.Format()}".PadRight(pad));
+        }
+
+        public static void AppendField<F,T>(this StringBuilder sb, F content, T pad)
+            where F : ICustomFormattable
+            where T : unmanaged, Enum
+        {                        
+
+            sb.Append($"{content?.Format()}".PadRight(evalue<T,int>(pad)));
+        }
+
+        public static void DelimitField<F,T>(this StringBuilder sb, F content, T pad, char delimiter)
+            where F : ICustomFormattable
+            where T : unmanaged, Enum
+        {
+            sb.Append(rspace(delimiter));            
+            sb.Append($"{content?.Format()}".PadRight(evalue<T,int>(pad)));
         }
 
     }

@@ -6,15 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
     
     using static zfunc;
 
+    
     public interface IBytePatternSet
     {
+        /// <summary>
+        /// The number of patterns in the set
+        /// </summary>
         int PatternCount {get;}
-
     }
 
    public interface IBytePatternSet<T> : IBytePatternSet

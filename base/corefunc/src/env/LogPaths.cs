@@ -159,6 +159,12 @@ namespace Z0
         public FilePath AsmHexPath(Type t, OpIdentity m)
             => AsmDataDir(t) + AsmHexFile(m);
 
+        public FilePath ParsedEncoding(ApiHost host)
+            => AsmDataRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.Name), FileExtensions.Csv);
+
+        public FilePath DecodedEncoding(ApiHost host)
+            => AsmDataRoot+ FileName.Define(concat(host.Owner.Format(), dot(), host.Name), FileExtensions.Asm);
+
         public FilePath ConfigPath(string name, FileExtension ext = null)
             => Settings.ConfigPath(FileName.Define(name, ext ?? FileExtension.Define("json")));
 
@@ -206,5 +212,6 @@ namespace Z0
             var elapsed = (long) (current - first).TotalMilliseconds;
             return LogPath(area, subdir, basename, ext, elapsed);
         }
+
     }
 }

@@ -41,7 +41,7 @@ namespace Z0
         public string DelimitedText(char delimiter)
         {
             var dst = text();
-            dst.AppendField(Location.Origin.FormatAsmHex(8), LocationPad);
+            dst.AppendField(Location.Location.FormatAsmHex(8), LocationPad);
             dst.DelimitField(Gap.ToString(), GapPad, delimiter);
             dst.DelimitField(Member, delimiter);
             return dst.ToString();

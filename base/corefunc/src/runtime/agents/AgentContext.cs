@@ -14,8 +14,8 @@ namespace Z0
     /// </summary>
     public class AgentContext : Context, IAgentContext
     {
-        ConcurrentDictionary<ulong, ISysemAgent> Agents {get;}
-            = new ConcurrentDictionary<ulong, ISysemAgent>();
+        ConcurrentDictionary<ulong, ISystemAgent> Agents {get;}
+            = new ConcurrentDictionary<ulong, ISystemAgent>();
 
         public AgentContext(IPolyrand random, IAgentEventSink EventLog)
             : base(random)
@@ -25,12 +25,12 @@ namespace Z0
 
         public IAgentEventSink EventLog {get;}
 
-        public void Register(ISysemAgent agent)
+        public void Register(ISystemAgent agent)
         {
             Agents.TryAdd(agent.Identity, agent);
         }
         
-        IEnumerable<ISysemAgent> IAgentContext.Memberhsip 
+        IEnumerable<ISystemAgent> IAgentContext.Memberhsip 
             => Agents.Values;        
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static RootShare;
 
     /// <summary>
     /// Identifies format configurations
@@ -18,6 +18,25 @@ namespace Z0
         
     }
 
+    public interface ICustomFormattable
+    {
+        string Format();
+
+        string Format(IFormatConfig config)
+            => Format();
+    }
+
+
+    /// <summary>
+    /// Characterizes a type that provides intrinsic formatting capability
+    /// </summary>
+    public interface IFormattable<T> : ICustomFormattable
+        where T : IFormattable<T>
+    {
+        
+    }    
+
+    
     /// <summary>
     /// Characterizes a type that transforms objects to a text-based representation
     /// </summary>
@@ -50,14 +69,6 @@ namespace Z0
             => Format(src);
     }
 
-    /// <summary>
-    /// Identifies formattable things to prevent including extant "Format" extension methods that are 
-    /// independent of the formatting infrastructure
-    /// </summary>
-    public interface ICustomFormattable
-    {
-
-    }
 
     /// <summary>
     /// Characterizes a configurable formatter

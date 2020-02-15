@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    
+    using System.Collections.Generic;
+
     using static zfunc;
 
-    public abstract class Context<T> : Context
-        where T : Context<T>
-    {                
-        protected Context(IPolyrand random)
-            : base(random)            
-        {
+    public interface IAgentContext : IContext
+    {
+        IEnumerable<ISystemAgent> Memberhsip {get;}   
 
-        }
-    }       
+        IAgentEventSink EventLog {get;}        
+    }
 }

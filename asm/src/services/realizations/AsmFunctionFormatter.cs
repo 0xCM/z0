@@ -24,19 +24,19 @@ namespace Z0
         public IAsmContext Context {get;}
         
         [MethodImpl(Inline)]
-        public static IAsmInstructionFormatter BaseFormatter(IAsmContext config)
-            => new AsmFunctionFormatter(config);
+        public static IAsmInstructionFormatter BaseFormatter(IAsmContext context)
+            => new AsmFunctionFormatter(context, context.AsmFormat);
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionFormatter Create(IAsmContext context)
-            => new AsmFunctionFormatter(context);
-        
-        AsmFunctionFormatter(IAsmContext context)
+        public static IAsmFunctionFormatter Create(IAsmContext context, AsmFormatConfig config)
+            => new AsmFunctionFormatter(context, config);
+
+        AsmFunctionFormatter(IAsmContext context, AsmFormatConfig config)
         {
             this.Context = context;
-            this.Config = context.AsmFormat;
+            this.Config = config;
         }
-        
+
         /// <summary>
         /// Formats the assembly function detail
         /// </summary>

@@ -187,7 +187,7 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-                => Context.Decoder(false).Decode(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
+                => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
         }
 
         readonly struct AsmV256ImmUnaryCapture<T> : IAsmImmUnaryCapture<T>
@@ -210,7 +210,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-                => Context.Decoder(false).Decode(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
+                => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
         }
         
         readonly struct AsmV128ImmBinaryCapture<T> : IAsmImmBinaryCapture<T>
@@ -232,7 +232,7 @@ namespace Z0
             }
             
             public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-                => Context.Decoder(false).Decode(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
+                => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
         }
 
         readonly struct AsmV256ImmBinaryCapture<T> : IAsmImmBinaryCapture<T>
@@ -255,7 +255,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-                => Context.Decoder(false).Decode(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
+                => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Moniker.WithImm8(imm8), Resolver.@delegate(imm8)));
         } 
     }
 }

@@ -11,6 +11,9 @@ namespace Z0
     
     using static zfunc;
 
+    /// <summary>
+    /// Defines the potential byte parser states
+    /// </summary>
     public enum ByteParserState
     {
         None = 0,
@@ -39,7 +42,5 @@ namespace Z0
 
         public static bool Success(this ByteParserState state)
             => state == ByteParserState.Succeeded;
-
-    }
-
+    }    
 }

@@ -122,8 +122,8 @@ namespace Z0
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionFormatter AsmFormatter(this IAsmContext context)
-            => AsmFunctionFormatter.Create(context);
+        public static IAsmFunctionFormatter AsmFormatter(this IAsmContext context, AsmFormatConfig config = null)
+            => AsmFunctionFormatter.Create(context, config ?? context.AsmFormat);
 
         /// <summary>
         /// Instantiates a contextual archive service that is specialized for an assembly
@@ -164,10 +164,21 @@ namespace Z0
         /// <summary>
         /// Allocates a caller-disposed asm text writer
         /// </summary>
+        /// <param name="context">The source context</param>
         /// <param name="dst">The target path</param>
-        /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
+        [MethodImpl(Inline)]
         public static IAsmFunctionWriter AsmWriter(this IAsmContext context, FilePath dst)
-            => AsmFunctionWriter.Create(context, dst);
+            => AsmFunctionWriter.Create(context, context.AsmFormat, dst);
+
+        /// <summary>
+        /// Allocates a caller-disposed asm text writer with a customized format configuration
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="config">The format configuration</param>
+        /// <param name="dst">The target path</param>
+        [MethodImpl(Inline)]
+        public static IAsmFunctionWriter AsmWriter(this IAsmContext context, AsmFormatConfig config, FilePath dst)
+            => AsmFunctionWriter.Create(context, config, dst);
 
         /// <summary>
         /// Instantiates a contextual catalog-level emitter service

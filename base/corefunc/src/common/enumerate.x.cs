@@ -5,23 +5,20 @@
 namespace  Z0
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;    
-    using System.Diagnostics;
     
     using static zfunc;
     
     partial class xfunc
     {
-
         /// <summary>
-        /// Partitions the source into sub-arrays of a maximum length
+        /// Partitions a source stream into sub-arrays of a maximum length
         /// </summary>
-        /// <param name="src"></param>
-        /// <param name="max"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <param name="src">The source stream</param>
+        /// <param name="max">The maximum sub-array length</param>
+        /// <typeparam name="T">The element type</typeparam>
         public static IEnumerable<T[]> Partition<T>(this IEnumerable<T> src, int max)
         {
             var list = new List<T>();
@@ -65,7 +62,6 @@ namespace  Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="source">The item source</param>
         /// <param name="max">The maximum number of elements per batch</param>
-        /// <returns></returns>
         /// <remarks>
         /// Implementation inspired from https://github.com/morelinq/MoreLINQ
         /// </remarks>
@@ -96,10 +92,10 @@ namespace  Z0
         /// <summary>
         /// Applies the supplied processor to blocks of at most <paramref name="batchSize"/> items at a time yielded from the enumerable
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="items">The items to process</param>
         /// <param name="processor">The processor</param>
         /// <param name="batchSize">The block size</param>
+        /// <typeparam name="T">The element type</typeparam>
         public static void ProcessBatches<T>(this IEnumerable<T> items, Action<IReadOnlyList<T>> processor, int batchSize, Action<int> processed)
         {
             var batch = new List<T>(batchSize);
@@ -216,7 +212,6 @@ namespace  Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The items to search</param>
         /// <param name="default">The replacement value if the sequence is empty</param>
-        [MethodImpl(Inline)]
         public static T FirstOrDefault<T>(this IEnumerable<T> src, T @default)
             => src.Any() ? src.First() : @default;
 
@@ -227,7 +222,6 @@ namespace  Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The items to search</param>
         /// <param name="default">The function invoked to produce a default value</param>
-        [MethodImpl(Inline)]
         public static T FirstOrDefault<T>(this IEnumerable<T> src, Func<T> @default)
             => src.Any() ? src.First() : @default();
 
@@ -237,7 +231,6 @@ namespace  Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The source sequence</param>
         /// <param name="default">The replacement value if the sequence is empty</param>
-        [MethodImpl(Inline)]
         public static T LastOrDefault<T>(this IEnumerable<T> src, T @default = default)
             => src.Any() ? src.Last() : @default;
 
@@ -248,7 +241,6 @@ namespace  Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The source sequence</param>
         /// <param name="default">The function invoked to produce a default value</param>
-        [MethodImpl(Inline)]
         public static T LastOrDefault<T>(this IEnumerable<T> src, Func<T> @default)
             => src.Any() ? src.Last() : @default();
 
@@ -290,7 +282,6 @@ namespace  Z0
         /// </summary>
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The source stream</param>
-        [MethodImpl(Inline)]
         public static T Second<T>(this IEnumerable<T> src)
             => src.Skip(1).Take(1).Single();
 
@@ -299,7 +290,6 @@ namespace  Z0
         /// </summary>
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The source stream</param>
-        [MethodImpl(Inline)]
         public static T Third<T>(this IEnumerable<T> src)
             => src.Skip(2).Take(1).Single();
 
@@ -307,19 +297,9 @@ namespace  Z0
         /// Returns the second term of the sequence if it exists; otherwise returns the default value
         /// </summary>
         /// <typeparam name="T">The sequence item type</typeparam>
-        /// <param name="items"></param>
-        [MethodImpl(Inline)]
-        public static T SecondOrDefault<T>(this IEnumerable<T> items)
-            => items.Take(2).LastOrDefault();
-
-        /// <summary>
-        /// Constructs a sequence of singleton sequences from a sequence of elements
-        /// </summary>
-        /// <param name="src">The source sequence</param>
-        /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]   
-        public static IEnumerable<IEnumerable<T>> Singletons<T>(this IEnumerable<T> src)
-            => singletons(src);
+        /// <param name="src">The source stream</param>
+        public static T SecondOrDefault<T>(this IEnumerable<T> src)
+            => src.Take(2).LastOrDefault();
 
         /// <summary>
         /// Determines whether two streams are identical
@@ -328,24 +308,30 @@ namespace  Z0
         /// <param name="lhs">The first sequence</param>
         /// <param name="rhs">The second sequence</param>
         public static bool Eq<T>(this IEnumerable<T> lhs, IEnumerable<T> rhs)
-            => System.Linq.Enumerable.SequenceEqual(lhs,rhs);            
+            =>  lhs.SequenceEqual(rhs);
 
         /// <summary>
         /// Forces enumerable evaluation
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)] 
         public static T[] Force<T>(this IEnumerable<T> src)
             => src.ToArray();
+
+        /// <summary>
+        /// Constructs a sequence of singleton sequences from a sequence of elements
+        /// </summary>
+        /// <param name="src">The source sequence</param>
+        /// <typeparam name="T">The item type</typeparam>
+        public static IEnumerable<IEnumerable<T>> Singletons<T>(this IEnumerable<T> src)
+            => singletons(src);
 
         /// <summary>
         /// Reduces a stream of element streams to an element stream
         /// </summary>
         /// <param name="src">The element streams</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]   
-        public static IEnumerable<T> Reduce<T>(this IEnumerable<IEnumerable<T>> src)
+        public static IEnumerable<T> Collapse<T>(this IEnumerable<IEnumerable<T>> src)
             => src.SelectMany(y => y);
 
         /// <summary>
@@ -354,7 +340,6 @@ namespace  Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The sequence that will be prependend</param>
         /// <param name="preceding">The items that will be prepended</param>
-        [MethodImpl(Inline)]   
         public static IEnumerable<T> Prepend<T>(this IEnumerable<T> src, params T[] preceding)
             => preceding.Concat(src);
   
@@ -377,12 +362,12 @@ namespace  Z0
         /// Applies the effect to each item in the source
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="effect">The side-effect</param>
+        /// <param name="f">The side-effect</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void Effects<T>(this IEnumerable<T> src, Action<T> effect)
+        public static void Effect<T>(this IEnumerable<T> src, Action<T> f)
         {
             foreach(var item in src)
-                effect(item);
+                f(item);
         }
 
         /// <summary>
@@ -391,20 +376,19 @@ namespace  Z0
         /// </summary>
         /// <param name="lhs">The left stream</param>
         /// <param name="rhs">The right stream</param>
-        /// <param name="effect">The side-effect</param>
+        /// <param name="f">The side-effect</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void Effects<T>(this IEnumerable<T> lhs, IEnumerable<T> rhs, Action<T,T> effect)
+        public static void Effect<T>(this IEnumerable<T> lhs, IEnumerable<T> rhs, Action<T,T> f)
         {
-            var lenum = lhs.GetEnumerator();
-            var renum = rhs.GetEnumerator();
+            var left = lhs.GetEnumerator();
+            var right = rhs.GetEnumerator();
 
-            while(lenum.MoveNext() && renum.MoveNext())
-                effect(lenum.Current, renum.Current);            
-
+            while(left.MoveNext() && right.MoveNext())
+                f(left.Current, right.Current);            
         }
 
         [MethodImpl(Inline)]   
-        public static (IEnumerable<T> x, IEnumerable<T> y) Duplicate<T>(this IEnumerable<T> src)
+        public static ConstPair<IEnumerable<T>> Split<T>(this IEnumerable<T> src)
             => (src, src);
         
         public static IEnumerable<T> Transform<S,T>(this IEnumerable<S> src, params Func<S,T>[] transformers)

@@ -16,6 +16,6 @@ namespace Z0
         public static bool IsStatic(this PropertyInfo p)
             => p.GetGetMethod()?.IsStatic == true 
             || p.GetSetMethod().IsStatic == true;
-
+        
     }
 }

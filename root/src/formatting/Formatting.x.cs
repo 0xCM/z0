@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static RootShare;
 
     /// <summary>
     /// Exposes formatting capabilites via exension methods
@@ -33,14 +33,14 @@ namespace Z0
             => Formatting.format(src, config);
 
         /// <summary>
-        /// Formats a type that reifies the custom formattable marker interface
+        /// Formats a type that provides intrinsic format capability
         /// </summary>
         /// <param name="src">The value to format</param>
         /// <typeparam name="T">The formattable value type</typeparam>
         [MethodImpl(Inline)]
         public static string Format<T>(this T src)
             where T : ICustomFormattable
-                => Formatting.format(src);
+                => src.Format();
 
         /// <summary>
         /// Formats a type that reifies the custom formattable marker interface
@@ -51,6 +51,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format<T>(this T src, IFormatConfig config)
             where T : ICustomFormattable
-                => Formatting.format(src, config);
+                => src.Format(config);
     }
 }

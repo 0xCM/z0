@@ -35,7 +35,7 @@ namespace Z0
             => new AsmImmBinaryCapture(context, src,baseid);
 
         static AsmFunction Decode(IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
-            => decoder.Decode(CaptureServices.Operations.Capture(in exchange, id, src));
+            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src));
 
         readonly struct AsmImmUnaryCapture : IAsmImmCapture
         {

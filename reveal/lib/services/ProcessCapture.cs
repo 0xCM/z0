@@ -48,7 +48,7 @@ namespace Z0
         Option<AsmFunction> CaptureFunction(MethodInfo method)
             => from runtime in GetRuntimeMethod(method)
                from capture in CaptureNative(method, runtime)
-               let f = Decoder.Decode(capture)
+               let f = Decoder.DecodeFunction(capture)
                select f;
 
         [MethodImpl(Inline)]

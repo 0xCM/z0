@@ -119,10 +119,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Includes(MemoryAddress address)
-            => address.Origin >= Start && address.Origin <= End;
+            => address.Location >= Start && address.Location <= End;
 
         [MethodImpl(Inline)]
-        public int CompareTo([AllowNull] MemoryRange other)
+        public int CompareTo(MemoryRange other)
             => this == other ? 0 : this < other ? -1 : 1;
     }
 }

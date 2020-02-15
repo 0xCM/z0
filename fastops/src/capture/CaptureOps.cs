@@ -84,7 +84,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static CaptureOutcome Complete(in CaptureState state, CaptureTermCode tc, long start, long end, int delta)
-            => CaptureOutcome.Define(state, (ulong)start, (ulong)(end + delta), tc);
+            => CaptureOutcome.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
         static CaptureSummary Summary(in CaptureExchange exchange, in CaptureState state, OpIdentity id, CaptureTermCode tc, long start, long end, int delta)
@@ -93,7 +93,7 @@ namespace Z0
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
             var bits = CaptureBits.Define(raw, trimmed);
-            return CaptureSummary.Define(id, outcome, bits);
+            return CaptureSummary.Define(outcome, bits);
         }
 
         [MethodImpl(Inline)]

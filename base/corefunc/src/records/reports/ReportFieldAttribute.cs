@@ -16,9 +16,9 @@ namespace Z0
             this.Name = string.Empty;
         }
 
-        public ReportFieldAttribute(int Width)
+        public ReportFieldAttribute(object Width)
         {
-            this.Width = Width;
+            this.Width = (int)Convert.ChangeType(Width, typeof(int));
             this.Name = string.Empty;
         }
 

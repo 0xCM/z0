@@ -27,7 +27,7 @@ namespace Z0
             var hearbeat = PulseEmitter.Define(Context, 
                 ServiceIdentityPool.NextAgentId(ServerId), 
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));            
-            this.Worker = ServerProcess.Define(Context, ServerId, Config.CoreNumber, new ISysemAgent[]{hearbeat});
+            this.Worker = ServerProcess.Define(Context, ServerId, Config.CoreNumber, new ISystemAgent[]{hearbeat});
         }
 
         protected override async void OnStart()

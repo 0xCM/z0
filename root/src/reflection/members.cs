@@ -77,8 +77,6 @@ namespace Z0
         /// <param name="t">The target attribute type</param>
         public static bool Attributed(this MemberInfo m, Type t)
             => Attribute.IsDefined(m,t);
-
-
     }
 
 }

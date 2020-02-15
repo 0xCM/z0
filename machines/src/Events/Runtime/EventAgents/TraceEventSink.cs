@@ -14,7 +14,7 @@ namespace Z0
 
     public sealed class TraceEventSink : SystemAgent
     {        
-        public static ISysemAgent Define(AgentContext Context, AgentIdentity Identity)
+        public static ISystemAgent Define(AgentContext Context, AgentIdentity Identity)
             => new TraceEventSink(Context, Identity);
 
         TraceEventSink(AgentContext Context, AgentIdentity Identity)
