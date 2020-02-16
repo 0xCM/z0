@@ -9,9 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.ComponentModel;
-    using System.Collections.Concurrent;
 
     using static RootShare;
     
@@ -76,7 +73,56 @@ namespace Z0
         /// <param name="m">The member to test</param>
         /// <param name="t">The target attribute type</param>
         public static bool Attributed(this MemberInfo m, Type t)
-            => Attribute.IsDefined(m,t);
-    }
+            => System.Attribute.IsDefined(m, t);
 
+
+        /// Selects the members with a particular name
+        /// </summary>
+        /// <param name="src">The members to examine</param>
+        /// <param name="name">The name to match</param>
+        public static IEnumerable<T> Attributed<T>(this IEnumerable<T> src, Type attrib)
+            where T : MemberInfo
+                => src.Where(m => m.Attributed(attrib));
+
+        /// <summary>
+        /// Selects the members with a name that exists within a supplied set
+        /// </summary>
+        /// <param name="src">The members to examine</param>
+        /// <param name="name">The name to match</param>
+        public static IEnumerable<T> WithName<T>(this IEnumerable<T> src, HashSet<string> names)
+            where T : MemberInfo
+                => src.Where(x => names.Contains(x.Name));
+
+        /// <summary>
+        /// Selects the members with names that contain the supplied search field
+        /// </summary>
+        /// <param name="src">The members to examine</param>
+        /// <param name="search">The name to match</param>
+        public static IEnumerable<T> WithNameLike<T>(this IEnumerable<T> src, string search)
+            where T : MemberInfo
+                => src.Where(x => x.Name.Contains(search)); 
+
+        /// <summary>
+        /// Selects the members with names that contain the supplied search field
+        /// </summary>
+        /// <param name="src">The members to examine</param>
+        /// <param name="search">The name to match</param>
+        public static IEnumerable<T> WithNameLike<T>(this IEnumerable<T> src, params string[] search)
+            where T : MemberInfo
+            => from m in src
+                where search.Any(match => m.Name.Contains(match))
+                select m;
+
+        /// <summary>
+        /// Selects the members with names that contain the supplied search field
+        /// </summary>
+        /// <param name="src">The members to examine</param>
+        /// <param name="search">The name to match</param>
+        public static IEnumerable<T> WithNameStartingWith<T>(this IEnumerable<T> src, params string[] search)
+            where T : MemberInfo
+            => from m in src
+                where search.Any(match => m.Name.StartsWith(match))
+                select m;    
+
+    }
 }

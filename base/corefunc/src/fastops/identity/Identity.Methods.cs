@@ -47,10 +47,9 @@ namespace Z0
 
         public static string identify(ParameterInfo p)
         {
-            var pt = p.ParameterType;
             if(!p.IsParametric())
             {
-                var id = Identity.identify(pt.EffectiveType());
+                var id = Identity.identify(p.ParameterType.EffectiveType());
                 if(!id.IsEmpty)
                     return concat(id.Identifier, p.Variance().Format());                
             }

@@ -79,6 +79,5 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ImmediateParameters(this MethodInfo m)
             => m.GetParameters().Where(p => p.Attributed<ImmAttribute>()).Select(p => p.ParameterType);
-
    }
 }

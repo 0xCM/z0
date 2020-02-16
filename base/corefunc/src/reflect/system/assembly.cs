@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
@@ -16,37 +13,13 @@ namespace Z0
     public static partial class Reflections
     {
         /// <summary>
-        /// Convenience accessor for the assembly's version
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        public static Version AssemblyVersion(this Assembly a)
-            => a.GetName().Version;
-
-        /// <summary>
-        /// Determines whether an assembly has an attribute of a given type
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        /// <typeparam name="T">The attribute type</typeparam>
-        public static bool HasAttribute<T>(this Assembly a) 
-            where T : Attribute
-                => System.Attribute.IsDefined(a, typeof(T));
-
-        /// <summary>
-        /// Gets the identified assembly attribute if present, otherwise NULL
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        /// <typeparam name="A">The type of attribute for which to search</typeparam>
-        public static A GetAttribute<A>(this Assembly a) where A : Attribute
-            => (A)System.Attribute.GetCustomAttribute(a, typeof(A));
-
-        /// <summary>
         /// Gets the identified assembly attribute if present, otherwise None
         /// </summary>
         /// <param name="a">The source assembly</param>
         /// <typeparam name="A">The type of attribute for which to search</typeparam>
         public static Option<A> TryGetAttribute<A>(this Assembly a) 
             where A : Attribute
-                =>  a.GetAttribute<A>();
+                =>  a.Attribute<A>();
 
         /// <summary>
         /// Gets the value of <see cref="AssemblyProductAttribute"/> if it exists
@@ -74,8 +47,6 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source assembly</param>
         public static Option<string> DefaultAlias(this Assembly a)
-            => from x in a.TryGetAttribute<AssemblyDefaultAliasAttribute>() select x.DefaultAlias;
-        public static T Reification<T>(this Type src, params object[] args)
-            => (T)Activator.CreateInstance(src, args);
+            => from x in a.TryGetAttribute<AssemblyDefaultAliasAttribute>() select x.DefaultAlias;        
     }
 }

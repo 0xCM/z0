@@ -5,17 +5,37 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.ComponentModel;
-    using System.Collections.Concurrent;
+    using System.Linq;
 
     using static RootShare;
     
     partial class RootCollections
     {
+
+        /// <summary>
+        /// Creates a dictionary from a span using the element indices as keys
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static IDictionary<int,T> ToDictionary<T>(this ReadOnlySpan<T> src)
+        {
+            var dst = new Dictionary<int,T>(src.Length);
+            for(var i = 0; i< src.Length; i++)
+                dst[i] = src[i];
+            return dst;
+        }
+
+        /// <summary>
+        /// Creates a dictionary from a span using the element indices as keys
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static IDictionary<int,T> ToDictionary<T>(this Span<T> src)        
+            => src.ReadOnly().ToDictionary();
+
         /// <summary>
         /// Constructs a mutable dictionary from a sequence of key-value pairs
         /// </summary>

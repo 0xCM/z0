@@ -32,15 +32,6 @@ namespace Z0
         public bool IsFloat
             => Numeric.floating(Value);
 
-        public NumericClass Class
-        {
-            [MethodImpl(Inline)]
-            get => 
-                  IsUnsignedInt ? NumericClass.Unsigned 
-                : IsSignedInt ? NumericClass.Signed 
-                : IsFloat ? NumericClass.Float 
-                : NumericClass.None;
-        }
 
         public FixedWidth Width
         {

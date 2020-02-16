@@ -62,16 +62,16 @@ namespace Z0
         public static ReadOnlySpan<byte> Data64u(int i0, int i1)
             => Bytes64u.Slice(i0*8, (i1 - i0)*8);
 
-        public static IEnumerable<Pair<int,ulong>> All
+        public static IEnumerable<(int i, ulong vallue)> All
             => typeof(Pow2M1).LiteralValues<ulong>();
 
         [MethodImpl(Inline)]
-        public static IEnumerable<Pair<int,T>> Values<T>()
+        public static IEnumerable<(int i, T value)> Values<T>()
             where T : unmanaged
                 => values_u<T>();
 
         [MethodImpl(Inline)]
-        static IEnumerable<Pair<int,T>> values_u<T>()
+        static IEnumerable<(int,T)> values_u<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))                
@@ -87,7 +87,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static IEnumerable<Pair<int,T>> values_i<T>()
+        static IEnumerable<(int,T)> values_i<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))                

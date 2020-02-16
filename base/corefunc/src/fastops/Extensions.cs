@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
-    using System.ComponentModel;
 
     using static zfunc;
     
@@ -169,5 +168,37 @@ namespace Z0
                     throw unsupported(kind);
             }
         }
+
+        /// <summary>
+        /// Determines whether a type is parametric over the natural numbers
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsNatSpan(this Type t)
+        {
+            var query =    
+                from def in t.GenericDefinition() 
+                where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
+                select def;
+
+            return query.IsSome();            
+        }
+
+        /// <summary>
+        /// Classifies a type according to whether it is a span, a readonly span, or otherwise
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static SpanKind SpanKind(this Type t)
+            => t.GenericDefinition() == typeof(Span<>) ? Z0.SpanKind.Mutable
+              : t.GenericDefinition() == typeof(ReadOnlySpan<>) ? Z0.SpanKind.Immutable
+              : 0;
+
+        /// <summary>
+        /// Determines whether a type is parametric over the natural numbers
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsSpan(this Type t)
+            => t.SpanKind().IsSome();
     }
 }

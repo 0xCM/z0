@@ -23,16 +23,6 @@ namespace Z0
         public static ScalarIdentity Scalar(NumericKind kind)
             => ScalarIdentity.Define(kind);
 
-        /// <summary>
-        /// Defines a segmented type identity
-        /// </summary>
-        /// <param name="indicator">Classifies the segmented type</param>
-        /// <param name="typewidth">The total bit-width of the type</param>
-        /// <param name="segkind">The segment kind</param>
-        [MethodImpl(Inline)]
-        public static SegmentedIdentity Segmented(char indicator, FixedWidth typewidth, NumericKind segkind)
-            => SegmentedIdentity.Define(indicator, typewidth,segkind);
-
         [MethodImpl(Inline)]
         public static TypeIdentity Define(string identifier)
             => new TypeIdentity(identifier);

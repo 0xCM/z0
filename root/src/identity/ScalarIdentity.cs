@@ -22,6 +22,10 @@ namespace Z0
             => src.Identifier;
 
         [MethodImpl(Inline)]
+        public static implicit operator TypeIdentity(ScalarIdentity src)
+            => src.AsTypeIdentity();
+
+        [MethodImpl(Inline)]
         public static bool operator==(ScalarIdentity a, ScalarIdentity b)
             => a.Equals(b);
 
@@ -40,9 +44,14 @@ namespace Z0
 
         public NumericKind NumericKind {get;}           
 
+
+        [MethodImpl(Inline)]
+        public TypeIdentity AsTypeIdentity()
+            => TypeIdentity.Define(Identifier);
+
         [MethodImpl(Inline)]
         public bool Equals(ScalarIdentity src)
-             => IdentityEquals(this, src);
+            => IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(IIdentity other)

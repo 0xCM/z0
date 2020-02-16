@@ -100,6 +100,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FullDisplayName(this MethodInfo src)
             => $"{src.DeclaringType.DisplayName()}/{src.DisplayName()}";
+
+        /// <summary>
+        /// Gets the display name specified by the eponymous attribute, if attributed; otherwise, returns the reflected property name
+        /// </summary>
+        /// <param name="src">The source property</param>
+        public static string DisplayName(this PropertyInfo src)
+            => (from a in src.CustomAttribute<DisplayNameAttribute>() 
+                 select a.DisplayName).ValueOrElse(() => src.Name);
+
     }
 
 }

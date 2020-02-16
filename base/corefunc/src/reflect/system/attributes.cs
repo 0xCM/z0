@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
     using static zfunc;
     using static ReflectionFlags;
@@ -21,8 +20,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="A">The attribute type</typeparam>
         /// <param name="m">The member</param>
-        public static Option<A> CustomAttribute<A>(this MemberInfo m) where A : Attribute
-            => m.GetCustomAttribute<A>();
+        public static Option<A> CustomAttribute<A>(this MemberInfo m) 
+            where A : Attribute
+                => m.GetCustomAttribute<A>();
 
         /// <summary>
         /// Retrieves the value of an attached attribute paired with the subject
@@ -32,7 +32,6 @@ namespace Z0
         public static Pair<MemberInfo,A> Attribution<A>(this MemberInfo m)
             where A : Attribute
                 => (m,(A)m.GetCustomAttribute(typeof(A)));
-
 
         /// <summary>
         /// Retrieves type attribution values from a stream of types
@@ -46,49 +45,6 @@ namespace Z0
                 select (type, attrib != null
                         ? some(attrib)
                         : none<A>())).ToReadOnlyDictionary();
-
-        /// <summary>
-        /// Retrieves the type's properties together with applied attributes
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="t">The type to examine</param>
-        public static Pairs<PropertyInfo, A> PropertyAttributions<A>(this Type t) 
-            where A : Attribute
-                => Pairs.Define(
-                    from p in t.DeclaredProperties()
-                    where p.Attributed<A>() 
-                    let attrib = p.GetCustomAttribute<A>()
-                    select (p,attrib)
-                    );
-
-        /// <summary>
-        /// Retrieves the type's fields together with applied attributes
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="t">The type to examine</param>
-        public static Pairs<FieldInfo, A> FieldAttributions<A>(this Type t) 
-            where A : Attribute
-                => Pairs.Define(
-                    from p in t.DeclaredFields()
-                    where p.Attributed<A>() 
-                    let attrib = p.GetCustomAttribute<A>()
-                    select (p,attrib)
-                    );
-
-        /// <summary>
-        /// Retrieves the attribution index for the identified methods declared by the type
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="t">The type to examine</param>
-        /// <param name="InstanceType">The member instance type</param>
-        public static Pairs<MethodInfo, A> MethodAttributions<A>(this Type t)
-            where A : Attribute
-                => Pairs.Define(
-                    from p in t.DeclaredMethods()
-                    where p.Attributed<A>() 
-                    let attrib = p.GetCustomAttribute<A>()
-                    select (p,attrib)
-                    );
 
         /// <summary>
         /// Gets the type attributions for the specified assembly
@@ -111,7 +67,5 @@ namespace Z0
             }
             return attributions;
         }
-
     }
-
 }

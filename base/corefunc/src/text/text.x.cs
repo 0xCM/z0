@@ -25,14 +25,6 @@ namespace Z0
             => char.IsDigit(c);
 
         /// <summary>
-        /// Determines whether the source character is a hex digit
-        /// </summary>
-        /// <param name="c">The source character</param>
-        [MethodImpl(Inline)]
-        public static bool IsHexDigit(this char c)
-            => Hex.isdigit(c);
-
-        /// <summary>
         /// Determines whether the source character is a binary digit, i.e. either '0' or '1'
         /// </summary>
         /// <param name="c">The source character</param>
@@ -71,6 +63,7 @@ namespace Z0
         public static bool EnclosedBy(this string s, char left, char right)
             => String.IsNullOrEmpty(s) ? false : s[0] == left && s.Last() == right;
 
+
         /// <summary>
         /// Joins a sequence of source characters with optional interspersed separator
         /// </summary>
@@ -84,102 +77,6 @@ namespace Z0
                 return new string(chars.Intersperse(sep.Value).ToSpan());                        
         }
 
-        /// <summary>
-        /// Formats the source as a braced list
-        /// </summary>
-        /// <param name="src">The source sequence</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Embrace<T>(this IEnumerable<T> src)
-            => embrace(string.Join(',',src));
-
-        /// <summary>
-        /// Partitions a string into two part, predicated on the first occurrence of a specified marker
-        /// </summary>
-        /// <param name="s">The string to partition</param>
-        /// <param name="marker">The demarcator</param>
-        /// <param name="trim">Whether to trim the parts prior to packing the resulting tuple</param>
-        public static (string Left, string Right) Split(this string s, string marker, bool trim = true)
-            => (ifTrue(trim, s.LeftOf(marker),x => x.Trim()), 
-                ifTrue(trim, s.RightOf(marker),x => x.Trim()));
- 
-        /// <summary>
-        /// Formats a sequence of values between braces 
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <param name="sep">The item separator</param>
-        /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Embrace<T>(this IEnumerable<T> src, string sep = ", ")
-            => embrace(string.Join(sep, src.Select(x => x.ToString())).TrimEnd());
-
-        /// <summary>
-        /// Formats a sequence of values between parentheses 
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <param name="sep">The item separator</param>
-        /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Parenthetical<T>(this IEnumerable<T> src, string sep = ", ")
-            => parenthetical(string.Join(sep, src.Select(x => x.ToString())).TrimEnd());
-
-        /// <summary>
-        /// Formats a sequence of values between brackets 
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <param name="sep">The item separator</param>
-        /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Bracket<T>(this IEnumerable<T> src, string sep = ", ")
-            => bracket(string.Join(sep, src.Select(x => x.ToString())).TrimEnd());
-
-        /// <summary>
-        /// Encloses a string between left and right brackets
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static string Bracket(this string src)
-            => bracket(src);
- 
-        [MethodImpl(Inline)]   
-        public static ReadOnlySpan<char> Concat(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
-            => lhs.Format() + rhs.Format();
-
-        /// <summary>
-        /// Creates a new string from the first n - 1 characters of a string of length n
-        /// </summary>
-        /// <param name="s">The source string</param>
-        [MethodImpl(Inline)]
-        public static string RemoveLast(this string s)
-            => string.IsNullOrWhiteSpace(s) ? string.Empty : s.Substring(0, s.Length - 1);
-
-        /// <summary>
-        /// Adds a variant of split that is inexplicably missing from System.String
-        /// </summary>
-        /// <param name="s">The string to split</param>
-        /// <param name="delimiter">The delimiter</param>
-        [MethodImpl(Inline)]
-        public static IReadOnlyList<string> Split(this string s, string delimiter)
-            => s.Split(array(delimiter), StringSplitOptions.RemoveEmptyEntries);
-
-
-        /// <summary>
-        /// Removes a substring from the source string if it exists
-        /// </summary>
-        /// <param name="s">The string to manipulate</param>
-        /// <param name="substring">The substring to remove</param>
-        public static string Remove(this string s, string substring)
-            => s.Replace(substring,string.Empty);
-
-        /// <summary>
-        /// Removes all occurences of a substring from the source strings where extant
-        /// </summary>
-        /// <param name="s">The strings to manipulate</param>
-        /// <param name="substring">The substring to remove</param>
-        public static IEnumerable<string> RemoveSubstring(this IEnumerable<string> src, string substring)
-            => from s in src
-                let r = s.Remove(substring)
-                select r;
-        
         /// <summary>
         /// Searches for the last index of a specified character in a string
         /// </summary>
@@ -359,26 +256,6 @@ namespace Z0
             else
                 result = System.Convert.ChangeType(groupValue, valueType);
             return (T)result;
-        }
-
-        public static IEnumerable<string> Partition(this string src, int max)
-        {
-            Span<char> buffer = stackalloc char[max];
-            for(int i = 0, j=0; i< src.Length; i++, j++)
-            {
-                if(j < max)
-                    buffer[j] = src[i];
-                else
-                {
-                    yield return new string(buffer);
-                    buffer = stackalloc char[max];
-                    j = 0;
-                    buffer[j] = src[i];
-                }
-            }
-            var trim = buffer.Trim();
-            if(trim.Length != 0)
-                yield return new string(trim);                
         }
 
         [MethodImpl(Inline)]

@@ -12,14 +12,14 @@ namespace Z0
 
     public interface IParser
     {
-        object Parse(string text);
+        ParseResult Parse(string text);
     }    
 
     public interface IParser<T> : IParser
     {
-        new T Parse(string text);
+        new ParseResult<T> Parse(string text);
 
-        object IParser.Parse(string text)
+        ParseResult IParser.Parse(string text)
             => Parse(text);
     }
 }

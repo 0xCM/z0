@@ -245,26 +245,6 @@ namespace  Z0
             => src.Any() ? src.Last() : @default();
 
         /// <summary>
-        /// Splits the input into two parts according to a supplied predicate
-        /// </summary>
-        /// <typeparam name="T">The item type</typeparam>
-        /// <param name="items">The items to evaluate</param>
-        /// <param name="predicate">The predicate used in the evaluation</param>
-        /// <returns>A 2-tuple whose first member reflects the items that evaluated to false 
-        /// and whose second member reflects the items that evaluated to true</returns>
-        public static (IEnumerable<T> @false, IEnumerable<T> @true) Split<T>(this IEnumerable<T> items, Func<T, bool> predicate)
-        {
-            var f = new List<T>();
-            var t = new List<T>();
-            foreach (var item in items)
-                if (predicate(item))
-                    t.Add(item);
-                else
-                    f.Add(item);
-            return (f, t);
-        }
-
-        /// <summary>
         /// Applies a function to the first item in the list that satisfies the predicate if such an item exists.
         /// If no such item exists, the function is applied to the default value of the item
         /// </summary>
@@ -308,7 +288,7 @@ namespace  Z0
         /// <param name="lhs">The first sequence</param>
         /// <param name="rhs">The second sequence</param>
         public static bool Eq<T>(this IEnumerable<T> lhs, IEnumerable<T> rhs)
-            =>  lhs.SequenceEqual(rhs);
+            => lhs.SequenceEqual(rhs);
 
         /// <summary>
         /// Forces enumerable evaluation
@@ -342,21 +322,6 @@ namespace  Z0
         /// <param name="preceding">The items that will be prepended</param>
         public static IEnumerable<T> Prepend<T>(this IEnumerable<T> src, params T[] preceding)
             => preceding.Concat(src);
-  
-        /// <summary>
-        /// Interleaves a specified value between each element of the source
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <param name="x">The value to interleave</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static IEnumerable<T> Intersperse<T>(this IEnumerable<T> src, T x)
-        {
-            foreach(var item in src)
-            {
-                yield return item;
-                yield return x;
-            }
-        }
 
         /// <summary>
         /// Applies the effect to each item in the source
@@ -387,8 +352,7 @@ namespace  Z0
                 f(left.Current, right.Current);            
         }
 
-        [MethodImpl(Inline)]   
-        public static ConstPair<IEnumerable<T>> Split<T>(this IEnumerable<T> src)
+        public static (IEnumerable<T> left, IEnumerable<T> right) Fork<T>(this IEnumerable<T> src)
             => (src, src);
         
         public static IEnumerable<T> Transform<S,T>(this IEnumerable<S> src, params Func<S,T>[] transformers)

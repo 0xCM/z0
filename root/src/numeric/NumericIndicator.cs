@@ -82,13 +82,6 @@ namespace Z0
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline)]
         public static string Format(this NumericIndicator src)
-            => src.Character().ToString();
- 
-        [MethodImpl(Inline)]
-        public static NumericClass ToNumericClass(this NumericIndicator src)
-            =>    src.IsSigned() ? NumericClass.Signed 
-                : src.IsUnsigned() ? NumericClass.Unsigned 
-                : src.IsFloat() ? NumericClass.Float 
-                : NumericClass.None; 
+            => src.Character().ToString(); 
     }
 }

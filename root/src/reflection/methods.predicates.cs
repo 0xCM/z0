@@ -62,7 +62,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsFunction(this MethodInfo m)
             => m.ReturnType != typeof(void);
-
         
         /// <summary>
         /// Determines whether a method is a function with specified arity
@@ -78,7 +77,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsEmitter(this MethodInfo m)
             => m.IsFunction() && m.HasArity(0);
-
 
         /// <summary>
         /// Determines whether a method defines an operator over a (common) domain

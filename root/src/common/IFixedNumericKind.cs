@@ -17,7 +17,6 @@ namespace Z0
 
     }
 
-
     /// <summary>
     /// Characterizes a reified numeric kind with which a fixed type is associated
     /// </summary>

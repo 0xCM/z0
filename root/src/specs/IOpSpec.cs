@@ -26,28 +26,4 @@ namespace Z0
         /// </summary>
         MethodInfo Subject {get;}    
     }
-
-    public interface IDirectOpSpec : IOpSpec
-    {
-        MethodInfo ConcreteMethod {get;}        
-
-        MethodInfo IOpSpec.Subject
-            => ConcreteMethod;
-    }
-
-    public interface IGenericOpSpec : IOpSpec
-    {
-        MethodInfo MethodDefinition {get;}        
-
-        MethodInfo IOpSpec.Subject
-            => MethodDefinition;
-    }
-
-    public interface IClosedOpSpec : IOpSpec
-    {
-        MethodInfo ClosedMethod {get;}        
-
-        MethodInfo IOpSpec.Subject
-            => ClosedMethod;
-    }
 }

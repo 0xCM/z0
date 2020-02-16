@@ -35,5 +35,8 @@ namespace Z0
 
             return (from kvp in index where kvp.Value > 1 select kvp.Key).ToArray();
         }
+
+        public static ScalarIdentity ToScalarIdentity(this NumericKind src)
+            => ScalarIdentity.Define(src);
     }
 }

@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
     using static zfunc;
     using static ReflectionFlags;
@@ -71,27 +70,11 @@ namespace Z0
                 ? declarer.GetMethod(name, bindingAttr: AnyVisibilityOrInstanceType, binder: null, types: paramTypes, modifiers: null)
                 : declarer.GetMethod(name, AnyVisibilityOrInstanceType);
 
-        /// <summary>
-        /// Selects the concrete (not abstract) methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Concrete(this IEnumerable<MethodInfo> src)
-            => src.Where(t => !t.IsAbstract);
-
-        /// <summary>
-        /// Selects the methods from a stream where the name is NOT special
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> NonSpecial(this IEnumerable<MethodInfo> src)
-            => src.Where(t => !t.IsSpecialName && !t.Name.Contains(AsciSym.Pipe) && !t.Name.Contains(AsciSym.Lt));
-
-
         [MethodImpl(Inline)]
         public static IntPtr Jit(this MethodInfo src)            
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
             return src.MethodHandle.GetFunctionPointer();
         }
-
     }
 }

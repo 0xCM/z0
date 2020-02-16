@@ -30,6 +30,5 @@ namespace Z0
         }
         
         FixedWidth IKind<FixedWidth>.Classifier => (FixedWidth)bitsize<F>();
-
     }
 }

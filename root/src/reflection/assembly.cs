@@ -8,10 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.ComponentModel;
-    using System.Collections.Concurrent;
 
     using static RootShare;
     
@@ -25,6 +21,31 @@ namespace Z0
             => a?.GetName()?.Name ?? string.Empty;
 
         /// <summary>
+        /// Convenience accessor for the assembly's version
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        public static Version AssemblyVersion(this Assembly a)
+            => a.GetName().Version;
+
+        /// <summary>
+        /// Determines whether an assembly has an attribute of a given type
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        /// <typeparam name="T">The attribute type</typeparam>
+        public static bool Attributed<T>(this Assembly a) 
+            where T : Attribute
+                => System.Attribute.IsDefined(a, typeof(T));
+
+        /// <summary>
+        /// Gets the identified assembly attribute if present, otherwise NULL
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        /// <typeparam name="A">The type of attribute for which to search</typeparam>
+        public static A Attribute<A>(this Assembly a) 
+            where A : Attribute
+                => (A)System.Attribute.GetCustomAttribute(a, typeof(A));
+
+        /// <summary>
         /// Gets the type attributions for the specified assembly
         /// </summary>
         /// <param name="a">The source assembly</param>
@@ -34,7 +55,7 @@ namespace Z0
         {
             var f = pred ?? (t => true);
             var q = from t in a.GetTypes()
-                    where Attribute.IsDefined(t, typeof(A)) && f(t)
+                    where System.Attribute.IsDefined(t, typeof(A)) && f(t)
                     let attrib = t.GetCustomAttribute<A>()
                     select new
                     {

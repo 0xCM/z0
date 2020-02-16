@@ -49,7 +49,6 @@ namespace Z0
         public static NT NumericType(this NK src)
             => NT.From(src);
 
-
         /// <summary>
         /// Computes the primal types identified by a specified kind
         /// </summary>

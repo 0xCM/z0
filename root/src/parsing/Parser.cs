@@ -10,9 +10,9 @@ namespace Z0
 
     using static RootShare;
 
-    public delegate object Parse(string text);
+    public delegate ParseResult Parse(string text);
 
-    public delegate T Parse<T>(string text);
+    public delegate ParseResult<T> Parse<T>(string text);
     
     public readonly struct Parser<T> : IParser<T>
     {        
@@ -27,7 +27,9 @@ namespace Z0
         {
             this.parse = parse;
         }
-        public T Parse(string text)
+        
+        [MethodImpl(Inline)]
+        public ParseResult<T> Parse(string text)
             => parse(text);
     }
 }

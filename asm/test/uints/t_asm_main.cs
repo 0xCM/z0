@@ -30,8 +30,12 @@ namespace Z0
             //archive_context(buffers);            
             //iter(hosts, EncodingParser.Parse);            
 
-            var workflow = Context.CaptureWorkflow();
-            workflow.Execute();
+            const string uritext = "hex://logix/LogicEngine?eval#eval_vcmp_expr128_g[8u]()";
+            var uri = OpUri.Parse(uritext);
+            print(uri);
+
+            // var workflow = Context.CaptureWorkflow();
+            // workflow.Execute();
         }
 
         static void buffer_client(IAsmContext context)

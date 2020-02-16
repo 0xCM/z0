@@ -15,64 +15,6 @@ namespace Z0
 
     public static partial class SpanExtend
     {
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this Span<T> src, Span<T> dst, int offset)
-            => src.CopyTo(dst.Slice(offset));
-
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this ReadOnlySpan<T> src, Span<T> dst, int offset)
-            => src.CopyTo(dst.Slice(offset));
-
-        /// <summary>
-        /// Forms a new span by the concatenation [head,tail]
-        /// </summary>
-        /// <param name="head">The first span</param>
-        /// <param name="tail">The second span</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> Concat<T>(this ReadOnlySpan<T> head, ReadOnlySpan<T> tail)
-        {
-            Span<T> dst = new T[head.Length + tail.Length];
-            head.CopyTo(dst);
-            tail.CopyTo(dst, head.Length);
-            return dst;
-        }
-
-        /// <summary>
-        /// Forms a new span by the concatenation [head,tail]
-        /// </summary>
-        /// <param name="head">The first span</param>
-        /// <param name="tail">The second span</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> Concat<T>(this Span<T> head, ReadOnlySpan<T> tail)
-            => head.ReadOnly().Concat(tail);
-
-        /// <summary>
-        /// Presents a mutable span as a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> ReadOnly<T>(this Span<T> src)
-            => src;
-
-
-        /// <summary>
-        /// Fills an allocated span from a sequence
-        /// </summary>
-        /// <param name="src">The source sequence</param>
-        /// <param name="dst">The target spn</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static Span<T> StreamTo<T>(this IEnumerable<T> src, Span<T> dst)
-        {
-            var i = 0;
-            var e = src.GetEnumerator();
-            while(e.MoveNext() && i < dst.Length)
-                dst[i++] = e.Current;
-            return dst;
-        }            
-
         /// <summary>
         /// Fills a span of natural length with streamed elements
         /// </summary>
@@ -84,35 +26,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Take(nati<N>()).StreamTo(dst.Data);
-
-
-        /// <summary>
-        /// Creates a new span by interposing a specified element between each element of an existing span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="x">The value to place between each element in the new span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static Span<T> Intersperse<T>(this ReadOnlySpan<T> src, T x)
-        {
-            Span<T> dst = new T[src.Length*2 - 1];
-            for(int i=0, j=0; i<src.Length; i++, j+= 2)
-            {
-                dst[j] = src[i];                
-                if(i != src.Length - 1)
-                    dst[j + 1] = x;                    
-            }
-            return dst;
-        }
-
-        /// <summary>
-        /// Creates a new span by interposing a specified element between each element of an existing span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="x">The value to place between each element in the new span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]        
-        public static Span<T> Intersperse<T>(this Span<T> src, T x)
-            => src.ReadOnly().Intersperse(x);
 
         /// <summary>
         /// Evaluates whether two spans have identical content
@@ -205,7 +118,6 @@ namespace Z0
                     return dst;
             }                        
         }
-
 
         /// <summary>
         /// Produces a reversed span from a readonly span

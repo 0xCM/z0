@@ -62,7 +62,7 @@ namespace Z0
         /// <typeparam name="A">The attribute type</typeparam>
         public static IEnumerable<Type> Attributed<A>(this IEnumerable<Type> src)
             where A : Attribute
-                => src.Where(t => Attribute.IsDefined(t, typeof(A)));
+                => src.Where(t => System.Attribute.IsDefined(t, typeof(A)));
 
         /// <summary>
         /// Selects the types from a specified namespace

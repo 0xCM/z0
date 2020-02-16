@@ -11,63 +11,11 @@ namespace Z0
 
     using static zfunc;
 
-    public enum SpanKind
-    {
-        None = 0,
-
-        Mutable = 1,
-
-        Immutable = 2
-    }
-
     partial class Identity
     {
-        /// <summary>
-        /// Classifies a type according to whether it is a span, a readonly span, or otherwise
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static SpanKind SpanKind(this Type t)
-            => t.GenericDefinition() == typeof(Span<>) ? Z0.SpanKind.Mutable
-              : t.GenericDefinition() == typeof(ReadOnlySpan<>) ? Z0.SpanKind.Immutable
-              : 0;
-
-
-        /// <summary>
-        /// Determines whether a type is parametric over the natural numbers
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static bool IsNatSpan(this Type t)
-        {
-            var query =    
-                from def in t.GenericDefinition() 
-                where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
-                select def;
-
-            return query.IsSome();            
-        }
-
-        /// <summary>
-        /// Determines whether a type is parametric over the natural numbers
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSpan(this Type t)
-            => t.SpanKind().IsSome();
-
-
         [MethodImpl(Inline)]
         public static TypeIdentity identify(Type t)
             => provider(t).DefineIdentity(t);
-
-        /// <summary>
-        /// Produces an identifier of the form {width(nk)}{u | i | f} for a numeric type
-        /// </summary>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static TypeIdentity identify(NumericKind nk)
-            => TypeIdentity.Define(nk.Format());
 
         [MethodImpl(Inline)]
         public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
@@ -115,105 +63,90 @@ namespace Z0
             return none<SegmentedIdentity>();                
         }
 
-        /// <summary>
-        /// Retrieves a cached identity provider, if found; otherwise, creates and caches the identity provider for the source type
-        /// </summary>
-        /// <param name="t">The source type</param>
-        [MethodImpl(Inline)]
-        static ITypeIdentityProvider provider(Type src)
-            => IdentityProviders.find(src, CreateProvider);
-
-        /// <summary>
-        /// Creates a type identity provider from a host type that realizes the required interface, if possible;
-        /// otherwise, returns none
-        /// </summary>
-        /// <param name="host">A type that realizes an identity provider</param>
-        [MethodImpl(Inline)]
-        static Option<ITypeIdentityProvider> FromHost(this Type host)
-            => Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
-
-        [MethodImpl(Inline)]
-        static Option<ITypeIdentityProvider> FromAttributed(this Type t)
-            => from a in t.CustomAttribute<IdentityProviderAttribute>()
-               from tid in FromHost(a.Host)
-               select tid;
-
-        static Option<TypeIdentity> CommonIdentity(this Type arg)
+        static Option<TypeIdentity> CommonId(this Type arg)
         {
             if(arg.IsPointer)
-                return from id in arg.Unwrap().CommonIdentity()
-                let idptr = concat(id, IDI.ModSep, IDI.Pointer)
-                select TypeIdentity.Define(idptr);    
-            else
-            {                        
-                if(arg.IsNat())
-                    return arg.NatIdentity();
-                else if(arg.IsPrimal())
-                    return arg.PrimalIdentity();
-                else if(arg.IsEnum)
-                    return arg.EnumIdentity();
-                else if(arg.IsSegmented())
-                    return arg.SegmentedIdentity();
-                else if(arg.IsSpan())
-                    return arg.SpanIdentity();
-                else if(arg.IsNatSpan())
-                    return arg.NatSpanIdentity();
-            }
-
+                return arg.PointerId();
+            else if(arg.IsNat())
+                return arg.NatId();
+            else if(arg.IsPrimal())
+                return arg.PrimalId();
+            else if(arg.IsEnum)
+                return arg.EnumId();
+            else if(arg.IsSegmented())
+                return arg.SegmentedId();
+            else if(arg.IsSpan())
+                return arg.SpanId();
+            else if(arg.IsNatSpan())
+                return arg.NatSpanId();  
+            else           
                 return none<TypeIdentity>();
         }
 
-        static Option<TypeIdentity> EnumIdentity(this Type t)
-            =>  TypeIdentity.Define($"{t.Name}{IDI.ModSep}{t.GetEnumUnderlyingType().NumericKind().Format()}");
+        static Option<TypeIdentity> PointerId(this Type arg)
+            => from id in arg.Unwrap().CommonId()
+                let idptr = concat(id, IDI.ModSep, IDI.Pointer)
+                select TypeIdentity.Define(idptr);    
+
+        static Option<TypeIdentity> SegmentedId(this Type t)
+            =>  from i in t.SegIndicator()
+                let segwidth = t.Width()                
+                where segwidth.IsSome()
+                let segfmt = segwidth.Format()
+                let arg = t.GetGenericArguments().Single()
+                let argwidth = arg.Width()                
+                where   argwidth.IsSome()
+                let argfmt = argwidth.Format()
+                let nk = arg.NumericKind()
+                where  nk.IsSome()                
+                let nki = nk.Indicator().Format()
+                let identifer = concat(i, segfmt, IDI.SegSep,argfmt, nki)                
+                select SegmentedIdentity.Define(i,segwidth,nk).AsTypeIdentity();
+
+        static Option<TypeIdentity> EnumId(this Type t)        
+        {
+            var id = EnumIdentity.From(t);
+            return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
+        } 
                 
-        static Option<TypeIdentity> NatIdentity(this Type arg)
+        static Option<TypeIdentity> NatId(this Type arg)
             => from v in arg.NatValue() 
                 let id = concat(IDI.Nat, v.ToString())
                 select TypeIdentity.Define(id);
         
-        static Option<TypeIdentity> PrimalIdentity(this Type arg)
+        static Option<TypeIdentity> PrimalId(this Type arg)
         {
-            if(arg.IsNumeric())
-                return TypeIdentity.Define(arg.NumericKind().Format());
-            else if(arg.IsPrimalNonNumeric())
-                return TypeIdentity.Define(arg.PrimitiveKeyword());
+            var id = PrimalIdentity.From(arg);
+            return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
+        }
+
+        static Option<TypeIdentity> SpanId(this Type arg)
+        {
+            var kind = arg.SpanKind();
+            if(kind.IsSome())
+            {
+                var cellid = arg.GetGenericArguments().Single().CommonId();
+                return cellid.TryMap(id => TypeIdentity.Define(concat(kind.Format(), id)));
+            }
             else
                 return none<TypeIdentity>();
         }
-
-        [MethodImpl(Inline)]
-        static T MapSomeOrElse<T>(this SpanKind kind, Func<SpanKind,T> ifSome, Func<T> ifNone)
-            => kind.IsSome() ? ifSome(kind) : ifNone();
-
-        [MethodImpl(Inline)]
-        static Option<(SpanKind kind, Type celltype)> SpanInfo(this Type arg)
-            => arg.SpanKind().MapSomeOrElse(
-                  k => (k, arg.GetGenericArguments().Single()), 
-                 () => none<(SpanKind, Type)>());
-
-        static Option<TypeIdentity> SpanIdentity(this Type arg)
-        {
-            return 
-                from info in arg.SpanInfo()
-                from cell in info.celltype.CommonIdentity()
-                select TypeIdentity.Define(concat(info.kind.Format(), cell));            
-        }
                                 
-        static Option<char> SegIndicator(this Type t)
+        static Option<TypeIndicator> SegIndicator(this Type t)
         {
             if(t.IsBlocked())
-                return IDI.Block;
+                return TypeIndicator.Define(IDI.Block);
             else if(t.IsVector())
-                return IDI.Vector;
+                return TypeIndicator.Define(IDI.Vector);
             else 
-                return none<char>();
+                return none<TypeIndicator>();
         }
 
         /// <summary>
         /// Defines an identity for a type-natural span type
         /// </summary>
         /// <param name="src">The type to examin</param>
-        static Option<TypeIdentity> NatSpanIdentity(this Type src)
+        static Option<TypeIdentity> NatSpanId(this Type src)
         {
             if(src.IsNatSpan())
             {
@@ -228,23 +161,29 @@ namespace Z0
                 return none<TypeIdentity>();
         }
 
-        static Option<TypeIdentity> SegmentedIdentity(this Type t)
-            =>  from i in t.SegIndicator()
-                let segwidth = t.Width()                
-                where segwidth.IsSome()
-                let segfmt = segwidth.Format()
-                let arg = t.GetGenericArguments().Single()
-                let argwidth = arg.Width()                
-                where   argwidth.IsSome()
-                let argfmt = argwidth.Format()
-                let nk = arg.NumericKind()
-                where  nk.IsSome()                
-                let nki = nk.Indicator().Format()
-                let identifer = concat(i,segfmt,IDI.SegSep,argfmt, nki)                
-                select TypeIdentity.Define(identifer);
+        /// <summary>
+        /// Retrieves a cached identity provider, if found; otherwise, creates and caches the identity provider for the source type
+        /// </summary>
+        /// <param name="t">The source type</param>
+        [MethodImpl(Inline)]
+        static ITypeIdentityProvider provider(Type src)
+            => IdentityProviders.find(src, CreateProvider);
 
         static readonly ITypeIdentityProvider DefaultProvider
-            = new FunctionalProvider(arg => arg.CommonIdentity().ValueOrElse(() => TypeIdentity.Empty));
+            = new FunctionalProvider(arg => arg.CommonId().ValueOrElse(() => TypeIdentity.Empty));
+
+        /// <summary>
+        /// Creates a type identity provider from a host type that realizes the required interface, if possible;
+        /// otherwise, returns none
+        /// </summary>
+        /// <param name="host">A type that realizes an identity provider</param>
+        static Option<ITypeIdentityProvider> FromHost(this Type host)
+            => Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
+
+        static Option<ITypeIdentityProvider> FromAttributed(this Type t)
+            => from a in t.CustomAttribute<IdentityProviderAttribute>()
+               from tid in FromHost(a.Host)
+               select tid;
 
         static ITypeIdentityProvider CreateProvider(this Type t)
         {
@@ -270,6 +209,5 @@ namespace Z0
             public TypeIdentity DefineIdentity(Type src)
                 => f(src);
         }
-
     }
 }

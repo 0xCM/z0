@@ -128,5 +128,19 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> TernaryOperators(this IEnumerable<MethodInfo> src)
             => src.Where(x => x.IsTernaryOperator());
+
+        /// <summary>
+        /// Selects the concrete (not abstract) methods from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> Concrete(this IEnumerable<MethodInfo> src)
+            => src.Where(t => !t.IsAbstract);
+
+        /// <summary>
+        /// Selects the methods from a stream where the name is NOT special
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> NonSpecial(this IEnumerable<MethodInfo> src)
+            => src.Where(t => !t.IsSpecialName && !t.Name.Contains('|') && !t.Name.Contains('<'));
     }
 }

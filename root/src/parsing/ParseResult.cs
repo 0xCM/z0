@@ -12,58 +12,77 @@ namespace Z0
 
     public readonly struct ParseResult : IParseResult
     {
-        [MethodImpl(Inline)]
-        public static ParseResult<T> Success<T>(T value)
-            => ParseResult<T>.Success(value);
-
-        [MethodImpl(Inline)]
-        public static ParseResult Success(Type target, object value)
-            => new ParseResult(target,value);
-
-        [MethodImpl(Inline)]
-        public static ParseResult Fail(Type target)
-            => new ParseResult(target,null);
-
-        [MethodImpl(Inline)]
-        ParseResult(Type type, object value)
-        {
-            TargetType = type;
-            Succeeded = value != null;
-            Value = value;
-        }
-
         public Type TargetType {get;}
      
         public bool Succeeded {get;}
         
         public object Value {get;}
 
+        public string Description {get;}
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Success<T>(T value, string info = null)
+            => ParseResult<T>.Success(value);
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Fail<T>(string info = null)
+            => ParseResult<T>.Fail(info);
+
+        [MethodImpl(Inline)]
+        public static ParseResult Success(Type target, object value, string info = null)
+            => new ParseResult(target, true, value, info);
+
+        [MethodImpl(Inline)]
+        public static ParseResult Fail(Type target, string info = null)
+            => new ParseResult(target, false, null, info);
+
+        [MethodImpl(Inline)]
+        public static ParseResult Define(Type target, bool succeeded,  object value, string info = null)
+            => new ParseResult(target, succeeded, value, info);
+
+        [MethodImpl(Inline)]
+        ParseResult(Type type, bool succeeded, object value, string info = null)
+        {
+            TargetType = type;
+            Succeeded = succeeded;
+            Value = value;
+            Description = info ?? string.Empty;
+        }
+
         public override string ToString()
-            => Succeeded ? (Value?.ToString() ?? string.Empty) : string.Empty;
+            => Succeeded ? (Value?.ToString() ?? "novalue") : Description;
     }
 
     public readonly struct ParseResult<T> : IParseResult<T>
     {
-        [MethodImpl(Inline)]
-        public static ParseResult<T> Success(T value)
-            => new ParseResult<T>(value);
-
-        [MethodImpl(Inline)]
-        public static ParseResult<T> Fail()
-            => default;
-
-        [MethodImpl(Inline)]
-        ParseResult(T value)
-        {
-            this.Succeeded = true;
-            this.Value = value;
-        }        
-
         public bool Succeeded {get;}
 
         public T Value {get;}
 
+        public string Description {get;}
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Success(T value, string info = null)
+            => new ParseResult<T>(value, info);
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Fail(string info = null)
+            => new ParseResult<T>(default, info);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult(ParseResult<T> src)
+            => ParseResult.Define(typeof(T), src.Succeeded, src.Value);
+        
+        [MethodImpl(Inline)]
+        ParseResult(T value, string info = null)
+        {
+            this.Succeeded = true;
+            this.Value = value;
+            this.Description = info ?? string.Empty;
+        }        
+
+
         public override string ToString()
-            => Succeeded ? (Value?.ToString() ?? string.Empty) : string.Empty;
+            => Succeeded ? (Value?.ToString() ?? "novalue") : Description;
     }
 }

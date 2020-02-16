@@ -9,15 +9,24 @@ namespace Z0
 
     using static RootShare;
 
-    [Parser]
     public readonly struct ApiHostPath : IIdentity<ApiHostPath>, IParser<ApiHostPath>
     {
+        public static ApiHostPath Empty = new ApiHostPath(AssemblyId.None, string.Empty);
+        
         public readonly AssemblyId Owner;
 
         public readonly string Name;
 
         public string Identifier {get;}
         
+        [MethodImpl(Inline)]
+        static IParser<ApiHostPath> Parser()
+            => default(ApiHostPath);
+        
+        [MethodImpl(Inline)]
+        public static ParseResult<ApiHostPath> Parse(string text)
+            => Parser().Parse(text);
+
         [MethodImpl(Inline)]
         public static ApiHostPath FromHost(Type host)
             => new ApiHostPath(host.Assembly.AssemblyId(), host.Name);
@@ -31,7 +40,7 @@ namespace Z0
         {
             this.Owner = owner;
             this.Name = name;
-            this.Identifier = $"{Owner.Format()}/{Name}";
+            this.Identifier = owner != 0 ? $"{Owner.Format()}/{Name}" : name;
         }
 
         [MethodImpl(Inline)]
@@ -51,13 +60,19 @@ namespace Z0
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
         
-        ApiHostPath IParser<ApiHostPath>.Parse(string text)
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Owner == AssemblyId.None && string.IsNullOrWhiteSpace(Name);
+        }
+
+        ParseResult<ApiHostPath> IParser<ApiHostPath>.Parse(string text)
         {
             var parts = text.Split('/');
-            if(parts.Length == 2 && Enum.TryParse(text,true, out AssemblyId owner))
-                return Define(owner, parts[1]);
+            if(parts.Length == 2 && Enum.TryParse(parts[0], true, out AssemblyId owner))
+                return ParseResult.Success(Define(owner, parts[1]));
             else
-                return Define(AssemblyId.None, $"error/{text}");
+                return ParseResult.Fail<ApiHostPath>();
         }
     }
 }

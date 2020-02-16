@@ -258,6 +258,12 @@ namespace Z0
             return found != -1 ? s.Substring(found + 1) : s;
         }
 
+        public static string TakeAfter(this string s, string match)
+        {
+            var found = s.IndexOf(match);
+            return found != -1 ? s.Substring(found + match.Length) : s;
+        }
+
         public static string Concat(this Span<string> src, string sep)
         {
             var sb = new StringBuilder();
@@ -367,6 +373,70 @@ namespace Z0
         public static string RemoveAny(this string s, params char[] removals)
             => s.RemoveAny(removals as IEnumerable<char>);
 
+         /// <summary>
+        /// Formats a readonly span of characters by forming the implied string
+        /// </summary>
+        /// <param name="src">The source span</param>
+        [MethodImpl(Inline)]   
+        public static string Format(this ReadOnlySpan<char> src)
+            => new string(src);
+
+        /// <summary>
+        /// Formats a span of characters by forming the implied string
+        /// </summary>
+        /// <param name="src">The source span</param>
+        [MethodImpl(Inline)]   
+        public static string Format(this Span<char> src)
+            => new string(src);
+
+        [MethodImpl(Inline)]   
+        public static ReadOnlySpan<char> Concat(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
+            => lhs.Format() + rhs.Format();
+
+        /// <summary>
+        /// Creates a new string from the first n - 1 characters of a string of length n
+        /// </summary>
+        /// <param name="s">The source string</param>
+        [MethodImpl(Inline)]
+        public static string RemoveLast(this string s)
+            => string.IsNullOrWhiteSpace(s) ? string.Empty : s.Substring(0, s.Length - 1);
+
+        /// <summary>
+        /// Splits the source string predicated on a string delimiter, removing any empy entries
+        /// </summary>
+        /// <param name="s">The string to split</param>
+        /// <param name="delimiter">The delimiter</param>
+        [MethodImpl(Inline)]
+        public static string[] SplitClean(this string s, string delimiter)
+            => s.Split(new string[]{delimiter}, StringSplitOptions.RemoveEmptyEntries);
+
+        /// <summary>
+        /// Splits the source string predicated on a character delimiter, removing any empy entries
+        /// </summary>
+        /// <param name="s">The string to split</param>
+        /// <param name="delimiter">The delimiter</param>
+        [MethodImpl(Inline)]
+        public static string[] SplitClean(this string s, char delimiter)
+            => s.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
+
+        /// <summary>
+        /// Removes a substring from the source string if it exists
+        /// </summary>
+        /// <param name="s">The string to manipulate</param>
+        /// <param name="substring">The substring to remove</param>
+        public static string Remove(this string s, string substring)
+            => s.Replace(substring,string.Empty);
+
+        /// <summary>
+        /// Removes all occurences of a substring from the source strings where extant
+        /// </summary>
+        /// <param name="s">The strings to manipulate</param>
+        /// <param name="substring">The substring to remove</param>
+        public static IEnumerable<string> RemoveSubstring(this IEnumerable<string> src, string substring)
+            => from s in src
+                let r = s.Remove(substring)
+                select r;
+
         /// <summary>
         /// Creates a new string by weaving a specified character between each character in the source
         /// </summary>
@@ -397,6 +467,44 @@ namespace Z0
                 sb.Append(sep);
             }
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Partitions a string into parts of a specified maximum width
+        /// </summary>
+        /// <param name="src">The source string</param>
+        /// <param name="maxlen"></param>
+        public static IEnumerable<string> Partition(this string src, int maxlen)
+        {
+            Span<char> buffer = stackalloc char[maxlen];
+            for(int i = 0, j=0; i< src.Length; i++, j++)
+            {
+                if(j < maxlen)
+                    buffer[j] = src[i];
+                else
+                {
+                    yield return new string(buffer);
+                    buffer = stackalloc char[maxlen];
+                    j = 0;
+                    buffer[j] = src[i];
+                }
+            }
+            var trim = buffer.Trim();
+            if(trim.Length != 0)
+                yield return new string(trim);                
+        }
+
+        public static string Between(this string src, char left, char right)
+        {
+            var result = string.Empty;
+            var i1 = src.IndexOf(left);
+            if(i1 != -1)
+            {
+                var i2 = src.IndexOf(right, i1 + 1);
+                if(i2 != -1)
+                    result = src.Substring(i1 + 1, i2 - i1 - 1);
+            }
+            return result;
         }
     }
 }

@@ -5,17 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
- 
-    using static ReflectionFlags;
 
-    partial class RootReflections
+    using static RootShare;
+
+    public interface IGenericOpSpec : IOpSpec
     {
-        public static bool IsStatic(this PropertyInfo p)
-            => p.GetGetMethod()?.IsStatic == true 
-            || p.GetSetMethod().IsStatic == true;
-        
+        MethodInfo MethodDefinition {get;}        
+
+        MethodInfo IOpSpec.Subject
+            => MethodDefinition;
     }
+
 }

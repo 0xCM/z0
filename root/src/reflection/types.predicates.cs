@@ -152,6 +152,13 @@ namespace Z0
             => t.IsTypeOf<string>();
 
         /// <summary>
+        /// Determines whether a supplied type is predicated on a string, including references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsObject(this Type t)
+            => t.IsTypeOf<object>();
+
+        /// <summary>
         /// Determines whether a supplied type is of type Void
         /// </summary>
         /// <param name="t">The type to examine</param>
@@ -240,7 +247,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static bool IsPrimalNonNumeric(this Type src)
-            => src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString();
+            => src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString() || src.IsObject();
 
         /// <summary>
         /// Determines whether a type is a primitive

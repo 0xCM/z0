@@ -13,11 +13,21 @@ namespace Z0
     
     public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>, IParser<OpUri>
     {
+        public static OpUri Empty => new OpUri(OpUriScheme.None, ApiHostPath.Empty, string.Empty, OpIdentity.Empty);
+        
+        [MethodImpl(Inline)]
+        static IParser<OpUri> Parser()
+            => default(OpUri);
+        
+        [MethodImpl(Inline)]
+        public static ParseResult<OpUri> Parse(string text)
+            => Parser().Parse(text);
+
         public readonly OpUriScheme Scheme;
         
         public readonly ApiHostPath HostPath;
         
-        public readonly string Group;
+        public readonly string OpGroup;
 
         public readonly OpIdentity OpId;
 
@@ -30,6 +40,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(OpUri a, OpUri b)
             => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static OpUri Define(OpUriScheme scheme, ApiHostPath host, string group, OpIdentity opid)        
+            => new OpUri(scheme, host, group, opid);
 
         [MethodImpl(Inline)]
         public static OpUri Hex(ApiHostPath host, string group)        
@@ -61,15 +75,15 @@ namespace Z0
             this.Scheme = scheme;
             this.HostPath = host;
             this.OpId = opid;
-            this.Group = group;
+            this.OpGroup = group;
             this.Identifier = 
                 opid.IsEmpty 
                 ? QueryText(scheme, host.Owner, host.Name,group) 
-                : UriText(scheme, host.Owner, host.Name, Group, opid);
+                : UriText(scheme, host.Owner, host.Name, OpGroup, opid);
         }
 
         public OpUri GroupUri
-            => new OpUri(Scheme, HostPath, Group, OpIdentity.Empty);
+            => new OpUri(Scheme, HostPath, OpGroup, OpIdentity.Empty);
 
         public string Format()
             => Identifier;
@@ -95,21 +109,54 @@ namespace Z0
         public int CompareTo(IIdentity other)
             => IdentityCompare(this, other);
 
+        const string C = ":";
+
+        const string S2 = "//";
+
+        const string S1 = "/";
+
+        const char Q = '?';
+
+        const char H = '#';
+        
+
         [MethodImpl(Inline)]
         static string PathText(string scheme, AssemblyId catalog, string subject)
-            => $"{scheme}://{catalog.Format()}/{subject}";
+            => $"{scheme}{C}{S2}{catalog.Format()}{S1}{subject}";
 
         [MethodImpl(Inline)]
         static string QueryText(OpUriScheme scheme, AssemblyId catalog, string subject, string group)
-            => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}";
+            => $"{scheme.Format()}{C}{S2}{catalog.Format()}{S1}{subject}{Q}{group}";
 
+        //scheme://assembly/apihost?opname#identifier
         [MethodImpl(Inline)]
         static string UriText(OpUriScheme scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
-            => $"{scheme.Format()}://{catalog.Format()}/{subject}?{group}#{opid.Identifier}";
+            => $"{scheme.Format()}{C}{S2}{catalog.Format()}{S1}{subject}?{group}#{opid.Identifier}";
 
-        OpUri IParser<OpUri>.Parse(string text)
+        ParseResult<OpUri> IParser<OpUri>.Parse(string text)
         {
-            return default;
+            var parts = text.SplitClean(C);
+            var msg = string.Empty;
+            if(parts.Length != 2)
+                msg = $"Splitting on {C} produces {parts.Length} pieces";
+            else
+            {
+                var scheme = OpUriSchemes.Parse(parts[0]);
+                var rest = parts[1].TakeAfter(S2);
+                var pathText = rest.TakeBefore(Q);
+                var path = ApiHostPath.Parse(pathText);
+                if(!path.Succeeded)
+                    msg = $"Failed to parse {pathText} as an api host path";
+                else
+                {
+                    var id = OpIdentity.Define(rest.TakeAfter(H));
+                    var group = rest.Between(Q,H);
+                    var uri = OpUri.Define(scheme, path.Value, group, id);
+                    return ParseResult.Success(uri);
+                }                
+            }
+                        
+            return ParseResult.Fail<OpUri>(msg);
         }
     }
 }

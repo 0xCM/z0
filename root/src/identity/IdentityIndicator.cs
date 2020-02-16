@@ -76,7 +76,7 @@ namespace Z0
         /// <summary>
         /// Indicates a signed integral type
         /// </summary>
-        public const char Signed = (char)NumericIndicator.Signed;
+        public const char Signed = 'i';
 
         /// <summary>
         /// Indicates a signed integral type expressed as text
@@ -87,7 +87,7 @@ namespace Z0
         /// <summary>
         /// Indicates an unsigned integral type
         /// </summary>
-        public const char Unsigned = (char)NumericIndicator.Unsigned;
+        public const char Unsigned = 'u';
 
         /// <summary>
         /// Indicates an unsigned integral type expressed as text
@@ -98,7 +98,7 @@ namespace Z0
         /// <summary>
         /// Indicates a floating-point type
         /// </summary>
-        public const char Float = (char)NumericIndicator.Float;
+        public const char Float = 'f';
 
         /// <summary>
         /// Indicates a floating-point type expressed as text

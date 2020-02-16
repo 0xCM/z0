@@ -9,22 +9,12 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.ComponentModel;
-    using System.Collections.Concurrent;
 
     using static zfunc;
     using static ReflectionFlags;
 
-    public enum MemberInstanceType
-    {
-        Instance = 0,
-        Static = 1
-    }
-
     partial class Reflections
     {        
-
         /// <summary>
         /// For a generic type or reference to a generic type, retrieves the generic type definition;
         /// otherwise, returns none
@@ -40,28 +30,6 @@ namespace Z0
             else
                 return default;            
         }
-
-        /// <summary>
-        /// Enumerates the literals defined by a type indexed by declaration order
-        /// </summary>
-        /// <param name="src">The source type</param>
-        /// <param name="declared">Whether a literal is rquired to be declared by the type</param>
-        public static IEnumerable<Pair<int,T>> LiteralValues<T>(this Type src, int? maxcount = null)  
-            where T : unmanaged  
-        {
-            var literals = src.LiteralFields().ToArray();
-            var count = Math.Min(maxcount ?? literals.Length, literals.Length);
-            for(var i=0; i<count; i++)
-                yield return (i, (T)Convert.ChangeType(literals[i].GetValue(null), typeof(T)));
-        }
-
-        /// <summary>
-        /// Determines whether the member instance classification is equivalent to static
-        /// </summary>
-        /// <param name="mit">The instance classification</param>
-        [MethodImpl(Inline)]
-        public static bool IsStaticType(this MemberInstanceType mit)
-            => mit == MemberInstanceType.Static;
 
         /// <summary>
         /// Determines whether a type is anonymous
@@ -120,7 +88,6 @@ namespace Z0
         public static IEnumerable<FieldInfo> InheritedFields(this Type t)
             => t.Fields().Except(t.DeclaredFields());
 
-
         /// <summary>
         /// Retrieves the public instance Fields declared by a supertype
         /// </summary>
@@ -178,37 +145,15 @@ namespace Z0
         public static Option<ConstructorInfo> DefaultConstructor(this Type t)
             => t.GetConstructor(BF_DeclaredInstance, null, new Type[] { }, new ParameterModifier[] { });
 
-
-        /// <summary>
-        /// Retrieves the non-public immutable instance fields inherited by the type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        static IEnumerable<FieldInfo> GetInheritedRestrictedImmutableFields(this Type t)
-            => t.BaseType?.GetFields(BF_AllRestrictedInstance)
-                        ?.Where(f => f.IsInitOnly || f.IsLiteral) ?? new FieldInfo[] { };
-
-        /// <summary>
-        /// Retrieves the immutable instance fields inherited and declared by the type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static IEnumerable<FieldInfo> RestrictedImmutableFields(this Type t)
-            => t.GetInheritedRestrictedImmutableFields().Union(t.DeclaredFields().NonPublic().Immutable().Instance());
-
         /// <summary>
         /// Retrieves the public properties declared by a type
         /// </summary>
         /// <param name="t">The type to examine</param>
         /// <param name="mit">The instance type</param>
         /// <param name="requireSetters">Whether the existence of setters are requied to satisfy matches</param>
-        public static IEnumerable<PropertyInfo> DeclaredPublicProperties(this Type t, 
-            MemberInstanceType mit,  bool requireSetters = false)
-                => (mit == MemberInstanceType.Instance 
-                    ? t.GetProperties(BF_DeclaredPublicInstance) 
-                    : t.GetProperties(BF_DeclaredPublicStatic)
-                    ).Where(p => !p.IsIndexer() && (requireSetters ? p.HasSetter() : true));
-        
-        
-
+        public static IEnumerable<PropertyInfo> DeclaredPublicProperties(this Type t, bool requireSetters = false)
+                => t.GetProperties(BF_Declared) .Where(p => !p.IsIndexer() && (requireSetters ? p.HasSetter() : true));
+            
         /// <summary>
         /// Retrieves the public instance properties declared by a supertype
         /// </summary>

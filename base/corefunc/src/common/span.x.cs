@@ -164,21 +164,6 @@ namespace Z0
         public static string FormatLines<T>(this Span<T> src)
             => src.ReadOnly().FormatLines();
 
-        /// <summary>
-        /// Formats a readonly span of characters by forming the implied string
-        /// </summary>
-        /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]   
-        public static string Format(this ReadOnlySpan<char> src)
-            => new string(src);
-
-        /// <summary>
-        /// Formats a span of characters by forming the implied string
-        /// </summary>
-        /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]   
-        public static string Format(this Span<char> src)
-            => new string(src);
 
         static Func<string,int,string> GetPadFunc<T>(bool padright)
             => padright 
