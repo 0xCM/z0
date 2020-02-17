@@ -15,13 +15,49 @@ namespace Z0
 
     partial class RootReflections
     {
+        static ReadOnlySpan<char> SpecialChars => new char[]{'<','>','|'};
+
+        /// <summary>
+        /// Determines whether a method is non-special as determined by either the IsSpecialName property 
+        /// or the presence of a compiler-generated character in the method name
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsSpecial(this MethodInfo src)
+            => src.IsSpecialName || src.Name.ContainsAny(SpecialChars);
+
+        /// <summary>
+        /// Determines whether a method is special as determined by either the IsSpecialName property 
+        /// or the presence of a compiler-generated character in the method name
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsNonSpecial(this MethodInfo src)
+            => ! src.IsSpecial();
+
+        /// <summary>
+        /// Returns the methods from the source type per the binding flags
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        /// <param name="flags">The reflection query flags</param>
+        public static IEnumerable<MethodInfo> FlaggedMethods(this Type src, BindingFlags flags)
+            => src.GetMethods(flags);
+
         /// <summary>
         /// Returns the methods from the source type per the binding flags, exluding those with special names
         /// </summary>
         /// <param name="src">The type to examine</param>
         /// <param name="flags">The reflection query flags</param>
-        static IEnumerable<MethodInfo> NonSpecialMethods(this Type src, BindingFlags flags)
-            => src.GetMethods(flags).Where(m => !m.IsSpecialName);
+        public static IEnumerable<MethodInfo> NonSpecialMethods(this Type src, BindingFlags flags)
+            => src.FlaggedMethods(flags).Where(IsNonSpecial);
+
+        /// <summary>
+        /// Returns the methods from the source type per the binding flags; however, only those with special names are included
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        /// <param name="flags">The reflection query flags</param>
+        public static IEnumerable<MethodInfo> SpecialMethods(this Type src, BindingFlags flags)
+            => src.FlaggedMethods(flags).Where(IsNonSpecial);
 
         /// <summary>
         /// Selects all methods declared by a type; however, property getters/setters and other 
@@ -73,7 +109,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static IEnumerable<MethodInfo> DeclaredStaticMethods(this Type t, bool nonspecial = true)
-            => nonspecial ?  t.NonSpecialMethods(BF_DeclaredStatic) : t.GetMethods(BF_DeclaredStatic);
+            => nonspecial ?  t.NonSpecialMethods(BF_DeclaredStatic) : t.FlaggedMethods(BF_DeclaredStatic);
 
         /// <summary>
         /// Retrieves the public and non-public static methods declared by a type that have a specific name
@@ -89,7 +125,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         /// <param name="InstanceType">Whether to selct static or instance </param>
         public static IEnumerable<MethodInfo> DeclaredInstanceMethods(this Type t, bool nonspecial = true)
-            => nonspecial ? t.NonSpecialMethods(BF_DeclaredInstance) : t.GetMethods(BF_DeclaredInstance);
+            => nonspecial ? t.NonSpecialMethods(BF_DeclaredInstance) : t.FlaggedMethods(BF_DeclaredInstance);
 
         /// <summary>
         /// Retrieves the attribution index for the identified methods declared by the type

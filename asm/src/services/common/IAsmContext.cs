@@ -6,6 +6,7 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using AsmSpecs;
 
@@ -33,12 +34,16 @@ namespace Z0
         /// <summary>
         /// The assemblies available to the context
         /// </summary>
-        IAssemblyComposition Assemblies {get;}
+        IAssemblyComposition Compostion {get;}
 
         /// <summary>
         /// Changes the default asm formatting configuration
         /// </summary>
         /// <param name="config">The new formatting configuration</param>
-        IAsmContext WithFormat(AsmFormatConfig config);               
+        IAsmContext WithFormat(AsmFormatConfig config);      
+
+        IEnumerable<AssemblyId> Assemblies
+            => from r in Compostion.Resolved
+                select r.Id;
     }
 }

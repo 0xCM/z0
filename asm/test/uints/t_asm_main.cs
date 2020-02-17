@@ -30,12 +30,13 @@ namespace Z0
             //archive_context(buffers);            
             //iter(hosts, EncodingParser.Parse);            
 
-            const string uritext = "hex://logix/LogicEngine?eval#eval_vcmp_expr128_g[8u]()";
-            var uri = OpUri.Parse(uritext);
-            print(uri);
+            // const string uritext = "hex://logix/LogicEngine?eval#eval_vcmp_expr128_g[8u]()";
+            // var uri = OpUri.Parse(uritext);
+            // print(uri);
 
-            // var workflow = Context.CaptureWorkflow();
-            // workflow.Execute();
+                    
+             var workflow = Context.CaptureWorkflow();
+             workflow.Execute().Force();
         }
 
         static void buffer_client(IAsmContext context)
@@ -86,7 +87,7 @@ namespace Z0
         void archive_context(in AsmBuffers buffers)
         {
             var archive = Context.Archiver();
-            var selection = from c in Context.Assemblies.Catalogs
+            var selection = from c in Context.Compostion.Catalogs
                             where !c.IsEmpty && c.AssemblyId != AssemblyId.Data
                             orderby c.AssemblyId
                             select c.AssemblyId;

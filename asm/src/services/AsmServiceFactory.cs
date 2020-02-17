@@ -210,8 +210,8 @@ namespace Z0
             => CilFunctionWriter.Create(context,dst);
 
         [MethodImpl(Inline)]
-        public static IExecutable CaptureWorkflow(this IAsmContext context)
-            => Z0.AsmCaptureFlow.Create(context);
+        public static IAsmCaptureFlow CaptureWorkflow(this IAsmContext context)
+            => AsmCaptureFlow.Create(context);
 
         [MethodImpl(Inline)]
         public static IEncodingExtractor EncodingExtractor(this IContext context, int? bufferlen = null)

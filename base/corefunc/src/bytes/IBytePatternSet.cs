@@ -24,7 +24,9 @@ namespace Z0
         ReadOnlySpan<P> PatternKinds {get;}
 
         ReadOnlySpan<byte> Pattern(P kind);   
-        
+
+        ReadOnlySpan<byte?> PartialPattern(P kind);   
+
         int PatternValue(P kind);     
     }
 

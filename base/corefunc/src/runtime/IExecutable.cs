@@ -21,4 +21,15 @@ namespace Z0
         void Execute();               
     }
 
+    /// <summary>
+    /// Characterizes a thread of execution control that has whatever context it needs, if any, to do something of use
+    /// and returns evidence of accomplishment
+    /// </summary>
+    public interface IExecutable<R> : IExecutable
+    {
+        new IEnumerable<R> Execute();
+
+        void IExecutable.Execute()
+            => Execute();
+    }
 }

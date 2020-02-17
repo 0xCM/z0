@@ -106,11 +106,13 @@ namespace Z0
                     break;
                 }
             }
+            
             var parts = src.Substring(startidx).Split(IDI.SegSep, StringSplitOptions.RemoveEmptyEntries);
             if(parts.Length == 2)
             {
                 var part0 = parts[0];
                 var part1 = parts[1];
+
                 var segtext = part0[0] == IDI.Generic ? part0.Substring(1, part0.Length - 1): part0;
                 if(uint.TryParse(segtext, out var n))
                 {

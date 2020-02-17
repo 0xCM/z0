@@ -34,12 +34,17 @@ namespace Z0
             var buffer = span<byte>(BufferLength);
             var parser = EncodingParser.ByteParser(Context, BufferLength);
             
+            print($"Parsing {encoded.Records.Length} {host} records");
+
             for(var i=0; i< dst.Length; i++)
             {
                 var current = encoded.Records[i];
                 var status = parser.Parse(current.Data);
                 var matched = parser.Result;
                 var succeeded = matched.IsSome() && status.Success();
+                if(!succeeded)
+                    print($"Parse failure", SeverityLevel.Warning);
+
                 var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
                 dst[i] = new ParsedEncoding
                 {

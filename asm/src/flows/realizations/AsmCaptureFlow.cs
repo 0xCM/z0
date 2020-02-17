@@ -11,12 +11,33 @@ namespace Z0
     
     using static zfunc;
 
-    readonly struct AsmCaptureFlow : IExecutable
+    public class AsmCaptureFlowOutcome
+    {
+        public ApiHostPath Host {get;set;}
+        
+        public FilePath CapturedPath {get;set;}
+
+        public CapturedEncodings Captured {get;set;}
+
+        public FilePath ParsedPath {get;set;}
+
+        public ParsedEncodings Parsed {get;set;}
+
+        public FilePath DecodedPath {get;set;}
+
+    }
+
+    public interface IAsmCaptureFlow : IExecutable<AsmCaptureFlowOutcome>
+    {
+
+    }
+
+    readonly struct AsmCaptureFlow : IAsmCaptureFlow
     {
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static IExecutable Create(IAsmContext context)
+        public static IAsmCaptureFlow Create(IAsmContext context)
             => new AsmCaptureFlow(context);
 
         [MethodImpl(Inline)]
@@ -25,33 +46,37 @@ namespace Z0
             this.Context = context;
         }
         
-        public void Execute()
-        {
-            var hosts = Context.Assemblies.Catalogs.SelectMany(c => c.ApiHosts);//.Where(c => c.HostingType.Name != "CpuVector");
-            var extractor = Context.EncodingExtractor();
-            var parser = Context.EncodingParser();
-            var decoder = Context.Decoder();
-            var config = Context.AsmFormat.WithSectionDelimiter();
+        void CreateLocationReport(AssemblyId id)
+            => Context.MemberLocations(id).OnSome(report => report.Save());
 
+        public IEnumerable<AsmCaptureFlowOutcome> Execute()
+        {            
+            var hosts = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts);
+            var config = Context.AsmFormat.WithSectionDelimiter();
             foreach(var host in hosts)
-                RunCaptureWorkflow(host);            
+                yield return RunCaptureWorkflow(host);
+
+            iter(Context.Assemblies, CreateLocationReport);
         }
 
         void Decode(CapturedEncoding captured, ParsedEncoding encoded, IAsmDecoder decoder,  IAsmFunctionWriter dst)
         {
-            var op = captured.GetOpInfo();
-            var bits = CaptureBits.Define(captured.Data, encoded.Data);
             var count = encoded.Length;
-            var range = MemoryRange.Define(captured.Address, captured.Address + (ulong)count);
-            var tc = encoded.TermCode;
+            if(count != 0)
+            {
+                var op = captured.GetOpInfo();
+                var bits = CaptureBits.Define(captured.Data, encoded.Data);
+                var range = MemoryRange.Define(captured.Address, captured.Address + (ulong)count);
+                var tc = encoded.TermCode;
 
-            var final = CaptureState.Define(op.Id, count, range.End, bits.Trimmed.Last());
-            var outcome = CaptureOutcome.Define(final, range, tc);
-            var summary = CaptureSummary.Define(outcome, bits);
-            dst.Write(decoder.DecodeFunction(op, summary));
+                var final = CaptureState.Define(op.Id, count, range.End, bits.Trimmed.Last());
+                var outcome = CaptureOutcome.Define(final, range, tc);
+                var summary = CaptureSummary.Define(outcome, bits);
+                dst.Write(decoder.DecodeFunction(op, summary));
+            }
         }
 
-        CapturedEncodings Capture(ApiHost host)
+        (CapturedEncodings result, FilePath target) Capture(ApiHost host)
         {
             var extractor = Context.EncodingExtractor();
             var captured = extractor.Extract(host);
@@ -59,10 +84,11 @@ namespace Z0
             captured.Save(target)
                         .OnSome(file => print($"Emitted {host} encodings to {file}"))
                         .OnNone(() => errout($"Error emitting {host} encodings"));                       
-            return captured;
+            return (captured,target);
         }
 
-        ParsedEncodings Parse(ApiHost host, CapturedEncodings captured)
+
+        (ParsedEncodings,FilePath) Parse(ApiHost host, CapturedEncodings captured)
         {
             var parser = Context.EncodingParser();
             var parsed = parser.Parse(host,captured);
@@ -72,24 +98,34 @@ namespace Z0
                         .OnNone(() => errout($"Error parsing {host} encodings"));                       
 
             require(captured.RecordCount == parsed.RecordCount);
-            return parsed;
+            return (parsed,target);
         }
 
-        void Decode(ApiHost host, CapturedEncodings captured, ParsedEncodings parsed)
+        FilePath Decode(ApiHost host, CapturedEncodings captured, ParsedEncodings parsed)
         {
             var path = Paths.DecodedEncoding(host);
             var decoder = Context.Decoder();            
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);
             for(var i=0; i< captured.RecordCount; i++)
                 Decode(captured[i], parsed[i], decoder, dst);
+            return path;
         }
 
-        void RunCaptureWorkflow(ApiHost host)        
+        AsmCaptureFlowOutcome RunCaptureWorkflow(ApiHost host)        
         {
-            var captured = Capture(host);            
-            var parsed = Parse(host, captured);
-            Decode(host, captured, parsed);
-
+            print($"Capturing {host}");
+            (var captured, var capturePath) = Capture(host);            
+            (var parsed, var parsedPath) = Parse(host, captured);
+            var decodingPath = Decode(host, captured, parsed);
+            return new AsmCaptureFlowOutcome
+            {
+                Host = host.Path,
+                CapturedPath = capturePath,
+                Captured = captured,
+                ParsedPath = parsedPath,
+                Parsed = parsed,
+                DecodedPath = decodingPath
+            };
         }
     }
 }

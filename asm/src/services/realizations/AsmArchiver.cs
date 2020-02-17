@@ -23,11 +23,11 @@ namespace Z0
         AsmArchiver(IAsmContext context)
         {
             Context = context;
-            Resources = Context.Assemblies.FindCatalog(AssemblyId.Data).Require().Resources;
+            Resources = Context.Compostion.FindCatalog(AssemblyId.Data).Require().Resources;
         }
 
         IAssemblyComposition Resolved 
-            => Context.Assemblies;
+            => Context.Compostion;
 
         IEnumerable<AssemblyId> ActiveAssemblies
             => Context.ActiveAssemblies();

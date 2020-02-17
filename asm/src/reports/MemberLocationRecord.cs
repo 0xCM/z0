@@ -34,14 +34,14 @@ namespace Z0
         [ReportField]
         public OpIdentity Member {get;set;}
 
-        const int LocationPad = 13;
+        const int LocationPad = 16;
 
         const int GapPad  = 8;
 
         public string DelimitedText(char delimiter)
         {
             var dst = text();
-            dst.AppendField(Location.Location.FormatAsmHex(8), LocationPad);
+            dst.AppendField(Location.Location.FormatAsmHex(), LocationPad);
             dst.DelimitField(Gap.ToString(), GapPad, delimiter);
             dst.DelimitField(Member, delimiter);
             return dst.ToString();

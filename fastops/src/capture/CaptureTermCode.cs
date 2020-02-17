@@ -28,13 +28,19 @@ namespace Z0
 
         CTC_INTRx2,
 
+        /// <summary>
+        /// Identifies the pattern 00 00 00 00 00 00 00
+        /// </summary>
         CTC_Zx7,
 
         CTC_JMP_RAX,
-        
+
         CTC_BUFFER_OUT,
 
         CTC_MSDIAG,
+
+        CTC_CALL32_INTR = 2*16,
+
     }
 
     public enum EncodingPatternKind : uint
@@ -53,13 +59,22 @@ namespace Z0
 
         CTC_INTRx2 = CaptureTermCode.CTC_INTRx2,
 
+        /// <summary>
+        /// Identifies the pattern 00 00 00 00 00 00 00
+        /// </summary>
         CTC_Zx7 = CaptureTermCode.CTC_Zx7,
 
         CTC_JMP_RAX = CaptureTermCode.CTC_JMP_RAX,
         
         CTC_BUFFER_OUT = CaptureTermCode.CTC_BUFFER_OUT,
 
-        CTC_MSDIAG = CaptureTermCode.CTC_MSDIAG
+        CTC_MSDIAG = CaptureTermCode.CTC_MSDIAG,
+
+        /// <summary>
+        /// Identifies the pattern e8 _ _ _ _ cc
+        /// </summary>
+        CTC_CALL32_INTR = CaptureTermCode.CTC_CALL32_INTR,
+
     }
 
     public enum EncodingPatternDelta : int
@@ -76,6 +91,8 @@ namespace Z0
 
         RET_INTRx2 = -2,
 
+        CTC_CALL32_INTR = None,
+        
         JMP_RAX = None,
 
         Z7 = -7,
@@ -98,6 +115,8 @@ namespace Z0
         public const byte E0 = 0xe0;
 
         public const byte J48 = 0x48;
+
+        public const byte CALL = 0xe8;
     }
 
     public static class EncodingPatternKindOps
@@ -105,6 +124,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsSome(this EncodingPatternKind code)
             => code != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsPartial(this EncodingPatternKind code)
+            => (uint)code >= 2*16;
 
         [MethodImpl(Inline)]
         public static CaptureTermCode ToTermCode(this EncodingPatternKind src)

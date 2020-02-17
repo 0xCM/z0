@@ -64,12 +64,12 @@ namespace Z0
         public CilFormatConfig CilFormat
             => Data.CilFormat;
         
-        public IAssemblyComposition Assemblies
+        public IAssemblyComposition Compostion
             => Data.Assemblies;
 
         public IAsmContext WithFormat(AsmFormatConfig config)
         {
-            var d = AsmContextData.Create(Assemblies, ClrIndex, Data.Resources, config, CilFormat);            
+            var d = AsmContextData.Create(Compostion, ClrIndex, Data.Resources, config, CilFormat);            
             return new AsmContext(ContextId, d ,Random);            
         }
     }   

@@ -15,6 +15,16 @@ namespace Z0
 
     public static partial class AsmReports
     {
+        public static Option<Assembly> ResolvedAssembly(this IAsmContext context, AssemblyId id)
+            =>  (from r in  context.Compostion.Resolved
+                where r.Id == id
+                select r.DeclaringAssembly).FirstOrDefault();
+
+        public static Option<MemberLocationReport> MemberLocations(this IAsmContext context, AssemblyId src)
+            => from a in context.ResolvedAssembly(src)
+                let methods = a.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps()
+                select MemberLocationReport.Create(src, methods);
+
         public static MemberLocationReport MemberLocations(AssemblyId id, Assembly src)
             => MemberLocationReport.Create(id, src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps());
 

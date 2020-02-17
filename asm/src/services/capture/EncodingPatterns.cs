@@ -10,8 +10,8 @@ namespace Z0
     using System.Collections.Generic;
     
     using static zfunc;
-    using static EncodingPatternKind;
-    using static EncodingPatternTokens;
+    using static Z0.EncodingPatternKind;
+    using static Z0.EncodingPatternTokens;
     
     using D = EncodingPatternDelta;
 
@@ -31,7 +31,7 @@ namespace Z0
                 CTC_RET_Zx3,
                 CTC_INTRx2,
                 CTC_JMP_RAX,
-                CTC_Zx7
+                CTC_Zx7,
             };
 
             PatternCount = PatternKindList.Length;
@@ -65,6 +65,12 @@ namespace Z0
                 _ => 0
             };
 
+        public ReadOnlySpan<byte?> PartialPattern(EncodingPatternKind kind)
+            => kind switch {
+                CTC_CALL32_INTR => CALL32_INTR,
+                _ => EmptyPartial
+            };
+
         static ReadOnlySpan<byte> RET_SBB 
             => new byte[]{RET,SBB};
 
@@ -80,6 +86,9 @@ namespace Z0
         static ReadOnlySpan<byte> INTRx2
             => new byte[]{INTR,INTR};
 
+        static ReadOnlySpan<byte?> CALL32_INTR
+            => new byte?[]{CALL,null,null,null,null,INTR};
+        
         static ReadOnlySpan<byte> JMP_RAX
             => new byte[]{ZED,ZED,J48,FF,E0};
 
@@ -88,5 +97,8 @@ namespace Z0
 
         static ReadOnlySpan<byte> Empty
             => new byte[]{};        
+
+        static ReadOnlySpan<byte?> EmptyPartial
+            => new byte?[]{};
     }
 }
