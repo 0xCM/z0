@@ -15,23 +15,17 @@ partial class zfunc
     public static T[] array<T>(params T[] src)
         => src;
 
-    [MethodImpl(Inline)]   
+    [MethodImpl(NotInline)]   
     public static T[] array<T>(int length)
         => new T[length];
 
-    [MethodImpl(Inline)]   
+    [MethodImpl(NotInline)]   
+    public static T[] array<T>(long length)
+        => new T[length];
+
+    [MethodImpl(NotInline)]   
     public static T[] array<T>(IEnumerable<T> src)
         => src.ToArray();
-
-    /// <summary>
-    /// Allocates an array
-    /// </summary>
-    /// <param name="len">The length of the array</param>
-    /// <typeparam name="T">The array element type</typeparam>
-    [MethodImpl(NotInline)]
-    public static T[] alloc<T>(long len)
-        => new T[len];
-
 
     /// <summary>
     /// Allocates an array and fills it wih a specified value
@@ -39,14 +33,14 @@ partial class zfunc
     /// <param name="len">The length of the array</param>
     /// <typeparam name="T">The array element type</typeparam>
     [MethodImpl(NotInline)]
-    public static T[] alloc<T>(long len, T fill)
-    {
-        var dst = alloc<T>((int)len);
+    public static T[] array<T>(long len, T fill)
+    {        
+        var dst = array<T>(len);
         dst.Fill(fill);
         return dst;
     }
 
-            /// <summary>
+    /// <summary>
     /// Constructs an array filled with a replicated value
     /// </summary>
     /// <param name="value">The value to replicate</param>

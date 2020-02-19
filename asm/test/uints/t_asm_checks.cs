@@ -350,13 +350,17 @@ namespace Z0
             }
         }
 
+        [MethodImpl(Inline)]
+        static unsafe ulong ptr(ReadOnlySpan<byte> src)
+            => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
+
         public void datares_check(in AsmBuffers buffers)
         {
             //Verifies that the "GetBytes" function doesn't return
             //a copy of the data but rather a refererence to the
             //data that exists in memory as a resource
             foreach(var d in Data.Resources)
-                Claim.eq(d.Location, location(d.GetBytes()));
+                Claim.eq(d.Location, ptr(d.GetBytes()));
         }
 
         public void vadd_check(in AsmBuffers buffers)

@@ -43,7 +43,7 @@ namespace Z0
         public static Matrix<N,T> alloc<N,T>(N n = default, T fill = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new Matrix<N, T>(zfunc.alloc((int)(zfunc.natval<N>()* zfunc.natval<N>()), fill));
+                => new Matrix<N, T>(zfunc.array((int)(zfunc.natval<N>()* zfunc.natval<N>()), fill));
 
         /// <summary>
         /// Allocates a blocked square matrix of natual dimension

@@ -316,42 +316,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Asserts the equality of two enum values
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <param name="caller">The caller member name</param>
-        /// <param name="file">The source file of the calling function</param>
-        /// <param name="line">The source file line number where invocation ocurred</param>
-        [MethodImpl(Inline)]
-        public static void enumeq<E>(E lhs, E rhs)
-            where E : unmanaged, Enum
-        {
-            if(!lhs.Equals(rhs))
-                Errors.ThrowNotEqual(lhs,rhs);
-        }
-
-        /// <summary>
-        /// Asserts content equality for two spans with enumeration content content
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <typeparam name="T">The enum type</typeparam>
-        public static void enumeq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : unmanaged, Enum
-                => iter(lhs,rhs,enumeq);
-
-        /// <summary>
-        /// Asserts content equality for two spans with enumeration content
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <typeparam name="T">The enum type</typeparam>
-        public static void enumeq<T>(Span<T> lhs, Span<T> rhs)
-            where T : unmanaged, Enum
-                => iter(lhs,rhs,enumeq);
-
-        /// <summary>
         /// Asserts the equality of two primal values
         /// </summary>
         /// <param name="lhs">The first value</param>

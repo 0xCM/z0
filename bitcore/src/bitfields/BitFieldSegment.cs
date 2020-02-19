@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal static BitFieldSegment Define(byte index, string name, byte start, byte end)
+        public static BitFieldSegment Define(byte index, string name, byte start, byte end)
             => new BitFieldSegment(index, name, start, end);
 
         [MethodImpl(Inline)]

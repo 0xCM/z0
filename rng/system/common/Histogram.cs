@@ -32,7 +32,7 @@ namespace Z0
             this.Domain = Domain;
             this.BinWidth = BinWidth;
             this.Partitions = Domain.PartPointStream(BinWidth).ToArray();
-            this.Counts = alloc<int>(Partitions.Length);
+            this.Counts = array<int>(Partitions.Length);
         }
 
         public Interval<T> Domain {get;}
@@ -131,7 +131,7 @@ namespace Z0
         /// 
         public Span<Bin<T>> Buckets()            
         {
-            var buckets = alloc<Bin<T>>(Partitions.Length - 1);
+            var buckets = array<Bin<T>>(Partitions.Length - 1);
             for(var i = 1; i< Partitions.Length; i++)
                 buckets[i-1] = Bin.Define(PartitionDomain(i), BucketSize(i));
             return buckets;

@@ -10,9 +10,8 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct BitFieldSpec<E,T> : IBitFieldSpec<E>, IFormattable<BitFieldSpec<E,T>>
+    public readonly struct BitFieldSpec<E> : IBitFieldSpec<E>, IFormattable<BitFieldSpec<E>>
         where E : unmanaged, Enum
-        where T : unmanaged
     {        
         readonly BitFieldSegment[] segments;
 
@@ -46,5 +45,14 @@ namespace Z0
 
         public string Format()
             => BitField.format(this);
+
+        [MethodImpl(Inline)]
+        public BitFieldReader<E,T> Reader<T>()
+            where T : unmanaged
+                => new BitFieldReader<E,T>(this);
+
+        public override string ToString()
+            => Format();
+                        
    }    
 }

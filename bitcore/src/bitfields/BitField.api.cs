@@ -23,29 +23,46 @@ namespace Z0
             where E : unmanaged, Enum
                 => BitFieldSegment.Define(evalue<E,byte>(segid), segid.ToString(), startpos, endpos);
 
-        public static BitFieldSpec<E,T> specify<E,T>()
+        public static BitFieldSpec<E> specify<E>()
             where E : unmanaged, Enum
-            where T : unmanaged
         {
             var indices = Enums.indexed<E>();
             var segs = segments(indices);
-            return new BitFieldSpec<E,T>(segs);
+            return new BitFieldSpec<E>(segs);
         }
 
         [MethodImpl(Inline)]
-        public static BitFieldSpec<E,T> specify<E,T>(params BitFieldSegment[] segments)
+        public static BitFieldSpec<E> specify<E>(params BitFieldSegment[] segments)
             where E : unmanaged, Enum
-            where T : unmanaged
         {
             var indices = Enums.indexed<E>();            
-            return new BitFieldSpec<E,T>(segments);
+            return new BitFieldSpec<E>(segments);
         }
 
         [MethodImpl(Inline)]
-        public static BitFieldReader<E,T> reader<E,T>(BitFieldSpec<E,T> spec)
+        public static BitFieldReader<E,T> reader<E,T>(in BitFieldSpec<E> spec)
             where E : unmanaged, Enum
             where T : unmanaged
                 => new BitFieldReader<E,T>(spec);
+
+        [MethodImpl(Inline)]
+        public static T read<T>(in BitFieldSegment segment, T src)
+            where T : unmanaged
+                => gbits.bitslice(src, segment.StartPos, segment.Width);
+
+        [MethodImpl(Inline)]
+        public static T read<T>(in BitFieldSegment segment, T src, bool offset)
+            where T : unmanaged
+                => offset ? gmath.sll(read(segment, src), segment.StartPos)  : read(segment,src);
+
+        [MethodImpl(Inline)]
+        public static void read<E,T>(in BitFieldSpec<E> spec, T src, Span<T> dst)
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            for(var i=0; i<spec.FieldCount; i++)
+                seek(dst,i) = read(skip(spec.Segments,i), src);
+        }
 
         public static string format<E>(IBitFieldSpec<E> spec)
             where E : unmanaged, Enum
