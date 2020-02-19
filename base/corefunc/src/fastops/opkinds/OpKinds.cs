@@ -70,16 +70,8 @@ namespace Z0
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>
     public enum BinaryBitLogicKind : byte
-    {        
+    {         
         /// <summary>
-        /// Classifies a logical binary operator true(a,b) = bv(1111)
-        /// </summary>
-        /// <remarks>
-        /// bv(1111) = id(False)
-        /// </remarks>
-        True = 0b1111,
- 
-         /// <summary>
         /// Classifies a logical  binary operator false(a,b) := bv(0000)
         /// </summary>
         /// <remarks>
@@ -100,17 +92,69 @@ namespace Z0
         And = 0b0001,
 
         /// <summary>
-        /// Classifies a logical binary operator nand(a,b) := not(and(a,b)) = bv(0111)
+        /// Classifies a logical binary operator cnotimply(a,b) := and(a, ~b) = bv(0010)
         /// </summary>
         /// <remarks>
-        /// bv(0111) = id(Or)
+        /// bv(0010) = id(ConverseNonimplication)
+        /// Truth table:
+        /// 0 0 0
+        /// 1 0 1
+        /// 0 1 0
+        /// 1 1 0
+        /// </remarks>
+        CNonImpl = 0b0010,               
+
+        /// <summary>
+        /// Classifes a logical binary operator left(a,b) := a = bv(1010)
+        /// </summary>
+        /// <remarks>
+        /// bv(1010) = id(RightNot)
         /// Truth Table:
-        /// 0 0 1
+        /// 0 0 0
+        /// 1 0 1
+        /// 0 1 0
+        /// 1 1 1
+        /// </remarks>
+        LProject = 0b0011, 
+
+        /// <summary>
+        /// Identifies a logical binary operator notimply(a,b) := and(~a, b) = bv(0100)
+        /// </summary>
+        /// <remarks>
+        /// bv(0100) = id(Nonimplication)
+        /// Truth table:
+        /// 0 0 0
+        /// 1 0 0
+        /// 0 1 1
+        /// 1 1 0
+        /// </remarks>
+        NonImpl = 0b0100,        
+
+        /// <summary>
+        /// Classifies a logical binary operator right(a,b) := b = bv(1100)
+        /// </summary>
+        /// <remarks>
+        /// bv(1100) = id(LeftNot)
+        /// Truth table:
+        /// 0 0 0
+        /// 1 0 0
+        /// 0 1 1
+        /// 1 1 1
+        /// </remarks>
+        RProject = 0b0101,
+
+        /// <summary>
+        /// Classifies a logical binary operator xor(a,b) := bv(0110)
+        /// </summary>
+        /// <remarks>
+        /// bv(0110) = id(XOr)
+        /// Truth Table:
+        /// 0 0 0
         /// 1 0 1
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        Nand = 0b1110, 
+        Xor = 0b0110,
 
         /// <summary>
         /// Classifies a logical binary operator or(a,b) := bv(1110)
@@ -139,19 +183,6 @@ namespace Z0
         Nor = 0b1000, 
 
         /// <summary>
-        /// Classifies a logical binary operator xor(a,b) := bv(0110)
-        /// </summary>
-        /// <remarks>
-        /// bv(0110) = id(XOr)
-        /// Truth Table:
-        /// 0 0 0
-        /// 1 0 1
-        /// 0 1 1
-        /// 1 1 0
-        /// </remarks>
-        Xor = 0b0110,
-
-        /// <summary>
         /// Classifies a binary operator xnor(a,b) := not(xor(a,b)) = bv(1001)
         /// </summary>
         /// <remarks>
@@ -163,45 +194,6 @@ namespace Z0
         /// 1 1 1
         /// </remarks>
         Xnor = 0b1001, 
-
-        /// <summary>
-        /// Classifes a logical binary operator left(a,b) := a = bv(1010)
-        /// </summary>
-        /// <remarks>
-        /// bv(1010) = id(RightNot)
-        /// Truth Table:
-        /// 0 0 0
-        /// 1 0 1
-        /// 0 1 0
-        /// 1 1 1
-        /// </remarks>
-        LProject = 0b0011, 
-
-        /// <summary>
-        /// Classifies a logical binary operator right(a,b) := b = bv(1100)
-        /// </summary>
-        /// <remarks>
-        /// bv(1100) = id(LeftNot)
-        /// Truth table:
-        /// 0 0 0
-        /// 1 0 0
-        /// 0 1 1
-        /// 1 1 1
-        /// </remarks>
-        RProject = 0b0101,
-
-        /// <summary>
-        /// Classifies a logical binary operator lnot(a,b) := not(a) = bv(0101)
-        /// </summary>
-        /// <remarks>
-        /// bv(0101) = id(RightProject)
-        /// Truth table:
-        /// 0 0 1
-        /// 1 0 0
-        /// 0 1 1
-        /// 1 1 0
-        /// </remarks>
-        LNot = 0b1100, 
 
         /// <summary>
         /// Classifes a logical binary operator rnot(a,b) := not(b) = bv(0011)
@@ -230,17 +222,17 @@ namespace Z0
         Impl = 0b1011,
 
         /// <summary>
-        /// Identifies a logical binary operator notimply(a,b) := and(~a, b) = bv(0100)
+        /// Classifies a logical binary operator lnot(a,b) := not(a) = bv(0101)
         /// </summary>
         /// <remarks>
-        /// bv(0100) = id(Nonimplication)
+        /// bv(0101) = id(RightProject)
         /// Truth table:
-        /// 0 0 0
+        /// 0 0 1
         /// 1 0 0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        NonImpl = 0b0100,        
+        LNot = 0b1100, 
 
         /// <summary>
         /// Classifies a logical binary operator cimply(a,b) := or(not(a), b) = bv(1101)
@@ -256,17 +248,26 @@ namespace Z0
         CImpl = 0b1101,
 
         /// <summary>
-        /// Classifies a logical binary operator cnotimply(a,b) := and(a, ~b) = bv(0010)
+        /// Classifies a logical binary operator nand(a,b) := not(and(a,b)) = bv(0111)
         /// </summary>
         /// <remarks>
-        /// bv(0010) = id(ConverseNonimplication)
-        /// Truth table:
-        /// 0 0 0
+        /// bv(0111) = id(Or)
+        /// Truth Table:
+        /// 0 0 1
         /// 1 0 1
-        /// 0 1 0
+        /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        CNonImpl = 0b0010,               
+        Nand = 0b1110, 
+        
+        /// <summary>
+        /// Classifies a logical binary operator true(a,b) = bv(1111)
+        /// </summary>
+        /// <remarks>
+        /// bv(1111) = id(False)
+        /// </remarks>
+        True = 0b1111,
+
     } 
 
     /// <summary>

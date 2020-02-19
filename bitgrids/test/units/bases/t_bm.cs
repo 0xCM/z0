@@ -27,7 +27,7 @@ namespace Z0
                 var C2 = and(A.Data, B.Data);
                 Claim.eq(A.Order, natval<N>());
                 Claim.eq(B.Order, natval<N>());                
-                Claim.eq(C1,C2);
+                Claim.numeq(C1,C2);
             }
         }
 
@@ -73,7 +73,7 @@ namespace Z0
                 var C2 = xor(A.Data, B.Data);
                 Claim.eq(A.Order, natval<N>());
                 Claim.eq(B.Order, natval<N>());                
-                Claim.eq(C1,C2);
+                Claim.numeq(C1,C2);
             }
         }
 

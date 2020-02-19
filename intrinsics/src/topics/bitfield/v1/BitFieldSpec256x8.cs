@@ -6,13 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
     using static zfunc;
-    using static As;
-    using static AsIn;
-    
+
     /// <summary>
     /// Defines a segmented bitfield indexed by enum values
     /// </summary>
@@ -23,14 +20,40 @@ namespace Z0
     /// create an enum where the first literal has the value 0, the second literal has the value 1 and so
     /// on as needed up to the maximum of 32 literals/values
     /// </remarks>
-    public struct BitField256<E>
+    public struct BitFieldSpec256x8<E>
         where E : unmanaged, Enum
     {        
+        const int MaxFieldCount = 32;
+
         internal Vector256<byte> widths;
             
         [MethodImpl(Inline)]
-        internal BitField256(Vector256<byte> widths)
-            => this.widths = widths;
+        internal BitFieldSpec256x8(Vector256<byte> widths)
+        {
+            this.widths = widths;
+        }
 
+        [MethodImpl(Inline)]
+        public byte SegWidth(E id)
+            => vcell(widths, evalue<E,int>(id));
+
+        BitFieldSegment[] Segments()
+        {
+            Span<BitFieldSegment> parts = span<BitFieldSegment>(MaxFieldCount);
+            var count = 0;
+            var start = 0;
+            var index = Enums.indexed<E>();
+            for(int i=0; i < MaxFieldCount; i++)
+            {
+                var width = vcell(widths,i);
+                if(width == 0)
+                    break;                
+
+                var seg = BitFieldSegment.Define(evalue<E,byte>(index[i].Value), index[i].Name, (byte)start, (byte)(start + width));
+                parts[count++] = seg;
+                start = start + width + 1;
+            }
+            return parts.Slice(0,count).ToArray();
+        }
     }
 }

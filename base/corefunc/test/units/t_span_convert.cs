@@ -20,7 +20,7 @@ namespace Z0
         void VerifySpanBytesToValues<T>(Span<byte> src, Span<T> expect)
             where T : unmanaged
         {
-            Claim.eq(expect, cast<T>(src));
+            Claim.numeq(expect, cast<T>(src));
         }
 
         void VerifyBytesToValues<T>()

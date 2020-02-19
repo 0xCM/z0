@@ -17,8 +17,7 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     public static class Errors
-    {
-        
+    {        
         public static AppException NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(ErrorMessages.NotEqual(lhs,rhs,caller,file,line));
 
@@ -48,7 +47,6 @@ namespace Z0
 
         public static AppException EmptySourceSpan([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(ErrorMessages.EmptySourceSpan(caller,file,line));
-
 
         /// <summary>
         /// Raised when a method is non-genric and should be
@@ -90,8 +88,13 @@ namespace Z0
         public static IndexOutOfRangeException OutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
                 => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
 
+        [MethodImpl(NotInline)]
         public static T ThrowNotEqual<T>(T lhs, T rhs)
-            => throw AppException.Define(appMsg($"Equality failed: {lhs} != {rhs}", SeverityLevel.Error));
+            => throw AppException.Define(appMsg($"Equality failure, {lhs} != {rhs}", SeverityLevel.Error));
+
+        [MethodImpl(NotInline)]
+        public static T ThrowNotEqual<T>(T lhs, T rhs, AppMsg msg)
+            => throw AppException.Define(msg.WithPrependedContent($"Equality failure, {lhs} != {rhs}:"));
 
         [MethodImpl(NotInline)]
         public static T ThrowArgException<A,T>(A arg)
@@ -100,7 +103,6 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static void Throw(string reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw AppException.Define(reason, caller,file,line);
-
 
         [MethodImpl(NotInline)]
         public static bool ThrowInvariantFailure(string reason)
@@ -113,6 +115,5 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static void ThrowTooShort(int dstLen, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort: line {line}, member {caller} in file {file}");
-
     }
 }

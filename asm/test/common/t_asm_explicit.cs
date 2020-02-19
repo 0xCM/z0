@@ -19,7 +19,7 @@ namespace Z0
         public t_asm_explicit()
         {
             Context = AsmContext.New(
-                Designators.Data.Designated,
+                Designators.AsmCore.Designated,
                 Designators.GMath.Designated,
                 Designators.Intrinsics.Designated,
                 Designators.BitCore.Designated,

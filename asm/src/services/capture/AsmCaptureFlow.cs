@@ -11,27 +11,6 @@ namespace Z0
     
     using static zfunc;
 
-    public class AsmCaptureFlowOutcome
-    {
-        public ApiHostPath Host {get;set;}
-        
-        public FilePath CapturedPath {get;set;}
-
-        public CapturedEncodings Captured {get;set;}
-
-        public FilePath ParsedPath {get;set;}
-
-        public ParsedEncodings Parsed {get;set;}
-
-        public FilePath DecodedPath {get;set;}
-
-    }
-
-    public interface IAsmCaptureFlow : IExecutable<AsmCaptureFlowOutcome>
-    {
-
-    }
-
     readonly struct AsmCaptureFlow : IAsmCaptureFlow
     {
         public IAsmContext Context {get;}
@@ -49,7 +28,7 @@ namespace Z0
         void CreateLocationReport(AssemblyId id)
             => Context.MemberLocations(id).OnSome(report => report.Save());
 
-        public IEnumerable<AsmCaptureFlowOutcome> Execute()
+        public IEnumerable<AsmCaptureSet> Execute()
         {            
             var hosts = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts);
             var config = Context.AsmFormat.WithSectionDelimiter();
@@ -87,7 +66,6 @@ namespace Z0
             return (captured,target);
         }
 
-
         (ParsedEncodings,FilePath) Parse(ApiHost host, CapturedEncodings captured)
         {
             var parser = Context.EncodingParser();
@@ -111,13 +89,13 @@ namespace Z0
             return path;
         }
 
-        AsmCaptureFlowOutcome RunCaptureWorkflow(ApiHost host)        
+        AsmCaptureSet RunCaptureWorkflow(ApiHost host)        
         {
             print($"Capturing {host}");
             (var captured, var capturePath) = Capture(host);            
             (var parsed, var parsedPath) = Parse(host, captured);
             var decodingPath = Decode(host, captured, parsed);
-            return new AsmCaptureFlowOutcome
+            return new AsmCaptureSet
             {
                 Host = host.Path,
                 CapturedPath = capturePath,

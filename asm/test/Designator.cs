@@ -21,7 +21,8 @@ namespace Z0.Designators
                 Intrinsics.Designated, 
                 BitCore.Designated,
                 BitGrids.Designated,
-                Logix.Designated
+                Logix.Designated,
+                AsmCore.Designated
             };
 
         public override void Run(params string[] args)

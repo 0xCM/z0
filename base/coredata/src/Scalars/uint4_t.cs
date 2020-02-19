@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using static zfunc;
 
-    using analog = uint8_t;
+    using analog = uint4_t;
 
-    public struct uint8_t : IEquatable<analog>
+    public struct uint4_t : IEquatable<analog>
     {
         byte data;
 
@@ -19,8 +19,28 @@ namespace Z0
         public static analog one => 1;
 
         [MethodImpl(Inline)]    
-        public uint8_t(byte x)
-            => data =x;
+        public static uint4_t From(byte src)
+            => new analog(src);
+
+        [MethodImpl(Inline)]    
+        public static uint4_t From(int src)
+            => new analog(src);
+
+        [MethodImpl(Inline)]    
+        public static uint4_t From(uint src)
+            => new analog(src);
+
+        [MethodImpl(Inline)]    
+        uint4_t(byte x)
+            => data = (byte)((uint)x & 0xFu);
+
+        [MethodImpl(Inline)]    
+        uint4_t(uint x)
+            => data = (byte)(x & 0xFu);
+
+        [MethodImpl(Inline)]    
+        uint4_t(int x)
+            => data = (byte)((uint)x & 0xFu);
 
         [MethodImpl(Inline)]    
         public static analog @bool(bool x)
@@ -39,7 +59,7 @@ namespace Z0
             => new analog(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(analog src)
+        public static explicit operator byte(analog src)
             => src.data;
 
         [MethodImpl(Inline)]
@@ -53,22 +73,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(analog src)
             => src.data;
-
-        [MethodImpl(Inline)]
-        public static explicit operator uint4_t(analog src)
-            => uint4_t.From(src.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint16_t(analog src)
-            => (ushort)src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint32_t(analog src)
-            => (uint)src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint64_t(analog src)
-            => (ulong)src.data;
 
         [MethodImpl(Inline)]
         public static explicit operator int(analog src)
@@ -95,6 +99,22 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
+        public static implicit operator uint8_t(analog src)
+            => src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint16_t(analog src)
+            => (ushort)src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint32_t(analog src)
+            => (uint)src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint64_t(analog src)
+            => (ulong)src.data;
+
+        [MethodImpl(Inline)]
         public static analog operator == (analog lhs, analog rhs) 
             => @bool(lhs.data == rhs.data);
 
@@ -104,23 +124,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator + (analog lhs, analog rhs) 
-            => wrap(lhs.data + rhs.data);
+            => From(lhs.data + rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator - (analog lhs, analog rhs) 
-            => wrap(lhs.data - rhs.data);
+            => From(lhs.data - rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator * (analog lhs, analog rhs) 
-            => wrap(lhs.data * rhs.data);
+            => From(lhs.data * rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator / (analog lhs, analog rhs) 
-            => wrap(lhs.data / rhs.data);
+            => From(lhs.data / rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator % (analog lhs, analog rhs)
-            => wrap(lhs.data % rhs.data);
+            => From(lhs.data % rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator < (analog lhs, analog rhs) 
@@ -140,43 +160,39 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator & (analog lhs, analog rhs) 
-            => (analog)(lhs.data & rhs.data);
+            => From(lhs.data & rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator | (analog lhs, analog rhs) 
-            => wrap(lhs.data | rhs.data);
+            => From(lhs.data | rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator ^ (analog lhs, analog rhs) 
-            => wrap(lhs.data ^ rhs.data);
+            => From(lhs.data ^ rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator >> (analog lhs, int rhs) 
-            => wrap(lhs.data >> rhs);
+            => From(lhs.data >> rhs);
     
         [MethodImpl(Inline)]
         public static analog operator << (analog lhs, int rhs) 
-            => wrap(lhs.data << rhs);
+            => From(lhs.data << rhs);
 
         [MethodImpl(Inline)]
         public static analog operator ~ (analog src) 
-            => wrap(~ src.data);
+            => From(~src.data);
 
         [MethodImpl(Inline)]
         public static analog operator - (analog src) 
-            => wrap(~src.data + 1);
+            => From(~src.data + 1);
 
         [MethodImpl(Inline)]
         public static analog operator -- (analog src) 
-            =>  --src.data;
+            => From(--src.data);
 
         [MethodImpl(Inline)]
         public static analog operator ++ (analog src) 
-            =>  ++src.data;
-
-        [MethodImpl(Inline)]
-        static analog wrap(int x)
-            => new analog((byte)x);
+            =>  From(++src.data);
 
         [MethodImpl(Inline)]
         public bool Equals(analog rhs)

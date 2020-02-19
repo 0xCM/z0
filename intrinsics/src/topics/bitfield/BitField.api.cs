@@ -14,79 +14,76 @@ namespace Z0
 
     public static class BitField
     {
-        public static BitFieldSpec specify(params (ushort first, ushort last)[] positions)
-        {
-            var fields = new BitSegment[positions.Length];
-            for(var i=0; i<fields.Length; i++)
-                fields[i] = positions[i];
-            return new BitFieldSpec(fields);
-        }       
+        [MethodImpl(Inline)]
+        public static BitFieldSegment segment(byte index, string name, byte startpos, byte endpos)
+            => BitFieldSegment.Define(index, name, startpos,endpos);
 
         [MethodImpl(Inline)]
-        public static BitField64 init(ulong data, BitFieldSpec spec)
-            => new BitField64(data, spec);
-
-        [MethodImpl(Inline)]
-        public static BitField64 init(ulong data, params BitSegment[] fields)
-            => new BitField64(data, fields);
-
-        static Span<Pair<E,byte>> parts<E>(BitField256<E> bf)
+        public static BitFieldSegment segment<E>(E segid, byte startpos, byte endpos)
             where E : unmanaged, Enum
-        {
-            Span<Pair<E,byte>> parts = new Pair<E,byte>[32];
-            var data = bf.widths.ToSpan();
+                => BitFieldSegment.Define(evalue<E,byte>(segid), segid.ToString(), startpos, endpos);
 
-            var count = 0;
-            for(int i=0; i < data.Length; i++)
-            {
-                var mask = data[i];
-                if(mask != 0)
-                    parts[count++] = paired<E,byte>(literal<E,byte>((byte)i), (byte)Bits.width(mask));
-            }
-            return parts.Slice(0,count);
+        public static BitFieldSpec<E,T> specify<E,T>()
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            var indices = Enums.indexed<E>();
+            var segs = segments(indices);
+            return new BitFieldSpec<E,T>(segs);
         }
 
-        static string format<E>(BitField256<E> bf)
+        [MethodImpl(Inline)]
+        public static BitFieldSpec<E,T> specify<E,T>(params BitFieldSegment[] segments)
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            var indices = Enums.indexed<E>();            
+            return new BitFieldSpec<E,T>(segments);
+        }
+
+        [MethodImpl(Inline)]
+        public static BitFieldReader<E,T> reader<E,T>(BitFieldSpec<E,T> spec)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => new BitFieldReader<E,T>(spec);
+
+        public static string format<E>(IBitFieldSpec<E> spec)
             where E : unmanaged, Enum
         {
-            var pairs = parts(bf);
-            
-            var fmt = text();            
-            for(var i=0; i < pairs.Length; i++)
+            var formatted = text();
+            for(var i=0; i< spec.FieldCount; i++)
             {
-                var part = pairs[i];
-                fmt.Append($"{part.A}:{part.B}");
-                if(i != pairs.Length - 1)
+                var segment = spec[(byte)i];
+                formatted.Append(segment.Format());
+                if(i != spec.FieldCount - 1)
                 {
-                    fmt.Append(AsciSym.Comma);
-                    fmt.Append(AsciSym.Space);
+                    formatted.Append(AsciSym.Comma);
+                    formatted.Append(AsciSym.Space);
                 }
             }
-            return embrace(fmt.ToString());
+            return bracket(formatted.ToString());
         }
 
-        [MethodImpl(Inline)]
-        static Vector128<T> filter<E,T>(BitField256<E> bf, Vector128<T> src)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => vgeneric<T>(dinx.vand(v8u(src), dinx.vlo(bf.widths)));
+        public static string format<S>(S segment)
+            where S : IBitFieldSegment
+                => $"{segment.Name}({segment.Index}):{segment.StartPos}..{segment.EndPos}";
 
-        [MethodImpl(Inline)]
-        static Vector256<T> filter<E,T>(BitField256<E> bf, Vector256<T> src)
+        static BitFieldSegment[] segments<E>(EnumIndexEntry<E>[] indices)
             where E : unmanaged, Enum
-            where T : unmanaged
-                => vgeneric<T>(dinx.vand(v8u(src), bf.widths));
-
-        const byte MaxFieldWidth = 7;
-
-        [MethodImpl(Inline)]
-        internal static Vector256<byte> setwidth<E>(Vector256<byte> widths, Pair<E,byte> spec)
-            where E : unmanaged, Enum
-            => widths = widths.WithElement(eint(spec.A), BitMask.lo<byte>(math.clamp(spec.B,MaxFieldWidth)));
-
-        [MethodImpl(Inline)]
-        internal static byte getwidth<E>(Vector256<byte> widths, E field)
-            where E : unmanaged, Enum
-                => (byte)Bits.width(widths.GetElement(eint(field)));
+        {            
+            var count = indices.Length;
+            var segments = new BitFieldSegment[count];
+            
+            var start = byte.MinValue;
+            for(var i=0; i<count; i++)
+            {
+                var entry = indices[i];
+                var width = evalue<E,byte>(entry.Value);
+                var endpos = (byte)(start + width - 1);
+                segments[i] = BitField.segment((byte)i, entry.Name, start, endpos);
+                start = (byte)(endpos + 1);
+            }
+            return segments;
+        }
     }
 }

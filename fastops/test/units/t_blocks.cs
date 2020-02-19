@@ -84,18 +84,18 @@ namespace Z0
             var block0 = x.Block(0);
             Claim.eq(4, block0.Length);   
             var y = DataBlocks.safeload(n128,span(1,2,3,4));         
-            Claim.eq(block0, y);
+            Claim.numeq(block0, y);
 
             var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
-            Claim.eq(block2,DataBlocks.parts(n128,5,6,7,8));
+            Claim.numeq(block2,DataBlocks.parts(n128,5,6,7,8));
 
         }
         public void Load1()
         {
             var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            Claim.eq(x, DataBlocks.parts(n128,1,2,3,4,5,6,7,8));
+            Claim.numeq(x, DataBlocks.parts(n128,1,2,3,4,5,6,7,8));
             
         }
 
@@ -116,7 +116,7 @@ namespace Z0
                     dst[block*blocklen + i] = src[block*blocklen + i];                
             }
 
-            Claim.eq(src,dst);
+            Claim.numeq(src,dst);
 
         }
 

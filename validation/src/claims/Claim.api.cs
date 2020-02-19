@@ -44,17 +44,6 @@ namespace Z0
         public static void fail([Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw failed(ClaimOpKind.Fail, AppMsg.Error("failed", caller, file,line));
 
-        /// <summary>
-        /// Asserts the equality of two enum values
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <param name="caller">The caller member name</param>
-        /// <param name="file">The source file of the calling function</param>
-        /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool eq(Enum lhs, Enum rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Equals(rhs) ? true
-                : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
         /// Asserts that a set contains a specified element
@@ -78,7 +67,6 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static bool eq(string lhs, string rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
-
 
         /// <summary>
         /// Asserts content equality for two character spans
@@ -186,22 +174,67 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool eq(bool lhs, bool rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-                => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+        public static void eq(bool lhs, bool rhs)
+            => (lhs == rhs).IfNone(() => Errors.ThrowNotEqual(lhs,rhs));
 
         /// <summary>
         /// Asserts the equality of two bit values
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        /// <param name="caller">The caller member name</param>
-        /// <param name="file">The source file of the calling function</param>
-        /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool eq(bit lhs, bit rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-                => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+        public static void eq(bit lhs, bit rhs)
+            => (lhs == rhs).IfNone(() => Errors.ThrowNotEqual(lhs,rhs));
 
         public static bool eq(byte lhs, byte rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+
+        /// <summary>
+        /// Asserts equality of two unsigned 8-bit values
+        /// </summary>
+        /// <param name="lhs">The left value</param>
+        /// <param name="rhs">The right value</param>
+        [MethodImpl(Inline)]
+        public static void ueq(byte lhs, byte rhs)
+        {
+            if(lhs != rhs)
+                Errors.ThrowNotEqual(lhs,rhs);
+        }
+
+        /// <summary>
+        /// Asserts equality of two unsigned 16-bit values
+        /// </summary>
+        /// <param name="lhs">The left value</param>
+        /// <param name="rhs">The right value</param>
+        [MethodImpl(Inline)]
+        public static void ueq(ushort lhs, ushort rhs)
+        {
+            if(lhs != rhs)
+                Errors.ThrowNotEqual(lhs,rhs);
+        }
+
+        /// <summary>
+        /// Asserts equality of two unsigned 32-bit values
+        /// </summary>
+        /// <param name="lhs">The left value</param>
+        /// <param name="rhs">The right value</param>
+        [MethodImpl(Inline)]
+        public static void ueq(uint lhs, uint rhs)
+        {
+            if(lhs != rhs)
+                Errors.ThrowNotEqual(lhs,rhs);
+        }
+
+        /// <summary>
+        /// Asserts equality of two unsigned 64-bit values
+        /// </summary>
+        /// <param name="lhs">The left value</param>
+        /// <param name="rhs">The right value</param>
+        [MethodImpl(Inline)]
+        public static void ueq(ulong lhs, ulong rhs)
+        {
+            if(lhs != rhs)
+                Errors.ThrowNotEqual(lhs,rhs);
+        }
 
         public static bool eq(sbyte lhs, sbyte rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
@@ -249,27 +282,93 @@ namespace Z0
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         /// <summary>
+        /// Asserts content equality for two spans with structured equatable content
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
+            where T : struct, IEquatable<T>
+        {            
+            if(!lhs.SequenceEqual(rhs))
+            {
+                for(var i = 0; i< length(lhs,rhs); i++)
+                    if(!lhs[i].Equals(rhs[i]))
+                        Errors.ThrowNotEqual(lhs[i], rhs[i]);
+            }
+        }
+
+        /// <summary>
+        /// Asserts content equality for two spans with structured equatable content
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static void eq<T>(Span<T> lhs, Span<T> rhs)
+            where T : struct, IEquatable<T>
+        {
+            if(!lhs.SequenceEqual(rhs))
+            {
+                for(var i = 0; i< length(lhs,rhs); i++)
+                    if(!lhs[i].Equals(rhs[i]))
+                        Errors.ThrowNotEqual(lhs[i], rhs[i]);
+            }
+        }
+
+        /// <summary>
+        /// Asserts the equality of two enum values
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        /// <param name="caller">The caller member name</param>
+        /// <param name="file">The source file of the calling function</param>
+        /// <param name="line">The source file line number where invocation ocurred</param>
+        [MethodImpl(Inline)]
+        public static void enumeq<E>(E lhs, E rhs)
+            where E : unmanaged, Enum
+        {
+            if(!lhs.Equals(rhs))
+                Errors.ThrowNotEqual(lhs,rhs);
+        }
+
+        /// <summary>
+        /// Asserts content equality for two spans with enumeration content content
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <typeparam name="T">The enum type</typeparam>
+        public static void enumeq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
+            where T : unmanaged, Enum
+                => iter(lhs,rhs,enumeq);
+
+        /// <summary>
+        /// Asserts content equality for two spans with enumeration content
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <typeparam name="T">The enum type</typeparam>
+        public static void enumeq<T>(Span<T> lhs, Span<T> rhs)
+            where T : unmanaged, Enum
+                => iter(lhs,rhs,enumeq);
+
+        /// <summary>
         /// Asserts the equality of two primal values
         /// </summary>
         /// <param name="lhs">The first value</param>
         /// <param name="rhs">The second value</param>
         /// <typeparam name="T">The primal value type</typeparam>
         [MethodImpl(Inline)]
-        public static bit numeq<T>(T lhs, T rhs)
+        public static void numeq<T>(T lhs, T rhs)
             where T : unmanaged 
         {
             if(typeof(T) == typeof(bit))
-                return As.bitval(lhs) == As.bitval(rhs);
+                Claim.eq(As.bitval(lhs), As.bitval(rhs));
             else
-            {                
-                if(gmath.neq(lhs,rhs))
-                    Errors.ThrowNotEqual(lhs,rhs);
-                return bit.On;
-            }
+                gmath.eq(lhs,rhs).IfNone(() => Errors.ThrowNotEqual(lhs,rhs));
         }
 
         /// <summary>
-        /// Asserts content equality for two spans
+        /// Asserts content equality for two readonly spans with numeric content
         /// </summary>
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
@@ -277,21 +376,22 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged 
-        {            
-            for(var i = 0; i< length(lhs,rhs); i++)
-                if(gmath.neq(lhs[i],rhs[i]))
-                    throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
-        }
+                => iter(lhs,rhs,numeq);
 
-        public static void eq<T>(Span<T> lhs, Span<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        /// <summary>
+        /// Asserts content equality for two spans with numeric content
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static void numeq<T>(Span<T> lhs, Span<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
-        {
-            for(var i = 0; i< length(lhs,rhs); i++)
-                if(!gmath.eq(lhs[i],rhs[i]))
-                    throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
-        }
+                => iter(lhs,rhs,numeq);
 
         /// <summary>
         /// Asserts content equality for two natural spans of coincident length
@@ -303,10 +403,10 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void eq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
-                => eq(lhs.Data,rhs.Data, caller,file,line);
+                => numeq(lhs.Data,rhs.Data, caller,file,line);
 
         /// <summary>
         /// Asserts content equality for two tabular spans of coincident dimension
@@ -319,11 +419,11 @@ namespace Z0
         /// <typeparam name="M">The row dimension type</typeparam>
         /// <typeparam name="N">The column dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void eq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged 
-                => eq(lhs.Data,rhs.Data, caller, file, line);
+                => numeq(lhs.Data,rhs.Data, caller, file, line);
 
         /// <summary>
         /// Asserts content equality for two 128-bit blocked spans
@@ -334,14 +434,13 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void eq<T>(Block128<T> lhs, Block128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<T>(Block128<T> lhs, Block128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
             for(var i = 0; i< lhs.CellCount; i++)
                 if(!gmath.eq(lhs[i],rhs[i]))
                     throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
-
 
         /// <summary>
         /// Asserts content equality for two 256-bit blocked spans
@@ -352,7 +451,7 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void eq<T>(Block256<T> xb, Block256<T> yb, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<T>(Block256<T> xb, Block256<T> yb, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             for(var i = 0; i< length(xb,yb); i++)

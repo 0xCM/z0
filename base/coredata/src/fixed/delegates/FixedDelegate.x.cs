@@ -31,6 +31,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static UnaryOp4 ToFixed(this Func<uint4_t,uint4_t> f)
+            => (Fixed4 a) =>f(a.X0);
+
+        [MethodImpl(Inline)]
         public static UnaryOp8 ToFixed(this Func<byte,byte> f)
             => (Fixed8 a) =>f(a.X0);
 

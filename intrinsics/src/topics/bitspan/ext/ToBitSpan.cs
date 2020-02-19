@@ -34,32 +34,64 @@ namespace Z0
             => BitSpan.create<byte>(src);
 
          [MethodImpl(Inline)]
+         public static BitSpan ToBitSpan(this byte src, int maxbits)
+            => BitSpan.create<byte>(src).Truncate(maxbits);
+
+         [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this sbyte src)
             => BitSpan.create<byte>((byte)src);
+
+         [MethodImpl(Inline)]
+         public static BitSpan ToBitSpan(this sbyte src, int maxbits)
+            => BitSpan.create<sbyte>(src).Truncate(maxbits);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this ushort src)
             => BitSpan.create<ushort>(src);
 
          [MethodImpl(Inline)]
+         public static BitSpan ToBitSpan(this ushort src, int maxbits)
+            => BitSpan.create<ushort>(src).Truncate(maxbits);
+
+         [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this short src)
             => BitSpan.create<ushort>((ushort)src);
+
+         [MethodImpl(Inline)]
+         public static BitSpan ToBitSpan(this short src, int maxbits)
+            => BitSpan.create<short>(src).Truncate(maxbits);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this int src)
             => BitSpan.create<uint>((uint)src);
 
          [MethodImpl(Inline)]
+         public static BitSpan ToBitSpan(this int src, int maxbits)
+            => BitSpan.create<int>(src).Truncate(maxbits);
+
+         [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this uint src)
             => BitSpan.create<uint>(src);
+
+         [MethodImpl(Inline)]
+         public static BitSpan ToBitSpan(this uint src, int maxbits)
+            => BitSpan.create<uint>(src).Truncate(maxbits);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this long src)
             => BitSpan.create<ulong>((ulong)src);
 
          [MethodImpl(Inline)]
+         public static BitSpan ToBitSpan(this long src, int maxbits)
+            => BitSpan.create<long>(src).Truncate(maxbits);
+
+         [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this ulong src)
             => BitSpan.create<ulong>(src);
+
+         [MethodImpl(Inline)]
+         public static BitSpan ToBitSpan(this ulong src, int maxbits)
+            => BitSpan.create<ulong>(src).Truncate(maxbits);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this float src)

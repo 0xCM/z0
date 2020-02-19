@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public ref struct BitField<E,T>
+    public ref struct DiscreteBitField<E,T>
         where E : unmanaged, Enum
         where T : unmanaged
     {
@@ -19,10 +19,10 @@ namespace Z0
 
         BitView<T> bits;
         
-        public static BitField<E,T> Define(T data)
-            => new BitField<E,T>(data);
+        public static DiscreteBitField<E,T> Define(T data)
+            => new DiscreteBitField<E,T>(data);
 
-        BitField(T data)
+        DiscreteBitField(T data)
         {
             this.data = data;    
             this.bits = BitView.Over(ref this.data);

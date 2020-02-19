@@ -43,6 +43,32 @@ partial class zfunc
             f(skip(input,i));
     }
 
+    /// <summary>
+    /// Inovkes an action for each pair of elements in source spans of equal length
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="f">The receiver</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static void iter<T>(ReadOnlySpan<T> first, ReadOnlySpan<T> second, Action<T,T> f)
+    {
+        var count = length(first,second);
+        ref readonly var x = ref head(first);
+        ref readonly var y = ref head(second);
+        
+        for(var i=0; i<count; i++)
+            f(skip(x,i),skip(y,i));
+    }
+
+    /// <summary>
+    /// Inovkes an action for each pair of elements in source spans of equal length
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="f">The receiver</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static void iter<T>(Span<T> first, Span<T> second, Action<T,T> f)
+        => iter(first.ReadOnly(), second.ReadOnly(),f);
 
     /// <summary>
     /// Inovkes an action for each element in a source span

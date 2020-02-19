@@ -110,6 +110,15 @@ namespace Z0
             => BitSpan.trim(src);
 
         /// <summary>
+        /// Clamps the source bitstring to one of a specified maximum length, discarding any excess
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="maxbits">The maximum length of the target bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitSpan Truncate(this in BitSpan src, int maxbits)
+            => BitSpan.truncate(src,maxbits);
+
+        /// <summary>
         /// Concatenates two bitspans
         /// </summary>
         /// <param name="head">The leading bits</param>

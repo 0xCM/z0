@@ -57,8 +57,8 @@ namespace Z0
                 var vHi = ginx.vinsert(v128Src, dst, 1);
                 var vHiSpan = vHi.ToSpan().Slice(vLo.Length()/2);
 
-                Claim.eq(srcSpan, vLoSpan);
-                Claim.eq(srcSpan, vHiSpan);
+                Claim.numeq(srcSpan, vLoSpan);
+                Claim.numeq(srcSpan, vHiSpan);
             }
         }
 

@@ -49,7 +49,7 @@ namespace  Z0
 
             if(overflow != 0)
             {
-                var last = alloc<T>(width);
+                var last = array<T>(width);
                 for(var i = count; i< src.Length; i++)
                     last[i] = src[i];
                 yield return new ArraySegment<T>(last);

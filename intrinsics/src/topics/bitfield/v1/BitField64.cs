@@ -9,43 +9,45 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly ref struct BitField64
+    public readonly ref struct BitFieldRef64
     {
         readonly ulong data;
 
-        readonly BitFieldSpec spec;
+        public readonly int FieldCount;
+
+        readonly BitFieldSpecV1 spec;
 
         [MethodImpl(Inline)]
-        public BitField64(ulong data, Span<BitSegment> segments)
+        public BitFieldRef64(ulong data, Span<BitFieldSegment> segments)
         {
             this.data = data;
-            this.spec = new BitFieldSpec(segments);
+            this.spec = new BitFieldSpecV1(segments);
+            this.FieldCount = segments.Length;
         }
 
         [MethodImpl(Inline)]
-        public BitField64(ulong data, BitFieldSpec spec)
+        public BitFieldRef64(ulong data, BitFieldSpecV1 spec)
         {
             this.data = data;
             this.spec = spec;
+            this.FieldCount = spec.FieldCount;
         }
 
         public ulong this[byte index]
         {
             [MethodImpl(Inline)]
-            get => Extract(index);
+            get => SegValue(index);
         }
 
         [MethodImpl(Inline)]
-        public ulong Extract(byte index)
+        public uint SegWidth(byte index)
+            => spec[index].Width;
+
+        [MethodImpl(Inline)]
+        public ulong SegValue(byte index)
         {
             var field = spec[index];
-            return Bits.bitslice(data, (byte)field.FirstPos, (byte)field.Width);            
-        }
-        
-        public BitFieldSpec Spec
-        {
-            [MethodImpl(Inline)]
-            get => spec;
-        }
+            return Bits.bitslice(data, (byte)field.StartPos, (byte)field.Width);            
+        }        
     }
 }

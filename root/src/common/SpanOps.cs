@@ -19,11 +19,6 @@ namespace Z0
         static IntPtr intptr(long i)
             => new IntPtr(i);
 
-        [MethodImpl(NotInline), Op, NumericClosures(NumericKind.All)]
-        public static Span<T> span<T>(int length)
-            where T : unmanaged
-                => new T[length];
-
         /// <summary>
         /// Returns a reference to the location of the first element
         /// </summary>

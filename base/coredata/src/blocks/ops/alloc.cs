@@ -23,7 +23,7 @@ namespace Z0
         [Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
         public static Block16<T> alloc<T>(N16 w, int blocks, T t = default)
             where T : unmanaged        
-                => new Block16<T>(span<T>(blocks * blocklen<T>(w)));
+                => new Block16<T>(new T[blocks * blocklen<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 32-bit blocks, filled with an optional pattern

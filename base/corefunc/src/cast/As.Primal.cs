@@ -219,6 +219,5 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T generic<T>(double src)
             => Unsafe.As<double,T>(ref src);
-
     }
 }

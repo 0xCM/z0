@@ -20,7 +20,7 @@ namespace Z0
             var y = dinx.vconvert(blockA, n128, z32);
             var blockC = y.ToBlock();            
             Claim.eq(x,y);
-            Claim.eq(blockB,blockC);            
+            Claim.numeq(blockB,blockC);            
         }
 
         public void block_64x8u_to_2x128x32u()

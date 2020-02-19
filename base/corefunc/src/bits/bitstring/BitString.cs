@@ -322,6 +322,33 @@ namespace Z0
         }
 
         /// <summary>
+        /// Forms a new bitstring by concatenation
+        /// </summary>
+        /// <param name="tail">The trailing bits</param>
+        public BitString Concat(BitString s0, BitString s1)
+        {
+            var dst = new byte[Length + s0.Length + s1.Length];
+            s1.BitSeq.CopyTo(dst);
+            s0.BitSeq.CopyTo(dst, s1.Length);
+            BitSeq.CopyTo(dst, s0.Length + s1.Length);
+            return new BitString(dst);
+        }
+        /// <summary>
+        /// Forms a new bitstring by concatenation
+        /// </summary>
+        /// <param name="tail">The trailing bits</param>
+        public BitString Concat(BitString s0, BitString s1, BitString s2)
+        {
+            var dst = new byte[Length + s0.Length + s1.Length + s2.Length];
+            s2.BitSeq.CopyTo(dst);
+            s1.BitSeq.CopyTo(dst, s2.Length);
+            s0.BitSeq.CopyTo(dst, s2.Length + s1.Length);
+            BitSeq.CopyTo(dst, s2.Length + s1.Length + s0.Length);
+            return new BitString(dst);
+        }
+
+
+        /// <summary>
         /// Returns a new bitstring of length no greater than a specified maximum
         /// </summary>
         /// <param name="maxlen">The maximum length</param>

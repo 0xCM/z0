@@ -106,5 +106,33 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static string FormatList<T>(this T[] src, char delimiter = ',', int offset = 0)
             => src.ToSpan().FormatList(delimiter, offset);
+
+        [MethodImpl(Inline)]
+        public static void IfNone(this bit x, Action f)
+        {
+            if(!x)
+                f();
+        }
+
+        [MethodImpl(Inline)]
+        public static void IfSome(this bit x, Action f)
+        {
+            if(x)
+                f();
+        }
+
+        [MethodImpl(Inline)]
+        public static void IfSome(this bool x, Action f)
+        {
+            if(x)
+                f();
+        }
+
+        [MethodImpl(Inline)]
+        public static void IfNone(this bool x, Action f)
+        {
+            if(!x)
+                f();
+        }
     }
 }

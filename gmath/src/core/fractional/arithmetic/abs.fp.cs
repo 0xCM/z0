@@ -29,9 +29,7 @@ namespace Z0
             else
                 throw unsupported<T>();
         }        
-
     }
-
     
     [StructLayout(LayoutKind.Explicit, Size = 4)]
     public struct Float32Bits
@@ -111,6 +109,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static double abs(double a)
             => Float64Bits.Abs(a);
-
     }
 }

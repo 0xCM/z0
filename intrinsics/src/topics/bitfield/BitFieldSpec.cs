@@ -6,57 +6,45 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
-    public readonly ref struct BitFieldSpec
-    {
-        readonly Span<BitSegment> Fields;
-
-
-        [MethodImpl(Inline)]
-        public BitFieldSpec(BitSegment[] fields)
-        {
-            this.Fields = fields;
-        }
+    public readonly struct BitFieldSpec<E,T> : IBitFieldSpec<E>, IFormattable<BitFieldSpec<E,T>>
+        where E : unmanaged, Enum
+        where T : unmanaged
+    {        
+        readonly BitFieldSegment[] segments;
 
         [MethodImpl(Inline)]
-        public BitFieldSpec(Span<BitSegment> fields)
+        internal BitFieldSpec(BitFieldSegment[] fields)
         {
-            this.Fields = fields;
+            this.segments = fields;
         }
 
-        public BitSegment this[int i]
+        [MethodImpl(Inline)]
+        public ref readonly BitFieldSegment Segment(byte index)
+            => ref Segments[index];
+
+        public ref readonly BitFieldSegment this[byte i]
         {
             [MethodImpl(Inline)]
-            get => skip<BitSegment>(Fields,i);
+            get => ref Segment(i);
         }
 
-        public int FieldCount
+        public byte FieldCount
         {
             [MethodImpl(Inline)]
-            get => Fields.Length;
+            get => (byte)segments.Length;
+        }
+
+        public ReadOnlySpan<BitFieldSegment> Segments 
+        {
+            [MethodImpl(Inline)]
+            get => segments;
         }
 
         public string Format()
-        {
-            var fmt = text();
-            for(var i=0; i< FieldCount; i++)
-            {
-                var f = this[i];
-                var index = i.ToString();
-                var width = f.Width.ToString().PadLeft(2,AsciDigits.A0);
-
-                fmt.Append($"{index}:{f.FirstPos}..{f.LastPos}");
-                if(i != FieldCount - 1)
-                {
-                    fmt.Append(AsciSym.Comma);
-                    fmt.Append(AsciSym.Space);
-                }
-            }
-            return bracket(fmt.ToString());
-        }
-
-    }
-
+            => BitField.format(this);
+   }    
 }

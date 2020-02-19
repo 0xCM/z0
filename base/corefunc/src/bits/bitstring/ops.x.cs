@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Collections.Generic;
+    using System.Linq;
     
     using static zfunc;
 
@@ -92,6 +94,7 @@ namespace Z0
                 => BitString.transpose(bs,m,n);
         
         public static BitString Transpose(this BitString bs, int m, int n)        
-            => BitString.transpose(bs,m,n);                    
+            => BitString.transpose(bs,m,n);                        
     }
+
 }

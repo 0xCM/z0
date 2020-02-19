@@ -14,9 +14,19 @@ namespace Z0
 
     public struct Fixed8 : IFixed<Fixed8,N8>, IEquatable<Fixed8>
     {
-        public const int BitWidth = 8;        
+        public const FixedWidth BitWidth = FixedWidth.W8;        
 
         internal byte X0;
+
+        [MethodImpl(Inline)]
+        Fixed8(byte x0)
+            => X0 = x0;
+
+        public FixedWidth FixedWidth
+        {
+            [MethodImpl(Inline)]
+            get => BitWidth;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed8(byte x0)
@@ -42,16 +52,7 @@ namespace Z0
         public static explicit operator byte(Fixed8 x)
             => (byte)x.X0;
 
-        [MethodImpl(Inline)]
-        internal Fixed8(byte x0)
-            => X0 = x0;
-
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
-
+ 
         [MethodImpl(Inline)]
         public bool Equals(Fixed8 src)
             => X0 == src.X0;

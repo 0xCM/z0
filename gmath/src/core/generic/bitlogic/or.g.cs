@@ -24,6 +24,33 @@ namespace Z0
             where T : unmanaged
                 => or_u(a,b);
 
+        /// <summary>
+        /// Computes the bitwise or among three primal values
+        /// </summary>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        public static T or<T>(T a, T b, T c)
+            where T : unmanaged
+                => or_u(a,b,c);
+
+        /// <summary>
+        /// Computes the bitwise or among four or more primal values
+        /// </summary>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        public static T or<T>(T a, T b, T c, T d, params T[] more)
+            where T : unmanaged
+        {
+            var dst = or(or(a,b,c), d);
+            for(var i=0; i<more.Length; i++)
+                dst = or(dst, more[i]);
+            return dst;
+        }
+
         [MethodImpl(Inline)]
         static T or_u<T>(T a, T b)
             where T : unmanaged

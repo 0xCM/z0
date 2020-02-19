@@ -258,7 +258,7 @@ namespace Z0
             
             var byx = BitConverter.GetBytes(x).ToSpan();
             var byy = Bytes.write(x);
-            Claim.eq(byx,byy);
+            Claim.numeq(byx,byy);
         }
 
         public void bs_assemble()

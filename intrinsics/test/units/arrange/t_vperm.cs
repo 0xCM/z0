@@ -19,18 +19,18 @@ namespace Z0
         // [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] 
         //
 
-        public void bitfield_outline()
-        {
-            var spec = BitField.specify((0,3),(4,6),(7,8),(9,9),(10,14),(15,17),(18,20));  
-            var data = 0b100_101_11010_1_11_110_0111ul;          
-            var bf = BitField.init(data,spec);
+        // public void bitfield_outline()
+        // {
+        //     var spec = BitField.specify((0,3),(4,6),(7,8),(9,9),(10,14),(15,17),(18,20));  
+        //     var data = 0b100_101_11010_1_11_110_0111ul;          
+        //     var bf = BitField.init(data,spec);
 
-            Claim.eq(7,spec.FieldCount);
+        //     Claim.eq(7,spec.FieldCount);
 
-            var expect = new long[]{0b0111,0b110,0b11,0b1,0b11010,0b101,0b100};
-            for(byte i=0; i < spec.FieldCount; i++)
-                Claim.eq(bf[i], expect[i]);
-        }
+        //     var expect = new long[]{0b0111,0b110,0b11,0b1,0b11010,0b101,0b100};
+        //     for(byte i=0; i < spec.FieldCount; i++)
+        //         Claim.eq(bf[i], expect[i]);
+        // }
 
 
 
@@ -52,16 +52,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            Claim.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
+            Claim.numeq(NatSpan.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            Claim.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
+            Claim.numeq(NatSpan.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            Claim.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
+            Claim.numeq(NatSpan.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            Claim.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
+            Claim.numeq(NatSpan.parts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermlo_4x16_outline()
