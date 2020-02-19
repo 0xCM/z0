@@ -10,22 +10,24 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct BitFieldSpec<E> : IBitFieldSpec<E>, IFormattable<BitFieldSpec<E>>
-        where E : unmanaged, Enum
+    /// <summary>
+    /// Defines a partition over a contiguous sequence of bits
+    /// </summary>
+    public readonly struct BitFieldSpec :  IFormattable<BitFieldSpec>
     {        
-        readonly BitFieldSegment[] segments;
+        readonly FieldSegment[] segments;
 
         [MethodImpl(Inline)]
-        internal BitFieldSpec(BitFieldSegment[] fields)
+        internal BitFieldSpec(FieldSegment[] fields)
         {
             this.segments = fields;
         }
 
         [MethodImpl(Inline)]
-        public ref readonly BitFieldSegment Segment(byte index)
+        public ref readonly FieldSegment Segment(byte index)
             => ref Segments[index];
 
-        public ref readonly BitFieldSegment this[byte i]
+        public ref readonly FieldSegment this[byte i]
         {
             [MethodImpl(Inline)]
             get => ref Segment(i);
@@ -37,22 +39,30 @@ namespace Z0
             get => (byte)segments.Length;
         }
 
-        public ReadOnlySpan<BitFieldSegment> Segments 
+        /// <summary>
+        /// The sum of the widths of the defining segments
+        /// </summary>
+        public byte TotalWidth
+        {
+            [MethodImpl(Inline)]
+            get => BitField.width(this);
+        }
+
+        public ReadOnlySpan<FieldSegment> Segments 
         {
             [MethodImpl(Inline)]
             get => segments;
         }
 
-        public string Format()
-            => BitField.format(this);
-
         [MethodImpl(Inline)]
-        public BitFieldReader<E,T> Reader<T>()
+        public BitFieldReader<T> Reader<T>()
             where T : unmanaged
-                => new BitFieldReader<E,T>(this);
+                => new BitFieldReader<T>(this);
+
+        public string Format()
+            => FieldSegments.format(Segments);
 
         public override string ToString()
-            => Format();
-                        
+            => Format();                        
    }    
 }

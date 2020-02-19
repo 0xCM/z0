@@ -32,7 +32,7 @@ namespace Z0
         {
             var ops = src.EncodedOps().ToArray();
             var dst = new CapturedEncoding[ops.Length];
-            var buffer = span<byte>(BufferLength);
+            var buffer = alloc<byte>(BufferLength);
             var reader = Context.ByteReader();
 
             for(var i=0; i< ops.Length; i++)

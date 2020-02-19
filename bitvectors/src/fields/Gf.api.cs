@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static As;
 
     public static class Gf
     {
@@ -24,7 +21,7 @@ namespace Z0
         {
             var components = default(T);
             for(var i=0; i< exponents.Length; i++)
-                components = gmath.or(components, Pow2.pow<T>(exponents[i]));
+                components = gmath.or(components, gmath.pow2<T>(exponents[i]));
             return components;
         }        
 
@@ -78,8 +75,5 @@ namespace Z0
         /// <param name="exponents">The exponent values for nonzero coefficients</param>
         public static GfPoly<N32,ulong> Poly(N32 degree, params byte[] exponents)
             => Poly<N32,ulong>(exponents);
-
     }
-
-
 }

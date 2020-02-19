@@ -12,7 +12,7 @@ namespace Z0
     partial class GXTypes
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Srl<T> : IShiftOp<T>, IUnarySpanOpImm8<T>, IBinarySpanOp<T>
+        public readonly struct Srl<T> : IShiftOp<T>, IShiftSpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "srl";
@@ -22,19 +22,16 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, byte offset) => gmath.srl(a, offset);
+            public T Invoke(T a, byte offset) 
+                => gmath.srl(a, offset);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, byte count, Span<T> dst)
                 => mathspan.srl(src,count,dst);
-
-            [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<T> counts, Span<T> dst)
-                => mathspan.srlv(src,counts,dst);
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Sll<T> : IShiftOp<T>, IUnarySpanOpImm8<T>, IBinarySpanOp<T>
+        public readonly struct Sll<T> : IShiftOp<T>, IShiftSpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "sll";
@@ -44,15 +41,42 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, byte offset) => gmath.sll(a, offset);
+            public T Invoke(T a, byte offset) 
+                => gmath.sll(a, offset);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, byte count, Span<T> dst)
                 => mathspan.sll(src,count,dst);
+        }
+
+        [NumericClosures(NumericKind.Integers)]
+        public readonly struct Sllv<T> : IVarShiftSpanOp<T>
+            where T : unmanaged        
+        {
+            public const string Name = "sllv";
+
+            public static Sllv<T> Op => default;
+
+            public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<T> counts, Span<T> dst)
+            public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
                 => mathspan.sllv(src,counts,dst);
+        }
+
+        [NumericClosures(NumericKind.Integers)]
+        public readonly struct Srlv<T> : IVarShiftSpanOp<T>
+            where T : unmanaged        
+        {
+            public const string Name = "srlv";
+
+            public static Srlv<T> Op => default;
+
+            public OpIdentity Id => Identity.contracted<T>(Name);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
+                => mathspan.srlv(src,counts,dst);
         }
     }
 }

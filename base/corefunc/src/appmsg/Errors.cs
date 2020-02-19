@@ -89,6 +89,10 @@ namespace Z0
                 => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
 
         [MethodImpl(NotInline)]
+        public static T ThrowNotEqualInfo<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw AppException.Define(ErrorMessages.NotEqual(lhs,rhs,caller,file,line));
+
+        [MethodImpl(NotInline)]
         public static T ThrowNotEqual<T>(T lhs, T rhs)
             => throw AppException.Define(appMsg($"Equality failure, {lhs} != {rhs}", SeverityLevel.Error));
 

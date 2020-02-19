@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
     using static GXTypes;
     
-    using OT = OpTypes;    
+    using OT = OpKinds;    
 
     partial class GX
     {
@@ -77,19 +77,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T eval<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IKnownOpType      
+            where K : unmanaged, IOpKind      
                 => eval_1(kind,a,b);
 
         [MethodImpl(Inline)]
         public static T eval<T,K>(K kind, T a)
             where T : unmanaged  
-            where K : unmanaged, IKnownOpType      
+            where K : unmanaged, IOpKind      
             => eval_1(kind,a);
 
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a)
             where T : unmanaged  
-            where K : unmanaged, IKnownOpType      
+            where K : unmanaged, IOpKind      
         {
             if(typeof(K) == typeof(OT.Negate))
                 return negate<T>().Invoke(a);
@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IKnownOpType      
+            where K : unmanaged, IOpKind      
         {
             if(typeof(K) == typeof(OT.And))
                 return and<T>().Invoke(a,b);
@@ -124,7 +124,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static T eval_2<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IKnownOpType      
+            where K : unmanaged, IOpKind      
         {
             if(typeof(K) == typeof(OT.Impl))
                 return impl<T>().Invoke(a,b);

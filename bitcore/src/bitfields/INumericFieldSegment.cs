@@ -6,19 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
-    using static As;
-
-    public interface IBitFieldSpec<E>
-        where E : unmanaged, Enum
+    /// <summary>
+    /// Characterizes an element within a partition of a numeric field
+    /// </summary>
+    /// <typeparam name="T">The field type over which a partition is defined</typeparam>
+    public interface INumericFieldSegment<T> : IFieldSegment<T>
+        where T : unmanaged
     {
-        byte FieldCount {get;}
 
-        ref readonly BitFieldSegment this[byte index] {get;}
-
-        ReadOnlySpan<BitFieldSegment> Segments {get;}
     }
 }

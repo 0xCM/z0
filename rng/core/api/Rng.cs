@@ -208,7 +208,7 @@ namespace Z0
         public static Span<INavigableSource<uint>> Pcg32Suite(Span<ulong> seeds, Span<ulong> indices)        
         {
             var count = length(seeds,indices);
-            var g = span<INavigableSource<uint>>(count);
+            var g = alloc<INavigableSource<uint>>(count);
             for(var i=0; i<count; i++)
                 g[i] = Pcg32(seeds[i], indices[i]);
             return g;

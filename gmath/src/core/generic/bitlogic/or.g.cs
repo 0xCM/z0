@@ -36,20 +36,15 @@ namespace Z0
                 => or_u(a,b,c);
 
         /// <summary>
-        /// Computes the bitwise or among four or more primal values
+        /// Computes the bitwise or among four primal values
         /// </summary>
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static T or<T>(T a, T b, T c, T d, params T[] more)
+        public static T or<T>(T a, T b, T c, T d)
             where T : unmanaged
-        {
-            var dst = or(or(a,b,c), d);
-            for(var i=0; i<more.Length; i++)
-                dst = or(dst, more[i]);
-            return dst;
-        }
+                => or(or(a,b,c), d);
 
         [MethodImpl(Inline)]
         static T or_u<T>(T a, T b)

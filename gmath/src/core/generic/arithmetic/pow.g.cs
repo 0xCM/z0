@@ -13,6 +13,16 @@ namespace Z0
 
     partial class gmath
     {
+        /// <summary>
+        /// Computes 2^i where i is an integer value in the interval [0,63]
+        /// and 2^i does not exceed the maximum value of T
+        /// </summary>
+        /// <param name="i">The exponent</param>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        public static T pow2<T>(byte i)
+            where T : unmanaged
+                => convert<ulong,T>(1ul << i); 
+
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged

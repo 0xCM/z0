@@ -55,8 +55,9 @@ namespace Z0
 
         void Run(params string[] args)
         {
-
-        
+            ByteKindGen.Define(false).GenToFile();
+            ByteKindGen.Define(true).GenToFile();
+            
             PopCountGen.GenToFile();
             Pow2Gen.GenToFile();
             Pow2M1Gen.GenToFile();

@@ -22,12 +22,12 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T x, T y) => gmath.eq(x,y);
+            public readonly bit Invoke(T x, T y) 
+                => gmath.eq(x,y);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
                 => SpanFunc.apply(this, lhs,rhs,dst);
-
         }
 
         [NumericClosures(NumericKind.All)]
@@ -46,7 +46,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
                 => SpanFunc.apply(this, lhs,rhs,dst);
-
         }
 
         [NumericClosures(NumericKind.All)]
@@ -60,7 +59,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T x, T y) => gmath.lt(x,y);
+            public readonly bit Invoke(T x, T y) 
+                => gmath.lt(x,y);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
@@ -78,7 +78,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T x, T y) => gmath.lteq(x,y);
+            public bit Invoke(T x, T y) 
+                => gmath.lteq(x,y);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
@@ -96,7 +97,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a, T b) => gmath.gt(a,b);
+            public bit Invoke(T a, T b) 
+                => gmath.gt(a,b);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
@@ -114,7 +116,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a, T b) => gmath.gteq(a,b);
+            public bit Invoke(T a, T b) 
+                => gmath.gteq(a,b);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
@@ -132,7 +135,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T x, T a, T b) => gmath.between(x,a,b);
+            public readonly bit Invoke(T x, T a, T b) 
+                => gmath.between(x,a,b);
         }
 
         [NumericClosures(NumericKind.All)]
@@ -146,12 +150,12 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => gmath.nonz(a);
+            public bit Invoke(T a) 
+                => gmath.nonz(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
                 => SpanFunc.apply(this, src, dst);
-
         }
 
         [NumericClosures(NumericKind.All)]
@@ -165,7 +169,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => gmath.negative(a);
+            public bit Invoke(T a) 
+                => gmath.negative(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
@@ -183,7 +188,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => gmath.positive(a);
+            public bit Invoke(T a) 
+                => gmath.positive(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
@@ -201,12 +207,12 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.min(a, b);
+            public T Invoke(T a, T b) 
+                => gmath.min(a, b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
                 => SpanFunc.apply(this, lhs,rhs,dst);
-
         }
 
         [NumericClosures(NumericKind.All)]
@@ -220,13 +226,12 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.max(a, b);
+            public T Invoke(T a, T b) 
+                => gmath.max(a, b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
                 => SpanFunc.apply(this, lhs,rhs,dst);
-
         }
-
     }
 }

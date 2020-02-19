@@ -80,12 +80,32 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary operator that accepts an 8-bit immediate
+    /// Characterizes an operator that applies a bitwise shift or rotation to elements in a source span
     /// </summary>
-    /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnarySpanOpImm8<T> : ISpanOp
+    public interface IShiftSpanOp : ISpanOp
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a span operator that shifts each source element by the same amount
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IShiftSpanOp<T> : IShiftSpanOp
     {
         Span<T> Invoke(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
     }
+
+    /// <summary>
+    /// Characterizes a span operator that shifts each source element by an amount secified in a corresponding count span
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVarShiftSpanOp<T> : IShiftSpanOp
+    {
+        Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst);
+    }
+
 }

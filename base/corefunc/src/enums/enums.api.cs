@@ -7,24 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Linq;
 
     using static zfunc;
 
     public static class Enums
     {
-        [MethodImpl(Inline)]
-        public static EnumIndexEntry<E>[] indexed<E>()
-            where E : unmanaged, Enum
-        {
-            var fields = typeof(E).LiteralFields().ToArray();
-            var indexed = new EnumIndexEntry<E>[fields.Length];
-            for(var i=0; i<indexed.Length; i++)
-                indexed[i] = new EnumIndexEntry<E>(i, fields[i].Name,  (E)fields[i].GetRawConstantValue());
-            return indexed;
-        }
-
         [MethodImpl(Inline)]
         public static E zero<E>()
             where E : unmanaged, Enum

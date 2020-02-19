@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;         
-    using static ByteKind;       
+    using static HexByteKind;       
 
     public static class EncodingModels
     {

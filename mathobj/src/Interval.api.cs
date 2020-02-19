@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
@@ -71,7 +70,7 @@ namespace Z0
             where T : unmanaged
         {
             var points = partpoints(src,width);
-            var dst = span<Interval<T>>(points.Length - 1);
+            var dst = alloc<Interval<T>>(points.Length - 1);
             var lastIx = points.Length - 1;
             var lastCycleIx = lastIx - 1;
             
@@ -117,7 +116,7 @@ namespace Z0
             var len =  length(src);
             convert<T,int>(gmath.div(len, width), out int count);
             
-            var dst = span<T>(count + 1);
+            var dst = alloc<T>(count + 1);
             var point = src.Left;
             var lastix = dst.Length - 1;
 
@@ -144,7 +143,7 @@ namespace Z0
             var len =  gfp.round(length(src), scale);
             var fcount = gfp.div(len, width);
             var count = convert<T,int>(gfp.ceil(fcount));            
-            var dst = span<T>(count + 1);
+            var dst = alloc<T>(count + 1);
 
             var point = src.Left;
             var lastix = dst.Length - 1;

@@ -225,12 +225,12 @@ namespace Z0.Mkl
             (var method, var introMsg) = varintro($"{m}x{n} * {n}x{m} = {m}x{m}", silent);
             var count = m*n;
             
-            var srcA = span<double>(count);
+            var srcA = alloc<double>(count);
             for(var i=1; i<= count; i++)
                 srcA[i-1] = i;
             var a = Matrix.blockload<M,N,double>(srcA);
 
-            var srcB = span<double>(m*n);
+            var srcB = alloc<double>(m*n);
             for(var i=1; i<= count; i++)
                 srcB[i-1] = i;
             var b = Matrix.blockload<N,M,double>(srcB);

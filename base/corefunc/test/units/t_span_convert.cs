@@ -32,7 +32,7 @@ namespace Z0
 
             var valSize = Unsafe.SizeOf<T>();
             var values = Random.Stream<T>().ToSpan(Pow2.T08);
-            var bytes = span<byte>(valSize*values.Length);
+            var bytes = alloc<byte>(valSize*values.Length);
             for(int i = 0, offset = 0; i< values.Length; i++, offset += valSize)
             {
                 var value = values[i];
@@ -90,7 +90,7 @@ namespace Z0
 
             var valSize = sizeof(int);
             var values = Random.Stream<int>().ToSpan(Pow2.T08);
-            var bytes = span<byte>(sizeof(int)*values.Length);
+            var bytes = alloc<byte>(sizeof(int)*values.Length);
             for(int i = 0, offset = 0; i< values.Length; i++, offset += valSize)
             {
                 var value = values[i];

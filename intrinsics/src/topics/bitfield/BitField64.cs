@@ -18,7 +18,7 @@ namespace Z0
         readonly BitFieldSpecV1 spec;
 
         [MethodImpl(Inline)]
-        public BitFieldRef64(ulong data, Span<BitFieldSegment> segments)
+        public BitFieldRef64(ulong data, Span<FieldSegment> segments)
         {
             this.data = data;
             this.spec = new BitFieldSpecV1(segments);

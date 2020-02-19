@@ -36,7 +36,6 @@ namespace Z0
         NumericKind IFixedEmitter.SegmentKind => typeof(T).NumericKind();
     }
 
-
     /// <summary>
     /// Characterizes a vectorized emitter
     /// </summary>

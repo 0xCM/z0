@@ -31,7 +31,7 @@ namespace Z0
         public ParsedEncodings Parse(ApiHost host, CapturedEncodings encoded)
         {
             var dst = new ParsedEncoding[encoded.Records.Length];
-            var buffer = span<byte>(BufferLength);
+            var buffer = alloc<byte>(BufferLength);
             var parser = EncodingParser.ByteParser(Context, BufferLength);
             
             print($"Parsing {encoded.Records.Length} {host} records");

@@ -28,7 +28,7 @@ namespace Z0
             ref readonly var leftIn = ref head(lhs);            
             
             
-            var dst = span<T2>(count);
+            var dst = alloc<T2>(count);
             ref var target = ref head(dst);
             
             clock.Start();

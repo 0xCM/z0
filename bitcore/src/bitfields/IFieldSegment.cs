@@ -6,41 +6,45 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
-    using static As;
-
-    public interface IBitFieldSegment : ICustomFormattable
+    /// <summary>
+    /// Identifies a value partition element
+    /// </summary>
+    public interface IFieldSegment : ICustomFormattable
     {
         /// <summary>
-        /// The 0-based and monotonically increasing segment identifier
+        /// A unique name that identifies the segment
         /// </summary>
-        byte Index {get;}
+        string Name {get;}        
+    }
 
+    /// <summary>
+    /// Characterizes an element within a field partition
+    /// </summary>
+    /// <typeparam name="T">The field type over which a partition is defined</typeparam>
+    public interface IFieldSegment<T> : IFieldSegment
+        where T : unmanaged
+    {
         /// <summary>
-        /// A unique name that can be used as an alternate segment identifier
+        /// An alternate segment identifier
         /// </summary>
-        string Name {get;}
+        T Index {get;}
 
         /// <summary>
         /// The first index of the segment, relative to the source field
         /// </summary>
-        byte StartPos {get;}
+        T StartPos {get;}
 
         /// <summary>
         /// The last index of the segment, relative to the source field
         /// </summary>
-        byte EndPos {get;}
+        T EndPos {get;}
 
         /// <summary>
         /// The number of bits in the segment
         /// </summary>
-        byte Width
-        {
-            [MethodImpl(Inline)]
-            get => (byte)(EndPos - StartPos + 1);
-        }
+        T Width {get;}        
     }
 }

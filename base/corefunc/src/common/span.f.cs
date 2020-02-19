@@ -20,7 +20,7 @@ partial class zfunc
     /// <param name="length">The number cells to allocate</param>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(NotInline)]
-    public static Span<T> span<T>(int length, T t = default)
+    public static Span<T> alloc<T>(int length, T t = default)
         => new Span<T>(new T[length]);
 
     /// <summary>
@@ -29,7 +29,16 @@ partial class zfunc
     /// <param name="length">The number cells to allocate</param>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(NotInline)]
-    public static Span<T> span<T>(ushort length, T t = default)
+    public static Span<T> alloc<T>(ushort length, T t = default)
+        => new Span<T>(new T[length]);
+
+    /// <summary>
+    /// Allocates a span
+    /// </summary>
+    /// <param name="length">The number cells to allocate</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(NotInline)]
+    public static Span<T> alloc<T>(byte length, T t = default)
         => new Span<T>(new T[length]);
 
     [MethodImpl(Inline)]

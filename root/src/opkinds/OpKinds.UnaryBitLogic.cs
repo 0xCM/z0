@@ -7,16 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static RootShare;
 
-    public interface IKnownOpType
+    using K = UnaryBitLogicKind;
+
+    partial class OpKinds
     {
-        string Name {get;}
+        public readonly struct Not : IOpKind<Not,K> { public K Kind { [MethodImpl(Inline)] get => K.Not;}}
     }
 
-    public interface IKnownOpType<K> : IKnownOpType
-        where K : unmanaged, IKnownOpType<K>
-    {
-        string IKnownOpType.Name => typeof(K).Name.ToLower();
-    }    
 }

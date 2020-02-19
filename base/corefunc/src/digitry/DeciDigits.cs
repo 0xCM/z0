@@ -37,7 +37,7 @@ namespace Z0
         public static Span<DeciDigit> Parse(string src)
         {
             var len = src.Length;
-            var dst = span<DeciDigit>(len);
+            var dst = alloc<DeciDigit>(len);
             for(var i = 0; i< len; i++)
                 dst[i] = Parse(src[i]);            
             return dst;            

@@ -32,7 +32,7 @@ namespace Z0
         {
             var offset = src.StartsWith("0b") ? 2 : 0;
             var len = src.Length - offset;
-            var dst = span<BinaryDigit>(len);
+            var dst = alloc<BinaryDigit>(len);
             for(var i = offset; i< len; i++)
                 dst[i] = Parse(src[i]);            
             return dst;

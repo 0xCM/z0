@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
 
     using static zfunc;
 
@@ -77,6 +74,5 @@ namespace Z0
         public abstract T @true();
 
         public abstract T xnor(T a, T b);
-
     }
 }

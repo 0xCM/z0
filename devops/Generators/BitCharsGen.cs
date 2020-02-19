@@ -39,7 +39,6 @@ namespace Z0
             return dst;
         }
 
-
         public static string GenAccessor(string propname)
             => InlineData.GenAccessor(GenData(), propname, seglen: 16);
 

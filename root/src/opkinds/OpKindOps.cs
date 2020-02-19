@@ -8,11 +8,10 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static RootShare;
 
-    public static class OpKindFormat
+    public static class OpKindOps
     {
-
         [MethodImpl(Inline)]
         public static string Format(this UnaryBitLogicKind kind)
             => kind.ToString().ToLower();
@@ -77,5 +76,12 @@ namespace Z0
 
         public static string Format<S,T>(this ShiftOpKind kind, S arg1, T arg2)
             => $"{arg1} {kind.Format()} {arg2}"; 
+
+        [MethodImpl(Inline)]
+        public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
+            => src != TernaryBitLogicKind.XFF 
+                ? (TernaryBitLogicKind)((uint)(src) + 1u)
+                : TernaryBitLogicKind.X00;        
+
     }
 }

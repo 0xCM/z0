@@ -44,7 +44,6 @@ namespace Z0
         public static void fail([Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw failed(ClaimOpKind.Fail, AppMsg.Error("failed", caller, file,line));
 
-
         /// <summary>
         /// Asserts that a set contains a specified element
         /// </summary>
@@ -185,56 +184,14 @@ namespace Z0
         public static void eq(bit lhs, bit rhs)
             => (lhs == rhs).IfNone(() => Errors.ThrowNotEqual(lhs,rhs));
 
-        public static bool eq(byte lhs, byte rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(HexByteKind lhs, HexByteKind rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        /// <summary>
-        /// Asserts equality of two unsigned 8-bit values
-        /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        [MethodImpl(Inline)]
-        public static void ueq(byte lhs, byte rhs)
-        {
-            if(lhs != rhs)
-                Errors.ThrowNotEqual(lhs,rhs);
-        }
+        public static bool eq(ByteKind lhs, ByteKind rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        /// <summary>
-        /// Asserts equality of two unsigned 16-bit values
-        /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        [MethodImpl(Inline)]
-        public static void ueq(ushort lhs, ushort rhs)
-        {
-            if(lhs != rhs)
-                Errors.ThrowNotEqual(lhs,rhs);
-        }
-
-        /// <summary>
-        /// Asserts equality of two unsigned 32-bit values
-        /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        [MethodImpl(Inline)]
-        public static void ueq(uint lhs, uint rhs)
-        {
-            if(lhs != rhs)
-                Errors.ThrowNotEqual(lhs,rhs);
-        }
-
-        /// <summary>
-        /// Asserts equality of two unsigned 64-bit values
-        /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        [MethodImpl(Inline)]
-        public static void ueq(ulong lhs, ulong rhs)
-        {
-            if(lhs != rhs)
-                Errors.ThrowNotEqual(lhs,rhs);
-        }
+        public static bool eq(byte lhs, byte rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         public static bool eq(sbyte lhs, sbyte rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));

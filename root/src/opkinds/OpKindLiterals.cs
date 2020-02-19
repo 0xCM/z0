@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static RootShare;
 
     /// <summary>
     /// Classifies operator arities
@@ -1631,7 +1631,6 @@ namespace Z0
         Dec = 2,
 
         Negate = 3,
-
     }    
 
     /// <summary>
@@ -1644,15 +1643,4 @@ namespace Z0
 
         Sub = 2,
     }    
-
-    public static class OperatorKindExtensions
-    {
-        [MethodImpl(Inline)]
-        public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
-            => src != TernaryBitLogicKind.XFF 
-                ? (TernaryBitLogicKind)((uint)(src) + 1u)
-                : TernaryBitLogicKind.X00;        
-
-    }
-
 }

@@ -113,7 +113,7 @@ partial class zfunc
         where T : unmanaged
         where S : unmanaged
     {
-        var dst = span<T>(src.Length);
+        var dst = alloc<T>(src.Length);
         for(var i=0; i<src.Length; i++)
             dst[i] = convert<S,T>(src[i]);
         return dst;

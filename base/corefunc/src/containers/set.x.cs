@@ -74,7 +74,7 @@ namespace Z0
         
         public static Span<T> ToSpan<T>(this ISet<T> src)
         {
-            var dst = span<T>(src.Count);
+            var dst = alloc<T>(src.Count);
             var i = 0;
             foreach(var item in src)
                 dst[i++] = item;

@@ -123,7 +123,7 @@ namespace Z0
 
         public static Span<T> ceil<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => ceil(src, span<T>(src.Length));
+                => ceil(src, alloc<T>(src.Length));
 
         public static Span<T> ceil<T>(Span<T> io)
             where T : unmanaged
@@ -144,7 +144,7 @@ namespace Z0
 
         public static Span<T> floor<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => floor(src, span<T>(src.Length));
+                => floor(src, alloc<T>(src.Length));
 
         public static Span<T> floor<T>(Span<T> src)
             where T : unmanaged

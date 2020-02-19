@@ -65,7 +65,7 @@ namespace Z0
             var rhs = (ExcludeZero ? Random.NonZeroSpan<T2>(count) : Random.Span<T2>(count)).ReadOnly();
             ref readonly var rightIn = ref head(rhs);
             
-            var dst = span<T3>(count);
+            var dst = alloc<T3>(count);
             ref var target = ref head(dst);
             
             clock.Start();

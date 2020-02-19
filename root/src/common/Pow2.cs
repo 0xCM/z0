@@ -7,28 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static RootShare;
     
     public static class Pow2    
     {                
-        /// <summary>
-        /// Returns a span containing each power of 2 where the exponent is wihin the range [0,63]
-        /// </summary>
-        public static ReadOnlySpan<ulong> Values
-        {
-            [MethodImpl(Inline)]
-            get => Bytes.As<ulong>();
-        }
-
-        /// <summary>
-        /// Computes the remainder of division by a power of 2, a % 2^i
-        /// </summary>
-        /// <param name="a">The value being divided by a power of 2</param>
-        /// <param name="i">The exponent</param>
-        [MethodImpl(Inline)]
-        public static ulong mod(ulong a, int i)        
-            => a & ((1ul << i) - 1);  
-
         /// <summary>
         /// Computes 2^i where i is an integer value in the interval [0,63]
         /// </summary>
@@ -44,16 +26,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong pow(int i)
             =>  1ul << i; 
-
-        /// <summary>
-        /// Computes 2^i where i is an integer value in the interval [0,63]
-        /// and 2^i does not exceed the maximum value of T
-        /// </summary>
-        /// <param name="i">The exponent</param>
-        [MethodImpl(Inline)]
-        public static T pow<T>(byte i)
-            where T : unmanaged
-                => convert<ulong,T>(1ul << i); 
 
         /// <summary>
         /// 2^0 = 1
@@ -285,9 +257,9 @@ namespace Z0
         /// </summary>
         public const ulong T63 = 2*(ulong)T62;        
         
-        [MethodImpl(Inline)]
-        public static ulong Lookup(int log2Idx)
-            => Bytes.Slice(log2Idx*8,8).TakeUInt64();
+        // [MethodImpl(Inline)]
+        // public static ulong Lookup(int log2Idx)
+        //     => Bytes.Slice(log2Idx*8,8).TakeUInt64();
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> Data(int log2Idx)

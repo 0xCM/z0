@@ -113,16 +113,52 @@ namespace Z0
             where T : unmanaged
                 => SpanFunc.apply(GX.odd<T>(), src,dst);
 
+        /// <summary>
+        /// Computes the bitwise and between corresponding span elements
+        /// </summary>
+        /// <param name="l">The left source span</param>
+        /// <param name="r">The right source span</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> and<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.and<T>(), l,r,dst);
 
+        /// <summary>
+        /// Computes the bitwise or between corresponding span elements
+        /// </summary>
+        /// <param name="l">The left source span</param>
+        /// <param name="r">The right source span</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> or<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.or<T>(), l, r, dst);
 
+        /// <summary>
+        /// Computes the aggregate bitwise or of the source elements
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        public static T or<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+        {
+            var result = default(T);
+            for(var i=0; i<src.Length; i++)
+                result = GX.or<T>().Invoke(result, skip(src,i));
+            return result;
+        }                
+
+        /// <summary>
+        /// Computes the bitwise xor between corresponding span elements
+        /// </summary>
+        /// <param name="l">The left source span</param>
+        /// <param name="r">The right source span</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> xor<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
@@ -188,19 +224,6 @@ namespace Z0
         }                
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
-        public static Span<T> srlv<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> counts, Span<T> dst)
-            where T : unmanaged
-        {
-            var len = dst.Length;
-            ref readonly var input = ref head(src);
-            ref readonly var count = ref head(counts);
-            ref var target = ref head(dst);
-            for(var i=0; i < len; i++)
-                seek(ref target,i) = gmath.srl(skip(input,i), convert<T,byte>(skip(count,i)));
-            return dst;
-        }
-
-        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> sll<T>(ReadOnlySpan<T> src, byte count, Span<T> dst)
             where T : unmanaged
         {            
@@ -213,15 +236,30 @@ namespace Z0
         }                
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
-        public static Span<T> sllv<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> counts, Span<T> dst)
+        public static Span<T> sllv<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
             where T : unmanaged
         {
             var len = dst.Length;
             ref readonly var input = ref head(src);
             ref readonly var count = ref head(counts);
             ref var target = ref head(dst);
+            
             for(var i=0; i < len; i++)
-                seek(ref target,i) = gmath.sll(skip(input,i), convert<T,byte>(skip(count,i)));
+                seek(ref target,i) = gmath.sll(skip(input,i), skip(count,i));
+            return dst;
+        }
+
+        [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
+        public static Span<T> srlv<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
+            where T : unmanaged
+        {
+            var len = dst.Length;
+            ref readonly var input = ref head(src);
+            ref readonly var count = ref head(counts);
+            ref var target = ref head(dst);
+
+            for(var i=0; i < len; i++)
+                seek(ref target,i) = gmath.srl(skip(input,i), skip(count,i));
             return dst;
         }
 
@@ -238,8 +276,8 @@ namespace Z0
             var count = lhs.Length;
             ref readonly var lSrc = ref head(lhs);
             ref readonly var rSrc = ref head(rhs);
-
             var dst = default(T);
+
             for(var i = 0; i< count; i++)
                 dst = gmath.fma(skip(lSrc, i), skip(rSrc,i), dst);
             return dst;                

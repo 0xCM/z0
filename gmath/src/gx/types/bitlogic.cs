@@ -21,9 +21,9 @@ namespace Z0
 
             public OpIdentity Id => Identity.contracted<T>(Name);
 
-
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.and(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.and(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
@@ -41,7 +41,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.or(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.or(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
@@ -58,9 +59,9 @@ namespace Z0
 
             public OpIdentity Id => Identity.contracted<T>(Name);
 
-
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.xor(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.xor(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
@@ -78,7 +79,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.nand(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.nand(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
@@ -92,11 +94,11 @@ namespace Z0
             public const string Name = "not";
 
             public static Nor<T> Op => default;
-
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.nor(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.nor(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
@@ -114,7 +116,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.xnor(a, b);
+            public T Invoke(T a, T b) 
+                => gmath.xnor(a, b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
@@ -132,12 +135,12 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b, T c) => gmath.select(a, b, c);
+            public T Invoke(T a, T b, T c) 
+                => gmath.select(a, b, c);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
                 => mathspan.select(a,b,c,dst);
-
         }
 
         [NumericClosures(NumericKind.Integers)]
@@ -151,7 +154,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a) => gmath.not(a);
+            public T Invoke(T a) 
+                => gmath.not(a);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
@@ -169,7 +173,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.impl(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.impl(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
@@ -187,7 +192,8 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.nonimpl(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.nonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
@@ -206,12 +212,12 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.cimpl(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.cimpl(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
                 => mathspan.cimpl(lhs,rhs,dst);
-
         }
 
         [NumericClosures(NumericKind.Integers)]
@@ -221,16 +227,16 @@ namespace Z0
             public const string Name = "cnonimpl";
 
             public static CNonImpl<T> Op => default;
-
+            
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.cnonimpl(a,b);
+            public T Invoke(T a, T b) 
+                => gmath.cnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
                 => mathspan.cnonimpl(lhs,rhs,dst);
-
         }
     }
 }

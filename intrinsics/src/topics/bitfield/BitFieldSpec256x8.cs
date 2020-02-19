@@ -37,19 +37,19 @@ namespace Z0
         public byte SegWidth(E id)
             => vcell(widths, evalue<E,int>(id));
 
-        BitFieldSegment[] Segments()
+        FieldSegment[] Segments()
         {
-            Span<BitFieldSegment> parts = span<BitFieldSegment>(MaxFieldCount);
+            Span<FieldSegment> parts = alloc<FieldSegment>(MaxFieldCount);
             var count = 0;
             var start = 0;
-            var index = Enums.indexed<E>();
+            var index = FieldIndex.Entries<E>();
             for(int i=0; i < MaxFieldCount; i++)
             {
                 var width = vcell(widths,i);
                 if(width == 0)
                     break;                
 
-                var seg = BitFieldSegment.Define(evalue<E,byte>(index[i].Value), index[i].Name, (byte)start, (byte)(start + width));
+                var seg = FieldSegments.define(index[i].FieldName, evalue<E,byte>(index[i].FieldValue), (byte)start, (byte)(start + width), width);
                 parts[count++] = seg;
                 start = start + width + 1;
             }

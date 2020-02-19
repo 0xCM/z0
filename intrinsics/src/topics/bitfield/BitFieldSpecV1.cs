@@ -12,24 +12,24 @@ namespace Z0
 
     public readonly ref struct BitFieldSpecV1
     {
-        readonly Span<BitFieldSegment> Fields;
+        readonly Span<FieldSegment> Fields;
 
         [MethodImpl(Inline)]
-        public BitFieldSpecV1(BitFieldSegment[] fields)
+        public BitFieldSpecV1(FieldSegment[] fields)
         {
             this.Fields = fields;
         }
 
         [MethodImpl(Inline)]
-        public BitFieldSpecV1(Span<BitFieldSegment> fields)
+        public BitFieldSpecV1(Span<FieldSegment> fields)
         {
             this.Fields = fields;
         }
 
-        public BitFieldSegment this[int i]
+        public FieldSegment this[int i]
         {
             [MethodImpl(Inline)]
-            get => skip<BitFieldSegment>(Fields,i);
+            get => skip<FieldSegment>(Fields,i);
         }
 
         public int FieldCount

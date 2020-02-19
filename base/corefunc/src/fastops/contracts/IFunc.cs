@@ -39,8 +39,7 @@ namespace Z0
     {
         A Invoke();
 
-        FunctionKind IFunc.Kind => FunctionKind.Emitter;
-        
+        FunctionKind IFunc.Kind => FunctionKind.Emitter;        
     }
 
     /// <summary>
@@ -74,7 +73,6 @@ namespace Z0
         C Invoke(A a, B b);
 
         FunctionKind IFunc.Kind => FunctionKind.BinaryFunc;
-
     }
 
     /// <summary>
