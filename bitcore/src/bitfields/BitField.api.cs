@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Collections.Concurrent;
 
     using static zfunc;
 
@@ -14,6 +15,15 @@ namespace Z0
 
     public static class BitField
     {
+        /// <summary>
+        /// Defines a bitfield predicated on an enum type
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitFieldSpec specify<E>()
+            where E : unmanaged, Enum
+                => GetSpec<E>();
+
         public static FieldSegment[] segments<E>(FieldIndexEntry<E>[] indices)
             where E : unmanaged, Enum
         {            
@@ -31,15 +41,6 @@ namespace Z0
             }
             return segments;
         }
-
-        /// <summary>
-        /// Defines a bitfield predicated on an enum type
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitFieldSpec specify<E>()
-            where E : unmanaged, Enum
-                => new BitFieldSpec(segments(FieldIndex.Entries<E>()));
 
         /// <summary>
         /// Defines a bitfield predicated on explicitly-specified segments
@@ -82,5 +83,19 @@ namespace Z0
 
         public static string format(in BitFieldSpec spec)
             => FieldSegments.format(spec.Segments);
+
+
+        static BitFieldSpec CreateSpec<E>()
+            where E : unmanaged, Enum
+                => new BitFieldSpec(segments(FieldIndex.Entries<E>()));
+
+        [MethodImpl(Inline)]
+        static BitFieldSpec GetSpec<E>()
+            where E : unmanaged, Enum
+                => FieldSpecs.GetOrAdd(typeof(E), _ => CreateSpec<E>());
+
+        static readonly ConcurrentDictionary<Type,BitFieldSpec> FieldSpecs
+            = new ConcurrentDictionary<Type, BitFieldSpec>();
+        
     }
 }

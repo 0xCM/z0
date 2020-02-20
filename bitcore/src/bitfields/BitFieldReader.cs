@@ -12,14 +12,17 @@ namespace Z0
     public readonly ref struct BitFieldReader<T>
         where T : unmanaged
     {
-        readonly BitFieldSpec spec;
+        /// <summary>
+        /// The bitfield definition upon which the reader is predicated
+        /// </summary>
+        public readonly BitFieldSpec Spec;
 
         readonly ReadOnlySpan<FieldSegment> Segments;
 
         [MethodImpl(Inline)]
         internal BitFieldReader(in BitFieldSpec spec)
         {
-            this.spec = spec;
+            this.Spec = spec;
             this.Segments = spec.Segments;            
         }
 
@@ -39,7 +42,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void Read(T src, Span<T> dst)
-            => BitField.read(spec, src, dst);
+            => BitField.read(Spec, src, dst);
 
         [MethodImpl(Inline)]
         public T Read(in FieldSegment segment, T src, bool offset)

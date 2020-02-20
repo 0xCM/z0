@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="uppercase">Specifies whether hex characters should be upper-cased</param>
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
         [MethodImpl(Inline)]
-        public static string FormatHex(this sbyte src, bool zpad, bool specifier, bool uppercase, bool prespec)
+        public static string FormatHex(this sbyte src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
             + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad8, '0') 
             : src.ToString(HexFmtSpec(uppercase)))
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="uppercase">Specifies whether hex characters should be upper-cased</param>
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
         [MethodImpl(Inline)]
-        public static string FormatHex(this short src, bool zpad, bool specifier, bool uppercase, bool prespec)
+        public static string FormatHex(this short src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
              + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad16, '0') 
                      : src.ToString(HexFmtSpec(uppercase)))
@@ -204,7 +204,7 @@ namespace Z0
         /// <param name="uppercase">Specifies whether hex characters should be upper-cased</param>
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
         [MethodImpl(Inline)]
-        public static string FormatHex(this int src, bool zpad, bool specifier, bool uppercase, bool prespec)
+        public static string FormatHex(this int src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
              + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad32, '0') 
                      : src.ToString(HexFmtSpec(uppercase)))
@@ -254,6 +254,24 @@ namespace Z0
              + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad64, '0') 
                      : src.ToString(HexFmtSpec(uppercase)))
              + (specifier && !prespec  ? "h" : string.Empty);    
+
+        /// <summary>
+        /// Formats a scalar value as a sequence of hex digits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="uppercase">Whether to use uppercase characters for digits A - F</param>
+        [MethodImpl(Inline)]
+        public static string FormatHex(this float src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => BitConverter.SingleToInt32Bits(src).FormatHex(zpad, specifier, uppercase, prespec);
+
+        /// <summary>
+        /// Formats a scalar value as a sequence of hex digits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="uppercase">Whether to use uppercase characters for digits A - F</param>
+        [MethodImpl(Inline)]
+        public static string FormatHex(this double src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => BitConverter.DoubleToInt64Bits(src).FormatHex(zpad, specifier, uppercase, prespec);
 
         /// <summary>
         /// Formats a scalar stream as a hex string
@@ -364,23 +382,6 @@ namespace Z0
         public static string HexDigits(this ulong src, bool uppercase)
             => src.ToString(uppercase ? UC : LC);
 
-        /// <summary>
-        /// Formats a scalar value as a sequence of hex digits
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="uppercase">Whether to use uppercase characters for digits A - F</param>
-        [MethodImpl(Inline)]
-        public static string HexDigits(this float src, bool uppercase)
-            => BitConverter.SingleToInt32Bits(src).ToString(uppercase ? UC : LC);
-
-        /// <summary>
-        /// Formats a scalar value as a sequence of hex digits
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="uppercase">Whether to use uppercase characters for digits A - F</param>
-        [MethodImpl(Inline)]
-        public static string HexDigits(this double src, bool uppercase)
-            => BitConverter.DoubleToInt64Bits(src).ToString(uppercase ? UC : LC);
 
         /// <summary>
         /// Formats a 64-bit blocked span as a sequence of hex values

@@ -32,17 +32,6 @@ namespace Z0
         }
     }
 
-    /// <summary>
-    ///  Characterizes a fixed type where the storage and reification sizes may differ
-    /// </summary>
-    /// <typeparam name="F">The reifying type</typeparam>
-    /// <typeparam name="S">The storage type</typeparam>
-    public interface IFixed<F,S> : IFixed
-        where F : unmanaged, IFixed<F,S>
-        where S : unmanaged
-    {
-
-    }
 
     /// <summary>
     ///  Characterizes a fixed type with storage and reification types of equal size
@@ -68,6 +57,18 @@ namespace Z0
             [MethodImpl(Inline)]
             get => 8*FullByteCount;
         }
+    }
+
+    /// <summary>
+    ///  Characterizes a fixed type where the storage and reification sizes may differ
+    /// </summary>
+    /// <typeparam name="F">The reifying type</typeparam>
+    /// <typeparam name="S">The storage type</typeparam>
+    public interface IFixed<F,S> : IFixed
+        where F : unmanaged, IFixed<F,S>
+        where S : unmanaged
+    {
+
     }
 
     public interface IFixedNumeric<T> : IFixed<T>, IFixedWidth

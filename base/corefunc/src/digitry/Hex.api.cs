@@ -25,7 +25,25 @@ namespace Z0
         /// Standard hex specifier that trails the numeric content
         /// </summary>
         public const char PostSpec = 'h';
-        
+
+        [MethodImpl(Inline)]
+        public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return hexdigits_u(src, zpad, specifier, uppercase, prespec);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return hexdigits_i(src, zpad, specifier, uppercase, prespec);
+            else 
+                return hexdigits_f(src, zpad, specifier, uppercase, prespec);
+        }
+
         /// <summary>
         /// Determines whether a character is a hex digit
         /// </summary>
@@ -52,6 +70,20 @@ namespace Z0
             d0 = (char)skip(in codes, 0xF & value);
             d1 = (char)skip(in codes, (value >> 4) & 0xF);
         }
+
+        [MethodImpl(Inline)]
+        public static (char d0, char d1) tuple(byte value)
+        {
+            ref readonly var codes = ref head(HexCodes);
+            return (
+                (char)skip(in codes, 0xF & value),
+                (char)skip(in codes, (value >> 4) & 0xF)
+            );
+        }
+
+        [MethodImpl(Inline)]
+        public static (char d0, char d1, char d2, char d3) tuple(ushort value)
+            => (digit(value,0), digit(value,1), digit(value,3), digit(value,3));
 
         /// <summary>
         /// Presuming a source value int the range [0,15], returns the corresponding hex 
@@ -98,7 +130,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The byte value</param>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> digits(byte value)
+        static ReadOnlySpan<char> digits(byte value)
         {
             ref readonly var codes = ref head(HexCodes);
             var storage = Stacks.chars(n2);
@@ -114,7 +146,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The byte value</param>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> digits(ushort value)
+        static ReadOnlySpan<char> digits(ushort value)
         {
             const int count = 4;
             ref readonly var codes = ref head(HexCodes);
@@ -131,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The byte value</param>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> digits(uint value)
+        static ReadOnlySpan<char> digits(uint value)
         {
             const int count = 8;
             ref readonly var codes = ref head(HexCodes);
@@ -148,7 +180,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The byte value</param>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> digits(ulong value)
+        static ReadOnlySpan<char> digits(ulong value)
         {
             const int count = 16;
             ref readonly var codes = ref head(HexCodes);
@@ -159,29 +191,6 @@ namespace Z0
                 @char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
             return Stacks.charspan(ref storage);
         }
-
-        [MethodImpl(Inline)]
-        public static string text<T>(T src, bool uppercase = true)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return hexdigits_u(src,uppercase);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return hexdigits_i(src,uppercase);
-            else 
-                return hexdigits_f(src,uppercase);
-        }
-
-        [MethodImpl(Inline)]
-        public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = true)
-            where T : unmanaged
-                => format_hex_digits<T>(text(src,uppercase),zpad,specifier);
 
         static string clean(string src)
             => src.Remove(PreSpec).RemoveAny(AsciLower.h);
@@ -200,7 +209,6 @@ namespace Z0
             else
                 return Errors.ThrowArgException<char,byte>(c);
         }
-
 
         /// <summary>
         /// Attempts to parse a hex string as an unsigned long
@@ -229,7 +237,7 @@ namespace Z0
             => src.Split(sep).Select(parsebyte);
                
         [MethodImpl(Inline)]
-        static string format_hex_digits<T>(string digits, bool zpad = true, bool specifier = true)
+        static string format_hex_digits<T>(string digits, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
         {
             var spec = specifier ? PreSpec : string.Empty;
@@ -237,41 +245,41 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static string hexdigits_i<T>(T src, bool uppercase)
+        static string hexdigits_i<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.int8(src).HexDigits(uppercase);
+                return int8(src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(short))
-                return As.int16(src).HexDigits(uppercase);
+                return int16(src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(int))
-                return As.int32(src).HexDigits(uppercase);
+                return int32(src).FormatHex(zpad,specifier,uppercase,prespec);
             else 
-                return As.int64(src).HexDigits(uppercase);
+                return int64(src).FormatHex(zpad,specifier,uppercase,prespec);
         } 
 
         [MethodImpl(Inline)]
-        static string hexdigits_u<T>(T src, bool uppercase)
+        static string hexdigits_u<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return uint8(src).HexDigits(uppercase);
+                return uint8(src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(ushort))
-                return As.uint16(src).HexDigits(uppercase);
+                return uint16(src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(uint))
-                return As.uint32(src).HexDigits(uppercase);
+                return uint32(src).FormatHex(zpad,specifier,uppercase,prespec);
             else 
-                return  As.uint64(src).HexDigits(uppercase);
+                return  uint64(src).FormatHex(zpad,specifier,uppercase,prespec);
         } 
 
         [MethodImpl(Inline)]
-        static string hexdigits_f<T>(T src, bool uppercase)
+        static string hexdigits_f<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return As.float32(src).HexDigits(uppercase);
+                return float32(src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(double))
-                return As.float64(src).HexDigits(uppercase);
+                return float64(src).FormatHex(zpad,specifier,uppercase,prespec);
             else
                 throw unsupported<T>();
         } 
@@ -297,7 +305,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static bit ishi(char c)
             => (byte)c >= MinHiCode && (byte)c <= MaxCode;
-
-
     }
 }

@@ -9,7 +9,6 @@ namespace Z0
 
     public class t_hex : UnitTest<t_hex>
     {
-
         public void hexdigits_define()
         {
             byte x0 = 0x3C;
@@ -82,5 +81,4 @@ namespace Z0
 
         }
     }
-
 }

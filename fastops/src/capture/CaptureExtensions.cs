@@ -25,7 +25,7 @@ namespace Z0
         {            
             var data = src.Code;
             var dst = text();
-			dst.AppendLine($"; label   : {src.SourceOp.Signature.Format()}");
+			dst.AppendLine($"; label   : {src.SourceOp.Signature}");
 			dst.AppendLine($"; location: {src.SourceMemory.Format()}, length: {src.SourceMemory.Length} bytes");
             var lines = data.Encoded.FormatHexLines(null);
             dst.Append(lines.Concat(AsciEscape.Eol));

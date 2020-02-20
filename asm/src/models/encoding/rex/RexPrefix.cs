@@ -6,15 +6,18 @@ namespace Z0.Asm.Encoding
 {        
     using System;
     using System.Runtime.CompilerServices;
-
+    using Z0;
     using static zfunc;         
 
-    using RF = RexField;   
+    using RF = RexFieldId;   
     using RFW = RexFieldWidth;
 
-    public struct RexPrefix : IFixedNumeric<byte>, INumericFormattable<RexPrefix>
-    {            
+    public struct RexPrefix : IFixedNumeric<byte>, INumericFormatProvider<RexPrefix>
+    {                    
         byte data;
+
+        public static BitFieldReader<RexPrefix> Reader
+            => BitField.specify<RexFieldWidth>().Reader<RexPrefix>();
 
         [MethodImpl(Inline)]
         public static RexPrefix Define(bit b, bit x, bit r, bit w, RexCode kind)
@@ -70,12 +73,12 @@ namespace Z0.Asm.Encoding
         {                
             [MethodImpl(Inline)] get => (RexCode)gbits.bitslice(data, 4, (byte)RFW.Code);
             [MethodImpl(Inline)] set => data = gbits.bitcopy((byte)value, 4, (byte)RFW.Code, data);
-        } 
+        }
 
-        public string Format()
-            => $"{RF.Code}:{Code} | {RF.W}:{W} | {RF.R}:{R} | {RF.X}:{X} | {RF.B}:{B}";
-
-        public string Format(NumericBase @base)
-            => data.Format(@base);
+        public INumericFormatter<RexPrefix> Formatter
+        {
+             [MethodImpl(Inline)]
+             get => RexFormatter.Default;
+        }
     }
 }
