@@ -32,11 +32,11 @@ namespace Z0
         }
 
         public static string GenAccessor()
-            => InlineData.GenAccessor(GenData(), $"{BasePropName}{Identity.numericid<ulong>()}");
+            => InlineData.GenAccessor(GenData(), $"{BasePropName}{TypeId.numeric<ulong>()}");
 
         public static string GenAccessor<T>()
             where T : unmanaged
-                => InlineData.GenAccessor(GenData<T>(), $"{BasePropName}{Identity.numericid<T>()}");
+                => InlineData.GenAccessor(GenData<T>(), $"{BasePropName}{TypeId.numeric<T>()}");
 
         public static void GenToFile()
         {

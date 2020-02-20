@@ -292,7 +292,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {            
-            var opname = $"bvdot_n{n}x{Identity.numericid<T>()}";
+            var opname = $"bvdot_n{n}x{TypeId.numeric<T>()}";
 
             void check()
             {

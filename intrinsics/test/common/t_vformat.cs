@@ -49,9 +49,9 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var srcType = Identity.numericid<S>();
+            var srcType = TypeId.numeric<S>();
             var srcCount = x.Length();
-            var dstType = Identity.numericid<T>();
+            var dstType = TypeId.numeric<T>();
             var dstCount = y.Length();
             var srcWidth = srcCount * bitsize<S>();
             var dstWidth = dstCount * bitsize<T>();
@@ -66,9 +66,9 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var srcType = Identity.numericid<S>();
+            var srcType = TypeId.numeric<S>();
             var srcCount = x.CellCount;
-            var dstType = Identity.numericid<T>();
+            var dstType = TypeId.numeric<T>();
             var dstCount = y.Length();
             var srcWidth = srcCount * bitsize<S>();
             var dstWidth = dstCount * bitsize<T>();

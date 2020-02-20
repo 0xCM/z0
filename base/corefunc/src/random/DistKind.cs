@@ -67,7 +67,5 @@ namespace Z0
         Weibull = Pow2.T16,
 
         Lognormal = Pow2.T17,
-
     }
-
 }

@@ -18,44 +18,44 @@ namespace Z0
         /// </summary>
         /// <param name="src">The packed source bits</param>
         [MethodImpl(Inline)]
-        public static BitSpan create<T>(T src)
+        public static BitSpan from<T>(T src)
             where T : unmanaged
-                => create_u(src);
+                => from_u(src);
 
         [MethodImpl(Inline)]
-        static BitSpan create_u<T>(T src)
+        static BitSpan from_u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return create(uint8(src));
+                return from(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                return create(uint16(src));
+                return from(uint16(src));
             else if(typeof(T) == typeof(uint))
-                return create(uint32(src));
+                return from(uint32(src));
             else if(typeof(T) == typeof(ulong))
-                return create(uint64(src));
+                return from(uint64(src));
             else
-                return create_i(src);
+                return from_i(src);
         }
 
         [MethodImpl(Inline)]
-        static BitSpan create_i<T>(T src)
+        static BitSpan from_i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return create(convert<T,byte>(src));
+                return from(convert<T,byte>(src));
             else if(typeof(T) == typeof(short))
-                return create(convert<T,ushort>(src));
+                return from(convert<T,ushort>(src));
             else if(typeof(T) == typeof(int))
-                return create(convert<T,uint>(src));
+                return from(convert<T,uint>(src));
             else if(typeof(T) == typeof(long))
-                return create(convert<T,ulong>(src));
+                return from(convert<T,ulong>(src));
             else
                 throw unsupported<T>();            
         }
 
         [MethodImpl(Inline)]
-        static BitSpan create(byte src)
+        static BitSpan from(byte src)
         {
             var buffer = Stacks.alloc(n64);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
@@ -69,7 +69,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static BitSpan create(ushort src)
+        static BitSpan from(ushort src)
         {
             var buffer = Stacks.alloc(n128);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
@@ -84,7 +84,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static BitSpan create(uint src)
+        static BitSpan from(uint src)
         {
             var buffer = Stacks.alloc(n256);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
@@ -101,7 +101,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static BitSpan create(ulong src)
+        static BitSpan from(ulong src)
         {
             var buffer = Stacks.alloc(n512);
             ref var tmp = ref Stacks.head<byte>(ref buffer);

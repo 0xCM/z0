@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Reflection.Emit;
     using System.Security;
 
     using static zfunc;
@@ -63,5 +61,4 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public delegate Fixed512 UnaryOp512<T>(Fixed512 a)
         where T : unmanaged;
-
 }

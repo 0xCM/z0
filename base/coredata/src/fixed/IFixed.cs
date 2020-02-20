@@ -24,7 +24,7 @@ namespace Z0
         }
     }
 
-    public interface IFixed<F,W> : IFixed
+    public interface IFixed<F,W> : IFixed, IFixedWidth<W>
         where F : unmanaged, IFixed<F,W>
         where W : unmanaged, ITypeNat
     {

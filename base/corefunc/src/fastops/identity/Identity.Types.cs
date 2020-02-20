@@ -26,16 +26,6 @@ namespace Z0
             => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");   
 
         /// <summary>
-        /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
-        /// </summary>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static TypeIdentity numericid<T>(T t = default)
-            where T : unmanaged
-                => TypeIdentity.Define(typeof(T).NumericKind().Format());
-
-        /// <summary>
         /// Transforms a nonspecific identity part into a specialized scalar part, if the source part is indeed a scalar identity
         /// </summary>
         /// <param name="part">The source part</param>
@@ -49,10 +39,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// Extracts an index-identified segmented identity part from an operation identity
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="partidx">The 0-based part index</param>
+        public static Option<SegmentedIdentity> segment(OpIdentity src, int partidx)
+            => from p in part(src, partidx)
+                from s in segmented(p)
+                select s;
+
+        /// <summary>
         /// Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
         /// </summary>
         /// <param name="part">The source part</param>
-        public static Option<SegmentedIdentity> segment(IdentityPart part)
+        public static Option<SegmentedIdentity> segmented(IdentityPart part)
         {
             if(part.PartKind == IdentityPartKind.Segment)
             {

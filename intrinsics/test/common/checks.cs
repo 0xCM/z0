@@ -17,17 +17,15 @@ namespace Z0
         {
             var svc = GX.bitlogic<T>();
             var v1 = VX.vbitlogic<T>(n128).and(x,y);
-            var buffer = Fixed.alloc(n128);
-            ref var dst = ref Fixed.head<T>(ref buffer);
+            var buffer = Fixed.alloc<Fixed128>();
+            ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
             var count = CpuVector.vcount(x);            
             for(var i=0; i< count; i++)
                 seek(ref dst, i) = svc.and(vcell(x,i), vcell(y,i));
             var v2 = CpuVector.vload(n128, in dst);
             return ginx.vsame(v1,v2);
         }
-
     }
-
 
     public static partial class CheckSpecs
     {   
@@ -96,6 +94,5 @@ namespace Z0
                     CheckFailed();
             }
         }
-
     }
 }

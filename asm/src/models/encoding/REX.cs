@@ -20,6 +20,27 @@ namespace Z0
 
     public static class EncodingPrefixes
     {
+
+        public readonly struct RexPrefix : IFixed<RexPrefix, N8>
+        {
+
+
+        }
+
+        public enum RexFields : byte
+        {
+            B = 1,
+
+            X = 1,
+
+            R = 1,
+            
+            W = 1,
+
+            Kind = 4
+
+        }
+
         /// <summary>
         /// Defines the available REX prefixes
         /// </summary>

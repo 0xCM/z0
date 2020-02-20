@@ -22,10 +22,10 @@ namespace Z0
         /// <param name="start">The bit posiion within the source where extraction should begin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static T bitslice<T>(T a, byte start, byte length)
+        public static T bitslice<T>(T src, byte start, byte length)
             where T : unmanaged
-                => bitslice_u(a,start,length);
-
+                => bitslice_u(src,start,length);
+            
         [MethodImpl(Inline)]
         static T bitslice_i<T>(T lhs, byte start, byte length)
             where T : unmanaged

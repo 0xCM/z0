@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="root">The root name</param>
         public static string testcase<C>(Type host, string root, C t = default)
             where C : unmanaged
-            => $"{host.Name}/{root}_{Identity.numericid(t)}";
+            => $"{host.Name}/{root}_{TypeId.numeric(t)}";
 
         public static string testcase<W,C>(Type host, string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeNat

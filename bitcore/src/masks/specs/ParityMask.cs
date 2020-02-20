@@ -59,7 +59,7 @@ namespace Z0
                 => default;
 
         public string Format()
-            => $"lsb(f:{natval<F>()}, d:{natval<D>()}, t:{Identity.numericid<T>()})";
+            => $"lsb(f:{natval<F>()}, d:{natval<D>()}, t:{TypeId.numeric<T>()})";
 
         public override string ToString()
             => Format();

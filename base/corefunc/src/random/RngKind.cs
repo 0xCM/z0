@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Numerics;
 
     using static zfunc;
     
@@ -93,8 +89,7 @@ namespace Z0
         User2 = 102,
 
         User3 = 103,
-        
-        
+                
         /// <summary>
         /// Indentifes a hardware level entropic source driven by
         /// the RDRAND instruction
@@ -160,7 +155,5 @@ namespace Z0
         /// A Philox4x32-10 counter-based pseudorandom number generator.
         /// </summary>
         MklPhilox4X32X10 = 16777216
-
     }
-
 }

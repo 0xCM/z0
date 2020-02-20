@@ -13,25 +13,25 @@ namespace Z0.OpCodes
     public static class bitspan
     {                        
         public static BitSpan load_scalar_8(byte src)
-            => BitSpan.create<byte>(src);
+            => BitSpan.from<byte>(src);
 
         public static BitSpan load_scalar_8_fill(byte src, in BitSpan dst)
             => BitSpan.fill(src, dst);
 
         public static BitSpan load_scalar_16(ushort src)
-            => BitSpan.create<ushort>(src);
+            => BitSpan.from<ushort>(src);
 
         public static BitSpan load_scalar_16_fill(ushort src, in BitSpan dst)
             => BitSpan.fill(src, dst);
 
         public static BitSpan load_scalar_32(uint src)
-            => BitSpan.create<uint>(src);
+            => BitSpan.from<uint>(src);
 
         public static BitSpan load_scalar_32_fill(uint src, in BitSpan dst)
             => BitSpan.fill(src, dst);
 
         public static BitSpan load_scalar_64(ulong src)
-            => BitSpan.create<ulong>(src);
+            => BitSpan.from<ulong>(src);
 
         public static BitSpan load_scalar_64_fill(ulong src, in BitSpan dst)
             => BitSpan.fill(src, dst);

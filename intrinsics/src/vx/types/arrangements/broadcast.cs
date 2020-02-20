@@ -37,7 +37,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public OpIdentity Id => Identity.contracted<T>($"{Name}_{Identity.numericid<S>()}",w);
+            public OpIdentity Id => Identity.contracted<T>($"{Name}_{TypeId.numeric<S>()}",w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(S a) => CpuVector.vbroadcast(n128, convert<S,T>(a));            
@@ -68,7 +68,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public OpIdentity Id => Identity.contracted<T>($"{Name}_{Identity.numericid<S>()}",w);
+            public OpIdentity Id => Identity.contracted<T>($"{Name}_{TypeId.numeric<S>()}",w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(S a) => CpuVector.vbroadcast(n256, convert<S,T>(a));

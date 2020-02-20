@@ -84,7 +84,6 @@ namespace Z0
         public static implicit operator ulong(Fixed4 x)
             => x.X0;
         
-
         [MethodImpl(Inline)]
         public bool Equals(Fixed4 src)
             => X0 == src.X0;

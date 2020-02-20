@@ -65,6 +65,5 @@ namespace Z0
         public static T[] Array<T>(this IPolyrand random, int length, T min, T max)
             where T : unmanaged
                 => random.Stream(min,max).TakeArray(length);
-
     }
 }

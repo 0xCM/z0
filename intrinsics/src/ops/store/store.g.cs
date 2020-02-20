@@ -16,12 +16,12 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector128<T> src, ref Fixed128 dst)
             where T : unmanaged
-                => vstore(src, ref Fixed.head<T>(ref dst));
+                => vstore(src, ref Fixed.head<Fixed128,T>(ref dst));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector256<T> src, ref Fixed256 dst)
             where T : unmanaged
-                => vstore(src, ref Fixed.head<T>(ref dst));
+                => vstore(src, ref Fixed.head<Fixed256,T>(ref dst));
 
         /// <summary>
         /// Stores vector content to a span
@@ -254,6 +254,5 @@ namespace Z0
             else 
                 throw unsupported<T>();                
         }
-
     }
 }

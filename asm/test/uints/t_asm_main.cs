@@ -216,8 +216,8 @@ namespace Z0
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = Identity.operation(name, kind, false);
-            var gId = Identity.operation(name, kind, true);
+            var dId = OpId.numeric(name, kind, false);
+            var gId = OpId.numeric(name, kind, true);
 
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);
@@ -225,9 +225,7 @@ namespace Z0
             var d = dArchive.Read(dId).Single();
             var g = gArchive.Read(gId).Single();
 
-            Claim.yea(binop_match(buffers, w,d,g));                         
-
-            
+            Claim.yea(binop_match(buffers, w,d,g));                                     
         }
 
         bit binop_match(in AsmBuffers buffers, FixedWidth w, AsmCode a, AsmCode b)

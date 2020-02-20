@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
         public static OpIdentity contracted<T>(string opname, T t = default)
-            => operation(opname,typeof(T).NumericKind());
+            => OpId.numeric(opname,typeof(T).NumericKind());
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]

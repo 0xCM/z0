@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="part">The source part</param>
         public static Option<SegmentedIdentity> Segment(this IdentityPart part)
-            => Identity.segment(part);
+            => Identity.segmented(part);
 
         /// <summary>
         /// Extracts an index-identified segmented identity part from an operation identity

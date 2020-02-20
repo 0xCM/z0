@@ -15,7 +15,7 @@ namespace Z0
     /// <remarks>
     /// Note that extended real numbers may also serve as endpoints, enabling representations such as (-∞,3] and (-3, ∞).
     /// </remarks>
-    public readonly struct Interval<T> : IInterval<T>
+    public readonly struct Interval<T> : IInterval<T>, IFormattable<Interval<T>>
         where T : unmanaged
     {
         public static Interval<T> Zero => default;
@@ -72,7 +72,7 @@ namespace Z0
             => (x.Left, x.Right);
 
         [MethodImpl(Inline)]
-        static IntervalKind DetermineKind(bool leftclosed, bool rightclosed)
+        static IntervalKind Classify(bool leftclosed, bool rightclosed)
         {
             var closed = leftclosed && rightclosed;
             var open =  !leftclosed && !rightclosed;
@@ -81,16 +81,14 @@ namespace Z0
                 : open ? IntervalKind.Open
                 : leftclosed && !rightclosed ? IntervalKind.LeftClosed
                 : IntervalKind.RightClosed;
-
         }
-
 
         [MethodImpl(Inline)]
         public Interval(T left, bool leftclosed, T right, bool rightclosed)
         {
             this.Left = left;
             this.Right = right;
-            this.Kind = DetermineKind(leftclosed,rightclosed);
+            this.Kind = Classify(leftclosed,rightclosed);
         }
 
         [MethodImpl(Inline)]
@@ -99,6 +97,12 @@ namespace Z0
             this.Left = left;
             this.Right = right;
             this.Kind = kind;
+        }
+
+        public ulong Width
+        {
+            [MethodImpl(Inline)]
+            get => convert<T,ulong>(Right) - convert<T,ulong>(Left);
         }
 
         /// <summary>
@@ -172,7 +176,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Kind == IntervalKind.RightOpen &&  Right.Equals(maxval<T>());
         }
-
 
         /// <summary>
         /// Specifies whether the interval is unbounded on the left and right, denoted by (-∞, ∞).

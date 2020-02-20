@@ -10,10 +10,36 @@ namespace Z0
     using static RootShare;
 
     /// <summary>
+    /// Characterizes a type that occupies a fixed amount of space at runtime
+    /// </summary>
+    public interface IFixedWidth
+    {
+        /// <summary>
+        /// Specifies the type width in bits
+        /// </summary>
+        FixedWidth FixedWidth {get;}
+
+        /// <summary>
+        /// Specifies the type width in bytes
+        /// </summary>
+        int ByteCount
+        {
+            [MethodImpl(Inline)]
+            get => (int)FixedWidth/8;
+        }
+    }
+
+    /// <summary>
     /// Identifies a fixed type
     /// </summary>
     public interface IFixed : IFixedWidth
     {
         
+    }
+
+    public interface IFixed<F>
+        where F : unmanaged
+    {
+
     }
 }

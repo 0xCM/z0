@@ -35,7 +35,7 @@ namespace Z0
           public static sbyte bitclear(sbyte src, byte index, byte count)
           {
                var mask = (int)ushort.MaxValue ^ ((int)BitMask.lo64(count - 1) << index);
-               return (sbyte)(mask & src);
+               return (sbyte)(mask & (int)src);
           }
 
           /// <summary>
@@ -94,11 +94,8 @@ namespace Z0
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
           [MethodImpl(Inline), Op]
-          public static ulong bitclear(ulong src, byte index, byte count)
-          {
-               var mask = ulong.MaxValue ^ (BitMask.lo64(count - 1) << index);
-               return mask & src;
-          }
+          public static long bitclear(long src, byte index, byte count)
+               => (long)bitclear((ulong)src, index, count);
 
           /// <summary>
           /// Disables a sequence of bits starting at a specified index
@@ -107,8 +104,11 @@ namespace Z0
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
           [MethodImpl(Inline), Op]
-          public static long bitclear(long src, byte index, byte count)
-               => (long)bitclear((ulong)src, index, count);
+          public static ulong bitclear(ulong src, byte index, byte count)
+          {
+               var mask = ulong.MaxValue ^ (BitMask.lo64(count - 1) << index);
+               return mask & src;
+          }
 
           /// <summary>
           /// Disables a sequence of 8 source bits starting at a specified index
@@ -145,6 +145,5 @@ namespace Z0
                var mask = ulong.MaxValue ^ ((ulong)byte.MaxValue << index);
                return mask & src;
           }
-
     }
 }

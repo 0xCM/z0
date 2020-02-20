@@ -65,8 +65,8 @@ namespace Z0
                 compare.Stop();
             }
 
-            ReportBenchmark($"gcdbin{Identity.numericid<T>()}", OpCount,subject);
-            ReportBenchmark($"gcd{Identity.numericid<T>()}", OpCount,compare);
+            ReportBenchmark($"gcdbin{TypeId.numeric<T>()}", OpCount,subject);
+            ReportBenchmark($"gcd{TypeId.numeric<T>()}", OpCount,compare);
         }
 
         /// <summary>

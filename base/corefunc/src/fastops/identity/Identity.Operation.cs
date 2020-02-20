@@ -11,6 +11,7 @@ namespace Z0
 
     using static zfunc;
 
+
     partial class Identity
     {
         /// <summary>
@@ -36,45 +37,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]   
-        public static OpIdentity operation(string opname, NumericKind k)
-            => operation(opname, FixedWidth.None, k, false);
-
-        /// <summary>
-        /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]   
-        public static OpIdentity operation(string opname, NumericKind k, bool generic)
-            => operation(opname, FixedWidth.None, k, generic);
-
-        /// <summary>
-        /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an
-        /// operation over a primal type of bit width N := bitsize[T]
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static OpIdentity operation<T>(string opname, NumericType<T> hk)
-            where T : unmanaged
-                => operation(opname,typeof(T).NumericKind());
-
-        /// <summary>
-        /// Produces an identifier of the form {opname}_{w}{typesig(nk)}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]   
-        public static OpIdentity operation(string opname, FixedWidth w, NumericKind nk)
-            => operation(opname,w,nk,false);
-
-        /// <summary>
         /// Extracts an index-identified operation identity part from an operation identity
         /// </summary>
         /// <param name="src">The source identity</param>
@@ -87,16 +49,6 @@ namespace Z0
             else
                 return none<IdentityPart>();
         }
-
-        /// <summary>
-        /// Extracts an index-identified segmented identity part from an operation identity
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        /// <param name="partidx">The 0-based part index</param>
-        public static Option<SegmentedIdentity> segment(OpIdentity src, int partidx)
-            => from p in part(src, partidx)
-                from s in segment(p)
-                select s;
 
         /// <summary>
         /// Defines an 8-bit immediate suffix predicated on an immediate value

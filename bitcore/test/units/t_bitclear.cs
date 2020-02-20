@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static zfunc;
 
-    public class t_clearbits : t_bitcore<t_clearbits>
+    public class t_bitclear : t_bitcore<t_bitclear>
     {            
         public void clearbits_outline()
         {
