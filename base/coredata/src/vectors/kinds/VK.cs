@@ -22,14 +22,6 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Reifies a parametric vector kind
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static VectorType<T> vk<T>(T t = default)
-            where T : unmanaged
-                => default;
-
-        /// <summary>
         /// Reifies a non-parametric 128-bit vector kind
         /// </summary>
         [MethodImpl(Inline)]
@@ -58,17 +50,6 @@ namespace Z0
         public static Vec256<T> vk256<T>(T t = default)
             where T : unmanaged
                 => default;
-
-        /// <summary>
-        /// Reifies a parametric vector kind that closes over width and cell parameters
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static VectorType<W,T> vk<W,T>(W w = default, T t = default)
-            where W : unmanaged, ITypeNat
-            where T : unmanaged
-                => default;
- 
-
     }
 
 }

@@ -228,14 +228,12 @@ namespace Z0
                     var bf = a.ToFixed<Fixed64>();
                     CheckUnaryOp(buffers, af, bf);
                 }
-
             }
-
         }
 
 
         void CheckUnaryOp<T>(in AsmBuffers buffers, AsmCode src, Func<T,T> f)
-            where T : unmanaged, IFixed
+            where T : unmanaged, IFixedWidth
 
         {            
             TraceCaller($"Checking {src.Id}");
@@ -246,7 +244,7 @@ namespace Z0
         }   
         
         void CheckUnaryOp<T>(in AsmBuffers buffers, in FixedAsm<T> a, in FixedAsm<T> b)
-            where T : unmanaged, IFixed
+            where T : unmanaged, IFixedWidth
         {            
             TraceCaller($"Checking {a.Id} == {b.Id} match");
             

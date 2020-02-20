@@ -14,7 +14,7 @@ namespace Z0
     partial class RngX
     {
         public static IFixedEmitter<F,T> FixedEmitter<F,T>(this IPolyrand random)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedWidth
             where T : unmanaged
                 => new FixedEmitter<F,T>(random, EmitterSurrogate<F,T>(random));
 
@@ -52,7 +52,7 @@ namespace Z0
             => (random.Fixed(n256), random.Fixed(n256));
 
         public static IEnumerable<T> FixedStream<T>(this IPolyrand random, T t = default)
-            where T:unmanaged, IFixed
+            where T:unmanaged, IFixedWidth
         {
             switch(t.FixedWidth)
             {
@@ -110,7 +110,7 @@ namespace Z0
         }
 
         static EmitterSurrogate<F> EmitterSurrogate<F,T>(IPolyrand random)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedWidth
             where T : unmanaged
         {
             const string name = "fixedrand";
@@ -268,7 +268,7 @@ namespace Z0
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N64 w)
-            where T :unmanaged, IFixed
+            where T :unmanaged, IFixedWidth
         {
             while(true)
             {
@@ -278,7 +278,7 @@ namespace Z0
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N128 w)
-            where T :unmanaged, IFixed
+            where T :unmanaged, IFixedWidth
         {
             while(true)
             {
@@ -288,7 +288,7 @@ namespace Z0
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N256 w)
-            where T :unmanaged, IFixed
+            where T :unmanaged, IFixedWidth
         {
             while(true)
             {
@@ -298,7 +298,7 @@ namespace Z0
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N512 w)
-            where T :unmanaged, IFixed
+            where T :unmanaged, IFixedWidth
         {
             while(true)
             {

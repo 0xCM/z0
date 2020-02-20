@@ -12,14 +12,33 @@ namespace Z0
     using static zfunc;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Fixed128 : IFixed<Fixed128,N128>, IEquatable<Fixed128>
+    public struct Fixed128 : IFixed<Fixed128>, IEquatable<Fixed128>
     {
-        internal ulong X0;
+        public const int BitWidth = 128;        
+
+        ulong X0;
 
         ulong X1;       
 
-        public const int BitWidth = 128;        
+        public int BitCount
+        {
+            [MethodImpl(Inline)]
+            get => BitWidth;
+        }
 
+        public FixedWidth FixedWidth
+        {
+            [MethodImpl(Inline)]
+            get => (FixedWidth)BitWidth;
+        }
+
+        [MethodImpl(Inline)]
+        Fixed128(ulong x0, ulong x1)
+        {
+            this.X0 = x0;
+            this.X1 = x1;
+        }
+        
         [MethodImpl(Inline)]
         public static implicit operator Fixed128((ulong x0, ulong x1) x)
             => new Fixed128(x.x0,x.x1);
@@ -63,20 +82,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ulong>(Fixed128 x)
             => x.ToVector<ulong>();
-
-
-        [MethodImpl(Inline)]
-        internal Fixed128(ulong x0, ulong x1)
-        {
-            this.X0 = x0;
-            this.X1 = x1;
-        }
-        
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed128 src)

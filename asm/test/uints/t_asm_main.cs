@@ -35,8 +35,8 @@ namespace Z0
             // print(uri);
 
                     
-             var workflow = Context.CaptureWorkflow();
-             workflow.Execute().Force();
+            //  var workflow = Context.CaptureWorkflow();
+            //  workflow.Execute().Force();
         }
 
         static void buffer_client(IAsmContext context)

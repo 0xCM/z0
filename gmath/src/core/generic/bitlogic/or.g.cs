@@ -46,6 +46,17 @@ namespace Z0
             where T : unmanaged
                 => or(or(a,b,c), d);
 
+        /// <summary>
+        /// Computes the bitwise or among five primal values
+        /// </summary>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        public static T or<T>(T a, T b, T c, T d, T e)
+            where T : unmanaged
+                => or(or(a,b,c), or(d, e));
+
         [MethodImpl(Inline)]
         static T or_u<T>(T a, T b)
             where T : unmanaged

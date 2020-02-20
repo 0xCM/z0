@@ -26,5 +26,4 @@ namespace Z0
         /// </summary>
         K Classifier {get;}
     }
-
 }

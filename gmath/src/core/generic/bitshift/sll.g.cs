@@ -13,6 +13,17 @@ namespace Z0
 
     partial class gmath
     {
+        [MethodImpl(Inline)]
+        public static uint sll<E>(bit x, E offset)
+            where E : unmanaged, Enum
+                => sll((uint)x, evalue<E,byte>(offset));
+
+        [MethodImpl(Inline)]
+        public static T sll<T,E>(T x, E offset)
+            where T : unmanaged
+            where E : unmanaged, Enum
+                => sll(x, evalue<E,byte>(offset));
+
         /// <summary>
         /// Applies a logical left-shift to an integral value
         /// </summary>

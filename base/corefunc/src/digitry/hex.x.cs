@@ -159,23 +159,11 @@ namespace Z0
              + (specifier && !prespec ? "h" : string.Empty);
 
         [MethodImpl(Inline)]
-        public static string FormatHex(this byte src, bool zpad, bool specifier, bool uppercase, bool prespec)
+        public static string FormatHex(this byte src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
              + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad8, '0') 
                      : src.ToString(HexFmtSpec(uppercase)))
              + (specifier && !prespec ? "h" : string.Empty);
-
-        /// <summary>
-        /// Renders a number as a hexadecimal string
-        /// </summary>
-        /// <param name="src">The source number</param>
-        /// <param name="zpad">Specifies whether the numeric content should be left-padded with zeros</param>
-        /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
-        /// <param name="uppercase">Specifies whether hex characters should be upper-cased</param>
-        /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
-        [MethodImpl(Inline)]
-        public static string FormatHex(this byte src)
-            => FormatHex(src,zpad:true,specifier:true,uppercase:false,prespec:true);
 
         /// <summary>
         /// Renders a number as a hexadecimal string
@@ -201,7 +189,7 @@ namespace Z0
         /// <param name="uppercase">Specifies whether hex characters should be upper-cased</param>
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
         [MethodImpl(Inline)]
-        public static string FormatHex(this ushort src, bool zpad, bool specifier, bool uppercase, bool prespec)
+        public static string FormatHex(this ushort src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
              + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad16, '0') 
                      : src.ToString(HexFmtSpec(uppercase)))
@@ -261,20 +249,11 @@ namespace Z0
         /// <param name="uppercase">Specifies whether hex characters should be upper-cased</param>
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
         [MethodImpl(Inline)]
-        public static string FormatHex(this ulong src, bool zpad, bool specifier, bool uppercase, bool prespec)
+        public static string FormatHex(this ulong src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => (specifier && prespec ? "0x" : string.Empty) 
              + (zpad ? src.ToString(HexFmtSpec(uppercase)).PadLeft(HexPad64, '0') 
                      : src.ToString(HexFmtSpec(uppercase)))
              + (specifier && !prespec  ? "h" : string.Empty);    
-
-        /// <summary>
-        /// Renders a number as a hexadecimal string
-        /// </summary>
-        /// <param name="src">The source number</param>
-        /// <param name="zpad">Specifies whether the numeric content should be left-padded with zeros</param>
-        [MethodImpl(Inline)]
-        public static string FormatHex(this ulong src, bool zpad)
-            => src.FormatHex(zpad,true,false,true);
 
         /// <summary>
         /// Formats a scalar stream as a hex string
@@ -295,21 +274,23 @@ namespace Z0
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
-        public static string FormatHexList(this IEnumerable<byte> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => bracket(src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(comma()));
+        public static string FormatHexList(this IEnumerable<byte> src, bool zpad = true, bool specifier = true, 
+            bool uppercase = false, bool prespec = true)
+                => bracket(src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(comma()));
 
         /// <summary>
         /// Formtas an array of bytes as a hex string
         /// </summary>
         /// <param name="src">The source bytes</param>
         /// <param name="sep"></param>
-        /// <param name="zpad"></param>
-        /// <param name="specifier"></param>
-        /// <param name="uppercase"></param>
-        /// <param name="prespec"></param>
+        /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
+        /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
+        /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
+        /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
         /// <param name="segwidth"></param>
-        public static string FormatHex(this byte[] src, char sep, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, int? segwidth = null)
-            => src.ToReadOnlySpan().FormatHexBytes(sep,zpad,specifier,uppercase,prespec);
+        public static string FormatHex(this byte[] src, char sep, bool zpad = true, bool specifier = true, 
+            bool uppercase = false, bool prespec = true, int? segwidth = null)
+                => src.ToReadOnlySpan().FormatHexBytes(sep,zpad,specifier,uppercase,prespec);
  
         /// <summary>
         /// Formats a scalar value as a sequence of hex digits

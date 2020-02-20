@@ -10,12 +10,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static HexDigit;
-
 
     public static class DigitsX
     {
-
         /// <summary>
         /// Returns the character corresponding to a digit
         /// </summary>
@@ -167,5 +164,34 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static string Format(this Span<HexDigit> src, bool specifier = true)
             => src.ReadOnly().Format(specifier);
+
+        public static string Format(this byte src, NumericBase @base)
+            => @base switch{
+                NumericBase.Binary => src.FormatBits(),
+                NumericBase.Hex => src.FormatHex(),
+                _=> src.ToString(),
+            };                    
+
+        public static string Format(this ushort src, NumericBase @base)
+            => @base switch{
+                NumericBase.Binary => src.FormatBits(),
+                NumericBase.Hex => src.FormatHex(),
+                _=> src.ToString(),
+            };                    
+
+        public static string Format(this uint src, NumericBase @base)
+            => @base switch{
+                NumericBase.Binary => src.FormatBits(),
+                NumericBase.Hex => src.FormatHex(),
+                _=> src.ToString(),
+            };                    
+
+        public static string Format(this ulong src, NumericBase @base)
+            => @base switch{
+                NumericBase.Binary => src.FormatBits(),
+                NumericBase.Hex => src.FormatHex(),
+                _=> src.ToString(),
+            };                    
+
     }
 }

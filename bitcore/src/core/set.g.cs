@@ -20,13 +20,8 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T set<T>(T src, int pos, bit value)            
             where T : unmanaged
-        {
-            if(value)
-                return gbits.enable(src, pos);
-            else
-                return gbits.disable(src, pos);
-        }
-
+                => value ? enable(src, pos) : disable(src, pos);        
+                
         /// <summary>
         /// Sets a bit value in a T-sequence predicated on a linear index
         /// </summary>

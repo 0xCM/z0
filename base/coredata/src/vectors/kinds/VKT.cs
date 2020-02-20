@@ -13,12 +13,12 @@ namespace Z0
 
     public static class VKT
     {
-        public readonly struct Vec : IVectorType
+        public readonly struct Vec : IVectorKind
         {
 
         }        
 
-        public readonly struct Vec128 : IFixedVectorType<Fixed128>
+        public readonly struct Vec128 : IVectorType<Fixed128>
         {
             public const FixedWidth Width = FixedWidth.W128;
 
@@ -34,11 +34,10 @@ namespace Z0
             public static implicit operator Vec128(N128 src)
                 =>  default;
 
-            public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
-                
+            public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}                
         }        
 
-        public readonly struct Vec128<T> : IVectorType<Vector128<T>,T>, IFixedVectorType<Fixed128>
+        public readonly struct Vec128<T> : IVectorType<Vector128<T>,T>, IVectorType<Fixed128>
             where T : unmanaged
         {
             public const FixedWidth Width = FixedWidth.W128;
@@ -55,15 +54,10 @@ namespace Z0
             public static implicit operator Vec128(Vec128<T> src)
                 =>  default;
 
-            [MethodImpl(Inline)]
-            public static implicit operator VectorType<T>(Vec128<T> src)
-                =>  default;
-                
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
-
         }        
 
-        public readonly struct Vec256 : IFixedVectorType<Fixed256>
+        public readonly struct Vec256 : IVectorType<Fixed256>
         {
             public const FixedWidth Width = FixedWidth.W256;
 
@@ -82,7 +76,7 @@ namespace Z0
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
 
-        public readonly struct Vec256<T> : IVectorType<Vector256<T>,T>, IFixedVectorType<Fixed256>
+        public readonly struct Vec256<T> : IVectorType<Vector256<T>,T>, IVectorType<Fixed256>
             where T : unmanaged
         {
             public const FixedWidth Width = FixedWidth.W256;
@@ -100,33 +94,5 @@ namespace Z0
                 =>  default;                    
             public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
         }        
-
-        public readonly struct VectorType<T> : IVectorType<T> 
-            where T : unmanaged
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator Vec(VectorType<T> src)
-                =>  default;                
-        }
-
-        public readonly struct VectorType<W,T> : IVectorType<T>, IFixedWidth<W>
-            where T : unmanaged
-            where W : unmanaged, ITypeNat
-        {
-            public static FixedWidth Width => (FixedWidth)nateval<W>();
-
-            public static int BitCount => (int)nateval<W>();
-            
-            [MethodImpl(Inline)]
-            public static implicit operator Vec(VectorType<W,T> src)
-                =>  default;
-
-            [MethodImpl(Inline)]
-            public static implicit operator VectorType<T>(VectorType<W,T> src)
-                =>  default;
-                        
-            public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
-        }        
-
     }
 }

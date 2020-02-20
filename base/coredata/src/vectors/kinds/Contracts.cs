@@ -9,31 +9,29 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IVectorType : ITypeKind
+    public interface IVectorKind : ITypeKind
     {
 
     }
 
-    public interface IFixedVectorType : IVectorType, IFixedWidth
+    public interface IVectorType : IVectorKind, IFixedWidth
     {
-
+        int BitWidth
+        {
+            [MethodImpl(Inline)]
+            get => (int)FixedWidth;
+        }
     }    
 
-    public interface IFixedVectorType<F> : IFixedVectorType, IFixedKind<F>
+    public interface IVectorType<F> : IVectorType, IFixedKind<F>
         where F : unmanaged, IFixed
     {
 
     }
 
-    public interface IVectorType<T> : IVectorType, ITypeKind<T>
-        where T : unmanaged
-    {
-
-    }
-
-    public interface IVectorType<V,T> : ITypeKind<T>, IFixedVectorType
-        where T : unmanaged
+    public interface IVectorType<V,T> : ITypeKind<T>, IVectorType
         where V : struct
+        where T : unmanaged
     {
 
     }

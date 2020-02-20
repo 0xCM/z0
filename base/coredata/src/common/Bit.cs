@@ -449,6 +449,22 @@ namespace Z0
             => SafeWrap(src);
 
         /// <summary>
+        /// Defines an explicit bit -> int conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator int(bit src)
+            => (int)src.state;
+
+        /// <summary>
+        /// Defines an *implicit* int -> bit conversion to aid sanity retention
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static implicit operator bit(int src)
+            => SafeWrap(src);
+
+        /// <summary>
         /// Defines an explicit bit -> uint conversion
         /// </summary>
         /// <param name="src">The source bit</param>
@@ -479,14 +495,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator double(bit src)
             => src.state;
-
-        /// <summary>
-        /// Defines an explicit bit -> int conversion
-        /// </summary>
-        /// <param name="src">The source bit</param>
-        [MethodImpl(Inline)]
-        public static explicit operator int(bit src)
-            => (int)src.state;
 
         /// <summary>
         /// Defines an explicit uint -> bit conversion
@@ -615,6 +623,10 @@ namespace Z0
         [MethodImpl(Inline)]
         static bit SafeWrap(uint state)
             => new bit(state & 1);
+
+        [MethodImpl(Inline)]
+        static bit SafeWrap(int state)
+            => new bit((uint)state & 1);
 
         [MethodImpl(Inline)]
         static bit SafeWrap(ulong state)

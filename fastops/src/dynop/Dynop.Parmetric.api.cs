@@ -84,7 +84,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static FixedFunc<T,T> UnaryOp<T>(this ExecBufferToken buffer, in AsmCode src)
-            where T : unmanaged, IFixed
+            where T : unmanaged, IFixed 
                 => buffer.F<T,T>(src);
 
         [MethodImpl(Inline)]
@@ -108,7 +108,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FixedFunc<X0,R> F<X0,R>(this ExecBufferToken buffer, in AsmCode src)
             where X0 : unmanaged, IFixed
-            where R : unmanaged, IFixed             
+            where R : unmanaged, IFixed
                 => buffer.Load(src).Func<X0,R>(src.Id);                                
 
         [MethodImpl(Inline)]
@@ -147,7 +147,7 @@ namespace Z0
             where X0 : unmanaged, IFixed
             where X1 : unmanaged, IFixed
             where X2 : unmanaged, IFixed
-            where R : unmanaged, IFixed    
+            where R : unmanaged, IFixed
                 => (FixedFunc<X0,X1,X2,R>)buffer.Handle.FixedFunc(id,  typeof(FixedFunc<X0,X1,X2,R>), typeof(R), typeof(X0), typeof(X1), typeof(X2));
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace Z0
             where X1 : unmanaged, IFixed
             where X2 : unmanaged, IFixed
             where X3 : unmanaged, IFixed
-            where R : unmanaged, IFixed    
+            where R : unmanaged, IFixed
                 => (FixedFunc<X0,X1,X2,X3,R>)buffer.Handle.FixedFunc(id, typeof(FixedFunc<X0,X1,X2,X3,R>), typeof(R), typeof(X0), typeof(X1), typeof(X2), typeof(X3));
 
         /// <summary>

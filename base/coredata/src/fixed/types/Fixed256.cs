@@ -12,14 +12,40 @@ namespace Z0
     using static zfunc;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Fixed256  : IFixed<Fixed256,N256>, IEquatable<Fixed256>
+    public struct Fixed256  : IFixed<Fixed256>, IEquatable<Fixed256>
     {
         public const int BitWidth = 256;        
 
-        internal Fixed128 X0;
+        Fixed128 X0;
 
         Fixed128 X1;
 
+        public int BitCount
+        {
+            [MethodImpl(Inline)]
+            get => BitWidth;
+        }
+
+        public FixedWidth FixedWidth
+        {
+            [MethodImpl(Inline)]
+            get => (FixedWidth)BitWidth;
+        }
+
+        [MethodImpl(Inline)]
+        Fixed256(in ConstQuad<ulong> src)
+        {
+            this.X0 = (src.A, src.B);
+            this.X1 = (src.C, src.D);
+        }
+
+        [MethodImpl(Inline)]
+        Fixed256(Fixed128 x0, Fixed128 x1)
+        {
+            this.X0 = x0;
+            this.X1 = x1;
+        }
+        
         [MethodImpl(Inline)]
         public static implicit operator Fixed256(Vector256<byte> x)
             => x.ToFixed();
@@ -68,25 +94,6 @@ namespace Z0
         public static implicit operator Fixed256(in ConstQuad<ulong> x)
             => new Fixed256(x);
 
-        [MethodImpl(Inline)]
-        internal Fixed256(in ConstQuad<ulong> src)
-        {
-            this.X0 = (src.A, src.B);
-            this.X1 = (src.C, src.D);
-        }
-
-        [MethodImpl(Inline)]
-        internal Fixed256(Fixed128 x0, Fixed128 x1)
-        {
-            this.X0 = x0;
-            this.X1 = x1;
-        }
-        
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed256 src)

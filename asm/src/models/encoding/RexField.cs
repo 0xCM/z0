@@ -2,30 +2,37 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
+namespace Z0.Asm.Encoding
+{        
     using System;
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Characterizes a higher-kinded type representation
+    /// Defines REX field identifiers
     /// </summary>
-    public interface ITypeKind : IKind
-    {        
-    }
-    
-    public interface ITypeKind<T> : ITypeKind
+    public enum RexField : byte
     {
+        B = 0,
 
+        X = 1,
+
+        R = 2,
+        
+        W = 3,
+
+        Code = 4,
     }
 
-    public interface ITypeKind<T1,T2> : ITypeKind
+    public enum RexFieldWidth : byte
     {
+        B = 1,
 
-    }
+        X = 1,
 
-    public interface ITypeKind<T1,T2,T3> : ITypeKind
-    {
+        R = 1,
+        
+        W = 1,
 
-    }
+        Code = 4,
+    }    
 }

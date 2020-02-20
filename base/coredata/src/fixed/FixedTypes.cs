@@ -12,25 +12,21 @@ namespace Z0
     public readonly struct FixedType<F> : IFixedKind<F>
         where F : unmanaged, IFixed
     {
-        public static int BitCount => (int)Width;
+        public static int BitCount => bitsize<F>();
 
-        public static FixedWidth Width => default(F).FixedWidth;
-
-        public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
+        public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> (FixedWidth) BitCount;}
     }
 
-    public readonly struct FixedType<F,T> : IFixedNumericKind<F,T>
+    public readonly struct FixedNumeric<F,T> : IFixedKind<F>
         where F : unmanaged, IFixed
         where T : unmanaged
     {
+        public static int BitCount => bitsize<T>();
+
         [MethodImpl(Inline)]
-        public static implicit operator FixedType<F>(FixedType<F,T> src)
+        public static implicit operator FixedType<F>(FixedNumeric<F,T> src)
             =>  default;
 
-        public static FixedWidth Width => default(F).FixedWidth;
-
-        public static int BitCount => (int)Width;
-
-        public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
+        public FixedWidth FixedWidth { [MethodImpl(Inline)] get => (FixedWidth)BitCount;}
     }
 }

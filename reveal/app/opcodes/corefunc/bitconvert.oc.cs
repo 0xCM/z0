@@ -33,14 +33,5 @@ namespace Z0.OpCodes
 
         public static Span<byte> bc_bytes_fixed512(Fixed512 a)
             => BitConvert.GetBytes(a);
-
-        public static Span<byte> bc_bytes_fixed1024(Fixed1024 a)
-            => BitConvert.GetBytes(a);
-
-        public static Span<byte> bc_bytes_fixed2048(Fixed2048 a)
-            => BitConvert.GetBytes(a);
-
-        public static Span<byte> bc_bytes_fixed4096(Fixed4096 a)
-            => BitConvert.GetBytes(a);
     }
 }

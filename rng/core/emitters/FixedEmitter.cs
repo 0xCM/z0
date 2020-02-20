@@ -11,13 +11,13 @@ namespace Z0
 
     using static zfunc;
 
-    readonly struct FixedEmitter<F,T> : IFixedEmitter<F, T>
-        where F : unmanaged, IFixed         
+    readonly struct FixedEmitter<F,T> : IFixedEmitter<F,T>
+        where F : unmanaged, IFixed
         where T :unmanaged
     {
         public const string Name = "fixedrand";
 
-        public static FixedWidth Width => default(F).FixedWidth;
+        public static int Width => bitsize<F>();
 
         public static NumericKind NumericKind => typeof(T).NumericKind();
         
@@ -25,7 +25,7 @@ namespace Z0
         
         readonly EmitterSurrogate<F> f;
 
-        public OpIdentity Id => OpId.fixedop(Name,Width,NumericKind);
+        public OpIdentity Id => OpId.fixedop(Name, (FixedWidth)Width, NumericKind);
 
         [MethodImpl(Inline)]
         internal FixedEmitter(IPolyrand random, EmitterSurrogate<F> f)      

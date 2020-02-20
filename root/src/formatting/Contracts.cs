@@ -10,6 +10,17 @@ namespace Z0
 
     using static RootShare;
 
+    public enum NumericBase
+    {
+        None = 0,
+
+        Binary = 1,
+
+        Decimal = 10,
+
+        Hex = 16,
+    }
+
     /// <summary>
     /// Identifies format configurations
     /// </summary>
@@ -22,8 +33,18 @@ namespace Z0
     {
         string Format();
 
+        [MethodImpl(Inline)]
         string Format(IFormatConfig config)
             => Format();
+    }
+
+    public interface INumericFormattable : ICustomFormattable
+    {
+        string Format(NumericBase @base);
+
+        [MethodImpl(Inline)]
+        string ICustomFormattable.Format()
+            => Format(NumericBase.Decimal);
     }
 
     /// <summary>
@@ -34,6 +55,12 @@ namespace Z0
     {
         
     }    
+
+    public interface INumericFormattable<T> : IFormattable<T>, INumericFormattable
+        where T : INumericFormattable<T>
+    {
+
+    }
 
     /// <summary>
     /// Characterizes a type that transforms objects to a text-based representation
@@ -66,7 +93,6 @@ namespace Z0
         string IFormatter.Format(object src)
             => Format(src);
     }
-
 
     /// <summary>
     /// Characterizes a configurable formatter

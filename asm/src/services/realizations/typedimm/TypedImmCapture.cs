@@ -47,7 +47,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             static DynamicImmediate Create<V,N>(IAsmContext context, V vk, N arity)
-                where V : unmanaged, IFixedVectorType
+                where V : unmanaged, IVectorType
                 where N : unmanaged, ITypeNat
             {
                 if(typeof(N) == typeof(N1))
@@ -60,7 +60,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             static DynamicImmediate BuildUnary<V>(IAsmContext context, V vk)
-                where V : unmanaged, IFixedVectorType
+                where V : unmanaged, IVectorType
             {
                 var opkind = FK.op(n1);
                 if(vk.FixedWidth == FixedWidth.W128)
@@ -71,7 +71,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             static DynamicImmediate BuildBinary<V>(IAsmContext context, V vk)
-                where V : unmanaged, IFixedVectorType
+                where V : unmanaged, IVectorType
             {
                 var opkind = FK.op(n2);
                 if(vk.FixedWidth == FixedWidth.W128)

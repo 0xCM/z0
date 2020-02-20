@@ -12,23 +12,21 @@ namespace Z0
     /// <summary>
     /// Characterizes a kind with which a fixed bit-width is associated
     /// </summary>
-    public interface IFixedKind : IKind<FixedWidth>
+    public interface IFixedKind : IKind
     {
-        
+        int BitWidth {get;}
     }
 
     /// <summary>
     /// Characterizes a reified kind with which a fixed bit-width is associated
     /// </summary>
-    public interface IFixedKind<F> : IFixedKind, IFixedWidth
+    public interface IFixedKind<F> : IFixedKind
         where F : unmanaged, IFixed
     {
-        FixedWidth IFixedWidth.FixedWidth 
+        int IFixedKind.BitWidth
         {
             [MethodImpl(Inline)]
-            get =>  (FixedWidth)bitsize<F>();
+            get => bitsize<F>();
         }
-        
-        FixedWidth IKind<FixedWidth>.Classifier => (FixedWidth)bitsize<F>();
     }
 }

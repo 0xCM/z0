@@ -24,10 +24,16 @@ namespace Z0
         }
     }
 
-    public interface IFixed<F,W> : IFixed, IFixedWidth<W>
-        where F : unmanaged, IFixed<F,W>
+    public interface IFixed<F,W> : IFixedWidth, IFixed<F>
+        where F : unmanaged, IFixed
         where W : unmanaged, ITypeNat
     {
-        W NatWidth => default;        
+
+        int IFixed.BitCount 
+        {
+            [MethodImpl(Inline)]
+            get => bitsize<F>();
+        }
+                    
     } 
 }

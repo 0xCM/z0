@@ -7,26 +7,28 @@ namespace Z0
     using System;
     using System.Security;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
-    public struct Fixed4 : IFixed<Fixed4,N4>, IEquatable<Fixed4>
+    public struct Fixed4 : IFixed, IEquatable<Fixed4>
     {
-        public const FixedWidth BitWidth = FixedWidth.W4;        
+        public const int BitWidth = 4;
 
-        internal byte X0;
+        byte X0;
 
-        [MethodImpl(Inline)]
-        Fixed4(byte x0)
-            => X0 = (byte)((uint)x0 & 0xFu);
-
-        public FixedWidth FixedWidth
+        public int BitCount 
         {
             [MethodImpl(Inline)]
             get => BitWidth;
         }
+
+        [MethodImpl(Inline)]
+        public static Fixed4 From(byte src)
+            => new Fixed4(src);
+
+        [MethodImpl(Inline)]
+        Fixed4(byte x0)
+            => X0 = (byte)((uint)x0 & 0xFu);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed4(uint4_t x)

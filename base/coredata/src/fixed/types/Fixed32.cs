@@ -6,17 +6,36 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Security;
 
     using static zfunc;
 
-    public struct Fixed32 : IFixed<Fixed32,N32>, IEquatable<Fixed32>
+    public struct Fixed32 : IFixedNumeric<Fixed32,uint>, IEquatable<Fixed32>
     {
         public const int BitWidth = 32;        
 
-        internal uint X0;
+        uint X0;
+
+        public uint Data
+        {
+            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] set => X0 = value;
+        }
+
+        public int BitCount
+        {
+            [MethodImpl(Inline)]
+            get => BitWidth;
+        }
+
+        public FixedWidth FixedWidth
+        {
+            [MethodImpl(Inline)]
+            get => (FixedWidth)BitWidth;
+        }
+
+        [MethodImpl(Inline)]
+        Fixed32(uint x0)
+            => X0 = x0;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed32(uint x0)
@@ -25,10 +44,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Fixed32(int x0)
             => new Fixed32((uint)x0);
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator Fixed32(float x0)
-        //     => new Fixed32(BitConvert.ToUInt32(x0));
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed32 x)
@@ -63,29 +78,20 @@ namespace Z0
             => (ulong)x.X0;
 
         [MethodImpl(Inline)]
-        internal Fixed32(uint x0)
-            => X0 = x0;
-
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
-
-        [MethodImpl(Inline)]
         public bool Equals(Fixed32 src)
             => X0 == src.X0;
-        
+
+        [MethodImpl(Inline)]
+        public bool Equals(uint src)
+            => X0 == src;
+       
         public override int GetHashCode()
             => X0.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed32 x && Equals(x);
 
-
         public override string ToString() 
             => X0.ToString();
     }
-
-
 }

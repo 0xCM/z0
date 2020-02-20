@@ -136,8 +136,8 @@ namespace Z0
                 => default;
 
         [MethodImpl(Inline)]
-        public static FixedType<F,T> kind<F,T>(F f = default, T t = default)
-            where F : unmanaged, IFixed
+        public static FixedNumeric<F,T> numeric<F,T>(F f = default, T t = default)
+            where F : unmanaged, IFixedNumeric<T>
             where T : unmanaged
                 => default; 
 

@@ -6,17 +6,36 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Security;
 
     using static zfunc;
 
-    public struct Fixed16 : IFixed<Fixed16,N16>, IEquatable<Fixed16>
+    public struct Fixed16 : IFixedNumeric<Fixed16,ushort>, IEquatable<Fixed16>
     {
         public const int BitWidth = 16;
 
-        internal ushort X0;
+        ushort X0;
+
+        public ushort Data
+        {
+            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] set => X0 = value;
+        }
+
+        public FixedWidth FixedWidth
+        {
+            [MethodImpl(Inline)]
+            get => (FixedWidth)BitWidth;
+        }
+
+        public int BitCount
+        {
+            [MethodImpl(Inline)]
+            get => BitWidth;
+        }
+
+        [MethodImpl(Inline)]
+        Fixed16(ushort x)
+            => X0 = x;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(ushort x)
@@ -51,19 +70,13 @@ namespace Z0
             => x.X0;
 
         [MethodImpl(Inline)]
-        internal Fixed16(ushort x)
-            => X0 = x;
-
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
-
-        [MethodImpl(Inline)]
         public bool Equals(Fixed16 src)
             => X0 == src.X0;
-        
+
+        [MethodImpl(Inline)]
+        public bool Equals(ushort src)
+            => X0 == src;
+       
         public override int GetHashCode()
             => X0.GetHashCode();
         

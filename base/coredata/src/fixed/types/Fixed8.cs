@@ -7,26 +7,36 @@ namespace Z0
     using System;
     using System.Security;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
-    public struct Fixed8 : IFixed<Fixed8,N8>, IEquatable<Fixed8>
+    public struct Fixed8 : IFixedNumeric<Fixed8, byte>, IEquatable<Fixed8>
     {
-        public const FixedWidth BitWidth = FixedWidth.W8;        
+        public const int BitWidth = 8;
 
-        internal byte X0;
+        byte X0;
 
-        [MethodImpl(Inline)]
-        Fixed8(byte x0)
-            => X0 = x0;
+        public byte Data
+        {
+            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] set => X0 = value;
+        }
 
-        public FixedWidth FixedWidth
+        public int BitCount
         {
             [MethodImpl(Inline)]
             get => BitWidth;
         }
+
+        public FixedWidth FixedWidth
+        {
+            [MethodImpl(Inline)]
+            get => (FixedWidth)BitWidth;
+        }
+
+        [MethodImpl(Inline)]
+        Fixed8(byte x0)
+            => X0 = x0;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed8(byte x0)
@@ -52,11 +62,14 @@ namespace Z0
         public static explicit operator byte(Fixed8 x)
             => (byte)x.X0;
 
- 
         [MethodImpl(Inline)]
         public bool Equals(Fixed8 src)
             => X0 == src.X0;
-        
+
+        [MethodImpl(Inline)]
+        public bool Equals(byte src)
+            => X0 == src;
+
         public override int GetHashCode()
             => X0.GetHashCode();
         
