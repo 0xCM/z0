@@ -80,5 +80,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static EmitterSurrogate<T> emitter<T>(Func<T> f, string name, T t = default)
             => new EmitterSurrogate<T>(f,name);        
+
+        /// <summary>
+        /// Captures a delegate and presents it as a binary predicate
+        /// </summary>
+        /// <param name="f">The delegate to capture</param>
+        /// <param name="name">The operator name</param>
+        /// <param name="t">A point representative</param>
+        /// <typeparam name="T">The delegate domain type</typeparam>
+        [MethodImpl(Inline)]
+        public static FixedEmitterSurrogate<F,T> emitter<F,T>(Func<F> f, string name, T t = default)
+            where F : unmanaged, IFixed
+            where T :unmanaged
+                => new FixedEmitterSurrogate<F,T>(f,name);        
+
     }
 }

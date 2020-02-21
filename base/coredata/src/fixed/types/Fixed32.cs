@@ -78,11 +78,6 @@ namespace Z0
             => (ulong)x.X0;
 
         [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed32,A>(ref Unsafe.AsRef(in this));             
-
-        [MethodImpl(Inline)]
         public bool Equals(Fixed32 src)
             => X0 == src.X0;
 

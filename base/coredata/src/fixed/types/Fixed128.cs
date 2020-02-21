@@ -20,11 +20,7 @@ namespace Z0
 
         ulong X1;       
 
-        public int BitCount
-        {
-            [MethodImpl(Inline)]
-            get => BitWidth;
-        }
+        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         public FixedWidth FixedWidth
         {
@@ -94,11 +90,6 @@ namespace Z0
             => src is Fixed128 x && Equals(x);
 
         public override string ToString() 
-            => array(X0,X1).FormatList();
-        
-        [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed128,A>(ref Unsafe.AsRef(in this));
+            => array(X0,X1).FormatList();       
     }
 }

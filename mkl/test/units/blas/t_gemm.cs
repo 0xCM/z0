@@ -33,22 +33,17 @@ namespace Z0.Mkl.Test
             Claim.eq(x,y);
         }
 
-        
-        // public void gemm16i()
-        // {
-        //     gemm_check(closed((short)-1024, (short)1024));
-        // }
+        public void gemm8u()
+        {
+            gemm_check(domain((byte)0, (byte)byte.MaxValue));
+        }
 
+        
         public void gemm16u()
         {
-            gemm_check(domain((ushort)0, (ushort)1024));
+            gemm_check(domain((ushort)0, ushort.MaxValue));
         }
         
-        public void gemm32i()
-        {
-            gemm_check(domain(-Pow2.T10, Pow2.T10));
-        }
-
         public void gemm32u()
         {
             gemm_check(domain(0u, 1024u));
@@ -152,7 +147,6 @@ namespace Z0.Mkl.Test
                 mkl.gemm(A, B, ref X);            
                 runtime += snapshot(sw);
                 
-
                 Matrix.mul(A, B, ref E);
 
                 if(trace)       
@@ -162,16 +156,6 @@ namespace Z0.Mkl.Test
                     PostMessage($"E = {E.Format()}");
                 }
                 
-                // for(var j=0; j< X.Unblocked.Length; j++)
-                // {
-                //     if(!gmath.within(EU[j],XU[j],epsilon))
-                //     {
-                //         var delta = gmath.abs(gmath.sub(EU[j],XU[j]));
-                //         Trace($"{label} is a problem: |{EU[j]} - {XU[j]}| = {delta} > {epsilon} ");
-                //         break;
-                //     }
-                // }
-
                 Claim.close(E.Unblocked, X.Unblocked, epsilon);
             }
 
@@ -202,10 +186,6 @@ namespace Z0.Mkl.Test
                 var sw = stopwatch();
                 mkl.gemm(A,B,ref X);            
                 runtime += snapshot(sw);
-                
-                // Mul(A, B, ref E);
-                // E.Unblocked.ClaimEqual(X.Unblocked,10);
-
             }
 
             var label = $"gemm<{nati<M>()},{nati<K>()},{nati<N>()}>";

@@ -230,10 +230,18 @@ namespace Z0
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
 
         public static bool eq(float lhs, float rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+        {
+            var err = fmath.relerr(lhs,rhs);
+            var tolerance = .1f;            
+            return err < tolerance ? true : throw failed(ClaimOpKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
+        }
 
         public static bool eq(double lhs, double rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+        {
+            var err = fmath.relerr(lhs,rhs);
+            var tolerance = .1f;            
+            return err < tolerance ? true : throw failed(ClaimOpKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
+        }
 
         public static bool eq(char lhs, char rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));

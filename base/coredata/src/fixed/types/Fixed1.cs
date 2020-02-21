@@ -14,12 +14,20 @@ namespace Z0
     {
         public const int BitWidth = 1;
 
+        const uint Mask = 1;
+
         byte X0;
 
         public int BitCount 
         {
             [MethodImpl(Inline)]
             get => BitWidth;
+        }
+
+        public byte Data
+        {
+            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] set => X0 = (byte)((uint)value & Mask);
         }
 
         [MethodImpl(Inline)]
@@ -54,11 +62,6 @@ namespace Z0
         public static implicit operator byte(Fixed1 x)
             => x.X0;
         
-         [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed1,A>(ref Unsafe.AsRef(in this));             
-
         [MethodImpl(Inline)]
         public bool Equals(Fixed1 src)
             => X0 == src.X0;

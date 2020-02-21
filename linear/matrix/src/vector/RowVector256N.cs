@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
         public static implicit operator NatSpan<N,T>(RowVector256<N,T> src)
-            => NatSpan.load<N,T>(src.data);
+            => Matrix.natspan<N,T>(src.data);
 
         /// <summary>
         /// Slice => Vec

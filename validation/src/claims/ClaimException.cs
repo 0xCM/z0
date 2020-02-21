@@ -50,6 +50,8 @@ namespace Z0
     {
         Eq,
         
+        Close,
+        
         EqItem,
 
         NEq,

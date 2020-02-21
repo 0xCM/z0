@@ -16,11 +16,7 @@ namespace Z0
 
     public interface IVectorType : IVectorKind, IFixedWidth
     {
-        int BitWidth
-        {
-            [MethodImpl(Inline)]
-            get => (int)FixedWidth;
-        }
+
     }    
 
     public interface IVectorType<F> : IVectorType, IFixedKind<F>

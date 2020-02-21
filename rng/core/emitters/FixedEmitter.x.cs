@@ -16,38 +16,49 @@ namespace Z0
         public static IFixedEmitter<F,T> FixedEmitter<F,T>(this IPolyrand random)
             where F : unmanaged, IFixedWidth
             where T : unmanaged
-                => new FixedEmitter<F,T>(random, EmitterSurrogate<F,T>(random));
+                => new FixedEmitter<F,T>(random, FixedSurrogate<F,T>(random));
 
+        [MethodImpl(Inline)]
         public static Fixed8 Fixed(this IPolyrand random, N8 w)
             => random.Next<byte>();
 
+        [MethodImpl(Inline)]
         public static Fixed8 Fixed(this IPolyrand random, N8 w, N1 signed)
             => random.Next<sbyte>();
 
+        [MethodImpl(Inline)]
         public static Fixed16 Fixed(this IPolyrand random, N16 w)
             => random.Next<ushort>();
 
+        [MethodImpl(Inline)]
         public static Fixed16 Fixed(this IPolyrand random, N16 w, N1 signed)
             => random.Next<short>();
 
+        [MethodImpl(Inline)]
         public static Fixed32 Fixed(this IPolyrand random, N32 w)
             => random.Next<uint>();
 
+        [MethodImpl(Inline)]
         public static Fixed32 Fixed(this IPolyrand random, N32 w, N1 signed)
             => random.Next<int>();
 
+        [MethodImpl(Inline)]
         public static Fixed64 Fixed(this IPolyrand random, N64 w)
             => random.Next<ulong>();
 
+        [MethodImpl(Inline)]
         public static Fixed64 Fixed(this IPolyrand random, N64 w, N1 signed)
             => random.Next<long>();
 
+        [MethodImpl(Inline)]
         public static Fixed128 Fixed(this IPolyrand random, N128 w)
             => random.NextPair<ulong>();
 
+        [MethodImpl(Inline)]
         public static Fixed256 Fixed(this IPolyrand random, N256 w)
-            => random.NextQuad<ulong>();
+            =>  (random.Fixed(n128), random.Fixed(n128));
 
+        [MethodImpl(Inline)]
         public static Fixed512 Fixed(this IPolyrand random, N512 w)
             => (random.Fixed(n256), random.Fixed(n256));
 
@@ -109,7 +120,7 @@ namespace Z0
                 yield return random.Fixed(w);
         }
 
-        static EmitterSurrogate<F> EmitterSurrogate<F,T>(IPolyrand random)
+        static FixedEmitterSurrogate<F,T> FixedSurrogate<F,T>(IPolyrand random)
             where F : unmanaged, IFixedWidth
             where T : unmanaged
         {
@@ -200,25 +211,25 @@ namespace Z0
                 switch(kind)
                 {
                     case NumericKind.I8:
-                        return OpSurrogates.emitter<F>(f8i, name);
+                        return OpSurrogates.emitter<F,T>(f8i, name);
                     case NumericKind.U8:
-                        return OpSurrogates.emitter<F>(f8u, name);
+                        return OpSurrogates.emitter<F,T>(f8u, name);
                     case NumericKind.I16:
-                        return OpSurrogates.emitter<F>(f16i, name);
+                        return OpSurrogates.emitter<F,T>(f16i, name);
                     case NumericKind.U16:
-                        return OpSurrogates.emitter<F>(f16u, name);
+                        return OpSurrogates.emitter<F,T>(f16u, name);
                     case NumericKind.I32:
-                        return OpSurrogates.emitter<F>(f32i, name);
+                        return OpSurrogates.emitter<F,T>(f32i, name);
                     case NumericKind.U32:
-                        return OpSurrogates.emitter<F>(f32u, name);
+                        return OpSurrogates.emitter<F,T>(f32u, name);
                     case NumericKind.I64:
-                        return OpSurrogates.emitter<F>(f64i, name);
+                        return OpSurrogates.emitter<F,T>(f64i, name);
                     case NumericKind.U64:
-                        return OpSurrogates.emitter<F>(f64u, name);
+                        return OpSurrogates.emitter<F,T>(f64u, name);
                     case NumericKind.F32:
-                        return OpSurrogates.emitter<F>(f32f, name);
+                        return OpSurrogates.emitter<F,T>(f32f, name);
                     case NumericKind.F64:
-                        return OpSurrogates.emitter<F>(f64f, name);
+                        return OpSurrogates.emitter<F,T>(f64f, name);
                 }   
             }
             else
@@ -226,15 +237,15 @@ namespace Z0
                 switch(width)
                 {
                     case FixedWidth.W128:
-                        return OpSurrogates.emitter<F>(f128, name);
+                        return OpSurrogates.emitter<F,T>(f128, name);
                     case FixedWidth.W256:
-                        return OpSurrogates.emitter<F>(f256, name);
+                        return OpSurrogates.emitter<F,T>(f256, name);
                     case FixedWidth.W512:
-                        return OpSurrogates.emitter<F>(f512, name);
+                        return OpSurrogates.emitter<F,T>(f512, name);
                 }
             }
 
-            return OpSurrogates.emitter<F>(() => default, name);            
+            return OpSurrogates.emitter<F,T>(() => default, name);            
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N8 w)

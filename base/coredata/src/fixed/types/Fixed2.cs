@@ -14,13 +14,17 @@ namespace Z0
     {
         public const int BitWidth = 2;
 
+        const uint Mask = 0b11;
+
         byte X0;
 
-        public int BitCount 
+        public byte Data
         {
-            [MethodImpl(Inline)]
-            get => BitWidth;
+            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] set => X0 = (byte)((uint)value & Mask);
         }
+
+        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         [MethodImpl(Inline)]
         public static Fixed2 From(byte src)
@@ -32,11 +36,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Fixed2(uint x0)
-            => X0 = (byte)(x0 & 0b11);
+            => X0 = (byte)(x0 & Mask);
 
         [MethodImpl(Inline)]
         Fixed2(byte x0)
-            => X0 = (byte)((uint)x0 & 0b11);
+            => X0 = (byte)((uint)x0 & Mask);
 
         [MethodImpl(Inline)]
         public static explicit operator Fixed2(byte x)
@@ -46,11 +50,6 @@ namespace Z0
         public static implicit operator byte(Fixed2 x)
             => x.X0;
          
-        [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed2,A>(ref Unsafe.AsRef(in this));             
-
         [MethodImpl(Inline)]
         public bool Equals(Fixed2 src)
             => X0 == src.X0;

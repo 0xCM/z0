@@ -21,27 +21,17 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = value;
         }
 
+        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
+
         public FixedWidth FixedWidth
         {
             [MethodImpl(Inline)]
             get => (FixedWidth)BitWidth;
         }
-
-        public int BitCount
-        {
-            [MethodImpl(Inline)]
-            get => BitWidth;
-        }
-
+        
         [MethodImpl(Inline)]
         Fixed16(ushort x)
             => X0 = x;
-
-        public unsafe Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => new Span<byte>(Unsafe.AsPointer(ref Unsafe.AsRef(in this)), BitWidth/8);
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(ushort x)
@@ -74,11 +64,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ushort(Fixed16 x)
             => x.X0;
-
-        [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed16,A>(ref Unsafe.AsRef(in this));             
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed16 src)

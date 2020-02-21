@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static RootShare;
+    using static Pow2;
 
     /// <summary>
     /// Defines identifiers for known system assemblies
@@ -18,53 +19,56 @@ namespace Z0
     {
         None = 0,
         
-        Empty = 1,
+        Empty = T00,
         
-        Root = 2,
+        Root = T01,
 
-        TypeNats = 4,
+        TypeNats = T02,
 
-        DataCore = 8,
+        DataCore = T03,
 
-        CoreFunc = 16,
+        CoreFunc = T04,
 
-        GMath = 32,
+        GMath = T05,
 
-        Intrinsics = 64,
+        Intrinsics = T07,
 
-        BitCore,
+        BitCore = T08,
 
-        BitVectors,
-
-        BitGrids,
-
-        Logix,
-
-        Polyrand,
-
-        AsmCore,
-
-        Data,
-
-        LibM,
-
-        Matrix,
-
-        LinearOps,
-
-        Machines,
-
-        RngCore,
-
-        MathObjects,
+        BitFields = T09,
         
-        MklApi,
+        BitVectors = T10,
 
-        Control,
+        BitGrids = T11,
 
-        FastOps,
+        Logix = T12,
 
-        Validation
+        Polyrand = T13,
+
+        AsmCore = T14,
+
+        Data = T15,
+
+        LibM = T16,
+
+        Matrix = T17,
+
+        LinearOps = T18,
+
+        Machines = T19,
+
+        RngCore = T20,
+
+        MathObjects = T21,
+        
+        MklApi = T22,
+
+        FastOps = T23,
+
+        Validation = T24,
+
+        Control = T63,
+
     }
 
     partial class RootKindExtensions

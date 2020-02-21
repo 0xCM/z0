@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -15,20 +13,25 @@ namespace Z0
         where F : unmanaged, IFixed
         where T :unmanaged
     {
+
+        readonly IPolyrand Random;
+        
+        readonly FixedEmitterSurrogate<F,T> f;
+
         public const string Name = "fixedrand";
 
         public static int Width => bitsize<F>();
 
-        public static NumericKind NumericKind => typeof(T).NumericKind();
+        public static NumericKind NumericKind 
+        {
+            [MethodImpl(Inline)]
+            get => typeof(T).NumericKind();
+        }
         
-        readonly IPolyrand Random;
-        
-        readonly EmitterSurrogate<F> f;
-
         public OpIdentity Id => OpId.fixedop(Name, (FixedWidth)Width, NumericKind);
 
         [MethodImpl(Inline)]
-        internal FixedEmitter(IPolyrand random, EmitterSurrogate<F> f)      
+        internal FixedEmitter(IPolyrand random, FixedEmitterSurrogate<F,T> f)      
         {      
             this.Random = random;
             this.f = f;

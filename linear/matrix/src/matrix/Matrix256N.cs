@@ -150,7 +150,7 @@ namespace Z0
         public NatSpan<N,T> Natural
         {
             [MethodImpl(Inline)]
-            get => NatSpan.load<N,T>(data);
+            get => Matrix.natspan<N,T>(data);
         }
 
         /// <summary>

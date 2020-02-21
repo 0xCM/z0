@@ -18,7 +18,10 @@ namespace Z0
         /// <param name="rhs">The result of the second calculation</param>
         [MethodImpl(Inline), Op]
         public static float relerr(float lhs, float rhs)
-            => fmath.abs((lhs - rhs)/lhs);
+        {
+            var err = dist(lhs,rhs)/lhs;
+            return err.IsNaN() ? 0 : err;
+        }
 
         /// <summary>
         /// Computes the relative error between a one floating-point calculation and another
@@ -27,7 +30,10 @@ namespace Z0
         /// <param name="rhs">The result of the second calculation</param>
         [MethodImpl(Inline), Op]
         public static double relerr(double lhs, double rhs)
-            => fmath.abs((lhs - rhs)/lhs);
+        {
+            var err = dist(lhs,rhs)/lhs;
+            return err.IsNaN() ? 0 : err;
+        }
         
         /// <summary>
         /// Computes the relative error between one floating-point calculation and another

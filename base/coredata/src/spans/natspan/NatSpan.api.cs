@@ -55,18 +55,6 @@ namespace Z0
             return new NatSpan<N, T>(src);
         }
 
-        /// <summary>
-        /// Loads a natural block from blocked storage
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="n">The length representative</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatSpan<N,T> load<N,T>(in Block256<T> src, N n = default)    
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => load(src.data,n);
 
         /// <summary>
         /// Loads a natural block from a reference

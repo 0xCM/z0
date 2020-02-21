@@ -21,11 +21,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int BitCount
-        {
-            [MethodImpl(Inline)]
-            get => BitWidth;
-        }
+        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         public FixedWidth FixedWidth
         {
@@ -80,12 +76,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(Fixed64 x)
             => x.X0;
-
-
-        [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed64,A>(ref Unsafe.AsRef(in this));             
 
         [MethodImpl(Inline)]
         public bool Equals(ulong src)

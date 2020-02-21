@@ -20,17 +20,7 @@ namespace Z0
 
         Fixed256 X1;
 
-        public int BitCount
-        {
-            [MethodImpl(Inline)]
-            get => BitWidth;
-        }
-
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
+        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         [MethodImpl(Inline)]
         Fixed512(Fixed256 x0, Fixed256 x1)
@@ -74,11 +64,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Vector512<ulong>(Fixed512 x)
             => x.ToVector<ulong>();
-
-        [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed512,A>(ref Unsafe.AsRef(in this));             
 
         public string Format() 
             => array(X0,X1).FormatList();

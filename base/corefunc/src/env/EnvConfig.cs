@@ -21,7 +21,7 @@ namespace Z0
         }
 
         FolderPath OutputFolder
-            =>  FolderPath.Define(Settings.LogDir);
+            =>  FolderPath.Define(Settings.LogRoot);
 
         // FolderPath OutputFolder
         //     =>  FolderPath.Define(@"J:\dev\projects\z0-logs");

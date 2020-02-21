@@ -32,6 +32,12 @@ namespace Z0
         public static AppMsg NotEqual(object lhs, object rhs, string caller, string file, int? line)
             => AppMsg.Define($"Equality failure: {lhs} != {rhs}", SeverityLevel.Error, caller, file, line) ;
 
+        public static AppMsg NotClose(float lhs, float rhs, float err, float tolerance, string caller, string file, int? line)
+            => AppMsg.Define($"Approximate equality failure: relerr({lhs},{rhs}) = {err} > {tolerance}", SeverityLevel.Error, caller, file, line) ;
+
+        public static AppMsg NotClose(double lhs, double rhs, double err, double tolerance, string caller, string file, int? line)
+            => AppMsg.Define($"Approximate equality failure: relerr({lhs},{rhs}) = {err} > {tolerance}", SeverityLevel.Error, caller, file, line) ;
+
         public static AppMsg Equal(object lhs, object rhs, string caller, string file, int? line)
             => AppMsg.Define($"{lhs} == {rhs}", SeverityLevel.Error, caller, file, line) ;
 

@@ -14,13 +14,17 @@ namespace Z0
     {
         public const int BitWidth = 4;
 
+        const uint Mask = 0xFu;
+
         byte X0;
 
-        public int BitCount 
+        public byte Data
         {
-            [MethodImpl(Inline)]
-            get => BitWidth;
+            [MethodImpl(Inline)] get => X0;
+            [MethodImpl(Inline)] set => X0 = (byte)((uint)value & Mask);
         }
+
+        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         [MethodImpl(Inline)]
         public static Fixed4 From(byte src)
@@ -28,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Fixed4(byte x0)
-            => X0 = (byte)((uint)x0 & 0xFu);
+            => X0 = (byte)((uint)x0 & Mask);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed4(uint4_t x)
@@ -85,11 +89,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ulong(Fixed4 x)
             => x.X0;
-
-        [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed4,A>(ref Unsafe.AsRef(in this));             
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed4 src)

@@ -42,6 +42,9 @@ dotnet sln add rng/system/z0.rng.system.csproj
 dotnet sln add bitcore/src/z0.bitcore.csproj
 dotnet sln add bitcore/test/z0.bitcore.test.csproj
 
+dotnet sln add bitfields/src/z0.bitfields.csproj
+dotnet sln add bitfields/test/z0.bitfields.test.csproj
+
 dotnet sln add bitvectors/src/z0.bitvectors.csproj
 dotnet sln add bitvectors/test/z0.bitvectors.test.csproj
 
@@ -62,5 +65,7 @@ dotnet sln add machines/test/z0.machines.test.csproj
 
 dotnet sln add testing/z0.testing.csproj
 dotnet sln add devops/z0.devops.csproj
+
+
 
 dotnet sln add .control/z0.control.csproj

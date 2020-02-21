@@ -20,24 +20,7 @@ namespace Z0
 
         Fixed128 X1;
 
-        public int BitCount
-        {
-            [MethodImpl(Inline)]
-            get => BitWidth;
-        }
-
-        public FixedWidth FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)BitWidth;
-        }
-
-        [MethodImpl(Inline)]
-        Fixed256(in ConstQuad<ulong> src)
-        {
-            this.X0 = (src.A, src.B);
-            this.X1 = (src.C, src.D);
-        }
+        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         [MethodImpl(Inline)]
         Fixed256(Fixed128 x0, Fixed128 x1)
@@ -89,16 +72,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Fixed256(in ConstPair<Fixed128> x)
             => new Fixed256(x.A,x.B);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed256(in ConstQuad<ulong> x)
-            => new Fixed256(x);
-
-
-        [MethodImpl(Inline)]
-        public A As<A>()
-            where A : struct
-                => Unsafe.As<Fixed256,A>(ref Unsafe.AsRef(in this));             
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed256 src)

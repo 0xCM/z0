@@ -1,1 +1,2 @@
-dotnet run > run.txt
+export ProjectId=machines
+bash $ZDev/run-test.sh

@@ -121,16 +121,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe void store<S,T>(in S src, int bytecount, ref T dst)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            ref var dstBytes = ref Unsafe.As<T,byte>(ref dst);
-            ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));            
-            Unsafe.CopyBlockUnaligned(ref dstBytes, ref srcBytes, (uint)bytecount);
-        } 
-
-        [MethodImpl(Inline)]
         public static FixedType<F> kind<F>(F f = default)
             where F : unmanaged, IFixed
                 => default;
@@ -170,5 +160,15 @@ namespace Z0
             where F : unmanaged, IFixed
             where T : unmanaged
                 => ref From<Vector512<T>,F>(in src);
+
+        [MethodImpl(Inline)]
+        static unsafe void store<S,T>(in S src, int bytecount, ref T dst)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            ref var dstBytes = ref Unsafe.As<T,byte>(ref dst);
+            ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));            
+            Unsafe.CopyBlockUnaligned(ref dstBytes, ref srcBytes, (uint)bytecount);
+        } 
     }
 }

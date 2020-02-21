@@ -1,1 +1,2 @@
-dotnet run > results.txt
+export ProjectId=asm
+bash $ZDev/run-test.sh

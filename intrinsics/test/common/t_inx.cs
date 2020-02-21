@@ -17,19 +17,5 @@ namespace Z0
     public abstract class t_inx<X> : UnitTest<X>
         where X : t_inx<X>
     {
-        /// <summary>
-        /// Asserts the equality of two bitspans
-        /// </summary>
-        /// <param name="a">The left bitspan</param>
-        /// <param name="b">The right bitspan</param>
-        protected void ClaimEqual(in BitSpan a, in BitSpan b)
-        {
-            if(a != b)
-            {
-                PostMessage(a.Format());
-                PostMessage(b.Format());
-                Claim.fail();
-            }
-        }
     }
 }

@@ -56,8 +56,8 @@ namespace Z0
         public static implicit operator TableSpan<M,N,T>(Span<T> src)
             => new TableSpan<M, N, T>(src);
 
-        public static implicit operator TableSpan<M,N,T>(Block256<T> src)
-            => new TableSpan<M, N, T>(src);
+        // public static implicit operator TableSpan<M,N,T>(Block256<T> src)
+        //     => new TableSpan<M, N, T>(src);
 
         public static implicit operator Span<T>(TableSpan<M,N,T> src)
             => src.data;
@@ -111,12 +111,12 @@ namespace Z0
             data = src.ToArray();
         }
 
-        [MethodImpl(Inline)]
-        internal TableSpan(Block256<T> src)
-        {
-            require(src.CellCount == CellCount, $"length(src) = {src.CellCount} != {CellCount} = SpanLength");         
-            this.data = src.Data;
-        }
+        // [MethodImpl(Inline)]
+        // internal TableSpan(Block256<T> src)
+        // {
+        //     require(src.CellCount == CellCount, $"length(src) = {src.CellCount} != {CellCount} = SpanLength");         
+        //     this.data = src.Data;
+        // }
 
         public ref T Head
         {

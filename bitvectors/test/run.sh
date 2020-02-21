@@ -1,1 +1,2 @@
-dotnet run > results.txt
+export ProjectId=bitvectors
+bash $ZDev/run-test.sh

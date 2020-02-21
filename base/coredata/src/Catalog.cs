@@ -18,12 +18,9 @@ namespace Z0
 
         }        
 
-        public override IEnumerable<ApiHost> DirectApiHosts
-            => from t in (new Type[]{typeof(DataBlocks)})
-                select ApiHost.Define(AssemblyId,t);
 
         public override IEnumerable<ApiHost> GenericApiHosts
-            => from t in (new Type[]{typeof(DataBlocks), typeof(Symbolic)})
+            => from t in (new Type[]{typeof(Symbolic)})
                 select ApiHost.Define(AssemblyId, t);
     }
 

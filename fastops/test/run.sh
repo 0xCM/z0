@@ -1,1 +1,2 @@
-dotnet run > run.txt
+export ProjectId=fastops
+bash $ZDev/run-test.sh

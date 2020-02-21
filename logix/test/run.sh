@@ -1,1 +1,2 @@
-dotnet run > run.txt
+export ProjectId=logix
+bash $ZDev/run-test.sh

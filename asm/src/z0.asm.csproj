@@ -12,6 +12,7 @@
     <ProjectReference Include="$(TopDir)fastops/src/z0.fastops.csproj" />
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />    
+    <ProjectReference Include="$(TopDir)bitfields/src/z0.bitfields.csproj" />    
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
   </ItemGroup>
 

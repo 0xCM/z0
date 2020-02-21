@@ -1,1 +1,2 @@
-dotnet run > run.txt
+export ProjectId=intrinsics
+bash $ZDev/run-test.sh
