@@ -83,6 +83,11 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
+        public A As<A>()
+            where A : struct
+                => Unsafe.As<Fixed64,A>(ref Unsafe.AsRef(in this));             
+
+        [MethodImpl(Inline)]
         public bool Equals(ulong src)
             => X0 == src;
 

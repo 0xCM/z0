@@ -6,15 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static RootShare;
 
-    public static class FieldExtensions
+    public interface IAs
     {
-        internal static string FormatEntry<F>(this F entry)
-            where F : IFieldIndexEntry
-                => $"{entry.FieldValue.GetType().Name}[{entry.Index}] = {entry.FieldName}";
+
     }
 
+    public interface IAs<S,T> : IAs        
+    {
+        T As(S src);
+    }
 }

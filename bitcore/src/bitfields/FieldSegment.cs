@@ -6,12 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Text;
 
     using static zfunc;
-
-    using static As;
 
     /// <summary>
     /// Defines a field segment, i.e. a congiguous run of bits that, together with other segments,
@@ -60,7 +56,7 @@ namespace Z0
         }
 
         public string Format()
-            => FieldSegments.format(this);
+            => FieldSegments.formatter<T>().Format(this);
 
         public override string ToString()
             => Format();
@@ -69,7 +65,7 @@ namespace Z0
     /// <summary>
     /// Defines a byte-parametric field segment
     /// </summary>
-    public readonly struct FieldSegment : INumericFieldSegment<byte>
+    public readonly struct FieldSegment : INumericSegment<byte>
     {
         /// <summary>
         /// A unique name that identifies the segment
@@ -111,7 +107,7 @@ namespace Z0
         }
 
         public string Format()
-            => FieldSegments.format(this);
+            => FieldSegments.formatter<byte>().Format(this);
 
         public override string ToString()
             =>  Format();

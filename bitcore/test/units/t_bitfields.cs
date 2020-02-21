@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FieldSegment segment<E>(E segid, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => FieldSegments.define(segid.ToString(), evalue<E,byte>(segid), startpos, endpos, (byte)(endpos - startpos + 1));
+                => BitFields.segment(segid.ToString(), evalue<E,byte>(segid), startpos, endpos, (byte)(endpos - startpos + 1));
 
         enum BF_A : byte
         {
@@ -33,32 +33,33 @@ namespace Z0
 
         public void bitfield_a()
         {
-            var bf = BitField.specify(
+            var spec = BitFields.specify(
                 segment(BF_A.F08_0, 0, 1),
                 segment(BF_A.F08_1, 2, 3),
                 segment(BF_A.F08_2, 4, 5),
                 segment(BF_A.F08_3, 6, 7)
                 );
-            
-            Claim.eq((byte)4, bf.FieldCount);
-            Claim.eq((byte)0, bf[0].StartPos);
-            Claim.eq((byte)2, bf[1].StartPos);
-            Claim.eq((byte)4, bf[2].StartPos);
-            Claim.eq((byte)6, bf[3].StartPos);
-            Claim.eq((byte)2, bf[0].Width);
-            Claim.eq((byte)2, bf[1].Width);
-            Claim.eq((byte)2, bf[2].Width);
-            Claim.eq((byte)2, bf[3].Width);
 
-            var reader = bf.Reader<byte>();
+            
+            Claim.eq((byte)4, spec.FieldCount);
+            Claim.eq((byte)0, spec[0].StartPos);
+            Claim.eq((byte)2, spec[1].StartPos);
+            Claim.eq((byte)4, spec[2].StartPos);
+            Claim.eq((byte)6, spec[3].StartPos);
+            Claim.eq((byte)2, spec[0].Width);
+            Claim.eq((byte)2, spec[1].Width);
+            Claim.eq((byte)2, spec[2].Width);
+            Claim.eq((byte)2, spec[3].Width);
+
+            var bf = BitFields.api<byte>(spec);
             for(var rep=0; rep<RepCount; rep++)
             {
                 var input = Random.Next<byte>();
                 
-                var seg0 = reader.Read(bf[0], input);            
-                var seg1 = reader.Read(bf[1], input);
-                var seg2 = reader.Read(bf[2], input);
-                var seg3 = reader.Read(bf[3], input);
+                var seg0 = bf.Read(spec[0], input);            
+                var seg1 = bf.Read(spec[1], input);
+                var seg2 = bf.Read(spec[2], input);
+                var seg3 = bf.Read(spec[3], input);
 
                 Claim.eq(Bits.bitslice(input, 0, 2), seg0);
                 Claim.eq(Bits.bitslice(input, 2, 2), seg1);
@@ -66,10 +67,10 @@ namespace Z0
                 Claim.eq(Bits.bitslice(input, 6, 2), seg3);
 
                 var output =  gmath.or(
-                    gmath.sll(seg0, bf[0].StartPos), 
-                    gmath.sll(seg1, bf[1].StartPos), 
-                    gmath.sll(seg2, bf[2].StartPos), 
-                    gmath.sll(seg3, bf[3].StartPos));
+                    gmath.sll(seg0, spec[0].StartPos), 
+                    gmath.sll(seg1, spec[1].StartPos), 
+                    gmath.sll(seg2, spec[2].StartPos), 
+                    gmath.sll(seg3, spec[3].StartPos));
                 Claim.eq(input,output);
 
             }
@@ -88,28 +89,28 @@ namespace Z0
 
         public void bitfield_b()
         {
-            var bf = BitField.specify(
+            var spec = BitFields.specify(
                 segment(BF_B.F16_0, 0, 3),
                 segment(BF_B.F16_1, 4, 7),
                 segment(BF_B.F16_2, 8, 9),
                 segment(BF_B.F16_3, 10, 15)
                 );
-            var dst = alloc<ushort>(bf.FieldCount);
-            var reader = bf.Reader<ushort>();
+            var dst = alloc<ushort>(spec.FieldCount);
+            var bf = BitFields.api<ushort>(spec);
 
-            Claim.eq((byte)4,bf.FieldCount);
+            Claim.eq((byte)4,spec.FieldCount);
 
             for(var rep=0; rep<RepCount; rep++)
             {
                 var src = Random.Next<ushort>();
                 dst.Clear();
-                reader.Read(src,dst);
+                bf.Read(src,dst);
                 
                 var output =  gmath.or(
-                    gmath.sll(dst[0], bf[0].StartPos), 
-                    gmath.sll(dst[1], bf[1].StartPos), 
-                    gmath.sll(dst[2], bf[2].StartPos), 
-                    gmath.sll(dst[3], bf[3].StartPos)
+                    gmath.sll(dst[0], spec[0].StartPos), 
+                    gmath.sll(dst[1], spec[1].StartPos), 
+                    gmath.sll(dst[2], spec[2].StartPos), 
+                    gmath.sll(dst[3], spec[3].StartPos)
                 );
 
                 Claim.eq(src,output);
@@ -133,31 +134,31 @@ namespace Z0
 
         public void bitfield_c()
         {
-            var bf = BitField.specify<BF_C>();
-            var reader = bf.Reader<byte>();            
-            var dst = alloc<byte>(bf.FieldCount);
+            var spec = BitFields.specify<BF_C>();
+            var bf = BitFields.api<byte>(spec);
+            var dst = alloc<byte>(spec.FieldCount);
 
-            Claim.eq((byte)4, bf.FieldCount);
+            Claim.eq((byte)4, spec.FieldCount);
 
             for(var rep=0; rep<RepCount; rep++)
             {
                 var src = Random.Next<byte>();
                                 
                 dst.Clear();
-                reader.Read(src, dst);
+                bf.Read(src, dst);
 
                 var result1 =  gmath.or(
-                    gmath.sll(dst[0], bf[0].StartPos), 
-                    gmath.sll(dst[1], bf[1].StartPos), 
-                    gmath.sll(dst[2], bf[2].StartPos), 
-                    gmath.sll(dst[3], bf[3].StartPos)
+                    gmath.sll(dst[0], spec[0].StartPos), 
+                    gmath.sll(dst[1], spec[1].StartPos), 
+                    gmath.sll(dst[2], spec[2].StartPos), 
+                    gmath.sll(dst[3], spec[3].StartPos)
                     );
 
                 var result2 = gmath.or(
-                    reader.Read(bf[0], src, true),
-                    reader.Read(bf[1], src, true),
-                    reader.Read(bf[2], src, true),
-                    reader.Read(bf[3], src, true)
+                    bf.Read(spec[0], src, true),
+                    bf.Read(spec[1], src, true),
+                    bf.Read(spec[2], src, true),
+                    bf.Read(spec[3], src, true)
                     );
                 
                 Claim.eq(src,result1);   
@@ -189,13 +190,13 @@ namespace Z0
 
         public void bitfield_d()
         {
-            var bf = BitField.specify<BF_D>();
-            var reader = bf.Reader<ulong>();            
-            var dst = alloc<ulong>(bf.FieldCount);
-            var tmp = alloc<ulong>(bf.FieldCount);
-            var positions = bf.Segments.Map(s => s.StartPos);
+            var spec = BitFields.specify<BF_D>();
+            var bf = BitFields.api<ulong>(spec);
+            var dst = alloc<ulong>(spec.FieldCount);
+            var tmp = alloc<ulong>(spec.FieldCount);
+            var positions = spec.Segments.Map(s => s.StartPos);
 
-            Trace(bf);
+            Trace(spec);
 
             for(var rep=0; rep < RepCount; rep++)
             {
@@ -204,15 +205,15 @@ namespace Z0
                 dst.Clear();
                 tmp.Clear();
 
-                var expect = gbits.bitslice(src,0, bf.TotalWidth);
+                var expect = gbits.bitslice(src,0, spec.TotalWidth);
 
-                reader.Read(src, dst);
+                bf.Read(src, dst);
                 mathspan.sllv(dst, positions, tmp);
                 var result1 = mathspan.or(tmp.ReadOnly());
                                 
                 var result2 = 0ul;
-                for(byte j=0; j<bf.FieldCount; j++)
-                    result2 = gmath.or(result2, gmath.sll(dst[j], bf[j].StartPos));
+                for(byte j=0; j<spec.FieldCount; j++)
+                    result2 = gmath.or(result2, gmath.sll(dst[j], spec[j].StartPos));
                 
                 Claim.eq(result1, result2);
                 

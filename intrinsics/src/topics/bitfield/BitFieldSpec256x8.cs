@@ -49,7 +49,7 @@ namespace Z0
                 if(width == 0)
                     break;                
 
-                var seg = FieldSegments.define(index[i].FieldName, evalue<E,byte>(index[i].FieldValue), (byte)start, (byte)(start + width), width);
+                var seg = BitFields.segment(index[i].FieldName, evalue<E,byte>(index[i].FieldValue), (byte)start, (byte)(start + width), width);
                 parts[count++] = seg;
                 start = start + width + 1;
             }

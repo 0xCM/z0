@@ -10,12 +10,13 @@ namespace Z0
 
     using static RootShare;
 
-    public interface INumericFormatter : IFormatter
+    public interface INumericFormatter : IObjectFormatter
     {
         
     }
 
     public interface INumericFormatter<T> : INumericFormatter, IFormatter<T>
+        where T : unmanaged
     {
         string Format(T src, NumericBase @base);
 
@@ -28,6 +29,7 @@ namespace Z0
 
     public interface INumericFormatter<F,T> : INumericFormatter<T>
         where F : struct, INumericFormatter<F,T>
+        where T : unmanaged
     {
         [MethodImpl(Inline)]
         new NumericFormatter<F,T> Concretize()

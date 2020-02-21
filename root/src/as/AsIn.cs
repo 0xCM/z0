@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    using static zfunc;
-    
+    using System.Runtime.CompilerServices;    
 
-    partial class AsIn
+    using static RootShare;    
+
+    [ApiHost]
+    public static class AsIn
     {
         [MethodImpl(Inline)]
         public static ref char char16<T>(in T src)
@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T generic<T>(in char src)
-            => ref Unsafe.As<char,T>(ref mutable(in src));
+            => ref Unsafe.As<char,T>(ref asRef(in src));
 
         [MethodImpl(Inline)]
         public static ref T generic<S,T>(in S src)
@@ -107,6 +107,5 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         static ref T asRef<T>(in T src)
             => ref Unsafe.AsRef(in src);
-
     }
 }

@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Collections.Concurrent;
-
+ 
     using static zfunc;
 
     /// <summary>
@@ -46,7 +44,7 @@ namespace Z0
         public byte TotalWidth
         {
             [MethodImpl(Inline)]
-            get => BitField.width(this);
+            get => BitFields.width(this);
         }
 
         public ReadOnlySpan<FieldSegment> Segments 
@@ -54,11 +52,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => segments;
         }
-
-        [MethodImpl(Inline)]
-        public BitFieldReader<T> Reader<T>()
-            where T : unmanaged
-                => new BitFieldReader<T>(this);
 
         public string Format()
             => FieldSegments.format(Segments);

@@ -85,7 +85,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ulong(Fixed4 x)
             => x.X0;
-        
+
+        [MethodImpl(Inline)]
+        public A As<A>()
+            where A : struct
+                => Unsafe.As<Fixed4,A>(ref Unsafe.AsRef(in this));             
+
         [MethodImpl(Inline)]
         public bool Equals(Fixed4 src)
             => X0 == src.X0;

@@ -10,7 +10,7 @@ namespace Z0.Asm.Encoding
     /// <summary>
     /// Defines REX field identifiers
     /// </summary>
-    public enum RexFieldId : byte
+    public enum RexFieldIndex : byte
     {
         B = 0,
 

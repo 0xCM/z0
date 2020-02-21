@@ -45,7 +45,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator byte(Fixed2 x)
             => x.X0;
-        
+         
+        [MethodImpl(Inline)]
+        public A As<A>()
+            where A : struct
+                => Unsafe.As<Fixed2,A>(ref Unsafe.AsRef(in this));             
+
         [MethodImpl(Inline)]
         public bool Equals(Fixed2 src)
             => X0 == src.X0;

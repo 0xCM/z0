@@ -32,7 +32,6 @@ namespace Z0
         }
     }
 
-
     /// <summary>
     ///  Characterizes a fixed type with storage and reification types of equal size
     /// </summary>
@@ -74,7 +73,7 @@ namespace Z0
     public interface IFixedNumeric<T> : IFixed<T>, IFixedWidth
         where T : unmanaged        
     {
-        T Data {get;}
+        T Data {get;set;}
 
         NumericKind NumericKind
         {
@@ -92,7 +91,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => (int)bitsize<T>();
-        }        
+        }    
     }
 
     public interface IFixedNumeric<F,T> : IFixedNumeric<T>, IEquatable<F>

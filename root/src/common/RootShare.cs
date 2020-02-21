@@ -43,6 +43,10 @@ namespace Z0
             => new NotSupportedException($"{value}");
 
         [MethodImpl(Inline)]
+        public static NotSupportedException unsupported<T>()
+            => new NotSupportedException($"The invoking operation does not support the type {typeof(T).Name}");
+
+        [MethodImpl(Inline)]
         public static int bitsize<T>()            
             where T : unmanaged
                 => Unsafe.SizeOf<T>()*8;

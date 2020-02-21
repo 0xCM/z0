@@ -75,6 +75,11 @@ namespace Z0
         public static implicit operator Vector512<ulong>(Fixed512 x)
             => x.ToVector<ulong>();
 
+        [MethodImpl(Inline)]
+        public A As<A>()
+            where A : struct
+                => Unsafe.As<Fixed512,A>(ref Unsafe.AsRef(in this));             
+
         public string Format() 
             => array(X0,X1).FormatList();
 

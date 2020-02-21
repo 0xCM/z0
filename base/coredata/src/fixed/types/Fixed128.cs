@@ -95,5 +95,10 @@ namespace Z0
 
         public override string ToString() 
             => array(X0,X1).FormatList();
+        
+        [MethodImpl(Inline)]
+        public A As<A>()
+            where A : struct
+                => Unsafe.As<Fixed128,A>(ref Unsafe.AsRef(in this));
     }
 }

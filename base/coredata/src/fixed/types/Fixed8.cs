@@ -63,6 +63,11 @@ namespace Z0
             => (byte)x.X0;
 
         [MethodImpl(Inline)]
+        public A As<A>()
+            where A : struct
+                => Unsafe.As<Fixed8,A>(ref Unsafe.AsRef(in this));             
+
+        [MethodImpl(Inline)]
         public bool Equals(Fixed8 src)
             => X0 == src.X0;
 

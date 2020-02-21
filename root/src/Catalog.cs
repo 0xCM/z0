@@ -22,7 +22,7 @@ namespace Z0
                 select ApiHost.Define(AssemblyId,t);
 
         public override IEnumerable<ApiHost> GenericApiHosts
-            => from t in (new Type[]{typeof(Numeric),typeof(SpanOps),typeof(Refs)})
+            => from t in (new Type[]{typeof(Numeric),typeof(SpanOps),typeof(Refs),typeof(AsIn)})
                 select ApiHost.Define(AssemblyId,t);
 
     }

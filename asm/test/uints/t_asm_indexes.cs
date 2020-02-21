@@ -19,11 +19,8 @@ namespace Z0
     {
         public void ListFiles()
         {
-            // var archive = Context.CodeArchive(AssemblyId.GMath);
-            // iter(archive.Read(), c => Trace(c.Id));
 
-            iter(typeof(math).Assembly.ApiHosts(), t => Trace(t.ToString()));
-
+            //iter(typeof(math).Assembly.ApiHosts(), t => Trace(t.ToString()));
 
             
 

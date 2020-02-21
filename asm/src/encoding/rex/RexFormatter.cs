@@ -9,7 +9,7 @@ namespace Z0.Asm.Encoding
     using Z0;
     using static zfunc;         
 
-    using RF = RexFieldId;   
+    using RF = RexFieldIndex;   
 
     readonly struct RexFormatter : INumericFormatter<RexPrefix>
     {

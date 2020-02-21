@@ -6,15 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static RootShare;
 
-    using static zfunc;
-
-    /// <summary>
-    /// Characterizes an element within a partition of a numeric field
-    /// </summary>
-    /// <typeparam name="T">The field type over which a partition is defined</typeparam>
-    public interface INumericFieldSegment<T> : IFieldSegment<T>
+    public interface IAsNumeric<S,T> : IAs<S,T>
         where T : unmanaged
+        
+    {
+
+    }
+
+    public interface IAsNumeric<R,S,T> : IAsNumeric<S,T>
+        where T : unmanaged
+        where R : unmanaged, IAsNumeric<R,S,T>
+        
     {
 
     }

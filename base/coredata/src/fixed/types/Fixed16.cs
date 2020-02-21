@@ -70,6 +70,11 @@ namespace Z0
             => x.X0;
 
         [MethodImpl(Inline)]
+        public A As<A>()
+            where A : struct
+                => Unsafe.As<Fixed16,A>(ref Unsafe.AsRef(in this));             
+
+        [MethodImpl(Inline)]
         public bool Equals(Fixed16 src)
             => X0 == src.X0;
 

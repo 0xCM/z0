@@ -308,14 +308,25 @@ namespace Z0
         public static string Concat(this IEnumerable<string> src, char sep)
             => string.Join(sep, src);
 
-        public static string Concat(this ReadOnlySpan<string> src, string sep = null)
+        public static string Concat(this ReadOnlySpan<string> src, string delimiter = null)
         {
-            var delimiter = sep ?? " | ";
             var sb = new StringBuilder();
             for(var i=0; i<src.Length; i++)
             {
-                if(i != 0)
+                if(i != 0 && delimiter != null)
                     sb.Append(delimiter);                
+                sb.Append(src[i]);            
+            }
+            return sb.ToString();
+        }
+
+        public static string Concat(this ReadOnlySpan<string> src, char? delimiter)
+        {
+            var sb = new StringBuilder();
+            for(var i=0; i<src.Length; i++)
+            {
+                if(i != 0 && delimiter != null)
+                    sb.Append(delimiter.Value);                
                 sb.Append(src[i]);            
             }
             return sb.ToString();

@@ -96,6 +96,11 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
+        public A As<A>()
+            where A : struct
+                => Unsafe.As<Fixed256,A>(ref Unsafe.AsRef(in this));             
+
+        [MethodImpl(Inline)]
         public bool Equals(Fixed256 src)
             => X0.Equals(src.X0) && X1.Equals(src.X1);
         

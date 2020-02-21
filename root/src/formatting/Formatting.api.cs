@@ -38,22 +38,32 @@ namespace Z0
             where C : IFormatConfig
                 => src.GetFormatter().Format(src,config);
 
+        /// <summary>
+        /// Formats a span containing formattable things
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="delimiter">An optional element delimiter</param>
+        /// <typeparam name="T">The element type</typeparam>        
         [MethodImpl(Inline)]
-        static IFormatter CreateFormatter(Type realization)
+        public static string format<T>(ReadOnlySpan<T> src, char? delimiter = null)
+            where T : IFormattable<T>
+                => SpanFormatter.@default<T>(delimiter).Format(src);
+
+        [MethodImpl(Inline)]
+        static IObjectFormatter CreateFormatter(Type realization)
         {
             try
             {
-                return (IFormatter)Activator.CreateInstance(realization);
+                return (IObjectFormatter)Activator.CreateInstance(realization);
             }
             catch(Exception)
             {
                 return default(DefaultFormatter);
             }
-
         }
 
         [MethodImpl(Inline)]
-        static IFormatter GetFormatter(this object src)
+        static IObjectFormatter GetFormatter(this object src)
         {
             var attrib = src?.GetType()?.GetCustomAttribute<FormatterAttribute>();
             if(attrib != null)
@@ -65,7 +75,7 @@ namespace Z0
         /// <summary>
         /// Reifies a formatter via Object.ToString()
         /// </summary>
-        readonly struct DefaultFormatter : IFormatter
+        readonly struct DefaultFormatter : IObjectFormatter
         {
             [MethodImpl(Inline)]
             public string Format(object src)

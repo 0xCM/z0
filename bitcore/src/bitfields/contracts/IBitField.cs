@@ -7,13 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
-
-    public interface INumericFormatProvider<T> :  IFormatProvider<T>
+    public interface IBitField
     {
-        new INumericFormatter<T> Formatter {get;}
 
-        IFormatter<T> IFormatProvider<T>.Formatter
-            => Formatter;
     }
+
 }

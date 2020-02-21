@@ -24,6 +24,7 @@ namespace Z0
     }
 
     public readonly struct NumericFormatter<T> : INumericFormatter<T>
+        where T : unmanaged
     {
         readonly INumericFormatter<T> Formatter;
 
@@ -37,6 +38,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public NumericFormatter<F> As<F>()
+            where F : unmanaged
             => new NumericFormatter<F>(this as INumericFormatter<F>);
 
         [MethodImpl(Inline)]
@@ -45,6 +47,7 @@ namespace Z0
     }
 
     public readonly struct NumericFormatter<F,T> : INumericFormatter<F,T>
+        where T : unmanaged
         where F : struct, INumericFormatter<F,T>
     {
         readonly F Formatter;
@@ -63,6 +66,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NumericFormatter<S> As<S>()
+            where S : unmanaged
             => new NumericFormatter<T>(this).As<S>();        
     }
     
