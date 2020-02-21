@@ -277,5 +277,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static G generic<S,G>(in S specific)
             => Unsafe.As<S, G>(ref Unsafe.AsRef(in specific));
+                                   
     }    
 }

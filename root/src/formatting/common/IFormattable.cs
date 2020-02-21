@@ -28,7 +28,6 @@ namespace Z0
     /// Characterizes a type that provides intrinsic formatting capability
     /// </summary>
     public interface IFormattable<F> : ICustomFormattable
-        where F : IFormattable<F>
     {
         
     }    

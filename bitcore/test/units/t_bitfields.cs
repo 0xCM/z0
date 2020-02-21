@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FieldSegment segment<E>(E segid, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => BitFields.segment(segid.ToString(), evalue<E,byte>(segid), startpos, endpos, (byte)(endpos - startpos + 1));
+                => BitField.segment(segid.ToString(), evalue<E,byte>(segid), startpos, endpos, (byte)(endpos - startpos + 1));
 
         enum BF_A : byte
         {
@@ -33,7 +33,7 @@ namespace Z0
 
         public void bitfield_a()
         {
-            var spec = BitFields.specify(
+            var spec = BitField.specify(
                 segment(BF_A.F08_0, 0, 1),
                 segment(BF_A.F08_1, 2, 3),
                 segment(BF_A.F08_2, 4, 5),
@@ -51,7 +51,7 @@ namespace Z0
             Claim.eq((byte)2, spec[2].Width);
             Claim.eq((byte)2, spec[3].Width);
 
-            var bf = BitFields.api<byte>(spec);
+            var bf = BitField.create<byte>(spec);
             for(var rep=0; rep<RepCount; rep++)
             {
                 var input = Random.Next<byte>();
@@ -76,27 +76,27 @@ namespace Z0
             }
         }
 
-        enum BF_B : byte
+        enum BFB_I : byte
         {
-            F16_0 = 0,
+            BFB_0 = 0,
 
-            F16_1 = 1,
+            BFB_1 = 1,
 
-            F16_2 = 2,
+            BFB_2 = 2,
 
-            F16_3 = 3,
+            BFB_3 = 3,
         }
 
         public void bitfield_b()
         {
-            var spec = BitFields.specify(
-                segment(BF_B.F16_0, 0, 3),
-                segment(BF_B.F16_1, 4, 7),
-                segment(BF_B.F16_2, 8, 9),
-                segment(BF_B.F16_3, 10, 15)
+            var spec = BitField.specify(
+                segment(BFB_I.BFB_0, 0, 3),
+                segment(BFB_I.BFB_1, 4, 7),
+                segment(BFB_I.BFB_2, 8, 9),
+                segment(BFB_I.BFB_3, 10, 15)
                 );
             var dst = alloc<ushort>(spec.FieldCount);
-            var bf = BitFields.api<ushort>(spec);
+            var bf = BitField.create<ushort>(spec);
 
             Claim.eq((byte)4,spec.FieldCount);
 
@@ -114,28 +114,36 @@ namespace Z0
                 );
 
                 Claim.eq(src,output);
-
             }
-
         }
 
-        //[F_0(0):0..3, F_1(1):4..7, F_2(2):8..9, F_3(3):10..15]
-        enum BF_C : byte
+        enum BFC_I : byte
         {
-            F_0 = 4,
+            BFC_0 = 0,
 
-            F_1 = 4,
+            BFC_1 = 1,
 
-            F_2 = 2,
+            BFC_2 = 2,
 
-            F_3 = 6,
+            BFC_3 = 3,
+        }
+
+        enum BFC_W : byte
+        {
+            BFCW_0 = 4,
+
+            BFCW_1 = 4,
+
+            BFCW_2 = 2,
+
+            BFCW_3 = 6,
         }
         
 
         public void bitfield_c()
         {
-            var spec = BitFields.specify<BF_C>();
-            var bf = BitFields.api<byte>(spec);
+            var spec = BitField.specify<BFC_I, BFC_W>();
+            var bf = BitField.create<byte>(spec);
             var dst = alloc<byte>(spec.FieldCount);
 
             Claim.eq((byte)4, spec.FieldCount);
@@ -167,31 +175,52 @@ namespace Z0
         }
 
         //[F1(0):0..7, F2(1):8..11, F3(2):12..13, F4(3):14..15, F5(4):16..18, F6(5):19..21, F7(6):22..26, F8(7):27..31, F9(8):32..40]
-        enum BF_D : byte
+        enum BFD_W : byte
         {            
-            F1 = 8,
+            F0_Width = 8,
             
-            F2 = 4,
+            F1_Width = 4,
             
-            F3 = 2,
+            F2_Width = 2,
             
-            F4 = 2,
+            F3_Width = 2,
             
-            F5 = 3,
+            F4_Width = 3,
 
-            F6 = 3,
+            F5_Width = 3,
 
-            F7 = 5,
+            F6_Width = 5,
 
-            F8 = 5,
+            F7_Width = 5,
 
-            F9 = 9
+            F8_Width = 9
+        }
+
+        enum BFD_I : byte
+        {            
+            F0 = 0,
+            
+            F1 = 1,
+            
+            F2 = 2,
+            
+            F3 = 3,
+            
+            F4 = 4,
+
+            F5 = 5,
+
+            F6 = 6,
+
+            F7 = 7,
+
+            F8 = 8
         }
 
         public void bitfield_d()
         {
-            var spec = BitFields.specify<BF_D>();
-            var bf = BitFields.api<ulong>(spec);
+            var spec = BitField.specify<BFD_I,BFD_W>();
+            var bf = BitField.create<ulong>(spec);
             var dst = alloc<ulong>(spec.FieldCount);
             var tmp = alloc<ulong>(spec.FieldCount);
             var positions = spec.Segments.Map(s => s.StartPos);
@@ -227,6 +256,22 @@ namespace Z0
 
                 Claim.eq(expect, result1);
             }
+        }
+
+        public void bitfield_IxW()
+        {
+            var spec = BitField.specify<BFD_I,BFD_W>();
+            var bf = BitField.create<ulong>(spec);
+
+        }
+
+        public void fixed_bits()
+        {
+            var bf = BitField.@fixed<BFD_I,byte,BFD_W>(64);
+
+            bf[3] = byte.MaxValue;
+            Trace(bf.FormatBits(32));                            
+
         }
     }
 }

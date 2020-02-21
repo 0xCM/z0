@@ -13,10 +13,10 @@ namespace Z0
     /// Defines the (stateful) bitfield api surface parametrized by an indexing enum
     /// </summary>
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
-    /// <typeparam name="F">A indexing enumeration</typeparam>
-    public readonly ref struct NumericBits<F,S,T>
-        where F : unmanaged, Enum
+    /// <typeparam name="I">A indexing enumeration</typeparam>
+    public readonly ref struct NumericBits<S,I,T>
         where S : INumericBits<T>
+        where I : unmanaged, Enum
         where T : unmanaged
     {
         /// <summary>
@@ -44,8 +44,8 @@ namespace Z0
         /// </summary>
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
-        public ref readonly FieldSegment Segment(F index)
-            => ref skip(Segments, evalue<F,byte>(index));
+        public ref readonly FieldSegment Segment(I index)
+            => ref skip(Segments, evalue<I,byte>(index));
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source value per the spegment specification
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="index">The segment index</param>
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
-        public T Read(F index, in S src)
+        public T Read(I index, in S src)
             => Ops.read(Segment(index), src);
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
-        public T Read(F index, in S src, bool offset)
+        public T Read(I index, in S src, bool offset)
             => Ops.read(Segment(index), src, offset);
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target value</param>
         [MethodImpl(Inline)]
-        public ref S Write(F index, in S src, ref S dst)
+        public ref S Write(I index, in S src, ref S dst)
         {
             Ops.write(Segment(index), src, ref dst);
             return ref dst;
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target value</param>
         [MethodImpl(Inline)]
-        public ref T Write(F index, in S src, ref T dst)
+        public ref T Write(I index, in S src, ref T dst)
         {
             Ops.write(Segment(index), src, ref dst);
             return ref dst;

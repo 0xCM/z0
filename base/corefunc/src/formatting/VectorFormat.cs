@@ -12,7 +12,6 @@ namespace Z0
 
     partial class xfunc
     {
-
         /// <summary>
         /// Formats a 128-bit cpu vector as indicated by the specified options
         /// </summary>
@@ -21,11 +20,11 @@ namespace Z0
         /// <param name="sep">The character that intersperses the vector components</param>
         /// <param name="pad">The component padding length</param>
         /// <typeparam name="T">The component type type</typeparam>
-        public static string Format<T>(this Vector128<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0, bool bracketed = true)
+        public static string Format<T>(this Vector128<T> src, SequenceFormatKind sfmt = SequenceFormatKind.List, char sep = ',', int pad = 0, bool bracketed = true)
             where T : unmanaged
         {
             var elements = src.ToSpan();
-            return sfmt == SeqFmtKind.Vector 
+            return sfmt == SequenceFormatKind.Vector 
                 ? elements.FormatAsVector(sep.ToString()) 
                 : elements.FormatList(sep,0,pad,bracketed);
         }
@@ -38,7 +37,7 @@ namespace Z0
         /// <param name="sep">The character that intersperses the vector components</param>
         /// <param name="pad">The component padding length</param>
         /// <typeparam name="T">The component type type</typeparam>
-        public static string Format<T>(this Vector256<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0, bool bracketed = true,  bool seplanes = false)
+        public static string Format<T>(this Vector256<T> src, SequenceFormatKind sfmt = SequenceFormatKind.List, char sep = ',', int pad = 0, bool bracketed = true,  bool seplanes = false)
             where T : unmanaged
         {
             if(seplanes)
@@ -46,7 +45,7 @@ namespace Z0
             else
             {
                 var elements = src.ToSpan();
-                return sfmt == SeqFmtKind.Vector 
+                return sfmt == SequenceFormatKind.Vector 
                     ? elements.FormatAsVector(sep.ToString()) 
                     : elements.FormatList(sep,0,pad,bracketed);
             }
@@ -61,7 +60,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static string FormatList<T>(this Vector128<T> src, char sep = ',', int pad = 0, bool bracketed = true)
             where T : unmanaged
-                => src.Format(SeqFmtKind.List, sep, pad, bracketed);
+                => src.Format(SequenceFormatKind.List, sep, pad, bracketed);
 
         /// <summary>
         /// Formats vector content for console/file output
@@ -72,7 +71,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static string FormatList<T>(this Vector256<T> src, char sep = ',', int pad = 0, bool bracketed = true)
             where T : unmanaged
-                => src.Format(SeqFmtKind.List,sep,pad, bracketed);
+                => src.Format(SequenceFormatKind.List,sep,pad, bracketed);
 
         /// <summary>
         /// Formats vector bits

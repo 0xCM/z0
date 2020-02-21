@@ -9,10 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     
     using static zfunc;    
-
 
     partial class xfunc
     {
@@ -510,9 +508,7 @@ namespace Z0
                 lines.Add(last);   
 
             dst.AppendLine();
-            return lines;
-            
-            //return dst.ToString();
+            return lines;           
         }
     }
 }

@@ -20,8 +20,8 @@ namespace Z0
     /// create an enum where the first literal has the value 0, the second literal has the value 1 and so
     /// on as needed up to the maximum of 32 literals/values
     /// </remarks>
-    public struct BitFieldSpec256x8<E>
-        where E : unmanaged, Enum
+    public struct BitFieldSpec256x8<I>
+        where I : unmanaged, Enum
     {        
         const int MaxFieldCount = 32;
 
@@ -34,26 +34,26 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public byte SegWidth(E id)
-            => vcell(widths, evalue<E,int>(id));
+        public byte SegWidth(I id)
+            => vcell(widths, evalue<I,int>(id));
 
-        FieldSegment[] Segments()
-        {
-            Span<FieldSegment> parts = alloc<FieldSegment>(MaxFieldCount);
-            var count = 0;
-            var start = 0;
-            var index = FieldIndex.Entries<E>();
-            for(int i=0; i < MaxFieldCount; i++)
-            {
-                var width = vcell(widths,i);
-                if(width == 0)
-                    break;                
+        // FieldSegment[] Segments()
+        // {
+        //     Span<FieldSegment> parts = alloc<FieldSegment>(MaxFieldCount);
+        //     var count = 0;
+        //     var start = 0;
+        //     var index = FieldIndex.Create<I>().Entries;
+        //     for(int i=0; i < MaxFieldCount; i++)
+        //     {
+        //         var width = vcell(widths,i);
+        //         if(width == 0)
+        //             break;                
 
-                var seg = BitFields.segment(index[i].FieldName, evalue<E,byte>(index[i].FieldValue), (byte)start, (byte)(start + width), width);
-                parts[count++] = seg;
-                start = start + width + 1;
-            }
-            return parts.Slice(0,count).ToArray();
-        }
+        //         var seg = BitFields.segment(index[i].FieldName, evalue<I,byte>(index[i].FieldWidth), (byte)start, (byte)(start + width), width);
+        //         parts[count++] = seg;
+        //         start = start + width + 1;
+        //     }
+        //     return parts.Slice(0,count).ToArray();
+        // }
     }
 }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static RootShare;
@@ -17,6 +16,6 @@ namespace Z0
     public interface ISequenceFormatter<T> : IFormatter
         where T : IFormattable<T>
     {
-        char? Delimiter {get;}
+        string Delimiter {get;}
     }     
 }

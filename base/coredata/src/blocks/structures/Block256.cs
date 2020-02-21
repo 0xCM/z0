@@ -54,15 +54,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// The encapsulated storage presented as a span of bytes
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => data.AsBytes();
-        }
-
-        /// <summary>
         /// True if no capacity exists, false otherwise
         /// </summary>
         public bool IsEmpty
@@ -126,6 +117,15 @@ namespace Z0
         }
 
         /// <summary>
+        /// Presents the source data as bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
+        }
+
+        /// <summary>
         /// Mediates access to the the underlying storage cells via block index and block-relative cell index
         /// </summary>
         /// <param name="block">The block index</param>
@@ -158,7 +158,6 @@ namespace Z0
         public Block256<S> As<S>()                
             where S : unmanaged
                 => new Block256<S>(MemoryMarshal.Cast<T,S>(data)); 
-
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static nfunc;
 
     [Flags]
-    public enum NumFmtKind
+    public enum NumericFormatKind
     {        
         /// <summary>
         /// Indicates the scalar is formated in binary
@@ -54,28 +53,28 @@ namespace Z0
 
     }
 
-    public static class NumFmtKindX
+    public static class NumericFormatKindOps
     {
-        public static bool IsBinary(this NumFmtKind src)
-            =>  (src & NumFmtKind.Binary) != 0;
+        public static bool IsBinary(this NumericFormatKind src)
+            =>  (src & NumericFormatKind.Binary) != 0;
 
-        public static bool IsDecimal(this NumFmtKind src)
-            =>  (src & NumFmtKind.Decimal) != 0;
+        public static bool IsDecimal(this NumericFormatKind src)
+            =>  (src & NumericFormatKind.Decimal) != 0;
 
-        public static bool IsHex(this NumFmtKind src)
-            =>  (src & NumFmtKind.Hex) != 0;
+        public static bool IsHex(this NumericFormatKind src)
+            =>  (src & NumericFormatKind.Hex) != 0;
             
-        public static bool IsBlocked(this NumFmtKind src)
-            =>  (src & NumFmtKind.Blocked) != 0;
+        public static bool IsBlocked(this NumericFormatKind src)
+            =>  (src & NumericFormatKind.Blocked) != 0;
 
-        public static bool IsPrefixed(this NumFmtKind src)
-            =>  (src & NumFmtKind.Prefixed) != 0;
+        public static bool IsPrefixed(this NumericFormatKind src)
+            =>  (src & NumericFormatKind.Prefixed) != 0;
 
-        public static bool IsSuffixed(this NumFmtKind src)
-            =>  (src & NumFmtKind.Suffixed) != 0;
+        public static bool IsSuffixed(this NumericFormatKind src)
+            =>  (src & NumericFormatKind.Suffixed) != 0;
 
-        public static bool IsZeroPadded(this NumFmtKind src)
-            =>  (src & NumFmtKind.ZeroPadded) != 0;
+        public static bool IsZeroPadded(this NumericFormatKind src)
+            =>  (src & NumericFormatKind.ZeroPadded) != 0;
 
     }
 }

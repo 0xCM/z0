@@ -8,54 +8,48 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using static zfunc;
 
-    public readonly struct FieldIndex
+    public readonly struct FieldIndex : IFieldIndex<FieldIndexEntry>
     {
         readonly FieldIndexEntry[] entries;
 
-        [MethodImpl(Inline)]
-        public static FieldIndexEntry<E>[] Entries<E>()
-            where E : unmanaged, Enum
+        public static FieldIndex<I,W> Create<I,U,W>()
+            where I : unmanaged, Enum
+            where U : unmanaged
+            where W : unmanaged, Enum
         {
-            var fields = typeof(E).LiteralFields().ToArray();
-            var indexed = new FieldIndexEntry<E>[fields.Length];
-            for(var i=0; i<indexed.Length; i++)
-                indexed[i] = new FieldIndexEntry<E>(i, fields[i].Name,  (E)fields[i].GetRawConstantValue());
+            var indices = typeof(I).LiteralFields().ToArray();
+            var widths = typeof(W).LiteralFields().ToArray();
+            var count = indices.Length;
+            var indexed = new FieldIndexEntry<I,W>[count];
+            for(var i=0; i < count; i++)
+                indexed[i] = CreateEntry<I,U,W>(i, indices, widths);
             return indexed;
         }
 
+        [MethodImpl(Inline)]
+        static FieldIndexEntry<I,W> CreateEntry<I,U,W>(int i, FieldInfo[] indices, FieldInfo[] widths)
+            where U : unmanaged
+            where I : unmanaged, Enum
+            where W : unmanaged, Enum
+                => new FieldIndexEntry<I,W>(
+                    index: Enums.member<U,I>(convert<int,U>(i)), 
+                    name: indices[i].Name,  
+                    width: (W)widths[i].GetRawConstantValue()
+                    );
+
         public static FieldIndex From(FieldIndexEntry[] entries)        
             => new FieldIndex(entries);
-
-        public static FieldIndex<E> From<E>(FieldIndexEntry<E>[] entries)        
-            where E : unmanaged, Enum
-            => new FieldIndex<E>(entries);
 
         FieldIndex(FieldIndexEntry[] entries)
         {
             this.entries = entries;
         }
 
-        public ReadOnlySpan<FieldIndexEntry> Fields
-        {
-            [MethodImpl(Inline)]
-            get => entries;
-        }
-    }    
-
-    public readonly struct FieldIndex<E>
-        where E : unmanaged, Enum
-    {
-        readonly FieldIndexEntry<E>[] entries;        
-
-        internal FieldIndex(FieldIndexEntry<E>[] entries)
-        {
-            this.entries = entries;
-        }
-
-        public ReadOnlySpan<FieldIndexEntry<E>> Fields
+        public ReadOnlySpan<FieldIndexEntry> Entries
         {
             [MethodImpl(Inline)]
             get => entries;

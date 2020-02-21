@@ -103,6 +103,15 @@ namespace Z0
         }
 
         /// <summary>
+        /// Presents the source data as bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
+        }
+
+        /// <summary>
         /// Mediates access to the the underlying storage cells via block index and block-relative cell index
         /// </summary>
         /// <param name="block">The block index</param>
@@ -143,5 +152,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
             => ref data.GetPinnableReference();                
+        
    }
 }

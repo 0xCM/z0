@@ -8,7 +8,7 @@ namespace Z0
     using static zfunc;
 
     [Flags]
-    public enum SeqFmtKind
+    public enum SequenceFormatKind
     {        
         /// <summary>
         /// Indicates a sequence of values is formatted as a comma-delimited 

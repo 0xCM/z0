@@ -44,7 +44,7 @@ namespace Z0
         public byte TotalWidth
         {
             [MethodImpl(Inline)]
-            get => BitFields.width(this);
+            get => BitField.width(this);
         }
 
         public ReadOnlySpan<FieldSegment> Segments 
@@ -59,4 +59,35 @@ namespace Z0
         public override string ToString()
             => Format();                
    }    
+
+    public readonly struct BitFieldSpec<I, W> : IFormattable<BitFieldSpec<I,W>>
+        where I : unmanaged, Enum
+        where W : unmanaged, Enum
+    {
+        /// <summary>
+        /// The bitfield definition upon which the reader is predicated
+        /// </summary>
+        readonly BitFieldSpec Untyped;
+
+        public int TotalWidth {get;}
+
+        public ReadOnlySpan<FieldSegment> Segments 
+        {
+            [MethodImpl(Inline)]
+            get => Untyped.Segments;
+        }
+
+        [MethodImpl(Inline)]
+        internal BitFieldSpec(in BitFieldSpec untyped, int bitcount)
+        {
+            this.TotalWidth = bitcount;
+            this.Untyped = untyped;
+        }        
+
+        public string Format()
+            => FieldSegments.format(Segments);
+
+        public override string ToString()
+            => Format();                
+    }
 }

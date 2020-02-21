@@ -37,6 +37,12 @@ namespace Z0
         Fixed16(ushort x)
             => X0 = x;
 
+        public unsafe Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => new Span<byte>(Unsafe.AsPointer(ref Unsafe.AsRef(in this)), BitWidth/8);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(ushort x)
             => new Fixed16(x);

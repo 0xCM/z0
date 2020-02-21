@@ -11,11 +11,20 @@ namespace Z0
 
     public readonly struct FieldIndexEntry : IFieldIndexEntry<FieldIndexEntry>
     {
-        public int Index {get;}
+        /// <summary>
+        /// The zero-based and sequential field index
+        /// </summary>
+        public int FieldIndex {get;}
 
+        /// <summary>
+        /// The field name
+        /// </summary>
         public string FieldName {get;}
 
-        public Enum FieldValue {get;}
+        /// <summary>
+        /// The number of bits covered by the field
+        /// </summary>
+        public Enum FieldWidth {get;}
 
         [MethodImpl(Inline)]
         public static bool operator ==(FieldIndexEntry lhs, FieldIndexEntry rhs)
@@ -26,11 +35,11 @@ namespace Z0
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        internal FieldIndexEntry(int position, string name, Enum value)
+        internal FieldIndexEntry(int index, string name, Enum width)
         {
-            this.Index = position;
+            this.FieldIndex = index;
             this.FieldName = name;
-            this.FieldValue = value;
+            this.FieldWidth = width;
         }
 
         public string Format()
@@ -38,17 +47,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(FieldIndexEntry other)
-            => Index == other.Index && FieldValue.Equals(other.FieldValue) && FieldName.Equals(other.FieldName);
+            => FieldIndex == other.FieldIndex && FieldWidth.Equals(other.FieldWidth) && FieldName.Equals(other.FieldName);
 
         [MethodImpl(Inline)]
         public int CompareTo(FieldIndexEntry other)
-            => Index.CompareTo(other.Index);
+            => FieldIndex.CompareTo(other.FieldIndex);
  
         public override string ToString()
             => Format();
            
         public override int GetHashCode()
-            => HashCode.Combine(Index,FieldValue);
+            => HashCode.Combine(FieldIndex,FieldWidth);
 
         public override bool Equals(object obj)
             => obj is FieldIndexEntry x && Equals(x);
@@ -57,53 +66,110 @@ namespace Z0
     /// <summary>
     /// Associates the declaration order of an enum literal with the corresponding literal value
     /// </summary>
-    public readonly struct FieldIndexEntry<E> : IFieldIndexEntry<FieldIndexEntry<E>,E>
-        where E : unmanaged, Enum
+    public readonly struct FieldIndexEntry<W> : IFieldIndexEntry<FieldIndexEntry<W>,W>
+        where W : unmanaged, Enum
     {        
-        public int Index {get;}
+        public int FieldIndex {get;}
 
         public string FieldName {get;}
 
-        public E FieldValue {get;}
+        public W FieldWidth {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldIndexEntry(FieldIndexEntry<E> src)
-            => new FieldIndexEntry(src.Index, src.FieldName, src.FieldValue);
+        public static implicit operator FieldIndexEntry(FieldIndexEntry<W> src)
+            => new FieldIndexEntry(src.FieldIndex, src.FieldName, src.FieldWidth);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(FieldIndexEntry<E> lhs, FieldIndexEntry<E> rhs)
+        public static bool operator ==(FieldIndexEntry<W> lhs, FieldIndexEntry<W> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(FieldIndexEntry<E> lhs, FieldIndexEntry<E> rhs)
+        public static bool operator !=(FieldIndexEntry<W> lhs, FieldIndexEntry<W> rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        internal FieldIndexEntry(int index, string name, E value)
+        internal FieldIndexEntry(int index, string name, W width)
         {
-            this.Index = index;
+            this.FieldIndex = index;
             this.FieldName = name;
-            this.FieldValue = value;
+            this.FieldWidth = width;
         }
 
         public string Format()
             => this.FormatEntry();
         
         [MethodImpl(Inline)]
-        public bool Equals(FieldIndexEntry<E> other)
-            => Index == other.Index && FieldValue.Equals(other.FieldValue)  && FieldName.Equals(other.FieldName);
+        public bool Equals(FieldIndexEntry<W> other)
+            => FieldIndex == other.FieldIndex && FieldWidth.Equals(other.FieldWidth)  && FieldName.Equals(other.FieldName);
 
         [MethodImpl(Inline)]
-        public int CompareTo(FieldIndexEntry<E> other)
-            => Index.CompareTo(other.Index);
+        public int CompareTo(FieldIndexEntry<W> other)
+            => FieldIndex.CompareTo(other.FieldIndex);
 
         public override string ToString()
             => Format();
          
         public override int GetHashCode()
-            => HashCode.Combine(Index,FieldValue);
+            => HashCode.Combine(FieldIndex,FieldWidth);
 
         public override bool Equals(object obj)
-            => obj is FieldIndexEntry<E> x && Equals(x);
+            => obj is FieldIndexEntry<W> x && Equals(x);
     }
+
+    /// <summary>
+    /// Associates the declaration order of an enum literal with the corresponding literal value
+    /// </summary>
+    public readonly struct FieldIndexEntry<I,W> : IFieldIndexEntry<FieldIndexEntry<I,W>,I,W>
+        where I : unmanaged, Enum
+        where W : unmanaged, Enum
+    {        
+        public I FieldIndex {get;}
+
+        public string FieldName {get;}
+
+        public W FieldWidth {get;}
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(FieldIndexEntry<I,W> lhs, FieldIndexEntry<I,W> rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(FieldIndexEntry<I,W> lhs, FieldIndexEntry<I,W> rhs)
+            => !lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        internal FieldIndexEntry(I index, string name, W width)
+        {
+            this.FieldIndex = index;
+            this.FieldName = name;
+            this.FieldWidth = width;
+        }
+
+        public string Format()
+        {
+            var t = typeof(I).Name;
+            var i = evalue<I,byte>(FieldIndex);
+            var w = evalue<W,byte>(FieldWidth);
+            return $"{t}[{i}:{w}] = {FieldName}";           
+        }
+        
+        [MethodImpl(Inline)]
+        public bool Equals(FieldIndexEntry<I,W> other)
+            => FieldIndex.Equals(other.FieldIndex) 
+            && FieldWidth.Equals(other.FieldWidth)  
+            && FieldName.Equals(other.FieldName);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(FieldIndexEntry<I,W> other)
+            => FieldIndex.CompareTo(other.FieldIndex);
+
+        public override string ToString()
+            => Format();
+         
+        public override int GetHashCode()
+            => HashCode.Combine(FieldIndex,FieldWidth);
+
+        public override bool Equals(object obj)
+            => obj is FieldIndexEntry<I,W> x && Equals(x);
+    }    
 }

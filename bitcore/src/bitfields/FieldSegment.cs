@@ -9,6 +9,7 @@ namespace Z0
 
     using static zfunc;
 
+
     /// <summary>
     /// Defines a field segment, i.e. a congiguous run of bits that, together with other segments,
     /// comprise a partition over a value of parametric type
@@ -17,15 +18,16 @@ namespace Z0
     public readonly struct FieldSegment<T> : IFieldSegment<T>
         where T : unmanaged
     {
-        /// <summary>
-        /// The 0-based, monotonically increasing segment identifier
-        /// </summary>
-        public T Index {get;}
 
         /// <summary>
         /// A unique name that can be used as an alternate segment identifier
         /// </summary>
         public string Name {get;}
+
+        /// <summary>
+        /// The 0-based, monotonically increasing segment identifier
+        /// </summary>
+        public T Index {get;}
 
         /// <summary>
         /// The first index of the segment, relative to the source field

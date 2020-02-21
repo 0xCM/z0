@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
     using static zfunc;
 
@@ -89,7 +89,6 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The relative type</typeparam>
         /// <param name="src">The source method</param> 
-        [MethodImpl(Inline)]
         public static string DisplayName<T>(this MethodBase src)
             => src.DeclaringType.DisplayName() + "/" + src.Name + "<" + typeof(T).DisplayName() + ">";
                 
@@ -97,7 +96,6 @@ namespace Z0
         /// Constructs a display name for a method
         /// </summary>
         /// <param name="src">The source method</param>
-        [MethodImpl(Inline)]
         public static string FullDisplayName(this MethodInfo src)
             => $"{src.DeclaringType.DisplayName()}/{src.DisplayName()}";
 
@@ -108,7 +106,5 @@ namespace Z0
         public static string DisplayName(this PropertyInfo src)
             => (from a in src.CustomAttribute<DisplayNameAttribute>() 
                  select a.DisplayName).ValueOrElse(() => src.Name);
-
     }
-
 }

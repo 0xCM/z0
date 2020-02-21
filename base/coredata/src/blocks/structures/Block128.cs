@@ -62,15 +62,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// The encapsulated storage presented as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => data.AsBytes();
-        }
-
-        /// <summary>
         /// The number of allocated cells 
         /// </summary>
         public int CellCount 
@@ -113,6 +104,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Cell(block, segment);
+        }
+
+        /// <summary>
+        /// Presents the source data as bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
         }
 
         /// <summary>

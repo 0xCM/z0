@@ -29,28 +29,6 @@ namespace Z0
                 => ref MemoryMarshal.AsRef<T>(src.AsBytes(offset,length));
 
         /// <summary>
-        /// Presents the content of a value of unmanaged type as a span of bytes
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe Span<byte> AsSpan<T>(ref T src)
-            where T : unmanaged
-                => new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<T>());
-
-        /// <summary>
-        /// Presents the content of a value of unmanaged type as a span of values of a specified target type
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe Span<T> AsSpan<S,T>(ref S src)
-            where T : unmanaged
-            where S : unmanaged
-                    => new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<T>()).As<byte,T>();
-
-        /// <summary>
         /// Formats a span as a table
         /// </summary>
         /// <param name="src">The source data to be formatted</param>
@@ -127,7 +105,6 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <param name="sep">The item separator</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]
         public static string FormatAsVector<T>(this ReadOnlySpan<T> src, string sep = ",")
         {
             var components = src.Map(x => x.ToString());
@@ -141,7 +118,6 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <param name="sep">The item separator</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline)]
         public static string FormatAsVector<T>(this Span<T> src, string sep = ",")
             => src.ReadOnly().FormatAsVector(sep);        
 
@@ -163,7 +139,6 @@ namespace Z0
         /// <param name="src">The source span</param>
         public static string FormatLines<T>(this Span<T> src)
             => src.ReadOnly().FormatLines();
-
 
         static Func<string,int,string> GetPadFunc<T>(bool padright)
             => padright 
@@ -210,58 +185,6 @@ namespace Z0
                 => src.ReadOnly().FormatCellBlocks(cellpad, padchar, padright);     
 
         /// <summary>
-        /// Formats span cells as bitstrings
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        public static string FormatBits<T>(this ReadOnlySpan<T> src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                where T : unmanaged
-        {
-            var sb = text();
-            for(var i=0; i<src.Length; i++)
-            {
-                var bs = BitString.scalar(src[i],maxbits).Format(tlz,specifier,blockWidth, blocksep, rowWidth);
-                sb.Append(bs);
-                if(i != src.Length - 1)
-                    sb.Append(AsciSym.Space);                    
-            }
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Formats span cells as bitstrings
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatBits<T>(this Span<T> src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                where T : unmanaged
-                    => src.ReadOnly().FormatBits(maxbits,tlz, specifier, blockWidth, blocksep, rowWidth);
-
-        /// <summary>
-        /// Formats span cells as bitstrings
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatBits<N,T>(this NatSpan<N,T> src, int? maxbits = null,   bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                where T : unmanaged
-                where N : unmanaged, ITypeNat
-                    => src.Data.FormatBits(maxbits, tlz,specifier,blockWidth, blocksep, rowWidth);
-
-        /// <summary>
         /// Formats a span of natural length as a delimited list
         /// </summary>
         /// <param name="src">The source span</param>
@@ -269,34 +192,9 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         /// <typeparam name="N">The length type</typeparam>
-        [MethodImpl(Inline)]        
         public static string FormatList<N,T>(this NatSpan<N,T> src, char delimiter = ',', int offset = 0, int pad = 0, bool bracketed = true)
             where N : unmanaged, ITypeNat
             where T : unmanaged 
                 => src.Data.FormatList(delimiter,offset,pad,bracketed);
-
-        /// <summary>
-        /// Formats the content as a bitstring
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Format(this ReadOnlySpan<bit> src, BitFormat? fmt = null)
-            => src.ToBitString().Format(fmt);
-            
-        /// <summary>
-        /// Formats the content as a bitstring
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Format(this Span<bit> src,  BitFormat? fmt = null)
-            => src.ReadOnly().Format(fmt);
     }
 }

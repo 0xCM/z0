@@ -7,27 +7,31 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static RootShare;
 
     public static class SpanFormatter
     {
         [MethodImpl(Inline)]
-        public static SpanFormatter<T> @default<T>(char? delimiter = null)
+        public static SpanFormatter<T> @default<T>(string delimiter = null)
             where T : IFormattable<T>
-                => default(SpanFormatter<T>);
+                => new SpanFormatter<T>(delimiter);
+
+        [MethodImpl(Inline)]
+        public static SpanFormatter<T> @default<T>(char? delimiter)
+            where T : IFormattable<T>
+                => new SpanFormatter<T>(delimiter != null ? delimiter.Value.ToString() : string.Empty);
     }
 
     public readonly struct SpanFormatter<T> : ISpanFormatter<T>
         where T : IFormattable<T>
     {
-        public char? Delimiter {get;}
+        public string Delimiter {get;}
 
         [MethodImpl(Inline)]
-        internal SpanFormatter(char? delimiter)
+        internal SpanFormatter(string delimiter)
         {
-            this.Delimiter = delimiter;
+            this.Delimiter = delimiter ?? string.Empty;
         }
 
         public string Format(ReadOnlySpan<T> src)

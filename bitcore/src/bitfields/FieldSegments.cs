@@ -71,6 +71,6 @@ namespace Z0
 
         internal static string FormatEntry<F>(this F entry)
             where F : IFieldIndexEntry
-                => $"{entry.FieldValue.GetType().Name}[{entry.Index}] = {entry.FieldName}";
+                => $"{entry.FieldWidth.GetType().Name}[{entry.FieldIndex}] = {entry.FieldName}";
     }
 }

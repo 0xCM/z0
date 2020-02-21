@@ -9,7 +9,7 @@ namespace Z0
 
     public interface IBitField
     {
-
+        int TotalWidth {get;}
     }
 
 }

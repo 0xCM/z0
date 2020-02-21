@@ -13,7 +13,7 @@ namespace Z0.Asm.Encoding
     public static class AsmBitfields
     {
         [MethodImpl(Inline)]
-        public static NumericBits<RexFieldIndex, RexPrefix, byte> Rex()
-            => BitFields.create<RexFieldIndex,RexPrefix,byte>(BitFields.specify<RexFieldWidth>());
+        public static NumericBits<RexPrefix,RexFieldIndex, byte> Rex()
+            => BitField.numeric<RexPrefix,RexFieldIndex, byte, RexFieldWidth>();
     }    
 }

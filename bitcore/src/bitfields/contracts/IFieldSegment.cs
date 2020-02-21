@@ -25,7 +25,6 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The field type over which a partition is defined</typeparam>
     public interface IFieldSegment<T> : IFieldSegment
-        where T : unmanaged
     {
         /// <summary>
         /// An alternate segment identifier
@@ -46,5 +45,22 @@ namespace Z0
         /// The number of bits in the segment
         /// </summary>
         T Width {get;}        
+    }
+
+    /// <summary>
+    /// Characterizes an element within a partition of a numeric field
+    /// </summary>
+    /// <typeparam name="T">The field type over which a partition is defined</typeparam>
+    public interface INumericSegment<T> : IFieldSegment<T>
+        where T : unmanaged
+    {
+
+    }    
+
+    public interface IFixedSegment<S> : IFieldSegment<S>
+        where S : unmanaged, IFixed
+    {
+
+
     }
 }

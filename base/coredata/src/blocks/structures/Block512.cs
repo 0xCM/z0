@@ -54,15 +54,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// The encapsulated storage presented as a span of bytes
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => data.AsBytes();
-        }
-
-        /// <summary>
         /// True if no capacity exists, false otherwise
         /// </summary>
         public bool IsEmpty
@@ -114,6 +105,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Cell(block, segment);
+        }
+
+        /// <summary>
+        /// Presents the source data as bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
         }
 
         /// <summary>
