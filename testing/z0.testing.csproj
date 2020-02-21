@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)base/nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)base/coredata/src/z0.coredata.csproj" />
+    
     <ProjectReference Include="$(TopDir)base/corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)validation/src/z0.validation.csproj" />

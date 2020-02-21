@@ -34,13 +34,13 @@ namespace Z0
         Fixed4(byte x0)
             => X0 = (byte)((uint)x0 & Mask);
 
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed4(uint4_t x)
-            => new Fixed4((byte)x);
+        // [MethodImpl(Inline)]
+        // public static implicit operator Fixed4(uint4_t x)
+        //     => new Fixed4((byte)x);
 
-        [MethodImpl(Inline)]
-        public static implicit operator uint4_t(Fixed4 x)
-            => uint4_t.From(x.X0);
+        // [MethodImpl(Inline)]
+        // public static implicit operator uint4_t(Fixed4 x)
+        //     => uint4_t.From(x.X0);
 
         [MethodImpl(Inline)]
         public static explicit operator Fixed4(byte x)

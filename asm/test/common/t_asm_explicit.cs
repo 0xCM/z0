@@ -26,8 +26,7 @@ namespace Z0
                 Designators.BitGrids.Designated,
                 Designators.Logix.Designated,
                 Designators.CoreFunc.Designated,
-                Designators.Root.Designated,
-                Designators.DataCore.Designated
+                Designators.Root.Designated
                 );
                                     
         }

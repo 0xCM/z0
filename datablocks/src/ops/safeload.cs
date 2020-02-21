@@ -158,17 +158,6 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Loads an unsized 256-bit blocked span from a sized unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The span index at which to begin the load</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => safeload(n,src.Data);
-         
+
     }
 }

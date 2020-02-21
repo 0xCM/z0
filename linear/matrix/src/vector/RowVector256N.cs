@@ -90,10 +90,11 @@ namespace Z0
             data = src;
         }
 
+
         [MethodImpl(Inline)]
         internal RowVector256(NatSpan<N,T> src)
         {
-            data = DataBlocks.safeload(n256,src);
+            data = RowVector.safeload(n256,src);
         }
                     
         public ref T this[int index] 

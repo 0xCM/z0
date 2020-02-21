@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)base/nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)base/coredata/src/z0.coredata.csproj" />    
     <ProjectReference Include="$(TopDir)base/corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)stats/dist/z0.statdist.csproj" />
     <ProjectReference Include="$(TopDir)linear/matrix/src/z0.matrix.csproj" />        

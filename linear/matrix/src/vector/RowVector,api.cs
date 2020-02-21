@@ -15,6 +15,19 @@ namespace Z0
     /// </summary>
     public static class RowVector
     {        
+        /// <summary>
+        /// Loads an unsized 256-bit blocked span from a sized unblocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The span index at which to begin the load</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        internal static Block256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => DataBlocks.safeload(n,src.Data);
+         
+
         [MethodImpl(NotInline)]
         public static RowVector<T> alloc<T>(int minlen)               
             where T : unmanaged  

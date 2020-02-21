@@ -6,7 +6,7 @@ namespace Z0.Designators
 {
     using System;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Represents the assembly
