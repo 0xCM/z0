@@ -3,7 +3,7 @@ dotnet sln add root/src/z0.root.csproj
 dotnet sln add nats/src/z0.nats.csproj
 dotnet sln add base/nats/test/z0.nats.test.csproj
 
-dotnet sln add base/corefunc/src/z0.corefunc.csproj
+dotnet sln add corefunc/src/z0.corefunc.csproj
 dotnet sln add base/corefunc/test/z0.corefunc.test.csproj
 
 dotnet sln add fastops/src/z0.fastops.csproj

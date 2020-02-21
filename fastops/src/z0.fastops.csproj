@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)base/corefunc/src/z0.corefunc.csproj" />
+    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
   </ItemGroup>
 
 </Project>

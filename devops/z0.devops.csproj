@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../base/corefunc/src/z0.corefunc.csproj" />
+    <ProjectReference Include="../corefunc/src/z0.corefunc.csproj" />
   </ItemGroup>
 
 </Project>

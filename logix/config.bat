@@ -1,5 +1,5 @@
 dotnet sln add ../nats/src/z0.nats.csproj
-dotnet sln add ../base/corefunc/src/z0.corefunc.csproj
+dotnet sln add ../corefunc/src/z0.corefunc.csproj
 dotnet sln add ../primal/math/src/z0.math.csproj
 dotnet sln add ../primal/intrinsic/src/z0.intrinsic.csproj
 dotnet sln add ../linear/matrix/src/z0.matrix.csproj

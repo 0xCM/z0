@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../../../.settings/Settings.cs" />
+    <Compile Include="../../.settings/Settings.cs" />
   </ItemGroup>
 
 </Project>
