@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
-    <ProjectReference Include="$(TopDir)base/nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
   </ItemGroup>
 
   <ItemGroup>
