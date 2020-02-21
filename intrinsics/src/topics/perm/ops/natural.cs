@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static zfunc;    
 
@@ -112,7 +110,7 @@ namespace Z0
             where T : unmanaged
         {
             if(terms.Length != natval(n))
-                Errors.ThrowInvariantFailure($"{n} != {terms.Length}");
+                AppErrors.ThrowInvariantFailure($"{n} != {terms.Length}");
             return new NatPerm<N,T>(define(terms));
         }
 
@@ -120,9 +118,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => natural(n, terms.ReadOnly());
-
-
-
     }
-
 }

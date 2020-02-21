@@ -13,7 +13,7 @@ namespace Z0
     using System.ComponentModel;
     using System.Collections.Concurrent;
 
-    using static RootShare;
+    using static Root;
  
     partial class RootReflections
     {

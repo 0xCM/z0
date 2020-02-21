@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     /// <summary>
     /// Defines a grouping construct for relating non-generic operations

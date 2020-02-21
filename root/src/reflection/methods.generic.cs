@@ -8,9 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.ComponentModel;
 
-    using static RootShare;
+    using static Root;
  
     partial class RootReflections
     {

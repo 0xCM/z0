@@ -5,8 +5,6 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
  
@@ -114,8 +112,6 @@ namespace Z0.Mkl
             where T : unmanaged
             where S : unmanaged
                 => lhs.Length == rhs.Length ? lhs.Length 
-                    : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
+                    : throw AppErrors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
     }
-
 }

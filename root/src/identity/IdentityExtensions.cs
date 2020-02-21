@@ -9,9 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
-    public static class IdentityExtensions
+    partial class RootX
     {
         /// <summary>
         /// Returns the duplicate identities found in the source stream, if any; otherwisse,

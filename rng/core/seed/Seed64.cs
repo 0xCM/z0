@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static As;
 
     public static class Seed64
     {            
@@ -18,7 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ulong Lookup(uint i)
-            => i < Count? read<ulong>(RawBytes, (int)(i*8)) : Errors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1);
+            => i < Count? read<ulong>(RawBytes, (int)(i*8)) : AppErrors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1);
                             
         public static ulong Seed00 => Lookup(0);
 

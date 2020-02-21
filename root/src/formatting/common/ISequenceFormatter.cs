@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     /// <summary>
     /// Base interface for formatters that format sequences of formattable things

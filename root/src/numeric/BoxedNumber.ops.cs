@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    using static RootShare;
+    using static Root;
     
     partial struct BoxedNumber
     {

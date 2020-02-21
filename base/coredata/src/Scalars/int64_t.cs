@@ -13,7 +13,6 @@ namespace Z0
 
     public struct int64_t : IEquatable<analog>
     {
-
         prim data;
 
         public static analog zero => 0;

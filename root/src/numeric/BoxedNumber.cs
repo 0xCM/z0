@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    using static RootShare;
+    using static Root;
     
     [StructLayout(LayoutKind.Sequential, Size = 8)]
     public readonly partial struct BoxedNumber : INumeric, IEquatable<BoxedNumber>

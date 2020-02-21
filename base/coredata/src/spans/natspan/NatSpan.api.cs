@@ -13,7 +13,6 @@ namespace Z0
 
     public static class NatSpan
     {
-
         /// <summary>
         /// Allocates span of natural length
         /// </summary>
@@ -50,11 +49,10 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(src.Length < nati<N>())
-                badsize(nati<N>(), src.Length);      
+                Errors.ThrowBadSize(nati<N>(), src.Length);      
 
             return new NatSpan<N, T>(src);
         }
-
 
         /// <summary>
         /// Loads a natural block from a reference

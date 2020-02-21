@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static RootShare;
+    using static Root;
     using static Pow2;
 
     /// <summary>
@@ -68,14 +68,5 @@ namespace Z0
         Validation = T24,
 
         Control = T63,
-
     }
-
-    partial class RootKindExtensions
-    {
-
-        [MethodImpl(Inline)]
-        public static string Format(this AssemblyId id)
-            => id.ToString().ToLower();
-    }    
 }

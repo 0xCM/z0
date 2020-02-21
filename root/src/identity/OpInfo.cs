@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static RootShare;
+    using static Root;
 
     public readonly struct OpInfo
     {        

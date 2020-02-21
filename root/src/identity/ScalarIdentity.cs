@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     public readonly struct ScalarIdentity  : ITypeIdentity<ScalarIdentity>
     {

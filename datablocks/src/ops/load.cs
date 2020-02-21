@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                badsize(w, src.Length - offset);      
+                Errors.ThrowBadSize(w, src.Length - offset);      
 
             return unsafeload(w, offset == 0 ? src : src.Slice(offset));
         }
@@ -42,7 +42,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                badsize(w, src.Length - offset);      
+                Errors.ThrowBadSize(w, src.Length - offset);      
 
             return unsafeload(w, offset == 0 ? src : src.Slice(offset));
         }
@@ -59,7 +59,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                badsize(w, src.Length - offset);      
+                Errors.ThrowBadSize(w, src.Length - offset);      
 
             return unsafeload(w, offset == 0 ? src : src.Slice(offset));
         }
@@ -76,7 +76,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w, src.Length - offset))
-                badsize(w, src.Length - offset);      
+                Errors.ThrowBadSize(w, src.Length - offset);      
 
             return unsafeload(w, offset == 0 ? src : src.Slice(offset));
         }
@@ -93,7 +93,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                badsize(w, src.Length - offset);      
+                Errors.ThrowBadSize(w, src.Length - offset);      
 
             return unsafeload(w,offset == 0 ? src : src.Slice(offset));
         }
@@ -110,7 +110,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
-                badsize(w, src.Length - offset);      
+                Errors.ThrowBadSize(w, src.Length - offset);      
 
             return unsafeload(w,offset == 0 ? src : src.Slice(offset));
         }

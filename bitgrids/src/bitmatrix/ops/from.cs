@@ -21,7 +21,7 @@ namespace Z0
             where T : unmanaged
         {
             if(src.RowCount != bitsize<T>())
-                Errors.Throw($"{bitsize<T>()} != {src.RowCount}");
+                AppErrors.Throw($"{bitsize<T>()} != {src.RowCount}");
 
             return load(src.data);                
         }
@@ -29,6 +29,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix32 from(N32 n, Span<byte> src)        
             => new BitMatrix32(src.AsUInt32());
-
     }
 }

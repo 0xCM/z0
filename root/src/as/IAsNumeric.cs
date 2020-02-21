@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static RootShare;
+    using static Root;
 
     public interface IAsNumeric<S,T> : IAs<S,T>
         where T : unmanaged

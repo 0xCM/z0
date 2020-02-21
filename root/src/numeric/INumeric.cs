@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using static RootShare;
+    using static Root;
 
     public interface INumeric : IComparable, IConvertible, IFormattable
     {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     public static class SpanFormatter
     {

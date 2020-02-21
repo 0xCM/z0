@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
-    using static As;
 
     /// <summary>
     /// Defines a permanent/immutable seed store to support pseudorandom reproducibility
@@ -64,7 +62,7 @@ namespace Z0
             if(needed < Bytes.Length)
                 return offset;
             else
-                return Errors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
+                return AppErrors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.ComponentModel;
 
-    using static RootShare;
+    using static Root;
     using static ReflectionFlags;
     
     partial class RootReflections

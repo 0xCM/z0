@@ -4,12 +4,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Linq;
 
-    using static RootShare;
+    using static Root;
     
     partial class RootCollections
     {
@@ -38,7 +35,5 @@ namespace Z0
         public static bool Any<T>(this Span<T> src, Func<T,bool> f)
              where T : unmanaged
                 => src.ReadOnly().Any(f);
-
     }
-
 }

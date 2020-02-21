@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static SpanOps;
-    using static RootShare;
+    using static Root;
 
     [ApiHost(ApiHostKind.Generic)]
     public static class Refs

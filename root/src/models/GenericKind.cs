@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     public enum GenericKind
     {
@@ -20,7 +20,7 @@ namespace Z0
         Definition
     }
 
-    partial class RootKindExtensions
+    public static class GenericKindOps
     {            
 
         [MethodImpl(Inline)]

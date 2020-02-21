@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static RootShare;
+    using static Root;
 
     public enum ParamVariance
     {

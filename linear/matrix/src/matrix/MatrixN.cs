@@ -194,7 +194,7 @@ namespace Z0
         void CheckRowIndex(int row)
         {
             if(row < 0 || row >= _RowCount)
-                throw Errors.OutOfRange(row, 0, _RowCount - 1);
+                throw AppErrors.OutOfRange(row, 0, _RowCount - 1);
         }
 
         [MethodImpl(Inline)]
@@ -217,7 +217,7 @@ namespace Z0
         public ref RowVector<N,T> GetCol(int col, ref RowVector<N,T> dst)
         {
             if(col < 0 || col >= _ColCount)
-                throw Errors.OutOfRange(col, 0, _ColCount - 1);
+                throw AppErrors.OutOfRange(col, 0, _ColCount - 1);
             
             for(var row = 0; row < _ColLength; row++)
                 dst[row] = data[row*_RowLenth + col];

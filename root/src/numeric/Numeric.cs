@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Concurrent;
 
-    using static RootShare;
+    using static Root;
 
     using NK = NumericKind;
     using TC = System.TypeCode;

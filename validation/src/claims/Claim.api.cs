@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void eq(bool lhs, bool rhs)
-            => (lhs == rhs).IfNone(() => Errors.ThrowNotEqual(lhs,rhs));
+            => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqual(lhs,rhs));
 
         /// <summary>
         /// Asserts the equality of two bit values
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         public static void eq(bit lhs, bit rhs)
-            => (lhs == rhs).IfNone(() => Errors.ThrowNotEqual(lhs,rhs));
+            => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqual(lhs,rhs));
 
         public static bool eq(HexByteKind lhs, HexByteKind rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
@@ -259,7 +259,7 @@ namespace Z0
             {
                 for(var i = 0; i< length(lhs,rhs); i++)
                     if(!lhs[i].Equals(rhs[i]))
-                        Errors.ThrowNotEqual(lhs[i], rhs[i]);
+                        AppErrors.ThrowNotEqual(lhs[i], rhs[i]);
             }
         }
 
@@ -276,7 +276,7 @@ namespace Z0
             {
                 for(var i = 0; i< length(lhs,rhs); i++)
                     if(!lhs[i].Equals(rhs[i]))
-                        Errors.ThrowNotEqual(lhs[i], rhs[i]);
+                        AppErrors.ThrowNotEqual(lhs[i], rhs[i]);
             }
         }
 
@@ -293,7 +293,7 @@ namespace Z0
             if(typeof(T) == typeof(bit))
                 Claim.eq(As.bitval(lhs), As.bitval(rhs));
             else
-                gmath.eq(lhs,rhs).IfNone(() => Errors.ThrowNotEqual(lhs,rhs));
+                gmath.eq(lhs,rhs).IfNone(() => AppErrors.ThrowNotEqual(lhs,rhs));
         }
 
         /// <summary>
@@ -368,7 +368,7 @@ namespace Z0
         {
             for(var i = 0; i< lhs.CellCount; i++)
                 if(!gmath.eq(lhs[i],rhs[i]))
-                    throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
+                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace Z0
         {
             for(var i = 0; i< length(xb,yb); i++)
                 if(!gmath.eq(xb[i],yb[i]))
-                    throw Errors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
+                    throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace Z0
         {
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(!gmath.within(lhs[i],rhs[i],tolerance))
-                    throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
+                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
         public static bool neq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -506,7 +506,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool nonzero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
-                => gmath.nonz(x) ? true : throw Errors.NotNonzero(caller,file,line);
+                => gmath.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
 
         /// <summary>
         /// Asserts that the source value is zero
@@ -518,7 +518,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool zero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
-                => !gmath.nonz(x) ? true : throw Errors.NotNonzero(caller,file,line);
+                => !gmath.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
 
         /// <summary>
         /// Asserts the operand is true

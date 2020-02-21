@@ -93,7 +93,7 @@ namespace Z0
         public RowVector256<N,T> Row(int row)
         {
             if(row < 0 || row >= Order)
-                throw Errors.OutOfRange(row, 0, Order - 1);
+                throw AppErrors.OutOfRange(row, 0, Order - 1);
             
             return RowVector.blockload<N,T>(data.Slice(row * Order, Order));
         }
@@ -102,7 +102,7 @@ namespace Z0
         public ref RowVector256<N,T> Row(int row, ref RowVector256<N,T> dst)
         {
             if(row < 0 || row >= Order)
-                Errors.ThrowOutOfRange<T>(row, 0, Order - 1);
+                AppErrors.ThrowOutOfRange<T>(row, 0, Order - 1);
              
              var src = data.Slice(row * Order, Order);
              src.CopyTo(dst.Unsized);
@@ -112,7 +112,7 @@ namespace Z0
         public ref RowVector256<N,T> Col(int col, ref RowVector256<N,T> dst)
         {
             if(col < 0 || col >= Order)
-                Errors.ThrowOutOfRange<T>(col, 0, Order - 1);
+                AppErrors.ThrowOutOfRange<T>(col, 0, Order - 1);
             
             for(var row = 0; row < Order; row++)
                 dst[row] = data[row*Order + col];

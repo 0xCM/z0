@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     public readonly struct GenericType
     {

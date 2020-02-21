@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
     
-    using static RootShare;
+    using static Root;
 
     public readonly partial struct OpIdentity : IIdentity<OpIdentity>
     {            
@@ -99,21 +99,22 @@ namespace Z0
         public IEnumerable<string> TextComponents
             => Identifier.Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
             
-        public override string ToString()
-            => Identifier;
-
-        public override int GetHashCode()
-            => IdentityHashCode(this);
-
         [MethodImpl(Inline)]
         public bool Equals(OpIdentity src)
-            => IdentityEquals(this, src);
+            => IdentityCommons.IdentityEquals(this, src);
 
-        public override bool Equals(object src)
-            => IdentityEquals(this, src);
-
+        [MethodImpl(Inline)]
         public int CompareTo(IIdentity other)
-            => IdentityCompare(this, other);
+            => IdentityCommons.IdentityCompare(this, other);
+ 
+        public override int GetHashCode()
+            => IdentityCommons.IdentityHashCode(this);
+
+        public override bool Equals(object obj)
+            => IdentityCommons.IdentityEquals(this, obj);
+
+        public override string ToString()
+            => Identifier;
 
         public IEnumerable<string> SuffixText
         {

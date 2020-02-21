@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static RootShare;
+    using static Root;
 
     public interface IClosedOpSpec : IOpSpec
     {

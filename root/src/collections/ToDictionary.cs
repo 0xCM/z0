@@ -9,11 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static RootShare;
+    using static Root;
     
     partial class RootCollections
     {
-
         /// <summary>
         /// Creates a dictionary from a span using the element indices as keys
         /// </summary>
@@ -73,7 +72,5 @@ namespace Z0
         /// <param name="this">The extended type</param>
         public static IReadOnlyDictionary<K, V> ToReadOnlyDictionary<K, V>(this IEnumerable<(K key, V value)> @this)
             => @this.ToDictionary(x => x.key, x => x.value);
-
     }
-
 }

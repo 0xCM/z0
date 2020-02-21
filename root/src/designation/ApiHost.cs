@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;    
+    using static Root;    
 
     public readonly struct ApiHost : IApiHostIdentity<ApiHost>
     {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     /// <summary>
     /// Characterizes a type that transforms objects to a text-based representation

@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     using NK = NumericKind;
-
 
     /// <summary>
     /// Defines a parition over primal numeric types: signed ints, unsigned ints and floating-point
@@ -153,7 +152,7 @@ namespace Z0
         Width64 = U64 | I64 | F64
     }
 
-    partial class RootKindExtensions
+    public static class NumericKindOps
     {
         /// <summary>
         /// Determines whether kind has a nonzero value

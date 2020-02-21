@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static RootShare;
+    using static Root;
     
     partial class RootCollections
     {

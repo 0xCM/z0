@@ -8,7 +8,7 @@ namespace Z0
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
     using NK = NumericKind;
 
     public readonly struct NumericType<T> : INumericType<T> 

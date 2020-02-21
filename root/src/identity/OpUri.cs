@@ -5,11 +5,10 @@
 namespace Z0
 {        
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static RootShare;
+    using static Root;
     
     public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>, IParser<OpUri>
     {
@@ -141,7 +140,7 @@ namespace Z0
                 msg = $"Splitting on {C} produces {parts.Length} pieces";
             else
             {
-                var scheme = OpUriSchemes.Parse(parts[0]);
+                var scheme = OpUriSchemeOps.Parse(parts[0]);
                 var rest = parts[1].TakeAfter(S2);
                 var pathText = rest.TakeBefore(Q);
                 var path = ApiHostPath.Parse(pathText);

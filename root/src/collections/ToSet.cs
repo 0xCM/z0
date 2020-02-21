@@ -6,10 +6,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static RootShare;
+    using static Root;
     
     partial class RootCollections
     {
@@ -30,7 +29,5 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static ISet<T> ToSet<T>(this Span<T> src)        
             => new HashSet<T>(src.ToEnumerable());
-
     }
-
 }

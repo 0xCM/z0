@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static RootShare;
+    using static Root;
     using IIK = IdentityIndicatorKind;
 
 
@@ -310,7 +310,7 @@ namespace Z0
         public IdentityIndicatorKind IndicatorKind {get;}
     }
 
-    partial class RootKindExtensions
+    partial class RootX
     {
         [MethodImpl(Inline)]
         public static bool IsSome(this IdentityIndicatorKind kind)

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
-    using static As;
 
     partial class gmath
     {
@@ -161,7 +160,7 @@ namespace Z0
             where T : unmanaged
         {
             var msg = $"Attempted to parse '{src}':{typename<T>()} but failed";
-            Errors.Throw(msg);
+            AppErrors.Throw(msg);
 
             return default;
         }

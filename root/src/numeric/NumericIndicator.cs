@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static RootShare;
+    using static Root;
 
     /// <summary>
     /// Defines character representations of the partitions identified by the NumericClass kind
@@ -34,7 +32,7 @@ namespace Z0
         Unsigned =  (ushort)'u',
     }
 
-    partial class RootKindExtensions
+    public static class NumericIndicatorOps
     {
         /// <summary>
         /// Determines whether the kind has a nonzero value

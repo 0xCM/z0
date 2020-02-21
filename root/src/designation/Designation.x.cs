@@ -13,5 +13,8 @@ namespace Z0
         public static IOperationCatalog OperationCatalog(this Assembly a)
             => a.Designator().Catalog;
 
+        [MethodImpl(Inline)]
+        public static string Format(this AssemblyId id)
+            => id.ToString().ToLower();
     }
 }

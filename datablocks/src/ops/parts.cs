@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged        
         {
             if(!aligned<T>(w,src.Length))
-                badsize(w, src.Length);      
+                Errors.ThrowBadSize(w, src.Length);      
             
             return new Block16<T>(src);
         }
@@ -40,7 +40,7 @@ namespace Z0
             where T : unmanaged        
         {
             if(!aligned<T>(w,src.Length))
-                badsize(w, src.Length);      
+                Errors.ThrowBadSize(w, src.Length);      
             
             return new Block32<T>(src);
         }
@@ -56,7 +56,7 @@ namespace Z0
             where T : unmanaged        
         {
             if(!aligned<T>(w,src.Length))
-                badsize(w, src.Length);      
+                Errors.ThrowBadSize(w, src.Length);      
             
             return new Block64<T>(src);
         }
@@ -72,7 +72,7 @@ namespace Z0
             where T : unmanaged        
         {
             if(!aligned<T>(w,src.Length))
-                badsize(w, src.Length);      
+                Errors.ThrowBadSize(w, src.Length);      
             
             return new Block128<T>(src);
         }
@@ -88,7 +88,7 @@ namespace Z0
             where T : unmanaged        
         {
             if(!aligned<T>(w,src.Length))
-                badsize(w, src.Length);    
+                Errors.ThrowBadSize(w, src.Length);    
 
             return new Block256<T>(src);
         }
@@ -104,7 +104,7 @@ namespace Z0
             where T : unmanaged        
         {
             if(!aligned<T>(w,src.Length))
-                badsize(w, src.Length);    
+                Errors.ThrowBadSize(w, src.Length);    
 
             return new Block512<T>(src);
         }

@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static RootShare;
-
+    using static Root;
 
     public readonly struct GenericMethodDef
     {

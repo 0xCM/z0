@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     public readonly partial struct SegmentedIdentity : ITypeIdentity<SegmentedIdentity>
     {        

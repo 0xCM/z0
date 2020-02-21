@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     public readonly struct PrimalIdentity  : ITypeIdentity<PrimalIdentity>
     {
@@ -70,19 +70,20 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(PrimalIdentity src)
-            => IdentityEquals(this, src);
+            => IdentityCommons.IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(IIdentity other)
-            => IdentityCompare(this, other);
+            => IdentityCommons.IdentityCompare(this, other);
+ 
+        public override int GetHashCode()
+            => IdentityCommons.IdentityHashCode(this);
+
+        public override bool Equals(object obj)
+            => IdentityCommons.IdentityEquals(this, obj);
 
         public override string ToString()
             => Identifier;
- 
-        public override int GetHashCode()
-            => IdentityHashCode(this);
 
-        public override bool Equals(object obj)
-            => IdentityEquals(this, obj);
     }
 }

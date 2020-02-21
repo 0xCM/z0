@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static RootShare;
+    using static Root;
 
    public interface ISpanFormatter<T> : ISequenceFormatter<T>
         where T : IFormattable<T>

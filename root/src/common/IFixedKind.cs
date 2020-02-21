@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static RootShare;
+    using static Root;
 
     /// <summary>
     /// Characterizes a kind with which a fixed bit-width is associated

@@ -16,7 +16,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public static class Errors
+    public static class AppErrors
     {        
         public static AppException NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(ErrorMessages.NotEqual(lhs,rhs,caller,file,line));
@@ -118,6 +118,6 @@ namespace Z0
 
         [MethodImpl(NotInline)]
         public static void ThrowTooShort(int dstLen, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort: line {line}, member {caller} in file {file}");
+            => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort:{Errors.FormatCallsite(caller,file,line)}");
     }
 }

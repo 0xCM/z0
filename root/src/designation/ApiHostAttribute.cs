@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static RootShare;
+    using static Root;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class ApiHostAttribute : Attribute

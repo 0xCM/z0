@@ -167,7 +167,7 @@ namespace Z0
             else if(seed.Length == (int)n.NatValue)
                 states = NatSpan.load(ref seed[0], n);
             else
-                throw Errors.LengthMismatch((int)n.NatValue, seed.Length);
+                throw AppErrors.LengthMismatch((int)n.NatValue, seed.Length);
 
             var members = new IPolyrand[n.NatValue];
             for(var i=0; i<members.Length; i++)

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;    
     using System.Runtime.Intrinsics;
 
-    using static RootShare;
+    using static Root;
     using static Refs;
 
     [ApiHost]

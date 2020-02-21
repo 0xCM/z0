@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
+
     using static zfunc;
 
     using prim = System.UInt32;
@@ -169,7 +167,6 @@ namespace Z0
             => rhs is analog a && Equals(a);
         
         public override string ToString()
-            => data.ToString();
-        
+            => data.ToString();        
     }
 }

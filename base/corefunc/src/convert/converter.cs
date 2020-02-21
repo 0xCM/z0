@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.InteropServices;    
+
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
@@ -79,7 +76,7 @@ namespace Z0
         static T unhandled<S,T>(S src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            Errors.Throw($"The conversion {typename<S>()} -> {typename<T>()} needed for the value {src} doesn't exist", caller,file,line);
+            AppErrors.Throw($"The conversion {typename<S>()} -> {typename<T>()} needed for the value {src} doesn't exist", caller,file,line);
             return default;
         }
     }

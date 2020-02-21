@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static RootShare;
+    using static Root;
 
     public interface IArtifactModel
     {
@@ -52,7 +50,6 @@ namespace Z0
 
     public interface IGenericArtifact<T> : IClrArtifact
     {        
-
         GenericKind Kind {get;}
     }
 }

@@ -56,9 +56,6 @@ namespace Z0
         public static implicit operator TableSpan<M,N,T>(Span<T> src)
             => new TableSpan<M, N, T>(src);
 
-        // public static implicit operator TableSpan<M,N,T>(Block256<T> src)
-        //     => new TableSpan<M, N, T>(src);
-
         public static implicit operator Span<T>(TableSpan<M,N,T> src)
             => src.data;
 
@@ -73,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> CheckedTransfer(Span<T> src)
         {
-            require(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");               
+            Errors.ThrowIfFalse(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");               
             return new TableSpan<M,N,T>(src);
         }
 
@@ -86,14 +83,14 @@ namespace Z0
         [MethodImpl(Inline)]        
         internal TableSpan(Span<T> src)
         {
-            require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            Errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src;
         }
 
         [MethodImpl(Inline)]        
         internal TableSpan(T[] src)
         {
-            require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            Errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src;
         }
 
@@ -107,16 +104,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal TableSpan(ReadOnlySpan<T> src)
         {
-            require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            Errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src.ToArray();
         }
-
-        // [MethodImpl(Inline)]
-        // internal TableSpan(Block256<T> src)
-        // {
-        //     require(src.CellCount == CellCount, $"length(src) = {src.CellCount} != {CellCount} = SpanLength");         
-        //     this.data = src.Data;
-        // }
 
         public ref T Head
         {
@@ -196,7 +186,7 @@ namespace Z0
         public ref NatSpan<M,T> Col(int col, ref NatSpan<M,T> dst)
         {
             if(col < 0 || col >= ColCount)
-                ThrowOutOfRange(col, 0, ColCount - 1);
+                Errors.ThrowOutOfRange(col, 0, ColCount - 1);
 
             for(var row = 0; row < ColLength; row++)
                 dst[row] = data[row*RowLenth + col];
@@ -207,7 +197,7 @@ namespace Z0
         public NatSpan<N,T> Row(int row)
         {
             if(row < 0 || row >= RowCount)
-                throw OutOfRange(row, 0, RowCount - 1);
+                Errors.ThrowOutOfRange(row, 0, RowCount - 1);
             
             return data.Slice(row * RowLenth, RowLenth);
         }
