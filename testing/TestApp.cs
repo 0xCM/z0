@@ -82,7 +82,6 @@ namespace Z0
         /// <param name="filters">Filters the host's test if nonempty</param>
         public void Run(Type host, string[] filters)
         {        
-
             if(!HasAny(host,filters))
                 return;
 
@@ -93,23 +92,28 @@ namespace Z0
                 var execTime = Duration.Zero;
                 var runtimer = stopwatch();
                 var name = host.DisplayName();
-
-                Trace(AppMsg.Define($"Creating test {host.Name}", SeverityLevel.Babble));
+                var clock = counter(false);
+                
                 unit = host.CreateInstance<IUnitTest>();
+                if(!unit.Enabled)
+                    return;
+
                 unit.Configure(Config); 
+                                
+                clock.Start();
+                
+                var tsStart = now();
+
                 if(unit is IExplicitTest et)  
-                {             
-                    RunExplicit(et, host.Name,results);
-                }
+                    ExecExplicit(et, host.Name,results);
                 else
                 {
-                    if(unit.Enabled)
-                        iter(Tests(host), t =>  execTime += RunUnit(unit, name, t, results));                
+                    iter(Tests(host), t =>  execTime += ExecCase(unit, name, t, results));                                    
                     Enqueue(unit.TakeBenchmarks().ToArray());
-                }
-                
-                print(AppMsg.Define($"{host.Name} exectime {execTime.Ms} ms, runtime = {snapshot(runtimer).Ms} ms", SeverityLevel.Info));
+                }                
+                clock.Stop();
 
+                print(AftUnitMsg(host.Name, clock.Time, tsStart, now()));                
             }
             catch(Exception e)
             {
@@ -123,23 +127,101 @@ namespace Z0
             }
         }
 
+        static string DefineTestName(IUnitTest unit, string hostpath, MethodInfo test)
+            => $"{hostpath}/{test.DisplayName()}";
+
+        static string DefineTestName(IExplicitTest unit, string hostpath)
+            => $"{hostpath}/{unit.GetType().DisplayName()}/{nameof(IExplicitTest.Execute)}";
+
+        static string DefineActionName(IUnitTest unit)
+            => $"{unit.GetType().DisplayName()}/action";
+
+        const int TestNamePad = 50;
+        
+        const int TimeStampPad = 30;
+
+        const int ElapsedPad = 12;
+
+        const string FieldSep = "| ";
+
+
+
+        static string ElapsedPlaceholder 
+            => string.Empty.PadRight(ElapsedPad);
+
+        static string FormatTs(DateTime ts)
+            => ts.ToLexicalString().PadRight(TimeStampPad);
+
+        static string Format(TimeSpan elapsed)
+            => $"{elapsed.TotalMilliseconds}ms".PadRight(ElapsedPad);
+
+        static string FormatName(string testName)
+            => $"{testName}".PadRight(TestNamePad);
+
+        static string FormatStatus(string status)
+            => status.PadRight(12);
+
+        static AppMsg PreCaseMsg(string testName, DateTime start)
+        {
+            var fields = items(
+                FormatName(testName), 
+                FormatStatus("executing"), 
+                ElapsedPlaceholder, 
+                FormatTs(start)
+                );                
+
+            return AppMsg.Define(fields.Concat(FieldSep), SeverityLevel.HiliteBL);
+        }
+
+        static AppMsg AftCaseMsg(string testName, TimeSpan elapsed, DateTime start, DateTime end)
+        {
+            var fields = items(
+                FormatName(testName), 
+                FormatStatus("executed"), 
+                Format(elapsed), 
+                FormatTs(start), 
+                FormatTs(end),
+                Format(end - start)
+                );
+
+            return AppMsg.Define(fields.Concat(FieldSep), SeverityLevel.HiliteBL);
+        }
+
+        static AppMsg AftUnitMsg(string testName, TimeSpan elapsed, DateTime start, DateTime end)
+        {
+            var fields = items(
+                FormatName(testName), 
+                FormatStatus("completed"), 
+                Format(elapsed), 
+                FormatTs(start), 
+                FormatTs(end),
+                Format(end - start)
+                );
+
+            return AppMsg.Define(fields.Concat(FieldSep), SeverityLevel.HiliteBL);
+
+        }
+
         public Duration RunAction(IUnitTest unit, Action exec)
         {
+
             var messages = new List<AppMsg>();
             var clock = counter(false);
-            var testName = $"{unit.GetType().DisplayName()}/action";
+            var testName = DefineActionName(unit);
             
             try
             {                
-                unit.Configure(Config);                  
-                messages.Add(AppMsg.Define($"{testName} executing", SeverityLevel.HiliteBL));                
+                unit.Configure(Config);     
+                
+                var tsStart = now();
+                messages.Add(PreCaseMsg(testName, tsStart));                
                 
                 clock.Start();
                 exec();
                 clock.Stop();
 
                 messages.AddRange(unit.DequeuePosts());
-                messages.Add(AppMsg.Define($"{testName} executed. {clock.Time.TotalMilliseconds}ms", SeverityLevel.Info));
+                messages.Add(AftCaseMsg(testName, clock.Time, tsStart, now()));
 
                 var outcomes = unit.TakeOutcomes().ToArray();                
                 if(outcomes.Length != 0)
@@ -181,7 +263,6 @@ namespace Z0
             yield return AppMsg.Define($"{name} failed.", SeverityLevel.Error);
         }
 
-
         AppMsg[] CollectMessages(IUnitTest src, string testName, Duration runtime, Exception e = null)
         {
             var messages = new List<AppMsg>();
@@ -207,62 +288,67 @@ namespace Z0
             return outcomes.ToArray();
         }
 
-        Duration RunExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
+        Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
         {
-            var time = counter(false);
+            var clock = counter(false);
             var messages = array<AppMsg>();
-            var testName = $"{hostpath}/{unit.GetType().DisplayName()}/{nameof(IExplicitTest.Execute)}";
+            var testName = DefineTestName(unit,hostpath);
+
             try
             {
-                time.Start();
+                clock.Start();
                 unit.Execute();
-                time.Stop();
-                messages = CollectMessages(unit, testName,time);
-                results.AppendRange(CollectOutcomes(unit,testName, time));                
+                clock.Stop();
+
+                messages = CollectMessages(unit, testName,clock);
+                results.AppendRange(CollectOutcomes(unit,testName, clock));                
 
             }
             catch(Exception e)
             {
-                time.Stop();
-                messages = CollectMessages(unit, testName, time, e);
-                results.AppendRange(CollectOutcomes(unit,testName, time,e));
+                clock.Stop();
+                messages = CollectMessages(unit, testName, clock, e);
+                results.AppendRange(CollectOutcomes(unit,testName, clock,e));
             }
             finally
             {            
                 print(messages);
             }
 
-            return time;
+            return clock;
         }
 
-        Duration RunUnit(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseRecord> results)
+        Duration ExecCase(IUnitTest unit, string hostpath, MethodInfo @case, IList<TestCaseRecord> results)
         {
             var exectime = Duration.Zero;
             var messages = new List<AppMsg>();
-            var testName = $"{hostpath}/{test.DisplayName()}";
-            var sw = stopwatch(false);
+            var testName = DefineTestName(unit, hostpath,@case);
+            var clock = counter(false);
+
             try
             {
-                messages.Add(AppMsg.Define($"{testName} executing", SeverityLevel.HiliteBL));                
-                sw.Start();
-                test.Invoke(unit,null);                    
-                exectime = snapshot(sw);
+                var tsStart = now();
+                messages.Add(PreCaseMsg(testName, tsStart));
+
+                clock.Start();
+                @case.Invoke(unit,null);                    
+                clock.Stop();
+
                 messages.AddRange(unit.DequeuePosts());
-                messages.Add(AppMsg.Define($"{testName} executed. {exectime.Ms}ms", SeverityLevel.Info));
+                messages.Add(AftCaseMsg(testName, clock.Time, tsStart, now()));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
                     results.AppendRange(outcomes);
                 else
-                    results.Add(TestCaseRecord.Define(testName,true,exectime));
+                    results.Add(TestCaseRecord.Define(testName,true,clock.Time));
             }
             catch(Exception e)
             {                
-                exectime = snapshot(sw);
+                clock.Stop();
                 messages.AddRange(unit.DequeuePosts());                
                 messages.AddRange(GetErrorMessages(testName,e));
-                results.Add(TestCaseRecord.Define(testName,false,exectime));
-                              
+                results.Add(TestCaseRecord.Define(testName,false,clock.Time));                              
             }
             finally
             {            

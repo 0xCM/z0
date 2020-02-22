@@ -67,7 +67,7 @@ namespace Z0
 
         public IAsmFunctionArchive Clear()
         {
-            RootFolder.DeleteFiles();
+            RootFolder.Clear();
             return this;
         }
             

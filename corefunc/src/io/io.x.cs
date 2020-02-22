@@ -111,10 +111,10 @@ namespace Z0
         }
 
         /// <summary>
-        /// Deletes all files in a specified directory
+        /// Deletes all files in a specified directory, but neither does it recurse nor delete folders
         /// </summary>
         /// <param name="dst">The target path</param>
-        public static void DeleteFiles(this FolderPath dst)
+        public static void Clear(this FolderPath dst)
         {   
             if(Directory.Exists(dst.Name)) 
                 iter(Directory.EnumerateFiles(dst.Name), File.Delete);

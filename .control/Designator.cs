@@ -63,8 +63,6 @@ namespace Z0.Designators
             D.MklApi.Designated,
             D.MklTest.Designated,
 
-            D.LinearOps.Designated,
-            D.LinearOpsTest.Designated,
 
             D.Machines.Designated,
             D.MachineTest.Designated,

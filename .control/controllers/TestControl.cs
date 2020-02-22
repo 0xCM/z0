@@ -92,7 +92,6 @@ namespace Z0
                 D.BitVectorTest.Designated.Name,
                 D.BitGridsTest.Designated.Name,
                 D.LogixTest.Designated.Name,
-                D.LinearOpsTest.Designated.Name,
                 
             };
 

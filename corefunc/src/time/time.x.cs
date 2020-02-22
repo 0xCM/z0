@@ -35,16 +35,16 @@ namespace Z0
                     format = date;
                     break;
                 case DateTimeAccuracy.Hour:
-                    format = String.Format("{0} {1}:00:00:000", date, hour);
+                    format = String.Format("{0} {1}:00:00.000", date, hour);
                     break;
                 case DateTimeAccuracy.Minute:
-                    format = String.Format("{0} {1}:{2}:00:000", date, hour, minute);
+                    format = String.Format("{0} {1}:{2}:00.000", date, hour, minute);
                     break;
                 case DateTimeAccuracy.Second:
-                    format = String.Format("{0} {1}:{2}:{3}:000", date, hour, minute, second);
+                    format = String.Format("{0} {1}:{2}:{3}.000", date, hour, minute, second);
                     break;
                 case DateTimeAccuracy.Millisecond:
-                    format = String.Format("{0} {1}:{2}:{3}:{4}", date, hour, minute, second, ms);
+                    format = String.Format("{0} {1}:{2}:{3}.{4}", date, hour, minute, second, ms);
                     break;
                 default:
                     throw new NotSupportedException();

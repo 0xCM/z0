@@ -13,6 +13,7 @@ namespace Z0.Test
     {
         public void write()
         {
+            DataDir.Clear();
             VerifyWriter<N12,N14,long>(Pow2.T03);        
             VerifyWriter<N19,N32,byte>(Pow2.T03);        
             VerifyWriter(Pow2.T03, n31, n31, 0u);                    
@@ -20,6 +21,10 @@ namespace Z0.Test
             VerifyWriter<N5,N5,float>(Pow2.T03);    
             VerifyWriter<N7,N7,double>(Pow2.T03);                
         }
+
+        static FolderPath DataDir
+            => Paths.DataDir(FolderName.Define("matrices"));
+
 
         static T round<T>(T src)
             where T : unmanaged
@@ -34,28 +39,35 @@ namespace Z0.Test
         {
             var folder = FolderName.Define("matrices");
             var isFp = Numeric.floating<T>();
-            for(var i=0; i< count; i++)
+            
+            Matrix256<M,N,T> Write(FilePath dst)
             {
-                                
-                var file = Matrix.filename<M,N,T>();
-                var dstpath = EnvConfig.Get().TestLogPath(file);
-                using var writer = datasink(folder,file);
-
+                using var writer = dst.Writer();
                 var A = Random.MatrixBlock<M,N,T>();
                 if(isFp)
                     A.Apply(round);
-                
                 Matrix.write(A,writer);
+                return A;
+            }
 
-                using var reader = datasource(folder,file);
-
-                var srcPath = dstpath;
+            Matrix256<M,N,T> Read(FilePath src)
+            {
+                using var reader = src.Reader();
                 var B = Matrix.blockread<M,N,T>(reader);
                 if(isFp)
                     B.Apply(round);
+                return B;
 
+            }
+
+            for(var i=0; i< count; i++)
+            {                                
+                var path = DataDir + Matrix.filename<M,N,T>(i);                
+                var A = Write(path);
+                var B = Read(path);                                    
                 Claim.yea(A == B);
             }
+
         }
     }
 }

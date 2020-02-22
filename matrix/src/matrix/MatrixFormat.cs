@@ -19,13 +19,42 @@ namespace Z0
             where T : unmanaged    
                 => Matrix.load<M,N,T>(src.Unblocked);
 
+        [MethodImpl(Inline)]
+        static int ColWidth<T>()
+            where T : unmanaged
+        {            
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return 8;
+            else if(typeof(T) == typeof(short) || typeof(T) == typeof(ushort))
+                return 10;
+            else if(typeof(T) == typeof(int) || typeof(T) == typeof(uint))
+                return 12;
+            else 
+                return 22;            
+        }
+
+
+        [MethodImpl(Inline)]
+        public static int ColFormatWidth<M,N,T>(this Matrix256<M,N,T> src)
+            where M: unmanaged, ITypeNat
+            where N: unmanaged, ITypeNat
+            where T : unmanaged    
+                => ColWidth<T>();
+
+        [MethodImpl(Inline)]
+        public static int ColFormatWidth<M,N,T>(this Matrix<M,N,T> src)
+            where M: unmanaged, ITypeNat
+            where N: unmanaged, ITypeNat
+            where T : unmanaged    
+                => ColWidth<T>();
+
         public static string Format<M,N,T>(this Matrix256<M,N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
+            var width = cellwidth ?? src.ColFormatWidth();
             var sep = cellsep ?? '|';
-            var width = cellwidth ?? 3;
             var rows = natval<M>();
             var cols = natval<N>();
             var sb = new StringBuilder();                        
@@ -34,7 +63,11 @@ namespace Z0
                 for(var col = 0; col<cols; col++)
                 {
                     var cellval = src[row,col];
-                    var cellfmt = $"{render?.Invoke(cellval) ?? cellval.ToString()}".PadRight(width);
+                    var cellfmt = concat(
+                        col == 0 ? string.Empty : " ", 
+                        $"{render?.Invoke(cellval) ?? cellval.ToString()}".PadRight(width)
+                        );
+                    
                     sb.Append(cellfmt);
                     if(col != cols - 1)
                         sb.Append(sep);
@@ -49,8 +82,8 @@ namespace Z0
             where N: unmanaged, ITypeNat
             where T : unmanaged    
         {
+            var width = cellwidth ?? src.ColFormatWidth();
             var sep = cellsep ?? '|';
-            var width = cellwidth ?? 3;
             var rows = natval<M>();
             var cols = natval<N>();
             var sb = new StringBuilder();                        
@@ -59,7 +92,10 @@ namespace Z0
                 for(var col = 0; col<cols; col++)
                 {
                     var cellval = src[row,col];
-                    var cellfmt = $"{render?.Invoke(cellval) ?? cellval.ToString()}".PadRight(width);
+                    var cellfmt = concat(
+                        col == 0 ? string.Empty : " ", 
+                        $"{render?.Invoke(cellval) ?? cellval.ToString()}".PadRight(width)
+                        );
                     sb.Append(cellfmt);
                     if(col != cols - 1)
                         sb.Append(sep);

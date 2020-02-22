@@ -13,14 +13,15 @@ namespace Z0
     {        
         public static readonly TextFormat Default = Define();
 
-        public static TextFormat Define(bool HasHeader = true, char Delimiter = AsciSym.Pipe, char CommentPrefix = AsciSym.Hash)
-            => new TextFormat(HasHeader, Delimiter, CommentPrefix);
+        public static TextFormat Define(bool HasHeader = true, char Delimiter = AsciSym.Pipe, char CommentPrefix = AsciSym.Hash, int? ColWidth = null)
+            => new TextFormat(HasHeader, Delimiter, CommentPrefix,ColWidth);
         
-        TextFormat(bool HasHeader, char Delimiter, char? CommentPrefix)
+        TextFormat(bool HasHeader, char Delimiter, char? CommentPrefix, int? ColWidth)
         {
             this.HasHeader = HasHeader;
             this.Delimiter = Delimiter;
             this.CommentPrefix = CommentPrefix;
+            this.ColWidth = ColWidth;
         }
 
         /// <summary>
@@ -37,6 +38,11 @@ namespace Z0
         /// Indicates a character that begins a comment
         /// </summary>
         public readonly char? CommentPrefix;
+
+        /// <summary>
+        /// If specified, indicates a uniform column width
+        /// </summary>
+        public readonly int? ColWidth;
     }
 
 

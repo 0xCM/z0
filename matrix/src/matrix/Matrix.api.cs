@@ -208,11 +208,17 @@ namespace Z0
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static FileName filename<M,N,T>(string fileId = null)
+        public static FileName filename<M,N,T>(int? index = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
-                => FileName.Define($"{fileId ?? "mat"}_{typename<T>()}[{nati<M>()}x{nati<N>()}].csv");
+        {
+            var dim = $"{nateval<M>()}x{nateval<N>()}";
+            var kind = typeof(T).NumericKind().Format();
+            var @base = $"mat_{kind}[{dim}]";
+            var suffix  = index.MapValueOrDefault(i => dot() + index.ToString().PadLeft(3,'0'), string.Empty);
+            return FileName.Define($"{@base}{suffix}",FileExtensions.Csv);                
+        }
         
         /// <summary>
         /// Writes a matrix to a delimited file
@@ -228,6 +234,7 @@ namespace Z0
             where T : unmanaged
         {
             var options = fmt ?? TextFormat.Default;
+            var width = fmt?.ColWidth ?? src.ColFormatWidth();
             var sep = options.Delimiter;
             var rows = nati<M>();
             var cols = nati<N>();
@@ -236,14 +243,18 @@ namespace Z0
             {
                 for(var i = 0; i<cols; i++)
                 {
-                    dst.Write($"Col{i}");
+                    if(i != 0)
+                        dst.Write(space());
+
+                    dst.Write($"Col{i}".PadRight(width, space()));
+                    
                     if(i != cols - 1)
                         dst.Write(sep);
                 }
                 dst.WriteLine();
             }
 
-            dst.Write(src.Format(sep));
+            dst.Write(src.Format(width,sep));
             dst.Flush();
         }
 
@@ -251,11 +262,11 @@ namespace Z0
         /// Reads a matrix from a delimited file
         /// </summary>
         /// <param name="src">The source file</param>
-        /// <param name="format">The file format</param>
+        /// <param name="fmt">The file format</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static Matrix256<M,N,T> blockread<M,N,T>(StreamReader src, TextFormat? format = null)
+        public static Matrix256<M,N,T> blockread<M,N,T>(StreamReader src, TextFormat? fmt = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    

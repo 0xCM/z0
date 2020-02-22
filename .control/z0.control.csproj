@@ -39,9 +39,7 @@
     <ProjectReference Include="$(TopDir)machines/src/z0.machines.csproj" />
     <ProjectReference Include="$(TopDir)machines/test/z0.machines.test.csproj" />
 
-    <ProjectReference Include="$(TopDir)linear/matrix/src/z0.matrix.csproj" />
-    <ProjectReference Include="$(TopDir)linear/ops/z0.linops.csproj" />
-    <ProjectReference Include="$(TopDir)linear/test/z0.linops.test.csproj" />
+    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />
 
     <ProjectReference Include="$(TopDir)mkl/src/z0.mkl.csproj" />
     <ProjectReference Include="$(TopDir)mkl/test/z0.mkl.test.csproj" />

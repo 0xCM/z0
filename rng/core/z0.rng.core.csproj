@@ -12,7 +12,7 @@
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)mathobj/src/z0.mathobj.csproj" />
 
-    <ProjectReference Include="$(TopDir)linear/matrix/src/z0.matrix.csproj" />    
+    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
 
   </ItemGroup>
 
