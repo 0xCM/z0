@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
         
-    using static zfunc;
+    using static Root;
 
     partial class DataBlocks
     {
@@ -43,7 +43,5 @@ namespace Z0
             ref var target = ref Unsafe.Add(ref Unsafe.As<T,byte>(ref dst.Head), offset);            
             Unsafe.CopyBlock(ref target, ref Unsafe.AsRef(in src), (uint)count);
         }
-
     }
-
 }

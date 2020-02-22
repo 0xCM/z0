@@ -8,15 +8,12 @@ namespace Z0.Designators
     using System.Linq;
     using System.Collections.Generic;
 
-    using static zfunc;
-
     public sealed class AsmCoreTest : AssemblyDesignator<AsmCoreTest>
-    {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
-    
-            public override AssemblyId Id
-            => AssemblyId.AsmCoreTest;
+    {        
+        const AssemblyId Identity = AssemblyId.AsmCoreTest;
+
+        public override AssemblyId Id 
+            => Identity;
 
         public override IEnumerable<IAssemblyDesignator> Designates
             => new IAssemblyDesignator[]{                

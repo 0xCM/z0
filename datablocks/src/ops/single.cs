@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
         
-    using static zfunc;
+    using static Root;
 
     partial class DataBlocks
     {
@@ -143,6 +143,5 @@ namespace Z0
         public static Block512<T> single<T>(N512 w, Span<T> src)
             where T : unmanaged        
                 => unsafeload(w, src.Slice(0, blocklen<T>(w)));
-
     }
 }

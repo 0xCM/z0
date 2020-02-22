@@ -11,7 +11,7 @@ namespace Z0.Designators
     /// </summary>
     public sealed class Analogs : AssemblyDesignator<Analogs>
     {
-        const AssemblyId Identity = 0;
+        const AssemblyId Identity = AssemblyId.Analogs;
 
         public override AssemblyId Id 
             => Identity;

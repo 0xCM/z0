@@ -7,11 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
+    using static Root;
 
     public static class BKT
     {
+        [MethodImpl(Inline)]
+        public static ulong nateval<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => NatMath2.natval(n);
+
         public readonly struct BlockedType : ITypeKind<BlockedType>
         {
 

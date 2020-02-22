@@ -12,8 +12,10 @@ namespace Z0.Designators
 
     public sealed class BitSpanTest : AssemblyDesignator<BitSpanTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.BitSpanTest;
+
+        public override AssemblyId Id 
+            => Identity;
     
         public override void Run(params string[] args)
             => App.Run(args);

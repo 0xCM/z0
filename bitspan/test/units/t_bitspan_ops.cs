@@ -8,7 +8,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_bitspan : UnitTest<t_bitspan>
+    public class t_bitspan_ops : UnitTest<t_bitspan_ops>
     {
         /// <summary>
         /// Asserts the equality of two bitspans
@@ -331,6 +331,5 @@ namespace Z0
             for(var j=0; j < 8; j++)
                 Claim.eq(bit.test(packed[i], j), bitspan[k + j]);
         }
-
     }
 }

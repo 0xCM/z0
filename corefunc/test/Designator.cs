@@ -11,12 +11,13 @@ namespace Z0.Designators
     /// </summary>
     public sealed class CoreFuncTest : AssemblyDesignator<CoreFuncTest>
     {
+        const AssemblyId Identity = AssemblyId.CoreFuncTest;
+
+        public override AssemblyId Id 
+            => Identity;
+
         public override void Run(params string[] args)
             => App.Run(args);
 
-        public override AssemblyRole Role
-            => AssemblyRole.Test;
     }
-
-
 }

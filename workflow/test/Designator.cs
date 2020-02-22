@@ -12,14 +12,11 @@ namespace Z0.Designators
 
     public sealed class WorkflowTest : AssemblyDesignator<WorkflowTest>
     {
-        const AssemblyId Identity = 0;
+        const AssemblyId Identity = AssemblyId.WorkflowTest;
 
         public override AssemblyId Id 
             => Identity;
-
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
-    
+   
         public override void Run(params string[] args)
             => App.Run(args);
     }

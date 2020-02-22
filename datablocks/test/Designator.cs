@@ -12,6 +12,11 @@ namespace Z0.Designators
 
     public sealed class DataBlocksTest : AssemblyDesignator<DataBlocksTest>
     {
+        const AssemblyId Identity = AssemblyId.DataBlocksTest;
+
+        public override AssemblyId Id 
+            => Identity;
+
         public override AssemblyRole Role 
             => AssemblyRole.Test;
     

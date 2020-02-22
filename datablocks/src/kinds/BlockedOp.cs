@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Identifies operations that accept one or more blocks and computes a result that is stored in a caller-supplied target block

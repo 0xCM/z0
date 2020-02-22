@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
 
     partial class BlockExtend    
     {
-
         /// <summary>
         /// Constructs a 32-bit blocked span from an unblocked span
         /// </summary>
@@ -72,8 +71,5 @@ namespace Z0
         public static Block512<T> Blocked<T>(this Span<T> src, N512 n)
              where T : unmanaged
                 => DataBlocks.load(n,src);
-
-
     }
-
 }

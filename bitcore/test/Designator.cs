@@ -6,11 +6,10 @@ namespace Z0.Designators
 {        
     public sealed class BitCoreTest : AssemblyDesignator<BitCoreTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.BitCoreTest;
 
-        public override AssemblyId Id
-            => AssemblyId.BitCoreTest;
+        public override AssemblyId Id 
+            => Identity;
 
         public override void Run(params string[] args)
             => App.Run(args);

@@ -22,6 +22,21 @@ namespace Z0
             where T : unmanaged
                 => from_u(src);
 
+        /// <summary>
+        /// Creates a bitspan from a primal source, or portion thereof
+        /// </summary>
+        /// <param name="src">The packed source bits</param>
+        /// <param name="maxbits">The maximum number of bits to draw from the source</param>
+        [MethodImpl(Inline)]
+        public static BitSpan from<T>(T src, int maxbits)
+            where T : unmanaged
+        {
+            var dst = from(src);
+            return (dst.Length > maxbits && maxbits != 0)
+                ? load(dst.bits.Slice(0, maxbits))  
+                : dst;
+        }
+
         [MethodImpl(Inline)]
         static BitSpan from_u<T>(T src)
             where T : unmanaged

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    using static zfunc;
+    using static Root;
 
     public static partial class BlockExtend    
     {
@@ -24,12 +24,6 @@ namespace Z0
         static N128 n128 => default;
 
         static N256 n256 => default;
-
-        // [MethodImpl(Inline)]        
-        // public static NatSpan<N,T> NatLoad<N,T>(this Span<T> src, N n = default)
-        //     where N : unmanaged, ITypeNat
-        //     where T : unmanaged
-        //         => NatSpan.load(src,n);
 
         /// <summary>
         /// Determines whether a type is blocked memory store

@@ -8,12 +8,13 @@ namespace Z0.Designators
     using System.Linq;
     using System.Collections.Generic;
 
-
     public sealed class AnalogsTest : AssemblyDesignator<AnalogsTest>
-    {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
-    
+    {    
+        const AssemblyId Identity = AssemblyId.AnalogsTest;
+
+        public override AssemblyId Id 
+            => Identity;
+
         public override void Run(params string[] args)
             => App.Run(args);
     }

@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;    
         
-    using static zfunc;
-
     [ApiHost("blocks",ApiHostKind.Generic)]
     public static partial class DataBlocks
     {

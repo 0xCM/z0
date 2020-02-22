@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
 
     partial class BlockExtend    
     {
@@ -110,7 +110,5 @@ namespace Z0
         public static Block128<T> Reblock<T>(this in Block256<T> src, N128 n)
              where T : unmanaged
                 => new Block128<T>(src.Data);
-
-
     }
 }

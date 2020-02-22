@@ -9,10 +9,12 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class MklTest : AssemblyDesignator<MklTest>
+    public sealed class MklApiTest : AssemblyDesignator<MklApiTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.MklApiTest;
+
+        public override AssemblyId Id 
+            => Identity;
 
         public override void Run(params string[] args)
             => App.Run(args);

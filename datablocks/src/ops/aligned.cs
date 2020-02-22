@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
         
-    using static zfunc;
+    using static Root;
 
     partial class DataBlocks
     {
@@ -81,6 +81,5 @@ namespace Z0
         public static bool aligned<T>(N512 n, int count)
             where T : unmanaged        
                 => count % blocklen<T>(n) == 0;
-
     }
 }

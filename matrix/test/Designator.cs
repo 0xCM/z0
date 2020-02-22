@@ -6,10 +6,12 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class LinearOpsTest : AssemblyDesignator<LinearOpsTest>
+    public sealed class MatrixTest : AssemblyDesignator<MatrixTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.MatrixTest;
+
+        public override AssemblyId Id 
+            => Identity;
 
         public override void Run(params string[] args)
             => App.Run(args);

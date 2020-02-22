@@ -5,23 +5,15 @@
 namespace Z0.Designators
 {        
     using System;
-    using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    using D = Z0.Designators;
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
     public sealed class MachineTest : AssemblyDesignator<MachineTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.MachinesTest;
+
+        public override AssemblyId Id 
+            => Identity;
 
         public override void Run(params string[] args)
             => App.Run(args);
-
     }
-
 }

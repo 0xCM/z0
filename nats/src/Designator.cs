@@ -10,9 +10,10 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class TypeNats : AssemblyDesignator<TypeNats>
+    public sealed class Nats : AssemblyDesignator<Nats>
     {
-        const AssemblyId Identity = AssemblyId.TypeNats;
+        const AssemblyId Identity = AssemblyId.Nats;
+
 
         public override AssemblyId Id 
             => Identity;

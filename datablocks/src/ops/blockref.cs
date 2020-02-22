@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
         
-    using static zfunc;
+    using static Root;
 
     partial class DataBlocks
     {
@@ -77,6 +77,5 @@ namespace Z0
         public static ref T blockref<T>(in Block512<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
-
     }
 }

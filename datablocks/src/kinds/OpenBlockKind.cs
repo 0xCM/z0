@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    
     using static FixedWidth;
 
     /// <summary>
@@ -26,5 +27,4 @@ namespace Z0
 
         Block512 = W512
     }
-
 }

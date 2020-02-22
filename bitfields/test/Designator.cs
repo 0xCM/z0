@@ -12,11 +12,10 @@ namespace Z0.Designators
 
     public sealed class BitFieldTest : AssemblyDesignator<BitFieldTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.BitFieldsTest;
 
-        public override AssemblyId Id
-            => AssemblyId.BitFieldsTest;
+        public override AssemblyId Id 
+            => Identity;
 
         public override void Run(params string[] args)
             => App.Run(args);

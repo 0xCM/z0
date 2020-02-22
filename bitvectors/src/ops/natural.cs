@@ -141,6 +141,5 @@ namespace Z0
                     dst |= (1ul << i);
             return ref dst;
         }
-
     }
 }

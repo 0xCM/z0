@@ -11,12 +11,12 @@ namespace Z0.Designators
     /// </summary>
     public sealed class IntrinsicsTest : AssemblyDesignator<IntrinsicsTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.IntrinsicsTest;
+
+        public override AssemblyId Id 
+            => Identity;
 
         public override void Run(params string[] args)
             => App.Run(args);
-
     }
-
 }

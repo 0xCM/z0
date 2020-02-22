@@ -363,6 +363,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
+            
             var storage = new byte[natval<N>()];
             for(var i=0; i< RepCount; i++)
             {

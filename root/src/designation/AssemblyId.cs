@@ -23,9 +23,9 @@ namespace Z0
 
         RootTest = Root | Test,
 
-        TypeNats = T02,
+        Nats = T02,
 
-        TypeNatsTest = TypeNats | Test,
+        NatsTest = Nats | Test,
 
         DataCore = T03,
 
@@ -107,6 +107,18 @@ namespace Z0
 
         FixedTest = Fixed | Test,
 
+        DataBlocks = T26,
+
+        DataBlocksTest = DataBlocks | Test,
+
+        Workflow = T27,
+
+        WorkflowTest = Workflow | Test,
+
+        Analogs = T28,
+
+        AnalogsTest = Analogs | Test,
+        
         Control = T50,
 
         Test = T63
@@ -119,21 +131,21 @@ namespace Z0
         {
             const string TestSuffix = ".test";
 
-            var test = id.IsTestAssembly();
-            var @base = id.WithoutTestFlag().ToString().ToLower();
+            var test = id.IsTest();
+            var @base = id.WithoutTest().ToString().ToLower();
             return @base + (test ? TestSuffix : string.Empty);
         }
 
         [MethodImpl(Inline)]
-        public static bool IsTestAssembly(this AssemblyId a)
+        public static bool IsTest(this AssemblyId a)
             => (a & AssemblyId.Test) != 0;
         
         [MethodImpl(Inline)]
-        public static AssemblyId WithoutTestFlag(this AssemblyId a)
+        public static AssemblyId WithoutTest(this AssemblyId a)
             => a & ~ AssemblyId.Test;
 
         [MethodImpl(Inline)]
-        public static AssemblyId WithTestFlag(this AssemblyId a)
+        public static AssemblyId WithTest(this AssemblyId a)
             => a | AssemblyId.Test;
     }
 }

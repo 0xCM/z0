@@ -21,17 +21,14 @@ namespace Z0.Designators
 
         public override AssemblyId Id
             => Identity;
-
-        public override AssemblyRole Role
-            => AssemblyRole.Controller;
             
         public override IEnumerable<IAssemblyDesignator> Designates
             => items<IAssemblyDesignator>(            
             
             D.Root.Designated,
             
-            D.TypeNats.Designated,
-            D.TypeNatsTest.Designated,            
+            D.Nats.Designated,
+            D.NatsTest.Designated,            
                         
             D.CoreFunc.Designated, 
             D.CoreFuncTest.Designated, 
@@ -61,7 +58,7 @@ namespace Z0.Designators
             D.AsmCoreTest.Designated,
 
             D.MklApi.Designated,
-            D.MklTest.Designated,
+            D.MklApiTest.Designated,
 
 
             D.Machines.Designated,

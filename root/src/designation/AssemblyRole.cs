@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
     
     /// <summary>
     /// Defines assembly role classifiers
@@ -32,14 +30,11 @@ namespace Z0
         /// Classifies an assembly as an api library
         /// </summary>
         Library,
-
         
         /// <summary>
         /// Classifies an assembly with an entry point that directs/orchestrates operations
         /// </summary>
         Controller
     }
-
-
 
 }

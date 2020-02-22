@@ -24,11 +24,11 @@ namespace Z0
         
         public TestController()
         {
-            this.Context = AsmContext.New(C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x).ToArray());
+            this.Context = AsmContext.New(C.Designated.Designates.Where(d => d.Id.IsTest()).Select(x => x).ToArray());
         }
 
         static IEnumerable<IAssemblyDesignator> TestHosts
-            => C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x);
+            => C.Designated.Designates.Where(d => d.Id.IsTest()).Select(x => x);
 
         // AsmFunction[] ResolveExample<T>(in CaptureExchange exchange, N128 w, T t = default)
         //     where T : unmanaged
@@ -84,7 +84,7 @@ namespace Z0
         
         static string[] ConcurrentTests
             => new string[]{
-                D.TypeNatsTest.Designated.Name,
+                D.NatsTest.Designated.Name,
                 D.CoreFuncTest.Designated.Name,     
                 D.GMathTest.Designated.Name,
                 D.IntrinsicsTest.Designated.Name,
@@ -98,7 +98,7 @@ namespace Z0
         static string[] SequentialTests
             => new string[]
         {
-            D.MklTest.Designated.Name,
+            D.MklApiTest.Designated.Name,
             D.LibMTest.Designated.Name
         };
 

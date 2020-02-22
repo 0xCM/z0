@@ -4,19 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
     public sealed class FastOpsTest : AssemblyDesignator<FastOpsTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.FastOpsTest;
+
+        public override AssemblyId Id 
+            => Identity;
 
         public override void Run(params string[] args)
             => App.Run(args);
     }
-
-
 }

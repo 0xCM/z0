@@ -9,10 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Text;
 
-    using static zfunc;
+    using static Root;
 
     public static class SegmentX
     {
@@ -56,8 +54,6 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static Type SegmentType(this Type t)
-            => t.IsSegmented() && t.IsClosedGeneric() ? t.SuppliedTypeArgs().Single() : typeof(void);        
-
-
+            => t.IsSegmented() && t.IsClosedGeneric() ? t.SuppliedTypeArgs().Single() : typeof(void);
     }
 }

@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
 
     partial class BlockExtend    
     {
@@ -97,8 +94,5 @@ namespace Z0
             src.CopyTo(dst);
             return new Block512<T>(dst);
         }
-
-
-
     }
 }

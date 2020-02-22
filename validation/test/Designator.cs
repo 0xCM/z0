@@ -9,8 +9,10 @@ namespace Z0.Designators
     /// </summary>
     public sealed class ValidationTest : AssemblyDesignator<ValidationTest>
     {
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        const AssemblyId Identity = AssemblyId.ValidationTest;
+
+        public override AssemblyId Id 
+            => Identity;
 
         public override void Run(params string[] args)
             => App.Run(args);

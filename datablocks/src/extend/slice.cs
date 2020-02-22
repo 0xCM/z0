@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
-    using static DataBlocks;
+    using static Root;
 
     partial class BlockExtend    
     {
@@ -66,10 +65,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Slice<T>(this in Block512<T> src, int offset, int length)
             where T : unmanaged
-                => src.Data.Slice(offset,length);             
-
-
-
+                => src.Data.Slice(offset,length);
     }
-
 }
