@@ -6,12 +6,8 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
 
     using static zfunc;
-
 
     partial class AsmReports
     {
@@ -34,16 +30,16 @@ namespace Z0
             =>  Paths.AsmReportRoot + FolderName.Define("capture");   
 
         public static FilePath EncodingExtract(ApiHost host)
-            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.Name, dash(), "extract"), FileExtensions.Csv);
+            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.HostName, dash(), "extract"), FileExtensions.Csv);
 
         public static FilePath EncodingParse(ApiHost host)
-            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.Name, dash(), "parsed"), FileExtensions.Csv);
+            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.HostName, dash(), "parsed"), FileExtensions.Csv);
 
         public static FilePath EncodingDecoded(ApiHost host)
-            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.Name, dash(), "decoded"), FileExtensions.Asm);
+            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.HostName, dash(), "decoded"), FileExtensions.Asm);
 
         public static FilePath HostLocation(ApiHost host)
-            => LocationRoot + FileName.Define(concat(host.Owner.Format(), dash(), host.Name), LocationExtension);
+            => LocationRoot + FileName.Define(concat(host.Owner.Format(), dash(), host.HostName), LocationExtension);
 
         public static FilePath AssemblyLocation(AssemblyId assembly)
             => LocationRoot + FileName.Define(assembly.Format(), LocationExtension);

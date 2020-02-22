@@ -17,7 +17,7 @@ namespace Z0
         static IntPtr intptr(long i)
             => new IntPtr(i);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
         public static ref T cast<S,T>(ref S src)
             => ref Unsafe.As<S,T>(ref src);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
         public static ref T cast<S,T>(ref S src, out T dst)
         {
             dst = Unsafe.As<S,T>(ref src);

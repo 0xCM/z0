@@ -3,11 +3,22 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    
-    class App : TestApp<App>
-    {            
-        public static void Main(params string[] args)
-            => Run(args);
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+
+
+    public class t_boxed_number : UnitTest<t_boxed_number>
+    {
+
+        public void create()
+        {
+
+
+        }
+
     }
+
 }

@@ -5,17 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
  
     using static Root;
 
-    partial class RootX
+    public static class BoxedNumberExtensions
     {
+        [MethodImpl(Inline)]
+        public static BoxedNumber Zero(this NumericKind kind)
+            => BoxedNumber.From(Numeric.convert(kind, 0)); 
+
         [MethodImpl(Inline)]
         public static BoxedNumber Box(this byte src)
             => src;

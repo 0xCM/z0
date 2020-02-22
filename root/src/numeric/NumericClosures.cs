@@ -9,30 +9,16 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     /// <summary>
-    /// Applies to a generic type/method to advertise the primal types over which the type parameter(s) may be closed
+    /// Applies to a generic type/method to advertise the types over which type parameter(s) may be closed
     /// </summary>
     public class NumericClosuresAttribute : Attribute
     {
-        public NumericClosuresAttribute(NumericKind system)
+        public NumericClosuresAttribute(NumericKind nk)
         {
-            this.NumericPrimitive = system;
-            this.UserPrimitive = UserPrimitiveKind.None;
-        }
-
-        public NumericClosuresAttribute(UserPrimitiveKind user)
-        {
-            this.NumericPrimitive = NumericKind.None;
-            this.UserPrimitive = user;
-        }
-
-        public NumericClosuresAttribute(NumericKind system, UserPrimitiveKind user)
-        {
-            this.NumericPrimitive = system;
-            this.UserPrimitive = user;
+            this.NumericPrimitive = nk;
         }
 
         public NumericKind NumericPrimitive {get;}
 
-        public UserPrimitiveKind UserPrimitive{get;}         
     }
 }

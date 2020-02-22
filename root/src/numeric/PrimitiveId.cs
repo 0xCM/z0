@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    /// <summary>
+    /// Defines identifier literals for system-defined primal types
+    /// </summary>
     public enum PrimitiveId : uint
     {
         U8 = NumericId.U8,

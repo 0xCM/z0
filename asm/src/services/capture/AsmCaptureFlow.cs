@@ -15,14 +15,17 @@ namespace Z0
     {
         public IAsmContext Context {get;}
 
-        [MethodImpl(Inline)]
-        public static IAsmCaptureFlow Create(IAsmContext context)
-            => new AsmCaptureFlow(context);
+        public HashSet<AssemblyId> Selected {get;}
 
         [MethodImpl(Inline)]
-        AsmCaptureFlow(IAsmContext context)
+        public static IAsmCaptureFlow Create(IAsmContext context, params AssemblyId[] selected)
+            => new AsmCaptureFlow(context,selected);
+
+        [MethodImpl(Inline)]
+        AsmCaptureFlow(IAsmContext context, AssemblyId[] selected)
         {
             this.Context = context;
+            this.Selected = selected.Length == 0 ? context.Assemblies.ToHashSet() : selected.ToHashSet();
         }
         
         void CreateLocationReport(AssemblyId id)
@@ -33,9 +36,12 @@ namespace Z0
             var hosts = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts);
             var config = Context.AsmFormat.WithSectionDelimiter();
             foreach(var host in hosts)
-                yield return RunCaptureWorkflow(host);
+            {
+                if(Selected.Contains(host.Owner))
+                    yield return RunCaptureWorkflow(host);
+            }
 
-            iter(Context.Assemblies, CreateLocationReport);
+            iter(Selected, CreateLocationReport);
         }
 
         void Decode(CapturedEncoding captured, ParsedEncoding encoded, IAsmDecoder decoder,  IAsmFunctionWriter dst)

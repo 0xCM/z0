@@ -13,7 +13,7 @@ namespace Z0
     using NK = NumericKind;
     using NT = NumericType;
 
-    partial class RootX
+    public static class NumericExtensions
     {
         /// <summary>
         /// Determines the numeric kind of a type, possibly none
@@ -62,10 +62,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NK ToNumericKind(this FixedWidth w, NumericIndicator i) 
             => Numeric.from(w, i);
-
-        [MethodImpl(Inline)]
-        public static BoxedNumber Zero(this NK kind)
-            => BoxedNumber.From(Numeric.convert(kind, 0)); 
             
         /// <summary>
         /// Tests whether the source kind, considered as a bitfield, contains the match kind

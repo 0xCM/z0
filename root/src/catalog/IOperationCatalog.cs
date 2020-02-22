@@ -15,9 +15,9 @@ namespace Z0
     public interface IOperationCatalog
     {
         /// <summary>
-        /// The known types that reify contracted operation services
+        /// The known types that reify contracted operation services, potentiall generic
         /// </summary>
-        IEnumerable<Type> ServiceHosts {get;}
+        IEnumerable<Type> ServiceHostTypes {get;}
         
         /// <summary>
         /// The known generic api hosts
@@ -40,6 +40,11 @@ namespace Z0
         AssemblyId AssemblyId {get;}
 
         /// <summary>
+        /// The api hosts known to the catalog
+        /// </summary>
+        ApiHost[] ApiHosts {get;}
+
+        /// <summary>
         /// Specifies whether the catalog is vacuous
         /// </summary>
         bool IsEmpty
@@ -49,9 +54,6 @@ namespace Z0
         /// The name of the catalog, which should be unique with respect to known catalogs
         /// </summary>
         string CatalogName
-            => AssemblyId.Format();
-        
-        IEnumerable<ApiHost> ApiHosts
-            => DirectApiHosts.Union(GenericApiHosts);
+            => AssemblyId.Format();        
     }
 }

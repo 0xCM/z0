@@ -10,7 +10,7 @@ namespace Z0
     
     using static Root;
 
-    [ApiHost]
+    [ApiHost(ApiHostKind.Generic)]
     public static class As
     {
         [MethodImpl(Inline)]

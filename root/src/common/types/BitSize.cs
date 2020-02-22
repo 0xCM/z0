@@ -15,6 +15,11 @@ namespace Z0
     public readonly struct BitSize
     {
         /// <summary>
+        /// Specifies a bit count
+        /// </summary>
+        public readonly ulong Bits;
+
+        /// <summary>
         /// Computes the quotient q :=  a / bitsize[T]
         /// </summary>
         /// <param name="a"></param>
@@ -33,11 +38,6 @@ namespace Z0
         public static int mod<T>(int a, T t = default)
             where T : unmanaged
                 => a % bitsize<T>();
-
-        /// <summary>
-        /// Specifies a bit count
-        /// </summary>
-        public readonly ulong Bits;
 
         /// <summary>
         /// The canonical zero size

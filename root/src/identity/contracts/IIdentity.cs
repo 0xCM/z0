@@ -27,6 +27,5 @@ namespace Z0
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         bool IEquatable<T>.Equals(T src)
             => IdentityEquals(Identifier,src.Identifier);                
-    }
-    
+    }    
 }        

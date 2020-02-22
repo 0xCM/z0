@@ -10,27 +10,49 @@ namespace Z0
 
     using static Root;
 
-    [IdentityProvider(typeof(BitIdentityProvider))]
-    public readonly struct bit
+    /// <summary>
+    /// An anti-succinct representation of a bit 
+    /// </summary>
+    /// <remarks>
+    /// An essay would be required to fully explain why a 32-bit integer is used to 
+    /// encose the content of a single bit. Briefly, it is because its the only way
+    /// to acheive performance characteristics on par with the system-defined bool
+    /// data type. Bool, which is itself predicated on a byte, is a privileged 
+    /// data structure that garners special treatment by the runtime. A user-defined
+    /// type predicated on a byte would not enjoy this status and would endure
+    /// a constant barrage of shifts, movements, etc. from not being 32-bit aligned.
+    /// </remarks>
+    [IdentityProvider(typeof(BitIdentityProvider)), UserPrimitive(PrimitiveId), Converters(typeof(BitConverters))]
+    public readonly struct bit : IUserPrimitive<bit>
     {
-        readonly uint state;
-
-        const uint _off = 0;
-
-        const uint _on = 1;
+        public const uint PrimitiveId = 1u;
 
         public const char Zero = '0';
 
         public const char One = '1';
+
+        readonly uint state;        
         
-        static string[] OnLabels => new string[]{"on", "1", "enabled", "true", "yes"};
+        [MethodImpl(Inline)]
+        unsafe bit(bool on)
+            => this.state  = *((byte*)(&on));
+
+        [MethodImpl(Inline)]
+        bit(uint state)
+            => this.state = state;
+
+        [MethodImpl(Inline)]
+        public char ToChar()
+            => (char)(state + 48);
         
         [MethodImpl(Inline)]
         public static bit Parse(char c)
-            => c == '1';
+            => c == One;
 
         public static bit Parse(string src)
             => OnLabels.Contains(src.Trim().ToLower());
+
+        static string[] OnLabels => new string[]{"on", "1", "enabled", "true", "yes"};
             
         /// <summary>
         /// Constructs a disabled bit
@@ -38,7 +60,7 @@ namespace Z0
         public static bit Off 
         {
              [MethodImpl(Inline)]
-             get  => new bit(_off);
+             get  => new bit(0u);
         }
 
         /// <summary>
@@ -47,7 +69,7 @@ namespace Z0
         public static bit On 
         {
              [MethodImpl(Inline)]
-             get  => new bit(_on);
+             get  => new bit(1u);
         }
 
         public static bit[] B01 
@@ -55,7 +77,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new bit[]{Off,On};
         }
-        
+
         [MethodImpl(Inline)]
         public unsafe static bit From(bool src)        
         {
@@ -578,17 +600,11 @@ namespace Z0
         public static bool operator !=(bit a, bit b)
             => a.state != b.state;
 
-        [MethodImpl(Inline)]
-        unsafe bit(bool on)
-            => this.state  = *((byte*)(&on));
-
-        [MethodImpl(Inline)]
-        bit(uint state)
-            => this.state = state;
-
-        [MethodImpl(Inline)]
-        public char ToChar()
-            => (char)(state + 48);
+        uint IUserPrimitive.PrimitiveId 
+        {
+            [MethodImpl(Inline)]
+            get => PrimitiveId;
+        }
 
         [MethodImpl(Inline)]
         public bool Equals(bit b)
@@ -629,11 +645,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static bit SafeWrap(ulong state)
             => new bit((uint)state & 1);
-    }
-
-    readonly struct BitIdentityProvider : ITypeIdentityProvider
-    {
-        public TypeIdentity DefineIdentity(Type src)
-            => src == typeof(bit) ? TypeIdentity.Define("1u") : TypeIdentity.Empty;
     }
 }

@@ -9,16 +9,19 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
+    using static Root;
+
     /// <summary>
-    /// Clasifies user-defined primitive types
+    /// Applied to a type to identify applicable IConverter realizations
     /// </summary>
-    public enum UserPrimitiveKind : uint
-    {    
-        None = 0,
-        
-        /// <summary>
-        /// Identifies a user-defined bit type
-        /// </summary>
-        Bit = 1,        
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
+    public class ConvertersAttribute : Attribute
+    {
+        public ConvertersAttribute(params Type[] types)
+        {
+            ConverterTypes = types;
+        }
+
+        public readonly Type[] ConverterTypes;
     }
 }

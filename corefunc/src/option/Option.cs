@@ -7,6 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
+
     using static Root;
 
     /// <summary>
@@ -155,8 +160,8 @@ namespace Z0
         /// Yields the encapulated value if present; otherwise, raises an exception
         /// </summary>
         [MethodImpl(Inline)]
-        public T Require()
-            =>  Exists ? value : throw new Exception<T>("Value doesn't exist");
+        public T Require([Caller]string caller = null, [File]string file = null, [Line]int? line = null)
+            =>  Exists ? value : throw AppErrors.NoValue<T>(caller,file,line);
                     
         public T Default 
         {

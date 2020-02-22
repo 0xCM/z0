@@ -245,8 +245,8 @@ namespace Z0
             
             else if(e.InnerException is AppException app)
                 yield return app.Message;
-            else
-                yield return ErrorMessages.Unanticipated(e ?? e.InnerException);
+            else                
+                yield return ErrorMessages.Unanticipated(e?.InnerException ?? e);
 
             yield return AppMsg.Define($"{name} failed.", SeverityLevel.Error);
         }

@@ -19,15 +19,15 @@ namespace Z0
 
         }
         
-        public override IEnumerable<Type> ServiceHosts
+        public override IEnumerable<Type> ServiceHostTypes
             => typeof(GXTypes).GetNestedTypes().Realize<IFunc>();
 
-        public override IEnumerable<ApiHost> GenericApiHosts
-            => from t in items(typeof(gmath), typeof(mathspan), typeof(gfp))
-                select ApiHost.Define(AssemblyId,t);
+        // public override IEnumerable<ApiHost> GenericApiHosts
+        //     => from t in items(typeof(gmath), typeof(mathspan), typeof(gfp))
+        //         select ApiHost.Define(AssemblyId,t);
 
-        public override IEnumerable<ApiHost> DirectApiHosts
-            => from t in items(typeof(math), typeof(fmath))
-                select ApiHost.Define(AssemblyId,t);
+        // public override IEnumerable<ApiHost> DirectApiHosts
+        //     => from t in items(typeof(math), typeof(fmath))
+        //         select ApiHost.Define(AssemblyId,t);
     }
 }

@@ -19,8 +19,8 @@ namespace Z0
         {
             var defaultName = t.Name.ToLower();
             var query = from a in t.CustomAttribute<ApiHostAttribute>()
-                        where a.Name.IsNotBlank()
-                        select a.Name;
+                        where a.HostName.IsNotBlank()
+                        select a.HostName;
             return query.ValueOrDefault(defaultName);            
         }    
     }

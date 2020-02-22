@@ -160,10 +160,10 @@ namespace Z0
             => AsmDataDir(t) + AsmHexFile(m);
 
         public FilePath ParsedEncoding(ApiHost host)
-            => AsmDataRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.Name), FileExtensions.Csv);
+            => AsmDataRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.HostName), FileExtensions.Csv);
 
         public FilePath DecodedEncoding(ApiHost host)
-            => AsmDataRoot+ FileName.Define(concat(host.Owner.Format(), dot(), host.Name), FileExtensions.Asm);
+            => AsmDataRoot+ FileName.Define(concat(host.Owner.Format(), dot(), host.HostName), FileExtensions.Asm);
 
         public FilePath ConfigPath(string name, FileExtension ext = null)
             => Settings.ConfigPath(FileName.Define(name, ext ?? FileExtension.Define("json")));

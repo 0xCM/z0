@@ -81,6 +81,15 @@ namespace Z0
             => String.IsNullOrWhiteSpace(Content);
 
         /// <summary>
+        /// Edits the message to include specifed caller info data
+        /// </summary>
+        /// <param name="caller">The invokind method</param>
+        /// <param name="file">The file in which the invocation occurred</param>
+        /// <param name="line">The line number at which the invocation occurred</param>
+        public AppMsg WithCallerInfo(string caller, string file, int? line)
+            => new AppMsg(Content, Level, caller,file,line);
+
+        /// <summary>
         /// Edits the message severity level
         /// </summary>
         /// <param name="Level">The new severity level</param>

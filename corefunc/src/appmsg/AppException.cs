@@ -15,6 +15,9 @@ namespace Z0
         public static AppException Define(AppMsg msg)
             => new AppException(msg);
 
+        public static AppException Define(AppMsg msg, string caller, string file, int? line)
+            => new AppException(msg.WithCallerInfo(caller,file,line));
+
         public static AppException Define(string msg, string caller, string file, int? line)
             => new AppException(msg, caller, file, line);
 

@@ -18,7 +18,7 @@ namespace Z0
 
         }
         
-        public override IEnumerable<Type> ServiceHosts
+        public override IEnumerable<Type> ServiceHostTypes
             => typeof(BVTypes).GetNestedTypes().Realize<IFunc>();
 
         public override IEnumerable<ApiHost> GenericApiHosts

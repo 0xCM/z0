@@ -102,7 +102,6 @@ namespace Z0
         void EmitDirectPrimary(in CaptureExchange exchange, ApiHost host, CaptureEmissionObserver observer)
         {
             var primary = HostArchive(host);
-            var immediate = HostImmArchive(host);
             var specs = host.DirectOps();
 
             foreach(var spec in specs)
@@ -112,7 +111,6 @@ namespace Z0
         void EmitGenericPrimary(in CaptureExchange exchange, ApiHost host, CaptureEmissionObserver observer)
         {
             var primary = HostArchive(host);
-            var immediate = HostImmArchive(host);
             var specs = host.GenericOps();
 
             foreach(var spec in specs.Where(spec => !spec.MethodDefinition.AcceptsImmediate()))
@@ -242,7 +240,7 @@ namespace Z0
         }
 
         string ArchiveSubject(ApiHost host, bool imm)
-            =>  host.Name + (imm ?  "_imm" : string.Empty);
+            =>  host.HostName + (imm ?  "_imm" : string.Empty);
 
         IAsmFunctionArchive HostArchive(ApiHost host)
             => Archive(ArchiveSubject(host,false));

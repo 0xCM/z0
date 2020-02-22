@@ -35,8 +35,8 @@ namespace Z0
             // print(uri);
 
                     
-            //  var workflow = Context.CaptureWorkflow();
-            //  workflow.Execute().Force();
+            var workflow = Context.CaptureWorkflow();
+            workflow.Execute().Force();
         }
 
         static void buffer_client(IAsmContext context)
@@ -81,7 +81,7 @@ namespace Z0
         void archive_selected(in AsmBuffers buffers)
         {
             var archive = Context.Archiver();
-            archive.Archive(AssemblyId.Intrinsics);
+            archive.Archive(AssemblyId.Root);
         }
 
         void archive_context(in AsmBuffers buffers)

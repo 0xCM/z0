@@ -23,7 +23,7 @@ namespace Z0
         AsmArchiver(IAsmContext context)
         {
             Context = context;
-            Resources = Context.Compostion.FindCatalog(AssemblyId.Data).Require().Resources;
+            Resources = Context.Compostion.FindCatalog(AssemblyId.Data).MapValueOrElse(c => c.Resources, () => DataResourceIndex.Empty);
         }
 
         IAssemblyComposition Resolved 
@@ -75,6 +75,7 @@ namespace Z0
             {
 
             }
+
             var metadata = ClrMetadataIndex.Create(src.HostAssembly);
             var context = AsmContext.New(metadata, Resources);
             var emitter = context.CatalogEmitter(src.Catalog, OnEmission);

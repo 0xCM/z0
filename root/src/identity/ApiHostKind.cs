@@ -21,9 +21,27 @@ namespace Z0
 
         Generic = 2,
 
-        Service = 4,
-
         DirectAndGeneric = Direct | Generic
+    }
+
+    public static class ApiHostKindOps
+    {
+        [MethodImpl(Inline)]
+        public static bool DefinesDirectOps(this ApiHostKind src)
+            => (src & ApiHostKind.Direct) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool DefinesGenericOps(this ApiHostKind src)
+            => (src & ApiHostKind.Generic) != 0;
+
+        
+        [MethodImpl(Inline)]
+        public static bool IsSome(this ApiHostKind src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsNone(this ApiHostKind src)
+            => src == 0;
     }
 
 }

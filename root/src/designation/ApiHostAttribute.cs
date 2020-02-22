@@ -9,19 +9,22 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Identifies an api host
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class ApiHostAttribute : Attribute
     {
-        public ApiHostAttribute(string Name, ApiHostKind opkind)
+        public ApiHostAttribute(string Name, ApiHostKind kind)
         {
-            this.Name = Name;
-            this.OpKind = opkind;
+            this.HostName = Name;
+            this.HostKind = kind;
         }
 
-        public ApiHostAttribute(ApiHostKind opkind)
+        public ApiHostAttribute(ApiHostKind kind)
         {
-            this.Name = string.Empty;
-            this.OpKind = opkind;
+            this.HostName = string.Empty;
+            this.HostKind = kind;
         }
 
         public ApiHostAttribute(string Name)
@@ -32,10 +35,11 @@ namespace Z0
         public ApiHostAttribute()
             : this(string.Empty, ApiHostKind.DirectAndGeneric)
         {
+ 
         }
 
-        public string Name {get;}
+        public string HostName {get;}
 
-        public ApiHostKind OpKind {get;}
+        public ApiHostKind HostKind {get;}
     }
 }

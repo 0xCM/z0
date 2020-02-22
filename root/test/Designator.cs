@@ -11,7 +11,7 @@ namespace Z0.Designators
     /// </summary>
     public sealed class RootTest : AssemblyDesignator<RootTest>
     {
-        const AssemblyId Identity = 0;
+        const AssemblyId Identity = AssemblyId.RootTest;
 
         public override AssemblyId Id 
             => Identity;

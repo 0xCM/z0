@@ -11,40 +11,32 @@ namespace Z0
     public abstract class OpCatalog<C> : IOperationCatalog
         where C : OpCatalog<C>
     {
+        public AssemblyId AssemblyId {get;}
+
+        public DataResourceIndex Resources  {get;}
+
+        public virtual ApiHost[] ApiHosts {get;}
+
+        public virtual IEnumerable<Type> ServiceHostTypes {get;}
+
+        public virtual IEnumerable<ApiHost> GenericApiHosts {get;}
+
+        public virtual IEnumerable<ApiHost> DirectApiHosts {get;}
+
         protected OpCatalog(AssemblyId id)
         {
             AssemblyId = id;
+            ApiHosts = ApiHost.HostTypes(typeof(C).Assembly).Select(t => ApiHost.Define(AssemblyId, t)).ToArray();
+            Resources = DataResourceIndex.Empty;
+            DirectApiHosts = ApiHosts.Where(h => h.HostKind.DefinesDirectOps());
+            GenericApiHosts = ApiHosts.Where(h => h.HostKind.DefinesGenericOps());
+            ServiceHostTypes =new Type[]{};
         }
         
         protected OpCatalog(AssemblyId id, DataResourceIndex resources)
             : this(id)
         {
-            Resources = resources;
-        }
-
-        public AssemblyId AssemblyId {get;}
-    
-        public virtual IEnumerable<Type> ServiceHosts
-            => new Type[]{};
-
-        public virtual IEnumerable<ApiHost> GenericApiHosts
-            => new ApiHost[]{};
-
-        public virtual IEnumerable<ApiHost> DirectApiHosts
-            => new ApiHost[]{};
-
-        public DataResourceIndex Resources  {get; private set;}
-            = DataResourceIndex.Empty;
-
-        public void Share(DataResourceIndex resources)
-        {
-            if(Resources.IsEmpty)
-                Resources = resources;
-            else
-                Merge(resources);
-        }
-        
-        void Merge(DataResourceIndex src)        
-            => Resources.Merge(src);
+            Resources = resources ?? DataResourceIndex.Empty;
+        }                    
     }
 }

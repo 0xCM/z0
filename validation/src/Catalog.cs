@@ -20,7 +20,7 @@ namespace Z0
 
         }
         
-        public override IEnumerable<Type> ServiceHosts
+        public override IEnumerable<Type> ServiceHostTypes
             => array<Type>();
 
         public override IEnumerable<ApiHost> GenericApiHosts

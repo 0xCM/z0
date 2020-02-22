@@ -6,5 +6,5 @@ LogDir=$ZLogs/test
 LogSrc=console
 LogName=$Project.$LogSrc.$LogExt
 cd $ProjectDir
-echo $Project
+echo Executing tests defined by $Project
 dotnet run > $LogDir/$LogName

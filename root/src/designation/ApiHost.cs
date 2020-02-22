@@ -12,20 +12,32 @@ namespace Z0
 
     using static Root;    
 
+    /// <summary>
+    /// Identifies/describes a type that declares a formalized api set
+    /// </summary>
     public readonly struct ApiHost : IApiHostIdentity<ApiHost>
-    {
-        public string Name {get;}
-
-        public readonly AssemblyId Owner;
-
-        public ApiHostPath Path {get;}
+    {        
+        public string HostName {get;}
 
         public string Identifier {get;}            
+
+        public ApiHostKind HostKind {get;}
+
+        public AssemblyId Owner {get;}
+
+        public ApiHostPath Path {get;}
         
-        public readonly Type HostingType;
+        public Type HostingType {get;}
 
         public static ApiHost Empty = new ApiHost(AssemblyId.None, typeof(void));
         
+        /// <summary>
+        /// Searches a source assembly for api host types as determined by attribution
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        public static IEnumerable<Type> HostTypes(Assembly src)
+            => src.GetTypes().Attributed<ApiHostAttribute>();
+
         [MethodImpl(Inline)]
         public static ApiHost Define(Type src)
             => new ApiHost(src.Assembly.AssemblyId(), src);
@@ -33,10 +45,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ApiHost Define(AssemblyId owner, Type src)
             => new ApiHost(owner, src);
-
-        [MethodImpl(Inline)]
-        public static IEnumerable<ApiHost> Define(AssemblyId owner, params Type[] src)
-            => src.Select(t => Define(owner, t));
 
         [MethodImpl(Inline)]
         public static bool operator==(ApiHost a, ApiHost b)
@@ -51,12 +59,13 @@ namespace Z0
         {
             this.Owner = id;
             this.HostingType = t;
-            var name =  t.GetCustomAttribute<ApiHostAttribute>()?.Name;
-            Name = string.IsNullOrEmpty(name) ? t.Name : name;
+            var attrib = t.GetCustomAttribute<ApiHostAttribute>();
+            this.HostKind = attrib?.HostKind ?? ApiHostKind.DirectAndGeneric;
+            this.HostName = string.IsNullOrWhiteSpace(attrib?.HostName) ? t.Name : attrib.HostName;            
             this.Path = ApiHostPath.Define(Owner, HostingType.Name);
             this.Identifier = Path.Format();
         }
-        
+                 
         public IEnumerable<MethodInfo> DeclaredMethods
             => HostingType.DeclaredMethods(false);
 
