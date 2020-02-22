@@ -5,16 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    partial class RootX
-    {    
-        public static IOperationCatalog OperationCatalog(this Assembly a)
-            => a.Designator().Catalog;
+    public static partial class RootX
+    {
 
-        [MethodImpl(Inline)]
-        public static string Format(this AssemblyId id)
-            => id.ToString().ToLower();
     }
 }

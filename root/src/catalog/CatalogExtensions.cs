@@ -6,10 +6,14 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
-    public interface IBenchResultSink
-    {
-        BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration);        
+    using static Root;
+
+
+    partial class RootX
+    {    
+        public static IOperationCatalog OperationCatalog(this Assembly a)
+            => a.Designator().Catalog;
     }
 }

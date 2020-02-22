@@ -6,12 +6,9 @@ namespace Z0.Designators
 {        
     using System;
 
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
     public sealed class BitSpan : AssemblyDesignator<BitSpan>
     {
-        const AssemblyId Identity = 0;
+        const AssemblyId Identity = AssemblyId.BitSpanTest;
 
         public override AssemblyId Id 
             => Identity;

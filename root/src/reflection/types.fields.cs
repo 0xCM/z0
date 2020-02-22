@@ -55,7 +55,7 @@ namespace Z0
         {
             var f = t.Fields().Literal().FirstOrDefault();
             if(f != null)
-                return (T)f.GetValue(null);
+                return (T)f.GetRawConstantValue();
             else
                 return @default;
         }

@@ -14,7 +14,10 @@ namespace Z0.Designators
     {
         public override AssemblyRole Role 
             => AssemblyRole.Test;
-    
+
+        public override AssemblyId Id
+            => AssemblyId.BitFieldsTest;
+
         public override void Run(params string[] args)
             => App.Run(args);
     }

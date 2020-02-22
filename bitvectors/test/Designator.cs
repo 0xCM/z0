@@ -11,6 +11,11 @@ namespace Z0.Designators
     public sealed class BitVectorTest : AssemblyDesignator<BitVectorTest>
     {
 
+        const AssemblyId Identity = AssemblyId.BitVectorsTest;
+
+        public override AssemblyId Id 
+            => Identity;
+
         public override AssemblyRole Role 
             => AssemblyRole.Test;
 

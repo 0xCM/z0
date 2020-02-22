@@ -99,5 +99,25 @@ namespace Z0
         /// <param name="immval">The immediate value to attach</param>
         public static OpIdentity WithImm8(this OpIdentity src, byte immval)
             => Identity.imm8Add(src,immval);
+
+        public static string TestCaseName(this MethodInfo method)
+            => Identity.testcase(method);
+
+        public static string TestCaseName(this IExplicitTest unit)
+        {
+            var owner = Identity.owner(unit.GetType());
+            var hostname = unit.GetType().Name;
+            var opname = "explicit";
+            return $"{owner}/{hostname}/{opname}";
+        }
+
+        public static string TestActionName(this IUnitTest unit)
+        {
+            var owner = Identity.owner(unit.GetType());
+            var hostname = unit.GetType().Name;
+            var opname = "action";
+         
+            return $"{owner}/{hostname}/{opname}";
+        }
     }
 }

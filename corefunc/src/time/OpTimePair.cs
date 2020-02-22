@@ -10,7 +10,7 @@ namespace Z0
 
     public readonly struct OpTimePair
     {
-        public static readonly OpTimePair Zero = Define(BenchmarkRecord.Zero, BenchmarkRecord.Zero);
+        public static readonly OpTimePair Zero = Define(BenchmarkRecord.Empty, BenchmarkRecord.Empty);
         
         public static implicit operator OpTimePair((BenchmarkRecord left, BenchmarkRecord right) src)
             => Define(src.left, src.right);

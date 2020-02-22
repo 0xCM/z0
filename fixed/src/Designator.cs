@@ -11,7 +11,7 @@ namespace Z0.Designators
     /// </summary>
     public sealed class Fixed : AssemblyDesignator<Fixed>
     {
-        const AssemblyId Identity = 0;
+        const AssemblyId Identity = AssemblyId.Fixed;
 
         public override AssemblyId Id 
             => Identity;

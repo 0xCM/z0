@@ -12,6 +12,11 @@ namespace Z0.Designators
 
     public sealed class FixedTest : AssemblyDesignator<FixedTest>
     {
+        const AssemblyId Identity = AssemblyId.FixedTest;
+
+        public override AssemblyId Id 
+            => Identity;
+
         public override AssemblyRole Role 
             => AssemblyRole.Test;
     

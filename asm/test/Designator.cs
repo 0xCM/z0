@@ -15,6 +15,9 @@ namespace Z0.Designators
         public override AssemblyRole Role 
             => AssemblyRole.Test;
     
+            public override AssemblyId Id
+            => AssemblyId.AsmCoreTest;
+
         public override IEnumerable<IAssemblyDesignator> Designates
             => new IAssemblyDesignator[]{                
                 GMath.Designated,

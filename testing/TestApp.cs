@@ -48,7 +48,7 @@ namespace Z0
         protected TestCaseRecord[] TakeSortedResults()
         {
             static IEnumerable<TestCaseRecord> Sort(IEnumerable<TestCaseRecord> src)
-                => src.OrderBy(x => x.Operation).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded));
+                => src.OrderBy(x => x.Case).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded));
 
             var results = Sort(TestResultQueue).ToArray();
             TestResultQueue.Clear();
@@ -85,13 +85,13 @@ namespace Z0
             if(!HasAny(host,filters))
                 return;
 
+            var hosturi = Identity.testhosturi(host);
             var results = new List<TestCaseRecord>();
             var unit = default(IUnitTest);
             try
             {
                 var execTime = Duration.Zero;
                 var runtimer = stopwatch();
-                var name = host.DisplayName();
                 var clock = counter(false);
                 
                 unit = host.CreateInstance<IUnitTest>();
@@ -108,16 +108,16 @@ namespace Z0
                     ExecExplicit(et, host.Name,results);
                 else
                 {
-                    iter(Tests(host), t =>  execTime += ExecCase(unit, name, t, results));                                    
+                    iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));                                    
                     Enqueue(unit.TakeBenchmarks().ToArray());
                 }                
                 clock.Stop();
 
-                print(AftUnitMsg(host.Name, clock.Time, tsStart, now()));                
+                print(AftUnitMsg(hosturi, clock.Time, tsStart, now()));                
             }
             catch(Exception e)
             {
-                errout($"Host execution failed: {e}", this);
+                errout($"Harness execution failed: {e}", this);
             }  
             finally
             {
@@ -127,15 +127,6 @@ namespace Z0
             }
         }
 
-        static string DefineTestName(IUnitTest unit, string hostpath, MethodInfo test)
-            => $"{hostpath}/{test.DisplayName()}";
-
-        static string DefineTestName(IExplicitTest unit, string hostpath)
-            => $"{hostpath}/{unit.GetType().DisplayName()}/{nameof(IExplicitTest.Execute)}";
-
-        static string DefineActionName(IUnitTest unit)
-            => $"{unit.GetType().DisplayName()}/action";
-
         const int TestNamePad = 50;
         
         const int TimeStampPad = 30;
@@ -143,8 +134,6 @@ namespace Z0
         const int ElapsedPad = 12;
 
         const string FieldSep = "| ";
-
-
 
         static string ElapsedPlaceholder 
             => string.Empty.PadRight(ElapsedPad);
@@ -187,10 +176,10 @@ namespace Z0
             return AppMsg.Define(fields.Concat(FieldSep), SeverityLevel.HiliteBL);
         }
 
-        static AppMsg AftUnitMsg(string testName, TimeSpan elapsed, DateTime start, DateTime end)
+        static AppMsg AftUnitMsg(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
         {
             var fields = items(
-                FormatName(testName), 
+                FormatName(hosturi), 
                 FormatStatus("completed"), 
                 Format(elapsed), 
                 FormatTs(start), 
@@ -204,38 +193,37 @@ namespace Z0
 
         public Duration RunAction(IUnitTest unit, Action exec)
         {
-
             var messages = new List<AppMsg>();
             var clock = counter(false);
-            var testName = DefineActionName(unit);
+            var casename = unit.TestActionName();
             
             try
             {                
                 unit.Configure(Config);     
                 
                 var tsStart = now();
-                messages.Add(PreCaseMsg(testName, tsStart));                
+                messages.Add(PreCaseMsg(casename, tsStart));                
                 
                 clock.Start();
                 exec();
                 clock.Stop();
 
                 messages.AddRange(unit.DequeuePosts());
-                messages.Add(AftCaseMsg(testName, clock.Time, tsStart, now()));
+                messages.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
 
                 var outcomes = unit.TakeOutcomes().ToArray();                
                 if(outcomes.Length != 0)
                     Enqueue(outcomes);
                 else
-                    Enqueue(TestCaseRecord.Define(testName,true,clock.Time));                              
+                    Enqueue(TestCaseRecord.Define(casename,true,clock.Time));                              
 
             }
             catch(Exception e)
             {
                 clock.Stop();
                 messages.AddRange(unit.DequeuePosts());                
-                messages.AddRange(GetErrorMessages(testName,e));
-                Enqueue(TestCaseRecord.Define(testName,false,clock.Time));                
+                messages.AddRange(GetErrorMessages(casename,e));
+                Enqueue(TestCaseRecord.Define(casename,false,clock.Time));                
             }
             finally
             {            
@@ -274,16 +262,16 @@ namespace Z0
             return messages.ToArray();
         }
 
-        TestCaseRecord[] CollectOutcomes(IExplicitTest unit, string testName, Duration runtime, Exception e = null)
+        TestCaseRecord[] CollectOutcomes(IExplicitTest unit, string casename, Duration runtime, Exception e = null)
         {
             var outcomes = new List<TestCaseRecord>();
             if(e!= null)
-                outcomes.Add(TestCaseRecord.Define(testName,false,runtime));
+                outcomes.Add(TestCaseRecord.Define(casename,false,runtime));
             else
             {
                 outcomes.AddRange(unit.TakeOutcomes());
                 if(outcomes.Count == 0)
-                    outcomes.Add(TestCaseRecord.Define(testName,true,runtime));
+                    outcomes.Add(TestCaseRecord.Define(casename,true,runtime));
             }
             return outcomes.ToArray();
         }
@@ -292,7 +280,7 @@ namespace Z0
         {
             var clock = counter(false);
             var messages = array<AppMsg>();
-            var testName = DefineTestName(unit,hostpath);
+            var casename = unit.TestCaseName();
 
             try
             {
@@ -300,15 +288,15 @@ namespace Z0
                 unit.Execute();
                 clock.Stop();
 
-                messages = CollectMessages(unit, testName,clock);
-                results.AppendRange(CollectOutcomes(unit,testName, clock));                
+                messages = CollectMessages(unit, casename,clock);
+                results.AppendRange(CollectOutcomes(unit, casename, clock));                
 
             }
             catch(Exception e)
             {
                 clock.Stop();
-                messages = CollectMessages(unit, testName, clock, e);
-                results.AppendRange(CollectOutcomes(unit,testName, clock,e));
+                messages = CollectMessages(unit, casename, clock, e);
+                results.AppendRange(CollectOutcomes(unit,casename, clock,e));
             }
             finally
             {            
@@ -318,37 +306,37 @@ namespace Z0
             return clock;
         }
 
-        Duration ExecCase(IUnitTest unit, string hostpath, MethodInfo @case, IList<TestCaseRecord> results)
+        Duration ExecCase(IUnitTest unit, MethodInfo testcase, IList<TestCaseRecord> results)
         {
             var exectime = Duration.Zero;
             var messages = new List<AppMsg>();
-            var testName = DefineTestName(unit, hostpath,@case);
+            var casename = testcase.TestCaseName();
             var clock = counter(false);
 
             try
             {
                 var tsStart = now();
-                messages.Add(PreCaseMsg(testName, tsStart));
+                messages.Add(PreCaseMsg(casename, tsStart));
 
                 clock.Start();
-                @case.Invoke(unit,null);                    
+                testcase.Invoke(unit,null);                    
                 clock.Stop();
 
                 messages.AddRange(unit.DequeuePosts());
-                messages.Add(AftCaseMsg(testName, clock.Time, tsStart, now()));
+                messages.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
                     results.AppendRange(outcomes);
                 else
-                    results.Add(TestCaseRecord.Define(testName,true,clock.Time));
+                    results.Add(TestCaseRecord.Define(casename, true, clock.Time));
             }
             catch(Exception e)
             {                
                 clock.Stop();
                 messages.AddRange(unit.DequeuePosts());                
-                messages.AddRange(GetErrorMessages(testName,e));
-                results.Add(TestCaseRecord.Define(testName,false,clock.Time));                              
+                messages.AddRange(GetErrorMessages(casename, e));
+                results.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
             }
             finally
             {            

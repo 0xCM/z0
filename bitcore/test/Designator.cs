@@ -4,18 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {        
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
     public sealed class BitCoreTest : AssemblyDesignator<BitCoreTest>
     {
         public override AssemblyRole Role 
             => AssemblyRole.Test;
 
+        public override AssemblyId Id
+            => AssemblyId.BitCoreTest;
+
         public override void Run(params string[] args)
             => App.Run(args);
-
     }
-
 }

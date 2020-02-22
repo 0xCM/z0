@@ -89,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         public string CaseName(string fullname)
-            => Identity.testcase(GetType(),fullname);
+            => Identity.testcase(GetType(), fullname);
 
         /// <summary>
         /// Produces the name of the test case predicated on a root name and parametric type
@@ -224,9 +224,15 @@ namespace Z0
 
         public BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration)
         {
-            var record = BenchmarkRecord.Define(name, opcount, duration);
+            var record = BenchmarkRecord.Define(opcount, duration, name);
             Benchmarks.Enqueue(record);
             return record;
         }
+
+        public void ReportBenchmark(BenchmarkRecord record)
+        {            
+            Benchmarks.Enqueue(record);
+        }
+
     }
 }

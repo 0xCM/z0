@@ -16,38 +16,23 @@ namespace Z0
     /// </summary>
     public readonly struct BenchmarkRecord : IRecord<BenchmarkRecord>
     {
-        public static readonly BenchmarkRecord Zero = new BenchmarkRecord(0, Duration.Zero,string.Empty);
-        
-        [MethodImpl(Inline)]
-        public static implicit operator (long OpCount, Duration WorkTime, string Label)(BenchmarkRecord src)
-            => (src.OpCount, src.Timing,src.Operation);
+        public static BenchmarkRecord Empty => new BenchmarkRecord(0, Duration.Zero,string.Empty);
 
         [MethodImpl(Inline)]
-        public static implicit operator BenchmarkRecord((long OpCount, Duration WorkTime) src)
-            => Define(src.OpCount, src.WorkTime);        
+        static BenchmarkRecord Define(string name, long count, TimeSpan timing)
+            => new BenchmarkRecord(count, timing, name);
 
         [MethodImpl(Inline)]
         public static implicit operator BenchmarkRecord((string opName, long opCount, SystemCounter tickCount) src)
             => Define(src.opName, src.opCount, src.tickCount);        
 
         [MethodImpl(Inline)]
-        public static implicit operator BenchmarkRecord((long OpCount, Duration WorkTime, string Label) src)
-            => Define(src.OpCount, src.WorkTime, src.Label);        
-
-        [MethodImpl(Inline)]
-        public static implicit operator BenchmarkRecord((long OpCount, Stopwatch sw, string Label) src)
-            => Define(src.OpCount, snapshot(src.sw), src.Label);        
-
-        [MethodImpl(Inline)]
-        public static BenchmarkRecord Define(long count, Duration timing, string label = null)
+        public static BenchmarkRecord Define(long count, Duration timing, string label)
             => new BenchmarkRecord(count, timing, label);
 
-        [MethodImpl(Inline)]
-        public static BenchmarkRecord Define(string name, long count, TimeSpan timing)
-            => new BenchmarkRecord(count, timing, name);
 
         [MethodImpl(Inline)]
-        public BenchmarkRecord(long count, Duration timing, string Label)
+        BenchmarkRecord(long count, Duration timing, string Label)
         {
             this.Operation = Label ?? "?";
             this.OpCount = count;

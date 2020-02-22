@@ -18,32 +18,15 @@ namespace Z0
 
         public ReportFieldAttribute(object Width)
         {
-            this.Width = (int)Convert.ChangeType(Width, typeof(int));
             this.Name = string.Empty;
+            this.Width = (int)Convert.ChangeType(Width, typeof(int));
         }
 
-        public ReportFieldAttribute(int Width, int Position)
+        public ReportFieldAttribute(string name, object width = null, int? position = null)
         {
-            this.Width = Width;
-            this.Position = Position;
-        }
-
-        public ReportFieldAttribute(string Name)
-        {
-            this.Name = Name;
-        }
-
-        public ReportFieldAttribute(string Name, int Width)
-        {
-            this.Name = Name;
-            this.Width = Width;
-        }
-
-        public ReportFieldAttribute(string Name, int Width, int Position)
-        {
-            this.Name = Name;
-            this.Width = Width;
-            this.Position = Position;
+            this.Name = name;
+            this.Position = position;
+            this.Width = width != null ? (int)Convert.ChangeType(width, typeof(int)) : (int?)null;
         }
 
         public string Name {get;}
@@ -51,6 +34,5 @@ namespace Z0
         public int? Position {get;}
         
         public int? Width {get;}
-
     }
 }

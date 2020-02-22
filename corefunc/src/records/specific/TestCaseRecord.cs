@@ -14,30 +14,34 @@ namespace Z0
     /// </summary>
     public class TestCaseRecord : IRecord<TestCaseRecord>
     {
-        public static TestCaseRecord Define(string Operation, bool Succeeded, Duration Duration)
-            => new TestCaseRecord(Operation, Succeeded, Duration);
+        public static TestCaseRecord Define(string name, bool success, Duration duration)
+            => new TestCaseRecord(name, success, duration);
         
-        public TestCaseRecord(string Operation, bool Succeeded, Duration Duration)
+        TestCaseRecord(string Case, bool Succeeded, Duration Duration)
         {
-            this.Operation = Operation;
+            this.Case = Case;
             this.Succeeded = Succeeded;
             this.Duration = Duration;
             this.Executed = now();
         }
 
-        public string Operation {get;set;}
+        [ReportField(CasePad)]
+        public string Case {get;set;}
 
+        [ReportField(OutcomePad)]
         public bool Succeeded {get;set;}
 
+        [ReportField(DurationPad)]
         public Duration Duration {get;set;}
 
+        [ReportField]
         public DateTime Executed {get;}
 
         const string YEA = "verified";
         
         const string BOO = "failed";
 
-        const int OperationPad = 75;
+        const int CasePad = 75;
 
         const int OutcomePad = 10;
 
@@ -48,7 +52,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
             => concat(
-                $"{Operation.PadRight(OperationPad)}{delimiter}" + AsciSym.Space, 
+                $"{Case.PadRight(CasePad)}{delimiter}" + AsciSym.Space, 
                 $"{Outcome.PadRight(OutcomePad)}{delimiter}" + AsciSym.Space, 
                 $"{Duration.Ms.ToString().PadRight(DurationPad)}{delimiter}" + AsciSym.Space,
                 $"{Executed.ToLexicalString()}"
@@ -56,7 +60,7 @@ namespace Z0
 
         public IReadOnlyList<string> GetHeaders()
             => new string[]{
-                                nameof(Operation).PadRight(OperationPad), 
+                                nameof(Case).PadRight(CasePad), 
                 AsciSym.Space + nameof(Outcome).PadRight(OutcomePad), 
                 AsciSym.Space + nameof(Duration).PadRight(DurationPad),
                 AsciSym.Space + nameof(Executed)
