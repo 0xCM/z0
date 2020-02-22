@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source code (pun intended)</param>
         [MethodImpl(Inline)]
-        public static ExecBufferToken Load(this ExecBufferToken buffer, in AsmCode src)
+        public static BufferToken Load(this BufferToken buffer, in AsmCode src)
         {
             buffer.Fill(src.Encoded);
             return buffer;

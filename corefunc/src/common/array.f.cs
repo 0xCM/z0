@@ -11,6 +11,15 @@ using Z0;
 
 partial class zfunc
 {
+    /// <summary>
+    /// Explicitly casts a source value to value of the indicated type, raising an exception if operation fails
+    /// </summary>
+    /// <param name="src">The source value</param>
+    /// <typeparam name="T">The target type</typeparam>
+    [MethodImpl(Inline)]   
+    public static T cast<T>(object src) 
+        => (T) src;
+
     [MethodImpl(Inline)]   
     public static T[] array<T>(params T[] src)
         => src;

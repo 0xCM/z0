@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Represents a potential value
@@ -21,7 +19,6 @@ namespace Z0
         /// The encapsulated value, iff Exists is true
         /// </summary>
         readonly T value;
-
 
         /// <summary>
         /// Specifies whether the option has a value
@@ -39,7 +36,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static Option<T> None()
-            => new Option<T>();
+            => default;
         
         /// <summary>
         /// Defines a valued option
@@ -48,6 +45,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<T> Some(T Value)
             => new Option<T>(Value);
+
+        /// <summary>
+        /// Initializes a valued option
+        /// </summary>
+        /// <param name="value">The encapsulated value</param>
+        [MethodImpl(Inline)]
+        Option(T value)
+        {
+            this.value = value;
+            this.Exists = true;
+        }
         
         [MethodImpl(Inline)]
         public static implicit operator Option<T>(T x)
@@ -60,9 +68,7 @@ namespace Z0
         /// <param name="rhs">The second value</param>
         [MethodImpl(Inline)]
         public static bool operator == (Option<T> lhs, Option<T> rhs)
-            => (lhs.IsNone() && rhs.IsNone())  
-                ? true 
-                : (lhs.Exists && rhs.Exists && lhs.value.Equals(rhs.value));
+            => (lhs.IsNone() && rhs.IsNone())  ? true : (lhs.Exists && rhs.Exists && lhs.value.Equals(rhs.value));
 
         /// <summary>
         /// Implements value-based equality negation
@@ -97,17 +103,6 @@ namespace Z0
         public static bool operator !(Option<T> x)
             => !x.Exists;
 
-        /// <summary>
-        /// Initializes a valued option
-        /// </summary>
-        /// <param name="value">The encapsulated value</param>
-        /// <param name="message">An optional message</param>
-        [MethodImpl(Inline)]
-        public Option(T value)
-        {
-            this.Exists = (value != null);
-            this.value = value;
-        }
 
         /// <summary>
         /// Returns true if the value exists
@@ -160,29 +155,41 @@ namespace Z0
         /// Yields the encapulated value if present; otherwise, raises an exception
         /// </summary>
         [MethodImpl(Inline)]
-        public T Require([CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int linenumber = 0)
-            =>  Exists ? value : throw new Exception<T>("Value doesn't exist", caller, file, linenumber);
+        public T Require()
+            =>  Exists ? value : throw new Exception<T>("Value doesn't exist");
                     
         public T Default 
-            => default;
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
 
         bool IOption.IsSome 
-            => Exists;
+        {
+            [MethodImpl(Inline)]
+            get => Exists;
+        }
 
         bool IOption.IsNone 
-            => !Exists;
+        {
+            [MethodImpl(Inline)]
+            get => !Exists;
+        }
 
         /// <summary>
         /// The type of the encapsulated value, if present
         /// </summary>
         public Type ValueType
-            => typeof(T);
+        {
+            [MethodImpl(Inline)]
+            get => typeof(T);
+        }
 
         /// <summary>
         /// Extracts the encapulated value if it exists; otherwise, returns the default value for
         /// the underlying type which is NULL for reference types
         /// </summary>
-        /// <param name="default"></param>
+        /// <param name="default">The value to return if the option is non-valued</param>
         [MethodImpl(Inline)]
         public T ValueOrDefault(T @default = default(T))
             => Exists ? value : @default;
@@ -321,34 +328,5 @@ namespace Z0
 
         public bool Equals(Option<T> other)
             => Option.eq(this, other);
-    }
-
-    /// <summary>
-    /// Characterizes an untyped optional value
-    /// </summary>
-    public interface IOption
-    {
-
-        /// <summary>
-        /// True if a value does exists, false otherwise
-        /// </summary>
-        bool IsSome { get; }
-
-        /// <summary>
-        /// True if a value does not exist, false otherwise
-        /// </summary>
-        bool IsNone { get; }
-
-    }
-
-    /// <summary>
-    /// Characterizes an typed optional value
-    /// </summary>
-    public interface IOption<T> : IOption
-    {
-        /// <summary>
-        /// The encapsualted value, if any
-        /// </summary>
-        T Value { get; }
     }
 }

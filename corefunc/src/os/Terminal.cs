@@ -104,7 +104,6 @@ namespace Z0
                 Console.Error.Write(zfunc.eol());
                 Console.ForegroundColor = fg;
             }
-
         }
 
         public void WriteError(AppMsg msg)
@@ -117,9 +116,7 @@ namespace Z0
                 Console.Error.Write(zfunc.eol());
                 Console.ForegroundColor = fg;
             }
-
         }
-
 
         public void Write(object src, ConsoleColor color)
         {

@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     
     /// <summary>
     /// Correlates a value with a key that uniquely identifies

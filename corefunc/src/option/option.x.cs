@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class xfunc
+    public static class OptionX
     {
         [MethodImpl(Inline)]
         public static T ValueOrElse<T>(this T? x,  Func<T> @else)
@@ -122,7 +122,6 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The value type</typeparam>
         /// <param name="options">The options to examine</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static IEnumerable<T> Values<T>(this IEnumerable<Option<T>> options)
             => options.WhereSome().Select(x => x.ValueOrDefault());
@@ -161,14 +160,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Logically equivalent to <see cref="Enumerable.Single{TSource}(IEnumerable{TSource})"/>, but returns None
-        /// in lieu of throwing an exception if there is not exactly one item in the sequence
+        /// Returns a value if the source stream yeilds exactly one value; otherwise, returns none
         /// </summary>
-        /// <typeparam name="TValue"></typeparam>
-        /// <param name="values"></param>
+        /// <param name="src">The source stream</param>
+        /// <typeparam name="T">The stream element type</typeparam>
         [MethodImpl(Inline)]
-        public static Option<TValue> TryGetSingle<TValue>(this IEnumerable<TValue> values)
-            => values.Count() == 1 ? values.Single() : none<TValue>();
+        public static Option<T> TryGetSingle<T>(this IEnumerable<T> src)
+            => src.Count() == 1 ? src.Single() : none<T>();
 
         /// <summary>
         /// Returns the first element of the sequence that satisifies the predicate, if any.
@@ -176,24 +174,22 @@ namespace Z0
         /// <param name="src">The sequence to search</param>
         /// <param name="predicate">The predicate to satiisfy</param>
         /// <typeparam name="T">The element type</typeparam>
-        /// <returns>A valued option, if found; otherwise, none</returns>
         [MethodImpl(Inline)]
         public static Option<T> TryFind<T>(this IEnumerable<T> src, Func<T,bool> predicate)
             => src.FirstOrDefault(predicate);
 
         /// <summary>
-        /// Logically equivalent to <see cref="Enumerable.Single{TSource}(IEnumerable{TSource})"/>, but returns None
-        /// in lieu of throwing an exception if there is not exactly one item in the sequence
+        /// Returns a value if the source stream yeilds exactly one value that satisfied a predicate; otherwise, returns none
         /// </summary>
-        /// <typeparam name="X">The stream item type</typeparam>
         /// <param name="stream">The stream to search</param>
         /// <param name="predicate">The predicate to match</param>
+        /// <typeparam name="T">The stream item type</typeparam>
         [MethodImpl(Inline)]
-        public static Option<X> TryGetSingle<X>(this IEnumerable<X> stream, Func<X, bool> predicate)
+        public static Option<T> TryGetSingle<T>(this IEnumerable<T> stream, Func<T, bool> predicate)
         {
             var satisfied = stream.Where(predicate).ToList();
             if (satisfied.Count != 1)
-                return none<X>();
+                return none<T>();
             else
                 return satisfied[0];
         }
@@ -208,7 +204,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<X> TryGetFirst<X>(this IEnumerable<X> stream, Func<X, bool> predicate)
             => stream.FirstOrDefault(predicate);
-
 
         /// <summary>
         /// Selects the subsequence for which values exist, if any

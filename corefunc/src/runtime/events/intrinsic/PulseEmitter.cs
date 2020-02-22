@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Timers;
-    using System.Threading.Tasks;
 
     using static zfunc;
 
@@ -28,7 +27,7 @@ namespace Z0
         
         void OnPulse(object sender, ElapsedEventArgs args)
         {
-            Context.EventLog.Pulse(PulseEvent.Define(ServerId, AgentId, SystemTime.Timestamp()));      
+            Context.EventLog.Pulse(PulseEvent.Define(ServerId, AgentId, TimestampService.Timestamp()));      
         }
 
         Timer Timer {get;}

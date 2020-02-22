@@ -23,11 +23,11 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(int))
-                sample.uniform(Source, int32(DistSpec.Min), int32(DistSpec.Max), span32i(buffer));
+                sample.uniform(Source, int32(DistSpec.Min), int32(DistSpec.Max), SpanOps.span32i(buffer));
             else if(typeof(T) == typeof(float))
-                sample.uniform(Source, float32(DistSpec.Min), float32(DistSpec.Max), span32f(buffer));
+                sample.uniform(Source, float32(DistSpec.Min), float32(DistSpec.Max), SpanOps.span32f(buffer));
             else if(typeof(T) == typeof(double))
-                sample.uniform(Source, float64(DistSpec.Min), float64(DistSpec.Max), span64f(buffer));
+                sample.uniform(Source, float64(DistSpec.Min), float64(DistSpec.Max), SpanOps.span64f(buffer));
             else 
                 throw unsupported<T>();
 

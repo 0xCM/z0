@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-    using static HexDigit;
 
     /// <summary>
     /// Defines literals corresponding to base-16 digits
@@ -95,8 +90,5 @@ namespace Z0
         /// Specifies 15 base 16
         /// </summary>
         XF = 0xF,
-
     }
-
- 
 }

@@ -55,7 +55,6 @@ namespace Z0
 
         readonly Func<T,T> Worker;
 
-
         ulong CycleCount;
 
         ProcessThread WorkerThread;

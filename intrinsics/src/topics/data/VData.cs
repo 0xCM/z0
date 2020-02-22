@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> load<T>(N512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(CpuVector.vload(n, in head(src)));
+                => Vector512.vgeneric<T>(CpuVector.vload(n, in head(src)));
 
         /// <summary>
         /// Creates a vector that decribes a lo/hi lane merge permutation

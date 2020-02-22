@@ -32,6 +32,7 @@ namespace Z0
             return bytecount;
         }
 
+
         /// <summary>
         /// Copies a specified number source cells to the target and returns the count of copied bytes
         /// </summary>

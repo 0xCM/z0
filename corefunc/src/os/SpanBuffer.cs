@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines an unmanaged/immovable buffer that requires explicit allocation and disposal
     /// </summary>
-    public unsafe readonly ref struct SpanBuffer
+    public readonly ref struct SpanBuffer
     {
         /// <summary>
         /// The native allocation reference
@@ -58,7 +58,6 @@ namespace Z0
             this.Handle = handle;
             this.Content = content;
         }
-
 
         /// <summary>
         /// Presents buffer content as span of specified cell type
@@ -105,8 +104,6 @@ namespace Z0
                 => Fill(content.AsSpan().ReadOnly());
 
         public void Dispose()
-        {
-            Marshal.FreeHGlobal(Handle);
-        }
+            => OS.Release(Handle); 
     }
 }

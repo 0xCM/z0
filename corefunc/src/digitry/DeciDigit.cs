@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using static DeciDigit;
 
     /// <summary>
     /// Defines the literals that constitute the base-10 digits
@@ -63,9 +60,6 @@ namespace Z0
         /// Specifies 9 base 10
         /// </summary>
         D9 = 9,
-
         
     }
-
-
 }

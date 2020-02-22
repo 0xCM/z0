@@ -10,61 +10,45 @@ namespace Z0
     
     using static zfunc;
 
-    public readonly ref struct ExecBuffer
+    public readonly struct ExecBuffer : IDisposable
     {
-        [MethodImpl(Inline)]
-        public static ExecBuffer Share(IntPtr handle, int length)
-            => new ExecBuffer(handle, length, true);
-
-        // [MethodImpl(Inline)]
-        // public static ExecBuffer Own(IntPtr handle, int length)
-        //     => new ExecBuffer(handle, length, false);
-
-        [MethodImpl(Inline)]
-        public static ExecBuffer Own(ExecBufferToken token)
-            => new ExecBuffer(token, false);
-
-        [MethodImpl(Inline)]
-        public static ExecBuffer Share(ExecBufferToken token)
-            => new ExecBuffer(token, true);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ExecBufferToken(ExecBuffer src)
-            => src.Token;
-
-        [MethodImpl(Inline)]
-        ExecBuffer(IntPtr handle, int length, bool shared)
-        {
-            this.Handle = handle;
-            this.Length = length;
-            this.Shared = shared;
-        }
-
-        [MethodImpl(Inline)]
-        ExecBuffer(ExecBufferToken token, bool shared)
-        {
-            this.Handle = token.Handle;
-            this.Length = token.Length;
-            this.Shared = shared;
-        }
-
         public readonly IntPtr Handle;
 
         public readonly int Length;
 
-        public ExecBufferToken Token
-        {
-            [MethodImpl(Inline)]
-            get => new ExecBufferToken(Handle, Length);
-        }
-        
-        readonly bool Shared;
+        [MethodImpl(Inline)]
+        public static ExecBuffer Own(BufferToken token)
+            => new ExecBuffer(token);
 
         [MethodImpl(Inline)]
-        public void Dispose()
+        public static implicit operator BufferToken(ExecBuffer src)
+            => src.Token;
+
+        [MethodImpl(Inline)]
+        ExecBuffer(BufferToken token)
         {
-            if(!Shared)
-                OS.Release(Handle);
+            this.Handle = token.Handle;
+            this.Length = token.Length;
         }
+
+        public BufferToken Token
+        {
+            [MethodImpl(Inline)]
+            get => new BufferToken(Handle, Length);
+        }
+
+        /// <summary>
+        /// Presents the allocation via a span
+        /// </summary>
+        public unsafe Span<byte> Data
+        {
+            [MethodImpl(Inline)]
+            get => new Span<byte>(Handle.ToPointer(), Length);
+        }
+        
+        [MethodImpl(Inline)]
+        public void Dispose()
+            => OS.Release(Handle);
+
     }
 }

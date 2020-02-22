@@ -7,12 +7,10 @@ namespace Z0.Machines
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
     using static zfunc;
-    using System.Diagnostics;
 
     /// <summary>
     /// Defines a state machine with minimal feature-set
@@ -38,7 +36,6 @@ namespace Z0.Machines
         /// Records the time spent actively running
         /// </summary>
         Stopwatch Runtime {get;}
-
 
         /// <summary>
         /// The machine transition function
@@ -151,7 +148,7 @@ namespace Z0.Machines
         /// </summary>
         public void Start()
         {
-            StartTime = SystemTime.Timestamp();
+            StartTime = TimestampService.Timestamp();
         }
 
         bool CanProcess()
@@ -211,7 +208,7 @@ namespace Z0.Machines
 
         void OnComplete(bool asPlanned)
         {
-            EndTime = SystemTime.Timestamp();
+            EndTime = TimestampService.Timestamp();
             Runtime.Stop();
             Completed?.Invoke(QueryStats(), asPlanned);
         }
@@ -223,7 +220,6 @@ namespace Z0.Machines
             OnEntry(s1);
             TransitionCount++;
         }
-
 
         /// <summary>
         /// Called upon state entry
@@ -250,8 +246,7 @@ namespace Z0.Machines
         void OnReceipt(E input)        
         {
             ReceiptCount++;
-            Try(() => InputReceipt?.Invoke(input));            
-
+            Try(() => InputReceipt?.Invoke(input));
         }
 
         void OnWarning(AppMsg msg)
@@ -266,12 +261,9 @@ namespace Z0.Machines
             Try(() => Oops?.Invoke(e));
 
             OnComplete(false);
-
-        }
-                     
+        }                     
     }
-
-    
+   
     public class ReceiptLimitExceeded : AppException
     {
         public static ReceiptLimitExceeded Define(string machine, ulong limit)

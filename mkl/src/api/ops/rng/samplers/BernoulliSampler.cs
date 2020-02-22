@@ -23,7 +23,7 @@ namespace Z0.Mkl
         {
             
             if(typeof(T) == typeof(int))
-                sample.bernoulli(Source,  DistSpec, span32i(buffer));
+                sample.bernoulli(Source,  DistSpec, SpanOps.span32i(buffer));
             else 
                 throw unsupported<T>();
             

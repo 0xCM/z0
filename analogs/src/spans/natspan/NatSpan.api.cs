@@ -14,6 +14,17 @@ namespace Z0
     public static class NatSpan
     {
         /// <summary>
+        /// Loads a bytespan of natural length from a generic source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline)]
+        public static NatSpan<N,byte> bytes<N,T>(Span<T> src, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => NatSpan.load(MemoryMarshal.AsBytes(src),n);
+
+        /// <summary>
         /// Allocates span of natural length
         /// </summary>
         /// <param name="n">The cell count representative</param>
@@ -79,5 +90,4 @@ namespace Z0
             return load(src,n);
         }
     }
-
 }

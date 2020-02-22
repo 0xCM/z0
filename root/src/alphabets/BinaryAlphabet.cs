@@ -14,7 +14,6 @@ namespace Z0
 
     using A = BinaryAlphabet;
 
-
     /// <summary>
     /// Defines an alphabet constructed from exactly two symbols, zero and one
     /// </summary>

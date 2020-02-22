@@ -13,7 +13,7 @@ namespace Z0
     
     using static zfunc;
 
-    partial class xfunc
+    public static class ConvertExtensions
     {
         /// <summary>
         /// Converts the source value to an array of bytes
@@ -470,6 +470,5 @@ namespace Z0
         public static T[] Convert<T>(this double[] src)
             where T : unmanaged
                 => src.Convert<double,T>();
-
     }
 }

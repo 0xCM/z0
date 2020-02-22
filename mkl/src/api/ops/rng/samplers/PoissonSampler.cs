@@ -25,7 +25,7 @@ namespace Z0.Mkl
         {
             
             if(typeof(T) == typeof(int))
-                sample.poisson(Source,  float64(DistSpec.Rate), span32i(buffer));
+                sample.poisson(Source,  float64(DistSpec.Rate), SpanOps.span32i(buffer));
             else 
                 throw unsupported<T>();
             

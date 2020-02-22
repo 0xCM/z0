@@ -19,35 +19,35 @@ namespace Z0
     public static partial class Dynop
     {
         [MethodImpl(Inline)]
-        public static FixedDelegate UnaryOp(this ExecBufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
+        public static FixedDelegate UnaryOp(this BufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
             => buffer.Handle.FixedFunc(id, functype: operatorType, result: operandType, args: operandType);
 
         [MethodImpl(Inline)]
-        public static FixedDelegate BinaryOp(this ExecBufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
+        public static FixedDelegate BinaryOp(this BufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
             => buffer.Handle.FixedFunc(id,functype:operatorType, result:operandType, args: array(operandType, operandType));
 
         [MethodImpl(Inline)]
-        public static FixedDelegate TernaryOp(this ExecBufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
+        public static FixedDelegate TernaryOp(this BufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
             => buffer.Handle.FixedFunc(id, functype:operatorType, result:operandType, args: array(operandType, operandType,operandType));
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 BinaryOp(this ExecBufferToken buffer, N8 w, in AsmCode src)
+        public static BinaryOp8 BinaryOp(this BufferToken buffer, N8 w, in AsmCode src)
             => buffer.Load(src).BinaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 BinaryOp(this ExecBufferToken buffer, N16 w, in AsmCode src)
+        public static BinaryOp16 BinaryOp(this BufferToken buffer, N16 w, in AsmCode src)
             => buffer.Load(src).BinaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 BinaryOp(this ExecBufferToken buffer, N32 w, in AsmCode src)
+        public static BinaryOp32 BinaryOp(this BufferToken buffer, N32 w, in AsmCode src)
             => buffer.Load(src).BinaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 BinaryOp(this ExecBufferToken buffer, N64 w, in AsmCode src)
+        public static BinaryOp64 BinaryOp(this BufferToken buffer, N64 w, in AsmCode src)
             => buffer.Load(src).BinaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static BinaryOp128 BinaryOp(this ExecBufferToken buffer, N128 w, in AsmCode src)
+        public static BinaryOp128 BinaryOp(this BufferToken buffer, N128 w, in AsmCode src)
             => buffer.Load(src).BinaryOp(w, src.Id);
 
         /// <summary>
@@ -56,35 +56,35 @@ namespace Z0
         /// <param name="address">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256 BinaryOp(this ExecBufferToken buffer, N256 w, OpIdentity id)
+        public static BinaryOp256 BinaryOp(this BufferToken buffer, N256 w, OpIdentity id)
             => (BinaryOp256)buffer.BinaryOp(id, typeof(BinaryOp256), typeof(Fixed256));
 
         [MethodImpl(Inline)]
-        public static BinaryOp256 BinaryOp(this ExecBufferToken buffer, N256 w, in AsmCode src)
+        public static BinaryOp256 BinaryOp(this BufferToken buffer, N256 w, in AsmCode src)
             => buffer.Load(src).BinaryOp(w, src.Id); 
 
         [MethodImpl(Inline)]
-        public static UnaryOp8 UnaryOp(this ExecBufferToken buffer, N8 w, in AsmCode src)
+        public static UnaryOp8 UnaryOp(this BufferToken buffer, N8 w, in AsmCode src)
             => buffer.Load(src).UnaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static UnaryOp16 UnaryOp(this ExecBufferToken buffer, N16 w, in AsmCode src)               
+        public static UnaryOp16 UnaryOp(this BufferToken buffer, N16 w, in AsmCode src)               
             => buffer.Load(src).UnaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static UnaryOp32 UnaryOp(this ExecBufferToken buffer, N32 w, in AsmCode src)
+        public static UnaryOp32 UnaryOp(this BufferToken buffer, N32 w, in AsmCode src)
             => buffer.Load(src).UnaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static UnaryOp64 UnaryOp(this ExecBufferToken buffer, N64 w, in AsmCode src)
+        public static UnaryOp64 UnaryOp(this BufferToken buffer, N64 w, in AsmCode src)
             => buffer.Load(src).UnaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static UnaryOp128 UnaryOp(this ExecBufferToken buffer, N128 w, in AsmCode src)
+        public static UnaryOp128 UnaryOp(this BufferToken buffer, N128 w, in AsmCode src)
             => buffer.Load(src).UnaryOp(w, src.Id);
 
         [MethodImpl(Inline)]
-        public static UnaryOp256 UnaryOp(this ExecBufferToken buffer, N256 w, in AsmCode src)
+        public static UnaryOp256 UnaryOp(this BufferToken buffer, N256 w, in AsmCode src)
             => buffer.Load(src).UnaryOp(w, src.Id);
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="address">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static UnaryOp8 UnaryOp8(this ExecBufferToken buffer, N8 w, OpIdentity id)
+        public static UnaryOp8 UnaryOp8(this BufferToken buffer, N8 w, OpIdentity id)
             => (UnaryOp8)buffer.UnaryOp(id, typeof(UnaryOp8), typeof(Fixed8));
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static UnaryOp8 UnaryOp(this ExecBufferToken buffer, N8 w, OpIdentity id)
+        public static UnaryOp8 UnaryOp(this BufferToken buffer, N8 w, OpIdentity id)
             => (UnaryOp8)buffer.UnaryOp(id, typeof(UnaryOp8), typeof(Fixed8));
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static UnaryOp16 UnaryOp(this ExecBufferToken buffer, N16 w, OpIdentity id)
+        public static UnaryOp16 UnaryOp(this BufferToken buffer, N16 w, OpIdentity id)
             => (UnaryOp16)buffer.UnaryOp(id, typeof(UnaryOp16), typeof(Fixed16));
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static UnaryOp32 UnaryOp(this ExecBufferToken buffer, N32 w, OpIdentity id)
+        public static UnaryOp32 UnaryOp(this BufferToken buffer, N32 w, OpIdentity id)
             => (UnaryOp32)buffer.UnaryOp(id, typeof(UnaryOp32), typeof(Fixed32));
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static UnaryOp64 UnaryOp(this ExecBufferToken buffer, N64 w, OpIdentity id)
+        public static UnaryOp64 UnaryOp(this BufferToken buffer, N64 w, OpIdentity id)
             => (UnaryOp64)buffer.UnaryOp(id, typeof(UnaryOp64), typeof(Fixed64));
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static UnaryOp128 UnaryOp(this ExecBufferToken buffer, N128 w, OpIdentity id)
+        public static UnaryOp128 UnaryOp(this BufferToken buffer, N128 w, OpIdentity id)
             => (UnaryOp128)buffer.UnaryOp(id, typeof(UnaryOp128), typeof(Fixed128));
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="address">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static UnaryOp256 UnaryOp(this ExecBufferToken buffer, N256 w, OpIdentity id)
+        public static UnaryOp256 UnaryOp(this BufferToken buffer, N256 w, OpIdentity id)
             => (UnaryOp256)buffer.UnaryOp(id, typeof(UnaryOp256), typeof(Fixed256));
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static BinaryOp8 BinaryOp(this ExecBufferToken buffer, N8 w,OpIdentity id)
+        public static BinaryOp8 BinaryOp(this BufferToken buffer, N8 w,OpIdentity id)
             => (BinaryOp8)buffer.BinaryOp(id, typeof(BinaryOp8), typeof(Fixed8));
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static BinaryOp16 BinaryOp(this ExecBufferToken buffer, N16 w, OpIdentity id)
+        public static BinaryOp16 BinaryOp(this BufferToken buffer, N16 w, OpIdentity id)
             => (BinaryOp16)buffer.BinaryOp(id, typeof(BinaryOp16), typeof(Fixed16));
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static BinaryOp32 BinaryOp(this ExecBufferToken buffer,N32 w, OpIdentity id)
+        public static BinaryOp32 BinaryOp(this BufferToken buffer,N32 w, OpIdentity id)
             => (BinaryOp32)buffer.BinaryOp(id, typeof(BinaryOp32), typeof(Fixed32));
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static BinaryOp64 BinaryOp(this ExecBufferToken buffer, N64 w, OpIdentity id)
+        public static BinaryOp64 BinaryOp(this BufferToken buffer, N64 w, OpIdentity id)
             => (BinaryOp64)buffer.BinaryOp(id, typeof(BinaryOp64), typeof(Fixed64));
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128 BinaryOp(this ExecBufferToken buffer, N128 w, OpIdentity id)
+        public static BinaryOp128 BinaryOp(this BufferToken buffer, N128 w, OpIdentity id)
             => (BinaryOp128)buffer.BinaryOp(id, typeof(BinaryOp128), typeof(Fixed128));
 
         /// <summary>

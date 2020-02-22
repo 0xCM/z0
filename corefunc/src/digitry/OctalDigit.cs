@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-    using static HexDigit;
 
     /// <summary>
     /// Defines literals corresponding to base-8 digits
@@ -54,9 +49,6 @@ namespace Z0
         /// <summary>
         /// Specifies 7 base 8
         /// </summary>
-        o7 = 0x7,
-        
+        o7 = 0x7,        
    }
-
- 
 }

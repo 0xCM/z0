@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Security;
+    using System.Diagnostics;
+    using System.Linq;
 
     using static zfunc;
 
@@ -21,19 +23,31 @@ namespace Z0
 
         public static readonly long CounterFrequency;
 
+        public static Process CurrentProcess => Process.GetCurrentProcess();
+
         /// <summary>
         /// The handle for the current process
         /// </summary>
-        public static readonly IntPtr CurrentProcess = System.Diagnostics.Process.GetCurrentProcess().Handle;
+        public static IntPtr ProcessHandle => CurrentProcess.Handle;
+
+        public static string ProcessName => CurrentProcess.ProcessName;
 
         /// <summary>
         /// Gets the OS thread ID, not the "ManagedThreadId" which is useless
         /// </summary>
-        public static uint CurrentThreadId
-        {
-            [MethodImpl(Inline)]
-            get => GetCurrentThreadId();
-        }
+        public static uint CurrentThreadId => GetCurrentThreadId();
+
+        [MethodImpl(Inline)]   
+        static Process IdentifiedProcess(int id)
+            => Process.GetProcessById(id);
+
+        /// <summary>
+        /// Searches for a thread given an OS-assigned id, not the useless clr id
+        /// </summary>
+        /// <param name="threadId">The OS thread Id</param>
+        [MethodImpl(Inline)]   
+        public static Option<ProcessThread> IdentifiedThread(uint threadId)
+            => CurrentProcess.ProcessThreads().FirstOrDefault(t => t.Id == threadId);
 
         /// <summary>
         /// Returns the difference between the current Counter value and a prior counter value
@@ -89,18 +103,10 @@ namespace Z0
         /// <summary>
         /// Deallocates a native allocation
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The allocation handle</param>
         [MethodImpl(Inline)]
         public static void Release(IntPtr handle)
-            => Marshal.FreeHGlobal(handle);            
-
-        /// <summary>
-        /// Allocates a non-gc'd buffer with user-managed lifecycle
-        /// </summary>
-        /// <param name="length">The buffer length in bytes</param>
-        [MethodImpl(Inline)]
-        public static NativeBuffer NativeAlloc(int length)
-            => NativeBuffer.Own((OS.Liberate(Marshal.AllocHGlobal(length), length),length));
+            => Marshal.FreeHGlobal(handle);
 
         [MethodImpl(Inline)]
         public static SpanBuffer SpanAlloc(int length)
@@ -122,12 +128,12 @@ namespace Z0
         /// <summary>
         /// Enables an executable memory segment
         /// </summary>
-        /// <param name="src"></param>
-        /// <param name="length"></param>
+        /// <param name="src">The leading cell pointer</param>
+        /// <param name="length">The length of the segment, in bytes</param>
         [MethodImpl(Inline)]
         public static IntPtr Liberate(IntPtr src, int length)
         {
-            if (!OS.VirtualProtectEx(CurrentProcess, src, (UIntPtr)(ulong)length, 0x40, out uint _))
+            if (!OS.VirtualProtectEx(ProcessHandle, src, (UIntPtr)(ulong)length, 0x40, out uint _))
                 ThrowLiberationError(src, length);
             return src;
         }
@@ -135,15 +141,15 @@ namespace Z0
         /// <summary>
         /// Enables en executable memory segment
         /// </summary>
-        /// <param name="src"></param>
-        /// <param name="length"></param>
+        /// <param name="src">The leading cell reference</param>
+        /// <param name="length">The length of the segment, in bytes</param>
         /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline)]
         public static IntPtr Liberate<T>(ref T src, int length)
             where T : unmanaged
         {
             IntPtr buffer = (IntPtr)Unsafe.AsPointer(ref src);
-            if (!OS.VirtualProtectEx(CurrentProcess, buffer, (UIntPtr)length, 0x40, out uint _))
+            if (!OS.VirtualProtectEx(ProcessHandle, buffer, (UIntPtr)length, 0x40, out uint _))
                 ThrowLiberationError(buffer, length);
             return buffer;
         }
@@ -231,7 +237,7 @@ namespace Z0
             where T : unmanaged
         {
             IntPtr buffer = (IntPtr)(void*)pBuffer;
-            if (!OS.VirtualProtectEx(CurrentProcess, buffer, (UIntPtr)length, 0x40, out uint _))
+            if (!OS.VirtualProtectEx(ProcessHandle, buffer, (UIntPtr)length, 0x40, out uint _))
                 ThrowLiberationError(buffer, length);
             return pBuffer;
         }             

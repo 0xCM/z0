@@ -22,9 +22,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))                
-                random.MarkovSpan(span32f(dst));
+                random.MarkovSpan(SpanOps.span32f(dst));
             else if(typeof(T) == typeof(double))
-                random.MarkovSpan(span64f(dst));
+                random.MarkovSpan(SpanOps.span64f(dst));
             else
                 throw unsupported<T>();
         }

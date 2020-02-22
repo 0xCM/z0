@@ -24,6 +24,6 @@ namespace Z0
         /// Specifies a representation of the buffer that can be safely exposed/passed to client code 
         /// without involving buffer ownership semantics
         /// </summary>
-        ExecBufferToken Token {get;}
+        BufferToken Token {get;}
     }   
 }

@@ -28,7 +28,6 @@ namespace Z0
                 return MathSym.EmptySet;
         }
 
-
         [MethodImpl(Inline)]   
         public static char ToChar(this DeciDigit src)
         {
@@ -192,6 +191,5 @@ namespace Z0
                 NumericBase.Hex => src.FormatHex(),
                 _=> src.ToString(),
             };                    
-
     }
 }

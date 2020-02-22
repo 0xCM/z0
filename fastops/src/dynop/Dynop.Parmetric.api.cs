@@ -73,22 +73,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static UnaryOp<T> UnaryOp<T>(this ExecBufferToken buffer, in AsmCode<T> src)
+        public static UnaryOp<T> UnaryOp<T>(this BufferToken buffer, in AsmCode<T> src)
             where T : unmanaged
                 => buffer.Load(src).UnaryOp<T>(src.Id);
 
         [MethodImpl(Inline)]
-        public static BinaryOp<T> BinaryOp<T>(this ExecBufferToken buffer, in AsmCode<T> src)
+        public static BinaryOp<T> BinaryOp<T>(this BufferToken buffer, in AsmCode<T> src)
             where T : unmanaged
                 => buffer.Load(src).BinaryOp<T>(src.Id);
         
         [MethodImpl(Inline)]
-        public static FixedFunc<T,T> UnaryOp<T>(this ExecBufferToken buffer, in AsmCode src)
+        public static FixedFunc<T,T> UnaryOp<T>(this BufferToken buffer, in AsmCode src)
             where T : unmanaged, IFixed 
                 => buffer.F<T,T>(src);
 
         [MethodImpl(Inline)]
-        public static FixedFunc<T,T,T> BinaryOp<T>(this ExecBufferToken buffer, in AsmCode src)
+        public static FixedFunc<T,T,T> BinaryOp<T>(this BufferToken buffer, in AsmCode src)
             where T : unmanaged, IFixed
                 => buffer.Load(src).F<T,T,T>(src);
 
@@ -100,19 +100,19 @@ namespace Z0
         /// <typeparam name="X0">The first argument type</typeparam>
         /// <typeparam name="R">The return type</typeparam>
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,R> Func<X0,R>(this ExecBufferToken buffer, OpIdentity id )
+        public static FixedFunc<X0,R> Func<X0,R>(this BufferToken buffer, OpIdentity id )
             where X0 : unmanaged, IFixed
             where R : unmanaged, IFixed
                 => (FixedFunc<X0,R>)buffer.Handle.FixedFunc(id, typeof(FixedFunc<X0,R>), typeof(R), typeof(X0));
 
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,R> F<X0,R>(this ExecBufferToken buffer, in AsmCode src)
+        public static FixedFunc<X0,R> F<X0,R>(this BufferToken buffer, in AsmCode src)
             where X0 : unmanaged, IFixed
             where R : unmanaged, IFixed
                 => buffer.Load(src).Func<X0,R>(src.Id);                                
 
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,X1,R> F<X0,X1,R>(this ExecBufferToken buffer, in AsmCode src)
+        public static FixedFunc<X0,X1,R> F<X0,X1,R>(this BufferToken buffer, in AsmCode src)
             where X0 : unmanaged, IFixed
             where X1 : unmanaged, IFixed
             where R : unmanaged, IFixed
@@ -127,7 +127,7 @@ namespace Z0
         /// <typeparam name="X1">The second argument type</typeparam>
         /// <typeparam name="R">The return type</typeparam>
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,X1,R> Func<X0,X1,R>(this ExecBufferToken buffer, OpIdentity id)
+        public static FixedFunc<X0,X1,R> Func<X0,X1,R>(this BufferToken buffer, OpIdentity id)
             where X0 : unmanaged, IFixed
             where X1 : unmanaged, IFixed
             where R : unmanaged, IFixed
@@ -143,7 +143,7 @@ namespace Z0
         /// <typeparam name="X2">The third argument type</typeparam>
         /// <typeparam name="R">The return type</typeparam>
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,X1,X2,R> Func<X0,X1,X2,R>(this ExecBufferToken buffer, OpIdentity id)
+        public static FixedFunc<X0,X1,X2,R> Func<X0,X1,X2,R>(this BufferToken buffer, OpIdentity id)
             where X0 : unmanaged, IFixed
             where X1 : unmanaged, IFixed
             where X2 : unmanaged, IFixed
@@ -161,7 +161,7 @@ namespace Z0
         /// <typeparam name="X3">The fourth argument type</typeparam>
         /// <typeparam name="R">The return type</typeparam>
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,X1,X2,X3,R> Func<X0,X1,X2,X3,R>(this ExecBufferToken buffer, OpIdentity id)
+        public static FixedFunc<X0,X1,X2,X3,R> Func<X0,X1,X2,X3,R>(this BufferToken buffer, OpIdentity id)
             where X0 : unmanaged, IFixed
             where X1 : unmanaged, IFixed
             where X2 : unmanaged, IFixed
@@ -176,7 +176,7 @@ namespace Z0
         /// <param name="name">Identity conferred to the manufactured operator</param>
         /// <typeparam name="T">The primal operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryOp<T> UnaryOp<T>(this ExecBufferToken buffer, OpIdentity id)
+        public static UnaryOp<T> UnaryOp<T>(this BufferToken buffer, OpIdentity id)
             where T : unmanaged
                 => (UnaryOp<T>)buffer.UnaryOp(id,typeof(UnaryOp<T>), typeof(T));
 
@@ -187,7 +187,7 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <typeparam name="T">The primal operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryOp<T> BinaryOp<T>(this ExecBufferToken buffer, OpIdentity id)
+        public static BinaryOp<T> BinaryOp<T>(this BufferToken buffer, OpIdentity id)
             where T : unmanaged
                 => (BinaryOp<T>)buffer.BinaryOp(id,typeof(BinaryOp<T>), typeof(T));
 

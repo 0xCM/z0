@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)workflow/src/z0.workflow.csproj" />        
+    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />  
+  </ItemGroup>
+
+</Project>

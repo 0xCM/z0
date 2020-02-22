@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void part64x1(ulong src, Span<byte> dst)
         {
-            ref var target = ref head64(dst);
+            ref var target = ref SpanOps.head64(dst);
             seek(ref target, 0) = lsb8x1(src);
             seek(ref target, 1) = lsb8x1(src >> 8);
             seek(ref target, 2) = lsb8x1(src >> 16);

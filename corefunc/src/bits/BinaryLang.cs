@@ -41,10 +41,7 @@ namespace Z0
                 var bs = BitString.scalar(i);
                 var bsfmt = bs.Format(true).PadLeft(length, '0');
                 yield return BitString.parse(bsfmt);
-            }
-                
+            }                
         }                
-
     }
-
 }

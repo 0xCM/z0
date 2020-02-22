@@ -153,7 +153,7 @@ namespace Z0
             Claim.eq(z1,z2);
         }
 
-        void CheckBinaryImm<T>(in CaptureExchange exchange, ExecBufferToken buffer, N256 w, string name, byte imm)
+        void CheckBinaryImm<T>(in CaptureExchange exchange, BufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = ImmOpProviders.provider<T>(VK.vk256<T>(), FK.op(n2));

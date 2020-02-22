@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+
     using static DeciDigit;
 
     public static class DeciDigits
@@ -66,6 +66,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static DeciDigit[] Get(uint src)
             => src.ToString().Select(DeciDigits.Parse).ToArray();
-
     }
 }

@@ -190,7 +190,6 @@ namespace Z0
             where T : unmanaged
                 => SpanFunc.apply(GX.nonimpl<T>(), l, r, dst);
 
-
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> cimpl<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
@@ -344,13 +343,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.avg_checked(span8u(src)));
+                return generic<T>(math.avg_checked(SpanOps.span8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.avg_checked(span16u(src)));
+                return generic<T>(math.avg_checked(SpanOps.span16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.avg_checked(span32u(src)));
+                return generic<T>(math.avg_checked(SpanOps.span32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.avg_checked(span64u(src)));
+                return generic<T>(math.avg_checked(SpanOps.span64u(src)));
             else
                 return avg_i(src);
         }           
@@ -360,13 +359,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(math.avg_checked(span8i(src)));
+                return generic<T>(math.avg_checked(SpanOps.span8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(math.avg_checked(span16i(src)));
+                return generic<T>(math.avg_checked(SpanOps.span16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(math.avg_checked(span32i(src)));
+                return generic<T>(math.avg_checked(SpanOps.span32i(src)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(math.avg_checked(span64i(src)));
+                return generic<T>(math.avg_checked(SpanOps.span64i(src)));
             else
                 return fspan.avg(src);
         }           

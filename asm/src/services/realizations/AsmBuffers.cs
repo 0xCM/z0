@@ -46,13 +46,13 @@ namespace Z0
 
         public readonly IAsmContext AsmContext;
 
-        public ExecBufferToken MainExec
+        public BufferToken MainExec
             => MBuffer;
 
-        public ExecBufferToken LeftExec
+        public BufferToken LeftExec
             => LBuffer;
 
-        public ExecBufferToken RightExec
+        public BufferToken RightExec
             => RBuffer;
 
         public readonly ICaptureOps Capture;

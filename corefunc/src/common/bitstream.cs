@@ -5,15 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     
     using static zfunc;
 
     partial class xfunc
     {
+        [MethodImpl(Inline)]
+        public static unsafe T* ToPointer<T>(this IntPtr src)
+            where T : unmanaged
+                => (T*)src.ToPointer();
+
         /// <summary>
         /// Transforms an primal enumerator into a bitstream
         /// </summary>

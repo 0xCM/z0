@@ -24,6 +24,14 @@ namespace Z0
         public static NotSupportedException unsupported<T>()
             => new NotSupportedException($"The invoking operation does not support the type {typeof(T).Name}");
 
+        /// <summary>
+        /// Computes the byte-size of a type
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        [MethodImpl(Inline)]
+        public static ByteSize size<T>()
+            => Unsafe.SizeOf<T>();
+
         [MethodImpl(Inline)]
         public static int bitsize<T>()            
             where T : unmanaged
@@ -55,7 +63,5 @@ namespace Z0
         internal static int IdentityHashCode<T>(in T src)     
             where T : struct, IIdentity<T>
                 => IdentityCommons.IdentityHashCode(src);
-
     }
-
 }

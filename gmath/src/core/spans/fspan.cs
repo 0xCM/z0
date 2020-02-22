@@ -11,8 +11,7 @@ namespace Z0
     using static As;
 
     public static class fspan
-    {
-        
+    {        
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Span<T> sqrt<T>(Span<T> src)
             where T : unmanaged
@@ -27,9 +26,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(avg(span32f(src)));
+                return generic<T>(avg(SpanOps.span32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(avg(span64f(src)));
+                return generic<T>(avg(SpanOps.span64f(src)));
             else            
                 throw unsupported<T>();
         }           

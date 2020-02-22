@@ -19,7 +19,7 @@ namespace Z0
 
         public IAsmContext Context {get;}
 
-        public ExecBufferToken Token {get;}
+        public BufferToken Token {get;}
         
         public IntPtr Handle {get;}
 

@@ -22,9 +22,9 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(uint))
-                sample.bits(Source,  span32u(buffer));
+                sample.bits(Source,  SpanOps.span32u(buffer));
             else if(typeof(T) == typeof(ulong))
-                sample.bits(Source,  span64u(buffer));
+                sample.bits(Source,  SpanOps.span64u(buffer));
             else 
                 throw unsupported<T>();
             

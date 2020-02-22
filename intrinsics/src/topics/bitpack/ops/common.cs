@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ushort maskpack16<T>(in T src)
             where T : unmanaged
-                => vtakemask(ginx.vsll(CpuVector.vload(n128, const64(src)),7));
+                => vtakemask(ginx.vsll(CpuVector.vload(n128, Refs.const64(src)),7));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint maskpack32<T>(in T src)
             where T : unmanaged
-                => vtakemask(ginx.vsll(CpuVector.vload(n256, const64(src)),7));
+                => vtakemask(ginx.vsll(CpuVector.vload(n256, Refs.const64(src)),7));
 
         [MethodImpl(Inline)]
         static ulong maskpack64<T>(in T src)

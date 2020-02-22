@@ -65,13 +65,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vmerge(vcast8i(x), vcast8i(y)));
+                 return Vector512.vgeneric<T>(dinx.vmerge(vcast8i(x), vcast8i(y)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vmerge(vcast16i(x), vcast16i(y)));
+                 return Vector512.vgeneric<T>(dinx.vmerge(vcast16i(x), vcast16i(y)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vmerge(vcast32i(x), vcast32i(y)));
+                 return Vector512.vgeneric<T>(dinx.vmerge(vcast32i(x), vcast32i(y)));
             else
-                 return vgeneric<T>(dinx.vmerge(vcast64i(x), vcast64i(y)));
+                 return Vector512.vgeneric<T>(dinx.vmerge(vcast64i(x), vcast64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -79,13 +79,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vmerge(vcast8u(x), vcast8u(y)));
+                return Vector512.vgeneric<T>(dinx.vmerge(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vmerge(vcast16u(x), vcast16u(y)));
+                return Vector512.vgeneric<T>(dinx.vmerge(vcast16u(x), vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vmerge(vcast32u(x), vcast32u(y)));
+                return Vector512.vgeneric<T>(dinx.vmerge(vcast32u(x), vcast32u(y)));
             else 
-                return vgeneric<T>(dinx.vmerge(vcast64u(x), vcast64u(y)));
+                return Vector512.vgeneric<T>(dinx.vmerge(vcast64u(x), vcast64u(y)));
         }
 
         [MethodImpl(Inline)]

@@ -8,7 +8,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static zfunc;
+    using static Root;
 
     public static class CpuCoreWorker
     {

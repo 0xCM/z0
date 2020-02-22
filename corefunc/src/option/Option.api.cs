@@ -10,6 +10,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
+    using static Root;
+
     public static class Option
     {
         /// <summary>
@@ -26,16 +28,14 @@ namespace Z0
         /// <typeparam name="T">The underlying type</typeparam>
         /// <param name="value">The option value</param>
         /// <param name="message">A related message, if any</param>
-        /// <returns></returns>
         internal static Option<T> some<T>(T value)
             => Option<T>.Some(value);
 
         /// <summary>
         /// Implements the canonical join operation that reduces the monadic depth by one level
         /// </summary>
+        /// <param name="option">The optional option</param>
         /// <typeparam name="T">The encapsulated value</typeparam>
-        /// <param name="option"></param>
-        /// <returns></returns>
         public static Option<T> collapse<T>(Option<Option<T>> option)
             => option.ValueOrDefault(none<T>());
 
@@ -44,7 +44,6 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type of value</typeparam>
         /// <param name="value">The value to lift into option-space</param>
-        /// <returns></returns>
         public static Option<T> eval<T>(T value)
             where T : class
                 => value is null ? none<T>()  : some(value);
@@ -55,7 +54,6 @@ namespace Z0
         /// <typeparam name="A">The source type</typeparam>
         /// <typeparam name="B">The target type</typeparam>
         /// <param name="f"></param>
-        /// <returns></returns>
         public static Func<Option<A>, Option<B>> fmap<A, B>(Func<A, B> f)
             => x => x.TryMap(a => f(a));
 
@@ -66,7 +64,6 @@ namespace Z0
         /// <typeparam name="Y">The target domain type</typeparam>
         /// <param name="x">The point in the monadic space over X</param>
         /// <param name="f">The function to apply to effect the bind</param>
-        /// <returns></returns>
         public static Option<Y> bind<X, Y>(Option<X> x, Func<X, Option<Y>> f)
             => x ? f(x.ValueOrDefault()) : none<Y>();        
 
@@ -94,5 +91,17 @@ namespace Z0
         /// <param name="x">The potential value</param>
         public static string format<X>(in Option<X> x)
             => x.MapValueOrElse(value => value?.ToString() ?? string.Empty, () => string.Empty);
+
+        /// <summary>
+        /// Evaluates a function if a predicate is satisfied; otherwise, returns None
+        /// </summary>
+        /// <typeparam name="X">The type of value to evaluate</typeparam>
+        /// <typeparam name="Y">The evaluation type</typeparam>
+        /// <param name="x">The point of evaluation</param>
+        /// <param name="predicate">A precondition for evaulation to proceed</param>
+        /// <param name="f">The evaluation function</param>
+        [MethodImpl(Inline)]   
+        public static Option<Y> guard<X, Y>(X x, Func<X, bool> predicate, Func<X, Option<Y>> f)
+            => predicate(x) ? f(x) : none<Y>();
     }
 }
