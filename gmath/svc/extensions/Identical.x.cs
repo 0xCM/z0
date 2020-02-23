@@ -10,7 +10,7 @@ namespace Z0
     using static As;
     using static zfunc;
 
-    partial class MathX
+    public static class IdenticalX
     {
         /// <summary>
         /// Returns 1 if left and right blocks cover identical cells and 0 otherwise

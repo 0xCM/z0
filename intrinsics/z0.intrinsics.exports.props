@@ -1,0 +1,7 @@
+﻿<Project>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
+  </ItemGroup>
+
+</Project>

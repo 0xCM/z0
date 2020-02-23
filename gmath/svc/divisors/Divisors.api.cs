@@ -28,7 +28,6 @@ namespace Z0
             where T : unmanaged
                 => new DivisorList<T>(dividend, divisors);
 
-
         [MethodImpl(Inline)]
         public static DivisorIndex<T> DefineIndex<T>(Interval<T> range, IReadOnlyList<DivisorList<T>> lists)
             where T : unmanaged
@@ -89,7 +88,5 @@ namespace Z0
             return result.ToArray();
         }
     }
-
-
 
 }

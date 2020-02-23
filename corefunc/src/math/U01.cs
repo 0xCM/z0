@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Text;
-    using System.Linq;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -19,9 +15,9 @@ namespace Z0
     public readonly struct U01<T>
         where T : unmanaged
     {
-        static readonly T LowerBound = gmath.zero<T>();
+        static readonly T LowerBound = zero<T>();
 
-        static readonly T UpperBound = gmath.one<T>();        
+        static readonly T UpperBound = one<T>();
         
         public static implicit operator Interval<T>(U01<T> src)
             => new Interval<T>(src.Left, src.LeftClosed, src.Right, src.RightClosed);
@@ -75,7 +71,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public U01<T> OpenRight()
             => new U01<T>(LeftClosed, false);
-
     }
-
 }

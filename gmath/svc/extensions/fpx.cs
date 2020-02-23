@@ -9,7 +9,10 @@ namespace Z0
 
     using static zfunc;    
     
-    partial class fpx
+    /// <summary>
+    /// Foating-point extensions
+    /// </summary>
+    public static class fpx
     {
 
         [MethodImpl(Inline)]

@@ -343,13 +343,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.avg_checked(SpanOps.span8u(src)));
+                return generic<T>(avg_checked(SpanOps.span8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.avg_checked(SpanOps.span16u(src)));
+                return generic<T>(avg_checked(SpanOps.span16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.avg_checked(SpanOps.span32u(src)));
+                return generic<T>(avg_checked(SpanOps.span32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.avg_checked(SpanOps.span64u(src)));
+                return generic<T>(avg_checked(SpanOps.span64u(src)));
             else
                 return avg_i(src);
         }           
@@ -359,13 +359,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(math.avg_checked(SpanOps.span8i(src)));
+                return generic<T>(avg_checked(SpanOps.span8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(math.avg_checked(SpanOps.span16i(src)));
+                return generic<T>(avg_checked(SpanOps.span16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(math.avg_checked(SpanOps.span32i(src)));
+                return generic<T>(avg_checked(SpanOps.span32i(src)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(math.avg_checked(SpanOps.span64i(src)));
+                return generic<T>(avg_checked(SpanOps.span64i(src)));
             else
                 return fspan.avg(src);
         }           
@@ -438,5 +438,216 @@ namespace Z0
         public static T max<T>(Span<T> src)
             where T : unmanaged
                 => max(src.ReadOnly());       
+
+
+        [MethodImpl(Inline)]
+        internal static sbyte avg_unchecked(this ReadOnlySpan<sbyte> src)
+        {
+            unchecked
+            {
+                var sum = default(long);
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                return (sbyte)(sum/(long)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static byte avg_unchecked(this ReadOnlySpan<byte> src)
+        {
+            unchecked
+            {
+                var sum = default(ulong);
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                return (byte)(sum/(ulong)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static short avg_unchecked(this ReadOnlySpan<short> src)
+        {
+            unchecked
+            {
+                var sum = default(long);
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                return (short)(sum/(long)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static ushort avg_unchecked(this ReadOnlySpan<ushort> src)
+        {
+            unchecked
+            {
+                var sum = default(ulong);
+
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+
+                return (ushort)(sum/(ulong)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static int avg_unchecked(this ReadOnlySpan<int> src)
+        {
+            unchecked
+            {
+                var sum = default(long);
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                return (int)(sum/(long)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static uint avg_unchecked(this ReadOnlySpan<uint> src)
+        {
+            unchecked 
+            {
+                var sum = default(ulong);
+                
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                
+                return (uint)(sum/(ulong)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static long avg_unchecked(this ReadOnlySpan<long> src)
+        {
+            unchecked
+            {
+                var sum = default(long);
+
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+
+                return sum/src.Length;
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static ulong avg_unchecked(this ReadOnlySpan<ulong> src)
+        {
+            checked
+            {
+                var sum = default(ulong);
+
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+
+                return sum/(ulong)src.Length;
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static sbyte avg_checked(this ReadOnlySpan<sbyte> src)
+        {
+            checked
+            {
+                var sum = default(long);
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                return (sbyte)(sum/(long)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static byte avg_checked(this ReadOnlySpan<byte> src)
+        {
+            checked
+            {
+                var sum = default(ulong);
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                return (byte)(sum/(ulong)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static short avg_checked(this ReadOnlySpan<short> src)
+        {
+            checked
+            {
+                var sum = default(long);
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                return (short)(sum/(long)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static ushort avg_checked(this ReadOnlySpan<ushort> src)
+        {
+            checked
+            {
+                var sum = default(ulong);
+
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+
+                return (ushort)(sum/(ulong)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static int avg_checked(this ReadOnlySpan<int> src)
+        {
+            checked
+            {
+                var sum = default(long);
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                return (int)(sum/(long)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static uint avg_checked(this ReadOnlySpan<uint> src)
+        {
+            checked 
+            {
+                var sum = default(ulong);
+                
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+                
+                return (uint)(sum/(ulong)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static long avg_checked(this ReadOnlySpan<long> src)
+        {
+            checked
+            {
+                var sum = default(long);
+
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+
+                return sum/src.Length;
+            }
+        }
+
+        [MethodImpl(Inline)]
+        internal static ulong avg_checked(this ReadOnlySpan<ulong> src)
+        {
+            checked
+            {
+                var sum = default(ulong);
+
+                for(var i=0; i<src.Length; i++)
+                    sum += src[i];
+
+                return sum/(ulong)src.Length;
+            }
+        }
+
+ 
     }
 }

@@ -10,33 +10,39 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static Pow2;
+
+    public interface IExp<R,B> : IFormattable<R>
+        where B : unmanaged, ITypeNat
+        where R : IExp<R,B>
+    {
+        
+    }
 
     /// <summary>
-    /// Prepresents a power of 2 in compact form
+    /// Defines a natural base raised to a nonnegative integral power
     /// </summary>
-    public readonly struct Pow2<T>
-        where T : unmanaged
+    public readonly struct Exp<B> : IExp<Exp<B>, B>
+        where B : unmanaged, ITypeNat
     {
-        public readonly T Exp;
+        public readonly uint Power;
+
+        public uint Base => (uint)nateval<B>();
 
         [MethodImpl(Inline)]
-        public static Pow2<T> operator *(Pow2<T> a, Pow2<T> b)
-            => new Pow2<T>(gmath.add(a.Exp, b.Exp));
+        public static Exp<B> operator *(Exp<B> a, Exp<B> b)
+            => new Exp<B>(a.Power + b.Power);
 
         [MethodImpl(Inline)]
-        public Pow2(T exp)
+        public Exp(uint exp)
         {
-            this.Exp = exp;
+            this.Power = exp;
         }
         
         public string Format()
-            => $"2^{Exp}";
+            => $"{Base}^{Power}";
 
         public override string ToString()
             => Format();
-
     }
 
- 
 }

@@ -1,0 +1,8 @@
+﻿<Project>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.src.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/svc/z0.gmath.svc.csproj" />
+  </ItemGroup>
+
+</Project>

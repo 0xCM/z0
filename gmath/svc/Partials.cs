@@ -14,4 +14,17 @@ namespace Z0
     {
 
     }
+
+    [ApiHost(ApiHostKind.Generic)]
+    public static partial class mathspan
+    {    
+
+    }
+    
+    public static partial class GXTypes
+    {
+        
+    }
+
+
 }

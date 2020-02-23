@@ -90,13 +90,11 @@ namespace Z0
 
         }
         
-
         public override string ToString()
             => Format();
 
         string FormatScalar(bool abs)
             => abs ? gmath.abs(Scalar).ToString() : Scalar.ToString();
-
     }
 
     /// <summary>

@@ -60,7 +60,6 @@ namespace Z0.Designators
             D.MklApi.Designated,
             D.MklApiTest.Designated,
 
-
             D.Machines.Designated,
             D.MachineTest.Designated,
 
@@ -68,20 +67,8 @@ namespace Z0.Designators
             D.LogixTest.Designated,
 
             D.LibM.Designated,            
-            D.LibMTest.Designated,
+            D.LibMTest.Designated
 
-            D.StatDist.Designated
             );               
-
-        // public Option<IOperationCatalog> FindCatalog(AssemblyId id)
-        // {
-        //     var catalog =(from d in Designated.Designates
-        //         where d is ICatalogProvider && d.Id == id
-        //         select (d as ICatalogProvider).Catalog).FirstOrDefault();
-        //     if(catalog != null && !catalog.IsEmpty)
-        //         return some(catalog);
-        //     else
-        //         return default;
-        // }            
    }
 }

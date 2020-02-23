@@ -37,30 +37,12 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Defines floating-point extensions
-    /// </summary>
-    public static partial class fpx
-    {
-
-    }
 
     public static partial class MathX
     {
 
     }
 
-
-    [ApiHost(ApiHostKind.Generic)]
-    public static partial class mathspan
-    {    
-
-    }
-    
-    public static partial class GXTypes
-    {
-        
-    }
 
     static class App
     {

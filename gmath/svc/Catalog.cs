@@ -17,6 +17,10 @@ namespace Z0
             : base(id)
         {
 
-        }        
+        }
+        
+        public override IEnumerable<Type> ServiceHostTypes
+            => typeof(GXTypes).GetNestedTypes().Realize<IFunc>();
+
     }
 }
