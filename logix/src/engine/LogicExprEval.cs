@@ -9,7 +9,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    [ApiHost("expr.logic.eval")]
+    //[ApiHost("expr.logic.eval",ApiHostKind.Direct)]
     public static class LogicExprEval
     {
         [Op("eval_logic_expr")]

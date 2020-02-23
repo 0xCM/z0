@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static AsIn;
 
-    [ApiHost]
+    [ApiHost(ApiHostKind.Generic)]
     public static class AsNumeric
     {                
         /// <summary>
@@ -25,18 +25,45 @@ namespace Z0
             where T : unmanaged
                 => As_u<S,T>(src);
 
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static byte AsU8<S>(S src)
+            where S : unmanaged
+                => As<S,byte>(src);
 
-        /// <summary>
-        /// Creates an IAsNumeric[S,T] realization via a concrete implementation type
-        /// </summary>
-        /// <typeparam name="R">The concrete reification</typeparam>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The numeric target type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static sbyte AsI8<S>(S src)
+            where S : unmanaged
+             => As<S,sbyte>(src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ushort AsU16<S>(S src)
+            where S : unmanaged
+                => As<S,ushort>(src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static short AsI16<S>(S src)
+            where S : unmanaged
+                => As<S,short>(src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static int AsI32<S>(S src)
+            => As<S,int>(src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static uint AsU32<S>(S src)
+            => As<S,uint>(src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static long AsI64<S>(S src)
+            => As<S,long>(src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ulong AsU64<S>(S src)
+            => As<S,ulong>(src);
+
         [MethodImpl(Inline)]
-        static AsNumeric<R,S,T> Reify<R,S,T>()
-            where T : unmanaged
-            where R : unmanaged, IAsNumeric<S,T>
-                => new AsNumeric<R,S,T>(default(R));
+        public static AsI8<S> I8<S>()        
+            => default(AsI8<S>);
 
         [MethodImpl(Inline)]
         public static AsU8<S> U8<S>()        
@@ -73,6 +100,79 @@ namespace Z0
         [MethodImpl(Inline)]
         public static AsF64<S> F64<S>()        
             => default(AsF64<S>);
+        
+        [MethodImpl(Inline)]
+        static AsU32<S> AsU32<S>()
+            => AsU32<AsU32<S>,S>();
+        
+        [MethodImpl(Inline)]
+        static R AsU32<R,S>()
+            where R : unmanaged, IAsNumeric<R,S,uint>
+                => As<R,S,uint>();
+
+        [MethodImpl(Inline)]
+        static ref readonly R generalize<X,R>(in X src)
+            where R : unmanaged            
+                => ref Unsafe.As<X,R>(ref Unsafe.AsRef(in src));
+
+        [MethodImpl(Inline)]
+        static T As<R,S,T>(S src)
+            where T : unmanaged
+            where R : unmanaged, IAsNumeric<R,S,T>
+                => As_u<R,S,T>().As(src);
+
+        [MethodImpl(Inline)]
+        static R As<R,S,T>()
+            where T : unmanaged
+            where R : unmanaged, IAsNumeric<R,S,T>
+                => As_u<R,S,T>();
+
+        [MethodImpl(Inline)]
+        static R As_u<R,S,T>()
+            where T : unmanaged
+            where R : unmanaged, IAsNumeric<R,S,T>
+        {
+            if(typeof(T) == typeof(byte))            
+                return generalize<AsU8<S>,R>(U8<S>());
+            else if(typeof(T) == typeof(ushort))            
+                return generalize<AsU16<S>,R>(U16<S>());
+            else if(typeof(T) == typeof(uint))            
+                return generalize<AsU32<S>,R>(U32<S>());
+            else if(typeof(T) == typeof(ulong))            
+                return generalize<AsU64<S>,R>(U64<S>());
+            else 
+                return As_i<R,S,T>();
+        }
+
+        [MethodImpl(Inline)]
+        static R As_i<R,S,T>()
+            where T : unmanaged
+            where R : unmanaged, IAsNumeric<R,S,T>
+        {
+            if(typeof(T) == typeof(sbyte))            
+                return generalize<AsI8<S>,R>(I8<S>());
+            else if(typeof(T) == typeof(short))            
+                return generalize<AsI16<S>,R>(I16<S>());
+            else if(typeof(T) == typeof(int))            
+                return generalize<AsI32<S>,R>(I32<S>());
+            else if(typeof(T) == typeof(long))            
+                return generalize<AsI64<S>,R>(I64<S>());
+            else 
+                return As_f<R,S,T>();
+        }
+
+        [MethodImpl(Inline)]
+        static R As_f<R,S,T>()
+            where T : unmanaged
+            where R : unmanaged, IAsNumeric<R,S,T>
+        {
+            if(typeof(T) == typeof(byte))            
+                return generalize<AsF32<S>,R>(F32<S>());
+            else if(typeof(T) == typeof(ushort))            
+                return generalize<AsF64<S>,R>(F64<S>());
+            else 
+                throw unsupported<S>();
+        }
 
         [MethodImpl(Inline)]
         static T As_u<S,T>(S src)
@@ -118,10 +218,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
-        public static AsI8<S> I8<S>()        
-            => Reify<AsI8<S>,S,sbyte>();
-
     }
 
     public readonly struct AsNumeric<R,S,T> : IAsNumeric<S,T>
@@ -146,8 +242,7 @@ namespace Z0
     }
 
     public readonly struct AsU8<S> : IAsNumeric<AsU8<S>,S,byte>
-    {        
-        
+    {                
         [MethodImpl(Inline)]
         public byte As(S src)
             => Unsafe.As<S,byte>(ref src);            
@@ -216,7 +311,3 @@ namespace Z0
             => Unsafe.As<S,double>(ref src);
     }    
 }
-
-
-
-

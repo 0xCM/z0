@@ -12,8 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-
-    public static partial class AsmReports
+    public static class AsmReports
     {
         public static Option<Assembly> ResolvedAssembly(this IAsmContext context, AssemblyId id)
             =>  (from r in  context.Compostion.Resolved

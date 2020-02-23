@@ -221,14 +221,14 @@ namespace Z0
         {
             var start = (ulong)pCode;
             var end = start + (ulong)src.Length;            
-            throw new Exception($"Attempting to liberate the memory range [{start.FormatHex(false)},{end.FormatHex(false)}] ({src.Length} bytes) for execution failed");     
+            throw new Exception($"An attempt to liberate {src.Length} bytes of memory for execution failed");     
         }
 
         static void ThrowLiberationError(IntPtr pCode, ByteSize Length)
         {
             var start = (ulong)pCode;
             var end = start + (ulong)Length;            
-            throw new Exception($"Attempting to liberate the memory range [{start.FormatHex(false)},{end.FormatHex(false)}] ({Length} bytes) for execution failed");     
+            throw new Exception($"An attempt to liberate {Length} bytes of memory for execution failed");     
         }
 
 

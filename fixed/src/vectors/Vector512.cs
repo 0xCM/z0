@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
 
-
     /// <summary>
     /// 2x256
     /// </summary>
@@ -20,7 +19,6 @@ namespace Z0
     public readonly struct Vector512<T>
         where T : unmanaged
     {        
-
         /// <summary>
         /// The lo 256 bits 
         /// </summary>

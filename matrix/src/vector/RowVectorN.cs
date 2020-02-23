@@ -144,8 +144,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public RowVector<N,T> Replicate(bool structureOnly = false)
-            => new RowVector<N,T>(data.Replicate(structureOnly));
+        public RowVector<N,T> Replicate()
+            => new RowVector<N,T>(data.Replicate());
 
         [MethodImpl(Inline)]
         public string Format(char? delimiter = null)

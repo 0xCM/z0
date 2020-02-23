@@ -243,11 +243,11 @@ namespace Z0
         /// <param name="x">The expression to examine</param>
         public static Option<MemberInfo> TryGetAccessedMember(this Expression X)
         {
-            var M = tryCast<MemberExpression>(X).ValueOrDefault();
+            var M = Root.TryCast<MemberExpression>(X).ValueOrDefault();
             if (M != null)
                 return M.Member;
             else
-                return tryCast<LambdaExpression>(X).Select(y => y.Body.TryGetAccessedMember().ValueOrDefault());
+                return Root.TryCast<LambdaExpression>(X).Select(y => y.Body.TryGetAccessedMember().ValueOrDefault());
         }
 
         /// <summary>
@@ -256,11 +256,11 @@ namespace Z0
         /// <param name="x">The expression to examine</param>
         public static Option<PropertyInfo> TryGetAccesedProperty(this Expression x)
         {
-            var candiate = tryCast<MemberExpression>(x).Select(GetAccessedProperty);
+            var candiate = Root.TryCast<MemberExpression>(x).Select(GetAccessedProperty);
             if (candiate)
                 return candiate;
             else
-                return tryCast<LambdaExpression>(x).Select(y => y.Body.TryGetAccesedProperty().ValueOrDefault());
+                return Root.TryCast<LambdaExpression>(x).Select(y => y.Body.TryGetAccesedProperty().ValueOrDefault());
         }
 
         public static Option<MemberInfo> TryGetAccessedMember(this BinaryExpression X)
@@ -270,7 +270,7 @@ namespace Z0
             => X.Left.GetValue().ValueOrElse(() => X.Right.GetValue());
 
         public static Option<object> TryGetConstant(this Expression x)
-            => tryCast<ConstantExpression>(x).Select(GetConstant);
+            => Root.TryCast<ConstantExpression>(x).Select(GetConstant);
 
         public static Option<object> GetValue(this Expression X)
         {

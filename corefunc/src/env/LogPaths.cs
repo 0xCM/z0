@@ -65,122 +65,8 @@ namespace Z0
         public FilePath DataPath(FolderName subject, FileName file)
             => Settings.DataDir(subject) + file;
 
-        public FileExtension HexExt
-            => FileExtension.Define("hex");
-
-        public FileExtension RawExt
-            => FileExtension.Define("raw");
-
-        public FileExtension CilExt
-            => FileExtension.Define("il");
-
-        public FileExtension AsmExt
-            => FileExtension.Define("asm");
-
-        public FileName AsmDetailFile(OpIdentity m)
-            => FileName.Define(m, AsmExt);
-
-        public FileName AsmHexFile(OpIdentity m)
-            => FileName.Define(m, HexExt);
-
-        public FileName AsmRawFile(OpIdentity m)
-            => FileName.Define(m, RawExt);
-
-        public FileName CilFile(OpIdentity m)
-            => FileName.Define(m, CilExt);
-
-        public FolderPath AsmDataRoot
-            => Settings.DataDir(FolderName.Define("asm"));
-
-        public FolderPath AsmReportRoot
-            => Settings.DataDir(FolderName.Define("asm-reports"));
-
-        public FolderPath AsmDataDir(FolderName subject)
-            => AsmDataRoot + subject; 
-
-        public FolderPath AsmDumpDir
-            => AsmDataDir(FolderName.Define(".dumps"));
-
-        public FolderPath AsmDataDir(RelativeLocation location)
-            => AsmDataRoot +  location;
-
-        /// <summary>
-        /// Returns the path to the dissasembly folder for a specified type
-        /// </summary>
-        /// <param name="t">The source type</param>
-        public FolderPath AsmDataDir(Type t)
-            => AsmDataDir(FolderName.Define(t.DisplayName().ToLower()));
-
-        /// <summary>
-        /// Returns the path to the primary dissasembly file for a specified type and operation name
-        /// </summary>
-        /// <param name="t">The source type</param>
-        /// <param name="m">The operation identifier</param>
-        public FilePath AsmInfoPath(Type t, OpIdentity m)
-            => AsmDataDir(t) + AsmDetailFile(m);
-
-        /// <summary>
-        /// Returns the path to the asm info file for an identified operation
-        /// </summary>
-        /// <param name="subject">The assembly log subfolder</param>
-        /// <param name="m">The operation moniker</param>
-        public FilePath AsmDetailPath(FolderPath dir, OpIdentity m)
-            => dir + AsmDetailFile(m);
-
-        /// <summary>
-        /// Returns the path to the cil file for an identified operation
-        /// </summary>
-        /// <param name="subject">The assembly log subfolder</param>
-        /// <param name="m">The operation moniker</param>
-        public FilePath CilPath(FolderPath dir, OpIdentity m)
-            => dir + CilFile(m);
-
-        /// <summary>
-        /// Returns the path to the hex data file for an identified operation
-        /// </summary>
-        /// <param name="subject">The assembly log subfolder</param>
-        /// <param name="m">The operation identifier</param>
-        public FilePath AsmHexPath(FolderName subject, OpIdentity m)
-            => AsmDataDir(subject) + AsmHexFile(m);
-
-        /// <summary>
-        /// Returns the path to the hex data file for an identified operation
-        /// </summary>
-        /// <param name="subject">The assembly log subfolder</param>
-        /// <param name="m">The operation identifier</param>
-        public FilePath AsmHexPath(FolderPath dir, OpIdentity m)
-            => dir + AsmHexFile(m);
-
-        /// <summary>
-        /// Returns the path to the hex data file for a specified type and operation name
-        /// </summary>
-        /// <param name="t">The source type</param>
-        /// <param name="m">The operation identifier</param>
-        public FilePath AsmHexPath(Type t, OpIdentity m)
-            => AsmDataDir(t) + AsmHexFile(m);
-
-        public FilePath ParsedEncoding(ApiHost host)
-            => AsmDataRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.HostName), FileExtensions.Csv);
-
-        public FilePath DecodedEncoding(ApiHost host)
-            => AsmDataRoot+ FileName.Define(concat(host.Owner.Format(), dot(), host.HostName), FileExtensions.Asm);
-
         public FilePath ConfigPath(string name, FileExtension ext = null)
             => Settings.ConfigPath(FileName.Define(name, ext ?? FileExtension.Define("json")));
-
-        /// <summary>
-        /// Returns the path to the hex data file for a specified type and operation name
-        /// </summary>
-        /// <param name="t">The source type</param>
-        /// <param name="m">The operation identifier</param>
-        public FilePath CilPath(Type t, OpIdentity m)
-            => AsmDataDir(t) + CilFile(m);
-
-        public static FolderPath ApiSrcDir()
-            => Settings.ApiSrcDir();
-            
-        public static FolderPath ApiSrcDir(FolderName subject)
-            => Settings.ApiSrcDir(subject);
 
         public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
             => LogDir(area) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
@@ -212,6 +98,5 @@ namespace Z0
             var elapsed = (long) (current - first).TotalMilliseconds;
             return LogPath(area, subdir, basename, ext, elapsed);
         }
-
     }
 }

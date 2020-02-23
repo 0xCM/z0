@@ -15,7 +15,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var x = VPattern.vunits<byte>(n128);            
+                var x = vpattern.vunits<byte>(n128);            
                 Claim.eq(ginx.vrotrx(x,8), dinx.vrotrx(x,n8));
                 Claim.eq(ginx.vrotrx(x,16), dinx.vrotrx(x,n16));
                 Claim.eq(ginx.vrotrx(x,24), dinx.vrotrx(x,n24));
@@ -28,7 +28,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var x = VPattern.vunits<byte>(n128);            
+                var x = vpattern.vunits<byte>(n128);            
                 Claim.eq(ginx.vrotlx(x,8), dinx.vrotlx(x,n8));
                 Claim.eq(ginx.vrotlx(x,16), dinx.vrotlx(x,n16));
                 Claim.eq(ginx.vrotlx(x,24), dinx.vrotlx(x,n24));

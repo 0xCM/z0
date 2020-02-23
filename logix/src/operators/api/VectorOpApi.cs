@@ -19,7 +19,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines services for 128-bit instrinsic operators
     /// </summary>
-    [ApiHost("vector.api")]
+    //[ApiHost("vector.api", ApiHostKind.Generic)]
     public static partial class VectorOpApi
     {
         /// <summary>

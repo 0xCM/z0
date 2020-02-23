@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+    partial class permute
     {
         /// <summary>
         /// Defines an untyped identity permutation
@@ -25,7 +25,7 @@ namespace Z0
         /// Defines an identity permutation on n symbols
         /// </summary>
         /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Perm<T> identity<T>(T n)
             where T : unmanaged
                 => new Perm<T>(range(default, gmath.dec(n)));

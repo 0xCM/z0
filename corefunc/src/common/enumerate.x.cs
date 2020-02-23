@@ -130,16 +130,6 @@ namespace  Z0
             => items.ProcessBatches(processor, batchSize, (count) => { });
        
         /// <summary>
-        /// Applies a function to an input sequence to yield a transformed output sequence
-        /// </summary>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        /// <param name="src">The source sequence</param>
-        /// <param name="f">The mapping function</param>
-        public static T[] Map<S, T>(this IEnumerable<S> src, Func<S, T> f)
-            => src.Select(item => f(item)).ToArray();
-
-        /// <summary>
         /// Constructs an integrally-indexed stream from a source stream
         /// </summary>
         /// <param name="index">The 0-based element index</param>

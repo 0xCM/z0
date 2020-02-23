@@ -1,0 +1,127 @@
+//-----------------------------------------------------------------------------
+// CPrimalyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+
+    using System.Runtime.Serialization;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
+
+    using static Root;
+
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
+    public static class AppErrors
+    {        
+        public static AppException NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.NotEqual(lhs,rhs,caller,file,line));
+
+        public static AppException Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.Equal(lhs,rhs,caller,file,line));
+
+        public static AppException NotLessThan(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.NotLessThan(lhs,rhs,caller,file,line));
+
+        public static AppException ItemsNotEqual(int index, object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.ItemsNotEqual(index, lhs,rhs,caller,file,line));
+
+        public static AppException NotNonzero([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.NotNonzero(caller,file,line));
+        
+        public static AppException NotTrue(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.NotTrue(msg,caller,file,line));
+
+        public static AppException NotFalse(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.NotFalse(msg,caller,file,line));
+
+        public static AppException CountMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.CountMismatch(lhs,rhs,caller,file,line));
+
+        public static AppException LengthMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.LengthMismatch(lhs,rhs,caller,file,line));
+
+        public static AppException EmptySourceSpan([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.EmptySourceSpan(caller,file,line));
+
+        /// <summary>
+        /// Raised when a method is non-genric and should be
+        /// </summary>
+        public static AppException NonGenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.NonGenericMethod(method,caller,file,line));
+
+        /// <summary>
+        /// Raised when a method is generic and should not be
+        /// </summary>
+        public static AppException GenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.GenericMethod(method,caller,file,line));
+
+        public static AppException KindUnsupported<T>(T kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : Enum
+                => AppException.Define(ErrorMessages.KindUnsupported(kind, caller, file, line));
+
+        public static AppException TypeUnsupported(Type t, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+                => AppException.Define(ErrorMessages.TypeUnsupported(t, caller, file, line));
+
+        public static AppException FeatureUnsupported(string feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+                => AppException.Define(ErrorMessages.FeatureUnsupported(feature, caller, file, line));
+  
+        public static AppException FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(ErrorMessages.FileDoesNotExist(path, caller, file, line));
+
+        public static AppException KindOpUnsupported<S,T>(S src, T dst, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where S : Enum
+            where T : Enum
+                => AppException.Define(ErrorMessages.KindOpUnsupported(src,dst, caller, file, line));
+
+        public static IndexOutOfRangeException TooManyBytes(ByteSize requested, ByteSize available, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new IndexOutOfRangeException(ErrorMessages.TooManyBytes(requested, available, caller, file, line).ToString());
+
+        public static IndexOutOfRangeException OutOfRange(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new IndexOutOfRangeException(ErrorMessages.IndexOutOfRange(index,min,max, caller, file, line).ToString());
+
+        [MethodImpl(NotInline)]
+        public static IndexOutOfRangeException OutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+                => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
+
+        [MethodImpl(NotInline)]
+        public static AppException NoValue<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define($"A value of type {typeof(T).Name} was expected but does not exist", caller,file,line);
+
+        [MethodImpl(NotInline)]
+        public static T ThrowNotEqualInfo<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw AppException.Define(ErrorMessages.NotEqual(lhs,rhs,caller,file,line));
+
+        [MethodImpl(NotInline)]
+        public static T ThrowNotEqual<T>(T lhs, T rhs)
+            => throw AppException.Define(AppMsg.Define($"Equality failure, {lhs} != {rhs}", SeverityLevel.Error));
+
+        [MethodImpl(NotInline)]
+        public static T ThrowNotEqual<T>(T lhs, T rhs, AppMsg msg)
+            => throw AppException.Define(msg.WithPrependedContent($"Equality failure, {lhs} != {rhs}:"));
+
+        [MethodImpl(NotInline)]
+        public static T ThrowArgException<A,T>(A arg)
+            => throw new ArgumentNullException(arg?.ToString() ?? string.Empty);
+
+        [MethodImpl(NotInline)]
+        public static void Throw(string reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw AppException.Define(reason, caller,file,line);
+
+        [MethodImpl(NotInline)]
+        public static bool ThrowInvariantFailure(string reason)
+            => throw new Exception(reason);
+
+        [MethodImpl(NotInline)]
+        public static T ThrowOutOfRange<T>(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw OutOfRange(index, min, max, caller, file, line);
+
+        [MethodImpl(NotInline)]
+        public static void ThrowTooShort(int dstLen, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort:{Errors.FormatCallsite(caller,file,line)}");
+    }
+}

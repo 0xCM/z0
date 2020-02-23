@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Perm(ReadOnlySpan<int> src)
-            => Perms.define(src);
+            => permute.define(src);
 
         /// <summary>
         /// Computes the composition h of f and g where f and g have common length n and
@@ -66,14 +66,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm(int n, (int i, int j)[] src)
         {
-            terms = Perms.identity(n).terms;
+            terms = permute.identity(n).terms;
             Swap(src);
         }
 
         [MethodImpl(Inline)]
         public Perm(int n, Swap[] src)
         {
-            terms = Perms.identity(n).terms;
+            terms = permute.identity(n).terms;
             Apply(src);            
         }
 
@@ -93,7 +93,7 @@ namespace Z0
             for(var i=0; i< m; i++)
                 terms[i] = src[i];
 
-            var identity = Perms.identity(n);
+            var identity = permute.identity(n);
             for(var i=m; i< n; i++)
                 terms[i] = identity[i - m];
         }
@@ -186,7 +186,7 @@ namespace Z0
         public Perm Compose(Perm g)
         {
             var n = length(terms, g.terms);
-            var dst = Perms.alloc(n);
+            var dst = permute.alloc(n);
             var f = this;
             for(var i=0; i< n; i++)
                 dst[i] = g[f[i]];
@@ -209,7 +209,7 @@ namespace Z0
         /// </summary>
         public Perm Invert()
         {
-            var dst = Perms.alloc(Length);
+            var dst = permute.alloc(Length);
             for(var i=0; i< Length; i++)
                 dst[terms[i]] = i;
             return dst;

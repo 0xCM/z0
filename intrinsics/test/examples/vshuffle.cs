@@ -88,7 +88,7 @@ namespace Z0
                 );
 
         static Vector256<byte> ToShuffleSpec2(Vector256<ushort> src)
-            => dinx.vcompact(src,VPattern.vincrements(n256, uint16(16)),n256,z8);
+            => dinx.vcompact(src,vpattern.vincrements(n256, uint16(16)),n256,z8);
 
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
             => v16u(dinx.vshuf32x8(v8u(a), ToShuffleSpec(spec)));
@@ -96,9 +96,9 @@ namespace Z0
         public void vshuf16x16()
         {
             var w = n256;
-            var x = VPattern.vincrements(w,z16);            
-            var reverse = VPattern.vdecrements<ushort>(w);
-            var identity = VPattern.vincrements<ushort>(w);
+            var x = vpattern.vincrements(w,z16);            
+            var reverse = vpattern.decrements<ushort>(w);
+            var identity = vpattern.vincrements<ushort>(w);
             var pairswap = CpuVector.vparts(w,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
@@ -114,29 +114,29 @@ namespace Z0
         public void vshuf16x8_128x8u()
         {
             var n = n128;
-            var x0 = VPattern.vincrements<byte>(n);
+            var x0 = vpattern.vincrements<byte>(n);
             var x0Spec = CpuVector.vload(n, in head(Pattern1));
             var x0Dst = dinx.vshuf16x8(x0,x0Spec);
             Claim.eq(x0Spec,x0Dst);
 
-            var x1 = VPattern.vincrements<byte>(n);
+            var x1 = vpattern.vincrements<byte>(n);
             var x1Spec = CpuVector.vload(n, in head(Pattern2));
             var x1Dst = dinx.vshuf16x8(x1,x1Spec);
             Claim.eq(x1Spec,x1Dst);
 
-            var x2 = VPattern.vincrements<byte>(n);
-            var x2Spec = VData.rotl(n128, n8);
+            var x2 = vpattern.vincrements<byte>(n);
+            var x2Spec = vdata.rotl(n128, n8);
             var x2Dst = dinx.vshuf16x8(x2,x2Spec);
             Claim.eq(x2Spec,x2Dst);
 
-            var x3 = VPattern.vincrements<byte>(n);
-            var x3Spec = VData.rotr(n128, n8);
+            var x3 = vpattern.vincrements<byte>(n);
+            var x3Spec = vdata.rotr(n128, n8);
             var x3Dst = dinx.vshuf16x8(x3,x3Spec);
             Claim.eq(x3Spec,x3Dst);
 
-            var x4 = VPattern.vincrements<byte>(n);
-            var x4Spec1 = VData.rotl(n128, n8);
-            var x4Spec2 = VData.rotr(n128, n8);
+            var x4 = vpattern.vincrements<byte>(n);
+            var x4Spec1 = vdata.rotl(n128, n8);
+            var x4Spec2 = vdata.rotr(n128, n8);
             var x4Dst = dinx.vshuf16x8(dinx.vshuf16x8(x4,x4Spec1), x4Spec2);
             Claim.eq(x4,x4Dst);
 
@@ -149,14 +149,14 @@ namespace Z0
 
         public void vshuf16x8()
         {
-            var src = VPattern.vincrements<byte>(n128);
-            var perm = Perms.natural(Perms.reversed(n16));
+            var src = vpattern.vincrements<byte>(n128);
+            var perm = permute.natural(permute.reversed(n16));
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);
 
             var shufspec = perm.ToShuffleSpec();
             var dst = dinx.vshuf16x8(src,shufspec);
-            var expect = VPattern.vdecrements<byte>(n128);
+            var expect = vpattern.decrements<byte>(n128);
             Claim.eq(expect, dst);
 
             var identity = ShuffleIdentityMask();

@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+    partial class permute
     {
         /// <summary>
         /// Attempts to extract an index-identified permutation symbol
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="index">The symbol index</param>
         /// <param name="dst">The symbol, if successful</param>
         /// <returns>True if symbol was successfully extracted, false otherwise</returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit literal(Perm4L src, int index, out Perm4L dst)
         {
             const int segwidth = 2;             
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="index">The symbol index</param>
         /// <param name="dst">The symbol, if successful</param>
         /// <returns>True if symbol was successfully extracted, false otherwise</returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit literal(Perm8L src, int index, out Perm8L dst)
         {
             const int segwidth = 3; 
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="index">The symbol index</param>
         /// <param name="dst">The symbol, if successful</param>
         /// <returns>True if symbol was successfully extracted, false otherwise</returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit literal(Perm16L src, int index, out Perm16L dst)
         {
             const int segwidth = 4;     
@@ -71,6 +71,7 @@ namespace Z0
         /// Distills a natural permutation on 4 symbols to its canonical literal specification
         /// </summary>
         /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline)]
         public static Perm4L literal(NatPerm<N4> src)
         {
             const int segwidth = 2;
@@ -86,6 +87,7 @@ namespace Z0
         /// Distills a natural permutation on 8 symbols to its canonical literal specification
         /// </summary>
         /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline)]
         public static Perm8L literal(NatPerm<N8> src)
         {
             const int segwidth = 3;
@@ -101,6 +103,7 @@ namespace Z0
         /// Distills a natural permutation on 16 symbols to its canonical literal specification
         /// </summary>
         /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline)]
         public static Perm16L literal(NatPerm<N16> src)
         {
             const int segwidth = 4;

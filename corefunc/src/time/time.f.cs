@@ -65,13 +65,6 @@ partial class zfunc
     public static BenchmarkRecord optime(long opcount, Duration time, [CallerMemberName] string label = null)
         => BenchmarkRecord.Define(opcount, time, label);
 
-    static readonly long TicksPerMs 
-        = Stopwatch.Frequency/1000L;
-    
-    [MethodImpl(Inline)]
-    public static long ticksToMs(long ticks)
-        => ticks/TicksPerMs;
-
     public static DateTime now()
         => DateTime.Now;
 

@@ -13,13 +13,13 @@ namespace Z0
     {                
 
         public static NatPerm<N4> ToNatural(this Perm4L src)
-            => Perms.natural(src);
+            => permute.natural(src);
 
         public static NatPerm<N8> ToNatural(this Perm8L src)
-            => Perms.natural(src);
+            => permute.natural(src);
 
         public static NatPerm<N16> ToNatural(this Perm16L src)
-            => Perms.natural(src);
+            => permute.natural(src);
 
     }
 

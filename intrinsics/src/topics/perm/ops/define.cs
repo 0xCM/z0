@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+    partial class permute
     {
         /// <summary>
         /// Defines an untyped permutation determined by values in a source span

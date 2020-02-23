@@ -1,0 +1,70 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
+    
+    using static zfunc;    
+    using static As;
+
+    partial class bitpack
+    {
+        /// <summary>
+        /// Distributes each packed source bit to the least significant bit of 8 corresponding target bytes
+        /// </summary>
+        /// <param name="packed">The packed source bits</param>
+        /// <param name="unpacked">A reference to the target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static void unpack8(byte packed, ref byte unpacked)
+        {
+            var m = BitMask.lsb<ulong>(n8,n1);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+        }
+
+        /// <summary>
+        /// Distributes each packed source bit to the least significant bit of 16 corresponding target bytes
+        /// </summary>
+        /// <param name="packed">The packed source bits</param>
+        /// <param name="unpacked">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static void unpack8(ushort packed, ref byte unpacked)
+        {
+            var m = BitMask.lsb<ulong>(n8,n1);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+        }
+
+        /// <summary>
+        /// Distributes each packed source bit to the least significant bit of 32 corresponding target bytes
+        /// </summary>
+        /// <param name="packed">The packed source bits</param>
+        /// <param name="unpacked">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static void unpack8(uint packed, ref byte unpacked)
+        {
+            var m = BitMask.lsb<ulong>(n8,n1);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref unpacked, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
+            seek64(ref unpacked, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
+        }
+
+        /// <summary>
+        /// Distributes each packed source bit to the least significant bit of 64 corresponding target bytes
+        /// </summary>
+        /// <param name="packed">The packed source bits</param>
+        /// <param name="unpacked">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static void unpack8(ulong packed, ref byte unpacked)        
+        {
+            unpack8((uint)packed, ref unpacked);
+            unpack8((uint)(packed >> 32), ref seek(ref unpacked, 32));
+        }
+
+    }
+}

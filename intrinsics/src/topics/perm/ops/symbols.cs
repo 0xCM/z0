@@ -12,7 +12,8 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+
+    partial class permute
     {
         /// <summary>
         /// Creates value-to-symbol index

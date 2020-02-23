@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> valt<T>(N256 n, T a, T b)
             where T : unmanaged
-                => vblend(vbroadcast(n,a), vbroadcast(n,b), VData.blendspec<T>(n,false));
+                => vblend(vbroadcast(n,a), vbroadcast(n,b), vdata.blendspec<T>(n,false));
 
         /// <summary>
         /// Creates a shuffle mask that clears ever-other vector component
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vclearalt<T>(N256 n)
             where T : unmanaged
-                => VData.clearalt<T>(n);
+                => vdata.clearalt<T>(n);
 
         /// <summary>
         /// Creates a vector that decribes a lo/hi lane merge permutation
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vlanemerge<T>()
             where T : unmanaged
-                => VData.lanemerge<T>();
+                => vdata.lanemerge<T>();
                 
         /// <summary>
         /// Defines a vector of 32 or 64-bit floating point values where each component has been intialized to the value -0.0

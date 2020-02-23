@@ -67,7 +67,7 @@ namespace Z0
             var blockcount = packed.Length;
             var unpacked = DataBlocks.alloc(n256, blockcount, z32);
             for(var block=0; block < blockcount; block++)
-                BitPack.unpack32(packed, unpacked,block);
+                bitpack.unpack32(packed, unpacked,block);
             return load(unpacked.As<bit>());
         }
 

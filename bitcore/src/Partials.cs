@@ -5,11 +5,13 @@
 namespace Z0
 {
 
+    [ApiHost("bits",ApiHostKind.Direct)]
     public static partial class Bits
     {
         
     }
 
+    [ApiHost(ApiHostKind.Generic)]
     public static partial class gbits
     {
 

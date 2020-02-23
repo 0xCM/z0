@@ -88,7 +88,7 @@ partial class zfunc
     /// <typeparam name="O">The object type</typeparam>
     /// <param name="parms">The parameters passed to the oject's constructor</param>
     public static Option<O> construct<O>(params object[] parms)
-        => Try(parms, args => (O)Activator.CreateInstance(typeof(O), args));
+        => Root.Try(parms, args => (O)Activator.CreateInstance(typeof(O), args));
 
     /// <summary>
     /// Gets the type's classification code
@@ -134,7 +134,7 @@ partial class zfunc
     /// <param name="instance">The object instance, if applicable</param>
     public static Option<V> value<V>(PropertyInfo member, object instance = null)
         => from o in member.TryGetValue(instance)
-           from v in tryCast<V>(o)
+           from v in Root.TryCast<V>(o)
            select v;
 
     /// <summary>
@@ -145,7 +145,7 @@ partial class zfunc
     /// <param name="instance">The object instance, if applicable</param>
     public static Option<V> value<V>(FieldInfo member, object instance = null)
         => from o in member.FieldValue(instance)
-           from v in tryCast<V>(o)
+           from v in Root.TryCast<V>(o)
            select v;
 
     /// <summary>

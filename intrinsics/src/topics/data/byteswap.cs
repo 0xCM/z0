@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
     using static Data;
 
-    partial class VData
+    partial class vdata
     {        
         /// <summary>
         /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation 

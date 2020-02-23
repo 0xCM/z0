@@ -27,18 +27,29 @@ namespace Z0
             this.Context = context;
             this.Selected = selected.Length == 0 ? context.Assemblies.ToHashSet() : selected.ToHashSet();
         }
-        
+
+        AsmEmissionPaths EmissionPaths
+            => Context.EmissionPaths();
+
         void CreateLocationReport(AssemblyId id)
             => Context.MemberLocations(id).OnSome(report => report.Save());
 
         public IEnumerable<AsmCaptureSet> Execute()
         {            
-            var hosts = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts);
+            var owners = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
             var config = Context.AsmFormat.WithSectionDelimiter();
-            foreach(var host in hosts)
+            foreach(var owner in owners)
             {
-                if(Selected.Contains(host.Owner))
-                    yield return RunCaptureWorkflow(host);
+                var id = owner.Key;
+                if(Selected.Contains(id))
+                {
+                    EmissionPaths.OwnerRoot(id).Clear();
+
+                    foreach(var host in owner)
+                       yield return RunCaptureWorkflow(host);
+                }
+                // if(Selected.Contains(host.Owner))
+                //     yield return RunCaptureWorkflow(host);
             }
 
             iter(Selected, CreateLocationReport);
@@ -65,7 +76,7 @@ namespace Z0
         {
             var extractor = Context.EncodingExtractor();
             var captured = extractor.Extract(host);
-            var target = AsmReports.EncodingExtract(host);                
+            var target = EmissionPaths.ExtractReport(host);                
             captured.Save(target)
                         .OnSome(file => print($"Emitted {host} encodings to {file}"))
                         .OnNone(() => errout($"Error emitting {host} encodings"));                       
@@ -76,7 +87,7 @@ namespace Z0
         {
             var parser = Context.EncodingParser();
             var parsed = parser.Parse(host,captured);
-            var target = Paths.ParsedEncoding(host);
+            var target = EmissionPaths.ParseReport(host);
             parsed.Save(target)
                         .OnSome(file => print($"Emitted parsed {host} encodings to {file}"))
                         .OnNone(() => errout($"Error parsing {host} encodings"));                       
@@ -87,7 +98,7 @@ namespace Z0
 
         FilePath Decode(ApiHost host, CapturedEncodings captured, ParsedEncodings parsed)
         {
-            var path = Paths.DecodedEncoding(host);
+            var path = EmissionPaths.DecodedAsmDetail(host);
             var decoder = Context.Decoder();            
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);
             for(var i=0; i< captured.RecordCount; i++)

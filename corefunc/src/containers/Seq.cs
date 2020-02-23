@@ -57,7 +57,7 @@ namespace Z0
             => stream;
 
         public bool empty()
-            => not(nonempty);
+            => !nonempty;
 
         public Seq<T> redefine(IEnumerable<T> src)
             => new Seq<T>(src);

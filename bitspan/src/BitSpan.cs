@@ -12,6 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines an anti-succinct data structure for bit representation
     /// </summary>
+    [ApiHost("bitspan")]
     public readonly ref partial struct BitSpan
     {
         readonly Span<bit> bits;

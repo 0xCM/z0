@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
         public static implicit operator Perm<T>(T n)
-            => Perms.identity(n);
+            => permute.identity(n);
 
         /// <summary>
         /// Computes the composition h of f and g where f and g have common length n and h(i) = g(f(i)) for i = 0, ... n-1
@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Perm(T n, (T i, T j)[] swaps)
         {
-            terms = Perms.identity(n).terms;
+            terms = permute.identity(n).terms;
             Swap(swaps);
         }
 
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Perm(T n, Swap<T>[] swaps)
         {
-            terms = Perms.identity(n).terms;
+            terms = permute.identity(n).terms;
             Swap(swaps);            
         }
 
@@ -125,7 +125,7 @@ namespace Z0
             for(var i=0; i< m; i++)
                 terms[i] = src[i];
 
-            var identity = Perms.identity(n);
+            var identity = permute.identity(n);
             for(var i=m; i< count; i++)
                 terms[i] = identity[i - m];
         }

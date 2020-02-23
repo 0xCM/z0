@@ -56,6 +56,11 @@ namespace Z0
         public static ISet<Type> DistinctTypes(this NK k)
             => Numeric.typeset(k);
 
+        /// <summary>
+        /// Convers a source value, which is hopefully a supported kind, to a target kind
+        /// </summary>
+        /// <param name="k">The primal kind</param>
+        [MethodImpl(Inline)]
         public static object Convert(this NK dst, object src)
             => Numeric.convert(dst,src);
 

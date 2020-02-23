@@ -246,7 +246,7 @@ namespace Z0.Machines
         void OnReceipt(E input)        
         {
             ReceiptCount++;
-            Try(() => InputReceipt?.Invoke(input));
+            Root.Try(() => InputReceipt?.Invoke(input));
         }
 
         void OnWarning(AppMsg msg)
@@ -258,7 +258,7 @@ namespace Z0.Machines
         {       
             Error = e;
                        
-            Try(() => Oops?.Invoke(e));
+            Root.Try(() => Oops?.Invoke(e));
 
             OnComplete(false);
         }                     

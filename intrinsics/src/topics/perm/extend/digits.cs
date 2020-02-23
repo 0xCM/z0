@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatSpan<N4, byte> ToDigits(this Perm4L src)
-            => Perms.digits(src);
+            => permute.digits(src);
 
         /// <summary>
         /// Computes the digits corresponding to each 3-bit segment of the permutation spec
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatSpan<N8, OctalDigit> ToDigits(this Perm8L src)
-            => Perms.digits(src);
+            => permute.digits(src);
 
         /// <summary>
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatSpan<N16, HexDigit> ToDigits(this Perm16L src)
-            => Perms.digits(src);
+            => permute.digits(src);
 
         [MethodImpl(Inline)]
         public static Perm16 ToPermSpec(this Vector128<byte> src)

@@ -19,8 +19,8 @@ namespace Z0
         public readonly object Value;     
 
         [MethodImpl(Inline)]
-        BoxedNumber(object src)
-            => this.Value = src ?? 0ul;
+        internal BoxedNumber(object src)
+            => this.Value = src;
 
         public NumericKind Kind
             => Numeric.kind(Value.GetType());
@@ -34,84 +34,16 @@ namespace Z0
         public bool IsFloat
             => Numeric.floating(Value);
 
-        public FixedWidth Width
-        {
-            [MethodImpl(Inline)]
-            get => 
-                  IsW8 ? FixedWidth.W8 
-                : IsW16 ? FixedWidth.W16 
-                : IsW32 ? FixedWidth.W32 
-                : IsW64 ? FixedWidth.W64 
-                : FixedWidth.None;
-        }
-
         [MethodImpl(Inline)]
-        public static BoxedNumber Define<T>(T src)
+        public T Unbox<T>()
             where T : unmanaged
-                => new BoxedNumber(src);
+                => BoxOps.unbox<T>(this);
 
         [MethodImpl(Inline)]
-        public static BoxedNumber From(object src)
-            => new BoxedNumber(src);
-
-        [MethodImpl(Inline)]
-        public BoxedNumber Convert(NumericKind dst)
-            => From(dst.Convert(Value));
-
-        [MethodImpl(Inline)]
-        public T Extract<T>()
+        public T Convert<T>()
             where T : unmanaged
-        {
-            var dst = Convert<T>().Value;
-            return Unsafe.As<object,T>(ref dst);
-        }
-
-        [MethodImpl(Inline)]
-        public BoxedNumber Convert<T>()
-            where T : unmanaged
-                => Convert(typeof(T));
-
-        [MethodImpl(Inline)]
-        public BoxedNumber Convert(Type target)
-            => From(target.NumericKind().Convert(Value));
-
-        bool IsW8
-        {
-            [MethodImpl(Inline)]
-            get => Value is byte || Value is sbyte;
-        }
-
-        bool IsW16
-        {
-            [MethodImpl(Inline)]
-            get => Value is short || Value is ushort;
-        }
-
-        bool IsW32
-        {
-            [MethodImpl(Inline)]
-            get => Value is int || Value is uint || Value is float;
-        }
-
-        bool IsW64
-        {
-            [MethodImpl(Inline)]
-            get => Value is long || Value is ulong || Value is double;
-        }
-
-        [MethodImpl(Inline)]
-        bool LiberalEquals(BoxedNumber rhs)
-        {
-            if(this.IsSignedInt && rhs.IsSignedInt)
-                return Extract<long>() == rhs.Extract<long>();
-            else if(this.IsUnsignedInt && rhs.IsUnsignedInt)
-                return Extract<ulong>() == rhs.Extract<ulong>();
-            else if(this.IsFloat && rhs.IsFloat)
-                return Extract<double>() == rhs.Extract<double>();
-            else   
-                return false;
-        }
-       
+                => BoxOps.convert<T>(this);
+                
         [MethodImpl(Inline)]
         public bool Equals(BoxedNumber other)
             => Value.Equals(other.Value);
@@ -124,7 +56,6 @@ namespace Z0
 
         public override bool Equals(object other)
             => other is BoxedNumber n && Equals(n);
-
 
         IComparable Comparable
         {
@@ -154,85 +85,84 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(sbyte src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(byte src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(short src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(ushort src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(int src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(uint src)        
-            => Define(src);
+            => BoxOps.number(src);
             
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(long src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(ulong src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(float src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(double src)        
-            => Define(src);
+            => BoxOps.number(src);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(BoxedNumber src)        
-            => src.Extract<sbyte>();
+            => src.Convert<sbyte>();
 
         [MethodImpl(Inline)]
         public static explicit operator short(BoxedNumber src)        
-            => src.Extract<short>();
+            => src.Convert<short>();
 
         [MethodImpl(Inline)]
         public static explicit operator int(BoxedNumber src)        
-            => src.Extract<int>();
+            => src.Convert<int>();
 
         [MethodImpl(Inline)]
         public static explicit operator long(BoxedNumber src)        
-            => src.Extract<long>();
+            => src.Convert<long>();
 
         [MethodImpl(Inline)]
         public static explicit operator byte(BoxedNumber src)        
-            => src.Extract<byte>();
+            => src.Convert<byte>();
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(BoxedNumber src)        
-            => src.Extract<ushort>();
+            => src.Convert<ushort>();
 
         [MethodImpl(Inline)]
         public static explicit operator uint(BoxedNumber src)        
-            => src.Extract<uint>();
+            => src.Convert<uint>();
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(BoxedNumber src)        
-            => src.Extract<ulong>();
+            => src.Convert<ulong>();
 
         [MethodImpl(Inline)]
         public static explicit operator float(BoxedNumber src)        
-            => src.Extract<float>();
+            => src.Convert<float>();
 
         [MethodImpl(Inline)]
         public static explicit operator double(BoxedNumber src)        
-            => src.Extract<double>();
-
-        
+            => src.Convert<double>();
+       
         [MethodImpl(Inline)]
         TypeCode IConvertible.GetTypeCode()        
             => Convertible.GetTypeCode();

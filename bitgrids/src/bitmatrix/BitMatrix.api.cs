@@ -9,6 +9,7 @@ namespace Z0
 
     using static zfunc;
 
+    [ApiHost("bitmatrix")]
     public static partial class BitMatrix
     {        
 

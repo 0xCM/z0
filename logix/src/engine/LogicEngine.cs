@@ -12,7 +12,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    [ApiHost("logic.engine")]
+    [ApiHost("logic.engine", ApiHostKind.Generic)]
     public static partial class LogicEngine
     {
         /// <summary>
@@ -152,7 +152,7 @@ namespace Z0.Logix
         {
             expr.SetVars(a,b);
             var result = eval(expr);
-            return ginx.vtestc(result.Value, VPattern.vones<T>(n128));
+            return ginx.vtestc(result.Value, vpattern.vones<T>(n128));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Z0.Logix
         {
             expr.SetVars(a,b);
             var result = eval(expr);
-            return ginx.vtestc(result.Value, VPattern.vones<T>(n256));
+            return ginx.vtestc(result.Value, vpattern.vones<T>(n256));
         }
 
         /// <summary>

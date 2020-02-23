@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
     using static As;
-
+    
     partial class Converter
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]

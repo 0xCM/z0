@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+    partial class permute
     {
         /// <summary>
         /// Allocates an empty permutation of specified length

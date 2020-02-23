@@ -36,7 +36,6 @@ partial class zfunc
         where T : unmanaged
             => range_1(x0,x1,step);
 
-
     /// <summary>
     /// Defines a generic complex number
     /// </summary>
@@ -115,100 +114,6 @@ partial class zfunc
             return range32f(x0,x1,step);
         else if(typeof(T) == typeof(double))
             return range64f(x0,x1,step);
-        else
-            throw unsupported<T>();
-    }
-
-    /// <summary>
-    /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
-    /// </summary>
-    /// <param name="x0">The lower bound</param>
-    /// <param name="x1">The upper bound</param>
-    /// <param name="step">The step size</param>
-    /// <typeparam name="T">The primal type</typeparam>
-    static IEnumerable<T> range_old<T>(T x0, T x1, T? step = null)
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(sbyte))
-        {
-            var min = Unsafe.As<T,sbyte>(ref x0);
-            var max = Unsafe.As<T,sbyte>(ref x1);
-            var _step = Unsafe.As<T?, sbyte?>(ref step) ??(sbyte)1;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<sbyte,T>(ref i);
-        }
-        else if(typeof(T) == typeof(byte))
-        {
-            var min = Unsafe.As<T,byte>(ref x0);
-            var max = Unsafe.As<T,byte>(ref x1);
-            var _step = Unsafe.As<T?, byte?>(ref step) ??(byte)1;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<byte,T>(ref i);
-        }
-        else if(typeof(T) == typeof(short))
-        {
-            var min = Unsafe.As<T,short>(ref x0);
-            var max = Unsafe.As<T,short>(ref x1);
-            var _step = Unsafe.As<T?, short?>(ref step) ?? (short)1;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<short,T>(ref i);
-        }
-        else if(typeof(T) == typeof(ushort))
-        {
-            var min = Unsafe.As<T,ushort>(ref x0);
-            var max = Unsafe.As<T,ushort>(ref x1);
-            var _step = Unsafe.As<T?, ushort?>(ref step) ?? (ushort)1;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<ushort,T>(ref i);
-        }
-        else if(typeof(T) == typeof(int))
-        {
-            var min = Unsafe.As<T,int>(ref x0);
-            var max = Unsafe.As<T,int>(ref x1);
-            var _step = Unsafe.As<T?, int?>(ref step) ?? 1;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<int,T>(ref i);
-        }
-        else if(typeof(T) == typeof(uint))
-        {
-            var min = Unsafe.As<T,uint>(ref x0);
-            var max = Unsafe.As<T,uint>(ref x1);
-            var _step = Unsafe.As<T?, uint?>(ref step) ?? 1u;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<uint,T>(ref i);
-        }
-        else if(typeof(T) == typeof(long))
-        {
-            var min = Unsafe.As<T,long>(ref x0);
-            var max = Unsafe.As<T,long>(ref x1);
-            var _step = Unsafe.As<T?, long?>(ref step) ?? 1L;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<long,T>(ref i);
-        }
-        else if(typeof(T) == typeof(ulong))
-        {
-            var min = Unsafe.As<T,ulong>(ref x0);
-            var max = Unsafe.As<T,ulong>(ref x1);
-            var _step = Unsafe.As<T?, ulong?>(ref step) ?? 1ul;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<ulong,T>(ref i);
-        }
-        else if(typeof(T) == typeof(float))
-        {
-            var min = Unsafe.As<T,float>(ref x0);
-            var max = Unsafe.As<T,float>(ref x1);
-            var _step = Unsafe.As<T?, float?>(ref step) ?? 1f;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<float,T>(ref i);
-        }
-        else if(typeof(T) == typeof(double))
-        {
-            var min = Unsafe.As<T,double>(ref x0);
-            var max = Unsafe.As<T,double>(ref x1);
-            var _step = Unsafe.As<T?, double?>(ref step) ?? 1d;
-            for(var i = min; i <= max; i += _step)            
-                yield return Unsafe.As<double,T>(ref i);
-        }
         else
             throw unsupported<T>();
     }

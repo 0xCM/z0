@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
     using static HexConst;
 
-    partial class VData
+    partial class vdata
     {        
         /// <summary>
         /// Defines a blend specification for combining 2 256-bit vectors that selects the odd components from each vector

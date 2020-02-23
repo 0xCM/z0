@@ -13,7 +13,7 @@ namespace Z0.Logix
 
     using static OpHelpers;
 
-    [ApiHost("predicate.api")]
+    //[ApiHost("predicate.api", ApiHostKind.Generic)]
     public static class PredicateApi
     {
         /// <summary>

@@ -291,7 +291,7 @@ namespace Z0
             where T : unmanaged 
         {
             if(typeof(T) == typeof(bit))
-                Claim.eq(As.bitval(lhs), As.bitval(rhs));
+                Claim.eq(As.ubit(lhs), As.ubit(rhs));
             else
                 gmath.eq(lhs,rhs).IfNone(() => AppErrors.ThrowNotEqual(lhs,rhs));
         }

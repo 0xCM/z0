@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static zfunc;    
 
 
-    [ApiHost("bitvector.ops")]
+    [ApiHost("bitvector.ops", ApiHostKind.Generic)]
     public static class BitVectorOps
     {
         /// <summary>

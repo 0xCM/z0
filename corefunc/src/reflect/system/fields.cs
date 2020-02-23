@@ -22,6 +22,6 @@ namespace Z0
         /// <param name="field">The field</param>
         /// <param name="instance">The object instance, if applicable</param>
         public static Option<object> FieldValue(this FieldInfo field, object instance = null)
-            => Try(() => field.GetValue(instance));
+            => Root.Try(() => field.GetValue(instance));
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    [ApiHost("expr.cmp.eval")]
+    [ApiHost("expr.cmp.eval", ApiHostKind.Generic)]
     public static class CmpExprEval
     {
         [Op("eval_cmp_expr"), NumericClosures(NumericKind.Integers & ~NumericKind.U64)]

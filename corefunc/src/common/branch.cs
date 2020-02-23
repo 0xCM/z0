@@ -11,32 +11,6 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Executes an action if condition is false
-    /// </summary>
-    /// <param name="condition">Specifies whether some condition is true</param>
-    /// <param name="@false">The action to invoke when condition is false</param>
-    [MethodImpl(Inline)]
-    public static Unit onFalse(bool condition, Action @false)
-    {
-        if(!condition)
-            @false();
-        return Unit.Value;
-    }
-
-    /// <summary>
-    /// Executes an action if condition is true
-    /// </summary>
-    /// <param name="condition">Specifies whether some condition is true</param>
-    /// <param name="@false">The action to invoke when condition is false</param>
-    [MethodImpl(Inline)]
-    public static Unit onTrue(bool condition, Action @true)
-    {
-        if(condition)
-            @true();
-        return Unit.Value;
-    }
-
-    /// <summary>
     /// Invokes an action if the supplied value is not null
     /// </summary>
     /// <typeparam name="V">The value type</typeparam>
@@ -50,14 +24,6 @@ partial class zfunc
 
         return Unit.Value;
     }
-
-    /// <summary>
-    /// Returns true if the input is false, false otherwise
-    /// </summary>
-    /// <param name="a">The value to test</param>
-    [MethodImpl(Inline)]   
-    public static bool not(bool a) 
-        => !a;
 
     /// <summary>
     /// Executes one of two functions depending on the evaulation criterion
@@ -132,20 +98,6 @@ partial class zfunc
         => x != null ? f1(x) : @default;
 
     /// <summary>
-    /// Evaluates a function over a value if the value is not null; otherwise invokes
-    /// a function that will produce a value that is within the expected range
-    /// </summary>
-    /// <typeparam name="S">The object type</typeparam>
-    /// <typeparam name="T">The function result type</typeparam>
-    /// <param name="x">The object to test</param>
-    /// <param name="f1">The non-null evaluator</param>
-    /// <param name="f2">The null evaluator</param>
-    /// <returns></returns>
-    [MethodImpl(Inline)]
-    public static T ifvalue<S, T>(S x, Func<S, T> f1, Func<T> f2)
-        where S : class => (x != null) ? f1(x) : f2();
-
-    /// <summary>
     /// Executes one action if a condition is true and another should it be false
     /// </summary>
     /// <param name="condition">Specifies whether some condition is true</param>
@@ -170,7 +122,6 @@ partial class zfunc
     /// <param name="v">The candidate value</param>
     /// <param name="f">The function to apply if matched</param>
     /// <param name="u">The function to apply if unmatched</param>
-    /// <returns></returns>
     public static Y ifType<X, Y>(object v, Func<X, Y> f, Func<object, Y> u)
     {
         switch (v)
@@ -207,7 +158,6 @@ partial class zfunc
     /// <typeparam name="Y">The output type</typeparam>
     /// <param name="v">The value to be evaluated </param>
     /// <param name="f">The function to apply</param>
-    /// <returns></returns>
     public static Option<Y> ifType<X, Y>((object candididate, X right) v, Func<(X left, X right), Y> f)
     {
         switch (v.candididate)

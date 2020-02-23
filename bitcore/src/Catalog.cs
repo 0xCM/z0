@@ -21,10 +21,10 @@ namespace Z0
         public override IEnumerable<Type> ServiceHostTypes
             => typeof(BCTypes).GetNestedTypes().Realize<IFunc>();
 
-        public override IEnumerable<ApiHost> GenericApiHosts
-            => items(ApiHost.Define(AssemblyId,typeof(gbits)));
+        // public override IEnumerable<ApiHost> GenericApiHosts
+        //     => items(ApiHost.Define(AssemblyId,typeof(gbits)));
 
-        public override IEnumerable<ApiHost> DirectApiHosts
-            => items(ApiHost.Define(AssemblyId,typeof(Bits)));
+        // public override IEnumerable<ApiHost> DirectApiHosts
+        //     => items(ApiHost.Define(AssemblyId,typeof(Bits)));
     }
 }

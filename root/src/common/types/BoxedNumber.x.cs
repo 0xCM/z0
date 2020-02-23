@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static BoxedNumber Zero(this NumericKind kind)
-            => BoxedNumber.From(Numeric.convert(kind, 0)); 
+            => BoxOps.from(Numeric.convert(kind, 0)); 
 
         [MethodImpl(Inline)]
         public static BoxedNumber Box(this byte src)

@@ -19,14 +19,14 @@ namespace Z0
         /// <param name="offset">The source index to begin extraction</param>
         /// <param name="count">The number of source bits that contribute to the extract</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op,NumericClosures(NumericKind.UnsignedInts)]
         public static T bitslice<T>(in BitSpan src, int offset, int count)
             where T : unmanaged
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(count, src.Length - offset);
             PolyData.copy(src.Bits, offset, len, dst);
-            return BitPack.pack<T>(dst);
+            return bitpack.pack<T>(dst);
         }
 
         /// <summary>
@@ -34,14 +34,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op,NumericClosures(NumericKind.UnsignedInts)]
         public static T bitslice<T>(in BitSpan src, int offset)
             where T : unmanaged
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(dst.Length, src.Length - offset);
             PolyData.copy(src.Bits, offset, len, dst);
-            return BitPack.pack<T>(dst);
+            return bitpack.pack<T>(dst);
         }
 
         /// <summary>
@@ -49,14 +49,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op,NumericClosures(NumericKind.UnsignedInts)]
         public static T bitslice<T>(in BitSpan src)
             where T : unmanaged
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(dst.Length, src.Length);
             PolyData.copy(src.Bits, 0, len, dst);
-            return BitPack.pack<T>(dst);
+            return bitpack.pack<T>(dst);
         }
 
         [MethodImpl(Inline)]
@@ -98,7 +98,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z8i);
+            return bitpack.pack(unpacked,z8i);
         }
 
         [MethodImpl(Inline)]
@@ -108,7 +108,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z8);
+            return bitpack.pack(unpacked,z8);
         }
 
         [MethodImpl(Inline)]
@@ -118,7 +118,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z16i);
+            return bitpack.pack(unpacked,z16i);
         }
 
         [MethodImpl(Inline)]
@@ -128,7 +128,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z16);
+            return bitpack.pack(unpacked,z16);
         }
 
         [MethodImpl(Inline)]
@@ -138,7 +138,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked,z32i);
+            return bitpack.pack(unpacked,z32i);
         }
 
         [MethodImpl(Inline)]
@@ -148,7 +148,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);
             var take = math.min(src.Bits.Length -offset, count);
             src.Bits.Slice(offset,take).CopyTo(unpacked);
-            return BitPack.pack(unpacked, z32);
+            return bitpack.pack(unpacked, z32);
         }
 
         [MethodImpl(Inline)]
@@ -158,7 +158,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked, z64i);
+            return bitpack.pack(unpacked, z64i);
         }
 
         [MethodImpl(Inline)]
@@ -168,7 +168,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
-            return BitPack.pack(unpacked, z64);
+            return bitpack.pack(unpacked, z64);
         }
     }
 }

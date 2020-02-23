@@ -306,8 +306,8 @@ namespace Z0
         /// Creates a copy of the matrix
         /// </summary>
         [MethodImpl(Inline)]
-        public Matrix<N,T> Replicate(bool structureOnly = false)
-            => new Matrix<N,T>(data.Replicate(structureOnly));
+        public Matrix<N,T> Replicate()
+            => new Matrix<N,T>(data.Replicate());
 
         public override bool Equals(object rhs)
             => rhs is Matrix<N,T> x && Equals(x);

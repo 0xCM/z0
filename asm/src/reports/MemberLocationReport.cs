@@ -84,6 +84,8 @@ namespace Z0
             => Records.Length != 0;
 
         public Option<FilePath> Save()
-            => Records.Save(ApiHost.MapValueOrElse(AsmReports.HostLocation,() => AsmReports.AssemblyLocation(AssemblyId)));
+            => Records.Save(ApiHost.MapValueOrElse(
+                    AsmEmissionPaths.Current.LocationReport,
+                    () => AsmEmissionPaths.Current.LocationReport(AssemblyId)));
     }
 }

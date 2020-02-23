@@ -160,29 +160,30 @@ namespace Z0
                 _ => throw new NotSupportedException(k.ToString())
             };
 
+        [MethodImpl(Inline)]
+        static TC typecode(Type t)
+            => t.IsEnum ? 0 : Type.GetTypeCode(t.EffectiveType());
+
         /// <summary>
         /// Determines the numeric kind of a type, possibly none
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline),Op]
+        [Op]
         public static NumericKind kind(Type t)
-            =>  t.IsEnum 
-                ? NumericKind.None 
-                : Type.GetTypeCode(t.EffectiveType()) 
-                    switch
-                    {
-                        TC.Byte => NK.U8,
-                        TC.SByte => NK.I8,
-                        TC.Int16 => NK.I16,
-                        TC.UInt16 => NK.U16,
-                        TC.Int32 => NK.I32,
-                        TC.UInt32 => NK.U32,
-                        TC.Int64 => NK.I64,
-                        TC.UInt64 => NK.U64,
-                        TC.Single => NK.F32,
-                        TC.Double => NK.F64,
-                        _ => NK.None
-                    };
+            => typecode(t) switch
+                {
+                    TC.SByte => NK.I8,
+                    TC.Byte => NK.U8,
+                    TC.Int16 => NK.I16,
+                    TC.UInt16 => NK.U16,
+                    TC.Int32 => NK.I32,
+                    TC.UInt32 => NK.U32,
+                    TC.Int64 => NK.I64,
+                    TC.UInt64 => NK.U64,
+                    TC.Single => NK.F32,
+                    TC.Double => NK.F64,
+                    _ => NK.None
+                };
 
         [MethodImpl(Inline), Op]
         public static bool signed(object value)
@@ -253,31 +254,31 @@ namespace Z0
             switch(tc)
             {
                 case TC.SByte:
-                    return FromInt8(dst,src);
+                    return FromInt8(dst, src);
 
                 case TC.Byte:
-                    return FromUInt8(dst,src);
+                    return FromUInt8(dst, src);
 
                 case TC.Int16:
-                    return FromInt16(dst,src);
+                    return FromInt16(dst, src);
 
                 case TC.UInt16:
-                    return FromUInt16(dst,src);
+                    return FromUInt16(dst, src);
                 
                 case TC.Int32:
-                    return FromInt32(dst,src);
+                    return FromInt32(dst, src);
 
                 case TC.UInt32:
-                    return FromUInt32(dst,src);
+                    return FromUInt32(dst, src);
 
                 case TC.Int64:
-                    return FromInt64(dst,src);
+                    return FromInt64(dst, src);
 
                 case TC.UInt64:
-                    return FromUInt64(dst,src);
+                    return FromUInt64(dst, src);
 
                 case TC.Single:
-                    return FromFloat32(dst,src);
+                    return FromFloat32(dst, src);
 
                 case TC.Double:
                     return FromFloat64(dst,src);
@@ -574,8 +575,6 @@ namespace Z0
             }
             return src;
         }
-
-
 
         [MethodImpl(Inline)]
         static NumericKind kind_u<T>()

@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The result type</typeparam>
         /// <param name="f">The function to evaluate</param>
-        public static Option<T> Try<T>(Func<T> f, Action<Exception> error = null)
+        static Option<T> Try<T>(Func<T> f, Action<Exception> error = null)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Z0
             catch (Exception e)
             {
                 error?.Invoke(e);
-                return zfunc.none<T>();
+                return Option.none<T>();
             }
         }
 
@@ -248,7 +248,6 @@ namespace Z0
             where K: unmanaged, ITypeNat
                 => Try( () => new NatOdd<K>(k));
 
-
         /// <summary>
         /// Attempts to prove that k:K1 => k % 2 != 0
         /// Signals success by returning evidence
@@ -348,6 +347,5 @@ namespace Z0
             where K2: unmanaged, ITypeNat
             where T : unmanaged, ITypeNat 
                 => TryBetween<T,K1,K2>();
-
     }
 }

@@ -17,10 +17,10 @@ namespace Z0
                 var src = Random.Next<ushort>();
                 var dst = DataBlocks.single<byte>(n128);
 
-                BitPack.unpack8(src, dst);            
+                bitpack.unpack8(src, dst);            
                 unpack_check(src,dst);
 
-                var rebound = BitPack.pack8(dst);
+                var rebound = bitpack.pack8(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -31,11 +31,11 @@ namespace Z0
             {
                 var src = Random.Next<uint>();
                 var dst = DataBlocks.single<byte>(n256);
-                BitPack.unpack8(src, dst);
+                bitpack.unpack8(src, dst);
 
                 unpack_check(src,dst);
                 
-                var rebound = BitPack.pack8(dst);
+                var rebound = bitpack.pack8(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -46,11 +46,11 @@ namespace Z0
             {
                 var src = Random.Next<ulong>();
                 var dst = DataBlocks.single<byte>(n512);
-                BitPack.unpack8(src, dst);
+                bitpack.unpack8(src, dst);
 
                 unpack_check(src,dst);
                 
-                var rebound = BitPack.pack8(dst);
+                var rebound = bitpack.pack8(dst);
                 Claim.eq(src,rebound);
             }
 
@@ -64,7 +64,7 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                var packed = BitPack.pack8(bitseq);
+                var packed = bitpack.pack8(bitseq);
                 Claim.eq(bs.TakeScalar<byte>(), packed);
             }
         }
@@ -77,7 +77,7 @@ namespace Z0
             for(var rep = 0; rep < RepCount; rep++)
             {
                 var src = Random.Single(z64);
-                BitPack.unpack32(src,dst);
+                bitpack.unpack32(src,dst);
                 for(var i=0; i< dst.Length; i++)
                     Claim.eq((uint)bit.test(src,i), dst[i]);
             }
@@ -92,7 +92,7 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                uint packed = BitPack.pack8(bitseq);
+                uint packed = bitpack.pack8(bitseq);
                 for(var i=0; i< count; i++)
                     Claim.eq(bs[i], bit.test(packed, i));
             }
@@ -112,7 +112,7 @@ namespace Z0
 
                 buffer.Clear();
                 bits.CopyTo(buffer);
-                var result = BitPack.pack<uint>(buffer);
+                var result = bitpack.pack<uint>(buffer);
                 
                 Claim.eq(expect, result);
 
@@ -124,8 +124,8 @@ namespace Z0
             void case1()
             {
                 var src = DataBlocks.single<byte>(n256);
-                VPattern.vones<byte>(n256).StoreTo(src);
-                var dst = BitPack.pack8(src);
+                vpattern.vones<byte>(n256).StoreTo(src);
+                var dst = bitpack.pack8(src);
                 Claim.eq(dst,uint.MaxValue);
 
             }
@@ -133,8 +133,8 @@ namespace Z0
             void case2()
             {
                 var src = DataBlocks.single<byte>(n128);
-                VPattern.vones<byte>(n128).StoreTo(src);
-                var dst = BitPack.pack8(src);
+                vpattern.vones<byte>(n128).StoreTo(src);
+                var dst = bitpack.pack8(src);
                 Claim.eq(dst,ushort.MaxValue);
             }
 

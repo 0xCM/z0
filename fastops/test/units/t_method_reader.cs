@@ -21,7 +21,7 @@ namespace Z0
         
         StreamWriter NativeTestWriter([Caller] string test = null)
         {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.HexExt);    
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
             return  new StreamWriter(path.CreateParentIfMissing().FullPath);
         }
 

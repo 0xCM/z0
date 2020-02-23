@@ -76,7 +76,7 @@ namespace Z0
             for(var i= 0; i<RepCount; i++)
             {
                 //Creates an "exchange" matrix
-                var perm = Perms.natural(n8).Reverse();
+                var perm = permute.natural(n8).Reverse();
                 var mat = perm.ToBitMatrix();
 
                 var v1 = Random.BitVector(n8);
@@ -91,7 +91,7 @@ namespace Z0
             for(var i= 0; i<RepCount; i++)
             {
                 //Creates an "exchange" matrix            
-                var perm = Perms.natural(n32).Reverse();
+                var perm = permute.natural(n32).Reverse();
                 var mat = perm.ToBitMatrix();
 
                 var v1 = Random.BitVector(n32);
@@ -106,7 +106,7 @@ namespace Z0
             for(var i= 0; i<RepCount; i++)
             {
                 //Creates an "exchange" matrix            
-                var perm = Perms.natural(n64).Reverse();
+                var perm = permute.natural(n64).Reverse();
                 var mat = perm.ToBitMatrix();
 
                 var v1 = Random.BitVector(n64);

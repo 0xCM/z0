@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => VPattern.vones<T>(w);            
+            public Vector128<T> Invoke() => vpattern.vones<T>(w);            
         }
 
         public readonly struct Ones256<T> : IVPatternSource256<T>
@@ -39,7 +39,7 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => VPattern.vones<T>(w);
+            public Vector256<T> Invoke() => vpattern.vones<T>(w);
 
         }
     }

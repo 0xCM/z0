@@ -101,6 +101,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E parse<E>(string name, bool cased = false, E @default = default)
             where E : unmanaged, Enum
-                => Try(() => Enum.Parse<E>(name, !cased)).ValueOrDefault(@default);
+                => Root.Try(() => Enum.Parse<E>(name, !cased)).ValueOrDefault(@default);
    }
 }

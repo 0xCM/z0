@@ -8,24 +8,54 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Collections.Generic;
-    using System.Runtime.Intrinsics.X86;
     using System.Runtime.CompilerServices;
-    using static zfunc;
-
 
     /// <summary>
     /// Direct vectorized intrinsics
     /// </summary>
+    [ApiHost(ApiHostKind.Direct)]
     public static partial class dinx
     {
 
     }
 
+    [ApiHost(ApiHostKind.Generic)]
+    public static partial class vblocks
+    {
+
+
+    }
+
+    [ApiHost("vpattern", ApiHostKind.Generic)]
+    public static partial class vpattern
+    {
+
+    }
+
+    [ApiHost("bitpack")]
+    public static partial class bitpack
+    {
+
+    }
+
+    [ApiHost("cpuvector")]
+    public static partial class CpuVector
+    {
+    
+    }    
+
     /// <summary>
     /// Direct vectorized intrinsics over floating-point domains
     /// </summary>
+    [ApiHost(ApiHostKind.Direct)]
     public static partial class dinxfp
     {
+    }
+
+    [ApiHost]
+    public static partial class permute
+    {
+
     }
 
     /// <summary>
@@ -47,12 +77,9 @@ namespace Z0
     /// <summary>
     /// Generic vectorized intrinsics
     /// </summary>
+    [ApiHost(ApiHostKind.Generic)]
     public static partial class ginx
     {        
-        public static IEnumerable<MethodInfo> BinOps()
-        {
-            return typeof(ginx).DeclaredMethods().Public().OpenGeneric().Where(x => x.ParameterTypes().Count() == 2);
-        }
 
     }
 

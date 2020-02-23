@@ -32,7 +32,8 @@ namespace Z0
             this.Context = context;
             this.Origin = catalog;
             this.HostName = host;
-            this.RootFolder = LogPaths.The.AsmDataDir(RelativeLocation.Define(Origin.Format(), host));
+            //this.RootFolder = LogPaths.The.AsmDataDir(RelativeLocation.Define(Origin.Format(), host));
+            this.RootFolder = context.EmissionPaths().AsmDataDir(RelativeLocation.Define(Origin.Format(),host));
         }
 
         AsmCodeArchive(IAsmContext context, AssemblyId catalog)
@@ -40,7 +41,8 @@ namespace Z0
             this.Context = context;
             this.Origin = catalog;
             this.HostName = string.Empty;
-            this.RootFolder = LogPaths.The.AsmDataDir(FolderName.Define(Origin.Format()));
+            //this.RootFolder = LogPaths.The.AsmDataDir(FolderName.Define(Origin.Format()));
+            this.RootFolder = context.EmissionPaths().AsmDataDir(FolderName.Define(Origin.Format()));
         }
 
         /// <summary>
@@ -95,7 +97,7 @@ namespace Z0
         /// <param name="id">The identifying moniker</param>
         public Option<AsmCode<T>> Read<T>(OpIdentity id, T t = default)
             where T : unmanaged
-                => Read(RootFolder,id, t);
+                => Read(Context.EmissionPaths().AsmHexPath(RootFolder, id), id, t);
         
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
@@ -106,13 +108,17 @@ namespace Z0
             where T : unmanaged
                 => new AsmCode<T>(id, Hex.parsebytes(data).ToArray());
 
-        static Option<AsmCode<T>> Read<T>(FolderPath location, OpIdentity m, T t = default)
+        Option<AsmCode<T>> Read<T>(FilePath src, OpIdentity m, T t = default)
             where T : unmanaged
-                => Try(() => Parse<T>(Paths.AsmHexPath(location, m).ReadText(),m,t));
+                => Root.Try(() => Parse<T>(src.ReadText(), m,t ));
+
+        // Option<AsmCode<T>> Read<T>(FolderPath location, OpIdentity m, T t = default)
+        //     where T : unmanaged
+        //         => Root.Try(() => Parse<T>(Paths.AsmHexPath(location, m).ReadText(),m,t));
 
         public IAsmCodeArchive Clear()
         {
-            iter(RootFolder.Files(Paths.HexExt), f => f.Delete());
+            iter(RootFolder.Files(FileExtensions.Hex), f => f.Delete());
             return this;
         }
     }

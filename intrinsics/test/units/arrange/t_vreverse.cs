@@ -52,8 +52,8 @@ namespace Z0
         void check_invariant<T>(N128 w, T t = default)
             where T : unmanaged
         {            
-            var v1 = VPattern.vincrements<T>(w);
-            var v2 = VPattern.vdecrements<T>(w);
+            var v1 = vpattern.vincrements<T>(w);
+            var v2 = vpattern.decrements<T>(w);
             var v3 = ginx.vreverse(v1);
             Claim.eq(v2,v3);
         }
@@ -61,8 +61,8 @@ namespace Z0
         void check_invariant<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var v1 = VPattern.vincrements<T>(w);
-            var v2 = VPattern.vdecrements<T>(w);            
+            var v1 = vpattern.vincrements<T>(w);
+            var v2 = vpattern.decrements<T>(w);            
             var v3 = ginx.vreverse(v1);
             Claim.eq(v2,v3);
         }

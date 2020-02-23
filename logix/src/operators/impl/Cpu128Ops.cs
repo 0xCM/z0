@@ -10,7 +10,7 @@ namespace Z0.Logix
 
     using static zfunc;    
 
-    [ApiHost("vector.ops")]
+    [ApiHost("vector.ops", ApiHostKind.Generic)]
     public static partial class VectorizedOps
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
@@ -21,7 +21,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> @true<T>(N128 w)
             where T:unmanaged
-                => VPattern.vones<T>(n128);
+                => vpattern.vones<T>(n128);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> @false<T>(Vector128<T> x)
@@ -31,7 +31,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> @true<T>(Vector128<T> x)
             where T:unmanaged
-                => VPattern.vones<T>(n128);
+                => vpattern.vones<T>(n128);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> @false<T>(Vector128<T> x, Vector128<T> y)
@@ -41,7 +41,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> @true<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T:unmanaged
-                => VPattern.vones<T>(n128);
+                => vpattern.vones<T>(n128);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> @false<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
@@ -51,7 +51,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> @true<T>(Vector128<T> x, Vector128<T> y)
             where T:unmanaged
-                => VPattern.vones<T>(n128);
+                => vpattern.vones<T>(n128);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> identity<T>(Vector128<T> a)

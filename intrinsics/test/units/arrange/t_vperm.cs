@@ -71,7 +71,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = VPattern.vincrements<ushort>(n128);
+            var x = vpattern.vincrements<ushort>(n128);
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
@@ -94,7 +94,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = VPattern.vincrements<ushort>(n128);
+            var x = vpattern.vincrements<ushort>(n128);
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
@@ -115,10 +115,10 @@ namespace Z0
         {
             var n = n128;
 
-            var u = VPattern.vincrements<uint>(n);
+            var u = vpattern.vincrements<uint>(n);
             Claim.eq(CpuVector.vparts(n,0,1,2,3), u);
 
-            var v = VPattern.vdecrements<uint>(n);
+            var v = vpattern.decrements<uint>(n);
             Claim.eq(CpuVector.vparts(n,3,2,1,0),v);
 
             Claim.eq(v, dinx.vperm4x32(u, Perm4L.DCBA));
@@ -198,7 +198,7 @@ namespace Z0
         static Vector128<T> vswapspec<T>(N128 n, params Swap[] swaps)
             where T : unmanaged  
         {
-            var src = VPattern.vincrements<T>(n).ToSpan();
+            var src = vpattern.vincrements<T>(n).ToSpan();
             var dst = src.Swap(swaps);
             return CpuVector.vload(n, in head(src));
         }
@@ -210,7 +210,7 @@ namespace Z0
         public void perm_swaps()
         {            
             
-            var src = VPattern.vincrements<byte>(n128);
+            var src = vpattern.vincrements<byte>(n128);
 
             Swap s = (0,1);
             var x1 = vswap(src, s);
@@ -231,14 +231,14 @@ namespace Z0
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
-                var symbols = Perms.literals(perm);
+                var symbols = permute.literals(perm);
                 Claim.eq(4, symbols.Length);
             }
         }
 
         void perm4x64_mapformat()
         {
-            var pmaps = Perms.mappings(n4);
+            var pmaps = permute.mappings(n4);
             iter(pmaps, m => Trace(m.perm.ToString(), m.format));
         }
 
@@ -289,7 +289,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var src = VPattern.vincrements<ulong>(n256);
+                var src = vpattern.vincrements<ulong>(n256);
                 var x = dinx.vperm4x64(src, Perm4L.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);
@@ -299,8 +299,8 @@ namespace Z0
 
         public void vperm_256u8_outline()
         {
-            var x = VPattern.vincrements<byte>(n256);
-            var y = VPattern.vdecrements<byte>(n256);
+            var x = vpattern.vincrements<byte>(n256);
+            var y = vpattern.decrements<byte>(n256);
             var z = dinx.vreverse(dinx.vshuf32x8(x,y));
             Claim.eq(x,z);
         }
@@ -314,7 +314,7 @@ namespace Z0
             var pbs_actual = BitString.scalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = Perms.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
+            var p_assembled = permute.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
             Claim.eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();
@@ -332,7 +332,7 @@ namespace Z0
             var symbol = default(Perm4L);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.yea(Perms.literal(perm, i, out symbol));
+                Claim.yea(permute.literal(perm, i, out symbol));
                 Claim.eq(expect[i], symbol);
             }
 

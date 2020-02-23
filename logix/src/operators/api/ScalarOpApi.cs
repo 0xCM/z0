@@ -17,7 +17,7 @@ namespace Z0.Logix
     /// <summary>
     /// Services for scalar operators
     /// </summary>
-    [ApiHost("scalar.api")]
+    //[ApiHost("scalar.api", ApiHostKind.Generic)]
     public static class ScalarOpApi
     {
         /// <summary>

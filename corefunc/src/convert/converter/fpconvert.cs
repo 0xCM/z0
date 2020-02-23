@@ -12,7 +12,6 @@ namespace Z0
 
     partial class Converter
     {
-
         [MethodImpl(Inline)]
         static double to64f(sbyte src)        
             => src;

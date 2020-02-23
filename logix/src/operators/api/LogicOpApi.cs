@@ -14,7 +14,7 @@ namespace Z0.Logix
     using static OpHelpers;
     using static TernaryBitLogicKind;
 
-    [ApiHost("logic.api")]
+    //[ApiHost("logic.api",ApiHostKind.Direct)]
     public static class LogicOpApi
     {
         /// <summary>

@@ -28,11 +28,11 @@ namespace Z0
             
         public void EmitFunctions(Type host)
         {
-            var outdir = Paths.AsmDumpDir.CreateIfMissing();         
+            var outdir = Context.EmissionPaths().AsmDumpDir.CreateIfMissing();
             var name = host.DisplayName();
             using var capture = AsmProcessServices.Capture(Context);
             var functions = capture.CaptureFunctions(host);
-            var outpath = outdir + FileName.Define(name, Paths.AsmExt);
+            var outpath = outdir + FileName.Define(name, FileExtensions.Asm);
             var emitter = Context.AsmEmitter();
             emitter.EmitAsm(functions, outpath).OnSome(e => throw e);
             EmitCil(functions, name);                
@@ -52,7 +52,7 @@ namespace Z0
             var dstFileName = FileName.Define(name) + FileExtension.Define(extension);
             if(timestamped)
                 dstFileName = FileName.Timestamped(dstFileName);        
-            var dstPath = Paths.AsmDataDir(FolderName.Define(".dumps")).CreateIfMissing() + dstFileName;
+            var dstPath = Context.EmissionPaths().AsmDataDir(FolderName.Define(".dumps")).CreateIfMissing() + dstFileName;
             return new StreamWriter(dstPath.ToString(),false);
         }        
     }

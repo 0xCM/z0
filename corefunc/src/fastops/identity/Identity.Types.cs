@@ -178,7 +178,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">A type that realizes an identity provider</param>
         static Option<ITypeIdentityProvider> FromHost(this Type host)
-            => Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
+            => Root.Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
 
         static Option<ITypeIdentityProvider> FromAttributed(this Type t)
             => from a in t.CustomAttribute<IdentityProviderAttribute>()

@@ -11,18 +11,8 @@ namespace Z0
 
     using static zfunc;
 
-    public enum AsmEmissionKind
-    {
-        None = 0,
-
-        Primary = 1,
-
-        Imm = 2
-    }
-
     public readonly struct AsmEmissionReport : IAsmReport<AsmEmissionRecord>
     {             
-
         public AssemblyId Id {get;}
         
         public AsmEmissionRecord[] Records {get;}
@@ -30,7 +20,7 @@ namespace Z0
         public AsmEmissionKind EmissionKind {get;}
 
         public FilePath ReportPath 
-            => AsmReports.EmissionsPath(Id, EmissionKind);
+            => AsmEmissionPaths.Current.EmissionReport(Id, EmissionKind);
                 
         public static AsmEmissionReport Create(AssemblyId id, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
         {

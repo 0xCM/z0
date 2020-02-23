@@ -80,7 +80,7 @@ namespace Z0
             if(indices.Length != 2)
                 return Empty;
 
-            var result = Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
+            var result = Root.Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
             if(result.IsSome())
                 return result.Value();
             else

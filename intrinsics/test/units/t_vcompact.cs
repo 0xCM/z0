@@ -19,10 +19,10 @@ namespace Z0
             
             var vsmax = CpuVector.vbroadcast(w, (ushort)cellmax);
             var vtmax = CpuVector.vbroadcast(w,cellmax);
-            var expect = dinx.vsub(vtmax, VPattern.vincrements(w,z8));
+            var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z8));
 
-            var x = dinx.vsub(vsmax, VPattern.vincrements(w, z16));
-            var y = dinx.vsub(vsmax, VPattern.vincrements(w, (ushort)8));
+            var x = dinx.vsub(vsmax, vpattern.vincrements(w, z16));
+            var y = dinx.vsub(vsmax, vpattern.vincrements(w, (ushort)8));
             var actual = dinx.vcompact(x,y,n128,z8);
             
             Claim.eq(expect,actual);            
@@ -35,10 +35,10 @@ namespace Z0
             
             var vsmax = CpuVector.vbroadcast(w, (ushort)cellmax);
             var vtmax = CpuVector.vbroadcast(w,cellmax);
-            var expect = dinx.vsub(vtmax, VPattern.vincrements(w,z8));
+            var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z8));
 
-            var x = dinx.vsub(vsmax, VPattern.vincrements(w, z16));
-            var y = dinx.vsub(vsmax, VPattern.vincrements(w, (ushort)16));
+            var x = dinx.vsub(vsmax, vpattern.vincrements(w, z16));
+            var y = dinx.vsub(vsmax, vpattern.vincrements(w, (ushort)16));
             var actual = dinx.vcompact(x,y,n256,z8);
             
             Claim.eq(expect,actual);            
@@ -51,10 +51,10 @@ namespace Z0
             
             var vsmax = CpuVector.vbroadcast(w, (uint)cellmax);
             var vtmax = CpuVector.vbroadcast(w,cellmax);
-            var expect = dinx.vsub(vtmax, VPattern.vincrements(w,z16));
+            var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z16));
 
-            var x = dinx.vsub(vsmax, VPattern.vincrements(w, 0u));
-            var y = dinx.vsub(vsmax, VPattern.vincrements(w, 4u));
+            var x = dinx.vsub(vsmax, vpattern.vincrements(w, 0u));
+            var y = dinx.vsub(vsmax, vpattern.vincrements(w, 4u));
             var actual = dinx.vcompact(x,y,n128,z16);
             
             Claim.eq(expect,actual);            
@@ -68,10 +68,10 @@ namespace Z0
             var vsmax = CpuVector.vbroadcast(w,(uint)cellmax);
             var vtmax = CpuVector.vbroadcast(w,cellmax);
             
-            var x = dinx.vsub(vsmax, VPattern.vincrements(w, 0u));
-            var y = dinx.vsub(vsmax, VPattern.vincrements(w, 8u));
+            var x = dinx.vsub(vsmax, vpattern.vincrements(w, 0u));
+            var y = dinx.vsub(vsmax, vpattern.vincrements(w, 8u));
             var v = dinx.vcompact(x,y,n256,z16);
-            var expect = dinx.vsub(vtmax, VPattern.vincrements(w,z16));
+            var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z16));
             Claim.eq(expect,v);            
         }
 
@@ -87,12 +87,12 @@ namespace Z0
 
         public void vinflate_128x8u_outline()
         {
-            var src = VPattern.vincrements<byte>(n128);
+            var src = vpattern.vincrements<byte>(n128);
             var z =  dinx.vinflate(src, n256, z16);
             var lo = dinx.vlo(z);
             var hi = dinx.vhi(z);
-            var loExpect = VPattern.vincrements<ushort>(n128);
-            var hiExpect = VPattern.vincrements<ushort>(n128,8);
+            var loExpect = vpattern.vincrements<ushort>(n128);
+            var hiExpect = vpattern.vincrements<ushort>(n128,8);
             Claim.eq(loExpect, lo);
             Claim.eq(hiExpect, hi);
 
@@ -102,7 +102,7 @@ namespace Z0
 
         public void vinflate_128x8u_128x16u_outline()
         {
-            var src = VPattern.vincrements<byte>(n128);            
+            var src = vpattern.vincrements<byte>(n128);            
             var z =  dinx.vinflate(src, n256, z16);
             var lo = dinx.vlo(z);
             var hi = dinx.vhi(z);
@@ -113,17 +113,17 @@ namespace Z0
         public void vcompact_128_outline()
         {
             var n = n128;
-            var a = VPattern.vincrements<uint>(n,0);
-            var b = VPattern.vincrements<uint>(n,4);
-            var c = VPattern.vincrements<uint>(n,8);
-            var d = VPattern.vincrements<uint>(n,12);
+            var a = vpattern.vincrements<uint>(n,0);
+            var b = vpattern.vincrements<uint>(n,4);
+            var c = vpattern.vincrements<uint>(n,8);
+            var d = vpattern.vincrements<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
             var abActual = dinx.vcompact(a,b,n128,z16);
-            var abExpect = VPattern.vincrements<ushort>(n);
+            var abExpect = vpattern.vincrements<ushort>(n);
             Claim.eq(abExpect, abActual);
 
             var abcdActual = dinx.vcompact(a,b,c,d, n128, z8);
-            var abcdExpect = VPattern.vincrements<byte>(n);
+            var abcdExpect = vpattern.vincrements<byte>(n);
             Claim.eq(abcdExpect, abcdActual);
             
         }
@@ -132,17 +132,17 @@ namespace Z0
         {
             var n = n256;
 
-            var a0 = VPattern.vincrements<uint>(n,0);
-            var b0 = VPattern.vincrements<uint>(n,8);
-            var c0 = VPattern.vincrements<uint>(n,16);
-            var d0 = VPattern.vincrements<uint>(n,24);      
+            var a0 = vpattern.vincrements<uint>(n,0);
+            var b0 = vpattern.vincrements<uint>(n,8);
+            var c0 = vpattern.vincrements<uint>(n,16);
+            var d0 = vpattern.vincrements<uint>(n,24);      
 
 
             var compacted = dinx.vcompact(a0,b0,c0,d0, n256, z8);        
             var inflated = dinx.vinflate(compacted, n1024, z32);
 
-            Claim.eq(VPattern.vincrements<ushort>(n), dinx.vcompact(a0,b0,n256,z16));
-            Claim.eq(VPattern.vincrements<byte>(n), compacted);
+            Claim.eq(vpattern.vincrements<ushort>(n), dinx.vcompact(a0,b0,n256,z16));
+            Claim.eq(vpattern.vincrements<byte>(n), compacted);
             Claim.eq(a0,inflated.A);
             Claim.eq(b0,inflated.B);
             Claim.eq(c0,inflated.C);

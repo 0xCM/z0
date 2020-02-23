@@ -10,9 +10,8 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static OpHelpers;
 
-    [ApiHost("expr.vector.eval")]
+    //[ApiHost("expr.vector.eval", ApiHostKind.Generic)]
     static class VectorExprEval
     {
         [Op("eval_vec128_expr"), NumericClosures(NumericKind.Integers)]

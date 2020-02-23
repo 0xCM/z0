@@ -10,6 +10,7 @@ namespace Z0
 
     using static zfunc;    
 
+    [ApiHost("bitvector")]
     public static partial class BitVector
     {   
         /// <summary>

@@ -14,7 +14,7 @@ namespace Z0
     using static HexConst;
     using static As;
 
-    public static partial class VData
+    public static partial class vdata
     {        
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan

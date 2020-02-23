@@ -105,8 +105,8 @@ namespace Z0
             var t = z64;
             var count = vcount(ws,s);
         
-            var a0 = VPattern.vincrements(ws,1u);
-            var a1 = VPattern.vincrements(ws,a0.LastCell() + 1);
+            var a0 = vpattern.vincrements(ws,1u);
+            var a1 = vpattern.vincrements(ws,a0.LastCell() + 1);
             var b0 = dinx.vmul(a0,a1);
             //var b1 = dinx.vmul(dinx.vperm4x32(a0, Perm4L.BADC), dinx.vperm4x32(a1, Perm4L.BADC));
             var b1 = dinx.vmul(dinx.vswaphl(a0), dinx.vswaphl(a1));

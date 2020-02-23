@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+    partial class permute
     {
         /// <summary>
         /// Creates a generic permutation by application of a sequence of transpositions to the identity permutation
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Perm<T> build<T>(T n, params (T i, T j)[] swaps)
             where T : unmanaged
-                => new Perm<T>(n,swaps);
+                => new Perm<T>(n, swaps);
 
         /// <summary>
         /// Creates a generic permutation by application of a sequence of transpositions to the identity permutation

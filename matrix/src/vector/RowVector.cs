@@ -129,8 +129,8 @@ namespace Z0
                => new RowVector<U>(convert<T,U>(data));
 
         [MethodImpl(Inline)]
-        public RowVector<T> Replicate(bool structureOnly = false)
-            => new RowVector<T>(data.Replicate(structureOnly));
+        public RowVector<T> Replicate()
+            => new RowVector<T>(data.Replicate());
 
         
         public bool Equals(RowVector<T> rhs)

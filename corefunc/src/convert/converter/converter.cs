@@ -16,6 +16,7 @@ namespace Z0
     
     using static zfunc;
 
+    [ApiHost("converter",ApiHostKind.Generic)]
     public static partial class Converter
     {
         [MethodImpl(Inline)]   
@@ -68,7 +69,7 @@ namespace Z0
             else if(typeof(S) == typeof(double))
                 return convert<T>(float64(src));
             else if(typeof(S) == typeof(char))
-                return convert<T>(char16(src));
+                return convert<T>(character(src));
             else            
                 return unhandled<S,T>(src);
         }

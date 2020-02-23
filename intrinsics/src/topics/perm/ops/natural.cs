@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+    partial class permute
     {
         /// <summary>
         /// Reifies a permutation of length 8 from its canonical scalar specification

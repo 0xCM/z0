@@ -106,31 +106,31 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<sbyte> src)
-            => TestC(src, VPattern.vones<sbyte>(n128));
+            => TestC(src, vpattern.vones<sbyte>(n128));
 
         [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<byte> src)
-            => TestC(src, VPattern.vones<byte>(n128));
+            => TestC(src, vpattern.vones<byte>(n128));
 
         [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<ushort> src)
-            => TestC(src, VPattern.vones<ushort>(n128));
+            => TestC(src, vpattern.vones<ushort>(n128));
         
         [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<int> src)
-            => TestC(src, VPattern.vones<int>(n128));
+            => TestC(src, vpattern.vones<int>(n128));
 
         [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<uint> src)
-            => TestC(src, VPattern.vones<uint>(n128));
+            => TestC(src, vpattern.vones<uint>(n128));
 
         [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<long> src)
-            => TestC(src, VPattern.vones<long>(n128));
+            => TestC(src, vpattern.vones<long>(n128));
 
         [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<ulong> src)
-            => TestC(src, VPattern.vones<ulong>(n128));
+            => TestC(src, vpattern.vones<ulong>(n128));
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256

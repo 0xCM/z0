@@ -22,7 +22,11 @@ namespace Z0
     /// type predicated on a byte would not enjoy this status and would endure
     /// a constant barrage of shifts, movements, etc. from not being 32-bit aligned.
     /// </remarks>
-    [IdentityProvider(typeof(BitIdentityProvider)), UserPrimitive(PrimitiveId), Converters(typeof(BitConverters))]
+    [
+        IdentityProvider(typeof(BitIdentityProvider)), 
+        UserPrimitive(PrimitiveId), 
+        ConversionProvider(typeof(BitConversionProvider))
+    ]
     public readonly struct bit : IUserPrimitive<bit>
     {
         public const uint PrimitiveId = 1u;

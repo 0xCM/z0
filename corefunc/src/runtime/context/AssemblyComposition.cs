@@ -61,7 +61,6 @@ namespace Z0
             => Resolved.Length == 0;
     }
 
-
     partial class xfunc
     {
         /// <summary>

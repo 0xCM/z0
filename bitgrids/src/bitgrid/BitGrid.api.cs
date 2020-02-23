@@ -10,6 +10,7 @@ namespace Z0
 
     using static zfunc;
 
+    [ApiHost("bitgrid")]
     public static partial class BitGrid
     {
                     

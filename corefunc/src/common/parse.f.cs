@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 using Z0;
 
@@ -75,6 +76,19 @@ partial class zfunc
     /// </summary>
     public static object parse(Type t, string s)
         => parsers[t](s);
+
+    /// <summary>
+    /// Evaluates a function over a value if the value is not null; otherwise invokes
+    /// a function that will produce a value that is within the expected range
+    /// </summary>
+    /// <typeparam name="S">The object type</typeparam>
+    /// <typeparam name="T">The function result type</typeparam>
+    /// <param name="x">The object to test</param>
+    /// <param name="f1">The non-null evaluator</param>
+    /// <param name="f2">The null evaluator</param>
+    [MethodImpl(Inline)]
+    public static T ifvalue<S, T>(S x, Func<S, T> f1, Func<T> f2)
+        where S : class => (x != null) ? f1(x) : f2();
 
     /// <summary>
     /// Attempts to parse the supplied value

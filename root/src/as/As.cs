@@ -348,16 +348,28 @@ namespace Z0
                 => ref Unsafe.As<Vector256<double>,Vector256<T>>(ref Refs.mutable(in src));
 
         [MethodImpl(Inline)]
-        public static bit bitval<T>(T src)
+        public static T generic<T>(char src)
+            => Unsafe.As<char,T>(ref src);                 
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(bool src)
+            => Unsafe.As<bool,T>(ref src);                 
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(bit src)
+            => Unsafe.As<bit,T>(ref src);                 
+
+        [MethodImpl(Inline)]
+        public static bit ubit<T>(T src)
             => Unsafe.As<T,bit>(ref src);        
 
         [MethodImpl(Inline)]
-        public static char char16<T>(T src)        
-            => Unsafe.As<T,char>(ref src);
+        public static bool boolean<T>(T src)
+            => Unsafe.As<T,bool>(ref src);        
 
         [MethodImpl(Inline)]
-        public static T generic<T>(char src)
-            => Unsafe.As<char,T>(ref src);                 
+        public static char character<T>(T src)        
+            => Unsafe.As<T,char>(ref src);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static sbyte int8<T>(T src)
@@ -406,7 +418,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref sbyte int8<T>(ref T src)
             => ref Unsafe.As<T,sbyte>(ref src);
-
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref byte uint8<T>(ref T src)

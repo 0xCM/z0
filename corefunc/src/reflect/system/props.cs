@@ -26,6 +26,6 @@ namespace Z0
         /// <param name="prop">The property</param>
         /// <param name="instance">The object instance, if applicable</param>
         public static Option<object> TryGetValue(this PropertyInfo prop, object instance = null)
-            => Try(() => prop.GetValue(instance));
+            => Root.Try(() => prop.GetValue(instance));
     }
 }

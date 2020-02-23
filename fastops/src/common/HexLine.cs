@@ -20,7 +20,7 @@ namespace Z0
 
         public const char DefaultByteSep = AsciSym.Space;
 
-        public static FileExtension FileExt => Paths.HexExt;
+        public static FileExtension FileExt => FileExtensions.Hex;
 
         /// <summary>
         /// Parses a row of identified hex text

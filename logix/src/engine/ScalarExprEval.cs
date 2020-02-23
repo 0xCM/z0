@@ -10,7 +10,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    [ApiHost("expr.scalar.eval")]
+    //[ApiHost("expr.scalar.eval", ApiHostKind.Generic)]
     static class ScalarExprEval
     {
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)

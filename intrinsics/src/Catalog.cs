@@ -27,14 +27,6 @@ namespace Z0
 
         public override IEnumerable<Type> ServiceHostTypes
             => typeof(VXTypes).GetNestedTypes().Realize<IFunc>();
-
-        public override IEnumerable<ApiHost> GenericApiHosts
-            => from t in items(typeof(ginx),typeof(vblocks),typeof(VPattern), typeof(BitPack), typeof(CpuVector))
-                select ApiHost.Define(AssemblyId,t);
-
-        public override IEnumerable<ApiHost> DirectApiHosts
-            => from t in items(typeof(dinx), typeof(BitPack), typeof(CpuVector))
-                select ApiHost.Define(AssemblyId,t);
     }
 
     public static class Intrinsics

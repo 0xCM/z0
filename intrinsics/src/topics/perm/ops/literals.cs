@@ -11,12 +11,13 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+    partial class permute
     {
         /// <summary>
         /// Extracts the ordered sequence of symbolic literals that define a 4-symbol permutation
         /// </summary>
         /// <param name="src">The canonical literal representation</param>
+        [MethodImpl(Inline)]
         public static Span<Perm4L> literals(Perm4L src)
         {            
             const int length = 4;
@@ -50,6 +51,7 @@ namespace Z0
         /// Extracts the ordered sequence of symbolic literals that define an 8-symbol permutation
         /// </summary>
         /// <param name="src">The canonical literal representation</param>
+        [MethodImpl(Inline)]
         public static Span<Perm8L> literals(Perm8L src)
         {            
             const int length = 8;

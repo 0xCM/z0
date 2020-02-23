@@ -47,7 +47,7 @@ namespace Z0
             => data.Length;
 
         public bool empty()
-            => not(nonempty);
+            => !nonempty;
 
         public T this[int i] 
             => data[i];

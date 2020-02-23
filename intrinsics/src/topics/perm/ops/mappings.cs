@@ -13,7 +13,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perms
+    partial class permute
     {
         /// <summary>
         /// Enumerates all permutation map format strings on 4 symbols

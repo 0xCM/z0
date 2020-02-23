@@ -28,7 +28,7 @@ namespace Z0
         public static Vector128<T> Ones
         {
             [MethodImpl(Inline)]
-            get => VPattern.vones<T>(MaxWidth);
+            get => vpattern.vones<T>(MaxWidth);
         }
 
         public static T Zero => default;
