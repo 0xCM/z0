@@ -10,7 +10,7 @@ namespace Z0.Designators
 
     using static zfunc;
 
-    public sealed class DataBlocksTest : AssemblyDesignator<DataBlocksTest>
+    public sealed class DataBlocksTest : AssemblyResolution<DataBlocksTest>
     {
         const AssemblyId Identity = AssemblyId.DataBlocksTest;
 

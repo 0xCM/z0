@@ -6,14 +6,14 @@ namespace Z0.Designators
 {
     using System;
 
-    public sealed class Intrinsics : AssemblyDesignator<Intrinsics>
+    public sealed class Intrinsics : AssemblyResolution<Intrinsics>
     {        
         const AssemblyId Identity = AssemblyId.Intrinsics;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog();
     }
 }

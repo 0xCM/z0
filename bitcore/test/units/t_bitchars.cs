@@ -54,7 +54,7 @@ namespace Z0
                 Claim.eq(s0, s1);
 
                 s0.Reverse();
-                var textA = s0.Format();
+                var textA = s0.Concat();
                 var textB = BitString.scalar(a).Format();
                 Claim.eq(textA, textB);
             }

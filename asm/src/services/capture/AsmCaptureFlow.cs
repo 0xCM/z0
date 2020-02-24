@@ -48,8 +48,6 @@ namespace Z0
                     foreach(var host in owner)
                        yield return RunCaptureWorkflow(host);
                 }
-                // if(Selected.Contains(host.Owner))
-                //     yield return RunCaptureWorkflow(host);
             }
 
             iter(Selected, CreateLocationReport);

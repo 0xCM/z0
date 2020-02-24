@@ -33,7 +33,7 @@ namespace Z0
         AsmExecBuffer(IAsmContext context, int? size = null)
         {
             Context = context;            
-            var buffer = OS.AllocExec(size ?? DefaultSize);
+            var buffer = ExecBuffers.alloc(size ?? DefaultSize);
             Handle = buffer.Handle;
             Length = buffer.Length;
             Token = buffer;

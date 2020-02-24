@@ -38,7 +38,7 @@ namespace Z0.Mkl.Test
         }
 
 
-        OpTimePair vaddF32Perf(int samples, long cycles)
+        BenchMarkedPair vaddF32Perf(int samples, long cycles)
         {
             var lhs1 = RVec<float>(samples);
             var rhs1 = RVec<float>(samples);
@@ -63,7 +63,7 @@ namespace Z0.Mkl.Test
             
         }
 
-        OpTimePair vaddF64Perf(int samples, long cycles)
+        BenchMarkedPair vaddF64Perf(int samples, long cycles)
         {
             var lhs1 = RVec<double>(samples);
             var rhs1 = RVec<double>(samples);

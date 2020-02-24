@@ -16,6 +16,14 @@ namespace Z0.Mkl
 
     static class Examples
     {
+        /// <summary>
+        /// Captures a stopwatch duration
+        /// </summary>
+        /// <param name="sw">A running/stopped stopwatch</param>
+        [MethodImpl(Inline)]   
+        public static Duration snap(Stopwatch sw)     
+            => Duration.Define(sw.ElapsedTicks);        
+
         const string Intro = "beginning";
         const string Finale = "finished";
 
@@ -64,7 +72,7 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         public static string finale(string title, object value, Stopwatch sw, bool silent = true, [CallerMemberName] string method = null)
-            => finale(title, value, snapshot(sw), silent, method);
+            => finale(title, value, snap(sw), silent, method);
 
         public static string output(object output, bool silent = true)
         {
@@ -170,7 +178,7 @@ namespace Z0.Mkl
 
             var sw = stopwatch();
             var result = CBLAS.cblas_sasum(n, ref x[0], incx);
-            var time = snapshot(sw);            
+            var time = snap(sw);            
 
             msg += output(result, silent);            
             msg += eol();
@@ -193,7 +201,7 @@ namespace Z0.Mkl
 
             var time = start();
             var result = CBLAS.cblas_dzasum(n, ref x[0], incx);            
-            output("result", result, snapshot(time));
+            output("result", result, snap(time));
 
         }
 
@@ -210,7 +218,7 @@ namespace Z0.Mkl
 
             var sw = stopwatch();
             CBLAS.cblas_saxpy(n, alpha, ref x[0], incx, ref y[0], incy);
-            var time = snapshot(sw);            
+            var time = snap(sw);            
 
             output(y.FormatAsVector());
             conclude(time);                                    
@@ -242,7 +250,7 @@ namespace Z0.Mkl
                 );            
 
             var c = mkl.gemm(a,b);            
-            var time = snapshot(timer); 
+            var time = snap(timer); 
             var finaleMsg = finale(nameof(c), c.Format(), timer, silent, method);
                 
             var report = text();

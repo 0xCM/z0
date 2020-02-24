@@ -35,7 +35,7 @@ namespace Z0.Mkl.Test
             Claim.yea(dst1 == dst2);
         }
 
-        OpTimePair vMulPerf(int samples, long cycles)
+        BenchMarkedPair vMulPerf(int samples, long cycles)
         {
             var lhs1 = RVec<double>(samples);
             var rhs1 = RVec<double>(samples);

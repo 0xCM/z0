@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;    
 
 
-    class App : Context
+    class App : RngContext
     {
 
         public App()

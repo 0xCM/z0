@@ -19,15 +19,15 @@ namespace Z0
         public t_asm_explicit()
         {
             Context = AsmContext.New(
-                Designators.AsmCore.Designated,
-                Designators.GMath.Designated,
-                Designators.Intrinsics.Designated,
-                Designators.BitCore.Designated,
-                Designators.BitGrids.Designated,
-                Designators.Logix.Designated,
-                Designators.CoreFunc.Designated,
-                Designators.Root.Designated,
-                Designators.BitSpan.Designated
+                Designators.AsmCore.Resolution,
+                Designators.GMath.Resolution,
+                Designators.Intrinsics.Resolution,
+                Designators.BitCore.Resolution,
+                Designators.BitGrids.Resolution,
+                Designators.Logix.Resolution,
+                Designators.CoreFunc.Resolution,
+                Designators.Root.Resolution,
+                Designators.BitSpan.Resolution
                 );
                                     
         }

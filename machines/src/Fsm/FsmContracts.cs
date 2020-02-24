@@ -59,7 +59,7 @@ namespace Z0.Machines
     /// <summary>
     /// Defines context specialization for FSM
     /// </summary>
-    public interface IFsmContext : IContext
+    public interface IFsmContext : IRngContext
     {
         ulong? ReceiptLimit {get;}
     }

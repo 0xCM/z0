@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
 
     partial class Stacked
     {

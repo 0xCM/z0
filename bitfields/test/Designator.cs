@@ -10,7 +10,7 @@ namespace Z0.Designators
 
     using static zfunc;
 
-    public sealed class BitFieldTest : AssemblyDesignator<BitFieldTest>
+    public sealed class BitFieldTest : AssemblyResolution<BitFieldTest>
     {
         const AssemblyId Identity = AssemblyId.BitFieldsTest;
 

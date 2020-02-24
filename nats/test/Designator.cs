@@ -6,7 +6,7 @@ namespace Z0.Designators
 {
     using System;
     
-    public sealed class NatsTest : AssemblyDesignator<NatsTest>
+    public sealed class NatsTest : AssemblyResolution<NatsTest>
     {
         const AssemblyId Identity = AssemblyId.NatsTest;
 

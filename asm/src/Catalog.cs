@@ -17,10 +17,10 @@ namespace Z0
         }
         
         public override IEnumerable<ApiHost> DirectApiHosts
-            => items(ApiHost.Define(AssemblyId, typeof(AsmSpecs.AsmConstructs)));               
+            => items(ApiHost.Define(OwnerId, typeof(AsmSpecs.AsmConstructs)));               
 
         public override IEnumerable<ApiHost> GenericApiHosts
-            => items(ApiHost.Define(AssemblyId, typeof(AsmSpecs.AsmConstructs)));               
+            => items(ApiHost.Define(OwnerId, typeof(AsmSpecs.AsmConstructs)));               
 
     }
 }

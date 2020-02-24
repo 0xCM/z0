@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    abstract class Controller<C> : Context<C>, IExecutable
+    abstract class Controller<C> : RngContext<C>, IExecutable
         where C : Controller<C>
     {        
         protected Controller(IPolyrand random)

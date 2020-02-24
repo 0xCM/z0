@@ -6,14 +6,14 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class LibM : AssemblyDesignator<LibM>
+    public sealed class LibM : AssemblyResolution<LibM>
     {
         const AssemblyId Identity = AssemblyId.LibM;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

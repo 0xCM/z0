@@ -14,7 +14,7 @@ namespace Z0
     public ref struct ByteParser<T>
         where T : unmanaged, Enum
     {
-        public IContext Context {get;}
+        public IRngContext Context {get;}
         
         readonly Span<byte> Buffer;
 
@@ -33,10 +33,10 @@ namespace Z0
         public ReadOnlySpan<byte> Parsed
             =>  (Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : new byte[]{};
 
-        public static ByteParser<T> Create(IContext context, int size, IBytePatternSet<T> patterns)
+        public static ByteParser<T> Create(IRngContext context, int size, IBytePatternSet<T> patterns)
             => new ByteParser<T>(context,size,patterns);
 
-        ByteParser(IContext context, int size, IBytePatternSet<T> patterns)
+        ByteParser(IRngContext context, int size, IBytePatternSet<T> patterns)
         {
             this.Context = context;
             this.Buffer = new byte[size];

@@ -66,6 +66,4 @@ namespace Z0
                 return none<V>();
         }
     }
-
-
 }

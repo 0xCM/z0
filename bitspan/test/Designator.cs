@@ -10,7 +10,7 @@ namespace Z0.Designators
 
     using static zfunc;
 
-    public sealed class BitSpanTest : AssemblyDesignator<BitSpanTest>
+    public sealed class BitSpanTest : AssemblyResolution<BitSpanTest>
     {
         const AssemblyId Identity = AssemblyId.BitSpanTest;
 

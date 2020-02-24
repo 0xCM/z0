@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public static class FiniteSet
     {
@@ -33,7 +33,6 @@ namespace Z0
             where T : ISemigroup<T>, new()
                 => new FiniteSet<T>(members);
     }    
-
 
     /// <summary>
     /// Contains a finite set of values

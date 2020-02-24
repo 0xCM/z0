@@ -8,7 +8,7 @@ namespace Z0.Designators
     using System.Linq;
     using System.Collections.Generic;
 
-    public sealed class AnalogsTest : AssemblyDesignator<AnalogsTest>
+    public sealed class AnalogsTest : AssemblyResolution<AnalogsTest>
     {    
         const AssemblyId Identity = AssemblyId.AnalogsTest;
 

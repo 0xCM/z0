@@ -10,40 +10,23 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// A context of everything and yet to everyting nothing
+    /// </summary>
     public interface IContext
     {
-        /// <summary>
-        /// Removes the messages accumulated by the context and returns these messages to the caller
-        /// </summary>
-        IReadOnlyList<AppMsg> DequeuePosts();
-
-        /// <summary>
-        /// Posts a message to the context queue
-        /// </summary>
-        /// <param name="msg">The message to post</param>
-        void PostMessage(AppMsg msg);
-
-        /// <summary>
-        /// Posts a text message to the context queue with optional severity
-        /// </summary>
-        /// <param name="msg">The message to post</param>
-        void PostMessage(string msg, SeverityLevel? severity = null);
-
-        /// <summary>
-        /// Posts an exception, from wich a message is derived, to the context queue
-        /// </summary>
-        /// <param name="msg">The message to post</param>
-        void PostError(Exception e);        
-
-        /// <summary>
-        /// Specifies context RNG
-        /// </summary>
-        IPolyrand Random {get;}
+        
     }
 
-    public interface IContext<C> : IContext
-        where C : IContext
+    /// <summary>
+    /// A context with parameteric state
+    /// </summary>
+    public interface IContext<S> : IContext
     {
-
+        /// <summary>
+        /// State shared with members of the context
+        /// </summary>
+        S State {get;}
     }
+    
 }

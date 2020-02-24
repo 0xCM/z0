@@ -9,7 +9,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class RootTest : AssemblyDesignator<RootTest>
+    public sealed class RootTest : AssemblyResolution<RootTest>
     {
         const AssemblyId Identity = AssemblyId.RootTest;
 

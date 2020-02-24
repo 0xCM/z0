@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
     using System.Collections;
 
-    public abstract class Distribution<S,T> : IDistribution<T>, ISampler<T>
+    public abstract class Distribution<S,T> : IDistribution<T>, IRandomSampler<T>
         where T : unmanaged
         where S : IDistributionSpec<T>
     {

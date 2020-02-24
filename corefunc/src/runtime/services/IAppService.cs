@@ -20,7 +20,7 @@ namespace Z0
     /// Characterizes a set of capabilities that execute within a parametric context
     /// </summary>
     public interface IAppService<C> : IAppService, IContextual<C>
-        where C : IContext
+        where C : IRngContext
     {
 
 

@@ -13,7 +13,7 @@ namespace Z0.Machines
     using static zfunc;
 
     
-    class FsmContext : Context<FsmContext>, IFsmContext
+    class FsmContext : RngContext<FsmContext>, IFsmContext
     {
 
         public FsmContext(IPolyrand random, ulong? receiptLimit = null)

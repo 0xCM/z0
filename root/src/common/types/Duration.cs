@@ -108,13 +108,13 @@ namespace Z0
         public ulong Ns
         {
             [MethodImpl(Inline)]
-            get => Z0.Ticks.ToNs(Ticks);
+            get => Z0.TimerTicks.ToNs(Ticks);
         }
 
         /// <summary>
         /// The duration expressed in timer ticks
         /// </summary>
-        public ulong TimerTicks
+        public ulong TickCount
         {
             [MethodImpl(Inline)]
             get => (ulong)Ticks;
@@ -126,7 +126,7 @@ namespace Z0
         public double Ms
         {
             [MethodImpl(Inline)]
-            get => Z0.Ticks.ToMs(Ticks);
+            get => Z0.TimerTicks.ToMs(Ticks);
         }
 
         [MethodImpl(Inline)]

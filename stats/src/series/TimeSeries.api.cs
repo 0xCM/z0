@@ -71,7 +71,7 @@ namespace Z0
             var sw = stopwatch();
             var series = Define(domain, seed); 
             var terms = series.Terms().ToSpan(count);
-            var time = snapshot(sw);
+            var time = Duration.Define(sw.ElapsedTicks);
             Claim.eq(terms.Length, count);
             Claim.eq(series.Observed.Observed, terms[count - 1].Observed);
             complete(series,time);
@@ -86,7 +86,8 @@ namespace Z0
             var terms = series.Terms().ToSpan(steps);
             Claim.eq(terms.Length, steps);
             Claim.eq(series.Observed.Observed, terms[steps - 1].Observed);
-            var evolved = SeriesEvolution.Define(seed, domain, s0.Observed, series.Observed, snapshot(sw));
+            var time = Duration.Define(sw.ElapsedTicks);
+            var evolved = SeriesEvolution.Define(seed, domain, s0.Observed, series.Observed, time);
             return evolved;            
         }
 
@@ -104,7 +105,7 @@ namespace Z0
                     let status = evolve.ContinueWith(t => receiver(t.Result))
                     select evolve;
             
-            await task(() => Task.WaitAll(variations.ToArray()));
+            await Tasks.create(() => Task.WaitAll(variations.ToArray()));
         }
     }
 }

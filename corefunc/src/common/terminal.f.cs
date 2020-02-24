@@ -212,7 +212,7 @@ partial class zfunc
     public static AppMsg trace<T>(Expression<Func<T>> fx, int? npad = null, SeverityLevel? severity = null)
         => trace(fx.Evaluate(), npad, severity);
 
-    public static AppMsg trace(OpTimePair timing, int? labelPad = null)
+    public static AppMsg trace(BenchMarkedPair timing, int? labelPad = null)
     {
         var msg = appMsg(timing.Format(labelPad), SeverityLevel.Benchmark);
         print(msg);

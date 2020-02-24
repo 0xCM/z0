@@ -139,7 +139,7 @@ namespace Z0.Machines
                 StartTime = StartTime,
                 EndTime = EndTime,
                 ReceiptCount = ReceiptCount,
-                Runtime = snapshot(Runtime),
+                Runtime = Duration.Define(Runtime.ElapsedTicks),
                 TransitionCount = TransitionCount                            
             };
 

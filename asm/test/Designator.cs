@@ -8,21 +8,21 @@ namespace Z0.Designators
     using System.Linq;
     using System.Collections.Generic;
 
-    public sealed class AsmCoreTest : AssemblyDesignator<AsmCoreTest>
+    public sealed class AsmCoreTest : AssemblyResolution<AsmCoreTest>
     {        
         const AssemblyId Identity = AssemblyId.AsmCoreTest;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IEnumerable<IAssemblyDesignator> Designates
-            => new IAssemblyDesignator[]{                
-                GMath.Designated,
-                Intrinsics.Designated, 
-                BitCore.Designated,
-                BitGrids.Designated,
-                Logix.Designated,
-                AsmCore.Designated
+        public override IEnumerable<IAssemblyResolution> Designates
+            => new IAssemblyResolution[]{                
+                GMath.Resolution,
+                Intrinsics.Resolution, 
+                BitCore.Resolution,
+                BitGrids.Resolution,
+                Logix.Resolution,
+                AsmCore.Resolution
             };
 
         public override void Run(params string[] args)

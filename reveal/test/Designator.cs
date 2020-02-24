@@ -7,7 +7,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class RevealTest : AssemblyDesignator<RevealTest>
+    public sealed class RevealTest : AssemblyResolution<RevealTest>
     {
 
         public override void Run(params string[] args)

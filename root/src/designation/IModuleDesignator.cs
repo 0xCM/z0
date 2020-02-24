@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a type that is responsible for identifying/classifying a module
     /// </summary>
-    public interface IModuleDesignator : IAssemblyDesignator
+    public interface IModuleDesignator : IAssemblyResolution
     {
         /// <summary>
         /// The designated module

@@ -9,7 +9,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class CoreFuncTest : AssemblyDesignator<CoreFuncTest>
+    public sealed class CoreFuncTest : AssemblyResolution<CoreFuncTest>
     {
         const AssemblyId Identity = AssemblyId.CoreFuncTest;
 

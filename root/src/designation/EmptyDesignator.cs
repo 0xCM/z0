@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [Ignore]
-    sealed class EmptyDesignator : AssemblyDesignator<EmptyDesignator>
+    sealed class EmptyDesignator : AssemblyResolution<EmptyDesignator>
     {
 
         public EmptyDesignator()

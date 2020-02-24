@@ -11,14 +11,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Logix : AssemblyDesignator<Logix>
+    public sealed class Logix : AssemblyResolution<Logix>
     {
         const AssemblyId Identity = AssemblyId.Logix;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

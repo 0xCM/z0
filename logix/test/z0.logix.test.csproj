@@ -14,7 +14,7 @@
 
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
-    <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.src.csproj" />    
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
 

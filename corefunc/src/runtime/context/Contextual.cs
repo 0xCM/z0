@@ -15,18 +15,18 @@ namespace Z0
     /// </summary>
     public interface IContextual
     {
-        IContext Context {get;}
+        IRngContext Context {get;}
     }
 
     /// <summary>
     /// Charaterizes a type that supports execution within a parametric context
     /// </summary>
     public interface IContextual<C> : IContextual
-        where C : IContext
+        where C : IRngContext
     {
         new C Context {get;}
 
-        IContext IContextual.Context
+        IRngContext IContextual.Context
             => Context;
     }
 }

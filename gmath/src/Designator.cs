@@ -6,14 +6,14 @@ namespace Z0.Designators
 {
     using System;
 
-    public sealed class GMath : AssemblyDesignator<GMath>
+    public sealed class GMath : AssemblyResolution<GMath>
     {
         const AssemblyId Identity = AssemblyId.GMath;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

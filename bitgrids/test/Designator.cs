@@ -6,7 +6,7 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class BitGridsTest : AssemblyDesignator<BitGridsTest>
+    public sealed class BitGridsTest : AssemblyResolution<BitGridsTest>
     {
         const AssemblyId Identity = AssemblyId.BitGridsTest;
 

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Diagnostics;
     
     using static zfunc;
 
@@ -26,6 +27,43 @@ namespace Z0
             {
 
             }        
+
+
+        /// <summary>
+        /// Creates a new stopwatch and optionally start it
+        /// </summary>
+        /// <param name="start">Whether to start the new stopwatch</param>
+        [MethodImpl(Inline)]   
+        protected static Stopwatch stopwatch(bool start = true) 
+            => start ? Stopwatch.StartNew() : new Stopwatch();
+
+        /// <summary>
+        /// Captures a stopwatch duration
+        /// </summary>
+        /// <param name="sw">A running/stopped stopwatch</param>
+        [MethodImpl(Inline)]   
+        protected static Duration snapshot(Stopwatch sw)     
+            => Duration.Define(sw.ElapsedTicks);        
+
+        /// <summary>
+        /// Captures a stopwatch duration and the number of operations executed within the duration period
+        /// </summary>
+        /// <param name="sw">The running/stopped stopwatch</param>
+        /// <param name="opcount">The operation count</param>
+        /// <param name="label">The label associated with the measure, if specified</param>
+        [MethodImpl(Inline)]   
+        protected static BenchmarkRecord optime(long opcount, Stopwatch sw, [CallerMemberName] string label = null)
+            => BenchmarkRecord.Define(opcount, snapshot(sw), label);
+
+        /// <summary>
+        /// Captures a duration and the number of operations executed within the period
+        /// </summary>
+        /// <param name="time">The running time</param>
+        /// <param name="opcount">The operation count</param>
+        /// <param name="label">The label associated with the measure, if specified</param>
+        [MethodImpl(Inline)]   
+        protected static BenchmarkRecord optime(long opcount, Duration time, [CallerMemberName] string label = null)
+            => BenchmarkRecord.Define(opcount, time, label);
 
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points

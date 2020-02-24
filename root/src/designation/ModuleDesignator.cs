@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public abstract class ModuleDesignator<T> : AssemblyDesignator<T>, IModuleDesignator
+    public abstract class ModuleDesignator<T> : AssemblyResolution<T>, IModuleDesignator
         where T : ModuleDesignator<T>, new()
     {
         public Module DeclaringModule 

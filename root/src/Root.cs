@@ -17,6 +17,11 @@ namespace Z0
 
         public const StringComparison IgnoreCase = StringComparison.InvariantCultureIgnoreCase;
 
+        /// <summary>
+        /// Specifies the name of the windows kernel32 dll, primarily intended for use in DllImport attributions
+        /// </summary>
+        public const string Kernel32 = "kernel32.dll";
+
 
         [MethodImpl(Inline)]
         public static NotSupportedException unsupported(object value)

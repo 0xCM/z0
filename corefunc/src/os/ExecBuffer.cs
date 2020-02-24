@@ -48,7 +48,6 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public void Dispose()
-            => OS.Release(Handle);
-
+            => ExecBuffers.release(Handle);
     }
 }

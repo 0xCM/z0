@@ -6,7 +6,7 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class MachineTest : AssemblyDesignator<MachineTest>
+    public sealed class MachineTest : AssemblyResolution<MachineTest>
     {
         const AssemblyId Identity = AssemblyId.MachinesTest;
 

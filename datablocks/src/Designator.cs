@@ -9,14 +9,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class DataBlocks : AssemblyDesignator<DataBlocks>
+    public sealed class DataBlocks : AssemblyResolution<DataBlocks>
     {
         const AssemblyId Identity = AssemblyId.DataBlocks;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

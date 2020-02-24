@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {        
-    public sealed class BitCoreTest : AssemblyDesignator<BitCoreTest>
+    public sealed class BitCoreTest : AssemblyResolution<BitCoreTest>
     {
         const AssemblyId Identity = AssemblyId.BitCoreTest;
 

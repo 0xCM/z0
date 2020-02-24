@@ -9,14 +9,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class AsmCore : AssemblyDesignator<AsmCore>
+    public sealed class AsmCore : AssemblyResolution<AsmCore>
     {
         const AssemblyId Identity = AssemblyId.AsmCore;        
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
 
     }

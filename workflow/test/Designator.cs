@@ -10,7 +10,7 @@ namespace Z0.Designators
 
     using static zfunc;
 
-    public sealed class WorkflowTest : AssemblyDesignator<WorkflowTest>
+    public sealed class WorkflowTest : AssemblyResolution<WorkflowTest>
     {
         const AssemblyId Identity = AssemblyId.WorkflowTest;
 

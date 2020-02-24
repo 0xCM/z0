@@ -24,11 +24,11 @@ namespace Z0
         
         public TestController()
         {
-            this.Context = AsmContext.New(C.Designated.Designates.Where(d => d.Id.IsTest()).Select(x => x).ToArray());
+            this.Context = AsmContext.New(C.Resolution.Designates.Where(d => d.Id.IsTest()).Select(x => x).ToArray());
         }
 
-        static IEnumerable<IAssemblyDesignator> TestHosts
-            => C.Designated.Designates.Where(d => d.Id.IsTest()).Select(x => x);
+        static IEnumerable<IAssemblyResolution> TestHosts
+            => C.Resolution.Designates.Where(d => d.Id.IsTest()).Select(x => x);
 
         // AsmFunction[] ResolveExample<T>(in CaptureExchange exchange, N128 w, T t = default)
         //     where T : unmanaged
@@ -58,9 +58,9 @@ namespace Z0
         //     return r1.Union(r2).ToArray();            
         // }
 
-        static double RunTests(IAssemblyDesignator host)
+        static double RunTests(IAssemblyResolution host)
         {
-            var clock = counter(true);
+            var clock = SystemCounter.Create(true);
             var runtime = 0.0;
             print(ExecutingHost(host));
 
@@ -84,22 +84,22 @@ namespace Z0
         
         static string[] ConcurrentTests
             => new string[]{
-                D.NatsTest.Designated.Name,
-                D.CoreFuncTest.Designated.Name,     
-                D.GMathTest.Designated.Name,
-                D.IntrinsicsTest.Designated.Name,
-                D.BitCoreTest.Designated.Name,
-                D.BitVectorTest.Designated.Name,
-                D.BitGridsTest.Designated.Name,
-                D.LogixTest.Designated.Name,
+                D.NatsTest.Resolution.Name,
+                D.CoreFuncTest.Resolution.Name,     
+                D.GMathTest.Resolution.Name,
+                D.IntrinsicsTest.Resolution.Name,
+                D.BitCoreTest.Resolution.Name,
+                D.BitVectorTest.Resolution.Name,
+                D.BitGridsTest.Resolution.Name,
+                D.LogixTest.Resolution.Name,
                 
             };
 
         static string[] SequentialTests
             => new string[]
         {
-            D.MklApiTest.Designated.Name,
-            D.LibMTest.Designated.Name
+            D.MklApiTest.Resolution.Name,
+            D.LibMTest.Resolution.Name
         };
 
         public static T[] freeze<T>(IEnumerable<T> src)

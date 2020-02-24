@@ -9,7 +9,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class OSTest : AssemblyDesignator<OSTest>
+    public sealed class OSTest : AssemblyResolution<OSTest>
     {
         const AssemblyId Identity = 0;
 

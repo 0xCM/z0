@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
     
     public readonly struct PrimalComparer<T> : IComparer<T>
         where T : unmanaged
@@ -26,7 +26,6 @@ namespace Z0
 
     public static class PrimalComparer
     {        
-
         [MethodImpl(Inline)]
         public static PrimalComparer<T> Get<T>()
             where T : unmanaged

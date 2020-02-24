@@ -35,7 +35,7 @@ namespace Z0
         Option<FilePath> ReportEmissions(AssemblyId src, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
             => AsmReports.Emissions(src, emitted, kind).Save();
 
-        CaptureTokenGroup[] EmitPrimary(in CaptureExchange exchange, IOperationProvider src,  IAsmCatalogEmitter emitter)
+        CaptureTokenGroup[] EmitPrimary(in CaptureExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
         {
             var emissions = new List<CaptureTokenGroup>(); 
 
@@ -46,7 +46,7 @@ namespace Z0
             return emissions.ToArray();
         }        
 
-        CaptureTokenGroup[] EmitImm(in CaptureExchange exchange, IOperationProvider src, IAsmCatalogEmitter emitter)
+        CaptureTokenGroup[] EmitImm(in CaptureExchange exchange, ICatalogProvider src, IAsmCatalogEmitter emitter)
         {
             var emissions = new List<CaptureTokenGroup>();   
             
@@ -57,9 +57,9 @@ namespace Z0
             return emissions.ToArray();                
         }
 
-        Option<FilePath> EmitLocations(IOperationProvider src)
+        Option<FilePath> EmitLocations(ICatalogProvider src)
         {
-            return AsmReports.MemberLocations(src.HostId, src.HostAssembly).Save();
+            return AsmReports.MemberLocations(src.OwnerId, src.Owner).Save();
         }
 
         void Completed(Option<FilePath> report)
@@ -69,24 +69,24 @@ namespace Z0
             report.Require();
         }
 
-        void Archive(in CaptureExchange exchange, IOperationProvider src)
+        void Archive(in CaptureExchange exchange, ICatalogProvider src)
         {
             void OnEmission(in CaptureTokenGroup data)
             {
 
             }
 
-            var metadata = ClrMetadataIndex.Create(src.HostAssembly);
+            var metadata = ClrMetadataIndex.Create(src.Owner);
             var context = AsmContext.New(metadata, Resources);
-            var emitter = context.CatalogEmitter(src.Catalog, OnEmission);
+            var emitter = context.CatalogEmitter(src.Operations, OnEmission);
 
             var primary = EmitPrimary(exchange, src, emitter);
             if(primary.Length != 0)
-                Completed(ReportEmissions(src.HostId, primary, AsmEmissionKind.Primary));
+                Completed(ReportEmissions(src.OwnerId, primary, AsmEmissionKind.Primary));
             
             var imm = EmitImm(exchange, src, emitter);
             if(imm.Length != 0)
-                Completed(ReportEmissions(src.HostId, imm, AsmEmissionKind.Imm));
+                Completed(ReportEmissions(src.OwnerId, imm, AsmEmissionKind.Imm));
             
             Completed(EmitLocations(src));
         }
@@ -98,7 +98,7 @@ namespace Z0
 
             }
 
-            var provider = Resolved.OperationProvider(id);
+            var provider = Resolved.CatalogProvider(id);
             if(provider.IsSome())
             {
                 var exchange = CaptureServices.Exchange(OnCaptureEvent);
@@ -114,7 +114,7 @@ namespace Z0
             }
 
             var exchange = CaptureServices.Exchange(OnCaptureEvent);
-            var providers = Resolved.OperationProviders(ActiveAssemblies);
+            var providers = Resolved.CatalogProviders(ActiveAssemblies);
             
             foreach(var src in providers)
                 Archive(exchange, src);

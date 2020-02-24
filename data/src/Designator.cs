@@ -6,14 +6,14 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class Data : AssemblyDesignator<Data>
+    public sealed class Data : AssemblyResolution<Data>
     {
         const AssemblyId Identity = AssemblyId.Data;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class MklApi : AssemblyDesignator<MklApi>
+    public sealed class MklApi : AssemblyResolution<MklApi>
     {
         const AssemblyId Identity = AssemblyId.MklApi;
         

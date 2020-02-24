@@ -18,8 +18,8 @@ namespace Z0
         /// Creates a new context with selected assemblies
         /// </summary>
         /// <param name="assemblies">The assemblies to share with the context</param>
-        public static IAsmContext New(params IAssemblyDesignator[] assemblies)
-            => New(AssemblyComposition.Define(assemblies));
+        public static IAsmContext New(params IAssemblyResolution[] assemblies)
+            => New(AssemblyComposition.Assemble(assemblies));
 
         /// <summary>
         /// Creates a new context with an assembly composition

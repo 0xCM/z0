@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface ITestContext : IContext, ITestResultSink, ITestResultSource, IBenchResultSink, IBenchResultSource
+    public interface ITestContext : IRngContext, ITestResultSink, ITestResultSource, IBenchResultSink, IBenchResultSource
     {
         ITestConfig Config {get;}
 

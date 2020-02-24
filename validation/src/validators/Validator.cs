@@ -5,11 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static zfunc;
 
     public abstract class Validator : IValidator
     {
+        /// <summary>
+        /// Allocates and optionally starts a system counter
+        /// </summary>
+        [MethodImpl(Inline)]   
+        protected static SystemCounter counter(bool start = false) 
+            => SystemCounter.Create(start);
+
         protected Validator(ITestContext context, bool xzero = false)
         {
             this.Context = context;

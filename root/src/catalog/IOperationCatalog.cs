@@ -8,12 +8,28 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     /// <summary>
     /// Characterizes a type that supports operation discovery
     /// </summary>
     public interface IOperationCatalog
     {
+        /// <summary>
+        /// The identity of the assembly that defines and owns the catalog
+        /// </summary>
+        AssemblyId OwnerId {get;}
+
+        /// <summary>
+        /// The assembly that defines and owns the catalog
+        /// </summary>
+        Assembly Owner {get;}
+
+        /// <summary>
+        /// The api hosts known to the catalog
+        /// </summary>
+        ApiHost[] ApiHosts {get;}
+
         /// <summary>
         /// The known types that reify contracted operation services, potentiall generic
         /// </summary>
@@ -30,30 +46,41 @@ namespace Z0
         IEnumerable<ApiHost> DirectApiHosts {get;}
 
         /// <summary>
-        /// Th global data resource index
+        /// The global data resource index
         /// </summary>
         DataResourceIndex Resources {get;}
-
-        /// <summary>
-        /// Identifies the declaring assembly
-        /// </summary>
-        AssemblyId AssemblyId {get;}
-
-        /// <summary>
-        /// The api hosts known to the catalog
-        /// </summary>
-        ApiHost[] ApiHosts {get;}
 
         /// <summary>
         /// Specifies whether the catalog is vacuous
         /// </summary>
         bool IsEmpty
-            => AssemblyId == AssemblyId.Empty || AssemblyId == AssemblyId.None;
+            => OwnerId == AssemblyId.Empty || OwnerId == AssemblyId.None;
             
         /// <summary>
         /// The name of the catalog, which should be unique with respect to known catalogs
         /// </summary>
         string CatalogName
-            => AssemblyId.Format();        
+            => OwnerId.Format();        
     }
+
+    /// <summary>
+    /// Characterizes a type that provides access to an operation catalog
+    /// </summary>
+    public interface ICatalogProvider
+    {
+        /// <summary>
+        /// The provided catalog
+        /// </summary>
+        IOperationCatalog Operations {get;}
+
+        /// <summary>
+        /// The owning assembly
+        /// </summary>
+        Assembly Owner {get;}
+
+        AssemblyId OwnerId 
+            => Operations.OwnerId;
+    }
+
+
 }

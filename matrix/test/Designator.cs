@@ -6,7 +6,7 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class MatrixTest : AssemblyDesignator<MatrixTest>
+    public sealed class MatrixTest : AssemblyResolution<MatrixTest>
     {
         const AssemblyId Identity = AssemblyId.MatrixTest;
 

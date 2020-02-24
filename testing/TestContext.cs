@@ -13,9 +13,16 @@ namespace Z0
     using static zfunc;
     
 
-    public abstract class TestContext<U> : Context<U>, ITestContext
+    public abstract class TestContext<U> : RngContext<U>, ITestContext
         where U : TestContext<U>
     {
+
+        /// <summary>
+        /// Allocates and optionally starts a system counter
+        /// </summary>
+        [MethodImpl(Inline)]   
+        protected static SystemCounter counter(bool start = false) 
+            => SystemCounter.Create(start);
 
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
             : base(random ?? Rng.WyHash64(Seed64.Seed00))

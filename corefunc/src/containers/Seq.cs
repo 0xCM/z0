@@ -19,14 +19,17 @@ namespace Z0
         public static Seq<T> define<T>(IEnumerable<T> src)
                 => new Seq<T>(src); 
         public static FiniteSeq<T> finite<T>(IEnumerable<T> src)
-                => new FiniteSeq<T>(src); 
+            => new FiniteSeq<T>(src); 
+
+        public static FiniteSeq<T> finite<T>(params T[] src)
+            => new FiniteSeq<T>(src); 
+
         public static Seq<T> define<T>(params T[] src)
-                => new Seq<T>(src); 
+            => new Seq<T>(src); 
     }
 
     /// <summary>
-    /// Provides a layer of indirection for, and gives a concrete type to, 
-    /// an IEnumerable instance
+    /// Provides a layer of indirection for, and gives a concrete type to, an IEnumerable instance
     /// </summary>
     public readonly struct Seq<T> : ISeq<Seq<T>,T>
     {
@@ -45,16 +48,16 @@ namespace Z0
 
         public Seq(IEnumerable<T> src)
         {
-            this.stream = src;
+            this.Source = src;
             this.nonempty = true;
         }
 
-        readonly IEnumerable<T> stream;
+        readonly IEnumerable<T> Source;
         
         readonly bool nonempty;
 
         public IEnumerable<T> Content 
-            => stream;
+            => Source;
 
         public bool empty()
             => !nonempty;
@@ -63,24 +66,22 @@ namespace Z0
             => new Seq<T>(src);
 
         public Seq<T> Concat(Seq<T> rhs)
-            => new Seq<T>(stream.Concat(rhs.stream));
+            => new Seq<T>(Source.Concat(rhs.Source));
 
         public Seq<Y> Select<Y>(Func<T, Y> selector)       
-             => define(from x in stream select selector(x));
+             => define(from x in Source select selector(x));
 
         public Seq<Z> SelectMany<Y, Z>(Func<T, Seq<Y>> lift, Func<T, Y, Z> project)
-            => define(from x in stream
-                          from y in lift(x).stream
+            => define(from x in Source
+                          from y in lift(x).Source
                           select project(x, y));
 
         public Seq<Y> SelectMany<Y>(Func<T, Seq<Y>> lift)
-            => define(from x in stream
-                          from y in lift(x).stream
+            => define(from x in Source
+                          from y in lift(x).Source
                           select y);
 
         public Seq<T> Where(Func<T, bool> predicate)
-            => define(from x in stream where predicate(x) select x);
+            => define(from x in Source where predicate(x) select x);
     }
-    
-
 }

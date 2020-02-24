@@ -9,14 +9,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class BitCore : AssemblyDesignator<BitCore>
+    public sealed class BitCore : AssemblyResolution<BitCore>
     {
         const AssemblyId Identity = AssemblyId.BitCore;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

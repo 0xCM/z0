@@ -15,59 +15,59 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Control : AssemblyDesignator<Control>
+    public sealed class Control : AssemblyResolution<Control>
     {
         const AssemblyId Identity = AssemblyId.Control;
 
         public override AssemblyId Id
             => Identity;
             
-        public override IEnumerable<IAssemblyDesignator> Designates
-            => items<IAssemblyDesignator>(            
+        public override IEnumerable<IAssemblyResolution> Designates
+            => items<IAssemblyResolution>(            
             
-            D.Root.Designated,
+            D.Root.Resolution,
             
-            D.Nats.Designated,
-            D.NatsTest.Designated,            
+            D.Nats.Resolution,
+            D.NatsTest.Resolution,            
                         
-            D.CoreFunc.Designated, 
-            D.CoreFuncTest.Designated, 
+            D.CoreFunc.Resolution, 
+            D.CoreFuncTest.Resolution, 
             
-            D.Data.Designated,
+            D.Data.Resolution,
             
-            D.GMath.Designated,
-            D.GMathTest.Designated,
+            D.GMath.Resolution,
+            D.GMathTest.Resolution,
 
-            D.Matrix.Designated,
+            D.Matrix.Resolution,
 
-            D.BitCore.Designated,
-            D.BitCoreTest.Designated,
+            D.BitCore.Resolution,
+            D.BitCoreTest.Resolution,
 
-            D.BitVectors.Designated,
-            D.BitVectorTest.Designated,
+            D.BitVectors.Resolution,
+            D.BitVectorTest.Resolution,
 
-            D.Intrinsics.Designated,
-            D.IntrinsicsTest.Designated,            
+            D.Intrinsics.Resolution,
+            D.IntrinsicsTest.Resolution,            
 
-            D.RngCore.Designated,
+            D.RngCore.Resolution,
 
-            D.BitGrids.Designated,
-            D.BitGridsTest.Designated,
+            D.BitGrids.Resolution,
+            D.BitGridsTest.Resolution,
 
-            D.AsmCore.Designated,
-            D.AsmCoreTest.Designated,
+            D.AsmCore.Resolution,
+            D.AsmCoreTest.Resolution,
 
-            D.MklApi.Designated,
-            D.MklApiTest.Designated,
+            D.MklApi.Resolution,
+            D.MklApiTest.Resolution,
 
-            D.Machines.Designated,
-            D.MachineTest.Designated,
+            D.Machines.Resolution,
+            D.MachineTest.Resolution,
 
-            D.Logix.Designated,
-            D.LogixTest.Designated,
+            D.Logix.Resolution,
+            D.LogixTest.Resolution,
 
-            D.LibM.Designated,            
-            D.LibMTest.Designated
+            D.LibM.Resolution,            
+            D.LibMTest.Resolution
 
             );               
    }

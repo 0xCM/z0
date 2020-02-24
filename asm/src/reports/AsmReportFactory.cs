@@ -17,7 +17,7 @@ namespace Z0
         public static Option<Assembly> ResolvedAssembly(this IAsmContext context, AssemblyId id)
             =>  (from r in  context.Compostion.Resolved
                 where r.Id == id
-                select r.DeclaringAssembly).FirstOrDefault();
+                select r.Resolved).FirstOrDefault();
 
         public static Option<MemberLocationReport> MemberLocations(this IAsmContext context, AssemblyId src)
             => from a in context.ResolvedAssembly(src)

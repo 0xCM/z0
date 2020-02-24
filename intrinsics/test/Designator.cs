@@ -9,7 +9,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class IntrinsicsTest : AssemblyDesignator<IntrinsicsTest>
+    public sealed class IntrinsicsTest : AssemblyResolution<IntrinsicsTest>
     {
         const AssemblyId Identity = AssemblyId.IntrinsicsTest;
 

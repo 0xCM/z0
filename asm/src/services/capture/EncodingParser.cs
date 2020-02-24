@@ -13,16 +13,16 @@ namespace Z0
 
     public readonly struct EncodingParser : IEncodingParser
     {
-        public IContext Context {get;}
+        public IRngContext Context {get;}
 
         public int BufferLength {get;}
 
         [MethodImpl(Inline)]
-        public static IEncodingParser Create(IContext context, int? maxlen = null)
+        public static IEncodingParser Create(IRngContext context, int? maxlen = null)
             => new EncodingParser(context,maxlen);
 
         [MethodImpl(Inline)]
-        EncodingParser(IContext context, int? maxlen)
+        EncodingParser(IRngContext context, int? maxlen)
         {
             this.Context = context;
             this.BufferLength = maxlen ?? Pow2.T14;
@@ -61,7 +61,7 @@ namespace Z0
             return ParsedEncodings.Create(dst);
         }
 
-        static ByteParser<EncodingPatternKind> ByteParser(IContext context, int size)
+        static ByteParser<EncodingPatternKind> ByteParser(IRngContext context, int size)
             => ByteParser<EncodingPatternKind>.Create(context, size, new EncodingPatterns(0));
 
         void ReportDuplicates(OpIdentity[] duplicated)

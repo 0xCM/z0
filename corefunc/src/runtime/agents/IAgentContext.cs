@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IAgentContext : IContext
+    public interface IAgentContext : IRngContext
     {
         IEnumerable<ISystemAgent> Memberhsip {get;}   
 

@@ -22,7 +22,7 @@ namespace Z0
     /// Characterizes a service with parametric context that requires explicit lifecycle managment
     /// </summary>
     public interface IServiceAllocation<C> : IServiceAllocation, IAppService<C>
-        where C : IContext
+        where C : IRngContext
     {
 
     }

@@ -14,8 +14,8 @@ namespace Z0
         public ConsoleControl()
             : base(Rng.WyHash64(Seed64.Seed00))
         {
-            Resolved = Designators.Control.Designated.Designates.ToArray();
-            AsmCtx = AsmContext.New(AssemblyComposition.Define(Resolved));
+            Resolved = Designators.Control.Resolution.Designates.ToArray();
+            AsmCtx = AsmContext.New(AssemblyComposition.Assemble(Resolved));
         }
 
         readonly IAsmContext AsmCtx;
@@ -23,7 +23,7 @@ namespace Z0
         protected override void Execute(params string[] args)
             => AsmCtx.Archiver().Execute();
 
-        public override IAssemblyDesignator[] Resolved{get;}
+        public override IAssemblyResolution[] Resolved{get;}
 
         static void Main(params string[] args)
             => Run(args);

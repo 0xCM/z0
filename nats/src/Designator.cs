@@ -10,7 +10,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Nats : AssemblyDesignator<Nats>
+    public sealed class Nats : AssemblyResolution<Nats>
     {
         const AssemblyId Identity = AssemblyId.Nats;
 
@@ -18,7 +18,7 @@ namespace Z0.Designators
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

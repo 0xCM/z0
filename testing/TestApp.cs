@@ -37,20 +37,18 @@ namespace Z0
 
         protected BenchmarkRecord[] TakeSortedBenchmarks()
         {
-            static IEnumerable<BenchmarkRecord> Sort(IEnumerable<BenchmarkRecord> src)
-                => src.OrderBy(x => x.Operation);
-            
-            var benchmarks = Sort(BenchmarkQueue).ToArray();
+            var records = BenchmarkQueue.ToArray();
             BenchmarkQueue.Clear();
-            return benchmarks;
+            Array.Sort(records);
+            return records;
         }
 
         protected TestCaseRecord[] TakeSortedResults()
         {
-            static IEnumerable<TestCaseRecord> Sort(IEnumerable<TestCaseRecord> src)
-                => src.OrderBy(x => x.Case).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded));
+            static TestCaseRecord[] Sort(IEnumerable<TestCaseRecord> src)
+                => src.OrderBy(x => x.Case).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded)).ToArray();
 
-            var results = Sort(TestResultQueue).ToArray();
+            var results = Sort(TestResultQueue);
             TestResultQueue.Clear();
             return results;
         }

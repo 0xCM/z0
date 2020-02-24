@@ -54,7 +54,7 @@ namespace Z0
     }
 
     public interface ISystemAgent<C> : ISystemAgent
-        where C : IContext
+        where C : IRngContext
     {
         C Context {get;}
     }

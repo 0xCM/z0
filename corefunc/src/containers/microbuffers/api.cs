@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     public static class MicroBuffers
     {
@@ -51,7 +51,5 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
                 => new PartRing<S,T>(src);
-
     }
-
 }

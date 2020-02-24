@@ -20,7 +20,7 @@ namespace Z0
         
         public override IEnumerable<ApiHost> GenericApiHosts
             => from t in items(typeof(Converter))
-                select ApiHost.Define(AssemblyId, t);
+                select ApiHost.Define(OwnerId, t);
                
     }
 }

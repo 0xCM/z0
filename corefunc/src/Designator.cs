@@ -11,14 +11,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class CoreFunc : AssemblyDesignator<CoreFunc>
+    public sealed class CoreFunc : AssemblyResolution<CoreFunc>
     {
         const AssemblyId Identity = AssemblyId.CoreFunc;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

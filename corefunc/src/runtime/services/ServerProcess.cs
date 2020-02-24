@@ -45,7 +45,7 @@ namespace Z0
         
         protected override void OnStart()
         {            
-            thread(OS.CurrentThreadId).OnSome(t => t.IdealProcessor = CoreNumber);
+            thread(CurrentProcess.CurrentThreadId).OnSome(t => t.IdealProcessor = CoreNumber);
             foreach(var src in Agents)
                 src.Start();
         }

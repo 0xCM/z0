@@ -9,14 +9,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class OS : AssemblyDesignator<OS>
+    public sealed class OS : AssemblyResolution<OS>
     {
         const AssemblyId Identity = 0;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

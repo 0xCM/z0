@@ -6,14 +6,14 @@ namespace Z0.Designators
 {
     using System;
 
-    public sealed class Validation : AssemblyDesignator<Validation>
+    public sealed class Validation : AssemblyResolution<Validation>
     {
         const AssemblyId Identity = AssemblyId.Validation;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

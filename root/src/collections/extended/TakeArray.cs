@@ -13,6 +13,7 @@ namespace Z0
     
     partial class RootCollections
     {
+
         /// <summary>
         /// Constructs an array of specified length from a stream
         /// </summary>

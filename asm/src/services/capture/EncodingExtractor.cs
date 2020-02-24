@@ -13,16 +13,16 @@ namespace Z0
 
     readonly struct EncodingExtractor : IEncodingExtractor
     {
-        public IContext Context {get;}
+        public IRngContext Context {get;}
 
         public int BufferLength {get;}
 
         [MethodImpl(Inline)]
-        public static IEncodingExtractor Create(IContext context, int? bufferlen = null)
+        public static IEncodingExtractor Create(IRngContext context, int? bufferlen = null)
             => new EncodingExtractor(context,bufferlen);
             
         [MethodImpl(Inline)]
-        EncodingExtractor(IContext context, int? bufferlen)            
+        EncodingExtractor(IRngContext context, int? bufferlen)            
         {
             this.Context = context;
             this.BufferLength = bufferlen ?? Pow2.T14;

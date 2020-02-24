@@ -6,7 +6,7 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class LibMTest : AssemblyDesignator<LibMTest>
+    public sealed class LibMTest : AssemblyResolution<LibMTest>
     {
         const AssemblyId Identity = AssemblyId.LibMTest;
 

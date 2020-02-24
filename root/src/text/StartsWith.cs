@@ -1,0 +1,54 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    using System.Text;
+
+    using static Root;
+
+    partial class TextExtensions
+    {
+        /// <summary>
+        /// Determines whether a string begins with a specific character
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        /// <param name="c">The character to match</param>
+        public static bool StartsWith(this string s, char c)
+            => nonempty(s) ? s.StartsWith(c.ToString()) : false;
+
+        /// <summary>
+        /// Determines whether a string starts with a value from a supplied set
+        /// </summary>
+        /// <param name="src">The string to examine</param>
+        /// <param name="values">The characters for which to search</param>
+        public static bool StartsWithAny(this string src, IEnumerable<string> values)
+        {
+            foreach (var v in values)
+                if (src.StartsWith(v))
+                    return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether a string leads with any of a specified set of characters
+        /// </summary>
+        /// <param name="src">The string to examine</param>
+        /// <param name="chars">The characters for which to search</param>
+        public static bool StartsWithAny(this string src, IEnumerable<char> chars)
+            => empty(src) ? false : chars.Contains(src[0]);
+
+        /// <summary>
+        /// Determines whether a string starts with a digit
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        [MethodImpl(Inline)]
+        public static bool StartsWithDigit(this string s)
+            => nonempty(s) ? Char.IsDigit(s.First()) : false;
+    }
+}

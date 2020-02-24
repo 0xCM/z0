@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a shared context for a set of agents
     /// </summary>
-    public class AgentContext : Context, IAgentContext
+    public class AgentContext : RngContext, IAgentContext
     {
         ConcurrentDictionary<ulong, ISystemAgent> Agents {get;}
             = new ConcurrentDictionary<ulong, ISystemAgent>();

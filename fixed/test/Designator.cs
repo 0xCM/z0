@@ -10,15 +10,12 @@ namespace Z0.Designators
 
     using static zfunc;
 
-    public sealed class FixedTest : AssemblyDesignator<FixedTest>
+    public sealed class FixedTest : AssemblyResolution<FixedTest>
     {
         const AssemblyId Identity = AssemblyId.FixedTest;
 
         public override AssemblyId Id 
             => Identity;
-
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
     
         public override void Run(params string[] args)
             => App.Run(args);

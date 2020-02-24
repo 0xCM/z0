@@ -7,7 +7,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class ValidationTest : AssemblyDesignator<ValidationTest>
+    public sealed class ValidationTest : AssemblyResolution<ValidationTest>
     {
         const AssemblyId Identity = AssemblyId.ValidationTest;
 

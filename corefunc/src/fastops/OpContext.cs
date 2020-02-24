@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
     
-    public abstract class OpContext<C> : Context<C>, IContext<C>
+    public abstract class OpContext<C> : RngContext<C>, IRngContext<C>
         where C : OpContext<C>
     {                
         protected OpContext(IPolyrand random)

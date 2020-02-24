@@ -88,9 +88,9 @@ namespace Z0
         {
             var archive = Context.Archiver();
             var selection = from c in Context.Compostion.Catalogs
-                            where !c.IsEmpty && c.AssemblyId != AssemblyId.Data
-                            orderby c.AssemblyId
-                            select c.AssemblyId;
+                            where !c.IsEmpty && c.OwnerId != AssemblyId.Data
+                            orderby c.OwnerId
+                            select c.OwnerId;
             foreach(var id in selection)
                 archive.Archive(id);    
         }

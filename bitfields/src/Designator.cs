@@ -9,14 +9,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class BitFields : AssemblyDesignator<BitFields>
+    public sealed class BitFields : AssemblyResolution<BitFields>
     {
         const AssemblyId Identity = AssemblyId.BitFields;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

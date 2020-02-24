@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    public sealed class Matrix : AssemblyDesignator<Matrix>
+    public sealed class Matrix : AssemblyResolution<Matrix>
     {
         const AssemblyId Identity = AssemblyId.Matrix;
 

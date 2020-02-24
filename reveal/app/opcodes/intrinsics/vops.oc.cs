@@ -46,12 +46,6 @@ namespace Z0
             SpanFunc.run(GX.negate(z32), src, dst);
         }
 
-
-        public static void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
-        {
-            SpanFunc.run(GX.negate(z32), src, dst);   
-        }
-
         public static void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
             var f = GX.negate<uint>();

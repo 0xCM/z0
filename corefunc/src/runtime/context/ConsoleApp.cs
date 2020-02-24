@@ -9,14 +9,7 @@ namespace Z0
     
     using static zfunc;    
 
-
-    public interface IConsoleApp : IAssemblyComposition, IContext
-    {
-        void RunApp(params string[] args);   
-             
-    }
-
-    public abstract class ConsoleApp<A> : Context<A>, IConsoleApp
+    public abstract class ConsoleApp<A> : RngContext<A>, IConsoleApp
         where A : ConsoleApp<A>, new()
     {
         protected ConsoleApp(IPolyrand random)
@@ -27,7 +20,7 @@ namespace Z0
 
         protected abstract void Execute(params string[] args);
 
-        public abstract IAssemblyDesignator[] Resolved {get;}
+        public abstract IAssemblyResolution[] Resolved {get;}
 
         public void RunApp(params string[] args)
         {

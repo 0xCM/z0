@@ -5,7 +5,7 @@
 namespace Z0.Designators
 {        
 
-    public sealed class LogixTest : AssemblyDesignator<LogixTest>
+    public sealed class LogixTest : AssemblyResolution<LogixTest>
     {
         const AssemblyId Identity = AssemblyId.LogixTest;
 

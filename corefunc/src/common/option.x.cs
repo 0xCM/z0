@@ -95,15 +95,6 @@ namespace Z0
         public static Option<T> TryGetSingle<T>(this IEnumerable<T> src)
             => src.Count() == 1 ? src.Single() : Option.none<T>();
 
-        /// <summary>
-        /// Returns the first element of the sequence that satisifies the predicate, if any.
-        /// </summary>
-        /// <param name="src">The sequence to search</param>
-        /// <param name="predicate">The predicate to satiisfy</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Option<T> TryFind<T>(this IEnumerable<T> src, Func<T,bool> predicate)
-            => src.FirstOrDefault(predicate);
 
         /// <summary>
         /// Returns a value if the source stream yeilds exactly one value that satisfied a predicate; otherwise, returns none

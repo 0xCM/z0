@@ -18,6 +18,6 @@ namespace Z0
         }
 
         public override IEnumerable<ApiHost> DirectApiHosts
-            => items(ApiHost.Define(AssemblyId, typeof(libm)));
+            => items(ApiHost.Define(OwnerId, typeof(libm)));
     }
 }

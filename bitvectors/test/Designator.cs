@@ -5,7 +5,7 @@
 namespace Z0.Designators
 {        
 
-    public sealed class BitVectorTest : AssemblyDesignator<BitVectorTest>
+    public sealed class BitVectorTest : AssemblyResolution<BitVectorTest>
     {
 
         const AssemblyId Identity = AssemblyId.BitVectorsTest;
