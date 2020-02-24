@@ -159,7 +159,7 @@ namespace Z0
         static T ParseError<T>(string src)
             where T : unmanaged
         {
-            var msg = $"Attempted to parse '{src}':{typename<T>()} but failed";
+            var msg = $"Attempted to parse '{src}':{typeof(T).DisplayName()} but failed";
             AppErrors.Throw(msg);
 
             return default;

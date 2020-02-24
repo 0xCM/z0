@@ -8,20 +8,13 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
-    using static zfunc;
-
     /// <summary>
-    /// A context that carries an RNG state
+    /// A context that supports application message capture/disbursement
     /// </summary>
-    public interface IRngContext : IRngProvider, IContext
-    {   
-           
-    }
-
-
-    public interface IRngContext<C> : IRngContext
-        where C : IRngContext
+    public interface IMsgContext : IMsgExchange, IContext
     {
-
+    
     }
+
+
 }

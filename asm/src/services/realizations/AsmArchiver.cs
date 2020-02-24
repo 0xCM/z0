@@ -65,7 +65,7 @@ namespace Z0
         void Completed(Option<FilePath> report)
         {
             report.OnSome(p => print(appMsg($"Completed emission task and saved report to {p}")))
-                  .OnNone(() => errout($"Emission task failure"));
+                  .OnNone(() => error($"Emission task failure"));
             report.Require();
         }
 

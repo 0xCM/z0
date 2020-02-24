@@ -53,7 +53,7 @@ namespace Z0.Logix
             => Format(false);
 
         public string Format(bool expand)
-            => $"{Name}:{typename<T>()}" + (expand ? $" := {Value}" : string.Empty);
+            => $"{Name}:{typeof(T).DisplayName()}" + (expand ? $" := {Value}" : string.Empty);
         
         public override string ToString()
             => Format();

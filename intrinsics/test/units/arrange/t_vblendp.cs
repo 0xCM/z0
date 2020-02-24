@@ -330,7 +330,7 @@ namespace Z0
 
             if(EmitInfo)
             {
-                PostMessage($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typename(t)}, perm length = {pn}");
+                PostMessage($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typeof(T).DisplayName()}, perm length = {pn}");
                 PostMessage($"left:  {left.Format(pad:2)}");
                 PostMessage($"right: {right.Format(pad:2)}");
                 PostMessage(perm.Format());  

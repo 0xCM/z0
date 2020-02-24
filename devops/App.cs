@@ -11,11 +11,10 @@ namespace Z0
     using static zfunc;    
 
 
-    class App : RngContext
+    class App : IContext
     {
 
         public App()
-            : base(null)
         {
             
         }

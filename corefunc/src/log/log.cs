@@ -37,11 +37,17 @@ namespace Z0
             return Log.Get(LogTarget.Define(LogArea.Test)).Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
+        public static ILogger Test => TestLog.TheOnly;
+
+        public static ILogger Bench => BenchLog.TheOnly;
+
+        public static ILogger App => AppLog.TheOnly;
+
         public static ILogger Get(ILogTarget dst)
             => dst.Area switch{
-                LogArea.App => AppLog.TheOnly,
-                LogArea.Bench => BenchLog.TheOnly,
-                LogArea.Test => TestLog.TheOnly,
+                LogArea.App => App,
+                LogArea.Bench => Bench,
+                LogArea.Test => Test,
                 _ => throw new ArgumentException()
             };
 

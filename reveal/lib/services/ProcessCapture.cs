@@ -99,7 +99,7 @@ namespace Z0
 			var label = method.Signature().Format();
             if (address == 0)
             {
-				errout($"Unspecified address for {label}");
+				error($"Unspecified address for {label}");
                 return default;
             }
 
@@ -113,13 +113,13 @@ namespace Z0
             var actualSize = 0;
 			if (!Target.ReadProcessMemory(address, buffer, buffer.Length, out actualSize))
             {
-				errout($"Memory access failure at address {address.FormatHex(false)} for {label}");
+				error($"Memory access failure at address {address.FormatHex(false)} for {label}");
                 return default;
             }
             
             if (size != actualSize)
             {
-                errout(AppErrors.LengthMismatch((int)size, actualSize));
+                error(AppErrors.LengthMismatch((int)size, actualSize));
                 return default;
             }
 

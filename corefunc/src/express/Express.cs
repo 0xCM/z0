@@ -17,11 +17,8 @@ namespace Z0
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
 
-    public static class Expressions
+    public static class express
     {
-        static ConcurrentDictionary<MethodInfo, Delegate> _cache { get; }
-            = new ConcurrentDictionary<MethodInfo, Delegate>();
-
         /// <summary>
         /// Defines a conversion from a source expression to a target type
         /// </summary>
@@ -46,14 +43,6 @@ namespace Z0
             => XPR.Constant(src);
 
         /// <summary>
-        /// Creates an expression from an emitter
-        /// </summary>
-        /// <typeparam name="T">The emission type</typeparam>
-        /// <param name="f">The emitter</param>
-        public static Expression<Func<T>> func<T>(Func<T> f)
-            => FuncExpression.make(f);
-
-        /// <summary>
         /// Creates and caches a delegate for a method realizing an emitter
         /// </summary>
         /// <typeparam name="X">The emission type</typeparam>
@@ -65,15 +54,6 @@ namespace Z0
                 var result = conversion<X>(call(instance, m));
                 return XPR.Lambda<Func<X>>(result).Compile();
             }));
-
-        /// <summary>
-        /// Creates an expression from a function delegate of arity 1
-        /// </summary>
-        /// <typeparam name="X">The function operand type</typeparam>
-        /// <typeparam name="Y">The function return type</typeparam>
-        /// <param name="f">The source delegate</param>
-        public static Expression<Func<X, Y>> func<X, Y>(Func<X, Y> f)
-            => FuncExpression.make(f);
 
         /// <summary>
         /// Creates and caches a delegate for a method realizing a function f:X->Y 
@@ -120,15 +100,6 @@ namespace Z0
             return x => del.DynamicInvoke(x);
         }
 
-        /// <summary>
-        /// Creates an expression from a function delegate of arity 2
-        /// </summary>
-        /// <typeparam name="X1">The type of the first operand</typeparam>
-        /// <typeparam name="X2">The type of the second operand</typeparam>
-        /// <typeparam name="Y">The function return type</typeparam>
-        /// <param name="f">The source delegate</param>
-        public static Expression<Func<X1, X2, Y>> func<X1, X2, Y>(Func<X1, X2, Y> f)
-            => FuncExpression.make(f);
 
         /// <summary>
         /// Creates and caches a function delegate for a method realizing a function f:(X1,X2) -> Y
@@ -146,16 +117,6 @@ namespace Z0
                 return lambda<X1, X2, Y>(args, f).Compile();
             }));
 
-        /// <summary>
-        /// Creates an expression from a function delegate of arity 3
-        /// </summary>
-        /// <typeparam name="X1">The type of the first operand</typeparam>
-        /// <typeparam name="X2">The type of the second operand</typeparam>
-        /// <typeparam name="X3">The type of the third operand</typeparam>
-        /// <typeparam name="Y">The function return type</typeparam>
-        /// <param name="f">The source delegate</param>
-        public static Expression<Func<X1, X2, X3, Y>> func<X1, X2, X3, Y>(Func<X1, X2, X3, Y> f)
-            => FuncExpression.make(f);
 
         /// <summary>
         /// Creates and caches a function delegate for a method realizing a function f:(X1,X2,X3) -> Y
@@ -258,7 +219,6 @@ namespace Z0
         /// <typeparam name="T">The aligned delegate type</typeparam>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body"></param>
-        /// <returns></returns>
         public static Expression<T> lambda<T>((PX p1, PX p2) parameters, Expression body)
             where T : Delegate
                 => XPR.Lambda<T>(body, items(parameters.p1, parameters.p2));
@@ -269,7 +229,6 @@ namespace Z0
         /// <typeparam name="T">The aligned delegate type</typeparam>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body"></param>
-        /// <returns></returns>
         public static Expression<T> lambda<T>((PX p1, PX p2, PX p3) parameters, Expression body)
             where T : Delegate
                 => XPR.Lambda<T>(body, items(parameters.p1, parameters.p2, parameters.p3));
@@ -295,7 +254,6 @@ namespace Z0
         /// </summary>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body">The expression body</param>
-        /// <returns></returns>
         public static Expression<Func<X1, X2, Y>> lambda<X1, X2, Y>(IEnumerable<PX> parameters, XPR body)
             => XPR.Lambda<Func<X1, X2, Y>>(body, parameters);
 
@@ -336,7 +294,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="X">The type of instance to create</typeparam>
         public static Option<Func<X>> factory<X>()
-            => from c in constructor<X>()
+            => from c in reflect.ctor<X>()
                 let x = XPR.New(c)
                 select XPR.Lambda<Func<X>>(x).Compile();
     
@@ -347,7 +305,7 @@ namespace Z0
         /// <typeparam name="X">The constructor parameter type</typeparam>
         /// <typeparam name="Y">The type of instance to create</typeparam>
         public static Option<Func<X, Y>> factory<X, Y>()
-            => from c in constructor<Y>(typeof(X))
+            => from c in reflect.ctor<Y>(typeof(X))
                 let parameters = array(paramX<X>("a1"))
                 let body = XPR.New(c, parameters)
                 select lambda<Func<X, Y>>(parameters, body).Compile();
@@ -359,7 +317,7 @@ namespace Z0
         /// <param name="targetType">The type of object to construct</param>
         /// <param name="arg1Type">The constuctor argument type</param>
         public static Option<Func<object, object>> factory(Type targetType, Type arg1Type)
-            => from c in constructor(targetType, arg1Type)
+            => from c in reflect.ctor(targetType, arg1Type)
                 let cParams = array(paramX(arg1Type, "a1"))
                 let lParams = array(paramX(typeof(object), "o1"))
                 let converted = array(conversion(lParams[0], arg1Type))
@@ -374,7 +332,7 @@ namespace Z0
         /// <typeparam name="X2">The second constructor parameter type</typeparam>
         /// <typeparam name="Y">The type of instance to create</typeparam>
         public static Option<Func<X1, X2, Y>> factory<X1, X2, Y>()
-            => from c in constructor<Y>(typeof(X1), typeof(X2))
+            => from c in reflect.ctor<Y>(typeof(X1), typeof(X2))
                 let parameters = array(paramX<X1>("a1"), paramX<X2>("a2"))
                 let body = XPR.New(c, parameters)
                 select lambda<Func<X1, X2, Y>>(parameters, body).Compile();
@@ -386,7 +344,7 @@ namespace Z0
         /// <param name="targetType">The type of object to construct</param>
         /// <param name="arg1Type">The constuctor argument type</param>
         public static Option<Func<object, object, object>> factory(Type targetType, Type arg1Type, Type arg2Type)
-            => from c in constructor(targetType, arg1Type, arg2Type)
+            => from c in reflect.ctor(targetType, arg1Type, arg2Type)
                 let lParams = array(paramX<object>("o1"), paramX<object>("o2"))
                 let converted = array(conversion(lParams[0], arg1Type), conversion(lParams[1], arg2Type))
                 let body = conversion(XPR.New(c, converted), typeof(object))
@@ -402,7 +360,7 @@ namespace Z0
         /// <typeparam name="X3">The third constructor parameter type</typeparam>
         /// <typeparam name="Y">The type of instance to create</typeparam>
         public static Option<Func<X1, X2, X3, Y>> factory<X1, X2, X3, Y>()
-            => from c in constructor<Y>(typeof(X1), typeof(X2))
+            => from c in reflect.ctor<Y>(typeof(X1), typeof(X2))
                 let parameters = array(paramX<X1>("a1"), paramX<X2>("a2"), paramX<X3>("a3"))
                 let body = Expression.New(c, parameters)
                 select lambda<Func<X1, X2, X3, Y>>(parameters, body).Compile();
@@ -514,5 +472,100 @@ namespace Z0
                 let right = invoke(func(p2), args.x2)
                 let body = or(left, right)
                 select lambda<Func<X1, X2, bool>>(args, body).Compile();
+
+        /// <summary>
+        /// Defines a function expression for an emitter
+        /// </summary>
+        /// <typeparam name="X">The emission type</typeparam>
+        /// <param name="f">The emitter</param>
+        public static FuncXpr<X> fmake<X>(Func<X> f)
+            => f;
+
+        /// <summary>
+        /// Creates an expression from an emitter
+        /// </summary>
+        /// <typeparam name="T">The emission type</typeparam>
+        /// <param name="f">The emitter</param>
+        public static Expression<Func<T>> func<T>(Func<T> f)
+            => fmake(f);
+
+        /// <summary>
+        /// Defines a function expression for a heterogenous fuction of arity 1
+        /// </summary>
+        /// <typeparam name="X">The function argument type</typeparam>
+        /// <typeparam name="Y">The return type</typeparam>
+        /// <param name="f">The source function</param>
+        public static FuncXpr<X,Y> fmake<X,Y>(Func<X,Y> f)
+            => f;
+
+        /// <summary>
+        /// Creates an expression from a function delegate of arity 1
+        /// </summary>
+        /// <typeparam name="X">The function operand type</typeparam>
+        /// <typeparam name="Y">The function return type</typeparam>
+        /// <param name="f">The source delegate</param>
+        public static Expression<Func<X, Y>> func<X, Y>(Func<X, Y> f)
+            => fmake(f);
+
+        /// <summary>
+        /// Defines a function expression for a heterogenous fuction of arity 2
+        /// </summary>
+        /// <typeparam name="X1">The type of the first argument</typeparam>
+        /// <typeparam name="X2">The type of the second argument</typeparam>
+        /// <typeparam name="Y">The return type</typeparam>
+        /// <param name="f">The source function</param>
+        public static FuncXpr<X1, X2, Y> fmake<X1, X2, Y>(Func<X1, X2, Y> f)
+            => f;
+
+        /// <summary>
+        /// Creates an expression from a function delegate of arity 2
+        /// </summary>
+        /// <typeparam name="X1">The type of the first operand</typeparam>
+        /// <typeparam name="X2">The type of the second operand</typeparam>
+        /// <typeparam name="Y">The function return type</typeparam>
+        /// <param name="f">The source delegate</param>
+        public static Expression<Func<X1, X2, Y>> func<X1, X2, Y>(Func<X1, X2, Y> f)
+            => fmake(f);
+
+        /// <summary>
+        /// Defines a function expression for an arity 2 operator
+        /// </summary>
+        /// <typeparam name="X">The operand type</typeparam>
+        /// <param name="f">The source function</param>
+        public static FuncXpr<X, X, X> fmake<X>(Func<X, X, X> f)
+            => f;
+
+        /// <summary>
+        /// Produces a 3-argument func expression
+        /// </summary>
+        /// <typeparam name="X1">The type of the first argument</typeparam>
+        /// <typeparam name="X2">The type of the second argument</typeparam>
+        /// <typeparam name="X3">The type of the third argument</typeparam>
+        /// <typeparam name="Y">The return type</typeparam>
+        /// <param name="f">The source function</param>
+        public static FuncXpr<X1, X2, X3, Y> fmake<X1, X2, X3, Y>(Func<X1, X2, X3, Y> f)
+            => f;
+
+        /// <summary>
+        /// Creates an expression from a function delegate of arity 3
+        /// </summary>
+        /// <typeparam name="X1">The type of the first operand</typeparam>
+        /// <typeparam name="X2">The type of the second operand</typeparam>
+        /// <typeparam name="X3">The type of the third operand</typeparam>
+        /// <typeparam name="Y">The function return type</typeparam>
+        /// <param name="f">The source delegate</param>
+        public static Expression<Func<X1, X2, X3, Y>> func<X1, X2, X3, Y>(Func<X1, X2, X3, Y> f)
+            => fmake(f);
+
+        /// <summary>
+        /// Defines a function expression for an arity 3 operator
+        /// </summary>
+        /// <typeparam name="X">The operand type</typeparam>
+        /// <param name="f">The source function</param>
+        public static FuncXpr<X, X, X,X> fmake<X>(Func<X, X, X,X> f)
+            => f;
+ 
+        static ConcurrentDictionary<MethodInfo, Delegate> _cache { get; }
+            = new ConcurrentDictionary<MethodInfo, Delegate>();
     }
 }

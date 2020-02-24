@@ -8,8 +8,6 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
-    using static zfunc;
-
     /// <summary>
     /// A context of everything and yet to everyting nothing
     /// </summary>

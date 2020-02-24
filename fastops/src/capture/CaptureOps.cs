@@ -25,7 +25,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e);
+                error(e);
                 return none<CapturedData>();
             }
         }
@@ -42,7 +42,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e);
+                error(e);
                 return CapturedMember.Empty;                    
             }
         }
@@ -60,7 +60,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e);
+                error(e);
                 return CapturedMember.Empty;
             }
         }
@@ -77,7 +77,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e);
+                error(e);
                 return CapturedMember.Empty;                    
             }
         }

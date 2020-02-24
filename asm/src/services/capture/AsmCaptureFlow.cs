@@ -77,7 +77,7 @@ namespace Z0
             var target = EmissionPaths.ExtractReport(host);                
             captured.Save(target)
                         .OnSome(file => print($"Emitted {host} encodings to {file}"))
-                        .OnNone(() => errout($"Error emitting {host} encodings"));                       
+                        .OnNone(() => error($"Error emitting {host} encodings"));                       
             return (captured,target);
         }
 
@@ -88,7 +88,7 @@ namespace Z0
             var target = EmissionPaths.ParseReport(host);
             parsed.Save(target)
                         .OnSome(file => print($"Emitted parsed {host} encodings to {file}"))
-                        .OnNone(() => errout($"Error parsing {host} encodings"));                       
+                        .OnNone(() => error($"Error parsing {host} encodings"));                       
 
             require(captured.RecordCount == parsed.RecordCount);
             return (parsed,target);

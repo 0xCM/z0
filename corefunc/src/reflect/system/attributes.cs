@@ -16,15 +16,6 @@ namespace Z0
     partial class Reflections
     {        
         /// <summary>
-        /// Gets the value of a member attribute if it exists 
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="m">The member</param>
-        public static Option<A> CustomAttribute<A>(this MemberInfo m) 
-            where A : Attribute
-                => m.GetCustomAttribute<A>();
-
-        /// <summary>
         /// Retrieves the value of an attached attribute paired with the subject
         /// </summary>
         /// <param name="m">The member to query</param>

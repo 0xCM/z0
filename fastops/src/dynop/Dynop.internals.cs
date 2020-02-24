@@ -50,6 +50,46 @@ namespace Z0
             where D : Delegate
                 => DynamicPointer.Define(src, src.DynamicMethod.NativePointer());
 
+        /// <summary>
+        /// Creates a binary operator delegate from a conforming method
+        /// </summary>
+        /// <param name="src">The methodd that defines a binary operator</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static Func<T,T,T> BinOp<T>(this MethodInfo src)
+        {
+            var operand = typeof(T);                        
+            var args = new Type[]{operand, operand};
+            var method = new DynamicMethod($"{src.Name}", operand, args, operand.Module);            
+            var gen = method.GetILGenerator();
+            gen.Emit(OpCodes.Ldarg_0);
+            gen.Emit(OpCodes.Ldarg_1);
+            gen.EmitCall(OpCodes.Call, src, null);
+            gen.Emit(OpCodes.Ret);
+            return (Func<T,T,T>) method.CreateDelegate(typeof(Func<T,T,T>));
+        }
+
+        /// <summary>
+        /// Creates a delegate via dynamic method emit via that is invoked via the Calli opcode
+        /// </summary>
+        /// <param name="target">The method for which a binary operator delegate will be created</param>
+        /// <param name="t">A declaring type representative</param>
+        /// <typeparam name="T">The declaring type</typeparam>
+        public static Func<T,T,T> BinOpCalli<T>(this MethodInfo target, T t = default)
+            where T : unmanaged
+        {
+            var operand = typeof(T);
+            var args = new Type[]{operand, operand};
+            var returnType = operand;
+            var method = new DynamicMethod($"{target.Name}", returnType, args, operand.Module);            
+            var g = method.GetILGenerator();
+            g.Emit(OpCodes.Ldarg_0);
+            g.Emit(OpCodes.Ldarg_1);
+            g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, args);
+            g.Emit(OpCodes.Ret);
+            return (Func<T,T,T>)method.CreateDelegate(typeof(Func<T,T,T>));
+        }
+
         internal static ILGenerator EmitImmLoad(this ILGenerator g, byte imm)
         {
             var code = imm switch {

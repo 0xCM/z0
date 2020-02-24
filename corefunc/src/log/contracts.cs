@@ -35,16 +35,13 @@ namespace Z0
 
         string Name {get;}
     }
+
     
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
-    public interface ILogger
+    public interface ILogger : IMsgLog
     {
-        void Write(IEnumerable<AppMsg> src);
-        
-        void Write(AppMsg src);
-
         /// <summary>
         /// Appends unstructured text content to the log
         /// </summary>

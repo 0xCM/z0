@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
     using System.ComponentModel;
     using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace Z0
     class NatSpanCases
     {        
         public static IEnumerable<(OpIdentity id, Type type)> All
-            => from p in type<NatSpanCases>().Properties().Where(p => p.Name != nameof(All))
+            => from p in typeof(NatSpanCases).Properties().Where(p => p.Name != nameof(All))
                 let id = OpIdentity.Define(p.DisplayName())
                 let type = p.PropertyType
                 select (id,type);   
@@ -33,7 +32,5 @@ namespace Z0
         [DisplayName("n256x1u")]
         public static NatSpan<N256,bit> Case_n128x1u
             => NatSpan.alloc<N256,bit>();
-
     }
-
 }

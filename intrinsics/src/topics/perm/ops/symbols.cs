@@ -12,7 +12,6 @@ namespace Z0
 
     using static zfunc;    
 
-
     partial class permute
     {
         /// <summary>
@@ -56,7 +55,7 @@ namespace Z0
                 if(index.TryGetValue(key, out var value))
                     symbols[i] = value;
                 else
-                    throw new Exception($"The value {key}:{typename<T>()} does not exist in the index");
+                    throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");
             }
             return symbols;
         }

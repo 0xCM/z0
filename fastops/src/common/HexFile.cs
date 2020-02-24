@@ -40,7 +40,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e);
+                error(e);
                 return none<FilePath>();
             }
         }

@@ -12,7 +12,7 @@ namespace Z0
     class ConsoleControl : ConsoleApp<ConsoleControl>
     {
         public ConsoleControl()
-            : base(Rng.WyHash64(Seed64.Seed00))
+            : base(Log.Get(LogTarget.Define(LogArea.App)))
         {
             Resolved = Designators.Control.Resolution.Designates.ToArray();
             AsmCtx = AsmContext.New(AssemblyComposition.Assemble(Resolved));

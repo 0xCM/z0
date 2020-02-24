@@ -11,11 +11,10 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// A context that supports application message capture/disbursement
+    /// A context that carries an RNG state
     /// </summary>
-    public interface IMsgContext : IMsgExchange, IContext
-    {
-    
+    public interface IRngContext : IRngProvider, IContext
+    {   
+           
     }
-
 }

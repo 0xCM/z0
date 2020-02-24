@@ -11,6 +11,8 @@ namespace Z0
 
     public static class Root
     {
+        public static readonly Terminal terminal = Terminal.Get();
+        
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
         public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;

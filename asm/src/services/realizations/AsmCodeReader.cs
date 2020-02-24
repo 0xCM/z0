@@ -35,7 +35,7 @@ namespace Z0
             foreach(var line in src.ReadLines())
             {
                 var hex = HexLine.Parse(line,IdSep,ByteSep);
-                if(hex.OnNone(() => errout($"Could not parse the line {line} from {src}")))
+                if(hex.OnNone(() => error($"Could not parse the line {line} from {src}")))
                     yield return hex.MapRequired(h => AsmCode.Define(h.Id, h.Encoded));
             }
         }        

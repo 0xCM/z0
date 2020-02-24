@@ -101,7 +101,7 @@ namespace Z0
                 var fg = Console.ForegroundColor;
                 Console.ForegroundColor = color;                
                 Console.Error.Write(src);
-                Console.Error.Write(zfunc.eol());
+                Console.Error.Write(AsciEscape.Eol);
                 Console.ForegroundColor = fg;
             }
         }
@@ -113,7 +113,7 @@ namespace Z0
                 var fg = Console.ForegroundColor;
                 Console.ForegroundColor = ForeColor(msg.Level);                
                 Console.Error.Write(msg);
-                Console.Error.Write(zfunc.eol());
+                Console.Error.Write(AsciEscape.Eol);
                 Console.ForegroundColor = fg;
             }
         }

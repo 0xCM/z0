@@ -24,7 +24,7 @@ namespace Z0.Logix
         void scalar_op_bench<T>(bool lookup, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"ops/scalar[{typename<T>()}]/lookup[{lookup}]";
+            var opname = $"ops/scalar[{typeof(T).DisplayName()}]/lookup[{lookup}]";
 
             var lhsSamples = Random.Array<T>(RepCount);
             var rhsSamples = Random.Array<T>(RepCount);

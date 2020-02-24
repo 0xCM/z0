@@ -18,7 +18,7 @@ namespace Z0
     using static ControlMessages;
     using static zfunc;
 
-    class TestController : Controller<TestController>
+    class TestController : IExecutable//Controller<TestController>
     {       
         readonly IAsmContext Context;
         
@@ -70,7 +70,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e);
+                error(e);
             }
             finally
             {
@@ -120,13 +120,13 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e);
+                error(e);
             }
             
             return runtime;
         }
 
-        public override void Execute()
+        public void Execute()
         {
            print(ExecutingSuites());
            

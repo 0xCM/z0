@@ -254,7 +254,7 @@ namespace Z0.Mkl.Test
                 Claim.yea(z == y);
             }
 
-            var label = $"gemv<{nati<M>()},{nati<N>()},{typename<double>()}>";
+            var label = $"gemv<{nati<M>()},{nati<N>()},{typeof(double).DisplayName()}>";
             return optime(cycles, sw, label);
         }
 

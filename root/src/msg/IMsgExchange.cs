@@ -32,10 +32,6 @@ namespace Z0
         /// <param name="msg">The message to post</param>
         void PostMessage(string msg, SeverityLevel? severity = null);
 
-        /// <summary>
-        /// Posts an exception, from wich a message is derived, to the context queue
-        /// </summary>
-        /// <param name="msg">The message to post</param>
-        void PostError(Exception e);                        
+        void Flush(Exception exception, IMsgLog target);                       
     }
 }

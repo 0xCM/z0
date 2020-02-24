@@ -28,7 +28,7 @@ namespace Z0.Logix
         protected void vector_op128_bench<T>(bool lookup, N128 n = default, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"ops/vector128[{typename<T>()}]/lookup[{lookup}]";
+            var opname = $"ops/vector128[{typeof(T).DisplayName()}]/lookup[{lookup}]";
 
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
@@ -69,7 +69,7 @@ namespace Z0.Logix
         protected void vector_op256_bench<T>(bool lookup, N256 n = default, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"ops/vector256[{typename<T>()}]/lookup[{lookup}]";
+            var opname = $"ops/vector256[{typeof(T).DisplayName()}]/lookup[{lookup}]";
 
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);

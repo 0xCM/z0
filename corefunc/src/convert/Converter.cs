@@ -77,7 +77,7 @@ namespace Z0
         static T unhandled<S,T>(S src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            AppErrors.Throw($"The conversion {typename<S>()} -> {typename<T>()} needed for the value {src} doesn't exist", caller,file,line);
+            AppErrors.Throw($"The conversion {typeof(S).DisplayName()} -> {typeof(T).DisplayName()} needed for the value {src} doesn't exist", caller,file,line);
             return default;
         }
     }

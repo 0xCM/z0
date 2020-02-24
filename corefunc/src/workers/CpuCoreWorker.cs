@@ -100,7 +100,7 @@ namespace Z0
             WorkerThread = thread(CurrentProcess.CurrentThreadId).ValueOrDefault();
             if(WorkerThread == null)
             {
-                errout("Thread lookup failed. Aborting worker");
+                error("Thread lookup failed. Aborting worker");
                 return;
             }
 

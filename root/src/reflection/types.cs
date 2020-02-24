@@ -16,6 +16,15 @@ namespace Z0
     partial class RootReflections
     {
         /// <summary>
+        /// Gets the value of a member attribute if it exists 
+        /// </summary>
+        /// <typeparam name="A">The attribute type</typeparam>
+        /// <param name="m">The member</param>
+        public static Option<A> CustomAttribute<A>(this Type t) 
+            where A : Attribute
+                => t.GetCustomAttribute<A>();
+
+        /// <summary>
         /// Returns true if the source type is non-null and non-void; otherwise, returns false
         /// </summary>
         /// <param name="src">The type to examine</param>

@@ -231,7 +231,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         /// <param name="o">The type instance</param>
         public static IReadOnlyDictionary<string, object> PropertyValues(this Type t, object o)
-            => map(props(o), p => (p.Name, p.GetValue(o))).ToReadOnlyDictionary();
+            => map(reflect.props(o), p => (p.Name, p.GetValue(o))).ToReadOnlyDictionary();
 
         /// <summary>
         /// Recursively close an IEnumerable generic type

@@ -270,7 +270,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e, name.Identifier);
+                error(e, name.Identifier);
                 succeeded = false;
             }
             finally
@@ -296,7 +296,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e, name);
+                error(e, name);
                 succeeded = false;
             }
             finally

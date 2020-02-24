@@ -6,19 +6,16 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Reflection;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Diagnostics;
 
     using static zfunc;
 
     using XPR = System.Linq.Expressions.Expression;
 
-    public static class expressX
+    public static class ExpressX
     {
         /// <summary>
         /// Tests whether an expression is a conversion

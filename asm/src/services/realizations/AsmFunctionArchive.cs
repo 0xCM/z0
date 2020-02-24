@@ -58,8 +58,8 @@ namespace Z0
         public Option<CaptureTokenGroup> Save(AsmFunctionGroup src, bool append)
         {            
             OnEmitting(src);
-            WriteHex(src, append).OnSome(e => errout(e));
-            WriteCil(src, append).OnSome(e => errout(e));            
+            WriteHex(src, append).OnSome(e => error(e));
+            WriteCil(src, append).OnSome(e => error(e));            
             var emissions = WriteAsm(src,append);
             var incount = src.Members.Length;
             var outcount = emissions.MapValueOrDefault(t => t.Tokens.Length);
@@ -133,7 +133,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout(e);
+                error(e);
                 return none<CaptureTokenGroup>();
             }
         }

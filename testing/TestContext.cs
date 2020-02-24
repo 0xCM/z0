@@ -11,25 +11,21 @@ namespace Z0
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using static zfunc;
-    
+    using Z0;
 
-    public abstract class TestContext<U> : MsgContext, ITestContext
+    public abstract class TestContext<U> : ITestContext
         where U : TestContext<U>
     {
-        public IPolyrand Random {get;}
-
-        /// <summary>
-        /// Allocates and optionally starts a system counter
-        /// </summary>
-        [MethodImpl(Inline)]   
-        protected static SystemCounter counter(bool start = false) 
-            => SystemCounter.Create(start);
-
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
         {
             this.Random = random ?? Rng.WyHash64(Seed64.Seed00);
             this.Config = config ?? TestConfigDefaults.Default();
+            this.Queue = MsgContext.Create();
         }
+
+        public IPolyrand Random {get;}
+
+        readonly IMsgContext Queue;
 
         public ITestConfig Config {get; private set;}
 
@@ -111,7 +107,7 @@ namespace Z0
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
-                => OpId.numeric(opname,Numeric.kind<T>());
+                => OpId.numeric(opname, Numeric.kind<T>());
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
@@ -127,7 +123,7 @@ namespace Z0
         protected void Trace(object msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{msg}",SeverityLevel.Info));
+                PostMessage(AppMsg.Define($"{msg}", SeverityLevel.Info));
         }
 
         /// <summary>
@@ -137,14 +133,14 @@ namespace Z0
         protected void Trace(object title, object msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{title} - {msg}",SeverityLevel.Info));
+                PostMessage(AppMsg.Define($"{title} - {msg}", SeverityLevel.Info));
         }
 
         protected void Trace(string title, string msg, int? tpad = null, SeverityLevel? severity = null)
         {
             if(TraceEnabled)
             {
-                var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
+                var titleFmt = tpad.Map<int, string>(pad => title.PadRight(pad), () => title.PadRight(20));        
                 PostMessage(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
             }
         }
@@ -180,7 +176,7 @@ namespace Z0
         protected void TraceCaller(object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}",SeverityLevel.Info));
+                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}", SeverityLevel.Info));
         }
 
         /// <summary>
@@ -192,7 +188,7 @@ namespace Z0
         protected void TraceCaller(string title, object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}/{title}: {msg}",SeverityLevel.Info));
+                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}/{title}: {msg}", SeverityLevel.Info));
         }
 
         /// <summary>
@@ -232,9 +228,25 @@ namespace Z0
         }
 
         public void ReportBenchmark(BenchmarkRecord record)
-        {            
-            Benchmarks.Enqueue(record);
-        }
+            => Benchmarks.Enqueue(record);
 
+        public IReadOnlyList<AppMsg> DequeuePosts()
+            => Queue.DequeuePosts();
+
+        public void PostMessage(AppMsg msg)
+            => Queue.PostMessage(msg);
+
+        public void PostMessage(string msg, SeverityLevel? severity = null)
+            => Queue.PostMessage(msg, severity);
+
+        public void Flush(Exception e, IMsgLog target)
+            => Queue.Flush(e, target);
+
+        /// <summary>
+        /// Allocates and optionally starts a system counter
+        /// </summary>
+        [MethodImpl(Inline)]   
+        protected static SystemCounter counter(bool start = false) 
+            => SystemCounter.Create(start);
     }
 }

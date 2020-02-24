@@ -56,7 +56,7 @@ namespace Z0
     {
 
         public ExperimentalScenarios()
-            : base(callerfile())
+            : base(reflect.myfile())
         {
 
         }

@@ -115,7 +115,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                errout($"Harness execution failed: {e}", this);
+                error($"Harness execution failed: {e}");
             }  
             finally
             {
@@ -391,7 +391,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                PostError(e);
+                Flush(e, Log.Test);
             }
         }
 

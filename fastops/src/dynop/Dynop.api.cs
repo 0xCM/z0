@@ -260,6 +260,7 @@ namespace Z0
                 owner: owner,
                 skipVisibility: false);       
 
+        
         internal static DynamicDelegate UnaryImmOpDelegate(VKT.Vec k, Type typedef, OpIdentity id, MethodInfo inner, byte imm8, Type component)
         {
             var reified = inner.Reify(component);

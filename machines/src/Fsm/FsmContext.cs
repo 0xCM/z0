@@ -11,14 +11,14 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-
     
-    class FsmContext : RngContext<FsmContext>, IFsmContext
+    class FsmContext : IFsmContext
     {
+        public IPolyrand Random {get;}  
 
         public FsmContext(IPolyrand random, ulong? receiptLimit = null)
-            : base(random)
         {
+            this.Random = random;
             this.ReceiptLimit = receiptLimit ?? (ulong)Pow2.T14;
         }
 
@@ -27,9 +27,6 @@ namespace Z0.Machines
         /// will accept prior to forced termination
         /// </summary>
         public ulong? ReceiptLimit {get;}
-
-        
-
     }
 
 }

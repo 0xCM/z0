@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Threading.Tasks;
     using System.Collections.Generic;
-    
-    using static zfunc;    
 
-    public interface IConsoleApp : IAssemblyComposition, IMsgContext
+    public interface IMsgLog
     {
-        void RunApp(params string[] args);   
-             
+        void Write(IEnumerable<AppMsg> src);
+        
+        void Write(AppMsg src);
     }
-
 }

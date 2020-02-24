@@ -6,15 +6,18 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    
-    using static zfunc;    
-
-    public abstract class ConsoleApp<A> : MsgContext, IConsoleApp
+        
+    public abstract class ConsoleApp<A> : IConsoleApp
         where A : ConsoleApp<A>, new()
     {
-        protected ConsoleApp(IPolyrand random)
-        {            
+        readonly IMsgContext Queue;
 
+        readonly IMsgLog MsgLog;
+
+        protected ConsoleApp(IMsgLog log)
+        {
+            this.Queue = MsgContext.Create();
+            this.MsgLog = log;
         }
 
         protected abstract void Execute(params string[] args);
@@ -30,7 +33,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                PostError(e);
+                Queue.Flush(e,MsgLog);
             }
         }
 
