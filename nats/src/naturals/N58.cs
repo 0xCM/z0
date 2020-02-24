@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static constant;    
+    using static Root;    
 
     public readonly struct N58 : INatSeq<N58,N5,N8>
     {

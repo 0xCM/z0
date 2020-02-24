@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static constant;    
+    using static Root;    
 
     public readonly struct N8192: INatSeq<N8192>, INatPow<N8192, N2, N13>,INatPow2<N13>,
         INatDivisible<N8192,N4096>, INatDivisible<N8192,N2048>, INatDivisible<N8192,N1024>, 

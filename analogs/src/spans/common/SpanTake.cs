@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class SpanExtend
+    public static class SpanTake
     {
         /// <summary>
         /// Reads a partial value if there aren't a sufficient number of bytes to comprise a target value

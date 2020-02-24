@@ -9,7 +9,7 @@ namespace Z0
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
  
-    using static constant;
+    using static Root;
 
     /// <summary>
     /// Captures the value of a type natural
@@ -17,7 +17,6 @@ namespace Z0
     public readonly struct NatVal
     {        
         public readonly ulong Value;
-
 
         [MethodImpl(Inline)]
         internal static NatVal From(ulong src)

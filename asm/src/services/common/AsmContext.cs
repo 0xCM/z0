@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public sealed class AsmContext : OpContext<AsmContext>, IAsmContext
+    public sealed class AsmContext : IAsmContext 
     {   
         static int LastId = 0;
 
@@ -26,23 +26,21 @@ namespace Z0
         /// </summary>
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
         public static IAsmContext New(IAssemblyComposition assemblies)
-            => new AsmContext(assemblies, ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
+            => new AsmContext(assemblies, ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default, CilFormatConfig.Default);
 
         public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
-            => new AsmContext(AssemblyComposition.Empty, clrindex, resources, format, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
+            => new AsmContext(AssemblyComposition.Empty, clrindex, resources, format, CilFormatConfig.Default);
         
         public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources)             
-            => new AsmContext(AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.Default, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
+            => new AsmContext(AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.Default, CilFormatConfig.Default);
 
-        AsmContext(IAssemblyComposition assemblies, IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat, IPolyrand random)
-            : base(random)            
+        AsmContext(IAssemblyComposition assemblies, IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
         {
             this.Data = AsmContextData.Create(assemblies ?? AssemblyComposition.Empty, clrIndex, resources,format,cilFormat);
             this.ContextId = Interlocked.Increment(ref LastId);
         }
 
-        AsmContext(int parentid, AsmContextData data, IPolyrand random)
-            : base(random)            
+        AsmContext(int parentid, AsmContextData data)
         {
             this.ParentId = parentid;
             this.Data = data;
@@ -68,9 +66,6 @@ namespace Z0
             => Data.Assemblies;
 
         public IAsmContext WithFormat(AsmFormatConfig config)
-        {
-            var d = AsmContextData.Create(Compostion, ClrIndex, Data.Resources, config, CilFormat);            
-            return new AsmContext(ContextId, d ,Random);            
-        }
+            => new AsmContext(ContextId, AsmContextData.Create(Compostion, ClrIndex, Data.Resources, config, CilFormat));            
     }   
 }

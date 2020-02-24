@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static constant;
+    using static Root;
+    using static nfunc;
 
     /// <summary>
     /// Encodes a natural number k := k1 - k2

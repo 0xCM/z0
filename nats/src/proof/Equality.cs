@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static constant;    
+    using static Root;    
 
     partial class NatProve
     {

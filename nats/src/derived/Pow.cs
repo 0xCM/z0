@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static nfunc;
-    using static constant;
+    using static Root;
 
     /// <summary>
     /// Encodes a natural number k := b^e
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="@base">The base value</param>
         /// <param name="exp">The exponent value</param>
-        [MethodImpl(constant.Inline)]
+        [MethodImpl(Inline)]
         static ulong pow(ulong @base, ulong exp)
             => repeat(@base, exp).Aggregate((x,y) => x * y); 
 

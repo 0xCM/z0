@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    
     using static Root;
 
     /// <summary>
@@ -277,5 +278,4 @@ namespace Z0
         public static N32768 n32768 => default; 
             
     }
-
 }

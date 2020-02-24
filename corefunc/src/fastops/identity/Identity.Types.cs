@@ -38,6 +38,8 @@ namespace Z0
                 return none<ScalarIdentity>();                
         }
 
+
+
         /// <summary>
         /// Extracts an index-identified segmented identity part from an operation identity
         /// </summary>
@@ -75,7 +77,7 @@ namespace Z0
                 return arg.EnumId();
             else if(arg.IsSegmented())
                 return arg.SegmentedId();
-            else if(arg.IsSpan())
+            else if(IsSpan(arg))
                 return arg.SpanId();
             else if(arg.IsNatSpan())
                 return arg.NatSpanId();  
@@ -119,6 +121,24 @@ namespace Z0
             var id = PrimalIdentity.From(arg);
             return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
         }
+
+        /// <summary>
+        /// Classifies a type according to whether it is a span, a readonly span, or otherwise
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        static SpanKind SpanKind(this Type t)
+            => t.GenericDefinition() == typeof(Span<>) ? Z0.SpanKind.Mutable
+              : t.GenericDefinition() == typeof(ReadOnlySpan<>) ? Z0.SpanKind.Immutable
+              : 0;
+
+        /// <summary>
+        /// Determines whether a type is parametric over the natural numbers
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        static bool IsSpan(this Type t)
+            => t.SpanKind().IsSome();
 
         static Option<TypeIdentity> SpanId(this Type arg)
         {

@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;
 
-    public interface IEncodingExtractor : IAppService
+    public interface IEncodingExtractor : IAsmService
     {
         CapturedEncodings Extract(ApiHost src);
     }

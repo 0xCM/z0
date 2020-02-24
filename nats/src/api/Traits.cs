@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static constant;
+
+    using static Root;
 
     /// <summary>
     /// Characterizes a type-level natural number, a *typenat*

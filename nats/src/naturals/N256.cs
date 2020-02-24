@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static constant;    
+    using static Root;    
 
     public readonly struct N256 : INatSeq<N256,N2,N5,N6>, INatPow<N256, N2,N8>, INatPow2<N8>, 
         INatDivisible<N256,N4>, INatDivisible<N256,N8>, INatDivisible<N256,N16>, 

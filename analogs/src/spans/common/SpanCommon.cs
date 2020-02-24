@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
     using static nfunc;
 
-    public static partial class SpanExtend
+    public static class SpanCommons
     {
         /// <summary>
         /// Fills a span of natural length with streamed elements
@@ -54,33 +54,6 @@ namespace Z0
         public static bool ValuesEqual<T>(this Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged, IEquatable<T>
                 => lhs.ReadOnly().ValuesEqual(rhs);
-
-        /// <summary>
-        /// Fills a span with a supplied valuie
-        /// </summary>
-        /// <param name="src">The span to manipulate</param>
-        /// <typeparam name="T">The element type</typeparam>
-        /// <returns>The manipulated span</returns>
-        [MethodImpl(Inline)]
-        public static Span<T> FillWith<T>(this Span<T> src, T value)
-        {
-            src.Fill(value);
-            return src;
-        }
-
-        /// <summary>
-        /// Overwrites span content with the default/zero value
-        /// </summary>
-        /// <param name="src">The span to manipulate</param>
-        /// <typeparam name="T">The element type</typeparam>
-        /// <returns>The manipulated span</returns>
-        [MethodImpl(Inline)]
-        public static Span<T> ZeroFill<T>(this Span<T> src)
-            where T : unmanaged
-        {
-            src.Fill(default(T));
-            return src;
-        }
             
         /// <summary>
         /// If the length of a source span is less than a specified length, a new span of the desired length

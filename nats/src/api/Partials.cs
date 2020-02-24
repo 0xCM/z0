@@ -9,9 +9,6 @@ namespace Z0
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
  
-    using static constant;
-
-
     public static partial class NatProve
     {
         

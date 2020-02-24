@@ -238,5 +238,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Option<T> TryCast<T>(object item)
             => item is T ? Option.some((T)item) : Option.none<T>();
+
+ 
     }
 }

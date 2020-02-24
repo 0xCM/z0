@@ -12,14 +12,14 @@ namespace Z0
 
     readonly struct ByteReader : IByteReader
     {
-        public IRngContext Context {get;}
+        public IContext Context {get;}
         
         [MethodImpl(Inline)]
-        public static ByteReader Create(IRngContext context)
+        public static ByteReader Create(IContext context)
             => new ByteReader(context);
 
         [MethodImpl(Inline)]
-        ByteReader(IRngContext context)
+        ByteReader(IContext context)
         {
             this.Context = context;
         }

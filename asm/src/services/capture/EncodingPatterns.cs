@@ -13,17 +13,31 @@ namespace Z0
     using static Z0.EncodingPatternKind;
     using static Z0.EncodingPatternTokens;
     
-    using D = EncodingPatternDelta;
+    using D = EncodingPatternOffset;
 
     public readonly struct EncodingPatterns : IBytePatternSet<EncodingPatternKind>
     {
-        readonly EncodingPatternKind[] PatternKindList;
-        
-        public int PatternCount {get;}
+        [MethodImpl(Inline)]
+        public static EncodingPatterns Define()
+            => new EncodingPatterns(0);
 
-        public EncodingPatterns(int dummy)
+        readonly EncodingPatternKind[] FullKinds;
+
+        readonly EncodingPatternKind[] PartialKinds;
+
+        public int FullPatternCount {get;}
+
+        public int PartialPatternCount {get;}
+
+        public ReadOnlySpan<EncodingPatternKind> FullPatternKinds 
+            => FullKinds;
+
+        public ReadOnlySpan<EncodingPatternKind> PartialPatternKinds 
+            => PartialKinds;
+        
+        EncodingPatterns(int dummy)
         {
-             PatternKindList = new EncodingPatternKind[]
+             FullKinds = new EncodingPatternKind[]
              {
                 CTC_RET_SBB,
                 CTC_RET_INTR,
@@ -34,13 +48,16 @@ namespace Z0
                 CTC_Zx7,
             };
 
-            PatternCount = PatternKindList.Length;
+            PartialKinds = new EncodingPatternKind[]
+            {
+                CTC_CALL32_INTR
+            };
+
+            FullPatternCount = FullKinds.Length;
+            PartialPatternCount = PartialKinds.Length;
         }
 
-        ReadOnlySpan<EncodingPatternKind> IBytePatternSet<EncodingPatternKind>.PatternKinds 
-            => PatternKindList;
-
-        ReadOnlySpan<byte> IBytePatternSet<EncodingPatternKind>.Pattern(EncodingPatternKind code)
+        public ReadOnlySpan<byte> FullPattern(EncodingPatternKind code)
             => code switch{
                 CTC_RET_SBB => RET_SBB,
                 CTC_RET_INTR => RET_INT,
@@ -52,7 +69,7 @@ namespace Z0
                 _ => Empty
             };
 
-        int IBytePatternSet<EncodingPatternKind>.PatternValue(EncodingPatternKind code)
+        public int MatchOffset(EncodingPatternKind code)
             => code switch{
                 CTC_RET_SBB => (int)D.RET_SBB,
                 CTC_RET_INTR => (int)D.RET_INT,
@@ -62,6 +79,7 @@ namespace Z0
                 CTC_JMP_RAX => (int)D.JMP_RAX,
                 CTC_Zx7 => (int)D.Z7,
                 CTC_RET_Zx7 => (int)D.RET_Zx7,
+                CTC_CALL32_INTR => (int)D.CTC_CALL32_INTR,
                 _ => 0
             };
 
@@ -70,35 +88,25 @@ namespace Z0
                 CTC_CALL32_INTR => CALL32_INTR,
                 _ => EmptyPartial
             };
-
-        static ReadOnlySpan<byte> RET_SBB 
-            => new byte[]{RET,SBB};
-
-        static ReadOnlySpan<byte> RET_INT 
-            => new byte[]{RET,INTR};
-
-        static ReadOnlySpan<byte> RET_ZED_SBB
-            => new byte[]{RET,ZED,SBB};
-
-        static ReadOnlySpan<byte> RET_Zx2
-            => new byte[]{RET,ZED,ZED};
-
-        static ReadOnlySpan<byte> INTRx2
-            => new byte[]{INTR,INTR};
-
-        static ReadOnlySpan<byte?> CALL32_INTR
-            => new byte?[]{CALL,null,null,null,null,INTR};
         
-        static ReadOnlySpan<byte> JMP_RAX
-            => new byte[]{ZED,ZED,J48,FF,E0};
+        static ReadOnlySpan<byte> RET_SBB  => new byte[]{RET,SBB};
 
-        static ReadOnlySpan<byte> Z7
-            => new byte[]{ZED,ZED,ZED,ZED,ZED,ZED,ZED};
+        static ReadOnlySpan<byte> RET_INT  => new byte[]{RET,INTR};
 
-        static ReadOnlySpan<byte> Empty
-            => new byte[]{};        
+        static ReadOnlySpan<byte> RET_ZED_SBB => new byte[]{RET,ZED,SBB};
 
-        static ReadOnlySpan<byte?> EmptyPartial
-            => new byte?[]{};
+        static ReadOnlySpan<byte> RET_Zx2 => new byte[]{RET,ZED,ZED};
+
+        static ReadOnlySpan<byte> INTRx2 => new byte[]{INTR,INTR};
+        
+        static ReadOnlySpan<byte> JMP_RAX => new byte[]{ZED,ZED,J48,FF,E0};
+
+        static ReadOnlySpan<byte> Z7 => new byte[]{ZED,ZED,ZED,ZED,ZED,ZED,ZED};
+
+        static ReadOnlySpan<byte?> CALL32_INTR => new byte?[]{CALL,null,null,null,null,INTR};
+
+        static ReadOnlySpan<byte> Empty => new byte[]{};        
+
+        static ReadOnlySpan<byte?> EmptyPartial => new byte?[]{};        
     }
 }

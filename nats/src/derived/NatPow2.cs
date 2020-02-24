@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     
     using static nfunc;
-    using static constant;
+    using static Root;
 
     /// <summary>
     /// Reifies a natural k such that e:E => k = 2^e

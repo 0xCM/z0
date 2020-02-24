@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static nfunc;
-    using static constant;
+    using static Root;
 
     /// <summary>
     /// Defines operations over character digits

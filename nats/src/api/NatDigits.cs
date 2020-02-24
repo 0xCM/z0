@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static nfunc;
-    using static constant;
+    
+    using static Root;
     
     /// <summary>
     /// Defines a generic digit representation realtive to a natural base

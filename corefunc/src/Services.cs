@@ -13,7 +13,7 @@ namespace Z0
     public static class CoreServices
     {
         [MethodImpl(Inline)]
-        public static IByteReader ByteReader(this IRngContext context)
+        public static IByteReader ByteReader(this IContext context)
             => Z0.ByteReader.Create(context);        
     }
 }

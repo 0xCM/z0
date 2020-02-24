@@ -8,36 +8,28 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-
     
     public interface IBytePatternSet
     {
         /// <summary>
-        /// The number of patterns in the set
+        /// The number of non-partial patterns in the set
         /// </summary>
-        int PatternCount {get;}
+        int FullPatternCount {get;}
+
+        int PartialPatternCount {get;}
     }
 
    public interface IBytePatternSet<P> : IBytePatternSet
         where P : unmanaged, Enum
     {
-        ReadOnlySpan<P> PatternKinds {get;}
+        ReadOnlySpan<P> FullPatternKinds {get;}
 
-        ReadOnlySpan<byte> Pattern(P kind);   
+        ReadOnlySpan<byte> FullPattern(P kind);   
+
+        ReadOnlySpan<P> PartialPatternKinds {get;}
 
         ReadOnlySpan<byte?> PartialPattern(P kind);   
 
-        int PatternValue(P kind);     
+        int MatchOffset(P kind);     
     }
-
-   public interface IBytePatternSet<P,C> : IBytePatternSet<P>
-        where P : unmanaged, Enum
-        where C : unmanaged, Enum
-    {
-        new C PatternValue(P kind);     
-
-        int IBytePatternSet<P>.PatternValue(P kind)
-            => evalue<C,int>(PatternValue(kind));
-    }
-
 }

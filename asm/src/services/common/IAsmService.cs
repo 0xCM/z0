@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a contextual asm service where caller-managed lifecyle is not needed
     /// </summary>
-    public interface IAsmService : IAppService<IAsmContext>
+    public interface IAsmService :  IAppService<IAsmContext>
     {
         
     }

@@ -13,9 +13,10 @@ namespace Z0
     using static zfunc;
     
 
-    public abstract class TestContext<U> : RngContext<U>, ITestContext
+    public abstract class TestContext<U> : MsgContext, ITestContext
         where U : TestContext<U>
     {
+        public IPolyrand Random {get;}
 
         /// <summary>
         /// Allocates and optionally starts a system counter
@@ -25,15 +26,9 @@ namespace Z0
             => SystemCounter.Create(start);
 
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
-            : base(random ?? Rng.WyHash64(Seed64.Seed00))
         {
+            this.Random = random ?? Rng.WyHash64(Seed64.Seed00);
             this.Config = config ?? TestConfigDefaults.Default();
-        }
-
-        protected TestContext(IPolyrand random)
-            : base(random)
-        {
-            this.Config = TestConfigDefaults.Default();
         }
 
         public ITestConfig Config {get; private set;}

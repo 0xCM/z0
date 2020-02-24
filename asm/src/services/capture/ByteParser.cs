@@ -14,7 +14,7 @@ namespace Z0
     public ref struct ByteParser<T>
         where T : unmanaged, Enum
     {
-        public IRngContext Context {get;}
+        public IAsmContext Context {get;}
         
         readonly Span<byte> Buffer;
 
@@ -33,10 +33,10 @@ namespace Z0
         public ReadOnlySpan<byte> Parsed
             =>  (Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : new byte[]{};
 
-        public static ByteParser<T> Create(IRngContext context, int size, IBytePatternSet<T> patterns)
+        public static ByteParser<T> Create(IAsmContext context, int size, IBytePatternSet<T> patterns)
             => new ByteParser<T>(context,size,patterns);
 
-        ByteParser(IRngContext context, int size, IBytePatternSet<T> patterns)
+        ByteParser(IAsmContext context, int size, IBytePatternSet<T> patterns)
         {
             this.Context = context;
             this.Buffer = new byte[size];
@@ -103,26 +103,26 @@ namespace Z0
             mc = default;
             delta = 0;
             
-            ref readonly var codes = ref head(Patterns.PatternKinds);
-            for(var i=0; i < Patterns.PatternCount; i++)
+            ref readonly var codes = ref head(Patterns.FullPatternKinds);
+            for(var i=0; i < Patterns.FullPatternCount; i++)
             {
                 var match = skip(codes,i);
-                var pattern = Patterns.Pattern(match);
+                var pattern = Patterns.FullPattern(match);
                 var len = pattern.Length;
 
-                var matched = 
-                    Offset > len
+                var matched = Offset > len
                     ? Buffer.Slice(Offset -  1 - len, len).EndsWith(pattern)
                     : false;                           
 
                 if(matched)
                 {
                     mc = match;
-                    delta = Patterns.PatternValue(match);
+                    delta = Patterns.MatchOffset(match);
                     return true;
                 }
                 
             }
+            
             return false;
         }            
     } 

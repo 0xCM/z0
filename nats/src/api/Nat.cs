@@ -11,14 +11,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static constant;
+    using static Root;
 
     /// <summary>
     /// Constructs natural number prepresentatives and calculates related values
     /// </summary>
     public static class Nat
     {        
-
         public static int require<N>(int value, N n = default)
             where N : unmanaged, ITypeNat
                 => nati<N>() == value ? value : throw new Exception();
@@ -615,6 +614,5 @@ namespace Z0
             else
                 return default(K).NatValue;
         }
-
     }
 }

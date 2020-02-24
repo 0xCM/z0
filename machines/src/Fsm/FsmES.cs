@@ -148,7 +148,7 @@ namespace Z0.Machines
         /// </summary>
         public void Start()
         {
-            StartTime = TimestampService.Timestamp();
+            StartTime = ServerTimestamp.Timestamp();
         }
 
         bool CanProcess()
@@ -208,7 +208,7 @@ namespace Z0.Machines
 
         void OnComplete(bool asPlanned)
         {
-            EndTime = TimestampService.Timestamp();
+            EndTime = ServerTimestamp.Timestamp();
             Runtime.Stop();
             Completed?.Invoke(QueryStats(), asPlanned);
         }

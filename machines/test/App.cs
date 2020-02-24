@@ -52,7 +52,7 @@ namespace Z0
 
         protected override void RunTests(params string[] filters)
         {
-            this.AgentContext = new AgentContext(Random,SystemEventWriter.Log);
+            this.AgentContext = new AgentContext(SystemEventWriter.Log);
             
             //ManageServerComplex();
 

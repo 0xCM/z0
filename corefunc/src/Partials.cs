@@ -23,17 +23,5 @@ namespace Z0
         
     }
 
-
-    public static partial class OpReps
-    {
-
-    }
-
-    public static partial class ZOps
-    {
-
-    }
-
-
 }
 

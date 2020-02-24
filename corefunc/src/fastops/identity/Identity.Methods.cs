@@ -171,6 +171,13 @@ namespace Z0
             return OpIdentity.Define(id);            
         }
 
+        /// <summary>
+        /// Gets the name of a method to which to Op attribute is applied
+        /// </summary>
+        /// <param name="m">The source method</param>
+        static string OpName(this MethodInfo m)
+            => Identity.name(m);
+
         static string formatargs(char open, char close, char sep, IEnumerable<string> args)
             => concat(open, string.Join(sep,args), close);
     }

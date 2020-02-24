@@ -12,15 +12,15 @@ namespace Z0
 
     using static Root;
 
-    partial class SpanExtend
+    [ApiHost(ApiHostKind.Generic)]
+    public static class SpanConvert
     {
-
         /// <summary>
         /// Reimagines a span of generic values as a span of chars
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<char> AsChar<T>(this Span<T> src)
             where T : unmanaged        
                 => MemoryMarshal.Cast<T,char>(src);
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<byte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(src);
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<sbyte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<sbyte,T>(src);
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<short> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<short,T>(src);
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<ushort> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<ushort,T>(src);
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<int> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<int,T>(src);
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<uint> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<uint,T>(src);
@@ -90,7 +90,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<long> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<long,T>(src);
@@ -100,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<ulong> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<ulong,T>(src);
@@ -110,7 +110,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<double> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<double,T>(src);
@@ -120,18 +120,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> As<T>(this Span<float> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<float,T>(src);
-
 
         /// <summary>
         /// Reimagines a span of signed bytes as a span of generic values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<sbyte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<sbyte,T>(src);
@@ -141,7 +140,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<byte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(src);
@@ -151,7 +150,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<short> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<short,T>(src);
@@ -161,7 +160,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<ushort> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<ushort,T>(src);
@@ -171,7 +170,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<uint> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<uint,T>(src);
@@ -181,7 +180,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<int> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<int,T>(src);
@@ -191,7 +190,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<long> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<long,T>(src);
@@ -211,7 +210,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<float> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<float,T>(src);
@@ -221,7 +220,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ReadOnlySpan<T> As<T>(this ReadOnlySpan<double> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<double,T>(src);
@@ -237,7 +236,5 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
                 => MemoryMarshal.Cast<S,T>(src);                                    
-
     }
-
 }

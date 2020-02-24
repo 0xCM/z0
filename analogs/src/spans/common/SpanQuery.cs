@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines various methods that extract/interrogate span content
     /// </summary>
-    partial class SpanExtend
+    public static class SpanQuery
     {
         /// <summary>
         /// Returns a reference to the first element of a nonempty span

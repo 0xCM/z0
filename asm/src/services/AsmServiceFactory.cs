@@ -214,11 +214,11 @@ namespace Z0
             => AsmCaptureFlow.Create(context);
 
         [MethodImpl(Inline)]
-        public static IEncodingExtractor EncodingExtractor(this IRngContext context, int? bufferlen = null)
+        public static IEncodingExtractor EncodingExtractor(this IAsmContext context, int? bufferlen = null)
             => Z0.EncodingExtractor.Create(context, bufferlen);
 
         [MethodImpl(Inline)]
-        public static IEncodingParser EncodingParser(this IRngContext context, int? bufferlen = null)
+        public static IEncodingParser EncodingParser(this IAsmContext context, int? bufferlen = null)
             => Z0.EncodingParser.Create(context, bufferlen);
 
         [MethodImpl(Inline)]

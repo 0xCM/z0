@@ -8,7 +8,7 @@ namespace Z0
     
     using static zfunc;
 
-    public interface IEncodingParser : IAppService
+    public interface IEncodingParser : IAsmService
     {
         ParsedEncodings Parse(ApiHost src, CapturedEncodings encoded);        
     }

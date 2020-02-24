@@ -9,8 +9,7 @@ using System.Runtime.CompilerServices;
 using Z0;
 
 partial class zfunc
-{
-            
+{            
     /// <summary>
     /// Determines whether m is evenly divisible by n
     /// </summary>
@@ -98,7 +97,4 @@ partial class zfunc
     public static bool divides<N>(N n, sbyte m)
         where N : unmanaged, ITypeNat
             => divides<N>(n, (uint)m);
-
-
 }
-

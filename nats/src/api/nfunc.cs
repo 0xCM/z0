@@ -8,10 +8,23 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Z0;
-using static constant;
+using static Z0.Root;
 
 public static class nfunc
 {
+    /// <summary>
+    /// Converts an integer to a sequence of digits
+    /// </summary>
+    /// <param name="src">The source value</param>
+    internal static byte[] digits(ulong src)
+    {
+        var text = src.ToString();
+        var chars = new byte[text.Length];
+        for(var i=0; i<text.Length; i++)
+            chars[i] = byte.Parse(text[i].ToString());                
+        return chars;
+    }
+
 
     [MethodImpl(Inline)]   
     internal static T[] repeat<T>(T value, ulong count)
