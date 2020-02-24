@@ -18,7 +18,7 @@ namespace Z0
     {        
         public readonly OpIdentity Id; 
 
-        public readonly OpInfo SourceOp;
+        public readonly OpDescriptor SourceOp;
 
         public readonly MemoryRange SourceMemory;
 
@@ -45,7 +45,7 @@ namespace Z0
         {
             require((int)memsrc.Length == bits.Trimmed.Length);    
             this.Id = id;        
-            this.SourceOp = OpInfo.Define(OpUri.Hex(ApiHostPath.FromHost(method.DeclaringType), method.Name, id), method.Signature().Format());
+            this.SourceOp = OpDescriptor.Define(OpUri.Hex(ApiHostPath.FromHost(method.DeclaringType), method.Name, id), method.Signature().Format());
             this.Method = method;
             this.SourceMemory = memsrc;
             this.Code = AsmCode.Define(id, memsrc, bits.Trimmed);

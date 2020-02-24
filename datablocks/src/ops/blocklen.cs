@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class DataBlocks
+    partial class blocks
     {        
         /// <summary>
         /// Computes the number of cells that comprise a single 8-bit block

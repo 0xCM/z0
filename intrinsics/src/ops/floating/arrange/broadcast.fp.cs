@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitsize selector</param>
         /// <param name="dst">The value to broadcast</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<float> vbroadcast(N256 n, float src)
             => BroadcastScalarToVector256(ptr(ref mutable(in src)));
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitsize selector</param>
         /// <param name="dst">The value to broadcast</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<double> vbroadcast(N256 n, double src)
             => BroadcastScalarToVector256(ptr(ref mutable(in src)));
 
@@ -38,11 +38,11 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitsize selector</param>
         /// <param name="dst">The value to broadcast</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<float> vbroadcast(N128 n128, float src)
             => BroadcastScalarToVector128(ptr(ref mutable(in src)));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<double> vbroadcast(N128 n128, double src)
             => Vector128.Create(src);        
     }

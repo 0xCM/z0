@@ -126,11 +126,11 @@ namespace Z0
 
             var w = n128;
             var t = z32;
-            var A = DataBlocks.alloc(w,BlockCount, t);                
-            var B = DataBlocks.alloc(w,BlockCount, t);
+            var A = blocks.alloc(w,BlockCount, t);                
+            var B = blocks.alloc(w,BlockCount, t);
 
-            var pattern0 = VMask.vlsb(w,n2,n1,t);
-            var pattern1 = VMask.vmsb(w,n2,n1,t);
+            var pattern0 = vmask.vlsb(w,n2,n1,t);
+            var pattern1 = vmask.vmsb(w,n2,n1,t);
 
             for(var block = 0; block < BlockCount; block++)
             {
@@ -160,21 +160,21 @@ namespace Z0
         static Vector256<ulong> VGather4x64uIndex
         {
             [MethodImpl(Inline)]
-            get => CpuVector.vload(n256, in SpanOps.head64(VGather256x64x256IndexData));
+            get => CpuVector.vload(n256, in Refs.head64(VGather256x64x256IndexData));
         }
 
         //[0, 63, 127, 255]
         static Vector256<long> VGather4x64iIndex
         {
             [MethodImpl(Inline)]
-            get => CpuVector.vload(n256, in SpanOps.head64i(VGather256x64x256IndexData));
+            get => CpuVector.vload(n256, in Refs.head64i(VGather256x64x256IndexData));
         }
 
         //[0, 7, 15, 31, 63, 127, 255, 511]
         static Vector256<uint> VGather256x32x512Index
         {
             [MethodImpl(Inline)]
-            get => CpuVector.vload<uint>(n256, in SpanOps.head32(VGather256x32x512IndexData));
+            get => CpuVector.vload<uint>(n256, in Refs.head32(VGather256x32x512IndexData));
         }
 
         //[0, 63, 127, 255]

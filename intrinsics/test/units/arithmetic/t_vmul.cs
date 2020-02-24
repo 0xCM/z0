@@ -159,8 +159,8 @@ namespace Z0
             var t = z32;
             var s = z16;
             
-            var zb = DataBlocks.single(w,t);
-            var eb = DataBlocks.single(w,t);            
+            var zb = blocks.single(w,t);
+            var eb = blocks.single(w,t);            
             var count = CpuVector.vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)

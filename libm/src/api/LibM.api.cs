@@ -13,6 +13,7 @@ namespace Z0
 
 	using static zfunc;
     
+    [ApiHost(ApiHostKind.Direct)]
     public static class libm
     {
         [MethodImpl(Inline), Op]

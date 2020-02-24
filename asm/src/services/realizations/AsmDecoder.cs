@@ -77,7 +77,7 @@ namespace Z0
             return AsmInstructionList.Create(dst);
         }
 
-        public AsmFunction DecodeFunction(OpInfo src, CaptureSummary summary)
+        public AsmFunction DecodeFunction(OpDescriptor src, CaptureSummary summary)
         {
             var code = AsmCode.Define(src.Id, summary.Range, summary.Bits.Trimmed);
             var instructions = DecodeInstructions(code, summary.Range.Start);
@@ -103,7 +103,7 @@ namespace Z0
                 return f;
         }
 
-        AsmFunction BuildFunction(OpInfo op, AsmInstructionBlock src)
+        AsmFunction BuildFunction(OpDescriptor op, AsmInstructionBlock src)
         {
             var info = new AsmInstructionInfo[src.InstructionCount];
             var offset = (ushort)0;

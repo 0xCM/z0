@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class DataBlocks
+    partial class blocks
     {
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 8-bit blocks

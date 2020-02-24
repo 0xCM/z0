@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using static zfunc;
+    using static Root;
     using static As;
 
     partial class Converter
     {
-
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T convert<T>(float src)
             where T : unmanaged
@@ -49,7 +48,6 @@ namespace Z0
             else
                 return convert_x<T>(src);
         }
-
 
         [MethodImpl(Inline)]
         static T convert_x<T>(float src)

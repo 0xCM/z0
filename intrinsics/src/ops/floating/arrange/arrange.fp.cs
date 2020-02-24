@@ -19,28 +19,28 @@ namespace Z0
 
     partial class dinxfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vlo(Vector256<float> src)
             => ExtractVector128(src, 0);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vlo(Vector256<double> src)
             => ExtractVector128(src, 0);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vhi(Vector256<float> src)
             => ExtractVector128(src, 1);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vhi(Vector256<double> src)
             => ExtractVector128(src, 1);
 
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<float> vscalar(float src)
             => LoadScalarVector128(&src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<double> vscalar(double src)
             => LoadScalarVector128(&src);
 
@@ -51,7 +51,7 @@ namespace Z0
         /// z[2] = x[2]
         /// z[3] = x[3]
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vmovescalar(Vector128<float> x, Vector128<float> y)
             => MoveScalar(y,x);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vmovescalar(Vector128<double> x, Vector128<double> y)
             => MoveScalar(y,x);
 
@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> movehl(Vector128<float> x, Vector128<float> y)
             => MoveHighToLow(x,y);
 
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> movelh(Vector128<float> x, Vector128<float> y)
             => MoveLowToHigh(x,y);
 
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="row1">The second row</param>
         /// <param name="row2">The third row</param>
         /// <param name="row3">The fourth row</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void vtranspose(ref Vector128<float> row0, ref Vector128<float> row1, ref Vector128<float> row2, ref Vector128<float> row3)
         {
             var tmp0 = Shuffle(row0,row1, 0x44);
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="control"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vshuffle(Vector128<float> x, Vector128<float> y, byte control)
             => Shuffle(x, y, control);
 
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="control"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vshuffle(Vector128<double> x, Vector128<double> y, byte control)
             => Shuffle(x, y, control);
     }

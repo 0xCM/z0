@@ -9,39 +9,67 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
-    using static zfunc;
+    using static Refs;
+    using static Root;
 
-    public static class BytePatternMatch
+    public readonly ref struct PartialEncodingPattern
     {
-        public static bool matches(Span<byte> src, Span<byte> pattern)
-        {
-            var len = pattern.Length;
-            var offset = src.Length - pattern.Length - 1;
-            if(offset >= 0)
-                return src.Slice(offset, len).EndsWith(pattern);
-            else
-                return false;
-                        
+        public readonly ReadOnlySpan<byte?> PatternData;
+
+        public readonly EncodingPatternKind Id;
+    }
+
+    public static class PartialEncodingMatch
+    {
+        public static int? TerminalIndex(ReadOnlySpan<byte> src, ReadOnlySpan<byte?> pattern, Span<byte> state)
+        {            
+            var pos = 0;
+            var posMax = state.Length - 1;
+            int? termidx = null;
+
+            ref readonly var input = ref head(src);
+            ref readonly var match = ref head(pattern);
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var atom = ref skip(input,i);
+                for(var j = pos; j<=posMax; j++)
+                {
+                    ref readonly var token = ref skip(match,j);
+                    if(!token.HasValue || (token.HasValue && token.Value == atom))
+                    {
+                        seek(state,j) = atom;
+                        if(j == posMax)
+                            termidx = i;
+                    }
+                }
+
+                if(termidx != null)
+                    break;
+            }
+        
+            return termidx;
         }
 
-        public static bool matches(Span<byte> src, Span<byte?> pattern)
-        {
-            var len = pattern.Length;
-            var offset = src.Length - pattern.Length - 1;
-            if(offset < 0)
-                return false;
 
-            for(int  i=offset, j=0; i< src.Length; i++,j++)    
+        public static bool TryMatch(EncodingPatternOffset offset, ReadOnlySpan<byte> input, ReadOnlySpan<byte?> pattern,  out ReadOnlySpan<byte> selected)
+        {
+            selected = input;
+            Span<byte> state = stackalloc byte[pattern.Length];
+            var terminal = PartialEncodingMatch.TerminalIndex(input,pattern,state);
+            if(terminal.HasValue)
             {
-                var y = pattern[j];
-                if(y != null)
-                {
-                    if(src[i] != y.Value)
-                        return false;
-                }
+                var length = (terminal.Value + 1) + (int)offset;
+                selected = input.Slice(0,length);
+                return true;
             }
-                
-            return true;
+            return false;
+        }
+
+        public static bool TryPartialMatch(this EncodingPatterns patterns, EncodingPatternKind id, ReadOnlySpan<byte> input, out ReadOnlySpan<byte> selected)
+        {
+            var pattern = patterns.PartialPattern(id);
+            var offset = patterns.MatchOffset(id);
+            return TryMatch(offset, input, pattern, out selected);
         }
     }
 }

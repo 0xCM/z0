@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    public interface INumericFormatter : IObjectFormatter
+    public interface INumericFormatter : IFormatter
     {
         
     }

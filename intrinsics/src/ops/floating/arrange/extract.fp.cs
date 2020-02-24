@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float vextract(Vector128<float> src, byte pos)
             => Extract(src,pos);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vextract(Vector256<float> src, byte pos)
             => ExtractVector128(src, pos);
 
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vextract(Vector256<double> src, byte pos)
             => ExtractVector128(src, pos);
 
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float vxscalar(Vector128<float> src, byte pos)
             => Extract(src,pos);
 
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double vxscalar(Vector128<double> src, byte pos)
             => src.GetElement(pos);
     }

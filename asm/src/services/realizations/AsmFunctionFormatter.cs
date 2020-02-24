@@ -143,8 +143,12 @@ namespace Z0
 
             dataline += bracket(code.MemorySource.Length);
 
-            if(Config.EmitFunctionEncoding)
-                dataline += concat(spaced(AsciSym.Eq), embrace(code.Encoded.FormatHex()));            
+            if(Config.EmitFunctionHeaderEncoding)
+            {
+                var formatter = HexFormatter.Define<byte>();
+                var formatted = formatter.Format(code.Encoded,Config.FunctionHeaderEncodingFormat);                
+                dataline += concat(spaced(AsciSym.Eq), embrace(formatted));
+            }
             return dataline;
         }
 

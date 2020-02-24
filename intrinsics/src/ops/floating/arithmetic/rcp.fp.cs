@@ -20,7 +20,7 @@ namespace Z0
         /// __m128 _mm_rcp_ps (__m128 a) RCPPS xmm, xmm/m128
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> rcp(Vector128<float> x)
             => Reciprocal(x);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// __m256 _mm256_rcp_ps (__m256 a) VRCPPS ymm, ymm/m256
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> rcp(Vector256<float> x)
             => Reciprocal(x);
     }

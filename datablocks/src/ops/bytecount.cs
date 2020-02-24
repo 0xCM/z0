@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class DataBlocks
+    partial class blocks
     {
         /// <summary>
         /// Computes the number of bytes covered by a specified cell count and width

@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal RowVector256(Span<T> src)
         {
-            data = DataBlocks.safeload(n256,src);
+            data = blocks.safeload(n256,src);
         }
 
         [MethodImpl(Inline)]

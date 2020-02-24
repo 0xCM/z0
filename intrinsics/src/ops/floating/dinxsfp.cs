@@ -28,7 +28,7 @@ namespace Z0
         ///  __m128 _mm_load_ss (float const* mem_address) MOVSS xmm, m32
         /// </summary>
         /// <param name="x">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<float> load(float x)
             => LoadScalarVector128(constptr(x));
 
@@ -36,7 +36,7 @@ namespace Z0
         ///  __m128d _mm_load_sd (double const* mem_address) MOVSD xmm, m64
         /// </summary>
         /// <param name="x">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<double> load(double x)
             => LoadScalarVector128(constptr(x));
 
@@ -44,7 +44,7 @@ namespace Z0
         /// void _mm_store_ss (float* mem_addr, __m128 a) MOVSS m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe float store(Vector128<float> src)
         {
             var dst = default(float);
@@ -56,7 +56,7 @@ namespace Z0
         /// void _mm_store_sd (double* mem_addr, __m128d a)MOVSD m64, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe double store(Vector128<double> src)
         {
             var dst = default(double);
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="dst"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref Vector128<double> convert(int x, out Vector128<double> dst)
         {
             dst = ConvertScalarToVector128Double(default, x);
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="src"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref Vector128<float> convert(int src, out Vector128<float> dst)
         {
             dst = ConvertScalarToVector128Single(default, src);
@@ -93,7 +93,7 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="dst"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref Vector128<float> convert(long src, out Vector128<float> dst)
         {
             dst = ConvertScalarToVector128Single(default, src);
@@ -104,7 +104,7 @@ namespace Z0
         /// int _mm_cvtss_si32 (__m128 a) CVTSS2SI r32, xmm/m32
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe int to32i(float x)
             => ConvertToInt32(LoadScalarVector128(ptr(ref x)));
 
@@ -112,7 +112,7 @@ namespace Z0
         /// int _mm_cvtsd_si32 (__m128d a) CVTSD2SI r32, xmm/m64
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe int to32i(double x)
             => ConvertToInt32(LoadScalarVector128(ptr(ref x)));
 
@@ -121,7 +121,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe long to64i(float x)
             => ConvertToInt64(LoadScalarVector128(ptr(ref x)));
 
@@ -129,7 +129,7 @@ namespace Z0
         /// __int64 _mm_cvtsd_si64 (__m128d a) CVTSD2SI r64, xmm/m64
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe long to64i(double x)
             => ConvertToInt64(LoadScalarVector128(ptr(ref x)));
 
@@ -138,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> add(Vector128<float> x, Vector128<float> y)
             => AddScalar(x, y);
 
@@ -147,7 +147,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> add(Vector128<double> x, Vector128<double> y)
             => AddScalar(x, y);
 
@@ -156,7 +156,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> mul(Vector128<float> x, Vector128<float> y)
             =>  MultiplyScalar(x, y);
 
@@ -165,7 +165,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> mul(Vector128<double> x, Vector128<double> y)
             =>  MultiplyScalar(x, y);
 
@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> fmadd(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplyAddScalar(x, y, z);
 
@@ -185,7 +185,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> fmadd(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplyAddScalar(x, y, z);
 
@@ -195,7 +195,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="z"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> fmsub(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplySubtractScalar(x,y,z);
 
@@ -205,7 +205,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="z"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> fmsub(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplySubtractScalar(x,y,z);
 
@@ -216,7 +216,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> fnmadd(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplyAddNegatedScalar(x,y,z);
 
@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> fnmadd(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplyAddNegatedScalar(x,y,z);
 
@@ -237,7 +237,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> div(Vector128<float> x, Vector128<float> y)
             => DivideScalar(x, y);
             
@@ -246,7 +246,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> div(Vector128<double> x, Vector128<double> y)
             => DivideScalar(x, y);
 
@@ -255,7 +255,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vectorized scalar</param>
         /// <param name="y">The right vectorized scalar</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> sub(Vector128<float> x, Vector128<float> y)
             => SubtractScalar(x, y);
             
@@ -264,7 +264,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vectorized scalar</param>
         /// <param name="y">The right vectorized scalar</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> sub(Vector128<double> x, Vector128<double> y)
             => SubtractScalar(x, y);
 
@@ -273,7 +273,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> max(Vector128<float> x, Vector128<float> y)
             => MaxScalar(x, y);            
 
@@ -282,7 +282,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> max(Vector128<double> x, Vector128<double> y)
             => MaxScalar(x, y);
 
@@ -291,7 +291,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vectorized scalar</param>
         /// <param name="y">The right vectorized scalar</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> min(Vector128<float> x, Vector128<float> y)
             => MinScalar(x, y);
 
@@ -300,7 +300,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vectorized scalar</param>
         /// <param name="y">The right vectorized scalar</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> min(Vector128<double> x, Vector128<double> y)
             => MinScalar(x, y);
 
@@ -309,7 +309,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool eq(Vector128<float> x,Vector128<float> y)
             => CompareScalarUnorderedEqual(x, y);
         
@@ -318,7 +318,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool eq(Vector128<double> x,Vector128<double> y)
             => CompareScalarUnorderedEqual(x, y);
 
@@ -327,7 +327,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool neq(Vector128<float> x, Vector128<float> y)
             => CompareScalarOrderedNotEqual(x, y);
         
@@ -336,7 +336,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool neq(Vector128<double> x, Vector128<double> y)
             => CompareScalarOrderedNotEqual(x, y);
 
@@ -345,7 +345,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool gt(Vector128<float> x, Vector128<float> y)
             => CompareScalarOrderedGreaterThan(x, y);
         
@@ -354,7 +354,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool gt(Vector128<double> x, Vector128<double> y)
             => CompareScalarOrderedGreaterThan(x, y);
 
@@ -363,7 +363,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool gteq(Vector128<float> x, Vector128<float> y)
             => CompareScalarOrderedGreaterThanOrEqual(x, y);
         
@@ -372,7 +372,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool gteq(Vector128<double> x, Vector128<double> y)
             => CompareScalarOrderedGreaterThanOrEqual(x, y);
 
@@ -381,7 +381,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool ngt(Vector128<float> x, Vector128<float> y)
             => CompareScalarNotGreaterThan(x, y).IsNaN(0);
 
@@ -390,7 +390,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool ngt(Vector128<double> x, Vector128<double> y)
             => CompareScalarNotGreaterThan(x, y).IsNaN(0);
 
@@ -399,7 +399,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool lt(Vector128<float> x, Vector128<float> y)
             => CompareScalarOrderedLessThan(x, y);                
 
@@ -408,7 +408,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool lt(Vector128<double> x, Vector128<double> y)
             => CompareScalarOrderedLessThan(x, y);
 
@@ -417,7 +417,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool nlt(Vector128<float> x, Vector128<float> y)
             => CompareScalarNotLessThan(x, y).IsNaN(0);
         
@@ -426,7 +426,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool nlt(Vector128<double> x, Vector128<double> y)
             => CompareScalarNotLessThan(x, y).IsNaN(0);
 
@@ -435,7 +435,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool lteq(Vector128<float> x, Vector128<float> y)
             => CompareScalarUnorderedLessThanOrEqual(x,y);
         
@@ -444,7 +444,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool lteq(Vector128<double> x, Vector128<double> y)
             => CompareScalarUnorderedLessThanOrEqual(x, y);
 
@@ -454,7 +454,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="mode"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> cmp(Vector128<float> x, Vector128<float> y, FpCmpMode mode)
             => CompareScalar(x,y, fpmode(mode));
    
@@ -464,7 +464,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="mode"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> cmp(Vector128<double> x, Vector128<double> y, FpCmpMode mode)
             => CompareScalar(x,y, fpmode(mode));
 
@@ -472,7 +472,7 @@ namespace Z0
         /// __m128 _mm_ceil_ss (__m128 a)ROUNDSD xmm, xmm/m128, imm8(10)
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> ceil(Vector128<float> x)
             => CeilingScalar(x);
 
@@ -480,7 +480,7 @@ namespace Z0
         /// __m128d _mm_ceil_sd (__m128d a)ROUNDSD xmm, xmm/m128, imm8(10)
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> ceil(Vector128<double> x)
             => CeilingScalar(x);
 
@@ -488,7 +488,7 @@ namespace Z0
         ///  __m128 _mm_ceil_ss (__m128 a)ROUNDSD xmm, xmm/m128, imm8(10)
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> floor(Vector128<float> x)
             => CeilingScalar(x);
         
@@ -496,7 +496,7 @@ namespace Z0
         /// __m128d _mm_ceil_sd (__m128d a)ROUNDSD xmm, xmm/m128, imm8(10)
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> floor(Vector128<double> x)
             => CeilingScalar(x);
 
@@ -505,7 +505,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> rcp(Vector128<float> x)
             => ReciprocalScalar(x);
 
@@ -513,7 +513,7 @@ namespace Z0
         /// __m128 _mm_sqrt_ss (__m128 a) SQRTSS xmm, xmm/m32
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> sqrt(Vector128<float> x)
             => SqrtScalar(x);
 
@@ -521,7 +521,7 @@ namespace Z0
         /// _m128d _mm_sqrt_sd (__m128d a) SQRTSD xmm, xmm/64 
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> sqrt(Vector128<double> x)
             => SqrtScalar(x);
 
@@ -529,7 +529,7 @@ namespace Z0
         /// __m128 _mm_rsqrt_ss (__m128 a) RSQRTSS xmm, xmm/m32
         /// </summary>
         /// <param name="x"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref Vector128<float> rsqrt(ref Vector128<float> x)
         {
             x = ReciprocalSqrtScalar(x);
@@ -540,7 +540,7 @@ namespace Z0
         /// Determines whether the first component is NaN
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static bool IsNaN(this Vector128<float> x, int index)
             => x.GetElement(index).IsNaN();
 
@@ -548,11 +548,11 @@ namespace Z0
         /// Determines whether the first component is NaN
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static bool IsNaN(this Vector128<double> x, int index)
             => x.GetElement(index).IsNaN();   
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static FloatComparisonMode fpmode(FpCmpMode m)
             => (FloatComparisonMode)m;
     }

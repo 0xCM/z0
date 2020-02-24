@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<float> vmaskload(ref float src, Vector128<float> mask)
             => MaskLoad(ptr(ref src), mask);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<double> vmaskload(ref double src, Vector128<double> mask)
             => MaskLoad(ptr(ref src), mask);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<float> vmaskload(ref float src, Vector256<float> mask)
             => MaskLoad(ptr(ref src), mask);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<double> vmaskload(ref double src, Vector256<double> mask)
             => MaskLoad(ptr(ref src), mask);
     }

@@ -119,5 +119,4 @@ namespace Z0
         public static unsafe Vector256<ulong> vmaskgather(N256 w, Vector256<ulong> vsrc, ref ulong msrc, Vector128<int> vidx, Vector256<ulong> mask)
             => GatherMaskVector256(vsrc, ptr(ref msrc), vidx, mask, 8);
     }
-
 }

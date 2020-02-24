@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
         
     using static Root;
-    using static DataBlocks;
+    using static blocks;
 
     /// <summary>
     /// Encapsulates a span that with content length can be evenly partitioned into 128-bit blocks

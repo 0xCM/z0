@@ -40,10 +40,11 @@ namespace Z0
             {
                 var current = encoded.Records[i];
                 var status = parser.Parse(current.Data);
+                
                 var matched = parser.Result;
                 var succeeded = matched.IsSome() && status.Success();
                 if(!succeeded)
-                    print($"Parse failure", SeverityLevel.Warning);
+                    print($"Parse failure: {matched}, {current.Operation.Uri}", SeverityLevel.Warning);
 
                 var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
                 dst[i] = new ParsedEncoding

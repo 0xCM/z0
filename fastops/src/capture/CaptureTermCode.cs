@@ -37,7 +37,7 @@ namespace Z0
 
         CTC_BUFFER_OUT,
 
-        CTC_MSDIAG,
+        CTC_MSDIAG,        
 
         /// <summary>
         /// Identifies the partial pattern e8 ?? ?? ?? ?? cc

@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class DataBlocks
+    partial class blocks
     {
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block

@@ -41,7 +41,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = DataBlocks.single<T>(n128);
+            var dst = blocks.single<T>(n128);
             ginx.vstore(src.data, dst);
             return dst;
         }
@@ -75,7 +75,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = DataBlocks.single<T>(n256);
+            var dst = blocks.single<T>(n256);
             ginx.vstore(src.data, dst);
             return dst;
         }

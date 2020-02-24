@@ -85,7 +85,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
-            var data = DataBlocks.taballoc<T>(n256, n, n);
+            var data = blocks.taballoc<T>(n256, n, n);
             for(int row=0; row < n; row++)
                 random.MarkovSpan<T>(data.Slice(row*n, n));                            
             return Z0.Matrix.blockload<N,T>(data);
@@ -144,7 +144,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {            
-            var dst = DataBlocks.alloc<float>(n256, DataBlocks.blockcount<float>(n256,length));
+            var dst = blocks.alloc<float>(n256, blocks.blockcount<float>(n256,length));
             random.Fill(domain(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Avg() * length);
             return dst; 
@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {                        
-            var dst = DataBlocks.alloc<double>(n256, DataBlocks.blockcount<double>(n256,length));
+            var dst = blocks.alloc<double>(n256, blocks.blockcount<double>(n256,length));
             random.Fill(domain(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Avg() * length);
             return dst; 

@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vblend(Vector128<float> x, Vector128<float> y, [Imm] byte spec)        
             => Blend(x, y, spec);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vblend(Vector128<double> x, Vector128<double> y, [Imm] byte spec)        
             => Blend(x, y, spec);
 
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vblend(Vector256<float> x, Vector256<float> y, [Imm] byte spec)        
             => Blend(x, y, spec);
 
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vblend(Vector256<double> x, Vector256<double> y, [Imm] byte spec)        
             => Blend(x, y, spec);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vblendv(Vector256<float> x, Vector256<float> y, Vector256<float> spec)        
             => BlendVariable(x, y, spec);
 
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vblendv(Vector256<double> x, Vector256<double> y, Vector256<double> spec)        
             => BlendVariable(x, y, spec);
  
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vblend4x32(Vector128<float> x, Vector128<float> y, Vector128<float> spec)        
             =>  BlendVariable(x, y, spec);
 
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vblend2x64(Vector128<double> x, Vector128<double> y, Vector128<double> spec)        
             =>  BlendVariable(x, y, spec);
 
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vblend8x32(Vector256<float> x, Vector256<float> y, Vector256<float> spec)        
             => BlendVariable(x, y, spec);
 
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vblend4x64(Vector256<double> x, Vector256<double> y, Vector256<double> spec)        
             => BlendVariable(x, y, spec);
 
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vblend(Vector128<double> x, Vector128<double> y, [Imm] Blend2x64 spec)        
             => Blend(x, y, (byte)spec);
     }

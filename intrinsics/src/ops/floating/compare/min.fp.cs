@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vmin(Vector128<float> x, Vector128<float> y)
             => Min(x, y);
 
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vmin(Vector128<double> x, Vector128<double> y)
             => Min(x, y);
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vmin(Vector256<float> x, Vector256<float> y)
             => Min(x, y);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vmin(Vector256<double> x, Vector256<double> y)
             => Min(x, y);
     }

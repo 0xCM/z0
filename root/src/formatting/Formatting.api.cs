@@ -61,11 +61,11 @@ namespace Z0
                 => SpanFormatter.@default<T>(delimiter).Format(src);
 
         [MethodImpl(Inline)]
-        static IObjectFormatter CreateFormatter(Type realization)
+        static IFormatter CreateFormatter(Type realization)
         {
             try
             {
-                return (IObjectFormatter)Activator.CreateInstance(realization);
+                return (IFormatter)Activator.CreateInstance(realization);
             }
             catch(Exception)
             {
@@ -74,7 +74,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static IObjectFormatter GetFormatter(this object src)
+        static IFormatter GetFormatter(this object src)
         {
             var attrib = src?.GetType()?.GetCustomAttribute<FormatterAttribute>();
             if(attrib != null)
@@ -86,7 +86,7 @@ namespace Z0
         /// <summary>
         /// Reifies a formatter via Object.ToString()
         /// </summary>
-        readonly struct DefaultFormatter : IObjectFormatter
+        readonly struct DefaultFormatter : IFormatter
         {
             [MethodImpl(Inline)]
             public string Format(object src)

@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vnlt(Vector128<double> x, Vector128<double> y)
             => CompareNotLessThan(x, y);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vnlt(Vector128<float> x, Vector128<float> y)
             => CompareNotLessThan(x, y);
     }

@@ -516,8 +516,8 @@ namespace Z0
             where T : unmanaged
         {            
             var w = n256;
-            var blocks = DataBlocks.alloc<T>(w, BitCalcs.tableblocks<T>(w,m,n)); 
-            DataBlocks.broadcast(d,blocks);
+            var blocks = Z0.blocks.alloc<T>(w, BitCalcs.tableblocks<T>(w, m, n));
+            Z0.blocks.broadcast(d, blocks);
             return new BitGrid<T>(blocks,m,n);            
         }
 
@@ -534,8 +534,8 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = n256;
-            var blocks = DataBlocks.alloc<T>(blocksize, BitCalcs.tableblocks<T>(blocksize, natval(m), natval(n))); 
-            DataBlocks.broadcast(d,blocks);
+            var blocks = Z0.blocks.alloc<T>(blocksize, BitCalcs.tableblocks<T>(blocksize, natval(m), natval(n)));
+            Z0.blocks.broadcast(d, blocks);
             return new BitGrid<M, N, T>(blocks);
         }
 

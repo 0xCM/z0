@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> fmadd(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplyAdd(x, y, z);
                     
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> fmadd(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplyAdd(x, y, z);
 
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> fmadd(Vector256<float> x, Vector256<float> y, Vector256<float> z)
             => MultiplyAdd(x,y,z);
 
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> fmadd(Vector256<double> x, Vector256<double> y, Vector256<double> z)
             => MultiplyAdd(x,y,z);
     }

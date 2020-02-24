@@ -6,13 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Root;
 
-    public interface ITypeIdentityProvider : IIdentityProvider<Type,TypeIdentity>
-    {
-        TypeIdentity DefineIdentity(Type src);        
 
-        IdentityKind IIdentityProvider.ProviderKind => IdentityKind.Type;
+    public enum RootTypeCodes : uint
+    {
+        None = 0,
+
+        Bit = 1
     }
+
 }

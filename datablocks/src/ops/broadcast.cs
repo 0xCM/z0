@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class DataBlocks
+    partial class blocks
     {
         /// <summary>
         /// Fills a target block with replicated cell data

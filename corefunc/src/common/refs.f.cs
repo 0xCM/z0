@@ -12,6 +12,82 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
+    /// Returns a reference to the location of the first element
+    /// </summary>
+    /// <param name="src">The source array</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe ref T head<T>(T[] src)
+        => ref Refs.head(src);
+
+    /// <summary>
+    /// Adds an offset to the head of a span, measured relative to the reference type
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="bytes">The number of elements to advance</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T seek<T>(Span<T> src, int count)
+        => ref Refs.seek(src, count);
+
+    /// <summary>
+    /// Adds an offset to the head of a span, measured relative to the reference type
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="bytes">The number of elements to advance</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T skip<T>(Span<T> src, int count)
+        => ref Refs.skip(src,count);
+
+   /// <summary>
+    /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="count">The number of elements to skip</param>
+    /// <typeparam name="T">The source element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
+        => ref Refs.skip(src,count);
+
+    /// <summary>
+    /// Returns a reference to the location of the first span element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T head<T>(Span<T> src)
+        => ref Refs.head(src);
+
+    /// <summary>
+    /// Returns a reference to the head of a span, offset by a specified amount
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T head<T>(Span<T> src, int offset)
+        => ref Refs.head(src,offset);
+
+    /// <summary>
+    /// Returns a reference to the head of a readonly span
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T head<T>(ReadOnlySpan<T> src)
+        => ref Refs.head(src);
+
+    /// <summary>
+    /// Returns a readonly reference to the head of a readonly span, offset by a specified amount
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
+        where T : unmanaged
+            => ref Refs.head(src,offset);
+
+    /// <summary>
     /// Presents a readonly reference as reference
     /// </summary>
     /// <param name="src">The source reference</param>
@@ -82,7 +158,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref byte seek8<T>(Span<T> src, int count)
-        => ref SpanOps.seek8(src, count);
+        => ref Refs.seek8(src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to 16-bit segments, and returns the resulting reference
@@ -92,7 +168,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref ushort seek16<T>(Span<T> src, int count)
-        => ref SpanOps.seek16(src, count);
+        => ref Refs.seek16(src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to 32-bit segments, and returns the resulting reference
@@ -102,7 +178,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref uint seek32<T>(Span<T> src, int count)
-        => ref SpanOps.seek32(src, count);
+        => ref Refs.seek32(src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to 64-bit segments, and returns the resulting reference
@@ -112,17 +188,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref ulong seek64<T>(Span<T> src, int count)
-        => ref SpanOps.seek64(src, count);
-
-    /// <summary>
-    /// Adds an offset to the head of a span, measured relative to the reference type
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="bytes">The number of elements to advance</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T seek<T>(Span<T> src, int count)
-        => ref SpanOps.seek(src, count);
+        => ref Refs.seek64(src, count);
 
     /// <summary>
     /// Adds an offset to a reference, measured in bytes
@@ -142,17 +208,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seekb<T>(Span<T> src, long count)
-        => ref SpanOps.seekb(src, count);
-
-    /// <summary>
-    /// Adds an offset to the head of a span, measured relative to the reference type
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="bytes">The number of elements to advance</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly T skip<T>(Span<T> src, int count)
-        => ref SpanOps.skip(src,count);
+        => ref Refs.seekb(src, count);
 
     /// <summary>
     /// Skips a specified number of source elements and returns a readonly reference to the resulting element
@@ -212,7 +268,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly byte skip8<T>(ReadOnlySpan<T> src, int count)
-        => ref SpanOps.skip8(src,count);
+        => ref Refs.skip8(src,count);
 
     /// <summary>
     /// Skips a specified number of 16-bit source segments and returns a readonly reference to the resulting memory location
@@ -222,7 +278,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly ushort skip16<T>(ReadOnlySpan<T> src, int count)
-        => ref SpanOps.skip16(src,count);
+        => ref Refs.skip16(src,count);
 
     /// <summary>
     /// Skips a specified number of 32-bit source segments and returns a readonly reference to the resulting memory location
@@ -232,7 +288,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly uint skip32<T>(ReadOnlySpan<T> src, int count)
-        => ref SpanOps.skip32(src,count);
+        => ref Refs.skip32(src,count);
 
     /// <summary>
     /// Skips a specified number of 64-bit source segments and returns a readonly reference to the resulting memory location
@@ -242,17 +298,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly ulong skip64<T>(ReadOnlySpan<T> src, int count)
-        => ref SpanOps.skip64(src,count);
-
-    /// <summary>
-    /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="count">The number of elements to skip</param>
-    /// <typeparam name="T">The source element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
-        => ref SpanOps.skip(src,count);
+        => ref Refs.skip64(src,count);
 
     /// <summary>
     /// Returns an readonly reference to a memory location, following a specified number of bytes
@@ -272,5 +318,5 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skipb<T>(ReadOnlySpan<T> src, long count)
-        => ref SpanOps.skipb(src,count);
+        => ref Refs.skipb(src,count);
 }

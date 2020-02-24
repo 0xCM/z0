@@ -77,7 +77,7 @@ namespace Z0
             var name = CaseName(Identity.contracted(MethodInfo.GetCurrentMethod().Name,w,t));
             var f = VX.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
-            var result = DataBlocks.alloc<T>(w, x.BlockCount);
+            var result = blocks.alloc<T>(w, x.BlockCount);
             result.Fill(gmath.ones<T>());
             CheckExplicit(f,x,x,result, name);
         }
@@ -88,7 +88,7 @@ namespace Z0
             var name = CaseName(Identity.contracted(MethodInfo.GetCurrentMethod().Name,w,t));
             var f = VX.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
-            var result = DataBlocks.alloc<T>(w, x.BlockCount);
+            var result = blocks.alloc<T>(w, x.BlockCount);
             result.Fill(gmath.ones<T>());
             CheckExplicit(f,x,x,result,name);
         }

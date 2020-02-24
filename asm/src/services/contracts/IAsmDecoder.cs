@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="src">The cource capture</param>
         AsmFunction DecodeFunction(CapturedMember src);    
 
-        AsmFunction DecodeFunction(OpInfo op, CaptureSummary summary);        
+        AsmFunction DecodeFunction(OpDescriptor op, CaptureSummary summary);        
     }
 }

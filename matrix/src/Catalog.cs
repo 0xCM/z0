@@ -5,18 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
+    using System.Collections.Generic;
+    
 
-    using static zfunc;
+    class Catalog : OpCatalog<Catalog>
+    {
+        public Catalog(AssemblyId id)
+            : base(id)
+        {
 
-    using static BitMasks;
-
-    public static partial class BitMask
-    {                
-
-
-
-
-    }   
+        }
+    }
 }

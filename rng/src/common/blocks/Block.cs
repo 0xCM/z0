@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block16<T> Block<T>(this IPolyrand random, N16 w, T t = default)
             where T : unmanaged
-                => random.Stream<T>().ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream<T>().ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 16-bit block
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block16<T> Block<T>(this IPolyrand random, N16 w)
             where T : unmanaged
-                => random.Stream<T>().ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream<T>().ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 32-bit block
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block16<T> Block<T>(this IPolyrand random, N16 w, T min, T max)
             where T : unmanaged
-                => random.Stream<T>((min,max)).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream<T>((min,max)).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 32-bit block
@@ -374,7 +374,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block16<T> Block<T>(this IPolyrand random, N16 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain,filter).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 32-bit block
@@ -387,7 +387,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block32<T> Block<T>(this IPolyrand random, N32 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain,filter).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 64-bit block
@@ -400,7 +400,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block64<T> Block<T>(this IPolyrand random, N64 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain,filter).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 128-bit block
@@ -413,7 +413,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<T> Block<T>(this IPolyrand random, N128 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain,filter).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 256-bit block
@@ -426,7 +426,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block256<T> Block<T>(this IPolyrand random, N256 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain,filter).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 512-bit block
@@ -439,7 +439,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block512<T> Block<T>(this IPolyrand random, N512 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain,filter).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 16-bit block
@@ -451,7 +451,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block16<T> Block<T>(this IPolyrand random, N16 w, Interval<T> domain)
             where T : unmanaged
-                => random.Stream(domain).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
  
         /// <summary>
         /// Allocates and fills a single 32-bit block
@@ -463,7 +463,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block32<T> Block<T>(this IPolyrand random, N32 w, Interval<T> domain)
             where T : unmanaged
-                => random.Stream(domain).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
   
         /// <summary>
         /// Allocates and fills a single 64-bit block
@@ -475,7 +475,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block64<T> Block<T>(this IPolyrand random, N64 w, Interval<T> domain)
             where T : unmanaged
-                => random.Stream(domain).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 128-bit block
@@ -487,7 +487,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<T> Block<T>(this IPolyrand random, N128 w, Interval<T> domain)
             where T : unmanaged
-                => random.Stream(domain).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 256-bit block
@@ -499,7 +499,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block256<T> Block<T>(this IPolyrand random, N256 w, Interval<T> domain)
             where T : unmanaged
-                => random.Stream(domain).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a single 512-bit block
@@ -511,6 +511,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block512<T> Block<T>(this IPolyrand random, N512 w, Interval<T> domain)
             where T : unmanaged
-                => random.Stream(domain).ToSpan(DataBlocks.blockedcells<T>(w,1)).Blocked(w); 
+                => random.Stream(domain).ToSpan(blocks.blockedcells<T>(w,1)).Blocked(w); 
     }
 }

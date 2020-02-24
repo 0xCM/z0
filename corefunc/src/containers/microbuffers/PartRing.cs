@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static Refs;
 
     /// <summary>
     /// Defines a mutable circular S-cell buffer partitioned into T-cell parts
@@ -39,7 +40,7 @@ namespace Z0
                 if(CurrentPart == parts)
                     CurrentPart = 0;
 
-                ref var next = ref Refs.seek(ref SpanOps.head(data), CurrentPart*partwidth);
+                ref var next = ref seek(ref head(data), CurrentPart*partwidth);
                 CurrentPart++;
                 return ref Unsafe.As<S,T>(ref next);
             }

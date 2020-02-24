@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class DataBlocks
+    partial class blocks
     {
         /// <summary>
         /// Allocates the minimum number of blocks required to block-align tabular data in 32-bit blocks

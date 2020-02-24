@@ -89,7 +89,7 @@ namespace Z0
         public int BlockCount
         {
             [MethodImpl(Inline)]
-            get => DataBlocks.minblocks<W,M,N,T>();
+            get => blocks.minblocks<W,M,N,T>();
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => DataBlocks.blocklen<W,T>();
+            get => blocks.blocklen<W,T>();
         }
 
         /// <summary>

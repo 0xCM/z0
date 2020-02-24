@@ -12,6 +12,7 @@
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.src.csproj" />
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
+    <ProjectReference Include="$(TopDir)libm/src/z0.libm.csproj" />
   </ItemGroup>
 
 </Project>

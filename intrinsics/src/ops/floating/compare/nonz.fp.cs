@@ -19,7 +19,7 @@ namespace Z0
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
         /// <param name="src">The vector to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool vnonz(Vector128<float> src) 
             => ! TestZ(src, src);        
 
@@ -27,7 +27,7 @@ namespace Z0
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
         /// <param name="src">The vector to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool vnonz(Vector128<double> src) 
             => ! TestZ(src, src);        
  
@@ -35,7 +35,7 @@ namespace Z0
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
         /// <param name="src">The vector to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool vnonz(Vector256<float> src) 
             => ! TestZ(src,src);        
 
@@ -43,7 +43,7 @@ namespace Z0
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
         /// <param name="src">The vector to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool vnonz(Vector256<double> src) 
             => ! TestZ(src,src);
     }

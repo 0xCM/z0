@@ -24,7 +24,7 @@ namespace Z0
         /// int _mm_movemask_ps (__m128 a) MOVMSKPS reg, xmm<
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int takemask(Vector128<float> src)
             => MoveMask(src);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// int _mm_movemask_pd (__m128d a) MOVMSKPD reg, xmm
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int takemask(Vector128<double> src)
             => MoveMask(src);
 
@@ -41,7 +41,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int takemask(Vector256<float> src)
             => MoveMask(src);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int takemask(Vector256<double> src)
             => MoveMask(src);
     }

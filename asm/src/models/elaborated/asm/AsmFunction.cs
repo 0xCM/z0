@@ -14,13 +14,13 @@ namespace Z0.AsmSpecs
     /// </summary>
     public class AsmFunction
     {   
-        public static AsmFunction Define(OpInfo op, MemoryRange memory, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
+        public static AsmFunction Define(OpDescriptor op, MemoryRange memory, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
             => new AsmFunction(op, memory, code, ci, instructions);
 
-        AsmFunction(OpInfo op, MemoryRange address, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
+        AsmFunction(OpDescriptor op, MemoryRange address, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
         {
             this.Id = code.Id;
-            this.SourceOp = op;
+            this.Operation = op;
             this.Instructions = instructions;
             this.Code = code;            
             this.SourceMemory = address;
@@ -30,7 +30,7 @@ namespace Z0.AsmSpecs
         /// <summary>
         /// The defining operation
         /// </summary>
-        public OpInfo SourceOp {get;}
+        public OpDescriptor Operation {get;}
 
         /// <summary>
         /// The function identifier
@@ -62,11 +62,14 @@ namespace Z0.AsmSpecs
         /// </summary>
         public CaptureOutcome CaptureInfo {get;}
 
+        public OpUri Uri
+            =>  Operation.Uri;
+
         /// <summary>
         /// Descriptive text such as a function signature
         /// </summary>
         public string Label 
-            => SourceOp.Signature;
+            => $"{Operation.Signature}, {Uri}";
 
         /// <summary>
         /// The number of encoded instructions

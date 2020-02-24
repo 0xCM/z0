@@ -202,7 +202,7 @@ namespace Z0
 
         static Option<ITypeIdentityProvider> FromAttributed(this Type t)
             => from a in t.CustomAttribute<IdentityProviderAttribute>()
-               from tid in FromHost(a.Host)
+               from tid in  FromHost(a.Host.ValueOrDefault(t))
                select tid;
 
         static ITypeIdentityProvider CreateProvider(this Type t)

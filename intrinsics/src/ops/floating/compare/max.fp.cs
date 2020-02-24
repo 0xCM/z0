@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vmax(Vector128<float> x, Vector128<float> y)
             => Max(x, y);
  
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vmax(Vector128<double> x, Vector128<double> y)
             => Max(x, y);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vmax(Vector256<float> x, Vector256<float> y)
             => Max(x, y);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vmax(Vector256<double> x, Vector256<double> y)
             => Max(x, y);
 

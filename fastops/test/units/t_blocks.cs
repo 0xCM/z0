@@ -16,26 +16,26 @@ namespace Z0
         
         public  void CellSize()
         {
-            Claim.eq(1, DataBlocks.cellsize<sbyte>());
-            Claim.eq(1, DataBlocks.cellsize<byte>());
-            Claim.eq(2, DataBlocks.cellsize<short>());
-            Claim.eq(4, DataBlocks.cellsize<int>());
-            Claim.eq(4, DataBlocks.cellsize<uint>());
-            Claim.eq(4, DataBlocks.cellsize<float>());
-            Claim.eq(8, DataBlocks.cellsize<ulong>());
-            Claim.eq(8, DataBlocks.cellsize<double>());
-            Claim.eq(8, DataBlocks.cellsize<long>());
+            Claim.eq(1, blocks.cellsize<sbyte>());
+            Claim.eq(1, blocks.cellsize<byte>());
+            Claim.eq(2, blocks.cellsize<short>());
+            Claim.eq(4, blocks.cellsize<int>());
+            Claim.eq(4, blocks.cellsize<uint>());
+            Claim.eq(4, blocks.cellsize<float>());
+            Claim.eq(8, blocks.cellsize<ulong>());
+            Claim.eq(8, blocks.cellsize<double>());
+            Claim.eq(8, blocks.cellsize<long>());
 
 
-            Claim.eq(1, DataBlocks.cellsize<sbyte>());
-            Claim.eq(1, DataBlocks.cellsize<byte>());
-            Claim.eq(2, DataBlocks.cellsize<short>());
-            Claim.eq(4, DataBlocks.cellsize<int>());
-            Claim.eq(4, DataBlocks.cellsize<uint>());
-            Claim.eq(4, DataBlocks.cellsize<float>());
-            Claim.eq(8, DataBlocks.cellsize<ulong>());
-            Claim.eq(8, DataBlocks.cellsize<double>());
-            Claim.eq(8, DataBlocks.cellsize<long>());
+            Claim.eq(1, blocks.cellsize<sbyte>());
+            Claim.eq(1, blocks.cellsize<byte>());
+            Claim.eq(2, blocks.cellsize<short>());
+            Claim.eq(4, blocks.cellsize<int>());
+            Claim.eq(4, blocks.cellsize<uint>());
+            Claim.eq(4, blocks.cellsize<float>());
+            Claim.eq(8, blocks.cellsize<ulong>());
+            Claim.eq(8, blocks.cellsize<double>());
+            Claim.eq(8, blocks.cellsize<long>());
 
         }
 
@@ -43,19 +43,19 @@ namespace Z0
         public void db_blocklen_128()
         {
             N128 n = default;
-            Claim.eq(16, DataBlocks.blocklen<sbyte>(n));
-            Claim.eq(16, DataBlocks.blocklen<byte>(n));
-            Claim.eq(8, DataBlocks.blocklen<short>(n));
-            Claim.eq(8, DataBlocks.blocklen<ushort>(n));
-            Claim.eq(4, DataBlocks.blocklen<int>(n));
-            Claim.eq(4, DataBlocks.blocklen<uint>(n));
-            Claim.eq(2, DataBlocks.blocklen<long>(n));
-            Claim.eq(2, DataBlocks.blocklen<ulong>(n));
-            Claim.eq(4, DataBlocks.blocklen<float>(n));
-            Claim.eq(2, DataBlocks.blocklen<double>(n));                
-            Claim.eq(8, DataBlocks.blockedcells<int>(n,2));
-            Claim.eq(4, DataBlocks.blockedcells<long>(n, 2));
-            Claim.eq(32, DataBlocks.blockedcells<byte>(n, 2));
+            Claim.eq(16, blocks.blocklen<sbyte>(n));
+            Claim.eq(16, blocks.blocklen<byte>(n));
+            Claim.eq(8, blocks.blocklen<short>(n));
+            Claim.eq(8, blocks.blocklen<ushort>(n));
+            Claim.eq(4, blocks.blocklen<int>(n));
+            Claim.eq(4, blocks.blocklen<uint>(n));
+            Claim.eq(2, blocks.blocklen<long>(n));
+            Claim.eq(2, blocks.blocklen<ulong>(n));
+            Claim.eq(4, blocks.blocklen<float>(n));
+            Claim.eq(2, blocks.blocklen<double>(n));                
+            Claim.eq(8, blocks.blockedcells<int>(n,2));
+            Claim.eq(4, blocks.blockedcells<long>(n, 2));
+            Claim.eq(32, blocks.blockedcells<byte>(n, 2));
 
 
         }
@@ -63,39 +63,39 @@ namespace Z0
         public void db_blocklen_256()
         {
             N256 n = default;
-            Claim.eq(32, DataBlocks.blocklen<sbyte>(n));
-            Claim.eq(32, DataBlocks.blocklen<byte>(n));
-            Claim.eq(16, DataBlocks.blocklen<short>(n));
-            Claim.eq(16, DataBlocks.blocklen<ushort>(n));
-            Claim.eq(8, DataBlocks.blocklen<int>(n));
-            Claim.eq(8, DataBlocks.blocklen<uint>(n));
-            Claim.eq(4, DataBlocks.blocklen<long>(n));
-            Claim.eq(4, DataBlocks.blocklen<ulong>(n));
-            Claim.eq(8, DataBlocks.blocklen<float>(n));
-            Claim.eq(4, DataBlocks.blocklen<double>(n));                
+            Claim.eq(32, blocks.blocklen<sbyte>(n));
+            Claim.eq(32, blocks.blocklen<byte>(n));
+            Claim.eq(16, blocks.blocklen<short>(n));
+            Claim.eq(16, blocks.blocklen<ushort>(n));
+            Claim.eq(8, blocks.blocklen<int>(n));
+            Claim.eq(8, blocks.blocklen<uint>(n));
+            Claim.eq(4, blocks.blocklen<long>(n));
+            Claim.eq(4, blocks.blocklen<ulong>(n));
+            Claim.eq(8, blocks.blocklen<float>(n));
+            Claim.eq(4, blocks.blocklen<double>(n));                
 
         }
 
 
         public void BlockSlice()
         {
-            var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
+            var x = blocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
 
             var block0 = x.Block(0);
             Claim.eq(4, block0.Length);   
-            var y = DataBlocks.safeload(n128,span(1,2,3,4));         
+            var y = blocks.safeload(n128,span(1,2,3,4));         
             Claim.numeq(block0, y);
 
             var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
-            Claim.numeq(block2,DataBlocks.parts(n128,5,6,7,8));
+            Claim.numeq(block2,blocks.parts(n128,5,6,7,8));
 
         }
         public void Load1()
         {
-            var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
+            var x = blocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            Claim.numeq(x, DataBlocks.parts(n128,1,2,3,4,5,6,7,8));
+            Claim.numeq(x, blocks.parts(n128,1,2,3,4,5,6,7,8));
             
         }
 
@@ -105,7 +105,7 @@ namespace Z0
             var blocks = Pow2.T08;   
                         
             var src = Random.Blocks<int>(n128,blocks);
-            var dst = DataBlocks.alloc<int>(n128,blocks);
+            var dst = Z0.blocks.alloc<int>(n128, blocks);
 
             Claim.eq(src.CellCount, dst.CellCount);
             var blocklen = src.BlockLength;

@@ -22,7 +22,7 @@ namespace Z0
         /// Round to nearest integer
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vround(Vector128<float> x)
             => RoundToNearestInteger(x);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Round to nearest integer
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vround(Vector128<double> x)
             => RoundToNearestInteger(x);
 
@@ -40,7 +40,7 @@ namespace Z0
         /// Round towards zero
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vroundz(Vector128<float> x)
             => RoundToZero(x);
 
@@ -49,7 +49,7 @@ namespace Z0
         /// Round towards zero
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vroundz(Vector128<double> x)
             => RoundToZero(x);
 
@@ -58,7 +58,7 @@ namespace Z0
         /// Round to nearest integer
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vround(Vector256<float> x)
             => RoundToNearestInteger(x);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// Round to nearest integer
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vround(Vector256<double> x)
             => RoundToNearestInteger(x);
 
@@ -76,7 +76,7 @@ namespace Z0
         /// Round towards zero
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vroundz(Vector256<float> x)
             => RoundToZero(x);
 
@@ -85,7 +85,7 @@ namespace Z0
         /// Round towards zero
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vroundz(Vector256<double> x)
             => RoundToZero(x);
     }

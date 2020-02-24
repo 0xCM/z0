@@ -13,8 +13,8 @@ namespace Z0
     /// <summary>
     /// A numbered box
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 8)]
-    public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>
+    [StructLayout(LayoutKind.Sequential, Size = 8), IdentityProvider]
+    public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
     {
         public readonly object Value;     
 
@@ -238,5 +238,9 @@ namespace Z0
         [MethodImpl(Inline)]
         string IFormattable.ToString(string format, IFormatProvider formatProvider)        
             => Formattable.ToString(format, formatProvider);     
+
+        public TypeIdentity DefineIdentity()
+            => TypeIdentity.Define("nbox");
+
     }
 }

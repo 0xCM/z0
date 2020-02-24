@@ -23,11 +23,11 @@ namespace Z0
     /// a constant barrage of shifts, movements, etc. from not being 32-bit aligned.
     /// </remarks>
     [
-        IdentityProvider(typeof(BitIdentityProvider)), 
-        UserPrimitive(PrimitiveId), 
+        IdentityProvider, 
+        UserPrimitive(RootTypeCodes.Bit), 
         ConversionProvider(typeof(BitConversionProvider))
     ]
-    public readonly struct bit : IUserPrimitive<bit>
+    public readonly struct bit : IUserPrimitive<bit>, ITypeIdentityProvider<bit>
     {
         public const uint PrimitiveId = 1u;
 
@@ -649,5 +649,10 @@ namespace Z0
         [MethodImpl(Inline)]
         static bit SafeWrap(ulong state)
             => new bit((uint)state & 1);
+
+        [MethodImpl(Inline)]
+        public TypeIdentity DefineIdentity()
+            => TypeIdentity.Define("1u");
+
     }
 }

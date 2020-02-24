@@ -232,7 +232,7 @@ namespace Z0
             var n = n64;
             var tf = 4;
             var pick = BitMask.msb(n1,n1,t);
-            var pattern = DataBlocks.single(w,t);
+            var pattern = blocks.single(w,t);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
             
@@ -243,7 +243,7 @@ namespace Z0
             var z = ginx.vblendp(x,y,spec);       
 
 
-            var dst = DataBlocks.alloc(w,2,t);
+            var dst = blocks.alloc(w,2,t);
             ginx.vlo(z).StoreTo(dst,0);
             ginx.vhi(z).StoreTo(dst,1);
 
@@ -264,7 +264,7 @@ namespace Z0
             where T : unmanaged
         {
             var pick = BitMask.msb(n1,n1,t);
-            var pattern = DataBlocks.single(w,t);
+            var pattern = blocks.single(w,t);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
             return pattern.LoadVector();
@@ -276,23 +276,23 @@ namespace Z0
 
         static Vector128<T> rrll_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.even(n2,n2,z64), enabled(t), DataBlocks.single(w,t)).LoadVector();
+                => ginx.broadcast(BitMask.even(n2,n2,z64), enabled(t), blocks.single(w,t)).LoadVector();
 
         static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.odd(n2,n2,z64), enabled(t), DataBlocks.single(w,t)).LoadVector();
+                => ginx.broadcast(BitMask.odd(n2,n2,z64), enabled(t), blocks.single(w,t)).LoadVector();
 
         static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), DataBlocks.single(w,t)).LoadVector();
+                => ginx.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), blocks.single(w,t)).LoadVector();
 
         static Vector128<T> lr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.msb(n2,n1,z64), enabled(t), DataBlocks.single(w,t)).LoadVector();
+                => ginx.broadcast(BitMask.msb(n2,n1,z64), enabled(t), blocks.single(w,t)).LoadVector();
 
         static Vector256<T> rl_pattern<T>(N256 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.lsb(n2,n1,t), enabled(t), DataBlocks.single(w,t)).LoadVector();
+                => ginx.broadcast(BitMask.lsb(n2,n1,t), enabled(t), blocks.single(w,t)).LoadVector();
 
 
         void vblendp_check<T>(Vector128<T> spec, [Caller] string title = null)
@@ -309,7 +309,7 @@ namespace Z0
             var blend = ginx.vblendp(left,right,spec);       
 
 
-            var dst = DataBlocks.alloc(w,2,t);
+            var dst = blocks.alloc(w,2,t);
             ginx.vlo(blend).StoreTo(dst,0);
             ginx.vhi(blend).StoreTo(dst,1);
 
@@ -413,7 +413,7 @@ namespace Z0
             var y = ginx.vadd(x, gmath.add(x.LastCell(), gmath.one(t)));            
             var z = ginx.vblendp(x,y,spec);         
 
-            var dst = DataBlocks.alloc(w,2,t);
+            var dst = blocks.alloc(w,2,t);
             ginx.vlo(z).StoreTo(dst,0);            
             ginx.vhi(z).StoreTo(dst,1);            
 
@@ -441,7 +441,7 @@ namespace Z0
             var y = ginx.vadd(x, gmath.add(x.LastCell(), gmath.one(t)));            
             var z = ginx.vblendp(x,y,spec);         
 
-            var dst = DataBlocks.alloc(w,2,t);
+            var dst = blocks.alloc(w,2,t);
             z.Lo.StoreTo(dst,0);
             z.Hi.StoreTo(dst,1);
 

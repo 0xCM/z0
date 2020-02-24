@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long convert(Vector128<float> src, N64 w, long t = default)
             => ConvertToInt64(src);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int convert(Vector128<float> src, N32 w, int t = default)
             => ConvertToInt32(src);
 
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long convert(Vector128<double> src, N64 w, long t = default)
             => ConvertToInt64(src);            
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> convert(Vector128<float> src, N128 w, int t = default)
             => ConvertToVector128Int32(src);
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> convert(Vector128<int> src, N128 w, float t = default)
             => ConvertToVector128Single(src);
 
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> convert(Vector128<int> src, N256 w, double t = default)
             => ConvertToVector256Double(src);
 
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> convert(Vector128<double> src, N128 w, float t = default)
             => ConvertToVector128Single(src);
 
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> convert(Vector256<int> src, N256 w, float t = default)
             => ConvertToVector256Single(src);
 
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> convert(Vector128<double> src, N128 w, int t = default)
             => ConvertToVector128Int32(src);
 
@@ -121,7 +121,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> convert(Vector256<float> src, N256 w, int t = default)
             =>  ConvertToVector256Int32(src);
 
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> convert(Vector256<double> src, N128 w, int t = default)
             => ConvertToVector128Int32(src);
 
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> convert(Vector256<double> src, N128 w, float t = default)
             => ConvertToVector128Single(src);
     }

@@ -22,14 +22,14 @@ namespace Z0
         /// Produces a sequence of n enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
         /// <typeparam name="N">The enabled bit count type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op]
         public static ulong lo64(int n)
             => blsmsk(Pow2.pow(n));
 
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T lo<T>(int n, T t = default)
             where T : unmanaged
                 => convert<ulong,T>(lo64(n));

@@ -18,7 +18,7 @@ namespace Z0
             const byte N = 0;
 
             var n = n128;
-            var dst = DataBlocks.single<byte>(n);
+            var dst = blocks.single<byte>(n);
             var m0 = CpuVector.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
             var m1 = dinx.vsllx(m0,32);
             var m2 = dinx.vsllx(m1,32);
@@ -52,20 +52,20 @@ namespace Z0
         {
             var count = 32;
             var x = Random.CpuVector(n256,z8);
-            var storage = DataBlocks.single(n256,z8);
+            var storage = blocks.single(n256,z8);
             var stored = CpuVector.vzero(n256,z8);
             var mask = CpuVector.vzero(n256,z8);
 
             // Store every component
             storage.Clear();
-            mask = VMask.vmsb(n256, n8, n1, z8);
+            mask = vmask.vmsb(n256, n8, n1, z8);
             ginx.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
             Claim.eq(x,stored);
 
             // Store odd components
             storage.Clear();
-            mask = VMask.vmsb(n256, n16, n1, z8);
+            mask = vmask.vmsb(n256, n16, n1, z8);
             ginx.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
 
@@ -78,7 +78,7 @@ namespace Z0
 
             // Store even components
             storage.Clear();
-            mask = ginx.vbsrl(VMask.vmsb(n256,n16,n1,z8),1);
+            mask = ginx.vbsrl(vmask.vmsb(n256,n16,n1,z8),1);
             ginx.vmaskstore8(x, mask, storage);
             stored = storage.LoadVector();
 

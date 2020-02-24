@@ -44,7 +44,7 @@ partial class zfunc
         where T : unmanaged
         where S : unmanaged
     {
-        var dst = DataBlocks.cellalloc<T>(n256,src.CellCount);
+        var dst = blocks.cellalloc<T>(n256,src.CellCount);
         for(var i=0; i< src.CellCount; i++)
             dst[i] = convert<S,T>(src[i]);
         return dst;

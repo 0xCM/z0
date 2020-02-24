@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vdot(Vector128<float> x, Vector128<float> y, byte? control = null)
             => DotProduct(x, y, control ?? 0xFF);
         
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vdot(Vector128<double> x, Vector128<double> y, byte? control = null)
             => DotProduct(x, y, control ?? 0xFF);
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vdot(Vector256<float> x, Vector256<float> y, byte? control = null)
             => DotProduct(x, y, control ?? 0xFF);
     }

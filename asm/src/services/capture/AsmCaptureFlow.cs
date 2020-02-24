@@ -58,7 +58,7 @@ namespace Z0
             var count = encoded.Length;
             if(count != 0)
             {
-                var op = captured.GetOpInfo();
+                var op = captured.Operation;
                 var bits = CaptureBits.Define(captured.Data, encoded.Data);
                 var range = MemoryRange.Define(captured.Address, captured.Address + (ulong)count);
                 var tc = encoded.TermCode;

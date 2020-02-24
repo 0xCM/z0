@@ -16,6 +16,7 @@ namespace Z0
     /// <summary>
     /// Generic scalar intrinsics over floating-point domains
     /// </summary>
+    [ApiHost(ApiHostKind.Generic)]
     public static class ginxsfp
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]

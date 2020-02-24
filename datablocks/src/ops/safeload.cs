@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class DataBlocks
+    partial class blocks
     {
         /// <summary>
         /// Loads 32-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked

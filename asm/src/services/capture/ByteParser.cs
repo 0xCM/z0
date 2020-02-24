@@ -89,7 +89,12 @@ namespace Z0
                     Accepted[src] = 1;
                 
                 if(TryMatch(out Outcome, out Delta))
-                    State = ByteParserState.Succeeded;
+                {
+                    if(Patterns.IsSuccessPattern(Outcome))
+                        State = ByteParserState.Succeeded;
+                    else
+                        State = ByteParserState.Failed;
+                }
             }
 
             return State;
@@ -117,7 +122,7 @@ namespace Z0
                 if(matched)
                 {
                     mc = match;
-                    delta = Patterns.MatchOffset(match);
+                    delta = (int)Patterns.MatchOffset(match);
                     return true;
                 }
                 

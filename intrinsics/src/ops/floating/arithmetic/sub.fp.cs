@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vsub(Vector128<float> x, Vector128<float> y)
             => Subtract(x,y);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vsub(Vector128<double> x, Vector128<double> y)
             => Subtract(x,y);
 
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vsub(Vector256<float> x, Vector256<float> y)
             => Subtract(x, y);
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vsub(Vector256<double> x, Vector256<double> y)  
             => Subtract(x, y);
     }

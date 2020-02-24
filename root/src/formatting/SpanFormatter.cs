@@ -44,5 +44,8 @@ namespace Z0
                 dst[i] = src[i].Format();
             return dst;
         }
+
+        public string Format(object src)
+            => throw new NotSupportedException("No can do; spans can never be objects! Use a better operand");
     }
 }

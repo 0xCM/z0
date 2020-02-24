@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vneq(Vector128<float> lhs, Vector128<float> rhs)
             => CompareNotEqual(lhs, rhs);
         
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vneq(Vector128<double> lhs, Vector128<double> rhs)
             => CompareNotEqual(lhs, rhs);
 
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vneq(Vector256<float> lhs, Vector256<float> rhs)
             => Compare(lhs, rhs, FloatComparisonMode.OrderedNotEqualNonSignaling);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vneq(Vector256<double> lhs, Vector256<double> rhs)
             => Compare(lhs, rhs, FloatComparisonMode.OrderedNotEqualNonSignaling);
     }

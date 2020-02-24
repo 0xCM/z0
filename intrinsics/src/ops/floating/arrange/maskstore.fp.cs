@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void maskstore(Vector128<float> src, Vector128<float> mask, ref float dst)
             => MaskStore(ptr(ref dst), src,mask);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void maskstore(Vector128<double> src, Vector128<double> mask, ref double dst)
             => MaskStore(ptr(ref dst), src,mask);
 
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void maskstore(Vector256<float> src, Vector256<float> mask, ref float dst)
             => MaskStore(ptr(ref dst), src,mask);
 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void maskstore(Vector256<double> src, Vector256<double> mask, ref double dst)
             => MaskStore(ptr(ref dst), src,mask);
     }

@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vgt(Vector128<float> x, Vector128<float> y)
             => CompareGreaterThan(x, y);
         
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vgt(Vector128<double> x, Vector128<double> y)
             => CompareGreaterThan(x, y);
 
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vgt(Vector256<float> x, Vector256<float> y)
             => Compare(x, y, FloatComparisonMode.OrderedGreaterThanNonSignaling);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vgt(Vector256<double> x, Vector256<double> y)
             => Compare(x, y, FloatComparisonMode.OrderedGreaterThanNonSignaling);
  
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vgteq(Vector128<float> x, Vector128<float> y)
             => CompareGreaterThanOrEqual(x, y);
         
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vgteq(Vector128<double> x, Vector128<double> y)
             => CompareGreaterThanOrEqual(x, y);
 
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vgteq(Vector256<float> x, Vector256<float> y)
             => Compare(x, y, FloatComparisonMode.OrderedGreaterThanOrEqualNonSignaling);
 
@@ -86,7 +86,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vgteq(Vector256<double> x, Vector256<double> y)
             => Compare(x, y, FloatComparisonMode.OrderedGreaterThanOrEqualNonSignaling);
 

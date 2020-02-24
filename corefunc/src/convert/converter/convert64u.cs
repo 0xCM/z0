@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using static zfunc;
+    using static Root;
     using static As;
 
     partial class Converter
@@ -55,7 +55,6 @@ namespace Z0
             else  
                 return generic<T>((ulong)src);
         }
-
 
         [MethodImpl(Inline)]
         static T convertx<T>(ulong src)

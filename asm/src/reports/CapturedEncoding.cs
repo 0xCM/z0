@@ -55,11 +55,11 @@ namespace Z0
         public IReadOnlyList<string> GetHeaders()
             => Record.ReportHeaders(GetType());
 
-        public OpUri GetOpUri()
+        OpUri GetOpUri()
             => Z0.OpUri.Hex(Host, OpName, OpId);
 
-        public OpInfo GetOpInfo()
-            => Z0.OpInfo.Define(GetOpUri(), OpSig);
+        public OpDescriptor Operation        
+            => OpDescriptor.Define(GetOpUri(), OpSig);
 
         enum Field
         {

@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vlt(Vector128<float> lhs, Vector128<float> rhs)
             => CompareLessThan(lhs, rhs);
         
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vlt(Vector128<double> lhs, Vector128<double> rhs)
             => CompareLessThan(lhs, rhs);
     
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vlt(Vector256<float> lhs, Vector256<float> rhs)
             => Compare(lhs, rhs, FloatComparisonMode.OrderedLessThanNonSignaling);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vlt(Vector256<double> lhs, Vector256<double> rhs)
             => Compare(lhs, rhs,FloatComparisonMode.OrderedLessThanNonSignaling);
 
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vlteq(Vector128<float> x, Vector128<float> y)
             => CompareLessThanOrEqual(x, y);
         
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vlteq(Vector128<double> x, Vector128<double> y)
             => CompareLessThanOrEqual(x, y);
  
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<float> vlteq(Vector256<float> lhs, Vector256<float> rhs)
             => Compare(lhs, rhs, FloatComparisonMode.OrderedLessThanOrEqualNonSignaling);
 
@@ -86,7 +86,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<double> vlteq(Vector256<double> lhs, Vector256<double> rhs)
             => Compare(lhs, rhs,FloatComparisonMode.OrderedLessThanOrEqualNonSignaling);
  

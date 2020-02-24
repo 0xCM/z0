@@ -14,6 +14,27 @@ namespace Z0
     using static zfunc;
 
 
+    static class t_asm
+    {
+        public static IAsmContext NewContext
+            => AsmContext.New(
+                Designators.Analogs.Resolution,
+                Designators.AsmCore.Resolution,
+                Designators.BitCore.Resolution,
+                Designators.BitGrids.Resolution,
+                Designators.BitSpan.Resolution,
+                Designators.CoreFunc.Resolution,
+                Designators.DataBlocks.Resolution,
+                Designators.Fixed.Resolution,
+                Designators.GMath.Resolution,
+                Designators.Intrinsics.Resolution,
+                Designators.LibM.Resolution,
+                Designators.Logix.Resolution,
+                Designators.Root.Resolution
+                );
+        
+    }
+
     public abstract class t_asm<U> : UnitTest<U>
         where U : t_asm<U>
     {
@@ -21,7 +42,7 @@ namespace Z0
         
         public t_asm()
         {
-            Context = AsmContext.New(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);            
+            Context = t_asm.NewContext;
         }
 
         public void Dispose()

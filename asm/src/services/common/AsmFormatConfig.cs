@@ -22,20 +22,21 @@ namespace Z0
         public bool EmitCaptureTermCode {get; set;}
             = true;
 
-        public bool EmitCaptureLookback {get; set;}
-            = false;
-
         public bool EmitFileHeader {get; set;}
             = true;
 
-        public bool EmitFunctionEncoding {get;set;}
-            = true;
+        public bool EmitFunctionHeaderEncoding {get;set;}
+            = true;        
+
+        public HexFormat FunctionHeaderEncodingFormat {get;set;}
+            = HexFormat.Define();
 
         public bool EmitFunctionOrigin {get;set;}
             = false;
 
         public bool EmitFunctionHeader {get; set;}
             = true;
+
 
         public bool EmitFunctionTimestamp {get;set;}
             = false;

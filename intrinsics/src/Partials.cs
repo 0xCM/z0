@@ -69,6 +69,7 @@ namespace Z0
     /// <summary>
     /// Direct floating-point scalar intrinsics
     /// </summary>
+    [ApiHost(ApiHostKind.Direct)]
     public static partial class dinxsfp
     {
 
@@ -81,6 +82,11 @@ namespace Z0
     public static partial class ginx
     {        
 
+    }
+
+    [ApiHost]
+    public static partial class vmask
+    {
     }
 
     /// <summary>

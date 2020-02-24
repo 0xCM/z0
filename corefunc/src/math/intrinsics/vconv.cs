@@ -11,7 +11,6 @@ using Z0;
 
 partial class zfunc
 {
-
     /// <summary>
     /// Returns a 128-bit vector with all bits disabled
     /// </summary>

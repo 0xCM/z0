@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static zfunc;
-    using static As;
+    using static blocks;
 
     partial class dinx
     {
@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vmaskload(in Block128<int> src, Vector128<int> mask)
             => MaskLoad(ptr(src), mask); 
 
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmaskload(in Block128<uint> src, Vector128<uint> mask)
             => MaskLoad(ptr(src), mask); 
 
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<int> vmaskload(in Block256<int> src, Vector256<int> mask)
             => MaskLoad(ptr(src), mask); 
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vmaskload(in Block256<uint> src, Vector256<uint> mask)
             => MaskLoad(ptr(src), mask); 
 
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vmaskload(in Block256<long> src, Vector256<long> mask)
             => MaskLoad(ptr(src), mask); 
 
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vmaskload(in Block256<ulong> src, Vector256<ulong> mask)
             => MaskLoad(ptr(src), mask); 
     }

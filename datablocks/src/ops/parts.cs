@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class DataBlocks
+    partial class blocks
     {
         /// <summary>
         /// Creates 16-bit blocked container from a parameter array and raises an error if the data source is not block-aligned

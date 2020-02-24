@@ -11,17 +11,30 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Base formatter interface
+    /// Characterizes a text serializer
     /// </summary>
     public interface IFormatter
     {
+        /// <summary>
+        /// Renders an object as text
+        /// </summary>
+        /// <param name="src">The source object</param>
+        string Format(object src);
 
+        /// <summary>
+        /// Formats a source object using a specified configuration
+        /// </summary>
+        /// <param name="src">The source object</param>
+        /// <param name="config">The format configuration</param>
+        [MethodImpl(Inline)]
+        string Format(object src, IFormatConfig config)
+            => Format(src);
     }
 
     /// <summary>
-    /// Characterizes a strongly-typed formatter
+    /// Characterizes a type-parametric formatter
     /// </summary>
-    public interface IFormatter<T> : IObjectFormatter
+    public interface IFormatter<T> : IFormatter
     {
         /// <summary>
         /// Renders an object as text
@@ -34,9 +47,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        string IObjectFormatter.Format(object src)
+        string IFormatter.Format(object src)
             => Format(src);
 
+    } 
+
+    /// <summary>
+    /// Characterizes a formatter, parametric in both type and configuration
+    /// </summary>
+    public interface IFormatter<T,C> : IFormatter<T>
+        where C : IFormatConfig
+    {
         /// <summary>
         /// Renders a source value according to a supplied configuration
         /// </summary>
@@ -44,8 +65,6 @@ namespace Z0
         /// <param name="config">The configuration</param>
         /// <typeparam name="C">The configuration type</typeparam>
         [MethodImpl(Inline)]
-        string Format<C>(T src, C config)
-            where C : IFormatConfig
-                => Format(src);            
-    } 
+        string Format(T src, in C config);
+    }
 }

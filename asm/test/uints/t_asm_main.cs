@@ -18,25 +18,33 @@ namespace Z0
 
     class t_asm_main : t_asm_explicit<t_asm_main>
     {
-
         protected override void OnExecute(in AsmBuffers buffers)
         {                    
-            // buffer_client(Context);
-            // capture_shifter(buffers);
-            // capture_shuffler(buffers);
-            // capture_constants(buffers);
-            // binary_imm(buffers);
-            //archive_selected(buffers);        
-            //archive_context(buffers);            
-            //iter(hosts, EncodingParser.Parse);            
+            buffer_client(Context);
+            capture_shifter(buffers);
+            capture_shuffler(buffers);
+            capture_constants(buffers);
+            //binary_imm(buffers);
+            //bitlogic_match(buffers);
+            // archive_selected(buffers);        
+            // archive_context(buffers);            
+        }
 
-            // const string uritext = "hex://logix/LogicEngine?eval#eval_vcmp_expr128_g[8u]()";
-            // var uri = OpUri.Parse(uritext);
-            // print(uri);
+        void archive_selected(in AsmBuffers buffers)
+        {
+            var archive = Context.Archiver();
+            archive.Archive(AssemblyId.Root);
+        }
 
-                    
-            var workflow = Context.CaptureWorkflow();
-            workflow.Execute().Force();
+        void archive_context(in AsmBuffers buffers)
+        {
+            var archive = Context.Archiver();
+            var selection = from c in Context.Compostion.Catalogs
+                            where !c.IsEmpty && c.OwnerId != AssemblyId.Data
+                            orderby c.OwnerId
+                            select c.OwnerId;
+            foreach(var id in selection)
+                archive.Archive(id);    
         }
 
         static void buffer_client(IAsmContext context)
@@ -76,122 +84,6 @@ namespace Z0
             composition.Execute(buffers);
 
             var stateBytes = state.Select(s => s.Payload).ToArray();
-        }
-
-        void archive_selected(in AsmBuffers buffers)
-        {
-            var archive = Context.Archiver();
-            archive.Archive(AssemblyId.Root);
-        }
-
-        void archive_context(in AsmBuffers buffers)
-        {
-            var archive = Context.Archiver();
-            var selection = from c in Context.Compostion.Catalogs
-                            where !c.IsEmpty && c.OwnerId != AssemblyId.Data
-                            orderby c.OwnerId
-                            select c.OwnerId;
-            foreach(var id in selection)
-                archive.Archive(id);    
-        }
-
-        [MethodImpl(Inline)]
-        static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
-            where T : unmanaged
-                => x => ginx.vshuf4x32<T>(x, Arrange4L.AABB);
-
-        [MethodImpl(Inline)]
-        static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
-            => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
-
-        [MethodImpl(Inline)]
-        static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
-            => v => Avx2.ShiftLeftLogical(v,imm);
-
-        AsmFormatConfig AsmFormat
-            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
-
-        void capture_constants(in AsmBuffers buffers)
-        {
-            var src = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
-
-            using var rawout = RawTestWriter(Context);            
-            using var hexout = HexTestWriter(Context);
-            using var asmout = AsmTestWriter(Context);            
-            
-            var decoder = Context.Decoder();         
-            var capture = Context.Capture(buffers.Capture);
-            
-            var data = capture.Capture(buffers.Exchange, src);        
-            hexout.Write(data);
-            rawout.Write(data);
-            asmout.Write(decoder.DecodeFunction(data));
-        }
-
-        void capture_shifter(in AsmBuffers buffers)
-        {
-            var src = shifter(4);
-
-            using var rawout = RawTestWriter(Context);            
-            using var hexout = HexTestWriter(Context);
-            using var asmout = AsmTestWriter(Context);            
-
-            var capture = Context.Capture(buffers.Capture);
-            var decoder = Context.Decoder();         
-            
-            var data = capture.Capture(buffers.Exchange, src.Identify(), src);
-            hexout.Write(data);
-            rawout.Write(data);
-            asmout.Write(decoder.DecodeFunction(data));
-            
-        }
-
-        void capture_shuffler(in AsmBuffers buffers)
-        {
-            var f = shuffler<uint>(n2);
-            var g = shuffler(n3);
-
-            using var rawout = RawTestWriter(Context);            
-            using var hexout = HexTestWriter(Context);
-            using var asmout = AsmTestWriter(Context);            
-
-            var capture = Context.Capture(buffers.Capture);
-            var decoder = Context.Decoder();         
-
-            var fData = capture.Capture(buffers.Exchange, f.Identify(), f);
-            hexout.Write(fData);
-            rawout.Write(fData);
-            asmout.Write(decoder.DecodeFunction(fData));
-
-            var gData = capture.Capture(buffers.Exchange, g.Identify(), g);
-            hexout.Write(gData);
-            rawout.Write(fData);
-            asmout.Write(decoder.DecodeFunction(gData));
-        }
-
-        void binary_imm(in AsmBuffers buffers)
-        {
-            var w = n256;
-            var name = nameof(dinx.vblend8x16);
-            var imm = (byte)Blend8x16.LRLRLRLR;
-
-            var provider = ImmOpProviders.provider(VK.vk256<ushort>(),FK.op(n2));
-            var x = Random.CpuVector<ushort>(w);
-            var y = Random.CpuVector<ushort>(w);
-            
-            var method = Intrinsics.Vectorized<ushort>(w, false, name).Single();            
-            var dynop = provider.CreateOp(method,imm);
-            var f = dynop.DynamicOp;
-            var z1 = f.Invoke(x,y);
-            var decoder = Context.Decoder(false);
-            var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);
-            var asm = decoder.DecodeFunction(captured);        
-
-            iter(asm.Instructions, i => Trace(i));  
-
-            var g = buffers.MainExec.BinaryOp<Fixed256>(asm.Code);
-            var z3 = g(x,y).ToVector<ushort>();
-            Claim.eq(z1,z3);
         }
 
 
@@ -304,5 +196,104 @@ namespace Z0
             var g = buffers.RightExec.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
+
+        void capture_constants(in AsmBuffers buffers)
+        {
+            var src = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
+
+            using var rawout = RawTestWriter(Context);            
+            using var hexout = HexTestWriter(Context);
+            using var asmout = AsmTestWriter(Context);            
+            
+            var decoder = Context.Decoder();         
+            var capture = Context.Capture(buffers.Capture);
+            
+            var data = capture.Capture(buffers.Exchange, src);        
+            hexout.Write(data);
+            rawout.Write(data);
+            asmout.Write(decoder.DecodeFunction(data));
+        }
+
+        void capture_shifter(in AsmBuffers buffers)
+        {
+            var src = shifter(4);
+
+            using var rawout = RawTestWriter(Context);            
+            using var hexout = HexTestWriter(Context);
+            using var asmout = AsmTestWriter(Context);            
+
+            var capture = Context.Capture(buffers.Capture);
+            var decoder = Context.Decoder();         
+            
+            var data = capture.Capture(buffers.Exchange, src.Identify(), src);
+            hexout.Write(data);
+            rawout.Write(data);
+            asmout.Write(decoder.DecodeFunction(data));
+            
+        }
+
+        void capture_shuffler(in AsmBuffers buffers)
+        {
+            var f = shuffler<uint>(n2);
+            var g = shuffler(n3);
+
+            using var rawout = RawTestWriter(Context);            
+            using var hexout = HexTestWriter(Context);
+            using var asmout = AsmTestWriter(Context);            
+
+            var capture = Context.Capture(buffers.Capture);
+            var decoder = Context.Decoder();         
+
+            var fData = capture.Capture(buffers.Exchange, f.Identify(), f);
+            hexout.Write(fData);
+            rawout.Write(fData);
+            asmout.Write(decoder.DecodeFunction(fData));
+
+            var gData = capture.Capture(buffers.Exchange, g.Identify(), g);
+            hexout.Write(gData);
+            rawout.Write(fData);
+            asmout.Write(decoder.DecodeFunction(gData));
+        }
+
+        void binary_imm(in AsmBuffers buffers)
+        {
+            var w = n256;
+            var name = nameof(dinx.vblend8x16);
+            var imm = (byte)Blend8x16.LRLRLRLR;
+
+            var provider = ImmOpProviders.provider(VK.vk256<ushort>(),FK.op(n2));
+            var x = Random.CpuVector<ushort>(w);
+            var y = Random.CpuVector<ushort>(w);
+            
+            var method = Intrinsics.Vectorized<ushort>(w, false, name).Single();            
+            var dynop = provider.CreateOp(method,imm);
+            var f = dynop.DynamicOp;
+            var z1 = f.Invoke(x,y);
+            var decoder = Context.Decoder(false);
+            var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);
+            var asm = decoder.DecodeFunction(captured);        
+
+            iter(asm.Instructions, i => Trace(i));  
+
+            var g = buffers.MainExec.BinaryOp<Fixed256>(asm.Code);
+            var z3 = g(x,y).ToVector<ushort>();
+            Claim.eq(z1,z3);
+        }
+
+        [MethodImpl(Inline)]
+        static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
+            where T : unmanaged
+                => x => ginx.vshuf4x32<T>(x, Arrange4L.AABB);
+
+        [MethodImpl(Inline)]
+        static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
+            => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
+
+        [MethodImpl(Inline)]
+        static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
+            => v => Avx2.ShiftLeftLogical(v,imm);
+
+        AsmFormatConfig AsmFormat
+            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
     }
 }

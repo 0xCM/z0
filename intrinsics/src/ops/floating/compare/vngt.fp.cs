@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vngt(Vector128<float> x, Vector128<float> y)
             => CompareNotGreaterThan(x, y);
         
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vngt(Vector128<double> x, Vector128<double> y)
             => CompareNotGreaterThan(x, y); 
 
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vngteq(Vector128<float> x, Vector128<float> y)
             => CompareNotGreaterThanOrEqual(x, y);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vngteq(Vector128<double> x, Vector128<double> y)
             => CompareNotGreaterThanOrEqual(x, y);
 
