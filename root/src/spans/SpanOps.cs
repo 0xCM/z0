@@ -14,11 +14,47 @@ namespace Z0
 
     [ApiHost]
     public static class SpanOps
-    {
+    {    
+        /// <summary>
+        /// Allocates a span
+        /// </summary>
+        /// <param name="length">The number cells to allocate</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(NotInline)]
+        public static Span<T> alloc<T>(int length, T t = default)
+            => new Span<T>(new T[length]);
+
+        /// <summary>
+        /// Allocates a span
+        /// </summary>
+        /// <param name="length">The number cells to allocate</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(NotInline)]
+        public static Span<T> alloc<T>(ushort length, T t = default)
+            => new Span<T>(new T[length]);
+
+        /// <summary>
+        /// Allocates a span
+        /// </summary>
+        /// <param name="length">The number cells to allocate</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(NotInline)]
+        public static Span<T> alloc<T>(byte length, T t = default)
+            => new Span<T>(new T[length]);
+
         [MethodImpl(Inline)]
-        static IntPtr intptr(long i)
-            => new IntPtr(i);
- 
+        public static unsafe Span<T> span<T>(T* pSrc, int length)
+            where T : unmanaged
+                => new Span<T>(pSrc, length);
+
+        /// <summary>
+        /// Constructs a span from a parameter array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> span<T>(params T[] src)
+            => src;
         /// <summary>
         /// Reimagines a readonly span of one element type as a readonly span of another element type
         /// </summary>

@@ -68,7 +68,8 @@ namespace Z0.Mkl
         {
             var src = Random.Span<long>(Pow2.T14, domain(-2000L, 2000L));
             var expect = mathspan.avg(src);
-            var actual = (long)Dataset.Load(src.Convert<double>().ToArray()).Mean()[0];
+            var converted = Converter.convert<long,double>(src);
+            var actual = (long)Dataset.Load(converted).Mean()[0];
             Claim.eq(expect,actual);
         }
     }

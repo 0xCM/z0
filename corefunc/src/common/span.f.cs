@@ -13,7 +13,6 @@ using Z0;
 
 partial class zfunc
 {
-
     /// <summary>
     /// Allocates a span
     /// </summary>
@@ -21,7 +20,7 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(NotInline)]
     public static Span<T> alloc<T>(int length, T t = default)
-        => new Span<T>(new T[length]);
+        => SpanOps.alloc<T>(length);
 
     /// <summary>
     /// Allocates a span
@@ -30,7 +29,7 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(NotInline)]
     public static Span<T> alloc<T>(ushort length, T t = default)
-        => new Span<T>(new T[length]);
+        => SpanOps.alloc<T>(length);
 
     /// <summary>
     /// Allocates a span
@@ -39,12 +38,12 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(NotInline)]
     public static Span<T> alloc<T>(byte length, T t = default)
-        => new Span<T>(new T[length]);
+        => SpanOps.alloc<T>(length);
 
     [MethodImpl(Inline)]
     public static unsafe Span<T> span<T>(T* pSrc, int length)
         where T : unmanaged
-            => new Span<T>(pSrc, length);
+            => SpanOps.span(pSrc,length);
 
     /// <summary>
     /// Constructs a span from a parameter array

@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static AsIn;
-    using static As;
-    
-    using static zfunc;
+    using static As;    
+    using static Root;
 
     [ApiHost("converter", ApiHostKind.Generic)]
     public static partial class Converter
@@ -25,6 +24,12 @@ namespace Z0
             where T : unmanaged
                 => convert_u<S,T>(src);
         
+
+        [MethodImpl(Inline)]   
+        public static T convert<T>(bit src, T t = default)
+            where T : unmanaged
+                => convert_u<T>(src);
+
         [MethodImpl(Inline)]
         static T convert_u<S,T>(S src)
             where S : unmanaged
@@ -74,10 +79,42 @@ namespace Z0
                 return unhandled<S,T>(src);
         }
 
+        [MethodImpl(Inline)]   
+        static T convert_u<T>(bit src, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return As.generic<T>((byte)src);
+            else if(typeof(T) == typeof(ushort))
+                return As.generic<T>((ushort)src);
+            else if(typeof(T) == typeof(uint))
+                return As.generic<T>((uint)src);
+            else if(typeof(T) == typeof(ulong))
+                return As.generic<T>((ulong)src);
+            else
+                return convert_i<T>(src);
+        }
+
+        [MethodImpl(Inline)]   
+        static T convert_i<T>(bit src, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return As.generic<T>((sbyte)src);
+            else if(typeof(T) == typeof(short))
+                return As.generic<T>((short)src);
+            else if(typeof(T) == typeof(int))
+                return As.generic<T>((int)src);
+            else if(typeof(T) == typeof(long))
+                return As.generic<T>((long)src);
+            else
+                throw unsupported<T>();
+        }
+
         static T unhandled<S,T>(S src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            AppErrors.Throw($"The conversion {typeof(S).DisplayName()} -> {typeof(T).DisplayName()} needed for the value {src} doesn't exist", caller,file,line);
+            AppErrors.Throw($"The conversion {typeof(S).Name} -> {typeof(T).Name} needed for the value {src} doesn't exist", caller,file,line);
             return default;
         }
     }

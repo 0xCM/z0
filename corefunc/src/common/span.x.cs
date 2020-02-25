@@ -15,6 +15,42 @@ namespace Z0
     partial class xfunc
     {
         /// <summary>
+        /// Fills a caller-supplied buffer with source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static ref readonly Block64<byte> GetBytes(ulong src, in Block64<byte> dst)
+        {         
+            Bytes.read(in src, dst);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Fills a caller-supplied buffer with source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static ref readonly Block32<byte> GetBytes(uint src, in Block32<byte> dst)
+        {         
+            Bytes.read(in src, dst);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Fills a caller-supplied buffer with source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static ref readonly Block16<byte> GetBytes(ushort src, in Block16<byte> dst)
+        {
+            Bytes.read(in src, dst);
+            return ref dst;
+        }
+
+        /// <summary>
         /// Renders a non-allocating mutable view over a source span segment that is presented as an individual target value
         /// </summary>
         /// <param name="src">The source span</param>

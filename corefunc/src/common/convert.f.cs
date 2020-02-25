@@ -51,23 +51,6 @@ partial class zfunc
     }
 
     /// <summary>
-    /// If possible, applies the conversion S -> T for each element of a source span
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="S">The source type</typeparam>
-    /// <typeparam name="T">The target type</typeparam>
-    [MethodImpl(Inline)]   
-    public static Span<T> convert<S,T>(Span<S> src, T t = default)
-        where T : unmanaged
-        where S : unmanaged
-    {
-        Span<T> dst = new T[src.Length];
-        for(var i=0; i< src.Length; i++)
-            dst[i] = convert<S,T>(src[i]);
-        return dst;
-    }
-
-    /// <summary>
     /// If possible, applies the conversion S -> T for each element of an array
     /// </summary>
     /// <param name="src">The source array</param>
@@ -77,12 +60,7 @@ partial class zfunc
     public static T[] convert<S,T>(S[] src)
         where T : unmanaged
         where S : unmanaged
-    {
-        var dst = new T[src.Length];
-        for(var i=0; i< src.Length; i++)
-            dst[i] = convert<S,T>(src[i]);
-        return dst;
-    }
+        => Converter.convert<S,T>(src);
 
     /// <summary>
     /// If possible, applies the conversion S -> T for each element of a source span
@@ -102,44 +80,6 @@ partial class zfunc
         return dst;
     }
 
-    /// <summary>
-    /// If possible, applies the conversion S -> T for each element of a source span
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="S">The source type</typeparam>
-    /// <typeparam name="T">The target type</typeparam>
-    [MethodImpl(Inline)]   
-    public static Span<T> convert<S,T>(ReadOnlySpan<S> src)
-        where T : unmanaged
-        where S : unmanaged
-    {
-        var dst = alloc<T>(src.Length);
-        for(var i=0; i<src.Length; i++)
-            dst[i] = convert<S,T>(src[i]);
-        return dst;
-    }
-
-    /// <summary>
-    /// Converts a bit to an unsigned integral type with the value 0 or 1 as determined by the state of thebit 
-    /// </summary>
-    /// <param name="src">The source bit</param>
-    /// <typeparam name="T">The target primal type</typeparam>
-    [MethodImpl(Inline)]   
-    public static T convert<T>(bit src, T t = default)
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(byte))
-            return As.generic<T>((byte)src);
-        else if(typeof(T) == typeof(ushort))
-            return As.generic<T>((ushort)src);
-        else if(typeof(T) == typeof(uint))
-            return As.generic<T>((uint)src);
-        else if(typeof(T) == typeof(ulong))
-            return As.generic<T>((ulong)src);
-        else
-            throw unsupported<T>();
-    }
-    
     /// <summary>
     /// If possible, applies the conversion sbyte -> T
     /// </summary>
