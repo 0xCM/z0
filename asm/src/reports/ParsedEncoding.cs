@@ -54,7 +54,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = text();
+            var dst = buildstring();
             dst.AppendField(Sequence, Field.Sequence);
             dst.DelimitField(Length, Field.Length,delimiter); 
             dst.DelimitField(TermCode, Field.TermCode, delimiter);

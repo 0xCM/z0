@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
-    using static As;
 
     public static class Math128
     {
@@ -445,5 +444,4 @@ namespace Z0
             dstLo -= srcLo;
         }
     }
-
 }

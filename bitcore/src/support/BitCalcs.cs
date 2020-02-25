@@ -84,7 +84,7 @@ namespace Z0
         public static int mincells<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => TypeMath.lteq(n,t) ? 1 : TypeMath.divceil(n,t); 
+                => TypeMath.lteq(n,t) ? 1 : (int)TypeMath.divceil(n,t); 
 
         /// <summary>
         /// Computes the number of packed cells required to cover a rectangular area
@@ -159,7 +159,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => NatMath.mul(m,n);         
-
 
         /// <summary>
         /// Computes the number of cells required to cover a rectangular region predicated on the 

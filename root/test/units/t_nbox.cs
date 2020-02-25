@@ -13,12 +13,24 @@ namespace Z0
     public class t_boxed_number : UnitTest<t_boxed_number>
     {
 
-        public void convert()
+        public void convert_1()
         {
-            var x = BoxOps.number((byte)3);
+            var x = BoxedNumber.Define((byte)3);
             var y = x.Convert<short>();
             Claim.eq(y, (short)x.Unbox<byte>());
             
+        }
+
+        public void convert_2()
+        {
+            for(var i=0; i<RepCount; i++)
+            {            
+                var converter = default(BoxedNumber).Converter;
+                var x = BoxedNumber.Define(Random.Next<byte>());
+                var y = converter.Convert<ushort>(x);
+                Claim.yea(y.IsSome());
+                Claim.eq(Converter.convert<ushort>((byte)x.Value), y.Value);                        
+            }
         }
 
         public void get_zero()

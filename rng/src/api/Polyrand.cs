@@ -13,7 +13,7 @@ namespace Z0
 
     class Polyrand : IPolyrand
     {
-        internal Polyrand(IBoundPointSource<ulong> Points)
+        internal Polyrand(IRngBoundPointSource<ulong> Points)
         {
             this.Points = Points;            
             this.Navigator = default;
@@ -25,7 +25,7 @@ namespace Z0
             this.Navigator = some(Points as IRandomNav);
         }
 
-        readonly IBoundPointSource<ulong> Points;
+        readonly IRngBoundPointSource<ulong> Points;
 
         public Option<IRandomNav> Navigator {get;}
 
@@ -183,7 +183,7 @@ namespace Z0
             get => this;
         }
 
-        IBoundPointSource<byte> UInt8Source
+        IRngBoundPointSource<byte> UInt8Source
         {
             [MethodImpl(Inline)]
             get => this;

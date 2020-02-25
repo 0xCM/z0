@@ -11,7 +11,6 @@ namespace Z0
         
     using static zfunc;    
 
-
     public static class ModOps
     {
         [MethodImpl(Inline)]
@@ -41,7 +40,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool divisible(ulong m, ulong n, uint a)
             => a * m <= m - 1; 
-
         
         /// <summary>
         /// Computes (a + b) mod n
@@ -49,7 +47,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint add(ulong m, ulong n, uint a, uint b)
             => mod(m,n, a + b);
-
 
         /// <summary>
         /// Computes (a * b) mod n

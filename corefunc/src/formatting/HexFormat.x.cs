@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             var delimiter = sep ?? AsciSym.Space;
-            var fmt = text();
+            var fmt = buildstring();
             if(bracket)
                 fmt.Append(AsciSym.LBracket);
 
@@ -72,7 +72,7 @@ namespace Z0
         static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
-            var sb =text();
+            var sb =buildstring();
             var pre = (specifier && prespec) ? "0x" : string.Empty;
             var post = (specifier && !prespec) ? "h" : string.Empty;
             var spec = HexFmtSpec(uppercase);
@@ -468,10 +468,10 @@ namespace Z0
         /// <param name="fmt">The format options</param>
         public static IReadOnlyList<string> FormatHexLines(this byte[] data, HexLineFormat? fmt = null)
         {
-            var dst = text();
+            var dst = buildstring();
             var configured = fmt ?? HexLineFormat.Default;  
             var lines = new List<string>();
-            var line = text();
+            var line = buildstring();
             for(ushort i=0; i< data.Length; i++)
             {                
                 if(i % configured.BytesPerLine == 0)

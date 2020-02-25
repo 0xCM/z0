@@ -61,7 +61,6 @@ namespace Z0
         /// <typeparam name="V">The type of value identified by the key</typeparam>
         /// <param name="subject">The collection to query</param>
         /// <param name="key">The key that identifies the value</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Option<V> TryRemove<K, V>(this ConcurrentDictionary<K, V> subject, K key)
             => guard(key,
@@ -80,13 +79,11 @@ namespace Z0
         public static void AddRange<T>(this ConcurrentBag<T> bag, IEnumerable<T> items)
             => items.Iterate(item => bag.Add(item));
 
-
         /// <summary>
         /// A functional rendition of <see cref="ConcurrentBag{T}.TryTake(out T)"/> 
         /// </summary>
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="source">The collection to search</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Option<T> TryTake<T>(this ConcurrentBag<T> source)
             => (source.TryTake(out T element)) ? some(element) : none<T>();
@@ -145,7 +142,5 @@ namespace Z0
         /// <returns></returns>
         public static Option<T> TryPop<T>(this ConcurrentQueue<T> q)
             => q.TryDequeue(out T next) ? some(next) : none<T>();
-
     }
-
 }

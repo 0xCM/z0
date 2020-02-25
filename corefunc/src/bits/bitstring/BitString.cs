@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    
-    using static zfunc;
+    using System.Text;
 
+    using static Root;
 
     /// <summary>
     /// Represents a sequence of bits
@@ -502,7 +502,7 @@ namespace Z0
             else
             {
                 var sep = blocksep ?? ' ';
-                var sb = text();
+                var sb = new StringBuilder();
                 var blocks = Partition(blockWidth.Value).Reverse();
                 var lastix = blocks.Length - 1;
                 var counter = 0;
@@ -544,7 +544,7 @@ namespace Z0
             else
             {
                 var blockWidth = style.BlockWidth;
-                var sb = text();
+                var sb = new StringBuilder();
                 var blocks = Partition(blockWidth).Reverse();
                 var lastix = blocks.Length - 1;
                 var counter = 0;

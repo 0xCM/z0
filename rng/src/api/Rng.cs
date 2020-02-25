@@ -70,10 +70,10 @@ namespace Z0
         /// <param name="s1">The second seed value</param>
         /// <param name="s2">The third seed value</param>
         /// <param name="s3">The fourth seed value</param>
-        public static IPointSource<uint> XOr128(uint? s0 = null, uint? s1 = null, uint? s2 = null, uint? s3 = null)
+        public static IRngPointSource<uint> XOr128(uint? s0 = null, uint? s1 = null, uint? s2 = null, uint? s3 = null)
             => new XOrShift128(s0 ?? Seed32.Seed00,s1 ?? Seed32.Seed01, s2 ?? Seed32.Seed02, s3 ?? Seed32.Seed03);
 
-        public static IPointSource<uint> XOr128(ReadOnlySpan<uint> state, int offset = 0)
+        public static IRngPointSource<uint> XOr128(ReadOnlySpan<uint> state, int offset = 0)
             => new XOrShift128(state.Slice(offset));
 
         /// <summary>
@@ -83,10 +83,10 @@ namespace Z0
         public static IPolyrand XOrShift1024(ulong[] seed = null)
             => new XOrShift1024(seed ?? Seed1024.Default).ToPolyrand();
 
-        public static IPointSource<uint> Mrg32k3a()
+        public static IRngPointSource<uint> Mrg32k3a()
             => new Mrg32K3A(new uint[]{0xFA243, 0xAD941, 0xBC883, 0xDB193, 0xAA137, 0xB1B39});
 
-        public static IPointSource<uint> Mrg32k3a(RowVector<N6,uint> seed)
+        public static IRngPointSource<uint> Mrg32k3a(RowVector<N6,uint> seed)
             => new Mrg32K3A(seed);
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Z0
         /// </summary>
         /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
         /// <param name="increment">The generator step size</param>
-        public static IBoundPointSource<ushort> WyHash16(ushort? seed = null, ushort? increment = null)
+        public static IRngBoundPointSource<ushort> WyHash16(ushort? seed = null, ushort? increment = null)
             => new WyHash16(seed ?? BitConverter.ToUInt16(Entropy.Bytes(2)),increment);
 
         /// <summary>

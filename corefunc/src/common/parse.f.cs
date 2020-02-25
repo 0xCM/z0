@@ -39,7 +39,7 @@ partial class zfunc
 
         [typeof(bool)] = s => ParseBool(s),
 
-        [typeof(bool?)] = s => empty(s) ? null : (bool?)ParseBool(s),
+        [typeof(bool?)] = s => isblank(s) ? null : (bool?)ParseBool(s),
 
         [typeof(int)] = s => int.Parse(s),
 

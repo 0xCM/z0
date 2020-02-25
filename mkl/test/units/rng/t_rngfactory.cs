@@ -131,7 +131,7 @@ namespace Z0
             rng_bench(samplers.uniform(src, (RangeF64)));
         }
 
-        void rng_bench<T>(IRandomStream<T> stream)
+        void rng_bench<T>(IRngStream<T> stream)
             where T : unmanaged
         {
             var segment = Pow2.T08;

@@ -130,7 +130,7 @@ namespace Z0
         /// Produces a stream of random 4-bit bitvectors
         /// </summary>
         /// <param name="random">The random source</param>
-        public static IRandomStream<BitVector4> BitVectors(this IPolyrand random, N4 n)
+        public static IRngStream<BitVector4> BitVectors(this IPolyrand random, N4 n)
         {
             IEnumerable<BitVector4> produce()
             {            
@@ -142,7 +142,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static IRandomStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
+        static IRngStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
             where T : unmanaged
                 =>  RandomStream.From(src,rng);
  

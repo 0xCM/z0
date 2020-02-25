@@ -57,7 +57,7 @@ namespace Z0
         public static string Format(this ITypeInfo src, int offset)
         {
             var indent = new string(AsciSym.Space, offset);
-            var fmt = text();
+            var fmt = buildstring();
 
             fmt.Append(indent);
 

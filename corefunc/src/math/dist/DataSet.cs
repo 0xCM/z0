@@ -120,7 +120,7 @@ namespace Z0
 
         public string Format()
         {
-            var fmt = text();
+            var fmt = buildstring();
             for(var i=0; i<Count; i++)
             {
                 var v = Observation(i);

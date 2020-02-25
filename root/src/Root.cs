@@ -61,6 +61,172 @@ namespace Z0
             => Option.some(value);
 
         /// <summary>
+        /// If possible, applies the conversion S -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<S,T>(S src)
+            where T : unmanaged
+            where S : unmanaged
+                => Converter.convert<S,T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion byte -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(byte src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion sbyte -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(sbyte src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion ushort -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(ushort src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion short -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(short src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion int -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(int src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion uint -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(uint src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion long -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(long src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion ulong -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(ulong src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion float -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(float src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion double -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T convert<T>(double src, T t = default)
+            where T : unmanaged
+                => Converter.convert<T>(src);
+
+        /// <summary>
+        /// Returns generic 0 for a primal source type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T zero<T>(T t = default)
+            where T : unmanaged
+                => Literals.zero<T>();
+
+        /// <summary>
+        /// Returns generic 1 for a primal source type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T one<T>(T t = default)
+            where T : unmanaged
+                => Literals.one<T>();
+
+        /// <summary>
+        /// Ones all bits each and every ... one
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T ones<T>(T t = default)
+            where T : unmanaged
+                => Literals.ones<T>();
+
+        /// <summary>
+        /// Returns the minimum value for a primal source type
+        /// </summary>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T minval<T>()
+            where T : unmanaged
+                => Literals.minval<T>();
+
+        /// <summary>
+        /// Returns the maximum value for a primal source type
+        /// </summary>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T maxval<T>()
+            where T : unmanaged
+                => Literals.maxval<T>();
+        /// <summary>
+        /// Right now
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static DateTime now()
+            => DateTime.Now;
+
+        /// <summary>
         /// Consructs an array from a parameter array
         /// </summary>
         /// <param name="src">The source items</param>
@@ -92,14 +258,6 @@ namespace Z0
                 foreach (var item in items)
                     action(item);
         }
-
-
-        /// <summary>
-        /// Right now
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static DateTime now()
-            => DateTime.Now;
 
         /// <summary>
         /// Executes an action if condition is false

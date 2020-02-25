@@ -2,19 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace System
+namespace Z0
 {
     using System.Collections.Generic;
-    using Z0;
 
     /// <summary>
-    /// Characterizes a random source that can be navigated
+    /// Characterizes a type that provides access to a stateful and parametric-polymorphic 
+    /// pseudorandom number generator
     /// </summary>
-    /// <typeparam name="T">The primal element type</typeparam>
-    public interface INavigableRng<T> : IBoundPointSource<T>, IRandomNav
-        where T : struct
+    public interface IRngProvider
     {
-
+        /// <summary>
+        /// The provided random number generator
+        /// </summary>
+        IPolyrand Random {get;}
+        
     }
-
 }

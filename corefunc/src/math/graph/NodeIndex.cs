@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+
+    using static Root;
 
     public class NodeIndex<V>
         where V : unmanaged

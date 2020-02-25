@@ -17,6 +17,15 @@ namespace Z0
     partial class xfunc
     {
         /// <summary>
+        /// Creates a span of replicated characters 
+        /// </summary>
+        /// <param name="src">The character to replicate</param>
+        /// <param name="count">The replication count</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> Replicate(this char src, int count)
+            => text.replicate(src,count);
+
+        /// <summary>
         /// Determines whether the source character is a decimal digit per the unicode standard
         /// </summary>
         /// <param name="c">The source character</param>
@@ -42,63 +51,6 @@ namespace Z0
         public static string EncloseWithin(this string s, string left, string right)
             => $"{left}{s}{right}";
 
-        /// <summary>
-        /// Determines whether the subject is contained betwee specified left and right markers
-        /// </summary>
-        /// <param name="s">The subject to test</param>
-        /// <param name="left">The left marker</param>
-        /// <param name="right">The right marker</param>
-        /// <param name="compare">Th comparison type</param>
-        [MethodImpl(Inline)]
-        public static bool EnclosedBy(this string s, string left, string right,
-            StringComparison compare = StringComparison.InvariantCulture) => s.StartsWith(left, compare) && s.EndsWith(right, compare);
-
-        /// <summary>
-        /// Determines whether the subject is contained betwee specified left and right markers
-        /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="left">The left marker</param>
-        /// <param name="right">The right marker</param>
-        [MethodImpl(Inline)]
-        public static bool EnclosedBy(this string s, char left, char right)
-            => String.IsNullOrEmpty(s) ? false : s[0] == left && s.Last() == right;
-
-
-        /// <summary>
-        /// Joins a sequence of source characters with optional interspersed separator
-        /// </summary>
-        /// <param name="chars"></param>
-        /// <param name="sep"></param>
-        public static string Concat(this IEnumerable<char> chars, char? sep = null)
-        {
-            if(sep == null)
-                return new string(chars.ToSpan());
-            else
-                return new string(chars.Intersperse(sep.Value).ToSpan());                        
-        }
-
-        /// <summary>
-        /// Searches for the last index of a specified character in a string
-        /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="c">The character to match</param>
-        public static Option<int> LastIndexOf(this string s, char c)
-        {
-            var idx = s.LastIndexOf(c);
-            return idx != -1 ? some(idx) : none<int>();
-        }
-
-        /// <summary>
-        /// Searches a string for the first occurrence of a specified character
-        /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="c">The marking character</param>
-        public static Option<int> FirstIndexOf(this string s, char c)
-        {
-            var idx = s.IndexOf(c);
-            return idx != -1 ? some(idx) : none<int>();
-        }
-    
         /// <summary>
         /// Returns true if not blank
         /// </summary>
@@ -258,14 +210,6 @@ namespace Z0
             return (T)result;
         }
 
-        [MethodImpl(Inline)]
-        public static IEnumerable<string> Trim(this IEnumerable<string> src)
-            => src.Select(s => s.Trim());
-
-        [MethodImpl(Inline)]
-        public static string[] Trim(this string[] src)
-            => src.Map(s => s.Trim());
-
         /// <summary>
         /// Block-formats a string using specified block length and separator
         /// </summary>
@@ -297,7 +241,7 @@ namespace Z0
         public static string SeparateBlocks(this string src, int blocklen, char sep, string blockprefix)
         {
             var parts = src.Partition(blocklen).ToArray();            
-            var result = text();
+            var result = buildstring();
             var prefix = blockprefix ?? string.Empty;
             var lastindex = parts.Length - 1;
             for(var i=0; i<parts.Length; i++)
@@ -326,7 +270,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static bool ContentEqual(this Span<char> lhs, ReadOnlySpan<char> rhs)        
-             =>  lhs.ReadOnly().ContentEqual(rhs);
+             => lhs.ReadOnly().ContentEqual(rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -336,14 +280,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool ContentEqual(this Span<char> lhs, Span<char> rhs)        
              => lhs.ReadOnly().ContentEqual(rhs);
-
-        /// <summary>
-        /// Removes whitespace characters from a string
-        /// </summary>
-        /// <param name="src">The source string</param>
-        [MethodImpl(Inline)]
-        public static string RemoveWhitespace(this string src)
-            => src.RemoveAny(items(AsciSym.Space, AsciEscape.LineFeed, AsciEscape.NewLine, AsciEscape.Tab));
 
         [MethodImpl(Inline)]
         public static string Comment(this string text, string delimiter = "//", int pad = 0)
@@ -367,5 +303,13 @@ namespace Z0
         [MethodImpl(Inline)]
         static bool IsRowHead(int index, int rowlen)
             => index == 0 || index % rowlen == 0; 
+
+        public static string Format(this Utf8AsciPoint src)
+        {
+            var bits = src.Code.FormatBits();
+            var num = src.Code.FormatHex();
+            var str = src.IsControl ? "___"  : $"'{src.ToChar()}'";
+            return $"{num} {bits} {str}";
+        }        
     }
 }

@@ -12,17 +12,17 @@ namespace Z0
 
     using static zfunc;
 
-    public class BitSource<T> : IRandomStream<bit>, IPointStream<bit>
+    public class BitSource<T> : IRngStream<bit>, IRngPointStreamSource<bit>
         where T : unmanaged
     {
         const int BufferSize = Pow2.T10;
 
         [MethodImpl(Inline)]
-        public static IRandomStream<bit> From(IPointSource<T> src)
+        public static IRngStream<bit> From(IRngPointSource<T> src)
                 => new BitSource<T>(src);
         
         [MethodImpl(Inline)]
-        public BitSource(IPointSource<T> random)
+        public BitSource(IRngPointSource<T> random)
         {
             this.RngKind = random.RngKind;
             this.Stream = random.Stream().GetEnumerator().ToBitStream();

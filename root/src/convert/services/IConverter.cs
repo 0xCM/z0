@@ -5,16 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Collections.Concurrent;
 
-    using static zfunc;
+    using static Root;
 
-    /// <summary>
-    /// A context that carries an RNG state
-    /// </summary>
-    public interface IRngContext : IRngProvider, IContext
-    {   
-           
+    public interface IConverter
+    {
+        
+    }
+    
+    public interface IConverter<in S, out T> : IConverter
+    {
+        T Convert(S src);
+
     }
 }

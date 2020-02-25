@@ -55,8 +55,8 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<uint>();
-                var b = bitstring(Bits.bfly(n4, a));
-                var c = bitstring(a);
+                var b = BitString.scalar(Bits.bfly(n4, a));
+                var c = BitString.scalar(a);
 
                 Claim.eq(BitString.scalar<byte>(c[0..3]), BitString.scalar<byte>(b[0..3]));
                 Claim.eq(BitString.scalar<byte>(c[4..7]), BitString.scalar<byte>(b[8..11]));

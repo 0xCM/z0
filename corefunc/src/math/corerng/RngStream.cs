@@ -10,13 +10,12 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
 
     public static class RandomStream
     {
         [MethodImpl(Inline)]
-        public static IRandomStream<T> From<T>(IEnumerable<T> src, RngKind rng)
+        public static IRngStream<T> From<T>(IEnumerable<T> src, RngKind rng)
             where T : struct
                 => new RandomStream<T>(rng,src);
     }
@@ -24,7 +23,7 @@ namespace Z0
     /// <summary>
     /// Captures a random stream along with the generator classification
     /// </summary>
-    public struct RandomStream<T> : IRandomStream<T>
+    public struct RandomStream<T> : IRngStream<T>
         where T : struct
     {
 

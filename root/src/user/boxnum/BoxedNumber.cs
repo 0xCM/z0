@@ -18,7 +18,8 @@ namespace Z0
         UserType(RootTypeCodes.BoxedNumberId), 
         ConversionProvider(typeof(BoxedNumberConverter))
     ]
-    public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
+
+    public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>, IBiconvertible<BoxedNumber>
     {
         /// <summary>
         /// In the box
@@ -28,18 +29,23 @@ namespace Z0
         /// <summary>
         /// Box discriminator for runtime efficiency
         /// </summary>
-        public readonly NumericKind kind;
-
+        public readonly NumericKind Kind;
 
         [MethodImpl(Inline)]
-        internal BoxedNumber(object src, NumericKind kind)
+        public static BoxedNumber Define<T>(T src)
+            where T : unmanaged
+                => new BoxedNumber(src, Numeric.kind<T>());
+
+        [MethodImpl(Inline)]
+        public static BoxedNumber Define(object src, NumericKind kind)
+            => new BoxedNumber(src ?? new object(), kind);
+
+        [MethodImpl(Inline)]
+        BoxedNumber(object src, NumericKind kind)
         {
             this.Value = src;
-            this.kind = kind;
+            this.Kind = kind;
         }
-
-        public NumericKind Kind
-            => Numeric.kind(Value.GetType());
 
         public bool IsSignedInt
             => Numeric.signed(Value);
@@ -53,25 +59,23 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Unbox<T>()
             where T : unmanaged
-                => BoxOps.unbox<T>(this);
+                => (T)Value;
 
-        [MethodImpl(Inline)]
+        public Biconverter<BoxedNumber> Converter
+        {
+            [MethodImpl(Inline)]
+            get => Biconverter<BoxedNumber>.Create();
+        }
+
         public T Convert<T>()
             where T : unmanaged
-                => BoxOps.convert<T>(this);
-                
-        [MethodImpl(Inline)]
-        public bool Equals(BoxedNumber other)
-            => Value.Equals(other.Value);
+                => (T)typeof(T).NumericKind().Convert(Value);
 
-        public override string ToString()
-            => Value.ToString();
+        public BoxedNumber Convert(NumericKind target)
+            => Define(target.Convert(Value), target);
 
-        public override int GetHashCode()
-            => Value.GetHashCode();
-
-        public override bool Equals(object other)
-            => other is BoxedNumber n && Equals(n);
+        public BoxedNumber Convert(Type target)
+            => Convert(target.NumericKind());
 
         IComparable Comparable
         {
@@ -101,43 +105,43 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(sbyte src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(byte src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(short src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(ushort src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(int src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(uint src)        
-            => BoxOps.number(src);
+            => Define(src);
             
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(long src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(ulong src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(float src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(double src)        
-            => BoxOps.number(src);
+            => Define(src);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(BoxedNumber src)        
@@ -179,6 +183,19 @@ namespace Z0
         public static explicit operator double(BoxedNumber src)        
             => src.Convert<double>();
        
+        [MethodImpl(Inline)]
+        public bool Equals(BoxedNumber other)
+            => Value.Equals(other.Value);
+
+        public override string ToString()
+            => Value.ToString();
+
+        public override int GetHashCode()
+            => Value.GetHashCode();
+
+        public override bool Equals(object other)
+            => other is BoxedNumber n && Equals(n);
+
         [MethodImpl(Inline)]
         TypeCode IConvertible.GetTypeCode()        
             => Convertible.GetTypeCode();
@@ -254,9 +271,7 @@ namespace Z0
         [MethodImpl(Inline)]
         string IFormattable.ToString(string format, IFormatProvider formatProvider)        
             => Formattable.ToString(format, formatProvider);     
-
         public TypeIdentity DefineIdentity()
             => TypeIdentity.Define("nbox");
-
     }
 }

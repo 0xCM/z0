@@ -22,7 +22,7 @@ namespace Z0
 
         string MakeBsArray(byte src)
         {
-            var dst = text();
+            var dst = buildstring();
             dst.Append("new char[]{");
             for(var i=0; i<8; i++)
             {
@@ -37,7 +37,7 @@ namespace Z0
         }
         string MakeBsArray(sbyte src)
         {
-            var dst = text();
+            var dst = buildstring();
             dst.Append("new char[]{");
             for(var i=0; i<8; i++)
             {
@@ -53,7 +53,7 @@ namespace Z0
 
         string MakeBsIndex(byte src)
         {
-            var dst = text();
+            var dst = buildstring();
             dst.Append("0b");
             for(var i=7; i>=0; i--)
                 dst.Append(MakeBitChar(src,i));
@@ -62,7 +62,7 @@ namespace Z0
 
         string MakeBsIndex(sbyte src)
         {
-            var dst = text();
+            var dst = buildstring();
             if(src < 0)
                 dst.Append("-");
             dst.Append("0b");            
@@ -94,7 +94,7 @@ namespace Z0
         //new byte[]{0,0,0,0,0,0,0,0}
         string MakeBsSeq(byte src)
         {
-            var dst = text();
+            var dst = buildstring();
             dst.Append("new byte[]{");
             for(var i=0; i<8; i++)
             {
@@ -108,7 +108,7 @@ namespace Z0
 
         string MakeBsSeq(sbyte src)
         {
-            var dst = text();
+            var dst = buildstring();
             dst.Append("new sbyte[]{");
             for(var i=0; i<8; i++)
             {

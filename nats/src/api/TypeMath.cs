@@ -9,14 +9,23 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
 
     /// <summary>
     /// Implements parametric computations
     /// </summary>
     public static class TypeMath
     {        
+        [MethodImpl(Inline)]
+        public static ulong bitsize<T>()
+            where T : unmanaged
+                => (ulong)Unsafe.SizeOf<T>()*8ul;
+
+        [MethodImpl(Inline)]
+        public static ulong nateval<N>()
+            where N : unmanaged, ITypeNat
+                => NatMath2.natval<N>(); 
+
         /// <summary>
         /// Computes the product p := natval[M] * bitsize[T]
         /// </summary>
@@ -25,10 +34,10 @@ namespace Z0
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The bit width type</typeparam>
         [MethodImpl(Inline)]
-        public static int mul<N,T>(N n = default, T t = default)
+        public static ulong mul<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => natval<N>() * bitsize<T>();
+                => nateval<N>() * bitsize<T>();
 
         /// <summary>
         /// Computes the product p := natval[M] * natval[N] * bitsize[T]
@@ -40,11 +49,11 @@ namespace Z0
         /// <typeparam name="N">The type of the second parameter</typeparam>
         /// <typeparam name="T">The bit width type</typeparam>
         [MethodImpl(Inline)]
-        public static int mul<M,N,T>(M m = default, N n = default, T t = default)
+        public static ulong mul<M,N,T>(M m = default, N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => NatMath.mul<M,N>() * bitsize<T>();
+                => NatMath2.mul<M,N>() * bitsize<T>();
 
         /// <summary>
         /// Computes the quotient q := natval[N] / bitsize[T]
@@ -57,7 +66,7 @@ namespace Z0
         public static int div<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => natval<N>() / bitsize<T>();
+                => (int)(nateval<N>() / bitsize<T>());
 
         /// <summary>
         /// Computes the remainder r := natval[N] % bitsize[T]
@@ -67,10 +76,10 @@ namespace Z0
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The bit width type</typeparam>
         [MethodImpl(Inline)]
-        public static int mod<N,T>(N n = default, T t = default)
+        public static ulong mod<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => natval<N>() % bitsize<T>();
+                => nateval<N>() % bitsize<T>();
 
         /// <summary>
         /// Computes the upward-rounded quotient 
@@ -97,7 +106,7 @@ namespace Z0
         public static bit eq<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => natval<N>() == bitsize<T>();
+                => nateval<N>() == bitsize<T>();
 
         /// <summary>
         /// Computes the predicate p := natval[N] < bitsize[T]
@@ -110,7 +119,7 @@ namespace Z0
         public static bit lt<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => natval<N>() < bitsize<T>();
+                => nateval<N>() < bitsize<T>();
 
         /// <summary>
         /// Computes the predicate p := natval[N] <= bitsize[T]
@@ -123,7 +132,7 @@ namespace Z0
         public static bit lteq<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => natval<N>() <= bitsize<T>();
+                => nateval<N>() <= bitsize<T>();
 
         /// <summary>
         /// Computes the predicate p := natval[N] > bitsize[T]
@@ -136,7 +145,7 @@ namespace Z0
         public static bit gt<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => natval<N>() > bitsize<T>();
+                => nateval<N>() > bitsize<T>();
 
         /// <summary>
         /// Computes the predicate p := natval[N] >= bitsize[T]
@@ -149,6 +158,6 @@ namespace Z0
         public static bit gteq<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => natval<N>() >= bitsize<T>();
+                => nateval<N>() >= bitsize<T>();
     }
 }

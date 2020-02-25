@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="fmt">The format configuration</param>
         public string FormatDetail(AsmFunction src)
         {            
-            var dst = text();
+            var dst = buildstring();
 
             if(Config.EmitSectionDelimiter)
                 dst.AppendLine(Config.SectionDelimiter);
@@ -90,7 +90,7 @@ namespace Z0
                 });                
 
             var dst = new string[src.Count];
-            var sb = text();
+            var sb = buildstring();
             var writer = new StringWriter(sb);
             var output = new AsmOutput(writer, @base);
             for(var i = 0; i < src.Count; i++)
@@ -194,7 +194,7 @@ namespace Z0
 
         string FormatInstruction(AsmInstructionInfo src)
         {
-            var description = text();    
+            var description = buildstring();    
             description.Append(concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(Config.InstructionPad, space())));
             description.Append(Comment(Format(src.Spec, Config)));
             description.Append(concat(Config.FieldDelimiter,"encoded", bracket(src.Encoded.Length.ToString())));

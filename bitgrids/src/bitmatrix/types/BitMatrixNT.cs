@@ -179,7 +179,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
         {
-            var sb = text();
+            var sb = buildstring();
             for(var i=0; i< Order; i++)
                  sb.AppendLine(this[i].Format());
             return sb.ToString();

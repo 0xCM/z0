@@ -7,11 +7,147 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial struct BitString
     {
+        /// <summary>
+        /// Allocates a bitstring with a specified length
+        /// </summary>
+        /// <param name="len">The length of the bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitString alloc(int len)
+            => new BitString(new byte[len]);
+
+        /// <summary>
+        /// Loads a bitstring from a bitseq
+        /// </summary>
+        /// <param name="bitseq">An array containing only 0's and 1's </param>
+        [MethodImpl(Inline)]
+        public static BitString load(byte[] bitseq)
+            => new BitString(bitseq);
+
+        /// <summary>
+        /// Constructs a bitstring from bitseq
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static BitString load(ReadOnlySpan<byte> src)                
+            => new BitString(src);
+
+        /// <summary>
+        /// Populates a bitstring from a 128-bit cpu vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="maxbits">The maximum number of bits to extract from the source</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]   
+        public static BitString load<T>(Vector128<T> src, int? maxbits = null)
+            where T : unmanaged        
+                => BitString.scalars(src.ToSpan(), maxbits);
+
+        /// <summary>
+        /// Populates a bitstring from a 256-bit cpu vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="maxbits">The maximum number of bits to extract</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]   
+        public static BitString load<T>(Vector256<T> src, int? maxbits = null)
+            where T : unmanaged        
+                => BitString.scalars(src.ToSpan(), maxbits);
+
+        /// <summary>
+        /// Constructs a bitstring from a span of bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static BitString load(ReadOnlySpan<bit> src)                
+            => new BitString(src);
+
+        /// <summary>
+        /// Constructs a bitstring from primal value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString scalar<T>(T src, int? maxbits = null)
+            where T : unmanaged
+                => new BitString(BitStore.bitseq(src, maxbits ?? bitsize<T>()));                
+
+        /// <summary>
+        /// Constructs a bitstring from primal value, using caller-supplied storage instead of allocation
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="storage">The caller-supplied storage</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString scalar<T>(T src, byte[] storage, int? maxbits = null)
+            where T : unmanaged
+        {
+            var bitseq = BitStore.bitseq(src, maxbits ?? bitsize<T>());
+            bitseq.CopyTo(storage);
+            return new BitString(storage);
+        }
+
+        /// <summary>
+        /// Converts an enumeration value to a bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The enumeration type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString @enum<T>(T src, int? maxbits = null)
+            where T : unmanaged, Enum
+                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? bitsize<T>());        
+
+        /// <summary>
+        /// Constructs a bitstring from span of scalar values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        /// <param name="maxbits">The maximum number of bits to extract from the source</param>
+        [MethodImpl(Inline)]
+        public static BitString scalars<T>(ReadOnlySpan<T> src, int? maxbits = null)
+            where T : unmanaged
+        {
+            var segbits = bitsize<T>();
+            var bitcount = maxbits ?? segbits*src.Length;
+            var k = 0;
+            var bitseq = new byte[bitcount];
+            for(int i=0; i<src.Length; i++)
+            {
+                var bits = BitStore.bitseq(src[i]);
+                for(var j = 0; j<segbits && k<bitcount; j++, k++)
+                    bitseq[k] = bits[j];                        
+            }
+            return new BitString(bitseq);
+        }
+
+        /// <summary>
+        /// Constructs a bitstring from span of scalar values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="maxbits">The maximum number of bits to extract from the source</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString scalars<T>(Span<T> src, int? maxbits = null)
+            where T : unmanaged
+                => scalars(src.ReadOnly(), maxbits);
+
+        /// <summary>
+        /// Constructs a bitstring from a power of 2
+        /// </summary>
+        /// <param name="exp">The value of the expoonent</param>
+        [MethodImpl(Inline)]
+        public static BitString pow2(int exp)
+        {
+            var dst =  new byte[exp + 1];
+            dst[exp] = 1;
+            return load(dst);
+        }
+
         /// <summary>
         /// Extracts a scalar value from a bitstring
         /// </summary>
@@ -22,7 +158,6 @@ namespace Z0
         public static T scalar<T>(BitString src, int offset = 0)
             where T : unmanaged 
                 => src.Scalar<T>(offset);
-
 
         /// <summary>
         /// Constructs a bitstring from text
@@ -52,6 +187,12 @@ namespace Z0
             return dst;
         }
 
+        static int length(BitString a, BitString b)
+        {
+            var len = a.Length;
+            return len == b.Length ? len : throw new Exception($"Length mismatch: {a.Length} != {b.Length}");
+        }
+
         /// <summary>
         /// Computes the bitwise and between the operands
         /// </summary>
@@ -59,7 +200,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         public static BitString and(BitString a, BitString b)
         {            
-            var len = length(a.data, b.data);
+            var len = length(a, b);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
                 dst[i] = a[i] & b[i];
@@ -73,7 +214,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         public static BitString or(BitString a, BitString b)
         {            
-            var len = length(a.data, b.data);
+            var len = length(a, b);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
                 dst[i] = a[i] | b[i];
@@ -87,7 +228,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         public static BitString xor(BitString a, BitString b)
         {            
-            var len = length(a.data,b.data);
+            var len = length(a,b);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
                 dst[i] = a[i] ^ b[i];
@@ -167,33 +308,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Considers the source bitstring as a row-major encoding of an mxn matrix and computes 
-        /// the transposition maxtrix of dimension nxm similary encoded as a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="m">The source row count</param>
-        /// <param name="n">The source column count</param>
-        public static BitString transpose<M,N>(BitString src, M m = default, N n = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-        {
-            var bitcount = NatMath.mul(m,n);
-            if(src.Length < bitcount)
-                return BitString.Empty;
-
-            var dst = BitString.alloc(bitcount);
-
-            var cols = natval(n);
-            var k = 0;
-
-            for(var col = 0; col < cols; col++)
-            for(var j = col; j<bitcount; j+=cols, k++)
-                dst[k] = src[j];
-
-            return dst;
-        }
-
-        /// <summary>
         /// Overwrites selected target bits with lower bits from the source
         /// </summary>
         /// <param name="src">The source</param>
@@ -235,7 +349,7 @@ namespace Z0
         public static BitString clear(BitString src, int i0, int i1)
         {
             for(var i=i0; i<=i1; i++)
-                src[i] = off;
+                src[i] = bit.Off;
             return src;
         }
 

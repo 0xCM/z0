@@ -2,14 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace System
+namespace Z0
 {
-    using System.Collections.Generic;
-    using Z0;
+    using System;
 
-    public interface IPointStream<T> : IPointSource<T>
-        where T : struct
-    {
-        IEnumerable<T> Stream {get;}
+    /// <summary>
+    /// A context that carries an RNG state
+    /// </summary>
+    public interface IRngContext : IRngProvider, IContext
+    {   
+           
     }
 }

@@ -40,7 +40,7 @@ namespace Z0
 
         public string Format()
         {
-            var fmt = text();
+            var fmt = buildstring();
             for(var i=0; i< FieldCount; i++)
             {
                 var f = this[i];

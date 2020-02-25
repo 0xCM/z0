@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a contiguous segment of homogenous values that lie within left and right boundaries 
@@ -244,7 +244,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval<U> Convert<U>()
             where U : unmanaged
-                => new Interval<U>(convert(Left, out U x),convert(Right, out U y),Kind);
+                => new Interval<U>(convert<T,U>(Left),convert<T,U>(Right),Kind);
 
         /// <summary>
         /// Creates a view of the data in the inverval as seen through the
@@ -266,7 +266,7 @@ namespace Z0
             => new Interval<T>(left,right, Kind);
 
         public string Format()
-            => concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);
+            => text.concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);
 
         public override string ToString()
             => Format();        

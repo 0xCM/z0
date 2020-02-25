@@ -57,7 +57,7 @@ namespace Z0
 
         public string GenLookups(Type valueType, string rootName)
         {
-            var sb = text();
+            var sb = buildstring();
             for(var i=0; i<Data.Length; i++)
                 sb.AppendLine($"public static {valueType.Name} {rootName}{i} => Lookup({i})");
             return sb.ToString();
@@ -66,7 +66,7 @@ namespace Z0
         public string GenAccessor(int offset = 0, int seglen = 8)
         {
             var src = Data;
-            var dst = text();
+            var dst = buildstring();
             var linepad = AsciSym.Space.Replicate(offset + 4);
             var margin = new string(' ',offset);
             dst.AppendLine(($"{margin}static ReadOnlySpan<byte> {PropName} => new byte[]"));

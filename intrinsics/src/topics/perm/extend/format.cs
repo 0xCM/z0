@@ -49,8 +49,8 @@ namespace Z0
         /// <typeparam name="T">The term type</typeparam>
         public static string FormatAsPerm<T>(this ReadOnlySpan<T> terms,  int? colwidth = null)
         {
-            var line1 = text();
-            var line2 = text();
+            var line1 = buildstring();
+            var line2 = buildstring();
             var pad = colwidth ?? 3;
             var leftBoundary = $"{AsciSym.Pipe}";
             var rightBoundary = $"{AsciSym.Pipe}".PadLeft(2);

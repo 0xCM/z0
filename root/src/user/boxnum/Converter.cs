@@ -9,9 +9,8 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static Converter;
 
-    readonly struct BoxedNumberConverter : IValueConversionProvider<BoxedNumberConverter,BoxedNumber>, IValueConverter<BoxedNumber>
+    readonly struct BoxedNumberConverter : IValueConversionProvider<BoxedNumberConverter,BoxedNumber>
     {
         static BoxedNumberConverter TheOnly => default;
 
@@ -25,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src) 
             where T : struct
-                => (T)oconvert(src.Value, Numeric.kind<T>());
+                => (T)Z0.Converter.oconvert(src.Value, Numeric.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -35,14 +34,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public BoxedNumber Convert<T>(T src) 
             where T : struct
-                => BoxOps.number(src, Numeric.kind<T>());
+                => BoxedNumber.Define(src, Numeric.kind<T>());
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
         {
             try
             {
                 var src = (BoxedNumber)incoming;
-                return oconvert(src.Value, dst.NumericKind());
+                return Z0.Converter.oconvert(src.Value, dst.NumericKind());
             }
             catch(Exception e)
             {
@@ -55,7 +54,7 @@ namespace Z0
         {
             var kind = (incoming?.GetType() ?? typeof(void)).NumericKind();
             return kind.IsSome() 
-                ? BoxOps.number(incoming, kind) 
+                ? BoxedNumber.Define(incoming, kind) 
                 : Option.none<BoxedNumber>();
         }
     }

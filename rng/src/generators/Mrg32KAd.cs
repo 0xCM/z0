@@ -27,7 +27,7 @@ namespace Z0
     /// <remarks>
     /// Derived from SSJ project sources; see LICENSE file in this project root
     /// </remarks>
-    public class Mrg32K3Ad : IPointSource<double>
+    public class Mrg32K3Ad : IRngPointSource<double>
     {
         const double m1 = Mod1;
 

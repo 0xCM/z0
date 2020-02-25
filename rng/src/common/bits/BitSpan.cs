@@ -14,7 +14,7 @@ namespace Z0
     partial class RngX
     {
         [MethodImpl(Inline)]
-        static IRandomStream<bit> ToBitStream<T>(this IPointSource<T> src)
+        static IRngStream<bit> ToBitStream<T>(this IRngPointSource<T> src)
             where T : unmanaged
                 => BitSource<T>.From(src);    
 

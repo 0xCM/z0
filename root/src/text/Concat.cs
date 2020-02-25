@@ -92,5 +92,18 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static ReadOnlySpan<char> Concat(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
             => lhs.Concat() + rhs.Concat();
+
+        /// <summary>
+        /// Joins a sequence of source characters with optional interspersed separator
+        /// </summary>
+        /// <param name="chars">The characters to join</param>
+        /// <param name="sep">The character to intersperse</param>
+        public static string Concat(this IEnumerable<char> chars, char? sep = null)
+        {
+            if(sep == null)
+                return new string(chars.ToSpan());
+            else
+                return new string(chars.Intersperse(sep.Value).ToSpan());                        
+        }
     }
 }

@@ -179,10 +179,6 @@ namespace Z0
             var num = Code.ToString("0x");
             var str = IsControl ? "___"  : $"'{ToChar()}'";
             return $"{num} {str}";
-
         }
-
     }
-
-
 }

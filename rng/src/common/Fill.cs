@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="count">The number of values to send to the target</param>
         /// <param name="dst">A reference to the target location</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void Fill<T>(this IPointSource<T> src, int count, ref T dst)
+        public static void Fill<T>(this IRngPointSource<T> src, int count, ref T dst)
             where T : unmanaged
         {
             for(var i=0; i<count; i++)

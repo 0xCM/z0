@@ -18,7 +18,7 @@ namespace Z0
         /// Samples one point from each generator
         /// </summary>
         /// <param name="sources">A set of random point sources</param>
-        public static Span<T> Next<T>(this Span<IBoundPointSource<T>> generators)
+        public static Span<T> Next<T>(this Span<IRngBoundPointSource<T>> generators)
             where T : unmanaged
         {
             Span<T> dst = new T[generators.Length];
@@ -44,7 +44,7 @@ namespace Z0
         /// Samples one point from each generator
         /// </summary>
         /// <param name="sources">A set of random point sources</param>
-        public static T[] Next<T>(this IBoundPointSource<T>[] sources)
+        public static T[] Next<T>(this IRngBoundPointSource<T>[] sources)
             where T : unmanaged
         {
             var dst = new T[sources.Length];

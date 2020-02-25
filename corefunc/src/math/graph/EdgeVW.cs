@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a weighted edge, parameterized by the vertex index type and the weight type
@@ -64,7 +63,5 @@ namespace Z0
         
         public override string ToString() 
             => $"{Source} -> {Target}";
-
     }
-
 }

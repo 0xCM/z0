@@ -14,8 +14,7 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Returns the supplied value if not null, otherwise invokes a function to provide
-    /// a non-null value as a replacement
+    /// Returns the supplied value if not null, otherwise invokes a function to provide a non-null value as a replacement
     /// </summary>
     /// <typeparam name="T">The object type</typeparam>
     /// <param name="x">The object to test</param>
@@ -55,5 +54,4 @@ partial class zfunc
     public static T coalesce<T>(T? x, T fallback)
         where T : unmanaged
             => x == null ? fallback : x.Value;
-
 }

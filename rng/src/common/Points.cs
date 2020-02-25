@@ -83,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
-        public static IEnumerable<T> Stream<T>(this IBoundPointSource<T> random)
+        public static IEnumerable<T> Stream<T>(this IRngBoundPointSource<T> random)
             where T : unmanaged
         {
             while(true)
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="count">The number of values to select</param>
         /// <typeparam name="T">The value type</typeparam>
-        public static IEnumerable<T> Take<T>(this IBoundPointSource<T> random, int count)
+        public static IEnumerable<T> Take<T>(this IRngBoundPointSource<T> random, int count)
             where T : unmanaged
                 => random.Stream().Take(count);
     }

@@ -40,7 +40,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = text();
+            var dst = buildstring();
             dst.AppendField(TermCode.ToString(), TermCodePad);
             dst.DelimitField(Size.ToString(), SizePad, delimiter);
             dst.DelimitField(Uri.Format(),delimiter);

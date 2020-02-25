@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
 
     partial struct BitString
     {
@@ -57,6 +57,5 @@ namespace Z0
             for(var i=0; i<dst.Length; i++)
                 dst[i] = f((bit)src.data[i]);
         }
-
     }
 }

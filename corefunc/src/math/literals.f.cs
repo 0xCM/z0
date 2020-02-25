@@ -147,22 +147,6 @@ partial class zfunc
     /// </summary>
     public const long i64min = long.MinValue;
 
-    const byte Ones8u = byte.MaxValue;
-
-    const sbyte Ones8i = -1;
-
-    const ushort Ones16u = ushort.MaxValue;
-
-    const short Ones16i = -1;
-
-    const uint Ones32u = uint.MaxValue;
-
-    const int Ones32i = -1;
-
-    const ulong Ones64u = ulong.MaxValue;
-
-    const long Ones64i = -1;
-
     /// <summary>
     /// Returns generic 0 for a primal source type
     /// </summary>
@@ -171,7 +155,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static T zero<T>(T t = default)
         where T : unmanaged
-            => default;
+            => Literals.zero<T>();
 
     /// <summary>
     /// Returns generic 1 for a primal source type
@@ -181,7 +165,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static T one<T>(T t = default)
         where T : unmanaged
-            => convert<T>(1);
+            => Literals.one<T>();
 
     /// <summary>
     /// Ones all bits each and every ... one
@@ -191,7 +175,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static T ones<T>(T t = default)
         where T : unmanaged
-            => ones_u<T>();
+            => Literals.ones<T>();
 
     /// <summary>
     /// Returns the minimum value for a primal source type
@@ -200,20 +184,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static T minval<T>()
         where T : unmanaged
-    {
-        if(typeof(T) == typeof(sbyte) 
-        || typeof(T) == typeof(short) 
-        || typeof(T) == typeof(int) 
-        || typeof(T) == typeof(long))
-            return minval_i<T>();
-        else if(typeof(T) == typeof(byte) 
-        || typeof(T) == typeof(ushort) 
-        || typeof(T) == typeof(uint) 
-        || typeof(T) == typeof(ulong))
-            return minval_u<T>();
-        else
-            return minval_f<T>();
-    }                
+            => Literals.minval<T>();
 
     /// <summary>
     /// Returns the maximum value for a primal source type
@@ -222,133 +193,5 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static T maxval<T>()
         where T : unmanaged
-    {
-        if(typeof(T) == typeof(sbyte) 
-        || typeof(T) == typeof(short) 
-        || typeof(T) == typeof(int) 
-        || typeof(T) == typeof(long))
-            return maxval_i<T>();
-        else if(typeof(T) == typeof(byte) 
-        || typeof(T) == typeof(ushort) 
-        || typeof(T) == typeof(uint) 
-        || typeof(T) == typeof(ulong))
-            return maxval_u<T>();
-        else
-            return maxval_f<T>();
-    }                
-
-
-    [MethodImpl(Inline)]
-    static T minval_i<T>()
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(sbyte))
-            return convert<T>(z8i);
-        else if(typeof(T) == typeof(short))
-            return convert<T>(z16i);
-        else if(typeof(T) == typeof(int))
-            return convert<T>(z32i);
-        else
-            return convert<T>(z64i);
-    }
-
-    [MethodImpl(Inline)]
-    static T minval_u<T>()
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(byte))
-            return convert<T>(z8);
-        else if(typeof(T) == typeof(ushort))
-            return convert<T>(z16);
-        else if(typeof(T) == typeof(uint))
-            return convert<T>(z32);
-        else
-            return convert<T>(z64);
-    }
-
-    [MethodImpl(Inline)]
-    static T minval_f<T>()
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(float))
-            return convert<T>(z32f);
-        else if(typeof(T) == typeof(double))
-            return convert<T>(z64f);
-        else
-            throw unsupported<T>();
-    }
-
-    [MethodImpl(Inline)]
-    static T maxval_i<T>()
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(sbyte))
-            return convert<T>(i8max);
-        else if(typeof(T) == typeof(short))
-            return convert<T>(i16max);
-        else if(typeof(T) == typeof(int))
-            return convert<T>(i32max);
-        else
-            return convert<T>(i64max);
-    }
-
-    [MethodImpl(Inline)]
-    static T maxval_u<T>()
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(byte))
-            return convert<T>(u8max);
-        else if(typeof(T) == typeof(ushort))
-            return convert<T>(u16max);
-        else if(typeof(T) == typeof(uint))
-            return convert<T>(u32max);
-        else
-            return convert<T>(u64max);
-    }
-
-    [MethodImpl(Inline)]
-    static T maxval_f<T>()
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(float))
-            return convert<T>(f32max);
-        else if(typeof(T) == typeof(double))
-            return convert<T>(f64max);
-        else
-            throw unsupported<T>();
-    }
-
-
-    [MethodImpl(Inline)]
-    static T ones_u<T>()
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(byte))
-            return convert<T>(Ones8u);
-        else if(typeof(T) == typeof(ushort))
-            return convert<T>(Ones16u);
-        else if(typeof(T) == typeof(uint))
-            return convert<T>(Ones32u);
-        else if(typeof(T) == typeof(ulong))
-            return convert<T>(Ones64u);
-        else 
-            return ones_i<T>();
-    }
-
-    [MethodImpl(Inline)]
-    static T ones_i<T>()
-        where T : unmanaged
-    {
-        if(typeof(T) == typeof(sbyte))
-            return convert<T>(Ones8i);
-        else if(typeof(T) == typeof(short))
-            return convert<T>(Ones16i);
-        else if(typeof(T) == typeof(int))
-            return convert<T>(Ones32i);
-        else if(typeof(T) == typeof(long))
-            return convert<T>(Ones64i);
-        else
-          throw unsupported<T>();
-    }
-
+            => Literals.maxval<T>();
 }

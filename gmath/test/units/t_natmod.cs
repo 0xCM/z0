@@ -134,7 +134,7 @@ namespace Z0
 
         static string CreateModReport<T>(T[,] entries, uint offset = 0)
         {
-            var sb = text();
+            var sb = buildstring();
             var m = entries.GetLength(0);
             var n = entries.GetLength(1);
 

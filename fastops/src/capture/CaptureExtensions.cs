@@ -24,7 +24,7 @@ namespace Z0
 	    public static string FormatCode(this CapturedMember src)
         {            
             var data = src.Code;
-            var dst = text();
+            var dst = buildstring();
 			dst.AppendLine($"; label   : {src.SourceOp.Signature}");
 			dst.AppendLine($"; location: {src.SourceMemory.Format()}, length: {src.SourceMemory.Length} bytes");
             var lines = data.Encoded.FormatHexLines(null);

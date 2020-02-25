@@ -16,7 +16,7 @@ namespace Z0
         /// Creates a polyrand rng from a point source
         /// </summary>
         /// <param name="rng">The source rng</param>
-        public static IPolyrand ToPolyrand(this IBoundPointSource<ulong> source)        
+        public static IPolyrand ToPolyrand(this IRngBoundPointSource<ulong> source)        
             => new Polyrand(source);
 
         /// <summary>
@@ -41,9 +41,9 @@ namespace Z0
         /// <param name="src">The randon source</param>
         /// <typeparam name="T">The point type</typeparam>
         [MethodImpl(Inline)]
-        public static IPointSource<T> PointSource<T>(this IPolyrand src)
+        public static IRngPointSource<T> PointSource<T>(this IPolyrand src)
             where T : unmanaged
-                => src as IPointSource<T>;
+                => src as IRngPointSource<T>;
 
         /// <summary>
         /// Samples a subsequence from a point source determined by successive sequence widths
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The point source</param>
         /// <param name="batchsize">The number of samples per batch</param>
         /// <param name="widths">The subsequence width markers</param>
-        public static Span<(ulong count, T value)> SubSeq<T>(this IPointSource<T> src, int batchsize, ReadOnlySpan<ulong> widths)
+        public static Span<(ulong count, T value)> SubSeq<T>(this IRngPointSource<T> src, int batchsize, ReadOnlySpan<ulong> widths)
             where T : unmanaged
         {
             var bufferlen = batchsize;

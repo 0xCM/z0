@@ -27,7 +27,7 @@ namespace Z0
     /// <remarks>
     /// Derived from SSJ project sources; see LICENSE file in this project root
     /// </remarks>
-    public class Mrg32K3A : IPointSource<uint>, IPointSource<double>
+    public class Mrg32K3A : IRngPointSource<uint>, IRngPointSource<double>
     {
         const uint m1 = Mod1;
 
@@ -167,8 +167,6 @@ namespace Z0
             => Next()*Norm;
         
         double IPointSource<double>.Next()
-            => NextF64();
- 
+            => NextF64(); 
     }
-
 }

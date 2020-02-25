@@ -11,7 +11,7 @@ namespace Z0
     using static As;
     using static AsIn;     
 
-    using static zfunc;    
+    using static Root;    
 
     /// <summary>
     /// Implements Leimire's algorithm for sampling a uniformly distribute random number

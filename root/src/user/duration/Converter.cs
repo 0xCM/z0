@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static Converter;
 
     readonly struct DurationConverter : IUnmanagedConverter<DurationConverter,Duration>
     {
@@ -32,9 +31,9 @@ namespace Z0
             => ToTarget(incoming);
 
         static Option<object> FromTarget(object incoming, Type dst)
-            => Try(() => oconvert(((Duration)incoming).Ticks, dst.NumericKind()));
+            => Try(() => Converter.oconvert(((Duration)incoming).Ticks, dst.NumericKind()));
 
         static Option<object> ToTarget(object incoming)
-            => Try(() => (Duration)(long)oconvert(incoming, NumericKind.I64));
+            => Try(() => (Duration)(long)Converter.oconvert(incoming, NumericKind.I64));
     }
 }

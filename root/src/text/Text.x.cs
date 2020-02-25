@@ -40,5 +40,34 @@ namespace Z0
         [MethodImpl(Inline)]
         static bool empty(string src)
             => String.IsNullOrWhiteSpace(src);
+
+        /// <summary>
+        /// Searches for the last index of a specified character in a string
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        /// <param name="c">The character to match</param>
+        public static Option<int> LastIndexOf(this string s, char c)
+        {
+            var idx = s.LastIndexOf(c);
+            return idx != -1 ? some(idx) : none<int>();
+        }
+
+        /// <summary>
+        /// Searches a string for the first occurrence of a specified character
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        /// <param name="c">The marking character</param>
+        public static Option<int> FirstIndexOf(this string s, char c)
+        {
+            var idx = s.IndexOf(c);
+            return idx != -1 ? some(idx) : none<int>();
+        }
+
+        /// <summary>
+        /// Removes whitespace characters from a string
+        /// </summary>
+        /// <param name="src">The source string</param>
+        public static string RemoveWhitespace(this string src)
+            => src.RemoveAny(items(AsciSym.Space, AsciEscape.LineFeed, AsciEscape.NewLine, AsciEscape.Tab));
     }
 }

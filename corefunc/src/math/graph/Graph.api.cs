@@ -9,8 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
-    using static zfunc;
+    using static Root;
     
     /// <summary>
     /// Defines the primary API surface for manipulated graphs
@@ -227,7 +228,7 @@ namespace Z0
             where V : unmanaged
         {
             var count = src.EdgeCount;
-            var fmt = text();
+            var fmt = new StringBuilder();
             fmt.AppendLine("digraph " +(label ?? "g") + "   {");
             for(var i=0; i< count; i++)
             {
