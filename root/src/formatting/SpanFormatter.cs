@@ -14,38 +14,53 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static SpanFormatter<T> @default<T>(string delimiter = null)
-            where T : IFormattable<T>
-                => new SpanFormatter<T>(delimiter);
-
-        [MethodImpl(Inline)]
-        public static SpanFormatter<T> @default<T>(char? delimiter)
-            where T : IFormattable<T>
-                => new SpanFormatter<T>(delimiter != null ? delimiter.Value.ToString() : string.Empty);
+            where T : ICustomFormattable
+                => new SpanFormatter<T>(SeqFormatConfig.Define(delimiter ?? DefaultSeqFormatConfig.Default.Delimiter));
     }
 
     public readonly struct SpanFormatter<T> : ISpanFormatter<T>
-        where T : IFormattable<T>
+        where T : ICustomFormattable
     {
-        public string Delimiter {get;}
+        readonly SeqFormatConfig Config;
 
         [MethodImpl(Inline)]
-        internal SpanFormatter(string delimiter)
+        internal SpanFormatter(SeqFormatConfig config)
         {
-            this.Delimiter = delimiter ?? string.Empty;
+            this.Config = config;
         }
 
         public string Format(ReadOnlySpan<T> src)
-            => FormatElements(src).Concat(Delimiter);
+            => FormatItems(src).Concat(Config.Delimiter);
 
-        public ReadOnlySpan<string> FormatElements(ReadOnlySpan<T> src)
+        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src)
         {
             var dst = new string[src.Length];
             for(var i=0; i<dst.Length; i++)
                 dst[i] = src[i].Format();
             return dst;
-        }
-
-        public string Format(object src)
-            => throw new NotSupportedException("No can do; spans can never be objects! Use a better operand");
+        }        
     }
+
+    public readonly struct SpanFormatter<T, C> : ISpanFormatter<T, C>
+        where T : ICustomFormattable
+        where C : ISeqFormatConfig
+    {
+        public string Format(ReadOnlySpan<T> src, in C config)
+            => FormatItems(src).Concat(config.Delimiter);
+
+        public string Format(ReadOnlySpan<T> src)
+            => FormatItems(src).Concat(DefaultSeqFormatConfig.Default.Delimiter);
+
+        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in C config)
+            => FormatItems(src);
+
+        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src)
+        {
+            var dst = new string[src.Length];
+            for(var i=0; i<dst.Length; i++)
+                dst[i] = src[i].Format();
+            return dst;
+        }        
+    }
+
 }

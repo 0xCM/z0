@@ -9,10 +9,11 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     
-    using static zfunc;    
+    using static Root;    
 
-    partial class xfunc
+    public static class HexFormatExtensions
     {
         const string UC = "X";
 
@@ -38,7 +39,7 @@ namespace Z0
             where T : unmanaged
         {
             var delimiter = sep ?? AsciSym.Space;
-            var fmt = buildstring();
+            var fmt = new StringBuilder();
             if(bracket)
                 fmt.Append(AsciSym.LBracket);
 
@@ -72,7 +73,7 @@ namespace Z0
         static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
-            var sb =buildstring();
+            var sb = new StringBuilder();
             var pre = (specifier && prespec) ? "0x" : string.Empty;
             var post = (specifier && !prespec) ? "h" : string.Empty;
             var spec = HexFmtSpec(uppercase);
@@ -86,7 +87,7 @@ namespace Z0
                 var value = src[i].ToString(spec);
                 var padded = zpad ? value.PadLeft(2,AsciDigits.A0) : value;
 
-                sb.Append(concat(pre, padded, post));
+                sb.Append(text.concat(pre, padded, post));
                 if(i != src.Length - 1)
                     sb.Append(sep);
                 
@@ -293,7 +294,7 @@ namespace Z0
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
         public static string FormatHexList(this IEnumerable<byte> src, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true)
-                => bracket(src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(comma()));
+                => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(AsciSym.Comma).Bracket();
 
         /// <summary>
         /// Formtas an array of bytes as a hex string
@@ -468,10 +469,10 @@ namespace Z0
         /// <param name="fmt">The format options</param>
         public static IReadOnlyList<string> FormatHexLines(this byte[] data, HexLineFormat? fmt = null)
         {
-            var dst = buildstring();
+            var dst = new StringBuilder();
             var configured = fmt ?? HexLineFormat.Default;  
             var lines = new List<string>();
-            var line = buildstring();
+            var line = new StringBuilder();
             for(ushort i=0; i< data.Length; i++)
             {                
                 if(i % configured.BytesPerLine == 0)

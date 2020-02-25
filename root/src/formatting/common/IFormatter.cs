@@ -20,15 +20,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source object</param>
         string Format(object src);
-
-        /// <summary>
-        /// Formats a source object using a specified configuration
-        /// </summary>
-        /// <param name="src">The source object</param>
-        /// <param name="config">The format configuration</param>
-        [MethodImpl(Inline)]
-        string Format(object src, IFormatConfig config)
-            => Format(src);
     }
 
     /// <summary>
@@ -49,22 +40,23 @@ namespace Z0
         [MethodImpl(Inline)]
         string IFormatter.Format(object src)
             => Format(src);
-
     } 
 
     /// <summary>
-    /// Characterizes a formatter, parametric in both type and configuration
+    /// Characterizes a configurable formatter, parametric in both type and configuration
     /// </summary>
-    public interface IFormatter<T,C> : IFormatter<T>
+    public interface IFormatter<T,C> : IFormatter<T>, IConfigurableFormatter<C>
         where C : IFormatConfig
     {
         /// <summary>
-        /// Renders a source value according to a supplied configuration
+        /// Formats a source value according to a supplied configuration
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="config">The configuration</param>
-        /// <typeparam name="C">The configuration type</typeparam>
-        [MethodImpl(Inline)]
         string Format(T src, in C config);
-    }
+
+        [MethodImpl(Inline)]
+        string IConfigurableFormatter<C>.Format(object src, in C config)
+            => Format((T)src, config);
+    }    
 }

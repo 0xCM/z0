@@ -10,9 +10,10 @@ namespace Z0
     using System.Globalization;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
+    using static Refs;
+    using static Nats;
     using static AsIn;     
-    using static Stacks;
 
     public static class Hex
     {
@@ -154,7 +155,7 @@ namespace Z0
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                @char(ref dst, i) = (char)skip(in codes, (value >> i*4) & 0xF);
+                Stacks.@char(ref dst, i) = (char)skip(in codes, (value >> i*4) & 0xF);
             return Stacks.charspan(ref storage);
         }
 
@@ -171,7 +172,7 @@ namespace Z0
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                @char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
+                Stacks.@char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
             return Stacks.charspan(ref storage);
         }
 
@@ -188,7 +189,7 @@ namespace Z0
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                @char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
+                Stacks.@char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
             return Stacks.charspan(ref storage);
         }
 

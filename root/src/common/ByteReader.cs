@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    using static zfunc;
+    using static Root;
+    using static Refs;
 
-    readonly struct ByteReader : IByteReader
+    public readonly struct ByteReader : IByteReader
     {
         public IContext Context {get;}
         

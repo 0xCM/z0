@@ -146,7 +146,7 @@ namespace Z0
             if(Config.EmitFunctionHeaderEncoding)
             {
                 var formatter = HexFormatter.Define<byte>();
-                var formatted = formatter.Format(code.Encoded,Config.FunctionHeaderEncodingFormat);                
+                var formatted = formatter.Format(code.Encoded, Config.FunctionHeaderEncodingFormat);                
                 dataline += concat(spaced(AsciSym.Eq), embrace(formatted));
             }
             return dataline;

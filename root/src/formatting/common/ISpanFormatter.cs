@@ -11,27 +11,49 @@ namespace Z0
 
     using static Root;
 
-   public interface ISpanFormatter<T> : ISequenceFormatter<T>
-        where T : IFormattable<T>
+   public interface ISpanFormatter<T> : ISeqFormatter<T>
     {
         string Format(ReadOnlySpan<T> src);
-
-        ReadOnlySpan<string> FormatElements(ReadOnlySpan<T> src);
+        
+        ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src);
     }
 
-   public interface IStreamFormatter<T> : ISequenceFormatter<T>
-        where T : IFormattable<T>
+   public interface ISpanFormatter<T,C> : ISpanFormatter<T>, ISeqFormatter<T,C>
+        where C : ISeqFormatConfig
     {
-        string Format(IEnumerable<T> src);
+        string Format(ReadOnlySpan<T> src, in C config);
 
-        IEnumerable<string> FormatElements(IEnumerable<T> src);
+        ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in C config);
+
     }
 
-   public interface IArrayFormatter<T> : ISequenceFormatter<T>
-        where T : IFormattable<T>
+   public interface ISpanFormatter<T,C,E> : ISpanFormatter<T,C>, ISeqFormatter<T,C,E>
+        where C : ISeqFormatConfig
+        where E : IFormatConfig
     {
-        string Format(T[] src);
-
-        string[] FormatElements(T[] src);
+         
     }
+
+   public interface IElementConfiguredSpanFormatter<T,C> : ISpanFormatter<T>, IElementConfiguredSeqFormatter<T,C>
+        where T : IConfiguredCustomFormattable
+        where C : ISeqFormatConfig
+    {
+        string Format(ReadOnlySpan<T> src, in C config);
+
+        ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in C config);
+
+    }
+
+   public interface IElementConfiguredSpanFormatter<T,C,E> : IElementConfiguredSpanFormatter<T,C>, IElementConfiguredSeqFormatter<T,C,E>
+        where T : IConfiguredCustomFormattable
+        where C : ISeqFormatConfig
+        where E : IFormatConfig
+    {
+
+        string Format(ReadOnlySpan<T> src, in C seqconfig, in E itemconfig);
+
+        ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in C seqconfig, in E itemconfig);
+
+    }
+
 }

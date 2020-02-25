@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+    using System.Runtime.InteropServices;
+    
     using static Root;
 
-    /// <summary>
-    /// Base interface for formatters that format sequences of formattable things
-    /// </summary>
-    /// <typeparam name="T">The sequence element type</typeparam>
-    public interface ISequenceFormatter<T> : IFormatter
-        where T : IFormattable<T>
+    interface IBaseHexFormatter<F,T> : IBaseHexFormatter<T>
+        where F : struct, IBaseHexFormatter<F,T>
+        where T : struct
     {
-        string Delimiter {get;}
-    }     
+        
+    }
 }

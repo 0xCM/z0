@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public readonly struct HexLineFormat
     {
         public static HexLineFormat Default => new HexLineFormat(4,true);

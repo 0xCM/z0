@@ -16,15 +16,6 @@ namespace Z0
     public static class CustomFormattableX
     {
         /// <summary>
-        /// Formats any object, using a custom configurable formatter if it exists or invoking ToString() if not
-        /// </summary>
-        /// <param name="src">The object to format</param>
-        /// <param name="src">The format configuration</param>
-        [MethodImpl(Inline)]
-        public static string Format(this object src, IFormatConfig config)
-            => Formatting.format(src, config);
-
-        /// <summary>
         /// Formats a type that provides intrinsic format capability
         /// </summary>
         /// <param name="src">The value to format</param>
@@ -33,6 +24,26 @@ namespace Z0
         public static string Format<T>(this T src)
             where T : ICustomFormattable
                 => src.Format();
+
+        /// <summary>
+        /// Formats a type that provides intrinsic format capability
+        /// </summary>
+        /// <param name="src">The value to format</param>
+        /// <typeparam name="T">The formattable value type</typeparam>
+        [MethodImpl(Inline)]
+        public static string Format<T>(this T src, IFormatConfig config)
+            where T : IConfiguredCustomFormattable
+                => src.Format(config);
+
+        /// <summary>
+        /// Formats a type that provides intrinsic format capability
+        /// </summary>
+        /// <param name="src">The value to format</param>
+        /// <typeparam name="T">The formattable value type</typeparam>
+        [MethodImpl(Inline)]
+        public static string Format<T,C>(this T src, C config)
+            where T : IConfiguredCustomFormattable<C>
+                => src.Format(config);
     }
 
     public static class NumericFormattableX

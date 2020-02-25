@@ -21,45 +21,6 @@ namespace Z0
         public static string format(object src)
             => src.GetFormatter().Format(src);
 
-        /// <summary>
-        /// Formats any object, using a custom configurable formatter if it exists or invoking ToString() if not
-        /// </summary>
-        /// <param name="src">The object to format</param>
-        [MethodImpl(Inline)]
-        public static string format(object src, IFormatConfig config)
-            => src.GetFormatter().Format(src,config);
-
-        /// <summary>
-        /// Formats any object, using a custom configurable formatter if it exists or invoking ToString() if not
-        /// </summary>
-        /// <param name="src">The object to format</param>
-        [MethodImpl(Inline)]
-        public static string format<C>(object src, C config)
-            where C : IFormatConfig
-                => src.GetFormatter().Format(src,config);
-
-        /// <summary>
-        /// Formats a span containing formattable things
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="delimiter">An optional element delimiter</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        [MethodImpl(Inline)]
-        public static string format<T>(ReadOnlySpan<T> src, char delimiter)
-            where T : IFormattable<T>
-                => SpanFormatter.@default<T>(delimiter).Format(src);
-
-        /// <summary>
-        /// Formats a span containing formattable things
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="delimiter">An optional element delimiter</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        [MethodImpl(Inline)]
-        public static string format<T>(ReadOnlySpan<T> src, string delimiter = null)
-            where T : IFormattable<T>
-                => SpanFormatter.@default<T>(delimiter).Format(src);
-
         [MethodImpl(Inline)]
         static IFormatter CreateFormatter(Type realization)
         {

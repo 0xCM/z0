@@ -14,14 +14,21 @@ namespace Z0
     {
         string Format();
 
-        [MethodImpl(Inline)]
-        string Format(IFormatConfig config)
-            => Format();
+    }
+
+    public interface IConfiguredCustomFormattable : ICustomFormattable
+    {
+        string Format(IFormatConfig config);        
+
+    }
+
+    public interface IConfiguredCustomFormattable<C> : IConfiguredCustomFormattable
+    {
+        string Format(C config);
 
         [MethodImpl(Inline)]
-        string Format<C>(C config)
-            where C : IFormatConfig
-                => Format();
+        string IConfiguredCustomFormattable.Format(IFormatConfig config)
+            => Format((C)config);
     }
 
     /// <summary>

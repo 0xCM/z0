@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
     
-
-    /// <summary>
-    /// Defines proof attempts for type naturals
-    /// </summary>
     public static class HexConst
     {
         public const byte x1 = 0x1;

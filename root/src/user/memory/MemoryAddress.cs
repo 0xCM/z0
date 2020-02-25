@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
-    public readonly struct MemoryAddress : IEquatable<MemoryAddress>, IComparable<MemoryAddress>, IFormattable<MemoryAddress>
+    public readonly struct MemoryAddress : IEquatable<MemoryAddress>, IComparable<MemoryAddress>
     {
         public static MemoryAddress Zero => default;
 
@@ -75,11 +75,9 @@ namespace Z0
             this.Location = absolute;
         }
         
-        public string Format()
-            => Location.FormatAsmHex();
 
-        public override string ToString()
-            => Format();         
+        // public override string ToString()
+        //     => Format();         
 
         public override int GetHashCode()
             => Location.GetHashCode();

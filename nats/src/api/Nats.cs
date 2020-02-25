@@ -275,7 +275,6 @@ namespace Z0
 
         public static N16384 n16384 => default; 
 
-        public static N32768 n32768 => default; 
-            
+        public static N32768 n32768 => default;             
     }
 }

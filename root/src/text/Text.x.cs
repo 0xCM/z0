@@ -69,5 +69,8 @@ namespace Z0
         /// <param name="src">The source string</param>
         public static string RemoveWhitespace(this string src)
             => src.RemoveAny(items(AsciSym.Space, AsciEscape.LineFeed, AsciEscape.NewLine, AsciEscape.Tab));
+
+        public static string Bracket(this string src)
+            => $"[{src}]";
     }
 }

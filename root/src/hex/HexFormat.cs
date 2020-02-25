@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a common set of hex formatting options
@@ -52,6 +52,10 @@ namespace Z0
         public readonly char Delimiter;
 
         [MethodImpl(Inline)]
+        public static implicit operator HexSeqFormat(in HexFormat src)
+            => HexSeqFormat.Define(src);
+
+        [MethodImpl(Inline)]
         public static HexFormat Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
             => new HexFormat(zpad,specifier,uppercase,prespec, delimiter ?? AsciSym.Comma);
         
@@ -65,6 +69,22 @@ namespace Z0
             this.CaseFormatChar = uppercase ? 'X' : 'x';
             this.Delimiter = delimiter;
         }
+    }
+
+    public readonly struct HexSeqFormat : ISeqFormatConfig<HexSeqFormat>, IFormatConfig<HexSeqFormat>
+    {
+        public static HexSeqFormat Define(in HexFormat hex, string delimiter = null)
+            => new HexSeqFormat(hex, delimiter ?? hex.Delimiter.ToString());
+            
+        HexSeqFormat(in HexFormat hex, string delimiter)
+        {
+            this.Delimiter = delimiter;
+            this.HexFormat = hex;
+        }
+            
+        public HexFormat HexFormat {get;}            
+        
+        public string Delimiter {get;}
 
     }
 }

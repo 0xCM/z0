@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines an inclusive address range
@@ -94,7 +94,7 @@ namespace Z0
         }
 
         public string Format()
-            => bracket(concat(Start.FormatAsmHex(), AsciSym.Comma, AsciSym.Space, End.FormatAsmHex()));
+            => text.concat(Start.FormatAsmHex(), AsciSym.Comma, AsciSym.Space, End.FormatAsmHex()).Bracket();
 
         public override string ToString()
             => Format();
@@ -120,5 +120,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(MemoryRange other)
             => this == other ? 0 : this < other ? -1 : 1;
+    }
+
+    public static class MemoryAddressX
+    {
+        public static string Format(this MemoryAddress src)
+            => src.Location.FormatAsmHex();
+
     }
 }

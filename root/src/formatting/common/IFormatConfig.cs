@@ -18,6 +18,13 @@ namespace Z0
         
     }
 
+    public interface IFormatConfig<C> : IFormatConfig
+        where C : struct, IFormatConfig<C>
+    {
+
+        
+    }
+
     /// <summary>
     /// Reifies a meaningless implementation of IFormatConfig
     /// </summary>
