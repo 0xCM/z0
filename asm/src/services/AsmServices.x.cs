@@ -26,7 +26,22 @@ namespace Z0
 
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
             => AsmInstructionSource.FromProducer(() => GetInstructions(archive));
-        
+
+        public static IEnumerable<AssemblyId> ActiveAssemblies(this IAsmContext context)
+        {
+            var settings = AppSettings.Load("z0.control").Pairs;
+            foreach(var (key,value) in settings)
+            {
+                var index = key.Split(colon());            
+                if(index.Length == 2 && bit.Parse(index[1]))
+                {
+                    var id = Enums.parse<AssemblyId>(value);
+                    if(id != AssemblyId.None)
+                        yield return id;                        
+                }
+            }
+        }
+
     }
     
 }

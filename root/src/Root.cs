@@ -10,20 +10,17 @@ namespace Z0
     using System.Linq;
 
     public static class Root
-    {
-        public static readonly Terminal terminal = Terminal.Get();
-        
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
-        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
-
-        public const StringComparison IgnoreCase = StringComparison.InvariantCultureIgnoreCase;
-
+    {        
         /// <summary>
         /// Specifies the name of the windows kernel32 dll, primarily intended for use in DllImport attributions
         /// </summary>
         public const string Kernel32 = "kernel32.dll";
 
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
+        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
+
+        public const StringComparison IgnoreCase = StringComparison.InvariantCultureIgnoreCase;
 
         [MethodImpl(Inline)]
         public static NotSupportedException unsupported(object value)
@@ -45,6 +42,23 @@ namespace Z0
         public static int bitsize<T>()            
             where T : unmanaged
                 => Unsafe.SizeOf<T>()*8;
+
+        /// <summary>
+        /// Defines a non-valued option
+        /// </summary>
+        /// <typeparam name="T">The value type, if the value existed</typeparam>
+        [MethodImpl(Inline)]
+        public static Option<T> none<T>()
+            => Option.none<T>();
+
+        /// <summary>
+        /// Defines a valued option
+        /// </summary>
+        /// <param name="value">The value</param>
+        /// <typeparam name="T">The type of the extant value</typeparam>
+        [MethodImpl(Inline)]
+        public static Option<T> some<T>(T value)
+            => Option.some(value);
 
         /// <summary>
         /// Consructs an array from a parameter array
@@ -79,27 +93,6 @@ namespace Z0
                     action(item);
         }
 
-        [MethodImpl(Inline)]
-        internal static bool IdentityEquals(string lhs, string rhs)
-            => IdentityCommons.IdentityEquals(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        internal static int IdentityCompare(IIdentity lhs, IIdentity rhs)
-            => IdentityCommons.IdentityCompare(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        internal static bool IdentityEquals(IIdentity lhs, object rhs)
-            => IdentityCommons.IdentityEquals(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        internal static bool IdentityEquals<T>(in T lhs, in T rhs)
-            where T : struct, IIdentity<T>
-                => IdentityCommons.IdentityEquals(lhs, rhs);   
-
-        [MethodImpl(Inline)]
-        internal static int IdentityHashCode<T>(in T src)     
-            where T : struct, IIdentity<T>
-                => IdentityCommons.IdentityHashCode(src);
 
         /// <summary>
         /// Right now
@@ -138,7 +131,7 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool empty(string src)
-            => String.IsNullOrWhiteSpace(src);
+            => string.IsNullOrWhiteSpace(src);
 
         /// <summary>
         /// Tests whether the source string is nonempty
@@ -146,7 +139,7 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool nonempty(string src)
-            => !String.IsNullOrWhiteSpace(src);
+            => !string.IsNullOrWhiteSpace(src);
 
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 
@@ -154,7 +147,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The result type</typeparam>
         /// <param name="f">The function to evaluate</param>
-        public static Option<T> Try<T>(Func<T> f, Action<Exception> error = null)
+        public static Option<T> Try<T>(Func<T> f, Action<Exception> handler = null)
         {
             try
             {
@@ -162,8 +155,9 @@ namespace Z0
             }
             catch (Exception e)
             {
-                error?.Invoke(e);
-                return Option.none<T>();
+                handler?.Invoke(e);
+                term.error(e);            
+                return none<T>();
             }
         }
 
@@ -173,7 +167,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function to evaluate</param>
         /// <typeparam name="T">The function result type, if successful</typeparam>
-        public static Option<T> Try<T>(Func<Option<T>> f, Action<Exception> error = null)
+        public static Option<T> Try<T>(Func<Option<T>> f, Action<Exception> handler = null)
         {
             try
             {
@@ -181,10 +175,9 @@ namespace Z0
             }
             catch (Exception e)
             {
-                if(error != null)
-                    error(e);
-
-                return Option.none<T>();
+                handler?.Invoke(e);
+                term.error(e);            
+                return none<T>();
             }
         }
 
@@ -195,7 +188,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The action to invoke</param>
         /// <param name="onerror">The error handler to call, if specified</param>
-        public static void Try(Action f, Action<Exception> error = null)
+        public static void Try(Action f, Action<Exception> handler = null)
         {
             try
             {
@@ -203,8 +196,8 @@ namespace Z0
             }
             catch(Exception e)
             {
-                if(error != null)
-                    error(e);
+                handler?.Invoke(e);
+                term.error(e);            
             }
         }
 
@@ -217,7 +210,7 @@ namespace Z0
         /// <param name="x">The input value</param>
         /// <param name="f">The function to evaluate</param>
         [MethodImpl(Inline)]   
-        public static Option<Y> Try<X, Y>(X x, Func<X, Y> f, Action<Exception> error = null)
+        public static Option<Y> Try<X, Y>(X x, Func<X, Y> f, Action<Exception> handler = null)
         {
             try
             {
@@ -225,10 +218,9 @@ namespace Z0
             }
             catch (Exception e)
             {
-                if(error != null)
-                    error(e);
-                
-                return Option.none<Y>();
+                handler?.Invoke(e);
+                term.error(e);                
+                return none<Y>();
             }
         }
 
@@ -239,8 +231,28 @@ namespace Z0
         /// <param name="item">The object to cast</param>
         [MethodImpl(Inline)]   
         public static Option<T> TryCast<T>(object item)
-            => item is T ? Option.some((T)item) : Option.none<T>();
+            => item is T ? some((T)item) : none<T>();
 
- 
+        [MethodImpl(Inline)]
+        internal static bool IdentityEquals(string lhs, string rhs)
+            => IdentityCommons.IdentityEquals(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        internal static int IdentityCompare(IIdentity lhs, IIdentity rhs)
+            => IdentityCommons.IdentityCompare(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        internal static bool IdentityEquals(IIdentity lhs, object rhs)
+            => IdentityCommons.IdentityEquals(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        internal static bool IdentityEquals<T>(in T lhs, in T rhs)
+            where T : struct, IIdentity<T>
+                => IdentityCommons.IdentityEquals(lhs, rhs);   
+
+        [MethodImpl(Inline)]
+        internal static int IdentityHashCode<T>(in T src)     
+            where T : struct, IIdentity<T>
+                => IdentityCommons.IdentityHashCode(src);
     }
 }

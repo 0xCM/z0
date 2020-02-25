@@ -15,11 +15,11 @@ namespace Z0
         [MethodImpl(Inline),Op,NumericClosures(NumericKind.All)]
         public static BoxedNumber number<T>(T src)
             where T : unmanaged
-                => new BoxedNumber(src);
+                => new BoxedNumber(src, Numeric.kind<T>());
 
         [MethodImpl(Inline),Op]
-        public static BoxedNumber from(object src)
-            => new BoxedNumber(src);
+        public static BoxedNumber number(object src, NumericKind kind)
+            => new BoxedNumber(src ?? new object(), kind);
 
         [MethodImpl(Inline),Op,NumericClosures(NumericKind.All)]
         public static T unbox<T>(BoxedNumber src)
@@ -28,11 +28,11 @@ namespace Z0
 
         [MethodImpl(Inline),Op]
         public static BoxedNumber convert(BoxedNumber src, NumericKind dst)
-            => BoxOps.from(dst.Convert(src.Value));
+            => number(dst.Convert(src.Value), dst);
 
         [MethodImpl(Inline),Op]
         public static BoxedNumber convert(BoxedNumber src, Type target)
-            => from(target.NumericKind().Convert(src.Value));
+            => convert(src, target.NumericKind());
 
         [MethodImpl(Inline),Op,NumericClosures(NumericKind.All)]
         public static T convert<T>(BoxedNumber src)

@@ -10,25 +10,10 @@ namespace Z0
 
     using static Root;
     using static As;
-    using static BitConversion;
+    using static Converter;
 
-    readonly struct BitConversionProvider : IUnmanagedConversionProvider<BiConverter, bit>
+    public readonly struct BitConversion : IUnmanagedConverter<BitConversion, bit>
     {
-        public BiConverter Converter 
-        {
-            [MethodImpl(Inline)]
-            get => BitConversion.Converter;
-        }
-    }
-
-    public readonly struct BitConversion 
-    {
-        public static BiConverter Converter
-        {
-            [MethodImpl(Inline)]
-            get => BiConverter.Service;
-        }
-
         [MethodImpl(Inline)]
         public static From<T> FromBit<T>()
             where T : unmanaged
@@ -38,21 +23,30 @@ namespace Z0
         public static To<T> ToBit<T>()
             where T : unmanaged
                 => To<T>.Service;
-        
-        public readonly struct BiConverter : IUnmanagedConverter<bit>
-        {
-            public static BiConverter Service => default(BiConverter);
 
-            [MethodImpl(Inline)]
-            public T Convert<T>(bit src)
-                where T : unmanaged
-                    => FromBit<T>().Convert(src);
+        [MethodImpl(Inline)]
+        public T Convert<T>(bit src)
+            where T : unmanaged
+                => FromBit<T>().Convert(src);
 
-            [MethodImpl(Inline)]
-            public bit Convert<T>(T src) 
-                where T : unmanaged
-                    => ToBit<T>().Convert(src);
-        }
+        [MethodImpl(Inline)]
+        public bit Convert<T>(T src) 
+            where T : unmanaged
+                => ToBit<T>().Convert(src);
+
+        static Option<object> FromTarget(object incoming, Type dst)
+            => Try(() => oconvert((uint)(bit)incoming, dst.NumericKind()));
+
+        static Option<object> ToTarget(object incoming)
+            => Try(() => (bit)(byte)oconvert(incoming, NumericKind.U8));
+
+        [MethodImpl(Inline)]
+        public Option<object> ConvertFromTarget(object incoming, Type dst)
+            => FromTarget(incoming,dst);
+
+        [MethodImpl(Inline)]
+        public Option<object> ConvertToTarget(object incoming)
+            => ToTarget(incoming);
 
         public readonly struct From<T> : IUnmanagedConveter<bit,T>
             where T : unmanaged
@@ -123,6 +117,5 @@ namespace Z0
                     throw unsupported<T>();
             }
         }
-
     }
 }

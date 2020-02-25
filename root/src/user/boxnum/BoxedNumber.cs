@@ -13,14 +13,30 @@ namespace Z0
     /// <summary>
     /// A numbered box
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 8), IdentityProvider]
+    [
+        IdentityProvider, 
+        UserType(RootTypeCodes.BoxedNumberId), 
+        ConversionProvider(typeof(BoxedNumberConverter))
+    ]
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
     {
+        /// <summary>
+        /// In the box
+        /// </summary>
         public readonly object Value;     
 
+        /// <summary>
+        /// Box discriminator for runtime efficiency
+        /// </summary>
+        public readonly NumericKind kind;
+
+
         [MethodImpl(Inline)]
-        internal BoxedNumber(object src)
-            => this.Value = src;
+        internal BoxedNumber(object src, NumericKind kind)
+        {
+            this.Value = src;
+            this.kind = kind;
+        }
 
         public NumericKind Kind
             => Numeric.kind(Value.GetType());

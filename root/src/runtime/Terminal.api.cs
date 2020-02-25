@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct term
     {
-        static readonly Terminal T = Root.terminal;
+        static readonly Terminal T = Terminal.Get();
 
         /// <summary>
         /// Writes an empty line to the console

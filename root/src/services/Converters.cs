@@ -13,8 +13,8 @@ namespace Z0
     public static class Converters
     {
         [MethodImpl(Inline)]
-        public static BitConversion.BiConverter BitConverter()
-            => BitConversion.Converter;
+        public static BitConversion BitConverter()
+            => default(BitConversion);
     }
 
 }

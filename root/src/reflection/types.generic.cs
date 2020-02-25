@@ -23,7 +23,7 @@ namespace Z0
             return (t.IsGenericType || t.IsGenericTypeDefinition) && !t.IsConstructedGenericType;
         }
 
-       /// <summary>
+        /// <summary>
         /// If a type is non-generic, returns an emtpy list.
         /// If a type is open generic, returns a list of generic arguments
         /// If a type is closed generic, returns a list of the types that were supplied as arguments to construct the type
@@ -84,6 +84,5 @@ namespace Z0
             else
                 return typeof(void);            
         }
-
     }
 }

@@ -12,6 +12,10 @@ namespace Z0
     /// <summary>
     /// Captures the length of a time period predicated on timer ticks
     /// </summary>
+    [
+        ConversionProvider(typeof(DurationConverter)),
+        UserType(RootTypeCodes.DurationId)
+    ]
     public readonly struct Duration : IFormattable<Duration>, IEquatable<Duration>, IComparable<Duration>
     {
         /// <summary>
@@ -37,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Duration(long timerTicks)
             => Define(timerTicks);
-            
+
         [MethodImpl(Inline)]
         public static Duration operator +(Duration lhs, Duration rhs)
             => new Duration(lhs.Ticks + rhs.Ticks);

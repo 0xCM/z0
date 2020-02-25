@@ -21,16 +21,14 @@ namespace Z0
     /// data structure that garners special treatment by the runtime. A user-defined
     /// type predicated on a byte would not enjoy this status and would endure
     /// a constant barrage of shifts, movements, etc. from not being 32-bit aligned.
-    /// </remarks>
+    /// </remarks>    
     [
         IdentityProvider, 
-        UserPrimitive(RootTypeCodes.Bit), 
-        ConversionProvider(typeof(BitConversionProvider))
+        UserType(RootTypeCodes.BitId), 
+        ConversionProvider(typeof(BitConversion))
     ]
-    public readonly struct bit : IUserPrimitive<bit>, ITypeIdentityProvider<bit>
+    public readonly struct bit : ITypeIdentityProvider<bit>
     {
-        public const uint PrimitiveId = 1u;
-
         public const char Zero = '0';
 
         public const char One = '1';
@@ -604,12 +602,6 @@ namespace Z0
         public static bool operator !=(bit a, bit b)
             => a.state != b.state;
 
-        uint IUserPrimitive.PrimitiveId 
-        {
-            [MethodImpl(Inline)]
-            get => PrimitiveId;
-        }
-
         [MethodImpl(Inline)]
         public bool Equals(bit b)
             => state == b.state;
@@ -653,6 +645,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public TypeIdentity DefineIdentity()
             => TypeIdentity.Define("1u");
-
     }
 }

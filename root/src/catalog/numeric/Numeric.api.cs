@@ -28,7 +28,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static NumericKind kind<T>()
-            where T : unmanaged
+            where T : struct
                 => kind_u<T>();
 
         /// <summary>
@@ -247,338 +247,9 @@ namespace Z0
         public static bool @is(NumericKind k, NumericId match)        
             => ((uint)k & (uint)match) != 0;
 
-        [Op]
-        public static object convert(NumericKind dst, object src)
-        {
-            var tc = Type.GetTypeCode(src?.GetType());
-            switch(tc)
-            {
-                case TC.SByte:
-                    return FromInt8(dst, src);
-
-                case TC.Byte:
-                    return FromUInt8(dst, src);
-
-                case TC.Int16:
-                    return FromInt16(dst, src);
-
-                case TC.UInt16:
-                    return FromUInt16(dst, src);
-                
-                case TC.Int32:
-                    return FromInt32(dst, src);
-
-                case TC.UInt32:
-                    return FromUInt32(dst, src);
-
-                case TC.Int64:
-                    return FromInt64(dst, src);
-
-                case TC.UInt64:
-                    return FromUInt64(dst, src);
-
-                case TC.Single:
-                    return FromFloat32(dst, src);
-
-                case TC.Double:
-                    return FromFloat64(dst,src);
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromInt8(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(sbyte)src;
-                case NK.I8:
-                    return (sbyte)(sbyte)src;
-                case NK.I16:
-                    return (short)(sbyte)src;
-                case NK.U16:
-                    return (ushort)(sbyte)src;
-                case NK.I32:
-                    return (int)(sbyte)src;
-                case NK.U32:
-                    return (uint)(sbyte)src;
-                case NK.I64:
-                    return (long)(sbyte)src;
-                case NK.U64:
-                    return (ulong)(sbyte)src;
-                case NK.F32:
-                    return (float)(sbyte)src;
-                case NK.F64:
-                    return (double)(sbyte)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromUInt8(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(byte)src;
-                case NK.I8:
-                    return (sbyte)(byte)src;
-                case NK.I16:
-                    return (short)(byte)src;
-                case NK.U16:
-                    return (ushort)(byte)src;
-                case NK.I32:
-                    return(int)(byte)src;
-                case NK.U32:
-                    return (uint)(byte)src;
-                case NK.I64:
-                    return (long)(byte)src;
-                case NK.U64:
-                    return (ulong)(byte)src;
-                case NK.F32:
-                    return (float)(byte)src;
-                case NK.F64:
-                    return (double)(byte)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromInt16(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(short)src;
-                case NK.I8:
-                    return (sbyte)(short)src;
-                case NK.I16:
-                    return (short)(short)src;
-                case NK.U16:
-                    return (ushort)(short)src;
-                case NK.I32:
-                    return (int)(short)src;
-                case NK.U32:
-                    return (uint)(short)src;
-                case NK.I64:
-                    return (long)(short)src;
-                case NK.U64:
-                    return (ulong)(short)src;
-                case NK.F32:
-                    return (float)(short)src;
-                case NK.F64:
-                    return (double)(short)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromUInt16(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(ushort)src;
-                case NK.I8:
-                    return (sbyte)(ushort)src;
-                case NK.I16:
-                    return (short)(ushort)src;
-                case NK.U16:
-                    return (ushort)(ushort)src;
-                case NK.I32:
-                    return (int)(ushort)src;
-                case NK.U32:
-                    return (uint)(ushort)src;
-                case NK.I64:
-                    return (long)(ushort)src;
-                case NK.U64:
-                    return (ulong)(ushort)src;
-                case NK.F32:
-                    return (float)(ushort)src;
-                case NK.F64:
-                    return (double)(ushort)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromInt32(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(int)src;
-                case NK.I8:
-                    return (sbyte)(int)src;
-                case NK.I16:
-                    return (short)(int)src;
-                case NK.U16:
-                    return (ushort)(int)src;
-                case NK.I32:
-                    return (int)(int)src;
-                case NK.U32:
-                    return (uint)(int)src;
-                case NK.I64:
-                    return (long)(int)src;
-                case NK.U64:
-                    return (ulong)(int)src;
-                case NK.F32:
-                    return (float)(int)src;
-                case NK.F64:
-                    return (double)(int)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromUInt32(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(uint)src;
-                case NK.I8:
-                    return (sbyte)(uint)src;
-                case NK.I16:
-                    return (short)(uint)src;
-                case NK.U16:
-                    return (ushort)(uint)src;
-                case NK.I32:
-                    return (int)(uint)src;
-                case NK.U32:
-                    return (uint)(uint)src;
-                case NK.I64:
-                    return (long)(uint)src;
-                case NK.U64:
-                    return (ulong)(uint)src;
-                case NK.F32:
-                    return (float)(uint)src;
-                case NK.F64:
-                    return (double)(uint)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromInt64(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(long)src;
-                case NK.I8:
-                    return (sbyte)(long)src;
-                case NK.I16:
-                    return (short)(long)src;
-                case NK.U16:
-                    return (ushort)(long)src;
-                case NK.I32:
-                    return (int)(long)src;
-                case NK.U32:
-                    return (uint)(long)src;
-                case NK.I64:
-                    return (long)(long)src;
-                case NK.U64:
-                    return (ulong)(long)src;
-                case NK.F32:
-                    return (float)(long)src;
-                case NK.F64:
-                    return (double)(long)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromUInt64(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(ulong)src;
-                case NK.I8:
-                    return (sbyte)(ulong)src;
-                case NK.I16:
-                    return (short)(ulong)src;
-                case NK.U16:
-                    return (ushort)(ulong)src;
-                case NK.I32:
-                    return (int)(ulong)src;
-                case NK.U32:
-                    return (uint)(ulong)src;
-                case NK.I64:
-                    return (long)(ulong)src;
-                case NK.U64:
-                    return (ulong)(ulong)src;
-                case NK.F32:
-                    return (float)(ulong)src;
-                case NK.F64:
-                    return (double)(ulong)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromFloat32(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(float)src;
-                case NK.I8:
-                    return (sbyte)(float)src;
-                case NK.I16:
-                    return (short)(float)src;
-                case NK.U16:
-                    return (ushort)(float)src;
-                case NK.I32:
-                    return (int)(float)src;
-                case NK.U32:
-                    return (uint)(float)src;
-                case NK.I64:
-                    return (long)(float)src;
-                case NK.U64:
-                    return (ulong)(float)src;
-                case NK.F32:
-                    return (float)(float)src;
-                case NK.F64:
-                    return (double)(float)src;
-            }
-            return src;
-        }
-
-        [Op]
-        static object FromFloat64(NumericKind dst, object src)
-        {
-            switch(dst)
-            {
-                case NK.U8:
-                    return (byte)(double)src;
-                case NK.I8:
-                    return (sbyte)(double)src;
-                case NK.I16:
-                    return (short)(double)src;
-                case NK.U16:
-                    return (ushort)(double)src;
-                case NK.I32:
-                    return (int)(double)src;
-                case NK.U32:
-                    return (uint)(double)src;
-                case NK.I64:
-                    return (long)(double)src;
-                case NK.U64:
-                    return (ulong)(double)src;
-                case NK.F32:
-                    return (float)(double)src;
-                case NK.F64:
-                    return (double)(double)src;
-            }
-            return src;
-        }
-
         [MethodImpl(Inline)]
         static NumericKind kind_u<T>()
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(byte))
                 return NumericKind.U8;
@@ -594,7 +265,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static NumericKind kind_i<T>()
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(sbyte))
                 return NumericKind.I8;
@@ -610,7 +281,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static NumericKind kind_f<T>()
-            where T : unmanaged
+            where T : struct
         {
             if(typeof(T) == typeof(float))
                 return NumericKind.F32;
@@ -619,7 +290,6 @@ namespace Z0
             else
                 return NumericKind.None;            
         }
-
 
         [Op]
         static HashSet<NumericKind> kindsetCreate(NumericKind k)       

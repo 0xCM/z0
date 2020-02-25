@@ -10,12 +10,15 @@ namespace Z0
 
     using static Root;
 
-
-    public enum RootTypeCodes : uint
+    public static class UserTypeCodes
     {
-        None = 0,
-
-        Bit = 1
+        [MethodImpl(Inline)]
+        public static UserTypeCode<T> define<S,T>(S source, ulong id, T rep = default)
+            where S : ITypeCodeSource
+        {
+            if(!source.AssignedCodes.Contains(id))
+                throw unsupported<T>();
+            return new UserTypeCode<T>(id);
+        }
     }
-
 }

@@ -10,13 +10,15 @@ namespace Z0
     using System.Runtime.CompilerServices; 
     using System.Text;
 
+    using static Root;
+
     /// <summary>
     /// Implments a thread-safe/thread-aware terminal absraction
     /// </summary>
     public class Terminal
     {
-        public static Terminal Get()
-            => TheOnly;
+        [MethodImpl(Inline)]
+        public static Terminal Get() => TheOnly;
         
         static readonly Terminal TheOnly = new Terminal();
         

@@ -61,7 +61,15 @@ namespace Z0
     {
 
     }
-    
+
+    public interface IValueConversionProvider<C,S> : IConversionProvider
+        where S : struct
+        where C : IValueConverter<S>
+    {
+        C Converter {get;}
+    }
+
+
     public interface IUnmanagedConversionProvider<C,S> : IConversionProvider
         where S : unmanaged
         where C : IUnmanagedConverter<S>
@@ -69,31 +77,67 @@ namespace Z0
         C Converter {get;}
     }
 
-    public interface IConverter<S> : IConverter
+    public interface IBiconverter : IConverter
     {
-        T Convert<T>(S src);
+        /// <summary>
+        /// The supported type
+        /// </summary>
+        Type TargetType {get;}
         
-        S Convert<T>(T src);
+        /// <summary>
+        /// Converts an incoming value to a value of target type, if possible
+        /// </summary>
+        /// <param name="incoming">The value to conver</param>
+        Option<object> ConvertToTarget(object incoming);
+        
+        /// <summary>
+        /// Converts an incoming value of the target type to a value of specified type, if possible
+        /// </summary>
+        /// <param name="incoming">The value to convert</param>
+        Option<object> ConvertFromTarget(object incoming, Type dst);
     }
 
-    public interface IValueConverter<S> : IConverter
+    public interface IBiconverter<S> : IBiconverter
+    {
+        Type IBiconverter.TargetType => typeof(S);
+
+    }
+
+    public interface IValueConverter<S> : IBiconverter<S>
         where S : struct
     {
-        T Convert<T>(S src)
+        /// <summary>
+        /// Converts an incoming value of the target type to a value of specified type, if possible
+        /// </summary>
+        /// <param name="incoming">The value to convert</param>
+        T Convert<T>(S incoming)
             where T : struct;
         
-        S Convert<T>(T src)
+        /// <summary>
+        /// converts an incoming value to a value of target type
+        /// </summary>
+        /// <param name="incoming">The value to convert</param>
+        /// <typeparam name="T">The incoming value type</typeparam>
+        S Convert<T>(T incoming)
             where T : struct;
     }
 
-
-    public interface IUnmanagedConverter<S> : IConverter
+    public interface IUnmanagedConverter<S> : IBiconverter<S>
         where S : unmanaged
     {
-        T Convert<T>(S src)
+        T Convert<T>(S incoming)
             where T : unmanaged;
         
-        S Convert<T>(T src)
+        S Convert<T>(T incoming)
             where T : unmanaged;        
+    }
+
+    public interface IUnmanagedConverter<P,S> : IUnmanagedConverter<S>, IUnmanagedConversionProvider<P,S>
+        where S : unmanaged
+        where P : struct, IUnmanagedConverter<P,S>
+    {
+
+        P IUnmanagedConversionProvider<P,S>.Converter {[MethodImpl(Inline)] get => default(P);}
+
     }
 }

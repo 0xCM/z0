@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]
         public static object Convert(this NK dst, object src)
-            => Numeric.convert(dst,src);
+            => Converter.oconvert(src,dst);
 
         [MethodImpl(Inline)]
         public static NK ToNumericKind(this FixedWidth w, NumericIndicator i) 
