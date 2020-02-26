@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
     using static zfunc;
 
     public interface IImmOpProvider

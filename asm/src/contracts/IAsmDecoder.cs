@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using Z0.AsmSpecs;
-
-    using static zfunc;
+    using Z0.Asm;
 
     /// <summary>
     /// Defines service contract for the decoding phase of the asm capture workflow

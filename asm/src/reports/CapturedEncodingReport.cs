@@ -6,17 +6,13 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static zfunc;
  
-    public readonly struct CapturedEncodings : IReport<CapturedEncoding>
+    public readonly struct CapturedEncodingReport : IReport<CapturedEncodingRecord>
     {
-        public static CapturedEncodings Create(ApiHost src, CapturedEncoding[] records)
-            => new CapturedEncodings(src,records);
+        public static CapturedEncodingReport Create(ApiHost src, CapturedEncodingRecord[] records)
+            => new CapturedEncodingReport(src,records);
 
-        CapturedEncodings(ApiHost src, CapturedEncoding[] records)
+        CapturedEncodingReport(ApiHost src, CapturedEncodingRecord[] records)
         {
             this.Source = src;
             this.Records = records;
@@ -24,12 +20,12 @@ namespace Z0
         
         public ApiHost Source {get;}
 
-        public CapturedEncoding[] Records {get;}
+        public CapturedEncodingRecord[] Records {get;}
 
         public Option<FilePath> Save(FilePath dst)
             => Records.Save(dst); 
 
-        public CapturedEncoding this[int index]
+        public CapturedEncodingRecord this[int index]
             => Records[index];                
 
         public int RecordCount

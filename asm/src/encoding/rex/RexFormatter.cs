@@ -6,8 +6,8 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using Z0;
-    using static zfunc;         
+ 
+    using static Root;         
 
     using RF = RexFieldIndex;   
 

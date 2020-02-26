@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.AsmSpecs
+namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     /// <summary>
     /// Describes an assembly instruction

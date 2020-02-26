@@ -9,8 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static zfunc;
-
     /// <summary>
     /// Defines what is effectively an asm emitter at (! .net) assembly-level granularity
     /// </summary>

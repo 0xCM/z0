@@ -13,7 +13,7 @@ namespace Z0
 
     public interface IEncodingExtractor : IAsmService
     {
-        CapturedEncodings Extract(ApiHost src);
+        CapturedEncodingReport Extract(ApiHost src);
     }
 
 }

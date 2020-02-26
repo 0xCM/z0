@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost(ApiHostKind.Generic)]
     public static class SpanConvert
     {
         /// <summary>

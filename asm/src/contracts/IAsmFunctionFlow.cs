@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
 
     public interface IAsmFunctionPipe  : IObjectObserverPipe<AsmFunction>

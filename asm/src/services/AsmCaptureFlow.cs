@@ -43,7 +43,7 @@ namespace Z0
                 var id = owner.Key;
                 if(Selected.Contains(id))
                 {
-                    EmissionPaths.OwnerRoot(id).Clear();
+                    EmissionPaths.DataFolderDir(id).Clear();
 
                     foreach(var host in owner)
                        yield return RunCaptureWorkflow(host);
@@ -53,14 +53,14 @@ namespace Z0
             iter(Selected, CreateLocationReport);
         }
 
-        void Decode(CapturedEncoding captured, ParsedEncoding encoded, IAsmDecoder decoder,  IAsmFunctionWriter dst)
+        void Decode(CapturedEncodingRecord captured, ParsedEncoding encoded, IAsmDecoder decoder,  IAsmFunctionWriter dst)
         {
             var count = encoded.Length;
             if(count != 0)
             {
-                var op = captured.Operation;
+                var op = captured.GetDescription();
                 var bits = CaptureBits.Define(captured.Data, encoded.Data);
-                var range = MemoryRange.Define(captured.Address, captured.Address + (ulong)count);
+                var range = MemoryRange.Define(captured.Address, captured.Address + (MemoryAddress)count);
                 var tc = encoded.TermCode;
 
                 var final = CaptureState.Define(op.Id, count, range.End, bits.Trimmed.Last());
@@ -70,22 +70,22 @@ namespace Z0
             }
         }
 
-        (CapturedEncodings result, FilePath target) Capture(ApiHost host)
+        (CapturedEncodingReport result, FilePath target) Capture(ApiHost host)
         {
             var extractor = Context.EncodingExtractor();
             var captured = extractor.Extract(host);
-            var target = EmissionPaths.ExtractReport(host);                
+            var target = EmissionPaths.CaptureSummaryPath(host);                
             captured.Save(target)
                         .OnSome(file => print($"Emitted {host} encodings to {file}"))
                         .OnNone(() => error($"Error emitting {host} encodings"));                       
             return (captured,target);
         }
 
-        (ParsedEncodings,FilePath) Parse(ApiHost host, CapturedEncodings captured)
+        (ParsedEncodings,FilePath) Parse(ApiHost host, CapturedEncodingReport captured)
         {
             var parser = Context.EncodingParser();
             var parsed = parser.Parse(host,captured);
-            var target = EmissionPaths.ParseReport(host);
+            var target = EmissionPaths.ParsedPath(host);
             parsed.Save(target)
                         .OnSome(file => print($"Emitted parsed {host} encodings to {file}"))
                         .OnNone(() => error($"Error parsing {host} encodings"));                       
@@ -94,9 +94,9 @@ namespace Z0
             return (parsed,target);
         }
 
-        FilePath Decode(ApiHost host, CapturedEncodings captured, ParsedEncodings parsed)
+        FilePath Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodings parsed)
         {
-            var path = EmissionPaths.DecodedAsmDetail(host);
+            var path = EmissionPaths.DetailPath(host);
             var decoder = Context.Decoder();            
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);
             for(var i=0; i< captured.RecordCount; i++)

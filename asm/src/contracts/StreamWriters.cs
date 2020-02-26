@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     public interface IAsmStreamWriter : IAsmServiceAllocation
     {

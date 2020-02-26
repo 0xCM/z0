@@ -9,13 +9,16 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using Z0.Asm;
     
 
-    public class CapturedEncoding : IRecord<CapturedEncoding>
+    public class CapturedEncodingRecord : IRecord<CapturedEncodingRecord>
     {
         [ReportField(Field.Sequence)]
         public int Sequence {get;set;}
+
+        [ReportField(Field.Address)]
+        public MemoryAddress Address {get; set;}
 
         [ReportField(Field.Length)]
         public int Length {get; set;}
@@ -26,9 +29,6 @@ namespace Z0
         [ReportField(Field.OpId)]
         public OpIdentity OpId {get; set;}
 
-        [ReportField(Field.Address)]
-        public MemoryAddress Address {get; set;}
-
         [ReportField(Field.OpName)]
         public string OpName {get; set;}
         
@@ -36,19 +36,19 @@ namespace Z0
         public string OpSig {get; set;}
         
         [ReportField(Field.Data)]
-        public byte[] Data {get; set;}
+        public EncodedData Data {get; set;}
 
         public string DelimitedText(char sep)
         {
             var dst = text.factory.Builder();
             dst.AppendField(Sequence, Field.Sequence);
+            dst.DelimitField(Address, Field.Address, sep); 
             dst.DelimitField(Length, Field.Length, sep);
             dst.DelimitField(Host, Field.Host, sep);
             dst.DelimitField(OpId, Field.OpId, sep);
-            dst.DelimitField(Address, Field.Address, sep); 
             dst.DelimitField(OpName, Field.OpName, sep);
             dst.DelimitField(OpSig, Field.OpSig, sep);
-            dst.DelimitField(Data.FormatHex(), Field.Data, sep);
+            dst.DelimitField(Data, Field.Data, sep);
             return dst.ToString();
         }
 
@@ -58,20 +58,20 @@ namespace Z0
         OpUri GetOpUri()
             => Z0.OpUri.Hex(Host, OpName, OpId);
 
-        public OpDescriptor Operation        
+        public OpDescriptor GetDescription()        
             => OpDescriptor.Define(GetOpUri(), OpSig);
 
         enum Field
         {
             Sequence = 10,
 
+            Address = 16,
+
             Length = 8,
 
-            Host = 20,
+            Host = 30,
 
             OpId = 60,
-
-            Address = 16,
 
             OpName = 14,
 

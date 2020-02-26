@@ -23,7 +23,7 @@ namespace Z0.Test
         }
 
         static FolderPath DataDir
-            => Paths.DataDir(FolderName.Define("matrices"));
+            => LogPaths.The.DataDir(FolderName.Define("matrices"));
 
 
         static T round<T>(T src)

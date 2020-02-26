@@ -3,7 +3,7 @@
 // License: See the accompanying license file
 //-----------------------------------------------------------------------------
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member    
-namespace Z0.AsmSpecs
+namespace Z0.Asm
 {    
 	/// <summary>
 	/// Mnemonic

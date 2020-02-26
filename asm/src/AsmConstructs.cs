@@ -2,20 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.AsmSpecs
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static ConstructIdentifier;
 
     public static class ConstructIdentifier
     {
         public const string Alloc = nameof(Alloc);
     }
 
-    [ApiHost]
+    [ApiHost("constructs")]
     public static class AsmConstructs
     {
 
@@ -33,7 +32,6 @@ namespace Z0.AsmSpecs
             for_min_max(0,8, i => sum += i*i);
             return sum;
         }
-
 
         [MethodImpl(NotInline), Op, NumericClosures(NumericKind.All)]
         public static Span<T> alloc<T>(int len)
@@ -62,6 +60,4 @@ namespace Z0.AsmSpecs
                 _ => 0
             };
     }
-
-
 }

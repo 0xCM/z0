@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using static zfunc;
 
     class Catalog : OpCatalog<Catalog>
     {
@@ -14,13 +13,6 @@ namespace Z0
             : base(id)
         {
 
-        }
-        
-        public override IEnumerable<ApiHost> DirectApiHosts
-            => items(ApiHost.Define(OwnerId, typeof(AsmSpecs.AsmConstructs)));               
-
-        public override IEnumerable<ApiHost> GenericApiHosts
-            => items(ApiHost.Define(OwnerId, typeof(AsmSpecs.AsmConstructs)));               
-
+        }       
     }
 }

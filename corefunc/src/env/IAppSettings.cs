@@ -3,19 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Collections.Generic;
+    using System.Collections.Generic;    
 
-    using Z0.Asm;
-    
-    public interface IFunctionEmitter
+    public interface IAppSettings
     {
+        Option<string> Read(string name);
         
-    }
+        Option<T> Read<T>(string name);
 
-    public interface IAsmFunctionEmitter : IFunctionEmitter
-    {
-        Option<Exception> EmitAsm(IEnumerable<AsmFunction> disassembly, FilePath file);
+        string this[string name] {get;}
+
+        IEnumerable<Pair<string>> Pairs {get;}
     }
 }

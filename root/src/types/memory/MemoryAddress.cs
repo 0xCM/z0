@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MemoryAddress : IEquatable<MemoryAddress>, IComparable<MemoryAddress>
+    public readonly struct MemoryAddress : IEquatable<MemoryAddress>, IComparable<MemoryAddress>, IFormattable<MemoryAddress>
     {
         public static MemoryAddress Zero => default;
 
@@ -38,12 +38,36 @@ namespace Z0
             => Define(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator long(MemoryAddress src)
+            => (long)src.Location;
+
+        [MethodImpl(Inline)]
         public static implicit operator ulong(MemoryAddress src)
             => src.Location;
 
         [MethodImpl(Inline)]
-        public static implicit operator long(MemoryAddress src)
-            => (long)src.Location;
+        public static explicit operator MemoryAddress(long src)
+            => Define(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator MemoryAddress(int src)
+            => Define(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator MemoryAddress(ushort src)
+            => Define(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator MemoryAddress(short src)
+            => Define(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(MemoryAddress src)
+            => (ushort)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator uint(MemoryAddress src)
+            => (uint)src.Location;
 
         [MethodImpl(Inline)]
         public static bool operator==(MemoryAddress a, MemoryAddress b)
@@ -68,34 +92,42 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator>=(MemoryAddress a, MemoryAddress b)
             => a.Location >= b.Location;
-            
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator+(MemoryAddress a, MemoryAddress b)
+            => new MemoryAddress(a.Location + b.Location);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator-(MemoryAddress a, MemoryAddress b)
+            => new MemoryAddress(a.Location - b.Location);
+
         [MethodImpl(Inline)]
         MemoryAddress(ulong absolute)
-        {
-            this.Location = absolute;
-        }
-        
+            => this.Location = absolute;
 
-        // public override string ToString()
-        //     => Format();         
-
-        public override int GetHashCode()
-            => Location.GetHashCode();
-
-        [MethodImpl(Inline)]
-        public bool Equals(MemoryAddress src)
-            => Location == src.Location;
-
-        public override bool Equals(object obj)
-            => obj is MemoryAddress a && Equals(a);                    
+        public string Format()
+            => Location.ToString("x") + "h";
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryAddress other)
             => this == other ? 0 : this < other ? -1 : 1;
 
         [MethodImpl(Inline)]
+        public bool Equals(MemoryAddress src)
+            => Location == src.Location;
+
+        public override int GetHashCode()
+            => Location.GetHashCode();
+
+        public override bool Equals(object obj)
+            => obj is MemoryAddress a && Equals(a);                    
+
+        public override string ToString() 
+            => Format();
+
+        [MethodImpl(Inline)]
         public unsafe T* ToPointer<T>()
             where T : unmanaged
-                => (T*)Location;         
+                => (T*)Location;
     }
 }

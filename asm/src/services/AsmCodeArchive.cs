@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="id">The identifying moniker</param>
         public Option<AsmCode<T>> Read<T>(OpIdentity id, T t = default)
             where T : unmanaged
-                => Read(Context.EmissionPaths().AsmHexPath(RootFolder, id), id, t);
+                => Read(Context.EmissionPaths().HexPath(RootFolder, id), id, t);
         
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes

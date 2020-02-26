@@ -8,9 +8,10 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using AsmSpecs;
 
-    using static zfunc;
+    using Z0.Asm;
+
+    using static Root;
 
     readonly struct CilFunctionEmitter : ICilFunctionEmitter
     {

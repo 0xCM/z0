@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.IO;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     using static AsmServiceMessages;
 

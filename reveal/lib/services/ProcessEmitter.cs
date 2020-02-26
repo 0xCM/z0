@@ -10,7 +10,7 @@ namespace Z0
     using System.IO;
     using System.Collections.Generic;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     using static zfunc;
 

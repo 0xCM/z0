@@ -9,9 +9,9 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static zfunc;                
+    using Z0.Asm;
 
-    using AsmSpecs;
+    using static zfunc;                
 
     using Iced = Iced.Intel;
 
@@ -384,6 +384,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static TupleType ToSpec(this Iced.TupleType src)
             => (TupleType)src;
-
    }
 }

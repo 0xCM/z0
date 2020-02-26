@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     public interface IAsmInstructionSource
     {

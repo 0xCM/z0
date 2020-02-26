@@ -6,12 +6,10 @@ namespace Z0
 {        
     using System;
     
-    using Z0.AsmSpecs;
+    using Z0.Asm;
     
-    using static Z0.AsmSpecs.OpKind;
+    using static Z0.Asm.OpKind;
     using static FixedWidth;
-
-    using static zfunc;
     
     static partial class AsmExtend
     {        
@@ -145,7 +143,7 @@ namespace Z0
             => src == OpKind.Register;  
 
         public static bool IsSpecified(this Register r)
-            => r != AsmSpecs.Register.None;
+            => r != Asm.Register.None;
 
         /// <summary>
         /// Determines the size of a classified immediate operand, if applicable; otherwise, returns 0

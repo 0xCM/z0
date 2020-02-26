@@ -14,7 +14,7 @@ namespace Z0.Logix
     public class t_truthtable : UnitTest<t_truthtable>
     {
         static StreamWriter writer(FileName filename)
-            => Paths.DataPath(FolderName.Define("truth"), filename).Writer();
+            => LogPaths.The.DataPath(FolderName.Define("truth"), filename).Writer();
         
         public void unary_truth_emit()
         {

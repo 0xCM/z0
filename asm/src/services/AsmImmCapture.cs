@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     using static zfunc;
 

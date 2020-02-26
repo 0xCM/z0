@@ -17,7 +17,7 @@ namespace Z0
         
         public FilePath CapturedPath {get;set;}
 
-        public CapturedEncodings Captured {get;set;}
+        public CapturedEncodingReport Captured {get;set;}
 
         public FilePath ParsedPath {get;set;}
 

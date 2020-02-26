@@ -18,11 +18,11 @@ namespace Z0
         {
             var src = host.EncodedOps().ToArray();
             var records = new MemberLocationRecord[src.Length];
-            var lastaddress = 0ul;
+            var lastaddress = MemoryAddress.Zero;
             for(var i=0; i< src.Length; i++)
             {
                 (var id, var address)  = src[i];
-                var gap = lastaddress != 0 ? address - lastaddress : 0ul;
+                var gap = lastaddress.NonZero ? address - lastaddress : MemoryAddress.Zero;
                 records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
                 lastaddress =  address;
             }
@@ -39,11 +39,11 @@ namespace Z0
                       select (id,address)).ToArray();
 
             var records = new MemberLocationRecord[src.Length];
-            var lastaddress = 0ul;
+            var lastaddress = MemoryAddress.Zero;
             for(var i=0; i< src.Length; i++)
             {
                 (var id, var address)  = src[i];
-                var gap = lastaddress != 0 ? address - lastaddress : 0ul;
+                var gap = lastaddress.NonZero ? address - lastaddress : MemoryAddress.Zero;
                 records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
                 lastaddress =  address;
             }
@@ -84,8 +84,11 @@ namespace Z0
             => Records.Length != 0;
 
         public Option<FilePath> Save()
-            => Records.Save(ApiHost.MapValueOrElse(
-                    AsmEmissionPaths.Current.LocationReport,
-                    () => AsmEmissionPaths.Current.LocationReport(AssemblyId)));
+        {
+            var dst = ApiHost.MapValueOrElse(AsmEmissionPaths.Current.LocationPath,
+                        () => AsmEmissionPaths.Current.LocationPath(AssemblyId));            
+            //Records.Save(dst);
+            return dst;
+        }
     }
 }

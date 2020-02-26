@@ -5,9 +5,7 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     public class CilFormatConfig
     {
@@ -30,7 +28,5 @@ namespace Z0
 
         public bool EmitSectionDelimiter {get;set;}
             = true;
-
-
     }
 }

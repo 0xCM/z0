@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     /// <summary>
     /// Defines service contract for asm text formatting support

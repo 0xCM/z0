@@ -6,9 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
-    using AsmSpecs;
-
-    using static zfunc;
 
     /// <summary>
     /// Defines service contract to support reading text-formatted encoded x86 asm data
@@ -21,5 +18,4 @@ namespace Z0
         /// <param name="src">The source file path</param>
         IEnumerable<AsmCode> Read(FilePath src);
     }
-
 }

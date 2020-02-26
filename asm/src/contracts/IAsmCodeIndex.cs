@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-
-    using AsmSpecs;
     
     public interface IAsmCodeIndex
     {

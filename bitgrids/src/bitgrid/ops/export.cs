@@ -187,7 +187,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged        
-                => Paths.DataPath(FolderName.Define("grids"), filename(label,w,m,n,t)).Writer();
+                => LogPaths.The.DataPath(FolderName.Define("grids"), filename(label,w,m,n,t)).Writer();
 
         /// <summary>
         /// Exports grid data to a file

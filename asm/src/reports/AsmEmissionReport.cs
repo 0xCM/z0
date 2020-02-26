@@ -20,7 +20,7 @@ namespace Z0
         public AsmEmissionKind EmissionKind {get;}
 
         public FilePath ReportPath 
-            => AsmEmissionPaths.Current.EmissionReport(Id, EmissionKind);
+            => AsmEmissionPaths.Current.EmissionPath(Id, EmissionKind);
                 
         public static AsmEmissionReport Create(AssemblyId id, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
         {

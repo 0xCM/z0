@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using Z0.Asm.Encoding;
-    using RFI = Z0.Asm.Encoding.RexFieldIndex;
+    using Z0.Asm;
 
-    using static zfunc;
+    using RFI = Z0.Asm.RexFieldIndex;
 
     public class t_asm_rex : t_asm<t_asm_rex>
     {

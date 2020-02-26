@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     public static class AsmServiceMessages
     {

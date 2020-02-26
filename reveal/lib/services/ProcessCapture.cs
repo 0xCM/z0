@@ -12,7 +12,7 @@ namespace Z0
     using System.Diagnostics;
     using Microsoft.Diagnostics.Runtime;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     using static zfunc;
     

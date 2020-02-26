@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static zfunc;
-
     /// <summary>
     /// Describes an assembly code emission
     /// </summary>
@@ -41,8 +39,8 @@ namespace Z0
         public string DelimitedText(char delimiter)
         {
             var dst = text.factory.Builder();
-            dst.AppendField(Location.Location.FormatAsmHex(), LocationPad);
-            dst.DelimitField(Gap.ToString(), GapPad, delimiter);
+            dst.AppendField(Location, LocationPad);
+            dst.DelimitField(Gap, GapPad, delimiter);
             dst.DelimitField(Member, delimiter);
             return dst.ToString();
         }

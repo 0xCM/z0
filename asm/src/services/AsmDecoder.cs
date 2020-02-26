@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
  
-    using Z0.AsmSpecs;
+    using Z0.Asm;
     
     using static AsmServiceMessages;
     using static zfunc;
@@ -46,7 +46,7 @@ namespace Z0
 				decoder.Decode(out instruction); 
 			}
 
-            var dst = new AsmSpecs.Instruction[decoded.Count];
+            var dst = new Asm.Instruction[decoded.Count];
             var formatted = Context.InstructionFormatter().FormatInstructions(decoded, @base);
             for(var i=0; i<dst.Length; i++)
                 dst[i] =  decoded[i].ToSpec(formatted[i]);
@@ -70,7 +70,7 @@ namespace Z0
 				decoder.Decode(out instruction); 
 			}
 
-            var dst = new AsmSpecs.Instruction[decoded.Count];
+            var dst = new Asm.Instruction[decoded.Count];
             var formatted = Context.InstructionFormatter().FormatInstructions(decoded, src.MemorySource.Start);
             for(var i=0; i<dst.Length; i++)
                 dst[i] =  decoded[i].ToSpec(formatted[i]);
@@ -91,7 +91,7 @@ namespace Z0
         public AsmFunction DecodeFunction(CapturedMember src)
         {
             var list = DecodeInstructions(src.Code, src.SourceMemory.Start);
-            var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.Outcome);
+            var block = Asm.AsmInstructionBlock.Define(src.Code, list, src.Outcome);
             var f = BuildFunction(src.SourceOp, block);
 
             if(EmitCil)

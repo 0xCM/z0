@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
     
     using static zfunc;
     using static FKT;

@@ -6,9 +6,7 @@ namespace Z0
 {        
     using System;
 
-    using Z0.AsmSpecs;
-
-    using static zfunc;
+    using Z0.Asm;
 
     public interface IAsmImmCapture : IAsmService
     {

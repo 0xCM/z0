@@ -13,7 +13,7 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost]
+    //[ApiHost]
     public static class SpanOps
     {    
         /// <summary>

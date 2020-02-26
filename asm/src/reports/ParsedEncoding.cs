@@ -28,10 +28,7 @@ namespace Z0
                 if(Enum.TryParse(fields[2], true, out CaptureTermCode tc))
                     dst.TermCode = tc;
 
-                //dst.Uri = OpUri.Hex()
-
-                dst.Data = Hex.parsebytes(fields[4], AsciSym.Space).ToArray();
-                
+                dst.Data = Hex.parsebytes(fields[4], AsciSym.Space).ToArray();                
             }
 
             return none<ParsedEncoding>();
@@ -82,12 +79,4 @@ namespace Z0
             Data = 1
         }    
     }
-
-    partial class AsmExtend
-    {
-        public static AsmCode GetAsmCode(this ParsedEncoding encoding, MemoryAddress @base)
-            => AsmCode.Define(encoding.Uri.OpId, MemoryRange.Define(@base, @base + (ulong)encoding.Data.Length), encoding.Data);
-
-    }
-
 }

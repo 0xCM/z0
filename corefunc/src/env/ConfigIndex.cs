@@ -12,24 +12,11 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IAppSettings
-    {
-        Option<string> Read(string name);
-        
-        Option<T> Read<T>(string name);
-
-        string this[string name] {get;}
-
-        IEnumerable<Pair<string>> Pairs {get;}
-
-    }
-
-
     public class AppSettings : IAppSettings
     {
         public static IAppSettings Load(string name)
         {
-            var path = Paths.ConfigPath(name);
+            var path = LogPaths.The.ConfigPath(name);
             path.FolderPath.CreateIfMissing();
             var builder = new ConfigurationBuilder();
             builder.AddJsonFile(path.Name,true);
@@ -61,7 +48,6 @@ namespace Z0
 
         int Age
             => (int)(now() - Loaded).TotalSeconds;
-
 
         public Option<string> Read(string name)
         {
@@ -99,9 +85,5 @@ namespace Z0
         }
 
         public IEnumerable<Pair<string>> Pairs => Values.Select(kvp => pair(kvp.Key, kvp.Value));
-
     }
-
 }
-
-

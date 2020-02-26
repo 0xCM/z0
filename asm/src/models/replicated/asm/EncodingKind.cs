@@ -2,7 +2,7 @@
 // Taken from Iced:https://github.com/0xd4d/iced
 // License: See the accompanying license file
 //-----------------------------------------------------------------------------
-namespace Z0.AsmSpecs
+namespace Z0.Asm
 {
 	/// <summary>
 	/// Instruction encoding

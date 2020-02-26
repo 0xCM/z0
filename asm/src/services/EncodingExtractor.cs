@@ -28,10 +28,10 @@ namespace Z0
             this.BufferLength = bufferlen ?? Pow2.T14;
         }
 
-        public CapturedEncodings Extract(ApiHost src)
+        public CapturedEncodingReport Extract(ApiHost src)
         {
             var ops = src.EncodedOps().ToArray();
-            var dst = new CapturedEncoding[ops.Length];
+            var dst = new CapturedEncodingRecord[ops.Length];
             var buffer = alloc<byte>(BufferLength);
             var reader = Context.ByteReader();
 
@@ -41,7 +41,7 @@ namespace Z0
 
                 var op = ops[i];
                 var length = reader.Read(op.Location, BufferLength, buffer);                
-                var record = new CapturedEncoding
+                var record = new CapturedEncodingRecord
                 {
                     Sequence = i,
                     Length = length,
@@ -55,7 +55,7 @@ namespace Z0
                 dst[i] = record;
             }    
 
-            return CapturedEncodings.Create(src,dst);
+            return CapturedEncodingReport.Create(src,dst);
         }
     }
 }

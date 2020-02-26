@@ -10,7 +10,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using Z0.AsmSpecs;
+    using Z0.Asm;
 
     using static zfunc;
     using static AsmServiceMessages;
@@ -63,7 +63,7 @@ namespace Z0
             var descriptions = DescribeInstructions(src);
             var lines = new List<string>();
             for(var i = 0; i< descriptions.Length; i++)
-                lines.Add(FormatInstruction(descriptions[i]));
+                lines.Add(FormatInstruction(src.StartAddress,descriptions[i]));
             return lines.ToArray();
         }    
 
@@ -189,13 +189,14 @@ namespace Z0
         static string FormatLineLabel(ulong src)
             => text.concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
 
-        static string FormatLineLabel(ushort src)
-            => FormatLineLabel(((ulong)src));
+        // static string FormatLineLabel(ushort src)
+        //     => FormatLineLabel(((ulong)src));
 
 
-        string FormatInstruction(AsmInstructionInfo src)
+        string FormatInstruction(in MemoryAddress @base, in AsmInstructionInfo src)
         {
-            var description = text.factory.Builder();    
+            var description = text.factory.Builder();
+            var absolute = @base + (MemoryAddress)src.Offset;  
             description.Append(text.concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(Config.InstructionPad, text.space())));
             description.Append(Comment(Format(src.Spec, Config)));
             description.Append(text.concat(Config.FieldDelimiter,"encoded", text.bracket(src.Encoded.Length.ToString())));

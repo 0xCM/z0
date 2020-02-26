@@ -28,7 +28,7 @@ namespace Z0
             this.BufferLength = maxlen ?? Pow2.T14;
         }
 
-        public ParsedEncodings Parse(ApiHost host, CapturedEncodings encoded)
+        public ParsedEncodings Parse(ApiHost host, CapturedEncodingReport encoded)
         {
             var dst = new ParsedEncoding[encoded.Records.Length];
             var buffer = alloc<byte>(BufferLength);
@@ -44,7 +44,7 @@ namespace Z0
                 var matched = parser.Result;
                 var succeeded = matched.IsSome() && status.Success();
                 if(!succeeded)
-                    print($"Parse failure: {matched}, {current.Operation.Uri}", SeverityLevel.Warning);
+                    print($"Parse failure: {matched}, {current.GetDescription().Uri}", SeverityLevel.Warning);
 
                 var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
                 dst[i] = new ParsedEncoding

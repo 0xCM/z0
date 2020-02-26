@@ -8,9 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using AsmSpecs;
 
-    using static zfunc;
+    using Z0.Asm;
 
     public static partial class AsmExtend
     {
@@ -41,7 +40,5 @@ namespace Z0
                 }
             }
         }
-
-    }
-    
+    }   
 }

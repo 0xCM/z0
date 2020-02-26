@@ -33,10 +33,4 @@ namespace Z0
         /// </summary>
         Raw = 4,
     }
-
-    partial class AsmExtend
-    {
-        public static FileExtension Extension(this ArchiveFileKind kind)
-            => FileExtension.Define(kind.ToString().ToLower());
-    }
 }

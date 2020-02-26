@@ -10,13 +10,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static zfunc;
-
     public readonly struct ByteKindGen
     {
         public static ByteKindGen Define(bool hex)
             => new ByteKindGen(hex);
         
+        static LogPaths Paths => LogPaths.The;
+
         public bool HexEnum {get;}
         
         ByteKindGen(bool HexEnum)
@@ -72,7 +72,6 @@ namespace Z0
             using var dst = dstpath.Writer();
             dst.WriteLine(src);
             return dstpath;
-
         }
 
         public Option<FilePath> GenToFile()
