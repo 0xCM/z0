@@ -50,7 +50,6 @@ namespace Z0
         public static ref readonly T skip<T>(in T src, int count)
             => ref Unsafe.Add(ref mutable(in src), count);
 
- 
         [MethodImpl(Inline)]
         public static ref T cast<S,T>(ref S src)
             => ref Unsafe.As<S,T>(ref src);

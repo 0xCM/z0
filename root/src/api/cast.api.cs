@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static CastInternals;
     
-    [ApiHost("converter", ApiHostKind.Generic)]
+    [ApiHost("cast", ApiHostKind.Generic)]
     public static partial class Cast
     {
         [MethodImpl(Inline)]   

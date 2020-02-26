@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Root;
+    using static Cast;
 
     readonly struct BoxedNumberConverter : IValueConversionProvider<BoxedNumberConverter,BoxedNumber>
     {
@@ -24,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src) 
             where T : struct
-                => (T)Z0.Cast.ocast(src.Value, Numeric.kind<T>());
+                => (T)ocast(src.Value, Numeric.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -41,7 +42,7 @@ namespace Z0
             try
             {
                 var src = (BoxedNumber)incoming;
-                return Z0.Cast.ocast(src.Value, dst.NumericKind());
+                return ocast(src.Value, dst.NumericKind());
             }
             catch(Exception e)
             {
@@ -58,5 +59,4 @@ namespace Z0
                 : Option.none<BoxedNumber>();
         }
     }
-
 }

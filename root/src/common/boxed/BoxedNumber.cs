@@ -18,7 +18,6 @@ namespace Z0
         UserType(TypeCodes.BoxedNumberId), 
         ConversionProvider(typeof(BoxedNumberConverter))
     ]
-
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>, IBiconvertible<BoxedNumber>
     {
         /// <summary>

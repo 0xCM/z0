@@ -18,7 +18,7 @@ namespace Z0
     using NI = NumericIndicator;
     using ID = NumericId;
 
-    [ApiHost]
+    [ApiHost("numeric")]
     public static class Numeric
     {
         /// <summary>

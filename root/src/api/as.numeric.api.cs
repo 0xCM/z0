@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static AsIn;
 
-    [ApiHost(ApiHostKind.Generic)]
+    [ApiHost("as.numeric", ApiHostKind.Generic)]
     public static class AsNumeric
     {                
         /// <summary>

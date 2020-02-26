@@ -12,15 +12,19 @@ namespace Z0
 
     [ApiHost]
     public static class BitConversions
-    {
+    {        
+        [MethodImpl(Inline)]
+        static BitConversion BitConverter()
+            => default(BitConversion);
+        
         [MethodImpl(Inline),Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T convert<T>(bit src)
             where T : unmanaged
-                => Converters.BitConverter().Convert<T>(src);
+                => BitConverter().Convert<T>(src);
 
         [MethodImpl(Inline),Op, NumericClosures(NumericKind.UnsignedInts)]
         public static bit convert<T>(T src)
             where T : unmanaged
-                => Converters.BitConverter().Convert(src);
+                => BitConverter().Convert(src);
     }
 }
