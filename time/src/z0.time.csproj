@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(TopDir)/shared/TypeCodes.cs" />
+  </ItemGroup>
+
+</Project>

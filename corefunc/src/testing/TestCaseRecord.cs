@@ -51,7 +51,7 @@ namespace Z0
             => Succeeded ? YEA : BOO;
 
         public string DelimitedText(char delimiter)
-            => concat(
+            => text.concat(
                 $"{Case.PadRight(CasePad)}{delimiter}" + AsciSym.Space, 
                 $"{Outcome.PadRight(OutcomePad)}{delimiter}" + AsciSym.Space, 
                 $"{Duration.Ms.ToString().PadRight(DurationPad)}{delimiter}" + AsciSym.Space,

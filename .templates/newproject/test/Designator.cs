@@ -6,10 +6,7 @@ namespace Z0.Designators
 {        
     using System;
 
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class RootTest : AssemblyDesignator<RootTest>
+    public sealed class NewTest : AssemblyResolution<NewTest>
     {
         const AssemblyId Identity = 0;
 
@@ -18,6 +15,5 @@ namespace Z0.Designators
 
         public override void Run(params string[] args)
             => App.Run(args);
-
     }
 }

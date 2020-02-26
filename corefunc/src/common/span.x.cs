@@ -64,6 +64,10 @@ namespace Z0
             where T : unmanaged
                 => ref MemoryMarshal.AsRef<T>(src.AsBytes(offset,length));
 
+        [MethodImpl(Inline)]
+        static bool IsRowHead(int index, int rowlen)
+            => index == 0 || index % rowlen == 0; 
+
         /// <summary>
         /// Formats a span as a table
         /// </summary>

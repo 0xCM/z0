@@ -11,6 +11,7 @@ namespace Z0
     using static Root;
     using static Refs;
     using static Stacked;
+    using static P2K;
 
     partial class Stacks
     {
@@ -18,7 +19,7 @@ namespace Z0
         public static unsafe CharStack4 concat(in CharStack2 head, in CharStack2 tail)
         {
             const int block = 2;
-            var dst = char4();
+            var dst = chars(p2x2);
             PolyData.copy(in first(in head), ref chead(ref dst), block);
             PolyData.copy(in first(in tail), ref seek(ref chead(ref dst),block), block);            
             return dst;
@@ -28,7 +29,7 @@ namespace Z0
         public static CharStack8 concat(in CharStack4 head, in CharStack4 tail)
         {
             const int block = 4;
-            var dst = char8();
+            var dst = chars(p2x3);
             PolyData.copy(in first(in head), ref chead(ref dst), block);
             PolyData.copy(in first(in tail), ref seek(ref chead(ref dst), block), block);            
             return dst;
@@ -38,7 +39,7 @@ namespace Z0
         public static CharStack16 concat(in CharStack8 head, in CharStack8 tail)
         {
             const int block = 8;
-            var dst = char16();
+            var dst = chars(p2x4);
             PolyData.copy(in first(in head), ref chead(ref dst), block);
             PolyData.copy(in first(in tail), ref seek(ref chead(ref dst),block), block);            
             return dst;
@@ -57,7 +58,7 @@ namespace Z0
         public static CharStack32 concat(in CharStack16 head, in CharStack16 tail)
         {
             const int block = 16;
-            var dst = char32();
+            var dst = chars(p2x5);
             return concat(head,tail,ref dst);
         }
 
@@ -74,7 +75,7 @@ namespace Z0
         public static CharStack64 concat(in CharStack32 head, in CharStack32 tail)
         {
             const int block = 32;
-            var dst = char64();
+            var dst = chars(p2x6);
             return concat(head,tail,ref dst);
         }
     }

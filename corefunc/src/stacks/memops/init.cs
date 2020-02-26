@@ -70,5 +70,6 @@ namespace Z0
             PolyData.copy(in src, ref head<T>(ref dst), count<T>(n));
             return dst;
         }
+
     }
 }

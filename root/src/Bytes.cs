@@ -10,7 +10,6 @@ namespace Z0
     using static Root;
     using static As;
     using static Refs;
-    using static SpanOps;
 
     public static class Bytes
     {

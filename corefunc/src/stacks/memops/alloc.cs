@@ -9,7 +9,8 @@ namespace Z0
 
     using static Root;
     using static Stacked;
-
+    using static P2K;
+    
     partial class Stacks
     {
         /// <summary>
@@ -25,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The storage width</param>
         [MethodImpl(Inline)]
-        public static MemStack64 alloc64()
+        public static MemStack64 alloc(P2x6 p2)
             => default;
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Z0
         /// <param name="w">The storage width</param>
         /// <param name="seg">The segment width</param>
         [MethodImpl(Inline)]
-        public static MemStack128 alloc128()
+        public static MemStack128 alloc(P2x7 p2)
             => default;
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace Z0
         /// <param name="w">The storage width</param>
         /// <param name="seg">The segment width</param>
         [MethodImpl(Inline)]
-        public static MemStack256 alloc256()
+        public static MemStack256 alloc(P2x8 p2)
             => default;
 
         /// <summary>
@@ -79,7 +80,7 @@ namespace Z0
         /// <param name="w">The storage width</param>
         /// <param name="seg">The segment width</param>
         [MethodImpl(Inline)]
-        public static MemStack512 alloc512()
+        public static MemStack512 alloc(P2x9 p2)
             => default;
 
         /// <summary>
@@ -90,13 +91,13 @@ namespace Z0
         public static MemStack1024 alloc(N1024 n)
             => default;
 
+
         /// <summary>
         /// Stack allocates 128 bytes = 1024-bits of storage
         /// </summary>
         /// <param name="w">The storage width</param>
         [MethodImpl(Inline)]
-        public static MemStack1024 alloc1024()
+        public static MemStack1024 alloc(P2x10 p2)
             => default;
-
     }
 }

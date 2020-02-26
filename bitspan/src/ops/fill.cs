@@ -10,6 +10,7 @@ namespace Z0
 
     using static zfunc;
     using static As;
+    using static P2K;
 
     partial struct BitSpan
     {
@@ -57,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref readonly BitSpan fill(byte src, in BitSpan dst)
         {
-            var buffer = Stacks.alloc(n64);
+            var buffer = Stacks.alloc(p2x6);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
@@ -69,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref readonly BitSpan fill(ushort src, in BitSpan dst)
         {
-            var buffer = Stacks.alloc(n128);
+            var buffer = Stacks.alloc(p2x7);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
@@ -96,7 +97,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref readonly BitSpan fill(ulong src, in BitSpan dst)
         {
-            var buffer = Stacks.alloc(n512);        
+            var buffer = Stacks.alloc(p2x9);        
             ref var tmp = ref head(dst.Bits.Slice(56,8).As<bit,byte>());
             ref var target = ref Unsafe.As<bit,uint>(ref head(dst.Bits));
 
@@ -121,6 +122,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static void distribute(in byte src, int srcstep, ref uint dst, int dststep)
             => ginx.vstore(dinx.vconvert(n64, in skip(in src, srcstep*8), n256, n32), ref seek(ref dst, dststep*8));
-
     }
 }

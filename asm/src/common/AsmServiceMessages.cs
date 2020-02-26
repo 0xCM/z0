@@ -67,12 +67,12 @@ namespace Z0
             => appMsg($"Emitting immediates specializations {immediates.FormatHexList()} for {op.Id}", SeverityLevel.Babble);
         
         public static AppMsg InstructionSizeMismatch(MemoryAddress location, int offset, int actual, int reported)
-            => appMsg(concat(
+            => appMsg(text.concat(
                 $"The encoded instruction length does not match the reported instruction length:", 
                 $"address = {location}, datalen = {reported}, offset = {offset}, bytelen = {reported}"));
 
         public static AppMsg InstructionBlockSizeMismatch(MemoryRange origin, int actual, int reported)
-            => appMsg(concat(
+            => appMsg(text.concat(
                 $"The encoded instruction block length does not match the reported total instruction length:", 
                 $"origin = {origin}, block length = {reported}, reported length = {reported}"));
 

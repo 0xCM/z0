@@ -24,7 +24,7 @@ namespace Z0
     /// </remarks>    
     [
         IdentityProvider, 
-        UserType(RootTypeCodes.BitId), 
+        UserType(TypeCodes.BitId), 
         ConversionProvider(typeof(BitConversion))
     ]
     public readonly struct bit : ITypeIdentityProvider<bit>

@@ -3,20 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
-{        
+{
     using System;
 
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class NewProject : AssemblyDesignator<NewProject>
+    public sealed class New : AssemblyResolution<New>
     {
         const AssemblyId Identity = 0;
 
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Catalog 
+        public override IOperationCatalog Operations 
             => new Catalog(Identity);
     }
 }

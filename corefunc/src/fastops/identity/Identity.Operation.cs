@@ -29,11 +29,11 @@ namespace Z0
             var suffixPart = string.IsNullOrWhiteSpace(suffix) ?  string.Empty : $"{IDI.SuffixSep}{suffix}";
 
             if(generic && k == NumericKind.None)
-                return OpIdentity.Define(concat(opname, IDI.PartSep, IDI.Generic, suffixPart));            
+                return OpIdentity.Define(text.concat(opname, IDI.PartSep, IDI.Generic, suffixPart));            
             else if(w.IsSome())
-                return OpIdentity.Define(concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}", suffixPart));
+                return OpIdentity.Define(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}", suffixPart));
             else
-                return OpIdentity.Define(concat($"{opname}_{g}{k.Format()}{suffixPart}"));
+                return OpIdentity.Define(text.concat($"{opname}_{g}{k.Format()}{suffixPart}"));
         }
 
         /// <summary>
@@ -81,6 +81,6 @@ namespace Z0
         /// <param name="src">The source identity</param>
         /// <param name="immval">The immediate value to attach</param>
         public static OpIdentity imm8Add(OpIdentity src, byte immval)
-              => OpIdentity.Define(concat(imm8Remove(src).Identifier, imm8(immval)));
+              => OpIdentity.Define(text.concat(imm8Remove(src).Identifier, imm8(immval)));
     }
 }

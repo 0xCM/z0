@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;    
     using System.Runtime.Intrinsics;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
-    using static Refs;
 
     [ApiHost]
     public static class SpanOps
@@ -320,5 +321,25 @@ namespace Z0
         public static ReadOnlySpan<double> span64f<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => SpanOps.cast<T,double>(src);        
+
+        [MethodImpl(Inline)]   
+        public static ISet<T> set<T>(ReadOnlySpan<T> src)
+        {
+            var dst = new HashSet<T>(src.Length);
+            for(var i=0; i<src.Length; i++)
+                dst.Add(src[i]);
+            return dst;
+        }
+
+        [MethodImpl(Inline)]   
+        public static ISet<T> set<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
+        {
+            var dst = new HashSet<T>(a.Length + b.Length);
+            for(var i=0; i<a.Length; i++)
+                dst.Add(a[i]);
+            for(var i=0; i<b.Length; i++)
+                dst.Add(b[i]);
+            return dst;     
+        }
     }    
 }

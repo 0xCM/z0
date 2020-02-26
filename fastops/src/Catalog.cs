@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using static zfunc;
 
     class Catalog : OpCatalog<Catalog>
     {

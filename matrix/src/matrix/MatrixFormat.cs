@@ -63,7 +63,7 @@ namespace Z0
                 for(var col = 0; col<cols; col++)
                 {
                     var cellval = src[row,col];
-                    var cellfmt = concat(
+                    var cellfmt = text.concat(
                         col == 0 ? string.Empty : " ", 
                         $"{render?.Invoke(cellval) ?? cellval.ToString()}".PadRight(width)
                         );
@@ -92,7 +92,7 @@ namespace Z0
                 for(var col = 0; col<cols; col++)
                 {
                     var cellval = src[row,col];
-                    var cellfmt = concat(
+                    var cellfmt = text.concat(
                         col == 0 ? string.Empty : " ", 
                         $"{render?.Invoke(cellval) ?? cellval.ToString()}".PadRight(width)
                         );

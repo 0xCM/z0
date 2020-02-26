@@ -70,7 +70,7 @@ namespace Z0
         public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base)
         {            
             static string LineLabel(ulong src)
-                => concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
+                => text.concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
             
             if(src.Count == 0)
                 return ReadOnlySpan<string>.Empty;
@@ -147,7 +147,7 @@ namespace Z0
             {
                 var formatter = HexFormatter.Define<byte>();
                 var formatted = formatter.Format(code.Encoded, Config.FunctionHeaderEncodingFormat);                
-                dataline += concat(text.spaced(AsciSym.Eq), text.embrace(formatted));
+                dataline += text.concat(text.spaced(AsciSym.Eq), text.embrace(formatted));
             }
             return dataline;
         }
@@ -172,7 +172,7 @@ namespace Z0
                 var ci = src.CaptureInfo;
                 var cidesc = string.Empty;
                 if(Config.EmitCaptureTermCode)
-                    cidesc += concat(nameof(ci.TermCode), text.spaced(AsciSym.Eq), ci.TermCode.ToString());
+                    cidesc += text.concat(nameof(ci.TermCode), text.spaced(AsciSym.Eq), ci.TermCode.ToString());
 
                 lines.Add(Comment(cidesc));
             }
@@ -187,7 +187,7 @@ namespace Z0
             => $"{src.Definition}{fmt.FieldDelimiter}{src.OpCode}";
 
         static string FormatLineLabel(ulong src)
-            => concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
+            => text.concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
 
         static string FormatLineLabel(ushort src)
             => FormatLineLabel(((ulong)src));
@@ -195,7 +195,7 @@ namespace Z0
         string FormatInstruction(AsmInstructionInfo src)
         {
             var description = text.factory.Builder();    
-            description.Append(concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(Config.InstructionPad, text.space())));
+            description.Append(text.concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(Config.InstructionPad, text.space())));
             description.Append(Comment(Format(src.Spec, Config)));
             description.Append(text.concat(Config.FieldDelimiter,"encoded", text.bracket(src.Encoded.Length.ToString())));
             description.Append(text.embrace(src.Encoded.FormatHex(text.space(), true, false)));

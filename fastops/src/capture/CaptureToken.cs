@@ -52,7 +52,7 @@ namespace Z0
         }
 
         public string Format()
-            => concat(Uri.ToString(), Origin.Format());
+            => text.concat(Uri.ToString(), Origin.Format());
 
         public override string ToString()
             => Format();

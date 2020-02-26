@@ -224,7 +224,7 @@ namespace Z0.Logix
         
         public void check_ternary_ops()
         {
-            iter(set(
+            iter(SpanOps.set(
                 VectorOpApi.TernaryBitLogicKinds, 
                 ScalarOpApi.TernaryBitLogicKinds),
                     check_ternary_ops);

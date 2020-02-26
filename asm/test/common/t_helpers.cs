@@ -20,7 +20,7 @@ namespace Z0
                 return src;
             else
                return OpIdentity.Define(
-                   concat(src.Identifier.LeftOf(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOf(IDI.PartSep)));
+                   text.concat(src.Identifier.LeftOf(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOf(IDI.PartSep)));
         }
 
         /// <summary>

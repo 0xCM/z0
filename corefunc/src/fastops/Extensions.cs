@@ -25,7 +25,6 @@ namespace Z0
             return nt.IsSome() ? some(nt.Subject) : none<Type>();
         }
 
-
         /// <summary>
         /// Determines whether a type is parametric over the natural numbers
         /// </summary>

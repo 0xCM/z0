@@ -38,8 +38,6 @@ namespace Z0
                 return none<ScalarIdentity>();                
         }
 
-
-
         /// <summary>
         /// Extracts an index-identified segmented identity part from an operation identity
         /// </summary>
@@ -87,7 +85,7 @@ namespace Z0
 
         static Option<TypeIdentity> PointerId(this Type arg)
             => from id in arg.Unwrap().CommonId()
-                let idptr = concat(id, IDI.ModSep, IDI.Pointer)
+                let idptr = text.concat(id, IDI.ModSep, IDI.Pointer)
                 select TypeIdentity.Define(idptr);    
 
         static Option<TypeIdentity> SegmentedId(this Type t)
@@ -102,7 +100,7 @@ namespace Z0
                 let nk = arg.NumericKind()
                 where  nk.IsSome()                
                 let nki = nk.Indicator().Format()
-                let identifer = concat(i, segfmt, IDI.SegSep,argfmt, nki)                
+                let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)                
                 select SegmentedIdentity.Define(i,segwidth,nk).AsTypeIdentity();
 
         static Option<TypeIdentity> EnumId(this Type t)        
@@ -113,7 +111,7 @@ namespace Z0
                 
         static Option<TypeIdentity> NatId(this Type arg)
             => from v in arg.NatValue() 
-                let id = concat(IDI.Nat, v.ToString())
+                let id = text.concat(IDI.Nat, v.ToString())
                 select TypeIdentity.Define(id);
         
         static Option<TypeIdentity> PrimalId(this Type arg)
@@ -146,7 +144,7 @@ namespace Z0
             if(kind.IsSome())
             {
                 var cellid = arg.GetGenericArguments().Single().CommonId();
-                return cellid.TryMap(id => TypeIdentity.Define(concat(kind.Format(), id)));
+                return cellid.TryMap(id => TypeIdentity.Define(text.concat(kind.Format(), id)));
             }
             else
                 return none<TypeIdentity>();

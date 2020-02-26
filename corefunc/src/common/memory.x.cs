@@ -61,22 +61,5 @@ namespace  Z0
         [MethodImpl(Inline)]
         public static Memory<T> TakeMemory<T>(this IEnumerable<T> src, int skip, int count)
             => src.Skip(skip).TakeMemory(count);
-
-        /// <summary>
-        /// Uses the (void*) explicit operator defined by the source type to
-        /// present said source as a void*
-        /// </summary>
-        /// <param name="src">The source pointer representative</param>
-        [MethodImpl(Inline)]
-        public static unsafe void* ToVoid(this IntPtr src)
-            => (void*)src;
-
-        /// <summary>
-        /// Gets the void* for the identified field
-        /// </summary>
-        /// <param name="src">The runtime field handle</param>
-        [MethodImpl(Inline)]
-        public static unsafe void* ToVoid(this RuntimeFieldHandle src)
-            => src.Value.ToVoid();
     }
 }

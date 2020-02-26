@@ -10,6 +10,7 @@ namespace Z0
 
     using static Root;
 
+    
     public static class SpanTake
     {
         /// <summary>

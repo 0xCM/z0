@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="$(TopDir)/shared/TypeCodes.cs" />
+  </ItemGroup>
+
 </Project>

@@ -10,98 +10,53 @@ namespace Z0
 
     using static Root;
     using static Stacked;
+    using static P2K;
 
     partial class Stacks
     {
-        /// <summary>
-        /// Allocates a 2-character storage stack
-        /// </summary>
-        /// <param name="n">The character count</param>
-        [MethodImpl(Inline)]
-        public static CharStack2 chars(N2 n)
-            => default;
-
-        /// <summary>
-        /// Allocates a 4-character storage stack
-        /// </summary>
-        /// <param name="n">The character count</param>
-        [MethodImpl(Inline)]
-        public static CharStack4 chars(N4 n)
-            => default;
-
-        /// <summary>
-        /// Allocates an 8-character storage stack
-        /// </summary>
-        /// <param name="n">The character count</param>
-        [MethodImpl(Inline)]
-        public static CharStack8 chars(N8 n)
-            => default;
-
-        /// <summary>
-        /// Allocates a 16-character storage stack
-        /// </summary>
-        /// <param name="n">The character count</param>
-        [MethodImpl(Inline)]
-        public static CharStack16 chars(N16 n)
-            => default;
-
-        /// <summary>
-        /// Allocates a 32-character storage stack
-        /// </summary>
-        /// <param name="n">The character count</param>
-        [MethodImpl(Inline)]
-        public static CharStack32 chars(N32 n)
-            => default;
-
-        /// <summary>
-        /// Allocates a 64-character storage stack
-        /// </summary>
-        /// <param name="n">The character count</param>
-        [MethodImpl(Inline)]
-        public static CharStack64 chars(N64 n)
-            => default;
-
-         /// <summary>
-        /// Allocates a 2-character storage stack
-        /// </summary>
+       /// <summary>
+       /// Allocates a 2-character storage stack
+       /// </summary>
        [MethodImpl(Inline)]
-        public static CharStack2 char2()
+       public static CharStack2 chars(P2x1 p2)
             => default;
 
         /// <summary>
         /// Allocates a 4-character storage stack
         /// </summary>
         [MethodImpl(Inline)]
-        public static CharStack4 char4()
+        public static CharStack4 chars(P2x2 p2)
             => default;
 
         /// <summary>
         /// Allocates an 8-character storage stack
         /// </summary>
         [MethodImpl(Inline)]
-        public static CharStack8 char8()
+        public static CharStack8 chars(P2x3 p2)
             => default;
 
         /// <summary>
         /// Allocates a 16-character storage stack
         /// </summary>
         [MethodImpl(Inline)]
-        public static CharStack16 char16()
+        public static CharStack16 chars(P2x4 p2)
             => default;
 
         /// <summary>
         /// Allocates a 32-character storage stack
         /// </summary>
         [MethodImpl(Inline)]
-        public static CharStack32 char32()
+        public static CharStack32 chars(P2x5 p2)
             => default;
 
         /// <summary>
         /// Allocates a 64-character storage stack
         /// </summary>
         [MethodImpl(Inline)]
-        public static CharStack64 char64()
+        public static CharStack64 chars(P2x6 p2)
             => default;
+
+
     }
 
 }

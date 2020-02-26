@@ -27,9 +27,9 @@ namespace Z0
             var count = closures.NonEmptyCount();
 
             if(count == 1)
-                return TypeIdentity.Define(concat(kind.Indicator(), closures.C.Format()));
+                return TypeIdentity.Define(text.concat(kind.Indicator(), closures.C.Format()));
             else if(count == 3)
-                return TypeIdentity.Define(concat(
+                return TypeIdentity.Define(text.concat(
                         kind.Indicator(), segsep, 
                         kind.Width().Format(), segsep, 
                         closures.A.Format(), segsep,

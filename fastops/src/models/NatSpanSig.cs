@@ -88,6 +88,6 @@ namespace Z0
             => obj is NatSpanSig s && Equals(s);
         
         public override string ToString()
-            => concat(IDI.Nat, Length.ToString(), IDI.SegSep, CellWidth.ToString(), Indicator);
+            => text.concat(IDI.Nat, Length.ToString(), IDI.SegSep, CellWidth.ToString(), Indicator);
     }
 }

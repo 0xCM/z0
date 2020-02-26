@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     [
         IdentityProvider, 
-        UserType(RootTypeCodes.BoxedNumberId), 
+        UserType(TypeCodes.BoxedNumberId), 
         ConversionProvider(typeof(BoxedNumberConverter))
     ]
 

@@ -1,2 +1,2 @@
-export ProjectId=newproject
+export ProjectId=new
 bash $ZDev/.scripts/add-project.sh

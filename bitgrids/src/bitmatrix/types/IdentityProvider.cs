@@ -22,7 +22,7 @@ namespace Z0
             if(t.IsConstructedGenericType && t.GetGenericTypeDefinition() ==typeof(BitMatrix<>))
             {
                 var kind = t.GetGenericArguments().Single().NumericKind();
-                return TypeIdentity.Define(concat(prefix, kind.Width().ToString(), IDI.SegSep, kind.Format()));                
+                return TypeIdentity.Define(text.concat(prefix, kind.Width().ToString(), IDI.SegSep, kind.Format()));                
             }
             else
             {
@@ -55,7 +55,7 @@ namespace Z0
                 }
 
                 if(kind.IsSome() && width.IsSome())
-                    return TypeIdentity.Define(concat(prefix, width.Format(), IDI.SegSep, kind.Format()));
+                    return TypeIdentity.Define(text.concat(prefix, width.Format(), IDI.SegSep, kind.Format()));
             }
 
             return TypeIdentity.Define($"{prefix}err");                                          

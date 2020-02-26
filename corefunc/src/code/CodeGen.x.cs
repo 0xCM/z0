@@ -82,7 +82,7 @@ namespace Z0
             fmt.Append(text.lbrace());
             
             foreach(var m in src.Members)
-                fmt.AppendLine(concat(indent + indent, m.Format()));
+                fmt.AppendLine(text.concat(indent + indent, m.Format()));
             
             fmt.AppendLine();
             fmt.Append(indent);

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
         
     using static zfunc;
-    using static dinx;
     using static BitPop;
 
     partial class ginx
@@ -139,8 +138,5 @@ namespace Z0
         public static Vector128<ulong> v128K2 => CpuVector.vbroadcast(n128, BitMasks.Even64x2);
 
         public static Vector128<ulong> v128K4 => CpuVector.vbroadcast(n128, BitMasks.Lsb64x8x4);
-
     }
-
-
 }

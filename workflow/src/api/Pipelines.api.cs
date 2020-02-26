@@ -13,6 +13,7 @@ namespace Z0
 
     public static class Pipelines
     {
+
         /// <summary>
         /// Creates an observation pipe from a receiver function
         /// </summary>

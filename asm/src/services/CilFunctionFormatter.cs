@@ -23,14 +23,18 @@ namespace Z0
             this.Context = context;
         }
         
+        static string Comment(string text, string delimiter = "//", int pad = 0)
+            => pad == 0 ? $"{delimiter} {text}" : delimiter.PadRight(pad) + text;
+
+
         public string Format(CilFunction f)
         {
             var rendered = text.factory.Builder();
 
             var margin = new string(AsciSym.Space,4);
-            rendered.AppendLine(f.FullName.Comment());
-            f.Sig.TryMap(s => rendered.AppendLine(s.Format().Comment()));
-            rendered.AppendLine(f.ImplSpec.ToString().Comment());            
+            rendered.AppendLine(Comment(f.FullName));
+            f.Sig.TryMap(s => rendered.AppendLine(Comment(s.Format())));
+            rendered.AppendLine(Comment(f.ImplSpec.ToString()));            
             rendered.AppendLine(f.Sig.MapValueOrElse(s => s.Format(), () => string.Empty));
             rendered.AppendLine(AsciSym.LBrace);                    
             

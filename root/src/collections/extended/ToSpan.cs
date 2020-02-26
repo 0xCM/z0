@@ -20,9 +20,17 @@ namespace Z0
         /// <param name="skip">The number of elements to skip</param>
         /// <param name="length">The length of the result span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
         public static Span<T> ToSpan<T>(this IEnumerable<T> src, int skip, int length)
             => src.Skip(skip).Take(length).ToArray();            
+
+        public static Span<T> ToSpan<T>(this ISet<T> src)
+        {
+            var dst = SpanOps.alloc<T>(src.Count);
+            var i = 0;
+            foreach(var item in src)
+                dst[i++] = item;
+            return dst;
+        }
 
         /// <summary>
         /// Constructs a span from an array
@@ -87,5 +95,4 @@ namespace Z0
         public static Span<T> ToSpan<T>(this T[] src, int offset, int length)
             => new Span<T>(src, offset, length);
     }
-
 }

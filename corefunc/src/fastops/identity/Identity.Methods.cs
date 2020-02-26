@@ -51,7 +51,7 @@ namespace Z0
             {
                 var id = Identity.identify(p.ParameterType.EffectiveType());
                 if(!id.IsEmpty)
-                    return concat(id.Identifier, p.Variance().Format());                
+                    return text.concat(id.Identifier, p.Variance().Format());                
             }
             return string.Empty;                        
         }
@@ -146,9 +146,9 @@ namespace Z0
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = concat(IDI.Vector,argtype.Width().Format());
+                        last = text.concat(IDI.Vector,argtype.Width().Format());
                     else if(argtype.IsBlocked())
-                        last = concat(IDI.Block, argtype.Width().Format());
+                        last = text.concat(IDI.Block, argtype.Width().Format());
                     else if(argtype.IsSpan())
                         last = argtype.SpanKind().Format();
                 }
@@ -179,6 +179,6 @@ namespace Z0
             => Identity.name(m);
 
         static string formatargs(char open, char close, char sep, IEnumerable<string> args)
-            => concat(open, string.Join(sep,args), close);
+            => text.concat(open, string.Join(sep,args), close);
     }
 }

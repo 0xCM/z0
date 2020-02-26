@@ -76,7 +76,7 @@ namespace Z0
         }
 
         public string Format()
-            => concat(OpId.ToString(), text.space(), Offset.FormatAsmHex(4), text.space(), Location.Format(), text.space(), Payload.FormatHex());
+            => text.concat(OpId.ToString(), text.space(), Offset.FormatAsmHex(4), text.space(), Location.Format(), text.space(), Payload.FormatHex());
 
         public override string ToString() 
             => Format();
