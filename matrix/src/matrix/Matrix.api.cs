@@ -216,7 +216,7 @@ namespace Z0
             var dim = $"{nateval<M>()}x{nateval<N>()}";
             var kind = typeof(T).NumericKind().Format();
             var @base = $"mat_{kind}[{dim}]";
-            var suffix  = index.MapValueOrDefault(i => dot() + index.ToString().PadLeft(3,'0'), string.Empty);
+            var suffix  = index.MapValueOrDefault(i => text.dot() + index.ToString().PadLeft(3,'0'), string.Empty);
             return FileName.Define($"{@base}{suffix}",FileExtensions.Csv);                
         }
         
@@ -244,9 +244,9 @@ namespace Z0
                 for(var i = 0; i<cols; i++)
                 {
                     if(i != 0)
-                        dst.Write(space());
+                        dst.Write(text.space());
 
-                    dst.Write($"Col{i}".PadRight(width, space()));
+                    dst.Write($"Col{i}".PadRight(width, text.space()));
                     
                     if(i != cols - 1)
                         dst.Write(sep);

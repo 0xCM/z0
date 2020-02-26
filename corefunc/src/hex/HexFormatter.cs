@@ -22,9 +22,9 @@ namespace Z0
     public readonly struct HexFormatter<T> : IHexFormatter<T>
         where T : unmanaged
     {
-        static HexFormat DefaultConfig => HexFormat.Define();
+        static HexFormatConfig DefaultConfig => HexFormatConfig.Define();
 
-        static HexSeqFormat DefaultSeqConfig => HexSeqFormat.Define(DefaultConfig);
+        static HexSeqFormatConfig DefaultSeqConfig => HexSeqFormatConfig.Define(DefaultConfig);
 
         readonly IBaseHexFormatter<T> BaseFormatter;
         
@@ -47,14 +47,14 @@ namespace Z0
             => FormatItem(src, DefaultConfig);
 
         [MethodImpl(Inline)]
-        public string FormatItem(T src, in HexFormat hex)
+        public string FormatItem(T src, in HexFormatConfig hex)
             => text.concat(
-                hex.Specifier && hex.Specifier ? HexFormat.PreSpecString : string.Empty, 
+                hex.Specifier && hex.Specifier ? HexFormatConfig.PreSpecString : string.Empty, 
                 hex.ZPad ? BaseFormatter.Format(src, hex.FormatString).PadLeft(size<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatString),
-                hex.Specifier && !hex.PreSpec ? HexFormat.PostSpecString : string.Empty
+                hex.Specifier && !hex.PreSpec ? HexFormatConfig.PostSpecString : string.Empty
                 );
 
-        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in HexSeqFormat config)
+        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in HexSeqFormatConfig config)
         {
             Span<string> dst = new string[src.Length];
             for(var i=0; i<dst.Length; i++)
@@ -62,7 +62,7 @@ namespace Z0
             return dst;
         }
 
-        public string Format(ReadOnlySpan<T> src, in HexSeqFormat seq, in HexFormat hex)
+        public string Format(ReadOnlySpan<T> src, in HexSeqFormatConfig seq, in HexFormatConfig hex)
         {            
             var result = new StringBuilder();
 
@@ -77,7 +77,7 @@ namespace Z0
             return result.ToString();
         }
 
-        public string Format(ReadOnlySpan<T> src, in HexSeqFormat seq)
+        public string Format(ReadOnlySpan<T> src, in HexSeqFormatConfig seq)
         {
             var result = new StringBuilder();
             var config = seq.HexFormat;

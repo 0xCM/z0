@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-
     [Flags]
     public enum NumericFormatKind
     {        
@@ -75,6 +73,5 @@ namespace Z0
 
         public static bool IsZeroPadded(this NumericFormatKind src)
             =>  (src & NumericFormatKind.ZeroPadded) != 0;
-
     }
 }

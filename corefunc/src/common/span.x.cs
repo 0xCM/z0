@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         public static string FormatLines<T>(this ReadOnlySpan<T> src)
         {
-            var lines = buildstring();
+            var lines = text.factory.Builder();
             for(var i=0; i<src.Length; i++)
                 lines.AppendLine(src[i].ToString());
             return lines.ToString();

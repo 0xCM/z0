@@ -40,7 +40,7 @@ namespace Z0.Logix
             => $"{gmath.log2(Id)}: {Label}";
          
         public string Format()
-            => parenthetical($"{gmath.log2(Id)}, {Label}");
+            => text.parenthetical($"{gmath.log2(Id)}, {Label}");
 
         public override string ToString()
             => Title;

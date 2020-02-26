@@ -232,4 +232,10 @@ namespace  Z0
         void AddOrReplace(K key, V value);
     }
 
+    public interface IConcurrentLookup<K,V>
+    {
+        V Acquire(K key, Func<K,V> factory);
+        void Add(K key, V value);        
+    }
+
 }

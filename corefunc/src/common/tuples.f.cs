@@ -95,24 +95,24 @@ partial class zfunc
     /// <summary>
     /// Determines the tuple's style, if possible; otherwise, returns None
     /// </summary>
-    /// <param name="text">The putative tuple representation</param>
-    static Option<TupleFormat> style(string text)
-        => text.EnclosedBy(lparen(), rparen()) ? some(TupleFormat.Coordinate)
-        : text.EnclosedBy(lbracket(), rbracket()) ? some(TupleFormat.List)
-        : text.EnclosedBy(lbrace(), rbrace()) ? some(TupleFormat.Record)
+    /// <param name="src">The putative tuple representation</param>
+    static Option<TupleFormat> style(string src)
+        => src.EnclosedBy(text.lparen(), text.rparen()) ? some(TupleFormat.Coordinate)
+        : src.EnclosedBy(text.lbracket(), text.rbracket()) ? some(TupleFormat.List)
+        : src.EnclosedBy(text.lbrace(), text.rbrace()) ? some(TupleFormat.Record)
         : none<TupleFormat>();
 
     static char leftBound(TupleFormat style)
-        => (style == TupleFormat.Coordinate ? lparen()
-        : style == TupleFormat.List ? lbracket().ToString()
-        : style == TupleFormat.Record ? lbrace()
-        : lparen())[0];
+        => (style == TupleFormat.Coordinate ? text.lparen()
+        : style == TupleFormat.List ? text.lbracket().ToString()
+        : style == TupleFormat.Record ? text.lbrace()
+        : text.lparen())[0];
 
     static char rightBound(TupleFormat style)
-        => (style == TupleFormat.Coordinate ? rparen()
-        : style == TupleFormat.List ? rbracket().ToString()
-        : style == TupleFormat.Record ? rbrace()
-        : rparen())[0];
+        => (style == TupleFormat.Coordinate ? text.rparen()
+        : style == TupleFormat.List ? text.rbracket().ToString()
+        : style == TupleFormat.Record ? text.rbrace()
+        : text.rparen())[0];
 
     static char[] bounds(TupleFormat style)
         => zfunc. array(leftBound(style), rightBound(style));
@@ -122,9 +122,9 @@ partial class zfunc
     /// </summary>
     /// <param name="style">The tuple representation style</param>
     internal static Func<string, string> boundaryFn(TupleFormat style)
-        => style == TupleFormat.List ? new Func<string, string>(bracket)
-        : style == TupleFormat.Record ? new Func<string, string>(embrace)
-        : new Func<string, string>(x => parenthetical(x));
+        => style == TupleFormat.List ? new Func<string, string>(text.bracket)
+        : style == TupleFormat.Record ? new Func<string, string>(text.embrace)
+        : new Func<string, string>(x => text.parenthetical(x));
 
     /// <summary>
     /// Parses a tuple of the form (x1,x2)

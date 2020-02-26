@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+
     using static FKT;
 
     public static class FK

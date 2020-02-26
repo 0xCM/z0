@@ -20,8 +20,8 @@ namespace Z0
                 return "null";
             
             return src switch{
-                string x => enquote(x.ToString()),
-                char x => squote(x.ToString()),
+                string x => text.enquote(x.ToString()),
+                char x => text.squote(x.ToString()),
                 object x => x.ToString()
             };
         }
@@ -42,7 +42,7 @@ namespace Z0
             if(src.IsConst())                
                 fmt += $" = {FormatValue(src.ConstValue.ValueOrDefault())}";
 
-            fmt += semicolon();
+            fmt += text.semicolon();
             
             return fmt;
         }
@@ -57,7 +57,7 @@ namespace Z0
         public static string Format(this ITypeInfo src, int offset)
         {
             var indent = new string(AsciSym.Space, offset);
-            var fmt = buildstring();
+            var fmt = text.factory.Builder();
 
             fmt.Append(indent);
 
@@ -79,14 +79,14 @@ namespace Z0
             
             fmt.AppendLine();
             fmt.Append(indent);
-            fmt.Append(lbrace());
+            fmt.Append(text.lbrace());
             
             foreach(var m in src.Members)
                 fmt.AppendLine(concat(indent + indent, m.Format()));
             
             fmt.AppendLine();
             fmt.Append(indent);
-            fmt.Append(rbrace());            
+            fmt.Append(text.rbrace());            
 
             return fmt.ToString();                
         }

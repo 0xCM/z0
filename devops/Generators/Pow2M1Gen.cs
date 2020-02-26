@@ -21,13 +21,13 @@ namespace Z0
         static FileName OutFile => FileName.Define($"{ClassName}.cs");
 
         public static byte[] GenData()
-            => Pow2M1.All.Select(x => x.vallue).ToSpan().AsBytes().ToArray();
+            => Pow2.M1Values.Select(x => x.vallue).ToSpan().AsBytes().ToArray();
 
         public static byte[] GenData<T>()
             where T : unmanaged
         {
             
-            var values = Pow2M1.Values<T>().Select(x => x.value).ToArray().ToSpan();
+            var values = Pow2.m1Values<T>().Select(x => x.value).ToArray().ToSpan();
             return values.AsBytes().ToArray();
         }
 

@@ -11,9 +11,7 @@ namespace Z0
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
-    public static class DisplayNameX
+    public static class DisplayNameFormatting
     {
         /// <summary>
         /// Constructs a display name for a type
@@ -64,24 +62,24 @@ namespace Z0
             return name;
         } 
 
+        static string GenericMethodDisplayName(this MethodInfo src, IReadOnlyList<Type> args)
+        {                
+            var argFmt = args.Count != 0 ? args.Select(t => t.DisplayName()).Concat(", ") : string.Empty;            
+            var typeName = src.Name.Replace($"`{args.Count}", string.Empty);
+            return typeName + (args.Count != 0 ? text.angled(argFmt) : string.Empty);
+        }
+
         /// <summary>
         /// Constructs a display name for a method
         /// </summary>
         /// <param name="src">The source method</param>
         public static string DisplayName(this MethodInfo src)
         {
-            static string GenericMemberDisplayName(string memberName, IReadOnlyList<Type> args)
-            {                
-                var argFmt = args.Count != 0 ? args.Select(t => t.DisplayName()).Concat(", ") : string.Empty;            
-                var typeName = memberName.Replace($"`{args.Count}", string.Empty);
-                return typeName + (args.Count != 0 ? angled(argFmt) : string.Empty);
-            }
-
             var attrib = src.GetCustomAttribute<DisplayNameAttribute>();
             if(attrib != null)
                 return attrib.DisplayName;
             var slots = src.GenericParameters(false);
-            return slots.Length == 0 ? src.Name : GenericMemberDisplayName(src.Name, slots);            
+            return slots.Length == 0 ? src.Name : src.GenericMethodDisplayName(slots);            
         }
 
         /// <summary>

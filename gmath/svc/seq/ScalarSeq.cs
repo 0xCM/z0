@@ -78,7 +78,7 @@ namespace Z0
 
         public string Format(char? delimiter = null)
         {
-            var fmt = buildstring();
+            var fmt = text.factory.Builder();
             fmt.Append(AsciSym.LBrace);
             for(var i=0; i<terms.Length; i++)
             {

@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;
-
-    partial class xfunc
+    
+    public static class BlockFormatting
     {
         /// <summary>
         /// Formats a blocked span as a delimited list

@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Describes an assembly code emission
@@ -40,7 +40,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = buildstring();
+            var dst = text.factory.Builder();
             dst.AppendField(TermCode.ToString(), TermCodePad);
             dst.DelimitField(Size.ToString(), SizePad, delimiter);
             dst.DelimitField(Uri.Format(),delimiter);

@@ -29,7 +29,7 @@ namespace Z0
 
         public override string ToString() 
         {
-            return concat(nameof(FunctionCount), spaced(AsciSym.Eq), FunctionCount.ToString());
+            return concat(nameof(FunctionCount), text.spaced(AsciSym.Eq), FunctionCount.ToString());
         }
     }
 

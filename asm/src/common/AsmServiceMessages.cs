@@ -52,7 +52,7 @@ namespace Z0
             => appMsg($"Emitting catalog {catalog.CatalogName} from catalog emitter", SeverityLevel.Info);
 
         public static AppMsg CapturingImmediates(GenericOpSpec op)        
-            => appMsg($"Capturing {op.Id} generic immediates for kinds {op.Kinds.Select(k => k.ToString()).Concat(comma())}", SeverityLevel.Babble);
+            => appMsg($"Capturing {op.Id} generic immediates for kinds {op.Kinds.Select(k => k.ToString()).Concat(text.comma())}", SeverityLevel.Babble);
 
         public static AppMsg Decoded(AsmFunction f)        
             => appMsg($"Decoded function {f.Id}", SeverityLevel.Babble);

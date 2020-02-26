@@ -22,7 +22,7 @@ namespace Z0
 
         string MakeBsArray(byte src)
         {
-            var dst = buildstring();
+            var dst = text.factory.Builder();
             dst.Append("new char[]{");
             for(var i=0; i<8; i++)
             {
@@ -37,7 +37,7 @@ namespace Z0
         }
         string MakeBsArray(sbyte src)
         {
-            var dst = buildstring();
+            var dst = text.factory.Builder();
             dst.Append("new char[]{");
             for(var i=0; i<8; i++)
             {
@@ -53,7 +53,7 @@ namespace Z0
 
         string MakeBsIndex(byte src)
         {
-            var dst = buildstring();
+            var dst = text.factory.Builder();
             dst.Append("0b");
             for(var i=7; i>=0; i--)
                 dst.Append(MakeBitChar(src,i));
@@ -62,7 +62,7 @@ namespace Z0
 
         string MakeBsIndex(sbyte src)
         {
-            var dst = buildstring();
+            var dst = text.factory.Builder();
             if(src < 0)
                 dst.Append("-");
             dst.Append("0b");            
@@ -79,7 +79,7 @@ namespace Z0
 
             for(var i=7; i>=0; i--)
                 dst[i] = MakeBitChar(src, 7-i);
-            return enquote(new string(dst));
+            return text.enquote(new string(dst));
         }
 
         string MakeBsText(sbyte src)
@@ -88,13 +88,13 @@ namespace Z0
 
             for(var i=7; i>=0; i--)
                 dst[i] = MakeBitChar(src, 7-i);
-            return enquote(new string(dst));
+            return text.enquote(new string(dst));
         }
 
         //new byte[]{0,0,0,0,0,0,0,0}
         string MakeBsSeq(byte src)
         {
-            var dst = buildstring();
+            var dst = text.factory.Builder();
             dst.Append("new byte[]{");
             for(var i=0; i<8; i++)
             {
@@ -108,7 +108,7 @@ namespace Z0
 
         string MakeBsSeq(sbyte src)
         {
-            var dst = buildstring();
+            var dst = text.factory.Builder();
             dst.Append("new sbyte[]{");
             for(var i=0; i<8; i++)
             {

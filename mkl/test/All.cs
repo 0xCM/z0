@@ -38,7 +38,7 @@ namespace Z0.Mkl
                 cyan(line1);
                 cyan(line2);
             }
-            return  (method, line1 + eol() + line2);
+            return  (method, line1 + text.eol() + line2);
         }
 
         public static (string method, string msg) varintro(string variation, bool silent = true, [CallerMemberName] string method = null)
@@ -52,7 +52,7 @@ namespace Z0.Mkl
                 cyan($"{variant} => {Intro}");
                 cyan(Divider);
             }
-            return (variant, line1 + eol() + line2);
+            return (variant, line1 + text.eol() + line2);
         }
 
 
@@ -67,7 +67,7 @@ namespace Z0.Mkl
                 cyan(line2);
             }
             
-            return line1 + eol() + line2;
+            return line1 + text.eol() + line2;
         }
 
         [MethodImpl(Inline)]
@@ -119,7 +119,7 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         public static (Stopwatch timer, string report) input(string firstTitle, object firstValue, string secondTitle, object secondValue, bool silent = true)
         {
-            var report = buildstring();
+            var report = text.factory.Builder();
             report.AppendLine(input(firstTitle, firstValue, silent));
             report.AppendLine(input(secondTitle, secondValue, silent));
             return (stopwatch(), report.ToString());
@@ -140,7 +140,7 @@ namespace Z0.Mkl
                 magenta(line1);
                 magenta(line2);
             }
-            return line1 + eol() + line2;
+            return line1 + text.eol() + line2;
 
         }
 
@@ -181,7 +181,7 @@ namespace Z0.Mkl
             var time = snap(sw);            
 
             msg += output(result, silent);            
-            msg += eol();
+            msg += text.eol();
             msg += conclude(time, silent);            
         }
 
@@ -253,7 +253,7 @@ namespace Z0.Mkl
             var time = snap(timer); 
             var finaleMsg = finale(nameof(c), c.Format(), timer, silent, method);
                 
-            var report = buildstring();
+            var report = text.factory.Builder();
             report.AppendLine(introMsg);
             report.AppendLine(startMsg);
             report.AppendLine(finaleMsg);
@@ -262,7 +262,7 @@ namespace Z0.Mkl
         
         public static void gemm()
         {
-            var report = buildstring();
+            var report = text.factory.Builder();
             report.AppendLine(gemm<N3,N4>());
             report.AppendLine(gemm<N5,N7>());
             report.AppendLine(gemm<N10,N10>());

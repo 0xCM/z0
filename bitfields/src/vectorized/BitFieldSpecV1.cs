@@ -40,7 +40,7 @@ namespace Z0
 
         public string Format()
         {
-            var fmt = buildstring();
+            var fmt = text.factory.Builder();
             for(var i=0; i< FieldCount; i++)
             {
                 var f = this[i];
@@ -54,7 +54,7 @@ namespace Z0
                     fmt.Append(AsciSym.Space);
                 }
             }
-            return bracket(fmt.ToString());
+            return text.bracket(fmt.ToString());
         }
     }
 }

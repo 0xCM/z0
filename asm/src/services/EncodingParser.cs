@@ -69,7 +69,7 @@ namespace Z0
         {
             if(duplicated.Length != 0)
             {
-                var format = string.Join(comma(), duplicated);
+                var format = string.Join(text.comma(), duplicated);
                 print($"Identifier duplicates: {format}", SeverityLevel.Warning);           
             }
         }

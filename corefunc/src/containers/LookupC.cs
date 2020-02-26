@@ -14,12 +14,6 @@ namespace Z0
     
     using static Root;
 
-    public interface IConcurrentLookup<K,V>
-    {
-        V Acquire(K key, Func<K,V> factory);
-        void Add(K key, V value);        
-    }
-
     readonly struct ConcurrentCache<K,V> : IConcurrentLookup<K,V>
     {
         static readonly ConcurrentLookup<K,V> Index = new ConcurrentLookup<K, V>();

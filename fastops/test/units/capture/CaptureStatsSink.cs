@@ -25,7 +25,7 @@ namespace Z0
 
         public override string ToString()
         {
-            var s = buildstring();
+            var s = text.factory.Builder();
             for(var i=0; i<Recognized.Length; i++)
             {
                 s.Append($"{Recognized[i]}");

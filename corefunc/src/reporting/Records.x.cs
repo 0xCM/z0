@@ -70,13 +70,13 @@ namespace Z0
 
         public static void DelimitField(this StringBuilder sb, object content, int pad, char delimiter)
         {
-            sb.Append(rspace(delimiter));            
+            sb.Append(text.rspace(delimiter));            
             sb.Append($"{content}".PadRight(pad));
         }
 
         public static void DelimitField(this StringBuilder sb, object content, char delimiter)
         {
-            sb.Append(rspace(delimiter));                        
+            sb.Append(text.rspace(delimiter));                        
             sb.Append(content);
         }
 
@@ -92,7 +92,7 @@ namespace Z0
             if(sb == null)
                 throw new Exception("Your string buildler is null!!");
 
-            sb.Append(rspace(delimiter));            
+            sb.Append(text.rspace(delimiter));            
             sb.Append($"{content}".PadRight(evalue<T,int>(pad)));
         }
 
@@ -105,7 +105,7 @@ namespace Z0
         public static void DelimitField<F>(this StringBuilder sb, F content, int pad, char delimiter)
             where F : ICustomFormattable
         {
-            sb.Append(rspace(delimiter));            
+            sb.Append(text.rspace(delimiter));            
             sb.Append($"{content?.Format()}".PadRight(pad));
         }
 
@@ -121,7 +121,7 @@ namespace Z0
             where F : ICustomFormattable
             where T : unmanaged, Enum
         {
-            sb.Append(rspace(delimiter));            
+            sb.Append(text.rspace(delimiter));            
             sb.Append($"{content?.Format()}".PadRight(evalue<T,int>(pad)));
         }
 

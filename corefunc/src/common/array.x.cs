@@ -16,14 +16,14 @@ namespace Z0
     {
         public static string Format<T>(this Vector512<T> src, char sep = ',', int pad = 0)
             where T : unmanaged
-            => bracket(concat(
+            => text.bracket(text.concat(
                     src.Lo.Format(sep:sep, pad:pad, bracketed:false), 
                     $"{sep} ",
                     src.Hi.Format(sep:sep, pad:pad, bracketed:false)));
 
         public static string Format<T>(this Vector1024<T> src, char sep = ',', int pad = 0)
             where T : unmanaged
-            => bracket(concat(
+            => text.bracket(text.concat(
                     src.A.Format(sep:AsciSym.Comma, bracketed:false), $"{sep} ",
                     src.B.Format(sep:AsciSym.Comma,bracketed:false), $"{sep} ",
                     src.C.Format(sep:AsciSym.Comma,bracketed:false), $"{sep} ",

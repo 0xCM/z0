@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static zfunc;    
-
-    partial class xfunc
+    public static class BitFormatting
     {
         /// <summary>
         /// Formats the source value as a bitstring
@@ -108,7 +106,7 @@ namespace Z0
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         static string BlockedBits<T>(T src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
             where T : unmanaged
-            => bracket(BitString.scalar(src,maxbits).Format(false, specifier, blocksize ?? 8, underscores ? AsciSym.Underscore : AsciSym.Space, null));
+            => text.bracket(BitString.scalar(src,maxbits).Format(false, specifier, blocksize ?? 8, underscores ? AsciSym.Underscore : AsciSym.Space, null));
 
         /// <summary>
         /// Block-formats the source value
@@ -198,7 +196,7 @@ namespace Z0
         /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static string Format(this ReadOnlySpan<bit> src, BitFormat? fmt = null)
+        public static string Format(this ReadOnlySpan<bit> src, BitFormatConfig? fmt = null)
             => src.ToBitString().Format(fmt);
             
         /// <summary>
@@ -209,7 +207,7 @@ namespace Z0
         /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static string Format(this Span<bit> src,  BitFormat? fmt = null)
+        public static string Format(this Span<bit> src,  BitFormatConfig? fmt = null)
             => src.ReadOnly().Format(fmt);                     
     }
 }

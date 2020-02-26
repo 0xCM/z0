@@ -33,7 +33,7 @@ namespace Z0.Logix
 
         public string Format()
         {
-            var sb = buildstring();
+            var sb = text.factory.Builder();
             
             for(var i=0; i<Answered.Length; i++)
             {

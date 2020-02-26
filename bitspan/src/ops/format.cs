@@ -11,9 +11,9 @@ namespace Z0
 
     partial struct BitSpan
     {
-        public static string format(in BitSpan src, BitFormat? fmt = null)
+        public static string format(in BitSpan src, BitFormatConfig? fmt = null)
         {
-            var options = fmt ?? BitFormat.Default;
+            var options = fmt ?? BitFormatConfig.Default;
             var bitcount = src.Length;
             var blocked = options.BlockWidth != 0;
             var blocks = blocked ? src.Length / options.BlockWidth : 0;                        

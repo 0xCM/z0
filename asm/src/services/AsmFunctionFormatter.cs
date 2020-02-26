@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="fmt">The format configuration</param>
         public string FormatDetail(AsmFunction src)
         {            
-            var dst = buildstring();
+            var dst = text.factory.Builder();
 
             if(Config.EmitSectionDelimiter)
                 dst.AppendLine(Config.SectionDelimiter);
@@ -70,7 +70,7 @@ namespace Z0
         public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base)
         {            
             static string LineLabel(ulong src)
-                => concat(src.FormatSmallHex(), Hex.PostSpec, space());
+                => concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
             
             if(src.Count == 0)
                 return ReadOnlySpan<string>.Empty;
@@ -90,7 +90,7 @@ namespace Z0
                 });                
 
             var dst = new string[src.Count];
-            var sb = buildstring();
+            var sb = text.factory.Builder();
             var writer = new StringWriter(sb);
             var output = new AsmOutput(writer, @base);
             for(var i = 0; i < src.Count; i++)
@@ -130,7 +130,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source function</param>
         static string EmbraceHex(AsmCode src)
-            => embrace(src.Encoded.FormatHex(AsciSym.Comma, true, true, true));
+            => text.embrace(src.Encoded.FormatHex(AsciSym.Comma, true, true, true));
 
         static string FormatEncodingProp(AsmCode src)
             => Comment($"static ReadOnlySpan<byte> {src.Id}_Bytes => new byte[{src.Encoded.Length}]{EmbraceHex(src)};");
@@ -141,13 +141,13 @@ namespace Z0
             if(Config.EmitFunctionOrigin)
                 dataline += code.MemorySource.Format();
 
-            dataline += bracket(code.MemorySource.Length);
+            dataline += text.bracket(code.MemorySource.Length);
 
             if(Config.EmitFunctionHeaderEncoding)
             {
                 var formatter = HexFormatter.Define<byte>();
                 var formatted = formatter.Format(code.Encoded, Config.FunctionHeaderEncodingFormat);                
-                dataline += concat(spaced(AsciSym.Eq), embrace(formatted));
+                dataline += concat(text.spaced(AsciSym.Eq), text.embrace(formatted));
             }
             return dataline;
         }
@@ -172,7 +172,7 @@ namespace Z0
                 var ci = src.CaptureInfo;
                 var cidesc = string.Empty;
                 if(Config.EmitCaptureTermCode)
-                    cidesc += concat(nameof(ci.TermCode), spaced(AsciSym.Eq), ci.TermCode.ToString());
+                    cidesc += concat(nameof(ci.TermCode), text.spaced(AsciSym.Eq), ci.TermCode.ToString());
 
                 lines.Add(Comment(cidesc));
             }
@@ -187,18 +187,18 @@ namespace Z0
             => $"{src.Definition}{fmt.FieldDelimiter}{src.OpCode}";
 
         static string FormatLineLabel(ulong src)
-            => concat(src.FormatSmallHex(), Hex.PostSpec, space());
+            => concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
 
         static string FormatLineLabel(ushort src)
             => FormatLineLabel(((ulong)src));
 
         string FormatInstruction(AsmInstructionInfo src)
         {
-            var description = buildstring();    
-            description.Append(concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(Config.InstructionPad, space())));
+            var description = text.factory.Builder();    
+            description.Append(concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(Config.InstructionPad, text.space())));
             description.Append(Comment(Format(src.Spec, Config)));
-            description.Append(concat(Config.FieldDelimiter,"encoded", bracket(src.Encoded.Length.ToString())));
-            description.Append(embrace(src.Encoded.FormatHex(space(), true, false)));
+            description.Append(text.concat(Config.FieldDelimiter,"encoded", text.bracket(src.Encoded.Length.ToString())));
+            description.Append(text.embrace(src.Encoded.FormatHex(text.space(), true, false)));
             return description.ToString();
         }
 

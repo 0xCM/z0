@@ -49,7 +49,7 @@ namespace Z0.Logix
             => convert<T,int>(gmath.sub(Max,Min));
 
         public string Format()
-            => embrace($"{Min}...{Max}") + bracket($"{Step}") ;
+            => text.embrace($"{Min}...{Max}") + text.bracket($"{Step}") ;
 
         public override string ToString()
             => Format();

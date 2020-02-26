@@ -32,7 +32,7 @@ namespace Z0
         public bool IsClosed {get;}
 
         public string Format(bool fence)
-            => fence ? angled(Name) : Name;
+            => fence ? text.angled(Name) : Name;
 
         public override string Format()
             => Format(false);

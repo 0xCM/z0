@@ -9,11 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     
     using static Root;    
 
-    public static class HexFormatExtensions
+    public static class HexFormatting
     {
         const string UC = "X";
 
@@ -39,21 +38,21 @@ namespace Z0
             where T : unmanaged
         {
             var delimiter = sep ?? AsciSym.Space;
-            var fmt = new StringBuilder();
+            var builder = factory<string>().Builder();
             if(bracket)
-                fmt.Append(AsciSym.LBracket);
+                builder.Append(AsciSym.LBracket);
 
             for(var i = 0; i<src.Length; i++)
             {
-                fmt.Append(Hex.format(src[i], true, specifier));
+                builder.Append(Hex.format(src[i], true, specifier));
                 if(i != src.Length - 1)
-                    fmt.Append((char)delimiter);
+                    builder.Append((char)delimiter);
             }
             
             if(bracket)
-                fmt.Append(AsciSym.RBracket);
+                builder.Append(AsciSym.RBracket);
             
-            return fmt.ToString();
+            return builder.ToString();
         }
 
 
@@ -73,31 +72,31 @@ namespace Z0
         static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
-            var sb = new StringBuilder();
+            var builder = factory<string>().Builder();
             var pre = (specifier && prespec) ? "0x" : string.Empty;
             var post = (specifier && !prespec) ? "h" : string.Empty;
             var spec = HexFmtSpec(uppercase);
             var width = segwidth ?? int.MaxValue;
             var counter = 0;
             if(segwidth != null)
-                sb.AppendLine();
+                builder.AppendLine();
 
             for(var i=0; i<src.Length; i++)
             {                
                 var value = src[i].ToString(spec);
                 var padded = zpad ? value.PadLeft(2,AsciDigits.A0) : value;
 
-                sb.Append(text.concat(pre, padded, post));
+                builder.Append(text.concat(pre, padded, post));
                 if(i != src.Length - 1)
-                    sb.Append(sep);
+                    builder.Append(sep);
                 
                 if(++counter == width)
                 {
-                    sb.AppendLine();
+                    builder.AppendLine();
                     counter = 0;
                 }                
             }
-            return sb.ToString();
+            return builder.ToString();
         }
         
         public static string FormatSmallHex(this ulong src, bool postspec = false)
@@ -469,17 +468,17 @@ namespace Z0
         /// <param name="fmt">The format options</param>
         public static IReadOnlyList<string> FormatHexLines(this byte[] data, HexLineFormat? fmt = null)
         {
-            var dst = new StringBuilder();
+            var builder = factory<string>().Builder();
             var configured = fmt ?? HexLineFormat.Default;  
             var lines = new List<string>();
-            var line = new StringBuilder();
+            var line = factory<string>().Builder();
             for(ushort i=0; i< data.Length; i++)
             {                
                 if(i % configured.BytesPerLine == 0)
                 {
                     if(i != 0)
                     {                        
-                        dst.AppendLine();
+                        builder.AppendLine();
                         
                         line.AppendLine();
                         lines.Add(line.ToString());
@@ -488,9 +487,9 @@ namespace Z0
 
                     if(configured.LineLabels)
                     {
-                        dst.Append(i.FormatHex(true,false,false,true));
-                        dst.Append(AsciLower.h);
-                        dst.Append(AsciSym.Space);
+                        builder.Append(i.FormatHex(true,false,false,true));
+                        builder.Append(AsciLower.h);
+                        builder.Append(AsciSym.Space);
 
                         line.Append(i.FormatHex(true,false,false,true));
                         line.Append(AsciLower.h);
@@ -499,8 +498,8 @@ namespace Z0
                     }
                 }
 
-                dst.Append(data[i].FormatHex(true, true, false, true));
-                dst.Append(AsciSym.Space);
+                builder.Append(data[i].FormatHex(true, true, false, true));
+                builder.Append(AsciSym.Space);
 
                 line.Append(data[i].FormatHex(true, true, false, true));
                 line.Append(AsciSym.Space);
@@ -509,7 +508,7 @@ namespace Z0
             if(last.IsNotBlank())
                 lines.Add(last);   
 
-            dst.AppendLine();
+            builder.AppendLine();
             return lines;           
         }
     }

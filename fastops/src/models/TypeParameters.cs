@@ -31,7 +31,7 @@ namespace Z0
         public string Format(bool fence)
         {            
             var content = reps.Select(x => x.Format(false)).Concat(", ");
-            return fence ? angled(content) : content;
+            return fence ? text.angled(content) : content;
         }
 
         public int Count

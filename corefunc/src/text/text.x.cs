@@ -241,7 +241,7 @@ namespace Z0
         public static string SeparateBlocks(this string src, int blocklen, char sep, string blockprefix)
         {
             var parts = src.Partition(blocklen).ToArray();            
-            var result = buildstring();
+            var result = text.factory.Builder();
             var prefix = blockprefix ?? string.Empty;
             var lastindex = parts.Length - 1;
             for(var i=0; i<parts.Length; i++)

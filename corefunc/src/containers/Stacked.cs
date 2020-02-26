@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static SpanOps;
     using static Refs;
 
     public ref struct Stacked<T>

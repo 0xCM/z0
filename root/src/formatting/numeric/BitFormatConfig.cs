@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Controls formatting when bitstring content is rendered as text
     /// </summary>
-    public readonly struct BitFormat
+    public readonly struct BitFormatConfig : IFormatConfig
     {        
         /// <summary>
         /// Indicates whether leading zeros should be trimmed
@@ -40,26 +39,26 @@ namespace Z0
         /// </summary>
         public readonly int RowWidth;        
 
-        public static BitFormat Default 
-            => new BitFormat(false);
+        public static BitFormatConfig Default 
+            => new BitFormatConfig(false);
 
-        public static BitFormat Tlz
-            => new BitFormat(true);
+        public static BitFormatConfig Tlz
+            => new BitFormatConfig(true);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitFormat(int blockwidth)
+        public static implicit operator BitFormatConfig(int blockwidth)
             => Blocked(blockwidth);
 
         [MethodImpl(Inline)]
-        public static BitFormat Blocked(int width, char? sep = null)
-            => new BitFormat(blockWidth: width, blocksep: sep);
+        public static BitFormatConfig Blocked(int width, char? sep = null)
+            => new BitFormatConfig(blockWidth: width, blocksep: sep);
 
         [MethodImpl(Inline)]
-        public static BitFormat RowBlocked(int blockWidth, int rowWidth, char? blockSep = null)
-            => new BitFormat(blockWidth: blockWidth, rowWidth:rowWidth, blocksep: blockSep);
+        public static BitFormatConfig RowBlocked(int blockWidth, int rowWidth, char? blockSep = null)
+            => new BitFormatConfig(blockWidth: blockWidth, rowWidth:rowWidth, blocksep: blockSep);
 
         [MethodImpl(Inline)]
-        public BitFormat(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null)
+        public BitFormatConfig(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null)
         {
             this.TrimLeadingZeros = tlz;
             this.SpecifierPrefix = false;
@@ -68,5 +67,4 @@ namespace Z0
             this.RowWidth = rowWidth ?? 0;
         }
     }
-
 }

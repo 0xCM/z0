@@ -32,7 +32,7 @@ namespace Z0
             var settings = AppSettings.Load("z0.control").Pairs;
             foreach(var (key,value) in settings)
             {
-                var index = key.Split(colon());            
+                var index = key.Split(text.colon());            
                 if(index.Length == 2 && bit.Parse(index[1]))
                 {
                     var id = Enums.parse<AssemblyId>(value);

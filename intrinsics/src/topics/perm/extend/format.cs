@@ -49,8 +49,8 @@ namespace Z0
         /// <typeparam name="T">The term type</typeparam>
         public static string FormatAsPerm<T>(this ReadOnlySpan<T> terms,  int? colwidth = null)
         {
-            var line1 = buildstring();
-            var line2 = buildstring();
+            var line1 = text.factory.Builder();
+            var line2 = text.factory.Builder();
             var pad = colwidth ?? 3;
             var leftBoundary = $"{AsciSym.Pipe}";
             var rightBoundary = $"{AsciSym.Pipe}".PadLeft(2);
@@ -65,7 +65,7 @@ namespace Z0
             line1.Append(rightBoundary);
             line2.Append(rightBoundary);
             
-            return line1.ToString() + eol() + line2.ToString();
+            return line1.ToString() + text.eol() + line2.ToString();
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         {
             var bs = BitString.scalar((byte)src);
             var data = bs.Format(false,false,2, AsciSym.Space);
-            return bracketed ? bracket(data) : data;
+            return bracketed ? text.bracket(data) : data;
         }
 
         /// <summary>

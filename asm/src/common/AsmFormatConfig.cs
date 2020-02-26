@@ -28,8 +28,8 @@ namespace Z0
         public bool EmitFunctionHeaderEncoding {get;set;}
             = true;        
 
-        public HexFormat FunctionHeaderEncodingFormat {get;set;}
-            = HexFormat.Define();
+        public HexFormatConfig FunctionHeaderEncodingFormat {get;set;}
+            = HexFormatConfig.Define();
 
         public bool EmitFunctionOrigin {get;set;}
             = false;

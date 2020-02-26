@@ -163,7 +163,7 @@ namespace Z0
             => data.Identical(y.data);
 
         [MethodImpl(Inline)]
-        public string Format(BitFormat? fmt = null)
+        public string Format(BitFormatConfig? fmt = null)
             => ToBitString().Format(fmt);
 
         public override bool Equals(object obj)

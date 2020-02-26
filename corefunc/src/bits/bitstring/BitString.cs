@@ -531,9 +531,9 @@ namespace Z0
             }            
         }
 
-        public string Format(BitFormat? fmt = null)
+        public string Format(BitFormatConfig? fmt = null)
         {                                            
-            var style = fmt ?? BitFormat.Default;
+            var style = fmt ?? BitFormatConfig.Default;
             var sep = style.BlockSep;
             var rowWidth = style.RowWidth;
             var specifier = style.SpecifierPrefix;

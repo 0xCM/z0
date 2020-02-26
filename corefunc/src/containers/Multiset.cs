@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Implementation of a basic multiset
@@ -101,6 +101,5 @@ namespace Z0
         /// </summary>
         public IEnumerable<T> Members
             => data.Keys;
-
    }
 }

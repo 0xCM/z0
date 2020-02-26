@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Text.RegularExpressions;
@@ -14,8 +15,14 @@ namespace Z0
 
     using static Root;
 
-    public static class text
+    public static partial class text
     {
+        public static ITextFactory factory
+        {
+            [MethodImpl(Inline)]
+            get => TextFactory.From(Root.factory<string>());
+        }
+
         /// <summary>
         /// Tests whether the source string is empty
         /// </summary>
@@ -95,15 +102,15 @@ namespace Z0
 
         public static string concat(ReadOnlySpan<string> src, string sep)
         {
-            var sb = new StringBuilder();
+            var builder = factory.Builder();
             var lastix = src.Length - 1;
             for(var i=0; i<src.Length; i++)        
             {
-                sb.Append(src[i]);
+                builder.Append(src[i]);
                 if(i != lastix)
-                    sb.Append(sep);
+                    builder.Append(sep);
             }
-            return sb.ToString();
+            return builder.ToString();
         }
 
         public static string concat(Span<string> src, string sep)
@@ -115,10 +122,27 @@ namespace Z0
         /// <param name="content">An content array</param>
         public static string lines(params string[] content)
         {
-            var sb = new StringBuilder();
+            var builder = factory.Builder();
             foreach(var item in content)
-                sb.AppendLine(item);
-            return sb.ToString();
+                builder.AppendLine(item);
+            return builder.ToString();
         }
+
+        /// <summary>
+        /// Creates a complied regular expression and (c)aches it
+        /// </summary>
+        /// <param name="pattern">The regex pattern/></param>
+        public static Regex regex(string pattern)
+            => RegExCache.GetOrAdd(pattern, p => MakeRegEx(p));
+
+        /// <summary>
+        /// Creates a complied regular expression from the supplied pattern
+        /// </summary>
+        /// <param name="pattern">The regex pattern/></param>
+        static Regex MakeRegEx(string pattern)
+            => new Regex(pattern, RegexOptions.Compiled);
+
+        static readonly ConcurrentDictionary<string, Regex> RegExCache
+            = new ConcurrentDictionary<string, Regex>();
     }
 }

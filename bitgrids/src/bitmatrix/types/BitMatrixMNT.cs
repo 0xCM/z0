@@ -208,7 +208,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
         {
-            var sb = buildstring();
+            var sb = text.factory.Builder();
             for(var i=0; i< RowCount; i++)
                  sb.AppendLine(ReadRow(i).Format(blockWidth:1));
             return sb.ToString();

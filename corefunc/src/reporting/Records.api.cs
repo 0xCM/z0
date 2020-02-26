@@ -78,9 +78,9 @@ namespace Z0
                 if(i == 0)
                     headers[i] = field.Name.PadRight(field.Width ?? 0);
                 else if(i == count - 1)
-                    headers[i] = lspace(field.Name);
+                    headers[i] = text.lspace(field.Name);
                 else
-                    headers[i] = lspace(field.Name.PadRight(field.Width ?? 0));        
+                    headers[i] = text.lspace(field.Name.PadRight(field.Width ?? 0));        
             }
             return headers;
         }

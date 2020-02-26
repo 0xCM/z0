@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a common set of hex formatting options
     /// </summary>
-    public readonly struct HexFormat : IFormatConfig
+    public readonly struct HexFormatConfig : IFormatConfig
     {   
         public const string PreSpecString = "0x";             
         
@@ -52,15 +52,15 @@ namespace Z0
         public readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public static implicit operator HexSeqFormat(in HexFormat src)
-            => HexSeqFormat.Define(src);
+        public static implicit operator HexSeqFormatConfig(in HexFormatConfig src)
+            => HexSeqFormatConfig.Define(src);
 
         [MethodImpl(Inline)]
-        public static HexFormat Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
-            => new HexFormat(zpad,specifier,uppercase,prespec, delimiter ?? AsciSym.Comma);
+        public static HexFormatConfig Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
+            => new HexFormatConfig(zpad,specifier,uppercase,prespec, delimiter ?? AsciSym.Comma);
         
         [MethodImpl(Inline)]
-        HexFormat(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)
+        HexFormatConfig(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)
         {
             this.ZPad = zpad;
             this.Specifier = specifier;
@@ -69,22 +69,5 @@ namespace Z0
             this.CaseFormatChar = uppercase ? 'X' : 'x';
             this.Delimiter = delimiter;
         }
-    }
-
-    public readonly struct HexSeqFormat : ISeqFormatConfig<HexSeqFormat>, IFormatConfig<HexSeqFormat>
-    {
-        public static HexSeqFormat Define(in HexFormat hex, string delimiter = null)
-            => new HexSeqFormat(hex, delimiter ?? hex.Delimiter.ToString());
-            
-        HexSeqFormat(in HexFormat hex, string delimiter)
-        {
-            this.Delimiter = delimiter;
-            this.HexFormat = hex;
-        }
-            
-        public HexFormat HexFormat {get;}            
-        
-        public string Delimiter {get;}
-
     }
 }

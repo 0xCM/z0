@@ -14,7 +14,7 @@ namespace Z0
     }
 
 
-    public interface IHexFormatter<T> : IHexFormatter, ISpanFormatter<T,HexSeqFormat,HexFormat>
+    public interface IHexFormatter<T> : IHexFormatter, ISpanFormatter<T,HexSeqFormatConfig,HexFormatConfig>
         where T : struct
          
     {        

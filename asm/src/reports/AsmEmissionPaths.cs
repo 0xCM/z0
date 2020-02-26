@@ -47,10 +47,10 @@ namespace Z0
             =>  AsmReportRoot + FolderName.Define("locations");   
 
         public FilePath ExtractReport(ApiHost host)
-            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), dot(), host.HostName, dash(), "extract"), Ext.Csv);
+            => CaptureRoot + FileName.Define(concat(host.Owner.Format(), text.dot(), host.HostName, text.dash(), "extract"), Ext.Csv);
 
         public FilePath LocationReport(ApiHost host)
-            => LocationRoot + FileName.Define(concat(host.Owner.Format(), dash(), host.HostName), Ext.Csv);
+            => LocationRoot + FileName.Define(concat(host.Owner.Format(), text.dash(), host.HostName), Ext.Csv);
 
         public FilePath LocationReport(AssemblyId assembly)
             => LocationRoot + FileName.Define(assembly.Format(), Ext.Csv);
@@ -82,10 +82,10 @@ namespace Z0
             => AsmDataRoot + FolderName.Define(owner.Format());
 
         public FilePath ParseReport(ApiHost host)
-            => OwnerRoot(host.Owner) + FileName.Define(concat(host.Owner.Format(), dot(), host.HostName), Ext.Csv);
+            => OwnerRoot(host.Owner) + FileName.Define(concat(host.Owner.Format(), text.dot(), host.HostName), Ext.Csv);
 
         public FilePath DecodedAsmDetail(ApiHost host)
-            => OwnerRoot(host.Owner) + FileName.Define(concat(host.Owner.Format(), dot(), host.HostName), Ext.Asm);
+            => OwnerRoot(host.Owner) + FileName.Define(concat(host.Owner.Format(), text.dot(), host.HostName), Ext.Asm);
 
         public FilePath ArchivePath(ArchiveFileKind kind, AssemblyId origin, string host, OpIdentity id)
             => kind switch {

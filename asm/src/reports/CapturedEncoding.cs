@@ -40,7 +40,7 @@ namespace Z0
 
         public string DelimitedText(char sep)
         {
-            var dst = buildstring();
+            var dst = text.factory.Builder();
             dst.AppendField(Sequence, Field.Sequence);
             dst.DelimitField(Length, Field.Length, sep);
             dst.DelimitField(Host, Field.Host, sep);

@@ -30,6 +30,11 @@ namespace Z0
         public static NotSupportedException unsupported<T>()
             => new NotSupportedException($"The invoking operation does not support the type {typeof(T).Name}");
 
+        [MethodImpl(Inline)]
+        public static Factory<T> factory<T>()
+            => default;
+
+
         /// <summary>
         /// Computes the byte-size of a type
         /// </summary>

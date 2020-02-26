@@ -6,7 +6,8 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;         
+    
+    using static Root;         
 
     public static class NumericFormatters
     {
@@ -64,7 +65,6 @@ namespace Z0
             else    
                 throw unsupported<T>();
         }
-
 
         [MethodImpl(Inline)]
         static F get_u<F,T>()
@@ -276,7 +276,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static G generic<S,G>(in S specific)
-            => Unsafe.As<S, G>(ref Unsafe.AsRef(in specific));
-                                   
+            => Unsafe.As<S, G>(ref Unsafe.AsRef(in specific));                                   
     }    
 }

@@ -381,7 +381,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="fmt">Optional formatting style</param>
         [MethodImpl(Inline)]
-        public static string format<N,T>(in BitVector128<N,T> x, BitFormat? fmt = null)
+        public static string format<N,T>(in BitVector128<N,T> x, BitFormatConfig? fmt = null)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => bitstring(x).Format(fmt);
@@ -392,7 +392,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="fmt">Optional formatting style</param>
         [MethodImpl(Inline)]
-        public static string format<N,T>(BitVector<N,T> x, BitFormat? fmt = null)
+        public static string format<N,T>(BitVector<N,T> x, BitFormatConfig? fmt = null)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => bitstring(x).Format(fmt);

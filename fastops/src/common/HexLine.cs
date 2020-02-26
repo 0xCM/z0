@@ -65,7 +65,7 @@ namespace Z0
         }
 
         public string Format(int idpad = 0)
-            => concat(Id.Identifier.PadRight(idpad), space(), Encoded.FormatHex());
+            => concat(Id.Identifier.PadRight(idpad), text.space(), Encoded.FormatHex());
         
         public override string ToString()
             => Format();

@@ -11,7 +11,6 @@ namespace Z0
 
     public static class MicroBuffers
     {
-
         [MethodImpl(NotInline)]
         public static Stacked<byte> bytestack(int capacity)
             => new Stacked<byte>(new byte[capacity]);

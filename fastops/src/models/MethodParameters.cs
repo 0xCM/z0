@@ -28,7 +28,7 @@ namespace Z0
         public string Format(bool fence)
         {
             var content = reps.Select(mp => mp.Format()).Concat(", ");
-            return fence ? parenthetical(content) : content;
+            return fence ? text.parenthetical(content) : content;
         }
     }
 

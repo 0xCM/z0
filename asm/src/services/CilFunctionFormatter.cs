@@ -25,7 +25,7 @@ namespace Z0
         
         public string Format(CilFunction f)
         {
-            var rendered = buildstring();
+            var rendered = text.factory.Builder();
 
             var margin = new string(AsciSym.Space,4);
             rendered.AppendLine(f.FullName.Comment());

@@ -38,9 +38,9 @@ namespace Z0.AsmSpecs
             if(BaseRegister != Register.None)                
                 formatted += BaseRegister.ToString();
             if(Size != MemorySize.Unknown)
-                formatted += lspace(Size);
+                formatted += text.lspace(Size);
             if(SizeFormat.IsNotBlank())
-                formatted += lspace(SizeFormat);
+                formatted += text.lspace(SizeFormat);
             return formatted;
         }
         

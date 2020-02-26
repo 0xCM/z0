@@ -113,7 +113,7 @@ namespace Z0
         }        
 
         [MethodImpl(Inline)]
-        public string Format(BitFormat? fmt = null)
+        public string Format(BitFormatConfig? fmt = null)
             => format(this, fmt);
 
         [MethodImpl(Inline)]

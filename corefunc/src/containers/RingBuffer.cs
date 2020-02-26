@@ -8,13 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static SpanOps;
     using static Refs;
 
     public ref struct RingBuffer<T>
         where T : unmanaged
-    {
-        
+    {        
         Span<T> buffer;
 
         int capacity;

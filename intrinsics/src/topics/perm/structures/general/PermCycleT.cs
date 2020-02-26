@@ -42,7 +42,7 @@ namespace Z0
         }
         public string Format()
         {
-            var sb = buildstring();
+            var sb = text.factory.Builder();
             sb.Append(AsciSym.LParen);
             for(var i=0; i< Terms.Length; i++)            
             {

@@ -97,7 +97,7 @@ namespace Z0
             var yO = Bits.project(Bits.select(y,BitMasks.Odd32), BitMasks.Odd32);
             var xEy = xE | yE;
             var xOy = xO | yO;
-            var t = buildstring();
+            var t = text.factory.Builder();
             t.WithLabeled("x", x.FormatBits(blockwidth:1));
             t.WithLabeled("x", x.FormatBits(blockwidth:1));
             t.WithLabeled("y", y.FormatBits(blockwidth:1));
