@@ -9,29 +9,13 @@ namespace Z0
 
     using static Root;
     using static As;
-
-    partial class Converter
+    using static CastInternals;
+    
+    partial class Cast
     {
-        [MethodImpl(Inline)]
-        public static T convert<T>(char src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return converti<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return convertu<T>(src);
-            else
-                return convertx<T>(src);
-        }
 
         [MethodImpl(Inline)]
-        static T converti<T>(char src)
+        static T to_i<T>(short src)
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>((sbyte)src);
@@ -44,7 +28,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T convertu<T>(char src)
+        static T to_u<T>(short src)
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);
@@ -57,18 +41,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T convertx<T>(char src)
+        static T to_x<T>(short src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return generic<T>((double)(src));
+                return generic<T>(to64f(src));
             else if(typeof(T) == typeof(char))
                 return  generic<T>((char)src);
             else            
-                return unhandled<char,T>(src);
-
+                return unhandled<short,T>(src);
         }
     }
 }

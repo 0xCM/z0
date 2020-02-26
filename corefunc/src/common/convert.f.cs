@@ -19,7 +19,7 @@ partial class zfunc
     public static T convert<S,T>(S src, out T dst)
         where T : unmanaged
         where S : unmanaged
-            => dst = Converter.convert<S,T>(src);
+            => dst = Cast.to<S,T>(src);
            
     /// <summary>
     /// If possible, applies the conversion S -> T
@@ -31,7 +31,7 @@ partial class zfunc
     public static T convert<S,T>(S src)
         where T : unmanaged
         where S : unmanaged
-           => Converter.convert<S,T>(src);
+           => Cast.to<S,T>(src);
 
     /// <summary>
     /// If possible, applies the conversion S -> T for each element of a source span
@@ -60,7 +60,7 @@ partial class zfunc
     public static T[] convert<S,T>(S[] src)
         where T : unmanaged
         where S : unmanaged
-        => Converter.convert<S,T>(src);
+        => Cast.to<S,T>(src);
 
     /// <summary>
     /// If possible, applies the conversion S -> T for each element of a source span
@@ -88,7 +88,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(sbyte src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion byte -> T
@@ -98,7 +98,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(byte src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion short -> T
@@ -108,7 +108,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(short src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
     
     /// <summary>
     /// If possible, applies the conversion ushort -> T
@@ -118,7 +118,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(ushort src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion int -> T
@@ -128,7 +128,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(int src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion uint -> T
@@ -138,7 +138,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(uint src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion long -> T
@@ -148,7 +148,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(long src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion ulong -> T
@@ -158,7 +158,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(ulong src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion float -> T
@@ -168,7 +168,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(float src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion double -> T
@@ -178,7 +178,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(double src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Cast.to<T>(src);
 
     /// <summary>
     /// If possible, applies the conversion char -> T
@@ -188,5 +188,5 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(char src, T t = default)
         where T : unmanaged
-            => Converter.convert<T>(src);            
+            => Cast.to<T>(src);            
 }

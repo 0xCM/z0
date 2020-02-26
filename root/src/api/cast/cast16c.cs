@@ -9,29 +9,30 @@ namespace Z0
 
     using static Root;
     using static As;
+    using static CastInternals;
 
-    partial class Converter
+    partial class Cast
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T convert<T>(int src)
+        [MethodImpl(Inline)]
+        public static T to<T>(char src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return convert_i<T>(src);
+                return converti<T>(src);
             else if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return convert_u<T>(src);
+                return convertu<T>(src);
             else
-                return convert_x<T>(src);
+                return convertx<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert_i<T>(int src)
+        static T converti<T>(char src)
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>((sbyte)src);
@@ -44,7 +45,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T convert_u<T>(int src)
+        static T convertu<T>(char src)
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);
@@ -57,17 +58,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T convert_x<T>(int src)
+        static T convertx<T>(char src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return generic<T>(to64f(src));
+                return generic<T>((double)(src));
             else if(typeof(T) == typeof(char))
                 return  generic<T>((char)src);
             else            
-                return unhandled<int,T>(src);
+                return unhandled<char,T>(src);
+
         }
     }
 }

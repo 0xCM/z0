@@ -7,54 +7,95 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+    using NK = NumericKind;
+
     using static Root;
     using static As;
-    using NK = NumericKind;
-    using TC = System.TypeCode;
 
-    partial class Converter
+    [ApiHost("cast.internals", ApiHostKind.Direct)]
+    static class CastInternals
     {
+        [MethodImpl(Inline), Op]
+        public static double to64f(sbyte src)        
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static double to64f(byte src)        
+            => src;
+        
+        [MethodImpl(Inline), Op]
+        public static double to64f(short src)        
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static double to64f(ushort src)        
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static double to64f(int src)        
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static double to64f(uint src)        
+            => (long)src;
+
+        [MethodImpl(Inline), Op]
+        public static double to64f(long src)        
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static double to64f(ulong src)        
+            => (long)src;
+
+        [MethodImpl(Inline), Op]
+        public static uint to32u(float src)        
+            => (uint)((long)src);
+
+        [MethodImpl(Inline), Op]
+        public static double to64f(float src)        
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static ulong to64u(float src)        
+            => (ulong)((long)src);
+
+        [MethodImpl(Inline), Op]
+        public static sbyte to8i(double src)
+            => (sbyte)to32i(src);
+
+        [MethodImpl(Inline), Op]
+        public static byte to8u(double src)
+            => (byte)to32u(src);
+
+        [MethodImpl(Inline), Op]
+        public static short to16i(double src)
+            => (sbyte)to32i(src);
+
+        [MethodImpl(Inline), Op]
+        public static ushort to16u(double src)
+            => (ushort)to32u(src);
+
+        [MethodImpl(Inline), Op]
+        public static int to32i(double src)
+            => (int)src; 
+
+        [MethodImpl(Inline), Op]
+        public static uint to32u(double src)
+            => (uint)((long)src);
+
+        [MethodImpl(Inline), Op]
+        public static long to64i(double src)
+            => (long)src;
+
+        [MethodImpl(Inline), Op]
+        public static ulong to64u(double src)
+            => (ulong)((long)src);
+ 
         [Op]
-        public static object oconvert(object src, NumericKind dst)
-        {
-            var tc = Type.GetTypeCode(src?.GetType());
-            switch(tc)
-            {
-                case TC.SByte:
-                    return from8i(dst, src);
-
-                case TC.Byte:
-                    return from8u(dst, src);
-
-                case TC.Int16:
-                    return from16i(dst, src);
-
-                case TC.UInt16:
-                    return from16u(dst, src);
-                
-                case TC.Int32:
-                    return from32i(dst, src);
-
-                case TC.UInt32:
-                    return from32u(dst, src);
-
-                case TC.Int64:
-                    return from64i(dst, src);
-
-                case TC.UInt64:
-                    return from64u(dst, src);
-
-                case TC.Single:
-                    return from32f(dst, src);
-
-                case TC.Double:
-                    return from64f(dst,src);
-            }
-            return src;
-        }
-
-        [Op]
-        static object from8i(NumericKind dst, object src)
+        public static object from8i(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -83,7 +124,7 @@ namespace Z0
         }
 
         [Op]
-        static object from8u(NumericKind dst, object src)
+        public static object from8u(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -112,7 +153,7 @@ namespace Z0
         }
 
         [Op]
-        static object from16i(NumericKind dst, object src)
+        public static object from16i(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -141,7 +182,7 @@ namespace Z0
         }
 
         [Op]
-        static object from16u(NumericKind dst, object src)
+        public static object from16u(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -170,7 +211,7 @@ namespace Z0
         }
 
         [Op]
-        static object from32i(NumericKind dst, object src)
+        public static object from32i(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -199,7 +240,7 @@ namespace Z0
         }
 
         [Op]
-        static object from32u(NumericKind dst, object src)
+        public static object from32u(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -228,7 +269,7 @@ namespace Z0
         }
 
         [Op]
-        static object from64i(NumericKind dst, object src)
+        public static object from64i(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -257,7 +298,7 @@ namespace Z0
         }
 
         [Op]
-        static object from64u(NumericKind dst, object src)
+        public static object from64u(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -286,7 +327,7 @@ namespace Z0
         }
 
         [Op]
-        static object from32f(NumericKind dst, object src)
+        public static object from32f(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -315,7 +356,7 @@ namespace Z0
         }
 
         [Op]
-        static object from64f(NumericKind dst, object src)
+        public static object from64f(NumericKind dst, object src)
         {
             switch(dst)
             {
@@ -342,6 +383,12 @@ namespace Z0
             }
             return src;
         }
+  
+        public static T unhandled<S,T>(S src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged
+        {
+            AppErrors.Throw($"The conversion {typeof(S).Name} -> {typeof(T).Name} needed for the value {src} doesn't exist", caller,file,line);
+            return default;
+        }
     }
-
 }

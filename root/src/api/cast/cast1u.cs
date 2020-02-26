@@ -9,16 +9,13 @@ namespace Z0
 
     using static Root;
     using static As;
+    using static CastInternals;
 
-    partial class Converter
+    partial class Cast
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T convert<T>(ushort src)
-            where T : unmanaged
-                => convert_u<T>(src);
 
-        [MethodImpl(Inline)]
-        static T convert_u<T>(ushort src)
+        [MethodImpl(Inline)]   
+        static T to_u<T>(bit src, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -27,14 +24,14 @@ namespace Z0
                 return generic<T>((ushort)src);
             else if(typeof(T) == typeof(uint))
                 return generic<T>((uint)src);
-            else if(typeof(T) == typeof(ulong)) 
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>((ulong)src);
             else
-                return convert_i<T>(src);
+                return to_i<T>(src);
         }
 
-        [MethodImpl(Inline)]
-        static T convert_i<T>(ushort src)
+        [MethodImpl(Inline)]   
+        static T to_i<T>(bit src, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -44,23 +41,9 @@ namespace Z0
             else if(typeof(T) == typeof(int))
                 return generic<T>((int)src);
             else if(typeof(T) == typeof(long))
-                return generic<T>((long)src);           
+                return generic<T>((long)src);
             else
-                return convert_x<T>(src);
+                throw unsupported<T>();
         }
-
-        [MethodImpl(Inline)]
-        static T convert_x<T>(ushort src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>((float)src);
-            else if(typeof(T) == typeof(double))
-                return generic<T>(to64f(src));
-            else if(typeof(T) == typeof(char))
-                return  generic<T>((char)src);
-            else            
-                return unhandled<ushort,T>(src);
-       }
     }
 }

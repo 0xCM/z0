@@ -31,9 +31,9 @@ namespace Z0
             => ToTarget(incoming);
 
         static Option<object> FromTarget(object incoming, Type dst)
-            => Try(() => Converter.oconvert(((Duration)incoming).Ticks, dst.NumericKind()));
+            => Try(() => Cast.ocast(((Duration)incoming).Ticks, dst.NumericKind()));
 
         static Option<object> ToTarget(object incoming)
-            => Try(() => (Duration)(long)Converter.oconvert(incoming, NumericKind.I64));
+            => Try(() => (Duration)(long)Cast.ocast(incoming, NumericKind.I64));
     }
 }

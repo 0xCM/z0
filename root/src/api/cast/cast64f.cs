@@ -9,17 +9,12 @@ namespace Z0
 
     using static Root;
     using static As;
+    using static CastInternals;
 
-    partial class Converter
+    partial class Cast
     {
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T convert<T>(double src)
-            where T : unmanaged
-                => convert_u<T>(src);
-
         [MethodImpl(Inline)]
-        static T convert_u<T>(double src)
+        static T to_u<T>(double src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -31,11 +26,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(to64u(src));
             else
-                return convert_i<T>(src);
+                return to_i<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert_i<T>(double src)
+        static T to_i<T>(double src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -63,6 +58,5 @@ namespace Z0
             else            
                 return unhandled<double,T>(src);
         }
-
     }
 }

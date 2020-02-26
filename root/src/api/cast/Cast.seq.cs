@@ -12,7 +12,7 @@ namespace Z0
     using static refs;    
     using static Root;
 
-    partial class Converter
+    partial class Cast
     {
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in ulong src)
@@ -51,99 +51,99 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<sbyte> src)
+        public static IEnumerable<T> to<T>(IEnumerable<sbyte> src)
             where T : unmanaged
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<byte> src)
+        public static IEnumerable<T> to<T>(IEnumerable<byte> src)
             where T : unmanaged
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
         
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<short> src)
+        public static IEnumerable<T> to<T>(IEnumerable<short> src)
             where T : unmanaged
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<ushort> src)
+        public static IEnumerable<T> to<T>(IEnumerable<ushort> src)
             where T : unmanaged
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<int> src)
+        public static IEnumerable<T> to<T>(IEnumerable<int> src)
             where T : unmanaged
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<uint> src)
+        public static IEnumerable<T> to<T>(IEnumerable<uint> src)
             where T : unmanaged
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<long> src)
+        public static IEnumerable<T> to<T>(IEnumerable<long> src)
             where T : unmanaged
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<ulong> src)
+        public static IEnumerable<T> to<T>(IEnumerable<ulong> src)
             where T : unmanaged            
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<float> src)
+        public static IEnumerable<T> to<T>(IEnumerable<float> src)
             where T : unmanaged            
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<double> src)
+        public static IEnumerable<T> to<T>(IEnumerable<double> src)
             where T : unmanaged            
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static IEnumerable<T> convert<T>(IEnumerable<char> src)
+        public static IEnumerable<T> to<T>(IEnumerable<char> src)
             where T : unmanaged            
-                => src.Select(convert<T>);
+                => src.Select(to<T>);
 
         /// <summary>
         /// If possible, applies the conversion S -> T for each element of a source span
@@ -152,13 +152,13 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]   
-        public static Span<T> convert<S,T>(Span<S> src)
+        public static Span<T> to<S,T>(Span<S> src)
             where T : unmanaged
             where S : unmanaged
         {
             Span<T> dst = new T[src.Length];
             for(var i=0; i< src.Length; i++)
-                dst[i] = convert<S,T>(src[i]);
+                dst[i] = to<S,T>(src[i]);
             return dst;
         }
 
@@ -167,13 +167,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source values</param>
         /// <typeparam name="T">The target type</typeparam>
-        public static Span<T> convert<S,T>(ReadOnlySpan<S> src)
+        public static Span<T> to<S,T>(ReadOnlySpan<S> src)
             where S : unmanaged
             where T : unmanaged
         {
             Span<T> dst = new T[src.Length];
             for(var i=0; i<src.Length; i++)
-                dst[i] = convert<S,T>(src[i]);
+                dst[i] = to<S,T>(src[i]);
             return dst;
         }
 
@@ -184,13 +184,13 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]   
-        public static T[] convert<S,T>(S[] src)
+        public static T[] to<S,T>(S[] src)
             where T : unmanaged
             where S : unmanaged
         {
             var dst = new T[src.Length];
             for(var i=0; i< src.Length; i++)
-                dst[i] = convert<S,T>(src[i]);
+                dst[i] = to<S,T>(src[i]);
             return dst;
         }
     }

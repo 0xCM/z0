@@ -9,29 +9,12 @@ namespace Z0
 
     using static Root;
     using static As;
+    using static CastInternals;
 
-    partial class Converter
+    partial class Cast
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T convert<T>(long src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return converti<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return convertu<T>(src);
-            else
-                return convertx<T>(src);
-        }
-
         [MethodImpl(Inline)]
-        static T converti<T>(long src)
+        static T to_i<T>(int src)
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>((sbyte)src);
@@ -44,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T convertu<T>(long src)
+        static T to_u<T>(int src)
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);
@@ -57,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T convertx<T>(long src)
+        static T to_x<T>(int src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -67,7 +50,7 @@ namespace Z0
             else if(typeof(T) == typeof(char))
                 return  generic<T>((char)src);
             else            
-                return unhandled<long,T>(src);
+                return unhandled<int,T>(src);
         }
     }
 }

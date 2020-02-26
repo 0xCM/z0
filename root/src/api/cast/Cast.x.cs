@@ -23,178 +23,178 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in ulong src)
-            => Converter.bytes(src);
+            => Cast.bytes(src);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in long src)
-            => Converter.bytes(src);
+            => Cast.bytes(src);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in double src)
-            => Converter.bytes(src);
+            => Cast.bytes(src);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in uint src)
-            => Converter.bytes(src);
+            => Cast.bytes(src);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in int src)
-            => Converter.bytes(src);
+            => Cast.bytes(src);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in float src)
-            => Converter.bytes(src);
+            => Cast.bytes(src);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in ushort src)
-            => Converter.bytes(src);
+            => Cast.bytes(src);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in short src)
-            => Converter.bytes(src);
+            => Cast.bytes(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<sbyte> src)
             where T : unmanaged
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<byte> src)
             where T : unmanaged
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
         
         public static IEnumerable<T> Convert<T>(this IEnumerable<short> src)
             where T : unmanaged
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<ushort> src)
             where T : unmanaged
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<int> src)
             where T : unmanaged
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<uint> src)
             where T : unmanaged
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<long> src)
             where T : unmanaged
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<ulong> src)
             where T : unmanaged            
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<float> src)
             where T : unmanaged            
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<double> src)
             where T : unmanaged            
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         public static IEnumerable<T> Convert<T>(this IEnumerable<char> src)
             where T : unmanaged            
-                => Converter.convert<T>(src);
+                => Cast.to<T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<sbyte> src)
             where T : unmanaged
-                => Converter.convert<sbyte,T>(src);
+                => Cast.to<sbyte,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<byte> src)
             where T : unmanaged
-                => Converter.convert<byte,T>(src);
+                => Cast.to<byte,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<short> src)
             where T : unmanaged
-                => Converter.convert<short,T>(src);
+                => Cast.to<short,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<ushort> src)
             where T : unmanaged
-                => Converter.convert<ushort,T>(src);
+                => Cast.to<ushort,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<int> src)
             where T : unmanaged
-                => Converter.convert<int,T>(src);
+                => Cast.to<int,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<uint> src)
             where T : unmanaged
-                => Converter.convert<uint,T>(src);
+                => Cast.to<uint,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<long> src)
             where T : unmanaged
-                => Converter.convert<long,T>(src);
+                => Cast.to<long,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<ulong> src)
             where T : unmanaged
-                => Converter.convert<ulong,T>(src);
+                => Cast.to<ulong,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<float> src)
             where T : unmanaged
-                => Converter.convert<float,T>(src);
+                => Cast.to<float,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<double> src)
             where T : unmanaged
-                => Converter.convert<double,T>(src);
+                => Cast.to<double,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<sbyte> src)
             where T : unmanaged
-                => Converter.convert<sbyte,T>(src);
+                => Cast.to<sbyte,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<byte> src)
             where T : unmanaged
-                => Converter.convert<byte,T>(src);
+                => Cast.to<byte,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<short> src)
             where T : unmanaged
-                => Converter.convert<short,T>(src);
+                => Cast.to<short,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<ushort> src)
             where T : unmanaged
-                => Converter.convert<ushort,T>(src);
+                => Cast.to<ushort,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<int> src)
             where T : unmanaged
-                => Converter.convert<int,T>(src);
+                => Cast.to<int,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<uint> src)
             where T : unmanaged
-                => Converter.convert<uint,T>(src);
+                => Cast.to<uint,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<long> src)
             where T : unmanaged
-                => Converter.convert<long,T>(src);
+                => Cast.to<long,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<ulong> src)
             where T : unmanaged
-                => Converter.convert<ulong,T>(src);
+                => Cast.to<ulong,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<float> src)
             where T : unmanaged
-                => Converter.convert<float,T>(src);
+                => Cast.to<float,T>(src);
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<double> src)
             where T : unmanaged
-                 => Converter.convert<double,T>(src);
+                 => Cast.to<double,T>(src);
     }
 }

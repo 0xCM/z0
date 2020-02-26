@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static BoxedNumber Zero(this NumericKind kind)
-            => BoxedNumber.Define(Converter.oconvert(byte.MinValue, kind), kind); 
+            => BoxedNumber.Define(Cast.ocast(byte.MinValue, kind), kind); 
 
         /// <summary>
         /// Puts a value of any numeric kind into a box of any numeric kind
@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber Box<T>(this NumericKind dst, T src)
             where T : unmanaged
-                => BoxedNumber.Define(Converter.oconvert(src,dst), dst);
+                => BoxedNumber.Define(Cast.ocast(src,dst), dst);
 
         [MethodImpl(Inline)]
         public static bool LiberalEquals(this BoxedNumber lhs, BoxedNumber rhs)

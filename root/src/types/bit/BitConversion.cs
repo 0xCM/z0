@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
     using static As;
-    using static Converter;
+    using static Cast;
 
     public readonly struct BitConversion : IUnmanagedConverter<BitConversion, bit>
     {
@@ -35,10 +35,10 @@ namespace Z0
                 => ToBit<T>().Convert(src);
 
         static Option<object> FromTarget(object incoming, Type dst)
-            => Try(() => oconvert((uint)(bit)incoming, dst.NumericKind()));
+            => Try(() => ocast((uint)(bit)incoming, dst.NumericKind()));
 
         static Option<object> ToTarget(object incoming)
-            => Try(() => (bit)(byte)oconvert(incoming, NumericKind.U8));
+            => Try(() => (bit)(byte)ocast(incoming, NumericKind.U8));
 
         [MethodImpl(Inline)]
         public Option<object> ConvertFromTarget(object incoming, Type dst)
