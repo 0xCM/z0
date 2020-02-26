@@ -28,9 +28,9 @@ namespace Z0
             this.BufferLength = maxlen ?? Pow2.T14;
         }
 
-        public ParsedEncodings Parse(ApiHost host, CapturedEncodingReport encoded)
+        public ParsedEncodingReport Parse(ApiHost host, CapturedEncodingReport encoded)
         {
-            var dst = new ParsedEncoding[encoded.Records.Length];
+            var dst = new ParsedEncodingRecord[encoded.Records.Length];
             var buffer = alloc<byte>(BufferLength);
             var parser = EncodingParser.ByteParser(Context, BufferLength);
             
@@ -43,23 +43,25 @@ namespace Z0
                 
                 var matched = parser.Result;
                 var succeeded = matched.IsSome() && status.Success();
+                
                 if(!succeeded)
-                    print($"Parse failure: {matched}, {current.GetDescription().Uri}", SeverityLevel.Warning);
+                    print($"Parse failure: {matched}, {current.Uri}", SeverityLevel.Warning);
 
                 var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-                dst[i] = new ParsedEncoding
+                dst[i] = new ParsedEncodingRecord
                 {
                      Sequence = current.Sequence,
-                     TermCode = matched.ToTermCode(),
+                     Address = current.Address,
                      Length = data.Length,
-                     Uri = OpUri.Hex(host.Path, current.OpName, current.OpId),
+                     TermCode = matched.ToTermCode(),
+                     Uri = OpUri.Hex(host.Path, current.Uri.OpGroup, current.Uri.OpId),
                      Data = data,
                 };
             }
 
             ReportDuplicates(dst.Select(x => x.Uri.OpId).Duplicates());
 
-            return ParsedEncodings.Create(dst);
+            return ParsedEncodingReport.Create(dst);
         }
 
         static ByteParser<EncodingPatternKind> ByteParser(IAsmContext context, int size)

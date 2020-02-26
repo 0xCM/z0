@@ -148,8 +148,8 @@ namespace Z0
         public string Format()
         {
             var t = typeof(I).Name;
-            var i = evalue<I,byte>(FieldIndex);
-            var w = evalue<W,byte>(FieldWidth);
+            var i = Enums.numeric<I,byte>(FieldIndex);
+            var w = Enums.numeric<W,byte>(FieldWidth);
             return $"{t}[{i}:{w}] = {FieldName}";           
         }
         

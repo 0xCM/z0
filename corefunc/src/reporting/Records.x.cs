@@ -83,7 +83,7 @@ namespace Z0
         public static void AppendField<T>(this StringBuilder sb, object content, T pad)
             where T : unmanaged, Enum
         {                        
-            sb.Append($"{content}".PadRight(evalue<T,int>(pad)));
+            sb.Append($"{content}".PadRight(Enums.numeric<T,int>(pad)));
         }
 
         public static void DelimitField<T>(this StringBuilder sb, object content, T pad, char delimiter)
@@ -93,7 +93,7 @@ namespace Z0
                 throw new Exception("Your string buildler is null!!");
 
             sb.Append(text.rspace(delimiter));            
-            sb.Append($"{content}".PadRight(evalue<T,int>(pad)));
+            sb.Append($"{content}".PadRight(Enums.numeric<T,int>(pad)));
         }
 
         public static void AppendField<F>(this StringBuilder sb, F content, int pad)
@@ -114,7 +114,7 @@ namespace Z0
             where T : unmanaged, Enum
         {                        
 
-            sb.Append($"{content?.Format()}".PadRight(evalue<T,int>(pad)));
+            sb.Append($"{content?.Format()}".PadRight(Enums.numeric<T,int>(pad)));
         }
 
         public static void DelimitField<F,T>(this StringBuilder sb, F content, T pad, char delimiter)
@@ -122,7 +122,7 @@ namespace Z0
             where T : unmanaged, Enum
         {
             sb.Append(text.rspace(delimiter));            
-            sb.Append($"{content?.Format()}".PadRight(evalue<T,int>(pad)));
+            sb.Append($"{content?.Format()}".PadRight(Enums.numeric<T,int>(pad)));
         }
 
     }

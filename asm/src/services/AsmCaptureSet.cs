@@ -21,7 +21,7 @@ namespace Z0
 
         public FilePath ParsedPath {get;set;}
 
-        public ParsedEncodings Parsed {get;set;}
+        public ParsedEncodingReport Parsed {get;set;}
 
         public FilePath DecodedPath {get;set;}
 

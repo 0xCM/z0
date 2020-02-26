@@ -12,28 +12,29 @@ namespace Z0
         
     public readonly struct EncodedOp
     {
-        [MethodImpl(Inline)]
-        public static EncodedOp Define(OpIdentity id, MethodInfo src, MemoryAddress location)
-            => new EncodedOp(id, src, location);
-        
-        [MethodImpl(Inline)]
-        EncodedOp(OpIdentity id, MethodInfo src, MemoryAddress location)
-        {
-            this.Id = id;
-            this.Source = src;
-            this.Location = location;
-        }
-
         public readonly OpIdentity Id;
 
         public readonly MethodInfo Source;
 
-        public readonly MemoryAddress Location;
+        public readonly MemoryAddress Address;
 
-        public void Deconstruct(out OpIdentity id, out MemoryAddress location)
+        [MethodImpl(Inline)]
+        public static EncodedOp Define(OpIdentity id, MethodInfo src, MemoryAddress address)
+            => new EncodedOp(id, src, address);
+        
+        [MethodImpl(Inline)]
+        EncodedOp(OpIdentity id, MethodInfo src, MemoryAddress address)
+        {
+            this.Id = id;
+            this.Source = src;
+            this.Address = address;
+        }
+
+        [MethodImpl(Inline)]
+        public void Deconstruct(out OpIdentity id, out MemoryAddress address)
         {
             id = Id;
-            location = Location;
+            address = Address;
         }
     }
 }

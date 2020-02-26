@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         int IBytePatternSet<P>.MatchOffset(P kind)
-            => evalue<O,int>(MatchOffset(kind));
+            => Enums.numeric<O,int>(MatchOffset(kind));
     }
 
 }

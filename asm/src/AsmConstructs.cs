@@ -37,6 +37,10 @@ namespace Z0.Asm
         public static Span<T> alloc<T>(int len)
             => new T[len];
 
+        [MethodImpl(NotInline), Op, NumericClosures(NumericKind.All)]
+        public static Type type<T>()
+            => typeof(Type);
+
 
         [MethodImpl(NotInline), Op]
         public static uint compute_32u(BinaryBitLogicKind op, uint a, uint b)            

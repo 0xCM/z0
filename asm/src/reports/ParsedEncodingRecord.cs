@@ -8,16 +8,18 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using Z0.Asm;
+
     using static zfunc;
 
-    public class ParsedEncoding : IRecord<ParsedEncoding>
+    public class ParsedEncodingRecord : IRecord<ParsedEncodingRecord>
     {        
-        public static Option<ParsedEncoding> Parse(char delimiter, string text)
+        public static Option<ParsedEncodingRecord> Parse(char delimiter, string text)
         {
             var fields = text.Split(delimiter);
             if(fields.Length == FieldCount)
             {   
-                var dst = new ParsedEncoding();
+                var dst = new ParsedEncodingRecord();
                 
                 if(int.TryParse(fields[0], out var seq))
                     dst.Sequence = seq;
@@ -31,11 +33,29 @@ namespace Z0
                 dst.Data = Hex.parsebytes(fields[4], AsciSym.Space).ToArray();                
             }
 
-            return none<ParsedEncoding>();
+            return none<ParsedEncodingRecord>();
         }
+
+        enum Field
+        {
+            Sequence = 10,
+
+            Address = 16,
+
+            Length = 8,
+
+            TermCode = 20,
+
+            Uri = 90,
+
+            Data = 1
+        }    
 
         [ReportField(Field.Sequence)]
         public int Sequence {get;set;}
+
+        [ReportField(Field.Address)]
+        public MemoryAddress Address {get; set;}
 
         [ReportField(Field.Length)]
         public int Length {get; set;}
@@ -47,16 +67,17 @@ namespace Z0
         public OpUri Uri {get;set;}
 
         [ReportField(Field.Data)]
-        public byte[] Data {get; set;}
+        public EncodedData Data {get; set;}
 
-        public string DelimitedText(char delimiter)
+        public string DelimitedText(char sep)
         {
             var dst = text.factory.Builder();
             dst.AppendField(Sequence, Field.Sequence);
-            dst.DelimitField(Length, Field.Length,delimiter); 
-            dst.DelimitField(TermCode, Field.TermCode, delimiter);
-            dst.DelimitField(Uri, Field.Uri, delimiter);
-            dst.DelimitField(Data.FormatHex(), Field.Data, delimiter);
+            dst.DelimitField(Address, Field.Address, sep); 
+            dst.DelimitField(Length, Field.Length,sep); 
+            dst.DelimitField(TermCode, Field.TermCode, sep);
+            dst.DelimitField(Uri, Field.Uri, sep);
+            dst.DelimitField(Data, Field.Data, sep);
             return dst.ToString();
         }
 
@@ -64,19 +85,7 @@ namespace Z0
             => Record.ReportHeaders(GetType());
 
         static int FieldCount {get;}
-            = Enums.members<Field>().Length;
+            = Enums.literals<Field>().Length;
 
-        enum Field
-        {
-            Sequence = 10,
-            
-            Length = 8,
-
-            TermCode = 20,
-
-            Uri = 70,
-
-            Data = 1
-        }    
     }
 }

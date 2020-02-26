@@ -96,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Pair<ulong> mul64x128(in ulong a, in ulong b, ref Pair<ulong> z)
         {                         
-            mul64x128(pair(a,b), ref z);
+            mul64x128((a,b), ref z);
             return ref z;
         }
 

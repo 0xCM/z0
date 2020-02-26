@@ -54,7 +54,7 @@ namespace Z0
                           let address =  MemoryAddress.Define(m.Jit())
                           select EncodedOp.Define(m.Identify(), m, address);
                           
-            return generic.Union(direct).OrderBy(x => x.Location);
+            return generic.Union(direct).OrderBy(x => x.Address);
         }            
     }
 }

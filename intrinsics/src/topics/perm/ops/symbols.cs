@@ -23,7 +23,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var values = Enums.values<E,T>();
+            var values = Enums.index<E,T>();
             var index = new Dictionary<T,char>();
             foreach(var kvp in values)
                 index[kvp.Key] = kvp.Value.ToString().Last();

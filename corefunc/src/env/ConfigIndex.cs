@@ -84,6 +84,6 @@ namespace Z0
             get => Read(name).ValueOrElse(() => string.Empty);
         }
 
-        public IEnumerable<Pair<string>> Pairs => Values.Select(kvp => pair(kvp.Key, kvp.Value));
+        public IEnumerable<Pair<string>> Pairs => Values.Select(kvp => Tuples.pair<string>(kvp.Key, kvp.Value));
     }
 }

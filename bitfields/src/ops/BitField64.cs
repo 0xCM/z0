@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         FieldSegment segment(I index)
-            => skip(segments, evalue<I,byte>(index));
+            => skip(segments, Enums.numeric<I,byte>(index));
 
         NumericBitOps<ulong> Ops
         {

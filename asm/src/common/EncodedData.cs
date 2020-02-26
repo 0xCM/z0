@@ -25,12 +25,17 @@ namespace Z0.Asm
 
         public readonly byte[] Bytes;
 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Bytes.Length;
+        }
+
         public string Format()
             => Bytes.FormatHex();
+
         
         public override string ToString() 
-            => Format();
-         
+            => Format();         
     }
-
 }

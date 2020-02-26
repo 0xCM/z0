@@ -11,6 +11,7 @@ namespace Z0.OpCodes
     using static zfunc;
     using static Stacked;
     using static P2K;
+    using static CharStacks;
 
     [OpCodeProvider]
     public static class stacked
@@ -78,13 +79,13 @@ namespace Z0.OpCodes
 
 
         public static CharStack8 ss_concat_8x8(CharStack4 head, CharStack4 tail)
-            => Stacks.concat(head,tail);
+            => concat(head,tail);
 
         public static ref CharStack32 ss_concat_2x16_buffered(in CharStack16 head, in CharStack16 tail, ref CharStack32 dst)
-            => ref Stacks.concat(head,tail, ref dst);
+            => ref concat(head,tail, ref dst);
 
         public static ref CharStack32 ss_concat_2x32_buffered(in CharStack16 head, in CharStack16 tail, ref CharStack32 dst)
-            => ref Stacks.concat(head,tail, ref dst);
+            => ref concat(head,tail, ref dst);
 
 
         public static MemStack64 init_64x8(in byte src)

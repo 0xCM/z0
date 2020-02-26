@@ -27,17 +27,17 @@ namespace Z0
 
         public void check_zfunc()
         {
-            var values = lpairs<Choices32i,int>();
+            var values = Enums.values<Choices32i,int>();
             Claim.eq(Enum.GetValues(typeof(Choices32i)).Length, values.Length);
 
             for(var i = 0; i<values.Length; i++)
             {
-                var ival = values[i].B;
+                var ival = values[i].Value;
                 if(ival == byte.MaxValue)
                     break;
 
                 var member = literal<Choices32i,int>(ival);
-                Claim.eq(member, values[i].A);
+                Claim.eq(member, values[i].Enum);
 
                 var expect = (int)Math.Pow(2,i);
                 if(expect != ival)

@@ -7,22 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    public readonly struct ParsedEncodings : IReport<ParsedEncoding>
+    public readonly struct ParsedEncodingReport : IReport<ParsedEncodingRecord>
     {        
-        public static ParsedEncodings Load(FilePath src)
+        public static ParsedEncodingReport Load(FilePath src)
             => default;
 
-        public static ParsedEncodings Create(params ParsedEncoding[] records)
-            => new ParsedEncodings(records);
+        public static ParsedEncodingReport Create(params ParsedEncodingRecord[] records)
+            => new ParsedEncodingReport(records);
 
-        ParsedEncodings(ParsedEncoding[] records)
+        ParsedEncodingReport(ParsedEncodingRecord[] records)
         {
             this.Records = records;
         }
         
-        public ParsedEncoding[] Records {get;}
+        public ParsedEncodingRecord[] Records {get;}
 
-        public ParsedEncoding this[int index]
+        public ParsedEncodingRecord this[int index]
             => Records[index];                
 
         public int RecordCount

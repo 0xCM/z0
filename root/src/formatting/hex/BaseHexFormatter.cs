@@ -35,7 +35,6 @@ namespace Z0
     public readonly struct BaseHexFormatter<T> : IBaseHexFormatter<T>
         where T : struct
     {
-
         [MethodImpl(Inline)]
         internal BaseHexFormatter(Func<T,string,string> f)
             => this.F = f;

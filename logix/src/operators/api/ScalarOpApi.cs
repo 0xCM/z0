@@ -24,13 +24,13 @@ namespace Z0.Logix
         /// Advertises the supported unary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<UnaryBitLogicKind> UnaryBitLogicKinds
-            => Enums.members<UnaryBitLogicKind>();
+            => Enums.literals<UnaryBitLogicKind>();
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitLogicKinds
-            => Enums.members<BinaryBitLogicKind>();
+            => Enums.literals<BinaryBitLogicKind>();
 
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators
@@ -42,19 +42,19 @@ namespace Z0.Logix
         /// Advertises the supported unary arithmetic operators
         /// </summary>
         public static ReadOnlySpan<UnaryArithmeticKind> UnaryAritmeticKinds
-            => Enums.members<UnaryArithmeticKind>();
+            => Enums.literals<UnaryArithmeticKind>();
 
         /// <summary>
         /// Advertises the supported binary arithmetic operators
         /// </summary>
         public static ReadOnlySpan<BinaryArithmeticKind> BinaryArithmeticKinds
-            => Enums.members<BinaryArithmeticKind>();
+            => Enums.literals<BinaryArithmeticKind>();
 
         /// <summary>
         /// Advertises the supported comparison operators
         /// </summary>
         public static ReadOnlySpan<ComparisonKind> ComparisonKinds
-            => Enums.members<ComparisonKind>();
+            => Enums.literals<ComparisonKind>();
 
 
         [Op, NumericClosures(NumericKind.Integers)]

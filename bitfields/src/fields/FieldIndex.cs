@@ -36,7 +36,7 @@ namespace Z0
             where I : unmanaged, Enum
             where W : unmanaged, Enum
                 => new FieldIndexEntry<I,W>(
-                    index: Enums.member<U,I>(convert<int,U>(i)), 
+                    index: Enums.literal<U,I>(convert<int,U>(i)), 
                     name: indices[i].Name,  
                     width: (W)widths[i].GetRawConstantValue()
                     );

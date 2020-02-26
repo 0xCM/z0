@@ -15,13 +15,5 @@ namespace Z0
         {
 
         }
-
-        // public override IEnumerable<ApiHost> DirectApiHosts
-        //     => from t in (new Type[]{typeof(Numeric),typeof(SpanOps)})
-        //         select ApiHost.Define(AssemblyId,t);
-
-        // public override IEnumerable<ApiHost> GenericApiHosts
-        //     => from t in (new Type[]{typeof(Numeric),typeof(SpanOps), typeof(Refs),typeof(AsIn), typeof(As)})
-        //         select ApiHost.Define(AssemblyId,t);
     }
 }

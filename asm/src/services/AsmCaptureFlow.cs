@@ -53,12 +53,12 @@ namespace Z0
             iter(Selected, CreateLocationReport);
         }
 
-        void Decode(CapturedEncodingRecord captured, ParsedEncoding encoded, IAsmDecoder decoder,  IAsmFunctionWriter dst)
+        void Decode(CapturedEncodingRecord captured, ParsedEncodingRecord encoded, IAsmDecoder decoder,  IAsmFunctionWriter dst)
         {
             var count = encoded.Length;
             if(count != 0)
             {
-                var op = captured.GetDescription();
+                var op = OpDescriptor.Define(captured.Uri, captured.OpSig);
                 var bits = CaptureBits.Define(captured.Data, encoded.Data);
                 var range = MemoryRange.Define(captured.Address, captured.Address + (MemoryAddress)count);
                 var tc = encoded.TermCode;
@@ -81,7 +81,7 @@ namespace Z0
             return (captured,target);
         }
 
-        (ParsedEncodings,FilePath) Parse(ApiHost host, CapturedEncodingReport captured)
+        (ParsedEncodingReport,FilePath) Parse(ApiHost host, CapturedEncodingReport captured)
         {
             var parser = Context.EncodingParser();
             var parsed = parser.Parse(host,captured);
@@ -94,7 +94,7 @@ namespace Z0
             return (parsed,target);
         }
 
-        FilePath Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodings parsed)
+        FilePath Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodingReport parsed)
         {
             var path = EmissionPaths.DetailPath(host);
             var decoder = Context.Decoder();            

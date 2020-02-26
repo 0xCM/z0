@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public byte SegWidth(I id)
-            => vcell(widths, evalue<I,int>(id));
+            => vcell(widths, Enums.numeric<I,int>(id));
 
         // FieldSegment[] Segments()
         // {

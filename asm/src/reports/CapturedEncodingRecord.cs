@@ -14,6 +14,19 @@ namespace Z0
 
     public class CapturedEncodingRecord : IRecord<CapturedEncodingRecord>
     {
+        enum Field
+        {
+            Sequence = 10,
+
+            Address = 16,
+
+            Length = 8,
+
+            Uri = 90,
+
+            Data = 1
+        }
+
         [ReportField(Field.Sequence)]
         public int Sequence {get;set;}
 
@@ -23,20 +36,13 @@ namespace Z0
         [ReportField(Field.Length)]
         public int Length {get; set;}
 
-        [ReportField(Field.Host)]
-        public ApiHostPath Host {get; set;}
-
-        [ReportField(Field.OpId)]
-        public OpIdentity OpId {get; set;}
-
-        [ReportField(Field.OpName)]
-        public string OpName {get; set;}
-        
-        [ReportField(Field.OpSig)]
-        public string OpSig {get; set;}
+        [ReportField(Field.Uri)]
+        public OpUri Uri {get; set;}
         
         [ReportField(Field.Data)]
         public EncodedData Data {get; set;}
+
+        public string OpSig;
 
         public string DelimitedText(char sep)
         {
@@ -44,10 +50,7 @@ namespace Z0
             dst.AppendField(Sequence, Field.Sequence);
             dst.DelimitField(Address, Field.Address, sep); 
             dst.DelimitField(Length, Field.Length, sep);
-            dst.DelimitField(Host, Field.Host, sep);
-            dst.DelimitField(OpId, Field.OpId, sep);
-            dst.DelimitField(OpName, Field.OpName, sep);
-            dst.DelimitField(OpSig, Field.OpSig, sep);
+            dst.DelimitField(Uri, Field.Uri, sep);
             dst.DelimitField(Data, Field.Data, sep);
             return dst.ToString();
         }
@@ -55,29 +58,5 @@ namespace Z0
         public IReadOnlyList<string> GetHeaders()
             => Record.ReportHeaders(GetType());
 
-        OpUri GetOpUri()
-            => Z0.OpUri.Hex(Host, OpName, OpId);
-
-        public OpDescriptor GetDescription()        
-            => OpDescriptor.Define(GetOpUri(), OpSig);
-
-        enum Field
-        {
-            Sequence = 10,
-
-            Address = 16,
-
-            Length = 8,
-
-            Host = 30,
-
-            OpId = 60,
-
-            OpName = 14,
-
-            OpSig = 80,
-
-            Data = 1
-        }
     }
 }
