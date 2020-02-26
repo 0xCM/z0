@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
 
     [ApiHost(ApiHostKind.Generic)]
-    public static class Refs
+    public static class refs
     {
         [MethodImpl(Inline)]
         public static IntPtr intptr(long i)
@@ -294,7 +294,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T skip<T>(Span<T> src, int count)
-            => ref Refs.seek(ref head(src), count);
+            => ref refs.seek(ref head(src), count);
 
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
-            => ref Refs.skip(in head(src), count);
+            => ref refs.skip(in head(src), count);
 
         /// <summary>
         /// Returns a reference to the location of the first element
@@ -324,7 +324,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref T seek<T>(Span<T> src, int count)
-            => ref Refs.seek(ref head(src), count);
+            => ref refs.seek(ref head(src), count);
 
        /// <summary>
         /// Presents the bytespan head as a reference to an unsigned 8-bit integer
@@ -433,7 +433,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref T seekb<T>(Span<T> src, long count)
-            => ref Refs.seekb(ref head(src), count);
+            => ref refs.seekb(ref head(src), count);
 
         /// <summary>
         /// Adds an offset to the head of a span, measured relative to 8-bit segments, and returns the resulting reference
@@ -523,7 +523,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T skipb<T>(ReadOnlySpan<T> src, long count)
-            => ref Refs.skipb(in head(src), count);     
+            => ref refs.skipb(in head(src), count);     
 
 
         /// <summary>

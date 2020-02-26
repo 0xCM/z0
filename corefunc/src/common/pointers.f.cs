@@ -18,7 +18,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* ptr<T>(ref T src)
         where T : unmanaged
-            => Refs.ptr(ref src);
+            => refs.ptr(ref src);
 
     /// <summary>
     /// Presents generic reference as a generic pointer displaced by an element offset
@@ -29,7 +29,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* ptr<T>(ref T src, int offset)
         where T : unmanaged
-            => Refs.ptr(ref src, offset);
+            => refs.ptr(ref src, offset);
 
     /// <summary>
     /// Presents a readonly reference as a generic pointer which should intself be considered constant
@@ -40,7 +40,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* constptr<T>(in T src)
         where T : unmanaged
-            => Refs.constptr(in src);
+            => refs.constptr(in src);
 
     /// <summary>
     /// Presents a readonly reference as a generic pointer displaced by an element offset
@@ -51,7 +51,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* constptr<T>(in T src, int offset)
         where T : unmanaged
-            => Refs.constptr(in src, offset);
+            => refs.constptr(in src, offset);
 
     /// <summary>
     /// Converts a generic reference into a void pointer
@@ -60,5 +60,5 @@ partial class zfunc
     /// <typeparam name="T">The type of the referenced data</typeparam>
     [MethodImpl(Inline)]
     public static unsafe void* pvoid<T>(ref T src)
-        => Refs.pvoid(ref src);
+        => refs.pvoid(ref src);
 }

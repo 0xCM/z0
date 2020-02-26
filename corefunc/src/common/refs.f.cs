@@ -18,7 +18,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static unsafe ref T head<T>(T[] src)
-        => ref Refs.head(src);
+        => ref refs.head(src);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to the reference type
@@ -28,7 +28,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seek<T>(Span<T> src, int count)
-        => ref Refs.seek(src, count);
+        => ref refs.seek(src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to the reference type
@@ -38,7 +38,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skip<T>(Span<T> src, int count)
-        => ref Refs.skip(src,count);
+        => ref refs.skip(src,count);
 
    /// <summary>
     /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance
@@ -48,7 +48,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
-        => ref Refs.skip(src,count);
+        => ref refs.skip(src,count);
 
     /// <summary>
     /// Returns a reference to the location of the first span element
@@ -57,7 +57,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T head<T>(Span<T> src)
-        => ref Refs.head(src);
+        => ref refs.head(src);
 
     /// <summary>
     /// Returns a reference to the head of a span, offset by a specified amount
@@ -66,7 +66,7 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]
     public static ref T head<T>(Span<T> src, int offset)
-        => ref Refs.head(src,offset);
+        => ref refs.head(src,offset);
 
     /// <summary>
     /// Returns a reference to the head of a readonly span
@@ -75,7 +75,7 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T head<T>(ReadOnlySpan<T> src)
-        => ref Refs.head(src);
+        => ref refs.head(src);
 
     /// <summary>
     /// Returns a readonly reference to the head of a readonly span, offset by a specified amount
@@ -85,7 +85,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
         where T : unmanaged
-            => ref Refs.head(src,offset);
+            => ref refs.head(src,offset);
 
     /// <summary>
     /// Presents a readonly reference as reference
@@ -94,7 +94,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static ref T mutable<T>(in T src)
-        => ref Refs.mutable(src);
+        => ref refs.mutable(src);
 
     /// <summary>
     /// Presents a reference as a byte reference
@@ -103,7 +103,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static ref byte byterefR<T>(ref T src)
-        => ref Refs.byterefR(ref src);
+        => ref refs.byterefR(ref src);
 
     /// <summary>
     /// Presents a readonly reference as a byte reference
@@ -112,7 +112,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static ref byte byteref<T>(in T src)
-        => ref Refs.byteref(in src);
+        => ref refs.byteref(in src);
 
     /// <summary>
     /// The canonical swap function
@@ -122,7 +122,7 @@ partial class zfunc
     /// <typeparam name="T">The value type</typeparam>
     [MethodImpl(Inline)]
     public static void swap<T>(ref T lhs, ref T rhs)
-        => Refs.swap(ref lhs, ref rhs);
+        => refs.swap(ref lhs, ref rhs);
 
     /// <summary>
     /// Adds an offset to a reference, measured relative to the reference type
@@ -132,23 +132,23 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seek<T>(ref T src, int count)
-        => ref Refs.seek(ref src, count);
+        => ref refs.seek(ref src, count);
 
     [MethodImpl(Inline)]
     public static ref byte seek8<T>(ref T src, int count)
-        => ref Refs.seek8(ref src, count);
+        => ref refs.seek8(ref src, count);
 
     [MethodImpl(Inline)]
     public static ref ushort seek16<T>(ref T src, int count)
-        => ref Refs.seek16(ref src, count);
+        => ref refs.seek16(ref src, count);
 
     [MethodImpl(Inline)]
     public static ref uint seek32<T>(ref T src, int count)
-        => ref Refs.seek32(ref src, count);
+        => ref refs.seek32(ref src, count);
 
     [MethodImpl(Inline)]
     public static ref ulong seek64<T>(ref T src, int count)
-        => ref Refs.seek64(ref src, count);
+        => ref refs.seek64(ref src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to 8-bit segments, and returns the resulting reference
@@ -158,7 +158,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref byte seek8<T>(Span<T> src, int count)
-        => ref Refs.seek8(src, count);
+        => ref refs.seek8(src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to 16-bit segments, and returns the resulting reference
@@ -168,7 +168,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref ushort seek16<T>(Span<T> src, int count)
-        => ref Refs.seek16(src, count);
+        => ref refs.seek16(src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to 32-bit segments, and returns the resulting reference
@@ -178,7 +178,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref uint seek32<T>(Span<T> src, int count)
-        => ref Refs.seek32(src, count);
+        => ref refs.seek32(src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to 64-bit segments, and returns the resulting reference
@@ -188,7 +188,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref ulong seek64<T>(Span<T> src, int count)
-        => ref Refs.seek64(src, count);
+        => ref refs.seek64(src, count);
 
     /// <summary>
     /// Adds an offset to a reference, measured in bytes
@@ -198,7 +198,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seekb<T>(ref T src, long count)
-        => ref Refs.seekb(ref src, count);
+        => ref refs.seekb(ref src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured in bytes
@@ -208,7 +208,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seekb<T>(Span<T> src, long count)
-        => ref Refs.seekb(src, count);
+        => ref refs.seekb(src, count);
 
     /// <summary>
     /// Skips a specified number of source elements and returns a readonly reference to the resulting element
@@ -218,7 +218,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skip<T>(in T src, int count)
-        => ref Refs.skip(src,count);
+        => ref refs.skip(src,count);
 
     /// <summary>
     /// Skips a specified number of 8-bit source segments and returns a readonly reference to the resulting memory location
@@ -228,7 +228,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref byte skip8<T>(in T src, int count)
-        => ref Refs.skip8(src,count);
+        => ref refs.skip8(src,count);
 
     /// <summary>
     /// Skips a specified number of 16-bit source segments and returns a readonly reference to the resulting memory location
@@ -238,7 +238,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref ushort skip16<T>(in T src, int count)
-        => ref Refs.skip16(src,count);
+        => ref refs.skip16(src,count);
 
     /// <summary>
     /// Skips a specified number of 32-bit source segments and returns a readonly reference to the resulting memory location
@@ -248,7 +248,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref uint skip32<T>(in T src, int count)
-        => ref Refs.skip32(src,count);
+        => ref refs.skip32(src,count);
 
     /// <summary>
     /// Skips a specified number of 64-bit source segments and returns a readonly reference to the resulting memory location
@@ -258,7 +258,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref ulong skip64<T>(in T src, int count)
-        => ref Refs.skip64(src,count);
+        => ref refs.skip64(src,count);
 
     /// <summary>
     /// Skips a specified number of 8-bit source segments and returns a readonly reference to the resulting memory location
@@ -268,7 +268,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly byte skip8<T>(ReadOnlySpan<T> src, int count)
-        => ref Refs.skip8(src,count);
+        => ref refs.skip8(src,count);
 
     /// <summary>
     /// Skips a specified number of 16-bit source segments and returns a readonly reference to the resulting memory location
@@ -278,7 +278,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly ushort skip16<T>(ReadOnlySpan<T> src, int count)
-        => ref Refs.skip16(src,count);
+        => ref refs.skip16(src,count);
 
     /// <summary>
     /// Skips a specified number of 32-bit source segments and returns a readonly reference to the resulting memory location
@@ -288,7 +288,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly uint skip32<T>(ReadOnlySpan<T> src, int count)
-        => ref Refs.skip32(src,count);
+        => ref refs.skip32(src,count);
 
     /// <summary>
     /// Skips a specified number of 64-bit source segments and returns a readonly reference to the resulting memory location
@@ -298,7 +298,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly ulong skip64<T>(ReadOnlySpan<T> src, int count)
-        => ref Refs.skip64(src,count);
+        => ref refs.skip64(src,count);
 
     /// <summary>
     /// Returns an readonly reference to a memory location, following a specified number of bytes
@@ -308,7 +308,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skipb<T>(in T src, long count)
-        => ref Refs.skipb(src,count);
+        => ref refs.skipb(src,count);
 
     /// <summary>
     /// Returns an readonly reference to a memory location, following a specified number of bytes
@@ -318,5 +318,5 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skipb<T>(ReadOnlySpan<T> src, long count)
-        => ref Refs.skipb(src,count);
+        => ref refs.skipb(src,count);
 }

@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Op]
         public static void unpack8x1(byte src, Span<byte> dst)
-            => unpack8x1(src, ref Refs.head64(dst));
+            => unpack8x1(src, ref refs.head64(dst));
 
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Op]
         public static void unpack16x1(ushort src, Span<byte> dst)
-            => unpack16x1(src, ref Refs.head64(dst));
+            => unpack16x1(src, ref refs.head64(dst));
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Op]
         public static void unpack32x1(uint src, Span<byte> dst)
-            => unpack32x1(src, ref Refs.head64(dst));
+            => unpack32x1(src, ref refs.head64(dst));
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Op]
         public static void unpack64x1(ulong src, Span<byte> dst)
-            => unpack64x1(src, ref Refs.head64(dst));
+            => unpack64x1(src, ref refs.head64(dst));
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell

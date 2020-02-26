@@ -13,7 +13,7 @@ namespace Z0
 
     using static Root;
     using static SpanOps;
-    using static Refs;
+    using static refs;
 
     [SuppressUnmanagedCodeSecurity]
     public static unsafe class ExecBuffers

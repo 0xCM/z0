@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Refs;
+    using static refs;
 
     /// <summary>
     /// Defines a mutable circular S-cell buffer partitioned into T-cell parts

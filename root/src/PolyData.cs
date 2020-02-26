@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     using static As;
-    using static Refs;
+    using static refs;
 
     public static class PolyData
     {

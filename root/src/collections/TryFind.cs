@@ -22,7 +22,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<T> TryFind<T>(this IEnumerable<T> src, Func<T,bool> predicate)
             => src.FirstOrDefault(predicate);
-
     }
-
 }

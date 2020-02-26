@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<sbyte> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<sbyte>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<sbyte>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<byte> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<byte>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<byte>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<short> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<short>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<short>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -106,7 +106,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<ushort> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<ushort>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<ushort>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<int> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<int>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<int>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -130,7 +130,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<uint> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<uint>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<uint>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -142,7 +142,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<long> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<long>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<long>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -154,7 +154,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<ulong> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<ulong>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<ulong>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -166,7 +166,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<float> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<float>,Vector512<T>>(ref Refs.mutable(in src));
+                => ref Unsafe.As<Vector512<float>,Vector512<T>>(ref refs.mutable(in src));
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -178,6 +178,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<double> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<double>,Vector512<T>>(ref Refs.mutable(in src));             
+                => ref Unsafe.As<Vector512<double>,Vector512<T>>(ref refs.mutable(in src));             
     }
 }
