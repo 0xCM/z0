@@ -22,5 +22,4 @@ namespace Z0
         /// <param name="id">The .net assembly identifier</param>
         void Archive(AssemblyId id);        
     }
-
 }

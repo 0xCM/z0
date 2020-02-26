@@ -16,6 +16,16 @@ namespace Z0
     public readonly struct OpDescriptor
     {        
         /// <summary>
+        /// The operation uri identifies it uniquely among all operaions in all hosts
+        /// </summary>
+        public readonly OpUri Uri;
+
+        /// <summary>
+        /// The signature of the defining method, formatted for display/legibility
+        /// </summary>
+        public readonly string Signature;
+
+        /// <summary>
         /// Defines an operation descriptor
         /// </summary>
         /// <param name="uri">The operation uri</param>
@@ -32,25 +42,21 @@ namespace Z0
         }
 
         /// <summary>
-        /// The operation uri identifies it uniquely among all operaions in all hosts
-        /// </summary>
-        public readonly OpUri Uri;
-
-        /// <summary>
-        /// The signature of the defining method, formatted for display/legibility
-        /// </summary>
-        public readonly string Signature;
-
-        /// <summary>
         /// The defining host
         /// </summary>
         public ApiHostPath Host
-            => Uri.HostPath;
+        {
+            [MethodImpl(Inline)]
+            get => Uri.HostPath;
+        }
         
         /// <summary>
         /// The operation id, unique with respect to all operations implemented by the defining host
         /// </summary>
         public OpIdentity Id
-            => Uri.OpId;        
+        {
+            [MethodImpl(Inline)]
+            get => Uri.OpId;        
+        }
     }
 }

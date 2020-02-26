@@ -159,8 +159,8 @@ namespace Z0
         ReadOnlySpan<string> FormatHeader(AsmFunction src)
         {            
             var lines = new List<string>();
-
-            lines.Add(Comment($"{src.Label}")); 
+            var label = Comment($"{src.Operation.Signature}, {src.Uri}");
+            lines.Add(label); 
             
             if(Config.EmitEncodingProp)           
                 lines.Add(FormatEncodingProp(src.Code));
@@ -191,6 +191,7 @@ namespace Z0
 
         static string FormatLineLabel(ushort src)
             => FormatLineLabel(((ulong)src));
+
 
         string FormatInstruction(AsmInstructionInfo src)
         {

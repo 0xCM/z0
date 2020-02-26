@@ -13,7 +13,7 @@ namespace Z0.AsmSpecs
     /// Describes the assembly encoding for a function
     /// </summary>
     public class AsmFunction
-    {   
+    {           
         public static AsmFunction Define(OpDescriptor op, MemoryRange memory, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
             => new AsmFunction(op, memory, code, ci, instructions);
 
@@ -62,20 +62,41 @@ namespace Z0.AsmSpecs
         /// </summary>
         public CaptureOutcome CaptureInfo {get;}
 
+        /// <summary>
+        /// The definining operation uri
+        /// </summary>
         public OpUri Uri
-            =>  Operation.Uri;
+        {
+            [MethodImpl(Inline)]
+            get =>  Operation.Uri;
+        }
 
         /// <summary>
-        /// Descriptive text such as a function signature
+        /// The location in memory at which the function definition begins
         /// </summary>
-        public string Label 
-            => $"{Operation.Signature}, {Uri}";
+        public MemoryAddress StartAddress
+        {
+            [MethodImpl(Inline)]
+            get => SourceMemory.Start;
+        }
+
+        /// <summary>
+        /// The location in memory at which the function definition ends
+        /// </summary>
+        public MemoryAddress EndAddress
+        {
+            [MethodImpl(Inline)]
+            get => SourceMemory.Start;
+        }
 
         /// <summary>
         /// The number of encoded instructions
         /// </summary>
         public int InstructionCount
-            => Instructions.Length;            
+        {
+            [MethodImpl(Inline)]
+            get => Instructions.Length;            
+        }
 
         public AsmFunction WithCil(CilFunction cil)            
         {            
