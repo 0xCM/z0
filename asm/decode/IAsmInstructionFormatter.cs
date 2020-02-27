@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Internal contract for instruction-level formatting
     /// </summary>
-    interface IAsmInstructionFormatter
+    public interface IAsmInstructionFormatter
     {
         ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong baseaddress);
     }

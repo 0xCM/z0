@@ -13,7 +13,7 @@ namespace Z0
     using Z0.Asm;
     using static zfunc;
 
-    internal interface IDynamicImmediate : IAsmService
+    public interface IDynamicImmediate : IAsmService
     {
         /// <summary>
         /// Embeds an immediate value within a dynamic method that wraps a call to a method that requires an immediate value
@@ -23,7 +23,7 @@ namespace Z0
         DynamicDelegate Specialize(MethodInfo method, byte imm);
     }
 
-    internal interface IDynamicImmediate<D> : IDynamicImmediate
+    public interface IDynamicImmediate<D> : IDynamicImmediate
         where D : Delegate
     {
 
