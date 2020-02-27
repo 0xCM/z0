@@ -225,6 +225,18 @@ namespace Z0
         public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostPath host)
             => AsmHostArchive.Create(context, host);
     
+        [MethodImpl(Inline)]
+        public static IAsmFunctionDecoder FunctionDecoder(this IAsmContext context)
+            => AsmFunctionDecoder.Create(context);
+
+        [MethodImpl(Inline)]
+        public static IAsmInstructionDecoder InstructionDecoder(this IAsmContext context)
+            => AsmInstructionDecoder.Create(context);
+
+        [MethodImpl(Inline)]
+        public static IAsmFunctionBuilder FunctionBuilder(this IAsmContext context)
+            => AsmFunctionBuilder.Create(context);
+
         /// <summary>
         /// Instantiates an internal instruction formatter service
         /// </summary>

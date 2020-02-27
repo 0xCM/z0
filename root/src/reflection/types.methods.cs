@@ -127,19 +127,6 @@ namespace Z0
         public static IEnumerable<MethodInfo> DeclaredInstanceMethods(this Type t, bool nonspecial = true)
             => nonspecial ? t.NonSpecialMethods(BF_DeclaredInstance) : t.FlaggedMethods(BF_DeclaredInstance);
 
-        /// <summary>
-        /// Retrieves the attribution index for the identified methods declared by the type
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="t">The type to examine</param>
-        /// <param name="InstanceType">The member instance type</param>
-        public static IReadOnlyDictionary<MethodInfo, A> MethodAttributions<A>(this Type t)
-            where A : Attribute
-                => (from p in t.DeclaredMethods()
-                    where p.Attributed<A>() 
-                    let attrib = p.GetCustomAttribute<A>()
-                    select (p,attrib)
-                    ).ToDictionary();
 
     }
 

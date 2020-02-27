@@ -45,7 +45,7 @@ namespace Z0
                     {
                         try
                         {
-                            iter(typeof(Data).DeclaredStaticMethods().Attributed<DataRegistryAttribute>(), m => m.Invoke(null, new object[]{}));
+                            iter(typeof(Data).DeclaredStaticMethods().Tagged<DataRegistryAttribute>(), m => m.Invoke(null, new object[]{}));
                             Initialized = true;
                         }
                         catch(Exception e)

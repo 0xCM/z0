@@ -119,7 +119,7 @@ namespace Z0
         public void CopyTo(Span<T> dst)
         {
             if(dst.Length < data.Length)
-                AppErrors.ThrowTooShort(dst.Length);
+                errors.ThrowTooShort(dst.Length);
              data.CopyTo(dst);
         }
 

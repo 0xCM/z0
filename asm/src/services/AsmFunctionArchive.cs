@@ -47,8 +47,7 @@ namespace Z0
             this.Origin = catalog;
             this.HostName = hostname;
             this.HostPath = ApiHostPath.Define(catalog, hostname);
-            //this.RootFolder = Paths.AsmDataDir(RelativeLocation.Define(catalog.Format(), hostname));
-            this.RootFolder = context.EmissionPaths().AsmDataDir(RelativeLocation.Define(catalog.Format(), hostname));
+            this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(catalog.Format(), hostname));
             this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
             this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
@@ -155,12 +154,12 @@ namespace Z0
 
             
         FilePath HexPath(OpIdentity id)
-            => EmissionPaths.ArchivePath(ArchiveFileKind.Hex, Origin, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Hex, Origin, HostName, id).CreateParentIfMissing();
 
         FilePath AsmPath(OpIdentity id)
-            => EmissionPaths.ArchivePath(ArchiveFileKind.Asm, Origin, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Asm, Origin, HostName, id).CreateParentIfMissing();
 
         FilePath CilPath(OpIdentity id)
-            => EmissionPaths.ArchivePath(ArchiveFileKind.Cil, Origin, HostName, id).CreateParentIfMissing();
+            => EmissionPaths.OpArchivePath(ArchiveFileKind.Cil, Origin, HostName, id).CreateParentIfMissing();
     }
 }

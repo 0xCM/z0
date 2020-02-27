@@ -62,7 +62,7 @@ namespace Z0
             if(needed < Bytes.Length)
                 return offset;
             else
-                return AppErrors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
+                return errors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
         }
 
         /// <summary>

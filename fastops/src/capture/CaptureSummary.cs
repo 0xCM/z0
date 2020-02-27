@@ -31,4 +31,6 @@ namespace Z0
         public MemoryRange Range
             => Outcome.Range;
     }
+
+ 
 }

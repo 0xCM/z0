@@ -22,7 +22,7 @@ namespace Z0
         public static void RequireNonGeneric(this MethodInfo src)
         {
             if(src.IsGenericMethod || src.IsConstructedGenericMethod || src.IsGenericMethodDefinition)
-                throw AppErrors.GenericMethod(src);
+                throw errors.GenericMethod(src);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         public static void RequireConstructed(this MethodInfo src)
         {
             if(!src.IsConstructedGenericMethod)
-                throw AppErrors.NonGenericMethod(src);
+                throw errors.NonGenericMethod(src);
         }
 
         /// <summary>

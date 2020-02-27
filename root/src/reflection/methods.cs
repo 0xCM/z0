@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="A">The attribute type</typeparam>
         /// <param name="m">The member</param>
-        public static Option<A> CustomAttribute<A>(this MemberInfo m) 
+        public static Option<A> Tag<A>(this MemberInfo m) 
             where A : Attribute
                 => m.GetCustomAttribute<A>();
 
@@ -87,6 +87,6 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ImmediateParameters(this MethodInfo m)
-            => m.GetParameters().Where(p => p.Attributed<ImmAttribute>()).Select(p => p.ParameterType);
+            => m.GetParameters().Where(p => p.Tagged<ImmAttribute>()).Select(p => p.ParameterType);
    }
 }

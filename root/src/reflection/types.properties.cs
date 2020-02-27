@@ -43,18 +43,5 @@ namespace Z0
         public static IEnumerable<PropertyInfo> StaticProperties(this Type src)
             => src.GetProperties(BF_AllStatic);
 
-        /// <summary>
-        /// Retrieves the type's properties together with applied attributes
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="t">The type to examine</param>
-        public static IReadOnlyDictionary<PropertyInfo, A> PropertyAttributions<A>(this Type t) 
-            where A : Attribute
-                => (from p in t.DeclaredProperties()
-                    where p.Attributed<A>() 
-                    let attrib = p.GetCustomAttribute<A>()
-                    select (p,attrib)
-                    ).ToDictionary();
-
     }
 }

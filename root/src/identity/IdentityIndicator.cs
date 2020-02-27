@@ -331,7 +331,7 @@ namespace Z0
         {
             try
             {
-                var fields = from f in typeof(IDI).FieldAttributions<IdentityIndicatorAttribute>()
+                var fields = from f in typeof(IDI).TaggedFieldIndex<IdentityIndicatorAttribute>()
                             let kind = f.Value.IndicatorKind
                             let format = (f.Key.GetRawConstantValue()?.ToString()) ?? string.Empty
                             select (kind,format);                                      

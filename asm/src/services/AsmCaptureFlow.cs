@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    
+    using System.Reflection;
+    using Z0.Asm;
+
     using static zfunc;
 
     readonly struct AsmCaptureFlow : IAsmCaptureFlow
@@ -38,12 +40,12 @@ namespace Z0
         {            
             var owners = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
             var config = Context.AsmFormat.WithSectionDelimiter();
+            EmissionPaths.DecodedDir.Clear();
             foreach(var owner in owners)
             {
                 var id = owner.Key;
                 if(Selected.Contains(id))
                 {
-                    EmissionPaths.DataFolderDir(id).Clear();
 
                     foreach(var host in owner)
                        yield return RunCaptureWorkflow(host);
@@ -53,28 +55,32 @@ namespace Z0
             iter(Selected, CreateLocationReport);
         }
 
-        void Decode(CapturedEncodingRecord captured, ParsedEncodingRecord encoded, IAsmDecoder decoder,  IAsmFunctionWriter dst)
+        void Decode(ParsedEncodingRecord src, IAsmDecoder decoder,  IAsmFunctionWriter dst)
         {
-            var count = encoded.Length;
-            if(count != 0)
-            {
-                var op = OpDescriptor.Define(captured.Uri, captured.OpSig);
-                var bits = CaptureBits.Define(captured.Data, encoded.Data);
-                var range = MemoryRange.Define(captured.Address, captured.Address + (MemoryAddress)count);
-                var tc = encoded.TermCode;
+            var parsed = src.ToParsedEncoding();
+            dst.Write(decoder.DecodeFunction(parsed));
+        }
 
-                var final = CaptureState.Define(op.Id, count, range.End, bits.Trimmed.Last());
-                var outcome = CaptureOutcome.Define(final, range, tc);
-                var summary = CaptureSummary.Define(outcome, bits);
-                dst.Write(decoder.DecodeFunction(op, summary));
-            }
+        static void EmitCil(Assembly src)
+        {
+            var index = ClrMetadataIndex.Create(src);
+            var dir = AsmEmissionPaths.Current.CilDir;
+            var srcId = src.AssemblyId();
+            var context = AsmContext.New(index, DataResourceIndex.Empty, AsmFormatConfig.Default.WithSectionDelimiter());
+
+            foreach(var host in src.ApiHosts())
+            {
+                var dstPath = AsmEmissionPaths.Current.CilPath(host);
+                //var functions = capture.CaptureFunctions(host);
+                //context.CilEmitter().EmitCil(functions, dstPath).OnSome(e => throw e);
+            }            
         }
 
         (CapturedEncodingReport result, FilePath target) Capture(ApiHost host)
         {
             var extractor = Context.EncodingExtractor();
             var captured = extractor.Extract(host);
-            var target = EmissionPaths.CaptureSummaryPath(host);                
+            var target = EmissionPaths.CapturePath(host);                
             captured.Save(target)
                         .OnSome(file => print($"Emitted {host} encodings to {file}"))
                         .OnNone(() => error($"Error emitting {host} encodings"));                       
@@ -96,11 +102,15 @@ namespace Z0
 
         FilePath Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodingReport parsed)
         {
-            var path = EmissionPaths.DetailPath(host);
+            var path = EmissionPaths.DecodedPath(host);
             var decoder = Context.Decoder();            
-            using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);
+            using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
             for(var i=0; i< captured.RecordCount; i++)
-                Decode(captured[i], parsed[i], decoder, dst);
+            {
+                var record = parsed[i];
+                if(record.Length != 0)
+                    Decode(record, decoder, dst);
+            }
             return path;
         }
 

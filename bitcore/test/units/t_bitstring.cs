@@ -337,7 +337,7 @@ namespace Z0
         }
 
         void TraceError(string msg)
-            => Trace(appMsg(msg, SeverityLevel.Error));
+            => Trace(appMsg(msg, AppMsgKind.Error));
 
         void bs_parse_range_check(int minlen, int maxlen)
         {

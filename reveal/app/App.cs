@@ -18,7 +18,7 @@ namespace Z0
             var a = GetType().Assembly;
             var clridx = ClrMetadataIndex.Create(a);
             var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default);
-            foreach(var t in a.GetTypes().Attributed(typeof(OpCodeProvider)))
+            foreach(var t in a.GetTypes().Tagged(typeof(OpCodeProvider)))
             {
                 var emitter = AsmProcessServices.Emitter(context);
                 emitter.EmitFunctions(t);                

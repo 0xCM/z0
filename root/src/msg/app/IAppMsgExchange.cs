@@ -8,12 +8,10 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
-    using static Root;
-
     /// <summary>
     /// Characterizes a stateful thing that functions as an exchange for application messages
     /// </summary>
-    public interface IMsgExchange
+    public interface IAppMsgExchange
     {
         /// <summary>
         /// Removes the messages accumulated by the context and returns these messages to the caller
@@ -30,8 +28,8 @@ namespace Z0
         /// Posts a text message to the context queue with optional severity
         /// </summary>
         /// <param name="msg">The message to post</param>
-        void PostMessage(string msg, SeverityLevel? severity = null);
+        void PostMessage(string msg, AppMsgKind? severity = null);
 
-        void Flush(Exception exception, IMsgLog target);                       
+        void Flush(Exception exception, IAppMsgLog target);                       
     }
 }

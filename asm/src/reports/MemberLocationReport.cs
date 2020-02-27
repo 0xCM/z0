@@ -14,21 +14,21 @@ namespace Z0
 
     public class MemberLocationReport : IReport<MemberLocationRecord>
     {
-        public static MemberLocationReport HostReport(ApiHost host)
-        {
-            var src = host.EncodedOps().ToArray();
-            var records = new MemberLocationRecord[src.Length];
-            var lastaddress = MemoryAddress.Zero;
-            for(var i=0; i< src.Length; i++)
-            {
-                (var id, var address)  = src[i];
-                var gap = lastaddress.NonZero ? address - lastaddress : MemoryAddress.Zero;
-                records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
-                lastaddress =  address;
-            }
+        // public static MemberLocationReport HostReport(ApiHost host)
+        // {
+        //     var src = host.EncodedOps().ToArray();
+        //     var records = new MemberLocationRecord[src.Length];
+        //     var lastaddress = MemoryAddress.Zero;
+        //     for(var i=0; i< src.Length; i++)
+        //     {
+        //         (var id, var address)  = src[i];
+        //         var gap = lastaddress.NonZero ? address - lastaddress : MemoryAddress.Zero;
+        //         records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
+        //         lastaddress =  address;
+        //     }
 
-            return new MemberLocationReport(host, records);
-        }
+        //     return new MemberLocationReport(host, records);
+        // }
 
         public static MemberLocationReport Create(AssemblyId assemblyid, IEnumerable<MethodInfo> methods)
         {   
@@ -38,17 +38,17 @@ namespace Z0
                       orderby address.Location
                       select (id,address)).ToArray();
 
-            var records = new MemberLocationRecord[src.Length];
-            var lastaddress = MemoryAddress.Zero;
-            for(var i=0; i< src.Length; i++)
-            {
-                (var id, var address)  = src[i];
-                var gap = lastaddress.NonZero ? address - lastaddress : MemoryAddress.Zero;
-                records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
-                lastaddress =  address;
-            }
-
-            return new MemberLocationReport(assemblyid, records);
+            // var records = new MemberLocationRecord[src.Length];
+            // var lastaddress = MemoryAddress.Zero;
+            // for(var i=0; i< src.Length; i++)
+            // {
+            //     (var id, var address)  = src[i];
+            //     var gap = lastaddress.NonZero ? address - lastaddress : MemoryAddress.Zero;
+            //     records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
+            //     lastaddress =  address;
+            // }
+            var dst = new MemberLocationRecord[src.Length];
+            return new MemberLocationReport(assemblyid, dst);
         }
 
         MemberLocationReport(AssemblyId id, MemberLocationRecord[] records)
@@ -71,24 +71,12 @@ namespace Z0
 
         public MemberLocationRecord[] Records {get;}
 
-        public MemoryAddress FirstAddress
-            => Records.First().Location;
-
-        public MemoryAddress LastAddress
-            => Records.Last().Location;        
-
-        public bool IsEmpty
-            => Records.Length == 0;
-
-        public bool IsNonEmpty
-            => Records.Length != 0;
-
+        /// <summary>
+        /// Intentionally not being saved because the report is useless
+        /// </summary>
+        /// <returns></returns>
         public Option<FilePath> Save()
-        {
-            var dst = ApiHost.MapValueOrElse(AsmEmissionPaths.Current.LocationPath,
-                        () => AsmEmissionPaths.Current.LocationPath(AssemblyId));            
-            //Records.Save(dst);
-            return dst;
-        }
+            => ApiHost.MapValueOrElse(AsmEmissionPaths.Current.LocationPath,
+                            () => AsmEmissionPaths.Current.LocationPath(AssemblyId));            
     }
 }

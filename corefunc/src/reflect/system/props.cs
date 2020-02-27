@@ -17,8 +17,11 @@ namespace Z0
         /// Selects the instance properties from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
-        public static IEnumerable<PropertyInfo> Instance(this IEnumerable<PropertyInfo> src)
-            => src.Where(x=> (x.HasSetter() && !x.IsStatic()) || (x.HasGetter() && !x.IsStatic()));
+        public static IEnumerable<PropertyInfo> Instance(this IEnumerable<PropertyInfo> src)    
+            =>  from p in src
+                let m = p.GetGetMethod() ?? p.GetSetMethod()                
+                where m != null && !m.IsStatic
+                select p;            
 
         /// <summary>
         /// Attempts to retrieve the value of an instance or static property

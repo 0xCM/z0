@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// A context that supports application message capture/disbursement
     /// </summary>
-    public interface IMsgContext : IMsgExchange, IContext
+    public interface IMsgContext : IAppMsgExchange, IContext
     {
     
     }

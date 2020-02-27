@@ -3,15 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
-    using System.Threading.Tasks;
-    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    public interface IMsgLog
+    static partial class AsmInternals
     {
-        void Write(IEnumerable<AppMsg> src);
-        
-        void Write(AppMsg src);
+
+
     }
 }

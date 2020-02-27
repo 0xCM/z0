@@ -20,6 +20,6 @@ namespace Z0
         /// <param name="f">The field to examine</param>
         [MethodImpl(Inline)]
         public static bool IsCompilerGenerated(this FieldInfo f)
-            => f.Attributed<CompilerGeneratedAttribute>();
+            => f.Tagged<CompilerGeneratedAttribute>();
     }
 }

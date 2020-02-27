@@ -15,78 +15,86 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    public static class AppErrors
+    
+    public static class errors
     {        
+        const string Unknown = "???";
+        
+        const int UnknownInt = -1;
+
+        [MethodImpl(Inline)]
+        public static string FormatCallsite(string caller, string file, int? line)
+            => $"line {line ?? UnknownInt}, member {caller ?? Unknown} in file {file ?? Unknown}";
+
         public static AppException NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.NotEqual(lhs,rhs,caller,file,line));
+            => AppException.Define(messages.NotEqual(lhs,rhs,caller,file,line));
 
         public static AppException Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.Equal(lhs,rhs,caller,file,line));
+            => AppException.Define(messages.Equal(lhs,rhs,caller,file,line));
 
         public static AppException NotLessThan(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.NotLessThan(lhs,rhs,caller,file,line));
+            => AppException.Define(messages.NotLessThan(lhs,rhs,caller,file,line));
 
         public static AppException ItemsNotEqual(int index, object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.ItemsNotEqual(index, lhs,rhs,caller,file,line));
+            => AppException.Define(messages.ItemsNotEqual(index, lhs,rhs,caller,file,line));
 
         public static AppException NotNonzero([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.NotNonzero(caller,file,line));
+            => AppException.Define(messages.NotNonzero(caller,file,line));
         
         public static AppException NotTrue(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.NotTrue(msg,caller,file,line));
+            => AppException.Define(messages.NotTrue(msg,caller,file,line));
 
         public static AppException NotFalse(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.NotFalse(msg,caller,file,line));
+            => AppException.Define(messages.NotFalse(msg,caller,file,line));
 
         public static AppException CountMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.CountMismatch(lhs,rhs,caller,file,line));
+            => AppException.Define(messages.CountMismatch(lhs,rhs,caller,file,line));
 
         public static AppException LengthMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.LengthMismatch(lhs,rhs,caller,file,line));
+            => AppException.Define(messages.LengthMismatch(lhs,rhs,caller,file,line));
 
         public static AppException EmptySourceSpan([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.EmptySourceSpan(caller,file,line));
+            => AppException.Define(messages.EmptySourceSpan(caller,file,line));
 
         /// <summary>
         /// Raised when a method is non-genric and should be
         /// </summary>
         public static AppException NonGenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.NonGenericMethod(method,caller,file,line));
+            => AppException.Define(messages.NonGenericMethod(method,caller,file,line));
 
         /// <summary>
         /// Raised when a method is generic and should not be
         /// </summary>
         public static AppException GenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.GenericMethod(method,caller,file,line));
+            => AppException.Define(messages.GenericMethod(method,caller,file,line));
 
         public static AppException KindUnsupported<T>(T kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : Enum
-                => AppException.Define(ErrorMessages.KindUnsupported(kind, caller, file, line));
+                => AppException.Define(messages.KindUnsupported(kind, caller, file, line));
 
         public static AppException TypeUnsupported(Type t, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                => AppException.Define(ErrorMessages.TypeUnsupported(t, caller, file, line));
+                => AppException.Define(messages.TypeUnsupported(t, caller, file, line));
 
         public static AppException FeatureUnsupported(string feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                => AppException.Define(ErrorMessages.FeatureUnsupported(feature, caller, file, line));
+                => AppException.Define(messages.FeatureUnsupported(feature, caller, file, line));
   
         public static AppException FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(ErrorMessages.FileDoesNotExist(path, caller, file, line));
+            => AppException.Define(messages.FileDoesNotExist(path, caller, file, line));
 
         public static AppException KindOpUnsupported<S,T>(S src, T dst, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where S : Enum
             where T : Enum
-                => AppException.Define(ErrorMessages.KindOpUnsupported(src,dst, caller, file, line));
+                => AppException.Define(messages.KindOpUnsupported(src,dst, caller, file, line));
 
         public static IndexOutOfRangeException TooManyBytes(ByteSize requested, ByteSize available, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new IndexOutOfRangeException(ErrorMessages.TooManyBytes(requested, available, caller, file, line).ToString());
+            => new IndexOutOfRangeException(messages.TooManyBytes(requested, available, caller, file, line).ToString());
 
         public static IndexOutOfRangeException OutOfRange(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new IndexOutOfRangeException(ErrorMessages.IndexOutOfRange(index,min,max, caller, file, line).ToString());
+            => new IndexOutOfRangeException(messages.IndexOutOfRange(index,min,max, caller, file, line).ToString());
 
         [MethodImpl(NotInline)]
         public static IndexOutOfRangeException OutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
+            => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
 
         [MethodImpl(NotInline)]
         public static AppException NoValue<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -94,11 +102,11 @@ namespace Z0
 
         [MethodImpl(NotInline)]
         public static T ThrowNotEqualInfo<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw AppException.Define(ErrorMessages.NotEqual(lhs,rhs,caller,file,line));
+            => throw AppException.Define(messages.NotEqual(lhs,rhs,caller,file,line));
 
         [MethodImpl(NotInline)]
         public static T ThrowNotEqual<T>(T lhs, T rhs)
-            => throw AppException.Define(AppMsg.Define($"Equality failure, {lhs} != {rhs}", SeverityLevel.Error));
+            => throw AppException.Define(AppMsg.Define($"Equality failure, {lhs} != {rhs}", AppMsgKind.Error));
 
         [MethodImpl(NotInline)]
         public static T ThrowNotEqual<T>(T lhs, T rhs, AppMsg msg)
@@ -119,9 +127,30 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static T ThrowOutOfRange<T>(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw OutOfRange(index, min, max, caller, file, line);
+        
+
+        [MethodImpl(NotInline)]
+        public static void ThrowOutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw OutOfRange(value,min,max,caller,file,line);
 
         [MethodImpl(NotInline)]
         public static void ThrowTooShort(int dstLen, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort:{Errors.FormatCallsite(caller,file,line)}");
+            => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort:{FormatCallsite(caller,file,line)}");
+
+        [MethodImpl(NotInline)]
+        public static void ThrowBadSize(int expect, int actual, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw new Exception($"The size {actual} is not aligned with {expect}:{FormatCallsite(caller,file,line)}");
+
+
+        [MethodImpl(NotInline)]
+        public static void ThrowCountMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw CountMismatch(lhs,rhs, caller,file,line);
+
+        [MethodImpl(NotInline)]
+        public static void ThrowIfFalse(bool condition, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        {
+            if(!condition)
+                throw new Exception($"{msg?? "Invariant Failure"}:{FormatCallsite(caller,file,line)}");
+        }
     }
 }

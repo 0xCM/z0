@@ -35,7 +35,7 @@ partial class zfunc
     public static void print(object content)
         => term.print(content);
 
-    public static void print(string content, SeverityLevel severity)
+    public static void print(string content, AppMsgKind severity)
         => term.print(content,severity);
     
     /// <summary>

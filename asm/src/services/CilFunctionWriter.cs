@@ -44,16 +44,13 @@ namespace Z0
         }
 
         public void Write(CilFunction src)
-        {
+            => throw new NotImplementedException();
 
-
-        }
-
-        Option<Exception> Write(CilFunction[] cilfuncs)
+        Option<Exception> Write(CilFunction[] src)
         {
             try
             {
-                if(cilfuncs.Length != 0)
+                if(src.Length != 0)
                 {
                     Target.FolderPath.CreateIfMissing();
                     using var writer = new StreamWriter(Target.FullPath, false);
@@ -61,7 +58,7 @@ namespace Z0
                     if(Context.CilFormat.EmitFileHeader)                        
                         writer.WriteLine($"; {now().ToLexicalString()}"); 
                     
-                    foreach(var f in cilfuncs)
+                    foreach(var f in src)
                     {
                         writer.WriteLine(Formatter.Format(f));
                         if(Context.CilFormat.EmitSectionDelimiter)

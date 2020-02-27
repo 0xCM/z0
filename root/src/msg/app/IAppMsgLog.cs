@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
 
-    using static Root;
-    
-    partial class RootReflections
-    {        
+    public interface IAppMsgLog
+    {
+        void Write(IEnumerable<AppMsg> src);
+        
+        void Write(AppMsg src);
     }
 }

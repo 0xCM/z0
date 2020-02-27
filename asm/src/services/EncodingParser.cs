@@ -44,24 +44,25 @@ namespace Z0
                 var matched = parser.Result;
                 var succeeded = matched.IsSome() && status.Success();
                 
-                if(!succeeded)
-                    print($"Parse failure: {matched}, {current.Uri}", SeverityLevel.Warning);
+                // if(!succeeded)
+                //     print($"Parse failure: {matched}, {current.Uri}", AppMsgKind.Warning);
 
                 var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
                 dst[i] = new ParsedEncodingRecord
-                {
-                     Sequence = current.Sequence,
-                     Address = current.Address,
-                     Length = data.Length,
-                     TermCode = matched.ToTermCode(),
-                     Uri = OpUri.Hex(host.Path, current.Uri.OpGroup, current.Uri.OpId),
-                     Data = data,
-                };
+                (
+                     Sequence : current.Sequence,
+                     Address : current.Address,
+                     Length : data.Length,
+                     TermCode: matched.ToTermCode(),
+                     Uri : OpUri.Hex(host.Path, current.Uri.OpGroup, current.Uri.OpId),
+                     OpSig : current.OpSig,
+                     Data : EncodedData.Define(current.Address, data)
+                );
             }
 
             ReportDuplicates(dst.Select(x => x.Uri.OpId).Duplicates());
 
-            return ParsedEncodingReport.Create(dst);
+            return AsmReports.Create(dst);
         }
 
         static ByteParser<EncodingPatternKind> ByteParser(IAsmContext context, int size)
@@ -72,7 +73,7 @@ namespace Z0
             if(duplicated.Length != 0)
             {
                 var format = string.Join(text.comma(), duplicated);
-                print($"Identifier duplicates: {format}", SeverityLevel.Warning);           
+                print($"Identifier duplicates: {format}", AppMsgKind.Warning);           
             }
         }
     }

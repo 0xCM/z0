@@ -33,9 +33,9 @@ namespace Z0
         /// </summary>
         /// <param name="content">The message to print</param>    
         public static void print(object content)
-            => T.WriteLine(content, SeverityLevel.Info);
+            => T.WriteLine(content, AppMsgKind.Info);
 
-        public static void print(string content, SeverityLevel severity)
+        public static void print(string content, AppMsgKind severity)
             => T.WriteLine(content, severity);
         
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void inform(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, SeverityLevel.Info, caller, file, line));
+            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.Info, caller, file, line));
 
         /// <summary>
         /// Reads a line of text from the terminal
@@ -63,13 +63,13 @@ namespace Z0
         /// Reads a character from the terminal
         /// </summary>
         public static char readKey(string content = null)
-            => T.ReadKey(content != null ? AppMsg.Define(content, SeverityLevel.HiliteCL) : null);
+            => T.ReadKey(content != null ? AppMsg.Define(content, AppMsgKind.HiliteCL) : null);
 
         /// <summary>
         /// Reads a line of text from the terminal after printing a supplied message
         /// </summary>
         public static string read(string content = null)
-            => T.ReadLine(content != null ? AppMsg.Define(content, SeverityLevel.HiliteCL) : null);
+            => T.ReadLine(content != null ? AppMsg.Define(content, AppMsgKind.HiliteCL) : null);
 
         /// <summary>
         /// Emits a warning-level message
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void warn(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, SeverityLevel.Warning, caller, file, line));
+            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.Warning, caller, file, line));
 
         /// <summary>
         /// Emits an information-level message with a magenta foreground
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void magenta(string title, object content)
-            => T.WriteMessage(AppMsg.Define( $"{title}: " + content?.ToString() ?? string.Empty, SeverityLevel.HiliteML));
+            => T.WriteMessage(AppMsg.Define( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgKind.HiliteML));
 
         /// <summary>
         /// Emits an information-level message with a magenta foreground
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void magenta(object content)
-            => T.WriteMessage(AppMsg.Define( content?.ToString() ?? string.Empty, SeverityLevel.HiliteML));
+            => T.WriteMessage(AppMsg.Define( content?.ToString() ?? string.Empty, AppMsgKind.HiliteML));
 
         /// <summary>
         /// Emits an information-level message with a cyan foreground
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void cyan(string title, object content)
-            => T.WriteMessage(AppMsg.Define(  $"{title}: " + content?.ToString() ?? string.Empty, SeverityLevel.HiliteCL));
+            => T.WriteMessage(AppMsg.Define(  $"{title}: " + content?.ToString() ?? string.Empty, AppMsgKind.HiliteCL));
 
         /// <summary>
         /// Emits an information-level message with a cyan foreground
@@ -109,7 +109,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void cyan(object content)
-            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, SeverityLevel.HiliteCL));
+            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.HiliteCL));
 
         /// <summary>
         /// Emits a verbose-level message
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void babble(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, SeverityLevel.Babble, caller, file, line));
+            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.Babble, caller, file, line));
 
         /// <summary>
         /// Emits message to the error output stream
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteError(AppMsg.Define(content?.ToString() ?? string.Empty, SeverityLevel.Error, caller, file, line));
+            => T.WriteError(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.Error, caller, file, line));
 
         /// <summary>
         /// Emits a message to the error output stream
@@ -133,6 +133,6 @@ namespace Z0
         /// <param name="e">The raised exception</param>
         /// <param name="title">The name/context of the error</param>
         public static void error(Exception e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteError(AppMsg.Define($"{title} | {e}", SeverityLevel.Error, caller, file, line));
+            => T.WriteError(AppMsg.Define($"{title} | {e}", AppMsgKind.Error, caller, file, line));
     }
 }

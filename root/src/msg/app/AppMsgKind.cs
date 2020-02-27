@@ -7,9 +7,9 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Clasifies application message severities
+    /// Classifier for application messages
     /// </summary>
-    public enum SeverityLevel
+    public enum AppMsgKind
     {   
         /// <summary>
         /// Boring

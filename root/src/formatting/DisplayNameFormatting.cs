@@ -102,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source property</param>
         public static string DisplayName(this PropertyInfo src)
-            => (from a in src.CustomAttribute<DisplayNameAttribute>() 
+            => (from a in src.Tag<DisplayNameAttribute>() 
                  select a.DisplayName).ValueOrElse(() => src.Name);
     }
 }

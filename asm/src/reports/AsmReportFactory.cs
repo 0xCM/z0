@@ -33,6 +33,21 @@ namespace Z0
         public static DataResourceReport Resources(AssemblyId id, DataResourceIndex resources)
             => DataResourceReport.Create(id, resources);
 
+
+        public static ParsedEncodingReport Create(params ParsedEncodingRecord[] records)
+            => PER.Create(records);
+
+
+        readonly struct PER : ParsedEncodingReport
+        {        
+            public static ParsedEncodingReport Create(params ParsedEncodingRecord[] records)
+                => new PER(records);
+
+            PER(ParsedEncodingRecord[] records)
+                => this.Records = records;
+            
+            public ParsedEncodingRecord[] Records {get;}
+        }    
     }
 }
 

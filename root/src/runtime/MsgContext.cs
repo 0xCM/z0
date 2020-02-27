@@ -29,7 +29,7 @@ namespace Z0
         public void PostMessage(AppMsg msg)
             => Queue.Post(msg);
 
-        public void Flush(Exception e, IMsgLog target)
+        public void Flush(Exception e, IAppMsgLog target)
         {
             var messages = Queue.Flush(e);            
             Terminal.Get().WriteMessages(messages);
@@ -37,7 +37,7 @@ namespace Z0
 
         }
         
-        public void PostMessage(string msg, SeverityLevel? severity = null)
+        public void PostMessage(string msg, AppMsgKind? severity = null)
             => Queue.Post(msg,severity);
     }    
 }

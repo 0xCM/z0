@@ -14,6 +14,15 @@ namespace Z0
     
     partial class RootReflections
     {
+        /// <summary>
+        /// Determines whether a parameter has a parametrically-identified attribute
+        /// </summary>
+        /// <param name="p">The parameter to examine</param>
+        /// <typeparam name="A">The attribute type to check</typeparam>
+        public static bool Tagged<A>(this ParameterInfo p)
+            where A : Attribute
+                => System.Attribute.IsDefined(p, typeof(A));
+
         public static bool IsParametric(this ParameterInfo src)
             => src.ParameterType.IsGenericParameter 
             || src.ParameterType.IsGenericMethodParameter 
@@ -24,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source parameter</param>
         public static bool IsImmediate(this ParameterInfo param)
-            => param.Attributed<ImmAttribute>();
+            => param.Tagged<ImmAttribute>();
 
         /// <summary>
         /// Determines the variance of a parameter
@@ -54,14 +63,6 @@ namespace Z0
                 where m.Parameters(predicate).Count() != 0
                 select m;
 
-        /// <summary>
-        /// Determines whether a parameter has a parametrically-identified attribute
-        /// </summary>
-        /// <param name="p">The parameter to examine</param>
-        /// <typeparam name="A">The attribute type to check</typeparam>
-        public static bool Attributed<A>(this ParameterInfo p)
-            where A : Attribute
-                => System.Attribute.IsDefined(p, typeof(A));
 
     }
 }

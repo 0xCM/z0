@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsSpanOp(this MethodInfo m)
-            => m.Attributed<SpanOpAttribute>();
+            => m.Tagged<SpanOpAttribute>();
 
         /// <summary>
         /// Creates a delegate for a static method via the expression api

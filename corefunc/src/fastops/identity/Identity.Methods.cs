@@ -70,7 +70,7 @@ namespace Z0
 
         public static string name(MethodInfo m)
         {
-            var attrib = m.CustomAttribute<OpAttribute>();
+            var attrib = m.Tag<OpAttribute>();
             if(attrib.IsNone())
                 return m.Name;
 

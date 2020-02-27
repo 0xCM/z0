@@ -9,11 +9,11 @@ using Z0;
 
 partial class zfunc
 {
-    public static AppMsg appMsg(object content, SeverityLevel level = SeverityLevel.Info)
-        => level == SeverityLevel.Warning ? AppMsg.Define($"{content} (warning)",level) : AppMsg.Define($"{content}",level);
+    public static AppMsg appMsg(object content, AppMsgKind level = AppMsgKind.Info)
+        => level == AppMsgKind.Warning ? AppMsg.Define($"{content} (warning)",level) : AppMsg.Define($"{content}",level);
 
     public static AppMsg appMsg(Exception content)
-        => AppMsg.Define(content.ToString(), SeverityLevel.Error);
+        => AppMsg.Define(content.ToString(), AppMsgKind.Error);
 
     /// <summary>
     /// Defines an application exception reporting the conent of an application message

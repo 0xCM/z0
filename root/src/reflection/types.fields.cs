@@ -88,19 +88,5 @@ namespace Z0
                 yield return (i, (T)Convert.ChangeType(literals[i].GetValue(null), typeof(T)));
         }
 
-        /// <summary>
-        /// Retrieves the type's fields together with applied attributes
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="src">The type to examine</param>
-        public static IDictionary<FieldInfo, A> FieldAttributions<A>(this Type src) 
-            where A : Attribute
-        {
-            var selection = from f in src.DeclaredFields()
-                            where f.Attributed<A>()
-                            let a = f.GetCustomAttribute<A>()
-                            select (f,a);
-            return selection.ToDictionary();
-        }
     }
 }

@@ -110,7 +110,7 @@ namespace Z0
             where T : unmanaged
         {
             if(terms.Length != natval(n))
-                AppErrors.ThrowInvariantFailure($"{n} != {terms.Length}");
+                errors.ThrowInvariantFailure($"{n} != {terms.Length}");
             return new NatPerm<N,T>(define(terms));
         }
 

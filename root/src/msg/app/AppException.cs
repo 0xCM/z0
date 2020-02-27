@@ -33,7 +33,7 @@ namespace Z0
         public AppException(string msg, string caller, string file, int? line) 
             : base(msg.ToString()) 
             { 
-                this.Message = AppMsg.Define($"{caller} line {line} {file}: {msg}", SeverityLevel.Error, caller, file, line);
+                this.Message = AppMsg.Define($"{caller} line {line} {file}: {msg}", AppMsgKind.Error, caller, file, line);
                 this.Caller = Message.Caller;
                 this.File = Message.CallerFile;
                 this.Line = Message.FileLine;
@@ -50,7 +50,7 @@ namespace Z0
         
         public new AppMsg Message {get;}
 
-        public SeverityLevel Severity
+        public AppMsgKind Severity
             => Message.Level;
 
         public override string ToString()

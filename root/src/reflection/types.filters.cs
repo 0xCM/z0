@@ -14,6 +14,15 @@ namespace Z0
     partial class RootReflections
     {
         /// <summary>
+        /// Selects source types from the stream to wich a parametrically-identified attribute is applied
+        /// </summary>
+        /// <param name="src">The source stypes</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static IEnumerable<Type> Tagged<A>(this IEnumerable<Type> src)
+            where A : Attribute
+                => src.Where(t => System.Attribute.IsDefined(t, typeof(A)));
+
+        /// <summary>
         /// Selects the concrete types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
@@ -54,15 +63,6 @@ namespace Z0
         /// <param name="src">The source types</param>
         public static IEnumerable<Type> Enums(this IEnumerable<Type> src)
             => src.Where(t => t.IsEnum);
-
-        /// <summary>
-        /// Selects source types from the stream to wich a parametrically-identified attribute is applied
-        /// </summary>
-        /// <param name="src">The source stypes</param>
-        /// <typeparam name="A">The attribute type</typeparam>
-        public static IEnumerable<Type> Attributed<A>(this IEnumerable<Type> src)
-            where A : Attribute
-                => src.Where(t => System.Attribute.IsDefined(t, typeof(A)));
 
         /// <summary>
         /// Selects the types from a specified namespace

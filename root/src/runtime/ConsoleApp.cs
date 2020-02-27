@@ -12,9 +12,9 @@ namespace Z0
     {
         readonly IMsgContext Queue;
 
-        readonly IMsgLog MsgLog;
+        readonly IAppMsgLog MsgLog;
 
-        protected ConsoleApp(IMsgLog log)
+        protected ConsoleApp(IAppMsgLog log)
         {
             this.Queue = MsgContext.Create();
             this.MsgLog = log;

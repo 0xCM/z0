@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class ReportFieldAttribute : Attribute
     {
         public ReportFieldAttribute()

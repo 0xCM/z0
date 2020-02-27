@@ -17,23 +17,23 @@ namespace Z0.Machines
     static class FsmMessages
     {
         public static AppMsg Transition<S>(string machine, S s1, S s2)
-            => appMsg($"{machine} Transitioned {s1} -> {s2}", SeverityLevel.HiliteCL);
+            => appMsg($"{machine} Transitioned {s1} -> {s2}", AppMsgKind.HiliteCL);
 
         public static AppMsg Completed(string machine, FsmStats stats, bool asPlanned)
             => appMsg($"{machine} executed for {stats.Runtime.Ms} ms and completed" 
             + (asPlanned ? $" as planned after receiving {stats.ReceiptCount} events and experiencing {stats.TransitionCount} transitions" : " abnormally"), 
-                SeverityLevel.HiliteBL);
+                AppMsgKind.HiliteBL);
         
         public static AppMsg Receipt<E>(string machine, E input, ulong receipts)
-            => appMsg($"{machine} received event {input.ToString().PadLeft(6)} | Total Receipts: {receipts}", SeverityLevel.Babble);
+            => appMsg($"{machine} received event {input.ToString().PadLeft(6)} | Total Receipts: {receipts}", AppMsgKind.Babble);
 
         public static AppMsg Error(string machine, Exception error)
-            => appMsg($"{machine} encountered an error: {error}", SeverityLevel.Error);
+            => appMsg($"{machine} encountered an error: {error}", AppMsgKind.Error);
 
         public static AppMsg ReceiptAfterFinish(string machine)
-            => appMsg($"{machine} continuing to receive input after finished has been signaled", SeverityLevel.Warning);
+            => appMsg($"{machine} continuing to receive input after finished has been signaled", AppMsgKind.Warning);
 
         public static AppMsg ReceiptBeforeStart(string machine)
-            => appMsg($"{machine} received input before start", SeverityLevel.Warning);
+            => appMsg($"{machine} received input before start", AppMsgKind.Warning);
     }
 }

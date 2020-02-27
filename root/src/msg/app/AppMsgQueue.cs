@@ -48,12 +48,12 @@ namespace Z0
         {
             lock(lockobj)
             {
-                Post(AppMsg.Define($"{e}", SeverityLevel.Error));
+                Post(AppMsg.Define($"{e}", AppMsgKind.Error));
                 return Dequeue();
             }
         }
 
-        public void Post(string msg, SeverityLevel? severity = null)
-            => Post(AppMsg.Define($"{msg}", severity ?? SeverityLevel.Babble));
+        public void Post(string msg, AppMsgKind? severity = null)
+            => Post(AppMsg.Define($"{msg}", severity ?? AppMsgKind.Babble));
     }
 }

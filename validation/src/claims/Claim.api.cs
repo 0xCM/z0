@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
         
     using static zfunc;
-    using static ErrorMessages;
+    using static messages;
     
     using Member = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void eq(bool lhs, bool rhs)
-            => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqual(lhs,rhs));
+            => (lhs == rhs).IfNone(() => errors.ThrowNotEqual(lhs,rhs));
 
         /// <summary>
         /// Asserts the equality of two bit values
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         public static void eq(bit lhs, bit rhs)
-            => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqual(lhs,rhs));
+            => (lhs == rhs).IfNone(() => errors.ThrowNotEqual(lhs,rhs));
 
         public static bool eq(HexByteKind lhs, HexByteKind rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
@@ -206,7 +206,7 @@ namespace Z0
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         public static bool eq(int lhs, int rhs, string msg, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, AppMsg.Define(msg, SeverityLevel.Error, caller, file, line));
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, AppMsg.Define(msg, AppMsgKind.Error, caller, file, line));
 
         public static bool eq(uint lhs, uint rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
@@ -259,7 +259,7 @@ namespace Z0
             {
                 for(var i = 0; i< length(lhs,rhs); i++)
                     if(!lhs[i].Equals(rhs[i]))
-                        AppErrors.ThrowNotEqual(lhs[i], rhs[i]);
+                        errors.ThrowNotEqual(lhs[i], rhs[i]);
             }
         }
 
@@ -276,7 +276,7 @@ namespace Z0
             {
                 for(var i = 0; i< length(lhs,rhs); i++)
                     if(!lhs[i].Equals(rhs[i]))
-                        AppErrors.ThrowNotEqual(lhs[i], rhs[i]);
+                        errors.ThrowNotEqual(lhs[i], rhs[i]);
             }
         }
 
@@ -293,7 +293,7 @@ namespace Z0
             if(typeof(T) == typeof(bit))
                 Claim.eq(As.ubit(lhs), As.ubit(rhs));
             else
-                gmath.eq(lhs,rhs).IfNone(() => AppErrors.ThrowNotEqual(lhs,rhs));
+                gmath.eq(lhs,rhs).IfNone(() => errors.ThrowNotEqual(lhs,rhs));
         }
 
         /// <summary>
@@ -368,7 +368,7 @@ namespace Z0
         {
             for(var i = 0; i< lhs.CellCount; i++)
                 if(!gmath.eq(lhs[i],rhs[i]))
-                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
+                    throw errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace Z0
         {
             for(var i = 0; i< length(xb,yb); i++)
                 if(!gmath.eq(xb[i],yb[i]))
-                    throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
+                    throw errors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace Z0
         {
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(!gmath.within(lhs[i],rhs[i],tolerance))
-                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
+                    throw errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
         public static bool neq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -506,7 +506,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool nonzero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
-                => gmath.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
+                => gmath.nonz(x) ? true : throw errors.NotNonzero(caller,file,line);
 
         /// <summary>
         /// Asserts that the source value is zero
@@ -518,7 +518,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool zero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
-                => !gmath.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
+                => !gmath.nonz(x) ? true : throw errors.NotNonzero(caller,file,line);
 
         /// <summary>
         /// Asserts the operand is true
@@ -563,9 +563,9 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static unsafe bool notnull(void* p, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => (p != null) ? true : throw new ArgumentNullException(AppMsg.Define($"Pointer was null", SeverityLevel.Error, caller,file,line).ToString());
+            => (p != null) ? true : throw new ArgumentNullException(AppMsg.Define($"Pointer was null", AppMsgKind.Error, caller,file,line).ToString());
 
         public static bool notnull<T>(T src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => !(src is null) ? true : throw new ArgumentNullException(AppMsg.Define($"Argument was null", SeverityLevel.Error, caller,file,line).ToString());
+            => !(src is null) ? true : throw new ArgumentNullException(AppMsg.Define($"Argument was null", AppMsgKind.Error, caller,file,line).ToString());
     }
 }

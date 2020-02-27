@@ -21,13 +21,20 @@ namespace Z0
 
         const string AsmIndicator = "asm";
 
+
+        const string CaptureWorkflow = "captured";
+
+        const string ParseWorkflow = "parsed";
+
+        const string DecodeWorkflow = "decoded";
+
+        const string ReportsIndicator = "reports";
+
         const string EmissionIndicator = "emissions";
 
         const string EmissionImmSuffix = "imm";
 
-        const string SummaryIndicator = "summary";
-
-        const string ReportsIndicator = "reports";
+        public FolderName Folder(AssemblyId owner) => FolderName.Define(owner.Format());
 
         public FolderName ReportFolder => FolderName.Define($"{AsmIndicator}{IndicatorPrefix}{ReportsIndicator}");  
         
@@ -36,16 +43,54 @@ namespace Z0
         public FolderName DataRootFolder => FolderName.Define(AsmIndicator);
 
         public FolderPath DataRootDir => Paths.DataDir(DataRootFolder);
+
+        public FolderPath DataSubDir(FolderName folder) => DataRootDir + folder; 
+
+        public FolderPath DataSubDir(RelativeLocation location) => DataRootDir +  location;
+
+        public FolderName CaptureFolder => FolderName.Define(CaptureWorkflow);
+
+        public FolderPath CaptureDir => DataSubDir(CaptureFolder);
+
+        public FileExtension CaptureFileExt => FileExtensions.Csv;
+
+        public FileName CaptureFileName(ApiHost host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName, IndicatorPrefix, CaptureWorkflow), CaptureFileExt);
         
-        public FolderPath AsmDataDir(FolderName folder) => DataRootDir + folder; 
+        public FilePath CapturePath(ApiHost host) => CaptureDir + CaptureFileName(host);
+        
+        public FileExtension ParsedExt => FileExtensions.Csv;
 
-        public FolderPath AsmDataDir(RelativeLocation location) => DataRootDir +  location;
+        public FolderName ParsedFolder => FolderName.Define(ParseWorkflow);
 
-        public FolderName DataFolderName(AssemblyId owner) => FolderName.Define(owner.Format());
+        public FolderPath ParsedDir(ApiHost host) => DataSubDir(ParsedFolder);
 
-        public FolderPath DataFolderDir(AssemblyId owner) => DataRootDir + DataFolderName(owner);
+        public FileName ParsedFileName(ApiHost host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), ParsedExt);
+        
+        public FilePath ParsedPath(ApiHost host) => ParsedDir(host) + ParsedFileName(host);
 
-        public FolderPath AsmDumpDir => AsmDataDir(FolderName.Define($"{IndicatorPrefix}dumps"));
+        public FileExtension DecodedExt => FileExtensions.Asm;
+
+        public FolderName DecodedFolder => FolderName.Define(DecodeWorkflow);
+
+        public FolderPath DecodedDir => DataSubDir(DecodedFolder);
+        
+        public FileName DecodedFileName(ApiHost host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), DecodedExt);
+        
+        public FilePath DecodedPath(ApiHost host) => DecodedDir + DecodedFileName(host);
+
+        public FolderPath CilDir => DecodedDir;
+
+        public FileExtension CilExt => FileExtensions.Il;
+        
+        public FileName CilFileName(ApiHost host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), CilExt);
+
+        public FilePath CilPath(ApiHost host) => CilDir + CilFileName(host);
+
+        public FolderPath AsmDumpDir => DataSubDir(FolderName.Define($"{IndicatorPrefix}dumps"));
 
         public FileExtension ResourceExt => FileExtensions.Csv;
 
@@ -58,17 +103,6 @@ namespace Z0
             + (kind == AsmEmissionKind.Imm 
                     ? FileName.Define($"{id.Format()}{SuffixSep}{EmissionImmSuffix}", EmissionExt) 
                     : FileName.Define($"{id.Format()}", EmissionExt));                
-
-        public FolderName CaptureSummaryFolder => FolderName.Define($"{IndicatorPrefix}{SummaryIndicator}");
-
-        public FolderPath CaptureSummaryDir => DataRootDir + CaptureSummaryFolder;
-
-        public FileExtension CaptureSummaryExt => FileExtensions.Csv;
-
-        public FileName CaptureSummaryFileName(ApiHost host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName, IndicatorPrefix, SummaryIndicator), CaptureSummaryExt);
-        
-        public FilePath CaptureSummaryPath(ApiHost host) => CaptureSummaryDir + CaptureSummaryFileName(host);
 
         public FileExtension LocationExt => FileExtensions.Csv;
 
@@ -85,75 +119,48 @@ namespace Z0
 
         public FilePath LocationPath(AssemblyId assembly) => LocationDir + LocationFileName(assembly);
 
-        public FileExtension ParsedExt => FileExtensions.Csv;
-
-        public FileName ParsedFileName(ApiHost host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), ParsedExt);
-        
-        public FilePath ParsedPath(ApiHost host) => DataFolderDir(host.Owner) + ParsedFileName(host);
-
-        public FileExtension DetailExt => FileExtensions.Asm;
-
-        public FileName DetailFileName(OpIdentity m) => FileName.Define(m, DetailExt);
-
-        public FileName DetailFileName(ApiHost host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), DetailExt);
-        
-        public FilePath DetailPath(ApiHost host) => DataFolderDir(host.Owner) + DetailFileName(host);
-
-        public FilePath DetailPath(AssemblyId origin, string host, OpIdentity id)
-            => AsmDataDir(RelativeLocation.Define(origin.Format(), host)) + DetailFileName(id);
-
-        public FilePath DetailPath(ApiHostPath host, OpIdentity id)
-            => AsmDataDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + DetailFileName(id);
-
         public FileName HexFileName(OpIdentity m) => FileName.Define(m, Ext.Hex);
 
         public FilePath HexPath(AssemblyId origin, string host, OpIdentity id)
-            => AsmDataDir(RelativeLocation.Define(origin.Format(), host)) + HexFileName(id);
+            => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + HexFileName(id);
 
         public FilePath HexPath(ApiHostPath host, OpIdentity id)
-            => AsmDataDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + HexFileName(id);
+            => DataSubDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + HexFileName(id);
 
-        /// <summary>
-        /// Returns the path to the hex data file for an identified operation
-        /// </summary>
-        /// <param name="subject">The assembly log subfolder</param>
-        /// <param name="m">The operation identifier</param>
         public FilePath HexPath(FolderPath dir, OpIdentity m) => dir + HexFileName(m);
 
         public FileName RawFileName(OpIdentity m) => FileName.Define(m, Ext.Raw);
 
         public FilePath RawPath(AssemblyId origin, string host, OpIdentity id)
-            => AsmDataDir(RelativeLocation.Define(origin.Format(), host)) + RawFileName(id);
+            => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + RawFileName(id);
 
         public FilePath RawFilePath(ApiHostPath host, OpIdentity id)
-            => AsmDataDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + RawFileName(id);
+            => DataSubDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + RawFileName(id);
 
         public FileName CilFileName(OpIdentity m) => FileName.Define(m, Ext.Il);
 
         public FilePath CilPath(AssemblyId catalog, string host, OpIdentity id)
-            => AsmDataDir(RelativeLocation.Define(catalog.Format(), host)) + CilFileName(id);
+            => DataSubDir(RelativeLocation.Define(catalog.Format(), host)) + CilFileName(id);
 
         public FilePath CilPath(ApiHostPath host, OpIdentity id)
-            => AsmDataDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + CilFileName(id);
+            => DataSubDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + CilFileName(id);
 
-        public FilePath ArchivePath(ArchiveFileKind kind, AssemblyId origin, string host, OpIdentity id)
+        public FileName DecodedOpFileName(OpIdentity m) => FileName.Define(m, DecodedExt);
+
+        public FilePath DecodedOpPath(AssemblyId origin, string host, OpIdentity id)
+            => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + DecodedOpFileName(id);
+
+        public FilePath DecodedOpPath(ApiHostPath host, OpIdentity id)
+            => DataSubDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + DecodedOpFileName(id);
+
+        public FilePath OpArchivePath(ArchiveFileKind kind, AssemblyId origin, string host, OpIdentity id)
             => kind switch {
                 ArchiveFileKind.Hex  => HexPath(origin, host, id),
                 ArchiveFileKind.Raw  => RawPath(origin, host, id),
-                ArchiveFileKind.Asm  => DetailPath(origin, host, id),
+                ArchiveFileKind.Asm  => DecodedOpPath(origin, host, id),
                 ArchiveFileKind.Cil  => CilPath(origin, host, id),
                 _  => FilePath.Empty,
             };
 
-        public FilePath ArchivePath(ArchiveFileKind kind, ApiHostPath host, OpIdentity id)
-            => kind switch {
-                ArchiveFileKind.Hex  => HexPath(host, id),
-                ArchiveFileKind.Raw  => RawFilePath(host, id),
-                ArchiveFileKind.Asm  => DetailPath(host, id),
-                ArchiveFileKind.Cil  => CilPath(host, id),
-                _  => FilePath.Empty,
-            };
     }
 }

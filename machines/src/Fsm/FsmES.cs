@@ -270,7 +270,7 @@ namespace Z0.Machines
             => new ReceiptLimitExceeded(machine, limit);
 
         public ReceiptLimitExceeded(string machine, ulong limit)
-            : base(AppMsg.Define($"{machine} Event receipt limit of {limit} was exeeded", SeverityLevel.Warning))
+            : base(AppMsg.Define($"{machine} Event receipt limit of {limit} was exeeded", AppMsgKind.Warning))
         {
 
         }

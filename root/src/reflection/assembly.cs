@@ -14,25 +14,11 @@ namespace Z0
     partial class RootReflections
     {        
         /// <summary>
-        /// Gets the simple name of an assembly
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        public static string GetSimpleName(this Assembly a)
-            => a?.GetName()?.Name ?? string.Empty;
-
-        /// <summary>
-        /// Convenience accessor for the assembly's version
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        public static Version AssemblyVersion(this Assembly a)
-            => a.GetName().Version;
-
-        /// <summary>
         /// Determines whether an assembly has an attribute of a given type
         /// </summary>
         /// <param name="a">The source assembly</param>
         /// <typeparam name="T">The attribute type</typeparam>
-        public static bool Attributed<T>(this Assembly a) 
+        public static bool Tagged<T>(this Assembly a) 
             where T : Attribute
                 => System.Attribute.IsDefined(a, typeof(T));
 
@@ -41,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source assembly</param>
         /// <typeparam name="A">The type of attribute for which to search</typeparam>
-        public static A Attribute<A>(this Assembly a) 
+        public static A Tag<A>(this Assembly a) 
             where A : Attribute
                 => (A)System.Attribute.GetCustomAttribute(a, typeof(A));
 
@@ -50,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source assembly</param>
         /// <typeparam name="A">The attribute type</typeparam>
-        public static IDictionary<Type, A> TypeAttributions<A>(this Assembly a, Func<Type,bool> pred = null)
+        public static IDictionary<Type, A> TaggedTypeIndex<A>(this Assembly a, Func<Type,bool> pred = null)
             where A : Attribute
         {
             var f = pred ?? (t => true);
@@ -64,6 +50,20 @@ namespace Z0
                     };
             return q.ToDictionary(x => x.Type, x => x.Attribute);
         }
+
+        /// <summary>
+        /// Gets the simple name of an assembly
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        public static string GetSimpleName(this Assembly a)
+            => a?.GetName()?.Name ?? string.Empty;
+
+        /// <summary>
+        /// Convenience accessor for the assembly's version
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        public static Version AssemblyVersion(this Assembly a)
+            => a.GetName().Version;
 
         public static IEnumerable<Type> Types(this Assembly a)
             => a.GetTypes();

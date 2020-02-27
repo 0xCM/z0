@@ -52,7 +52,7 @@ namespace Z0
             var dstFileName = FileName.Define(name) + FileExtension.Define(extension);
             if(timestamped)
                 dstFileName = FileName.Timestamped(dstFileName);        
-            var dstPath = Context.EmissionPaths().AsmDataDir(FolderName.Define(".dumps")).CreateIfMissing() + dstFileName;
+            var dstPath = Context.EmissionPaths().DataSubDir(FolderName.Define(".dumps")).CreateIfMissing() + dstFileName;
             return new StreamWriter(dstPath.ToString(),false);
         }        
     }

@@ -7,19 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Linq;
 
     using static Root;
 
-
     public static class Enums
     {
-        [MethodImpl(Inline)]
-        public static EnumValue<E,V> value<E,V>(E e, V v = default)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => new EnumValue<E,V>(e, numeric(e,v));
-
         [MethodImpl(Inline)]
         public static E zero<E>()
             where E : unmanaged, Enum
@@ -56,30 +50,33 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E[] literals<E>(E e = default)
             where E : unmanaged, Enum
-                => (E[])Enum.GetValues(typeof(E));
+                => (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiterals<E>());
+                //=> (E[])Enum.GetValues(typeof(E));
 
         /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
-        public static EnumValue<E,T>[] values<E,T>(E e = default, T t = default)
+        public static EnumValues<E,T> values<E,T>(E e = default, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
-        {
-            var members = literals<E>();
-            var pairs = new EnumValue<E,T>[members.Length];
-            for(var i=0; i<members.Length; i++)
-                pairs[i] = (members[i], numeric<E,T>(members[i]));
-            return pairs;        
-        }
+                => (EnumValues<E,T>)ValueCache.GetOrAdd(typeof(E), _ => CreateValues<E,T>());
+
+        /// <summary>
+        /// Gets the declaration-order indices for each defined literal
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        public static LiteralIndices<E> indices<E>()
+            where E : unmanaged, Enum
+                => (LiteralIndices<E>)IndicesCache.GetOrAdd(typeof(E), _ => CreateIndices<E>());
 
         /// <summary>
         /// Constructs a arbitrarily deduplicated value-to-member index
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
-        public static IDictionary<T,E> index<E,T>(E e = default, T t = default)
+        public static IDictionary<T,E> dictionary<E,T>(E e = default, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
         {
@@ -189,5 +186,76 @@ namespace Z0
         public static ulong @ulong<E>(E e, ulong t = default)
             where E : unmanaged, Enum
                 => Enums.numeric(e,t);                
+
+        /// <summary>
+        /// Gets the literals defined by an enumeration together with their integral values
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="T">The value type</typeparam>
+        static EnumValues<E,T> CreateValues<E,T>()
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            //var members = literals<E>();
+            var index = indices<E>();
+            var dst = new EnumValue<E,T>[index.Length];
+            for(var i=0; i<index.Length; i++)
+            {
+                var literal = index[i].Literal;
+                var value = numeric<E,T>(literal);
+                //dst[i] = (i, members[i], numeric<E,T>(members[i]));
+                dst[i] = (i, literal, value);
+            }
+            return dst;        
+        }
+
+        /// <summary>
+        /// Gets the literals defined by an enumeration
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static E[] CreateLiterals<E>()
+            where E : unmanaged, Enum
+        {
+            var i = indices<E>();
+            var dst = new E[i.Length];
+            for(var j = 0; j<dst.Length; j++)
+                dst[j] = i[j].Literal;
+            return dst;    
+        }
+
+        public static LiteralIndices<E> CreateIndices<E>()
+            where E : unmanaged, Enum
+        {
+            var fields = typeof(E).LiteralFields().ToArray();
+            var dst = new LiteralIndex<E>[fields.Length];
+            for(var i=0; i< fields.Length; i++)
+            {
+                var f = fields[i];
+                var literal = Enums.parse<E>(f.Name);
+                dst[i] = (Enums.parse<E>(f.Name),i);
+            }
+            return dst;
+        }
+
+        // static LiteralIndices<E> CreateIndices<E>()
+        //     where E : unmanaged, Enum
+        // {
+        //     var members = literals<E>();
+        //     var dst = new LiteralIndex<E>[members.Length];
+        //     for(var i=0; i<members.Length; i++)
+        //         dst[i] = (members[i],i);
+        //     return dst;        
+        // }
+
+        static ConcurrentDictionary<Type,object> LiteralCache {get;}
+            = new ConcurrentDictionary<Type, object>();
+
+        static ConcurrentDictionary<Type,object> IndicesCache {get;}
+            = new ConcurrentDictionary<Type, object>();
+
+        static ConcurrentDictionary<Type,object> ValueCache {get;}
+            = new ConcurrentDictionary<Type, object>();
+
    }
 }

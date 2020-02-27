@@ -28,19 +28,19 @@ namespace Z0
             => appMsg($"{now().ToLexicalString()} Completed test suite execution after {runtime} ms");
 
         public static AppMsg CatalogNotFound(AssemblyId id)        
-            => appMsg($"Operation catalog was not found for assembly {id}", SeverityLevel.Warning);
+            => appMsg($"Operation catalog was not found for assembly {id}", AppMsgKind.Warning);
 
         public static AppMsg CatalogEmpty(IOperationCatalog catalog)        
-            => appMsg($"Operation catalog {catalog.CatalogName} is empty", SeverityLevel.Warning);
+            => appMsg($"Operation catalog {catalog.CatalogName} is empty", AppMsgKind.Warning);
 
         public static AppMsg DispatchingCatalogWorkers()        
-            => appMsg($"Dispatching catalog workers", SeverityLevel.Babble);
+            => appMsg($"Dispatching catalog workers", AppMsgKind.Babble);
 
         public static AppMsg DispatchingCatalogWorker(IOperationCatalog catalog)        
-            => appMsg($"Dispatching {catalog.CatalogName} worker", SeverityLevel.Info);
+            => appMsg($"Dispatching {catalog.CatalogName} worker", AppMsgKind.Info);
 
         public static AppMsg CollectingStats(IOperationCatalog catalog)        
-            => appMsg($"Collecting {catalog.CatalogName} catalog statistics", SeverityLevel.Info);
+            => appMsg($"Collecting {catalog.CatalogName} catalog statistics", AppMsgKind.Info);
 
     }
 }

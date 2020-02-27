@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
+
     using static zfunc;
 
     class Catalog : OpCatalog<Catalog>
@@ -21,6 +19,5 @@ namespace Z0
         
         public override IEnumerable<Type> ServiceHostTypes
             => typeof(GXTypes).GetNestedTypes().Realize<IFunc>();
-
     }
 }

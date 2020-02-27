@@ -5,29 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
 
-    using static zfunc;
-
-    public class ReportFieldInfo
+    public readonly struct ReportFieldInfo
     {
-        public static ReportFieldInfo Define(PropertyInfo src)
-        {
-            var attrib = src.CustomAttribute<ReportFieldAttribute>();
-            return attrib.Map(a => new ReportFieldInfo(src, a.Name.IfBlank(src.Name), a.Width), () => new ReportFieldInfo(src, src.Name,null));
-        }
+        public readonly string Name;
 
-        ReportFieldInfo(PropertyInfo src, string name, int? width)
+        public readonly int? Width;
+
+        public static ReportFieldInfo Define(string name, int? width)
+            => new ReportFieldInfo(name,width);
+       
+        ReportFieldInfo(string name, int? width)
         {
-            this.Source = src;
             this.Name = name;
             this.Width = width;
-        }
-        
-        public string Name {get;}
-
-        public int? Width {get;}
-
-        public PropertyInfo Source {get;}         
+        }        
     }
 }

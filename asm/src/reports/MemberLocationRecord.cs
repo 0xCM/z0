@@ -8,10 +8,23 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using F = MemberLocationField;
+    using R = MemberLocationRecord;
+
+    enum MemberLocationField
+    {
+        Location = 16,
+
+        Gap = 8,
+
+        Member = 1,
+
+    }
+
     /// <summary>
     /// Describes an assembly code emission
     /// </summary>
-    public class MemberLocationRecord : IRecord<MemberLocationRecord>
+    public class MemberLocationRecord :  IRecord<F, R>
     {    
         public static MemberLocationRecord Define(MemoryAddress location, ushort gap, OpIdentity member)
             => new MemberLocationRecord(location, gap, member);
@@ -44,8 +57,5 @@ namespace Z0
             dst.DelimitField(Member, delimiter);
             return dst.ToString();
         }
-
-        public IReadOnlyList<string> GetHeaders()
-            => Record.ReportHeaders(GetType());        
     }
 }

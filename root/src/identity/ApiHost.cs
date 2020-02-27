@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The assembly to search</param>
         public static IEnumerable<Type> HostTypes(Assembly src)
-            => src.GetTypes().Attributed<ApiHostAttribute>();
+            => src.GetTypes().Tagged<ApiHostAttribute>();
 
         [MethodImpl(Inline)]
         public static ApiHost Define(Type src)

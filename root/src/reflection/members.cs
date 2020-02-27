@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The subject to examine</param>
         /// <typeparam name="T">The type of attribute for which to check</typeparam>
-        public static bool Attributed<T>(this MemberInfo m) 
+        public static bool Tagged<T>(this MemberInfo m) 
             where T : Attribute
                 => System.Attribute.IsDefined(m, typeof(T));
 
@@ -63,26 +63,28 @@ namespace Z0
         /// </summary>
         /// <param name="m">The subject to examine</param>
         /// <typeparam name="T">The type of attribute for which to check</typeparam>
-        public static bool Unattributed<T>(this MemberInfo m) 
+        public static bool Untagged<T>(this MemberInfo m) 
             where T : Attribute
-                => !m.Attributed<T>();
+                => !m.Tagged<T>();
 
         /// <summary>
         /// Determines whether an attribute of specified type is attached to a member
         /// </summary>
         /// <param name="m">The member to test</param>
         /// <param name="t">The target attribute type</param>
-        public static bool Attributed(this MemberInfo m, Type t)
+        public static bool Tagged(this MemberInfo m, Type t)
             => System.Attribute.IsDefined(m, t);
 
 
-        /// Selects the members with a particular name
+        /// <summary>
+        /// Selects the members with a particular attribute
         /// </summary>
         /// <param name="src">The members to examine</param>
         /// <param name="name">The name to match</param>
-        public static IEnumerable<T> Attributed<T>(this IEnumerable<T> src, Type attrib)
+        public static IEnumerable<T> Tagged<T>(this IEnumerable<T> src, Type attrib)
             where T : MemberInfo
-                => src.Where(m => m.Attributed(attrib));
+                => src.Where(m => m.Tagged(attrib));
+
 
         /// <summary>
         /// Selects the members with a name that exists within a supplied set
@@ -123,6 +125,7 @@ namespace Z0
             => from m in src
                 where search.Any(match => m.Name.StartsWith(match))
                 select m;    
+
 
     }
 }

@@ -55,6 +55,6 @@ namespace Z0.Asm
             => Decoded.Length;     
 
         public MemoryRange Origin
-            => NativeCode.MemorySource;    
+            => NativeCode.AddressRange;    
     }
 }

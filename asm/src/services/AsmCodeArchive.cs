@@ -33,7 +33,7 @@ namespace Z0
             this.Origin = catalog;
             this.HostName = host;
             //this.RootFolder = LogPaths.The.AsmDataDir(RelativeLocation.Define(Origin.Format(), host));
-            this.RootFolder = context.EmissionPaths().AsmDataDir(RelativeLocation.Define(Origin.Format(),host));
+            this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(Origin.Format(),host));
         }
 
         AsmCodeArchive(IAsmContext context, AssemblyId catalog)
@@ -42,7 +42,7 @@ namespace Z0
             this.Origin = catalog;
             this.HostName = string.Empty;
             //this.RootFolder = LogPaths.The.AsmDataDir(FolderName.Define(Origin.Format()));
-            this.RootFolder = context.EmissionPaths().AsmDataDir(FolderName.Define(Origin.Format()));
+            this.RootFolder = context.EmissionPaths().DataSubDir(FolderName.Define(Origin.Format()));
         }
 
         /// <summary>
@@ -111,10 +111,6 @@ namespace Z0
         Option<AsmCode<T>> Read<T>(FilePath src, OpIdentity m, T t = default)
             where T : unmanaged
                 => Root.Try(() => Parse<T>(src.ReadText(), m,t ));
-
-        // Option<AsmCode<T>> Read<T>(FolderPath location, OpIdentity m, T t = default)
-        //     where T : unmanaged
-        //         => Root.Try(() => Parse<T>(Paths.AsmHexPath(location, m).ReadText(),m,t));
 
         public IAsmCodeArchive Clear()
         {

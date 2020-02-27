@@ -16,6 +16,7 @@ namespace Z0
     {
         readonly FieldIndexEntry[] entries;
 
+
         public static FieldIndex<I,W> Create<I,U,W>()
             where I : unmanaged, Enum
             where U : unmanaged

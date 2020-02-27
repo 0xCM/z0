@@ -55,7 +55,7 @@ namespace Z0
 
         IEnumerable<Type> CandidateTypes()
             =>  from t in typeof(A).Assembly.Types().Realize<IUnitTest>()
-                where t.Concrete() && t.Unattributed<IgnoreAttribute>()
+                where t.Concrete() && t.Untagged<IgnoreAttribute>()
                 select t;
         
         IEnumerable<Type> Hosts()
@@ -157,7 +157,7 @@ namespace Z0
                 FormatTs(start)
                 );                
 
-            return AppMsg.Define(fields.Concat(FieldSep), SeverityLevel.HiliteBL);
+            return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
         }
 
         static AppMsg AftCaseMsg(string testName, TimeSpan elapsed, DateTime start, DateTime end)
@@ -171,7 +171,7 @@ namespace Z0
                 Format(end - start)
                 );
 
-            return AppMsg.Define(fields.Concat(FieldSep), SeverityLevel.HiliteBL);
+            return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
         }
 
         static AppMsg AftUnitMsg(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
@@ -185,7 +185,7 @@ namespace Z0
                 Format(end - start)
                 );
 
-            return AppMsg.Define(fields.Concat(FieldSep), SeverityLevel.HiliteBL);
+            return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
 
         }
 
@@ -244,9 +244,9 @@ namespace Z0
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else                
-                yield return ErrorMessages.Unanticipated(e?.InnerException ?? e);
+                yield return messages.Unanticipated(e?.InnerException ?? e);
 
-            yield return AppMsg.Define($"{name} failed.", SeverityLevel.Error);
+            yield return AppMsg.Define($"{name} failed.", AppMsgKind.Error);
         }
 
         AppMsg[] CollectMessages(IUnitTest src, string testName, Duration runtime, Exception e = null)
@@ -256,7 +256,7 @@ namespace Z0
             if(e != null)
                 messages.AddRange(GetErrorMessages(testName,e));
             else
-                messages.Add(AppMsg.Define($"{testName} executed. {runtime}", SeverityLevel.Info));
+                messages.Add(AppMsg.Define($"{testName} executed. {runtime}", AppMsgKind.Info));
             return messages.ToArray();
         }
 

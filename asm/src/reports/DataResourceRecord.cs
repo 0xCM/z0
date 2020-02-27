@@ -55,6 +55,6 @@ namespace Z0
         }
 
         public IReadOnlyList<string> GetHeaders()
-            => Record.ReportHeaders(GetType());
+            => Reports.ReportHeaders(GetType());
     }
 }

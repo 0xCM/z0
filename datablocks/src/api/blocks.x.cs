@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBlocked(this MethodInfo m)
-            => m.Attributed<BlockedOpAttribute>();
+            => m.Tagged<BlockedOpAttribute>();
 
         /// <summary>
         /// Determines whether a method is segmentation-centric

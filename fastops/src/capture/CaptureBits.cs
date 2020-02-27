@@ -27,11 +27,5 @@ namespace Z0
             this.Raw = raw;
             this.Trimmed = trimmed;
         }
-
-        public int RawLength
-            => Raw.Length;
-
-        public int TrimmedLength
-            => Trimmed.Length;
     }
 }

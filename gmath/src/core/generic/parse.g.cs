@@ -160,7 +160,7 @@ namespace Z0
             where T : unmanaged
         {
             var msg = $"Attempted to parse '{src}':{typeof(T).DisplayName()} but failed";
-            AppErrors.Throw(msg);
+            errors.Throw(msg);
 
             return default;
         }

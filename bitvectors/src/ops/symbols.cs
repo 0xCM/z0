@@ -27,7 +27,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var index = Enums.index<E,T>();
+            var index = Enums.dictionary<E,T>();
             var bitcount = maxbits ?? bitsize<T>();
             var count = BitCalcs.mincells(segwidth, bitcount);
             Span<char> symbols = new char[count];

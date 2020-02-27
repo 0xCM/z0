@@ -20,8 +20,8 @@ namespace Z0
         public static IEnumerable<BinaryLiteral<T>> BinaryLiterals<T>(this Type src)
             where T : unmanaged
             => from f in src.LiteralFields()
-                where f.FieldType == typeof(T) && f.Attributed<BinaryLiteralAttribute>()
-               let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
+                where f.FieldType == typeof(T) && f.Tagged<BinaryLiteralAttribute>()
+               let a = f.Tag<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, (T)f.GetValue(null), a.Text);
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace Z0
         /// <param name="src">The source type</param>
         public static IEnumerable<BinaryLiteral> BinaryLiterals(this Type src)
             => from f in src.LiteralFields()
-                where f.Attributed<BinaryLiteralAttribute>()
-               let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
+                where f.Tagged<BinaryLiteralAttribute>()
+               let a = f.Tag<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, f.GetValue(null), a.Text);
 
         public static string Format(this BinaryLiteral src) 

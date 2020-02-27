@@ -20,19 +20,19 @@ partial class zfunc
     /// <typeparam name="T">The enumeration type</typeparam>
     public static AppException unsupported<T>(T kind)
         where T : Enum
-            => AppErrors.KindUnsupported(kind);
+            => errors.KindUnsupported(kind);
     
     public static AppException unsupported<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        => AppErrors.TypeUnsupported(typeof(T), caller,file, line);
+        => errors.TypeUnsupported(typeof(T), caller,file, line);
 
     public static AppException unsupported(Type t, [Caller] string caller = null,  [File] string file = null, [Line] int? line = null)
-        => AppErrors.TypeUnsupported(t, caller,file, line);
+        => errors.TypeUnsupported(t, caller,file, line);
 
     public static AppException unsupported<S,T>(S src, T dst, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         where T : Enum
         where S : Enum
-            => AppErrors.KindOpUnsupported(src, dst, caller, file, line);    
+            => errors.KindOpUnsupported(src, dst, caller, file, line);    
     
     public static bool require(bool value, string info = null, [Caller] string caller = null, [File] string file = null,  [Line] int? line = null)
-            =>  value ? true : throw new AppException(AppMsg.Define($"Invariant failure: {info}", SeverityLevel.Error, caller, file, line));        
+            =>  value ? true : throw new AppException(AppMsg.Define($"Invariant failure: {info}", AppMsgKind.Error, caller, file, line));        
 }

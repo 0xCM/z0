@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static AsmCode WithIdentity(this AsmCode src, OpIdentity id)
-            => AsmCode.Define(id, src.MemorySource, src.Encoded);
+            => AsmCode.Define(id, src.AddressRange, src.Encoded);
 
         public static bool AcceptsParameter(this AsmCode src, NumericKind kind)
             => Numeric.kinds(src.Id.TextComponents.Skip(1)).Contains(kind);

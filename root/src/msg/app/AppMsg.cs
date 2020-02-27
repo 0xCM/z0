@@ -18,19 +18,19 @@ namespace Z0
     /// </summary>
     public class AppMsg
     {
-        public static AppMsg Define(string content, SeverityLevel level)
+        public static AppMsg Define(string content, AppMsgKind level)
             => new AppMsg(content, level, string.Empty, string.Empty,null);
 
-        public static AppMsg Define(string content, SeverityLevel? level = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, level ?? SeverityLevel.Info, caller, file, line);
+        public static AppMsg Define(string content, AppMsgKind? level = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new AppMsg(content, level ?? AppMsgKind.Info, caller, file, line);
         
         public static AppMsg Error(string content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, SeverityLevel.Error, caller, file, line);
+            => new AppMsg(content, AppMsgKind.Error, caller, file, line);
 
         public static readonly AppMsg Empty
-            = new AppMsg(string.Empty, SeverityLevel.Info, string.Empty, string.Empty, null);
+            = new AppMsg(string.Empty, AppMsgKind.Info, string.Empty, string.Empty, null);
 
-        AppMsg(string Content, SeverityLevel Level, string Caller, string Path, int? FileLine)
+        AppMsg(string Content, AppMsgKind Level, string Caller, string Path, int? FileLine)
         {
             this.Content = Content ?? string.Empty;
             this.Level = Level;
@@ -39,7 +39,7 @@ namespace Z0
             this.FileLine = FileLine;    
         }
 
-        AppMsg(string content, SeverityLevel Level, string caller, FilePath file, int? line)
+        AppMsg(string content, AppMsgKind Level, string caller, FilePath file, int? line)
         {
             this.Content = content ?? string.Empty;
             this.Level = Level;
@@ -56,7 +56,7 @@ namespace Z0
         /// <summary>
         /// The message severit
         /// </summary>
-        public SeverityLevel Level {get;}
+        public AppMsgKind Level {get;}
 
         /// <summary>
         /// The name of the member that originated the message
@@ -74,7 +74,7 @@ namespace Z0
         public int? FileLine {get;}
 
         public bool SupressFullPath
-            => Level != SeverityLevel.Error;
+            => Level != AppMsgKind.Error;
 
         public bool IsEmpty
             => String.IsNullOrWhiteSpace(Content);
@@ -92,7 +92,7 @@ namespace Z0
         /// Edits the message severity level
         /// </summary>
         /// <param name="Level">The new severity level</param>
-        public AppMsg WithLevel(SeverityLevel Level)
+        public AppMsg WithLevel(AppMsgKind Level)
             => new AppMsg(Content, Level, Caller, CallerFile, FileLine);
 
         /// <summary>

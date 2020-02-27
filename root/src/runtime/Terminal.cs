@@ -82,7 +82,7 @@ namespace Z0
             }
         }
 
-        public void WriteLine(object src, SeverityLevel level)
+        public void WriteLine(object src, AppMsgKind level)
             => WriteLine(src, (ConsoleColor)level);
             
         public void WriteLine(object src, ConsoleColor color)
@@ -136,12 +136,12 @@ namespace Z0
         /// </summary>
         /// <param name="c">The char to emit</param>
         /// <param name="severity">The severity</param>
-        public void WriteChar(char c, SeverityLevel? severity = null)
-            => Write(c, ForeColor(severity ?? SeverityLevel.Info));
+        public void WriteChar(char c, AppMsgKind? severity = null)
+            => Write(c, ForeColor(severity ?? AppMsgKind.Info));
 
         public void WriteMessage(AppMsg msg, bool cr = true)
         {   
-            if(msg.Level == SeverityLevel.Error)
+            if(msg.Level == AppMsgKind.Error)
                 WriteError(msg, ForeColor(msg.Level));
             else
             {
@@ -181,7 +181,7 @@ namespace Z0
             return Console.ReadKey().KeyChar;
         }
 
-        static ConsoleColor ForeColor(SeverityLevel level)
+        static ConsoleColor ForeColor(AppMsgKind level)
             => (ConsoleColor)level;
     }
 }

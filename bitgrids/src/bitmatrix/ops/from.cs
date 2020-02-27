@@ -21,7 +21,7 @@ namespace Z0
             where T : unmanaged
         {
             if(src.RowCount != bitsize<T>())
-                AppErrors.Throw($"{bitsize<T>()} != {src.RowCount}");
+                errors.Throw($"{bitsize<T>()} != {src.RowCount}");
 
             return load(src.data);                
         }

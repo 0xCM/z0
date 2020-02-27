@@ -133,7 +133,7 @@ partial class zfunc
     public static int length<T>(ReadOnlyMemory<T> lhs, ReadOnlyMemory<T> rhs,  [CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             => lhs.Length == rhs.Length ? lhs.Length 
-                : throw AppErrors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+                : throw errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 }
 
 //https://stackoverflow.com/questions/54511330/how-can-i-cast-memoryt-to-another

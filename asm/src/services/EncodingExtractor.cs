@@ -41,15 +41,14 @@ namespace Z0
 
                 var op = ops[i];
                 var length = reader.Read(op.Address, BufferLength, buffer);                
-                var record = new CapturedEncodingRecord
-                {
-                    Sequence = i,
-                    Address = op.Address,
-                    Length = length,
-                    Uri = OpUri.Hex(src.Path, op.Source.Name, op.Id),
-                    Data = buffer.Slice(0,length).ToArray(),
-                    OpSig = op.Source.Signature().Format(),
-                };
+                var record = new CapturedEncodingRecord(                
+                    Sequence : i,
+                    Address : op.Address,
+                    Length : length,
+                    Uri : OpUri.Hex(src.Path, op.Source.Name, op.Id),
+                    OpSig : op.Source.Signature().Format(),
+                    Data : EncodedData.Define(op.Address, buffer.Slice(0,length).ToArray())
+                    );
                 dst[i] = record;
             }    
 

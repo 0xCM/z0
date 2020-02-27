@@ -23,7 +23,7 @@ namespace Z0
                 else
                 {
                     var converter = 
-                        from a in typeof(S).CustomAttribute<ConversionProviderAttribute>()
+                        from a in typeof(S).Tag<ConversionProviderAttribute>()
                         let provider = (IConversionProvider<S>)Activator.CreateInstance(a.ProviderType)
                         select provider.Converter;            
 

@@ -63,7 +63,7 @@ namespace Z0
             var descriptions = DescribeInstructions(src);
             var lines = new List<string>();
             for(var i = 0; i< descriptions.Length; i++)
-                lines.Add(FormatInstruction(src.StartAddress,descriptions[i]));
+                lines.Add(FormatInstruction(src.StartAddress, descriptions[i]));
             return lines.ToArray();
         }    
 
@@ -119,7 +119,7 @@ namespace Z0
                 if(src.Code.Length < offset + instruction.ByteLength)
                     throw appFail(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
             
-                dst[i] = instruction.SummarizeInstruction(src.Code.Encoded, instruction.FormattedInstruction, offset, src.Code.MemorySource.Start);
+                dst[i] = instruction.SummarizeInstruction(src.Code.Encoded, instruction.FormattedInstruction, offset, src.Code.AddressRange.Start);
                 offset += (ushort)instruction.ByteLength;
             }
             return dst;
@@ -139,9 +139,9 @@ namespace Z0
         {
             var dataline = Comment(code.Id);
             if(Config.EmitFunctionOrigin)
-                dataline += code.MemorySource.Format();
+                dataline += code.AddressRange.Format();
 
-            dataline += text.bracket(code.MemorySource.Length);
+            dataline += text.bracket(code.AddressRange.Length);
 
             if(Config.EmitFunctionHeaderEncoding)
             {

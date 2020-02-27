@@ -127,7 +127,7 @@ namespace Z0
             var cpuTxt = $"cputime = {totalCpu}, ";
             var stateTxt = $"current state = {state}";            
             var msgText = $"({coreTxt}{cycleTxt}{cpuTxt}{stateTxt}";
-            var msg = appMsg(msgText, SeverityLevel.HiliteML);
+            var msg = appMsg(msgText, AppMsgKind.HiliteML);
             return msg;            
         }    
     }

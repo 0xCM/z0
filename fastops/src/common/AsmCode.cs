@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The originating memory location
         /// </summary>
-        public readonly MemoryRange MemorySource;
+        public readonly MemoryRange AddressRange;
 
         /// <summary>
         /// The encoded asm bytes
@@ -44,12 +44,12 @@ namespace Z0
         /// Defines a fully-specified code block
         /// </summary>
         /// <param name="id">The identifying moniker</param>
-        /// <param name="origin">The originating memory location</param>
+        /// <param name="src">The originating memory location</param>
         /// <param name="label">Descriptive text</param>
         /// <param name="data">The code bytes</param>
         [MethodImpl(Inline)]
-        public static AsmCode Define(OpIdentity id, MemoryRange origin, byte[] data)
-            => new AsmCode(id, origin, data);
+        public static AsmCode Define(OpIdentity id, MemoryRange src, byte[] data)
+            => new AsmCode(id, src, data);
 
         /// <summary>
         /// Defines a minimally-specified code block
@@ -73,10 +73,10 @@ namespace Z0
             => code.Encoded;
 
         [MethodImpl(Inline)]
-        internal AsmCode(OpIdentity id, MemoryRange origin, byte[] encoded)
+        internal AsmCode(OpIdentity id, MemoryRange src, byte[] encoded)
         {
             this.Id = id;
-            this.MemorySource = origin;
+            this.AddressRange = src;
             this.Encoded = encoded;
         }
 

@@ -9,23 +9,35 @@ namespace Z0
 
     using Z0.Asm;
 
-    /// <summary>
-    /// Defines service contract for the decoding phase of the asm capture workflow
-    /// </summary>
-    public interface IAsmDecoder : IAsmService
+    public interface IAsmFunctionDecoder : IAsmService
+    {        
+        /// <summary>
+        /// Decodes a function from a member capture
+        /// </summary>
+        /// <param name="src">The cource capture</param>
+        AsmFunction DecodeFunction(CapturedMember member, bool emitcil = true);   
+
+        /// <summary>
+        /// Decodes a function from the parsed encoding package
+        /// </summary>
+        /// <param name="parsed">The parsed data</param>
+        AsmFunction DecodeFunction(ParsedEncoding parsed);
+    }
+
+    public interface IAsmInstructionDecoder : IAsmService
     {
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        AsmInstructionList DecodeInstructions(AsmCode src);
+        AsmInstructionList DecodeInstructions(AsmCode src);        
+    }
 
-        /// <summary>
-        /// Decodes a function from a native capture
-        /// </summary>
-        /// <param name="src">The cource capture</param>
-        AsmFunction DecodeFunction(CapturedMember src);    
+    /// <summary>
+    /// Defines service contract for the decoding phase of the asm capture workflow
+    /// </summary>
+    public interface IAsmDecoder : IAsmFunctionDecoder, IAsmInstructionDecoder
+    {
 
-        AsmFunction DecodeFunction(OpDescriptor op, CaptureSummary summary);        
     }
 }

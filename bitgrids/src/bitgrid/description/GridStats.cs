@@ -11,6 +11,22 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static zfunc;
+    
+    public class ColInfoAttribute : Attribute
+    {
+        public ColInfoAttribute(string Name, string desc = "", int Width = 0)
+        {
+            this.Name = Name;
+            this.Desc = desc;
+            this.Width = Width == 0 ? (int?)null : Width;
+        }
+        
+        public string Name {get;}
+
+        public string Desc {get;}
+        
+        public int? Width {get;}
+    }
 
     public class GridStats
     {        
@@ -97,6 +113,7 @@ namespace Z0
         {
 
         }
+
 
         /// <summary>
         /// The number of grid rows

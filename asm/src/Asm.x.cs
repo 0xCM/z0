@@ -15,7 +15,6 @@ namespace Z0
             => AsmCode.Define(
                 encoding.Uri.OpId, 
                 MemoryRange.Define(@base, @base + (MemoryAddress)encoding.Data.Length), 
-                encoding.Data
-                );
+                encoding.Data);
     }
 }

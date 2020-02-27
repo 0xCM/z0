@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source host</param>
         public static IEnumerable<GenericOpSpec> generic(ApiHost src)
-            => from m in src.DeclaredMethods.Attributed<OpAttribute>().OpenGeneric()
+            => from m in src.DeclaredMethods.Tagged<OpAttribute>().OpenGeneric()
                 let def = m.GetGenericMethodDefinition()
                 let closures = m.NumericClosures().ToArray()
                 let id = Identity.generic(m)
@@ -47,11 +47,11 @@ namespace Z0
                 select ClosedOpSpec.Define(op.Host, id, k, op.MethodDefinition.MakeGenericMethod(pt.Value)); 
 
        static IEnumerable<DirectOpSpec> direct(ApiHost host)
-            => from m in host.DeclaredMethods.Attributed<OpAttribute>().NonGeneric()
+            => from m in host.DeclaredMethods.Tagged<OpAttribute>().NonGeneric()
                 select DirectOpSpec.Define(host, Identity.identify(m), m);
 
         static IEnumerable<NumericKind> NumericClosures(this MemberInfo m)
-            => m.CustomAttribute<NumericClosuresAttribute>()
+            => m.Tag<NumericClosuresAttribute>()
                 .MapValueOrElse(
                     a => a.NumericPrimitive.DistinctKinds(), 
                     () => items<NumericKind>());

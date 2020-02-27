@@ -5,29 +5,28 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
-
-    public class RecordSpec
+    public readonly struct RecordSpec
     {   
-        public static RecordSpec Define(string Namespace, string TypeName, params RecordField[] Fields)
+        [MethodImpl(Inline)]
+        public static RecordSpec Define(string Namespace, string TypeName, params RecordFieldSpec[] Fields)
             => new RecordSpec(Namespace, TypeName, Fields);
         
-        public RecordSpec(string Namespace, string TypeName, params RecordField[] Fields)
+        [MethodImpl(Inline)]
+        RecordSpec(string Namespace, string TypeName, params RecordFieldSpec[] Fields)
         {
             this.Namespace = Namespace;
             this.TypeName = TypeName;
             this.Fields = Fields;
         }
         
-        public string Namespace {get;}
+        public readonly string Namespace;
         
-        public string TypeName {get;}
+        public readonly string TypeName;
 
-        public RecordField[] Fields {get;}
-
+        public readonly RecordFieldSpec[] Fields;
     }
-
-
 }

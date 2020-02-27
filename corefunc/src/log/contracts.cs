@@ -40,7 +40,7 @@ namespace Z0
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
-    public interface ILogger : IMsgLog
+    public interface ILogger : IAppMsgLog
     {
         /// <summary>
         /// Appends unstructured text content to the log

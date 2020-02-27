@@ -9,11 +9,30 @@ namespace Z0
     
     using static zfunc;
 
+    using F = TestCaseField;
+    using R = TestCaseRecord;
+
+    enum TestCaseField
+    {
+
+        Case = 75,
+
+        Succeeded = 10,
+
+        Duration = 10,
+        
+        Executed = 1
+    }
+
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public class TestCaseRecord : IRecord<TestCaseRecord>
+    public class TestCaseRecord : IRecord<F,R>
     {
+        const string YEA = "verified";
+        
+        const string BOO = "failed";
+
         public static TestCaseRecord Define(string name, bool success, Duration duration)
             => new TestCaseRecord(name, success, duration);
         
@@ -25,46 +44,26 @@ namespace Z0
             this.Executed = now();
         }
 
-        [ReportField(CasePad)]
+        [ReportField(F.Case)]
         public string Case {get;set;}
 
-        [ReportField(OutcomePad)]
+        [ReportField(F.Succeeded)]
         public bool Succeeded {get;set;}
 
-        [ReportField(DurationPad)]
+        [ReportField(F.Duration)]
         public Duration Duration {get;set;}
 
-        [ReportField]
-        public DateTime Executed {get;}
-
-        const string YEA = "verified";
-        
-        const string BOO = "failed";
-
-        const int CasePad = 75;
-
-        const int OutcomePad = 10;
-
-        const int DurationPad = 10;
-
-        string Outcome
-            => Succeeded ? YEA : BOO;
+        [ReportField(F.Executed)]
+        public DateTime Executed {get;set;}
 
         public string DelimitedText(char delimiter)
-            => text.concat(
-                $"{Case.PadRight(CasePad)}{delimiter}" + AsciSym.Space, 
-                $"{Outcome.PadRight(OutcomePad)}{delimiter}" + AsciSym.Space, 
-                $"{Duration.Ms.ToString().PadRight(DurationPad)}{delimiter}" + AsciSym.Space,
-                $"{Executed.ToLexicalString()}"
-                );
-
-        public IReadOnlyList<string> GetHeaders()
-            => new string[]{
-                                nameof(Case).PadRight(CasePad), 
-                AsciSym.Space + nameof(Outcome).PadRight(OutcomePad), 
-                AsciSym.Space + nameof(Duration).PadRight(DurationPad),
-                AsciSym.Space + nameof(Executed)
-                };
-
+        {
+            var dst = text.factory.Builder();
+            dst.AppendField(Case, F.Case);
+            dst.DelimitField(Succeeded ? YEA : BOO, F.Succeeded, delimiter);
+            dst.DelimitField(Duration, F.Duration, delimiter);
+            dst.DelimitField(Executed, delimiter);
+            return dst.ToString();
+        }
     }
 }

@@ -125,7 +125,7 @@ namespace Z0
                 
                 var zN = xN + yN;                
                 var z = (uint)(((ulong)x + (ulong)y) % (ulong)nVal);
-                Claim.eq(z, zN.State, appMsg($"{xN} + {yN} = {zN} != {z} = ({x} + {y}) % {n}", SeverityLevel.Error));                
+                Claim.eq(z, zN.State, appMsg($"{xN} + {yN} = {zN} != {z} = ({x} + {y}) % {n}", AppMsgKind.Error));                
             }
 
             TypeCaseEnd<N>();
@@ -235,10 +235,10 @@ namespace Z0
         }
 
         protected void TypeCaseStart<C>([Caller] string caller = null)
-            => PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", SeverityLevel.HiliteCL));
+            => PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", AppMsgKind.HiliteCL));
 
         protected void TypeCaseEnd<C>([Caller] string caller = null)
-            => PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
+            => PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", AppMsgKind.HiliteCL));
 
     }
 }

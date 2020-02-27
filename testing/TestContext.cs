@@ -123,7 +123,7 @@ namespace Z0
         protected void Trace(object msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{msg}", SeverityLevel.Info));
+                PostMessage(AppMsg.Define($"{msg}", AppMsgKind.Info));
         }
 
         /// <summary>
@@ -133,15 +133,15 @@ namespace Z0
         protected void Trace(object title, object msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{title} - {msg}", SeverityLevel.Info));
+                PostMessage(AppMsg.Define($"{title} - {msg}", AppMsgKind.Info));
         }
 
-        protected void Trace(string title, string msg, int? tpad = null, SeverityLevel? severity = null)
+        protected void Trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null)
         {
             if(TraceEnabled)
             {
                 var titleFmt = tpad.Map<int, string>(pad => title.PadRight(pad), () => title.PadRight(20));        
-                PostMessage(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
+                PostMessage(AppMsg.Define($"{titleFmt}: {msg}", severity ?? AppMsgKind.Babble));
             }
         }
 
@@ -151,10 +151,10 @@ namespace Z0
         /// <param name="msg">The source message</param>
         /// <param name="severity">The diagnostic severity level that, if specified, 
         /// replaces the exising source message severity prior to queue submission</param>
-        protected void Trace(AppMsg msg, SeverityLevel? severity = null)
+        protected void Trace(AppMsg msg, AppMsgKind? severity = null)
         {
             if(TraceEnabled)
-                PostMessage(msg.WithLevel(severity ?? SeverityLevel.Babble));
+                PostMessage(msg.WithLevel(severity ?? AppMsgKind.Babble));
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="msg">The source message</param>
         /// <param name="severity">The diagnostic severity level that, if specified, 
         /// replaces the exising source message severity prior to queue submission</param>
-        protected void TraceCaller(object msg, SeverityLevel severity, [Caller] string caller = null)
+        protected void TraceCaller(object msg, AppMsgKind severity, [Caller] string caller = null)
         {
             if(TraceEnabled)
                 PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}",severity));
@@ -176,7 +176,7 @@ namespace Z0
         protected void TraceCaller(object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}", SeverityLevel.Info));
+                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}", AppMsgKind.Info));
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Z0
         protected void TraceCaller(string title, object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}/{title}: {msg}", SeverityLevel.Info));
+                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}/{title}: {msg}", AppMsgKind.Info));
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Z0
         protected void TracePerf(string msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
+                PostMessage(AppMsg.Define($"{msg}", AppMsgKind.Benchmark));
         }
 
         public IEnumerable<TestCaseRecord> TakeOutcomes()
@@ -236,10 +236,10 @@ namespace Z0
         public void PostMessage(AppMsg msg)
             => Queue.PostMessage(msg);
 
-        public void PostMessage(string msg, SeverityLevel? severity = null)
+        public void PostMessage(string msg, AppMsgKind? severity = null)
             => Queue.PostMessage(msg, severity);
 
-        public void Flush(Exception e, IMsgLog target)
+        public void Flush(Exception e, IAppMsgLog target)
             => Queue.Flush(e, target);
 
         /// <summary>

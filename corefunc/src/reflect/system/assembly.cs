@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="A">The type of attribute for which to search</typeparam>
         public static Option<A> TryGetAttribute<A>(this Assembly a) 
             where A : Attribute
-                =>  a.Attribute<A>();
+                =>  a.Tag<A>();
 
         /// <summary>
         /// Gets the value of <see cref="AssemblyProductAttribute"/> if it exists

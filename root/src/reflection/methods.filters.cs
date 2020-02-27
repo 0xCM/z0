@@ -14,6 +14,15 @@ namespace Z0
     partial class RootReflections
     {
         /// <summary>
+        /// Selects the methods that are adorned with parametrically-identified attribute
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static IEnumerable<MethodInfo> Tagged<A>(this IEnumerable<MethodInfo> src)
+            where A : Attribute
+                => src.Where(m => m.Tagged<A>());      
+
+        /// <summary>
         /// Selects the conversion operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
@@ -70,14 +79,6 @@ namespace Z0
         public static IEnumerable<MethodInfo> WithParameterType(this IEnumerable<MethodInfo> src, Type t)
             => src.Where(m => m.GetParameters().Any(p => p.ParameterType == t));
 
-        /// <summary>
-        /// Selects the methods that are adorned with parametrically-identified attribute
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        /// <typeparam name="A">The attribute type</typeparam>
-        public static IEnumerable<MethodInfo> Attributed<A>(this IEnumerable<MethodInfo> src)
-            where A : Attribute
-                => src.Where(m => m.Attributed<A>());      
                           
         /// <summary>
         /// Selects functions from a stream

@@ -199,7 +199,7 @@ namespace Z0
             => Root.Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
 
         static Option<ITypeIdentityProvider> FromAttributed(this Type t)
-            => from a in t.CustomAttribute<IdentityProviderAttribute>()
+            => from a in t.Tag<IdentityProviderAttribute>()
                from tid in  FromHost(a.Host.ValueOrDefault(t))
                select tid;
 

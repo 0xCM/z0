@@ -15,7 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ulong Lookup(uint i)
-            => i < Count? read<ulong>(RawBytes, (int)(i*8)) : AppErrors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1);
+            => i < Count? read<ulong>(RawBytes, (int)(i*8)) : errors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1);
                             
         public static ulong Seed00 => Lookup(0);
 

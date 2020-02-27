@@ -119,7 +119,7 @@ namespace Z0
             
             if (size != actualSize)
             {
-                error(AppErrors.LengthMismatch((int)size, actualSize));
+                error(errors.LengthMismatch((int)size, actualSize));
                 return default;
             }
 
