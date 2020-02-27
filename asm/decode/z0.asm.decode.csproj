@@ -6,7 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
+    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
+    <ProjectReference Include="$(TopDir)asm/core/z0.asm.core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dnlib" Version="3.3.1" />
+    <PackageReference Include="Iced" Version="1.4.0" />
   </ItemGroup>
 
 </Project>

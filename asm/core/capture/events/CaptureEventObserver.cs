@@ -16,11 +16,4 @@ namespace Z0
     /// <param name="data">The event data</param>
     public delegate void CaptureEventObserver(in CaptureEventData data);
 
-    /// <summary>
-    /// Delegate contract for emission event receipt
-    /// </summary>
-    /// <param name="data">The event data</param>
-    public delegate void CaptureEmissionObserver(in CaptureTokenGroup data);
-
-
 }

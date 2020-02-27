@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
-    using Iced.Intel.InstructionInfoInternal;
+    //using Iced.Intel.InstructionInfoInternal;
 
 
 	/// <summary>

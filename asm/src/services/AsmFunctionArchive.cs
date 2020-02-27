@@ -17,6 +17,15 @@ namespace Z0
 
     class AsmFunctionArchive : IAsmFunctionArchive
     {        
+        public static AppMsg Emitting(AsmFunctionGroup src)
+            => appMsg($"Emitting {src.Id}");
+
+        public static AppMsg Emitted(CaptureTokenGroup src)
+            => appMsg($"Emitted {src.Uri}");
+
+        public static AppMsg Decoded(AsmFunction f)        
+            => appMsg($"Decoded function {f.Id}", AppMsgKind.Babble);
+
         public FolderPath RootFolder {get;}
         
         readonly AsmFormatConfig GroupFormatConfig;

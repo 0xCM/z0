@@ -11,7 +11,6 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using Z0.Asm;
 
     public static class AsmServiceMessages
     {
@@ -27,11 +26,6 @@ namespace Z0
         public static AppMsg Emitting(Type host)
             => appMsg($"Emitting operations defined by {host.Name}", AppMsgKind.Babble);
 
-        public static AppMsg Emitting(AsmFunctionGroup src)
-            => appMsg($"Emitting {src.Id}");
-
-        public static AppMsg Emitted(CaptureTokenGroup src)
-            => appMsg($"Emitted {src.Uri}");
 
         public static AppMsg Emitted(CaptureToken src)
             => appMsg($"Emitted {src.Uri}", AppMsgKind.Babble);
@@ -54,8 +48,6 @@ namespace Z0
         public static AppMsg CapturingImmediates(GenericOpSpec op)        
             => appMsg($"Capturing {op.Id} generic immediates for kinds {op.Kinds.Select(k => k.ToString()).Concat(text.comma())}", AppMsgKind.Babble);
 
-        public static AppMsg Decoded(AsmFunction f)        
-            => appMsg($"Decoded function {f.Id}", AppMsgKind.Babble);
 
         public static AppMsg Decoding(OpIdentity id, MethodInfo m)        
             => appMsg($"Decoding  method {m.DisplayName()} with identity {id}", AppMsgKind.Babble);

@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
-
     public interface IPointSink<T> : ISink
     {
         void Accept(in T src);

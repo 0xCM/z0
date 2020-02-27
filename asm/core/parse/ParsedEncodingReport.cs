@@ -9,10 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using Z0.Asm;
-
-    using static zfunc;
-
     using F = ParsedEncodingField;
     using R = ParsedEncodingRecord;
 

@@ -12,22 +12,6 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IArchived
-    {
-        int Sequence {get;}
-
-        object Content {get;}
-
-    }
-
-    public interface IArchived<T> : IArchived
-    {
-        new T Content {get;}
-
-        object IArchived.Content
-            => Content;
-    }
-
     public readonly struct Archived : IArchived<string>
     {
         [MethodImpl(Inline)]

@@ -10,33 +10,6 @@ namespace Z0
 
     using static zfunc;
 
-    public interface ICaptureToken : IEquatable<CaptureToken>, IComparable<CaptureToken>
-    {
-
-    }
-
-    public interface ICaptureTokenSink : IPointSink<CaptureTokenGroup>
-    {
-        
-    }
-
-    public enum CaptureEventKind
-    {
-        None = 0,
-
-        Step = 1,
-
-        Complete = 2
-    }
-
-    /// <summary>
-    /// Defines contract for external observation of the capture workflow
-    /// </summary>
-    public interface ICaptureEventSink : ISink
-    {
-        void Accept(in CaptureEventData data);
-    }
-
     /// <summary>
     /// Defines a source for events that originate within a capture exchange context. This
     /// device is used as a means to compensate for the fact that the exchange itself, which is a
@@ -60,23 +33,4 @@ namespace Z0
         void OnCaptureComplete(in CaptureExchange src, in CaptureState state, in CapturedMember captured);        
     }
 
-    /// <summary>
-    /// Defines the supported capture operations
-    /// </summary>
-    public interface ICaptureOps
-    {               
-        CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, MethodInfo src);            
-
-        CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, in DynamicDelegate src);
-            
-        CapturedMember Capture(in CaptureExchange exchange, in OpIdentity id, Delegate src);
-            
-        Option<CapturedData> Capture(in CaptureExchange exchange, in OpIdentity id, Span<byte> src);
-
-    }
-
-    public interface ICaptureControl : ICaptureOps, ICaptureJunction
-    {
-
-    }
 }

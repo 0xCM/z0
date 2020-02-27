@@ -14,7 +14,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class AsmExtend
+	public static class AsmCoreEx
     {
 
 		/// <summary>

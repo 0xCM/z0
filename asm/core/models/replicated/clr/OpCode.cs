@@ -54,7 +54,7 @@ namespace Z0.ClrSpecs
 		/// </summary>
 		public int Size => Code < (Code)0x100 || Code == Code.UNKNOWN1 ? 1 : 2;
 
-		internal OpCode(string name, Code code, OperandType operandType, FlowControl flowControl, OpCodeType opCodeType, StackBehaviour push, StackBehaviour pop) {
+		public OpCode(string name, Code code, OperandType operandType, FlowControl flowControl, OpCodeType opCodeType, StackBehaviour push, StackBehaviour pop) {
 			Name = name;
 			Code = code;
 			OperandType = operandType;
