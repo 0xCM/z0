@@ -14,26 +14,26 @@ namespace Z0
     /// Describes the capture and subsequent emission of single routine, such
     /// as a member function or a delegate
     /// </summary>
-    public readonly struct CaptureToken : ICaptureToken
+    public readonly struct CaptureToken : ICaptureToken, IFormattable<CaptureToken>
     {
-        /// <summary>
-        /// Specifies the reason for capture termination
-        /// </summary>
-        public readonly CaptureTermCode TermCode;
-
         /// <summary>
         /// Defines a uri relataive to the global asm data root
         /// </summary>
         public readonly OpUri Uri;
 
         /// <summary>
+        /// Specifies the reason for capture termination
+        /// </summary>
+        public readonly CaptureTermCode TermCode;
+
+        /// <summary>
         /// The memory range from which the defining code was extracted
         /// </summary>
-        public readonly MemoryRange Origin;
+        public readonly MemoryRange AddressRange;
 
         [MethodImpl(Inline)]
-        public static CaptureToken Define(CaptureOutcome cc, OpUri uri)        
-            => new CaptureToken(cc, uri);
+        public static CaptureToken Define(OpUri uri, MemoryRange src, CaptureTermCode term)        
+            => new CaptureToken(uri,src,term);
 
         [MethodImpl(Inline)]
         public static bool operator==(CaptureToken a, CaptureToken b)
@@ -44,27 +44,27 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        CaptureToken(CaptureOutcome cc, OpUri uri)
+        CaptureToken(OpUri uri, MemoryRange src, CaptureTermCode term)
         {
-            this.TermCode = cc.TermCode;
             this.Uri = uri;
-            this.Origin = cc.Range;
+            this.AddressRange = src;
+            this.TermCode = term;
         }
 
         public string Format()
-            => text.concat(Uri.ToString(), Origin.Format());
+            => text.concat(Uri.ToString(), AddressRange.Format());
 
         public override string ToString()
             => Format();
         
         public override int GetHashCode()
-            => HashCode.Combine(Uri,Origin);
+            => HashCode.Combine(Uri,AddressRange);
 
         [MethodImpl(Inline)]
         public bool Equals(CaptureToken src)
             => TermCode == src.TermCode
             && Uri == src.Uri 
-            && Origin == src.Origin;
+            && AddressRange == src.AddressRange;
         
         public override bool Equals(object src)
             => src is CaptureToken d && Equals(d);

@@ -27,28 +27,26 @@ namespace Z0
             this.Context = context;
         }
 
+        Option<CilFunction> GetCil(CapturedMember src)
+            => from c in Context.ClrIndex.FindCil(src.Method.MetadataToken)
+               select c.WithSig(src.Method.Signature());
+
         public AsmFunction DecodeFunction(CapturedMember src, bool emitcil = true)
         {
-            var list = Context.DecodeInstructions(src.Code, src.SourceMemory.Start);
-            var block = Asm.AsmInstructionBlock.Define(src.Code, list, src.Outcome);
-            var f = Context.FunctionBuilder().BuildFunction(src.SourceOp, block);
-            return emitcil ? f.WithCil(Context.ClrIndex.FindCil(src.Method).ValueOrDefault()) : f;
+            var list = Context.DecodeInstructions(src.Code);
+            var block = Asm.AsmInstructionBlock.Define(src.Code, list, src.TermCode);
+            var f = Context.FunctionBuilder().BuildFunction(src.Operation, block);
+            if(emitcil)
+                f = f.WithCil(GetCil(src).ValueOrDefault());
+            return f;
         }
 
         public AsmFunction DecodeFunction(ParsedEncoding parsed)
         {
             var op = parsed.Operation;
-            var code = AsmCode.Define(op.Id, parsed.AddressRange, parsed.ParsedData);
-            var instructions = Context.DecodeInstructions(code, parsed.AddressRange.Start);
-            return AsmFunction.Define(parsed, parsed.CaptureResult, instructions);
-            //return AsmFunction.Define(op, code, parsed.CaptureResult, instructions);
+            var code = AsmCode.Define(op.Id, parsed.ParsedData);
+            var instructions = Context.DecodeInstructions(code);
+            return AsmFunction.Define(parsed, instructions);
         }
-
-        // public AsmFunction DecodeFunction(OpDescriptor src, CaptureSummary summary)
-        // {
-        //     var code = AsmCode.Define(src.Id, summary.Range, summary.Bits.Trimmed);
-        //     var instructions = Context.DecodeInstructions(code, summary.Range.Start);
-        //     return AsmFunction.Define(src, code, summary.Outcome, instructions);
-        // }
     }
 }

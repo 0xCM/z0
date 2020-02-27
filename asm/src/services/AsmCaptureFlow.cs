@@ -55,7 +55,7 @@ namespace Z0
             iter(Selected, CreateLocationReport);
         }
 
-        void Decode(ParsedEncodingRecord src, IAsmDecoder decoder,  IAsmFunctionWriter dst)
+        void Decode(ParsedEncodingRecord src, IAsmFunctionDecoder decoder,  IAsmFunctionWriter dst)
         {
             var parsed = src.ToParsedEncoding();
             dst.Write(decoder.DecodeFunction(parsed));
@@ -103,7 +103,7 @@ namespace Z0
         FilePath Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodingReport parsed)
         {
             var path = EmissionPaths.DecodedPath(host);
-            var decoder = Context.Decoder();            
+            var decoder = Context.FunctionDecoder();
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
             for(var i=0; i< captured.RecordCount; i++)
             {

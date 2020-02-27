@@ -15,8 +15,13 @@ namespace Z0
     /// <summary>
     /// Encapsulates a block of encoded assembly
     /// </summary>
-    public readonly struct AsmCode
+    public readonly struct AsmCode : IFormattable<AsmCode>
     {
+        /// <summary>
+        /// The canonical zero
+        /// </summary>
+        public static AsmCode Empty => new AsmCode(OpIdentity.Empty, EncodedData.Empty);
+
         /// <summary>
         /// The assigned identity
         /// </summary>
@@ -28,56 +33,20 @@ namespace Z0
         public readonly MemoryRange AddressRange;
 
         /// <summary>
-        /// The encoded asm bytes
+        /// The data, encoded
         /// </summary>
-        public readonly byte[] Encoded;
+        public readonly EncodedData Data;
         
-        public int Length
-            => Encoded?.Length ?? 0;
-
-        /// <summary>
-        /// The canonical zero
-        /// </summary>
-        public static AsmCode Empty => new AsmCode(OpIdentity.Empty, MemoryRange.Empty, new byte[]{0});
-
-        /// <summary>
-        /// Defines a fully-specified code block
-        /// </summary>
-        /// <param name="id">The identifying moniker</param>
-        /// <param name="src">The originating memory location</param>
-        /// <param name="label">Descriptive text</param>
-        /// <param name="data">The code bytes</param>
-        [MethodImpl(Inline)]
-        public static AsmCode Define(OpIdentity id, MemoryRange src, byte[] data)
-            => new AsmCode(id, src, data);
-
-        /// <summary>
-        /// Defines a minimally-specified code block
-        /// </summary>
-        /// <param name="id">The identifying moniker</param>
-        /// <param name="data">The code bytes</param>
-        [MethodImpl(Inline)]
-        public static AsmCode Define(OpIdentity id, byte[] data)
-            => new AsmCode(id, MemoryRange.Empty, data);
-
-        /// <summary>
-        /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
-        /// </summary>
-        /// <param name="data">The encoded assembly</param>
-        /// <param name="id">The identity to confer</param>
-        public static AsmCode Parse(OpIdentity id, string data)
-            => new AsmCode(id, MemoryRange.Empty, Hex.parsebytes(data).ToArray());
-                
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(AsmCode code)
-            => code.Encoded;
-
-        [MethodImpl(Inline)]
-        internal AsmCode(OpIdentity id, MemoryRange src, byte[] encoded)
+        public ReadOnlySpan<byte> Bytes
         {
-            this.Id = id;
-            this.AddressRange = src;
-            this.Encoded = encoded;
+            [MethodImpl(Inline)]
+            get => Data.Bytes;
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
         }
 
         /// <summary>
@@ -86,11 +55,43 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0);
+            get => Data.IsEmpty;
         }
+
+        /// <summary>
+        /// Defines a code block
+        /// </summary>
+        /// <param name="id">The operation identifier</param>
+        /// <param name="data">The encoded data</param>
+        [MethodImpl(Inline)]
+        public static AsmCode Define(OpIdentity id, EncodedData data)
+            => new AsmCode(id, data);
+
+        /// <summary>
+        /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
+        /// </summary>
+        /// <param name="data">The encoded assembly</param>
+        /// <param name="id">The identity to confer</param>
+        public static AsmCode Parse(OpIdentity id, string data)
+            => Define(id, EncodedData.Define(Hex.parsebytes(data).ToArray()));
                 
-        public string Format(int idpad = 0)
-            => HexLine.Define(Id, Encoded).Format(idpad);
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(AsmCode code)
+            => code.Bytes;
+
+        [MethodImpl(Inline)]
+        internal AsmCode(OpIdentity id, EncodedData encoded)
+        {
+            this.Id = id;
+            this.AddressRange = encoded.AddressRange;
+            this.Data = encoded;
+        }
+
+        public string Format(int idpad)
+            => HexLine.Define(Id, Data).Format(idpad);
+
+        public string Format()
+            => HexLine.Define(Id, Data).Format();
 
         public override string ToString()
             => Format();         

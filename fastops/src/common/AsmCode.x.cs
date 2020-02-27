@@ -21,13 +21,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BufferToken Load(this BufferToken buffer, in AsmCode src)
         {
-            buffer.Fill(src.Encoded);
+            buffer.Fill(src.Bytes);
             return buffer;
         }
 
         [MethodImpl(Inline)]
         public static AsmCode WithIdentity(this AsmCode src, OpIdentity id)
-            => AsmCode.Define(id, src.AddressRange, src.Encoded);
+            => AsmCode.Define(id, src.Data);
 
         public static bool AcceptsParameter(this AsmCode src, NumericKind kind)
             => Numeric.kinds(src.Id.TextComponents.Skip(1)).Contains(kind);

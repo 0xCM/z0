@@ -14,6 +14,21 @@ namespace Z0
     {
         public static OpUri Empty => new OpUri(OpUriScheme.None, ApiHostPath.Empty, string.Empty, OpIdentity.Empty);
         
+        public readonly OpUriScheme Scheme;
+        
+        public readonly ApiHostPath HostPath;
+        
+        /// <summary>
+        /// The name assigned to a group of methods; usually agrees with what is called a "method group" in clr-land
+        /// The purpose of the group name is to classify/identify a related set of methods and, again, this typically
+        /// corresponds to the "name" property on a method
+        /// </summary>
+        public readonly string GroupName;
+
+        public readonly OpIdentity OpId;
+
+        public string Identifier {get;}
+
         [MethodImpl(Inline)]
         static IParser<OpUri> Parser()
             => default(OpUri);
@@ -21,16 +36,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ParseResult<OpUri> Parse(string text)
             => Parser().Parse(text);
-
-        public readonly OpUriScheme Scheme;
-        
-        public readonly ApiHostPath HostPath;
-        
-        public readonly string OpGroup;
-
-        public readonly OpIdentity OpId;
-
-        public string Identifier {get;}
 
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
@@ -74,15 +79,15 @@ namespace Z0
             this.Scheme = scheme;
             this.HostPath = host;
             this.OpId = opid;
-            this.OpGroup = group;
+            this.GroupName = group;
             this.Identifier = 
                 opid.IsEmpty 
                 ? QueryText(scheme, host.Owner, host.Name,group) 
-                : UriText(scheme, host.Owner, host.Name, OpGroup, opid);
+                : UriText(scheme, host.Owner, host.Name, GroupName, opid);
         }
 
         public OpUri GroupUri
-            => new OpUri(Scheme, HostPath, OpGroup, OpIdentity.Empty);
+            => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
 
         public string Format()
             => Identifier;

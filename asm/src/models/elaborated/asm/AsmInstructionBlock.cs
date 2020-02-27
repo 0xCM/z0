@@ -7,44 +7,47 @@ namespace Z0.Asm
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
         
     /// <summary>
     /// Encapsulates a contiguous instruction sequence along with the captured bits
     /// </summary>
-    public class AsmInstructionBlock 
+    public readonly struct AsmInstructionBlock 
     {
         /// <summary>
         /// Defines an instruction sequence, in both encoded and decoded form
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static AsmInstructionBlock Define(AsmCode encoded, Instruction[] decoded, CaptureOutcome captureinfo)
-            => new AsmInstructionBlock(encoded, decoded, captureinfo);
+        [MethodImpl(Inline)]
+        public static AsmInstructionBlock Define(AsmCode encoded, Instruction[] decoded, CaptureTermCode term)
+            => new AsmInstructionBlock(encoded, decoded, term);
 
-        AsmInstructionBlock(AsmCode encoded, Instruction[] decoded, CaptureOutcome captureinfo)
+        [MethodImpl(Inline)]
+        AsmInstructionBlock(AsmCode encoded, Instruction[] decoded, CaptureTermCode term)
         {
             this.NativeCode = encoded;
             this.Decoded = decoded;
-            this.CaptureInfo = captureinfo;
+            this.TermCode = term;
         }
 
         /// <summary>
         /// Encoded assembly
         /// </summary>
-        public AsmCode NativeCode {get;}
+        public readonly AsmCode NativeCode;
 
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        public Instruction[] Decoded {get;}
+        public readonly Instruction[] Decoded;
 
         /// <summary>
-        /// Describes the capture outcome
+        /// The reason capture was terminated
         /// </summary>
-        public CaptureOutcome CaptureInfo {get;}
-
+        public readonly CaptureTermCode TermCode;
+        
         /// <summary>
         /// Queries/Manipulates an index-identified instruction
         /// </summary>

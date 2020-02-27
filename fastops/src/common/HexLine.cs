@@ -22,6 +22,10 @@ namespace Z0
 
         public static FileExtension FileExt => FileExtensions.Hex;
 
+        public readonly OpIdentity Id;
+
+        public readonly EncodedData Encoded;
+
         /// <summary>
         /// Parses a row of identified hex text
         /// </summary>
@@ -33,8 +37,8 @@ namespace Z0
             try
             {
                 var id = OpIdentity.Define(formatted.TakeBefore(idsep).Trim());
-                var encoded = array(formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(Hex.parsebyte));
-                return Define(id,encoded);                
+                var encoded = EncodedData.Define(array(formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(Hex.parsebyte)));
+                return Define(id, encoded);                
             }
             catch(Exception e)
             {
@@ -44,28 +48,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static HexLine Define(OpIdentity id, EncodedData encoded)
+            => new HexLine(id, encoded);
+
+        [MethodImpl(Inline)]
         public static HexLine Define(OpIdentity id, byte[] encoded)
-            => new HexLine(id,encoded);
+            => new HexLine(id, EncodedData.Define(encoded));
         
         [MethodImpl(Inline)]
-        public HexLine(OpIdentity id, byte[] encoded)
+        HexLine(OpIdentity id, EncodedData encoded)
         {
             this.Id = id;
             this.Encoded = encoded;
         }
         
-        public readonly OpIdentity Id;
-
-        public readonly byte[] Encoded;
-
-        public void Deconstruct(out OpIdentity id, out byte[] data)
+        public void Deconstruct(out OpIdentity id, out EncodedData data)
         {
             id = Id;
             data = Encoded;
         }
 
         public string Format(int idpad = 0)
-            => text.concat(Id.Identifier.PadRight(idpad), text.space(), Encoded.FormatHex());
+            => text.concat(Id.Identifier.PadRight(idpad), text.space(), Encoded.Bytes.FormatHex());
         
         public override string ToString()
             => Format();

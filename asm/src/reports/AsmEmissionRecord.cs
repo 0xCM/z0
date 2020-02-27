@@ -21,7 +21,7 @@ namespace Z0
         AsmEmissionRecord(CaptureToken src)
         {
             this.TermCode = src.TermCode;
-            this.Size = (int)src.Origin.Length;
+            this.Size = (int)src.AddressRange.Length;
             this.Uri = src.Uri;
         }
         

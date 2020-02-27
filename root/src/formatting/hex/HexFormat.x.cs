@@ -262,7 +262,7 @@ namespace Z0
         /// </summary>
         /// <param name="data">The source data</param>
         /// <param name="fmt">The format options</param>
-        public static IReadOnlyList<string> FormatHexLines(this byte[] data, HexLineFormat? fmt = null)
+        public static IReadOnlyList<string> FormatHexLines(this ReadOnlySpan<byte> data, HexLineFormat? fmt = null)
         {
             var builder = factory<string>().Builder();
             var configured = fmt ?? HexLineFormat.Default;  
@@ -290,7 +290,6 @@ namespace Z0
                         line.Append(i.FormatHex(true,false,false,true));
                         line.Append(AsciLower.h);
                         line.Append(AsciSym.Space);
-
                     }
                 }
 
@@ -307,6 +306,9 @@ namespace Z0
             builder.AppendLine();
             return lines;           
         } 
+
+        public static IReadOnlyList<string> FormatHexLines(this byte[] data, HexLineFormat? fmt = null)
+            => data.ToReadOnlySpan().FormatHexLines(fmt);
 
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
@@ -347,10 +349,10 @@ namespace Z0
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
-        /// <param name="segwidth"></param>
+        /// <param name="segwidth">The maximum number of bytes on a single line</param>
         public static string FormatHex(this byte[] src, char sep, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
-                => src.ToReadOnlySpan().FormatHexBytes(sep,zpad,specifier,uppercase,prespec);
+                => src.ToReadOnlySpan().FormatHexBytes(sep, zpad, specifier, uppercase, prespec, segwidth);
 
         public static string FormatSmallHex(this ulong src, bool postspec = false)
             => src.ToString("x4") + (postspec ? $"{PostSpec}" : string.Empty);

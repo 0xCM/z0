@@ -166,7 +166,6 @@ namespace Z0
                             partkind = IdentityPartKind.Segment;
                         else
                         {
-                            partkind = IdentityPartKind.UserType;
                             if(i == 1 && part[0] == IDI.Generic && Char.IsDigit(TakeAfter(part, IDI.Generic).First()))
                                 partkind = IdentityPartKind.Scalar;
                             else if(Char.IsDigit(part.First()))

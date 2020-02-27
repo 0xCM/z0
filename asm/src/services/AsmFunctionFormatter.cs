@@ -63,7 +63,7 @@ namespace Z0
             var descriptions = DescribeInstructions(src);
             var lines = new List<string>();
             for(var i = 0; i< descriptions.Length; i++)
-                lines.Add(FormatInstruction(src.StartAddress, descriptions[i]));
+                lines.Add(FormatInstruction(src.BaseAddress, descriptions[i]));
             return lines.ToArray();
         }    
 
@@ -119,7 +119,7 @@ namespace Z0
                 if(src.Code.Length < offset + instruction.ByteLength)
                     throw appFail(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
             
-                dst[i] = instruction.SummarizeInstruction(src.Code.Encoded, instruction.FormattedInstruction, offset, src.Code.AddressRange.Start);
+                dst[i] = instruction.SummarizeInstruction(src.Code.Data, instruction.FormattedInstruction, offset, src.Code.AddressRange.Start);
                 offset += (ushort)instruction.ByteLength;
             }
             return dst;
@@ -130,10 +130,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source function</param>
         static string EmbraceHex(AsmCode src)
-            => text.embrace(src.Encoded.FormatHex(AsciSym.Comma, true, true, true));
+            => text.embrace(src.Bytes.FormatHexBytes(sep: AsciSym.Comma, uppercase:true));
 
         static string FormatEncodingProp(AsmCode src)
-            => Comment($"static ReadOnlySpan<byte> {src.Id}_Bytes => new byte[{src.Encoded.Length}]{EmbraceHex(src)};");
+            => Comment($"static ReadOnlySpan<byte> {src.Id}_Bytes => new byte[{src.Data.Length}]{EmbraceHex(src)};");
 
         string FormatHeaderCode(AsmCode code)
         {
@@ -146,7 +146,7 @@ namespace Z0
             if(Config.EmitFunctionHeaderEncoding)
             {
                 var formatter = HexFormatter.Define<byte>();
-                var formatted = formatter.Format(code.Encoded, Config.FunctionHeaderEncodingFormat);                
+                var formatted = formatter.Format(code.Data, Config.FunctionHeaderEncodingFormat);                
                 dataline += text.concat(text.spaced(AsciSym.Eq), text.embrace(formatted));
             }
             return dataline;
@@ -169,10 +169,9 @@ namespace Z0
                 
             if(Config.EmitCaptureTermCode)
             {
-                var ci = src.CaptureInfo;
                 var cidesc = string.Empty;
                 if(Config.EmitCaptureTermCode)
-                    cidesc += text.concat(nameof(ci.TermCode), text.spaced(AsciSym.Eq), ci.TermCode.ToString());
+                    cidesc += text.concat(nameof(src.TermCode), text.spaced(AsciSym.Eq), src.TermCode.ToString());
 
                 lines.Add(Comment(cidesc));
             }
@@ -188,10 +187,6 @@ namespace Z0
 
         static string FormatLineLabel(ulong src)
             => text.concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
-
-        // static string FormatLineLabel(ushort src)
-        //     => FormatLineLabel(((ulong)src));
-
 
         string FormatInstruction(in MemoryAddress @base, in AsmInstructionInfo src)
         {

@@ -46,10 +46,10 @@ namespace Z0
         /// <summary>
         /// The encoded asm bytes
         /// </summary>
-        public byte[] Encoded
+        public EncodedData Encoded
         {
             [MethodImpl(Inline)]
-            get => Code.Encoded;
+            get => Code.Data;
         }
         
         public int Length

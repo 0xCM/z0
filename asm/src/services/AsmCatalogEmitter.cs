@@ -28,7 +28,7 @@ namespace Z0
         {
             this.Context = context;
             this.Catalog = catalog;
-            this.Decoder = Context.Decoder();
+            this.Decoder = Context.FunctionDecoder();
             this.Observer = observer;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
 
         readonly IOperationCatalog Catalog;
 
-        readonly IAsmDecoder Decoder;
+        readonly IAsmFunctionDecoder Decoder;
 
         readonly CaptureEmissionObserver Observer;
 
@@ -130,10 +130,10 @@ namespace Z0
             }                        
         }
 
-        static AsmFunction Decode(IAsmDecoder decoder, in CaptureExchange exchange, DirectOpSpec src)
+        static AsmFunction Decode(IAsmFunctionDecoder decoder, in CaptureExchange exchange, DirectOpSpec src)
             => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, src.Id, src.ConcreteMethod));
 
-        static AsmFunction Decode(IAsmDecoder decoder, in CaptureExchange exchange, ClosedOpSpec closure)
+        static AsmFunction Decode(IAsmFunctionDecoder decoder, in CaptureExchange exchange, ClosedOpSpec closure)
             => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, closure.Id, closure.ClosedMethod));
 
         void Emit(in CaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, CaptureEmissionObserver observer)

@@ -22,14 +22,6 @@ namespace Z0
             => AsmArchiver.Create(context);
 
         /// <summary>
-        /// Instantiates a contextual decoder service
-        /// </summary>
-        /// <param name="context">The source context</param>
-        [MethodImpl(Inline)]
-        public static IAsmDecoder Decoder(this IAsmContext context, bool emitcil = true)
-            => AsmDecoder.Create(context, emitcil);                        
-
-        /// <summary>
         /// Instantiates a contextual asm capture service service
         /// </summary>
         /// <param name="context">The source context</param>

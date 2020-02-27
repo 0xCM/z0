@@ -37,7 +37,7 @@ namespace Z0
                 var pSrc = jit(src);
                 var summary = Capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;            
-                var captured = CapturedMember.Define(id, src, outcome.Range, summary.Bits, outcome);                
+                var captured = CapturedMember.Define(id, src, outcome.Range, summary.Bits, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -54,7 +54,7 @@ namespace Z0
                 var pSrc = jit(src).Ptr;
                 var summary = Capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;   
-                var captured = CapturedMember.Define(id, src, outcome.Range, summary.Bits, outcome);                
+                var captured = CapturedMember.Define(id, src, outcome.Range, summary.Bits, outcome.TermCode);                
                 return exchange.CaptureComplete(outcome.State, captured);
 
             }
@@ -72,7 +72,7 @@ namespace Z0
                 var pSrc = jit(src);
                 var summary = Capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
-                var captured = CapturedMember.Define(id, src, outcome.Range, summary.Bits, outcome);  
+                var captured = CapturedMember.Define(id, src, outcome.Range, summary.Bits, outcome.TermCode);  
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)

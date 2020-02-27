@@ -39,7 +39,7 @@ namespace Z0
                 if(src.NativeCode.Length < offset + instruction.ByteLength)
                     throw AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.NativeCode.Length, instruction.ByteLength));                
             
-                info[i] = instruction.SummarizeInstruction(src.NativeCode.Encoded, instruction.FormattedInstruction, offset, src.Origin.Start);
+                info[i] = instruction.SummarizeInstruction(src.NativeCode.Data, instruction.FormattedInstruction, offset, src.Origin.Start);
                 offset += (ushort)instruction.ByteLength;
             }
 
@@ -47,7 +47,8 @@ namespace Z0
             if(blocklen != src.NativeCode.Length)
                 throw AppException.Define(InstructionBlockSizeMismatch(src.Origin, src.NativeCode.Length, blocklen));
         
-            return AsmFunction.Define(op,  src.NativeCode, src.CaptureInfo, src.Decoded);
+            var parsed = ParsedEncoding.Define(op, src.TermCode, src.NativeCode.Data);
+            return AsmFunction.Define(parsed, src.Decoded);
         }
     }
 }

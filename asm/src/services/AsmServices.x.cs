@@ -18,7 +18,7 @@ namespace Z0
         
         static IEnumerable<AsmInstructionList> GetInstructions(IAsmCodeArchive archive)
         {            
-            var decoder = archive.Context.Decoder();
+            var decoder = archive.Context.InstructionDecoder();
             foreach(var codeblock in archive.Read())
                 yield return decoder.DecodeInstructions(codeblock);                
         }

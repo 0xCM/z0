@@ -54,7 +54,7 @@ namespace Z0
                                  .MapRequired(m => m.GetGenericMethodDefinition()
                                  .MakeGenericMethod(typeof(byte)));
 
-            var decoder = context.Decoder(); 
+            var decoder = context.FunctionDecoder();
 
             using var rawout = RawTestWriter(context);            
             using var hexout = HexTestWriter(context);
@@ -205,7 +205,7 @@ namespace Z0
             using var hexout = HexTestWriter(Context);
             using var asmout = AsmTestWriter(Context);            
             
-            var decoder = Context.Decoder();         
+            var decoder = Context.FunctionDecoder();
             var capture = Context.Capture(buffers.Capture);
             
             var data = capture.Capture(buffers.Exchange, src);        
@@ -223,7 +223,7 @@ namespace Z0
             using var asmout = AsmTestWriter(Context);            
 
             var capture = Context.Capture(buffers.Capture);
-            var decoder = Context.Decoder();         
+            var decoder = Context.FunctionDecoder();
             
             var data = capture.Capture(buffers.Exchange, src.Identify(), src);
             hexout.Write(data);
@@ -242,7 +242,7 @@ namespace Z0
             using var asmout = AsmTestWriter(Context);            
 
             var capture = Context.Capture(buffers.Capture);
-            var decoder = Context.Decoder();         
+            var decoder = Context.FunctionDecoder();
 
             var fData = capture.Capture(buffers.Exchange, f.Identify(), f);
             hexout.Write(fData);
@@ -269,9 +269,9 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var f = dynop.DynamicOp;
             var z1 = f.Invoke(x,y);
-            var decoder = Context.Decoder(false);
+            var decoder = Context.FunctionDecoder();
             var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);
-            var asm = decoder.DecodeFunction(captured);        
+            var asm = decoder.DecodeFunction(captured,false);        
 
             iter(asm.Instructions, i => Trace(i));  
 

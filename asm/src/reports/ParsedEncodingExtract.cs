@@ -22,7 +22,7 @@ namespace Z0
             var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
             var final = CaptureState.Define(op.Id, count, range.End, src.Data.LastByte);
             var outcome = CaptureOutcome.Define(final, range, src.TermCode);
-            var parsed = ParsedEncoding.Define(op, outcome, src.Data);
+            var parsed = ParsedEncoding.Define(op, outcome.TermCode, src.Data);
             return parsed;                
         }
 

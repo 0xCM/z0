@@ -11,8 +11,6 @@ namespace Z0
     using System.Linq;
     using System.IO;
 
-    using static zfunc;
-
     public static class CaptureExtensions
     {
         public static CaptureTokenGroup ToGroup(this IEnumerable<CaptureToken> tokens, OpUri groupUri)
@@ -25,13 +23,12 @@ namespace Z0
         {            
             var data = src.Code;
             var dst = text.factory.Builder();
-			dst.AppendLine($"; label   : {src.SourceOp.Signature}");
-			dst.AppendLine($"; location: {src.SourceMemory.Format()}, length: {src.SourceMemory.Length} bytes");
-            var lines = data.Encoded.FormatHexLines(null);
+			dst.AppendLine($"; label   : {src.Operation.Signature}");
+			dst.AppendLine($"; location: {src.AddressRange.Format()}, length: {src.AddressRange.Length} bytes");
+            var lines = data.Bytes.FormatHexLines(null);
             dst.Append(lines.Concat(AsciEscape.Eol));
             dst.AppendLine(new string('_',80));
             return dst.ToString();
         }                 
-
     }
 }

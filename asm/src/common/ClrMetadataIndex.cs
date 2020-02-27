@@ -46,11 +46,11 @@ namespace Z0
             iter(modules, IndexClrModule);
         }
 
-        public Option<CilFunction> FindCil(MethodInfo mi)
+        public Option<CilFunction> FindCil(int id)
             => IsEmpty ? default : 
-                from def in MethodDefIndex.TryFind(mi.MetadataToken)
+                from def in MethodDefIndex.TryFind(id)
                 from f in GetCilFunction(def)
-                select f.WithSig(mi.Signature());
+                select f;
 
         public Option<Type> FindType(int id)
             => TypeIndex.TryFind(id);

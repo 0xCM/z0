@@ -12,7 +12,7 @@ namespace Z0
 
     public interface IClrIndex
     {
-        Option<CilFunction> FindCil(MethodInfo mi);
+        Option<CilFunction> FindCil(int id);
 
         Option<Type> FindType(int id);
 

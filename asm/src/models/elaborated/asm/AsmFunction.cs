@@ -14,22 +14,19 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction Define(OpDescriptor op, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
-            => new AsmFunction(op, code, ci, instructions);
-
-        public static AsmFunction Define(ParsedEncoding encoding, CaptureOutcome ci, AsmInstructionList instructions)
+        public static AsmFunction Define(ParsedEncoding encoding,  AsmInstructionList instructions)
         {         
-            var code = AsmCode.Define(encoding.Operation.Id, encoding.AddressRange, encoding.ParsedData);
-            return new AsmFunction(encoding.Operation, code, ci,instructions);
+            var code = AsmCode.Define(encoding.Operation.Id, encoding.ParsedData);
+            return new AsmFunction(encoding.Operation, code, encoding.TermCode, instructions);
         }
 
-        AsmFunction(OpDescriptor op, AsmCode code, CaptureOutcome ci, AsmInstructionList instructions)
+        AsmFunction(OpDescriptor op, AsmCode code, CaptureTermCode term, AsmInstructionList instructions)
         {
             this.Id = op.Id;
             this.Operation = op;
             this.Instructions = instructions;
             this.Code = code;            
-            this.CaptureInfo = ci;
+            this.TermCode =term;
         }
 
         /// <summary>
@@ -51,25 +48,16 @@ namespace Z0.Asm
         /// The encoded instructions
         /// </summary>
         public AsmInstructionList Instructions {get;}            
-                
+
         /// <summary>
-        /// Describes the capture outcome
+        /// Specifies the reason for capture termination
         /// </summary>
-        public CaptureOutcome CaptureInfo {get;}
+        public CaptureTermCode TermCode {get;}
 
         /// <summary>
         /// The defining CIL
         /// </summary>
         public Option<CilFunction> Cil {get; private set;}
-
-        /// <summary>
-        /// The memory location from which the code was taken
-        /// </summary>
-        public MemoryRange AddressRange
-        {
-            [MethodImpl(Inline)]
-            get => Code.AddressRange;
-        }
 
         /// <summary>
         /// The definining operation uri
@@ -81,21 +69,21 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// The location in memory at which the function definition begins
+        /// The memory segment from which the function was extracted
         /// </summary>
-        public MemoryAddress StartAddress
+        public MemoryRange AddressRange
         {
             [MethodImpl(Inline)]
-            get => AddressRange.Start;
+            get => Code.AddressRange;    
         }
 
         /// <summary>
-        /// The location in memory at which the function definition ends
+        /// The head of the address range
         /// </summary>
-        public MemoryAddress EndAddress
+        public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => AddressRange.End;
+            get => Code.AddressRange.Start;
         }
 
         /// <summary>

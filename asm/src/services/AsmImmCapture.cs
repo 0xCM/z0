@@ -34,8 +34,9 @@ namespace Z0
         public static IAsmImmCapture Binary(IAsmContext context, MethodInfo src, OpIdentity baseid)
             => new AsmImmBinaryCapture(context, src,baseid);
 
-        static AsmFunction Decode(IAsmDecoder decoder, in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
-            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src));
+        [MethodImpl(Inline)]
+        static AsmFunction Decode(IAsmFunctionDecoder decoder, in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
+            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src), false);
 
         readonly struct AsmImmUnaryCapture : IAsmImmCapture
         {
@@ -45,7 +46,7 @@ namespace Z0
 
             readonly OpIdentity BaseId;
 
-            readonly IAsmDecoder Decoder;
+            readonly IAsmFunctionDecoder Decoder;
 
             [MethodImpl(Inline)]
             public AsmImmUnaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
@@ -53,7 +54,7 @@ namespace Z0
                 this.Context = context;
                 this.Method = method;
                 this.BaseId = baseid;
-                this.Decoder = context.Decoder(false);
+                this.Decoder = context.FunctionDecoder();
             }
 
             public AsmFunction Capture(in CaptureExchange exchange, byte imm)
@@ -71,7 +72,7 @@ namespace Z0
 
             readonly OpIdentity BaseId;
 
-            readonly IAsmDecoder Decoder;
+            readonly IAsmFunctionDecoder Decoder;
 
             [MethodImpl(Inline)]
             public AsmImmBinaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
@@ -79,7 +80,7 @@ namespace Z0
                 this.Context = context;
                 this.Method = method;
                 this.BaseId = baseid;
-                this.Decoder = context.Decoder(false);
+                this.Decoder = context.FunctionDecoder();
             }
 
             public AsmFunction Capture(in CaptureExchange exchange, byte imm)

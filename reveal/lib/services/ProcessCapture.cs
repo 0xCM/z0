@@ -29,7 +29,7 @@ namespace Z0
 
         readonly ClrRuntime Runtime;
 
-        readonly IAsmDecoder Decoder;
+        readonly IAsmFunctionDecoder Decoder;
 
         ProcessCapture(IAsmContext context)
         {            
@@ -37,7 +37,7 @@ namespace Z0
             ClrIndex = context.ClrIndex;
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
             Runtime = CreateRuntime(Target);
-            Decoder = Context.Decoder();
+            Decoder = context.FunctionDecoder();
         }
             
         void IDisposable.Dispose()
@@ -126,7 +126,7 @@ namespace Z0
             var location = MemoryRange.Define(address, address + size);            
             var result = CaptureOutcome.Define(CaptureState.Empty, location.Start, location.End, CaptureTermCode.CTC_MSDIAG);
             var bits = CaptureBits.Define(buffer,buffer);
-			return CapturedMember.Define(id, method, location, bits, result);                    
+			return CapturedMember.Define(id, method, location, bits, result.TermCode);                    
         }
     }
 }

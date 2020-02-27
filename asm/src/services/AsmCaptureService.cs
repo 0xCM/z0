@@ -26,8 +26,6 @@ namespace Z0
             Ops = control;            
         }
 
-        IAsmDecoder Decoder => Context.Decoder();                
-
         public CapturedMember Capture(in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
             => Ops.Capture(in exchange, id, src);
 

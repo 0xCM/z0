@@ -20,7 +20,7 @@ namespace Z0
         {        
             public IAsmContext Context {get;}
 
-            readonly IAsmDecoder Decoder;
+            readonly IAsmFunctionDecoder Decoder;
 
             readonly IImmOpProvider ImmOpProvider;
 
@@ -84,7 +84,7 @@ namespace Z0
             DynamicImmediate(IAsmContext context, VKT.Vec128 vk, OperatorType<N1> opk)
             {
                 this.Context = context;
-                this.Decoder = context.Decoder(false);
+                this.Decoder = context.FunctionDecoder();
                 this.ImmOpProvider = ImmOpProviders.provider(vk,opk);
             }
 
@@ -92,7 +92,7 @@ namespace Z0
             DynamicImmediate(IAsmContext context, VKT.Vec256 vk, OperatorType<N1> opk)
             {
                 this.Context = context;
-                this.Decoder = context.Decoder(false);
+                this.Decoder = context.FunctionDecoder();
                 this.ImmOpProvider = ImmOpProviders.provider(vk,opk);
             }
 
@@ -100,7 +100,7 @@ namespace Z0
             DynamicImmediate(IAsmContext context, VKT.Vec128 vk, OperatorType<N2> opk)
             {
                 this.Context = context;
-                this.Decoder = context.Decoder();
+                this.Decoder = context.FunctionDecoder();
                 this.ImmOpProvider = ImmOpProviders.provider(vk,opk);
             }
 
@@ -108,7 +108,7 @@ namespace Z0
             DynamicImmediate(IAsmContext context, VKT.Vec256 vk, OperatorType<N2> opk)
             {
                 this.Context = context;
-                this.Decoder = context.Decoder(false);
+                this.Decoder = context.FunctionDecoder();
                 this.ImmOpProvider = ImmOpProviders.provider(vk,opk);
             }
 
@@ -140,13 +140,13 @@ namespace Z0
 
             readonly IImmOpProvider<D> ImmProvider;
             
-            readonly IAsmDecoder Decoder;
+            readonly IAsmFunctionDecoder Decoder;
 
             [MethodImpl(Inline)]
             public DynamicImmediate(IAsmContext context, IImmOpProvider<D> factory)
             {
                 this.Context = context;
-                this.Decoder = context.Decoder(false);
+                this.Decoder = context.FunctionDecoder();
                 this.ImmProvider = factory;
             }
 
@@ -186,7 +186,13 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-                => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8)));
+                => Context.FunctionDecoder()
+                          .DecodeFunction(
+                              CaptureServices.Operations.Capture(
+                                  exchange, 
+                                  Resolver.Id.WithImm8(imm8), 
+                                  Resolver.@delegate(imm8)),
+                                  false);
         }
 
         readonly struct AsmV256ImmUnaryCapture<T> : IAsmImmUnaryCapture<T>
@@ -209,7 +215,13 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-                => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8)));
+                => Context.FunctionDecoder()
+                          .DecodeFunction(
+                              CaptureServices.Operations.Capture(
+                                  exchange, 
+                                  Resolver.Id.WithImm8(imm8), 
+                                  Resolver.@delegate(imm8)),
+                                  false);
         }
         
         readonly struct AsmV128ImmBinaryCapture<T> : IAsmImmBinaryCapture<T>
@@ -231,7 +243,13 @@ namespace Z0
             }
             
             public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-                => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8)));
+                => Context.FunctionDecoder()
+                          .DecodeFunction(
+                                CaptureServices.Operations.Capture(
+                                    exchange, 
+                                    Resolver.Id.WithImm8(imm8), 
+                                    Resolver.@delegate(imm8)),
+                                    false);
         }
 
         readonly struct AsmV256ImmBinaryCapture<T> : IAsmImmBinaryCapture<T>
@@ -254,7 +272,13 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
-                => Context.Decoder(false).DecodeFunction(CaptureServices.Operations.Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8)));
+                => Context.FunctionDecoder()
+                          .DecodeFunction(
+                              CaptureServices.Operations.Capture(
+                                  exchange, 
+                                  Resolver.Id.WithImm8(imm8), 
+                                  Resolver.@delegate(imm8)),
+                                  false);
         } 
     }
 }

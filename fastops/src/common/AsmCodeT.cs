@@ -21,7 +21,7 @@ namespace Z0
             => Code.Id;
          
         public ReadOnlySpan<byte> Data
-            => Code.Encoded;
+            => Code.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator AsmCode(AsmCode<T> src)
@@ -38,9 +38,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmCode(OpIdentity id,  byte[] data)
+        public AsmCode(OpIdentity id,  EncodedData data)
         {
-            Code = AsmCode.Define(id, MemoryRange.Empty, data);
+            Code = AsmCode.Define(id, data);
         }
 
         /// <summary>

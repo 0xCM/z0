@@ -122,13 +122,11 @@ namespace Z0
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
-                    //var uri = OpUri.Asm(Origin, HostName, src.Id, f.Id);
                     var uri = OpUri.Asm(HostPath, src.Id, f.Id);
                     writer.Write(GroupFormatter.FormatDetail(f));
-                    tokens[i] = CaptureToken.Define(f.CaptureInfo, uri);
+                    tokens[i] = CaptureToken.Define(uri, f.AddressRange, f.TermCode);
                 }
                 return tokens.ToGroup(OpUri.Asm(HostPath, src.Id));
-                //return tokens.ToGroup(OpUri.AsmGroup(Origin, HostName, src.Id));
             }
             catch(Exception e)
             {

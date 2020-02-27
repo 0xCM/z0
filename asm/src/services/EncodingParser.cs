@@ -54,7 +54,7 @@ namespace Z0
                      Address : current.Address,
                      Length : data.Length,
                      TermCode: matched.ToTermCode(),
-                     Uri : OpUri.Hex(host.Path, current.Uri.OpGroup, current.Uri.OpId),
+                     Uri : OpUri.Hex(host.Path, current.Uri.GroupName, current.Uri.OpId),
                      OpSig : current.OpSig,
                      Data : EncodedData.Define(current.Address, data)
                 );

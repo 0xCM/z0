@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
 
-
     public class t_boxed_number : UnitTest<t_boxed_number>
     {
 
