@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <Import Project="$(TopDir)asm/z0.asm.exports.props"/>
+
   <ItemGroup>
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
         
@@ -14,7 +16,6 @@
     <ProjectReference Include="$(TopDir)bitvectors/src/z0.bitvectors.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
     <ProjectReference Include="$(TopDir)bitspan/src/z0.bitspan.csproj" />
-    <ProjectReference Include="$(TopDir)asm/src/z0.asm.csproj" />
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
     <ProjectReference Include="$(TopDir)reveal/lib/z0.reveal.lib.csproj" />

@@ -71,9 +71,9 @@ namespace Z0
 
         PolyrandTest = Polyrand | Test,
 
-        AsmCore = T14,
+        Asm = T14,
 
-        AsmCoreTest = AsmCore | Test,
+        AsmTest = Asm | Test,
 
         Data = T15,
 
@@ -129,7 +129,11 @@ namespace Z0
 
         DynamicTest = T29 | Test,
         
-        Control = T50,
+        AsmCore = T30,
+
+        AsmDecode = T31,
+
+        Control = T50,        
 
         Svc = T62,
 

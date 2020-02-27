@@ -10,7 +10,7 @@ namespace Z0.Designators
 
     public sealed class AsmCoreTest : AssemblyResolution<AsmCoreTest>
     {        
-        const AssemblyId Identity = AssemblyId.AsmCoreTest;
+        const AssemblyId Identity = AssemblyId.AsmTest;
 
         public override AssemblyId Id 
             => Identity;

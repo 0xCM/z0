@@ -6,12 +6,12 @@
   </PropertyGroup>
 
 
+  <Import Project="$(TopDir)asm/z0.asm.exports.props"/>
+
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-        
+    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />        
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.src.csproj" />
-    <ProjectReference Include="$(TopDir)asm/src/z0.asm.csproj" />
   </ItemGroup>
 
   <ItemGroup>

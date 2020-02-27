@@ -1,0 +1,9 @@
+﻿<Project>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)asm/core/z0.asm.core.csproj" />
+    <ProjectReference Include="$(TopDir)asm/decode/z0.asm.decode.csproj" />
+    <ProjectReference Include="$(TopDir)asm/src/z0.asm.src.csproj" />
+  </ItemGroup>
+
+</Project>
