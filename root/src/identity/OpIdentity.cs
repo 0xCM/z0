@@ -221,5 +221,45 @@ namespace Z0
         public const string AsmLocator = "-asm";
 
         public const string GenericLocator = "_g";
+
+
+        /// <summary>
+        /// Defines an 8-bit immediate suffix predicated on an immediate value
+        /// </summary>
+        /// <param name="immval">The source value</param>
+        static string imm8(byte immval)            
+            => $"{IDI.SuffixSep}{IDI.Imm}{immval}";
+
+        /// <summary>
+        /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        public Option<byte> Imm8()            
+        {
+            if(HasImm && byte.TryParse(Identifier.RightOfLast(IDI.Imm), out var immval))
+                return immval;
+            else
+                return none<byte>();
+        }
+
+        /// <summary>        
+        /// Clears an attached immediate suffix, if any
+        /// </summary>
+        public OpIdentity WithoutImm8()
+        {
+            var perhaps = Imm8();
+            if(!perhaps)   
+                return this;
+            return OpIdentity.Define(Identifier.Remove(imm8(perhaps.Value)));
+        }
+
+        /// <summary>        
+        /// Attaches an immediate suffix to an identity, removing an existing immediate suffix if necessary
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="immval">The immediate value to attach</param>
+        public  OpIdentity WithImm8(byte immval)
+              => OpIdentity.Define(text.concat(WithoutImm8().Identifier, imm8(immval)));
+
     }
 }

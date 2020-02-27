@@ -13,14 +13,6 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Transforms a sequence of elements into a sequence of singleton sequences 
-    /// </summary>
-    /// <param name="src">The source sequence</param>
-    /// <typeparam name="T">The item type</typeparam>
-    public static IEnumerable<IEnumerable<T>> singletons<T>(IEnumerable<T> src)
-        => from item in src select items(item);
-
-    /// <summary>
     /// Consructs an enumerable from a parameter array
     /// </summary>
     /// <param name="src">The source items</param>

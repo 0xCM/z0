@@ -8,13 +8,10 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static zfunc;
-
     public interface IAsmTriggerSet
     {
         void FireOnMatch(AsmInstructionList instructions);
         
         void FireOnMatch(AsmFunction function);
     }
-
 }

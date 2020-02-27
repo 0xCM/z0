@@ -12,6 +12,8 @@ namespace Z0
     using static Root;
     using NK = NumericKind;
     using NT = NumericType;
+    using NI = NumericIndicator;
+
 
     public static class NumericExtensions
     {
@@ -123,16 +125,25 @@ namespace Z0
         /// <param name="k">The primal classifier</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]   
-        public static NumericIndicator Indicator(this NK k)
+        public static NI Indicator(this NK k)
         {
             if(k.IsUnsigned())
-                return NumericIndicator.Unsigned;
+                return NI.Unsigned;
             else if(k.IsSigned())
-                return NumericIndicator.Signed;
+                return NI.Signed;
             else if(k.IsFloat())
-                return NumericIndicator.Float;
+                return NI.Float;
             else
-                return NumericIndicator.None;
+                return NI.None;
+        }
+
+        [MethodImpl(Inline)]
+        public static Option<NI> NumericIndicator(this Type t)
+        {
+            if(t == typeof(bit))
+                return NI.Unsigned; 
+            var i = t.NumericKind().Indicator();
+            return i.IsSome() ? some(i) : none<NI>(); //Option.some(i.ToChar()) : Option.none<char>();
         }
 
         /// <summary>

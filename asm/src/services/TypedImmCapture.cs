@@ -189,8 +189,8 @@ namespace Z0
                 => Context.FunctionDecoder()
                           .DecodeFunction(
                               CaptureServices.Operations.Capture(
-                                  exchange, 
-                                  Resolver.Id.WithImm8(imm8), 
+                                  exchange,
+                                  Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
                                   false);
         }
@@ -218,8 +218,8 @@ namespace Z0
                 => Context.FunctionDecoder()
                           .DecodeFunction(
                               CaptureServices.Operations.Capture(
-                                  exchange, 
-                                  Resolver.Id.WithImm8(imm8), 
+                                  exchange,
+                                  Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
                                   false);
         }
@@ -246,8 +246,8 @@ namespace Z0
                 => Context.FunctionDecoder()
                           .DecodeFunction(
                                 CaptureServices.Operations.Capture(
-                                    exchange, 
-                                    Resolver.Id.WithImm8(imm8), 
+                                    exchange,
+                                    Resolver.Id.WithImm8(imm8),
                                     Resolver.@delegate(imm8)),
                                     false);
         }
@@ -275,8 +275,8 @@ namespace Z0
                 => Context.FunctionDecoder()
                           .DecodeFunction(
                               CaptureServices.Operations.Capture(
-                                  exchange, 
-                                  Resolver.Id.WithImm8(imm8), 
+                                  exchange,
+                                  Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
                                   false);
         } 

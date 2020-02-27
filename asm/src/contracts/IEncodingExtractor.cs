@@ -15,5 +15,4 @@ namespace Z0
     {
         CapturedEncodingReport Extract(ApiHost src);
     }
-
 }

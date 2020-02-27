@@ -88,7 +88,5 @@ namespace Z0
             EmitFunctionTimestamp = true;
             return this;
         }
-
     }
-
 }

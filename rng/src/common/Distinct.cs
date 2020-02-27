@@ -31,7 +31,7 @@ namespace Z0
             var src = random.Stream(default(T), pool);
             var set = src.Take(count).ToHashSet();
             while(set.Count < count)
-                set.AddRange(src.Take(count / 2));
+                set.WithItems(src.Take(count / 2));
             return set;
         }
 
@@ -42,7 +42,7 @@ namespace Z0
             var _count = convert<T,int>(count);
             var set = src.Take(_count).ToHashSet();
             while(set.Count < _count)
-                set.AddRange(src.Take(_count / 2));
+                set.WithItems(src.Take(_count / 2));
             return set;
         }
 
@@ -58,7 +58,7 @@ namespace Z0
             var stream = random.Stream<T>();
             var set = stream.Take(count).ToHashSet();
             while(set.Count < count)
-                set.AddRange(stream.Take(set.Count - count));
+                set.WithItems(stream.Take(set.Count - count));
             return set;
         }
 
@@ -74,7 +74,7 @@ namespace Z0
             var src =  random.Stream();
             var set = src.Take(count).ToHashSet();
             while(set.Count < count)
-                set.AddRange(src.Take(count / 2));
+                set.WithItems(src.Take(count / 2));
             return set;
         }
     }

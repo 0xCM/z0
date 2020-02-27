@@ -9,8 +9,6 @@ namespace Z0
     using System.Collections.Generic;
  
     using Z0.Asm;
-
-    using static zfunc;
     
     public interface IAsmProcessCapture : IDisposable
     {

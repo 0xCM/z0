@@ -45,7 +45,6 @@ namespace Z0
             {
                 return e;
             }
-        }
-        
+        }        
     }
 }

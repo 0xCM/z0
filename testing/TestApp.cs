@@ -287,14 +287,14 @@ namespace Z0
                 clock.Stop();
 
                 messages = CollectMessages(unit, casename,clock);
-                results.AppendRange(CollectOutcomes(unit, casename, clock));                
+                results.WithItems(CollectOutcomes(unit, casename, clock));                
 
             }
             catch(Exception e)
             {
                 clock.Stop();
                 messages = CollectMessages(unit, casename, clock, e);
-                results.AppendRange(CollectOutcomes(unit,casename, clock,e));
+                results.WithItems(CollectOutcomes(unit,casename, clock,e));
             }
             finally
             {            
@@ -325,7 +325,7 @@ namespace Z0
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
-                    results.AppendRange(outcomes);
+                    results.WithItems(outcomes);
                 else
                     results.Add(TestCaseRecord.Define(casename, true, clock.Time));
             }

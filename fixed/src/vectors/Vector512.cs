@@ -98,6 +98,7 @@ namespace Z0
         public bool Equals(in Vector512<T> rhs)
             => Lo.Equals(rhs.Lo) && Hi.Equals(rhs.Hi);
 
+
         public override int GetHashCode()
             => HashCode.Combine(Lo,Hi);
         

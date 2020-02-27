@@ -34,27 +34,5 @@ namespace Z0
         public static IEnumerable<ClosedOpSpec> Close(this GenericOpSpec op)
             => HostedOps.close(op);        
 
-        public static IEnumerable<EncodedOp> EncodedOps(this ApiHost host)
-        {
-            var generic = from m in host.DeclaredMethods.OpenGeneric()                
-                          where 
-                               m.Tagged<OpAttribute>() 
-                            && m.Tagged<NumericClosuresAttribute>() 
-                            && !m.AcceptsImmediate()
-                          let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
-                          where c != NumericKind.None
-                          from t in c.DistinctKinds().Select(x => x.ToClrType())
-                          where t.IsSome()
-                          let concrete = m.MakeGenericMethod(t.Value)
-                          let address =  MemoryAddress.Define(concrete.Jit())
-                          select EncodedOp.Define(concrete.Identify(), concrete, address);
-            
-            var direct = from m in host.DeclaredMethods.NonGeneric()
-                          where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
-                          let address =  MemoryAddress.Define(m.Jit())
-                          select EncodedOp.Define(m.Identify(), m, address);
-                          
-            return generic.Union(direct).OrderBy(x => x.Address);
-        }            
     }
 }

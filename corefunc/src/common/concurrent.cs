@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="key">The key that identifies the value</param>
         [MethodImpl(Inline)]
         public static Option<V> TryRemove<K, V>(this ConcurrentDictionary<K, V> subject, K key)
-            => guard(key,
+            => Option.guard(key,
                 k => k != null,
                 k => subject.TryRemove(k, out V value)
                     ? some(value)
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="items">The items to add</param>
         [MethodImpl(Inline)]
         public static void AddRange<T>(this ConcurrentBag<T> bag, IEnumerable<T> items)
-            => items.Iterate(item => bag.Add(item));
+            => items.Iter(item => bag.Add(item));
 
         /// <summary>
         /// A functional rendition of <see cref="ConcurrentBag{T}.TryTake(out T)"/> 

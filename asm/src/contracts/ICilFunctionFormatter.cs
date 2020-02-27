@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public interface ICilFunctionFormatter
+    public interface ICilFunctionFormatter : IAsmService
     {
         string Format(CilFunction f);
     }

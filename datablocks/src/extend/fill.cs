@@ -42,8 +42,5 @@ namespace Z0
         public static void Fill<T>(this in Block512<T> dst, T data)
             where T : unmanaged
                 => broadcast(data, dst);
-
-
     }
-
 }

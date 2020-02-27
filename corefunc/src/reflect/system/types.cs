@@ -16,22 +16,6 @@ namespace Z0
     partial class Reflections
     {        
         /// <summary>
-        /// For a generic type or reference to a generic type, retrieves the generic type definition;
-        /// otherwise, returns none
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static Option<Type> GenericDefinition(this Type t)
-        {
-            var effective = t.EffectiveType();
-            if(effective.IsConstructedGenericType)
-                return effective.GetGenericTypeDefinition();
-            else if(effective.IsGenericTypeDefinition)
-                return effective;
-            else
-                return default;            
-        }
-
-        /// <summary>
         /// Determines whether a type is anonymous
         /// </summary>
         /// <param name="src">The type to test</param>
@@ -62,75 +46,6 @@ namespace Z0
         public static bool IsOption(this Type candidate)
             => candidate.Realizes<IOption>();
 
-        /// <summary>
-        /// Attempts to retrieve a name-identified field from a type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        /// <param name="name">The name of the field</param>
-        /// <param name="declared">Whether the field is required to be declared by the source type</param>
-        public static Option<FieldInfo> Field(this Type src, string name)
-            => src.Fields().FirstOrDefault(f => f.Name == name);
-
-        public static object FieldValue(this Type src, string name, object instance = null)
-            => src.Fields().FirstOrDefault(f => f.Name == name)?.GetValue(instance);
-
-        /// <summary>
-        /// Selects the public and non-public static fields declared by a type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static IEnumerable<FieldInfo> DeclaredInstanceFields(this Type t)
-            => t.GetFields(BF_DeclaredInstance);
-
-        /// <summary>
-        /// Selects all instance/static and public/non-public fields inhertited by a type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static IEnumerable<FieldInfo> InheritedFields(this Type t)
-            => t.Fields().Except(t.DeclaredFields());
-
-        /// <summary>
-        /// Retrieves the public instance Fields declared by a supertype
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static IEnumerable<FieldInfo> InheritedPublicFields(this Type src)
-            => src.BaseType?.GetFields(BF_AllPublicInstance) ?? new FieldInfo[] { };
-
-        /// <summary>
-        /// Retrieves all public instance Fields declared or inherited by a type
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static IEnumerable<FieldInfo> PublicFields(this Type t)
-            => t.InheritedPublicFields().Union(t.GetFields());
-
-        /// <summary>
-        /// Attempts to retrieves a static field by name, irrespective of its visibility
-        /// </summary>
-        /// <param name="t">The declaring type</param>
-        /// <param name="name">The name of the method</param>
-        public static Option<FieldInfo> DeclaredStaticField(this Type t, string name) 
-            => t.DeclaredFields().Static().Where(f => f.Name == name).FirstOrDefault();
-
-        /// <summary>
-        /// Retrieves a public or non-public setter for a property if it exists
-        /// </summary>
-        /// <param name="p">The property to examine</param>
-        public static Option<MethodInfo> Setter(this PropertyInfo p)
-            => p.GetSetMethod() ?? p.GetSetMethod(true);
-
-        /// <summary>
-        /// Retrieves a public or non-public getter for a property if it exists
-        /// </summary>
-        /// <param name="p">The property to examine</param>
-        public static Option<MethodInfo> Getter(this PropertyInfo p)
-            => p.GetGetMethod() ?? p.GetGetMethod(true);
-
-        /// <summary>
-        /// Selects the first method found on the type, if any, that has a specified name
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        /// <param name="name">The name to match</param>
-        public static Option<MethodInfo> Method(this Type src, string name)
-            => src.DeclaredMethods().WithName(name).FirstOrDefault();
 
         public static IEnumerable<object> Values(this IEnumerable<FieldInfo> src, object o = null)
             => src.Select(x => x.GetValue(o));
@@ -138,12 +53,6 @@ namespace Z0
         public static IEnumerable<T> Values<T>(this IEnumerable<FieldInfo> src, object o = null)
             => src.Select(x => x.GetValue(o)).Where(x => x is T).Cast<T>();
 
-        /// <summary>
-        /// Retrieves a type's default constructor, if present; otherwise, none
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static Option<ConstructorInfo> DefaultConstructor(this Type t)
-            => t.GetConstructor(BF_DeclaredInstance, null, new Type[] { }, new ParameterModifier[] { });
 
         /// <summary>
         /// Retrieves the public properties declared by a type

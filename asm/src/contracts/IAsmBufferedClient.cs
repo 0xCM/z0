@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     /// <summary>
     /// Defines the signature of a buffer client delegate
     /// </summary>

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
     partial class BlockExtend    
     {
         /// <summary>
@@ -16,7 +14,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
         public static Block16<T> Replicate<T>(this in Block16<T> src)
             where T : unmanaged
         {
@@ -30,7 +27,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
         public static Block32<T> Replicate<T>(this in Block32<T> src)
             where T : unmanaged
         {
@@ -44,7 +40,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
         public static Block64<T> Replicate<T>(this in Block64<T> src)
             where T : unmanaged
         {
@@ -58,7 +53,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
         public static Block128<T> Replicate<T>(this in Block128<T> src)
             where T : unmanaged
         {
@@ -72,7 +66,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
         public static Block256<T> Replicate<T>(this in Block256<T> src)
             where T : unmanaged
         {
@@ -86,7 +79,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
         public static Block512<T> Replicate<T>(this in Block512<T> src)
             where T : unmanaged
         {

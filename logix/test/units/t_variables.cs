@@ -21,13 +21,13 @@ namespace Z0.Logix
             var pairs = from op1 in ops
                         from op2 in ops
                         select (op1, op2);            
-            pairs.Iterate(o => check_4x2(o.op1,o.op2));
+            pairs.Iter(o => check_4x2(o.op1,o.op2));
                      
         }
 
         public void check_binop_vars()
         {
-            ScalarOpApi.BinaryBitLogicKinds.ToArray().Iterate(check_binop_vars);
+            ScalarOpApi.BinaryBitLogicKinds.ToArray().Iter(check_binop_vars);
         }
 
         public void check_solution()

@@ -71,7 +71,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline)]
-        public static char Character(this NumericIndicator src)
+        public static char ToChar(this NumericIndicator src)
             => src.IsSome() ? (char)src : 'e';
 
         /// <summary>
@@ -80,6 +80,6 @@ namespace Z0
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline)]
         public static string Format(this NumericIndicator src)
-            => src.Character().ToString(); 
+            => src.ToChar().ToString(); 
     }
 }

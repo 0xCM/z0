@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static zfunc;
-
     public interface IClrIndex
     {
         Option<CilFunction> FindCil(int id);
@@ -17,6 +15,5 @@ namespace Z0
         Option<Type> FindType(int id);
 
         Option<MethodInfo> FindMethod(int id);
-
     }
 }

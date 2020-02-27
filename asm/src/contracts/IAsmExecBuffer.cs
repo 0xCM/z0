@@ -8,8 +8,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     /// <summary>
     /// Defines service contract for a caller-disposed native execution buffer
     /// </summary>

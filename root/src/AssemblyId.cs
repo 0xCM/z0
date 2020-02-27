@@ -124,6 +124,10 @@ namespace Z0
         Analogs = T28,
 
         AnalogsTest = Analogs | Test,
+
+        Dynamic = T29,
+
+        DynamicTest = T29 | Test,
         
         Control = T50,
 

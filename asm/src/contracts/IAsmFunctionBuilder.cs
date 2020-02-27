@@ -5,12 +5,8 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     using Z0.Asm;    
-
 
     public interface IAsmFunctionBuilder : IAsmService
     {

@@ -50,37 +50,5 @@ namespace Z0
                 return none<IdentityPart>();
         }
 
-        /// <summary>
-        /// Defines an 8-bit immediate suffix predicated on an immediate value
-        /// </summary>
-        /// <param name="immval">The source value</param>
-        public static string imm8(byte immval)            
-            => $"{IDI.SuffixSep}{IDI.Imm}{immval}";
-
-        /// <summary>
-        /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        public static Option<byte> imm8(OpIdentity src)            
-        {
-            if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(IDI.Imm), out var immval))
-                return immval;
-            else
-                return none<byte>();
-        }
-
-        /// <summary>        
-        /// Clears an attached immediate suffix, if any
-        /// </summary>
-        public static OpIdentity imm8Remove(OpIdentity src)
-            => imm8(src).MapValueOrDefault(immval => OpIdentity.Define(src.Identifier.Remove(imm8(immval))), src);
-
-        /// <summary>        
-        /// Attaches an immediate suffix to an identity, removing an existing immediate suffix if necessary
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        /// <param name="immval">The immediate value to attach</param>
-        public static OpIdentity imm8Add(OpIdentity src, byte immval)
-              => OpIdentity.Define(text.concat(imm8Remove(src).Identifier, imm8(immval)));
     }
 }

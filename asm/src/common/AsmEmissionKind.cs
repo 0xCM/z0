@@ -5,11 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static zfunc;
 
     public enum AsmEmissionKind
     {
@@ -19,5 +14,4 @@ namespace Z0
 
         Imm = 2
     }
-
 }

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     class AsmContextData
     {
         public static AsmContextData Create(
@@ -35,6 +34,5 @@ namespace Z0
         public CilFormatConfig CilFormat {get;}
 
         public AsmFormatConfig AsmFormat {get;}
-
     }
 }

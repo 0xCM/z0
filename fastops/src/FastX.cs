@@ -72,6 +72,7 @@ namespace Z0
         public static Option<SegmentedIdentity> Segment(this IdentityPart part)
             => Identity.segmented(part);
 
+
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>
@@ -111,14 +112,6 @@ namespace Z0
         public static bool IsKind(this MethodInfo m, VKT.Vec256 hk, bool total)        
             => m.IsVectorized(256,total);
 
-        [MethodImpl(Inline)]
-        public static Option<char> NumericIndicator(this Type t)
-        {
-            if(t == typeof(bit))
-                return AsciLower.u;                        
-            var i = t.NumericKind().Indicator();
-            return i.IsSome() ? Option.some(i.Character()) : Option.none<char>();
-        }
 
         [MethodImpl(Inline)]
         public static bool IsOperator(this IFunc f)
@@ -203,27 +196,13 @@ namespace Z0
         public static Option<SegmentedIdentity> Segment(this OpIdentity src, int partidx)
             => Identity.segment(src,partidx);
 
-        /// <summary>
-        /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        public static Option<byte> Imm8(this OpIdentity src)            
-            => Identity.imm8(src);
 
-        /// <summary>        
-        /// Clears an attached immediate suffix from an identity, if any
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        public static OpIdentity WithoutImm8(this OpIdentity src)
-            => Identity.imm8Remove(src);
+
+        // public static OpIdentity WithoutImm8(this OpIdentity src)
+        //     => Identity.imm8Remove(src);
     
-        /// <summary>        
-        /// Attaches an immediate suffix to an identity, removing an existing immediate suffix if necessary
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        /// <param name="immval">The immediate value to attach</param>
-        public static OpIdentity WithImm8(this OpIdentity src, byte immval)
-            => Identity.imm8Add(src,immval);
+        // public static OpIdentity WithImm8(this OpIdentity src, byte immval)
+        //     => Identity.imm8Add(src,immval);
 
         public static string TestCaseName(this MethodInfo method)
             => Identity.testcase(method);
