@@ -5,12 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.IO;
-    using System.Reflection;
-
-    using static zfunc;
 
     public abstract class Deconstructable<T> : IDeconstructable<T>
         where T : Deconstructable<T>
@@ -31,13 +25,12 @@ namespace Z0
             var asmfile =  SourcePath.FolderPath + filename.WithExtension(FileExtensions.Asm);
             var cilfile = SourcePath.FolderPath + filename.WithExtension(FileExtensions.Il);
             var host = typeof(T);
-            var clridx = ClrMetadataIndex.Create(host.Assembly);
+            var clridx = host.Assembly.CreateIndex();
             var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default.WithSectionDelimiter());
             using var capture = AsmProcessServices.Capture(context);
             var functions = capture.CaptureFunctions(host); 
             context.AsmEmitter().EmitAsm(functions, asmfile).OnSome(e => throw e);
             context.CilEmitter().EmitCil(functions, cilfile).OnSome(e => throw e);
-
         }
     }
 }

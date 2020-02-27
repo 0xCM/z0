@@ -11,7 +11,7 @@ namespace Z0
     using static Z0.Asm.OpKind;
     using static FixedWidth;
     
-    static partial class AsmExtend
+    public static class AsmModels
     {        
         /// <summary>
         /// Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch

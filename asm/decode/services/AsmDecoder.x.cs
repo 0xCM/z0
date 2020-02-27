@@ -12,27 +12,10 @@ namespace Z0
     using Z0.Asm;
     
     using Iced = Iced.Intel;
+    using static Root;
 
-    partial class AsmInternals
+    public static class AsmDecodingOps
     {
-        // public static AsmInstructionList DecodeInstructions(this IAsmContext context, AsmCode src, ulong @base)
-        // {
-        //     var decoded = new Iced.InstructionList();
-        //     var reader = new Iced.ByteArrayCodeReader(src.Data);
-		// 	var decoder =Iced.Decoder.Create(IntPtr.Size * 8, reader);
-        //     decoder.IP = @base;
-		// 	while (reader.CanReadByte) 
-		// 	{
-		// 		ref var instruction = ref decoded.AllocUninitializedElement();
-		// 		decoder.Decode(out instruction); 
-		// 	}
-
-        //     var dst = new Asm.Instruction[decoded.Count];
-        //     var formatted = context.InstructionFormatter().FormatInstructions(decoded, @base);
-        //     for(var i=0; i<dst.Length; i++)
-        //         dst[i] =  decoded[i].ToSpec(formatted[i]);
-        //     return AsmInstructionList.Create(dst);
-        // }
 
         public static AsmInstructionList DecodeInstructions(this IAsmContext context, AsmCode src)
         {

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     /// <summary>
     /// Defines literals that indicate the reason for catpture termination
     /// </summary>

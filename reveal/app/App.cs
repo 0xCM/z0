@@ -5,8 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Reflection;
-    using System.Linq;
 
     using static zfunc;
 
@@ -16,7 +14,7 @@ namespace Z0
         {                        
             new ExperimentalScenarios().Emit();
             var a = GetType().Assembly;
-            var clridx = ClrMetadataIndex.Create(a);
+            var clridx = a.CreateIndex();
             var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default);
             foreach(var t in a.GetTypes().Tagged(typeof(OpCodeProvider)))
             {

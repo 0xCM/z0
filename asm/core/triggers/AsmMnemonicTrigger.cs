@@ -5,15 +5,11 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
     using System.Runtime.CompilerServices;
-    using System.Threading;
 
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Fires when an instruction mnemonic matches a specified mnemonic

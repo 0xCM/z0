@@ -13,18 +13,18 @@ namespace Z0
 
     using static zfunc;
 
-    readonly struct AsmCaptureFlow : IAsmCaptureFlow
+    readonly struct AsmHostCaptureFlow : IAsmHostCaptureFlow
     {
         public IAsmContext Context {get;}
 
         public HashSet<AssemblyId> Selected {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmCaptureFlow Create(IAsmContext context, params AssemblyId[] selected)
-            => new AsmCaptureFlow(context,selected);
+        public static IAsmHostCaptureFlow Create(IAsmContext context, params AssemblyId[] selected)
+            => new AsmHostCaptureFlow(context,selected);
 
         [MethodImpl(Inline)]
-        AsmCaptureFlow(IAsmContext context, AssemblyId[] selected)
+        AsmHostCaptureFlow(IAsmContext context, AssemblyId[] selected)
         {
             this.Context = context;
             this.Selected = selected.Length == 0 ? context.Assemblies.ToHashSet() : selected.ToHashSet();
@@ -48,7 +48,7 @@ namespace Z0
                 {
 
                     foreach(var host in owner)
-                       yield return RunCaptureWorkflow(host);
+                       yield return RunHostCaptureFlow(host);
                 }
             }
 
@@ -63,7 +63,7 @@ namespace Z0
 
         static void EmitCil(Assembly src)
         {
-            var index = ClrMetadataIndex.Create(src);
+            var index = src.CreateIndex();
             var dir = AsmEmissionPaths.Current.CilDir;
             var srcId = src.AssemblyId();
             var context = AsmContext.New(index, DataResourceIndex.Empty, AsmFormatConfig.Default.WithSectionDelimiter());
@@ -76,10 +76,10 @@ namespace Z0
             }            
         }
 
-        (CapturedEncodingReport result, FilePath target) Capture(ApiHost host)
+        (CapturedEncodingReport result, FilePath target) CaptureHostOps(ApiHost host)
         {
-            var extractor = Context.EncodingExtractor();
-            var captured = extractor.Extract(host);
+            var capture = Context.HostCapture();
+            var captured = capture.CaptureHostOps(host);
             var target = EmissionPaths.CapturePath(host);                
             captured.Save(target)
                         .OnSome(file => print($"Emitted {host} encodings to {file}"))
@@ -87,7 +87,7 @@ namespace Z0
             return (captured,target);
         }
 
-        (ParsedEncodingReport,FilePath) Parse(ApiHost host, CapturedEncodingReport captured)
+        (ParsedEncodingReport,FilePath) ParseHostOps(ApiHost host, CapturedEncodingReport captured)
         {
             var parser = Context.EncodingParser();
             var parsed = parser.Parse(host,captured);
@@ -114,11 +114,11 @@ namespace Z0
             return path;
         }
 
-        AsmCaptureSet RunCaptureWorkflow(ApiHost host)        
+        AsmCaptureSet RunHostCaptureFlow(ApiHost host)        
         {
             print($"Capturing {host}");
-            (var captured, var capturePath) = Capture(host);            
-            (var parsed, var parsedPath) = Parse(host, captured);
+            (var captured, var capturePath) = CaptureHostOps(host);            
+            (var parsed, var parsedPath) = ParseHostOps(host, captured);
             var decodingPath = Decode(host, captured, parsed);
             return new AsmCaptureSet
             {

@@ -8,8 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    
+    using static zfunc;    
     using static CaptureTermCode;
 
     static class CaptureHelpers

@@ -45,5 +45,4 @@ namespace Z0
         int IBytePatternSet<P>.MatchOffset(P kind)
             => Enums.numeric<O,int>(MatchOffset(kind));
     }
-
 }

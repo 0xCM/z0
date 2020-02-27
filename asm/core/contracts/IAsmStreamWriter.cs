@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-
-    using static zfunc;
-
-    using Z0.Asm;
 
     public interface IAsmStreamWriter : IAsmServiceAllocation
     {
@@ -18,7 +13,6 @@ namespace Z0
         /// </summary>
         FilePath TargetPath {get;}        
     }
-
 
     /// <summary>
     /// Defines serivce contract for persting text-formatted x86 encoded assembly 

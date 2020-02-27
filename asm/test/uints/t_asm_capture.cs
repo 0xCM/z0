@@ -8,17 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static refs;
-    using static Root;
-    using static EncodingPatternTokens;
-
-
     public class t_asm_capture : t_asm<t_asm_capture>
     {
         public void capture_workflow()
         {                    
                     
-            var workflow = Context.CaptureWorkflow();
+            var workflow = Context.HostCaptureFlow();
             workflow.Execute().Force();
         }
 
@@ -29,10 +24,8 @@ namespace Z0
             {
                 Claim.eq(AsChar_Span8u_Output,selected);
 
-            }            
-            
+            }                        
         }
-
 
         static ReadOnlySpan<byte> AsChar_Span8u_Input 
             => new byte[]{
@@ -52,6 +45,5 @@ namespace Z0
                 0xc4,0x28,0xc3,0xe8,0xd0,0xa5,0x4f,0x5f,
                 0xcc,
                 };
-
     }
 }

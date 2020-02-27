@@ -76,7 +76,7 @@ namespace Z0
 
             }
 
-            var metadata = ClrMetadataIndex.Create(src.Owner);
+            var metadata = src.Owner.CreateIndex();
             var context = AsmContext.New(metadata, Resources);
             var emitter = context.CatalogEmitter(src.Operations, OnEmission);
 

@@ -6,10 +6,6 @@ namespace Z0
 {        
     using System;
 
-    using Z0.Asm;
-
-    using static zfunc;
-
     /// <summary>
     /// Defines service contract for persisting asm functions which are derived from .net member functions
     /// </summary>

@@ -6,42 +6,42 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Runtime.CompilerServices;
-
-    using Z0.Asm;
 
     using static zfunc;
 
-    readonly struct AsmFunctionWriter : IAsmFunctionWriter
+    readonly struct AsmRawWriter : IAsmRawWriter
     {        
-        readonly StreamWriter StreamOut;
-
-        readonly AsmFormatConfig Config;
-
         public IAsmContext Context {get;}
+
+        readonly StreamWriter StreamOut;
 
         public FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionWriter Create(IAsmContext context, AsmFormatConfig config, FilePath dst)
-            => new AsmFunctionWriter(context, config, dst);
+        public static IAsmRawWriter Create(IAsmContext context, FilePath dst)
+            => new AsmRawWriter(context, dst);
 
         [MethodImpl(Inline)]
-        AsmFunctionWriter(IAsmContext context, AsmFormatConfig config, FilePath path)
+        AsmRawWriter(IAsmContext context, FilePath path)
         {
-            this.TargetPath = path;
             this.Context = context;
-            this.Config = config;
+            this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
-    
-        public void Write(AsmFunction src)
-            => StreamOut.Write(Context.AsmFormatter(Config).FormatDetail(src));
 
+        public void Write(OpIdentity id, Span<byte> data, int? idpad = null)
+            => StreamOut.WriteLine(HexLine.Define(id, data.ToArray()).Format(idpad ?? 0));
+
+        public void Write(in CapturedMember src, int? idpad = null)
+            => Write(src.Id, src.RawBits, idpad);
+        
         public void Dispose()
         {
             StreamOut.Flush();
             StreamOut.Dispose();
         }
+
     }
 }

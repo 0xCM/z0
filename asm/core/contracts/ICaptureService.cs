@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static zfunc;
-
     /// <summary>
     /// Defines most basic service contract for capturing x86 *encoded* assembly data produced by the jitter
     /// </summary>

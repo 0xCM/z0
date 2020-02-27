@@ -12,13 +12,19 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static AsmServiceMessages;
-
     using static zfunc;
-    using Z0;
+    using static AsmServiceMessages;
 
     class AsmCatalogEmitter : IAsmCatalogEmitter, ICaptureTokenSink
     {
+        public IAsmContext Context {get;}
+
+        readonly IOperationCatalog Catalog;
+
+        readonly IAsmFunctionDecoder Decoder;
+
+        readonly CaptureEmissionObserver Observer;
+
         [MethodImpl(Inline)]
         public static IAsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog, CaptureEmissionObserver observer)
             => new AsmCatalogEmitter(context,catalog,observer);
@@ -32,13 +38,9 @@ namespace Z0
             this.Observer = observer;
         }
 
-        public IAsmContext Context {get;}
 
-        readonly IOperationCatalog Catalog;
-
-        readonly IAsmFunctionDecoder Decoder;
-
-        readonly CaptureEmissionObserver Observer;
+        IAsmFunctionArchive Archive(ApiHostPath host, bool imm)
+            => Context.FunctionArchive(host, imm);
 
         ICaptureTokenSink Sink
         {

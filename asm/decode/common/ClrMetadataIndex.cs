@@ -13,17 +13,19 @@ namespace Z0
 
     using dnlib.DotNet;
 
-    using static zfunc;
-    
-    public class ClrMetadataIndex : IClrIndex
-    {                            
-        public static readonly ClrMetadataIndex Empty = new ClrMetadataIndex();
+    using Z0;
 
-        public static ClrMetadataIndex Create(params Module[] modules)
-            => new ClrMetadataIndex(modules);
+    using static zfunc;
+
+    class ClrMetadataIndex : IClrIndex
+    {                            
+        public static readonly IClrIndex Empty = default(EmptyClrIndex);
 
         public static ClrMetadataIndex Create(Assembly assembly)
             => Create(assembly.Modules.ToArray());
+
+        static ClrMetadataIndex Create(params Module[] modules)
+            => new ClrMetadataIndex(modules);
 
         ConcurrentDictionary<int, Type> TypeIndex 
             = new ConcurrentDictionary<int, Type>();
@@ -76,13 +78,13 @@ namespace Z0
         {            
             iter(mod.GetTypes(), IndexClrType);
         }
-                        
+
         Option<CilFunction> GetCilFunction(MethodDef md)
         {
             if(!md.HasBody || !md.Body.HasInstructions)
                 return default;
             
-            var mcil =  CilFunction.Create((int)md.MDToken.Raw, md.FullName, md.ImplAttributes.ToSpec(), md.Body.Instructions.Map(i => i.ToSpec()));
+            var mcil = CilFunction.Create((int)md.MDToken.Raw, md.FullName, md.ImplAttributes.ToSpec(), md.Body.Instructions.Map(i => i.ToSpec()));
             md.FreeMethodBody();
             return mcil;
         }

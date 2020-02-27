@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
 
     /// <summary>
     /// Defines serivce contract for persting text-formatted x86 encoded assembly 

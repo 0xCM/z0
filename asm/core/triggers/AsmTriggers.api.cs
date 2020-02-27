@@ -3,13 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
+    using System.Threading;
     
-
-    public interface IAsmCaptureFlow : IExecutable<AsmCaptureSet>
+    public static class AsmTriggers
     {
+        static int LastId;
 
+        internal static int NextId()
+            => Interlocked.Increment(ref LastId);
     }
-
 }

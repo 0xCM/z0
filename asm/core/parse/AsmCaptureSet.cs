@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-    
-    using static zfunc;
 
     public class AsmCaptureSet
     {
@@ -24,7 +19,5 @@ namespace Z0
         public ParsedEncodingReport Parsed {get;set;}
 
         public FilePath DecodedPath {get;set;}
-
     }
-
 }

@@ -28,13 +28,6 @@ namespace Z0
 
         public FolderPath RootFolder {get;}
         
-        readonly AsmFormatConfig GroupFormatConfig;
-
-        readonly IAsmFunctionFormatter DefaultFormatter;
-
-        readonly IAsmFunctionFormatter GroupFormatter;
-
-        readonly ICilFunctionFormatter CilFormatter;
 
         public IAsmContext Context {get;}
 
@@ -44,12 +37,37 @@ namespace Z0
 
         public ApiHostPath HostPath {get;}
 
+        readonly AsmFormatConfig GroupFormatConfig;
+
+        readonly IAsmFunctionFormatter DefaultFormatter;
+
+        readonly IAsmFunctionFormatter GroupFormatter;
+
+        readonly ICilFunctionFormatter CilFormatter;
+
         AsmEmissionPaths EmissionPaths
             => Context.EmissionPaths();
 
         public static IAsmFunctionArchive Create(IAsmContext context, AssemblyId catalog, string host)
             => new AsmFunctionArchive(context, catalog,host);
 
+        public static IAsmFunctionArchive Create(IAsmContext context, ApiHostPath host, bool imm)
+            => new AsmFunctionArchive(context, host, imm);
+
+        AsmFunctionArchive(IAsmContext context, ApiHostPath host, bool imm)
+        {
+            this.Context = context;
+            this.Origin = host.Owner;
+            this.HostName = $"{host.Name}-imm";
+            this.HostPath = host;
+            this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(host.Owner.Format(), $"{host.Name}-imm"));
+            this.DefaultFormatter = context.AsmFormatter();
+            this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
+            this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
+            this.CilFormatter = context.CilFormatter();
+
+        }
+        
         AsmFunctionArchive(IAsmContext context, AssemblyId catalog, string hostname)
         {
             this.Context = context;
@@ -158,7 +176,6 @@ namespace Z0
         {
             print(EmissionMismatch(id,incount,outcount));
         }
-
             
         FilePath HexPath(OpIdentity id)
             => EmissionPaths.OpArchivePath(ArchiveFileKind.Hex, Origin, HostName, id).CreateParentIfMissing();

@@ -3,19 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Threading;
-
-    using Z0.Asm;
-
-    using static zfunc;
-
-    public static class AsmTriggers
+    using System.Collections.Generic;
+    using System.Linq;
+    
+    class Catalog : OpCatalog<Catalog>
     {
-        static int LastId;
+        public Catalog(AssemblyId id)
+            : base(id)
+        {
 
-        internal static int NextId()
-            => Interlocked.Increment(ref LastId);
+        }       
     }
 }

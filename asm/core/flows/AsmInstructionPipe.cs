@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
 
     public readonly struct AsmInstructionPipe : IAsmInstructionPipe
     {

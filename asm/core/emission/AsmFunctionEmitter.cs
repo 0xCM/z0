@@ -18,14 +18,18 @@ namespace Z0
     {
         public IAsmContext Context {get;}
 
-        [MethodImpl(Inline)]
-        public static IAsmFunctionEmitter Create(IAsmContext context)
-            => new AsmFunctionEmitter(context);
+        readonly IAsmFunctionFormatter Formatter;
+
 
         [MethodImpl(Inline)]
-        AsmFunctionEmitter(IAsmContext context)
+        public static IAsmFunctionEmitter Create(IAsmContext context, IAsmFunctionFormatter formatter)
+            => new AsmFunctionEmitter(context,formatter);
+
+        [MethodImpl(Inline)]
+        AsmFunctionEmitter(IAsmContext context, IAsmFunctionFormatter formatter)
         {
             this.Context = context;
+            this.Formatter = formatter;
         }
 
         public Option<Exception> EmitAsm(IEnumerable<AsmFunction> src, FilePath file)        
@@ -35,10 +39,9 @@ namespace Z0
                 return default;
             try
             {
-                var formatter = Context.AsmFormatter();
                 using var dst = new StreamWriter(file.FullPath, false);
                 for(var i=0; i< functions.Length; i++)
-                    dst.Write(formatter.FormatDetail(functions[i]));
+                    dst.Write(Formatter.FormatDetail(functions[i]));
                 return default;
             }
             catch(Exception e)

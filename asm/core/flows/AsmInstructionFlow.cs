@@ -10,8 +10,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static zfunc;
-
     readonly struct AsmInstructionFlow : IAsmInstructionFlow
     {
         public IAsmContext Context {get;}

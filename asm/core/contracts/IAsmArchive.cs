@@ -5,9 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
-
-    using static zfunc;
 
     /// <summary>
     /// Defines base interface for archival services that support persistence/lookup for x86 encoded asm
@@ -38,5 +35,4 @@ namespace Z0
         /// </summary>
         T Clear();        
     }
-
 }

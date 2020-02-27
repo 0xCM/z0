@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     public interface ICaptureToken : IEquatable<CaptureToken>, IComparable<CaptureToken>
     {
 
     }
-
 }

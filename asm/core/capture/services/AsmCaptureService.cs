@@ -8,8 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
-    using static zfunc;
 
     readonly struct AsmCaptureService : ICaptureService
     {

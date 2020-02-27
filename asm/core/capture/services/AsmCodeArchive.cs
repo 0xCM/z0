@@ -32,7 +32,6 @@ namespace Z0
             this.Context = context;
             this.Origin = catalog;
             this.HostName = host;
-            //this.RootFolder = LogPaths.The.AsmDataDir(RelativeLocation.Define(Origin.Format(), host));
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(Origin.Format(),host));
         }
 
@@ -41,7 +40,6 @@ namespace Z0
             this.Context = context;
             this.Origin = catalog;
             this.HostName = string.Empty;
-            //this.RootFolder = LogPaths.The.AsmDataDir(FolderName.Define(Origin.Format()));
             this.RootFolder = context.EmissionPaths().DataSubDir(FolderName.Define(Origin.Format()));
         }
 

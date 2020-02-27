@@ -34,6 +34,14 @@ namespace Z0
         public static Factory<T> factory<T>()
             => default;
 
+        /// <summary>
+        /// Allocates a span
+        /// </summary>
+        /// <param name="length">The number cells to allocate</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(NotInline)]
+        public static Span<T> alloc<T>(int length, T t = default)
+            => SpanOps.alloc<T>(length);
 
         /// <summary>
         /// Computes the byte-size of a type

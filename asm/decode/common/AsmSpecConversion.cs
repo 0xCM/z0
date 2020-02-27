@@ -11,11 +11,11 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static zfunc;                
+    using static Root;                
 
     using Iced = Iced.Intel;
 
-    public static class AsmSpecConversion
+    static class AsmSpecConversion
     {
         public static AsmInstructionCode InstructionCode(this Iced.Instruction src)
         {
@@ -30,7 +30,7 @@ namespace Z0
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
-        internal static OpCodeInfo ToSpec(this Iced.OpCodeInfo src)
+        public static OpCodeInfo ToSpec(this Iced.OpCodeInfo src)
             => new OpCodeInfo
             {
                 AddressSize = src.AddressSize,
@@ -79,7 +79,7 @@ namespace Z0
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
-        internal static Instruction ToSpec(this Iced.Instruction src, string formatted)
+        public static Instruction ToSpec(this Iced.Instruction src, string formatted)
             => new Instruction
             {
                 FormattedInstruction = formatted,
@@ -188,7 +188,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static MemoryOperand ToSpec(this Iced.MemoryOperand src)
             => new MemoryOperand(src.Base.ToSpec(), src.Index.ToSpec(), src.Scale, src.Displacement, src.DisplSize, src.IsBroadcast, src.SegmentPrefix.ToSpec());
-
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
