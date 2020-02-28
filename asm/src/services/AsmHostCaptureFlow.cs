@@ -85,7 +85,7 @@ namespace Z0
             return (captured,target);
         }
 
-        (ParsedEncodingReport,FilePath) ParseHostOps(ApiHost host, CapturedEncodingReport captured)
+        (Report<ParsedEncodingRecord>,FilePath) ParseHostOps(ApiHost host, CapturedEncodingReport captured)
         {
             var parser = Context.EncodingParser();
             var parsed = parser.Parse(host,captured);
@@ -98,7 +98,7 @@ namespace Z0
             return (parsed,target);
         }
 
-        FilePath Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodingReport parsed)
+        FilePath Decode(ApiHost host, CapturedEncodingReport captured, Report<ParsedEncodingRecord> parsed)
         {
             var path = EmissionPaths.DecodedPath(host);
             var decoder = Context.FunctionDecoder();

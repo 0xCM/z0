@@ -28,7 +28,7 @@ namespace Z0
             this.BufferLength = maxlen ?? Pow2.T14;
         }
 
-        public ParsedEncodingReport Parse(ApiHost host, CapturedEncodingReport encoded)
+        public Report<ParsedEncodingRecord> Parse(ApiHost host, CapturedEncodingReport encoded)
         {
             var dst = new ParsedEncodingRecord[encoded.Records.Length];
             var buffer = alloc<byte>(BufferLength);

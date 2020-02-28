@@ -8,7 +8,7 @@ namespace Z0
 
     public class AsmCaptureSet
     {
-        public static AsmCaptureSet Define(ApiHostPath host, CapturedEncodingReport captured, ParsedEncodingReport parsed, FilePath decoded)
+        public static AsmCaptureSet Define(ApiHostPath host, CapturedEncodingReport captured, Report<ParsedEncodingRecord> parsed, FilePath decoded)
             => new AsmCaptureSet
             {
                 Host = host,
@@ -21,7 +21,7 @@ namespace Z0
 
         public CapturedEncodingReport Captured {get;set;}
 
-        public ParsedEncodingReport Parsed {get;set;}
+        public Report<ParsedEncodingRecord> Parsed {get;set;}
 
         public FilePath DecodedPath {get;set;}
     }

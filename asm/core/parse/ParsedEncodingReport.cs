@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     using F = ParsedEncodingField;
     using R = ParsedEncodingRecord;
@@ -28,19 +31,40 @@ namespace Z0
         Data = 6 | 1ul << 32
     }    
 
-    public class ParsedEncodingReport : Report<F,R>
-    {        
-        public ApiHostPath Host {get;}
+    public struct ParsedEncodingReport
+    {
+        public static Report<F,R> Empty => Report<F,R>.Empty;
         
-        public static ParsedEncodingReport Create(ApiHostPath host, params ParsedEncodingRecord[] records)
-            => new ParsedEncodingReport(host,records);
+        readonly Report<F,R> Data;
 
-        ParsedEncodingReport(ApiHostPath host, ParsedEncodingRecord[] records)
-            : base(records)
+        [MethodImpl(Inline)]
+        public static ParsedEncodingReport Create()
+            => new ParsedEncodingReport(new ParsedEncodingRecord[]{});
+
+        [MethodImpl(Inline)]
+        ParsedEncodingReport(params ParsedEncodingRecord[] records)
         {
-            this.Host = host;
-        }       
-    }    
+            this.Data = new Report<F, R>(records);
+        }
+
+        public Report<F,R> Populate(params ParsedEncodingRecord[] records)        
+            => new Report<F, R>(records);
+    }
+
+    // public class ParsedEncodingReport : Report<F,R>
+    // {        
+    //     public ApiHostPath Host {get;}
+        
+    //     public static ParsedEncodingReport Create(ApiHostPath host, params ParsedEncodingRecord[] records)
+    //         => new ParsedEncodingReport(host,records);
+
+        
+    //     ParsedEncodingReport(ApiHostPath host, ParsedEncodingRecord[] records)
+    //         : base(records)
+    //     {
+    //         this.Host = host;
+    //     }       
+    // }    
 
     public readonly struct ParsedEncodingRecord : IRecord<F, R>
     {        
@@ -97,7 +121,6 @@ namespace Z0
 
         static Report<F,R> Model => Report<F,R>.Empty;
 
- 
         /// <summary>
         /// Gets the parsed encoding described by the source record
         /// </summary>

@@ -10,6 +10,6 @@ namespace Z0
 
     public interface IEncodingParser : IAsmService
     {
-        ParsedEncodingReport Parse(ApiHost src, CapturedEncodingReport encoded);        
+        Report<ParsedEncodingRecord> Parse(ApiHost src, CapturedEncodingReport encoded);        
     }
 }
