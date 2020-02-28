@@ -8,13 +8,9 @@ namespace Z0
 
     class AsmContextData
     {
-        public static AsmContextData Create(
-                IAssemblyComposition assemblies, 
-                IClrIndex clrIndex, 
-                DataResourceIndex resources, 
-                AsmFormatConfig format, 
-                CilFormatConfig cilFormat)
-                    => new AsmContextData(assemblies, clrIndex, resources, format, cilFormat);
+        public static AsmContextData Create(IAssemblyComposition assemblies, IClrIndex clrIndex, 
+            DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
+                => new AsmContextData(assemblies, clrIndex, resources, format, cilFormat);
 
         AsmContextData(IAssemblyComposition assemblies, IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
         {

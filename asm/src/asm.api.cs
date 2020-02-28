@@ -9,9 +9,11 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    static partial class AsmInternals
+    public static class asm
     {
 
 
+
     }
+     
 }

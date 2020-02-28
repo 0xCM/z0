@@ -7,6 +7,9 @@ bash $AddCmd
 export Kind=core
 bash $AddCmd
 
+export Kind=encode
+bash $AddCmd
+
 export Kind=decode
 bash $AddCmd
 

@@ -6,24 +6,25 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public interface IReport
     {
-        IReadOnlyList<string> HeaderFields {get;}
+        string[] HeaderNames {get;}
 
     }
     
-    public interface IReport<T> : IReport
-        where T : IRecord<T>
+    public interface IReport<R> : IReport
+        where R : IRecord<R>
     {
-        T[] Records {get;}
+        R[] Records {get;}
 
-        IReadOnlyList<string> IReport.HeaderFields 
-            =>  Reports.ReportHeaders<T>();
+        string[] IReport.HeaderNames 
+            =>  Reports.headers<R>();
 
-        T this[int index]
+        R this[int index]
             => Records[index];
         
         int RecordCount
@@ -33,8 +34,8 @@ namespace Z0
             => Records.Save(dst);         
     }
 
-    public interface IReport<F,T> : IReport<T>
-        where T : IRecord<F,T>
+    public interface IReport<F,R> : IReport<R>
+        where R : IRecord<F,R>
         where F : unmanaged, Enum
     {
 
@@ -50,5 +51,4 @@ namespace Z0
         EnumValues<F,int> FieldWidths
             => Enums.values<F,int>();
     }
-
 }

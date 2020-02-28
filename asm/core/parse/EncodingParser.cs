@@ -48,7 +48,7 @@ namespace Z0
                 //     print($"Parse failure: {matched}, {current.Uri}", AppMsgKind.Warning);
 
                 var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-                dst[i] = new ParsedEncodingRecord
+                dst[i] = ParsedEncodingRecord.Define
                 (
                      Sequence : current.Sequence,
                      Address : current.Address,
@@ -62,7 +62,7 @@ namespace Z0
 
             ReportDuplicates(dst.Select(x => x.Uri.OpId).Duplicates());
 
-            return AsmReports.Create(dst);
+            return AsmReports.ParsedEncodings(host.Path, dst);
         }
 
         static ByteParser<EncodingPatternKind> ByteParser(IAsmContext context, int size)

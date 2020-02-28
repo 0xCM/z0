@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.IO;
     using System.Text;
 
     using static Root;
@@ -25,7 +22,7 @@ namespace Z0
         /// <typeparam name="R">The source record type</typeparam>
         public static Option<FilePath> Save<R>(this R[] records, FilePath dst, char delimiter = AsciSym.Pipe, bool header = true, bool overwrite = true)
             where R : IRecord
-                => Reports.SaveReport(records, dst, delimiter, header,overwrite);
+                => Reports.save(records, dst, delimiter, header,overwrite);
 
         public static void AppendField(this StringBuilder sb, object content)
         {
@@ -69,21 +66,6 @@ namespace Z0
             where F : ICustomFormattable
         {            
             sb.Append($"{content?.Format()}".PadRight(pad));
-        }
-
-        public static void DelimitField<F>(this StringBuilder sb, F content, int pad, char delimiter)
-            where F : ICustomFormattable
-        {
-            sb.Append(text.rspace(delimiter));            
-            sb.Append($"{content?.Format()}".PadRight(pad));
-        }
-
-        public static void AppendField<F,T>(this StringBuilder sb, F content, T pad)
-            where F : ICustomFormattable
-            where T : unmanaged, Enum
-        {                        
-
-            sb.Append($"{content?.Format()}".PadRight(Enums.numeric<T,int>(pad)));
         }
 
         public static void DelimitField<F,T>(this StringBuilder sb, F content, T pad, char delimiter)

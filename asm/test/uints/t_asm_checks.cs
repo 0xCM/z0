@@ -18,10 +18,29 @@ namespace Z0
     using static NKT;
 
     public class t_asm_checks : t_asm<t_asm_checks>
-    {           
-        public void Execute()
+    {                   
+        void RunPipe()
         {
+            var archive =  Context.CodeArchive(AssemblyId.Intrinsics);
+            var source = archive.ToInstructionSource();
+            var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
+            var triggers = AsmTriggerSet.Define(trigger);
+            var flow =  Context.Flow(source, triggers);
+            var pipe = AsmInstructionPipe.From(Pipe); 
+            var results = flow.Flow(pipe).Force();
 
+            var count = 0;
+            foreach(var result in results)
+            {
+                foreach(var i in result)
+                {
+                    if(trigger.CanFire(i))
+                        count++;
+                }
+            }
+            
+            TraceCaller($"{listcount} instruction lists were processed out of {source.Instructions.Count()} available");
+            TraceCaller($"Trigger activate {activations} times");
         }
 
         void CheckImm(in AsmBuffers buffers)
@@ -89,7 +108,6 @@ namespace Z0
                 codeDst.Write(data);
                 var asm = decoder.DecodeFunction(data);
                 asmDst.Write(asm);
-
             }
         }
 
@@ -104,31 +122,6 @@ namespace Z0
                         
             return hex.TargetPath;            
         }
-
-        void RunPipe(in AsmBuffers buffers)
-        {
-            var archive =  Context.CodeArchive(AssemblyId.Intrinsics);
-            var source = archive.ToInstructionSource();
-            var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
-            var triggers = AsmTriggerSet.Define(trigger);
-            var flow =  Context.Flow(source, triggers);
-            var pipe = AsmInstructionPipe.From(Pipe); 
-            var results = flow.Flow(pipe).Force();
-
-            var count = 0;
-            foreach(var result in results)
-            {
-                foreach(var i in result)
-                {
-                    if(trigger.CanFire(i))
-                        count++;
-                }
-            }
-            
-            TraceCaller($"{listcount} instruction lists were processed out of {source.Instructions.Count()} available");
-            TraceCaller($"Trigger activate {activations} times");
-        }
-
 
         void CheckBinaryImm<T>(in AsmBuffers buffers, N128 w, string name, byte imm)
             where T : unmanaged

@@ -88,7 +88,7 @@ namespace Z0
                     return;
 
                 if(header)
-                    dst.Append(string.Join(delimiter, records[0].HeaderFields));
+                    dst.Append(string.Join(delimiter, records[0].HeaderNames));
                 
                 iter(records, r => dst.Append(r.DelimitedText(delimiter)));
             }

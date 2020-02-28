@@ -9,16 +9,16 @@ namespace Z0
     using System.Threading;
     using System.Reflection;
 
+    using static Root;
+
     public sealed class AsmContext : IAsmContext 
     {   
-        static int LastId = 0;
-
         /// <summary>
         /// Creates a new context with selected assemblies
         /// </summary>
         /// <param name="assemblies">The assemblies to share with the context</param>
         public static IAsmContext New(params IAssemblyResolution[] assemblies)
-            => New(AssemblyComposition.Assemble(assemblies));
+            => New(assemblies.Assemble());
 
         /// <summary>
         /// Creates a new context with an assembly composition
@@ -33,38 +33,39 @@ namespace Z0
         public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources)             
             => new AsmContext(AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.Default, CilFormatConfig.Default);
 
+        [MethodImpl(Inline)]
+        static AsmContext New(AsmContextData data)
+            => new AsmContext(Context.NextId(), data);
+
         AsmContext(IAssemblyComposition assemblies, IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
         {
-            this.Data = AsmContextData.Create(assemblies ?? AssemblyComposition.Empty, clrIndex, resources,format,cilFormat);
-            this.ContextId = Interlocked.Increment(ref LastId);
+            this.State = AsmContextData.Create(assemblies ?? AssemblyComposition.Empty, clrIndex, resources,format,cilFormat);
+            this.Identity = Context.NextId();
         }
 
-        AsmContext(int parentid, AsmContextData data)
+        AsmContext(int id, AsmContextData data)
         {
-            this.ParentId = parentid;
-            this.Data = data;
-            this.ContextId = Interlocked.Increment(ref LastId);
+            this.State = data;
+            this.Identity = id;
         }
 
-        AsmContextData Data;
+        readonly AsmContextData State;
         
-        public int ContextId {get;}
-
-        public int ParentId {get;}
+        public int Identity {get;}
 
         public IClrIndex ClrIndex 
-            => Data.ClrIndex;
+            => State.ClrIndex;
         
         public AsmFormatConfig AsmFormat 
-            => Data.AsmFormat;
+            => State.AsmFormat;
 
         public CilFormatConfig CilFormat
-            => Data.CilFormat;
+            => State.CilFormat;
         
         public IAssemblyComposition Compostion
-            => Data.Assemblies;
+            => State.Assemblies;
 
         public IAsmContext WithFormat(AsmFormatConfig config)
-            => new AsmContext(ContextId, AsmContextData.Create(Compostion, ClrIndex, Data.Resources, config, CilFormat));            
+            => New(AsmContextData.Create(Compostion, ClrIndex, State.Resources, config, CilFormat));            
     }   
 }

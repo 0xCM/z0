@@ -31,7 +31,7 @@ namespace Z0
         public CapturedEncodingReport CaptureHostOps(ApiHost src)
         {
             var ops = DefinedHostOps(src).ToArray();
-            var dst = new CapturedEncodingRecord[ops.Length];
+            var records = new CapturedEncodingRecord[ops.Length];
             var buffer = alloc<byte>(BufferLength);
             var reader = Context.ByteReader();
 
@@ -49,10 +49,10 @@ namespace Z0
                     OpSig : op.Source.Signature().Format(),
                     Data : EncodedData.Define(op.Address, buffer.Slice(0,length).ToArray())
                     );
-                dst[i] = record;
+                records[i] = record;
             }    
-
-            return CapturedEncodingReport.Create(src,dst);
+            var report = CapturedEncodingReport.Create(src.Path, records);
+            return report;
         }
 
         public IEnumerable<EncodedOp> DefinedHostOps(ApiHost host)

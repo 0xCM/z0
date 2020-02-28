@@ -31,6 +31,11 @@ namespace Z0
             where V : unmanaged
                 => Unsafe.Read<V>((V*)(&e));
 
+        [MethodImpl(Inline)]
+        public static V numeric<V>(Enum e)
+            where V : unmanaged
+                => (V)Convert.ChangeType(e, e.GetTypeCode());
+
         /// <summary>
         /// Reads a generic enum member from a generic value
         /// </summary>

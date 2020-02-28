@@ -13,6 +13,42 @@ namespace Z0
 
     public static class AsmCoreServices
     {
+        public static Option<ParsedEncodingReport> LoadParsedEncodings(this IAsmContext context, ApiHostPath host, char? delimiter = null)
+        {
+            var path = context.EmissionPaths().ParsedPath(host);
+            var sep = delimiter ?? text.pipe();
+            var model = ParsedEncodingReport.Empty;
+            
+            try
+            {            
+                var records = new List<ParsedEncodingRecord>();
+                var headers = Reports.headers<ParsedEncodingRecord>();
+                var count = 0;
+                
+                using var reader = path.Reader();
+                while(!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    if(count != 0)
+                    {
+                        var fields = line.SplitClean(sep);
+                        if(fields.Length != model.FieldCount)
+                            throw new Exception($"A line had an unexpected number of fields. Expected = {model.FieldCount}, Actual = {fields.Length}");                        
+                        //records.Add(ParsedEncodingRecord.FromFields(fields));
+                    }
+                        
+                    count++;                    
+                }                
+
+                return default;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return none<ParsedEncodingReport>();
+            }
+        }
+
         public static IAsmCodeIndex ToCodeIndex(this IEnumerable<AsmCode> code)
             => AsmCodeIndex.Create(code);
 

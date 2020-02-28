@@ -33,7 +33,7 @@ namespace Z0
             => Context.ActiveAssemblies();
 
         Option<FilePath> ReportEmissions(AssemblyId src, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
-            => AsmReports.Emissions(src, emitted, kind).Save();
+            => AsmReports.Emissions(src, emitted, kind).Save(AsmEmissionPaths.Current.EmissionPath(src, kind));
 
         CaptureTokenGroup[] EmitPrimary(in CaptureExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
         {

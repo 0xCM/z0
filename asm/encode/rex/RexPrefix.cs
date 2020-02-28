@@ -76,5 +76,9 @@ namespace Z0.Asm
 
         public string Format()
             => RexFormatter.Default.Format(this);
+
+        INumericFormatter<byte> INumericFormatProvider<byte>.Formatter
+            => NumericFormatters.get<byte>();        
+
     }
 }

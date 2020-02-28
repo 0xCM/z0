@@ -33,6 +33,7 @@ namespace Z0
         AsmEmissionPaths EmissionPaths
             => Context.EmissionPaths();
 
+
         void CreateLocationReport(AssemblyId id)
             => Context.MemberLocations(id).OnSome(report => report.Save());
 
@@ -56,10 +57,7 @@ namespace Z0
         }
 
         void Decode(ParsedEncodingRecord src, IAsmFunctionDecoder decoder,  IAsmFunctionWriter dst)
-        {
-            var parsed = src.ToParsedEncoding();
-            dst.Write(decoder.DecodeFunction(parsed));
-        }
+            => dst.Write(decoder.DecodeFunction(src));
 
         static void EmitCil(Assembly src)
         {
@@ -117,18 +115,10 @@ namespace Z0
         AsmCaptureSet RunHostCaptureFlow(ApiHost host)        
         {
             print($"Capturing {host}");
-            (var captured, var capturePath) = CaptureHostOps(host);            
-            (var parsed, var parsedPath) = ParseHostOps(host, captured);
-            var decodingPath = Decode(host, captured, parsed);
-            return new AsmCaptureSet
-            {
-                Host = host.Path,
-                CapturedPath = capturePath,
-                Captured = captured,
-                ParsedPath = parsedPath,
-                Parsed = parsed,
-                DecodedPath = decodingPath
-            };
+            (var captured, _) = CaptureHostOps(host);            
+            (var parsed, _) = ParseHostOps(host, captured);
+            var decoded = Decode(host, captured, parsed);
+            return AsmCaptureSet.Define(host.Path, captured, parsed, decoded);
         }
     }
 }

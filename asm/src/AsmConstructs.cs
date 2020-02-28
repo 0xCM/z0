@@ -9,11 +9,6 @@ namespace Z0.Asm
 
     using static zfunc;
 
-    public static class ConstructIdentifier
-    {
-        public const string Alloc = nameof(Alloc);
-    }
-
     [ApiHost("constructs")]
     public static class AsmConstructs
     {

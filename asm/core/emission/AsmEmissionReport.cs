@@ -3,25 +3,65 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
 
-    public readonly struct AsmEmissionReport : IAsmReport<AsmEmissionRecord>
+    using F = AsmEmissionField;
+    using R = AsmEmissionRecord;
+
+    public enum AsmEmissionField : ulong
+    {
+        TermCode = 0 | (20ul << 32),
+
+        Size = 1 | (8ul << 32),
+
+        Uri = 2 | (1ul << 32)
+    }
+
+    /// <summary>
+    /// Describes an assembly code emission
+    /// </summary>
+    public class AsmEmissionRecord : IRecord<F,R>
+    {    
+        public static AsmEmissionRecord Define(CaptureToken src)
+            => new AsmEmissionRecord(src);
+
+        AsmEmissionRecord(CaptureToken src)
+        {
+            this.TermCode = src.TermCode;
+            this.Size = (int)src.AddressRange.Length;
+            this.Uri = src.Uri;
+        }
+        
+        [ReportField(F.TermCode)]
+        public CaptureTermCode TermCode {get;}
+
+        [ReportField(F.Size)]
+        public int Size {get;}
+
+        [ReportField(F.Uri)]
+        public OpUri Uri {get;}
+
+        public string DelimitedText(char delimiter)
+        {
+            var dst = text.factory.Builder();
+            dst.AppendField(TermCode.ToString(), (int)((ulong)F.TermCode >> 32));
+            dst.DelimitField(Size.ToString(), (int)((ulong)F.Size >> 32), delimiter);
+            dst.DelimitField(Uri.Format(),delimiter);
+            return dst.ToString();
+        }
+    }
+
+    public class AsmEmissionReport :   Report<F,R>
     {             
         public AssemblyId Id {get;}
         
-        public AsmEmissionRecord[] Records {get;}
-
         public AsmEmissionKind EmissionKind {get;}
 
-        public FilePath ReportPath 
-            => AsmEmissionPaths.Current.EmissionPath(Id, EmissionKind);
-                
         public static AsmEmissionReport Create(AssemblyId id, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
         {
             if(emitted.Length == 0)
@@ -38,13 +78,10 @@ namespace Z0
         }
 
         AsmEmissionReport(AssemblyId id, AsmEmissionRecord[] records, AsmEmissionKind kind)
+            : base(records)
         {
             this.Id = id;
-            this.Records = records;            
             this.EmissionKind = kind;
         }
-
-        public Option<FilePath> Save()
-            => Records.Save(ReportPath); 
-    }
+   }    
 }

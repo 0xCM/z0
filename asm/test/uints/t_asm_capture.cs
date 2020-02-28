@@ -12,9 +12,22 @@ namespace Z0
     {
         public void capture_workflow()
         {                    
-                    
+
+            // var r1 = ParsedEncodingReport.Empty.Description;
+            // Trace(r1);
+
+            // var r2 = CapturedEncodingReport.Empty.Description;
+            // Trace(r2);
+
+            // var r3 = AsmEmissionReport.Empty.Description;
+            // Trace(r3);
+
+            var paths = Context.EmissionPaths();                    
             var workflow = Context.HostCaptureFlow();
-            workflow.Execute().Force();
+            foreach(var result in workflow.Execute())
+            {
+                Claim.exists(paths.ParsedPath(result.Host));                
+            }
         }
 
         public void call32_intr_pattern()

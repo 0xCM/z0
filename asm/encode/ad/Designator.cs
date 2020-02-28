@@ -6,18 +6,14 @@ namespace Z0.Designators
 {
     using System;
 
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class Asm : AssemblyResolution<Asm>
+    public sealed class AsmEncode : AssemblyResolution<AsmEncode>
     {
-        const AssemblyId Identity = AssemblyId.Asm;        
+        const AssemblyId Identity = AssemblyId.AsmEncode;        
 
         public override AssemblyId Id 
             => Identity;
 
         public override IOperationCatalog Operations 
             => new Catalog(Identity);
-
     }
 }

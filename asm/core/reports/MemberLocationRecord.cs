@@ -11,7 +11,7 @@ namespace Z0
     using F = MemberLocationField;
     using R = MemberLocationRecord;
 
-    enum MemberLocationField
+    enum MemberLocationField : ulong
     {
         Location = 16,
 
@@ -36,24 +36,20 @@ namespace Z0
             this.Member = member;
         }
 
-        [ReportField(LocationPad)]
+        [ReportField(F.Location)]
         public MemoryAddress Location {get;set;}
 
-        [ReportField(GapPad)]
+        [ReportField(F.Gap)]
         public ushort Gap {get;set;}
 
-        [ReportField]
+        [ReportField(F.Member)]
         public OpIdentity Member {get;set;}
-
-        const int LocationPad = 16;
-
-        const int GapPad  = 8;
 
         public string DelimitedText(char delimiter)
         {
             var dst = text.factory.Builder();
-            dst.AppendField(Location, LocationPad);
-            dst.DelimitField(Gap, GapPad, delimiter);
+            dst.AppendField(Location, 16);
+            dst.DelimitField(Gap, 8, delimiter);
             dst.DelimitField(Member, delimiter);
             return dst.ToString();
         }

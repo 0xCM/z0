@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
 
     public interface IFieldIndex<E>
         where E : IFieldIndexEntry

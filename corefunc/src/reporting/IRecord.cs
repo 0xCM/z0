@@ -16,22 +16,20 @@ namespace Z0
         /// </summary>
         string DelimitedText(char delimiter);
 
-        IReadOnlyList<string> HeaderFields {get;}        
+        string[] HeaderNames {get;}        
     }
 
-    public interface IRecord<T> : IRecord
-        where T : IRecord
+    public interface IRecord<R> : IRecord
+        where R : IRecord
     {
-        IReadOnlyList<string> IRecord.HeaderFields
-            =>  Reports.ReportHeaders<T>();
+        string[] IRecord.HeaderNames
+            =>  Reports.headers<R>();
     }
 
-    public interface IRecord<F,T> : IRecord<T>
-        where T : IRecord
+    public interface IRecord<F,R> : IRecord<R>
         where F : unmanaged, Enum
+        where R : IRecord
     {
 
     }   
-
-
 }

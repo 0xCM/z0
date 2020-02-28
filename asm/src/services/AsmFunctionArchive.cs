@@ -28,7 +28,6 @@ namespace Z0
 
         public FolderPath RootFolder {get;}
         
-
         public IAsmContext Context {get;}
 
         public AssemblyId Origin {get;}
@@ -65,7 +64,6 @@ namespace Z0
             this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
             this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
             this.CilFormatter = context.CilFormatter();
-
         }
         
         AsmFunctionArchive(IAsmContext context, AssemblyId catalog, string hostname)

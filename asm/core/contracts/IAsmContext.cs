@@ -8,12 +8,18 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+
+    public interface IAsmFormatContext : IAsmContext
+    {
+        
+    }
+
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IContext
+    public interface IAsmContext : IComposedContext<IAsmContext>
     {
-        int ContextId {get;}
+        int Identity {get;}
         
         IClrIndex ClrIndex {get;}
 
@@ -28,18 +34,10 @@ namespace Z0
         CilFormatConfig CilFormat {get;}
 
         /// <summary>
-        /// The assemblies available to the context
-        /// </summary>
-        IAssemblyComposition Compostion {get;}
-
-        /// <summary>
         /// Changes the default asm formatting configuration
         /// </summary>
         /// <param name="config">The new formatting configuration</param>
         IAsmContext WithFormat(AsmFormatConfig config);      
 
-        IEnumerable<AssemblyId> Assemblies
-            => from r in Compostion.Resolved
-                select r.Id;
     }
 }

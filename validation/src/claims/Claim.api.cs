@@ -529,8 +529,8 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool yea(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => src ? true : throw ClaimException.Define(NotTrue(msg, caller, file,line));
+        public static void yea(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            => src.IfNone(() => throw ClaimException.Define(NotTrue(msg, caller, file,line)));
 
         /// <summary>
         /// Asserts the operand is true
@@ -540,9 +540,9 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool yea<T>(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void yea<T>(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-            => src ? true : throw ClaimException.Define(NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line));
+                => src.IfNone(() => throw ClaimException.Define(NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line)));
 
         /// <summary>
         /// Asserts the operand is false
@@ -552,8 +552,8 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool nea(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => !src ? true : throw ClaimException.Define(NotFalse(msg, caller, file,line));
+        public static void nea(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            => src.IfSome(() => throw ClaimException.Define(NotFalse(msg, caller, file,line)));
 
         /// <summary>
         /// Asserts the pointer is not null
@@ -563,10 +563,13 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static unsafe bool notnull(void* p, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => (p != null) ? true : throw new ArgumentNullException(AppMsg.Define($"Pointer was null", AppMsgKind.Error, caller,file,line).ToString());
+        public static unsafe void notnull(void* p, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            => (p != null).IfNone(() => throw new ArgumentNullException(AppMsg.Define($"Pointer was null", AppMsgKind.Error, caller,file,line).ToString()));
 
         public static bool notnull<T>(T src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => !(src is null) ? true : throw new ArgumentNullException(AppMsg.Define($"Argument was null", AppMsgKind.Error, caller,file,line).ToString());
+
+        public static void exists(FilePath path,[Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            => path.Exists().IfNone(() => throw AppException.Define($"The file {path} does not exist", caller, file,line));
     }
 }

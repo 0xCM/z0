@@ -9,16 +9,21 @@ namespace Z0
 
     using static Root;
     
-
     public readonly struct ApiHostPath : IIdentity<ApiHostPath>, IParser<ApiHostPath>
     {
         public static ApiHostPath Empty = new ApiHostPath(AssemblyId.None, string.Empty);
         
         public readonly AssemblyId Owner;
 
-        public readonly string Name;
+        public readonly string Name;        
 
         public string Identifier {get;}
+
+        public FolderName HostFolder 
+            => FolderName.Define(Name);
+
+        public RelativeLocation HostLocation 
+            => RelativeLocation.Define(FolderName.Define(Owner.Format()), HostFolder);
         
         [MethodImpl(Inline)]
         static IParser<ApiHostPath> Parser()

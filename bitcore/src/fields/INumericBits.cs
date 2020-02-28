@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+    
+    using static Root;
 
     public interface IIndexedBits<F> : IBitField
         where F : unmanaged, Enum
@@ -28,7 +29,5 @@ namespace Z0
         where T : unmanaged
         where S : INumericBits<T>
     {        
-        INumericFormatter<T> INumericFormatProvider<T>.Formatter
-            => NumericFormatters.get<T>();        
     }
 }

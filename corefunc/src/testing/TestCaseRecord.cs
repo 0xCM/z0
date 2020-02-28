@@ -12,16 +12,16 @@ namespace Z0
     using F = TestCaseField;
     using R = TestCaseRecord;
 
-    enum TestCaseField
+    public enum TestCaseField : ulong
     {
 
-        Case = 75,
+        Case = 0 | (75ul << 32),
 
-        Succeeded = 10,
+        Succeeded =  1 | (10ul << 32),
 
-        Duration = 10,
+        Duration = 2  | (14ul << 32),
         
-        Executed = 1
+        Executed =  3 | (1ul << 32)
     }
 
     /// <summary>
@@ -45,25 +45,27 @@ namespace Z0
         }
 
         [ReportField(F.Case)]
-        public string Case {get;set;}
+        public string Case {get;}
 
         [ReportField(F.Succeeded)]
-        public bool Succeeded {get;set;}
+        public bool Succeeded {get;}
 
         [ReportField(F.Duration)]
-        public Duration Duration {get;set;}
+        public readonly Duration Duration;
 
         [ReportField(F.Executed)]
-        public DateTime Executed {get;set;}
+        public DateTime Executed {get;}
 
         public string DelimitedText(char delimiter)
         {
-            var dst = text.factory.Builder();
-            dst.AppendField(Case, F.Case);
-            dst.DelimitField(Succeeded ? YEA : BOO, F.Succeeded, delimiter);
-            dst.DelimitField(Duration, F.Duration, delimiter);
-            dst.DelimitField(Executed, delimiter);
+            var dst = Model.Formatter.Reset();
+            dst.AppendField(F.Case, Case);
+            dst.DelimitField(F.Succeeded, Succeeded, delimiter);
+            dst.DelimitField(F.Duration, Duration, delimiter);
+            dst.DelimitField(F.Executed, Executed, delimiter);
             return dst.ToString();
         }
+
+        static readonly Report<F,R> Model = Report<F,R>.Empty;
     }
 }

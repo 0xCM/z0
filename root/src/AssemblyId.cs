@@ -131,7 +131,9 @@ namespace Z0
         
         AsmCore = T30,
 
-        AsmDecode = T31,
+        AsmEncode = T31,
+        
+        AsmDecode = T32,
 
         Control = T50,        
 

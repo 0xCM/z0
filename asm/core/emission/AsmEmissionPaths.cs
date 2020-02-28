@@ -56,19 +56,27 @@ namespace Z0
 
         public FileName CaptureFileName(ApiHost host)
             => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName, IndicatorPrefix, CaptureWorkflow), CaptureFileExt);
-        
+
+        public FileName CaptureFileName(ApiHostPath host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name, IndicatorPrefix, CaptureWorkflow), CaptureFileExt);
+
         public FilePath CapturePath(ApiHost host) => CaptureDir + CaptureFileName(host);
-        
+
+        public FilePath CapturePath(ApiHostPath host) => CaptureDir + CaptureFileName(host);
+
         public FileExtension ParsedExt => FileExtensions.Csv;
 
         public FolderName ParsedFolder => FolderName.Define(ParseWorkflow);
-
-        public FolderPath ParsedDir(ApiHost host) => DataSubDir(ParsedFolder);
-
+    
         public FileName ParsedFileName(ApiHost host)
             => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), ParsedExt);
-        
-        public FilePath ParsedPath(ApiHost host) => ParsedDir(host) + ParsedFileName(host);
+
+        public FileName ParsedFileName(ApiHostPath host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), ParsedExt);
+
+        public FilePath ParsedPath(ApiHost host) => DataSubDir(ParsedFolder) + ParsedFileName(host);
+
+        public FilePath ParsedPath(ApiHostPath host) => DataSubDir(ParsedFolder) + ParsedFileName(host);
 
         public FileExtension DecodedExt => FileExtensions.Asm;
 
@@ -79,6 +87,10 @@ namespace Z0
         public FileName DecodedFileName(ApiHost host)
             => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), DecodedExt);
         
+
+        public FileName DecodedFileName(ApiHostPath host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), DecodedExt);
+
         public FilePath DecodedPath(ApiHost host) => DecodedDir + DecodedFileName(host);
 
         public FolderPath CilDir => DecodedDir;
@@ -88,7 +100,13 @@ namespace Z0
         public FileName CilFileName(ApiHost host)
             => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), CilExt);
 
+        public FileName CilFileName(ApiHostPath host)
+            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), CilExt);
+
         public FilePath CilPath(ApiHost host) => CilDir + CilFileName(host);
+
+
+        public FilePath CilPath(ApiHostPath host) => CilDir + CilFileName(host);
 
         public FolderPath AsmDumpDir => DataSubDir(FolderName.Define($"{IndicatorPrefix}dumps"));
 
@@ -113,9 +131,15 @@ namespace Z0
         public FileName LocationFileName(ApiHost host)
             => FileName.Define(text.concat(host.Owner.Format(), SuffixSep, host.HostName), LocationExt);
 
+
+        public FileName LocationFileName(ApiHostPath host)
+            => FileName.Define(text.concat(host.Owner.Format(), SuffixSep, host.Name), LocationExt);
+
         public FileName LocationFileName(AssemblyId assembly) => FileName.Define(assembly.Format(), LocationExt);    
 
         public FilePath LocationPath(ApiHost host) => LocationDir + LocationFileName(host);
+
+        public FilePath LocationPath(ApiHostPath host) => LocationDir + LocationFileName(host);
 
         public FilePath LocationPath(AssemblyId assembly) => LocationDir + LocationFileName(assembly);
 
@@ -161,6 +185,5 @@ namespace Z0
                 ArchiveFileKind.Cil  => CilPath(origin, host, id),
                 _  => FilePath.Empty,
             };
-
     }
 }

@@ -36,9 +36,7 @@ namespace Z0
         /// Covers the source resolutions with an assembly composition
         /// </summary>
         /// <param name="resolutions"></param>
-        /// <returns></returns>
         public static AssemblyComposition Assemble(this IEnumerable<IAssemblyResolution> resolutions)
             => AssemblyComposition.Assemble(resolutions.ToArray());
     }
-
 }

@@ -10,21 +10,23 @@ namespace Z0
     using System.Collections.Generic;
 
     /// <summary>
-    /// A context of everything and yet to everyting nothing
+    /// Charaterizes a component that maintains access to a context
     /// </summary>
-    public interface IContext
+    public interface IContextual
     {
-        
+        IContext Context {get;}
     }
 
     /// <summary>
-    /// A context with parameteric state
+    /// Charaterizes a component that maintains access to a context of a specific type
     /// </summary>
-    public interface IContext<S> : IContext
+    public interface IContextual<C> : IContextual
+        where C : IContext
     {
-        /// <summary>
-        /// State shared with members of the context
-        /// </summary>
-        S State {get;}
-    }
+        new C Context {get;}
+
+        IContext IContextual.Context
+            => Context;
+    }    
+
 }

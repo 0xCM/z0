@@ -70,8 +70,7 @@ namespace Z0
         public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, CaptureEmissionObserver observer)
             => AsmCatalogEmitter.Create(context, catalog, observer);
 
-
-       /// <summary>
+        /// <summary>
         /// Instantiates a contextual cil function emitter service
         /// </summary>
         /// <param name="context">The source context</param>
@@ -100,6 +99,5 @@ namespace Z0
         public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostPath host)
             => AsmHostArchive.Create(context, host);
     
-
     }
 }

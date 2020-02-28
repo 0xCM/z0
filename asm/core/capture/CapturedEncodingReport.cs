@@ -12,22 +12,22 @@ namespace Z0
     using F = CapturedEncodingField;
     using R = CapturedEncodingRecord;
 
-    public enum CapturedEncodingField
+    public enum CapturedEncodingField : ulong
     {
-        Sequence = 10,
+        Sequence = 0 | 10ul << 32,
 
-        Address = 16,
+        Address = 1 | 16ul << 32,
 
-        Length = 8,
+        Length = 2 | 8ul << 32,
 
-        Uri = 110,
+        Uri = 3 | 110ul << 32,
 
-        OpSig = 110,
+        OpSig = 4 | 110ul << 32,
 
-        Data = 1
+        Data = 5 | 1ul << 32
     }
 
-    public class CapturedEncodingRecord : IRecord<F, R>
+    public readonly struct CapturedEncodingRecord : IRecord<F, R>
     {
         public CapturedEncodingRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, EncodedData Data)
         {
@@ -40,61 +40,49 @@ namespace Z0
         }
         
         [ReportField(F.Sequence)]
-        public int Sequence {get;}
+        public readonly int Sequence;
 
         [ReportField(F.Address)]
-        public MemoryAddress Address {get;}
+        public readonly MemoryAddress Address;
 
         [ReportField(F.Length)]
-        public int Length {get;}
+        public readonly int Length;
 
         [ReportField(F.Uri)]
-        public OpUri Uri {get;}
+        public readonly OpUri Uri;
         
         [ReportField(F.OpSig)]
-        public string OpSig {get;}
+        public readonly string OpSig;
 
         [ReportField(F.Data)]
-        public EncodedData Data {get;}
+        public readonly EncodedData Data;
 
         public string DelimitedText(char sep)
         {
-            var dst = text.factory.Builder();
-            dst.AppendField(Sequence, F.Sequence);
-            dst.DelimitField(Address, F.Address, sep); 
-            dst.DelimitField(Length, F.Length, sep);
-            dst.DelimitField(Uri, F.Uri, sep);
-            dst.DelimitField(OpSig, F.OpSig, sep);
-            dst.DelimitField(Data, F.Data, sep);
-            return dst.ToString();
+            var dst = Model.Formatter.Reset();            
+            dst.AppendField(F.Sequence, Sequence);
+            dst.DelimitField(F.Address, Address, sep);
+            dst.DelimitField(F.Length, Length, sep);
+            dst.DelimitField(F.Uri, Uri, sep);
+            dst.DelimitField(F.OpSig, OpSig, sep);
+            dst.DelimitField(F.Data, Data, sep);
+            return dst.Format();            
         }
 
-        public IReadOnlyList<string> GetHeaders()
-            => Reports.ReportHeaders(GetType());
+        static Report<F,R> Model => Report<F,R>.Empty;
     }
 
-    public readonly struct CapturedEncodingReport : IReport<CapturedEncodingRecord>
-    {
-        public static CapturedEncodingReport Create(ApiHost src, CapturedEncodingRecord[] records)
+    public class CapturedEncodingReport : Report<F,R>
+    {        
+        public static CapturedEncodingReport Create(ApiHostPath src, CapturedEncodingRecord[] records)
             => new CapturedEncodingReport(src,records);
-
-        CapturedEncodingReport(ApiHost src, CapturedEncodingRecord[] records)
+        
+        CapturedEncodingReport(ApiHostPath src, CapturedEncodingRecord[] records)
+            : base(records)
         {
-            this.Source = src;
-            this.Records = records;
+            this.Host = src;
         }
         
-        public ApiHost Source {get;}
-
-        public CapturedEncodingRecord[] Records {get;}
-
-        public Option<FilePath> Save(FilePath dst)
-            => Records.Save(dst); 
-
-        public CapturedEncodingRecord this[int index]
-            => Records[index];                
-
-        public int RecordCount
-            => Records.Length;
+        public ApiHostPath Host {get;}    
     }    
 }

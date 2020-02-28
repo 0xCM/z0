@@ -10,8 +10,6 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static zfunc;
-
     public static class AsmReports
     {
         public static Option<Assembly> ResolvedAssembly(this IAsmContext context, AssemblyId id)
@@ -33,21 +31,9 @@ namespace Z0
         public static DataResourceReport Resources(AssemblyId id, DataResourceIndex resources)
             => DataResourceReport.Create(id, resources);
 
+        public static ParsedEncodingReport ParsedEncodings(ApiHostPath host, params ParsedEncodingRecord[] records)
+            => ParsedEncodingReport.Create(host,records);
 
-        public static ParsedEncodingReport Create(params ParsedEncodingRecord[] records)
-            => PER.Create(records);
-
-
-        readonly struct PER : ParsedEncodingReport
-        {        
-            public static ParsedEncodingReport Create(params ParsedEncodingRecord[] records)
-                => new PER(records);
-
-            PER(ParsedEncodingRecord[] records)
-                => this.Records = records;
-            
-            public ParsedEncodingRecord[] Records {get;}
-        }    
     }
 }
 

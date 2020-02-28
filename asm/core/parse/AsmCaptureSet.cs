@@ -8,13 +8,18 @@ namespace Z0
 
     public class AsmCaptureSet
     {
-        public ApiHostPath Host {get;set;}
-        
-        public FilePath CapturedPath {get;set;}
+        public static AsmCaptureSet Define(ApiHostPath host, CapturedEncodingReport captured, ParsedEncodingReport parsed, FilePath decoded)
+            => new AsmCaptureSet
+            {
+                Host = host,
+                Captured = captured,
+                Parsed = parsed,
+                DecodedPath = decoded
+            };
+
+        public ApiHostPath Host {get;set;}        
 
         public CapturedEncodingReport Captured {get;set;}
-
-        public FilePath ParsedPath {get;set;}
 
         public ParsedEncodingReport Parsed {get;set;}
 

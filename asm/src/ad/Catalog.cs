@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
+    using System.Collections.Generic;
 
-    public interface IAppService<C> : IService, IContextual<C>
-        where C : IContext
+    class Catalog : OpCatalog<Catalog>
     {
-        
+        public Catalog(AssemblyId id)
+            : base(id)
+        {
+
+        }       
     }
-
-    public interface IAppService : IAppService<IContext>
-    {
-
-    }     
 }

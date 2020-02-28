@@ -7,31 +7,50 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
 
     using F = ParsedEncodingField;
     using R = ParsedEncodingRecord;
 
-    public enum ParsedEncodingField
+    public enum ParsedEncodingField : ulong
     {
-        Sequence = 10,
+        Sequence = 0 | 10ul << 32,
 
-        Address = 16,
+        Address = 1 | 16ul << 32,
 
-        Length = 8,
+        Length = 2 | 8ul << 32,
 
-        TermCode = 20,
+        TermCode = 3 | 20ul << 32,
 
-        Uri = 110,
+        Uri = 4 | 110ul << 32,
 
-        OpSig = 110,
+        OpSig = 5 | 110ul << 32,
 
-        Data = 1
+        Data = 6 | 1ul << 32
     }    
 
-    public class ParsedEncodingRecord : IRecord<F, R>
+    public class ParsedEncodingReport : Report<F,R>
     {        
-        public ParsedEncodingRecord(int Sequence, MemoryAddress Address, int Length, CaptureTermCode TermCode, OpUri Uri, string OpSig, EncodedData Data)
+        public ApiHostPath Host {get;}
+        
+        public static ParsedEncodingReport Create(ApiHostPath host, params ParsedEncodingRecord[] records)
+            => new ParsedEncodingReport(host,records);
+
+        ParsedEncodingReport(ApiHostPath host, ParsedEncodingRecord[] records)
+            : base(records)
+        {
+            this.Host = host;
+        }       
+    }    
+
+    public readonly struct ParsedEncodingRecord : IRecord<F, R>
+    {        
+        public static implicit operator ParsedEncoding(ParsedEncodingRecord src)
+            => src.ToParsedEncoding();
+
+        public static ParsedEncodingRecord Define(int Sequence, MemoryAddress Address, int Length, CaptureTermCode TermCode, OpUri Uri, string OpSig, EncodedData Data)
+            => new ParsedEncodingRecord(Sequence, Address, Length, TermCode, Uri,OpSig,Data);
+        
+        ParsedEncodingRecord(int Sequence, MemoryAddress Address, int Length, CaptureTermCode TermCode, OpUri Uri, string OpSig, EncodedData Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -41,7 +60,7 @@ namespace Z0
             this.OpSig = OpSig;
             this.Data = Data;
         }
-
+        
         [ReportField(F.Sequence)]
         public int Sequence {get;}
 
@@ -65,23 +84,33 @@ namespace Z0
 
         public string DelimitedText(char sep)
         {
-            var dst = text.factory.Builder();
-            dst.AppendField(Sequence, F.Sequence);
-            dst.DelimitField(Address, F.Address, sep); 
-            dst.DelimitField(Length, F.Length,sep); 
-            dst.DelimitField(TermCode, F.TermCode, sep);
-            dst.DelimitField(Uri, F.Uri, sep);
-            dst.DelimitField(OpSig, F.OpSig, sep);
-            dst.DelimitField(Data, F.Data, sep);
-            return dst.ToString();
+            var dst = Model.Formatter.Reset();            
+            dst.AppendField(F.Sequence, Sequence);
+            dst.DelimitField(F.Address, Address, sep);
+            dst.DelimitField(F.Length, Length, sep);
+            dst.DelimitField(F.TermCode, TermCode, sep);
+            dst.DelimitField(F.Uri, Uri, sep);
+            dst.DelimitField(F.OpSig, OpSig, sep);
+            dst.DelimitField(F.Data, Data, sep);
+            return dst.Format();            
         }
 
-
-
-    }
-
-    public interface ParsedEncodingReport : IReport<F,R> { }
-
+        static Report<F,R> Model => Report<F,R>.Empty;
 
  
+        /// <summary>
+        /// Gets the parsed encoding described by the source record
+        /// </summary>
+        /// <param name="src">The source record</param>
+        public ParsedEncoding ToParsedEncoding()
+        {
+            var src = this;
+            var count = src.Length;
+            var op = OpDescriptor.Define(src.Uri, src.OpSig);
+            var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
+            var final = CaptureState.Define(op.Id, count, range.End, src.Data.LastByte);
+            var outcome = CaptureOutcome.Define(final, range, src.TermCode);
+            return ParsedEncoding.Define(op, outcome.TermCode, src.Data);
+        }
+    }
 }

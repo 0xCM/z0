@@ -3,14 +3,66 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    using static zfunc;
- 
+    using static Root;
+
+    using F = DataResourceField;
+    using R = DataResourceRecord;
+
+    public enum DataResourceField : ulong
+    {
+        Offset = 0 | (8 << 32),
+
+        Location = 1 | (16 << 32),
+
+        Length = 2 | (10 << 32),
+
+        Id = 3 | (1 << 32)
+    }
+
+    /// <summary>
+    /// Describes an assembly code emission
+    /// </summary>
+    public class DataResourceRecord : IRecord<F,R>
+    {    
+        public static DataResourceRecord Create(ushort offset, ulong location, int length, string id)
+            => new DataResourceRecord(offset, location, length, id);
+
+        DataResourceRecord(ushort Offset, ulong location, int length, string id)
+        {
+            this.Offset =Offset;
+            this.Location = location;
+            this.Length = length;
+            this.Id = id;
+        }
+
+        [ReportField(F.Offset)]
+        public ushort Offset {get; set;}
+
+        [ReportField(F.Location)]
+        public ulong Location {get; set;}
+
+        [ReportField(F.Length)]
+        public int Length {get; set;}
+
+        [ReportField(F.Id)]
+        public string Id {get; set;}
+
+        public string DelimitedText(char delimiter)
+        {
+            var dst = text.factory.Builder();
+            dst.AppendField(Offset.FormatAsmHex(), 8);
+            dst.DelimitField(Location.FormatAsmHex(),16, delimiter); 
+            dst.DelimitField(Length.FormatAsmHex(4),10,delimiter); 
+            dst.DelimitField(Id,delimiter);                        
+            return dst.ToString();
+        }
+    }
+
     public readonly struct DataResourceReport : IAsmReport<DataResourceRecord>
     {        
         public readonly AssemblyId Id;
@@ -50,5 +102,5 @@ namespace Z0
             }
             return records.ToArray();
         }
-   }
+   }    
 }
