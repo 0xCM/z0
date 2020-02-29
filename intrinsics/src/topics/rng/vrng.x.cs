@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w));
+                => random.Blocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w));
+                => random.Blocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a random 128-bit cpu vector
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, Interval<T> domain, Func<T,bool> filter)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w, domain, 1, filter));
+                => random.Blocks<T>(w, domain, 1, filter).LoadVector();
 
         /// <summary>
         /// Produces a random 128-bit cpu vector
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, Interval<T> domain)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w,domain,1));
+                => random.Blocks<T>(w,domain,1).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, Interval<T> domain, Func<T,bool> filter)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w, domain, 1, filter));
+                => random.Blocks<T>(w, domain, 1, filter).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -107,7 +107,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, Interval<T> domain)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w,domain,1));
+                => random.Blocks<T>(w,domain,1).LoadVector();
 
         /// <summary>
         /// Produces a random 512-bit cpu vector
@@ -120,7 +120,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, Interval<T> domain, Func<T,bool> filter)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks(w, domain, 1, filter));
+                => random.Blocks(w, domain, 1, filter).LoadVector();
 
         /// <summary>
         /// Produces a random 512-bit cpu vector
@@ -145,7 +145,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, T min, T max, Func<T,bool> filter)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks(w, (min, max), 1, filter));
+                => random.Blocks(w, (min, max), 1, filter).LoadVector();
 
         /// <summary>
         /// Produces a random 128-bit cpu vector
@@ -158,7 +158,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, T min, T max)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks(w,(min, max), 1,(Func<T,bool>)null));
+                => random.Blocks(w,(min, max), 1,(Func<T,bool>)null).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -171,7 +171,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 n, T min, T max, Func<T,bool> filter)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks(n, (min, max), 1, filter));
+                => random.Blocks(n, (min, max), 1, filter).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -184,7 +184,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 n, T min, T max)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks(n, (min, max), 1, (Func<T,bool>)null));
+                => random.Blocks(n, (min, max), 1, (Func<T,bool>)null).LoadVector();
 
         /// <summary>
         /// Produces a random 512-bit cpu vector
@@ -197,7 +197,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 n, T min, T max, Func<T,bool> filter)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks(n, (min, max),1, filter));
+                => random.Blocks(n, (min, max),1, filter).LoadVector();
 
         /// <summary>
         /// Produces a random 128-bit cpu vector
@@ -209,7 +209,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, T t)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w,1));
+                => random.Blocks<T>(w,1).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -221,7 +221,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, T t)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w,1));
+                => random.Blocks<T>(w,1).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -233,16 +233,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, T t)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks<T>(w,1));
+                => random.Blocks<T>(w,1).LoadVector();
 
-         /// <summary>
+        /// <summary>
         /// Produces a random permutation of a specified length
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
         public static Perm Perm(this IPolyrand random, int n)
-            => Z0.permute.identity(n).Shuffle(random);
+            => permute.identity(n).Shuffle(random);
 
         /// <summary>
         /// Produces a random permutation of a specified length

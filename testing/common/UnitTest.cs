@@ -201,57 +201,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Verifies that two 128-bit vectorized binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
-            where T : unmanaged
-        {
-            void check()
-            {
-                var w = n128;
-                var t = default(T);
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
-                    Claim.eq(f(x,y), g.Apply(x,y));
-                }            
-            }
-
-            CheckAction(check, name);      
-
-        }
-
-        /// <summary>
-        /// Verifies that two 256-bit vectorized binary operators agree over a random set of points
-        /// </summary>
-        /// <param name="f">The first operator, considered as a basline</param>
-        /// <param name="fId">The identity of the first operator</param>
-        /// <param name="g">The second operator, considered as the operation under test</param>
-        /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
-            where T : unmanaged
-        {
-            void check()
-            {
-                var w = n256;
-                var t = default(T);
-                for(var i=0; i<RepCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
-                    Claim.eq(f(x,y), g.Apply(x,y));
-                }
-            }      
-
-            CheckAction(check, name);      
-        }
-
-        /// <summary>
         /// Manages the execution of an action test case
         /// </summary>
         /// <param name="f">The action under test</param>

@@ -6,13 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.src.csproj" />
-    <ProjectReference Include="$(TopDir)validation/src/z0.validation.csproj" />
-    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.src.csproj" />    
   </ItemGroup>
 
