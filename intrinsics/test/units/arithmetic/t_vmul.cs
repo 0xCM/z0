@@ -108,7 +108,6 @@ namespace Z0
             var a0 = vpattern.vincrements(ws,1u);
             var a1 = vpattern.vincrements(ws,a0.LastCell() + 1);
             var b0 = dinx.vmul(a0,a1);
-            //var b1 = dinx.vmul(dinx.vperm4x32(a0, Perm4L.BADC), dinx.vperm4x32(a1, Perm4L.BADC));
             var b1 = dinx.vmul(dinx.vswaphl(a0), dinx.vswaphl(a1));
             Trace("x",a0.Format());
             Trace("y",a1.Format());
@@ -159,8 +158,8 @@ namespace Z0
             var t = z32;
             var s = z16;
             
-            var zb = blocks.single(w,t);
-            var eb = blocks.single(w,t);            
+            var zb = blocks.single(n512,t);
+            var eb = blocks.single(n512,t);            
             var count = CpuVector.vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)

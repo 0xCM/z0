@@ -54,7 +54,7 @@ namespace Z0
             => IdentityCommons.IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
+        public int CompareTo(ApiHostPath other)
             => IdentityCommons.IdentityCompare(this, other);
  
         public override int GetHashCode()

@@ -10,10 +10,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+
     using NK = NumericKind;
     using NT = NumericType;
     using NI = NumericIndicator;
-
 
     public static class NumericExtensions
     {
@@ -24,6 +24,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NK NumericKind(this Type src)
             => Numeric.kind(src);
+
+        /// <summary>
+        /// Determines the numeric kind identified by a type code, if any
+        /// </summary>
+        /// <param name="tc">The type code to evaluate</param>
+        [MethodImpl(Inline)]
+        public static NumericKind NumericKind(this TypeCode tc)
+            => Numeric.kind(tc);
 
         /// <summary>
         /// Returns true if the source type represents a primal numeric type
@@ -77,7 +85,7 @@ namespace Z0
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline)]
         public static bool Is(this NumericKind k, NK match)        
-            => Numeric.@is(k,match);
+            => Numeric.contains(k,match);
 
         /// <summary>
         /// Tests whether the source kind, considered as a bitfield, contains the match id
@@ -86,7 +94,7 @@ namespace Z0
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline)]
         public static bool Is(this NK k, NumericId match)        
-            => Numeric.@is(k,match);
+            => Numeric.contains(k,match);
 
         /// <summary>
         /// Enumerates the distinct numeric kinds represented by the (bitfield) source kind
@@ -143,7 +151,7 @@ namespace Z0
             if(t == typeof(bit))
                 return NI.Unsigned; 
             var i = t.NumericKind().Indicator();
-            return i.IsSome() ? some(i) : none<NI>(); //Option.some(i.ToChar()) : Option.none<char>();
+            return i.IsSome() ? some(i) : none<NI>();
         }
 
         /// <summary>

@@ -32,6 +32,28 @@ namespace Z0
                 => Unsafe.Read<V>((V*)(&e));
 
         /// <summary>
+        /// Determines whether an enum has a specified integral value
+        /// </summary>
+        /// <param name="v">The test value</param>
+        /// <typeparam name="E">The enum source type</typeparam>
+        /// <typeparam name="V">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool defined<E,V>(V v)
+            where E : unmanaged, Enum
+            where V : unmanaged
+                => Enum.IsDefined(typeof(E), v);
+
+        /// <summary>
+        /// Determines whether an enum defines a name-identified literal
+        /// </summary>
+        /// <param name="name">The test name</param>
+        /// <typeparam name="E">The enum source type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool defined<E>(string name)
+            where E : unmanaged, Enum
+                => Enum.IsDefined(typeof(E), name);
+
+        /// <summary>
         /// Reads a generic numeric value from a boxed enum
         /// </summary>
         /// <param name="e">The enum value to reinterpret</param>
@@ -40,6 +62,15 @@ namespace Z0
         public static V numeric<V>(Enum e)
             where V : unmanaged
                 => (V)Convert.ChangeType(e, e.GetTypeCode());
+
+        /// <summary>
+        /// Determines an enumeration's underlying kind
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static EnumKind kind<E>()
+            where E : unmanaged, Enum
+                => (EnumKind)default(E).GetTypeCode();
 
         /// <summary>
         /// Reads a generic enum member from a generic value
@@ -52,6 +83,18 @@ namespace Z0
             where E : unmanaged, Enum
             where V : unmanaged
                 => Unsafe.Read<E>((E*)&v);
+        
+        /// <summary>
+        /// Puts an enum value into a (numeric) box
+        /// </summary>
+        /// <param name="e">The enumeration value</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static BoxedNumber box<E>(E e)
+            where E : unmanaged, Enum
+                => BoxedNumber.Define(Convert.ChangeType(e, 
+                    kind<E>().TypeCode()), 
+                    kind<E>().NumericKind());
 
         /// <summary>
         /// Gets the literals defined by an enumeration

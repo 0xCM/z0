@@ -83,8 +83,13 @@ namespace Z0
         public static IEnumerable<Type> Interfaces(this Type src)
             => src.GetInterfaces() ?? new Type[]{};
 
+        /// <summary>
+        /// For a system-defined type, returns the C#-specific keyword for the type if it has one; 
+        /// otherwise, returns an empty string
+        /// </summary>
+        /// <param name="src">The type to test</param>
         [MethodImpl(Inline)]
-        public static string PrimitiveKeyword(this Type src)
+        public static string SystemKeyword(this Type src)
         {
             if(src.IsSByte())
                 return "sbyte";
@@ -119,7 +124,39 @@ namespace Z0
             else if(src.IsObject())
                 return "object";
             else 
-                return default;
+                return string.Empty;
+        }
+
+        /// <summary>
+        /// For a numeric type, returns the C#-specific keyword for the type; 
+        /// otherwise, returns an empty string
+        /// </summary>
+        /// <param name="src">The type to test</param>
+        [MethodImpl(Inline)]
+        public static string NumericKeyword(this Type src)
+        {
+            if(src.IsSByte())
+                return "sbyte";
+            else if(src.IsByte())
+                return "byte";
+            else if(src.IsUInt16())
+                return "ushort";
+            else if(src.IsInt16())
+                return "short";
+            else if(src.IsInt32())
+                return "int";
+            else if(src.IsUInt32())
+                return "uint";
+            else if(src.IsInt64())
+                return "long";
+            else if(src.IsUInt64())
+                return "ulong";
+            else if(src.IsSingle())
+                return "float";
+            else if(src.IsDouble())
+                return "double";
+            else 
+                return string.Empty;
         }
     }
 }

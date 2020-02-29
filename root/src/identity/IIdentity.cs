@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static IdentityCommons;
 
     public interface IIdentity : ICustomFormattable, IComparable
     {
@@ -22,22 +21,23 @@ namespace Z0
         
         [MethodImpl(Inline)]
         string ICustomFormattable.Format()
-            => IdentityFormat(this);
-        
+            => text.denullify(Identifier);
+
         [MethodImpl(Inline)]
         int IComparable.CompareTo(object src)
-            => IdentityCompare(this, src as IIdentity);
+            => text.denullify(Identifier).CompareTo((src as IIdentity)?.Identifier);
     }
 
     public interface IIdentity<T> :  IIdentity, IEquatable<T>, IFormattable<T>, IComparable<T>
         where T : IIdentity<T>, new()
     {
+ 
         [MethodImpl(Inline)]
         bool IEquatable<T>.Equals(T src)
-            => IdentityEquals(this, src);
+            => text.equals(Identifier, src?.Identifier);
 
         [MethodImpl(Inline)]
         int IComparable<T>.CompareTo(T src)
-            => IdentityCompare(this, src);
+            => text.denullify(Identifier).CompareTo(src?.Identifier); 
     }    
 }

@@ -13,9 +13,6 @@ namespace Z0
         public static AppException Define(AppMsg msg)
             => new AppException(msg);
 
-        public static AppException Define(AppMsg msg, string caller, string file, int? line)
-            => new AppException(msg.WithCallerInfo(caller,file,line));
-
         public static AppException Define(string msg, string caller, string file, int? line)
             => new AppException(msg, caller, file, line);
 
@@ -24,7 +21,7 @@ namespace Z0
         public AppException(AppMsg msg) 
             : base(msg.ToString()) 
             { 
-                this.Message = msg;
+                this.Message = msg.AsKind(AppMsgKind.Error);
                 this.Caller = Message.Caller;
                 this.File = Message.CallerFile;
                 this.Line = Message.FileLine;
@@ -33,7 +30,7 @@ namespace Z0
         public AppException(string msg, string caller, string file, int? line) 
             : base(msg.ToString()) 
             { 
-                this.Message = AppMsg.Define($"{caller} line {line} {file}: {msg}", AppMsgKind.Error, caller, file, line);
+                this.Message = AppMsg.Error($"{caller} line {line} {file}: {msg}", caller, file, line);
                 this.Caller = Message.Caller;
                 this.File = Message.CallerFile;
                 this.Line = Message.FileLine;

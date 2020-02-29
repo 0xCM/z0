@@ -23,13 +23,12 @@ namespace Z0
         public static N512 N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<T>(in Block512<T> src)
+        public static explicit operator Span<T>(in Block512<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(in Block512<T> src)
+        public static explicit operator ReadOnlySpan<T>(in Block512<T> src)
             => src.data;
-
 
         [MethodImpl(Inline)]
         internal Block512(Span<T> src)
@@ -116,6 +115,7 @@ namespace Z0
             get => data.AsBytes();
         }
 
+
         /// <summary>
         /// Mediates access to the the underlying storage cells via block index and block-relative cell index
         /// </summary>
@@ -179,5 +179,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
             => ref data.GetPinnableReference();                           
+        
+        
     }
 }

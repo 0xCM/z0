@@ -5,21 +5,25 @@
 namespace Z0.Asm
 {        
     using System;
-    using static zfunc;
+    using System.Runtime.CompilerServices;
+    
+    using static Root;
 
     public readonly struct AsmInstructionCode
     {
+        public readonly string Definition;
+
+        public readonly string OpCode;
+
+        [MethodImpl(Inline)]
         public static AsmInstructionCode Define(string def, string opcode)
             => new AsmInstructionCode(def,opcode);
 
+        [MethodImpl(Inline)]
         AsmInstructionCode(string def, string opcode)
         {
             this.Definition = def;
             this.OpCode = opcode;
         }
-
-        public readonly string Definition;
-
-        public readonly string OpCode;
     }
 }

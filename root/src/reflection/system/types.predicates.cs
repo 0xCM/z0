@@ -250,15 +250,18 @@ namespace Z0
         /// Determines whether a type is a non-numeric primitive
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static bool IsPrimalNonNumeric(this Type src)
+        public static bool IsNonNumericSystemType(this Type src)
             => src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString() || src.IsObject();
 
         /// <summary>
-        /// Determines whether a type is a primitive
+        /// Determines whether a type is system-defined
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static bool IsPrimal(this Type src)
-            => src.IsNumeric() || src.IsPrimalNonNumeric();
+        public static bool IsSystemType(this Type src)
+            => src.IsNumeric() || src.IsNonNumericSystemType();
+        
+        public static bool IsCoreClrType(this Type src)
+            => src.Assembly == typeof(int).Assembly;
 
         public static GenericKind GenericKind(this Type src, bool effective)
             =>   src.IsOpenGeneric(false) ? GK.Open 

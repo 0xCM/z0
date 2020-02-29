@@ -11,8 +11,7 @@ namespace Z0.Asm
     using System.Linq;
     
     using static Root;
-        
-         
+                 
     /// <summary>
     /// Defines a contiguous instruction sequence
     /// </summary>

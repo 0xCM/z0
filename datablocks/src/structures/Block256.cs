@@ -30,7 +30,6 @@ namespace Z0
         public static implicit operator ReadOnlySpan<T>(in Block256<T> src)
             => src.data;
 
-
         [MethodImpl(Inline)]
         internal Block256(Span<T> src)
             => this.data = src;

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     
     using Z0.Asm;
-    
+    using static Root;    
+
     using static Z0.Asm.OpKind;
     using static FixedWidth;
     
@@ -187,7 +188,7 @@ namespace Z0
             
             if(kind.IsMemory())
             {
-                var info = new AsmMemInfo();
+                var info = AsmMemInfo.Init(src.MemorySize, src.MemorySize.Format());
                 info.Size = src.MemorySize;
                 info.SizeFormat = src.MemorySize.Format();
 
@@ -213,7 +214,7 @@ namespace Z0
                 return info;
             }
 
-            return default;
+            return none<AsmMemInfo>();
         }
 
         /// <summary>
@@ -225,11 +226,11 @@ namespace Z0
         {
             var kind = src.GetOpKind(index);
             if(!kind.IsImmediate())
-                return default;
+                return none<ImmInfo>();
 
             int size = kind.ImmediateSize();
             if(size == 0)
-                return default;
+                return none<ImmInfo>();
 
             var signed = kind.IsSignExtendedImmediate();
             var imm = src.GetImmediate(index);
@@ -253,7 +254,7 @@ namespace Z0
                     else 
                         return ImmInfo.Define(size, imm);
                 default:
-                    return default;
+                    return none<ImmInfo>();
             }
         }
 
@@ -265,19 +266,19 @@ namespace Z0
                 switch(kind)
                 {
                     case NearBranch16:
-                        return AsmBranchInfo.Define(16, src.NearBranch16, true, baseaddress);
+                        return AsmBranchInfo.Define(baseaddress, src.NearBranch16, 16, true);
                     case NearBranch32:
-                        return AsmBranchInfo.Define(32, src.NearBranch32, true, baseaddress);
+                        return AsmBranchInfo.Define(baseaddress, src.NearBranch32, 32, true);
                     case NearBranch64:
-                        return AsmBranchInfo.Define(64, src.NearBranch64, true, baseaddress);
+                        return AsmBranchInfo.Define(baseaddress, src.NearBranch64, 64, true);
                     case FarBranch16:
-                        return AsmBranchInfo.Define(16, src.FarBranch16, false, baseaddress);
+                        return AsmBranchInfo.Define(baseaddress, src.FarBranch16, 16,  false);
                     case FarBranch32:
-                        return AsmBranchInfo.Define(32, src.FarBranch32, false, baseaddress);
+                        return AsmBranchInfo.Define(baseaddress, src.FarBranch32, 32, false);
                 }
             }
 
-            return default;
+            return none<AsmBranchInfo>();
         }
 
         /// <summary>
@@ -286,11 +287,16 @@ namespace Z0
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
         public static Option<AsmRegisterInfo> RegisterInfo(this Instruction src, int index)
-            => src.GetOpKind(index).IsRegister() ? new AsmRegisterInfo(src.GetOpRegister(index)) : default;
+            => src.GetOpKind(index).IsRegister() 
+            ? new AsmRegisterInfo(src.GetOpRegister(index)) 
+            : none<AsmRegisterInfo>();
 
         public static AsmInstructionInfo SummarizeInstruction(this Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset, ulong baseaddress)
-            => AsmInstructionInfo.Define((ushort)offset, content, src.InstructionCode,  src.SummarizeOperands(baseaddress),  
-                    encoded.Slice(offset, src.ByteLength).ToArray());
+            => AsmInstructionInfo.Define((ushort)offset, 
+                content, 
+                src.InstructionCode,
+                src.SummarizeOperands(baseaddress),
+                encoded.Slice(offset, src.ByteLength).ToArray());
 
         /// <summary>
         /// Extracts operand information from an instruction
@@ -307,10 +313,10 @@ namespace Z0
         public static AsmOperandInfo OperandInfo(this Instruction src, int index, ulong baseaddress)
             => AsmOperandInfo.Define(index, 
                 src.GetOpKind(index),
-                src.ImmediateInfo(index).ValueOrDefault(), 
-                src.MemoryInfo(index).ValueOrDefault(), 
-                src.RegisterInfo(index).ValueOrDefault(), 
-                src.BranchInfo(index,baseaddress).ValueOrDefault()
+                src.ImmediateInfo(index),
+                src.MemoryInfo(index),
+                src.RegisterInfo(index),
+                src.BranchInfo(index,baseaddress)
                 );
         
         const NumericIndicator nf = NumericIndicator.Float;

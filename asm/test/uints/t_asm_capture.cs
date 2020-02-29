@@ -21,9 +21,14 @@ namespace Z0
             }
         }
 
+
         void OnWorkflowComplete(in AsmCaptureSet src)
         {
             Trace($"Completed capture workflow for {src.Host}");
+            foreach(var f in src.Decoded)
+            {
+                
+            }
         }
 
         public void call32_intr_pattern()

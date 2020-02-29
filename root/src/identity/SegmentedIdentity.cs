@@ -10,8 +10,9 @@ namespace Z0
 
     using static Root;
     using static IdentityCommons;
+    using static text;
 
-    public readonly partial struct SegmentedIdentity : ITypeIdentity<SegmentedIdentity>
+    public readonly struct SegmentedIdentity : ITypeIdentity<SegmentedIdentity>
     {        
         public static SegmentedIdentity Empty => Define(TypeIndicator.Empty, FixedWidth.None, NumericKind.None);
 
@@ -26,6 +27,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static SegmentedIdentity Define(TypeIndicator indicator, FixedWidth typewidth, NumericKind segkind)
             => new SegmentedIdentity(indicator, typewidth,segkind);
+
+        public static SegmentedIdentity Define(TypeIndicator si, int totalwidth, int segwidth, char ni)
+        {
+            if(Enum.IsDefined(typeof(FixedWidth), (uint)totalwidth) &&
+                Enum.IsDefined(typeof(FixedWidth),(uint)segwidth) &&
+                Enum.IsDefined(typeof(NumericIndicator), (ushort)ni)
+            ) return Define(si, (FixedWidth)totalwidth, ((FixedWidth)segwidth).ToNumericKind((NumericIndicator)ni));
+            else
+                return Empty;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator string(SegmentedIdentity src)
@@ -64,7 +75,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(SegmentedIdentity src)
             => IdentityEquals(this, src);
-
  
         public int CompareTo(SegmentedIdentity src)
             => IdentityCompare(this, src);
@@ -78,23 +88,13 @@ namespace Z0
         public override string ToString()
             => Identifier;
 
-        static SegmentedIdentity Define(TypeIndicator si, int totalwidth, int segwidth, char ni)
-        {
-            if(Enum.IsDefined(typeof(FixedWidth),(uint)totalwidth) &&
-                Enum.IsDefined(typeof(FixedWidth),(uint)segwidth) &&
-                Enum.IsDefined(typeof(NumericIndicator), (ushort)ni)
-            ) return Define(si, (FixedWidth)totalwidth, ((FixedWidth)segwidth).ToNumericKind((NumericIndicator)ni));
-            else
-                return Empty;
-        }
-
         public static bool TryParse(string src, out SegmentedIdentity dst)
         {
             dst = default;
             if(src.Length == 0)
                 return false;
 
-            var indicator = Z0.TypeIndicator.Define(src[0]);
+            var indicator = TypeIndicator.Define(src[0]);
             var startidx = 0;
             for(var i=0; i<src.Length; i++)
             {
@@ -105,18 +105,22 @@ namespace Z0
                 }
             }
             
-            var parts = src.Substring(startidx).Split(IDI.SegSep, StringSplitOptions.RemoveEmptyEntries);
+            var parts = split(slice(src,startidx), IDI.SegSep);
             if(parts.Length == 2)
             {
                 var part0 = parts[0];
                 var part1 = parts[1];
 
-                var segtext = part0[0] == IDI.Generic ? part0.Substring(1, part0.Length - 1): part0;
+                var segtext = part0[0] 
+                    == IDI.Generic 
+                    ? slice(part0, 1, part0.Length - 1) 
+                    : part0;
+
                 if(uint.TryParse(segtext, out var n))
                 {
                     if(Enum.IsDefined(typeof(FixedWidth),n))
                     {
-                        var bytext = part1.Substring(0, part1.Length - 1);
+                        var bytext = slice(part1,0, part1.Length - 1);                        
                         if(uint.TryParse(bytext, out var by))
                         {                                
                             if(Enum.IsDefined(typeof(FixedWidth), by))
@@ -130,6 +134,5 @@ namespace Z0
             }
             return false;
         }
-
     }
 }

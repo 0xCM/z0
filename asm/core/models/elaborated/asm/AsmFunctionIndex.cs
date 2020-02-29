@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
 
     public class AsmFunctionIndex
     {
@@ -25,7 +25,7 @@ namespace Z0
             foreach(var item in src.Members)            
             {
                 if(!index.TryAdd(item.Id, item))
-                    throw appFail(AppMsg.Error($"Duplicate identifier found: Id = {item.Id}"));
+                    errors.Throw($"Duplicate identifier found: Id = {item.Id}");
             }
         }
         
@@ -44,6 +44,5 @@ namespace Z0
                 from i in  f.Instructions
                 where i.Mnemonic == mnemonic
                 select f;
-
     }
 }

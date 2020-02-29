@@ -22,45 +22,48 @@ namespace Z0
         TestCaseRecord ReportOutcome(string casename, bool succeeded, TimeSpan duration);
 
         void ISink<TestCaseRecord>.Accept(in TestCaseRecord src)
-            => ReportOutcome(src.Case, src.Succeeded, src.Duration);
+            => ReportOutcome(src.Case, src.Status != 0, src.Duration);
     }
         
     public enum TestCaseField : ulong
     {
-        Case = 0 | (75ul << 32),
+        Case = 0 | (80ul << 32),
 
-        Succeeded =  1 | (10ul << 32),
+        Status =  1 | (14ul << 32),
 
         Duration = 2  | (14ul << 32),
         
-        Executed =  3 | (1ul << 32)
+        Executed =  3 | (26ul << 32)
+    }
+
+    public enum TestCaseStatus : byte
+    {
+        Failed = 0,
+
+        Passed = 1
     }
 
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
     public class TestCaseRecord : IRecord<F,R>
-    {
-        const string YEA = "verified";
+    {        
+        public static TestCaseRecord Define(string name, bool succeeded, Duration duration)
+            => new TestCaseRecord(name, succeeded, duration);
         
-        const string BOO = "failed";
-
-        public static TestCaseRecord Define(string name, bool success, Duration duration)
-            => new TestCaseRecord(name, success, duration);
-        
-        TestCaseRecord(string Case, bool Succeeded, Duration Duration)
+        TestCaseRecord(string name, bool succeeded, Duration duration)
         {
-            this.Case = Case;
-            this.Succeeded = Succeeded;
-            this.Duration = Duration;
+            this.Case = name;
+            this.Status = succeeded ? TestCaseStatus.Passed : TestCaseStatus.Failed;
+            this.Duration = duration;
             this.Executed = now();
         }
 
         [ReportField(F.Case)]
         public string Case {get;}
 
-        [ReportField(F.Succeeded)]
-        public bool Succeeded {get;}
+        [ReportField(F.Status)]
+        public TestCaseStatus Status {get;}
 
         [ReportField(F.Duration)]
         public readonly Duration Duration;
@@ -72,8 +75,8 @@ namespace Z0
         {
             var dst = Model.Formatter.Reset();
             dst.AppendField(F.Case, Case);
-            dst.DelimitField(F.Succeeded, Succeeded, delimiter);
-            dst.DelimitField(F.Duration, Duration, delimiter);
+            dst.DelimitField(F.Status, Status, delimiter);
+            dst.DelimitField(F.Duration, Duration, delimiter);            
             dst.DelimitField(F.Executed, Executed, delimiter);
             return dst.ToString();
         }

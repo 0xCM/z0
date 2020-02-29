@@ -82,7 +82,7 @@ namespace Z0
                 return arg.PointerId();
             else if(arg.IsNat())
                 return arg.NatId();
-            else if(arg.IsPrimal())
+            else if(arg.IsSystemType())
                 return arg.PrimalId();
             else if(arg.IsEnum)
                 return arg.EnumId();

@@ -19,7 +19,7 @@ namespace Z0
             void OnEvent(in CaptureEventData data)
             {
                 var state = data.CaptureState;
-                data.Captured.OnSome(s => Trace(s.TermCode)).OnNone(() => Trace(state));
+                //data.Captured.OnSome(s => Trace(s.TermCode)).OnNone(() => Trace(state));
             }
             
             var exchange = CaptureServices.Exchange(OnEvent);

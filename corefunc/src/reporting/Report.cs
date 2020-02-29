@@ -42,7 +42,7 @@ namespace Z0
         public Option<FilePath> Save(FilePath dst) => Records.Save(dst);   
     }
     
-    public class Report<F, R> : Report<R>
+    public class Report<F,R> : Report<R>
         where F : unmanaged, Enum
         where R : IRecord<F, R>
     {             

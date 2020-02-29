@@ -9,8 +9,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+
     using Z0.Asm;
 
+    using static AsmServiceMessages;
     using static zfunc;
 
     readonly struct AsmHostCaptureFlow : IAsmHostCaptureFlow
@@ -75,12 +77,6 @@ namespace Z0
             }            
         }
 
-        public static AppMsg HostCaptured(ApiHost host, FilePath dst)
-            => AppMsg.Info($"Emitted {host} encodings to {dst}");
-
-        public static AppMsg HostCaptureFailed(ApiHost host)
-            => AppMsg.Define($"Error emitting {host} encodings", AppMsgKind.Error);
-
         CapturedEncodingReport CaptureHostOps(ApiHost host)
         {
             var capture = Context.HostCapture();
@@ -88,8 +84,8 @@ namespace Z0
             var target = EmissionPaths.CapturePath(host);  
             var sink = Context;
             captured.Save(target)
-                     .OnSome(file => sink.PostMessage(HostCaptured(host,file)))
-                     .OnNone(() => sink.PostMessage(HostCaptureFailed(host)));
+                     .OnSome(file => sink.PostMessage(CapturedRaw(host,file)))
+                     .OnNone(() => sink.PostMessage(CaptureRawFailed(host)));
             return captured;
         }
 
@@ -100,8 +96,8 @@ namespace Z0
             var target = EmissionPaths.ParsedPath(host);
             var sink = Context;
             parsed.Save(target)
-                        .OnSome(file => sink.PostMessage($"Emitted parsed {host} encodings to {file}"))
-                        .OnNone(() => sink.PostMessage($"Error parsing {host} encodings", AppMsgKind.Error));
+                        .OnSome(file => sink.PostMessage(ParsedEncodings(host,file)))
+                        .OnNone(() => sink.PostMessage(ParseEncodingFailure(host)));
             require(captured.RecordCount == parsed.RecordCount);
             return parsed;
         }
@@ -125,7 +121,7 @@ namespace Z0
 
         AsmCaptureSet RunHostCaptureFlow(ApiHost host)        
         {
-            Context.PostMessage($"Capturing {host}");
+            Context.PostMessage($"Executing {host} capture workflow");
             var captured = CaptureHostOps(host);
             var parsed = ParseHostOps(host, captured);
             var decoded = Decode(host, captured, parsed);        

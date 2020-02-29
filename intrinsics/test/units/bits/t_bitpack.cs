@@ -48,7 +48,7 @@ namespace Z0
                 var dst = blocks.single<byte>(n512);
                 bitpack.unpack8(src, dst);
 
-                unpack_check(src,dst);
+                unpack_check(src,dst.Data);
                 
                 var rebound = bitpack.pack8(dst);
                 Claim.eq(src,rebound);

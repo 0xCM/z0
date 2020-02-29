@@ -74,7 +74,7 @@ namespace Z0
             {
                 if(data.EventKind != CaptureEventKind.Complete)
                 {
-                    print($"{data.CaptureState}", AppMsgKind.HiliteBL);
+                    //print($"{data.CaptureState}", AppMsgKind.HiliteBL);
                     state.Add(data.CaptureState);
                 }
             }

@@ -26,7 +26,7 @@ namespace Z0
         {
             void OnCaptureEvent(in CaptureEventData data)
             {
-                Trace($"{data.CaptureState}");
+                //Trace($"{data.CaptureState}");
             }
 
             using var buffers = Context.Buffers(OnCaptureEvent);

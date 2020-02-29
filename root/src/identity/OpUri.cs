@@ -83,8 +83,8 @@ namespace Z0
             this.GroupName = group;
             this.Identifier = 
                 opid.IsEmpty 
-                ? QueryText(scheme, host.Owner, host.Name,group) 
-                : UriText(scheme, host.Owner, host.Name, GroupName, opid);
+                ? OpUriOps.QueryText(scheme, host.Owner, host.Name, group) 
+                : OpUriOps.FullUriText(scheme, host.Owner, host.Name, GroupName, opid);
         }
 
         public OpUri GroupUri
@@ -109,55 +109,8 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        const string C = ":";
-
-        const string S2 = "//";
-
-        const string S1 = "/";
-
-        const char Q = '?';
-
-        const char H = '#';
         
-
-        [MethodImpl(Inline)]
-        static string PathText(string scheme, AssemblyId catalog, string subject)
-            => $"{scheme}{C}{S2}{catalog.Format()}{S1}{subject}";
-
-        [MethodImpl(Inline)]
-        static string QueryText(OpUriScheme scheme, AssemblyId catalog, string subject, string group)
-            => $"{scheme.Format()}{C}{S2}{catalog.Format()}{S1}{subject}{Q}{group}";
-
-        //scheme://assembly/apihost?opname#identifier
-        [MethodImpl(Inline)]
-        static string UriText(OpUriScheme scheme, AssemblyId catalog, string subject, string group, OpIdentity opid)
-            => $"{scheme.Format()}{C}{S2}{catalog.Format()}{S1}{subject}?{group}#{opid.Identifier}";
-
         ParseResult<OpUri> IParser<OpUri>.Parse(string text)
-        {
-            var parts = text.SplitClean(C);
-            var msg = string.Empty;
-            if(parts.Length != 2)
-                msg = $"Splitting on {C} produces {parts.Length} pieces";
-            else
-            {
-                var scheme = OpUriSchemeOps.Parse(parts[0]);
-                var rest = parts[1].TakeAfter(S2);
-                var pathText = rest.TakeBefore(Q);
-                var path = ApiHostPath.Parse(pathText);
-                if(!path.Succeeded)
-                    msg = $"Failed to parse {pathText} as an api host path";
-                else
-                {
-                    var id = OpIdentity.Define(rest.TakeAfter(H));
-                    var group = rest.Between(Q,H);
-                    var uri = OpUri.Define(scheme, path.Value, group, id);
-                    return ParseResult.Success(uri);
-                }                
-            }
-                        
-            return ParseResult.Fail<OpUri>(msg);
-        }
+            => OpUriOps.ParseUri(text);
     }
 }

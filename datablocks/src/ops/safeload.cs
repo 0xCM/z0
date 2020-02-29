@@ -153,7 +153,7 @@ namespace Z0
             else
             {
                 var dst = alloc<T>(n, bz + 1);
-                src.CopyTo(dst);
+                src.CopyTo(dst.Data);
                 return dst;
             }
         }

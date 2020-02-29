@@ -94,6 +94,17 @@ namespace Z0
                 => vstore(src, ref dst.Head);
 
         /// <summary>
+        /// Stores the source vector to a blocked container
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static void vstore<T>(Vector512<T> src, in Block512<T> dst)
+            where T : unmanaged
+                => vstore(src, ref dst.Head);
+
+        /// <summary>
         /// Stores the source vector to a specified block in a blocked container
         /// </summary>
         /// <param name="src">The source vector</param>

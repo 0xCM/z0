@@ -6,14 +6,22 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using static zfunc;
+
+    using static Root;
 
     /// <summary>
     /// Describes a block of memory the context of an asm instruction operand
     /// </summary>
-    public class AsmMemInfo
-    {        
+    public struct AsmMemInfo : IFormattable<AsmMemInfo>
+    {      
+        public static AsmMemInfo Init(MemorySize size, string sizefmt)
+        {
+            var dst = default(AsmMemInfo);
+            dst.Size = size;
+            dst.SizeFormat = sizefmt;
+            return dst;
+        }
+
         public Register BaseRegister {get;set;}
         
         public uint? Displacement {get; set;}
@@ -32,7 +40,7 @@ namespace Z0.Asm
 
         public string SizeFormat {get;set;}
 
-        public override string ToString()
+        public string Format()
         {
             var formatted = string.Empty;
             if(BaseRegister != Register.None)                
@@ -42,8 +50,10 @@ namespace Z0.Asm
             if(SizeFormat.IsNotBlank())
                 formatted += text.lspace(SizeFormat);
             return formatted;
-        }
-        
-    }
 
+        }
+
+        public override string ToString()
+            => Format();
+    }
 }

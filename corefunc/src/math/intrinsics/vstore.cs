@@ -63,8 +63,7 @@ partial class zfunc
         where T : unmanaged            
     {
         vstore(src, ref head(dst));
-        return dst;
-        
+        return dst;        
     }
 
     [MethodImpl(Inline)]

@@ -46,7 +46,7 @@ namespace Z0
         protected TestCaseRecord[] TakeSortedResults()
         {
             static TestCaseRecord[] Sort(IEnumerable<TestCaseRecord> src)
-                => src.OrderBy(x => x.Case).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded)).ToArray();
+                => src.OrderBy(x => x.Case).Where(x => x.Status == 0).Concat(src.Where(x => x.Status != 0)).ToArray();
 
             var results = Sort(TestResultQueue);
             TestResultQueue.Clear();
@@ -125,35 +125,37 @@ namespace Z0
             }
         }
 
-        const int TestNamePad = 50;
+        const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
         
-        const int TimeStampPad = 30;
+        const int ExecutedPad = (int)((ulong)TestCaseField.Executed >> 32);
 
-        const int ElapsedPad = 12;
+        const int DurationPad = (int)((ulong)TestCaseField.Duration >> 32);
+
+        const int StatusPad = (int)((ulong)TestCaseField.Status >> 32);
 
         const string FieldSep = "| ";
 
-        static string ElapsedPlaceholder 
-            => string.Empty.PadRight(ElapsedPad);
+        static string DurationPlaceholder 
+            => string.Empty.PadRight(DurationPad);
 
         static string FormatTs(DateTime ts)
-            => ts.ToLexicalString().PadRight(TimeStampPad);
+            => ts.ToLexicalString().PadRight(ExecutedPad);
 
         static string Format(TimeSpan elapsed)
-            => $"{elapsed.TotalMilliseconds}ms".PadRight(ElapsedPad);
+            => $"{elapsed.TotalMilliseconds} ms".PadRight(DurationPad);
 
         static string FormatName(string testName)
-            => $"{testName}".PadRight(TestNamePad);
+            => $"{testName}".PadRight(CasePad);
 
         static string FormatStatus(string status)
-            => status.PadRight(12);
+            => status.PadRight(StatusPad);
 
         static AppMsg PreCaseMsg(string testName, DateTime start)
         {
             var fields = items(
                 FormatName(testName), 
                 FormatStatus("executing"), 
-                ElapsedPlaceholder, 
+                DurationPlaceholder, 
                 FormatTs(start)
                 );                
 

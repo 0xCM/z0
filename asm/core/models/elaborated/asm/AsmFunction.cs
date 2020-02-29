@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;             
+    using static Root;
 
     /// <summary>
     /// Describes the assembly encoding for a function

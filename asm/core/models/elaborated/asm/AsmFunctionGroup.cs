@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a group of related assembly functions
@@ -20,7 +21,8 @@ namespace Z0
         public static AsmFunctionGroup Define(OpIdentity id, AsmFunction[] members)
         {            
             if(members.Length == 0)
-                throw appFail(appMsg($"{id}: Empty groups are disallowed"));            
+                errors.ThrowFeatureUnsupported($"{id}: Empty groups are disallowed");            
+            
             return new AsmFunctionGroup(id, members);
         }
         

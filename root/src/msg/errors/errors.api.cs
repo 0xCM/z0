@@ -56,15 +56,9 @@ namespace Z0
         public static AppException EmptySourceSpan([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(messages.EmptySourceSpan(caller,file,line));
 
-        /// <summary>
-        /// Raised when a method is non-genric and should be
-        /// </summary>
         public static AppException NonGenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(messages.NonGenericMethod(method,caller,file,line));
 
-        /// <summary>
-        /// Raised when a method is generic and should not be
-        /// </summary>
         public static AppException GenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(messages.GenericMethod(method,caller,file,line));
 
@@ -76,7 +70,10 @@ namespace Z0
                 => AppException.Define(messages.TypeUnsupported(t, caller, file, line));
 
         public static AppException FeatureUnsupported(string feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                => AppException.Define(messages.FeatureUnsupported(feature, caller, file, line));
+            => AppException.Define(messages.FeatureUnsupported(feature, caller, file, line));
+        
+        public static void ThrowFeatureUnsupported(string feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw FeatureUnsupported(feature, caller, file, line);
   
         public static AppException FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(messages.FileDoesNotExist(path, caller, file, line));
@@ -92,61 +89,48 @@ namespace Z0
         public static IndexOutOfRangeException OutOfRange(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new IndexOutOfRangeException(messages.IndexOutOfRange(index,min,max, caller, file, line).ToString());
 
-        [MethodImpl(NotInline)]
         public static IndexOutOfRangeException OutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
 
-        [MethodImpl(NotInline)]
         public static AppException NoValue<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define($"A value of type {typeof(T).Name} was expected but does not exist", caller,file,line);
 
-        [MethodImpl(NotInline)]
         public static T ThrowNotEqualInfo<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw AppException.Define(messages.NotEqual(lhs,rhs,caller,file,line));
 
-        [MethodImpl(NotInline)]
         public static T ThrowNotEqual<T>(T lhs, T rhs)
             => throw AppException.Define(AppMsg.Define($"Equality failure, {lhs} != {rhs}", AppMsgKind.Error));
 
-        [MethodImpl(NotInline)]
         public static T ThrowNotEqual<T>(T lhs, T rhs, AppMsg msg)
             => throw AppException.Define(msg.WithPrependedContent($"Equality failure, {lhs} != {rhs}:"));
 
-        [MethodImpl(NotInline)]
         public static T ThrowArgException<A,T>(A arg)
             => throw new ArgumentNullException(arg?.ToString() ?? string.Empty);
 
-        [MethodImpl(NotInline)]
         public static void Throw(string reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw AppException.Define(reason, caller,file,line);
 
-        [MethodImpl(NotInline)]
-        public static bool ThrowInvariantFailure(string reason)
+        public static void Throw(AppMsg msg)
+            => throw AppException.Define(msg);
+
+        public static void ThrowInvariantFailure(string reason)
             => throw new Exception(reason);
 
-        [MethodImpl(NotInline)]
         public static T ThrowOutOfRange<T>(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw OutOfRange(index, min, max, caller, file, line);
         
-
-        [MethodImpl(NotInline)]
         public static void ThrowOutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw OutOfRange(value,min,max,caller,file,line);
 
-        [MethodImpl(NotInline)]
         public static void ThrowTooShort(int dstLen, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort:{FormatCallsite(caller,file,line)}");
 
-        [MethodImpl(NotInline)]
         public static void ThrowBadSize(int expect, int actual, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw new Exception($"The size {actual} is not aligned with {expect}:{FormatCallsite(caller,file,line)}");
 
-
-        [MethodImpl(NotInline)]
         public static void ThrowCountMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw CountMismatch(lhs,rhs, caller,file,line);
 
-        [MethodImpl(NotInline)]
         public static void ThrowIfFalse(bool condition, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(!condition)

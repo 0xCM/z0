@@ -68,4 +68,28 @@ namespace Z0
         public int CompareTo(IdentityPart other)
             => IdentityCompare(this, other);        
     }
+
+    public static class IdentityPartOps
+    {
+        [MethodImpl(Inline)]
+        public static bool IsNumericIndicator(this IdentityPartKind kind)
+            => kind == IdentityPartKind.FloatIndicator 
+            || kind == IdentityPartKind.UnsignedIndicator 
+            || kind == IdentityPartKind.SignedIndicator;
+
+        [MethodImpl(Inline)]
+        public static bool IsArgList(this IdentityPartKind kind)
+            => kind == IdentityPartKind.ValueArgList 
+            || kind == IdentityPartKind.TypeArgList;
+
+        [MethodImpl(Inline)]
+        public static bool IsArg(this IdentityPartKind kind)
+            => kind == IdentityPartKind.ValueArg
+            || kind == IdentityPartKind.TypeArg;
+        
+        [MethodImpl(Inline)]
+        public static bool IsModifier(this IdentityPartKind kind)
+            => (TermModifierKind)kind >= TermModifierKind.First 
+            && (TermModifierKind)kind <= TermModifierKind.Last;
+    }    
 }

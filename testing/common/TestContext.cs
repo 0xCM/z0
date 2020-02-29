@@ -154,7 +154,7 @@ namespace Z0
         protected void Trace(AppMsg msg, AppMsgKind? severity = null)
         {
             if(TraceEnabled)
-                PostMessage(msg.WithLevel(severity ?? AppMsgKind.Babble));
+                PostMessage(msg.AsKind(severity ?? AppMsgKind.Babble));
         }
 
         /// <summary>

@@ -18,10 +18,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static PrimalIdentity From(Type t)
-            => t.IsPrimal() ? 
+            => t.IsSystemType() ? 
                ( t.IsNumeric()
-               ? new PrimalIdentity(t.NumericKind(), t.PrimitiveKeyword())
-               : new PrimalIdentity(t.PrimitiveKeyword())
+               ? new PrimalIdentity(t.NumericKind(), t.SystemKeyword())
+               : new PrimalIdentity(t.SystemKeyword())
                )
                : Empty;
 

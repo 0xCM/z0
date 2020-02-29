@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
     using static messages;
     
-    using Member = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static void failwith(string msg, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void failwith(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw failed(ClaimOpKind.Fail, AppMsg.Error(msg, caller, file,line));
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static void fail([Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw failed(ClaimOpKind.Fail, AppMsg.Error("failed", caller, file,line));
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T"></typeparam>
-        public static bool contains<T>(ISet<T> set, T item, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool contains<T>(ISet<T> set, T item, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => set.Contains(item) ? true : throw  failed(ClaimOpKind.NotIn, AppMsg.Error($"Item {item} not in set"));
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool eq(string lhs, string rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(string lhs, string rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void eq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Claim.yea(lhs.ContentEqual(rhs), null, caller, file, line);
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void eq(Span<char> lhs, ReadOnlySpan<char> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq(Span<char> lhs, ReadOnlySpan<char> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Claim.yea(lhs.ContentEqual(rhs), null, caller, file, line);
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>        
-        public static bool eq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>        
-        public static bool eq<T>(ISet<T> lhs, ISet<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq<T>(ISet<T> lhs, ISet<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.SetEquals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool eq<T>(Vector128<T> lhs, Vector128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq<T>(Vector128<T> lhs, Vector128<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
@@ -136,7 +136,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool eq<T>(Vector256<T> lhs, Vector256<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq<T>(Vector256<T> lhs, Vector256<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static bool eq<T>(T[] lhs, T[] rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq<T>(T[] lhs, T[] rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.SequenceEqual(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static void eq(bool[] lhs, bool[] rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq(bool[] lhs, bool[] rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {            
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(lhs[i] != rhs[i])
@@ -185,66 +185,66 @@ namespace Z0
         public static void eq(bit lhs, bit rhs)
             => (lhs == rhs).IfNone(() => errors.ThrowNotEqual(lhs,rhs));
 
-        public static bool eq(HexByteKind lhs, HexByteKind rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(HexByteKind lhs, HexByteKind rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool eq(ByteKind lhs, ByteKind rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(ByteKind lhs, ByteKind rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool eq(byte lhs, byte rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(byte lhs, byte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool eq(sbyte lhs, sbyte rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(sbyte lhs, sbyte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool eq(short lhs, short rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(short lhs, short rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool eq(ushort lhs, ushort rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(ushort lhs, ushort rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool eq(int lhs, int rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool eq(int lhs, int rhs, string msg, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(int lhs, int rhs, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, AppMsg.Define(msg, AppMsgKind.Error, caller, file, line));
 
-        public static bool eq(uint lhs, uint rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(uint lhs, uint rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         public static bool eq(uint lhs, uint rhs, AppMsg msg)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
 
-        public static bool eq(long lhs, long rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool neq(long lhs, long rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool neq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs != rhs ? true : throw failed(ClaimOpKind.NEq, Equal(lhs, rhs, caller, file, line));
 
         public static bool eq(long lhs, long rhs, AppMsg msg)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
 
-        public static bool eq(ulong lhs, ulong rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(ulong lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         public static bool eq(ulong lhs, ulong rhs, AppMsg msg)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
 
-        public static bool eq(float lhs, float rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(float lhs, float rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;            
             return err < tolerance ? true : throw failed(ClaimOpKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
-        public static bool eq(double lhs, double rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(double lhs, double rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;            
             return err < tolerance ? true : throw failed(ClaimOpKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
-        public static bool eq(char lhs, char rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool eq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void numeq<T>(Span<T> lhs, Span<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<T>(Span<T> lhs, Span<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
                 => iter(lhs,rhs,numeq);
 
@@ -333,7 +333,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
                 => numeq(lhs.Data,rhs.Data, caller,file,line);
@@ -349,7 +349,7 @@ namespace Z0
         /// <typeparam name="M">The row dimension type</typeparam>
         /// <typeparam name="N">The column dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged 
@@ -364,7 +364,7 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void numeq<T>(Block128<T> lhs, Block128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<T>(Block128<T> lhs, Block128<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
             for(var i = 0; i< lhs.CellCount; i++)
@@ -381,10 +381,27 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void numeq<T>(Block256<T> xb, Block256<T> yb, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void numeq<T>(Block256<T> xb, Block256<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            for(var i = 0; i< length(xb,yb); i++)
+            for(var i = 0; i< blocks.length(xb,yb); i++)
+                if(!gmath.eq(xb[i],yb[i]))
+                    throw errors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
+        }
+
+        /// <summary>
+        /// Asserts content equality for two 256-bit blocked spans
+        /// </summary>
+        /// <param name="xb">The left block</param>
+        /// <param name="yb">The right block</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="T">The element type</typeparam>        
+        public static void numeq<T>(Block512<T> xb, Block512<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged
+        {
+            for(var i = 0; i< blocks.length(xb,yb); i++)
                 if(!gmath.eq(xb[i],yb[i]))
                     throw errors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
@@ -399,7 +416,7 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, Action<int,T,T> handler,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, Action<int,T,T> handler,  [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
             for(var i = 0; i< length(lhs,rhs); i++)
@@ -420,7 +437,7 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void close<T>(this Span<T> lhs, Span<T> rhs, T tolerance, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void close<T>(this Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
             for(var i = 0; i< length(lhs,rhs); i++)
@@ -428,7 +445,7 @@ namespace Z0
                     throw errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
-        public static bool neq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => !lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, Equal(lhs, rhs, caller, file, line));
         
         /// <summary>
@@ -441,7 +458,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T">The source value type</typeparam>
-        public static bool between<T>(T x, T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool between<T>(T x, T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => gmath.between(x,lhs,rhs) ? true : throw failed(ClaimOpKind.Between, NotBetween(x, lhs, rhs, caller, file, line));
 
@@ -454,7 +471,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T">The source value type</typeparam>
-        public static bool gt<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool gt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => gmath.gt(lhs,rhs) ? true : throw failed(ClaimOpKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
 
@@ -467,7 +484,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T">The source value type</typeparam>
-        public static bool gteq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool gteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => gmath.gteq(lhs,rhs) ? true : throw failed(ClaimOpKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
@@ -480,7 +497,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T">The source value type</typeparam>
-        public static bool lt<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool lt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => gmath.lt(lhs,rhs) ? true : throw failed(ClaimOpKind.Lt, NotLessThan(lhs, rhs, caller, file, line));
 
@@ -493,7 +510,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T">The source value type</typeparam>
-        public static bool lteq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool lteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => gmath.lteq(lhs,rhs) ? true : throw failed(ClaimOpKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
@@ -505,7 +522,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T">The source value type</typeparam>
-        public static bool nonzero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
+        public static bool nonzero<T>(T x, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
                 => gmath.nonz(x) ? true : throw errors.NotNonzero(caller,file,line);
 
@@ -517,7 +534,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T">The source value type</typeparam>
-        public static bool zero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
+        public static bool zero<T>(T x, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
                 => !gmath.nonz(x) ? true : throw errors.NotNonzero(caller,file,line);
 
@@ -529,7 +546,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static void yea(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void yea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => src.IfNone(() => throw ClaimException.Define(NotTrue(msg, caller, file,line)));
 
         /// <summary>
@@ -540,7 +557,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static void yea<T>(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void yea<T>(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => src.IfNone(() => throw ClaimException.Define(NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line)));
 
@@ -552,7 +569,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static void nea(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void nea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => src.IfSome(() => throw ClaimException.Define(NotFalse(msg, caller, file,line)));
 
         /// <summary>
@@ -563,13 +580,13 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static unsafe void notnull(void* p, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static unsafe void notnull(void* p, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => (p != null).IfNone(() => throw new ArgumentNullException(AppMsg.Define($"Pointer was null", AppMsgKind.Error, caller,file,line).ToString()));
 
-        public static bool notnull<T>(T src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool notnull<T>(T src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => !(src is null) ? true : throw new ArgumentNullException(AppMsg.Define($"Argument was null", AppMsgKind.Error, caller,file,line).ToString());
 
-        public static void exists(FilePath path,[Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void exists(FilePath path,[Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => path.Exists().IfNone(() => throw AppException.Define($"The file {path} does not exist", caller, file,line));
     }
 }

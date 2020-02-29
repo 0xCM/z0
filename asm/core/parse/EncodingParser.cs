@@ -34,7 +34,7 @@ namespace Z0
             var buffer = alloc<byte>(BufferLength);
             var parser = EncodingParser.ByteParser(Context, BufferLength);
             
-            print($"Parsing {encoded.Records.Length} {host} records");
+            Context.PostMessage($"Parsing {encoded.Records.Length} {host} records");
 
             for(var i=0; i< dst.Length; i++)
             {
@@ -73,7 +73,7 @@ namespace Z0
             if(duplicated.Length != 0)
             {
                 var format = string.Join(text.comma(), duplicated);
-                print($"Identifier duplicates: {format}", AppMsgKind.Warning);           
+                Context.PostMessage($"Identifier duplicates: {format}", AppMsgKind.Warning);           
             }
         }
     }

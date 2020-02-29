@@ -65,7 +65,6 @@ namespace Z0
             where T : unmanaged
                 => new Interval<T>(min,max, IntervalKind.Closed);
 
-
         /// <summary>
         /// Determines the primal kind (if any) of a parametrically-identifed type
         /// </summary>
@@ -75,6 +74,48 @@ namespace Z0
         public static NumericKind kind<T>()
             where T : struct
                 => kind_u<T>();
+
+        /// <summary>
+        /// Determines the numeric kind identified by a type code, if any
+        /// </summary>
+        /// <param name="tc">The type code to evaluate</param>
+        public static NumericKind kind(TypeCode tc)
+        {
+            switch(tc)
+            {
+                case TC.SByte:
+                    return NK.I8;
+
+                case TC.Byte:
+                    return NK.U8;
+
+                case TC.Int16:
+                    return NK.I16;
+
+                case TC.UInt16:
+                    return NK.U16;
+                
+                case TC.Int32:
+                    return NK.I32;
+
+                case TC.UInt32:
+                    return NK.U32;
+
+                case TC.Int64:
+                    return NK.I64;
+
+                case TC.UInt64:
+                    return NK.U64;
+
+                case TC.Single:
+                    return NK.F32;
+
+                case TC.Double:
+                    return NK.F64;
+            }
+            
+            return NK.None;
+        }
 
         /// <summary>
         /// Returns true if the primal source type is signed, false otherwise
@@ -158,8 +199,8 @@ namespace Z0
             || t == typeof(double);
 
         [Op]
-        public static NumericKind from(FixedWidth width, NumericIndicator ni)
-            => ni switch {
+        public static NumericKind from(FixedWidth width, NumericIndicator indicator)
+            => indicator switch {
                 NI.Signed 
                     => width switch {                    
                         FW.W8  => NK.I8,
@@ -205,17 +246,13 @@ namespace Z0
                 _ => throw new NotSupportedException(k.ToString())
             };
 
-        [MethodImpl(Inline)]
-        static TC typecode(Type t)
-            => t.IsEnum ? 0 : Type.GetTypeCode(t.EffectiveType());
-
         /// <summary>
         /// Determines the numeric kind of a type, possibly none
         /// </summary>
         /// <param name="t">The type to examine</param>
         [Op]
         public static NumericKind kind(Type t)
-            => typecode(t) switch
+            => t.IsEnum ? 0 : Type.GetTypeCode(t.EffectiveType()) switch
                 {
                     TC.SByte => NK.I8,
                     TC.Byte => NK.U8,
@@ -264,7 +301,7 @@ namespace Z0
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline), Op]
         public static ISet<Type> typeset(NumericKind k)
-            => typesetAcquire(k);
+            => GetTypeset(k);
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
@@ -272,7 +309,7 @@ namespace Z0
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline), Op]
         public static ISet<NumericKind> kindset(NumericKind k)
-            => kindsetAcquire(k);
+            => GetKindset(k);
 
         /// <summary>
         /// Tests whether the source kind, considered as a bitfield, contains the match kind
@@ -280,7 +317,7 @@ namespace Z0
         /// <param name="k">The source kind</param>
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline), Op]
-        public static bool @is(NumericKind k, NumericKind match)        
+        public static bool contains(NumericKind k, NumericKind match)        
             => kindset(k).Contains(match);
 
         /// <summary>
@@ -289,7 +326,7 @@ namespace Z0
         /// <param name="k">The source kind</param>
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline), Op]
-        public static bool @is(NumericKind k, NumericId match)        
+        public static bool contains(NumericKind k, NumericId match)        
             => ((uint)k & (uint)match) != 0;
 
         [MethodImpl(Inline)]
@@ -336,43 +373,6 @@ namespace Z0
                 return NumericKind.None;            
         }
 
-        [Op]
-        static HashSet<NumericKind> kindsetCreate(NumericKind k)       
-        {
-            var dst = new HashSet<NumericKind>();
-            if(@is(k, ID.U8))
-                dst.Add(NK.U8);
-
-            if(@is(k, ID.I8))
-                dst.Add(NK.I8);
-
-            if(@is(k, ID.U16))
-                dst.Add(NK.U16);
-
-            if(@is(k, ID.I16))
-                dst.Add(NK.I16);
-
-            if(@is(k, ID.U32))
-                dst.Add(NK.U32);
-
-            if(@is(k, ID.I32))
-                dst.Add(NK.I32);
-
-            if(@is(k, ID.U64))
-                dst.Add(NK.U64);
-
-            if(@is(k, ID.I64))
-                dst.Add(NK.I64);
-
-            if(@is(k, ID.F32))
-                dst.Add(NK.F32);
-
-            if(@is(k, ID.F64))
-                dst.Add(NK.F64);
-            
-            return dst;
-        }
-
         /// <summary>
         /// Attempts to parse a numeric kind from a string in the form {width}{indicator} 
         /// </summary>
@@ -414,16 +414,53 @@ namespace Z0
                     : kind(part)
                 select x;
 
-        static HashSet<Type> typesetCreate(NumericKind k)
-            => kindsetAcquire(k).Select(type).ToHashSet();         
+        static HashSet<Type> CreateTypeset(NumericKind k)
+            => GetKindset(k).Select(type).ToHashSet();         
+
+        [Op]
+        static HashSet<NumericKind> CreateKindset(NumericKind k)       
+        {
+            var dst = new HashSet<NumericKind>();
+            if(contains(k, ID.U8))
+                dst.Add(NK.U8);
+
+            if(contains(k, ID.I8))
+                dst.Add(NK.I8);
+
+            if(contains(k, ID.U16))
+                dst.Add(NK.U16);
+
+            if(contains(k, ID.I16))
+                dst.Add(NK.I16);
+
+            if(contains(k, ID.U32))
+                dst.Add(NK.U32);
+
+            if(contains(k, ID.I32))
+                dst.Add(NK.I32);
+
+            if(contains(k, ID.U64))
+                dst.Add(NK.U64);
+
+            if(contains(k, ID.I64))
+                dst.Add(NK.I64);
+
+            if(contains(k, ID.F32))
+                dst.Add(NK.F32);
+
+            if(contains(k, ID.F64))
+                dst.Add(NK.F64);
+            
+            return dst;
+        }
 
         [MethodImpl(Inline)]
-        static HashSet<NumericKind> kindsetAcquire(NumericKind kind)
-            => KindsetCache.GetOrAdd(kind, kindsetCreate);
+        static HashSet<NumericKind> GetKindset(NumericKind kind)
+            => KindsetCache.GetOrAdd(kind, CreateKindset);
 
         [MethodImpl(Inline)]
-        static ISet<Type> typesetAcquire(NumericKind kind)
-            => TypesetCache.GetOrAdd(kind,typesetCreate);            
+        static ISet<Type> GetTypeset(NumericKind kind)
+            => TypesetCache.GetOrAdd(kind,CreateTypeset);            
 
         static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> KindsetCache {get;}       
             = new ConcurrentDictionary<NumericKind, HashSet<NumericKind>>();

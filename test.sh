@@ -1,11 +1,11 @@
-Test=analogs/test.sh
-bash $Test
+# Test=analogs/test.sh
+# bash $Test
 
-Test=asm/test.sh
-bash $Test
+# Test=asm/test.sh
+# bash $Test
 
-Test=bitcore/test.sh
-bash $Test
+# Test=bitcore/test.sh
+# bash $Test
 
 Test=bitfields/test.sh
 bash $Test

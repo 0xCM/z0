@@ -66,6 +66,34 @@ namespace Z0
         public static string denullify(string test)
             => empty(test) ? string.Empty : test;
 
+        /// <summary>
+        /// Extracts a substring
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="startidx">The index of the first character</param>
+        [MethodImpl(Inline)]
+        public static string slice(string src, int startidx)
+            => denullify(src).Substring(startidx);        
+
+        /// <summary>
+        /// Extracts a substring
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="startidx">The index of the first character</param>
+        /// <param name="length">The substring length</param>
+        [MethodImpl(Inline)]
+        public static string slice(string src, int startidx, int length)
+            => denullify(src).Substring(startidx,length);        
+
+        /// <summary>
+        /// Splits the string, removing empty entries
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="sep">The delimiter</param>
+        [MethodImpl(Inline)]
+        public static string[] split(string src, char sep)
+            => denullify(src).Split(sep, StringSplitOptions.RemoveEmptyEntries);        
+
         [MethodImpl(Inline)]
         public static bool equals(string a, string b, bool cased = false)
             => string.Equals(a,b, cased ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase);

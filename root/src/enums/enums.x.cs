@@ -26,5 +26,23 @@ namespace Z0
         public static T MapSomeOrElse<E,T>(this E kind, Func<E,T> ifSome, Func<T> ifNone)
             where E : unmanaged, Enum
                 => kind.IsSome() ? ifSome(kind) : ifNone();
+        
+        /// <summary>
+        /// Puts an enum value into a (numeric) box
+        /// </summary>
+        /// <param name="e">The enumeration value</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static BoxedNumber Box<E>(this E src)
+            where E : unmanaged, Enum            
+                => Enums.box(src);
+
+        [MethodImpl(Inline)]
+        public static TypeCode TypeCode(this EnumKind k)
+            =>( System.TypeCode)k;
+
+        [MethodImpl(Inline)]
+        public static NumericKind NumericKind(this EnumKind k)
+            => k.TypeCode().NumericKind();
     }
 }

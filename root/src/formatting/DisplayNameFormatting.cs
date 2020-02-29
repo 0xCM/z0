@@ -31,8 +31,8 @@ namespace Z0
             if(src.IsPointer)
                 return $"{src.GetElementType().DisplayName()}*";
             
-            if(src.IsPrimal())
-                return src.PrimitiveKeyword().IfBlank(src.Name);
+            if(src.IsSystemType())
+                return src.SystemKeyword().IfBlank(src.Name);
 
             if(src.IsGenericType && !src.IsRef())
                 return src.FormatGeneric();

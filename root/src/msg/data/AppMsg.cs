@@ -99,6 +99,13 @@ namespace Z0
             => Content == null || (Content is string s && text.empty(s));
 
         /// <summary>
+        /// Returns a kind-aligned messages
+        /// </summary>
+        /// <param name="kind">The target kind</param>
+        public AppMsg AsKind(AppMsgKind kind)
+            => this.Kind == kind ? this : new AppMsg(Content, kind, Caller, CallerFile, FileLine);
+
+        /// <summary>
         /// Edits the message to include specifed caller info data
         /// </summary>
         /// <param name="caller">The invokind method</param>
@@ -106,13 +113,6 @@ namespace Z0
         /// <param name="line">The line number at which the invocation occurred</param>
         public AppMsg WithCallerInfo(string caller, string file, int? line)
             => new AppMsg(Content, Kind, caller, FilePath.Define(file),line);
-
-        /// <summary>
-        /// Edits the message severity level
-        /// </summary>
-        /// <param name="Level">The new severity level</param>
-        public AppMsg WithLevel(AppMsgKind Level)
-            => new AppMsg(Content, Level, Caller, CallerFile, FileLine);
 
         /// <summary>
         /// Prepends the message body with specified content
