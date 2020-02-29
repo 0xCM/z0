@@ -8,9 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static IdentityCommons;
 
     public readonly struct ScalarIdentity  : ITypeIdentity<ScalarIdentity>
     {
+        public string Identifier {get;}            
+
+        public NumericKind NumericKind {get;}           
+
         [MethodImpl(Inline)]
         public static ScalarIdentity Define(NumericKind kind)
             => new ScalarIdentity(kind);
@@ -37,31 +42,33 @@ namespace Z0
             this.NumericKind = kind;
             this.Identifier = $"{kind.WidthKind().Format()}{NumericKind.Indicator().Format()}";
         }
-     
-        public string Identifier {get;}            
-
-        public NumericKind NumericKind {get;}           
-
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
             => TypeIdentity.Define(Identifier);
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Identifier);
+        }
 
         [MethodImpl(Inline)]
         public bool Equals(ScalarIdentity src)
             => IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
+        public int CompareTo(ScalarIdentity other)
             => IdentityCompare(this, other);
-
-        public override string ToString()
-            => Identifier;
  
         public override int GetHashCode()
             => IdentityHashCode(this);
 
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
+
+        public override string ToString()
+            => Identifier;
+
     }
 }

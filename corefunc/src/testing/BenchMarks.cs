@@ -11,6 +11,17 @@ namespace Z0
 
     using static zfunc;
 
+    public interface IBenchResultSink
+    {
+        BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration);        
+    }
+
+    public interface IBenchResultSource
+    {
+        IEnumerable<BenchmarkRecord> TakeBenchmarks();
+    }
+
+    
     /// <summary>
     /// Defines a benchmark measure for an operator
     /// </summary>

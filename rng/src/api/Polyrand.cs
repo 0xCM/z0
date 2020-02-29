@@ -22,12 +22,12 @@ namespace Z0
         internal Polyrand(INavigableRng<ulong> Points)
         {
             this.Points = Points;            
-            this.Navigator = some(Points as IRandomNav);
+            this.Navigator = some(Points as IRngNav);
         }
 
         readonly IRngBoundPointSource<ulong> Points;
 
-        public Option<IRandomNav> Navigator {get;}
+        public Option<IRngNav> Navigator {get;}
 
         public RngKind RngKind 
             => Points.RngKind;

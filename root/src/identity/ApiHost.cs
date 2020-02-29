@@ -62,7 +62,6 @@ namespace Z0
             var attrib = t.GetCustomAttribute<ApiHostAttribute>();
             this.HostKind = attrib?.HostKind ?? ApiHostKind.DirectAndGeneric;
             this.HostName = string.IsNullOrWhiteSpace(attrib?.HostName) ? t.Name : attrib.HostName;            
-            //this.Path = ApiHostPath.Define(Owner, HostingType.Name);
             this.Path = ApiHostPath.Define(Owner, HostName);
             this.Identifier = Path.Format();
         }
@@ -78,16 +77,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(ApiHost src)
-            => IdentityEquals(this, src);
+            => IdentityCommons.IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
-            => IdentityCompare(this, other);
+        public int CompareTo(ApiHost other)
+            => IdentityCommons.IdentityCompare(this, other);
 
         public override int GetHashCode()
-            => IdentityHashCode(this);
+            => IdentityCommons.IdentityHashCode(this);
 
         public override bool Equals(object obj)
-            => IdentityEquals(this, obj);
+            => IdentityCommons.IdentityEquals(this, obj);
     }
 }

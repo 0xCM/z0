@@ -74,6 +74,63 @@ namespace Z0
             => Option.some(value);
 
         /// <summary>
+        /// Presents a readonly reference as reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T mutable<T>(in T src)
+            => ref refs.mutable(src);
+
+        /// <summary>
+        /// The canonical swap function
+        /// </summary>
+        /// <param name="lhs">The left value</param>
+        /// <param name="rhs">The right value</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static void swap<T>(ref T lhs, ref T rhs)
+            => refs.swap(ref lhs, ref rhs);
+
+        /// <summary>
+        /// Adds an offset to a reference, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T seek<T>(ref T src, int count)
+            => ref refs.seek(ref src, count);
+
+        /// <summary>
+        /// Skips a specified number of source elements and returns a readonly reference to the resulting element
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The number of elements to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(in T src, int count)
+            => ref refs.skip(src,count);
+
+        /// <summary>
+        /// Returns a reference to the head of a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T head<T>(ReadOnlySpan<T> src)
+            => ref refs.head(src);
+
+        /// <summary>
+        /// Returns a reference to the head of a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T head<T>(Span<T> src)
+            => ref refs.head(src);
+
+        /// <summary>
         /// If possible, applies the conversion S -> T
         /// </summary>
         /// <param name="src">The source value</param>
@@ -232,12 +289,29 @@ namespace Z0
         public static T maxval<T>()
             where T : unmanaged
                 => Literals.maxval<T>();
+
         /// <summary>
         /// Right now
         /// </summary>
         [MethodImpl(Inline)]
         public static DateTime now()
             => DateTime.Now;
+
+        /// <summary>
+        /// Returns true if the test operand is null
+        /// </summary>
+        /// <param name="test">The object to test for nullity</param>
+        [MethodImpl(Inline)]
+        public static bool isnull(object test)
+            => test == null;
+        
+        /// <summary>
+        /// Returns true if the test operand is not null
+        /// </summary>
+        /// <param name="test">The object to test for nullity</param>
+        [MethodImpl(Inline)]
+        public static bool notnull(object test)
+            => test != null;
 
         /// <summary>
         /// Consructs an array from a parameter array
@@ -296,21 +370,6 @@ namespace Z0
                 @true();
         }
 
-        /// <summary>
-        /// Tests whether the source string is empty
-        /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Inline)]
-        public static bool empty(string src)
-            => string.IsNullOrWhiteSpace(src);
-
-        /// <summary>
-        /// Tests whether the source string is nonempty
-        /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Inline)]
-        public static bool nonempty(string src)
-            => !string.IsNullOrWhiteSpace(src);
 
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 
@@ -403,27 +462,5 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Option<T> TryCast<T>(object item)
             => item is T ? some((T)item) : none<T>();
-
-        [MethodImpl(Inline)]
-        internal static bool IdentityEquals(string lhs, string rhs)
-            => IdentityCommons.IdentityEquals(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        internal static int IdentityCompare(IIdentity lhs, IIdentity rhs)
-            => IdentityCommons.IdentityCompare(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        internal static bool IdentityEquals(IIdentity lhs, object rhs)
-            => IdentityCommons.IdentityEquals(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        internal static bool IdentityEquals<T>(in T lhs, in T rhs)
-            where T : struct, IIdentity<T>
-                => IdentityCommons.IdentityEquals(lhs, rhs);   
-
-        [MethodImpl(Inline)]
-        internal static int IdentityHashCode<T>(in T src)     
-            where T : struct, IIdentity<T>
-                => IdentityCommons.IdentityHashCode(src);
     }
 }

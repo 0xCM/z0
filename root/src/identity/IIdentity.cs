@@ -6,26 +6,38 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Root;
+    using static IdentityCommons;
 
-    public interface IIdentity : IComparable<IIdentity>, ICustomFormattable
+    public interface IIdentity : ICustomFormattable, IComparable
     {
         string Identifier {get;}
 
         bool IsEmpty 
-            => string.IsNullOrWhiteSpace(Identifier);
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Identifier);
+        }
         
+        [MethodImpl(Inline)]
         string ICustomFormattable.Format()
-            => Identifier.ToString();
+            => IdentityFormat(this);
+        
+        [MethodImpl(Inline)]
+        int IComparable.CompareTo(object src)
+            => IdentityCompare(this, src as IIdentity);
     }
 
-    public interface IIdentity<T> :  IIdentity, IEquatable<T>, IFormattable<T>
-        where T : struct, IIdentity<T>
+    public interface IIdentity<T> :  IIdentity, IEquatable<T>, IFormattable<T>, IComparable<T>
+        where T : IIdentity<T>, new()
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         bool IEquatable<T>.Equals(T src)
-            => IdentityEquals(Identifier,src.Identifier);                
+            => IdentityEquals(this, src);
+
+        [MethodImpl(Inline)]
+        int IComparable<T>.CompareTo(T src)
+            => IdentityCompare(this, src);
     }    
-}        
+}

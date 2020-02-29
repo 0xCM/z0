@@ -25,8 +25,13 @@ namespace Z0
 
         public static Duration Zero => new Duration(0);
         
-        public static Duration Define(long timerTicks)
-            => new Duration(timerTicks);
+        [MethodImpl(Inline)]
+        public static Duration Define(long ticks)
+            => new Duration(ticks);
+
+        [MethodImpl(Inline)]
+        public static Duration Define(TimeSpan ts)
+            => new Duration(ts.Ticks);
 
         [MethodImpl(Inline)]
         Duration(long ticks)
@@ -34,45 +39,50 @@ namespace Z0
             this.Ticks = ticks;
         }
 
+
+        [MethodImpl(Inline)]
+        public static implicit operator TimeSpan(Duration src)
+            => src.TimeSpan;
+
         [MethodImpl(Inline)]
         public static implicit operator Duration(TimeSpan src)
             => new Duration(src.Ticks);
 
         [MethodImpl(Inline)]
-        public static implicit operator Duration(long timerTicks)
-            => Define(timerTicks);
+        public static implicit operator Duration(long ticks)
+            => Define(ticks);
 
         [MethodImpl(Inline)]
-        public static Duration operator +(Duration lhs, Duration rhs)
-            => new Duration(lhs.Ticks + rhs.Ticks);
+        public static Duration operator +(Duration a, Duration b)
+            => new Duration(a.Ticks + b.Ticks);
 
         [MethodImpl(Inline)]
-        public static Duration operator +(Duration lhs, TimeSpan rhs)
-            => new Duration(lhs.Ticks + rhs.Ticks);
+        public static Duration operator +(Duration a, TimeSpan b)
+            => new Duration(a.Ticks + b.Ticks);
 
         [MethodImpl(Inline)]
-        public static Duration operator -(Duration lhs, Duration rhs)
-            => new Duration(lhs.Ticks - rhs.Ticks);
+        public static Duration operator -(Duration a, Duration b)
+            => new Duration(a.Ticks - b.Ticks);
 
         [MethodImpl(Inline)]
-        public static Duration operator -(Duration lhs, TimeSpan rhs)
-            => new Duration(lhs.Ticks - rhs.Ticks);
+        public static Duration operator -(Duration a, TimeSpan b)
+            => new Duration(a.Ticks - b.Ticks);
 
         [MethodImpl(Inline)]
-        public static double operator /(Duration lhs, Duration rhs)        
-            => Math.Round((double)lhs.Ticks / (double) rhs.Ticks, 4);
+        public static double operator /(Duration a, Duration b)        
+            => Math.Round((double)a.Ticks / (double) b.Ticks, 4);
 
         [MethodImpl(Inline)]
-        public static double operator /(Duration lhs, TimeSpan rhs)        
-            => Math.Round((double)lhs.Ticks / (double) rhs.Ticks, 4);
+        public static double operator /(Duration a, TimeSpan b)        
+            => Math.Round((double)a.Ticks / (double) b.Ticks, 4);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Duration lhs, Duration rhs)
-            => lhs.Ticks != rhs.Ticks;
+        public static bool operator !=(Duration a, Duration b)
+            => a.Ticks != b.Ticks;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Duration lhs, Duration rhs)
-            => lhs.Ticks == rhs.Ticks;
+        public static bool operator ==(Duration a, Duration b)
+            => a.Ticks == b.Ticks;
 
         [MethodImpl(Inline)]
         public static bool operator >(Duration lhs, Duration rhs)
@@ -131,6 +141,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Z0.TimerTicks.ToMs(Ticks);
+        }
+
+        public TimeSpan TimeSpan
+        {
+            [MethodImpl(Inline)]
+            get => new TimeSpan(Ticks);
         }
 
         [MethodImpl(Inline)]

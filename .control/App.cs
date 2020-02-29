@@ -9,19 +9,22 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    class ConsoleControl : ConsoleApp<ConsoleControl>
+    class ConsoleControl : ConsoleApp<ConsoleControl,IAsmContext>
     {
-        public ConsoleControl()
-            : base(Log.Get(LogTarget.Define(LogArea.App)))
+        static IAsmContext CreateContext()
         {
-            Resolved = Designators.Control.Resolution.Designates.ToArray();
-            AsmCtx = AsmContext.New(AssemblyComposition.Assemble(Resolved));
+            var composition = Designators.Control.Resolution.Designates.Assemble();
+            return AsmContext.New(composition);
         }
 
-        readonly IAsmContext AsmCtx;
+        public ConsoleControl()
+            : base(CreateContext(), Log.Get(LogTarget.Define(LogArea.App)))
+        {
+
+        }
 
         protected override void Execute(params string[] args)
-            => AsmCtx.Archiver().Execute();
+            => Context.Archiver().Execute();
 
         public override IAssemblyResolution[] Resolved{get;}
 

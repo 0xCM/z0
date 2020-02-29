@@ -9,23 +9,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    public interface IPointSink<T> : ISink
+    public delegate Option<T> SourceEmitter<T>();
+
+    public interface ISource
     {
-        void Accept(in T src);
+        
     }
 
-    public interface IBufferedPointSink<S,T> : ISink
+    public interface ISource<T> : ISource
     {
-        void Accept(in S src, Span<T> buffer);
-    }
-
-    public interface IPointSink<A,B> : ISink
-    {
-        void Accept(in A a, in B b);
-    }
-
-    public interface IPointSink<A,B,C> : ISink
-    {
-        void Accept(in A a, in B b, in C c);
+        /// <summary>
+        /// Emits the next source value, if any
+        /// </summary>
+        Option<T> Next();
     }
 }

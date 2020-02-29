@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
     
     /// <summary>
     /// Defines a 32-symbol permutation
@@ -43,7 +43,7 @@ namespace Z0
         Perm32(Vector256<byte> data)
             => this.data = data;
 
-        static N256 w => n256;
+        static N256 w => Nats.n256;
     }
 
     /// <summary>
@@ -114,7 +114,5 @@ namespace Z0
         XU = 0b11110,
 
         XV = 0b11111,   
-
     }
-
 }

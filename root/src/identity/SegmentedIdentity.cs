@@ -9,9 +9,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static IdentityCommons;
 
     public readonly partial struct SegmentedIdentity : ITypeIdentity<SegmentedIdentity>
     {        
+        public static SegmentedIdentity Empty => Define(TypeIndicator.Empty, FixedWidth.None, NumericKind.None);
+
         public readonly TypeIndicator Indicator;
 
         public readonly FixedWidth TypeWidth;
@@ -19,8 +22,6 @@ namespace Z0
         public readonly NumericKind SegKind;  
 
         public string Identifier {get;}
-
-        public static SegmentedIdentity Empty => Define(TypeIndicator.Empty, FixedWidth.None, NumericKind.None);
 
         [MethodImpl(Inline)]
         public static SegmentedIdentity Define(TypeIndicator indicator, FixedWidth typewidth, NumericKind segkind)
@@ -42,9 +43,6 @@ namespace Z0
         public static bool operator!=(SegmentedIdentity a, SegmentedIdentity b)
             => !a.Equals(b);
 
-        // public static implicit operator SegmentedIdentity((TypeIndicator si, int w, int t, char i) src)                
-        //     => Define(src.si, src.w,src.t, src.i);
-
         public static implicit operator SegmentedIdentity((TypeIndicator si, FixedWidth w, FixedWidth t, NumericIndicator i) src)                
             => SegmentedIdentity.Define(src.si,src.w, src.t.ToNumericKind(src.i));
 
@@ -58,7 +56,6 @@ namespace Z0
                 = (TypeWidth.IsNone() && segkind.IsNone()) 
                 ? string.Empty 
                 : $"{indicator}{(int)TypeWidth}{IDI.SegSep}{segkind.Width()}{(char)segkind.Indicator()}";
-
         }
 
         public TypeIdentity AsTypeIdentity()
@@ -68,17 +65,18 @@ namespace Z0
         public bool Equals(SegmentedIdentity src)
             => IdentityEquals(this, src);
 
-        public override string ToString()
-            => Identifier;
  
-        public override int GetHashCode()
+        public int CompareTo(SegmentedIdentity src)
+            => IdentityCompare(this, src);
+
+         public override int GetHashCode()
             => IdentityHashCode(this);
 
-        public override bool Equals(object obj)
-            => IdentityEquals(this, obj);
+        public override bool Equals(object src)
+            => IdentityEquals(this, src);
 
-        public int CompareTo(IIdentity other)
-            => IdentityCompare(this, other);
+        public override string ToString()
+            => Identifier;
 
         static SegmentedIdentity Define(TypeIndicator si, int totalwidth, int segwidth, char ni)
         {

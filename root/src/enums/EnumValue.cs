@@ -51,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator EnumValues<E,V>(EnumValue<E,V>[] src)
-            => default;
+            => new EnumValues<E,V>(src);
 
         [MethodImpl(Inline)]
         public EnumValues(EnumValue<E,V>[] src) 

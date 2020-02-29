@@ -59,6 +59,5 @@ namespace Z0
             }
             return symbols;
         }
-
     }
 }

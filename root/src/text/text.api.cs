@@ -24,11 +24,28 @@ namespace Z0
         }
 
         /// <summary>
+        /// The non-null empty string
+        /// </summary>
+        public static string blank
+        {
+            [MethodImpl(Inline)]
+            get => string.Empty;
+        }
+
+        /// <summary>
+        /// Tests whether the source string is nonempty
+        /// </summary>
+        /// <param name="src">The string to evaluate</param>
+        [MethodImpl(Inline)]
+        public static bool nonempty(string src)
+            => !string.IsNullOrWhiteSpace(src);
+
+        /// <summary>
         /// Tests whether the source string is empty
         /// </summary>
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline)]
-        public static bool isblank(string src)
+        public static bool empty(string src)
             => string.IsNullOrWhiteSpace(src);
 
         /// <summary>
@@ -37,8 +54,21 @@ namespace Z0
         /// <param name="test">The subject string</param>
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline)]
-        public static string ifblank(string test, string replace = null)
-            => isblank(test) ? replace ?? string.Empty : test;
+        public static string ifempty(string test, string replace)
+            => empty(test) ? replace ?? string.Empty : test;
+
+        /// <summary>
+        /// If the test string is null, returns the empty string; otherwise, returns the test string
+        /// </summary>
+        /// <param name="test">The subject string</param>
+        /// <param name="replace">The replacement value if blank</param>
+        [MethodImpl(Inline)]
+        public static string denullify(string test)
+            => empty(test) ? string.Empty : test;
+
+        [MethodImpl(Inline)]
+        public static bool equals(string a, string b, bool cased = false)
+            => string.Equals(a,b, cased ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase);
 
         /// <summary>
         /// Creates a span of replicated characters 
@@ -47,7 +77,6 @@ namespace Z0
         /// <param name="count">The replication count</param>
         public static ReadOnlySpan<char> replicate(char src, int count)
             => new string(src,count);
-
 
         /// <summary>
         /// Concatenates a sequence of strings

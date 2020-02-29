@@ -23,7 +23,7 @@ namespace Z0
         {
             var spec = new Fsm1Spec();
             var tasks = new Task[Pow2.T08];
-            var indices = range(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
+            var indices = Numeric.range(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
             for(var i=0u; i< tasks.Length; i++)
             {
                 var random = Rng.Pcg64(0,indices[i]).ToPolyrand();

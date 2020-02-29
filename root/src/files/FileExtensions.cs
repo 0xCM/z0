@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     using static Root;
-
 
     public static class FileExtensions
     {
@@ -24,7 +24,5 @@ namespace Z0
 
         public static FileExtension Cs =>  FileExtension.Define("cs");
         
-
     }
-
 }

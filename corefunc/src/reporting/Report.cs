@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Root;
 
@@ -64,4 +61,25 @@ namespace Z0
 
         public readonly RecordFormatter<F,R> Formatter;
     }
+
+   public class Report<B,F, R> : Report<R>
+        where F : unmanaged, Enum
+        where R : IRecord<F, R>
+        where B : Report<B,F,R>, new()
+    {             
+        public static readonly new B Empty = new B();
+
+        public Report(R[] records)
+            : base(records)
+        {
+            Formatter = Reports.formatter<F,R>();
+        }
+
+        public Report()
+        {
+            Formatter = Reports.formatter<F,R>();
+        }
+
+        public readonly RecordFormatter<F,R> Formatter;
+    }    
 }

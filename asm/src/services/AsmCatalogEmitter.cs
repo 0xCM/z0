@@ -236,7 +236,7 @@ namespace Z0
             }
         }
 
-        void IPointSink<CaptureTokenGroup>.Accept(in CaptureTokenGroup src)
+        void ISink<CaptureTokenGroup>.Accept(in CaptureTokenGroup src)
         {
             Observer(src);
         }

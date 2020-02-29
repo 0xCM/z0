@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+
     using NK = NumericKind;
 
     public readonly struct NumericType<T> : INumericType<T> 
@@ -108,11 +109,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(NumericType src)
-             => IdentityEquals(this, src);
+             => IdentityCommons.IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
-            => IdentityCompare(this, other);
+        public int CompareTo(NumericType other)
+            => IdentityCommons.IdentityCompare(this, other);
 
         public override string ToString()
             => Identifier;

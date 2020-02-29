@@ -8,6 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.IO;
+    using System.Runtime.CompilerServices;
 
     using static Root;
 
@@ -16,20 +17,26 @@ namespace Z0
     /// </summary>
     public class FolderPath : PathComponent<FolderPath>
     {        
-        public static FolderPath operator + (FolderPath lhs, FolderName rhs)
-            => FolderPath.Define(Path.Join(lhs.Name, rhs.Name));
+        [MethodImpl(Inline)]
+        public static FolderPath Define(string name)
+            => new FolderPath(name);
 
-        public static FilePath operator + (FolderPath lhs, FileName rhs)
-            => new FilePath(Path.Join(lhs.Name, rhs.Name));
+        public static FolderPath operator + (FolderPath path, FolderName folder)
+            => FolderPath.Define(Path.Join(path.Name, folder.Name));
 
-        public static FolderPath operator + (FolderPath lhs, RelativeLocation rhs)
-            => FolderPath.Define(Path.Join(lhs.Name, rhs.Name));
+        public static FilePath operator + (FolderPath path, FileName file)
+            => new FilePath(Path.Join(path.Name, file.Name));
 
-        public static FolderPath Define(string Name)
-            => new FolderPath(Name);
+        public static FolderPath operator + (FolderPath path, RelativeLocation location)
+            => FolderPath.Define(Path.Join(path.Name, location.Name));
 
-        public FolderPath(string Name)
-            : base(Name)
+        public FolderPath()
+        {
+
+        }
+
+        public FolderPath(string name)
+            : base(name)
         {
 
         }

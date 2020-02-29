@@ -5,24 +5,33 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using Z0.Asm;
 
-    public class AsmCaptureSet
+    using static Root;
+
+    public readonly struct AsmCaptureSet
     {
-        public static AsmCaptureSet Define(ApiHostPath host, CapturedEncodingReport captured, Report<ParsedEncodingRecord> parsed, FilePath decoded)
-            => new AsmCaptureSet
-            {
-                Host = host,
-                Captured = captured,
-                Parsed = parsed,
-                DecodedPath = decoded
-            };
+        public static AsmCaptureSet Define(ApiHostPath host, CapturedEncodingReport captured, ParsedEncodingReport parsed, AsmFunctionList decoded)
+            => new AsmCaptureSet(host, captured, parsed, decoded);
 
-        public ApiHostPath Host {get;set;}        
+        public static implicit operator AsmCaptureSet((ApiHostPath host, CapturedEncodingReport captured, ParsedEncodingReport parsed, AsmFunctionList decoded) src)
+            => Define(src.host, src.captured, src.parsed, src.decoded);
+        
+        AsmCaptureSet(ApiHostPath host, CapturedEncodingReport captured, ParsedEncodingReport parsed, AsmFunctionList decoded)
+        {
+            this.Host = host;
+            this.Captured = captured;
+            this.Parsed = parsed;
+            this.Decoded = decoded;
+        }
 
-        public CapturedEncodingReport Captured {get;set;}
+        public readonly ApiHostPath Host;
 
-        public Report<ParsedEncodingRecord> Parsed {get;set;}
+        public readonly CapturedEncodingReport Captured;
 
-        public FilePath DecodedPath {get;set;}
+        public readonly ParsedEncodingReport Parsed;
+        
+        public readonly AsmFunctionList Decoded;
     }
 }

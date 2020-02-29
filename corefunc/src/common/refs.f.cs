@@ -87,14 +87,6 @@ partial class zfunc
         where T : unmanaged
             => ref refs.head(src,offset);
 
-    /// <summary>
-    /// Presents a readonly reference as reference
-    /// </summary>
-    /// <param name="src">The source reference</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T mutable<T>(in T src)
-        => ref refs.mutable(src);
 
     /// <summary>
     /// Presents a reference as a byte reference
@@ -115,6 +107,15 @@ partial class zfunc
         => ref refs.byteref(in src);
 
     /// <summary>
+    /// Presents a readonly reference as reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T mutable<T>(in T src)
+        => ref refs.mutable(src);
+
+    /// <summary>
     /// The canonical swap function
     /// </summary>
     /// <param name="lhs">The left value</param>
@@ -133,6 +134,16 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref T seek<T>(ref T src, int count)
         => ref refs.seek(ref src, count);
+
+    /// <summary>
+    /// Skips a specified number of source elements and returns a readonly reference to the resulting element
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <param name="count">The number of elements to skip</param>
+    /// <typeparam name="T">The source element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T skip<T>(in T src, int count)
+        => ref refs.skip(src,count);
 
     [MethodImpl(Inline)]
     public static ref byte seek8<T>(ref T src, int count)
@@ -210,15 +221,6 @@ partial class zfunc
     public static ref T seekb<T>(Span<T> src, long count)
         => ref refs.seekb(src, count);
 
-    /// <summary>
-    /// Skips a specified number of source elements and returns a readonly reference to the resulting element
-    /// </summary>
-    /// <param name="src">The source reference</param>
-    /// <param name="count">The number of elements to skip</param>
-    /// <typeparam name="T">The source element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly T skip<T>(in T src, int count)
-        => ref refs.skip(src,count);
 
     /// <summary>
     /// Skips a specified number of 8-bit source segments and returns a readonly reference to the resulting memory location

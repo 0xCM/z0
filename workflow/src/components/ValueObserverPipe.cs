@@ -15,13 +15,13 @@ namespace Z0
         where T : struct
     {
         [MethodImpl(Inline)]
-        public static ValueObserverPipe<T> Create(PointReceiver<T> receiver)
+        public static ValueObserverPipe<T> Create(SinkReceiver<T> receiver)
             => new ValueObserverPipe<T>(receiver);
                 
         [MethodImpl(Inline)]
-        ValueObserverPipe(PointReceiver<T> receiver)
+        ValueObserverPipe(SinkReceiver<T> receiver)
             => this.Receiver = receiver;
         
-        public readonly PointReceiver<T> Receiver {get;}
+        public readonly SinkReceiver<T> Receiver {get;}
     }
 }

@@ -9,35 +9,52 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
+    using static Root;
+
     public sealed class MsgContext : IMsgContext
     {
-        readonly AppMsgQueue Queue;
+        readonly MsgContextQueue Queue;
 
+        /// <summary>
+        /// Creates a message context that manages its own queue
+        /// </summary>
+        /// <param name="queue">The target queue</param>
         public static IMsgContext Create()
             => new MsgContext();          
 
-        MsgContext()
-            => Queue = AppMsgQueue.Create();
+        /// <summary>
+        /// Creates a message context using a supplied target queue
+        /// </summary>
+        /// <param name="queue">The target queue</param>
+        public static IMsgContext Create(MsgContextQueue queue)
+            => new MsgContext(queue);          
 
-        public IReadOnlyList<AppMsg> DequeuePosts()
+        MsgContext()
+            => Queue = MsgContextQueue.Create();
+
+        MsgContext(MsgContextQueue queue)
+            => Queue = queue;
+
+        public IReadOnlyList<AppMsg> DequeueMessages()
             => Queue.Dequeue();
         
         /// <summary>
         /// Enqueues application messages
         /// </summary>
         /// <param name="msg">The messages to enqueue</param>
+        [MethodImpl(Inline)]
         public void PostMessage(AppMsg msg)
-            => Queue.Post(msg);
+            => Queue.PostMessage(msg);
+        
+        [MethodImpl(Inline)]
+        public void PostMessage(string msg, AppMsgKind? severity = null)
+            => Queue.PostMessage(msg,severity);
 
-        public void Flush(Exception e, IAppMsgLog target)
+        public void FlushMessages(Exception e, IAppMsgLog target)
         {
             var messages = Queue.Flush(e);            
             Terminal.Get().WriteMessages(messages);
             target.Write(messages);
-
         }
-        
-        public void PostMessage(string msg, AppMsgKind? severity = null)
-            => Queue.Post(msg,severity);
     }    
 }

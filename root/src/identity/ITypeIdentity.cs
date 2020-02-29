@@ -15,7 +15,7 @@ namespace Z0
     }
     
     public interface ITypeIdentity<T> : ITypeIdentity, IIdentity<T>
-        where T : struct, ITypeIdentity<T>    
+        where T : ITypeIdentity<T>, new()    
     {
 
     }

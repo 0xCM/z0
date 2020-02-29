@@ -15,7 +15,7 @@ namespace Z0
     }
     
     public interface IApiHostIdentity<T> : IApiHostIdentity, IIdentity<T>
-        where T : struct, IApiHostIdentity<T>    
+        where T : IApiHostIdentity<T>, new()
     {
 
     }

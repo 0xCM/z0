@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
-
    public enum Arrange2L : byte
    {
         A = 0b00,

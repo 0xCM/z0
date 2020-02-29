@@ -6,16 +6,15 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using Z0.Asm;
 
-    using static zfunc;
+    // using static zfunc;
 
-    using Iced = Iced.Intel;
+    // using Iced = Iced.Intel;
 
-    /// <summary>
-    /// Internal contract for instruction-level formatting
-    /// </summary>
     public interface IAsmInstructionFormatter
     {
-        ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong baseaddress);
+
+        string FormatInstruction(in MemoryAddress @base, in AsmInstructionInfo src);        
     }
 }

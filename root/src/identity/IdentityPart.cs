@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static IdentityCommons;
 
     public readonly struct IdentityPart : IIdentity<IdentityPart>
     {        
@@ -25,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IdentityPart Define(byte index, IdentityPartKind kind, string text)
             => new IdentityPart(index, kind, text);
-
+        
         public static implicit operator IdentityPart((byte index, IdentityPartKind kind, string text) src)
             => Define(src.index, src.kind, src.text);
 
@@ -64,7 +65,7 @@ namespace Z0
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
 
-        public int CompareTo(IIdentity other)
+        public int CompareTo(IdentityPart other)
             => IdentityCompare(this, other);        
     }
 }

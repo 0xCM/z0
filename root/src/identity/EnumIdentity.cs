@@ -8,10 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static IdentityCommons;
 
     public readonly struct EnumIdentity  : ITypeIdentity<EnumIdentity>
     {
         public static EnumIdentity Empty = Define(string.Empty, NumericKind.None);
+
+        public string Identifier {get;}            
+
+        public string Name {get;}
+        
+        public NumericKind BaseType {get;}           
 
         [MethodImpl(Inline)]
         public static EnumIdentity From(Type src)
@@ -45,16 +52,11 @@ namespace Z0
             this.Identifier = basetype.IsSome() ? $"{Name}{IDI.ModSep}{basetype.Format()}" : string.Empty;
         }
      
-        public string Identifier {get;}            
-
-        public string Name {get;}
-        
-        public NumericKind BaseType {get;}           
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
+            get => text.empty(Identifier);
         }
 
         [MethodImpl(Inline)]
@@ -63,20 +65,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(EnumIdentity src)
-            => IdentityCommons.IdentityEquals(this, src);
+            => IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
-            => IdentityCommons.IdentityCompare(this, other);
+        public int CompareTo(EnumIdentity src)
+            => IdentityCompare(this, src);
  
         public override int GetHashCode()
-            => IdentityCommons.IdentityHashCode(this);
+            => IdentityHashCode(this);
 
         public override bool Equals(object obj)
-            => IdentityCommons.IdentityEquals(this, obj);
+            => IdentityEquals(this, obj);
 
         public override string ToString()
             => Identifier;
-
     }
 }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using System.Runtime.CompilerServices;
 
     using static Root;
 
@@ -15,6 +16,18 @@ namespace Z0
     /// </summary>
     public class FileName : PathComponent<FileName>
     {        
+        [MethodImpl(Inline)]
+        public static FileName Define(string name)
+            => new FileName(name);
+
+        [MethodImpl(Inline)]
+        public static FileName Define(string name, string ext)
+            => new FileName(name,ext);
+
+        [MethodImpl(Inline)]
+        public static FileName Define(string name, FileExtension ext)
+            => new FileName(name, ext.Name);
+
         public static FileName Timestamped(FileName src)
         {
             var first = new DateTime(2019,1,1);
@@ -24,29 +37,26 @@ namespace Z0
             return timestamped;            
         }
 
+        [MethodImpl(Inline)]
         public static FilePath Timestamped(FilePath src)
             => src.RenameFile(Timestamped(src.FileName));
         
-        public static FileName Define(string Name)
-            => new FileName(Name);
+        public static FileName operator + (FileName name, FileExtension ext)
+            => FileName.Define($"{name.Name}.{ext.Name}");
 
-        public static FileName Define(string Name, string Ext)
-            => new FileName(Name,Ext);
+        public FileName()
+        {
 
-        public static FileName Define(string Name, FileExtension Ext)
-            => new FileName(Name,Ext.Name);
+        }
 
-        public static FileName operator + (FileName lhs, FileExtension rhs)
-            => FileName.Define($"{lhs.Name}.{rhs.Name}");
-
-        public FileName(string Name)
-            : base(Name)
+        public FileName(string name)
+            : base(name)
             {
 
             }
 
-        public FileName(string Name, string Ext)
-            : base($"{Name}.{Ext}")
+        public FileName(string name, string ext)
+            : base($"{name}.{ext}")
             {
 
             }

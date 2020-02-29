@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a stewise-contiguous sequence of scalar values, available on-demand, 
@@ -43,7 +43,7 @@ namespace Z0.Logix
         }
         
         public IEnumerable<T> Terms
-            => range(Min,Max,Step);
+            => Numeric.range(Min,Max,Step);
 
         public int? Length 
             => convert<T,int>(gmath.sub(Max,Min));

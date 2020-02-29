@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
-
     public delegate void ObjectReceiver<T>(in T src)
         where T : class;
 
@@ -62,17 +60,10 @@ namespace Z0
 
     public delegate void StreamReceiver<T>(IEnumerable<T> src);
 
-    public delegate void PointReceiver<T>(in T src);
-
-    public delegate void PointReceiver<A,B>(in A a, in B b);
-
-    public delegate void PointReceiver<A,B,C>(in A a, in B b, in C c);
-
     /// <summary>
     /// Characterizes a function that produces a stream of values
     /// </summary>
     /// <typeparam name="T">The emission type</typeparam>
     public delegate IEnumerable<T> ValueEmitter<T>()
         where T : struct;    
-
 }

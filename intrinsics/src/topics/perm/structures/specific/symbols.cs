@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class permute
-    {
+    {        
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
         /// </summary>
@@ -45,7 +43,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> symbols(Perm2x4 src)
             => permute.symbols<Perm4Sym,byte>((byte)src,4);
-
     }
-
 }

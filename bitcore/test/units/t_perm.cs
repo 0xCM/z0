@@ -26,7 +26,7 @@ namespace Z0
         {
             
             var perm = permute.identity(n);
-            var lengths = range(m,n);
+            var lengths = Numeric.range(m,n);
             iter(lengths, i => {
                 var p = permute.identity(i);
                 var cycle = p.Cycle(default(T));

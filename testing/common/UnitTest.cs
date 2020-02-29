@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Diagnostics;
     
-    using static zfunc;
-
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using static Root;
+    using static Nats;
 
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
@@ -27,7 +26,6 @@ namespace Z0
             {
 
             }        
-
 
         /// <summary>
         /// Creates a new stopwatch and optionally start it
@@ -270,7 +268,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, name.Identifier);
+                term.error(e, name.Identifier);
                 succeeded = false;
             }
             finally
@@ -296,7 +294,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, name);
+                term.error(e, name);
                 succeeded = false;
             }
             finally

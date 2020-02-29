@@ -9,18 +9,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
 
-    public readonly struct PointSink<T> : IPointSink<T>
+    public readonly struct Sink<T> : ISink<T>
     {
         static void empty(in T src){}
         
-        public static PointSink<T> Empty => new PointSink<T>(empty);
+        public static Sink<T> Empty => new Sink<T>(empty);
         
-        readonly PointReceiver<T> Receiver;
+        readonly SinkReceiver<T> Receiver;
         
         [MethodImpl(Inline)]
-        internal PointSink(PointReceiver<T> receiver)
+        internal Sink(SinkReceiver<T> receiver)
             => Receiver = receiver;
         
         [MethodImpl(Inline)]
@@ -28,16 +28,16 @@ namespace Z0
             => Receiver(in src);
     }
 
-    public readonly struct PointSink<A,B> : IPointSink<A,B>
+    public readonly struct Sink<A,B> : ISink<A,B>
     {
         static void empty(in A a, in B b){}
         
-        public static PointSink<A,B> Empty => new PointSink<A,B>(empty);
+        public static Sink<A,B> Empty => new Sink<A,B>(empty);
 
-        readonly PointReceiver<A,B> Receiver;
+        readonly SinkReceiver<A,B> Receiver;
         
         [MethodImpl(Inline)]
-        internal PointSink(PointReceiver<A,B> receiver)
+        internal Sink(SinkReceiver<A,B> receiver)
             => Receiver = receiver;
         
         [MethodImpl(Inline)]
@@ -45,21 +45,20 @@ namespace Z0
             => Receiver(in a, in b);
     }
 
-    public readonly struct PointSink<A,B,C> : IPointSink<A,B,C>
+    public readonly struct Sink<A,B,C> : ISink<A,B,C>
     {
         static void empty(in A a, in B b, in C c){}
         
-        public static PointSink<A,B,C> Empty => new PointSink<A,B,C>(empty);
+        public static Sink<A,B,C> Empty => new Sink<A,B,C>(empty);
 
-        readonly PointReceiver<A,B,C> Receiver;
+        readonly SinkReceiver<A,B,C> Receiver;
         
         [MethodImpl(Inline)]
-        internal PointSink(PointReceiver<A,B,C> receiver)
+        internal Sink(SinkReceiver<A,B,C> receiver)
             => Receiver = receiver;
         
         [MethodImpl(Inline)]
         public void Accept(in A a, in B b, in C c)
             => Receiver(in a, in b, in c);
     }
-
 }

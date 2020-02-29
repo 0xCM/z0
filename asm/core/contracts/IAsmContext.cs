@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IComposedContext<IAsmContext>
+    public interface IAsmContext : IComposedContext<IAsmContext>, IAppMsgSink
     {
         int Identity {get;}
         

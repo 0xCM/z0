@@ -15,5 +15,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The code source</param>
         AsmInstructionList DecodeInstructions(AsmCode src);        
+
+        /// <summary>
+        /// Decodes an instruction list
+        /// </summary>
+        /// <param name="src">The code source</param>
+        AsmInstructionList DecodeInstructions(EncodedData src);        
     }
 }

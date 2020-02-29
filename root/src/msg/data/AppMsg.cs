@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static Root;
@@ -16,34 +16,51 @@ namespace Z0
     /// <summary>
     /// Defines a message that encapsulates application diagnstic/status/error message content
     /// </summary>
-    public class AppMsg
+    public class AppMsg  : IFormattable<AppMsg>
     {
-        public static AppMsg Define(string content, AppMsgKind level)
-            => new AppMsg(content, level, string.Empty, string.Empty,null);
+        public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new AppMsg(content, kind, caller, FilePath.Define(file), line);
 
-        public static AppMsg Define(string content, AppMsgKind? level = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, level ?? AppMsgKind.Info, caller, file, line);
+        public static AppMsg NoCaller(object content, AppMsgKind kind)
+            => new AppMsg(content, kind, text.blank, FilePath.Empty, null);
+
+        public static AppMsg SpecificCaller(object content, AppMsgKind kind, string caller, string file = null, int? line = null)
+            => new AppMsg(content, kind, caller,FilePath.Define(file),line);
+
+        public static AppMsg Colorize(object content, AppMsgColor color, AppMsgKind kind = AppMsgKind.Info)
+            => new AppMsg(content, kind, color, text.blank, FilePath.Empty, null);
+
+        public static AppMsg Info(object content)
+            => new AppMsg(content, AppMsgKind.Info, text.blank, FilePath.Empty, null);
+
+        public static AppMsg Babble(object content)
+            => new AppMsg(content, AppMsgKind.Babble, text.blank, FilePath.Empty, null);
+
+        public static AppMsg Warn(object content)
+            => new AppMsg(content, AppMsgKind.Warning, text.blank, FilePath.Empty, null);
+
+        public static AppMsg Error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new AppMsg(content, AppMsgKind.Error, caller, FilePath.Define(file), line);
         
-        public static AppMsg Error(string content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, AppMsgKind.Error, caller, file, line);
+        public static AppMsg Empty
+            => new AppMsg(string.Empty, AppMsgKind.Info, text.blank, FilePath.Empty, null);
 
-        public static readonly AppMsg Empty
-            = new AppMsg(string.Empty, AppMsgKind.Info, string.Empty, string.Empty, null);
-
-        AppMsg(string Content, AppMsgKind Level, string Caller, string Path, int? FileLine)
-        {
-            this.Content = Content ?? string.Empty;
-            this.Level = Level;
-            this.Caller = Caller ?? string.Empty;
-            this.CallerFile =  nonempty(Path) ? FilePath.Define(Path) : Z0.FilePath.Empty;
-            this.FileLine = FileLine;    
-        }
-
-        AppMsg(string content, AppMsgKind Level, string caller, FilePath file, int? line)
+        AppMsg(object content, AppMsgKind kind, string caller, FilePath file, int? line)
         {
             this.Content = content ?? string.Empty;
-            this.Level = Level;
-            this.Caller = caller ?? string.Empty;
+            this.Kind = kind;
+            this.Color = (AppMsgColor)kind;
+            this.Caller =  text.denullify(caller);
+            this.CallerFile = file;
+            this.FileLine = line;    
+        }
+
+        AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line)
+        {
+            this.Content = content ?? string.Empty;
+            this.Kind = kind;
+            this.Color = color;
+            this.Caller =  text.denullify(caller);
             this.CallerFile = file;
             this.FileLine = line;    
         }
@@ -51,12 +68,17 @@ namespace Z0
         /// <summary>
         /// The message body
         /// </summary>
-        public string Content {get;}
+        public object Content {get;}
 
         /// <summary>
-        /// The message severit
+        /// The message classification
         /// </summary>
-        public AppMsgKind Level {get;}
+        public AppMsgKind Kind {get;}
+
+        /// <summary>
+        /// The message foreground color when rendered for display
+        /// </summary>
+        public AppMsgColor Color {get;}
 
         /// <summary>
         /// The name of the member that originated the message
@@ -73,11 +95,8 @@ namespace Z0
         /// </summary>
         public int? FileLine {get;}
 
-        public bool SupressFullPath
-            => Level != AppMsgKind.Error;
-
         public bool IsEmpty
-            => String.IsNullOrWhiteSpace(Content);
+            => Content == null || (Content is string s && text.empty(s));
 
         /// <summary>
         /// Edits the message to include specifed caller info data
@@ -86,7 +105,7 @@ namespace Z0
         /// <param name="file">The file in which the invocation occurred</param>
         /// <param name="line">The line number at which the invocation occurred</param>
         public AppMsg WithCallerInfo(string caller, string file, int? line)
-            => new AppMsg(Content, Level, caller,file,line);
+            => new AppMsg(Content, Kind, caller, FilePath.Define(file),line);
 
         /// <summary>
         /// Edits the message severity level
@@ -99,39 +118,39 @@ namespace Z0
         /// Prepends the message body with specified content
         /// </summary>
         /// <param name="prefix">The prefix conent</param>
-        public AppMsg WithPrependedContent(string prefix)    
-            => new AppMsg($"{prefix}{this.Content}", Level, Caller, CallerFile, FileLine);
+        public AppMsg WithPrependedContent(object prefix)    
+            => new AppMsg($"{prefix}{Content}", Kind, Caller, CallerFile, FileLine);
 
         /// <summary>
         /// Appends specified content to the message body
         /// </summary>
         /// <param name="suffix">The suffix content</param>
-        public AppMsg WithAppendedContent(string suffix)    
-            => new AppMsg($"{this.Content}{suffix}", Level, Caller, CallerFile, FileLine);
+        public AppMsg WithAppendedContent(object suffix)    
+            => new AppMsg($"{Content}{suffix}", Kind, Caller, CallerFile, FileLine);
 
         public string Format()
         {
-            var source = string.Empty;
+            if(IsEmpty)
+                return string.Empty;
+
+            var formatted = string.Empty;
             
-            if(nonempty(Caller))
-                source += $"{Caller}(";
+            if(text.nonempty(Caller))
+                formatted += $"{Caller}(";
 
             if(CallerFile.IsNonEmpty)
-                source += SupressFullPath ? $"File: {CallerFile.FileName.Name}" : $"File: {CallerFile.Name}";                        
+                formatted += (Kind != AppMsgKind.Error) ? $"File: {CallerFile.FileName.Name}" : $"File: {CallerFile.Name}";                        
 
             if(FileLine != null)
-                source += $", Line: {FileLine}";
+                formatted += $", Line: {FileLine}";
 
-            if(nonempty(Caller))
-                source += ")";
-
-            return nonempty(source) 
-                ? $"{source.Trim()} | {Content}" 
-                : Content;
-
+            if(text.nonempty(Caller))
+                formatted += ")";
+            
+            return formatted.IsBlank() ? $"{Content}" : $"{formatted.Trim()} | {Content}" ;
         }
+        
         public override string ToString()
             => Format();
-
     }
 }

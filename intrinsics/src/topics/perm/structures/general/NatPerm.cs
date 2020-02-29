@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
+    using static Nats;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
@@ -35,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static int[] AllocIdentity()
-            => range(0, n - 1).ToArray();
+            => Numeric.range(0, n - 1).ToArray();
 
         /// <summary>
         /// Allocates an empty permutation

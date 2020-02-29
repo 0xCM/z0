@@ -8,36 +8,13 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
+    using System.Runtime.CompilerServices;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
 
 
-    static class t_asm
-    {
-        public static IAsmContext NewContext
-            => AsmContext.New(
-                Designators.Analogs.Resolution,
-                Designators.AsmCore.Resolution,
-                Designators.BitCore.Resolution,
-                Designators.BitGrids.Resolution,
-                Designators.BitSpan.Resolution,
-                Designators.BitFields.Resolution,
-                Designators.BitVectors.Resolution,
-                Designators.CoreFunc.Resolution,
-                Designators.DataBlocks.Resolution,
-                Designators.FastOps.Resolution,
-                Designators.Fixed.Resolution,
-                Designators.GMath.Resolution,
-                Designators.GMathSvc.Resolution,
-                Designators.Intrinsics.Resolution,
-                Designators.LibM.Resolution,
-                Designators.Logix.Resolution,
-                Designators.Root.Resolution
-                );
-        
-    }
 
     public abstract class t_asm<U> : UnitTest<U>
         where U : t_asm<U>
@@ -46,7 +23,7 @@ namespace Z0
         
         public t_asm()
         {
-            Context = t_asm.NewContext;
+            Context = AsmContext.Rooted(this, DefaultComposition.Create());
         }
 
         public void Dispose()

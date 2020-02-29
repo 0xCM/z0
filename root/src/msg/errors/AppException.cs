@@ -51,7 +51,7 @@ namespace Z0
         public new AppMsg Message {get;}
 
         public AppMsgKind Severity
-            => Message.Level;
+            => Message.Kind;
 
         public override string ToString()
             => Message.ToString();

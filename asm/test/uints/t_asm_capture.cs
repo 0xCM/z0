@@ -12,32 +12,27 @@ namespace Z0
     {
         public void capture_workflow()
         {                    
-
-            // var r1 = ParsedEncodingReport.Empty.Description;
-            // Trace(r1);
-
-            // var r2 = CapturedEncodingReport.Empty.Description;
-            // Trace(r2);
-
-            // var r3 = AsmEmissionReport.Empty.Description;
-            // Trace(r3);
-
             var paths = Context.EmissionPaths();                    
             var workflow = Context.HostCaptureFlow();
             foreach(var result in workflow.Execute())
             {
-                Claim.exists(paths.ParsedPath(result.Host));                
+                Claim.exists(paths.ParsedPath(result.Host));
+                OnWorkflowComplete(result);                
             }
+        }
+
+        void OnWorkflowComplete(in AsmCaptureSet src)
+        {
+            Trace($"Completed capture workflow for {src.Host}");
         }
 
         public void call32_intr_pattern()
         {
             var patterns = EncodingPatterns.Define();
             if(patterns.TryPartialMatch(EncodingPatternKind.CALL32_INTR, AsChar_Span8u_Input, out var selected))
-            {
                 Claim.eq(AsChar_Span8u_Output,selected);
-
-            }                        
+            else
+                Claim.fail();
         }
 
         static ReadOnlySpan<byte> AsChar_Span8u_Input 

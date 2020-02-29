@@ -99,7 +99,7 @@ namespace Z0
             where T : unmanaged
         {
             var sw = stopwatch();
-            var variations = from i in range(count) 
+            var variations = from i in Numeric.range(count) 
                     let seed = Seed1024.Entropic
                     let evolve = TimeSeries.Evolve(seed, domain, steps)
                     let status = evolve.ContinueWith(t => receiver(t.Result))

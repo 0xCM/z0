@@ -15,7 +15,7 @@ namespace Z0
     }
     
     public interface IOpIdentity<T> : IOpIdentity, IIdentity<T>
-        where T : struct, IOpIdentity<T>    
+        where T : IOpIdentity<T>, new()    
     {
 
     }    

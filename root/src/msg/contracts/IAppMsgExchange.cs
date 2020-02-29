@@ -11,25 +11,13 @@ namespace Z0
     /// <summary>
     /// Characterizes a stateful thing that functions as an exchange for application messages
     /// </summary>
-    public interface IAppMsgExchange
+    public interface IAppMsgExchange : IAppMsgSink
     {
         /// <summary>
         /// Removes the messages accumulated by the context and returns these messages to the caller
         /// </summary>
-        IReadOnlyList<AppMsg> DequeuePosts();
+        IReadOnlyList<AppMsg> DequeueMessages();
 
-        /// <summary>
-        /// Posts a message to the context queue
-        /// </summary>
-        /// <param name="msg">The message to post</param>
-        void PostMessage(AppMsg msg);
-
-        /// <summary>
-        /// Posts a text message to the context queue with optional severity
-        /// </summary>
-        /// <param name="msg">The message to post</param>
-        void PostMessage(string msg, AppMsgKind? severity = null);
-
-        void Flush(Exception exception, IAppMsgLog target);                       
+        void FlushMessages(Exception exception, IAppMsgLog target);                       
     }
 }

@@ -21,8 +21,8 @@ namespace Z0
                 using var dst = LogArea.Test.LogWriter(filename);
                 dst.WriteLine(GridStats.FormatHeader());
                 var points = (
-                    from row in range(minsegs,maxsegs)
-                    from col in range(minsegs,maxsegs)
+                    from row in Numeric.range(minsegs,maxsegs)
+                    from col in Numeric.range(minsegs,maxsegs)
                     let count = row*col
                     orderby count
                     select (row, col)).ToArray();

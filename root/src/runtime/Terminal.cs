@@ -113,7 +113,7 @@ namespace Z0
             lock(locker)
             {
                 var fg = Console.ForegroundColor;
-                Console.ForegroundColor = ForeColor(msg.Level);                
+                Console.ForegroundColor = ForeColor(msg.Kind);                
                 Console.Error.Write(msg);
                 Console.Error.Write(AsciEscape.Eol);
                 Console.ForegroundColor = fg;
@@ -141,14 +141,14 @@ namespace Z0
 
         public void WriteMessage(AppMsg msg, bool cr = true)
         {   
-            if(msg.Level == AppMsgKind.Error)
-                WriteError(msg, ForeColor(msg.Level));
+            if(msg.Kind == AppMsgKind.Error)
+                WriteError(msg, ForeColor(msg.Kind));
             else
             {
                 if(cr)
-                    WriteLine(msg, ForeColor(msg.Level)); 
+                    WriteLine(msg, ForeColor(msg.Kind)); 
                 else
-                    Write(msg, ForeColor(msg.Level));
+                    Write(msg, ForeColor(msg.Kind));
             }
         }
                                 
@@ -159,7 +159,7 @@ namespace Z0
                 var fg = Console.ForegroundColor;
                 foreach(var msg in messages)
                 {
-                    Console.ForegroundColor = ForeColor(msg.Level);
+                    Console.ForegroundColor = ForeColor(msg.Kind);
                     Console.WriteLine(msg);
                 }                
                 Console.ForegroundColor = fg;

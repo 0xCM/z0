@@ -14,6 +14,8 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
+        public static AsmFunction Empty => new AsmFunction(OpDescriptor.Empty, AsmCode.Empty, 0, AsmInstructionList.Empty);
+
         public static AsmFunction Define(ParsedEncoding encoding,  AsmInstructionList instructions)
         {         
             var code = AsmCode.Define(encoding.Operation.Id, encoding.ParsedData);
@@ -94,6 +96,8 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => Instructions.Length;            
         }
+
+        public bool IsEmpty => InstructionCount == 0;
 
         public AsmFunction WithCil(CilFunction cil)            
         {            

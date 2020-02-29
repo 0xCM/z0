@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="context">The configuration to use</param>
         [MethodImpl(Inline)]
-        internal static IAsmInstructionFormatter InstructionFormatter(this IAsmContext context)
+        internal static AsmFunctionFormatter InstructionFormatter(this IAsmContext context)
             => AsmFunctionFormatter.BaseFormatter(context);    
 
         /// <summary>

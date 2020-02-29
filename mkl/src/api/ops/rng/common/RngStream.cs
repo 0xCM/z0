@@ -10,7 +10,7 @@ namespace Z0.Mkl
     using System.Collections.Generic;
 	using static zfunc;
 
-    public readonly struct MklRng : IRandomSource,  IDisposable
+    public readonly struct MklRng : IRngSource,  IDisposable
     {
         [MethodImpl(Inline)]
         public static MklRng Define(BRNG brng, uint seed = 0, int index = 0)

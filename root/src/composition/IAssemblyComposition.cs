@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Characterizes, in dependency injection vernacular, composition roots
     /// </summary>
-    public interface IAssemblyComposition
+    public interface IAssemblyComposition : ICustomFormattable
     {
         /// <summary>
         /// The resolved assemblies that comprise the composition
@@ -31,5 +31,12 @@ namespace Z0
             => from a in Resolved
                 where !a.Catalog.IsEmpty
                 select a.Catalog;
+    }
+
+    public interface IAssemblyComposition<T> :  IAssemblyComposition, IFormattable<T>
+        where T : IAssemblyComposition<T>
+    {
+
+
     }
 }

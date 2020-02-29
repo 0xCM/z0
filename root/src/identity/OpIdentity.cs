@@ -11,8 +11,9 @@ namespace Z0
     using System.Collections.Generic;
     
     using static Root;
+    using static IdentityCommons;
 
-    public readonly partial struct OpIdentity : IIdentity<OpIdentity>
+    public readonly partial struct OpIdentity : IOpIdentity<OpIdentity>
     {            
         /// <summary>
         /// The moniker text
@@ -101,17 +102,17 @@ namespace Z0
             
         [MethodImpl(Inline)]
         public bool Equals(OpIdentity src)
-            => IdentityCommons.IdentityEquals(this, src);
+            => IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
-            => IdentityCommons.IdentityCompare(this, other);
+        public int CompareTo(OpIdentity other)
+            => IdentityCompare(this, other);
  
         public override int GetHashCode()
-            => IdentityCommons.IdentityHashCode(this);
+            => IdentityHashCode(this);
 
         public override bool Equals(object obj)
-            => IdentityCommons.IdentityEquals(this, obj);
+            => IdentityEquals(this, obj);
 
         public override string ToString()
             => Identifier;

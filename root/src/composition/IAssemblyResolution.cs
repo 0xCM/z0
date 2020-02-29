@@ -20,7 +20,7 @@ namespace Z0
     /// Characterizes an object that, when extant, proves that the represented assembly 
     /// is resolved/loaded/ready-for-use
     /// </summary>
-    public interface IAssemblyResolution : IAssemblyIdentity
+    public interface IAssemblyResolution : IAssemblyIdentity, ICustomFormattable
     {
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
    /// Characterizes an object of parametric type that, when extant, proves that the represented assembly 
    /// is resolved/loaded/ready-for-use
    /// </summary>
-   public interface IAssemblyResolution<T> : IAssemblyResolution
+   public interface IAssemblyResolution<T> : IAssemblyResolution, IFormattable<T>
         where T : IAssemblyResolution<T>, new()   
     {
         /// <summary>

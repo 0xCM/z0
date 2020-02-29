@@ -15,6 +15,15 @@ namespace Z0
     [ApiHost("cast", ApiHostKind.Generic)]
     public static partial class Cast
     {
+        /// <summary>
+        /// Explicitly casts a source value to value of the indicated type, raising an exception if operation fails
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T force<T>(object src) 
+            => (T)src;
+
         [MethodImpl(Inline)]   
         public static T to<S,T>(S src)
             where S : unmanaged

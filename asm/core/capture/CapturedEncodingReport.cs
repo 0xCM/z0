@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using F = CapturedEncodingField;
@@ -74,15 +72,12 @@ namespace Z0
 
     public class CapturedEncodingReport : Report<F,R>
     {        
-        public static CapturedEncodingReport Create(ApiHostPath src, CapturedEncodingRecord[] records)
-            => new CapturedEncodingReport(src,records);
+        public static CapturedEncodingReport Create(CapturedEncodingRecord[] records)
+            => new CapturedEncodingReport(records);
         
-        CapturedEncodingReport(ApiHostPath src, CapturedEncodingRecord[] records)
+        CapturedEncodingReport(CapturedEncodingRecord[] records)
             : base(records)
         {
-            this.Host = src;
-        }
-        
-        public ApiHostPath Host {get;}    
+        }        
     }    
 }

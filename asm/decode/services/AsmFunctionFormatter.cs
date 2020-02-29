@@ -24,7 +24,7 @@ namespace Z0
         public IAsmContext Context {get;}
         
         [MethodImpl(Inline)]
-        public static IAsmInstructionFormatter BaseFormatter(IAsmContext context)
+        public static AsmFunctionFormatter BaseFormatter(IAsmContext context)
             => new AsmFunctionFormatter(context, context.AsmFormat);
 
         [MethodImpl(Inline)]
@@ -188,7 +188,7 @@ namespace Z0
         static string FormatLineLabel(ulong src)
             => text.concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
 
-        string FormatInstruction(in MemoryAddress @base, in AsmInstructionInfo src)
+        public string FormatInstruction(in MemoryAddress @base, in AsmInstructionInfo src)
         {
             var description = text.factory.Builder();
             var absolute = @base + (MemoryAddress)src.Offset;  

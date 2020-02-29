@@ -14,7 +14,7 @@ namespace Z0.Mkl
     using static zfunc;
     using static As;
 
-    abstract class Sampler<T,S> : IRandomSampler<T>    
+    abstract class Sampler<T,S> : IRngSampler<T>    
         where T : unmanaged
         where S : IDistributionSpec
     {        

@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static IdentityCommons;
 
     public readonly struct IdentityGranule : IIdentity<IdentityGranule>
     {                
@@ -30,6 +31,7 @@ namespace Z0
         public static bool operator!=(IdentityGranule a, IdentityGranule b)
             => !a.Equals(b);
 
+        [MethodImpl(Inline)]
         IdentityGranule(string atomic)
         {
             this.Identifier = atomic;
@@ -37,22 +39,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(IdentityGranule src)
-            => IdentityCommons.IdentityEquals(this, src);
+            => IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
-            => IdentityCommons.IdentityCompare(this, other);
+        public int CompareTo(IdentityGranule other)
+            => IdentityCompare(this, other);
  
         public override int GetHashCode()
-            => IdentityCommons.IdentityHashCode(this);
+            => IdentityHashCode(this);
 
         public override bool Equals(object obj)
-            => IdentityCommons.IdentityEquals(this, obj);
+            => IdentityEquals(this, obj);
 
         public override string ToString()
             => Identifier;
-
-
     }
-
 }

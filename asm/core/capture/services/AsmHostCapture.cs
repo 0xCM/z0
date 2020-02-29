@@ -51,8 +51,7 @@ namespace Z0
                     );
                 records[i] = record;
             }    
-            var report = CapturedEncodingReport.Create(src.Path, records);
-            return report;
+            return CapturedEncodingReport.Create(records);
         }
 
         public IEnumerable<EncodedOp> DefinedHostOps(ApiHost host)

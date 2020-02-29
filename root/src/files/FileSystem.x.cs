@@ -77,8 +77,7 @@ namespace Z0
         public static void WriteText(this FilePath dst, string src)
         {
             if(!string.IsNullOrWhiteSpace(src))
-            {
-                
+            {                
                 File.WriteAllText(dst.CreateParentIfMissing().FullPath, src);
             }
         }

@@ -8,7 +8,11 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
+
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     using static Root;
 
     /// <summary>
@@ -48,12 +52,13 @@ namespace Z0
         {
             lock(lockobj)
             {
-                Post(AppMsg.Define($"{e}", AppMsgKind.Error));
+                Post(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
                 return Dequeue();
             }
         }
 
+
         public void Post(string msg, AppMsgKind? severity = null)
-            => Post(AppMsg.Define($"{msg}", severity ?? AppMsgKind.Babble));
+            => Post(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
     }
 }

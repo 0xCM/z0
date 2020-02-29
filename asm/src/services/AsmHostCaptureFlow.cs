@@ -33,7 +33,6 @@ namespace Z0
         AsmEmissionPaths EmissionPaths
             => Context.EmissionPaths();
 
-
         void CreateLocationReport(AssemblyId id)
             => Context.MemberLocations(id).OnSome(report => report.Save());
 
@@ -46,18 +45,20 @@ namespace Z0
             {
                 var id = owner.Key;
                 if(Selected.Contains(id))
-                {
-
                     foreach(var host in owner)
                        yield return RunHostCaptureFlow(host);
-                }
             }
 
             iter(Selected, CreateLocationReport);
         }
 
-        void Decode(ParsedEncodingRecord src, IAsmFunctionDecoder decoder,  IAsmFunctionWriter dst)
-            => dst.Write(decoder.DecodeFunction(src));
+        AsmFunction Decode(ParsedEncodingRecord src, IAsmFunctionDecoder decoder,  IAsmFunctionWriter dst)
+        {
+            var f = decoder.DecodeFunction(src);
+            dst.Write(f);
+            return f;
+
+        }
 
         static void EmitCil(Assembly src)
         {
@@ -74,51 +75,61 @@ namespace Z0
             }            
         }
 
-        (CapturedEncodingReport result, FilePath target) CaptureHostOps(ApiHost host)
+        public static AppMsg HostCaptured(ApiHost host, FilePath dst)
+            => AppMsg.Info($"Emitted {host} encodings to {dst}");
+
+        public static AppMsg HostCaptureFailed(ApiHost host)
+            => AppMsg.Define($"Error emitting {host} encodings", AppMsgKind.Error);
+
+        CapturedEncodingReport CaptureHostOps(ApiHost host)
         {
             var capture = Context.HostCapture();
             var captured = capture.CaptureHostOps(host);
-            var target = EmissionPaths.CapturePath(host);                
+            var target = EmissionPaths.CapturePath(host);  
+            var sink = Context;
             captured.Save(target)
-                        .OnSome(file => print($"Emitted {host} encodings to {file}"))
-                        .OnNone(() => error($"Error emitting {host} encodings"));                       
-            return (captured,target);
+                     .OnSome(file => sink.PostMessage(HostCaptured(host,file)))
+                     .OnNone(() => sink.PostMessage(HostCaptureFailed(host)));
+            return captured;
         }
 
-        (Report<ParsedEncodingRecord>,FilePath) ParseHostOps(ApiHost host, CapturedEncodingReport captured)
+        ParsedEncodingReport ParseHostOps(ApiHost host, CapturedEncodingReport captured)
         {
             var parser = Context.EncodingParser();
             var parsed = parser.Parse(host,captured);
             var target = EmissionPaths.ParsedPath(host);
+            var sink = Context;
             parsed.Save(target)
-                        .OnSome(file => print($"Emitted parsed {host} encodings to {file}"))
-                        .OnNone(() => error($"Error parsing {host} encodings"));                       
-
+                        .OnSome(file => sink.PostMessage($"Emitted parsed {host} encodings to {file}"))
+                        .OnNone(() => sink.PostMessage($"Error parsing {host} encodings", AppMsgKind.Error));
             require(captured.RecordCount == parsed.RecordCount);
-            return (parsed,target);
+            return parsed;
         }
 
-        FilePath Decode(ApiHost host, CapturedEncodingReport captured, Report<ParsedEncodingRecord> parsed)
+        AsmFunctionList Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodingReport parsed)
         {
             var path = EmissionPaths.DecodedPath(host);
             var decoder = Context.FunctionDecoder();
+            var functions = new AsmFunction[captured.RecordCount];
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
             for(var i=0; i< captured.RecordCount; i++)
             {
                 var record = parsed[i];
                 if(record.Length != 0)
-                    Decode(record, decoder, dst);
+                    functions[i] = Decode(record, decoder, dst);
+                else
+                    functions[i] = AsmFunction.Empty;
             }
-            return path;
+            return AsmFunctionList.Define(functions);
         }
 
         AsmCaptureSet RunHostCaptureFlow(ApiHost host)        
         {
-            print($"Capturing {host}");
-            (var captured, _) = CaptureHostOps(host);            
-            (var parsed, _) = ParseHostOps(host, captured);
-            var decoded = Decode(host, captured, parsed);
-            return AsmCaptureSet.Define(host.Path, captured, parsed, decoded);
+            Context.PostMessage($"Capturing {host}");
+            var captured = CaptureHostOps(host);
+            var parsed = ParseHostOps(host, captured);
+            var decoded = Decode(host, captured, parsed);        
+            return (host.Path, captured, parsed, decoded);
         }
     }
 }

@@ -18,10 +18,10 @@ namespace Z0.Mkl
         /// <param name="rng">The random stream</param>
         /// <param name="spec">The distribution specifier</param>
         /// <typeparam name="T">The sample point type</typeparam>
-        public static IRandomSampler<T> Sampler<T>(this MklRng rng, IDistributionSpec<T> spec)
+        public static IRngSampler<T> Sampler<T>(this MklRng rng, IDistributionSpec<T> spec)
             where T : unmanaged
         {
-            var sampler = default(IRandomSampler<T>);
+            var sampler = default(IRngSampler<T>);
             switch(spec.DistKind)
             {
                 case DistKind.Uniform:
@@ -50,17 +50,17 @@ namespace Z0.Mkl
         /// <param name="spec">The distribution specifier</param>
         /// <typeparam name="T">The sample point type</typeparam>
         [MethodImpl(Inline)]
-        public static IRandomSampler<T> UniformSampler<T>(this MklRng rng, UniformSpec<T>? spec = null)
+        public static IRngSampler<T> UniformSampler<T>(this MklRng rng, UniformSpec<T>? spec = null)
             where T : unmanaged
         {
             var _spec = spec ?? UniformSpec.Define<T>(minval<T>(), maxval<T>());
-            var sampler = default(IRandomSampler<T>);
+            var sampler = default(IRngSampler<T>);
             if(typeof(T) == typeof(int))
-                sampler = samplers.uniform(rng, _spec.ToInt32()) as IRandomSampler<T>;
+                sampler = samplers.uniform(rng, _spec.ToInt32()) as IRngSampler<T>;
             else if(typeof(T) == typeof(float))
-                sampler = samplers.uniform(rng, _spec.ToFloat32()) as IRandomSampler<T>;
+                sampler = samplers.uniform(rng, _spec.ToFloat32()) as IRngSampler<T>;
             else if(typeof(T) == typeof(double))                    
-                sampler = samplers.uniform(rng, _spec.ToFloat64()) as IRandomSampler<T>;
+                sampler = samplers.uniform(rng, _spec.ToFloat64()) as IRngSampler<T>;
             else
                 throw unsupported<T>();                                        
             return sampler;
@@ -73,15 +73,15 @@ namespace Z0.Mkl
         /// <param name="spec">The distribution specifier</param>
         /// <typeparam name="T">The sample point type</typeparam>
         [MethodImpl(Inline)]
-        public static IRandomSampler<T> UniformBitsSampler<T>(this MklRng rng, UniformBitsSpec<T>? spec = null)
+        public static IRngSampler<T> UniformBitsSampler<T>(this MklRng rng, UniformBitsSpec<T>? spec = null)
             where T : unmanaged
         {
-            var sampler = default(IRandomSampler<T>);
+            var sampler = default(IRngSampler<T>);
             var _spec = spec ?? UniformBitsSpec.Define<T>();
             if(typeof(T) == typeof(uint))
-                sampler = samplers.bits(rng, _spec.ToUInt32()) as IRandomSampler<T>;
+                sampler = samplers.bits(rng, _spec.ToUInt32()) as IRngSampler<T>;
             else if(typeof(T) == typeof(ulong))
-                sampler = samplers.bits(rng, _spec.ToUInt64()) as IRandomSampler<T>;
+                sampler = samplers.bits(rng, _spec.ToUInt64()) as IRngSampler<T>;
             else
                 throw unsupported<T>();                                        
             return sampler;
@@ -94,12 +94,12 @@ namespace Z0.Mkl
         /// <param name="spec">The distribution specifier</param>
         /// <typeparam name="T">The sample point type</typeparam>
         [MethodImpl(Inline)]
-        public static IRandomSampler<T> BernoulliSampler<T>(this MklRng rng, BernoulliSpec<T> spec)
+        public static IRngSampler<T> BernoulliSampler<T>(this MklRng rng, BernoulliSpec<T> spec)
             where T : unmanaged
         {
-            var sampler = default(IRandomSampler<T>);
+            var sampler = default(IRngSampler<T>);
             if(typeof(T) == typeof(int))
-                sampler = samplers.bernoulli(rng,spec) as IRandomSampler<T>;
+                sampler = samplers.bernoulli(rng,spec) as IRngSampler<T>;
             else
                 throw unsupported<T>();                                        
             return sampler;
@@ -112,14 +112,14 @@ namespace Z0.Mkl
         /// <param name="spec">The distribution specifier</param>
         /// <typeparam name="T">The sample point type</typeparam>
         [MethodImpl(Inline)]
-        public static IRandomSampler<T> GaussianSampler<T>(this MklRng rng, GaussianSpec<T> spec)
+        public static IRngSampler<T> GaussianSampler<T>(this MklRng rng, GaussianSpec<T> spec)
             where T : unmanaged
         {
-            var sampler = default(IRandomSampler<T>);
+            var sampler = default(IRngSampler<T>);
             if(typeof(T) == typeof(float))
-                sampler = samplers.gaussian(rng, spec.ToFloat32()) as IRandomSampler<T>;
+                sampler = samplers.gaussian(rng, spec.ToFloat32()) as IRngSampler<T>;
             else if(typeof(T) == typeof(double))
-                sampler = samplers.gaussian(rng, spec.ToFloat64()) as IRandomSampler<T>;
+                sampler = samplers.gaussian(rng, spec.ToFloat64()) as IRngSampler<T>;
             else
                 throw unsupported<T>();                                        
             return sampler;

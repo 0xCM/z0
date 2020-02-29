@@ -7,15 +7,27 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     
-    using static zfunc;
+    using static Root;
 
     using F = TestCaseField;
     using R = TestCaseRecord;
 
+    public interface ITestResultSource
+    {
+        IEnumerable<TestCaseRecord> TakeOutcomes();
+    }
+
+    public interface ITestResultSink : ISink<TestCaseRecord>
+    {
+        TestCaseRecord ReportOutcome(string casename, bool succeeded, TimeSpan duration);
+
+        void ISink<TestCaseRecord>.Accept(in TestCaseRecord src)
+            => ReportOutcome(src.Case, src.Succeeded, src.Duration);
+    }
+        
     public enum TestCaseField : ulong
     {
-
-        Case = 0 | (75ul << 32),
+        Case = 0 | (90ul << 32),
 
         Succeeded =  1 | (10ul << 32),
 

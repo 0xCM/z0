@@ -18,7 +18,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Interval<T> domain<T>(T min, T max)
         where T : unmanaged
-            => new Interval<T>(min,max, IntervalKind.Closed);
+            => Numeric.domain(min,max);
 
     /// <summary>
     /// Constructs the (left-closed | right-open) interval [min,max)

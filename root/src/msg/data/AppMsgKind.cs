@@ -14,62 +14,61 @@ namespace Z0
         /// <summary>
         /// Boring
         /// </summary>
-        Unspecified = ConsoleColor.White,
+        Unspecified = AppMsgColor.Unspecified,
         
         /// <summary>
         /// Identifies chatty content
         /// </summary>
-        Babble = ConsoleColor.DarkGray,
+        Babble = AppMsgColor.DarkGray,
 
         /// <summary>
         /// Identifies iformational content
         /// </summary>
-        Info = ConsoleColor.Green,
+        Info = AppMsgColor.Green,
         
         /// <summary>
         /// Identifies warning content
         /// </summary>
-        Warning = ConsoleColor.Yellow,
+        Warning = AppMsgColor.Yellow,
 
         /// <summary>
         /// Identifies error content
         /// </summary>
-        Error = ConsoleColor.Red,
+        Error = AppMsgColor.Red,
         
         /// <summary>
         /// Identifies benchmark/timing result
         /// </summary>
-        Benchmark = ConsoleColor.Magenta,
+        Benchmark = AppMsgColor.Magenta,
 
         /// <summary>
         /// Dark blue foreground 
         /// </summary>
-        HiliteBD = ConsoleColor.DarkBlue,
+        HiliteBD = AppMsgColor.DarkBlue,
 
         /// <summary>
         /// Light blue foreground 
         /// </summary>
-        HiliteBL = ConsoleColor.Blue,
+        HiliteBL = AppMsgColor.Blue,
 
         /// <summary>
         /// Dark cyan foreground 
         /// </summary>
-        HiliteCD = ConsoleColor.DarkCyan,
+        HiliteCD = AppMsgColor.DarkCyan,
 
         /// <summary>
         /// Cyan foreground 
         /// </summary>
-        HiliteCL = ConsoleColor.Cyan,
+        HiliteCL = AppMsgColor.Cyan,
 
         /// <summary>
         /// Dark magenta foreground
         /// </summary>
-        HiliteMD = ConsoleColor.DarkMagenta,
+        HiliteMD = AppMsgColor.DarkMagenta,
 
         /// <summary>
         /// Magenta foreground
         /// </summary>
-        HiliteML = ConsoleColor.Magenta,
+        HiliteML = AppMsgColor.Magenta,
     }
-
 }

@@ -9,11 +9,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using static zfunc;
-    using Z0;
+    using static Root;
 
-    public abstract class TestContext<U> : ITestContext
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
+    public abstract class TestContext<U> : ITestContext<U>
         where U : TestContext<U>
     {
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
@@ -161,12 +161,11 @@ namespace Z0
         /// Submits a diagnostic message to the message queue
         /// </summary>
         /// <param name="msg">The source message</param>
-        /// <param name="severity">The diagnostic severity level that, if specified, 
-        /// replaces the exising source message severity prior to queue submission</param>
+        /// <param name="severity">The diagnostic severity level that, if specified, replaces the exising source message severity prior to queue submission</param>
         protected void TraceCaller(object msg, AppMsgKind severity, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}",severity));
+                PostMessage(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}: {msg}",severity));
         }
 
         /// <summary>
@@ -176,7 +175,7 @@ namespace Z0
         protected void TraceCaller(object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}", AppMsgKind.Info));
+                PostMessage(AppMsg.Info($"{GetType().DisplayName()}/{caller}: {msg}"));
         }
 
         /// <summary>
@@ -188,7 +187,7 @@ namespace Z0
         protected void TraceCaller(string title, object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}/{title}: {msg}", AppMsgKind.Info));
+                PostMessage(AppMsg.Info($"{GetType().DisplayName()}/{caller}/{title}: {msg}"));
         }
 
         /// <summary>
@@ -198,7 +197,7 @@ namespace Z0
         protected void TracePerf(string msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{msg}", AppMsgKind.Benchmark));
+                PostMessage(AppMsg.NoCaller($"{msg}", AppMsgKind.Benchmark));
         }
 
         public IEnumerable<TestCaseRecord> TakeOutcomes()
@@ -230,8 +229,8 @@ namespace Z0
         public void ReportBenchmark(BenchmarkRecord record)
             => Benchmarks.Enqueue(record);
 
-        public IReadOnlyList<AppMsg> DequeuePosts()
-            => Queue.DequeuePosts();
+        public IReadOnlyList<AppMsg> DequeueMessages()
+            => Queue.DequeueMessages();
 
         public void PostMessage(AppMsg msg)
             => Queue.PostMessage(msg);
@@ -239,8 +238,8 @@ namespace Z0
         public void PostMessage(string msg, AppMsgKind? severity = null)
             => Queue.PostMessage(msg, severity);
 
-        public void Flush(Exception e, IAppMsgLog target)
-            => Queue.Flush(e, target);
+        public void FlushMessages(Exception e, IAppMsgLog target)
+            => Queue.FlushMessages(e, target);
 
         /// <summary>
         /// Allocates and optionally starts a system counter

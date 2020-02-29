@@ -11,7 +11,6 @@ namespace Z0
 
     public class t_natmod : t_gmath<t_natmod>
     {                
-
         public void mod_mul32_n3()
             => mod_mul_check(n3);
 
@@ -235,10 +234,9 @@ namespace Z0
         }
 
         protected void TypeCaseStart<C>([Caller] string caller = null)
-            => PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", AppMsgKind.HiliteCL));
+            => PostMessage(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", AppMsgKind.HiliteCL));
 
         protected void TypeCaseEnd<C>([Caller] string caller = null)
-            => PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", AppMsgKind.HiliteCL));
-
+            => PostMessage(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", AppMsgKind.HiliteCL));
     }
 }

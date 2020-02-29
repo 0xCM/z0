@@ -36,7 +36,7 @@ namespace Z0.Logix
         /// Advertises the supported ternary bitlogic opeators
         /// </summary>
         public static ReadOnlySpan<TernaryBitLogicKind> TernaryBitLogicKinds
-            => range((byte)1,(byte)X5F).Cast<TernaryBitLogicKind>().ToArray();
+            => Numeric.range((byte)1,(byte)X5F).Cast<TernaryBitLogicKind>().ToArray();
 
         /// <summary>
         /// Advertises the supported unary arithmetic operators

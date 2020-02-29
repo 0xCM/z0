@@ -8,9 +8,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    public interface ICaptureTokenSink : IPointSink<CaptureTokenGroup>
+    public interface ICaptureTokenSink : ISink<CaptureTokenGroup>
     {
         
     }
-
 }

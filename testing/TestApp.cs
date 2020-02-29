@@ -157,7 +157,7 @@ namespace Z0
                 FormatTs(start)
                 );                
 
-            return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
+            return AppMsg.Colorize(fields.Concat(FieldSep), AppMsgColor.Blue);
         }
 
         static AppMsg AftCaseMsg(string testName, TimeSpan elapsed, DateTime start, DateTime end)
@@ -171,7 +171,9 @@ namespace Z0
                 Format(end - start)
                 );
 
-            return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
+            return AppMsg.Colorize(fields.Concat(FieldSep), AppMsgColor.Blue);
+
+            //return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
         }
 
         static AppMsg AftUnitMsg(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
@@ -185,7 +187,9 @@ namespace Z0
                 Format(end - start)
                 );
 
-            return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
+            return AppMsg.Colorize(fields.Concat(FieldSep), AppMsgColor.Blue);
+
+            //return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
 
         }
 
@@ -206,7 +210,7 @@ namespace Z0
                 exec();
                 clock.Stop();
 
-                messages.AddRange(unit.DequeuePosts());
+                messages.AddRange(unit.DequeueMessages());
                 messages.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
 
                 var outcomes = unit.TakeOutcomes().ToArray();                
@@ -219,7 +223,7 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
-                messages.AddRange(unit.DequeuePosts());                
+                messages.AddRange(unit.DequeueMessages());                
                 messages.AddRange(GetErrorMessages(casename,e));
                 Enqueue(TestCaseRecord.Define(casename,false,clock.Time));                
             }
@@ -252,7 +256,7 @@ namespace Z0
         AppMsg[] CollectMessages(IUnitTest src, string testName, Duration runtime, Exception e = null)
         {
             var messages = new List<AppMsg>();
-            messages.AddRange(src.DequeuePosts());
+            messages.AddRange(src.DequeueMessages());
             if(e != null)
                 messages.AddRange(GetErrorMessages(testName,e));
             else
@@ -320,7 +324,7 @@ namespace Z0
                 testcase.Invoke(unit,null);                    
                 clock.Stop();
 
-                messages.AddRange(unit.DequeuePosts());
+                messages.AddRange(unit.DequeueMessages());
                 messages.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
@@ -332,7 +336,7 @@ namespace Z0
             catch(Exception e)
             {                
                 clock.Stop();
-                messages.AddRange(unit.DequeuePosts());                
+                messages.AddRange(unit.DequeueMessages());                
                 messages.AddRange(GetErrorMessages(casename, e));
                 results.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
             }
@@ -391,16 +395,11 @@ namespace Z0
             }
             catch (Exception e)
             {
-                Flush(e, Log.Test);
+                FlushMessages(e, Log.Test);
             }
         }
 
         public static void Run(params string[] args)
             => new A().RunTests();
     }
-}
-
-namespace Z0.Test
-{
-    //public static class X {}
 }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static IdentityCommons;
 
     public readonly struct TypeIdentity : ITypeIdentity<TypeIdentity>
     {
@@ -54,25 +55,26 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
+            get => text.empty(Identifier);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(TypeIdentity src)
-            => IdentityCommons.IdentityEquals(this, src);
+            => IdentityEquals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
-            => IdentityCommons.IdentityCompare(this, other);
- 
+        public int CompareTo(TypeIdentity src)
+            => IdentityCompare(this, src); 
+        public string Format()
+            => IdentityFormat(this);
+
         public override int GetHashCode()
-            => IdentityCommons.IdentityHashCode(this);
+            => IdentityHashCode(this);
 
         public override bool Equals(object obj)
-            => IdentityCommons.IdentityEquals(this, obj);
+            => IdentityEquals(this, obj);
 
         public override string ToString()
-            => Identifier;
-
+            => Format();
     }
 }

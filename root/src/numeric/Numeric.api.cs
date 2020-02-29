@@ -22,6 +22,51 @@ namespace Z0
     public static class Numeric
     {
         /// <summary>
+        /// Creates the numeric sequence {0,1,...,count-1}
+        /// </summary>
+        /// <param name="count">The number of elements in the sequence</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static IEnumerable<T> range<T>(T count)
+            where T : unmanaged
+                => NumericRange.counted(count);
+
+        /// <summary>
+        /// Creates a numeric sequence that ranges between inclusive upper and lower bounds
+        /// </summary>
+        /// <param name="x0">The lower bound</param>
+        /// <param name="x1">The upper bound</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static IEnumerable<T> range<T>(T x0, T x1)
+            where T : unmanaged
+                => NumericRange.sequence(x0,x1);
+
+        /// <summary>
+        /// Creates a numeric sequence that ranges between inclusive upper and lower bounds
+        /// </summary>
+        /// <param name="x0">The lower bound</param>
+        /// <param name="x1">The upper bound</param>
+        /// <param name="step">The step size</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static IEnumerable<T> range<T>(T x0, T x1, T step)
+            where T : unmanaged
+                => NumericRange.step(x0,x1,step);
+
+        /// <summary>
+        /// Defines a closed interval [min,max]
+        /// </summary>
+        /// <param name="min">The inclusive left endpoint</param>
+        /// <param name="max">The inclusive right endpoint</param>
+        /// <typeparam name="T">The underlying type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static Interval<T> domain<T>(T min, T max)
+            where T : unmanaged
+                => new Interval<T>(min,max, IntervalKind.Closed);
+
+
+        /// <summary>
         /// Determines the primal kind (if any) of a parametrically-identifed type
         /// </summary>
         /// <param name="t">A type value representative</param>

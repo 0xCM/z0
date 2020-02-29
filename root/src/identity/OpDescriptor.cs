@@ -15,6 +15,8 @@ namespace Z0
     /// </summary>
     public readonly struct OpDescriptor
     {        
+        public static OpDescriptor Empty => Define(OpUri.Empty, string.Empty);
+                
         /// <summary>
         /// The operation uri identifies it uniquely among all operaions in all hosts
         /// </summary>

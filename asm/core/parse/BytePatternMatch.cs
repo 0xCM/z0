@@ -6,10 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
     
-    using static refs;
     using static Root;
 
     public readonly ref struct PartialEncodingPattern
@@ -37,7 +34,7 @@ namespace Z0
                     ref readonly var token = ref skip(match,j);
                     if(!token.HasValue || (token.HasValue && token.Value == atom))
                     {
-                        seek(state,j) = atom;
+                        refs.seek(state,j) = atom;
                         if(j == posMax)
                             termidx = i;
                     }

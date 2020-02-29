@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using static zfunc;
 
     public abstract class UnitBench<U> : UnitTest<U>
         where U : UnitBench<U>
@@ -28,7 +27,7 @@ namespace Z0
                 for(var cycle = 0; cycle < CycleCount; cycle++)
                 for(int rep=0; rep < RepCount; rep++, j++, oc++)
                 {
-                    ref readonly var x = ref skip(src,j);
+                    ref readonly var x = ref refs.skip(src,j);
                     last = f(x);
                 }
                 clock.Stop();
@@ -47,7 +46,7 @@ namespace Z0
                 for(var cycle = 0; cycle < CycleCount; cycle++)
                 for(int rep=0; rep < RepCount; rep++, j++, oc++)
                 {
-                    ref readonly var x = ref skip(src,j);
+                    ref readonly var x = ref refs.skip(src,j);
                     last = cf(x);
                 }            
                 clock.Stop();
@@ -79,8 +78,8 @@ namespace Z0
                 for(var cycle = 0; cycle < CycleCount; cycle++)
                 for(int rep=0; rep < RepCount; rep++, j++, oc++)
                 {
-                    ref readonly var x = ref skip(lhs,j);
-                    ref readonly var y = ref skip(rhs,j);                
+                    ref readonly var x = ref refs.skip(lhs,j);
+                    ref readonly var y = ref refs.skip(rhs,j);                
                     last = f(x,y);
                 }
                 clock.Stop();
@@ -99,8 +98,8 @@ namespace Z0
                 for(var cycle = 0; cycle < CycleCount; cycle++)
                 for(int rep=0; rep < RepCount; rep++, j++, oc++)
                 {
-                    ref readonly var x = ref skip(lhs,j);
-                    ref readonly var y = ref skip(rhs,j);                
+                    ref readonly var x = ref refs.skip(lhs,j);
+                    ref readonly var y = ref refs.skip(rhs,j);                
                     last = cf(x,y);
                 }            
                 clock.Stop();
@@ -115,5 +114,4 @@ namespace Z0
             run_f();
         }
     }
-
 }

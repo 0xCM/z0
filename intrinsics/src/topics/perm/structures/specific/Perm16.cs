@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;    
 
     /// <summary>
     /// Defines a 16-symbol permutation 
@@ -40,9 +40,9 @@ namespace Z0
         Perm16(Vector128<byte> data)
             => this.data = data;
 
-        static N128 w => n128;        
-
+        static N128 w => Nats.n128;        
     }
+
 
     /// <summary>
     /// Defines canonical literals for representing terms of permutations on 16 symbols

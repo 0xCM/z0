@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static Root;
-    using static refs;
 
     public readonly struct ByteReader : IByteReader
     {

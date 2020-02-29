@@ -31,8 +31,8 @@ namespace Z0
         public static DataResourceReport Resources(AssemblyId id, DataResourceIndex resources)
             => DataResourceReport.Create(id, resources);
 
-        public static Report<ParsedEncodingRecord> ParsedEncodings(ApiHostPath host, params ParsedEncodingRecord[] records)
-            => ParsedEncodingReport.Create().Populate(records);
+        public static ParsedEncodingReport ParsedEncodings(ApiHostPath host, params ParsedEncodingRecord[] records)
+            => ParsedEncodingReport.Create(records);
 
     }
 }

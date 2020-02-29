@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;    
-        
+    using System.Collections.Generic;        
+
     using static zfunc;
 
     /// <summary>
@@ -25,8 +26,7 @@ namespace Z0
         internal static Block256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => blocks.safeload(n,src.Data);
-         
+                => blocks.safeload(n,src.Data);        
 
         [MethodImpl(NotInline)]
         public static RowVector<T> alloc<T>(int minlen)               
@@ -75,7 +75,19 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => RowVector<N,T>.Zero;
- 
+
+        /// <summary>
+        /// Defines a scalar sequence [first, ..., (first + N)]
+        /// </summary>
+        /// <param name="first">The first value in the sequence</param>
+        /// <typeparam name="N">The count type</typeparam>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static IEnumerable<T> range<N,T>(T first, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => Numeric.range(first,convert<T>(n.NatValue));
+
         public static RowVector<N,T> increasing<N,T>(N length = default, T first = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -140,8 +152,6 @@ namespace Z0
         public static RowVector256<N,T> blockload<N,T>(NatSpan<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src;
- 
+                => src; 
     }
-
 }

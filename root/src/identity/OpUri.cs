@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
+    using static IdentityCommons;
     
     public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>, IParser<OpUri>
     {
@@ -90,28 +91,24 @@ namespace Z0
             => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
 
         public string Format()
-            => Identifier;
+            => IdentityFormat(this);
         
+        [MethodImpl(Inline)]
+        public int CompareTo(OpUri other)
+            => IdentityCompare(this, other);
+
         [MethodImpl(Inline)]
         public bool Equals(OpUri src)
             => IdentityEquals(this, src);
 
-        public override string ToString()
-            => Identifier;
- 
         public override int GetHashCode()
             => IdentityHashCode(this);
 
         public override bool Equals(object obj)
             => IdentityEquals(this, obj);
 
-        [MethodImpl(Inline)]
-        public int CompareTo(OpUri other)
-            => IdentityCompare(this, other);
-
-        [MethodImpl(Inline)]
-        public int CompareTo(IIdentity other)
-            => IdentityCompare(this, other);
+        public override string ToString()
+            => Format();
 
         const string C = ":";
 

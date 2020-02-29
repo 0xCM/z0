@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
         public static Perm identity(int n)
-            => new Perm(range(0, n-1));
+            => new Perm(Numeric.range(0, n-1));
 
         /// <summary>
         /// Defines an identity permutation on n symbols
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Perm<T> identity<T>(T n)
             where T : unmanaged
-                => new Perm<T>(range(default, gmath.dec(n)));
+                => new Perm<T>(Numeric.range(default, gmath.dec(n)));
 
         /// <summary>
         /// Defines the identity permutation on 4 symbols

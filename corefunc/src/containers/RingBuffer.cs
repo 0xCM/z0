@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static refs;
 
     public ref struct RingBuffer<T>
         where T : unmanaged

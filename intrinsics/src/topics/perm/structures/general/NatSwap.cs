@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
+    
 
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length
@@ -82,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N> operator ++(in NatSwap<N> src)
         {
-            ref var dst = ref mutable(in src);
+            ref var dst = ref refs.mutable(in src);
             dst.i++;
             dst.j++;
             return dst;
@@ -91,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N> operator --(in NatSwap<N> src)
         {
-            ref var dst = ref mutable(in src);
+            ref var dst = ref refs.mutable(in src);
             if(src.i != 0)
                 dst.i--;
             if(src.j != 0)

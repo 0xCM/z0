@@ -13,7 +13,6 @@ namespace Z0
 
     partial class Stacks
     {
-
         /// <summary>
         /// Counts the number of T-cells convered by a n-bit stack
         /// </summary>

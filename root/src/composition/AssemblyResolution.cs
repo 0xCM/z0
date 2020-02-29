@@ -44,13 +44,14 @@ namespace Z0
 
         public virtual IOperationCatalog Operations {get;}
             = new EmptyCatalog();
-             
+
+        public string Format()
+            => Id.Format();
+
         public virtual void Run(params string[] args)
-        {
-            Console.WriteLine("Assembly has no executor");
-        }
+            => term.error("Assembly has no executor");
 
         public override string ToString()
-            => Id.Format();
+            => Format();
     }
 }

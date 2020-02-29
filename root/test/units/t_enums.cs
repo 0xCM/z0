@@ -36,7 +36,7 @@ namespace Z0
                 if(ival == byte.MaxValue)
                     break;
 
-                var member = literal<Choices32i,int>(ival);
+                var member = Enums.literal<Choices32i,int>(ival);
                 Claim.eq(member, values[i].Enum);
 
                 var expect = (int)Math.Pow(2,i);

@@ -12,6 +12,19 @@ namespace Z0
 
     using static Root;
 
+    public static class LiteralIndex
+    {
+        [MethodImpl(Inline)]
+        public static LiteralIndex<E> Define<E>(E literal, int index)
+            where E : unmanaged, Enum
+                => new LiteralIndex<E>(literal,index);
+
+        [MethodImpl(Inline)]
+        public static LiteralIndices<E> Define<E>(params LiteralIndex<E>[] src)
+            where E : unmanaged, Enum
+                => new LiteralIndices<E>(src);
+    }
+
     public readonly struct LiteralIndex<E>
         where E : unmanaged, Enum        
     {
@@ -24,7 +37,7 @@ namespace Z0
             => new LiteralIndex<E>(src.literal, src.index);
             
         [MethodImpl(Inline)]
-        public LiteralIndex(E literal, int index)
+        internal LiteralIndex(E literal, int index)
         {
             this.Literal = literal;
             this.Index = index;
@@ -45,10 +58,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator LiteralIndices<E>(LiteralIndex<E>[] src)
-            => default;
-
+            => new LiteralIndices<E>(src);
+        
         [MethodImpl(Inline)]
-        public LiteralIndices(LiteralIndex<E>[] src) 
+        internal LiteralIndices(LiteralIndex<E>[] src) 
             => indices = src;
 
         [MethodImpl(Inline)]

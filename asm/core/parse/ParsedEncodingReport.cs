@@ -31,41 +31,6 @@ namespace Z0
         Data = 6 | 1ul << 32
     }    
 
-    public struct ParsedEncodingReport
-    {
-        public static Report<F,R> Empty => Report<F,R>.Empty;
-        
-        readonly Report<F,R> Data;
-
-        [MethodImpl(Inline)]
-        public static ParsedEncodingReport Create()
-            => new ParsedEncodingReport(new ParsedEncodingRecord[]{});
-
-        [MethodImpl(Inline)]
-        ParsedEncodingReport(params ParsedEncodingRecord[] records)
-        {
-            this.Data = new Report<F, R>(records);
-        }
-
-        public Report<F,R> Populate(params ParsedEncodingRecord[] records)        
-            => new Report<F, R>(records);
-    }
-
-    // public class ParsedEncodingReport : Report<F,R>
-    // {        
-    //     public ApiHostPath Host {get;}
-        
-    //     public static ParsedEncodingReport Create(ApiHostPath host, params ParsedEncodingRecord[] records)
-    //         => new ParsedEncodingReport(host,records);
-
-        
-    //     ParsedEncodingReport(ApiHostPath host, ParsedEncodingRecord[] records)
-    //         : base(records)
-    //     {
-    //         this.Host = host;
-    //     }       
-    // }    
-
     public readonly struct ParsedEncodingRecord : IRecord<F, R>
     {        
         public static implicit operator ParsedEncoding(ParsedEncodingRecord src)
@@ -106,6 +71,20 @@ namespace Z0
         [ReportField(F.Data)]
         public EncodedData Data {get; }
 
+        public dynamic this[F f]
+        {
+            get => f switch {
+                F.Sequence => Sequence,
+                F.Address => Address,
+                F.Length => Length,
+                F.TermCode => TermCode,
+                F.Uri => Uri,
+                F.OpSig => OpSig,
+                F.Data => Data,
+                _ => 0,
+            };
+        }
+
         public string DelimitedText(char sep)
         {
             var dst = Model.Formatter.Reset();            
@@ -134,6 +113,22 @@ namespace Z0
             var final = CaptureState.Define(op.Id, count, range.End, src.Data.LastByte);
             var outcome = CaptureOutcome.Define(final, range, src.TermCode);
             return ParsedEncoding.Define(op, outcome.TermCode, src.Data);
+        }
+    }
+
+    public class ParsedEncodingReport : Report<ParsedEncodingReport,F,R>
+    {             
+        [MethodImpl(Inline)]
+        public static ParsedEncodingReport Create(params ParsedEncodingRecord[] records)
+            => new ParsedEncodingReport(records);
+
+        public ParsedEncodingReport(){}
+        
+        [MethodImpl(Inline)]
+        ParsedEncodingReport(params ParsedEncodingRecord[] records)
+            : base(records)
+        {
+
         }
     }
 }

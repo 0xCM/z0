@@ -11,7 +11,6 @@ namespace Z0
     using static Root;
     using static Stacked;
     using static AsIn;
-    using static refs;
 
     partial class Stacks
     {
@@ -52,7 +51,6 @@ namespace Z0
             return dst;
         }
 
-
         [MethodImpl(Inline)]
         public static MemStack512 init<T>(N512 n, in T src)
             where T : unmanaged
@@ -70,6 +68,5 @@ namespace Z0
             PolyData.copy(in src, ref head<T>(ref dst), count<T>(n));
             return dst;
         }
-
     }
 }

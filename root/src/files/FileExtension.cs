@@ -6,23 +6,25 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     using static Root;
-
 
     /// <summary>
     /// Defines a file extension
     /// </summary>
     public class FileExtension : PathComponent<FileExtension>
     {
-        public static FileExtension Define(string Name)
-            => new FileExtension(Name);
+        [MethodImpl(Inline)]
+        public static FileExtension Define(string name)
+            => new FileExtension(name);
 
-        public FileExtension(string Name)
-            : base(Name)
+        public FileExtension(){}
+
+        public FileExtension(string name)
+            : base(name)
         {
 
         }
     }
-
 }

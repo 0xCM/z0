@@ -55,7 +55,7 @@ namespace Z0.Machines
             where T : unmanaged
         {
             var seeds = Entropy.Values<ulong>(machineCount);
-            var indices = range(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
+            var indices = Numeric.range(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
             if(sequential)
                 return RunSequential(spec, seeds, indices).Force();
             else
@@ -107,7 +107,7 @@ namespace Z0.Machines
         static MachineTransition<T,T> Transition<T>(IFsmContext context, PrimalFsmSpec<T> spec)        
             where T : unmanaged
         {            
-            var sources = range<T>(spec.StateCount).ToArray();
+            var sources = Numeric.range<T>(spec.StateCount).ToArray();
             var random = context.Random;
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)

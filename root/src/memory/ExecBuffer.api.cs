@@ -8,12 +8,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
-    using System.Linq;
 
     using static Root;
-    using static SpanOps;
-    using static refs;
 
     [SuppressUnmanagedCodeSecurity]
     public static unsafe class ExecBuffers

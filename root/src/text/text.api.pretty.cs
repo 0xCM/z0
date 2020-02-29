@@ -326,7 +326,7 @@ namespace Z0
         /// <param name="chars">The leading characters to remove</param>
         [MethodImpl(Inline)]
         public static string ltrim(string src, params char[] chars)
-            => isblank(src) ? string.Empty : src.TrimStart(chars);
+            => empty(src) ? string.Empty : src.TrimStart(chars);
 
         /// <summary>
         /// Trims trailing characters when matched
@@ -335,7 +335,7 @@ namespace Z0
         /// <param name="chars">The leading characters to remove</param>
         [MethodImpl(Inline)]
         public static string rtrim(string src, params char[] chars)
-            => isblank(src) ? string.Empty : src.TrimEnd(chars);
+            => empty(src) ? string.Empty : src.TrimEnd(chars);
 
         /// <summary>
         /// Produces "..." where count has the default value of 3
@@ -401,11 +401,11 @@ namespace Z0
         /// Returns the substring [0,chars-1]
         /// </summary>
         public static string left(string src, int chars)
-            => isblank(src) ? src : src.Substring(0, src.Length < chars ? src.Length : chars);
+            => empty(src) ? src : src.Substring(0, src.Length < chars ? src.Length : chars);
 
         public static string right(string src, int chars)
         {
-            if (isblank(src))
+            if (empty(src))
                 return src;
 
             var len = src.Length < chars ? src.Length : chars;

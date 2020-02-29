@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System.Collections.Generic;
-
+    
     /// <summary>
     /// Identifies a source of random data
     /// </summary>
-    public interface IRandomSource
+    public interface IRngSource
     {
         /// <summary>
         /// Identifies the rng that drives the source
@@ -17,7 +17,7 @@ namespace Z0
         RngKind RngKind {get;}
     }
 
-    public interface IRngPointSource<T> : IRandomSource, IPointSource<T>
+    public interface IRngPointSource<T> : IRngSource, IPointSource<T>
         where T : struct
     {
     
@@ -33,7 +33,7 @@ namespace Z0
 
     }
 
-   public interface IRandomSampler<T> : IRngStream<T>
+   public interface IRngSampler<T> : IRngStream<T>
         where T : struct
     {
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a random stream navigator
     /// </summary>
-    public interface IRandomNav
+    public interface IRngNav
     {
         /// <summary>
         /// Moves the stream a specified number of steps forward
@@ -84,7 +84,7 @@ namespace Z0
     /// Characterizes a random source that can be navigated
     /// </summary>
     /// <typeparam name="T">The primal element type</typeparam>
-    public interface INavigableRng<T> : IRandomNav, IRngBoundPointSource<T> 
+    public interface INavigableRng<T> : IRngNav, IRngBoundPointSource<T> 
         where T : struct
     {
 
@@ -109,6 +109,27 @@ namespace Z0
         /// <summary>
         /// Retrieves the random stream navigator, if supported
         /// </summary>
-        Option<IRandomNav> Navigator {get;}    
+        Option<IRngNav> Navigator {get;}    
     } 
+
+    /// <summary>
+    /// Characterizes a type that provides access to a stateful and parametric-polymorphic 
+    /// pseudorandom number generator
+    /// </summary>
+    public interface IRngProvider
+    {
+        /// <summary>
+        /// The provided random number generator
+        /// </summary>
+        IPolyrand Random {get;}
+        
+    }
+    
+    /// <summary>
+    /// A context that carries an RNG state
+    /// </summary>
+    public interface IRngContext : IRngProvider, IContext
+    {   
+           
+    }
 }

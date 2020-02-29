@@ -5,32 +5,35 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.IO;
+
+    using static Root;
 
     /// <summary>
     /// Represents a fully-qualified path to a file on the local machine
     /// </summary>
     public class FilePath : PathComponent<FilePath>
     {
-        public static readonly FilePath Empty = Define(string.Empty);
+        [MethodImpl(Inline)]
+        public static FilePath Define(string name) => new FilePath(name);
 
-        public static FilePath Define(string Name)
-            => new FilePath(Name);
+        public static FilePath operator + (FilePath a, FileName b)
+            => new FilePath(Path.Join(a.Name, b.Name));
 
-        public static FilePath operator + (FilePath lhs, FileName rhs)
-            => new FilePath(Path.Join(lhs.Name, rhs.Name));
+        public static FilePath operator + (FilePath a, FolderName b)
+            => new FilePath(Path.Join(a.Name, b.Name));
 
-        public static FilePath operator + (FilePath lhs, FolderName rhs)
-            => new FilePath(Path.Join(lhs.Name, rhs.Name));
+        public static FilePath operator + (FilePath a, FileExtension b)
+            => new FilePath(Path.Join(a.Name, b.Name));
 
-        public static FilePath operator + (FilePath lhs, FileExtension rhs)
-            => new FilePath(Path.Join(lhs.Name, rhs.Name));
+        public static FilePath operator + (FilePath a, FilePath b)
+            => new FilePath(Path.Join(a.Name, b.Name));
 
-        public static FilePath operator + (FilePath lhs, FilePath rhs)
-            => new FilePath(Path.Join(lhs.Name, rhs.Name));
+        public FilePath(){}
 
-        public FilePath(string Name)
-            : base(Name)
+        public FilePath(string name)
+            : base(name)
         {
 
         }

@@ -9,9 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
-
-
     /// <summary>
     /// Characterizes a value emission facility
     /// </summary>
@@ -27,5 +24,4 @@ namespace Z0
         IEnumerable<object> IDataSource.Data
             => Values.Cast<object>();
     }
-
 }
