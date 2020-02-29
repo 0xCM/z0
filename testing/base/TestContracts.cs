@@ -38,24 +38,6 @@ namespace Z0
         
     }    
 
-    public interface ISampleDefaults
-    {
-        /// <summary>
-        /// The default sample size
-        /// </summary>
-        int SampleSize {get;}
-
-    }
-
-    public interface ISampleDefaults<T> : ISampleDefaults
-        where T : unmanaged
-    {
-        /// <summary>
-        /// The domain of potential values
-        /// </summary>
-        Interval<T> SampleDomain {get;}
-    }
-
     public interface ITestConfig : ISampleDefaults
     {
         ITestConfig<T> Get<T>()

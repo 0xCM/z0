@@ -123,7 +123,7 @@ namespace Z0
         protected void Trace(object msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{msg}", AppMsgKind.Info));
+                PostMessage(AppMsg.Info(msg));
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Z0
         protected void Trace(object title, object msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{title} - {msg}", AppMsgKind.Info));
+                PostMessage(AppMsg.Info($"{title} - {msg}"));
         }
 
         protected void Trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null)
@@ -141,7 +141,7 @@ namespace Z0
             if(TraceEnabled)
             {
                 var titleFmt = tpad.Map<int, string>(pad => title.PadRight(pad), () => title.PadRight(20));        
-                PostMessage(AppMsg.Define($"{titleFmt}: {msg}", severity ?? AppMsgKind.Babble));
+                PostMessage(AppMsg.NoCaller($"{titleFmt}: {msg}", severity ?? AppMsgKind.Babble));
             }
         }
 

@@ -140,21 +140,5 @@ namespace Z0
         public static string TestCaseName(this MethodInfo method)
             => Identity.testcase(method);
 
-        public static string TestCaseName(this IExplicitTest unit)
-        {
-            var owner = Identity.owner(unit.GetType());
-            var hostname = unit.GetType().Name;
-            var opname = "explicit";
-            return $"{owner}/{hostname}/{opname}";
-        }
-
-        public static string TestActionName(this IUnitTest unit)
-        {
-            var owner = Identity.owner(unit.GetType());
-            var hostname = unit.GetType().Name;
-            var opname = "action";
-         
-            return $"{owner}/{hostname}/{opname}";
-        }
     }
 }

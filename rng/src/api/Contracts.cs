@@ -10,6 +10,24 @@ namespace Z0
     using static zfunc;
     using static As;
 
+    public interface ISampleDefaults
+    {
+        /// <summary>
+        /// The default sample size
+        /// </summary>
+        int SampleSize {get;}
+
+    }
+
+    public interface ISampleDefaults<T> : ISampleDefaults
+        where T : unmanaged
+    {
+        /// <summary>
+        /// The domain of potential values
+        /// </summary>
+        Interval<T> SampleDomain {get;}
+    }
+
     /// <summary>
     /// Characterizes a suite of random number generators
     /// </summary>

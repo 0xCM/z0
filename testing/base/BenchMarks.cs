@@ -20,7 +20,6 @@ namespace Z0
     {
         IEnumerable<BenchmarkRecord> TakeBenchmarks();
     }
-
     
     /// <summary>
     /// Defines a benchmark measure for an operator

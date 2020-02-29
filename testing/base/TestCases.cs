@@ -27,7 +27,7 @@ namespace Z0
         
     public enum TestCaseField : ulong
     {
-        Case = 0 | (90ul << 32),
+        Case = 0 | (75ul << 32),
 
         Succeeded =  1 | (10ul << 32),
 

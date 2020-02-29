@@ -172,8 +172,6 @@ namespace Z0
                 );
 
             return AppMsg.Colorize(fields.Concat(FieldSep), AppMsgColor.Blue);
-
-            //return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
         }
 
         static AppMsg AftUnitMsg(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
@@ -188,9 +186,6 @@ namespace Z0
                 );
 
             return AppMsg.Colorize(fields.Concat(FieldSep), AppMsgColor.Blue);
-
-            //return AppMsg.Define(fields.Concat(FieldSep), AppMsgKind.HiliteBL);
-
         }
 
         public Duration RunAction(IUnitTest unit, Action exec)
@@ -250,7 +245,7 @@ namespace Z0
             else                
                 yield return messages.Unanticipated(e?.InnerException ?? e);
 
-            yield return AppMsg.Define($"{name} failed.", AppMsgKind.Error);
+            yield return AppMsg.Error($"{name} failed.");
         }
 
         AppMsg[] CollectMessages(IUnitTest src, string testName, Duration runtime, Exception e = null)
@@ -260,7 +255,7 @@ namespace Z0
             if(e != null)
                 messages.AddRange(GetErrorMessages(testName,e));
             else
-                messages.Add(AppMsg.Define($"{testName} executed. {runtime}", AppMsgKind.Info));
+                messages.Add(AppMsg.Info($"{testName} executed. {runtime}"));
             return messages.ToArray();
         }
 
