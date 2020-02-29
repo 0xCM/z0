@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString load<T>(Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.scalars(src.ToSpan(), maxbits);
+                => BitString.scalars(vfuncs.span(src), maxbits);
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -57,7 +57,18 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString load<T>(Vector256<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.scalars(src.ToSpan(), maxbits);
+                => BitString.scalars(vfuncs.span(src), maxbits);
+
+        /// <summary>
+        /// Populates a bitstring from a 256-bit cpu vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="maxbits">The maximum number of bits to extract</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]   
+        public static BitString load<T>(Vector512<T> src, int? maxbits = null)
+            where T : unmanaged        
+                => BitString.scalars(vfuncs.span(src), maxbits);
 
         /// <summary>
         /// Constructs a bitstring from a span of bits

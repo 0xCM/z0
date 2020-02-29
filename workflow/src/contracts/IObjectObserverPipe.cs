@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
-
+    using static Root;
 
     public interface IObjectObserverPipe<T> : IObjectPipe<T>
         where T : class

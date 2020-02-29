@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     /// <summary>
     /// Characterizes a coordinator that manages value production
     /// </summary>
@@ -29,5 +27,4 @@ namespace Z0
         IEnumerable<T> Flow(IEnumerable<S> src, IObjectFactoryPipe<S,T> pipe)
             => pipe.Flow(src);
     }
-
 }

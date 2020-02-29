@@ -5,12 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
  
-    using static zfunc;
+    using static Root;
     using static nfunc;
 
     partial class mkl
@@ -37,10 +34,6 @@ namespace Z0.Mkl
                 MklException.Throw(exitcode);
 
             return EigenResult.Define(ComplexNumber.FromPaired<N,double>(wr, wi), lVec, rVec);
-
         }
-
     }
-
-
 }

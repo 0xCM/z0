@@ -5,13 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
  
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     partial class mkl
     {
@@ -31,7 +27,6 @@ namespace Z0.Mkl
         public static double asum(RowVector256<double> X)        
             => CBLAS.cblas_dasum(X.Length, ref head(X), 1);
 
-
         [MethodImpl(Inline)]
         static float asum(Span<ComplexF32> X)        
             => CBLAS.cblas_scasum(X.Length, ref X[0], 1);
@@ -39,8 +34,5 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         static double asum(Span<ComplexF64> X)        
             => CBLAS.cblas_dzasum(X.Length, ref X[0], 1);
-
-
     }
-
 }

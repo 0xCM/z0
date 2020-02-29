@@ -116,8 +116,5 @@ namespace Z0.Mkl
         /// Gaussian inverse CDF; for lambda < 1 table lookup method is used.    
         ///</summary>
         POISNORM  = 1
-
     }
-
-
 }

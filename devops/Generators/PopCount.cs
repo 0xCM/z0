@@ -5,12 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-
-    using static zfunc;
 
     public class PopCountGen
     {
@@ -26,7 +20,7 @@ namespace Z0
         }
 
         public static string GenAccessor(string propname)
-            => InlineData.GenAccessor(GenData(), propname);
+            => ResourceData.GenAccessor(GenData(), propname);
 
         public static void GenToFile()
         {
@@ -39,5 +33,4 @@ namespace Z0
 
         }
     }
-
 }

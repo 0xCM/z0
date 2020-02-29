@@ -9,6 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    using static Root;
+
     /// <summary>
     /// Adapter for client code that expects to interface with the System.Random class
     /// </summary>

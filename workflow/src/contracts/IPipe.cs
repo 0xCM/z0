@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
-
     /// <summary>
     /// Characterizes a conduit that transmits singletons and sequences from A -> B
     /// </summary>

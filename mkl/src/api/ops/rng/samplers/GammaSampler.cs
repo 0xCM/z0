@@ -5,9 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-	using static zfunc;
+
+    using static Root;
     using static As;
 
     sealed class GammaSampler<T> : Sampler<T, GammaSpec<T>>
@@ -35,7 +35,6 @@ namespace Z0.Mkl
                 throw unsupported<T>();
 
             return buffer.Length;
-
         }
     }
 }

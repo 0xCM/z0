@@ -22,7 +22,6 @@ namespace Z0.Mkl
                         float alpha, ref float A, int lda,
                         ref float X, int incX, float beta,
                         ref float Y, int incY);
-
         
         /// <summary>
         /// Computes  y = alpha*A*x + beta*y ;

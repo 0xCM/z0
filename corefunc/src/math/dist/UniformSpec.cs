@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines operations specific to uniform distributions
@@ -120,6 +120,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public UniformSpec<double> ToFloat64()
             => new UniformSpec<double>(convert<T,double>(Min), convert<T,double>(Max));
-
    }
 }

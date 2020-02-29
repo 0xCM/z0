@@ -8,8 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-	using static zfunc;
-
+    using static Root;
     using static As;
 
     sealed class PoissonSampler<T> : Sampler<T, PoissonSpec<T>>
@@ -30,8 +29,6 @@ namespace Z0.Mkl
                 throw unsupported<T>();
             
             return buffer.Length;
-
         }
     }
-
 }

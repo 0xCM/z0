@@ -59,15 +59,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ICaptureService Capture(this IAsmContext context, ICaptureOps ops)
             => AsmCaptureService.Create(context, ops);
-
-        /// <summary>
-        /// Instantiates a contextual exucution buffer
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="size">The buffer length</param>
-        [MethodImpl(Inline)]
-        public static IAsmExecBuffer ExecBuffer(this IAsmContext context, int? size = null)
-            => AsmExecBuffer.Create(context,size);
         
         /// <summary>
         /// Instantiates a contextual buffered client
@@ -77,7 +68,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IAsmBufferedClient BufferedClient(this IAsmContext context, AsmBufferClient client)
             => AsmBufferedClient.Create(context, client);
-
 
         [MethodImpl(Inline)]
         public static IAsmFunctionBuilder FunctionBuilder(this IAsmContext context)
@@ -105,7 +95,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IAsmHostCapture HostCapture(this IAsmContext context, int? bufferlen = null)
             => AsmHostCapture.Create(context, bufferlen);
-
 
         /// <summary>
         /// Instantiates a contextual code writer services that targets a specified file path
@@ -180,6 +169,5 @@ namespace Z0
                 }
             }
         }
-
     }
 }

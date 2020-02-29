@@ -5,14 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Collections.Concurrent;
-    using System.Threading;
-
-    using static zfunc;    
-
 
     public class TimeSeries<T> : ITimeSeries<T>
         where T : unmanaged

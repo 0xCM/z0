@@ -8,8 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
  
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     /// <summary>
     /// mkl + u = Unsafe, Unsized, Unchecked and Unblocked
@@ -32,7 +31,6 @@ namespace Z0.Mkl
                 throw MklException.Define(exit);
             return exit;
         }
-
 
         /// <summary>
         /// Returns a reference to the location of the first span element

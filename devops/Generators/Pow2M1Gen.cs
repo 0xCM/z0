@@ -8,9 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
 
     public class Pow2M1Gen
     {
@@ -32,17 +31,17 @@ namespace Z0
         }
 
         public static string GenAccessor()
-            => InlineData.GenAccessor(GenData(), $"{BasePropName}{TypeId.numeric<ulong>()}");
+            => ResourceData.GenAccessor(GenData(), $"{BasePropName}{TypeId.numeric<ulong>()}");
 
         public static string GenAccessor<T>()
             where T : unmanaged
-                => InlineData.GenAccessor(GenData<T>(), $"{BasePropName}{TypeId.numeric<T>()}");
+                => ResourceData.GenAccessor(GenData<T>(), $"{BasePropName}{TypeId.numeric<T>()}");
 
         public static void GenToFile()
         {
             var filename = OutFile;
             var outpath = LogArea.App.TargetPath(filename);
-            print($"Generating {outpath}");
+            term.print($"Generating {outpath}");
 
             using var dst = LogArea.App.LogWriter(filename);
             dst.WriteLine($"public static class {ClassName}");

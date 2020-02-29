@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static nfunc;
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -93,7 +93,7 @@ namespace Z0
         public RowVector256<N,T> Row(int row)
         {
             if(row < 0 || row >= Order)
-                throw errors.OutOfRange(row, 0, Order - 1);
+                throw errors.IndexOutOfRange(row, 0, Order - 1);
             
             return RowVector.blockload<N,T>(data.Slice(row * Order, Order));
         }
@@ -227,7 +227,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256<N,U> Convert<U>()
             where U : unmanaged
-               => new Matrix256<N,U>(convert<T,U>(data));
+               => new Matrix256<N,U>(zfunc.convert<T,U>(data));
 
         [MethodImpl(Inline)]
         public Matrix256<N,U> As<U>()

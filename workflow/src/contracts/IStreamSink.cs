@@ -13,5 +13,4 @@ namespace Z0
     {
         void Accept(IEnumerable<T> src);
     }
-
 }

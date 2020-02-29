@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Text;
     using System.Linq;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
 
     public class Histogram
     {
@@ -48,8 +46,8 @@ namespace Z0
         
         Interval<T> PartitionDomain(int ix)
             => ix == Partitions.Length - 1 
-             ? domain(Partitions[ix-1], Partitions[ix]) 
-             : ldomain(Partitions[ix-1], Partitions[ix]);
+             ? Numeric.domain(Partitions[ix-1], Partitions[ix]) 
+             : Numeric.domain(Partitions[ix-1], Partitions[ix]).ToRightOpen();
 
         /// <summary>
         /// Returns the least bin count
@@ -131,7 +129,7 @@ namespace Z0
         /// 
         public Span<Bin<T>> Buckets()            
         {
-            var buckets = array<Bin<T>>(Partitions.Length - 1);
+            var buckets = alloc<Bin<T>>(Partitions.Length - 1);
             for(var i = 1; i< Partitions.Length; i++)
                 buckets[i-1] = Bin.Define(PartitionDomain(i), BucketSize(i));
             return buckets;

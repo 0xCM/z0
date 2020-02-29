@@ -56,7 +56,7 @@ namespace Z0
             this.Case = name;
             this.Status = succeeded ? TestCaseStatus.Passed : TestCaseStatus.Failed;
             this.Duration = duration;
-            this.Executed = now();
+            this.Executed = DateTime.Now;
         }
 
         [ReportField(F.Case)]

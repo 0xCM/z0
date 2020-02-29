@@ -5,10 +5,7 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-	using static zfunc;
 
     /// <summary>
     /// Wraps a pointer to a VSL stream
@@ -36,11 +33,5 @@ namespace Z0.Mkl
             if(Pointer != IntPtr.Zero)
                 VSL.vslDeleteStream(ref Pointer);
         }        
-
     }
-
-
-
-
- 
 }

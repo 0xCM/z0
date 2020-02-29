@@ -8,7 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
-	using static zfunc;
     using static MklCommon;
 
     partial class VSL
@@ -67,8 +66,6 @@ namespace Z0.Mkl
 
         [DllImport(VslDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern VslRngStatus vslCopyStreamState(IntPtr dst, IntPtr src);
-
-
     }
 
     /*
@@ -79,10 +76,6 @@ namespace Z0.Mkl
     
     status = vslLeapfrogStream(stream1, 0, 3); 
     status = vslLeapfrogStream(stream2, 1, 3); 
-    status = vslLeapfrogStream(stream3, 2, 3);
-
-    
+    status = vslLeapfrogStream(stream3, 2, 3);    
      */
-
-
 }

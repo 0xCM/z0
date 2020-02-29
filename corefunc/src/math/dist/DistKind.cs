@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     /// <summary>
     /// Identifies a supported distribution
     /// </summary>

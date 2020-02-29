@@ -5,13 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
  
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     partial class mkl
     {
@@ -60,8 +56,5 @@ namespace Z0.Mkl
             CBLAS.cblas_dscal(x.Length, a, ref head(x.CopyTo(ref y)), 1);
             return ref y;
         }
-
-
     }
-
 }

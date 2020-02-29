@@ -5,24 +5,15 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Diagnostics;    
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Security;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
     using static MklCommon;
-
 
     [SuppressUnmanagedCodeSecurity]
     public static partial class LAPACK
     {
         const string MklDll = "z0-lapacke-clib.dll";
-
-
 
         [DllImport(MklDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern float LAPACKE_dlamch(char cmach);
@@ -17208,5 +17199,4 @@ namespace Z0.Mkl
 
 #endif
     }
-
 }

@@ -5,7 +5,6 @@
 namespace Z0.Mkl
 {
     using System;
-	using static zfunc;
 
     /// <summary>
     /// Specifies the meaning of a numeric code where applied
@@ -19,7 +18,5 @@ namespace Z0.Mkl
         }
 
         public string Meaning {get;}
-
     }
-
 }

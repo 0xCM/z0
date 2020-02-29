@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void eq(bool lhs, bool rhs)
-            => (lhs == rhs).IfNone(() => errors.ThrowNotEqual(lhs,rhs));
+            => (lhs == rhs).IfNone(() => errors.ThrowNotEqualNoCaller(lhs,rhs));
 
         /// <summary>
         /// Asserts the equality of two bit values
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         public static void eq(bit lhs, bit rhs)
-            => (lhs == rhs).IfNone(() => errors.ThrowNotEqual(lhs,rhs));
+            => (lhs == rhs).IfNone(() => errors.ThrowNotEqualNoCaller(lhs,rhs));
 
         public static bool eq(HexByteKind lhs, HexByteKind rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
@@ -260,7 +260,7 @@ namespace Z0
             {
                 for(var i = 0; i< length(lhs,rhs); i++)
                     if(!lhs[i].Equals(rhs[i]))
-                        errors.ThrowNotEqual(lhs[i], rhs[i]);
+                        errors.ThrowNotEqualNoCaller(lhs[i], rhs[i]);
             }
         }
 
@@ -277,7 +277,7 @@ namespace Z0
             {
                 for(var i = 0; i< length(lhs,rhs); i++)
                     if(!lhs[i].Equals(rhs[i]))
-                        errors.ThrowNotEqual(lhs[i], rhs[i]);
+                        errors.ThrowNotEqualNoCaller(lhs[i], rhs[i]);
             }
         }
 
@@ -294,7 +294,7 @@ namespace Z0
             if(typeof(T) == typeof(bit))
                 Claim.eq(As.ubit(lhs), As.ubit(rhs));
             else
-                gmath.eq(lhs,rhs).IfNone(() => errors.ThrowNotEqual(lhs,rhs));
+                gmath.eq(lhs,rhs).IfNone(() => errors.ThrowNotEqualNoCaller(lhs,rhs));
         }
 
         /// <summary>

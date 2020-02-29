@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public class Pow2Gen
     {
@@ -27,19 +25,17 @@ namespace Z0
             for(var i=0; i< dst.Length; i++)
                 dst[i] = 1ul << i;
             return dst.As<byte>();
-            // var values = Pow2.Values<T>().Select(x => x.p).ToArray().ToSpan();
-            // return values.AsBytes().ToArray();
         }
 
         public static string GenAccessor<T>()
             where T : unmanaged
-                => InlineData.GenAccessor(GenData<T>(), PropName);
+                => ResourceData.GenAccessor(GenData<T>(), PropName);
 
         public static void GenToFile()
         {
             var filename = OutFile;
             var outpath = LogArea.App.TargetPath(filename);
-            print($"Generating {outpath}");
+            term.print($"Generating {outpath}");
 
             using var dst = LogArea.App.LogWriter(filename);
             dst.WriteLine($"public static class {ClassName}");
@@ -47,7 +43,5 @@ namespace Z0
             dst.WriteLine(GenAccessor<ulong>());
             dst.WriteLine("}");
         }
-
     }
-
 }

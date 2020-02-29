@@ -5,9 +5,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
+using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
 using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
 using Z0;
 
@@ -34,5 +34,5 @@ partial class zfunc
             => errors.KindOpUnsupported(src, dst, caller, file, line);    
     
     public static bool require(bool value, string info = null, [Caller] string caller = null, [File] string file = null,  [Line] int? line = null)
-            =>  value ? true : throw new AppException(AppMsg.Define($"Invariant failure: {info}", AppMsgKind.Error, caller, file, line));        
+        =>  value ? true : throw new AppException(AppMsg.Define($"Invariant failure: {info}", AppMsgKind.Error, caller, file, line));        
 }

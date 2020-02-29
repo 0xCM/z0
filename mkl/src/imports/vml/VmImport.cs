@@ -5,13 +5,9 @@
 namespace Z0.Mkl
 {
 	using System;
-	using System.Linq;
-	using System.Collections.Generic;
-	using System.Runtime.CompilerServices;
 	using System.Runtime.InteropServices;
     using System.Security;
 
-	using static zfunc;
     using static MklCommon;
 
     [SuppressUnmanagedCodeSecurity]
@@ -19,10 +15,8 @@ namespace Z0.Mkl
     {
         const string VmlDll = "z0-vml-clib.dll";
 
-
         [DllImport(VmlDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern uint vmlGetMode();		
-
 
         [DllImport(VmlDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern uint vmlSetMode(uint mode);		

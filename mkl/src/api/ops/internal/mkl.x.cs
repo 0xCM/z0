@@ -5,16 +5,12 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-     using System.Runtime.CompilerServices;
+    using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     public static partial class mklx
     {
-
         /// <summary>
         /// Initializes a new VslStream for rng 
         /// </summary>
@@ -60,9 +56,5 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]    
         internal static RngKind RngKind(this VslStream stream)
             => stream.Brng().ToRngKind();
-
-
     }
-
-
 }

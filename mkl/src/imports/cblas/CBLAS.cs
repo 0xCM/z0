@@ -5,14 +5,8 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Diagnostics;    
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Security;
     using System.Runtime.InteropServices;
-    using static zfunc;
 
     using static MklCommon;
 
@@ -859,5 +853,4 @@ namespace Z0.Mkl
         public static extern void cblas_gemm_s16s16s32_compute(BlasLayout Layout, int TransA, int TransB, MatrixOffset offsetc,
             int M, int N, int K, float alpha, ref short A, int lda, short ao, ref short B, int ldb, short bo, float beta, ref int C, int ldc, ref int co);
     }
-
 }

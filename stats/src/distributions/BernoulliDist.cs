@@ -8,9 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static zfunc;
-    using static As;
-
     /// <summary>
     /// Realizes a Bernoulli distribution
     /// </summary>

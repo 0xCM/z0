@@ -49,6 +49,5 @@ namespace Z0.Mkl
         /// Extract exception trap bits
         /// </summary>
         TrapExceptions = 0x0F000000,
-
     }
 }

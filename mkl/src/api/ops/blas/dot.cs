@@ -5,17 +5,12 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
  
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     partial class mkl
     {
-
         /// <summary>
         /// Computes the scalar product between two vectors of natural length
         /// </summary>
@@ -71,7 +66,5 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         static double dot(Span<double> X, Span<double> Y)        
             => CBLAS.cblas_ddot(length(X,Y), ref head(X), 1, ref head(Y), 1);
-
     }
-
 }

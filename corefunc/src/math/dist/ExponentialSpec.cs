@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Characterizes a Exponential (normal) distribution
@@ -46,5 +46,4 @@ namespace Z0
         public DistKind DistKind 
             => DistKind.Exponential; 
     }
-
 }

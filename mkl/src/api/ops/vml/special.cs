@@ -5,12 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-     using System.Runtime.CompilerServices;
+    using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     public static class special
     {            

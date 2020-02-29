@@ -5,10 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-	using static zfunc;
+	using static Root;
 
     sealed class BernoulliSampler<T> : Sampler<T, BernoulliSpec<double>>
         where T : unmanaged
@@ -18,18 +17,14 @@ namespace Z0.Mkl
         {
 
         }
-
         protected override int FillBuffer(Span<T> buffer)
-        {
-            
+        {            
             if(typeof(T) == typeof(int))
                 sample.bernoulli(Source,  DistSpec, SpanOps.span32i(buffer));
             else 
                 throw unsupported<T>();
             
             return buffer.Length;
-
         }
     }
-
 }

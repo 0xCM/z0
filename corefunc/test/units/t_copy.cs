@@ -12,25 +12,17 @@ namespace Z0
  
     public sealed class t_copy : UnitTest<t_copy>
     {
-
-
         public void Test1()
         {
 
             var src = new uint[]{2, 4, 6, 8};
             var dst = new byte[16];
-            memcpy(src,dst);
+            memory.copy(src,dst);
 
             Claim.eq(dst[0], (byte)2);
             Claim.eq(dst[4], (byte)4);
             Claim.eq(dst[8], (byte)6);
             Claim.eq(dst[12], (byte)8);
-
-
         }
-
- 
     }
-
-
 }

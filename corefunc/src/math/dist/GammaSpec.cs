@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public static class GammaSpec
     {
-
         /// <summary>
         /// Interprets a supplied spec as a gamma spec; an error
         /// is raised if the spec does not define gamma distribution
@@ -70,7 +69,6 @@ namespace Z0
             => DistKind.Gamma;
     }
 
-
     static class MathUtil
     {
         [MethodImpl(Inline)]
@@ -82,5 +80,4 @@ namespace Z0
             return convert<T>(r);
         }
     }
-
 }

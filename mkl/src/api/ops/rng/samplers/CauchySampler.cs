@@ -5,10 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-	using static zfunc;
+
+	using static Root;
     using static As;
 
     sealed class CauchySampler<T> : Sampler<T, CauchySpec<T>>
@@ -37,7 +36,6 @@ namespace Z0.Mkl
             else 
                 throw unsupported<T>();            
             return buffer.Length;
-
         }
     }
 

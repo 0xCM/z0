@@ -7,7 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-	using static zfunc;
+
+	using static Root;
 
     sealed class UniformBitsSampler<T> : Sampler<T, UniformBitsSpec<T>>
         where T : unmanaged

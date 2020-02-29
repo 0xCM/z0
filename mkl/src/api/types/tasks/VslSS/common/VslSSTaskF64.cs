@@ -8,8 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     sealed class VslSSTaskF64 : VslSSTask<double>
     {
         public static VslSSTaskF64 Define(int Dim, double[] Samples)

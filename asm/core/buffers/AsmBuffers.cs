@@ -34,9 +34,9 @@ namespace Z0
             Capture = Exchange.Operations;
             CaptureTarget = Exchange.TargetBuffer;
             CaptureState = Exchange.StateBuffer;
-            MBuffer = ExecBuffers.alloc(size ?? DefaultSize);            
-            LBuffer = ExecBuffers.alloc(size ?? DefaultSize);
-            RBuffer = ExecBuffers.alloc(size ?? DefaultSize);            
+            MBuffer = buffers.alloc(size ?? DefaultSize);            
+            LBuffer = buffers.alloc(size ?? DefaultSize);
+            RBuffer = buffers.alloc(size ?? DefaultSize);            
         }
 
         public readonly IAsmContext AsmContext;

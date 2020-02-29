@@ -4,15 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
 {
-
-	using System;
-	using System.Linq;
-	using System.Collections.Generic;
 	using System.Runtime.CompilerServices;
 	using System.Runtime.InteropServices;
-    using System.Security;
-
-	using static zfunc;
 
     [StructLayout(LayoutKind.Sequential)]    
     struct DefVmlErrorContext
@@ -41,6 +34,4 @@ namespace Z0.Mkl
         
         public double dbR2Im;
     } 
-
-
 }

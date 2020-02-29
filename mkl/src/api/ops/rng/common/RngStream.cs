@@ -5,10 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-	using static zfunc;
+
+	using static Root;
 
     public readonly struct MklRng : IRngSource,  IDisposable
     {
@@ -31,5 +30,4 @@ namespace Z0.Mkl
         public void Dispose()
             => Source.Dispose();
     }
-
 }

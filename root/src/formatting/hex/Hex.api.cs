@@ -208,7 +208,7 @@ namespace Z0
             else if(ishi(u))
                 return (byte)((byte)u - MinHiCode + 0xA);
             else
-                return errors.ThrowArgException<char,byte>(c);
+                throw errors.BadArg(c);
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static zfunc;    
+    using static Root;    
 
     public static class TimeSeries
     {
@@ -68,26 +68,29 @@ namespace Z0
         public static void EvolveSeries<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)
             where T : unmanaged
         {
-            var sw = stopwatch();
+            
+            var sw = time.stopwatch();
             var series = Define(domain, seed); 
             var terms = series.Terms().ToSpan(count);
-            var time = Duration.Define(sw.ElapsedTicks);
-            Claim.eq(terms.Length, count);
-            Claim.eq(series.Observed.Observed, terms[count - 1].Observed);
-            complete(series,time);
+            var elapsed = Duration.Define(sw.ElapsedTicks);
+            require(terms.Length == count);
+            require(series.Observed.Observed.Equals(terms[count - 1].Observed));
+            complete(series,elapsed);
         }
 
         static SeriesEvolution<T> Execute<T>(in ulong[] seed, in Interval<T> domain, int steps)
             where T : unmanaged
         {
-            var sw = stopwatch();
+            var sw = time.stopwatch();
+            
             var series = Define(domain, seed); 
             var s0 = series.Snapshot();                     
             var terms = series.Terms().ToSpan(steps);
-            Claim.eq(terms.Length, steps);
-            Claim.eq(series.Observed.Observed, terms[steps - 1].Observed);
-            var time = Duration.Define(sw.ElapsedTicks);
-            var evolved = SeriesEvolution.Define(seed, domain, s0.Observed, series.Observed, time);
+            require(terms.Length == steps);
+            require(series.Observed.Observed.Equals(terms[steps - 1].Observed));
+            
+            var elapsed = Duration.Define(sw.ElapsedTicks);
+            var evolved = SeriesEvolution.Define(seed, domain, s0.Observed, series.Observed, elapsed);
             return evolved;            
         }
 
@@ -98,14 +101,14 @@ namespace Z0
         public static async Task Evolve<T>(Interval<T> domain, Action<SeriesEvolution<T>> receiver, int count = Pow2.T06, int steps = Pow2.T19)
             where T : unmanaged
         {
-            var sw = stopwatch();
+            var sw = time.stopwatch();
             var variations = from i in Numeric.range(count) 
                     let seed = Seed1024.Entropic
                     let evolve = TimeSeries.Evolve(seed, domain, steps)
                     let status = evolve.ContinueWith(t => receiver(t.Result))
                     select evolve;
             
-            await Tasks.create(() => Task.WaitAll(variations.ToArray()));
+            await task.create(() => Task.WaitAll(variations.ToArray()));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
 
     public interface IValueObserverFlow<T> : IValueFlow<T>
         where T : struct
@@ -37,5 +37,4 @@ namespace Z0
         IEnumerable<T> IValueFlow<P,T>.Flow(IEnumerable<T> src, P pipe)
             => from item in src select pipe.Flow(item);            
     }
-
 }

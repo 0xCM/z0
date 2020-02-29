@@ -6,10 +6,10 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     readonly struct ValueSource<T> : IValueSource<T>
         where T : struct

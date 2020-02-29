@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
 {
-
+    using System;
+    
     enum VmlErrorMode
     {
         ///<summary>Indicates errors are ignored</summary>
@@ -27,6 +28,4 @@ namespace Z0.Mkl
 
         DefaultErrorMode  = ErrorNumber | ErrorCallback | RaiseException        
     }
-
-
 }

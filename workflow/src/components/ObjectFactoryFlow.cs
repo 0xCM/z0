@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     readonly struct ObjectFactoryFlow<P,S,T> : IObjectFactoryFlow<P,S,T>
         where S : class
         where T : class

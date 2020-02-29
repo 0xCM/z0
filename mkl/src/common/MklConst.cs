@@ -5,24 +5,14 @@
 namespace Z0.Mkl
 {
 	using System;
-	using System.Linq;
-	using System.Collections.Generic;
 	using System.Runtime.CompilerServices;
 	using System.Runtime.InteropServices;
     using System.Security;
-
-	using static zfunc;
     
     [SuppressUnmanagedCodeSecurity]
     static class MklCommon
     {
         internal const CallingConvention Cdecl = CallingConvention.Cdecl;
 
-        const BlasTrans NoTranspose = BlasTrans.None;
-        
-        const BlasLayout RowMajor = BlasLayout.RowMajor;
-
-
     }
-
 }

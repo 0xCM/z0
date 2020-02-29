@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
 
     public class BitCharsGen
     {
@@ -19,7 +15,6 @@ namespace Z0
         static string ClassName => $"{PropName}Data";
 
         static FileName OutFile => FileName.Define($"{ClassName}.cs");
-
 
         public static byte[] GenData()
         {
@@ -40,13 +35,13 @@ namespace Z0
         }
 
         public static string GenAccessor(string propname)
-            => InlineData.GenAccessor(GenData(), propname, seglen: 16);
+            => ResourceData.GenAccessor(GenData(), propname, seglen: 16);
 
         public static void GenToFile()
         {
             var filename = OutFile;
             var outpath = LogArea.App.TargetPath(filename);
-            print($"Generating {outpath}");
+            term.print($"Generating {outpath}");
 
             using var dst = LogArea.App.LogWriter(filename);
             
@@ -54,10 +49,6 @@ namespace Z0
             dst.WriteLine("{");
             dst.WriteLine(GenAccessor(PropName));
             dst.WriteLine("}");
-
-
         }
     }
-
-
 }

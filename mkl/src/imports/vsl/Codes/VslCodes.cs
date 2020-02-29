@@ -5,12 +5,8 @@
 namespace Z0.Mkl
 {
 	using System;
-	using System.Linq;
-	using System.Collections.Generic;
 	using System.Runtime.CompilerServices;
-	using System.Runtime.InteropServices;
 
-	using static zfunc;
     using static VslRngMethod;
             
     public enum VslSSMatrixStorage : int
@@ -28,6 +24,5 @@ namespace Z0.Mkl
         /// </summary>
         [MklCode("Observation vectors are organized by columns")]
         VSL_SS_MATRIX_STORAGE_COLS  =   0x00020000
-
     }
 }

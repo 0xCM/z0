@@ -8,9 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Threading.Tasks;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Characterizes a conduit that accepts S-values and produces T-values

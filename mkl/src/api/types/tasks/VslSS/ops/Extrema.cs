@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     using static VslSSTaskParameter;
     using static VslSSComputeRoutine;
@@ -177,7 +177,5 @@ namespace Z0.Mkl
             h2.Compute(Calcs.VSL_SS_2R_MOM, VSL_SS_METHOD_FAST);
             return dst;
         }
-
     }
-
 }

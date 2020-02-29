@@ -8,11 +8,10 @@ namespace Z0.Mkl
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
+
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;    
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    using static zfunc;
 
     public sealed class MklException : AppException
     {
@@ -23,8 +22,8 @@ namespace Z0.Mkl
         /// <param name="caller">The calling member</param>
         /// <param name="file">The file in which invocation occurs</param>
         /// <param name="line">The file line number of invocation</param>
-        public static new MklException Define(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                => new MklException(msg,caller,file,line);
+        public static MklException Define(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new MklException(msg,caller,file,line);
 
         /// <summary>
         /// Creates an MKL-specific exception

@@ -5,14 +5,10 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
- 
-    using static zfunc;
-    using static nfunc;
 
+    using static Root;
+
+    using static nfunc;
 
     partial class mkl
     {
@@ -54,5 +50,4 @@ namespace Z0.Mkl
             return ref y;
         }
     }
-
 }

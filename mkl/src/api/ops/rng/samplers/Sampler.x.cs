@@ -7,8 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-	using static zfunc;
-    using static As;
+
+    using static Root;
 
     partial class mklx
     {

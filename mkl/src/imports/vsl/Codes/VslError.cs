@@ -6,10 +6,8 @@ namespace Z0.Mkl
 {
 	using System;
 
-
     public enum VslError 
     {
-
         [MklCode("Everying is OK")]
         VSL_ERROR_OK = 0,
         

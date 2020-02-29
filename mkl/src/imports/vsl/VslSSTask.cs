@@ -8,7 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
     using static MklCommon;
 
     partial class VSL
@@ -86,7 +85,6 @@ namespace Z0.Mkl
 
         [DllImport(VslDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern VslSSStatus vsldSSCompute(IntPtr task, VslSSComputeRoutine routines, VslSSComputeMethod methods);
-
     }
-    
+   
 }

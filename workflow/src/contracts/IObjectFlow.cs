@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
-
-    using static zfunc;
     
     public interface IObjectFlow : IFlow
     {
@@ -20,7 +18,6 @@ namespace Z0
         where T : class
     {
         IEnumerable<T> Flow(IEnumerable<T> src, IObjectPipe<T> pipe);
-
     }
 
     public interface IObjectFlow<P,T> : IObjectFlow<T>
@@ -34,9 +31,7 @@ namespace Z0
         where S : class
         where T : class
         where P : IObjectPipe<S,T>
-    {
-        
+    {       
         IEnumerable<T> Flow(IEnumerable<S> src, P pipe);
-
-     }
+    }
 }

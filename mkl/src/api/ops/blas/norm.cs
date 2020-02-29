@@ -5,13 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
  
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     partial class mkl
     {
@@ -46,8 +42,5 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         static double norm(Span<ComplexF64> X)        
             => CBLAS.cblas_dznrm2(X.Length, ref head(X), 1);
-
-
     }
-
 }

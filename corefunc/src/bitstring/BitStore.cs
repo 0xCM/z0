@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
     using static As;     
     using static AsIn;     
 
@@ -145,40 +145,40 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe byte* bitseqP(byte value)
-            => constptr(in skip(in head(BitSeqData), 8*value));
+            => refs.constptr(in skip(in head(BitSeqData), 8*value));
 
         [MethodImpl(Inline)]
         static unsafe char* bitcharP(byte value)
         {
             ref readonly var start = ref skip(head(BitChars), 16*value);
-            return (char*)constptr(in start);
+            return (char*)refs.constptr(in start);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(byte src, Span<char> dst, int offset)
         {
-            memcpy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
+            memory.copy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(ushort src, Span<char> dst, int offset)
         {
-            memcpy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
-            memcpy(bitcharP((byte)(src >> seglen*1)), dst, offset + seglen*1,  seglen);
+            memory.copy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
+            memory.copy(bitcharP((byte)(src >> seglen*1)), dst, offset + seglen*1,  seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(uint src, Span<char> dst, int offset)
         {
             for(var i=0; i<4; i++)
-                memcpy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
+                memory.copy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(ulong src, Span<char> dst, int offset)
         {
             for(var i=0; i<8; i++)
-                memcpy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
+                memory.copy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
         }
 
         [MethodImpl(Inline)]
@@ -209,29 +209,29 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe void bitseq(byte src, Span<byte> dst, int offset)
         {
-            memcpy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
+            memory.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(ushort src, Span<byte> dst, int offset)
         {
             ref var target = ref head(dst);
-            memcpy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
-            memcpy(bitseqP((byte)(src >> seglen*1)), dst, offset + seglen*1, seglen);            
+            memory.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
+            memory.copy(bitseqP((byte)(src >> seglen*1)), dst, offset + seglen*1, seglen);            
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(uint src, Span<byte> dst, int offset)
         {            
             for(var i=0; i<4; i++)
-                memcpy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
+                memory.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
         }                 
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(ulong src, Span<byte> dst, int offset)
         {            
             for(var i=0; i<8; i++)
-                memcpy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
+                memory.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
         }
 
         [MethodImpl(Inline)]

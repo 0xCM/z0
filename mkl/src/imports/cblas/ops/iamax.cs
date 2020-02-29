@@ -5,12 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
  
-    using static zfunc;
     using static MklCommon;
 
     partial class CBLAS
@@ -53,7 +50,5 @@ namespace Z0.Mkl
         /// <param name="X">A reference the source vector head</param>
 		[DllImport(CBlasDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern ulong cblas_izamax(int n, ref ComplexF64 X, int incX);
-
     }
-
 }

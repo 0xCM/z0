@@ -45,7 +45,6 @@ namespace Z0
         public static Option<ProcessThread> ProcessThread(uint id)
             => Threads.FirstOrDefault(t => t.Id == id);
 
-
         /// <summary>
         /// Get the OS ID of the current thread
         /// </summary>
@@ -57,6 +56,5 @@ namespace Z0
         /// </summary>
         [DllImport(Kernel32)]
         static extern IntPtr GetCurrentThread();
-
     }
 }

@@ -31,7 +31,7 @@ namespace Z0
         public static FileName Timestamped(FileName src)
         {
             var first = new DateTime(2019,1,1);
-            var current = now();
+            var current = DateTime.Now;
             var elapsed = (long) (current - first).TotalMilliseconds;
             var timestamped = src.Rename($"{src.NoExtension}-{elapsed}");
             return timestamped;            

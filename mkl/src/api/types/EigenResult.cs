@@ -7,9 +7,6 @@ namespace Z0.Mkl
     using System;
     using System.Linq;
  
-    using static zfunc;
-    using static nfunc;
-
     public static class EigenResult
     {
         public static EigenResult<N,T> Define<N,T>(in NatSpan<N,Complex<T>> values, in Block256<T> lv = default,  in Block256<T> rv = default)

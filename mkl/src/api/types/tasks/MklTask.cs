@@ -8,9 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
-
     public interface IMklTask : IDisposable
     {
 

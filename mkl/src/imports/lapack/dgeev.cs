@@ -5,15 +5,13 @@
 namespace Z0.Mkl
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-
-    using static zfunc;
+ 
     using static MklCommon;
 	
     partial class LAPACK
     {
-
-
         [DllImport(MklDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern int LAPACKE_sgeev(BlasLayout layout, char jobvl, char jobvr,
                                 int n, ref float a, int lda, ref float wr,
@@ -46,7 +44,5 @@ namespace Z0.Mkl
                                 int n, ref double a, int lda, ref double wr,
                                 ref double wi, ref double vl, int ldvl, ref double vr,
                                 int ldvr);
-
     }
-
 }

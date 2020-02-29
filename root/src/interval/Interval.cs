@@ -218,11 +218,25 @@ namespace Z0
             => new Interval<T>(Left, Right, IntervalKind.Open);
 
         /// <summary>
-        /// Creates a left-open interval with endpoints from the existing interval
+        /// Creates a left-open/right-closed interval with endpoints from the existing interval
         /// </summary>
         [MethodImpl(Inline)]
         public Interval<T> ToLeftOpen()
             => new Interval<T>(Left, Right, IntervalKind.LeftOpen);
+
+        /// <summary>
+        /// Creates a left-open/right-closed interval with endpoints from the existing interval
+        /// </summary>
+        [MethodImpl(Inline)]
+        public Interval<T> ToRightClosed()
+            => new Interval<T>(Left, Right, IntervalKind.RightClosed);
+
+        /// <summary>
+        /// Creates a left-open/right-closed interval with endpoints from the existing interval
+        /// </summary>
+        [MethodImpl(Inline)]
+        public Interval<T> ToRightOpen()
+            => new Interval<T>(Left, Right, IntervalKind.RightOpen);
 
         /// <summary>
         /// Creates a left-closed interval with endpoints from the existing interval

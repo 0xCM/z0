@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitMatrix
     {        
-
         /// <summary>
         /// Creates a new generic bitmatrix where each row is initialized to a common source vector
         /// </summary>
@@ -28,7 +27,7 @@ namespace Z0
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0; i< n; i++)
-                memcpy(in src, ref seek(ref dst, i*count), (uint)count);
+                memory.copy(in src, ref seek(ref dst, i*count), (uint)count);
             return matrix;
         }
 
@@ -49,7 +48,7 @@ namespace Z0
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0; i< n; i++)
-                memcpy(in src, ref seek(ref dst, i*count), (uint)count);
+                memory.copy(in src, ref seek(ref dst, i*count), (uint)count);
             return matrix;
         }
 
@@ -101,7 +100,5 @@ namespace Z0
             A.Bytes.AsUInt64().Fill(x);
             return A;
         }
-
     }
-
 }

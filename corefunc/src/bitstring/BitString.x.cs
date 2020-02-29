@@ -180,7 +180,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.scalars(src.ToSpan(), maxbits);
+                => BitString.scalars(vfuncs.span(src), maxbits);
         
         /// <summary>
         /// Converts an 256-bit intrinsic vector representation to a bistring
@@ -190,7 +190,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector256<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.scalars(src.ToSpan(), maxbits);        
+                => BitString.scalars(vfuncs.span(src), maxbits);        
 
         /// <summary>
         /// Converts an enumeration value to a bitstring

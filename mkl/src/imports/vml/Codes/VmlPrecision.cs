@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
 {
-
     enum VmlPrecision
     {
         ///<summary>Selects the default/current precision mode</summary>
@@ -18,7 +17,5 @@ namespace Z0.Mkl
         
         ///<summary>Selects the prior precision mode</summary>
         RestoreRounding =0x00000030,
-
     }
-
 }

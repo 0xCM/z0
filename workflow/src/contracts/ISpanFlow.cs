@@ -5,11 +5,9 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Characterizes an orchestrator that coordinates data transmission
@@ -28,5 +26,4 @@ namespace Z0
         Span<T> Flow(ISpanSource<T> source, ISpanPipe<T> pipe)
             => Flow(source.Data, pipe);
     }
-
 }

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
 {
-
     /// <summary>
     /// Controls the accuracy of VML functions
     /// </summary>
@@ -18,8 +17,5 @@ namespace Z0.Mkl
         
         ///<summary>Selects enhanced performance, high accuracy VML functions</summary>
         HighAccuracyP = 0x00000003
-
     }
-
-
 }

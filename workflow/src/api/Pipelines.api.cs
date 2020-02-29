@@ -9,11 +9,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
 
     public static class Pipelines
     {
-
         /// <summary>
         /// Creates an observation pipe from a receiver function
         /// </summary>

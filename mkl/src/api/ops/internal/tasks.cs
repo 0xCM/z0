@@ -5,12 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-     using System.Runtime.CompilerServices;
+    using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     partial class mkl
     {            
@@ -25,9 +22,5 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         public static IVslSSTask<double> sstask(int dim, double[] samples)        
             => VslSSTaskF64.Define(dim, samples);
-
-
-
     }
-
 }

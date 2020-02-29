@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static Root;
+    using static Nats;
 
     partial class blocks
     {

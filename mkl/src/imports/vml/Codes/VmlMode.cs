@@ -26,7 +26,6 @@ namespace Z0.Mkl
 
         public VmlModeFlags Flags
             => (VmlModeFlags)Accuracy | (VmlModeFlags)ErrorMode;
-
     }
 
     [Flags]
@@ -70,8 +69,5 @@ namespace Z0.Mkl
 
         ///<summary>Ignore errors and do not update error status</summary>
         PretendNoError = 0x00002000,
-
-
     }
-
 }

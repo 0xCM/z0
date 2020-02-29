@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-
-    using static zfunc;
     
     /// <summary>
     /// Identifies a supported random number generator
@@ -14,6 +12,7 @@ namespace Z0
     public enum RngKind
     {        
         None = 0,
+
         /// <summary>
         /// A crypto-sourced nondeterministic generator
         /// </summary>

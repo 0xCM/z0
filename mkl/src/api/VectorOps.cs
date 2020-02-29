@@ -5,18 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
         
-    using static zfunc;
-    using static As;
     using Z0.Mkl;
+
+    using static Root;
+    using static As;
 
     public static class VectorOps
     {             
-
         /// <summary>
         /// Add the first vector to the second and populates the third with the result
         /// </summary>
@@ -58,10 +55,6 @@ namespace Z0
                 return generic<T>(mkl.dot(x.As<double>(), y.As<double>()));
             else
                 return mathspan.dot<T>(x.Unsized, y.Unsized);                
-        }
-
-
-        
+        }        
     }
-
 }

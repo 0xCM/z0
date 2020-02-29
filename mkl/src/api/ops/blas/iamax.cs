@@ -5,13 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
  
-    using static zfunc;
-    using static nfunc;
+    using static Root;
 
     partial class mkl
     {
@@ -46,8 +42,5 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         public static double amax(RowVector256<double> X)        
             => X[iamax(X)];
-
-
     }
-
 }

@@ -6,16 +6,13 @@ namespace Z0.Mkl
 {
     using System;
 
-	using static zfunc;
     using static VslRngConstants;
-    using static VslRngMethod;
 
     static class VslRngConstants
     {
         public const int VSL_BRNG_SHIFT = 20;
 
         public const int  VSL_BRNG_INC = 1 << VSL_BRNG_SHIFT;
-
     }
 
     public enum BRNG

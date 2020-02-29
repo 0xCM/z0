@@ -7,7 +7,6 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
     using static MklCommon;
 	
     partial class LAPACK
@@ -25,7 +24,5 @@ namespace Z0.Mkl
         /// <param name="exitcode">If successful, populated with 0; if -i, the i-th parameter had an illegal value; if info=i, general alorithm failure</param>
         [DllImport(MklDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern int LAPACKE_dpotrf(BlasLayout layout, char uplo, int n, ref double a, int lda);
-
     }
-
 }

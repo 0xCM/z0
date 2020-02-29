@@ -5,9 +5,8 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-	using static zfunc;
+
+    using static Root;
     using static As;
 
     sealed class GaussianSampler<T> : Sampler<T, GaussianSpec<T>>

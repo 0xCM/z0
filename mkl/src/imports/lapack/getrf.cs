@@ -5,14 +5,13 @@
 namespace Z0.Mkl
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-
-    using static zfunc;
+ 
     using static MklCommon;
 	
     partial class LAPACK
     {
-
         /// <summary>
         /// Computes an LU factorization of a general M-by-N matrix A using partial pivoting with row interchanges.
         /// </summary>

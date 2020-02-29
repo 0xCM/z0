@@ -5,7 +5,6 @@
 namespace Z0.Mkl
 {
 	using System;
-	using System.Linq;
 
     /// <summary>
     /// SS routines provide computation of basic statistical estimates
@@ -87,5 +86,4 @@ namespace Z0.Mkl
         [MklCode("Radix sorting")]
         VSL_SS_METHOD_RADIX = 0x00100000,
     }
-
 }

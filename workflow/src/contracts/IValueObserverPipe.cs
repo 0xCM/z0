@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
 
     public interface IValueObserverPipe : IValuePipe
     {
@@ -41,5 +41,4 @@ namespace Z0
         object IPipe.Flow(object src)
             => Flow(in Unsafe.As<object,T>(ref Unsafe.AsRef(in src)));
     }
-
 }

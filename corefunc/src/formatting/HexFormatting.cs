@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Vector128<T> src, bool bracket = false, char? sep = null, bool specifier = false)
             where T : unmanaged
-                => src.ToSpan().FormatHex(bracket, sep, specifier);
+                => vfuncs.span(src).FormatHex(bracket, sep, specifier);
 
         /// <summary>
         /// Formats cpu vector components of integral type as a sequence of hex values
@@ -65,6 +65,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Vector256<T> src, bool bracket = false, char? sep = null, bool specifier = false)
              where T : unmanaged
-                => src.ToSpan().FormatHex(bracket,sep, specifier);
+                => vfuncs.span(src).FormatHex(bracket,sep, specifier);
    }
 }

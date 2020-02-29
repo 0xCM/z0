@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
         
-    using static zfunc;
+    using static Root;
 
     public readonly ref struct Dataset<T>
         where T : unmanaged
@@ -53,7 +53,6 @@ namespace Z0
         public static bool operator != (Dataset<T> lhs, Dataset<T> rhs)
             => lhs.Data != rhs.Data;
         
-
         [MethodImpl(Inline)]
         Dataset(Span<T> src, int dim)
         {

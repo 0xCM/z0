@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Embodies an asynchrounous thread of execution that is assigned to a specific CPU core
@@ -78,7 +78,7 @@ namespace Z0
         {
             RunCycle();
             ++CycleCount;
-            print(FinishedCycle(CurrentCycle, TotalCpuUsage, State, CoreNumber));
+            term.print(FinishedCycle(CurrentCycle, TotalCpuUsage, State, CoreNumber));
             await asyncDelay(Frequency);
         }
 
@@ -97,10 +97,10 @@ namespace Z0
         
         internal async Task Run()
         {
-            WorkerThread = thread(CurrentProcess.CurrentThreadId).ValueOrDefault();
+            WorkerThread = task.thread(CurrentProcess.CurrentThreadId).ValueOrDefault();
             if(WorkerThread == null)
             {
-                error("Thread lookup failed. Aborting worker");
+                term.error("Thread lookup failed. Aborting worker");
                 return;
             }
 
@@ -127,8 +127,7 @@ namespace Z0
             var cpuTxt = $"cputime = {totalCpu}, ";
             var stateTxt = $"current state = {state}";            
             var msgText = $"({coreTxt}{cycleTxt}{cpuTxt}{stateTxt}";
-            var msg = appMsg(msgText, AppMsgKind.HiliteML);
-            return msg;            
+            return AppMsg.Colorize(msgText, AppMsgColor.Magenta);
         }    
     }
 }

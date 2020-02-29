@@ -5,10 +5,6 @@
 namespace Z0.Mkl
 {
 	using System;
-	using System.Linq;
-	using System.Collections.Generic;
-	using System.Runtime.CompilerServices;
-	using System.Runtime.InteropServices;
 
     [Flags]
     enum VslSSComputeRoutine : long
@@ -241,6 +237,5 @@ namespace Z0.Mkl
         /// </summary>
         [MklCode("Computes mean absolute deviation")]
         VSL_SS_MNAD = 0x0000000400000000,
-
    }    
 }

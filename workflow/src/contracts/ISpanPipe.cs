@@ -5,11 +5,9 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static zfunc;
+    using static Root;
 
     public interface ISpanPipe<T> : IPipe
         where T : struct
@@ -19,7 +17,7 @@ namespace Z0
         Span<T> Flow(Span<T> src)
         {
             for(var i=0; i<src.Length; i++)
-                Flow(ref seek(src, i));
+                Flow(ref refs.seek(src, i));
             return src;
         }
 
@@ -30,5 +28,4 @@ namespace Z0
             return Flow(ref value);
         }
     }
-
 }

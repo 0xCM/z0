@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Text;
     using System.Linq;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
-
-    using static zfunc;
     using System.Collections;
 
     public abstract class Distribution<S,T> : IDistribution<T>, IRngSampler<T>

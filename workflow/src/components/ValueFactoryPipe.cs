@@ -5,11 +5,9 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
+    using static Root;
 
     /// <summary>
     /// Reifies a value factor pipe via a supplied production function

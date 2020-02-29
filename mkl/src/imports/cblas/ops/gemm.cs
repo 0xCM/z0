@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
 {
-	using System;
-	using System.Linq;
-	using System.Collections.Generic;
-	using System.Runtime.CompilerServices;
-	using System.Runtime.InteropServices;
-
-	using static zfunc;
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+ 
     using static MklCommon;
 
 	partial class CBLAS
@@ -45,7 +42,5 @@ namespace Z0.Mkl
 		[DllImport(CBlasDll, CallingConvention=Cdecl, ExactSpelling=true)]
 		public static extern void cblas_sgemm(BlasLayout Layout, BlasTrans TransA, BlasTrans TransB, int M, int n,
 			int K, float alpha, ref float A, int lda, ref float B, int ldb, float beta, ref float C, int ldc);
-
 	}
-
 }

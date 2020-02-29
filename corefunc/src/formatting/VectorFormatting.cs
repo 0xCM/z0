@@ -23,7 +23,7 @@ namespace Z0
         public static string Format<T>(this Vector128<T> src, SequenceFormatKind sfmt = SequenceFormatKind.List, char sep = ',', int pad = 0, bool bracketed = true)
             where T : unmanaged
         {
-            var elements = src.ToSpan();
+            var elements = vfuncs.span(src);
             return sfmt == SequenceFormatKind.Vector 
                 ? elements.FormatAsVector(sep.ToString()) 
                 : elements.FormatList(sep,0,pad,bracketed);
@@ -44,7 +44,7 @@ namespace Z0
                 return $"{src.GetLower().Format(sfmt, sep, pad)} {src.GetUpper().Format(sfmt, sep, pad)}";
             else
             {
-                var elements = src.ToSpan();
+                var elements = vfuncs.span(src);
                 return sfmt == SequenceFormatKind.Vector 
                     ? elements.FormatAsVector(sep.ToString()) 
                     : elements.FormatList(sep,0,pad,bracketed);

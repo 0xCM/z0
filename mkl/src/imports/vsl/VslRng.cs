@@ -5,13 +5,10 @@
 namespace Z0.Mkl
 {
 	using System;
-	using System.Linq;
-	using System.Collections.Generic;
 	using System.Runtime.CompilerServices;
 	using System.Runtime.InteropServices;
     using System.Security;
 
-	using static zfunc;
     using static MklCommon;
     
     [SuppressUnmanagedCodeSecurity]
@@ -259,7 +256,5 @@ namespace Z0.Mkl
 
         [DllImport(VslDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern VslRngStatus vdRngLognormal(int method, IntPtr stream, int count, ref double values, double a, double b, double c, double d);
-
     }
 }
-

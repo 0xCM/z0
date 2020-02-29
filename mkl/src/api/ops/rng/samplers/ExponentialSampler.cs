@@ -7,7 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-	using static zfunc;
+	
+    using static Root;
     using static As;
 
     sealed class ExponentialSampler<T> : Sampler<T, ExponentialSpec<T>>
@@ -35,7 +36,6 @@ namespace Z0.Mkl
                 throw unsupported<T>();
 
             return buffer.Length;
-
         }
     }
 }

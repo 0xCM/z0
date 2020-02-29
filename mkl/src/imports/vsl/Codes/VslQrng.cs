@@ -48,11 +48,5 @@ namespace Z0.Mkl
         VSL_USER_DIRECTION_NUMBERS = 4,
 
         VSL_QRNG_OVERRIDE_1ST_DIM_INIT = 8
-
     }
-
-
 }
-
-
-

@@ -5,17 +5,13 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
  
-    using static zfunc;
     using static MklCommon;
 
     partial class CBLAS
     {
-
         /// <summary>
         /// Finds the index of the vector component with minimal absoute value
         /// </summary>
@@ -56,8 +52,5 @@ namespace Z0.Mkl
         /// <returns></returns>
 		[DllImport(CBlasDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern ulong cblas_izamin(int n, ref ComplexF64 X, int incX);
-
-
     }
-
 }

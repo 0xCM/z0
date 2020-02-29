@@ -6,16 +6,11 @@ namespace Z0.Designators
 {        
     using System;    
 
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
     public sealed class MklApi : AssemblyResolution<MklApi>
     {
         const AssemblyId Identity = AssemblyId.MklApi;
         
         public override AssemblyId Id 
             => Identity;
-
     }
-
 }

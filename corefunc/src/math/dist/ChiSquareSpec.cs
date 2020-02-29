@@ -8,8 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
+    using static Root;
 
     /// <summary>
     /// Characterizes a bernouli distribution
@@ -46,7 +45,5 @@ namespace Z0
         /// </summary>
         public DistKind DistKind 
             => DistKind.Chi2;
-
     }
-
 }

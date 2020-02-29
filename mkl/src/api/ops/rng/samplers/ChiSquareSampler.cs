@@ -5,9 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-	using static zfunc;
+
+	using static Root;
 
     sealed class ChiSquareSampler<T> : Sampler<T, ChiSquareSpec<int>>
         where T : unmanaged
@@ -27,8 +27,6 @@ namespace Z0.Mkl
             else 
                 throw unsupported<T>();            
             return buffer.Length;
-
         }
     }
-
 }

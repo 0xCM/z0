@@ -15,11 +15,13 @@ namespace Z0
 
     public static class messages
     {
-        public static AppMsg FeatureUnsupported(string feature, string caller, string file, int? line)
-                => AppMsg.Define($"Unsupported: {feature}", AppMsgKind.Error, caller, file, line);
+        public static AppMsg FeatureUnsupported(object feature, string caller, string file, int? line)
+            => AppMsg.Define($"Unsupported: {feature}", AppMsgKind.Error, caller, file, line);
+        
         public static AppMsg KindUnsupported<T>(T kind, string caller, string file, int? line)
             where T : Enum
                 => AppMsg.Define($"{typeof(T).Name}.{kind} not supported", AppMsgKind.Error, caller, file, line);
+     
         public static AppMsg TypeUnsupported(Type t, string caller, string file, int? line)
                 => AppMsg.Define($"Type {t.Name} is not supported in the current context", AppMsgKind.Error, caller, file, line);
         public static AppMsg KindOpUnsupported<S,T>(S src, T dst, string caller, string file, int? line)
@@ -76,9 +78,15 @@ namespace Z0
         public static AppMsg LengthMismatch(int lhs, int rhs, string caller, string file, int? line)
             => AppMsg.Define($"Length mismatch: {lhs} != {rhs}", AppMsgKind.Error, caller, file, line);
 
+        public static AppMsg InvariantFailure(object description, string caller, string file, int? line)
+            => AppMsg.Error(description ?? "An required invariant was unsatisfied", caller,file,line);
+
+        public static AppMsg InvariantFailure(string caller, string file, int? line)
+            => InvariantFailure(null, caller, file, line);
+                
         public static AppMsg NotBetween<T>(T x, T lhs, T rhs, string caller, string file, int? line)
             => AppMsg.Define($"The source value {x} is not between {lhs} and {rhs}", AppMsgKind.Error, caller, file, line);
-
+        
         public static AppMsg IndexOutOfRange(int index, int min, int max, string caller, string file, int? line)
             => AppMsg.Define($"The index {index} is not between {min} and {max}", AppMsgKind.Error, caller, file, line);
 

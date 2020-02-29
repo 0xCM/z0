@@ -10,8 +10,7 @@ namespace Z0.Mkl
     /// Defines summary statistic status codes
     /// </summary>
     public enum VslSSStatus
-    {
-        
+    {        
         /// <summary>
         /// Everything is OK
         /// </summary>        

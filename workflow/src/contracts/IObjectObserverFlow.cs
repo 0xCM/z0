@@ -8,9 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Threading.Tasks;
-
-    using static zfunc;
 
     public interface IObjectObserverFlow<T> : IObjectFlow<T>
         where T : class
