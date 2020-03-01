@@ -32,7 +32,7 @@ namespace Z0
             var len = blocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
-                seek(ref mem, i) = even(i) ? a : b;
+                seek(ref mem, i) = parity.even(i) ? a : b;
             return CpuVector.vload(n, in head(data));
         }
 

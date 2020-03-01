@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static zfunc;
+    using static Root;
 
     public static class Math128
     {
@@ -392,7 +392,7 @@ namespace Z0
 
             var lo = (u2 << 32) | (t0 & 0xffffffffu);
             var hi = t3 + (u2 >> 32) + (u1 >> 32);  
-            return pair(lo,hi);          
+            return (lo,hi);          
         }
 
         /// <summary>

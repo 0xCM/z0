@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
+    using P = parity;
 
     partial class BitVector
     {
@@ -22,8 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit parity<T>(BitVector<T> src)
             where T : unmanaged
-                => odd(gbits.pop(src.Scalar));
-
+                => P.odd(gbits.pop(src.Scalar));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -34,7 +34,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static bit parity(BitVector4 src)
-            => odd(pop(src));
+            => P.odd(pop(src));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -45,7 +45,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static bit parity(BitVector8 src)
-            => odd(pop(src));
+            => P.odd(pop(src));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -56,7 +56,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static bit parity(BitVector16 src)
-            => odd(pop(src));
+            => P.odd(pop(src));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -67,7 +67,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static bit parity(BitVector32 src)
-            => odd(pop(src));
+            => P.odd(pop(src));
 
         /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -78,7 +78,6 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static bit parity(BitVector64 src)
-            => odd(pop(src));
-
+            => P.odd(pop(src));
     }
 }

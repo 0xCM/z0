@@ -71,7 +71,7 @@ namespace Z0
 
 
             for(var i=0; i< count; i++)
-                if(odd(i)) 
+                if(parity.odd(i)) 
                     Claim.eq(vcell(x,i), storage[i]);
                 else
                     Claim.eq(z8, storage[i]);
@@ -84,7 +84,7 @@ namespace Z0
 
 
             for(var i=0; i< count; i++)
-                if(even(i)) 
+                if(parity.even(i)) 
                     Claim.eq(vcell(x,i), storage[i]);
                 else
                     Claim.eq(z8, storage[i]);

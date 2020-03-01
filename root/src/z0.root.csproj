@@ -9,4 +9,12 @@
     <Compile Include="$(TopDir)/shared/TypeCodes.cs" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <ProjectFolder>$[System.IO.Path]::GetFileName($(MSBuildThisFileDirectory))</ProjectFolder>
+  </PropertyGroup>
+
+  <Target Name="Diagnostic">
+    <Message Text="ProjectFolder = $(ProjectFolder)" Importance="high" />
+  </Target>
+
 </Project>

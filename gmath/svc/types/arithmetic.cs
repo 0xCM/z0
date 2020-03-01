@@ -133,7 +133,7 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => gmath.even(a);
+            public readonly bit Invoke(T a) => parity.even(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
@@ -151,7 +151,7 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => gmath.odd(a);
+            public readonly bit Invoke(T a) => parity.odd(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)

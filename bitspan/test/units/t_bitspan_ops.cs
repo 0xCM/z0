@@ -243,7 +243,7 @@ namespace Z0
             Claim.eq(length, bitspan.Length);
             for(int i=0, j = length - 1; i< length; i++, j--)
             {
-                if(even(i))
+                if(parity.even(i))
                 {
                     Claim.yea(bitspan[i]);
                     Claim.eq(bit.One, format[j]);

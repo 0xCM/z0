@@ -152,7 +152,7 @@ namespace Z0
             
             var lrpattern = v32u(CpuVector.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(var i=0; i < 8; i++)
-                Claim.eq(vcell(lrpattern,i), even(i) ? 0u : uint.MaxValue);
+                Claim.eq(vcell(lrpattern,i), parity.even(i) ? 0u : uint.MaxValue);
             
             var zero = CpuVector.vzero<uint>(n);            
             var ones = vpattern.vones<uint>(n);
@@ -209,7 +209,7 @@ namespace Z0
 
                 var es = blocks.single<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
-                    es[i] = odd(i) ? ys[i] : xs[i];
+                    es[i] = parity.odd(i) ? ys[i] : xs[i];
                 var expect = es.LoadVector();
                 var actual = ginx.vblend(x,y,m);
 

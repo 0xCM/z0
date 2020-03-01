@@ -15,7 +15,7 @@
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.src.csproj" />    
-    <ProjectReference Include="$(TopDir)stats/src/z0.stats.src.csproj" />
+    <ProjectReference Include="$(TopDir)stats/src/z0.stats.csproj" />
   </ItemGroup>
 
   <ItemGroup>

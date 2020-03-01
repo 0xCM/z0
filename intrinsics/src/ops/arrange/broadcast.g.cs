@@ -62,6 +62,6 @@ namespace Z0
         public static T broadcast<S,T>(S src, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => vfirst<S,T>(CpuVector.vbroadcast(n128, src));                
+                => vfuncs.vfirst<S,T>(CpuVector.vbroadcast(n128, src));                
     }
 }

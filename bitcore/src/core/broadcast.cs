@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static ushort broadcast(byte src, N16 w)
-            => vfirst<byte,ushort>(vbroadcast(src));
+            => vfuncs.vfirst<byte,ushort>(vbroadcast(src));
 
         /// <summary>
         /// Replicates an 8-bit source over a 32-bit target
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static uint broadcast(byte src, N32 w)
-            => vfirst<byte,uint>(vbroadcast(src));
+            => vfuncs.vfirst<byte,uint>(vbroadcast(src));
 
         /// <summary>
         /// Replicates an 8-bit source over a 64-bit target
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static ulong broadcast(byte src, N64 w)
-            => vfirst<byte,ulong>(vbroadcast(src));
+            => vfuncs.vfirst<byte,ulong>(vbroadcast(src));
 
         /// <summary>
         /// Replicates a 16-bit source over a 32-bit target
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static uint broadcast(ushort src, N32 w)
-            => vfirst<ushort,uint>(vbroadcast(src));
+            => vfuncs.vfirst<ushort,uint>(vbroadcast(src));
 
         /// <summary>
         /// Replicates a 16-bit source over a 64-bit target
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static ulong broadcast(ushort src, N64 w)
-            => vfirst<ushort,ulong>(vbroadcast(src));
+            => vfuncs.vfirst<ushort,ulong>(vbroadcast(src));
 
         /// <summary>
         /// Replicates a 32-bit source over a 64-bit target
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static ulong broadcast(uint src, N64 w)
-            => vfirst<uint,ulong>(vbroadcast(src));
+            => vfuncs.vfirst<uint,ulong>(vbroadcast(src));
 
         [MethodImpl(Inline), Op]
         static unsafe Vector128<byte> vbroadcast(byte src)
@@ -81,6 +81,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static unsafe Vector128<uint> vbroadcast(uint src)
             => BroadcastScalarToVector128(&src);
-
     }
 }

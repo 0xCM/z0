@@ -2,5 +2,9 @@
 
   <Import Project="../directory.build.props"/>
 
+  <PropertyGroup>
+    <ProjectId>root</ProjectId>
+  </PropertyGroup>
+
 
 </Project>

@@ -159,7 +159,7 @@ namespace Z0
             where T : unmanaged
         {
             uint cell = v8u(g.Data).GetElement(index/2);
-            return convert<byte>((odd(index) ? cell >> 4 : 0xF & cell));
+            return convert<byte>((parity.odd(index) ? cell >> 4 : 0xF & cell));
         }
 
         /// <summary>

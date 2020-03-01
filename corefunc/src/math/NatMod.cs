@@ -270,26 +270,5 @@ namespace Z0
         /// The equivalent untyped modulus with nullary state
         /// </summary>
         static Mod _Mod => Mod.Define(M32, 0);
-
-    //     static uint[,] ProductTable()
-    //     {
-    //         var products = new uint[M32,M32];
-    //         for(var i = 1u; i<M32; i++)
-    //         for(var j = 1u; j<M32; j++)
-    //             products[i,j] = _Mod.mod(i*j);                
-    //         return products;            
-    //     }
-
-    //     static uint Inverse(uint a)
-    //     {
-    //         var prod = Products.Value;
-    //         for(var i=1u; i<M32; i++)
-    //             if(prod[i,a] == 1u) return i;
-         
-    //         throw new Exception($"Multiplicative inverse for {a} not found. Are you sure {M32} is prime?");
-    //     }
-        
-    //     static Lazy<uint[,]> Products = new Lazy<uint[,]>(ProductTable);
-    // }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     
     using static NatProve;
     using static nfunc;
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines proof attempts for type naturals

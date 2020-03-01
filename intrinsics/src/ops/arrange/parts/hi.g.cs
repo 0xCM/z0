@@ -87,13 +87,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vhi(vcast8u(src)));
+                return vgeneric<T>(dinx.vhi(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vhi(vcast16u(src)));
+                return vgeneric<T>(dinx.vhi(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vhi(vcast32u(src)));
+                return vgeneric<T>(dinx.vhi(v32u(src)));
             else 
-                return vgeneric<T>(dinx.vhi(vcast64u(src)));
+                return vgeneric<T>(dinx.vhi(v64u(src)));
         }
 
         [MethodImpl(Inline)]
@@ -101,13 +101,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vhi(vcast8i(src)));
+                return vgeneric<T>(dinx.vhi(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vhi(vcast16i(src)));
+                return vgeneric<T>(dinx.vhi(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vhi(vcast32i(src)));
+                return vgeneric<T>(dinx.vhi(v32i(src)));
             else
-                return vgeneric<T>(dinx.vhi(vcast64i(src)));
+                return vgeneric<T>(dinx.vhi(v64i(src)));
         }
 
         [MethodImpl(Inline)]
@@ -115,9 +115,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vhi(vcast32f(src)));
+                return vgeneric<T>(dinxfp.vhi(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vhi(vcast64f(src)));
+                return vgeneric<T>(dinxfp.vhi(v64f(src)));
             else 
                 throw unsupported<T>();
         }

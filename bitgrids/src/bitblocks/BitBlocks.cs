@@ -221,7 +221,7 @@ namespace Z0
                 var b = (uint)y[i];
                 result += a*b;
             }
-            return odd(result);
+            return parity.odd(result);
         }
 
         /// <summary>

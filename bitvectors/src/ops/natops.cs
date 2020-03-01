@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
+    using P = parity;
 
     partial class BitVector
     {
@@ -472,7 +473,7 @@ namespace Z0
             var result = 0u;
             for(var i=0; i<x.Width; i++)
                 result += ((uint)x[i]*(uint)y[i]);                
-            return odd(result);
+            return P.odd(result);
         }
 
         /// <summary>
@@ -679,7 +680,7 @@ namespace Z0
         public static bit parity<N,T>(BitVector<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => odd(gbits.pop(src.Scalar));
+                => P.odd(gbits.pop(src.Scalar));
 
         /// <summary>
         /// Computes the parity of the source vector
@@ -688,7 +689,7 @@ namespace Z0
         public static bit parity<N,T>(in BitVector128<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => odd(pop(src));
+                => P.odd(pop(src));
  
          [MethodImpl(Inline)]
         public static bit same<N,T>(in BitVector<N,T> x, in BitVector<N,T> y)
@@ -833,8 +834,6 @@ namespace Z0
         public static BitVector128<N,T> srl<N,T>(in BitVector128<N,T> x, byte s)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vsrlx(x.data,s);
-
- 
+                => ginx.vsrlx(x.data,s); 
     }
 }

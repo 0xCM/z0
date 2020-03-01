@@ -135,7 +135,7 @@ namespace Z0
             for(var block = 0; block < BlockCount; block++)
             {
                 var target = A.Block(block);
-                var source = even(block) ? pattern0 : pattern1;
+                var source = parity.even(block) ? pattern0 : pattern1;
                 source.StoreTo(target);
             }
 
@@ -151,7 +151,7 @@ namespace Z0
                 
                 var indices = CpuVector.vparts(w,i0,i1,i2,i3);
                 var result = vgather(w, in A.Head, indices);
-                var expect = even(block) ? pattern0 : pattern1;
+                var expect = parity.even(block) ? pattern0 : pattern1;
                 Claim.eq(result,expect);                
             }
         }

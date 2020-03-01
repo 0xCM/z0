@@ -35,7 +35,7 @@ namespace Z0.Logix
 
         public void identity_bench()
         {
-            if(odd(now().Ticks))
+            if(parity.odd(now().Ticks))
             {
                 evaluator_bench();
             }

@@ -258,5 +258,77 @@ partial class zfunc
         where T : unmanaged
             => x.As<S,T>();
 
+    [MethodImpl(Inline)]
+    public static void vstore<T>(Vector128<T> src, ref T dst)
+        where T : unmanaged
+            => vfuncs.vstore(src, ref dst);
+
+    [MethodImpl(Inline)]
+    public static void vstore<T>(Vector256<T> src, ref T dst)
+        where T : unmanaged
+            => vfuncs.vstore(src, ref dst);
+
+    [MethodImpl(Inline)]
+    public static Span<T> vstore<T>(Vector128<T> src, Span<T> dst)
+        where T : unmanaged            
+            => vfuncs.vstore(src, dst);
+
+    [MethodImpl(Inline)]
+    public static Span<T> vstore<T>(Vector256<T> src, Span<T> dst)
+        where T : unmanaged            
+            => vfuncs.vstore(src, dst);
+
+    /// <summary>
+    /// Extracts an index-identified component from the source vector
+    /// </summary>
+    /// <param name="src">The source vector</param>
+    /// <param name="index">The index of the component to extract</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static T vcell<T>(Vector128<T> src, int index)
+        where T : unmanaged
+            => vfuncs.vcell(src,index);
+
+    /// <summary>
+    /// Extracts an index-identified component from the source vector
+    /// </summary>
+    /// <param name="src">The source vector</param>
+    /// <param name="index">The index of the component to extract</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static T vcell<T>(Vector256<T> src, int index)
+        where T : unmanaged
+            => vfuncs.vcell(src,index);
+
+    /// <summary>
+    /// Computes the vector component count for a given bit-width and component type
+    /// </summary>
+    /// <param name="w">The width selector</param>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [MethodImpl(Inline)]
+    public static int vcount<W,T>(W w = default, T t = default)
+        where W : unmanaged, ITypeNat
+        where T : unmanaged
+            => vfuncs.vcount<W,T>();
+
+    /// <summary>
+    /// Computes the vector component count for a given bit-width and component type
+    /// </summary>
+    /// <param name="w">The width selector</param>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [MethodImpl(Inline)]
+    public static int vcount<T>(N128 w, T t = default)
+        where T : unmanaged
+            => vfuncs.vcount<T>(w);
+
+    /// <summary>
+    /// Computes the vector component count for a given bit-width and component type
+    /// </summary>
+    /// <param name="w">The width selector</param>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [MethodImpl(Inline)]
+    public static int vcount<T>(N256 w, T t = default)
+        where T : unmanaged
+            => vfuncs.vcount<T>(w);
     
 }

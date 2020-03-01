@@ -191,13 +191,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                dinx.vstore(vcast8u(src), ref uint8(ref dst), offset);
+                dinx.vstore(v8u(src), ref uint8(ref dst), offset);
             else if(typeof(T) == typeof(ushort))
-                dinx.vstore(vcast16u(src), ref uint16(ref dst), offset);
+                dinx.vstore(v16u(src), ref uint16(ref dst), offset);
             else if(typeof(T) == typeof(uint))
-                dinx.vstore(vcast32u(src), ref uint32(ref dst), offset);
+                dinx.vstore(v32u(src), ref uint32(ref dst), offset);
             else
-                dinx.vstore(vcast64u(src), ref uint64(ref dst), offset);
+                dinx.vstore(v64u(src), ref uint64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -205,13 +205,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                dinx.vstore(vcast8i(src), ref int8(ref dst), offset);
+                dinx.vstore(v8i(src), ref int8(ref dst), offset);
             else if(typeof(T) == typeof(short))
-                dinx.vstore(vcast16i(src), ref int16(ref dst), offset);
+                dinx.vstore(v16i(src), ref int16(ref dst), offset);
             else if(typeof(T) == typeof(int))
-                dinx.vstore(vcast32i(src), ref int32(ref dst), offset);
+                dinx.vstore(v32i(src), ref int32(ref dst), offset);
             else
-                dinx.vstore(vcast64i(src), ref int64(ref dst), offset);
+                dinx.vstore(v64i(src), ref int64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -219,9 +219,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                dinx.vstore(vcast32f(src), ref float32(ref dst), offset);
+                dinx.vstore(v32f(src), ref float32(ref dst), offset);
             else if(typeof(T) == typeof(double))
-                dinx.vstore(vcast64f(src), ref float64(ref dst), offset);
+                dinx.vstore(v64f(src), ref float64(ref dst), offset);
             else 
                 throw unsupported<T>();                
         }
@@ -231,13 +231,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                dinx.vstore(vcast8u(src), ref uint8(ref dst), offset);
+                dinx.vstore(v8u(src), ref uint8(ref dst), offset);
             else if(typeof(T) == typeof(ushort))
-                dinx.vstore(vcast16u(src), ref uint16(ref dst), offset);
+                dinx.vstore(v16u(src), ref uint16(ref dst), offset);
             else if(typeof(T) == typeof(uint))
-                dinx.vstore(vcast32u(src), ref uint32(ref dst), offset);
+                dinx.vstore(v32u(src), ref uint32(ref dst), offset);
             else
-                dinx.vstore(vcast64u(src), ref uint64(ref dst), offset);
+                dinx.vstore(v64u(src), ref uint64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -245,13 +245,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                dinx.vstore(vcast8i(src), ref int8(ref dst), offset);
+                dinx.vstore(v8i(src), ref int8(ref dst), offset);
             else if(typeof(T) == typeof(short))
-                dinx.vstore(vcast16i(src), ref int16(ref dst), offset);
+                dinx.vstore(v16i(src), ref int16(ref dst), offset);
             else if(typeof(T) == typeof(int))
-                dinx.vstore(vcast32i(src), ref int32(ref dst), offset);
+                dinx.vstore(v32i(src), ref int32(ref dst), offset);
             else
-                dinx.vstore(vcast64i(src), ref int64(ref dst), offset);
+                dinx.vstore(v64i(src), ref int64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -259,9 +259,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                dinx.vstore(vcast32f(src), ref float32(ref dst), offset);
+                dinx.vstore(v32f(src), ref float32(ref dst), offset);
             else if(typeof(T) == typeof(double))
-                dinx.vstore(vcast64f(src), ref float64(ref dst), offset);
+                dinx.vstore(v64f(src), ref float64(ref dst), offset);
             else 
                 throw unsupported<T>();                
         }

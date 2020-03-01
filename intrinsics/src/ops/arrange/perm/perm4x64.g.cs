@@ -76,7 +76,7 @@ namespace Z0
             if(typeof(T) == typeof(float))
                 return vgeneric<T>(v32f(dinxfp.vperm4x64(v64f(x), spec)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vperm4x64(vcast64f(x), spec));
+                return vgeneric<T>(dinxfp.vperm4x64(v64f(x), spec));
             else
                 throw unsupported<T>();
         }
