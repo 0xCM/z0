@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Root;
 
@@ -33,7 +31,6 @@ namespace Z0
         }
 
         public override string ToString() 
-            => $"({Index})";
+            => $"({Index})"; 
     }
-
 }

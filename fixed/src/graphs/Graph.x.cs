@@ -11,16 +11,6 @@ namespace Z0
 
     public static class GraphX
     {
-        /// <summary>
-        /// Converts an graph edge to an arrow
-        /// </summary>
-        /// <param name="e">The edge to convert</param>
-        /// <typeparam name="V">The vertex index type</typeparam>
-        [MethodImpl(Inline)]
-        public static Arrow<V> ToArrow<V>(this Edge<V> e)
-            where V : unmanaged
-                => new Arrow<V>(e.Source, e.Target);
-
         [MethodImpl(Inline)]
         public static void Deconstruct<T>(this Edge<T> edge, out T source, out T target)
             where T : unmanaged

@@ -11,7 +11,7 @@ namespace Z0
     using System.Text;
 
     using static Root;
-    
+
     /// <summary>
     /// Defines the primary API surface for manipulated graphs
     /// and related elements
@@ -233,4 +233,5 @@ namespace Z0
             return fmt.ToString();
         }
     }
+
 }

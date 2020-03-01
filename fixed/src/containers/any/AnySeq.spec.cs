@@ -35,7 +35,6 @@ namespace Z0
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
             => Terms.GetEnumerator();
-
         
         /// <summary>
         /// It is not assumed that sequence is finite; in discrete computing
@@ -61,8 +60,5 @@ namespace Z0
         /// </summary>
         /// <param name="src">The term source</param>
         public static P Create(IEnumerable<T> src) => Empty.Factory(src);
-
     }
-
-
 }

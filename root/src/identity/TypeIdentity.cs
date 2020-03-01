@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static IdentityCommons;
+    using static IdentityOps;
 
     public readonly struct TypeIdentity : ITypeIdentity<TypeIdentity>
     {
@@ -60,19 +60,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(TypeIdentity src)
-            => IdentityEquals(this, src);
+            => equals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(TypeIdentity src)
-            => IdentityCompare(this, src); 
+            => compare(this, src); 
         public string Format()
-            => IdentityFormat(this);
+            => IdentityOps.format(this);
 
         public override int GetHashCode()
-            => IdentityHashCode(this);
+            => hash(this);
 
         public override bool Equals(object obj)
-            => IdentityEquals(this, obj);
+            => equals(this, obj);
 
         public override string ToString()
             => Format();

@@ -31,7 +31,6 @@ namespace Z0
     public interface IIdentity<T> :  IIdentity, IEquatable<T>, IFormattable<T>, IComparable<T>
         where T : IIdentity<T>, new()
     {
- 
         [MethodImpl(Inline)]
         bool IEquatable<T>.Equals(T src)
             => text.equals(Identifier, src?.Identifier);

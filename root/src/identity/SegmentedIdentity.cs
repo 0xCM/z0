@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static IdentityCommons;
+    using static IdentityOps;
     using static text;
 
     public readonly struct SegmentedIdentity : ITypeIdentity<SegmentedIdentity>
@@ -74,16 +74,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(SegmentedIdentity src)
-            => IdentityEquals(this, src);
+            => equals(this, src);
  
         public int CompareTo(SegmentedIdentity src)
-            => IdentityCompare(this, src);
+            => compare(this, src);
 
          public override int GetHashCode()
-            => IdentityHashCode(this);
+            => hash(this);
 
         public override bool Equals(object src)
-            => IdentityEquals(this, src);
+            => equals(this, src);
 
         public override string ToString()
             => Identifier;

@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Generic;
     
     using static Root;
-    using static IdentityCommons;
+    using static IdentityOps;
 
     public readonly partial struct OpIdentity : IOpIdentity<OpIdentity>
     {            
@@ -102,17 +102,17 @@ namespace Z0
             
         [MethodImpl(Inline)]
         public bool Equals(OpIdentity src)
-            => IdentityEquals(this, src);
+            => IdentityOps.equals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(OpIdentity other)
-            => IdentityCompare(this, other);
+            => compare(this, other);
  
         public override int GetHashCode()
-            => IdentityHashCode(this);
+            => hash(this);
 
         public override bool Equals(object obj)
-            => IdentityEquals(this, obj);
+            => equals(this, obj);
 
         public override string ToString()
             => Identifier;

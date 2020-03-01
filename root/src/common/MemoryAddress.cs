@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MemoryAddress : IEquatable<MemoryAddress>, IComparable<MemoryAddress>, IFormattable<MemoryAddress>
+    public readonly struct MemoryAddress : IIdentity<MemoryAddress>
     {
         public static MemoryAddress Zero => default;
 
@@ -20,6 +20,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Location != 0;
         }
+
+        public string Identifier 
+            => Location.ToString("x") + "h";
 
         [MethodImpl(Inline)]
         public static MemoryAddress Define(long location)
@@ -106,7 +109,7 @@ namespace Z0
             => this.Location = absolute;
 
         public string Format()
-            => Location.ToString("x") + "h";
+            => Identifier;
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryAddress other)

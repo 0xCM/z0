@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    
+    using static IdentityOps;
+
     public readonly struct ApiHostPath : IIdentity<ApiHostPath>, IParser<ApiHostPath>
     {
         public static ApiHostPath Empty = new ApiHostPath(AssemblyId.None, string.Empty);
@@ -51,17 +52,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(ApiHostPath src)
-            => IdentityCommons.IdentityEquals(this, src);
+            => equals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(ApiHostPath other)
-            => IdentityCommons.IdentityCompare(this, other);
+            => compare(this, other);
  
         public override int GetHashCode()
-            => IdentityCommons.IdentityHashCode(this);
+            => hash(this);
 
         public override bool Equals(object obj)
-            => IdentityCommons.IdentityEquals(this, obj);
+            => equals(this, obj);
 
         public override string ToString()
             => Identifier;

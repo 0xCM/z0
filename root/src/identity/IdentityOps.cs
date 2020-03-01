@@ -9,30 +9,30 @@ namespace Z0
     
     using static Root;
     
-    static class IdentityCommons
+    public static class IdentityOps
     {
         [MethodImpl(Inline)]
-        public static string IdentityFormat<T>(in T a)
+        public static string format<T>(in T a)
             where T : IIdentity<T>, new()
                 => text.denullify(a?.Identifier);
 
         [MethodImpl(Inline)]
-        public static int IdentityCompare<T>(in T a, in T b)
+        public static int compare<T>(in T a, in T b)
             where T : IIdentity<T>, new()
                 => text.denullify(a.Identifier).CompareTo(b.Identifier);
 
         [MethodImpl(Inline)]
-        public static bool IdentityEquals<T>(in T a, object b)
+        public static bool equals<T>(in T a, object b)
             where T : IIdentity<T>, new()
                 => text.equals(a.Identifier, b is T x ? x.Identifier : text.blank);   
 
         [MethodImpl(Inline)]
-        public static bool IdentityEquals<T>(in T a, in T b)
+        public static bool equals<T>(in T a, in T b)
             where T : IIdentity<T>, new()
                 => text.equals(a.Identifier, b.Identifier);   
 
         [MethodImpl(Inline)]
-        public static int IdentityHashCode<T>(in T src)     
+        public static int hash<T>(in T src)     
             where T : IIdentity<T>, new()
                 => text.denullify(src.Identifier).GetHashCode();
     }

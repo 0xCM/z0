@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static IdentityCommons;
+    using static IdentityOps;
 
     public readonly struct EnumIdentity  : ITypeIdentity<EnumIdentity>
     {
@@ -64,17 +64,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(EnumIdentity src)
-            => IdentityEquals(this, src);
+            => IdentityOps.equals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(EnumIdentity src)
-            => IdentityCompare(this, src);
+            => compare(this, src);
  
         public override int GetHashCode()
-            => IdentityHashCode(this);
+            => hash(this);
 
         public override bool Equals(object obj)
-            => IdentityEquals(this, obj);
+            => equals(this, obj);
 
         public override string ToString()
             => Identifier;

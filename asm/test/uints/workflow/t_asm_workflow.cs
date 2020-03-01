@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {
@@ -22,13 +24,28 @@ namespace Z0
         }
 
 
+        HashSet<MemoryAddress> Targets {get;}
+            = new HashSet<MemoryAddress>();
+
         void OnWorkflowComplete(in AsmCaptureSet src)
         {
             Trace($"Completed capture workflow for {src.Host}");
+
+            var callers = new List<CallerTarget>();
             foreach(var f in src.Decoded)
             {
-                
+                foreach(var i in f.Instructions)   
+                {
+                    
+                    callers.Add(CallerTarget.Define(f.Uri, i.MemoryAddress64));
+                }
+                        
             }
+            
+            var distinct = callers.Select(c => c.Dst).Distinct().ToList();
+            Targets.Include(distinct);
+
+            Trace($"Collected {callers.Count} total far calls for {src.Host} that included unique {distinct.Count} targets out of {Targets.Count} distinct targets for the session");
         }
 
         public void call32_intr_pattern()

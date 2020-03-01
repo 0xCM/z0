@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-        
+    
     /// <summary>
     /// Defines a graph in which data may be associated with each node and edges are weighted
     /// </summary>
@@ -68,4 +68,5 @@ namespace Z0
             get => ref Vertex(index);
         }
     }
+ 
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class Arrows
+    public class ArrowSymbols
     {
         public const char RightSquiggle = '⇝';
         

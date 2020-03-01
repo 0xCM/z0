@@ -6,21 +6,28 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    public readonly struct CallerTarget
+    using static Root;
+
+    public readonly struct CallerTarget : IArrow<CallerTarget, OpUri, MemoryAddress>
     {
-        public static CallerTarget Define(OpUri caller, MemoryRange target)
-            => new CallerTarget(caller, target);
+        [MethodImpl(Inline)]
+        public static CallerTarget Define(OpUri src, MemoryAddress dst)
+            => new CallerTarget(src, dst);
         
-        CallerTarget(OpUri caller, MemoryRange target)
+        [MethodImpl(Inline)]
+        CallerTarget(OpUri src, MemoryAddress dst)
         {
-            this.Caller = caller;
-            this.Target = target;
+            this.Src = src;
+            this.Dst = dst;
+            this.Identifier = Arrows.connect(src,dst).Format();
         }
-        public readonly OpUri Caller;
 
-        public readonly MemoryRange Target;
+        public OpUri Src {get;}
+
+        public MemoryAddress Dst {get;}
+
+        public string Identifier {get;}
     }
 
     

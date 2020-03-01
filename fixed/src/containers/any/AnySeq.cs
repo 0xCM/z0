@@ -11,7 +11,6 @@ namespace Z0
     using System.Linq;
     
     using static Root;
-    using System.Diagnostics.CodeAnalysis;
 
     public readonly struct AnySeq<T> : IAnySeq<AnySeq<T>,T>
     {    
@@ -21,7 +20,7 @@ namespace Z0
         public static AnySeq<T> Define(IEnumerable<T> src)
             => new AnySeq<T>(src);
 
-
+        [MethodImpl(Inline)]
         public bool Equals(AnySeq<T> other)
             => false;
 

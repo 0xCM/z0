@@ -77,16 +77,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(ApiHost src)
-            => IdentityCommons.IdentityEquals(this, src);
+            => IdentityOps.equals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(ApiHost other)
-            => IdentityCommons.IdentityCompare(this, other);
+            => IdentityOps.compare(this, other);
 
         public override int GetHashCode()
-            => IdentityCommons.IdentityHashCode(this);
+            => IdentityOps.hash(this);
 
         public override bool Equals(object obj)
-            => IdentityCommons.IdentityEquals(this, obj);
+            => IdentityOps.equals(this, obj);
     }
 }

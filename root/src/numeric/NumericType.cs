@@ -109,11 +109,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(NumericType src)
-             => IdentityCommons.IdentityEquals(this, src);
+             => IdentityOps.equals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(NumericType other)
-            => IdentityCommons.IdentityCompare(this, other);
+            => IdentityOps.compare(this, other);
 
         public override string ToString()
             => Identifier;

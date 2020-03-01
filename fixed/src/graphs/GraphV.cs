@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-
+    
     /// <summary>
     /// Defines a directed graph parameterized by the vertex index type
     /// </summary>
@@ -171,6 +171,6 @@ namespace Z0
                 foreach(var subnode in Path(target,  v0))
                     yield return subnode;
             }
-        }
-    }
+        }    
+    } 
 }
