@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
     using static nfunc;
 
     partial class RngX
@@ -58,7 +58,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = Z0.RowVector.alloc<N,T>();
-            random.Fill(domain(min,max), ref dst);
+            random.Fill(Interval.closed(min,max), ref dst);
             return dst;
         }
 

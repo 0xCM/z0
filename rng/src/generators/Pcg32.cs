@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+
+    using static Root;
     using static math;
 
     public class Pcg32 : INavigableRng<uint>
@@ -32,7 +31,6 @@ namespace Z0
         
         ulong Index;
 
-
         public RngKind RngKind 
             => RngKind.Pcg32;
 
@@ -42,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Next(uint max)
-            => Next().Contract(max);
+            => Next().contract(max);
 
         [MethodImpl(Inline)]
         public uint Next(uint min, uint max)        

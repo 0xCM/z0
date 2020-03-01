@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public static class Seed64
     {            
@@ -17,7 +17,7 @@ namespace Z0
         public static ulong Lookup(uint i)
         {
             if(i < Count)
-                return read<ulong>(RawBytes, (int)(i*8));
+                return Bytes.cell<ulong>(RawBytes, (int)(i*8));
             else
             {               
                 errors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 

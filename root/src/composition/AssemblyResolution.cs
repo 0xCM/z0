@@ -12,6 +12,18 @@ namespace Z0
     public abstract class AssemblyResolution<T> : IAssemblyResolution<T>
         where T : AssemblyResolution<T>, new()
     {
+        protected AssemblyResolution()
+        {
+            this.Id = 0;
+        }
+
+        protected AssemblyResolution(AssemblyId id)
+        {
+            this.Id = id;   
+        }
+
+        public virtual AssemblyId Id {get;}
+
         /// <summary>
         /// The resolved assembly representation
         /// </summary>
@@ -24,8 +36,8 @@ namespace Z0
         public Assembly Resolved 
             => typeof(T).Assembly;
 
-        public virtual AssemblyRole Role 
-            => AssemblyRole.Library;
+        // public virtual AssemblyRole Role 
+        //     => AssemblyRole.Library;
 
         public virtual string Name
             => Resolved.GetName().Name;
@@ -33,8 +45,6 @@ namespace Z0
         public bool IsNonEmpty
             => Id != AssemblyId.None && Id != AssemblyId.Empty;
 
-        public virtual AssemblyId Id 
-            => AssemblyId.None;
         
         public virtual IEnumerable<IAssemblyResolution> Designates {get;}
             = new IAssemblyResolution[]{};

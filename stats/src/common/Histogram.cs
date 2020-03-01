@@ -46,8 +46,8 @@ namespace Z0
         
         Interval<T> PartitionDomain(int ix)
             => ix == Partitions.Length - 1 
-             ? Numeric.domain(Partitions[ix-1], Partitions[ix]) 
-             : Numeric.domain(Partitions[ix-1], Partitions[ix]).ToRightOpen();
+             ? Interval.closed(Partitions[ix-1], Partitions[ix]) 
+             : Interval.closed(Partitions[ix-1], Partitions[ix]).ToRightOpen();
 
         /// <summary>
         /// Returns the least bin count

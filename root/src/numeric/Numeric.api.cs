@@ -55,39 +55,6 @@ namespace Z0
                 => NumericRange.step(x0,x1,step);
 
         /// <summary>
-        /// Defines a closed interval [min,max]
-        /// </summary>
-        /// <param name="min">The inclusive left endpoint</param>
-        /// <param name="max">The inclusive right endpoint</param>
-        /// <typeparam name="T">The underlying type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Interval<T> domain<T>(T min, T max)
-            where T : unmanaged
-                => new Interval<T>(min,max, IntervalKind.Closed);
-
-        /// <summary>
-        /// Constructs the (left-closed | right-open) interval [min,max)
-        /// </summary>
-        /// <param name="min">The inclusive left endpoint</param>
-        /// <param name="max">The exclusive right endpoint</param>
-        /// <typeparam name="T">The underlying type</typeparam>
-        [MethodImpl(Inline)]
-        public static Interval<T> ldomain<T>(T min, T max)
-            where T : unmanaged
-                => domain(min,max).ToRightOpen();
-
-        /// <summary>
-        /// Constructs the (right-closed | left-open) interval (min,max]
-        /// </summary>
-        /// <param name="min">The exclusive left endpoint</param>
-        /// <param name="max">The inclusive right endpoint</param>
-        /// <typeparam name="T">The underlying type</typeparam>
-        [MethodImpl(Inline)]
-        public static Interval<T> rdomain<T>(T min, T max)
-            where T : unmanaged
-                => domain(min,max).ToLeftOpen();
-
-        /// <summary>
         /// Determines the primal kind (if any) of a parametrically-identifed type
         /// </summary>
         /// <param name="t">A type value representative</param>

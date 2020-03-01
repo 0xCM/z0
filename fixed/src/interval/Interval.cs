@@ -15,7 +15,7 @@ namespace Z0
     /// <remarks>
     /// Note that extended real numbers may also serve as endpoints, enabling representations such as (-∞,3] and (-3, ∞).
     /// </remarks>
-    public readonly struct Interval<T> : IInterval<T>, IFormattable<Interval<T>>
+    public readonly struct Interval<T> : IInterval<Interval<T>,T>, IFormattable<Interval<T>>
         where T : unmanaged
     {
         public static Interval<T> Zero => default;
@@ -270,15 +270,6 @@ namespace Z0
             where U : unmanaged
                 => new Interval<U>(AsIn.generic<T,U>(in Left), AsIn.generic<T,U>(in Right), Kind);
 
-        /// <summary>
-        /// Creates the same kind of interval with alternate endpoints
-        /// </summary>
-        /// <param name="left">The left endpoint</param>
-        /// <param name="right">The right endpoint</param>
-        [MethodImpl(Inline)]
-        public Interval<T> WithEndpoints(T left, T right)
-            => new Interval<T>(left,right, Kind);
-
         public string Format()
             => text.concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);
 
@@ -291,6 +282,10 @@ namespace Z0
             left = Left;
             right = Right;
         }
+
+        [MethodImpl(Inline)]
+        public Interval<T> New(T left, T right, IntervalKind kind)
+            => new Interval<T>(left,right, kind);
 
         string LeftFormat => LeftUnbounded ? "-∞" : Left.ToString();
 

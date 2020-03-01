@@ -9,11 +9,10 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     partial class RngX
     {
-
         /// <summary>
         /// Produces a bitstring with a specified length
         /// </summary>

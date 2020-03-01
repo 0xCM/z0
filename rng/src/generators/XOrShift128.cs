@@ -9,8 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
+    using static Root;
 
     /// <summary>
     /// Defines pseudorandom number generator
@@ -81,6 +80,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint Grind(uint d, uint t)
             => xorsr(d, 21) ^ xorsr(t, 4);
-
     }
 }

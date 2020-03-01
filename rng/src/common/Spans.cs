@@ -9,9 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
-
+    using static Root;
+  
     partial class RngX
     {
         /// <summary>
@@ -129,6 +128,5 @@ namespace Z0
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples)
             where T : unmanaged
                 => random.Span<T>(samples, DefaultDomain<T>(), x => gmath.nonz(x));
-
     }
 }

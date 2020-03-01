@@ -6,11 +6,5 @@ namespace Z0.Designators
 {
     using System;
 
-    public sealed class RngCore : AssemblyResolution<RngCore>
-    {
-        const AssemblyId Identity = AssemblyId.RngCore;
-
-        public override AssemblyId Id 
-            => AssemblyId.RngCore;
-    }
+    public sealed class RngCore : AssemblyResolution<RngCore> { public override AssemblyId Id  => AssemblyId.RngCore;}
 }

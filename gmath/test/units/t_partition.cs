@@ -52,7 +52,7 @@ namespace Z0
         public void part0()
         {
             var src = ldomain(5,12);
-            var dst = src.PartPoints();
+            var dst = Partition.measuredPoints(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            
             Claim.numeq(items(5,6,7,8,9,10,11,12).ToSpan(),dst);
@@ -61,7 +61,7 @@ namespace Z0
         public void part1()
         {
             var src = ldomain(5,20);
-            var dst = src.Partition();
+            var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(ldomain(5,6), dst.First());
@@ -72,7 +72,7 @@ namespace Z0
         public void part2()
         {
             var src = domain(5,20);
-            var dst = src.Partition();
+            var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(ldomain(5,6), dst.First());
@@ -82,7 +82,7 @@ namespace Z0
         public void part3()
         {
             var src = open(5,20);
-            var dst = src.Partition();
+            var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(open(5,6), dst.First());
@@ -93,16 +93,17 @@ namespace Z0
         public void part4()
         {
             var src = rdomain(1,100);
-            var dst = src.PartPointByCount(10);
+            var dst = src.MeasuredPartitionPoints(10);
             Claim.eq(10,dst.Length);
             Claim.eq(1, dst.First());
             Claim.eq(100, dst.Last());
         }
         
+        
         public void part6()
         {
             var src = domain(1,103);
-            var dst = src.Partition(13);            
+            var dst = src.MeasuredPartitions(13);            
             var fmt = dst.Map(x => x.Format()).Concat(" + ");  
             Claim.yea(dst.Last().Closed);
         }
@@ -110,7 +111,7 @@ namespace Z0
         protected void points_check<T>(T min, T max, T width)
             where T : unmanaged
         {
-            var points = open(min, max).PartPoints(width); 
+            var points = open(min, max).MeasuredPartitionPoints(width); 
             var len = gmath.sub(max,min);
             var deltaSum = gmath.zero<T>();
             for(var i=0; i<points.Length - 1; i++)           

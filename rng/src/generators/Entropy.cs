@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
 
-    using static zfunc;
+    using static Root;
 
     public static class Entropy
     {

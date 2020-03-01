@@ -5,22 +5,11 @@
 namespace Z0.Designators
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using static zfunc;
 
     public sealed class DataBlocksTest : AssemblyResolution<DataBlocksTest>
     {
-        const AssemblyId Identity = AssemblyId.DataBlocksTest;
-
-        public override AssemblyId Id 
-            => Identity;
-
-        public override AssemblyRole Role 
-            => AssemblyRole.Test;
+        public DataBlocksTest() : base(AssemblyId.DataBlocksTest) {}
     
-        public override void Run(params string[] args)
-            => App.Run(args);
+        public override void Run(params string[] args) => App.Run(args);
     }
 }

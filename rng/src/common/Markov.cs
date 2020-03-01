@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
     using static nfunc;
+    using static Nats;
 
     partial class RngX
     {
@@ -114,7 +115,7 @@ namespace Z0
             where T : unmanaged
         {
             var tol = .001;
-            var radius = domain(1 - tol,1 + tol);   
+            var radius = Interval.closed(1 - tol,1 + tol);   
             for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
@@ -129,7 +130,7 @@ namespace Z0
         static void MarkovSpan(this IPolyrand random, Span<float> dst)
         {            
             var length = dst.Length;
-            random.Fill(domain(1.0f,length << 4), length, ref dst[0]);
+            random.Fill(Interval.closed(1.0f,length << 4), length, ref dst[0]);
             fspan.div(dst, dst.Avg()*length);
         }
 
@@ -137,7 +138,7 @@ namespace Z0
         static void MarkovSpan(this IPolyrand random, Span<double> dst)
         {            
             var length = dst.Length;
-            random.Fill(domain(1.0, length << 4), length, ref dst[0]);
+            random.Fill(Interval.closed(1.0, length << 4), length, ref dst[0]);
             fspan.div(dst, dst.Avg()*length);
         }
 
@@ -145,7 +146,7 @@ namespace Z0
         static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {            
             var dst = blocks.alloc<float>(n256, blocks.blockcount<float>(n256,length));
-            random.Fill(domain(min,max), length, ref dst[0]);
+            random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Avg() * length);
             return dst; 
         }
@@ -154,7 +155,7 @@ namespace Z0
         static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {                        
             var dst = blocks.alloc<double>(n256, blocks.blockcount<double>(n256,length));
-            random.Fill(domain(min,max), length, ref dst[0]);
+            random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Avg() * length);
             return dst; 
         }

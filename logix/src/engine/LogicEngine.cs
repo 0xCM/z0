@@ -195,7 +195,7 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var sln = new List<T>();
-            var level0 = domain.Increments();
+            var level0 = domain.Increments(default(T));
             var ones = gmath.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
@@ -211,8 +211,8 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var sln = new List<T>();
-            var level0 = domain.Increments();
-            var level1 = domain.Increments();
+            var level0 = domain.Increments(default(T));
+            var level1 = domain.Increments(default(T));
             var ones = gmath.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {

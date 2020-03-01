@@ -5,13 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-
-    using static zfunc;
-    using static As;
-
 
     public static class Seed32
     {    
@@ -31,8 +24,5 @@ namespace Z0
         public static uint Seed06 => (uint)Seed64.Lookup(3);
 
         public static uint Seed07 =>  (uint)(Seed64.Lookup(3) >> 16);
-
-
     }
-
 }

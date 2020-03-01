@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly Block64<byte> GetBytes(ulong src, in Block64<byte> dst)
         {         
-            Bytes.read(in src, dst);
+            Bytes.to(in src, dst);
             return ref dst;
         }
 
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly Block32<byte> GetBytes(uint src, in Block32<byte> dst)
         {         
-            Bytes.read(in src, dst);
+            Bytes.to(in src, dst);
             return ref dst;
         }
 
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly Block16<byte> GetBytes(ushort src, in Block16<byte> dst)
         {
-            Bytes.read(in src, dst);
+            Bytes.to(in src, dst);
             return ref dst;
         }
     }

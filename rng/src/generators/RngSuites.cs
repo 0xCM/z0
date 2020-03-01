@@ -5,12 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using static zfunc;
-    using static math;
 
     public static class RngSuites
     {
@@ -65,7 +60,5 @@ namespace Z0
                 dst[i] = sources[i].Next();
             return dst;
         }
-
     }
-
 }

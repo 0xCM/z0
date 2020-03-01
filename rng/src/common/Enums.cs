@@ -9,9 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
-
+    using static Root;
 
     partial class RngX
     {
@@ -60,7 +58,7 @@ namespace Z0
                 var excluded = exclusions.Select(x => x.ToString()).ToHashSet();
                 var available = Enum.GetNames(typeof(E)).Where(n => !excluded.Contains(n)).ToArray();
                 var names = available.Mapi((index, name) => (index, name)).ToDictionary();
-                var stream = random.Stream(domain(0, names.Count));
+                var stream = random.Stream(Interval.closed(0, names.Count));
 
                 while(true)
                     yield return Enum.Parse<E>(names[stream.Next()]);

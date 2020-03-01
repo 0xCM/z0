@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static zfunc;
     using System;
-
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+
+    using static Root;
 
     /// <summary>
     /// Implements a 64-bit random number generator
@@ -45,11 +44,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Next().Contract(max);
+            => Next().contract(max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)
-            => min + Next().Contract(max - min);
+            => min + Next().contract(max - min);
 
         [MethodImpl(Inline)]
         static ulong NextState(ulong state)
@@ -65,6 +64,5 @@ namespace Z0
         const ulong X2 = 0xBF58476D1CE4E5B9;
         
         const ulong X3 = 0x94D049BB133111EB;
-
     }
 }

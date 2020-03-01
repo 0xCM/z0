@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Fatory for RNG's
@@ -145,7 +145,7 @@ namespace Z0
         public static IRngSuite<N> Pcg64Suite<N>(Span<ulong> seeds, Span<ulong> indices)        
             where N : unmanaged, ITypeNat
         {
-            var count = length(seeds,indices);
+            var count = seeds.Length;
             var members = new IPolyrand[count];
             for(var i=0; i<count; i++)
                 members[i] = Pcg64(seeds[i], indices[i]);
@@ -207,7 +207,7 @@ namespace Z0
         /// <param name="indices">A span of index values</param>
         public static Span<INavigableRng<uint>> Pcg32Suite(Span<ulong> seeds, Span<ulong> indices)        
         {
-            var count = length(seeds,indices);
+            var count = seeds.Length;
             var g = alloc<INavigableRng<uint>>(count);
             for(var i=0; i<count; i++)
                 g[i] = Pcg32(seeds[i], indices[i]);

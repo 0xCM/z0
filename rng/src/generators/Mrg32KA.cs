@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    
-    using static zfunc;
 
     static class Mrg32K
     {
@@ -45,6 +40,5 @@ namespace Z0
             
             return ref seed;
         }
-
     }
 }

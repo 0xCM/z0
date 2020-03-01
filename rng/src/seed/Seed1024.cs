@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Security.Cryptography;
 
-    using static zfunc;
-
+    using static Root;
 
     public static class Seed1024
     {
@@ -52,7 +48,6 @@ namespace Z0
             Guid.Parse("58d433a1-6844-4adf-8596-e6cba3d35855"),
 
            };
-
  
         public static ulong[] TestSeed 
             = items(
@@ -79,5 +74,4 @@ namespace Z0
         public static ulong[] Entropic
             => Entropy(); 
     }
-
 }

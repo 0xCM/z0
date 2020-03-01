@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
     using static Mrg32K;
+
     using Vec6u32 = RowVector<N6,uint>;
     using Vec6f64 = RowVector<N6,double>;
     using Mat3f64 = Matrix<N3,double>;
@@ -40,7 +39,6 @@ namespace Z0
         const double a21 = A21;
 
         const double a23n = A23n;
-
 
         static readonly double[,] A1p76 = 
         {
@@ -266,8 +264,5 @@ namespace Z0
             /* Combination */
             return ((p1 > p2) ? (p1 - p2) * Norm : (p1 - p2 + m1) * Norm);
         }
-
     }
-
-
 }

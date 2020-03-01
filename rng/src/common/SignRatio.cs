@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     
-    using static zfunc;
-
     public static partial class RngQuality
     {
         /// <summary>

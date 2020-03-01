@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<byte> GetBytes<T>(in T src)
             where T : unmanaged
-                => Bytes.read(in src);
+                => Bytes.get(in src);
 
         /// <summary>
         /// Converts a specified number of source elements to bytes
@@ -42,31 +42,31 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void GetBytes<T>(in T src, Span<byte> dst)
             where T : unmanaged
-                => Bytes.read(in src, dst);
+                => Bytes.to(in src, dst);
 
         [MethodImpl(Inline), Op]
         public static short ToInt16(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.read<short>(src, offset);
+            => Bytes.cell<short>(src, offset);
 
         [MethodImpl(Inline), Op]
         public static ushort ToUInt16(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.read<ushort>(src, offset);
+            => Bytes.cell<ushort>(src, offset);
 
         [MethodImpl(Inline), Op]
         public static int ToInt32(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.read<int>(src,offset);
+            => Bytes.cell<int>(src,offset);
 
         [MethodImpl(Inline), Op]
         public static uint ToUInt32(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.read<uint>(src,offset);
+            => Bytes.cell<uint>(src,offset);
 
         [MethodImpl(Inline), Op]
         public static long ToInt64(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.read<long>(src, offset);
+            => Bytes.cell<long>(src, offset);
 
         [MethodImpl(Inline), Op]
         public static ulong ToUInt64(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.read<ulong>(src, offset);
+            => Bytes.cell<ulong>(src, offset);
 
         [MethodImpl(Inline), Op]
         public static float ToSingle(int src)

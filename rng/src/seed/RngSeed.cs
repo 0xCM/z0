@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a permanent/immutable seed store to support pseudorandom reproducibility
@@ -35,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The data type</typeparam>
         public static T TakeSingle<T>(int offset)
             where T : unmanaged
-                => read<T>(Bytes, VerifyIndex<T>(offset));
+                => zfunc.read<T>(Bytes, VerifyIndex<T>(offset));
 
         /// <summary>
         /// Acauires a readonly span of values from the embedded source

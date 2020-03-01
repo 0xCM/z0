@@ -1,11 +1,9 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+    
+    using static Root;
 
     /// <summary>
     /// Implements an XOrShift generator
@@ -69,7 +67,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Next().Contract(max);
+            => Next().contract(max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)        
@@ -90,7 +88,5 @@ namespace Z0
         /// Predetermined constant by which every generated value is multiplied
         /// </summary>
         const ulong Multiplier = 1181783497276652981;
-
     }
-
 }

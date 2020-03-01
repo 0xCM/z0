@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static zfunc;
     using System;
-
     using System.Runtime.CompilerServices;
 
     class WyHash64Suite<N> : IPointSource<N, ulong>
@@ -33,5 +31,4 @@ namespace Z0
             
         }
     }
-
 }

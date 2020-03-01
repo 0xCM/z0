@@ -12,6 +12,29 @@ namespace Z0
 
     partial class gmath
     {
+        [MethodImpl(Inline)]
+        public static S add<S,T>(S lhs, S rhs)
+            where S : struct, IInterval<S,T>
+            where T : unmanaged
+            => lhs.WithEndpoints(gmath.add(lhs.Left, rhs.Left), gmath.add(lhs.Right, rhs.Right));
+
+        [MethodImpl(Inline)]
+        public static S sub<S,T>(S lhs, S rhs)
+            where S : struct, IInterval<S,T>
+            where T : unmanaged
+                => lhs.WithEndpoints(gmath.sub(lhs.Left, rhs.Left), gmath.sub(lhs.Right, rhs.Right));
+
+        /// <summary>
+        /// Creates the same kind of interval with alternate endpoints
+        /// </summary>
+        /// <param name="left">The left endpoint</param>
+        /// <param name="right">The right endpoint</param>
+        [MethodImpl(Inline)]
+        static S WithEndpoints<S,T>(this S src, T left, T right)
+            where S : struct, IInterval<S,T>
+            where T : unmanaged
+                => default(S).New(left, right, src.Kind);
+
         /// <summary>
         /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
         /// </summary>

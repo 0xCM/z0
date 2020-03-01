@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     partial class RngX
     {
@@ -94,7 +95,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
             where N : unmanaged, ITypeNat
-                => random.MatrixBlock<N,int, float>(domain(min ?? -25, max ?? 25));
+                => random.MatrixBlock<N,int, float>(Interval.closed(min ?? -25, max ?? 25));
 
         /// <summary>
         /// Samples 64-bit integers that are converted to 64-bit floats to populate a square matrix
@@ -111,6 +112,6 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
             where N : unmanaged, ITypeNat
-                => random.MatrixBlock<N,long, double>(domain(min ?? -25L, max ?? 25L));
+                => random.MatrixBlock<N,long, double>(Interval.closed(min ?? -25L, max ?? 25L));
     }
 }

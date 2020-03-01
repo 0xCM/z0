@@ -51,7 +51,7 @@ namespace Z0
             }
 
             var bits5 = Random.Span<byte>(5);
-            var bits5x64 = Bytes.read<ulong>(bits5);
+            var bits5x64 = Bytes.cell<ulong>(bits5);
             var bc5x64PC = Bits.pop(bits5x64);
             var bits5up = Unpack(bits5);
             var bits5upPC = bits5up.PopCount();

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -64,8 +62,60 @@ namespace Z0
             [MethodImpl(Inline)]
             get => convert<T,ulong>(Right) - convert<T,ulong>(Left);
         }
-    }
-
  
+        /// <summary>
+        /// Specifies whether the interval is open on the right and closed on the left, denoted by [Left,Right)
+        /// </summary>
+        bool RightOpen
+        {
+            [MethodImpl(Inline)]
+            get => Kind == IntervalKind.RightOpen;
+        }
 
+        /// <summary>
+        /// Specifies whether the interval is open on the left and closed on the right, denoted by (Left,Right]
+        /// </summary>
+        bool LeftOpen
+        {
+            [MethodImpl(Inline)]
+            get => Kind == IntervalKind.LeftOpen;
+        }
+    } 
+
+    public interface IInterval<S,T> : IInterval<T>, IFormattable<S>
+        where S : struct, IInterval<S,T>
+        where T : unmanaged
+    {
+        S New(T left, T right, IntervalKind kind);
+
+        /// <summary>
+        /// Creates an open interval with endpoints from the existing interval
+        /// </summary>
+        S ToOpen();
+            
+        /// <summary>
+        /// Creates a left-open/right-closed interval with endpoints from the existing interval
+        /// </summary>
+        S ToLeftOpen();
+
+        /// <summary>
+        /// Creates a left-open/right-closed interval with endpoints from the existing interval
+        /// </summary>
+        S ToRightClosed();
+
+        /// <summary>
+        /// Creates a left-open/right-closed interval with endpoints from the existing interval
+        /// </summary>
+        S ToRightOpen();
+        
+        /// <summary>
+        /// Creates a left-closed interval with endpoints from the existing interval
+        /// </summary>
+        S ToLeftClosed();
+
+        /// <summary>
+        /// Creates a closed interval with endpoints from the existing interval
+        /// </summary>
+        S ToClosed();         
+    }
 }

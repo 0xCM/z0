@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using static zfunc;
+    
+    using static Root;
     using static math;
 
     /// <summary>
@@ -57,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Next().Contract(max);
+            => Next().contract(max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)        

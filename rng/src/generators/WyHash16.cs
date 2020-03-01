@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static zfunc;
     using System;
-
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+
+    using static Root;
 
     /// <summary>
     /// Implements a 16-bit random number generator
@@ -16,7 +15,6 @@ namespace Z0
     /// <remarks>Algorithms take from https://lemire.me/blog/2019/07/03/a-fast-16-bit-random-number-generator/</remarks>
     class WyHash16 : IRngBoundPointSource<ushort>
     {
-
         /// <summary>
         /// Creates a wyhash 16-bit rng
         /// </summary>
@@ -71,7 +69,6 @@ namespace Z0
         {
             var hash = input * key;
             return (ushort) (((hash >> 16) ^ hash) & 0xFFFF);
-        }        
-
+        }
     }
 }

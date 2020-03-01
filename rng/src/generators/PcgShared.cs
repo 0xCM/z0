@@ -5,12 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using static zfunc;
-    using static math;
 
     static class PcgShared
     {
@@ -36,5 +31,4 @@ namespace Z0
             return factor * state + increment;
         }
     }
-
 }
