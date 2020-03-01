@@ -23,7 +23,7 @@ namespace Z0
                 Designators.BitFields.Resolution,
                 Designators.BitVectors.Resolution,
                 Designators.CoreFunc.Resolution,
-                Designators.DataBlocks.Resolution,
+                Designators.Blocks.Resolution,
                 Designators.FastOps.Resolution,
                 Designators.Fixed.Resolution,
                 Designators.GMath.Resolution,
@@ -31,7 +31,8 @@ namespace Z0
                 Designators.Intrinsics.Resolution,
                 Designators.LibM.Resolution,
                 Designators.Logix.Resolution,
-                Designators.Root.Resolution);
+                Designators.Root.Resolution,
+                Designators.VFuncs.Resolution);
 
         [MethodImpl(Inline)]
         public static IAssemblyComposition Create()

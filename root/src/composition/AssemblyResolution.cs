@@ -64,4 +64,19 @@ namespace Z0
         public override string ToString()
             => Format();
     }
+
+    public abstract class AssemblyResolution<T,C> : AssemblyResolution<T>
+        where T : AssemblyResolution<T,C>, new()
+        where C : OpCatalog<C>, new()
+    {
+        public override IOperationCatalog Operations  => new C();
+
+        protected AssemblyResolution(AssemblyId id)
+            : base(id)
+        {
+            
+        }
+            
+    }
+
 }

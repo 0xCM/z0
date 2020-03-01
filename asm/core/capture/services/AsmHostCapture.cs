@@ -56,7 +56,7 @@ namespace Z0
 
         public IEnumerable<EncodedOp> DefinedHostOps(ApiHost host)
         {
-            var generic = from m in host.DeclaredMethods.OpenGeneric()                
+            var generic = from m in host.DeclaredMethods.OpenGeneric(1)
                           where 
                                m.Tagged<OpAttribute>() 
                             && m.Tagged<NumericClosuresAttribute>() 

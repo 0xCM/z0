@@ -10,6 +10,9 @@ namespace Z0
 
     public readonly struct CallerTarget
     {
+        public static CallerTarget Define(OpUri caller, MemoryRange target)
+            => new CallerTarget(caller, target);
+        
         CallerTarget(OpUri caller, MemoryRange target)
         {
             this.Caller = caller;
@@ -19,4 +22,6 @@ namespace Z0
 
         public readonly MemoryRange Target;
     }
+
+    
 }

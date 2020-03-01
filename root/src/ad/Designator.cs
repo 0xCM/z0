@@ -6,14 +6,12 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class Root : AssemblyResolution<Root>
+    public sealed class Root : AssemblyResolution<Root, Root.C>
     {
-        const AssemblyId Identity = AssemblyId.Root;
+        public const AssemblyId Identity = AssemblyId.Root;
 
-        public override AssemblyId Id 
-            => Identity;
+        public Root() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C> { public C() : base(Identity) { } }            
     }
 }

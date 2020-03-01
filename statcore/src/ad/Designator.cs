@@ -6,14 +6,16 @@ namespace Z0.Designators
 {
     using System;
 
-    public sealed class StatCore : AssemblyResolution<StatCore>
+    public sealed class StatCore : AssemblyResolution<StatCore,StatCoreCatalog>
     {
-        const AssemblyId Identity = 0;
+        public const AssemblyId Identity = AssemblyId.StatCore;
 
-        public override AssemblyId Id 
-            => Identity;
-
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public StatCore() : base(Identity) {}
+    
     }
+
+    public class StatCoreCatalog : OpCatalog<StatCoreCatalog> 
+    {
+         public StatCoreCatalog() : base(StatCore.Identity) {} 
+    }    
 }

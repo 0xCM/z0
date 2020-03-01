@@ -3,17 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
-{
+{        
     using System;
+    
 
-    public sealed class Time : AssemblyResolution<Time>
+    public sealed class Time : AssemblyResolution<Time, Time.C>
     {
-        const AssemblyId Identity = 0;
+        public const AssemblyId Identity = AssemblyId.Time;
 
-        public override AssemblyId Id 
-            => Identity;
+        public Time() : base(Identity){}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C> { public C() : base(Identity) { } }            
     }
 }

@@ -4,16 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    using System;
-
-    public sealed class VFuncs : AssemblyResolution<VFuncs>
+    public sealed class VFuncs : AssemblyResolution<VFuncs, VFuncs.C>
     {
         const AssemblyId Identity = AssemblyId.VFuncs;
 
-        public override AssemblyId Id 
-            => Identity;
+        public VFuncs() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
-    }
+        public class C : OpCatalog<C> { public C() : base(Identity) {} }    
+    }   
 }

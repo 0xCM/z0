@@ -4,7 +4,7 @@
     <ProjectReference Include="$(TopDir)asm/core/z0.asm.core.csproj" />
     <ProjectReference Include="$(TopDir)asm/encode/z0.asm.encode.csproj" />
     <ProjectReference Include="$(TopDir)asm/decode/z0.asm.decode.csproj" />
-    <ProjectReference Include="$(TopDir)asm/src/z0.asm.src.csproj" />
+    <ProjectReference Include="$(TopDir)asm/src/z0.asm.csproj" />
   </ItemGroup>
 
 </Project>

@@ -105,17 +105,17 @@ namespace Z0
 
         FastOpsTest = FastOps | Test,
 
-        Validation = T24,
+        StatCore = T24,
 
-        ValidationTest = Validation | Test,
+        StateCoreTest = StatCore | Test,
 
         Fixed = T25,
 
         FixedTest = Fixed | Test,
 
-        DataBlocks = T26,
+        Blocks = T26,
 
-        DataBlocksTest = DataBlocks | Test,
+        BlocksTest = Blocks | Test,
 
         Workflow = T27,
 
@@ -138,6 +138,10 @@ namespace Z0
         VFuncs = T33,
 
         VFuncsTest = VFuncs | Test,
+
+        Time = T34,
+
+        TimeTest = Time | Test,
 
         Control = T50,        
 

@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(NotInline)]
+        [MethodImpl(NotInline), Op, NumericClosures(NumericKind.All)]
         internal static Block128<T> block<T>(Vector128<T> src)
             where T : unmanaged            
         {
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(NotInline)]
+        [MethodImpl(NotInline), Op, NumericClosures(NumericKind.All)]
         internal static Block256<T> block<T>(Vector256<T> src)
             where T : unmanaged            
         {
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(NotInline)]
+        [MethodImpl(NotInline), Op, NumericClosures(NumericKind.All)]
         internal static Block512<T> block<T>(Vector512<T> src)
             where T : unmanaged            
         {

@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The bitness selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vzero<T>(N128 w, T t = default)
             where T : unmanaged
                 => default;
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The bitness selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> vzero<T>(N256 w, T t = default)
             where T : unmanaged
                 => default;

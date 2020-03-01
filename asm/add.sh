@@ -1,8 +1,7 @@
 export ProjectId=asm
-AddCmd=$ZDev/.scripts/sln-add.sh
+bash $ZDev/.scripts/add-project.sh
 
-export Kind=src
-bash $AddCmd
+AddCmd=$ZDev/.scripts/sln-add.sh
 
 export Kind=core
 bash $AddCmd
