@@ -16,7 +16,7 @@ namespace Z0
             var workflow = Context.HostCaptureFlow();
             foreach(var result in workflow.Execute())
             {
-                Claim.exists(paths.ParsedPath(result.Host));
+                Claim.exists(paths.ParsedCapturePath(result.Host));
                 OnWorkflowComplete(result);                
             }
         }

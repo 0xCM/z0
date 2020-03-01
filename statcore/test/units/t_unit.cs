@@ -5,8 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-        
-    class Catalog : OpCatalog<Catalog> { public Catalog(AssemblyId id) : base(id) { } }
+
+
+    public class t_unit : UnitTest<t_unit>
+    {    
+
+
+    }
+
 }

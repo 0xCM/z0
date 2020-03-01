@@ -107,57 +107,74 @@ namespace Z0
             => new string(src,count);
 
         /// <summary>
-        /// Concatenates a sequence of strings
+        /// Concatenates a sequence of values with no intervening delimiter
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
-        public static string concat(IEnumerable<string> src)
+        public static string concat(IEnumerable<object> src)    
             => string.Concat(src);
 
         /// <summary>
-        /// Concatenates a sequence of strings intersprsed by a character delimiter
-        /// </summary>
-        /// <param name="src">The characters to concatenate</param>
-        public static string concat(IEnumerable<string> src, char sep)
-            => string.Join(sep,src);
-
-        /// <summary>
-        /// Concatenates a sequence of characters
+        /// Concatenates a sequence of characters with no intervening delimiter
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
         public static string concat(IEnumerable<char> src)
             => new string(src.ToArray());
 
         /// <summary>
+        /// Formats a custom-formattable elements
+        /// </summary>
+        /// <param name="src">The source element</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static string format<T>(T src)
+            where T : ICustomFormattable
+                => denullify(src?.Format());
+
+        /// <summary>
+        /// Produces a sequence of formatted strings given a sequence of custom-formattable elements
+        /// </summary>
+        /// <param name="src">The source element</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static IEnumerable<string> format<T>(IEnumerable<T> src)
+            where T : ICustomFormattable
+                => src.Select(x => x.Format());
+
+        public static string format<T>(IEnumerable<T> src, string delimiter = null)
+            where T : ICustomFormattable
+        {
+            var dst = factory.Builder();
+            var count = 0;
+            var sep = denullify(delimiter);
+            void append(T item)
+            {
+                if(count != 0)
+                    dst.Append(sep);
+                 dst.Append(item.Format());   
+            }
+
+            return dst.ToString();
+            
+        }
+
+        /// <summary>
+        /// Concatenates a sequence of strings intersprsed by a character delimiter
+        /// </summary>
+        /// <param name="src">The characters to concatenate</param>
+        public static string concat(char sep, IEnumerable<object> src)
+            => string.Join(sep,src);
+
+        /// <summary>
         /// Joins the string representation of a sequence of values
         /// </summary>
         /// <param name="src">The values to be joined</param>
         /// <param name="sep">The value delimiter</param>
-        public static string concat(IEnumerable<object> src, string sep)
+        public static string concat(string sep, IEnumerable<object> src)
             => string.Join(sep, src);
 
-        /// <summary>
-        /// Concatenates a character array
-        /// </summary>
-        /// <param name="src">The characters to concatenate</param>
-        [MethodImpl(Inline)]
-        public static string concat(params char[] src)
-            => new string(src);
 
-        /// <summary>
-        /// Concatenates an array of strings
-        /// </summary>
-        /// <param name="src">The strings to concatenate</param>
-        public static string concat(params string[] src)
-            => string.Concat(src);
-        
-        /// <summary>
-        /// Concatenates an arbitrary number of string representations
-        /// </summary>
-        /// <param name="src">The strings to be concatenated</param>
         public static string concat(params object[] src)    
             => string.Concat(src);
 
-        public static string concat(ReadOnlySpan<string> src, string sep)
+        public static string concat(string sep, ReadOnlySpan<string> src)
         {
             var builder = factory.Builder();
             var lastix = src.Length - 1;
@@ -170,8 +187,8 @@ namespace Z0
             return builder.ToString();
         }
 
-        public static string concat(Span<string> src, string sep)
-            => concat(src.ReadOnly(), sep);
+        public static string concat(string sep, Span<string> src)
+            => concat(sep, src.ReadOnly());
 
         /// <summary>
         /// Produces a line of content for each item in an array

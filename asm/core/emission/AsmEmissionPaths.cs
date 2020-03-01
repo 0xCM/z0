@@ -48,63 +48,51 @@ namespace Z0
 
         public FolderPath DataSubDir(RelativeLocation location) => DataRootDir +  location;
 
-        public FolderName CaptureFolder => FolderName.Define(CaptureWorkflow);
+        public FolderName CaptureWorkflowFolder => FolderName.Define(CaptureWorkflow);
 
-        public FolderPath CaptureDir => DataSubDir(CaptureFolder);
+        public FolderPath RawCaptureDir => DataSubDir(CaptureWorkflowFolder);
 
-        public FileExtension CaptureFileExt => FileExtensions.Csv;
+        public FileExtension RawCaptureFileExt => FileExtensions.Csv;
 
-        public FileName CaptureFileName(ApiHost host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName, IndicatorPrefix, CaptureWorkflow), CaptureFileExt);
+        public FileName RawCaptureFileName(ApiHostPath host)
+            => FileName.Define(
+                text.concat(host.Owner.Format(), text.dot(), host.Name, IndicatorPrefix, CaptureWorkflow), 
+                    RawCaptureFileExt);
 
-        public FileName CaptureFileName(ApiHostPath host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name, IndicatorPrefix, CaptureWorkflow), CaptureFileExt);
+        public FilePath RawCapturePath(ApiHostPath host) => RawCaptureDir + RawCaptureFileName(host);
 
-        public FilePath CapturePath(ApiHost host) => CaptureDir + CaptureFileName(host);
+        public FileExtension ParsedCaptureExt => FileExtensions.Csv;
 
-        public FilePath CapturePath(ApiHostPath host) => CaptureDir + CaptureFileName(host);
-
-        public FileExtension ParsedExt => FileExtensions.Csv;
-
-        public FolderName ParsedFolder => FolderName.Define(ParseWorkflow);
+        public FolderName ParsedCaptureFolder => FolderName.Define(ParseWorkflow);
     
-        public FileName ParsedFileName(ApiHost host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), ParsedExt);
-
-        public FileName ParsedFileName(ApiHostPath host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), ParsedExt);
-
-        public FilePath ParsedPath(ApiHost host) => DataSubDir(ParsedFolder) + ParsedFileName(host);
-
-        public FilePath ParsedPath(ApiHostPath host) => DataSubDir(ParsedFolder) + ParsedFileName(host);
-
-        public FileExtension DecodedExt => FileExtensions.Asm;
-
-        public FolderName DecodedFolder => FolderName.Define(DecodeWorkflow);
-
-        public FolderPath DecodedDir => DataSubDir(DecodedFolder);
+        public FolderPath ParsedCaptureDir => DataSubDir(ParsedCaptureFolder);
         
-        public FileName DecodedFileName(ApiHost host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), DecodedExt);
+        public FileName ParsedCaptureFileName(ApiHostPath host)
+            => FileName.Define(
+                    text.concat(host.Owner.Format(), text.dot(), host.Name), 
+                        ParsedCaptureExt);
         
+        public FilePath ParsedCapturePath(ApiHostPath host) => ParsedCaptureDir + ParsedCaptureFileName(host);
 
-        public FileName DecodedFileName(ApiHostPath host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), DecodedExt);
+        public FileExtension DecodedCaptureExt => FileExtensions.Asm;
 
-        public FilePath DecodedPath(ApiHost host) => DecodedDir + DecodedFileName(host);
+        public FolderName DecodedCaptureFolder => FolderName.Define(DecodeWorkflow);
 
-        public FolderPath CilDir => DecodedDir;
+        public FolderPath DecodeCapturedDir => DataSubDir(DecodedCaptureFolder);
+        
+        public FileName DecodedCaptureFileName(ApiHostPath host)
+            => FileName.Define(
+                    text.concat(host.Owner.Format(), text.dot(), host.Name), 
+                        DecodedCaptureExt);
+
+        public FilePath DecodedCapturePath(ApiHostPath host) => DecodeCapturedDir + DecodedCaptureFileName(host);
+
+        public FolderPath CilDir => DecodeCapturedDir;
 
         public FileExtension CilExt => FileExtensions.Il;
-        
-        public FileName CilFileName(ApiHost host)
-            => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.HostName), CilExt);
 
         public FileName CilFileName(ApiHostPath host)
             => FileName.Define(text.concat(host.Owner.Format(), text.dot(), host.Name), CilExt);
-
-        public FilePath CilPath(ApiHost host) => CilDir + CilFileName(host);
-
 
         public FilePath CilPath(ApiHostPath host) => CilDir + CilFileName(host);
 
@@ -128,16 +116,10 @@ namespace Z0
 
         public FolderPath LocationDir =>  ReportRootDir + LocationFolder;
 
-        public FileName LocationFileName(ApiHost host)
-            => FileName.Define(text.concat(host.Owner.Format(), SuffixSep, host.HostName), LocationExt);
-
-
         public FileName LocationFileName(ApiHostPath host)
             => FileName.Define(text.concat(host.Owner.Format(), SuffixSep, host.Name), LocationExt);
 
         public FileName LocationFileName(AssemblyId assembly) => FileName.Define(assembly.Format(), LocationExt);    
-
-        public FilePath LocationPath(ApiHost host) => LocationDir + LocationFileName(host);
 
         public FilePath LocationPath(ApiHostPath host) => LocationDir + LocationFileName(host);
 
@@ -169,7 +151,7 @@ namespace Z0
         public FilePath CilPath(ApiHostPath host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(host.Owner.Format(), host.Name)) + CilFileName(id);
 
-        public FileName DecodedOpFileName(OpIdentity m) => FileName.Define(m, DecodedExt);
+        public FileName DecodedOpFileName(OpIdentity m) => FileName.Define(m, DecodedCaptureExt);
 
         public FilePath DecodedOpPath(AssemblyId origin, string host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + DecodedOpFileName(id);

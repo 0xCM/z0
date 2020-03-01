@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Defines orientation - a choice between exactly one of two values,

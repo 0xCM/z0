@@ -34,5 +34,19 @@ namespace Z0
                 foreach (var item in items)
                     action(item);
         }
+
+        /// <summary>
+        /// Iterates over the supplied items, invoking an indexed receiver for each
+        /// </summary>
+        /// <param name="src">The source items</param>
+        /// <param name="f">The receiver</param>
+        /// <typeparam name="T">The item type</typeparam>
+        public static void iteri<T>(IEnumerable<T> items, Action<int,T> action)
+        {
+            var it = items.GetEnumerator();
+            var index = 0;
+            while(it.MoveNext())
+                action(index++, it.Current);
+        }        
     }
 }

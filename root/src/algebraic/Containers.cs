@@ -69,6 +69,7 @@ namespace  Z0
         int Count {get;}
     }
 
+
     public interface IFiniteSeq<S,T> : ISeq<S,T>, IFiniteContainer<S,T>
         where S : IFiniteSeq<S,T>, new()
     {
@@ -209,7 +210,7 @@ namespace  Z0
         /// <param name="rhs">The set that should be differenced</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
         S Difference(S rhs, bool symmetric = false);
-    }
+    }    
 
     public interface IReadOnlyLookup<K,V>
     {
@@ -237,5 +238,4 @@ namespace  Z0
         V Acquire(K key, Func<K,V> factory);
         void Add(K key, V value);        
     }
-
 }

@@ -9,12 +9,11 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static As;
 
     /// <summary>
     /// A generic variant
     /// </summary>
-    public readonly struct Any<T> : IFormattable<Any<T>>, IEquatable<Any<T>>
+    public readonly struct Any<T> : IAny<Any<T>>, IEquatable<Any<T>>
     {
         public readonly T Contained;
 

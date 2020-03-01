@@ -47,7 +47,7 @@ namespace Z0
 
         T Gcd(T lhs, T rhs);
 
-        Pair<T> DivRem(T lhs, T rhs);
+        (T q, T r) DivRem(T lhs, T rhs);
     }
 
     /// <summary>

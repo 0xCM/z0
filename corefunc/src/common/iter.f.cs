@@ -17,15 +17,8 @@ partial class zfunc
     /// <param name="src">The source items</param>
     /// <param name="f">The receiver</param>
     /// <typeparam name="T">The item type</typeparam>
-    public static Unit iter<T>(IEnumerable<T> items, Action<T> action, bool pll = false)
-    {
-        if (pll)
-            items.AsParallel().ForAll(item => action(item));
-        else
-            foreach (var item in items)
-                action(item);
-        return Unit.Value;
-    }
+    public static void iter<T>(IEnumerable<T> items, Action<T> action, bool pll = false)
+        => Root.iter(items,action,pll);
 
     /// <summary>
     /// Inovkes an action for each element in a source span

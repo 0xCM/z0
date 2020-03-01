@@ -27,6 +27,6 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static IEnumerable<T> ToEnumerable<T>(this Span<T> src)
-            => src.ReadOnly().ToEnumerable();            
+            => src.ReadOnly().ToEnumerable();   
     }
 }

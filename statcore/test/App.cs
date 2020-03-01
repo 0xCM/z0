@@ -3,10 +3,6 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-        
-    class Catalog : OpCatalog<Catalog> { public Catalog(AssemblyId id) : base(id) { } }
+{            
+    class App : TestApp<App> {public static void Main(params string[] args) => Run(args);}
 }

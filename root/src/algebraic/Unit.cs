@@ -8,7 +8,7 @@ namespace Z0
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
     
     /// <summary>
     /// Defines a slot in the type system for an "empty" type
@@ -17,8 +17,6 @@ namespace Z0
     /// </summary>
     public readonly struct Unit
     {
-
-
         public static readonly Unit Value = new Unit();
         
         public static readonly Type Type = typeof(Unit);
@@ -27,14 +25,11 @@ namespace Z0
         /// Executes the action and returns the unit value
         /// </summary>
         /// <param name="a">The action to execute</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static explicit operator Unit(Action a)
         {
             a();
             return Value;
-        }
-        
-    }
-    
+        }        
+    }    
 }

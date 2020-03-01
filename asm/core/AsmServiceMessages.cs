@@ -44,16 +44,16 @@ namespace Z0
                     $"origin = {origin}, block length = {reported}, reported length = {reported}"),
                         caller, file, line);
 
-        public static AppMsg CapturedRaw(ApiHost host, FilePath dst)
+        public static AppMsg CapturedRaw(ApiHostPath host, FilePath dst)
             => AppMsg.Info($"Emitted raw {host} encodings to {dst}");
 
-        public static AppMsg CaptureRawFailed(ApiHost host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppMsg CaptureRawFailed(ApiHostPath host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppMsg.Error($"Error emitting raw {host} encodings", caller, file, line);
 
-        public static AppMsg ParsedEncodings(ApiHost host, FilePath dst)
+        public static AppMsg ParsedEncodings(ApiHostPath host, FilePath dst)
             => AppMsg.Info($"Emitted parsed {host} encodings to {dst}");
 
-        public static AppMsg ParseEncodingFailure(ApiHost host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppMsg ParseEncodingFailure(ApiHostPath host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppMsg.Error($"Error parsing {host} encodings", caller, file, line);
 
     }

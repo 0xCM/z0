@@ -76,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <returns></returns>
         public Option<FilePath> Save()
-            => ApiHost.MapValueOrElse(AsmEmissionPaths.Current.LocationPath,
+            => ApiHost.MapValueOrElse(h => AsmEmissionPaths.Current.LocationPath(h.Path),
                             () => AsmEmissionPaths.Current.LocationPath(AssemblyId));            
     }
 }

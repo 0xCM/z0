@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using static zfunc;
 
     /// <summary>
     /// Characterizes operations over an integer type

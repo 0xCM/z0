@@ -15,11 +15,18 @@ namespace Z0
     using static AsmServiceMessages;
     using static zfunc;
 
+    public readonly struct AsmCaptureFlowConfig<T>
+    {
+        public readonly AnyList<T> Targets;
+
+    }
+
     readonly struct AsmHostCaptureFlow : IAsmHostCaptureFlow
     {
         public IAsmContext Context {get;}
 
         public HashSet<AssemblyId> Selected {get;}
+
 
         [MethodImpl(Inline)]
         public static IAsmHostCaptureFlow Create(IAsmContext context, params AssemblyId[] selected)
@@ -32,17 +39,20 @@ namespace Z0
             this.Selected = selected.Length == 0 ? context.Assemblies.ToHashSet() : selected.ToHashSet();
         }
 
-        AsmEmissionPaths EmissionPaths
+        AsmEmissionPaths Paths
             => Context.EmissionPaths();
 
         void CreateLocationReport(AssemblyId id)
             => Context.MemberLocations(id).OnSome(report => report.Save());
-
+        
         public IEnumerable<AsmCaptureSet> Execute()
         {            
             var owners = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
             var config = Context.AsmFormat.WithSectionDelimiter();
-            EmissionPaths.DecodedDir.Clear();
+            Paths.DecodeCapturedDir.Clear();
+            Paths.ParsedCaptureDir.Clear();
+            Paths.RawCaptureDir.Clear();
+
             foreach(var owner in owners)
             {
                 var id = owner.Key;
@@ -71,7 +81,7 @@ namespace Z0
 
             foreach(var host in src.ApiHosts())
             {
-                var dstPath = AsmEmissionPaths.Current.CilPath(host);
+                var dstPath = AsmEmissionPaths.Current.CilPath(host.Path);
                 //var functions = capture.CaptureFunctions(host);
                 //context.CilEmitter().EmitCil(functions, dstPath).OnSome(e => throw e);
             }            
@@ -81,11 +91,11 @@ namespace Z0
         {
             var capture = Context.HostCapture();
             var captured = capture.CaptureHostOps(host);
-            var target = EmissionPaths.CapturePath(host);  
+            var target = Paths.RawCapturePath(host.Path);  
             var sink = Context;
             captured.Save(target)
-                     .OnSome(file => sink.PostMessage(CapturedRaw(host,file)))
-                     .OnNone(() => sink.PostMessage(CaptureRawFailed(host)));
+                     .OnSome(file => sink.PostMessage(CapturedRaw(host.Path,file)))
+                     .OnNone(() => sink.PostMessage(CaptureRawFailed(host.Path)));
             return captured;
         }
 
@@ -93,18 +103,18 @@ namespace Z0
         {
             var parser = Context.EncodingParser();
             var parsed = parser.Parse(host,captured);
-            var target = EmissionPaths.ParsedPath(host);
+            var target = Paths.ParsedCapturePath(host.Path);
             var sink = Context;
             parsed.Save(target)
-                        .OnSome(file => sink.PostMessage(ParsedEncodings(host,file)))
-                        .OnNone(() => sink.PostMessage(ParseEncodingFailure(host)));
+                        .OnSome(file => sink.PostMessage(ParsedEncodings(host.Path,file)))
+                        .OnNone(() => sink.PostMessage(ParseEncodingFailure(host.Path)));
             require(captured.RecordCount == parsed.RecordCount);
             return parsed;
         }
 
         AsmFunctionList Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodingReport parsed)
         {
-            var path = EmissionPaths.DecodedPath(host);
+            var path = Paths.DecodedCapturePath(host.Path);
             var decoder = Context.FunctionDecoder();
             var functions = new AsmFunction[captured.RecordCount];
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            

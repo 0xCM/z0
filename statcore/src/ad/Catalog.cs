@@ -4,11 +4,5 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-
+    class Catalog : OpCatalog<Catalog> { public Catalog(AssemblyId id) : base(id) {} }
 }

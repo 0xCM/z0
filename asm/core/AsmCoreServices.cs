@@ -15,7 +15,7 @@ namespace Z0
     {
         public static Option<ParsedEncodingReport> LoadParsedEncodings(this IAsmContext context, ApiHostPath host, char? delimiter = null)
         {
-            var path = context.EmissionPaths().ParsedPath(host);
+            var path = context.EmissionPaths().ParsedCapturePath(host);
             var sep = delimiter ?? text.pipe();
             var model = ParsedEncodingReport.Empty;
             

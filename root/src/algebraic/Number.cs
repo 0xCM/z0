@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using static zfunc;
 
     /// <summary>
     /// Defines the minimal aspects for a value to be considered a "real number"
