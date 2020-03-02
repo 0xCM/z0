@@ -24,7 +24,6 @@ namespace Z0
                 Designators.BitVectors.Resolution,
                 Designators.CoreFunc.Resolution,
                 Designators.Blocks.Resolution,
-                Designators.FastOps.Resolution,
                 Designators.Fixed.Resolution,
                 Designators.GMath.Resolution,
                 Designators.GMathSvc.Resolution,

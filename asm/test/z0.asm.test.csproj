@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
-    <ProjectReference Include="$(TopDir)fastops/src/z0.fastops.csproj" />    
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />

@@ -12,8 +12,18 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class RngX
+    public static class FixedEmitX
     {
+        /// <summary>
+        /// Creates a primal emitter predicated on a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static PrimalEmitter<T> Emitter<T>(this IPolyrand random)
+            where T : unmanaged
+                => new PrimalEmitter<T>(random);
+
         public static IFixedEmitter<F,T> FixedEmitter<F,T>(this IPolyrand random)
             where F : unmanaged, IFixedWidth
             where T : unmanaged
