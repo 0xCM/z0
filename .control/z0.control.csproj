@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <Import Project="$(TopDir)asm/z0.asm.exports.props"/>
+  <Import Project="$(TopDir)gmath/z0.gmath.exports.props"/>
+  <Import Project="$(TopDir)rng/z0.rng.exports.props"/>
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
@@ -16,7 +18,6 @@
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)corefunc/test/z0.corefunc.test.csproj" />
 
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.src.csproj" />
     <ProjectReference Include="$(TopDir)gmath/test/z0.gmath.test.csproj" />
 
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
@@ -30,7 +31,6 @@
 
     <ProjectReference Include="$(TopDir)asm/test/z0.asm.test.csproj" />
 
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.src.csproj" />    
 
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
     <ProjectReference Include="$(TopDir)bitgrids/test/z0.bitgrids.test.csproj" />

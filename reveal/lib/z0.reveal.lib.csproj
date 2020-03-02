@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />        
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.src.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
   </ItemGroup>
 
   <ItemGroup>

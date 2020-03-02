@@ -143,6 +143,12 @@ namespace Z0
 
         TimeTest = Time | Test,
 
+        RngEmitters = T35,
+
+        Identity = T36,
+
+        IdentityTest = Identity | Test,
+
         Control = T50,        
 
         Svc = T62,

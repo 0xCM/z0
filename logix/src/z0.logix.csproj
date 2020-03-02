@@ -9,13 +9,13 @@
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)fastops/src/z0.fastops.csproj" />      
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.src.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />
     <ProjectReference Include="$(TopDir)bitvectors/src/z0.bitvectors.csproj" />
 
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.src.csproj" />    
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
 
   </ItemGroup>

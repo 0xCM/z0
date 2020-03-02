@@ -9,30 +9,11 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static zfunc;
-
-    class Catalog : OpCatalog<Catalog>
-    {
-        public Catalog(AssemblyId id)
-            : base(id)
-        {
-
-        }
-
-        public Catalog()
-            : base(AssemblyId.Intrinsics)
-        {
-
-        }
-
-        public override IEnumerable<Type> ServiceHostTypes
-            => typeof(VXTypes).GetNestedTypes().Realize<IFunc>();
-    }
+    using C = Z0.Designators.Intrinsics.C;
 
     public static class Intrinsics
     {
-        public static IOperationCatalog Catalog
-            => new Catalog();
+        public static IOperationCatalog Catalog => new C();
                 
         public static IEnumerable<MethodInfo> Generic
             => from host in Catalog.GenericApiHosts

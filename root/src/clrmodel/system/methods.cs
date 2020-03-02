@@ -89,5 +89,26 @@ namespace Z0
         public static IEnumerable<Type> ImmediateParameters(this MethodInfo m)
             => m.GetParameters().Where(p => p.Tagged<ImmAttribute>()).Select(p => p.ParameterType);
 
+
+        /// <summary>
+        /// Raises an error if the source method is any flavor of generic
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        public static void RequireNonGeneric(this MethodInfo src)
+        {
+            if(src.IsGenericMethod || src.IsConstructedGenericMethod || src.IsGenericMethodDefinition)
+                throw errors.GenericMethod(src);
+        }
+
+        /// <summary>
+        /// Raises an error if the source method is not a constructed generic method
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        public static void RequireConstructed(this MethodInfo src)
+        {
+            if(!src.IsConstructedGenericMethod)
+                throw errors.NonGenericMethod(src);
+        }
+
    }
 }

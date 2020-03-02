@@ -12,7 +12,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
@@ -94,7 +94,7 @@ namespace Z0
             var typeDef = typeof(Func<,>).GetGenericTypeDefinition();
             var type = typeDef.MakeGenericType(array(paramInfo.ParameterType, method.ReturnType));
             var args = paramX(paramInfo.ParameterType, paramInfo.Name);
-            var call = Expression.Call(ifNotNull(instance, x => constant(x)), method, args);
+            var call = Expression.Call(zfunc.ifNotNull(instance, x => constant(x)), method, args);
             var l = Expression.Lambda(type, call, args);
             var del = l.Compile();
             return x => del.DynamicInvoke(x);
@@ -372,7 +372,7 @@ namespace Z0
         /// <param name="m">The method to be invoked</param>
         /// <param name="args">The arguments supplied to the method when invoked</param>
         public static MethodCallExpression call(object Host, MethodInfo m, params PX[] args)
-            => XPR.Call(ifNotNull(Host, h => constant(h)), m, args);
+            => XPR.Call(zfunc.ifNotNull(Host, h => constant(h)), m, args);
 
         /// <summary>
         /// Creates an expression that invokes a static method

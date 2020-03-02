@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.src.csproj" />
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.src.csproj" />        
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />        
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />  
   </ItemGroup>
 

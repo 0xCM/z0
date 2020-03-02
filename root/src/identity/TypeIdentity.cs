@@ -28,6 +28,16 @@ namespace Z0
         public static TypeIdentity Define(string identifier)
             => new TypeIdentity(identifier);
         
+        /// <summary>
+        /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static TypeIdentity numeric<T>(T t = default)
+            where T : unmanaged
+                => TypeIdentity.Define(typeof(T).NumericKind().Format());
+
         [MethodImpl(Inline)]
         public static TypeIdentity operator +(TypeIdentity lhs, string rhs)
             => Define($"{lhs}{rhs}");

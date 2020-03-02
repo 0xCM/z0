@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public class t_unit : UnitTest<t_unit>
     {    
 

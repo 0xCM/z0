@@ -15,25 +15,6 @@ namespace Z0
 
     partial class Reflections
     {        
-        /// <summary>
-        /// Raises an error if the source method is any flavor of generic
-        /// </summary>
-        /// <param name="src">The method to examine</param>
-        public static void RequireNonGeneric(this MethodInfo src)
-        {
-            if(src.IsGenericMethod || src.IsConstructedGenericMethod || src.IsGenericMethodDefinition)
-                throw errors.GenericMethod(src);
-        }
-
-        /// <summary>
-        /// Raises an error if the source method is not a constructed generic method
-        /// </summary>
-        /// <param name="src">The method to examine</param>
-        public static void RequireConstructed(this MethodInfo src)
-        {
-            if(!src.IsConstructedGenericMethod)
-                throw errors.NonGenericMethod(src);
-        }
 
         /// <summary>
         /// Attempts to determine whether a method is sporting the "new" keyword

@@ -1,0 +1,8 @@
+﻿<Project>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)rng/emitters/z0.rng.emitters.csproj" />
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
+  </ItemGroup>
+
+</Project>

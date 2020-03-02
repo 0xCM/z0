@@ -31,11 +31,11 @@ namespace Z0
         }
 
         public static string GenAccessor()
-            => ResourceData.GenAccessor(GenData(), $"{BasePropName}{TypeId.numeric<ulong>()}");
+            => ResourceData.GenAccessor(GenData(), $"{BasePropName}{TypeIdentity.numeric<ulong>()}");
 
         public static string GenAccessor<T>()
             where T : unmanaged
-                => ResourceData.GenAccessor(GenData<T>(), $"{BasePropName}{TypeId.numeric<T>()}");
+                => ResourceData.GenAccessor(GenData<T>(), $"{BasePropName}{TypeIdentity.numeric<T>()}");
 
         public static void GenToFile()
         {

@@ -5,15 +5,24 @@
 namespace Z0.Designators
 {
     using System;
+    using System.Collections.Generic;
 
-    public sealed class Intrinsics : AssemblyResolution<Intrinsics>
+    public sealed class Intrinsics : AssemblyResolution<Intrinsics, Intrinsics.C>
     {        
         const AssemblyId Identity = AssemblyId.Intrinsics;
 
-        public override AssemblyId Id 
-            => Identity;
+        public Intrinsics() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog();
+        public class C : OpCatalog<C>
+        {
+            public C()
+                : base(Identity)
+            {
+
+            }
+
+            public override IEnumerable<Type> ServiceHostTypes
+                => typeof(VXTypes).GetNestedTypes().Realize<IFunc>();
+        }
     }
 }

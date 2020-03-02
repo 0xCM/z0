@@ -10,8 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq.Expressions;
     
-    using static zfunc;
-
     /// <summary>
     /// Encapsulates a delegate that implicitly converts into a LINQ expression
     /// </summary>

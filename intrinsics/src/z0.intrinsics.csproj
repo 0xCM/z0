@@ -11,7 +11,7 @@
     <ProjectReference Include="$(TopDir)fastops/src/z0.fastops.csproj" />
     <ProjectReference Include="$(TopDir)data/src/z0.data.csproj" />    
     <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.src.csproj" />
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
   </ItemGroup>
 
 </Project>
