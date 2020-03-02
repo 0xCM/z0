@@ -502,8 +502,8 @@ namespace Z0
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = Identity.numeric(name, kind, false);
-            var gId = Identity.numeric(name, kind, true);
+            var dId = OpIdentity.numeric(name, kind, false);
+            var gId = OpIdentity.numeric(name, kind, true);
 
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);
@@ -520,8 +520,8 @@ namespace Z0
         {
             var catalog = AssemblyId.Intrinsics;
             
-            var idD = Identity.operation(name, w, kind, false);
-            var idG = Identity.operation(name, w, kind, true);
+            var idD = OpIdentity.operation(name, w, kind, false);
+            var idG = OpIdentity.operation(name, w, kind, true);
 
             var d = Context.CodeArchive(catalog, nameof(dinx)).Read(idD).Single();
             var g = Context.CodeArchive(catalog, nameof(ginx)).Read(idG).Single();

@@ -28,7 +28,7 @@ namespace Z0
             get => typeof(T).NumericKind();
         }
         
-        public OpIdentity Id => Identity.fixedop(Name, (FixedWidth)Width, NumericKind);
+        public OpIdentity Id => OpIdentity.fixedop(Name, (FixedWidth)Width, NumericKind);
 
         [MethodImpl(Inline)]
         internal FixedEmitter(IPolyrand random, FixedEmitterSurrogate<F,T> f)      

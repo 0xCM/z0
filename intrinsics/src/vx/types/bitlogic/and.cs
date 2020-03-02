@@ -10,8 +10,6 @@ namespace Z0
 
     using static zfunc;
 
-    using static OpSkeleta;
-
     partial class VXTypes
     {
         [NumericClosures(NumericKind.Integers)]
@@ -24,7 +22,7 @@ namespace Z0
             
             static N128 w => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name, w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name, w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vand(x,y);
@@ -48,7 +46,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vand(x,y);

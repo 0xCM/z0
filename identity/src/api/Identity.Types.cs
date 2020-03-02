@@ -208,6 +208,13 @@ namespace Z0
                from tid in  FromHost(a.Host.ValueOrDefault(t))
                select tid;
 
+        /// <summary>
+        /// Determines whether a type is parametric over the natural numbers
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        static bool IsNatSpan(this Type t)
+            => NatSpan.@is(t);
+
         static ITypeIdentityProvider CreateProvider(this Type t)
         {
             var provider = none<ITypeIdentityProvider>();   

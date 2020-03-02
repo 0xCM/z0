@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "byteswap";
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.byteswap(a);

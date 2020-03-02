@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    public static class TestIdentity
+    public static class TestIdentityX
     {
         public static string TestCaseName(this IExplicitTest unit)
         {
-            var owner = Identity.owner(unit.GetType());
+            var owner = TypeIdentity.owner(unit.GetType());
             var hostname = unit.GetType().Name;
             var opname = "explicit";
             return $"{owner}/{hostname}/{opname}";
@@ -20,7 +20,7 @@ namespace Z0
 
         public static string TestActionName(this IUnitTest unit)
         {
-            var owner = Identity.owner(unit.GetType());
+            var owner = TypeIdentity.owner(unit.GetType());
             var hostname = unit.GetType().Name;
             var opname = "action";
          

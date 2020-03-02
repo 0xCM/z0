@@ -19,7 +19,7 @@ namespace Z0
 
             public static Srl<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte offset) 
@@ -38,7 +38,7 @@ namespace Z0
 
             public static Sll<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte offset) 
@@ -57,7 +57,7 @@ namespace Z0
 
             public static Sllv<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
@@ -72,7 +72,7 @@ namespace Z0
 
             public static Srlv<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)

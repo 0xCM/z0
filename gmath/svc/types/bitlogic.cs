@@ -19,7 +19,7 @@ namespace Z0
 
             public static And<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -38,7 +38,7 @@ namespace Z0
 
             public static Or<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -57,7 +57,7 @@ namespace Z0
 
             public static Xor<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -76,7 +76,7 @@ namespace Z0
 
             public static Nand<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -94,7 +94,7 @@ namespace Z0
             public const string Name = "not";
 
             public static Nor<T> Op => default;
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -113,7 +113,7 @@ namespace Z0
 
             public static Xnor<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -132,7 +132,7 @@ namespace Z0
 
             public static Select<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c) 
@@ -151,7 +151,7 @@ namespace Z0
 
             public static Not<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) 
@@ -170,7 +170,7 @@ namespace Z0
 
             public static Impl<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -189,7 +189,7 @@ namespace Z0
 
             public static NonImpl<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -209,7 +209,7 @@ namespace Z0
 
             public static CImpl<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -228,7 +228,7 @@ namespace Z0
 
             public static CNonImpl<T> Op => default;
             
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 

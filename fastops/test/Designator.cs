@@ -6,7 +6,7 @@ namespace Z0.Designators
 {
     public sealed class FastOpsTest : AssemblyResolution<FastOpsTest>
     {
-        const AssemblyId Identity = AssemblyId.FastOpsTest;
+        const AssemblyId Identity = AssemblyId.FreeTestId;
 
         public override AssemblyId Id 
             => Identity;

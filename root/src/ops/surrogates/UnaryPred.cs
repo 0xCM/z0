@@ -7,24 +7,24 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
     
-    public readonly struct TernaryOpSurrogate<T> : ITernaryOp<T>
+    public readonly struct UnaryPredSurrogate<T> : IUnaryPred<T>
     {
         public readonly string Name;
 
-        readonly Func<T,T,T,T> F;
+        readonly Func<T,bit> F;
 
         [MethodImpl(Inline)]
-        internal TernaryOpSurrogate(Func<T,T,T,T> f, string name)            
+        internal UnaryPredSurrogate(Func<T,bit> f, string name)            
         {
             this.F = f;
             this.Name = name;
         }
         
-        public OpIdentity Id => Identity.contracted<T>(Name);
+        public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
-        public T Invoke(T a, T b, T c) => F(a, b, c);
+        public bit Invoke(T a) => F(a);
     }
 }

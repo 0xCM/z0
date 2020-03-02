@@ -19,7 +19,7 @@ namespace Z0
 
         readonly IPolyrand Random;
 
-        public OpIdentity Id => Identity.contracted(Name,w);
+        public OpIdentity Id => OpIdentity.contracted(Name,w);
 
         [MethodImpl(Inline)]
         internal VRandom128(IPolyrand random)            
@@ -38,7 +38,7 @@ namespace Z0
 
         static N256 w => default;
 
-        public OpIdentity Id => Identity.contracted(Name,w);
+        public OpIdentity Id => OpIdentity.contracted(Name,w);
 
         [MethodImpl(Inline)]
         internal VRandom256(IPolyrand random)            

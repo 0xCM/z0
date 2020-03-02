@@ -174,6 +174,10 @@ namespace Z0
                 where T : unmanaged
                     => src.ReadOnly().FormatBits(maxbits,tlz, specifier, blockWidth, blocksep, rowWidth);
 
+        public static string FormatBits<T>(this T src)
+            where T : unmanaged, IFixed
+                => BitConvert.GetBytes(in src).FormatBits();
+
         /// <summary>
         /// Formats span cells as bitstrings
         /// </summary>

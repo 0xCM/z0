@@ -9,23 +9,22 @@ namespace Z0
 
     using static Root;
     
-    public readonly struct BinaryPredSurrogate<T> : IBinaryPred<T>
+    public readonly struct TernaryOpSurrogate<T> : ITernaryOp<T>
     {
         public readonly string Name;
 
-        readonly Func<T,T,bit> F;
-
+        readonly Func<T,T,T,T> F;
 
         [MethodImpl(Inline)]
-        internal BinaryPredSurrogate(Func<T,T,bit> f, string name)            
+        internal TernaryOpSurrogate(Func<T,T,T,T> f, string name)            
         {
             this.F = f;
             this.Name = name;
         }
         
-        public OpIdentity Id => Identity.contracted<T>(Name);
+        public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
-        public bit Invoke(T a, T b) => F(a, b);
+        public T Invoke(T a, T b, T c) => F(a, b, c);
     }
 }

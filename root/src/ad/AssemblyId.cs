@@ -101,9 +101,9 @@ namespace Z0
 
         MklApiTest = MklApi | Test,
 
-        FastOps = T23,
+        FreeId = T23,
 
-        FastOpsTest = FastOps | Test,
+        FreeTestId = FreeId | Test,
 
         StatCore = T24,
 

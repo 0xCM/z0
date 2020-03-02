@@ -38,6 +38,14 @@ namespace Z0
             where T : unmanaged
                 => TypeIdentity.Define(typeof(T).NumericKind().Format());
 
+        /// <summary>
+        /// Produces the formatted identifier of the declaring assembly
+        /// </summary>
+        /// <param name="host">The source type</param>
+        [MethodImpl(Inline)]   
+        public static string owner(Type host)
+            => host.Assembly.AssemblyId().Format();
+
         [MethodImpl(Inline)]
         public static TypeIdentity operator +(TypeIdentity lhs, string rhs)
             => Define($"{lhs}{rhs}");

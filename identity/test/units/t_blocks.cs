@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_blocks : t_fastops<t_blocks>
+    public class t_blocks : t_identity<t_blocks>
     {        
         
         public  void CellSize()

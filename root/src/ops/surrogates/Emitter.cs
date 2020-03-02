@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Captures a delegate that is exposed as an emitter
@@ -25,7 +25,7 @@ namespace Z0
             this.Name = name;
         }
         
-        public OpIdentity Id => Identity.contracted<T>(Name);
+        public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
         public T Invoke() => f();
@@ -49,7 +49,7 @@ namespace Z0
             this.Name = name;
         }
         
-        public OpIdentity Id => Identity.contracted<T>(Name);
+        public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
         public F Invoke() => f();

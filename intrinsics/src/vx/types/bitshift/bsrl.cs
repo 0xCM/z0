@@ -23,7 +23,7 @@ namespace Z0
 
             public static Bsrl128<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
                 => Dynop.UnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);
@@ -42,7 +42,7 @@ namespace Z0
 
             public static Bsrl256<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
                 => Dynop.UnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);

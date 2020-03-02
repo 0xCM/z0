@@ -83,7 +83,7 @@ namespace Z0
             if(!HasAny(host,filters))
                 return;
 
-            var hosturi = Identity.testhosturi(host);
+            var hosturi = TestIdentity.testhosturi(host);
             var results = new List<TestCaseRecord>();
             var unit = default(IUnitTest);
             try
@@ -305,11 +305,11 @@ namespace Z0
             return clock;
         }
 
-        Duration ExecCase(IUnitTest unit, MethodInfo testcase, IList<TestCaseRecord> results)
+        Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> results)
         {
             var exectime = Duration.Zero;
             var messages = new List<AppMsg>();
-            var casename = testcase.TestCaseName();
+            var casename = TestIdentity.testcase(method);
             var clock = counter(false);
 
             try
@@ -318,7 +318,7 @@ namespace Z0
                 messages.Add(PreCaseMsg(casename, tsStart));
 
                 clock.Start();
-                testcase.Invoke(unit,null);                    
+                method.Invoke(unit,null);                    
                 clock.Stop();
 
                 messages.AddRange(unit.DequeueMessages());

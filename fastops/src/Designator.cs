@@ -6,7 +6,7 @@ namespace Z0.Designators
 {
     public sealed class FastOps : AssemblyResolution<FastOps, FastOps.C>
     {
-        const AssemblyId Identity = AssemblyId.FastOps;
+        const AssemblyId Identity = AssemblyId.FreeId;
 
         public FastOps() : base(Identity) {}
 

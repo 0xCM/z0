@@ -12,7 +12,7 @@ namespace Z0
     
     using static zfunc;
 
-    public sealed class t_classify : t_fastops<t_classify>
+    public sealed class t_classify : t_identity<t_classify>
     {
         static string FormatList(IEnumerable<NumericKind> src, char? sep = null)
             => src.Select(k => k.ToString()).Concat(sep ?? text.comma());

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Security;
 
-    using static zfunc;
+    using static Root;
     
     /// <summary>
     /// Defines api surface for creating surrogate operator delegates

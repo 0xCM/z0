@@ -467,5 +467,45 @@ namespace Z0
         /// <param name="w">The vector width</param>
         public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, N512 w, string name)
             => src.NonGeneric().WithName(name).WithParameter(p => p.IsClosedVector(w));
+
+        /// <summary>
+        /// Determines whether a method has intrinsic parameters or return type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsKind(this MethodInfo m, VKT.Vec hk, bool total = false)        
+            => m.IsVectorized(total);
+
+        /// <summary>
+        /// Determines whether a method has intrinsic paremeters or return type of specified width
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="width">The required vector width</param>
+        /// <param name="total">Whether all parameters and return type must be intrinsic</param>
+        public static bool IsKind(this MethodInfo m, VKT.Vec128 hk, bool total)        
+            => m.IsVectorized(128,total);
+
+        /// <summary>
+        /// Selects methods from a stream that accept and/or return intrinsic vectors
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> OfKind(this IEnumerable<MethodInfo> src, VKT.Vec128 hk, bool total = false)
+            => src.Where(m => m.IsKind(hk,total));
+
+        /// <summary>
+        /// Selects methods from a stream that accept and/or return intrinsic vectors
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> OfKind(this IEnumerable<MethodInfo> src, VKT.Vec256 hk, bool total = false)
+            => src.Where(m => m.IsKind(hk,total));
+
+        /// <summary>
+        /// Determines whether a method has intrinsic paremeters or return type of specified width
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="width">The required vector width</param>
+        /// <param name="total">Whether all parameters and return type must be intrinsic</param>
+        public static bool IsKind(this MethodInfo m, VKT.Vec256 hk, bool total)        
+            => m.IsVectorized(256,total);
+
     }
 }

@@ -73,21 +73,21 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function</param>
         public string CaseName(IFunc f)
-            => Identity.testcase(GetType(),f);
+            => TestIdentity.testcase(GetType(),f);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="id">Moniker that identifies the operation under test</param>
         public string CaseName(OpIdentity id)
-            => Identity.testcase(GetType(),id);
+            => TestIdentity.testcase(GetType(),id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         public string CaseName(string fullname)
-            => Identity.testcase(GetType(), fullname);
+            => TestIdentity.testcase(GetType(), fullname);
 
         /// <summary>
         /// Produces the name of the test case predicated on a root name and parametric type
@@ -95,23 +95,23 @@ namespace Z0
         /// <param name="root">The root name</param>
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
-            => Identity.testcase(GetType(),root, t);
+            => TestIdentity.testcase(GetType(),root, t);
 
         protected string CaseName<W,C>(string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where C : unmanaged
-                => Identity.testcase(GetType(),root, w, t, generic);
+                => NaturalIdentity.testcase(GetType(),root, w, t, generic);
 
         protected static OpIdentity SubjectId(string opname, NumericKind kind)
-            => Identity.numeric(opname,kind);
+            => OpIdentity.numeric(opname,kind);
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
-                => Identity.numeric(opname, Numeric.kind<T>());
+                => OpIdentity.numeric(opname, Numeric.kind<T>());
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
-                => Identity.contracted<K>($"{opname}_baseline");
+                => OpIdentity.contracted<K>($"{opname}_baseline");
 
         protected virtual bool TraceEnabled
             => true;

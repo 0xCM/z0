@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "bvgather";
 
-            public OpIdentity Id => Identity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.gather(a,b);

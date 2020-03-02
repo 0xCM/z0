@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public readonly struct UnaryFuncSurrogate<A,B> : IUnaryFunc<A,B>
     {
@@ -42,7 +42,7 @@ namespace Z0
             this.Name = name;
         }
         
-        public OpIdentity Id => Identity.contracted<T>(Name);
+        public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
         public T Invoke(T a) => f(a);

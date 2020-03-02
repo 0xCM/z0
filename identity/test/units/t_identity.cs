@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    
+    using static zfunc;
 
+    public abstract class t_identity<U> : UnitTest<U>
+        where U : t_identity<U>
+    {
 
-    public class t_unit : UnitTest<t_unit>
-    {    
-
-        public void test_1()
-        {
-            
-        }
     }
 
 }

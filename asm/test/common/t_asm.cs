@@ -39,7 +39,7 @@ namespace Z0
 
         protected OpIdentity TestOpName<T>(string basename, T t = default)
             where T : unmanaged
-                => Identity.numeric($"{basename}_asm",typeof(T).NumericKind());
+                => OpIdentity.numeric($"{basename}_asm",typeof(T).NumericKind());
 
         protected AsmFormatConfig DefaultAsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
@@ -154,7 +154,7 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             var archive = Context.CodeArchive(catalog,host);
-            var id = Identity.contracted(opname, w, Numeric.kind<T>());
+            var id = NaturalIdentity.contracted(opname, w, Numeric.kind<T>());
             Trace($"{id}");
             var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)
@@ -191,7 +191,7 @@ namespace Z0
         protected void megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, NumericType<byte> kind)
         {
             var w = n8;
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -207,7 +207,7 @@ namespace Z0
         protected void megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericType<sbyte> kind)
         {
             var w = n8;
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -224,7 +224,7 @@ namespace Z0
         {
             var w = n8;
 
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
             var f0 = primal.ToFixed();
 
             var f1 = generic.ToFixed();
@@ -241,7 +241,7 @@ namespace Z0
         {
             var w = n16;
 
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
             var f0 = primal.ToFixed();
 
             var f1 = generic.ToFixed();
@@ -259,7 +259,7 @@ namespace Z0
         {
             var w = n16;
 
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -275,7 +275,7 @@ namespace Z0
         protected void megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, NumericType<uint> kind)
         {
             var w = n32;
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -291,7 +291,7 @@ namespace Z0
         protected void megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, NumericType<int> kind)
         {
             var w = n32;
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
 
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -307,7 +307,7 @@ namespace Z0
         protected void megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, NumericType<long> kind)
         {            
             var w = n64;
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -323,7 +323,7 @@ namespace Z0
         protected void megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, NumericType<ulong> kind)
         {            
             var w = n64;
-            var id = Identity.numeric(name, kind, false);
+            var id = OpIdentity.numeric(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();

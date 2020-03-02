@@ -123,6 +123,54 @@ namespace Z0
                 return OpIdentity.Define(text.concat($"{opname}_{g}{k.Format()}{suffixPart}"));
         }
  
+         /// <summary>
+        /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="k">The primal kind over which the identifier is deined</param>
+        [MethodImpl(Inline)]   
+        public static OpIdentity numeric(string opname, NumericKind k, bool generic)
+            => OpIdentity.operation(opname, FixedWidth.None, k, generic);
+
+        /// <summary>
+        /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="k">The primal kind over which the identifier is deined</param>
+        [MethodImpl(Inline)]   
+        public static OpIdentity numeric(string opname, NumericKind k)
+            => OpIdentity.operation(opname, FixedWidth.None, k, false);
+
+        /// <summary>
+        /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity numeric<T>(string opname, NumericType<T> hk = default, bool generic = true)
+            where T : unmanaged
+                => OpIdentity.operation(opname, FixedWidth.None, typeof(T).NumericKind(), generic);       
+
+        /// <summary>
+        /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity contracted<T>(string opname, T t = default)
+            => OpIdentity.numeric(opname,typeof(T).NumericKind());
+
+        /// <summary>
+        /// Produces an identifier of the form {opname}_{w}{typesig(nk)}
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="k">The primal kind over which the identifier is deined</param>
+        [MethodImpl(Inline)]   
+        public static OpIdentity fixedop(string opname, FixedWidth w, NumericKind nk)
+            => OpIdentity.operation(opname,w,nk,false);
+
  
         [MethodImpl(Inline)]
         public bool Equals(OpIdentity src)

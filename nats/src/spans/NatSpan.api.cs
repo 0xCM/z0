@@ -14,6 +14,19 @@ namespace Z0
     public static class NatSpan
     {
         /// <summary>
+        /// Determines whether a type is a natural span
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool @is(Type t)
+        {            
+            var query =    
+                from def in t.GenericDefinition() 
+                where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
+                select def;
+            return query.IsSome();            
+        }
+
+        /// <summary>
         /// Loads a bytespan of natural length from a generic source span
         /// </summary>
         /// <param name="src">The source span</param>

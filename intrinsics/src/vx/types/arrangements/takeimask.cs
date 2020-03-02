@@ -21,7 +21,7 @@ namespace Z0
 
             public static TakeIMask128<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x, byte index) 
@@ -37,7 +37,7 @@ namespace Z0
 
             public static TakeIMask256<T> Op => default;
             
-            public OpIdentity Id => Identity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x,byte index) 

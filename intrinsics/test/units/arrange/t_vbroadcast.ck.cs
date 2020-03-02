@@ -43,7 +43,7 @@ namespace Z0
             
             static T t => default;
 
-            public OpIdentity Id => Identity.contracted(Name,w,t);
+            public OpIdentity Id => NaturalIdentity.contracted(Name,w,t);
 
             public bit Invoke(S a, Vector128<T> x)
             {
@@ -70,7 +70,7 @@ namespace Z0
 
             public const string Name = "vbroadcast_check";
 
-            public OpIdentity Id => Identity.contracted<N256,T>(Name);
+            public OpIdentity Id => NaturalIdentity.contracted<N256,T>(Name);
 
             public bit Invoke(S a, Vector256<T> x)
             {
