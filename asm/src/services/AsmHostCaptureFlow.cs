@@ -15,12 +15,6 @@ namespace Z0
     using static AsmServiceMessages;
     using static zfunc;
 
-    public readonly struct AsmCaptureFlowConfig<T>
-    {
-        public readonly AnyList<T> Targets;
-
-    }
-
     readonly struct AsmHostCaptureFlow : IAsmHostCaptureFlow
     {
         public IAsmContext Context {get;}
@@ -45,7 +39,7 @@ namespace Z0
         void CreateLocationReport(AssemblyId id)
             => Context.MemberLocations(id).OnSome(report => report.Save());
         
-        public IEnumerable<AsmCaptureSet> Execute()
+        public IEnumerable<AsmHostExtract> Execute()
         {            
             var owners = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
             var config = Context.AsmFormat.WithSectionDelimiter();
@@ -87,10 +81,10 @@ namespace Z0
             }            
         }
 
-        CapturedEncodingReport CaptureHostOps(ApiHost host)
+        ExtractionReport CaptureHostOps(ApiHost host)
         {
-            var capture = Context.HostCapture();
-            var captured = capture.CaptureHostOps(host);
+            var capture = Context.HostExtractor();
+            var captured = capture.ExtractOps(host);
             var target = Paths.RawCapturePath(host.Path);  
             var sink = Context;
             captured.Save(target)
@@ -99,9 +93,9 @@ namespace Z0
             return captured;
         }
 
-        ParsedEncodingReport ParseHostOps(ApiHost host, CapturedEncodingReport captured)
+        ParsedEncodingReport Parse(ApiHost host, ExtractionReport captured)
         {
-            var parser = Context.EncodingParser();
+            var parser = Context.ExtractReportParser(new byte[Context.DefaultBufferLength]);
             var parsed = parser.Parse(host,captured);
             var target = Paths.ParsedCapturePath(host.Path);
             var sink = Context;
@@ -112,7 +106,7 @@ namespace Z0
             return parsed;
         }
 
-        AsmFunctionList Decode(ApiHost host, CapturedEncodingReport captured, ParsedEncodingReport parsed)
+        AsmFunctionList Decode(ApiHost host, ExtractionReport captured, ParsedEncodingReport parsed)
         {
             var path = Paths.DecodedCapturePath(host.Path);
             var decoder = Context.FunctionDecoder();
@@ -129,11 +123,11 @@ namespace Z0
             return AsmFunctionList.Define(functions);
         }
 
-        AsmCaptureSet RunHostCaptureFlow(ApiHost host)        
+        AsmHostExtract RunHostCaptureFlow(ApiHost host)        
         {
             Context.PostMessage($"Executing {host} capture workflow");
             var captured = CaptureHostOps(host);
-            var parsed = ParseHostOps(host, captured);
+            var parsed = Parse(host, captured);
             var decoded = Decode(host, captured, parsed);        
             return (host.Path, captured, parsed, decoded);
         }

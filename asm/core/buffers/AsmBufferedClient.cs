@@ -9,14 +9,14 @@ namespace Z0
 
     using static Root;
 
-    readonly struct AsmBufferedClient : IAsmBufferedClient
+    readonly struct AsmBufferedClient : IAsmBufferClient
     {
         public IAsmContext Context {get;}
 
         readonly AsmBufferClient Client;
 
         [MethodImpl(Inline)]
-        public static IAsmBufferedClient Create(IAsmContext context, AsmBufferClient client)
+        public static IAsmBufferClient Create(IAsmContext context, AsmBufferClient client)
             => new AsmBufferedClient(context, client);
         
         [MethodImpl(Inline)]

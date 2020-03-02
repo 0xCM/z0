@@ -6,7 +6,7 @@ namespace Z0.Designators
 {        
     using System;
 
-    public sealed class VFuncsTest : AssemblyResolution<VFuncsTest>
+    public sealed class StatsTest : AssemblyResolution<StatsTest>
     {
         const AssemblyId Identity = 0;
 

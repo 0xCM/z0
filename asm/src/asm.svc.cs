@@ -9,7 +9,9 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using Z0.Asm;
+
+    using static Root;
 
     public static class AsmServices
     {                
@@ -67,7 +69,7 @@ namespace Z0
         /// Instantiates a contextual catalog-level emitter service
         /// </summary>
         /// <param name="context">The source context</param>
-        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, CaptureEmissionObserver observer)
+        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, AsmCaptureEmissionObserver observer)
             => AsmCatalogEmitter.Create(context, catalog, observer);
 
         /// <summary>
@@ -92,12 +94,19 @@ namespace Z0
             => AsmHostCaptureFlow.Create(context);
  
         [MethodImpl(Inline)]
-        public static IEncodingParser EncodingParser(this IAsmContext context, int? bufferlen = null)
-            => Z0.EncodingParser.Create(context, bufferlen);
+        public static IAsmMemoryCaptureFlow MemoryCaptureFlow(this IAsmContext context, IAsmBaseAddressProvider provider)
+            => AsmMemoryCaptureFlow.Create(context, provider);
+
+        [MethodImpl(Inline)]
+        public static IAsmMemoryCaptureFlow MemoryCaptureFlow(this IAsmContext context, params MemoryAddress[] addresses)
+            => context.MemoryCaptureFlow(context.BaseAddressProvider(addresses));
+
+        [MethodImpl(Inline)]
+        public static IExtractionReportParser ExtractReportParser(this IAsmContext context, byte[] buffer)
+            => ExtractionReportParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostPath host)
-            => AsmHostArchive.Create(context, host);
-    
+            => AsmHostArchive.Create(context, host);    
     }
 }

@@ -10,9 +10,9 @@ namespace Z0
 
     public interface IAsmImmCapture : IAsmService
     {
-        AsmFunction Capture(in CaptureExchange exchange, byte imm8);
+        AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8);
 
-        AsmFunction[] Capture(in CaptureExchange exchange, params byte[] immediates)
+        AsmFunction[] Capture(in AsmCaptureExchange exchange, params byte[] immediates)
         {
             var dst = new AsmFunction[immediates.Length];
 

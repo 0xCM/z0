@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static zfunc;
+    using static Root;
 
     public struct RowVector<N,T>  
         where N : unmanaged, ITypeNat
@@ -126,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector<N,U> Convert<U>()
             where U : unmanaged
-               => new RowVector<N,U>(convert<T,U>(data));
+               => new RowVector<N,U>(Cast.to<T,U>(data));
 
         public bool Equals(RowVector<N,T> rhs)
         {
@@ -149,7 +149,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(char? delimiter = null)
-            => data.FormatList(delimiter ?? AsciSym.Comma);    
+            => data.FormatDataList(delimiter ?? AsciSym.Comma);    
 
         public override bool Equals(object rhs)
             => rhs is RowVector<N,T> x && Equals(x);

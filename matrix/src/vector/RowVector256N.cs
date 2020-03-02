@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static nfunc;
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public readonly ref struct RowVector256<N,T>
         where N : unmanaged, ITypeNat
@@ -165,7 +166,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector256<N,U> Convert<U>()
             where U : unmanaged
-               => new RowVector256<N,U>(convert<T,U>(data));
+               => new RowVector256<N,U>(blocks.convert<T,U>(data));
 
         [MethodImpl(Inline)]
         public string Format(char? delimiter = null)
@@ -187,4 +188,3 @@ namespace Z0
             => Format();    
     }
 }
-

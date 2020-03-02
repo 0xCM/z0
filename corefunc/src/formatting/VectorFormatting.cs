@@ -26,7 +26,7 @@ namespace Z0
             var elements = vfuncs.span(src);
             return sfmt == SequenceFormatKind.Vector 
                 ? elements.FormatAsVector(sep.ToString()) 
-                : elements.FormatList(sep,0,pad,bracketed);
+                : elements.FormatDataList(sep,0,pad,bracketed);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
                 var elements = vfuncs.span(src);
                 return sfmt == SequenceFormatKind.Vector 
                     ? elements.FormatAsVector(sep.ToString()) 
-                    : elements.FormatList(sep,0,pad,bracketed);
+                    : elements.FormatDataList(sep,0,pad,bracketed);
             }
         }
 

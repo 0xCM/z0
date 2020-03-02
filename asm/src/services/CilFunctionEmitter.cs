@@ -23,9 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         CilFunctionEmitter(IAsmContext context)
-        {
-            this.Context = context;
-        }
+            => this.Context = context;
 
         public Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst)
             => Context.CilWriter(dst).WriteCil(functions);

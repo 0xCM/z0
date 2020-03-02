@@ -66,7 +66,7 @@ namespace Z0
             => x.ToVector<ulong>();
 
         public string Format() 
-            => array(X0,X1).FormatList();
+            => array(X0,X1).FormatDataList();
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed512 src)

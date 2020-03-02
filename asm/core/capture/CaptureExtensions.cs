@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
@@ -13,13 +12,13 @@ namespace Z0
 
     public static class CaptureExtensions
     {
-        public static CaptureTokenGroup ToGroup(this IEnumerable<CaptureToken> tokens, OpUri groupUri)
+        public static CaptureTokenGroup ToGroup(this IEnumerable<AsmCaptureToken> tokens, OpUri groupUri)
             => CaptureTokenGroup.Define(groupUri, tokens.ToArray());
 
-        public static void WriteMember(this StreamWriter dst, CapturedMember src) 
+        public static void WriteMember(this StreamWriter dst, AsmMemberCapture src) 
             => dst.Write(src.FormatCode());
 
-	    public static string FormatCode(this CapturedMember src)
+	    public static string FormatCode(this AsmMemberCapture src)
         {            
             var data = src.Code;
             var dst = text.factory.Builder();

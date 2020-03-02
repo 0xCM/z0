@@ -27,10 +27,10 @@ namespace Z0
     /// </summary>
     public class AsmEmissionRecord : IRecord<F,R>
     {    
-        public static AsmEmissionRecord Define(CaptureToken src)
+        public static AsmEmissionRecord Define(AsmCaptureToken src)
             => new AsmEmissionRecord(src);
 
-        AsmEmissionRecord(CaptureToken src)
+        AsmEmissionRecord(AsmCaptureToken src)
         {
             this.TermCode = src.TermCode;
             this.Size = (int)src.AddressRange.Length;

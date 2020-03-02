@@ -11,7 +11,8 @@ namespace Z0
 
     using Z0.Asm;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static FKT;
     
     static class TypedImmCapture
@@ -185,10 +186,10 @@ namespace Z0
             }
             
             [MethodImpl(Inline)]
-            public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
+            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              CaptureServices.Operations.Capture(
+                              Context.CaptureOps().Capture(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
@@ -214,10 +215,10 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
+            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              CaptureServices.Operations.Capture(
+                              Context.CaptureOps().Capture(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
@@ -242,10 +243,10 @@ namespace Z0
                 this.Resolver = resolver;
             }
             
-            public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
+            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                                CaptureServices.Operations.Capture(
+                                Context.CaptureOps().Capture(
                                     exchange,
                                     Resolver.Id.WithImm8(imm8),
                                     Resolver.@delegate(imm8)),
@@ -271,10 +272,10 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public AsmFunction Capture(in CaptureExchange exchange, byte imm8)
+            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              CaptureServices.Operations.Capture(
+                              Context.CaptureOps().Capture(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),

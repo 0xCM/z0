@@ -10,9 +10,9 @@ namespace Z0
 
     public static class CaptureOpExtensions
     {
-        public static CapturedMember[] Capture(this ICaptureOps ops, in CaptureExchange exchange, MethodInfo[] methods)
+        public static AsmMemberCapture[] Capture(this IAsmCaptureOps ops, in AsmCaptureExchange exchange, MethodInfo[] methods)
         {
-            var targets = new CapturedMember[methods.Length];
+            var targets = new AsmMemberCapture[methods.Length];
             for(var i = 0; i<methods.Length; i++)
             {
                 var m = methods[i];
@@ -21,7 +21,7 @@ namespace Z0
             return targets;
         }
 
-        public static CapturedMember Capture(this ICaptureOps ops, in CaptureExchange exchange, MethodInfo src, params Type[] args)
+        public static AsmMemberCapture Capture(this IAsmCaptureOps ops, in AsmCaptureExchange exchange, MethodInfo src, params Type[] args)
         {
             if(src.IsOpenGeneric())
             {

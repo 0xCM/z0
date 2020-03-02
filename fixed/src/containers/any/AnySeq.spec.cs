@@ -12,10 +12,29 @@ namespace Z0
     
     using static Root;
 
-    public interface IAnySeq<T> : IEnumerable<T>
+    public interface IAnySeq
     {
-
+        IEnumerable<object> Terms {get;}
     }
+
+    public interface IAnySeq<T> : IAnySeq, IEnumerable<T>
+    {
+        /// <summary>
+        /// The sequence terms
+        /// </summary>
+        new IEnumerable<T> Terms {get;}
+
+        IEnumerable<object> IAnySeq.Terms
+            => Terms.Cast<object>();
+        IEnumerator IEnumerable.GetEnumerator()
+            => Terms.GetEnumerator();
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+            => Terms.GetEnumerator();
+    }
+
+    public delegate P AnySeqFactory<T,P>(IEnumerable<T> terms)
+        where P: IAnySeq<P,T>, new();         
 
     public interface IAnySeq<P,T> : IAnySeq<T>, IAny<P>
         where P: IAnySeq<P,T>, new()         
@@ -23,18 +42,7 @@ namespace Z0
         /// <summary>
         ///  A self-hosted factory
         /// </summary>
-        Func<IEnumerable<T>,P> Factory {get;}
-
-        /// <summary>
-        /// The sequence terms
-        /// </summary>
-        IEnumerable<T> Terms {get;}
-
-        IEnumerator IEnumerable.GetEnumerator()
-            => Terms.GetEnumerator();
-
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => Terms.GetEnumerator();
+        AnySeqFactory<T,P> Factory {get;}
         
         /// <summary>
         /// It is not assumed that sequence is finite; in discrete computing
@@ -60,5 +68,24 @@ namespace Z0
         /// </summary>
         /// <param name="src">The term source</param>
         public static P Create(IEnumerable<T> src) => Empty.Factory(src);
+    }
+
+    public interface IAnyFormattableSeq<T> : IAnySeq<T>, ICustomFormattable
+        where T : ICustomFormattable
+    {
+        string ICustomFormattable.Format()
+            => Terms.FormatList();        
+    }
+
+    public interface IFormattableSeq<T> : ICustomFormattable
+        where T : ICustomFormattable
+    {
+        /// <summary>
+        /// The sequence terms, assumed finite
+        /// </summary>
+        IEnumerable<T> Terms {get;}
+
+        string ICustomFormattable.Format()
+            => Terms.FormatList();
     }
 }

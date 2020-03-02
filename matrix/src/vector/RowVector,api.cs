@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Collections.Generic;        
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     /// <summary>
     /// Defines the vector api surface

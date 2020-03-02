@@ -14,7 +14,8 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     class t_asm_main : t_asm_explicit<t_asm_main>
     {
@@ -70,7 +71,7 @@ namespace Z0
                 Claim.eq(captured.RawBits.Length, state.Count);
             }
 
-            void OnCaptureEvent(in CaptureEventData data)
+            void OnCaptureEvent(in AsmCaptureEvent data)
             {
                 if(data.EventKind != CaptureEventKind.Complete)
                 {
@@ -270,7 +271,7 @@ namespace Z0
             var f = dynop.DynamicOp;
             var z1 = f.Invoke(x,y);
             var decoder = Context.FunctionDecoder();
-            var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);
+            var captured = Context.CaptureOps().Capture(buffers.Exchange, dynop.Id, dynop);
             var asm = decoder.DecodeFunction(captured,false);        
 
             iter(asm.Instructions, i => Trace(i));  

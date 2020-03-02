@@ -12,7 +12,7 @@ namespace Z0
     
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
 
     readonly struct CilFunctionWriter : ICilFunctionWriter
     {
@@ -56,7 +56,7 @@ namespace Z0
                     using var writer = new StreamWriter(Target.FullPath, false);
                     
                     if(Context.CilFormat.EmitFileHeader)                        
-                        writer.WriteLine($"; {now().ToLexicalString()}"); 
+                        writer.WriteLine($"; {time.now().ToLexicalString()}"); 
                     
                     foreach(var f in src)
                     {

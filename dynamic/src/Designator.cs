@@ -4,16 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    using System;
-
-    public sealed class Dynamic : AssemblyResolution<Dynamic>
+    public sealed class Dynamic : AssemblyResolution<Dynamic, Dynamic.C>
     {
-        const AssemblyId Identity = AssemblyId.Dynamic;
+        public const AssemblyId Identity = AssemblyId.Dynamic;
 
-        public override AssemblyId Id 
-            => Identity;
+        public Dynamic() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C> { public C() : base(Identity) { } }               
     }
 }

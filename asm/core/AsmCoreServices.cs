@@ -57,17 +57,9 @@ namespace Z0
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static ICaptureService Capture(this IAsmContext context, ICaptureOps ops)
+        public static IAsmCaptureService Capture(this IAsmContext context, IAsmCaptureOps ops)
             => AsmCaptureService.Create(context, ops);
         
-        /// <summary>
-        /// Instantiates a contextual buffered client
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="client">The client to interwine</param>
-        [MethodImpl(Inline)]
-        public static IAsmBufferedClient BufferedClient(this IAsmContext context, AsmBufferClient client)
-            => AsmBufferedClient.Create(context, client);
 
         [MethodImpl(Inline)]
         public static IAsmFunctionBuilder FunctionBuilder(this IAsmContext context)
@@ -93,8 +85,28 @@ namespace Z0
             => AsmFunctionEmitter.Create(context, formatter);
 
         [MethodImpl(Inline)]
-        public static IAsmHostCapture HostCapture(this IAsmContext context, int? bufferlen = null)
+        public static IAsmHostExtractor HostExtractor(this IAsmContext context, int? bufferlen = null)
             => AsmHostCapture.Create(context, bufferlen);
+
+        [MethodImpl(Inline)]
+        public static IAsmMemoryExtractor MemoryExtractor(this IAsmContext context, byte[] buffer)
+            => AsmMemoryExtractor.Create(context, buffer);
+
+        [MethodImpl(Inline)]
+        public static IAsmEncodingParser EncodingParser(this IAsmContext context, byte[] buffer)
+            => AsmEncodingParser.Create(context, buffer);
+
+        [MethodImpl(Inline)]
+        public static ByteParser<EncodingPatternKind> PatternParser(this IAsmContext context, byte[] buffer)
+            => ByteParser<EncodingPatternKind>.Create(context, EncodingPatterns.Default,  buffer);
+
+        [MethodImpl(Inline)]
+        public static IAsmBaseAddressProvider BaseAddressProvider(this IAsmContext context, params MemoryAddress[] addresses)
+            => AsmBaseAddressProvider.Create(context,addresses);
+
+        [MethodImpl(Inline)]
+        public static IAsmCaptureOps CaptureOps(this IAsmContext context)
+            => AsmCaptureOps.Create(context);
 
         /// <summary>
         /// Instantiates a contextual code writer services that targets a specified file path
@@ -116,7 +128,6 @@ namespace Z0
         public static IAsmCodeReader CodeReader(this IAsmContext context, char? idsep = null, char? bytesep = null)
             => AsmCodeReader.Create(context,idsep,bytesep);
 
-
         /// <summary>
         /// Creates an asm buffer set, which is considered an asm service but cannot be contracted since it is a ref struct
         /// </summary>
@@ -124,8 +135,17 @@ namespace Z0
         /// <param name="sink">The target to which capture events are routed</param>
         /// <param name="size">The (uniform) buffer length</param>
         [MethodImpl(Inline)]
-        public static AsmBuffers Buffers(this IAsmContext context, CaptureEventObserver observer, int? size = null)
+        public static AsmBuffers Buffers(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
             => AsmBuffers.Create(context,observer,size);
+
+        /// <summary>
+        /// Instantiates a contextual buffered client
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="client">The client to interwine</param>
+        [MethodImpl(Inline)]
+        public static IAsmBufferClient BufferedClient(this IAsmContext context, AsmBufferClient client)
+            => AsmBufferedClient.Create(context, client);
 
         /// <summary>
         /// Instantiates a contextual archive service that is specialized for an assembly
@@ -154,6 +174,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IAsmRawWriter RawWriter(this IAsmContext context, FilePath dst)
             => AsmRawWriter.Create(context, dst);
+
+        public static AsmCaptureExchange CaptureExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
+        {
+            const int DefaultBufferLen = 1024*8;
+
+            var control = AsmCaptureControl.Create(context, observer);
+            var cBuffer = new byte[size ?? DefaultBufferLen];
+            var sBuffer = new byte[size ?? DefaultBufferLen];
+            return AsmCaptureExchange.Define(control, cBuffer, sBuffer);
+        }        
 
         public static IEnumerable<AssemblyId> ActiveAssemblies(this IAsmContext context)
         {

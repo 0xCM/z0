@@ -105,25 +105,25 @@ namespace Z0
             switch(kind)
             {
                 case NumericKind.I8:
-                    return dst.As<sbyte>().FormatList();
+                    return dst.As<sbyte>().FormatDataList();
                 case NumericKind.U8:
-                    return dst.As<byte>().FormatList();
+                    return dst.As<byte>().FormatDataList();
                 case NumericKind.I16:
-                    return dst.As<short>().FormatList();
+                    return dst.As<short>().FormatDataList();
                 case NumericKind.U16:
-                    return dst.As<ushort>().FormatList();
+                    return dst.As<ushort>().FormatDataList();
                 case NumericKind.I32:
-                    return dst.As<int>().FormatList();
+                    return dst.As<int>().FormatDataList();
                 case NumericKind.U32:
-                    return dst.As<uint>().FormatList();
+                    return dst.As<uint>().FormatDataList();
                 case NumericKind.I64:
-                    return dst.As<long>().FormatList();
+                    return dst.As<long>().FormatDataList();
                 case NumericKind.U64:
-                    return dst.As<ulong>().FormatList();
+                    return dst.As<ulong>().FormatDataList();
                 case NumericKind.F32:
-                    return dst.As<float>().FormatList();
+                    return dst.As<float>().FormatDataList();
                 case NumericKind.F64:
-                    return dst.As<double>().FormatList();
+                    return dst.As<double>().FormatDataList();
                 default:
                     throw unsupported(kind);
             }
@@ -139,6 +139,5 @@ namespace Z0
  
         public static string TestCaseName(this MethodInfo method)
             => Identity.testcase(method);
-
     }
 }

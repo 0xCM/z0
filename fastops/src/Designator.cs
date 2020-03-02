@@ -4,16 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    using System;
-
-    public sealed class FastOps : AssemblyResolution<FastOps>
+    public sealed class FastOps : AssemblyResolution<FastOps, FastOps.C>
     {
         const AssemblyId Identity = AssemblyId.FastOps;
 
-        public override AssemblyId Id 
-            => Identity;
+        public FastOps() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C> { public C() : base(Identity) { } }
     }
 }

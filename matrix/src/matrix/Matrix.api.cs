@@ -9,7 +9,8 @@ namespace Z0
     using System.IO;
 
     using static nfunc;
-    using static zfunc;
+    using static Nats;
+    using static Root;
 
     /// <summary>
     /// Defines the matrix api surface

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static nfunc;
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a blocked primal matrix of natural dimensions
@@ -232,7 +232,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256<M,N,U> Convert<U>()
             where U : unmanaged
-               => new Matrix256<M,N,U>(convert<T,U>(data));
+               => new Matrix256<M,N,U>(blocks.convert<T,U>(data));
 
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Z0
         public ref Matrix256<M,N,U> Convert<U>(out Matrix256<M,N,U> dst)
             where U : unmanaged
         {
-            dst = new Matrix256<M,N,U>(convert<T,U>(data));
+            dst = new Matrix256<M,N,U>(blocks.convert<T,U>(data));
             return ref dst;
         }
 

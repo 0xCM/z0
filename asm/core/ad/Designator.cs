@@ -4,16 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    using System;
-
     public sealed class AsmCore : AssemblyResolution<AsmCore>
     {
         const AssemblyId Identity = AssemblyId.AsmCore;
 
-        public override AssemblyId Id 
-            => Identity;
+        public AsmCore() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C> { public C() : base(Identity) { } }
     }
 }

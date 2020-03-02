@@ -11,27 +11,27 @@ namespace Z0
     
     using static Root;
 
-    readonly struct AsmHostCapture : IAsmHostCapture
+    readonly struct AsmHostCapture : IAsmHostExtractor
     {
         public IAsmContext Context {get;}
 
         public int BufferLength {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmHostCapture Create(IAsmContext context, int? bufferlen = null)
+        public static IAsmHostExtractor Create(IAsmContext context, int? bufferlen = null)
             => new AsmHostCapture(context,bufferlen);
             
         [MethodImpl(Inline)]
         AsmHostCapture(IAsmContext context, int? bufferlen)            
         {
             this.Context = context;
-            this.BufferLength = bufferlen ?? Pow2.T14;
+            this.BufferLength = bufferlen ?? Context.DefaultBufferLength;
         }
 
-        public CapturedEncodingReport CaptureHostOps(ApiHost src)
+        public ExtractionReport ExtractOps(ApiHost src)
         {
-            var ops = DefinedHostOps(src).ToArray();
-            var records = new CapturedEncodingRecord[ops.Length];
+            var ops = Addresses(src).ToArray();
+            var records = new ExtractionRecord[ops.Length];
             var buffer = alloc<byte>(BufferLength);
             var reader = Context.ByteReader();
 
@@ -40,8 +40,8 @@ namespace Z0
                 buffer.Clear();                
 
                 var op = ops[i];
-                var length = reader.Read(op.Address, BufferLength, buffer);                
-                var record = new CapturedEncodingRecord(                
+                var length = reader.Read(op.Address, BufferLength, buffer);
+                var record = new ExtractionRecord(                
                     Sequence : i,
                     Address : op.Address,
                     Length : length,
@@ -51,10 +51,10 @@ namespace Z0
                     );
                 records[i] = record;
             }    
-            return CapturedEncodingReport.Create(records);
+            return ExtractionReport.Create(records);
         }
 
-        public IEnumerable<EncodedOp> DefinedHostOps(ApiHost host)
+        public IEnumerable<OpAddress> Addresses(ApiHost host)
         {
             var generic = from m in host.DeclaredMethods.OpenGeneric(1)
                           where 
@@ -67,12 +67,12 @@ namespace Z0
                           where t.IsSome()
                           let concrete = m.MakeGenericMethod(t.Value)
                           let address =  MemoryAddress.Define(concrete.Jit())
-                          select EncodedOp.Define(concrete.Identify(), concrete, address);
+                          select OpAddress.Define(concrete.Identify(), concrete, address);
             
             var direct = from m in host.DeclaredMethods.NonGeneric()
                           where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
                           let address =  MemoryAddress.Define(m.Jit())
-                          select EncodedOp.Define(m.Identify(), m, address);
+                          select OpAddress.Define(m.Identify(), m, address);
                           
             return generic.Union(direct).OrderBy(x => x.Address);
         }            

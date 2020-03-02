@@ -11,6 +11,6 @@ namespace Z0
     /// </summary>
     public interface IAsmCodeWriter : IAsmStreamWriter
     {
-        void Write(in CapturedMember src, int? idpad = null);
+        void Write(in AsmMemberCapture src, int? idpad = null);
     }
 }

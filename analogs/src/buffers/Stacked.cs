@@ -65,7 +65,7 @@ namespace Z0
         }
 
         public string Format()
-            => buffer.FormatList();
+            => buffer.FormatDataList();
         
         [MethodImpl(Inline)]
         public S PeekValue<S>()

@@ -6,14 +6,19 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Runtime.CompilerServices;
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
 
     readonly struct AsmHostArchive : IAsmHostArchive
     {
+        public IAsmContext Context {get;}
+        
+        public ApiHostPath Host {get;}
+        
+        public IEnumerable<Archived<AsmCode>> ArchivedCode {get;}
+
         [MethodImpl(Inline)]
         public static IAsmHostArchive Create(IAsmContext context, ApiHostPath host)
             => new AsmHostArchive(context, host);
@@ -24,12 +29,6 @@ namespace Z0
             this.Context = context;
             this.Host = host;
             this.ArchivedCode = new Archived<AsmCode>[]{};
-        }
-        
-        public IAsmContext Context {get;}
-        
-        public ApiHostPath Host {get;}
-        
-        public IEnumerable<Archived<AsmCode>> ArchivedCode {get;}
+        }       
     }
 }

@@ -5,13 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Reflection;
-    using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
-
-    using Z0.Asm;
-    using static zfunc;
 
     public interface IDynamicImmediate : IAsmService
     {

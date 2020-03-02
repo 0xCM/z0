@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     public enum TriangularKind : byte
-    {
-        
+    {        
         /// <summary>
         /// Classifies a matrix as lower-triangular
         /// </summary>

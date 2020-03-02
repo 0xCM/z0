@@ -100,7 +100,7 @@ namespace Z0
             }            
         }
 
-        static void RunCapture(ICaptureService capture, IAsmFunctionDecoder decoder, in CaptureExchange exchange, MethodInfo[] src, IAsmCodeWriter codeDst, IAsmFunctionWriter asmDst)
+        static void RunCapture(IAsmCaptureService capture, IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, MethodInfo[] src, IAsmCodeWriter codeDst, IAsmFunctionWriter asmDst)
         {
             foreach(var method in src)
             {
@@ -135,7 +135,7 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
             var decoder = Context.FunctionDecoder();
-            var captured = CaptureServices.Operations.Capture(buffers.Exchange, dynop.Id, dynop);            
+            var captured = Context.CaptureOps().Capture(buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured,false);
 
             Trace(asm.Id);
@@ -146,7 +146,7 @@ namespace Z0
             Claim.eq(z1,z2);
         }
 
-        void CheckBinaryImm<T>(in CaptureExchange exchange, BufferToken buffer, N256 w, string name, byte imm)
+        void CheckBinaryImm<T>(in AsmCaptureExchange exchange, BufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = ImmOpProviders.provider<T>(VK.vk256<T>(), FK.op(n2));
@@ -159,7 +159,7 @@ namespace Z0
             var z1 = dynop.DynamicOp.Invoke(x,y);
             
             var decoder = Context.FunctionDecoder();
-            var captured = CaptureServices.Operations.Capture(in exchange, dynop.Id, dynop);            
+            var captured = Context.CaptureOps().Capture(in exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured,false);
 
             Trace(asm.Id);
@@ -183,7 +183,7 @@ namespace Z0
             var z1 = dynop.DynamicOp.Invoke(x);
             
             var decoder = Context.FunctionDecoder();
-            var capture = CaptureServices.Operations.Capture(in buffers.Exchange, dynop.Id, dynop);            
+            var capture = Context.CaptureOps().Capture(in buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(capture,false);
 
             Trace(asm.Id);

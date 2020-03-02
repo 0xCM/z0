@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     readonly struct AsmCodeArchive : IAsmCodeArchive
     {
@@ -21,12 +21,15 @@ namespace Z0
 
         public string HostName {get;}
 
+        [MethodImpl(Inline)]
         public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog)
             => new AsmCodeArchive(context, catalog);
 
+        [MethodImpl(Inline)]
         public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog, string host)
             => new AsmCodeArchive(context, catalog, host);
 
+        [MethodImpl(Inline)]
         AsmCodeArchive(IAsmContext context, AssemblyId catalog, string host)
         {
             this.Context = context;

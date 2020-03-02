@@ -5,19 +5,28 @@
 namespace Z0.Designators
 {        
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class BitVectors : AssemblyResolution<BitVectors>
+    public sealed class BitVectors : AssemblyResolution<BitVectors, BitVectors.C>
     {
         const AssemblyId Identity = AssemblyId.BitVectors;
 
-        public override AssemblyId Id 
-            => Identity;
+        public BitVectors() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C>
+        {
+            public C()
+                : base(Identity)
+            {
+
+            }
+            
+            public override IEnumerable<Type> ServiceHostTypes
+                => typeof(BVTypes).GetNestedTypes().Realize<IFunc>();
+        }
     }
 }
 

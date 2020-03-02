@@ -7,7 +7,7 @@ namespace Z0
     using System;
     
 
-    public interface IAsmHostCaptureFlow : IAppService<IAsmContext>, IExecutable<AsmCaptureSet>
+    public interface IAsmHostCaptureFlow : IAppService<IAsmContext>, IExecutable<AsmHostExtract>
     {
         
     }

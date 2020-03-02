@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
     
     readonly struct AsmArchiver :  IAsmArchiver
     {                
@@ -17,9 +17,11 @@ namespace Z0
 
         readonly DataResourceIndex Resources;
 
+        [MethodImpl(Inline)]
         public static AsmArchiver Create(IAsmContext context)
             => new AsmArchiver(context);
 
+        [MethodImpl(Inline)]
         AsmArchiver(IAsmContext context)
         {
             Context = context;
@@ -35,7 +37,7 @@ namespace Z0
         Option<FilePath> ReportEmissions(AssemblyId src, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
             => AsmReports.Emissions(src, emitted, kind).Save(AsmEmissionPaths.Current.EmissionPath(src, kind));
 
-        CaptureTokenGroup[] EmitPrimary(in CaptureExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
+        CaptureTokenGroup[] EmitPrimary(in AsmCaptureExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
         {
             var emissions = new List<CaptureTokenGroup>(); 
 
@@ -46,7 +48,7 @@ namespace Z0
             return emissions.ToArray();
         }        
 
-        CaptureTokenGroup[] EmitImm(in CaptureExchange exchange, ICatalogProvider src, IAsmCatalogEmitter emitter)
+        CaptureTokenGroup[] EmitImm(in AsmCaptureExchange exchange, ICatalogProvider src, IAsmCatalogEmitter emitter)
         {
             var emissions = new List<CaptureTokenGroup>();   
             
@@ -64,12 +66,12 @@ namespace Z0
 
         void Completed(Option<FilePath> report)
         {
-            report.OnSome(p => print(appMsg($"Completed emission task and saved report to {p}")))
-                  .OnNone(() => error($"Emission task failure"));
+            report.OnSome(p => term.inform($"Completed emission task and saved report to {p}"))
+                  .OnNone(() => term.error($"Emission task failure"));
             report.Require();
         }
 
-        void Archive(in CaptureExchange exchange, ICatalogProvider src)
+        void Archive(in AsmCaptureExchange exchange, ICatalogProvider src)
         {
             void OnEmission(in CaptureTokenGroup data)
             {
@@ -93,7 +95,7 @@ namespace Z0
 
         public void Archive(AssemblyId id)
         {
-            void OnCaptureEvent(in CaptureEventData data)
+            void OnCaptureEvent(in AsmCaptureEvent data)
             {
 
             }
@@ -101,19 +103,19 @@ namespace Z0
             var provider = Resolved.CatalogProvider(id);
             if(provider.IsSome())
             {
-                var exchange = CaptureServices.Exchange(OnCaptureEvent);
+                var exchange = Context.CaptureExchange(OnCaptureEvent);
                 Archive(in exchange, provider.Value);
             }
         }
 
         public void Execute()
         {             
-            void OnCaptureEvent(in CaptureEventData data)
+            void OnCaptureEvent(in AsmCaptureEvent data)
             {
 
             }
 
-            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var exchange = Context.CaptureExchange(OnCaptureEvent);
             var providers = Resolved.CatalogProviders(ActiveAssemblies);
             
             foreach(var src in providers)

@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     readonly struct AsmRawWriter : IAsmRawWriter
     {        
@@ -34,14 +34,13 @@ namespace Z0
         public void Write(OpIdentity id, Span<byte> data, int? idpad = null)
             => StreamOut.WriteLine(HexLine.Define(id, data.ToArray()).Format(idpad ?? 0));
 
-        public void Write(in CapturedMember src, int? idpad = null)
-            => Write(src.Id, src.RawBits, idpad);
+        public void Write(in AsmMemberCapture src, int? idpad = null)
+            => Write(src.Id, src.RawBits.Bytes, idpad);
         
         public void Dispose()
         {
             StreamOut.Flush();
             StreamOut.Dispose();
         }
-
     }
 }

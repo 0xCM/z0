@@ -4,19 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {        
-    using System;
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class Fixed : AssemblyResolution<Fixed>
+    public sealed class Fixed : AssemblyResolution<Fixed, Fixed.C>
     {
         const AssemblyId Identity = AssemblyId.Fixed;
 
-        public override AssemblyId Id 
-            => Identity;
+        public Fixed() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C> { public C() : base(Identity) { } }            
     }
 }

@@ -8,12 +8,12 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;
     using static CaptureTermCode;
 
     static class CaptureHelpers
     {
-        public static CaptureTermCode? CalcTerm(in CaptureExchange exchange, int offset, int? ret_offset, out int delta)
+        public static CaptureTermCode? CalcTerm(in AsmCaptureExchange exchange, int offset, int? ret_offset, out int delta)
         {
             delta = 0;
 
@@ -61,7 +61,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static CaptureTermCode? Scan4(in CaptureExchange exchange, int offset, out int delta)
+        static CaptureTermCode? Scan4(in AsmCaptureExchange exchange, int offset, out int delta)
         {
             var x0 = exchange.Target(offset - 3);
             var x1 = exchange.Target(offset - 2);
@@ -84,7 +84,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static CaptureTermCode? Scan5(in CaptureExchange exchange, int offset, out int delta)
+        static CaptureTermCode? Scan5(in AsmCaptureExchange exchange, int offset, out int delta)
         {
             var x0 = exchange.Target(offset - 5);
             var x1 = exchange.Target(offset - 4);
@@ -100,7 +100,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool Zx7(in CaptureExchange exchange, int offset)
+        static bool Zx7(in AsmCaptureExchange exchange, int offset)
             =>      exchange.Target(offset - 6) == ZED 
                 && (exchange.Target(offset - 5) == ZED) 
                 && (exchange.Target(offset - 4) == ZED) 

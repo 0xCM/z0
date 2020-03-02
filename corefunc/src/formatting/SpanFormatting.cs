@@ -164,6 +164,6 @@ namespace Z0
         public static string FormatList<N,T>(this NatSpan<N,T> src, char delimiter = ',', int offset = 0, int pad = 0, bool bracketed = true)
             where N : unmanaged, ITypeNat
             where T : unmanaged 
-                => src.Data.FormatList(delimiter,offset,pad,bracketed);
+                => src.Data.FormatDataList(delimiter,offset,pad,bracketed);
     }
 }

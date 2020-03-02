@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;    
         
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a vector over cells of unmanaged type
@@ -109,7 +109,7 @@ namespace Z0
         /// <param name="delimiter">The component delimiter</param>
         [MethodImpl(Inline)]
         public string Format(char? delimiter = null)
-            => data.FormatList(delimiter ?? AsciSym.Comma);    
+            => data.FormatDataList(delimiter ?? AsciSym.Comma);    
 
         /// <summary>
         /// Copies vector content into a caller-provided span
@@ -126,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector<U> Convert<U>()
             where U : unmanaged
-               => new RowVector<U>(convert<T,U>(data));
+               => new RowVector<U>(Cast.to<T,U>(data));
 
         [MethodImpl(Inline)]
         public RowVector<T> Replicate()

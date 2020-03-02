@@ -388,7 +388,6 @@ namespace Z0
                     Run(false,filters);
                 }
                 EmitLogs();
-
             }
             catch (Exception e)
             {

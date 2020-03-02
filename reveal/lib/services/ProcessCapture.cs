@@ -14,7 +14,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
     
     class ProcessCapture : IAsmProcessCapture
     {
@@ -66,7 +66,7 @@ namespace Z0
             foreach(var m in methods)
             {
                 var d = CaptureFunction(m);
-                d.OnNone(() => warn($"Failed to capture {m.Name}"));
+                d.OnNone(() => term.warn($"Failed to capture {m.Name}"));
                 if(d)
                     yield return d.Value;                    
             }            
@@ -89,7 +89,7 @@ namespace Z0
         Option<ClrMethod> GetRuntimeMethod(MethodInfo src)
             => Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
 
-		Option<CapturedMember> CaptureNative(MethodInfo method, ClrMethod runtime)
+		Option<AsmMemberCapture> CaptureNative(MethodInfo method, ClrMethod runtime)
 		{
 			var codeInfo = runtime.HotColdInfo;	
             var id = Identity.identify(method);
@@ -99,13 +99,13 @@ namespace Z0
 			var label = method.Signature().Format();
             if (address == 0)
             {
-				error($"Unspecified address for {label}");
+				term.error($"Unspecified address for {label}");
                 return default;
             }
 
 			if (size == 0)
             {
-				warn($"There is no code to read at address = {address.FormatHex(false)} for {label}");
+				term.warn($"There is no code to read at address = {address.FormatHex(false)} for {label}");
                 return default;
             }
 
@@ -113,20 +113,20 @@ namespace Z0
             var actualSize = 0;
 			if (!Target.ReadProcessMemory(address, buffer, buffer.Length, out actualSize))
             {
-				error($"Memory access failure at address {address.FormatHex(false)} for {label}");
+				term.error($"Memory access failure at address {address.FormatHex(false)} for {label}");
                 return default;
             }
             
             if (size != actualSize)
             {
-                error(errors.LengthMismatch((int)size, actualSize));
+                term.error(errors.LengthMismatch((int)size, actualSize));
                 return default;
             }
 
             var location = MemoryRange.Define(address, address + size);            
-            var result = CaptureOutcome.Define(CaptureState.Empty, location.Start, location.End, CaptureTermCode.CTC_MSDIAG);
-            var bits = CaptureBits.Define(buffer,buffer);
-			return CapturedMember.Define(id, method, location, bits, result.TermCode);                    
+            var result = AsmCaptureOutcome.Define(CaptureState.Empty, location.Start, location.End, CaptureTermCode.CTC_MSDIAG);
+            var bits = AsmCaptureBits.Define(address, buffer,buffer);
+			return AsmMemberCapture.Define(id, method, location, bits, result.TermCode);                    
         }
     }
 }

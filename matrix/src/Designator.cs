@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    public sealed class Matrix : AssemblyResolution<Matrix>
+    public sealed class Matrix : AssemblyResolution<Matrix, Matrix.C>
     {
         const AssemblyId Identity = AssemblyId.Matrix;
 
-        public override AssemblyId Id 
-            => Identity;
+        public Matrix() : base(Identity) {}
+    
+        public class C : OpCatalog<C> { public C() : base(Identity) { } }
     }
 }

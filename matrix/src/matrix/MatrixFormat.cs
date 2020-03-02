@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
 
     using static nfunc;
-    using static zfunc;
+    using static Root;
 
     public static class MatrixFormat
     {
@@ -124,6 +124,6 @@ namespace Z0
         public static string Fomat<N,T>(this RowVector256<N,T> src)
             where T : unmanaged    
             where N: unmanaged, ITypeNat
-                => src.Unsized.FormatList();
+                => src.Unsized.FormatDataList();
     }
 }

@@ -7,11 +7,9 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Reflection;
-
     using System.Runtime.CompilerServices;
-    using static zfunc;
-    using Z0;
+
+    using static Root;
 
     readonly struct CaptureStats
     {
@@ -40,21 +38,21 @@ namespace Z0
 
     readonly struct CaptureStatsSink
     {                
-        readonly CaptureEventObserver Observer;
+        readonly AsmCaptureEventObserver Observer;
         
         readonly Dictionary<int,CaptureByteCode> Classified;
 
-        public static CaptureStatsSink Create(CaptureEventObserver observer)
+        public static CaptureStatsSink Create(AsmCaptureEventObserver observer)
             => new CaptureStatsSink(observer);
 
-        CaptureStatsSink(CaptureEventObserver observer)
+        CaptureStatsSink(AsmCaptureEventObserver observer)
         {
             Observer = observer;
             Classified = new Dictionary<int, CaptureByteCode>();
         }
 
         [MethodImpl(Inline)]
-        public void Accept(in CaptureEventData info)
+        public void Accept(in AsmCaptureEvent info)
         {
             Observer(info);
             (var offset, var value) = Record(info);
@@ -89,7 +87,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        static (int offset, byte value) Record(in CaptureEventData data)
+        static (int offset, byte value) Record(in AsmCaptureEvent data)
         {
             var offset = Offset(data);
             var value = data.CaptureState.Payload;
@@ -98,7 +96,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static int Offset(in CaptureEventData src)        
+        static int Offset(in AsmCaptureEvent src)        
             => src.CaptureState.Offset;        
     }
 
@@ -114,10 +112,4 @@ namespace Z0
 
         FF = 0xFF        
     }
-
-    static class CaptureStatsX
-    {
-
-    }
-
 }

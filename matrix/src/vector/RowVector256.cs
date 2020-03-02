@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
         
-    using static zfunc;
+    using static Root;
 
     public readonly ref struct RowVector256<T>
         where T : unmanaged
@@ -86,7 +86,7 @@ namespace Z0
                 
         [MethodImpl(Inline)]
         public string Format(char delimiter = ',')
-            => data.Data.FormatList(delimiter);    
+            => data.Data.FormatDataList(delimiter);    
 
         [MethodImpl(Inline)]
         public ref RowVector256<T> CopyTo(ref RowVector256<T> dst)
@@ -98,7 +98,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector256<U> Convert<U>()
             where U : unmanaged
-              => new RowVector256<U>(convert<T,U>(data));
+              => new RowVector256<U>(blocks.convert<T,U>(data));
 
         public RowVector256<T> Replicate()
             => new RowVector256<T>(data.Replicate());

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public abstract class t_asm_explicit<E> : UnitTest<E>, IExplicitTest
@@ -24,7 +22,7 @@ namespace Z0
    
         public void Execute()
         {
-            void OnCaptureEvent(in CaptureEventData data)
+            void OnCaptureEvent(in AsmCaptureEvent data)
             {
                 //Trace($"{data.CaptureState}");
             }

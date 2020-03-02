@@ -84,6 +84,6 @@ namespace Z0
             => src is Fixed256 x && Equals(x);
 
         public override string ToString() 
-            => array(X0,X1).FormatList();
+            => array(X0,X1).FormatDataList();
     }
 }

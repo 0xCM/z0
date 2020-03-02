@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines service contract for a buffered client
     /// </summary>
-    public interface IAsmBufferedClient : IAsmService
+    public interface IAsmBufferClient : IAsmService
     {
         /// <summary>
         /// Exucutes client-specific operation that may use the supplied buffers

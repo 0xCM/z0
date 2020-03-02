@@ -20,6 +20,12 @@ namespace Z0
     public interface IAsmContext : IComposedContext<IAsmContext>, IAppMsgSink
     {
         int Identity {get;}
+
+        /// <summary>
+        /// The buffer length to use whenever a buffer length is unspecified
+        /// </summary>
+        int DefaultBufferLength 
+            => Pow2.T14;
         
         IClrIndex ClrIndex {get;}
 

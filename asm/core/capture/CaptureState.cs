@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines the state of the routine capture workflow at a given step

@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static string FormatList<T>(this Block128<T> src, char delimiter = ',', int offset = 0, int pad = 0, bool bracketed = true)
             where T : unmanaged
-                => src.Data.FormatList(delimiter, offset, pad, bracketed);
+                => src.Data.FormatDataList(delimiter, offset, pad, bracketed);
 
         /// <summary>
         /// Formats a blocked span as a delimited list
@@ -29,6 +29,6 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static string FormatList<T>(this Block256<T> src, char delimiter = ',', int offset = 0, int pad = 0, bool bracketed = true)
             where T : unmanaged
-                => src.Data.FormatList(delimiter, offset, pad,bracketed); 
+                => src.Data.FormatDataList(delimiter, offset, pad,bracketed); 
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
     /// </summary>
     public interface IAsmRawWriter : IAsmStreamWriter
     {
-        void Write(in CapturedMember src, int? idpad = null);
+        void Write(in AsmMemberCapture src, int? idpad = null);
 
         void Write(OpIdentity id, Span<byte> data, int? idpad = null);
     }

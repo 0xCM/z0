@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using static Root;
     
     /// <summary>
     /// Gathers a set of frequently-used buffers that is a by-convention asm service
@@ -24,13 +26,15 @@ namespace Z0
 
         readonly ExecBuffer RBuffer;
 
-        public static AsmBuffers Create(IAsmContext context, CaptureEventObserver observer, int? size = null)
+        [MethodImpl(Inline)]
+        public static AsmBuffers Create(IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
             => new AsmBuffers(context, observer, size);
 
-        AsmBuffers(IAsmContext context, CaptureEventObserver observer, int? size = null)
+        [MethodImpl(Inline)]
+        AsmBuffers(IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
         {
             AsmContext = context;
-            Exchange = CaptureServices.Exchange(observer, size);     
+            Exchange = context.CaptureExchange(observer, size);     
             Capture = Exchange.Operations;
             CaptureTarget = Exchange.TargetBuffer;
             CaptureState = Exchange.StateBuffer;
@@ -50,9 +54,9 @@ namespace Z0
         public BufferToken RightExec
             => RBuffer;
 
-        public readonly ICaptureOps Capture;
+        public readonly IAsmCaptureOps Capture;
 
-        public readonly CaptureExchange Exchange;
+        public readonly AsmCaptureExchange Exchange;
 
         public void Dispose()
         {

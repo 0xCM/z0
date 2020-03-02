@@ -31,15 +31,16 @@ namespace Z0
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        public AsmInstructionList DecodeInstructions(AsmCode src)
+        [MethodImpl(Inline)]
+        public Option<AsmInstructionList> DecodeInstructions(AsmCode src)
             => Context.DecodeInstructions(src);
 
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        public AsmInstructionList DecodeInstructions(EncodedData src)
+        [MethodImpl(Inline)]
+        public Option<AsmInstructionList> DecodeInstructions(EncodedData src)        
             => Context.DecodeInstructions(src);
-
     }
 }

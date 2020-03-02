@@ -17,9 +17,7 @@ namespace Z0
 
     public readonly struct EncodingPatterns : IBytePatternSet<EncodingPatternKind,EncodingPatternOffset>
     {
-        [MethodImpl(Inline)]
-        public static EncodingPatterns Define()
-            => new EncodingPatterns(0);
+        public static EncodingPatterns Default => new EncodingPatterns(0);
 
         readonly EncodingPatternKind[] FullKinds;
 

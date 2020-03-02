@@ -5,32 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Linq;
     using System.Runtime.CompilerServices;
  
-    using static zfunc;    
+    using static Root;    
 
     public readonly struct CaptureSummary
     {        
-        public readonly CaptureOutcome Outcome;
+        public readonly AsmCaptureOutcome Outcome;
 
-        public readonly CaptureBits Bits;
+        public readonly AsmCaptureBits Bits;
 
         [MethodImpl(Inline)]
-        public static CaptureSummary Define(CaptureOutcome outcome, CaptureBits bits)
+        public static CaptureSummary Define(AsmCaptureOutcome outcome, AsmCaptureBits bits)
             => new CaptureSummary(outcome, bits);
 
         [MethodImpl(Inline)]
-        CaptureSummary(CaptureOutcome outcome, CaptureBits bits)
+        CaptureSummary(AsmCaptureOutcome outcome, AsmCaptureBits bits)
         {            
             this.Outcome = outcome;
             this.Bits = bits;
         }
-
-        public MemoryRange Range
-            => Outcome.Range;
     }
-
- 
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static nfunc;
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -296,11 +296,10 @@ namespace Z0
         public Matrix<N,N,T> ToRectangular()
             => new Matrix<N,N,T>(this.data);
 
-
         [MethodImpl(Inline)]
         public Matrix<N,U> Convert<U>()
             where U : unmanaged
-               => new Matrix<N,U>(convert<T,U>(data));
+               => new Matrix<N,U>(Cast.to<T,U>(data));
                
         /// <summary>
         /// Creates a copy of the matrix

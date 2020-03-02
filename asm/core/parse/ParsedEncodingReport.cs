@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -111,7 +109,7 @@ namespace Z0
             var op = OpDescriptor.Define(src.Uri, src.OpSig);
             var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
             var final = CaptureState.Define(op.Id, count, range.End, src.Data.LastByte);
-            var outcome = CaptureOutcome.Define(final, range, src.TermCode);
+            var outcome = AsmCaptureOutcome.Define(final, range, src.TermCode);
             return ParsedEncoding.Define(op, outcome.TermCode, src.Data);
         }
     }

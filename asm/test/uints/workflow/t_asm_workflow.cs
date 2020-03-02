@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Linq;
+    using Z0.Asm;
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {
@@ -21,13 +22,14 @@ namespace Z0
                 Claim.exists(paths.ParsedCapturePath(result.Host));
                 OnWorkflowComplete(result);                
             }
+                    
         }
 
 
         HashSet<MemoryAddress> Targets {get;}
             = new HashSet<MemoryAddress>();
 
-        void OnWorkflowComplete(in AsmCaptureSet src)
+        void OnWorkflowComplete(in AsmHostExtract src)
         {
             Trace($"Completed capture workflow for {src.Host}");
 
@@ -35,9 +37,9 @@ namespace Z0
             foreach(var f in src.Decoded)
             {
                 foreach(var i in f.Instructions)   
-                {
-                    
-                    callers.Add(CallerTarget.Define(f.Uri, i.MemoryAddress64));
+                {                    
+                    if(i.FlowControl == FlowControl.Call)
+                        callers.Add(CallerTarget.Define(f.Uri, i.MemoryAddress64));
                 }
                         
             }
@@ -50,7 +52,7 @@ namespace Z0
 
         public void call32_intr_pattern()
         {
-            var patterns = EncodingPatterns.Define();
+            var patterns = EncodingPatterns.Default;
             if(patterns.TryPartialMatch(EncodingPatternKind.CALL32_INTR, AsChar_Span8u_Input, out var selected))
                 Claim.eq(AsChar_Span8u_Output,selected);
             else

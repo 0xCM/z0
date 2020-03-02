@@ -4,21 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    using System;
-    
-    using static zfunc;
-
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class CoreFunc : AssemblyResolution<CoreFunc>
+    public sealed class CoreFunc : AssemblyResolution<CoreFunc, CoreFunc.C>
     {
         const AssemblyId Identity = AssemblyId.CoreFunc;
 
-        public override AssemblyId Id 
-            => Identity;
-
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public CoreFunc() : base(Identity) {}
+        
+        public class C : OpCatalog<C> { public C() : base(Identity) { } }
     }
 }

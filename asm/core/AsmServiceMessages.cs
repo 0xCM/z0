@@ -5,16 +5,10 @@
 namespace Z0
 {        
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    using static zfunc;
 
     public static class AsmServiceMessages
     {
@@ -24,7 +18,7 @@ namespace Z0
         public static AppMsg CatalogEmissionFailed(IOperationCatalog catalog, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppMsg.Error($"Error occurred while emitting catalog {catalog.CatalogName}", caller, file, line);
 
-        public static AppMsg Emitted(CaptureToken src)
+        public static AppMsg Emitted(AsmCaptureToken src)
             => AppMsg.Babble($"Emitted {src.Uri}");
 
         public static AppMsg EmissionMismatch(OpIdentity id, int incount, int outcount)

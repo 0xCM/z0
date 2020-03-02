@@ -9,9 +9,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    using System.Reflection;
     
-    using static zfunc;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     
     public sealed class t_native_reader : t_asm<t_native_reader>
@@ -39,14 +37,14 @@ namespace Z0
 
         public void capture_vectorized_generics()
         {
-            void OnCaptureEvent(in CaptureEventData data)
+            void OnCaptureEvent(in AsmCaptureEvent data)
             {
 
             }
 
             using var writer = NativeTestWriter();
 
-            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var exchange = Context.CaptureExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
             var types = NumericKind.All.DistinctTypes();
@@ -63,11 +61,11 @@ namespace Z0
 
         public void capture_direct()
         {
-            void OnCaptureEvent(in CaptureEventData data)
+            void OnCaptureEvent(in AsmCaptureEvent data)
             {
 
             }            
-            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var exchange = Context.CaptureExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
 
@@ -85,12 +83,12 @@ namespace Z0
 
         public void capture_delegates()
         {
-            void OnCaptureEvent(in CaptureEventData data)
+            void OnCaptureEvent(in AsmCaptureEvent data)
             {
 
             }
 
-            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var exchange = Context.CaptureExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
             using var target = NativeTestWriter();
@@ -116,12 +114,12 @@ namespace Z0
 
         public void read_library()
         {
-            void OnCaptureEvent(in CaptureEventData data)
+            void OnCaptureEvent(in AsmCaptureEvent data)
             {
 
             }
 
-            var exchange = CaptureServices.Exchange(OnCaptureEvent);
+            var exchange = Context.CaptureExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();

@@ -10,7 +10,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
 
     public static class AsmImmCapture
     {
@@ -35,8 +35,8 @@ namespace Z0
             => new AsmImmBinaryCapture(context, src,baseid);
 
         [MethodImpl(Inline)]
-        static AsmFunction Decode(IAsmFunctionDecoder decoder, in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
-            => decoder.DecodeFunction(CaptureServices.Operations.Capture(in exchange, id, src), false);
+        static AsmFunction Decode(IAsmContext context, IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, OpIdentity id, DynamicDelegate src)
+            => decoder.DecodeFunction(context.CaptureOps().Capture(in exchange, id, src), false);
 
         readonly struct AsmImmUnaryCapture : IAsmImmCapture
         {
@@ -57,10 +57,10 @@ namespace Z0
                 this.Decoder = context.FunctionDecoder();
             }
 
-            public AsmFunction Capture(in CaptureExchange exchange, byte imm)
+            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm)
             {
                 var op = Dynop.UnaryOpImm(VK.vk(), Method, BaseId, imm);
-                return Decode(Decoder, exchange, op.Id, op);
+                return Decode(Context, Decoder, exchange, op.Id, op);
             }
         }
 
@@ -83,10 +83,10 @@ namespace Z0
                 this.Decoder = context.FunctionDecoder();
             }
 
-            public AsmFunction Capture(in CaptureExchange exchange, byte imm)
+            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm)
             {
                 var op = Dynop.BinaryOpImm(VK.vk(), Method, BaseId, imm);
-                return Decode(Decoder, exchange, op.Id, op);
+                return Decode(Context,Decoder, exchange, op.Id, op);
             }
         }
     }

@@ -9,34 +9,38 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    readonly struct AsmCaptureService : ICaptureService
+    using static Root;
+    
+    readonly struct AsmCaptureService : IAsmCaptureService
     {
         public IAsmContext Context {get;}
 
-        readonly ICaptureOps Ops;
+        readonly IAsmCaptureOps Ops;
 
-        public static ICaptureService Create(IAsmContext context, ICaptureOps control)
+        [MethodImpl(Inline)]
+        public static IAsmCaptureService Create(IAsmContext context, IAsmCaptureOps control)
             => new AsmCaptureService(context, control);
 
-        AsmCaptureService(IAsmContext context, ICaptureOps control)
+        [MethodImpl(Inline)]
+        AsmCaptureService(IAsmContext context, IAsmCaptureOps control)
         {
             Context = context;
             Ops = control;            
         }
 
-        public CapturedMember Capture(in CaptureExchange exchange, OpIdentity id, DynamicDelegate src)
+        public AsmMemberCapture Capture(in AsmCaptureExchange exchange, OpIdentity id, DynamicDelegate src)
             => Ops.Capture(in exchange, id, src);
 
-        public CapturedMember Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
+        public AsmMemberCapture Capture(in AsmCaptureExchange exchange, OpIdentity id, MethodInfo src)
             => Ops.Capture(in exchange, id, src);
 
-        public CapturedMember Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
+        public AsmMemberCapture Capture(in AsmCaptureExchange exchange, OpIdentity id, Delegate src)
             => Ops.Capture(in exchange, id, src);
 
-        public CapturedMember Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
+        public AsmMemberCapture Capture(in AsmCaptureExchange exchange, MethodInfo src, params Type[] args)
             => Ops.Capture(exchange,src,args);
 
-        public CapturedMember[] Capture(in CaptureExchange exchange, MethodInfo[] methods)
+        public AsmMemberCapture[] Capture(in AsmCaptureExchange exchange, MethodInfo[] methods)
             => Ops.Capture(exchange,methods);
     }
 }

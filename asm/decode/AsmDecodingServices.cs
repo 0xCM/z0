@@ -62,12 +62,15 @@ namespace Z0
         public static IAsmInstructionDecoder InstructionDecoder(this IAsmContext context)
             => AsmInstructionDecoder.Create(context);
 
-
         static IEnumerable<AsmInstructionList> GetInstructions(IAsmCodeArchive archive)
         {            
             var decoder = archive.Context.InstructionDecoder();
             foreach(var codeblock in archive.Read())
-                yield return decoder.DecodeInstructions(codeblock);                
+            {
+                var decoded = decoder.DecodeInstructions(codeblock);
+                if(decoded)
+                    yield return decoded.Value;                
+            }
         }
 
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)

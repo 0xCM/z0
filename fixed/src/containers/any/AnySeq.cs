@@ -30,11 +30,10 @@ namespace Z0
             this.Terms = src;
         }
 
-        public Func<IEnumerable<T>, AnySeq<T>> Factory
+        public AnySeqFactory<T,AnySeq<T>> Factory
              => Define;
  
         string ICustomFormattable.Format()
             => text.concat(Terms.TakeAtMost(20), text.comma());
     }
-
 }

@@ -5,30 +5,28 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Linq;
     using System.Runtime.CompilerServices;
- 
-    using static zfunc;    
+
+    using static Root;    
 
     public readonly struct CapturedData
     {        
-        public static CapturedData Define(OpIdentity id, CaptureOutcome outcome, byte[] content)
+        public readonly OpIdentity Id;
+
+        public readonly AsmCaptureOutcome Outcome;
+
+        public readonly byte[] Content;
+
+        [MethodImpl(Inline)]
+        public static CapturedData Define(OpIdentity id, AsmCaptureOutcome outcome, byte[] content)
             => new CapturedData(id,outcome,content);
 
-        CapturedData(OpIdentity id, CaptureOutcome info, byte[] content)
+        [MethodImpl(Inline)]
+        CapturedData(OpIdentity id, AsmCaptureOutcome info, byte[] content)
         {
             this.Id = id;
             this.Outcome = info;
             this.Content = content;
-        }
-        
-        public readonly OpIdentity Id;
-
-        public readonly CaptureOutcome Outcome;
-
-        public readonly byte[] Content;
+        }        
     }
-
-
 }

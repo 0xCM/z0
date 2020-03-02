@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Text;
     using System.Runtime.Intrinsics;
     using System.Reflection;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Collections.Generic;
 
     using static Root;
 
@@ -220,55 +219,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinaryOp64 ToFixedBinOp(this MethodInfo f, NumericType<long> k)
             => f.CreateDelegate<Func<long,long,long>>().ToFixed();
-
-        /// <summary>
-        /// Formats a span as a delimited list
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="sep">The delimiter</param>
-        /// <param name="offset">The position at which formatting should begin</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static string FormatList<T>(this ReadOnlySpan<T> src, char sep = ',', int offset = 0, int pad = 0, bool bracketed = true)
-        {
-            if(src.Length == 0)
-                return string.Empty;
-
-            var sb = new StringBuilder();
-            
-            for(var i = offset; i< src.Length; i++)
-            {
-                var item =$"{src[i]}";
-                sb.Append(pad != 0 ? item.PadLeft(pad) : item);                
-                if(i != src.Length - 1)
-                {
-                    sb.Append(sep);
-                    sb.Append(AsciSym.Space);
-                }
-            }
-            return bracketed ? $"[{sb.ToString()}]" : sb.ToString();
-        }
-
-        /// <summary>
-        /// Formats a span as a delimited list
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="delimiter">The delimiter</param>
-        /// <param name="offset">The position at which formatting should begin</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]        
-        public static string FormatList<T>(this Span<T> src, char delimiter = ',', int offset = 0, int pad = 0, bool bracketed = true)
-            => src.ReadOnly().FormatList(delimiter, offset, pad, bracketed);
-
-        /// <summary>
-        /// Formats an array as a delimited list
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="delimiter">The delimiter</param>
-        /// <param name="offset">The position at which formatting should begin</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]        
-        public static string FormatList<T>(this T[] src, char delimiter = ',', int offset = 0)
-            => src.ToSpan().FormatList(delimiter, offset);
 
         [MethodImpl(Inline)]
         public static void IfNone(this bit x, Action f)

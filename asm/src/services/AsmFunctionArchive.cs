@@ -8,23 +8,18 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.IO;
+    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
     using static AsmServiceMessages;
 
-    using static zfunc;
+    using static Root;
 
     class AsmFunctionArchive : IAsmFunctionArchive
     {        
-        public static AppMsg Emitting(AsmFunctionGroup src)
-            => appMsg($"Emitting {src.Id}");
-
         public static AppMsg Emitted(CaptureTokenGroup src)
-            => appMsg($"Emitted {src.Uri}");
-
-        public static AppMsg Decoded(AsmFunction f)        
-            => appMsg($"Decoded function {f.Id}", AppMsgKind.Babble);
+            => AppMsg.Info($"Emitted {src.Uri}");
 
         public FolderPath RootFolder {get;}
         
@@ -47,9 +42,11 @@ namespace Z0
         AsmEmissionPaths EmissionPaths
             => Context.EmissionPaths();
 
+        [MethodImpl(Inline)]
         public static IAsmFunctionArchive Create(IAsmContext context, AssemblyId catalog, string host)
             => new AsmFunctionArchive(context, catalog,host);
 
+        [MethodImpl(Inline)]
         public static IAsmFunctionArchive Create(IAsmContext context, ApiHostPath host, bool imm)
             => new AsmFunctionArchive(context, host, imm);
 
@@ -82,8 +79,8 @@ namespace Z0
         public Option<CaptureTokenGroup> Save(AsmFunctionGroup src, bool append)
         {            
             OnEmitting(src);
-            WriteHex(src, append).OnSome(e => error(e));
-            WriteCil(src, append).OnSome(e => error(e));            
+            WriteHex(src, append).OnSome(e => term.error(e));
+            WriteCil(src, append).OnSome(e => term.error(e));            
             var emissions = WriteAsm(src,append);
             var incount = src.Members.Length;
             var outcount = emissions.MapValueOrDefault(t => t.Tokens.Length);
@@ -142,20 +139,20 @@ namespace Z0
         {
             try
             {
-                var tokens = new CaptureToken[src.Members.Length];
+                var tokens = new AsmCaptureToken[src.Members.Length];
                 using var writer = new StreamWriter(AsmPath(src.Id).FullPath, append);            
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
                     var uri = OpUri.Asm(HostPath, src.Id, f.Id);
                     writer.Write(GroupFormatter.FormatDetail(f));
-                    tokens[i] = CaptureToken.Define(uri, f.AddressRange, f.TermCode);
+                    tokens[i] = AsmCaptureToken.Define(uri, f.AddressRange, f.TermCode);
                 }
                 return tokens.ToGroup(OpUri.Asm(HostPath, src.Id));
             }
             catch(Exception e)
             {
-                error(e);
+                term.error(e);
                 return none<CaptureTokenGroup>();
             }
         }
@@ -166,14 +163,10 @@ namespace Z0
         }
 
         void OnEmitted(CaptureTokenGroup emitted)
-        {
-            print(Emitted(emitted));            
-        }
+            => term.print(Emitted(emitted));            
 
         void OnInOutMismatch(OpIdentity id, int incount, int outcount)
-        {
-            print(EmissionMismatch(id,incount,outcount));
-        }
+            => term.print(EmissionMismatch(id,incount,outcount));
             
         FilePath HexPath(OpIdentity id)
             => EmissionPaths.OpArchivePath(ArchiveFileKind.Hex, Origin, HostName, id).CreateParentIfMissing();

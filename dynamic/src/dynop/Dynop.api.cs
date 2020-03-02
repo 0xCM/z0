@@ -13,7 +13,8 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Linq;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static FKT;
 
     public static partial class Dynop

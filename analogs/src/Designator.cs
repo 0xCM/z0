@@ -13,10 +13,8 @@ namespace Z0.Designators
     {
         const AssemblyId Identity = AssemblyId.Analogs;
 
-        public override AssemblyId Id 
-            => Identity;
+        public Analogs() : base(Identity) {}
 
-        public override IOperationCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C> { public C() : base(Identity){ }}
     }
 }

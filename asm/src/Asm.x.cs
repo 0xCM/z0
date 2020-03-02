@@ -13,9 +13,6 @@ namespace Z0
 
     public static partial class AsmExtend
     {
-        // public static IEnumerable<ApiHost> KnownHosts(this IComposedContext src)
-        //     => from owner in src.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner)
-        //         from  host in owner
-        //         select host;
+
     }
 }
