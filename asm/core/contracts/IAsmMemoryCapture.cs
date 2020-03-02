@@ -5,10 +5,11 @@
 namespace Z0
 {
     using System;
+    using Z0.Asm;
 
-    public interface IAsmMemoryCaptureFlow : IAppService<IAsmContext>, IExecutable<AsmMemoryExtract>
+    public interface IAsmMemoryCapture : IAsmService
     {
-        
+        Option<AsmMemoryExtract> Capture(MemoryAddress src);        
     }
 
 }

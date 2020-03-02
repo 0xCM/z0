@@ -11,8 +11,9 @@ namespace Z0
 
     using static Z0.Asm.OpKind;
     using static FixedWidth;
+    using static AsmServiceMessages;
     
-    public static class AsmModels
+    public static partial class AsmModels
     {        
         /// <summary>
         /// Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch
@@ -318,12 +319,54 @@ namespace Z0
                 src.RegisterInfo(index),
                 src.BranchInfo(index,baseaddress)
                 );
-        
+
+        /// <summary>
+        /// Describes the instructions that comprise an instruction list
+        /// </summary>
+        /// <param name="src">The source instruction list</param>
+        public static AsmInstructionInfo[] DescribeInstructions(this AsmInstructionList src)
+        {
+            var dst = new AsmInstructionInfo[src.Length];
+            var offset = (ushort)0;
+
+            for(var i=0; i<dst.Length; i++)
+            {
+                var instruction = src[i];                            
+                dst[i] = instruction.SummarizeInstruction(src.EncodedBytes, instruction.FormattedInstruction, offset, src.EncodedBytes.AddressRange.Start);
+                offset += (ushort)instruction.ByteLength;
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Describes the instructions that comprise a function
+        /// </summary>
+        /// <param name="src">The source function</param>
+        public static AsmInstructionInfo[] DescribeInstructions(this AsmFunction src)
+        {
+            var dst = new AsmInstructionInfo[src.InstructionCount];
+            var offset = (ushort)0;
+
+            for(var i=0; i<dst.Length; i++)
+            {
+                var instruction = src.Instructions[i];
+                
+                if(src.Code.Length < offset + instruction.ByteLength)
+                    throw AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
+            
+                dst[i] = instruction.SummarizeInstruction(src.Code.Data, instruction.FormattedInstruction, offset, src.Code.AddressRange.Start);
+                offset += (ushort)instruction.ByteLength;
+            }
+            return dst;
+        }
+      
         const NumericIndicator nf = NumericIndicator.Float;
         
         const NumericIndicator ni = NumericIndicator.Signed;
         
         const NumericIndicator nu = NumericIndicator.Unsigned;
+
+        static readonly AsmFormatConfig DefaultConfig = AsmFormatConfig.Default;
 
         public static SegmentedIdentity AsSegmentedIdentity(this MemorySize src, TypeIndicator ti)
             => src switch {

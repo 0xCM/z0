@@ -20,48 +20,39 @@ namespace Z0
             var extracts = list<AsmHostExtract>();            
             var paths = Context.EmissionPaths();                    
             var workflow = Context.HostCaptureFlow();
+            var memcap = Context.MemoryCapture();
+            var memfail = list<OpUri>();
             foreach(var extract in workflow.Execute())
             {
                 Claim.exists(paths.ParsedCapturePath(extract.Host));
-                extracts.Add(extract);                            
+                extracts.Add(extract); 
+                var count = extract.Parsed.RecordCount;
+                for(var i=0; i<count; i++)
+                {
+                    var parsed = extract.Parsed[i];
+                    var code = AsmCode.Define(parsed.Uri.OpId, parsed.Data);
+                    if(!MemcapCheck(memcap, code))
+                        memfail.Add(parsed.Uri);
+
+                }
             }   
 
-            var callsfar = extracts.FarCalls().Distinct().ToArray();
-            var bases = extracts.BaseAddresses().ToArray();
-            var known = callsfar.Intersect(bases).ToArray();
-            var unknown = bases.Except(known).ToArray();
-            var fcs = FarCallSummary.Define(
-                targets: callsfar,
-                hosted: bases,
-                known: known,
-                unknown: unknown);  
-
-            Trace(fcs.Format());
-        
+            foreach(var fail in memfail)
+                Trace($"Memory capture failed for {fail}");
         }
 
-        // HashSet<MemoryAddress> Targets {get;}
-        //     = new HashSet<MemoryAddress>();
+        bool MemcapCheck(IAsmMemoryCapture memcap, AsmCode src)
+        {
+            var section = new string('-',120);
+            var captured = memcap.Capture(src.BaseAddress);
+            if(!captured)
+                return false;
 
-        // void OnWorkflowComplete(IAsmHostCaptureFlow flow, in AsmHostExtract src)
-        // {
-        //     Trace($"Completed {flow.Name} for {src.Host}");
-
-        //     var callers = new List<CallerTarget>();
-        //     foreach(var f in src.Decoded)
-        //     {
-        //         foreach(var i in f.Instructions)   
-        //         {                    
-        //             if(i.FlowControl == FlowControl.Call)
-        //                 callers.Add(CallerTarget.Define(f.Uri, i.MemoryAddress64));
-        //         }                        
-        //     }
-            
-        //     var distinct = callers.Select(c => c.Dst).Distinct().ToList();
-        //     Targets.Include(distinct);
-
-        //     Trace($"Collected {callers.Count} total far calls for {src.Host} that included unique {distinct.Count} targets out of {Targets.Count} distinct targets for the session");
-        // }
+            var data = captured.Value.Data.Parsed;
+            if(data.Length != src.Length)
+                return false;
+            return true;
+        }
 
         public void call32_intr_pattern()
         {

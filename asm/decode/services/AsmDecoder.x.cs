@@ -7,12 +7,15 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
  
     using Z0.Asm;
     
-    using Iced = Iced.Intel;
     using static Root;
+    using static AsmServiceMessages;
+
+    using Iced = Iced.Intel;
 
     public static class AsmDecodingOps
     {
@@ -30,11 +33,11 @@ namespace Z0
                     decoder.Decode(out instruction); 
                 }
 
-                var dst = new Asm.Instruction[decoded.Count];
+                var instructions = new Asm.Instruction[decoded.Count];
                 var formatted = context.InstructionFormatter().FormatInstructions(decoded, src.BaseAddress);
-                for(var i=0; i<dst.Length; i++)
-                    dst[i] =  decoded[i].ToSpec(formatted[i]);
-                return AsmInstructionList.Create(dst);
+                for(var i=0; i<instructions.Length; i++)
+                    instructions[i] =  decoded[i].ToSpec(formatted[i]);
+                return AsmInstructionList.Create(instructions,src);
             }
             catch(Exception e)
             {

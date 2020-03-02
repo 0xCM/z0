@@ -12,7 +12,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static zfunc;
+    using static Root;
     using static AsmServiceMessages;
 
     using Iced = Iced.Intel;
@@ -60,7 +60,7 @@ namespace Z0
 
         ReadOnlySpan<string> FormatInstructions(AsmFunction src)
         {
-            var descriptions = DescribeInstructions(src);
+            var descriptions = src.DescribeInstructions();
             var lines = new List<string>();
             for(var i = 0; i< descriptions.Length; i++)
                 lines.Add(FormatInstruction(src.BaseAddress, descriptions[i]));
@@ -107,23 +107,24 @@ namespace Z0
         static string Comment(string text)
             =>  $"; {text}";
 
-        AsmInstructionInfo[] DescribeInstructions(AsmFunction src)
-        {
-            var dst = new AsmInstructionInfo[src.InstructionCount];
-            var offset = (ushort)0;
 
-            for(var i=0; i<dst.Length; i++)
-            {
-                var instruction = src.Instructions[i];
+        // AsmInstructionInfo[] DescribeInstructions(AsmFunction src)
+        // {
+        //     var dst = new AsmInstructionInfo[src.InstructionCount];
+        //     var offset = (ushort)0;
+
+        //     for(var i=0; i<dst.Length; i++)
+        //     {
+        //         var instruction = src.Instructions[i];
                 
-                if(src.Code.Length < offset + instruction.ByteLength)
-                    throw appFail(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
+        //         if(src.Code.Length < offset + instruction.ByteLength)
+        //             throw AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.Code.Length, instruction.ByteLength));                
             
-                dst[i] = instruction.SummarizeInstruction(src.Code.Data, instruction.FormattedInstruction, offset, src.Code.AddressRange.Start);
-                offset += (ushort)instruction.ByteLength;
-            }
-            return dst;
-        }
+        //         dst[i] = instruction.SummarizeInstruction(src.Code.Data, instruction.FormattedInstruction, offset, src.Code.AddressRange.Start);
+        //         offset += (ushort)instruction.ByteLength;
+        //     }
+        //     return dst;
+        // }
 
         /// <summary>
         /// Formats the function body encoding as a comma-separated list of hex values
@@ -177,7 +178,7 @@ namespace Z0
             }
 
             if(Config.EmitFunctionTimestamp)
-                lines.Add(Comment(now().ToLexicalString()));
+                lines.Add(Comment(time.now().ToLexicalString()));
             
             return lines.ToArray();
         }

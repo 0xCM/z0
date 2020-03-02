@@ -58,6 +58,7 @@ namespace Z0
         {
             sb.Append(label);
             sb.Append(eol);
+            sb.Append(text.space());
         }
 
         /// <summary>
@@ -70,7 +71,6 @@ namespace Z0
         public static void AppendLabeled(this StringBuilder sb, string label, char eol, object content)
         {
             sb.AppendLabel(label,eol);
-            sb.Append(text.space());
             sb.Append(content);
         }
 
@@ -85,7 +85,6 @@ namespace Z0
             where T : ICustomFormattable
         {
             sb.AppendLabel(label,eol);
-            sb.Append(text.space());
             sb.Append(content.Format());
         }
 
@@ -100,6 +99,7 @@ namespace Z0
         /// <param name="delimiter">The content delimiter</param>
         public static void DelimitLabeled(this StringBuilder sb, string label, char eol, object content, int pad, char delimiter)
         {
+            sb.Append(text.space());
             sb.Append(delimiter);
             sb.Append(text.space());
             sb.AppendLabel(label, eol);
@@ -118,6 +118,7 @@ namespace Z0
         public static void DelimitLabeled<T>(this StringBuilder sb, string label, char eol, T content, int pad, char delimiter)
             where T : ICustomFormattable
         {
+            sb.Append(text.space());
             sb.Append(delimiter);
             sb.Append(text.space());
             sb.AppendLabel(label, eol);

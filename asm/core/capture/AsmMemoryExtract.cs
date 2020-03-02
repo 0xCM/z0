@@ -13,19 +13,17 @@ namespace Z0
     public readonly struct AsmMemoryExtract
     {
         [MethodImpl(Inline)]
-        public static AsmMemoryExtract Define(MemoryAddress address, AsmCaptureBits data, AsmInstructionList instructions)
-            => new AsmMemoryExtract(address, data, instructions);
+        public static AsmMemoryExtract Define(MemoryAddress address, AsmCaptureBits data, AsmInstructionList instructions, string formatted)
+            => new AsmMemoryExtract(address, data, instructions,formatted);
         
-        [MethodImpl(Inline)]
-        public static implicit operator AsmMemoryExtract((MemoryAddress address, AsmCaptureBits data, AsmInstructionList instructions) src)
-            => Define(src.address, src.data, src.instructions);
 
         [MethodImpl(Inline)]
-        AsmMemoryExtract(MemoryAddress address, AsmCaptureBits data, AsmInstructionList instructions)
+        AsmMemoryExtract(MemoryAddress address, AsmCaptureBits data, AsmInstructionList instructions, string formatted)
         {
             this.Address = address;
             this.Data = data;
             this.Instructions = instructions;
+            this.FormattedAsm = formatted;
         }
 
         public readonly MemoryAddress Address;
@@ -33,5 +31,7 @@ namespace Z0
         public readonly AsmCaptureBits Data;
 
         public readonly AsmInstructionList Instructions;
+
+        public readonly string FormattedAsm;
     }
 }

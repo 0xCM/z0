@@ -37,7 +37,6 @@ namespace Z0
         public bool EmitFunctionHeader {get; set;}
             = true;
 
-
         public bool EmitFunctionTimestamp {get;set;}
             = false;
 

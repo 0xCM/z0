@@ -10,32 +10,14 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Z0.Root;
+    using Z0;
 
     /// <summary>
     /// Encapsulates a block of encoded assembly
     /// </summary>
     public readonly struct AsmCode : IFormattable<AsmCode>
     {
-        /// <summary>
-        /// Defines a code block for an identified operation 
-        /// </summary>
-        /// <param name="id">The operation identifier</param>
-        /// <param name="data">The encoded data</param>
-        [MethodImpl(Inline)]
-        public static AsmCode Define(OpIdentity id, EncodedData data)
-            => new AsmCode(id, data);
-
-        /// <summary>
-        /// Defines a code block for an identified operation
-        /// </summary>
-        /// <param name="id">The operation identifier</param>
-        /// <param name="base">The base address</param>
-        /// <param name="data">The encoded bytes</param>
-        [MethodImpl(Inline)]
-        public static AsmCode Define(OpIdentity id, MemoryAddress @base, byte[] data)
-            => new AsmCode(id, EncodedData.Define(@base,data));
-
         /// <summary>
         /// The canonical zero
         /// </summary>
@@ -56,6 +38,29 @@ namespace Z0
         /// </summary>
         public readonly EncodedData Data;
         
+        public MemoryAddress BaseAddress 
+            => AddressRange.Start;
+
+        /// <summary>
+        /// Defines a code block for an identified operation 
+        /// </summary>
+        /// <param name="id">The operation identifier</param>
+        /// <param name="data">The encoded data</param>
+        [MethodImpl(Inline)]
+        public static AsmCode Define(OpIdentity id, EncodedData data)
+            => new AsmCode(id, data);
+
+        /// <summary>
+        /// Defines a code block for an identified operation
+        /// </summary>
+        /// <param name="id">The operation identifier</param>
+        /// <param name="base">The base address</param>
+        /// <param name="data">The encoded bytes</param>
+        [MethodImpl(Inline)]
+        public static AsmCode Define(OpIdentity id, MemoryAddress @base, byte[] data)
+            => new AsmCode(id, EncodedData.Define(@base,data));
+
+
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]

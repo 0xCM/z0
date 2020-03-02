@@ -97,9 +97,9 @@ namespace Z0
 
         public string Identifier {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator Identified<Arrow<S,T>>(Arrow<S,T> src)
-            => (src.Identifier, src);
+        // [MethodImpl(Inline)]
+        // public static implicit operator Identified<Arrow<S,T>>(Arrow<S,T> src)
+        //     => (src.Identifier, src);
 
         [MethodImpl(Inline)]
         public Arrow(S src, T dst)

@@ -28,27 +28,22 @@ namespace Z0
             PatternBuffer = buffer;
         }
 
-        static Option<AsmParseRecord> Parse(in ByteParser<EncodingPatternKind> parser, in AsmOpExtractRecord src)
+        static AsmParseRecord Parse(in ByteParser<EncodingPatternKind> parser, in AsmOpExtractRecord current)
         {
-            var status = parser.Parse(src.Data);
+            var status = parser.Parse(current.Data);                
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();                
-            if(succeeded)
-            {
-                var data = parser.Parsed.ToArray();
-                return AsmParseRecord.Define
-                (
-                     Sequence : src.Sequence,
-                     Address : src.Address,
-                     Length : data.Length,
-                     TermCode: matched.ToTermCode(),
-                     Uri : OpUri.Hex(src.Uri.HostPath, src.Uri.GroupName, src.Uri.OpId),
-                     OpSig : src.OpSig,
-                     Data : EncodedData.Define(src.Address, data)
-                );
-            }
-            else 
-                return none<AsmParseRecord>();
+            var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
+            return AsmParseRecord.Define
+            (
+                Sequence : current.Sequence,
+                Address : current.Address,
+                Length : data.Length,
+                TermCode: matched.ToTermCode(),
+                Uri : OpUri.Hex(current.Uri.HostPath, current.Uri.GroupName, current.Uri.OpId),
+                OpSig : current.OpSig,
+                Data : EncodedData.Define(current.Address, data)
+            );
         }
 
         public AsmParseReport Parse(ApiHost host, AsmOpExtractReport encoded)
@@ -59,25 +54,23 @@ namespace Z0
 
             for(var i=0; i< dst.Length; i++)
             {
-                var current = encoded.Records[i];
-                var parsed = Parse(parser,current);
-                dst[i] = parsed.ValueOrElse(() => AsmParseRecord.Empty);
-                
-                // var status = parser.Parse(current.Data);                
-                // var matched = parser.Result;
-                // var succeeded = matched.IsSome() && status.Success();                
-                // var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
+                ref readonly var current = ref encoded.Records[i];                
+                var status = parser.Parse(current.Data);                
+                var matched = parser.Result;
+                var succeeded = matched.IsSome() && status.Success();                
+                var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
+                dst[i] = AsmParseRecord.Define
+                (
+                     Sequence : current.Sequence,
+                     Address : current.Address,
+                     Length : data.Length,
+                     TermCode: matched.ToTermCode(),
+                     Uri : OpUri.Hex(host.Path, current.Uri.GroupName, current.Uri.OpId),
+                     OpSig : current.OpSig,
+                     Data : EncodedData.Define(current.Address, data)
+                );
 
-                // dst[i] = AsmParseRecord.Define
-                // (
-                //      Sequence : current.Sequence,
-                //      Address : current.Address,
-                //      Length : data.Length,
-                //      TermCode: matched.ToTermCode(),
-                //      Uri : OpUri.Hex(host.Path, current.Uri.GroupName, current.Uri.OpId),
-                //      OpSig : current.OpSig,
-                //      Data : EncodedData.Define(current.Address, data)
-                // );
+                //dst[i] = Parse(parser, current);
             }
 
             ReportDuplicates(dst.Select(x => x.Uri.OpId).Duplicates());

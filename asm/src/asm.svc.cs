@@ -94,12 +94,8 @@ namespace Z0
             => AsmHostCaptureFlow.Create(context);
  
         [MethodImpl(Inline)]
-        public static IAsmMemoryCaptureFlow MemoryCaptureFlow(this IAsmContext context, IAsmBaseAddressProvider provider)
-            => AsmMemoryCaptureFlow.Create(context, provider);
-
-        [MethodImpl(Inline)]
-        public static IAsmMemoryCaptureFlow MemoryCaptureFlow(this IAsmContext context, params MemoryAddress[] addresses)
-            => context.MemoryCaptureFlow(context.BaseAddressProvider(addresses));
+        public static IAsmMemoryCapture MemoryCapture(this IAsmContext context)
+            => AsmMemoryCapture.Create(context);
 
         [MethodImpl(Inline)]
         public static IAsmOpExtractParser ExtractReportParser(this IAsmContext context, byte[] buffer)

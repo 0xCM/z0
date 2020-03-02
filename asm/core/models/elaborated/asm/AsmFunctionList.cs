@@ -27,7 +27,6 @@ namespace Z0.Asm
             => Define;
     }
 
-    public interface IAsmFunctionList 
-        : IAnyListProvider<AsmFunctionList, AsmFunction>{}
+    public interface IAsmFunctionList  : IAnyListProvider<AsmFunctionList, AsmFunction>{}
 
 }

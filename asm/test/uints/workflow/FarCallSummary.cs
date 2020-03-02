@@ -16,16 +16,16 @@ namespace Z0
     public readonly struct FarCallSummary
     {
         [MethodImpl(Inline)]
-        public static FarCallSummary Define(MemoryAddress[] targets, MemoryAddress[] hosted, MemoryAddress[] known, MemoryAddress[] unknown)
-            => new FarCallSummary(targets, hosted, known, unknown);
+        public static FarCallSummary Define(MemoryAddress[] targets, MemoryAddress[] bases, MemoryAddress[] hosted, MemoryAddress[] unhosted)
+            => new FarCallSummary(targets, bases, hosted, unhosted);
         
         [MethodImpl(Inline)]
-        FarCallSummary(MemoryAddress[] targets, MemoryAddress[] hosted, MemoryAddress[] known, MemoryAddress[] unknown)
+        FarCallSummary(MemoryAddress[] targets, MemoryAddress[] bases, MemoryAddress[] hosted, MemoryAddress[] unhosted)
         {
             this.FarCallTargets = targets;
-            this.HostBases = hosted;
-            this.HostTargets = known;
-            this.UnhostedTargets = unknown;
+            this.HostBases = bases;
+            this.HostedReceivers = hosted;
+            this.UnhostedReceivers = unhosted;
         }
         
         /// <summary>
@@ -41,20 +41,19 @@ namespace Z0
         /// <summary>
         /// Base addresses of api host functions that are targets of a far call
         /// </summary>
-        public readonly MemoryAddress[] HostTargets;
+        public readonly MemoryAddress[] HostedReceivers;
 
         /// <summary>
         /// Far call targets that are not defined by an api host
         /// </summary>
-        public readonly MemoryAddress[] UnhostedTargets;
-
+        public readonly MemoryAddress[] UnhostedReceivers;
 
         public FarCallCounts Counts
             => FarCallCounts.Define(
                 FarCallTargets.Length, 
                 HostBases.Length, 
-                HostTargets.Length, 
-                UnhostedTargets.Length);
+                HostedReceivers.Length, 
+                UnhostedReceivers.Length);
 
         public string Format()
             => Counts.Format();
