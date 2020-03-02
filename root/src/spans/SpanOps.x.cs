@@ -348,5 +348,27 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> MapRange<S,T>(this Span<S> src, int offset, int length, Func<S, T> f)
             => src.ReadOnly().MapRange(offset,length, f);                
+
+        static void ThrowEmptySpanError()
+            => throw new Exception($"The span is empty");
+            
+        public static T Reduce<T>(this ReadOnlySpan<T> src, Func<T,T,T> f)
+        {
+            if(src.IsEmpty)
+                ThrowEmptySpanError();
+            else if(src.Length == 1)
+                return MemoryMarshal.GetReference(src);
+            
+            var x = src[0];
+            for(var i=1; i<src.Length; i++)
+                x = f(x,src[i]);
+            return x;            
+        }
+
+
+        [MethodImpl(Inline)]
+        public static T Reduce<T>(this Span<T> src, Func<T,T,T> f)
+            => src.ReadOnly().Reduce(f);        
+
     }
 }

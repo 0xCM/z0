@@ -47,7 +47,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, CaseName(OpId.numeric<T>(nameof(gbits.bitcopy))));
+            CheckAction(check, CaseName(Identity.numeric<T>(nameof(gbits.bitcopy))));
         }
     }
 }

@@ -84,29 +84,35 @@ namespace Z0
             return true;
         }
 
-        public static T Reduce<T>(this ReadOnlySpan<T> src, Func<T,T,T> f)
+        /// <summary>
+        /// Evaluates whether two spans have identical content
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <typeparam name="T">The value type</typeparam>
+        public static bool ValuesEqual<T>(this ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
+            where T : unmanaged, IEquatable<T>
         {
-            if(src.IsEmpty)
-                ThrowEmptySpanError();
-            else if(src.Length == 1)
-                return MemoryMarshal.GetReference(src);
-            
-            var x = src[0];
-            for(var i=1; i<src.Length; i++)
-                x = f(x,src[i]);
-            return x;            
+            if(lhs.Length != rhs.Length)
+                return false;
+            for(var i=0; i< lhs.Length; i++)
+                if(!lhs[i].Equals(rhs[i]))
+                    return false;
+            return true;
         }
 
-
+        /// <summary>
+        /// Evaluates whether two spans have identical content
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static T Reduce<T>(this Span<T> src, Func<T,T,T> f)
-            => src.ReadOnly().Reduce(f);        
+        public static bool ValuesEqual<T>(this Span<T> lhs, ReadOnlySpan<T> rhs)
+            where T : unmanaged, IEquatable<T>
+                => lhs.ReadOnly().ValuesEqual(rhs);
 
         static void ThrowEmptySpanError()
             => throw new Exception($"The span is empty");
-
-        static Exception unsupported<T>()
-            => new Exception($"The type {typeof(T).Name} is unsupported");
-
     }
 }

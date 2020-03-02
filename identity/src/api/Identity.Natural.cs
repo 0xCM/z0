@@ -14,16 +14,6 @@ namespace Z0
     partial class Identity
     {
         /// <summary>
-        /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static OpIdentity contracted<T>(string opname, T t = default)
-            => OpId.numeric(opname,typeof(T).NumericKind());
-
-        /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
         /// </summary>
         /// <param name="opname">The base operator name</param>
@@ -62,5 +52,25 @@ namespace Z0
         public static OpIdentity contracted<T>(string opname, N256 w, bool generic = true)
             where T : unmanaged
                 => contracted(opname, w, Numeric.kind<T>(), generic);
+
+        /// <summary>
+        /// Determines whether a type is parametric over the natural numbers
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        static bool IsNatSpan(this Type t)
+        {            
+            var query =    
+                from def in t.GenericDefinition() 
+                where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
+                select def;
+
+            return query.IsSome();            
+        }
+
+        public static string testcase<W,C>(Type host, string root, W w = default, C t = default, bool generic = true)
+            where W : unmanaged, ITypeNat
+            where C : unmanaged
+                => $"{owner(host)}{host.Name}/{operation(root, (FixedWidth)w.NatValue, Numeric.kind<C>(), generic)}";
+
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-
+    
     public readonly struct NatSpanSig : IEquatable<NatSpanSig>
     {
         public static Option<NatSpanSig> From(Type t)

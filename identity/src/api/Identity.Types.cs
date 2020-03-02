@@ -14,10 +14,37 @@ namespace Z0
     partial class Identity
     {
         /// <summary>
+        /// Extracts an index-identified operation identity part from an operation identity
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="partidx">The 0-based part index</param>
+        static Option<IdentityPart> part(OpIdentity src, int partidx)
+        {
+            var parts = src.Parts.ToArray();
+            if(partidx <= parts.Length - 1)
+                return parts[partidx];
+            else
+                return none<IdentityPart>();
+        }
+
+        /// <summary>
+        /// Transforms a nonspecific identity part into a specialized scalar part, if the source part is indeed a scalar identity
+        /// </summary>
+        /// <param name="part">The source part</param>
+        static Option<ScalarIdentity> scalar(IdentityPart part)
+        {
+            var nk = part.PartKind == IdentityPartKind.Scalar ? Numeric.kind(part.Identifier) : NumericKind.None;
+            if(nk.IsSome())
+                return ScalarIdentity.Define(nk);                
+            else                
+                return none<ScalarIdentity>();                
+        }
+        
+        /// <summary>
         /// Gets the name of a method to which to Op attribute is applied
         /// </summary>
         /// <param name="m">The source method</param>
-        public static string host(Type t)
+        static string host(Type t)
         {
             var defaultName = t.Name.ToLower();
             var query = from a in t.Tag<ApiHostAttribute>()
@@ -26,46 +53,11 @@ namespace Z0
             return query.ValueOrDefault(defaultName);            
         }    
 
-        [MethodImpl(Inline)]
-        public static TypeIdentity identify(Type t)
-            => provider(t).DefineIdentity(t);
-
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w}x{kind.Format()}");
-        
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");   
-
-        /// <summary>
-        /// Transforms a nonspecific identity part into a specialized scalar part, if the source part is indeed a scalar identity
-        /// </summary>
-        /// <param name="part">The source part</param>
-        public static Option<ScalarIdentity> scalar(IdentityPart part)
-        {
-            var nk = part.PartKind == IdentityPartKind.Scalar ? Numeric.kind(part.Identifier) : NumericKind.None;
-            if(nk.IsSome())
-                return ScalarIdentity.Define(nk);                
-            else                
-                return none<ScalarIdentity>();                
-        }
-
-        /// <summary>
-        /// Extracts an index-identified segmented identity part from an operation identity
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        /// <param name="partidx">The 0-based part index</param>
-        public static Option<SegmentedIdentity> segment(OpIdentity src, int partidx)
-            => from p in part(src, partidx)
-                from s in segmented(p)
-                select s;
-
         /// <summary>
         /// Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
         /// </summary>
         /// <param name="part">The source part</param>
-        public static Option<SegmentedIdentity> segmented(IdentityPart part)
+        static Option<SegmentedIdentity> segmented(IdentityPart part)
         {
             if(part.PartKind == IdentityPartKind.Segment)
             {
@@ -74,21 +66,6 @@ namespace Z0
             }
 
             return none<SegmentedIdentity>();                
-        }
-
-
-        /// <summary>
-        /// Determines whether a type is parametric over the natural numbers
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        static bool IsNatSpan(this Type t)
-        {
-            var query =    
-                from def in t.GenericDefinition() 
-                where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
-                select def;
-
-            return query.IsSome();            
         }
 
         static Option<TypeIdentity> CommonId(this Type arg)

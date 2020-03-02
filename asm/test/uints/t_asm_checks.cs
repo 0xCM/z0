@@ -502,8 +502,8 @@ namespace Z0
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = OpId.numeric(name, kind, false);
-            var gId = OpId.numeric(name, kind, true);
+            var dId = Identity.numeric(name, kind, false);
+            var gId = Identity.numeric(name, kind, true);
 
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);
