@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Text;
+    using System.Linq.Expressions;
 
     using static Root;
 
@@ -29,6 +30,7 @@ namespace Z0
             sb.Append($"{content}");
         }
 
+
         public static void AppendField(this StringBuilder sb, object content, int pad)
         {            
             sb.Append($"{content}".PadRight(pad));
@@ -44,6 +46,82 @@ namespace Z0
         {
             sb.Append(text.rspace(delimiter));                        
             sb.Append(content);
+        }
+
+        /// <summary>
+        /// Appends a label suffixed by an eol (end-of-label) signifier to produce '{label}{eol}'
+        /// </summary>
+        /// <param name="sb">The target builder</param>
+        /// <param name="label">The label text</param>
+        /// <param name="eol">A character that denotes the end of a label and indicate that what follows is content</param>
+        public static void AppendLabel(this StringBuilder sb, string label, char eol)
+        {
+            sb.Append(label);
+            sb.Append(eol);
+        }
+
+        /// <summary>
+        /// Appends labeled content to produce: '{label}{eol} {content}'
+        /// </summary>
+        /// <param name="sb">The target builder</param>
+        /// <param name="label">The label text</param>
+        /// <param name="eol">A character that denotes the end of a label and indicate that what follows is content</param>
+        /// <param name="content">The content to append</param>
+        public static void AppendLabeled(this StringBuilder sb, string label, char eol, object content)
+        {
+            sb.AppendLabel(label,eol);
+            sb.Append(text.space());
+            sb.Append(content);
+        }
+
+        /// <summary>
+        /// Appends labeled formattable content to produce: '{label}{eol} {content}'
+        /// </summary>
+        /// <param name="sb">The target builder</param>
+        /// <param name="label">The label text</param>
+        /// <param name="eol">A character that denotes the end of a label and indicate that what follows is content</param>
+        /// <param name="content">The content to append</param>
+        public static void AppendLabeled<T>(this StringBuilder sb, string label, char eol, T content)
+            where T : ICustomFormattable
+        {
+            sb.AppendLabel(label,eol);
+            sb.Append(text.space());
+            sb.Append(content.Format());
+        }
+
+        /// <summary>
+        /// Delimits labeled content to produce '{delimiter} {label}{eol} {content}'
+        /// </summary>
+        /// <param name="sb">The target builder</param>
+        /// <param name="label">The label text</param>
+        /// <param name="eol">A character that denotes the end of a label and indicate that what follows is content</param>
+        /// <param name="content">The content to delimit</param>
+        /// <param name="pad">The right-padded content width</param>
+        /// <param name="delimiter">The content delimiter</param>
+        public static void DelimitLabeled(this StringBuilder sb, string label, char eol, object content, int pad, char delimiter)
+        {
+            sb.Append(delimiter);
+            sb.Append(text.space());
+            sb.AppendLabel(label, eol);
+            sb.Append($"{content}".PadRight(pad));
+        }
+
+        /// <summary>
+        /// Delimits labeled formattable content to produce '{delimiter} {label}{eol} {content}'
+        /// </summary>
+        /// <param name="sb">The target builder</param>
+        /// <param name="label">The label text</param>
+        /// <param name="eol">A character that denotes the end of a label and indicate that what follows is content</param>
+        /// <param name="content">The content to delimit</param>
+        /// <param name="pad">The right-padded content width</param>
+        /// <param name="delimiter">The content delimiter</param>
+        public static void DelimitLabeled<T>(this StringBuilder sb, string label, char eol, T content, int pad, char delimiter)
+            where T : ICustomFormattable
+        {
+            sb.Append(delimiter);
+            sb.Append(text.space());
+            sb.AppendLabel(label, eol);
+            sb.Append($"{content.Format()}".PadRight(pad));
         }
 
         public static void AppendField<T>(this StringBuilder sb, object content, T pad)

@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+
     partial class Root
     {
         /// <summary>
@@ -19,6 +20,24 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IEnumerable<T> items<T>(params T[] src)
             => src;
+
+        /// <summary>
+        /// Creates a set from a parameter array
+        /// </summary>
+        /// <param name="src">The source items</param>
+        /// <typeparam name="T">The item type</typeparam>
+        [MethodImpl(Inline)]   
+        public static ISet<T> set<T>(params T[] src)
+            => src.ToHashSet();
+
+        /// <summary>
+        /// Creates a set from a parameter array
+        /// </summary>
+        /// <param name="src">The source items</param>
+        /// <typeparam name="T">The item type</typeparam>
+        [MethodImpl(Inline)]   
+        public static IList<T> list<T>(params T[] src)
+            => src.ToList();
 
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each

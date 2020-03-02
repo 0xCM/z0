@@ -18,7 +18,7 @@ namespace Z0
 
     class AsmFunctionArchive : IAsmFunctionArchive
     {        
-        public static AppMsg Emitted(CaptureTokenGroup src)
+        public static AppMsg Emitted(AsmCaptureTokenGroup src)
             => AppMsg.Info($"Emitted {src.Uri}");
 
         public FolderPath RootFolder {get;}
@@ -76,7 +76,7 @@ namespace Z0
             this.CilFormatter = context.CilFormatter();
         }
 
-        public Option<CaptureTokenGroup> Save(AsmFunctionGroup src, bool append)
+        public Option<AsmCaptureTokenGroup> Save(AsmFunctionGroup src, bool append)
         {            
             OnEmitting(src);
             WriteHex(src, append).OnSome(e => term.error(e));
@@ -135,7 +135,7 @@ namespace Z0
             }
         }
 
-        Option<CaptureTokenGroup> WriteAsm(AsmFunctionGroup src, bool append)
+        Option<AsmCaptureTokenGroup> WriteAsm(AsmFunctionGroup src, bool append)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace Z0
             catch(Exception e)
             {
                 term.error(e);
-                return none<CaptureTokenGroup>();
+                return none<AsmCaptureTokenGroup>();
             }
         }
  
@@ -162,7 +162,7 @@ namespace Z0
             
         }
 
-        void OnEmitted(CaptureTokenGroup emitted)
+        void OnEmitted(AsmCaptureTokenGroup emitted)
             => term.print(Emitted(emitted));            
 
         void OnInOutMismatch(OpIdentity id, int incount, int outcount)

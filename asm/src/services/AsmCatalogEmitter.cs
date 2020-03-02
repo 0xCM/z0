@@ -129,10 +129,10 @@ namespace Z0.Asm
         }
 
         AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, DirectOpSpec src)
-            => decoder.DecodeFunction(Context.CaptureOps().Capture(in exchange, src.Id, src.ConcreteMethod));
+            => decoder.DecodeFunction(Context.OpExtractor().Extract(in exchange, src.Id, src.ConcreteMethod));
 
         AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, ClosedOpSpec closure)
-            => decoder.DecodeFunction(Context.CaptureOps().Capture(in exchange, closure.Id, closure.ClosedMethod));
+            => decoder.DecodeFunction(Context.OpExtractor().Extract(in exchange, closure.Id, closure.ClosedMethod));
 
         void Emit(in AsmCaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, AsmCaptureEmissionObserver observer)
         {
@@ -222,7 +222,7 @@ namespace Z0.Asm
                 iter(ApiHosts.Select(HostArchive), a => a.Clear());
         }    
 
-        void OnSave(Option<CaptureTokenGroup> g, AsmCaptureEmissionObserver observer)
+        void OnSave(Option<AsmCaptureTokenGroup> g, AsmCaptureEmissionObserver observer)
         {
             if(g.IsSome())
             {
@@ -232,7 +232,7 @@ namespace Z0.Asm
             }
         }
 
-        void ISink<CaptureTokenGroup>.Accept(in CaptureTokenGroup src)
+        void ISink<AsmCaptureTokenGroup>.Accept(in AsmCaptureTokenGroup src)
         {
             Observer(src);
         }

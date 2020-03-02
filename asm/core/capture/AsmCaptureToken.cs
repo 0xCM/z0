@@ -6,6 +6,9 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.IO;
 
     using static Root;    
 
@@ -72,4 +75,11 @@ namespace Z0
         public int CompareTo(AsmCaptureToken rhs)
             => this.Uri.CompareTo(rhs.Uri);
     }
+
+    public static class AsmCaptureTokenOps
+    {
+        public static AsmCaptureTokenGroup ToGroup(this IEnumerable<AsmCaptureToken> tokens, OpUri groupUri)
+            => AsmCaptureTokenGroup.Define(groupUri, tokens.ToArray());
+
+    }    
 }

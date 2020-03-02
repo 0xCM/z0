@@ -102,8 +102,8 @@ namespace Z0
             => context.MemoryCaptureFlow(context.BaseAddressProvider(addresses));
 
         [MethodImpl(Inline)]
-        public static IExtractionReportParser ExtractReportParser(this IAsmContext context, byte[] buffer)
-            => ExtractionReportParser.Create(context, buffer);
+        public static IAsmOpExtractParser ExtractReportParser(this IAsmContext context, byte[] buffer)
+            => AsmOpExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostPath host)

@@ -8,15 +8,12 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static zfunc;
-
     public static class AsmProcessServices
     {
         public static IAsmProcessEmitter Emitter(IAsmContext context)
             => AsmProcessEmitter.Create(context);
 
         public static IAsmProcessCapture Capture(IAsmContext context)
-            => ProcessCapture.Create(context);
-
+            => AsmProcessCapture.Create(context);
     }
 }

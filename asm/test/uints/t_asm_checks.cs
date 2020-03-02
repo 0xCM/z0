@@ -25,7 +25,7 @@ namespace Z0
             var source = archive.ToInstructionSource();
             var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
             var triggers = AsmTriggerSet.Define(trigger);
-            var flow =  Context.Flow(source, triggers);
+            var flow =  Context.InstructionFlow(source, triggers);
             var pipe = AsmInstructionPipe.From(Pipe); 
             var results = flow.Flow(pipe).Force();
 
@@ -100,11 +100,11 @@ namespace Z0
             }            
         }
 
-        static void RunCapture(IAsmCaptureService capture, IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, MethodInfo[] src, IAsmCodeWriter codeDst, IAsmFunctionWriter asmDst)
+        static void RunCapture(IAsmOpExtractor capture, IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, MethodInfo[] src, IAsmCodeWriter codeDst, IAsmFunctionWriter asmDst)
         {
             foreach(var method in src)
             {
-                var data = capture.Capture(exchange, method.Identify(), method);
+                var data = capture.Extract(exchange, method.Identify(), method);
                 codeDst.Write(data);
                 var asm = decoder.DecodeFunction(data);
                 asmDst.Write(asm);
@@ -135,7 +135,7 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
             var decoder = Context.FunctionDecoder();
-            var captured = Context.CaptureOps().Capture(buffers.Exchange, dynop.Id, dynop);            
+            var captured = Context.OpExtractor().Extract(buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured,false);
 
             Trace(asm.Id);
@@ -159,7 +159,7 @@ namespace Z0
             var z1 = dynop.DynamicOp.Invoke(x,y);
             
             var decoder = Context.FunctionDecoder();
-            var captured = Context.CaptureOps().Capture(in exchange, dynop.Id, dynop);            
+            var captured = Context.OpExtractor().Extract(in exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured,false);
 
             Trace(asm.Id);
@@ -183,7 +183,7 @@ namespace Z0
             var z1 = dynop.DynamicOp.Invoke(x);
             
             var decoder = Context.FunctionDecoder();
-            var capture = Context.CaptureOps().Capture(in buffers.Exchange, dynop.Id, dynop);            
+            var capture = Context.OpExtractor().Extract(in buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(capture,false);
 
             Trace(asm.Id);

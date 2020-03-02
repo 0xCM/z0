@@ -6,49 +6,62 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Linq;
+
     using Z0.Asm;
+
+    using static Root;
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {
         public void capture_workflow()
         {                    
+            var extracts = list<AsmHostExtract>();            
             var paths = Context.EmissionPaths();                    
             var workflow = Context.HostCaptureFlow();
-            foreach(var result in workflow.Execute())
+            foreach(var extract in workflow.Execute())
             {
-                Claim.exists(paths.ParsedCapturePath(result.Host));
-                OnWorkflowComplete(result);                
-            }
-                    
+                Claim.exists(paths.ParsedCapturePath(extract.Host));
+                extracts.Add(extract);                            
+            }   
+
+            var callsfar = extracts.FarCalls().Distinct().ToArray();
+            var bases = extracts.BaseAddresses().ToArray();
+            var known = callsfar.Intersect(bases).ToArray();
+            var unknown = bases.Except(known).ToArray();
+            var fcs = FarCallSummary.Define(
+                targets: callsfar,
+                hosted: bases,
+                known: known,
+                unknown: unknown);  
+
+            Trace(fcs.Format());
+        
         }
 
+        // HashSet<MemoryAddress> Targets {get;}
+        //     = new HashSet<MemoryAddress>();
 
-        HashSet<MemoryAddress> Targets {get;}
-            = new HashSet<MemoryAddress>();
+        // void OnWorkflowComplete(IAsmHostCaptureFlow flow, in AsmHostExtract src)
+        // {
+        //     Trace($"Completed {flow.Name} for {src.Host}");
 
-        void OnWorkflowComplete(in AsmHostExtract src)
-        {
-            Trace($"Completed capture workflow for {src.Host}");
-
-            var callers = new List<CallerTarget>();
-            foreach(var f in src.Decoded)
-            {
-                foreach(var i in f.Instructions)   
-                {                    
-                    if(i.FlowControl == FlowControl.Call)
-                        callers.Add(CallerTarget.Define(f.Uri, i.MemoryAddress64));
-                }
-                        
-            }
+        //     var callers = new List<CallerTarget>();
+        //     foreach(var f in src.Decoded)
+        //     {
+        //         foreach(var i in f.Instructions)   
+        //         {                    
+        //             if(i.FlowControl == FlowControl.Call)
+        //                 callers.Add(CallerTarget.Define(f.Uri, i.MemoryAddress64));
+        //         }                        
+        //     }
             
-            var distinct = callers.Select(c => c.Dst).Distinct().ToList();
-            Targets.Include(distinct);
+        //     var distinct = callers.Select(c => c.Dst).Distinct().ToList();
+        //     Targets.Include(distinct);
 
-            Trace($"Collected {callers.Count} total far calls for {src.Host} that included unique {distinct.Count} targets out of {Targets.Count} distinct targets for the session");
-        }
+        //     Trace($"Collected {callers.Count} total far calls for {src.Host} that included unique {distinct.Count} targets out of {Targets.Count} distinct targets for the session");
+        // }
 
         public void call32_intr_pattern()
         {

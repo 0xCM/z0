@@ -18,6 +18,25 @@ namespace Z0
     public readonly struct AsmCode : IFormattable<AsmCode>
     {
         /// <summary>
+        /// Defines a code block for an identified operation 
+        /// </summary>
+        /// <param name="id">The operation identifier</param>
+        /// <param name="data">The encoded data</param>
+        [MethodImpl(Inline)]
+        public static AsmCode Define(OpIdentity id, EncodedData data)
+            => new AsmCode(id, data);
+
+        /// <summary>
+        /// Defines a code block for an identified operation
+        /// </summary>
+        /// <param name="id">The operation identifier</param>
+        /// <param name="base">The base address</param>
+        /// <param name="data">The encoded bytes</param>
+        [MethodImpl(Inline)]
+        public static AsmCode Define(OpIdentity id, MemoryAddress @base, byte[] data)
+            => new AsmCode(id, EncodedData.Define(@base,data));
+
+        /// <summary>
         /// The canonical zero
         /// </summary>
         public static AsmCode Empty => new AsmCode(OpIdentity.Empty, EncodedData.Empty);
@@ -58,14 +77,6 @@ namespace Z0
             get => Data.IsEmpty;
         }
 
-        /// <summary>
-        /// Defines a code block
-        /// </summary>
-        /// <param name="id">The operation identifier</param>
-        /// <param name="data">The encoded data</param>
-        [MethodImpl(Inline)]
-        public static AsmCode Define(OpIdentity id, EncodedData data)
-            => new AsmCode(id, data);
 
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes

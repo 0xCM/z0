@@ -62,7 +62,7 @@ namespace Z0
         
         public AsmEmissionKind EmissionKind {get;}
 
-        public static AsmEmissionReport Create(AssemblyId id, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
+        public static AsmEmissionReport Create(AssemblyId id, AsmCaptureTokenGroup[] emitted, AsmEmissionKind kind)
         {
             if(emitted.Length == 0)
                 return default;

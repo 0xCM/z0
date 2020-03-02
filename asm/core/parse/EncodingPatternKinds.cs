@@ -59,9 +59,7 @@ namespace Z0
         /// Identifies the partial pattern e8 ?? ?? ?? ?? cc
         /// </summary>
         CALL32_INTR = 2*16
-
     }
-
     
     public static class EncodingPatternTokens
     {

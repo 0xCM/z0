@@ -15,7 +15,7 @@ namespace Z0
         /// Decodes a function from a member capture
         /// </summary>
         /// <param name="src">The cource capture</param>
-        AsmFunction DecodeFunction(AsmMemberCapture member, bool emitcil = true);   
+        AsmFunction DecodeFunction(AsmOpExtract member, bool emitcil = true);   
 
         /// <summary>
         /// Decodes a function from the parsed encoding package

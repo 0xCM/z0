@@ -34,25 +34,25 @@ namespace Z0
         IEnumerable<AssemblyId> ActiveAssemblies
             => Context.ActiveAssemblies();
 
-        Option<FilePath> ReportEmissions(AssemblyId src, CaptureTokenGroup[] emitted, AsmEmissionKind kind)
+        Option<FilePath> ReportEmissions(AssemblyId src, AsmCaptureTokenGroup[] emitted, AsmEmissionKind kind)
             => AsmReports.Emissions(src, emitted, kind).Save(AsmEmissionPaths.Current.EmissionPath(src, kind));
 
-        CaptureTokenGroup[] EmitPrimary(in AsmCaptureExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
+        AsmCaptureTokenGroup[] EmitPrimary(in AsmCaptureExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
         {
-            var emissions = new List<CaptureTokenGroup>(); 
+            var emissions = new List<AsmCaptureTokenGroup>(); 
 
-            void OnEmission(in CaptureTokenGroup emission) => emissions.Add(emission);            
+            void OnEmission(in AsmCaptureTokenGroup emission) => emissions.Add(emission);            
             
             emitter.EmitPrimary(exchange,OnEmission);
 
             return emissions.ToArray();
         }        
 
-        CaptureTokenGroup[] EmitImm(in AsmCaptureExchange exchange, ICatalogProvider src, IAsmCatalogEmitter emitter)
+        AsmCaptureTokenGroup[] EmitImm(in AsmCaptureExchange exchange, ICatalogProvider src, IAsmCatalogEmitter emitter)
         {
-            var emissions = new List<CaptureTokenGroup>();   
+            var emissions = new List<AsmCaptureTokenGroup>();   
             
-            void OnEmission(in CaptureTokenGroup emission) => emissions.Add(emission);
+            void OnEmission(in AsmCaptureTokenGroup emission) => emissions.Add(emission);
 
             emitter.EmitImm(exchange,OnEmission);
 
@@ -73,7 +73,7 @@ namespace Z0
 
         void Archive(in AsmCaptureExchange exchange, ICatalogProvider src)
         {
-            void OnEmission(in CaptureTokenGroup data)
+            void OnEmission(in AsmCaptureTokenGroup data)
             {
 
             }

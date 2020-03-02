@@ -31,7 +31,7 @@ namespace Z0
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        public void Write(in AsmMemberCapture src, int? idpad = null)
+        public void Write(in AsmOpExtract src, int? idpad = null)
             => StreamOut.WriteLine(src.Code.Format(idpad ?? 0));
         public void Dispose()
         {

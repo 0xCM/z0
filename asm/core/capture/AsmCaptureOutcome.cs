@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The final state in the capture process
         /// </summary>
-        public readonly CaptureState State;
+        public readonly AsmCaptureState State;
 
         /// <summary>
         /// The origin of the captured data
@@ -29,19 +29,19 @@ namespace Z0
         /// </summary>
         public readonly CaptureTermCode TermCode;
 
-        public static AsmCaptureOutcome Empty => Define(CaptureState.Empty, 0,0, CaptureTermCode.None);
+        public static AsmCaptureOutcome Empty => Define(AsmCaptureState.Empty, 0,0, CaptureTermCode.None);
 
         [MethodImpl(Inline)]
-        public static AsmCaptureOutcome Define(in CaptureState state, ulong start, ulong end, CaptureTermCode cc)
+        public static AsmCaptureOutcome Define(in AsmCaptureState state, ulong start, ulong end, CaptureTermCode cc)
             => new AsmCaptureOutcome(state, (start, end), cc);
 
         [MethodImpl(Inline)]
-        public static AsmCaptureOutcome Define(in CaptureState state, MemoryRange source, CaptureTermCode cc)
+        public static AsmCaptureOutcome Define(in AsmCaptureState state, MemoryRange source, CaptureTermCode cc)
             => new AsmCaptureOutcome(state, source, cc);
 
 
         [MethodImpl(Inline)]
-        AsmCaptureOutcome(in CaptureState state, MemoryRange range, CaptureTermCode cc)
+        AsmCaptureOutcome(in AsmCaptureState state, MemoryRange range, CaptureTermCode cc)
         {   
             this.State = state;
             this.Range = range;

@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public static class AsmCodeExtensions
     {
@@ -51,5 +51,10 @@ namespace Z0
             => from code in src
                 where code.ParameterCount() == count
                 select code;
+
+
+        public static AsmCodeIndex ToCodeIndex(this IEnumerable<AsmCode> code)
+            => AsmCodeIndex.Create(code);
+
     }
 }

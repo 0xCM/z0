@@ -13,7 +13,7 @@ namespace Z0
     using Z0.Asm;
 
     using static AsmServiceMessages;
-    using static zfunc;
+    using static Root;
 
     readonly struct AsmHostCaptureFlow : IAsmHostCaptureFlow
     {
@@ -58,7 +58,7 @@ namespace Z0
             iter(Selected, CreateLocationReport);
         }
 
-        AsmFunction Decode(ParsedEncodingRecord src, IAsmFunctionDecoder decoder,  IAsmFunctionWriter dst)
+        AsmFunction Decode(AsmParseRecord src, IAsmFunctionDecoder decoder,  IAsmFunctionWriter dst)
         {
             var f = decoder.DecodeFunction(src);
             dst.Write(f);
@@ -81,7 +81,7 @@ namespace Z0
             }            
         }
 
-        ExtractionReport CaptureHostOps(ApiHost host)
+        AsmOpExtractReport CaptureHostOps(ApiHost host)
         {
             var capture = Context.HostExtractor();
             var captured = capture.ExtractOps(host);
@@ -93,7 +93,7 @@ namespace Z0
             return captured;
         }
 
-        ParsedEncodingReport Parse(ApiHost host, ExtractionReport captured)
+        AsmParseReport Parse(ApiHost host, AsmOpExtractReport captured)
         {
             var parser = Context.ExtractReportParser(new byte[Context.DefaultBufferLength]);
             var parsed = parser.Parse(host,captured);
@@ -106,7 +106,7 @@ namespace Z0
             return parsed;
         }
 
-        AsmFunctionList Decode(ApiHost host, ExtractionReport captured, ParsedEncodingReport parsed)
+        AsmFunctionList Decode(ApiHost host, AsmOpExtractReport captured, AsmParseReport parsed)
         {
             var path = Paths.DecodedCapturePath(host.Path);
             var decoder = Context.FunctionDecoder();

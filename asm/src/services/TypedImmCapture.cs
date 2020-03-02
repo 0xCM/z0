@@ -189,7 +189,7 @@ namespace Z0
             public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              Context.CaptureOps().Capture(
+                              Context.OpExtractor().Extract(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
@@ -218,7 +218,7 @@ namespace Z0
             public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              Context.CaptureOps().Capture(
+                              Context.OpExtractor().Extract(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
@@ -246,7 +246,7 @@ namespace Z0
             public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                                Context.CaptureOps().Capture(
+                                Context.OpExtractor().Extract(
                                     exchange,
                                     Resolver.Id.WithImm8(imm8),
                                     Resolver.@delegate(imm8)),
@@ -275,7 +275,7 @@ namespace Z0
             public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              Context.CaptureOps().Capture(
+                              Context.OpExtractor().Extract(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),

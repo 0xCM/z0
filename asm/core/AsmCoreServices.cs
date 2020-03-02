@@ -13,16 +13,16 @@ namespace Z0
 
     public static class AsmCoreServices
     {
-        public static Option<ParsedEncodingReport> LoadParsedEncodings(this IAsmContext context, ApiHostPath host, char? delimiter = null)
+        public static Option<AsmParseReport> LoadParsedEncodings(this IAsmContext context, ApiHostPath host, char? delimiter = null)
         {
             var path = context.EmissionPaths().ParsedCapturePath(host);
             var sep = delimiter ?? text.pipe();
-            var model = ParsedEncodingReport.Empty;
+            var model = AsmParseReport.Empty;
             
             try
             {            
-                var records = new List<ParsedEncodingRecord>();
-                var headers = Reports.headers<ParsedEncodingRecord>();
+                var records = new List<AsmParseRecord>();
+                var headers = Reports.headers<AsmParseRecord>();
                 var count = 0;
                 
                 using var reader = path.Reader();
@@ -45,21 +45,19 @@ namespace Z0
             catch(Exception e)
             {
                 term.error(e);
-                return none<ParsedEncodingReport>();
+                return none<AsmParseReport>();
             }
         }
-
-        public static IAsmCodeIndex ToCodeIndex(this IEnumerable<AsmCode> code)
-            => AsmCodeIndex.Create(code);
 
         /// <summary>
         /// Instantiates a contextual asm capture service service
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmCaptureService Capture(this IAsmContext context, IAsmCaptureOps ops)
-            => AsmCaptureService.Create(context, ops);
-        
+        public static IAsmOpExtractor Capture(this IAsmContext context, IAsmOpExtractor ops)
+            => ops;
+
+            //=> AsmCaptureService.Create(context, ops);
 
         [MethodImpl(Inline)]
         public static IAsmFunctionBuilder FunctionBuilder(this IAsmContext context)
@@ -86,7 +84,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IAsmHostExtractor HostExtractor(this IAsmContext context, int? bufferlen = null)
-            => AsmHostCapture.Create(context, bufferlen);
+            => AsmHostExtractor.Create(context, bufferlen);
 
         [MethodImpl(Inline)]
         public static IAsmMemoryExtractor MemoryExtractor(this IAsmContext context, byte[] buffer)
@@ -105,8 +103,8 @@ namespace Z0
             => AsmBaseAddressProvider.Create(context,addresses);
 
         [MethodImpl(Inline)]
-        public static IAsmCaptureOps CaptureOps(this IAsmContext context)
-            => AsmCaptureOps.Create(context);
+        public static IAsmOpExtractor OpExtractor(this IAsmContext context)
+            => AsmOpExtractor.Create(context);
 
         /// <summary>
         /// Instantiates a contextual code writer services that targets a specified file path
@@ -166,6 +164,15 @@ namespace Z0
             => AsmCodeArchive.Create(context, assembly, host);
 
         /// <summary>
+        /// Creates a flow over an instruction source
+        /// </summary>
+        /// <param name="context">The context within which the flow will be created</param>
+        /// <param name="source">The instruction source</param>
+        /// <param name="triggers">The triggers that fire when instructions satisfy criterea of interest</param>
+        public static IAsmInstructionFlow InstructionFlow(this IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
+            => AsmInstructionFlow.Create(context, source, triggers);
+
+        /// <summary>
         /// Instantiates a contextual raw buffer writer services that targets a specified file path
         /// </summary>
         /// <param name="context">The source context</param>
@@ -179,7 +186,7 @@ namespace Z0
         {
             const int DefaultBufferLen = 1024*8;
 
-            var control = AsmCaptureControl.Create(context, observer);
+            var control = AsmExtractControl.Create(context, observer);
             var cBuffer = new byte[size ?? DefaultBufferLen];
             var sBuffer = new byte[size ?? DefaultBufferLen];
             return AsmCaptureExchange.Define(control, cBuffer, sBuffer);

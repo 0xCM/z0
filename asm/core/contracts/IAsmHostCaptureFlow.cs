@@ -9,7 +9,7 @@ namespace Z0
 
     public interface IAsmHostCaptureFlow : IAppService<IAsmContext>, IExecutable<AsmHostExtract>
     {
-        
+        string Name => GetType().Name;
     }
 
 }

@@ -17,7 +17,7 @@ namespace Z0
         
         public ApiHostPath Host {get;}
         
-        public IEnumerable<Archived<AsmCode>> ArchivedCode {get;}
+        public IEnumerable<ArchivedContent<AsmCode>> ArchivedCode {get;}
 
         [MethodImpl(Inline)]
         public static IAsmHostArchive Create(IAsmContext context, ApiHostPath host)
@@ -28,7 +28,7 @@ namespace Z0
         {
             this.Context = context;
             this.Host = host;
-            this.ArchivedCode = new Archived<AsmCode>[]{};
+            this.ArchivedCode = new ArchivedContent<AsmCode>[]{};
         }       
     }
 }

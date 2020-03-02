@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Defines serivce contract for catalog-granularity asm emission
     /// </summary>
-    public interface IAsmCatalogEmitter : IAsmService, ISink<CaptureTokenGroup>
+    public interface IAsmCatalogEmitter : IAsmService, ISink<AsmCaptureTokenGroup>
     {
         /// <summary>
         /// Emits non-immediate captures

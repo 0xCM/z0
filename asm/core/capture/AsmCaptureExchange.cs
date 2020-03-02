@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The juncture-coincident operation set 
         /// </summary>
-        public readonly IAsmCaptureOps Operations;
+        public readonly IAsmOpExtractor Operations;
 
         /// <summary>
         /// The junction to which events will be relayed
@@ -32,10 +32,10 @@ namespace Z0
         readonly IAsmCaptureJunction Junction;
 
         [MethodImpl(Inline)]
-        public static AsmCaptureExchange Define(IAsmCaptureControl control, Span<byte> capture, Span<byte> state)
+        public static AsmCaptureExchange Define(IAsmExtractControl control, Span<byte> capture, Span<byte> state)
             => new AsmCaptureExchange(control,capture,state);
 
-        AsmCaptureExchange(IAsmCaptureControl control, Span<byte> capture, Span<byte> state)            
+        AsmCaptureExchange(IAsmExtractControl control, Span<byte> capture, Span<byte> state)            
         {
             require(capture.Length == state.Length);
             this.TargetBuffer = capture;
@@ -76,14 +76,14 @@ namespace Z0
             => TargetBuffer.Slice(start, length);
 
         [MethodImpl(Inline)]
-        public ref readonly AsmMemberCapture CaptureComplete(in CaptureState state, in AsmMemberCapture captured)
+        public ref readonly AsmOpExtract CaptureComplete(in AsmCaptureState state, in AsmOpExtract captured)
         {
             Junction.OnCaptureComplete(this, state, captured);
             return ref captured;
         }
 
         [MethodImpl(Inline)]
-        public ref readonly CaptureState CaptureStep(in CaptureState state)
+        public ref readonly AsmCaptureState CaptureStep(in AsmCaptureState state)
         {
             Junction.OnCaptureStep(this, state);
             return ref state;

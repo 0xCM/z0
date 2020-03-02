@@ -9,6 +9,6 @@ namespace Z0
 
     public interface IAsmHostArchive : IAsmService
     {
-        IEnumerable<Archived<AsmCode>> ArchivedCode {get;}
+        IEnumerable<ArchivedContent<AsmCode>> ArchivedCode {get;}
     }
 }

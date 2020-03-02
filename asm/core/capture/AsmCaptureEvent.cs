@@ -16,15 +16,15 @@ namespace Z0
     public readonly ref struct AsmCaptureEvent
     {
         [MethodImpl(Inline)]
-        public static AsmCaptureEvent Define(CaptureState state, Span<byte> buffer)
+        public static AsmCaptureEvent Define(AsmCaptureState state, Span<byte> buffer)
             => new AsmCaptureEvent(state,buffer);        
 
         [MethodImpl(Inline)]
-        public static AsmCaptureEvent Define(CaptureState state, Span<byte> buffer, in AsmMemberCapture captured)
+        public static AsmCaptureEvent Define(AsmCaptureState state, Span<byte> buffer, in AsmOpExtract captured)
             => new AsmCaptureEvent(state,buffer, captured);
 
         [MethodImpl(Inline)]
-        AsmCaptureEvent(CaptureState state, Span<byte> buffer, in AsmMemberCapture captured)
+        AsmCaptureEvent(AsmCaptureState state, Span<byte> buffer, in AsmOpExtract captured)
         {
             this.EventKind = CaptureEventKind.Complete;
             this.CaptureState = state;
@@ -33,12 +33,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        AsmCaptureEvent(CaptureState state, Span<byte> buffer)
+        AsmCaptureEvent(AsmCaptureState state, Span<byte> buffer)
         {
             this.CaptureState = state;
             this.StateBuffer = buffer;
             this.EventKind = CaptureEventKind.Step;
-            this.Captured = none<AsmMemberCapture>();
+            this.Captured = none<AsmOpExtract>();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The capture state when the even occurred
         /// </summary>
-        public readonly CaptureState CaptureState;
+        public readonly AsmCaptureState CaptureState;
 
         /// <summary>
         /// The state buffer
@@ -59,7 +59,7 @@ namespace Z0
         /// <summary>
         /// If a completion event, the captured member
         /// </summary>
-        public readonly Option<AsmMemberCapture> Captured;
+        public readonly Option<AsmOpExtract> Captured;
 
         /// <summary>
         /// Queries/Manipulates an index-identified state buffer byte

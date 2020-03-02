@@ -63,7 +63,7 @@ namespace Z0
         }
     }
 
-    public readonly struct DataResourceReport : IAsmReport<DataResourceRecord>
+    public readonly struct DataResourceReport : IReport<DataResourceRecord>
     {        
         public readonly AssemblyId Id;
 
