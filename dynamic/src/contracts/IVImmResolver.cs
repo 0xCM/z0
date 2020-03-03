@@ -10,7 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     [SuppressUnmanagedCodeSecurity]
     public interface IVImm8Resolver<V> : IImm8Resolver<V>

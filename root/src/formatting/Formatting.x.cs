@@ -10,6 +10,7 @@ namespace Z0
 
     using static Root;
 
+
     /// <summary>
     /// Exposes formatting capabilites via exension methods
     /// </summary>
@@ -44,6 +45,7 @@ namespace Z0
         public static string Format<T,C>(this T src, C config)
             where T : IConfiguredCustomFormattable<C>
                 => src.Format(config);
+ 
     }
 
     public static class NumericFormattableX

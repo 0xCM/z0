@@ -158,5 +158,47 @@ namespace Z0
             else 
                 return string.Empty;
         }
+
+        /// <summary>
+        /// Recursively close an IEnumerable generic type
+        /// </summary>
+        /// <param name="stype">The sequence type</param>
+        /// <remarks>
+        /// Adapted from https://blogs.msdn.microsoft.com/mattwar/2007/07/30/linq-building-an-iqueryable-provider-part-i/
+        /// </remarks>
+        public static Option<Type> CloseEnumerableType(this Type stype)
+        {
+            if (stype == typeof(string))
+                return null;
+
+            if (stype.IsArray)
+                return typeof(IEnumerable<>).MakeGenericType(stype.GetElementType());
+
+            if (stype.IsGenericType)
+            {
+                foreach (var arg in stype.GetGenericArguments())
+                {
+                    var enumerable = typeof(IEnumerable<>).MakeGenericType(arg);
+                    if (enumerable.IsAssignableFrom(stype))
+                        return enumerable;
+                }
+            }
+
+            var interfaces = stype.Interfaces().ToList();
+            if (interfaces.Count > 0)
+            {
+                foreach (var i in interfaces)
+                {
+                    var ienum = CloseEnumerableType(i);
+                    if (ienum.Exists)
+                        return ienum;
+                }
+            }
+
+            if (stype.BaseType != null && stype.BaseType != typeof(object))
+                return CloseEnumerableType(stype.BaseType);
+            return null;
+        }
+
     }
 }

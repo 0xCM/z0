@@ -14,6 +14,13 @@ namespace Z0
     
     partial class RootReflections
     {
+        /// <summary>
+        /// Attempts to retrieve the value of an instance or static field
+        /// </summary>
+        /// <param name="field">The field</param>
+        /// <param name="instance">The object instance, if applicable</param>
+        public static Option<object> FieldValue(this FieldInfo field, object instance = null)
+            => Root.Try(() => field.GetValue(instance));
     }
 
 }

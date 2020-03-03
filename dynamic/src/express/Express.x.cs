@@ -11,7 +11,8 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Cast;
 
     using XPR = System.Linq.Expressions.Expression;
 
@@ -65,7 +66,7 @@ namespace Z0
         /// <typeparam name="P">The property type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
         public static PropertyInfo GetProperty<P>(this Expression<Func<P>> selector)
-            => cast<PropertyInfo>(cast<MemberExpression>(selector.SelectionSubject()).Member);
+            => force<PropertyInfo>(force<MemberExpression>(selector.SelectionSubject()).Member);
 
         /// <summary>
         /// Extracts the property info for the property referenced by an expression delegate
@@ -74,7 +75,7 @@ namespace Z0
         /// <typeparam name="P">The property type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
         public static PropertyInfo GetProperty<T, P>(this Expression<Func<T, P>> selector)
-            => cast<PropertyInfo>(cast<MemberExpression>(selector.SelectionSubject()).Member);
+            => force<PropertyInfo>(force<MemberExpression>(selector.SelectionSubject()).Member);
 
         /// <summary>
         /// Determines the name of the property as identified by an expression delegate
@@ -91,7 +92,7 @@ namespace Z0
         /// <typeparam name="F">The field type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
         public static FieldInfo GetField<F>(this Expression<Func<F>> selector)
-            => cast<FieldInfo>(cast<MemberExpression>(selector.SelectionSubject()).Member);
+            => force<FieldInfo>(force<MemberExpression>(selector.SelectionSubject()).Member);
 
         /// <summary>
         /// Extracts the field info for the field referenced by an expression delegate
@@ -100,7 +101,7 @@ namespace Z0
         /// <typeparam name="P">The property type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
         public static FieldInfo GetField<T, P>(this Expression<Func<T, P>> selector)
-            => cast<FieldInfo>(cast<MemberExpression>(selector.SelectionSubject()).Member);
+            => force<FieldInfo>(force<MemberExpression>(selector.SelectionSubject()).Member);
 
         /// <summary>
         /// Extracts the member info for the member referenced by an expression delegate
@@ -109,7 +110,7 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
         public static MemberInfo GetMember<T, M>(this Expression<Func<T, M>> selector)
-            => cast<MemberInfo>(cast<MemberExpression>(selector.Body).Member);
+            => force<MemberInfo>(force<MemberExpression>(selector.Body).Member);
 
         /// <summary>
         /// Extracts the <see cref="ValueMember"/> for the member referenced by a an expression delegate
@@ -151,9 +152,9 @@ namespace Z0
         public static MethodInfo GetMethod<T>(this Expression<Func<T>> selector)
         {
             if (selector.Body is MethodCallExpression)
-                return cast<MethodCallExpression>(selector.Body).Method;
+                return force<MethodCallExpression>(selector.Body).Method;
             else if (selector.Body.IsConversion())
-                return (cast<UnaryExpression>(selector.Body).Operand as MethodCallExpression).Method;
+                return (force<UnaryExpression>(selector.Body).Operand as MethodCallExpression).Method;
             else
                 throw new NotSupportedException();
         }
@@ -165,7 +166,7 @@ namespace Z0
         /// <typeparam name="T2">The function return type</typeparam>
         /// <param name="selector">The call expression</param>
         public static MethodInfo GetMethod<T1, T2>(this Expression<Func<T1, T2>> selector)
-            => cast<MethodCallExpression>(selector.Body).Method;
+            => force<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
         /// Extracts the method info for the function referenced by an expression delegate
@@ -175,7 +176,7 @@ namespace Z0
         /// <typeparam name="R">The function return type</typeparam>
         /// <param name="selector">The call expression</param>
         public static MethodInfo GetMethod<T1, T2, R>(this Expression<Func<T1, T2, R>> selector)
-            => cast<MethodCallExpression>(selector.Body).Method;
+            => force<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
         /// Extracts the method info for the function referenced by an expression delegate
@@ -186,7 +187,7 @@ namespace Z0
         /// <typeparam name="R">The function return type</typeparam>
         /// <param name="selector">Specifies the call expression</param>
         public static MethodInfo GetMethod<T1, T2, T3, R>(this Expression<Func<T1, T2, T3, R>> selector)
-            => cast<MethodCallExpression>(selector.Body).Method;
+            => force<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
         /// Extracts the method for the action referenced by an an expression delegate
@@ -194,7 +195,7 @@ namespace Z0
         /// <typeparam name="T">The action argument</typeparam>
         /// <param name="selector">Specifies the call expression</param>
         public static MethodInfo GetMethod<T>(this Expression<Action<T>> selector)
-            => cast<MethodCallExpression>(selector.Body).Method;
+            => force<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
         /// Extracts the method info for the action referenced by an expression delegate
@@ -203,7 +204,7 @@ namespace Z0
         /// <typeparam name="T2">The second action argument</typeparam>
         /// <param name="selector">Specifies the call expression</param>
         public static MethodInfo GetMethod<T1, T2>(this Expression<Action<T1, T2>> selector)
-            => cast<MethodCallExpression>(selector.Body).Method;
+            => force<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
         /// Extracts the method info for the action referenced by an expression delegate
@@ -213,7 +214,7 @@ namespace Z0
         /// <typeparam name="T3">The third action argument</typeparam>
         /// <param name="selector">Specifies the call expression</param>
         public static MethodInfo GetMethod<T1, T2, T3>(this Expression<Action<T1, T2, T3>> selector)
-            => cast<MethodCallExpression>(selector.Body).Method;
+            => force<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
         /// Extracts the method info for the action referenced by an expression delegate
@@ -225,14 +226,14 @@ namespace Z0
         /// <param name="selector">The call expression</param>
         /// <returns></returns>
         public static MethodInfo GetMethod<T1, T2, T3, T4>(this Expression<Action<T1, T2, T3, T4>> selector)
-            => cast<MethodCallExpression>(selector.Body).Method;
+            => force<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
         /// Extracts property info from a member expression, if possbile, and otherwise returns null
         /// </summary>
         /// <param name="x">The expression to examine</param>
         public static PropertyInfo GetAccessedProperty(this Expression x)
-            => cast<PropertyInfo>(cast<MemberExpression>(x)?.Member);
+            => force<PropertyInfo>(force<MemberExpression>(x)?.Member);
 
         /// <summary>
         /// Extracts member info from an expression, if possbile; otherwise returns none
@@ -314,7 +315,7 @@ namespace Z0
         /// <param name="x">The expression to test</param>
         /// <returns></returns>
         public static Option<MethodInfo> GetCalledMethod(this Expression x)
-            => cast<MethodCallExpression>(x)?.Method;
+            => force<MethodCallExpression>(x)?.Method;
 
         /// <summary>
         /// Tests whether an expression is an application of the LINQ select operator
@@ -507,6 +508,6 @@ namespace Z0
         /// </summary>
         /// <param name="x">The expression to examine</param>
         static object GetConstant(this Expression x)
-            => cast<ConstantExpression>(x)?.Value;
+            => force<ConstantExpression>(x)?.Value;
     }
 }

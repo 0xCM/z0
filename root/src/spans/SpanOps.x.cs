@@ -246,6 +246,7 @@ namespace Z0
             where T : unmanaged        
                 => MemoryMarshal.Cast<T,float>(src);
 
+
         /// <summary>
         /// Reimagines a span of generic values as a span of 64-bit floats
         /// </summary>
@@ -348,6 +349,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> MapRange<S,T>(this Span<S> src, int offset, int length, Func<S, T> f)
             => src.ReadOnly().MapRange(offset,length, f);                
+
+        /// <summary>
+        /// Renders a non-allocating mutable view over a source span segment that is presented as an individual target value
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The index of the first source element</param>
+        /// <param name="length">The number of source elements required to constitute a target type</param>
+        /// <typeparam name="S">The source element type</typeparam>
+        /// <typeparam name="T">The target element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T Singleton<S,T>(this Span<S> src, int offset = 0, int? length = null)
+            where S : unmanaged
+            where T : unmanaged
+                => ref MemoryMarshal.AsRef<T>(src.AsBytes(offset,length));
 
         static void ThrowEmptySpanError()
             => throw new Exception($"The span is empty");

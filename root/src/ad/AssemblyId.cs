@@ -101,9 +101,9 @@ namespace Z0
 
         MklApiTest = MklApi | Test,
 
-        FreeId = T23,
+        BitString = T23,
 
-        FreeTestId = FreeId | Test,
+        BitStringTest = BitString | Test,
 
         StatCore = T24,
 

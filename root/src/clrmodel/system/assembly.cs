@@ -32,6 +32,43 @@ namespace Z0
                 => (A)System.Attribute.GetCustomAttribute(a, typeof(A));
 
         /// <summary>
+        /// Gets the identified assembly attribute if present, otherwise None
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        /// <typeparam name="A">The type of attribute for which to search</typeparam>
+        public static Option<A> TryGetTag<A>(this Assembly a) 
+            where A : Attribute
+                =>  a.Tag<A>();
+
+        /// <summary>
+        /// Gets the value of <see cref="AssemblyProductAttribute"/> if it exists
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        public static Option<string> Product(this Assembly a)
+            => from x in a.TryGetTag<AssemblyProductAttribute>() select x.Product;
+
+        /// <summary>
+        /// Gets the value of <see cref="AssemblyTitleAttribute"/> if it exists
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        public static Option<string> Title(this Assembly a)
+            => from x in a.TryGetTag<AssemblyTitleAttribute>() select x.Title;
+
+        /// <summary>
+        /// Gets the value of <see cref="AssemblyCompanyAttribute"/> if it exists
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        public static Option<string> Company(this Assembly a)
+            => from x in a.TryGetTag<AssemblyCompanyAttribute>() select x.Company;
+
+        /// <summary>
+        /// Gets the value of <see cref="AssemblyDefaultAliasAttribute"/> if it exists
+        /// </summary>
+        /// <param name="a">The source assembly</param>
+        public static Option<string> DefaultAlias(this Assembly a)
+            => from x in a.TryGetTag<AssemblyDefaultAliasAttribute>() select x.DefaultAlias;        
+ 
+        /// <summary>
         /// Gets the type attributions for the specified assembly
         /// </summary>
         /// <param name="a">The source assembly</param>

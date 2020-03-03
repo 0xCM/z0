@@ -94,7 +94,7 @@ namespace Z0
             var typeDef = typeof(Func<,>).GetGenericTypeDefinition();
             var type = typeDef.MakeGenericType(array(paramInfo.ParameterType, method.ReturnType));
             var args = paramX(paramInfo.ParameterType, paramInfo.Name);
-            var call = Expression.Call(zfunc.ifNotNull(instance, x => constant(x)), method, args);
+            var call = Expression.Call(ifNotNull(instance, x => constant(x)), method, args);
             var l = Expression.Lambda(type, call, args);
             var del = l.Compile();
             return x => del.DynamicInvoke(x);
@@ -372,7 +372,7 @@ namespace Z0
         /// <param name="m">The method to be invoked</param>
         /// <param name="args">The arguments supplied to the method when invoked</param>
         public static MethodCallExpression call(object Host, MethodInfo m, params PX[] args)
-            => XPR.Call(zfunc.ifNotNull(Host, h => constant(h)), m, args);
+            => XPR.Call(ifNotNull(Host, h => constant(h)), m, args);
 
         /// <summary>
         /// Creates an expression that invokes a static method
@@ -565,6 +565,18 @@ namespace Z0
         public static FuncXpr<X, X, X,X> fmake<X>(Func<X, X, X,X> f)
             => f;
  
+        /// <summary>
+        /// Evaluates a function over a value if the value is not null; otherwise,
+        /// returns the default result value
+        /// </summary>
+        /// <typeparam name="X">The operand type</typeparam>
+        /// <typeparam name="Y">The return type</typeparam>
+        /// <param name="x">The operand</param>
+        /// <param name="f1">The function to potentially evaluate</param>
+        [MethodImpl(Inline)]
+        static Y ifNotNull<X, Y>(X x, Func<X, Y> f1, Y @default = default)
+            => x != null ? f1(x) : @default;
+
         static ConcurrentDictionary<MethodInfo, Delegate> _cache { get; }
             = new ConcurrentDictionary<MethodInfo, Delegate>();
     }

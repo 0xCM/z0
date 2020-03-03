@@ -46,12 +46,24 @@ namespace Z0
             return new NatSpan<N,T>(dst);
         }
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static void CopyTo<N,T>(this in NatSpan<N,T> src,Span<T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Data.CopyTo(dst);
  
+        /// <summary>
+        /// Formats a span of natural length and integral type as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
+        /// <param name="sep">The character to use when separating digits</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static string FormatHex<N,T>(this NatSpan<N,T> src, bool bracket = false, char? sep = null, bool specifier = false)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Data.FormatHex(bracket, sep, specifier);
     }
-
 }

@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="../corefunc/src/z0.corefunc.csproj" />
+    <ProjectReference Include="../bitstring/src/z0.bitstring.csproj" />    
+
   </ItemGroup>
 
 </Project>

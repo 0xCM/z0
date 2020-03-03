@@ -11,7 +11,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Z0.Root;
-    using Z0;
 
     /// <summary>
     /// Encapsulates a block of encoded assembly
