@@ -26,7 +26,6 @@ partial class zfunc
     public static ReadOnlySpan<T> view<T>(in T src, int count)
         => MemoryMarshal.CreateReadOnlySpan(ref Unsafe.AsRef(in src), count);
 
-
     /// <summary>
     /// Constructs a span from a parameter array
     /// </summary>

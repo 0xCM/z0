@@ -125,25 +125,25 @@ namespace Z0
             Claim.eq(x1Spec,x1Dst);
 
             var x2 = vpattern.vincrements<byte>(n);
-            var x2Spec = vdata.rotl(n128, n8);
+            var x2Spec = VectorData.rotl(n128, n8);
             var x2Dst = dinx.vshuf16x8(x2,x2Spec);
             Claim.eq(x2Spec,x2Dst);
 
             var x3 = vpattern.vincrements<byte>(n);
-            var x3Spec = vdata.rotr(n128, n8);
+            var x3Spec = VectorData.rotr(n128, n8);
             var x3Dst = dinx.vshuf16x8(x3,x3Spec);
             Claim.eq(x3Spec,x3Dst);
 
             var x4 = vpattern.vincrements<byte>(n);
-            var x4Spec1 = vdata.rotl(n128, n8);
-            var x4Spec2 = vdata.rotr(n128, n8);
+            var x4Spec1 = VectorData.rotl(n128, n8);
+            var x4Spec2 = VectorData.rotr(n128, n8);
             var x4Dst = dinx.vshuf16x8(dinx.vshuf16x8(x4,x4Spec1), x4Spec2);
             Claim.eq(x4,x4Dst);
 
             var x5 = Random.CpuVector<byte>(n);
-            var x5Spec = CpuVector.vbroadcast(n,(byte)0b10000000);
+            var x5Spec = Vectors.vbroadcast(n,(byte)0b10000000);
             var x5Dst = dinx.vshuf16x8(x5, x5Spec);
-            Claim.eq(x5Dst,CpuVector.vbroadcast(n,(byte)0));                        
+            Claim.eq(x5Dst,Vectors.vbroadcast(n,(byte)0));                        
         }
 
 

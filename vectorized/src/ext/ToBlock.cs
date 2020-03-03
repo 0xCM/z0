@@ -10,6 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
+    using static Vectors;
+    using static Nats;
 
     partial class VectorExtensions
     {
@@ -19,9 +21,13 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(NotInline)]
-        internal static Block128<T> ToBlock<T>(this Vector128<T> src)
+        public static Block128<T> ToBlock<T>(this Vector128<T> src)
             where T : unmanaged            
-                => Vectors.block(src);
+        {
+            var dst = Blocks.single<T>(n128);
+            vstore(src, ref dst.Head);
+            return dst;
+        }                       
 
         /// <summary>
         /// Allocates and deposits vector content to a data block
@@ -29,10 +35,26 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(NotInline)]
-        internal static Block256<T> ToBlock<T>(this Vector256<T> src)
+        public static Block256<T> ToBlock<T>(this Vector256<T> src)
             where T : unmanaged            
-                => Vectors.block(src);
+        {
+            var dst = Blocks.single<T>(n256);
+            vstore(src, ref dst.Head);
+            return dst;
+        }            
+
+        /// <summary>
+        /// Allocates and deposits vector content to a data block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(NotInline)]
+        public static Block512<T> ToBlock<T>(this Vector512<T> src)
+            where T : unmanaged            
+        {
+            var dst = Blocks.single<T>(n512);
+            vstore(src, ref dst.Head);
+            return dst;
+        }            
     }
 }
-
-

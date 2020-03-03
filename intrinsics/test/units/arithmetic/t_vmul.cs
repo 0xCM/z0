@@ -160,7 +160,7 @@ namespace Z0
             
             var zb = Blocks.single(n512,t);
             var eb = Blocks.single(n512,t);            
-            var count = CpuVector.vcount(w,s);
+            var count = Vectors.vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)
             {

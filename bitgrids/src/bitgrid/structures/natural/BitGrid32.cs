@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = W := 32

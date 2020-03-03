@@ -91,7 +91,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => CpuVector.vbroadcast(w, BitMask.lsb(n64,n2,n1,t));            
+                => Vectors.vbroadcast(w, BitMask.lsb(n64,n2,n1,t));            
 
         [MethodImpl(Inline)]
         public static SubGrid256<M,N,T> bars<M,N,T>(N256 w, M m = default, N n = default, T t = default)
@@ -101,7 +101,7 @@ namespace Z0
         {
             var sep = natval(n);
             var pattern = BitMask.lo(sep, z64) << sep;                        
-            return vgeneric<T>(CpuVector.vbroadcast(w,gbits.replicate(pattern)));
+            return vgeneric<T>(Vectors.vbroadcast(w,gbits.replicate(pattern)));
         }
 
     }

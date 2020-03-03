@@ -117,10 +117,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void distribute(in byte src, int step, ref uint dst)
-            => ginx.vstore(dinx.vconvert(n64, in skip(in src, step*8), n256, n32), ref seek(ref dst, step*8));
+            => Vectors.vstore(dinx.vconvert(n64, in skip(in src, step*8), n256, n32), ref seek(ref dst, step*8));
 
         [MethodImpl(Inline)]
         static void distribute(in byte src, int srcstep, ref uint dst, int dststep)
-            => ginx.vstore(dinx.vconvert(n64, in skip(in src, srcstep*8), n256, n32), ref seek(ref dst, dststep*8));
+            => Vectors.vstore(dinx.vconvert(n64, in skip(in src, srcstep*8), n256, n32), ref seek(ref dst, dststep*8));
     }
 }

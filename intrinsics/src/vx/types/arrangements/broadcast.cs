@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(T a) => CpuVector.vbroadcast(n128, a);            
+            public Vector128<T> Invoke(T a) => Vectors.vbroadcast(n128, a);            
         }
 
         public readonly struct Broadcast128<S,T> : IVFactory128<S,T>
@@ -40,7 +40,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>($"{Name}_{TypeIdentity.numeric<S>()}",w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(S a) => CpuVector.vbroadcast(n128, convert<S,T>(a));            
+            public Vector128<T> Invoke(S a) => Vectors.vbroadcast(n128, convert<S,T>(a));            
         }
 
         public readonly struct Broadcast256<T> : IVFactory256<T,T>
@@ -55,7 +55,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(T a) => CpuVector.vbroadcast(n256, a);            
+            public Vector256<T> Invoke(T a) => Vectors.vbroadcast(n256, a);            
         }
 
         public readonly struct Broadcast256<S,T> : IVFactory256<S,T>
@@ -71,7 +71,7 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>($"{Name}_{TypeIdentity.numeric<S>()}",w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(S a) => CpuVector.vbroadcast(n256, convert<S,T>(a));
+            public Vector256<T> Invoke(S a) => Vectors.vbroadcast(n256, convert<S,T>(a));
             
         }
     }

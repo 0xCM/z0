@@ -9,12 +9,10 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitGrid
     {
-
-
        [MethodImpl(Inline)]
         public static BitGrid16<M,N,T> sll<M,N,T>(BitGrid16<M,N,T> g, byte shift)
             where T : unmanaged
@@ -49,8 +47,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => ginx.vsll<T>(g,(byte)shift);
- 
-
     }
-
 }

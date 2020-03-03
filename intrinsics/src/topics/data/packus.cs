@@ -14,7 +14,7 @@ namespace Z0
     using static HexConst;
     using static Data;
 
-    partial class vdata
+    partial class VectorData
     {        
         /// <summary>
         /// Produces the lo shuffle spec for packing (128x32, 128x32) -> 128x16

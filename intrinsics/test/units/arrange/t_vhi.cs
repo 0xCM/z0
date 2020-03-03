@@ -83,7 +83,7 @@ namespace Z0
                 var h = f.Invoke(x);
 
                 for(int i=0, j = count/2; j < count; i++, j++)
-                    Claim.eq(x.Item(j), h.Item(i));
+                    Claim.eq(x.Cell(j), h.Cell(i));
             }
         }
 

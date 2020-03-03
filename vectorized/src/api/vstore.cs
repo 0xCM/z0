@@ -140,6 +140,7 @@ namespace Z0
             where T : unmanaged
                 => vstore(src, ref dst.BlockRef(block));
 
+
         /// <summary>
         /// Stores the source vector to a reference cell
         /// </summary>

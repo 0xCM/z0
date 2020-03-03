@@ -17,8 +17,8 @@ namespace Z0
             var w = n128;
             var cellmax = u8max;
             
-            var vsmax = CpuVector.vbroadcast(w, (ushort)cellmax);
-            var vtmax = CpuVector.vbroadcast(w,cellmax);
+            var vsmax = Vectors.vbroadcast(w, (ushort)cellmax);
+            var vtmax = Vectors.vbroadcast(w,cellmax);
             var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z8));
 
             var x = dinx.vsub(vsmax, vpattern.vincrements(w, z16));
@@ -33,8 +33,8 @@ namespace Z0
             var w = n256;
             var cellmax = u8max;
             
-            var vsmax = CpuVector.vbroadcast(w, (ushort)cellmax);
-            var vtmax = CpuVector.vbroadcast(w,cellmax);
+            var vsmax = Vectors.vbroadcast(w, (ushort)cellmax);
+            var vtmax = Vectors.vbroadcast(w,cellmax);
             var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z8));
 
             var x = dinx.vsub(vsmax, vpattern.vincrements(w, z16));
@@ -49,8 +49,8 @@ namespace Z0
             var w = n128;
             var cellmax = u16max;
             
-            var vsmax = CpuVector.vbroadcast(w, (uint)cellmax);
-            var vtmax = CpuVector.vbroadcast(w,cellmax);
+            var vsmax = Vectors.vbroadcast(w, (uint)cellmax);
+            var vtmax = Vectors.vbroadcast(w,cellmax);
             var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z16));
 
             var x = dinx.vsub(vsmax, vpattern.vincrements(w, 0u));
@@ -65,8 +65,8 @@ namespace Z0
             var w = n256;
             var cellmax = u16max;
 
-            var vsmax = CpuVector.vbroadcast(w,(uint)cellmax);
-            var vtmax = CpuVector.vbroadcast(w,cellmax);
+            var vsmax = Vectors.vbroadcast(w,(uint)cellmax);
+            var vtmax = Vectors.vbroadcast(w,cellmax);
             
             var x = dinx.vsub(vsmax, vpattern.vincrements(w, 0u));
             var y = dinx.vsub(vsmax, vpattern.vincrements(w, 8u));
@@ -107,7 +107,7 @@ namespace Z0
             var lo = dinx.vlo(z);
             var hi = dinx.vhi(z);
             for(var i=0; i<8; i++)
-                Claim.eq(src.Item(i), lo.Item(i));            
+                Claim.eq(src.Cell(i), lo.Cell(i));            
         }
 
         public void vcompact_128_outline()

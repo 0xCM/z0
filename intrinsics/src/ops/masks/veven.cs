@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;    
-    using static As;
-    using static CpuVector;
+    using static Root;    
+    using static Nats;
+    using static Vectors;
 
     partial class vmask
     {
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         static Vector128<T> veven<T>(N128 w, N2 f = default, N1 d = default, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMask.even(f,d,t));
+                => Vectors.vbroadcast(w,BitMask.even(f,d,t));
                 
         /// <summary>
         /// [01010101]

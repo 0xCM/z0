@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a 16-bit grid
@@ -132,7 +132,6 @@ namespace Z0
             => throw new NotSupportedException();
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
- 
+            => throw new NotSupportedException(); 
     }
 }

@@ -30,10 +30,10 @@ namespace Z0
         {            
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
                 seek(ref mem, i) = parity.even(i) ? a : b;
-            return Vectors.vload(n, in head(data));
+            return Vectors.vload(n, in data.Head);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
@@ -72,7 +72,7 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
@@ -95,7 +95,7 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
@@ -117,7 +117,7 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
@@ -132,14 +132,14 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
                 current = gmath.dec(current);
             }
 
-            return Vectors.vload(n, in head(data.Swap(swaps)));
+            return Vectors.vload(n, in data.Swap(swaps).Head);
         }            
 
         public static Vector128<T> vdecrements<T>(N128 n, T first, params Swap[] swaps)
@@ -148,14 +148,14 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
                 current = gmath.dec(current);
             }
 
-            return Vectors.vload(n, in head(data.Swap(swaps)));
+            return Vectors.vload(n, in data.Swap(swaps).Head);
         }    
      
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
                 seek(ref mem, i) = current;
@@ -191,12 +191,13 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
                 seek(ref mem, i) = current;
                 current = gmath.add(current, step);
             }
+            
             return Vectors.vload(n, in mem);
         }
     
@@ -206,14 +207,14 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
                 seek(ref mem, i) = current;
                 current = gmath.inc(current);
             }
 
-            return Vectors.vload(n, in head(data.Swap(swaps)));
+            return Vectors.vload(n, in data.Swap(swaps).Head);
         }
 
         public static Vector256<T> vincrements<T>(N256 n, T first, params Swap[] swaps)
@@ -222,14 +223,14 @@ namespace Z0
             var current = first;
             var data = Blocks.single<T>(n);
             var len = Blocks.length<T>(n);
-            ref var mem = ref head(data);
+            ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
                 seek(ref mem, i) = current;
                 current = gmath.inc(current);
             }
 
-            return Vectors.vload(n, in head(data.Swap(swaps)));
+            return Vectors.vload(n, in data.Swap(swaps).Head);
         }            
 
 

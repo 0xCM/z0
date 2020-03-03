@@ -44,6 +44,11 @@ namespace Z0
     
     }    
 
+    public static partial class CpuVecX
+    {
+
+    }
+    
     /// <summary>
     /// Direct vectorized intrinsics over floating-point domains
     /// </summary>

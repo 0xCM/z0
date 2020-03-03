@@ -23,7 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Perm16 from(Vector128<byte> data)
-            => new Perm16(dinx.vand(data, CpuVector.vbroadcast(w, BitMasks.Msb8x8x3)));
+            => new Perm16(dinx.vand(data, Vectors.vbroadcast(w, BitMasks.Msb8x8x3)));
 
         /// <summary>
         /// Creates the identity permutation

@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = CpuVector.vbroadcast(n128, (ushort)(byte.MaxValue));
+            var mask = Vectors.vbroadcast(n128, (ushort)(byte.MaxValue));
             var v1 = v16i(dinx.vand(x,mask));
             var v2 = v16i(dinx.vand(y,mask));
             return PackUnsignedSaturate(v1,v2);         
@@ -53,8 +53,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector128<byte> vpackus_alt(Vector128<ushort> x, Vector128<ushort> y)
             => v8u(vor(
-                    vshuf16x8(x, vdata.packusLo(n128,n16,n8)),
-                    vshuf16x8(y, vdata.packusHi(n128,n16,n8))));
+                    vshuf16x8(x, VectorData.packusLo(n128,n16,n8)),
+                    vshuf16x8(y, VectorData.packusHi(n128,n16,n8))));
 
         /// <summary>
         ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128 
@@ -76,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpackus(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = CpuVector.vbroadcast(n128, (uint)(ushort.MaxValue));
+            var mask = Vectors.vbroadcast(n128, (uint)(ushort.MaxValue));
             var z0 = v32i(vand(x,mask));
             var z1 = v32i(vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
@@ -91,8 +91,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector128<ushort> vpackus_alt(Vector128<uint> x, Vector128<uint> y)
         {
-            var v1 = dinx.vshuf16x8(x, vdata.packusLo(n128,n32,n16));
-            var v2 = dinx.vshuf16x8(y, vdata.packusHi(n128,n32,n16));
+            var v1 = dinx.vshuf16x8(x, VectorData.packusLo(n128,n32,n16));
+            var v2 = dinx.vshuf16x8(y, VectorData.packusHi(n128,n32,n16));
             return v16u(dinx.vor(v1,v2));
         }
 
@@ -115,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackus(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = CpuVector.vbroadcast(n256, (ushort)(byte.MaxValue));
+            var mask = Vectors.vbroadcast(n256, (ushort)(byte.MaxValue));
             var v1 = v16i(dinx.vand(x,mask));
             var v2 = v16i(dinx.vand(y,mask));
             return PackUnsignedSaturate(v1,v2);         
@@ -130,8 +130,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector256<byte> vpackus_alt(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var v1 = dinx.vshuf16x8(x,vdata.packusLo(n256,n16,n8));
-            var v2 = dinx.vshuf16x8(y,vdata.packusHi(n256,n16,n8));
+            var v1 = dinx.vshuf16x8(x,VectorData.packusLo(n256,n16,n8));
+            var v2 = dinx.vshuf16x8(y,VectorData.packusHi(n256,n16,n8));
             return v8u(dinx.vor(v1,v2));
         }
 
@@ -155,7 +155,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = CpuVector.vbroadcast(n256, (uint)(ushort.MaxValue));
+            var mask = Vectors.vbroadcast(n256, (uint)(ushort.MaxValue));
             var z0 = v32i(dinx.vand(x,mask));
             var z1 = v32i(dinx.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
@@ -170,8 +170,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector256<ushort> vpackus_alt(Vector256<uint> x, Vector256<uint> y)
         {
-            var v1 = vshuf16x8(x, vdata.packusLo(n256,n32,n16));
-            var v2 = vshuf16x8(y, vdata.packusHi(n256,n32,n16));
+            var v1 = vshuf16x8(x, VectorData.packusLo(n256,n32,n16));
+            var v2 = vshuf16x8(y, VectorData.packusHi(n256,n32,n16));
             return v16u(vor(v1,v2));
         }
    }

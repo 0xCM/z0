@@ -9,8 +9,10 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static As;
+    using static Vectors;
 
     partial class BitGrid
     {        

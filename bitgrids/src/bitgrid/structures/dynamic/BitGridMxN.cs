@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     /// <summary>
     /// Defines a maximally packed data structure of natural dimensions over a primal type

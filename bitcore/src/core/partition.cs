@@ -259,7 +259,7 @@ namespace Z0
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline), Op]
         public static void part4x2(uint src, NatSpan<N2,byte> dst)
-            => part4x2(src, ref head(dst));
+            => part4x2(src, ref dst.Head);
 
         /// <summary>
         /// Partitions the first 12 bits of a 32-bit source value into 3 target segments each with an effective width of 4
@@ -283,7 +283,7 @@ namespace Z0
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline), Op]
         public static void part4x3(uint src, NatSpan<N3,byte> dst)
-            => part4x3(src, ref head(dst));
+            => part4x3(src, ref dst.Head);
 
         /// <summary>
         /// Partitions a 16-bit source value into 4 8-bit target segments

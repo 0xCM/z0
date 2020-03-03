@@ -11,7 +11,6 @@ namespace Z0
     
     using static Root;
     using static Vectors;
-    using static ginx;
     
     partial class vblock
     {     

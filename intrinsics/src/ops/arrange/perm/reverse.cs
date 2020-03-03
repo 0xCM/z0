@@ -137,7 +137,7 @@ namespace Z0
             => vperm4x64(src,Perm4L.DCBA);
 
         static Vector256<uint> MRev256u32 
-            => v32u(vdata.load(n256,MRev256u32Data));
+            => v32u(VectorData.load(n256,MRev256u32Data));
             
             //=> vbuild.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
 

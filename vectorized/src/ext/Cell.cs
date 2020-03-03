@@ -10,6 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
+    using static Vectors;
+    using static Nats;
 
     partial class VectorExtensions
     {
@@ -23,7 +25,7 @@ namespace Z0
         public static T Cell<T>(this Vector128<T> src, int index)
             where T : unmanaged 
                 => src.GetElement(index);
-                
+
         /// <summary>
         /// Sets an index-identified component to a specified value
         /// </summary>
@@ -58,5 +60,7 @@ namespace Z0
         public static T Cell<T>(this Vector256<T> src, int index)
             where T : unmanaged 
                 => src.GetElement(index);
-    }
+
+
+   }
 }

@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static Vector128<T> vadd<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vadd(x, CpuVector.vbroadcast(n128,a));
+                => vadd(x, Vectors.vbroadcast(n128,a));
 
         /// <summary>
         /// Adds a constant value to each vector component
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static Vector256<T> vadd<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vadd(x, CpuVector.vbroadcast(n256,a));
+                => vadd(x, Vectors.vbroadcast(n256,a));
 
         /// <summary>
         /// Adds a constant value to each source vector component
@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static Vector512<T> vadd<T>(Vector512<T> x, T a)
             where T : unmanaged
-                => vadd(x, CpuVector.vbroadcast(n512,a));
+                => vadd(x, Vectors.vbroadcast(n512,a));
 
         [MethodImpl(Inline)]
         static Vector128<T> vadd_u<T>(Vector128<T> x, Vector128<T> y)

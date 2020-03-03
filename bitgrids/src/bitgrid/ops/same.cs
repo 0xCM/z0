@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitGrid
     {
@@ -34,8 +32,7 @@ namespace Z0
         public static bit same<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
                 => math.eq(gx,gy);
-
-         
+        
         /// <summary>
         /// Returns 1 if the source grids have identical conent and 0 otherwise
         /// </summary>

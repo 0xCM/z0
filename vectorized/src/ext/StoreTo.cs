@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;    
+    using static Root;
+    using static Nats;
 
-    partial class CpuVecX
+    partial class VectorExtensions
     {
-        /// <summary>
+       /// <summary>
         /// Stores vector content to a memory reference
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -22,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector128<T> src, ref T dst, int offset = 0)
             where T : unmanaged            
-                => ginx.vstore(src, ref dst, offset);
+                => Vectors.vstore(src, ref dst, offset);
 
         /// <summary>
         /// Stores vector content to a memory reference
@@ -33,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector256<T> src, ref T dst, int offset = 0)
             where T : unmanaged            
-                => ginx.vstore(src, ref dst, offset);
+                => Vectors.vstore(src, ref dst, offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied span
@@ -43,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector128<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged            
-                => ginx.vstore(src,dst,offset);
+                => Vectors.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied span
@@ -53,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector256<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged            
-                => ginx.vstore(src,dst,offset);
+                => Vectors.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied span
@@ -63,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void StoreTo<T>(this Vector512<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged            
-                => ginx.vstore(src,dst,offset);
+                => Vectors.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied block
@@ -73,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector128<T> src, in Block128<T> dst)
             where T : unmanaged
-                => ginx.vstore(src, dst);
+                => Vectors.vstore(src, dst);
 
         /// <summary>
         /// Stores vector content to a specified block in a blocked container
@@ -84,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector128<T> src, in Block128<T> dst, int block)
             where T : unmanaged
-                => ginx.vstore(src, dst, block);
+                => Vectors.vstore(src, dst, block);
 
         /// <summary>
         /// Stores vector content to a caller-supplied block
@@ -94,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector256<T> src, in Block256<T> dst)
             where T : unmanaged
-                => ginx.vstore(src, dst);
+                => Vectors.vstore(src, dst);
 
         /// <summary>
         /// Stores vector content to a caller-supplied block
@@ -104,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector512<T> src, in Block512<T> dst)
             where T : unmanaged
-                => ginx.vstore(src, dst);
+                => Vectors.vstore(src, dst);
 
         /// <summary>
         /// Stores vector content to a specified block in a blocked container
@@ -115,7 +116,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector256<T> src, in Block256<T> dst, int block)
             where T : unmanaged
-                => ginx.vstore(src, dst, block);
+                => Vectors.vstore(src, dst, block);
 
         /// <summary>
         /// Stores vector content to a specified block in a blocked container
@@ -126,7 +127,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void StoreTo<T>(this Vector512<T> src, in Block512<T> dst, int block)
             where T : unmanaged
-                => ginx.vstore(src, dst, block);
+                => Vectors.vstore(src, dst, block);
     }
-
 }

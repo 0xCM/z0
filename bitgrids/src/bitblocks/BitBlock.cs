@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;    
-    using static As;
+    using static zfunc;
 
     /// <summary>
     /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits
@@ -80,7 +78,7 @@ namespace Z0
         internal BitBlock(T src, int bitcount)
         {            
             this.data = Blocks.single<T>(n256);
-            head(data) = src;
+            data.Head = src;
             this.BitCount = bitcount;
         }
 

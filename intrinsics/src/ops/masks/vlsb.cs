@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;    
+    using static Root;    
     using static As;
-    using static CpuVector;
+    using static Vectors;
 
     partial class vmask
     {
@@ -320,8 +320,5 @@ namespace Z0
         public static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
-
-
     }
-
 }

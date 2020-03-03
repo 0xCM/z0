@@ -71,7 +71,7 @@ namespace Z0
             odd = vadd(vadd(maj, maj), odd);
 
             var dst = Stacks.alloc(n128);
-            ginx.vstore(odd, ref dst.X0);
+            Vectors.vstore(odd, ref dst.X0);
             var total = 0ul;
 
             total += (dst.X0 * kf) >> 56;
@@ -113,7 +113,7 @@ namespace Z0
 
             var dst = Stacks.alloc(n256);
             ref var X = ref Stacks.head(ref dst, z64);
-            vstore(odd, ref X);
+            Vectors.vstore(odd, ref X);
             
             var total = 0ul;
             total += (seek(ref X, 0) * kf) >> 56;
@@ -127,16 +127,16 @@ namespace Z0
 
     public static class BitPop
     {        
-        public static Vector256<ulong> K1 => CpuVector.vbroadcast(n256, BitMasks.Even64);
+        public static Vector256<ulong> K1 => Vectors.vbroadcast(n256, BitMasks.Even64);
 
-        public static Vector256<ulong> K2 => CpuVector.vbroadcast(n256, BitMasks.Even64x2);
+        public static Vector256<ulong> K2 => Vectors.vbroadcast(n256, BitMasks.Even64x2);
 
-        public static Vector256<ulong> K4 => CpuVector.vbroadcast(n256, BitMasks.Lsb64x8x4);        
+        public static Vector256<ulong> K4 => Vectors.vbroadcast(n256, BitMasks.Lsb64x8x4);        
 
-        public static Vector128<ulong> v128K1 => CpuVector.vbroadcast(n128, BitMasks.Even64);
+        public static Vector128<ulong> v128K1 => Vectors.vbroadcast(n128, BitMasks.Even64);
 
-        public static Vector128<ulong> v128K2 => CpuVector.vbroadcast(n128, BitMasks.Even64x2);
+        public static Vector128<ulong> v128K2 => Vectors.vbroadcast(n128, BitMasks.Even64x2);
 
-        public static Vector128<ulong> v128K4 => CpuVector.vbroadcast(n128, BitMasks.Lsb64x8x4);
+        public static Vector128<ulong> v128K4 => Vectors.vbroadcast(n128, BitMasks.Lsb64x8x4);
     }
 }

@@ -14,6 +14,52 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
+        /// Expands a bit-level S-pattern to a vector-level T-pattern
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="src">The source pattern</param>
+        /// <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        public static Vector128<T> vbroadcast<S,T>(N128 w, S src, T enabled)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var count = Vector128<T>.Count;
+            Span<T> buffer = stackalloc T[count];
+            ref var dst = ref head(buffer);
+
+            var length = math.min(count, bitsize<S>());
+            for(var i=0; i< length; i++)
+                seek(ref dst, i) = gbits.testbit(src,i) ? enabled : default;
+            
+            return buffer.LoadVector(w);
+        }
+
+        /// <summary>
+        /// Expands a bit-level S-pattern to a vector-level T-pattern
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="src">The source pattern</param>
+        /// <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        public static Vector256<T> vbroadcast<S,T>(N256 w, S src, T enabled)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var count = Vector256<T>.Count;
+            Span<T> buffer = stackalloc T[count];
+            ref var dst = ref head(buffer);
+
+            var length = math.min(count, bitsize<S>());
+            for(var i=0; i< length; i++)
+                seek(ref dst, i) = gbits.testbit(src,i) ? enabled : default;
+            
+            return buffer.LoadVector(w);
+        }
+
+        /// <summary>
         /// Expands a bit-level S-pattern to a block-level T-pattern
         /// </summary>
         /// <param name="src">The source pattern</param>
@@ -62,6 +108,6 @@ namespace Z0
         public static T broadcast<S,T>(S src, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => Vectors.vfirst<S,T>(CpuVector.vbroadcast(n128, src));                
+                => Vectors.vfirst<S,T>(Vectors.vbroadcast(n128, src));                
     }
 }

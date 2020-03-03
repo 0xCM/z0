@@ -33,13 +33,13 @@ namespace Z0
         static Vector256<byte> K0V 
         {
             [MethodImpl(Inline)]
-            get => vdata.load(n256, K0Bytes);
+            get => VectorData.load(n256, K0Bytes);
         }
 
         static Vector256<byte> K1V 
         {
             [MethodImpl(Inline)]
-            get => vdata.load(n256,K1Bytes);
+            get => VectorData.load(n256,K1Bytes);
         }
 
         static ReadOnlySpan<byte> K0Bytes

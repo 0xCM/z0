@@ -25,7 +25,7 @@ namespace Z0
             
             var w = n256;
             var t = z32;
-            var count = CpuVector.vcount(w,t);
+            var count = Vectors.vcount(w,t);
 
             var x = vpattern.vincrements(w,t);
             var y = vpattern.vincrements(w, (x.LastCell() + 1));
@@ -56,7 +56,7 @@ namespace Z0
             void report()
             {
                 var x = vpattern.vincrements<byte>(n128);
-                var y = dinx.vadd(x, CpuVector.vbroadcast(n128, (byte)16));
+                var y = dinx.vadd(x, Vectors.vbroadcast(n128, (byte)16));
 
                 var lo = ginx.vmergelo(x,y);
                 var hi = ginx.vmergehi(x,y);

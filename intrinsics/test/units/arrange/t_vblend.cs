@@ -28,7 +28,7 @@ namespace Z0
             var w = n256;
             var x = vpattern.vincrements(w, z8);
             var y = vpattern.decrements(w, u8max);
-            var spec = v8u(CpuVector.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
+            var spec = v8u(Vectors.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
             var z = ginx.vblend(x,y,spec);            
         }        
 
@@ -36,7 +36,7 @@ namespace Z0
         {
             var w = n128;
             var alt = (uint)BitMasks.Msb16x8x1 << 16; 
-            dinx.vcover(v16u(CpuVector.vbroadcast(w,alt)), out Vector128<byte> spec);
+            dinx.vcover(v16u(Vectors.vbroadcast(w,alt)), out Vector128<byte> spec);
             var x = vpattern.vincrements(w,z16);
             var y = vpattern.decrements(w,u16max);
             var z = ginx.vblend(x,y,spec);
@@ -47,7 +47,7 @@ namespace Z0
             var w = n256;
             var altOdd = (uint)BitMasks.Msb16x8x1 << 16; 
             var altEven = (uint)BitMasks.Msb16x8x1; 
-            dinx.vcover(v16u(CpuVector.vbroadcast(w,altOdd)), out Vector256<byte> spec);
+            dinx.vcover(v16u(Vectors.vbroadcast(w,altOdd)), out Vector256<byte> spec);
             var x = vpattern.vincrements(w,z16);
             var y = vpattern.decrements(w,u16max);
             var z = ginx.vblend(x,y,spec);
@@ -58,8 +58,8 @@ namespace Z0
             void example1()
             {
                 var n = n128;
-                var x = CpuVector.vbroadcast(n, (byte)1);
-                var y = CpuVector.vbroadcast(n, (byte)2);
+                var x = Vectors.vbroadcast(n, (byte)1);
+                var y = Vectors.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format());
                 Trace($"y{n}", y.Format());                
                 Trace("valignr/3",ginx.valignr(x,y, 3).Format());
@@ -73,8 +73,8 @@ namespace Z0
             void example2()
             {
                 var n = n256;
-                var x = CpuVector.vbroadcast(n, (byte)1);
-                var y = CpuVector.vbroadcast(n, (byte)2);
+                var x = Vectors.vbroadcast(n, (byte)1);
+                var y = Vectors.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format(seplanes:true));
                 Trace($"y{n}", y.Format(seplanes:true));                
                 Trace("valignr/3",ginx.valignr(x,y, 3).Format(seplanes:true));
@@ -150,7 +150,7 @@ namespace Z0
             Claim.eq(Vectors.vparts(n,8,9,2,3,C,D,6,7),dinx.vblend(left,right, Blend8x32.RRLLRRLL));
 
             
-            var lrpattern = v32u(CpuVector.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
+            var lrpattern = v32u(Vectors.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(var i=0; i < 8; i++)
                 Claim.eq(vcell(lrpattern,i), parity.even(i) ? 0u : uint.MaxValue);
             
@@ -168,8 +168,8 @@ namespace Z0
             var y = Vectors.vparts(n,8,9,A,B,C,D,E,F);
             var e = Vectors.vparts(n,0,9,2,B,4,D,6,F);
             var o = Vectors.vparts(n,8,1,A,3,C,5,E,7);
-            var mEven = vdata.blendspec(n,false,w);
-            var mOdd = vdata.blendspec(n,true,w);
+            var mEven = VectorData.blendspec(n,false,w);
+            var mOdd = VectorData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend(x,y,mEven));
             Claim.eq(o,ginx.vblend(x,y,mOdd));
         }
@@ -182,8 +182,8 @@ namespace Z0
             var y = Vectors.vparts(n,4,5,6,7);
             var e = Vectors.vparts(n,0,5,2,7);
             var o = Vectors.vparts(n,4,1,6,3);
-            var mEven = vdata.blendspec(n,false,w);
-            var mOdd = vdata.blendspec(n,true,w);
+            var mEven = VectorData.blendspec(n,false,w);
+            var mOdd = VectorData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend(x,y,mEven));
             Claim.eq(o,ginx.vblend(x,y,mOdd));
 
@@ -205,7 +205,7 @@ namespace Z0
                 var y = ys.LoadVector();
                 Claim.eq(y,Vectors.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
-                var m = vdata.blendspec(n256,false,n64);
+                var m = VectorData.blendspec(n256,false,n64);
 
                 var es = Blocks.single<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)

@@ -11,6 +11,7 @@ namespace Z0
     
     using static Root;
     using static Vectors;
+    using static Nats;
 
     partial class VectorExtensions
     {
@@ -188,5 +189,6 @@ namespace Z0
         public static Vector512<T> LoadVector<T>(this in Block512<T> src, int block)            
             where T : unmanaged            
                 => vload(src,block);
+
     }
 }
