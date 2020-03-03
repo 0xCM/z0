@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitGrid
     {        
@@ -119,7 +117,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => CpuVector.vload(w, bs.Pack(0,w));
+                => Vectors.vload(w, bs.Pack(0,w));
 
         /// <summary>
         /// Hydrates a 256-bit natural bitgrid from a bitstring
@@ -137,6 +135,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => CpuVector.vload(w, bs.Pack(0,w));
+                => Vectors.vload(w, bs.Pack(0,w));
     }
 }

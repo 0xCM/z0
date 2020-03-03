@@ -9,7 +9,7 @@ namespace Z0.Logix
     
     using static Root;
     using static Nats;
-    using static vfuncs;
+    using static Vectors;
 
     using static VectorizedOps;
     

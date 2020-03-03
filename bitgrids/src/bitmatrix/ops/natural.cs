@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
+    using static Root;
+    using static Nats;
     using static As;
 
     partial class BitMatrix
@@ -166,6 +166,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => and(A, B, alloc<N,T>());
-
     }
 }

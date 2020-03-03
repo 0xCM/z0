@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
-    using static zfunc;    
-    using static ginx;
-    using static As;
 
-    partial class CpuVector
+    using static Root;
+
+    partial class Vectors
     {
         /// <summary>
         /// Defines a 128-bit vector by explicit component specification, from least -> most significant
@@ -250,7 +248,5 @@ namespace Z0
         [MethodImpl(Inline),Op]
         public static Vector512<double> vpartsf(N512 w, double x0, double  x1, double  x2, double  x3, double x4, double  x5, double  x6, double  x7)
             => Vector512.Create(x0,x1,x2,x3,x4,x5,x6,x7);
-
     }
-
 }

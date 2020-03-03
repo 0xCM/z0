@@ -22,7 +22,7 @@ namespace Z0
             var a1 = svc.and(vcell(x,1), vcell(y,1));
             var a2 = svc.and(vcell(x,2), vcell(y,2));
             var a3 = svc.and(vcell(x,3), vcell(y,3));
-            var v2 = CpuVector.vparts(n128,a0,a1,a2,a3);
+            var v2 = Vectors.vparts(n128,a0,a1,a2,a3);
             return ginx.vsame(v1,v2);
         }
 

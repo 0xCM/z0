@@ -42,10 +42,10 @@ namespace Z0
             var j0 = index8x16(j,bit.Off);
             var j1 = index8x16(j,bit.On);
 
-            perm = vfuncs.vcell(i0, j0, perm);
-            perm = vfuncs.vcell(i1, j1, perm);
-            perm = vfuncs.vcell(j0, i0, perm);
-            perm = vfuncs.vcell(j1, i1, perm);
+            perm = Vectors.vcell(i0, j0, perm);
+            perm = Vectors.vcell(i1, j1, perm);
+            perm = Vectors.vcell(j0, i0, perm);
+            perm = Vectors.vcell(j1, i1, perm);
 
             return vshuf16x8(src,perm);            
         }

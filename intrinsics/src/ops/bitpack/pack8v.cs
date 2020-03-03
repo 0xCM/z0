@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;    
-    using static AsIn;
-    using static dinx;
+    using static Root;    
 
     partial class bitpack
     {
@@ -70,6 +68,5 @@ namespace Z0
         public static uint packlsb8<T>(Vector256<T> src)
             where T : unmanaged
                 => pack8(src,0);
-
     }
 }

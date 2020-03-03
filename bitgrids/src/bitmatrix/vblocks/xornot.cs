@@ -9,13 +9,12 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;    
     using static ginx;
-    using static CpuVector;
+    using static Root;
+    using static Vectors;
     
     partial class vblock
     {     
-
         [MethodImpl(Inline)]
         public static Vector128<T> vxornot<T>(N128 w, in T a, in T b)
             where T : unmanaged

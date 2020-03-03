@@ -6,7 +6,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     /// <summary>
     /// Defines a 64x64 matrix of bits

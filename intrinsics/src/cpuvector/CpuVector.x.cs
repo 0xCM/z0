@@ -9,7 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;    
+    using static Root;
+    using static Vectors;
+    using static Nats;
 
     public static partial class CpuVecX
     {
@@ -63,7 +65,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return CpuVector.vload(n128, in head(dst));        
+            return vload(n128, in head(dst));        
         } 
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);
-            return CpuVector.vload(n128, in head(dst));        
+            return vload(n128, in head(dst));        
         } 
 
         /// <summary>
@@ -111,7 +113,7 @@ namespace Z0
                 dst[j++] = f(rhsData[i]);
             }
             
-            return CpuVector.vload(n256, in head(dst));        
+            return Vectors.vload(n256, in head(dst));        
         } 
 
         /// <summary>
@@ -131,7 +133,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);            
-            return CpuVector.vload(n256, in head(dst));        
+            return Vectors.vload(n256, in head(dst));        
         } 
 
         /// <summary>
@@ -154,7 +156,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return CpuVector.vload(n, in head(dst));        
+            return Vectors.vload(n, in head(dst));        
         } 
     }
 }

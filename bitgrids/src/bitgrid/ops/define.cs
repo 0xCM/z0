@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     partial class BitGrid
     {                
@@ -27,7 +26,5 @@ namespace Z0
         public static BitGrid64<T> define<T>(N64 w, int rows, int cols, ulong data)
             where T : unmanaged
                 => new BitGrid64<T>(data,rows,cols);
-
     }
-
 }

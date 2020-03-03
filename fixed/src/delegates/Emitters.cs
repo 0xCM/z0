@@ -33,9 +33,6 @@ namespace Z0
     public delegate Fixed256 Emitter256();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 Emitter512();
-
-    [SuppressUnmanagedCodeSecurity]
     public delegate Fixed8 Emitter8<T>()
         where T : unmanaged;
 
@@ -59,7 +56,5 @@ namespace Z0
     public delegate Fixed256 Emitter256<T>()
         where T : unmanaged;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 Emitter512<T>()
-        where T : unmanaged;
+
 }

@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Perm16 from(NatPerm<N16,byte> spec)
-            => new Perm16(CpuVector.vload(w, spec.Terms));
+            => new Perm16(Vectors.vload(w, spec.Terms));
 
         [MethodImpl(Inline)]
         public static Perm16 from(Vector128<byte> data)

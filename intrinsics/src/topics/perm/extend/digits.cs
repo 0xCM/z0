@@ -52,7 +52,7 @@ namespace Z0
         public static Vector128<byte> ToShuffleSpec(this NatPerm<N16> src)
         {
             var data = src.Terms.Convert<byte>();
-            return CpuVector.vload(n128,in head(data));
+            return Vectors.vload(n128,in head(data));
         }
 
     }

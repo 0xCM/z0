@@ -7,7 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static zfunc;    
+    using static Root;    
+    using static Nats;
+    using static Literals;
+    using static Vectors;
     using static AsIn;
 
     partial class bitpack
@@ -57,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static byte pack(Span<bit> src, N8 n)
         {
-            var v0 = CpuVector.vload(n256, head(convert(src, 0, bitsize<byte>())));
+            var v0 = vload(n256, head(convert(src, 0, bitsize<byte>())));
             return (byte)packlsb8(dinx.vcompact(v0,n128,z8));
         }
 

@@ -11,7 +11,7 @@ namespace Z0
    
     using static Root;
 
-    partial class vfuncs
+    partial class Vectors
     {
         /// <summary>
         /// Extracts an index-identified component from the source vector

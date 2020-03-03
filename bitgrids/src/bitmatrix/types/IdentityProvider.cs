@@ -7,8 +7,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     
-    using static zfunc;
-
     readonly struct BitMatrixIdentityProvider : ITypeIdentityProvider
     {
         public TypeIdentity DefineIdentity(Type src)
@@ -61,5 +59,4 @@ namespace Z0
             return TypeIdentity.Define($"{prefix}err");                                          
         }
     }
-
 }

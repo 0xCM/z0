@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitMatrix
     {
@@ -32,7 +31,5 @@ namespace Z0
                 col = Bits.setif(A[r], index, col, r);
             return col;
         }
-
     }
-
 }

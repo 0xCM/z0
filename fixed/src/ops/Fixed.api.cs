@@ -156,12 +156,6 @@ namespace Z0
                 => ref From<Vector256<T>,F>(in src);
         
         [MethodImpl(Inline)]
-        public static ref readonly F FromVector<T,F>(in Vector512<T> src)
-            where F : unmanaged, IFixed
-            where T : unmanaged
-                => ref From<Vector512<T>,F>(in src);
-
-        [MethodImpl(Inline)]
         static unsafe void store<S,T>(in S src, int bytecount, ref T dst)
             where S : unmanaged
             where T : unmanaged

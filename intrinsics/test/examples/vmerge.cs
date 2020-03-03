@@ -36,10 +36,10 @@ namespace Z0
 
         public void vmerge_example()
         {
-            var a = CpuVector.vparts(n128, 0u,1,2,3);
-            var b = CpuVector.vparts(n128, 4u,5,6,7);
-            var c = CpuVector.vparts(n128, 8u,9,10,11);
-            var d = CpuVector.vparts(n128, 12u,13,14,15);
+            var a = Vectors.vparts(n128, 0u,1,2,3);
+            var b = Vectors.vparts(n128, 4u,5,6,7);
+            var c = Vectors.vparts(n128, 8u,9,10,11);
+            var d = Vectors.vparts(n128, 12u,13,14,15);
             var x0 = dinx.vmergelo(v8u(a), v8u(b));
             var y0 = dinx.vmergelo(v8u(c), v8u(d));
             var z0 = v8u(dinx.vmergelo(v16u(x0),v16u(y0)));

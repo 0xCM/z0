@@ -20,7 +20,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static Perm32 from(NatPerm<N32,byte> spec)
-            => new Perm32(CpuVector.vload(w, spec.Terms));
+            => new Perm32(Vectors.vload(w, spec.Terms));
 
         [MethodImpl(Inline)]
         public static Perm32 from(Vector256<byte> data)

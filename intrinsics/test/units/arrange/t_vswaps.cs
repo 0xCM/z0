@@ -74,7 +74,7 @@ namespace Z0
                 else
                     spec[k] = k;
             }
-            return dinx.vperm8x32(src,CpuVector.vload(n256, head(spec)));
+            return dinx.vperm8x32(src, Vectors.vload(n256, head(spec)));
         }
 
         public void swap_256_i32()

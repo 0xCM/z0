@@ -6,14 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitGrid
     {        
-
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>
@@ -133,6 +130,5 @@ namespace Z0
         public static BitString bitstring<T>(in BitGrid<T> g)
             where T : unmanaged
                 => g.Data.ToBitString(g.BitCount);
-
     }
 }

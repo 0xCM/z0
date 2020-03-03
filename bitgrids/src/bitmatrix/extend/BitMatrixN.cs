@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static As;
-
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public static class BitMatrixNx
     {   
@@ -94,8 +93,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<N8,ulong> ToNatBits(this ulong src, N8 n)
             => BitMatrix.natural(src,n);
-
     }
-
-
 }

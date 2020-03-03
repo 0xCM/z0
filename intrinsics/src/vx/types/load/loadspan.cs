@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => CpuVector.vload(n128,x,offset);
+            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n128,x,offset);
             
         }
 
@@ -40,7 +40,7 @@ namespace Z0
             public OpIdentity Id => Identity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => CpuVector.vload(n256,x,offset);
+            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n256,x,offset);
 
         }
     }

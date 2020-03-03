@@ -8,9 +8,9 @@ namespace Z0
     using System.Linq;
     using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public ref struct BitMatrix4

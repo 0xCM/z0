@@ -5,11 +5,31 @@
 namespace Z0
 {
     using System;
+    using System.Security;
+
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
     using static Root;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed512 Emitter512<T>()
+        where T : unmanaged;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed512 BinaryOp512(Fixed512 a, Fixed512 b);
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed512 BinaryOp512<T>(Fixed512 a, Fixed512 b)
+        where T : unmanaged;
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed512 UnaryOp512(Fixed512 a);
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed512 UnaryOp512<T>(Fixed512 a)
+        where T : unmanaged;
+
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Fixed512  : IFixed<Fixed512>
@@ -33,37 +53,37 @@ namespace Z0
         public static implicit operator Fixed512((Fixed256 x0, Fixed256 x1) x)
             => new Fixed512(x.x0,x.x1);
 
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed512(Vector512<byte> x)
-            => x.ToFixed();
+        // [MethodImpl(Inline)]
+        // public static implicit operator Fixed512(Vector512<byte> x)
+        //     => x.ToFixed();
 
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed512(Vector512<ushort> x)
-            => x.ToFixed();
+        // [MethodImpl(Inline)]
+        // public static implicit operator Fixed512(Vector512<ushort> x)
+        //     => x.ToFixed();
 
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed512(Vector512<uint> x)
-            => x.ToFixed();
+        // [MethodImpl(Inline)]
+        // public static implicit operator Fixed512(Vector512<uint> x)
+        //     => x.ToFixed();
 
-        [MethodImpl(Inline)]
-        public static implicit operator Fixed512(Vector512<ulong> x)
-            => x.ToFixed();
+        // [MethodImpl(Inline)]
+        // public static implicit operator Fixed512(Vector512<ulong> x)
+        //     => x.ToFixed();
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vector512<byte>(Fixed512 x)
-            => x.ToVector<byte>();
+        // [MethodImpl(Inline)]
+        // public static implicit operator Vector512<byte>(Fixed512 x)
+        //     => x.ToVector<byte>();
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vector512<ushort>(Fixed512 x)
-            => x.ToVector<ushort>();
+        // [MethodImpl(Inline)]
+        // public static implicit operator Vector512<ushort>(Fixed512 x)
+        //     => x.ToVector<ushort>();
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vector512<uint>(Fixed512 x)
-            => x.ToVector<uint>();
+        // [MethodImpl(Inline)]
+        // public static implicit operator Vector512<uint>(Fixed512 x)
+        //     => x.ToVector<uint>();
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vector512<ulong>(Fixed512 x)
-            => x.ToVector<ulong>();
+        // [MethodImpl(Inline)]
+        // public static implicit operator Vector512<ulong>(Fixed512 x)
+        //     => x.ToVector<ulong>();
 
         public string Format() 
             => array(X0,X1).FormatDataList();
@@ -80,5 +100,5 @@ namespace Z0
 
         public override string ToString() 
             => Format();                      
-    }
+    }    
 }

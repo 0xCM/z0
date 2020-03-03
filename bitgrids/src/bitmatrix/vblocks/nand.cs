@@ -9,10 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;    
-    
     using static ginx;
-    using static CpuVector;
+    using static Root;
+    using static Vectors;
     
     partial class vblock
     {     

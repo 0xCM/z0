@@ -7,7 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static zfunc;    
+    using static Root;    
+    using static Nats;
+    using static Literals;
+    using static Vectors;
 
     partial class bitpack
     {
@@ -19,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte pack32(in uint src, N8 n)
         {
-            var v0 = CpuVector.vload(n256, skip(src,0*8));
+            var v0 = vload(n256, skip(src,0*8));
             return (byte)bitpack.packlsb8(dinx.vcompact(v0, n128, z8));
         }
 
@@ -31,8 +34,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort pack32(in uint src, N16 n)
         {
-            var v0 = CpuVector.vload(n256, skip(src,0*8));
-            var v1 = CpuVector.vload(n256, skip(src,1*8));
+            var v0 = vload(n256, skip(src,0*8));
+            var v1 = vload(n256, skip(src,1*8));
             return bitpack.packlsb8(dinx.vcompact(v0, v1, n128, z8));
         }
 
@@ -44,12 +47,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint pack32(in uint src, N32 n)
         {            
-            var v0 = CpuVector.vload(n256, skip(src,0*8));
-            var v1 = CpuVector.vload(n256, skip(src,1*8));
+            var v0 = vload(n256, skip(src,0*8));
+            var v1 = vload(n256, skip(src,1*8));
             var x = dinx.vcompact(v0,v1,n256,z16);
 
-            v0 = CpuVector.vload(n256, skip(src,2*8));
-            v1 = CpuVector.vload(n256, skip(src,3*8));
+            v0 = vload(n256, skip(src,2*8));
+            v1 = vload(n256, skip(src,3*8));
             var y = dinx.vcompact(v0,v1,n256,z16);
 
             return bitpack.packlsb8(dinx.vcompact(x,y,n256,z8));
@@ -63,22 +66,22 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong pack32(in uint src, N64 n)
         {
-            var v0 = CpuVector.vload(n256, skip(src,0*8));
-            var v1 = CpuVector.vload(n256, skip(src,1*8));
+            var v0 = vload(n256, skip(src,0*8));
+            var v1 = vload(n256, skip(src,1*8));
             var x = dinx.vcompact(v0,v1,n256,z16);
 
-            v0 = CpuVector.vload(n256, skip(src,2*8));
-            v1 = CpuVector.vload(n256, skip(src,3*8));
+            v0 = vload(n256, skip(src,2*8));
+            v1 = vload(n256, skip(src,3*8));
             var y = dinx.vcompact(v0,v1,n256,z16);
 
             var packed = (ulong)packlsb8(dinx.vcompact(x,y,n256,z8));
 
-            v0 = CpuVector.vload(n256, skip(src,4*8));
-            v1 = CpuVector.vload(n256, skip(src,5*8));
+            v0 = vload(n256, skip(src,4*8));
+            v1 = vload(n256, skip(src,5*8));
             x = dinx.vcompact(v0,v1,n256,z16);
 
-            v0 = CpuVector.vload(n256, skip(src,6*8));
-            v1 = CpuVector.vload(n256, skip(src,7*8));
+            v0 = vload(n256, skip(src,6*8));
+            v1 = vload(n256, skip(src,7*8));
             y = dinx.vcompact(v0,v1,n256,z16);
 
             packed |= (ulong)packlsb8(dinx.vcompact(x,y,n256,z8)) << 32;

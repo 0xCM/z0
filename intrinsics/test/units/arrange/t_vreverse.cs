@@ -78,9 +78,9 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = CpuVector.vzero(w,t);
+                var expect = Vectors.vzero(w,t);
                 for(var j = 0; j < n; j++)
-                    expect = vfuncs.vcell(vfuncs.vcell(input,(n - 1) - j),j,expect);
+                    expect = Vectors.vcell(Vectors.vcell(input,(n - 1) - j),j,expect);
 
                 Claim.eq(expect,output);
             }
@@ -99,9 +99,9 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = CpuVector.vzero(w,t);
+                var expect = Vectors.vzero(w,t);
                 for(var j = 0; j < n; j++)
-                    expect = vfuncs.vcell(vcell(input,(n - 1) - j),j,expect);
+                    expect = Vectors.vcell(vcell(input,(n - 1) - j),j,expect);
 
                 Claim.eq(expect,output);
             }

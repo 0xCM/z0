@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
 
     partial class BitMatrix
     {        
@@ -21,6 +20,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int totalcells(int w, int m, int n)
             => BitCalcs.mincells(w,n) * m;
-
     }
 }

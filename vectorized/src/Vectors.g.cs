@@ -9,8 +9,9 @@ namespace Z0
     
     using static Root;
 
+
     [ApiHost("generic", ApiHostKind.Generic)]
-    public static partial class vfuncs
+    public static partial class Vectors
     {
 
 

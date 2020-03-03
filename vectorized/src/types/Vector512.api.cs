@@ -15,6 +15,18 @@ namespace Z0
     [ApiHost("v512")]
     public static class Vector512
     {
+
+        [MethodImpl(Inline)]
+        public static ref readonly F ToFixed<T,F>(this in Vector512<T> src)
+            where F : unmanaged, IFixed
+            where T : unmanaged
+                => ref Fixed.From<Vector512<T>,F>(in src);
+
+        [MethodImpl(Inline)]
+        public static Vector512<T> ToVector<T>(this in Fixed512 src)
+            where T : unmanaged
+                => Unsafe.As<Fixed512,Vector512<T>>(ref Unsafe.AsRef(in src));
+
         [MethodImpl(Inline),Op]
         public static Vector512<short> Create(
             short x0, short x1, short x2, short x3, short x4, short x5, short x6, short x7,

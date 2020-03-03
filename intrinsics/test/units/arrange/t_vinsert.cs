@@ -49,7 +49,7 @@ namespace Z0
                 var v128Src = Random.CpuVector<T>(w);
                 var srcSpan = v128Src.ToSpan();
 
-                var dst = CpuVector.vzero(n256,t);
+                var dst = Vectors.vzero(n256,t);
                 
                 var vLo = ginx.vinsert(v128Src, dst,0);
                 var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);

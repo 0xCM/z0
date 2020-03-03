@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static byte extract(in BitSpan src, N8 n, int offset)
         {
-            var v0 = CpuVector.vload(n256, head(extract(src, offset, bitsize<byte>())));
+            var v0 = Vectors.vload(n256, head(extract(src, offset, bitsize<byte>())));
             return (byte)bitpack.packlsb8(dinx.vcompact(v0,n128,z8));
         }
 

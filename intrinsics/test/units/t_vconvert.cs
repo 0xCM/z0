@@ -15,7 +15,7 @@ namespace Z0
         public void block_32x8u_to_128x32u()
         {
             var blockA = Blocks.parts<byte>(n32,1,2,3,4);
-            var x = CpuVector.vparts(n128,1,2,3,4);
+            var x = Vectors.vparts(n128,1,2,3,4);
             var blockB = x.ToBlock();            
             var y = dinx.vconvert(blockA, n128, z32);
             var blockC = y.ToBlock();            
@@ -26,8 +26,8 @@ namespace Z0
         public void block_64x8u_to_2x128x32u()
         {
             var block = Blocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
-            var xE = CpuVector.vparts(n128,1,2,3,4);
-            var yE = CpuVector.vparts(n128,5,6,7,8);
+            var xE = Vectors.vparts(n128,1,2,3,4);
+            var yE = Vectors.vparts(n128,5,6,7,8);
             var z = dinx.vconvert(block, n256,z32);
             Claim.eq(xE, dinx.vlo(z));
             Claim.eq(yE, dinx.vhi(z));
@@ -36,8 +36,8 @@ namespace Z0
         public void block_32x8u_to_2x128x64u()
         {
             var block = Blocks.parts<byte>(n32,1,2,3,4);
-            var xE = CpuVector.vparts(n128,1,2);
-            var yE = CpuVector.vparts(n128,3,4);
+            var xE = Vectors.vparts(n128,1,2);
+            var yE = Vectors.vparts(n128,3,4);
 
             var z = dinx.vconvert(block,n256,z64);
             Claim.eq(xE, dinx.vlo(z));
@@ -47,8 +47,8 @@ namespace Z0
         public void block_128x8u_to_2x128x16u()
         {
             var block = Blocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
-            var xE = CpuVector.vparts(n128,1,2,3,4,5,6,7,8);
-            var yE = CpuVector.vparts(n128,9,10,11,12,13,14,15,16);
+            var xE = Vectors.vparts(n128,1,2,3,4,5,6,7,8);
+            var yE = Vectors.vparts(n128,9,10,11,12,13,14,15,16);
             var z = dinx.vconvert(block,n256,z16);
             
             Claim.eq(xE, dinx.vlo(z));
@@ -57,9 +57,9 @@ namespace Z0
 
         public void v128x8u_v128x16u()
         {
-            var x = CpuVector.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var x = Vectors.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var y = dinx.vmaplo(x, n128, z16);
-            var z = CpuVector.vparts(n128,0,1,2,3,4,5,6,7);
+            var z = Vectors.vparts(n128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);
         }
 
@@ -67,7 +67,7 @@ namespace Z0
         {
             var x = Blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
             var y = dinx.vconvert(x, n128, z16);
-            var z = CpuVector.vparts(n128,0,1,2,3,4,5,6,7);            
+            var z = Vectors.vparts(n128,0,1,2,3,4,5,6,7);            
 
             Claim.eq(y,z);            
         }

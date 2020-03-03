@@ -14,7 +14,7 @@ namespace Z0
     using static AsIn;
     using static Nats;
 
-    partial class vfuncs
+    partial class Vectors
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector128<T> src, ref Fixed128 dst)
@@ -247,13 +247,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                VFuncD.vstore(vcast8u(src), ref As.uint8(ref dst));
+                VectorsD.vstore(vcast8u(src), ref As.uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                VFuncD.vstore(vcast16u(src), ref uint16(ref dst));
+                VectorsD.vstore(vcast16u(src), ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
-                VFuncD.vstore(vcast32u(src), ref uint32(ref dst));
+                VectorsD.vstore(vcast32u(src), ref uint32(ref dst));
             else
-                VFuncD.vstore(vcast64u(src), ref uint64(ref dst));
+                VectorsD.vstore(vcast64u(src), ref uint64(ref dst));
         }
 
         [MethodImpl(Inline)]
@@ -261,13 +261,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                VFuncD.vstore(vcast8i(src), ref As.int8(ref dst));
+                VectorsD.vstore(vcast8i(src), ref As.int8(ref dst));
             else if(typeof(T) == typeof(short))
-                VFuncD.vstore(vcast16i(src), ref int16(ref dst));
+                VectorsD.vstore(vcast16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))
-                VFuncD.vstore(vcast32i(src), ref int32(ref dst));
+                VectorsD.vstore(vcast32i(src), ref int32(ref dst));
             else
-                VFuncD.vstore(vcast64i(src), ref int64(ref dst));
+                VectorsD.vstore(vcast64i(src), ref int64(ref dst));
         }
 
         [MethodImpl(Inline)]
@@ -275,9 +275,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                VFuncD.vstore(vcast32f(src), ref float32(ref dst));
+                VectorsD.vstore(vcast32f(src), ref float32(ref dst));
             else if(typeof(T) == typeof(double))
-                VFuncD.vstore(vcast64f(src), ref float64(ref dst));
+                VectorsD.vstore(vcast64f(src), ref float64(ref dst));
             else 
                 throw unsupported<T>();                
         }
@@ -287,13 +287,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                VFuncD.vstore(vcast8u(src), ref As.uint8(ref dst));
+                VectorsD.vstore(vcast8u(src), ref As.uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                VFuncD.vstore(vcast16u(src), ref uint16(ref dst));
+                VectorsD.vstore(vcast16u(src), ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
-                VFuncD.vstore(vcast32u(src), ref uint32(ref dst));
+                VectorsD.vstore(vcast32u(src), ref uint32(ref dst));
             else
-                VFuncD.vstore(vcast64u(src), ref uint64(ref dst));
+                VectorsD.vstore(vcast64u(src), ref uint64(ref dst));
         }
 
         [MethodImpl(Inline)]
@@ -301,13 +301,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                VFuncD.vstore(vcast8i(src), ref As.int8(ref dst));
+                VectorsD.vstore(vcast8i(src), ref As.int8(ref dst));
             else if(typeof(T) == typeof(short))
-                VFuncD.vstore(vcast16i(src), ref int16(ref dst));
+                VectorsD.vstore(vcast16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))
-                VFuncD.vstore(vcast32i(src), ref int32(ref dst));
+                VectorsD.vstore(vcast32i(src), ref int32(ref dst));
             else
-                VFuncD.vstore(vcast64i(src), ref int64(ref dst));
+                VectorsD.vstore(vcast64i(src), ref int64(ref dst));
         }
 
         [MethodImpl(Inline)]
@@ -315,9 +315,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                VFuncD.vstore(vcast32f(src), ref float32(ref dst));
+                VectorsD.vstore(vcast32f(src), ref float32(ref dst));
             else if(typeof(T) == typeof(double))
-                VFuncD.vstore(vcast64f(src), ref float64(ref dst));
+                VectorsD.vstore(vcast64f(src), ref float64(ref dst));
             else 
                 throw unsupported<T>();                
         }
@@ -327,13 +327,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                VFuncD.vstore(vcast8u(src), ref uint8(ref dst), offset);
+                VectorsD.vstore(vcast8u(src), ref uint8(ref dst), offset);
             else if(typeof(T) == typeof(ushort))
-                VFuncD.vstore(vcast16u(src), ref uint16(ref dst), offset);
+                VectorsD.vstore(vcast16u(src), ref uint16(ref dst), offset);
             else if(typeof(T) == typeof(uint))
-                VFuncD.vstore(vcast32u(src), ref uint32(ref dst), offset);
+                VectorsD.vstore(vcast32u(src), ref uint32(ref dst), offset);
             else
-                VFuncD.vstore(vcast64u(src), ref uint64(ref dst), offset);
+                VectorsD.vstore(vcast64u(src), ref uint64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -341,13 +341,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                VFuncD.vstore(vcast8i(src), ref int8(ref dst), offset);
+                VectorsD.vstore(vcast8i(src), ref int8(ref dst), offset);
             else if(typeof(T) == typeof(short))
-                VFuncD.vstore(vcast16i(src), ref int16(ref dst), offset);
+                VectorsD.vstore(vcast16i(src), ref int16(ref dst), offset);
             else if(typeof(T) == typeof(int))
-                VFuncD.vstore(vcast32i(src), ref int32(ref dst), offset);
+                VectorsD.vstore(vcast32i(src), ref int32(ref dst), offset);
             else
-                VFuncD.vstore(vcast64i(src), ref int64(ref dst), offset);
+                VectorsD.vstore(vcast64i(src), ref int64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -355,9 +355,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                VFuncD.vstore(vcast32f(src), ref float32(ref dst), offset);
+                VectorsD.vstore(vcast32f(src), ref float32(ref dst), offset);
             else if(typeof(T) == typeof(double))
-                VFuncD.vstore(vcast64f(src), ref float64(ref dst), offset);
+                VectorsD.vstore(vcast64f(src), ref float64(ref dst), offset);
             else 
                 throw unsupported<T>();                
         }
@@ -367,13 +367,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                VFuncD.vstore(vcast8u(src), ref uint8(ref dst), offset);
+                VectorsD.vstore(vcast8u(src), ref uint8(ref dst), offset);
             else if(typeof(T) == typeof(ushort))
-                VFuncD.vstore(vcast16u(src), ref uint16(ref dst), offset);
+                VectorsD.vstore(vcast16u(src), ref uint16(ref dst), offset);
             else if(typeof(T) == typeof(uint))
-                VFuncD.vstore(vcast32u(src), ref uint32(ref dst), offset);
+                VectorsD.vstore(vcast32u(src), ref uint32(ref dst), offset);
             else
-                VFuncD.vstore(vcast64u(src), ref uint64(ref dst), offset);
+                VectorsD.vstore(vcast64u(src), ref uint64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -381,13 +381,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                VFuncD.vstore(vcast8i(src), ref int8(ref dst), offset);
+                VectorsD.vstore(vcast8i(src), ref int8(ref dst), offset);
             else if(typeof(T) == typeof(short))
-                VFuncD.vstore(vcast16i(src), ref int16(ref dst), offset);
+                VectorsD.vstore(vcast16i(src), ref int16(ref dst), offset);
             else if(typeof(T) == typeof(int))
-                VFuncD.vstore(vcast32i(src), ref int32(ref dst), offset);
+                VectorsD.vstore(vcast32i(src), ref int32(ref dst), offset);
             else
-                VFuncD.vstore(vcast64i(src), ref int64(ref dst), offset);
+                VectorsD.vstore(vcast64i(src), ref int64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]
@@ -395,9 +395,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                VFuncD.vstore(vcast32f(src), ref float32(ref dst), offset);
+                VectorsD.vstore(vcast32f(src), ref float32(ref dst), offset);
             else if(typeof(T) == typeof(double))
-                VFuncD.vstore(vcast64f(src), ref float64(ref dst), offset);
+                VectorsD.vstore(vcast64f(src), ref float64(ref dst), offset);
             else 
                 throw unsupported<T>();                
         }

@@ -12,7 +12,7 @@ namespace Z0
     using static Root;    
     using P = parity;
     using static Nats;
-    using static vfuncs;
+    using static Vectors;
 
     partial class BitVector
     {

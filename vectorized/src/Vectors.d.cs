@@ -16,7 +16,7 @@ namespace Z0
     using static Root;
 
     [ApiHost("direct", ApiHostKind.Direct)]
-    static class VFuncD
+    static class VectorsD
     {
         /// <summary>
         /// Stores vector content to a memory location

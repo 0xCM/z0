@@ -30,8 +30,6 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public delegate Fixed256 BinaryOp256(Fixed256 a, Fixed256 b);
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 BinaryOp512(Fixed512 a, Fixed512 b);
 
     [SuppressUnmanagedCodeSecurity]
     public delegate Fixed8 BinaryOp8<T>(Fixed8 a, Fixed8 b)
@@ -57,7 +55,6 @@ namespace Z0
     public delegate Fixed256 BinaryOp256<T>(Fixed256 a, Fixed256 b)
         where T : unmanaged;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 BinaryOp512<T>(Fixed512 a, Fixed512 b)
-        where T : unmanaged;
+
+
 }

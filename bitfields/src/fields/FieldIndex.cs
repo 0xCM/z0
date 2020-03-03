@@ -10,12 +10,11 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static zfunc;
+    using static Root;
 
     public readonly struct FieldIndex : IFieldIndex<FieldIndexEntry>
     {
         readonly FieldIndexEntry[] entries;
-
 
         public static FieldIndex<I,W> Create<I,U,W>()
             where I : unmanaged, Enum

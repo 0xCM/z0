@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public static class BitMatrix64x
     {   
@@ -69,5 +69,4 @@ namespace Z0
         public static BitMatrix64 AndNot(this BitMatrix64 A, in BitMatrix64 B)
             => BitMatrix.cnonimpl(A, B);
     }
-
 }

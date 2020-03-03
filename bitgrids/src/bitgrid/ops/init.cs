@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     partial class BitGrid
     {
@@ -654,6 +653,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged            
                 => new BitGrid256<M, N, T>(CpuVector.vbroadcast(n256, d)); 
-
     }
 }

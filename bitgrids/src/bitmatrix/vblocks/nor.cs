@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;    
+    using static Root;
+    using static Vectors;
     using static ginx;
     
     partial class vblock
@@ -18,8 +19,8 @@ namespace Z0
         public static Vector128<T> vnor<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
-            CpuVector.vload(in a, out Vector128<T> vA);
-            CpuVector.vload(in b, out Vector128<T> vB);
+            Vectors.vload(in a, out Vector128<T> vA);
+            Vectors.vload(in b, out Vector128<T> vB);
             return ginx.vnor(vA,vB);
         }
 
@@ -27,8 +28,8 @@ namespace Z0
         public static Vector256<T> vnor<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
-            CpuVector.vload(in a, out Vector256<T> vA);
-            CpuVector.vload(in b, out Vector256<T> vB);
+            Vectors.vload(in a, out Vector256<T> vA);
+            Vectors.vload(in b, out Vector256<T> vB);
             return ginx.vnor(vA,vB);
         }
 

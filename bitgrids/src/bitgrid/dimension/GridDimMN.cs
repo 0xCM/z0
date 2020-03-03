@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     /// <summary>
     /// Encapsulates metrics that characterize a grid of natural rectangular dimensions

@@ -122,7 +122,7 @@ namespace Z0
                 var x1 = Math128.mul(vcell(x,1), vcell(y,1));
                 var x2 = Math128.mul(vcell(x,2), vcell(y,2));
                 var x3 = Math128.mul(vcell(x,3), vcell(y,3));
-                var expect = CpuVector.vparts(wt, x0,x1,x2,x3);
+                var expect = Vectors.vparts(wt, x0,x1,x2,x3);
                 var actual = dinx.vmul(x,y);
 
                 Claim.eq(expect,actual);

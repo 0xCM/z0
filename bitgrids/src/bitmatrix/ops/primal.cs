@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitMatrix
     {        
@@ -124,7 +123,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix8 primal(N8 n8, byte row0 = 0, byte row1 = 0, byte row2 = 0, byte row3 = 0, 
             byte row4 = 0, byte row5 = 0, byte row6 = 0, byte row7 = 0)
-                => new BitMatrix8(array(row0,row1,row2,row3,row4,row5,row6, row7));
- 
+               => new BitMatrix8(array(row0,row1,row2,row3,row4,row5,row6, row7)); 
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
 
             var n = n128;
             var dst = Blocks.single<byte>(n);
-            var m0 = CpuVector.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
+            var m0 = Vectors.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
             var m1 = dinx.vsllx(m0,32);
             var m2 = dinx.vsllx(m1,32);
             var m3 = dinx.vsllx(m2,32);
@@ -36,8 +36,8 @@ namespace Z0
                 dinx.vmaskstore(v2, m2, dst);
                 dinx.vmaskstore(v3, m3, dst);
 
-                var v4 = CpuVector.vload(dst);
-                var v5 = CpuVector.vparts(n128, 
+                var v4 = Vectors.vload(dst);
+                var v5 = Vectors.vparts(n128, 
                     vcell(v0,0), vcell(v0,1), vcell(v0,2), vcell(v0,3),
                     vcell(v1,4), vcell(v1,5), vcell(v1,6), vcell(v1,7),
                     vcell(v2,8), vcell(v2,9), vcell(v2,A), vcell(v2,B),
@@ -53,8 +53,8 @@ namespace Z0
             var count = 32;
             var x = Random.CpuVector(n256,z8);
             var storage = Blocks.single(n256,z8);
-            var stored = CpuVector.vzero(n256,z8);
-            var mask = CpuVector.vzero(n256,z8);
+            var stored = Vectors.vzero(n256,z8);
+            var mask = Vectors.vzero(n256,z8);
 
             // Store every component
             storage.Clear();

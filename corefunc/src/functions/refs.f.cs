@@ -60,15 +60,6 @@ partial class zfunc
         => ref refs.head(src);
 
     /// <summary>
-    /// Returns a reference to the head of a span, offset by a specified amount
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<T>(Span<T> src, int offset)
-        => ref refs.head(src,offset);
-
-    /// <summary>
     /// Returns a reference to the head of a readonly span
     /// </summary>
     /// <param name="src">The source span</param>
@@ -76,6 +67,15 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref readonly T head<T>(ReadOnlySpan<T> src)
         => ref refs.head(src);
+
+    /// <summary>
+    /// Returns a reference to the head of a span, offset by a specified amount
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T head<T>(Span<T> src, int offset)
+        => ref refs.head(src,offset);
 
     /// <summary>
     /// Returns a readonly reference to the head of a readonly span, offset by a specified amount
@@ -86,7 +86,6 @@ partial class zfunc
     public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
         where T : unmanaged
             => ref refs.head(src,offset);
-
 
     /// <summary>
     /// Presents a reference as a byte reference

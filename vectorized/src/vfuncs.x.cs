@@ -11,48 +11,8 @@ namespace Z0
     
     using static Root;
 
-    public static class VFuncsX
+    public static partial class VectorExtensions
     {
-        /// <summary>
-        /// Allocates a span into which vector content is stored
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(NotInline)]
-        internal static Span<T> ToSpan<T>(this Vector128<T> src)
-            where T : unmanaged            
-                => vfuncs.span(src);
-
-        /// <summary>
-        /// Allocates and deposits vector content to a span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(NotInline)]
-        internal static Span<T> ToSpan<T>(this Vector256<T> src)
-            where T : unmanaged            
-                => vfuncs.span(src);
-
-        /// <summary>
-        /// Allocates and deposits vector content to a data block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(NotInline)]
-        internal static Block128<T> ToBlock<T>(this Vector128<T> src)
-            where T : unmanaged            
-                => vfuncs.block(src);
-
-        /// <summary>
-        /// Allocates and deposits vector content to a data block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(NotInline)]
-        internal static Block256<T> ToBlock<T>(this Vector256<T> src)
-            where T : unmanaged            
-                => vfuncs.block(src);
-
         /// <summary>
         /// Determines whether any elements of the source match the target
         /// </summary>
@@ -63,52 +23,6 @@ namespace Z0
         public static bool Contains<T>(this ReadOnlySpan<T> src, T target)        
             where T : unmanaged
                 => src.BinarySearch(target, PrimalComparer.Get<T>()) >= 0;
-
-        /// <summary>
-        /// Extracts an index-identified component from the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The index of the component to extract</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static T Cell<T>(this Vector128<T> src, int index)
-            where T : unmanaged 
-                => src.GetElement(index);
-                
-        /// <summary>
-        /// Sets an index-identified component to a specified value
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The index of the component to extract</param>
-        /// <param name="value">The new component value</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> Cell<T>(this Vector128<T> src, int index, T value)
-            where T : unmanaged
-                => src.WithElement(index,value);
-
-        /// <summary>
-        /// Sets an index-identified component to a specified value
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The index of the component to extract</param>
-        /// <param name="value">The new component value</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> Cell<T>(this Vector256<T> src, int index, T value)
-            where T : unmanaged
-                => src.WithElement(index,value);
-
-        /// <summary>
-        /// Extracts an index-identified component from the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The index of the component to extract</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static T Cell<T>(this Vector256<T> src, int index)
-            where T : unmanaged 
-                => src.GetElement(index);
 
         [MethodImpl(Inline)]
         public static T FirstCell<T>(this Vector128<T> src)
@@ -148,30 +62,15 @@ namespace Z0
                 return src.Cell(3);
         }    
 
-        /// <summary>
-        /// Formats cpu vector components of integral type as a sequence of hex values
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
-        /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Vector128<T> src, bool bracket = false, char? sep = null, bool specifier = false)
+        public static Vector512<T> ToVector<T>(this in Fixed512 src)
             where T : unmanaged
-                => vfuncs.span(src).FormatHex(bracket, sep, specifier);
+                => Unsafe.As<Fixed512,Vector512<T>>(ref Unsafe.AsRef(in src));
 
-        /// <summary>
-        /// Formats cpu vector components of integral type as a sequence of hex values
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
-        /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Vector256<T> src, bool bracket = false, char? sep = null, bool specifier = false)
-             where T : unmanaged
-                => vfuncs.span(src).FormatHex(bracket,sep, specifier);
+        public static Fixed512 ToFixed<T>(this Vector512<T> x)
+            where T : unmanaged
+                => Unsafe.As<Vector512<T>,Fixed512>(ref x);
+                
     }
 }

@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitGrid
     {        
@@ -157,6 +155,5 @@ namespace Z0
         public static BitGrid<T> not<T>(in BitGrid<T> gx)
             where T : unmanaged
                 => not(gx, alloc<T>(gx.RowCount, gx.ColCount));
-
     }
 }

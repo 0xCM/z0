@@ -6,8 +6,6 @@ namespace Z0
     using System;    
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     readonly struct BitGridIdentity : ITypeIdentityProvider
     {        
         public TypeIdentity DefineIdentity(Type src)
@@ -40,5 +38,4 @@ namespace Z0
                 return TypeIdentity.Empty;            
         }
     }
-
 }

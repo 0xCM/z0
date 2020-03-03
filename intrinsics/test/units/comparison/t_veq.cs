@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static Nats;
     using static Literals;
-    using static vfuncs;
+    using static Vectors;
 
     public class t_veq : t_vinx<t_veq>
     {     

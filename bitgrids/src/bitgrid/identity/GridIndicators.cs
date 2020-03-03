@@ -6,8 +6,6 @@ namespace Z0
     using System;    
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     public class GridIndicators
     {   
         public const string Natural = "bgnu";

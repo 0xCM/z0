@@ -5,19 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.ComponentModel;
-    using System.Collections.Concurrent;
 
     using static Root;
  
     partial class RootReflections
     {
-
         /// <summary>
         /// Raises an error if a method is nongeneric
         /// </summary>
@@ -35,5 +28,4 @@ namespace Z0
         public static Exception RequireGenericError(this MethodInfo src)
             => new Exception($"The method {src} is nongenric");
     }
-
 }

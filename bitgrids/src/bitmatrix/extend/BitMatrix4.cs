@@ -5,19 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
-    using static zfunc;
+    using static Root;
 
     public static class BitMatrix4x
     {   
         [MethodImpl(Inline)] 
-        public static BitMatrix4 Replicate(this BitMatrix4 src, bool structureOnly = false)
-            => structureOnly ? ushort.MinValue : (ushort)src;
+        public static BitMatrix4 Replicate(this BitMatrix4 src)
+            => (ushort)src;
 
         /// <summary>
         /// Converts the matrix to a bitvector
@@ -36,6 +32,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix4 Transpose(this BitMatrix4 A)
             => BitMatrix.transpose(A);
-
     }
 }

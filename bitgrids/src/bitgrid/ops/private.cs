@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     partial class BitGrid
     {
@@ -23,5 +23,4 @@ namespace Z0
             where T : unmanaged
                 => g.WithElement(index, data);
     }
-
 }

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     partial class BitMatrix
     {
@@ -73,7 +74,6 @@ namespace Z0
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return BitSquare.testc(in Z.Head);
         }
-
 
         /// <summary>
         /// Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise

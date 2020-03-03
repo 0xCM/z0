@@ -110,13 +110,13 @@ namespace Z0
 
             ref var g32src = ref g32.Head;
             
-            var row124 = CpuVector.vload(n, g32.BlockRef(124*cpr));
-            var row125 = CpuVector.vload(n, g32.BlockRef(125*cpr));
-            var row126 = CpuVector.vload(n, g32.BlockRef(126*cpr));
-            var row127 = CpuVector.vload(n, g32.BlockRef(127*cpr));
+            var row124 = Vectors.vload(n, g32.BlockRef(124*cpr));
+            var row125 = Vectors.vload(n, g32.BlockRef(125*cpr));
+            var row126 = Vectors.vload(n, g32.BlockRef(126*cpr));
+            var row127 = Vectors.vload(n, g32.BlockRef(127*cpr));
             
-            var diagA = dinx.vgather(n, in g32src, CpuVector.vparts(n, 496, 501, 506, 511));
-            var diagB = CpuVector.vparts(n, g32[496], g32[501], g32[506], g32[511]);
+            var diagA = dinx.vgather(n, in g32src, Vectors.vparts(n, 496, 501, 506, 511));
+            var diagB = Vectors.vparts(n, g32[496], g32[501], g32[506], g32[511]);
             Claim.eq(diagA,diagB);
         }
     }

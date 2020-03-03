@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.IO;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     partial class BitGrid
     {                
@@ -292,7 +293,6 @@ namespace Z0
         }
 
          static string HeaderSep
-            => new string('-',80);
-      
+            => new string('-',80);     
     }
 }

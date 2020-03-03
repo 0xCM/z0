@@ -16,35 +16,35 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in ulong src)
-            => new Span<byte>(constptr(in src), 8);
+            => new Span<byte>(refs.constptr(in src), 8);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in long src)
-            => new Span<byte>(constptr(in src), 8);
+            => new Span<byte>(refs.constptr(in src), 8);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in double src)
-            => new Span<byte>(constptr(in src), 8);
+            => new Span<byte>(refs.constptr(in src), 8);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in uint src)
-            => new Span<byte>(constptr(in src), 4);
+            => new Span<byte>(refs.constptr(in src), 4);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in int src)
-            => new Span<byte>(constptr(in src), 4);
+            => new Span<byte>(refs.constptr(in src), 4);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in float src)
-            => new Span<byte>(constptr(in src), 4);
+            => new Span<byte>(refs.constptr(in src), 4);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in ushort src)
-            => new Span<byte>(constptr(in src), 2);
+            => new Span<byte>(refs.constptr(in src), 2);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(in short src)
-            => new Span<byte>(constptr(in src), 2);
+            => new Span<byte>(refs.constptr(in src), 2);
 
         /// <summary>
         /// Unconditionally converts the sources value to the target type

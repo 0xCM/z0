@@ -72,7 +72,7 @@ namespace Z0
             var b1E = (byte)(xF + xF);
             var b1F = (byte)(xF + xF + 1);
 
-            return CpuVector.vparts(n256, 
+            return Vectors.vparts(n256, 
                 b0,b1, b2,b3, b4,b5, b6,b7, b8,b9,   bA,bB, bC,bD, bE,bF, 
                 b10,b11, b12,b13, b14,b15, b16,b17,  b18,b19, b1A,b1B, b1C,b1D, b1E,b1F
                 );
@@ -99,7 +99,7 @@ namespace Z0
             var x = vpattern.vincrements(w,z16);            
             var reverse = vpattern.decrements<ushort>(w);
             var identity = vpattern.vincrements<ushort>(w);
-            var pairswap = CpuVector.vparts(w,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
+            var pairswap = Vectors.vparts(w,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
             Claim.eq(reverse, y1);
@@ -115,12 +115,12 @@ namespace Z0
         {
             var n = n128;
             var x0 = vpattern.vincrements<byte>(n);
-            var x0Spec = CpuVector.vload(n, in head(Pattern1));
+            var x0Spec = Vectors.vload(n, in head(Pattern1));
             var x0Dst = dinx.vshuf16x8(x0,x0Spec);
             Claim.eq(x0Spec,x0Dst);
 
             var x1 = vpattern.vincrements<byte>(n);
-            var x1Spec = CpuVector.vload(n, in head(Pattern2));
+            var x1Spec = Vectors.vload(n, in head(Pattern2));
             var x1Dst = dinx.vshuf16x8(x1,x1Spec);
             Claim.eq(x1Spec,x1Dst);
 
@@ -170,8 +170,8 @@ namespace Z0
 
         public void vperm4x16()
         {
-            var id = CpuVector.vparts(n128,0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vperm4x16(CpuVector.vparts(n128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), CpuVector.vparts(n128,0,3,2,1,6,9,8,7));
+            var id = Vectors.vparts(n128,0,1,2,3,6,7,8,9);
+            Claim.eq(dinx.vperm4x16(Vectors.vparts(n128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), Vectors.vparts(n128,0,3,2,1,6,9,8,7));
         }
 
         public void vperm4x32_128x32u_example1()
@@ -201,7 +201,7 @@ namespace Z0
                 var v2 = dinx.vperm4x32(v1,p);
 
                 // Permute vector manually
-                var v3 = CpuVector.vparts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
+                var v3 = Vectors.vparts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
 
                 // Same?
                 Claim.eq(v3,v2);
@@ -218,24 +218,24 @@ namespace Z0
         public void vperm4x32_128x32u_example2()
         {
             var n = n128;
-            var src = CpuVector.vparts(n128,1,2,3,4);
+            var src = Vectors.vparts(n128,1,2,3,4);
             var spec = Perm4L.ABCD;
-            var y = CpuVector.vparts(n128,4,3,2,1);
+            var y = Vectors.vparts(n128,4,3,2,1);
             var x = dinx.vperm4x32(src, Perm4L.ABCD);
             Claim.eq(x, src);
 
-            y = CpuVector.vparts(n128,4,3,2,1);
+            y = Vectors.vparts(n128,4,3,2,1);
             spec = Perm4L.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
 
-            y = CpuVector.vparts(4u,3u,2u,1u);
+            y = Vectors.vparts(4u,3u,2u,1u);
             spec = Perm4L.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
 
-            Claim.eq(dinx.vperm4x32(CpuVector.vparts(0,1,2,3), Perm4L.ADCB), CpuVector.vparts(0,3,2,1));
-            Claim.eq(dinx.vperm4x32(CpuVector.vparts(0,1,2,3), Perm4L.DBCA), CpuVector.vparts(3,1,2,0));
+            Claim.eq(dinx.vperm4x32(Vectors.vparts(0,1,2,3), Perm4L.ADCB), Vectors.vparts(0,3,2,1));
+            Claim.eq(dinx.vperm4x32(Vectors.vparts(0,1,2,3), Perm4L.DBCA), Vectors.vparts(3,1,2,0));
         }
 
         static Vector256<byte> ShuffleIdentityMask()
