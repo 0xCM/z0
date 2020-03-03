@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <Import Project="$(TopDir)gmath/z0.gmath.exports.props"/>
+
   <ItemGroup>
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />

@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using static zfunc;
+
+    using static Root;
     
     public static class TextParser
     {
@@ -49,7 +50,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                observer?.Invoke(appMsg(e));
+                observer?.Invoke(AppMsg.Error(e));
             }
 
 
@@ -108,7 +109,7 @@ namespace Z0
         }
 
         public static Option<TextDoc> ReadTextDoc(this StreamReader src, TextFormat? format = null)
-            => src.ParseDocument(format, message => print(message));
+            => src.ParseDocument(format, message => term.print(message));
 
         static Option<TextLine> ParseLine(this StreamReader reader, uint lineNumber)
         {
@@ -124,7 +125,5 @@ namespace Z0
             => src[0]  == spec.Delimiter 
                     ? src.Substring(1).Split(spec.Delimiter) 
                     : src.Split(spec.Delimiter);
-
     }
-
 }

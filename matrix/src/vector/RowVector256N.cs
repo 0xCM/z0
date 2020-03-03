@@ -76,7 +76,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T operator *(RowVector256<N,T> lhs, in RowVector256<N,T> rhs)
-            => mathspan.dot<T>(lhs.Unsized, rhs.Unsized);
+            => gmath.dot<T>(lhs.Unsized, rhs.Unsized);
          
         [MethodImpl(Inline)]
         internal RowVector256(Span<T> src)
@@ -90,7 +90,6 @@ namespace Z0
             require(src.CellCount >= Length);
             data = src;
         }
-
 
         [MethodImpl(Inline)]
         internal RowVector256(NatSpan<N,T> src)

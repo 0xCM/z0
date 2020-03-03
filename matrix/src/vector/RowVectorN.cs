@@ -54,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T operator *(RowVector<N,T> lhs, RowVector<N,T> rhs)
-            => mathspan.dot<T>(lhs.Data, rhs.Data);         
+            => gmath.dot<T>(lhs.Data, rhs.Data);         
 
         /// <summary>
         /// Initializes a vector with an array

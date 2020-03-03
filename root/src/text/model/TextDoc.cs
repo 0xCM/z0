@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.Linq;
     
-
     public sealed class TextDoc
     {
         TextRow[] LineData;        
@@ -40,5 +36,4 @@ namespace Z0
         public uint HeaderLineCount
             => Header.IsSome() ? 1u : 0u;
     }
-
 }

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
         
-    using static zfunc;    
+    using static Root;    
 
     public interface IModN
     {
@@ -96,5 +96,4 @@ namespace Z0
             get => (uint)_N;
         } 
     }
-
 }

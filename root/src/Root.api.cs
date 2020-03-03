@@ -20,6 +20,12 @@ namespace Z0
         public static T[] alloc<T>(int length)
             => new T[length];
 
+        public static T[] alloc<T>(int length, T fill)
+        {
+            var dst = alloc<T>(length);
+            return dst.Fill(fill);
+        }            
+
         /// <summary>
         /// Returns the common length of the operands if they are the same; otherwise, raises an error
         /// </summary>

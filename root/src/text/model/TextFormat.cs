@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.Linq;
     
     public readonly struct TextFormat
     {        

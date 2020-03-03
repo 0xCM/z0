@@ -57,7 +57,8 @@ namespace Z0
         public static Matrix<N,T> alloc<N,T>(N n = default, T fill = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new Matrix<N, T>(zfunc.array((int)(zfunc.natval<N>()* zfunc.natval<N>()), fill));
+                => new Matrix<N, T>(
+                    Arrays.alloc((int)(natval<N>()* natval<N>()), fill));
 
         /// <summary>
         /// Allocates a blocked square matrix of natual dimension
@@ -287,7 +288,7 @@ namespace Z0
             {
                 ref readonly var row = ref doc[i];
                 for(var j = 0; j<row.Cells.Length; j++)
-                    dst[i,j] = gmath.parse<T>(row.Cells[j].CellValue);
+                    dst[i,j] = NumericParser.parse<T>(row.Cells[j].CellValue);
             }
 
             return dst;

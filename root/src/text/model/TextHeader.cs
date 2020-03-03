@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.Linq;
     
-
     /// <summary>
     /// Defines header content in a text data file
     /// </summary>
@@ -31,5 +27,4 @@ namespace Z0
         public override string ToString()
             => Format();
     }
-
 }

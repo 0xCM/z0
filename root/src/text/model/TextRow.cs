@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Collections.Generic;
-    using System.Linq;
-    
-    using static zfunc;
+    using System.Linq;    
 
     /// <summary>
     /// Defines a row of text parttioned into a sequence of cells
@@ -39,5 +36,4 @@ namespace Z0
         public override string ToString()
             => Format();
     }
-
 }

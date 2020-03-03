@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines grid dimensions based on specification without parametrization
@@ -32,8 +31,8 @@ namespace Z0
             var parts = s.Split('x');
             if(parts.Length == 2)
             {
-                if(gmath.parse(parts[0], out int m))
-                if(gmath.parse(parts[1], out int n))
+                if(NumericParser.parse(parts[0], out int m))
+                if(NumericParser.parse(parts[1], out int n))
                     return (m,n);
             }
             return Empty;

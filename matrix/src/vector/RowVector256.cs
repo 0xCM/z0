@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T operator *(RowVector256<T> lhs, in RowVector256<T> rhs)
-            => mathspan.dot<T>(lhs.Data, rhs.Data);
+            => gmath.dot<T>(lhs.Data, rhs.Data);
 
         public ref T this[int i]
         {

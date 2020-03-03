@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
         
-    using static zfunc;    
+    using static Root;    
 
     /// <summary>
     /// Defines mod/div operations
@@ -219,6 +219,4 @@ namespace Z0
         public override string ToString() 
             => Format();
     }
-
-
 }

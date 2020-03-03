@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Root;    
 
-    partial class gmath
+    using static Root;
+
+    public static class NumericParser
     {
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static T parse<T>(string src)
@@ -28,7 +28,7 @@ namespace Z0
             dst = default;
             if(typeof(T) == typeof(byte))
             {
-                if(math.parse(src, out byte x))
+                if(parse(src, out byte x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -38,7 +38,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(ushort))
             {
-                if(math.parse(src, out ushort x))
+                if(parse(src, out ushort x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -49,7 +49,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(uint))
             {
-                if(math.parse(src, out uint x))
+                if(parse(src, out uint x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -60,7 +60,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(ulong))
             {
-                if(math.parse(src, out ulong x))
+                if(parse(src, out ulong x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -81,7 +81,7 @@ namespace Z0
             dst = default;
             if(typeof(T) == typeof(sbyte))
             {
-                if(math.parse(src, out sbyte x))
+                if(parse(src, out sbyte x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -91,7 +91,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(short))
             {
-                if(math.parse(src, out short x))
+                if(parse(src, out short x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -102,7 +102,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(int))
             {
-                if(math.parse(src, out int x))
+                if(parse(src, out int x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -113,7 +113,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(long))
             {
-                if(math.parse(src, out long x))
+                if(parse(src, out long x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -134,7 +134,7 @@ namespace Z0
             
             if(typeof(T) == typeof(float))
             {
-                if(math.parse(src, out float x))
+                if(parse(src, out float x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -144,7 +144,7 @@ namespace Z0
             }
             else if(typeof(T) == typeof(double))
             {
-                if(math.parse(src, out double x))
+                if(parse(src, out double x))
                 {
                     dst = convert<T>(x);
                     return true;
@@ -164,5 +164,46 @@ namespace Z0
 
             return default;
         }
+ 
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out sbyte dst)
+            => sbyte.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out byte dst)
+            => byte.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out short dst)
+            => short.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out ushort dst)
+            => ushort.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out int dst)
+            => int.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out uint dst)
+            => uint.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out long dst)
+            => long.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out ulong dst)
+            => ulong.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out float dst)
+            => float.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        static bit parse(string src, out double dst)
+            => double.TryParse(src, out dst);
     }
 }

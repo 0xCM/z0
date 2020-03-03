@@ -56,7 +56,7 @@ namespace Z0
             if(indices.Length != 2)
                 return Zero;
             
-            var result = Root.Try(() => (gmath.parse<T>(indices[0]), gmath.parse<T>(indices[1])));
+            var result = Root.Try(() => (NumericParser.parse<T>(indices[0]), NumericParser.parse<T>(indices[1])));
             if(result.IsSome())
                 return result.Value();
             else
