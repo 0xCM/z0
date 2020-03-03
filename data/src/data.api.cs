@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     using System.Linq;
     using System.Collections.Generic;
     
-    using static zfunc;    
+    using static Root;    
  
     public static partial class Data
     {        
@@ -50,7 +48,7 @@ namespace Z0
                         }
                         catch(Exception e)
                         {
-                            error(e);
+                            term.error(e);
                         }
                     }
                 }

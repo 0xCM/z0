@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -66,6 +66,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 xor(BitVector64 x, BitVector64 y)
             => gmath.xor(x.data, y.data);
-
     }
 }

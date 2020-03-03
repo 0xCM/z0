@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -67,8 +67,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 rotl(BitVector64 x, int s)
              => gbits.rotl(x.Scalar,s);
-
-
     }
-
 }

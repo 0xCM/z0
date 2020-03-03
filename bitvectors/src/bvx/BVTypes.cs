@@ -8,13 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
-
     public static partial class BVTypes
     {
 
     }
-
 }
-
-

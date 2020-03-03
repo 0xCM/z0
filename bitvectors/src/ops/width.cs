@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -49,6 +49,5 @@ namespace Z0
         public static int width<T>(BitVector<T> x)
             where T : unmanaged
                 => bitsize<T>() - nlz(x);
-
     }
 }

@@ -14,9 +14,91 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    partial class blocks
+    partial class Blocks
     {
         /// <summary>
+        /// Computes the number of cells that comprise a single 8-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8)]
+        public static int length<T>(N8 w, T t = default)
+            where T : unmanaged
+                => Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Computes the number of cells that comprise a single 16-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
+        public static int length<T>(N16 w, T t = default)
+            where T : unmanaged
+                => 2/Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Computes the number of cells that comprise a single 32-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
+        public static int length<T>(N32 w, T t = default)
+            where T : unmanaged
+                => 4/Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Computes the number of elements that comprise a single 64-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        public static int length<T>(N64 w, T t = default)
+            where T : unmanaged
+                => 8/Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Computes the number of elements that comprise a single 128-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        public static int length<T>(N128 w, T t = default)
+            where T : unmanaged
+                => 16/Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Computes the number of elements that comprise a 256-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        public static int length<T>(N256 w, T t = default)
+            where T : unmanaged
+                => 32/Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Computes the number of elements that comprise a 512-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.All)]
+        public static int length<T>(N512 w, T t = default)
+            where T : unmanaged
+                => 64/Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Computes the number of T-cells that comprise an N-block
+        /// </summary>
+        /// <param name="w">The block width representative</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int length<N,T>(N w = default, T t = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => NatMath.div(w,N8.Rep)/Unsafe.SizeOf<T>();
+ 
+         /// <summary>
         /// Returns the length of equal-length blocks; otherwise raises an error
         /// </summary>
         /// <param name="lhs">The left span</param>

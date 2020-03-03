@@ -103,7 +103,7 @@ namespace Z0
 
         public static bool[] fcmp(Span<float> lhs, Span<float> rhs, FpCmpMode kind)
         {
-            var len =  SpanOps.length(lhs,rhs);
+            var len =  Spans.length(lhs,rhs);
             var result = Arrays.alloc<bool>(len);
             for(var i = 0; i< len; i++)
                 result[i] = fmath.fcmp(lhs[i], rhs[i], kind);
@@ -112,7 +112,7 @@ namespace Z0
 
         public static bool[] fcmp(Span<double> lhs, Span<double> rhs, FpCmpMode kind)
         {
-            var len = SpanOps.length(lhs,rhs);
+            var len = Spans.length(lhs,rhs);
             var result = Arrays.alloc<bool>(len);
             for(var i = 0; i< len; i++)
                 result[i] = fmath.fcmp(lhs[i], rhs[i], kind);

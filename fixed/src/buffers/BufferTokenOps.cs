@@ -17,7 +17,7 @@ namespace  Z0
         [MethodImpl(Inline)]
         public static unsafe Span<T> Content<T>(this BufferToken src)
             where T : unmanaged
-                => SpanOps.span((byte*)src.Handle.ToPointer(), src.Length).As<T>();
+                => Spans.span((byte*)src.Handle.ToPointer(), src.Length).As<T>();
 
         /// <summary>
         /// Fills a token-identified buffer with data from a span

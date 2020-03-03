@@ -51,7 +51,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(NotInline)]
         public static Span<T> alloc<T>(int length, T t = default)
-            => SpanOps.alloc<T>(length);
+            => Spans.alloc<T>(length);
 
         /// <summary>
         /// Consructs an array from a parameter array

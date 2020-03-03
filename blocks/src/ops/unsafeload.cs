@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class blocks
+    partial class Blocks
     {
         /// <summary>
         /// Loads a span into a blocked container without checks

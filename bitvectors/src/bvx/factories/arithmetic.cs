@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
     using static BVTypes;
 
     public static partial class BV
     {
-
         [MethodImpl(Inline)]
         public static Add<T> bvadd<T>(T t = default)
             where T : unmanaged        
@@ -23,6 +22,5 @@ namespace Z0
         public static Sub<T> bvsub<T>(T t = default)
             where T : unmanaged        
                 => Sub<T>.Op;
-
     }
 }

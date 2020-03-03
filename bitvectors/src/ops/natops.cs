@@ -9,8 +9,10 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;    
     using P = parity;
+    using static Nats;
+    using static vfuncs;
 
     partial class BitVector
     {

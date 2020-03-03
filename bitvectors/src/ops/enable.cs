@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -60,7 +59,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 enable(BitVector64 x, int index)
             => Bits.enable(x.data, index);
-
-
     }
 }

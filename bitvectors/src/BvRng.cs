@@ -9,13 +9,11 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
 
-    using static zfunc;
-
-    using BV = Z0.BitVector;
-
+    using static Root;
+    using static Nats;
+    
     public static class BvRng
     {   
-
         /// <summary>
         /// Produces a 4-bit primal bitvector predicated on a random source
         /// </summary>

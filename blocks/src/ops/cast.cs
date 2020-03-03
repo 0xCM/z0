@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class blocks
+    partial class Blocks
     {
         /// <summary>
         /// Presents a blocked span of S-cells as a blocked span of T-cells

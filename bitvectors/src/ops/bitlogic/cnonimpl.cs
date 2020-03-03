@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -22,6 +22,5 @@ namespace Z0
         public static BitVector<T> cnonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.cnonimpl(x.Scalar, y.Scalar);
-
    }
 }

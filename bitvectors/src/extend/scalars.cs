@@ -9,11 +9,10 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitVectorX
     {
-
         /// <summary>
         /// Defines a 16-bit bitvector from the lo 16 bits of the source
         /// </summary>
@@ -93,6 +92,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector24 ToBitVector(this ulong src, N24 n)
             => (uint)src;
-
    }
 }

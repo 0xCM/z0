@@ -9,11 +9,11 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static BKT;
-    using static ClosedBlockKind;
+    using static BTK;
+    using static BlockedKind;
 
     /// <summary>
-    /// Block-kinded type api
+    /// Block kinds api
     /// </summary>
     public static class BK
     {
@@ -75,11 +75,11 @@ namespace Z0
         /// Determines the block classifier for a blocked type
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static ClosedBlockKind kind(Type t)
-            => BK.test(t) ? kind(BK.width(t), BK.segment(t).GetNumericId()) : ClosedBlockKind.None;
+        public static BlockedKind kind(Type t)
+            => BK.test(t) ? kind(BK.width(t), BK.segment(t).GetNumericId()) : BlockedKind.None;
 
         [MethodImpl(Inline)]
-        public static ClosedBlockKind kind<W,T>(W w = default, T t = default)
+        public static BlockedKind kind<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -96,36 +96,36 @@ namespace Z0
             else if(typeof(W) == typeof(N512))
                 return kind<T>(default(N512));
             else
-                return ClosedBlockKind.None;
+                return BlockedKind.None;
         }
 
         [MethodImpl(Inline)]
-        public static ClosedBlockKind kind<T>(N16 w, T t = default)
+        public static BlockedKind kind<T>(N16 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
         [MethodImpl(Inline)]
-        public static ClosedBlockKind kind<T>(N32 w, T t = default)
+        public static BlockedKind kind<T>(N32 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
         [MethodImpl(Inline)]
-        public static ClosedBlockKind kind<T>(N64 w, T t = default)
+        public static BlockedKind kind<T>(N64 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
         [MethodImpl(Inline)]
-        public static ClosedBlockKind kind<T>(N128 w, T t = default)
+        public static BlockedKind kind<T>(N128 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
         [MethodImpl(Inline)]
-        public static ClosedBlockKind kind<T>(N256 w, T t = default)
+        public static BlockedKind kind<T>(N256 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
         [MethodImpl(Inline)]
-        public static ClosedBlockKind kind<T>(N512 w, T t = default)
+        public static BlockedKind kind<T>(N512 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
@@ -386,7 +386,7 @@ namespace Z0
         public static Block512x64f bk512x64f()
             => default;       
 
-       public static ClosedBlockKind kind(FixedWidth width, NumericId id)            
+       public static BlockedKind kind(FixedWidth width, NumericId id)            
         {
             var k = width switch 
                     { FixedWidth.W16 => 
@@ -479,241 +479,241 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_u<T>(N16 w, T t = default)
+        static BlockedKind kind_u<T>(N16 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ClosedBlockKind.b16x8u;
+                return BlockedKind.b16x8u;
             else if(typeof(T) == typeof(ushort))
-                return ClosedBlockKind.b16x16u;
+                return BlockedKind.b16x16u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_i<T>(N16 w, T t = default)
+        static BlockedKind kind_i<T>(N16 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return ClosedBlockKind.b16x8i;
+                return BlockedKind.b16x8i;
             else if(typeof(T) == typeof(short))
-                return ClosedBlockKind.b16x16i;
+                return BlockedKind.b16x16i;
             else
-                return ClosedBlockKind.None;
+                return BlockedKind.None;
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_u<T>(N32 w, T t = default)
+        static BlockedKind kind_u<T>(N32 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ClosedBlockKind.b32x8u;
+                return BlockedKind.b32x8u;
             else if(typeof(T) == typeof(ushort))
-                return ClosedBlockKind.b32x16u;
+                return BlockedKind.b32x16u;
             else if(typeof(T) == typeof(uint))
-                return ClosedBlockKind.b32x32u;
+                return BlockedKind.b32x32u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_i<T>(N32 w, T t = default)
+        static BlockedKind kind_i<T>(N32 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return ClosedBlockKind.b32x8i;
+                return BlockedKind.b32x8i;
             else if(typeof(T) == typeof(short))
-                return ClosedBlockKind.b32x16i;
+                return BlockedKind.b32x16i;
             else if(typeof(T) == typeof(int))
-                return ClosedBlockKind.b32x32i;
+                return BlockedKind.b32x32i;
             else
                 return kind_f(w, t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_f<T>(N32 w, T t = default)
+        static BlockedKind kind_f<T>(N32 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return ClosedBlockKind.b32x32f;
+                return BlockedKind.b32x32f;
             else
-                return ClosedBlockKind.None;
+                return BlockedKind.None;
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_u<T>(N64 w, T t = default)
+        static BlockedKind kind_u<T>(N64 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ClosedBlockKind.b64x8u;
+                return BlockedKind.b64x8u;
             else if(typeof(T) == typeof(ushort))
-                return ClosedBlockKind.b64x16u;
+                return BlockedKind.b64x16u;
             else if(typeof(T) == typeof(uint))
-                return ClosedBlockKind.b64x32u;
+                return BlockedKind.b64x32u;
             else if(typeof(T) == typeof(ulong))
-                return ClosedBlockKind.b64x64u;
+                return BlockedKind.b64x64u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_i<T>(N64 w, T t = default)
+        static BlockedKind kind_i<T>(N64 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return ClosedBlockKind.b64x8i;
+                return BlockedKind.b64x8i;
             else if(typeof(T) == typeof(short))
-                return ClosedBlockKind.b64x16i;
+                return BlockedKind.b64x16i;
             else if(typeof(T) == typeof(int))
-                return ClosedBlockKind.b64x32i;
+                return BlockedKind.b64x32i;
             else if(typeof(T) == typeof(long))
-                return ClosedBlockKind.b64x64i;
+                return BlockedKind.b64x64i;
             else
                 return kind_f(w, t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_f<T>(N64 w, T t = default)
+        static BlockedKind kind_f<T>(N64 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return ClosedBlockKind.b64x32f;
+                return BlockedKind.b64x32f;
             else if(typeof(T) == typeof(double))
-                return ClosedBlockKind.b64x64f;
+                return BlockedKind.b64x64f;
             else
-                return ClosedBlockKind.None;
+                return BlockedKind.None;
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_u<T>(N128 w, T t = default)
+        static BlockedKind kind_u<T>(N128 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ClosedBlockKind.b128x8u;
+                return BlockedKind.b128x8u;
             else if(typeof(T) == typeof(ushort))
-                return ClosedBlockKind.b128x16u;
+                return BlockedKind.b128x16u;
             else if(typeof(T) == typeof(uint))
-                return ClosedBlockKind.b128x32u;
+                return BlockedKind.b128x32u;
             else if(typeof(T) == typeof(ulong))
-                return ClosedBlockKind.b128x64u;
+                return BlockedKind.b128x64u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_i<T>(N128 w, T t = default)
+        static BlockedKind kind_i<T>(N128 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return ClosedBlockKind.b128x8i;
+                return BlockedKind.b128x8i;
             else if(typeof(T) == typeof(short))
-                return ClosedBlockKind.b128x16i;
+                return BlockedKind.b128x16i;
             else if(typeof(T) == typeof(int))
-                return ClosedBlockKind.b128x32i;
+                return BlockedKind.b128x32i;
             else if(typeof(T) == typeof(long))
-                return ClosedBlockKind.b128x64i;
+                return BlockedKind.b128x64i;
             else
                 return kind_f(w, t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_f<T>(N128 w, T t = default)
+        static BlockedKind kind_f<T>(N128 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return ClosedBlockKind.b128x32f;
+                return BlockedKind.b128x32f;
             else if(typeof(T) == typeof(double))
-                return ClosedBlockKind.b128x64f;
+                return BlockedKind.b128x64f;
             else
-                return ClosedBlockKind.None;
+                return BlockedKind.None;
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_u<T>(N256 w, T t = default)
+        static BlockedKind kind_u<T>(N256 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ClosedBlockKind.b256x8u;
+                return BlockedKind.b256x8u;
             else if(typeof(T) == typeof(ushort))
-                return ClosedBlockKind.b256x16u;
+                return BlockedKind.b256x16u;
             else if(typeof(T) == typeof(uint))
-                return ClosedBlockKind.b256x32u;
+                return BlockedKind.b256x32u;
             else if(typeof(T) == typeof(ulong))
-                return ClosedBlockKind.b256x64u;
+                return BlockedKind.b256x64u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_i<T>(N256 w, T t = default)
+        static BlockedKind kind_i<T>(N256 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return ClosedBlockKind.b256x8i;
+                return BlockedKind.b256x8i;
             else if(typeof(T) == typeof(short))
-                return ClosedBlockKind.b256x16i;
+                return BlockedKind.b256x16i;
             else if(typeof(T) == typeof(int))
-                return ClosedBlockKind.b256x32i;
+                return BlockedKind.b256x32i;
             else if(typeof(T) == typeof(long))
-                return ClosedBlockKind.b256x64i;
+                return BlockedKind.b256x64i;
             else
                 return kind_f(w, t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_f<T>(N256 w, T t = default)
+        static BlockedKind kind_f<T>(N256 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return ClosedBlockKind.b256x32f;
+                return BlockedKind.b256x32f;
             else if(typeof(T) == typeof(double))
-                return ClosedBlockKind.b256x64f;
+                return BlockedKind.b256x64f;
             else
-                return ClosedBlockKind.None;
+                return BlockedKind.None;
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_u<T>(N512 w, T t = default)
+        static BlockedKind kind_u<T>(N512 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ClosedBlockKind.b512x8u;
+                return BlockedKind.b512x8u;
             else if(typeof(T) == typeof(ushort))
-                return ClosedBlockKind.b512x16u;
+                return BlockedKind.b512x16u;
             else if(typeof(T) == typeof(uint))
-                return ClosedBlockKind.b512x32u;
+                return BlockedKind.b512x32u;
             else if(typeof(T) == typeof(ulong))
-                return ClosedBlockKind.b512x64u;
+                return BlockedKind.b512x64u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_i<T>(N512 w, T t = default)
+        static BlockedKind kind_i<T>(N512 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return ClosedBlockKind.b512x8i;
+                return BlockedKind.b512x8i;
             else if(typeof(T) == typeof(short))
-                return ClosedBlockKind.b512x16i;
+                return BlockedKind.b512x16i;
             else if(typeof(T) == typeof(int))
-                return ClosedBlockKind.b512x32i;
+                return BlockedKind.b512x32i;
             else if(typeof(T) == typeof(long))
-                return ClosedBlockKind.b512x64i;
+                return BlockedKind.b512x64i;
             else
                 return kind_f(w, t);
         }
 
         [MethodImpl(Inline)]
-        static ClosedBlockKind kind_f<T>(N512 w, T t = default)
+        static BlockedKind kind_f<T>(N512 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return ClosedBlockKind.b512x32f;
+                return BlockedKind.b512x32f;
             else if(typeof(T) == typeof(double))
-                return ClosedBlockKind.b512x64f;
+                return BlockedKind.b512x64f;
             else
-                return ClosedBlockKind.None;
+                return BlockedKind.None;
         }
     }
 }

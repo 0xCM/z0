@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class blocks
+    partial class Blocks
     {
         /// <summary>
         /// Loads 16-bit segments from a span, raising an error if said source does not evenly partition

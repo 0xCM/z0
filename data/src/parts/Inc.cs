@@ -6,9 +6,10 @@ namespace Z0
 {
     using System;
     
-    using static zfunc;    
     using static HexConst;
- 
+    using static Root;    
+    using static Nats;
+
     public static partial class Data
     {
         [Op]

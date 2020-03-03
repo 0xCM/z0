@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class blocks
+    partial class Blocks
     {
         /// <summary>
         /// If possible, applies the conversion S -> T for each cell in the source block

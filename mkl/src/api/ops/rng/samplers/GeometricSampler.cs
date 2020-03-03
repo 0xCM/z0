@@ -22,7 +22,7 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {            
             if(typeof(T) == typeof(int))
-                sample.geometric(Source,  DistSpec, SpanOps.span32i(buffer));
+                sample.geometric(Source,  DistSpec, Spans.span32i(buffer));
             else 
                 throw unsupported<T>();
             

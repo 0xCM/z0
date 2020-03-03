@@ -6,15 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
-    using static zfunc;    
-    using static As;
-
+    using static Root;    
+    using static Nats;
+    
     public static class Gf512
     {
-
         public const int MemberCount = 512;
 
         static readonly BitVector32 Redux =  GfPoly.Lookup<N9,uint>().Scalar;
@@ -53,10 +50,8 @@ namespace Z0
                 if((p & (1ul << i)) != 0)
                     p^= (r <<(i-16));
             }
+         
             return (ushort)p;
         }
-
     }
-
-
 }

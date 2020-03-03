@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class blocks
+    partial class Blocks
     {
         /// <summary>
         /// Allocates a specified number of 16-bit blocks, filled with an optional pattern
@@ -21,7 +21,7 @@ namespace Z0
         [Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
         public static Block16<T> alloc<T>(N16 w, int blocks, T t = default)
             where T : unmanaged        
-                => new Block16<T>(new T[blocks * blocklen<T>(w)]);
+                => new Block16<T>(new T[blocks * length<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 32-bit blocks, filled with an optional pattern
@@ -32,7 +32,7 @@ namespace Z0
         [Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
         public static Block32<T> alloc<T>(N32 w, int blocks, T t = default)
             where T : unmanaged        
-                => new Block32<T>(new T[blocks * blocklen<T>(w)]);
+                => new Block32<T>(new T[blocks * length<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 64-bit blocks, filled with an optional pattern
@@ -43,7 +43,7 @@ namespace Z0
         [Op, NumericClosures(NumericKind.All)]
         public static Block64<T> alloc<T>(N64 w, int blocks, T t = default)
             where T : unmanaged        
-                => new Block64<T>(new T[blocks * blocklen<T>(w)]);
+                => new Block64<T>(new T[blocks * length<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 128-bit blocks
@@ -54,7 +54,7 @@ namespace Z0
         [Op, NumericClosures(NumericKind.All)]
         public static Block128<T> alloc<T>(N128 w, int blocks, T t = default)
             where T : unmanaged        
-                => new Block128<T>(new T[blocks * blocklen<T>(w)]);
+                => new Block128<T>(new T[blocks * length<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 256-bit blocks
@@ -65,7 +65,7 @@ namespace Z0
         [Op, NumericClosures(NumericKind.All)]
         public static Block256<T> alloc<T>(N256 w, int blocks, T t = default)
             where T : unmanaged        
-                => new Block256<T>(new T[blocks * blocklen<T>(w)]);
+                => new Block256<T>(new T[blocks * length<T>(w)]);
 
         /// <summary>
         /// Allocates a specified number of 512-bit blocks
@@ -76,6 +76,6 @@ namespace Z0
         [Op, NumericClosures(NumericKind.All)]
         public static Block512<T> alloc<T>(N512 w, int blocks, T t = default)
             where T : unmanaged        
-                => new Block512<T>(new T[blocks * blocklen<T>(w)]);
+                => new Block512<T>(new T[blocks * length<T>(w)]);
     }
 }

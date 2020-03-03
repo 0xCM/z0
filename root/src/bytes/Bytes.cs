@@ -35,6 +35,25 @@ namespace Z0
                 => MemoryMarshal.CreateSpan(ref refs.byterefR(ref src), size<T>()); 
 
         /// <summary>
+        /// Constructs a span from a parameter array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        static Span<T> span<T>(params T[] src)
+            => src;
+
+        /// <summary>
+        /// Converts the source value to a bytespan
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<byte> from<T>(T src)
+            where T : unmanaged
+                => MemoryMarshal.AsBytes(span(src));
+
+        /// <summary>
         /// Converts the source value to a bytespan
         /// </summary>
         /// <param name="src">The source value</param>
@@ -80,6 +99,26 @@ namespace Z0
         }
 
         /// <summary>
+        /// Reads a generic value from the head of a source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static T cell<T>(ReadOnlySpan<byte> src)
+            where T : unmanaged        
+                => MemoryMarshal.Read<T>(src);
+
+        /// <summary>
+        /// Reads a generic value from the head of a source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static T cell<T>(Span<byte> src)
+            where T : unmanaged        
+                => MemoryMarshal.Read<T>(src);
+
+        /// <summary>
         /// Writes an unmanaged source value to an array
         /// </summary>
         /// <param name="src">The source value</param>
@@ -101,7 +140,7 @@ namespace Z0
         /// <param name="offset">The source array offset</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static T cell<T>(Span<byte> src, int offset = 0)
+        public static T cell<T>(Span<byte> src, int offset)
             where T : unmanaged
                 => Unsafe.ReadUnaligned<T>(ref seek(ref head(src), offset));
 
@@ -112,7 +151,7 @@ namespace Z0
         /// <param name="offset">The source span offset</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static T cell<T>(ReadOnlySpan<byte> src, int offset = 0)
+        public static T cell<T>(ReadOnlySpan<byte> src, int offset)
             where T : unmanaged
                 => Unsafe.ReadUnaligned<T>(ref mutable(skip(head(src), offset)));
     }

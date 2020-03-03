@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-
-    using static zfunc;    
+    
+    using static Root;    
 
     partial class BitVector
     {
-
         /// <summary>
         /// Computes the bitvector z := x | y from bitvectors x and y
         /// </summary>
@@ -68,7 +66,5 @@ namespace Z0
         public static BitVector<T> or<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.or(x.Scalar,y.Scalar);
-
-
     }
 }

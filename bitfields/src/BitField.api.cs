@@ -132,7 +132,7 @@ namespace Z0
 
         static FixedData<T> fixedalloc<T>(int bitcount)
             where T : unmanaged
-                => new FixedData<T>(blocks.alloc<T>(n64, blocks.blockcount<T>(bitcount)), bitcount);             
+                => new FixedData<T>(Blocks.alloc<T>(n64, Blocks.bitcover<T>(bitcount)), bitcount);             
 
         /// <summary>
         /// Creates a stateful numeric bitfield api surface

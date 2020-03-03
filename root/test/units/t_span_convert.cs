@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+
+    using static Root;
 
     public sealed class t_span_convert : UnitTest<t_span_convert>
     {
@@ -14,13 +15,13 @@ namespace Z0
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
             where T : unmanaged
         {
-            Claim.eq(expect, read<T>(src));
+            Claim.eq(expect, Bytes.cell<T>(src));
         }
 
         void VerifySpanBytesToValues<T>(Span<byte> src, Span<T> expect)
             where T : unmanaged
         {
-            Claim.numeq(expect, SpanOps.cast<T>(src));
+            Claim.numeq(expect, Spans.cast<T>(src));
         }
 
         void VerifyBytesToValues<T>()
@@ -90,7 +91,7 @@ namespace Z0
 
             var valSize = sizeof(int);
             var values = Random.Stream<int>().ToSpan(Pow2.T08);
-            var bytes = alloc<byte>(sizeof(int)*values.Length);
+            var bytes = Spans.alloc<byte>(sizeof(int)*values.Length);
             for(int i = 0, offset = 0; i< values.Length; i++, offset += valSize)
             {
                 var value = values[i];

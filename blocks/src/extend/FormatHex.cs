@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    partial class BlockExtend
+    partial class ExtendedBlocks
     {
         /// <summary>
         /// Formats a 64-bit blocked span as a sequence of hex values

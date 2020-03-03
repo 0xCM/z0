@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
 
-    using static zfunc;    
-    using static As;
+    using static Root;
 
     public static class Gf8
     {

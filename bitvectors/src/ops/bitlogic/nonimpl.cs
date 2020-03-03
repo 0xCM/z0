@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -21,9 +21,5 @@ namespace Z0
         public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.nonimpl(x.Scalar, y.Scalar);
-
-
-
-
     }
 }

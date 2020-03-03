@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -16,7 +15,5 @@ namespace Z0
         public static bit same<T>(in BitVector<T> x, in BitVector<T> y)
             where T : unmanaged
                 => gmath.eq(x.data,y.data);
-
     }
-
 }

@@ -227,7 +227,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256<N,U> Convert<U>()
             where U : unmanaged
-               => new Matrix256<N,U>(blocks.convert<T,U>(data));
+               => new Matrix256<N,U>(Blocks.convert<T,U>(data));
 
         [MethodImpl(Inline)]
         public Matrix256<N,U> As<U>()

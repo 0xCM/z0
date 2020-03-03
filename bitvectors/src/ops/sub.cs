@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
-
         /// <summary>
         /// Computes the arithmetic difference z := x - y for bitvectors x and y
         /// </summary>

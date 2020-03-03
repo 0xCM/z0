@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class blocks
+    partial class Blocks
     {
         /// <summary>
         /// Converts a generic reference into a void pointer

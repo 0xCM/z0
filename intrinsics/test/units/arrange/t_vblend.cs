@@ -207,7 +207,7 @@ namespace Z0
 
                 var m = vdata.blendspec(n256,false,n64);
 
-                var es = blocks.single<ulong>(n);
+                var es = Blocks.single<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = parity.odd(i) ? ys[i] : xs[i];
                 var expect = es.LoadVector();

@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -77,8 +75,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 init(ulong src)
             => new BitVector64(src);
-
-
     }
-
 }

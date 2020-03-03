@@ -57,7 +57,7 @@ namespace Z0
             return wrapper.CreateDelegate<BinaryOp<Vector256<T>>>(id.WithImm8(imm8),reified);
         }
 
-        public static DynamicDelegate<UnaryBlockedOp128<T>> UnaryOpImm<T>(BKT.Blocked128 k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryBlockedOp128<T>> UnaryOpImm<T>(BTK.Blocked128 k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var reified = src.Reify(typeof(T));

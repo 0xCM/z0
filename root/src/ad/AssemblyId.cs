@@ -135,9 +135,9 @@ namespace Z0
         
         AsmDecode = T32,
 
-        VFuncs = T33,
+        Vectorized = T33,
 
-        VFuncsTest = VFuncs | Test,
+        VectorizedTest = Vectorized | Test,
 
         Time = T34,
 

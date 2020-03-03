@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RowBits<T> load<T>(Span<byte> src)
             where T : unmanaged
-                => new RowBits<T>(SpanOps.cast<T>(src));
+                => new RowBits<T>(Spans.cast<T>(src));
                 
         /// <summary>
         /// Loads loads rows from a span

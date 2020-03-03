@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class BlockExtend    
+    partial class ExtendedBlocks    
     {
         [MethodImpl(Inline)]
         public static Span<T> Slice<T>(this in Block16<T> src, int offset)

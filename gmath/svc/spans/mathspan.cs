@@ -324,7 +324,7 @@ namespace Z0
 
         public static Span<byte> avgi(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)        
         {
-            Span<byte> dst = new byte[SpanOps.length(lhs,rhs)];
+            Span<byte> dst = new byte[Spans.length(lhs,rhs)];
             for(var i=0; i<dst.Length; i++)
                 dst[i] = math.avgi(lhs[i],rhs[i]);
             return dst;
@@ -332,7 +332,7 @@ namespace Z0
 
         public static Span<ushort> avgi(ReadOnlySpan<ushort> lhs, ReadOnlySpan<ushort> rhs)        
         {
-            Span<ushort> dst = new ushort[SpanOps.length(lhs,rhs)];
+            Span<ushort> dst = new ushort[Spans.length(lhs,rhs)];
             for(var i=0; i<dst.Length; i++)
                 dst[i] = math.avgi(lhs[i],rhs[i]);
             return dst;
@@ -343,13 +343,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(avg_checked(SpanOps.span8u(src)));
+                return generic<T>(avg_checked(Spans.span8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(avg_checked(SpanOps.span16u(src)));
+                return generic<T>(avg_checked(Spans.span16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(avg_checked(SpanOps.span32u(src)));
+                return generic<T>(avg_checked(Spans.span32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(avg_checked(SpanOps.span64u(src)));
+                return generic<T>(avg_checked(Spans.span64u(src)));
             else
                 return avg_i(src);
         }           
@@ -359,13 +359,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(avg_checked(SpanOps.span8i(src)));
+                return generic<T>(avg_checked(Spans.span8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(avg_checked(SpanOps.span16i(src)));
+                return generic<T>(avg_checked(Spans.span16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(avg_checked(SpanOps.span32i(src)));
+                return generic<T>(avg_checked(Spans.span32i(src)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(avg_checked(SpanOps.span64i(src)));
+                return generic<T>(avg_checked(Spans.span64i(src)));
             else
                 return fspan.avg(src);
         }           

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class BlockExtend    
+    partial class ExtendedBlocks    
     {
         [MethodImpl(Inline)]
         public static void CopyTo<T>(this in Block16<T> src, Span<T> dst)

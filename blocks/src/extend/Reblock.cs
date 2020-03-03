@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class BlockExtend    
+    partial class ExtendedBlocks    
     {
         /// <summary>
         /// Converts 64-bit blocks to 32-bit blocks without allocation

@@ -7,16 +7,6 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Reads a generic value from the head of a source span
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The value type</typeparam>
-    [MethodImpl(Inline)]
-    public static T read<T>(ReadOnlySpan<byte> src)
-        where T : unmanaged        
-            => MemoryMarshal.Read<T>(src);
-
-    /// <summary>
     /// Loads a span from a memory reference
     /// </summary>
     /// <param name="src">The memory source</param>
@@ -36,15 +26,15 @@ partial class zfunc
     public static ReadOnlySpan<T> view<T>(in T src, int count)
         => MemoryMarshal.CreateReadOnlySpan(ref Unsafe.AsRef(in src), count);
 
+
     /// <summary>
-    /// Reads a single cell into a span of bytes
+    /// Constructs a span from a parameter array
     /// </summary>
-    /// <param name="src">The source reference</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]   
-    public static Span<byte> readbytes<T>(ref T src)
-        where T : unmanaged
-            => MemoryMarshal.CreateSpan(ref byterefR(ref src), size<T>()); 
+    /// <param name="src">The source array</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static Span<T> span<T>(params T[] src)
+        => src;
 
     /// <summary>
     /// Converts the source value to a bytespan
@@ -55,16 +45,6 @@ partial class zfunc
     public static Span<byte> bytes<T>(T src)
         where T : unmanaged
             => MemoryMarshal.AsBytes(span(src));
-
-    /// <summary>
-    /// Converts a source value of any value type to its bytespan representation
-    /// </summary>
-    /// <param name="src">The source value</param>
-    /// <typeparam name="T">The value type</typeparam>
-    [MethodImpl(Inline)]
-    public static void readbytes<T>(in T src, Span<byte> dst)
-        where T : unmanaged
-            => As.generic<T>(ref head(dst)) = src;
 
     /// <summary>
     /// Reads a generic value beginning at a specified offset

@@ -18,7 +18,7 @@ namespace Z0
             const byte N = 0;
 
             var n = n128;
-            var dst = blocks.single<byte>(n);
+            var dst = Blocks.single<byte>(n);
             var m0 = CpuVector.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
             var m1 = dinx.vsllx(m0,32);
             var m2 = dinx.vsllx(m1,32);
@@ -52,7 +52,7 @@ namespace Z0
         {
             var count = 32;
             var x = Random.CpuVector(n256,z8);
-            var storage = blocks.single(n256,z8);
+            var storage = Blocks.single(n256,z8);
             var stored = CpuVector.vzero(n256,z8);
             var mask = CpuVector.vzero(n256,z8);
 

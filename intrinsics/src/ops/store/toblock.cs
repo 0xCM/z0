@@ -22,7 +22,7 @@ namespace Z0
         public static Block128<T> ToBlock<T>(this Vector128<T> src)
             where T : unmanaged            
         {
-            var dst = blocks.single<T>(n128);
+            var dst = Blocks.single<T>(n128);
             ginx.vstore(src, ref dst.Head);
             return dst;
         }                       
@@ -36,7 +36,7 @@ namespace Z0
         public static Block256<T> ToBlock<T>(this Vector256<T> src)
             where T : unmanaged            
         {
-            var dst = blocks.single<T>(n256);
+            var dst = Blocks.single<T>(n256);
             ginx.vstore(src, ref dst.Head);
             return dst;
         }            
@@ -50,7 +50,7 @@ namespace Z0
         public static Block512<T> ToBlock<T>(this Vector512<T> src)
             where T : unmanaged            
         {
-            var dst = blocks.single<T>(n512);
+            var dst = Blocks.single<T>(n512);
             ginx.vstore(src, ref dst.Head);
             return dst;
         }            

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -75,6 +75,5 @@ namespace Z0
         public static BitString bitstring<T>(BitVector<T> src, int width)
             where T : unmanaged
                 => BitString.scalar<T>(src.Scalar, width);
-
    }
 }

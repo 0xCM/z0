@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -75,6 +74,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(BitVector64 x, BitFormatConfig? fmt = null)
             => bitstring(x).Format(fmt);
-
     }
 }

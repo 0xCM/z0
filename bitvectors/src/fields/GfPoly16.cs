@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
-    using static zfunc;    
-    using static As;
+    using static Root;    
 
     /// <summary>
     /// Represents a base-2 polynomial of degree at most N = 15. The represented polynomial is of the form

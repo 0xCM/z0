@@ -6,11 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
-
-    using static zfunc;    
-    using static As;
     
     /// <summary>
     /// Primitive polynomials for GF reduction
@@ -18,7 +13,6 @@ namespace Z0
     /// <remarks>The tables at https://www.partow.net/programming/polynomials/index.html were used for the source data</remarks>
     public static class GfPoly
     {
-
         /// <summary>
         /// x^2 + x^1 + x^0
         /// </summary>
@@ -122,5 +116,4 @@ namespace Z0
             }
         }
    }
-
 }

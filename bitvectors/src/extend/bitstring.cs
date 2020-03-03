@@ -175,7 +175,7 @@ namespace Z0
         public static BitVector128<N,T> ToBitVector<N,T>(this BitString src, N128 n, T t = default)
             where T : unmanaged   
             where N : unmanaged, ITypeNat
-                => blocks.safeload(n,src.Pack().As<byte, T>()).LoadVector();
+                => Blocks.safeload(n,src.Pack().As<byte, T>()).LoadVector();
 
     }
 }

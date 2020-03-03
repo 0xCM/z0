@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
         
     using static Root;
-    using static blocks;
+    using static Blocks;
 
     /// <summary>
     /// Encapsulates a span that with content length can be evenly partitioned into 128-bit blocks
@@ -85,7 +85,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => blocklen<T>(N);        
+            get => length<T>(N);        
         }
 
         /// <summary>
@@ -155,7 +155,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
-                
+            => ref data.GetPinnableReference();                
     }
 }

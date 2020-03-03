@@ -39,7 +39,7 @@ namespace Z0
         static Block256<T> and<T>(Block256<T> lhs, Block256<T> rhs)
             where T : unmanaged
         {
-            var dst = blocks.alloc<T>(n256,lhs.BlockCount);
+            var dst = Blocks.alloc<T>(n256,lhs.BlockCount);
             mathspan.and(lhs,rhs, dst.Data);
             return dst;
         }            

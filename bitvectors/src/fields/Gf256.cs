@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
 
-    using static zfunc;    
-    using static As;
-
+    using static Root;
+    using static Nats;
+    
     public static class Gf256
     {
         public const int MemberCount = 256;

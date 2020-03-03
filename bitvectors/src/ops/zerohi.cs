@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -59,6 +59,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 zerohi(BitVector64 src, int pos)
             => gbits.zerohi(src.data, pos);
-
     }
 }

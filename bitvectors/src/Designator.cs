@@ -7,9 +7,6 @@ namespace Z0.Designators
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
     public sealed class BitVectors : AssemblyResolution<BitVectors, BitVectors.C>
     {
         const AssemblyId Identity = AssemblyId.BitVectors;

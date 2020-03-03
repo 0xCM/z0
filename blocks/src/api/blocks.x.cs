@@ -8,43 +8,25 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Reflection;
+    using System.Linq;    
 
     using static Root;
 
-    public static partial class BlockExtend    
+    public static partial class ExtendedBlocks    
     {
-        static N8 n8 => default;
-
-        static N16 n16 => default;
-
-        static N32 n32 => default;
-
-        static N64 n64 => default;
-
-        static N128 n128 => default;
-
-        static N256 n256 => default;
+        /// <summary>
+        /// Determines whether a method defines a predicate that returns a bit or bool value
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsPredicate(this MethodInfo m)        
+            => m.ParameterTypes().Distinct().Count() == 1 
+            && (m.ReturnType == typeof(bit) || m.ReturnType == typeof(bool));
 
         /// <summary>
-        /// Determines whether a type is blocked memory store
+        /// If type is intrinsic or blocked, returns the primal type over which the segmentation is defined; otherwise, returns none
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsBlocked(this Type t)
-            => BK.test(t);
-
-        /// <summary>
-        /// Determines whether a method accepts and/or returns at least one memory block parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBlocked(this MethodInfo m)
-            => m.Tagged<BlockedOpAttribute>();
-
-        /// <summary>
-        /// Determines whether a method is segmentation-centric
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsSegmented(this MethodInfo m)
-            => m.IsVectorized() || m.IsBlocked();
+        public static Type SegmentType(this Type t)
+            => t.IsSegmented() && t.IsClosedGeneric() ? t.SuppliedTypeArgs().Single() : typeof(void); 
     }
 }

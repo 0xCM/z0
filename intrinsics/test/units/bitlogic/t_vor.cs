@@ -155,7 +155,7 @@ namespace Z0
 
             var xb = Random.Blocks<T>(w, blocks);
             var yb = Random.Blocks<T>(w, blocks);
-            var zb = Z0.blocks.alloc<T>(w, blocks);
+            var zb = Z0.Blocks.alloc<T>(w, blocks);
             vblocks.vor(xb,yb,zb);
             
             for(var i=0; i<cells; i++)
@@ -172,7 +172,7 @@ namespace Z0
 
             var xb = Random.Blocks<T>(w, blocks);
             var yb = Random.Blocks<T>(w, blocks);
-            var zb = Z0.blocks.alloc<T>(w, blocks);
+            var zb = Z0.Blocks.alloc<T>(w, blocks);
             vblocks.vor(xb,yb,zb);
             
             for(var i=0; i<cells; i++)

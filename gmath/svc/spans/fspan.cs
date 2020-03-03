@@ -9,7 +9,7 @@ namespace Z0
         
     using static Root;    
     using static As;
-    using static SpanOps;
+    using static Spans;
 
     public static class fspan
     {        
@@ -27,9 +27,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(avg(SpanOps.span32f(src)));
+                return generic<T>(avg(Spans.span32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(avg(SpanOps.span64f(src)));
+                return generic<T>(avg(Spans.span64f(src)));
             else            
                 throw unsupported<T>();
         }           
@@ -45,7 +45,7 @@ namespace Z0
         public static Span<T> fdiv<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
-            var len = SpanOps.length(lhs,rhs);
+            var len = Spans.length(lhs,rhs);
             for(var i = 0; i< len; i++)
                 lhs[i] = gfp.div(lhs[i], rhs[i]);
             return lhs;
@@ -123,7 +123,7 @@ namespace Z0
 
         public static Span<T> ceil<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => ceil(src, SpanOps.alloc<T>(src.Length));
+                => ceil(src, Spans.alloc<T>(src.Length));
 
         public static Span<T> ceil<T>(Span<T> io)
             where T : unmanaged
@@ -144,7 +144,7 @@ namespace Z0
 
         public static Span<T> floor<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => floor(src, SpanOps.alloc<T>(src.Length));
+                => floor(src, Spans.alloc<T>(src.Length));
 
         public static Span<T> floor<T>(Span<T> src)
             where T : unmanaged

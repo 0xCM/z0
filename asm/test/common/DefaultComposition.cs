@@ -31,7 +31,7 @@ namespace Z0
                 Designators.LibM.Resolution,
                 Designators.Logix.Resolution,
                 Designators.Root.Resolution,
-                Designators.VFuncs.Resolution);
+                Designators.Vectorized.Resolution);
 
         [MethodImpl(Inline)]
         public static IAssemblyComposition Create()

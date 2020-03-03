@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class BlockExtend    
+    partial class ExtendedBlocks    
     {
         /// <summary>
         /// Zero-fills the block

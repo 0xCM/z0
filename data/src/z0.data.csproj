@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
-    <ProjectReference Include="$(TopDir)dynamic/src/z0.dynamic.csproj" />
+    <ProjectReference Include="$(TopDir)identity/src/z0.identity.csproj" />
   </ItemGroup>
 
 </Project>

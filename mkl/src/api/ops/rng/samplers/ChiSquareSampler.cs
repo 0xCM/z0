@@ -21,9 +21,9 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {            
             if(typeof(T) == typeof(float))
-                sample.chi2(Source, DistSpec, SpanOps.span32f(buffer));
+                sample.chi2(Source, DistSpec, Spans.span32f(buffer));
             else if (typeof(T) == typeof(double))
-                sample.chi2(Source, DistSpec, SpanOps.span64f(buffer));
+                sample.chi2(Source, DistSpec, Spans.span64f(buffer));
             else 
                 throw unsupported<T>();            
             return buffer.Length;

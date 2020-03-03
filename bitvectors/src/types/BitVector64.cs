@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
+    using static Nats;
 
     /// <summary>
     /// Defines a 64-bit bitvector

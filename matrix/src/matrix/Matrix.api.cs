@@ -71,7 +71,7 @@ namespace Z0
         public static Matrix256<N,T> blockalloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => blocks.taballoc<T>(n256, natval(n), natval(n)); 
+                => Blocks.rectangle<T>(n256, natval(n), natval(n)); 
 
         /// <summary>
         /// Allocates a blocked matrix of natual dimensions
@@ -87,7 +87,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => blocks.taballoc<T>(n256, natval(m), natval(n)); 
+                => Blocks.rectangle<T>(n256, natval(m), natval(n)); 
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -158,7 +158,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => blocks.safeload(n256,src);
+                => Blocks.safeload(n256,src);
 
         /// <summary>
         /// Defines a square matrix
@@ -283,7 +283,7 @@ namespace Z0
             if(n != doc.Rows[0].Cells.Length)
                 return default;
 
-            var dst =  Matrix.blockload<M,N,T>(blocks.taballoc<T>(n256,natval<M>(),natval<N>()));
+            var dst =  Matrix.blockload<M,N,T>(Blocks.rectangle<T>(n256,natval<M>(),natval<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];

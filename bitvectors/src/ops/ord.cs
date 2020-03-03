@@ -6,12 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
-
-    using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -29,7 +23,5 @@ namespace Z0
             }
             return 0;
         }
-
-
     }
 }

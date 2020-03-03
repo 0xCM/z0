@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -22,6 +21,5 @@ namespace Z0
         public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
             where T : unmanaged
                 => gmath.select(x.data, y.data, z.data);
-
-  }
+    }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class BlockExtend    
+    partial class ExtendedBlocks    
     {
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T BlockRef<T>(this in Block16<T> src, int index)
             where T : unmanaged
-                => ref blocks.blockref(src,index);
+                => ref Blocks.reference(src,index);
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T BlockRef<T>(this in Block32<T> src, int index)
             where T : unmanaged
-                => ref blocks.blockref(src,index);
+                => ref Blocks.reference(src,index);
         
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T BlockRef<T>(this in Block64<T> src, int index)
             where T : unmanaged
-                => ref blocks.blockref(src,index);
+                => ref Blocks.reference(src,index);
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block

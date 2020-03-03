@@ -20,92 +20,92 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<short> int16<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
-                => SpanOps.cast<T,short>(src.Span);
+                => Spans.cast<T,short>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<ushort> uint16<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
-                => SpanOps.cast<T,ushort>(src.Span);
+                => Spans.cast<T,ushort>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<int> int32<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
-                => SpanOps.cast<T,int>(src.Span);
+                => Spans.cast<T,int>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<uint> uint32<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
-                => SpanOps.cast<T,uint>(src.Span);
+                => Spans.cast<T,uint>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<long> int64<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
-                => SpanOps.cast<T,long>(src.Span);
+                => Spans.cast<T,long>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<ulong> uint64<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
-                => SpanOps.cast<T,ulong>(src.Span);
+                => Spans.cast<T,ulong>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<float> float32<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
-                => SpanOps.cast<T,float>(src.Span);
+                => Spans.cast<T,float>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<double> float64<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
-                => SpanOps.cast<T,double>(src.Span);
+                => Spans.cast<T,double>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<sbyte> src)
             where T : unmanaged
-                => SpanOps.cast<sbyte,T>(src.Span);
+                => Spans.cast<sbyte,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<byte> src)
             where T : unmanaged
-                => SpanOps.cast<byte,T>(src.Span);
+                => Spans.cast<byte,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<short> src)
             where T : unmanaged
-                => SpanOps.cast<short,T>(src.Span);
+                => Spans.cast<short,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<ushort> src)
             where T : unmanaged
-                => SpanOps.cast<ushort,T>(src.Span);
+                => Spans.cast<ushort,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<int> src)
             where T : unmanaged
-                => SpanOps.cast<int,T>(src.Span);
+                => Spans.cast<int,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<uint> src)
             where T : unmanaged
-                => SpanOps.cast<uint,T>(src.Span);
+                => Spans.cast<uint,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<long> src)
             where T : unmanaged
-                => SpanOps.cast<long,T>(src.Span);
+                => Spans.cast<long,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<ulong> src)
             where T : unmanaged
-                => SpanOps.cast<ulong,T>(src.Span);
+                => Spans.cast<ulong,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<float> src)
             where T : unmanaged
-                => SpanOps.cast<float,T>(src.Span);
+                => Spans.cast<float,T>(src.Span);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<double> src)
             where T : unmanaged
-                => SpanOps.cast<double,T>(src.Span);                 
+                => Spans.cast<double,T>(src.Span);                 
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    partial class BlockExtend
+    partial class ExtendedBlocks
     {
         /// <summary>
         /// Formats a blocked span as a delimited list

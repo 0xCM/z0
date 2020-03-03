@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -60,7 +60,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 alt(N64 n, bit parity)
             => parity ? BitMasks.Even64 : BitMasks.Odd64;
-
-
     }
 }

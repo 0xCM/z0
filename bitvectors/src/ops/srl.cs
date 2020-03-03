@@ -9,13 +9,10 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
 
-    using static zfunc;    
-    using static nfunc;
-    using static As;
+    using static Root;    
 
     partial class BitVector
     {
-
         /// <summary>
         /// Computes z := x >> s for a bitvector x and shift offset s
         /// </summary>
@@ -70,6 +67,5 @@ namespace Z0
         public static BitVector<T> srl<T>(BitVector<T> x, byte s)
             where T : unmanaged
                 => gmath.srl(x.Scalar,s);
-
    }
 }

@@ -20,13 +20,13 @@ namespace Z0.OpCodes
 
 
         public static int blockalign_64x8u_var(int cellcount)
-            => blocks.minblocks<byte>(n64,cellcount);
+            => Blocks.cellcover<byte>(n64,cellcount);
 
         public static int blockalign_64x8u_16()
-            => blocks.minblocks<byte>(n64,16);
+            => Blocks.cellcover<byte>(n64,16);
 
         public static int blockalign_64x8u_17()
-            => blocks.minblocks<byte>(n64,17);
+            => Blocks.cellcover<byte>(n64,17);
 
         public static ReadOnlySpan<char> Chars
             => new char[]{'0','1','2','3','4','5'};

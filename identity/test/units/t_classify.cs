@@ -190,64 +190,64 @@ namespace Z0
 
         public void classify_block_16()
         {
-            Claim.eq(BK.kind(typeof(Block16<byte>)), ClosedBlockKind.b16x8u);
-            Claim.eq(BK.kind(typeof(Block16<sbyte>)), ClosedBlockKind.b16x8i);
-            Claim.eq(BK.kind(typeof(Block16<ushort>)), ClosedBlockKind.b16x16u);
-            Claim.eq(BK.kind(typeof(Block16<short>)), ClosedBlockKind.b16x16i);
+            Claim.eq(BK.kind(typeof(Block16<byte>)), BlockedKind.b16x8u);
+            Claim.eq(BK.kind(typeof(Block16<sbyte>)), BlockedKind.b16x8i);
+            Claim.eq(BK.kind(typeof(Block16<ushort>)), BlockedKind.b16x16u);
+            Claim.eq(BK.kind(typeof(Block16<short>)), BlockedKind.b16x16i);
         }
 
         void classify_block_32()
         {
-            Claim.eq(BK.kind(typeof(Block32<byte>)), ClosedBlockKind.b32x8u);
-            Claim.eq(BK.kind(typeof(Block32<sbyte>)), ClosedBlockKind.b32x8i);
-            Claim.eq(BK.kind(typeof(Block32<ushort>)), ClosedBlockKind.b32x16u);
-            Claim.eq(BK.kind(typeof(Block32<short>)), ClosedBlockKind.b32x16i);
-            Claim.eq(BK.kind(typeof(Block32<uint>)), ClosedBlockKind.b32x32u);
-            Claim.eq(BK.kind(typeof(Block32<int>)), ClosedBlockKind.b32x32i);
-            Claim.eq(BK.kind(typeof(Block32<float>)), ClosedBlockKind.b32x32f);
+            Claim.eq(BK.kind(typeof(Block32<byte>)), BlockedKind.b32x8u);
+            Claim.eq(BK.kind(typeof(Block32<sbyte>)), BlockedKind.b32x8i);
+            Claim.eq(BK.kind(typeof(Block32<ushort>)), BlockedKind.b32x16u);
+            Claim.eq(BK.kind(typeof(Block32<short>)), BlockedKind.b32x16i);
+            Claim.eq(BK.kind(typeof(Block32<uint>)), BlockedKind.b32x32u);
+            Claim.eq(BK.kind(typeof(Block32<int>)), BlockedKind.b32x32i);
+            Claim.eq(BK.kind(typeof(Block32<float>)), BlockedKind.b32x32f);
         }
 
         void classify_block_64()
         {
-            Claim.eq(BK.kind(typeof(Block64<byte>)), ClosedBlockKind.b64x8u);
-            Claim.eq(BK.kind(typeof(Block64<sbyte>)), ClosedBlockKind.b64x8i);
-            Claim.eq(BK.kind(typeof(Block64<ushort>)), ClosedBlockKind.b64x16u);
-            Claim.eq(BK.kind(typeof(Block64<short>)), ClosedBlockKind.b64x16i);
-            Claim.eq(BK.kind(typeof(Block64<uint>)), ClosedBlockKind.b64x32u);
-            Claim.eq(BK.kind(typeof(Block64<int>)), ClosedBlockKind.b64x32i);
-            Claim.eq(BK.kind(typeof(Block64<ulong>)), ClosedBlockKind.b64x64u);
-            Claim.eq(BK.kind(typeof(Block64<long>)), ClosedBlockKind.b64x64i);
-            Claim.eq(BK.kind(typeof(Block64<float>)), ClosedBlockKind.b64x32f);
-            Claim.eq(BK.kind(typeof(Block64<double>)), ClosedBlockKind.b64x64f);
+            Claim.eq(BK.kind(typeof(Block64<byte>)), BlockedKind.b64x8u);
+            Claim.eq(BK.kind(typeof(Block64<sbyte>)), BlockedKind.b64x8i);
+            Claim.eq(BK.kind(typeof(Block64<ushort>)), BlockedKind.b64x16u);
+            Claim.eq(BK.kind(typeof(Block64<short>)), BlockedKind.b64x16i);
+            Claim.eq(BK.kind(typeof(Block64<uint>)), BlockedKind.b64x32u);
+            Claim.eq(BK.kind(typeof(Block64<int>)), BlockedKind.b64x32i);
+            Claim.eq(BK.kind(typeof(Block64<ulong>)), BlockedKind.b64x64u);
+            Claim.eq(BK.kind(typeof(Block64<long>)), BlockedKind.b64x64i);
+            Claim.eq(BK.kind(typeof(Block64<float>)), BlockedKind.b64x32f);
+            Claim.eq(BK.kind(typeof(Block64<double>)), BlockedKind.b64x64f);
         }
 
         void classify_block_128()
         {
-            Claim.eq(BK.kind(typeof(Block128<byte>)), ClosedBlockKind.b128x8u);
-            Claim.eq(BK.kind(typeof(Block128<sbyte>)), ClosedBlockKind.b128x8i);
-            Claim.eq(BK.kind(typeof(Block128<ushort>)), ClosedBlockKind.b128x16u);
-            Claim.eq(BK.kind(typeof(Block128<short>)), ClosedBlockKind.b128x16i);
-            Claim.eq(BK.kind(typeof(Block128<uint>)), ClosedBlockKind.b128x32u);
-            Claim.eq(BK.kind(typeof(Block128<int>)), ClosedBlockKind.b128x32i);
-            Claim.eq(BK.kind(typeof(Block128<ulong>)), ClosedBlockKind.b128x64u);
-            Claim.eq(BK.kind(typeof(Block128<long>)), ClosedBlockKind.b128x64i);
-            Claim.eq(BK.kind(typeof(Block128<float>)), ClosedBlockKind.b128x32f);
-            Claim.eq(BK.kind(typeof(Block128<double>)), ClosedBlockKind.b128x64f);
+            Claim.eq(BK.kind(typeof(Block128<byte>)), BlockedKind.b128x8u);
+            Claim.eq(BK.kind(typeof(Block128<sbyte>)), BlockedKind.b128x8i);
+            Claim.eq(BK.kind(typeof(Block128<ushort>)), BlockedKind.b128x16u);
+            Claim.eq(BK.kind(typeof(Block128<short>)), BlockedKind.b128x16i);
+            Claim.eq(BK.kind(typeof(Block128<uint>)), BlockedKind.b128x32u);
+            Claim.eq(BK.kind(typeof(Block128<int>)), BlockedKind.b128x32i);
+            Claim.eq(BK.kind(typeof(Block128<ulong>)), BlockedKind.b128x64u);
+            Claim.eq(BK.kind(typeof(Block128<long>)), BlockedKind.b128x64i);
+            Claim.eq(BK.kind(typeof(Block128<float>)), BlockedKind.b128x32f);
+            Claim.eq(BK.kind(typeof(Block128<double>)), BlockedKind.b128x64f);
 
         }
 
         void classify_block_256()
         {
-            Claim.eq(BK.kind(typeof(Block256<byte>)), ClosedBlockKind.b256x8u);
-            Claim.eq(BK.kind(typeof(Block256<sbyte>)), ClosedBlockKind.b256x8i);
-            Claim.eq(BK.kind(typeof(Block256<ushort>)), ClosedBlockKind.b256x16u);
-            Claim.eq(BK.kind(typeof(Block256<short>)), ClosedBlockKind.b256x16i);
-            Claim.eq(BK.kind(typeof(Block256<uint>)), ClosedBlockKind.b256x32u);
-            Claim.eq(BK.kind(typeof(Block256<int>)), ClosedBlockKind.b256x32i);
-            Claim.eq(BK.kind(typeof(Block256<ulong>)), ClosedBlockKind.b256x64u);
-            Claim.eq(BK.kind(typeof(Block256<long>)), ClosedBlockKind.b256x64i);
-            Claim.eq(BK.kind(typeof(Block256<float>)), ClosedBlockKind.b256x32f);
-            Claim.eq(BK.kind(typeof(Block256<double>)), ClosedBlockKind.b256x64f);
+            Claim.eq(BK.kind(typeof(Block256<byte>)), BlockedKind.b256x8u);
+            Claim.eq(BK.kind(typeof(Block256<sbyte>)), BlockedKind.b256x8i);
+            Claim.eq(BK.kind(typeof(Block256<ushort>)), BlockedKind.b256x16u);
+            Claim.eq(BK.kind(typeof(Block256<short>)), BlockedKind.b256x16i);
+            Claim.eq(BK.kind(typeof(Block256<uint>)), BlockedKind.b256x32u);
+            Claim.eq(BK.kind(typeof(Block256<int>)), BlockedKind.b256x32i);
+            Claim.eq(BK.kind(typeof(Block256<ulong>)), BlockedKind.b256x64u);
+            Claim.eq(BK.kind(typeof(Block256<long>)), BlockedKind.b256x64i);
+            Claim.eq(BK.kind(typeof(Block256<float>)), BlockedKind.b256x32f);
+            Claim.eq(BK.kind(typeof(Block256<double>)), BlockedKind.b256x64f);
         }
 
         public void classify_vector()

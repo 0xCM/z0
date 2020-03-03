@@ -198,7 +198,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int tableblocks<T>(N256 w, int rows, int cols, T t = default)
             where T : unmanaged
-                => blocks.minblocks<T>(w, tablecells<T>(rows,cols));
+                => Blocks.cellcover<T>(w, tablecells<T>(rows,cols));
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
@@ -215,6 +215,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => blocks.minblocks<T>(w, tablecells<T>(natval(m), natval(n)));        
+                => Blocks.cellcover<T>(w, tablecells<T>(natval(m), natval(n)));        
     }
 }

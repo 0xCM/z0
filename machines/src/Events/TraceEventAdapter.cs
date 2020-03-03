@@ -53,6 +53,6 @@ namespace Z0
         where T : unmanaged
     {
         public virtual T Body
-            => read<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());
+            => Bytes.cell<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());
     }
 }

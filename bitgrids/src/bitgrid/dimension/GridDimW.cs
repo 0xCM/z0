@@ -89,7 +89,7 @@ namespace Z0
         public int BlockCount
         {
             [MethodImpl(Inline)]
-            get => blocks.minblocks<W,M,N,T>();
+            get => Blocks.cellcover<W,M,N,T>();
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => blocks.blocklen<W,T>();
+            get => Blocks.length<W,T>();
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(NotInline)]
     public static Span<T> alloc<T>(int length, T t = default)
-        => SpanOps.alloc<T>(length);
+        => Spans.alloc<T>(length);
 
     /// <summary>
     /// Allocates a span
@@ -29,7 +29,7 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(NotInline)]
     public static Span<T> alloc<T>(ushort length, T t = default)
-        => SpanOps.alloc<T>(length);
+        => Spans.alloc<T>(length);
 
     /// <summary>
     /// Allocates a span
@@ -38,19 +38,10 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(NotInline)]
     public static Span<T> alloc<T>(byte length, T t = default)
-        => SpanOps.alloc<T>(length);
+        => Spans.alloc<T>(length);
 
     [MethodImpl(Inline)]
     public static unsafe Span<T> span<T>(T* pSrc, int length)
         where T : unmanaged
-            => SpanOps.span(pSrc,length);
-
-    /// <summary>
-    /// Constructs a span from a parameter array
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<T> span<T>(params T[] src)
-        => src;
+            => Spans.span(pSrc,length);
 }

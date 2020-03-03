@@ -9,9 +9,10 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static blocks;
+    using static Blocks;
+    using static Nats;
 
-    partial class BlockExtend    
+    partial class ExtendedBlocks    
     {
         /// <summary>
         /// Extracts the upper half of an index-identified block
@@ -22,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> HiBlock<T>(this in Block128<T> src, int block)
             where T : unmanaged
-                => src.Slice(block * src.BlockLength + blocklen<T>(n64), blocklen<T>(n64));
+                => src.Slice(block * src.BlockLength + length<T>(n64), length<T>(n64));
 
     }
 }

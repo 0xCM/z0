@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static blocks;
+    using static Blocks;
 
-    partial class BlockExtend    
+    partial class ExtendedBlocks    
     {
        [MethodImpl(Inline)]
         public static void Fill<T>(this in Block16<T> dst, T data)

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -57,5 +57,4 @@ namespace Z0
         public static BitVector128<N128,ulong> extend(BitVector64 src, N128 n)
             => new BitVector128<N128, ulong>(dinx.vscalar(n,src));
     }
-
 }

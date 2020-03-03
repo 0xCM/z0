@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
     using static BVTypes;
 
     public static partial class BV
@@ -62,8 +62,5 @@ namespace Z0
         public static Gather<T> bvgather<T>(T t = default)
             where T : unmanaged        
                 => Gather<T>.Op;
-
     }
 }
-
-

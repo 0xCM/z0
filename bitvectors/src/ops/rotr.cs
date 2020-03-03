@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -67,6 +66,5 @@ namespace Z0
         public static BitVector<T> rotr<T>(BitVector<T> x, int s)
             where T : unmanaged
                 => gbits.rotr(x.Scalar,s);
-
     }
 }

@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -62,6 +61,5 @@ namespace Z0
         public static uint pop<T>(BitVector<T> x)
             where T : unmanaged
                 => gbits.pop(x.data);
-
    }
 }

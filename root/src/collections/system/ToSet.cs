@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         public static ISet<T> ToSet<T>(this Span<T> src)        
             where T : unmanaged
-                => SpanOps.set(src.ReadOnly());
+                => Spans.set(src.ReadOnly());
 
         /// <summary>
         /// Constructs a hash set from span content
@@ -28,7 +28,7 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         public static ISet<T> ToSet<T>(this ReadOnlySpan<T> src)        
             where T : unmanaged
-                => SpanOps.set(src);
+                => Spans.set(src);
 
         /// <summary>
         /// Constructs a hash set from span content
@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         public static ISet<T> ToSet<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)        
             where T : unmanaged
-                => SpanOps.set(a,b);
+                => Spans.set(a,b);
 
         /// <summary>
         /// Constructs a hash set from span content

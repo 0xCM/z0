@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -21,7 +21,6 @@ namespace Z0
         public static BitVector<T> nor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.nor(x.Scalar, y.Scalar);
-
          
         /// <summary>
         /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
@@ -67,6 +66,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 nor(BitVector64 x, BitVector64 y)
             => gmath.nor(x.data, y.data); 
-
    }
 }

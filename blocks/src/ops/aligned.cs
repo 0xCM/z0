@@ -10,7 +10,7 @@ namespace Z0
         
     using static Root;
 
-    partial class blocks
+    partial class Blocks
     {
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 8-bit blocks
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bool aligned<T>(N8 n, int count)
             where T : unmanaged        
-                => count % blocklen<T>(n) == 0;
+                => count % length<T>(n) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 16-bit blocks
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bool aligned<T>(N16 n, int count)
             where T : unmanaged        
-                => count % blocklen<T>(n) == 0;
+                => count % length<T>(n) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 32-bit blocks
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bool aligned<T>(N32 n, int count)
             where T : unmanaged        
-                => count % blocklen<T>(n) == 0;
+                => count % length<T>(n) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 64-bit blocks
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bool aligned<T>(N64 n, int count)
             where T : unmanaged        
-                => count % blocklen<T>(n) == 0;
+                => count % length<T>(n) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 128-bit blocks
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bool aligned<T>(N128 n, int count)
             where T : unmanaged        
-                => count % blocklen<T>(n) == 0;
+                => count % length<T>(n) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 256-bit blocks
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bool aligned<T>(N256 n, int count)
             where T : unmanaged        
-                => count % blocklen<T>(n) == 0;
+                => count % length<T>(n) == 0;
 
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 512-bit blocks
@@ -80,6 +80,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bool aligned<T>(N512 n, int count)
             where T : unmanaged        
-                => count % blocklen<T>(n) == 0;
+                => count % length<T>(n) == 0;
     }
 }

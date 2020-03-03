@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {        
-    using System;
-
     public sealed class Root : AssemblyResolution<Root, Root.C>
     {
         public const AssemblyId Identity = AssemblyId.Root;

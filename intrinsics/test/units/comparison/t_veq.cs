@@ -79,7 +79,7 @@ namespace Z0
             var name = CaseName(NaturalIdentity.contracted(MethodInfo.GetCurrentMethod().Name,w,t));
             var f = VX.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
-            var result = blocks.alloc<T>(w, x.BlockCount);
+            var result = Blocks.alloc<T>(w, x.BlockCount);
             result.Fill(ones(t));
             CheckExplicit(f,x,x,result, name);
         }
@@ -90,7 +90,7 @@ namespace Z0
             var name = CaseName(NaturalIdentity.contracted(MethodInfo.GetCurrentMethod().Name,w,t));
             var f = VX.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
-            var result = blocks.alloc<T>(w, x.BlockCount);
+            var result = Blocks.alloc<T>(w, x.BlockCount);
             result.Fill(ones(t));
             CheckExplicit(f,x,x,result,name);
         }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -67,7 +67,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 add(BitVector64 x, BitVector64 y)
             => gmath.add(x.data, y.data);
-
-
     }
 }

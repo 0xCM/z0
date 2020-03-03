@@ -9,6 +9,11 @@ namespace Z0
 
     partial class Root
     {
+        [MethodImpl(Inline)]
+        public static Span<byte> bytes<T>(T src)
+            where T : unmanaged
+                => Bytes.from(src);
+
         /// <summary>
         /// If possible, applies the conversion S -> T
         /// </summary>

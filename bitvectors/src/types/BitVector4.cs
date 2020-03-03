@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;    
 
     /// <summary>
     /// Defines a 4-bit bitvector
@@ -252,6 +252,5 @@ namespace Z0
         
         public override string ToString()
             => this.Format();
-
     }
 }

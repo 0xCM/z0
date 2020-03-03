@@ -23,9 +23,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))                
-                random.MarkovSpan(SpanOps.span32f(dst));
+                random.MarkovSpan(Spans.span32f(dst));
             else if(typeof(T) == typeof(double))
-                random.MarkovSpan(SpanOps.span64f(dst));
+                random.MarkovSpan(Spans.span64f(dst));
             else
                 throw unsupported<T>();
         }
@@ -86,7 +86,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
-            var data = blocks.taballoc<T>(n256, n, n);
+            var data = Z0.Blocks.rectangle<T>(n256, n, n);
             for(int row=0; row < n; row++)
                 random.MarkovSpan<T>(data.Slice(row*n, n));                            
             return Z0.Matrix.blockload<N,T>(data);
@@ -145,7 +145,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {            
-            var dst = blocks.alloc<float>(n256, blocks.blockcount<float>(n256,length));
+            var dst = Z0.Blocks.alloc<float>(n256, Z0.Blocks.blockcount<float>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Avg() * length);
             return dst; 
@@ -154,7 +154,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {                        
-            var dst = blocks.alloc<double>(n256, blocks.blockcount<double>(n256,length));
+            var dst = Z0.Blocks.alloc<double>(n256, Z0.Blocks.blockcount<double>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Avg() * length);
             return dst; 

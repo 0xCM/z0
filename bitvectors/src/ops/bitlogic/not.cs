@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;    
 
     partial class BitVector
     {
@@ -21,7 +20,6 @@ namespace Z0
         public static BitVector<T> not<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.not(x.Scalar);
-
 
         /// <summary>
         /// Computes the bitwise complement z:= ~x of a bitvector x
@@ -62,7 +60,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 not(BitVector64 x)
             => gmath.not(x.data);
- 
-
     }
 }

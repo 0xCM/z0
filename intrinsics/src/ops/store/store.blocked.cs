@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static Root;
-    using static blocks;
+    using static Blocks;
 
     partial class dinx
     {

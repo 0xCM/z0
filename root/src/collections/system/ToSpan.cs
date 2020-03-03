@@ -35,7 +35,7 @@ namespace Z0
 
         public static Span<T> ToSpan<T>(this ISet<T> src)
         {
-            var dst = SpanOps.alloc<T>(src.Count);
+            var dst = Spans.alloc<T>(src.Count);
             var i = 0;
             foreach(var item in src)
                 dst[i++] = item;

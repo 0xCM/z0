@@ -14,7 +14,7 @@ namespace Z0
     {   
         public void block_32x8u_to_128x32u()
         {
-            var blockA = blocks.parts<byte>(n32,1,2,3,4);
+            var blockA = Blocks.parts<byte>(n32,1,2,3,4);
             var x = CpuVector.vparts(n128,1,2,3,4);
             var blockB = x.ToBlock();            
             var y = dinx.vconvert(blockA, n128, z32);
@@ -25,7 +25,7 @@ namespace Z0
 
         public void block_64x8u_to_2x128x32u()
         {
-            var block = blocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
+            var block = Blocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
             var xE = CpuVector.vparts(n128,1,2,3,4);
             var yE = CpuVector.vparts(n128,5,6,7,8);
             var z = dinx.vconvert(block, n256,z32);
@@ -35,7 +35,7 @@ namespace Z0
 
         public void block_32x8u_to_2x128x64u()
         {
-            var block = blocks.parts<byte>(n32,1,2,3,4);
+            var block = Blocks.parts<byte>(n32,1,2,3,4);
             var xE = CpuVector.vparts(n128,1,2);
             var yE = CpuVector.vparts(n128,3,4);
 
@@ -46,7 +46,7 @@ namespace Z0
 
         public void block_128x8u_to_2x128x16u()
         {
-            var block = blocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+            var block = Blocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
             var xE = CpuVector.vparts(n128,1,2,3,4,5,6,7,8);
             var yE = CpuVector.vparts(n128,9,10,11,12,13,14,15,16);
             var z = dinx.vconvert(block,n256,z16);
@@ -65,7 +65,7 @@ namespace Z0
 
         public void m64x8u_v128x16u()
         {
-            var x = blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
+            var x = Blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
             var y = dinx.vconvert(x, n128, z16);
             var z = CpuVector.vparts(n128,0,1,2,3,4,5,6,7);            
 
@@ -74,7 +74,7 @@ namespace Z0
 
         public void blockspan_128x8u_v128x16u()
         {
-            var x = blocks.parts<byte>(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var x = Blocks.parts<byte>(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var q = dinx.vconvert(x, n256, z16);
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
@@ -90,7 +90,7 @@ namespace Z0
 
         public void blockspan_64x8u_v2x128x32u()
         {
-            var x = blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
+            var x = Blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
             var y = dinx.vconvert(x,n256,z32);
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);
@@ -114,8 +114,8 @@ namespace Z0
 
             var tbc = 1;
 
-            var sb = blocks.single(sw,st);
-            var tb = blocks.alloc(tw,tbc,tt);
+            var sb = Blocks.single(sw,st);
+            var tb = Blocks.alloc(tw,tbc,tt);
 
             for(var sample = 0; sample < RepCount; sample++)
             {
@@ -142,8 +142,8 @@ namespace Z0
 
             var tbc = 2;
 
-            var sb = blocks.single(sw,st);
-            var tb = blocks.alloc(tw,tbc,tt);
+            var sb = Blocks.single(sw,st);
+            var tb = Blocks.alloc(tw,tbc,tt);
 
             for(var sample = 0; sample < RepCount; sample++)
             {

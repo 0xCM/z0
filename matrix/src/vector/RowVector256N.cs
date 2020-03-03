@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal RowVector256(Span<T> src)
         {
-            data = blocks.safeload(n256,src);
+            data = Blocks.safeload(n256,src);
         }
 
         [MethodImpl(Inline)]
@@ -165,7 +165,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector256<N,U> Convert<U>()
             where U : unmanaged
-               => new RowVector256<N,U>(blocks.convert<T,U>(data));
+               => new RowVector256<N,U>(Blocks.convert<T,U>(data));
 
         [MethodImpl(Inline)]
         public string Format(char? delimiter = null)

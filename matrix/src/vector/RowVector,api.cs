@@ -27,7 +27,7 @@ namespace Z0
         internal static Block256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => blocks.safeload(n,src.Data);        
+                => Blocks.safeload(n,src.Data);        
 
         [MethodImpl(NotInline)]
         public static RowVector<T> alloc<T>(int minlen)               
@@ -116,7 +116,7 @@ namespace Z0
         public static RowVector256<N,T> blockalloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => RowVector256<N,T>.Load(blocks.taballoc<T>(n256, natval(n)));
+                => RowVector256<N,T>.Load(Blocks.square<T>(n256, natval(n)));
         
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value
@@ -128,7 +128,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RowVector256<T> blockalloc<T>(int length)               
             where T : unmanaged
-                => blocks.cellalloc<T>(n256,length);
+                => Blocks.cellalloc<T>(n256,length);
 
         /// <summary>
         /// Loads a vector of natural length from a span that may not be aligned (Allocating if unaligned)
@@ -141,7 +141,7 @@ namespace Z0
         public static RowVector256<N,T> blockload<N,T>(Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => RowVector256<N,T>.Load(blocks.safeload(n256,src));
+                => RowVector256<N,T>.Load(Blocks.safeload(n256,src));
 
         [MethodImpl(Inline)]
         public static RowVector256<N,T> blockload<N,T>(Block256<T> src)
