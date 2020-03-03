@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public static class Survey
     {
@@ -27,7 +27,7 @@ namespace Z0.Logix
             for(uint i=0u, questionId = 1; i< length; i++, questionId++)
             {
                 var choices = new QuestionChoice<T>[width];
-                var choiceId = gmath.one<T>();
+                var choiceId = one<T>();
                 for(var j = 0u; j< width; j++)
                 {                    
                     choices[j] = Choice(choiceId, ChoiceLabel(j));

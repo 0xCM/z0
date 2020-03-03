@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit TestC<T>(this BitVector<T> src)
             where T : unmanaged
-                => gmath.eq(gmath.and(gmath.maxval<T>(), src.data), gmath.maxval<T>());
+                => gmath.eq(gmath.and(maxval<T>(), src.data), maxval<T>());
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
@@ -56,7 +56,7 @@ namespace Z0
         public static bit TestC<N,T>(this BitVector<N,T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.eq(gmath.and(gmath.maxval<T>(), src.data), gmath.maxval<T>());
+                => gmath.eq(gmath.and(maxval<T>(), src.data), maxval<T>());
 
         [MethodImpl(Inline)]
         public static bit TestC<N,T>(this BitVector128<N,T> src)

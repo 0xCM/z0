@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     public static partial class TypedLogicSpec
     {
@@ -78,7 +78,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static RangeExpr<T> rangexpr<T>(T min, T max, T? step = null)
             where T : unmanaged
-                => new RangeExpr<T>(min,max,step ?? gmath.one<T>());
+                => new RangeExpr<T>(min,max,step ?? one<T>());
 
         
 

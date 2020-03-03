@@ -9,8 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
 
     /// <summary>
     /// Implements component-wise vector contraction
@@ -77,12 +76,12 @@ namespace Z0
         [MethodImpl(Inline)]
         static T TypeMin<T>()
             where T : unmanaged
-                => gmath.minval<T>();
+                => minval<T>();
         
         [MethodImpl(Inline)]
         static T TypeMax<T>()
             where T : unmanaged
-                => gmath.maxval<T>();
+                => maxval<T>();
 
     }
 }

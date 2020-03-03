@@ -43,6 +43,28 @@ namespace Z0
                 => new Interval<T>(min,max, IntervalKind.Closed);
 
         /// <summary>
+        /// Constructs the (left-closed | right-open) interval [min,max)
+        /// </summary>
+        /// <param name="min">The inclusive left endpoint</param>
+        /// <param name="max">The exclusive right endpoint</param>
+        /// <typeparam name="T">The underlying type</typeparam>
+        [MethodImpl(Inline)]
+        public static Interval<T> lclosed<T>(T min, T max)
+            where T : unmanaged
+                => Interval.define(min,max,IntervalKind.LeftClosed);
+
+        /// <summary>
+        /// Constructs the (left-closed | right-open) interval [min,max)
+        /// </summary>
+        /// <param name="min">The inclusive left endpoint</param>
+        /// <param name="max">The exclusive right endpoint</param>
+        /// <typeparam name="T">The underlying type</typeparam>
+        [MethodImpl(Inline)]
+        public static Interval<T> rclosed<T>(T min, T max)
+            where T : unmanaged
+                => Interval.define(min,max,IntervalKind.RightClosed);
+
+        /// <summary>
         /// Defines an interval of specified sort
         /// </summary>
         /// <param name="min">The left endpoint</param>

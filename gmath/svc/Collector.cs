@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
     using static As;
 
     /// <summary>
@@ -443,7 +443,7 @@ namespace Z0
             if(count == 0)         
                 return;
 
-            ref readonly var data = ref head(src);
+            ref readonly var data = ref refs.head(src);
             for(var i=0; i<count; i++)
                 Collect(skip(in data, i));
         }

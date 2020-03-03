@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class BitMatrix
     {
@@ -31,7 +31,7 @@ namespace Z0
         public static ref BitMatrix<T> @true<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T:unmanaged
         {
-            Z.Data.Fill(gmath.maxval<T>());
+            Z.Data.Fill(Literals.maxval<T>());
             return ref Z;
         }
     }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     [ApiHost("bitvector")]
     public static partial class BitVector
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> ones<T>()
             where T : unmanaged
-                => gmath.ones<T>();           
+                => Literals.ones<T>();           
 
         /// <summary>
         /// Returns a generic vector with all bits disabled

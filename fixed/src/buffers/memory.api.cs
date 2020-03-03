@@ -23,7 +23,8 @@ namespace Z0
         public static unsafe void copy<S,T>(in S src, ref T dst, uint targets)
             where T : unmanaged
             where S : unmanaged
-                =>  Unsafe.CopyBlock(refs.ptr(ref dst), Unsafe.AsPointer(ref Unsafe.AsRef(in src)), targets*size<T>());
+                =>  Unsafe.CopyBlock(refs.ptr(ref dst), 
+                        Unsafe.AsPointer(ref Unsafe.AsRef(in src)), targets*(uint)size<T>());
 
         /// <summary>
         /// Copies a contiguous segments of bytes from one location to another

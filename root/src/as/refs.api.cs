@@ -295,7 +295,6 @@ namespace Z0
         public static ref readonly T skip<T>(Span<T> src, int count)
             => ref refs.seek(ref head(src), count);
 
-
         /// <summary>
         /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance
         /// </summary>

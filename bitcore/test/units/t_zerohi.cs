@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
 
     public class t_zerohi : t_bitcore<t_zerohi>
     {    
@@ -35,7 +35,7 @@ namespace Z0
         {
             var width = bitsize<T>();
 
-            var bs0 = BitString.scalar(gmath.maxval<T>());
+            var bs0 = BitString.scalar(maxval(t));
             var bv0 = bs0.ToBitVector<T>();
 
             Claim.eq(width, bs0.PopCount());

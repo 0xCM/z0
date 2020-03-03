@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
         
     public class t_bitview : t_bitcore<t_bitview>
     {
@@ -25,7 +25,7 @@ namespace Z0
         void bitview_check<T>(T t = default)
             where T : unmanaged
         {
-            var src = gmath.maxval<T>();
+            var src = maxval<T>();
             var view = BitView.Over(ref src);
             var bytecount = size<T>();
 

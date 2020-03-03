@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
+    using static Literals;
 
     public class t_testbit : t_bitcore<t_testbit>
     {     
@@ -39,7 +40,7 @@ namespace Z0
         {
             if(Numeric.unsigned<T>())
             {
-                var src = gmath.maxval<T>();
+                var src = maxval(t);
                 for(var i=0; i< bitsize<T>(); i++)
                     Claim.yea(gbits.testbit(src,i));
             }            

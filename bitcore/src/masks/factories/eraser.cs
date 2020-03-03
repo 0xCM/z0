@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
 
-    using static zfunc;
-
-    using static BitMasks;
+    using static Root;
 
     partial class BitMask
     {                
@@ -23,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T eraser<T>(byte start, byte count)
             where T : unmanaged
-                => gmath.xor(gmath.maxval<T>(), gmath.sll(BitMask.lo<T>(count - 1), start));
+                => gmath.xor(maxval<T>(), gmath.sll(BitMask.lo<T>(count - 1), start));
     }
 }

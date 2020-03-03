@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     [ApiHost("constructs")]
     public static class AsmConstructs
@@ -40,7 +40,7 @@ namespace Z0.Asm
         [MethodImpl(NotInline), Op]
         public static uint compute_32u(BinaryBitLogicKind op, uint a, uint b)            
             => op switch {
-                BinaryBitLogicKind.False => gmath.zero<uint>(),
+                BinaryBitLogicKind.False => zero<uint>(),
                 BinaryBitLogicKind.And => math.and(a,b),
                 BinaryBitLogicKind.CNonImpl => math.cnonimpl(a,b),
                 BinaryBitLogicKind.LProject => a,
@@ -55,7 +55,7 @@ namespace Z0.Asm
                 BinaryBitLogicKind.LNot => math.not(a),
                 BinaryBitLogicKind.CImpl => math.cimpl(a,b),
                 BinaryBitLogicKind.Nand => math.nand(a,b),
-                BinaryBitLogicKind.True => gmath.ones<uint>(),
+                BinaryBitLogicKind.True => ones<uint>(),
                 _ => 0
             };
     }

@@ -9,8 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
+    using static Nats;
+    using static Literals;
+    using static vfuncs;
 
     public class t_veq : t_vinx<t_veq>
     {     
@@ -78,7 +80,7 @@ namespace Z0
             var f = VX.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = blocks.alloc<T>(w, x.BlockCount);
-            result.Fill(gmath.ones<T>());
+            result.Fill(ones(t));
             CheckExplicit(f,x,x,result, name);
         }
 
@@ -89,7 +91,7 @@ namespace Z0
             var f = VX.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = blocks.alloc<T>(w, x.BlockCount);
-            result.Fill(gmath.ones<T>());
+            result.Fill(ones(t));
             CheckExplicit(f,x,x,result,name);
         }
 

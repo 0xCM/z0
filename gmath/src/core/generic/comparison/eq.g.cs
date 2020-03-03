@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;    
+    using static Root;    
     using static As;
 
     partial class gmath
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T eqz<T>(T a, T b)
             where T : unmanaged
-                => gmath.mul(convert<T>((uint)gmath.eq(a,b)),gmath.ones<T>());
+                => gmath.mul(convert<T>((uint)gmath.eq(a,b)),ones<T>());
 
         [MethodImpl(Inline)]
         static bit eq_u<T>(T a, T b)

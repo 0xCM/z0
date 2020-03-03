@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
 
     public class t_partition : t_gmath<t_partition>
     {        
@@ -51,7 +51,7 @@ namespace Z0
 
         public void part0()
         {
-            var src = ldomain(5,12);
+            var src = zfunc.ldomain(5,12);
             var dst = Partition.measuredPoints(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            
@@ -60,39 +60,39 @@ namespace Z0
 
         public void part1()
         {
-            var src = ldomain(5,20);
+            var src = Interval.lclosed(5,20);
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(ldomain(5,6), dst.First());
-            Claim.eq(ldomain(19,20), dst.Last());
+            Claim.eq(Interval.lclosed(5,6), dst.First());
+            Claim.eq(Interval.lclosed(19,20), dst.Last());
 
         }
 
         public void part2()
         {
-            var src = domain(5,20);
+            var src = Interval.closed(5,20);
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(ldomain(5,6), dst.First());
-            Claim.eq(domain(19,20), dst.Last());
+            Claim.eq(Interval.lclosed(5,6), dst.First());
+            Claim.eq(Interval.closed(19,20), dst.Last());
         }
 
         public void part3()
         {
-            var src = open(5,20);
+            var src = Interval.open(5,20);
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(open(5,6), dst.First());
-            Claim.eq(ldomain(19,20), dst.Last());
+            Claim.eq(Interval.open(5,6), dst.First());
+            Claim.eq(Interval.lclosed(19,20), dst.Last());
         }
 
 
         public void part4()
         {
-            var src = rdomain(1,100);
+            var src = Interval.rclosed(1,100);
             var dst = src.MeasuredPartitionPoints(10);
             Claim.eq(10,dst.Length);
             Claim.eq(1, dst.First());
@@ -102,7 +102,7 @@ namespace Z0
         
         public void part6()
         {
-            var src = domain(1,103);
+            var src = Interval.closed(1,103);
             var dst = src.MeasuredPartitions(13);            
             var fmt = dst.Map(x => x.Format()).Concat(" + ");  
             Claim.yea(dst.Last().Closed);
@@ -111,9 +111,9 @@ namespace Z0
         protected void points_check<T>(T min, T max, T width)
             where T : unmanaged
         {
-            var points = open(min, max).MeasuredPartitionPoints(width); 
+            var points = Interval.open(min, max).MeasuredPartitionPoints(width); 
             var len = gmath.sub(max,min);
-            var deltaSum = gmath.zero<T>();
+            var deltaSum = Literals.zero<T>();
             for(var i=0; i<points.Length - 1; i++)           
             {
                 var left = points[i];

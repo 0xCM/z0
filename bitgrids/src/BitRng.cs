@@ -637,7 +637,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static BitMatrix8 BitMatrix(this IPolyrand random, N8 n)
-            => BM.primal(n,random.Next<ulong>());
+            => BM.primal(n, random.Next<ulong>());
 
         /// <summary>
         /// Produces a 16x16 bitmatrix from a random source

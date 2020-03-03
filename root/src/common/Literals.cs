@@ -171,7 +171,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static T zero<T>(T t = default)
+        public static T zero<T>()
             where T : unmanaged
                 => default;
 
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static T one<T>(T t = default)
+        public static T one<T>()
             where T : unmanaged
                 => convert<T>(1);
 
@@ -191,7 +191,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static T ones<T>(T t = default)
+        public static T ones<T>()
             where T : unmanaged
                 => ones_u<T>();
 

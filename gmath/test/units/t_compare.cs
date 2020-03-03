@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
+    using static Root;
+    using static Literals;
     using static OpSurrogates;
 
     public class t_compare : t_gmath<t_compare>

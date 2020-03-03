@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     using static OpSurrogates;
+    using static Literals;
 
     public class t_bitlogic : t_gmath<t_bitlogic>
     {

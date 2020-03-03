@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static Literals;
 
     public class t_vpatterns : t_vinx<t_vpatterns>
     {
@@ -73,19 +75,19 @@ namespace Z0
 
         protected void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VX.vunits(w,t), CpuVector.vbroadcast(w,gmath.one<T>()));
+                => CheckPattern(VX.vunits(w,t), CpuVector.vbroadcast(w,one(t)));
 
         protected void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VX.vunits(w,t), CpuVector.vbroadcast(w,gmath.one<T>()));
+                => CheckPattern(VX.vunits(w,t), CpuVector.vbroadcast(w,one(t)));
 
         protected void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VX.vones(w,t), CpuVector.vbroadcast(w,gmath.ones<T>()));
+                => CheckPattern(VX.vones(w,t), CpuVector.vbroadcast(w,ones(t)));
 
         protected void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VX.vones(w,t), CpuVector.vbroadcast(w,gmath.ones<T>()));
+                => CheckPattern(VX.vones(w,t), CpuVector.vbroadcast(w,ones(t)));
 
    }
 }

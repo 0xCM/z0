@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
+    using static Nats;
 
     /// <summary>
     /// Defines a natural bitvector over a primal cell
@@ -117,7 +118,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator ++(BitVector<N,T> src)
-            =>  gmath.eq(src.data,MaxValue) ? gmath.zero<T>() : gmath.inc(src.data);
+            =>  gmath.eq(src.data,MaxValue) ? zero<T>() : gmath.inc(src.data);
 
         /// <summary>
         /// Computes the bitwise complement of the operand

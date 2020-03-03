@@ -8,7 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static Literals;
+    using static vfuncs;
 
     public class t_vpop : t_vinx<t_vpop>
     {
@@ -41,8 +44,8 @@ namespace Z0
 
             void check()
             {
-                var zero = gmath.zero(t);
-                var src = Random.Blocks<T>(w, domain(zero, gmath.maxval<T>()),3);
+                var zed = zero(t);
+                var src = Random.Blocks<T>(w, Interval.closed(zed, maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
@@ -66,8 +69,8 @@ namespace Z0
 
             void check()
             {
-                var zero = gmath.zero(t);
-                var src = Random.Blocks<T>(w, domain(zero, gmath.maxval<T>()),3);
+                var zed = zero(t);
+                var src = Random.Blocks<T>(w, Interval.closed(zed, maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
@@ -75,7 +78,7 @@ namespace Z0
                 var expect = 0u;
 
                 for(var i=0; i<vlen; i++)
-                    expect += f.InvokeScalar(vcell(x0,i),vcell(x1,i),vcell(x2,i));
+                    expect += f.InvokeScalar(vcell(x0,i),vcell(x1,i), vcell(x2,i));
 
                 var result = f.Invoke(x0,x1,x2);
                 Claim.eq(expect,result);

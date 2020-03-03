@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
 
     public class t_lsboff : t_bitcore<t_lsboff>
     {
@@ -29,7 +29,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var y0 = gbits.lsboff(x);
-                var y1 = gmath.and(gmath.sub(x, gmath.one<T>()), x);
+                var y1 = gmath.and(gmath.sub(x, one<T>()), x);
                 Claim.eq(y0,y1);
             }
         }

@@ -111,10 +111,11 @@ namespace Z0
         public static BitMatrix16 transpose(in BitMatrix16 A)
         {
             var dst = A.Replicate();
-            for(var i=0; i< BitMatrix16.N; i++)
+            for(var i=0; i < BitMatrix16.N; i++)
                 dst[i] = A.Col(i);
             return dst;
         }
+
 
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {

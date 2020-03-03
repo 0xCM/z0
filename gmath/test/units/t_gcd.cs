@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
 
     public class t_gcd : t_gmath<t_arithmetic>
     {

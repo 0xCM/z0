@@ -39,6 +39,36 @@ namespace Z0
             => ref refs.seek(ref src, count);
 
         /// <summary>
+        /// Adds an offset to the head of a span, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ref T seek<T>(Span<T> src, int count)
+            => ref refs.seek(ref head(src), count);
+
+        /// <summary>
+        /// Adds an offset to the head of a span, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ref readonly T skip<T>(Span<T> src, int count)
+            => ref refs.seek(ref head(src), count);
+
+        /// <summary>
+        /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="count">The number of elements to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
+            => ref refs.skip(in head(src), count);
+
+        /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the resulting element
         /// </summary>
         /// <param name="src">The source reference</param>

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_natmod : t_gmath<t_natmod>
     {                
@@ -124,7 +125,7 @@ namespace Z0
                 
                 var zN = xN + yN;                
                 var z = (uint)(((ulong)x + (ulong)y) % (ulong)nVal);
-                Claim.eq(z, zN.State, appMsg($"{xN} + {yN} = {zN} != {z} = ({x} + {y}) % {n}", AppMsgKind.Error));                
+                Claim.eq(z, zN.State, AppMsg.Error($"{xN} + {yN} = {zN} != {z} = ({x} + {y}) % {n}"));                
             }
 
             TypeCaseEnd<N>();

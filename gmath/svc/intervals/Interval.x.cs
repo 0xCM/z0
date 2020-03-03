@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
        
     using static As;
-    using static zfunc;
+    using static Root;
     using P = Partition;
 
     public static class IntervalX

@@ -6,7 +6,10 @@ namespace Z0
 {
     using System;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static Literals;
+    using static vfuncs;
 
     public class t_vnonz : t_vinx<t_vnonz>
     {
@@ -43,8 +46,8 @@ namespace Z0
         protected void vnonz_check<T>(N128 w, T t = default)
             where T : unmanaged
         {            
-            var min = gmath.one(t);
-            var max = gmath.maxval(t);
+            var min = one(t);
+            var max = maxval(t);
             var f = VX.vnonz(w,t);
 
             Claim.nea(ginx.vnonz(vzero(w,t)));
@@ -56,8 +59,8 @@ namespace Z0
         protected void vnonz_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var min = gmath.one(t);
-            var max = gmath.maxval(t);
+            var min = one(t);
+            var max = maxval(t);
             var f = VX.vnonz(w,t);
 
             Claim.nea(ginx.vnonz(vzero(w,t)));

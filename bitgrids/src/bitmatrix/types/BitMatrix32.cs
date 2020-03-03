@@ -145,8 +145,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(BitMatrix32 rhs)
-            => BitMatrix.same(this,rhs);
+        public bool Equals(BitMatrix32  src)
+            => BitMatrix.same(this, src);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

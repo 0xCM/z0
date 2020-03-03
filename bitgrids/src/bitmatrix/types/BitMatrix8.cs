@@ -93,7 +93,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix8(ulong src)
-            => this.data = BitConvert.GetBytes(src);
+            => this.data = BitConvert.GetBytes(src).Replicate();
 
         public ReadOnlySpan<byte> Bytes
         {
@@ -156,8 +156,8 @@ namespace Z0
             => this.Format();
 
         [MethodImpl(Inline)]
-        public readonly bool Equals(BitMatrix8 rhs)
-            => BitMatrix.same(this,rhs);
+        public readonly bool Equals(BitMatrix8 src)
+            => BitMatrix.same(this, src);
 
         [MethodImpl(Inline)]
 

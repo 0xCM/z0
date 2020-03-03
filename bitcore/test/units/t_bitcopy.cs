@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
 
     public class t_bitcopy : t_bitcore<t_bitcopy>
     {            
@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {            
             var zed = zero<T>();
-            var lit = gmath.ones<T>();
+            var lit = ones<T>();
             var min = byte.MinValue;
             var max = (byte)bitsize<T>();
 

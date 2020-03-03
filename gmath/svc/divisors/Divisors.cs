@@ -9,16 +9,16 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
 
-    using static zfunc;
+    using static Root;
         
     public readonly struct Divisors<T> 
         where T : unmanaged
     {
         public static readonly Divisors<T> Inhabitant = default;
             
-        static readonly T Zero = gmath.zero<T>();
+        static readonly T Zero = zero<T>();
 
-        static readonly T One = gmath.one<T>();
+        static readonly T One = one<T>();
 
         [MethodImpl(Inline)]
         public T[] divisors(T src)
@@ -55,7 +55,7 @@ namespace Z0
             {
                 var divMin = gmath.add(i, One);
                 var divMax = gmath.add(i, step);
-                var next = domain(divMin, divMax);
+                var next = Interval.closed(divMin, divMax);
                 yield return Compute(next);
             }
         }

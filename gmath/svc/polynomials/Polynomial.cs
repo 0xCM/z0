@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
 
-    using static zfunc;    
+    using static Root;    
     using static As;
 
     /// <summary>

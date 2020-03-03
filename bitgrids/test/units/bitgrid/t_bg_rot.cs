@@ -22,9 +22,9 @@ namespace Z0
                 var t = z16;
                 var pattern = (ushort)0b1100110011001100;
                 var g = BitGrid.broadcast(pattern, BitGrid.alloc(w,m,n,t));
-                PostMessage(g.Format());
+                //PostMessage(g.Format());
                 g = BitGrid.rotl(g, 1);
-                PostMessage(g.Format());
+                //PostMessage(g.Format());
             }
 
             void case2()
@@ -37,16 +37,16 @@ namespace Z0
                 var shifts = CpuVector.vparts(w,1,1,4,4,0,0,1,1);
                 var g0 = BitGrid.broadcast(pattern, BitGrid.alloc(w,m,n,t));
                 
-                PostMessage("g0");
-                PostMessage(g0.Format());
+                //PostMessage("g0");
+                //PostMessage(g0.Format());
                 
                 var g1 = BitGrid.sllv(g0, shifts);
-                PostMessage("sllv");
-                PostMessage(g1.Format());
+                //PostMessage("sllv");
+                //PostMessage(g1.Format());
 
                 var g2 = BitGrid.srlv(g0, shifts);
-                PostMessage("srlv");
-                PostMessage(g2.Format());
+                // PostMessage("srlv");
+                // PostMessage(g2.Format());
             }
 
             case2();

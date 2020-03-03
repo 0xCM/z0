@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;    
+    using static Root;    
     using static As;
 
     partial class gmath
@@ -37,7 +37,7 @@ namespace Z0
         {
             var count = dst.Length;
             for(var i=0; i<count; i++)
-                seek(dst,i) = convert<T>(i);
+                refs.seek(dst,i) = convert<T>(i);
             return dst;
         }
 
@@ -68,7 +68,7 @@ namespace Z0
         {
             var count = dst.Length;
             for(var i=0; i<count; i++)
-                seek(dst,i) = gmath.add(first, convert<T>(i));
+                refs.seek(dst,i) = gmath.add(first, convert<T>(i));
             return dst;
         }
     }

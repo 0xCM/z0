@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     partial class BitMatrix
     {        
@@ -38,7 +39,7 @@ namespace Z0
         {            
             var dst = zero<T>();
             var len = bitsize<T>();
-            var one = gmath.one<T>();
+            var one = Literals.one<T>();
             for(var i=0; i < len; i++)
                 dst[i] = gmath.sll(one,(byte)i);
             return dst;
@@ -71,7 +72,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => init(gmath.maxval<T>(),m,n);
+                => init(Literals.maxval<T>(),m,n);
 
         /// <summary>
         /// Allocates a 1-filled bitmatrix of natural order
@@ -83,6 +84,6 @@ namespace Z0
         public static BitMatrix<N,T> ones<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => init(gmath.maxval<T>(),n);
+                => init(Literals.maxval<T>(),n);
     }
 }

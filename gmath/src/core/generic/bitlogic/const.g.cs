@@ -7,13 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
-    using static AsIn;
+    using static Root;
 
     partial class gmath
     {
-
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T @false<T>()
             where T:unmanaged
@@ -53,8 +50,5 @@ namespace Z0
         public static T @true<T>(T a, T b, T c)
             where T:unmanaged
                 => @true<T>();
-
-
     }
-
 }

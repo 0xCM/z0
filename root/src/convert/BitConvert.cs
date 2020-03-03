@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
@@ -63,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static long ToInt64(ReadOnlySpan<byte> src, int offset = 0)
             => Bytes.cell<long>(src, offset);
-
+        
         [MethodImpl(Inline), Op]
         public static ulong ToUInt64(ReadOnlySpan<byte> src, int offset = 0)
             => Bytes.cell<ulong>(src, offset);

@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;    
+    using static Root;    
     using static As;
+    using static SpanOps;
 
     public static class fspan
     {        
@@ -44,7 +45,7 @@ namespace Z0
         public static Span<T> fdiv<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
-            var len = length(lhs,rhs);
+            var len = SpanOps.length(lhs,rhs);
             for(var i = 0; i< len; i++)
                 lhs[i] = gfp.div(lhs[i], rhs[i]);
             return lhs;
@@ -122,7 +123,7 @@ namespace Z0
 
         public static Span<T> ceil<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => ceil(src, alloc<T>(src.Length));
+                => ceil(src, SpanOps.alloc<T>(src.Length));
 
         public static Span<T> ceil<T>(Span<T> io)
             where T : unmanaged
@@ -143,7 +144,7 @@ namespace Z0
 
         public static Span<T> floor<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => floor(src, alloc<T>(src.Length));
+                => floor(src, SpanOps.alloc<T>(src.Length));
 
         public static Span<T> floor<T>(Span<T> src)
             where T : unmanaged

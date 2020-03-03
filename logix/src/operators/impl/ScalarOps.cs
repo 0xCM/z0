@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
     using static As;
 
     [ApiHost("scalar.ops", ApiHostKind.Generic)]
@@ -21,7 +21,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T ones<T>()
             where T : unmanaged
-                => gmath.maxval<T>();
+                => maxval<T>();
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T @false<T>()

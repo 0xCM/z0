@@ -6,9 +6,7 @@ namespace Z0.Logix
 {
     using System;
 
-    using static zfunc;
-
-    using static TypedLogicSpec;
+    using static Root;
 
     public class t_solve : UnitTest<t_solve>
     {
@@ -35,7 +33,7 @@ namespace Z0.Logix
         void check_identity_sln<T>(ComparisonExpr<T> identity, T min, T max)
             where T : unmanaged
         {
-            var count = convert<T,int>(gmath.add(gmath.sub(max, min), gmath.one<T>()));
+            var count = convert<T,int>(gmath.add(gmath.sub(max, min), one<T>()));
             var expect = gmath.square(count);
             var sln = LogicEngine.solve(identity, (min,max));
             Claim.eq(expect,sln.Count);            

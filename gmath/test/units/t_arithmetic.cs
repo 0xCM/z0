@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
+    using static Root;
     using static OpSurrogates;
+    using static Literals;
     
     public class t_arithmetic : t_gmath<t_arithmetic>
     {
@@ -342,7 +342,7 @@ namespace Z0
         protected void signum_check<T>(T t = default)
             where T : unmanaged
         {
-            var zero = gmath.zero<T>();
+            var zero = Literals.zero<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();

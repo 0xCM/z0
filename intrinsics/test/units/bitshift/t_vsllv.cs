@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static Literals;
 
     public class t_vsllv : t_vinx<t_vsllv>
     {
@@ -41,7 +43,7 @@ namespace Z0
         void vsllv_check<T>(N128 w, T t = default)
             where T : unmanaged        
         {
-            var min = gmath.zero(t);
+            var min = zero(t);
             var max = convert<int,T>(bitsize(t) - 1);
             
             Pair<Vector128<T>> @case(int i)
@@ -57,7 +59,7 @@ namespace Z0
         void vsllv_check<T>(N256 w, T t = default)
             where T : unmanaged        
         {
-            var min = gmath.zero(t);
+            var min = zero(t);
             var max = convert<int,T>(bitsize(t) - 1);
             
             Pair<Vector256<T>> @case(int i)

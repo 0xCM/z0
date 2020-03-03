@@ -10,7 +10,8 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     [ApiHost("logic.engine", ApiHostKind.Generic)]
     public static partial class LogicEngine
@@ -136,7 +137,7 @@ namespace Z0.Logix
             where T :unmanaged
         {
             expr.SetVars(a,b);
-            return gmath.eq(LogicEngine.eval(expr).Value, gmath.maxval<T>());
+            return gmath.eq(LogicEngine.eval(expr).Value, Literals.maxval<T>());
         }
 
         /// <summary>
@@ -179,7 +180,7 @@ namespace Z0.Logix
         [Op]
         public static bit equal(VariedLogicExpr a, VariedLogicExpr b)
         {                
-            var count = length(a.Vars, b.Vars);
+            var count = Arrays.length(a.Vars, b.Vars);
             foreach(var vars in BitLogicSpec.bitcombo(count))
             {
                 a.SetVars(vars);
@@ -196,7 +197,7 @@ namespace Z0.Logix
         {
             var sln = new List<T>();
             var level0 = domain.Increments(default(T));
-            var ones = gmath.maxval<T>();
+            var ones = Literals.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
                 expr.SetVar(varyix, level0[i]);
@@ -213,7 +214,7 @@ namespace Z0.Logix
             var sln = new List<T>();
             var level0 = domain.Increments(default(T));
             var level1 = domain.Increments(default(T));
-            var ones = gmath.maxval<T>();
+            var ones = Literals.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
                 expr.SetVar(0,level0[i]);

@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+    
+    using static Root;
 
     partial class gbits
     {
@@ -48,7 +49,7 @@ namespace Z0
         public static T setnb<T>(T src, byte pos, bit value)
             where T : unmanaged
         {
-            var x = gmath.negate(gmath.sll(gmath.one<T>(), pos));            
+            var x = gmath.negate(gmath.sll(one<T>(), pos));            
             var y = convert<uint,T>((uint)value << pos);
             var z = gmath.and(src, x);
             return gmath.and(z, y);

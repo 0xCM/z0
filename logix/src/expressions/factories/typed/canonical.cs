@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
 
     partial class TypedLogicSpec
     {
@@ -20,7 +20,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static LiteralExpr<T> @true<T>()
             where T : unmanaged
-                => gmath.maxval<T>();
+                => maxval<T>();
 
         /// <summary>
         /// Defines a 128-bit cpu vector where all bits are on
@@ -47,7 +47,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static LiteralExpr<T> @false<T>()
             where T : unmanaged
-                => gmath.zero<T>();
+                => zero<T>();
 
         [MethodImpl(Inline)]
         public static LiteralExpr<Vector256<T>> @false<T>(N256 n)

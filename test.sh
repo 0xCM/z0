@@ -1,11 +1,11 @@
-# Test=analogs/test.sh
-# bash $Test
+Test=analogs/test.sh
+bash $Test
 
-# Test=asm/test.sh
-# bash $Test
+Test=asm/test.sh
+bash $Test
 
-# Test=bitcore/test.sh
-# bash $Test
+Test=bitcore/test.sh
+bash $Test
 
 Test=bitfields/test.sh
 bash $Test
@@ -19,10 +19,10 @@ bash $Test
 Test=bitvectors/test.sh
 bash $Test
 
-Test=corefunc/test.sh
+Test=blocks/test.sh
 bash $Test
 
-Test=fastops/test.sh
+Test=corefunc/test.sh
 bash $Test
 
 Test=gmath/test.sh
@@ -47,4 +47,19 @@ Test=mkl/test.sh
 bash $Test
 
 Test=nats/test.sh
+bash $Test
+
+Test=root/test.sh
+bash $Test
+
+Test=rng/test.sh
+bash $Test
+
+Test=statcore/test.sh
+bash $Test
+
+Test=stats/test.sh
+bash $Test
+
+Test=vfuncs/test.sh
 bash $Test

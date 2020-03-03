@@ -27,14 +27,8 @@ namespace Z0
                 return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
             else
             {
-                var min = Numeric.signed<T>()
-                ? gmath.negate(gmath.sar(gmath.maxval<T>(), 1)) 
-                : gmath.minval<T>();
-                        
-                var max = 
-                    Numeric.signed<T>()
-                    ? gmath.sar(gmath.maxval<T>(), 1)
-                    : gmath.maxval<T>();                
+                var min = Numeric.signed<T>() ? gmath.negate(gmath.sar(maxval<T>(), 1)) : minval<T>();                        
+                var max =  Numeric.signed<T>() ? gmath.sar(maxval<T>(), 1) : maxval<T>();                
                 return (min,max);
             }            
         }

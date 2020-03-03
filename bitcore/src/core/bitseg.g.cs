@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
     using static As;
     using static AsIn;
     
@@ -27,7 +27,7 @@ namespace Z0
         {
             var bitcount = lastpos - firstpos;
             if(bitcount > bitsize<T>())
-                return gmath.maxval<T>();
+                return maxval<T>();
 
             var sameSeg = firstpos.CellIndex == lastpos.CellIndex;
             var firstCount = uint8(sameSeg ? bitcount : bitsize<T>() - firstpos.BitOffset);
@@ -79,6 +79,5 @@ namespace Z0
         public static T bitseg<T>(in Block256<T> src, int firstidx, int lastidx)
             where T : unmanaged
                 => bitseg(src.Data, bitpos<T>(firstidx), bitpos<T>(lastidx)); 
-
     }
 }

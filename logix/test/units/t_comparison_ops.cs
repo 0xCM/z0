@@ -7,7 +7,9 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static vfuncs;
 
     using static VectorizedOps;
     
@@ -120,13 +122,13 @@ namespace Z0.Logix
                 Claim.yea(y0);
 
                 var y1 = S.equals(x,x);
-                Claim.eq(gmath.maxval<T>(), y1);
+                Claim.eq(maxval<T>(), y1);
 
                 var y2 = gmath.eq(x,y);
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);
-                Claim.eq(gmath.zero<T>(),y3);
+                Claim.eq(zero<T>(),y3);
 
             }
         }

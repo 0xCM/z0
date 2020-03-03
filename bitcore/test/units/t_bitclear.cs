@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
 
     public class t_bitclear : t_bitcore<t_bitclear>
     {            
@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             var n = bitsize<T>();
-            var dst = gbits.bitclear(gmath.maxval<T>(), first, count);           
+            var dst = gbits.bitclear(maxval<T>(), first, count);           
             var bs = BitString.scalar(dst);
             Claim.eq(bs.Length, n);
             for(var i=0; i<bs.Length; i++)

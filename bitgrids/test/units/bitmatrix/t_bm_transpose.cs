@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_bm_transpose : t_bm<t_bm_transpose>
     {
-        public void bm_transpose_8x8x8()
+        public void bm_transpose_8x8x8_v2()
         {
             var n = n8;
             var m1 = Random.BitMatrix(n);
@@ -24,9 +24,19 @@ namespace Z0
             Claim.yea(m3 == m1);
         }
 
+        public void bm_transpose_8x8x8()
+        {
+            var n = n8;
+            var m1 = Random.BitMatrix(n);
+            var m2 = m1.Transpose();
+            var m3 = m2.Transpose();
+            Claim.yea(m3 == m1);
+        }
+
         public void bm_transpose_16x16x16()
         {
-            var m1 = Random.BitMatrix(n16);
+            var n = n16;
+            var m1 = Random.BitMatrix(n);
             var m2 = m1.Transpose();
             var m3 = m2.Transpose();
             Claim.yea(m3 == m1);
@@ -34,7 +44,8 @@ namespace Z0
 
         public void bm_transpose_32x32x32()
         {
-            var m1 = Random.BitMatrix(n32);
+            var n = n32;
+            var m1 = Random.BitMatrix(n);
             var m2 = m1.Transpose();
             var m3 = m2.Transpose();
             Claim.yea(m3 == m1);
@@ -42,7 +53,8 @@ namespace Z0
 
         public void bm_transpose_64x64x64()
         {
-            var m1 = Random.BitMatrix(n64);
+            var n = n64;
+            var m1 = Random.BitMatrix(n);
             var m2 = m1.Transpose();
             var m3 = m2.Transpose();
             Claim.yea(m3 == m1);    

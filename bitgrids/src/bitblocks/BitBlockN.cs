@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;    
+    using static Nats;
 
     /// <summary>
     /// A data structure that covers a natural count of packed bits
@@ -212,7 +213,7 @@ namespace Z0
         public void Fill(bit state)
         {            
             if(state)
-                data.Fill(gmath.maxval<T>());
+                data.Fill(maxval<T>());
             else
                 data.Clear();
         }
