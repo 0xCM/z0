@@ -11,7 +11,6 @@
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
-    <ProjectReference Include="$(TopDir)statcore/src/z0.statcore.csproj" />
     <ProjectReference Include="$(TopDir)analogs/src/z0.analogs.csproj" />      
     <ProjectReference Include="$(TopDir)vfuncs/src/z0.vfuncs.csproj" />      
   </ItemGroup>

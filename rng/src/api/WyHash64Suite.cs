@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public class WyHash64Suite<N> : IPointSource<N, ulong>
+    public class WyHash64Suite<N>
         where N : unmanaged, ITypeNat
 
     {

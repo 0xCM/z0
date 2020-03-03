@@ -15,14 +15,14 @@ namespace Z0
         where S : IAgentControl
         where C : IAgentContext         
     {
-        protected AgentControl(IRngContext AppContext)
+        protected AgentControl(IContext AppContext)
         {
             this.Context = AppContext;
         }
 
         public AgentStats SummaryStats {get; protected set;}
 
-        public IRngContext Context {get;}
+        public IContext Context {get;}
 
         public event Action<C> Configured;
 
@@ -51,10 +51,10 @@ namespace Z0
 
     public class AgentControl : AgentControl<IAgentControl,IAgentContext>, IAgentControl
     {
-        public static IAgentControl FromContext(IRngContext Context)
+        public static IAgentControl FromContext(IContext Context)
             => new AgentControl(Context);
         
-        public AgentControl(IRngContext Context)
+        public AgentControl(IContext Context)
             : base(Context)
         {
 

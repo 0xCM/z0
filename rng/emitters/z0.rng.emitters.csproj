@@ -9,9 +9,9 @@
   <ItemGroup>
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />
     <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />
-    <ProjectReference Include="$(TopDir)statcore/src/z0.statcore.csproj" />
 
   </ItemGroup>
 
