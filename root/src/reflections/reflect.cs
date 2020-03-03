@@ -146,7 +146,7 @@ namespace Z0
         /// <param name="member">The field</param>
         /// <param name="instance">The object instance, if applicable</param>
         public static Option<V> value<V>(FieldInfo member, object instance = null)
-            => from o in member.FieldValue(instance)
+            => from o in member.Value(instance)
             from v in Root.TryCast<V>(o)
             select v;
 

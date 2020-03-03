@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Agent that manages a collection of servers
@@ -32,13 +32,13 @@ namespace Z0
             var complex = ServerComplex.Define(context);                
             var configs = new List<ServerConfig>();
             var processors = Environment.ProcessorCount;
-            inform(appMsg($"Server complex using {processors} processor cores"));
+            term.inform($"Server complex using {processors} processor cores");
             
             for(uint i = 0, corenum = 1; i <= servers; i++, corenum++)
             {
                 var sid = ServiceIdentityPool.NextServerId();
                 var config = new ServerConfig(sid, $"Server{sid}", corenum);
-                babble(appMsg($"Defined configuration for {config}"));
+                term.babble($"Defined configuration for {config}");
                 configs.Add(config);
                 if(corenum == processors)
                     corenum = 0;

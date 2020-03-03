@@ -216,10 +216,25 @@ namespace Z0
             return dst;            
         }
 
-       public override bool Equals(object rhs) 
+
+        /// <summary>
+        /// Formats a tabular span
+        /// </summary>
+        /// <param name="src">The source data to be formatted</param>
+        /// <param name="cellsep">The character that intersperses the cells of each row</param>
+        /// <param name="rowsep">The character that intersperses the rows </param>
+        /// <param name="padlen">The optional padding for each cell; if less than zero the calls are left-padded; if greater than zero, the cells are right-padded</param>
+        /// <param name="padchar">The optional pad character; if unspecified and padlen is specified it defaults to a space</param>
+        /// <typeparam name="T">The span element type</typeparam>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The row count type</typeparam>
+        public string Format( int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
+            => Data.FormatTable(nati<M>(), nati<N>(),  padlen, padchar, rowsep, cellsep); 
+
+        public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 
-       public override int GetHashCode() 
+        public override int GetHashCode() 
             => throw new NotSupportedException();        
     }
 }

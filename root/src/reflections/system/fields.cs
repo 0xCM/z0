@@ -19,8 +19,15 @@ namespace Z0
         /// </summary>
         /// <param name="field">The field</param>
         /// <param name="instance">The object instance, if applicable</param>
-        public static Option<object> FieldValue(this FieldInfo field, object instance = null)
+        public static Option<object> Value(this FieldInfo field, object instance = null)
             => Root.Try(() => field.GetValue(instance));
+
+        public static IEnumerable<object> Values(this IEnumerable<FieldInfo> src, object o = null)
+            => src.Select(x => x.GetValue(o));
+
+        public static IEnumerable<T> Values<T>(this IEnumerable<FieldInfo> src, object o = null)
+            => src.Select(x => x.GetValue(o)).Where(x => x is T).Cast<T>();
+
     }
 
 }

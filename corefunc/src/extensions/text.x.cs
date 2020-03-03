@@ -175,37 +175,9 @@ namespace Z0
             return (T)result;
         }
 
-        /// <summary>
-        /// Returns true if the character spans are equal as strings, false otherwise
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline)]
-        public static bool ContentEqual(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)        
-             => lhs.CompareTo(rhs, StringComparison.InvariantCulture) == 0;
-
-        /// <summary>
-        /// Returns true if the character spans are equal as strings, false otherwise
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline)]
-        public static bool ContentEqual(this Span<char> lhs, ReadOnlySpan<char> rhs)        
-             => lhs.ReadOnly().ContentEqual(rhs);
-
-        /// <summary>
-        /// Returns true if the character spans are equal as strings, false otherwise
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline)]
-        public static bool ContentEqual(this Span<char> lhs, Span<char> rhs)        
-             => lhs.ReadOnly().ContentEqual(rhs);
-
-        public static StringBuilder WithLabeled(this StringBuilder sb, object label, object content, int? labelWidth = null)
+        public static StringBuilder WithLabel(this StringBuilder sb, object label, object content)
         {
-            var padR = labelWidth ?? 12;
-            sb.Append($"{label}".PadRight(padR));
+            sb.Append($"{label}".PadRight(12));
             sb.Append($"{content}");
             sb.AppendLine();
             return sb;

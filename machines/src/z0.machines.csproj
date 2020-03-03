@@ -16,6 +16,7 @@
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
     <ProjectReference Include="$(TopDir)stats/src/z0.stats.csproj" />
+    <ProjectReference Include="$(TopDir)workflow/src/z0.workflow.csproj" />
   </ItemGroup>
 
   <ItemGroup>

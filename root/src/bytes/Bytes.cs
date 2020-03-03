@@ -116,4 +116,12 @@ namespace Z0
             where T : unmanaged
                 => Unsafe.ReadUnaligned<T>(ref mutable(skip(head(src), offset)));
     }
+
+    partial class RootX
+    {
+        [MethodImpl(Inline)]
+        public static IByteReader ByteReader(this IContext context)
+            => Z0.ByteReader.Create(context);        
+
+    }
 }

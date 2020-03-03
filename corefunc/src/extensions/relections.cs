@@ -59,30 +59,6 @@ namespace Z0
             return attributions;
         }
 
-        /// <summary>
-        /// Attempts to determine whether a method is sporting the "new" keyword
-        /// </summary>
-        /// <returns></returns>
-        /// <remarks>
-        /// Approach adapted from https://stackoverflow.com/questions/288357/how-does-reflection-tell-me-when-a-property-is-hiding-an-inherited-member-with-t
-        /// </remarks>
-        public static bool IsHidingBaseMember(this MethodInfo self)
-        {
-            Type baseType = self.DeclaringType.BaseType;
-            var baseMethod = baseType.GetMethod(self.Name, self.GetParameters().Select(p => p.ParameterType).ToArray());
-
-            if (baseMethod == null)
-                return false;
-
-            if (baseMethod.DeclaringType == self.DeclaringType)
-                return false;
-
-            var baseMethodDefinition = baseMethod.GetBaseDefinition();
-            var thisMethodDefinition = self.GetBaseDefinition();
-
-            return baseMethodDefinition.DeclaringType != thisMethodDefinition.DeclaringType;
-        }
-
 
         [MethodImpl(Inline)]
         public static IntPtr Jit(this MethodInfo src)            
@@ -113,11 +89,6 @@ namespace Z0
         public static bool IsNamed(this Type t)
             => !t.IsAnonymous();
 
-        public static IEnumerable<object> Values(this IEnumerable<FieldInfo> src, object o = null)
-            => src.Select(x => x.GetValue(o));
-
-        public static IEnumerable<T> Values<T>(this IEnumerable<FieldInfo> src, object o = null)
-            => src.Select(x => x.GetValue(o)).Where(x => x is T).Cast<T>();
 
 
         /// <summary>
