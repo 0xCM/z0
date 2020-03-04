@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
  
-    using static zfunc;
-    
+    using static Root;
+   
     partial class gbits
     {                       
         /// <summary>
@@ -51,6 +51,5 @@ namespace Z0
         public static T replicate<T>(byte src)
             where T : unmanaged
                 => convert<T>(Bits.replicate((ulong)src, 0, 7, bitsize<T>() / 8));
-
     }
 }

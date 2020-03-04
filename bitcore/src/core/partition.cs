@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
  
-    using static zfunc;
-    using static As;
-    
+    using static Root;
+    using static Nats;
+   
     partial class Bits
     {
         // ~ Nx1
@@ -406,6 +404,5 @@ namespace Z0
         static T lsb32x1<T>(T src)
             where T : unmanaged
                 => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x32x1));
-
     }
 }

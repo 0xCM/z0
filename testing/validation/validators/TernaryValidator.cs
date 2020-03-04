@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
 
     class TernaryValidator<T1,T2,T3,T4> : Validator, ITernaryValidator<T1,T2,T3,T4>
         where T1 : unmanaged
@@ -48,7 +48,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                Error(e, casename);
                 succeeded = false;
             }
             finally
@@ -85,7 +85,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                Error(e, casename);
                 succeeded = false;
             }
             finally

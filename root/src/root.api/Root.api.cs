@@ -35,7 +35,6 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static int length<T>(IReadOnlyList<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null) 
             => lhs.Count == rhs.Length ? lhs.Count : throw errors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
-
     }
 
     public static partial class Root

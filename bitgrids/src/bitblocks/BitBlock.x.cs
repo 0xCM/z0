@@ -74,7 +74,6 @@ namespace Z0
             where T : unmanaged
                 => BitBlocks.load(src,len);
 
-
         /// <summary>
         /// Converts the least significant elements of a generic natural bitvector to a 8-bit primal bitvector
         /// </summary>
@@ -147,5 +146,16 @@ namespace Z0
         public static Vector256<T> ToCpuVector<T>(this BitString src, N256 w, T t = default)
             where T : unmanaged
                 => src.Pack().As<byte, T>().Blocked(w).LoadVector();
+
+        [MethodImpl(Inline)]
+        public static bit Identical<T>(this Block128<T> xb, Block128<T> yb)        
+            where T : unmanaged        
+                => xb.Data.Identical(yb.Data);
+
+        [MethodImpl(Inline)]
+        public static bit Identical<T>(this Block256<T> xb, Block256<T> yb)        
+            where T : unmanaged        
+                => xb.Data.Identical(yb.Data);
+
     }
 }

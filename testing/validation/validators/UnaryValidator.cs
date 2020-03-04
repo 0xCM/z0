@@ -5,7 +5,8 @@
 namespace Z0
 {
     using System;
-    using static zfunc;
+    
+    using static Root;
 
     sealed class UnaryValidator<T1,T2> : Validator, IUnaryValidator<T1,T2>
         where T1 : unmanaged
@@ -40,7 +41,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                Error(e, casename);
                 succeeded = false;
             }
             finally
@@ -69,8 +70,8 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
-                succeeded = false;
+                 Error(e, casename);
+                 succeeded = false;
             }
             finally
             {

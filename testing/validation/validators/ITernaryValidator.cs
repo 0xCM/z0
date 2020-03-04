@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
 
     public interface ITernaryValidator<T1,T2,T3,T4> : IValidator
     {

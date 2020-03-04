@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     /// <summary>
     /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits

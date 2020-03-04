@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a specification for producing an index-oriented mask
@@ -31,5 +30,4 @@ namespace Z0
             get => Numeric.kind<T>();
         }
     }
-
 }

@@ -50,20 +50,20 @@ namespace Z0
                 Claim.eq(buffer64x8.Data.PopCount(), y.PopCount());
             }
 
-            var bits5 = Random.Span<byte>(5);
-            var bits5x64 = Bytes.cell<ulong>(bits5);
-            var bc5x64PC = Bits.pop(bits5x64);
-            var bits5up = Unpack(bits5);
-            var bits5upPC = bits5up.PopCount();
-            var bits5PC = bits5.PopCount();
+            // var bits5 = Random.Span<byte>(5);
+            // var bits5x64 = Bytes.cell<ulong>(bits5);
+            // var bc5x64PC = Bits.pop(bits5x64);
+            // var bits5up = Unpack(bits5);
+            // var bits5upPC = bits5up.PopCount();
+            // var bits5PC = bits5.PopCount();
 
-            Claim.eq(bc5x64PC, bits5upPC);
-            Claim.eq(bc5x64PC, bits5PC);
+            // Claim.eq(bc5x64PC, bits5upPC);
+            // Claim.eq(bc5x64PC, bits5PC);
 
-            var bits279 = Random.Span<byte>(279);
-            var bits279PC = bits279.PopCount();
-            var bits279upPC = Unpack(bits279).PopCount();
-            Claim.eq(bits279upPC, bits279PC);
+            // var bits279 = Random.Span<byte>(279);
+            // var bits279PC = bits279.PopCount();
+            // var bits279upPC = Unpack(bits279).PopCount();
+            // Claim.eq(bits279upPC, bits279PC);
         }
     }
 }

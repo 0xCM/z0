@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;
-
+    
+    using static Root;
     using static As;
 
     partial class gbits
     {
-
         /// <summary>
         /// Partitions the source value into two parts predicated on an index
         /// [1010 11111 0011] |> split 4 = [1010 1111] [0011]
@@ -52,8 +51,5 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }
-
-
     }
-
 }

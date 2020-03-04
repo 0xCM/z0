@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
+    
     public interface IBinaryValidator<T1,T2,T3> : IValidator
     {
         void CheckMatch<F, G>(F baseline, G subject)

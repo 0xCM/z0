@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
 
     class BinaryValidator<T1,T2,T3> : Validator, IBinaryValidator<T1,T2,T3>
         where T1 : unmanaged
@@ -43,7 +43,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                Error(e, casename);
                 succeeded = false;
             }
             finally
@@ -77,7 +77,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                Error(e, casename);
                 succeeded = false;
             }
             finally

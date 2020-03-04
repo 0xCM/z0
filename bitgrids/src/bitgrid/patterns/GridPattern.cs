@@ -9,11 +9,12 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
-    
-    using static BitGrid;
+    using static Root;
+    using static Nats;
+    using static Literals;    
     using static ginx;
     using static As;
+    using static BitGrid;
 
     public static partial class GridPattern
     {

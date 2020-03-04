@@ -5,10 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    
-    using static zfunc;
 
     public interface IShiftOp : IOperator
     {
@@ -26,5 +22,4 @@ namespace Z0.Logix
 
         IExpr<byte> Offset {get;}
     }
-
 }

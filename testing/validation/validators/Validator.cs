@@ -6,7 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+    
+    using static Root;
+
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     public abstract class Validator : IValidator
     {
@@ -26,7 +31,6 @@ namespace Z0
         
         public ITestContext Context {get;}
 
-
         protected IPolyrand Random
             => Context.Random;
 
@@ -34,5 +38,7 @@ namespace Z0
 
         protected bool ExcludeZero {get;}
 
+        protected void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Context.PostMessage(AppMsg.Error(e, caller,file,line));
     }
 }

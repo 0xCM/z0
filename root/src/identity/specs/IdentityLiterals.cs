@@ -34,6 +34,13 @@ namespace Z0
 
     }
 
+    public static class OpUriSchemeOps
+    {
+       public static string Format(this OpUriScheme src)
+            => src.ToString().ToLower();
+
+    }
+
     [Flags]
     public enum ApiHostKind
     {

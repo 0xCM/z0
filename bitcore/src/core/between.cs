@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
-    using static System.Runtime.Intrinsics.X86.Bmi2;
-    using static System.Runtime.Intrinsics.X86.Bmi2.X64;
  
-    using static zfunc;
+    using static Root;
     
     partial class Bits
     {                
@@ -113,7 +111,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static double between(double src, byte k0, byte k1)
             => BitConverter.Int64BitsToDouble(between(BitConverter.DoubleToInt64Bits(src), k0, k1));
-
     }
-
 }

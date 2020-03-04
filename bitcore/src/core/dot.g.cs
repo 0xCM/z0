@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
     
     partial class gbits
     {    
@@ -23,5 +22,4 @@ namespace Z0
             where T : unmanaged
                 => parity.odd(pop(gmath.and(x,y)));
     }
-
 }

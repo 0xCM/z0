@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-
     partial class Root
     {
         /// <summary>
@@ -40,32 +39,13 @@ namespace Z0
             => src.ToList();
 
         /// <summary>
-        /// Iterates over the supplied items, invoking a receiver for each
+        /// Constructs a span from a parameter array
         /// </summary>
-        /// <param name="src">The source items</param>
-        /// <param name="f">The receiver</param>
-        /// <typeparam name="T">The item type</typeparam>
-        public static void iter<T>(IEnumerable<T> items, Action<T> action, bool pll = false)
-        {
-            if (pll)
-                items.AsParallel().ForAll(item => action(item));
-            else
-                foreach (var item in items)
-                    action(item);
-        }
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> span<T>(params T[] src)
+            => src;
 
-        /// <summary>
-        /// Iterates over the supplied items, invoking an indexed receiver for each
-        /// </summary>
-        /// <param name="src">The source items</param>
-        /// <param name="f">The receiver</param>
-        /// <typeparam name="T">The item type</typeparam>
-        public static void iteri<T>(IEnumerable<T> items, Action<int,T> action)
-        {
-            var it = items.GetEnumerator();
-            var index = 0;
-            while(it.MoveNext())
-                action(index++, it.Current);
-        }        
     }
 }

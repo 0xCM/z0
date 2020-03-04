@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
 
@@ -14,6 +16,31 @@ namespace Z0
     /// </summary>
     public static class RngSeed
     {
+        public static IEnumerable<ulong> ToU64Stream(this IEnumerable<Guid> guids)
+        {
+            foreach(var guid in guids)
+            {
+                var bytes = guid.ToByteArray();      
+                yield return BitConverter.ToUInt64(bytes,0);
+                yield return BitConverter.ToUInt64(bytes,4);
+            }            
+        }
+
+        public static ulong[] ToU64Array(this IEnumerable<Guid> guids)
+            => guids.ToU64Stream().ToArray();
+
+        [MethodImpl(Inline)]
+        public static T ValueOrDefault<T>(this T? x, T @default = default)
+            where T : unmanaged
+                => x != null ? x.Value : @default;
+
+        /// <summary>
+        /// Produces an array of bits from a stream of binary digits
+        /// </summary>
+        /// <param name="src">The source digits</param>
+        public static Span<bit> ToBits(this IEnumerable<BinaryDigit> src)
+            => src.Select(d => d == BinaryDigit.Zed ? bit.Off : bit.On).ToSpan();
+
         /// <summary>
         /// The total number of bytes in the embedded data 
         /// </summary>
@@ -35,7 +62,7 @@ namespace Z0
         /// <typeparam name="T">The data type</typeparam>
         public static T TakeSingle<T>(int offset)
             where T : unmanaged
-                => zfunc.read<T>(Bytes, VerifyIndex<T>(offset));
+                => Z0.Bytes.cell<T>(Bytes, VerifyIndex<T>(offset));
 
         /// <summary>
         /// Acauires a readonly span of values from the embedded source

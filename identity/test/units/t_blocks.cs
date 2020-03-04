@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_blocks : t_identity<t_blocks>
     {        
@@ -79,16 +80,16 @@ namespace Z0
 
         public void BlockSlice()
         {
-            var x = Blocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
+            var x = Blocks.safeload(n128, span<int>(1,2,3,4,5,6,7,8));
 
             var block0 = x.Block(0);
             Claim.eq(4, block0.Length);   
-            var y = Blocks.safeload(n128,span(1,2,3,4));         
+            var y = Blocks.safeload(n128, span(1,2,3,4));         
             Claim.numeq(block0, y);
 
             var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
-            Claim.numeq(block2,Blocks.parts(n128,5,6,7,8));
+            Claim.numeq(block2, Blocks.parts(n128,5,6,7,8));
 
         }
         public void Load1()

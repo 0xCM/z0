@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Popcnt;
     using static System.Runtime.Intrinsics.X86.Popcnt.X64;
  
-    using static zfunc;
+    using static Root;
     
     partial class Bits
     {                
@@ -149,6 +149,5 @@ namespace Z0
         public static uint pop<T>(Span<T> src)
             where T : unmanaged
                 => pop(in head(src.AsUInt64()), src.Length);
- 
     }
 }

@@ -285,67 +285,67 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void not(in byte A, ref byte Z)
-            => store64(gmath.not(read64(A)), ref Z);
+            => store64(gmath.not(Bytes.read64(A)), ref Z);
 
         [MethodImpl(Inline)]
         static void select(in byte A, in byte B, in byte C, ref byte Z)
-            => store64(gmath.select(read64(A), read64(B), read64(C)), ref Z);
+            => store64(gmath.select(Bytes.read64(A), Bytes.read64(B), Bytes.read64(C)), ref Z);
 
         [MethodImpl(Inline)]
         static void and(in byte A, in byte B, ref byte Z)
-            => store64(gmath.and(read64(A), read64(B)), ref Z);
+            => store64(gmath.and(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void nand(in byte A, in byte B, ref byte Z)
-            => store64(gmath.nand(read64(A), read64(B)), ref Z);
+            => store64(gmath.nand(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void or(in byte A, in byte B, ref byte Z)
-            => store64(gmath.or(read64(A), read64(B)), ref Z);
+            => store64(gmath.or(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void nor(in byte A, in byte B, ref byte Z)
-            => store64(gmath.nor(read64(A), read64(B)), ref Z);
+            => store64(gmath.nor(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xor(in byte A, in byte B, ref byte Z)
-            => store64(gmath.xor(read64(A), read64(B)), ref Z);
+            => store64(gmath.xor(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xnor(in byte A, in byte B, ref byte Z)
-            => store64(gmath.xnor(read64(A), read64(B)), ref Z);
+            => store64(gmath.xnor(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void nonimpl(in byte A, in byte B, ref byte Z)
-            => store64(gmath.nonimpl(read64(A), read64(B)), ref Z);
+            => store64(gmath.nonimpl(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void impl(in byte A, in byte B, ref byte Z)
-            => store64(gmath.impl(read64(A), read64(B)), ref Z);
+            => store64(gmath.impl(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void cimpl(in byte A, in byte B, ref byte Z)
-            => store64(gmath.cimpl(read64(A), read64(B)), ref Z);
+            => store64(gmath.cimpl(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void cnonimpl(in byte A, in byte B, ref byte Z)
-            => store64(gmath.cnonimpl(read64(A), read64(B)), ref Z);
+            => store64(gmath.cnonimpl(Bytes.read64(A), Bytes.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xornot(in byte A, in byte B, ref byte Z)
-            => store64(gmath.xor(read64(in A), gmath.not(read64(in B))), ref Z);
+            => store64(gmath.xor(Bytes.read64(in A), gmath.not(Bytes.read64(in B))), ref Z);
 
         [MethodImpl(Inline)]
         static bit testz(in byte A, in byte B)
-            => dinx.testz(read64(in A), read64(in B));
+            => dinx.testz(Bytes.read64(in A), Bytes.read64(in B));
 
         [MethodImpl(Inline)]
         static bit testc(in byte A, in byte B)
-            => dinx.testc(read64(in A),read64(in B));
+            => dinx.testc(Bytes.read64(in A),Bytes.read64(in B));
 
         [MethodImpl(Inline)]
         static bit testc(in byte A)
-            => dinx.testc(read64(in A));
+            => dinx.testc(Bytes.read64(in A));
 
     }
 }

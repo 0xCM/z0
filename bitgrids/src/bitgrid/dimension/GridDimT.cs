@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Nats;
 
-    public readonly struct GridDim<T> : IGridDim<T>
+    public readonly struct GridDim<T> : IGridDim<T>, IFormattable<GridDim<T>>
         where T : unmanaged
     {
         public GridDim(int rows, int cols, int? blockwidth = null)
@@ -21,12 +20,24 @@ namespace Z0
             this.BlockWidth = blockwidth ?? CellWidth;
         }
 
+        /// <summary>
+        /// The number of rows in the grid
+        /// </summary>
         public int RowCount {get;}
 
+        /// <summary>
+        /// The number of columsn in the grid
+        /// </summary>
         public int ColCount {get;}
 
+        /// <summary>
+        /// The bit-width of a grid cell
+        /// </summary>
         public int CellWidth {get;}
 
+        /// <summary>
+        /// The block width, set to 1 if the grid is unblocked
+        /// </summary>
         public int BlockWidth {get;}
 
         /// <summary>
@@ -55,7 +66,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitCalcs.tablesize(RowCount, ColCount);
         }
-
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate

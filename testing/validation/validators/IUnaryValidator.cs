@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
 
     public interface IUnaryValidator<T1,T2> : IValidator
     {

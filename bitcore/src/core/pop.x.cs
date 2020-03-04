@@ -5,16 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;    
     
-    using static zfunc;
+    using static Root;
 
     partial class BitsX
-    {
-               
+    {               
         [MethodImpl(Inline)]   
         public static ulong PopCount(this Span<byte> src)
         {
@@ -24,5 +20,4 @@ namespace Z0
             return count;
         }
     }
-
 }

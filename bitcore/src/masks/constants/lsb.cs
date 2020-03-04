@@ -6,10 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
  
-    using static zfunc;
-
     partial class BitMasks
     {            
         // ~ Lsb2x1: The least bit of each 2-bit segment is enabled

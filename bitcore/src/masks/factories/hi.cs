@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
 
-    using static zfunc;
-    using static As;
+    using static Root;
+    using static Nats;
 
     partial class BitMask
     {           

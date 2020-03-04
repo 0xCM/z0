@@ -10,7 +10,8 @@ namespace Z0
     using static Root;    
     using static As;
     using static Spans;
-
+    
+    [ApiHost(ApiHostKind.Generic)]
     public static class fspan
     {        
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -39,9 +40,10 @@ namespace Z0
         /// overwriting each left operand cell with the result. 
         /// Specifically, lhs[i] = lhs[i] / rhs[i] for i = 0...n - 1 where n is the common length of the operands
         /// </summary>
-        /// <param name="lhs">The left integer source</param>
-        /// <param name="rhs">The right integer source</param>
-        /// <typeparam name="T">The primal floating-point type</typeparam>
+        /// <param name="lhs">The left source span</param>
+        /// <param name="rhs">The right source span</param>
+        /// <typeparam name="T">The floating-point type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Span<T> fdiv<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
@@ -54,15 +56,16 @@ namespace Z0
         /// <summary>
         /// Computes in-place the quotient of each source element in the left operand and the right operand
         /// </summary>
-        /// <param name="src"></param>
-        /// <param name="rhs"></param>
-        /// <typeparam name="T">The primal floating-point type</typeparam>
-        public static Span<T> div<T>(Span<T> src, T rhs)
+        /// <param name="lhs">The left source span</param>
+        /// <param name="rhs">The right source span</param>
+        /// <typeparam name="T">The floating-point type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        public static Span<T> div<T>(Span<T> lhs, T rhs)
             where T : unmanaged
         {
-            for(var i = 0; i< src.Length; i++)
-                src[i] = gfp.div(src[i], rhs);
-            return src;
+            for(var i = 0; i< lhs.Length; i++)
+                lhs[i] = gfp.div(lhs[i], rhs);
+            return lhs;
         }
 
         /// <summary>
@@ -73,6 +76,7 @@ namespace Z0
         /// <param name="lhs">The left integer source</param>
         /// <param name="rhs">The right integer source</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Span<T> fdiv<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
@@ -102,7 +106,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Floats)]
         public static Span<T> mod<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
@@ -112,6 +116,7 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Floats)]
         public static Span<T> ceil<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
@@ -125,6 +130,7 @@ namespace Z0
             where T : unmanaged
                 => ceil(src, Spans.alloc<T>(src.Length));
 
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Floats)]
         public static Span<T> ceil<T>(Span<T> io)
             where T : unmanaged
         {
@@ -133,6 +139,7 @@ namespace Z0
             return io;
         }
 
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Floats)]
         public static Span<T> floor<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
@@ -146,7 +153,8 @@ namespace Z0
             where T : unmanaged
                 => floor(src, Spans.alloc<T>(src.Length));
 
-        public static Span<T> floor<T>(Span<T> src)
+       [MethodImpl(Inline),Op, NumericClosures(NumericKind.Floats)]
+       public static Span<T> floor<T>(Span<T> src)
             where T : unmanaged
         {
             for(var i =0; i<src.Length; i++)

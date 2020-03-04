@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static zfunc;
+    using static Root;
     using static As;
+
     partial class Bits
     {
         /// <summary>
@@ -88,14 +89,14 @@ namespace Z0
         static void unpack32x1(uint src, ref ulong dst)
         {
             unpack16x1((ushort)src, ref dst);
-            unpack16x1((ushort)(src >> 16), ref seekb(ref dst, 16));
+            unpack16x1((ushort)(src >> 16), ref refs.seekb(ref dst, 16));
         }
 
         [MethodImpl(Inline), Op]
         static void unpack64x1(ulong src, ref ulong dst)
         {
             unpack32x1((uint)src, ref dst);
-            unpack32x1((uint)(src >> 32), ref seekb(ref dst, 32));
+            unpack32x1((uint)(src >> 32), ref refs.seekb(ref dst, 32));
         }
     }
 }

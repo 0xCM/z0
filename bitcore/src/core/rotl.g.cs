@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using static zfunc;
+    
+    using static Root;
     using static As;
     using static AsIn;
 
     partial class gbits
     {
-
         /// <summary>
         /// Rotates source cells leftward and deposits the result in a caller-supplied target
         /// </summary>
@@ -72,7 +71,5 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }           
-
-
     }
 }

@@ -13,28 +13,6 @@ namespace Z0
     public static class IdenticalX
     {
         /// <summary>
-        /// Returns 1 if left and right blocks cover identical cells and 0 otherwise
-        /// </summary>
-        /// <param name="xb">The left block</param>
-        /// <param name="yb">The right block</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit Identical<T>(this Block128<T> xb, Block128<T> yb)        
-            where T : unmanaged        
-                => xb.Data.Identical(yb.Data);
-
-        /// <summary>
-        /// Returns 1 if left and right blocks cover identical cells and 0 otherwise
-        /// </summary>
-        /// <param name="xb">The left block</param>
-        /// <param name="yb">The right block</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit Identical<T>(this Block256<T> xb, Block256<T> yb)        
-            where T : unmanaged        
-                => xb.Data.Identical(yb.Data);
-
-        /// <summary>
         /// Returns 1 if the left and right spans contain identical content and 0 otherwise
         /// </summary>
         /// <param name="xs">The left span</param>
@@ -197,9 +175,6 @@ namespace Z0
                 index += 1;
             }
             return false;        
-        }
-
-  
+        }  
     }
-
 }

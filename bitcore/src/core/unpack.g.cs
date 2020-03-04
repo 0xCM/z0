@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using static zfunc;
+
+    using static Root;
 
     partial class gbits
     {
@@ -99,7 +100,7 @@ namespace Z0
             var bitcount = bitsize<T>()*src.Length;
             require(dst.Length >= bitcount);
 
-            ref var target = ref head(dst);
+            ref var target = ref refs.head(dst);
             var k = 0;
             for(var i=0; i < src.Length; i++)
             for(byte j=0; j< srcsize; j++, k++)

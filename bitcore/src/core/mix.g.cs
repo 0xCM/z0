@@ -9,8 +9,7 @@ namespace Z0
 
     using static As;
     using static AsIn;
-
-    using static zfunc;
+    using static Root;
 
     partial class gbits
     {

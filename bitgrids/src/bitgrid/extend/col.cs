@@ -8,11 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Nats;
 
     partial class BitGrid
     {                
-
         [MethodImpl(Inline)]
         public static BitVector<N16,ushort> Col<T>(this BitGrid64<N16,N4,T> g, int index)
             where T : unmanaged

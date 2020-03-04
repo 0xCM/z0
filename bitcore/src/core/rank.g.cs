@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
  
-    using static zfunc;
+    using static Root;
     using static As;
     using static AsIn;
     
@@ -35,5 +35,4 @@ namespace Z0
                 throw unsupported<T>();
         }
     }
-
 }

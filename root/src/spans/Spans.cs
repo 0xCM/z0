@@ -20,6 +20,26 @@ namespace Z0
     public static class Spans
     {    
         /// <summary>
+        /// Loads a span from a memory reference
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="count">The number of source cells to read</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static ReadOnlySpan<T> view<T>(in T src, int count)
+            => MemoryMarshal.CreateReadOnlySpan(ref Unsafe.AsRef(in src), count);
+
+        /// <summary>
+        /// Loads a span from a memory reference
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="count">The number of source cells to read</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static Span<T> manipulate<T>(ref T src, int count)
+            => MemoryMarshal.CreateSpan(ref src, count);
+
+        /// <summary>
         /// Allocates a span
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
@@ -398,5 +418,75 @@ namespace Z0
         public static int length<S,T>(ReadOnlySpan<S> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.Length == rhs.Length ? lhs.Length : throw errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
+
+        [MethodImpl(Inline)]
+        public static Span<T3> apply<F,T0,T1,T2,T3>(F f, ReadOnlySpan<T0> A, ReadOnlySpan<T1> B, ReadOnlySpan<T2> C,  Span<T3> dst)
+            where F : ITernaryFunc<T0,T1,T2,T3>
+        {
+            var count = dst.Length;
+            ref readonly var a = ref head(A);
+            ref readonly var b = ref head(B);
+            ref readonly var c = ref head(C);
+            ref var target = ref head(dst);
+
+            for(var i=0; i<count; i++)
+                seek(ref target, i) = f.Invoke(skip(in a, i), skip(in b, i), skip(in c, i));
+            return dst;
+        }        
+
+        [MethodImpl(Inline)]
+        public static Span<T2> apply<F,T0,T1,T2>(F f, ReadOnlySpan<T0> lhs, ReadOnlySpan<T1> rhs, Span<T2> dst)
+            where F : IBinaryFunc<T0,T1,T2>
+        {
+            var count = dst.Length;
+            ref readonly var lSrc = ref head(lhs);
+            ref readonly var rSrc = ref head(rhs);
+            ref var target = ref head(dst);
+
+            for(var i=0; i<count; i++)
+                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
+            return dst;
+        }        
+
+
+        [MethodImpl(Inline)]
+        public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
+            where F : IBinaryPred<T>
+        {
+            var count = dst.Length;
+            ref readonly var lSrc = ref head(lhs);
+            ref readonly var rSrc = ref head(rhs);
+            ref var target = ref head(dst);
+
+            for(var i=0; i<count; i++)
+                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<T2> apply<F,T1,T2>(F f, ReadOnlySpan<T1> src, Span<T2> dst)
+            where F : IUnaryFunc<T1,T2>
+        {
+            var count = dst.Length;
+            ref readonly var input = ref head(src);
+            ref var target = ref head(dst);
+
+            for(var i=0; i<count; i++)
+                seek(ref target, i) = f.Invoke(skip(in input, i));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> src, Span<bit> dst)
+            where F : IUnaryPred<T>
+        {
+            var count = dst.Length;
+            ref readonly var input = ref head(src);
+            ref var target = ref head(dst);
+
+            for(var i=0; i<count; i++)
+                seek(ref target, i) = f.Invoke(skip(in input, i));
+            return dst;
+        }
     }    
 }

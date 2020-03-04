@@ -83,8 +83,8 @@ namespace Z0
             this.GroupName = group;
             this.Identifier = 
                 opid.IsEmpty 
-                ? OpUriOps.QueryText(scheme, host.Owner, host.Name, group) 
-                : OpUriOps.FullUriText(scheme, host.Owner, host.Name, GroupName, opid);
+                ? OpUriBuilder.QueryText(scheme, host.Owner, host.Name, group) 
+                : OpUriBuilder.FullUriText(scheme, host.Owner, host.Name, GroupName, opid);
         }
 
         public OpUri GroupUri
@@ -111,6 +111,6 @@ namespace Z0
             => Format();
         
         ParseResult<OpUri> IParser<OpUri>.Parse(string text)
-            => OpUriOps.ParseUri(text);
+            => OpUriParser.The.Parse(text);            
     }
 }

@@ -22,4 +22,10 @@ namespace Z0
         ParseResult IParser.Parse(string text)
             => Parse(text);
     }
+
+    public interface IParser<P,T> : IParser<T>
+        where P : IParser<P,T>, new()
+    {
+        
+    }
 }

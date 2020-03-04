@@ -5,12 +5,10 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
-    <ProjectReference Include="$(TopDir)analogs/src/z0.analogs.csproj" />
   </ItemGroup>
 
 </Project>

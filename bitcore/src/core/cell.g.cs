@@ -7,12 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
 
     partial class gbits
     {
-
         /// <summary>
         /// Queries/manipulates a source cell that covers a position-identified bit
         /// </summary>
@@ -34,8 +32,5 @@ namespace Z0
         public static ref readonly T cell<T>(ReadOnlySpan<T> src, BitPos<T> pos)
             where T : unmanaged
                 => ref skip(src, pos.CellIndex);
-
-
     }
-
 }

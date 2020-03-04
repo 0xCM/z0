@@ -5,20 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
-
-    /// <summary>
-    /// Characterizes a bitwise shift operator
-    /// </summary>
-    /// <typeparam name="A">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IShiftOp<A> : IUnaryOpImm8<A>
-    {
-
-    }
 
     /// <summary>
     /// Characterizes a vectorized shift operator

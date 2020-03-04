@@ -147,7 +147,7 @@ namespace Z0
         {            
             var dst = Z0.Blocks.alloc<float>(n256, Z0.Blocks.blockcount<float>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
-            fspan.div(dst.Data, dst.Avg() * length);
+            fspan.div(dst.Data, dst.Data.Avg() * length);
             return dst; 
         }
 
@@ -156,7 +156,7 @@ namespace Z0
         {                        
             var dst = Z0.Blocks.alloc<double>(n256, Z0.Blocks.blockcount<double>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
-            fspan.div(dst.Data, dst.Avg() * length);
+            fspan.div(dst.Data, dst.Data.Avg() * length);
             return dst; 
         }
     }

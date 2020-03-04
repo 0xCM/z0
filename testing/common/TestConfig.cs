@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+    
     using static Interval;
         
-
     public class TestConfig : ITestConfig
     {
         public TestConfig(ITestConfig Defaults)

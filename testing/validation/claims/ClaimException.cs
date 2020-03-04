@@ -5,14 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
         
-    using static zfunc;
-
-
     /// <summary>
     /// Raised when a claim has failed
     /// </summary>
@@ -76,5 +70,4 @@ namespace Z0
 
         NotIn
     }
-
 }

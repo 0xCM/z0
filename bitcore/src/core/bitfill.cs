@@ -4,12 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
- 
-    using static zfunc;
-    
+     using System;
+     using System.Runtime.CompilerServices;
+
+     using static Root;
+   
      partial class Bits
      {                
           /// <summary>

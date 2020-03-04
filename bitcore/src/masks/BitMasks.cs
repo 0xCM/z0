@@ -5,17 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
- 
-    using static zfunc;
-
 
     public static partial class BitMasks
     {            
 
-
     }
-
 
 }

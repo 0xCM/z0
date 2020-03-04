@@ -45,7 +45,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
                 => mathspan.sub(lhs,rhs,dst);
-
         }
 
         [NumericClosures(NumericKind.All)]
@@ -281,6 +280,5 @@ namespace Z0
             [MethodImpl(Inline)]
             public readonly ulong Invoke(T a, T b) => gmath.dist(a,b);
         }
-
     }
 }

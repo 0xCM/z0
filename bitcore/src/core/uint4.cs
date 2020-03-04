@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;    
+    using static Root;    
 
     public struct UInt4 : IEquatable<UInt4>
     {
@@ -267,7 +266,7 @@ namespace Z0
         public override int GetHashCode()
             => data.GetHashCode();
  
-         /// <summary>
+        /// <summary>
         /// Specifies the status an index-identified bit
         /// </summary>
         /// <param name="pos">The 0-based absolute bit position</param>

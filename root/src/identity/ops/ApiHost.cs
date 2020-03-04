@@ -11,6 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;    
+    using static IdentityShare;
 
     /// <summary>
     /// Identifies/describes a type that declares a formalized api set
@@ -72,21 +73,24 @@ namespace Z0
         public bool IsEmtpy 
             => Owner == AssemblyId.None && HostingType == typeof(void);
 
-        public override string ToString() 
+        public string Format()
             => Identifier;
+
+        public override string ToString() 
+            => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(ApiHost src)
-            => IdentityShare.equals(this, src);
+            => equals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(ApiHost other)
-            => IdentityShare.compare(this, other);
+            => compare(this, other);
 
         public override int GetHashCode()
-            => IdentityShare.hash(this);
+            => hash(this);
 
         public override bool Equals(object obj)
-            => IdentityShare.equals(this, obj);
+            => equals(this, obj);
     }
 }

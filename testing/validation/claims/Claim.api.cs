@@ -10,7 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
         
-    using static zfunc;
+    using static Root;
+    using static Spans;
     using static messages;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

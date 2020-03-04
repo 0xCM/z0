@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-
-    using static zfunc;
 
     /// <summary>
     /// Characterizes an injective linear mapping from a monotonic sequence of bit positions to 
@@ -55,7 +52,6 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The 0-based linear index of the bit</param>
         ref readonly BitIndex Index(uint pos);
-
     }
 
     /// <summary>

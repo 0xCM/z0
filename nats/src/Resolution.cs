@@ -2,18 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Resolutions
 {
-    using System;
-    using System.Collections.Generic;
-
-    class Catalog : OpCatalog<Catalog>
+    public sealed class Nats : AssemblyResolution<Nats, Nats.C>
     {
-        public Catalog(AssemblyId id)
-            : base(id)
-        {
+        public Nats() : base(AssemblyId.Nats) {}
 
-        }        
-
+        public class C : OpCatalog<C> { public C() : base(AssemblyId.Nats) {} }
     }
 }

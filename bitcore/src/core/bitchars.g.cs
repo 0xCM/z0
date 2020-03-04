@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using static zfunc;
+    
+    using static Root;
 
     partial class gbits
     {
@@ -61,7 +61,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<char> bitchars<T>(Span<T> src, int? maxlen = null)
             where T : unmanaged
-                => bitchars(src.ReadOnly(), maxlen);    
-        
+                => bitchars(src.ReadOnly(), maxlen);        
     }
 }

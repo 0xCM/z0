@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public static class Validators
     {
         public static IUnaryValidator<T,T> UnaryValidator<T>(this ITestContext context, T t = default)

@@ -14,7 +14,6 @@ namespace Z0
     /// </summary>
     public static class fpx
     {
-
         [MethodImpl(Inline)]
         public static float Round(this float src, int scale)
             => fmath.round(src, scale);
@@ -62,14 +61,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double Avg(this ReadOnlySpan<double> src)
             => fspan.avg(src);
-
-        [MethodImpl(Inline)]
-        public static float Avg(this Block256<float> src)
-            => fspan.avg<float>(src);
-
-        [MethodImpl(Inline)]
-        public static double Avg(this Block256<double> src)
-            => fspan.avg<double>(src);
-            
     }
 }

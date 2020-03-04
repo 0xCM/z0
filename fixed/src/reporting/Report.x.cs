@@ -30,7 +30,6 @@ namespace Z0
             sb.Append($"{content}");
         }
 
-
         public static void AppendField(this StringBuilder sb, object content, int pad)
         {            
             sb.Append($"{content}".PadRight(pad));

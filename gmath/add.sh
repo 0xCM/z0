@@ -1,4 +1,4 @@
-export ProjectId=gmath
+export ProjectId="$(dirname "$0")"
 AddCmd=$ZDev/.scripts/sln-add.sh
 
 export Kind=src
