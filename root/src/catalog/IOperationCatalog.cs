@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a type that supports operation discovery
     /// </summary>
-    public interface IOperationCatalog
+    public interface IOperationCatalog : IOpServiceProvider
     {
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
@@ -29,11 +29,6 @@ namespace Z0
         /// The api hosts known to the catalog
         /// </summary>
         ApiHost[] ApiHosts {get;}
-
-        /// <summary>
-        /// The known types that reify contracted operation services, potentiall generic
-        /// </summary>
-        IEnumerable<Type> ServiceHostTypes {get;}
         
         /// <summary>
         /// The known generic api hosts

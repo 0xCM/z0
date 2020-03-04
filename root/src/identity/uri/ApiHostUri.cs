@@ -10,9 +10,9 @@ namespace Z0
     using static Root;
     using static IdentityOps;
 
-    public readonly struct ApiHostPath : IIdentity<ApiHostPath>, IParser<ApiHostPath>
+    public readonly struct ApiHostUri : IUri<ApiHostUri>
     {
-        public static ApiHostPath Empty = new ApiHostPath(AssemblyId.None, string.Empty);
+        public static ApiHostUri Empty = new ApiHostUri(AssemblyId.None, string.Empty);
         
         public readonly AssemblyId Owner;
 
@@ -27,23 +27,23 @@ namespace Z0
             => RelativeLocation.Define(FolderName.Define(Owner.Format()), HostFolder);
         
         [MethodImpl(Inline)]
-        static IParser<ApiHostPath> Parser()
-            => default(ApiHostPath);
+        static IParser<ApiHostUri> Parser()
+            => default(ApiHostUri);
         
         [MethodImpl(Inline)]
-        public static ParseResult<ApiHostPath> Parse(string text)
+        public static ParseResult<ApiHostUri> Parse(string text)
             => Parser().Parse(text);
 
         [MethodImpl(Inline)]
-        public static ApiHostPath FromHost(Type host)
-            => new ApiHostPath(host.Assembly.AssemblyId(), host.Name);
+        public static ApiHostUri FromHost(Type host)
+            => new ApiHostUri(host.Assembly.AssemblyId(), host.Name);
                 
         [MethodImpl(Inline)]
-        public static ApiHostPath Define(AssemblyId owner, string name)
-            => new ApiHostPath(owner,name);
+        public static ApiHostUri Define(AssemblyId owner, string name)
+            => new ApiHostUri(owner,name);
      
         [MethodImpl(Inline)]
-        ApiHostPath(AssemblyId owner, string name)
+        ApiHostUri(AssemblyId owner, string name)
         {
             this.Owner = owner;
             this.Name = name;
@@ -51,11 +51,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(ApiHostPath src)
+        public bool Equals(ApiHostUri src)
             => equals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(ApiHostPath other)
+        public int CompareTo(ApiHostUri other)
             => compare(this, other);
  
         public override int GetHashCode()
@@ -73,13 +73,13 @@ namespace Z0
             get => Owner == AssemblyId.None && string.IsNullOrWhiteSpace(Name);
         }
 
-        ParseResult<ApiHostPath> IParser<ApiHostPath>.Parse(string text)
+        ParseResult<ApiHostUri> IParser<ApiHostUri>.Parse(string text)
         {
             var parts = text.Split('/');
             if(parts.Length == 2 && Enum.TryParse(parts[0], true, out AssemblyId owner))
                 return ParseResult.Success(Define(owner, parts[1]));
             else
-                return ParseResult.Fail<ApiHostPath>();
+                return ParseResult.Fail<ApiHostUri>();
         }
     }
 }

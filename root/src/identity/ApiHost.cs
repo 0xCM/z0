@@ -25,7 +25,7 @@ namespace Z0
 
         public AssemblyId Owner {get;}
 
-        public ApiHostPath Path {get;}
+        public ApiHostUri Path {get;}
         
         public Type HostingType {get;}
 
@@ -62,7 +62,7 @@ namespace Z0
             var attrib = t.GetCustomAttribute<ApiHostAttribute>();
             this.HostKind = attrib?.HostKind ?? ApiHostKind.DirectAndGeneric;
             this.HostName = string.IsNullOrWhiteSpace(attrib?.HostName) ? t.Name : attrib.HostName;            
-            this.Path = ApiHostPath.Define(Owner, HostName);
+            this.Path = ApiHostUri.Define(Owner, HostName);
             this.Identifier = Path.Format();
         }
                  

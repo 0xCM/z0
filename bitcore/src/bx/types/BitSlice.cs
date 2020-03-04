@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;
+    using static Root;
 
-    partial class BCTypes
+    partial class BitCoreServices
     {
         public readonly struct BitSlice<T> : IUnaryOpImm8x2<T>
             where T : unmanaged        

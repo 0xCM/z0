@@ -41,7 +41,8 @@ namespace Z0
 
         public IOperationCatalog Operations {get;}
 
-        IEnumerable<Type> IOperationCatalog.ServiceHostTypes 
+
+        IEnumerable<Type> IOpServiceProvider.ServiceHostTypes 
             => Operations.ServiceHostTypes;
 
         IEnumerable<ApiHost> IOperationCatalog.GenericApiHosts 

@@ -13,10 +13,10 @@ namespace Z0
     using static Root;    
 
     /// <summary>
-    /// Describes the capture and subsequent emission of single routine, such
-    /// as a member function or a delegate
+    /// Upon success, provides evidence that an operation was extracted, decoded and emitted; upon failure, communicates in the
+    /// termination code the basic reason why the capture processes failed
     /// </summary>
-    public readonly struct AsmCaptureToken : IEquatable<AsmCaptureToken>, IComparable<AsmCaptureToken>, IFormattable<AsmCaptureToken>
+    public readonly struct AsmEmissionToken : IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>, IFormattable<AsmEmissionToken>
     {
         /// <summary>
         /// Defines a uri relataive to the global asm data root
@@ -34,19 +34,19 @@ namespace Z0
         public readonly MemoryRange AddressRange;
 
         [MethodImpl(Inline)]
-        public static AsmCaptureToken Define(OpUri uri, MemoryRange src, CaptureTermCode term)        
-            => new AsmCaptureToken(uri,src,term);
+        public static AsmEmissionToken Define(OpUri uri, MemoryRange src, CaptureTermCode term)        
+            => new AsmEmissionToken(uri,src,term);
 
         [MethodImpl(Inline)]
-        public static bool operator==(AsmCaptureToken a, AsmCaptureToken b)
+        public static bool operator==(AsmEmissionToken a, AsmEmissionToken b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(AsmCaptureToken a, AsmCaptureToken b)
+        public static bool operator!=(AsmEmissionToken a, AsmEmissionToken b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        AsmCaptureToken(OpUri uri, MemoryRange src, CaptureTermCode term)
+        AsmEmissionToken(OpUri uri, MemoryRange src, CaptureTermCode term)
         {
             this.Uri = uri;
             this.AddressRange = src;
@@ -63,23 +63,16 @@ namespace Z0
             => HashCode.Combine(Uri,AddressRange);
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmCaptureToken src)
+        public bool Equals(AsmEmissionToken src)
             => TermCode == src.TermCode
             && Uri == src.Uri 
             && AddressRange == src.AddressRange;
         
         public override bool Equals(object src)
-            => src is AsmCaptureToken d && Equals(d);
+            => src is AsmEmissionToken d && Equals(d);
 
         [MethodImpl(Inline)]
-        public int CompareTo(AsmCaptureToken rhs)
+        public int CompareTo(AsmEmissionToken rhs)
             => this.Uri.CompareTo(rhs.Uri);
     }
-
-    public static class AsmCaptureTokenOps
-    {
-        public static AsmCaptureTokenGroup ToGroup(this IEnumerable<AsmCaptureToken> tokens, OpUri groupUri)
-            => AsmCaptureTokenGroup.Define(groupUri, tokens.ToArray());
-
-    }    
 }

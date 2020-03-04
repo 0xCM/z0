@@ -22,7 +22,7 @@ namespace Z0
             var uri = attempt.Value;
 
             Claim.eq(OpUriScheme.Hex, uri.Scheme);
-            Claim.eq(ApiHostPath.Define(AssemblyId.Fixed, nameof(Vector512)), uri.HostPath);
+            Claim.eq(ApiHostUri.Define(AssemblyId.Fixed, nameof(Vector512)), uri.HostPath);
             Claim.eq(nameof(Vector512.vgeneric), uri.GroupName);
             Claim.eq(opid, uri.OpId);
             Claim.eq(true, opid.IsGeneric);

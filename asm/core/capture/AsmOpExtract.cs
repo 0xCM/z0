@@ -43,7 +43,7 @@ namespace Z0
             require((int)memsrc.Length == bits.Parsed.Length);    
             this.Id = id;        
             this.Code = AsmCode.Define(id, bits.Parsed);
-            this.Operation = OpDescriptor.Define(OpUri.Hex(ApiHostPath.FromHost(method.DeclaringType), method.Name, id), method.Signature().Format());
+            this.Operation = OpDescriptor.Define(OpUri.Hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id), method.Signature().Format());
             this.Method = method;
             this.TermCode = term;
             this.RawBits = bits.Raw;

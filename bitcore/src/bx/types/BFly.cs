@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;
+    using static Root;
 
-    partial class BCTypes
+    partial class BitCoreServices
     {
         public readonly struct Bfly<N,T> : INaturalUnaryOp<N,T>
             where T : unmanaged

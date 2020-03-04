@@ -39,7 +39,7 @@ namespace Z0
             this.addresses = src;
         }
 
-        public IEnumerable<MemoryAddress> Terms 
+        public IEnumerable<MemoryAddress> Content 
             => addresses;
     }
 }

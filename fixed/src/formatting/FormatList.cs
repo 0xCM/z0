@@ -53,6 +53,16 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static string FormatList<T>(this IEnumerable<T> items, char? delimiter = null, int offset = 0)
             where T : ICustomFormattable
-                => items.ToReadOnlySpan().FormatList();
+                => items.ToReadOnlySpan().FormatList(delimiter,offset);
+
+        /// <summary>
+        /// Formats a sequence of formattable things as delimited list
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="delimiter">The delimiter, if specified; otherwise, a system default is chosen</param>
+        /// <param name="offset">The index of the source element at which formatting will begin</param>
+        /// <typeparam name="T">A formattable type</typeparam>
+        public static string FormatList(this IEnumerable<object> items, char? delimiter = null)
+            => string.Join(delimiter ?? text.comma(), items);
     }
 }

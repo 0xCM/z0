@@ -38,7 +38,6 @@ namespace Z0
 
     }
 
-    [ApiHost("cpuvector")]
     public static partial class CpuVector
     {
     

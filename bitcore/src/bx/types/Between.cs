@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;
-
-    partial class BCTypes
+    partial class BitCoreServices
     {
         public readonly struct Between<T> : IUnaryOpImm8x2<T>
             where T : unmanaged        

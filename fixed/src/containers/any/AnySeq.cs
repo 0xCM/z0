@@ -14,7 +14,13 @@ namespace Z0
 
     public readonly struct AnySeq<T> : IAnySeq<AnySeq<T>,T>
     {    
-        public IEnumerable<T> Terms {get;}
+        public IEnumerable<T> Content {get;}
+
+        IEnumerable<T> Items 
+        {
+            [MethodImpl(Inline)]
+            get => Items ?? array<T>();
+        }
 
         [MethodImpl(Inline)]
         public static AnySeq<T> Define(IEnumerable<T> src)
@@ -27,13 +33,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public AnySeq(IEnumerable<T> src)
         {
-            this.Terms = src;
+            this.Content = src;
         }
+
 
         public AnySeqFactory<T,AnySeq<T>> Factory
              => Define;
  
         string ICustomFormattable.Format()
-            => text.concat(Terms.TakeAtMost(20), text.comma());
+            => text.concat(Items.TakeAtMost(20), text.comma());
     }
 }

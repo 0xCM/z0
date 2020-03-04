@@ -5,15 +5,53 @@
 namespace  Z0
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
+    using System.Linq;
+
+
+    public interface IContentAggregate : ICustomFormattable
+    {
+        IEnumerable<object> Items {get;}
+
+        string ICustomFormattable.Format()
+            => string.Join(AsciSym.Comma, Items);
+
+    }
+
+    public interface IContentAggregate<T> : IContentAggregate, IEnumerable<T>
+    {
+        new IEnumerable<T> Items {get;}
+
+        IEnumerable<object> IContentAggregate.Items
+            => Items.Cast<object>();
+
+        IEnumerator IEnumerable.GetEnumerator()
+            => Items.GetEnumerator();
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+            => Items.ToReadOnlyList().GetEnumerator();
+
+    }
+
     /// <summary>
     /// Characterizes a reified container
     /// </summary>
     /// <typeparam name="S">The container type</typeparam>
-    public interface IContainer<S>
-        where S : IContainer<S>, new()
+    public interface IContainer<A>
+        //where S : IContainer<S>, new()
+    {
+        A Content {get;}
+    }
+
+    /// <summary>
+    /// Characterizes a reified container parametrized by the contained type
+    /// </summary>
+    /// <typeparam name="S">The container type</typeparam>
+    /// <typeparam name="T">The content aggregate</typeparam>
+    public interface IContainer<C,A> : IContainer<A>
+        //where C : IContainer<C,A>, new()
     {
         
     }
@@ -21,10 +59,22 @@ namespace  Z0
     /// <summary>
     /// Characterizes a reified container parametrized by the contained type
     /// </summary>
+    /// <typeparam name="C">The container</typeparam>
+    /// <typeparam name="A">The content aggregate</typeparam>
+    /// <typeparam name="T">The contained item type</typeparam>
+    public interface IContainer<C,A,T> : IContainer<C,A>
+        where C : IContainer<C,A,T>, new()
+    {
+           
+    }
+
+    /// <summary>
+    /// Characterizes a container that comprises discrete content
+    /// </summary>
     /// <typeparam name="S">The container type</typeparam>
     /// <typeparam name="T">The contained type</typeparam>
-    public interface IContainer<S,T> : IContainer<S>
-        where S : IContainer<S,T>, new()
+    public interface IEnumerableContainer<C,T> : IContainer<C,IEnumerable<T>, T>
+        where C : IEnumerableContainer<C,T>, new()
     {
         
     }
@@ -49,19 +99,9 @@ namespace  Z0
 
     }
 
-    /// <summary>
-    /// Characterizes a container that comprises discrete content
-    /// </summary>
-    /// <typeparam name="S">The container type</typeparam>
-    /// <typeparam name="T">The contained type</typeparam>
-    public interface IDiscreteContainer<S,T> : IContainer<S,T>
-        where S : IDiscreteContainer<S,T>, new()
-    {
-        IEnumerable<T> Content {get;}
-    }
 
-    public interface IFiniteContainer<S,T> : IDiscreteContainer<S,T>
-        where S : IFiniteContainer<S,T>, new()
+    public interface IFiniteEnumerable<S,T> : IEnumerableContainer<S,T>
+        where S : IFiniteEnumerable<S,T>, new()
     {
         /// <summary>
         /// The count providing evidence that the content is finite
@@ -70,8 +110,8 @@ namespace  Z0
     }
 
 
-    public interface IFiniteSeq<S,T> : ISeq<S,T>, IFiniteContainer<S,T>
-        where S : IFiniteSeq<S,T>, new()
+    public interface IIndexedSeq<S,T> : ISeq<S,T>, IFiniteEnumerable<S,T>
+        where S : IIndexedSeq<S,T>, new()
     {
         /// <summary>
         /// Retrieves the 0-based i'th element of the sequence
@@ -101,56 +141,23 @@ namespace  Z0
     }
 
     /// <summary>
-    /// Characterizes a reified set
-    /// </summary>
-    /// <typeparam name="S">The container type</typeparam>
-    /// <typeparam name="T">The contained type</typeparam>
-    public interface IFormalSet<S,T> : IFormalSet, IContainer<S,T>
-        where S : IFormalSet<S,T>, new()
-    {
-    
-    }
-
-    /// <summary>
     /// Characterizes a concatenable container with discrete content 
     /// </summary>
     /// <typeparam name="S">The container type</typeparam>
     /// <typeparam name="T">The contained type</typeparam>
-    public interface ISeq<S,T> : IDiscreteContainer<S,T>, IConcatenable<S,T>
+    public interface ISeq<S,T> : IEnumerableContainer<S,T>, IConcatenable<S,T>
         where S : ISeq<S,T>, new()
     {
         
     }
 
-    /// <summary>
-    /// Characterizes a set indexed by another set
-    /// </summary>
-    /// <typeparam name="I">The indexing set</typeparam>
-    /// <typeparam name="X">The indexed set</typeparam>
-    public interface IIndex<I,T> : IDiscreteContainer<I,KeyedValue<I,T>>
-        where I : IIndex<I,T>, new()
-    {
-        /// <summary>
-        /// Retrives an indexed value
-        /// </summary>
-        /// <param name="index">The index value</param>
-        /// <returns>The indexed value</returns>
-        T Lookup(I index);
-
-        /// <summary>
-        /// Retrives an indexed value via an index operator
-        /// </summary>
-        /// <param name="index">The index value</param>
-        /// <returns>The indexed value</returns>
-        T  this[I ix] {get;}
-    }
 
     /// <summary>
     /// Characteriizes a reified set for which there are a countable number of members
     /// </summary>
     /// <typeparam name="S">The reification type</typeparam>
     /// <typeparam name="T">The member type</typeparam>
-    public interface IDiscreteSet<S,T> : IFormalSet, IDiscreteContainer<S,T>
+    public interface IDiscreteSet<S,T> : IFormalSet, IEnumerableContainer<S,T>
         where S: IDiscreteSet<S,T>, new()
     {
 

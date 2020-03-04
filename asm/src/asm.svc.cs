@@ -62,14 +62,14 @@ namespace Z0
             => AsmFunctionArchive.Create(context, catalog, host);
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(this IAsmContext context, ApiHostPath host, bool imm)
+        public static IAsmFunctionArchive FunctionArchive(this IAsmContext context, ApiHostUri host, bool imm)
             => AsmFunctionArchive.Create(context, host, imm);
 
         /// <summary>
         /// Instantiates a contextual catalog-level emitter service
         /// </summary>
         /// <param name="context">The source context</param>
-        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, AsmCaptureEmissionObserver observer)
+        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOperationCatalog catalog, AsmEmissionObserver observer)
             => AsmCatalogEmitter.Create(context, catalog, observer);
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
             => AsmOpExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
-        public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostPath host)
+        public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostUri host)
             => AsmHostArchive.Create(context, host);    
     }
 }

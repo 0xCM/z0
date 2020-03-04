@@ -14,6 +14,34 @@ namespace Z0
 
     public static class Enums
     {
+        /// <summary>
+        /// Attempts to parses an enumeration literal, ignoring case, and returns a default value if parsing failed
+        /// </summary>
+        /// <param name="name">The literal name</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static E parse<E>(string name, E @default)
+            where E : unmanaged, Enum
+                => Root.Try(() => Enum.Parse<E>(name, true)).ValueOrDefault(@default);
+
+        /// <summary>
+        /// Attempts o parse an enum literal, ignoring case, and returns a null value if parsing failed
+        /// </summary>
+        /// <param name="name">The literal name</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        public static ParseResult<E> parse<E>(string name)
+            where E : unmanaged, Enum
+        {
+            try
+            {                
+                return ParseResult.Success(Enum.Parse<E>(name,true));
+            }
+            catch(Exception e)
+            {
+                return ParseResult.Fail<E>(e);
+            }
+        }
+
         [MethodImpl(Inline)]
         public static E zero<E>()
             where E : unmanaged, Enum
@@ -151,33 +179,6 @@ namespace Z0
         public static string[] names<E>()
             => Enum.GetNames(typeof(E));
 
-        /// <summary>
-        /// Attempts to parses an enumeration literal, ignoring case, and returns a default value if parsing failed
-        /// </summary>
-        /// <param name="name">The literal name</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static E parse<E>(string name, E @default = default)
-            where E : unmanaged, Enum
-                => Root.Try(() => Enum.Parse<E>(name, true)).ValueOrDefault(@default);
-
-        /// <summary>
-        /// Attempts o parse an enum literal, ignoring case, and returns a null value if parsing failed
-        /// </summary>
-        /// <param name="name">The literal name</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        public static E? tryparse<E>(string name)
-            where E : unmanaged, Enum
-        {
-            try
-            {
-                return Enum.Parse<E>(name,true);
-            }
-            catch(Exception)
-            {
-                return null;
-            }
-        }
         
         /// <summary>
         /// Interprets an enum value as a signed byte

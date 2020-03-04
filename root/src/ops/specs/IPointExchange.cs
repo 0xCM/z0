@@ -84,17 +84,6 @@ namespace Z0
     }
 
     /// <summary>
-    /// Chracterizes an integer-indexed sequence
-    /// </summary>
-    /// <typeparam name="A">The sequence term type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IIndexedSeq<A> : IIndexedSource<A>
-    {
-
-
-    }
-
-    /// <summary>
     /// Characterizes an exchange that emits/receives index-identified points
     /// </summary>
     /// <typeparam name="A">The type of point exchanged</typeparam>

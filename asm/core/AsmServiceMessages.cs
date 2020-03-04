@@ -18,7 +18,7 @@ namespace Z0
         public static AppMsg CatalogEmissionFailed(IOperationCatalog catalog, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppMsg.Error($"Error occurred while emitting catalog {catalog.CatalogName}", caller, file, line);
 
-        public static AppMsg Emitted(AsmCaptureToken src)
+        public static AppMsg Emitted(AsmEmissionToken src)
             => AppMsg.Babble($"Emitted {src.Uri}");
 
         public static AppMsg EmissionMismatch(OpIdentity id, int incount, int outcount)
@@ -38,16 +38,16 @@ namespace Z0
                     $"origin = {origin}, block length = {reported}, reported length = {reported}"),
                         caller, file, line);
 
-        public static AppMsg CapturedRaw(ApiHostPath host, FilePath dst)
+        public static AppMsg CapturedRaw(ApiHostUri host, FilePath dst)
             => AppMsg.Info($"Emitted raw {host} encodings to {dst}");
 
-        public static AppMsg CaptureRawFailed(ApiHostPath host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppMsg CaptureRawFailed(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppMsg.Error($"Error emitting raw {host} encodings", caller, file, line);
 
-        public static AppMsg ParsedEncodings(ApiHostPath host, FilePath dst)
+        public static AppMsg ParsedEncodings(ApiHostUri host, FilePath dst)
             => AppMsg.Info($"Emitted parsed {host} encodings to {dst}");
 
-        public static AppMsg ParseEncodingFailure(ApiHostPath host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppMsg ParseEncodingFailure(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppMsg.Error($"Error parsing {host} encodings", caller, file, line);
 
     }

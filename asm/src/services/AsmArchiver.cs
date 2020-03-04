@@ -34,25 +34,25 @@ namespace Z0
         IEnumerable<AssemblyId> ActiveAssemblies
             => Context.ActiveAssemblies();
 
-        Option<FilePath> ReportEmissions(AssemblyId src, AsmCaptureTokenGroup[] emitted, AsmEmissionKind kind)
+        Option<FilePath> ReportEmissions(AssemblyId src, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
             => AsmReports.Emissions(src, emitted, kind).Save(AsmEmissionPaths.Current.EmissionPath(src, kind));
 
-        AsmCaptureTokenGroup[] EmitPrimary(in AsmCaptureExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
+        AsmEmissionTokens<OpUri>[] EmitPrimary(in AsmCaptureExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
         {
-            var emissions = new List<AsmCaptureTokenGroup>(); 
+            var emissions = new List<AsmEmissionTokens<OpUri>>(); 
 
-            void OnEmission(in AsmCaptureTokenGroup emission) => emissions.Add(emission);            
+            void OnEmission(in AsmEmissionTokens<OpUri> emission) => emissions.Add(emission);            
             
             emitter.EmitPrimary(exchange,OnEmission);
 
             return emissions.ToArray();
         }        
 
-        AsmCaptureTokenGroup[] EmitImm(in AsmCaptureExchange exchange, ICatalogProvider src, IAsmCatalogEmitter emitter)
+        AsmEmissionTokens<OpUri>[] EmitImm(in AsmCaptureExchange exchange, ICatalogProvider src, IAsmCatalogEmitter emitter)
         {
-            var emissions = new List<AsmCaptureTokenGroup>();   
+            var emissions = new List<AsmEmissionTokens<OpUri>>();   
             
-            void OnEmission(in AsmCaptureTokenGroup emission) => emissions.Add(emission);
+            void OnEmission(in AsmEmissionTokens<OpUri> emission) => emissions.Add(emission);
 
             emitter.EmitImm(exchange,OnEmission);
 
@@ -73,7 +73,7 @@ namespace Z0
 
         void Archive(in AsmCaptureExchange exchange, ICatalogProvider src)
         {
-            void OnEmission(in AsmCaptureTokenGroup data)
+            void OnEmission(in AsmEmissionTokens<OpUri> data)
             {
 
             }

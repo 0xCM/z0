@@ -46,8 +46,5 @@ namespace Z0
     public interface IUnaryOpImm8x2<A> : IFunc<A,byte,byte,A>
     {
         FunctionKind IFunc.Kind => FunctionKind.TernaryImm;
-
     }
-
-
 }

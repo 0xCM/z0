@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;
+    using static Root;
 
-    partial class BCTypes
+    partial class BitCoreServices
     {
         public readonly struct ByteSwap<T> : IUnaryOp<T>
             where T : unmanaged        
@@ -24,5 +24,4 @@ namespace Z0
             public T Invoke(T a) => gbits.byteswap(a);
         }
     }
-
 }

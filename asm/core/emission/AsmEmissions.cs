@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.IO;
 
-    public static class AsmEmissions
+    public static class AsmEmissionsX
     {
         public static void WriteMember(this StreamWriter dst, AsmOpExtract src) 
             => dst.Write(src.FormatCode());

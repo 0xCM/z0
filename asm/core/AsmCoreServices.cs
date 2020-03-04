@@ -13,7 +13,7 @@ namespace Z0
 
     public static class AsmCoreServices
     {
-        public static Option<AsmParseReport> LoadParsedEncodings(this IAsmContext context, ApiHostPath host, char? delimiter = null)
+        public static Option<AsmParseReport> LoadParsedEncodings(this IAsmContext context, ApiHostUri host, char? delimiter = null)
         {
             var path = context.EmissionPaths().ParsedCapturePath(host);
             var sep = delimiter ?? text.pipe();
@@ -200,7 +200,7 @@ namespace Z0
                 var index = key.Split(text.colon());            
                 if(index.Length == 2 && bit.Parse(index[1]))
                 {
-                    var id = Enums.parse<AssemblyId>(value);
+                    var id = Enums.parse<AssemblyId>(value, AssemblyId.None);
                     if(id != AssemblyId.None)
                         yield return id;                        
                 }

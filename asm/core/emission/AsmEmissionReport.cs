@@ -27,10 +27,10 @@ namespace Z0
     /// </summary>
     public class AsmEmissionRecord : IRecord<F,R>
     {    
-        public static AsmEmissionRecord Define(AsmCaptureToken src)
+        public static AsmEmissionRecord Define(AsmEmissionToken src)
             => new AsmEmissionRecord(src);
 
-        AsmEmissionRecord(AsmCaptureToken src)
+        AsmEmissionRecord(AsmEmissionToken src)
         {
             this.TermCode = src.TermCode;
             this.Size = (int)src.AddressRange.Length;
@@ -62,12 +62,12 @@ namespace Z0
         
         public AsmEmissionKind EmissionKind {get;}
 
-        public static AsmEmissionReport Create(AssemblyId id, AsmCaptureTokenGroup[] emitted, AsmEmissionKind kind)
+        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
         {
             if(emitted.Length == 0)
                 return default;
             
-            var emissions = emitted.SelectMany(g => g.Tokens).ToArray();
+            var emissions = emitted.SelectMany(g => g.Content).ToArray();
             Array.Sort(emissions);
             var count = emissions.Length;
             var records = new AsmEmissionRecord[count];            

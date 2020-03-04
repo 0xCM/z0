@@ -11,13 +11,13 @@ namespace Z0
     using static Root;
     using static IdentityOps;
     
-    public readonly struct OpUri : IEquatable<OpUri>, IComparable<OpUri>, IIdentity<OpUri>, IParser<OpUri>
+    public readonly struct OpUri : IUri<OpUri>
     {
-        public static OpUri Empty => new OpUri(OpUriScheme.None, ApiHostPath.Empty, string.Empty, OpIdentity.Empty);
+        public static OpUri Empty => new OpUri(OpUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
         
         public readonly OpUriScheme Scheme;
         
-        public readonly ApiHostPath HostPath;
+        public readonly ApiHostUri HostPath;
         
         /// <summary>
         /// The name assigned to a group of methods; usually agrees with what is called a "method group" in clr-land
@@ -47,35 +47,35 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static OpUri Define(OpUriScheme scheme, ApiHostPath host, string group, OpIdentity opid)        
+        public static OpUri Define(OpUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)        
             => new OpUri(scheme, host, group, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri Hex(ApiHostPath host, string group)        
+        public static OpUri Hex(ApiHostUri host, string group)        
             => new OpUri(OpUriScheme.Hex, host, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
-        public static OpUri Hex(ApiHostPath host, string group, OpIdentity opid)        
+        public static OpUri Hex(ApiHostUri host, string group, OpIdentity opid)        
             => new OpUri(OpUriScheme.Hex, host, group, opid);
 
         [MethodImpl(Inline)]
         public static OpUri Hex(OpIdentity opid, MethodInfo src)        
-            => new OpUri(OpUriScheme.Hex, ApiHostPath.FromHost(src.DeclaringType), src.Name, opid);
+            => new OpUri(OpUriScheme.Hex, ApiHostUri.FromHost(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri Asm(ApiHostPath host, string group)        
+        public static OpUri Asm(ApiHostUri host, string group)        
             => new OpUri(OpUriScheme.Asm, host, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
-        public static OpUri Asm(ApiHostPath host, string group, OpIdentity opid)        
+        public static OpUri Asm(ApiHostUri host, string group, OpIdentity opid)        
             => new OpUri(OpUriScheme.Asm, host, group, opid);
 
         [MethodImpl(Inline)]
         public static OpUri Asm(OpIdentity opid, MethodInfo src)        
-            => new OpUri(OpUriScheme.Asm, ApiHostPath.FromHost(src.DeclaringType), src.Name, opid);
+            => new OpUri(OpUriScheme.Asm, ApiHostUri.FromHost(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
-        OpUri(OpUriScheme scheme, ApiHostPath host, string group, OpIdentity opid)
+        OpUri(OpUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
         {
             this.Scheme = scheme;
             this.HostPath = host;

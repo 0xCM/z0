@@ -20,14 +20,14 @@ namespace Z0.Asm
 
         readonly IAsmFunctionDecoder Decoder;
 
-        readonly AsmCaptureEmissionObserver Observer;
+        readonly AsmEmissionObserver Observer;
 
         [MethodImpl(Inline)]
-        public static IAsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog, AsmCaptureEmissionObserver observer)
+        public static IAsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog, AsmEmissionObserver observer)
             => new AsmCatalogEmitter(context,catalog,observer);
 
         [MethodImpl(Inline)]
-        AsmCatalogEmitter(IAsmContext context, IOperationCatalog catalog, AsmCaptureEmissionObserver observer)
+        AsmCatalogEmitter(IAsmContext context, IOperationCatalog catalog, AsmEmissionObserver observer)
         {
             this.Context = context;
             this.Catalog = catalog;
@@ -35,7 +35,7 @@ namespace Z0.Asm
             this.Observer = observer;
         }
 
-        IAsmFunctionArchive Archive(ApiHostPath host, bool imm)
+        IAsmFunctionArchive Archive(ApiHostUri host, bool imm)
             => Context.FunctionArchive(host, imm);
 
         IAsmCatalogEmitter Me
@@ -44,27 +44,27 @@ namespace Z0.Asm
             get => this;
         }
         
-        void IAsmCatalogEmitter.EmitPrimary(in AsmCaptureExchange exchange, AsmCaptureEmissionObserver observer)
+        void IAsmCatalogEmitter.EmitPrimary(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
         {
             ClearArchives(false);
             EmitDirectPrimary(exchange,observer);
             EmitGenericPrimary(exchange,observer);
         }
 
-        void IAsmCatalogEmitter.EmitImm(in AsmCaptureExchange exchange, AsmCaptureEmissionObserver observer)
+        void IAsmCatalogEmitter.EmitImm(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
         {
             ClearArchives(true);
             EmitDirectImm(exchange,observer);
             EmitGenericImm(exchange,observer);
         }
 
-        void EmitDirectPrimary(in AsmCaptureExchange exchange, AsmCaptureEmissionObserver observer)
+        void EmitDirectPrimary(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
         {            
             foreach(var host in Catalog.DirectApiHosts)
                 EmitDirectPrimary(exchange, host, observer);
         }
 
-        void EmitDirectImm(in AsmCaptureExchange exchange, AsmCaptureEmissionObserver observer)
+        void EmitDirectImm(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
         {
             foreach(var host in Catalog.DirectApiHosts)
             {
@@ -79,13 +79,13 @@ namespace Z0.Asm
             }
         }
 
-        void EmitGenericPrimary(in AsmCaptureExchange exchange, AsmCaptureEmissionObserver observer)
+        void EmitGenericPrimary(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
         {
             foreach(var host in Catalog.GenericApiHosts)                
                 EmitGenericPrimary(exchange, host, observer);
         }
 
-        void EmitGenericImm(in AsmCaptureExchange exchange, AsmCaptureEmissionObserver observer)
+        void EmitGenericImm(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
         {        
             foreach(var host in Catalog.GenericApiHosts)
             {
@@ -97,7 +97,7 @@ namespace Z0.Asm
             }        
         }
 
-        void EmitDirectPrimary(in AsmCaptureExchange exchange, ApiHost host, AsmCaptureEmissionObserver observer)
+        void EmitDirectPrimary(in AsmCaptureExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
             var primary = HostArchive(host);
             var specs = host.DirectOps();
@@ -106,7 +106,7 @@ namespace Z0.Asm
                 Emit(exchange, PrimaryGroup(host,spec), primary, observer);
         }
 
-        void EmitGenericPrimary(in AsmCaptureExchange exchange, ApiHost host, AsmCaptureEmissionObserver observer)
+        void EmitGenericPrimary(in AsmCaptureExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
             var primary = HostArchive(host);
             var specs = host.GenericOps();
@@ -115,7 +115,7 @@ namespace Z0.Asm
                 Emit(exchange, spec, primary, observer);
         }        
 
-        void Emit(in AsmCaptureExchange exchange, DirectOpGroup group, IAsmFunctionArchive dst, AsmCaptureEmissionObserver observer)
+        void Emit(in AsmCaptureExchange exchange, DirectOpGroup group, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {                                    
             var functions = new List<AsmFunction>();
             foreach(var spec in group.Members)
@@ -134,7 +134,7 @@ namespace Z0.Asm
         AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, ClosedOpSpec closure)
             => decoder.DecodeFunction(Context.OpExtractor().Extract(in exchange, closure.Id, closure.ClosedMethod));
 
-        void Emit(in AsmCaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, AsmCaptureEmissionObserver observer)
+        void Emit(in AsmCaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
             var functions = new List<AsmFunction>();
             foreach(var closure in op.Close())                        
@@ -146,7 +146,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitGenericImm(in AsmCaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, AsmCaptureEmissionObserver observer)
+        void EmitGenericImm(in AsmCaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
             if(op.MethodDefinition.IsVectorizedUnaryImm())
             {                                                
@@ -176,9 +176,9 @@ namespace Z0.Asm
             }
         }
 
-        void EmitDirectImm(in AsmCaptureExchange exchange, DirectOpGroup op, IAsmFunctionArchive dst, AsmCaptureEmissionObserver observer)
+        void EmitDirectImm(in AsmCaptureExchange exchange, DirectOpGroup op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
-            var tokens = new List<AsmCaptureToken>();
+            var tokens = new List<AsmEmissionToken>();
             foreach(var member in op.Members.Where(m => m.ConcreteMethod.IsVectorizedUnaryImm()))
             {
                 var resolutions = Context.UnaryImmCapture(member.ConcreteMethod, member.Id).Capture(in exchange, ImmSelection);
@@ -186,7 +186,7 @@ namespace Z0.Asm
                 {
                     var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
                     var tGroup = dst.Save(fGroup, true);
-                    tGroup.OnSome(t => tokens.AddRange(t.Tokens)).OnSome(g => Me.Accept(g));
+                    tGroup.OnSome(t => tokens.AddRange(t.Content)).OnSome(g => Me.Accept(g));
                 }
             }
 
@@ -197,12 +197,12 @@ namespace Z0.Asm
                 {
                     var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
                     var tGroup = dst.Save(fGroup, true);
-                    tGroup.OnSome(t => tokens.AddRange(t.Tokens)).OnSome(g => Me.Accept(g));
+                    tGroup.OnSome(t => tokens.AddRange(t.Content)).OnSome(g => Me.Accept(g));
                 }
             }
 
             if(tokens.Count != 0)
-                observer(tokens.ToGroup(tokens[0].Uri.GroupUri));
+                observer(AsmEmissionTokens.From(tokens[0].Uri.GroupUri,tokens));
         }                    
 
         DirectOpGroup PrimaryGroup(ApiHost host, DirectOpGroup g)
@@ -222,17 +222,17 @@ namespace Z0.Asm
                 iter(ApiHosts.Select(HostArchive), a => a.Clear());
         }    
 
-        void OnSave(Option<AsmCaptureTokenGroup> g, AsmCaptureEmissionObserver observer)
+        void OnSave(Option<AsmEmissionTokens<OpUri>> g, AsmEmissionObserver observer)
         {
             if(g.IsSome())
             {
                 observer(g.Value);            
-                foreach(var t in g.Value.Tokens)
+                foreach(var t in g.Value.Content)
                     term.inform(Emitted(t));
             }
         }
 
-        void ISink<AsmCaptureTokenGroup>.Accept(in AsmCaptureTokenGroup src)
+        void ISink<AsmEmissionTokens<OpUri>>.Accept(in AsmEmissionTokens<OpUri> src)
         {
             Observer(src);
         }

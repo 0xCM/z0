@@ -43,7 +43,7 @@ namespace Z0
             Resources = DataResourceIndex.Empty;
             DirectApiHosts = ApiHosts.Where(h => h.HostKind.DefinesDirectOps());
             GenericApiHosts = ApiHosts.Where(h => h.HostKind.DefinesGenericOps());
-            ServiceHostTypes =new Type[]{};
+            ServiceHostTypes = OpServiceProviders.Discover(Owner);
         }
         
         protected OpCatalog(AssemblyId id, DataResourceIndex resources)

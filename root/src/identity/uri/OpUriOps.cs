@@ -39,7 +39,7 @@ namespace Z0
         public static string FullUriText(OpUriScheme scheme, AssemblyId catalog, string host, string group, OpIdentity opid)
             => $"{scheme.Format()}{C}{S2}{catalog.Format()}{S1}{host}?{group}#{opid.Identifier}";
 
-        public static string GroupUriText(OpUriScheme scheme, ApiHostPath host, string group)
+        public static string GroupUriText(OpUriScheme scheme, ApiHostUri host, string group)
             => QueryText(scheme, host.Owner, host.Name, group); 
 
         public static ParseResult<OpUri> ParseUri(string text)
@@ -53,7 +53,7 @@ namespace Z0
                 var scheme = ParseScheme(parts[0]);
                 var rest = parts[1].TakeAfter(S2);
                 var pathText = rest.TakeBefore(Q);
-                var path = ApiHostPath.Parse(pathText);
+                var path = ApiHostUri.Parse(pathText);
                 if(!path.Succeeded)
                     msg = $"Failed to parse {pathText} as an api host path";
                 else

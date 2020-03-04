@@ -45,7 +45,7 @@ namespace Z0
         /// <summary>
         /// The defining host
         /// </summary>
-        public ApiHostPath Host
+        public ApiHostUri Host
         {
             [MethodImpl(Inline)]
             get => Uri.HostPath;

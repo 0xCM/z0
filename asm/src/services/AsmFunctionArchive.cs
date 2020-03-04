@@ -18,8 +18,8 @@ namespace Z0
 
     class AsmFunctionArchive : IAsmFunctionArchive
     {        
-        public static AppMsg Emitted(AsmCaptureTokenGroup src)
-            => AppMsg.Info($"Emitted {src.Uri}");
+        public static AppMsg Emitted(AsmEmissionTokens<OpUri> src)
+            => AppMsg.Info($"Emitted {src.Source}");
 
         public FolderPath RootFolder {get;}
         
@@ -29,7 +29,7 @@ namespace Z0
 
         public string HostName {get;}
 
-        public ApiHostPath HostPath {get;}
+        public ApiHostUri HostPath {get;}
 
         readonly AsmFormatConfig GroupFormatConfig;
 
@@ -47,10 +47,10 @@ namespace Z0
             => new AsmFunctionArchive(context, catalog,host);
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive Create(IAsmContext context, ApiHostPath host, bool imm)
+        public static IAsmFunctionArchive Create(IAsmContext context, ApiHostUri host, bool imm)
             => new AsmFunctionArchive(context, host, imm);
 
-        AsmFunctionArchive(IAsmContext context, ApiHostPath host, bool imm)
+        AsmFunctionArchive(IAsmContext context, ApiHostUri host, bool imm)
         {
             this.Context = context;
             this.Origin = host.Owner;
@@ -68,7 +68,7 @@ namespace Z0
             this.Context = context;
             this.Origin = catalog;
             this.HostName = hostname;
-            this.HostPath = ApiHostPath.Define(catalog, hostname);
+            this.HostPath = ApiHostUri.Define(catalog, hostname);
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(catalog.Format(), hostname));
             this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
@@ -76,14 +76,14 @@ namespace Z0
             this.CilFormatter = context.CilFormatter();
         }
 
-        public Option<AsmCaptureTokenGroup> Save(AsmFunctionGroup src, bool append)
+        public Option<AsmEmissionTokens<OpUri>> Save(AsmFunctionGroup src, bool append)
         {            
             OnEmitting(src);
             WriteHex(src, append).OnSome(e => term.error(e));
             WriteCil(src, append).OnSome(e => term.error(e));            
             var emissions = WriteAsm(src,append);
             var incount = src.Members.Length;
-            var outcount = emissions.MapValueOrDefault(t => t.Tokens.Length);
+            var outcount = emissions.MapValueOrDefault(t => t.Content.Length);
             if(incount != outcount)
                OnInOutMismatch(src.Id, incount, outcount);                
             
@@ -135,25 +135,25 @@ namespace Z0
             }
         }
 
-        Option<AsmCaptureTokenGroup> WriteAsm(AsmFunctionGroup src, bool append)
+        Option<AsmEmissionTokens<OpUri>> WriteAsm(AsmFunctionGroup src, bool append)
         {
             try
             {
-                var tokens = new AsmCaptureToken[src.Members.Length];
+                var tokens = new AsmEmissionToken[src.Members.Length];
                 using var writer = new StreamWriter(AsmPath(src.Id).FullPath, append);            
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
                     var uri = OpUri.Asm(HostPath, src.Id, f.Id);
                     writer.Write(GroupFormatter.FormatDetail(f));
-                    tokens[i] = AsmCaptureToken.Define(uri, f.AddressRange, f.TermCode);
+                    tokens[i] = AsmEmissionToken.Define(uri, f.AddressRange, f.TermCode);
                 }
-                return tokens.ToGroup(OpUri.Asm(HostPath, src.Id));
+                return AsmEmissionTokens.From(OpUri.Asm(HostPath, src.Id),tokens);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<AsmCaptureTokenGroup>();
+                return none<AsmEmissionTokens<OpUri>>();
             }
         }
  
@@ -162,7 +162,7 @@ namespace Z0
             
         }
 
-        void OnEmitted(AsmCaptureTokenGroup emitted)
+        void OnEmitted(AsmEmissionTokens<OpUri> emitted)
             => term.print(Emitted(emitted));            
 
         void OnInOutMismatch(OpIdentity id, int incount, int outcount)

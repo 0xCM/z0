@@ -18,7 +18,14 @@ namespace Z0
     /// Delegate contract for emission event receipt
     /// </summary>
     /// <param name="data">The event data</param>
-    public delegate void AsmCaptureEmissionObserver(in AsmCaptureTokenGroup data);
+    public delegate void AsmEmissionObserver(in AsmEmissionTokens<OpUri> data);
+
+    /// <summary>
+    /// Delegate contract for generic emission event receipt
+    /// </summary>
+    /// <param name="data">The event data</param>
+    public delegate void AsmEmissionObserver<T>(in AsmEmissionTokens<T> data)
+        where T : IUri;
 
     /// <summary>
     /// Defines a source for events that originate within a capture exchange context. This
@@ -47,5 +54,4 @@ namespace Z0
     {
 
     }
-
 }

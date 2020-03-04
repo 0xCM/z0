@@ -13,15 +13,15 @@ namespace Z0
     public readonly struct AsmHostExtract
     {
         [MethodImpl(Inline)]
-        public static AsmHostExtract Define(ApiHostPath host, AsmOpExtractReport captured, AsmParseReport parsed, AsmFunctionList decoded)
+        public static AsmHostExtract Define(ApiHostUri host, AsmOpExtractReport captured, AsmParseReport parsed, AsmFunctionList decoded)
             => new AsmHostExtract(host, captured, parsed, decoded);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmHostExtract((ApiHostPath host, AsmOpExtractReport captured, AsmParseReport parsed, AsmFunctionList decoded) src)
+        public static implicit operator AsmHostExtract((ApiHostUri host, AsmOpExtractReport captured, AsmParseReport parsed, AsmFunctionList decoded) src)
             => Define(src.host, src.captured, src.parsed, src.decoded);
         
         [MethodImpl(Inline)]
-        AsmHostExtract(ApiHostPath host, AsmOpExtractReport captured, AsmParseReport parsed, AsmFunctionList decoded)
+        AsmHostExtract(ApiHostUri host, AsmOpExtractReport captured, AsmParseReport parsed, AsmFunctionList decoded)
         {
             this.Host = host;
             this.Captured = captured;
@@ -29,7 +29,7 @@ namespace Z0
             this.Decoded = decoded;
         }
 
-        public readonly ApiHostPath Host;
+        public readonly ApiHostUri Host;
 
         public readonly AsmOpExtractReport Captured;
 

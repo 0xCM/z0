@@ -12,37 +12,27 @@ namespace Z0
     
     using static Root;
 
-    public interface IAnySeq
+    public interface IAnySeq : IContentAggregate
     {
-        IEnumerable<object> Terms {get;}
+        
     }
 
-    public interface IAnySeq<T> : IAnySeq, IEnumerable<T>
-    {
-        /// <summary>
-        /// The sequence terms
-        /// </summary>
-        new IEnumerable<T> Terms {get;}
-
-        IEnumerable<object> IAnySeq.Terms
-            => Terms.Cast<object>();
-        IEnumerator IEnumerable.GetEnumerator()
-            => Terms.GetEnumerator();
-
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => Terms.GetEnumerator();
+    public interface IAnySeq<T> : IAnySeq, IContainer<IEnumerable<T>>, IContentAggregate<T>
+    {        
+        IEnumerable<T> IContentAggregate<T>.Items
+            => Content;
     }
 
-    public delegate P AnySeqFactory<T,P>(IEnumerable<T> terms)
-        where P: IAnySeq<P,T>, new();         
+    public delegate C AnySeqFactory<T,C>(IEnumerable<T> terms)
+        where C: IAnySeq<C,T>, new();         
 
-    public interface IAnySeq<P,T> : IAnySeq<T>, IAny<P>
-        where P: IAnySeq<P,T>, new()         
+    public interface IAnySeq<C,T> : IAnySeq<T>, IAny<C>, IContainer<C, IEnumerable<T>, T>
+        where C: IAnySeq<C,T>, new()         
     {
         /// <summary>
         ///  A self-hosted factory
         /// </summary>
-        AnySeqFactory<T,P> Factory {get;}
+        AnySeqFactory<T,C> Factory {get;}
         
         /// <summary>
         /// It is not assumed that sequence is finite; in discrete computing
@@ -53,39 +43,27 @@ namespace Z0
         /// the result to be false, which is what is done here
         /// </summary>
         /// <param name="src">The sequenct that will not be compared to this one</param>
-        bool IEquatable<P>.Equals(P src)
+        bool IEquatable<C>.Equals(C src)
             => false;
 
         /// <summary>
         /// Creates the empty sequence
         /// </summary>
-        public static P Empty => Create();
+        public static C Empty => Create();
 
-        private static P Create(params T[] src) => Empty.Factory(src);
+        private static C Create(params T[] src) => Empty.Factory(src);
 
         /// <summary>
         /// Creates a concrete sequence from a source enumerable
         /// </summary>
         /// <param name="src">The term source</param>
-        public static P Create(IEnumerable<T> src) => Empty.Factory(src);
+        public static C Create(IEnumerable<T> src) => Empty.Factory(src);
     }
 
     public interface IAnyFormattableSeq<T> : IAnySeq<T>, ICustomFormattable
         where T : ICustomFormattable
     {
         string ICustomFormattable.Format()
-            => Terms.FormatList();        
-    }
-
-    public interface IFormattableSeq<T> : ICustomFormattable
-        where T : ICustomFormattable
-    {
-        /// <summary>
-        /// The sequence terms, assumed finite
-        /// </summary>
-        IEnumerable<T> Terms {get;}
-
-        string ICustomFormattable.Format()
-            => Terms.FormatList();
+            => Items.FormatList();        
     }
 }
