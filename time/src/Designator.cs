@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Designators
+namespace Z0.Resolutions
 {        
     public sealed class Time : AssemblyResolution<Time, Time.C>
     {

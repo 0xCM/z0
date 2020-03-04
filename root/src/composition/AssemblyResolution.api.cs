@@ -68,10 +68,10 @@ namespace Z0
                 }
             }
             
-            return Designators.GetOrAdd(a,factory);
+            return Resolutions.GetOrAdd(a,factory);
         }
 
-        static ConcurrentDictionary<Assembly,IAssemblyResolution> Designators
+        static ConcurrentDictionary<Assembly,IAssemblyResolution> Resolutions
             = new ConcurrentDictionary<Assembly, IAssemblyResolution>();            
 
         static ConcurrentDictionary<Assembly,AssemblyId> Identifiers

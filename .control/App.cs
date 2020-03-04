@@ -13,7 +13,7 @@ namespace Z0
     {
         static IAsmContext CreateContext()
         {
-            var composition = Designators.Control.Resolution.Designates.Assemble();
+            var composition = Resolutions.Control.Resolution.Designates.Assemble();
             return AsmContext.New(composition);
         }
 

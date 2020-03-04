@@ -2,14 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Designators
+namespace Z0.Resolutions
 {        
     using System;
     using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
-
-    using D = Z0.Designators;
 
     /// <summary>
     /// Represents the assembly

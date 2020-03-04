@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using C = Z0.Designators.Intrinsics.C;
+    using C = Z0.Resolutions.Intrinsics.C;
 
     public static class Intrinsics
     {

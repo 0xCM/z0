@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Designators
+namespace Z0.Resolutions
 {
     /// <summary>
     /// Represents the assembly

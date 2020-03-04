@@ -12,8 +12,8 @@ namespace Z0
 
     using Z0.Asm;
 
-    using C = Z0.Designators.Control;
-    using D = Z0.Designators;
+    using C = Z0.Resolutions.Control;
+    using D = Z0.Resolutions;
     
     using static ControlMessages;
     using static zfunc;

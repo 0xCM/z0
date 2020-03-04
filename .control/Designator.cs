@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Designators
+namespace Z0.Resolutions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using D = Z0.Designators;
+    using D = Z0.Resolutions;
 
     using static zfunc;
 
