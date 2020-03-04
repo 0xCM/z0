@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
-
+    using static Root;
     using static VXTypes;
 
     partial class VX
@@ -24,5 +23,4 @@ namespace Z0
             where T : unmanaged
                 => BitLogic256<T>.Svc;
     }
-
 }

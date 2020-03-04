@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static math;
 
-    public class Pcg32 : INavigableRng<uint>
+    public class Pcg32 : IRngNav<uint>
     {
         /// <summary>
         /// Creates a pcg 64-bit rng

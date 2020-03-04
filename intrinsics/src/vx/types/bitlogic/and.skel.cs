@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
-
+    using static Root;
     using static OpSkeleta;
 
     public static class AndSkeleton

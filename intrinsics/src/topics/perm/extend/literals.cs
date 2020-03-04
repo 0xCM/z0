@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;
 
     public static partial class PermX
     {                
-
         /// <summary>
         /// Constructs the sequence of permutation symbols corresponding to the canonical literal representation
         /// </summary>
@@ -59,7 +58,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Perm16L ToLiteral(this NatPerm<N16> src)
             => permute.literal(src);
-
     }
-
 }

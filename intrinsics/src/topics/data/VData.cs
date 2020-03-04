@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
 
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static HexConst;
     using static As;
 

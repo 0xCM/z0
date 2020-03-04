@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static IdentityOps;
+    using static IdentityShare;
 
     public readonly struct AssemblyUri : IUri<AssemblyUri>
     {

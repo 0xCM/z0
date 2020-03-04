@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;    
     
-
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length
     /// </summary>

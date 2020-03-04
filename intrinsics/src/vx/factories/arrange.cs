@@ -8,13 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
-
+    using static Root;
     using static VXTypes;
 
     partial class VX
     {
-
         [MethodImpl(Inline)]
         public static Concat2x128<T> vconcat<T>(N128 w, T t = default)
             where T : unmanaged

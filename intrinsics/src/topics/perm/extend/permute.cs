@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;
 
     partial class PermX
     {
-
         /// <summary>
         /// Shuffles bitstring content as determined by a permutation
         /// </summary>
@@ -47,5 +46,4 @@ namespace Z0
         public static Span<T> Permute<T>(this Span<T> src, Perm p)
             => src.ReadOnly().Permute(p);
     }
-
 }

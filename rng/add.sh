@@ -3,6 +3,9 @@ bash $ZDev/.scripts/add-project.sh
 
 AddCmd=$ZDev/.scripts/sln-add.sh
 
+export Kind=core
+bash $AddCmd
+
 export Kind=emitters
 bash $AddCmd
 

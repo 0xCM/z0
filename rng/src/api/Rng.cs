@@ -103,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="seed">The inital rng state</param>
         /// <param name="index">The stream index, if any</param>
-        public static INavigableRng<uint> Pcg32(ulong? seed = null, ulong? index = null)
+        public static IRngNav<uint> Pcg32(ulong? seed = null, ulong? index = null)
             => Z0.Pcg32.Define(seed ?? Seed64.Seed00, index);        
 
         /// <summary>
@@ -183,9 +183,9 @@ namespace Z0
         /// </summary>
         /// <param name="seed">The initial state of a generator</param>
         /// <param name="index">The stream index</param>
-        public static INavigableRng<uint>[] Pcg32Suite(params (ulong seed, ulong index)[] specs)
+        public static IRngNav<uint>[] Pcg32Suite(params (ulong seed, ulong index)[] specs)
         {
-            var suite = new INavigableRng<uint>[specs.Length];
+            var suite = new IRngNav<uint>[specs.Length];
             for(var i=0; i < suite.Length; i++)
             {
                 (var seed, var index) = specs[i];
@@ -199,10 +199,10 @@ namespace Z0
         /// </summary>
         /// <param name="seeds">A span of seed values</param>
         /// <param name="indices">A span of index values</param>
-        public static Span<INavigableRng<uint>> Pcg32Suite(Span<ulong> seeds, Span<ulong> indices)        
+        public static Span<IRngNav<uint>> Pcg32Suite(Span<ulong> seeds, Span<ulong> indices)        
         {
             var count = seeds.Length;
-            var g = alloc<INavigableRng<uint>>(count);
+            var g = alloc<IRngNav<uint>>(count);
             for(var i=0; i<count; i++)
                 g[i] = Pcg32(seeds[i], indices[i]);
             return g;

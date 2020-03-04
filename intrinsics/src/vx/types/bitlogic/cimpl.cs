@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class VXTypes
     {
@@ -47,7 +47,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vcimpl(x,y);
@@ -58,8 +58,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
                 => ref vblocks.vcimpl(a,b,c);
-
         }
-
     }
 }

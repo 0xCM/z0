@@ -11,45 +11,33 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
-
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)nats/test/z0.nats.test.csproj" />
-
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
-    <ProjectReference Include="$(TopDir)corefunc/test/z0.corefunc.test.csproj" />
-
-    <ProjectReference Include="$(TopDir)gmath/test/z0.gmath.test.csproj" />
-
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
+
+    <!-- <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
+    <ProjectReference Include="$(TopDir)nats/test/z0.nats.test.csproj" />
+    <ProjectReference Include="$(TopDir)corefunc/test/z0.corefunc.test.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/test/z0.gmath.test.csproj" />
+    <ProjectReference Include="$(TopDir)bitcore/test/z0.bitcore.test.csproj" />
+    <ProjectReference Include="$(TopDir)asm/test/z0.asm.test.csproj" />
+    <ProjectReference Include="$(TopDir)bitgrids/test/z0.bitgrids.test.csproj" />
+    <ProjectReference Include="$(TopDir)machines/test/z0.machines.test.csproj" />
+    <ProjectReference Include="$(TopDir)mkl/test/z0.mkl.test.csproj" />
+    <ProjectReference Include="$(TopDir)libm/test/z0.libm.test.csproj" />
+    <ProjectReference Include="$(TopDir)logix/test/z0.logix.test.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/test/z0.intrinsics.test.csproj" />
     
     <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />
-    <ProjectReference Include="$(TopDir)bitcore/test/z0.bitcore.test.csproj" />
-
     <ProjectReference Include="$(TopDir)bitvectors/src/z0.bitvectors.csproj" />
     <ProjectReference Include="$(TopDir)bitvectors/test/z0.bitvectors.test.csproj" />
-
-    <ProjectReference Include="$(TopDir)asm/test/z0.asm.test.csproj" />
-
-
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
-    <ProjectReference Include="$(TopDir)bitgrids/test/z0.bitgrids.test.csproj" />
-
     <ProjectReference Include="$(TopDir)machines/src/z0.machines.csproj" />
-    <ProjectReference Include="$(TopDir)machines/test/z0.machines.test.csproj" />
-
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />
-
     <ProjectReference Include="$(TopDir)mkl/src/z0.mkl.csproj" />
-    <ProjectReference Include="$(TopDir)mkl/test/z0.mkl.test.csproj" />
-
     <ProjectReference Include="$(TopDir)libm/src/z0.libm.csproj" />
-    <ProjectReference Include="$(TopDir)libm/test/z0.libm.test.csproj" />
-
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
-    <ProjectReference Include="$(TopDir)logix/test/z0.logix.test.csproj" />
-
-    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
+ -->
 
   </ItemGroup>
 

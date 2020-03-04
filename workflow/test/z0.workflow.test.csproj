@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />        
     <ProjectReference Include="$(TopDir)workflow/src/z0.workflow.csproj" />        
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />  
   </ItemGroup>

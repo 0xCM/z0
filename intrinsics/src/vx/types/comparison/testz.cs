@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class VXTypes
     {
@@ -22,7 +22,7 @@ namespace Z0
 
             public static TestZ128<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x,Vector128<T> y) => ginx.vtestz(x,y);
@@ -45,7 +45,7 @@ namespace Z0
 
             public static TestZ256<T> Op => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x,Vector256<T> y) => ginx.vtestz(x,y);

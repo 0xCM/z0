@@ -12,7 +12,7 @@ namespace Z0
     public sealed class EmptyCatalog : OpCatalog<EmptyCatalog>
     {
         public EmptyCatalog()
-            : base(AssemblyId.Empty)
+            : base(AssemblyId.None)
         {
 
         }               

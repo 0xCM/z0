@@ -69,7 +69,7 @@ namespace Z0.Asm
             foreach(var host in Catalog.DirectApiHosts)
             {
                 var archive = HostImmArchive(host);
-                var specs = from g in host.DirectOps()
+                var specs = from g in  Context.OpCollector().CollectDirect(host)
                              let immg = ImmGroup(host,g)
                              where !immg.IsEmpty
                              select immg;
@@ -90,7 +90,7 @@ namespace Z0.Asm
             foreach(var host in Catalog.GenericApiHosts)
             {
                 var archive = HostImmArchive(host);
-                var specs = host.GenericOps().Where(op => op.MethodDefinition.AcceptsImmediate());
+                var specs = Context.OpCollector().CollectGeneric(host).Where(op => op.Definition.AcceptsImmediate());
 
                 foreach(var spec in specs)
                     EmitGenericImm(exchange, spec, archive, observer);                
@@ -100,7 +100,7 @@ namespace Z0.Asm
         void EmitDirectPrimary(in AsmCaptureExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
             var primary = HostArchive(host);
-            var specs = host.DirectOps();
+            var specs =  Context.OpCollector().CollectDirect(host);
 
             foreach(var spec in specs)
                 Emit(exchange, PrimaryGroup(host,spec), primary, observer);
@@ -108,10 +108,10 @@ namespace Z0.Asm
 
         void EmitGenericPrimary(in AsmCaptureExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
-            var primary = HostArchive(host);
-            var specs = host.GenericOps();
+            var primary = HostArchive(host);            
+            var specs = Context.OpCollector().CollectGeneric(host);
 
-            foreach(var spec in specs.Where(spec => !spec.MethodDefinition.AcceptsImmediate()))
+            foreach(var spec in specs.Where(spec => !spec.Definition.AcceptsImmediate()))
                 Emit(exchange, spec, primary, observer);
         }        
 
@@ -128,13 +128,13 @@ namespace Z0.Asm
             }                        
         }
 
-        AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, DirectOpSpec src)
+        AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, DirectOp src)
             => decoder.DecodeFunction(Context.OpExtractor().Extract(in exchange, src.Id, src.ConcreteMethod));
 
-        AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, ClosedOpSpec closure)
+        AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, ClosedOp closure)
             => decoder.DecodeFunction(Context.OpExtractor().Extract(in exchange, closure.Id, closure.ClosedMethod));
 
-        void Emit(in AsmCaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
+        void Emit(in AsmCaptureExchange exchange, GenericOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
             var functions = new List<AsmFunction>();
             foreach(var closure in op.Close())                        
@@ -146,9 +146,9 @@ namespace Z0.Asm
             }
         }
 
-        void EmitGenericImm(in AsmCaptureExchange exchange, GenericOpSpec op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
+        void EmitGenericImm(in AsmCaptureExchange exchange, GenericOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
-            if(op.MethodDefinition.IsVectorizedUnaryImm())
+            if(op.Definition.IsVectorizedUnaryImm())
             {                                                
                 foreach(var closure in op.Close())
                 {
@@ -161,7 +161,7 @@ namespace Z0.Asm
                     }
                 }
             }
-            else if(op.MethodDefinition.IsVectorizedBinaryImm())
+            else if(op.Definition.IsVectorizedBinaryImm())
             {
                 foreach(var closure in op.Close())
                 {

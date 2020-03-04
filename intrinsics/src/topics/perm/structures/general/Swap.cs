@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;
 
     /// <summary>
     /// Defines a transposition, i.e. a specification for a two-element position exchange

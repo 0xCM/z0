@@ -15,6 +15,6 @@ namespace Z0
 
         }
 
-        public override AssemblyId Id => AssemblyId.Empty;
+        public override AssemblyId Id => AssemblyId.None;
     }
 }

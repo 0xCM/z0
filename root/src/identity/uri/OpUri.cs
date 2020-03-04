@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
-    using static IdentityOps;
+    using static IdentityShare;
     
     public readonly struct OpUri : IUri<OpUri>
     {
@@ -91,7 +91,7 @@ namespace Z0
             => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
 
         public string Format()
-            => IdentityOps.format(this);
+            => IdentityShare.format(this);
         
         [MethodImpl(Inline)]
         public int CompareTo(OpUri other)

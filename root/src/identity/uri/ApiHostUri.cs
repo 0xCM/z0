@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static IdentityOps;
+    using static IdentityShare;
 
     public readonly struct ApiHostUri : IUri<ApiHostUri>
     {

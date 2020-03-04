@@ -8,9 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static zfunc;    
+    using static Root;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
@@ -185,7 +184,7 @@ namespace Z0
         /// <param name="g">The right permutation</param>
         public Perm Compose(Perm g)
         {
-            var n = length(terms, g.terms);
+            var n = Spans.length(terms, g.terms);
             var dst = permute.alloc(n);
             var f = this;
             for(var i=0; i< n; i++)

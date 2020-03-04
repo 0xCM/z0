@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
  
-    using static zfunc;    
+    using static Root;
 
     /// <summary>
     /// Defines a permutation over an integral type based at 0, [0, 1, ..., n - 1] where n is the permutation length
@@ -273,7 +273,7 @@ namespace Z0
         /// <param name="g">The right permutation</param>
         public readonly Perm<T> Compose(in Perm<T> g)
         {
-            var n = length(terms, g.terms);
+            var n = Spans.length(terms, g.terms);
             var dst = new Perm<T>(new T[n]);
             var f = this;
             for(var i=0; i< n; i++)

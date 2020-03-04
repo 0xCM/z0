@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class VXTypes
     {
@@ -21,7 +21,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke() => vpattern.vunits<T>(w);            
@@ -35,7 +35,7 @@ namespace Z0
             public static Units256<T> Op => default;
 
             static N256 w => default;
-            public OpIdentity Id => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke() => vpattern.vunits<T>(w);

@@ -15,7 +15,7 @@ namespace Z0
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {
-        public void capture_workflow()
+        public void host_workflow()
         {                    
             var extracts = list<AsmHostExtract>();            
             var paths = Context.EmissionPaths();                    

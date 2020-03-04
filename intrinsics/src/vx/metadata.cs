@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static zfunc;
 
     partial class VX
     {
 
     }
-
 }

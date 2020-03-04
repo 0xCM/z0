@@ -6,12 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Runtime.Intrinsics;
-    using System.Linq;
-
-    using static zfunc;
-    using static As;
+    using static Root;
 
     public static class vrng
     {
@@ -39,5 +34,4 @@ namespace Z0
             where T : unmanaged
                 => new VRandom256<T>(random);
     }
-
 }

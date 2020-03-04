@@ -18,7 +18,7 @@ namespace Z0
         UserType(TypeCodes.BoxedNumberId), 
         ConversionProvider(typeof(BoxedNumberConverter))
     ]
-    public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>, IBiconvertible<BoxedNumber>
+    public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
     {
         /// <summary>
         /// In the box
@@ -63,7 +63,7 @@ namespace Z0
         public Biconverter<BoxedNumber> Converter
         {
             [MethodImpl(Inline)]
-            get => Biconverter<BoxedNumber>.Create();
+            get => default(Biconverter<BoxedNumber>);
         }
 
         public T Convert<T>()

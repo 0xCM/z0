@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;
+    using static Nats;
 
     partial class permute
     {
@@ -89,6 +90,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> digits(Perm32 spec)
             => dinx.vshuf32x8(vpattern.vincrements<byte>(n256),spec.data);
-
     }
 }

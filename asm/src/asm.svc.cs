@@ -89,8 +89,12 @@ namespace Z0
         public static ICilFunctionWriter CilWriter(this IAsmContext context, FilePath dst)
             => CilFunctionWriter.Create(context,dst);
 
+        /// <summary>
+        /// Creates a capture workflow where the unit-of-work is determined by an api host
+        /// </summary>
+        /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmHostCaptureFlow HostCaptureFlow(this IAsmContext context)
+        public static IAsmHostCapture HostCaptureFlow(this IAsmContext context)
             => AsmHostCaptureFlow.Create(context);
  
         [MethodImpl(Inline)]

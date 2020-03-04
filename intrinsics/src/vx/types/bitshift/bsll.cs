@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
 
-    using static zfunc;
+    using static Root;
 
     partial class VXTypes
     {

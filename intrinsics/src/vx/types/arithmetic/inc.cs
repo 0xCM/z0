@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class VXTypes
     {
@@ -60,7 +60,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
                 => ref vblocks.vinc(a,c);
-
         }            
     }
 }

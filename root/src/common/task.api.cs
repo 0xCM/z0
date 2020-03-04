@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a task api for common operations
     /// </summary>
-    public static class task
+    public static class Tasks
     {
         /// <summary>
         /// Executes a worker that computes a value within the context of a new task

@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;
 
     partial class permute
     {
@@ -34,8 +32,5 @@ namespace Z0
         public static Perm<T> build<T>(T n, params Swap<T>[] swaps)
             where T : unmanaged
                 => new Perm<T>(n,swaps);
-
-
     }
-
 }

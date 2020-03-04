@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
     
     public readonly struct VRandom128<T> : IVEmitter128<T>
         where T : unmanaged

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Collections.Concurrent;
 
     using static Root;
 
@@ -29,7 +27,6 @@ namespace Z0
 
                     Converters[typeof(S)] = converter ? some((IBiconverter)converter.Value) : none<IBiconverter>();
                     return converter;
-
                 }
             }
         }
@@ -40,11 +37,11 @@ namespace Z0
             = new Dictionary<Type, Option<IBiconverter>>();
     }
 
-    public readonly struct Biconverter<S>
+    public readonly struct Biconverter<S> : IBiconverter<S>
     {        
-        [MethodImpl(Inline)]
-        public static Biconverter<S> Create()
-            => default(Biconverter<S>);
+        // [MethodImpl(Inline)]
+        // public static Biconverter<S> Create()
+        //     => default(Biconverter<S>);
         
         /// <summary>
         /// Converts an incoming value of the target type to a value of specified type, if possible
@@ -79,6 +76,38 @@ namespace Z0
                     from converter in Biconverter.Create<S>()
                     from converted in converter.ConvertFromTarget(incoming,typeof(S))
                     select (S)converted;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return none<S>();
+            }
+        }
+
+        public Option<object> ConvertFromTarget(object incoming, Type dst)
+        {
+            try
+            {
+                return 
+                    from converter in Biconverter.Create<S>()
+                    from converted in converter.ConvertFromTarget(incoming, dst)
+                    select converted;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return none<object>();
+            }
+        }
+
+        public Option<object> ConvertToTarget(object incoming)
+        {
+            try
+            {
+                return 
+                    from converter in Biconverter.Create<S>()
+                    from converted in converter.ConvertFromTarget(incoming,typeof(S))
+                    select converted;
             }
             catch(Exception e)
             {

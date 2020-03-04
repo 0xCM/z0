@@ -82,25 +82,24 @@ namespace Z0
             return runtime;
         }
         
-        static string[] ConcurrentTests
-            => new string[]{
-                D.NatsTest.Resolution.Name,
-                D.CoreFuncTest.Resolution.Name,     
-                D.GMathTest.Resolution.Name,
-                D.IntrinsicsTest.Resolution.Name,
-                D.BitCoreTest.Resolution.Name,
-                D.BitVectorTest.Resolution.Name,
-                D.BitGridsTest.Resolution.Name,
-                D.LogixTest.Resolution.Name,
+        static string[] ConcurrentTests => array<string>();
+            // => new string[]{
+            //     D.NatsTest.Resolution.Name,
+            //     D.CoreFuncTest.Resolution.Name,     
+            //     D.GMathTest.Resolution.Name,
+            //     D.IntrinsicsTest.Resolution.Name,
+            //     D.BitCoreTest.Resolution.Name,
+            //     D.BitVectorTest.Resolution.Name,
+            //     D.BitGridsTest.Resolution.Name,
+            //     D.LogixTest.Resolution.Name,
                 
-            };
+            // };
 
-        static string[] SequentialTests
-            => new string[]
-        {
-            D.MklApiTest.Resolution.Name,
-            D.LibMTest.Resolution.Name
-        };
+        static string[] SequentialTests => array<string>();
+        // {
+        //     D.MklApiTest.Resolution.Name,
+        //     D.LibMTest.Resolution.Name
+        // };
 
         public static T[] freeze<T>(IEnumerable<T> src)
             => src.ToArray();

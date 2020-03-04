@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;
 
     public static partial class PermX
     {                
-
         public static NatPerm<N4> ToNatural(this Perm4L src)
             => permute.natural(src);
 
@@ -20,7 +19,5 @@ namespace Z0
 
         public static NatPerm<N16> ToNatural(this Perm16L src)
             => permute.natural(src);
-
     }
-
 }

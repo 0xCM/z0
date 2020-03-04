@@ -43,7 +43,7 @@ namespace Z0
             => Resolved.GetName().Name;
 
         public bool IsNonEmpty
-            => Id != AssemblyId.None && Id != AssemblyId.Empty;
+            => Id != AssemblyId.None && Id != AssemblyId.None;
 
         
         public virtual IEnumerable<IAssemblyResolution> Designates {get;}

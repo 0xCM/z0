@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class VXTypes
     {
@@ -41,8 +41,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector256<T> x) 
-                => ginx.vlo(x);
-           
+                => ginx.vlo(x);           
         }
     }
 }

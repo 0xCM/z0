@@ -42,7 +42,7 @@ namespace Z0
             return  context.CodeWriter(dst);
         }
 
-        protected static IAsmRawWriter RawTestWriter(IAsmContext context, [Caller] string test = null)
+        protected static IAsmEncodingWriter RawTestWriter(IAsmContext context, [Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Raw);    
             return  context.RawWriter(dst);
@@ -54,6 +54,5 @@ namespace Z0
             var format = AsmFormatConfig.Default.WithFunctionTimestamp();
             return context.WithFormat(format).AsmWriter(path);
         }
-
     }
 }

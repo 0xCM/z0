@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
     
     /// <summary>
     /// Defines content for a parallel 16-way lookup

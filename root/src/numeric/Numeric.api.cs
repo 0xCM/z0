@@ -240,8 +240,12 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         [Op]
-        public static NumericKind kind(Type t)
-            => t.IsEnum ? 0 : Type.GetTypeCode(t.EffectiveType()) switch
+        public static Option<NumericKind> kind(Type t)
+        {
+            var k = t.IsEnum 
+                ? NumericKind.None 
+                : Type.GetTypeCode(t.EffectiveType()) 
+                switch
                 {
                     TC.SByte => NK.I8,
                     TC.Byte => NK.U8,
@@ -255,6 +259,8 @@ namespace Z0
                     TC.Double => NK.F64,
                     _ => NK.None
                 };
+            return k.IsSome() ? some(k) : none<NumericKind>();
+        }
 
         [MethodImpl(Inline), Op]
         public static bool signed(object value)

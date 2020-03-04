@@ -5,18 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static zfunc;    
+    using static Root;
 
     /// <summary>
     /// Describes an indivual term of a permutation p, i.e. the point 
     /// of evaluation i and its image p(i)
     /// </summary>
-    public readonly struct PermTerm
+    public readonly struct PermTerm : IFormattable<PermTerm>
     {
         /// <summary>
         /// The point at which the permuation is evaluated
@@ -65,6 +62,10 @@ namespace Z0
             dst = Target;
         }
 
+        public string Format()
+            => $"{Source} -> {Target}";
+
+
         [MethodImpl(Inline)]
         public bool Equals(PermTerm y)
             => Source == y.Source && Target == y.Target;
@@ -76,8 +77,8 @@ namespace Z0
         public override int GetHashCode()
             => HashCode.Combine(Source,Target);
 
-        public override string ToString() 
-            => $"{Source} -> {Target}";
 
+        public override string ToString() 
+            => Format();
     }
 }

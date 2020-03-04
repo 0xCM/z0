@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;
+    using static Nats;
 
     public static partial class PermX
     {
@@ -54,6 +55,5 @@ namespace Z0
             var data = src.Terms.Convert<byte>();
             return Vectors.vload(n128,in head(data));
         }
-
     }
 }

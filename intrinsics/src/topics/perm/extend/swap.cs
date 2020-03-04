@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;
+    using static Nats;
 
     partial class PermX
     {
@@ -24,7 +25,7 @@ namespace Z0
         {
             var len = swaps.Length;
             ref var srcmem = ref head(src);
-            ref var swapmem = ref head(swaps);
+            ref var swapmem = ref refs.head(swaps);
             for(var k = 0; k < len; k++)
             {
                 (var i, var j) = skip(in swapmem, k);
@@ -87,6 +88,5 @@ namespace Z0
                 dst[i] = src[i];
             return dst;
         }
-
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     using static AsmServiceMessages;
     using static Root;
 
-    readonly struct AsmHostCaptureFlow : IAsmHostCaptureFlow
+    readonly struct AsmHostCaptureFlow : IAsmHostCapture
     {
         public IAsmContext Context {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static IAsmHostCaptureFlow Create(IAsmContext context, params AssemblyId[] selected)
+        public static IAsmHostCapture Create(IAsmContext context, params AssemblyId[] selected)
             => new AsmHostCaptureFlow(context,selected);
 
         [MethodImpl(Inline)]

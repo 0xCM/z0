@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;
-
+    using static Root;
     using static VXTypes;
 
     partial class VX
@@ -44,5 +42,4 @@ namespace Z0
             where T : unmanaged
                 => Blend8x16x256<T>.Op;
     }
-
 }

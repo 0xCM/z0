@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
+    using static Root;
+    using static Nats;
 
     /// <summary>
     /// Describes cycle in a perutation
@@ -58,5 +59,4 @@ namespace Z0
         public override string ToString()
             => Format();
     }
-
 }

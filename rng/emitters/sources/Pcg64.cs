@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Implemements a 64-bit PCG generator
     /// </summary>
-    public class Pcg64 : INavigableRng<ulong>
+    public class Pcg64 : IRngNav<ulong>
     {    
         /// <summary>
         /// Creates a pcg 64-bit rng

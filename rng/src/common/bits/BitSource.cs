@@ -9,8 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-
-    using static Root;
+    using static Z0.Root;
 
     public class BitSource<T> : IRngStream<bit>, IRngPointStreamSource<bit>
         where T : unmanaged
@@ -34,6 +33,9 @@ namespace Z0
         public RngKind RngKind {get;}
 
         public IEnumerable<bit> Stream {get;}
+
+        public ValueStreamEmitter<bit> Emitter
+             => (int? count) => count != null ? Stream.Take(count.Value) : Stream;
 
         [MethodImpl(Inline)]
         public bit Next()

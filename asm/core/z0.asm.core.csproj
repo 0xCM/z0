@@ -8,7 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)dynamic/src/z0.dynamic.csproj" />
-    <ProjectReference Include="$(TopDir)workflow/src/z0.workflow.csproj" />
+    <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />
   </ItemGroup>
 
 </Project>

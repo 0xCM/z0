@@ -49,7 +49,7 @@ namespace Z0
         /// Specifies whether the catalog is vacuous
         /// </summary>
         bool IsEmpty
-            => OwnerId == AssemblyId.Empty || OwnerId == AssemblyId.None;
+            => OwnerId == AssemblyId.None;
             
         /// <summary>
         /// The name of the catalog, which should be unique with respect to known catalogs

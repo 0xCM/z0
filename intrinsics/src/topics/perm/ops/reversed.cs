@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;
 
     partial class permute
     {
-
         /// <summary>
         /// Defines the canonical literal representation of the reversal of the identity permutation on 4 symbols
         /// </summary>
@@ -41,8 +38,5 @@ namespace Z0
                 Perm16L.XB,Perm16L.XA,Perm16L.X9,Perm16L.X8,
                 Perm16L.X7,Perm16L.X6,Perm16L.X5,Perm16L.X4,
                 Perm16L.X3,Perm16L.X2,Perm16L.X1,Perm16L.X0);
-
-
     }
-
 }

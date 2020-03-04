@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Threading.Tasks;
-
     public interface IAppService<C> : IService, IContextual<C>
         where C : IContext
     {

@@ -14,7 +14,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static CallerTarget Define(OpUri src, MemoryAddress dst)
             => new CallerTarget(src, dst);
-        
+
+
         [MethodImpl(Inline)]
         CallerTarget(OpUri src, MemoryAddress dst)
         {
@@ -28,7 +29,6 @@ namespace Z0
         public MemoryAddress Dst {get;}
 
         public string Identifier {get;}
-    }
 
-    
+    }    
 }

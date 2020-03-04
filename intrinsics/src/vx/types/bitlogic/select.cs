@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class VXTypes
     {
@@ -22,7 +22,7 @@ namespace Z0
 
             static N128 w => default;
  
-            public OpIdentity Id => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, Vector128<T> z) => ginx.vselect(x,y,z);
@@ -33,7 +33,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c, in Block128<T> dst)            
                 => ref vblocks.vselect(a,b,c,dst);
-
         }
 
         [NumericClosures(NumericKind.Integers)]
@@ -46,7 +45,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public OpIdentity Id => Identity.contracted<T>(Name,w);
+            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, Vector256<T> z) => ginx.vselect(x,y,z);
@@ -57,8 +56,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c, in Block256<T> dst)            
                 => ref vblocks.vselect(a,b,c,dst);
-
         }
-
     }
 }

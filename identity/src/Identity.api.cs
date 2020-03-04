@@ -48,14 +48,6 @@ namespace Z0
         public static TypeIdentity identify(Type t)
             => provider(t).DefineIdentity(t);
 
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w}x{kind.Format()}");
-        
-        [MethodImpl(Inline)]
-        public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
-            => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");   
-
         /// <summary>
         /// Extracts an index-identified segmented identity part from an operation identity
         /// </summary>
@@ -81,10 +73,10 @@ namespace Z0
         /// Defines the identity of a generic method
         /// </summary>
         /// <param name="src">The source method</param>
-        public static OpIdentity generic(MethodInfo src)            
+        public static GenericOpIdentity generic(MethodInfo src)            
         {
             if(!src.IsGenericMethod)
-                return OpIdentity.Empty;
+                return GenericOpIdentity.Empty;
                         
             var id = name(src);
             id += IDI.PartSep; 
@@ -116,23 +108,23 @@ namespace Z0
                 id += last;
             }
 
-            return OpIdentity.Define(id);        
+            return GenericOpIdentity.Define(id);        
         }
+
+        /// <summary>
+        /// Closes generic operations over the set of primal types that each operation supports
+        /// </summary>
+        /// <param name="generics">Metadata for generic operations</param>
+        public static IEnumerable<ClosedOp> close(GenericOp op)
+             => from k in op.Kinds
+                let pt = k.ToClrType() where pt.IsSome()
+                let id = Identity.identify(op.Definition, k) where !id.IsEmpty
+                select ClosedOp.Define(op.Host, id, k, op.Definition.MakeGenericMethod(pt.Value)); 
+
     }
 
     public static class IdentityExtensions
     {        
-        /// <summary>
-        /// Returns a kind-identified system type if possible; throws an exception otherwise
-        /// </summary>
-        /// <param name="k">The identifying kind</param>
-        [MethodImpl(Inline)]
-        public static Option<Type> ToClrType(this NumericKind k)
-        {
-            var nt = k.NumericType();
-            return nt.IsSome() ? some(nt.Subject) : none<Type>();
-        }
-
         /// <summary>
         /// Identifies the method
         /// </summary>
@@ -154,6 +146,17 @@ namespace Z0
         /// <param name="partidx">The 0-based part index</param>
         public static Option<SegmentedIdentity> Segment(this OpIdentity src, int partidx)
             => Identity.segment(src,partidx); 
+
+        /// <summary>
+        /// Closes generic operations over the set of primal types that each operation supports
+        /// </summary>
+        /// <param name="generics">Metadata for generic operations</param>
+        public static IEnumerable<ClosedOp> Close(this GenericOp op)
+             => Identity.close(op);
+
+        [MethodImpl(Inline)]
+        public static IMemberOpCollector OpCollector(this IContext context)
+            => MemberOpCollector.Create(context);
 
     }    
 }

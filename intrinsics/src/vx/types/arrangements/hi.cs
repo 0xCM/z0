@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     partial class VXTypes
     {
@@ -24,8 +24,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => ginx.vhi(x);
-            
+            public Vector128<T> Invoke(Vector128<T> x) => ginx.vhi(x);            
         }
 
         public readonly struct Hi256<T> : IVReducer256<T>
@@ -41,7 +40,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector256<T> x) => ginx.vhi(x);
-            
+           
         }
     }
 }

@@ -163,7 +163,7 @@ namespace Z0
         public double NextF64()
             => Next()*Norm;
         
-        double IPointSource<double>.Next()
+        double ISource<double>.Next()
             => NextF64(); 
     }
 }

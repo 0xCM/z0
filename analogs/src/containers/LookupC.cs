@@ -98,7 +98,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public V Acquire(K key, Func<K,V> factory)
-            => GetOrCreate(key, () => task.create(factory,key)).Result;
+            => GetOrCreate(key, () => Tasks.create(factory,key)).Result;
 
         [MethodImpl(Inline)]
         public void Add(K key, V value)        

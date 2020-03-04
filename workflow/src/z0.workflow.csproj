@@ -9,6 +9,9 @@
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)time/src/z0.time.csproj" />
+    <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
+    <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />        
+    
     <ProjectReference Include="$(TopDir)rng/emitters/z0.rng.emitters.csproj" />
   </ItemGroup>
 
