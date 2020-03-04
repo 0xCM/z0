@@ -11,13 +11,9 @@ namespace Z0
     /// <summary>
     /// Characterizes a stateful thing that functions as an exchange for application messages
     /// </summary>
-    public interface IAppMsgExchange : IAppMsgSink
-    {
-        /// <summary>
-        /// Removes the messages accumulated by the context and returns these messages to the caller
-        /// </summary>
-        IReadOnlyList<AppMsg> DequeueMessages();
+    public interface IAppMsgExchange : IAppMsgQueue
+    {        
 
-        void FlushMessages(Exception exception, IAppMsgLog target);                       
+        void Flush(Exception exception, IAppMsgLog target);                       
     }
 }

@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Text;
 
     using static Root;
 
@@ -46,6 +48,16 @@ namespace Z0
             where T : IConfiguredCustomFormattable<C>
                 => src.Format(config);
  
+        public static IEnumerable<string> FormatLines<F>(this IEnumerable<F> items)
+            where F : ICustomFormattable
+                => items.Select(m => m.Format());
+                
+        public static void AppendLines(this StringBuilder src, IEnumerable<string> lines)
+            => iter(lines, line => src.AppendLine(line));            
+
+        public static void AppendLines<F>(this StringBuilder src, IEnumerable<F> items)
+            where F : ICustomFormattable
+            => src.AppendLines(items.FormatLines());
     }
 
     public static class NumericFormattableX

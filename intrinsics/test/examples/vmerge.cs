@@ -61,10 +61,10 @@ namespace Z0
                 var lo = ginx.vmergelo(x,y);
                 var hi = ginx.vmergehi(x,y);
 
-                PostMessage(x.Format(pad:2));
-                PostMessage(y.Format(pad:2));
-                PostMessage(lo.Format(pad:2));
-                PostMessage(hi.Format(pad:2));
+                Enqueue(x.Format(pad:2));
+                Enqueue(y.Format(pad:2));
+                Enqueue(lo.Format(pad:2));
+                Enqueue(hi.Format(pad:2));
             }
 
             void merge_hi()
@@ -74,10 +74,10 @@ namespace Z0
                 var x = vpattern.vincrements(w,t);
                 var y = vpattern.vincrements(w, (byte)(x.LastCell() + 1));
                 var z = dinx.vmergehi(x,y);
-                PostMessage($"mergehi");
-                PostMessage(x.Format(pad:2));
-                PostMessage(y.Format(pad:2));
-                PostMessage(z.Format(pad:2));
+                Enqueue($"mergehi");
+                Enqueue(x.Format(pad:2));
+                Enqueue(y.Format(pad:2));
+                Enqueue(z.Format(pad:2));
             }
 
             void merge()
@@ -87,9 +87,9 @@ namespace Z0
                 var x = vpattern.vincrements(w,t);
                 var y = vpattern.vincrements(w, (byte)(x.LastCell() + 1));
                 var z = dinx.vmerge(x,y);
-                PostMessage(x.Format(pad:2));
-                PostMessage(y.Format(pad:2));
-                PostMessage(z.Format(pad:2));
+                Enqueue(x.Format(pad:2));
+                Enqueue(y.Format(pad:2));
+                Enqueue(z.Format(pad:2));
             }
         }
 

@@ -12,7 +12,7 @@ namespace Z0
     public abstract class t_asm_explicit<E> : UnitTest<E>, IExplicitTest
         where E : t_asm_explicit<E>
     {
-        protected IAsmContext Context;
+        protected new IAsmContext Context;
 
         public t_asm_explicit()
         {

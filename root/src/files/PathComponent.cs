@@ -13,6 +13,8 @@ namespace Z0
     public abstract class PathComponent<T> : IIdentity<T>
         where T : PathComponent<T>, new()
     {
+        public const char PathSeparator = '/';
+    
         public static T Empty => new T();
 
         public string Name {get;}

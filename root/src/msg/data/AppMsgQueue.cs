@@ -57,7 +57,6 @@ namespace Z0
             }
         }
 
-
         public void Post(string msg, AppMsgKind? severity = null)
             => Post(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
     }

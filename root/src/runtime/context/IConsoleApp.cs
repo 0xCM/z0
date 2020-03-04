@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     
     public interface IConsoleApp : IAssemblyComposition, IContext
-    {
+    {        
         void RunApp(params string[] args);                
     }
 

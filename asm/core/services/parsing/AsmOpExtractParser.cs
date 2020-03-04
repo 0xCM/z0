@@ -50,7 +50,7 @@ namespace Z0
         {
             var dst = new AsmParseRecord[encoded.Records.Length];
             var parser = Context.PatternParser(PatternBuffer.Clear());            
-            Context.PostMessage($"Parsing {encoded.Records.Length} {host} records");
+            Context.Enqueue($"Parsing {encoded.Records.Length} {host} records");
 
             for(var i=0; i< dst.Length; i++)
             {
@@ -83,7 +83,7 @@ namespace Z0
             if(duplicated.Length != 0)
             {
                 var format = string.Join(text.comma(), duplicated);
-                Context.PostMessage($"Identifier duplicates: {format}", AppMsgKind.Warning);           
+                Context.Enqueue($"Identifier duplicates: {format}", AppMsgKind.Warning);           
             }
         }
     }

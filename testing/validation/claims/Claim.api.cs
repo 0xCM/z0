@@ -589,5 +589,9 @@ namespace Z0
 
         public static void exists(FilePath path,[Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => path.Exists().IfNone(() => throw AppException.Define($"The file {path} does not exist", caller, file,line));
+
+        public static void exists(FolderPath path,[Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => path.Exists().IfNone(() => throw AppException.Define($"The folder {path} does not exist", caller, file,line));
+
     }
 }

@@ -88,8 +88,8 @@ namespace Z0
             var target = Paths.RawCapturePath(host.Path);  
             var sink = Context;
             captured.Save(target)
-                     .OnSome(file => sink.PostMessage(CapturedRaw(host.Path,file)))
-                     .OnNone(() => sink.PostMessage(CaptureRawFailed(host.Path)));
+                     .OnSome(file => sink.Enqueue(CapturedRaw(host.Path,file)))
+                     .OnNone(() => sink.Enqueue(CaptureRawFailed(host.Path)));
             return captured;
         }
 
@@ -100,8 +100,8 @@ namespace Z0
             var target = Paths.ParsedCapturePath(host.Path);
             var sink = Context;
             parsed.Save(target)
-                        .OnSome(file => sink.PostMessage(ParsedEncodings(host.Path,file)))
-                        .OnNone(() => sink.PostMessage(ParseEncodingFailure(host.Path)));
+                        .OnSome(file => sink.Enqueue(ParsedEncodings(host.Path,file)))
+                        .OnNone(() => sink.Enqueue(ParseEncodingFailure(host.Path)));
             require(captured.RecordCount == parsed.RecordCount);
             return parsed;
         }
@@ -125,7 +125,7 @@ namespace Z0
 
         AsmHostExtract RunHostCaptureFlow(ApiHost host)        
         {
-            Context.PostMessage($"Executing {host} capture workflow");
+            Context.Enqueue($"Executing {host} capture workflow");
             var captured = CaptureHostOps(host);
             var parsed = Parse(host, captured);
             var decoded = Decode(host, captured, parsed);        

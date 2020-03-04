@@ -9,23 +9,27 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Z0.Root;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Z0;
 
-    public abstract class TestContext<U> : ITestContext<U>
-        where U : TestContext<U>
+    public class TestContext<U> : ITestContext<U>
+        //where U : TestContext<U>
     {
+        public ITestContext Context {get;}
+
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
         {
             this.Random = random ?? Rng.WyHash64(Seed64.Seed00);
             this.Config = config ?? TestConfigDefaults.Default();
             this.Queue = MsgContext.Create();
+            this.Context = this;
         }
 
         public IPolyrand Random {get;}
 
-        readonly IMsgContext Queue;
+        IMsgContext Queue {get;set;}
 
         public ITestConfig Config {get; private set;}
 
@@ -123,7 +127,7 @@ namespace Z0
         protected void Trace(object msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Info(msg));
+                Enqueue(AppMsg.Info(msg));
         }
 
         /// <summary>
@@ -133,15 +137,15 @@ namespace Z0
         protected void Trace(object title, object msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Info($"{title} - {msg}"));
+                Enqueue(AppMsg.Info($"{title} - {msg}"));
         }
 
         protected void Trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null)
         {
             if(TraceEnabled)
             {
-                var titleFmt = tpad.Map<int, string>(pad => title.PadRight(pad), () => title.PadRight(20));        
-                PostMessage(AppMsg.NoCaller($"{titleFmt}: {msg}", severity ?? AppMsgKind.Babble));
+                var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
+                Enqueue(AppMsg.NoCaller($"{titleFmt}: {msg}", severity ?? AppMsgKind.Babble));
             }
         }
 
@@ -154,7 +158,7 @@ namespace Z0
         protected void Trace(AppMsg msg, AppMsgKind? severity = null)
         {
             if(TraceEnabled)
-                PostMessage(msg.AsKind(severity ?? AppMsgKind.Babble));
+                Enqueue(msg.AsKind(severity ?? AppMsgKind.Babble));
         }
 
         /// <summary>
@@ -165,7 +169,7 @@ namespace Z0
         protected void TraceCaller(object msg, AppMsgKind severity, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}: {msg}",severity));
+                Enqueue(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}: {msg}",severity));
         }
 
         /// <summary>
@@ -175,7 +179,7 @@ namespace Z0
         protected void TraceCaller(object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Info($"{GetType().DisplayName()}/{caller}: {msg}"));
+                Enqueue(AppMsg.Info($"{GetType().DisplayName()}/{caller}: {msg}"));
         }
 
         /// <summary>
@@ -187,7 +191,7 @@ namespace Z0
         protected void TraceCaller(string title, object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.Info($"{GetType().DisplayName()}/{caller}/{title}: {msg}"));
+                Enqueue(AppMsg.Info($"{GetType().DisplayName()}/{caller}/{title}: {msg}"));
         }
 
         /// <summary>
@@ -197,7 +201,7 @@ namespace Z0
         protected void TracePerf(string msg)
         {
             if(TraceEnabled)
-                PostMessage(AppMsg.NoCaller($"{msg}", AppMsgKind.Benchmark));
+                Enqueue(AppMsg.NoCaller($"{msg}", AppMsgKind.Benchmark));
         }
 
         public IEnumerable<TestCaseRecord> TakeOutcomes()
@@ -229,17 +233,20 @@ namespace Z0
         public void ReportBenchmark(BenchmarkRecord record)
             => Benchmarks.Enqueue(record);
 
-        public IReadOnlyList<AppMsg> DequeueMessages()
-            => Queue.DequeueMessages();
+        public IReadOnlyList<AppMsg> Dequeue()
+            => Queue.Dequeue();
 
-        public void PostMessage(AppMsg msg)
-            => Queue.PostMessage(msg);
+        public void Enqueue(AppMsg msg)
+            => Queue.Enqueue(msg);
 
-        public void PostMessage(string msg, AppMsgKind? severity = null)
-            => Queue.PostMessage(msg, severity);
+        public void Enqueue(string msg, AppMsgKind? severity = null)
+            => Queue.Enqueue(msg, severity);
+        
+        public IReadOnlyList<AppMsg> Flush(Exception e)
+            => Queue.Flush(e);
 
-        public void FlushMessages(Exception e, IAppMsgLog target)
-            => Queue.FlushMessages(e, target);
+        public void Flush(Exception e, IAppMsgLog target)
+            => Queue.Flush(e, target);
 
         /// <summary>
         /// Allocates and optionally starts a system counter
@@ -247,5 +254,6 @@ namespace Z0
         [MethodImpl(Inline)]   
         protected static SystemCounter counter(bool start = false) 
             => SystemCounter.Create(start);
+
     }
 }

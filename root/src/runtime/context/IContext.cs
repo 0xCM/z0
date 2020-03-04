@@ -8,13 +8,19 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Reflection;
 
     /// <summary>
     /// A context of everything and yet to everyting nothing
     /// </summary>
     public interface IContext
     {
+        AssemblyId Owner
+            => Assembly.GetEntryAssembly().AssemblyId();
         
+        IAppPaths Paths 
+            => AppPathProvider.Create(Owner, Env.Current.RunDir);   
+                         
     }
 
     /// <summary>

@@ -8,21 +8,33 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
-    public interface IAppMsgSink : ISink<AppMsg>
+    using static Root;
+    public interface IAppMsgQueue : ISink<AppMsg>
     {
         /// <summary>
         /// Posts a message to the context queue
         /// </summary>
         /// <param name="msg">The message to post</param>
-        void PostMessage(AppMsg msg);        
+        void Enqueue(AppMsg msg);        
+
+        /// <summary>
+        /// Posts an arbitrary number of messages to the queue
+        /// </summary>
+        /// <param name="msg">The message to post</param>
+        void Enqueue(IEnumerable<AppMsg> msg)
+            => iter(msg,Enqueue);        
 
         void ISink<AppMsg>.Accept(in AppMsg src)
-            => PostMessage(src);
+            => Enqueue(src);
 
         /// <summary>
         /// Posts a text message to the context queue with optional severity
         /// </summary>
         /// <param name="msg">The message to post</param>
-        void PostMessage(string msg, AppMsgKind? severity = null);
+        void Enqueue(string msg, AppMsgKind? severity = null);
+
+        IReadOnlyList<AppMsg> Dequeue();        
+
+        IReadOnlyList<AppMsg> Flush(Exception e);
     }
 }

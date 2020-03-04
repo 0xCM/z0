@@ -41,7 +41,7 @@ namespace Z0
 
                 var expect = (int)Math.Pow(2,i);
                 if(expect != ival)
-                    PostMessage($"{values[i]} = {ival} != {expect}");
+                    Enqueue($"{values[i]} = {ival} != {expect}");
                 Claim.eq(expect, ival);                            
             }
         }

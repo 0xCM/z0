@@ -14,7 +14,7 @@ namespace Z0
     /// Represents a fully-qualified path to a file on the local machine
     /// </summary>
     public class FilePath : PathComponent<FilePath>
-    {
+    {        
         [MethodImpl(Inline)]
         public static FilePath Define(string name) => new FilePath(name);
 

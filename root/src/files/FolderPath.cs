@@ -17,18 +17,19 @@ namespace Z0
     /// </summary>
     public class FolderPath : PathComponent<FolderPath>
     {        
+
         [MethodImpl(Inline)]
         public static FolderPath Define(string name)
             => new FolderPath(name);
 
         public static FolderPath operator + (FolderPath path, FolderName folder)
-            => FolderPath.Define(Path.Join(path.Name, folder.Name));
+            => FolderPath.Define(text.concat(path.WithoutTrailingSeparator().Name, PathSeparator, folder.Name));
 
         public static FilePath operator + (FolderPath path, FileName file)
-            => new FilePath(Path.Join(path.Name, file.Name));
+            => FilePath.Define(text.concat(path.WithoutTrailingSeparator().Name, PathSeparator, file.Name));
 
         public static FolderPath operator + (FolderPath path, RelativeLocation location)
-            => FolderPath.Define(Path.Join(path.Name, location.Name));
+            => FolderPath.Define(text.concat(path.WithoutTrailingSeparator().Name, PathSeparator, location.Name));
 
         public FolderPath()
         {
@@ -67,5 +68,7 @@ namespace Z0
                 where f.FileName.Name.Contains(match) 
                 select f;
         
+        public FolderPath WithoutTrailingSeparator()
+            => Define(Path.TrimEndingDirectorySeparator(Name));        
     }
 }

@@ -37,7 +37,7 @@ namespace Z0.Logix
             var expr1 = varied(n1, and(x,y),x);
             var expr2 = y;
             var result = solve(expr1, expr2,(1,0xFF));
-            PostMessage($"Expression is satisfied by {result.Count} values");
+            Enqueue($"Expression is satisfied by {result.Count} values");
             Claim.nea(result.IsEmpty());                                                
         }
 
@@ -48,7 +48,7 @@ namespace Z0.Logix
             var expr1 = varied(n2, or(v2, xor(v1,and(v1,nand(v2, not(v1))))),v1,v2);
             var expr2 = literal(32u);
             var result = solve(expr1, expr2, (1,0xFF));
-            PostMessage($"Expression is satisfied by {result.Count} values");
+            Enqueue($"Expression is satisfied by {result.Count} values");
         }
 
         IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, LiteralExpr<T> match, Interval<T> domain)
@@ -112,7 +112,7 @@ namespace Z0.Logix
             var v3_name = v3.Format(false);
             var method = MethodInfo.GetCurrentMethod().DisplayName<T>();
             var msg = appMsg($"{method}");
-            PostMessage(msg);
+            Enqueue(msg);
                         
 
             var expr = binary(k1, binary(k0, v0,v1), binary(k0, v2,v3));            

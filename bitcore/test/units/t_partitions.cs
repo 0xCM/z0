@@ -52,8 +52,8 @@ namespace Z0
             var expect = BitSpan.parse("000001110000011100000111000001110000011100000111000001110000011100000111");
             var actual = dst.Data.ToBitSpan();
 
-            PostMessage(expect.Format());
-            PostMessage(actual.Format());
+            Enqueue(expect.Format());
+            Enqueue(actual.Format());
 
             for(var i=0; i<n; i+= 3)
             {

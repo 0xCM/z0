@@ -153,7 +153,7 @@ namespace Z0.Logix
                 Claim.eq(actual,expect);
                 matrix[j] = actual;
             
-                PostMessage(actual.Format(8));
+                Enqueue(actual.Format(8));
             }            
         }
 

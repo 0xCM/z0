@@ -164,7 +164,7 @@ namespace Z0
             {
                 var x = Vectors.vparts(n128,127,0,127,0,127,0,127,0);
                 var y = dinx.vpackus(x,x);
-                PostMessage(y.Format());
+                Enqueue(y.Format());
             }        
             case1();
             case2();

@@ -107,7 +107,7 @@ namespace Z0.Logix
                 var expect = ScalarOpApi.eval(ComparisonKind.Gt,a,b);   
                 var actual = eval(x).Value;
                 if(gmath.neq(actual,expect))             
-                    PostMessage($"{a} > {b}?");
+                    Enqueue($"{a} > {b}?");
                 Claim.eq(expect,actual);            
             }
         }

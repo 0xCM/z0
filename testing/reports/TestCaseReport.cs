@@ -11,23 +11,10 @@ namespace Z0
 
     using F = TestCaseField;
     using R = TestCaseRecord;
-
-    public interface ITestResultSource
-    {
-        IEnumerable<TestCaseRecord> TakeOutcomes();
-    }
-
-    public interface ITestResultSink : ISink<TestCaseRecord>
-    {
-        TestCaseRecord ReportOutcome(string casename, bool succeeded, TimeSpan duration);
-
-        void ISink<TestCaseRecord>.Accept(in TestCaseRecord src)
-            => ReportOutcome(src.Case, src.Status != 0, src.Duration);
-    }
         
     public enum TestCaseField : ulong
     {
-        Case = 0 | (80ul << 32),
+        Case = 0 | (60ul << 32),
 
         Status =  1 | (14ul << 32),
 

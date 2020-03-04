@@ -34,7 +34,7 @@ namespace Z0
                 var expect = Vectors.vparts(n512,6, 7, 0, 1, 2, 3, 4, 5);
                 var actual = ginx.vperm2x128(src, p0, p1);
                 Claim.eq(actual,expect);
-                PostMessage(describe(src,p0,p1));
+                Enqueue(describe(src,p0,p1));
 
             }
 

@@ -13,48 +13,49 @@ namespace Z0
 
     public sealed class MsgContext : IMsgContext
     {
-        readonly MsgContextQueue Queue;
+        readonly IAppMsgQueue Queue;
 
         /// <summary>
         /// Creates a message context that manages its own queue
         /// </summary>
         /// <param name="queue">The target queue</param>
-        public static IMsgContext Create()
-            => new MsgContext();          
+        public static IMsgContext Create(IAppMsgQueue dst)
+            => new MsgContext(dst);          
 
-        /// <summary>
-        /// Creates a message context using a supplied target queue
-        /// </summary>
-        /// <param name="queue">The target queue</param>
-        public static IMsgContext Create(MsgContextQueue queue)
-            => new MsgContext(queue);          
+        public static IMsgContext Create()
+            => new MsgContext();
+
+        MsgContext(IAppMsgQueue dst)
+            => Queue = dst;
 
         MsgContext()
-            => Queue = MsgContextQueue.Create();
+            => Queue = MsgContextQueue.Create(this);
 
-        MsgContext(MsgContextQueue queue)
-            => Queue = queue;
-
-        public IReadOnlyList<AppMsg> DequeueMessages()
+        public IReadOnlyList<AppMsg> Dequeue()
             => Queue.Dequeue();
-        
+
         /// <summary>
         /// Enqueues application messages
         /// </summary>
         /// <param name="msg">The messages to enqueue</param>
         [MethodImpl(Inline)]
-        public void PostMessage(AppMsg msg)
-            => Queue.PostMessage(msg);
+        public void Enqueue(AppMsg msg)
+            => Queue.Enqueue(msg);
         
         [MethodImpl(Inline)]
-        public void PostMessage(string msg, AppMsgKind? severity = null)
-            => Queue.PostMessage(msg,severity);
+        public void Enqueue(string msg, AppMsgKind? severity = null)
+            => Queue.Enqueue(msg,severity);
 
-        public void FlushMessages(Exception e, IAppMsgLog target)
+        public void Flush(Exception e, IAppMsgLog target)
+        {
+            target.Write(Flush(e));
+        }
+
+        public IReadOnlyList<AppMsg> Flush(Exception e)        
         {
             var messages = Queue.Flush(e);            
             Terminal.Get().WriteMessages(messages);
-            target.Write(messages);
+            return messages;
         }
     }    
 }

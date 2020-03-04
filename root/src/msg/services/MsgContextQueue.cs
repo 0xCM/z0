@@ -8,39 +8,57 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.IO;
     
     using static Root;
 
-    public readonly struct MsgContextQueue : IAppMsgSink
+    public readonly struct MsgContextQueue : IAppMsgQueue
     {
+        public IContext Context {get;}
+
         readonly AppMsgQueue Messages;
 
         [MethodImpl(Inline)]
-        public static MsgContextQueue Create()        
-            => new MsgContextQueue(AppMsgQueue.Create());
+        public static IAppMsgQueue Create(IContext context)  
+        {      
+            return new MsgContextQueue(context, AppMsgQueue.Create());
+        }
         
         [MethodImpl(Inline)]
-        MsgContextQueue(AppMsgQueue queue)
-            => this.Messages = queue;
+        MsgContextQueue(IContext context, AppMsgQueue queue)
+        {
+            this.Context = context;
+            this.Messages = queue;
+        }
 
         /// <summary>
         /// Enqueues application messages
         /// </summary>
         /// <param name="msg">The messages to enqueue</param>
         [MethodImpl(Inline)]
-        public void PostMessage(AppMsg msg)
+        public void Enqueue(AppMsg msg)
             => Messages.Post(msg);
 
         [MethodImpl(Inline)]
-        public void PostMessage(string msg, AppMsgKind? severity = null)
+        public void Enqueue(string msg, AppMsgKind? severity = null)
             => Messages.Post(msg,severity);
        
-        [MethodImpl(Inline)]
-        internal IReadOnlyList<AppMsg> Dequeue()
-            => Messages.Dequeue(); 
+        public IReadOnlyList<AppMsg> Dequeue()
+            => EmitMessages(Messages.Dequeue());
 
-        [MethodImpl(Inline)]
-        internal IReadOnlyList<AppMsg> Flush(Exception e)
-            => Messages.Flush(e);
+        public IReadOnlyList<AppMsg> Flush(Exception e)
+            => EmitMessages(Messages.Flush(e));
+
+        IReadOnlyList<AppMsg> EmitMessages(IReadOnlyList<AppMsg> src)
+        {                    
+            var errors = src.Where(m => m.Kind == AppMsgKind.Error).FormatLines().ToArray();
+            if(errors.Length != 0)
+                Context.Paths.StandardErrorPath.AppendAsync(errors);
+                                
+            var standard = src.Where(m => m.Kind != AppMsgKind.Error).FormatLines().ToArray();
+            if(standard.Length != 0)
+                Context.Paths.StandardOutPath.AppendAsync(standard);
+            return src;
+        }
     }
 }

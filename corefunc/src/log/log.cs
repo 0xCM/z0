@@ -72,13 +72,13 @@ namespace Z0
             public void Write(AppMsg src)
             {
                 lock(locker)
-                    LogPath.Append(src.ToString());
+                    LogPath.AppendLine(src.ToString());
             }
 
             public void Write(IEnumerable<AppMsg> src)
             {
                 lock(locker)
-                    LogPath.Append(src.Select(x => x.ToString()));
+                    LogPath.Append(src.FormatLines());
             }
 
             void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
@@ -88,9 +88,9 @@ namespace Z0
                     return;
 
                 if(header)
-                    dst.Append(string.Join(delimiter, records[0].HeaderNames));
+                    dst.AppendLine(string.Join(delimiter, records[0].HeaderNames));
                 
-                iter(records, r => dst.Append(r.DelimitedText(delimiter)));
+                iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
             }
 
             FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)

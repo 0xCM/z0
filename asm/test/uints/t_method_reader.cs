@@ -30,7 +30,7 @@ namespace Z0
                 var end = Random.Next((ulong)uint.MaxValue, ulong.MaxValue);
                 var expect = MemoryRange.Define(start,end);
                 var format = expect.Format();
-                var actual = MemoryRange.Parse(format).OnNone(() => PostMessage(format)).Require();
+                var actual = MemoryRange.Parse(format).OnNone(() => Enqueue(format)).Require();
                 Claim.eq(expect,actual);
             }
         }

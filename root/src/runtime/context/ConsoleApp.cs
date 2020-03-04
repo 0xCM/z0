@@ -9,14 +9,18 @@ namespace Z0
         
     public abstract class ConsoleApp<A> : IConsoleApp<A>
         where A : ConsoleApp<A>, new()
-    {
-        readonly IMsgContext Queue;
+    {        
+        readonly IContext Context;
 
         readonly IAppMsgLog MsgLog;
 
-        protected ConsoleApp(IAppMsgLog log)
+        readonly IAppMsgQueue MsgQueue;
+        
+        
+        protected ConsoleApp(IContext context, IAppMsgLog log)
         {
-            this.Queue = MsgContext.Create();
+            this.Context = context;
+            this.MsgQueue = MsgContextQueue.Create(context);
             this.MsgLog = log;
         }
 
@@ -29,11 +33,10 @@ namespace Z0
             try
             {            
                 Execute(args);
-
             }
             catch (Exception e)
             {
-                Queue.FlushMessages(e,MsgLog);
+                MsgQueue.Flush(e);
             }
         }
 
@@ -48,13 +51,14 @@ namespace Z0
         where A : ConsoleApp<A,C>, new()
         where C : IContext
     {
+        public C Context {get;}
+
         protected ConsoleApp(C context, IAppMsgLog log)
-            : base(log)
+            : base(context, log)
         {
 
         }
 
-        public C Context {get;}
     }
 
 }

@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using static Z0.Root;
 
@@ -102,7 +103,7 @@ namespace Z0
 
         Option<IMsgContext> MsgContext => RootContext.TryMap(c => c as IMsgContext);
 
-        Option<IAppMsgSink> MsgSink => MsgContext.TryMap(c => c as IAppMsgSink);
+        Option<IAppMsgQueue> MsgSink => MsgContext.TryMap(c => c as IAppMsgQueue);
         
         public int Identity {get;}
 
@@ -125,10 +126,16 @@ namespace Z0
                 AsmContextData.Create(Compostion, ClrIndex, State.Resources, config, CilFormat)
                 );
 
-        public void PostMessage(AppMsg msg)
-            => MsgSink.OnSome(sink => sink.PostMessage(msg));
+        public void Enqueue(AppMsg msg)
+            => MsgSink.OnSome(sink => sink.Enqueue(msg));
 
-        public void PostMessage(string msg, AppMsgKind? severity = null)
-            => MsgSink.OnSome(sink => sink.PostMessage(msg,severity));
+        public void Enqueue(string msg, AppMsgKind? severity = null)
+            => MsgSink.OnSome(sink => sink.Enqueue(msg, severity));
+
+        public IReadOnlyList<AppMsg> Dequeue()
+            => MsgSink ? MsgSink.Value.Dequeue() : array<AppMsg>();
+
+        public IReadOnlyList<AppMsg> Flush(Exception e)
+            => MsgSink ? MsgSink.Value.Flush(e) : array<AppMsg>();
     }   
 }

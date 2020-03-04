@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
     using System.IO;
+    using System.Threading.Tasks;
 
     using static Root;
 
@@ -70,24 +71,18 @@ namespace Z0
             => new StreamWriter(dst.CreateParentIfMissing().FullPath, false);
 
         /// <summary>
-        /// Creates or overwrites a file with supplied text
-        /// </summary>
-        /// <param name="dst">The target path</param>
-        /// <param name="src">The source text</param>
-        public static void WriteText(this FilePath dst, string src)
-        {
-            if(!string.IsNullOrWhiteSpace(src))
-            {                
-                File.WriteAllText(dst.CreateParentIfMissing().FullPath, src);
-            }
-        }
-
-        /// <summary>
         /// Determines whether a file exists
         /// </summary>
-        /// <param name="src">The file path for which existence is in question</param>
+        /// <param name="src">The path for which existence will be tested</param>
         public static bool Exists(this FilePath src)
             => File.Exists(src.FullPath);
+
+        /// <summary>
+        /// Determines whether a directory exists
+        /// </summary>
+        /// <param name="src">The path for which existence will be tested</param>
+        public static bool Exists(this FolderPath src)
+            => Directory.Exists(src.Name);
 
         /// <summary>
         /// Deletes the file if it exists
@@ -119,22 +114,14 @@ namespace Z0
                 iter(Directory.EnumerateFiles(dst.Name), File.Delete);
         }
 
-        public static int Overwrite(this FilePath dst, params string[] lines)
-        {         
-            var count = 0;
-            using var writer = new StreamWriter(dst.CreateParentIfMissing().FullPath,false);            
-            foreach(var line in lines)
-            {
-                writer.WriteLine(line);
-                count++;
-            }
-            return count;
-        }
+        public static void Append(this FilePath dst, string src)
+            => File.AppendAllText(dst.CreateParentIfMissing().FullPath, src);
 
-        public static int Append(this FilePath dst, params string[] src)
-            => dst.Append((IEnumerable<string>)src);
-            
-        public static int Append(this FilePath dst, IEnumerable<string> src)
+
+        public static void AppendLine(this FilePath dst, string src)
+            => dst.Append(items(src));
+
+        public static void Append(this FilePath dst, IEnumerable<string> src)
         {
             var count = 0;
             using var writer = new StreamWriter(dst.CreateParentIfMissing().FullPath,true);            
@@ -143,8 +130,13 @@ namespace Z0
                 writer.WriteLine(line);
                 count++;
             }
-            return count;
         }
+
+        public static Task AppendAsync(this FilePath dst, string src)
+            => File.AppendAllTextAsync(dst.CreateParentIfMissing().FullPath, src);
+
+        public static Task AppendAsync(this FilePath dst, IEnumerable<string> src)
+            => File.AppendAllLinesAsync(dst.CreateParentIfMissing().FullPath, src);
 
         public static IEnumerable<FilePath> WithExtension(this IEnumerable<FilePath> src, FileExtension ext)
             => src.Where(path => path.Extension == ext);

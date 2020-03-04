@@ -11,6 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
+
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {
@@ -26,6 +27,8 @@ namespace Z0
 
             }        
 
+        
+        
         /// <summary>
         /// Creates a new stopwatch and optionally start it
         /// </summary>

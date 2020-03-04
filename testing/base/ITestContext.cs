@@ -23,41 +23,8 @@ namespace Z0
     }
 
     public interface ITestContext<C> : ITestContext
-        where C : ITestContext<C>
     {
 
     }
 
-    public interface IUnitTest : ITestContext
-    {
-
-    }    
-
-    public interface IExplicitTest : IUnitTest, IExecutable
-    {
-        
-    }    
-
-    public interface ITestConfig : ISampleDefaults
-    {
-        ITestConfig<T> Get<T>()
-            where T : unmanaged;
-        
-        ITestConfig WithSampleSize(int SampleSize);
-
-        ITestConfig WithTrace();
-
-        ITestConfig WithoutTrace();
-
-        ITestConfig Replicate();
-
-        bool TraceEnabled {get;}
-    }    
-
-
-    public interface ITestConfig<T> : ITestConfig, ISampleDefaults<T>
-        where T : unmanaged
-    {
-        
-    }    
 }

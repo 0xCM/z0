@@ -19,8 +19,8 @@ namespace Z0
         {
             if(a != b)
             {
-                PostMessage(a.Format());
-                PostMessage(b.Format());
+                Enqueue(a.Format());
+                Enqueue(b.Format());
                 Claim.fail();
             }
         }

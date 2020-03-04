@@ -5,8 +5,9 @@
 namespace Z0
 {
     using System;
-
     using static zfunc;
+
+
 
     public readonly struct LogPaths
     {
@@ -83,7 +84,7 @@ namespace Z0
         FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext, long timestamp)
             => LogDir(area, subdir) + FileName.Define($"{basename}.{timestamp}.{ext ?? DefaultExtension}");
 
-        public FilePath UniqueLogPath(LogArea area, string basename,  FileExtension ext = null)
+        public FilePath UniqueLogPath(LogArea area, string basename, FileExtension ext = null)
         {
             var first = new DateTime(2019,1,1);
             var current = now();
@@ -91,7 +92,7 @@ namespace Z0
             return LogPath(area, basename, ext, elapsed);
         }
 
-        public FilePath UniqueLogPath(LogArea area, FolderName subdir, string basename,  FileExtension ext = null)
+        public FilePath UniqueLogPath(LogArea area, FolderName subdir, string basename, FileExtension ext = null)
         {
             var first = new DateTime(2019,1,1);
             var current = now();

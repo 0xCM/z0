@@ -19,7 +19,7 @@ namespace Z0
     public abstract class t_asm<U> : UnitTest<U>
         where U : t_asm<U>
     {
-        protected IAsmContext Context;
+        protected new IAsmContext Context;
         
         public t_asm()
         {
