@@ -13,11 +13,6 @@ namespace Z0
 
     }
 
-    [ApiHost(ApiHostKind.Direct)]
-    public static partial class math
-    {
-
-    }
 
     /// <summary>
     /// Defines generic floating-point operations

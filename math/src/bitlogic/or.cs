@@ -44,35 +44,35 @@ namespace Z0
             => a | b;
 
         [MethodImpl(Inline), Op]
-        internal static sbyte or(sbyte a, sbyte b, sbyte c)
+        public static sbyte or(sbyte a, sbyte b, sbyte c)
             => (sbyte)((int)a | (int)b | (int)c);
 
         [MethodImpl(Inline), Op]
-        internal static byte or(byte a, byte b, byte c)
+        public static byte or(byte a, byte b, byte c)
             => (byte)((uint)a | (uint)b | (uint)c);
 
         [MethodImpl(Inline), Op]
-        internal static short or(short a, short b, short c)
+        public static short or(short a, short b, short c)
             => (short)((int)a | (int)b | (int)c);
 
         [MethodImpl(Inline), Op]
-        internal static ushort or(ushort a, ushort b, ushort c)
+        public static ushort or(ushort a, ushort b, ushort c)
             => (ushort)((uint)a | (uint)b | (uint)c);
 
         [MethodImpl(Inline), Op]
-        internal static int or(int a, int b, int c)
+        public static int or(int a, int b, int c)
             => a | b | c;
 
         [MethodImpl(Inline), Op]
-        internal static uint or(uint a, uint b, uint c)
+        public static uint or(uint a, uint b, uint c)
             => a | b | c;
 
         [MethodImpl(Inline), Op]
-        internal static long or(long a, long b, long c)
+        public static long or(long a, long b, long c)
             => a | b | c;
 
         [MethodImpl(Inline), Op]
-        internal static ulong or(ulong a, ulong b, ulong c)
+        public static ulong or(ulong a, ulong b, ulong c)
             => a | b | c; 
     }
 }

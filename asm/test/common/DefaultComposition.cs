@@ -26,6 +26,7 @@ namespace Z0
                 R.CoreFunc.Resolution,
                 R.Blocks.Resolution,
                 R.Fixed.Resolution,
+                R.Math.Resolution,
                 R.GMath.Resolution,
                 R.GMathSvc.Resolution,
                 R.Intrinsics.Resolution,

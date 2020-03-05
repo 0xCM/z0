@@ -32,6 +32,11 @@ namespace Z0
 
         CoreFuncTest = CoreFunc | Test,
 
+
+        Math = 45,
+
+        MathTest = Math | Test,
+        
         GMath = 50,
 
         GMathTest = GMath | Test,

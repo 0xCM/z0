@@ -9,7 +9,7 @@
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
-    <ProjectReference Include="$(TopDir)math/src/z0.math.csproj" />
+
   </ItemGroup>
 
 </Project>

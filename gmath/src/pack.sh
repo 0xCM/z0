@@ -1,1 +1,0 @@
-dotnet pack --output ../dist
