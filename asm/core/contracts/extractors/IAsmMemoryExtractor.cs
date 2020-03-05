@@ -12,6 +12,6 @@ namespace Z0
     /// </summary>
     public interface IAsmMemoryExtractor : IAsmService
     {
-        Option<EncodedData> Extract(MemoryAddress src);        
+        Option<MemoryEncoding> Extract(MemoryAddress src);        
     }    
 }

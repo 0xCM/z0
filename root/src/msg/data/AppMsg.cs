@@ -21,41 +21,31 @@ namespace Z0
     public class AppMsg  : IFormattable<AppMsg>
     {
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, kind, caller, FilePath.Define(file), line);
+            => new AppMsg(content, kind, (AppMsgColor)kind, caller, FilePath.Define(file), line);
 
         public static AppMsg NoCaller(object content, AppMsgKind kind)
-            => new AppMsg(content, kind, text.blank, FilePath.Empty, null);
+            => new AppMsg(content, kind, (AppMsgColor)kind, text.blank, FilePath.Empty, null);
 
         public static AppMsg SpecificCaller(object content, AppMsgKind kind, string caller, string file = null, int? line = null)
-            => new AppMsg(content, kind, caller,FilePath.Define(file),line);
+            => new AppMsg(content, kind, (AppMsgColor)kind,  caller, FilePath.Define(file),line);
 
-        public static AppMsg Colorize(object content, AppMsgColor color, AppMsgKind kind = AppMsgKind.Info)
-            => new AppMsg(content, kind, color, text.blank, FilePath.Empty, null);
+        public static AppMsg Colorize(object content, AppMsgColor color)
+            => new AppMsg(content, AppMsgKind.Info, color, text.blank, FilePath.Empty, null);
 
         public static AppMsg Info(object content)
-            => new AppMsg(content, AppMsgKind.Info, text.blank, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, text.blank, FilePath.Empty, null);
 
         public static AppMsg Babble(object content)
-            => new AppMsg(content, AppMsgKind.Babble, text.blank, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Babble, AppMsgColor.Gray, text.blank, FilePath.Empty, null);
 
         public static AppMsg Warn(object content)
-            => new AppMsg(content, AppMsgKind.Warning, text.blank, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Warning, AppMsgColor.Yellow, text.blank, FilePath.Empty, null);
 
         public static AppMsg Error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, AppMsgKind.Error, caller, FilePath.Define(file), line);
+            => new AppMsg(content, AppMsgKind.Error, AppMsgColor.Red, caller, FilePath.Define(file), line);
         
         public static AppMsg Empty
-            => new AppMsg(string.Empty, AppMsgKind.Info, text.blank, FilePath.Empty, null);
-
-        AppMsg(object content, AppMsgKind kind, string caller, FilePath file, int? line)
-        {
-            this.Content = content ?? string.Empty;
-            this.Kind = kind;
-            this.Color = (AppMsgColor)kind;
-            this.Caller =  text.denullify(caller);
-            this.CallerFile = file;
-            this.FileLine = line;    
-        }
+            => new AppMsg(string.Empty, AppMsgKind.Info, AppMsgColor.Unspecified, text.blank, FilePath.Empty, null);
 
         AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line)
         {
@@ -105,7 +95,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The target kind</param>
         public AppMsg AsKind(AppMsgKind kind)
-            => this.Kind == kind ? this : new AppMsg(Content, kind, Caller, CallerFile, FileLine);
+            => this.Kind == kind ? this : new AppMsg(Content, kind, Color, Caller, CallerFile, FileLine);
 
         /// <summary>
         /// Edits the message to include specifed caller info data
@@ -114,21 +104,21 @@ namespace Z0
         /// <param name="file">The file in which the invocation occurred</param>
         /// <param name="line">The line number at which the invocation occurred</param>
         public AppMsg WithCallerInfo(string caller, string file, int? line)
-            => new AppMsg(Content, Kind, caller, FilePath.Define(file),line);
+            => new AppMsg(Content, Kind, Color, caller, FilePath.Define(file),line);
 
         /// <summary>
         /// Prepends the message body with specified content
         /// </summary>
         /// <param name="prefix">The prefix conent</param>
         public AppMsg WithPrependedContent(object prefix)    
-            => new AppMsg($"{prefix}{Content}", Kind, Caller, CallerFile, FileLine);
+            => new AppMsg($"{prefix}{Content}", Kind, Color, Caller, CallerFile, FileLine);
 
         /// <summary>
         /// Appends specified content to the message body
         /// </summary>
         /// <param name="suffix">The suffix content</param>
         public AppMsg WithAppendedContent(object suffix)    
-            => new AppMsg($"{Content}{suffix}", Kind, Caller, CallerFile, FileLine);
+            => new AppMsg($"{Content}{suffix}", Kind, Color, Caller, CallerFile, FileLine);
 
         public string Format()
         {

@@ -14,7 +14,7 @@ namespace Z0
 
     public static class AsmDecodingOps
     {
-        public static Option<AsmInstructionList> DecodeInstructions(this IAsmContext context, EncodedData src)
+        public static Option<AsmInstructionList> DecodeInstructions(this IAsmContext context, MemoryEncoding src)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace Z0
                 }
 
                 var instructions = new Asm.Instruction[decoded.Count];
-                var formatted = context.InstructionFormatter().FormatInstructions(decoded, src.BaseAddress);
+                var formatted = context.InstructionFormatter().FormatInstructions(decoded, src.Address);
                 for(var i=0; i<instructions.Length; i++)
                     instructions[i] =  decoded[i].ToSpec(formatted[i]);
                 return AsmInstructionList.Create(instructions,src);

@@ -79,4 +79,16 @@ namespace Z0
             
     }
 
+    [Ignore]
+    sealed class EmptyResolution : AssemblyResolution<EmptyResolution>
+    {
+
+        public EmptyResolution()
+        {
+
+        }
+
+        public override AssemblyId Id => AssemblyId.None;
+    }
+
 }

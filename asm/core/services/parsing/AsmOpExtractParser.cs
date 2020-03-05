@@ -42,7 +42,7 @@ namespace Z0
                 TermCode: matched.ToTermCode(),
                 Uri : OpUri.Hex(current.Uri.HostPath, current.Uri.GroupName, current.Uri.OpId),
                 OpSig : current.OpSig,
-                Data : EncodedData.Define(current.Address, data)
+                Data : MemoryEncoding.Define(current.Address, data)
             );
         }
 
@@ -67,7 +67,7 @@ namespace Z0
                      TermCode: matched.ToTermCode(),
                      Uri : OpUri.Hex(host.Path, current.Uri.GroupName, current.Uri.OpId),
                      OpSig : current.OpSig,
-                     Data : EncodedData.Define(current.Address, data)
+                     Data : MemoryEncoding.Define(current.Address, data)
                 );
 
                 //dst[i] = Parse(parser, current);

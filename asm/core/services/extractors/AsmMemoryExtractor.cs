@@ -15,7 +15,7 @@ namespace Z0
     {
         public IAsmContext Context {get;}
 
-        public readonly IByteReader Reader;
+        public readonly IMemoryReader Reader;
 
         readonly byte[] Buffer;
 
@@ -28,22 +28,22 @@ namespace Z0
         {
             this.Context = context;
             this.Buffer = buffer;
-            this.Reader = context.ByteReader();
+            this.Reader = context.MemoryReader();
         }
 
         [MethodImpl(Inline)]
-        public Option<EncodedData> Extract(MemoryAddress src)
+        public Option<MemoryEncoding> Extract(MemoryAddress src)
         {
             try
             {
                 Span<byte> buffer = Buffer.Clear();
                 var length = Reader.Read(src, buffer.Length, buffer);            
-                return EncodedData.Define(src, buffer.Slice(0,length).ToArray());
+                return MemoryEncoding.Define(src, buffer.Slice(0,length).ToArray());
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<EncodedData>();
+                return none<MemoryEncoding>();
             }
         }
     }

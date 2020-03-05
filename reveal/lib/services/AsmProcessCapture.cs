@@ -119,7 +119,7 @@ namespace Z0
             
             if (size != actualSize)
             {
-                term.error(errors.LengthMismatch((int)size, actualSize));
+                term.error(Errors.LengthMismatch((int)size, actualSize));
                 return default;
             }
 

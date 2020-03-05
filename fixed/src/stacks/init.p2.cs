@@ -58,7 +58,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = alloc(p2);
-            PolyData.copy(in src, ref head<T>(ref dst), count<T>(p2));
+            Cells.copy(in src, ref head<T>(ref dst), count<T>(p2));
             return dst;
         }
 
@@ -67,7 +67,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = alloc(p2);
-            PolyData.copy(in src, ref head<T>(ref dst), count<T>(p2));
+            Cells.copy(in src, ref head<T>(ref dst), count<T>(p2));
             return dst;
         }        
 

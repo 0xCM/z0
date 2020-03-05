@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> CheckedTransfer(Span<T> src)
         {
-            errors.ThrowIfFalse(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");               
+            Errors.ThrowIfFalse(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");               
             return new TableSpan<M,N,T>(src);
         }
 
@@ -83,14 +83,14 @@ namespace Z0
         [MethodImpl(Inline)]        
         internal TableSpan(Span<T> src)
         {
-            errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            Errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src;
         }
 
         [MethodImpl(Inline)]        
         internal TableSpan(T[] src)
         {
-            errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            Errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src;
         }
 
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal TableSpan(ReadOnlySpan<T> src)
         {
-            errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            Errors.ThrowIfFalse(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src.ToArray();
         }
 
@@ -186,7 +186,7 @@ namespace Z0
         public ref NatSpan<M,T> Col(int col, ref NatSpan<M,T> dst)
         {
             if(col < 0 || col >= ColCount)
-                errors.ThrowOutOfRange(col, 0, ColCount - 1);
+                Errors.ThrowOutOfRange(col, 0, ColCount - 1);
 
             for(var row = 0; row < ColLength; row++)
                 dst[row] = data[row*RowLenth + col];
@@ -197,7 +197,7 @@ namespace Z0
         public NatSpan<N,T> Row(int row)
         {
             if(row < 0 || row >= RowCount)
-                errors.ThrowOutOfRange(row, 0, RowCount - 1);
+                Errors.ThrowOutOfRange(row, 0, RowCount - 1);
             
             return data.Slice(row * RowLenth, RowLenth);
         }

@@ -17,10 +17,10 @@ namespace Z0
         public static ulong Lookup(uint i)
         {
             if(i < Count)
-                return Bytes.cell<ulong>(RawBytes, (int)(i*8));
+                return Cells.cell<ulong>(RawBytes, (int)(i*8));
             else
             {               
-                errors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 
+                Errors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 
                 return 0;
             }
         }

@@ -33,12 +33,6 @@ namespace Z0
         /// </summary>
         bool IsNonEmpty {get;}
 
-        /// <summary>
-        /// The assembly role
-        /// </summary>
-        AssemblyRole Role
-            => AssemblyRole.Library;
-
         IOperationCatalog Catalog {get;}
 
         /// <summary>

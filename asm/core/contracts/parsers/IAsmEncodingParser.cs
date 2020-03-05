@@ -10,6 +10,6 @@ namespace Z0
 
     public interface IAsmEncodingParser : IAsmService
     {
-        Option<EncodedData> Parse(EncodedData src);        
+        Option<MemoryEncoding> Parse(MemoryEncoding src);        
     }
 }

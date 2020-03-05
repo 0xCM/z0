@@ -24,7 +24,7 @@ namespace Z0
 
         public readonly OpIdentity Id;
 
-        public readonly EncodedData Encoded;
+        public readonly MemoryEncoding Encoded;
 
         /// <summary>
         /// Parses a row of identified hex text
@@ -38,7 +38,7 @@ namespace Z0
             {
                 var id = OpIdentity.Define(formatted.TakeBefore(idsep).Trim());
                 var bytes = formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(Hex.parsebyte).ToArray();
-                var encoded = EncodedData.Define(bytes);
+                var encoded = MemoryEncoding.Define(bytes);
                 return Define(id, encoded);                
             }
             catch(Exception e)
@@ -49,22 +49,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static HexLine Define(OpIdentity id, EncodedData encoded)
+        public static HexLine Define(OpIdentity id, MemoryEncoding encoded)
             => new HexLine(id, encoded);
 
         [MethodImpl(Inline)]
         public static HexLine Define(OpIdentity id, byte[] encoded)
-            => new HexLine(id, EncodedData.Define(encoded));
+            => new HexLine(id, MemoryEncoding.Define(encoded));
         
         [MethodImpl(Inline)]
-        HexLine(OpIdentity id, EncodedData encoded)
+        HexLine(OpIdentity id, MemoryEncoding encoded)
         {
             this.Id = id;
             this.Encoded = encoded;
         }
         
         [MethodImpl(Inline)]
-        public void Deconstruct(out OpIdentity id, out EncodedData data)
+        public void Deconstruct(out OpIdentity id, out MemoryEncoding data)
         {
             id = Id;
             data = Encoded;

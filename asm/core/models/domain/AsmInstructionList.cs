@@ -19,9 +19,9 @@ namespace Z0.Asm
     {        
         readonly Instruction[] Instructions;
 
-        public readonly EncodedData EncodedBytes;
+        public readonly MemoryEncoding EncodedBytes;
 
-        public static AsmInstructionList Empty = new AsmInstructionList(new Instruction[0]{}, EncodedData.Empty);
+        public static AsmInstructionList Empty = new AsmInstructionList(new Instruction[0]{}, MemoryEncoding.Empty);
 
         [MethodImpl(Inline)]
         public static implicit operator Instruction[](AsmInstructionList src)
@@ -36,7 +36,7 @@ namespace Z0.Asm
         //     => new AsmInstructionList(src, data);
          
         [MethodImpl(Inline)]
-        public static AsmInstructionList Create(Instruction[] src, EncodedData data)
+        public static AsmInstructionList Create(Instruction[] src, MemoryEncoding data)
             => new AsmInstructionList(src, data);
 
         // [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0.Asm
         // }
 
         [MethodImpl(Inline)]
-        AsmInstructionList(Instruction[] instructions, EncodedData data)
+        AsmInstructionList(Instruction[] instructions, MemoryEncoding data)
         {
             this.Instructions = instructions;
             this.EncodedBytes = data;

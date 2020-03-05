@@ -11,18 +11,18 @@ namespace Z0
 
     using static Root;
     
-    readonly struct AsmArchiver :  IAsmAssemblyArchiver
+    readonly struct AsmAssemblyArchiver :  IAsmAssemblyArchiver
     {                
         public IAsmContext Context {get;}
 
         readonly DataResourceIndex Resources;
 
         [MethodImpl(Inline)]
-        public static AsmArchiver Create(IAsmContext context)
-            => new AsmArchiver(context);
+        public static AsmAssemblyArchiver Create(IAsmContext context)
+            => new AsmAssemblyArchiver(context);
 
         [MethodImpl(Inline)]
-        AsmArchiver(IAsmContext context)
+        AsmAssemblyArchiver(IAsmContext context)
         {
             Context = context;
             Resources = Context.Compostion.FindCatalog(AssemblyId.Data).MapValueOrElse(c => c.Resources, () => DataResourceIndex.Empty);

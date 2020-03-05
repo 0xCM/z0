@@ -34,7 +34,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]   
         public static int length<T>(IReadOnlyList<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null) 
-            => lhs.Count == rhs.Length ? lhs.Count : throw errors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
+            => lhs.Count == rhs.Length ? lhs.Count : throw Errors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
     }
 
     public static partial class Root

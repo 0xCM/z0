@@ -37,7 +37,7 @@ namespace Z0
         /// Changes the default asm formatting configuration
         /// </summary>
         /// <param name="config">The new formatting configuration</param>
-        IAsmContext WithFormat(AsmFormatConfig config);      
+        IAsmContext WithFormat(AsmFormatConfig config);  
 
     }
 }

@@ -10,16 +10,16 @@ namespace Z0
     
     using static Root;
 
-    public readonly struct ByteReader : IByteReader
+    public readonly struct MemoryReader : IMemoryReader
     {
         public IContext Context {get;}
         
         [MethodImpl(Inline)]
-        public static ByteReader Create(IContext context)
-            => new ByteReader(context);
+        public static MemoryReader Create(IContext context)
+            => new MemoryReader(context);
 
         [MethodImpl(Inline)]
-        ByteReader(IContext context)
+        MemoryReader(IContext context)
         {
             this.Context = context;
         }
@@ -58,4 +58,12 @@ namespace Z0
             return offset;
         }
     }
+
+    partial class RootX
+    {
+        [MethodImpl(Inline)]
+        public static IMemoryReader MemoryReader(this IContext context)
+            => Z0.MemoryReader.Create(context);        
+
+    }    
 }

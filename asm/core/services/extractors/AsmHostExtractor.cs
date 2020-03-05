@@ -33,10 +33,10 @@ namespace Z0
 
         public AsmOpExtractReport ExtractOps(ApiHost src)
         {
-            var ops = Addresses(src).ToArray();
+            var ops = Context.OpAddresses(src.HostingType).ToArray();
             var records = new AsmOpExtractRecord[ops.Length];
             var buffer = alloc<byte>(BufferLength);
-            var reader = Context.ByteReader();
+            var reader = Context.MemoryReader();
 
             for(var i=0; i< ops.Length; i++)
             {
@@ -50,34 +50,12 @@ namespace Z0
                     Length : length,
                     Uri : OpUri.Hex(src.Path, op.Source.Name, op.Id),
                     OpSig : op.Source.Signature().Format(),
-                    Data : EncodedData.Define(op.Address, buffer.Slice(0,length).ToArray())
+                    Data : MemoryEncoding.Define(op.Address, buffer.Slice(0,length).ToArray())
                     );
                 records[i] = record;
             }    
+         
             return AsmOpExtractReport.Create(records);
         }
-
-        public IEnumerable<OpAddress> Addresses(ApiHost host)
-        {
-            var generic = from m in host.DeclaredMethods.OpenGeneric(1)
-                          where 
-                               m.Tagged<OpAttribute>() 
-                            && m.Tagged<NumericClosuresAttribute>() 
-                            && !m.AcceptsImmediate()
-                          let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
-                          where c != NumericKind.None
-                          from t in c.DistinctKinds().Select(x => x.ToClrType())
-                          where t.IsSome()
-                          let concrete = m.MakeGenericMethod(t.Value)
-                          let address =  MemoryAddress.Define(concrete.Jit())
-                          select OpAddress.Define(concrete.Identify(), concrete, address);
-            
-            var direct = from m in host.DeclaredMethods.NonGeneric()
-                          where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
-                          let address =  MemoryAddress.Define(m.Jit())
-                          select OpAddress.Define(m.Identify(), m, address);
-                          
-            return generic.Union(direct).OrderBy(x => x.Address);
-        }            
     }
 }

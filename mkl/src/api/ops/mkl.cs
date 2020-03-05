@@ -110,6 +110,6 @@ namespace Z0.Mkl
             where T : unmanaged
             where S : unmanaged
                 => lhs.Length == rhs.Length ? lhs.Length 
-                    : throw errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+                    : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
     }
 }

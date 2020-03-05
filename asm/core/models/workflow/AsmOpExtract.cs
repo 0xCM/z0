@@ -23,7 +23,7 @@ namespace Z0
         
         public readonly CaptureTermCode TermCode;
 
-        public readonly EncodedData RawBits {get;}
+        public readonly MemoryEncoding RawBits {get;}
                 
         public readonly MethodInfo Method;
 

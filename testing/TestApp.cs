@@ -245,7 +245,7 @@ namespace Z0
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else                
-                yield return messages.Unanticipated(e?.InnerException ?? e);
+                yield return Messages.Unanticipated(e?.InnerException ?? e);
 
             yield return AppMsg.Error($"{name} failed.");
         }
@@ -311,19 +311,19 @@ namespace Z0
             var casename = TestIdentity.testcase(method);
             var clock = counter(false);
 
-            var messages = new List<AppMsg>();
+            var collected = new List<AppMsg>();
             try
             {
                 var tsStart = now();
-                messages.Add(PreCaseMsg(casename, tsStart));
+                collected.Add(PreCaseMsg(casename, tsStart));
 
                 clock.Start();
                 method.Invoke(unit,null);                    
                 clock.Stop();
 
 
-                messages.AddRange(unit.Dequeue());
-                messages.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
+                collected.AddRange(unit.Dequeue());
+                collected.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
@@ -334,15 +334,15 @@ namespace Z0
             catch(Exception e)
             {                
                 clock.Stop();
-                messages.AddRange(unit.Dequeue());                
-                messages.AddRange(CreateErrorMessages(casename, e));
+                collected.AddRange(unit.Dequeue());                
+                collected.AddRange(CreateErrorMessages(casename, e));
              
                 cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
             }
             finally
             {     
-                Messages.emit(Context, messages);
-                iter(messages,print);       
+                Messages.emit(Context, collected);
+                iter(collected,print);       
                 //print(messages);
             }
             return exectime;

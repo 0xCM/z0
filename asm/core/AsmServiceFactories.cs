@@ -99,10 +99,6 @@ namespace Z0
             => ByteParser<EncodingPatternKind>.Create(context, EncodingPatterns.Default,  buffer);
 
         [MethodImpl(Inline)]
-        public static IAsmBaseAddressProvider BaseAddressProvider(this IAsmContext context, params MemoryAddress[] addresses)
-            => AsmBaseAddressProvider.Create(context,addresses);
-
-        [MethodImpl(Inline)]
         public static IAsmOpExtractor OpExtractor(this IAsmContext context)
             => AsmOpExtractor.Create(context);
 
@@ -179,8 +175,22 @@ namespace Z0
         /// <param name="dst">The target path</param>
         /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
         [MethodImpl(Inline)]
-        public static IAsmEncodingWriter RawWriter(this IAsmContext context, FilePath dst)
+        public static IAsmEncodingWriter EncodingWriter(this IAsmContext context, FilePath dst)
             => AsmEncodingWriter.Create(context, dst);
+
+        [MethodImpl(Inline)]
+        public static IAsmHostAddresses HostAddressService(this IAsmContext src)
+            => AsmHostAddresses.Create(src);
+
+        [MethodImpl(Inline)]
+        public static IAsmAssemblyAddresses AssemblyAddressService(this IAsmContext src)
+            => AsmAssemblyAddresses.Create(src);
+
+        public static IEnumerable<OpAddress> OpAddresses(this IAsmContext context, AssemblyId src)
+            => context.ResolvedAssembly(src).MapValueOrElse(a => AsmAssemblyAddresses.Create(context).Addresses(a), () => array<OpAddress>());
+
+        public static IEnumerable<OpAddress> OpAddresses(this IAsmContext context, Type host)
+            => AsmHostAddresses.Create(context).Addresses(host);
 
         public static AsmCaptureExchange CaptureExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
         {

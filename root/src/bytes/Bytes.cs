@@ -99,48 +99,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reads a generic value from the head of a source span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static T cell<T>(ReadOnlySpan<byte> src)
-            where T : unmanaged        
-                => MemoryMarshal.Read<T>(src);
-
-        /// <summary>
-        /// Reads a generic value beginning at a specified offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The index at which span consumption should begin</param>
-        /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static T cell<T>(ReadOnlySpan<byte> src, int offset)
-            where T : unmanaged        
-                => MemoryMarshal.Read<T>(src.Slice(offset));
-
-        /// <summary>
-        /// Reads a generic value from the head of a source span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static T cell<T>(Span<byte> src)
-            where T : unmanaged           
-                => MemoryMarshal.Read<T>(src);
-
-        /// <summary>
-        /// Reads an unmanaged generic value from a bytespan beginning at a specified offset
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The source array offset</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static T cell<T>(Span<byte> src, int offset)
-            where T : unmanaged
-                => MemoryMarshal.Read<T>(src.Slice(offset));
-   
-        /// <summary>
         /// Writes an unmanaged source value to an array
         /// </summary>
         /// <param name="src">The source value</param>
@@ -186,14 +144,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ulong read64(in byte src)
             => *(ulong*)constptr(in src);
-
-    }
-
-    partial class RootX
-    {
-        [MethodImpl(Inline)]
-        public static IByteReader ByteReader(this IContext context)
-            => Z0.ByteReader.Create(context);        
-
     }
 }

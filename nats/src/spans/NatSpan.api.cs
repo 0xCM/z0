@@ -73,7 +73,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(src.Length < nati<N>())
-                errors.ThrowBadSize(nati<N>(), src.Length);      
+                Errors.ThrowBadSize(nati<N>(), src.Length);      
 
             return new NatSpan<N, T>(src);
         }

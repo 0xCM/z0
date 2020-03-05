@@ -62,7 +62,7 @@ namespace Z0
         /// <typeparam name="T">The data type</typeparam>
         public static T TakeSingle<T>(int offset)
             where T : unmanaged
-                => Z0.Bytes.cell<T>(Bytes, VerifyIndex<T>(offset));
+                => Cells.cell<T>(Bytes, VerifyIndex<T>(offset));
 
         /// <summary>
         /// Acauires a readonly span of values from the embedded source
@@ -90,7 +90,7 @@ namespace Z0
                 return offset;
             else
             {
-                errors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
+                Errors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
                 return 0;
             }
         }

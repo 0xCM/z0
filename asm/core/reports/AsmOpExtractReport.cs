@@ -27,7 +27,7 @@ namespace Z0
 
     public readonly struct AsmOpExtractRecord : IRecord<F, R>
     {
-        public AsmOpExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, EncodedData Data)
+        public AsmOpExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, MemoryEncoding Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -53,7 +53,7 @@ namespace Z0
         public readonly string OpSig;
 
         [ReportField(F.Data)]
-        public readonly EncodedData Data;
+        public readonly MemoryEncoding Data;
 
         public string DelimitedText(char sep)
         {

@@ -19,7 +19,7 @@ namespace Z0
         {                    
             var extracts = list<AsmHostExtract>();            
             var paths = Context.EmissionPaths();                    
-            var workflow = Context.HostCaptureFlow();
+            var workflow = Context.HostCapture();
             var memcap = Context.MemoryCapture();
             var memfail = list<OpUri>();
             foreach(var extract in workflow.Execute())
@@ -38,7 +38,7 @@ namespace Z0
             }   
 
             foreach(var fail in memfail)
-                Trace($"Memory capture failed for {fail}");
+                Trace(AppMsg.Warn($"Memory capture failed for {fail}"));
         }
 
         bool MemcapCheck(IAsmMemoryCapture memcap, AsmCode src)

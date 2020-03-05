@@ -28,15 +28,6 @@ partial class zfunc
     public static void print(AppMsg content)
         => term.print(content);
 
-    /// <summary>
-    /// Writes a single line to the terminal
-    /// </summary>
-    /// <param name="content">The message to print</param>    
-    public static void print(object content)
-        => term.print(content);
-
-    public static void print(string content, AppMsgKind severity)
-        => term.print(content,severity);
     
     /// <summary>
     /// Prints a sequence of messages in an unbroken block
@@ -117,7 +108,7 @@ partial class zfunc
     /// <param name="content">The message to emit</param>
     /// <param name="caller">The calling member</param>
     public static void babble(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        => term.babble(content,caller,file,line);
+        => term.babble(content);
 
     /// <summary>
     /// Emits message to the error output stream

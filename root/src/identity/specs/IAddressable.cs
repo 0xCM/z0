@@ -3,18 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    [Ignore]
-    sealed class EmptyDesignator : AssemblyResolution<EmptyDesignator>
+    /// <summary>
+    /// Characterizes an address-identified target
+    /// </summary>
+    public interface IAddressable
     {
-
-        public EmptyDesignator()
-        {
-
-        }
-
-        public override AssemblyId Id => AssemblyId.None;
-    }
+        MemoryAddress Address {get;}
+    }        
 }

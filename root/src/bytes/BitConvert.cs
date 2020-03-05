@@ -47,27 +47,27 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static short ToInt16(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.cell<short>(src, offset);
+            => Cells.cell<short>(src, offset);
 
         [MethodImpl(Inline), Op]
         public static ushort ToUInt16(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.cell<ushort>(src, offset);
+            => Cells.cell<ushort>(src, offset);
 
         [MethodImpl(Inline), Op]
         public static int ToInt32(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.cell<int>(src,offset);
+            => Cells.cell<int>(src,offset);
 
         [MethodImpl(Inline), Op]
         public static uint ToUInt32(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.cell<uint>(src,offset);
+            => Cells.cell<uint>(src,offset);
 
         [MethodImpl(Inline), Op]
         public static long ToInt64(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.cell<long>(src, offset);
+            => Cells.cell<long>(src, offset);
         
         [MethodImpl(Inline), Op]
         public static ulong ToUInt64(ReadOnlySpan<byte> src, int offset = 0)
-            => Bytes.cell<ulong>(src, offset);
+            => Cells.cell<ulong>(src, offset);
 
         [MethodImpl(Inline), Op]
         public static float ToSingle(int src)

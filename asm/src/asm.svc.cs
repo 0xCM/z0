@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
         public static IAsmAssemblyArchiver Archiver(this IAsmContext context)
-            => AsmArchiver.Create(context);
+            => AsmAssemblyArchiver.Create(context);
 
         /// <summary>
         /// Instantiates a contextual immediate capture service for a unary operator
@@ -94,8 +94,8 @@ namespace Z0
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmHostCapture HostCaptureFlow(this IAsmContext context)
-            => AsmHostCaptureFlow.Create(context);
+        public static IAsmHostCapture HostCapture(this IAsmContext context)
+            => AsmHostCapture.Create(context);
  
         [MethodImpl(Inline)]
         public static IAsmMemoryCapture MemoryCapture(this IAsmContext context)

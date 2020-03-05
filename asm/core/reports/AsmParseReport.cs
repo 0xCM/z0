@@ -31,15 +31,15 @@ namespace Z0
 
     public readonly struct AsmParseRecord : IRecord<F, R>
     {                        
-        public static AsmParseRecord Empty => Define(0, MemoryAddress.Zero, 0, CaptureTermCode.None, OpUri.Empty, text.blank, EncodedData.Empty);
+        public static AsmParseRecord Empty => Define(0, MemoryAddress.Zero, 0, CaptureTermCode.None, OpUri.Empty, text.blank, MemoryEncoding.Empty);
         
         public static implicit operator ParsedEncoding(AsmParseRecord src)
             => src.ToParsedEncoding();
 
-        public static AsmParseRecord Define(int Sequence, MemoryAddress Address, int Length, CaptureTermCode TermCode, OpUri Uri, string OpSig, EncodedData Data)
+        public static AsmParseRecord Define(int Sequence, MemoryAddress Address, int Length, CaptureTermCode TermCode, OpUri Uri, string OpSig, MemoryEncoding Data)
             => new AsmParseRecord(Sequence, Address, Length, TermCode, Uri,OpSig,Data);
         
-        AsmParseRecord(int Sequence, MemoryAddress Address, int Length, CaptureTermCode TermCode, OpUri Uri, string OpSig, EncodedData Data)
+        AsmParseRecord(int Sequence, MemoryAddress Address, int Length, CaptureTermCode TermCode, OpUri Uri, string OpSig, MemoryEncoding Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -69,7 +69,7 @@ namespace Z0
         public string OpSig {get; }
 
         [ReportField(F.Data)]
-        public EncodedData Data {get; }
+        public MemoryEncoding Data {get; }
 
         public dynamic this[F f]
         {

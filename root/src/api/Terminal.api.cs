@@ -24,9 +24,9 @@ namespace Z0
         /// <summary>
         /// Writes a single messages to the terminal
         /// </summary>
-        /// <param name="content">The message to print</param>    
-        public static void print(AppMsg content)
-            => T.WriteMessage(content);
+        /// <param name="msg">The message to print</param>    
+        public static void print(AppMsg msg)
+            => T.WriteMessage(msg);
 
         /// <summary>
         /// Writes a single line to the terminal
@@ -34,9 +34,6 @@ namespace Z0
         /// <param name="content">The message to print</param>    
         public static void print(object content)
             => T.WriteLine(content, AppMsgKind.Info);
-
-        public static void print(string content, AppMsgKind severity)
-            => T.WriteLine(content, severity);
         
         /// <summary>
         /// Prints a sequence of messages in an unbroken block
@@ -85,7 +82,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void magenta(string title, object content)
-            => T.WriteMessage(AppMsg.Define( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgKind.HiliteML));
+            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
 
         /// <summary>
         /// Emits an information-level message with a magenta foreground
@@ -93,7 +90,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void magenta(object content)
-            => T.WriteMessage(AppMsg.Define( content?.ToString() ?? string.Empty, AppMsgKind.HiliteML));
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
 
         /// <summary>
         /// Emits an information-level message with a cyan foreground
@@ -115,9 +112,8 @@ namespace Z0
         /// Emits a verbose-level message
         /// </summary>
         /// <param name="content">The message to emit</param>
-        /// <param name="caller">The calling member</param>
-        public static void babble(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.Babble, caller, file, line));
+        public static void babble(object content)
+            => T.WriteMessage(AppMsg.Babble(content?.ToString() ?? string.Empty));
 
         /// <summary>
         /// Emits message to the error output stream
@@ -125,7 +121,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteError(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.Error, caller, file, line));
+            => T.WriteMessage(AppMsg.Error(content?.ToString() ?? string.Empty, caller, file, line));
 
         /// <summary>
         /// Emits a message to the error output stream
@@ -133,6 +129,6 @@ namespace Z0
         /// <param name="e">The raised exception</param>
         /// <param name="title">The name/context of the error</param>
         public static void error(Exception e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteError(AppMsg.Define($"{title} | {e}", AppMsgKind.Error, caller, file, line));
+            => T.WriteMessage(AppMsg.Error($"{title} | {e}", caller, file, line));
     }
 }

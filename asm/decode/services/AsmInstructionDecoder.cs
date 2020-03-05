@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The code source</param>
         [MethodImpl(Inline)]
-        public Option<AsmInstructionList> DecodeInstructions(EncodedData src)        
+        public Option<AsmInstructionList> DecodeInstructions(MemoryEncoding src)        
             => Context.DecodeInstructions(src);
     }
 }

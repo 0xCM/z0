@@ -16,7 +16,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     
-    public static class errors
+    public static class Errors
     {        
         const string Unknown = "???";
         
@@ -33,7 +33,7 @@ namespace Z0
             => throw AppException.Define(msg);
 
         public static AppException InvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.InvariantFailure(description, caller, file, line));
+            => AppException.Define(Messages.InvariantFailure(description, caller, file, line));
 
         public static void ThrowInvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw InvariantFailure(description, caller, file, line);
@@ -45,13 +45,13 @@ namespace Z0
         }
 
         public static AppException FeatureUnsupported(object feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.FeatureUnsupported(feature, caller, file, line));
+            => AppException.Define(Messages.FeatureUnsupported(feature, caller, file, line));
         
         public static void ThrowFeatureUnsupported(string feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw FeatureUnsupported(feature, caller, file, line);
 
         public static AppException NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.NotEqual(lhs,rhs,caller,file,line));
+            => AppException.Define(Messages.NotEqual(lhs,rhs,caller,file,line));
 
         public static void ThrowNotEqual<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw NotEqual(lhs,rhs,caller,file,line);
@@ -63,64 +63,64 @@ namespace Z0
             => throw AppException.Define(msg.WithPrependedContent($"Equality failure, {lhs} != {rhs}:"));
 
         public static AppException Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.Equal(lhs,rhs,caller,file,line));
+            => AppException.Define(Messages.Equal(lhs,rhs,caller,file,line));
 
         public static AppException NotLessThan(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.NotLessThan(lhs,rhs,caller,file,line));
+            => AppException.Define(Messages.NotLessThan(lhs,rhs,caller,file,line));
 
         public static AppException ItemsNotEqual(int index, object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.ItemsNotEqual(index, lhs,rhs,caller,file,line));
+            => AppException.Define(Messages.ItemsNotEqual(index, lhs,rhs,caller,file,line));
 
         public static AppException NotNonzero([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.NotNonzero(caller,file,line));
+            => AppException.Define(Messages.NotNonzero(caller,file,line));
         
         public static AppException NotTrue(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.NotTrue(msg,caller,file,line));
+            => AppException.Define(Messages.NotTrue(msg,caller,file,line));
 
         public static AppException NotFalse(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.NotFalse(msg,caller,file,line));
+            => AppException.Define(Messages.NotFalse(msg,caller,file,line));
 
         public static AppException CountMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.CountMismatch(lhs,rhs,caller,file,line));
+            => AppException.Define(Messages.CountMismatch(lhs,rhs,caller,file,line));
 
         public static void ThrowCountMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw CountMismatch(lhs,rhs, caller,file,line);
 
         public static AppException LengthMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.LengthMismatch(lhs,rhs,caller,file,line));
+            => AppException.Define(Messages.LengthMismatch(lhs,rhs,caller,file,line));
 
         public static AppException EmptySourceSpan([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.EmptySourceSpan(caller,file,line));
+            => AppException.Define(Messages.EmptySourceSpan(caller,file,line));
 
         public static AppException NonGenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.NonGenericMethod(method,caller,file,line));
+            => AppException.Define(Messages.NonGenericMethod(method,caller,file,line));
 
         public static AppException GenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.GenericMethod(method,caller,file,line));
+            => AppException.Define(Messages.GenericMethod(method,caller,file,line));
 
         public static AppException KindUnsupported<T>(T kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : Enum
-                => AppException.Define(messages.KindUnsupported(kind, caller, file, line));
+                => AppException.Define(Messages.KindUnsupported(kind, caller, file, line));
 
         public static AppException TypeUnsupported(Type t, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.TypeUnsupported(t, caller, file, line));  
+            => AppException.Define(Messages.TypeUnsupported(t, caller, file, line));  
 
         public static AppException TypeUnsupported<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => TypeUnsupported(typeof(T), caller, file, line);
 
         public static AppException FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(messages.FileDoesNotExist(path, caller, file, line));
+            => AppException.Define(Messages.FileDoesNotExist(path, caller, file, line));
 
         public static AppException KindOpUnsupported<S,T>(S src, T dst, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where S : Enum
             where T : Enum
-                => AppException.Define(messages.KindOpUnsupported(src,dst, caller, file, line));
+                => AppException.Define(Messages.KindOpUnsupported(src,dst, caller, file, line));
 
         public static IndexOutOfRangeException TooManyBytes(ByteSize requested, ByteSize available, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new IndexOutOfRangeException(messages.TooManyBytes(requested, available, caller, file, line).ToString());
+            => new IndexOutOfRangeException(Messages.TooManyBytes(requested, available, caller, file, line).ToString());
 
         public static IndexOutOfRangeException IndexOutOfRange(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new IndexOutOfRangeException(messages.IndexOutOfRange(index, min, max, caller, file, line).ToString());
+            => new IndexOutOfRangeException(Messages.IndexOutOfRange(index, min, max, caller, file, line).ToString());
 
         public static IndexOutOfRangeException IndexOutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");

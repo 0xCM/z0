@@ -13,23 +13,23 @@ namespace Z0
     {
         readonly MemoryAddress Source;
         
-        public readonly EncodedData Raw;
+        public readonly MemoryEncoding Raw;
 
-        public readonly EncodedData Parsed;
+        public readonly MemoryEncoding Parsed;
 
         [MethodImpl(Inline)]
         public static AsmCaptureBits Define(MemoryAddress src, byte[] raw, byte[] parsed)
             => new AsmCaptureBits(src, raw,parsed);
 
         [MethodImpl(Inline)]
-        public static AsmCaptureBits Define(MemoryAddress src, EncodedData raw, EncodedData parsed)
+        public static AsmCaptureBits Define(MemoryAddress src, MemoryEncoding raw, MemoryEncoding parsed)
             => new AsmCaptureBits(src, raw,parsed);
 
         [MethodImpl(Inline)]
-        AsmCaptureBits(MemoryAddress src, EncodedData raw, EncodedData parsed)
+        AsmCaptureBits(MemoryAddress src, MemoryEncoding raw, MemoryEncoding parsed)
         {
-            require(src.Equals(raw.BaseAddress));
-            require(src.Equals(parsed.BaseAddress));
+            require(src.Equals(raw.Address));
+            require(src.Equals(parsed.Address));
             
             this.Source = src;
             this.Raw = raw;
@@ -40,8 +40,8 @@ namespace Z0
         AsmCaptureBits(MemoryAddress src, byte[] raw, byte[] parsed)
         {
             this.Source = src;
-            this.Raw = EncodedData.Define(src, raw);
-            this.Parsed = EncodedData.Define(src, parsed);
+            this.Raw = MemoryEncoding.Define(src, raw);
+            this.Parsed = MemoryEncoding.Define(src, parsed);
         }
     }
 }

@@ -15,19 +15,18 @@ namespace Z0
     using static AsmServiceMessages;
     using static Root;
 
-    readonly struct AsmHostCaptureFlow : IAsmHostCapture
+    readonly struct AsmHostCapture : IAsmHostCapture
     {
         public IAsmContext Context {get;}
 
         public HashSet<AssemblyId> Selected {get;}
 
-
         [MethodImpl(Inline)]
         public static IAsmHostCapture Create(IAsmContext context, params AssemblyId[] selected)
-            => new AsmHostCaptureFlow(context,selected);
+            => new AsmHostCapture(context,selected);
 
         [MethodImpl(Inline)]
-        AsmHostCaptureFlow(IAsmContext context, AssemblyId[] selected)
+        AsmHostCapture(IAsmContext context, AssemblyId[] selected)
         {
             this.Context = context;
             this.Selected = selected.Length == 0 ? context.Assemblies.ToHashSet() : selected.ToHashSet();
@@ -63,7 +62,6 @@ namespace Z0
             var f = decoder.DecodeFunction(src);
             dst.Write(f);
             return f;
-
         }
 
         static void EmitCil(Assembly src)

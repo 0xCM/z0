@@ -17,14 +17,14 @@ namespace Z0
 
         public readonly CaptureTermCode TermCode;
 
-        public readonly EncodedData ParsedData;   
+        public readonly MemoryEncoding ParsedData;   
 
         [MethodImpl(Inline)]
-        public static ParsedEncoding Define(OpDescriptor op, CaptureTermCode term, EncodedData parsed)
+        public static ParsedEncoding Define(OpDescriptor op, CaptureTermCode term, MemoryEncoding parsed)
             => new ParsedEncoding(op,term,parsed);
 
         [MethodImpl(Inline)]
-        ParsedEncoding(OpDescriptor op, CaptureTermCode term, EncodedData parsed)
+        ParsedEncoding(OpDescriptor op, CaptureTermCode term, MemoryEncoding parsed)
         {
             this.Operation = op;
             this.ParsedData = parsed;

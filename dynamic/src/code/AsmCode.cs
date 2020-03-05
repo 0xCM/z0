@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static AsmCode Empty => new AsmCode(OpIdentity.Empty, EncodedData.Empty);
+        public static AsmCode Empty => new AsmCode(OpIdentity.Empty, MemoryEncoding.Empty);
 
         /// <summary>
         /// The assigned identity
@@ -35,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The data, encoded
         /// </summary>
-        public readonly EncodedData Data;
+        public readonly MemoryEncoding Data;
         
         public MemoryAddress BaseAddress 
             => AddressRange.Start;
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="id">The operation identifier</param>
         /// <param name="data">The encoded data</param>
         [MethodImpl(Inline)]
-        public static AsmCode Define(OpIdentity id, EncodedData data)
+        public static AsmCode Define(OpIdentity id, MemoryEncoding data)
             => new AsmCode(id, data);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="data">The encoded bytes</param>
         [MethodImpl(Inline)]
         public static AsmCode Define(OpIdentity id, MemoryAddress @base, byte[] data)
-            => new AsmCode(id, EncodedData.Define(@base,data));
+            => new AsmCode(id, MemoryEncoding.Define(@base,data));
 
 
         public ReadOnlySpan<byte> Bytes
@@ -88,14 +88,14 @@ namespace Z0
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
         public static AsmCode Parse(OpIdentity id, string data)
-            => Define(id, EncodedData.Define(Hex.parsebytes(data).ToArray()));
+            => Define(id, MemoryEncoding.Define(Hex.parsebytes(data).ToArray()));
                 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)
             => code.Bytes;
 
         [MethodImpl(Inline)]
-        internal AsmCode(OpIdentity id, EncodedData encoded)
+        internal AsmCode(OpIdentity id, MemoryEncoding encoded)
         {
             this.Id = id;
             this.AddressRange = encoded.AddressRange;

@@ -15,7 +15,7 @@ namespace Z0
 
     public static class AssemblyResolutions
     {
-        public static IAssemblyResolution Empty => new EmptyDesignator();
+        public static IAssemblyResolution Empty => new EmptyResolution();
 
         /// <summary>
         /// Returns a useful assembly designator where one can be found; otherwise, returns the empty designator

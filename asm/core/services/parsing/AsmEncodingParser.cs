@@ -37,15 +37,15 @@ namespace Z0
             : this(context, new byte[bufferlen ?? context.DefaultBufferLength])
         {}
 
-        public Option<EncodedData> Parse(EncodedData src)
+        public Option<MemoryEncoding> Parse(MemoryEncoding src)
         {
             var parser = Context.PatternParser(Buffer.Clear());
             var status = parser.Parse(src);            
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
             return succeeded 
-                ? EncodedData.Define(src.BaseAddress, parser.Parsed.ToArray()) 
-                : none<EncodedData>();
+                ? MemoryEncoding.Define(src.Address, parser.Parsed.ToArray()) 
+                : none<MemoryEncoding>();
         }               
     }
 

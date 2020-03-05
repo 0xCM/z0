@@ -13,13 +13,13 @@ namespace Z0
     /// <summary>
     /// Defines the address of an identififed member operation
     /// </summary>
-    public readonly struct OpAddress
+    public readonly struct OpAddress : IAddressable
     {
         public readonly OpIdentity Id;
 
         public readonly MethodInfo Source;
 
-        public readonly MemoryAddress Address;
+        public MemoryAddress Address {get;}
 
         [MethodImpl(Inline)]
         public static OpAddress Define(OpIdentity id, MethodInfo src, MemoryAddress address)

@@ -26,7 +26,7 @@ namespace Z0
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(count, src.Length - offset);
-            PolyData.copy(src.Bits, offset, len, dst);
+            Cells.copy(src.Bits, offset, len, dst);
             return bitpack.pack<T>(dst);
         }
 
@@ -41,7 +41,7 @@ namespace Z0
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(dst.Length, src.Length - offset);
-            PolyData.copy(src.Bits, offset, len, dst);
+            Cells.copy(src.Bits, offset, len, dst);
             return bitpack.pack<T>(dst);
         }
 
@@ -56,7 +56,7 @@ namespace Z0
         {            
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(dst.Length, src.Length);
-            PolyData.copy(src.Bits, 0, len, dst);
+            Cells.copy(src.Bits, 0, len, dst);
             return bitpack.pack<T>(dst);
         }
 
@@ -98,7 +98,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x6);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
+            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z8i);
         }
 
@@ -108,7 +108,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x6);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
+            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z8);
         }
 
@@ -118,7 +118,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x7);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
+            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z16i);
         }
 
@@ -128,7 +128,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x7);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
+            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z16);
         }
 
@@ -138,7 +138,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x8);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
+            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z32i);
         }
 
@@ -158,7 +158,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x9);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
+            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked, z64i);
         }
 
@@ -168,7 +168,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x9);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            PolyData.copy(in skip(src.Bits, offset), ref dst, count);        
+            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked, z64);
         }
     }

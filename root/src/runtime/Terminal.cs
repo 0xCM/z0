@@ -26,7 +26,7 @@ namespace Z0
      
         Option<Action> TerminationHandler;
 
-        private Terminal()
+        Terminal()
         {
              locker = new object();
              Console.OutputEncoding = new UnicodeEncoding();      
@@ -41,10 +41,10 @@ namespace Z0
         public void SetTerminationHandler(Action handler)
             => TerminationHandler = handler;
 
-        private void OnCancelKeyPressed(object sender, ConsoleCancelEventArgs args)
+        void OnCancelKeyPressed(object sender, ConsoleCancelEventArgs args)
             => TerminationHandler.OnSome(h => h());
 
-        public void WriteLine(object src)
+        void WriteLine(object src)
         {
             lock(locker)
                 Console.WriteLine(src);
@@ -56,13 +56,13 @@ namespace Z0
                 Console.WriteLine();
         }
                 
-        public void Write(object src)
+        void Write(object src)
         {
             lock(locker)
                 Console.Write(src);
         }
         
-        public void WriteLine<T>(IEnumerable<T> items, string sep)
+        void WriteLine<T>(IEnumerable<T> items, string sep)
         {
             lock(locker)
             {
@@ -81,53 +81,46 @@ namespace Z0
                 Console.WriteLine();
             }
         }
-
-        public void WriteLine(object src, AppMsgKind level)
-            => WriteLine(src, (ConsoleColor)level);
             
-        public void WriteLine(object src, ConsoleColor color)
+        void WriteLine(object src, AppMsgColor color)
         {
             lock(locker)
             {
-                var fg = Console.ForegroundColor;
-                Console.ForegroundColor = color;                
+                var current = Console.ForegroundColor;
+                Console.ForegroundColor = (ConsoleColor)color;                
                 Console.WriteLine(src);
-                Console.ForegroundColor = fg;
+                Console.ForegroundColor = current;
             }
         }
 
-        void WriteError(object src, ConsoleColor color)
+        void WriteError(object src, AppMsgColor color)
         {
             lock(locker)
             {
-                var fg = Console.ForegroundColor;
-                Console.ForegroundColor = color;                
+                var current = Console.ForegroundColor;
+                Console.ForegroundColor = (ConsoleColor)color;                
                 Console.Error.Write(src);
                 Console.Error.Write(AsciEscape.Eol);
-                Console.ForegroundColor = fg;
+                Console.ForegroundColor = current;
             }
         }
 
-        public void WriteError(AppMsg msg)
+        public void WriteLine(object src, AppMsgKind kind)
         {
-            lock(locker)
-            {
-                var fg = Console.ForegroundColor;
-                Console.ForegroundColor = ForeColor(msg.Kind);                
-                Console.Error.Write(msg);
-                Console.Error.Write(AsciEscape.Eol);
-                Console.ForegroundColor = fg;
-            }
+            if(kind == AppMsgKind.Error) 
+                WriteError(src,(AppMsgColor)kind);
+            else
+                WriteLine(src, (AppMsgColor)kind);
         }
 
-        public void Write(object src, ConsoleColor color)
+        void Write(object src, ConsoleColor color)
         {
             lock(locker)
             {
-                var fg = Console.ForegroundColor;
+                var current = Console.ForegroundColor;
                 Console.ForegroundColor = color;
                 Console.Write(src);
-                Console.ForegroundColor = fg;
+                Console.ForegroundColor = current;
             }
         }
 
@@ -139,44 +132,40 @@ namespace Z0
         public void WriteChar(char c, AppMsgKind? severity = null)
             => Write(c, ForeColor(severity ?? AppMsgKind.Info));
 
-        public void WriteMessage(AppMsg msg, bool cr = true)
+        public void WriteMessage(AppMsg msg)
         {   
             if(msg.Kind == AppMsgKind.Error)
-                WriteError(msg, ForeColor(msg.Kind));
+                WriteError(msg, msg.Color);
             else
-            {
-                if(cr)
-                    WriteLine(msg, ForeColor(msg.Kind)); 
-                else
-                    Write(msg, ForeColor(msg.Kind));
-            }
+                WriteLine(msg, msg.Color); 
         }
                                 
         public void WriteMessages(IEnumerable<AppMsg> messages)
         {
             lock(locker)            
             {
-                var fg = Console.ForegroundColor;
+                var current = Console.ForegroundColor;
                 foreach(var msg in messages)
                 {
-                    Console.ForegroundColor = ForeColor(msg.Kind);
+                    Console.ForegroundColor = (ConsoleColor)msg.Color;
                     Console.WriteLine(msg);
+                    Console.ForegroundColor = current;
                 }                
-                Console.ForegroundColor = fg;
+                Console.ForegroundColor = current;
             }            
         }
 
         public string ReadLine(AppMsg msg = null)
         {
              if(msg != null)
-                WriteMessage(msg,false);
+                WriteMessage(msg);
              return Console.ReadLine();
         }
 
         public char ReadKey(AppMsg msg = null)
         {
              if(msg != null)
-                WriteMessage(msg,false);
+                WriteMessage(msg);
               
             return Console.ReadKey().KeyChar;
         }

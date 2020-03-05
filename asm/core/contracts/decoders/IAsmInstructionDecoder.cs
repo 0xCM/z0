@@ -20,6 +20,6 @@ namespace Z0
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        Option<AsmInstructionList> DecodeInstructions(EncodedData src);        
+        Option<AsmInstructionList> DecodeInstructions(MemoryEncoding src);        
     }
 }

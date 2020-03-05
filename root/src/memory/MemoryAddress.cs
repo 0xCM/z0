@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MemoryAddress : IIdentity<MemoryAddress>
+    public readonly struct MemoryAddress : IIdentity<MemoryAddress>, IAddressable
     {
         public static MemoryAddress Zero => default;
 
@@ -23,6 +23,12 @@ namespace Z0
 
         public string Identifier 
             => Location.ToString("x") + "h";
+
+        MemoryAddress IAddressable.Address 
+        {
+            [MethodImpl(Inline)]
+            get => this;
+        }
 
         [MethodImpl(Inline)]
         public static MemoryAddress Define(long location)

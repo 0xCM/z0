@@ -115,6 +115,6 @@ namespace Z0
         public static int length<T>(ReadOnlyMemory<T> lhs, ReadOnlyMemory<T> rhs,  [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
                 => lhs.Length == rhs.Length ? lhs.Length 
-                    : throw errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+                    : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
     }
 }

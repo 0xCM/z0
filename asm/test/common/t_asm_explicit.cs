@@ -45,7 +45,7 @@ namespace Z0
         protected static IAsmEncodingWriter RawTestWriter(IAsmContext context, [Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Raw);    
-            return  context.RawWriter(dst);
+            return  context.EncodingWriter(dst);
         }
 
         protected static IAsmFunctionWriter AsmTestWriter(IAsmContext context, [Caller] string test = null)
