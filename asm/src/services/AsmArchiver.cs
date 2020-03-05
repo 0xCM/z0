@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
     
-    readonly struct AsmArchiver :  IAsmArchiver
+    readonly struct AsmArchiver :  IAsmAssemblyArchiver
     {                
         public IAsmContext Context {get;}
 

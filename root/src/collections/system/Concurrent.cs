@@ -11,18 +11,18 @@ namespace Z0
     using System.Linq;
     using System.Threading.Tasks;
     using System.Runtime.CompilerServices;
-    
-    using static zfunc;
 
-    partial class xfunc
+    
+    using static Root;
+    
+    partial class SystemCollections
     {
         /// <summary>
-        /// A <see cref="ConcurrentDictionary{TKey, TValue}"/> constructor function
+        /// Creates a concurrent dictionary from an ordinary dictionary
         /// </summary>
         /// <typeparam name="K">The key type</typeparam>
         /// <typeparam name="V">The value type</typeparam>
         /// <param name="d">The source dictionary</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static ConcurrentDictionary<K, V> ToConcurrentDictionary<K, V>(this IDictionary<K, V> d)
             => new ConcurrentDictionary<K, V>(d);
@@ -70,16 +70,6 @@ namespace Z0
                     : none<V>());
 
         /// <summary>
-        /// Adds a collection of items to a bag
-        /// </summary>
-        /// <typeparam name="T">The item type</typeparam>
-        /// <param name="bag">The destination bag</param>
-        /// <param name="items">The items to add</param>
-        [MethodImpl(Inline)]
-        public static void AddRange<T>(this ConcurrentBag<T> bag, IEnumerable<T> items)
-            => items.Iter(item => bag.Add(item));
-
-        /// <summary>
         /// A functional rendition of <see cref="ConcurrentBag{T}.TryTake(out T)"/> 
         /// </summary>
         /// <typeparam name="T">The item type</typeparam>
@@ -87,60 +77,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<T> TryTake<T>(this ConcurrentBag<T> source)
             => (source.TryTake(out T element)) ? some(element) : none<T>();
-
-        /// <summary>
-        /// Pops all items off the queue
-        /// </summary>
-        /// <typeparam name="T">The type of value contained int he queue</typeparam>
-        /// <param name="q">The queue to manipulate</param>
-        /// <returns></returns>
-        public static IEnumerable<T> Dequeue<T>(this ConcurrentQueue<T> q)
-        {
-            var item = default(T);
-            var go = true;
-            while (go)
-            {
-                if (q.TryDequeue(out item))
-                    yield return item;
-                else
-                    go = false;
-            }
-        }
-
-        /// <summary>
-        /// Pushes a sequence of items into queue and returns the number of items enqueued
-        /// </summary>
-        /// <typeparam name="T">The item type</typeparam>
-        /// <param name="q">The queue to manipulate</param>
-        /// <param name="items">The items to place on the qeeue</param>
-        public static int Enqueue<T>(this ConcurrentQueue<T> q, IEnumerable<T> items)
-        {
-            int count = 0;
-            foreach (var item in items)
-            {
-                q.Enqueue(item);
-                count++;
-            }
-            return count;
-        }
-
-        /// <summary>
-        /// Pops a sequence of items off a queue
-        /// </summary>
-        /// <typeparam name="T">The item type</typeparam>
-        /// <param name="q">The queue to manipulate</param>
-        /// <param name="max">The maximum number of items to remove</param>
-        /// <returns></returns>
-        public static IEnumerable<T> Dequeue<T>(this ConcurrentQueue<T> q, int max)
-            => q.Dequeue().Take(max);
-
-        /// <summary>
-        /// Removes an element from the queue if one exists
-        /// </summary>
-        /// <typeparam name="T">The element type</typeparam>
-        /// <param name="q">the queue</param>
-        /// <returns></returns>
-        public static Option<T> TryPop<T>(this ConcurrentQueue<T> q)
-            => q.TryDequeue(out T next) ? some(next) : none<T>();
     }
 }

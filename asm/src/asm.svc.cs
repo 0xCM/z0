@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmArchiver Archiver(this IAsmContext context)
+        public static IAsmAssemblyArchiver Archiver(this IAsmContext context)
             => AsmArchiver.Create(context);
 
         /// <summary>

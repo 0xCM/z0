@@ -31,7 +31,7 @@ namespace Z0
                     ? gmath.negate(gmath.sar(maxval<T>(), 1)) 
                     : minval<T>();                        
                 
-                var max =  Numeric.signed<T>() 
+                var max = Numeric.signed<T>() 
                     ? gmath.sar(maxval<T>(), 1) 
                     : maxval<T>();
 
