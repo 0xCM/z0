@@ -25,15 +25,4 @@ namespace Z0
                 throw unsupported<T>();
         }
     }
-
-    partial class fmath
-    {
-        [MethodImpl(Inline), Op]
-        public static float sub(float a, float b)
-            => a - b;
-
-        [MethodImpl(Inline), Op]
-        public static double sub(double a, double b)
-            => a - b;
-    }    
 }

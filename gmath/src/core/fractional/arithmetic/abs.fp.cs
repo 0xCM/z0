@@ -84,30 +84,4 @@ namespace Z0
         public ulong Integral;
 
     }
-
-    partial class fmath
-    {
-        const uint Float32SignMask = 0x7fffffff;
-        const ulong Float64SignMask = 0x7fffffffffffffff;
-
-        /// <summary>
-        /// Computes the absolute value of the source
-        /// </summary>
-        /// <param name="a">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float abs(float a)
-        {
-            var bits =  Float32Bits.Define(a);
-            bits.Integral &= Float32SignMask;
-            return bits.Fractional;
-        }
-
-        /// <summary>
-        /// Computes the absolute value of the source
-        /// </summary>
-        /// <param name="a">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double abs(double a)
-            => Float64Bits.Abs(a);
-    }
 }

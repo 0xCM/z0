@@ -16,7 +16,7 @@ namespace Z0.Resolutions
         public override AssemblyId Id 
             => Identity;
 
-        public override IOperationCatalog Operations 
+        public override IOpCatalog Operations 
             => new Catalog(Identity);
     }
 }

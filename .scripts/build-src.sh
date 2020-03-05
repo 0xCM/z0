@@ -4,4 +4,5 @@ ProjectDir=$ZDev/$ProjectLoc
 
 cd $ProjectDir
 echo building $Project
-dotnet build
+dotnet build -bl:$ZDev/bin/z0.$ProjectId.binlog
+

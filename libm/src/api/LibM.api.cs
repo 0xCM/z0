@@ -11,7 +11,7 @@ namespace Z0
 	using System.Runtime.InteropServices;
     using System.Security;
 
-	using static zfunc;
+	using static Root;
     
     [ApiHost(ApiHostKind.Direct)]
     public static class libm

@@ -32,15 +32,4 @@ namespace Z0
                 throw unsupported<T>();
         }
    }
-
-    partial class fmath
-    {
-        [MethodImpl(Inline), Op]
-        public static float fma(float x, float y, float z)
-            => MathF.FusedMultiplyAdd(x,y,z);
-
-        [MethodImpl(Inline), Op]
-        public static double fma(double x, double y, double z)
-            => Math.FusedMultiplyAdd(x, y, z);
-    }    
 }

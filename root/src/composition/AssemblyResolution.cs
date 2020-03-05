@@ -49,10 +49,10 @@ namespace Z0
         public virtual IEnumerable<IAssemblyResolution> Designates {get;}
             = new IAssemblyResolution[]{};
 
-        public IOperationCatalog Catalog
-            =>(IOperationCatalog)CatalogProvider.Define(Id, Resolved, Operations);
+        public IOpCatalog Catalog
+            =>(IOpCatalog)OpCatalogProvider.Define(Id, Resolved, Operations);
 
-        public virtual IOperationCatalog Operations {get;}
+        public virtual IOpCatalog Operations {get;}
             = new EmptyCatalog();
 
         public string Format()
@@ -69,7 +69,7 @@ namespace Z0
         where T : AssemblyResolution<T,C>, new()
         where C : OpCatalog<C>, new()
     {
-        public override IOperationCatalog Operations  => new C();
+        public override IOpCatalog Operations  => new C();
 
         protected AssemblyResolution(AssemblyId id)
             : base(id)

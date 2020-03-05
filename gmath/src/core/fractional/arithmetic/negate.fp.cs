@@ -25,22 +25,4 @@ namespace Z0
         }
     }
 
-    partial class fmath
-    {
-        /// <summary>
-        /// Negates the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float negate(float src)
-            => -src;
-
-        /// <summary>
-        /// Negates the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double negate(double src)
-            => -src;
-    }    
 }

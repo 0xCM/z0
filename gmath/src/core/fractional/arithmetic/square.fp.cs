@@ -29,29 +29,7 @@ namespace Z0
     partial class fmath
     {
 
-        [MethodImpl(Inline), Op]
-        public static float square(float src)
-            => fmath.mul(src,src);
 
-        [MethodImpl(Inline), Op]
-        public static double square(double src)
-            => fmath.mul(src,src);
-
-        /// <summary>
-        /// Computes the square root of the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float sqrt(float src)
-            => MathF.Sqrt(src);
-
-        /// <summary>
-        /// Computes the square root of the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double sqrt(double src)
-            => Math.Sqrt(src); 
     }
 
 }

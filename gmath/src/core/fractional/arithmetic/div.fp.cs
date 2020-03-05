@@ -42,23 +42,4 @@ namespace Z0
                 throw unsupported<T>();
         }
     }
-
-    partial class fmath
-    {
-        [MethodImpl(Inline), Op]
-        public static float div(float a, float b)
-            => a / b;
-
-        [MethodImpl(Inline), Op]
-        public static double div(double a, double b)
-            => a / b;
-
-        [MethodImpl(Inline), Op]
-        public static bit divides(float a, float b)
-            => b % a == 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit divides(double a, double b)
-            => b % a == 0;
-    }    
 }

@@ -25,14 +25,4 @@ namespace Z0
         }
     }
 
-    partial class fmath
-    {
-        [MethodImpl(Inline)]
-        public static float round(float src, int scale)
-            => MathF.Round(src, scale);
-
-        [MethodImpl(Inline)]
-        public static double round(double src, int scale)
-            => Math.Round(src, scale);
-    }    
 }

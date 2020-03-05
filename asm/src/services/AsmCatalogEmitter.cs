@@ -16,18 +16,18 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        readonly IOperationCatalog Catalog;
+        readonly IOpCatalog Catalog;
 
         readonly IAsmFunctionDecoder Decoder;
 
         readonly AsmEmissionObserver Observer;
 
         [MethodImpl(Inline)]
-        public static IAsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog, AsmEmissionObserver observer)
+        public static IAsmCatalogEmitter Create(IAsmContext context, IOpCatalog catalog, AsmEmissionObserver observer)
             => new AsmCatalogEmitter(context,catalog,observer);
 
         [MethodImpl(Inline)]
-        AsmCatalogEmitter(IAsmContext context, IOperationCatalog catalog, AsmEmissionObserver observer)
+        AsmCatalogEmitter(IAsmContext context, IOpCatalog catalog, AsmEmissionObserver observer)
         {
             this.Context = context;
             this.Catalog = catalog;

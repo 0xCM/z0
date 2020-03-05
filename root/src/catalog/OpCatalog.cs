@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    public abstract class OpCatalog<C> : IOperationCatalog
+    public abstract class OpCatalog<C> : IOpCatalog
         where C : OpCatalog<C>
     {
         /// <summary>
@@ -52,4 +52,13 @@ namespace Z0
             Resources = resources ?? DataResourceIndex.Empty;
         }                    
     }
+
+    public sealed class EmptyCatalog : OpCatalog<EmptyCatalog>
+    {
+        public EmptyCatalog()
+            : base(AssemblyId.None)
+        {
+
+        }               
+    }    
 }

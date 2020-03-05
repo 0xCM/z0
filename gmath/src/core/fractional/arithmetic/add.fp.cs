@@ -25,15 +25,4 @@ namespace Z0
                 throw unsupported<T>();
         }
     }
-
-    partial class fmath
-    {
-        [MethodImpl(Inline), Op]
-        public static float add(float lhs, float rhs)
-            => lhs + rhs;
-
-        [MethodImpl(Inline), Op]
-        public static double add(double lhs, double rhs)
-            => lhs + rhs;
-    }
 }

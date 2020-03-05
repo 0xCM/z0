@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         bool IsNonEmpty {get;}
 
-        IOperationCatalog Catalog {get;}
+        IOpCatalog Catalog {get;}
 
         /// <summary>
         /// The resolved assembly

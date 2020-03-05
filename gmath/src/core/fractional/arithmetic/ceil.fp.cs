@@ -23,44 +23,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
     }
-
-    partial class fmath
-    {
-        /// <summary>
-        /// Computes the smallest integral value greater than or equal to the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float ceil(float src)
-            => MathF.Ceiling(src);
-
-        /// <summary>
-        /// Computes the smallest integral value greater than or equal to the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double ceil(double src)
-            => Math.Ceiling(src);
-
-        /// <summary>
-        /// Clamps the source value to an inclusive maximum
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="max">The maximum value</param>
-        [MethodImpl(Inline), Op]
-        public static float clamp(float src, float max)
-            => src > max ? max : src;
-
-        /// <summary>
-        /// Clamps the source value to an inclusive maximum
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="max">The maximum value</param>
-        [MethodImpl(Inline), Op]
-        public static double clamp(double src, double max)
-            => src > max ? max : src;
-
-    }    
 }

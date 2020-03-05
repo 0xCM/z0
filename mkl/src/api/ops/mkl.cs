@@ -102,7 +102,7 @@ namespace Z0.Mkl
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where T : unmanaged
             where S : unmanaged
-                => zfunc.length(lhs,rhs);
+                => Spans.length(lhs,rhs);
 
         [MethodImpl(Inline)]   
         static int length<S,T>(RowVector256<S> lhs, RowVector256<T> rhs, [CallerMemberName] string caller = null, 

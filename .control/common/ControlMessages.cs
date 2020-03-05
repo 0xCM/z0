@@ -28,16 +28,16 @@ namespace Z0
         public static AppMsg CatalogNotFound(AssemblyId id)        
             => appMsg($"Operation catalog was not found for assembly {id}", AppMsgKind.Warning);
 
-        public static AppMsg CatalogEmpty(IOperationCatalog catalog)        
+        public static AppMsg CatalogEmpty(IOpCatalog catalog)        
             => appMsg($"Operation catalog {catalog.CatalogName} is empty", AppMsgKind.Warning);
 
         public static AppMsg DispatchingCatalogWorkers()        
             => appMsg($"Dispatching catalog workers", AppMsgKind.Babble);
 
-        public static AppMsg DispatchingCatalogWorker(IOperationCatalog catalog)        
+        public static AppMsg DispatchingCatalogWorker(IOpCatalog catalog)        
             => appMsg($"Dispatching {catalog.CatalogName} worker", AppMsgKind.Info);
 
-        public static AppMsg CollectingStats(IOperationCatalog catalog)        
+        public static AppMsg CollectingStats(IOpCatalog catalog)        
             => appMsg($"Collecting {catalog.CatalogName} catalog statistics", AppMsgKind.Info);
 
     }

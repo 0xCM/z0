@@ -29,33 +29,4 @@ namespace Z0
                 throw unsupported<T>();
         }           
     }
-
-    partial class fmath
-    {
-        /// <summary>
-        /// Decrements the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float dec(float src)
-            => --src;
-
-        /// <summary>
-        /// Decrements the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double dec(double src)
-            => --src;
-
-        /// <summary>
-        /// Computes the nonnegative distance between two values
-        /// </summary>
-        /// <param name="a">The first number</param>
-        /// <param name="b">The second number</param>
-        [MethodImpl(Inline), Op]
-        public static ulong dist(double a, double b)
-            => a >= b ? (ulong)(a - b) : (ulong)(b - a);
-
-    }    
 }

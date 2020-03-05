@@ -9,8 +9,7 @@ namespace Z0.Mkl
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
- 
-    using static zfunc;
+    
     using static MklCommon;
 
     partial class CBLAS

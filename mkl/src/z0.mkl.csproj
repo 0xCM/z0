@@ -8,10 +8,12 @@
   <Import Project="$(TopDir)gmath/z0.gmath.exports.props"/>
 
   <ItemGroup>
+    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(TopDir)analogs/src/z0.analogs.csproj" />
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />
-    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />     
+    <!-- <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" /> -->
 
   </ItemGroup>
 

@@ -29,23 +29,4 @@ namespace Z0
                 throw unsupported<T>();
         }
     }
-
-    partial class fmath
-    {
-        /// <summary>
-        /// Increments the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float inc(float src)
-            => src + 1;
-
-        /// <summary>
-        /// Increments the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double inc(double src)
-            => src + 1;
-    }    
 }

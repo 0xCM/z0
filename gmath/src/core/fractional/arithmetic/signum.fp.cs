@@ -24,23 +24,4 @@ namespace Z0
                 throw unsupported<T>();
         }           
     }
-
-    partial class fmath
-    {
-        /// <summary>
-        /// Computes the sign of the operand
-        /// </summary>
-        /// <param name="src">The operand</param>
-        [MethodImpl(Inline), Op]
-        public static Sign signum(float src)
-            => (Sign)MathF.Sign(src);
-
-        /// <summary>
-        /// Computes the sign of the operand
-        /// </summary>
-        /// <param name="src">The operand</param>
-        [MethodImpl(Inline), Op]
-        public static Sign signum(double src)
-            => (Sign)Math.Sign(src);            
-    }
 }

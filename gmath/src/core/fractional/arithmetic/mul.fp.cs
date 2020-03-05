@@ -24,15 +24,4 @@ namespace Z0
                 throw unsupported<T>();
         }
     }
-
-    partial class fmath
-    {
-        [MethodImpl(Inline), Op]
-        public static float mul(float lhs, float rhs)
-            => lhs * rhs;
-
-        [MethodImpl(Inline), Op]
-        public static double mul(double lhs, double rhs)
-            => lhs * rhs;
-    }
 }

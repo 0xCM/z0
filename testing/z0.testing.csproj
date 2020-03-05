@@ -10,10 +10,9 @@
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
     <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />
     <ProjectReference Include="$(TopDir)time/src/z0.time.csproj" />
+    <ProjectReference Include="$(TopDir)math/src/z0.math.csproj" />    
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />    
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
-    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />    
-
   </ItemGroup>
 
 </Project>

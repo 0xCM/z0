@@ -1,0 +1,1 @@
+dotnet build -bl:$ZDev/bin/z0.testing.binlog

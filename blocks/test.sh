@@ -1,2 +1,2 @@
-export ProjectId=blocks
+export ProjectId="$(dirname "$0")"
 bash $ZDev/run-test.sh

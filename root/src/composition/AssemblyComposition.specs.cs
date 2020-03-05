@@ -27,7 +27,7 @@ namespace Z0
         Option<IAssemblyResolution> FindAssembly(AssemblyId id)
             => Resolved.TryFind(r => r.Id == id);
 
-        IEnumerable<IOperationCatalog> Catalogs
+        IEnumerable<IOpCatalog> Catalogs
             => from a in Resolved
                 where !a.Catalog.IsEmpty
                 select a.Catalog;

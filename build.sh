@@ -1,1 +1,1 @@
-dotnet build -bl:bin/z0.build.binlog
+dotnet build -bl:bin/z0.binlog
