@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial class RngX
+    partial class CoreRngOps
     {
         /// <summary>
         /// Produces a stream of values sampled from an enum
@@ -24,7 +24,7 @@ namespace Z0
             IEnumerable<E> produce()
             {
                 var names = Enum.GetNames(typeof(E)).Mapi((index, name) => (index, name)).ToDictionary();
-                var domain = zfunc.domain(0, names.Count);
+                var domain = Z0.Interval.closed(0, names.Count);
                 var stream = random.Stream(domain);
 
                 while(true)
@@ -58,7 +58,7 @@ namespace Z0
                 var excluded = exclusions.Select(x => x.ToString()).ToHashSet();
                 var available = Enum.GetNames(typeof(E)).Where(n => !excluded.Contains(n)).ToArray();
                 var names = available.Mapi((index, name) => (index, name)).ToDictionary();
-                var stream = random.Stream(Interval.closed(0, names.Count));
+                var stream = random.Stream(Z0.Interval.closed(0, names.Count));
 
                 while(true)
                     yield return Enum.Parse<E>(names[stream.Next()]);
@@ -68,4 +68,3 @@ namespace Z0
         }
     }
 }
-

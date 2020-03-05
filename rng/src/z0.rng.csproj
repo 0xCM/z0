@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)rng/emitters/z0.rng.emitters.csproj" />    
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
 
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    

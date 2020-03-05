@@ -19,14 +19,6 @@ namespace Z0
             => new Polyrand(source);
 
         /// <summary>
-        /// Creates a System.Random rng from a random source
-        /// </summary>
-        /// <param name="rng"></param>
-        [MethodImpl(Inline)]
-        public static System.Random ToSysRand(this IPolyrand rng)
-            => SysRand.From(rng);
-
-        /// <summary>
         /// Creates a polyrand based on a specified source
         /// </summary>
         /// <param name="src">The random source</param>

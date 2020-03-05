@@ -15,20 +15,20 @@ namespace Z0
     /// Defines a suite of random number generators
     /// </summary>
     /// <typeparam name="N">The number of generators in the suite</typeparam>
-    public class RngSuite<N> : IRngSuite<N>
+    public class RngSuite256<N> : IRngSuite256<N>
         where N : unmanaged, ITypeNat
     {
         readonly IPolyrand[] members;
 
         static readonly int n = (int)new N().NatValue;        
 
-        public RngSuite(IPolyrand[] members)
+        public RngSuite256(IPolyrand[] members)
         {
             this.members = members.ToArray();
             require(this.members.Length == n);
         }
 
-        public RngSuite(IEnumerable<IPolyrand> members)
+        public RngSuite256(IEnumerable<IPolyrand> members)
         {
             this.members = members.ToArray();
             require(this.members.Length == n);

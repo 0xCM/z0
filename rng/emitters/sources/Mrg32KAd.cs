@@ -9,10 +9,10 @@ namespace Z0
     
     using static Root;
     using static Mrg32K;
+    using static Nats;
 
-    using Vec6u32 = RowVector<N6,uint>;
-    using Vec6f64 = RowVector<N6,double>;
-    using Mat3f64 = Matrix<N3,double>;
+    using Vec6u32 = NatSpan<N6,uint>;
+    using Vec6f64 = NatSpan<N6,double>;
 
     /// <summary>
     /// Implements L’Ecuyer's combined multiple recursive generator (CMRG) with 64-bit floating-point arithmetic.
@@ -68,7 +68,7 @@ namespace Z0
         };
 
         // Default seed of the package for the first stream
-        static Vec6f64 nextSeed = new double[]{12345, 12345, 12345, 12345, 12345, 12345};
+        static Vec6f64 nextSeed => NatSpan.parts(n6, 12345.0, 12345.0, 12345.0, 12345.0, 12345.0, 12345.0);
 
         double Cg0, Cg1, Cg2, Cg3, Cg4, Cg5;
 
@@ -209,17 +209,11 @@ namespace Z0
         * subsequent use.
         *  @return the current state of the generator
         */
-        public Vec6u32 State() 
-        {
-            return new uint[] 
-            {   (uint)Cg0, (uint)Cg1, (uint)Cg2,
-                (uint)Cg3, (uint)Cg4, (uint)Cg5
-            };
-        }
-
+        public Vec6u32 State()         
+            => NatSpan.parts(n6, (uint)Cg0, (uint)Cg1, (uint)Cg2, (uint)Cg3, (uint)Cg4, (uint)Cg5);
+                    
         public RngKind RngKind 
             => RngKind.MRG32K3Ad;
-
 
         /// <summary>
         /// Calls `nextDouble` once to create one integer between `i` and `j`.

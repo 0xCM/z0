@@ -8,6 +8,12 @@ namespace Z0
 
     public static class Mrg32K
     {
+        public static IRngPointSource<uint> Mrg32k3a()
+            => new Mrg32K3A(new uint[]{0xFA243, 0xAD941, 0xBC883, 0xDB193, 0xAA137, 0xB1B39});
+
+        public static IRngPointSource<uint> Mrg32k3a(NatSpan<N6,uint> seed)
+            => new Mrg32K3A(seed);
+
         public static readonly double Norm   = 2.328306549295727688e-10;
 
         public const uint Mod1 = 4294967087;
@@ -22,7 +28,7 @@ namespace Z0
 
         public const uint A23n = 1370589;
 
-        public static ref readonly RowVector<N6,uint> CheckSeed(in RowVector<N6,uint> seed) 
+        public static ref readonly NatSpan<N6,uint> CheckSeed(in NatSpan<N6,uint> seed) 
         {        
             if (seed[0] == 0 && seed[1] == 0 && seed[2] == 0)
                 throw new ArgumentException("The first 3 values must not be 0");

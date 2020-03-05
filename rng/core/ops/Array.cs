@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class RngX
+    partial class CoreRngOps
     {
         /// <summary>
         /// Produces an array of random values

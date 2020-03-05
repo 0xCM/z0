@@ -102,7 +102,7 @@ namespace Z0
         public static ReadOnlySpan<T> ReadOnlySpan<T>(this IPolyrand random, int length, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
                 => random.Span<T>(length, domain, filter);
-
+ 
         /// <summary>
         /// Allocates and produces a punctured span populated with nonzero random values
         /// </summary>

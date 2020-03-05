@@ -27,8 +27,14 @@ namespace Z0
                 return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
             else
             {
-                var min = Numeric.signed<T>() ? gmath.negate(gmath.sar(maxval<T>(), 1)) : minval<T>();                        
-                var max =  Numeric.signed<T>() ? gmath.sar(maxval<T>(), 1) : maxval<T>();                
+                var min = Numeric.signed<T>() 
+                    ? gmath.negate(gmath.sar(maxval<T>(), 1)) 
+                    : minval<T>();                        
+                
+                var max =  Numeric.signed<T>() 
+                    ? gmath.sar(maxval<T>(), 1) 
+                    : maxval<T>();
+
                 return (min,max);
             }            
         }
@@ -77,12 +83,6 @@ namespace Z0
         public static IPolyrand XOrShift1024(ulong[] seed = null)
             => new XOrShift1024(seed ?? Seed1024.Default).ToPolyrand();
 
-        public static IRngPointSource<uint> Mrg32k3a()
-            => new Mrg32K3A(new uint[]{0xFA243, 0xAD941, 0xBC883, 0xDB193, 0xAA137, 0xB1B39});
-
-        public static IRngPointSource<uint> Mrg32k3a(RowVector<N6,uint> seed)
-            => new Mrg32K3A(seed);
-
         /// <summary>
         /// Creates an XOrShift 1024 rng
         /// </summary>
@@ -119,7 +119,7 @@ namespace Z0
         /// </summary>
         /// <param name="seed">The initial state of a generator</param>
         /// <param name="index">The stream index</param>
-        public static IRngSuite<N> Pcg64Suite<N>(N n, params (ulong seed, ulong index)[] specs)
+        public static IRngSuite256<N> Pcg64Suite<N>(N n, params (ulong seed, ulong index)[] specs)
             where N : unmanaged, ITypeNat
         {
             var suite = new IPolyrand[specs.Length];
@@ -128,7 +128,7 @@ namespace Z0
                 (var seed, var index) = specs[i];
                 suite[i] = Pcg64(seed, index);
             }
-            return new RngSuite<N>(suite);
+            return new RngSuite256<N>(suite);
         }
 
         /// <summary>
@@ -136,14 +136,14 @@ namespace Z0
         /// </summary>
         /// <param name="seed">The initial rng states</param>
         /// <param name="indices">A span of index values</param>
-        public static IRngSuite<N> Pcg64Suite<N>(Span<ulong> seeds, Span<ulong> indices)        
+        public static IRngSuite256<N> Pcg64Suite<N>(Span<ulong> seeds, Span<ulong> indices)        
             where N : unmanaged, ITypeNat
         {
             var count = seeds.Length;
             var members = new IPolyrand[count];
             for(var i=0; i<count; i++)
                 members[i] = Pcg64(seeds[i], indices[i]);
-            return new RngSuite<N>(members);
+            return new RngSuite256<N>(members);
         }    
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="n">The number of suite generators</param>
         /// <param name="seed">The optional seed which, if of nonzero length, must have matching natural length</param>
         /// <typeparam name="N">The natural length type</typeparam>
-        public static IRngSuite<N> WyHash64Suite<N>(N n = default, params ulong[] seed)
+        public static IRngSuite256<N> WyHash64Suite<N>(N n = default, params ulong[] seed)
             where N : unmanaged, ITypeNat
         {
             NatSpan<N,ulong> states;
@@ -167,7 +167,7 @@ namespace Z0
             for(var i=0; i<members.Length; i++)
                 members[i] = WyHash64(states[i]);
 
-            return new RngSuite<N>(members);
+            return new RngSuite256<N>(members);
         }
 
         /// <summary>

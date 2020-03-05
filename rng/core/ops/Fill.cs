@@ -5,11 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
-    partial class RngX
+    using static Root;
+
+    partial class CoreRngOps
     {
         /// <summary>
         /// Fills a caller-allocated target with a specified number of values from a source

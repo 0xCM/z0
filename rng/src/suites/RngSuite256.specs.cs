@@ -14,7 +14,7 @@ namespace Z0
     /// Characterizes a suite of random number generators
     /// </summary>
     /// <typeparam name="N">The number of generators in the suite</typeparam>
-    public interface IRngSuite<N>
+    public interface IRngSuite256<N>
         where N : unmanaged, ITypeNat
     {
         /// <summary>

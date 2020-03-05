@@ -113,8 +113,8 @@ namespace Z0.Machines
             foreach(var source in sources)
             {                                
                 var evss = random.Next<T>(spec.MinEventSamples, spec.MaxEventSamples);
-                var targets = from t in random.SampleDistinct(spec.StateCount, evss) where gmath.neq(t,source) select t;
-                var events = random.SampleDistinct(spec.EventCount, evss);
+                var targets = from t in random.Distinct(spec.StateCount, evss) where gmath.neq(t,source) select t;
+                var events = random.Distinct(spec.EventCount, evss);
                 rules.AddRange(events.Zip(targets).Select(x => Fsm.TransitionRule(x.First, source, x.Second)));
             }
             return rules.ToFunction();

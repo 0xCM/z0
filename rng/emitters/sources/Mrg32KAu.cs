@@ -10,8 +10,8 @@ namespace Z0
     using static Root;
     using static Mrg32K;
 
-    using Vec6u32 = RowVector<N6,uint>;
-    using Vec6i64 = RowVector<N6,long>;
+    using Vec6u32 = NatSpan<N6,uint>;
+    using Vec6i64 = NatSpan<N6,long>;
     using Mat3u32 = Matrix<N3,uint>;
 
     /// <summary>
@@ -39,28 +39,28 @@ namespace Z0
 
         const uint a23n = A23n;
             
-        static readonly Mat3u32 A1p76 = new uint[]
+        static readonly uint[] A1p76 = new uint[]
         {
             82758667, 1871391091, 4127413238,
             3672831523, 69195019, 1871391091,
             3672091415, 3528743235, 69195019
         };
 
-        static readonly Mat3u32 A2p76 = new uint[] 
+        static readonly uint[] A2p76 = new uint[] 
         {
              1511326704, 3759209742, 1610795712 ,
              4292754251, 1511326704, 3889917532 ,
              3859662829, 4292754251, 3708466080 
         };
 
-        static readonly Mat3u32  A1p127 = new uint[] 
+        static readonly uint[]  A1p127 = new uint[] 
         {
             2427906178, 3580155704,  949770784,
             226153695, 1230515664, 3580155704,
             1988835001,  986791581, 1230515664 
         };
 
-        static readonly Mat3u32 A2p127 = new uint[] 
+        static readonly uint[] A2p127 = new uint[] 
         {
             1464411153,  277697599, 1610723613 ,
             32183930, 1464411153, 1022607788 ,
@@ -88,20 +88,26 @@ namespace Z0
                 v[i + 3] = vv[i];
         }
 
-        Vec6i64 Cg;
+        ulong[] Cg;
         
-        Vec6u32 Bg;
+        uint[] Bg;
         
-        Vec6u32 Ig;
+        uint[] Ig;
 
         public RngKind RngKind 
             => RngKind.Mrg32K3Au;
 
+        public Mrg32K3A(uint[] seed) 
+            : this(NatSpan.load<N6,uint>(seed))
+        {
+
+        }
+
         public Mrg32K3A(Vec6u32 seed) 
         {
-            Ig = seed;
+            Ig = seed.Data.ToArray();
             Bg = Ig.Replicate();
-            Cg = RowVector.alloc<N6,long>();
+            Cg = new ulong[6];
             Cg[0] = Bg[0];
             Cg[1] = Bg[1];
             Cg[2] = Bg[2];
@@ -130,13 +136,10 @@ namespace Z0
 
         void ResetNextSubstream()  
         {
-            MVMul(Bg, A1p76, m1, A2p76, m2);
+            MVMul(NatSpan.load<N6,uint>(Bg), A1p76, m1, A2p76, m2);
             ResetStartSubstream();
         }
         
-        Vec6u32 State() 
-            => Cg.Convert<uint>();
-
         public uint Next()
         {
             /* Component 1 */
