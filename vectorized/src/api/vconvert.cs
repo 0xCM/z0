@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
 
-    partial class Vectors
+    partial class gvec
     {
         /// <summary>
         /// Reinterprets a vector over S-cells as a vector over T-cells

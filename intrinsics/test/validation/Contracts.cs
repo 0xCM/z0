@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public interface IVShiftValidator128D<T> : IValidator
         where T : unmanaged
     {

@@ -17,12 +17,12 @@ namespace Z0
         public static bit check_and_1(Vector128<uint> x, Vector128<uint> y)
         {
             var svc = GX.bitlogic<uint>();
-            var v1 = VX.vbitlogic<uint>(n128).and(x,y);
+            var v1 = VF.vbitlogic<uint>(n128).and(x,y);
             var a0 = svc.and(vcell(x,0), vcell(y,0));
             var a1 = svc.and(vcell(x,1), vcell(y,1));
             var a2 = svc.and(vcell(x,2), vcell(y,2));
             var a3 = svc.and(vcell(x,3), vcell(y,3));
-            var v2 = Vectors.vparts(n128,a0,a1,a2,a3);
+            var v2 = gvec.vparts(n128,a0,a1,a2,a3);
             return ginx.vsame(v1,v2);
         }
 
@@ -36,10 +36,10 @@ namespace Z0
             =>  f.InvokeScalar(x,y);
 
         public static Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)
-            =>  VXTypes.And128<uint>.Op.Invoke(x,y);
+            =>  VFTypes.And128<uint>.Op.Invoke(x,y);
 
         public static uint and_struct_scalar(uint x, uint y)
-            =>  VXTypes.And128<uint>.Op.InvokeScalar(x,y);
+            =>  VFTypes.And128<uint>.Op.InvokeScalar(x,y);
 
         public static void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
@@ -77,7 +77,7 @@ namespace Z0
         
         public static uint vxor_128x32u_1(Vector128<uint> x, Vector128<uint> y)
         {
-            var ops = VX.vxor(n128,z32);
+            var ops = VF.vxor(n128,z32);
             var z = ops.Invoke(x,y);
             var a = ops.InvokeScalar(x.FirstCell(),y.LastCell());
             return a;

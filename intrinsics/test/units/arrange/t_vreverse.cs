@@ -43,11 +43,11 @@ namespace Z0
 
         void vreverse_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => vreverse_check(VX.vreverse(w,t),w,t);
+                => vreverse_check(VF.vreverse(w,t),w,t);
 
         void vreverse_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => vreverse_check(VX.vreverse(w,t),w,t);
+                => vreverse_check(VF.vreverse(w,t),w,t);
 
         void check_invariant<T>(N128 w, T t = default)
             where T : unmanaged
@@ -78,9 +78,9 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = Vectors.vzero(w,t);
+                var expect = gvec.vzero(w,t);
                 for(var j = 0; j < n; j++)
-                    expect = Vectors.vcell(Vectors.vcell(input,(n - 1) - j),j,expect);
+                    expect = gvec.vcell(gvec.vcell(input,(n - 1) - j),j,expect);
 
                 Claim.eq(expect,output);
             }
@@ -99,9 +99,9 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = Vectors.vzero(w,t);
+                var expect = gvec.vzero(w,t);
                 for(var j = 0; j < n; j++)
-                    expect = Vectors.vcell(vcell(input,(n - 1) - j),j,expect);
+                    expect = gvec.vcell(vcell(input,(n - 1) - j),j,expect);
 
                 Claim.eq(expect,output);
             }

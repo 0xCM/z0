@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         public readonly struct Concat2x128<T> : IVMergeOp2x128x256<T>
             where T : unmanaged
@@ -24,7 +24,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y) 
-                => ginx.vconcat(x,y);           
+                => gvec.vconcat(x,y);           
         }
     }
 }

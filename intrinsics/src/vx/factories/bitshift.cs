@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static VXTypes;
+    using static VFTypes;
 
-    partial class VX
+    partial class VF
     {
         [MethodImpl(Inline)]
         public static Sll128<T> vsll<T>(N128 w, T t = default)

@@ -7,9 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static Literals;
+    using static gvec;
 
     partial class dinx
     {   
@@ -78,7 +80,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate(Vector128<sbyte> src, N256 w, short t = default)
-            => vconcat(vmaplo(src,n128,t), vmaphi(src,n128,t));
+            => dvec.vconcat(vmaplo(src,n128,t), vmaphi(src,n128,t));
 
         /// <summary>
         /// 32x8w -> 32x16i
@@ -149,7 +151,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static ulong vcompact(Vector128<ushort> src, N64 w, ulong t = default)            
-            => Vectors.vcell64(vcompact(src, default, n128, z8),0);
+            => gvec.vcell64(vcompact(src, default, n128, z8),0);
 
         /// <summary>
         /// 16x8u -> 16x16u
@@ -383,7 +385,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vcompact(Vector128<ulong> x0, Vector128<ulong> x1, N128 w, uint t = default)
-            => Vectors.vparts(n128, (uint)vcell(x0, 0),(uint)vcell(x0, 1),(uint)vcell(x1, 0),(uint)vcell(x1, 1));
+            => vparts(n128, (uint)vcell(x0, 0),(uint)vcell(x0, 1),(uint)vcell(x1, 0),(uint)vcell(x1, 1));
 
         /// <summary>
         /// 4x32u -> 4x64u
@@ -411,7 +413,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vcompact(Vector256<ulong> src, N128 w, uint t = default)
-            => Vectors.vparts(n128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
+            => gvec.vparts(n128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
 
         /// <summary>
         /// 4x64w -> 4x32w
@@ -420,7 +422,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vcompact(Vector256<long> src, N128 w, int t = default)            
-            => Vectors.vpartsi(n128, (int)vcell(src, 0),(int)vcell(src, 1),(int)vcell(src, 2),(int)vcell(src, 3));
+            => gvec.vpartsi(n128, (int)vcell(src, 0),(int)vcell(src, 1),(int)vcell(src, 2),(int)vcell(src, 3));
 
         // ~ 8x64w <-> 8x32w
         // ~ 8:32 <-> 64
@@ -434,7 +436,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vcompact(Vector256<ulong> x0, Vector256<ulong> x1, N256 w, uint t = default)
-            => vconcat(vcompact(x0, n128,t), vcompact(x1, n128,t));
+            => dvec.vconcat(vcompact(x0, n128,t), vcompact(x1, n128,t));
             
         /// <summary>
         /// 8x32u -> 8x64u

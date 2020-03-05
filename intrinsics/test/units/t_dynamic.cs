@@ -52,7 +52,7 @@ namespace Z0
         {
             const byte imm8 = 9;
 
-            var vbsll = VX.vbsll<uint>(n128).@delegate(imm8).DynamicOp;            
+            var vbsll = VF.vbsll<uint>(n128).@delegate(imm8).DynamicOp;            
                     
             for(var i=0; i<RepCount; i++)
             {

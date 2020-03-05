@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> load<T>(N128 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(Vectors.vload(n, in head(src)));
+                => vgeneric<T>(gvec.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 256-bit pattern described by a readonly bytespan
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> load<T>(N256 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(Vectors.vload(n, in head(src)));
+                => vgeneric<T>(gvec.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 512-bit pattern described by a readonly bytespan
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector512<T> load<T>(N512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => Vector512.vgeneric<T>(Vectors.vload(n, in head(src)));
+                => Vector512.vgeneric<T>(gvec.vload(n, in head(src)));
     }
 
 }

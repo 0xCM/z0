@@ -75,19 +75,19 @@ namespace Z0
 
         protected void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VX.vunits(w,t), Vectors.vbroadcast(w,one(t)));
+                => CheckPattern(VF.vunits(w,t), gvec.vbroadcast(w,one(t)));
 
         protected void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VX.vunits(w,t), Vectors.vbroadcast(w,one(t)));
+                => CheckPattern(VF.vunits(w,t), gvec.vbroadcast(w,one(t)));
 
         protected void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VX.vones(w,t), Vectors.vbroadcast(w,ones(t)));
+                => CheckPattern(VF.vones(w,t), gvec.vbroadcast(w,ones(t)));
 
         protected void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckPattern(VX.vones(w,t), Vectors.vbroadcast(w,ones(t)));
+                => CheckPattern(VF.vones(w,t), gvec.vbroadcast(w,ones(t)));
 
    }
 }

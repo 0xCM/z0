@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class Vectors
+    partial class gvec
     {
         /// <summary>
         /// Allocates a span into which vector content is stored

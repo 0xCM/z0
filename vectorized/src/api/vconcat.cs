@@ -11,9 +11,9 @@ namespace Z0
 
     using static Root;
     using static As;
-    using D = VDirect;
+    using D = dvec;
 
-    partial class Vectors
+    partial class gvec
     {
         /// <summary>
         /// Creates a 256-bit vector from two 128-bit vectors    

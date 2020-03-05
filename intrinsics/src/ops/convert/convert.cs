@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> convert(Vector128<ulong> lo, Vector128<ulong> hi, N128 w, uint t = default)
-            => convert(dinx.vconcat(lo,hi), w,t);
+            => convert(dvec.vconcat(lo,hi), w,t);
 
         /// <summary>
         /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256

@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     using BG = Z0.BitGrid;
     using BS = Z0.BitBlocks;
@@ -539,8 +540,8 @@ namespace Z0
         public static IEnumerable<BitPos<T>> BitPositions<T>(this IPolyrand random, ushort mincells, ushort maxcells)
             where T : unmanaged
         {
-            var s2 = random.Stream(domain(mincells,maxcells)).GetEnumerator();            
-            var s3 = random.Stream<byte>(domain((byte)0, (byte)bitsize<T>())).GetEnumerator();
+            var s2 = random.Stream(Interval.closed(mincells,maxcells)).GetEnumerator();            
+            var s3 = random.Stream<byte>(Interval.closed((byte)0, (byte)bitsize<T>())).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
                 yield return BitPos.FromCellIndex<T>(s2.Current, s3.Current);
         }
@@ -554,8 +555,8 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static IEnumerable<BitPos> BitPositions(this IPolyrand random, byte capacity, ushort mincells, ushort maxcells)
         {
-            var s2 = random.Stream(domain(mincells,maxcells)).GetEnumerator();            
-            var s3 = random.Stream<byte>(domain((byte)0, capacity)).GetEnumerator();
+            var s2 = random.Stream(Interval.closed(mincells,maxcells)).GetEnumerator();            
+            var s3 = random.Stream<byte>(Interval.closed((byte)0, capacity)).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
                 yield return BitPos.FromCellIndex(capacity, s2.Current, s3.Current);
         }

@@ -84,7 +84,7 @@ namespace Z0
             var xACBD = dinx.vpermlo4x16(x, Perm4L.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            Claim.eq(dinx.vpermlo4x16(Vectors.vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), Vectors.vparts(n128, 0,3,2,1,6,7,8,9));           
+            Claim.eq(dinx.vpermlo4x16(gvec.vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), gvec.vparts(n128, 0,3,2,1,6,7,8,9));           
         }
 
         public void vpermhi_4x16_outline()
@@ -107,7 +107,7 @@ namespace Z0
             var xACBD = dinx.vpermhi4x16(x, Perm4L.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
 
-            Claim.eq(dinx.vpermhi4x16(Vectors.vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), Vectors.vparts(n128,0,1,2,3,6,9,8,7));
+            Claim.eq(dinx.vpermhi4x16(gvec.vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), gvec.vparts(n128,0,1,2,3,6,9,8,7));
 
         }
 
@@ -116,10 +116,10 @@ namespace Z0
             var n = n128;
 
             var u = vpattern.vincrements<uint>(n);
-            Claim.eq(Vectors.vparts(n,0,1,2,3), u);
+            Claim.eq(gvec.vparts(n,0,1,2,3), u);
 
             var v = vpattern.decrements<uint>(n);
-            Claim.eq(Vectors.vparts(n,3,2,1,0),v);
+            Claim.eq(gvec.vparts(n,3,2,1,0),v);
 
             Claim.eq(v, dinx.vperm4x32(u, Perm4L.DCBA));
             Claim.eq(u, dinx.vperm4x32(v, Perm4L.DCBA));
@@ -128,30 +128,30 @@ namespace Z0
         public void vperm_4x16_outline()
         {
             var n = n128;
-            var x = Vectors.vparts(n,0,1,2,3,4,5,6,7);
+            var x = gvec.vparts(n,0,1,2,3,4,5,6,7);
                         
             var a0 = dinx.vpermlo4x16(x, Perm4L.DCBA);
-            var a1 = Vectors.vparts(n,3,2,1,0,4,5,6,7);
+            var a1 = gvec.vparts(n,3,2,1,0,4,5,6,7);
             Claim.eq(a0,a1);
 
             var b0 = dinx.vpermhi4x16(x, Perm4L.DCBA);
-            var b1 = Vectors.vparts(n,0,1,2,3,7,6,5,4);
+            var b1 = gvec.vparts(n,0,1,2,3,7,6,5,4);
             Claim.eq(b0,b1);
 
             var c0 = dinx.vperm4x16(x,Perm4L.DCBA,Perm4L.DCBA);
-            var c1 = Vectors.vparts(n,3,2,1,0,7,6,5,4);
+            var c1 = gvec.vparts(n,3,2,1,0,7,6,5,4);
             Claim.eq(c0,c1);
 
             var d0 = dinx.vpermlo4x16(x, Perm4L.BADC);
-            var d1 = Vectors.vparts(n,1,0,3,2,4,5,6,7);            
+            var d1 = gvec.vparts(n,1,0,3,2,4,5,6,7);            
             Claim.eq(d0,d1);
 
             var e0 = dinx.vpermhi4x16(x, Perm4L.BADC);
-            var e1 = Vectors.vparts(n,0,1,2,3,5,4,7,6);
+            var e1 = gvec.vparts(n,0,1,2,3,5,4,7,6);
             Claim.eq(e0,e1);
 
             var f0 = dinx.vperm4x16(x, Perm4L.BADC, Perm4L.BADC);
-            var f1 = Vectors.vparts(n,1,0,3,2,5,4,7,6);
+            var f1 = gvec.vparts(n,1,0,3,2,5,4,7,6);
             Claim.eq(f0,f1);
         }
 
@@ -159,21 +159,21 @@ namespace Z0
         {
          
             var n = n256;
-            var x = Vectors.vparts(n,0,1,2,3);
+            var x = gvec.vparts(n,0,1,2,3);
             
-            Claim.eq(Vectors.vparts(n,0,1,2,3), dinx.vperm4x64(x, Perm4L.ABCD));
-            Claim.eq(Vectors.vparts(n,0,1,3,2), dinx.vperm4x64(x, Perm4L.ABDC));
-            Claim.eq(Vectors.vparts(n,0,2,1,3), dinx.vperm4x64(x, Perm4L.ACBD));
-            Claim.eq(Vectors.vparts(n,0,2,3,1), dinx.vperm4x64(x, Perm4L.ACDB));
-            Claim.eq(Vectors.vparts(n,0,3,1,2), dinx.vperm4x64(x, Perm4L.ADBC));
-            Claim.eq(Vectors.vparts(n,0,3,2,1), dinx.vperm4x64(x, Perm4L.ADCB));
+            Claim.eq(gvec.vparts(n,0,1,2,3), dinx.vperm4x64(x, Perm4L.ABCD));
+            Claim.eq(gvec.vparts(n,0,1,3,2), dinx.vperm4x64(x, Perm4L.ABDC));
+            Claim.eq(gvec.vparts(n,0,2,1,3), dinx.vperm4x64(x, Perm4L.ACBD));
+            Claim.eq(gvec.vparts(n,0,2,3,1), dinx.vperm4x64(x, Perm4L.ACDB));
+            Claim.eq(gvec.vparts(n,0,3,1,2), dinx.vperm4x64(x, Perm4L.ADBC));
+            Claim.eq(gvec.vparts(n,0,3,2,1), dinx.vperm4x64(x, Perm4L.ADCB));
             
-            Claim.eq(Vectors.vparts(n,1,0,2,3), dinx.vperm4x64(x, Perm4L.BACD));
-            Claim.eq(Vectors.vparts(n,1,0,3,2), dinx.vperm4x64(x, Perm4L.BADC));
-            Claim.eq(Vectors.vparts(n,1,2,0,3), dinx.vperm4x64(x, Perm4L.BCAD));
-            Claim.eq(Vectors.vparts(n,1,2,3,0), dinx.vperm4x64(x, Perm4L.BCDA));
-            Claim.eq(Vectors.vparts(n,1,3,0,2), dinx.vperm4x64(x, Perm4L.BDAC));
-            Claim.eq(Vectors.vparts(n,1,3,2,0), dinx.vperm4x64(x, Perm4L.BDCA));
+            Claim.eq(gvec.vparts(n,1,0,2,3), dinx.vperm4x64(x, Perm4L.BACD));
+            Claim.eq(gvec.vparts(n,1,0,3,2), dinx.vperm4x64(x, Perm4L.BADC));
+            Claim.eq(gvec.vparts(n,1,2,0,3), dinx.vperm4x64(x, Perm4L.BCAD));
+            Claim.eq(gvec.vparts(n,1,2,3,0), dinx.vperm4x64(x, Perm4L.BCDA));
+            Claim.eq(gvec.vparts(n,1,3,0,2), dinx.vperm4x64(x, Perm4L.BDAC));
+            Claim.eq(gvec.vparts(n,1,3,2,0), dinx.vperm4x64(x, Perm4L.BDCA));
         }
 
         public void perm4_symbols()
@@ -200,7 +200,7 @@ namespace Z0
         {
             var src = vpattern.vincrements<T>(n).ToSpan();
             var dst = src.Swap(swaps);
-            return Vectors.vload(n, in head(src));
+            return gvec.vload(n, in head(src));
         }
 
         [MethodImpl(Inline)]
@@ -245,20 +245,20 @@ namespace Z0
         public void vperm_2x128_outline()
         {
             var n = n256;
-            var x = Vectors.vparts(n, 0, 1, 2, 3);
-            var y = Vectors.vparts(n, 4, 5, 6, 7);
+            var x = gvec.vparts(n, 0, 1, 2, 3);
+            var y = gvec.vparts(n, 4, 5, 6, 7);
 
-            Claim.eq(Vectors.vparts(n, 0, 1, 4, 5), ginx.vperm2x128(x,y, Perm2x4.AC));
-            Claim.eq(Vectors.vparts(n, 4, 5, 0, 1), ginx.vperm2x128(x,y, Perm2x4.CA));
+            Claim.eq(gvec.vparts(n, 0, 1, 4, 5), ginx.vperm2x128(x,y, Perm2x4.AC));
+            Claim.eq(gvec.vparts(n, 4, 5, 0, 1), ginx.vperm2x128(x,y, Perm2x4.CA));
 
-            Claim.eq(Vectors.vparts(n, 0, 1, 6, 7), ginx.vperm2x128(x,y, Perm2x4.AD));
-            Claim.eq(Vectors.vparts(n, 6, 7, 0, 1), ginx.vperm2x128(x,y, Perm2x4.DA));
+            Claim.eq(gvec.vparts(n, 0, 1, 6, 7), ginx.vperm2x128(x,y, Perm2x4.AD));
+            Claim.eq(gvec.vparts(n, 6, 7, 0, 1), ginx.vperm2x128(x,y, Perm2x4.DA));
 
-            Claim.eq(Vectors.vparts(n, 2, 3, 4, 5), ginx.vperm2x128(x,y, Perm2x4.BC));
-            Claim.eq(Vectors.vparts(n, 4, 5, 2, 3), ginx.vperm2x128(x,y, Perm2x4.CB));
+            Claim.eq(gvec.vparts(n, 2, 3, 4, 5), ginx.vperm2x128(x,y, Perm2x4.BC));
+            Claim.eq(gvec.vparts(n, 4, 5, 2, 3), ginx.vperm2x128(x,y, Perm2x4.CB));
 
-            Claim.eq(Vectors.vparts(n, 2, 3, 6, 7), ginx.vperm2x128(x,y, Perm2x4.BD));
-            Claim.eq(Vectors.vparts(n, 6, 7, 2, 3), ginx.vperm2x128(x,y, Perm2x4.DB));
+            Claim.eq(gvec.vparts(n, 2, 3, 6, 7), ginx.vperm2x128(x,y, Perm2x4.BD));
+            Claim.eq(gvec.vparts(n, 6, 7, 2, 3), ginx.vperm2x128(x,y, Perm2x4.DB));
         }
 
         /// <summary>
@@ -320,8 +320,8 @@ namespace Z0
             var pformat_actual = p.FormatMap();
             Claim.eq(pformat_epect, pformat_actual);
 
-            var vIn = Vectors.vparts(0,1,2,3);
-            var vExpect = Vectors.vparts(3,2,1,0);
+            var vIn = gvec.vparts(0,1,2,3);
+            var vExpect = gvec.vparts(3,2,1,0);
             var vActual = dinx.vperm4x32(vIn,p);
             Claim.eq(vExpect, vActual);                                
         }        

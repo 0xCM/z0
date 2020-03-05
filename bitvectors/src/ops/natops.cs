@@ -12,7 +12,7 @@ namespace Z0
     using static Root;    
     using P = parity;
     using static Nats;
-    using static Vectors;
+    using static gvec;
 
     partial class BitVector
     {
@@ -40,7 +40,7 @@ namespace Z0
         {
             var sum = dinx.vadd(v64u(x.data), v64u(y.data));            
             bit carry = x.Lo > vcell(sum,0);
-            return  As.vgeneric<T>(dinx.vadd(sum, Vectors.vbroadcast(n128, (ulong)carry)));
+            return  As.vgeneric<T>(dinx.vadd(sum, gvec.vbroadcast(n128, (ulong)carry)));
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace Z0
         public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Vectors.vbroadcast(w,a);
+                => gvec.vbroadcast(w,a);
 
         /// <summary>
         /// Disables a bit if it is enabled

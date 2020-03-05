@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    partial class VX
+    partial class VF
     {
 
     }

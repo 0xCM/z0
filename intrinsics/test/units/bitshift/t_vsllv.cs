@@ -53,7 +53,7 @@ namespace Z0
                 return (x,offsets);
             }
 
-            CheckScalarMatch(VX.vsllv(w,t),@case);            
+            CheckScalarMatch(VF.vsllv(w,t),@case);            
         }
 
         void vsllv_check<T>(N256 w, T t = default)
@@ -69,7 +69,7 @@ namespace Z0
                 return (x,offsets);
             }
 
-            CheckScalarMatch(VX.vsllv(w,t),@case);            
+            CheckScalarMatch(VF.vsllv(w,t),@case);            
         }
     }
 }

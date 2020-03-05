@@ -43,11 +43,11 @@ namespace Z0
 
         void vnot_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VX.vnot(w,t),w,t);
+                => CheckUnaryScalarMatch(VF.vnot(w,t),w,t);
             
         void vnot_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VX.vnot(w,t),w,t);
+                => CheckUnaryScalarMatch(VF.vnot(w,t),w,t);
   }
 
 }

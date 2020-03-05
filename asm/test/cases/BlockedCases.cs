@@ -21,32 +21,32 @@ namespace Z0
         [MethodImpl(Inline), BlockedOp, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block128<T> vand<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VX.vand<T>(n128));
+                => ref vzip(a,b,c,VF.vand<T>(n128));
 
         [MethodImpl(Inline), BlockedOp, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> vand<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VX.vand<T>(n256));
+                => ref vzip(a,b,c,VF.vand<T>(n256));
 
         [MethodImpl(Inline), BlockedOp, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block128<T> vor<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VX.vor<T>(n128));
+                => ref vzip(a,b,c,VF.vor<T>(n128));
 
         [MethodImpl(Inline), BlockedOp, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> vor<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VX.vor<T>(n256));
+                => ref vzip(a,b,c,VF.vor<T>(n256));
 
         [MethodImpl(Inline), BlockedOp, NumericClosures(NumericKind.All)]
         public static ref readonly Block128<T> vxor<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VX.vxor<T>(n128));
+                => ref vzip(a,b,c,VF.vxor<T>(n128));
 
         [MethodImpl(Inline), BlockedOp, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> vxor<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VX.vxor<T>(n256));
+                => ref vzip(a,b,c,VF.vxor<T>(n256));
 
     }
 

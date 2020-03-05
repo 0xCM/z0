@@ -11,9 +11,9 @@ namespace Z0
 
     using static Root;
     using static As;
-    using D = VDirect;
+    using D = dvec;
 
-    partial class Vectors
+    partial class gvec
     {
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector

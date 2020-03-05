@@ -147,28 +147,29 @@ namespace Z0
             return dinx.vcompact(x0,x1,n128, z8);
         }
 
+
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vgather(N256 w, in sbyte src, Vector256<sbyte> vidx)        
-            => dinx.vconcat(
+            => dvec.vconcat(
                     vgather(n128, in src, dinx.vlo(vidx)), 
                     vgather(n128, in src, dinx.vhi(vidx)));
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vgather(N256 w, in byte src, Vector256<byte> vidx)        
-            => dinx.vconcat(
+            => dvec.vconcat(
                     vgather(n128, in src, dinx.vlo(vidx)), 
                     vgather(n128, in src, dinx.vhi(vidx)));
 
 
         [MethodImpl(Inline), Op]
         public static Vector256<short> vgather(N256 w, in short src, Vector256<short> vidx)        
-            => dinx.vconcat(
+            => dvec.vconcat(
                     vgather(n128, in src, dinx.vlo(vidx)), 
                     vgather(n128, in src, dinx.vhi(vidx)));
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vgather(N256 w, in ushort src, Vector256<ushort> vidx)        
-            => dinx.vconcat(
+            => dvec.vconcat(
                     vgather(n128, in src, dinx.vlo(vidx)), 
                     vgather(n128, in src, dinx.vhi(vidx)));
 

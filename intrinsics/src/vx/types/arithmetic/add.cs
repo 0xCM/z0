@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         [NumericClosures(NumericKind.All)]
         public readonly struct Add128<T> : IVBinOp128D<T>, IBinaryBlockedOp128<T>
@@ -35,7 +35,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
                 => ref vblocks.add(a,b,c);
-
         }
 
         [NumericClosures(NumericKind.All)]

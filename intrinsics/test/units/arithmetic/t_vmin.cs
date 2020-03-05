@@ -46,10 +46,10 @@ namespace Z0
 
         void vmin_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VX.vmin(w,t), w, t);
+                => CheckBinaryScalarMatch(VF.vmin(w,t), w, t);
             
         void vmin_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VX.vmin(w,t), w, t);
+                => CheckBinaryScalarMatch(VF.vmin(w,t), w, t);
     }
 }

@@ -192,6 +192,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint vtakemask(Vector256<ulong> src, Vector256<ulong> offsets, [Imm] byte index)
             => vtakemask(vsllv(src, offsets), index);   
-
     }
 }

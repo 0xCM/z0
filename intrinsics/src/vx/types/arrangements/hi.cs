@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         public readonly struct Hi128<T> : IVUnaryOp128<T>
             where T : unmanaged

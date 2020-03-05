@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
  
     partial struct BitSpan
     {
@@ -20,7 +19,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSpan truncate(in BitSpan src, int maxbits)
             => src.Length <= maxbits ? src : new BitSpan(src.bits.Slice(0, maxbits));
-
     }
-
 }

@@ -122,7 +122,7 @@ namespace Z0
                 var x1 = Math128.mul(vcell(x,1), vcell(y,1));
                 var x2 = Math128.mul(vcell(x,2), vcell(y,2));
                 var x3 = Math128.mul(vcell(x,3), vcell(y,3));
-                var expect = Vectors.vparts(wt, x0,x1,x2,x3);
+                var expect = gvec.vparts(wt, x0,x1,x2,x3);
                 var actual = dinx.vmul(x,y);
 
                 Claim.eq(expect,actual);
@@ -160,7 +160,7 @@ namespace Z0
             
             var zb = Blocks.single(n512,t);
             var eb = Blocks.single(n512,t);            
-            var count = Vectors.vcount(w,s);
+            var count = gvec.vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)
             {

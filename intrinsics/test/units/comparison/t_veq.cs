@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static Nats;
     using static Literals;
-    using static Vectors;
+    using static gvec;
 
     public class t_veq : t_vinx<t_veq>
     {     
@@ -77,7 +77,7 @@ namespace Z0
             where T : unmanaged
         {
             var name = CaseName(NaturalIdentity.contracted(MethodInfo.GetCurrentMethod().Name,w,t));
-            var f = VX.veq(w,t);
+            var f = VF.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = Blocks.alloc<T>(w, x.BlockCount);
             result.Fill(ones(t));
@@ -88,7 +88,7 @@ namespace Z0
             where T : unmanaged
         {
             var name = CaseName(NaturalIdentity.contracted(MethodInfo.GetCurrentMethod().Name,w,t));
-            var f = VX.veq(w,t);
+            var f = VF.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = Blocks.alloc<T>(w, x.BlockCount);
             result.Fill(ones(t));
@@ -97,10 +97,10 @@ namespace Z0
 
         void veq_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VX.veq(w,t),w,t);
+                => CheckBinaryScalarMatch(VF.veq(w,t),w,t);
 
         void veq_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VX.veq(w,t),w,t);            
+                => CheckBinaryScalarMatch(VF.veq(w,t),w,t);            
     }
 }

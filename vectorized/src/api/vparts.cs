@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Vectors
+    partial class gvec
     {
         /// <summary>
         /// Defines a 128-bit vector by explicit component specification, from least -> most significant

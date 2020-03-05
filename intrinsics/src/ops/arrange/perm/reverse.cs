@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vreverse(Vector256<sbyte> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => dvec.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vreverse(Vector256<short> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => dvec.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vreverse(Vector256<ushort> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => dvec.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components

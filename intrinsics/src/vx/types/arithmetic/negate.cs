@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         [NumericClosures(NumericKind.All)]
         public readonly struct Negate128<T> : IVUnaryOp128D<T>, IUnaryBlockedOp128<T>

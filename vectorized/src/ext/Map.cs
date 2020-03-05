@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static Vectors;
+    using static gvec;
     using static Nats;
 
     partial class VectorExtensions
@@ -73,7 +73,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);            
-            return Vectors.vload(n256, in head(dst));        
+            return gvec.vload(n256, in head(dst));        
         } 
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return Vectors.vload(n, in head(dst));        
+            return gvec.vload(n, in head(dst));        
         } 
     }
 }

@@ -108,6 +108,6 @@ namespace Z0
         public static T broadcast<S,T>(S src, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => Vectors.vfirst<S,T>(Vectors.vbroadcast(n128, src));                
+                => gvec.vfirst<S,T>(gvec.vbroadcast(n128, src));                
     }
 }

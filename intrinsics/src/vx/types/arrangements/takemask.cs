@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         public readonly struct TakeMask128<T> : IVUnaryScalar128<T,ushort>
             where T : unmanaged

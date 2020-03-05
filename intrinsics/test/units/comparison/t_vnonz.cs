@@ -9,7 +9,7 @@ namespace Z0
     using static Root;
     using static Nats;
     using static Literals;
-    using static Vectors;
+    using static gvec;
 
     public class t_vnonz : t_vinx<t_vnonz>
     {
@@ -48,7 +48,7 @@ namespace Z0
         {            
             var min = one(t);
             var max = maxval(t);
-            var f = VX.vnonz(w,t);
+            var f = VF.vnonz(w,t);
 
             Claim.nea(ginx.vnonz(vzero(w,t)));
             
@@ -61,7 +61,7 @@ namespace Z0
         {
             var min = one(t);
             var max = maxval(t);
-            var f = VX.vnonz(w,t);
+            var f = VF.vnonz(w,t);
 
             Claim.nea(ginx.vnonz(vzero(w,t)));
             

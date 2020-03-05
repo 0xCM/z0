@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         [NumericClosures(NumericKind.All)]
         public readonly struct Sub128<T> : IVBinOp128D<T>, IBinaryBlockedOp128<T>

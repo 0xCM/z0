@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = Blocks.single<T>(n128);
-            Vectors.vstore(src, ref dst.Head);
+            gvec.vstore(src, ref dst.Head);
             return dst.Data;
         }
 
@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = Blocks.single<T>(n256);
-            Vectors.vstore(src, ref dst.Head);
+            gvec.vstore(src, ref dst.Head);
             return dst.Data;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = Blocks.single<T>(n256);
-            Vectors.vstore(src, ref dst.Head);
+            gvec.vstore(src, ref dst.Head);
             return dst.Data;
         }             
     }

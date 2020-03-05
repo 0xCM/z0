@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
+    using static Literals;
+    using static Nats;
 
     partial struct BitSpan
     {

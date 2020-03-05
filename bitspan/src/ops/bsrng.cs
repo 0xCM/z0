@@ -9,8 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static zfunc;
-    using static As;
+    using static Root;
  
     public static class BitSpanRng
     {
@@ -43,5 +42,4 @@ namespace Z0
             return ref dst;
         }
     }
-
 }

@@ -27,7 +27,7 @@ namespace Z0
         {
             var n = n128;
             var cellmask = BitMask.eraser<T>(start,count);
-            var vmask = Vectors.vbroadcast(n, cellmask);
+            var vmask = gvec.vbroadcast(n, cellmask);
             return ginx.vand(vmask,src);
         }
 
@@ -44,7 +44,7 @@ namespace Z0
         {
             var n = n256;
             var cellmask = BitMask.eraser<T>(start,count);
-            var vmask = Vectors.vbroadcast(n, cellmask);
+            var vmask = gvec.vbroadcast(n, cellmask);
             return ginx.vand(vmask,src);
         }
     }

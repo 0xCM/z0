@@ -22,7 +22,7 @@ namespace Z0.Resolutions
             }
 
             public override IEnumerable<Type> ServiceHostTypes
-                => typeof(VXTypes).GetNestedTypes().Realize<IFunc>();
+                => typeof(VFTypes).GetNestedTypes().Realize<IFunc>();
         }
     }
 }

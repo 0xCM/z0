@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         [NumericClosures(NumericKind.Integers)]
         public readonly struct CImpl128<T> : IVBinOp128D<T>, IBinaryBlockedOp128<T>

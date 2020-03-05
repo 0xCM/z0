@@ -26,7 +26,7 @@ namespace Z0.OpCodes
 
         public static Vector128<uint> vlogic_machine(Vector128<uint> a, Vector128<uint> b)
         {
-            var m = LogicMachine.Create(VX.vbitlogic(n128,z32),a);
+            var m = LogicMachine.Create(VF.vbitlogic(n128,z32),a);
             return m.xor(m.and(a,b),b);
         }
 

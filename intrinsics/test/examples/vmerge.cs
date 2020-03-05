@@ -25,7 +25,7 @@ namespace Z0
             
             var w = n256;
             var t = z32;
-            var count = Vectors.vcount(w,t);
+            var count = gvec.vcount(w,t);
 
             var x = vpattern.vincrements(w,t);
             var y = vpattern.vincrements(w, (x.LastCell() + 1));
@@ -36,10 +36,10 @@ namespace Z0
 
         public void vmerge_example()
         {
-            var a = Vectors.vparts(n128, 0u,1,2,3);
-            var b = Vectors.vparts(n128, 4u,5,6,7);
-            var c = Vectors.vparts(n128, 8u,9,10,11);
-            var d = Vectors.vparts(n128, 12u,13,14,15);
+            var a = gvec.vparts(n128, 0u,1,2,3);
+            var b = gvec.vparts(n128, 4u,5,6,7);
+            var c = gvec.vparts(n128, 8u,9,10,11);
+            var d = gvec.vparts(n128, 12u,13,14,15);
             var x0 = dinx.vmergelo(v8u(a), v8u(b));
             var y0 = dinx.vmergelo(v8u(c), v8u(d));
             var z0 = v8u(dinx.vmergelo(v16u(x0),v16u(y0)));
@@ -56,7 +56,7 @@ namespace Z0
             void report()
             {
                 var x = vpattern.vincrements<byte>(n128);
-                var y = dinx.vadd(x, Vectors.vbroadcast(n128, (byte)16));
+                var y = dinx.vadd(x, gvec.vbroadcast(n128, (byte)16));
 
                 var lo = ginx.vmergelo(x,y);
                 var hi = ginx.vmergehi(x,y);

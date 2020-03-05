@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         public readonly struct LoadSpan128<T> : IVSpanSourced128<T>
             where T : unmanaged
@@ -25,7 +25,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n128,x,offset);            
+            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => gvec.vload(n128,x,offset);            
         }
 
         public readonly struct LoadSpan256<T> : IVSpanSourced256<T>
@@ -40,7 +40,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => Vectors.vload(n256,x,offset);
+            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => gvec.vload(n256,x,offset);
         }
     }
 }

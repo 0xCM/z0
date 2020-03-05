@@ -47,11 +47,11 @@ namespace Z0
 
         void vnegate_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VX.vnegate(w,t), w, t);
+                => CheckUnaryScalarMatch(VF.vnegate(w,t), w, t);
             
         void vnegate_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VX.vnegate(w,t), w, t);
+                => CheckUnaryScalarMatch(VF.vnegate(w,t), w, t);
 
    }
 }

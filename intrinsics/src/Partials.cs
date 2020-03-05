@@ -94,9 +94,9 @@ namespace Z0
     }
 
     /// <summary>
-    /// Vectorized operators
+    /// Vectorized functions
     /// </summary>
-    public static partial class VX
+    public static partial class VF
     {
 
     }
@@ -104,7 +104,7 @@ namespace Z0
     /// <summary>
     /// Vectorized operator types
     /// </summary>
-    public static partial class VXTypes
+    public static partial class VFTypes
     {
 
     }

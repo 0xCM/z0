@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class VXTypes
+    partial class VFTypes
     {
         [NumericClosures(NumericKind.Integers)]
         public readonly struct BitLogic128<T> : IBitLogic<Vector128<T>>

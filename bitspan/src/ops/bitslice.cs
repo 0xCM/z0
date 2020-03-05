@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
     using static As;
     using static P2K;
+    using static Literals;
  
     partial struct BitSpan
     {

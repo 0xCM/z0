@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
 
     public static class RowBitsX
     {
@@ -21,5 +20,4 @@ namespace Z0
             where T : unmanaged
                 => new RowBits<T>(src.data.Replicate());
     }
-
 }

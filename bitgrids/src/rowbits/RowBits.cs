@@ -5,10 +5,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a sequence of generic bitvectors, interpreted as rows, for which the width is determined by the bitvector primal type 

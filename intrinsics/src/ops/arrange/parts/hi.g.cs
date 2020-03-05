@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => vgeneric<T>(Vectors.vscalar(n128, vcell(v64u(src),1)));
+                => vgeneric<T>(gvec.vscalar(n128, vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts hi 128-bit lane of the source vector

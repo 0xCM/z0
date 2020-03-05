@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
     using static Literals;
-    using static Vectors;
+    using static gvec;
 
     public class t_vpop : t_vinx<t_vpop>
     {
@@ -40,7 +40,7 @@ namespace Z0
         void vpop_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var f = VX.vpop(w,t);
+            var f = VF.vpop(w,t);
 
             void check()
             {
@@ -65,7 +65,7 @@ namespace Z0
         void vpop_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var f = VX.vpop(w,t);
+            var f = VF.vpop(w,t);
 
             void check()
             {

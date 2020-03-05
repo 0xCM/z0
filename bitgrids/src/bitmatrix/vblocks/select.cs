@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static Vectors;
+    using static gvec;
     using static ginx;    
     
     partial class vblock
@@ -19,9 +19,9 @@ namespace Z0
         public static Vector128<T> vselect<T>(N128 n, in T a, in T b, in T c)
             where T : unmanaged
         {                    
-            Vectors.vload(a, out Vector128<T> vA);
-            Vectors.vload(b, out Vector128<T> vB);
-            Vectors.vload(c, out Vector128<T> vC);
+            gvec.vload(a, out Vector128<T> vA);
+            gvec.vload(b, out Vector128<T> vB);
+            gvec.vload(c, out Vector128<T> vC);
             return ginx.vselect(vA,vB,vC);
         }
 
@@ -29,9 +29,9 @@ namespace Z0
         public static Vector256<T> vselect<T>(N256 n, in T a, in T b, in T c)
             where T : unmanaged
         {                    
-            Vectors.vload(a, out Vector256<T> vA);
-            Vectors.vload(b, out Vector256<T> vB);
-            Vectors.vload(c, out Vector256<T> vC);
+            gvec.vload(a, out Vector256<T> vA);
+            gvec.vload(b, out Vector256<T> vB);
+            gvec.vload(c, out Vector256<T> vC);
             return ginx.vselect(vA,vB,vC);
         }
 

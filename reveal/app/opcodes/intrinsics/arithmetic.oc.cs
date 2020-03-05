@@ -20,7 +20,7 @@ namespace Z0
             => ginx.vadd(x,y);
 
         public static Vector256<short> add_o256x16i(Vector256<short> x, Vector256<short> y)
-            => Pipes.apply(x,y,VX.vadd(n256,z16i));
+            => Pipes.apply(x,y,VF.vadd(n256,z16i));
             
         public static Vector256<short> abs_d256x16i(Vector256<short> src)
             => dinx.vabs(src);
@@ -29,7 +29,7 @@ namespace Z0
             => ginx.vabs(src);
 
         public static Vector256<short> abs_o256x16i(Vector256<short> src)
-            => Pipes.apply(src, VX.vabs(n256,z16i));
+            => Pipes.apply(src, VF.vabs(n256,z16i));
 
         public static Vector256<short> sub_d256x16i(Vector256<short> x, Vector256<short> y)
             => dinx.vsub(x,y);

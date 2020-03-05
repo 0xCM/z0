@@ -49,7 +49,7 @@ namespace Z0
             where T : unmanaged
         {
             const int count = 16;
-            var f = VX.vtakemask(w,t);
+            var f = VF.vtakemask(w,t);
             var r = Random.VectorEmitter(w,t);
 
             void check()
@@ -71,7 +71,7 @@ namespace Z0
             where T : unmanaged
         {
             const int count = 32;
-            var f = VX.vtakemask(w,t);
+            var f = VF.vtakemask(w,t);
             var r = Random.VectorEmitter(w,t);
             
             void check()

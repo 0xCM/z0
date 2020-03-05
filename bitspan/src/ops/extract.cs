@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Literals;
+    using static Nats;
     using static As;
  
     partial struct BitSpan
@@ -59,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static byte extract(in BitSpan src, N8 n, int offset)
         {
-            var v0 = Vectors.vload(n256, head(extract(src, offset, bitsize<byte>())));
+            var v0 = gvec.vload(n256, head(extract(src, offset, bitsize<byte>())));
             return (byte)bitpack.packlsb8(dinx.vcompact(v0,n128,z8));
         }
 

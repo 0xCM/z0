@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Vectors
+    partial class gvec
     {
        /// <summary>
         /// Returns a 128-bit vector with all bits disabled

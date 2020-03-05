@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static As;
     using static P2K;
 
@@ -117,10 +118,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void distribute(in byte src, int step, ref uint dst)
-            => Vectors.vstore(dinx.vconvert(n64, in skip(in src, step*8), n256, n32), ref seek(ref dst, step*8));
+            => gvec.vstore(dinx.vconvert(n64, in skip(in src, step*8), n256, n32), ref seek(ref dst, step*8));
 
         [MethodImpl(Inline)]
         static void distribute(in byte src, int srcstep, ref uint dst, int dststep)
-            => Vectors.vstore(dinx.vconvert(n64, in skip(in src, srcstep*8), n256, n32), ref seek(ref dst, dststep*8));
+            => gvec.vstore(dinx.vconvert(n64, in skip(in src, srcstep*8), n256, n32), ref seek(ref dst, dststep*8));
     }
 }

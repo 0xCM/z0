@@ -69,8 +69,8 @@ namespace Z0
 
         public Vector128<uint> InvokeBinaryImmediate_2()
         {
-            var x = Vectors.vparts(n128,1,2,3,4);
-            var y = Vectors.vparts(n128,1,2,3,4);
+            var x = gvec.vparts(n128,1,2,3,4);
+            var y = gvec.vparts(n128,1,2,3,4);
             return dinx.vblend2x64(x,y, (byte)4);
 
         }

@@ -12,9 +12,9 @@ namespace Z0
     using static Root;
     using static As;
     using static Nats;
-    using D = VDirect;
+    using D = dvec;
 
-    partial class Vectors
+    partial class gvec
     {
         /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector

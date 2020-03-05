@@ -75,7 +75,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = vcount(w,t);
-            var f = VX.vhi(w,t);
+            var f = VF.vhi(w,t);
             var r = Random.VectorEmitter(w,t);
             for(var rep=0; rep < RepCount; rep++)
             {                
@@ -90,7 +90,7 @@ namespace Z0
         protected void vhi_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var f = VX.vhi(w,t);
+            var f = VF.vhi(w,t);
             var r = Random.VectorEmitter(w,t);
             for(var rep=0; rep < RepCount; rep++)
             {
