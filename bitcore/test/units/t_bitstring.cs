@@ -329,7 +329,7 @@ namespace Z0
             var src = Random.Span<T>(RepCount);
             for(var i=0; i<src.Length; i++)
             {
-                var x = gbits.bitchars(src[i]);
+                var x = BitString.bitchars(src[i]);
                 gbits.parse(x, 0, out T y);
                 Claim.eq(src[i], y);                
             }

@@ -11,8 +11,18 @@ namespace Z0
 
     using static Root;
 
+    public static class Formatters
+    {
+        [MethodImpl(Inline)]
+        public static IFormatter<T,BitFormatConfig>  BitFormatter<T>()
+            where T : struct
+                =>  default(BitFormatter<T>);
+
+    }
+
     public static class Formatting
     {             
+
         /// <summary>
         /// Formats any object, using a custom formatter if it exists or invoking ToString() if not
         /// </summary>

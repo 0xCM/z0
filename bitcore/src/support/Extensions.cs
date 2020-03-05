@@ -31,16 +31,5 @@ namespace Z0
         public static T BitSeg<T>(this Block256<T> src, int first, int last)
             where T : unmanaged
                 => gbits.bitseg(src,first,last);
-
-
-        /// <summary>
-        /// Converts a bitview to a bitstring
-        /// </summary>
-        /// <param name="src">The view source</param>
-        /// <typeparam name="T">The data type on which the view is predicated</typeparam>
-        [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this BitView<T> src, int? maxbits = null)
-            where T : unmanaged
-                => src.Bytes.ToBitString(maxbits);
     }
 }

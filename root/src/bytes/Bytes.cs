@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]   
         public static Span<byte> from<T>(ref T src)
-            where T : unmanaged
+            where T : struct
                 => MemoryMarshal.CreateSpan(ref refs.byterefR(ref src), size<T>()); 
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<byte> from<T>(T src)
-            where T : unmanaged
+            where T : struct
                 => MemoryMarshal.AsBytes(span(src));
 
         /// <summary>

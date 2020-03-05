@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
         internal static string FormatMatrixBits(this Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false) 
         {
-            var dst = gbits.bitchars(src);
+            var dst = BitString.bitchars(src);
             var sb = text.factory.Builder();
             var limit = maxbits ?? dst.Length;
 

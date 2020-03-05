@@ -24,5 +24,4 @@ namespace Z0
         /// </summary>
         Interval<T> SampleDomain {get;}
     }
-
 }

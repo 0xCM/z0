@@ -66,7 +66,7 @@ namespace Z0
                     yield return random.BitString(minlen, maxlen);
             }
             
-            return stream(produce(), random.RngKind);
+            return CoreRng.stream(produce(), random.RngKind);
         }
     }
 }

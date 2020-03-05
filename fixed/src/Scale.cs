@@ -92,6 +92,6 @@ namespace Z0
         /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline)]
         public static ulong contract(this ulong src, ulong max)
-            => Scale.mulhi(src,max);  //src.MulHi(max);          
+            => Scale.mulhi(src,max); 
     }
 }

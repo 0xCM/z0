@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
+
     using static Z0.Root;
 
     public class BitSource<T> : IRngStream<bit>, IRngPointStreamSource<bit>

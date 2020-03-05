@@ -25,6 +25,11 @@ namespace Z0
         public readonly bool SpecifierPrefix;
 
         /// <summary>
+        /// The maximum number of bits to be extracted/formatted from the source
+        /// </summary>
+        public readonly int MaxBitCount;
+
+        /// <summary>
         /// Optional contiguous digit sequence width; if unspecified the bistring will be formatted without blocks
         /// </summary>
         public readonly int BlockWidth;
@@ -50,6 +55,11 @@ namespace Z0
             => Blocked(blockwidth);
 
         [MethodImpl(Inline)]
+        public static BitFormatConfig Limited(int maxbits)
+            => new BitFormatConfig(true, maxbits: maxbits);
+
+
+        [MethodImpl(Inline)]
         public static BitFormatConfig Blocked(int width, char? sep = null)
             => new BitFormatConfig(blockWidth: width, blocksep: sep);
 
@@ -58,13 +68,17 @@ namespace Z0
             => new BitFormatConfig(blockWidth: blockWidth, rowWidth:rowWidth, blocksep: blockSep);
 
         [MethodImpl(Inline)]
-        public BitFormatConfig(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null)
+        public BitFormatConfig(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null, int? maxbits = null)
         {
             this.TrimLeadingZeros = tlz;
-            this.SpecifierPrefix = false;
+            this.SpecifierPrefix = specifier;
             this.BlockWidth = blockWidth ?? 0;
             this.BlockSep = blocksep ?? AsciSym.Space;
             this.RowWidth = rowWidth ?? 0;
+            this.MaxBitCount = maxbits ?? int.MaxValue;
         }
+        
+        public BitFormatConfig WithSpecifier()
+            => new BitFormatConfig(TrimLeadingZeros,true,BlockWidth,BlockSep,RowWidth,MaxBitCount);
     }
 }

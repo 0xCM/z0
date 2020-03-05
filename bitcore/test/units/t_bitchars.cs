@@ -49,8 +49,8 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Next<T>();
-                gbits.bitchars(a,s0);
-                s1 = gbits.bitchars(a);
+                BitString.bitchars(a,s0);
+                s1 = BitString.bitchars(a);
                 Claim.eq(s0, s1);
 
                 s0.Reverse();

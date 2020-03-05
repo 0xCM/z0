@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+    using System.Collections.Generic;
+    using System.Linq;
+
     using static Root;
-    
-    partial class CoreRng
+
+    partial class CoreRngOps
     {
         /// <summary>
         /// Produces a single random value

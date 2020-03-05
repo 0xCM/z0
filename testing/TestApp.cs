@@ -305,41 +305,44 @@ namespace Z0
             return clock;
         }
 
-        Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> results)
+        Duration ExecCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
         {
             var exectime = Duration.Zero;
             var casename = TestIdentity.testcase(method);
             var clock = counter(false);
 
-            var messages = MsgContextQueue.Create(this);
+            var messages = new List<AppMsg>();
             try
             {
                 var tsStart = now();
-                messages.Enqueue(PreCaseMsg(casename, tsStart));
+                messages.Add(PreCaseMsg(casename, tsStart));
 
                 clock.Start();
                 method.Invoke(unit,null);                    
                 clock.Stop();
 
-                messages.Enqueue(unit.Dequeue());
-                messages.Enqueue(AftCaseMsg(casename, clock.Time, tsStart, now()));
+
+                messages.AddRange(unit.Dequeue());
+                messages.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
-                    results.WithItems(outcomes);
+                    cases.WithItems(outcomes);
                 else
-                    results.Add(TestCaseRecord.Define(casename, true, clock.Time));
+                    cases.Add(TestCaseRecord.Define(casename, true, clock.Time));
             }
             catch(Exception e)
             {                
                 clock.Stop();
-                messages.Enqueue(unit.Dequeue());                
-                messages.Enqueue(CreateErrorMessages(casename, e));
-                results.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
+                messages.AddRange(unit.Dequeue());                
+                messages.AddRange(CreateErrorMessages(casename, e));
+             
+                cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
             }
             finally
             {     
-                iter(messages.Dequeue(),print);       
+                Messages.emit(Context, messages);
+                iter(messages,print);       
                 //print(messages);
             }
             return exectime;

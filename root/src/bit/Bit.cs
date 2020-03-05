@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Collections.Generic;
 
     using static Root;
 
@@ -27,7 +28,7 @@ namespace Z0
         UserType(TypeCodes.BitId), 
         ConversionProvider(typeof(BitConversion))
     ]
-    public readonly struct bit : ITypeIdentityProvider<bit>
+    public readonly struct bit : ITypeIdentityProvider<bit>, IFormattable<bit>
     {
         public const char Zero = '0';
 
@@ -645,5 +646,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public TypeIdentity DefineIdentity()
             => TypeIdentity.Define("1u");
+    }
+
+    public static class BitTypeExtensions
+    {
+        public static string Format(this IEnumerable<bit> src, bool reversed = true)
+        {
+            var chars = src.Map(x => x.ToChar());
+            if(reversed)
+                return new string(chars.Reverse());
+            else
+                return new string(chars);            
+        }
     }
 }

@@ -9,11 +9,10 @@ namespace Z0
 
     using static Root;
 
-    readonly struct FixedEmitter<F,T> : IFixedEmitter<F,T>
+    public readonly struct FixedEmitter<F,T> : IFixedEmitter<F,T>
         where F : unmanaged, IFixed
         where T :unmanaged
     {
-
         readonly IPolyrand Random;
         
         readonly FixedEmitterSurrogate<F,T> f;
@@ -31,7 +30,7 @@ namespace Z0
         public OpIdentity Id => OpIdentity.fixedop(Name, (FixedWidth)Width, NumericKind);
 
         [MethodImpl(Inline)]
-        internal FixedEmitter(IPolyrand random, FixedEmitterSurrogate<F,T> f)      
+        public FixedEmitter(IPolyrand random, FixedEmitterSurrogate<F,T> f)      
         {      
             this.Random = random;
             this.f = f;

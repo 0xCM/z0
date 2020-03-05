@@ -23,7 +23,7 @@ namespace Z0
     /// <summary>
     /// Captures a random stream along with the generator classification
     /// </summary>
-    public struct RandomStream<T> : IRngStream<T>
+    public readonly struct RandomStream<T> : IRngStream<T>
         where T : struct
     {
 

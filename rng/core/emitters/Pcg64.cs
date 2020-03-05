@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     
     using static Root;
-    using static math;
+    using static RngMath;
 
     /// <summary>
     /// Implemements a 64-bit PCG generator

@@ -8,25 +8,23 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
+    
     using static Root;
 
     /// <summary>
     /// A container of messages which isnt't realy a queue but is more-or-less thread-safe
     /// </summary>
-    public class AppMsgQueue
+    public class AppMsgQueue : IAppMsgQueue
     {
         object lockobj = new object();
 
         List<AppMsg> Messages {get;} 
 
+        [MethodImpl(Inline)]
         public static AppMsgQueue Create(params AppMsg[] src)
             => new AppMsgQueue(src);
 
+        [MethodImpl(Inline)]
         AppMsgQueue(params AppMsg[] src)
         {
             this.Messages = src.ToList();
@@ -42,7 +40,7 @@ namespace Z0
             }
         }
 
-        public void Post(AppMsg msg)
+        public void Enqueue(AppMsg msg)
         {
             lock(lockobj)
                 Messages.Add(msg);
@@ -52,12 +50,12 @@ namespace Z0
         {
             lock(lockobj)
             {
-                Post(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
+                Enqueue(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
                 return Dequeue();
             }
         }
-
-        public void Post(string msg, AppMsgKind? severity = null)
-            => Post(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
+        
+        public void Enqueue(string msg, AppMsgKind? severity = null)
+            => Enqueue(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
     }
 }

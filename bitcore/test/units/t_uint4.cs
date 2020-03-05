@@ -196,14 +196,5 @@ namespace Z0
             
         }
 
-        public void uint4_bitstring()
-        {
-            var x0 = ((UInt4)0b0111).ToBitString().Format(true);
-            Claim.eq("111",x0);
-
-            var x1 = ((UInt4)0b1101).ToBitString().Format(true);
-            Claim.eq("1101",x1);
-
-        }
     }
 }

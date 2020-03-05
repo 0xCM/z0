@@ -29,7 +29,7 @@ namespace Z0
             => Queue = dst;
 
         MsgContext()
-            => Queue = MsgContextQueue.Create(this);
+            => Queue = AppMsgQueue.Create();
 
         public IReadOnlyList<AppMsg> Dequeue()
             => Queue.Dequeue();

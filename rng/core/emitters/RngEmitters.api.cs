@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    public static class FixedEmitX
+    public static class RngEmitters
     {
         /// <summary>
         /// Creates a primal emitter predicated on a random source
@@ -329,4 +329,5 @@ namespace Z0
             }
         }
     }
+
 }

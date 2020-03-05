@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
     using System.Runtime.CompilerServices;
 
@@ -20,7 +19,7 @@ namespace Z0
         public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
-        internal PrimalEmitter(IPolyrand random)            
+        public PrimalEmitter(IPolyrand random)            
             => this.Random = random;
         
         [MethodImpl(Inline)]

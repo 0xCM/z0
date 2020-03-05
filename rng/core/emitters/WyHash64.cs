@@ -14,8 +14,7 @@ namespace Z0
     /// </summary>
     /// <remarks>Algorithms take from https://github.com/lemire/testingRNG/blob/master/source/wyhash.h</remarks>
     public class WyHash64 : IRngBoundPointSource<ulong>
-    {
-        
+    {        
         ulong State;
 
         [MethodImpl(Inline)]
@@ -30,10 +29,8 @@ namespace Z0
         public ulong Next()
         {
             State += X1;
-            //State.UMul128(X2, out UInt128 a);
             Math128.mul(State, X2, out Pair<ulong> Y1);
             var m1 = Y1.A ^ Y1.B;
-            //m1.UMul128(X3, out UInt128 Y2);
             Math128.mul(m1, X3, out Pair<ulong> Y2);
             var m2 = Y2.A ^ Y2.B;
             return m2;

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static RngMath;
 
     /// <summary>
     /// Implements a 16-bit random number generator
@@ -49,7 +50,7 @@ namespace Z0
             var l = (ushort)m;
             if (l < max) 
             {
-                var t = math.mod(math.negate(max), max);
+                var t = mod(negate(max), max);
                 while (l < t) 
                 {
                     x = Next();
@@ -62,7 +63,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ushort Next(ushort min, ushort max)
-            => math.add(min, Next((ushort)(max - min)));
+            => add(min, Next((ushort)(max - min)));
 
         [MethodImpl(Inline)]
         ushort Hash16(uint input, uint key) 

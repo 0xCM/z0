@@ -9,7 +9,6 @@ namespace Z0
 
     public class WyHash64Suite<N>
         where N : unmanaged, ITypeNat
-
     {
         static readonly int MemberCount = (int)new N().NatValue;
         

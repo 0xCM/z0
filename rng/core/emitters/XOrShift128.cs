@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static RngMath;
 
     /// <summary>
     /// Defines pseudorandom number generator
@@ -44,7 +43,6 @@ namespace Z0
         public RngKind RngKind 
             => RngKind.XOrShift128;
 
-
         // From Marsaglia's Xorshift RNGs
         // The stream produced should have a period of 2^128 - 1
         public uint Next()
@@ -56,26 +54,6 @@ namespace Z0
             d = Grind(d,t);
             return d;
         }
-
-        /// <summary>
-        /// Computes the XOR of the source value and the result of left-shifting 
-        /// the source by a specified offset
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The number of bits to shift the source value leftwards</param>
-        [MethodImpl(Inline)]
-        static uint xorsl(uint src, int offset)
-            => src^(src << offset);
-
-        /// <summary>
-        /// Computes the XOR of the source value and the result of right-shifting 
-        /// the source by a specified offset
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The number of bits to shift the source value rightwards</param>
-        [MethodImpl(Inline)]
-        public static uint xorsr(uint src, int offset)
-            => src^(src >> offset);
 
         [MethodImpl(Inline)]
         static uint Grind(uint d, uint t)

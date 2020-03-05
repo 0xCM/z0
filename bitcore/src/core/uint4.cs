@@ -249,13 +249,7 @@ namespace Z0
         public string Format()
             => HexMap[data].ToString();
 
-        /// <summary>
-        /// Converts the source value to a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitString ToBitString()
-            => BitString.load(gbits.storeseq(data).Slice(0,BitWidth));
-
+ 
         [MethodImpl(Inline)]
         public bool Equals(UInt4 rhs)
             => data == rhs.data;

@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static As;
 
     public static class PolyData
     {
+
         /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>

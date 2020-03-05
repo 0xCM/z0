@@ -38,6 +38,7 @@ namespace Z0
         public static short mod(short a, short m)
             => (short)(a % m);
 
+
         /// <summary>
         /// Computes b := a % m
         /// </summary>

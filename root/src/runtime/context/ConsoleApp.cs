@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-        
+    using static Root;
+
     public abstract class ConsoleApp<A> : IConsoleApp<A>
         where A : ConsoleApp<A>, new()
     {        
@@ -15,12 +16,11 @@ namespace Z0
         readonly IAppMsgLog MsgLog;
 
         readonly IAppMsgQueue MsgQueue;
-        
-        
+                
         protected ConsoleApp(IContext context, IAppMsgLog log)
         {
             this.Context = context;
-            this.MsgQueue = MsgContextQueue.Create(context);
+            this.MsgQueue = AppMsgQueue.Create();
             this.MsgLog = log;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                MsgQueue.Flush(e);
+                iter(MsgQueue.Flush(e), term.print);
             }
         }
 
