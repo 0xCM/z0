@@ -1,19 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(TopDir)data/src/z0.data.csproj" />    
+    <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-    <ProjectReference Include="$(TopDir)intrinsics/svc/z0.intrinsics.svc.csproj" />
-    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />
-    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
-    
   </ItemGroup>
 
 </Project>

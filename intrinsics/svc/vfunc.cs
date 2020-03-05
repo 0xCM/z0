@@ -11,6 +11,22 @@ namespace Z0
     
     using static Root;    
 
+    /// <summary>
+    /// Vectorized functions
+    /// </summary>
+    public static partial class VF
+    {
+
+    }
+
+    /// <summary>
+    /// Vectorized operator types
+    /// </summary>
+    public static partial class VFTypes
+    {
+
+    }
+    
     public static class vfunc
     {
         [MethodImpl(Inline)]

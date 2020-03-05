@@ -12,6 +12,13 @@ namespace Z0
     using static zfunc;
     using static vfunc;
 
+    [ApiHost(ApiHostKind.Generic)]
+    public static partial class vblocks
+    {
+
+
+    }
+
     partial class vblocks
     {
         [MethodImpl(Inline), BlockedOp, NumericClosures(NumericKind.Integers & (~NumericKind.U64))]

@@ -11,6 +11,8 @@
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
+    <ProjectReference Include="$(TopDir)intrinsics/svc/z0.intrinsics.svc.csproj" />
+
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />        
     <ProjectReference Include="$(TopDir)bitspan/src/z0.bitspan.csproj" />    

@@ -19,12 +19,6 @@ namespace Z0
 
     }
 
-    [ApiHost(ApiHostKind.Generic)]
-    public static partial class vblocks
-    {
-
-
-    }
 
     [ApiHost("vpattern", ApiHostKind.Generic)]
     public static partial class vpattern
@@ -93,19 +87,5 @@ namespace Z0
     {
     }
 
-    /// <summary>
-    /// Vectorized functions
-    /// </summary>
-    public static partial class VF
-    {
 
-    }
-
-    /// <summary>
-    /// Vectorized operator types
-    /// </summary>
-    public static partial class VFTypes
-    {
-
-    }
 }

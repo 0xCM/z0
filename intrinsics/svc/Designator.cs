@@ -7,12 +7,12 @@ namespace Z0.Resolutions
     using System;
     using System.Collections.Generic;
 
-    public sealed class Intrinsics : AssemblyResolution<Intrinsics, Intrinsics.C>
+    public sealed class IntrinsicsSvc : AssemblyResolution<IntrinsicsSvc, IntrinsicsSvc.C>
     {        
-        const AssemblyId Identity = AssemblyId.Intrinsics;
+        const AssemblyId Identity = AssemblyId.IntrinsicsSvc;
 
-        public Intrinsics() : base(AssemblyId.Intrinsics) {}
+        public IntrinsicsSvc() : base(AssemblyId.IntrinsicsSvc) {}
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.Intrinsics) { } }
+        public class C : OpCatalog<C> { public C() : base(AssemblyId.IntrinsicsSvc) { } }
     }
 }
