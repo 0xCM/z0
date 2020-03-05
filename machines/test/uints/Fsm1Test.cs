@@ -26,7 +26,7 @@ namespace Z0
             var indices = Numeric.range(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
             for(var i=0u; i< tasks.Length; i++)
             {
-                var random = Rng.Pcg64(0,indices[i]).ToPolyrand();
+                var random = CoreRng.polyrand(Rng.Pcg64(0,indices[i]));
                 var context = Fsm.CreateContext(random);
                 var machine = Fsm.Machine($"Fsm1-{i}",context, S0,S5, spec.TransFunc);
                 tasks[i] = Fsm.Run(machine);

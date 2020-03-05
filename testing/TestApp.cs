@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;    
+    using static Root;    
 
     /// <summary>
     /// Base type for test applications
@@ -89,7 +89,7 @@ namespace Z0
             try
             {
                 var execTime = Duration.Zero;
-                var runtimer = stopwatch();
+                var runtimer = time.stopwatch();
                 var clock = counter(false);
                 
                 unit = host.CreateInstance<IUnitTest>();
@@ -100,7 +100,7 @@ namespace Z0
                                 
                 clock.Start();
                 
-                var tsStart = now();
+                var tsStart = time.now();
 
                 if(unit is IExplicitTest et)  
                     ExecExplicit(et, host.Name,results);
@@ -111,11 +111,11 @@ namespace Z0
                 }                
                 clock.Stop();
 
-                print(AftUnitMsg(hosturi, clock.Time, tsStart, now()));                
+                term.print(AftUnitMsg(hosturi, clock.Time, tsStart, time.now()));                
             }
             catch(Exception e)
             {
-                error($"Harness execution failed: {e}");
+                term.error($"Harness execution failed: {e}");
             }  
             finally
             {
@@ -200,7 +200,7 @@ namespace Z0
             {                
                 unit.Configure(Config);     
                 
-                var tsStart = now();
+                var tsStart = time.now();
                 messages.Add(PreCaseMsg(casename, tsStart));                
                 
                 clock.Start();
@@ -208,7 +208,7 @@ namespace Z0
                 clock.Stop();
 
                 messages.AddRange(unit.Dequeue());
-                messages.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
+                messages.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
 
                 var outcomes = unit.TakeOutcomes().ToArray();                
                 if(outcomes.Length != 0)
@@ -226,7 +226,7 @@ namespace Z0
             }
             finally
             {            
-                print(messages);
+                term.print(messages);
             }
             return clock.Time;
         }
@@ -299,7 +299,7 @@ namespace Z0
             }
             finally
             {            
-                print(messages);
+                term.print(messages);
             }
 
             return clock;
@@ -314,7 +314,7 @@ namespace Z0
             var collected = new List<AppMsg>();
             try
             {
-                var tsStart = now();
+                var tsStart = time.now();
                 collected.Add(PreCaseMsg(casename, tsStart));
 
                 clock.Start();
@@ -323,7 +323,7 @@ namespace Z0
 
 
                 collected.AddRange(unit.Dequeue());
-                collected.Add(AftCaseMsg(casename, clock.Time, tsStart, now()));
+                collected.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
@@ -342,7 +342,7 @@ namespace Z0
             finally
             {     
                 Messages.emit(Context, collected);
-                iter(collected,print);       
+                iter(collected,term.print);       
                 //print(messages);
             }
             return exectime;

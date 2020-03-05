@@ -11,23 +11,33 @@ namespace Z0
     using static Root;
     using static As;
 
-    class Polyrand : IPolyrand
+    public class Polyrand : IPolyrand
     {
-        internal Polyrand(IRngBoundPointSource<ulong> Points)
+        readonly IRngBoundPointSource<ulong> Points;
+
+        public Option<IRngNav> Navigator {get;}
+
+        [MethodImpl(Inline)]
+        public static IPolyrand Create(IRngBoundPointSource<ulong> src)
+            => new Polyrand(src);
+
+        [MethodImpl(Inline)]
+        public static IPolyrand Create(IRngNav<ulong> src)
+            => new Polyrand(src);
+
+        [MethodImpl(Inline)]
+        Polyrand(IRngBoundPointSource<ulong> Points)
         {
             this.Points = Points;            
             this.Navigator = default;
         }
 
-        internal Polyrand(IRngNav<ulong> Points)
+        [MethodImpl(Inline)]
+        Polyrand(IRngNav<ulong> Points)
         {
             this.Points = Points;            
             this.Navigator = some(Points as IRngNav);
         }
-
-        readonly IRngBoundPointSource<ulong> Points;
-
-        public Option<IRngNav> Navigator {get;}
 
         public RngKind RngKind 
             => Points.RngKind;

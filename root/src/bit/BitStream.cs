@@ -7,12 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
 
-    public static class Streams
+    public static class BitStream
     {
-        public static IEnumerable<bit> bitstream<T>(T src)
+        public static IEnumerable<bit> from<T>(T src)
             where T : struct
         {
             var bytes = Bytes.from(src).ToArray();
@@ -29,11 +30,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static IEnumerable<bit> bitstream<T>(IEnumerator<T> src)
+        public static IEnumerable<bit> from<T>(IEnumerator<T> src)
             where T : struct
         {
             while(src.MoveNext())
-                foreach(var b in bitstream(src.Current))
+                foreach(var b in from(src.Current))
                     yield return b;
         }
 
@@ -43,8 +44,14 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<bit> bitstream<T>(IEnumerable<T> src)
+        public static IEnumerable<bit> from<T>(IEnumerable<T> src)
             where T : struct
-                => bitstream<T>(src.GetEnumerator());
+                => from<T>(src.GetEnumerator());
+        
+        [MethodImpl(Inline)]
+        public static IStreamSource<bit> source<T>(IEnumerable<T> src)
+            where T : struct
+                => new BitStream<T>(src);
     }
+
 }

@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static Root;
 
-    public static class vrng
+    public static class VRand
     {
+
         /// <summary>
         /// Creates a 128-bit vectorized emitter predicated an a specified random source
         /// </summary>
@@ -34,4 +35,5 @@ namespace Z0
             where T : unmanaged
                 => new VRandom256<T>(random);
     }
+
 }

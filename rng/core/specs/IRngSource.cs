@@ -32,12 +32,6 @@ namespace Z0
     {
     }
 
-    public interface IRngPointStreamSource<T> : IRngPointSource<T>, IValueStreamSource<T>
-        where T : struct
-    {        
-    
-    }
-
 
    public interface IRngSampler<T> : IRngStream<T>
         where T : struct
@@ -52,7 +46,4 @@ namespace Z0
         /// </summary>
         DistKind DistKind{get;}
     }
-
-
-
 }

@@ -5,38 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using static Root;
-  
-    partial class RngX
+
+    partial class CoreRngOps
     {
-        /// <summary>
-        /// Fills a caller-allocated span with random values
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="dst">The target span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Fill<T>(this IPolyrand random, Span<T> dst)
-            where T : unmanaged
-                => random.Fill(Rng.TypeDomain<T>(), dst.Length, ref head(dst));
-
-        /// <summary>
-        /// Fills a caller-allocated span with random values
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="dst">The target span</param>
-        /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The exclusive upper bound</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Fill<T>(this IPolyrand random, T min, T max, Span<T> dst)
-            where T : unmanaged
-                => random.Fill((min,max), dst.Length, ref head(dst));
-
         /// <summary>
         /// Produces a span of random values
         /// </summary>
@@ -50,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             Span<T> dst = new T[length];
-            random.Fill(domain.Configure(), length,ref head(dst), filter);
+            random.Fill(domain.ValueOrElse(() => CoreRng.domain<T>()), length,ref head(dst), filter);
             return dst;
         }
 
@@ -102,7 +78,7 @@ namespace Z0
         public static ReadOnlySpan<T> ReadOnlySpan<T>(this IPolyrand random, int length, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
                 => random.Span<T>(length, domain, filter);
- 
+
         /// <summary>
         /// Allocates and produces a punctured span populated with nonzero random values
         /// </summary>
@@ -127,6 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples)
             where T : unmanaged
-                => random.Span<T>(samples, DefaultDomain<T>(), x => gmath.nonz(x));
+                => random.Span<T>(samples, CoreRng.domain<T>(), x => gmath.nonz(x));
+                 
     }
 }

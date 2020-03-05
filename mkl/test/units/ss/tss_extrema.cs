@@ -17,7 +17,7 @@ namespace Z0.Mkl
         {
             var samplesize = Pow2.T14;
 
-            var s1Range = domain(350.0, 1000.0);
+            var s1Range = Interval.closed(350.0, 1000.0);
             var s1 = Random.Array<double>(samplesize, s1Range);
             var s1Max = Dataset.Load(s1).Max()[0];
             Claim.neq(s1Max,0.0);
@@ -44,7 +44,7 @@ namespace Z0.Mkl
         {
             var cycles = Pow2.T12;
             var samples = Pow2.T14;
-            var src = Random.Span<long>(samples, domain(-2000L, 2000L)).Convert<double>();
+            var src = Random.Span<long>(samples, Interval.closed(-2000L, 2000L)).Convert<double>();
             var ds = Dataset.Load(src);
             var dst = 0.0;
             var last = 0.0;
@@ -66,7 +66,7 @@ namespace Z0.Mkl
         
         public void mean()
         {
-            var src = Random.Span<long>(Pow2.T14, domain(-2000L, 2000L));
+            var src = Random.Span<long>(Pow2.T14, Interval.closed(-2000L, 2000L));
             var expect = mathspan.avg(src);
             var converted = Cast.to<long,double>(src);
             var actual = (long)Dataset.Load(converted).Mean()[0];

@@ -52,7 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Retreat(ulong count)
-            => Advance(negate(count));        
+            => Advance(math.negate(count));        
 
         /// <summary>
         /// Advances the generator to the next state and returns the prior state for consumption

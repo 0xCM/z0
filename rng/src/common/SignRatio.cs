@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="samples">The sample count</param>
         public static double SignRatio(IPolyrand random, long samples, long radius)
         {
-            var domain = zfunc.domain(0 - math.abs(radius), 0 + math.abs(radius));
+            var domain = Interval.closed(0 - math.abs(radius), 0 + math.abs(radius));
             var pos = 0L;
             var neg = 0L;
             var zed = 0L;

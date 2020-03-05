@@ -12,7 +12,8 @@ namespace Z0
 
     using static Root;
 
-    public static class VRngX
+
+    public static class VRandX
     {
         /// <summary>
         /// Creates a 128-bit vectorized emitter predicated a random source
@@ -23,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static VRandom128<T> VectorEmitter<T>(this IPolyrand random, N128 w, T t = default)
             where T : unmanaged
-                => vrng.emitter(w,random,t);
+                => VRand.emitter(w,random,t);
 
         /// <summary>
         /// Creates a 256-bit vectorized emitter predicated a random source
@@ -34,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static VRandom256<T> VectorEmitter<T>(this IPolyrand random, N256 w, T t = default)
             where T : unmanaged
-                => vrng.emitter(w,random,t);
+                => VRand.emitter(w,random,t);
 
         /// <summary>
         /// Produces a random 128-bit cpu vector
@@ -235,65 +236,5 @@ namespace Z0
             where T : unmanaged
                 => random.Blocks<T>(w,1).LoadVector();
 
-        /// <summary>
-        /// Produces a random permutation of a specified length
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline)]
-        public static Perm Perm(this IPolyrand random, int n)
-            => permute.identity(n).Shuffle(random);
-
-        /// <summary>
-        /// Produces a random permutation of a specified length
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline)]
-        public static Perm Perm(this IPolyrand random, uint n)
-            => random.Perm((int)n);
-
-        /// <summary>
-        /// Produces a stream of random permutation of a specified length
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="n">The length representative</param>
-        /// <param name="rep">A primal type representative</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The primal symbol type</typeparam>
-        [MethodImpl(Inline)]
-        public static IEnumerable<Perm> Perms(this IPolyrand random, int len)
-        {
-            while(true)
-                yield return random.Perm(len);
-        }
-
-        /// <summary>
-        /// Produces a random permutation of natural length N
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="n">The length representative</param>
-        /// <param name="rep">A primal type representative</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The primal symbol type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatPerm<N> Perm<N>(this IPolyrand random, N n = default)
-            where N : unmanaged, ITypeNat
-                => Z0.permute.natural(n).Shuffle(random);
-                
-        /// <summary>
-        /// Produces a stream of random permutation of natural length N
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="n">The length representative</param>
-        /// <param name="rep">A primal type representative</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The primal symbol type</typeparam>
-        public static IEnumerable<NatPerm<N>> Perms<N>(this IPolyrand random, N n = default)
-            where N : unmanaged, ITypeNat
-        {
-            while(true)
-                yield return random.Perm(n);
-        }                        
     }
 }

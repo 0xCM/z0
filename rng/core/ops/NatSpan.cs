@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
 
-    partial class RngX
+    partial class CoreRngOps
     {
         /// <summary>
         /// Allocates a span of natural dimensions and populates it with random values
@@ -58,6 +60,6 @@ namespace Z0
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Z0.TableSpan.load<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
+                => TableSpan.load<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
     }
 }

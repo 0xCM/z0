@@ -25,6 +25,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public delegate IEnumerable<T> StreamEmitter<T>(int? count = null);
 
+
     /// <summary>
     /// Root interface for value production services
     /// </summary>
@@ -45,18 +46,9 @@ namespace Z0
         T Next();                   
     }
 
-    public interface IPointStream<T>  : ISource<T>, IEnumerable<T>
-    {
-        /// <summary>
-        /// Retrieves the next sequence of values, with optionally-governed count
-        /// </summary>
-        /// <param name="count">The number of elements</param>
-        IEnumerable<T> Next(int? count = null);
 
-    }
-
-    public interface IStreamSource<T> : ISource<T>
+    public interface IStreamSource<T> : ISource<IEnumerable<T>>
     {
-        IEnumerable<T> Stream {get;}        
+     
     }
 }

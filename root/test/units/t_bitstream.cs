@@ -25,7 +25,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Next<T>();
-                var bits = Streams.bitstream(a);
+                var bits = BitStream.from(a);
                 var s1 = bits.Format();
                 var s2 = formatter.Format(a);
                 Claim.eq(s1,s1);

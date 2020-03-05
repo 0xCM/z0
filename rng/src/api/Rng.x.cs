@@ -11,30 +11,6 @@ namespace Z0
 
     public static partial class RngX
     {
-        /// <summary>
-        /// Creates a polyrand rng from a point source
-        /// </summary>
-        /// <param name="rng">The source rng</param>
-        public static IPolyrand ToPolyrand(this IRngBoundPointSource<ulong> source)        
-            => new Polyrand(source);
-
-        /// <summary>
-        /// Creates a polyrand based on a specified source
-        /// </summary>
-        /// <param name="src">The random source</param>
-        [MethodImpl(Inline)]
-        public static IPolyrand ToPolyrand(this IRngNav<ulong> src)
-            => new Polyrand(src);
-
-        /// <summary>
-        /// Presents the polysource as a point source
-        /// </summary>
-        /// <param name="src">The randon source</param>
-        /// <typeparam name="T">The point type</typeparam>
-        [MethodImpl(Inline)]
-        public static IRngPointSource<T> PointSource<T>(this IPolyrand src)
-            where T : unmanaged
-                => src as IRngPointSource<T>;
 
         /// <summary>
         /// Samples a subsequence from a point source determined by successive sequence widths

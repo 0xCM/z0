@@ -63,25 +63,5 @@ namespace Z0
             return dst;
         }
  
-        [MethodImpl(Inline)]
-        internal static Interval<T> Configure<T>(this Interval<T>? domain)        
-            where T : unmanaged
-                => domain.ValueOrElse(() => Rng.TypeDomain<T>());
-
-        [MethodImpl(Inline)]
-        internal static Interval<T> DefaultDomain<T>()        
-            where T : unmanaged
-                => Rng.TypeDomain<T>();
-
-        [MethodImpl(Inline)]
-        static T TypeMin<T>()
-            where T : unmanaged
-                => minval<T>();
-        
-        [MethodImpl(Inline)]
-        static T TypeMax<T>()
-            where T : unmanaged
-                => maxval<T>();
-
     }
 }

@@ -25,7 +25,7 @@ namespace Z0.Mkl
                     sum++;
 
             var pActual = sum / ((double)count);
-            var radius = domain(pTarget - tolerance, pTarget + tolerance);
+            var radius = Interval.closed(pTarget - tolerance, pTarget + tolerance);
             Claim.yea(radius.Contains(pActual));
         }
 
@@ -41,7 +41,7 @@ namespace Z0.Mkl
             var bufferF64 = new double[samplesize];
             var bufferU32 = new uint[samplesize];
             var bufferI32 = new int[samplesize];
-            var ufRange = domain(1.0, 250.0);
+            var ufRange = Interval.closed(1.0, 250.0);
             for(var i=0; i<gencount; i++)
             {
                 var stream = streams[i];

@@ -35,43 +35,43 @@ namespace Z0.Mkl.Test
 
         public void gemm8u()
         {
-            gemm_check(domain((byte)0, (byte)byte.MaxValue));
+            gemm_check(Interval.closed((byte)0, (byte)byte.MaxValue));
         }
 
         
         public void gemm16u()
         {
-            gemm_check(domain((ushort)0, ushort.MaxValue));
+            gemm_check(Interval.closed((ushort)0, ushort.MaxValue));
         }
         
         public void gemm32u()
         {
-            gemm_check(domain(0u, 1024u));
+            gemm_check(Interval.closed(0u, 1024u));
         }
 
         public void gemm64i()
         {
-            gemm_check(domain((long)-Pow2.T21, (long)Pow2.T21));
+            gemm_check(Interval.closed((long)-Pow2.T21, (long)Pow2.T21));
         }
 
         public void gemm64u()
         {
-            gemm_check(domain(0ul, (ulong)Pow2.T21));
+            gemm_check(Interval.closed(0ul, (ulong)Pow2.T21));
         }
 
         public void gemm32f()
         {
-            gemm_check(domain(-1024f, 1024f),5f);
+            gemm_check(Interval.closed(-1024f, 1024f),5f);
         }
 
         public void gemm64f()
         {
-            gemm_check(domain(-(double)Pow2.T21, (double)Pow2.T21),2d);
+            gemm_check(Interval.closed(-(double)Pow2.T21, (double)Pow2.T21),2d);
         }
 
         void gemm32f_direct()
         {
-            var src = Random.Stream(domain(-Pow2.T21, Pow2.T21)).Select(x => (float)x);
+            var src = Random.Stream(Interval.closed(-Pow2.T21, Pow2.T21)).Select(x => (float)x);
 
             gemm_direct_check<N64,N64,N64>(src);
             gemm_direct_check<N3, N3, N3>(src);
@@ -88,7 +88,7 @@ namespace Z0.Mkl.Test
 
         void gemm64f_direct()
         {
-            var src = Random.Stream(domain(-Pow2.T21, Pow2.T21)).Select(x => (double)x);
+            var src = Random.Stream(Interval.closed(-Pow2.T21, Pow2.T21)).Select(x => (double)x);
 
             gemm_direct_check<N64,N64,N64>(src);
             gemm_direct_check<N3, N3, N3>(src);
@@ -340,7 +340,7 @@ namespace Z0.Mkl.Test
 
         void GemmInt32Format()
         {
-            var domain = zfunc.domain(-32768, 32768);
+            var domain = Interval.closed(-32768, 32768);
             var n = n5;
             var m = n5;
             var m1 = Random.MatrixBlock(domain, m, n);

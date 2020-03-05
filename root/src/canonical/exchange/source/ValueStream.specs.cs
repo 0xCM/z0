@@ -7,7 +7,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Security;
 
-
     /// <summary>
     /// Characterizes a function that produces a stream of values
     /// </summary>
@@ -22,12 +21,10 @@ namespace Z0
     {
     }
 
-    public interface IValueStreamSource<T> : IStreamSource<T>, IValueSource<T>
+    public interface IValueStreamSource<T> : IValueSource<T>
         where T : struct
     {        
         ValueStreamEmitter<T> Emitter {get;}
         
-        IEnumerable<T> IStreamSource<T>.Stream 
-            => Emitter();
     }
 }

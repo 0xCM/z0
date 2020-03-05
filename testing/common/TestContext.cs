@@ -9,13 +9,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Z0.Root;
+    using static Root;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Z0;
 
     public class TestContext<U> : ITestContext<U>
-        //where U : TestContext<U>
     {
         public ITestContext Context {get;}
 
@@ -254,6 +252,5 @@ namespace Z0
         [MethodImpl(Inline)]   
         protected static SystemCounter counter(bool start = false) 
             => SystemCounter.Create(start);
-
     }
 }

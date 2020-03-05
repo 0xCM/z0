@@ -52,7 +52,7 @@ namespace Z0
          public static Matrix256<N,T> MatrixBlock<N,T>(this IPolyrand random, Interval<T>? domain = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
-                => Z0.Matrix.blockload<N, T>(random.Blocks(n256, domain.Configure(), Z0.Blocks.blockcount<N, N, T>(n256)));                    
+                => Z0.Matrix.blockload<N, T>(random.Blocks(n256, domain.ValueOrElse(() => CoreRng.domain<T>()), Z0.Blocks.blockcount<N, N, T>(n256)));                    
 
          /// <summary>
          /// Samples values over an S-domain, transforms the sample into a T-domain and from this transformed

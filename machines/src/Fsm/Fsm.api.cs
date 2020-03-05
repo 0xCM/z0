@@ -195,7 +195,7 @@ namespace Z0.Machines
                 var random = machine.Context.Random;
                 var o = Fsm.DefaultObserver(machine, ObserverTrace.Completions | ObserverTrace.Errors);
                 var events = machine.Triggers.ToArray();
-                var domain = zfunc.domain(0, events.Length);
+                var domain = Interval.closed(0, events.Length);
                 var eventstream = random.Stream(domain).Select(i => events[i]);
                 machine.Start();
                 while(!machine.Finished)
