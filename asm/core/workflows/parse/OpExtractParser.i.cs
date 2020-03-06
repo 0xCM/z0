@@ -9,5 +9,7 @@ namespace Z0
     public interface IOpExtractParser : IAsmService
     {
         ParsedOpReport Parse(ApiHost src, OpExtractReport encoded);        
+
+        ParsedExtract[] Parse(OpExtract[] src);
     }
 }

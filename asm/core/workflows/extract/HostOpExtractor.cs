@@ -31,7 +31,7 @@ namespace Z0
             this.BufferLength = bufferlen ?? Context.DefaultBufferLength;
         }
 
-        public OpExtracts Extract(ApiHost src)
+        public OpExtract[] Extract(ApiHost src)
         {
             var members = Context.LocatedMembers(src.HostingType).ToArray();
             var buffer = alloc<byte>(BufferLength);
@@ -46,10 +46,9 @@ namespace Z0
                 var length = reader.Read(op.Address, BufferLength, buffer);
                 var data = MemoryExtract.Define(op.Address, buffer.Slice(0,length).ToArray());
                 var uri = OpUri.Hex(src.Path, op.Member.Name, op.Id);
-                extracts[i] = OpExtract.Defne(op.Id, uri, op, data);
+                extracts[i] = OpExtract.Define(op.Id, uri, op, data);
             }  
             return extracts;  
-
         }
 
         public OpExtractReport ExtractOps(ApiHost src)

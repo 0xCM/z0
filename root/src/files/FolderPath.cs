@@ -70,5 +70,12 @@ namespace Z0
         
         public FolderPath WithoutTrailingSeparator()
             => Define(Path.TrimEndingDirectorySeparator(Name));        
+
+        public FolderPath WithSubFolder(FolderName folder)
+            => this + folder;
+
+       public FolderPath WithSubFolder(RelativeLocation folder)
+            => this + folder;
+             
     }
 }

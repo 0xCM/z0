@@ -9,13 +9,15 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using Z0.Asm;
+    
     using static Root;
 
     public static class AsmCoreServices
     {
         public static Option<ParsedOpReport> LoadParsedEncodings(this IAsmContext context, ApiHostUri host, char? delimiter = null)
         {
-            var path = context.EmissionPaths().ParsedCapturePath(host);
+            var path = context.EmissionPaths().ParsedPath(host);
             var sep = delimiter ?? text.pipe();
             var model = ParsedOpReport.Empty;
             

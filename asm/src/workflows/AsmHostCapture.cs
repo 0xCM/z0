@@ -42,16 +42,16 @@ namespace Z0
         {            
             var owners = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
             var config = Context.AsmFormat.WithSectionDelimiter();
-            Paths.DecodeCapturedDir.Clear();
-            Paths.ParsedCaptureDir.Clear();
-            Paths.RawCaptureDir.Clear();
+            Paths.DecodedDir.Clear();
+            Paths.ParsedDir.Clear();
+            Paths.ExtractDir.Clear();
 
             foreach(var owner in owners)
             {
                 var id = owner.Key;
                 if(Selected.Contains(id))
                     foreach(var host in owner)
-                       yield return RunHostCaptureFlow(host);
+                       yield return CaptureHostOps(host);
             }
 
             iter(Selected, CreateLocationReport);
@@ -79,34 +79,34 @@ namespace Z0
             }            
         }
 
-        OpExtractReport ExtractHostOps(ApiHost host)
+        OpExtractReport Extract(ApiHost host)
         {
             var extractor = Context.HostExtractor();
-            var extract = extractor.ExtractOps(host);
-            var target = Paths.RawCapturePath(host.Path);  
+            var report = extractor.ExtractOps(host);
+            var dstpath = Paths.ExtractPath(host.Path);  
             var sink = Context;
-            extract.Save(target)
-                     .OnSome(file => sink.Enqueue(ExractedEncodings(host.Path,file)))
-                     .OnNone(() => sink.Enqueue(HostExtrationFailed(host.Path)));
-            return extract;
+            report.Save(dstpath)
+                     .OnSome(file => sink.Notify(ExractedHost(host.Path,file)))
+                     .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
+            return report;
         }
 
         ParsedOpReport Parse(ApiHost host, OpExtractReport extract)
         {
-            var parser = Context.ExtractReportParser(new byte[Context.DefaultBufferLength]);
+            var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
             var parsed = parser.Parse(host,extract);
-            var target = Paths.ParsedCapturePath(host.Path);
+            var target = Paths.ParsedPath(host.Path);
             var sink = Context;
             parsed.Save(target)
-                        .OnSome(file => sink.Enqueue(ParsedEncodings(host.Path,file)))
-                        .OnNone(() => sink.Enqueue(ParseEncodingFailure(host.Path)));
+                        .OnSome(file => sink.Enqueue(ParsedExtracts(host.Path,file)))
+                        .OnNone(() => sink.Enqueue(ExtractParseFailure(host.Path)));
             require(extract.RecordCount == parsed.RecordCount);
             return parsed;
         }
 
         AsmFunctionList Decode(ApiHost host, OpExtractReport captured, ParsedOpReport parsed)
         {
-            var path = Paths.DecodedCapturePath(host.Path);
+            var path = Paths.DecodedPath(host.Path);
             var decoder = Context.FunctionDecoder();
             var functions = new AsmFunction[captured.RecordCount];
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
@@ -121,13 +121,13 @@ namespace Z0
             return AsmFunctionList.Define(functions);
         }
 
-        CapturedHost RunHostCaptureFlow(ApiHost host)        
+        public CapturedHost CaptureHostOps(ApiHost host)        
         {
             Context.Enqueue($"Executing {host} capture workflow");
-            var captured = ExtractHostOps(host);
-            var parsed = Parse(host, captured);
-            var decoded = Decode(host, captured, parsed);        
-            return CapturedHost.Define(host.Path, captured, parsed, decoded);
+            var extracted = Extract(host);
+            var parsed = Parse(host, extracted);
+            var decoded = Decode(host, extracted, parsed);        
+            return CapturedHost.Define(host.Path, extracted, parsed, decoded);
         }
     }
 }

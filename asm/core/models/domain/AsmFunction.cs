@@ -22,6 +22,12 @@ namespace Z0.Asm
             return new AsmFunction(encoding.Operation, code, encoding.TermCode, instructions);
         }
 
+        public static AsmFunction Define(ParsedExtract encoding,  AsmInstructionList instructions)
+        {         
+            var code = AsmCode.Define(encoding.Id, encoding.ParsedContent);            
+            return new AsmFunction(encoding.Descriptor, code, encoding.TermCode, instructions);
+        }
+
         AsmFunction(OpDescriptor op, AsmCode code, ExtractTermCode term, AsmInstructionList instructions)
         {
             this.Id = op.Id;

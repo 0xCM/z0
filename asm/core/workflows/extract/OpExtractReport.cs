@@ -72,13 +72,13 @@ namespace Z0
 
     public class OpExtractReport : Report<F,R>
     {        
-        public static OpExtractReport Create(IFiniteSeq<OpExtract> src)
+        public static OpExtractReport Create(OpExtract[] src)
         {
             var records = new OpExtractRecord[src.Length];
             for(var i=0; i< src.Length; i++)
             {
                 var op = src[i];
-                var record = new OpExtractRecord(                
+                records[i] = new OpExtractRecord(                
                     Sequence : i,
                     Address : op.Member.Address,
                     Length : op.EncodedData.Length,
@@ -88,7 +88,7 @@ namespace Z0
                     );
 
             }
-            return OpExtractReport.Create(records);
+            return new OpExtractReport(records);
         }
 
         public static OpExtractReport Create(OpExtractRecord[] records)

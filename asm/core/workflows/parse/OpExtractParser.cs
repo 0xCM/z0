@@ -46,6 +46,23 @@ namespace Z0
             );
         }
 
+        public ParsedExtract[] Parse(OpExtract[] src)
+        {
+            var dst = new ParsedExtract[src.Length];
+            var parser = Context.PatternParser(PatternBuffer.Clear());               
+            for(var i=0; i< dst.Length; i++)
+            {
+                ref readonly var current = ref src[i];                
+                var status = parser.Parse(current.EncodedData);                
+                var matched = parser.Result;
+                var succeeded = matched.IsSome() && status.Success();                
+                var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
+                dst[i] = ParsedExtract.Define(current, matched.ToTermCode(), MemoryExtract.Define(current.EncodedData.Address, data));
+            }
+            return dst;
+        }
+
+
         public ParsedOpReport Parse(ApiHost host, OpExtractReport encoded)
         {
             var dst = new ParsedOpRecord[encoded.Records.Length];
@@ -70,7 +87,7 @@ namespace Z0
                      Data : MemoryExtract.Define(current.Address, data)
                 );
 
-                //dst[i] = Parse(parser, current);
+                
             }
 
             ReportDuplicates(OpIdentity.duplicates(dst.Select(x => x.Uri.OpId)));

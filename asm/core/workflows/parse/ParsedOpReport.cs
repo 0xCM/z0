@@ -122,6 +122,27 @@ namespace Z0
         public static ParsedOpReport Create(params ParsedOpRecord[] records)
             => new ParsedOpReport(records);
 
+        public static ParsedOpReport Create(ParsedExtract[] src)
+        {
+            var dst = new ParsedOpRecord[src.Length];
+            for(var i=0; i< dst.Length; i++)
+            {
+                ref readonly var current = ref src[i];                
+                dst[i] = ParsedOpRecord.Define
+                (
+                     Sequence : i,
+                     Address : current.Address,
+                     Length : current.ParsedContent.Length,
+                     TermCode: current.TermCode,
+                     Uri : current.Uri,
+                     OpSig : current.SourceMember.Signature().Format(),
+                     Data : current.ParsedContent
+                );
+                
+            }
+            return new ParsedOpReport(dst);
+        }
+
         public ParsedOpReport(){}
         
         [MethodImpl(Inline)]

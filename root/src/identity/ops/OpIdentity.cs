@@ -77,6 +77,15 @@ namespace Z0
         }
 
         /// <summary>
+        /// Indicates whether the moniker is emtpy
+        /// </summary>
+        public bool IsNonEmpty
+        {            
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
+        /// <summary>
         /// Specifies whether the operation was reified from a generic definition 
         /// </summary>
         public bool IsGeneric

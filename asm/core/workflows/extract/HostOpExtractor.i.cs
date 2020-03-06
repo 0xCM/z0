@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The defining host</param>
         OpExtractReport ExtractOps(ApiHost src);
 
-        OpExtracts Extract(ApiHost src);        
+        OpExtract[] Extract(ApiHost src);        
     }
 }

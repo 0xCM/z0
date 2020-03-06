@@ -56,7 +56,7 @@ namespace Z0
             => BenchResultDir + FileName.Define($"{AppId.Format()}", FileExtensions.Csv);
 
         FolderPath TestDataDir(Type test)
-            => StandardOutDir +  FolderName.Define(test.Name);
+            => StandardOutDir +  FolderName.Define((test ?? GetType()).Name);
 
         FolderPath TestDataDir<T>()
             => TestDataDir(typeof(T));

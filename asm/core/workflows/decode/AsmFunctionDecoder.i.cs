@@ -22,5 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="parsed">The parsed data</param>
         AsmFunction DecodeFunction(ParsedOpExtract parsed);
+
+        AsmFunction[] Decode(params ParsedExtract[] src);     
     }
 }

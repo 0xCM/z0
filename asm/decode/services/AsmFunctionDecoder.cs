@@ -48,5 +48,18 @@ namespace Z0
             var instructions = Context.DecodeInstructions(code).Require();
             return AsmFunction.Define(parsed, instructions);
         }
+
+        public AsmFunction[] Decode(params ParsedExtract[] src)
+        {
+            var dst = new AsmFunction[src.Length];
+            for(var i=0; i<src.Length; i++)
+            {
+                var parsed = src[i];
+                var code = AsmCode.Define(parsed.Id, parsed.ParsedContent);
+                var instructions = Context.DecodeInstructions(code).Require();
+                dst[i] = AsmFunction.Define(parsed, instructions);
+            }
+            return dst;
+        }
     }
 }

@@ -11,6 +11,45 @@ namespace Z0
  
     using static Root;    
 
+    public readonly struct ParsedExtract
+    {
+        [MethodImpl(Inline)]
+        public static ParsedExtract Define(OpExtract src, ExtractTermCode term, MemoryExtract parsed)
+            => new ParsedExtract(src,term,parsed);
+
+        [MethodImpl(Inline)]
+        ParsedExtract(OpExtract src, ExtractTermCode term, MemoryExtract parsed)
+        {
+            this.SourceExtract = src;
+            this.TermCode = term;
+            this.ParsedContent = parsed;
+        }        
+
+        public readonly OpExtract SourceExtract;
+
+        public readonly ExtractTermCode TermCode;
+
+        public readonly MemoryExtract ParsedContent;   
+
+        public OpIdentity Id 
+            => SourceExtract.Id;
+
+        public OpUri Uri 
+            => SourceExtract.Uri;
+
+        public MemoryExtract SourceContent 
+            => SourceExtract.EncodedData;
+
+        public MemoryAddress Address 
+            => SourceContent.Address;
+
+        public MethodInfo SourceMember 
+            => SourceExtract.Member.Member;
+
+        public OpDescriptor Descriptor 
+            => OpDescriptor.Define(Uri, SourceMember.Signature().Format());
+    }
+
     public readonly struct ParsedOpExtract
     {
         public readonly OpDescriptor Operation;        

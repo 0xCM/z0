@@ -38,17 +38,17 @@ namespace Z0
                     $"origin = {origin}, block length = {reported}, reported length = {reported}"),
                         caller, file, line);
 
-        public static AppMsg ExractedEncodings(ApiHostUri host, FilePath dst)
-            => AppMsg.Info($"Emitted extracted {host} encodings to {dst}");
+        public static AppMsg ExractedHost(ApiHostUri host, FilePath dst)
+            => AppMsg.Info($"Emitted extracted {host} operations to {dst}");
 
-        public static AppMsg HostExtrationFailed(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppMsg.Error($"Error extracting {host} encodings", caller, file, line);
+        public static AppMsg HostExtractionFailed(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppMsg.Error($"Error extracting {host} operations", caller, file, line);
 
-        public static AppMsg ParsedEncodings(ApiHostUri host, FilePath dst)
-            => AppMsg.Info($"Emitted parsed {host} encodings to {dst}");
+        public static AppMsg ParsedExtracts(ApiHostUri host, FilePath dst)
+            => AppMsg.Info($"Emitted parsed {host} op extracts to {dst}");
 
-        public static AppMsg ParseEncodingFailure(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppMsg.Error($"Error parsing {host} encodings", caller, file, line);
+        public static AppMsg ExtractParseFailure(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppMsg.Error($"Error parsing {host} op extracts", caller, file, line);
 
     }
 }

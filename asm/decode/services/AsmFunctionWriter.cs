@@ -35,8 +35,11 @@ namespace Z0
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
     
-        public void Write(AsmFunction src)
-            => StreamOut.Write(Context.AsmFormatter(Config).FormatDetail(src));
+        public void Write(params AsmFunction[] src)
+        {
+            foreach(var f in src)
+                StreamOut.Write(Context.AsmFormatter(Config).FormatDetail(f));
+        }
 
         public void Dispose()
         {

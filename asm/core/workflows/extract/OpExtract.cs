@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct OpExtract
     {        
         [MethodImpl(Inline)]
-        public static OpExtract Defne(OpIdentity id, OpUri uri, LocatedMember member, MemoryExtract encoded)
+        public static OpExtract Define(OpIdentity id, OpUri uri, LocatedMember member, MemoryExtract encoded)
             => new OpExtract(id,uri,member,encoded);
          
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
         public readonly MemoryExtract EncodedData;
     }
 
-    public readonly struct OpExtracts : IFiniteSeq<OpExtract>
+    public readonly struct OpExtracts //: IFiniteSeq<OpExtract>
     {
         [MethodImpl(Inline)]
         public static implicit operator OpExtracts(OpExtract[] src)

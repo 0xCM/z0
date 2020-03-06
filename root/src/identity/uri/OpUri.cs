@@ -30,6 +30,16 @@ namespace Z0
 
         public string Identifier {get;}
 
+        public bool IsEmpty
+        {
+            get => Scheme.IsNone() && HostPath.IsEmpty && text.empty(GroupName) && OpId.IsEmpty;
+        }
+        
+        public bool IsComplete
+        {
+            get => Scheme.IsSome() && !HostPath.IsEmpty && text.nonempty(GroupName) && OpId.IsNonEmpty;
+        }
+
         [MethodImpl(Inline)]
         static IParser<OpUri> Parser()
             => default(OpUri);

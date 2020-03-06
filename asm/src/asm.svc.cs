@@ -106,7 +106,7 @@ namespace Z0
             => Z0.MemoryCapture.Create(context);
 
         [MethodImpl(Inline)]
-        public static IOpExtractParser ExtractReportParser(this IAsmContext context, byte[] buffer)
+        public static IOpExtractParser ExtractParser(this IAsmContext context, byte[] buffer)
             => OpExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]

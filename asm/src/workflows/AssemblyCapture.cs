@@ -10,6 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
+    using Asm;
     using static AsmServiceMessages;
     using static Root;
 
@@ -35,25 +36,41 @@ namespace Z0
             return default;
         }
 
-        // AsmHostExtract RunHostCaptureFlow(ApiHost host)        
-        // {
-        //     Context.Enqueue($"Executing {host} capture workflow");
-        //     var captured = CaptureHostOps(host);
-        //     var parsed = Parse(host, captured);
-        //     var decoded = Decode(host, captured, parsed);        
-        //     return (host.Path, captured, parsed, decoded);
-        // }
-
-        OpExtractReport CaptureHost(ApiHost host)
+        public Option<OpExtractReport> ExtractOps(ApiHost host)
         {
             var capture = Context.HostExtractor();
-            var captured = capture.ExtractOps(host);
-            var target = Paths.RawCapturePath(host.Path);  
-            var sink = Context;
-            captured.Save(target)
-                     .OnSome(file => sink.Enqueue(ExractedEncodings(host.Path,file)))
-                     .OnNone(() => sink.Enqueue(HostExtrationFailed(host.Path)));
-            return captured;
+            var ops = capture.Extract(host);
+            var report = OpExtractReport.Create(ops);            
+            var target = Paths.ExtractPath(host.Path);  
+            var saved = report.Save(target);
+            var sink = Context;            
+            saved.OnSome(file => sink.Notify(ExractedHost(host.Path,file)))
+                .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
+            return saved ? some(report) : none<OpExtractReport>();
+        }
+
+        public ParsedExtract[] Parse(OpExtract[] src)
+        {
+            var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
+            var parsed = parser.Parse(src);
+            return parsed;
+        }
+
+        AsmFunctionList Decode(ApiHost host, OpExtract[] extracted, ParsedOpExtract[] parsed)
+        {
+            var path = Paths.DecodedPath(host.Path);
+            var decoder = Context.FunctionDecoder();
+            var functions = new AsmFunction[extracted.Length];
+            using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
+            // for(var i=0; i< extracted.Length; i++)
+            // {
+            //     var record = parsed[i];
+            //     if(record.Length != 0)
+            //         functions[i] = Decode(record, decoder, dst);
+            //     else
+            //         functions[i] = AsmFunction.Empty;
+            // }
+            return AsmFunctionList.Define(functions);
         }
 
         CapturedOp[] CaptureHostOps(ApiHost src)
@@ -63,14 +80,12 @@ namespace Z0
 
             var capture = Context.HostExtractor();
             var captured = capture.ExtractOps(src);
-            var target = Paths.RawCapturePath(src.Path);  
+            var target = Paths.ExtractPath(src.Path);  
             var sink = Context;
             captured.Save(target)
-                     .OnSome(file => sink.Enqueue(ExractedEncodings(src.Path,file)))
-                     .OnNone(() => sink.Enqueue(HostExtrationFailed(src.Path)));
-
-            
-
+                     .OnSome(file => sink.Enqueue(ExractedHost(src.Path,file)))
+                     .OnNone(() => sink.Enqueue(HostExtractionFailed(src.Path)));
+        
 
             return extracts.ToArray();
         }

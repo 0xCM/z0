@@ -9,5 +9,7 @@ namespace Z0
     public interface IHostCapture : IAppService<IAsmContext>, IExecutable<CapturedHost>
     {
         string Name => GetType().Name;
+
+             
     }
 }

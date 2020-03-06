@@ -10,6 +10,6 @@ namespace Z0
 
     public interface IAsmFunctionWriter : IAsmStreamWriter
     {
-        void Write(AsmFunction src);
+        void Write(params AsmFunction[] src);
     }
 }

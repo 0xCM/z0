@@ -40,6 +40,9 @@ namespace Z0
         public void Configure(ITestConfig config)
             => Config = config;
                 
+
+        protected FolderPath DefaultDataDir
+            => Context.Paths.TestDataDir(GetType());                
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>
@@ -240,6 +243,12 @@ namespace Z0
         public void Enqueue(string msg, AppMsgKind? severity = null)
             => Queue.Enqueue(msg, severity);
         
+        public void Notify(AppMsg msg)
+            => Queue.Enqueue(msg);
+
+        protected void Notify(string msg, AppMsgKind? severity = null)
+            => Queue.Enqueue(msg,severity);
+
         public IReadOnlyList<AppMsg> Flush(Exception e)
             => Queue.Flush(e);
 

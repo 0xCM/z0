@@ -70,7 +70,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Owner == AssemblyId.None && string.IsNullOrWhiteSpace(Name);
+            get => Owner.IsNone()  && text.empty(Name);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
         }
 
         ParseResult<ApiHostUri> IParser<ApiHostUri>.Parse(string text)
