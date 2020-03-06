@@ -17,26 +17,26 @@ namespace Z0
         static T to_i<T>(uint src)
         {
             if(typeof(T) == typeof(sbyte))
-                return AsIn.generic<T>((sbyte)src);
+                return generic<T>((sbyte)src);
             else if(typeof(T) == typeof(short))
-                return AsIn.generic<T>((short)src);
+                return generic<T>((short)src);
             else if(typeof(T) == typeof(int))
-                return AsIn.generic<T>((int)src);
+                return generic<T>((int)src);
             else  
-                return AsIn.generic<T>((long)src);           
+                return generic<T>((long)src);           
         }
 
         [MethodImpl(Inline)]
         static T to_u<T>(uint src)
         {
             if(typeof(T) == typeof(byte))
-                return AsIn.generic<T>((byte)src);
+                return generic<T>((byte)src);
             else if(typeof(T) == typeof(ushort))
-                return AsIn.generic<T>((ushort)src);
+                return generic<T>((ushort)src);
             else if(typeof(T) == typeof(uint))
-                return AsIn.generic<T>((uint)src);
+                return generic<T>((uint)src);
             else  
-                return AsIn.generic<T>((ulong)src);
+                return generic<T>((ulong)src);
         }
 
         [MethodImpl(Inline)]

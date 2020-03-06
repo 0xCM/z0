@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     using static OpSurrogates;
-    using static Literals;
+    using static Nats;
     
     public class t_arithmetic : t_gmath<t_arithmetic>
     {
@@ -342,7 +342,7 @@ namespace Z0
         protected void signum_check<T>(T t = default)
             where T : unmanaged
         {
-            var zero = Literals.zero<T>();
+            var zero = Root.zero<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();

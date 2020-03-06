@@ -12,8 +12,8 @@ namespace Z0
     // using static Root;
     // using static Nats;
     using static As;
-    using static AsIn;
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     static partial class vblock
     {

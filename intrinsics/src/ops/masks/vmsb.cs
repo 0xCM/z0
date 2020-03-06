@@ -11,7 +11,6 @@ namespace Z0
     
     using static Root;    
     using static Nats;
-    using static As;
     using static gvec;
 
     partial class vmask
@@ -68,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vmsb<T>(N128 w, N16 f, N1 d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast<ulong>(w, BitMask.msb(n64, f, d)));
+                => generic<T>(vbroadcast<ulong>(w, BitMask.msb(n64, f, d)));
 
         /// <summary>
         /// [11000000]
@@ -158,7 +157,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vmsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
+                => generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
 
         /// <summary>
         /// [100...00]    
@@ -221,7 +220,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vmsb<T>(N256 w, N16 f, N1 d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast<ulong>(w, BitMask.msb(n64, f, d)));
+                => generic<T>(vbroadcast<ulong>(w, BitMask.msb(n64, f, d)));
 
         /// <summary>
         /// [11000000]
@@ -307,6 +306,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vmsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
+                => generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
     }
 }

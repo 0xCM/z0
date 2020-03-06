@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Root;
-    using static As;
     using D = dvec;
 
     partial class gvec
@@ -65,13 +64,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(D.vscalar(n, int8(src)));
+                return generic<T>(D.vscalar(n, int8(src)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(D.vscalar(n, int16(src)));
+                return generic<T>(D.vscalar(n, int16(src)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(D.vscalar(n,int32(src)));
+                return generic<T>(D.vscalar(n,int32(src)));
             else
-                return vgeneric<T>(D.vscalar(n,int64(src)));
+                return generic<T>(D.vscalar(n,int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -79,13 +78,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(D.vscalar(n, uint8(src)));
+                return generic<T>(D.vscalar(n, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(D.vscalar(n,uint16(src)));
+                return generic<T>(D.vscalar(n,uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(D.vscalar(n,uint32(src)));
+                return generic<T>(D.vscalar(n,uint32(src)));
             else 
-                return vgeneric<T>(D.vscalar(n,uint64(src)));
+                return generic<T>(D.vscalar(n,uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -93,9 +92,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(D.vscalar(n,float32(src)));
+                return generic<T>(D.vscalar(n,float32(src)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(D.vscalar(n,float64(src)));
+                return generic<T>(D.vscalar(n,float64(src)));
             else 
                 throw unsupported<T>();
         }
@@ -105,13 +104,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(D.vscalar(n,int8(src)));
+                return generic<T>(D.vscalar(n,int8(src)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(D.vscalar(n,int16(src)));
+                return generic<T>(D.vscalar(n,int16(src)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(D.vscalar(n,int32(src)));
+                return generic<T>(D.vscalar(n,int32(src)));
             else
-                return vgeneric<T>(D.vscalar(n,int64(src)));
+                return generic<T>(D.vscalar(n,int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -119,13 +118,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(D.vscalar(n,uint8(src)));
+                return generic<T>(D.vscalar(n,uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(D.vscalar(n,uint16(src)));
+                return generic<T>(D.vscalar(n,uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(D.vscalar(n,uint32(src)));
+                return generic<T>(D.vscalar(n,uint32(src)));
             else 
-                return vgeneric<T>(D.vscalar(n,uint64(src)));
+                return generic<T>(D.vscalar(n,uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -133,9 +132,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(D.vscalar(n,float32(src)));
+                return generic<T>(D.vscalar(n,float32(src)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(D.vscalar(n,float64(src)));
+                return generic<T>(D.vscalar(n,float64(src)));
             else 
                 throw unsupported<T>();
         }

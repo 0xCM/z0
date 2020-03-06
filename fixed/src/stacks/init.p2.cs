@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static Stacked;
-    using static AsIn;
     using static P2K;
 
     partial class Stacks

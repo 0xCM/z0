@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Root;    
-    using static AsIn;
 
     partial class gmath
     {                
@@ -54,6 +53,5 @@ namespace Z0
             else
                 return gfp.add(a,b);
         }
-
     }
 }

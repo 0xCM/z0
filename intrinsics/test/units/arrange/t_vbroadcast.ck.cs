@@ -11,8 +11,22 @@ namespace Z0
     using static zfunc;
     using static CheckSpecs;
 
-    partial class Checks
+    static class VChecks
     {
+        public static bit vand<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            var svc = GX.bitlogic<T>();
+            var v1 = VF.vbitlogic<T>(n128).and(x,y);
+            var buffer = Fixed.alloc<Fixed128>();
+            ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
+            var count = gvec.vcount<T>(n128);            
+            for(var i=0; i< count; i++)
+                seek(ref dst, i) = svc.and(vcell(x,i), vcell(y,i));
+            var v2 = gvec.vload(n128, in dst);
+            return ginx.vsame(v1,v2);
+        }
+
 
        [MethodImpl(Inline)]
        public static VBroadcastCheck128<S, T> vbroadcast<S,T>(N128 w, S s = default, T t = default)

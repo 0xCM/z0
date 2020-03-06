@@ -260,6 +260,7 @@ namespace Z0
             where U : unmanaged
                 => new Interval<U>(convert<T,U>(Left),convert<T,U>(Right),Kind);
 
+
         /// <summary>
         /// Creates a view of the data in the inverval as seen through the
         /// lens of another type, but performs no conversion
@@ -268,7 +269,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval<U> As<U>()
             where U : unmanaged
-                => new Interval<U>(AsIn.generic<T,U>(in Left), AsIn.generic<T,U>(in Right), Kind);
+                => new Interval<U>(Root.generic<T,U>(in Left), Root.generic<T,U>(in Right), Kind);
 
         public string Format()
             => text.concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);

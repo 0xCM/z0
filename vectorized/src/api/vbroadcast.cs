@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Root;
-    using static As;
     using static Nats;
     using D = dvec;
 
@@ -80,13 +79,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(D.vbroadcast(n128, int8(src)));
+                return generic<T>(D.vbroadcast(n128, int8(src)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(D.vbroadcast(n128, int16(src)));
+                return generic<T>(D.vbroadcast(n128, int16(src)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(D.vbroadcast(n128, int32(src)));
+                return generic<T>(D.vbroadcast(n128, int32(src)));
             else 
-                return vgeneric<T>(D.vbroadcast(n128, int64(src)));
+                return generic<T>(D.vbroadcast(n128, int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -94,13 +93,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(D.vbroadcast(n128, uint8(src)));
+                return generic<T>(D.vbroadcast(n128, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(D.vbroadcast(n128, uint16(src)));
+                return generic<T>(D.vbroadcast(n128, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(D.vbroadcast(n128, uint32(src)));
+                return generic<T>(D.vbroadcast(n128, uint32(src)));
             else 
-                return vgeneric<T>(D.vbroadcast(n128, uint64(src)));
+                return generic<T>(D.vbroadcast(n128, uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -108,9 +107,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return  vgeneric<T>(D.vbroadcast(n128, float32(src)));
+                return  generic<T>(D.vbroadcast(n128, float32(src)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(D.vbroadcast(n128, float64(src)));
+                return generic<T>(D.vbroadcast(n128, float64(src)));
             else 
                 throw unsupported<T>();
         }
@@ -120,13 +119,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(D.vbroadcast(n256, int8(src)));
+                return generic<T>(D.vbroadcast(n256, int8(src)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(D.vbroadcast(n256, int16(src)));
+                return generic<T>(D.vbroadcast(n256, int16(src)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(D.vbroadcast(n256, int32(src)));
+                return generic<T>(D.vbroadcast(n256, int32(src)));
             else 
-                return  vgeneric<T>(D.vbroadcast(n256, int64(src)));
+                return  generic<T>(D.vbroadcast(n256, int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -134,13 +133,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(D.vbroadcast(n256, uint8(src)));
+                return generic<T>(D.vbroadcast(n256, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(D.vbroadcast(n256, uint16(src)));
+                return generic<T>(D.vbroadcast(n256, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(D.vbroadcast(n256, uint32(src)));
+                return generic<T>(D.vbroadcast(n256, uint32(src)));
             else 
-                return vgeneric<T>(D.vbroadcast(n256, uint64(src)));
+                return generic<T>(D.vbroadcast(n256, uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -148,9 +147,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(D.vbroadcast(n256, float32(src)));
+                return generic<T>(D.vbroadcast(n256, float32(src)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(D.vbroadcast(n256, float64(src)));
+                return generic<T>(D.vbroadcast(n256, float64(src)));
             else 
                 throw unsupported<T>();
         }

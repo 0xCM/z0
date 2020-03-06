@@ -11,6 +11,7 @@ namespace Z0
 
     partial class Root
     {
+            
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each
         /// </summary>
@@ -35,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void iter<T>(ReadOnlySpan<T> first, ReadOnlySpan<T> second, Action<T,T> f)
         {
-            var count = Spans.length(first,second);
+            var count = Checks.length(first,second);
             ref readonly var x = ref head(first);
             ref readonly var y = ref head(second);
             

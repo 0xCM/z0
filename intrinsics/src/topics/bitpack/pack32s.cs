@@ -9,9 +9,7 @@ namespace Z0
     
     using static Root;    
     using static Nats;
-    using static Literals;
     using static gvec;
-    using static AsIn;
 
     partial class bitpack
     {

@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static As;     
-    using static AsIn;     
 
     public static class BitStore
     {
@@ -107,7 +106,7 @@ namespace Z0
         static int popd(in ushort a)
         {
             var count = 0;
-            ref readonly var src = ref AsIn.uint8(in a);
+            ref readonly var src = ref uint8(in a);
             count += popd(skip(in src, 0));
             count += popd(skip(in src, 1));
             return count;
@@ -117,7 +116,7 @@ namespace Z0
         static int popd(in uint a)
         {
             var count = 0;
-            ref readonly var src = ref AsIn.uint8(in a);
+            ref readonly var src = ref uint8(in a);
             count += popd(skip(in src, 0));
             count += popd(skip(in src, 1));
             count += popd(skip(in src, 2));
@@ -129,7 +128,7 @@ namespace Z0
         static int popd(in ulong a)
         {
             var count = 0;
-            ref readonly var src = ref AsIn.uint8(in a);
+            ref readonly var src = ref uint8(in a);
             count += popd(skip(in src, 0));
             count += popd(skip(in src, 1));
             count += popd(skip(in src, 2));

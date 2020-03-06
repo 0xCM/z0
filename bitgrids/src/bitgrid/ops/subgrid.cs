@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Literals;
+    using static Nats;
 
     partial class BitGrid
     {

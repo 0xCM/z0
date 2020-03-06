@@ -113,7 +113,7 @@ namespace Z0
         {
             var points = Interval.open(min, max).MeasuredPartitionPoints(width); 
             var len = gmath.sub(max,min);
-            var deltaSum = Literals.zero<T>();
+            var deltaSum = Root.zero<T>();
             for(var i=0; i<points.Length - 1; i++)           
             {
                 var left = points[i];

@@ -11,7 +11,6 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static AsIn;
     using static P2K;     
     using static CharStacks;
 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Root;
-    using static Literals;
+    using static Nats;
 
     public class t_testbit : t_bitcore<t_testbit>
     {     

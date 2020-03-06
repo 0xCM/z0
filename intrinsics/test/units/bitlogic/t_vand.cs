@@ -21,7 +21,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(n128,z32);
                 var y = Random.CpuVector(n128,z32);
-                Claim.yea(Checks.vand(x,y));
+                Claim.yea(VChecks.vand(x,y));
             }
         }
 

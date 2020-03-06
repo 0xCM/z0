@@ -9,34 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
-
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    public static class Arrays
-    {
-        public static T[] alloc<T>(int length)
-            => new T[length];
-
-        public static T[] alloc<T>(int length, T fill)
-        {
-            var dst = alloc<T>(length);
-            return dst.Fill(fill);
-        }            
-
-        /// <summary>
-        /// Returns the common length of the operands if they are the same; otherwise, raises an error
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]   
-        public static int length<T>(IReadOnlyList<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null) 
-            => lhs.Count == rhs.Length ? lhs.Count : throw Errors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
-    }
-
     public static partial class Root
     {        
         [MethodImpl(Inline)]
@@ -95,6 +67,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int bitsize<T>(T t)
             => Unsafe.SizeOf<T>()*8;
-
     }
 }

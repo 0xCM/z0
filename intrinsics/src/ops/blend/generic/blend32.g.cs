@@ -9,12 +9,11 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static As;
-    using static zfunc;
+    using static Root;
+    using static gvec;
 
     partial class ginx
     {
-
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vblend4x32<T>(Vector128<T> x, Vector128<T> y, [Imm] byte spec)        
             where T : unmanaged
@@ -52,13 +51,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(v8u(dinx.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v8u(dinx.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(v16u(dinx.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v16u(dinx.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vblend4x32(v32u(x), v32u(y), spec));
+                return generic<T>(dinx.vblend4x32(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(v64u(dinx.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v64u(dinx.vblend4x32(v32u(x), v32u(y), spec)));
             else
                 return vblend4x32_i(x, y, spec);
         }
@@ -68,13 +67,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(v8i(dinx.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v8i(dinx.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(v16i(dinx.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v16i(dinx.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vblend4x32(v32i(x), v32i(y), spec));
+                return generic<T>(dinx.vblend4x32(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(v64i(dinx.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v64i(dinx.vblend4x32(v32u(x), v32u(y), spec)));
             else 
                 throw unsupported<T>();
         }
@@ -84,13 +83,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(v8u(dinx.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v8u(dinx.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(v16u(dinx.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v16u(dinx.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vblend8x32(v32u(x), v32u(y), spec));
+                return generic<T>(dinx.vblend8x32(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(v64u(dinx.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v64u(dinx.vblend8x32(v32u(x), v32u(y), spec)));
             else
                 return vblend8x32_i(x, y, spec);
         }
@@ -100,13 +99,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(v8i(dinx.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v8i(dinx.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(v16i(dinx.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v16i(dinx.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vblend8x32(v32i(x), v32i(y), spec));
+                return generic<T>(dinx.vblend8x32(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(v64i(dinx.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v64i(dinx.vblend8x32(v32u(x), v32u(y), spec)));
             else 
                 throw unsupported<T>();
         }

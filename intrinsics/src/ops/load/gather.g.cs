@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;
-    using static As;
-    using static AsIn;
+    using static Root;
+    using static gvec;
+    using static Nats;
     
     partial class ginx
     {
@@ -40,13 +40,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vgather(w, in uint8(in src), v8u(vidx)));
+                return generic<T>(dinx.vgather(w, in uint8(in src), v8u(vidx)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vgather(w, in uint16(in src), v16u(vidx)));
+                return generic<T>(dinx.vgather(w, in uint16(in src), v16u(vidx)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vgather(w, in uint32(in src), v32u(vidx)));
+                return generic<T>(dinx.vgather(w, in uint32(in src), v32u(vidx)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vgather(w, in uint64(in src), v64u(vidx)));
+                return generic<T>(dinx.vgather(w, in uint64(in src), v64u(vidx)));
             else 
                 return vgather_i(w,src,vidx);
         }
@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vgather(w, in int8(in src), v8i(vidx)));
+                return generic<T>(dinx.vgather(w, in int8(in src), v8i(vidx)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vgather(w, in int16(in src), v16i(vidx)));
+                return generic<T>(dinx.vgather(w, in int16(in src), v16i(vidx)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vgather(w, in int32(in src), v32i(vidx)));
+                return generic<T>(dinx.vgather(w, in int32(in src), v32i(vidx)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vgather(w, in int64(in src), v64i(vidx)));
+                return generic<T>(dinx.vgather(w, in int64(in src), v64i(vidx)));
             else 
                 throw unsupported<T>();
         }
@@ -72,13 +72,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vgather(w, in uint8(in src), v8u(vidx)));
+                return generic<T>(dinx.vgather(w, in uint8(in src), v8u(vidx)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vgather(w, in uint16(in src), v16u(vidx)));
+                return generic<T>(dinx.vgather(w, in uint16(in src), v16u(vidx)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vgather(w, in uint32(in src), v32u(vidx)));
+                return generic<T>(dinx.vgather(w, in uint32(in src), v32u(vidx)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vgather(w, in uint64(in src), v64u(vidx)));
+                return generic<T>(dinx.vgather(w, in uint64(in src), v64u(vidx)));
             else 
                 return vgather_i(w,src,vidx);
         }
@@ -88,13 +88,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vgather(w, in int8(in src), v8i(vidx)));
+                return generic<T>(dinx.vgather(w, in int8(in src), v8i(vidx)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vgather(w, in int16(in src), v16i(vidx)));
+                return generic<T>(dinx.vgather(w, in int16(in src), v16i(vidx)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vgather(w, in int32(in src), v32i(vidx)));
+                return generic<T>(dinx.vgather(w, in int32(in src), v32i(vidx)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vgather(w, in int64(in src), v64i(vidx)));
+                return generic<T>(dinx.vgather(w, in int64(in src), v64i(vidx)));
             else 
                 throw unsupported<T>();
         }

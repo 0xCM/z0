@@ -658,5 +658,33 @@ namespace Z0
             else
                 return new string(chars);            
         }
+
+        [MethodImpl(Inline)]
+        public static void IfNone(this bit x, Action f)
+        {
+            if(!x)
+                f();
+        }
+
+        [MethodImpl(Inline)]
+        public static void IfSome(this bit x, Action f)
+        {
+            if(x)
+                f();
+        }
+
+        [MethodImpl(Inline)]
+        public static void IfSome(this bool x, Action f)
+        {
+            if(x)
+                f();
+        }
+
+        [MethodImpl(Inline)]
+        public static void IfNone(this bool x, Action f)
+        {
+            if(!x)
+                f();
+        }                    
     }
 }

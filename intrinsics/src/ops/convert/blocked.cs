@@ -13,7 +13,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;    
     using static System.Runtime.Intrinsics.X86.Avx2;    
      
-    using static zfunc;   
+    using static Root;
+    using static gvec;
 
     partial class dinx
     {                

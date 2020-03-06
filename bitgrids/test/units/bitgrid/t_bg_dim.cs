@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
     
     public class t_bg_dim : t_bg<t_bg_dim>
     {        
@@ -44,7 +45,7 @@ namespace Z0
 
             var d256a = BitGrid.p2dimensions(Pow2.T08).OrderBy(x =>x.I).ThenBy(x => x.J).ToArray();
             var d256b = BitGrid.dimensions(n256).OrderBy(x =>x.I).ThenBy(x => x.J).ToArray();
-            for(var i=0; i< length(d256a,d256b); i++)
+            for(var i=0; i< zfunc.length(d256a,d256b); i++)
             {
                 Claim.eq(d256a[i].I, d256b[i].I);
                 Claim.eq(d256a[i].J, d256b[i].J);
@@ -52,7 +53,7 @@ namespace Z0
             
             var d128a = BitGrid.p2dimensions(Pow2.T07).OrderBy(x =>x.I).ThenBy(x => x.J).ToArray();
             var d128b = BitGrid.dimensions(n128).OrderBy(x =>x.I).ThenBy(x => x.J).ToArray();
-            for(var i=0; i< length(d128a,d128b); i++)
+            for(var i=0; i< zfunc.length(d128a,d128b); i++)
             {
                 Claim.eq(d128a[i].I, d128b[i].I);
                 Claim.eq(d128a[i].J, d128b[i].J);

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;    
-    using static As;
     using static gvec;
 
     partial class vmask
@@ -83,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N16 f, N1 d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast<ulong>(w, BitMask.lsb64(f, d)));
+                => generic<T>(vbroadcast<ulong>(w, BitMask.lsb64(f, d)));
 
         /// <summary>
         /// [00000011]
@@ -222,7 +221,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N16 f, N1 d,T t = default)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast<ulong>(w, BitMask.lsb64(f, d)));
+                => generic<T>(vbroadcast<ulong>(w, BitMask.lsb64(f, d)));
 
         /// <summary>
         /// [00000011]
@@ -307,7 +306,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
+                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -319,6 +318,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
+                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
     }
 }

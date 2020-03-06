@@ -8,47 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Root;    
-    using static AsIn;
     
     partial class gmath
     {
-        // /// <summary>
-        // /// Returns the additive identity for a primal type
-        // /// </summary>
-        // /// <typeparam name="T">The type</typeparam>
-        // [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        // public static T zero<T>(T t = default)
-        //     where T : unmanaged
-        //         => default;
-
-        // /// <summary>
-        // /// Ones all bits each and every ... one
-        // /// </summary>
-        // /// <param name="t">A primal type representative</param>
-        // /// <typeparam name="T">The primal source type</typeparam>
-        // [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        // public static T ones<T>(T t = default)
-        //     where T : unmanaged
-        //         => zfunc.ones<T>();
-
-        // /// <summary>
-        // /// Returns the minimum value that can be represented by a primal type
-        // /// </summary>
-        // /// <typeparam name="T">The type</typeparam>
-        // [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        // public static T minval<T>(T t = default)
-        //     where T : unmanaged
-        //         => zfunc.minval<T>();
-
-        // /// <summary>
-        // /// Returns the maximum value that can be represented by a primal type
-        // /// </summary>
-        // /// <typeparam name="T">The type</typeparam>
-        // [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        // public static T maxval<T>(T t = default)
-        //     where T : unmanaged
-        //         => zfunc.maxval<T>();
-
         /// <summary>
         /// Defines an alternating bit pattern 01 01...01
         /// </summary>
@@ -104,6 +66,5 @@ namespace Z0
         const ulong U64_AltEven = 0xAAAAAAAAAAAAAAAA;
 
         const ulong U64_AltOdd = 0x5555555555555555;
-
     }
 }

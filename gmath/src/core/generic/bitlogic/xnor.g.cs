@@ -9,8 +9,6 @@ namespace Z0
         
     using static Root;    
 
-    using static AsIn;
-
     partial class gmath
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]

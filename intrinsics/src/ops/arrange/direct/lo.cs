@@ -139,6 +139,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vlo(Vector128<ulong> src)
-            =>  vscalar(n128,src.GetElement(0));
+            =>  dvec.vscalar(n128,src.GetElement(0));
     }
 }

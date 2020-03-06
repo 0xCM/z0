@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static As;
     using static P2K;
-    using static Literals;
+    using static Nats;
  
     partial struct BitSpan
     {

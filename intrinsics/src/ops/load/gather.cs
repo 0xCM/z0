@@ -14,9 +14,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static zfunc;
-    using static As;
-    using static AsIn;
+    using static Root;
+    using static gvec;
+    using static Nats;
 
     partial class dinx
     {    
@@ -258,8 +258,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static unsafe Vector256<uint> vgather(N256 w, in ushort src, Vector256<uint> vidx)
-            => GatherVector256(constptr(in uint32(in src)), v32i(vidx), 2);         
-
+            => GatherVector256(constptr(in uint32(in src)), v32i(vidx), 2);
     }
-
 }

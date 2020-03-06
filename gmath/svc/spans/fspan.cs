@@ -9,7 +9,7 @@ namespace Z0
         
     using static Root;    
     using static As;
-    using static Spans;
+    using static Checks;
     
     [ApiHost(ApiHostKind.Generic)]
     public static class fspan
@@ -47,7 +47,7 @@ namespace Z0
         public static Span<T> fdiv<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
-            var len = Spans.length(lhs,rhs);
+            var len = Checks.length(lhs,rhs);
             for(var i = 0; i< len; i++)
                 lhs[i] = gfp.div(lhs[i], rhs[i]);
             return lhs;

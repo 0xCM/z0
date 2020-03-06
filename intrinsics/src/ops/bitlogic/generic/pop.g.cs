@@ -13,7 +13,6 @@ namespace Z0
     using static Nats;
     using static gvec;
     using static BitPop;
-    using static Literals;
 
     partial class ginx
     {

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public sealed class t_microbuffers : UnitTest<t_microbuffers>
     {

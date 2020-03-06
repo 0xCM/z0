@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static As;
     using static Root;
-    using static Nats;
     using static gvec;
 
     partial class ginx
@@ -43,13 +41,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(v8u(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v8u(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(v16u(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v16u(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(v32u(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v32u(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vperm4x64(v64u(x), spec));
+                return generic<T>(dinx.vperm4x64(v64u(x), spec));
             else
                 return vperm4x64_i(x,spec);
 
@@ -60,13 +58,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(v8i(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v8i(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(v16i(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v16i(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(v32i(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v32i(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vperm4x64(v64i(x), spec));
+                return generic<T>(dinx.vperm4x64(v64i(x), spec));
             else 
                 return vperm4x64_f(x,spec);
         }
@@ -76,9 +74,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(v32f(dinxfp.vperm4x64(v64f(x), spec)));
+                return generic<T>(v32f(dinxfp.vperm4x64(v64f(x), spec)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vperm4x64(v64f(x), spec));
+                return generic<T>(dinxfp.vperm4x64(v64f(x), spec));
             else
                 throw unsupported<T>();
         }

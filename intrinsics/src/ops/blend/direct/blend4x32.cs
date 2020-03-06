@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse41;
         
-    using static zfunc;
+    using static Root;
 
     partial class dinx
     {
@@ -58,8 +58,6 @@ namespace Z0
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vblend(Vector128<uint> x, Vector128<uint> y, [Imm] Blend4x32 spec)        
-            => Blend(x, y, (byte)spec);
- 
+            => Blend(x, y, (byte)spec); 
     }
-
 }

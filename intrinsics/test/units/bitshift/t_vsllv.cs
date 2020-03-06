@@ -10,7 +10,6 @@ namespace Z0
     
     using static Root;
     using static Nats;
-    using static Literals;
 
     public class t_vsllv : t_vinx<t_vsllv>
     {

@@ -276,5 +276,161 @@ namespace Z0
         public static N16384 n16384 => default; 
 
         public static N32768 n32768 => default;             
+
+
+        /// <summary>
+        /// A bit with state 1
+        /// </summary>
+        public static bit on
+        {
+            [MethodImpl(Inline)]
+            get => bit.On;
+        }
+
+        /// <summary>
+        /// A bit with state 0
+        /// </summary>
+        public static bit off
+        {
+            [MethodImpl(Inline)]
+            get => bit.Off;
+        }
+
+        /// <summary>
+        /// The zero-value for an 8-bit signed integer
+        /// </summary>
+        public const sbyte z8i = 0;
+
+        /// <summary>
+        /// The zero-value for an 8-bit usigned integer
+        /// </summary>
+        public const byte z8 = 0;
+
+        /// <summary>
+        /// The zero-value for a 16-bit signed integer
+        /// </summary>
+        public const short z16i = 0;
+
+        /// <summary>
+        /// The zero-value for a 16-bit unsigned integer
+        /// </summary>
+        public const ushort z16 = 0;
+
+        /// <summary>
+        /// The zero-value for a 32-bit signed integer
+        /// </summary>
+        public const int z32i = 0;
+
+        /// <summary>
+        /// The zero-value for a 32-bit usigned integer
+        /// </summary>
+        public const uint z32 = 0;
+
+        /// <summary>
+        /// The zero-value for a 64-bit signed integer
+        /// </summary>
+        public const long z64i = 0;
+
+        /// <summary>
+        /// The zero-value for a 64-bit usigned integer
+        /// </summary>
+        public const ulong z64 = 0;
+
+        /// <summary>
+        /// The zero-value for a 32-bit float
+        /// </summary>
+        public const float z32f = 0;
+
+        /// <summary>
+        /// The zero-value for a 64-bit float
+        /// </summary>
+        public const double z64f = 0;
+
+        /// <summary>
+        /// The maximum value for an 8-bit signed integer
+        /// </summary>
+        public const sbyte i8max = sbyte.MaxValue;
+
+        /// <summary>
+        /// The maximum value for an 8-bit usigned integer
+        /// </summary>
+        public const byte u8max = byte.MaxValue;
+
+        /// <summary>
+        /// The maximum value for a 16-bit signed integer
+        /// </summary>
+        public const short i16max = short.MaxValue;
+
+        /// <summary>
+        /// The maximum value for a 16-bit unsigned integer
+        /// </summary>
+        public const ushort u16max = ushort.MaxValue;
+
+        /// <summary>
+        /// The maximum value for a 32-bit signed integer
+        /// </summary>
+        public const int i32max = int.MaxValue;
+
+        /// <summary>
+        /// The maximum value for a 32-bit usigned integer
+        /// </summary>
+        public const uint u32max = uint.MaxValue;
+
+        /// <summary>
+        /// The maximum value for a 64-bit signed integer
+        /// </summary>
+        public const long i64max = long.MaxValue;
+
+        /// <summary>
+        /// The maximum value for a 64-bit usigned integer
+        /// </summary>
+        public const ulong u64max = ulong.MaxValue;
+
+        /// <summary>
+        /// The maximum value for a 32-bit float
+        /// </summary>
+        public const float f32max = float.MaxValue;
+
+        /// <summary>
+        /// The maximum value for a 64-bit float
+        /// </summary>
+        public const double f64max = double.MaxValue;
+
+        /// <summary>
+        /// The minimum value for an 8-bit signed integer
+        /// </summary>
+        public const sbyte i8min = sbyte.MinValue;
+
+        /// <summary>
+        /// The minimum value for a 16-bit signed integer
+        /// </summary>
+        public const short i16min = short.MinValue;
+
+        /// <summary>
+        /// The minimum value for a 32-bit signed integer
+        /// </summary>
+        public const int i32min = int.MinValue;
+
+        /// <summary>
+        /// The minimum value for a 64-bit signed integer
+        /// </summary>
+        public const long i64min = long.MinValue;
+
+        const byte Ones8u = byte.MaxValue;
+
+        const sbyte Ones8i = -1;
+
+        const ushort Ones16u = ushort.MaxValue;
+
+        const short Ones16i = -1;
+
+        const uint Ones32u = uint.MaxValue;
+
+        const int Ones32i = -1;
+
+        const ulong Ones64u = ulong.MaxValue;
+
+        const long Ones64i = -1;
+ 
     }
 }

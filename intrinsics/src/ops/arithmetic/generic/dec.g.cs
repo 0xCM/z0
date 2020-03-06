@@ -11,7 +11,6 @@ namespace Z0
     
     using static Root;    
     using static gvec;
-    using static As;
     
     partial class ginx
     {
@@ -30,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vdec(v8u(src)));
+                return generic<T>(dinx.vdec(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vdec(v16u(src)));
+                return generic<T>(dinx.vdec(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vdec(v32u(src)));
+                return generic<T>(dinx.vdec(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vdec(v64u(src)));
+                return generic<T>(dinx.vdec(v64u(src)));
             else
                 return vdec_i(src);
         }
@@ -46,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vdec(v8i(src)));
+                 return generic<T>(dinx.vdec(v8i(src)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vdec(v16i(src)));
+                 return generic<T>(dinx.vdec(v16i(src)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vdec(v32i(src)));
+                 return generic<T>(dinx.vdec(v32i(src)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(dinx.vdec(v64i(src)));
+                 return generic<T>(dinx.vdec(v64i(src)));
             else 
                 throw unsupported<T>();
         }
@@ -62,13 +61,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vdec(v8u(src)));
+                return generic<T>(dinx.vdec(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vdec(v16u(src)));
+                return generic<T>(dinx.vdec(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vdec(v32u(src)));
+                return generic<T>(dinx.vdec(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vdec(v64u(src)));
+                return generic<T>(dinx.vdec(v64u(src)));
             else
                 return vdec_i(src);
         }
@@ -78,13 +77,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vdec(v8i(src)));
+                 return generic<T>(dinx.vdec(v8i(src)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vdec(v16i(src)));
+                 return generic<T>(dinx.vdec(v16i(src)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vdec(v32i(src)));
+                 return generic<T>(dinx.vdec(v32i(src)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(dinx.vdec(v64i(src)));
+                 return generic<T>(dinx.vdec(v64i(src)));
             else 
                 throw unsupported<T>();
         }

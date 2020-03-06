@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static Nats;
-    using static Literals;
 
     partial class BitGrid
     {

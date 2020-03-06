@@ -107,6 +107,8 @@ namespace Z0
         public static unsafe void vstore(Vector128<double> src, ref double dst)
             => Store(ptr(ref dst), src);            
 
+
+
         /// <summary>
         /// Stores vector content to a memory location
         /// </summary>
@@ -292,6 +294,7 @@ namespace Z0
         public static unsafe void vstore(Vector128<double> src, ref double dst, int offset)
             => Store(ptr(ref dst, offset), src);            
 
+
         /// <summary>
         /// Stores vector content to a memory location
         /// </summary>
@@ -386,6 +389,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe void vstore(Vector256<double> src, ref double dst, int offset)
             => Store(ptr(ref dst, offset), src);             
-
     }
 }

@@ -19,7 +19,6 @@ namespace Z0
     using static Root;    
     using static gvec;
     using static Nats;
-    using static Literals;
 
     partial class dinx
     {

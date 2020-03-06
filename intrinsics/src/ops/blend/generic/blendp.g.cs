@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static As;
-    using static zfunc;
+    using static Root;
+    using static gvec;
 
     partial class ginx
     {

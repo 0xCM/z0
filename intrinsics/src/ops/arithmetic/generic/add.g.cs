@@ -12,7 +12,6 @@ namespace Z0
     using static Root;    
     using static gvec;
     using static Nats;
-    using static As;
 
     partial class ginx
     {
@@ -87,13 +86,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vadd(v8u(x), v8u(y)));
+                return generic<T>(dinx.vadd(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vadd(v16u(x), v16u(y)));
+                return generic<T>(dinx.vadd(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vadd(v32u(x), v32u(y)));
+                return generic<T>(dinx.vadd(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vadd(v64u(x), v64u(y)));
+                return generic<T>(dinx.vadd(v64u(x), v64u(y)));
             else
                 return vadd_i(x,y);
         }
@@ -103,13 +102,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vadd(v8i(x), v8i(y)));
+                 return generic<T>(dinx.vadd(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vadd(v16i(x), v16i(y)));
+                 return generic<T>(dinx.vadd(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vadd(v32i(x), v32i(y)));
+                 return generic<T>(dinx.vadd(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(dinx.vadd(v64i(x), v64i(y)));
+                 return generic<T>(dinx.vadd(v64i(x), v64i(y)));
             else
                 return ginxfp.vadd(x,y);
         }
@@ -119,13 +118,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vadd(v8u(x), v8u(y)));
+                return generic<T>(dinx.vadd(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vadd(v16u(x), v16u(y)));
+                return generic<T>(dinx.vadd(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vadd(v32u(x), v32u(y)));
+                return generic<T>(dinx.vadd(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vadd(v64u(x), v64u(y)));
+                return generic<T>(dinx.vadd(v64u(x), v64u(y)));
             else
                 return vadd_i(x,y);
         }    
@@ -135,13 +134,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vadd(v8i(x), v8i(y)));
+                 return generic<T>(dinx.vadd(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vadd(v16i(x), v16i(y)));
+                 return generic<T>(dinx.vadd(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vadd(v32i(x), v32i(y)));
+                 return generic<T>(dinx.vadd(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(dinx.vadd(v64i(x), v64i(y)));
+                 return generic<T>(dinx.vadd(v64i(x), v64i(y)));
             else
                 return ginxfp.vadd(x,y);
         }    

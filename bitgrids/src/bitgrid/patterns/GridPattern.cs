@@ -11,9 +11,7 @@ namespace Z0
 
     using static Root;
     using static Nats;
-    using static Literals;    
     using static ginx;
-    using static As;
     using static BitGrid;
 
     public static partial class GridPattern
@@ -102,7 +100,7 @@ namespace Z0
         {
             var sep = natval(n);
             var pattern = BitMask.lo(sep, z64) << sep;                        
-            return vgeneric<T>(gvec.vbroadcast(w,gbits.replicate(pattern)));
+            return gvec.generic<T>(gvec.vbroadcast(w,gbits.replicate(pattern)));
         }
 
     }

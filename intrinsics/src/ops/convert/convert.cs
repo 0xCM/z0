@@ -17,13 +17,13 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse2.X64;
      
-    using static As;
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static gvec;
 
     partial class dinx
     {                
         // ~ Scalar conversions
-
         /// <summary>
         /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
         /// </summary>
@@ -64,16 +64,6 @@ namespace Z0
         public static ulong convert(Vector128<ulong> src, N64 w, ulong t = default)
             => ConvertToUInt64(src);
 
-        /// <summary>
-        /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
-        /// (2x64u,2x64u) -> 4x32u
-        /// </summary>
-        /// <param name="lo">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> convert(Vector128<ulong> lo, Vector128<ulong> hi, N128 w, uint t = default)
-            => convert(dvec.vconcat(lo,hi), w,t);
 
         /// <summary>
         /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
@@ -83,18 +73,19 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> convert(Vector256<ulong> src, N128 w, uint t = default)
+        public static Vector128<uint> vconvert(Vector256<ulong> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(v64f(src)));
-
+    
         /// <summary>
-        /// __m256d _mm256_cvtepi32_pd (__m128i a)VCVTDQ2PD ymm, xmm/m128
-        /// 4x32u -> 4x64u
+        /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
+        /// (2x64u,2x64u) -> 4x32u
         /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="lo">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> convert(Vector128<uint> src, N256 w, ulong t = default)
-            => v64u(ConvertToVector256Double(v32i(src)));
+        public static Vector128<uint> vconvert(Vector128<ulong> lo, Vector128<ulong> hi, N128 w, uint t = default)
+            => vconvert(dvec.vconcat(lo,hi), w,t);
 
         // ~ 128x8i -> X
         // ~ ------------------------------------------------------------------

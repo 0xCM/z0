@@ -211,33 +211,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinaryOp64 ToFixedBinOp(this MethodInfo f, NumericType<long> k)
             => f.CreateDelegate<Func<long,long,long>>().ToFixed();
-
-        [MethodImpl(Inline)]
-        public static void IfNone(this bit x, Action f)
-        {
-            if(!x)
-                f();
-        }
-
-        [MethodImpl(Inline)]
-        public static void IfSome(this bit x, Action f)
-        {
-            if(x)
-                f();
-        }
-
-        [MethodImpl(Inline)]
-        public static void IfSome(this bool x, Action f)
-        {
-            if(x)
-                f();
-        }
-
-        [MethodImpl(Inline)]
-        public static void IfNone(this bool x, Action f)
-        {
-            if(!x)
-                f();
-        }            
     }
 }

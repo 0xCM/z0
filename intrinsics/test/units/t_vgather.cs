@@ -91,6 +91,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Interval<T> bounds<T>(int n, T t = default)
             where T : unmanaged
-                => (zero(t), convert<T>(n));        
+                => (Root.zero(t), convert<T>(n));        
     }
 }

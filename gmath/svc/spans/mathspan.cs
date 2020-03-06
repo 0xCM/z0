@@ -324,7 +324,7 @@ namespace Z0
 
         public static Span<byte> avgi(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)        
         {
-            Span<byte> dst = new byte[Spans.length(lhs,rhs)];
+            Span<byte> dst = new byte[Checks.length(lhs,rhs)];
             for(var i=0; i<dst.Length; i++)
                 dst[i] = math.avgi(lhs[i],rhs[i]);
             return dst;
@@ -332,7 +332,7 @@ namespace Z0
 
         public static Span<ushort> avgi(ReadOnlySpan<ushort> lhs, ReadOnlySpan<ushort> rhs)        
         {
-            Span<ushort> dst = new ushort[Spans.length(lhs,rhs)];
+            Span<ushort> dst = new ushort[Checks.length(lhs,rhs)];
             for(var i=0; i<dst.Length; i++)
                 dst[i] = math.avgi(lhs[i],rhs[i]);
             return dst;

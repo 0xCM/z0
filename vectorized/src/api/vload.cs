@@ -17,7 +17,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
 
     using static Root;
-    using static As;
     using static Nats;
 
     partial class gvec
@@ -414,13 +413,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                dst = vgeneric<T>(LoadDquVector256((byte*)pSrc));
+                dst = generic<T>(LoadDquVector256((byte*)pSrc));
             else if(typeof(T) == typeof(ushort))
-                dst = vgeneric<T>(LoadDquVector256((ushort*)pSrc));
+                dst = generic<T>(LoadDquVector256((ushort*)pSrc));
             else if(typeof(T) == typeof(uint))
-                dst = vgeneric<T>(LoadDquVector256((uint*)pSrc));
+                dst = generic<T>(LoadDquVector256((uint*)pSrc));
             else 
-                dst = vgeneric<T>(LoadDquVector256((ulong*)pSrc));
+                dst = generic<T>(LoadDquVector256((ulong*)pSrc));
 
         }
 
@@ -429,13 +428,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                dst = vgeneric<T>(LoadDquVector256((sbyte*)pSrc));
+                dst = generic<T>(LoadDquVector256((sbyte*)pSrc));
             else if(typeof(T) == typeof(short))
-                dst = vgeneric<T>(LoadDquVector256((short*)pSrc));
+                dst = generic<T>(LoadDquVector256((short*)pSrc));
             else if(typeof(T) == typeof(int))
-                dst = vgeneric<T>(LoadDquVector256((int*)pSrc));
+                dst = generic<T>(LoadDquVector256((int*)pSrc));
             else 
-                dst = vgeneric<T>(LoadDquVector256((long*)pSrc));
+                dst = generic<T>(LoadDquVector256((long*)pSrc));
 
         }
 
@@ -444,9 +443,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                dst = vgeneric<T>(LoadVector256((float*)pSrc));
+                dst = generic<T>(LoadVector256((float*)pSrc));
             else if(typeof(T) == typeof(double))
-                dst = vgeneric<T>(LoadVector256((double*)pSrc));
+                dst = generic<T>(LoadVector256((double*)pSrc));
             else 
                 throw unsupported<T>();
         }
@@ -456,13 +455,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                dst = As.vgeneric<T>(LoadDquVector128((byte*)pSrc));
+                dst = generic<T>(LoadDquVector128((byte*)pSrc));
             else if(typeof(T) == typeof(ushort))
-                dst = vgeneric<T>(LoadDquVector128((ushort*)pSrc));
+                dst = generic<T>(LoadDquVector128((ushort*)pSrc));
             else if(typeof(T) == typeof(uint))
-                dst = vgeneric<T>(LoadDquVector128((uint*)pSrc));
+                dst = generic<T>(LoadDquVector128((uint*)pSrc));
             else 
-                dst = vgeneric<T>(LoadDquVector128((ulong*)pSrc));
+                dst = generic<T>(LoadDquVector128((ulong*)pSrc));
 
         }
 
@@ -471,13 +470,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                dst = As.vgeneric<T>(LoadDquVector128((sbyte*)pSrc));
+                dst = generic<T>(LoadDquVector128((sbyte*)pSrc));
             else if(typeof(T) == typeof(short))
-                dst = As.vgeneric<T>(LoadDquVector128((short*)pSrc));
+                dst = generic<T>(LoadDquVector128((short*)pSrc));
             else if(typeof(T) == typeof(int))
-                dst = vgeneric<T>(LoadDquVector128((int*)pSrc));
+                dst = generic<T>(LoadDquVector128((int*)pSrc));
             else 
-                dst = vgeneric<T>(LoadDquVector128((long*)pSrc));
+                dst = generic<T>(LoadDquVector128((long*)pSrc));
 
         }
 
@@ -486,9 +485,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                dst = vgeneric<T>(LoadVector128((float*)pSrc));
+                dst = generic<T>(LoadVector128((float*)pSrc));
             else if(typeof(T) == typeof(double))
-                dst = vgeneric<T>(LoadVector128((double*)pSrc));
+                dst = generic<T>(LoadVector128((double*)pSrc));
             else 
                 throw unsupported<T>();
         }         

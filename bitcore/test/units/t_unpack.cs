@@ -76,7 +76,7 @@ namespace Z0
                 var bs = BitString.scalar(src);
                 for(var i = 0; i< bs.Length; i++)
                 {
-                    var expect = bs[i] ? one<T>() : zero<T>();
+                    var expect = bs[i] ? Root.one<T>() : Root.zero<T>();
                     var actual = dst[i];
                     Claim.eq(expect,actual);
                 }
@@ -88,7 +88,7 @@ namespace Z0
             var y2 = BitString.scalars(x);
             for(var i=0; i< y1.Length; i++)
             {
-                var expect = y2[i] ? one<T>() : zero<T>();
+                var expect = y2[i] ? Root.one<T>() : Root.zero<T>();
                 var actual = y1[i];
                 Claim.yea(gmath.eq(expect,actual));
             }

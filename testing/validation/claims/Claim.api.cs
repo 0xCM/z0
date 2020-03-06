@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
         
     using static Root;
-    using static Spans;
+    using static Checks;
     using static Messages;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

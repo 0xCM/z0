@@ -13,10 +13,6 @@ namespace Z0
 
     using static Root;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
     public static class Spans
     {    
         /// <summary>
@@ -36,7 +32,7 @@ namespace Z0
         /// <param name="count">The number of source cells to read</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
-        public static Span<T> manipulate<T>(ref T src, int count)
+        public static Span<T> edit<T>(ref T src, int count)
             => MemoryMarshal.CreateSpan(ref src, count);
 
         /// <summary>
@@ -79,6 +75,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> span<T>(params T[] src)
             => src;
+            
         /// <summary>
         /// Reimagines a readonly span of one element type as a readonly span of another element type
         /// </summary>
@@ -153,7 +150,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> span8u<T>(Span<T> src)
             where T : unmanaged
-                => Spans.cast<T,byte>(src);
+                => cast<T,byte>(src);
 
         /// <summary>
         /// Presents a readonly span of generic values as a span of signed bytes
@@ -163,7 +160,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<sbyte> span8i<T>(Span<T> src)
             where T : unmanaged
-                => Spans.cast<T,sbyte>(src);
+                => cast<T,sbyte>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of signed 16-bit integers
@@ -173,7 +170,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<short> span16i<T>(Span<T> src)
             where T : unmanaged        
-                => Spans.cast<T,short>(src);
+                => cast<T,short>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of unsigned 16-bit integers
@@ -183,7 +180,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<ushort> span16u<T>(Span<T> src)
             where T : unmanaged        
-                => Spans.cast<T,ushort>(src);
+                => cast<T,ushort>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of signed 32-bit integers
@@ -193,7 +190,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<int> span32i<T>(Span<T> src)
             where T : unmanaged        
-                => Spans.cast<T,int>(src);
+                => cast<T,int>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of unsigned 32-bit integers
@@ -203,7 +200,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<uint> span32u<T>(Span<T> src)
             where T : unmanaged        
-                => Spans.cast<T,uint>(src);
+                => cast<T,uint>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of 64-bit signed integers
@@ -213,7 +210,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<long> span64i<T>(Span<T> src)
             where T : unmanaged        
-                => Spans.cast<T,long>(src);
+                => cast<T,long>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of 64-bit unsigned integers
@@ -223,7 +220,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<ulong> span64u<T>(Span<T> src)
             where T : unmanaged        
-                => Spans.cast<T,ulong>(src);
+                => cast<T,ulong>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of 32-bit floats
@@ -233,7 +230,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<float> span32f<T>(Span<T> src)
             where T : unmanaged        
-                => Spans.cast<T,float>(src);
+                => cast<T,float>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of 64-bit floats
@@ -253,7 +250,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<sbyte> span8i<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => Spans.cast<T,sbyte>(src);
+                => cast<T,sbyte>(src);
 
         /// <summary>
         /// Presents a readonly span ofgeneric values as a readonly span of bytes
@@ -273,7 +270,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<short> span16i<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
-                => Spans.cast<T,short>(src);
+                => cast<T,short>(src);
 
         /// <summary>
         /// Presents a readonly span of generic values as a readonly span of unsigned 16-bit integers
@@ -283,7 +280,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<ushort> span16u<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
-                => Spans.cast<T,ushort>(src);
+                => cast<T,ushort>(src);
 
         /// <summary>
         /// Presents a readonly span of generic values as a readonly span of signed 32-bit integers
@@ -293,7 +290,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<int> span32i<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
-                => Spans.cast<T,int>(src);
+                => cast<T,int>(src);
 
         /// <summary>
         /// Presents a readonly span of generic values as a readonly span of unsigned 32-bit integers
@@ -303,7 +300,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<uint> span32u<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
-                => Spans.cast<T,uint>(src);
+                => cast<T,uint>(src);
 
         /// <summary>
         /// Presents a readonly span of generic values as a readonly span of 64-bit signed integers
@@ -313,7 +310,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<long> span64i<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
-                => Spans.cast<T,long>(src);
+                => cast<T,long>(src);
 
         /// <summary>
         /// Presents a readonly span of generic values as a readonly span of 64-bit unsigned integers
@@ -323,7 +320,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<ulong> span64u<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
-                => Spans.cast<T,ulong>(src);
+                => cast<T,ulong>(src);
 
         /// <summary>
         /// Presents a readonly span of generic values as a readonly span of 32-bit floats
@@ -333,7 +330,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<float> span32f<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
-                => Spans.cast<T,float>(src);
+                => cast<T,float>(src);
 
         /// <summary>
         /// Presents a readonly readonly span of generic values as a readonly readonly span of 64-bit floats
@@ -343,7 +340,107 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<double> span64f<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
-                => Spans.cast<T,double>(src);        
+                => cast<T,double>(src);        
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<sbyte> span8i<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,sbyte>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> span8u<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,byte>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<short> span16i<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,short>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<ushort> span16u<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,ushort>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<int> span32i<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,int>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<uint> span32u<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,uint>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<long> span64i<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,long>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<ulong> span64u<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,ulong>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<float> span32f<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,float>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<double> span64f<T>(in ReadOnlyMemory<T> src)
+            where T : unmanaged
+                => cast<T,double>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> from<T>(in ReadOnlyMemory<sbyte> src)
+            where T : unmanaged
+                => cast<sbyte,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> from<T>(in ReadOnlyMemory<byte> src)
+            where T : unmanaged
+                => cast<byte,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> from<T>(in ReadOnlyMemory<short> src)
+            where T : unmanaged
+                => cast<short,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> from<T>(in ReadOnlyMemory<ushort> src)
+            where T : unmanaged
+                => cast<ushort,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> from<T>(in ReadOnlyMemory<int> src)
+            where T : unmanaged
+                => cast<int,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> from<T>(in ReadOnlyMemory<uint> src)
+            where T : unmanaged
+                => cast<uint,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<long> src)
+            where T : unmanaged
+                => cast<long,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> from<T>(in ReadOnlyMemory<ulong> src)
+            where T : unmanaged
+                => cast<ulong,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> from<T>(in ReadOnlyMemory<float> src)
+            where T : unmanaged
+                => cast<float,T>(src.Span);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<double> src)
+            where T : unmanaged
+                => cast<double,T>(src.Span);                 
 
         [MethodImpl(Inline)]   
         public static ISet<T> set<T>(ReadOnlySpan<T> src)
@@ -364,60 +461,6 @@ namespace Z0
                 dst.Add(b[i]);
             return dst;     
         }
-
-        /// <summary>
-        /// Returns the common length of the operands if they are the same; otherwise, raises an error
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]   
-        public static int length<T>(Span<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-        /// <summary>
-        /// Returns the common length of the operands if they are the same; otherwise, raises an error
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]   
-        public static int length<T>(IReadOnlyList<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null) 
-            => lhs.Count == rhs.Length ? lhs.Count : throw Errors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
-
-        /// <summary>
-        /// Returns the common length of the operands if they are the same; otherwise, raises an error
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <typeparam name="T">The element type of the first operand</typeparam>
-        /// <typeparam name="S">The element type of the second operand</typeparam>
-        [MethodImpl(Inline)]   
-        public static int length<S,T>(Span<S> lhs, Span<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-        /// <summary>
-        /// Returns the common length of the operands if they are the same; otherwise, raises an error
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <typeparam name="T">The element type of the first operand</typeparam>
-        /// <typeparam name="S">The element type of the second operand</typeparam>
-        [MethodImpl(Inline)]   
-        public static int length<S,T>(ReadOnlySpan<S> lhs, Span<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-        /// <summary>
-        /// Returns the common length of the operands if they are the same; otherwise, raises an error
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <typeparam name="T">The element type of the first operand</typeparam>
-        /// <typeparam name="S">The element type of the second operand</typeparam>
-        [MethodImpl(Inline)]   
-        public static int length<S,T>(ReadOnlySpan<S> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
 
         [MethodImpl(Inline)]
         public static Span<T3> apply<F,T0,T1,T2,T3>(F f, ReadOnlySpan<T0> A, ReadOnlySpan<T1> B, ReadOnlySpan<T2> C,  Span<T3> dst)

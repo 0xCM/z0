@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static Literals;
     using static Nats;
 
     partial struct BitSpan

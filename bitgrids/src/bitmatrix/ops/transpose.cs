@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix8 transpose_v1(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            var x = dinx.vscalar(n128,(ulong)A);
+            var x = vscalar(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
             {
                 Z[i] = (byte)dinx.vtakemask(v8u(x));

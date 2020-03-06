@@ -9,58 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static AsIn;
 
     [ApiHost("as.numeric", ApiHostKind.Generic)]
     public static class AsNumeric
     {                
-        /// <summary>
-        /// Converts the source value to a numeric target value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static T As<S,T>(S src)
-            where T : unmanaged
-                => As_u<S,T>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static byte AsU8<S>(S src)
-            where S : unmanaged
-                => As<S,byte>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static sbyte AsI8<S>(S src)
-            where S : unmanaged
-             => As<S,sbyte>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static ushort AsU16<S>(S src)
-            where S : unmanaged
-                => As<S,ushort>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static short AsI16<S>(S src)
-            where S : unmanaged
-                => As<S,short>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static int AsI32<S>(S src)
-            => As<S,int>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static uint AsU32<S>(S src)
-            => As<S,uint>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static long AsI64<S>(S src)
-            => As<S,long>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static ulong AsU64<S>(S src)
-            => As<S,ulong>(src);
-
         [MethodImpl(Inline)]
         public static AsI8<S> I8<S>()        
             => default(AsI8<S>);

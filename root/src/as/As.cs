@@ -17,95 +17,6 @@ namespace Z0
         public static ref T refAdd<T>(ref T src, IntPtr offset)
             => ref Unsafe.Add(ref src, offset);
     
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<short> int16<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => Spans.cast<T,short>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<ushort> uint16<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => Spans.cast<T,ushort>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<int> int32<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => Spans.cast<T,int>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<uint> uint32<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => Spans.cast<T,uint>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<long> int64<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => Spans.cast<T,long>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<ulong> uint64<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => Spans.cast<T,ulong>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<float> float32<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => Spans.cast<T,float>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<double> float64<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => Spans.cast<T,double>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<sbyte> src)
-            where T : unmanaged
-                => Spans.cast<sbyte,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<byte> src)
-            where T : unmanaged
-                => Spans.cast<byte,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<short> src)
-            where T : unmanaged
-                => Spans.cast<short,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<ushort> src)
-            where T : unmanaged
-                => Spans.cast<ushort,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<int> src)
-            where T : unmanaged
-                => Spans.cast<int,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<uint> src)
-            where T : unmanaged
-                => Spans.cast<uint,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<long> src)
-            where T : unmanaged
-                => Spans.cast<long,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<ulong> src)
-            where T : unmanaged
-                => Spans.cast<ulong,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<float> src)
-            where T : unmanaged
-                => Spans.cast<float,T>(src.Span);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> generic<T>(in ReadOnlyMemory<double> src)
-            where T : unmanaged
-                => Spans.cast<double,T>(src.Span);                 
 
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells
@@ -323,29 +234,6 @@ namespace Z0
             where T : unmanaged        
                 => ref Unsafe.As<Vector256<ulong>,Vector256<T>>(ref refs.edit(in src));
 
-        /// <summary>
-        /// Reinterprets the source vector as a vector over parametric T-cells
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The target type</typeparam>
-        /// <remarks>This operation should be dissolved when the method is closed over a concrete type
-        /// and should not impact instruction generation</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static ref Vector256<T> vgeneric<T>(in Vector256<float> src)
-            where T : unmanaged        
-                => ref Unsafe.As<Vector256<float>,Vector256<T>>(ref refs.edit(in src));
-
-        /// <summary>
-        /// Reinterprets the source vector as a vector over parametric T-cells
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The target type</typeparam>
-        /// <remarks>This operation should be dissolved when the method is closed over a concrete type
-        /// and should not impact instruction generation</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static ref Vector256<T> vgeneric<T>(in Vector256<double> src)
-            where T : unmanaged        
-                => ref Unsafe.As<Vector256<double>,Vector256<T>>(ref refs.edit(in src));
 
         [MethodImpl(Inline)]
         public static T generic<T>(char src)
@@ -552,9 +440,6 @@ namespace Z0
         public static T generic<T>(ulong src)
             => Unsafe.As<ulong,T>(ref src);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static ref T generic<T>(ref long src)
-            => ref Unsafe.As<long,T>(ref src);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref T generic<T>(ref ulong src)

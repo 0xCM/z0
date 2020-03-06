@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+
+    using static Root;
+    using static Nats;
     
     public class t_bg_col : t_bg<t_bg_col>
     {        
