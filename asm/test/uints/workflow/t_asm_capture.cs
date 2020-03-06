@@ -16,41 +16,6 @@ namespace Z0
     public class t_asm_capture : t_asm<t_asm_capture>
     {
 
-        public void host_workflow_2()
-        {
-            var outdir = DefaultDataDir;
-            outdir.Clear();
-            var extractor = Context.HostExtractor();
-            var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
-            var decoder = Context.FunctionDecoder();
-            var roots = RootEmissionPaths.Define(outdir).Clear();
-            var format = Context.AsmFormat.WithSectionDelimiter();
-
-
-            foreach(var catalog in Context.Compostion.Catalogs)   
-            {
-                foreach(var host in catalog.ApiHosts)
-                {
-                    //var paths = Context.EmissionPaths(host.Path, outdir);
-                    var paths = HostEmissionPaths.Define(host.Path,roots);
-                    var extract = extractor.Extract(host);
-                    foreach(var op in extract)
-                        Claim.eq(op.Uri.HostPath, host.Path);
-                        
-                    var extractReport = OpExtractReport.Create(extract); 
-                    extractReport.Save(paths.ExtractPath);
-
-                    var parsed = parser.Parse(extract);
-                    var parsedReport = ParsedOpReport.Create(parsed);                    
-                    parsedReport.Save(paths.ParsedPath);
-                    
-                    var decoded = decoder.Decode(parsed);
-
-                    using var writer = Context.AsmWriter(format, paths.DecodedPath);
-                    writer.Write(decoded);
-                }
-            }
-        }
 
         void host_workflow()
         {                    

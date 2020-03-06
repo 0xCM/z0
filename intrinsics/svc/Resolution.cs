@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
 {
-    using System;
-    using System.Collections.Generic;
-
     public sealed class IntrinsicsSvc : AssemblyResolution<IntrinsicsSvc, IntrinsicsSvc.C>
     {        
         const AssemblyId Identity = AssemblyId.IntrinsicsSvc;

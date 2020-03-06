@@ -3,11 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
-{        
-    public sealed class Fixed : AssemblyResolution<Fixed, Fixed.C>
+{    
+    public sealed class Machines : AssemblyResolution<Machines>
     {
-        public Fixed() : base(AssemblyId.Fixed) {}
-
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.Fixed) { } }            
+        public Machines() : base(AssemblyId.Machines) {}
     }
 }

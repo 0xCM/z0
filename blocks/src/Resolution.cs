@@ -6,10 +6,8 @@ namespace Z0.Resolutions
 {        
     public sealed class Blocks : AssemblyResolution<Blocks, Blocks.C>
     {
-        const AssemblyId Identity = AssemblyId.Blocks;
+        public Blocks() : base(AssemblyId.Blocks) {}
 
-        public Blocks() : base(Identity) {}
-
-        public class C : OpCatalog<C> { public C() : base(Identity){ }}
+        public class C : OpCatalog<C> { public C() : base(AssemblyId.Blocks){ }}
     }
 }

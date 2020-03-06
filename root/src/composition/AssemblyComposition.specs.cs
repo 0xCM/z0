@@ -29,7 +29,7 @@ namespace Z0
 
         IEnumerable<IOpCatalog> Catalogs
             => from a in Resolved
-                where !a.Catalog.IsEmpty
+                where !a.Catalog.IsEmpty && a.Catalog.OwnerId.IsSome()
                 select a.Catalog;
     }
 

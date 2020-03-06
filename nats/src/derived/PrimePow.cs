@@ -3,12 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-        
+{        
     /// <summary>
     /// Reifies a natural prime base raised to a natural power
     /// </summary>
-    public readonly struct PrimePow<P, E> : ITypeNat
+    public readonly struct PrimePow<P,E> : ITypeNat
         where E : unmanaged, ITypeNat
         where P : unmanaged, ITypeNat, INatPrime<P>
     {
@@ -33,5 +32,4 @@ namespace Z0
         public override string ToString() 
             => format();
     }
-
 }

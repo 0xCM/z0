@@ -3,14 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
-{    
-    using System;
-
-    public sealed class Machines : AssemblyResolution<Machines>
+{        
+    public sealed class BitFields : AssemblyResolution<BitFields, BitFields.C>
     {
-        const AssemblyId Identity = AssemblyId.Machines;
+        public BitFields() : base(AssemblyId.BitFields) {}
 
-        public override AssemblyId Id 
-            => Identity;
+        public class C : OpCatalog<C> { public C() : base(AssemblyId.BitFields) {} }
     }
 }

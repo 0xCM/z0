@@ -62,7 +62,7 @@ namespace Z0
             this.HostingType = t;
             var attrib = t.GetCustomAttribute<ApiHostAttribute>();
             this.HostKind = attrib?.HostKind ?? ApiHostKind.DirectAndGeneric;
-            this.HostName = string.IsNullOrWhiteSpace(attrib?.HostName) ? t.Name : attrib.HostName;            
+            this.HostName = text.ifempty(attrib?.HostName, t.Name);
             this.Path = ApiHostUri.Define(Owner, HostName);
             this.Identifier = Path.Format();
         }

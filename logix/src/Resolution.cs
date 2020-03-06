@@ -4,21 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
 {        
-    using System;
-    
-    using Z0.Logix;
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class Logix : AssemblyResolution<Logix>
+    public sealed class Logix : AssemblyResolution<Logix, Logix.C>
     {
         const AssemblyId Identity = AssemblyId.Logix;
 
-        public override AssemblyId Id 
-            => Identity;
+        public Logix() : base(AssemblyId.Logix) {}
 
-        public override IOpCatalog Operations 
-            => new Catalog(Identity);
+        public class C : OpCatalog<C> { public C() : base(AssemblyId.Logix) { } }
     }
 }

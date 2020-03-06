@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
 {
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class CoreFunc : AssemblyResolution<CoreFunc, CoreFunc.C>
+    public sealed class CoreFunc : AssemblyResolution<CoreFunc>
     {
-        const AssemblyId Identity = AssemblyId.CoreFunc;
-
-        public CoreFunc() : base(Identity) {}
-        
-        public class C : OpCatalog<C> { public C() : base(Identity) { } }
+        public CoreFunc() : base(AssemblyId.CoreFunc) {}
+                
     }
 }

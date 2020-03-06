@@ -13,25 +13,23 @@ namespace Z0
     /// <summary>
     /// Defines identifiers for known system assemblies
     /// </summary>
-    [Flags]
     public enum AssemblyId : ulong
     {
         None = 0,
                 
-        Root = 1,
+        Root = 12,
 
         RootTest = Root | Test,
 
-        Nats = 20,
+        Nats = 225,
 
         NatsTest = Nats | Test,
 
         DataCore = 30,
 
-        CoreFunc = 40,
+        CoreFunc = 41,
 
         CoreFuncTest = CoreFunc | Test,
-
 
         Math = 45,
 
@@ -41,7 +39,7 @@ namespace Z0
 
         GMathTest = GMath | Test,
 
-        GMathSvc = 60 | Svc,
+        GMathSvc = GMath | Svc,
 
         Intrinsics = 70,
 
@@ -159,6 +157,7 @@ namespace Z0
 
         Test = T17
     }
+
 
     public static class AssemblyIdOps
     {

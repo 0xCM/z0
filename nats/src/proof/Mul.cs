@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
 
     partial class NatProve
     {

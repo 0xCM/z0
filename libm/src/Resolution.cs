@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
 {        
-    using System;
-
     public sealed class LibM : AssemblyResolution<LibM, LibM.C>
     {
         public LibM() : base(AssemblyId.LibM) {}

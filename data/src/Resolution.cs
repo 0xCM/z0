@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
 {        
-    using System;
-
     public sealed class Data : AssemblyResolution<Data, Data.C>
     {
         public Data() : base(AssemblyId.Data) {}

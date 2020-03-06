@@ -15,9 +15,9 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class ApiHostAttribute : Attribute
     {
-        public ApiHostAttribute(string Name, ApiHostKind kind)
+        public ApiHostAttribute(string name, ApiHostKind kind)
         {
-            this.HostName = Name;
+            this.HostName = name;
             this.HostKind = kind;
         }
 
@@ -27,8 +27,8 @@ namespace Z0
             this.HostKind = kind;
         }
 
-        public ApiHostAttribute(string Name)
-            : this(Name, ApiHostKind.DirectAndGeneric)
+        public ApiHostAttribute(string name)
+            : this(name, ApiHostKind.DirectAndGeneric)
         {
         }
 
