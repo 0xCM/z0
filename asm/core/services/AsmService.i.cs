@@ -14,6 +14,7 @@ namespace Z0
         
     }
 
+
     /// <summary>
     /// Characterizes contexutal asm service with caller-managed lifecycle
     /// </summary>

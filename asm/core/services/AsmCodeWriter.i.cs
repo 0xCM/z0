@@ -11,6 +11,11 @@ namespace Z0
     /// </summary>
     public interface IAsmCodeWriter : IAsmStreamWriter
     {
-        void Write(in CapturedOp src, int? idpad = null);
+        void WriteCode(in CapturedOp src, int? idpad = null);
+
+        void WriteHexLine(in CapturedOp src, int? idpad = null);
+
+        void WriteHexLine(OpIdentity id, Span<byte> data, int? idpad = null);
+
     }
 }

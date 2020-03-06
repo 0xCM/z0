@@ -10,11 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
-
-
 
     public abstract class t_asm<U> : UnitTest<U>
         where U : t_asm<U>
@@ -44,17 +41,6 @@ namespace Z0
         protected AsmFormatConfig DefaultAsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-        protected IAsmCodeWriter HexTestWriter([Caller] string test = null)
-        {
-            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
-            return  Context.CodeWriter(dst);
-        }
-
-        protected IAsmFunctionWriter AsmTestWriter([Caller] string test = null)
-        {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Asm);    
-            return Context.WithFormat(DefaultAsmFormat).AsmWriter(path);
-        }
 
         /// <summary>
         /// Evaluates a pair of unary operators and asserts their equality over a random sequence

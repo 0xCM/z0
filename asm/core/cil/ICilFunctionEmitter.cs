@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    public interface ICilFunctionEmitter : IFunctionEmitter
+    public interface ICilFunctionEmitter
     {
         Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst);
     }

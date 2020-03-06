@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
     
     using static zfunc;
-    using static Z0.EncodingPatternKind;
-    using static Z0.EncodingPatternTokens;
+
+    using static EncodingPatternKind;
+    using static EncodingPatternTokens;
     
     using D = EncodingPatternOffset;
 

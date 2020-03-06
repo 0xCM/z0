@@ -16,14 +16,6 @@ namespace Z0
     public static class AsmServices
     {                
         /// <summary>
-        /// Instantiates a contextual asm function emitter service
-        /// </summary>
-        /// <param name="context">The source context</param>
-        [MethodImpl(Inline)]
-        public static IAsmFunctionEmitter AsmEmitter(this IAsmContext context)
-            => context.AsmEmitter(context.AsmFormatter());
-
-        /// <summary>
         /// Instantiates a contextual archive service
         /// </summary>
         /// <param name="context">The source context</param>

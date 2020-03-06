@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The juncture-coincident operation set 
         /// </summary>
-        public readonly IOpCaptureService Operations;
+        public readonly ICaptureService Operations;
 
         /// <summary>
         /// The junction to which events will be relayed

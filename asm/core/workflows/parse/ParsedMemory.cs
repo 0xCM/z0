@@ -6,27 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
+ 
     using static Root;    
 
     public readonly struct ParsedMemory
     {        
-        public readonly OpIdentity Id;
-
         public readonly ExtractionOutcome Outcome;
 
-        public readonly byte[] Content;
+        public readonly ParsedMemoryExtract Bits;
 
         [MethodImpl(Inline)]
-        public static ParsedMemory Define(OpIdentity id, ExtractionOutcome outcome, byte[] content)
-            => new ParsedMemory(id,outcome,content);
+        public static ParsedMemory Define(ExtractionOutcome outcome, ParsedMemoryExtract bits)
+            => new ParsedMemory(outcome, bits);
 
         [MethodImpl(Inline)]
-        ParsedMemory(OpIdentity id, ExtractionOutcome info, byte[] content)
-        {
-            this.Id = id;
-            this.Outcome = info;
-            this.Content = content;
-        }        
+        ParsedMemory(ExtractionOutcome outcome, ParsedMemoryExtract bits)
+        {            
+            this.Outcome = outcome;
+            this.Bits = bits;
+        }
     }
 }

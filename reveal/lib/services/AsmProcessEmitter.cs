@@ -33,8 +33,8 @@ namespace Z0
             using var capture = AsmProcessServices.Capture(Context);
             var functions = capture.CaptureFunctions(host);
             var outpath = outdir + FileName.Define(name, FileExtensions.Asm);
-            var emitter = Context.AsmEmitter();
-            emitter.EmitAsm(functions, outpath).OnSome(e => throw e);
+            using var writer = Context.AsmWriter(outpath);
+            writer.Write(functions);
             EmitCil(functions, name);                
         }
 

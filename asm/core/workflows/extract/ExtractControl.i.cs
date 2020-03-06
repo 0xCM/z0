@@ -50,7 +50,7 @@ namespace Z0
         void OnCaptureComplete(in OpExtractExchange src, in OpExtractionState state, in CapturedOp captured);        
     }
 
-    public interface IExtractControl : IOpCaptureService, IExtractJunction
+    public interface IExtractControl : ICaptureService, IExtractJunction
     {
 
     }

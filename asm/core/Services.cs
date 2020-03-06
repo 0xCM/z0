@@ -50,17 +50,7 @@ namespace Z0
                 return none<ParsedOpReport>();
             }
         }
-
-        /// <summary>
-        /// Instantiates a contextual asm capture service service
-        /// </summary>
-        /// <param name="context">The source context</param>
-        [MethodImpl(Inline)]
-        public static IOpCaptureService Capture(this IAsmContext context, IOpCaptureService ops)
-            => ops;
-
-            //=> AsmCaptureService.Create(context, ops);
-
+            
         [MethodImpl(Inline)]
         public static IAsmFunctionBuilder FunctionBuilder(this IAsmContext context)
             => AsmFunctionBuilder.Create(context);        
@@ -76,14 +66,6 @@ namespace Z0
         public static ICilFunctionFormatter CilFormatter(this IAsmContext context)
             => CilFunctionFormatter.Create(context);
 
-        /// <summary>
-        /// Instantiates a contextual asm function emitter service
-        /// </summary>
-        /// <param name="context">The source context</param>
-        [MethodImpl(Inline)]
-        public static IAsmFunctionEmitter AsmEmitter(this IAsmContext context, IAsmFormatter formatter)
-            => AsmFunctionEmitter.Create(context, formatter);
-
         [MethodImpl(Inline)]
         public static IHostOpExtractor HostExtractor(this IAsmContext context, int? bufferlen = null)
             => HostOpExtractor.Create(context, bufferlen);
@@ -93,16 +75,16 @@ namespace Z0
             => Z0.MemoryExtractor.Create(context, buffer);
 
         [MethodImpl(Inline)]
-        public static IMemoryExtractParser EncodingParser(this IAsmContext context, byte[] buffer)
-            => MemoryExtractParser.Create(context, buffer);
+        public static IMemoryExtractParser MemoryExtractParser(this IAsmContext context, byte[] buffer)
+            => Z0.MemoryExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static ByteParser<EncodingPatternKind> PatternParser(this IAsmContext context, byte[] buffer)
             => ByteParser<EncodingPatternKind>.Create(context, EncodingPatterns.Default,  buffer);
 
         [MethodImpl(Inline)]
-        public static IOpCaptureService OpExtractor(this IAsmContext context)
-            => OpCaptureService.Create(context);
+        public static ICaptureService Capture(this IAsmContext context)
+            => CaptureService.Create(context);
 
         /// <summary>
         /// Instantiates a contextual code writer services that targets a specified file path
@@ -169,16 +151,6 @@ namespace Z0
         /// <param name="triggers">The triggers that fire when instructions satisfy criterea of interest</param>
         public static IAsmInstructionFlow InstructionFlow(this IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
-
-        /// <summary>
-        /// Instantiates a contextual raw buffer writer services that targets a specified file path
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="dst">The target path</param>
-        /// <param name="append">Whether the writer should append to an existing file if it exist or obliterate it regardless</param>
-        [MethodImpl(Inline)]
-        public static IAsmEncodingWriter EncodingWriter(this IAsmContext context, FilePath dst)
-            => AsmEncodingWriter.Create(context, dst);
 
         [MethodImpl(Inline)]
         public static IMemberLocator MemberLocator(this IAsmContext src)

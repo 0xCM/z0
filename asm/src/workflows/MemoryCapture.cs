@@ -50,17 +50,16 @@ namespace Z0
                 select CapturedMemory.Define(src, bits, instructions, string.Empty);
 
         [MethodImpl(Inline)]
-        Option<MemoryExtract> Extract(MemoryAddress src)
+        public Option<MemoryExtract> Extract(MemoryAddress src)
             => Extractor.Extract(src);
 
-        Option<MemoryExtract> Parse(MemoryExtract src)
-            => from parsed in Context.EncodingParser(ParseBuffer.Clear()).Parse(src)
+        public Option<MemoryExtract> Parse(MemoryExtract src)
+            => from parsed in Context.MemoryExtractParser(ParseBuffer.Clear()).Parse(src)
                 let encoded = MemoryExtract.Define(src.Address, parsed)
                 select encoded;
 
         [MethodImpl(Inline)]
-        Option<AsmInstructionList> Decode(MemoryExtract src)
+        public Option<AsmInstructionList> Decode(MemoryExtract src)
             => Decoder.DecodeInstructions(src);
-
     }
 }

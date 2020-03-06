@@ -54,7 +54,7 @@ namespace Z0
         public BufferToken RightExec
             => RBuffer;
 
-        public readonly IOpCaptureService Capture;
+        public readonly ICaptureService Capture;
 
         public readonly OpExtractExchange Exchange;
 

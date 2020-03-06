@@ -36,19 +36,19 @@ namespace Z0
         protected AsmFormatConfig DefaultAsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-        protected static IAsmCodeWriter HexTestWriter(IAsmContext context, [Caller] string test = null)
+        protected static IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Hex);    
             return  context.CodeWriter(dst);
         }
 
-        protected static IAsmEncodingWriter RawTestWriter(IAsmContext context, [Caller] string test = null)
+        protected static IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Raw);    
-            return  context.EncodingWriter(dst);
+            return  context.CodeWriter(dst);
         }
 
-        protected static IAsmFunctionWriter AsmTestWriter(IAsmContext context, [Caller] string test = null)
+        protected static IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Asm);
             var format = AsmFormatConfig.Default.WithFunctionTimestamp();

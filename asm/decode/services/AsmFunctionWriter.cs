@@ -40,7 +40,7 @@ namespace Z0
             foreach(var f in src)
                 StreamOut.Write(Context.AsmFormatter(Config).FormatFunction(f));
         }
-
+        
         public void Dispose()
         {
             StreamOut.Flush();

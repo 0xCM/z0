@@ -53,7 +53,6 @@ namespace Z0
             => Code.AddressRange;        
     }
 
-
     public readonly struct CapturedOps : IFiniteSeq<CapturedOp>
     {
         [MethodImpl(Inline)]

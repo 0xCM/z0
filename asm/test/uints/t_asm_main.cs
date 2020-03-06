@@ -57,16 +57,16 @@ namespace Z0
 
             var decoder = context.FunctionDecoder();
 
-            using var rawout = RawTestWriter(context);            
-            using var hexout = HexTestWriter(context);
-            using var asmout = AsmTestWriter(context);            
+            using var hexout = HexWriter(context);            
+            using var codeout = CodeWriter(context);
+            using var asmout = FunctionWriter(context);            
                         
             void OnExecute(in AsmBuffers buffers)
             {            
-                var capture = context.Capture(buffers.Capture);
+                var capture = buffers.Capture;
                 var captured = capture.Capture(buffers.Exchange, f);
-                hexout.Write(captured);
-                rawout.Write(captured);
+                codeout.WriteCode(captured);
+                hexout.WriteHexLine(captured);
                 asmout.Write(decoder.DecodeFunction(captured));
                 Claim.eq(captured.RawBits.Length, state.Count);
             }
@@ -202,16 +202,16 @@ namespace Z0
         {
             var src = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
 
-            using var rawout = RawTestWriter(Context);            
-            using var hexout = HexTestWriter(Context);
-            using var asmout = AsmTestWriter(Context);            
+            using var rawout = HexWriter(Context);            
+            using var hexout = CodeWriter(Context);
+            using var asmout = FunctionWriter(Context);            
             
             var decoder = Context.FunctionDecoder();
-            var capture = Context.Capture(buffers.Capture);
+            var capture = buffers.Capture;
             
             var data = capture.Capture(buffers.Exchange, src);        
-            hexout.Write(data);
-            rawout.Write(data);
+            hexout.WriteCode(data);
+            rawout.WriteHexLine(data);
             asmout.Write(decoder.DecodeFunction(data));
         }
 
@@ -219,18 +219,17 @@ namespace Z0
         {
             var src = shifter(4);
 
-            using var rawout = RawTestWriter(Context);            
-            using var hexout = HexTestWriter(Context);
-            using var asmout = AsmTestWriter(Context);            
+            using var rawout = HexWriter(Context);            
+            using var hexout = CodeWriter(Context);
+            using var asmout = FunctionWriter(Context);            
 
-            var capture = Context.Capture(buffers.Capture);
+            var capture = buffers.Capture;
             var decoder = Context.FunctionDecoder();
             
             var data = capture.Capture(buffers.Exchange, src.Identify(), src);
-            hexout.Write(data);
-            rawout.Write(data);
-            asmout.Write(decoder.DecodeFunction(data));
-            
+            hexout.WriteCode(data);
+            rawout.WriteHexLine(data);
+            asmout.Write(decoder.DecodeFunction(data));            
         }
 
         void capture_shuffler(in AsmBuffers buffers)
@@ -238,21 +237,21 @@ namespace Z0
             var f = shuffler<uint>(n2);
             var g = shuffler(n3);
 
-            using var rawout = RawTestWriter(Context);            
-            using var hexout = HexTestWriter(Context);
-            using var asmout = AsmTestWriter(Context);            
+            using var rawout = HexWriter(Context);            
+            using var hexout = CodeWriter(Context);
+            using var asmout = FunctionWriter(Context);            
 
-            var capture = Context.Capture(buffers.Capture);
+            var capture = buffers.Capture;
             var decoder = Context.FunctionDecoder();
 
             var fData = capture.Capture(buffers.Exchange, f.Identify(), f);
-            hexout.Write(fData);
-            rawout.Write(fData);
+            hexout.WriteCode(fData);
+            rawout.WriteHexLine(fData);
             asmout.Write(decoder.DecodeFunction(fData));
 
             var gData = capture.Capture(buffers.Exchange, g.Identify(), g);
-            hexout.Write(gData);
-            rawout.Write(fData);
+            hexout.WriteCode(gData);
+            rawout.WriteHexLine(fData);
             asmout.Write(decoder.DecodeFunction(gData));
         }
 
@@ -271,7 +270,7 @@ namespace Z0
             var f = dynop.DynamicOp;
             var z1 = f.Invoke(x,y);
             var decoder = Context.FunctionDecoder();
-            var captured = Context.OpExtractor().Capture(buffers.Exchange, dynop.Id, dynop);
+            var captured = Context.Capture().Capture(buffers.Exchange, dynop.Id, dynop);
             var asm = decoder.DecodeFunction(captured,false);        
 
             iter(asm.Instructions, i => Trace(i));  

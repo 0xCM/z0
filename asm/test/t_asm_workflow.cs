@@ -17,20 +17,17 @@ namespace Z0
     {
         public void host_workflow()
         {
-            var outdir = DefaultDataDir;
-            outdir.Clear();
             var extractor = Context.HostExtractor();
             var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
             var decoder = Context.FunctionDecoder();
-            var roots = RootEmissionPaths.Define(outdir).Clear();
+            var root = RootEmissionPaths.Define(DefaultDataDir).Clear();
             var format = Context.AsmFormat.WithSectionDelimiter();
-
 
             foreach(var catalog in Context.Compostion.Catalogs)   
             {
                 foreach(var host in catalog.ApiHosts)
                 {
-                    var paths = HostEmissionPaths.Define(host.Path,roots);
+                    var paths = HostEmissionPaths.Define(host.Path,root);
                     var extract = extractor.Extract(host);
                     foreach(var op in extract)
                         Claim.eq(op.Uri.HostPath, host.Path);

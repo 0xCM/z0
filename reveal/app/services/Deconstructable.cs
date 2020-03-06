@@ -5,6 +5,7 @@
 namespace Z0
 {        
     using System;
+    using Z0.Asm;
 
     public abstract class Deconstructable<T> : IDeconstructable<T>
         where T : Deconstructable<T>
@@ -29,7 +30,10 @@ namespace Z0
             var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default.WithSectionDelimiter());
             using var capture = AsmProcessServices.Capture(context);
             var functions = capture.CaptureFunctions(host); 
-            context.AsmEmitter().EmitAsm(functions, asmfile).OnSome(e => throw e);
+            using var asmwriter = context.AsmWriter(asmfile);
+            asmwriter.Write(functions);            
+        
+            //context.AsmEmitter().EmitAsm(functions, asmfile).OnSome(e => throw e);
             context.CilEmitter().EmitCil(functions, cilfile).OnSome(e => throw e);
         }
     }

@@ -36,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static AsmFunction Decode(IAsmContext context, IAsmFunctionDecoder decoder, in OpExtractExchange exchange, OpIdentity id, DynamicDelegate src)
-            => decoder.DecodeFunction(context.OpExtractor().Capture(in exchange, id, src), false);
+            => decoder.DecodeFunction(context.Capture().Capture(in exchange, id, src), false);
 
         readonly struct AsmImmUnaryCapture : IAsmImmCapture
         {

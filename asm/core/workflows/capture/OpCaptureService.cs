@@ -11,33 +11,33 @@ namespace Z0
     using static Root;    
     using static ExtractTermCode;
     
-    unsafe readonly struct OpCaptureService : IOpCaptureService
+    unsafe readonly struct CaptureService : ICaptureService
     {        
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static OpCaptureService Create(IAsmContext context)
-            => new OpCaptureService(context);
+        public static CaptureService Create(IAsmContext context)
+            => new CaptureService(context);
 
         [MethodImpl(Inline)]
-        OpCaptureService(IAsmContext context)
+        CaptureService(IAsmContext context)
         {
             Context = context;
         }
 
-        public Option<ParsedMemory> Capture(in OpExtractExchange exchange, in OpIdentity id, Span<byte> src)
+        public Option<ParsedBuffer> ParseBuffer(in OpExtractExchange exchange, in OpIdentity id, Span<byte> src)
         {
             try
             {
-                var parsed = Parse(exchange, id, ref head(src));
+                var parsed = ParseBuffer(exchange, id, ref head(src));
                 var outcome = parsed.Outcome;            
                 var bytes = exchange.Target(0, outcome.ByteCount).ToArray();
-                return ParsedMemory.Define(id, outcome, bytes);
+                return ParsedBuffer.Define(id, outcome, bytes);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<ParsedMemory>();
+                return none<ParsedBuffer>();
             }
         }
 
@@ -109,25 +109,25 @@ namespace Z0
             => ExtractionOutcome.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
-        static MemoryParseSummary SummarizeParse(in OpExtractExchange exchange, in OpExtractionState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        static ParsedMemory SummarizeParse(in OpExtractExchange exchange, in OpExtractionState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
         {
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
             var bits = ParsedMemoryExtract.Define((MemoryAddress)start, raw, trimmed);
-            return MemoryParseSummary.Define(outcome, bits);
+            return ParsedMemory.Define(outcome, bits);
         }
 
         [MethodImpl(Inline)]
-        MemoryParseSummary Parse(in OpExtractExchange exchange, OpIdentity id, ref byte src)
+        ParsedMemory ParseBuffer(in OpExtractExchange exchange, OpIdentity id, ref byte src)
             => capture(exchange, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
-        MemoryParseSummary Parse(in OpExtractExchange exchange, OpIdentity id, IntPtr src)        
+        ParsedMemory Parse(in OpExtractExchange exchange, OpIdentity id, IntPtr src)        
             => capture(exchange, id, src.ToPointer<byte>());
 
         [MethodImpl(Inline)]
-        MemoryParseSummary capture(in OpExtractExchange exchange, OpIdentity id, byte* pSrc)
+        ParsedMemory capture(in OpExtractExchange exchange, OpIdentity id, byte* pSrc)
         {
             var limit = exchange.BufferLength - 1;
             var start = (long)pSrc;

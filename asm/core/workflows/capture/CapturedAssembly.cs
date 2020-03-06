@@ -35,6 +35,5 @@ namespace Z0
             this.Assembly = id;
             this.Captured = ops;
         }
-
     }
 }

@@ -27,14 +27,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         public static string ReadText(this FilePath src)
-            => File.ReadAllText(src.ToString());
+            => File.ReadAllText(src.FullPath);
 
         /// <summary>
         /// Reads the line-partitioned content of a text file
         /// </summary>
         /// <param name="src">The file path</param>
-        public static IEnumerable<string> ReadLines(this FilePath src)
-            => File.ReadAllLines(src.ToString());
+        public static string[] ReadLines(this FilePath src)
+            => File.ReadAllLines(src.FullPath);
 
         /// <summary>
         /// Reads the full content of a text file
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         public static byte[] ReadBytes(this FilePath src)
-            => File.ReadAllBytes(src.ToString());
+            => File.ReadAllBytes(src.FullPath);
 
         /// <summary>
         /// Creates a writer initialized with the source file; caller-disposal required
@@ -108,15 +108,15 @@ namespace Z0
         /// Deletes all files in a specified directory, but neither does it recurse nor delete folders
         /// </summary>
         /// <param name="dst">The target path</param>
-        public static void Clear(this FolderPath dst)
+        public static FolderPath Clear(this FolderPath dst)
         {   
             if(Directory.Exists(dst.Name)) 
                 iter(Directory.EnumerateFiles(dst.Name), File.Delete);
+            return dst;
         }
 
         public static void Append(this FilePath dst, string src)
             => File.AppendAllText(dst.CreateParentIfMissing().FullPath, src);
-
 
         public static void AppendLine(this FilePath dst, string src)
             => dst.Append(items(src));

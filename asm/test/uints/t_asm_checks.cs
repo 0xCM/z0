@@ -13,6 +13,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using Z0.Asm;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
     using static NKT;
@@ -100,25 +101,36 @@ namespace Z0
             }            
         }
 
-        static void RunCapture(IOpCaptureService capture, IAsmFunctionDecoder decoder, in OpExtractExchange exchange, MethodInfo[] src, IAsmCodeWriter codeDst, IAsmFunctionWriter asmDst)
+        static void RunCapture(ICaptureService capture, IAsmFunctionDecoder decoder, in OpExtractExchange exchange, MethodInfo[] src, IAsmCodeWriter codeDst, IAsmFunctionWriter asmDst)
         {
             foreach(var method in src)
             {
                 var data = capture.Capture(exchange, method.Identify(), method);
-                codeDst.Write(data);
+                codeDst.WriteCode(data);
                 var asm = decoder.DecodeFunction(data);
                 asmDst.Write(asm);
             }
         }
 
+        IAsmCodeWriter CodeWriter([Caller] string test = null)
+        {
+            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
+            return  Context.CodeWriter(dst);
+        }
+
+        IAsmFunctionWriter FunctionWriter([Caller] string test = null)
+        {
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Asm);    
+            return Context.WithFormat(DefaultAsmFormat).AsmWriter(path);
+        }
+
         FilePath Capture(in AsmBuffers buffers, MethodInfo[] methods, string subject)
         {
-            using var hex = HexTestWriter(subject);
-            using var asm = AsmTestWriter(subject);
+            using var hex = CodeWriter(subject);
+            using var asm = FunctionWriter(subject);
 
-            var capture = Context.Capture(buffers.Capture);
             var decoder = Context.FunctionDecoder();
-            RunCapture(Context.Capture(buffers.Capture), Context.FunctionDecoder(), buffers.Exchange, methods, hex, asm);
+            RunCapture(buffers.Capture, Context.FunctionDecoder(), buffers.Exchange, methods, hex, asm);
                         
             return hex.TargetPath;            
         }
@@ -135,7 +147,7 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
             var decoder = Context.FunctionDecoder();
-            var captured = Context.OpExtractor().Capture(buffers.Exchange, dynop.Id, dynop);            
+            var captured = Context.Capture().Capture(buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured,false);
 
             Trace(asm.Id);
@@ -159,7 +171,7 @@ namespace Z0
             var z1 = dynop.DynamicOp.Invoke(x,y);
             
             var decoder = Context.FunctionDecoder();
-            var captured = Context.OpExtractor().Capture(in exchange, dynop.Id, dynop);            
+            var captured = Context.Capture().Capture(in exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured,false);
 
             Trace(asm.Id);
@@ -183,7 +195,7 @@ namespace Z0
             var z1 = dynop.DynamicOp.Invoke(x);
             
             var decoder = Context.FunctionDecoder();
-            var capture = Context.OpExtractor().Capture(in buffers.Exchange, dynop.Id, dynop);            
+            var capture = Context.Capture().Capture(in buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(capture,false);
 
             Trace(asm.Id);

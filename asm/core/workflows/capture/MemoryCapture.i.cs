@@ -9,6 +9,13 @@ namespace Z0
 
     public interface IMemoryCapture : IAsmService
     {
+        Option<MemoryExtract> Extract(MemoryAddress src);        
+
+        Option<MemoryExtract> Parse(MemoryExtract src);
+
+        Option<AsmInstructionList> Decode(MemoryExtract src);
+                        
         Option<CapturedMemory> Capture(MemoryAddress src);        
+
     }
 }

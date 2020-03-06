@@ -129,10 +129,10 @@ namespace Z0.Asm
         }
 
         AsmFunction Decode(IAsmFunctionDecoder decoder, in OpExtractExchange exchange, DirectOp src)
-            => decoder.DecodeFunction(Context.OpExtractor().Capture(in exchange, src.Id, src.ConcreteMethod));
+            => decoder.DecodeFunction(Context.Capture().Capture(in exchange, src.Id, src.ConcreteMethod));
 
         AsmFunction Decode(IAsmFunctionDecoder decoder, in OpExtractExchange exchange, ClosedOp closure)
-            => decoder.DecodeFunction(Context.OpExtractor().Capture(in exchange, closure.Id, closure.ClosedMethod));
+            => decoder.DecodeFunction(Context.Capture().Capture(in exchange, closure.Id, closure.ClosedMethod));
 
         void Emit(in OpExtractExchange exchange, GenericOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {

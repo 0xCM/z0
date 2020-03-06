@@ -17,31 +17,31 @@ namespace Z0
     {
 
 
-        void host_workflow()
-        {                    
-            var hostcap = list<CapturedHost>();            
-            var paths = Context.EmissionPaths();                    
-            var workflow = Context.HostCaptureWorkflow();
-            var memcap = Context.MemoryCapture();
-            var memfail = list<OpUri>();
-            foreach(var extract in workflow.Execute())
-            {
-                Claim.exists(paths.ParsedPath(extract.Host));
-                hostcap.Add(extract); 
-                var count = extract.Parsed.RecordCount;
-                for(var i=0; i<count; i++)
-                {
-                    var parsed = extract.Parsed[i];
-                    var code = AsmCode.Define(parsed.Uri.OpId, parsed.Data);
-                    if(!MemcapCheck(memcap, code))
-                        memfail.Add(parsed.Uri);
+        // void host_workflow()
+        // {                    
+        //     var hostcap = list<CapturedHost>();            
+        //     var paths = Context.EmissionPaths();                    
+        //     var workflow = Context.HostCaptureWorkflow();
+        //     var memcap = Context.MemoryCapture();
+        //     var memfail = list<OpUri>();
+        //     foreach(var extract in workflow.Execute())
+        //     {
+        //         Claim.exists(paths.ParsedPath(extract.Host));
+        //         hostcap.Add(extract); 
+        //         var count = extract.Parsed.RecordCount;
+        //         for(var i=0; i<count; i++)
+        //         {
+        //             var parsed = extract.Parsed[i];
+        //             var code = AsmCode.Define(parsed.Uri.OpId, parsed.Data);
+        //             if(!MemcapCheck(memcap, code))
+        //                 memfail.Add(parsed.Uri);
 
-                }
-            }   
+        //         }
+        //     }   
 
-            foreach(var fail in memfail)
-                Trace(AppMsg.Warn($"Memory capture failed for {fail}"));
-        }
+        //     foreach(var fail in memfail)
+        //         Trace(AppMsg.Warn($"Memory capture failed for {fail}"));
+        // }
 
         bool MemcapCheck(IMemoryCapture memcap, AsmCode src)
         {

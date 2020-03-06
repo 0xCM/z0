@@ -31,8 +31,15 @@ namespace Z0
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        public void Write(in CapturedOp src, int? idpad = null)
+        public void WriteCode(in CapturedOp src, int? idpad = null)
             => StreamOut.WriteLine(src.Code.Format(idpad ?? 0));
+
+        public void WriteHexLine(OpIdentity id, Span<byte> data, int? idpad = null)
+            => StreamOut.WriteLine(HexLine.Define(id, data.ToArray()).Format(idpad ?? 0));
+
+        public void WriteHexLine(in CapturedOp src, int? idpad = null)
+            => WriteHexLine(src.Id, src.RawBits.Bytes, idpad);
+
         public void Dispose()
         {
             StreamOut.Flush();

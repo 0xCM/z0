@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a service that extracts identified member operation x86 encodings
     /// </summary>
-    public interface IOpCaptureService : IAsmService
+    public interface ICaptureService : IAsmService
     {               
         /// <summary>
         /// Captures native x86 encoded assembly produced by the jitter for a method
@@ -53,6 +53,6 @@ namespace Z0
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id"></param>
         /// <param name="src">The source buffer</param>
-        Option<ParsedMemory> Capture(in OpExtractExchange exchange, in OpIdentity id, Span<byte> src);
+        Option<ParsedBuffer> ParseBuffer(in OpExtractExchange exchange, in OpIdentity id, Span<byte> src);
     }
 }

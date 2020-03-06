@@ -29,23 +29,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, in DynamicDelegate src)
-            => Context.OpExtractor().Capture(exchange, id, src);
+            => Context.Capture().Capture(exchange, id, src);
 
         [MethodImpl(Inline)]
         public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src)
-            => Context.OpExtractor().Capture(exchange, id,src);
+            => Context.Capture().Capture(exchange, id,src);
 
         [MethodImpl(Inline)]
         public CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, MethodInfo src)
-            => Context.OpExtractor().Capture(exchange, id, src);                                    
+            => Context.Capture().Capture(exchange, id, src);                                    
 
         [MethodImpl(Inline)]
-        public Option<ParsedMemory> Capture(in OpExtractExchange exchange, in OpIdentity id, Span<byte> src)
-            => Context.OpExtractor().Capture(exchange, id, src);
+        public Option<ParsedBuffer> ParseBuffer(in OpExtractExchange exchange, in OpIdentity id, Span<byte> src)
+            => Context.Capture().ParseBuffer(exchange, id, src);
 
         [MethodImpl(Inline)]
         public CapturedOp Capture(in OpExtractExchange exchange, MethodInfo src, params Type[] args)
-            => Context.OpExtractor().Capture(exchange, src, args);
+            => Context.Capture().Capture(exchange, src, args);
 
         [MethodImpl(Inline)]
         void IExtractJunction.OnCaptureStep(in OpExtractExchange exchange, in OpExtractionState state)
