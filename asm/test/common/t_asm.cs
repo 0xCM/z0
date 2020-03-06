@@ -39,7 +39,7 @@ namespace Z0
                 => OpIdentity.numeric($"{basename}_asm",typeof(T).NumericKind());
 
         protected AsmFormatConfig DefaultAsmFormat
-            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
+            => AsmFormatConfig.New.WithoutFunctionTimestamp();
 
 
         /// <summary>

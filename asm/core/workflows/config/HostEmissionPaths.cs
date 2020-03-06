@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Root;
 
-    using Ext = FileExtensions;
-
     public readonly struct HostEmissionPaths
     {
         [MethodImpl(Inline)]

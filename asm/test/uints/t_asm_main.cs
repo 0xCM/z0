@@ -294,6 +294,6 @@ namespace Z0
             => v => Avx2.ShiftLeftLogical(v,imm);
 
         AsmFormatConfig AsmFormat
-            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
+            => AsmFormatConfig.New.WithoutFunctionTimestamp();
     }
 }

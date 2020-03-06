@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Reflection;
@@ -17,7 +17,7 @@ namespace Z0
         readonly AsmCaptureEventObserver Observer;
 
         [MethodImpl(Inline)]
-        public static IExtractControl Create(IAsmContext context, AsmCaptureEventObserver observer)
+        public static IExtractControl New(IAsmContext context, AsmCaptureEventObserver observer)
             => new ExtractControl(context,observer);
                     
         [MethodImpl(Inline)]

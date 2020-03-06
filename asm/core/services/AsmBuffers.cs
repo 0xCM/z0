@@ -27,7 +27,7 @@ namespace Z0
         readonly ExecBuffer RBuffer;
 
         [MethodImpl(Inline)]
-        public static AsmBuffers Create(IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
+        public static AsmBuffers New(IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
             => new AsmBuffers(context, observer, size);
 
         [MethodImpl(Inline)]

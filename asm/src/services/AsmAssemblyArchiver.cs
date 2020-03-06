@@ -35,7 +35,7 @@ namespace Z0.Asm
             => Context.ActiveAssemblies();
 
         Option<FilePath> ReportEmissions(AssemblyId src, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
-            => AsmReports.Emissions(src, emitted, kind).Save(AsmEmissionPaths.Current.EmissionPath(src, kind));
+            => AsmEmissionReport.Create(src, emitted, kind).Save(AsmEmissionPaths.The.EmissionPath(src, kind));
 
         AsmEmissionTokens<OpUri>[] EmitPrimary(in OpExtractExchange exchange, ICatalogProvider src,  IAsmCatalogEmitter emitter)
         {
@@ -61,7 +61,7 @@ namespace Z0.Asm
 
         Option<FilePath> EmitLocations(ICatalogProvider src)
         {
-            return AsmReports.LocationReport(src.OwnerId, src.Owner).Save();
+            return MemberLocationReport.Create(src.OwnerId, src.Owner).Save();
         }
 
         void Completed(Option<FilePath> report)
@@ -121,7 +121,7 @@ namespace Z0.Asm
             foreach(var src in providers)
                 Archive(exchange, src);
 
-            AsmReports.Resources(AssemblyId.Data, Resources).Save().Require();
+            DataResourceReport.Create(AssemblyId.Data, Resources).Save().Require();
         }
     }
 }

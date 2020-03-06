@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -21,7 +21,7 @@ namespace Z0
         public int BufferLength {get;}
 
         [MethodImpl(Inline)]
-        public static IHostOpExtractor Create(IAsmContext context, int? bufferlen = null)
+        public static IHostOpExtractor New(IAsmContext context, int? bufferlen = null)
             => new HostOpExtractor(context,bufferlen);
             
         [MethodImpl(Inline)]

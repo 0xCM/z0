@@ -19,7 +19,7 @@ namespace Z0
         readonly char ByteSep;
 
         [MethodImpl(Inline)]
-        public static IAsmCodeReader Create(IAsmContext context, char? idsep = null, char? bytesep = null)
+        public static IAsmCodeReader New(IAsmContext context, char? idsep = null, char? bytesep = null)
             => new AsmCodeReader(context, idsep, bytesep);
 
         [MethodImpl(Inline)]

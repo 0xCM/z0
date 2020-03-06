@@ -32,7 +32,7 @@ namespace Z0
         readonly IExtractJunction Junction;
 
         [MethodImpl(Inline)]
-        public static OpExtractExchange Define(IExtractControl control, Span<byte> capture, Span<byte> state)
+        public static OpExtractExchange New(IExtractControl control, Span<byte> capture, Span<byte> state)
             => new OpExtractExchange(control,capture,state);
 
         OpExtractExchange(IExtractControl control, Span<byte> capture, Span<byte> state)            

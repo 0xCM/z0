@@ -33,10 +33,10 @@ namespace Z0
         public ReadOnlySpan<byte> Parsed
             =>  (Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : new byte[]{};
 
-        public static ByteParser<T> Create(IAsmContext context, IBytePatternSet<T> patterns, int? bufferlen)
+        public static ByteParser<T> New(IAsmContext context, IBytePatternSet<T> patterns, int? bufferlen)
             => new ByteParser<T>(context, patterns, bufferlen);
 
-        public static ByteParser<T> Create(IAsmContext context, IBytePatternSet<T> patterns, byte[] buffer)
+        public static ByteParser<T> New(IAsmContext context, IBytePatternSet<T> patterns, byte[] buffer)
             => new ByteParser<T>(context, patterns, buffer);
 
         ByteParser(IAsmContext context, IBytePatternSet<T> patterns, byte[] buffer)

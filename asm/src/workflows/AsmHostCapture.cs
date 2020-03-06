@@ -33,8 +33,12 @@ namespace Z0.Asm
         AsmEmissionPaths Paths
             => Context.EmissionPaths();
 
+        Option<MemberLocationReport> LocationReport(AssemblyId src)
+            => from a in Context.ResolvedAssembly(src)
+                let methods = a.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps()
+                select MemberLocationReport.Create(src, methods);
         void CreateLocationReport(AssemblyId id)
-            => Context.LocationReport(id).OnSome(report => report.Save());
+            => LocationReport(id).OnSome(report => report.Save());
         
         public IEnumerable<CapturedHost> Execute()
         {            
@@ -65,13 +69,13 @@ namespace Z0.Asm
         static void EmitCil(Assembly src)
         {
             var index = src.CreateIndex();
-            var dir = AsmEmissionPaths.Current.CilDir;
+            var dir = AsmEmissionPaths.The.CilDir;
             var srcId = src.AssemblyId();
-            var context = AsmContext.New(index, DataResourceIndex.Empty, AsmFormatConfig.Default.WithSectionDelimiter());
+            var context = AsmContext.New(index, DataResourceIndex.Empty, AsmFormatConfig.New.WithSectionDelimiter());
 
             foreach(var host in src.ApiHosts())
             {
-                var dstPath = AsmEmissionPaths.Current.CilPath(host.Path);
+                var dstPath = AsmEmissionPaths.The.CilPath(host.Path);
                 //var functions = capture.CaptureFunctions(host);
                 //context.CilEmitter().EmitCil(functions, dstPath).OnSome(e => throw e);
             }            

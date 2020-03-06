@@ -17,7 +17,7 @@ namespace Z0
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static MemberLocator Create(IAsmContext context)
+        public static MemberLocator New(IAsmContext context)
             => new MemberLocator(context);
 
         [MethodImpl(Inline)]

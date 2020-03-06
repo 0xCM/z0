@@ -27,7 +27,7 @@ namespace Z0
             var cilfile = SourcePath.FolderPath + filename.WithExtension(FileExtensions.Il);
             var host = typeof(T);
             var clridx = host.Assembly.CreateIndex();
-            var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default.WithSectionDelimiter());
+            var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.New.WithSectionDelimiter());
             using var capture = AsmProcessServices.Capture(context);
             var functions = capture.CaptureFunctions(host); 
             using var asmwriter = context.AsmWriter(asmfile);

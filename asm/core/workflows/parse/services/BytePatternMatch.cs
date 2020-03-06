@@ -9,12 +9,6 @@ namespace Z0
     
     using static Root;
 
-    public readonly ref struct PartialEncodingPattern
-    {
-        public readonly ReadOnlySpan<byte?> PatternData;
-
-        public readonly EncodingPatternKind Id;
-    }
 
     public static class PartialEncodingMatch
     {

@@ -5,19 +5,13 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     public class AsmFormatConfig
     {
-        public static AsmFormatConfig Default
-            => new AsmFormatConfig();
+        public static AsmFormatConfig New => new AsmFormatConfig();
 
-        public AsmFormatConfig()
-        {
-
-        }
+        AsmFormatConfig() { }
 
         public bool EmitCaptureTermCode {get; set;}
             = true;

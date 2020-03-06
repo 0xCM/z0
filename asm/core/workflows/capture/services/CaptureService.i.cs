@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-
     /// <summary>
     /// Characterizes a service that extracts identified member operation x86 encodings
     /// </summary>

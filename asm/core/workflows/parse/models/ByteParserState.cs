@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
     
-    using static zfunc;
-
     /// <summary>
     /// Defines the potential byte parser states
     /// </summary>

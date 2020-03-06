@@ -366,7 +366,7 @@ namespace Z0
         
         const NumericIndicator nu = NumericIndicator.Unsigned;
 
-        static readonly AsmFormatConfig DefaultConfig = AsmFormatConfig.Default;
+        static readonly AsmFormatConfig DefaultConfig = AsmFormatConfig.New;
 
         public static SegmentedIdentity AsSegmentedIdentity(this MemorySize src, TypeIndicator ti)
             => src switch {

@@ -67,7 +67,7 @@ namespace Z0
         }
 
         AsmFormatConfig AsmFormat
-            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
+            => AsmFormatConfig.New.WithoutFunctionTimestamp();
 
         public void CheckCapture(in AsmBuffers buffers)
         {

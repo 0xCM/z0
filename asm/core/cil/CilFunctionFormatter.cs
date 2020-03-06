@@ -14,7 +14,7 @@ namespace Z0
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static ICilFunctionFormatter Create(IAsmContext context)
+        public static ICilFunctionFormatter New(IAsmContext context)
             => new CilFunctionFormatter(context);
         
         [MethodImpl(Inline)]

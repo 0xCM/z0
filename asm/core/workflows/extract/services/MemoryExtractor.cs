@@ -20,7 +20,7 @@ namespace Z0
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        public static IMemoryExtractor Create(IAsmContext context, byte[] buffer)
+        public static IMemoryExtractor New(IAsmContext context, byte[] buffer)
             => new MemoryExtractor(context, buffer);
 
         [MethodImpl(Inline)]

@@ -22,11 +22,11 @@ namespace Z0
         public string HostName {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog)
+        public static IAsmCodeArchive New(IAsmContext context, AssemblyId catalog)
             => new AsmCodeArchive(context, catalog);
 
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog, string host)
+        public static IAsmCodeArchive New(IAsmContext context, AssemblyId catalog, string host)
             => new AsmCodeArchive(context, catalog, host);
 
         [MethodImpl(Inline)]

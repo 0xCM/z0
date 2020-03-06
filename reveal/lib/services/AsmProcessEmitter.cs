@@ -6,7 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Linq;
-    using System.Reflection;
     using System.IO;
     using System.Collections.Generic;
 
@@ -28,7 +27,7 @@ namespace Z0
             
         public void EmitFunctions(Type host)
         {
-            var outdir = Context.EmissionPaths().AsmDumpDir.CreateIfMissing();
+            var outdir = Context.EmissionPaths().DataSubDir(FolderName.Define($".dumps")).CreateIfMissing();
             var name = host.DisplayName();
             using var capture = AsmProcessServices.Capture(Context);
             var functions = capture.CaptureFunctions(host);

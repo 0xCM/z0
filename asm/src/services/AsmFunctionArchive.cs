@@ -58,7 +58,7 @@ namespace Z0
             this.HostPath = host;
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(host.Owner.Format(), $"{host.Name}-imm"));
             this.DefaultFormatter = context.AsmFormatter();
-            this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
+            this.GroupFormatConfig = AsmFormatConfig.New.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
             this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
             this.CilFormatter = context.CilFormatter();
         }
@@ -71,7 +71,7 @@ namespace Z0
             this.HostPath = ApiHostUri.Define(catalog, hostname);
             this.RootFolder = context.EmissionPaths().DataSubDir(RelativeLocation.Define(catalog.Format(), hostname));
             this.DefaultFormatter = context.AsmFormatter();
-            this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
+            this.GroupFormatConfig = AsmFormatConfig.New.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
             this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
             this.CilFormatter = context.CilFormatter();
         }

@@ -20,7 +20,7 @@ namespace Z0
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmCodeWriter Create(IAsmContext context, FilePath dst)
+        public static IAsmCodeWriter New(IAsmContext context, FilePath dst)
             => new AsmCodeWriter(context, dst);
 
         [MethodImpl(Inline)]

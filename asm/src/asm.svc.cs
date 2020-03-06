@@ -99,7 +99,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IOpExtractParser ExtractParser(this IAsmContext context, byte[] buffer)
-            => OpExtractParser.Create(context, buffer);
+            => OpExtractParser.New(context, buffer);
 
         [MethodImpl(Inline)]
         public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostUri host)

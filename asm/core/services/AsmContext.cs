@@ -7,8 +7,10 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
+    using Z0.Asm;
+
     using static Root;
+
 
     public sealed class AsmContext : IAsmContext 
     {               
@@ -18,7 +20,7 @@ namespace Z0
         /// <param name="root">The root context</param>
         /// <param name="resolutions">The assemblies to share with the context</param>
         public static IAsmContext Rooted(IContext root, params IAssemblyResolution[] resolutions)
-            => new AsmContext(root, resolutions.Assemble(), default(EmptyClrIndex), DataResourceIndex.Empty, AsmFormatConfig.Default, CilFormatConfig.Default);
+            => new AsmContext(root, resolutions.Assemble(), default(EmptyClrIndex), DataResourceIndex.Empty, AsmFormatConfig.New, CilFormatConfig.Default);
 
         /// <summary>
         /// Creates a rooted context with a specified composition
@@ -26,7 +28,7 @@ namespace Z0
         /// <param name="root">The root context</param>
         /// <param name="assemblies">The composition</param>
         public static IAsmContext Rooted(IContext root, IAssemblyComposition assemblies)
-            => new AsmContext(root, assemblies, default(EmptyClrIndex), DataResourceIndex.Empty, AsmFormatConfig.Default, CilFormatConfig.Default);
+            => new AsmContext(root, assemblies, default(EmptyClrIndex), DataResourceIndex.Empty, AsmFormatConfig.New, CilFormatConfig.Default);
 
         /// <summary>
         /// Creates a rooted context with specified indexes
@@ -35,7 +37,7 @@ namespace Z0
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
         public static IAsmContext Rooted(IContext root, IClrIndex clrindex, DataResourceIndex resources)             
-            => new AsmContext(root, AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.Default, CilFormatConfig.Default);
+            => new AsmContext(root, AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.New, CilFormatConfig.Default);
 
         /// <summary>
         /// Creates a rooted context with specified indexes and format configuration
@@ -52,14 +54,14 @@ namespace Z0
         /// </summary>
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
         public static IAsmContext New(IAssemblyComposition assemblies)
-            => new AsmContext(assemblies, default(EmptyClrIndex), DataResourceIndex.Empty, AsmFormatConfig.Default, CilFormatConfig.Default);
+            => new AsmContext(assemblies, default(EmptyClrIndex), DataResourceIndex.Empty, AsmFormatConfig.New, CilFormatConfig.Default);
 
         /// <summary>
         /// Creates a base context with selected assemblies
         /// </summary>
         /// <param name="resolutions">The assemblies to share with the context</param>
         public static IAsmContext New(params IAssemblyResolution[] resolutions)
-            => new AsmContext(resolutions.Assemble(), default(EmptyClrIndex), DataResourceIndex.Empty, AsmFormatConfig.Default, CilFormatConfig.Default);
+            => new AsmContext(resolutions.Assemble(), default(EmptyClrIndex), DataResourceIndex.Empty, AsmFormatConfig.New, CilFormatConfig.Default);
 
         /// <summary>
         /// Creates a base context with specified indexes and format configuration
@@ -76,12 +78,12 @@ namespace Z0
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
         public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources)             
-            => new AsmContext(AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.Default, CilFormatConfig.Default);
+            => new AsmContext(AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.New, CilFormatConfig.Default);
 
         AsmContext(IContext root, IAssemblyComposition assemblies, IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
         {
             this.RootContext = root != null ? some(root) : none<IContext>();
-            this.State = AsmContextData.Create(assemblies ?? AssemblyComposition.Empty, clrIndex, resources,format,cilFormat);
+            this.State = AsmContextData.New(assemblies ?? AssemblyComposition.Empty, clrIndex, resources,format,cilFormat);
             this.Identity = Context.NextId();
         }
 
@@ -124,7 +126,7 @@ namespace Z0
             => new AsmContext(
                 RootContext.ValueOrDefault(),
                 Context.NextId(),
-                AsmContextData.Create(Compostion, ClrIndex, State.Resources, config, CilFormat)
+                AsmContextData.New(Compostion, ClrIndex, State.Resources, config, CilFormat)
                 );
 
         public void Notify(AppMsg msg)

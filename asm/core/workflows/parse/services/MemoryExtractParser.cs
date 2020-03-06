@@ -18,11 +18,11 @@ namespace Z0
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        public static MemoryExtractParser Create(IAsmContext context, int? bufferlen)
+        public static MemoryExtractParser New(IAsmContext context, int? bufferlen)
             => new MemoryExtractParser(context, bufferlen);
 
         [MethodImpl(Inline)]
-        public static MemoryExtractParser Create(IAsmContext context, byte[] buffer)
+        public static MemoryExtractParser New(IAsmContext context, byte[] buffer)
             => new MemoryExtractParser(context, buffer);
 
         [MethodImpl(Inline)]

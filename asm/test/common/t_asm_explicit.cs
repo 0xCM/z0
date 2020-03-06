@@ -34,7 +34,7 @@ namespace Z0
         protected abstract void OnExecute(in AsmBuffers buffers);
 
         protected AsmFormatConfig DefaultAsmFormat
-            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
+            => AsmFormatConfig.New.WithoutFunctionTimestamp();
 
         protected static IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
         {
@@ -51,7 +51,7 @@ namespace Z0
         protected static IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Asm);
-            var format = AsmFormatConfig.Default.WithFunctionTimestamp();
+            var format = AsmFormatConfig.New.WithFunctionTimestamp();
             return context.WithFormat(format).AsmWriter(path);
         }
     }

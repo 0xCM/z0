@@ -16,7 +16,7 @@ namespace Z0
         readonly AsmBufferClient Client;
 
         [MethodImpl(Inline)]
-        public static IAsmBufferClient Create(IAsmContext context, AsmBufferClient client)
+        public static IAsmBufferClient New(IAsmContext context, AsmBufferClient client)
             => new AsmBufferedClient(context, client);
         
         [MethodImpl(Inline)]

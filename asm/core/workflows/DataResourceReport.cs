@@ -70,7 +70,7 @@ namespace Z0
         public DataResourceRecord[] Records {get;}
 
         public readonly FilePath ReportPath
-            => AsmEmissionPaths.Current.ResourcePath(Id);
+            => AsmEmissionPaths.The.ResourcePath(Id);
         
         readonly DataResourceIndex Index;        
 

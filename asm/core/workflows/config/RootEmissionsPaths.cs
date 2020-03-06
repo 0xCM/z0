@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Root;
 
-    using Ext = FileExtensions;
-
     public readonly struct RootEmissionPaths
     {
         [MethodImpl(Inline)]
@@ -42,6 +40,13 @@ namespace Z0.Asm
         
         public FolderPath DecodedDir
             => RootDir + DecodedFolder;
+
+        public FolderName AssemblyFolder(AssemblyId id) 
+            => FolderName.Define(id.Format());
+
+        public FolderPath AssemblyDir(AssemblyId id)
+            => RootDir + AssemblyFolder(id);
+
 
         public RootEmissionPaths Clear()
         {

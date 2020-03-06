@@ -18,7 +18,7 @@ namespace Z0
         byte[] PatternBuffer {get;}
 
         [MethodImpl(Inline)]
-        public static IOpExtractParser Create(IAsmContext context, byte[] buffer)
+        public static IOpExtractParser New(IAsmContext context, byte[] buffer)
             => new OpExtractParser(context,buffer);
 
         [MethodImpl(Inline)]
@@ -92,7 +92,7 @@ namespace Z0
 
             ReportDuplicates(OpIdentity.duplicates(dst.Select(x => x.Uri.OpId)));
 
-            return AsmReports.ParsedEncodings(host.Path, dst);
+            return ParsedOpReport.Create(dst);
         }
 
         void ReportDuplicates(OpIdentity[] duplicated)
