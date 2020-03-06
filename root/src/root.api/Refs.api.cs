@@ -22,6 +22,15 @@ namespace Z0
             => new IntPtr(p);
 
         /// <summary>
+        /// Presents a readonly reference as reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ref T edit<T>(in T src)
+            => ref Unsafe.AsRef(in src);
+
+        /// <summary>
         /// Adds an offset to a reference, measured relative to the reference type
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -32,15 +41,6 @@ namespace Z0
             => ref Unsafe.Add(ref src, count);
 
         /// <summary>
-        /// Presents a readonly reference as reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static ref T mutable<T>(in T src)
-            => ref Unsafe.AsRef(in src);
-
-        /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the resulting element
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -48,7 +48,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T skip<T>(in T src, int count)
-            => ref Unsafe.Add(ref mutable(in src), count);
+            => ref Unsafe.Add(ref edit(in src), count);
 
         [MethodImpl(Inline)]
         public static ref T cast<S,T>(ref S src)
@@ -84,7 +84,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref byte byteref<T>(in T src)
-            => ref Unsafe.As<T,byte>(ref mutable(in src));
+            => ref Unsafe.As<T,byte>(ref edit(in src));
 
         /// <summary>
         /// The canonical swap function
@@ -134,7 +134,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref byte skip8<T>(in T src, int count)
-            => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref mutable(in src)), count);
+            => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref edit(in src)), count);
 
         /// <summary>
         /// Skips a specified number of 16-bit source segments and returns a readonly reference to the resulting memory location
@@ -144,7 +144,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref ushort skip16<T>(in T src, int count)
-            => ref Unsafe.Add(ref Unsafe.As<T,ushort>(ref mutable(in src)), count);
+            => ref Unsafe.Add(ref Unsafe.As<T,ushort>(ref edit(in src)), count);
 
         /// <summary>
         /// Skips a specified number of 32-bit source segments and returns a readonly reference to the resulting memory location
@@ -154,7 +154,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref uint skip32<T>(in T src, int count)
-            => ref Unsafe.Add(ref Unsafe.As<T,uint>(ref mutable(in src)), count);
+            => ref Unsafe.Add(ref Unsafe.As<T,uint>(ref edit(in src)), count);
 
         /// <summary>
         /// Skips a specified number of 64-bit source segments and returns a readonly reference to the resulting memory location
@@ -164,7 +164,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref ulong skip64<T>(in T src, int count)
-            => ref Unsafe.Add(ref Unsafe.As<T,ulong>(ref mutable(in src)), count);
+            => ref Unsafe.Add(ref Unsafe.As<T,ulong>(ref edit(in src)), count);
 
         /// <summary>
         /// Returns an readonly reference to a memory location, following a specified number of bytes
@@ -174,7 +174,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T skipb<T>(in T src, long count)
-            => ref Unsafe.Add(ref mutable(in src), intptr(count));
+            => ref Unsafe.Add(ref edit(in src), intptr(count));
 
         /// <summary>
         /// Interprets a readonly generic reference as a readonly uint8 reference
@@ -481,7 +481,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly byte skip8<T>(ReadOnlySpan<T> src, int count)
-            => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref mutable(in head(src))), count);
+            => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref edit(in head(src))), count);
 
         /// <summary>
         /// Skips a specified number of 16-bit source segments and returns a readonly reference to the resulting memory location
@@ -491,7 +491,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly ushort skip16<T>(ReadOnlySpan<T> src, int count)
-            => ref Unsafe.Add(ref Unsafe.As<T,ushort>(ref mutable(in head(src))), count);
+            => ref Unsafe.Add(ref Unsafe.As<T,ushort>(ref edit(in head(src))), count);
 
         /// <summary>
         /// Skips a specified number of 32-bit source segments and returns a readonly reference to the resulting memory location
@@ -501,7 +501,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly uint skip32<T>(ReadOnlySpan<T> src, int count)
-            => ref Unsafe.Add(ref Unsafe.As<T,uint>(ref mutable(in head(src))), count);
+            => ref Unsafe.Add(ref Unsafe.As<T,uint>(ref edit(in head(src))), count);
 
         /// <summary>
         /// Skips a specified number of 64-bit source segments and returns a readonly reference to the resulting memory location
@@ -511,7 +511,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly ulong skip64<T>(ReadOnlySpan<T> src, int count)
-            => ref Unsafe.Add(ref Unsafe.As<T,ulong>(ref mutable(in head(src))), count);
+            => ref Unsafe.Add(ref Unsafe.As<T,ulong>(ref edit(in head(src))), count);
 
         /// <summary>
         /// Returns an readonly reference to a memory location, following a specified number of bytes
@@ -554,7 +554,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* constptr<T>(in T src)
             where T : unmanaged
-                => ptr(ref mutable(in src));
+                => ptr(ref edit(in src));
 
         /// <summary>
         /// Presents a readonly reference as a generic pointer displaced by an element offset
@@ -565,7 +565,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* constptr<T>(in T src, int offset)
             where T : unmanaged
-                => ptr(ref mutable(in skip(in src, offset)));
+                => ptr(ref edit(in skip(in src, offset)));
 
         /// <summary>
         /// Converts a generic reference into a void pointer
@@ -707,6 +707,5 @@ namespace Z0
         public static unsafe ulong* puint64<T>(ref T r)
             where T : unmanaged
                 => ptr<T,ulong>(ref r);
-
     }
 }

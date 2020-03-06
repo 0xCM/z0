@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> get<T>(in T src)
             where T : unmanaged
-                => from(ref mutable(in src));
+                => from(ref edit(in src));
 
         /// <summary>
         /// Reads a byte array from an unmanaged source value and stored the result in a caller-allocated target

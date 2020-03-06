@@ -19,8 +19,8 @@ namespace Z0
         {
             if(a != b)
             {
-                Enqueue(a.Format());
-                Enqueue(b.Format());
+                Notify(a.Format());
+                Notify(b.Format());
                 Claim.fail();
             }
         }

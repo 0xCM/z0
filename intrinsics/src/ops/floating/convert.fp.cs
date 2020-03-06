@@ -15,8 +15,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse.X64;
      
-    using static As;
-    using static zfunc;    
+    using static Root;
 
     partial class dinxfp
     {

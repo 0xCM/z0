@@ -39,12 +39,12 @@ namespace Z0
         /// </summary>
         /// <param name="msg">The messages to enqueue</param>
         [MethodImpl(Inline)]
-        public void Enqueue(AppMsg msg)
-            => Queue.Enqueue(msg);
+        public void Notify(AppMsg msg)
+            => Queue.Notify(msg);
         
         [MethodImpl(Inline)]
-        public void Enqueue(string msg, AppMsgKind? severity = null)
-            => Queue.Enqueue(msg,severity);
+        public void Notify(string msg, AppMsgKind? severity = null)
+            => Queue.Notify(msg,severity);
 
         public void Flush(Exception e, IAppMsgLog target)
         {

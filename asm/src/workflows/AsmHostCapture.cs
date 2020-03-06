@@ -2,15 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
-    using Z0.Asm;
 
     using static AsmServiceMessages;
     using static Root;
@@ -98,8 +96,8 @@ namespace Z0
             var target = Paths.ParsedPath(host.Path);
             var sink = Context;
             parsed.Save(target)
-                        .OnSome(file => sink.Enqueue(ParsedExtracts(host.Path,file)))
-                        .OnNone(() => sink.Enqueue(ExtractParseFailure(host.Path)));
+                        .OnSome(file => sink.Notify(ParsedExtracts(host.Path,file)))
+                        .OnNone(() => sink.Notify(ExtractParseFailure(host.Path)));
             require(extract.RecordCount == parsed.RecordCount);
             return parsed;
         }
@@ -123,7 +121,7 @@ namespace Z0
 
         public CapturedHost CaptureHostOps(ApiHost host)        
         {
-            Context.Enqueue($"Executing {host} capture workflow");
+            Context.Notify($"Executing {host} capture workflow");
             var extracted = Extract(host);
             var parsed = Parse(host, extracted);
             var decoded = Decode(host, extracted, parsed);        

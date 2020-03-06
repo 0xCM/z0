@@ -7,7 +7,8 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     using static BitLogicSpec;
     using static LogicEngine;
@@ -153,7 +154,7 @@ namespace Z0.Logix
                 Claim.eq(actual,expect);
                 matrix[j] = actual;
             
-                Enqueue(actual.Format(8));
+                Notify(actual.Format(8));
             }            
         }
 

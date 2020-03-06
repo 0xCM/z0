@@ -23,7 +23,7 @@ namespace Z0
 
         readonly byte[] ParseBuffer;
 
-        readonly IAsmFunctionFormatter Formatter;
+        readonly IAsmFormatter Formatter;
 
         readonly IAsmInstructionDecoder Decoder;
 

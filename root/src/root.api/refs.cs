@@ -15,8 +15,8 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T mutable<T>(in T src)
-            => ref refs.mutable(src);
+        public static ref T edit<T>(in T src)
+            => ref Unsafe.AsRef(in src);
 
         /// <summary>
         /// The canonical swap function

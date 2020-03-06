@@ -39,7 +39,7 @@ namespace Z0
         {
             if(xs.Length != ys.Length)
                 return false;
-            return identical(ref mutable(in head(xs)), ref mutable(in head(ys)), xs.Length);
+            return identical(ref edit(in head(xs)), ref edit(in head(ys)), xs.Length);
         }
  
         //Adapted from corefx repo

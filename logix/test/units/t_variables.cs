@@ -9,7 +9,8 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Reflection;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     using static TypedLogicSpec;
 
@@ -37,7 +38,7 @@ namespace Z0.Logix
             var expr1 = varied(n1, and(x,y),x);
             var expr2 = y;
             var result = solve(expr1, expr2,(1,0xFF));
-            Enqueue($"Expression is satisfied by {result.Count} values");
+            Notify($"Expression is satisfied by {result.Count} values");
             Claim.nea(result.IsEmpty());                                                
         }
 
@@ -48,7 +49,7 @@ namespace Z0.Logix
             var expr1 = varied(n2, or(v2, xor(v1,and(v1,nand(v2, not(v1))))),v1,v2);
             var expr2 = literal(32u);
             var result = solve(expr1, expr2, (1,0xFF));
-            Enqueue($"Expression is satisfied by {result.Count} values");
+            Notify($"Expression is satisfied by {result.Count} values");
         }
 
         IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, LiteralExpr<T> match, Interval<T> domain)
@@ -111,10 +112,9 @@ namespace Z0.Logix
             var v2_name = v2.Format(false);
             var v3_name = v3.Format(false);
             var method = MethodInfo.GetCurrentMethod().DisplayName<T>();
-            var msg = appMsg($"{method}");
-            Enqueue(msg);
+            var msg = AppMsg.Babble($"{method}");
+            Notify(msg);
                         
-
             var expr = binary(k1, binary(k0, v0,v1), binary(k0, v2,v3));            
             var op0 = ScalarOpApi.lookup<T>(k0);
             var op1 = ScalarOpApi.lookup<T>(k1);
@@ -158,5 +158,4 @@ namespace Z0.Logix
             }
         }
     }
-
 }

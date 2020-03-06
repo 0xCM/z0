@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Swap<T> operator ++(in Swap<T> src)
         {
-            ref var dst = ref mutable(in src);
+            ref var dst = ref edit(in src);
             dst.i = gmath.inc(dst.i);
             dst.j = gmath.inc(dst.j);
             return dst;
@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Swap<T> operator --(in Swap<T> src)
         {
-            ref var dst = ref mutable(in src);
+            ref var dst = ref edit(in src);
             if(gmath.nonz(src.i))
                 dst.i = gmath.dec(dst.i);
             

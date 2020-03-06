@@ -39,6 +39,6 @@ namespace Z0
         protected bool ExcludeZero {get;}
 
         protected void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Context.Enqueue(AppMsg.Error(e, caller,file,line));
+            => Context.Notify(AppMsg.Error(e, caller,file,line));
     }
 }

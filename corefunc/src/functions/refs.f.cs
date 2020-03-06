@@ -112,7 +112,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static ref T mutable<T>(in T src)
-        => ref refs.mutable(src);
+        => ref refs.edit(src);
 
     /// <summary>
     /// The canonical swap function

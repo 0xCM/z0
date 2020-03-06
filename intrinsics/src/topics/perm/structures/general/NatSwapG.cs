@@ -91,7 +91,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N,T> operator ++(in NatSwap<N,T> src)
         {
-            ref var dst = ref refs.mutable(in src);
+            ref var dst = ref refs.edit(in src);
             dst.i++;
             dst.j++;
             return dst;
@@ -100,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N,T> operator --(in NatSwap<N,T> src)
         {
-            ref var dst = ref refs.mutable(in src);
+            ref var dst = ref refs.edit(in src);
             if(src.i != 0)
                 dst.i--;
             if(src.j != 0)

@@ -30,7 +30,7 @@ namespace Z0
                 var end = Random.Next((ulong)uint.MaxValue, ulong.MaxValue);
                 var expect = MemoryRange.Define(start,end);
                 var format = expect.Format();
-                var actual = MemoryRange.Parse(format).OnNone(() => Enqueue(format)).Require();
+                var actual = MemoryRange.Parse(format).OnNone(() => Notify(format)).Require();
                 Claim.eq(expect,actual);
             }
         }
@@ -44,7 +44,7 @@ namespace Z0
 
             using var writer = NativeTestWriter();
 
-            var exchange = Context.CaptureExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
             var types = NumericKind.All.DistinctTypes();
@@ -65,7 +65,7 @@ namespace Z0
             {
 
             }            
-            var exchange = Context.CaptureExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
 
@@ -88,7 +88,7 @@ namespace Z0
 
             }
 
-            var exchange = Context.CaptureExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
             using var target = NativeTestWriter();
@@ -119,7 +119,7 @@ namespace Z0
 
             }
 
-            var exchange = Context.CaptureExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange(OnCaptureEvent);
             var ops  = exchange.Operations;
 
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();

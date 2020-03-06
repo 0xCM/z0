@@ -222,7 +222,7 @@ namespace Z0
         /// <param name="dst">The value to broadcast</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<float> vbroadcast(N256 n, float src)
-            => BroadcastScalarToVector256(ptr(ref mutable(in src)));
+            => BroadcastScalarToVector256(ptr(ref edit(in src)));
 
         /// <summary>
         /// __m256d _mm256_broadcast_sd (double const * mem_addr) VBROADCASTSD ymm, m64
@@ -231,7 +231,7 @@ namespace Z0
         /// <param name="dst">The value to broadcast</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<double> vbroadcast(N256 n, double src)
-            => BroadcastScalarToVector256(ptr(ref mutable(in src)));
+            => BroadcastScalarToVector256(ptr(ref edit(in src)));
 
         /// <summary>
         /// __m128 _mm_broadcast_ss (float const * mem_addr) VBROADCASTSS xmm, m32
@@ -240,7 +240,7 @@ namespace Z0
         /// <param name="dst">The value to broadcast</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<float> vbroadcast(N128 n128, float src)
-            => BroadcastScalarToVector128(ptr(ref mutable(in src)));
+            => BroadcastScalarToVector128(ptr(ref edit(in src)));
 
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<double> vbroadcast(N128 n128, double src)

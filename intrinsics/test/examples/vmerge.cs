@@ -5,13 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;
-    using static CpuVector;
-    using static dinx;
+    using static Root;
+    using static Nats;
+    using static Literals;
+    using static gvec;
 
     partial class vexamples
     {
@@ -61,10 +59,10 @@ namespace Z0
                 var lo = ginx.vmergelo(x,y);
                 var hi = ginx.vmergehi(x,y);
 
-                Enqueue(x.Format(pad:2));
-                Enqueue(y.Format(pad:2));
-                Enqueue(lo.Format(pad:2));
-                Enqueue(hi.Format(pad:2));
+                Notify(x.Format(pad:2));
+                Notify(y.Format(pad:2));
+                Notify(lo.Format(pad:2));
+                Notify(hi.Format(pad:2));
             }
 
             void merge_hi()
@@ -74,10 +72,10 @@ namespace Z0
                 var x = vpattern.vincrements(w,t);
                 var y = vpattern.vincrements(w, (byte)(x.LastCell() + 1));
                 var z = dinx.vmergehi(x,y);
-                Enqueue($"mergehi");
-                Enqueue(x.Format(pad:2));
-                Enqueue(y.Format(pad:2));
-                Enqueue(z.Format(pad:2));
+                Notify($"mergehi");
+                Notify(x.Format(pad:2));
+                Notify(y.Format(pad:2));
+                Notify(z.Format(pad:2));
             }
 
             void merge()
@@ -87,12 +85,10 @@ namespace Z0
                 var x = vpattern.vincrements(w,t);
                 var y = vpattern.vincrements(w, (byte)(x.LastCell() + 1));
                 var z = dinx.vmerge(x,y);
-                Enqueue(x.Format(pad:2));
-                Enqueue(y.Format(pad:2));
-                Enqueue(z.Format(pad:2));
+                Notify(x.Format(pad:2));
+                Notify(y.Format(pad:2));
+                Notify(z.Format(pad:2));
             }
         }
-
     }
-
 }

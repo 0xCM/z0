@@ -164,7 +164,7 @@ namespace Z0
             {
                 var x = gvec.vparts(n128,127,0,127,0,127,0,127,0);
                 var y = dinx.vpackus(x,x);
-                Enqueue(y.Format());
+                Notify(y.Format());
             }        
             case1();
             case2();

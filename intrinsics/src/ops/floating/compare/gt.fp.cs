@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static zfunc;    
+    using static Root;
 
     partial class dinxfp
     {
@@ -89,7 +89,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vgteq(Vector256<double> x, Vector256<double> y)
             => Compare(x, y, FloatComparisonMode.OrderedGreaterThanOrEqualNonSignaling);
-
     }
-
 }

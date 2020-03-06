@@ -8,7 +8,9 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.IO;
     
-    using static zfunc;    
+    using static Root;
+    using static Nats;
+
     using static BinaryBitLogicKind;
 
     public class t_truthtable : UnitTest<t_truthtable>
@@ -160,9 +162,9 @@ namespace Z0.Logix
 
         public void truth_vectors()
         {
-            Enqueue(TruthTables.definition(BinaryBitLogicKind.And).Format());
-            Enqueue(TruthTables.definition(BinaryBitLogicKind.Or).Format());
-            Enqueue(TruthTables.definition(BinaryBitLogicKind.Nand).Format());        
+            Notify(TruthTables.definition(BinaryBitLogicKind.And).Format());
+            Notify(TruthTables.definition(BinaryBitLogicKind.Or).Format());
+            Notify(TruthTables.definition(BinaryBitLogicKind.Nand).Format());        
         }
     }
 }

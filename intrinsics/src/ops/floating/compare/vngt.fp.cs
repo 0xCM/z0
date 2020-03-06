@@ -11,10 +11,8 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static zfunc;    
+    using static Root;
 
     partial class dinxfp
     {
@@ -53,6 +51,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<double> vngteq(Vector128<double> x, Vector128<double> y)
             => CompareNotGreaterThanOrEqual(x, y);
-
     }
 }

@@ -15,6 +15,6 @@ namespace Z0
         /// </summary>
         /// <param name="resolutions">The resolutions</param>
         public static AssemblyComposition Assemble(this IEnumerable<IAssemblyResolution> resolutions)
-            => AssemblyComposition.Assemble(resolutions.ToArray());
+            => AssemblyComposition.Assemble(resolutions.Where(r => r.Id != 0).ToArray());
     }
 }

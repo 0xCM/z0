@@ -41,9 +41,9 @@ namespace Z0
                 var bstg = bst.ToBitGrid(w,n,m,t);
                 if(gt != bstg)
                 {
-                    Enqueue(gt.Format());
-                    Enqueue("!=");
-                    Enqueue(bstg.Format());
+                    Notify(gt.Format());
+                    Notify("!=");
+                    Notify(bstg.Format());
                     Claim.fail();
                 }
             }
@@ -65,17 +65,17 @@ namespace Z0
 
                 if(tr1 != tr3)
                 {
-                    Enqueue(tr1.Format());
-                    Enqueue("!=");
-                    Enqueue(tr3.Format());
+                    Notify(tr1.Format());
+                    Notify("!=");
+                    Notify(tr3.Format());
                     Claim.fail();
                 }
 
                 if(tr1 != tr2)
                 {
-                    Enqueue(tr1.Format());
-                    Enqueue("!=");
-                    Enqueue(tr2.Format());
+                    Notify(tr1.Format());
+                    Notify("!=");
+                    Notify(tr2.Format());
                     Claim.fail();
                 }
             }

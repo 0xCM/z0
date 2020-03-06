@@ -40,7 +40,7 @@ namespace Z0
             }
         }
 
-        public void Enqueue(AppMsg msg)
+        public void Notify(AppMsg msg)
         {
             lock(lockobj)
                 Messages.Add(msg);
@@ -50,12 +50,12 @@ namespace Z0
         {
             lock(lockobj)
             {
-                Enqueue(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
+                Notify(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
                 return Dequeue();
             }
         }
         
-        public void Enqueue(string msg, AppMsgKind? severity = null)
-            => Enqueue(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
+        public void Notify(string msg, AppMsgKind? severity = null)
+            => Notify(AppMsg.NoCaller($"{msg}", severity ?? AppMsgKind.Babble));
     }
 }

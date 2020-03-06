@@ -11,7 +11,8 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static zfunc;    
+ 
+    using static Root;
 
     partial class dinxfp
     {
@@ -53,9 +54,6 @@ namespace Z0
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline), Op]
         public static bool vtestz(Vector256<double> src, Vector256<double> mask)
-            => TestZ(src,mask);        
-
-
+            => TestZ(src,mask);
     }
-
 }

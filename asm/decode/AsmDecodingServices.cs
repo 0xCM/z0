@@ -21,16 +21,16 @@ namespace Z0
         /// </summary>
         /// <param name="context">The configuration to use</param>
         [MethodImpl(Inline)]
-        internal static AsmFunctionFormatter InstructionFormatter(this IAsmContext context)
-            => AsmFunctionFormatter.BaseFormatter(context);    
+        internal static AsmFormatter InstructionFormatter(this IAsmContext context)
+            => Z0.AsmFormatter.Internal(context);    
 
         /// <summary>
         /// Instantiates a contextual asm formatter service
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionFormatter AsmFormatter(this IAsmContext context, AsmFormatConfig config = null)
-            => AsmFunctionFormatter.Create(context, config ?? context.AsmFormat);
+        public static IAsmFormatter AsmFormatter(this IAsmContext context, AsmFormatConfig config = null)
+            => Z0.AsmFormatter.Create(context, config ?? context.AsmFormat);
 
         public static IClrIndex CreateIndex(this Assembly src)
             => ClrMetadataIndex.Create(src);
@@ -74,6 +74,6 @@ namespace Z0
         }
 
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
-            => AsmInstructionSource.FromProducer(() => GetInstructions(archive));
+            => AsmInstructionSource.From(() => GetInstructions(archive));
     }
 }

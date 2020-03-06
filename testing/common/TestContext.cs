@@ -128,7 +128,7 @@ namespace Z0
         protected void Trace(object msg)
         {
             if(TraceEnabled)
-                Enqueue(AppMsg.Info(msg));
+                Notify(AppMsg.Info(msg));
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Z0
         protected void Trace(object title, object msg)
         {
             if(TraceEnabled)
-                Enqueue(AppMsg.Info($"{title} - {msg}"));
+                Notify(AppMsg.Info($"{title} - {msg}"));
         }
 
         protected void Trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null)
@@ -146,7 +146,7 @@ namespace Z0
             if(TraceEnabled)
             {
                 var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
-                Enqueue(AppMsg.NoCaller($"{titleFmt}: {msg}", severity ?? AppMsgKind.Babble));
+                Notify(AppMsg.NoCaller($"{titleFmt}: {msg}", severity ?? AppMsgKind.Babble));
             }
         }
 
@@ -159,7 +159,7 @@ namespace Z0
         protected void Trace(AppMsg msg, AppMsgKind? severity = null)
         {
             if(TraceEnabled)
-                Enqueue(msg.AsKind(severity ?? AppMsgKind.Babble));
+                Notify(msg.AsKind(severity ?? AppMsgKind.Babble));
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0
         protected void TraceCaller(object msg, AppMsgKind severity, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                Enqueue(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}: {msg}",severity));
+                Notify(AppMsg.NoCaller($"{GetType().DisplayName()}/{caller}: {msg}",severity));
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Z0
         protected void TraceCaller(object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                Enqueue(AppMsg.Info($"{GetType().DisplayName()}/{caller}: {msg}"));
+                Notify(AppMsg.Info($"{GetType().DisplayName()}/{caller}: {msg}"));
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Z0
         protected void TraceCaller(string title, object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
-                Enqueue(AppMsg.Info($"{GetType().DisplayName()}/{caller}/{title}: {msg}"));
+                Notify(AppMsg.Info($"{GetType().DisplayName()}/{caller}/{title}: {msg}"));
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0
         protected void TracePerf(string msg)
         {
             if(TraceEnabled)
-                Enqueue(AppMsg.NoCaller($"{msg}", AppMsgKind.Benchmark));
+                Notify(AppMsg.NoCaller($"{msg}", AppMsgKind.Benchmark));
         }
 
         public IEnumerable<TestCaseRecord> TakeOutcomes()
@@ -237,17 +237,11 @@ namespace Z0
         public IReadOnlyList<AppMsg> Dequeue()
             => Queue.Dequeue();
 
-        public void Enqueue(AppMsg msg)
-            => Queue.Enqueue(msg);
-
-        public void Enqueue(string msg, AppMsgKind? severity = null)
-            => Queue.Enqueue(msg, severity);
+        public void Notify(string msg, AppMsgKind? severity = null)
+            => Queue.Notify(msg, severity);
         
         public void Notify(AppMsg msg)
-            => Queue.Enqueue(msg);
-
-        protected void Notify(string msg, AppMsgKind? severity = null)
-            => Queue.Enqueue(msg,severity);
+            => Queue.Notify(msg);
 
         public IReadOnlyList<AppMsg> Flush(Exception e)
             => Queue.Flush(e);

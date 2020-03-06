@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
@@ -103,7 +103,7 @@ namespace Z0
             var provider = Resolved.CatalogProvider(id);
             if(provider.IsSome())
             {
-                var exchange = Context.CaptureExchange(OnCaptureEvent);
+                var exchange = Context.ExtractExchange(OnCaptureEvent);
                 Archive(in exchange, provider.Value);
             }
         }
@@ -115,7 +115,7 @@ namespace Z0
 
             }
 
-            var exchange = Context.CaptureExchange(OnCaptureEvent);
+            var exchange = Context.ExtractExchange(OnCaptureEvent);
             var providers = Resolved.CatalogProviders(ActiveAssemblies);
             
             foreach(var src in providers)

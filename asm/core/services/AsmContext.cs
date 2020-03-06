@@ -127,11 +127,11 @@ namespace Z0
                 AsmContextData.Create(Compostion, ClrIndex, State.Resources, config, CilFormat)
                 );
 
-        public void Enqueue(AppMsg msg)
-            => MsgSink.OnSome(sink => sink.Enqueue(msg));
+        public void Notify(AppMsg msg)
+            => MsgSink.OnSome(sink => sink.Notify(msg));
 
-        public void Enqueue(string msg, AppMsgKind? severity = null)
-            => MsgSink.OnSome(sink => sink.Enqueue(msg, severity));
+        public void Notify(string msg, AppMsgKind? severity = null)
+            => MsgSink.OnSome(sink => sink.Notify(msg, severity));
 
         public IReadOnlyList<AppMsg> Dequeue()
             => MsgSink ? MsgSink.Value.Dequeue() : array<AppMsg>();

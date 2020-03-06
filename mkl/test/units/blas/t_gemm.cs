@@ -152,8 +152,8 @@ namespace Z0.Mkl.Test
                 if(trace)       
                 {
                     var padlen = Int32.MinValue.ToString().Length + 2;
-                    Enqueue($"X = {X.Format()}");
-                    Enqueue($"E = {E.Format()}");
+                    Notify($"X = {X.Format()}");
+                    Notify($"E = {E.Format()}");
                 }
                 
                 Claim.close(E.Unblocked, X.Unblocked, epsilon);

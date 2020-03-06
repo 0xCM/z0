@@ -55,19 +55,21 @@ namespace Z0
                 ref readonly var current = ref src[i];                
                 var status = parser.Parse(current.EncodedData);                
                 var matched = parser.Result;
-                var succeeded = matched.IsSome() && status.Success();                
+                var succeeded = matched.IsSome() && status.Success(); 
+                if(!succeeded)               
+                    Context.Notify(AppMsg.Warn($"Failed to parse {current.Uri} with status = {status}"));
                 var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
                 dst[i] = ParsedExtract.Define(current, matched.ToTermCode(), MemoryExtract.Define(current.EncodedData.Address, data));
             }
+
             return dst;
         }
-
 
         public ParsedOpReport Parse(ApiHost host, OpExtractReport encoded)
         {
             var dst = new ParsedOpRecord[encoded.Records.Length];
             var parser = Context.PatternParser(PatternBuffer.Clear());            
-            Context.Enqueue($"Parsing {encoded.Records.Length} {host} records");
+            Context.Notify($"Parsing {encoded.Records.Length} {host} records");
 
             for(var i=0; i< dst.Length; i++)
             {
@@ -85,9 +87,7 @@ namespace Z0
                      Uri : OpUri.Hex(host.Path, current.Uri.GroupName, current.Uri.OpId),
                      OpSig : current.OpSig,
                      Data : MemoryExtract.Define(current.Address, data)
-                );
-
-                
+                );               
             }
 
             ReportDuplicates(OpIdentity.duplicates(dst.Select(x => x.Uri.OpId)));
@@ -100,7 +100,7 @@ namespace Z0
             if(duplicated.Length != 0)
             {
                 var format = string.Join(text.comma(), duplicated);
-                Context.Enqueue($"Identifier duplicates: {format}", AppMsgKind.Warning);           
+                Context.Notify($"Identifier duplicates: {format}", AppMsgKind.Warning);           
             }
         }
     }

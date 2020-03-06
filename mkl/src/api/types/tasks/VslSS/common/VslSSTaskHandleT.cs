@@ -62,7 +62,7 @@ namespace Z0.Mkl
 
         
         public void Dispose()
-            => VSL.vslSSDeleteTask(ref mutable(in TaskPtr)).AutoThrow();
+            => VSL.vslSSDeleteTask(ref edit(in TaskPtr)).AutoThrow();
     }
 
 

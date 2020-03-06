@@ -73,7 +73,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Enqueue(descrition);
+                Notify(descrition);
             
         }
 
@@ -96,7 +96,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Enqueue(descrition);
+                Notify(descrition);
             
         }
 
@@ -119,7 +119,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Enqueue(descrition);            
+                Notify(descrition);            
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Enqueue(descrition);            
+                Notify(descrition);            
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z16)), source,target);
             if(EmitInfo)
-                Enqueue(descrition);            
+                Notify(descrition);            
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z32)), source,target);
             if(EmitInfo)
-                Enqueue(descrition);            
+                Notify(descrition);            
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z64)), source,target);
             if(EmitInfo)
-                Enqueue(descrition);            
+                Notify(descrition);            
         }
 
         public void vblendp_512x8_Jsb8x2()
@@ -333,11 +333,11 @@ namespace Z0
 
             if(EmitInfo)
             {
-                Enqueue($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typeof(T).DisplayName()}, perm length = {pn}");
-                Enqueue($"left:  {left.Format(pad:2)}");
-                Enqueue($"right: {right.Format(pad:2)}");
-                Enqueue(perm.Format());  
-                Enqueue(string.Empty);  
+                Notify($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typeof(T).DisplayName()}, perm length = {pn}");
+                Notify($"left:  {left.Format(pad:2)}");
+                Notify($"right: {right.Format(pad:2)}");
+                Notify(perm.Format());  
+                Notify(string.Empty);  
             }
         }
 

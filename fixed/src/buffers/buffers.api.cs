@@ -70,7 +70,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static IntPtr Liberate(ReadOnlySpan<byte> src)
-            => Liberate(ref mutable(in head(src)), src.Length);
+            => Liberate(ref edit(in head(src)), src.Length);
 
         [MethodImpl(Inline)]
         static IntPtr Liberate(Span<byte> src)

@@ -34,7 +34,7 @@ namespace Z0
         AsmBuffers(IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
         {
             AsmContext = context;
-            Exchange = context.CaptureExchange(observer, size);     
+            Exchange = context.ExtractExchange(observer, size);     
             Capture = Exchange.Operations;
             CaptureTarget = Exchange.TargetBuffer;
             CaptureState = Exchange.StateBuffer;

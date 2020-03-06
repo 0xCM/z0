@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {        
     using System;
     using System.Linq;
@@ -10,23 +10,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using Z0.Asm;
-
-    using static zfunc;
+    using static Root;
 
     readonly struct AsmFunctionEmitter : IAsmFunctionEmitter
     {
         public IAsmContext Context {get;}
 
-        readonly IAsmFunctionFormatter Formatter;
-
+        readonly IAsmFormatter Formatter;
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionEmitter Create(IAsmContext context, IAsmFunctionFormatter formatter)
+        public static IAsmFunctionEmitter Create(IAsmContext context, IAsmFormatter formatter)
             => new AsmFunctionEmitter(context,formatter);
 
         [MethodImpl(Inline)]
-        AsmFunctionEmitter(IAsmContext context, IAsmFunctionFormatter formatter)
+        AsmFunctionEmitter(IAsmContext context, IAsmFormatter formatter)
         {
             this.Context = context;
             this.Formatter = formatter;
@@ -41,7 +38,7 @@ namespace Z0
             {
                 using var dst = new StreamWriter(file.FullPath, false);
                 for(var i=0; i< functions.Length; i++)
-                    dst.Write(Formatter.FormatDetail(functions[i]));
+                    dst.Write(Formatter.FormatFunction(functions[i]));
                 return default;
             }
             catch(Exception e)

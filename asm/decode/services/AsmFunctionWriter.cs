@@ -38,7 +38,7 @@ namespace Z0
         public void Write(params AsmFunction[] src)
         {
             foreach(var f in src)
-                StreamOut.Write(Context.AsmFormatter(Config).FormatDetail(f));
+                StreamOut.Write(Context.AsmFormatter(Config).FormatFunction(f));
         }
 
         public void Dispose()

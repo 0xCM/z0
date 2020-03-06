@@ -44,7 +44,7 @@ namespace Z0
             var method = typeof(ginx).DeclaredMethods().WithName(nameof(ginx.vbsll)).OfKind(VK.vk128()).Single();
             var op = Dynop.UnaryOpImm(VK.vk128<uint>(), Identity.identify(method), method,imm8);
             var handle = GetMethodHandle(op.DynamicMethod);
-            Enqueue(handle.Value.ToString());
+            Notify(handle.Value.ToString());
 
         }
          

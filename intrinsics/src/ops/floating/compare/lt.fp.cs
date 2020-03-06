@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static zfunc;    
+    using static Root;
 
     partial class dinxfp
     {
@@ -88,7 +88,6 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<double> vlteq(Vector256<double> lhs, Vector256<double> rhs)
-            => Compare(lhs, rhs,FloatComparisonMode.OrderedLessThanOrEqualNonSignaling);
- 
+            => Compare(lhs, rhs,FloatComparisonMode.OrderedLessThanOrEqualNonSignaling); 
     }
 }

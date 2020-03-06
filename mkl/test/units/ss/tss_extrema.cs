@@ -6,9 +6,6 @@ namespace Z0.Mkl
 {
     using System;
     using System.Linq;
-
-    using static zfunc;
-    using static nfunc;
     
     public class t_extrema: UnitTest<t_extrema>
     {
@@ -23,7 +20,7 @@ namespace Z0.Mkl
             Claim.neq(s1Max,0.0);
 
             var zeroCount = s1.Count(x => x == 0);
-            Enqueue($"Found {zeroCount} zeroes");
+            Notify($"Found {zeroCount} zeroes");
         }
 
         public void sumvals()
@@ -73,5 +70,4 @@ namespace Z0.Mkl
             Claim.eq(expect,actual);
         }
     }
-
 }

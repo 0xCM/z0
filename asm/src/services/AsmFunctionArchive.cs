@@ -33,9 +33,9 @@ namespace Z0
 
         readonly AsmFormatConfig GroupFormatConfig;
 
-        readonly IAsmFunctionFormatter DefaultFormatter;
+        readonly IAsmFormatter DefaultFormatter;
 
-        readonly IAsmFunctionFormatter GroupFormatter;
+        readonly IAsmFormatter GroupFormatter;
 
         readonly ICilFunctionFormatter CilFormatter;
 
@@ -145,7 +145,7 @@ namespace Z0
                 {
                     var f = src.Members[i];
                     var uri = OpUri.Asm(HostPath, src.Id, f.Id);
-                    writer.Write(GroupFormatter.FormatDetail(f));
+                    writer.Write(GroupFormatter.FormatFunction(f));
                     tokens[i] = AsmEmissionToken.Define(uri, f.AddressRange, f.TermCode);
                 }
                 return AsmEmissionTokens.From(OpUri.Asm(HostPath, src.Id),tokens);

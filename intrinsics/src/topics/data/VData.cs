@@ -13,6 +13,7 @@ namespace Z0
     using static Nats;
     using static HexConst;
     using static As;
+    using static gvec;
 
     public static partial class VectorData
     {        
@@ -25,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> load<T>(N128 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(gvec.vload(n, in head(src)));
+                => generic<T>(gvec.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan
@@ -46,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> load<T>(N256 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(gvec.vload(n, in head(src)));
+                => generic<T>(gvec.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 256-bit pattern described by a readonly bytespan
@@ -67,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> load<T>(N512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => Vector512.vgeneric<T>(gvec.vload(n, in head(src)));
+                => generic<T>(gvec.vload(n, in head(src)));
 
         /// <summary>
         /// Creates a vector that decribes a lo/hi lane merge permutation
@@ -266,6 +267,5 @@ namespace Z0
         
         static ReadOnlySpan<byte> ClearAlt256x16u 
             => new byte[32]{0x00,0x00,0xff,0xff,0x02,0x00,0xff,0xff,0x04,0x00,0xff,0xff,0x06,0x00,0xff,0xff,0x00,0x00,0xff,0xff,0x02,0x00,0xff,0xff,0x04,0x00,0xff,0xff,0x06,0x00,0xff,0xff};
-
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Root;
+    using static gvec;
 
     public class t_opuri : UnitTest<t_opuri>
     {
@@ -23,10 +24,10 @@ namespace Z0
 
             Claim.eq(OpUriScheme.Hex, uri.Scheme);
             Claim.eq(ApiHostUri.Define(AssemblyId.Fixed, nameof(Vector512)), uri.HostPath);
-            Claim.eq(nameof(Vector512.vgeneric), uri.GroupName);
+            Claim.eq("vgeneric", uri.GroupName);
             Claim.eq(opid, uri.OpId);
             Claim.eq(true, opid.IsGeneric);
-            Claim.eq(nameof(Vector512.vgeneric), opid.Name);
+            Claim.eq("vgeneric", opid.Name);
             var parts  = opid.Parts.ToArray();
             foreach(var p in parts)
                 Trace(p.PartKind, p);

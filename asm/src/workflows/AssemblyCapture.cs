@@ -83,8 +83,8 @@ namespace Z0
             var target = Paths.ExtractPath(src.Path);  
             var sink = Context;
             captured.Save(target)
-                     .OnSome(file => sink.Enqueue(ExractedHost(src.Path,file)))
-                     .OnNone(() => sink.Enqueue(HostExtractionFailed(src.Path)));
+                     .OnSome(file => sink.Notify(ExractedHost(src.Path,file)))
+                     .OnNone(() => sink.Notify(HostExtractionFailed(src.Path)));
         
 
             return extracts.ToArray();

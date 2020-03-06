@@ -5,10 +5,9 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_ternary_logic : UnitTest<t_ternary_logic>
     {
@@ -148,7 +147,7 @@ namespace Z0.Logix
                 BitVector<T> v = ScalarOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
-                    Enqueue($"Equivalence failed for ternary op {kind}:{TypeIdentity.numeric<T>()}");
+                    Notify($"Equivalence failed for ternary op {kind}:{TypeIdentity.numeric<T>()}");
 
                 Claim.eq(u,v);
 

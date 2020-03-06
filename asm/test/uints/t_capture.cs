@@ -20,7 +20,7 @@ namespace Z0
                 //data.Captured.OnSome(s => Trace(s.TermCode)).OnNone(() => Trace(state));
             }
             
-            var exchange = Context.CaptureExchange(OnEvent);
+            var exchange = Context.ExtractExchange(OnEvent);
             var control = exchange.Operations;
             
             
