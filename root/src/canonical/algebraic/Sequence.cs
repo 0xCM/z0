@@ -58,17 +58,5 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Characterizes a finite sequence which may be empty
-    /// </summary>
-    /// <typeparam name="I">The sequence domain</typeparam>
-    /// <typeparam name="T">The sequence codomain</typeparam>
-    public interface IFiniteSequence<I,T> : ISequence<I,T>
-        where I : IFiniteSequence<I,T>, new()
-    {
-        int Length {get;}
 
-        bool IsEmpty {get;}
-
-    }
 }

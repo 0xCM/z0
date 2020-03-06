@@ -44,27 +44,27 @@ namespace Z0.Asm
             get => this;
         }
         
-        void IAsmCatalogEmitter.EmitPrimary(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
+        void IAsmCatalogEmitter.EmitPrimary(in OpExtractExchange exchange, AsmEmissionObserver observer)
         {
             ClearArchives(false);
             EmitDirectPrimary(exchange,observer);
             EmitGenericPrimary(exchange,observer);
         }
 
-        void IAsmCatalogEmitter.EmitImm(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
+        void IAsmCatalogEmitter.EmitImm(in OpExtractExchange exchange, AsmEmissionObserver observer)
         {
             ClearArchives(true);
             EmitDirectImm(exchange,observer);
             EmitGenericImm(exchange,observer);
         }
 
-        void EmitDirectPrimary(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
+        void EmitDirectPrimary(in OpExtractExchange exchange, AsmEmissionObserver observer)
         {            
             foreach(var host in Catalog.DirectApiHosts)
                 EmitDirectPrimary(exchange, host, observer);
         }
 
-        void EmitDirectImm(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
+        void EmitDirectImm(in OpExtractExchange exchange, AsmEmissionObserver observer)
         {
             foreach(var host in Catalog.DirectApiHosts)
             {
@@ -79,13 +79,13 @@ namespace Z0.Asm
             }
         }
 
-        void EmitGenericPrimary(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
+        void EmitGenericPrimary(in OpExtractExchange exchange, AsmEmissionObserver observer)
         {
             foreach(var host in Catalog.GenericApiHosts)                
                 EmitGenericPrimary(exchange, host, observer);
         }
 
-        void EmitGenericImm(in AsmCaptureExchange exchange, AsmEmissionObserver observer)
+        void EmitGenericImm(in OpExtractExchange exchange, AsmEmissionObserver observer)
         {        
             foreach(var host in Catalog.GenericApiHosts)
             {
@@ -97,7 +97,7 @@ namespace Z0.Asm
             }        
         }
 
-        void EmitDirectPrimary(in AsmCaptureExchange exchange, ApiHost host, AsmEmissionObserver observer)
+        void EmitDirectPrimary(in OpExtractExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
             var primary = HostArchive(host);
             var specs =  Context.OpCollector().CollectDirect(host);
@@ -106,7 +106,7 @@ namespace Z0.Asm
                 Emit(exchange, PrimaryGroup(host,spec), primary, observer);
         }
 
-        void EmitGenericPrimary(in AsmCaptureExchange exchange, ApiHost host, AsmEmissionObserver observer)
+        void EmitGenericPrimary(in OpExtractExchange exchange, ApiHost host, AsmEmissionObserver observer)
         {
             var primary = HostArchive(host);            
             var specs = Context.OpCollector().CollectGeneric(host);
@@ -115,7 +115,7 @@ namespace Z0.Asm
                 Emit(exchange, spec, primary, observer);
         }        
 
-        void Emit(in AsmCaptureExchange exchange, DirectOpGroup group, IAsmFunctionArchive dst, AsmEmissionObserver observer)
+        void Emit(in OpExtractExchange exchange, DirectOpGroup group, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {                                    
             var functions = new List<AsmFunction>();
             foreach(var spec in group.Members)
@@ -128,13 +128,13 @@ namespace Z0.Asm
             }                        
         }
 
-        AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, DirectOp src)
-            => decoder.DecodeFunction(Context.OpExtractor().Extract(in exchange, src.Id, src.ConcreteMethod));
+        AsmFunction Decode(IAsmFunctionDecoder decoder, in OpExtractExchange exchange, DirectOp src)
+            => decoder.DecodeFunction(Context.OpExtractor().Capture(in exchange, src.Id, src.ConcreteMethod));
 
-        AsmFunction Decode(IAsmFunctionDecoder decoder, in AsmCaptureExchange exchange, ClosedOp closure)
-            => decoder.DecodeFunction(Context.OpExtractor().Extract(in exchange, closure.Id, closure.ClosedMethod));
+        AsmFunction Decode(IAsmFunctionDecoder decoder, in OpExtractExchange exchange, ClosedOp closure)
+            => decoder.DecodeFunction(Context.OpExtractor().Capture(in exchange, closure.Id, closure.ClosedMethod));
 
-        void Emit(in AsmCaptureExchange exchange, GenericOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
+        void Emit(in OpExtractExchange exchange, GenericOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
             var functions = new List<AsmFunction>();
             foreach(var closure in op.Close())                        
@@ -146,7 +146,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitGenericImm(in AsmCaptureExchange exchange, GenericOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
+        void EmitGenericImm(in OpExtractExchange exchange, GenericOp op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
             if(op.Definition.IsVectorizedUnaryImm())
             {                                                
@@ -176,7 +176,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitDirectImm(in AsmCaptureExchange exchange, DirectOpGroup op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
+        void EmitDirectImm(in OpExtractExchange exchange, DirectOpGroup op, IAsmFunctionArchive dst, AsmEmissionObserver observer)
         {
             var tokens = new List<AsmEmissionToken>();
             foreach(var member in op.Members.Where(m => m.ConcreteMethod.IsVectorizedUnaryImm()))

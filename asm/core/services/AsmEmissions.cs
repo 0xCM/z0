@@ -9,10 +9,10 @@ namespace Z0
 
     public static class AsmEmissionsX
     {
-        public static void WriteMember(this StreamWriter dst, AsmOpExtract src) 
+        public static void WriteMember(this StreamWriter dst, CapturedOp src) 
             => dst.Write(src.FormatCode());
 
-	    public static string FormatCode(this AsmOpExtract src)
+	    public static string FormatCode(this CapturedOp src)
         {            
             var data = src.Code;
             var dst = text.factory.Builder();

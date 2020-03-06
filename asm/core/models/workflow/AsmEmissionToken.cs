@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// Specifies the reason for capture termination
         /// </summary>
-        public readonly CaptureTermCode TermCode;
+        public readonly ExtractTermCode TermCode;
 
         /// <summary>
         /// The memory range from which the defining code was extracted
@@ -39,7 +39,7 @@ namespace Z0
         public readonly MemoryRange AddressRange;
 
         [MethodImpl(Inline)]
-        public static AsmEmissionToken Define(OpUri uri, MemoryRange src, CaptureTermCode term)        
+        public static AsmEmissionToken Define(OpUri uri, MemoryRange src, ExtractTermCode term)        
             => new AsmEmissionToken(uri,src,term);
 
         [MethodImpl(Inline)]
@@ -51,7 +51,7 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        AsmEmissionToken(OpUri uri, MemoryRange src, CaptureTermCode term)
+        AsmEmissionToken(OpUri uri, MemoryRange src, ExtractTermCode term)
         {
             this.Uri = uri;
             this.AddressRange = src;

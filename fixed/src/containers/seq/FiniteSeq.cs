@@ -9,9 +9,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Z0.Root;
+    using Z0;
 
-    public readonly struct FiniteSeq<T> : IIndexedSeq<FiniteSeq<T>,T>
+    public readonly struct FiniteSeq<T> : IIndexedSeq<FiniteSeq<T>, T>, IFiniteSeq<T>
     {
         public static readonly FiniteSeq<T> Empty = default;
 
@@ -25,55 +26,55 @@ namespace Z0
         [MethodImpl(Inline)]
         public FiniteSeq(T[] src)
         {
-            this.Source = src;
+            this.Content = src;
             this.nonempty = true;
         }
 
         [MethodImpl(Inline)]
         public FiniteSeq(IEnumerable<T> src)
         {
-            this.Source = src.ToArray();
+            this.Content = src.ToArray();
             this.nonempty = true;
         }
 
         readonly bool nonempty;
 
-        readonly T[] Source;
-
-        public IEnumerable<T> Content
-            => Source;
+        public T[] Content {get;}
 
         public int Count 
-            => Source.Length;
+            => Content.Length;
+
+        IEnumerable<T> IContainer<IEnumerable<T>>.Content 
+            => Content;
 
         public bool empty()
             => !nonempty;
 
         public T this[int i] 
-            => Source[i];
+            => Content[i];
 
         [MethodImpl(Inline)]
         public bool Equals(FiniteSeq<T> rhs)
-            => Source.Equals(rhs.Source);
+            => Content.Equals(rhs.Content);
 
         public FiniteSeq<T> Concat(FiniteSeq<T> rhs)
-            => new FiniteSeq<T>(Source.Concat(rhs.Source));
+            => new FiniteSeq<T>(Content.Concat(rhs.Content));
 
         public FiniteSeq<Y> Select<Y>(Func<T, Y> selector)       
-             => Seq.finite(from x in Source select selector(x));
+             => Seq.finite(from x in Content select selector(x));
 
         public FiniteSeq<Z> SelectMany<Y, Z>(Func<T, FiniteSeq<Y>> lift, Func<T, Y, Z> project)
-            => Seq.finite(from x in Source
-                          from y in lift(x).Source
+            => Seq.finite(from x in Content
+                          from y in lift(x).Content
                           select project(x, y));
 
         public FiniteSeq<Y> SelectMany<Y>(Func<T, FiniteSeq<Y>> lift)
-            => Seq.finite(from x in Source
-                          from y in lift(x).Source
+            => Seq.finite(from x in Content
+                          from y in lift(x).Content
                           select y);
 
         public FiniteSeq<T> Where(Func<T, bool> predicate)
-            => Seq.finite(from x in Source where predicate(x) select x);
+            => Seq.finite(from x in Content where predicate(x) select x);
 
     }
 }

@@ -17,12 +17,12 @@ namespace Z0
                 where r.Id == id
                 select r.Resolved).FirstOrDefault();
 
-        public static Option<MemberLocationReport> MemberLocations(this IAsmContext context, AssemblyId src)
+        public static Option<MemberLocationReport> LocationReport(this IAsmContext context, AssemblyId src)
             => from a in context.ResolvedAssembly(src)
                 let methods = a.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps()
                 select MemberLocationReport.Create(src, methods);
 
-        public static MemberLocationReport MemberLocations(AssemblyId id, Assembly src)
+        public static MemberLocationReport LocationReport(AssemblyId id, Assembly src)
             => MemberLocationReport.Create(id, src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps());
 
         public static AsmEmissionReport Emissions(AssemblyId id, AsmEmissionTokens<OpUri>[] emissions, AsmEmissionKind kind)
@@ -31,7 +31,7 @@ namespace Z0
         public static DataResourceReport Resources(AssemblyId id, DataResourceIndex resources)
             => DataResourceReport.Create(id, resources);
 
-        public static AsmParseReport ParsedEncodings(ApiHostUri host, params AsmParseRecord[] records)
-            => AsmParseReport.Create(records);
+        public static ParsedOpReport ParsedEncodings(ApiHostUri host, params ParsedOpRecord[] records)
+            => ParsedOpReport.Create(records);
     }
 }

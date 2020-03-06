@@ -47,7 +47,7 @@ namespace Z0
             if(blocklen != src.NativeCode.Length)
                 throw AppException.Define(InstructionBlockSizeMismatch(src.Origin, src.NativeCode.Length, blocklen));
         
-            var parsed = ParsedEncoding.Define(op, src.TermCode, src.NativeCode.Data);
+            var parsed = ParsedOpExtract.Define(op, src.TermCode, src.NativeCode.Data);
             var instructions = AsmInstructionList.Create(src.Decoded, src.NativeCode.Data);
             //return AsmFunction.Define(parsed, src.Decoded);
             return AsmFunction.Define(parsed, instructions);

@@ -34,7 +34,7 @@ namespace Z0
         public void Write(OpIdentity id, Span<byte> data, int? idpad = null)
             => StreamOut.WriteLine(HexLine.Define(id, data.ToArray()).Format(idpad ?? 0));
 
-        public void Write(in AsmOpExtract src, int? idpad = null)
+        public void Write(in CapturedOp src, int? idpad = null)
             => Write(src.Id, src.RawBits.Bytes, idpad);
         
         public void Dispose()

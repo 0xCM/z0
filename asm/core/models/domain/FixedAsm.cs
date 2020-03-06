@@ -43,7 +43,7 @@ namespace Z0
         /// <summary>
         /// The encoded asm bytes
         /// </summary>
-        public MemoryEncoding Encoded
+        public MemoryExtract Encoded
         {
             [MethodImpl(Inline)]
             get => Code.Data;

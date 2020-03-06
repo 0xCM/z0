@@ -89,21 +89,25 @@ namespace Z0
         public static ICilFunctionWriter CilWriter(this IAsmContext context, FilePath dst)
             => CilFunctionWriter.Create(context,dst);
 
+        [MethodImpl(Inline)]
+        public static IAssemblyCapture AssemblyCapture(this IAsmContext context)
+            => Z0.AssemblyCapture.Create(context);
+ 
         /// <summary>
         /// Creates a capture workflow where the unit-of-work is determined by an api host
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmHostCapture HostCapture(this IAsmContext context)
+        public static IHostCapture HostCaptureWorkflow(this IAsmContext context)
             => AsmHostCapture.Create(context);
  
         [MethodImpl(Inline)]
-        public static IAsmMemoryCapture MemoryCapture(this IAsmContext context)
-            => AsmMemoryCapture.Create(context);
+        public static IMemoryCapture MemoryCapture(this IAsmContext context)
+            => Z0.MemoryCapture.Create(context);
 
         [MethodImpl(Inline)]
-        public static IAsmOpExtractParser ExtractReportParser(this IAsmContext context, byte[] buffer)
-            => AsmOpExtractParser.Create(context, buffer);
+        public static IOpExtractParser ExtractReportParser(this IAsmContext context, byte[] buffer)
+            => OpExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostUri host)

@@ -39,7 +39,7 @@ namespace Z0
     /// <summary>
     /// Defines a grouping construct that serves as evidence for emission of related functions
     /// </summary>
-    public readonly struct AsmEmissionTokens<S> : IAnyFiniteSeq<AsmEmissionToken>
+    public readonly struct AsmEmissionTokens<S> : IFiniteSeq<AsmEmissionToken>
         where S : IUri
     {
         /// <summary>

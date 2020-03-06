@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The source items</param>
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Inline)]   
-        public static IList<T> list<T>(params T[] src)
+        public static List<T> list<T>(params T[] src)
             => src.ToList();
 
         /// <summary>

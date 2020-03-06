@@ -40,7 +40,6 @@ namespace  Z0
     /// </summary>
     /// <typeparam name="S">The container type</typeparam>
     public interface IContainer<A>
-        //where S : IContainer<S>, new()
     {
         A Content {get;}
     }
@@ -51,7 +50,6 @@ namespace  Z0
     /// <typeparam name="S">The container type</typeparam>
     /// <typeparam name="T">The content aggregate</typeparam>
     public interface IContainer<C,A> : IContainer<A>
-        //where C : IContainer<C,A>, new()
     {
         
     }

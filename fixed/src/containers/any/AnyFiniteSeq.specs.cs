@@ -12,29 +12,45 @@ namespace Z0
     
     using static Root;
 
-    public interface IAnyFiniteSeq : IContentAggregate
+    /// <summary>
+    /// Characterizes any refiication
+    /// </summary>
+    /// <typeparam name="T">The ensconsed </typeparam>
+    public interface IAny<T> : IFormattable<T>, IEquatable<T>
+        where T : IAny<T>
+    {
+        
+    }
+
+    public interface IFiniteSeq : IContentAggregate
     {
     }
 
-    public interface IAnyFiniteSeq<T> : IAnyFiniteSeq, IContainer<T[]>,  IContentAggregate<T>
+    public interface IFiniteSeq<T> : IFiniteSeq, IContainer<T[]>,  IContentAggregate<T>
     {
         IEnumerable<T> IContentAggregate<T>.Items    
             => Content;
 
         int Length
             => Content.Length;
+        
+        T this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => Content[index];
+        }
     }
 
-    public delegate C AnyFiniteSeqFactory<T,C>(T[] terms)
-        where C : IAnyFiniteSeq<C,T>, new();         
+    public delegate C FiniteSeqFactory<T,C>(T[] terms)
+        where C : IFiniteSeq<C,T>, new();         
 
-    public interface IAnyFiniteSeq<C,T> :  IAnyFiniteSeq<T>, IAny<C>, IContainer<C,T[],T>
-        where C : IAnyFiniteSeq<C,T>, new()         
+    public interface IFiniteSeq<C,T> :  IFiniteSeq<T>, IAny<C>, IContainer<C,T[],T>
+        where C : IFiniteSeq<C,T>, new()         
     {
         /// <summary>
         ///  A self-hosted factory
         /// </summary>
-        AnyFiniteSeqFactory<T,C> Factory {get;}
+        FiniteSeqFactory<T,C> Factory {get;}
         
         bool IEquatable<C>.Equals(C src)
             => Enumerable.SequenceEqual(this, src);

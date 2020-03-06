@@ -38,7 +38,7 @@ namespace Z0
         }
         
         [ReportField(F.TermCode)]
-        public CaptureTermCode TermCode {get;}
+        public ExtractTermCode TermCode {get;}
 
         [ReportField(F.Size)]
         public int Size {get;}

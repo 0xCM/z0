@@ -1,0 +1,53 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
+    
+    using static Root;
+
+    public readonly struct MemoryExtractParser : IMemoryExtractParser
+    {
+        public IAsmContext Context {get;}
+
+        readonly byte[] Buffer;
+
+        [MethodImpl(Inline)]
+        public static MemoryExtractParser Create(IAsmContext context, int? bufferlen)
+            => new MemoryExtractParser(context, bufferlen);
+
+        [MethodImpl(Inline)]
+        public static MemoryExtractParser Create(IAsmContext context, byte[] buffer)
+            => new MemoryExtractParser(context, buffer);
+
+        [MethodImpl(Inline)]
+        MemoryExtractParser(IAsmContext context, byte[] buffer)
+        {
+            this.Context = context;
+            this.Buffer = buffer;
+        }
+
+        [MethodImpl(Inline)]
+        MemoryExtractParser(IAsmContext context, int? bufferlen)
+            : this(context, new byte[bufferlen ?? context.DefaultBufferLength])
+        {}
+
+        public Option<MemoryExtract> Parse(MemoryExtract src)
+        {
+            var parser = Context.PatternParser(Buffer.Clear());
+            var status = parser.Parse(src);            
+            var matched = parser.Result;
+            var succeeded = matched.IsSome() && status.Success();
+            return succeeded 
+                ? MemoryExtract.Define(src.Address, parser.Parsed.ToArray()) 
+                : none<MemoryExtract>();
+        }               
+    }
+
+}        
+

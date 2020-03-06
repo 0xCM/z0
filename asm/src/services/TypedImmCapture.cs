@@ -186,10 +186,10 @@ namespace Z0
             }
             
             [MethodImpl(Inline)]
-            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
+            public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              Context.OpExtractor().Extract(
+                              Context.OpExtractor().Capture(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
@@ -215,10 +215,10 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
+            public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              Context.OpExtractor().Extract(
+                              Context.OpExtractor().Capture(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),
@@ -243,10 +243,10 @@ namespace Z0
                 this.Resolver = resolver;
             }
             
-            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
+            public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                                Context.OpExtractor().Extract(
+                                Context.OpExtractor().Capture(
                                     exchange,
                                     Resolver.Id.WithImm8(imm8),
                                     Resolver.@delegate(imm8)),
@@ -272,10 +272,10 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public AsmFunction Capture(in AsmCaptureExchange exchange, byte imm8)
+            public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
                 => Context.FunctionDecoder()
                           .DecodeFunction(
-                              Context.OpExtractor().Extract(
+                              Context.OpExtractor().Capture(
                                   exchange,
                                   Resolver.Id.WithImm8(imm8),
                                   Resolver.@delegate(imm8)),

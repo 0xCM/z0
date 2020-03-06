@@ -13,16 +13,16 @@ namespace Z0
 
     public static class AsmCoreServices
     {
-        public static Option<AsmParseReport> LoadParsedEncodings(this IAsmContext context, ApiHostUri host, char? delimiter = null)
+        public static Option<ParsedOpReport> LoadParsedEncodings(this IAsmContext context, ApiHostUri host, char? delimiter = null)
         {
             var path = context.EmissionPaths().ParsedCapturePath(host);
             var sep = delimiter ?? text.pipe();
-            var model = AsmParseReport.Empty;
+            var model = ParsedOpReport.Empty;
             
             try
             {            
-                var records = new List<AsmParseRecord>();
-                var headers = Reports.headers<AsmParseRecord>();
+                var records = new List<ParsedOpRecord>();
+                var headers = Reports.headers<ParsedOpRecord>();
                 var count = 0;
                 
                 using var reader = path.Reader();
@@ -45,7 +45,7 @@ namespace Z0
             catch(Exception e)
             {
                 term.error(e);
-                return none<AsmParseReport>();
+                return none<ParsedOpReport>();
             }
         }
 
@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
-        public static IAsmOpExtractor Capture(this IAsmContext context, IAsmOpExtractor ops)
+        public static IOpCaptureService Capture(this IAsmContext context, IOpCaptureService ops)
             => ops;
 
             //=> AsmCaptureService.Create(context, ops);
@@ -83,24 +83,24 @@ namespace Z0
             => AsmFunctionEmitter.Create(context, formatter);
 
         [MethodImpl(Inline)]
-        public static IAsmHostExtractor HostExtractor(this IAsmContext context, int? bufferlen = null)
-            => AsmHostExtractor.Create(context, bufferlen);
+        public static IHostOpExtractor HostExtractor(this IAsmContext context, int? bufferlen = null)
+            => HostOpExtractor.Create(context, bufferlen);
 
         [MethodImpl(Inline)]
-        public static IAsmMemoryExtractor MemoryExtractor(this IAsmContext context, byte[] buffer)
-            => AsmMemoryExtractor.Create(context, buffer);
+        public static IMemoryExtractor MemoryExtractor(this IAsmContext context, byte[] buffer)
+            => Z0.MemoryExtractor.Create(context, buffer);
 
         [MethodImpl(Inline)]
-        public static IAsmEncodingParser EncodingParser(this IAsmContext context, byte[] buffer)
-            => AsmEncodingParser.Create(context, buffer);
+        public static IMemoryExtractParser EncodingParser(this IAsmContext context, byte[] buffer)
+            => MemoryExtractParser.Create(context, buffer);
 
         [MethodImpl(Inline)]
         public static ByteParser<EncodingPatternKind> PatternParser(this IAsmContext context, byte[] buffer)
             => ByteParser<EncodingPatternKind>.Create(context, EncodingPatterns.Default,  buffer);
 
         [MethodImpl(Inline)]
-        public static IAsmOpExtractor OpExtractor(this IAsmContext context)
-            => AsmOpExtractor.Create(context);
+        public static IOpCaptureService OpExtractor(this IAsmContext context)
+            => OpCaptureService.Create(context);
 
         /// <summary>
         /// Instantiates a contextual code writer services that targets a specified file path
@@ -165,7 +165,7 @@ namespace Z0
         /// <param name="context">The context within which the flow will be created</param>
         /// <param name="source">The instruction source</param>
         /// <param name="triggers">The triggers that fire when instructions satisfy criterea of interest</param>
-        public static IAsmInstructionWorkflow InstructionFlow(this IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
+        public static IAsmInstructionFlow InstructionFlow(this IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
 
         /// <summary>
@@ -179,27 +179,23 @@ namespace Z0
             => AsmEncodingWriter.Create(context, dst);
 
         [MethodImpl(Inline)]
-        public static IAsmHostAddresses HostAddressService(this IAsmContext src)
-            => AsmHostAddresses.Create(src);
+        public static IMemberLocator MemberLocator(this IAsmContext src)
+            => Z0.MemberLocator.Create(src);
 
-        [MethodImpl(Inline)]
-        public static IAsmAssemblyAddresses AssemblyAddressService(this IAsmContext src)
-            => AsmAssemblyAddresses.Create(src);
+        public static IEnumerable<LocatedMember> LocatedMembers(this IAsmContext context, AssemblyId src)
+            => context.ResolvedAssembly(src).MapValueOrElse(a => Z0.MemberLocator.Create(context).Members(a), () => array<LocatedMember>());
 
-        public static IEnumerable<OpAddress> OpAddresses(this IAsmContext context, AssemblyId src)
-            => context.ResolvedAssembly(src).MapValueOrElse(a => AsmAssemblyAddresses.Create(context).Addresses(a), () => array<OpAddress>());
+        public static IEnumerable<LocatedMember> LocatedMembers(this IAsmContext context, Type host)
+            => Z0.MemberLocator.Create(context).Members(host);
 
-        public static IEnumerable<OpAddress> OpAddresses(this IAsmContext context, Type host)
-            => AsmHostAddresses.Create(context).Addresses(host);
-
-        public static AsmCaptureExchange CaptureExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
+        public static OpExtractExchange CaptureExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
         {
             const int DefaultBufferLen = 1024*8;
 
-            var control = AsmExtractControl.Create(context, observer);
+            var control = ExtractControl.Create(context, observer);
             var cBuffer = new byte[size ?? DefaultBufferLen];
             var sBuffer = new byte[size ?? DefaultBufferLen];
-            return AsmCaptureExchange.Define(control, cBuffer, sBuffer);
+            return OpExtractExchange.Define(control, cBuffer, sBuffer);
         }        
 
         public static IEnumerable<AssemblyId> ActiveAssemblies(this IAsmContext context)

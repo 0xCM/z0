@@ -15,11 +15,24 @@ namespace Z0
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {
+
+        public void host_workflow_2()
+        {
+            var extractor = Context.HostExtractor();
+            foreach(var catalog in Context.Compostion.Catalogs)   
+            {
+                foreach(var host in catalog.ApiHosts)
+                {
+                    var extraction = extractor.Extract(host);
+                    
+                }
+            }
+        }
         public void host_workflow()
         {                    
-            var extracts = list<AsmHostExtract>();            
+            var extracts = list<CapturedHost>();            
             var paths = Context.EmissionPaths();                    
-            var workflow = Context.HostCapture();
+            var workflow = Context.HostCaptureWorkflow();
             var memcap = Context.MemoryCapture();
             var memfail = list<OpUri>();
             foreach(var extract in workflow.Execute())
@@ -41,14 +54,14 @@ namespace Z0
                 Trace(AppMsg.Warn($"Memory capture failed for {fail}"));
         }
 
-        bool MemcapCheck(IAsmMemoryCapture memcap, AsmCode src)
+        bool MemcapCheck(IMemoryCapture memcap, AsmCode src)
         {
             var section = new string('-',120);
             var captured = memcap.Capture(src.BaseAddress);
             if(!captured)
                 return false;
 
-            var data = captured.Value.Data.Parsed;
+            var data = captured.Value.ExtractedData.Parsed;
             if(data.Length != src.Length)
                 return false;
             return true;

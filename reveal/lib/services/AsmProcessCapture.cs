@@ -89,7 +89,7 @@ namespace Z0
         Option<ClrMethod> GetRuntimeMethod(MethodInfo src)
             => Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
 
-		Option<AsmOpExtract> CaptureNative(MethodInfo method, ClrMethod runtime)
+		Option<CapturedOp> CaptureNative(MethodInfo method, ClrMethod runtime)
 		{
 			var codeInfo = runtime.HotColdInfo;	
             var id = Identity.identify(method);
@@ -124,9 +124,9 @@ namespace Z0
             }
 
             var location = MemoryRange.Define(address, address + size);            
-            var result = AsmCaptureOutcome.Define(AsmCaptureState.Empty, location.Start, location.End, CaptureTermCode.CTC_MSDIAG);
-            var bits = AsmCaptureBits.Define(address, buffer,buffer);
-			return AsmOpExtract.Define(id, method, location, bits, result.TermCode);                    
+            var result = ExtractionOutcome.Define(OpExtractionState.Empty, location.Start, location.End, ExtractTermCode.CTC_MSDIAG);
+            var bits = ParsedMemoryExtract.Define(address, buffer,buffer);
+			return CapturedOp.Define(id, method, location, bits, result.TermCode);                    
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Z0
                 foreach(var def in defintions)
                 {
                     var m = def.MakeGenericMethod(t);
-                    writer.WriteMember(ops.Extract(in exchange,m.Identify(), m));
+                    writer.WriteMember(ops.Capture(in exchange,m.Identify(), m));
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace Z0
 
             using var target = NativeTestWriter();
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
-                target.WriteMember(ops.Extract(in exchange, m.Identify(), m));
+                target.WriteMember(ops.Capture(in exchange, m.Identify(), m));
         }
 
         static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
@@ -94,21 +94,21 @@ namespace Z0
             using var target = NativeTestWriter();
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            target.WriteMember(ops.Extract(in exchange, dAnd.Identify(), dAnd));
+            target.WriteMember(ops.Capture(in exchange, dAnd.Identify(), dAnd));
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            target.WriteMember(ops.Extract(in exchange, mAnd.Identify(), mAnd));
+            target.WriteMember(ops.Capture(in exchange, mAnd.Identify(), mAnd));
 
             var dShuffle = shuffler(4);
-            target.WriteMember(ops.Extract(in exchange, dShuffle.Identify(), dShuffle));
+            target.WriteMember(ops.Capture(in exchange, dShuffle.Identify(), dShuffle));
 
             var dShift = shifter(4);
-            target.WriteMember(ops.Extract(in exchange, dShift.Identify(), dShift));
+            target.WriteMember(ops.Capture(in exchange, dShift.Identify(), dShift));
 
             var methods = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();
             
             foreach(var m in methods)
-                target.WriteMember(ops.Extract(in exchange, m.Identify(), m));
+                target.WriteMember(ops.Capture(in exchange, m.Identify(), m));
             
         }
 
@@ -126,7 +126,7 @@ namespace Z0
 
             for(var i=0; i<src.Length; i++)
             {
-                var capture = ops.Extract(in exchange, src[i].Identify(), src[i]);
+                var capture = ops.Capture(in exchange, src[i].Identify(), src[i]);
                 //PostMessage(capture.FormatCode());
             }
         }

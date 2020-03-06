@@ -16,13 +16,13 @@ namespace Z0.Asm
     {           
         public static AsmFunction Empty => new AsmFunction(OpDescriptor.Empty, AsmCode.Empty, 0, AsmInstructionList.Empty);
 
-        public static AsmFunction Define(ParsedEncoding encoding,  AsmInstructionList instructions)
+        public static AsmFunction Define(ParsedOpExtract encoding,  AsmInstructionList instructions)
         {         
-            var code = AsmCode.Define(encoding.Operation.Id, encoding.ParsedData);
+            var code = AsmCode.Define(encoding.Operation.Id, encoding.Content);
             return new AsmFunction(encoding.Operation, code, encoding.TermCode, instructions);
         }
 
-        AsmFunction(OpDescriptor op, AsmCode code, CaptureTermCode term, AsmInstructionList instructions)
+        AsmFunction(OpDescriptor op, AsmCode code, ExtractTermCode term, AsmInstructionList instructions)
         {
             this.Id = op.Id;
             this.Operation = op;
@@ -54,7 +54,7 @@ namespace Z0.Asm
         /// <summary>
         /// Specifies the reason for capture termination
         /// </summary>
-        public CaptureTermCode TermCode {get;}
+        public ExtractTermCode TermCode {get;}
 
         /// <summary>
         /// The defining CIL

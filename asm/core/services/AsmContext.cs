@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using static Z0.Root;
+    
+    using static Root;
 
     public sealed class AsmContext : IAsmContext 
     {               

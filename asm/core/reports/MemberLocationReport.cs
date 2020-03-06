@@ -14,22 +14,6 @@ namespace Z0
 
     public class MemberLocationReport : IReport<MemberLocationRecord>
     {
-        // public static MemberLocationReport HostReport(ApiHost host)
-        // {
-        //     var src = host.EncodedOps().ToArray();
-        //     var records = new MemberLocationRecord[src.Length];
-        //     var lastaddress = MemoryAddress.Zero;
-        //     for(var i=0; i< src.Length; i++)
-        //     {
-        //         (var id, var address)  = src[i];
-        //         var gap = lastaddress.NonZero ? address - lastaddress : MemoryAddress.Zero;
-        //         records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
-        //         lastaddress =  address;
-        //     }
-
-        //     return new MemberLocationReport(host, records);
-        // }
-
         public static MemberLocationReport Create(AssemblyId assemblyid, IEnumerable<MethodInfo> methods)
         {   
             var src = (from m in methods

@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmCode(OpIdentity id,  MemoryEncoding data)
+        public AsmCode(OpIdentity id,  MemoryExtract data)
         {
             Code = AsmCode.Define(id, data);
         }

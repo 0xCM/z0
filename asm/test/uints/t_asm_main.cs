@@ -50,7 +50,7 @@ namespace Z0
 
         static void buffer_client(IAsmContext context)
         {
-            var state = new List<AsmCaptureState>();
+            var state = new List<OpExtractionState>();
             var f = typeof(gmath).Method(nameof(gmath.alteven))
                                  .MapRequired(m => m.GetGenericMethodDefinition()
                                  .MakeGenericMethod(typeof(byte)));
@@ -64,7 +64,7 @@ namespace Z0
             void OnExecute(in AsmBuffers buffers)
             {            
                 var capture = context.Capture(buffers.Capture);
-                var captured = capture.Extract(buffers.Exchange, f);
+                var captured = capture.Capture(buffers.Exchange, f);
                 hexout.Write(captured);
                 rawout.Write(captured);
                 asmout.Write(decoder.DecodeFunction(captured));
@@ -209,7 +209,7 @@ namespace Z0
             var decoder = Context.FunctionDecoder();
             var capture = Context.Capture(buffers.Capture);
             
-            var data = capture.Extract(buffers.Exchange, src);        
+            var data = capture.Capture(buffers.Exchange, src);        
             hexout.Write(data);
             rawout.Write(data);
             asmout.Write(decoder.DecodeFunction(data));
@@ -226,7 +226,7 @@ namespace Z0
             var capture = Context.Capture(buffers.Capture);
             var decoder = Context.FunctionDecoder();
             
-            var data = capture.Extract(buffers.Exchange, src.Identify(), src);
+            var data = capture.Capture(buffers.Exchange, src.Identify(), src);
             hexout.Write(data);
             rawout.Write(data);
             asmout.Write(decoder.DecodeFunction(data));
@@ -245,12 +245,12 @@ namespace Z0
             var capture = Context.Capture(buffers.Capture);
             var decoder = Context.FunctionDecoder();
 
-            var fData = capture.Extract(buffers.Exchange, f.Identify(), f);
+            var fData = capture.Capture(buffers.Exchange, f.Identify(), f);
             hexout.Write(fData);
             rawout.Write(fData);
             asmout.Write(decoder.DecodeFunction(fData));
 
-            var gData = capture.Extract(buffers.Exchange, g.Identify(), g);
+            var gData = capture.Capture(buffers.Exchange, g.Identify(), g);
             hexout.Write(gData);
             rawout.Write(fData);
             asmout.Write(decoder.DecodeFunction(gData));
@@ -271,7 +271,7 @@ namespace Z0
             var f = dynop.DynamicOp;
             var z1 = f.Invoke(x,y);
             var decoder = Context.FunctionDecoder();
-            var captured = Context.OpExtractor().Extract(buffers.Exchange, dynop.Id, dynop);
+            var captured = Context.OpExtractor().Capture(buffers.Exchange, dynop.Id, dynop);
             var asm = decoder.DecodeFunction(captured,false);        
 
             iter(asm.Instructions, i => Trace(i));  

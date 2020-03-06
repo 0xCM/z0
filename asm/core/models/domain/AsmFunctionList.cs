@@ -9,7 +9,7 @@ namespace Z0.Asm
     using Z0;
     using static Root;
 
-    public readonly struct AsmFunctionList : IAnyFiniteSeq<AsmFunctionList, AsmFunction>
+    public readonly struct AsmFunctionList : IFiniteSeq<AsmFunctionList, AsmFunction>
     {        
         public static AsmFunctionList Empty = new AsmFunctionList(new AsmFunction[]{});
         
@@ -23,7 +23,7 @@ namespace Z0.Asm
         
         public AsmFunction[] Content {get;}
 
-        public AnyFiniteSeqFactory<AsmFunction, AsmFunctionList> Factory
+        public FiniteSeqFactory<AsmFunction, AsmFunctionList> Factory
             => Define;        
     }
 }

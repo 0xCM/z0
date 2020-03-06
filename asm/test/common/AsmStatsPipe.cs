@@ -50,21 +50,5 @@ namespace Z0
             => AsmStats.Create(FunctionCount);
     }
 
-    readonly struct AsmStatsPipe : IAsmFunctionPipe
-    {
-        public static IAsmFunctionPipe Create(AsmStatsCollector dst)
-            => new AsmStatsPipe(dst);
-
-        public ObjectReceiver<AsmFunction> Receiver {get;}
-
-        AsmStatsPipe(AsmStatsCollector dst)
-        {
-
-            void Receive(in AsmFunction f)        
-                => dst.IncrementFunctionCount();                
-
-            this.Receiver = Receive;
-        }
-    }
 
 }

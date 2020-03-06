@@ -27,11 +27,11 @@ namespace Z0
             this.Context = context;
         }
 
-        Option<CilFunction> GetCil(AsmOpExtract src)
+        Option<CilFunction> GetCil(CapturedOp src)
             => from c in Context.ClrIndex.FindCil(src.Method.MetadataToken)
                select c.WithSig(src.Method.Signature());
 
-        public AsmFunction DecodeFunction(AsmOpExtract src, bool emitcil = true)
+        public AsmFunction DecodeFunction(CapturedOp src, bool emitcil = true)
         {
             var list = Context.DecodeInstructions(src.Code);
             var block = Asm.AsmInstructionBlock.Define(src.Code, list.Require(), src.TermCode);
@@ -41,10 +41,10 @@ namespace Z0
             return f;
         }
 
-        public AsmFunction DecodeFunction(ParsedEncoding parsed)
+        public AsmFunction DecodeFunction(ParsedOpExtract parsed)
         {
             var op = parsed.Operation;
-            var code = AsmCode.Define(op.Id, parsed.ParsedData);
+            var code = AsmCode.Define(op.Id, parsed.Content);
             var instructions = Context.DecodeInstructions(code).Require();
             return AsmFunction.Define(parsed, instructions);
         }

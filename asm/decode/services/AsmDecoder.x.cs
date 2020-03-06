@@ -14,7 +14,7 @@ namespace Z0
 
     public static class AsmDecodingOps
     {
-        public static Option<AsmInstructionList> DecodeInstructions(this IAsmContext context, MemoryEncoding src)
+        public static Option<AsmInstructionList> DecodeInstructions(this IAsmContext context, MemoryExtract src)
         {
             try
             {
