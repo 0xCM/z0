@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static RngMath;
 
     public class Pcg32 : IRngNav<uint>
     {

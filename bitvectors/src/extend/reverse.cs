@@ -6,14 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
     using static Root;
 
     partial class BitVectorX
     {
-
         /// <summary>
         /// Reverses the vector bits
         /// </summary>

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static RngMath;
+    using static math;
 
     /// <summary>
     /// Implements a 16-bit random number generator

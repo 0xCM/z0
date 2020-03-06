@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Root;
 
@@ -26,7 +25,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.xnor(a,b);
-
         }
     }
 }

@@ -25,7 +25,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.add(a,b);
-
         }
     }
 }
