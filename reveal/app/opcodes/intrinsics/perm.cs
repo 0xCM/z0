@@ -18,7 +18,7 @@ namespace Z0.OpCodes
         static Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> vand_delgate()
         {
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            var mDel = mAnd.BinOpCalli<Vector256<uint>>();
+            var mDel = mAnd.EmitBinaryOp<Vector256<uint>>(true);
             return mDel;
 
         }

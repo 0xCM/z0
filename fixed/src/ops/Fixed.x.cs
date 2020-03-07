@@ -94,12 +94,12 @@ namespace Z0
             => src;
 
         [MethodImpl(Inline)]
-        public static Vector256<T> Apply<T>(this UnaryOp256 f, Vector256<T> x)
+        public static Vector256<T> Apply<T>(this FixedUnaryOp256 f, Vector256<T> x)
            where T : unmanaged
                 => f(x.ToFixed()).ToVector<T>();
 
         [MethodImpl(Inline)]
-        public static Vector256<T> Apply<T>(this BinaryOp256 f, Vector256<T> x, Vector256<T> y)
+        public static Vector256<T> Apply<T>(this FixedBinaryOp256 f, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             var zf = f(Unsafe.As<Vector256<T>,Fixed256>(ref x), Unsafe.As<Vector256<T>,Fixed256>(ref y));
@@ -112,104 +112,104 @@ namespace Z0
                 => f(x.ToFixed()).ToVector<T>();
 
         [MethodImpl(Inline)]
-        public static Vector128<T> Apply<T>(this BinaryOp128 f, Vector128<T> x, Vector128<T> y)
+        public static Vector128<T> Apply<T>(this FixedBinaryOp128 f, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
 
         [MethodImpl(Inline)]
-        public static UnaryOp8 ToFixed(this Func<byte,byte> f)
+        public static FixedUnaryOp8 ToFixed(this Func<byte,byte> f)
             => (Fixed8 a) =>f(a.Data);
 
         [MethodImpl(Inline)]
-        public static UnaryOp8 ToFixed(this Func<sbyte,sbyte> f)
+        public static FixedUnaryOp8 ToFixed(this Func<sbyte,sbyte> f)
             => (Fixed8 a) =>f((sbyte)a.Data);
 
         [MethodImpl(Inline)]
-        public static UnaryOp16 ToFixed(this Func<ushort,ushort> f)
+        public static FixedUnaryOp16 ToFixed(this Func<ushort,ushort> f)
             => (Fixed16 a) =>f(a.Data);
 
         [MethodImpl(Inline)]
-        public static UnaryOp16 ToFixed(this Func<short,short> f)
+        public static FixedUnaryOp16 ToFixed(this Func<short,short> f)
             => (Fixed16 a) =>f((short)a.Data);
 
         [MethodImpl(Inline)]
-        public static UnaryOp32 ToFixed(this Func<uint,uint> f)
+        public static FixedUnaryOp32 ToFixed(this Func<uint,uint> f)
             => (Fixed32 a) =>f(a.Data);
 
         [MethodImpl(Inline)]
-        public static UnaryOp32 ToFixed(this Func<int,int> f)
+        public static FixedUnaryOp32 ToFixed(this Func<int,int> f)
             => (Fixed32 a) =>f((int)a.Data);
 
         [MethodImpl(Inline)]
-        public static UnaryOp64 ToFixed(this Func<ulong,ulong> f)
+        public static FixedUnaryOp64 ToFixed(this Func<ulong,ulong> f)
             => (Fixed64 a) =>f(a.Data);
 
         [MethodImpl(Inline)]
-        public static UnaryOp64 ToFixed(this Func<long,long> f)
+        public static FixedUnaryOp64 ToFixed(this Func<long,long> f)
             => (Fixed64 a) =>f((long)a.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 ToFixed(this Func<sbyte,sbyte,sbyte> f)
+        public static FixedBinaryOp8 ToFixed(this Func<sbyte,sbyte,sbyte> f)
             => (Fixed8 a, Fixed8 b) =>f((sbyte)a.Data, (sbyte)b.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 ToFixed(this Func<byte,byte,byte> f)
+        public static FixedBinaryOp8 ToFixed(this Func<byte,byte,byte> f)
             => (Fixed8 a, Fixed8 b) =>f(a.Data, b.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 ToFixed(this Func<short,short,short> f)
+        public static FixedBinaryOp16 ToFixed(this Func<short,short,short> f)
             => (Fixed16 a, Fixed16 b) =>f((short)a.Data, (short)b.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 ToFixed(this Func<ushort,ushort,ushort> f)
+        public static FixedBinaryOp16 ToFixed(this Func<ushort,ushort,ushort> f)
             => (Fixed16 a, Fixed16 b) =>f(a.Data, b.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 ToFixed(this Func<int,int,int> f)
+        public static FixedBinaryOp32 ToFixed(this Func<int,int,int> f)
             => (Fixed32 a, Fixed32 b) =>f((int)a.Data, (int)b.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 ToFixed(this Func<uint,uint,uint> f)
+        public static FixedBinaryOp32 ToFixed(this Func<uint,uint,uint> f)
             => (Fixed32 a, Fixed32 b) =>f(a.Data, b.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 ToFixed(this Func<ulong,ulong,ulong> f)
+        public static FixedBinaryOp64 ToFixed(this Func<ulong,ulong,ulong> f)
             => (Fixed64 a, Fixed64 b) =>f(a.Data, b.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 ToFixed(this Func<long,long,long> f)
+        public static FixedBinaryOp64 ToFixed(this Func<long,long,long> f)
             => (Fixed64 a, Fixed64 b) =>f((long)a.Data, (long)b.Data);
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 ToFixedBinOp(this MethodInfo f, NumericType<byte> k)
+        public static FixedBinaryOp8 ToFixedBinOp(this MethodInfo f, NumericType<byte> k)
             => f.CreateDelegate<Func<byte,byte,byte>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp8 ToFixedBinOp(this MethodInfo f, NumericType<sbyte> k)
+        public static FixedBinaryOp8 ToFixedBinOp(this MethodInfo f, NumericType<sbyte> k)
             => f.CreateDelegate<Func<sbyte,sbyte,sbyte>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 ToFixedBinOp(this MethodInfo f, NumericType<ushort> k)
+        public static FixedBinaryOp16 ToFixedBinOp(this MethodInfo f, NumericType<ushort> k)
             => f.CreateDelegate<Func<ushort,ushort,ushort>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp16 ToFixedBinOp(this MethodInfo f, NumericType<short> k)
+        public static FixedBinaryOp16 ToFixedBinOp(this MethodInfo f, NumericType<short> k)
             => f.CreateDelegate<Func<short,short,short>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 ToFixedBinOp(this MethodInfo f, NumericType<uint> k)
+        public static FixedBinaryOp32 ToFixedBinOp(this MethodInfo f, NumericType<uint> k)
             => f.CreateDelegate<Func<uint,uint,uint>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp32 ToFixedBinOp(this MethodInfo f, NumericType<int> k)
+        public static FixedBinaryOp32 ToFixedBinOp(this MethodInfo f, NumericType<int> k)
             => f.CreateDelegate<Func<int,int,int>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 ToFixedBinOp(this MethodInfo f, NumericType<ulong> k)
+        public static FixedBinaryOp64 ToFixedBinOp(this MethodInfo f, NumericType<ulong> k)
             => f.CreateDelegate<Func<ulong,ulong,ulong>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static BinaryOp64 ToFixedBinOp(this MethodInfo f, NumericType<long> k)
+        public static FixedBinaryOp64 ToFixedBinOp(this MethodInfo f, NumericType<long> k)
             => f.CreateDelegate<Func<long,long,long>>().ToFixed();
     }
 }

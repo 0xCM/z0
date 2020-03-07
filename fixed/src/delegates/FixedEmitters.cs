@@ -15,46 +15,44 @@ namespace Z0
         where R : IFixed;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed8 Emitter8();
+    public delegate Fixed8 FixedEmitter8();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed16 Emitter16();
+    public delegate Fixed16 FixedEmitter16();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed32 Emitter32();
+    public delegate Fixed32 FixedEmitter32();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed64 Emitter64();
+    public delegate Fixed64 FixedEmitter64();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128 Emitter128();
+    public delegate Fixed128 FixedEmitter128();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256 Emitter256();
+    public delegate Fixed256 FixedEmitter256();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed8 Emitter8<T>()
+    public delegate Fixed8 FixedEmitter8<T>()
         where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed16 Emitter16<T>()
+    public delegate Fixed16 FixedEmitter16<T>()
         where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed32 Emitter32<T>()
+    public delegate Fixed32 FixedEmitter32<T>()
         where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed64 Emitter64<T>()
+    public delegate Fixed64 FixedEmitter64<T>()
         where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128 Emitter128<T>()
+    public delegate Fixed128 FixedEmitter128<T>()
         where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256 Emitter256<T>()
+    public delegate Fixed256 FixedEmitter256<T>()
         where T : unmanaged;
-
-
 }

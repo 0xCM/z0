@@ -14,14 +14,14 @@ namespace Z0
     using static Nats;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVImm8Resolver<V> : IImm8Resolver<V>
+    public interface IImm8VResolver<V> : IImm8Resolver<V>
         where V : struct
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryImm8Resolver<W,V> : IVImm8Resolver<V>
+    public interface IImm8VUnaryResolver<W,V> : IImm8VResolver<V>
         where V : struct
         where W : unmanaged, ITypeNat
     {
@@ -33,7 +33,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryImm8Resolver<W,V> : IVImm8Resolver<V>
+    public interface IImm8VBinaryResolver<W,V> : IImm8VResolver<V>
         where V : struct
         where W : unmanaged, ITypeNat
     {
@@ -46,28 +46,28 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryImm8Resolver128<T> : IVUnaryImm8Resolver<N128,Vector128<T>>
+    public interface IImm8V128UnaryResolver<T> : IImm8VUnaryResolver<N128,Vector128<T>>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryImm8Resolver256<T> : IVUnaryImm8Resolver<N256,Vector256<T>>
+    public interface IImm8V256UnaryResolver<T> : IImm8VUnaryResolver<N256,Vector256<T>>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryImm8Resolver128<T> : IVBinaryImm8Resolver<N128,Vector128<T>>
+    public interface IImm8V128BinaryResolver<T> : IImm8VBinaryResolver<N128,Vector128<T>>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryImm8Resolver256<T>  : IVBinaryImm8Resolver<N256,Vector256<T>>
+    public interface IImm8V256BinaryResolver<T>  : IImm8VBinaryResolver<N256,Vector256<T>>
         where T : unmanaged
     {
         

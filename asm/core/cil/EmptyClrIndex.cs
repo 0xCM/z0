@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
 
-    public readonly struct EmptyClrIndex : IClrIndex
+    public readonly struct EmptyClrIndex : IClrIndexer
     {
         public Option<CilFunction> FindCil(int id)
             => none<CilFunction>();

@@ -9,30 +9,19 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IImmResolver : IFunc
-    {
-        NumericKind ImmKind => NumericKind.None;
-
-        OpArityKind ResolvedArity => OpArityKind.Nullary;
-
-        FixedWidth OperandWidth => FixedWidth.None;
-
-    }
-
-    public interface IImmResolver<T> : IImmResolver
-        where T : unmanaged
-    {
-        NumericKind IImmResolver.ImmKind => Numeric.kind<T>();
-    }
-
-    [SuppressUnmanagedCodeSecurity]
     public interface IImm8Resolver : IImmResolver<byte>
     {
             
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryImm8Resolver<T> : IImm8Resolver
+    public interface IImm8Resolver<T> : IImm8Resolver
+    {
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IImm8UnaryResolver<T> : IImm8Resolver
         where T :struct
     {
         DynamicDelegate<UnaryOp<T>>  @delegate(byte imm8);  
@@ -41,17 +30,11 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryImm8Resolver<T> : IImm8Resolver
+    public interface IImm8BinaryResolver<T> : IImm8Resolver
         where T :struct
     {
         DynamicDelegate<BinaryOp<T>>  @delegate(byte imm8);  
 
         OpArityKind IImmResolver.ResolvedArity => OpArityKind.Binary;        
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImm8Resolver<T> : IImm8Resolver
-    {
-
     }
 }

@@ -31,7 +31,7 @@ namespace Z0.Asm
         {
             this.Context = context;
             this.Catalog = catalog;
-            this.Decoder = Context.FunctionDecoder();
+            this.Decoder = Context.AsmFunctionDecoder();
             this.Observer = observer;
         }
 
@@ -152,7 +152,7 @@ namespace Z0.Asm
             {                                                
                 foreach(var closure in op.Close())
                 {
-                    var svc = Context.UnaryImmCapture(closure.ClosedMethod, closure.Id);
+                    var svc = Context.ImmUnaryCapture(closure.ClosedMethod, closure.Id);
                     var functions = svc.Capture(in exchange, ImmSelection);
                     if(functions.Length != 0)
                     {
@@ -165,7 +165,7 @@ namespace Z0.Asm
             {
                 foreach(var closure in op.Close())
                 {
-                    var svc = Context.BinaryImmCapture(closure.ClosedMethod, closure.Id);
+                    var svc = Context.ImmBinaryCapture(closure.ClosedMethod, closure.Id);
                     var functions = svc.Capture(in exchange, ImmSelection);
                     if(functions.Length != 0)
                     {
@@ -181,7 +181,7 @@ namespace Z0.Asm
             var tokens = new List<AsmEmissionToken>();
             foreach(var member in op.Members.Where(m => m.ConcreteMethod.IsVectorizedUnaryImm()))
             {
-                var resolutions = Context.UnaryImmCapture(member.ConcreteMethod, member.Id).Capture(in exchange, ImmSelection);
+                var resolutions = Context.ImmUnaryCapture(member.ConcreteMethod, member.Id).Capture(in exchange, ImmSelection);
                 if(resolutions.Length != 0)
                 {
                     var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());
@@ -192,7 +192,7 @@ namespace Z0.Asm
 
             foreach(var member in op.Members.Where(m => m.ConcreteMethod.IsVectorizedBinaryImm()))
             {
-                var resolutions = Context.BinaryImmCapture(member.ConcreteMethod, member.Id).Capture(in exchange, ImmSelection);
+                var resolutions = Context.ImmBinaryCapture(member.ConcreteMethod, member.Id).Capture(in exchange, ImmSelection);
                 if(resolutions.Length != 0)
                 {
                     var fGroup = AsmFunctionGroup.Define(op.GroupId, resolutions.ToArray());

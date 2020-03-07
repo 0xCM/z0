@@ -129,8 +129,8 @@ namespace Z0
             using var hex = CodeWriter(subject);
             using var asm = FunctionWriter(subject);
 
-            var decoder = Context.FunctionDecoder();
-            RunCapture(buffers.Capture, Context.FunctionDecoder(), buffers.Exchange, methods, hex, asm);
+            var decoder = Context.AsmFunctionDecoder();
+            RunCapture(buffers.Capture, Context.AsmFunctionDecoder(), buffers.Exchange, methods, hex, asm);
                         
             return hex.TargetPath;            
         }
@@ -138,7 +138,7 @@ namespace Z0
         void CheckBinaryImm<T>(in AsmBuffers buffers, N128 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = ImmOpProviders.provider(VK.vk128<T>(), FK.op(n2));
+            var provider = Dynop.ImmProvider(VK.vk128<T>(), FK.op(n2));
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -146,14 +146,14 @@ namespace Z0
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
-            var decoder = Context.FunctionDecoder();
+            var decoder = Context.AsmFunctionDecoder();
             var captured = Context.Capture().Capture(buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured,false);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffers.MainExec.BinaryOp<Fixed128>(asm.Code);
+            var f = buffers.MainExec.FixedBinaryOp<Fixed128>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -161,7 +161,7 @@ namespace Z0
         void CheckBinaryImm<T>(in OpExtractExchange exchange, BufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = ImmOpProviders.provider<T>(VK.vk256<T>(), FK.op(n2));
+            var provider = Dynop.ImmProvider<T>(VK.vk256<T>(), FK.op(n2));
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -170,14 +170,14 @@ namespace Z0
             var dynop = provider.CreateOp(method,imm);
             var z1 = dynop.DynamicOp.Invoke(x,y);
             
-            var decoder = Context.FunctionDecoder();
+            var decoder = Context.AsmFunctionDecoder();
             var captured = Context.Capture().Capture(in exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(captured,false);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffer.BinaryOp<Fixed256>(asm.Code);
+            var f = buffer.FixedBinaryOp<Fixed256>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -186,7 +186,7 @@ namespace Z0
             where T : unmanaged
         {            
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
-            var provider = ImmOpProviders.provider<T>(VK.vk256<T>(), FK.op(n1));
+            var provider = Dynop.ImmProvider<T>(VK.vk256<T>(), FK.op(n1));
 
             
             var dynop = provider.CreateOp(method,imm);
@@ -194,14 +194,14 @@ namespace Z0
             var x = Random.CpuVector<T>(w);
             var z1 = dynop.DynamicOp.Invoke(x);
             
-            var decoder = Context.FunctionDecoder();
+            var decoder = Context.AsmFunctionDecoder();
             var capture = Context.Capture().Capture(in buffers.Exchange, dynop.Id, dynop);            
             var asm = decoder.DecodeFunction(capture,false);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffers.MainExec.UnaryOp<Fixed256>(capture.Code);
+            var f = buffers.MainExec.FixedUnaryOp<Fixed256>(capture.Code);
             var z2 = f(x.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -242,7 +242,7 @@ namespace Z0
 
         {            
             TraceCaller($"Checking {src.Id}");
-            var g = (FixedFunc<T,T>)buffers.MainExec.Load(src).UnaryOp(src.Id, typeof(FixedFunc<T,T>),typeof(T));
+            var g = (FixedFunc<T,T>)buffers.MainExec.Load(src).FixedUnaryAdapter(src.Id, typeof(FixedFunc<T,T>),typeof(T));
             var points = Random.FixedStream<T>().Take(RepCount);
             iter(points, x => Claim.eq(f(x), g(x)));            
             
@@ -253,8 +253,8 @@ namespace Z0
         {            
             TraceCaller($"Checking {a.Id} == {b.Id} match");
             
-            var f = (FixedFunc<T,T>)buffers.LeftExec.Load(a.Code).UnaryOp(a.Id, typeof(FixedFunc<T,T>),typeof(T));
-            var g = (FixedFunc<T,T>)buffers.RightExec.Load(b.Code).UnaryOp(b.Id, typeof(FixedFunc<T,T>),typeof(T));
+            var f = (FixedFunc<T,T>)buffers.LeftExec.Load(a.Code).FixedUnaryAdapter(a.Id, typeof(FixedFunc<T,T>),typeof(T));
+            var g = (FixedFunc<T,T>)buffers.RightExec.Load(b.Code).FixedUnaryAdapter(b.Id, typeof(FixedFunc<T,T>),typeof(T));
 
             var stream = Random.FixedStream<T>();
             if(stream == null)
@@ -271,35 +271,35 @@ namespace Z0
             switch(nk)
             {
                 case NumericKind.I8:
-                    var f8i = buffers.MainExec.UnaryOp<Fixed8>(src);
+                    var f8i = buffers.MainExec.FixedUnaryOp<Fixed8>(src);
                     Trace((sbyte)f8i((sbyte) -9));
                     break;
                 case NumericKind.U8:
-                    var f8u = buffers.MainExec.UnaryOp<Fixed8>(src);
+                    var f8u = buffers.MainExec.FixedUnaryOp<Fixed8>(src);
                     Trace(f8u((byte) 7));
                     break;
                 case NumericKind.I16:
-                    var f16i = buffers.MainExec.UnaryOp<Fixed16>(src);
+                    var f16i = buffers.MainExec.FixedUnaryOp<Fixed16>(src);
                     Trace((short)f16i((short) -17));
                     break;
                 case NumericKind.U16:
-                    var f16u = buffers.MainExec.UnaryOp<Fixed16>(src);
+                    var f16u = buffers.MainExec.FixedUnaryOp<Fixed16>(src);
                     Trace(f16u((ushort) 15));
                     break;                    
                 case NumericKind.I32:
-                    var f32i = buffers.MainExec.UnaryOp<Fixed32>(src);
+                    var f32i = buffers.MainExec.FixedUnaryOp<Fixed32>(src);
                     Trace((int)f32i((int) -33));
                     break;
                 case NumericKind.U32:
-                    var f32u = buffers.MainExec.UnaryOp<Fixed32>(src);
+                    var f32u = buffers.MainExec.FixedUnaryOp<Fixed32>(src);
                     Trace(f32u((uint) 31));
                     break;                    
                 case NumericKind.I64:
-                    var f64i = buffers.MainExec.UnaryOp<Fixed64>(src);
+                    var f64i = buffers.MainExec.FixedUnaryOp<Fixed64>(src);
                     Trace((long)f64i((long) -65));
                     break;
                 case NumericKind.U64:
-                    var f64u = buffers.MainExec.UnaryOp<Fixed64>(src);
+                    var f64u = buffers.MainExec.FixedUnaryOp<Fixed64>(src);
                     Trace(f64u((ulong) 63));
                     break;   
                 default:
@@ -316,35 +316,35 @@ namespace Z0
             switch(kind)
             {
                 case NumericKind.I8:
-                    var f8i = buffers.MainExec.BinaryOp<Fixed8>(src);
+                    var f8i = buffers.MainExec.FixedBinaryOp<Fixed8>(src);
                     Trace(f8i(5,7));
                     break;
                 case NumericKind.U8:
-                    var f8u = buffers.MainExec.BinaryOp<Fixed8>(src);
+                    var f8u = buffers.MainExec.FixedBinaryOp<Fixed8>(src);
                     Trace(f8u(5,7));
                     break;
                 case NumericKind.I16:
-                    var f16i = buffers.MainExec.BinaryOp<Fixed16>(src);
+                    var f16i = buffers.MainExec.FixedBinaryOp<Fixed16>(src);
                     Trace(f16i(3,6));
                     break;
                 case NumericKind.U16:
-                    var f16u = buffers.MainExec.BinaryOp<Fixed16>(src);
+                    var f16u = buffers.MainExec.FixedBinaryOp<Fixed16>(src);
                     Trace(f16u(12,12));
                     break;                    
                 case NumericKind.I32:
-                    var f32i = buffers.MainExec.BinaryOp<Fixed32>(src);
+                    var f32i = buffers.MainExec.FixedBinaryOp<Fixed32>(src);
                     Trace(f32i(10,10));
                     break;
                 case NumericKind.U32:
-                    var f32u = buffers.MainExec.BinaryOp<Fixed32>(src);
+                    var f32u = buffers.MainExec.FixedBinaryOp<Fixed32>(src);
                     Trace(f32u(20,10));
                     break;                    
                 case NumericKind.I64:
-                    var f64i = buffers.MainExec.BinaryOp<Fixed64>(src);
+                    var f64i = buffers.MainExec.FixedBinaryOp<Fixed64>(src);
                     Trace(f64i(50,50));
                     break;
                 case NumericKind.U64:
-                    var f64u = buffers.MainExec.BinaryOp<Fixed64>(src);
+                    var f64u = buffers.MainExec.FixedBinaryOp<Fixed64>(src);
                     Trace(f64u(13,13));
                     break;                    
                 default:
@@ -578,58 +578,58 @@ namespace Z0
 
         protected void binop_match(in AsmBuffers buffers, N8 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.BinaryOp(w, a);
-            var g = buffers.RightExec.BinaryOp(w, b);
+            var f = buffers.LeftExec.FixedBinaryOp(w, a);
+            var g = buffers.RightExec.FixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N16 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.BinaryOp(w, a);
-            var g = buffers.RightExec.BinaryOp(w, b);
+            var f = buffers.LeftExec.FixedBinaryOp(w, a);
+            var g = buffers.RightExec.FixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N32 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.BinaryOp(w, a);
-            var g = buffers.RightExec.BinaryOp(w, b);
+            var f = buffers.LeftExec.FixedBinaryOp(w, a);
+            var g = buffers.RightExec.FixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N64 w, AsmCode a, AsmCode b)
         {
 
-            var f = buffers.LeftExec.BinaryOp(w, a);
-            var g = buffers.RightExec.BinaryOp(w, b);
+            var f = buffers.LeftExec.FixedBinaryOp(w, a);
+            var g = buffers.RightExec.FixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N128 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.BinaryOp(w, a);
-            var g = buffers.RightExec.BinaryOp(w, b);
+            var f = buffers.LeftExec.FixedBinaryOp(w, a);
+            var g = buffers.RightExec.FixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N256 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.BinaryOp(w, a);
-            var g = buffers.RightExec.BinaryOp(w, b);
+            var f = buffers.LeftExec.FixedBinaryOp(w, a);
+            var g = buffers.RightExec.FixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
         
         void vadd_check<T>(in AsmBuffers buffers, N128 w, AsmCode<T> asm)
             where T : unmanaged
         {            
-            var f = buffers.MainExec.BinaryOp(w,asm);            
+            var f = buffers.MainExec.FixedBinaryOp(w,asm);            
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
         void vadd_check<T>(in AsmBuffers buffers, N256 w, AsmCode<T> asm)
             where T : unmanaged
         {            
-            var f = buffers.MainExec.BinaryOp(w,asm);
+            var f = buffers.MainExec.FixedBinaryOp(w,asm);
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
@@ -641,7 +641,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
+        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, FixedBinaryOp128 g, OpIdentity name)
             where T : unmanaged
         {
             void check()
@@ -666,7 +666,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
+        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, FixedBinaryOp256 g, OpIdentity name)
             where T : unmanaged
         {
             void check()

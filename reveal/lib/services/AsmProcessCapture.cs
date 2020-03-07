@@ -23,7 +23,7 @@ namespace Z0
 
         readonly IAsmContext Context;
         
-        readonly IClrIndex ClrIndex;
+        readonly IClrIndexer ClrIndex;
 
         readonly DataTarget Target;
 
@@ -37,7 +37,7 @@ namespace Z0
             ClrIndex = context.ClrIndex;
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
             Runtime = CreateRuntime(Target);
-            Decoder = context.FunctionDecoder();
+            Decoder = context.AsmFunctionDecoder();
         }
             
         void IDisposable.Dispose()

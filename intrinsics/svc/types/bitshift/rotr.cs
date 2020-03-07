@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VFTypes
     {
-        public readonly struct Rotr128<T> : IVShiftOp128D<T>, IVUnaryImm8Resolver128<T>
+        public readonly struct Rotr128<T> : IVShiftOp128D<T>, IImm8V128UnaryResolver<T>
             where T : unmanaged
         {
             public const string Name = "vrotr";
@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
-                => Dynop.UnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),imm8);
+                => Dynop.ImmVUnaryOP<T>(hk, Id, gApiMethod(hk,Name),imm8);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset) 
@@ -35,7 +35,7 @@ namespace Z0
                 => gbits.rotr(a,offset);
         }
 
-        public readonly struct Rotr256<T> : IVShiftOp256D<T>, IVUnaryImm8Resolver256<T>
+        public readonly struct Rotr256<T> : IVShiftOp256D<T>, IImm8V256UnaryResolver<T>
             where T : unmanaged
         {
             public const string Name = "vrotr";
@@ -47,7 +47,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
-                => Dynop.UnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);
+                => Dynop.ImmVUnaryOp<T>(hk, Id, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte count) 

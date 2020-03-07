@@ -11,18 +11,18 @@ namespace Z0.Asm
 
     using static Root;
     
-    readonly struct AsmAssemblyArchiver :  IAsmAssemblyArchiver
+    readonly struct AssemblyArchiverService :  IAsmAssemblyArchiver
     {                
         public IAsmContext Context {get;}
 
         readonly DataResourceIndex Resources;
 
         [MethodImpl(Inline)]
-        public static AsmAssemblyArchiver Create(IAsmContext context)
-            => new AsmAssemblyArchiver(context);
+        public static AssemblyArchiverService Create(IAsmContext context)
+            => new AssemblyArchiverService(context);
 
         [MethodImpl(Inline)]
-        AsmAssemblyArchiver(IAsmContext context)
+        AssemblyArchiverService(IAsmContext context)
         {
             Context = context;
             Resources = Context.Compostion.FindCatalog(AssemblyId.Data).MapValueOrElse(c => c.Resources, () => DataResourceIndex.Empty);
@@ -78,7 +78,7 @@ namespace Z0.Asm
 
             }
 
-            var metadata = src.Owner.CreateIndex();
+            var metadata = src.Owner.CreateClrIndex();
             var context = AsmContext.New(metadata, Resources);
             var emitter = context.CatalogEmitter(src.Operations, OnEmission);
 

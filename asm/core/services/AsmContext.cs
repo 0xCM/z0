@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="root">The root context</param>
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
-        public static IAsmContext Rooted(IContext root, IClrIndex clrindex, DataResourceIndex resources)             
+        public static IAsmContext Rooted(IContext root, IClrIndexer clrindex, DataResourceIndex resources)             
             => new AsmContext(root, AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.New, CilFormatConfig.Default);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
         /// <param name="format">The context format configuration</param>
-        public static IAsmContext Rooted(IContext root, IClrIndex clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
+        public static IAsmContext Rooted(IContext root, IClrIndexer clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
             => new AsmContext(root, AssemblyComposition.Empty, clrindex, resources, format, CilFormatConfig.Default);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
         /// <param name="format">The context format configuration</param>
-        public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
+        public static IAsmContext New(IClrIndexer clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
             => new AsmContext(AssemblyComposition.Empty, clrindex, resources, format, CilFormatConfig.Default);
 
         /// <summary>
@@ -77,17 +77,17 @@ namespace Z0
         /// </summary>
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
-        public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources)             
+        public static IAsmContext New(IClrIndexer clrindex, DataResourceIndex resources)             
             => new AsmContext(AssemblyComposition.Empty, clrindex, resources, AsmFormatConfig.New, CilFormatConfig.Default);
 
-        AsmContext(IContext root, IAssemblyComposition assemblies, IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
+        AsmContext(IContext root, IAssemblyComposition assemblies, IClrIndexer clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
         {
             this.RootContext = root != null ? some(root) : none<IContext>();
             this.State = AsmContextData.New(assemblies ?? AssemblyComposition.Empty, clrIndex, resources,format,cilFormat);
             this.Identity = Context.NextId();
         }
 
-        AsmContext(IAssemblyComposition assemblies, IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
+        AsmContext(IAssemblyComposition assemblies, IClrIndexer clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
             : this(null,assemblies, clrIndex, resources, format, cilFormat)
         {
 
@@ -110,7 +110,7 @@ namespace Z0
         
         public int Identity {get;}
 
-        public IClrIndex ClrIndex 
+        public IClrIndexer ClrIndex 
             => State.ClrIndex;
         
         public AsmFormatConfig AsmFormat 

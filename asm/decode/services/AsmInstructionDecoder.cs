@@ -13,7 +13,9 @@ namespace Z0
     
     using static Root;    
 
-    public readonly struct AsmInstructionDecoder : IAsmInstructionDecoder
+    using Iced = Iced.Intel;
+
+    readonly struct AsmInstructionDecoder : IAsmInstructionDecoder
     {
         public IAsmContext Context {get;}
 
@@ -33,7 +35,7 @@ namespace Z0
         /// <param name="src">The code source</param>
         [MethodImpl(Inline)]
         public Option<AsmInstructionList> DecodeInstructions(AsmCode src)
-            => Context.DecodeInstructions(src);
+            => DecodeInstructions(src.Data);
 
         /// <summary>
         /// Decodes an instruction list
@@ -41,6 +43,30 @@ namespace Z0
         /// <param name="src">The code source</param>
         [MethodImpl(Inline)]
         public Option<AsmInstructionList> DecodeInstructions(MemoryExtract src)        
-            => Context.DecodeInstructions(src);
+        {
+            try
+            {
+                var decoded = new Iced.InstructionList();
+                var reader = new Iced.ByteArrayCodeReader(src.Bytes);
+                var decoder =Iced.Decoder.Create(IntPtr.Size * 8, reader);
+                decoder.IP = src.AddressRange.Start;
+                while (reader.CanReadByte) 
+                {
+                    ref var instruction = ref decoded.AllocUninitializedElement();
+                    decoder.Decode(out instruction); 
+                }
+
+                var instructions = new Asm.Instruction[decoded.Count];
+                var formatted = AsmFormatter.Internal(Context).FormatInstructions(decoded, src.Address);
+                for(var i=0; i<instructions.Length; i++)
+                    instructions[i] =  decoded[i].ToSpec(formatted[i]);
+                return AsmInstructionList.Create(instructions,src);
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return none<AsmInstructionList>();
+            }
+        }
     }
 }

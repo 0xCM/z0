@@ -14,7 +14,7 @@ namespace Z0
         {                        
             new ExperimentalScenarios().Emit();
             var a = GetType().Assembly;
-            var clridx = a.CreateIndex();
+            var clridx = a.CreateClrIndex();
             var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.New);
             foreach(var t in a.GetTypes().Tagged(typeof(OpCodeProvider)))
             {

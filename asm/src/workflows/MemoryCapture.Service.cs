@@ -2,18 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Z0.Asm;
 
     using static Root;
 
-    class MemoryCapture : IMemoryCapture
+    class MemoryCaptureService : IMemoryCapture
     {
         public IAsmContext Context {get;}
 
@@ -29,16 +25,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IMemoryCapture Create(IAsmContext context)
-            => new MemoryCapture(context);
+            => new MemoryCaptureService(context);
 
         [MethodImpl(Inline)]
-        MemoryCapture(IAsmContext context)
+        MemoryCaptureService(IAsmContext context)
         {
             this.Context = context;
             this.ExtractBuffer = new byte[context.DefaultBufferLength];
             this.ParseBuffer = new byte[context.DefaultBufferLength];
             this.Extractor = context.MemoryExtractor(ExtractBuffer);
-            this.Decoder = context.InstructionDecoder();
+            this.Decoder = context.AsmInstructionDecoder();
             this.Formatter = context.AsmFormatter(context.AsmFormat.WithSectionDelimiter());
         }
         

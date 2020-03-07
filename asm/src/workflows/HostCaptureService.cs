@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static AsmServiceMessages;
     using static Root;
 
-    readonly struct AsmHostCapture : IHostCapture
+    readonly struct HostCaptureService : IHostCapture
     {
         public IAsmContext Context {get;}
 
@@ -21,10 +21,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static IHostCapture Create(IAsmContext context, params AssemblyId[] selected)
-            => new AsmHostCapture(context,selected);
+            => new HostCaptureService(context,selected);
 
         [MethodImpl(Inline)]
-        AsmHostCapture(IAsmContext context, AssemblyId[] selected)
+        HostCaptureService(IAsmContext context, AssemblyId[] selected)
         {
             this.Context = context;
             this.Selected = selected.Length == 0 ? context.Assemblies.ToHashSet() : selected.ToHashSet();
@@ -68,7 +68,7 @@ namespace Z0.Asm
 
         static void EmitCil(Assembly src)
         {
-            var index = src.CreateIndex();
+            var index = src.CreateClrIndex();
             var dir = AsmEmissionPaths.The.CilDir;
             var srcId = src.AssemblyId();
             var context = AsmContext.New(index, DataResourceIndex.Empty, AsmFormatConfig.New.WithSectionDelimiter());
@@ -109,7 +109,7 @@ namespace Z0.Asm
         AsmFunctionList Decode(ApiHost host, OpExtractReport captured, ParsedOpReport parsed)
         {
             var path = Paths.DecodedPath(host.Path);
-            var decoder = Context.FunctionDecoder();
+            var decoder = Context.AsmFunctionDecoder();
             var functions = new AsmFunction[captured.RecordCount];
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
             for(var i=0; i< captured.RecordCount; i++)

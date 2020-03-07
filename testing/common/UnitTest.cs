@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
+        protected void CheckMatch(FixedBinaryOp8 f, OpIdentity fId, FixedBinaryOp8 g, OpIdentity gId)
         {
             void check()
             {
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp16 f, OpIdentity fId, BinaryOp16 g, OpIdentity gId)
+        protected void CheckMatch(FixedBinaryOp16 f, OpIdentity fId, FixedBinaryOp16 g, OpIdentity gId)
         {
             void check()
             {
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp32 f, OpIdentity fId, BinaryOp32 g, OpIdentity gId)
+        protected void CheckMatch(FixedBinaryOp32 f, OpIdentity fId, FixedBinaryOp32 g, OpIdentity gId)
         {
             var w = n32;
             void check()
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp64 f, OpIdentity fId, BinaryOp64 g, OpIdentity gId)
+        protected void CheckMatch(FixedBinaryOp64 f, OpIdentity fId, FixedBinaryOp64 g, OpIdentity gId)
         {
             var w = n64;
             void check()
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp128 f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
+        protected void CheckMatch(FixedBinaryOp128 f, OpIdentity fId, FixedBinaryOp128 g, OpIdentity gId)
         {
             var w = n128;
             
@@ -185,7 +185,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp256 f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
+        protected void CheckMatch(FixedBinaryOp256 f, OpIdentity fId, FixedBinaryOp256 g, OpIdentity gId)
         {
             var w = n256;
             void check()

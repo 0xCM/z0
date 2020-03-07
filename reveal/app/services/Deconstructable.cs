@@ -26,7 +26,7 @@ namespace Z0
             var asmfile =  SourcePath.FolderPath + filename.WithExtension(FileExtensions.Asm);
             var cilfile = SourcePath.FolderPath + filename.WithExtension(FileExtensions.Il);
             var host = typeof(T);
-            var clridx = host.Assembly.CreateIndex();
+            var clridx = host.Assembly.CreateClrIndex();
             var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.New.WithSectionDelimiter());
             using var capture = AsmProcessServices.Capture(context);
             var functions = capture.CaptureFunctions(host); 

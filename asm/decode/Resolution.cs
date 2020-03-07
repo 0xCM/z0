@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
 {
-    using System;
-
     public sealed class AsmDecoder : AssemblyResolution<AsmDecoder, AsmDecoder.C>
     {
         public AsmDecoder() : base(AssemblyId.AsmDecoder) {}

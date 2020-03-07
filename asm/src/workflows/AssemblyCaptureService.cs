@@ -2,28 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
 
-    using Asm;
+    using Z0.Asm;
     using static AsmServiceMessages;
     using static Root;
 
-    readonly struct AssemblyCapture : IAssemblyCapture
+    readonly struct AssemblyCaptureService : IAssemblyCapture
     {
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static AssemblyCapture Create(IAsmContext context)
-            => new AssemblyCapture(context);
+        public static AssemblyCaptureService Create(IAsmContext context)
+            => new AssemblyCaptureService(context);
 
         [MethodImpl(Inline)]
-        AssemblyCapture(IAsmContext context)
+        AssemblyCaptureService(IAsmContext context)
         {
             this.Context = context;
         }
@@ -59,7 +57,7 @@ namespace Z0
         AsmFunctionList Decode(ApiHost host, OpExtract[] extracted, ParsedOpExtract[] parsed)
         {
             var path = Paths.DecodedPath(host.Path);
-            var decoder = Context.FunctionDecoder();
+            var decoder = Context.AsmFunctionDecoder();
             var functions = new AsmFunction[extracted.Length];
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
             // for(var i=0; i< extracted.Length; i++)

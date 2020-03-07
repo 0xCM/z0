@@ -13,9 +13,11 @@ namespace Z0
     
     using static Root;
 
-    public readonly struct AsmFunctionDecoder : IAsmFunctionDecoder
+    readonly struct AsmFunctionDecoder : IAsmFunctionDecoder
     {
         public IAsmContext Context {get;}
+
+        readonly IAsmInstructionDecoder Decoder;
 
         [MethodImpl(Inline)]
         public static AsmFunctionDecoder Create(IAsmContext context)
@@ -25,6 +27,7 @@ namespace Z0
         AsmFunctionDecoder(IAsmContext context)
         {
             this.Context = context;
+            this.Decoder = context.AsmInstructionDecoder();
         }
 
         Option<CilFunction> GetCil(CapturedOp src)
@@ -33,8 +36,8 @@ namespace Z0
 
         public AsmFunction DecodeFunction(CapturedOp src, bool emitcil = true)
         {
-            var list = Context.DecodeInstructions(src.Code);
-            var block = Asm.AsmInstructionBlock.Define(src.Code, list.Require(), src.TermCode);
+            var list = Decoder.DecodeInstructions(src.Code).Require();
+            var block = Asm.AsmInstructionBlock.Define(src.Code, list, src.TermCode);
             var f = Context.FunctionBuilder().BuildFunction(src.Operation, block);
             if(emitcil)
                 f = f.WithCil(GetCil(src).ValueOrDefault());
@@ -45,7 +48,7 @@ namespace Z0
         {
             var op = parsed.Operation;
             var code = AsmCode.Define(op.Id, parsed.Content);
-            var instructions = Context.DecodeInstructions(code).Require();
+            var instructions = Decoder.DecodeInstructions(code).Require();
             return AsmFunction.Define(parsed, instructions);
         }
 
@@ -56,7 +59,7 @@ namespace Z0
             {
                 var parsed = src[i];
                 var code = AsmCode.Define(parsed.Id, parsed.ParsedContent);
-                var instructions = Context.DecodeInstructions(code).Require();
+                var instructions = Decoder.DecodeInstructions(code).Require();
                 dst[i] = AsmFunction.Define(parsed, instructions);
             }
             return dst;

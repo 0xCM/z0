@@ -12,7 +12,7 @@ namespace Z0
 
     public class CilBody
     {
-        public static CilBody From(MethodInfo method)
+        public static CilBody Load(MethodInfo method)
         {
             return new CilBody
             {
@@ -22,7 +22,7 @@ namespace Z0
             };
         }
 
-        public static CilBody From(DynamicMethod method)
+        public static CilBody Load(DynamicMethod method)
         {
             return new CilBody
             {
@@ -32,8 +32,8 @@ namespace Z0
             };
         }
 
-        public static CilBody From(DynamicDelegate src)
-            => From(src.DynamicMethod);
+        public static CilBody Load(DynamicDelegate src)
+            => Load(src.DynamicMethod);
         
         /// <summary>
         /// See https://stackoverflow.com/questions/4148297/resolving-the-tokens-found-in-the-il-from-a-dynamic-method/35711376#35711376

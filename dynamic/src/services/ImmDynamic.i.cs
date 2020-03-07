@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    public interface IDynamicImmediate : IAsmService
+    public interface IImmDynamic : IService
     {
         /// <summary>
         /// Embeds an immediate value within a dynamic method that wraps a call to a method that requires an immediate value
@@ -18,7 +18,7 @@ namespace Z0
         DynamicDelegate Specialize(MethodInfo method, byte imm);
     }
 
-    public interface IDynamicImmediate<D> : IDynamicImmediate
+    public interface IImmDynamic<D> : IImmDynamic
         where D : Delegate
     {
 

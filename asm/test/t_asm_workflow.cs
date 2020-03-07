@@ -19,7 +19,7 @@ namespace Z0
         {
             var extractor = Context.HostExtractor();
             var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
-            var decoder = Context.FunctionDecoder();
+            var decoder = Context.AsmFunctionDecoder();
             var root = RootEmissionPaths.Define(DefaultDataDir).Clear();
             var format = Context.AsmFormat.WithSectionDelimiter();
 

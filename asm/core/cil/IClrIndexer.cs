@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    public interface IClrIndex
+    public interface IClrIndexer
     {
         Option<CilFunction> FindCil(int id);
 

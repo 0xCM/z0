@@ -17,14 +17,6 @@ namespace Z0
     public static class AsmDecodingServices
     {
         /// <summary>
-        /// Instantiates an internal instruction formatter service
-        /// </summary>
-        /// <param name="context">The configuration to use</param>
-        [MethodImpl(Inline)]
-        internal static AsmFormatter InstructionFormatter(this IAsmContext context)
-            => Z0.AsmFormatter.Internal(context);    
-
-        /// <summary>
         /// Instantiates a contextual asm formatter service
         /// </summary>
         /// <param name="context">The source context</param>
@@ -32,8 +24,8 @@ namespace Z0
         public static IAsmFormatter AsmFormatter(this IAsmContext context, AsmFormatConfig config = null)
             => Z0.AsmFormatter.Create(context, config ?? context.AsmFormat);
 
-        public static IClrIndex CreateIndex(this Assembly src)
-            => ClrMetadataIndex.Create(src);
+        public static IClrIndexer CreateClrIndex(this Assembly src)
+            => ClrIndexer.Create(src);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer
@@ -55,25 +47,27 @@ namespace Z0
             => AsmFunctionWriter.Create(context, config, dst);
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionDecoder FunctionDecoder(this IAsmContext context)
-            => AsmFunctionDecoder.Create(context);
+        public static IAsmFunctionDecoder AsmFunctionDecoder(this IAsmContext context)
+            => Z0.AsmFunctionDecoder.Create(context);
 
         [MethodImpl(Inline)]
-        public static IAsmInstructionDecoder InstructionDecoder(this IAsmContext context)
-            => AsmInstructionDecoder.Create(context);
-
-        static IEnumerable<AsmInstructionList> GetInstructions(IAsmCodeArchive archive)
-        {            
-            var decoder = archive.Context.InstructionDecoder();
-            foreach(var codeblock in archive.Read())
-            {
-                var decoded = decoder.DecodeInstructions(codeblock);
-                if(decoded)
-                    yield return decoded.Value;                
-            }
-        }
+        public static IAsmInstructionDecoder AsmInstructionDecoder(this IAsmContext context)
+            => Z0.AsmInstructionDecoder.Create(context);
 
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
-            => AsmInstructionSource.From(() => GetInstructions(archive));
+        {
+            IEnumerable<AsmInstructionList> Enumerate()
+            {            
+                var decoder = archive.Context.AsmInstructionDecoder();
+                foreach(var codeblock in archive.Read())
+                {
+                    var decoded = decoder.DecodeInstructions(codeblock);
+                    if(decoded)
+                        yield return decoded.Value;                
+                }
+            }
+        
+            return AsmInstructionSource.From(Enumerate);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    public interface IAsmImmCapture : IAsmService
+    public interface IImmCapture : IAsmService
     {
         AsmFunction Capture(in OpExtractExchange exchange, byte imm8);
 
@@ -22,18 +22,18 @@ namespace Z0
         }                    
     }
 
-    public interface IAsmImmCapture<T> : IAsmImmCapture
+    public interface IImmCapture<T> : IImmCapture
         where T : unmanaged
     {
 
     }
 
-    public interface IAsmImmUnaryCapture<T> : IAsmImmCapture<T>, IAsmImmCapture
-        where T : unmanaged        
+    public interface IImmUnaryCapture<T> : IImmCapture<T>, IImmCapture
+        where T : unmanaged
     {
     }
 
-    public interface IAsmImmBinaryCapture<T> : IAsmImmCapture<T>,  IAsmImmCapture
+    public interface IImmBinaryCapture<T> : IImmCapture<T>,  IImmCapture
         where T : unmanaged        
     {
     }
