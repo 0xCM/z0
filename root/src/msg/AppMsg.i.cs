@@ -9,7 +9,12 @@ namespace Z0
 
     using static Root;
 
-    public interface IAppMsgQueue : ISink<AppMsg>
+    public interface IAppMsgSink : ISink<AppMsg>
+    {
+        
+    }
+
+    public interface IAppMsgQueue : IAppMsgSink
     {
         /// <summary>
         /// Posts a message to the context queue
@@ -21,11 +26,8 @@ namespace Z0
         /// Posts an arbitrary number of messages to the queue
         /// </summary>
         /// <param name="msg">The message to post</param>
-        void Enqueue(IEnumerable<AppMsg> msg)
+        void Notify(IEnumerable<AppMsg> msg)
             => iter(msg,Notify);        
-
-        void ISink<AppMsg>.Accept(in AppMsg src)
-            => Notify(src);
 
         /// <summary>
         /// Posts a text message to the context queue with optional severity
@@ -33,8 +35,38 @@ namespace Z0
         /// <param name="msg">The message to post</param>
         void Notify(string msg, AppMsgKind? severity = null);
 
-        IReadOnlyList<AppMsg> Dequeue();        
+        void ISink<AppMsg>.Accept(in AppMsg src)
+            => Notify(src);
+
+        IReadOnlyList<AppMsg> Flush();        
 
         IReadOnlyList<AppMsg> Flush(Exception e);
     }
+
+    /// <summary>
+    /// Characterizes a stateful thing that functions as an exchange for application messages
+    /// </summary>
+    public interface IAppMsgExchange : IAppMsgQueue
+    {        
+        void Flush(Exception exception, IAppMsgLog target);                       
+    }
+
+    /// <summary>
+    /// A context that supports application message capture/disbursement
+    /// </summary>
+    public interface IAppMsgContext : IAppMsgExchange, IContext
+    {
+    
+    }    
+
+    public interface IAppMsgLog : IAppMsgSink
+    {
+        void Write(IEnumerable<AppMsg> src);
+        
+        void Write(AppMsg src);
+        
+        void ISink<AppMsg>.Accept(in AppMsg src)
+            => Write(src);
+
+    }    
 }

@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The final state in the capture process
         /// </summary>
-        public readonly OpExtractionState State;
+        public readonly ExtractionState State;
 
         /// <summary>
         /// The origin of the captured data
@@ -29,18 +29,18 @@ namespace Z0
         /// </summary>
         public readonly ExtractTermCode TermCode;
 
-        public static ExtractionOutcome Empty => Define(OpExtractionState.Empty, 0,0, ExtractTermCode.None);
+        public static ExtractionOutcome Empty => Define(ExtractionState.Empty, 0,0, ExtractTermCode.None);
 
         [MethodImpl(Inline)]
-        public static ExtractionOutcome Define(in OpExtractionState state, ulong start, ulong end, ExtractTermCode cc)
+        public static ExtractionOutcome Define(in ExtractionState state, ulong start, ulong end, ExtractTermCode cc)
             => new ExtractionOutcome(state, (start, end), cc);
 
         [MethodImpl(Inline)]
-        public static ExtractionOutcome Define(in OpExtractionState state, MemoryRange source, ExtractTermCode cc)
+        public static ExtractionOutcome Define(in ExtractionState state, MemoryRange source, ExtractTermCode cc)
             => new ExtractionOutcome(state, source, cc);
 
         [MethodImpl(Inline)]
-        ExtractionOutcome(in OpExtractionState state, MemoryRange range, ExtractTermCode cc)
+        ExtractionOutcome(in ExtractionState state, MemoryRange range, ExtractTermCode cc)
         {   
             this.State = state;
             this.Range = range;

@@ -22,19 +22,23 @@ namespace Z0
             => new OpExtractParser(context,buffer);
 
         [MethodImpl(Inline)]
+        public static IOpExtractParser New(IAsmContext context, int? bufferlen = null)
+            => new OpExtractParser(context, new byte[bufferlen ?? context.DefaultBufferLength]);
+
+        [MethodImpl(Inline)]
         OpExtractParser(IAsmContext context, byte[] buffer)
         {
             Context = context;
             PatternBuffer = buffer;
         }
 
-        static ParsedOpRecord Parse(in ByteParser<EncodingPatternKind> parser, in OpExtractRecord current)
+        static MemberParseRecord Parse(in ByteParser<EncodingPatternKind> parser, in MemberExtractRecord current)
         {
             var status = parser.Parse(current.Data);                
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();                
             var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-            return ParsedOpRecord.Define
+            return MemberParseRecord.Define
             (
                 Sequence : current.Sequence,
                 Address : current.Address,
@@ -46,7 +50,7 @@ namespace Z0
             );
         }
 
-        public ParsedExtract[] Parse(OpExtract[] src)
+        public ParsedExtract[] Parse(params MemberExtract[] src)
         {
             var dst = new ParsedExtract[src.Length];
             var parser = Context.PatternParser(PatternBuffer.Clear());               
@@ -65,9 +69,9 @@ namespace Z0
             return dst;
         }
 
-        public ParsedOpReport Parse(ApiHost host, OpExtractReport encoded)
+        public MemberParseReport Parse(ApiHost host, MemberExtractReport encoded)
         {
-            var dst = new ParsedOpRecord[encoded.Records.Length];
+            var dst = new MemberParseRecord[encoded.Records.Length];
             var parser = Context.PatternParser(PatternBuffer.Clear());            
             Context.Notify($"Parsing {encoded.Records.Length} {host} records");
 
@@ -78,7 +82,7 @@ namespace Z0
                 var matched = parser.Result;
                 var succeeded = matched.IsSome() && status.Success();                
                 var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-                dst[i] = ParsedOpRecord.Define
+                dst[i] = MemberParseRecord.Define
                 (
                      Sequence : current.Sequence,
                      Address : current.Address,
@@ -92,7 +96,7 @@ namespace Z0
 
             ReportDuplicates(OpIdentity.duplicates(dst.Select(x => x.Uri.OpId)));
 
-            return ParsedOpReport.Create(dst);
+            return MemberParseReport.Create(dst);
         }
 
         void ReportDuplicates(OpIdentity[] duplicated)

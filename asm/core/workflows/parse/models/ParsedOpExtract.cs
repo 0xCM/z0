@@ -14,18 +14,18 @@ namespace Z0
     public readonly struct ParsedExtract
     {
         [MethodImpl(Inline)]
-        public static ParsedExtract Define(OpExtract src, ExtractTermCode term, MemoryExtract parsed)
+        public static ParsedExtract Define(MemberExtract src, ExtractTermCode term, MemoryExtract parsed)
             => new ParsedExtract(src,term,parsed);
 
         [MethodImpl(Inline)]
-        ParsedExtract(OpExtract src, ExtractTermCode term, MemoryExtract parsed)
+        ParsedExtract(MemberExtract src, ExtractTermCode term, MemoryExtract parsed)
         {
             this.SourceExtract = src;
             this.TermCode = term;
             this.ParsedContent = parsed;
         }        
 
-        public readonly OpExtract SourceExtract;
+        public readonly MemberExtract SourceExtract;
 
         public readonly ExtractTermCode TermCode;
 
@@ -46,24 +46,24 @@ namespace Z0
         public MethodInfo SourceMember 
             => SourceExtract.Member.Member;
 
-        public OpDescriptor Descriptor 
-            => OpDescriptor.Define(Uri, SourceMember.Signature().Format());
+        public MemberDescriptor Descriptor 
+            => MemberDescriptor.Define(Uri, SourceMember.Signature().Format());
     }
 
     public readonly struct ParsedOpExtract
     {
-        public readonly OpDescriptor Operation;        
+        public readonly MemberDescriptor Operation;        
 
         public readonly ExtractTermCode TermCode;
 
         public readonly MemoryExtract Content;   
 
         [MethodImpl(Inline)]
-        public static ParsedOpExtract Define(OpDescriptor op, ExtractTermCode term, MemoryExtract parsed)
+        public static ParsedOpExtract Define(MemberDescriptor op, ExtractTermCode term, MemoryExtract parsed)
             => new ParsedOpExtract(op,term,parsed);
 
         [MethodImpl(Inline)]
-        ParsedOpExtract(OpDescriptor op, ExtractTermCode term, MemoryExtract parsed)
+        ParsedOpExtract(MemberDescriptor op, ExtractTermCode term, MemoryExtract parsed)
         {
             this.Operation = op;
             this.Content = parsed;

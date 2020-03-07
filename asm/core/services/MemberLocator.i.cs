@@ -14,6 +14,8 @@ namespace Z0
     {
         IEnumerable<LocatedMember> Members(Type host);
 
+        IEnumerable<LocatedMember> Members(ApiHost host);        
+
         IEnumerable<LocatedMember> Members(Assembly assembly);
     }
 }

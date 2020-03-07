@@ -31,52 +31,45 @@ namespace Z0.Asm
             this.BufferLength = bufferlen ?? Context.DefaultBufferLength;
         }
 
-        public OpExtract[] Extract(ApiHost src)
+        /// <summary>
+        /// Extracts encoded content that defines executable code for a located member
+        /// </summary>
+        /// <param name="src">The source member</param>
+        public MemberExtract Extract(LocatedMember src)
         {
-            var members = Context.LocatedMembers(src.HostingType).ToArray();
-            var buffer = alloc<byte>(BufferLength);
+            Span<byte> buffer = stackalloc byte[BufferLength];
             var reader = Context.MemoryReader();
-            var extracts = new OpExtract[members.Length];
-
-            for(var i=0; i< members.Length; i++)
-            {
-                buffer.Clear();                
-
-                var op = members[i];
-                var length = reader.Read(op.Address, BufferLength, buffer);
-                var data = MemoryExtract.Define(op.Address, buffer.Slice(0,length).ToArray());
-                var uri = OpUri.Hex(src.Path, op.Member.Name, op.Id);
-                extracts[i] = OpExtract.Define(op.Id, uri, op, data);
-            }  
-            return extracts;  
+            return Extract(src, reader, buffer);
         }
 
-        public OpExtractReport ExtractOps(ApiHost src)
+        public MemberExtract[] Extract(LocatedMember[] members)
         {
-            var ops = Context.LocatedMembers(src.HostingType).ToArray();
-            var records = new OpExtractRecord[ops.Length];
-            var buffer = alloc<byte>(BufferLength);
+            var dst = new MemberExtract[members.Length];
+            Span<byte> buffer = stackalloc byte[BufferLength];            
             var reader = Context.MemoryReader();
+            for(var i=0; i<members.Length; i++)
+                dst[i] = Extract(members[i], reader, buffer);
+            return dst;
+        }
 
+        /// <summary>
+        /// Extracts encoded content for all operations defined by a host
+        /// </summary>
+        /// <param name="src">The source member</param>
+        public MemberExtract[] Extract(ApiHost src)
+        {
+            var locator = Context.MemberLocator();
+            var members = locator.Members(src).ToArray();
+            return Extract(members);
+        }
 
-            for(var i=0; i< ops.Length; i++)
-            {
-                buffer.Clear();                
-
-                var op = ops[i];
-                var length = reader.Read(op.Address, BufferLength, buffer);
-                var record = new OpExtractRecord(                
-                    Sequence : i,
-                    Address : op.Address,
-                    Length : length,
-                    Uri : OpUri.Hex(src.Path, op.Member.Name, op.Id),
-                    OpSig : op.Member.Signature().Format(),
-                    Data : MemoryExtract.Define(op.Address, buffer.Slice(0,length).ToArray())
-                    );
-                records[i] = record;
-            }    
-         
-            return OpExtractReport.Create(records);
+        [MethodImpl(Inline)]
+        MemberExtract Extract(LocatedMember src, IMemoryReader reader,  Span<byte> buffer)
+        {
+            buffer.Clear();                
+            var length = reader.Read(src.Address, BufferLength, buffer);
+            var data = MemoryExtract.Define(src.Address, buffer.Slice(0,length).ToArray());
+            return MemberExtract.Define(src, data);
         }
     }
 }

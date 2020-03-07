@@ -34,55 +34,48 @@ namespace Z0.Asm
             return default;
         }
 
-        public Option<OpExtractReport> ExtractOps(ApiHost host)
+        public Option<MemberExtractReport> ExtractOps(ApiHost host)
         {
             var capture = Context.HostExtractor();
             var ops = capture.Extract(host);
-            var report = OpExtractReport.Create(ops);            
+            var report = MemberExtractReport.Create(host.Path, ops);            
             var target = Paths.ExtractPath(host.Path);  
             var saved = report.Save(target);
             var sink = Context;            
             saved.OnSome(file => sink.Notify(ExractedHost(host.Path,file)))
                 .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
-            return saved ? some(report) : none<OpExtractReport>();
+            return saved ? some(report) : none<MemberExtractReport>();
         }
 
-        public ParsedExtract[] Parse(OpExtract[] src)
+        public ParsedExtract[] Parse(MemberExtract[] src)
         {
             var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
             var parsed = parser.Parse(src);
             return parsed;
         }
 
-        AsmFunctionList Decode(ApiHost host, OpExtract[] extracted, ParsedOpExtract[] parsed)
+        AsmFunctionList Decode(ApiHost host, MemberExtract[] extracted, ParsedOpExtract[] parsed)
         {
             var path = Paths.DecodedPath(host.Path);
             var decoder = Context.AsmFunctionDecoder();
             var functions = new AsmFunction[extracted.Length];
             using var dst = Context.AsmWriter(Context.AsmFormat.WithSectionDelimiter(), path);            
-            // for(var i=0; i< extracted.Length; i++)
-            // {
-            //     var record = parsed[i];
-            //     if(record.Length != 0)
-            //         functions[i] = Decode(record, decoder, dst);
-            //     else
-            //         functions[i] = AsmFunction.Empty;
-            // }
             return AsmFunctionList.Define(functions);
         }
 
-        CapturedOp[] CaptureHostOps(ApiHost src)
+        CapturedOp[] CaptureHostOps(ApiHost host)
         {
             var extracts = list<CapturedOp>();            
-            Context.Notify($"Executing {src} capture workflow");            
+            Context.Notify($"Executing {host} capture workflow");            
 
             var capture = Context.HostExtractor();
-            var captured = capture.ExtractOps(src);
-            var target = Paths.ExtractPath(src.Path);  
+            var extract = capture.Extract(host);
+            var report = MemberExtractReport.Create(host.Path, extract);
+            var target = Paths.ExtractPath(host.Path);  
             var sink = Context;
-            captured.Save(target)
-                     .OnSome(file => sink.Notify(ExractedHost(src.Path,file)))
-                     .OnNone(() => sink.Notify(HostExtractionFailed(src.Path)));
+            report.Save(target)
+                     .OnSome(file => sink.Notify(ExractedHost(host.Path,file)))
+                     .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
         
 
             return extracts.ToArray();

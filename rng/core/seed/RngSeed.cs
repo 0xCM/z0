@@ -90,7 +90,7 @@ namespace Z0
                 return offset;
             else
             {
-                Errors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
+                AppErrors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
                 return 0;
             }
         }

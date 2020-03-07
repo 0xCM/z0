@@ -81,24 +81,16 @@ namespace Z0
         /// </summary>
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
-        public static void magenta(string title, object content)
-            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
+        public static void magenta(object content)
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
 
         /// <summary>
         /// Emits an information-level message with a magenta foreground
         /// </summary>
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
-        public static void magenta(object content)
-            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
-
-        /// <summary>
-        /// Emits an information-level message with a cyan foreground
-        /// </summary>
-        /// <param name="content">The message to emit</param>
-        /// <param name="caller">The calling member</param>
-        public static void cyan(string title, object content)
-            => T.WriteMessage(AppMsg.Define(  $"{title}: " + content?.ToString() ?? string.Empty, AppMsgKind.HiliteCL));
+        public static void magenta(string title, object content)
+            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
 
         /// <summary>
         /// Emits an information-level message with a cyan foreground
@@ -106,7 +98,31 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void cyan(object content)
-            => T.WriteMessage(AppMsg.Define(content?.ToString() ?? string.Empty, AppMsgKind.HiliteCL));
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Cyan));
+
+        /// <summary>
+        /// Emits an information-level message with a cyan foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void cyan(string title, object content)
+            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Cyan));
+
+        /// <summary>
+        /// Emits an information-level message with a dark yello foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void golden(object content)
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.DarkYellow));
+
+        /// <summary>
+        /// Emits an information-level message with a dark yellow foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void golden(string title, object content)
+            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.DarkYellow));
 
         /// <summary>
         /// Emits a verbose-level message

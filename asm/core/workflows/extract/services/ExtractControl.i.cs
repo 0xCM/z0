@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source exchange</param>
         /// <param name="state">The new state</param>
-        void OnCaptureStep(in OpExtractExchange src, in OpExtractionState state);   
+        void OnCaptureStep(in OpExtractExchange src, in ExtractionState state);   
 
         /// <summary>
         /// Invoked by the exchange to relay a capture completion event
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source exchange</param>
         /// <param name="state">The final state</param>
         /// <param name="captured">The captured member</param>
-        void OnCaptureComplete(in OpExtractExchange src, in OpExtractionState state, in CapturedOp captured);        
+        void OnCaptureComplete(in OpExtractExchange src, in ExtractionState state, in CapturedOp captured);        
     }
 
     public interface IExtractControl : ICaptureService, IExtractJunction

@@ -14,7 +14,7 @@ namespace Z0.Asm
     /// </summary>
     public class AsmFunction
     {           
-        public static AsmFunction Empty => new AsmFunction(OpDescriptor.Empty, AsmCode.Empty, 0, AsmInstructionList.Empty);
+        public static AsmFunction Empty => new AsmFunction(MemberDescriptor.Empty, AsmCode.Empty, 0, AsmInstructionList.Empty);
 
         public static AsmFunction Define(ParsedOpExtract encoding,  AsmInstructionList instructions)
         {         
@@ -28,7 +28,7 @@ namespace Z0.Asm
             return new AsmFunction(encoding.Descriptor, code, encoding.TermCode, instructions);
         }
 
-        AsmFunction(OpDescriptor op, AsmCode code, ExtractTermCode term, AsmInstructionList instructions)
+        AsmFunction(MemberDescriptor op, AsmCode code, ExtractTermCode term, AsmInstructionList instructions)
         {
             this.Id = op.Id;
             this.Operation = op;
@@ -40,7 +40,7 @@ namespace Z0.Asm
         /// <summary>
         /// The defining operation
         /// </summary>
-        public OpDescriptor Operation {get;}
+        public MemberDescriptor Operation {get;}
 
         /// <summary>
         /// The function identifier

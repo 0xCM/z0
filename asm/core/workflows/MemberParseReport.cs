@@ -9,10 +9,12 @@ namespace Z0
 
     using static Root;
 
-    using F = ParsedOpField;
-    using R = ParsedOpRecord;
+    using F = MemberParseField;
+    using R = MemberParseRecord;
+    using Report = MemberParseReport;
+    using Created = ParseReportCreated;
 
-    public enum ParsedOpField : ulong
+    public enum MemberParseField : ulong
     {
         Sequence = 0 | 10ul << 32,
 
@@ -29,17 +31,17 @@ namespace Z0
         Data = 6 | 1ul << 32
     }    
 
-    public readonly struct ParsedOpRecord : IRecord<F, R>
+    public readonly struct MemberParseRecord : IRecord<F, R>
     {                        
-        public static ParsedOpRecord Empty => Define(0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, MemoryExtract.Empty);
+        public static MemberParseRecord Empty => Define(0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, text.blank, MemoryExtract.Empty);
         
-        public static implicit operator ParsedOpExtract(ParsedOpRecord src)
+        public static implicit operator ParsedOpExtract(MemberParseRecord src)
             => src.ToParsedEncoding();
 
-        public static ParsedOpRecord Define(int Sequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, MemoryExtract Data)
-            => new ParsedOpRecord(Sequence, Address, Length, TermCode, Uri,OpSig,Data);
+        public static MemberParseRecord Define(int Sequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, MemoryExtract Data)
+            => new MemberParseRecord(Sequence, Address, Length, TermCode, Uri,OpSig,Data);
         
-        ParsedOpRecord(int Sequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, MemoryExtract Data)
+        MemberParseRecord(int Sequence, MemoryAddress Address, int Length, ExtractTermCode TermCode, OpUri Uri, string OpSig, MemoryExtract Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -108,27 +110,27 @@ namespace Z0
         {
             var src = this;
             var count = src.Length;
-            var op = OpDescriptor.Define(src.Uri, src.OpSig);
+            var op = MemberDescriptor.Define(src.Uri, src.OpSig);
             var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
-            var final = OpExtractionState.Define(op.Id, count, range.End, src.Data.LastByte);
+            var final = ExtractionState.Define(op.Id, count, range.End, src.Data.LastByte);
             var outcome = ExtractionOutcome.Define(final, range, src.TermCode);
             return ParsedOpExtract.Define(op, outcome.TermCode, src.Data);
         }
     }
 
-    public class ParsedOpReport : Report<ParsedOpReport,F,R>
+    public class MemberParseReport : Report<Report,F,R>
     {             
         [MethodImpl(Inline)]
-        public static ParsedOpReport Create(params ParsedOpRecord[] records)
-            => new ParsedOpReport(records);
+        public static Report Create(params R[] records)
+            => new Report(records);
 
-        public static ParsedOpReport Create(ParsedExtract[] src)
+        public static Report Create(ParsedExtract[] src)
         {
-            var dst = new ParsedOpRecord[src.Length];
+            var dst = new MemberParseRecord[src.Length];
             for(var i=0; i< dst.Length; i++)
             {
                 ref readonly var current = ref src[i];                
-                dst[i] = ParsedOpRecord.Define
+                dst[i] = MemberParseRecord.Define
                 (
                      Sequence : i,
                      Address : current.Address,
@@ -140,16 +142,42 @@ namespace Z0
                 );
                 
             }
-            return new ParsedOpReport(dst);
+            return new Report(dst);
         }
 
-        public ParsedOpReport(){}
+        public MemberParseReport(){}
         
         [MethodImpl(Inline)]
-        ParsedOpReport(params ParsedOpRecord[] records)
+        MemberParseReport(params R[] records)
             : base(records)
         {
 
         }
+
+        public Created CreatedEvent()
+            => Created.Define(this);
     }
+
+    public readonly struct ParseReportCreated : IAppEvent<Created,Report>
+    {
+        public static Created Empty => new Created(MemberParseReport.Empty);
+
+        [MethodImpl(Inline)]
+        public static Created Define(Report report)
+            => new Created(report);
+
+        [MethodImpl(Inline)]
+        ParseReportCreated(Report report)
+        {
+            this.EventData = report;
+        }
+
+        public Report EventData {get;}
+
+        public string EventName
+            => $"{EventData.ReportName} created: {EventData.RecordCount}";
+        
+        public string Format()
+            => EventName;         
+    }    
 }

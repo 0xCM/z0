@@ -10,9 +10,9 @@ namespace Z0
     {
         FiniteSeq<CapturedOp> Capture(AssemblyId src);
 
-        ParsedExtract[] Parse(OpExtract[] src);
+        ParsedExtract[] Parse(MemberExtract[] src);
         
-        Option<OpExtractReport> ExtractOps(ApiHost host);        
+        Option<MemberExtractReport> ExtractOps(ApiHost host);        
 
     }
 

@@ -16,12 +16,12 @@ namespace Z0
     partial class Root
     {        
         public static AppException unsupported(object feature, [Caller] string caller = null, [File] string file = null,  [Line] int? line = null)
-            => Errors.FeatureUnsupported(feature, caller,file,line);
+            => AppErrors.FeatureUnsupported(feature, caller,file,line);
 
         public static AppException unsupported<T>([Caller] string caller = null, [File] string file = null,  [Line] int? line = null)
-            => Errors.TypeUnsupported<T>(caller,file,line);
+            => AppErrors.TypeUnsupported<T>(caller,file,line);
 
         public static void require(bool test, string info = null, [Caller] string caller = null, [File] string file = null,  [Line] int? line = null)
-            => Errors.ThrowIfFalse(test, info, caller, file, line);
+            => AppErrors.ThrowIfFalse(test, info, caller, file, line);
     }
 }

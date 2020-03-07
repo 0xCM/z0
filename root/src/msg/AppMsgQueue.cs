@@ -30,7 +30,7 @@ namespace Z0
             this.Messages = src.ToList();
         }
 
-        public IReadOnlyList<AppMsg> Dequeue()
+        public IReadOnlyList<AppMsg> Flush()
         {
             lock(lockobj)
             {
@@ -51,7 +51,7 @@ namespace Z0
             lock(lockobj)
             {
                 Notify(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
-                return Dequeue();
+                return Flush();
             }
         }
         

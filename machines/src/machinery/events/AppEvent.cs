@@ -14,28 +14,28 @@ namespace Z0
     /// <summary>
     /// Identifies an application-level/logical event
     /// </summary>
-    public readonly struct AppEvent
+    public readonly struct MachineEvent
     {
         public readonly EventIdentity EventId;
 
         [MethodImpl(Inline)]
-        public static AppEvent Define(EventIdentity id)
-            => new AppEvent(id);
+        public static MachineEvent Define(EventIdentity id)
+            => new MachineEvent(id);
 
         [MethodImpl(Inline)]
-        public static AppEvent<T> Define<T>(EventIdentity id, T data)
+        public static MachineEvent<T> Define<T>(EventIdentity id, T data)
             where T : unmanaged
-            => new AppEvent<T>(id, data);
+            => new MachineEvent<T>(id, data);
 
         [MethodImpl(Inline)]
-        public AppEvent(EventIdentity id)
+        public MachineEvent(EventIdentity id)
             => EventId = id;
     }
 
     /// <summary>
     /// Represents an application-level/logical event with which data specific to an event class is associated
     /// </summary>
-    public readonly struct AppEvent<T>
+    public readonly struct MachineEvent<T>
         where T : unmanaged
     {
         public readonly EventIdentity EventId;
@@ -49,15 +49,15 @@ namespace Z0
         /// Reconstitutes an event from a sequence of bytes
         /// </summary>
         [MethodImpl(Inline)]
-        public static AppEvent<T> Materialize(Span<byte> src)
-            => MemoryMarshal.Read<AppEvent<T>>(src);
+        public static MachineEvent<T> Materialize(Span<byte> src)
+            => MemoryMarshal.Read<MachineEvent<T>>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AppEvent(AppEvent<T> src)
-            => new AppEvent(src.EventId);
+        public static implicit operator MachineEvent(MachineEvent<T> src)
+            => new MachineEvent(src.EventId);
 
         [MethodImpl(Inline)]
-        public AppEvent(EventIdentity id, T data)
+        public MachineEvent(EventIdentity id, T data)
         {
             EventId = id;
             Payload = data;

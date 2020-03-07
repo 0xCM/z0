@@ -20,7 +20,7 @@ namespace Z0
                 return Cells.cell<ulong>(RawBytes, (int)(i*8));
             else
             {               
-                Errors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 
+                AppErrors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 
                 return 0;
             }
         }

@@ -8,8 +8,8 @@ namespace Z0
     
     public interface IOpExtractParser : IAsmService
     {
-        ParsedOpReport Parse(ApiHost src, OpExtractReport encoded);        
+        MemberParseReport Parse(ApiHost src, MemberExtractReport encoded);        
 
-        ParsedExtract[] Parse(OpExtract[] src);
+        ParsedExtract[] Parse(params MemberExtract[] src);
     }
 }

@@ -25,7 +25,7 @@ namespace Z0
             foreach(var item in src.Members)            
             {
                 if(!index.TryAdd(item.Id, item))
-                    Errors.Throw($"Duplicate identifier found: Id = {item.Id}");
+                    AppErrors.Throw($"Duplicate identifier found: Id = {item.Id}");
             }
         }
         

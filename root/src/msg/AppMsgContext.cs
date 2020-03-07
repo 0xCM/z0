@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
 
-    public sealed class MsgContext : IMsgContext
+    public sealed class AppMsgContext : IAppMsgContext
     {
         readonly IAppMsgQueue Queue;
 
@@ -19,20 +19,20 @@ namespace Z0
         /// Creates a message context that manages its own queue
         /// </summary>
         /// <param name="queue">The target queue</param>
-        public static IMsgContext Create(IAppMsgQueue dst)
-            => new MsgContext(dst);          
+        public static IAppMsgContext Create(IAppMsgQueue dst)
+            => new AppMsgContext(dst);          
 
-        public static IMsgContext Create()
-            => new MsgContext();
+        public static IAppMsgContext Create()
+            => new AppMsgContext();
 
-        MsgContext(IAppMsgQueue dst)
+        AppMsgContext(IAppMsgQueue dst)
             => Queue = dst;
 
-        MsgContext()
+        AppMsgContext()
             => Queue = AppMsgQueue.Create();
 
-        public IReadOnlyList<AppMsg> Dequeue()
-            => Queue.Dequeue();
+        public IReadOnlyList<AppMsg> Flush()
+            => Queue.Flush();
 
         /// <summary>
         /// Enqueues application messages

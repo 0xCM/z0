@@ -21,7 +21,7 @@ namespace Z0
         public static AsmFunctionGroup Define(OpIdentity id, AsmFunction[] members)
         {            
             if(members.Length == 0)
-                Errors.ThrowFeatureUnsupported($"{id}: Empty groups are disallowed");            
+                AppErrors.ThrowFeatureUnsupported($"{id}: Empty groups are disallowed");            
             
             return new AsmFunctionGroup(id, members);
         }

@@ -43,6 +43,10 @@ namespace Z0
             => new ApiHostUri(owner,name);
      
         [MethodImpl(Inline)]
+        public static implicit operator ApiHostUri(ApiHost src)
+            => src.Path;
+        
+        [MethodImpl(Inline)]
         ApiHostUri(AssemblyId owner, string name)
         {
             this.Owner = owner;

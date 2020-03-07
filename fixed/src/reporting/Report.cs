@@ -40,6 +40,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Option<FilePath> Save(FilePath dst) => Records.Save(dst);   
+
+        public virtual string ReportName  => GetType().DisplayName();
+
     }
     
     public class Report<F,R> : Report<R>
@@ -60,9 +63,10 @@ namespace Z0
         }
 
         public readonly RecordFormatter<F,R> Formatter;
+
     }
 
-   public class Report<B,F, R> : Report<R>
+   public class Report<B,F,R> : Report<R>
         where F : unmanaged, Enum
         where R : IRecord<F, R>
         where B : Report<B,F,R>, new()
@@ -76,6 +80,7 @@ namespace Z0
         }
 
         public Report()
+            : base(new R[]{})
         {
             Formatter = Reports.formatter<F,R>();
         }

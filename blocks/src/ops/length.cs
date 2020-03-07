@@ -106,7 +106,7 @@ namespace Z0
         public static int length<S,T>(Block128<S> lhs, Block128<T> rhs, [Caller] string caller = null,[File] string file = null, [Line] int? line = null)
             where T : unmanaged
             where S : unmanaged
-                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
 
         /// <summary>
         /// Returns the length of equal-length blocks; otherwise raises an error
@@ -116,7 +116,7 @@ namespace Z0
         public static int length<S,T>(Block256<S> lhs, Block256<T> rhs, [Caller] string caller = null,[File] string file = null, [Line] int? line = null)
             where T : unmanaged
             where S : unmanaged
-                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
 
         /// <summary>
         /// Returns the length of equal-length blocks; otherwise raises an error
@@ -126,6 +126,6 @@ namespace Z0
         public static int length<S,T>(Block512<S> lhs, Block512<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
             where S : unmanaged
-                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
     }
 }

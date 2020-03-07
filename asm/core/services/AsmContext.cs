@@ -104,7 +104,7 @@ namespace Z0
 
         readonly Option<IContext> RootContext;
 
-        Option<IMsgContext> MsgContext => RootContext.TryMap(c => c as IMsgContext);
+        Option<IAppMsgContext> MsgContext => RootContext.TryMap(c => c as IAppMsgContext);
 
         Option<IAppMsgQueue> MsgSink => MsgContext.TryMap(c => c as IAppMsgQueue);
         
@@ -135,8 +135,8 @@ namespace Z0
         public void Notify(string msg, AppMsgKind? severity = null)
             => MsgSink.OnSome(sink => sink.Notify(msg, severity));
 
-        public IReadOnlyList<AppMsg> Dequeue()
-            => MsgSink ? MsgSink.Value.Dequeue() : array<AppMsg>();
+        public IReadOnlyList<AppMsg> Flush()
+            => MsgSink ? MsgSink.Value.Flush() : array<AppMsg>();
 
         public IReadOnlyList<AppMsg> Flush(Exception e)
             => MsgSink ? MsgSink.Value.Flush(e) : array<AppMsg>();

@@ -13,12 +13,12 @@ namespace Z0
     /// <summary>
     /// Defines the state of the routine capture workflow at a given step
     /// </summary>
-    public readonly struct OpExtractionState : IFormattable<OpExtractionState>
+    public readonly struct ExtractionState : IFormattable<ExtractionState>
     {
         /// <summary>
         /// The empty state
         /// </summary>
-        public static OpExtractionState Empty => new OpExtractionState(OpIdentity.Empty, 0,0,0);
+        public static ExtractionState Empty => new ExtractionState(OpIdentity.Empty, 0,0,0);
 
         /// <summary>
         /// The subject identifier
@@ -47,8 +47,8 @@ namespace Z0
         /// <param name="location">The memory location from which data was extracted</param>
         /// <param name="payload">The extracted data</param>
         [MethodImpl(Inline)]
-        public static OpExtractionState Define(OpIdentity opid, int offset, long location, byte payload)
-            => new OpExtractionState(opid,offset,location,payload);
+        public static ExtractionState Define(OpIdentity opid, int offset, long location, byte payload)
+            => new ExtractionState(opid,offset,location,payload);
 
         /// <summary>
         /// Defines a capture state
@@ -57,11 +57,11 @@ namespace Z0
         /// <param name="location">The memory location from which data was extracted</param>
         /// <param name="payload">The extracted data</param>
         [MethodImpl(Inline)]
-        public static OpExtractionState Define(OpIdentity opid, int offset, MemoryAddress location, byte payload)
-            => new OpExtractionState(opid,offset,location,payload);
+        public static ExtractionState Define(OpIdentity opid, int offset, MemoryAddress location, byte payload)
+            => new ExtractionState(opid,offset,location,payload);
 
         [MethodImpl(Inline)]
-        OpExtractionState(OpIdentity opid, int offset, long location, byte payload)
+        ExtractionState(OpIdentity opid, int offset, long location, byte payload)
         {
             this.OpId = opid;
             this.Offset = offset - 1;

@@ -50,7 +50,7 @@ namespace Z0
 
         static void buffer_client(IAsmContext context)
         {
-            var state = new List<OpExtractionState>();
+            var state = new List<ExtractionState>();
             var f = typeof(gmath).Method(nameof(gmath.alteven))
                                  .MapRequired(m => m.GetGenericMethodDefinition()
                                  .MakeGenericMethod(typeof(byte)));

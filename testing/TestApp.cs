@@ -207,7 +207,7 @@ namespace Z0
                 exec();
                 clock.Stop();
 
-                messages.AddRange(unit.Dequeue());
+                messages.AddRange(unit.Flush());
                 messages.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
 
                 var outcomes = unit.TakeOutcomes().ToArray();                
@@ -220,7 +220,7 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
-                messages.AddRange(unit.Dequeue());                
+                messages.AddRange(unit.Flush());                
                 messages.AddRange(CreateErrorMessages(casename,e));
                 PostTestResult(TestCaseRecord.Define(casename,false,clock.Time));                
             }
@@ -245,7 +245,7 @@ namespace Z0
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else                
-                yield return Messages.Unanticipated(e?.InnerException ?? e);
+                yield return AppMessages.Unanticipated(e?.InnerException ?? e);
 
             yield return AppMsg.Error($"{name} failed.");
         }
@@ -253,7 +253,7 @@ namespace Z0
         AppMsg[] CollectMessages(IUnitTest src, string testName, Duration runtime, Exception e = null)
         {
             var messages = new List<AppMsg>();
-            messages.AddRange(src.Dequeue());
+            messages.AddRange(src.Flush());
             if(e != null)
                 messages.AddRange(CreateErrorMessages(testName,e));
             else
@@ -322,7 +322,7 @@ namespace Z0
                 clock.Stop();
 
 
-                collected.AddRange(unit.Dequeue());
+                collected.AddRange(unit.Flush());
                 collected.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
@@ -334,14 +334,14 @@ namespace Z0
             catch(Exception e)
             {                
                 clock.Stop();
-                collected.AddRange(unit.Dequeue());                
+                collected.AddRange(unit.Flush());                
                 collected.AddRange(CreateErrorMessages(casename, e));
              
                 cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
             }
             finally
             {     
-                Messages.emit(Context, collected);
+                AppMessages.emit(Context, collected);
                 iter(collected,term.print);       
                 //print(messages);
             }

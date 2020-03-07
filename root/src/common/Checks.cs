@@ -18,7 +18,7 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static Root;
-    using static Messages;
+    using static AppMessages;
 
     public static class Checks
     {
@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]   
         public static int length<T>(Span<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+            => lhs.Length == rhs.Length ? lhs.Length : throw AppErrors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
         /// <summary>
         /// Returns the common length of the operands if they are the same; otherwise, raises an error
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]   
         public static int length<T>(IReadOnlyList<T> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null) 
-            => lhs.Count == rhs.Length ? lhs.Count : throw Errors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
+            => lhs.Count == rhs.Length ? lhs.Count : throw AppErrors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
 
         /// <summary>
         /// Returns the common length of the operands if they are the same; otherwise, raises an error
@@ -51,7 +51,7 @@ namespace Z0
         /// <typeparam name="S">The element type of the second operand</typeparam>
         [MethodImpl(Inline)]   
         public static int length<S,T>(Span<S> lhs, Span<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+            => lhs.Length == rhs.Length ? lhs.Length : throw AppErrors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
         /// <summary>
         /// Returns the common length of the operands if they are the same; otherwise, raises an error
@@ -62,7 +62,7 @@ namespace Z0
         /// <typeparam name="S">The element type of the second operand</typeparam>
         [MethodImpl(Inline)]   
         public static int length<S,T>(ReadOnlySpan<S> lhs, Span<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+            => lhs.Length == rhs.Length ? lhs.Length : throw AppErrors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
         /// <summary>
         /// Returns the common length of the operands if they are the same; otherwise, raises an error
@@ -73,7 +73,7 @@ namespace Z0
         /// <typeparam name="S">The element type of the second operand</typeparam>
         [MethodImpl(Inline)]   
         public static int length<S,T>(ReadOnlySpan<S> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+            => lhs.Length == rhs.Length ? lhs.Length : throw AppErrors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void eq(bool lhs, bool rhs)
-            => (lhs == rhs).IfNone(() => Errors.ThrowNotEqualNoCaller(lhs,rhs));
+            => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
 
         /// <summary>
         /// Asserts the equality of two bit values
@@ -241,7 +241,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         public static void eq(bit lhs, bit rhs)
-            => (lhs == rhs).IfNone(() => Errors.ThrowNotEqualNoCaller(lhs,rhs));
+            => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
 
         public static bool eq(HexByteKind lhs, HexByteKind rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
@@ -304,7 +304,7 @@ namespace Z0
             {
                 for(var i = 0; i< length(lhs,rhs); i++)
                     if(!lhs[i].Equals(rhs[i]))
-                        Errors.ThrowNotEqualNoCaller(lhs[i], rhs[i]);
+                        AppErrors.ThrowNotEqualNoCaller(lhs[i], rhs[i]);
             }
         }
 
@@ -321,7 +321,7 @@ namespace Z0
             {
                 for(var i = 0; i< length(lhs,rhs); i++)
                     if(!lhs[i].Equals(rhs[i]))
-                        Errors.ThrowNotEqualNoCaller(lhs[i], rhs[i]);
+                        AppErrors.ThrowNotEqualNoCaller(lhs[i], rhs[i]);
             }
         }
 

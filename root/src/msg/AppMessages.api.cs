@@ -15,7 +15,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public static class Messages
+    public static class AppMessages
     {
         public static IEnumerable<AppMsg> emit(IContext context, IEnumerable<AppMsg> src)
         {                    

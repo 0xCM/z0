@@ -105,11 +105,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        static ExtractionOutcome Complete(in OpExtractionState state, ExtractTermCode tc, long start, long end, int delta)
+        static ExtractionOutcome Complete(in ExtractionState state, ExtractTermCode tc, long start, long end, int delta)
             => ExtractionOutcome.Define(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
-        static ParsedMemory SummarizeParse(in OpExtractExchange exchange, in OpExtractionState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        static ParsedMemory SummarizeParse(in OpExtractExchange exchange, in ExtractionState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
         {
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
@@ -134,7 +134,7 @@ namespace Z0.Asm
             var offset = 0;            
             int? ret_offset = null;
             var end = (long)pSrc;
-            var state = default(OpExtractionState);
+            var state = default(ExtractionState);
 
             while(offset < limit)
             {
@@ -152,12 +152,12 @@ namespace Z0.Asm
         }                    
 
         [MethodImpl(Inline)]
-        static OpExtractionState Step(in OpExtractExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
+        static ExtractionState Step(in OpExtractExchange exchange, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
         {
             var code = Unsafe.Read<byte>(pSrc++);
             exchange.Target(offset++) = code;
             location = (long)pSrc;
-            return OpExtractionState.Define(id, offset, location, code);
+            return ExtractionState.Define(id, offset, location, code);
         }
 
         static ExtractTermCode? CalcTerm(in OpExtractExchange exchange, int offset, int? ret_offset, out int delta)

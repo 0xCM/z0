@@ -12,11 +12,11 @@ namespace Z0.Asm
     public readonly struct CapturedHost
     {
         [MethodImpl(Inline)]
-        public static CapturedHost Define(ApiHostUri host, OpExtractReport captured, ParsedOpReport parsed, AsmFunctionList decoded)
+        public static CapturedHost Define(ApiHostUri host, MemberExtractReport captured, MemberParseReport parsed, AsmFunctionList decoded)
             => new CapturedHost(host, captured, parsed, decoded);
         
         [MethodImpl(Inline)]
-        CapturedHost(ApiHostUri host, OpExtractReport captured, ParsedOpReport parsed, AsmFunctionList decoded)
+        CapturedHost(ApiHostUri host, MemberExtractReport captured, MemberParseReport parsed, AsmFunctionList decoded)
         {
             this.Host = host;
             this.Captured = captured;
@@ -26,9 +26,9 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
 
-        public readonly OpExtractReport Captured;
+        public readonly MemberExtractReport Captured;
 
-        public readonly ParsedOpReport Parsed;
+        public readonly MemberParseReport Parsed;
         
         public readonly AsmFunctionList Decoded;
     }

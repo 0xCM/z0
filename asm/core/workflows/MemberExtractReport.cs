@@ -6,11 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    
+    using static Root;
 
-    using F = OpExtractField;
-    using R = OpExtractRecord;
+    using F = MemberExtractField;
+    using R = MemberExtractRecord;
+    using Report = MemberExtractReport;
+    using Created = ExtractReportCreated;
 
-    public enum OpExtractField : ulong
+    public enum MemberExtractField : ulong
     {
         Sequence = 0 | 10ul << 32,
 
@@ -25,9 +29,9 @@ namespace Z0
         Data = 5 | 1ul << 32
     }
 
-    public readonly struct OpExtractRecord : IRecord<F, R>
+    public readonly struct MemberExtractRecord : IRecord<F, R>
     {
-        public OpExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, MemoryExtract Data)
+        public MemberExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, MemoryExtract Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -69,16 +73,20 @@ namespace Z0
 
         static Report<F,R> Model => Report<F,R>.Empty;
     }
-
-    public class OpExtractReport : Report<F,R>
+    
+    public class MemberExtractReport : Report<MemberExtractReport,F,R>
     {        
-        public static OpExtractReport Create(OpExtract[] src)
+        public ApiHostUri ApiHost {get;}
+
+        public override string ReportName => $"Extract report for {ApiHost.Format()}";
+
+        public static MemberExtractReport Create(ApiHostUri host, MemberExtract[] extracts)
         {
-            var records = new OpExtractRecord[src.Length];
-            for(var i=0; i< src.Length; i++)
+            var records = new MemberExtractRecord[extracts.Length];
+            for(var i=0; i< extracts.Length; i++)
             {
-                var op = src[i];
-                records[i] = new OpExtractRecord(                
+                var op = extracts[i];
+                records[i] = new MemberExtractRecord(                
                     Sequence : i,
                     Address : op.Member.Address,
                     Length : op.EncodedData.Length,
@@ -88,15 +96,41 @@ namespace Z0
                     );
 
             }
-            return new OpExtractReport(records);
+            return new MemberExtractReport(host, records);
         }
-
-        public static OpExtractReport Create(OpExtractRecord[] records)
-            => new OpExtractReport(records);
         
-        OpExtractReport(OpExtractRecord[] records)
+        public MemberExtractReport(){}
+
+        MemberExtractReport(ApiHostUri host, MemberExtractRecord[] records)
             : base(records)
         {
+            this.ApiHost = host;
         }        
+        
+        public Created CreatedEvent()
+            => Created.Define(this);
+    }    
+
+    public readonly struct ExtractReportCreated : IAppEvent<Created,Report>
+    {
+        public static Created Empty => new ExtractReportCreated(Report.Empty);
+        
+        [MethodImpl(Inline)]
+        public static Created Define(Report report)
+            => new Created(report);
+
+        [MethodImpl(Inline)]
+        public ExtractReportCreated(Report report)
+        {
+            this.EventData = report;
+        }
+
+        public Report EventData {get;}
+
+        public string EventName
+            => $"{EventData.ReportName} created: {EventData.RecordCount}";
+        
+        public string Format()
+            => EventName;         
     }    
 }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
         
@@ -12,11 +12,21 @@ namespace Z0
     public interface IHostOpExtractor : IAsmService
     {
         /// <summary>
-        /// Extracts the operations supplied by the host, as determined by the DefinedOps operation
+        /// Extracts encoded content that defines executable code for a located member
         /// </summary>
-        /// <param name="src">The defining host</param>
-        OpExtractReport ExtractOps(ApiHost src);
+        /// <param name="src">The source member</param>
+        MemberExtract Extract(LocatedMember src);        
 
-        OpExtract[] Extract(ApiHost src);        
+        /// <summary>
+        /// Extracts encoded content that defines executable code for an array of located members
+        /// </summary>
+        /// <param name="src">The source member</param>
+        MemberExtract[] Extract(LocatedMember[] src);
+
+        /// <summary>
+        /// Extracts encoded content for all operations defined by a host
+        /// </summary>
+        /// <param name="src">The source member</param>
+        MemberExtract[] Extract(ApiHost src);        
     }
 }

@@ -119,12 +119,12 @@ namespace Z0
             
             if (size != actualSize)
             {
-                term.error(Errors.LengthMismatch((int)size, actualSize));
+                term.error(AppErrors.LengthMismatch((int)size, actualSize));
                 return default;
             }
 
             var location = MemoryRange.Define(address, address + size);            
-            var result = ExtractionOutcome.Define(OpExtractionState.Empty, location.Start, location.End, ExtractTermCode.CTC_MSDIAG);
+            var result = ExtractionOutcome.Define(ExtractionState.Empty, location.Start, location.End, ExtractTermCode.CTC_MSDIAG);
             var bits = ParsedMemoryExtract.Define(address, buffer,buffer);
 			return CapturedOp.Define(id, method, location, bits, result.TermCode);                    
         }

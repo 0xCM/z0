@@ -23,7 +23,6 @@ namespace Z0
         public static IAsmAssemblyArchiver Archiver(this IAsmContext context)
             => AssemblyArchiverService.Create(context);
 
-
         /// <summary>
         /// Instantiates a contextual function archive service that is specialized for an assembly and api host
         /// </summary>
@@ -83,10 +82,11 @@ namespace Z0
             => OpExtractParser.New(context, buffer);
 
         [MethodImpl(Inline)]
+        public static IOpExtractParser ExtractParser(this IAsmContext context, int? bufferlen = null)
+            => OpExtractParser.New(context, bufferlen);
+
+        [MethodImpl(Inline)]
         public static IAsmHostArchive HostArchive(this IAsmContext context, ApiHostUri host)
             => AsmHostArchive.Create(context, host);    
-
-
-
     }
 }

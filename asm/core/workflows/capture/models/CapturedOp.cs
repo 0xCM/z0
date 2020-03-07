@@ -17,7 +17,7 @@ namespace Z0
     {        
         public readonly OpIdentity Id; 
 
-        public readonly OpDescriptor Operation;
+        public readonly MemberDescriptor Operation;
 
         public readonly AsmCode Code;
         
@@ -43,7 +43,7 @@ namespace Z0
             require((int)memsrc.Length == bits.Parsed.Length);    
             this.Id = id;        
             this.Code = AsmCode.Define(id, bits.Parsed);
-            this.Operation = OpDescriptor.Define(OpUri.Hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id), method.Signature().Format());
+            this.Operation = MemberDescriptor.Define(OpUri.Hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id), method.Signature().Format());
             this.Method = method;
             this.TermCode = term;
             this.RawBits = bits.Source;            

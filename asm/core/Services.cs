@@ -15,43 +15,7 @@ namespace Z0
     using static Root;
 
     public static class AsmCoreServices
-    {
-        public static Option<ParsedOpReport> LoadParsedEncodings(this IAsmContext context, ApiHostUri host, char? delimiter = null)
-        {
-            var path = context.EmissionPaths().ParsedPath(host);
-            var sep = delimiter ?? text.pipe();
-            var model = ParsedOpReport.Empty;
-            
-            try
-            {            
-                var records = new List<ParsedOpRecord>();
-                var headers = Reports.headers<ParsedOpRecord>();
-                var count = 0;
-                
-                using var reader = path.Reader();
-                while(!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    if(count != 0)
-                    {
-                        var fields = line.SplitClean(sep);
-                        if(fields.Length != model.FieldCount)
-                            throw new Exception($"A line had an unexpected number of fields. Expected = {model.FieldCount}, Actual = {fields.Length}");                        
-                        //records.Add(ParsedEncodingRecord.FromFields(fields));
-                    }
-                        
-                    count++;                    
-                }                
-
-                return default;
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return none<ParsedOpReport>();
-            }
-        }
-            
+    {            
         [MethodImpl(Inline)]
         public static IAsmFunctionBuilder FunctionBuilder(this IAsmContext context)
             => AsmFunctionBuilder.Create(context);        
@@ -156,12 +120,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IMemberLocator MemberLocator(this IAsmContext src)
             => Z0.MemberLocator.New(src);
-
-        public static IEnumerable<LocatedMember> LocatedMembers(this IAsmContext context, AssemblyId src)
-            => context.ResolvedAssembly(src).MapValueOrElse(a => Z0.MemberLocator.New(context).Members(a), () => array<LocatedMember>());
-
-        public static IEnumerable<LocatedMember> LocatedMembers(this IAsmContext context, Type host)
-            => Z0.MemberLocator.New(context).Members(host);
 
         public static OpExtractExchange ExtractExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
         {

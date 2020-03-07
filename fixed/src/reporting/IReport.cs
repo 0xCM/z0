@@ -14,6 +14,26 @@ namespace Z0
     {
         string[] HeaderNames {get;}
 
+        string ReportName {get;}
+
+    }
+    
+    public readonly struct ReportCreated<T> : IAppEvent<ReportCreated<T>,T>
+        where T : IReport
+    {
+        [MethodImpl(Inline)]
+        public ReportCreated(T report)
+        {
+            this.EventData = report;
+        }
+
+        public T EventData {get;}
+
+        public string EventName
+            => $"{EventData.ReportName} created";
+        
+        public string Format()
+            => EventName;         
     }
     
     public interface IReport<R> : IReport
@@ -23,6 +43,9 @@ namespace Z0
 
         string[] IReport.HeaderNames 
             =>  Reports.headers<R>();
+
+        string IReport.ReportName 
+            => GetType().DisplayName();
 
         R this[int index]
             => Records[index];

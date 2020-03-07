@@ -13,14 +13,15 @@ namespace Z0
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    public readonly struct OpExtract
+    public readonly struct MemberExtract
     {        
         [MethodImpl(Inline)]
-        public static OpExtract Define(OpIdentity id, OpUri uri, LocatedMember member, MemoryExtract encoded)
-            => new OpExtract(id,uri,member,encoded);
+        public static MemberExtract Define(LocatedMember member, MemoryExtract encoded)
+            => new MemberExtract(member.Id, member.Uri, member, encoded);
+
          
         [MethodImpl(Inline)]
-        OpExtract(OpIdentity id, OpUri uri, LocatedMember member, MemoryExtract encoded)
+        MemberExtract(OpIdentity id, OpUri uri, LocatedMember member, MemoryExtract encoded)
         {
             this.Id = id;
             this.Uri = uri;
@@ -40,15 +41,15 @@ namespace Z0
     public readonly struct OpExtracts //: IFiniteSeq<OpExtract>
     {
         [MethodImpl(Inline)]
-        public static implicit operator OpExtracts(OpExtract[] src)
+        public static implicit operator OpExtracts(MemberExtract[] src)
             => new OpExtracts(src);
         
         [MethodImpl(Inline)]
-        public OpExtracts(OpExtract[] content)
+        public OpExtracts(MemberExtract[] content)
         {
             this.Content = content;
         }
         
-        public OpExtract[] Content {get;}
+        public MemberExtract[] Content {get;}
     }
 }

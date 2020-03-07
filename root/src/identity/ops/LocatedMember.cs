@@ -15,29 +15,29 @@ namespace Z0
     /// </summary>
     public readonly struct LocatedMember : IAddressable
     {
+        public readonly ApiHostUri Host;
+        
         public readonly OpIdentity Id;
 
         public readonly MethodInfo Member;
 
         public MemoryAddress Address {get;}
 
+        public OpUri Uri
+            => OpUri.Hex(Host, Member.Name, Id);
+
+
         [MethodImpl(Inline)]
-        public static LocatedMember Define(OpIdentity id, MethodInfo src, MemoryAddress address)
-            => new LocatedMember(id, src, address);
+        public static LocatedMember Define(ApiHostUri host, OpIdentity id, MethodInfo src, MemoryAddress address)
+            => new LocatedMember(host,id, src, address);
         
         [MethodImpl(Inline)]
-        LocatedMember(OpIdentity id, MethodInfo src, MemoryAddress address)
+        LocatedMember(ApiHostUri host, OpIdentity id, MethodInfo src, MemoryAddress address)
         {
+            this.Host = host;
             this.Id = id;
             this.Member = src;
             this.Address = address;
-        }
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out OpIdentity id, out MemoryAddress address)
-        {
-            id = Id;
-            address = Address;
         }
     }
 }

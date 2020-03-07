@@ -21,13 +21,13 @@ namespace Z0
         {
             this.Random = random ?? Rng.WyHash64(Seed64.Seed00);
             this.Config = config ?? TestConfigDefaults.Default();
-            this.Queue = MsgContext.Create();
+            this.Queue = AppMsgContext.Create();
             this.Context = this;
         }
 
         public IPolyrand Random {get;}
 
-        IMsgContext Queue {get;set;}
+        IAppMsgContext Queue {get;set;}
 
         public ITestConfig Config {get; private set;}
 
@@ -234,8 +234,8 @@ namespace Z0
         public void ReportBenchmark(BenchmarkRecord record)
             => Benchmarks.Enqueue(record);
 
-        public IReadOnlyList<AppMsg> Dequeue()
-            => Queue.Dequeue();
+        public IReadOnlyList<AppMsg> Flush()
+            => Queue.Flush();
 
         public void Notify(string msg, AppMsgKind? severity = null)
             => Queue.Notify(msg, severity);

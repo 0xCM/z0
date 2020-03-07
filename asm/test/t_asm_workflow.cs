@@ -2,48 +2,67 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Z0.Asm;
-
     using static Root;
+    using static HostCaptureWorkflow;
+
+    using WF = HostCaptureWorkflow;
 
     public class t_asm_workflow : t_asm<t_asm_workflow>
     {
-        public void host_workflow()
+
+        public t_asm_workflow()
         {
-            var extractor = Context.HostExtractor();
-            var parser = Context.ExtractParser(new byte[Context.DefaultBufferLength]);
-            var decoder = Context.AsmFunctionDecoder();
-            var root = RootEmissionPaths.Define(DefaultDataDir).Clear();
-            var format = Context.AsmFormat.WithSectionDelimiter();
 
-            foreach(var catalog in Context.Compostion.Catalogs)   
+        }
+        
+        void Created(ExtractReportCreated e)
+        {
+            term.golden(e.Format());
+
+        }
+
+        void Created(ParseReportCreated e)
+        {
+            term.cyan(e.Format());
+
+        }
+
+        void Decoded(WF.FunctionsDecoded e)
+        {
+            term.magenta(e.Format());
+        }
+
+        public void ExecuteWorkflow()
+        {
+            var workflow = WF.Create(Context);
+            var sinks = WF.EventSinks.Connect(workflow);
+            workflow.ExecuteWorkflow(DefaultDataDir);
+        }
+
+        void load_reports(FolderPath src)
+        {
+            var root = RootEmissionPaths.Define(src);
+
+        }
+
+        public Option<MemberParseReport> LoadMemberParseReport(ApiHostUri host)
+        {            
+            try
+            {            
+
+                return default;
+            }
+            catch(Exception e)
             {
-                foreach(var host in catalog.ApiHosts)
-                {
-                    var paths = HostEmissionPaths.Define(host.Path,root);
-                    var extract = extractor.Extract(host);
-                    foreach(var op in extract)
-                        Claim.eq(op.Uri.HostPath, host.Path);
-                        
-                    var extractReport = OpExtractReport.Create(extract); 
-                    extractReport.Save(paths.ExtractPath);
-
-                    var parsed = parser.Parse(extract);
-                    var parsedReport = ParsedOpReport.Create(parsed);                    
-                    parsedReport.Save(paths.ParsedPath);
-                    
-                    var decoded = decoder.Decode(parsed);
-
-                    using var writer = Context.AsmWriter(format, paths.DecodedPath);
-                    writer.Write(decoded);
-                }
+                term.error(e);
+                return none<MemberParseReport>();
             }
         }
 

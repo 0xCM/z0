@@ -8,7 +8,6 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
-    using static zfunc;
 
     /// <summary>
     /// Bears witness to an occurence of something of identifiable interest 
@@ -18,7 +17,7 @@ namespace Z0
     /// a fixed location, is that the source many not produce two events of the same kind
     /// at the same moment in time, relative to timestamp resolution
     /// </summary>
-    public interface IEvent
+    public interface IServerEvent
     {
         /// <summary>
         /// Identifies a system event with respect to time/space/subject
@@ -53,15 +52,7 @@ namespace Z0
         ulong Timestamp  => Identity.Timestamp;
     }
 
-    /// <summary>
-    /// Characterizes a system event with a type-specific payload
-    /// </summary>
-    /// <typeparam name="T">The payload type</typeparam>
-    public interface IEvent<T> : IEvent
-    {
-        T Payload {get;}
-    }
-
+ 
     /// <summary>
     /// Characterizes an event orignator
     /// </summary>

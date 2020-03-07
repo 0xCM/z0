@@ -12,9 +12,9 @@ namespace Z0
     /// <summary>
     /// Identifies and describes a hosted operation
     /// </summary>
-    public readonly struct OpDescriptor
+    public readonly struct MemberDescriptor
     {        
-        public static OpDescriptor Empty => Define(OpUri.Empty, string.Empty);
+        public static MemberDescriptor Empty => Define(OpUri.Empty, string.Empty);
                 
         /// <summary>
         /// The operation uri identifies it uniquely among all operaions in all hosts
@@ -32,11 +32,11 @@ namespace Z0
         /// <param name="uri">The operation uri</param>
         /// <param name="sig">The operation signature</param>
         [MethodImpl(Inline)]
-        public static OpDescriptor Define(OpUri uri, string sig)
-            => new OpDescriptor(uri,sig);
+        public static MemberDescriptor Define(OpUri uri, string sig)
+            => new MemberDescriptor(uri,sig);
 
         [MethodImpl(Inline)]
-        OpDescriptor(OpUri uri, string sig)
+        MemberDescriptor(OpUri uri, string sig)
         {
             this.Uri = uri;
             this.Signature = sig;
