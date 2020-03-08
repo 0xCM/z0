@@ -12,12 +12,12 @@ namespace Z0.Asm
     public readonly struct HostEmissionPaths
     {
         [MethodImpl(Inline)]
-        public static HostEmissionPaths Define(ApiHostUri host, RootEmissionPaths root)
-            => new HostEmissionPaths(host, root);
+        public static HostEmissionPaths Define(in RootEmissionPaths root, in ApiHostUri host)
+            => new HostEmissionPaths(root,host);
 
 
         [MethodImpl(Inline)]
-        HostEmissionPaths(ApiHostUri host, RootEmissionPaths root)
+        HostEmissionPaths(in RootEmissionPaths root, in ApiHostUri host)
         {
             this.Host = host;
             this.Root = root;

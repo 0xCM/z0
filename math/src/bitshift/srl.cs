@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     
     partial class math
     {
-
         /// <summary>
         /// Applies a logical right shift to the source value
         /// </summary>
@@ -102,6 +99,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static ulong srl64u(ulong src, byte offset)
             => src >> offset;
-
     }
 }

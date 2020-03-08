@@ -11,11 +11,6 @@ namespace Z0
 
     using static Root;
 
-    public delegate void AppEventReceiver(IAppEvent @event);
-
-    public delegate void AppEventReceiver<E>(E @event)
-        where E : IAppEvent;
-        
 
     public interface IAppEvent : ICustomFormattable
     {
@@ -45,19 +40,24 @@ namespace Z0
     public interface IAppEvent<E,T> : IAppEvent<T>
         where E : IAppEvent<E,T>
     {
-
         string IAppEvent.Description
             => typeof(E).DisplayName();
     }
+
+    public delegate void AppEventReceiver(IAppEvent @event);
+
+    public delegate void AppEventReceiver<E>(E @event)
+        where E : IAppEvent;        
+
 
     public interface IAppEventSink : ISink
     {
 
     }
+
     public interface IAppEventSink<E> : IAppEventSink, ISink<E>
         where E : IAppEvent
     {
-
 
     }
 
@@ -66,6 +66,29 @@ namespace Z0
         where E : IAppEvent
     {
 
+        
+    }
+
+    public delegate IAppEvent AppEventEmitter();
+
+    public delegate E AppEventEmitter<E>()
+        where E : IAppEvent;        
+
+    public interface IAppEventSource : ISource
+    {
+
+    }
+
+    public interface IAppEventSource<E> : IAppEventSource, ISource<E>
+        where E : IAppEvent
+    {
+
+    }
+
+    public interface IAppEventSource<S,E> : IAppEventSource<E>
+        where S : IAppEventSource<S,E>
+        where E : IAppEvent
+    {
         
     }
 }

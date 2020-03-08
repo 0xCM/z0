@@ -18,30 +18,6 @@ namespace Z0
     public static class NumericExtensions
     {
         /// <summary>
-        /// Determines the numeric kind of a type, possibly none
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static NK NumericKind(this Type src)
-            => Numeric.kind(src).ValueOrDefault();
-
-        /// <summary>
-        /// Determines the numeric kind identified by a type code, if any
-        /// </summary>
-        /// <param name="tc">The type code to evaluate</param>
-        [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this TypeCode tc)
-            => Numeric.kind(tc);
-
-        /// <summary>
-        /// Returns true if the source type represents a primal numeric type
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [MethodImpl(Inline)]
-        public static bool IsNumeric(this Type src)
-            => src.NumericKind().IsSome();
-
-        /// <summary>
         /// Defines a numeric type model over a clr type that represents a numeric type; if
         /// the source type does not represent a numeric type, returns the empty model
         /// </summary>

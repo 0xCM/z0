@@ -74,22 +74,6 @@ namespace Z0
             where T : unmanaged
                 => parts.Map(x => x.Format()).Concat($" {sep ?? AsciSym.Plus} ");            
 
-        /// <summary>
-        /// Computes the points that determine a partitioning predicated on partition width
-        /// </summary>
-        /// <param name="src">The source interval</param>
-        /// <param name="width">The partition width</param>
-        /// <typeparam name="T">The interval primal type</typeparam>
-         public static Span<T> MeasuredPartitionPoints<S,T>(this S src, T width)
-            where S : struct, IInterval<S,T>
-            where T : unmanaged
-                => P.measuredPoints(src, width);
-
-        public static Span<S> MeasuredPartitions<S,T>(this S src, T width)
-            where S : struct, IInterval<S,T>
-            where T : unmanaged
-                => P.width<S,T>(src,width);
-
         public static T[] Increments<S,T>(this S src, T t = default)
             where S : struct, IInterval<S,T>
             where T : unmanaged

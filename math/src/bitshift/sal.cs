@@ -5,18 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
-
     
     using static Root;
 
     partial class math
     {
-         /// <summary>
+        /// <summary>
         /// Shifts the source value arithmetically leftwards by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>

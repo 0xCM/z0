@@ -38,7 +38,7 @@ namespace Z0
         public static IEnumerable<ApiHost> ApiHosts(this Assembly src)
             => from t in src.GetTypes()
                 where t.Tagged<ApiHostAttribute>()
-                select ApiHost.Define(t);
+                select ApiHost.FromType(t);
         
         [MethodImpl(Inline)]
         static AssemblyId GetAssemblyId(this Assembly src)

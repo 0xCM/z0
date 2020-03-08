@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
 
+
     public class t_special : t_gmath<t_special>
     {
         public void ilog2()

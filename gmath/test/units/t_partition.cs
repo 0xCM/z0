@@ -93,7 +93,7 @@ namespace Z0
         public void part4()
         {
             var src = Interval.rclosed(1,100);
-            var dst = src.MeasuredPartitionPoints(10);
+            var dst = Partition.measuredPoints(src,10);
             Claim.eq(10,dst.Length);
             Claim.eq(1, dst.First());
             Claim.eq(100, dst.Last());
@@ -103,7 +103,7 @@ namespace Z0
         public void part6()
         {
             var src = Interval.closed(1,103);
-            var dst = src.MeasuredPartitions(13);            
+            var dst = Partition.width(src,13);
             var fmt = dst.Map(x => x.Format()).Concat(" + ");  
             Claim.yea(dst.Last().Closed);
         }
@@ -111,7 +111,7 @@ namespace Z0
         protected void points_check<T>(T min, T max, T width)
             where T : unmanaged
         {
-            var points = Interval.open(min, max).MeasuredPartitionPoints(width); 
+            var points = Partition.measuredPoints(Interval.open(min, max), width);
             var len = gmath.sub(max,min);
             var deltaSum = Root.zero<T>();
             for(var i=0; i<points.Length - 1; i++)           

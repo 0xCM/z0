@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines enumeration identifiers
     /// </summary>
-    public readonly struct EnumIdentity  : ITypeIdentity<EnumIdentity>
+    public readonly struct EnumIdentity  : IEnumIdentity
     {
         public static EnumIdentity Empty = Define(string.Empty, NumericKind.None);
 

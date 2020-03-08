@@ -57,7 +57,7 @@ namespace Z0
 
         BitVectors = 100,
 
-        BitGrids = 110,
+        BitGrids = 700,
 
         Logix = 120,
 

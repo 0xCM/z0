@@ -10,8 +10,7 @@ namespace Z0
     using static Root;    
 
     partial class math
-    {
-        
+    {        
         [MethodImpl(Inline), Op]
         public static sbyte and(sbyte a, sbyte b)
             => (sbyte)(a & b);
@@ -44,5 +43,4 @@ namespace Z0
         public static ulong and(ulong a, ulong b)
             => a & b;
    }
-
 }

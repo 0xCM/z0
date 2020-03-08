@@ -41,7 +41,7 @@ namespace Z0
         where T1 : unmanaged
         where T2 : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.Vectorized;
+        FunctionKind IFunc.Kind => FunctionKind.Converter | FunctionKind.Vectorized;
 
     }
 
@@ -55,7 +55,7 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.V128;
+        FunctionKind IFunc.Kind => FunctionKind.Converter | FunctionKind.V128;
 
     }
 
@@ -82,7 +82,7 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.V256;
+        FunctionKind IFunc.Kind => FunctionKind.Converter | FunctionKind.V256;
 
     }
 

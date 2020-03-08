@@ -12,6 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines primar api surface for rowbit manipulation
     /// </summary>
+    [ApiHost(ApiHostKind.Generic)]
     public static class RowBits
     {
         /// <summary>
@@ -29,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> load<T>(Span<byte> src)
             where T : unmanaged
                 => new RowBits<T>(Spans.cast<T>(src));
@@ -39,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> load<T>(Span<T> src)
             where T : unmanaged
                 => new RowBits<T>(src);
@@ -49,22 +50,22 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> load<T>(params T[] src)
             where T : unmanaged
                => new RowBits<T>(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> block<T>(in RowBits<T> x, int firstRow)
             where T : unmanaged
                 => load(x.data.Slice(firstRow));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> block<T>(in RowBits<T> x, int firstRow, int lastRow)
             where T : unmanaged
                 => load(x.data.Slice(firstRow, lastRow - firstRow));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> not<T>(in RowBits<T> x, in RowBits<T> dst)
             where T : unmanaged
         {            
@@ -73,7 +74,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> and<T>(in RowBits<T> x, in RowBits<T> y, in RowBits<T> dst)
             where T : unmanaged
         {
@@ -83,7 +84,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> cnonimpl<T>(in RowBits<T> x, in RowBits<T> y, in RowBits<T> dst)
             where T : unmanaged
         {
@@ -93,7 +94,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> or<T>(in RowBits<T> x, in RowBits<T> y, in RowBits<T> dst)
             where T : unmanaged
         {
@@ -103,7 +104,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> xor<T>(in RowBits<T> x, in RowBits<T> y, in RowBits<T> dst)
             where T : unmanaged
         {
@@ -113,7 +114,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> nand<T>(in RowBits<T> x, in RowBits<T> y, in RowBits<T> dst)
             where T : unmanaged
         {
@@ -123,7 +124,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> nor<T>(in RowBits<T> x, in RowBits<T> y, in RowBits<T> dst)
             where T : unmanaged
         {
@@ -133,7 +134,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> xnor<T>(in RowBits<T> x, in RowBits<T> y, in RowBits<T> dst)
             where T : unmanaged
         {
@@ -143,42 +144,42 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> not<T>(in RowBits<T> x)
             where T : unmanaged
                 => not(x, alloc<T>(x.RowCount));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> and<T>(in RowBits<T> x, in RowBits<T> y)
             where T : unmanaged
                 => and(x,y, alloc<T>(x.RowCount));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> cnonimpl<T>(in RowBits<T> x, in RowBits<T> y)
             where T : unmanaged
                 => cnonimpl(x,y, alloc<T>(x.RowCount));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> or<T>(in RowBits<T> x, in RowBits<T> y)
             where T : unmanaged
                 => or(x,y, alloc<T>(x.RowCount));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> xor<T>(in RowBits<T> x, in RowBits<T> y)
             where T : unmanaged
                 => xor(x,y, alloc<T>(x.RowCount));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> nand<T>(in RowBits<T> x, in RowBits<T> y)
             where T : unmanaged
                 => nand(x,y, alloc<T>(x.RowCount));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> nor<T>(in RowBits<T> x, in RowBits<T> y)
             where T : unmanaged
                 => nor(x,y, alloc<T>(x.RowCount));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static RowBits<T> xnor<T>(in RowBits<T> x, in RowBits<T> y)
             where T : unmanaged
                 => xnor(x,y, alloc<T>(x.RowCount));

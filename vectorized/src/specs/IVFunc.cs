@@ -118,7 +118,7 @@ namespace Z0
     public interface IVReducer256<T> : IVFunc<N256,N128,Vector256<T>,Vector128<T>,T,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.V256 | FunctionKind.UnaryConverter;
+        FunctionKind IFunc.Kind => FunctionKind.V256 | FunctionKind.Converter;
     }
 
 }

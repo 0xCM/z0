@@ -8,6 +8,7 @@ namespace Z0
 
     using System.Runtime.Serialization;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
     using System.Reflection;
 
     using static Root;
@@ -46,6 +47,9 @@ namespace Z0
 
         public static AppException FeatureUnsupported(object feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppMessages.FeatureUnsupported(feature, caller, file, line));
+
+        public static AppException DuplicateKeys(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(AppMsg.Error($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
         
         public static void ThrowFeatureUnsupported(string feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw FeatureUnsupported(feature, caller, file, line);

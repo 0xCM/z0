@@ -83,7 +83,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong xorsr(ulong a, byte offset)
             => a^(a >> offset);
-
     }
-
 }

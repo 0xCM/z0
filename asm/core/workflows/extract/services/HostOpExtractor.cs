@@ -59,7 +59,7 @@ namespace Z0.Asm
         public MemberExtract[] Extract(ApiHost src)
         {
             var locator = Context.MemberLocator();
-            var members = locator.Members(src).ToArray();
+            var members = locator.Located(src).ToArray();
             return Extract(members);
         }
 

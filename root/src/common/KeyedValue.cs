@@ -9,6 +9,13 @@ namespace Z0
 
     using static Root;
 
+    public readonly struct KeyedValue
+    {
+        [MethodImpl(Inline)]
+        public static KeyedValue<K,V> Define<K,V>(K key, V value)
+            => KeyedValue<K,V>.Define(key,value);
+    }
+
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
@@ -31,6 +38,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator (K key, V value)(KeyedValue<K,V> src)
             => (src.Key, src.Value);
+
+        [MethodImpl(Inline)]
+        public static KeyedValue<K,V> Define(K key, V value)
+            => new KeyedValue<K,V>(key,value);
 
         [MethodImpl(Inline)]
         public KeyedValue(K key, V value)

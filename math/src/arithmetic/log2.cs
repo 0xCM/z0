@@ -11,7 +11,6 @@ namespace Z0
     
     partial class math
     {
-
         [MethodImpl(Inline)]
         static ref ulong log2(ref ulong dst, ref ulong x, ulong power)
         {
@@ -40,10 +39,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ulong log2(int src)
-            => log2((ulong)src);
-
-        [MethodImpl(Inline), Op]
         public static uint log2(uint src)
             => (uint)log2((ulong)src);
 
@@ -54,7 +49,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort log2(ushort src)
             => (ushort)log2((ulong)src);
-
     }
-
 }

@@ -53,6 +53,11 @@ namespace Z0.Asm
         public FolderPath AssemblyDir(AssemblyId id)
             => RootDir + AssemblyFolder(id);
 
+
+        [MethodImpl(Inline)]
+        public HostEmissionPaths HostPaths(in ApiHostUri host)
+            => HostEmissionPaths.Define(this, host);
+
         public RootEmissionPaths Clear()
         {
             ExtractDir.Clear();

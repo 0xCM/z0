@@ -12,10 +12,16 @@ namespace Z0
     
     public interface IMemberLocator : IAsmService
     {
-        IEnumerable<LocatedMember> Members(Type host);
+        IEnumerable<HostedMember> Hosted(Assembly src);
 
-        IEnumerable<LocatedMember> Members(ApiHost host);        
+        IEnumerable<HostedMember> Hosted(Type src);
 
-        IEnumerable<LocatedMember> Members(Assembly assembly);
+        IEnumerable<HostedMember> Hosted(ApiHost src);
+                            
+        IEnumerable<LocatedMember> Located(Type host);
+
+        IEnumerable<LocatedMember> Located(ApiHost host);        
+
+        IEnumerable<LocatedMember> Located(Assembly assembly);
     }
 }

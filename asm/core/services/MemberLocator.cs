@@ -26,19 +26,46 @@ namespace Z0
             this.Context = context;
         }
 
-        public IEnumerable<LocatedMember> Members(Assembly src)
-              => src.ApiHosts().SelectMany(Members);   
+        public IEnumerable<HostedMember> Hosted(Assembly src)
+              => src.ApiHosts().SelectMany(Hosted);   
 
-        public IEnumerable<LocatedMember> Members(Type src)
+        public IEnumerable<HostedMember> Hosted(Type src)
         {
-            var host = ApiHost.Define(src);
-            return GenericOps(host).Union(DirectOps(host)).OrderBy(x => x.Address);
+            var host = ApiHost.FromType(src);
+            return HostedGeneric(host).Union(HostedDirect(host)).OrderBy(x => x.Method.MetadataToken);
         }
 
-        public IEnumerable<LocatedMember> Members(ApiHost src)
-              => GenericOps(src).Union(DirectOps(src)).OrderBy(x => x.Address);
+        public IEnumerable<HostedMember> Hosted(ApiHost src)
+              => HostedGeneric(src).Union(HostedDirect(src)).OrderBy(x => x.Method.MetadataToken);
 
-        static IEnumerable<LocatedMember> GenericOps(ApiHost src)
+        public IEnumerable<LocatedMember> Located(Assembly src)
+              => src.ApiHosts().SelectMany(Located);   
+
+        public IEnumerable<LocatedMember> Located(Type src)
+        {
+            var host = ApiHost.FromType(src);
+            return LocatedGeneric(host).Union(LocatedDirect(host)).OrderBy(x => x.Address);
+        }
+
+        public IEnumerable<LocatedMember> Located(ApiHost src)
+              => LocatedGeneric(src).Union(LocatedDirect(src)).OrderBy(x => x.Address);
+
+        static IEnumerable<HostedMember> HostedDirect(ApiHost src)
+              => from m in src.HostingType.DeclaredMethods().NonGeneric()
+                 where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
+                 select HostedMember.Define(src.Path, m.Identify(), m);
+
+        static IEnumerable<HostedMember> HostedGeneric(ApiHost src)
+              =>   from m in src.HostingType.DeclaredMethods().OpenGeneric(1)
+                    where m.Tagged<OpAttribute>() && m.Tagged<NumericClosuresAttribute>()  && !m.AcceptsImmediate()
+                    let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
+                    where c != NumericKind.None
+                    from t in c.DistinctKinds().Select(x => x.ToClrType())
+                    where t.IsSome()
+                    let concrete = m.MakeGenericMethod(t.Value)
+                    select HostedMember.Define(src.Path, concrete.Identify(), concrete);
+
+        static IEnumerable<LocatedMember> LocatedGeneric(ApiHost src)
               =>   from m in src.HostingType.DeclaredMethods().OpenGeneric(1)
                     where m.Tagged<OpAttribute>() && m.Tagged<NumericClosuresAttribute>()  && !m.AcceptsImmediate()
                     let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
@@ -49,7 +76,7 @@ namespace Z0
                     let address = MemoryAddress.Define(concrete.Jit())
                     select LocatedMember.Define(src.Path, concrete.Identify(), concrete, address);
 
-        static IEnumerable<LocatedMember> DirectOps(ApiHost src)
+        static IEnumerable<LocatedMember> LocatedDirect(ApiHost src)
               => from m in src.HostingType.DeclaredMethods().NonGeneric()
                  where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
                  let address = MemoryAddress.Define(m.Jit())

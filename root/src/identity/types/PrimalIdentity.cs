@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static IdentityShare;
 
-    public readonly struct PrimalIdentity  : ITypeIdentity<PrimalIdentity>
+    public readonly struct PrimalIdentity  : IPrimalIdentity
     {
         public static PrimalIdentity Empty => new PrimalIdentity(string.Empty);
 

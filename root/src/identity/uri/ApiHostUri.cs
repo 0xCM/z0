@@ -36,7 +36,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ApiHostUri FromHost(Type host)
-            => new ApiHostUri(host.Assembly.AssemblyId(), host.Name);
+        {
+            var tag = host.Tag<ApiHostAttribute>();
+            var name = text.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
+            var owner = host.Assembly.AssemblyId();
+            return new ApiHostUri(owner, name);
+        }
                 
         [MethodImpl(Inline)]
         public static ApiHostUri Define(AssemblyId owner, string name)
@@ -45,7 +50,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiHost src)
             => src.Path;
-        
+
+        [MethodImpl(Inline)]
+        public static bool operator==(ApiHostUri a, ApiHostUri b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(ApiHostUri a, ApiHostUri b)
+            => !a.Equals(b);
+
         [MethodImpl(Inline)]
         ApiHostUri(AssemblyId owner, string name)
         {

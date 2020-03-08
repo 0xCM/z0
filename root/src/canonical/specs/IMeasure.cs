@@ -27,14 +27,27 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a binary function that returns a scalar value
+    /// Characterizes a homogenous binary function that returns a scalar value
     /// </summary>
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The second operand type</typeparam>
     /// <typeparam name="K">The scalar type</typeparam>
-    public interface IBinaryMeasure<A,B,K> : IMeasure, IFunc<A,B,K>
+    public interface IBinaryMeasure<A,K> : IMeasure, IFunc<A,A,K>
         where K : unmanaged
     {
         FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure;
     }
+
+    /// <summary>
+    /// Characterizes a homogenous ternary function that returns a scalar value
+    /// </summary>
+    /// <typeparam name="A">The first operand type</typeparam>
+    /// <typeparam name="B">The second operand type</typeparam>
+    /// <typeparam name="K">The scalar type</typeparam>
+    public interface ITernaryMeasure<A,K> : IMeasure, IFunc<A,A,A,K>
+        where K : unmanaged
+    {
+        FunctionKind IFunc.Kind => FunctionKind.TernaryMeasure;
+    }
+
 }

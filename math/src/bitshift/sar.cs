@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+
     using static Root;
     
     partial class math
@@ -82,7 +81,6 @@ namespace Z0
         /// <param name="offset">The number of bits to shift</param>
         [MethodImpl(Inline), Op]
         public static ulong sar(ulong src, byte offset)
-            => src >> offset;
- 
+            => src >> offset; 
     }
 }

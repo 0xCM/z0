@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static IdentityShare;
 
-    public readonly struct ScalarIdentity  : ITypeIdentity<ScalarIdentity>
+    public readonly struct ScalarIdentity  : IScalarIdentity
     {
         public string Identifier {get;}            
 

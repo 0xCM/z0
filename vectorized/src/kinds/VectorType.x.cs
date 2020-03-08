@@ -516,13 +516,6 @@ namespace Z0
         public static bool IsSegmented(this Type t)
             => t.IsBlocked() || t.IsVector();
 
-        /// <summary>
-        /// Determines whether a method defines a predicate that returns a bit or bool value
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsPredicate(this MethodInfo m)        
-            => m.ParameterTypes().Distinct().Count() == 1 
-            && (m.ReturnType == typeof(bit) || m.ReturnType == typeof(bool));
 
         /// <summary>
         /// If type is intrinsic or blocked, returns the primal type over which the segmentation is defined; otherwise, returns none

@@ -93,7 +93,7 @@ namespace Z0.Asm
                         Address : op.Member.Address,
                         Length : op.EncodedData.Length,
                         Uri : op.Uri,
-                        OpSig : op.Member.Member.Signature().Format(),
+                        OpSig : op.Member.Method.Signature().Format(),
                         Data : op.EncodedData
                         );
 

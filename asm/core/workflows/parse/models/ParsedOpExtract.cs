@@ -71,7 +71,7 @@ namespace Z0
             => SourceContent.Address;
 
         public MethodInfo SourceMember 
-            => SourceExtract.Member.Member;
+            => SourceExtract.Member.Method;
 
         public MemberDescriptor Descriptor 
             => MemberDescriptor.Define(Uri, SourceMember.Signature().Format());

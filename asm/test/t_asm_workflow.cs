@@ -5,6 +5,8 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -31,7 +33,7 @@ namespace Z0.Asm
             NotifyConsole(msg);
         }
 
-        void OnEvent(AsmFunctionsDecoded e)
+        void OnEvent(FunctionsDecoded e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
             NotifyConsole(msg);
@@ -49,7 +51,10 @@ namespace Z0.Asm
             NotifyConsole(msg);
         }
 
-        public void ExecuteWorkflow()
+        RootEmissionPaths Root
+            => RootEmissionPaths.Define(DefaultDataDir);
+
+        void ExecuteWorkflow()
         {
             var workflow = HostCaptureWorkflow.Create(Context);
             var sinks = workflow.ConnectSinks();
@@ -58,26 +63,57 @@ namespace Z0.Asm
             sinks.HostFunctionsDecoded += OnEvent;
             sinks.HostCodeSaved += OnEvent;
             sinks.HostReportSaved += OnEvent;
-            workflow.ExecuteWorkflow(DefaultDataDir);
+            workflow.Run(Root);
         }
 
-        void load_reports(FolderPath src)
-        {
-            var root = RootEmissionPaths.Define(src);
 
-        }
-
-        public Option<MemberParseReport> LoadMemberParseReport(ApiHostUri host)
+        public void ExecuteOps()
         {            
-            try
-            {            
+            var host = ApiHost.FromType(typeof(math));
+            var paths = Root.HostPaths(host);
+            var codepath = paths.CodePath;
+            Claim.exists(codepath);
 
-                return default;
-            }
-            catch(Exception e)
+            var locator = Context.MemberLocator();
+            var members = locator.Hosted(host).CreateIndex();
+
+            var reader = Context.CodeReader();                
+            foreach(var code in reader.Read(codepath))
             {
-                term.error(e);
-                return none<MemberParseReport>();
+                var id = code.Id;
+                var member = members[id];
+                Claim.yea(member.IsNonEmpty); 
+                
+                var method = member.Method;
+                if(method.IsUnaryOperator())
+                {
+                    NotifyConsole($"{id} is a unary operator", AppMsgColor.Magenta);
+                }
+                else if(method.IsBinaryOperator())
+                {
+                    NotifyConsole($"{id} is a binary operator", AppMsgColor.Magenta);
+                }
+                else if(method.IsTernaryOperator())
+                {
+                    NotifyConsole($"{id} is a ternary operator", AppMsgColor.Magenta);
+                }
+                else if(method.IsPredicate())
+                {
+                    NotifyConsole($"{id} is a predicate", AppMsgColor.Magenta);
+                }
+                else if(method.IsMeasure())
+                {
+                    NotifyConsole($"{id} is a measure", AppMsgColor.Magenta);
+                }
+                else if(method.IsNumericFunction())
+                {
+                    NotifyConsole($"{id} is a numeric function", AppMsgColor.Magenta);
+                }
+                else
+                {
+                    NotifyConsole($"{id} is unclassified", AppMsgColor.Yellow);
+                }
+                
             }
         }
     }

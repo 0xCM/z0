@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     
     using static Root;
 
@@ -43,8 +42,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Sign signum(ulong src)
             => src != 0 ? Sign.Pos : Sign.Neg;
-
-
     }
-
 }
