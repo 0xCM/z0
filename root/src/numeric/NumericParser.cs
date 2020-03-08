@@ -6,11 +6,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Globalization;
 
     using static Root;
 
     public static class NumericParser
     {
+        /// <summary>
+        /// Attempts to parse a hex string as an unsigned long
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static Option<ulong> ParseHex(string src)
+        {            
+            static string clean(string src)
+                => src.Remove("0x").RemoveAny(AsciLower.h);            
+
+            if(ulong.TryParse(clean(src), NumberStyles.HexNumber, null,  out ulong value))
+                return value;
+            return default;
+        }
+
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static T parse<T>(string src)
             where T : unmanaged

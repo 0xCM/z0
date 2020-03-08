@@ -12,84 +12,84 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit eq(float a, float b)
             => a == b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit eq(double a, double b)
             => a == b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit neq(float a, float b)
             => a != b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit neq(double a, double b)
             => a != b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit gt(float a, float b)
             => a > b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit gt(double a, double b)
             => a > b;        
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit gteq(float a, float b)
             => a >= b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit gteq(double a, double b)
             => a >= b;        
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit lt(float lhs, float rhs)
             => lhs < rhs;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit lt(double lhs, double rhs)
             => lhs < rhs;        
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit lteq(float lhs, float rhs)
             => lhs <= rhs;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit lteq(double lhs, double rhs)
             => lhs <= rhs;        
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float max(float a, float b)
             => a > b ? a : b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double max(double a, double b)
             => a > b ? a : b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float min(float a, float b)
             => a < b ? a : b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double min(double a, double b)
             => a < b ? a : b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double width(float lhs, float rhs)
             => abs((double)rhs - (double)lhs);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double width(double lhs, double rhs)
             => abs(rhs - lhs);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit within(float a, float b, float delta)
             => a > b ? a - b <= delta 
               : b - a <= delta;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit within(double a, double b, double delta)
             => a > b ? a - b <= delta 
               : b - a <= delta;

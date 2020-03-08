@@ -10,6 +10,26 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Identifies format configurations
+    /// </summary>
+    public interface IFormatConfig
+    {
+        
+    }
+
+    public interface IFormatConfig<C> : IFormatConfig
+        where C : struct, IFormatConfig<C>
+    {
+
+        
+    }
+
+    /// <summary>
+    /// Reifies a meaningless implementation of IFormatConfig
+    /// </summary>
+    readonly struct DefautFormatConfig : IFormatConfig {}
+    
     public interface ICustomFormattable
     {
         string Format();

@@ -13,7 +13,7 @@ namespace Z0
 
 	using static Root;
     
-    [ApiHost(ApiHostKind.Direct)]
+    [ApiHost("api", ApiHostKind.Direct)]
     public static class libm
     {
         [MethodImpl(Inline), Op]

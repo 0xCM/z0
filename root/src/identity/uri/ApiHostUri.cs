@@ -54,6 +54,9 @@ namespace Z0
             this.Identifier = owner != 0 ? $"{Owner.Format()}/{Name}" : name;
         }
 
+        public string Format()
+            => Identifier;
+
         [MethodImpl(Inline)]
         public bool Equals(ApiHostUri src)
             => equals(this, src);
@@ -69,8 +72,8 @@ namespace Z0
             => equals(this, obj);
 
         public override string ToString()
-            => Identifier;
-        
+            => Identifier;        
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

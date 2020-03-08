@@ -163,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         /// <param name="b">The divisor</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float fmod(float a, float b)
             => MathF.IEEERemainder(a,b);
 
@@ -172,15 +172,15 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         /// <param name="b">The divisor</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double fmod(double a, double b)
             => Math.IEEERemainder(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float mod(float a, float b)
             => a % b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double mod(double a, double b)
             => a % b;
 
@@ -208,11 +208,11 @@ namespace Z0
         public static double negate(double src)
             => -src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float round(float src, int scale)
             => MathF.Round(src, scale);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double round(double src, int scale)
             => Math.Round(src, scale);
 

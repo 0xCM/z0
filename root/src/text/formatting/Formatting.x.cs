@@ -12,11 +12,10 @@ namespace Z0
 
     using static Root;
 
-
     /// <summary>
     /// Exposes formatting capabilites via exension methods
     /// </summary>
-    public static class CustomFormattableX
+    public static partial class CustomFormattables
     {
         /// <summary>
         /// Formats a type that provides intrinsic format capability
@@ -62,7 +61,7 @@ namespace Z0
 
     public static class NumericFormattableX
     {
-        [MethodImpl(Inline)]
+         [MethodImpl(Inline)]
         public static string Format<F>(this F src)
             where F : unmanaged, INumericFormatProvider<F>
                 => src.Formatter.Format(src);

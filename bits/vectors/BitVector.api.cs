@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;    
 
-    [ApiHost("bitvector")]
+    [ApiHost("api")]
     public static partial class BitVector
     {   
         /// <summary>

@@ -145,6 +145,14 @@ namespace Z0
 
         IdentityTest = Identity | Test,
 
+        Graphs = 370,
+
+        GraphTest = Graphs | Test,
+
+        Containers = 380,
+
+        ContainerTest = Containers | Test,
+
         Control = 1000,        
 
         Svc = T16,
