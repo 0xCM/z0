@@ -3,16 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
-{
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using static zfunc;
-
-    public sealed class BitFieldTest : AssemblyResolution<BitFieldTest>
+{        
+    public sealed class BitTest : AssemblyResolution<BitTest>
     {
-        const AssemblyId Identity = AssemblyId.BitFieldsTest;
+        const AssemblyId Identity = AssemblyId.BitTest;
 
         public override AssemblyId Id 
             => Identity;

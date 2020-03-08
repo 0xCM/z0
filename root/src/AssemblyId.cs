@@ -25,8 +25,6 @@ namespace Z0
 
         NatsTest = Nats | Test,
 
-        DataCore = 30,
-
         CoreFunc = 41,
 
         CoreFuncTest = CoreFunc | Test,
@@ -49,21 +47,17 @@ namespace Z0
 
         BitCore = 80,
 
-        BitCoreTest = BitCore | Test,
+        BitSuite = 500,
+        
+        BitTest = BitSuite | Test,
 
         BitCoreSvc = BitCore | Svc,
 
         BitFields = 90,
 
-        BitFieldsTest = BitFields | Test,
-
         BitVectors = 100,
 
-        BitVectorsTest = BitVectors | Test,
-
         BitGrids = 110,
-
-        BitGridsTest = BitGrids | Test,
 
         Logix = 120,
 
