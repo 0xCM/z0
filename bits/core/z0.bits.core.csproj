@@ -11,7 +11,7 @@
     <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)vectorized/src/z0.vectorized.csproj" />
-    <ProjectReference Include="$(TopDir)bitstring/src/z0.bitstring.csproj" />    
+    <ProjectReference Include="$(TopDir)bits/strings/z0.bits.strings.csproj" />    
   </ItemGroup>
 
 </Project>

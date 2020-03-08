@@ -29,9 +29,9 @@
     <ProjectReference Include="$(TopDir)intrinsics/test/z0.intrinsics.test.csproj" />
     
     <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
-    <ProjectReference Include="$(TopDir)bitvectors/src/z0.bitvectors.csproj" />
+    <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
     <ProjectReference Include="$(TopDir)bitvectors/test/z0.bitvectors.test.csproj" />
-    <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
+    <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />
     <ProjectReference Include="$(TopDir)machines/src/z0.machines.csproj" />
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />
     <ProjectReference Include="$(TopDir)mkl/src/z0.mkl.csproj" />

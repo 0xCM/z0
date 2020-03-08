@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)bitfields/src/z0.bitfields.csproj" />        
+    <ProjectReference Include="$(TopDir)bits/fields/z0.bits.fields.csproj" />        
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />  
   </ItemGroup>
 

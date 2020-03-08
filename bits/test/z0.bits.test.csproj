@@ -6,16 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)bitspan/src/z0.bitspan.csproj" />
-    <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
-    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
-
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
+    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
 
+    <ProjectReference Include="$(TopDir)bits/strings/z0.bits.strings.csproj" />
+    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
+    <ProjectReference Include="$(TopDir)bits/fields/z0.bits.fields.csproj" />
+    <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
+
+
+    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />    
+    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
+    
+    <ProjectReference Include="$(TopDir)bits/spans/z0.bits.spans.csproj" />
+    <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />
   </ItemGroup>
 
 </Project>

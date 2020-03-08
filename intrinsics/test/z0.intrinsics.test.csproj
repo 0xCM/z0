@@ -13,9 +13,9 @@
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/svc/z0.intrinsics.svc.csproj" />
 
-    <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
+    <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />        
-    <ProjectReference Include="$(TopDir)bitspan/src/z0.bitspan.csproj" />    
+    <ProjectReference Include="$(TopDir)bits/spans/z0.bits.spans.csproj" />    
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
 
   </ItemGroup>

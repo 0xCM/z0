@@ -12,8 +12,8 @@
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
     <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
-    <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />
-    <ProjectReference Include="$(TopDir)bitvectors/src/z0.bitvectors.csproj" />
+    <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />
+    <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
 
   </ItemGroup>
