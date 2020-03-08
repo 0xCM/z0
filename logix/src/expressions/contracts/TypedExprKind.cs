@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     /// <summary>
     /// Classifies typed expressions
     /// </summary>
     public enum TypedExprKind : byte
-    {
-        
+    {        
         /// <summary>
         /// Classifies a variable
         /// </summary>
@@ -56,7 +52,4 @@ namespace Z0
         /// </summary>
         ShiftExpr = 17,
     }
-
-
-
 }

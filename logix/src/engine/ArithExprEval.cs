@@ -5,11 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
     using static OpHelpers;
 
     [ApiHost("expr.arith.eval", ApiHostKind.Generic)]
@@ -24,7 +21,7 @@ namespace Z0.Logix
                     return x.Value;
                 case IVarExpr<T> x:
                     return eval(x);
-                case IArithmeticOp<T> x:
+                case IArithmeticOpExpr<T> x:
                     return eval(x);
                 default: throw new NotSupportedException(expr.GetType().Name);
             }
@@ -52,20 +49,20 @@ namespace Z0.Logix
             }
         }
 
-        static LiteralExpr<T> eval<T>(IArithmeticOp<T> expr)
+        static LiteralExpr<T> eval<T>(IArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)               
             {
-                case IUnaryArithmeticOp<T> x:
+                case IUnaryArithmeticOpExpr<T> x:
                     return eval(x);
-                case IBinaryArithmeticOp<T> x:
+                case IBinaryArithmeticOpExpr<T> x:
                     return eval(x);
                 default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
 
-        static LiteralExpr<T> eval<T>(IBinaryArithmeticOp<T> expr)
+        static LiteralExpr<T> eval<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -82,7 +79,7 @@ namespace Z0.Logix
             }
         }
 
-        static LiteralExpr<T> eval<T>(IUnaryArithmeticOp<T> expr)
+        static LiteralExpr<T> eval<T>(IUnaryArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)               
@@ -97,32 +94,31 @@ namespace Z0.Logix
         [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
-                => ScalarOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op, NumericClosures(NumericKind.Integers)]
-        static LiteralExpr<T> inc<T>(IUnaryArithmeticOp<T> a)
+        static LiteralExpr<T> inc<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => ScalarOps.inc(eval(a).Value);
+                => NumericOps.inc(eval(a).Value);
 
         [Op, NumericClosures(NumericKind.Integers)]
-        static LiteralExpr<T> dec<T>(IUnaryArithmeticOp<T> a)
+        static LiteralExpr<T> dec<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => ScalarOps.dec(eval(a).Value);
+                => NumericOps.dec(eval(a).Value);
 
         [Op, NumericClosures(NumericKind.Integers)]
-        static LiteralExpr<T> negate<T>(IUnaryArithmeticOp<T> a)
+        static LiteralExpr<T> negate<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => ScalarOps.negate(eval(a).Value);
+                => NumericOps.negate(eval(a).Value);
     
         [Op, NumericClosures(NumericKind.Integers)]
-        static LiteralExpr<T> add<T>(IBinaryArithmeticOp<T> expr)
+        static LiteralExpr<T> add<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
-                => ScalarOps.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericOps.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op, NumericClosures(NumericKind.Integers)]
-        static LiteralExpr<T> sub<T>(IBinaryArithmeticOp<T> expr)
+        static LiteralExpr<T> sub<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
-                => ScalarOps.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
-
+                => NumericOps.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
     }
 }

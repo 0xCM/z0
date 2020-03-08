@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
@@ -80,7 +79,7 @@ namespace Z0.Logix
         /// <param name="expr">The predicate to evaluate</param>
         /// <typeparam name="T">The type over which the comparison is defined</typeparam>
         [Op("eval_cmp_pred"), NumericClosures(NumericKind.Integers & (~NumericKind.U64))]
-        public static bit eval<T>(IComparisonPred<T> expr)
+        public static bit eval<T>(IComparisonPredExpr<T> expr)
             where T : unmanaged
                 => CmpExprEval.eval(expr);
 

@@ -26,13 +26,13 @@ namespace Z0.Logix
         /// Advertises the supported unary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<UnaryBitLogicKind> UnaryBitLogicKinds
-            => ScalarOpApi.UnaryBitLogicKinds;
+            => NumericOpApi.UnaryBitLogicKinds;
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitLogicKinds
-            => ScalarOpApi.BinaryBitLogicKinds;
+            => NumericOpApi.BinaryBitLogicKinds;
 
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators

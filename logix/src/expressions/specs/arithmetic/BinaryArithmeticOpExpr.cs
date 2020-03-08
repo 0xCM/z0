@@ -7,18 +7,16 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     /// <summary>
-    /// Captures a binary bitwise operator along with with its operands
+    /// Defines a typed binary arithmetic operator expression
     /// </summary>
-    public sealed class BinaryBitwiseOp<T> : IBinaryBitwiseOp<T>
+    public sealed class BinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryBitLogicKind OpKind {get;}
+        public BinaryArithmeticKind OpKind {get;}
 
         /// <summary>
         /// The left operand
@@ -30,19 +28,18 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> RightArg {get;}
 
-        [MethodImpl(Inline)]
-        public BinaryBitwiseOp(BinaryBitLogicKind op, IExpr<T> left, IExpr<T> right)
+        public BinaryArithmeticOpExpr(BinaryArithmeticKind op, IExpr<T> lhs, IExpr<T> rhs)
         {
             this.OpKind = op;
-            this.LeftArg = left;
-            this.RightArg = right;
+            this.LeftArg= lhs;
+            this.RightArg = rhs;
         }
-
+        
         /// <summary>
         /// Renders the expression in canonical form
         /// </summary>
         public string Format()
-            => OpKind.Format(LeftArg,RightArg);
+            => OpKind.Format(LeftArg, RightArg);
         
         public override string ToString()
             => Format();

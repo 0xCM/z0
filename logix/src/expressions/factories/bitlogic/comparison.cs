@@ -5,11 +5,9 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
     
     partial class BitLogicSpec
     {
@@ -56,7 +54,5 @@ namespace Z0.Logix
         public static ComparisonExpr<T> equals<T>(ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
                 => ComparisonExpr.Define(ComparisonKind.Eq, lhs,rhs, variables);
-
     }
-
 }

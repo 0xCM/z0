@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static LogicEngine;
     using static PredicateSpec;
     using static ComparisonKind;
-    using static ScalarOps;
+    using static NumericOps;
     using static LogicOps;
     
     public class t_comparison_pred : TypedLogixTest<t_comparison_pred>

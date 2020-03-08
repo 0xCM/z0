@@ -226,7 +226,7 @@ namespace Z0.Logix
         {
             iter(Spans.set(
                 VectorOpApi.TernaryBitLogicKinds, 
-                ScalarOpApi.TernaryBitLogicKinds),
+                NumericOpApi.TernaryBitLogicKinds),
                     check_ternary_ops);
         }
 
@@ -245,7 +245,7 @@ namespace Z0.Logix
             var b = convert<T>(0b1100_1100);
             var c = convert<T>(0b1010_1010);
             var mask = convert<T>(0xFF);
-            var f = ScalarOpApi.lookup<T>(id);
+            var f = NumericOpApi.lookup<T>(id);
             var actual = convert<T,byte>(gmath.and(f(a,b,c), mask));
             var expect = (byte)id;
             Claim.eq(expect.FormatHex(), actual.FormatHex());
@@ -255,7 +255,7 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var BL = LogicOpApi.lookup(id);
-            var SC = ScalarOpApi.lookup<T>(id);
+            var SC = NumericOpApi.lookup<T>(id);
             var V128 = VectorOpApi.lookup<T>(n128,id);
             var V256 = VectorOpApi.lookup<T>(n256,id);
             check_op_identity<T>(id);
@@ -274,7 +274,7 @@ namespace Z0.Logix
                     z0[i] = BL(va[i],vb[i],vc[i]);
 
                 var z3 = SC(sa, sb, sc);
-                if(!ScalarOps.same(z3, z0.Scalar))
+                if(!NumericOps.same(z3, z0.Scalar))
                     Claim.failwith($"Evalutation of ternary op {id} failed");
 
                 var v1 = gvec.vbroadcast(n256,sa);
@@ -303,7 +303,7 @@ namespace Z0.Logix
                 var a = Random.Next<T>();
                 v1.Set(a);
                 BitVector<T> actual = LogicEngine.eval(expr).Value;
-                BitVector<T> expect = ScalarOpApi.eval(kind,a);
+                BitVector<T> expect = NumericOpApi.eval(kind,a);
                 Claim.eq(actual,expect);                                            
             }
         }
@@ -321,7 +321,7 @@ namespace Z0.Logix
                 var b = Random.Next<T>();
                 v1.Set(a);
                 v2.Set(b);
-                T expect = ScalarOpApi.eval(op,a,b);
+                T expect = NumericOpApi.eval(op,a,b);
                 T result1 = LogicEngine.eval(expr);
                 T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
                 Claim.eq(expect, result1);                            

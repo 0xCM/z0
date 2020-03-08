@@ -32,7 +32,7 @@ namespace Z0.Logix
         /// Advertises the supported binary bitwise operators
         /// </summary>
         public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
-            => ScalarOpApi.BinaryBitLogicKinds;
+            => NumericOpApi.BinaryBitLogicKinds;
 
         [Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A)

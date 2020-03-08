@@ -5,11 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
     using static LogicOpApi;
 
     /// <summary>
@@ -112,7 +109,6 @@ namespace Z0.Logix
                 z[i] = eval(BinaryBitLogicKind.Xnor, x[i], y[i]);
             return z;
         }
-
 
         /// <summary>
         /// Computes the bitwise LeftNot of the source vetors via component-wise logical operations to define a reference implementation
@@ -219,6 +215,5 @@ namespace Z0.Logix
                 dst[i] = LogicOps.select(x[i], y[i], z[i]);
             return z;
         }
-
     }
 }

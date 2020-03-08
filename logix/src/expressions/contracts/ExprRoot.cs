@@ -5,14 +5,7 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    
-    using static zfunc;
-
 
     /// <summary>
     /// Characterizes an expression
@@ -56,7 +49,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes an expression defined via an operator
     /// </summary>
-    public interface IOperator : IExpr
+    public interface IOperatorExpr : IExpr
     {
         
     }
@@ -65,7 +58,7 @@ namespace Z0.Logix
     /// Characterizes a parametric operator that varies over operand type
     /// </summary>
     /// <typeparam name="T">The type over which the expression is defined</typeparam>
-    public interface IOperator<T> : IOperator, IExpr<T> 
+    public interface IOperatorExpr<T> : IOperatorExpr, IExpr<T> 
         where T : unmanaged
     {
 
@@ -76,7 +69,7 @@ namespace Z0.Logix
     /// </summary>
     /// <typeparam name="T">The type over which the expression is defined</typeparam>
     /// <typeparam name="K">The operator classifier</typeparam>
-    public interface IOperator<T,K> : IOperator<T>
+    public interface IOperatorExpr<T,K> : IOperatorExpr<T>
         where T : unmanaged
         where K : unmanaged, Enum
     {
@@ -89,7 +82,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a binary operator parametrized by expression type
     /// </summary>
-    public interface IBinaryOp<X> : IOperator
+    public interface IBinaryOpExpr<X> : IOperatorExpr
         where X : IExpr
     {
         X LeftArg {get;}
@@ -100,7 +93,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a unary operator parametrized by an expression type
     /// </summary>
-    public interface IUnaryOp<X> : IOperator
+    public interface IUnaryOpExpr<X> : IOperatorExpr
         where X : IExpr
     {
         /// <summary>
@@ -112,7 +105,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a ternary operator parametrized by expression type
     /// </summary>
-    public interface ITernaryOp<X> : IOperator
+    public interface ITernaryOpExpr<X> : IOperatorExpr
         where X : IExpr
     {
         X FirstArg {get;}
@@ -121,6 +114,4 @@ namespace Z0.Logix
 
         X ThirdArg {get;}
     }
-
-
 }

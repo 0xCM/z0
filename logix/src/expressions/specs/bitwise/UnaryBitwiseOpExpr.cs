@@ -7,41 +7,32 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     /// <summary>
-    /// Defines a bitwise shift operator expression
+    /// Defines a unary bitwise operator expression
     /// </summary>
-    public sealed class ShiftOpSpec<T> : IShiftOp<T>
+    public sealed class UnaryBitwiseOpExpr<T> : IUnaryBitwiseOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public ShiftOpKind OpKind {get;}
+        public UnaryBitLogicKind OpKind {get;}
 
         /// <summary>
         /// The operand
         /// </summary>
-        public IExpr<T> Subject {get;}
+        public IExpr<T> Arg {get;}
 
-        /// <summary>
-        /// The magnitude of the shift
-        /// </summary>
-        public IExpr<byte> Offset {get;}
-
-        [MethodImpl(Inline)]
-        public ShiftOpSpec(ShiftOpKind op, IExpr<T> subject, IExpr<byte> offset)
+        public UnaryBitwiseOpExpr(UnaryBitLogicKind op, IExpr<T> operand)
         {
             this.OpKind = op;
-            this.Subject = subject;
-            this.Offset = offset;
+            this.Arg = operand;
         }
-
-        public string Format()
-            => OpKind.Format(Subject,Offset);
         
+        public string Format()
+            => OpKind.Format(Arg);
+
         public override string ToString()
             => Format();
-    } 
+    }
 }

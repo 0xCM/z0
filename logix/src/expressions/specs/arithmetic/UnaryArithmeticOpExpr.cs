@@ -7,41 +7,32 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     /// <summary>
-    /// Definesan untyped binary logical operator expression
+    /// Defines a typed unary arithmetic operator expression
     /// </summary>
-    public class BinaryLogicOp : IBinaryLogicOp
+    public sealed class UnaryAritheticOpExpr<T> : IUnaryArithmeticOpExpr<T>
+        where T : unmanaged
     {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryBitLogicKind OpKind {get;}
+        public UnaryArithmeticKind OpKind {get;}
 
         /// <summary>
-        /// The left operand
+        /// The operand
         /// </summary>
-        public ILogicExpr LeftArg {get;}
+        public IExpr<T> Arg {get;}
 
-        /// <summary>
-        /// The right operand
-        /// </summary>
-        public ILogicExpr RightArg {get;}
-
-        [MethodImpl(Inline)]
-        public BinaryLogicOp(BinaryBitLogicKind op, ILogicExpr lhs, ILogicExpr rhs)
+        public UnaryAritheticOpExpr(UnaryArithmeticKind op, IExpr<T> operand)
         {
             this.OpKind = op;
-            this.LeftArg = lhs;
-            this.RightArg = rhs;
+            this.Arg = operand;
         }
-
+        
         public string Format()
-            => OpKind.Format(LeftArg,RightArg);        
+            => OpKind.Format(Arg);
 
         public override string ToString()
             => Format();
-    } 
-
+    }
 }

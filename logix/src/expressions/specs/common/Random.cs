@@ -6,9 +6,8 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
 
     public static class VarRandom
     {

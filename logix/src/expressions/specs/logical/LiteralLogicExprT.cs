@@ -7,15 +7,14 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>    
     /// Defines a typed literal logic expression
     /// </summary>
-    public sealed class LiteralLogicExpr<T> : ILogicLiteral<T>
+    public sealed class LiteralLogicExpr<T> : ILogicLiteralExpr<T>
         where T : unmanaged
     {
-
         /// <summary>
         /// The literal value
         /// </summary>

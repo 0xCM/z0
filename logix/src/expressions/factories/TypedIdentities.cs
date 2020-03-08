@@ -9,10 +9,11 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using static zfunc;
+    
+    using static Root;
+    using static TypedLogicSpec;
 
     using TLS = TypedLogicSpec;
-    using static TypedLogicSpec;
 
     public static class TypedIdentities
     {        
@@ -62,7 +63,6 @@ namespace Z0.Logix
             var lhs = and(a, or(b,c));
             var rhs = or(and(a,b), and(a,c));
             return equals(lhs, rhs, a, b, c);
-
         }
         
         /// <summary>
@@ -87,7 +87,6 @@ namespace Z0.Logix
                 var lhs = not(xor(a,b));
                 var rhs = xor(not(a),b);
                 return equals(lhs,rhs,a,b);
-
         }
 
         public static ComparisonExpr<Vector128<T>> AndOverOr128<T>()
@@ -138,7 +137,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static (IVarExpr<T> a, IVarExpr<T> b, IVarExpr<T> c) vars3<T>()
             where T : unmanaged
-                => (TLS.variable<T>('a'), TLS.variable<T>('b'), TLS.variable<T>('c'));
- 
+                => (TLS.variable<T>('a'), TLS.variable<T>('b'), TLS.variable<T>('c')); 
     }
 }

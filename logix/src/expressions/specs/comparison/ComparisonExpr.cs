@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines an untyped comparison expression
@@ -58,7 +58,7 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
-        public void SetVars(ILiteralLogicSeq values)
+        public void SetVars(ILiteralLogicSeqExpr values)
         {
             var count = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<count; i++)

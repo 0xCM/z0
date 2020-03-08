@@ -5,23 +5,19 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
-
     [ApiHost("expr.cmp.eval", ApiHostKind.Generic)]
     public static class CmpExprEval
     {
         [Op("eval_cmp_expr"), NumericClosures(NumericKind.Integers & ~NumericKind.U64)]
         public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
-                => ScalarOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op("eval_cmp_pred"), NumericClosures(NumericKind.Integers & ~NumericKind.U64)]
-        public static bit eval<T>(IComparisonPred<T> expr)
+        public static bit eval<T>(IComparisonPredExpr<T> expr)
             where T : unmanaged
                 => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 

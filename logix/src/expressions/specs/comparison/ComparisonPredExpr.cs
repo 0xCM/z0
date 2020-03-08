@@ -7,12 +7,12 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a typed comparison predicate
     /// </summary>
-    public sealed class ComparisonPred<T> : IComparisonPred<T>
+    public sealed class ComparisonPredExpr<T> : IComparisonPredExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0.Logix
         public IVarExpr<T>[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public ComparisonPred(ComparisonKind op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
+        public ComparisonPredExpr(ComparisonKind op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
         {
             this.ComparisonKind = op;
             this.LeftArg = left;

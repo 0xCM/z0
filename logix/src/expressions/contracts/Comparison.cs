@@ -5,11 +5,7 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    
-    using static zfunc;
-
 
     /// <summary>
     /// Characterizes a claim that two variable-dependent comparison expressions are equivalent
@@ -60,14 +56,13 @@ namespace Z0.Logix
         ComparisonKind ComparisonKind {get;}
     }
 
-
     /// <summary>
     /// Characterizes a comparison expression that evaluates as a predicate where a single bit, or bitvector, 
     /// characterizes the evaluation result. This is in contradistinction to the more general typed comparison expression
     /// where the result is predicated on the type and may be scalar/vector/etc in nature
     /// </summary>
     /// <typeparam name="T">The type over which the comparison is defined</typeparam>
-    public interface IComparisonPred<T> : IComparisonExpr<T> 
+    public interface IComparisonPredExpr<T> : IComparisonExpr<T> 
         where T : unmanaged
     {
 

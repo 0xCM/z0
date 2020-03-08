@@ -5,34 +5,27 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
-
-
     /// <summary>
     /// Characterizes a typed ternary bitwise operator
     /// </summary>
     /// <typeparam name="T">The type over which the operator is defined</typeparam>
-    public interface ITernaryBitwiseOp<T> : ITernaryOp<IExpr<T>>, IOperator<T,TernaryBitLogicKind> 
+    public interface ITernaryBitwiseOpExpr<T> : ITernaryOpExpr<IExpr<T>>, IOperatorExpr<T,TernaryBitLogicKind> 
         where T : unmanaged
     {
 
 
     }
 
-
-    public interface ITernaryLogicOp :  ITernaryOp<ILogicExpr>,  ILogicOp<TernaryBitLogicKind> 
+    public interface ITernaryLogicOpExpr :  ITernaryOpExpr<ILogicExpr>,  ILogicOpExpr<TernaryBitLogicKind> 
     {
 
     }
 
-    public interface ITernaryLogicOp<T> : ITernaryLogicOp, ITernaryOp<ILogicExpr<T>>,ILogicOp<T,TernaryBitLogicKind>
+    public interface ITernaryLogicOpExpr<T> : ITernaryLogicOpExpr, ITernaryOpExpr<ILogicExpr<T>>,ILogicOpExpr<T,TernaryBitLogicKind>
         where T : unmanaged
     {
 
     }
-
 }

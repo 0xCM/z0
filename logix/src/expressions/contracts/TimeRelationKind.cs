@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     
-    
-    using static zfunc;
-
     /// <summary>
     /// Classifies the chronological disposition of one instant in time with respect to another
     /// </summary>

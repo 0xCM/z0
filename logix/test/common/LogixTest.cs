@@ -11,7 +11,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static ScalarOpApi;
+    using static NumericOpApi;
     using static LogicOpApi;
     
     using static BitLogicSpec;
@@ -441,7 +441,7 @@ namespace Z0.Logix
             {   
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();
-                var result1 = ScalarOpApi.eval(kind,a,b);    
+                var result1 = NumericOpApi.eval(kind,a,b);    
                 var result2 = BitVectorOpApi.eval(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result3 = BitVectorOpApi.evalspec(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result4 = VectorOpApi.eval(kind, gvec.vbroadcast(n128,a), gvec.vbroadcast(n128,b)).ToScalar();

@@ -5,10 +5,9 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     public static class ExprX
     {        
@@ -263,12 +262,12 @@ namespace Z0.Logix
         /// Transforms a bitstring into a literal logic sequence
         /// </summary>
         /// <param name="bs">The source bitstring</param>
-        public static LiteralLogicSeq ToLogicSeq(this BitString bs)
+        public static LiteralLogicSeqExpr ToLogicSeq(this BitString bs)
         {
             var terms = new bit[bs.Length];
             for(var i=0; i<terms.Length; i++)
                 terms[i] = bs[i];
-            return new LiteralLogicSeq(terms);
+            return new LiteralLogicSeqExpr(terms);
         }
 
         /// <summary>
@@ -277,11 +276,11 @@ namespace Z0.Logix
         /// <param name="bs">The source bitstring</param>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
-        public static LiteralLogicSeq<N> ToLogicSeq<N>(this BitString src, N n = default)
+        public static LiteralLogicSeqExpr<N> ToLogicSeq<N>(this BitString src, N n = default)
             where N : unmanaged, ITypeNat
         {
             Nat.require<N>(src.Length);
-            return new LiteralLogicSeq<N>(src.ToLogicSeq().Terms);
+            return new LiteralLogicSeqExpr<N>(src.ToLogicSeq().Terms);
         }
 
         [MethodImpl(Inline)]
@@ -291,6 +290,5 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static bool IsOperator(this TypedExprKind kind)
             => (uint)kind >= (uint)TypedExprKind.UnaryOperator;
-
     }
 }

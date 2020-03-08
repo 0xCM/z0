@@ -8,8 +8,6 @@ namespace Z0.Logix
     using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;    
-
     /// <summary>
     /// Defines the canonical shape of a bitwise shift function
     /// </summary>

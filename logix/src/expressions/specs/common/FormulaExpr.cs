@@ -7,12 +7,12 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines an untyped identified expression, identifier := expression
     /// </summary>
-    public class Formula : IFormula
+    public class FormulaExpr : IFormulaExpr
     {
         /// <summary>
         /// The identifier
@@ -25,7 +25,7 @@ namespace Z0.Logix
         public IExpr Encoding {get;}
 
         [MethodImpl(Inline)]
-        public Formula(string name, IExpr encoding)
+        public FormulaExpr(string name, IExpr encoding)
         {
             this.Name = name;
             this.Encoding = encoding;
@@ -38,7 +38,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a typed identified expression, identifier := expression
     /// </summary>
-    public sealed class Formula<T> : Formula, IFormula<T>
+    public sealed class FormulaExpr<T> : FormulaExpr, IFormulaExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0.Logix
         public new IExpr<T> Encoding {get;}
 
         [MethodImpl(Inline)]
-        public Formula(string name, IExpr<T> encoding)
+        public FormulaExpr(string name, IExpr<T> encoding)
             : base(name,encoding)
         {
             this.Encoding = encoding;

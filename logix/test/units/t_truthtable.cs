@@ -141,10 +141,10 @@ namespace Z0.Logix
             const byte off = 0;
 
             var dst = BitVector.alloc(n4);
-            dst[0] = (byte)(ScalarOpApi.eval(op, off,off) & on) == on;
-            dst[1] = (byte)(ScalarOpApi.eval(op, on,off) & on) == on;
-            dst[2] = (byte)(ScalarOpApi.eval(op, off,on) & on) == on;
-            dst[3] = (byte)(ScalarOpApi.eval(op, on,on) & on) == on;
+            dst[0] = (byte)(NumericOpApi.eval(op, off,off) & on) == on;
+            dst[1] = (byte)(NumericOpApi.eval(op, on,off) & on) == on;
+            dst[2] = (byte)(NumericOpApi.eval(op, off,on) & on) == on;
+            dst[3] = (byte)(NumericOpApi.eval(op, on,on) & on) == on;
             var sig = TruthTables.sig(op);
             Claim.eq(sig,dst);
         }

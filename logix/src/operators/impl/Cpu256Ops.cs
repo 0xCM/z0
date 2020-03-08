@@ -8,7 +8,8 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;
+    using static Nats;
 
     public static partial class VectorizedOps
     {
@@ -379,4 +380,3 @@ namespace Z0.Logix
                 => select(c, xnor(b,c), nand(b,c));
     }
 }
-

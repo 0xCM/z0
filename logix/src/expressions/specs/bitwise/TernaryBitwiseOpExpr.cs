@@ -5,45 +5,49 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
-    /// Defines a typed ternary logic operator expression
+    /// Defines a typed ternary bitwise operator expression
     /// </summary>
-    public sealed class TernaryLogicOp<T> : TernaryLogicOp, ITernaryLogicOp<T>
+    public sealed class TernaryBitwiseOpExpr<T> : ITernaryBitwiseOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public new TernaryBitLogicKind OpKind {get;}
+        public TernaryBitLogicKind OpKind {get;}
 
         /// <summary>
         /// The first operand
         /// </summary>
-        public new ILogicExpr<T> FirstArg {get;}
+        public IExpr<T> FirstArg {get;}
 
         /// <summary>
         /// The second operand
         /// </summary>
-        public new ILogicExpr<T> SecondArg {get;}
+        public IExpr<T> SecondArg {get;}
 
         /// <summary>
         /// The third operand
         /// </summary>
-        public new ILogicExpr<T> ThirdArg {get;}
+        public IExpr<T> ThirdArg {get;}
 
         [MethodImpl(Inline)]
-        public TernaryLogicOp(TernaryBitLogicKind op, ILogicExpr<T> arg1, ILogicExpr<T> arg2, ILogicExpr<T> arg3)
-            : base(op, arg1,arg2,arg3)
+        public TernaryBitwiseOpExpr(TernaryBitLogicKind op, IExpr<T> first, IExpr<T> second, IExpr<T> third)
         {
             this.OpKind = op;
-            this.FirstArg = arg1;
-            this.SecondArg = arg2;
-            this.ThirdArg = arg3;
+            this.FirstArg = first;
+            this.SecondArg = second;
+            this.ThirdArg = third;
         }
+
+        public string Format()
+            => OpKind.Format(FirstArg,SecondArg,ThirdArg);
+        
+        public override string ToString()
+            => Format();
     }
 }

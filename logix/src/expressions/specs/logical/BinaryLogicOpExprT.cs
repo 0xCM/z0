@@ -7,12 +7,12 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a typed binary logical operator expression
     /// </summary>
-    public sealed class BinaryLogicOp<T> : BinaryLogicOp, IBinaryLogicOp<T>
+    public sealed class BinaryLogicOpExpr<T> : BinaryLogicOpExpr, IBinaryLogicOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0.Logix
         public new ILogicExpr<T> RightArg {get;}
 
         [MethodImpl(Inline)]
-        public BinaryLogicOp(BinaryBitLogicKind op, ILogicExpr<T> left, ILogicExpr<T> right)
+        public BinaryLogicOpExpr(BinaryBitLogicKind op, ILogicExpr<T> left, ILogicExpr<T> right)
             : base(op,left,right)
         {
             this.LeftArg = left;

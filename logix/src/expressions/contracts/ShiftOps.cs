@@ -6,12 +6,12 @@ namespace Z0.Logix
 {
     using System;
 
-    public interface IShiftOp : IOperator
+    public interface IShiftOpExpr : IOperatorExpr
     {
         
     }
 
-    public interface IShiftOp<T> : IShiftOp, IOperator<T, ShiftOpKind>
+    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, ShiftOpKind>
         where T : unmanaged
     {
         /// <summary>

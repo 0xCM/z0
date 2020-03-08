@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     /// <summary>
     /// Classifier for logical expressions
     /// </summary>
@@ -49,6 +46,5 @@ namespace Z0
         /// Classifies a boolean ternary operator
         /// </summary>
         TernaryOperator = 7,
-
     }
 }

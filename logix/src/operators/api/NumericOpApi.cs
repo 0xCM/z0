@@ -9,16 +9,15 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
     using static TernaryBitLogicKind;
-    using static ScalarOps;
+    using static NumericOps;
     using static OpHelpers;
 
     /// <summary>
     /// Services for scalar operators
     /// </summary>
     //[ApiHost("scalar.api", ApiHostKind.Generic)]
-    public static class ScalarOpApi
+    public static class NumericOpApi
     {
         /// <summary>
         /// Advertises the supported unary bitlogic operators
@@ -90,7 +89,7 @@ namespace Z0.Logix
             switch(kind)
             {
                 case UnaryBitLogicKind.Not: return not(a);
-                case UnaryBitLogicKind.Identity: return ScalarOps.identity(a);
+                case UnaryBitLogicKind.Identity: return NumericOps.identity(a);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -274,7 +273,7 @@ namespace Z0.Logix
             switch(kind)
             {
                 case UnaryBitLogicKind.Not: return not;
-                case UnaryBitLogicKind.Identity: return ScalarOps.identity;
+                case UnaryBitLogicKind.Identity: return NumericOps.identity;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

@@ -7,8 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     //[ApiHost("expr.logic.eval",ApiHostKind.Direct)]
     public static class LogicExprEval
     {
@@ -21,9 +19,9 @@ namespace Z0.Logix
                     return eval(x.Value);
                 case IVariedLogicExpr x:
                     return eval(x.BaseExpr);
-                case ILogicLiteral x:
+                case ILogicLiteralExpr x:
                     return x.Value;
-                case ILogicOp x:
+                case ILogicOpExpr x:
                     return eval(x);
                 case IComparisonExpr x:
                     return eval(x.Lhs) == eval(x.Rhs);
@@ -36,15 +34,15 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op("eval_logic_op")]
-        static bit eval(ILogicOp expr)
+        static bit eval(ILogicOpExpr expr)
         {
             switch(expr)               
             {
-                case IUnaryLogicOp x:
+                case IUnaryLogicOpExpr x:
                     return LogicOpApi.eval(x.OpKind, eval(x.Arg));
-                case IBinaryLogicOp x:
+                case IBinaryLogicOpExpr x:
                     return LogicOpApi.eval(x.OpKind, eval(x.LeftArg), eval(x.RightArg));
-                case ITernaryLogicOp x:
+                case ITernaryLogicOpExpr x:
                     return LogicOpApi.eval(x.OpKind, eval(x.FirstArg), eval(x.SecondArg), eval(x.ThirdArg));
                default: throw new NotSupportedException(expr.GetType().Name);
             }

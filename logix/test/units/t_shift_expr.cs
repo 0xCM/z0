@@ -152,7 +152,7 @@ namespace Z0.Logix
                 var a = Random.Next<T>();
                 v1.Set(a);   
                 T actual = LogicEngine.eval(expr);
-                T expect = ScalarOpApi.eval(op,a,offset);
+                T expect = NumericOpApi.eval(op,a,offset);
                 Claim.eq(actual,expect);                            
             }
         }

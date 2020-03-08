@@ -11,7 +11,7 @@ namespace Z0.Logix
     using static As;
 
     [ApiHost("scalar.ops", ApiHostKind.Generic)]
-    public static class ScalarOps
+    public static class NumericOps
     {        
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T identity<T>(T a)
@@ -851,5 +851,4 @@ namespace Z0.Logix
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));
     }    
-
 }

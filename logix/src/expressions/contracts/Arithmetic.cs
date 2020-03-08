@@ -5,11 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     public interface IArithmeticExpr : IExpr
     {
 
@@ -21,50 +18,48 @@ namespace Z0.Logix
         
     }
 
-    public interface IArithmeticOp : IOperator
+    public interface IArithmeticOpExpr : IOperatorExpr
     {
 
     }
 
-    public interface IArithmeticOp<T> : IArithmeticOp, IArithmeticExpr<T>, IOperator<T>
+    public interface IArithmeticOpExpr<T> : IArithmeticOpExpr, IArithmeticExpr<T>, IOperatorExpr<T>
         where T : unmanaged
     {
 
 
     }
 
-    public interface IArithmeticOp<T,K> : IArithmeticOp<T>, IOperator<T,K>
+    public interface IArithmeticOpExpr<T,K> : IArithmeticOpExpr<T>, IOperatorExpr<T,K>
         where T : unmanaged
         where K : unmanaged, Enum
     {
 
 
     }
- 
-    public interface IUnaryArithmeticOp :  IArithmeticOp
+    
+    public interface IUnaryArithmeticOpExpr :  IArithmeticOpExpr
     {
 
     }
+    
 
-
-    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp, IArithmeticOp<T, UnaryArithmeticKind>
+    public interface IUnaryArithmeticOpExpr<T> :  IUnaryArithmeticOpExpr, IArithmeticOpExpr<T, UnaryArithmeticKind>
         where T : unmanaged
     {
 
     }
 
-    public interface IBinaryArithmeticOp :  IArithmeticOp
+    public interface IBinaryArithmeticOpExpr :  IArithmeticOpExpr
     {
 
     }
 
-    public interface IBinaryArithmeticOp<T> : IBinaryArithmeticOp, IArithmeticOp<T,BinaryArithmeticKind>
+    public interface IBinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr, IArithmeticOpExpr<T,BinaryArithmeticKind>
         where T : unmanaged
     {
         IExpr<T> LeftArg {get;}
 
         IExpr<T> RightArg {get;}
-
     }
-
 }

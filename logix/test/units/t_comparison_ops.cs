@@ -13,7 +13,7 @@ namespace Z0.Logix
 
     using static VectorizedOps;
     
-    using S = ScalarOps;
+    using S = NumericOps;
 
     public class t_comparison_ops : TypedLogixTest<t_comparison_ops>
     {

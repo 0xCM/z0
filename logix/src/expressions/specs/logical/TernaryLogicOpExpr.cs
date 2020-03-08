@@ -5,15 +5,14 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines the application of an untyped ternary logic operator
     /// </summary>
-    public class TernaryLogicOp : ITernaryLogicOp
+    public class TernaryLogicOpExpr : ITernaryLogicOpExpr
     {
         /// <summary>
         /// The operator kind
@@ -36,7 +35,7 @@ namespace Z0.Logix
         public ILogicExpr ThirdArg {get;}
 
         [MethodImpl(Inline)]
-        public TernaryLogicOp(TernaryBitLogicKind op, ILogicExpr arg1, ILogicExpr arg2, ILogicExpr arg3)
+        public TernaryLogicOpExpr(TernaryBitLogicKind op, ILogicExpr arg1, ILogicExpr arg2, ILogicExpr arg3)
         {
             this.OpKind = op;
             this.FirstArg = arg1;

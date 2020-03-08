@@ -5,11 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     public interface ILiteralExpr : IExpr
     {
         
@@ -24,28 +21,25 @@ namespace Z0.Logix
         T Value {get;}                
     }
 
-    public interface ILiteralSeq<T> : ILiteralExpr, ISeqExpr<T>
+    public interface ILiteralSeqExpr<T> : ILiteralExpr, ISeqExpr<T>
         where T : unmanaged
     {
 
-
     }
 
-    public interface ILiteralLogicSeq : ILiteralSeq<bit>, ILogicExpr
+    public interface ILiteralLogicSeqExpr : ILiteralSeqExpr<bit>, ILogicExpr
     {
 
     }
     
-    public interface ILogicLiteral : ILogicExpr, ILiteralExpr
+    public interface ILogicLiteralExpr : ILogicExpr, ILiteralExpr
     {
         bit Value {get;}
     }
 
-    public interface ILogicLiteral<T> : ILogicLiteral, ILogicExpr<T>
+    public interface ILogicLiteralExpr<T> : ILogicLiteralExpr, ILogicExpr<T>
         where T : unmanaged
     {
 
     }
-
-
 }

@@ -7,22 +7,27 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
-   /// <summary>
-   /// Defines a natural-length sequence of literal bit values
-   /// </summary>
-   public sealed class LiteralLogicSeq<N> : ILiteralLogicSeq
-        where N : unmanaged, ITypeNat
+    /// <summary>
+    /// Defines a sequence of literal bit values
+    /// </summary>
+    public sealed class LiteralLogicSeqExpr : ILiteralLogicSeqExpr
     {
         public bit[] Terms {get;}
 
         [MethodImpl(Inline)]
-        internal LiteralLogicSeq(bit[] terms)
+        internal LiteralLogicSeqExpr(bit[] terms)
         {
             this.Terms = terms;
         }
-                    
+
+        /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public LogicExprKind ExprKind
+            => LogicExprKind.Literal;
+
         public bit this[int index]
         {
             [MethodImpl(Inline)]
@@ -31,20 +36,17 @@ namespace Z0.Logix
             [MethodImpl(Inline)]
             set => Terms[index] = value;
         }
-
+        
         public int Length
             => Terms.Length;
 
-        public LogicExprKind ExprKind 
-            => LogicExprKind.Literal;
-
         public BitString ToBitString()
-            => BitString.load(Terms);    
-
+            => BitString.load(Terms);
+        
         public string Format()
             => ToBitString().Format();
-
+    
         public override string ToString()
-            => Format();    
+            => Format();
     }
 }

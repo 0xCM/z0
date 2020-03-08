@@ -5,12 +5,10 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static TernaryBitLogicKind;
+    using static Root;
+    using static Nats;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits

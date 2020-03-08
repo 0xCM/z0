@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a variable-dependent typed expression
@@ -47,7 +47,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public void SetVars(params IVarExpr<T>[] values)
             => OpHelpers.Set(this,values);
-
     }
 
     /// <summary>
@@ -81,5 +80,4 @@ namespace Z0.Logix
         public string Format()
             => string.Empty;
    }
-
 }

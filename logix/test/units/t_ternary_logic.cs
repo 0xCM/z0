@@ -15,7 +15,7 @@ namespace Z0.Logix
         protected override int RepCount => Pow2.T08;
         
         ReadOnlySpan<TernaryBitLogicKind> TernaryKinds
-            => ScalarOpApi.TernaryBitLogicKinds;
+            => NumericOpApi.TernaryBitLogicKinds;
         
         public void op_identities()
         {                         
@@ -65,7 +65,7 @@ namespace Z0.Logix
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
-                BitVector<T> x = ScalarOps.select(a.Scalar, b.Scalar, c.Scalar);
+                BitVector<T> x = NumericOps.select(a.Scalar, b.Scalar, c.Scalar);
                 for(var j=0; j<x.Width; j++)
                     Claim.eq(x[j], LogicOps.select(a[j],b[j],c[j]));
             }
@@ -88,7 +88,7 @@ namespace Z0.Logix
                 var sx = x.ToSpan();
 
                 for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], ScalarOps.select(sa[j], sb[j], sc[j]));
+                    Claim.eq(sx[j], NumericOps.select(sa[j], sb[j], sc[j]));
             }
 
         }
@@ -110,7 +110,7 @@ namespace Z0.Logix
                 var sx = x.ToSpan();
 
                 for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], ScalarOps.select(sa[j], sb[j], sc[j]));
+                    Claim.eq(sx[j], NumericOps.select(sa[j], sb[j], sc[j]));
             }
 
         }
@@ -122,7 +122,7 @@ namespace Z0.Logix
             var b = convert<T>(0b1100_1100);
             var c = convert<T>(0b1010_1010);
             var d = convert<T>(0b1111_1111);
-            var f = ScalarOpApi.lookup<T>(id);
+            var f = NumericOpApi.lookup<T>(id);
             var actual = convert<T,byte>(gmath.and(f(a,b,c), d));
             var expect = (byte)id;
             Claim.eq(expect.FormatHex(), actual.FormatHex());
@@ -144,7 +144,7 @@ namespace Z0.Logix
                     u[j] = LogicOpApi.eval(kind, a[j], b[j], c[j]);
                 
                 
-                BitVector<T> v = ScalarOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
+                BitVector<T> v = NumericOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
                     Notify($"Equivalence failed for ternary op {kind}:{TypeIdentity.numeric<T>()}");

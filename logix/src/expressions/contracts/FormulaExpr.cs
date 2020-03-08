@@ -5,17 +5,12 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    
-    using static zfunc;
+    using System.Runtime.CompilerServices;    
 
     /// <summary>
     /// Characterizes a formula which, by definition, is a named expression
     /// </summary>
-    public interface IFormula : IExpr
+    public interface IFormulaExpr : IExpr
     {
         /// <summary>
         /// The formula name, unique with respect to some context
@@ -31,7 +26,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a typed formula, a named typed expression
     /// </summary>
-    public interface IFormula<T> : IFormula
+    public interface IFormulaExpr<T> : IFormulaExpr
         where T : unmanaged
     {
         /// <summary>
@@ -39,7 +34,4 @@ namespace Z0.Logix
         /// </summary>
         new IExpr<T> Encoding {get;}
     }
-
-
-
 }

@@ -29,7 +29,7 @@ namespace Z0.Logix
             var lhsSamples = Random.Array<T>(RepCount);
             var rhsSamples = Random.Array<T>(RepCount);
             var result = default(T);
-            var kinds = ScalarOpApi.BinaryBitLogicKinds.ToArray();
+            var kinds = NumericOpApi.BinaryBitLogicKinds.ToArray();
             var opcount = 0;
 
             clock.Start();
@@ -39,14 +39,14 @@ namespace Z0.Logix
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
-                    result = ScalarOpApi.lookup<T>(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
+                    result = NumericOpApi.lookup<T>(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
             }
             else
             {
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
-                    result = ScalarOpApi.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
+                    result = NumericOpApi.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
             }
 
             clock.Stop();

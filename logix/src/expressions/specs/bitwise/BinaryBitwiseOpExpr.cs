@@ -7,45 +7,42 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
-    /// Defines a typed ternary bitwise operator expression
+    /// Captures a binary bitwise operator along with with its operands
     /// </summary>
-    public sealed class TernaryBitwiseOp<T> : ITernaryBitwiseOp<T>
+    public sealed class BinaryBitwiseOpExpr<T> : IBinaryBitwiseOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public TernaryBitLogicKind OpKind {get;}
+        public BinaryBitLogicKind OpKind {get;}
 
         /// <summary>
-        /// The first operand
+        /// The left operand
         /// </summary>
-        public IExpr<T> FirstArg {get;}
+        public IExpr<T> LeftArg {get;}
 
         /// <summary>
-        /// The second operand
+        /// The right operand
         /// </summary>
-        public IExpr<T> SecondArg {get;}
-
-        /// <summary>
-        /// The third operand
-        /// </summary>
-        public IExpr<T> ThirdArg {get;}
+        public IExpr<T> RightArg {get;}
 
         [MethodImpl(Inline)]
-        public TernaryBitwiseOp(TernaryBitLogicKind op, IExpr<T> first, IExpr<T> second, IExpr<T> third)
+        public BinaryBitwiseOpExpr(BinaryBitLogicKind op, IExpr<T> left, IExpr<T> right)
         {
             this.OpKind = op;
-            this.FirstArg = first;
-            this.SecondArg = second;
-            this.ThirdArg = third;
+            this.LeftArg = left;
+            this.RightArg = right;
         }
 
+        /// <summary>
+        /// Renders the expression in canonical form
+        /// </summary>
         public string Format()
-            => OpKind.Format(FirstArg,SecondArg,ThirdArg);
+            => OpKind.Format(LeftArg,RightArg);
         
         public override string ToString()
             => Format();

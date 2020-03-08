@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
     
     partial class BitLogicSpec
     {
@@ -16,8 +16,8 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicSeq bitseq(params bit[] terms)
-            => new LiteralLogicSeq(terms);
+        public static LiteralLogicSeqExpr bitseq(params bit[] terms)
+            => new LiteralLogicSeqExpr(terms);
 
         /// <summary>
         /// Defines a bit sequence expression of natural length
@@ -25,11 +25,11 @@ namespace Z0.Logix
         /// <param name="length">The natural length of the sequence</param>
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicSeq<N> bitseq<N>(N length, params bit[] terms)
+        public static LiteralLogicSeqExpr<N> bitseq<N>(N length, params bit[] terms)
             where N : unmanaged, ITypeNat
         {
             Nat.require<N>(terms.Length);
-            return new LiteralLogicSeq<N>(terms);
+            return new LiteralLogicSeqExpr<N>(terms);
         }
     }
 }

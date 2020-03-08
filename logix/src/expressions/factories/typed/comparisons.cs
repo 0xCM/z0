@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
     using TLS = TypedLogicSpec;
     using static TypedLogicSpec;
 
@@ -173,5 +173,4 @@ namespace Z0.Logix
             where T : unmanaged
                 => gteq(TLS.literal(lhs), TLS.literal(rhs));
     }
-
 }

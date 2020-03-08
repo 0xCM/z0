@@ -5,11 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     /// <summary>
     /// Distinguishes varied expressions from other sorts of expressions
     /// </summary>
@@ -32,7 +29,6 @@ namespace Z0.Logix
         void SetVars(params IExpr<T>[] values);        
 
         void SetVars(params T[] values);
-
     }
 
     /// <summary>
@@ -47,7 +43,6 @@ namespace Z0.Logix
         void SetVars(params ILogicExpr[] values);        
 
         void SetVars(params bit[] values);        
-
     }
 
     /// <summary>
@@ -64,5 +59,4 @@ namespace Z0.Logix
 
         void SetVars(params ILogicExpr<T>[] values);        
     }
-
 }

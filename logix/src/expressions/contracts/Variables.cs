@@ -5,10 +5,7 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    
-    using static zfunc;
 
     /// <summary>
     /// Characterizes a variable
@@ -70,8 +67,6 @@ namespace Z0.Logix
         ILogicExpr Value {get;}
     }
 
-
-
     /// <summary>
     /// Characterizes a logical variable that also carries type information
     /// </summary>
@@ -83,14 +78,10 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The value to assigned to the variable</param>
         void Set(ILogicExpr<T> expr);
-
         
         /// <summary>
         /// The current value of the variable
         /// </summary>
         new ILogicExpr<T> Value {get;}
-
-
     }
-
 }

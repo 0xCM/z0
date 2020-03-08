@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines an untyped logic expression over one or more variables
@@ -45,7 +45,7 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
-        public void SetVars(LiteralLogicSeq values)
+        public void SetVars(LiteralLogicSeqExpr values)
         {
             var n = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<n; i++)

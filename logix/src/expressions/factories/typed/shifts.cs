@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     partial class TypedLogicSpec
     {
@@ -20,9 +20,9 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> shift<T>(ShiftOpKind op, IExpr<T> src, byte count)
+        public static ShiftOpExpr<T> shift<T>(ShiftOpKind op, IExpr<T> src, byte count)
             where T : unmanaged
-                => new ShiftOpSpec<T>(op,src,literal(count));
+                => new ShiftOpExpr<T>(op,src,literal(count));
 
         /// <summary>
         /// Creates a shift expression
@@ -32,9 +32,9 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> shiftx<T>(ShiftOpKind op, IExpr<T> src, IExpr<byte> count)
+        public static ShiftOpExpr<T> shiftx<T>(ShiftOpKind op, IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
-                => new ShiftOpSpec<T>(op,src, count);
+                => new ShiftOpExpr<T>(op,src, count);
 
         /// <summary>
         /// Defines a bitwise sll expression
@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> sll<T>(IExpr<T> src, byte count)
+        public static ShiftOpExpr<T> sll<T>(IExpr<T> src, byte count)
             where T : unmanaged
                 => shift(ShiftOpKind.Sll, src, count);
 
@@ -54,7 +54,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> sll<T>(T src, byte count)
+        public static ShiftOpExpr<T> sll<T>(T src, byte count)
             where T : unmanaged
                 => sll(literal(src), count);
 
@@ -65,7 +65,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> srl<T>(IExpr<T> src, byte count)
+        public static ShiftOpExpr<T> srl<T>(IExpr<T> src, byte count)
             where T : unmanaged
                 => shift(ShiftOpKind.Srl, src, count);
 
@@ -76,7 +76,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> srl<T>(T src, byte count)
+        public static ShiftOpExpr<T> srl<T>(T src, byte count)
             where T : unmanaged
                 => srl(literal(src), count);
 
@@ -87,7 +87,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotr<T>(IExpr<T> src, byte count)
+        public static ShiftOpExpr<T> rotr<T>(IExpr<T> src, byte count)
             where T : unmanaged
                 => shift(ShiftOpKind.Rotr, src, count);
 
@@ -98,7 +98,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotr<T>(T src, byte count)
+        public static ShiftOpExpr<T> rotr<T>(T src, byte count)
             where T : unmanaged
                 => rotr(literal(src), count);
         
@@ -109,7 +109,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotl<T>(IExpr<T> src, byte count)
+        public static ShiftOpExpr<T> rotl<T>(IExpr<T> src, byte count)
             where T : unmanaged
                 => shift(ShiftOpKind.Rotl, src, count);
 
@@ -120,7 +120,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotl<T>(T src, byte count)
+        public static ShiftOpExpr<T> rotl<T>(T src, byte count)
             where T : unmanaged
                 => rotl(literal(src), count);
 
@@ -131,7 +131,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> sll<T>(IExpr<T> src, IExpr<byte> count)
+        public static ShiftOpExpr<T> sll<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Sll, src, count);
 
@@ -142,7 +142,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> sllx<T>(T src, IExpr<byte> count)
+        public static ShiftOpExpr<T> sllx<T>(T src, IExpr<byte> count)
             where T : unmanaged
                 => sll(literal(src), count);
 
@@ -153,7 +153,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> srl<T>(IExpr<T> src, IExpr<byte> count)
+        public static ShiftOpExpr<T> srl<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Srl, src, count);
 
@@ -164,7 +164,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> srl<T>(T src, IExpr<byte> count)
+        public static ShiftOpExpr<T> srl<T>(T src, IExpr<byte> count)
             where T : unmanaged
                 => srl(literal(src), count);
 
@@ -175,7 +175,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotr<T>(IExpr<T> src, IExpr<byte> count)
+        public static ShiftOpExpr<T> rotr<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Rotr, src, count);
 
@@ -186,7 +186,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotr<T>(T src, IExpr<byte> count)
+        public static ShiftOpExpr<T> rotr<T>(T src, IExpr<byte> count)
             where T : unmanaged
                 => rotr(literal(src), count);
         
@@ -197,7 +197,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotl<T>(IExpr<T> src, IExpr<byte> count)
+        public static ShiftOpExpr<T> rotl<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Rotl, src, count);
 
@@ -208,11 +208,8 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotl<T>(T src, IExpr<byte> count)
+        public static ShiftOpExpr<T> rotl<T>(T src, IExpr<byte> count)
             where T : unmanaged
                 => rotl(literal(src), count);
-
-
     }
-
 }

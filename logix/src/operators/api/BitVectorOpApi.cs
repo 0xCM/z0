@@ -20,7 +20,7 @@ namespace Z0.Logix
         /// Advertises the supported binary operators
         /// </summary>
         public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
-            => ScalarOpApi.BinaryBitLogicKinds;
+            => NumericOpApi.BinaryBitLogicKinds;
 
         [Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> eval<T>(BinaryBitLogicKind kind, BitVector<T> x, BitVector<T> y)
