@@ -41,11 +41,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
     }
-
-    partial class fmath
-    {
-
-    }    
 }
