@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static zfunc;
+    using static Root;
 
     using F = MemberLocationField;
     using R = MemberLocationRecord;

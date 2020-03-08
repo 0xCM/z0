@@ -3,15 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{
+{        
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
 
-    using static AsmWorkflowReports;
-    
-    public interface IOpExtractParser : IAsmService
+
+    public static partial class AsmWorkflowReports
     {
-        MemberParseReport Parse(ApiHost src, MemberExtractReport encoded);        
 
-        ParsedExtract[] Parse(MemberExtract[] src);
+
     }
+
+
 }

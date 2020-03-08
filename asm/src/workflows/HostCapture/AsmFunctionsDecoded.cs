@@ -6,18 +6,16 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Root;
 
     partial class HostCaptureWorkflow
     {
-        public readonly struct FunctionsDecoded : IAppEvent<FunctionsDecoded, AsmFunction[]>
+        public readonly struct AsmFunctionsDecoded : IAppEvent<AsmFunctionsDecoded, AsmFunction[]>
         {
-            public static FunctionsDecoded Empty => new FunctionsDecoded(ApiHostUri.Empty, new AsmFunction[]{});
+            public static AsmFunctionsDecoded Empty => new AsmFunctionsDecoded(ApiHostUri.Empty, new AsmFunction[]{});
 
-            public FunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
+            public AsmFunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
             {
                 this.Host = host;
                 this.EventData = functions;
@@ -27,14 +25,11 @@ namespace Z0.Asm
             
             public AsmFunction[] EventData {get;}
 
-            public string EventName
-                => $"{Host} functions decoded: {EventData.Length}";
+            public string Description
+                => $"{EventData.Length} {Host} functions decoded";
             
             public string Format()
-                => EventName;         
+                => Description;         
         }    
-
     }
-
-
 }

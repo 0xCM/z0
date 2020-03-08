@@ -299,7 +299,10 @@ namespace Z0
             }
             finally
             {            
-                term.print(messages);
+                AppMessages.emit(Context, messages);
+                iter(messages.Where(m => !m.Displayed), term.print);       
+
+                //term.print(messages);
             }
 
             return clock;
@@ -342,7 +345,7 @@ namespace Z0
             finally
             {     
                 AppMessages.emit(Context, collected);
-                iter(collected,term.print);       
+                iter(collected.Where(m => !m.Displayed), term.print);       
                 //print(messages);
             }
             return exectime;

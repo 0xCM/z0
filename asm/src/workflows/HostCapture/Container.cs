@@ -5,11 +5,14 @@
 namespace Z0.Asm
 {
     using System;
-    
-    using static zfunc;
+    using System.Runtime.CompilerServices;
 
-    public interface IMemoryExtractParser : IAsmService
+    using static Root;
+
+    public static partial class HostCaptureWorkflow
     {
-        Option<MemoryExtract> Parse(MemoryExtract src);        
+        [MethodImpl(Inline)]
+        public static IWorkflowService Create(IAsmContext context)
+            => new WorkflowService(context);       
     }
 }

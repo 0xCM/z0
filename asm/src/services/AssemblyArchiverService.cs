@@ -10,6 +10,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Root;
+    using static AsmWorkflowReports;
     
     readonly struct AssemblyArchiverService :  IAsmAssemblyArchiver
     {                

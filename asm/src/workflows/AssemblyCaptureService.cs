@@ -8,9 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.Asm;
-    using static AsmServiceMessages;
     using static Root;
+    using static AsmServiceMessages;
+    using static AsmWorkflowReports;
 
     readonly struct AssemblyCaptureService : IAssemblyCapture
     {
@@ -42,7 +42,7 @@ namespace Z0.Asm
             var target = Paths.ExtractPath(host.Path);  
             var saved = report.Save(target);
             var sink = Context;            
-            saved.OnSome(file => sink.Notify(ExractedHost(host.Path,file)))
+            saved.OnSome(file => sink.Notify(ExractedHost(host.Path, file)))
                 .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
             return saved ? some(report) : none<MemberExtractReport>();
         }
@@ -65,7 +65,7 @@ namespace Z0.Asm
 
         CapturedOp[] CaptureHostOps(ApiHost host)
         {
-            var extracts = list<CapturedOp>();            
+            var extracts = list<CapturedOp>();
             Context.Notify($"Executing {host} capture workflow");            
 
             var capture = Context.HostExtractor();
@@ -74,7 +74,7 @@ namespace Z0.Asm
             var target = Paths.ExtractPath(host.Path);  
             var sink = Context;
             report.Save(target)
-                     .OnSome(file => sink.Notify(ExractedHost(host.Path,file)))
+                     .OnSome(file => sink.Notify(ExractedHost(host.Path, file)))
                      .OnNone(() => sink.Notify(HostExtractionFailed(host.Path)));
         
 

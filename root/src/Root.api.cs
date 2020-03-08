@@ -6,11 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public static partial class Root
     {        
+        [MethodImpl(Inline)]
+        public static TheEmpty empty() 
+            => TheEmpty.The;
+
+        [MethodImpl(Inline)]
+        public static TheEmpty<T> empty<T>(T zero = default) 
+            => TheEmpty<T>.The(zero);
+        
         [MethodImpl(Inline)]
         public static Factory<T> factory<T>()
             => default;

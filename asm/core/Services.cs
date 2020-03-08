@@ -41,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IMemoryExtractParser MemoryExtractParser(this IAsmContext context, byte[] buffer)
-            => Z0.MemoryExtractParser.New(context, buffer);
+            => Z0.Asm.MemoryExtractParser.New(context, buffer);
 
         [MethodImpl(Inline)]
         public static ByteParser<EncodingPatternKind> PatternParser(this IAsmContext context, byte[] buffer)

@@ -243,9 +243,12 @@ namespace Z0
         public void Notify(AppMsg msg)
             => Queue.Notify(msg);
 
+        public void NotifyConsole(AppMsg msg)
+            => Queue.NotifyConsole(msg);
+
         public IReadOnlyList<AppMsg> Flush(Exception e)
             => Queue.Flush(e);
-
+            
         public void Flush(Exception e, IAppMsgLog target)
             => Queue.Flush(e, target);
 

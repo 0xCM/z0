@@ -47,14 +47,15 @@ namespace Z0
         public static AppMsg Empty
             => new AppMsg(string.Empty, AppMsgKind.Info, AppMsgColor.Unspecified, text.blank, FilePath.Empty, null);
 
-        AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line)
+        AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line, bool displayed = false)
         {
             this.Content = content ?? string.Empty;
             this.Kind = kind;
             this.Color = color;
             this.Caller =  text.denullify(caller);
             this.CallerFile = file;
-            this.FileLine = line;    
+            this.FileLine = line;
+            this.Displayed = displayed;    
         }
 
         /// <summary>
@@ -87,6 +88,11 @@ namespace Z0
         /// </summary>
         public int? FileLine {get;}
 
+        /// <summary>
+        /// Specifies whether the message has been emitted to an output device, such as the terminal
+        /// </summary>
+        public bool Displayed {get;}
+
         public bool IsEmpty
             => Content == null || (Content is string s && text.empty(s));
 
@@ -104,7 +110,7 @@ namespace Z0
         /// <param name="file">The file in which the invocation occurred</param>
         /// <param name="line">The line number at which the invocation occurred</param>
         public AppMsg WithCallerInfo(string caller, string file, int? line)
-            => new AppMsg(Content, Kind, Color, caller, FilePath.Define(file),line);
+            => new AppMsg(Content, Kind, Color, caller, FilePath.Define(file), line);
 
         /// <summary>
         /// Prepends the message body with specified content
@@ -119,6 +125,12 @@ namespace Z0
         /// <param name="suffix">The suffix content</param>
         public AppMsg WithAppendedContent(object suffix)    
             => new AppMsg($"{Content}{suffix}", Kind, Color, Caller, CallerFile, FileLine);
+        
+        /// <summary>
+        /// Sets the display state to true
+        /// </summary>
+        public AppMsg Printed()
+            => new AppMsg(Content, Kind, Color, Caller, CallerFile, FileLine, true);
 
         public string Format()
         {

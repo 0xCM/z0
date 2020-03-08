@@ -34,11 +34,26 @@ namespace Z0
         public void WriteCode(in CapturedOp src, int? idpad = null)
             => StreamOut.WriteLine(src.Code.Format(idpad ?? 0));
 
+        public void WriteCode(in AsmCode src, int? idpad = null)
+        {
+            StreamOut.WriteLine(src.Format(idpad ?? 0));
+        }
+
         public void WriteHexLine(OpIdentity id, Span<byte> data, int? idpad = null)
             => StreamOut.WriteLine(HexLine.Define(id, data.ToArray()).Format(idpad ?? 0));
 
         public void WriteHexLine(in CapturedOp src, int? idpad = null)
             => WriteHexLine(src.Id, src.RawBits.Bytes, idpad);
+
+        public void Write(AsmCode[] src)
+        {
+            var idpad = src.Max(x => x.Id.Identifier.Length) + 1;
+            for(var i=0; i< src.Length; i++)
+            {
+                WriteCode(src[i], idpad);
+            }
+            StreamOut.Flush();
+        }
 
         public void Dispose()
         {

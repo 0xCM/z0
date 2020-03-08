@@ -11,6 +11,7 @@ namespace Z0.Asm
     using System.Reflection;
 
     using static AsmServiceMessages;
+    using static AsmWorkflowReports;
     using static Root;
 
     readonly struct HostCaptureService : IHostCapture

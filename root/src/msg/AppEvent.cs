@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct AppEvent : IFormattable<AppEvent>, IAppEvent<AppEvent,object>
     {
-        public string EventName {get;}
+        public string Description {get;}
         
         public object EventData {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal AppEvent(string name, object data)
         {
-            this.EventName = name;
+            this.Description = name;
             this.EventData = data;
         }
 
@@ -36,23 +36,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public AppEvent<T> As<T>()
-            => Create<T>(EventName, (T)EventData);
+            => Create<T>(Description, (T)EventData);
     }
 
     public readonly struct AppEvent<T> : IFormattable<AppEvent<T>>, IAppEvent<AppEvent<T>,T>
     {
-        public string EventName {get;}
+        public string Description {get;}
         
         public T EventData {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator AppEvent(AppEvent<T> src)
-            => new AppEvent(src.EventName, src.EventData);
+            => new AppEvent(src.Description, src.EventData);
 
         [MethodImpl(Inline)]
         internal AppEvent(string name, T data)
         {
-            this.EventName = name;
+            this.Description = name;
             this.EventData = data;
         }
 

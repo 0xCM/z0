@@ -5,13 +5,16 @@
 namespace Z0.Asm
 {
     using System;
-
-    using static AsmWorkflowReports;
+    using static Root;
     
-    public interface IOpExtractParser : IAsmService
+    partial class HostCaptureWorkflow
     {
-        MemberParseReport Parse(ApiHost src, MemberExtractReport encoded);        
+        public interface IWorkflowService : IAsmService
+        {
+            void ExecuteWorkflow(FolderPath dst); 
 
-        ParsedExtract[] Parse(MemberExtract[] src);
+            EventSinks ConnectSinks();
+            
+        }
     }
 }

@@ -48,7 +48,9 @@ namespace Z0
             => AppMsg.Info($"Emitted parsed {host} op extracts to {dst}");
 
         public static AppMsg ExtractParseFailure(ApiHostUri host, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppMsg.Error($"Error parsing {host} op extracts", caller, file, line);
-
+            => AppMsg.Error($"Extract parse failure for {host}", caller, file, line);
+        
+        public static AppMsg ExtractParseFailure(OpUri op, ExtractTermCode code)
+            => AppMsg.Warn($"Extract parse failure {code} for {op}");
     }
 }

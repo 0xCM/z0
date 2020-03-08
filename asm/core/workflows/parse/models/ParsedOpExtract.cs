@@ -14,32 +14,59 @@ namespace Z0
     public readonly struct ParsedExtract
     {
         [MethodImpl(Inline)]
-        public static ParsedExtract Define(MemberExtract src, ExtractTermCode term, MemoryExtract parsed)
-            => new ParsedExtract(src,term,parsed);
+        public static ParsedExtract Define(MemberExtract src, int seq, ExtractTermCode term, MemoryExtract parsed)
+            => new ParsedExtract(src, seq, term,parsed);
 
         [MethodImpl(Inline)]
-        ParsedExtract(MemberExtract src, ExtractTermCode term, MemoryExtract parsed)
+        ParsedExtract(MemberExtract src, int seq, ExtractTermCode term, MemoryExtract parsed)
         {
             this.SourceExtract = src;
+            this.SourceSequence = seq;
             this.TermCode = term;
             this.ParsedContent = parsed;
         }        
 
+        /// <summary>
+        /// The extracted member,
+        /// </summary>
         public readonly MemberExtract SourceExtract;
 
+        /// <summary>
+        /// The extracted member sequence
+        /// </summary>
+        public readonly int SourceSequence;
+
+        /// <summary>
+        /// The reason for extract completion
+        /// </summary>
         public readonly ExtractTermCode TermCode;
 
+        /// <summary>
+        /// The parsed extract
+        /// </summary>
         public readonly MemoryExtract ParsedContent;   
 
+        /// <summary>
+        /// The host-relative operation identifier
+        /// </summary>
         public OpIdentity Id 
             => SourceExtract.Id;
 
+        /// <summary>
+        /// The globally-unique operation uri 
+        /// </summary>
         public OpUri Uri 
             => SourceExtract.Uri;
 
+        /// <summary>
+        /// The extract data
+        /// </summary>
         public MemoryExtract SourceContent 
             => SourceExtract.EncodedData;
 
+        /// <summary>
+        /// The operation memory address
+        /// </summary>
         public MemoryAddress Address 
             => SourceContent.Address;
 
@@ -48,6 +75,9 @@ namespace Z0
 
         public MemberDescriptor Descriptor 
             => MemberDescriptor.Define(Uri, SourceMember.Signature().Format());
+        
+        public AsmCode Code
+            => AsmCode.Define(Id, ParsedContent);
     }
 
     public readonly struct ParsedOpExtract

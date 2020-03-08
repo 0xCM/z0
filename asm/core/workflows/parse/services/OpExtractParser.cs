@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,6 +10,8 @@ namespace Z0
     using System.Linq;
     
     using static Root;
+    using static AsmWorkflowReports;
+    using static AsmServiceMessages;
 
     public readonly struct OpExtractParser : IOpExtractParser
     {
@@ -32,71 +34,67 @@ namespace Z0
             PatternBuffer = buffer;
         }
 
-        static MemberParseRecord Parse(in ByteParser<EncodingPatternKind> parser, in MemberExtractRecord current)
+        Option<ParsedExtract> Parse(in MemberExtract src, int seq, ByteParser<EncodingPatternKind> parser)
         {
-            var status = parser.Parse(current.Data);                
+            var status = parser.Parse(src.EncodedData);                
             var matched = parser.Result;
-            var succeeded = matched.IsSome() && status.Success();                
+            var succeeded = matched.IsSome() && status.Success(); 
+            if(!succeeded)               
+                Context.NotifyConsole(ExtractParseFailure(src.Uri, matched.ToTermCode()));
             var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-            return MemberParseRecord.Define
-            (
-                Sequence : current.Sequence,
-                Address : current.Address,
-                Length : data.Length,
-                TermCode: matched.ToTermCode(),
-                Uri : OpUri.Hex(current.Uri.HostPath, current.Uri.GroupName, current.Uri.OpId),
-                OpSig : current.OpSig,
-                Data : MemoryExtract.Define(current.Address, data)
-            );
+            return succeeded 
+                ? ParsedExtract.Define(src, seq, matched.ToTermCode(), MemoryExtract.Define(src.EncodedData.Address, data))
+                : none<ParsedExtract>();
         }
 
-        public ParsedExtract[] Parse(params MemberExtract[] src)
+        public ParsedExtract[] Parse(MemberExtract[] extracts)
         {
-            var dst = new ParsedExtract[src.Length];
+            var dst = list<ParsedExtract>(extracts.Length);
             var parser = Context.PatternParser(PatternBuffer.Clear());               
-            for(var i=0; i< dst.Length; i++)
+            for(var i=0; i< extracts.Length; i++)
             {
-                ref readonly var current = ref src[i];                
-                var status = parser.Parse(current.EncodedData);                
-                var matched = parser.Result;
-                var succeeded = matched.IsSome() && status.Success(); 
-                if(!succeeded)               
-                    Context.Notify(AppMsg.Warn($"Failed to parse {current.Uri} with status = {status}"));
-                var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-                dst[i] = ParsedExtract.Define(current, matched.ToTermCode(), MemoryExtract.Define(current.EncodedData.Address, data));
+                ref readonly var extract = ref extracts[i];                
+                var parsed = Parse(extract, i, parser);
+                parsed.OnSome(x => dst.Add(x));
             }
 
-            return dst;
+            return dst.ToArray();
         }
 
-        public MemberParseReport Parse(ApiHost host, MemberExtractReport encoded)
+        public MemberParseReport Parse(ApiHost host, MemberExtractReport extracts)
         {
-            var dst = new MemberParseRecord[encoded.Records.Length];
+            var records = list<MemberParseRecord>(extracts.RecordCount);
             var parser = Context.PatternParser(PatternBuffer.Clear());            
-            Context.Notify($"Parsing {encoded.Records.Length} {host} records");
-
-            for(var i=0; i< dst.Length; i++)
+            Context.Notify($"Parsing {extracts.Records.Length} {host} records");
+            
+            var seq = 0;
+            for(var i=0; i< extracts.RecordCount; i++)
             {
-                ref readonly var current = ref encoded.Records[i];                
-                var status = parser.Parse(current.Data);                
+                ref readonly var extract = ref extracts.Records[i];                
+                var status = parser.Parse(extract.Data);                
                 var matched = parser.Result;
-                var succeeded = matched.IsSome() && status.Success();                
-                var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
-                dst[i] = MemberParseRecord.Define
-                (
-                     Sequence : current.Sequence,
-                     Address : current.Address,
-                     Length : data.Length,
-                     TermCode: matched.ToTermCode(),
-                     Uri : OpUri.Hex(host.Path, current.Uri.GroupName, current.Uri.OpId),
-                     OpSig : current.OpSig,
-                     Data : MemoryExtract.Define(current.Address, data)
-                );               
+                if(matched.IsSome() && status.Success())
+                {
+                    var bytes = parser.Parsed.ToArray();
+                    var uri = OpUri.Hex(host.Path, extract.Uri.GroupName, extract.Uri.OpId);
+                    var data = MemoryExtract.Define(extract.Address, bytes);
+                    var record = MemberParseRecord.Define
+                    (
+                        Sequence: seq++,
+                        SourceSequence: extract.Sequence,
+                        Address: extract.Address,
+                        Length: bytes.Length,
+                        TermCode: matched.ToTermCode(),
+                        Uri: uri,
+                        OpSig: extract.OpSig,
+                        Data: data
+                    );
+                    records.Add(record);               
+                }
             }
 
-            ReportDuplicates(OpIdentity.duplicates(dst.Select(x => x.Uri.OpId)));
-
-            return MemberParseReport.Create(dst);
+            ReportDuplicates(OpIdentity.duplicates(records.Select(x => x.Uri.OpId)));
+            return MemberParseReport.Create(host, records.ToArray());
         }
 
         void ReportDuplicates(OpIdentity[] duplicated)

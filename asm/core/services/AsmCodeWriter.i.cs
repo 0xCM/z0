@@ -18,5 +18,9 @@ namespace Z0
 
         void WriteHexLine(OpIdentity id, Span<byte> data, int? idpad = null);
 
+        void WriteCode(in AsmCode src, int? idpad = null);
+
+        void Write(AsmCode[] src);
+
     }
 }

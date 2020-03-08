@@ -35,6 +35,12 @@ namespace Z0.Asm
         public FolderPath ParsedDir
             => RootDir + ParsedFolder;
 
+        public FolderName CodeFolder 
+            => FolderName.Define("code");
+        
+        public FolderPath CodeDir
+            => RootDir + CodeFolder;
+
         public FolderName DecodedFolder 
             => FolderName.Define("decoded");
         
@@ -47,12 +53,12 @@ namespace Z0.Asm
         public FolderPath AssemblyDir(AssemblyId id)
             => RootDir + AssemblyFolder(id);
 
-
         public RootEmissionPaths Clear()
         {
             ExtractDir.Clear();
             ParsedDir.Clear();
             DecodedDir.Clear();
+            CodeDir.Clear();
             return this;
         }            
     }

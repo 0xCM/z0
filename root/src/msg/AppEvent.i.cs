@@ -19,15 +19,15 @@ namespace Z0
 
     public interface IAppEvent : ICustomFormattable
     {
-        string EventName {get;}
-
         object EventData {get;}
 
+        string Description {get;}
+
         string ICustomFormattable.Format()        
-            => text.concat(EventName, text.colon(), text.space(), EventData?.ToString() ?? string.Empty);  
+            => text.concat(Description, text.colon(), text.space(), EventData?.ToString() ?? string.Empty);  
 
         IAppEvent<K> As<K>()
-            => AppEvent.Create<K>(EventName, (K)EventData);
+            => AppEvent.Create<K>(Description, (K)EventData);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         where E : IAppEvent<E,T>
     {
 
-        string IAppEvent.EventName
+        string IAppEvent.Description
             => typeof(E).DisplayName();
     }
 
@@ -68,5 +68,4 @@ namespace Z0
 
         
     }
-
 }

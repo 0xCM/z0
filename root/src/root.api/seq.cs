@@ -30,7 +30,16 @@ namespace Z0
             => src.ToHashSet();
 
         /// <summary>
-        /// Creates a set from a parameter array
+        /// Creates a list with specified capacity
+        /// </summary>
+        /// <param name="capacity">The list capacity</param>
+        /// <typeparam name="T">The item type</typeparam>
+        [MethodImpl(Inline)]   
+        public static List<T> list<T>(int capacity)
+            => new List<T>(capacity);
+
+        /// <summary>
+        /// Creates a list from a parameter array
         /// </summary>
         /// <param name="src">The source items</param>
         /// <typeparam name="T">The item type</typeparam>
@@ -46,6 +55,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> span<T>(params T[] src)
             => src;
-
     }
 }

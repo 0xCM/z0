@@ -93,6 +93,22 @@ namespace Z0
             => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Magenta));
 
         /// <summary>
+        /// Emits an information-level message with a magenta foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void green(object content)
+            => T.WriteMessage(AppMsg.Colorize(content?.ToString() ?? string.Empty, AppMsgColor.Green));
+
+        /// <summary>
+        /// Emits an information-level message with a magenta foreground
+        /// </summary>
+        /// <param name="content">The message to emit</param>
+        /// <param name="caller">The calling member</param>
+        public static void green(string title, object content)
+            => T.WriteMessage(AppMsg.Colorize( $"{title}: " + content?.ToString() ?? string.Empty, AppMsgColor.Green));
+
+        /// <summary>
         /// Emits an information-level message with a cyan foreground
         /// </summary>
         /// <param name="content">The message to emit</param>

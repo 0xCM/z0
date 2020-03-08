@@ -29,11 +29,11 @@ namespace Z0
 
         public T EventData {get;}
 
-        public string EventName
+        public string Description
             => $"{EventData.ReportName} created";
         
         public string Format()
-            => EventName;         
+            => Description;         
     }
     
     public interface IReport<R> : IReport

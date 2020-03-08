@@ -45,6 +45,14 @@ namespace Z0.Asm
 
         public FilePath ParsedPath => ParsedDir + ParsedFileName;
 
+        public FolderPath CodeDir  => Root.CodeDir;
+
+        public FileExtension CodeExt => FileExtension.Define("hex");
+
+        public FileName CodeFileName => BaseFileName + CodeExt;
+
+        public FilePath CodePath => CodeDir + CodeFileName;
+
         public FolderPath DecodedDir  => Root.DecodedDir;
         
         public FileExtension DecodedExt => FileExtensions.Asm;

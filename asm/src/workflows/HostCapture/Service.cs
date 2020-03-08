@@ -10,14 +10,11 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Root;
+    using static AsmWorkflowReports;
 
-    public static partial class HostCaptureWorkflow
+    partial class HostCaptureWorkflow
     {
-        [MethodImpl(Inline)]
-        public static IHostCaptureWorkflow Create(IAsmContext context)
-            => new Service(context);
-        
-        readonly struct Service : IHostCaptureWorkflow
+        internal class WorkflowService : IWorkflowService
         {
             public IAsmContext Context {get;}
 
@@ -29,19 +26,55 @@ namespace Z0.Asm
 
             readonly AsmFormatConfig Format;
 
-            readonly Dictionary<Type, AppEventReceiver> Receivers;
-
             readonly Dictionary<Type, IAppEventSink> Sinks;
 
-            public Service(IAsmContext context)
+            public WorkflowService(IAsmContext context)
             {
                 this.Context = context;
                 Extractor = Context.HostExtractor(Context.DefaultBufferLength);
                 Parser = Context.ExtractParser(Context.DefaultBufferLength);
                 Decoder = Context.AsmFunctionDecoder();
                 Format = Context.AsmFormat.WithSectionDelimiter();
-                Receivers = new Dictionary<Type, AppEventReceiver>();
                 Sinks = new Dictionary<Type, IAppEventSink>();
+            }
+
+            public void ExecuteWorkflow(FolderPath dst)
+            {
+                var root = RootEmissionPaths.Define(dst).Clear();
+                var catalogs = Context.Compostion.Catalogs;
+
+                foreach(var catalog in catalogs)   
+                {
+                    Capture(catalog, root);
+                }
+            }
+
+            void SaveReport(MemberExtractReport src, FilePath dst)
+            {
+                src.Save(dst)
+                   .OnSome(f => RaiseEvent(ApiHostReportSaved.Define(src.ApiHost, src.GetType(), src.RecordCount, f)));
+            }
+
+            void SaveReport(MemberParseReport src, FilePath dst)
+            {
+                src.Save(dst)
+                   .OnSome(f => RaiseEvent(ApiHostReportSaved.Define(src.ApiHost, src.GetType(), src.RecordCount, f)));
+            }
+
+            void SaveCode(in ApiHost host, ParsedExtract[] src, FilePath dst)
+            {                    
+                using var writer = Context.CodeWriter(dst);
+                var code = src.Map(x => x.Code);
+                writer.Write(code);
+
+                RaiseEvent(AsmCodeSaved.Define(host, code, dst));
+            }
+
+            void SaveDecoded(in ApiHost host, AsmFunction[] src, FilePath dst)
+            {
+                using var writer = Context.AsmWriter(Format, dst);
+                
+                writer.Write(src);
             }
 
             LocatedMember[] LocateMembers(in ApiHost host)
@@ -66,16 +99,6 @@ namespace Z0.Asm
                 return report;
             }
 
-            void Save(MemberExtractReport src, FilePath dst)
-            {
-                src.Save(dst);
-            }
-
-            void Save(MemberParseReport src, FilePath dst)
-            {
-                src.Save(dst);
-            }
-
             ParsedExtract[] Parse(MemberExtract[] src)
             {
                 var dst = Parser.Parse(src);
@@ -83,9 +106,9 @@ namespace Z0.Asm
                 return dst;
             }
 
-            MemberParseReport CreateReport(ParsedExtract[] src)
+            MemberParseReport CreateReport(in ApiHost host, ParsedExtract[] src)
             {
-                var report = MemberParseReport.Create(src);                    
+                var report = MemberParseReport.Create(host,src);                    
                 RaiseEvent(report.CreatedEvent());
                 return report;
             }
@@ -93,29 +116,26 @@ namespace Z0.Asm
             AsmFunction[] Decode(in ApiHost host, ParsedExtract[] extracts)
             {
                 var functions = Decoder.Decode(extracts);
-                RaiseEvent(new FunctionsDecoded(host, functions));
+                RaiseEvent(new AsmFunctionsDecoded(host, functions));
                 return functions;
-            }
-
-            void Save(in ApiHost host, AsmFunction[] src, FilePath dst)
-            {
-                using var writer = Context.AsmWriter(Format, dst);
-                
-                writer.Write(src);
             }
 
             void Capture(in ApiHost host, in RootEmissionPaths dst)
             {
-                var paths = HostEmissionPaths.Define(host,dst);
-                
+                var paths = HostEmissionPaths.Define(host,dst);                
                 var extracts = Extract(host);                
-                Save(CreateReport(host, extracts), paths.ExtractPath);
+
+                if(extracts.Length == 0)
+                    return;
+                
+                SaveReport(CreateReport(host, extracts), paths.ExtractPath);
 
                 var parsed = Parse(extracts);
-                Save(CreateReport(parsed), paths.ParsedPath);
+                SaveReport(CreateReport(host,parsed), paths.ParsedPath);
+                SaveCode(host, parsed, paths.CodePath);
                 
                 var decoded = Decode(host, parsed);
-                Save(host, decoded, paths.DecodedPath);
+                SaveDecoded(host, decoded, paths.DecodedPath);
             }
 
             void Capture(IOpCatalog src, in RootEmissionPaths dst)
@@ -126,35 +146,16 @@ namespace Z0.Asm
                 }
             }
 
-            public void ExecuteWorkflow(FolderPath dst)
-            {
-                var root = RootEmissionPaths.Define(dst).Clear();
-                var catalogs = Context.Compostion.Catalogs;
-
-                foreach(var catalog in catalogs)   
-                {
-                    Capture(catalog, root);
-                }
-            }
 
             void RaiseEvent<E>(in E e)
                 where E : IAppEvent
-            {
-                if(Receivers.TryGetValue(e.GetType(), out var receiver))
-                    receiver?.Invoke(e);
-                
+            {                
                 if(Sinks.TryGetValue(e.GetType(), out var sink))
                 {
                     ((IAppEventSink<E>)sink).Accept(e);
                 }
             }
  
-            public void WithReceiver<E>(Action<E> receiver, E model = default)
-                where E : IAppEvent
-            {
-                Receivers[typeof(E)] = e => receiver((E)e);
-            }
-
             public void WithSink<S,E>(S sink, E model = default) 
                 where E : IAppEvent
                 where S : IAppEventSink<E>
@@ -162,8 +163,9 @@ namespace Z0.Asm
             {
                 Sinks[typeof(E)] = sink;
             }
+
+            public EventSinks ConnectSinks()
+                => EventSinks.Connect(this);
         }   
-
     }
-
 }

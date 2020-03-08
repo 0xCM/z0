@@ -30,6 +30,16 @@ namespace Z0
             => iter(msg,Notify);        
 
         /// <summary>
+        /// Posts a message to the context queue
+        /// </summary>
+        /// <param name="msg">The message to post</param>
+        void NotifyConsole(AppMsg msg)
+        {
+            term.print(msg);
+            Notify(msg.Printed());
+        }        
+
+        /// <summary>
         /// Posts a text message to the context queue with optional severity
         /// </summary>
         /// <param name="msg">The message to post</param>

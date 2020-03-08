@@ -6,13 +6,10 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Root;
+    using static AsmWorkflowReports;
     using static HostCaptureWorkflow;
-
-    using WF = HostCaptureWorkflow;
 
     public class t_asm_workflow : t_asm<t_asm_workflow>
     {
@@ -22,27 +19,45 @@ namespace Z0.Asm
 
         }
         
-        void Created(ExtractReportCreated e)
+        void OnEvent(ExtractReportCreated e)
         {
-            term.golden(e.Format());
-
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Blue);
+            NotifyConsole(msg);
         }
 
-        void Created(ParseReportCreated e)
+        void OnEvent(ParseReportCreated e)
         {
-            term.cyan(e.Format());
-
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Blue);
+            NotifyConsole(msg);
         }
 
-        void Decoded(WF.FunctionsDecoded e)
+        void OnEvent(AsmFunctionsDecoded e)
         {
-            term.magenta(e.Format());
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
+            NotifyConsole(msg);
+        }
+
+        void OnEvent(AsmCodeSaved e)
+        {
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            NotifyConsole(msg);
+        }
+
+        void OnEvent(ApiHostReportSaved e)
+        {
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            NotifyConsole(msg);
         }
 
         public void ExecuteWorkflow()
         {
-            var workflow = WF.Create(Context);
-            var sinks = WF.EventSinks.Connect(workflow);
+            var workflow = HostCaptureWorkflow.Create(Context);
+            var sinks = workflow.ConnectSinks();
+            sinks.HostExtractReportCreated += OnEvent;
+            sinks.HostParseReportCreated += OnEvent;
+            sinks.HostFunctionsDecoded += OnEvent;
+            sinks.HostCodeSaved += OnEvent;
+            sinks.HostReportSaved += OnEvent;
             workflow.ExecuteWorkflow(DefaultDataDir);
         }
 
@@ -65,6 +80,5 @@ namespace Z0.Asm
                 return none<MemberParseReport>();
             }
         }
-
     }
 }
