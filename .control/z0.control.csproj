@@ -28,7 +28,7 @@
     <ProjectReference Include="$(TopDir)logix/test/z0.logix.test.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/test/z0.intrinsics.test.csproj" />
     
-    <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />
+    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
     <ProjectReference Include="$(TopDir)bitvectors/src/z0.bitvectors.csproj" />
     <ProjectReference Include="$(TopDir)bitvectors/test/z0.bitvectors.test.csproj" />
     <ProjectReference Include="$(TopDir)bitgrids/src/z0.bitgrids.csproj" />

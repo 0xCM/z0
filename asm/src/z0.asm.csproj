@@ -16,7 +16,7 @@
     <ProjectReference Include="$(TopDir)dynamic/src/z0.dynamic.csproj" />
 
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
-    <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />    
+    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />    
     <ProjectReference Include="$(TopDir)bitfields/src/z0.bitfields.csproj" />    
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
   </ItemGroup>
