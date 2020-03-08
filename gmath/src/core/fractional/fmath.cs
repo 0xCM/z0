@@ -6,22 +6,6 @@ namespace Z0
 {
     
     using System;
-    
-    [ApiHost(ApiHostKind.Generic)]
-    public static partial class gmath
-    {
-
-    }
-
-
-    /// <summary>
-    /// Defines generic floating-point operations
-    /// </summary>
-    [ApiHost(ApiHostKind.Generic)]
-    public static partial class gfp
-    {
-
-    }
 
     /// <summary>
     /// Defines floating-point operations
@@ -30,18 +14,6 @@ namespace Z0
     public static partial class fmath
     {
 
-    }
-
-
-    public static partial class MathX
-    {
-
-    }
-
-
-    static class App
-    {
-        public static void Main(params string[] args) { }
     }
 
 }

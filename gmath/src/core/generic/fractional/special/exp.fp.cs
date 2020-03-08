@@ -29,25 +29,4 @@ namespace Z0
                 throw unsupported<T>();
         }        
     }
-
-    partial class fmath
-    {
-        /// <summary>
-        /// Raises e to a specified exponent
-        /// </summary>
-        /// <param name="pow">The exponent</param>
-        [MethodImpl(Inline), Op]
-        public static float exp(float pow)
-            => MathF.Exp(pow);
-
-        /// <summary>
-        /// Raises e to a specified exponent
-        /// </summary>
-        /// <param name="pow">The exponent</param>
-        [MethodImpl(Inline), Op]
-        public static double exp(double pow)
-            => Math.Exp(pow);
-
-    }
-
 }

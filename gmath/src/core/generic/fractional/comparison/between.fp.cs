@@ -13,29 +13,15 @@ namespace Z0
     partial class gfp
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
-        public static bit within<T>(T a, T b, T delta)    
+        public static bit between<T>(T x, T a, T b)    
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return fmath.within(float32(a),float32(b), float32(delta));
+                return fmath.between(float32(x),float32(a), float32(b));
             else if(typeof(T) == typeof(double))
-                return fmath.within(float64(a), float64(b), float64(delta));
+                return fmath.between(float64(x), float64(a), float64(b));
             else            
                 throw unsupported<T>();
         }        
     }
-
-    partial class fmath
-    {
-        [MethodImpl(Inline)]
-        public static bit within(float a, float b, float delta)
-            => a > b ? a - b <= delta 
-              : b - a <= delta;
-
-        [MethodImpl(Inline)]
-        public static bit within(double a, double b, double delta)
-            => a > b ? a - b <= delta 
-              : b - a <= delta;
-    }
-
 }

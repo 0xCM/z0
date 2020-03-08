@@ -24,16 +24,4 @@ namespace Z0
                throw unsupported<T>();            
         }
     }
-
-    partial class fmath
-    {
-
-        [MethodImpl(Inline), Op]
-        public static float pow(float src, float exp)
-            => MathF.Pow(src,exp);
-
-        [MethodImpl(Inline), Op]
-        public static double pow(double src, double exp)
-            => Math.Pow(src,exp);
-    }
 }

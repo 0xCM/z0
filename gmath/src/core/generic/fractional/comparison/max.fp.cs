@@ -13,26 +13,15 @@ namespace Z0
     partial class gfp
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
-        public static T min<T>(T a, T b)
+        public static T max<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fmath.min(float32(a), float32(b)));
+                return generic<T>(fmath.max(float32(a), float32(b)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fmath.min(float64(a), float64(b)));
+                return generic<T>(fmath.max(float64(a), float64(b)));
             else
                 throw unsupported<T>();
         }        
     }
-
-    partial class fmath
-    {
-        [MethodImpl(Inline)]
-        public static float min(float a, float b)
-            => a < b ? a : b;
-
-        [MethodImpl(Inline)]
-        public static double min(double a, double b)
-            => a < b ? a : b;
-    }    
 }
