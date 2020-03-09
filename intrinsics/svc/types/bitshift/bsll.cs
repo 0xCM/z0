@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         public readonly struct Bsll128<T> : IVShiftOp128<T>, IImm8V128UnaryResolver<T>, IUnaryBlockedOp128Imm8<T>
             where T : unmanaged

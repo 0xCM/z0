@@ -17,7 +17,7 @@ namespace Z0
             where T : unmanaged
         {
             var svc = MathSvcFactory.bitlogic<T>();
-            var v1 = VF.vbitlogic<T>(n128).and(x,y);
+            var v1 = VSvcFactories.vbitlogic<T>(n128).and(x,y);
             var buffer = Fixed.alloc<Fixed128>();
             ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
             var count = gvec.vcount<T>(n128);            

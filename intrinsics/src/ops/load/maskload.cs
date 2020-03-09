@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static zfunc;
+    using static Root;    
     using static Blocks;
 
     partial class dinx
@@ -72,5 +72,4 @@ namespace Z0
         public static unsafe Vector256<ulong> vmaskload(in Block256<ulong> src, Vector256<ulong> mask)
             => MaskLoad(ptr(src), mask); 
     }
-
 }

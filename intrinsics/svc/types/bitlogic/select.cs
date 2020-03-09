@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
         public readonly struct Select128<T> : IVTernaryOp128D<T>, ITernaryBlockedOp128<T>

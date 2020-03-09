@@ -44,5 +44,4 @@ namespace Z0
         public static Vector256<double> vnegate(Vector256<double> x)
             =>  vsub(default, x);
     }
-
 }

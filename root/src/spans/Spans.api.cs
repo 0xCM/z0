@@ -491,7 +491,6 @@ namespace Z0
             return dst;
         }        
 
-
         [MethodImpl(Inline)]
         public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
             where F : IBinaryPred<T>
@@ -531,5 +530,115 @@ namespace Z0
                 seek(ref target, i) = f.Invoke(skip(in input, i));
             return dst;
         }
+
+        public static Span<T> Fuse<T>(this Span<T> xs, Span<T> ys, Func<T,T,T> f)
+        {        
+            var len = Checks.length(xs,ys);
+            ref var xh = ref head(xs);
+            ref var yh = ref head(ys);        
+            for(var i = 0; i < len ; i++)
+                seek(ref xh, i) = f(skip(in xh,i), skip(in yh, i));
+            return xs;
+        }     
+
+        /// <summary>
+        /// Inovkes an action for each element in a source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="f">The receiver</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static void iter<T>(ReadOnlySpan<T> src, Action<T> f)
+        {
+            ref readonly var input = ref head(src);
+            int count = src.Length;
+
+            for(var i=0; i<count; i++)
+                f(skip(input,i));
+        }
+
+        /// <summary>
+        /// Inovkes an action for each pair of elements in source spans of equal length
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="f">The receiver</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static void iter<T>(ReadOnlySpan<T> first, ReadOnlySpan<T> second, Action<T,T> f)
+        {
+            var count = Checks.length(first,second);
+            ref readonly var x = ref head(first);
+            ref readonly var y = ref head(second);
+            
+            for(var i=0; i<count; i++)
+                f(skip(x,i),skip(y,i));
+        }
+
+        /// <summary>
+        /// Inovkes an action for each pair of elements in source spans of equal length
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="f">The receiver</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static void iter<T>(Span<T> first, Span<T> second, Action<T,T> f)
+            => iter(first.ReadOnly(), second.ReadOnly(),f);
+
+        /// <summary>
+        /// Inovkes an action for each element in a source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="f">The receiver</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static void iteri<T>(ReadOnlySpan<T> src, Action<int,T> f)
+        {
+            ref readonly var input = ref head(src);
+            int count = src.Length;
+
+            for(var i=0; i<count; i++)
+                f(i,skip(input,i));
+        }
+
+        /// <summary>
+        /// Maps the elements of a source span to a target span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="f">The mapping function</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
+        {
+            ref readonly var input = ref head(src);
+            ref var output = ref head(dst);
+            int count = src.Length;
+            
+            for(var i=0; i<count; i++)
+                seek(ref output, i)= f(skip(in input, i));
+            
+            return dst;
+        }
+
+        /// <summary>
+        /// Maps the elements of a source span to a target span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="f">The mapping function</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> mapi<S,T>(ReadOnlySpan<S> src, Func<int,S,T> f, Span<T> dst)
+        {
+            ref readonly var input = ref head(src);
+            ref var output = ref head(dst);
+            int count = src.Length;
+            
+            for(var i=0; i<count; i++)
+                seek(ref output, i)= f(i,skip(in input, i));
+            
+            return dst;
+        }
+
     }    
 }

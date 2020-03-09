@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static VFTypes;
+    using static VSvcHosts;
 
     public class t_vconcat : t_vinx<t_vconcat>
     {     
@@ -28,7 +28,7 @@ namespace Z0
 
         void vconcat_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckAction(() => vconcat_checker(w,t), CaseName(VF.vconcat(w,t)));
+                => CheckAction(() => vconcat_checker(w,t), CaseName(VSvcFactories.vconcat(w,t)));
 
         Action<N128,T> vconcat_checker<T>(N128 w, T t = default)
             where T : unmanaged
@@ -41,7 +41,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);
-                var z = VF.vconcat(w,t).Invoke(x,y);
+                var z = VSvcFactories.vconcat(w,t).Invoke(x,y);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();

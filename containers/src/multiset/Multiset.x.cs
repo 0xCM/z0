@@ -19,7 +19,5 @@ namespace Z0
         /// <typeparam name="T">The data type</typeparam>
         public static Multiset<T> ToMultiSet<T>(this IEnumerable<T> src)
             => new Multiset<T>(src);
-
     }
-
 }

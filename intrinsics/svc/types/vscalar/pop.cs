@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         public readonly struct Pop128<T> : IVTernaryScalar128D<T,uint>
             where T : unmanaged

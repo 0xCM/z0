@@ -19,7 +19,7 @@ namespace Z0
     /// </remarks>
     public interface INullaryOps<T> 
     {
-        T Zero {get;}
+        T Empty {get;}
     }
 
     /// <summary>
@@ -41,7 +41,9 @@ namespace Z0
         /// <summary>
         /// Specifies the zero value
         /// </summary>
-        S Zero {get;}
+        S Empty {get;}
+
+        bool IsEmpty {get;}
     
     }
 

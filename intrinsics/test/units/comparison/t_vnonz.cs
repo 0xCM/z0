@@ -47,7 +47,7 @@ namespace Z0
         {            
             var min = one(t);
             var max = maxval(t);
-            var f = VF.vnonz(w,t);
+            var f = VSvcFactories.vnonz(w,t);
 
             Claim.nea(ginx.vnonz(vzero(w,t)));
             
@@ -60,7 +60,7 @@ namespace Z0
         {
             var min = one(t);
             var max = maxval(t);
-            var f = VF.vnonz(w,t);
+            var f = VSvcFactories.vnonz(w,t);
 
             Claim.nea(ginx.vnonz(vzero(w,t)));
             

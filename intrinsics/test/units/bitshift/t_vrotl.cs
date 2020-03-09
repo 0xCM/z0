@@ -35,11 +35,11 @@ namespace Z0
 
         void vrotl_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckShiftScalarMatch(VF.vrotl(w,t), w,t);
+                => CheckShiftScalarMatch(VSvcFactories.vrotl(w,t), w,t);
             
         void vrotl_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckShiftScalarMatch(VF.vrotl(w,t), w,t);
+                => CheckShiftScalarMatch(VSvcFactories.vrotl(w,t), w,t);
 
     }
 }

@@ -8,13 +8,13 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class VF
+    partial class VSvcFactories
     {
 
 
     }
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         static Type ApiG => typeof(ginx);
 

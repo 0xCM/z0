@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
         public readonly struct BitClear128<T> : IVUnaryOp128Imm8x2D<T>

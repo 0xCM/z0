@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         public readonly struct LoadSpan128<T> : IVSpanSourced128<T>
             where T : unmanaged

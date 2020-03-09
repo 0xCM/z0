@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         public readonly struct Broadcast128<T> : IVFactory128<T,T>
             where T : unmanaged

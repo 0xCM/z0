@@ -62,7 +62,7 @@ namespace Z0
             get => !IsEmpty;
         }
 
-        HostedMember INullary<HostedMember>.Zero 
+        HostedMember INullary<HostedMember>.Empty 
             => Empty;
 
         [MethodImpl(Inline)]

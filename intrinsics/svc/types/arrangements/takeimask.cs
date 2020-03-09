@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         public readonly struct TakeIMask128<T> : IVUnaryScalar128Imm8<T,ushort>
             where T : unmanaged

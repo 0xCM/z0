@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         [NumericClosures(NumericKind.All)]
         public readonly struct Gt128<T> : IVBinOp128D<T>, IBinaryBlockedOp128<T>

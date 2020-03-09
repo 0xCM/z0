@@ -35,11 +35,11 @@ namespace Z0
 
         void vabs_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VF.vabs(w,t),w,t);
+                => CheckUnaryScalarMatch(VSvcFactories.vabs(w,t),w,t);
             
         void vabs_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VF.vabs(w,t),w,t);
+                => CheckUnaryScalarMatch(VSvcFactories.vabs(w,t),w,t);
 
     }
 

@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static VFTypes;
+    using static VSvcHosts;
 
-    partial class VF
+    partial class VSvcFactories
     {
         [MethodImpl(Inline)]
         public static LoadSpan128<T> vloadspan<T>(N128 w, T t = default)

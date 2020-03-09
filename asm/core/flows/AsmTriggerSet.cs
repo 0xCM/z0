@@ -7,19 +7,23 @@ namespace Z0.Asm
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
-    public class AsmTriggerSet : IAsmTriggerSet
+    public readonly struct AsmTriggerSet : IAsmTriggerSet, INullary<AsmTriggerSet>
     {
         public static AsmTriggerSet Empty => Define(array<IAsmFunctionTrigger>(), array<IAsmInstructionTrigger>());
-            
+                    
+        [MethodImpl(Inline)]
         public static AsmTriggerSet Define(IEnumerable<IAsmFunctionTrigger> fTriggers, IEnumerable<IAsmInstructionTrigger> iTriggers)
             => new AsmTriggerSet(fTriggers, iTriggers);
 
+        [MethodImpl(Inline)]
         public static AsmTriggerSet Define(params IAsmInstructionTrigger[] iTriggers)
             => new AsmTriggerSet(array<IAsmFunctionTrigger>(), iTriggers);
 
+        [MethodImpl(Inline)]
         AsmTriggerSet(IEnumerable<IAsmFunctionTrigger> fTriggers, IEnumerable<IAsmInstructionTrigger> iTriggers)
         {
             FunctionTriggers = fTriggers.ToReadOnlyList();
@@ -32,6 +36,9 @@ namespace Z0.Asm
 
         public bool IsEmpty 
             => InstructionTriggers.Count == 0 && FunctionTriggers.Count == 0;
+        
+        AsmTriggerSet INullary<AsmTriggerSet>.Empty 
+            => Empty;
 
         public void FireOnMatch(AsmInstructionList instructions)
         {

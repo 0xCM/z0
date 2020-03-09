@@ -8,11 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Reflection;
-
     
     using static Root;
-    using static Nats;
-    using static FKT;
     
     readonly struct ImmV128UnaryCaptureService<T> : IImmUnaryCapture<T>
         where T : unmanaged
@@ -62,5 +59,4 @@ namespace Z0.Asm
             => Context.AsmFunctionDecoder()
                         .DecodeFunction(Context.Capture().Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8)));
     }
-
 }

@@ -24,6 +24,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool notnull(object test)
             => test != null;
-
     }
 }

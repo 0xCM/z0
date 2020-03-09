@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         [NumericClosures(NumericKind.All)]
         public readonly struct NonZ128<T> : IVUnaryPred128D<T>, IUnaryBlockedPred128<T>

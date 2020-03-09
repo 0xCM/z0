@@ -21,13 +21,6 @@ namespace Z0
     public delegate void AsmEmissionObserver(in AsmEmissionTokens<OpUri> data);
 
     /// <summary>
-    /// Delegate contract for generic emission event receipt
-    /// </summary>
-    /// <param name="data">The event data</param>
-    public delegate void AsmEmissionObserver<T>(in AsmEmissionTokens<T> data)
-        where T : IUri;
-
-    /// <summary>
     /// Defines a source for events that originate within a capture exchange context. This
     /// device is used as a means to compensate for the fact that the exchange itself, which is a
     /// ref struct, cannot be contracted.

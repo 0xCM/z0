@@ -37,7 +37,6 @@ namespace Z0.Asm
             {
                 Triggers.FireOnMatch(i);
                 yield return pipe.Flow(i);
-
             }            
         }        
     }

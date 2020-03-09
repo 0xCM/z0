@@ -24,7 +24,6 @@ namespace Z0
         public static IAsmFormatter AsmFormatter(this IAsmContext context, AsmFormatConfig config = null)
             => Z0.AsmFormatter.Create(context, config ?? context.AsmFormat);
 
-
         /// <summary>
         /// Allocates a caller-disposed asm text writer
         /// </summary>

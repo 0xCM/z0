@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
         public readonly struct Blend2x64x128<T> : IVBinOp128Imm8<T>, IImm8V128BinaryResolver<T>

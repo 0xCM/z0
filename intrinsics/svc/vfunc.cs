@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Vectorized functions
     /// </summary>
-    public static partial class VF
+    public static partial class VSvcFactories
     {
 
     }
@@ -22,7 +22,7 @@ namespace Z0
     /// <summary>
     /// Vectorized operator types
     /// </summary>
-    public static partial class VFTypes
+    public static partial class VSvcHosts
     {
 
     }

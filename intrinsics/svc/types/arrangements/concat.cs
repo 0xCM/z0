@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         public readonly struct Concat2x128<T> : IVMergeOp2x128x256<T>
             where T : unmanaged

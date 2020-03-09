@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class VFTypes
+    partial class VSvcHosts
     {
         public readonly struct Sllx128<T> : IVShiftOp128<T>
             where T : unmanaged

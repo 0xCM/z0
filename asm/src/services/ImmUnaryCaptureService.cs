@@ -30,7 +30,6 @@ namespace Z0.Asm
         public static IImmCapture New(IAsmContext context, MethodInfo src, OpIdentity baseid)
             => new ImmUnaryCaptureService(context, src,baseid);
 
-
         [MethodImpl(Inline)]
         public ImmUnaryCaptureService(IAsmContext context, MethodInfo method, OpIdentity baseid)
         {            
