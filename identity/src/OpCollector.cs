@@ -16,6 +16,7 @@ namespace Z0
     {
         public IContext Context {get;}
 
+
         [MethodImpl(Inline)]
         public static IMemberOpCollector Create(IContext context)
             => new MemberOpCollector(context);

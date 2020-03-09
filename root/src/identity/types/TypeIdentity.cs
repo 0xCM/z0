@@ -27,7 +27,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TypeIdentity Define(string identifier)
             => new TypeIdentity(identifier);
-        
+
+        public static TypeIdentity IdentifyNumericClosure(string root, Type arg)
+        {
+            var kind = arg.NumericKind();
+            var indicator = kind.Indicator().ToChar();
+            var width = kind.Width();
+            return TypeIdentity.Define($"{root}{width}{indicator}");
+        }
+
         /// <summary>
         /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
         /// </summary>

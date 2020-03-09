@@ -304,6 +304,24 @@ namespace Z0
         public static Span<T> Map<S,T>(this ReadOnlySpan<S> src, Func<S, T> f)
         {
             Span<T> dst = new T[src.Length];
+
+            ref readonly var current = ref head(src);
+            ref var target = ref head(dst);
+            for(var i= 0; i<src.Length; i++)
+                seek(dst,i) = f(skip(src,i));
+            return dst;
+        }
+
+        /// <summary>
+        /// Projects a source span to target span via a supplied transformation
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="f">The transformation</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        public static T[] ArrayMap<S,T>(this ReadOnlySpan<S> src, Func<S, T> f)
+        {
+            var dst = new T[src.Length];
             for(var i= 0; i<src.Length; i++)
                 dst[i] = f(src[i]);
             return dst;

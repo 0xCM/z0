@@ -72,7 +72,7 @@ namespace Z0
             else if(arg.IsNatSpan())
                 return arg.NatSpanId();  
             else           
-                return none<TypeIdentity>();
+                return TypeIdentity.Define(arg.DisplayName());
         }
 
         static Option<TypeIdentity> PointerId(this Type arg)

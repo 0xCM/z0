@@ -52,5 +52,8 @@ namespace Z0
         
         public static AppMsg ExtractParseFailure(OpUri op, ExtractTermCode code)
             => AppMsg.Warn($"Extract parse failure {code} for {op}");
+        
+        public static AppMsg DuplicateWarning(ApiHostUri host, OpIdentity id)
+            => AppMsg.Warn($"The host {host} defines operations with a duplicated identifer: {id}");
     }
 }

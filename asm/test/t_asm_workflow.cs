@@ -12,6 +12,7 @@ namespace Z0.Asm
     using static Root;
     using static AsmWorkflowReports;
     using static HostCaptureWorkflow;
+    using static AsmServiceMessages;
 
     using WF = HostCaptureWorkflow;
 
@@ -46,14 +47,13 @@ namespace Z0.Asm
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
             Analyze(e.Host, e.EventData);
-            NotifyConsole(msg);
+            //NotifyConsole(msg);
         }
-
 
         void OnEvent(FunctionsDecoded e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
-            NotifyConsole(msg);
+            //NotifyConsole(msg);
             Analyze(e.Host, e.EventData);
         }
 
@@ -63,13 +63,6 @@ namespace Z0.Asm
             NotifyConsole(msg);
             Analyze(e.Host, e.EventData, e.Target);
         }
-
-        // void OnEvent(AsmCodeSaved e)
-        // {
-        //     var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
-        //     NotifyConsole(msg);
-        //     Analyze(e.Host, e.EventData);
-        // }
 
         void OnEvent(ExtractReportCreated e)
         {
@@ -111,7 +104,6 @@ namespace Z0.Asm
             
             if(HandleMembersLocated)
                 broker.MembersLocated.Receive(broker, OnEvent);
-
         }
 
         public void ExecuteWorkflow()
@@ -130,31 +122,30 @@ namespace Z0.Asm
             NotifyConsole($"The {host} host members define a total of {total} instructions", AppMsgColor.Cyan);            
         }
 
-        void Analyze(in ApiHostUri host, ReadOnlySpan<AsmOpData> extracts, FilePath dst)
+        void Analyze(in ApiHostUri hosturi, ReadOnlySpan<AsmOpData> ops, FilePath dst)
         {
-            
+            var hosted = Context.FindHost(hosturi).MapRequired(host => Context.MemberLocator().Hosted(host)).ToOpIndex();            
             var saved = Context.HexReader().Read(dst).ToArray();
-            Claim.eq(saved.Length, extracts.Length);
+            Claim.eq(saved.Length, ops.Length);
             
             var emptycount = saved.Where(s => s.Uri.IsEmpty).Count();
             Claim.eq(emptycount,0);
 
-
-            // if(emptycount != 0)
-            //     NotifyConsole($"Uri parse failures for {host}: {emptycount} failures out of {saved.Length} uris", AppMsgColor.Red);
-
-            ref readonly var src = ref head(extracts);
-            var count = extracts.Length;
+            ref readonly var src = ref head(ops);
+            var count = ops.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var subject = ref skip(src, i);   
-                Claim.eq(saved[i].Uri, subject.Uri);             
+                Claim.eq(saved[i].Uri, subject.Uri);  
+                Claim.eq(saved[i].Bytes.Length, subject.Bytes.Length);           
             }
         }
 
         void Analyze(in ApiHostUri host, ReadOnlySpan<LocatedMember> src)
         {
-
+            var index = src.ToOpIndex();
+            foreach(var key in index.DuplicateKeys)
+                NotifyConsole(DuplicateWarning(host,key));
 
         }
 

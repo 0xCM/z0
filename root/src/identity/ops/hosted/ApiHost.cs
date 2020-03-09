@@ -71,7 +71,7 @@ namespace Z0
             this.Path = ApiHostUri.Define(Owner, HostName);
             this.Identifier = Path.Format();
         }
-                 
+                                  
         public IEnumerable<MethodInfo> DeclaredMethods
             => HostingType.DeclaredMethods(false);
 

@@ -14,16 +14,16 @@ namespace Z0
     using static Root;
 
     public static class OpIndex
-    {
+    {        
         [MethodImpl(Inline)]
-        public static OpIndex<T> From<T>(IEnumerable<(OpIdentity,T)> src)
+        public static OpIndex<T> From<T>(IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
             where T : struct
-                => new OpIndex<T>(src);
+                => new OpIndex<T>(src, deduplicate);
 
         [MethodImpl(Inline)]
-        public static OpIndex<T> ToOpIndex<T>(this IEnumerable<(OpIdentity,T)> src)
+        public static OpIndex<T> ToOpIndex<T>(this IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
             where T : struct
-                => new OpIndex<T>(src);
+                => new OpIndex<T>(src, deduplicate);
     }
 
     public readonly struct OpIndex<T> : IEnumerable<KeyedValue<OpIdentity, T>>
@@ -31,17 +31,27 @@ namespace Z0
     {
         readonly Dictionary<OpIdentity, T> HashTable;
 
-        internal OpIndex(IEnumerable<(OpIdentity,T)> src)
+        readonly OpIdentity[] Duplicates;
+
+        internal OpIndex(IEnumerable<(OpIdentity,T)> src, bool deduplicate)
         {
             var items = src.ToArray();
             var identities = items.Select(x => x.Item1).ToArray();
-            var duplicates = from g in identities.GroupBy(i => i.Identifier)
+            var duplicates = (from g in identities.GroupBy(i => i.Identifier)
                              where g.Count() > 1
-                             select g.Key;
-            if(duplicates.Count() != 0)
-                throw AppErrors.DuplicateKeys(duplicates);
+                             select g.Key).ToHashSet();
             
-            HashTable = src.ToDictionary();
+            if(duplicates.Count() != 0)
+            {
+                if(deduplicate)
+                    HashTable = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
+                else
+                    throw AppErrors.DuplicateKeys(duplicates);
+            }
+            else
+                HashTable = src.ToDictionary();
+            
+            Duplicates = duplicates.Select(d => OpIdentity.Define(d)).ToArray();
         }
     
         public Option<T> Lookup(OpIdentity id)
@@ -57,6 +67,9 @@ namespace Z0
                     return default;
             }
         }
+
+        public IReadOnlyList<OpIdentity> DuplicateKeys
+            => Duplicates;
 
         IEnumerable<KeyedValue<OpIdentity,T>> KeyedValues
             => HashTable.Select(x => KeyedValue.Define(x.Key, x.Value));
