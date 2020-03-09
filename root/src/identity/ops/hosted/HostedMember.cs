@@ -25,8 +25,7 @@ namespace Z0
 
         public OpKindId? KindId {get;}
 
-        public OpUri Uri
-            => OpUri.Hex(Host, Method.Name, Id);
+        public OpUri Uri => OpUri.hosted(this);
 
         [MethodImpl(Inline)]
         public static HostedMember Define(ApiHostUri host, OpIdentity id, MethodInfo src)

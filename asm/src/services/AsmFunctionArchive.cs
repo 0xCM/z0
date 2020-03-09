@@ -10,7 +10,6 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
 
     using static AsmServiceMessages;
 
@@ -80,7 +79,7 @@ namespace Z0
         {            
             OnEmitting(src);
             WriteHex(src, append).OnSome(e => term.error(e));
-            WriteCil(src, append).OnSome(e => term.error(e));            
+            //WriteCil(src, append).OnSome(e => term.error(e));            
             var emissions = WriteAsm(src,append);
             var incount = src.Members.Length;
             var outcount = emissions.MapValueOrDefault(t => t.Content.Length);
@@ -112,28 +111,28 @@ namespace Z0
             }
         }
 
-        Option<Exception> WriteCil(AsmFunctionGroup src, bool append)
-        {
-            try
-            {                
-                var cilfuncs = src.Members.Where(f => f.Cil.IsSome()).Select(f => f.Cil.Value).ToArray();
-                if(cilfuncs.Length == 0)
-                    return default;
+        // Option<Exception> WriteCil(AsmFunctionGroup src, bool append)
+        // {
+        //     try
+        //     {                
+        //         var cilfuncs = src.Members.Where(f => f.Cil.IsSome()).Select(f => f.Cil.Value).ToArray();
+        //         if(cilfuncs.Length == 0)
+        //             return default;
 
-                using var writer = new StreamWriter(CilPath(src.Id).FullPath,append);
-                foreach(var f in cilfuncs)
-                {
-                    writer.Write(CilFormatter.Format(f));
-                    if(GroupFormatConfig.EmitSectionDelimiter)
-                        writer.WriteLine(GroupFormatConfig.SectionDelimiter);
-                }                    
-                return default;
-            }
-            catch(Exception e)
-            {
-                return e;                
-            }
-        }
+        //         using var writer = new StreamWriter(CilPath(src.Id).FullPath,append);
+        //         foreach(var f in cilfuncs)
+        //         {
+        //             writer.Write(CilFormatter.Format(f));
+        //             if(GroupFormatConfig.EmitSectionDelimiter)
+        //                 writer.WriteLine(GroupFormatConfig.SectionDelimiter);
+        //         }                    
+        //         return default;
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         return e;                
+        //     }
+        // }
 
         Option<AsmEmissionTokens<OpUri>> WriteAsm(AsmFunctionGroup src, bool append)
         {
@@ -144,11 +143,11 @@ namespace Z0
                 for(var i=0; i < src.Members.Length;i++)
                 {
                     var f = src.Members[i];
-                    var uri = OpUri.Asm(HostPath, src.Id, f.Id);
+                    var uri = OpUri.asm(HostPath, src.Id, f.Id);
                     writer.Write(GroupFormatter.FormatFunction(f));
                     tokens[i] = AsmEmissionToken.Define(uri, f.AddressRange, f.TermCode);
                 }
-                return AsmEmissionTokens.From(OpUri.Asm(HostPath, src.Id),tokens);
+                return AsmEmissionTokens.From(OpUri.asm(HostPath, src.Id),tokens);
             }
             catch(Exception e)
             {

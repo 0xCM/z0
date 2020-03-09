@@ -16,7 +16,6 @@ namespace Z0
 
     partial class xfunc
     {
-
         /// <summary>
         /// Returns true if not blank
         /// </summary>
@@ -173,20 +172,6 @@ namespace Z0
             else
                 result = System.Convert.ChangeType(groupValue, valueType);
             return (T)result;
-        }
-
-        public static StringBuilder WithLabel(this StringBuilder sb, object label, object content)
-        {
-            sb.Append($"{label}".PadRight(12));
-            sb.Append($"{content}");
-            sb.AppendLine();
-            return sb;
-        }
-
-        public static StringBuilder AppendLine(this StringBuilder sb, char c)
-        {
-            sb.AppendLine(c.ToString());
-            return sb;
         }
     }
 }

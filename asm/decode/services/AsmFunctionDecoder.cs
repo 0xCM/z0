@@ -30,17 +30,17 @@ namespace Z0
             this.Decoder = context.AsmInstructionDecoder();
         }
 
-        Option<CilFunction> GetCil(CapturedOp src)
-            => from c in Context.ClrIndex.FindCil(src.Method.MetadataToken)
-               select c.WithSig(src.Method.Signature());
+        // Option<CilFunction> GetCil(CapturedOp src)
+        //     => from c in Context.ClrIndex.FindCil(src.Method.MetadataToken)
+        //        select c.WithSig(src.Method.Signature());
 
-        public AsmFunction DecodeFunction(CapturedOp src, bool emitcil = true)
+        public AsmFunction DecodeFunction(CapturedOp src)
         {
             var list = Decoder.DecodeInstructions(src.Code).Require();
             var block = Asm.AsmInstructionBlock.Define(src.Code, list, src.TermCode);
             var f = Context.FunctionBuilder().BuildFunction(src.Operation, block);
-            if(emitcil)
-                f = f.WithCil(GetCil(src).ValueOrDefault());
+            // if(emitcil)
+            //     f = f.WithCil(GetCil(src).ValueOrDefault());
             return f;
         }
 

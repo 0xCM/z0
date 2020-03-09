@@ -17,17 +17,10 @@ namespace Z0
         int DefaultBufferLength 
             => Pow2.T14;
         
-        IClrIndexer ClrIndex {get;}
-
         /// <summary>
         /// The default asm formatting configuration
         /// </summary>
         AsmFormatConfig AsmFormat {get;}
-
-        /// <summary>
-        /// The default cil formatting configuration
-        /// </summary>
-        CilFormatConfig CilFormat {get;}
 
         /// <summary>
         /// Changes the default asm formatting configuration

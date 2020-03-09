@@ -44,22 +44,7 @@ namespace Z0
         public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOpCatalog catalog, AsmEmissionObserver observer)
             => AsmCatalogEmitter.Create(context, catalog, observer);
 
-        /// <summary>
-        /// Instantiates a contextual cil function emitter service
-        /// </summary>
-        /// <param name="context">The source context</param>
-        [MethodImpl(Inline)]
-        public static ICilFunctionEmitter CilEmitter(this IAsmContext context)
-            => CilFunctionEmitter.Create(context);
 
-        /// <summary>
-        /// Allocates a caller-disposed cil text writer
-        /// </summary>
-        /// <param name="context">The source context</param>
-        /// <param name="dst">The target path</param>
-        [MethodImpl(Inline)]
-        public static ICilFunctionWriter CilWriter(this IAsmContext context, FilePath dst)
-            => CilFunctionWriter.Create(context,dst);
 
         [MethodImpl(Inline)]
         public static IAssemblyCapture AssemblyCapture(this IAsmContext context)

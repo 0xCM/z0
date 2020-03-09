@@ -151,6 +151,10 @@ namespace Z0
 
         Containers = 380,
 
+        Cil = 390,
+
+        CilTest = Cil | Test,
+
         ContainerTest = Containers | Test,
 
         Control = 1000,        

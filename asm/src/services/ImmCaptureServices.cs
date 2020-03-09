@@ -46,7 +46,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         internal static AsmFunction Decode(this IAsmContext context, IAsmFunctionDecoder decoder, in OpExtractExchange exchange, OpIdentity id, DynamicDelegate src)
-            => decoder.DecodeFunction(context.Capture().Capture(in exchange, id, src), false);
+            => decoder.DecodeFunction(context.Capture().Capture(in exchange, id, src));
 
     }
 }

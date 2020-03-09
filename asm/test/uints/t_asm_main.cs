@@ -271,7 +271,7 @@ namespace Z0
             var z1 = f.Invoke(x,y);
             var decoder = Context.AsmFunctionDecoder();
             var captured = Context.Capture().Capture(buffers.Exchange, dynop.Id, dynop);
-            var asm = decoder.DecodeFunction(captured,false);        
+            var asm = decoder.DecodeFunction(captured);        
 
             iter(asm.Instructions, i => Trace(i));  
 

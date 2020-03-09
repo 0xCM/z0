@@ -61,28 +61,36 @@ namespace Z0
             => new OpUri(scheme, host, group, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri Hex(ApiHostUri host, string group)        
+        public static OpUri hex(ApiHostUri host, string group)        
             => new OpUri(OpUriScheme.Hex, host, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
-        public static OpUri Hex(ApiHostUri host, string group, OpIdentity opid)        
+        public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)        
             => new OpUri(OpUriScheme.Hex, host, group, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri Hex(OpIdentity opid, MethodInfo src)        
+        public static OpUri hex(OpIdentity opid, MethodInfo src)        
             => new OpUri(OpUriScheme.Hex, ApiHostUri.FromHost(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri Asm(ApiHostUri host, string group)        
+        public static OpUri asm(ApiHostUri host, string group)        
             => new OpUri(OpUriScheme.Asm, host, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
-        public static OpUri Asm(ApiHostUri host, string group, OpIdentity opid)        
+        public static OpUri asm(ApiHostUri host, string group, OpIdentity opid)        
             => new OpUri(OpUriScheme.Asm, host, group, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri Asm(OpIdentity opid, MethodInfo src)        
+        public static OpUri asm(OpIdentity opid, MethodInfo src)        
             => new OpUri(OpUriScheme.Asm, ApiHostUri.FromHost(src.DeclaringType), src.Name, opid);
+
+        [MethodImpl(Inline)]
+        public static OpUri located(LocatedMember src)        
+            => new OpUri(OpUriScheme.Located, src.Host, src.Method.Name, src.Id);
+
+        [MethodImpl(Inline)]
+        public static OpUri hosted(HostedMember src)        
+            => new OpUri(OpUriScheme.Hosted, src.Host, src.Method.Name, src.Id);
 
         [MethodImpl(Inline)]
         OpUri(OpUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)

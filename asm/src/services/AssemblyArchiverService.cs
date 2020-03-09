@@ -80,7 +80,7 @@ namespace Z0.Asm
             }
 
             var metadata = src.Owner.CreateClrIndex();
-            var context = AsmContext.New(metadata, Resources);
+            var context = AsmContext.New(Resources);
             var emitter = context.CatalogEmitter(src.Operations, OnEmission);
 
             var primary = EmitPrimary(exchange, src, emitter);

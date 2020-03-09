@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Text;
 
@@ -21,13 +19,13 @@ namespace Z0
         /// <param name="c">The character to intersperse</param>
         public static string Intersperse(this string src, char c)
         {
-            var sb = new StringBuilder();
+            var builder = text.factory.Builder();
             foreach(var item in src)
             {
-                sb.Append(item);
-                sb.Append(c);
+                builder.Append(item);
+                builder.Append(c);
             }
-            return sb.ToString();
+            return builder.ToString();
         }
 
         /// <summary>
@@ -37,16 +35,13 @@ namespace Z0
         /// <param name="sep">The value to intersperse</param>
         public static string Intersperse(this string src, string sep)
         {
-            var sb = new StringBuilder();
+            var builder = text.factory.Builder();
             foreach(var item in src)
             {
-                sb.Append(item);
-                sb.Append(sep);
+                builder.Append(item);
+                builder.Append(sep);
             }
-            return sb.ToString();
+            return builder.ToString();
         }
-
-
     }
-
 }

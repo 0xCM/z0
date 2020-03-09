@@ -38,7 +38,7 @@ namespace Z0
         /// The globally-unique operation uri
         /// </summary>
         OpUri Uri
-            => OpUri.Hex(Host, Method.Name, Id);        
+            => OpUri.hex(Host, Method.Name, Id);        
     }        
 
     public interface IHostedMember<T> : IHostedMember, IEquatable<T>, IFormattable<T>

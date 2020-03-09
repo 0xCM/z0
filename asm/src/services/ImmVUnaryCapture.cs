@@ -36,12 +36,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
             => Context.AsmFunctionDecoder()
-                        .DecodeFunction(
-                            Context.Capture().Capture(
-                                exchange,
-                                Resolver.Id.WithImm8(imm8),
-                                Resolver.@delegate(imm8)),
-                                false);
+                        .DecodeFunction(Context.Capture().Capture(exchange,Resolver.Id.WithImm8(imm8),Resolver.@delegate(imm8)));
     }
 
     readonly struct ImmV256UnaryCaptureService<T> : IImmUnaryCapture<T>
@@ -65,12 +60,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmFunction Capture(in OpExtractExchange exchange, byte imm8)
             => Context.AsmFunctionDecoder()
-                        .DecodeFunction(
-                            Context.Capture().Capture(
-                                exchange,
-                                Resolver.Id.WithImm8(imm8),
-                                Resolver.@delegate(imm8)),
-                                false);
+                        .DecodeFunction(Context.Capture().Capture(exchange, Resolver.Id.WithImm8(imm8), Resolver.@delegate(imm8)));
     }
 
 }

@@ -6,6 +6,8 @@ namespace Z0
 {        
     using System;
     using Z0.Asm;
+    using System.Linq;
+    using System.Collections.Generic;
 
     public abstract class Deconstructable<T> : IDeconstructable<T>
         where T : Deconstructable<T>
@@ -32,9 +34,7 @@ namespace Z0
             var functions = capture.CaptureFunctions(host); 
             using var asmwriter = context.AsmWriter(asmfile);
             asmwriter.Write(functions);            
-        
-            //context.AsmEmitter().EmitAsm(functions, asmfile).OnSome(e => throw e);
-            context.CilEmitter().EmitCil(functions, cilfile).OnSome(e => throw e);
+            context.CilWriter(cilfile).Write(functions.Where(f => f.Cil.IsSome()).Select(x => x.Cil.Require()).ToArray());        
         }
     }
 }

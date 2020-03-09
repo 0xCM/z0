@@ -76,7 +76,7 @@ namespace Z0.Asm
                 if(matched.IsSome() && status.Success())
                 {
                     var bytes = parser.Parsed.ToArray();
-                    var uri = OpUri.Hex(host.Path, extract.Uri.GroupName, extract.Uri.OpId);
+                    var uri = OpUri.hex(host.Path, extract.Uri.GroupName, extract.Uri.OpId);
                     var data = MemoryExtract.Define(extract.Address, bytes);
                     var record = MemberParseRecord.Define
                     (

@@ -38,8 +38,7 @@ namespace Z0.Asm
                             Context.Capture().Capture(
                                 exchange,
                                 Resolver.Id.WithImm8(imm8),
-                                Resolver.@delegate(imm8)),
-                                false);
+                                Resolver.@delegate(imm8)));
     }
 
     readonly struct ImmV256BinaryCaptureService<T> : IImmBinaryCapture<T>
@@ -67,8 +66,7 @@ namespace Z0.Asm
                             Context.Capture().Capture(
                                 exchange,
                                 Resolver.Id.WithImm8(imm8),
-                                Resolver.@delegate(imm8)),
-                                false);
+                                Resolver.@delegate(imm8)));
     } 
  
 }

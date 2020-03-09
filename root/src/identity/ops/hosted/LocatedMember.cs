@@ -27,8 +27,7 @@ namespace Z0
 
         public MemoryAddress Address {get;}
 
-        public OpUri Uri
-            => OpUri.Hex(Host, Method.Name, Id);
+        public OpUri Uri => OpUri.located(this);
 
         [MethodImpl(Inline)]
         public static LocatedMember Define(ApiHostUri host, OpIdentity id, MethodInfo src, MemoryAddress address)

@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Exposes formatting capabilites via exension methods
     /// </summary>
-    partial class CustomFormattables
+    partial class CustomFormatting
     {
         /// <summary>
         /// Formats a sequence of formattable things as delimited list
@@ -47,16 +47,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Formats a sequence of objects as a delimited list
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="delimiter">The delimiter, if specified; otherwise, a system default is chosen</param>
-        /// <param name="offset">The index of the source element at which formatting will begin</param>
-        /// <typeparam name="T">A formattable type</typeparam>
-        public static string FormatList(this IEnumerable<object> items, char? delimiter = null)
-            => string.Join(delimiter ?? text.comma(), items);
-
-        /// <summary>
         /// Formats a sequence of formattable things as delimited list
         /// </summary>
         /// <param name="src">The source span</param>
@@ -67,6 +57,5 @@ namespace Z0
         public static string FormatList<T>(this IEnumerable<T> items, char? delimiter = null, int offset = 0)
             where T : ICustomFormattable
                 => string.Join(delimiter ?? AsciSym.Comma, items.Skip(0).Select(x => x.Format()));
-
     }
 }

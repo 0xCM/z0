@@ -9,6 +9,8 @@
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
+    <ProjectReference Include="$(TopDir)cil/src/z0.cil.csproj" />
+
     <ProjectReference Include="$(TopDir)asm/core/z0.asm.core.csproj" />
     <ProjectReference Include="$(TopDir)asm/encode/z0.asm.encode.csproj" />
     <ProjectReference Include="$(TopDir)asm/decode/z0.asm.decode.csproj" />

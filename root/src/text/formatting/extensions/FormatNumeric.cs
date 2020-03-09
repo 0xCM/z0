@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Exposes formatting capabilites via exension methods
     /// </summary>
-    partial class CustomFormattables
+    partial class CustomFormatting
     {
         public static string FormatNumeric<T>(this T src, NumericKind kind)
             where T : unmanaged, IFixed

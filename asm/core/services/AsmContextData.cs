@@ -8,26 +8,19 @@ namespace Z0.Asm
 
     class AsmContextData
     {
-        public static AsmContextData New(IAssemblyComposition assemblies, IClrIndexer clrIndex, 
-            DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
-                => new AsmContextData(assemblies, clrIndex, resources, format, cilFormat);
+        public static AsmContextData New(IAssemblyComposition assemblies, DataResourceIndex resources, AsmFormatConfig format)
+                => new AsmContextData(assemblies, resources, format);
 
-        AsmContextData(IAssemblyComposition assemblies, IClrIndexer clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat)
+        AsmContextData(IAssemblyComposition assemblies, DataResourceIndex resources, AsmFormatConfig format)
         {
             this.Assemblies = assemblies;
-            this.ClrIndex = clrIndex;
             this.Resources = resources;
             this.AsmFormat = format;
-            this.CilFormat = cilFormat;
         }
-
-        public IClrIndexer ClrIndex {get;}
 
         public DataResourceIndex Resources {get;}
 
         public IAssemblyComposition Assemblies {get;}
-
-        public CilFormatConfig CilFormat {get;}
 
         public AsmFormatConfig AsmFormat {get;}
     }

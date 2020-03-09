@@ -148,7 +148,7 @@ namespace Z0
             var z1 = dynop.DynamicOp.Invoke(x,y);
             var decoder = Context.AsmFunctionDecoder();
             var captured = Context.Capture().Capture(buffers.Exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(captured,false);
+            var asm = decoder.DecodeFunction(captured);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
@@ -172,7 +172,7 @@ namespace Z0
             
             var decoder = Context.AsmFunctionDecoder();
             var captured = Context.Capture().Capture(in exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(captured,false);
+            var asm = decoder.DecodeFunction(captured);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
@@ -196,7 +196,7 @@ namespace Z0
             
             var decoder = Context.AsmFunctionDecoder();
             var capture = Context.Capture().Capture(in buffers.Exchange, dynop.Id, dynop);            
-            var asm = decoder.DecodeFunction(capture,false);
+            var asm = decoder.DecodeFunction(capture);
 
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  

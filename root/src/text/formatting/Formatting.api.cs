@@ -22,7 +22,6 @@ namespace Z0
 
     public static class Formatting
     {             
-
         /// <summary>
         /// Formats any object, using a custom formatter if it exists or invoking ToString() if not
         /// </summary>

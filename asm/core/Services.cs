@@ -24,13 +24,6 @@ namespace Z0
         public static AsmEmissionPaths EmissionPaths(this IAsmContext context)    
             => AsmEmissionPaths.The;
 
-        /// <summary>
-        /// Instantiates a contextual cil formatter
-        /// </summary>
-        /// <param name="context">The source context</param>
-        public static ICilFunctionFormatter CilFormatter(this IAsmContext context)
-            => CilFunctionFormatter.New(context);
-
         [MethodImpl(Inline)]
         public static IHostOpExtractor HostExtractor(this IAsmContext context, int? bufferlen = null)
             => HostOpExtractor.New(context, bufferlen);

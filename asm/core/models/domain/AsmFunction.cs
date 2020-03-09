@@ -63,11 +63,6 @@ namespace Z0.Asm
         public ExtractTermCode TermCode {get;}
 
         /// <summary>
-        /// The defining CIL
-        /// </summary>
-        public Option<CilFunction> Cil {get; private set;}
-
-        /// <summary>
         /// The definining operation uri
         /// </summary>
         public OpUri Uri
@@ -104,17 +99,5 @@ namespace Z0.Asm
         }
 
         public bool IsEmpty => InstructionCount == 0;
-
-        public AsmFunction WithCil(CilFunction cil)            
-        {            
-            this.Cil = cil;
-            return this;
-        }
-
-        public AsmFunction WithCil(Option<CilFunction> cil)            
-        {            
-            this.Cil = cil;
-            return this;
-        }
     }
 }

@@ -13,14 +13,25 @@ namespace Z0
     {
         None = 0,
         
+        /// <summary>
+        /// Marker for operations emitted to a decoded asm file
+        /// </summary>
         Asm,
-
+        
+        /// <summary>
+        /// Marker for operations emitted to a hex-formatted file
+        /// </summary>
         Hex,
 
-        Raw,
+        /// <summary>
+        /// Marker for hosted operations
+        /// </summary>
+        Hosted,
 
-        Cil
-
+        /// <summary>
+        /// Marker for memory-located operations
+        /// </summary>
+        Located,
     }
 
     public static class OpUriSchemeOps
