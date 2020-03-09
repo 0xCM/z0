@@ -34,7 +34,7 @@ namespace Z0.Asm
 
         public bool HandleFunctionsDecoded {get;} = true;
 
-        public bool HandleCodeSaved {get;} = true;
+        public bool HandleParsedExtractSaved {get;} = true;
 
         public bool HandleHostReportSaved {get;} = false;
 
@@ -49,12 +49,27 @@ namespace Z0.Asm
             NotifyConsole(msg);
         }
 
-        void OnEvent(ExtractsParsed e)
+
+        void OnEvent(FunctionsDecoded e)
         {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Green);
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
             NotifyConsole(msg);
             Analyze(e.Host, e.EventData);
         }
+
+        void OnEvent(AsmHexSaved e)
+        {
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            NotifyConsole(msg);
+            Analyze(e.Host, e.EventData, e.Target);
+        }
+
+        // void OnEvent(AsmCodeSaved e)
+        // {
+        //     var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+        //     NotifyConsole(msg);
+        //     Analyze(e.Host, e.EventData);
+        // }
 
         void OnEvent(ExtractReportCreated e)
         {
@@ -65,20 +80,6 @@ namespace Z0.Asm
         void OnEvent(ParseReportCreated e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Blue);
-            NotifyConsole(msg);
-        }
-
-        void OnEvent(FunctionsDecoded e)
-        {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
-            NotifyConsole(msg);
-
-            Analyze(e.Host, e.EventData);
-        }
-
-        void OnEvent(AsmCodeSaved e)
-        {
-            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
             NotifyConsole(msg);
         }
 
@@ -102,8 +103,8 @@ namespace Z0.Asm
             if(HandleFunctionsDecoded)
                 broker.FunctionsDecoded.Receive(broker, OnEvent);
 
-            if(HandleCodeSaved)            
-                broker.CodeSaved.Receive(broker, OnEvent);
+            if(HandleParsedExtractSaved)            
+                broker.HexSaved.Receive(broker, OnEvent);
 
             if(HandleHostReportSaved)
                 broker.HostReportSaved.Receive(broker, OnEvent);
@@ -111,8 +112,6 @@ namespace Z0.Asm
             if(HandleMembersLocated)
                 broker.MembersLocated.Receive(broker, OnEvent);
 
-            if(HandleExtractsParsed)            
-                broker.ExtractsParsed.Receive(broker, OnEvent);
         }
 
         public void ExecuteWorkflow()
@@ -131,45 +130,33 @@ namespace Z0.Asm
             NotifyConsole($"The {host} host members define a total of {total} instructions", AppMsgColor.Cyan);            
         }
 
-        void Analyze(in ApiHostUri host, ReadOnlySpan<ParsedExtract> extracts)
+        void Analyze(in ApiHostUri host, ReadOnlySpan<AsmOpData> extracts, FilePath dst)
         {
+            
+            var saved = Context.HexReader().Read(dst).ToArray();
+            Claim.eq(saved.Length, extracts.Length);
+            
+            var emptycount = saved.Where(s => s.Uri.IsEmpty).Count();
+            Claim.eq(emptycount,0);
+
+
+            // if(emptycount != 0)
+            //     NotifyConsole($"Uri parse failures for {host}: {emptycount} failures out of {saved.Length} uris", AppMsgColor.Red);
+
             ref readonly var src = ref head(extracts);
             var count = extracts.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var subject = ref skip(src, i);                
+                ref readonly var subject = ref skip(src, i);   
+                Claim.eq(saved[i].Uri, subject.Uri);             
             }
         }
 
-        void Analyze(in ApiHostUri host, ReadOnlySpan<LocatedMember> members)
+        void Analyze(in ApiHostUri host, ReadOnlySpan<LocatedMember> src)
         {
-            foreach(var member in members)
-            {
-                member.KindId.OnValue(id => NotifyConsole($"The {member.Uri} is of kind {id}"));
-            }
+
+
         }
 
-        void DescribeOpKinds(ApiHost host)
-        {            
-            var paths = Root.HostPaths(host);
-            var codepath = paths.CodePath;
-            Claim.exists(codepath);
-
-            var locator = Context.MemberLocator();
-            var members = locator.Hosted(host).CreateIndex();
-
-            var reader = Context.CodeReader();                
-            foreach(var code in reader.Read(codepath))
-            {
-                var id = code.Id;
-                var member = members[id];
-                Claim.yea(member.IsNonEmpty); 
-                
-                var method = member.Method;
-                var kind = method.KindId();
-                if(kind.HasValue)
-                    NotifyConsole($"Member {method.Name} has a kind identifier: {kind}", AppMsgColor.Magenta);
-            }
-        }
     }
 }

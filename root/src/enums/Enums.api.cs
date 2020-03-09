@@ -34,11 +34,11 @@ namespace Z0
         {
             try
             {                
-                return ParseResult.Success(Enum.Parse<E>(name,true));
+                return ParseResult.Success(name,Enum.Parse<E>(name,true));
             }
             catch(Exception e)
             {
-                return ParseResult.Fail<E>(e);
+                return ParseResult.Fail<E>(name, e);
             }
         }
 

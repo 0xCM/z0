@@ -110,8 +110,7 @@ namespace Z0
             => Identifier.Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
             
         /// <summary>
-        /// Returns the duplicate identities found in the source stream, if any; otherwisse,
-        /// returns an empty array
+        /// Returns the duplicate identities found in the source stream, if any; otherwise, returns an empty array
         /// </summary>
         /// <param name="src">The identities to search for duplicates</param>
         public static OpIdentity[] duplicates(IEnumerable<OpIdentity> src)

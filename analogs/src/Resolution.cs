@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Fixed)]
+[assembly: AssemblyId(AssemblyId.Analogs)]
 
 namespace Z0.Resolutions
 {        
-    public sealed class Fixed : AssemblyResolution<Fixed, Fixed.C>
+    public sealed class Analogs : AssemblyResolution<Analogs, Analogs.C>
     {
-        public Fixed() : base(AssemblyId.Fixed) {}
+        public Analogs() : base(AssemblyId.Analogs) {}
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.Fixed) { } }            
+        public class C : OpCatalog<C> { public C() : base(AssemblyId.Analogs){ }}
     }
 }

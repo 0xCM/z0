@@ -23,13 +23,13 @@ namespace Z0.Asm
 
             ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
 
-            ExtractsParsed ExtractsParsed => ExtractsParsed.Empty;
+            ExtractsParsed ExtractsParsed => ExtractsParsed.Empty;            
             
             ParseReportCreated ParseReportCreated => ParseReportCreated.Empty;
 
             FunctionsDecoded FunctionsDecoded => FunctionsDecoded.Empty;
-
-            AsmCodeSaved CodeSaved => AsmCodeSaved.Empty;
+            
+            AsmHexSaved HexSaved => AsmHexSaved.Empty;
 
             ExtractReportSaved HostReportSaved => ExtractReportSaved.Empty;
 

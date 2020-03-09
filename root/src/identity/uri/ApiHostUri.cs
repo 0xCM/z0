@@ -103,9 +103,9 @@ namespace Z0
         {
             var parts = text.Split('/');
             if(parts.Length == 2 && Enum.TryParse(parts[0], true, out AssemblyId owner))
-                return ParseResult.Success(Define(owner, parts[1]));
+                return ParseResult.Success(text,Define(owner, parts[1]));
             else
-                return ParseResult.Fail<ApiHostUri>();
+                return ParseResult.Fail<ApiHostUri>(text);
         }
     }
 }

@@ -82,14 +82,16 @@ namespace Z0.Asm
                 return dst;
             }
 
-            public void SaveCode(in ApiHost host, ParsedExtract[] src, FilePath dst)
-            {                    
-                using var writer = Context.CodeWriter(dst);
-                var code = src.Map(x => x.Code);
-                writer.Write(code);
-
-                Broker.RaiseEvent(AsmCodeSaved.Define(host, code, dst));
+            AsmOpData[] HandleSave(in ApiHost host, ParsedExtract[] src, FilePath dst)
+            {
+                using var writer = Context.HexWriter(dst);
+                var data = src.Map(x => AsmOpData.Define(x.Uri, x.ParsedContent.Bytes));
+                writer.Write(data);
+                return data;
             }
+
+            public void SaveCode(in ApiHost host, ParsedExtract[] src, FilePath dst)
+                => Broker.RaiseEvent(AsmHexSaved.Define(host, HandleSave(host, src, dst), dst));
 
             public void SaveDecoded(in ApiHost host, AsmFunction[] src, FilePath dst)
             {
@@ -114,6 +116,9 @@ namespace Z0.Asm
             public void CaptureHost(in ApiHost host, in RootEmissionPaths dst)
             {
                 var paths = dst.HostPaths(host);
+                if(host.Owner.IsNone())
+                    return;
+
                 var extracts = ExtractMembers(host);                
 
                 if(extracts.Length == 0)

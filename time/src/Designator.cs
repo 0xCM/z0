@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.Time)]
+
 namespace Z0.Resolutions
 {        
     public sealed class Time : AssemblyResolution<Time, Time.C>
     {
-        public const AssemblyId Identity = AssemblyId.Time;
+        public Time() : base(AssemblyId.Time){}
 
-        public Time() : base(Identity){}
-
-        public class C : OpCatalog<C> { public C() : base(Identity) { } }
+        public class C : OpCatalog<C> { public C() : base(AssemblyId.Time) { } }
     }    
 }

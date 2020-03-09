@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.WorkflowCore)]
+
 namespace Z0.Resolutions
 {
     public sealed class WorkflowCore : AssemblyResolution<WorkflowCore, WorkflowCore.C>

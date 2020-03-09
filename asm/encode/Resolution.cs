@@ -2,10 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.AsmEncoder)]
+
 namespace Z0.Resolutions
 {
-    using System;
-
     public sealed class AsmEncoder : AssemblyResolution<AsmEncoder, AsmEncoder.C>
     {
         public AsmEncoder() : base(AssemblyId.AsmEncoder) {}

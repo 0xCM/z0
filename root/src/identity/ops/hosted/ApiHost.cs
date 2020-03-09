@@ -41,11 +41,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ApiHost FromType(Type src)
-            => new ApiHost(src.Assembly.AssemblyId(), src);
+        {
+            var owner = src.Assembly.AssemblyId();            
+            return new ApiHost(owner, src);
+        }
 
         [MethodImpl(Inline)]
         public static ApiHost Define(AssemblyId owner, Type src)
-            => new ApiHost(owner, src);
+        {
+            return new ApiHost(owner, src);
+        }
 
         [MethodImpl(Inline)]
         public static bool operator==(ApiHost a, ApiHost b)

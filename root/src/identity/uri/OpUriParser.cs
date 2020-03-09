@@ -54,7 +54,7 @@ namespace Z0
                     var id = OpIdentity.Define(rest.TakeAfter(H));
                     var group = rest.Between(Q,H);
                     var uri = OpUri.Define(scheme, path.Value, group, id);
-                    return ParseResult.Success(uri);
+                    return ParseResult.Success(text,uri);
                 }                
             }
                         

@@ -106,7 +106,7 @@ namespace Z0
             foreach(var method in src)
             {
                 var data = capture.Capture(exchange, method.Identify(), method);
-                codeDst.WriteCode(data);
+                codeDst.WriteCode(data.Code);
                 var asm = decoder.DecodeFunction(data);
                 asmDst.Write(asm);
             }

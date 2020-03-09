@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.Root)]
+
 namespace Z0.Resolutions
 {        
     public sealed class Root : AssemblyResolution<Root, Root.C>

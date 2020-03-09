@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    readonly struct AsmCodeWriter : IAsmCodeWriter
+    readonly struct AsmHexWriter : IAsmHexWriter
     {        
         readonly StreamWriter StreamOut;
 
@@ -20,35 +20,31 @@ namespace Z0.Asm
         public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public static IAsmCodeWriter New(IAsmContext context, FilePath dst)
-            => new AsmCodeWriter(context, dst);
+        public static IAsmHexWriter New(IAsmContext context, FilePath dst)
+            => new AsmHexWriter(context, dst);
 
         [MethodImpl(Inline)]
-        AsmCodeWriter(IAsmContext context, FilePath path)
+        AsmHexWriter(IAsmContext context, FilePath path)
         {
             this.Context = context;
             this.TargetPath = path;
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        public void WriteCode(in AsmCode src, int? idpad = null)
+        public void Write(in AsmOpData src, int? uripad = null)
         {
-            StreamOut.WriteLine(src.Format(idpad ?? 0));
+            StreamOut.WriteLine(src.Format(uripad ?? 5));
         }
-        
-        public void WriteHexLine(in CapturedOp src, int? idpad = null)
-            => StreamOut.WriteLine(HexLine.Define(src.Id, src.RawBits.Bytes).Format(idpad ?? 0));  //StreamOut.WriteHexLine(src.Id, src.RawBits.Bytes, idpad);
 
-        public void Write(AsmCode[] src)
+        public void Write(AsmOpData[] src)
         {
-            var idpad = src.Max(x => x.Id.Identifier.Length) + 1;
+            var uripad = src.Max(x => x.Uri.Identifier.Length) + 1;
             for(var i=0; i< src.Length; i++)
             {
-                WriteCode(src[i], idpad);
+                Write(src[i], uripad);
             }
-        
             StreamOut.Flush();
-        }
+        }        
         public void Dispose()
         {
             StreamOut.Flush();

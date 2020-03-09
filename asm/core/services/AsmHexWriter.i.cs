@@ -2,12 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Machines)]
-
-namespace Z0.Resolutions
-{    
-    public sealed class Machines : AssemblyResolution<Machines>
+namespace Z0.Asm
+{
+    using System;
+    
+    public interface IAsmHexWriter : IAsmStreamWriter
     {
-        public Machines() : base(AssemblyId.Machines) {}
+        void Write(in AsmOpData src, int? uripad = null);
+
+        void Write(AsmOpData[] src);
     }
 }

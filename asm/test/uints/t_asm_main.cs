@@ -65,7 +65,7 @@ namespace Z0
             {            
                 var capture = buffers.Capture;
                 var captured = capture.Capture(buffers.Exchange, f);
-                codeout.WriteCode(captured);
+                codeout.WriteCode(captured.Code);
                 hexout.WriteHexLine(captured);
                 asmout.Write(decoder.DecodeFunction(captured));
                 Claim.eq(captured.RawBits.Length, state.Count);
@@ -210,7 +210,7 @@ namespace Z0
             var capture = buffers.Capture;
             
             var data = capture.Capture(buffers.Exchange, src);        
-            hexout.WriteCode(data);
+            hexout.WriteCode(data.Code);
             rawout.WriteHexLine(data);
             asmout.Write(decoder.DecodeFunction(data));
         }
@@ -227,7 +227,7 @@ namespace Z0
             var decoder = Context.AsmFunctionDecoder();
             
             var data = capture.Capture(buffers.Exchange, src.Identify(), src);
-            hexout.WriteCode(data);
+            hexout.WriteCode(data.Code);
             rawout.WriteHexLine(data);
             asmout.Write(decoder.DecodeFunction(data));            
         }
@@ -245,12 +245,12 @@ namespace Z0
             var decoder = Context.AsmFunctionDecoder();
 
             var fData = capture.Capture(buffers.Exchange, f.Identify(), f);
-            hexout.WriteCode(fData);
+            hexout.WriteCode(fData.Code);
             rawout.WriteHexLine(fData);
             asmout.Write(decoder.DecodeFunction(fData));
 
             var gData = capture.Capture(buffers.Exchange, g.Identify(), g);
-            hexout.WriteCode(gData);
+            hexout.WriteCode(gData.Code);
             rawout.WriteHexLine(fData);
             asmout.Write(decoder.DecodeFunction(gData));
         }

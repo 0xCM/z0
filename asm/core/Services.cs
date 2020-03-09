@@ -62,7 +62,25 @@ namespace Z0
         /// <param name="bytesep">The byte delimiter</param>
         [MethodImpl(Inline)]
         public static IAsmCodeReader CodeReader(this IAsmContext context, char? idsep = null, char? bytesep = null)
-            => AsmCodeReader.New(context,idsep,bytesep);
+            => AsmCodeReader.New(context,idsep, bytesep);
+
+        /// <summary>
+        /// Instantiates a contextual service allocation that streams lines of operation hex to a target file
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="dst">The target file</param>
+        [MethodImpl(Inline)]
+        public static IAsmHexWriter HexWriter(this IAsmContext context, FilePath dst)
+            => AsmHexWriter.New(context, dst);
+
+        /// <summary>
+        /// Instantiates a contextual service allocation that streams lines of operation hex to a target file
+        /// </summary>
+        /// <param name="context">The source context</param>
+        /// <param name="dst">The target file</param>
+        [MethodImpl(Inline)]
+        public static IAsmHexReader HexReader(this IAsmContext context)
+            => AsmHexReader.New(context);
 
         /// <summary>
         /// Creates an asm buffer set, which is considered an asm service but cannot be contracted since it is a ref struct

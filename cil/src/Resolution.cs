@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.Cil)]
+
 namespace Z0.Resolutions
 {
     public sealed class Cil : AssemblyResolution<Cil, Cil.C>

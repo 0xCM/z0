@@ -12,37 +12,55 @@ namespace Z0
 
     public readonly struct ParseResult : IParseResult, IFormattable<ParseResult>
     {
+        /// <summary>
+        /// The text that was parsed...or not
+        /// </summary>
+        public string Source {get;}
+        
+        /// <summary>
+        /// The target value type
+        /// </summary>
         public Type TargetType {get;}
      
+        /// <summary>
+        /// Specifies whether the parse attempt succeed, and thus the Value field is meaningful
+        /// </summary>
         public bool Succeeded {get;}
         
+        /// <summary>
+        /// The parsed value, if the parse operaion succeedeed; otherwise best not look there
+        /// </summary>
         public object Value {get;}
 
+        /// <summary>
+        /// If the parse attempt failed, the reason for the failure, if available
+        /// </summary>
         public Option<object> Reason {get;}
 
         [MethodImpl(Inline)]
-        public static ParseResult<T> Success<T>(T value)
-            => ParseResult<T>.Success(value);
+        public static ParseResult<T> Success<T>(string source, T value)
+            => ParseResult<T>.Success(source, value);
 
         [MethodImpl(Inline)]
-        public static ParseResult<T> Fail<T>(object reason = null)
-            => ParseResult<T>.Fail(reason);
+        public static ParseResult<T> Fail<T>(string source, object reason = null)
+            => ParseResult<T>.Fail(source, reason);
 
         [MethodImpl(Inline)]
-        public static ParseResult Success(Type target, object value)
-            => new ParseResult(target, true, value);
+        public static ParseResult Success(string source, Type target, object value)
+            => new ParseResult(source, target, true, value);
 
         [MethodImpl(Inline)]
-        public static ParseResult Fail(Type target, object reason = null)
-            => new ParseResult(target, false, null, reason);
+        public static ParseResult Fail(string source, Type target, object reason = null)
+            => new ParseResult(source, target, false, null, reason);
 
         [MethodImpl(Inline)]
-        public static ParseResult Define(Type target, bool succeeded,  object value, object reason = null)
-            => new ParseResult(target, succeeded, value, reason);
+        public static ParseResult Define(string source, Type target, bool succeeded,  object value, object reason = null)
+            => new ParseResult(source, target, succeeded, value, reason);
 
         [MethodImpl(Inline)]
-        ParseResult(Type type, bool succeeded, object value, object reason = null)
+        ParseResult(string source, Type type, bool succeeded, object value, object reason = null)
         {
+            Source = source;
             TargetType = type;
             Succeeded = succeeded;
             Value = value;
@@ -66,27 +84,39 @@ namespace Z0
 
     public readonly struct ParseResult<T> : IParseResult<T>, IFormattable<ParseResult<T>>
     {
+        /// <summary>
+        /// The text that was parsed...or not
+        /// </summary>
+        public string Source {get;}
+
+        /// <summary>
+        /// Specifies whether the parse attempt succeed, and thus the Value field is meaningful
+        /// </summary>
         public bool Succeeded {get;}
 
+        /// <summary>
+        /// Upon successful parse attempt, holds the parsed value; otherwise it may or may not hold something else
+        /// </summary>
         public T Value {get;}
 
         public Option<object> Reason {get;}
 
         [MethodImpl(Inline)]
-        public static ParseResult<T> Success(T value)
-            => new ParseResult<T>(value);
+        public static ParseResult<T> Success(string source, T value)
+            => new ParseResult<T>(source, value);
 
         [MethodImpl(Inline)]
-        public static ParseResult<T> Fail(object reason = null)
-            => new ParseResult<T>(default, reason);
+        public static ParseResult<T> Fail(string source, object reason = null)
+            => new ParseResult<T>(source, default, reason);
 
         [MethodImpl(Inline)]
         public static implicit operator ParseResult(ParseResult<T> src)
-            => ParseResult.Define(typeof(T), src.Succeeded, src.Value);
+            => ParseResult.Define(src.Source, typeof(T), src.Succeeded, src.Value);
         
         [MethodImpl(Inline)]
-        ParseResult(T value, object reason = null)
+        ParseResult(string source, T value, object reason = null)
         {
+            this.Source = source;
             this.Succeeded = true;
             this.Value = value;
             this.Reason = reason != null ? some(reason) : none<object>();
@@ -115,7 +145,17 @@ namespace Z0
                 f();
             return this;
         }
-            
+
+        /// <summary>
+        /// Maps the parsed value upon success and the source text upon failure
+        /// </summary>
+        /// <param name="success">The success projector</param>
+        /// <param name="failure">The failure projector</param>
+        /// <typeparam name="Y">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public Y MapValueOrSource<Y>(Func<T,Y> success, Func<string,Y> failure)
+            =>  Succeeded ? success(Value) : failure(Source);
+
         /// <summary>
         /// Extracts the encapulated value if it exists; otherwise, returns the default value for
         /// the underlying type which is NULL for reference types
@@ -140,7 +180,7 @@ namespace Z0
         /// <param name="f">The function to apply when value exists</param>
         [MethodImpl(Inline)]
         public ParseResult<S> TryMap<S>(Func<T, S> f)
-            => Succeeded ? ParseResult<S>.Success(f(Value)) : ParseResult<S>.Fail();
+            => Succeeded ? ParseResult<S>.Success(Source, f(Value)) : ParseResult<S>.Fail(Source);
 
         /// <summary>
         /// Implements the canonical bind operation
@@ -150,7 +190,7 @@ namespace Z0
         /// <param name="x">The point in the monadic space over X</param>
         /// <param name="f">The function to apply to effect the bind</param>
         public ParseResult<Y> Bind<Y>(Func<T, ParseResult<Y>> f)
-            => Succeeded ? f(Value) : ParseResult<Y>.Fail();
+            => Succeeded ? f(Value) : ParseResult<Y>.Fail(Source);
 
         /// <summary>
         /// LINQ integration function
@@ -171,17 +211,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParseResult<Z> SelectMany<Y, Z>(Func<T, ParseResult<Y>> eval, Func<T, Y, Z> project)
         {
+            var src = Source;
             if (Succeeded)
             {
                 var v = Value;
                 var y = eval(v);
-                var z = y.Bind(yVal => ParseResult<Z>.Success(project(v, yVal)));
+                var z = y.Bind(yVal => ParseResult<Z>.Success(src, project(v, yVal)));
                 return z;
             }
             else
-                return ParseResult<Z>.Fail();
+                return ParseResult<Z>.Fail(src);
         }
-
 
         public string Format()
             => ParseResult.Format(this);
