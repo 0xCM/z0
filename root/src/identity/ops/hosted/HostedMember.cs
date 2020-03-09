@@ -23,6 +23,8 @@ namespace Z0
 
         public MethodInfo Method {get;}
 
+        public OpKindId? KindId {get;}
+
         public OpUri Uri
             => OpUri.Hex(Host, Method.Name, Id);
 
@@ -44,6 +46,7 @@ namespace Z0
             this.Host = host;
             this.Id = id;
             this.Method = src;
+            this.KindId = src.KindId();
         }
 
         public bool IsEmpty

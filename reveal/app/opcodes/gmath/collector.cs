@@ -13,7 +13,7 @@ namespace Z0
     {
 
         public static ulong avgz_64u_g(ReadOnlySpan<ulong> src)
-            => mathspan.avgz<ulong>(src);
+            => gspan.avgz<ulong>(src);
 
         public static Collector collector_create()
             => Collector.Create(0);

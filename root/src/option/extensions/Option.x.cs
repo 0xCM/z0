@@ -32,7 +32,7 @@ namespace Z0
         public static Option<T> TryPop<T>(this Queue<T> q)
             => q.IsEmpty() ? none<T>() : some(q.Dequeue()); 
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static IEnumerable<Option<T>> Condense<T>(this IEnumerable<IEnumerable<Option<T>>> options)
             => options.SelectMany(x => x);
 

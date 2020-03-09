@@ -23,6 +23,8 @@ namespace Z0
 
         public MethodInfo Method {get;}
 
+        public OpKindId? KindId {get;}
+
         public MemoryAddress Address {get;}
 
         public OpUri Uri
@@ -46,6 +48,7 @@ namespace Z0
             this.Host = host;
             this.Id = id;
             this.Method = src;
+            this.KindId = src.KindId();
             this.Address = address;
         }
 

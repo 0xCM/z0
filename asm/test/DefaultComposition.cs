@@ -27,7 +27,7 @@ namespace Z0
                 R.Fixed.Resolution,
                 R.Math.Resolution,
                 R.GMath.Resolution,
-                R.GMathSvc.Resolution,
+                R.MathServices.Resolution,
                 R.Intrinsics.Resolution,
                 R.LibM.Resolution,
                 R.Logix.Resolution,

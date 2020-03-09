@@ -119,7 +119,7 @@ namespace Z0
             for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
-                var sum =  convert<T,double>(mathspan.sum(row.Unsized));
+                var sum =  convert<T,double>(gspan.sum(row.Unsized));
                 if(!radius.Contains(sum))
                     return false;
             }

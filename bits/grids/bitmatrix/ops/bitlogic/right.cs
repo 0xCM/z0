@@ -11,12 +11,12 @@ namespace Z0
 
     partial class BitMatrix
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), RProject, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> right<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => B;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), RProject, NumericClosures(NumericKind.UnsignedInts)]
         public static ref BitMatrix<T> right<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {

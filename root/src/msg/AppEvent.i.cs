@@ -44,10 +44,6 @@ namespace Z0
             => typeof(E).DisplayName();
     }
 
-    public delegate void AppEventReceiver(IAppEvent @event);
-
-    public delegate void AppEventReceiver<E>(E @event)
-        where E : IAppEvent;        
 
 
     public interface IAppEventSink : ISink
@@ -69,6 +65,31 @@ namespace Z0
         
     }
 
+    public readonly struct AppEventReceiverSink
+    {
+        [MethodImpl(Inline)]
+        public static AppEventReceiverSink<E> From<E>(Action<E> receiver)
+            where E : IAppEvent
+                => new AppEventReceiverSink<E>(receiver);
+    }
+
+
+    public readonly struct AppEventReceiverSink<E> : IAppEventSink<E>
+        where E : IAppEvent
+    {
+        readonly Action<E> Receiver;
+
+        [MethodImpl(Inline)]
+        internal AppEventReceiverSink(Action<E> receiver)
+        {
+            this.Receiver = receiver;
+        }
+        
+        [MethodImpl(Inline)]
+        public void Accept(in E e)
+            => Receiver(e);
+    }
+
     public delegate IAppEvent AppEventEmitter();
 
     public delegate E AppEventEmitter<E>()
@@ -79,10 +100,10 @@ namespace Z0
 
     }
 
-    public interface IAppEventSource<E> : IAppEventSource, ISource<E>
+    public interface IAppEventSource<E> : IAppEventSource
         where E : IAppEvent
     {
-
+        void AcceptReceiver(Action<E> receiver);
     }
 
     public interface IAppEventSource<S,E> : IAppEventSource<E>
@@ -90,5 +111,11 @@ namespace Z0
         where E : IAppEvent
     {
         
+    }
+
+    public interface IAppEventChannel<E> : IAppEventSource<E>, IAppEventSink<E>
+        where E : IAppEvent
+    {
+
     }
 }

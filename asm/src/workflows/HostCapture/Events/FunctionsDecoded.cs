@@ -15,6 +15,7 @@ namespace Z0.Asm
         {
             public static FunctionsDecoded Empty => new FunctionsDecoded(ApiHostUri.Empty, new AsmFunction[]{});
 
+            [MethodImpl(Inline)]
             public FunctionsDecoded(ApiHostUri host, AsmFunction[] functions)
             {
                 this.Host = host;

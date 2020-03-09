@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CNonImpl]
         public static sbyte cnonimpl(sbyte a, sbyte b)
             => (sbyte)AndNot((uint)b,(uint)a);
 
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CNonImpl]
         public static byte cnonimpl(byte a, byte b)
             => (byte)AndNot((uint)b,(uint)a);
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CNonImpl]
         public static short cnonimpl(short a, short b)
             => (short)AndNot((uint)b,(uint)a);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CNonImpl]
         public static ushort cnonimpl(ushort a, ushort b)
             => (ushort)AndNot((uint)b,(uint)a);
 
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CNonImpl]
         public static int cnonimpl(int a, int b)
             => (int)AndNot((uint)b,(uint)a);
 
@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CNonImpl]
         public static uint cnonimpl(uint a, uint b)
             => AndNot(b,a);
 
@@ -75,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CNonImpl]
         public static long cnonimpl(long a, long b)
             => (long)AndNot((ulong)b,(ulong)a);
 
@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CNonImpl]
         public static ulong cnonimpl(ulong a, ulong b)
             => AndNot(b,a);
     }

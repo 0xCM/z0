@@ -13,6 +13,13 @@ namespace Z0.Asm
     using static AsmWorkflowReports;
     using static HostCaptureWorkflow;
 
+    using WF = HostCaptureWorkflow;
+
+    public abstract class WorkflowHost
+    {
+
+    }
+
     public class t_asm_workflow : t_asm<t_asm_workflow>
     {
 
@@ -20,7 +27,35 @@ namespace Z0.Asm
         {
 
         }
-        
+
+        public bool HandleMembersLocated {get;} = true;
+
+        public bool HandleExtractsParsed {get;} = true;
+
+        public bool HandleFunctionsDecoded {get;} = true;
+
+        public bool HandleCodeSaved {get;} = true;
+
+        public bool HandleHostReportSaved {get;} = false;
+
+        public bool HandleExtractReportCreated {get;} = false;
+
+        public bool HandleParseReportCreated {get;} = false;
+
+        void OnEvent(MembersLocated e)
+        {
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
+            Analyze(e.Host, e.EventData);
+            NotifyConsole(msg);
+        }
+
+        void OnEvent(ExtractsParsed e)
+        {
+            var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Green);
+            NotifyConsole(msg);
+            Analyze(e.Host, e.EventData);
+        }
+
         void OnEvent(ExtractReportCreated e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Blue);
@@ -37,6 +72,8 @@ namespace Z0.Asm
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
             NotifyConsole(msg);
+
+            Analyze(e.Host, e.EventData);
         }
 
         void OnEvent(AsmCodeSaved e)
@@ -45,8 +82,8 @@ namespace Z0.Asm
             NotifyConsole(msg);
         }
 
-        void OnEvent(ApiHostReportSaved e)
-        {
+        void OnEvent(ExtractReportSaved e)
+        {            
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
             NotifyConsole(msg);
         }
@@ -54,22 +91,66 @@ namespace Z0.Asm
         RootEmissionPaths Root
             => RootEmissionPaths.Define(DefaultDataDir);
 
-        void ExecuteWorkflow()
+        void ConnectReceivers(IWorkflowEventBroker broker)
+        {
+            if(HandleExtractReportCreated)
+                broker.ExtractReportCreated.Receive(broker, OnEvent);
+
+            if(HandleParseReportCreated)
+                broker.ParseReportCreated.Receive(broker, OnEvent);
+
+            if(HandleFunctionsDecoded)
+                broker.FunctionsDecoded.Receive(broker, OnEvent);
+
+            if(HandleCodeSaved)            
+                broker.CodeSaved.Receive(broker, OnEvent);
+
+            if(HandleHostReportSaved)
+                broker.HostReportSaved.Receive(broker, OnEvent);
+            
+            if(HandleMembersLocated)
+                broker.MembersLocated.Receive(broker, OnEvent);
+
+            if(HandleExtractsParsed)            
+                broker.ExtractsParsed.Receive(broker, OnEvent);
+        }
+
+        public void ExecuteWorkflow()
         {
             var workflow = HostCaptureWorkflow.Create(Context);
-            var sinks = workflow.ConnectSinks();
-            sinks.HostExtractReportCreated += OnEvent;
-            sinks.HostParseReportCreated += OnEvent;
-            sinks.HostFunctionsDecoded += OnEvent;
-            sinks.HostCodeSaved += OnEvent;
-            sinks.HostReportSaved += OnEvent;
+            ConnectReceivers(workflow.EventBroker);
             workflow.Run(Root);
         }
 
+        void Analyze(in ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
+        {
+            var analyzer = FunctionAnalyzer.Create();
+            var analyses = analyzer.Analyze(functions);
+            var counts = analyses.Map(a => a.InstructionCount);
+            var total = gspan.sum(counts.AsUInt64());
+            NotifyConsole($"The {host} host members define a total of {total} instructions", AppMsgColor.Cyan);            
+        }
 
-        public void ExecuteOps()
+        void Analyze(in ApiHostUri host, ReadOnlySpan<ParsedExtract> extracts)
+        {
+            ref readonly var src = ref head(extracts);
+            var count = extracts.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var subject = ref skip(src, i);                
+            }
+        }
+
+        void Analyze(in ApiHostUri host, ReadOnlySpan<LocatedMember> members)
+        {
+            foreach(var member in members)
+            {
+                member.KindId.OnValue(id => NotifyConsole($"The {member.Uri} is of kind {id}"));
+            }
+        }
+
+        void DescribeOpKinds(ApiHost host)
         {            
-            var host = ApiHost.FromType(typeof(math));
             var paths = Root.HostPaths(host);
             var codepath = paths.CodePath;
             Claim.exists(codepath);
@@ -85,35 +166,9 @@ namespace Z0.Asm
                 Claim.yea(member.IsNonEmpty); 
                 
                 var method = member.Method;
-                if(method.IsUnaryOperator())
-                {
-                    NotifyConsole($"{id} is a unary operator", AppMsgColor.Magenta);
-                }
-                else if(method.IsBinaryOperator())
-                {
-                    NotifyConsole($"{id} is a binary operator", AppMsgColor.Magenta);
-                }
-                else if(method.IsTernaryOperator())
-                {
-                    NotifyConsole($"{id} is a ternary operator", AppMsgColor.Magenta);
-                }
-                else if(method.IsPredicate())
-                {
-                    NotifyConsole($"{id} is a predicate", AppMsgColor.Magenta);
-                }
-                else if(method.IsMeasure())
-                {
-                    NotifyConsole($"{id} is a measure", AppMsgColor.Magenta);
-                }
-                else if(method.IsNumericFunction())
-                {
-                    NotifyConsole($"{id} is a numeric function", AppMsgColor.Magenta);
-                }
-                else
-                {
-                    NotifyConsole($"{id} is unclassified", AppMsgColor.Yellow);
-                }
-                
+                var kind = method.KindId();
+                if(kind.HasValue)
+                    NotifyConsole($"Member {method.Name} has a kind identifier: {kind}", AppMsgColor.Magenta);
             }
         }
     }

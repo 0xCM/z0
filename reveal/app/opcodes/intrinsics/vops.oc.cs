@@ -16,7 +16,7 @@ namespace Z0
     {
         public static bit check_and_1(Vector128<uint> x, Vector128<uint> y)
         {
-            var svc = GX.bitlogic<uint>();
+            var svc = MathSvcFactory.bitlogic<uint>();
             var v1 = VF.vbitlogic<uint>(n128).and(x,y);
             var a0 = svc.and(vcell(x,0), vcell(y,0));
             var a1 = svc.and(vcell(x,1), vcell(y,1));
@@ -43,13 +43,13 @@ namespace Z0
 
         public static void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            SpanFunc.run(GX.negate(z32), src, dst);
+            SpanFunc.run(MathSvcFactory.negate(z32), src, dst);
         }
 
         public static void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            var f = GX.negate<uint>();
-            var g = GX.not<uint>();
+            var f = MathSvcFactory.negate<uint>();
+            var g = MathSvcFactory.not<uint>();
             var count = dst.Length;
             for(var i=0; i< count; i++)
                 seek(dst,i) = Pipes.pipe(skip(src,i),f,g);
@@ -58,8 +58,8 @@ namespace Z0
 
         public static void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            var g = GX.negate(z32);
-            var f = GX.and(z32);
+            var g = MathSvcFactory.negate(z32);
+            var f = MathSvcFactory.and(z32);
             var count = dst.Length;
             for(var i=0; i< count; i++)
                 seek(dst,i) = Pipes.compose(skip(src,i),f,g);
@@ -70,8 +70,8 @@ namespace Z0
 
         public static uint and_negate_ops(uint x)
         {
-            var g = GX.negate(x);
-            var f = GX.and(x);
+            var g = MathSvcFactory.negate(x);
+            var f = MathSvcFactory.and(x);
             return Pipes.compose(x,f,g);
         }
         

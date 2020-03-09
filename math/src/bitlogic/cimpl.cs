@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CImpl]
         public static sbyte cimpl(sbyte a, sbyte b)
             => or(not(a),b);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CImpl]
         public static byte cimpl(byte a, byte b)
             => (byte)(~a | b);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CImpl]
         public static short cimpl(short a, short b)
             => or(not(a),b);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CImpl]
         public static ushort cimpl(ushort a, ushort b)
             => (ushort)(~a | b);
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CImpl]
         public static int cimpl(int a, int b)
             => ~a | b;
 
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CImpl]
         public static uint cimpl(uint a, uint b)
             => ~a | b;
             
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CImpl]
         public static long cimpl(long a, long b)
             => ~a | b;
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), CImpl]
         public static ulong cimpl(ulong a, ulong b)
             => ~a | b;
     }

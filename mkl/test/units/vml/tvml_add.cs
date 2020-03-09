@@ -21,7 +21,7 @@ namespace Z0.Mkl.Test
             mkl.add(lhs,rhs, ref dst1);
             
             var dst2 = lhs.Replicate();
-            mathspan.add(lhs,rhs, dst2.Unblocked);
+            gspan.add(lhs,rhs, dst2.Unblocked);
             Claim.yea(dst1 == dst2);
         }
 
@@ -33,7 +33,7 @@ namespace Z0.Mkl.Test
             mkl.add(lhs,rhs,ref dst1);
             
             var dst2 = lhs.Replicate();
-            mathspan.add(lhs, rhs, dst2.Unblocked);
+            gspan.add(lhs, rhs, dst2.Unblocked);
             Claim.yea(dst1 == dst2);
         }
 
@@ -50,7 +50,7 @@ namespace Z0.Mkl.Test
 
             var sw1 = stopwatch();
             for(var i=0; i<cycles; i++)
-                mathspan.add(lhs1,rhs1, dst1.Unblocked);
+                gspan.add(lhs1,rhs1, dst1.Unblocked);
             var time1 = BenchmarkRecord.Define(cycles, snapshot(sw1), "gmath");
 
 
@@ -72,7 +72,7 @@ namespace Z0.Mkl.Test
 
             var sw1 = stopwatch();
             for(var i=0; i<cycles; i++)
-                mathspan.add(lhs1,rhs1,dst1.Unblocked);
+                gspan.add(lhs1,rhs1,dst1.Unblocked);
             var time1 = BenchmarkRecord.Define(cycles, snapshot(sw1), "gmath");
 
 

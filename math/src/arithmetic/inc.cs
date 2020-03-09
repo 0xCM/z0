@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static Root;    
     
@@ -19,7 +15,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Inc]
         public static sbyte inc(sbyte src)
             => ++src;
 
@@ -27,7 +23,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Inc]
         public static byte inc(byte src)
             => ++src;
 
@@ -35,7 +31,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Inc]
         public static short inc(short src)
             => ++src;
 
@@ -43,7 +39,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Inc]
         public static ushort inc(ushort src)
             => ++src;
 
@@ -51,7 +47,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Inc]
         public static int inc(int src)
             => ++src;
 
@@ -59,7 +55,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Inc]
         public static uint inc(uint src)
             => ++src;
 
@@ -67,7 +63,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Inc]
         public static long inc(long src)
             => ++src;
 
@@ -75,7 +71,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Inc]
         public static ulong inc(ulong src)
             => ++src;
     }

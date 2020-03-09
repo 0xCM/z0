@@ -16,7 +16,7 @@ namespace Z0
         public static bit vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
-            var svc = GX.bitlogic<T>();
+            var svc = MathSvcFactory.bitlogic<T>();
             var v1 = VF.vbitlogic<T>(n128).and(x,y);
             var buffer = Fixed.alloc<Fixed128>();
             ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);

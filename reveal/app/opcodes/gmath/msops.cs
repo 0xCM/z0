@@ -13,7 +13,7 @@ namespace Z0.OpCodes
     public class msops
     {
         public static Span<uint> msand_32u(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, Span<uint> dst)
-            => mathspan.and(lhs, rhs, dst);
+            => gspan.and(lhs, rhs, dst);
 
 
     }

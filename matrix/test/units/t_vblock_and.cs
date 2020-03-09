@@ -40,7 +40,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = Blocks.alloc<T>(n256,lhs.BlockCount);
-            mathspan.and(lhs,rhs, dst.Data);
+            gspan.and(lhs,rhs, dst.Data);
             return dst;
         }            
 

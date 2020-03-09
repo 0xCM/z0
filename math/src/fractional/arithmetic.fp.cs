@@ -19,7 +19,7 @@ namespace Z0
         /// Computes the absolute value of the source
         /// </summary>
         /// <param name="a">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Abs]
         public static float abs(float a)
         {
             var bits =  Float32Bits.Define(a);
@@ -31,17 +31,143 @@ namespace Z0
         /// Computes the absolute value of the source
         /// </summary>
         /// <param name="a">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Abs]
         public static double abs(double a)
             => Float64Bits.Abs(a);
 
-        [MethodImpl(Inline), Op]
-        public static float add(float lhs, float rhs)
-            => lhs + rhs;
+        /// <summary>
+        /// Decrements the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Dec]
+        public static float dec(float src)
+            => --src;
 
-        [MethodImpl(Inline), Op]
-        public static double add(double lhs, double rhs)
-            => lhs + rhs;
+        /// <summary>
+        /// Decrements the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Dec]
+        public static double dec(double src)
+            => --src;
+
+        /// <summary>
+        /// Increments the operand
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Inc]
+        public static float inc(float src)
+            => src + 1;
+
+        /// <summary>
+        /// Increments the operand
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Inc]
+        public static double inc(double src)
+            => src + 1;
+
+        /// <summary>
+        /// Negates the operand
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Negate]
+        public static float negate(float src)
+            => -src;
+
+        /// <summary>
+        /// Negates the operand
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Negate]
+        public static double negate(double src)
+            => -src;
+
+        /// <summary>
+        /// Computes the arithmetic sum of the source operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Add]
+        public static float add(float a, float b)
+            => a + b;
+
+        /// <summary>
+        /// Computes the arithmetic sum of the source operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Add]
+        public static double add(double a, double b)
+            => a + b;
+
+        /// <summary>
+        /// Computes the arithmetic difference between the first operand and the second
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Sub]
+        public static float sub(float a, float b)
+            => a - b;
+
+        /// <summary>
+        /// Computes the arithmetic difference between the first operand and the second
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Sub]
+        public static double sub(double a, double b)
+            => a - b;
+
+        /// <summary>
+        /// Computes the arithmetic product of the operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Mul]
+        public static float mul(float a, float b)
+            => a * b;
+
+        /// <summary>
+        /// Computes the arithmetic quotient of the first operand over the second
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Div]
+        public static float div(float a, float b)
+            => a / b;
+
+        /// <summary>
+        /// Computes the arithmetic quotient of the first operand over the second
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Div]
+        public static double div(double a, double b)
+            => a / b;
+
+        /// <summary>
+        /// Computes the modulus of the first operand over the second
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Mod]
+        public static float mod(float a, float b)
+            => a % b;
+
+        [MethodImpl(Inline), Mod]
+        public static double mul(double a, double b)
+            => a * b;
+
+        /// <summary>
+        /// Computes the modulus of the first operand over the second
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Mod]
+        public static double mod(double a, double b)
+            => a % b;
+
 
         /// <summary>
         /// Computes the smallest integral value greater than or equal to the source value
@@ -58,6 +184,22 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static double ceil(double src)
             => Math.Ceiling(src);
+
+       /// <summary>
+        /// Computes the largest integral value less than or equal to the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static float floor(float src)
+            => MathF.Floor(src);
+
+        /// <summary>
+        /// Computes the largest integral value less than or equal to the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static double floor(double src)
+            => Math.Floor(src); 
 
         /// <summary>
         /// Clamps the source value to an inclusive maximum
@@ -78,22 +220,6 @@ namespace Z0
             => src > max ? max : src;
 
         /// <summary>
-        /// Decrements the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float dec(float src)
-            => --src;
-
-        /// <summary>
-        /// Decrements the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double dec(double src)
-            => --src;
-
-        /// <summary>
         /// Computes the nonnegative distance between two values
         /// </summary>
         /// <param name="a">The first number</param>
@@ -103,14 +229,6 @@ namespace Z0
             => a >= b ? (ulong)(a - b) : (ulong)(b - a);
 
         [MethodImpl(Inline), Op]
-        public static float div(float a, float b)
-            => a / b;
-
-        [MethodImpl(Inline), Op]
-        public static double div(double a, double b)
-            => a / b;
-
-        [MethodImpl(Inline), Op]
         public static bit divides(float a, float b)
             => b % a == 0;
 
@@ -118,22 +236,6 @@ namespace Z0
         public static bit divides(double a, double b)
             => b % a == 0;
  
-        /// <summary>
-        /// Computes the largest integral value less than or equal to the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float floor(float src)
-            => MathF.Floor(src);
-
-        /// <summary>
-        /// Computes the largest integral value less than or equal to the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double floor(double src)
-            => Math.Floor(src); 
-
         [MethodImpl(Inline), Op]
         public static float fma(float x, float y, float z)
             => MathF.FusedMultiplyAdd(x,y,z);
@@ -141,22 +243,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static double fma(double x, double y, double z)
             => Math.FusedMultiplyAdd(x, y, z);
-
-        /// <summary>
-        /// Increments the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float inc(float src)
-            => src + 1;
-
-        /// <summary>
-        /// Increments the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double inc(double src)
-            => src + 1;
 
         /// <summary>
         /// Computes the remainder of the quotient of the operands
@@ -176,37 +262,6 @@ namespace Z0
         public static double fmod(double a, double b)
             => Math.IEEERemainder(a,b);
 
-        [MethodImpl(Inline), Op]
-        public static float mod(float a, float b)
-            => a % b;
-
-        [MethodImpl(Inline), Op]
-        public static double mod(double a, double b)
-            => a % b;
-
-        [MethodImpl(Inline), Op]
-        public static float mul(float lhs, float rhs)
-            => lhs * rhs;
-
-        [MethodImpl(Inline), Op]
-        public static double mul(double lhs, double rhs)
-            => lhs * rhs;
-
-        /// <summary>
-        /// Negates the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static float negate(float src)
-            => -src;
-
-        /// <summary>
-        /// Negates the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static double negate(double src)
-            => -src;
 
         [MethodImpl(Inline), Op]
         public static float round(float src, int scale)
@@ -233,14 +288,6 @@ namespace Z0
             => (Sign)Math.Sign(src);            
 
         [MethodImpl(Inline), Op]
-        public static float sub(float a, float b)
-            => a - b;
-
-        [MethodImpl(Inline), Op]
-        public static double sub(double a, double b)
-            => a - b;
-
-        [MethodImpl(Inline), Op]
         public static float square(float src)
             => fmath.mul(src,src);
 
@@ -263,5 +310,59 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static double sqrt(double src)
             => Math.Sqrt(src); 
+
+        [MethodImpl(Inline), Op]
+        public static float avg(ReadOnlySpan<float> src, bool @checked)
+            => @checked? avg_checked(src) : avg_unchecked(src);
+
+        [MethodImpl(Inline), Op]
+        public static double avg(ReadOnlySpan<double> src, bool @checked)
+            => @checked? avg_checked(src) : avg_unchecked(src);
+
+        [MethodImpl(Inline), Op]
+        public static float avg(ReadOnlySpan<float> src)
+            => avg(src,true);
+
+        [MethodImpl(Inline), Op]
+        public static double avg(ReadOnlySpan<double> src)
+            => avg(src,true);
+
+        [MethodImpl(Inline), Op]
+        static float avg_checked(ReadOnlySpan<float> src)
+            {checked{ return avg_unchecked(src);}}
+
+        [MethodImpl(Inline), Op]
+        static double avg_checked(ReadOnlySpan<double> src)
+            {checked{ return avg_unchecked(src);}}
+
+        [MethodImpl(Inline), Op]
+        static float avg_unchecked(ReadOnlySpan<float> src)
+        {
+            unchecked
+            {
+                var sum = default(double);                
+                
+                ref readonly var current = ref head(src);                
+                for(var i=0; i<src.Length; i++)
+                    sum += skip(current,i);
+                
+                return (float)(sum/(float)src.Length);
+            }
+        }
+
+        [MethodImpl(Inline), Op]
+        static double avg_unchecked(ReadOnlySpan<double> src)
+        {
+            unchecked
+            {
+                var sum = default(double);
+
+                ref readonly var current = ref head(src);                
+                for(var i=0; i<src.Length; i++)
+                    sum += skip(current,i);
+
+                return sum/(double)src.Length;
+            }
+        }
     }        
 }

@@ -11,35 +11,35 @@ namespace Z0
 
     partial class math
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Add]
         public static sbyte add(sbyte a, sbyte b)
             => (sbyte)(a + b);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Add]
         public static byte add(byte a, byte b)
             => (byte)(a + b);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Add]
         public static short add(short a, short b)
             => (short)(a + b);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Add]
         public static ushort add(ushort a, ushort b)
             => (ushort)(a + b);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Add]
         public static int add(int a, int b)
             => a + b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Add]
         public static uint add(uint a, uint b)
             => a + b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Add]
         public static long add(long a, long b)
             => a + b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Add]
         public static ulong add(ulong a, ulong b)
             => a + b;
     }

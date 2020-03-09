@@ -265,7 +265,18 @@ namespace Z0
         /// <param name="default">The value to return when no value exists</param>
         [MethodImpl(Inline)]
         public S MapValueOrDefault<S>(Func<T, S> ifSome, S @default = default)
-            => Exists ? ifSome(value) :  @default;
+            => Exists ? ifSome(value) :  @default;        
+
+        /// <summary>
+        /// Maps an optional source value to a nullable value type
+        /// </summary>
+        /// <param name="x">The optional source value</param>
+        /// <param name="f">The transfomation function</param>
+        /// <typeparam name="S">The type of the project value if value exists</typeparam>
+        [MethodImpl(Inline)]
+        public S? MapValueOrNull<S>(Func<T, S> f)
+            where S : struct
+                => value != null ? f(value) : (S?)null;
 
         /// <summary>
         /// Implements the canonical bind operation

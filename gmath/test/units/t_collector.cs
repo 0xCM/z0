@@ -68,9 +68,9 @@ namespace Z0
             for(var i=0; i<data.Length; i++)
                 c.Collect(skip(in src,i));
             
-            var avg = mathspan.avg(data);
-            var min = mathspan.min(data.ReadOnly());
-            var max = mathspan.max(data.ReadOnly());
+            var avg = gspan.avg(data);
+            var min = gspan.min(data.ReadOnly());
+            var max = gspan.max(data.ReadOnly());
 
             Claim.eq(min, c.Min);
             Claim.eq(max, c.Max);
@@ -87,11 +87,11 @@ namespace Z0
             for(var i=0; i<data.Length; i++)
                 c.Collect(skip(in src,i));
             
-            var msAvg = mathspan.avg(data);
-            var min = mathspan.min(data.ReadOnly());
-            var max = mathspan.max(data.ReadOnly());
+            var msAvg = gspan.avg(data);
+            var min = gspan.min(data.ReadOnly());
+            var max = gspan.max(data.ReadOnly());
             
-            var usAvg1 = mathspan.avgz(data);
+            var usAvg1 = gspan.avgz(data);
             var usAvg2 = avg(data);
             Notify($"{usAvg1} vs {usAvg2}");
 
@@ -111,11 +111,11 @@ namespace Z0
             for(var i=0; i<data.Length; i++)
                 c.Collect(skip(in src,i));
             
-            var msAvg = mathspan.avg(data);
-            var min = mathspan.min(data.ReadOnly());
-            var max = mathspan.max(data.ReadOnly());
+            var msAvg = gspan.avg(data);
+            var min = gspan.min(data.ReadOnly());
+            var max = gspan.max(data.ReadOnly());
             
-            var usAvg1 = mathspan.avgz(data);
+            var usAvg1 = gspan.avgz(data);
             var usAvg2 = avg(data);
             Notify($"{usAvg1} vs {usAvg2}");
 
@@ -135,9 +135,9 @@ namespace Z0
             for(var i=0; i<data.Length; i++)
                 c.Collect(skip(in src,i));
             
-            var msAvg = mathspan.avg(data);
-            var min = mathspan.min(data.ReadOnly());
-            var max = mathspan.max(data.ReadOnly());
+            var msAvg = gspan.avg(data);
+            var min = gspan.min(data.ReadOnly());
+            var max = gspan.max(data.ReadOnly());
 
             Claim.eq(min, c.Min);
             Claim.eq(max, c.Max);

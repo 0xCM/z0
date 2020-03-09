@@ -15,6 +15,7 @@ namespace Z0.Asm
         {
             public static ExtractsParsed Empty => new ExtractsParsed(ApiHostUri.Empty, new ParsedExtract[]{});
 
+            [MethodImpl(Inline)]
             public ExtractsParsed(ApiHostUri host, ParsedExtract[] functions)
             {
                 this.Host = host;

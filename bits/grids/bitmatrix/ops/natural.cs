@@ -150,7 +150,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            mathspan.and(A.Data, B.Data, C.Data);
+            gspan.and(A.Data, B.Data, C.Data);
             return ref C;
         }
 
@@ -166,5 +166,28 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => and(A, B, alloc<N,T>());
+
+
+        [MethodImpl(Inline)]
+        public static ref BitMatrix<N,T> xor<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> C)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            gspan.xor(A.Data, B.Data, C.Data);
+            return ref C;
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between two square bitmatrices of common order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> xor<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var C = alloc<N,T>();
+            return xor(in A, in B, ref C);
+        }
+
     }
 }

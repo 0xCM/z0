@@ -14,12 +14,29 @@ namespace Z0
         
     public interface IHostedMember
     {
+        /// <summary>
+        /// The globally-unique host uri
+        /// </summary>
         ApiHostUri Host {get;}
 
+        /// <summary>
+        /// The host-relative operation identifier
+        /// </summary>
         OpIdentity Id {get;}
 
+        /// <summary>
+        /// The hosted method
+        /// </summary>
         MethodInfo Method {get;}
 
+        /// <summary>
+        /// The method's kind identifier if it exists
+        /// </summary>
+        OpKindId? KindId {get;}
+
+        /// <summary>
+        /// The globally-unique operation uri
+        /// </summary>
         OpUri Uri
             => OpUri.Hex(Host, Method.Name, Id);        
     }        

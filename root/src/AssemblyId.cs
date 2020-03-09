@@ -37,7 +37,7 @@ namespace Z0
 
         GMathTest = GMath | Test,
 
-        GMathSvc = GMath | Svc,
+        MathSvc = GMath | Svc,
 
         Intrinsics = 70,
 

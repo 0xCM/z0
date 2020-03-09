@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Resolutions
 {
-    public sealed class GMathSvc : AssemblyResolution<GMathSvc, GMathSvc.C>
+    public sealed class MathServices : AssemblyResolution<MathServices, MathServices.C>
     {        
-        public GMathSvc() : base(AssemblyId.GMathSvc) {}
+        public const string SvcCollectionName = "math.services";                
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.GMathSvc) {} }    
+        public MathServices() : base(AssemblyId.MathSvc) {}
+
+        public class C : OpCatalog<C> { public C() : base(AssemblyId.MathSvc) {} }    
     }
 }

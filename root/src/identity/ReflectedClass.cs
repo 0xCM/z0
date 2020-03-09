@@ -174,5 +174,12 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsTernaryPredicate(this MethodInfo m)        
             => m.IsTernaryFunction() && m.IsPredicate();
+
+        /// <summary>
+        /// Returns the source method's kind identifier if it exists
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static OpKindId? KindId(this MethodInfo m)
+            => m.Tag<SpecificOpAttribute>().MapValueOrNull(a => a.KindId);
     }
 }

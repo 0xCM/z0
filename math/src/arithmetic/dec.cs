@@ -15,7 +15,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dec]
         public static sbyte dec(sbyte src)
             => --src;
 
@@ -23,7 +23,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dec]
         public static byte dec(byte src)
             => --src;
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dec]
         public static short dec(short src)
             => --src;
 
@@ -39,7 +39,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dec]
         public static ushort dec(ushort src)
             => --src;
 
@@ -47,7 +47,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dec]
         public static int dec(int src)
             => --src;
 
@@ -55,7 +55,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dec]
         public static uint dec(uint src)
             => --src;
 
@@ -63,7 +63,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dec]
         public static long dec(long src)
             => --src;
 
@@ -71,7 +71,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dec]
         public static ulong dec(ulong src)
             => --src;
     }

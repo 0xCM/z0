@@ -15,7 +15,7 @@ namespace Z0
         /// Negates the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static sbyte negate(sbyte src)
             => (sbyte)(- src);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static byte negate(byte src)
             => (byte)(~src + 1);
      
@@ -33,7 +33,7 @@ namespace Z0
         /// Negates the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static short negate(short src)
             => (short)(- src);
 
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static ushort negate(ushort src)
             => (ushort)(~src + 1);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// Negates the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static int negate(int src)
             => -src;
 
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static uint negate(uint src)
             => ~src + 1;
 
@@ -67,7 +67,7 @@ namespace Z0
         /// Negates the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static long negate(long src)
             => -src;
 
@@ -76,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static ulong negate(ulong src)
             => ~src + 1;
 
@@ -84,7 +84,7 @@ namespace Z0
         /// Negates the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static float negate(float src)
             => -src;
 
@@ -92,7 +92,7 @@ namespace Z0
         /// Negates the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Negate]
         public static double negate(double src)
             => -src;
    }

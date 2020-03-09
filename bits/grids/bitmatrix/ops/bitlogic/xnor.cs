@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor, NumericClosures(NumericKind.UnsignedInts)]
         public static ref BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static ref BitMatrix8 xnor(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
              BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static BitMatrix4 xnor(in BitMatrix4 A, in BitMatrix4 B)
         {
             var a = (ushort)A;
@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static BitMatrix8 xnor(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static ref BitMatrix16 xnor(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -99,7 +99,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static BitMatrix16 xnor(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static ref BitMatrix32 xnor(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -125,7 +125,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static BitMatrix32 xnor(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static ref BitMatrix64 xnor(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -151,7 +151,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Xnor]
         public static BitMatrix64 xnor(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);

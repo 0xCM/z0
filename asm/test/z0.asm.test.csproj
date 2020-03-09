@@ -10,6 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/svc/z0.gmath.svc.csproj" />
+
     <ProjectReference Include="$(TopDir)intrinsics/svc/z0.intrinsics.svc.csproj" />
     <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />

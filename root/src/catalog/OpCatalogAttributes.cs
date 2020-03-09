@@ -46,6 +46,21 @@ namespace Z0
         public override string ToString()
             => Name;
     }
+
+    public abstract class SpecificOpAttribute : OpAttribute
+    {
+        protected SpecificOpAttribute(object kind) 
+            : base(false) 
+        {
+
+            KindId = (OpKindId)kind;
+        }
+
+        public OpKindId KindId {get;}
+    }
+    
+
+
     /// <summary>
     /// Identifies a parameter that accepts an immediate shift count
     /// </summary>

@@ -16,11 +16,11 @@ namespace Z0.OpCodes
     public static class gxops
     {    
         public static uint bl_and32(uint a, uint b)
-            => GX.bitlogic<uint>().and(a,b);
+            => MathSvcFactory.bitlogic<uint>().and(a,b);
 
         public static uint logic_machine(uint a, uint b)
         {
-            var m = LogicMachine.Create(GX.bitlogic<uint>(),z32);
+            var m = LogicMachine.Create(MathSvcFactory.bitlogic<uint>(),z32);
             return m.xor(m.and(a,b),b);
         }
 
@@ -37,10 +37,10 @@ namespace Z0.OpCodes
             => gmath.eq(a,b);
 
         public static bit eq_o16u(ushort a, ushort b)
-            => GX.eq<ushort>().Invoke(a,b);
+            => MathSvcFactory.eq<ushort>().Invoke(a,b);
 
         public static string eq_moniker()
-            => GX.eq<ushort>().Id;
+            => MathSvcFactory.eq<ushort>().Id;
                      
         const string name = "thename";
 

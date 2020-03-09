@@ -34,7 +34,7 @@ namespace Z0
         void add_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.add(t);
+            var g = MathSvcFactory.add(t);
             var validator = this.BinaryValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
@@ -60,7 +60,7 @@ namespace Z0
         void sub_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.sub(t);
+            var g = MathSvcFactory.sub(t);
             var validator = this.BinaryValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
@@ -86,7 +86,7 @@ namespace Z0
         void mul_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.mul(t);
+            var g = MathSvcFactory.mul(t);
             var validator = this.BinaryValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
@@ -112,7 +112,7 @@ namespace Z0
         void div_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.div(t);
+            var g = MathSvcFactory.div(t);
             var validator = this.BinaryValidator(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
@@ -138,7 +138,7 @@ namespace Z0
         void mod_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.mod(t);
+            var g = MathSvcFactory.mod(t);
             var validator = this.BinaryValidator(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
@@ -164,7 +164,7 @@ namespace Z0
         void modmul_check<T>(TernaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.modmul(t);
+            var g = MathSvcFactory.modmul(t);
             var validator = this.TernaryValidator(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
@@ -190,7 +190,7 @@ namespace Z0
         void clamp_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.clamp(t);
+            var g = MathSvcFactory.clamp(t);
             var validator = this.BinaryValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
@@ -216,7 +216,7 @@ namespace Z0
         void inc_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.inc(t);
+            var g = MathSvcFactory.inc(t);
             var validator = this.UnaryValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);            
@@ -242,7 +242,7 @@ namespace Z0
         void dec_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.dec(t);
+            var g = MathSvcFactory.dec(t);
             var validator = this.UnaryValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);            
@@ -268,7 +268,7 @@ namespace Z0
         void negate_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.negate(t);
+            var g = MathSvcFactory.negate(t);
             var validator = this.UnaryValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);            
@@ -290,7 +290,7 @@ namespace Z0
         void abs_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = GX.abs(t);
+            var g = MathSvcFactory.abs(t);
             var validator = this.UnaryValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);            

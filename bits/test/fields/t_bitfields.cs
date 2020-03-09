@@ -237,8 +237,8 @@ namespace Z0
                 var expect = gbits.bitslice(src,0, spec.TotalWidth);
 
                 bf.Read(src, dst);
-                mathspan.sllv(dst, positions, tmp);
-                var result1 = mathspan.or(tmp.ReadOnly());
+                gspan.sllv(dst, positions, tmp);
+                var result1 = gspan.or(tmp.ReadOnly());
                                 
                 var result2 = 0ul;
                 for(byte j=0; j<spec.FieldCount; j++)
