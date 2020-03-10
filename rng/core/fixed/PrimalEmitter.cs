@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     
-    public readonly struct PrimalEmitter<T> : IEmitter<T>
+    public readonly struct NumericEmitter<T> : IEmitter<T>
         where T : unmanaged
     {
         public const string Name = "random";
@@ -19,7 +19,7 @@ namespace Z0
         public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
         [MethodImpl(Inline)]
-        public PrimalEmitter(IPolyrand random)            
+        public NumericEmitter(IPolyrand random)            
             => this.Random = random;
         
         [MethodImpl(Inline)]

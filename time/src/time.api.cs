@@ -27,5 +27,12 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Stopwatch stopwatch(bool start = true) 
             => start ? Stopwatch.StartNew() : new Stopwatch();
+
+        /// <summary>
+        /// Allocates and optionally starts a system counter
+        /// </summary>
+        [MethodImpl(Inline)]   
+        public static SystemCounter counter(bool start = false) 
+            => SystemCounter.Create(start);
     }
 }

@@ -26,4 +26,18 @@ namespace Z0
     {   
            
     }
+
+    public readonly struct RngContext<R> : IRngContext, IRootedContext<R>
+        where R : IContext
+    {
+        public R Root {get;}
+
+        public IPolyrand Random {get;}
+
+        public RngContext(R root, IPolyrand rng)
+        {
+            this.Root = root;
+            this.Random = rng;
+        }
+    }
 }

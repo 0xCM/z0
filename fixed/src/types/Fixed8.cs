@@ -42,16 +42,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Fixed8 From(byte src)
+            => new Fixed8(src);
+
+        [MethodImpl(Inline)]
+        public static Fixed8 From(sbyte src)
+            => new Fixed8((byte)src);
+
+        [MethodImpl(Inline)]
+        public static Fixed8 From(int src)
+            => new Fixed8((byte)(sbyte)src);
+
+        [MethodImpl(Inline)]
+        public static Fixed8 From(uint src)
+            => new Fixed8((byte)src);
+
+        [MethodImpl(Inline)]
         Fixed8(byte x0)
             => X0 = x0;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed8(byte x0)
-            => new Fixed8(x0);
+            => From(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed8(sbyte x0)
-            => new Fixed8((byte)x0);
+            => From(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed8(int x)

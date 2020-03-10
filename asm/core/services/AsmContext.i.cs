@@ -28,4 +28,10 @@ namespace Z0
         /// <param name="config">The new formatting configuration</param>
         IAsmContext WithFormat(AsmFormatConfig config);  
     }
+
+    public interface IAsmContext<D> : IRootContext<IAsmContext, D>
+        where D : IRootedContext<IAsmContext>
+    {
+        
+    }
 }

@@ -9,7 +9,7 @@ namespace Z0
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public abstract class t_asm_explicit<E> : UnitTest<E>, IExplicitTest
+    public abstract class t_asm_explicit<E> : t_asm<E>, IExplicitTest
         where E : t_asm_explicit<E>
     {
         protected new IAsmContext Context;
@@ -33,8 +33,6 @@ namespace Z0
 
         protected abstract void OnExecute(in AsmBuffers buffers);
 
-        protected AsmFormatConfig DefaultAsmFormat
-            => AsmFormatConfig.New.WithoutFunctionTimestamp();
 
         protected static IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
         {

@@ -45,16 +45,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Fixed32 From(uint src)
+            => new Fixed32(src);
+
+        [MethodImpl(Inline)]
+        public static Fixed32 From(int src)
+            => new Fixed32((uint)src);
+
+        [MethodImpl(Inline)]
         Fixed32(uint x0)
             => X0 = x0;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed32(uint x0)
-            => new Fixed32(x0);
+            => From(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed32(int x0)
-            => new Fixed32((uint)x0);
+            => From(x0);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed32 x)

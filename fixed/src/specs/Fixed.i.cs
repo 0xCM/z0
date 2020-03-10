@@ -45,5 +45,4 @@ namespace Z0
             get => bitsize<C>();
         }
     }
-
 }

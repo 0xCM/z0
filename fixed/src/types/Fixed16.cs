@@ -39,26 +39,42 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (FixedWidth)BitWidth;
         }
-        
+
+        [MethodImpl(Inline)]
+        public static Fixed16 From(ushort src)
+            => new Fixed16(src);
+
+        [MethodImpl(Inline)]
+        public static Fixed16 From(short src)
+            => new Fixed16((ushort)src);
+
+        [MethodImpl(Inline)]
+        public static Fixed16 From(int src)
+            => new Fixed16((ushort)(short)src);
+
+        [MethodImpl(Inline)]
+        public static Fixed16 From(uint src)
+            => new Fixed16((ushort)src);
+
         [MethodImpl(Inline)]
         Fixed16(ushort x)
             => X0 = x;
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(ushort x)
-            => new Fixed16(x);
+            => From(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(short x)
-            => new Fixed16((ushort)x);
+            => From(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(int x)
-            => new Fixed16((ushort)((short)x));
+            => From(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed16(uint x)
-            => new Fixed16((ushort)x);
+            => From(x);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed16 x)

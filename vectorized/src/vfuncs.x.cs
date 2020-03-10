@@ -80,7 +80,6 @@ namespace Z0
         {
             var zf = f(Unsafe.As<Vector512<T>,Fixed512>(ref x), Unsafe.As<Vector512<T>,Fixed512>(ref y));
             return Unsafe.As<Fixed512,Vector512<T>>(ref zf);
-        }
-               
+        }              
     }
 }

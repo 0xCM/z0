@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Security;
-    using System.Runtime.Intrinsics;
 
     /// <summary>
     /// Chracterizes an operation that produces a value that does not depend on arguments
@@ -17,22 +16,4 @@ namespace Z0
     {
         
     }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IFixedEmitter : IFunc
-    {
-        NumericKind SegmentKind {get;}
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IFixedEmitter<F,T> : IEmitter<F>, IFixedEmitter
-        where F : unmanaged, IFixed
-        where T : unmanaged
-    {
-        FunctionClass IFunc.Class => FunctionClass.Emitter | FunctionClass.Fixed;
-
-        NumericKind IFixedEmitter.SegmentKind => typeof(T).NumericKind();
-    }
-
-
 }

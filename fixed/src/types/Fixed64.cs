@@ -41,20 +41,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Fixed64 From(int src)
+            => new Fixed64((ulong)(long)src);
+
+        [MethodImpl(Inline)]
+        public static Fixed64 From(ulong src)
+            => new Fixed64(src);
+
+        [MethodImpl(Inline)]
+        public static Fixed64 From(long src)
+            => new Fixed64((ulong)src);
+
+        [MethodImpl(Inline)]
         Fixed64(ulong x0)
             => X0 = x0;
         
         [MethodImpl(Inline)]
         public static implicit operator Fixed64(int x0)
-            => new Fixed64((ulong)(long)x0);
+            => From(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed64(long x0)
-            => new Fixed64((ulong)x0);
+            => From(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed64(ulong x0)
-            => new Fixed64(x0);
+            => From(x0);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Fixed64 x)

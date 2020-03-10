@@ -6,23 +6,31 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
-    using System.Runtime.CompilerServices;
 
     using static Root;
     using static Nats;
+    using static time;
 
-    public abstract class t_asm<U> : UnitTest<U>
-        where U : t_asm<U>
+    public class AsmChecks : IAsmService
     {
-        protected new IAsmContext Context;
+        public IAsmContext Context {get;set;}
         
-        public t_asm()
-        {
-            Context = AsmContext.Rooted(this, DefaultComposition.Create());
-        }
+        IPolyrand Random ;
+        
+        int RepCount;
 
+        public static AsmChecks Create(IAsmContext context, IPolyrand random)
+            => new AsmChecks(context, random);
+
+        AsmChecks(IAsmContext context, IPolyrand random)
+        {
+            this.Context = context;
+            this.RepCount = 128;
+            this.Random = random;
+        }
 
         protected string Math
             => nameof(math);
@@ -34,14 +42,14 @@ namespace Z0
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="id">Moniker that identifies the operation under test</param>
-        new string CaseName(OpIdentity id)
+        string CaseName(OpIdentity id)
             => TestIdentity.testcase(GetType(),id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
-        new string CaseName(string fullname)
+        string CaseName(string fullname)
             => TestIdentity.testcase(GetType(), fullname);
 
         protected OpIdentity TestOpName<T>(string basename, T t = default)
@@ -148,7 +156,7 @@ namespace Z0
         {
             var archive = Context.CodeArchive(catalog,host);
             var id = NaturalIdentity.contracted(opname, w, Numeric.kind<T>());
-            Trace($"{id}");
+            Context.Notify($"{id}");
             var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)
                 Claim.failwith($"Could not find {id} in the archive at {archive.RootFolder}");
@@ -173,6 +181,7 @@ namespace Z0
 
             return CheckAction(check, CaseName($"{fId}~/~{gId}"));                   
         }
+
 
         protected TestCaseRecord CheckMatch<T>(in AsmBuffers buffers, BinaryOp<Vector256<T>> f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
             where T : unmanaged

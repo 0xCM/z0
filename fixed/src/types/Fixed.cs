@@ -37,6 +37,5 @@ namespace Z0
             this.CellCount = BitCount/CellWidth;
             this.Sign = sign;
         }
-
     }
 }
