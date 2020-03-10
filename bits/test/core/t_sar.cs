@@ -85,11 +85,11 @@ namespace Z0
 
             var signed = Numeric.signed<T>();
             BitSize bitsize = bitsize<T>();
-            var bs10 = BitString.parse("1" + repeat('0', bitsize - 1).Concat());
+            var bs10 = BitString.parse("1" + Arrays.replicate('0', bitsize - 1).Concat());
             var x10 = bs10.TakeScalar<T>();
-            var bs11 = BitString.parse("11" + repeat('0', bitsize - 2).Concat());
+            var bs11 = BitString.parse("11" + Arrays.replicate('0', bitsize - 2).Concat());
             var x11 = bs11.TakeScalar<T>();
-            var bs01 = BitString.parse("01" + repeat('0', bitsize - 2).Concat());
+            var bs01 = BitString.parse("01" + Arrays.replicate('0', bitsize - 2).Concat());
             var x01 = bs01.TakeScalar<T>();
             var y = gmath.sar(x10, 1);
             if(signed)

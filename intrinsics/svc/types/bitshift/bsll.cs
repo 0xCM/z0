@@ -33,7 +33,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, byte count, in Block128<T> c)            
-                => ref vblocks.vbsll(a,count,c);            
+                => ref gblocks.bsll(a,count,c);            
         }
 
         public readonly struct Bsll256<T> : IVShiftOp256<T>, IImm8V256UnaryResolver<T>, IUnaryBlockedOp256Imm8<T>
@@ -56,7 +56,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, byte count, in Block256<T> c)            
-                => ref vblocks.vbsll(a,count,c);
+                => ref gblocks.bsll(a,count,c);
         }    
     }
 }

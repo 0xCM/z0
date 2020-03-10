@@ -9,39 +9,32 @@ namespace Z0
     
     using static Root;
 
-    public enum ReceiverKind : ulong
+    using static ArityClass;
+    using static ExchangeClass;
+
+    public enum ReceiverClass : ulong
     { 
         None = 0,
 
         /// <summary>
         /// An operation that accepts no arguments and has a void return type
         /// </summary>
-        Sink0 = Pow2.T00,
+        Sink0 = Nullary | Receiver,
 
        /// <summary>
        /// An operation that accepts one argument and has a void return type
        /// </summary>
-        Sink1 = Pow2.T01,
+        Sink1 = Unary | Receiver,
 
        /// <summary>
        /// An operation that accepts two arguments and has a void return type
        /// </summary>
-        Sink2 = Pow2.T02,
+        Sink2 = Binary | Receiver,
 
        /// <summary>
        /// An operation that accepts three arguments and has a void return type
        /// </summary>
-        Sink3 = Pow2.T03,
-
-       /// <summary>
-       /// An operation that accepts four arguments and has a void return type
-       /// </summary>
-        Sink4 = Pow2.T04,
-
-       /// <summary>
-       /// An operation that accepts five arguments and has a void return type
-       /// </summary>
-        Sink5 = Pow2.T05,
+        Sink3 = Ternary | Receiver,
         
         /// <summary>
         /// A synonym for Sink0

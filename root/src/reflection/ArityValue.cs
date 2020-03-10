@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Classifies function/receiver arities
     /// </summary>
-    public enum ArityKind : byte
+    public enum ArityValue : byte
     {       
         /// <summary>
         /// Classifies an operator with no arguments

@@ -18,11 +18,16 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IEnumerable<T> Intersperse<T>(this IEnumerable<T> src, T x)
         {
-            foreach(var item in src)
+            var items = src.ToArray();
+            var count = items.Length;
+            var last = count - 1;
+            for(var i=0; i<count; i++)
             {
-                yield return item;
-                yield return x;
+                yield return items[i];
+                if(i != last)
+                    yield return x;
             }
+
         }
 
         /// <summary>

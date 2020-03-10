@@ -9,6 +9,7 @@ namespace Z0
     
     using static Root;
     using static OpKindId;
+    
     using Id = OpKindId;
 
     using A = OpKindAttribute;

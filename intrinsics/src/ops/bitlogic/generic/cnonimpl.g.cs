@@ -10,33 +10,43 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static Nats;
     using static gvec;
     using static As;
     
     partial class ginx
     {
         /// <summary>
-        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for vectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), NonImpl, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vcnonimpl<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vcnonimpl_u(x,y);
 
         /// <summary>
-        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for vectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), NonImpl, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vcnonimpl<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vcnonimpl_u(x,y);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for vectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline), NonImpl, NumericClosures(NumericKind.Integers)]
+        public static Vector512<T> vcnonimpl<T>(in Vector512<T> x, in Vector512<T> y)
+            where T : unmanaged
+                => (vcnonimpl(x.Lo,y.Lo), (vcnonimpl(x.Hi, y.Hi)));
 
         [MethodImpl(Inline)]
         static Vector128<T> vcnonimpl_u<T>(Vector128<T> x, Vector128<T> y)

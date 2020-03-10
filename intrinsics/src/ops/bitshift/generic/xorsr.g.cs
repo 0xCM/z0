@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The amount by which to shift each component</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), XorSr, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vxorsr<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The amount by which to shift each component</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), XorSr, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vxorsr<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {

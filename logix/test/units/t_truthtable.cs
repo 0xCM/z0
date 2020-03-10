@@ -23,7 +23,7 @@ namespace Z0.Logix
             using var dst = writer(FileName.Define("UnaryTruth.txt"));
             var ops = LogicOpApi.UnaryOpKinds;
             TruthTables.emit(dst,ops);
-            TruthTables.emit(dst,ArityKind.Unary);
+            TruthTables.emit(dst,ArityValue.Unary);
         }
 
         public void binary_truth_emit()
@@ -31,7 +31,7 @@ namespace Z0.Logix
             using var dst = writer(FileName.Define("BinaryTruth.txt"));
             var ops = LogicOpApi.BinaryOpKinds;
             TruthTables.emit(dst,ops);
-            TruthTables.emit(dst,ArityKind.Binary);
+            TruthTables.emit(dst,ArityValue.Binary);
         }
 
         public void ternary_truth_emit()
@@ -39,7 +39,7 @@ namespace Z0.Logix
             using var dst = writer(FileName.Define("TernaryTruth.txt"));
             var ops = LogicOpApi.TernaryOpKinds;
             TruthTables.emit(dst,ops);
-            TruthTables.emit(dst,ArityKind.Ternary);
+            TruthTables.emit(dst,ArityValue.Ternary);
         }
 
         public void unary_sig_check()

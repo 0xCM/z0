@@ -13,7 +13,7 @@ namespace Z0
     {
         NumericKind ImmKind => NumericKind.None;
 
-        ArityKind ResolvedArity => ArityKind.Nullary;
+        ArityValue ResolvedArity => ArityValue.Nullary;
 
         FixedWidth OperandWidth => FixedWidth.None;
 

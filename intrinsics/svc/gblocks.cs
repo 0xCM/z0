@@ -4,9 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
 
-    partial class VSvcFactories
+    [ApiHost(ApiHostKind.Generic)]
+    public static partial class gblocks
     {
 
+
     }
+
 }

@@ -20,21 +20,21 @@ namespace Z0
         where V : struct
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.Vectorized;
+        FunctionClass IFunc.Class => FunctionClass.Emitter | FunctionClass.Vectorized;
     }
 
     [SuppressUnmanagedCodeSecurity]
     public interface IVEmitter128<T> : IVEmitter<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.V128;
+        FunctionClass IFunc.Class => FunctionClass.Emitter | FunctionClass.V128;
     }
 
     [SuppressUnmanagedCodeSecurity]
     public interface IVEmitter256<T> : IVEmitter<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.V256;
+        FunctionClass IFunc.Class => FunctionClass.Emitter | FunctionClass.V256;
     }    
 
 }

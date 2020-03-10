@@ -34,7 +34,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryOpImm8<A> : IFunc<A,byte,A>
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryImm;
+        FunctionClass IFunc.Class => FunctionClass.BinaryImm;
     }
 
 
@@ -45,6 +45,6 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryOpImm8x2<A> : IFunc<A,byte,byte,A>
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryImm;
+        FunctionClass IFunc.Class => FunctionClass.TernaryImm;
     }
 }

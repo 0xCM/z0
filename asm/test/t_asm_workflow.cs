@@ -21,6 +21,13 @@ namespace Z0.Asm
 
     }
 
+    public enum OverwriteOption
+    {
+        Overwrite = 0,
+
+        Append = 1
+    }
+
     public enum WorkflowLogKind
     {
         None = 0,
@@ -46,11 +53,11 @@ namespace Z0.Asm
 
         RootEmissionPaths Root {get;}
 
-        ILogDevice OpenLog(WorkflowLogKind kind, string discriminator = null, bool append = false, FileExtension ext = null, bool display = false)
+        ILogDevice OpenLog(WorkflowLogKind kind, string name = null, FileExtension ext = null, OverwriteOption? overwrite = null,  bool display = false)
         {
-            var prefix = (discriminator == null ? string.Empty : text.dot() + discriminator);
-            var devname = prefix + kind.ToString();            
+            var devname = name  ?? kind.ToString();            
             var target = Root.LogDir + FileName.Define(devname, ext ?? FileExtensions.Log);
+            var append = (overwrite ?? OverwriteOption.Overwrite) == OverwriteOption.Append;
             return Context.OpenLogDevice(target, devname, append, display);
         }
 
@@ -190,24 +197,40 @@ namespace Z0.Asm
             }
         }
 
+        IEnumerable<LocatedMember> KindedOperators(IEnumerable<LocatedMember> src, int? arity = null)
+            => from located in src
+                let m = located.Method
+                let id = m.KindId()
+                where id.HasValue && m.IsOperator() && (arity != null ? m.Arity() == arity : true)
+                select located;
+
+        IEnumerable<LocatedMember> KindedNumericOperators(IEnumerable<LocatedMember> src, int arity)
+            => from located in src
+                let m = located.Method
+                let id = m.KindId()
+                where id.HasValue && m.IsNumericOperator(arity)
+                select located;
+
         void Analyze(in ApiHostUri host, ReadOnlySpan<LocatedMember> src)
         {
             var index = src.ToOpIndex();
             foreach(var key in index.DuplicateKeys)
                 NotifyConsole(DuplicateWarning(host,key));
 
-            var kinded = (from member in src.ToEnumerable()
-                         let kind = member.Method.KindId()
-                         where kind.HasValue
-                         select (member.Uri, member.Method, kind.Value)).ToArray();
+            var kinded = (from located in KindedOperators(src.ToEnumerable())
+                         let m = located.Method
+                         let id = m.KindId().Value
+                         let c = TypedOperatorClass.Infer(m)
+                         select (located.Uri, m, c,  id)).ToArray();
+
 
             var messages = list<AppMsg>(kinded.Length);        
-            foreach(var (uri,method,kind) in kinded)
-                messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString()), AppMsgKind.Info));
+            foreach(var (uri,method,oc,kind) in kinded)
+                messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
 
             if(messages.Count != 0)
             {
-                using var log = OpenLog(WorkflowLogKind.IdentifiedKind, append:true, ext:FileExtensions.Csv);  
+                using var log = OpenLog(WorkflowLogKind.IdentifiedKind, "numeric-binary-ops", FileExtensions.Csv, OverwriteOption.Append);
                 log.Write(messages.ToArray());
             }
         }

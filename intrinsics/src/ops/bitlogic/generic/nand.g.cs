@@ -17,49 +17,33 @@ namespace Z0
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
         /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline), Nand, NumericClosures(NumericKind.All)]
         public static Vector128<T> vnand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vnand_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vnand_i(x,y);
-            else 
-                return vnand_f(x,y);
-        }
+                => vnand_u(x,y);
+
+        /// <summary>
+        /// Computes ~(x & y) for vectors x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline), Nand, NumericClosures(NumericKind.All)]        
+        public static Vector256<T> vnand<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => vnand_u(x,y);
 
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Vector256<T> vnand<T>(Vector256<T> x, Vector256<T> y)
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline), Nand, NumericClosures(NumericKind.All)]
+        public static Vector512<T> vnand<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vnand_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vnand_i(x,y);
-            else 
-                return vnand_f(x,y);
-        }
-
+                => (vnand(x.Lo,y.Lo), (vnand(x.Hi, y.Hi)));
 
         [MethodImpl(Inline)]
         static Vector128<T> vnand_u<T>(Vector128<T> x, Vector128<T> y)
@@ -71,8 +55,10 @@ namespace Z0
                 return generic<T>(dinx.vnand(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vnand(v32u(x), v32u(y)));
-            else
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vnand(v64u(x), v64u(y)));
+            else
+                return vnand_i(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -85,18 +71,8 @@ namespace Z0
                 return generic<T>(dinx.vnand(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vnand(v32i(x), v32i(y)));
-            else
+            else if(typeof(T) == typeof(long))            
                 return generic<T>(dinx.vnand(v64i(x), v64i(y)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector128<T> vnand_f<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vnand(v32f(x), v32f(y)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vnand(v64f(x), v64f(y)));
             else
                 throw unsupported<T>();
         }
@@ -111,8 +87,10 @@ namespace Z0
                 return generic<T>(dinx.vnand(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vnand(v32u(x), v32u(y)));
-            else
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vnand(v64u(x), v64u(y)));
+            else
+                return vnand_i(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -125,18 +103,8 @@ namespace Z0
                 return generic<T>(dinx.vnand(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vnand(v32i(x), v32i(y)));
-            else
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dinx.vnand(v64i(x), v64i(y)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector256<T> vnand_f<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vnand(v32f(x), v32f(y)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vnand(v64f(x), v64f(y)));
             else
                 throw unsupported<T>();
         }

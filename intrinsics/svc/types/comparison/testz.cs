@@ -32,7 +32,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(in Block128<T> x, in Block128<T> y, Span<bit> dst) 
-                => vblocks.vtestz(x,y,dst);
+                => gblocks.vtestz(x,y,dst);
         }
 
         [NumericClosures(NumericKind.All)]
@@ -55,7 +55,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(in Block256<T> x, in Block256<T> y, Span<bit> dst) 
-                => vblocks.vtestz(x,y,dst);
+                => gblocks.vtestz(x,y,dst);
 
         }
    }

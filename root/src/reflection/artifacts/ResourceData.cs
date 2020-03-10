@@ -61,11 +61,20 @@ namespace Z0
             return sb.ToString();
         }
         
+        /// <summary>
+        /// Creates a span of replicated characters 
+        /// </summary>
+        /// <param name="src">The character to replicate</param>
+        /// <param name="count">The replication count</param>
+        public static ReadOnlySpan<char> replicate(char src, int count)
+            => new string(src,count);
+
         public string GenAccessor(int offset = 0, int seglen = 8)
         {
             var src = Data;
             var dst = text.factory.Builder();
-            var linepad = AsciSym.Space.Replicate(offset + 4);
+
+            var linepad = replicate(AsciSym.Space,offset + 4);
             var margin = new string(' ',offset);
             dst.AppendLine(($"{margin}static ReadOnlySpan<byte> {PropName} => new byte[]"));
             dst.AppendLine(margin + "{");            

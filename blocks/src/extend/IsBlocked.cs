@@ -22,11 +22,5 @@ namespace Z0
         public static bool IsBlocked(this Type t)
             => BK.test(t);
 
-        /// <summary>
-        /// Determines whether a method accepts and/or returns at least one memory block parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBlocked(this MethodInfo m)
-            => m.Tagged<BlockedOpAttribute>();
     }
 }

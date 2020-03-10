@@ -29,7 +29,7 @@ namespace Z0
         where F : unmanaged, IFixed
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.Emitter | FunctionKind.Fixed;
+        FunctionClass IFunc.Class => FunctionClass.Emitter | FunctionClass.Fixed;
 
         NumericKind IFixedEmitter.SegmentKind => typeof(T).NumericKind();
     }

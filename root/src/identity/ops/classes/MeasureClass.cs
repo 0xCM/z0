@@ -8,24 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-
-    public enum MeasureKind : ulong
+    
+    using FC = FunctionClass;
+    
+    public enum MeasureClass : ulong
     {
         None = 0,
 
         /// <summary>
         /// Classifies a unary function that returns a numeric value
         /// </summary>
-        UnaryMeasure = FunctionKind.UnaryMeasure,
+        UnaryMeasure = FC.UnaryMeasure,
 
         /// <summary>
         /// Classifies a homogenous binary function that returns a numeric value
         /// </summary>
-        BinaryMeasure = FunctionKind.BinaryMeasure,
+        BinaryMeasure = FC.BinaryMeasure,
 
         /// <summary>
         /// Classifies a homogenous ternary function that returns a numeric value
         /// </summary>
-        TernaryMeasure = FunctionKind.TernaryMeasure,
+        TernaryMeasure = FC.TernaryMeasure,
     }
 }

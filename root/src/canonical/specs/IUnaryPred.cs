@@ -19,7 +19,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryPred<A> : IUnaryFunc<A,bit>
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred;        
+        FunctionClass IFunc.Class => FunctionClass.UnaryPred;        
     }
 
 

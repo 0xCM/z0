@@ -8,29 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static OpKindId;    
     
-    using A = OpKindAttribute;
+    using FC = FunctionClass;
 
-    public enum PredicateKind : ulong
+    public enum PredicateClass : ulong
     {
         None = 0,
        
         /// <summary>
         /// Classifies a function as a unary predicate
         /// </summary>        
-        UnaryPred = FunctionKind.UnaryPred,
+        UnaryPred = FC.UnaryPred,
 
         /// <summary>
         /// Classifies a function as a binary predicate
         /// </summary>        
-        BinaryPred = FunctionKind.BinaryPred,
+        BinaryPred = FC.BinaryPred,
 
        /// <summary>
        /// Classifies a function as a ternary predicate
        /// </summary>        
-       TernaryPred = FunctionKind.TernaryPred,   
+       TernaryPred = FC.TernaryPred,   
     }    
-
-    public sealed class PredAttribute : A { public PredAttribute() : base(Pred) {} }
 }

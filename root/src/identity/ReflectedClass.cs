@@ -92,6 +92,20 @@ namespace Z0
             && m.ParameterTypes().All(t => t.NumericKind() != NK.None);
 
         /// <summary>
+        /// Determines whether a method is a numeric operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsNumericOperator(this MethodInfo m)
+            => m.IsOperator()  && m.IsNumeric();
+
+        /// <summary>
+        /// Determines whether a method is a numeric operator with a specified arity
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsNumericOperator(this MethodInfo m, int arity)
+            => m.IsOperator()  && m.IsNumeric() && m.Arity() == arity;
+
+        /// <summary>
         /// Determines whether a method is a function accepts one or more arguments an returns a numeric or enum value
         /// </summary>
         /// <param name="m">The method to examine</param>
@@ -126,22 +140,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsTernaryMeasure(this MethodInfo m)
             => m.IsMeasure() && m.IsTernaryFunction();
-
-        /// <summary>
-        /// Assigns a measure classification, if any, to a method
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static MeasureKind MeasureKind(this MethodInfo m)
-        {
-            if(m.IsUnaryMeasure())
-                return Z0.MeasureKind.UnaryMeasure;
-            else if(m.IsBinaryMeasure())
-                return Z0.MeasureKind.BinaryMeasure;
-            else if(m.IsTernaryMeasure())
-                return Z0.MeasureKind.TernaryMeasure;
-            else
-                return Z0.MeasureKind.None;
-        }
 
         /// <summary>
         /// Determines whether a method defines a predicate that returns a bit or bool value
@@ -196,6 +194,76 @@ namespace Z0
         /// <param name="kind">The kind to match</param>
         public static IEnumerable<MethodInfo> WithIdentifiedKind(IEnumerable<MethodInfo> src, OpKindId kind)
             => from m in src where m.KindId() == kind select m;
-            
+
+        /// <summary>
+        /// Assigns a measure classification, if any, to a method
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static MeasureClass ClassifyMeasure(this MethodInfo m)
+        {
+            if(m.IsUnaryMeasure())
+                return MeasureClass.UnaryMeasure;
+            else if(m.IsBinaryMeasure())
+                return MeasureClass.BinaryMeasure;
+            else if(m.IsTernaryMeasure())
+                return MeasureClass.TernaryMeasure;
+            else
+                return MeasureClass.None;
+        }
+
+        /// <summary>
+        /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static OperatorClass ClassifyOperator(this MethodInfo m)
+        {
+            var isop = m.IsOperator();
+            if(isop)
+            {
+                return m.Arity() switch {
+                    1 => OperatorClass.UnaryOp,
+                    2 => OperatorClass.BinaryOp,
+                    3 => OperatorClass.TernaryOp,
+                    _ => OperatorClass.None
+
+                };
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static PredicateClass ClassifyPredicate(this MethodInfo m)
+        {
+            var ispred = m.IsPredicate();
+            if(ispred)
+            {
+                return m.Arity() switch {
+                    1 => PredicateClass.UnaryPred,
+                    2 => PredicateClass.BinaryPred,
+                    3 => PredicateClass.TernaryPred,
+                    _ => PredicateClass.None
+
+                };
+            }
+            return 0;
+        }          
+
+        /// <summary>
+        /// Selects numeric operators from the source stream
+        /// </summary>
+        /// <param name="src">The methods to filter</param>
+        public static IEnumerable<MethodInfo> NumericOperators(this IEnumerable<MethodInfo> src)
+            => src.Where(x => x.IsNumericOperator());
+
+        /// <summary>
+        /// Selects numeric operators with a specifed arity from the source stream
+        /// </summary>
+        /// <param name="src">The methods to filter</param>
+        public static IEnumerable<MethodInfo> NumericOperators(this IEnumerable<MethodInfo> src, int arity)
+            => src.Where(x => x.IsNumericOperator(arity));
+
     }
 }

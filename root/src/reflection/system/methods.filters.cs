@@ -26,15 +26,15 @@ namespace Z0
         /// Selects the conversion operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> ConversionOps(this IEnumerable<MethodInfo> src)
-            => src.Where(IsConversionOp);
+        public static IEnumerable<MethodInfo> ConversionOperators(this IEnumerable<MethodInfo> src)
+            => src.Where(IsConversionOperator);
 
         /// <summary>
         /// Reomoves any conversion operations from the stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> WithoutConversionOps(this IEnumerable<MethodInfo> src)
-            => src.Where(m => !m.IsConversionOp());
+        public static IEnumerable<MethodInfo> WithoutConversionOperators(this IEnumerable<MethodInfo> src)
+            => src.Where(m => !m.IsConversionOperator());
 
         /// <summary>
         /// Selects the abstract methods from a stream

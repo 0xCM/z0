@@ -13,6 +13,7 @@ namespace Z0
     using static Root;
     using static ReflectionFlags;
     
+
     partial class RootReflections
     {
         /// <summary>
@@ -50,7 +51,7 @@ namespace Z0
         /// Determines whether a method is an implict or explicit conversion operation
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool IsConversionOp(this MethodInfo m)
+        public static bool IsConversionOperator(this MethodInfo m)
             => m.IsExplicitConverter() || m.IsImplicitConverter();
 
         /// <summary>
@@ -88,7 +89,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ImmediateParameters(this MethodInfo m)
             => m.GetParameters().Where(p => p.Tagged<ImmAttribute>()).Select(p => p.ParameterType);
-
 
         /// <summary>
         /// Raises an error if the source method is any flavor of generic

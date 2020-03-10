@@ -22,18 +22,20 @@ namespace Z0
 
             public static Max128<T> Op => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id 
+                => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vmax(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) 
+                => ginx.vmax(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.max(a,b);
+            public T InvokeScalar(T a, T b) 
+                => gmath.max(a,b);
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
-                => ref vblocks.vmax(a,b,c);
-
+                => ref gblocks.max(a,b,c);
         }
 
         [NumericClosures(NumericKind.All)]
@@ -46,19 +48,20 @@ namespace Z0
 
             static N256 w => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id 
+                => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vmax(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) 
+                => ginx.vmax(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.max(a,b);
+            public T InvokeScalar(T a, T b) 
+                => gmath.max(a,b);
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
-                => ref vblocks.vmax(a,b,c);
-
+                => ref gblocks.max(a,b,c);
         }
-
     }
 }

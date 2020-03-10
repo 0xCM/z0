@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// Specifies the function kind classification
         /// </summary>
-        FunctionKind Kind => FunctionKind.None;       
+        FunctionClass Class => FunctionClass.None;       
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -37,7 +37,7 @@ namespace Z0
     {
         A Invoke();
 
-        FunctionKind IFunc.Kind => FunctionKind.Emitter;        
+        FunctionClass IFunc.Class => FunctionClass.Func0;        
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
     {
         B Invoke(A a);
 
-        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc;
+        FunctionClass IFunc.Class => FunctionClass.UnaryFunc;
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="c">The third operand</param>
         C Invoke(A a, B b);
 
-        FunctionKind IFunc.Kind => FunctionKind.BinaryFunc;
+        FunctionClass IFunc.Class => FunctionClass.BinaryFunc;
     }
 
     /// <summary>
@@ -91,6 +91,6 @@ namespace Z0
         /// <param name="c">The third operand</param>
         D Invoke(A a, B b, C c);
 
-        FunctionKind IFunc.Kind => FunctionKind.TernaryFunc;
+        FunctionClass IFunc.Class => FunctionClass.TernaryFunc;
     }
 }

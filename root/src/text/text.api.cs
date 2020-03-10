@@ -103,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The character to replicate</param>
         /// <param name="count">The replication count</param>
-        public static ReadOnlySpan<char> replicate(char src, int count)
+        public static IEnumerable<char> replicate(char src, int count)
             => new string(src,count);
 
         /// <summary>
@@ -199,6 +199,49 @@ namespace Z0
             var builder = factory.Builder();
             foreach(var item in content)
                 builder.AppendLine(item);
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Repeats a string a specified number of times
+        /// </summary>
+        /// <param name="src">The text content to replicate</param>
+        /// <param name="count">The number of copies to produce</param>
+        public static IEnumerable<string> replicate(string src, int count)
+        {
+            for(var i=0; i<count; i++)
+                yield return src;
+        }
+
+        /// <summary>
+        /// Creates a new string by weaving a specified character between each character in the source
+        /// </summary>
+        /// <param name="src">The source string</param>
+        /// <param name="c">The character to intersperse</param>
+        public static string intersperse(string src, char c)
+        {
+            var builder = text.factory.Builder();
+            foreach(var item in src)
+            {
+                builder.Append(item);
+                builder.Append(c);
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Creates a new string by weaving a substring between each character in the source
+        /// </summary>
+        /// <param name="src">The source string</param>
+        /// <param name="sep">The value to intersperse</param>
+        public static string intersperse(string src, string sep)
+        {
+            var builder = text.factory.Builder();
+            foreach(var item in src)
+            {
+                builder.Append(item);
+                builder.Append(sep);
+            }
             return builder.ToString();
         }
 

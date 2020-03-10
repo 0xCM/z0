@@ -36,7 +36,7 @@ namespace Z0.Asm
 
         Option<MemberLocationReport> LocationReport(AssemblyId src)
             => from a in Context.ResolvedAssembly(src)
-                let methods = a.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps()
+                let methods = a.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOperators()
                 select MemberLocationReport.Create(src, methods);
         void CreateLocationReport(AssemblyId id)
             => LocationReport(id).OnSome(report => report.Save());

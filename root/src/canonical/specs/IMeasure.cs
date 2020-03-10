@@ -23,7 +23,7 @@ namespace Z0
     public interface IUnaryMeasure<A,K> : IMeasure, IFunc<A,K>
         where K : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryMeasure;        
+        FunctionClass IFunc.Class => FunctionClass.UnaryMeasure;        
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
     public interface IBinaryMeasure<A,K> : IMeasure, IFunc<A,A,K>
         where K : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure;
+        FunctionClass IFunc.Class => FunctionClass.BinaryMeasure;
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
     public interface ITernaryMeasure<A,K> : IMeasure, IFunc<A,A,A,K>
         where K : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryMeasure;
+        FunctionClass IFunc.Class => FunctionClass.TernaryMeasure;
     }
 
 }

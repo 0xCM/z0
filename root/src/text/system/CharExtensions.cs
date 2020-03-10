@@ -15,15 +15,6 @@ namespace Z0
     public static partial class CharExtensions
     {
         /// <summary>
-        /// Creates a span of replicated characters 
-        /// </summary>
-        /// <param name="src">The character to replicate</param>
-        /// <param name="count">The replication count</param>
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> Replicate(this char src, int count)
-            => text.replicate(src,count);
-
-        /// <summary>
         /// Determines whether the source character is a decimal digit per the unicode standard
         /// </summary>
         /// <param name="c">The source character</param>
@@ -64,7 +55,5 @@ namespace Z0
             else
                 return '∅';                        
         }            
-
-
     }
 }

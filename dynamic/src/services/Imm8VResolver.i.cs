@@ -28,7 +28,7 @@ namespace Z0
 
         FixedWidth IImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
-        ArityKind IImmResolver.ResolvedArity => ArityKind.Unary;           
+        ArityValue IImmResolver.ResolvedArity => ArityValue.Unary;           
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -40,7 +40,7 @@ namespace Z0
 
         FixedWidth IImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
-        ArityKind IImmResolver.ResolvedArity => ArityKind.Binary;           
+        ArityValue IImmResolver.ResolvedArity => ArityValue.Binary;           
 
     }
 

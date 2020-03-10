@@ -140,14 +140,14 @@ namespace Z0.Logix
                 emit(kinds[i],dst);
         }
 
-        public static void emit(TextWriter dst, ArityKind arity)
+        public static void emit(TextWriter dst, ArityValue arity)
         {
             switch(arity)
             {
 
-                case ArityKind.Unary: emitUnary(dst); break;
-                case ArityKind.Binary: emitBinary(dst); break;
-                case ArityKind.Ternary: emitTernary(dst); break;
+                case ArityValue.Unary: emitUnary(dst); break;
+                case ArityValue.Binary: emitBinary(dst); break;
+                case ArityValue.Ternary: emitTernary(dst); break;
                 default: 
                     throw unsupported(arity);
             }

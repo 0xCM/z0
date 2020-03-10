@@ -32,7 +32,7 @@ namespace Z0
         where V : struct
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryOp | FunctionKind.Vectorized;
+        FunctionClass IFunc.Class => FunctionClass.BinaryOp | FunctionClass.Vectorized;
     }
 
     /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
     public interface IVBinOp128<T> : IVBinOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryOp | FunctionKind.V128;
+        FunctionClass IFunc.Class => FunctionClass.BinaryOp | FunctionClass.V128;
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
     public interface IVBinOp256<T> : IVBinOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryOp | FunctionKind.V256;        
+        FunctionClass IFunc.Class => FunctionClass.BinaryOp | FunctionClass.V256;        
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
     public interface IVBinOp128Imm8<T> : IVBinOpImm8<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryImm | FunctionKind.V256;
+        FunctionClass IFunc.Class => FunctionClass.TernaryImm | FunctionClass.V256;
         
     }
 
@@ -110,6 +110,6 @@ namespace Z0
     public interface IVBinOp256Imm8<T> : IVBinOpImm8<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryImm | FunctionKind.V256;
+        FunctionClass IFunc.Class => FunctionClass.TernaryImm | FunctionClass.V256;
     }   
 }

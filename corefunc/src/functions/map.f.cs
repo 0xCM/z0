@@ -25,7 +25,6 @@ partial class zfunc
         return dst;
     }    
 
-
     /// <summary>
     /// Applies a function to elements of an input sequence to produce 
     /// a transformed output sequence

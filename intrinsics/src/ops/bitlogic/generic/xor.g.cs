@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Xor, NumericClosures(NumericKind.All)]
         public static Vector128<T> vxor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vxor_u(x,y);
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]        
+        [MethodImpl(Inline), Xor, NumericClosures(NumericKind.All)]        
         public static Vector256<T> vxor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vxor_u(x,y);
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Xor, NumericClosures(NumericKind.All)]
         public static Vector512<T> vxor<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vxor(x.Lo,y.Lo), (vxor(x.Hi, y.Hi)));

@@ -30,7 +30,7 @@ namespace Z0
         where W : unmanaged, ITypeNat
         where V : struct
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.Vectorized;
+        FunctionClass IFunc.Class => FunctionClass.UnaryPred | FunctionClass.Vectorized;
     }
 
     /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
     public interface IVUnaryPred128<T> : IVUnaryPred<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.V128;   
+        FunctionClass IFunc.Class => FunctionClass.UnaryPred | FunctionClass.V128;   
     }
 
     /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
     public interface IVUnaryPred256<T> : IVUnaryPred<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.V256;
+        FunctionClass IFunc.Class => FunctionClass.UnaryPred | FunctionClass.V256;
         
     }
 

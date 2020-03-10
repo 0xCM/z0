@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Xors, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vxors<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, count),vsrl(x,count)));
@@ -31,10 +31,9 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Xors, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vxors<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, count),vsrl(x,count)));
-
     }
 }

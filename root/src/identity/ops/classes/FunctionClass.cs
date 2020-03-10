@@ -5,44 +5,69 @@
 namespace Z0
 {        
     using System;
-    
+
+    using FC = FunctionClass;
+    using static ArityClass;
+    using static ExchangeClass;
+
+    public enum ArityClass : ulong
+    {
+        None = 0,
+
+        Nullary = Pow2.T00,
+       
+        /// <summary>
+        /// Classifies a function as a unary predicate
+        /// </summary>        
+        Unary = Pow2.T01,
+
+        /// <summary>
+        /// Classifies a function as a binary predicate
+        /// </summary>        
+        Binary = Pow2.T02,
+
+       /// <summary>
+       /// Classifies a function as a ternary predicate
+       /// </summary>        
+       Ternary = Pow2.T03,   
+    }    
+
+    public enum ExchangeClass : ulong
+    {
+        None = 0,
+
+        Receiver = Pow2.T55,
+
+        Function = Pow2.T56
+    }
+
     /// <summary>
     /// Defines higher-kinded function classifications
     /// </summary>
     [Flags]
-    public enum FunctionKind : ulong
+    public enum FunctionClass : ulong
     {
         None = 0,
 
         /// <summary>
         /// An operation that accepts no arguments and has a non-void return type
         /// </summary>
-        Func0 = Pow2.T00,
+        Func0 = Nullary | Function,
 
         /// <summary>
         /// An operation that accepts one argument and has a non-void return type
         /// </summary>
-        Func1 = Pow2.T01,
+        Func1 = Unary | Function,
 
         /// <summary>
         /// An operation that accepts two arguments and has a non-void return type
         /// </summary>
-        Func2 = Pow2.T02,
+        Func2 = Binary | Function,
 
         /// <summary>
         /// An operation that accepts three arguments and has a non-void return type
         /// </summary>
-        Func3 = Pow2.T03,
-
-        /// <summary>
-        /// An operation that accepts four arguments and has a non-void return type
-        /// </summary>
-        Func4 = Pow2.T04,
-
-        /// <summary>
-        /// An operation that accepts five arguments and has a non-void return type
-        /// </summary>
-        Func5 = Pow2.T05,
+        Func3 = Ternary | Function,
         
         /// <summary>
         /// A synonym for Func0
@@ -63,15 +88,10 @@ namespace Z0
         /// A synonym for Func3
         /// </summary>
         TernaryFunc = Func3,
-    
-        /// <summary>
-        /// A function that returns an enum value
-        /// </summary>
-        LiteralFunc = Pow2.T15,
 
-        Operator = Pow2.T40,
-        
-        Predicate = Pow2.T41,
+        Converter = Pow2.T09 | UnaryFunc,
+
+        Predicate = Pow2.T10,
 
         /// <summary>
         /// Classifies a function as a unary predicate
@@ -88,17 +108,33 @@ namespace Z0
         /// </summary>        
         TernaryPred = Predicate  | TernaryFunc,                        
 
-        Converter = Pow2.T42 | UnaryFunc,
-
-        Vectorized = Pow2.T45,        
-
-        Imm = Pow2.T48,
-
-        Fixed = Pow2.T49,
-
-        V128 = Vectorized | Pow2.T46,
+        /// <summary>
+        /// Classifies a function that accepts one or more homogenous arguments and produces a numeric or enum value
+        /// </summary>
+        Measure = Pow2.T11,
         
-        V256 = Vectorized | Pow2.T47,
+        /// <summary>
+        /// Classifies a unary function that returns a numeric or enum value
+        /// </summary>
+        UnaryMeasure = Measure | UnaryFunc,
+
+        /// <summary>
+        /// Classifies a homogenous binary function that returns a numeric or enum value
+        /// </summary>
+        BinaryMeasure = Measure | BinaryFunc,        
+
+        /// <summary>
+        /// Classifies a homogenous ternary function that returns a numeric or enum value
+        /// </summary>
+        TernaryMeasure = Measure | TernaryFunc,
+        
+        Vectorized = Pow2.T12,        
+
+        V128 = Vectorized | Pow2.T13,
+        
+        V256 = Vectorized | Pow2.T14,
+
+        Imm = Pow2.T20,
 
         /// <summary>
         /// Classifies unary functions that accepts an immediate value
@@ -115,35 +151,15 @@ namespace Z0
         /// </summary>
         TernaryImm = Imm | TernaryFunc,
 
+        Operator = Pow2.T21,
+
         UnaryOp = Operator | UnaryFunc,
 
         BinaryOp = Operator | BinaryFunc,
 
-        TernaryOp = Operator | TernaryFunc,        
+        TernaryOp = Operator | TernaryFunc,   
 
-        /// <summary>
-        /// Classifies a function that accepts one or more homogenous arguments and produces a numeric or enum value
-        /// </summary>
-        Measure = Pow2.T43,
-        
-        /// <summary>
-        /// Classifies a unary function that returns a numeric or enum value
-        /// </summary>
-        UnaryMeasure = Measure | UnaryFunc,
+        Fixed = Pow2.T49,     
 
-        /// <summary>
-        /// Classifies a homogenous binary function that returns a numeric or enum value
-        /// </summary>
-        BinaryMeasure = Measure | BinaryFunc,        
-
-        /// <summary>
-        /// Classifies a homogenous ternary function that returns a numeric or enum value
-        /// </summary>
-        TernaryMeasure = Measure | TernaryFunc,
-
-        /// <summary>
-        /// Classifies a measure that returns an enum value
-        /// </summary>
-        LiteralMeasure = Measure | LiteralFunc,
     } 
 }

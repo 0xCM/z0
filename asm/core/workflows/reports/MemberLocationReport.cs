@@ -61,7 +61,7 @@ namespace Z0
     public class MemberLocationReport : IReport<MemberLocationRecord>
     {
         public static MemberLocationReport Create(AssemblyId id, Assembly src)
-            => MemberLocationReport.Create(id, src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps());
+            => MemberLocationReport.Create(id, src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOperators());
 
         public static MemberLocationReport Create(AssemblyId assemblyid, IEnumerable<MethodInfo> methods)
         {   

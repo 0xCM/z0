@@ -98,13 +98,13 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline)]
-        public static FunctionKind ofk<N>(N n = default)
+        public static FunctionClass ofk<N>(N n = default)
             where N : unmanaged, ITypeNat
             => nateval<N>() switch {
-                1 => FunctionKind.UnaryOp,
-                2 => FunctionKind.BinaryOp,
-                3 => FunctionKind.TernaryOp,
-                _ => FunctionKind.None
+                1 => FunctionClass.UnaryOp,
+                2 => FunctionClass.BinaryOp,
+                3 => FunctionClass.TernaryOp,
+                _ => FunctionClass.None
             };         
     }
 }

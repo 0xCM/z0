@@ -32,7 +32,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(in Block128<T> x, Span<bit> dst) 
-                => vblocks.vnonz(x,dst);
+                => gblocks.vnonz(x,dst);
 
         }
 
@@ -56,7 +56,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(in Block256<T> x, Span<bit> dst) 
-                => vblocks.vnonz(x,dst);
+                => gblocks.vnonz(x,dst);
 
         }
     }

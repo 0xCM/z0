@@ -34,7 +34,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> c)            
-                => ref vblocks.vinc(a,c);
+                => ref gblocks.vinc(a,c);
         }
 
         [NumericClosures(NumericKind.Integers)]
@@ -59,7 +59,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
-                => ref vblocks.vinc(a,c);
+                => ref gblocks.vinc(a,c);
         }            
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Api placeholsder
     /// </summary>
-    public static partial class FunctionKinds
+    public static partial class FunctionClasses
     {
 
 
