@@ -6,6 +6,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;    
+    using System.Reflection;
 
     using static Root;
     
@@ -429,6 +430,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool ContentEqual(this Span<char> lhs, Span<char> rhs)        
              => lhs.ReadOnly().ContentEqual(rhs);
-
     }
 }

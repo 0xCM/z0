@@ -40,7 +40,7 @@ namespace Z0.Logix
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(ShiftOpKind kind)
+        public static string sig<T>(ShiftKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 

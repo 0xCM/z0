@@ -8,6 +8,6 @@ namespace Z0.Resolutions
     {
         public Cil() : base(AssemblyId.Cil) {}
         
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.Cil) {} }            
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Cil) {} }            
     }
 }

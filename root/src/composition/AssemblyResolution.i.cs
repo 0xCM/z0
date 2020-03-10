@@ -27,12 +27,8 @@ namespace Z0
         /// </summary>
         IEnumerable<IAssemblyResolution> Designates {get;}
 
-        /// <summary>
-        /// Specifies whther the reification is empty
-        /// </summary>
-        bool IsNonEmpty {get;}
 
-        IOpCatalog Catalog {get;}
+        IAssemblyCatalog Catalog {get;}
 
         /// <summary>
         /// The resolved assembly

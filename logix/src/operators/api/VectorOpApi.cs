@@ -7,7 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
@@ -226,15 +225,15 @@ namespace Z0.Logix
         /// <param name="count">The shift bit count</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector128<T> eval<T>(ShiftOpKind kind, Vector128<T> a, [Imm] byte count)
+        public static Vector128<T> eval<T>(ShiftKind kind, Vector128<T> a, [Imm] byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKind.Sll: return sll(a,count);
-                case ShiftOpKind.Srl: return srl(a,count);
-                case ShiftOpKind.Rotl: return rotl(a,count);
-                case ShiftOpKind.Rotr: return rotr(a,count);
+                case ShiftKind.Sll: return sll(a,count);
+                case ShiftKind.Srl: return srl(a,count);
+                case ShiftKind.Rotl: return rotl(a,count);
+                case ShiftKind.Rotr: return rotr(a,count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -247,15 +246,15 @@ namespace Z0.Logix
         /// <param name="count">The shift amount</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector256<T> eval<T>(ShiftOpKind kind, Vector256<T> a, [Imm] byte count)
+        public static Vector256<T> eval<T>(ShiftKind kind, Vector256<T> a, [Imm] byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKind.Sll: return sll(a,count);
-                case ShiftOpKind.Srl: return srl(a,count);
-                case ShiftOpKind.Rotl: return rotl(a,count);
-                case ShiftOpKind.Rotr: return rotr(a,count);
+                case ShiftKind.Sll: return sll(a,count);
+                case ShiftKind.Srl: return srl(a,count);
+                case ShiftKind.Rotl: return rotl(a,count);
+                case ShiftKind.Rotr: return rotr(a,count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -350,15 +349,15 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<Vector128<T>> lookup<T>(N128 w, ShiftOpKind kind)
+        public static Shifter<Vector128<T>> lookup<T>(N128 w, ShiftKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKind.Sll: return sll;
-                case ShiftOpKind.Srl: return srl;
-                case ShiftOpKind.Rotl: return rotl;
-                case ShiftOpKind.Rotr: return rotr;
+                case ShiftKind.Sll: return sll;
+                case ShiftKind.Srl: return srl;
+                case ShiftKind.Rotl: return rotl;
+                case ShiftKind.Rotr: return rotr;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -369,15 +368,15 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<Vector256<T>> lookup<T>(N256 w, ShiftOpKind kind)
+        public static Shifter<Vector256<T>> lookup<T>(N256 w, ShiftKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKind.Sll: return sll;
-                case ShiftOpKind.Srl: return srl;
-                case ShiftOpKind.Rotl: return rotl;
-                case ShiftOpKind.Rotr: return rotr;
+                case ShiftKind.Sll: return sll;
+                case ShiftKind.Srl: return srl;
+                case ShiftKind.Rotl: return rotl;
+                case ShiftKind.Rotr: return rotr;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

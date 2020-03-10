@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
 
@@ -29,7 +28,7 @@ namespace Z0
 
         FixedWidth IImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
-        OpArityKind IImmResolver.ResolvedArity => OpArityKind.Unary;           
+        ArityKind IImmResolver.ResolvedArity => ArityKind.Unary;           
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -41,7 +40,7 @@ namespace Z0
 
         FixedWidth IImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
-        OpArityKind IImmResolver.ResolvedArity => OpArityKind.Binary;           
+        ArityKind IImmResolver.ResolvedArity => ArityKind.Binary;           
 
     }
 

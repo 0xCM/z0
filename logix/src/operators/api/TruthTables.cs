@@ -5,13 +5,12 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.IO;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static Root;
     using static Nats;
+
     using Api = LogicOpApi;
 
     public static class TruthTables
@@ -141,14 +140,14 @@ namespace Z0.Logix
                 emit(kinds[i],dst);
         }
 
-        public static void emit(TextWriter dst, OpArityKind arity)
+        public static void emit(TextWriter dst, ArityKind arity)
         {
             switch(arity)
             {
 
-                case OpArityKind.Unary: emitUnary(dst); break;
-                case OpArityKind.Binary: emitBinary(dst); break;
-                case OpArityKind.Ternary: emitTernary(dst); break;
+                case ArityKind.Unary: emitUnary(dst); break;
+                case ArityKind.Binary: emitBinary(dst); break;
+                case ArityKind.Ternary: emitTernary(dst); break;
                 default: 
                     throw unsupported(arity);
             }

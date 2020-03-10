@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public RngCore() : base(AssemblyId.RngCore) {}
         
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.RngCore) {} }            
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.RngCore) {} }            
     }
 }

@@ -17,13 +17,6 @@ namespace Z0
     public static class FixedTypeX
     {
         /// <summary>
-        /// Determines whether a method is classified as a span op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsSpanOp(this MethodInfo m)
-            => m.Tagged<SpanOpAttribute>();
-
-        /// <summary>
         /// Creates a delegate for a static method via the expression api
         /// </summary>
         /// <typeparam name="D">The type of the constructed delegate</typeparam>
@@ -181,35 +174,35 @@ namespace Z0
             => (Fixed64 a, Fixed64 b) =>f((long)a.Data, (long)b.Data);
 
         [MethodImpl(Inline)]
-        public static FixedBinaryOp8 ToFixedBinOp(this MethodInfo f, NumericType<byte> k)
+        public static FixedBinaryOp8 ToFixedBinOp(this MethodInfo f, NumericTypeKind<byte> k)
             => f.CreateDelegate<Func<byte,byte,byte>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static FixedBinaryOp8 ToFixedBinOp(this MethodInfo f, NumericType<sbyte> k)
+        public static FixedBinaryOp8 ToFixedBinOp(this MethodInfo f, NumericTypeKind<sbyte> k)
             => f.CreateDelegate<Func<sbyte,sbyte,sbyte>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static FixedBinaryOp16 ToFixedBinOp(this MethodInfo f, NumericType<ushort> k)
+        public static FixedBinaryOp16 ToFixedBinOp(this MethodInfo f, NumericTypeKind<ushort> k)
             => f.CreateDelegate<Func<ushort,ushort,ushort>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static FixedBinaryOp16 ToFixedBinOp(this MethodInfo f, NumericType<short> k)
+        public static FixedBinaryOp16 ToFixedBinOp(this MethodInfo f, NumericTypeKind<short> k)
             => f.CreateDelegate<Func<short,short,short>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static FixedBinaryOp32 ToFixedBinOp(this MethodInfo f, NumericType<uint> k)
+        public static FixedBinaryOp32 ToFixedBinOp(this MethodInfo f, NumericTypeKind<uint> k)
             => f.CreateDelegate<Func<uint,uint,uint>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static FixedBinaryOp32 ToFixedBinOp(this MethodInfo f, NumericType<int> k)
+        public static FixedBinaryOp32 ToFixedBinOp(this MethodInfo f, NumericTypeKind<int> k)
             => f.CreateDelegate<Func<int,int,int>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static FixedBinaryOp64 ToFixedBinOp(this MethodInfo f, NumericType<ulong> k)
+        public static FixedBinaryOp64 ToFixedBinOp(this MethodInfo f, NumericTypeKind<ulong> k)
             => f.CreateDelegate<Func<ulong,ulong,ulong>>().ToFixed();
 
         [MethodImpl(Inline)]
-        public static FixedBinaryOp64 ToFixedBinOp(this MethodInfo f, NumericType<long> k)
+        public static FixedBinaryOp64 ToFixedBinOp(this MethodInfo f, NumericTypeKind<long> k)
             => f.CreateDelegate<Func<long,long,long>>().ToFixed();
     }
 }

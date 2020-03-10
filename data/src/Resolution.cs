@@ -10,7 +10,7 @@ namespace Z0.Resolutions
     {
         public Data() : base(AssemblyId.Data) {}
 
-        public class C : OpCatalog<C>
+        public class C : AssemblyCatalog<C>
         {
             public C() : base(AssemblyId.Data, DataResourceIndex.Create(Z0.Data.Resources)) {}            
         }

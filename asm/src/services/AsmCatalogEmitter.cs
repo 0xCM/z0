@@ -16,18 +16,18 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        readonly IOpCatalog Catalog;
+        readonly IAssemblyCatalog Catalog;
 
         readonly IAsmFunctionDecoder Decoder;
 
         readonly AsmEmissionObserver Observer;
 
         [MethodImpl(Inline)]
-        public static IAsmCatalogEmitter Create(IAsmContext context, IOpCatalog catalog, AsmEmissionObserver observer)
+        public static IAsmCatalogEmitter Create(IAsmContext context, IAssemblyCatalog catalog, AsmEmissionObserver observer)
             => new AsmCatalogEmitter(context,catalog,observer);
 
         [MethodImpl(Inline)]
-        AsmCatalogEmitter(IAsmContext context, IOpCatalog catalog, AsmEmissionObserver observer)
+        AsmCatalogEmitter(IAsmContext context, IAssemblyCatalog catalog, AsmEmissionObserver observer)
         {
             this.Context = context;
             this.Catalog = catalog;
@@ -247,7 +247,7 @@ namespace Z0.Asm
             => Archive(ArchiveSubject(host,true));
 
         IAsmFunctionArchive Archive(string subject)
-            => Context.FunctionArchive(Catalog.OwnerId, subject);
+            => Context.FunctionArchive(Catalog.AssemblyId, subject);
 
         static byte[] ImmSelection => new byte[]{5,9,13};
     }

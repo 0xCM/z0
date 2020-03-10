@@ -11,15 +11,6 @@ namespace Z0
     using static Root;
 
     using NK = NumericKind;
-
-    public readonly struct NumericType<T> : INumericType<T> 
-        where T : unmanaged
-    {
-
-        [MethodImpl(Inline)]
-        public static implicit operator NumericKind(NumericType<T> src)
-            => Numeric.kind<T>();
-    }
     
     public readonly struct NumericType : IClrTypeModel<NumericType>, IIdentity<NumericType>
     {        

@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector128<T> vxorsl<T>(Vector128<T> x, [Shift] byte count)
+        public static Vector128<T> vxorsl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector256<T> vxorsl<T>(Vector256<T> x, [Shift] byte count)
+        public static Vector256<T> vxorsl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

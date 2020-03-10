@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Asm() : base(AssemblyId.Asm) {}
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.Asm) { } }            
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Asm) { } }            
     }
 }

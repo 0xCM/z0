@@ -1,7 +1,12 @@
 export ProjectId="$(dirname "$0")"
-bash $ZDev/.scripts/add-project.sh
 
 AddCmd=$ZDev/.scripts/sln-add.sh
 
 export Kind=core
+bash $AddCmd
+
+export Kind=runtime
+bash $AddCmd
+
+export Kind=test
 bash $AddCmd

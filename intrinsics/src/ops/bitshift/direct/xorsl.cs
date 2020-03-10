@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vxorsl(Vector128<byte> x, [Shift] byte count)
+        public static Vector128<byte> vxorsl(Vector128<byte> x, [Imm] byte count)
             => dinx.vxor(x, vsll(x,count));
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vxorsl(Vector128<ushort> x, [Shift] byte count)
+        public static Vector128<ushort> vxorsl(Vector128<ushort> x, [Imm] byte count)
             => dinx.vxor(x, vsll(x,count));
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vxorsl(Vector128<uint> x, [Shift] byte count)
+        public static Vector128<uint> vxorsl(Vector128<uint> x, [Imm] byte count)
             => dinx.vxor(x, vsll(x,count));
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vxorsl(Vector128<ulong> x, [Shift] byte count)
+        public static Vector128<ulong> vxorsl(Vector128<ulong> x, [Imm] byte count)
             => dinx.vxor(x, vsll(x,count));
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vxorsl(Vector256<byte> x, [Shift] byte count)
+        public static Vector256<byte> vxorsl(Vector256<byte> x, [Imm] byte count)
             => dinx.vxor(x, vsll(x,count));
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vxorsl(Vector256<ushort> x, [Shift] byte count)
+        public static Vector256<ushort> vxorsl(Vector256<ushort> x, [Imm] byte count)
             => dinx.vxor(x, vsll(x,count));
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vxorsl(Vector256<uint> x, [Shift] byte count)
+        public static Vector256<uint> vxorsl(Vector256<uint> x, [Imm] byte count)
             => dinx.vxor(x, vsll(x,count));
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vxorsl(Vector256<ulong> x, [Shift] byte count)
+        public static Vector256<ulong> vxorsl(Vector256<ulong> x, [Imm] byte count)
             => dinx.vxor(x, vsll(x,count));
 
         /// <summary>

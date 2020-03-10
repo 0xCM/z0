@@ -60,7 +60,18 @@ namespace Z0
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic
         /// </summary>
-        IEnumerable<Type> ServiceHostTypes {get;}
+        Type[] ServiceHostTypes {get;}
+
+        /// <summary>
+        /// Specifies the number of service hosts described by the catalog
+        /// </summary>
+        int ServiceHostCount => ServiceHostTypes.Length;
+
+        /// <summary>
+        /// Specifies whether the catalog describes any service hosts
+        /// </summary>
+        bool HasServiceHostContent => ServiceHostCount != 0;
+
     }
 
     public interface IOpServiceProvider<P> : IOpServiceProvider
@@ -72,8 +83,8 @@ namespace Z0
     public abstract class OpServiceProvider<P>: IOpServiceProvider<P>
         where P : IOpServiceProvider<P>, new()
     {
-        public IEnumerable<Type> ServiceHostTypes 
-            => typeof(P).GetNestedTypes().Realize<IFunc>();
+        public Type[] ServiceHostTypes 
+            => typeof(P).GetNestedTypes().Realize<IFunc>().ToArray();
     }
 
     

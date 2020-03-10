@@ -26,7 +26,7 @@ namespace Z0
     {
         DynamicDelegate<UnaryOp<T>>  @delegate(byte imm8);  
 
-        OpArityKind IImmResolver.ResolvedArity => OpArityKind.Unary;
+        ArityKind IImmResolver.ResolvedArity => ArityKind.Unary;
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -35,6 +35,6 @@ namespace Z0
     {
         DynamicDelegate<BinaryOp<T>>  @delegate(byte imm8);  
 
-        OpArityKind IImmResolver.ResolvedArity => OpArityKind.Binary;        
+        ArityKind IImmResolver.ResolvedArity => ArityKind.Binary;        
     }
 }

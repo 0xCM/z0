@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public WorkflowCore() : base(AssemblyId.WorkflowCore) {}
         
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.WorkflowCore) {} }            
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.WorkflowCore) {} }            
     }
 }

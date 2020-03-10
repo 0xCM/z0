@@ -11,6 +11,6 @@ namespace Z0.Resolutions
         public AsmDecoder() : base(AssemblyId.AsmDecoder) {}
         
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.AsmDecoder) {} }            
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.AsmDecoder) {} }            
     }
 }

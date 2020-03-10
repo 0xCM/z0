@@ -120,7 +120,6 @@ namespace Z0
                 let pt = k.ToClrType() where pt.IsSome()
                 let id = Identity.identify(op.Definition, k) where !id.IsEmpty
                 select ClosedOp.Define(op.Host, id, k, op.Definition.MakeGenericMethod(pt.Value)); 
-
     }
 
     public static class IdentityExtensions
@@ -157,6 +156,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IMemberOpCollector OpCollector(this IContext context)
             => MemberOpCollector.Create(context);
-
     }    
 }

@@ -24,5 +24,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool notnull(object test)
             => test != null;
+
+        [MethodImpl(Inline)]
+        public static bool not(bool src)
+            => !src;
+
+        [MethodImpl(Inline)]
+        public static bit not(bit src)
+            => !src;
+
     }
 }

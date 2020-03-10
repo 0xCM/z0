@@ -13,7 +13,7 @@ namespace Z0
     /// </summary>
     /// <remarks>The primary use case for this data structure is to faciltate efficient bitwise 
     /// operations over generic scalar sequences where the length of the sequence varies</remarks>
-    [IdentityProvider(typeof(RowBItsIdentity))]
+    [IdentityProvider(typeof(RowBitsIdentity))]
     public readonly ref struct RowBits<T>
         where T : unmanaged
     {

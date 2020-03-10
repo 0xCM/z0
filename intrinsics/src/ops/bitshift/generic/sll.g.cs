@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static Vector128<T> vsll<T>(Vector128<T> x, [Shift] byte count)
+        public static Vector128<T> vsll<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
             => vsll_u(x,count);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> vsll<T>(Vector256<T> x, [Shift] byte count)
+        public static Vector256<T> vsll<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
             => vsll_u(x,count);
 

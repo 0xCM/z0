@@ -5,9 +5,12 @@ namespace Z0
 {
     using System; 
     using System.Linq;   
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+
+    using static Root;
     
-    readonly struct RowBItsIdentity : ITypeIdentityProvider
+    readonly struct RowBitsIdentity : ITypeIdentityProvider
     {        
         public static TypeIdentity IdentifyNumericClosure(string root, Type arg)
         {
@@ -19,6 +22,8 @@ namespace Z0
         
         const string @base = "rowbits";
 
+        public IEnumerable<Type> Identifiable => items(typeof(RowBits<>));
+        
         public TypeIdentity DefineIdentity(Type src)
         {
             var t = src.GenericDefinition();

@@ -108,7 +108,7 @@ namespace Z0
                     let status = evolve.ContinueWith(t => receiver(t.Result))
                     select evolve;
             
-            await Tasks.create(() => Task.WaitAll(variations.ToArray()));
+            await task(() => Task.WaitAll(variations.ToArray()));
         }
     }
 }

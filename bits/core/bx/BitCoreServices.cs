@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
@@ -13,7 +14,7 @@ namespace Z0
     [OpServiceProvider("bitcore.services")]
     public partial class BitCoreServices : IOpServiceProvider
     {
-        public IEnumerable<Type> ServiceHostTypes 
-            => typeof(BitCoreServices).GetNestedTypes().Realize<IFunc>();
+        public Type[] ServiceHostTypes {get;}
+            = typeof(BitCoreServices).GetNestedTypes().Realize<IFunc>().ToArray();
     }
 }

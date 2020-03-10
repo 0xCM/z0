@@ -9,6 +9,7 @@
     <ProjectReference Include="$(TopDir)containers/src/z0.containers.csproj" />
     <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />
     <ProjectReference Include="$(TopDir)dynamic/src/z0.dynamic.csproj" />
+    <ProjectReference Include="$(TopDir)graphs/src/z0.graphs.csproj" />
 
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
   </ItemGroup>

@@ -14,61 +14,61 @@ namespace Z0
     /// </summary>
     public static class NKT
     {
-        public static NumericType<byte> u8
+        public static NumericTypeKind<byte> u8
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<sbyte> i8
+        public static NumericTypeKind<sbyte> i8
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<ushort> u16
+        public static NumericTypeKind<ushort> u16
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<short> i16
+        public static NumericTypeKind<short> i16
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<uint> u32
+        public static NumericTypeKind<uint> u32
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<int> i32
+        public static NumericTypeKind<int> i32
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<ulong> u64
+        public static NumericTypeKind<ulong> u64
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<long> i64
+        public static NumericTypeKind<long> i64
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<float> f32
+        public static NumericTypeKind<float> f32
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        public static NumericType<double> f64
+        public static NumericTypeKind<double> f64
         {
             [MethodImpl(Inline)]
             get => default;

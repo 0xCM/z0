@@ -19,7 +19,6 @@ namespace Z0
         /// </summary>
         IAssemblyComposition Compostion {get;}
 
-
         /// <summary>
         /// The assemblies available via the assigned composition
         /// </summary>

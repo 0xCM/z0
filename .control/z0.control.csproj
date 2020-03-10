@@ -5,15 +5,12 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <Import Project="$(TopDir)asm/z0.asm.exports.props"/>
-  <Import Project="$(TopDir)gmath/z0.gmath.exports.props"/>
-  <Import Project="$(TopDir)rng/z0.rng.exports.props"/>
-
   <ItemGroup>
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
+    <ProjectReference Include="$(TopDir)asm/src/z0.asm.csproj" />
 
     <!-- <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
     <ProjectReference Include="$(TopDir)nats/test/z0.nats.test.csproj" />

@@ -84,7 +84,7 @@ namespace Z0
         public static T eval<T,K>(K kind, T a)
             where T : unmanaged  
             where K : unmanaged, IOpKind      
-            => eval_1(kind,a);
+                => eval_1(kind,a);
 
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a)
@@ -98,7 +98,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
 
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a, T b)

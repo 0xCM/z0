@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source assembly</param>
         /// <typeparam name="A">The type of attribute for which to search</typeparam>
-        public static Option<A> TryGetTag<A>(this Assembly a) 
+        public static Option<A> FindTag<A>(this Assembly a) 
             where A : Attribute
                 =>  a.Tag<A>();
 
@@ -45,28 +45,28 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source assembly</param>
         public static Option<string> Product(this Assembly a)
-            => from x in a.TryGetTag<AssemblyProductAttribute>() select x.Product;
+            => from x in a.FindTag<AssemblyProductAttribute>() select x.Product;
 
         /// <summary>
         /// Gets the value of <see cref="AssemblyTitleAttribute"/> if it exists
         /// </summary>
         /// <param name="a">The source assembly</param>
         public static Option<string> Title(this Assembly a)
-            => from x in a.TryGetTag<AssemblyTitleAttribute>() select x.Title;
+            => from x in a.FindTag<AssemblyTitleAttribute>() select x.Title;
 
         /// <summary>
         /// Gets the value of <see cref="AssemblyCompanyAttribute"/> if it exists
         /// </summary>
         /// <param name="a">The source assembly</param>
         public static Option<string> Company(this Assembly a)
-            => from x in a.TryGetTag<AssemblyCompanyAttribute>() select x.Company;
+            => from x in a.FindTag<AssemblyCompanyAttribute>() select x.Company;
 
         /// <summary>
         /// Gets the value of <see cref="AssemblyDefaultAliasAttribute"/> if it exists
         /// </summary>
         /// <param name="a">The source assembly</param>
         public static Option<string> DefaultAlias(this Assembly a)
-            => from x in a.TryGetTag<AssemblyDefaultAliasAttribute>() select x.DefaultAlias;        
+            => from x in a.FindTag<AssemblyDefaultAliasAttribute>() select x.DefaultAlias;        
  
         /// <summary>
         /// Gets the type attributions for the specified assembly

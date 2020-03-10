@@ -36,23 +36,16 @@ namespace Z0
         public Assembly Resolved 
             => typeof(T).Assembly;
 
-        // public virtual AssemblyRole Role 
-        //     => AssemblyRole.Library;
-
         public virtual string Name
             => Resolved.GetName().Name;
-
-        public bool IsNonEmpty
-            => Id != AssemblyId.None && Id != AssemblyId.None;
-
         
         public virtual IEnumerable<IAssemblyResolution> Designates {get;}
             = new IAssemblyResolution[]{};
 
-        public IOpCatalog Catalog
-            =>(IOpCatalog)OpCatalogProvider.Define(Id, Resolved, Operations);
+        public IAssemblyCatalog Catalog
+            =>(IAssemblyCatalog)CatalogProvider.Define(Id, Resolved, Operations);
 
-        public virtual IOpCatalog Operations {get;}
+        public virtual IAssemblyCatalog Operations {get;}
             = new EmptyCatalog();
 
         public string Format()
@@ -67,9 +60,9 @@ namespace Z0
 
     public abstract class AssemblyResolution<T,C> : AssemblyResolution<T>
         where T : AssemblyResolution<T,C>, new()
-        where C : OpCatalog<C>, new()
+        where C : AssemblyCatalog<C>, new()
     {
-        public override IOpCatalog Operations  => new C();
+        public override IAssemblyCatalog Operations  => new C();
 
         protected AssemblyResolution(AssemblyId id)
             : base(id)

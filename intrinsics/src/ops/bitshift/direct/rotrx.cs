@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to rotate</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vrotrx(Vector128<ulong> src, [Shift] byte count)
+        public static Vector128<ulong> vrotrx(Vector128<ulong> src, [Imm] byte count)
             => vor(vsrlx(src, count), vsllx(src, (byte)(128 - count)));             
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to rotate</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vrotrx(Vector256<ulong> src, [Shift] byte count)
+        public static Vector256<ulong> vrotrx(Vector256<ulong> src, [Imm] byte count)
             => vor(vsrlx(src, count), vsllx(src, (byte)(128 - count)));             
 
         /// <summary>

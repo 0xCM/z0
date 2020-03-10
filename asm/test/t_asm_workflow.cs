@@ -47,13 +47,11 @@ namespace Z0.Asm
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Cyan);
             Analyze(e.Host, e.EventData);
-            //NotifyConsole(msg);
         }
 
         void OnEvent(FunctionsDecoded e)
         {
             var msg = AppMsg.Colorize(e.Format(), AppMsgColor.Magenta);
-            //NotifyConsole(msg);
             Analyze(e.Host, e.EventData);
         }
 
@@ -82,11 +80,30 @@ namespace Z0.Asm
             NotifyConsole(msg);
         }
 
+        void OnEvent(WorkflowError e)
+        {
+            NotifyConsole(AppMsg.Error(e.EventData));    
+        }
+
+        void OnEvent(StepStart<IAssemblyCatalog> e)
+        {
+            var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.DarkGreen);
+            NotifyConsole(msg);
+        }
+
+        void OnEvent(StepEnd<IAssemblyCatalog> e)
+        {
+            var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.DarkGreen);
+            NotifyConsole(msg);
+            
+        }
+
         RootEmissionPaths Root
             => RootEmissionPaths.Define(DefaultDataDir);
 
-        void ConnectReceivers(IWorkflowEventBroker broker)
+        void ConnectReceivers(IHostCaptureEventBroker broker)
         {
+            broker.Error.Receive(broker, OnEvent);
             if(HandleExtractReportCreated)
                 broker.ExtractReportCreated.Receive(broker, OnEvent);
 
@@ -104,7 +121,18 @@ namespace Z0.Asm
             
             if(HandleMembersLocated)
                 broker.MembersLocated.Receive(broker, OnEvent);
+
+            Witness(broker.CaptureCatalogEnd.Receive(broker, OnEvent));
+            Witness(broker.CaptureCatalogStart.Receive(broker, OnEvent));            
         }
+
+        void Witness<E>(in BrokerAcceptance<E> accepted)
+            where E : IAppEvent
+        {
+
+            NotifyConsole(accepted.Message);
+        }
+
 
         public void ExecuteWorkflow()
         {

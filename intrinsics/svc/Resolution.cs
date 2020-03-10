@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {        
         public IntrinsicsSvc() : base(AssemblyId.IntrinsicsSvc) {}
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.IntrinsicsSvc) { } }
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.IntrinsicsSvc) { } }
     }
 }

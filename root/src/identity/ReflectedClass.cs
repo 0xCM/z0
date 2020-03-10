@@ -180,6 +180,6 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static OpKindId? KindId(this MethodInfo m)
-            => m.Tag<SpecificOpAttribute>().MapValueOrNull(a => a.KindId);
+            => m.Tag<OpKindAttribute>().MapValueOrNull(a => a.KindId);
     }
 }

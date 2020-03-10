@@ -51,10 +51,14 @@ namespace Z0
         
         public IdentityPart WithText(string src)
             => Define(PartIndex, PartKind, src);
-        
+
         [MethodImpl(Inline)]
         public bool Equals(IdentityPart src)
             => equals(this, src);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(IdentityPart other)
+            => compare(this, other);        
 
         public override string ToString()
             => Identifier;
@@ -65,7 +69,5 @@ namespace Z0
         public override bool Equals(object obj)
             => equals(this, obj);
 
-        public int CompareTo(IdentityPart other)
-            => compare(this, other);        
     }
 }

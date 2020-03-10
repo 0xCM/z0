@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Graphs() : base(AssemblyId.Graphs) {}
         
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.Graphs) {} }
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Graphs) {} }
     }
 }

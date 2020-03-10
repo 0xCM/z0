@@ -10,7 +10,7 @@ namespace Z0.Resolutions
     {
         public BitVectors() : base(AssemblyId.BitVectors) {}
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.BitVectors) { } }
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.BitVectors) { } }
     }
 }
 

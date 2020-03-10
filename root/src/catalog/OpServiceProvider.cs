@@ -20,7 +20,7 @@ namespace Z0
         public static IOpServiceProvider Create(Func<IEnumerable<Type>> hosts)
             => new OpServiceProvider(hosts);
 
-        public IEnumerable<Type> ServiceHostTypes
+        public Type[] ServiceHostTypes
             => Factory?.Invoke()?.ToArray() ?? array<Type>();
 
         [MethodImpl(Inline)]

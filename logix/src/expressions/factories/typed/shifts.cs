@@ -20,7 +20,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpExpr<T> shift<T>(ShiftOpKind op, IExpr<T> src, byte count)
+        public static ShiftOpExpr<T> shift<T>(ShiftKind op, IExpr<T> src, byte count)
             where T : unmanaged
                 => new ShiftOpExpr<T>(op,src,literal(count));
 
@@ -32,7 +32,7 @@ namespace Z0.Logix
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpExpr<T> shiftx<T>(ShiftOpKind op, IExpr<T> src, IExpr<byte> count)
+        public static ShiftOpExpr<T> shiftx<T>(ShiftKind op, IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => new ShiftOpExpr<T>(op,src, count);
 
@@ -45,7 +45,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ShiftOpExpr<T> sll<T>(IExpr<T> src, byte count)
             where T : unmanaged
-                => shift(ShiftOpKind.Sll, src, count);
+                => shift(ShiftKind.Sll, src, count);
 
         /// <summary>
         /// Defines a bitwise sll expression with literal operands
@@ -67,7 +67,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ShiftOpExpr<T> srl<T>(IExpr<T> src, byte count)
             where T : unmanaged
-                => shift(ShiftOpKind.Srl, src, count);
+                => shift(ShiftKind.Srl, src, count);
 
         /// <summary>
         /// Defines a bitwise srl expression with literal operands
@@ -89,7 +89,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ShiftOpExpr<T> rotr<T>(IExpr<T> src, byte count)
             where T : unmanaged
-                => shift(ShiftOpKind.Rotr, src, count);
+                => shift(ShiftKind.Rotr, src, count);
 
         /// <summary>
         /// Defines a bitwise rotr expression with literal operands
@@ -111,7 +111,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ShiftOpExpr<T> rotl<T>(IExpr<T> src, byte count)
             where T : unmanaged
-                => shift(ShiftOpKind.Rotl, src, count);
+                => shift(ShiftKind.Rotl, src, count);
 
         /// <summary>
         /// Defines a bitwise rotl expression with literal operands
@@ -133,7 +133,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ShiftOpExpr<T> sll<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
-                => shiftx(ShiftOpKind.Sll, src, count);
+                => shiftx(ShiftKind.Sll, src, count);
 
         /// <summary>
         /// Defines a bitwise sll expression with literal operands
@@ -155,7 +155,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ShiftOpExpr<T> srl<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
-                => shiftx(ShiftOpKind.Srl, src, count);
+                => shiftx(ShiftKind.Srl, src, count);
 
         /// <summary>
         /// Defines a bitwise srl expression with literal operands
@@ -177,7 +177,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ShiftOpExpr<T> rotr<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
-                => shiftx(ShiftOpKind.Rotr, src, count);
+                => shiftx(ShiftKind.Rotr, src, count);
 
         /// <summary>
         /// Defines a bitwise rotr expression with literal operands
@@ -199,7 +199,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ShiftOpExpr<T> rotl<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
-                => shiftx(ShiftOpKind.Rotl, src, count);
+                => shiftx(ShiftKind.Rotl, src, count);
 
         /// <summary>
         /// Defines a bitwise rotl expression with literal operands

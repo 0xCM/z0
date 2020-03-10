@@ -3,6 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 using static Z0.Pow2;    
@@ -110,9 +111,9 @@ public enum AssemblyId : ulong
 
     BlocksTest = Blocks | Test,
 
-    Workflow = 270,
+    WorkflowRuntime = 270,
 
-    WorkflowTest = Workflow | Test,
+    WorkflowTest = WorkflowRuntime | Test,
 
     Analogs = 280,
 
@@ -229,5 +230,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static AssemblyId Base(this AssemblyId a)
             => a.WithoutSvc().WithoutTest();
+
+        [MethodImpl(Inline)]
+        public static AssemblyId Id(this Assembly src)
+            => src.FindTag<AssemblyIdAttribute>().MapValueOrDefault(a => a.Id);
     }
 }

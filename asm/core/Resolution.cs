@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.AsmCore)]
+
 namespace Z0.Resolutions
 {
-    public sealed class AsmCore : AssemblyResolution<AsmCore>
+    public sealed class AsmCore : AssemblyResolution<AsmCore, AsmCore.C>
     {
-        const AssemblyId Identity = AssemblyId.AsmCore;
+        public AsmCore() : base(AssemblyId.AsmCore) {}
 
-        public AsmCore() : base(Identity) {}
-
-        public class C : OpCatalog<C> { public C() : base(Identity) { } }
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.AsmCore) { } }
     }
 }

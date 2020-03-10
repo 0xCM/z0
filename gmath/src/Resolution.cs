@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {        
         public GMath() : base(AssemblyId.GMath) {}
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.GMath) {} }    
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.GMath) {} }    
     }
 }

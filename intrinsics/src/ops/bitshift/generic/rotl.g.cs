@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector128<T> vrotl<T>(Vector128<T> x, [Shift] byte count)
+        public static Vector128<T> vrotl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector256<T> vrotl<T>(Vector256<T> x, [Shift] byte count)
+        public static Vector256<T> vrotl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

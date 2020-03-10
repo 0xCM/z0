@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Logix() : base(AssemblyId.Logix) {}
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.Logix) { } }
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Logix) { } }
     }
 }

@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public ShiftOpKind OpKind {get;}
+        public ShiftKind OpKind {get;}
 
         /// <summary>
         /// The operand
@@ -31,7 +31,7 @@ namespace Z0.Logix
         public IExpr<byte> Offset {get;}
 
         [MethodImpl(Inline)]
-        public ShiftOpExpr(ShiftOpKind op, IExpr<T> subject, IExpr<byte> offset)
+        public ShiftOpExpr(ShiftKind op, IExpr<T> subject, IExpr<byte> offset)
         {
             this.OpKind = op;
             this.Subject = subject;

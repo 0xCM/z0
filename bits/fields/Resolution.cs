@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public BitFields() : base(AssemblyId.BitFields) {}
 
-        public class C : OpCatalog<C> { public C() : base(AssemblyId.BitFields) {} }
+        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.BitFields) {} }
     }
 }

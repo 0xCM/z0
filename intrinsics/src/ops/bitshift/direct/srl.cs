@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vsrl(Vector128<byte> src, [Shift] byte count)
+        public static Vector128<byte> vsrl(Vector128<byte> src, [Imm] byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
             var m = vmask.vlsb(n128, n8, (byte)(8 - count),z8);
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Shift] byte count)
+        public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
             var x = v16u(ShiftRightLogical(vinflate(src, n256, z16i),count));
             var y = vand(x,v16u(gvec.vbroadcast(n256, byte.MaxValue)));
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vsrl(Vector128<short> src, [Shift] byte count)
+        public static Vector128<short> vsrl(Vector128<short> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vsrl(Vector128<ushort> src, [Shift] byte count)
+        public static Vector128<ushort> vsrl(Vector128<ushort> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vsrl(Vector128<int> src, [Shift] byte count)
+        public static Vector128<int> vsrl(Vector128<int> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vsrl(Vector128<uint> src, [Shift] byte count)
+        public static Vector128<uint> vsrl(Vector128<uint> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<long> vsrl(Vector128<long> src, [Shift] byte count)
+        public static Vector128<long> vsrl(Vector128<long> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vsrl(Vector128<ulong> src, [Shift] byte count)
+        public static Vector128<ulong> vsrl(Vector128<ulong> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Shift] byte count)
+        public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Imm] byte count)
         {
             var x = v16u(ShiftRightLogical(vinflate(vlo(src), n256, z16i),count));
             var y = v16u(ShiftRightLogical(vinflate(vhi(src), n256, z16i),count));
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vsrl(Vector256<byte> src, [Shift] byte count)
+        public static Vector256<byte> vsrl(Vector256<byte> src, [Imm] byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
             var m = vmask.vlsb(n256, n8, (byte)(8 - count),z8);
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vsrl(Vector256<short> src, [Shift] byte count)
+        public static Vector256<short> vsrl(Vector256<short> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vsrl(Vector256<ushort> src, [Shift] byte count)
+        public static Vector256<ushort> vsrl(Vector256<ushort> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vsrl(Vector256<int> src, [Shift] byte count)
+        public static Vector256<int> vsrl(Vector256<int> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vsrl(Vector256<uint> src, [Shift] byte count)
+        public static Vector256<uint> vsrl(Vector256<uint> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vsrl(Vector256<long> src, [Shift] byte count)
+        public static Vector256<long> vsrl(Vector256<long> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vsrl(Vector256<ulong> src, [Shift] byte count)
+        public static Vector256<ulong> vsrl(Vector256<ulong> src, [Imm] byte count)
             => ShiftRightLogical(src, count); 
     }
 }

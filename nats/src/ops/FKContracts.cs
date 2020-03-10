@@ -21,14 +21,13 @@ namespace Z0
         {            
             [MethodImpl(Inline)]
             get => (int)nateval<N>();
-        }
-            
+        }            
     }
 
     /// <summary>
     /// Characterizes a higher-kinded function representation
     /// </summary>
-    public interface IFuncType : IKind<FunctionKind>
+    public interface IFuncType : IHigherKind<FunctionKind>
     {
 
     }

@@ -34,13 +34,14 @@ namespace Z0.Asm
             PatternBuffer = buffer;
         }
 
+
         Option<ParsedExtract> Parse(in MemberExtract src, int seq, ByteParser<EncodingPatternKind> parser)
         {
             var status = parser.Parse(src.EncodedData);                
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success(); 
-            if(!succeeded)               
-                Context.NotifyConsole(ExtractParseFailure(src.Uri, matched.ToTermCode()));
+            // if(!succeeded)               
+            //     Context.NotifyConsole(ExtractParseFailure(src.Uri, matched.ToTermCode()));
             var data = succeeded ? parser.Parsed.ToArray() : array<byte>();
             return succeeded 
                 ? ParsedExtract.Define(src, seq, matched.ToTermCode(), MemoryExtract.Define(src.EncodedData.Address, data))

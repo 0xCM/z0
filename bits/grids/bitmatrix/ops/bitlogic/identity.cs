@@ -11,12 +11,12 @@ namespace Z0
 
     partial class BitMatrix
     {
-        [MethodImpl(Inline), Identity, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), IdentityFunction, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> identity<T>(in BitMatrix<T> A)
             where T : unmanaged
                 => A;
 
-        [MethodImpl(Inline), Identity, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), IdentityFunction, NumericClosures(NumericKind.UnsignedInts)]
         public static ref BitMatrix<T> identity<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -24,5 +24,4 @@ namespace Z0
             return ref Z;
         }
     }
-
 }

@@ -41,7 +41,7 @@ namespace Z0
         /// Instantiates a contextual catalog-level emitter service
         /// </summary>
         /// <param name="context">The source context</param>
-        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IOpCatalog catalog, AsmEmissionObserver observer)
+        public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IAssemblyCatalog catalog, AsmEmissionObserver observer)
             => AsmCatalogEmitter.Create(context, catalog, observer);
 
 

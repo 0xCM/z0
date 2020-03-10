@@ -13,7 +13,7 @@ namespace Z0
     {
         NumericKind ImmKind => NumericKind.None;
 
-        OpArityKind ResolvedArity => OpArityKind.Nullary;
+        ArityKind ResolvedArity => ArityKind.Nullary;
 
         FixedWidth OperandWidth => FixedWidth.None;
 
@@ -24,5 +24,4 @@ namespace Z0
     {
         NumericKind IImmResolver.ImmKind => Numeric.kind<T>();
     }
-
 }

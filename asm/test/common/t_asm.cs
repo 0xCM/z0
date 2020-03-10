@@ -174,7 +174,7 @@ namespace Z0
             }            
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, NumericType<byte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, NumericTypeKind<byte> kind)
         {
             var w = n8;
             var id = OpIdentity.numeric(name, kind, false);
@@ -190,7 +190,7 @@ namespace Z0
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericType<sbyte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericTypeKind<sbyte> kind)
         {
             var w = n8;
             var id = OpIdentity.numeric(name, kind, false);
@@ -206,7 +206,7 @@ namespace Z0
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, in AsmCode dCode, in AsmCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericType<sbyte> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, in AsmCode dCode, in AsmCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericTypeKind<sbyte> kind)
         {
             var w = n8;
 
@@ -223,7 +223,7 @@ namespace Z0
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, NumericType<ushort> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, NumericTypeKind<ushort> kind)
         {
             var w = n16;
 
@@ -241,7 +241,7 @@ namespace Z0
         }
 
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<short,short,short> primal, Func<short,short,short> generic, NumericType<short> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<short,short,short> primal, Func<short,short,short> generic, NumericTypeKind<short> kind)
         {
             var w = n16;
 
@@ -258,7 +258,7 @@ namespace Z0
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, NumericType<uint> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, NumericTypeKind<uint> kind)
         {
             var w = n32;
             var id = OpIdentity.numeric(name, kind, false);
@@ -274,7 +274,7 @@ namespace Z0
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, NumericType<int> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, NumericTypeKind<int> kind)
         {
             var w = n32;
             var id = OpIdentity.numeric(name, kind, false);
@@ -290,7 +290,7 @@ namespace Z0
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, NumericType<long> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, NumericTypeKind<long> kind)
         {            
             var w = n64;
             var id = OpIdentity.numeric(name, kind, false);
@@ -306,7 +306,7 @@ namespace Z0
             CheckMatch(f0, id, f3, id.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, NumericType<ulong> kind)
+        protected void megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, NumericTypeKind<ulong> kind)
         {            
             var w = n64;
             var id = OpIdentity.numeric(name, kind, false);

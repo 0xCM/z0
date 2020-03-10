@@ -3,6 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.MklApi)]
+
 namespace Z0.Resolutions
 {        
     public sealed class MklApi : AssemblyResolution<MklApi>

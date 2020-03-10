@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Root;
 
@@ -17,15 +15,18 @@ namespace Z0
         
         public object EventData {get;}
 
-        [MethodImpl(Inline)]
-        public static AppEvent<T> Create<T>(string name, T data)
-            => new AppEvent<T>(name,data);
+        public CorrelationToken Correlation {get;}
 
         [MethodImpl(Inline)]
-        internal AppEvent(string name, object data)
+        public static AppEvent<T> Create<T>(string name, T data, CorrelationToken? ct = null)
+            => new AppEvent<T>(name, data, ct);
+
+        [MethodImpl(Inline)]
+        internal AppEvent(string name, object data, CorrelationToken? ct = null)
         {
             this.Description = name;
             this.EventData = data;
+            this.Correlation = ct ?? CorrelationToken.Empty;
         }
 
         public string Format()
@@ -36,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public AppEvent<T> As<T>()
-            => Create<T>(Description, (T)EventData);
+            => Create<T>(Description, (T)EventData, Correlation);
     }
 
     public readonly struct AppEvent<T> : IFormattable<AppEvent<T>>, IAppEvent<AppEvent<T>,T>
@@ -45,15 +46,18 @@ namespace Z0
         
         public T EventData {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator AppEvent(AppEvent<T> src)
-            => new AppEvent(src.Description, src.EventData);
+        public CorrelationToken Correlation {get;}
 
         [MethodImpl(Inline)]
-        internal AppEvent(string name, T data)
+        public static implicit operator AppEvent(AppEvent<T> src)
+            => new AppEvent(src.Description, src.EventData, src.Correlation);
+
+        [MethodImpl(Inline)]
+        internal AppEvent(string name, T data, CorrelationToken? ct = null)
         {
             this.Description = name;
             this.EventData = data;
+            this.Correlation = ct ?? CorrelationToken.Empty;
         }
 
         public string Format()
