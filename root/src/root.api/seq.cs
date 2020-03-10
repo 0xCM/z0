@@ -63,6 +63,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Lazy<T> defer<T>(Func<T> factory)
             => new Lazy<T>(factory);
-
     }
 }

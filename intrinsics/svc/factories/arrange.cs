@@ -51,16 +51,6 @@ namespace Z0
                 => ByteSwap256<T>.Op;
 
         [MethodImpl(Inline)]
-        public static BitClear128<T> vbitclear<T>(N128 w, T t = default)
-            where T : unmanaged
-                => BitClear128<T>.Op;
-
-        [MethodImpl(Inline)]
-        public static BitClear256<T> vbitclear<T>(N256 w, T t = default)
-            where T : unmanaged
-                => BitClear256<T>.Op;
-
-        [MethodImpl(Inline)]
         public static Hi128<T> vhi<T>(N128 w, T t = default)
             where T : unmanaged
                 => Hi128<T>.Op;

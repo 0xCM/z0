@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="host">The source type</param>
         [MethodImpl(Inline)]   
         public static string owner(Type host)
-            => host.Assembly.AssemblyId().Format();
+            => host.Assembly.Id().Format();
 
         [MethodImpl(Inline)]
         public static TypeIdentity operator +(TypeIdentity lhs, string rhs)

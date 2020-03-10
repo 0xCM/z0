@@ -181,5 +181,21 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static OpKindId? KindId(this MethodInfo m)
             => m.Tag<OpKindAttribute>().MapValueOrNull(a => a.KindId);
+
+        /// <summary>
+        /// Selects the methods from a source stream that have an identified kind
+        /// </summary>
+        /// <param name="src">The souce methods</param>
+        public static IEnumerable<MethodInfo> WithIdentifiedKind(this IEnumerable<MethodInfo> src)
+            => from m in src where m.KindId().HasValue select m;
+
+        /// <summary>
+        /// Selects the methods from a source stream of a specified kind
+        /// </summary>
+        /// <param name="src">The souce methods</param>
+        /// <param name="kind">The kind to match</param>
+        public static IEnumerable<MethodInfo> WithIdentifiedKind(IEnumerable<MethodInfo> src, OpKindId kind)
+            => from m in src where m.KindId() == kind select m;
+            
     }
 }

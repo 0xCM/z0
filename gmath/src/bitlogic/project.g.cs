@@ -14,27 +14,27 @@ namespace Z0
     partial class gmath
     {
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), LProject, NumericClosures(NumericKind.Integers)]
         public static T left<T>(T a, T b)
             where T : unmanaged
                 => a;
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), RProject, NumericClosures(NumericKind.Integers)]
         public static T right<T>(T a, T b)
             where T : unmanaged
                 => b;
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), LNot, NumericClosures(NumericKind.Integers)]
         public static T lnot<T>(T a, T b)
             where T : unmanaged
                 => not(a);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), RNot, NumericClosures(NumericKind.Integers)]
         public static T rnot<T>(T a, T b)
             where T : unmanaged
                 => not(b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), IdentityFunction, NumericClosures(NumericKind.Integers)]
         public static T identity<T>(T a)
             where T : unmanaged
                 => a;

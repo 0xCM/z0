@@ -14,11 +14,18 @@ namespace Z0.Asm
     using static HostCaptureWorkflow;
     using static AsmServiceMessages;
 
-    using WF = HostCaptureWorkflow;
+
 
     public abstract class WorkflowHost
     {
 
+    }
+
+    public enum WorkflowLogKind
+    {
+        None = 0,
+
+        IdentifiedKind = 1,
     }
 
     public class t_asm_workflow : t_asm<t_asm_workflow>
@@ -26,7 +33,25 @@ namespace Z0.Asm
 
         public t_asm_workflow()
         {
+            Root = RootEmissionPaths.Define(DefaultDataDir);
+            Root.LogDir.Clear();
+        }
 
+        
+        public override void Dispose()
+        {
+            base.Dispose();
+
+        }
+
+        RootEmissionPaths Root {get;}
+
+        ILogDevice OpenLog(WorkflowLogKind kind, string discriminator = null, bool append = false, FileExtension ext = null, bool display = false)
+        {
+            var prefix = (discriminator == null ? string.Empty : text.dot() + discriminator);
+            var devname = prefix + kind.ToString();            
+            var target = Root.LogDir + FileName.Define(devname, ext ?? FileExtensions.Log);
+            return Context.OpenLogDevice(target, devname, append, display);
         }
 
         public bool HandleMembersLocated {get;} = true;
@@ -87,19 +112,16 @@ namespace Z0.Asm
 
         void OnEvent(StepStart<IAssemblyCatalog> e)
         {
-            var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.DarkGreen);
+            var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.Green);
             NotifyConsole(msg);
         }
 
         void OnEvent(StepEnd<IAssemblyCatalog> e)
         {
-            var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.DarkGreen);
-            NotifyConsole(msg);
-            
+            var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.Magenta);
+            NotifyConsole(msg);            
         }
 
-        RootEmissionPaths Root
-            => RootEmissionPaths.Define(DefaultDataDir);
 
         void ConnectReceivers(IHostCaptureEventBroker broker)
         {
@@ -132,7 +154,6 @@ namespace Z0.Asm
 
             NotifyConsole(accepted.Message);
         }
-
 
         public void ExecuteWorkflow()
         {
@@ -175,6 +196,20 @@ namespace Z0.Asm
             foreach(var key in index.DuplicateKeys)
                 NotifyConsole(DuplicateWarning(host,key));
 
+            var kinded = (from member in src.ToEnumerable()
+                         let kind = member.Method.KindId()
+                         where kind.HasValue
+                         select (member.Uri, member.Method, kind.Value)).ToArray();
+
+            var messages = list<AppMsg>(kinded.Length);        
+            foreach(var (uri,method,kind) in kinded)
+                messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString()), AppMsgKind.Info));
+
+            if(messages.Count != 0)
+            {
+                using var log = OpenLog(WorkflowLogKind.IdentifiedKind, append:true, ext:FileExtensions.Csv);  
+                log.Write(messages.ToArray());
+            }
         }
 
     }

@@ -39,7 +39,7 @@ namespace Z0
         {
             var tag = host.Tag<ApiHostAttribute>();
             var name = text.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
-            var owner = host.Assembly.AssemblyId();
+            var owner = host.Assembly.Id();
             return new ApiHostUri(owner, name);
         }
                 

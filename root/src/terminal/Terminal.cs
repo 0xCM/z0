@@ -139,7 +139,30 @@ namespace Z0
             else
                 WriteLine(msg, msg.Color); 
         }
-                                
+
+        public void WriteLines<F>(params F[] formattables)
+            where F : ICustomFormattable
+        {
+            lock(locker)            
+            {
+                foreach(var msg in formattables)
+                    Console.WriteLine(msg);
+            }            
+        }
+
+        public void WriteLines<F>(AppMsgColor color, params F[] formattables)
+            where F : ICustomFormattable
+        {
+            lock(locker)            
+            {
+                var current = Console.ForegroundColor;
+                Console.ForegroundColor = (ConsoleColor)color;
+                foreach(var msg in formattables)
+                    Console.WriteLine(msg);
+                Console.ForegroundColor = current;
+            }            
+        }
+
         public void WriteMessages(IEnumerable<AppMsg> messages)
         {
             lock(locker)            

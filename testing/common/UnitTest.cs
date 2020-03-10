@@ -26,7 +26,11 @@ namespace Z0
 
             }        
 
-        
+
+        public virtual void Dispose()
+        {
+
+        }
         
         /// <summary>
         /// Creates a new stopwatch and optionally start it

@@ -11,7 +11,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Xnor, NumericClosures(NumericKind.Integers)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
                 => xnor_u(a,b);

@@ -129,8 +129,8 @@ namespace Z0
             var A = Blocks.alloc(w,BlockCount, t);                
             var B = Blocks.alloc(w,BlockCount, t);
 
-            var pattern0 = vmask.vlsb(w,n2,n1,t);
-            var pattern1 = vmask.vmsb(w,n2,n1,t);
+            var pattern0 = vgbits.vlsb(w,n2,n1,t);
+            var pattern1 = vgbits.vmsb(w,n2,n1,t);
 
             for(var block = 0; block < BlockCount; block++)
             {

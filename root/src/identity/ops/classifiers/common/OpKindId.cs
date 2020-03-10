@@ -69,6 +69,8 @@ namespace Z0
 
         Mod,
 
+        Clamp,
+
         Sll = 300,
 
         Srl,
@@ -80,6 +82,12 @@ namespace Z0
         Rotl,
 
         Rotr,
+
+        XorSl,
+
+        XorSr,
+
+        Xors,
 
         Pred = 400,
 
@@ -98,5 +106,9 @@ namespace Z0
         Between,
 
         Identity = 600,
+
+        Sum = 700,
+
+        Avg,
     }
 }

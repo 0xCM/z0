@@ -11,8 +11,8 @@ namespace Z0
         
     using static Root;
 
-    [OpServiceProvider("bitcore.services")]
-    public partial class BitCoreServices : IOpServiceProvider
+    [OpSvcHostProvider("bitcore.services")]
+    public partial class BitCoreServices : IOpSvcHostProvider
     {
         public Type[] ServiceHostTypes {get;}
             = typeof(BitCoreServices).GetNestedTypes().Realize<IFunc>().ToArray();

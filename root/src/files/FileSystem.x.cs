@@ -67,8 +67,8 @@ namespace Z0
         /// Creates a writer initialized with the source file; caller-disposal required
         /// </summary>
         /// <param name="dst">The file path</param>
-        public static StreamWriter Writer(this FilePath dst)
-            => new StreamWriter(dst.CreateParentIfMissing().FullPath, false);
+        public static StreamWriter Writer(this FilePath dst, bool append = false)
+            => new StreamWriter(dst.CreateParentIfMissing().FullPath, append);
 
         /// <summary>
         /// Determines whether a file exists

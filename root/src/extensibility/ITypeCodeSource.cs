@@ -21,7 +21,7 @@ namespace Z0
         where S : struct, ITypeCodeSource<S>
     {
         AssemblyId ITypeCodeSource.Owner
-            => typeof(S).Assembly.AssemblyId();     
+            => typeof(S).Assembly.Id();     
 
         ulong[] ITypeCodeSource.AssignedCodes 
             => typeof(S).LiteralFields().Map(f => (ulong)f.GetRawConstantValue());

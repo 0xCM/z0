@@ -83,7 +83,7 @@ namespace Z0.Asm
 
         CapturedOp[] RunWorkflow(Assembly src)        
         {
-            Context.Notify($"Executing {src.AssemblyId().Format()} capture workflow");
+            Context.Notify($"Executing {src.Id().Format()} capture workflow");
 
             var extracts = list<CapturedOp>();
 

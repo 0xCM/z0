@@ -120,8 +120,7 @@ namespace Z0
             finally
             {
                 PostTestResults(results);
-                if(unit is IDisposable d)
-                    d.Dispose();
+                unit.Dispose();
             }
         }
 

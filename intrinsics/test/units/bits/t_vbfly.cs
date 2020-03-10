@@ -77,7 +77,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector<uint>(n);
-                var y = ginx.vbfly(w, x);
+                var y = vgbits.vbfly(w, x);
                 var xs = x.ToSpan();
                 var zs = Blocks.single<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
@@ -94,7 +94,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector<uint>(n);
-                var y = ginx.vbfly(w, x);
+                var y = vgbits.vbfly(w, x);
                 var xs = x.ToSpan();
                 var zs = Blocks.single<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
@@ -112,7 +112,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector<ulong>(n);
-                var y = ginx.vbfly(w, x);
+                var y = vgbits.vbfly(w, x);
                 var xs = x.ToSpan();
                 var zs = Blocks.single<ulong>(n);
                 for(var j=0; j<zs.CellCount; j++)
@@ -131,7 +131,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector<T>(w);
-                var y = ginx.vbfly(b, x);
+                var y = vgbits.vbfly(b, x);
                 var xs = x.ToSpan();
                 var zs = Blocks.single<T>(w);
                 for(var j=0; j<zs.CellCount; j++)

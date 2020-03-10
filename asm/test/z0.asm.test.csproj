@@ -14,6 +14,9 @@
 
     <ProjectReference Include="$(TopDir)intrinsics/svc/z0.intrinsics.svc.csproj" />
     <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />
+    <ProjectReference Include="$(TopDir)bits/vbits/z0.bits.vbits.csproj" />
+    <ProjectReference Include="$(TopDir)permute/src/z0.permute.csproj" />
+
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
     <ProjectReference Include="$(TopDir)libm/src/z0.libm.csproj" />
   </ItemGroup>

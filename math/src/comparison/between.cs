@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
-        [MethodImpl(Inline),Between]
+        [MethodImpl(Inline), Between]
         public static bit between(byte t, byte min, byte max)    
             => t >= min && t <= max;
 
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
-        [MethodImpl(Inline),Between]
+        [MethodImpl(Inline), Between]
         public static bit between(sbyte t, sbyte min, sbyte max)    
             => t >= min && t <= max;
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
-        [MethodImpl(Inline),Between]
+        [MethodImpl(Inline), Between]
         public static bit between(short t, short min, short max)    
             => t >= min && t <= max;
 
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
-        [MethodImpl(Inline),Between]
+        [MethodImpl(Inline), Between]
         public static bit between(ushort t, ushort min, ushort max)    
             => t >= min && t <= max;
 
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
-        [MethodImpl(Inline),Between]
+        [MethodImpl(Inline), Between]
         public static bit between(int t, int min, int max)    
             => t >= min && t <= max;
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
-        [MethodImpl(Inline),Between]
+        [MethodImpl(Inline), Between]
         public static bit between(uint t, uint min, uint max)    
             => t >= min && t <= max;
 
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
-        [MethodImpl(Inline),Between]
+        [MethodImpl(Inline), Between]
         public static bit between(long t, long min, long max)    
             => t >= min && t <= max;
 
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
-        [MethodImpl(Inline),Between]
+        [MethodImpl(Inline), Between]
         public static bit between(ulong t, ulong min, ulong max)    
             => t >= min && t <= max;
     }

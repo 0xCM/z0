@@ -55,7 +55,10 @@ public enum AssemblyId : ulong
 
     BitVectors = 100,
 
+    VBits = 110,
+
     BitGrids = 700,
+
 
     Logix = 120,
 
@@ -149,12 +152,16 @@ public enum AssemblyId : ulong
 
     Containers = 380,
 
+    ContainerTest = Containers | Test,
+
     Cil = 390,
 
     CilTest = Cil | Test,
 
-    ContainerTest = Containers | Test,
+    Permute = 400,
 
+    PermuteTest = Permute | Test,
+    
     Control = 1000,        
 
     Svc = T16,

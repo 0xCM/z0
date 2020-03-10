@@ -47,6 +47,12 @@ namespace Z0.Asm
         public FolderPath DecodedDir
             => RootDir + DecodedFolder;
 
+        public FolderName LogFolder
+            => FolderName.Define("logs");
+
+        public FolderPath LogDir
+            => RootDir + LogFolder;
+
         public FolderName AssemblyFolder(AssemblyId id) 
             => FolderName.Define(id.Format());
 

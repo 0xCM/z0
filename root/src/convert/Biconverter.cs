@@ -39,9 +39,6 @@ namespace Z0
 
     public readonly struct Biconverter<S> : IBiconverter<S>
     {        
-        // [MethodImpl(Inline)]
-        // public static Biconverter<S> Create()
-        //     => default(Biconverter<S>);
         
         /// <summary>
         /// Converts an incoming value of the target type to a value of specified type, if possible

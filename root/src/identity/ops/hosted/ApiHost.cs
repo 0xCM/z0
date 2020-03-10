@@ -33,16 +33,23 @@ namespace Z0
         public static ApiHost Empty = new ApiHost(AssemblyId.None, typeof(void));
         
         /// <summary>
-        /// Searches a source assembly for api host types as determined by attribution
+        /// Searches an assembly for api host types
         /// </summary>
         /// <param name="src">The assembly to search</param>
         public static IEnumerable<Type> HostTypes(Assembly src)
             => src.GetTypes().Tagged<ApiHostAttribute>();
 
+        /// <summary>
+        /// Instantiates the api hosts found in a specified assembly
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        public static IEnumerable<ApiHost> Hosts(Assembly src)
+            => HostTypes(src).Select(FromType);
+
         [MethodImpl(Inline)]
         public static ApiHost FromType(Type src)
         {
-            var owner = src.Assembly.AssemblyId();            
+            var owner = src.Assembly.Id();            
             return new ApiHost(owner, src);
         }
 

@@ -23,6 +23,8 @@ namespace Z0
                 R.BitSpan.Resolution,
                 R.BitFields.Resolution,
                 R.BitVectors.Resolution,
+                R.VBits.Resolution,
+                R.Permute.Resolution,
                 R.Blocks.Resolution,
                 R.Fixed.Resolution,
                 R.Math.Resolution,

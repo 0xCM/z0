@@ -120,9 +120,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber box<E>(E e)
             where E : unmanaged, Enum
-                => BoxedNumber.Define(Convert.ChangeType(e, 
-                    kind<E>().TypeCode()), 
-                    kind<E>().NumericKind());
+                => BoxedNumber.Define(Convert.ChangeType(e, kind<E>().TypeCode()), kind<E>().NumericKind());
 
         /// <summary>
         /// Gets the literals defined by an enumeration
@@ -130,9 +128,11 @@ namespace Z0
         /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static E[] literals<E>(bool peek = false)
+        public static E[] literals<E>(bool peek = false, bool skipzero = true)
             where E : unmanaged, Enum
-                => peek ? CreateLiterals<E>() : (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiterals<E>());
+                => peek 
+                ? CreateLiterals<E>(skipzero) 
+                : (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiterals<E>(skipzero));
 
         /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values
@@ -140,30 +140,34 @@ namespace Z0
         /// <param name="peek">If true, extracts the content, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="V">The numeric value type</typeparam>
-        public static EnumValues<E,V> values<E,V>(bool peek = false)
+        public static EnumValues<E,V> values<E,V>(bool peek = false, bool skipzero = true)
             where E : unmanaged, Enum
             where V : unmanaged
-                => peek ? CreateValues<E,V>() :  (EnumValues<E,V>)ValueCache.GetOrAdd(typeof(E), _ => CreateValues<E,V>());
+                => peek 
+                ? CreateValues<E,V>(skipzero) 
+                : (EnumValues<E,V>)ValueCache.GetOrAdd(typeof(E), _ => CreateValues<E,V>(skipzero));
 
         /// <summary>
         /// Gets the declaration-order indices for each defined literal
         /// </summary>
         /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static LiteralIndices<E> indices<E>(bool peek = false)
+        public static LiteralIndices<E> indices<E>(bool peek = false, bool skipzero = true)
             where E : unmanaged, Enum
-                => peek ? CreateIndices<E>() : (LiteralIndices<E>)IndicesCache.GetOrAdd(typeof(E), _ => CreateIndices<E>());
+                => peek 
+                 ? CreateIndices<E>(skipzero) 
+                 : (LiteralIndices<E>)IndicesCache.GetOrAdd(typeof(E), _ => CreateIndices<E>(skipzero));
 
         /// <summary>
         /// Constructs a arbitrarily deduplicated value-to-member index
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="V">The numeric value type</typeparam>
-        public static IDictionary<V,E> dictionary<E,V>(bool peek = false)
+        public static IDictionary<V,E> dictionary<E,V>(bool peek = false, bool skipzero = true)
             where E : unmanaged, Enum
             where V : unmanaged
         {
-            var pairs = values<E,V>(peek);
+            var pairs = values<E,V>(peek, skipzero);
             var index = new Dictionary<V,E>();
             foreach(var pair in pairs)
                 index.TryAdd(pair.Value, pair.Enum);
@@ -178,7 +182,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string[] names<E>()
             => Enum.GetNames(typeof(E));
-
         
         /// <summary>
         /// Interprets an enum value as a signed byte
@@ -265,11 +268,11 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
-        static EnumValues<E,T> CreateValues<E,T>()
+        static EnumValues<E,T> CreateValues<E,T>(bool skipzero = true)
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var index = CreateIndices<E>();
+            var index = CreateIndices<E>(skipzero);
             var dst = new EnumValue<E,T>[index.Length];
             for(var i=0; i<index.Length; i++)
             {
@@ -284,24 +287,33 @@ namespace Z0
         /// Gets the literals defined by an enumeration
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
-        static E[] CreateLiterals<E>()
+        static E[] CreateLiterals<E>(bool skipzero = true)
             where E : unmanaged, Enum
         {
-            var i = indices<E>();
+            var i = indices<E>(false, skipzero);
             var dst = new E[i.Length];
             for(var j = 0; j<dst.Length; j++)
                 dst[j] = i[j].Literal;
             return dst;    
         }
 
-        static LiteralIndices<E> CreateIndices<E>()
+        static LiteralIndices<E> CreateIndices<E>(bool skipzero = true)
             where E : unmanaged, Enum
         {
             var fields = typeof(E).LiteralFields().ToArray();
-            var dst = new LiteralIndex<E>[fields.Length];
+            var indices = list<LiteralIndex<E>>(fields.Length);
             for(var i=0; i< fields.Length; i++)
-                dst[i] = ((E)fields[i].GetRawConstantValue(), i);
-            return LiteralIndex.Define(dst);
+            {
+                var value = (E)fields[i].GetRawConstantValue();
+                if(value.IsNone())                
+                {
+                    if(!skipzero)
+                        indices.Add((value,i));
+                }
+                else
+                    indices.Add((value,i));
+            }
+            return LiteralIndex.Define(indices.ToArray());
         }
 
         static ConcurrentDictionary<Type,object> LiteralCache {get;}

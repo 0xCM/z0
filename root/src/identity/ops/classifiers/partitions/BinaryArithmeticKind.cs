@@ -9,23 +9,28 @@ namespace Z0
     
     using static Root;
     using static OpKindId;
+    using Id = OpKindId;
 
     using A = OpKindAttribute;
 
     /// <summary>
     /// Classsifies binary arithmetic operators
     /// </summary>
-    public enum BinaryArithmeticKind : byte
+    public enum BinaryArithmeticKind : ulong
     {
-        Add = 1,
+        None = 0,
 
-        Sub = 2,
+        Add = Id.Add,
 
-        Mul = 3,
+        Sub = Id.Sub,
 
-        Div = 4,
+        Mul = Id.Mul,
 
-        Mod = 5,
+        Div = Id.Div,
+
+        Mod = Id.Mod,
+
+        Clamp = Id.Clamp,
     }    
 
     public sealed class SubAttribute : A { public SubAttribute() : base(Sub) {} }
@@ -35,6 +40,9 @@ namespace Z0
     public sealed class DivAttribute : A { public DivAttribute() : base(Div) {} }
         
     public sealed class ModAttribute : A { public ModAttribute() : base(Mod) {} }
+
+    public sealed class ClampAttribute : A { public ClampAttribute() : base(Clamp) {} }
+
 
     partial class ClassifierFormat
     {

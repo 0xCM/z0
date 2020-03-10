@@ -20,6 +20,31 @@ namespace Z0
     partial class dinx
     {         
         /// <summary>
+        /// The f least significant bits of each 8 bit segment are enabled
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the bit density</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
+            where T : unmanaged
+                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
+
+        /// <summary>
+        /// The f least significant bits of each 8 bit segment are enabled
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the bit density</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
+            where T : unmanaged
+                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
+
+
+        /// <summary>
         /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -28,7 +53,7 @@ namespace Z0
         public static Vector128<byte> vsrl(Vector128<byte> src, [Imm] byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
-            var m = vmask.vlsb(n128, n8, (byte)(8 - count),z8);
+            var m = vlsb(n128, n8, (byte)(8 - count),z8);
             return dinx.vand(y,m);
         }
 
@@ -128,7 +153,7 @@ namespace Z0
         public static Vector256<byte> vsrl(Vector256<byte> src, [Imm] byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
-            var m = vmask.vlsb(n256, n8, (byte)(8 - count),z8);
+            var m = vlsb(n256, n8, (byte)(8 - count),z8);
             return dinx.vand(y,m);
         } 
 

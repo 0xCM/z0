@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), CImpl, NumericClosures(NumericKind.Integers)]
         public static T cimpl<T>(T a, T b)
             where T : unmanaged
                 => cimpl_u(a,b);

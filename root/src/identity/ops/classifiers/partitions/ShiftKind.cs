@@ -11,31 +11,47 @@ namespace Z0
     using static OpKindId;
 
     using A = OpKindAttribute;
+    using Id = OpKindId;
 
     /// <summary>
     /// Classifies bitwise shift operators
     /// </summary>
-    public enum ShiftKind : byte
+    public enum ShiftKind : ulong
     {
         /// <summary>
         /// Classifies a logical left-shift
         /// </summary>
-        Sll = 1,
+        Sll = Id.Sll,
 
         /// <summary>
         /// Classifies a logical right-shift
         /// </summary>
-        Srl = 2,
+        Srl = Id.Srl,
 
         /// <summary>
         /// Classifies a left circular shift
         /// </summary>
-        Rotl = 4,
+        Rotl = Id.Rotl,
 
         /// <summary>
         /// Classifies a right circular shift
         /// </summary>
-        Rotr  = 8,
+        Rotr  = Id.Rotr,
+
+        /// <summary>
+        /// Classifies the composite operation a^(a << offset)
+        /// </summary>
+        XorSl = Id.XorSl,
+
+        /// <summary>
+        /// Classifies the composite operation a^(a >> offset)
+        /// </summary>
+        XorSr = Id.XorSr,
+
+        /// <summary>
+        /// Classifies the composite operation a ^ ((a << offset) ^ (a >> offset))
+        /// </summary>
+        Xors = Id.Xors,
     }    
 
     public sealed class SllAttribute : A { public SllAttribute() : base(Sll) {} }
@@ -50,6 +66,11 @@ namespace Z0
         
     public sealed class RotrAttribute : A { public RotrAttribute() : base(Rotr) {} }
 
+    public sealed class XorSlAttribute : A { public XorSlAttribute() : base(XorSl) {} }
+
+    public sealed class XorSrAttribute : A { public XorSrAttribute() : base(XorSr) {} }
+
+    public sealed class XorsAttribute : A { public XorsAttribute() : base(Xors) {} }
 
     partial class ClassifierFormat
     {
@@ -64,7 +85,6 @@ namespace Z0
 
         public static string Format<S,T>(this ShiftKind kind, S arg1, T arg2)
             => $"{arg1} {kind.Format()} {arg2}"; 
-
     }
 
 }

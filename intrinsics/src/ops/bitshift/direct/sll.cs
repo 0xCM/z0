@@ -19,6 +19,30 @@ namespace Z0
     partial class dinx
     {           
         /// <summary>
+        /// The f most significant bits of each 8 bits are enabled
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the bit density</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        static Vector128<T> vmsb<T>(N128 w, N8 f, byte d, T t = default)
+            where T : unmanaged
+                => generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
+
+        /// <summary>
+        /// Creates a mask where f most significant bits of each 8 bits are enabled
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the bit density</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        static Vector256<T> vmsb<T>(N256 w, N8 f, byte d, T t = default)
+            where T : unmanaged
+                => generic<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
+
+        /// <summary>
         /// Defines the unfortunately missing _mm_slli_epi8 that shifts each vector component leftward by a common number of bits
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -27,7 +51,7 @@ namespace Z0
         public static Vector128<byte> vsll(Vector128<byte> src, [Imm] byte count)
         {
             var y = v8u(dinx.vsll(v64u(src), count));
-            var m = vmask.vmsb(n128, n8, (byte)(8 - count),z8);
+            var m = vmsb(n128, n8, (byte)(8 - count),z8);
             return dinx.vand(y,m);
         }
 
@@ -109,7 +133,7 @@ namespace Z0
         public static Vector256<byte> vsll(Vector256<byte> src, [Imm] byte count)
         {
             var y = v8u(dinx.vsll(v64u(src), count));
-            var m = vmask.vmsb(n256, n8, (byte)(8 - count),z8);
+            var m = vmsb(n256, n8, (byte)(8 - count),z8);
             return dinx.vand(y,m);
         }
 

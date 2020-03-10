@@ -22,7 +22,7 @@ namespace Z0
 
         public static FileExtension Raw =>  FileExtension.Define("raw");
 
-        public static FileExtension Cs =>  FileExtension.Define("cs");
+        public static FileExtension Log =>  FileExtension.Define("log");
         
     }
 }

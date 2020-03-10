@@ -14,4 +14,16 @@ namespace Z0
     {
 
     }     
+
+    public interface IAppServiceAlloction : IAppService, IServiceAllocation
+    {
+
+    }
+
+    public interface IAppServiceAlloction<C> : IServiceAllocation, IContextual<C>
+        where C : IContext
+    {
+        
+    }
+
 }

@@ -34,7 +34,24 @@ namespace Z0
         /// <param name="content">The message to print</param>    
         public static void print(object content)
             => T.WriteLine(content, AppMsgKind.Info);
-        
+
+        /// <summary>
+        /// Writes formattables to the console in a contiguous block
+        /// </summary>
+        /// <param name="content">The content to print</param>    
+        public static void print<F>(params F[] content)
+            where F : ICustomFormattable
+                => T.WriteLines(content);
+
+        /// <summary>
+        /// Writes formattables to the console in a contiguous block using a specified foreground color
+        /// </summary>
+        /// <param name="color">The message foreground color</param>    
+        /// <param name="content">The content to print</param>    
+        public static void print<F>(AppMsgColor color, params F[] content)
+            where F : ICustomFormattable
+                => T.WriteLines(color,content);
+
         /// <summary>
         /// Prints a sequence of messages in an unbroken block
         /// </summary>

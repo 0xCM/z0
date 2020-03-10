@@ -71,7 +71,7 @@ namespace Z0.Asm
         {
             var index = src.CreateClrIndex();
             var dir = AsmEmissionPaths.The.CilDir;
-            var srcId = src.AssemblyId();
+            var srcId = src.Id();
 
             foreach(var host in src.ApiHosts())
             {

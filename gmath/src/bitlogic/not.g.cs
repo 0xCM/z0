@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Not, NumericClosures(NumericKind.Integers)]
         public static T not<T>(T a)
             where T : unmanaged
                 => not_u(a);

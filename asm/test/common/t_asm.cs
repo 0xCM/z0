@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-
     using static zfunc;
 
     public abstract class t_asm<U> : UnitTest<U>
@@ -23,10 +22,6 @@ namespace Z0
             Context = AsmContext.Rooted(this, DefaultComposition.Create());
         }
 
-        public void Dispose()
-        {
-
-        }
 
         protected string Math
             => nameof(math);

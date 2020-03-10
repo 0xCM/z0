@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Reflection;
 
     /// <summary>
@@ -16,11 +13,10 @@ namespace Z0
     public interface IContext
     {
         AssemblyId Owner
-            => Assembly.GetEntryAssembly().AssemblyId();
+            => Assembly.GetEntryAssembly().Id();
         
         IAppPaths Paths 
-            => AppPathProvider.Create(Owner, Env.Current.RunDir);   
-                         
+            => AppPathProvider.Create(Owner, Env.Current.RunDir);                         
     }
 
     /// <summary>
