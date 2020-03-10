@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
 
     [SuppressUnmanagedCodeSecurity]
-    public static unsafe class buffers
+    public static unsafe class Buffers
     {
         /// <summary>
         /// Allocates an execution buffer
@@ -22,14 +22,14 @@ namespace Z0
         public static ExecBuffer alloc(int length)
             => ExecBuffer.Own((liberate(Marshal.AllocHGlobal(length), length), length));        
 
-        [MethodImpl(Inline)]
-        public static ExecBufferSpan spanalloc(int length)
-        {
-            var handle = liberate(Marshal.AllocHGlobal(length), length);            
-            var content = new Span<byte>(handle.ToPointer(), length);
-            content.Clear();
-            return ExecBufferSpan.Own(handle,content);
-        }
+        // [MethodImpl(Inline)]
+        // public static ExecBufferSpan spanalloc(int length)
+        // {
+        //     var handle = liberate(Marshal.AllocHGlobal(length), length);            
+        //     var content = new Span<byte>(handle.ToPointer(), length);
+        //     content.Clear();
+        //     return ExecBufferSpan.Own(handle,content);
+        // }
 
         /// <summary>
         /// Deallocates a native allocation
@@ -76,12 +76,12 @@ namespace Z0
         static IntPtr Liberate(Span<byte> src)
             => Liberate(ref head(src), src.Length);
 
-        static void ThrowLiberationError(IntPtr pCode, ReadOnlySpan<byte> src)
-        {
-            var start = (ulong)pCode;
-            var end = start + (ulong)src.Length;            
-            throw new Exception($"An attempt to liberate {src.Length} bytes of memory for execution failed");     
-        }
+        // static void ThrowLiberationError(IntPtr pCode, ReadOnlySpan<byte> src)
+        // {
+        //     var start = (ulong)pCode;
+        //     var end = start + (ulong)src.Length;            
+        //     throw new Exception($"An attempt to liberate {src.Length} bytes of memory for execution failed");     
+        // }
 
         static void ThrowLiberationError(IntPtr pCode, ByteSize Length)
         {

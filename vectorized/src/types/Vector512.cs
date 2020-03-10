@@ -49,7 +49,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ConstPair<Vector256<T>>(Vector512<T> src)
             => (src.Lo, src.Hi);
-         
+
+
         [MethodImpl(Inline)]
         public static bool operator ==(in Vector512<T> a, in Vector512<T> b)        
             => a.Equals(b);

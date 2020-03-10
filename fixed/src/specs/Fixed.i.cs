@@ -24,16 +24,26 @@ namespace Z0
         }
     }
 
-    public interface IFixed<F,W> : IFixedWidth, IFixed<F>
+    public interface IFixed<C,F> : IFixed<F>
         where F : unmanaged, IFixed
-        where W : unmanaged, ITypeNat
+        where C : IFixed<C, F>
     {
+        
+    }
 
-        int IFixed.BitCount 
+    public interface IFixedChar : IFixed
+    {
+        ReadOnlySpan<char> Individuals {get;}        
+    }
+
+    public interface IFixedChar<C> : IFixedChar
+        where C : unmanaged    
+    {
+        int IFixed.FixedBitCount
         {
             [MethodImpl(Inline)]
-            get => bitsize<F>();
+            get => bitsize<C>();
         }
-                    
-    } 
+    }
+
 }

@@ -20,7 +20,7 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {            
             if(typeof(T) == typeof(int))
-                sample.bernoulli(Source,  DistSpec, Spans.span32i(buffer));
+                sample.bernoulli(Source,  DistSpec, Spans.s32i(buffer));
             else 
                 throw unsupported<T>();
             

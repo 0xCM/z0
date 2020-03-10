@@ -26,7 +26,7 @@ namespace Z0
             get => (FixedWidth)bitsize<T>();
         }
 
-        int IFixed.BitCount
+        int IFixed.FixedBitCount
         {
             [MethodImpl(Inline)]
             get => (int)bitsize<T>();

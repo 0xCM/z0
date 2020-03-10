@@ -48,6 +48,6 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public void Dispose()
-            => buffers.release(Handle);
+            => Buffers.release(Handle);
     }
 }

@@ -11,6 +11,10 @@ namespace Z0
     using static Root;
 
     [SuppressUnmanagedCodeSecurity]
+    public delegate R FixedEmitter<R>()
+        where R : IFixed;
+
+    [SuppressUnmanagedCodeSecurity]
     public delegate R FixedFunc<X0,R>(X0 x0)
         where R : IFixed
         where X0 : IFixed;

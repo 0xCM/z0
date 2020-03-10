@@ -17,14 +17,14 @@ namespace  Z0
         [MethodImpl(Inline)]
         public static unsafe Span<T> Content<T>(this BufferToken src)
             where T : unmanaged
-                => Spans.span((byte*)src.Handle.ToPointer(), src.Length).As<T>();
+                => Spans.cover((byte*)src.Handle.ToPointer(), src.Length).As<T>();
 
         /// <summary>
-        /// Fills a token-identified buffer with data from a span
+        /// Fills a token-identified buffer with data from a source span and returns the target memory to the caller as a span
         /// </summary>
         /// <param name="src">The source content</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static unsafe void Fill<T>(this BufferToken dst, ReadOnlySpan<T> src)
+        public static unsafe Span<T> Fill<T>(this BufferToken dst, ReadOnlySpan<T> src)
             where T : unmanaged
         {
             var srcBytes = src.AsBytes();
@@ -37,29 +37,19 @@ namespace  Z0
                 srcBytes.CopyTo(dstBytes);
             }
             else
-                srcBytes.Slice(dst.Length).CopyTo(dstBytes);        
+                srcBytes.Slice(dst.Length).CopyTo(dstBytes);  
+            return dst.Content<T>();         
         }
 
-        /// <summary>
-        /// Fills a token-identified buffer with data from a span
-        /// </summary>
-        /// <param name="dst">The target buffer</param>
-        /// <param name="src">The source content</param>
-        /// <typeparam name="T">The content cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Fill<T>(this BufferToken dst, Span<T> src)
-            where T : unmanaged        
-                => dst.Fill(src.ReadOnly());
+        // [MethodImpl(Inline)]
+        // public static void Fill<T>(this BufferToken dst, Span<T> src)
+        //     where T : unmanaged        
+        //         => dst.Fill(src.ReadOnly());
 
-        /// <summary>
-        /// Fills a token-identified buffer with data from an array
-        /// </summary>
-        /// <param name="src">The source content</param>
-        /// <typeparam name="T">The content cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Fill<T>(this BufferToken dst, T[] src)   
-            where T : unmanaged
-                => dst.Fill(src.AsSpan().ReadOnly());
+        // [MethodImpl(Inline)]
+        // public static void Fill<T>(this BufferToken dst, T[] src)   
+        //     where T : unmanaged
+        //         => dst.Fill(src.AsSpan().ReadOnly());
 
         /// <summary>
         /// Zero-fills a token-identified buffer

@@ -8,8 +8,9 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-
+    
     using static Root;
+    using static IdentityShare;
 
     public static class Parametric
     {
@@ -55,4 +56,56 @@ namespace Z0
     {
         Type[] IParametric.Parameters => array(typeof(T0), typeof(T1), typeof(T2), typeof(T3));
     }
+
+    public interface IParametricIdentity : ITypeIdentity<ParametricIdentity>
+    {
+
+    }
+    
+    public readonly struct ParametricIdentity  : IParametricIdentity
+    {
+        public string Identifier {get;}            
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(ParametricIdentity src)
+            => src.Identifier;
+
+
+        [MethodImpl(Inline)]
+        public static bool operator==(ParametricIdentity a, ParametricIdentity b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(ParametricIdentity a, ParametricIdentity b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        ParametricIdentity(IParametric parametric)
+        {
+            this.Identifier = text.blank;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Identifier);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(ParametricIdentity src)
+            => equals(this, src);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(ParametricIdentity other)
+            => compare(this, other);
+ 
+        public override int GetHashCode()
+            => hash(this);
+
+        public override bool Equals(object obj)
+            => equals(this, obj);
+
+        public override string ToString()
+            => Identifier;
+    }    
 }

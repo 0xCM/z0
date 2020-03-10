@@ -6,8 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+    using System.Security;
+    using System.Reflection;
+
     using static Root;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed64 Emitter64();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed64 UnaryOp64(Fixed64 a);
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed64 BinaryOp64(Fixed64 a, Fixed64 b);
 
     public struct Fixed64 : IFixedNumeric<Fixed64,ulong>, IEquatable<Fixed64>
     {
@@ -21,7 +32,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         public FixedWidth FixedWidth
         {
@@ -94,4 +105,41 @@ namespace Z0
         public override string ToString() 
             => X0.ToString();
     }
+
+    partial class FixedNumericOps
+    {
+        [MethodImpl(Inline)]
+        public static Fixed64 ToFixed(this long src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed64 ToFixed(this ulong src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static UnaryOp64 ToFixed(this Func<ulong,ulong> f)
+            => (Fixed64 a) =>f(a.Data);
+
+        [MethodImpl(Inline)]
+        public static UnaryOp64 ToFixed(this Func<long,long> f)
+            => (Fixed64 a) =>f((long)a.Data);
+
+        [MethodImpl(Inline)]
+        public static BinaryOp64 ToFixed(this Func<ulong,ulong,ulong> f)
+            => (Fixed64 a, Fixed64 b) =>f(a.Data, b.Data);
+
+        [MethodImpl(Inline)]
+        public static BinaryOp64 ToFixed(this Func<long,long,long> f)
+            => (Fixed64 a, Fixed64 b) =>f((long)a.Data, (long)b.Data);
+
+        [MethodImpl(Inline)]
+        public static BinaryOp64 ToFixedBinOp(this MethodInfo f, NumericTypeKind<ulong> k)
+            => f.CreateDelegate<Func<ulong,ulong,ulong>>().ToFixed();
+
+        [MethodImpl(Inline)]
+        public static BinaryOp64 ToFixedBinOp(this MethodInfo f, NumericTypeKind<long> k)
+            => f.CreateDelegate<Func<long,long,long>>().ToFixed();
+
+    }
+
 }

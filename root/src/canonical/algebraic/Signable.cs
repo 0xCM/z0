@@ -56,4 +56,9 @@ namespace Z0
         /// </summary>
         Sign Sign();
     }
+
+    public interface ISigned
+    {
+        Sign Sign {get;}
+    }
 }

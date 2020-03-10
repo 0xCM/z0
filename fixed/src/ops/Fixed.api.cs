@@ -137,23 +137,6 @@ namespace Z0
             where T : struct
                 => ref Unsafe.As<T,F>(ref  Unsafe.AsRef(in src));
 
-        [MethodImpl(Inline)]
-        public static ref readonly F FromScalar<T,F>(in T src)
-            where F : unmanaged, IFixed
-            where T : struct
-                => ref From<T,F>(in src);
-
-        [MethodImpl(Inline)]
-        public static ref readonly F FromVector<T,F>(in Vector128<T> src)
-            where F : unmanaged, IFixed
-            where T : struct
-                => ref From<Vector128<T>,F>(in src);
-
-        [MethodImpl(Inline)]
-        public static ref readonly F FromVector<T,F>(in Vector256<T> src)
-            where F : unmanaged, IFixed
-            where T : struct
-                => ref From<Vector256<T>,F>(in src);
         
         [MethodImpl(Inline)]
         static unsafe void store<S,T>(in S src, int bytecount, ref T dst)

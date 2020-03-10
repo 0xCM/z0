@@ -11,6 +11,7 @@ namespace Z0
 
     using static Root;
 
+
     public static class FixedAssembly
     {
          [MethodImpl(Inline)]
@@ -35,22 +36,22 @@ namespace Z0
 
         public F2 Field2;
 
-        public int BitCount
+        public int FixedBitCount
         {
             [MethodImpl(Inline)]
-            get => Field1.BitCount + Field2.BitCount;
+            get => Field1.FixedBitCount + Field2.FixedBitCount;
         }
 
-        public int FullByteCount 
+        public int FixedByteCount 
         {
             [MethodImpl(Inline)]
-            get => Field1.FullByteCount + Field2.FullByteCount;
+            get => Field1.FixedByteCount + Field2.FixedByteCount;
         }
 
         public bool IsByteAligned 
         {
             [MethodImpl(Inline)]
-            get => BitCount % 8 == 0;
+            get => FixedBitCount % 8 == 0;
         }
 
         [MethodImpl(Inline)]
@@ -83,22 +84,22 @@ namespace Z0
 
         public F3 Field3;
 
-        public int BitCount
+        public int FixedBitCount
         {
             [MethodImpl(Inline)]
-            get => Field1.BitCount + Field2.BitCount + Field3.BitCount;
+            get => Field1.FixedBitCount + Field2.FixedBitCount + Field3.FixedBitCount;
         }
 
-        public int FullByteCount 
+        public int FixedByteCount 
         {
             [MethodImpl(Inline)]
-            get => Field1.FullByteCount + Field2.FullByteCount + Field3.FullByteCount;
+            get => Field1.FixedByteCount + Field2.FixedByteCount + Field3.FixedByteCount;
         }
 
         public bool IsByteAligned 
         {
             [MethodImpl(Inline)]
-            get => BitCount % 8 == 0;
+            get => FixedBitCount % 8 == 0;
         }
 
         [MethodImpl(Inline)]

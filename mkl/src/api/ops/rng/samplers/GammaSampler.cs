@@ -28,9 +28,9 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(float))
-                sample.gamma(Source, float32(DistSpec.Alpha), float32(DistSpec.Dx), float32(DistSpec.Beta), Spans.span32f(buffer));
+                sample.gamma(Source, float32(DistSpec.Alpha), float32(DistSpec.Dx), float32(DistSpec.Beta), Spans.s32f(buffer));
             else if(typeof(T) == typeof(double))
-                sample.gamma(Source, float64(DistSpec.Alpha), float64(DistSpec.Dx), float64(DistSpec.Beta), Spans.span64f(buffer));
+                sample.gamma(Source, float64(DistSpec.Alpha), float64(DistSpec.Dx), float64(DistSpec.Beta), Spans.s64f(buffer));
             else 
                 throw unsupported<T>();
 

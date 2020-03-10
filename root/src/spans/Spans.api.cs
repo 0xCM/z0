@@ -36,6 +36,17 @@ namespace Z0
             => MemoryMarshal.CreateSpan(ref src, count);
 
         /// <summary>
+        /// Covers a memory segment with a generic span
+        /// </summary>
+        /// <param name="pSrc">The memory source</param>
+        /// <param name="size">The number of bytes to cover</param>
+        /// <typeparam name="T">The span cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe Span<T> cover<T>(T* pSrc, ByteSize size)
+            where T : unmanaged
+                => new Span<T>(pSrc, size);
+
+        /// <summary>
         /// Allocates a span
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
@@ -61,11 +72,6 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static Span<T> alloc<T>(byte length, T t = default)
             => new Span<T>(new T[length]);
-
-        [MethodImpl(Inline)]
-        public static unsafe Span<T> span<T>(T* pSrc, int length)
-            where T : unmanaged
-                => new Span<T>(pSrc, length);
 
         /// <summary>
         /// Constructs a span from a parameter array
@@ -148,7 +154,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<byte> span8u<T>(Span<T> src)
+        public static Span<byte> s8u<T>(Span<T> src)
             where T : unmanaged
                 => cast<T,byte>(src);
 
@@ -158,7 +164,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<sbyte> span8i<T>(Span<T> src)
+        public static Span<sbyte> s8i<T>(Span<T> src)
             where T : unmanaged
                 => cast<T,sbyte>(src);
 
@@ -168,7 +174,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<short> span16i<T>(Span<T> src)
+        public static Span<short> s16i<T>(Span<T> src)
             where T : unmanaged        
                 => cast<T,short>(src);
 
@@ -178,7 +184,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<ushort> span16u<T>(Span<T> src)
+        public static Span<ushort> s16u<T>(Span<T> src)
             where T : unmanaged        
                 => cast<T,ushort>(src);
 
@@ -188,7 +194,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<int> span32i<T>(Span<T> src)
+        public static Span<int> s32i<T>(Span<T> src)
             where T : unmanaged        
                 => cast<T,int>(src);
 
@@ -198,7 +204,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<uint> span32u<T>(Span<T> src)
+        public static Span<uint> s32u<T>(Span<T> src)
             where T : unmanaged        
                 => cast<T,uint>(src);
 
@@ -208,7 +214,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<long> span64i<T>(Span<T> src)
+        public static Span<long> s64i<T>(Span<T> src)
             where T : unmanaged        
                 => cast<T,long>(src);
 
@@ -218,7 +224,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<ulong> span64u<T>(Span<T> src)
+        public static Span<ulong> s64u<T>(Span<T> src)
             where T : unmanaged        
                 => cast<T,ulong>(src);
 
@@ -228,7 +234,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<float> span32f<T>(Span<T> src)
+        public static Span<float> s32f<T>(Span<T> src)
             where T : unmanaged        
                 => cast<T,float>(src);
 
@@ -238,7 +244,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<double> span64f<T>(Span<T> src)
+        public static Span<double> s64f<T>(Span<T> src)
             where T : unmanaged        
                 => cast<T,double>(src);
 
@@ -248,7 +254,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<sbyte> span8i<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<sbyte> s8i<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => cast<T,sbyte>(src);
 
@@ -258,7 +264,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> span8u<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<byte> s8u<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => MemoryMarshal.AsBytes(src);
 
@@ -268,7 +274,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<short> span16i<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<short> s16i<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => cast<T,short>(src);
 
@@ -278,7 +284,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<ushort> span16u<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<ushort> s16u<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => cast<T,ushort>(src);
 
@@ -288,7 +294,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<int> span32i<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<int> s32i<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => cast<T,int>(src);
 
@@ -298,7 +304,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<uint> span32u<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<uint> s32u<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => cast<T,uint>(src);
 
@@ -308,7 +314,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<long> span64i<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<long> s64i<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => cast<T,long>(src);
 
@@ -318,7 +324,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<ulong> span64u<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<ulong> s64u<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => cast<T,ulong>(src);
 
@@ -328,7 +334,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<float> span32f<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<float> s32f<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => cast<T,float>(src);
 
@@ -338,57 +344,57 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<double> span64f<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<double> s64f<T>(ReadOnlySpan<T> src)
             where T : unmanaged        
                 => cast<T,double>(src);        
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<sbyte> span8i<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<sbyte> s8i<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,sbyte>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> span8u<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<byte> s8u<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,byte>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<short> span16i<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<short> s16i<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,short>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<ushort> span16u<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<ushort> s16u<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,ushort>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<int> span32i<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<int> s32i<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,int>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<uint> span32u<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<uint> s32u<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,uint>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<long> span64i<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<long> s64i<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,long>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<ulong> span64u<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<ulong> s64u<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,ulong>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<float> span32f<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<float> s32f<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,float>(src.Span);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<double> span64f<T>(in ReadOnlyMemory<T> src)
+        public static ReadOnlySpan<double> s64f<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged
                 => cast<T,double>(src.Span);
 
@@ -639,6 +645,5 @@ namespace Z0
             
             return dst;
         }
-
     }    
 }

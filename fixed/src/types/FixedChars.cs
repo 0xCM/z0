@@ -10,21 +10,6 @@ namespace Z0
 
     using static Root;
 
-    public interface IFixedChar : IFixed
-    {
-        ReadOnlySpan<char> Individuals {get;}        
-    }
-
-    public interface IFixedChar<C> : IFixedChar
-        where C : unmanaged    
-    {
-        int IFixed.BitCount
-        {
-            [MethodImpl(Inline)]
-            get => bitsize<C>();
-        }
-    }
-
     [StructLayout(LayoutKind.Sequential)]
     public struct Char2 : IFixedChar<Char2>
     {
@@ -45,7 +30,7 @@ namespace Z0
             this.C1 = c1;
         }
         
-        public int BitCount
+        public int FixedBitCount
         {
             [MethodImpl(Inline)]
             get => BitSize;
@@ -83,7 +68,7 @@ namespace Z0
             C1 = c1;
         }
 
-        public int BitCount
+        public int FixedBitCount
         {
             [MethodImpl(Inline)]
             get => BitSize;
@@ -120,7 +105,7 @@ namespace Z0
             C1 = c1;
         }
 
-        public int BitCount
+        public int FixedBitCount
         {
             [MethodImpl(Inline)]
             get => BitSize;
@@ -131,7 +116,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new ReadOnlySpan<char>(Unsafe.AsPointer(ref this), BitSize/8);
         }
-
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -154,7 +138,7 @@ namespace Z0
             C1 = c1;
         }
  
-        public int BitCount
+        public int FixedBitCount
         {
             [MethodImpl(Inline)]
             get => BitSize;
@@ -166,7 +150,6 @@ namespace Z0
             get => new ReadOnlySpan<char>(Unsafe.AsPointer(ref this), BitSize/8);
         }
    }
-
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Char32

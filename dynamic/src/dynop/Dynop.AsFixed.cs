@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp8 AsFixedUnaryOp(this BufferToken buffer, N8 w, OpIdentity id)
-            => (FixedUnaryOp8)buffer.FixedUnaryAdapter(id, typeof(FixedUnaryOp8), typeof(Fixed8));
+        public static UnaryOp8 AsFixedUnaryOp(this BufferToken buffer, N8 w, OpIdentity id)
+            => (UnaryOp8)buffer.FixedUnaryAdapter(id, typeof(UnaryOp8), typeof(Fixed8));
 
         /// <summary>
         /// Presents an identified buffer as a 16-bit fixed unary operator
@@ -28,8 +28,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp16 AsFixedUnaryOp(this BufferToken buffer, N16 w, OpIdentity id)
-            => (FixedUnaryOp16)buffer.FixedUnaryAdapter(id, typeof(FixedUnaryOp16), typeof(Fixed16));
+        public static UnaryOp16 AsFixedUnaryOp(this BufferToken buffer, N16 w, OpIdentity id)
+            => (UnaryOp16)buffer.FixedUnaryAdapter(id, typeof(UnaryOp16), typeof(Fixed16));
 
         /// <summary>
         /// Presents an identified buffer as a 32-bit fixed unary operator
@@ -38,8 +38,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp32 AsFixedUnaryOp(this BufferToken buffer, N32 w, OpIdentity id)
-            => (FixedUnaryOp32)buffer.FixedUnaryAdapter(id, typeof(FixedUnaryOp32), typeof(Fixed32));
+        public static UnaryOp32 AsFixedUnaryOp(this BufferToken buffer, N32 w, OpIdentity id)
+            => (UnaryOp32)buffer.FixedUnaryAdapter(id, typeof(UnaryOp32), typeof(Fixed32));
 
         /// <summary>
         /// Presents an identified buffer as a 64-bit fixed unary operator
@@ -48,8 +48,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp64 AsFixedUnaryOp(this BufferToken buffer, N64 w, OpIdentity id)
-            => (FixedUnaryOp64)buffer.FixedUnaryAdapter(id, typeof(FixedUnaryOp64), typeof(Fixed64));
+        public static UnaryOp64 AsFixedUnaryOp(this BufferToken buffer, N64 w, OpIdentity id)
+            => (UnaryOp64)buffer.FixedUnaryAdapter(id, typeof(UnaryOp64), typeof(Fixed64));
 
         /// <summary>
         /// Presents an identified buffer as a 128-bit fixed unary operator
@@ -68,8 +68,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp256 AsFixedUnaryOp(this BufferToken buffer, N256 w, OpIdentity id)
-            => (FixedUnaryOp256)buffer.FixedUnaryAdapter(id, typeof(FixedUnaryOp256), typeof(Fixed256));
+        public static UnaryOp256 AsFixedUnaryOp(this BufferToken buffer, N256 w, OpIdentity id)
+            => (UnaryOp256)buffer.FixedUnaryAdapter(id, typeof(UnaryOp256), typeof(Fixed256));
 
         /// <summary>
         /// Presents an identified buffer as an 8-bit fixed binary operator
@@ -78,8 +78,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp8 AsFixedBinaryOp(this BufferToken buffer, N8 w,OpIdentity id)
-            => (FixedBinaryOp8)buffer.FixedBinaryAdapter(id, typeof(FixedBinaryOp8), typeof(Fixed8));
+        public static BinaryOp8 AsFixedBinaryOp(this BufferToken buffer, N8 w,OpIdentity id)
+            => (BinaryOp8)buffer.FixedBinaryAdapter(id, typeof(BinaryOp8), typeof(Fixed8));
 
         /// <summary>
         /// Presents an identified buffer as a 16-bit fixed binary operator
@@ -88,8 +88,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp16 AsFixedBinaryOp(this BufferToken buffer, N16 w, OpIdentity id)
-            => (FixedBinaryOp16)buffer.FixedBinaryAdapter(id, typeof(FixedBinaryOp16), typeof(Fixed16));
+        public static BinaryOp16 AsFixedBinaryOp(this BufferToken buffer, N16 w, OpIdentity id)
+            => (BinaryOp16)buffer.FixedBinaryAdapter(id, typeof(BinaryOp16), typeof(Fixed16));
 
         /// <summary>
         /// Presents an identified buffer as a 32-bit fixed binary operator
@@ -98,8 +98,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp32 AsFixedBinaryOp(this BufferToken buffer,N32 w, OpIdentity id)
-            => (FixedBinaryOp32)buffer.FixedBinaryAdapter(id, typeof(FixedBinaryOp32), typeof(Fixed32));
+        public static BinaryOp32 AsFixedBinaryOp(this BufferToken buffer,N32 w, OpIdentity id)
+            => (BinaryOp32)buffer.FixedBinaryAdapter(id, typeof(BinaryOp32), typeof(Fixed32));
 
         /// <summary>
         /// Presents an identified buffer as a 64-bit fixed binary operator
@@ -108,8 +108,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp64 AsFixedBinaryOp(this BufferToken buffer, N64 w, OpIdentity id)
-            => (FixedBinaryOp64)buffer.FixedBinaryAdapter(id, typeof(FixedBinaryOp64), typeof(Fixed64));
+        public static BinaryOp64 AsFixedBinaryOp(this BufferToken buffer, N64 w, OpIdentity id)
+            => (BinaryOp64)buffer.FixedBinaryAdapter(id, typeof(BinaryOp64), typeof(Fixed64));
 
         /// <summary>
         /// Presents an identified buffer as a 128-bit fixed binary operator
@@ -118,8 +118,8 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp128 AsFixedBinaryOp(this BufferToken buffer, N128 w, OpIdentity id)
-            => (FixedBinaryOp128)buffer.FixedBinaryAdapter(id, typeof(FixedBinaryOp128), typeof(Fixed128));
+        public static BinaryOp128 AsFixedBinaryOp(this BufferToken buffer, N128 w, OpIdentity id)
+            => (BinaryOp128)buffer.FixedBinaryAdapter(id, typeof(BinaryOp128), typeof(Fixed128));
 
         /// <summary>
         /// Presents an identified buffer as a 256-bit fixed binary operator
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="id">The identity to bestow upon the operator</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp256 AsFixedBinaryOp(this BufferToken buffer, N256 w, OpIdentity id)
-            => (FixedBinaryOp256)buffer.FixedBinaryAdapter(id, typeof(FixedBinaryOp256), typeof(Fixed256));
+        public static BinaryOp256 AsFixedBinaryOp(this BufferToken buffer, N256 w, OpIdentity id)
+            => (BinaryOp256)buffer.FixedBinaryAdapter(id, typeof(BinaryOp256), typeof(Fixed256));
     }
 }

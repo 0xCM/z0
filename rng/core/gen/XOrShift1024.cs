@@ -32,7 +32,7 @@ namespace Z0
         {
             if(seed.Length < 128)
                 throw new Exception($"Not enough seed! 1024 bits = 128 bytes are required");
-            this.state = Spans.span64u(seed).ToArray();
+            this.state = Spans.s64u(seed).ToArray();
         }
 
         public RngKind RngKind 

@@ -10,6 +10,9 @@ namespace Z0
 
     using static Root;
 
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed4 UnaryOp4(Fixed4 a);
+
     public struct Fixed4 : IFixed, IEquatable<Fixed4>
     {
         public const int BitWidth = 4;
@@ -24,7 +27,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = (byte)((uint)value & Mask);
         }
 
-        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         [MethodImpl(Inline)]
         public static Fixed4 From(byte src)

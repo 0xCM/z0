@@ -143,7 +143,7 @@ namespace Z0
             return result.Require();
         }
         
-        protected void CheckMatch<T>(in AsmBuffers buffers, BinaryOp<Vector128<T>> f, FixedBinaryOp128 g)
+        protected void CheckMatch<T>(in AsmBuffers buffers, BinaryOp<Vector128<T>> f, BinaryOp128 g)
             where T : unmanaged
         {
             var w = n128;
@@ -156,7 +156,7 @@ namespace Z0
             }            
         }
 
-        protected void CheckMatch<T>(in AsmBuffers buffers, BinaryOp<Vector256<T>> f, FixedBinaryOp256 g)
+        protected void CheckMatch<T>(in AsmBuffers buffers, BinaryOp<Vector256<T>> f, BinaryOp256 g)
             where T : unmanaged
         {
             var w = n256;

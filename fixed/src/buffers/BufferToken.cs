@@ -15,6 +15,20 @@ namespace Z0
     /// </summary>
     public readonly struct BufferToken
     {                
+        /// <summary>
+        /// Creates an array of tokens that identify a squence of buffers
+        /// </summary>
+        /// <param name="base">The base address</param>
+        /// <param name="width">The width of each represented buffer</param>
+        /// <param name="count">The length of the buffer sequence</param>
+        public static BufferToken[] Tokenize(IntPtr @base, int width, int count)
+        {
+            var tokens = new BufferToken[count];
+            for(var i=0; i<count; i++)
+                tokens[i] = (IntPtr.Add(@base, width*i), width); 
+            return tokens;
+        }
+        
         public readonly IntPtr Handle;
 
         public readonly int Length;

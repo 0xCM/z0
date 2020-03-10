@@ -18,9 +18,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fmath.avg(Spans.span32f(src), @checked));
+                return generic<T>(fmath.avg(Spans.s32f(src), @checked));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fmath.avg(Spans.span64f(src), @checked));
+                return generic<T>(fmath.avg(Spans.s64f(src), @checked));
             else            
                 throw unsupported<T>();
         }           

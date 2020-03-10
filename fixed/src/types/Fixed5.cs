@@ -24,7 +24,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = (byte)((uint)value & Mask);
         }
 
-        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         [MethodImpl(Inline)]
         public static Fixed5 From(byte src)

@@ -30,9 +30,9 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {            
             if(typeof(T) == typeof(float))
-                sample.cauchy(Source, float32(DistSpec.Location), float32(DistSpec.Scale), Spans.span32f(buffer));
+                sample.cauchy(Source, float32(DistSpec.Location), float32(DistSpec.Scale), Spans.s32f(buffer));
             else if (typeof(T) == typeof(double))
-                sample.cauchy(Source, float64(DistSpec.Location), float64(DistSpec.Scale), Spans.span64f(buffer));
+                sample.cauchy(Source, float64(DistSpec.Location), float64(DistSpec.Scale), Spans.s64f(buffer));
             else 
                 throw unsupported<T>();            
             return buffer.Length;

@@ -10,6 +10,7 @@ namespace Z0
 
     using static Root;
 
+
     public struct Fixed1 : IFixed, IEquatable<Fixed1>
     {
         public const int BitWidth = 1;
@@ -18,7 +19,7 @@ namespace Z0
 
         byte X0;
 
-        public int BitCount 
+        public int FixedBitCount 
         {
             [MethodImpl(Inline)]
             get => BitWidth;

@@ -135,6 +135,7 @@ namespace Z0
             return hex.TargetPath;            
         }
 
+
         void CheckBinaryImm<T>(in AsmBuffers buffers, N128 w, string name, byte imm)
             where T : unmanaged
         {            
@@ -641,7 +642,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, FixedBinaryOp128 g, OpIdentity name)
+        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
             where T : unmanaged
         {
             void check()
@@ -666,7 +667,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, FixedBinaryOp256 g, OpIdentity name)
+        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
             where T : unmanaged
         {
             void check()

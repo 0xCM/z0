@@ -6,8 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Security;
+    using System.Reflection; 
 
     using static Root;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed16 Emitter16();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed16 UnaryOp16(Fixed16 a);
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Fixed16 BinaryOp16(Fixed16 a, Fixed16 b);
 
     public struct Fixed16 : IFixedNumeric<Fixed16,ushort>, IEquatable<Fixed16>
     {
@@ -21,7 +32,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int BitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         public FixedWidth FixedWidth
         {
@@ -82,4 +93,42 @@ namespace Z0
         public override string ToString() 
             => X0.ToString();
     }
+
+    partial class FixedNumericOps
+    {
+        [MethodImpl(Inline)]
+        public static Fixed16 ToFixed(this ushort src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static Fixed16 ToFixed(this short src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static UnaryOp16 ToFixed(this Func<ushort,ushort> f)
+            => (Fixed16 a) =>f(a.Data);
+
+        [MethodImpl(Inline)]
+        public static UnaryOp16 ToFixed(this Func<short,short> f)
+            => (Fixed16 a) =>f((short)a.Data);
+
+        [MethodImpl(Inline)]
+        public static BinaryOp16 ToFixed(this Func<short,short,short> f)
+            => (Fixed16 a, Fixed16 b) =>f((short)a.Data, (short)b.Data);
+
+        [MethodImpl(Inline)]
+        public static BinaryOp16 ToFixed(this Func<ushort,ushort,ushort> f)
+            => (Fixed16 a, Fixed16 b) =>f(a.Data, b.Data);
+
+        [MethodImpl(Inline)]
+        public static BinaryOp16 ToFixedBinOp(this MethodInfo f, NumericTypeKind<ushort> k)
+            => f.CreateDelegate<Func<ushort,ushort,ushort>>().ToFixed();
+
+        [MethodImpl(Inline)]
+        public static BinaryOp16 ToFixedBinOp(this MethodInfo f, NumericTypeKind<short> k)
+            => f.CreateDelegate<Func<short,short,short>>().ToFixed();
+
+
+    }
+
 }

@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp8 FixedBinaryOp(this BufferToken buffer, N8 w, in AsmCode src)
+        public static BinaryOp8 FixedBinaryOp(this BufferToken buffer, N8 w, in AsmCode src)
             => buffer.Load(src).AsFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp16 FixedBinaryOp(this BufferToken buffer, N16 w, in AsmCode src)
+        public static BinaryOp16 FixedBinaryOp(this BufferToken buffer, N16 w, in AsmCode src)
             => buffer.Load(src).AsFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp32 FixedBinaryOp(this BufferToken buffer, N32 w, in AsmCode src)
+        public static BinaryOp32 FixedBinaryOp(this BufferToken buffer, N32 w, in AsmCode src)
             => buffer.Load(src).AsFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp64 FixedBinaryOp(this BufferToken buffer, N64 w, in AsmCode src)
+        public static BinaryOp64 FixedBinaryOp(this BufferToken buffer, N64 w, in AsmCode src)
             => buffer.Load(src).AsFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp128 FixedBinaryOp(this BufferToken buffer, N128 w, in AsmCode src)
+        public static BinaryOp128 FixedBinaryOp(this BufferToken buffer, N128 w, in AsmCode src)
             => buffer.Load(src).AsFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp256 FixedBinaryOp(this BufferToken buffer, N256 w, in AsmCode src)
+        public static BinaryOp256 FixedBinaryOp(this BufferToken buffer, N256 w, in AsmCode src)
             => buffer.Load(src).AsFixedBinaryOp(w, src.Id); 
 
  
@@ -94,7 +94,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp128 FixedBinaryOp<T>(this Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
+        public static BinaryOp128 FixedBinaryOp<T>(this Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
             where T : unmanaged
                 => (Fixed128 a, Fixed128 b) =>f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();
 
@@ -103,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static FixedBinaryOp256 FixedBinaryOp<T>(this Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
+        public static BinaryOp256 FixedBinaryOp<T>(this Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
             where T : unmanaged
                 => (Fixed256 a, Fixed256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToFixed();
     }

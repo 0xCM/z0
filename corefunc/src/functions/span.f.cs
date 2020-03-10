@@ -43,5 +43,5 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe Span<T> span<T>(T* pSrc, int length)
         where T : unmanaged
-            => Spans.span(pSrc,length);
+            => Spans.cover(pSrc,length);
 }

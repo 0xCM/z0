@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp8 FixedUnaryOp(this BufferToken buffer, N8 w, in AsmCode src)
+        public static UnaryOp8 FixedUnaryOp(this BufferToken buffer, N8 w, in AsmCode src)
             => buffer.Load(src).AsFixedUnaryOp(w, src.Id);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp16 FixedUnaryOp(this BufferToken buffer, N16 w, in AsmCode src)               
+        public static UnaryOp16 FixedUnaryOp(this BufferToken buffer, N16 w, in AsmCode src)               
             => buffer.Load(src).AsFixedUnaryOp(w, src.Id);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp32 FixedUnaryOp(this BufferToken buffer, N32 w, in AsmCode src)
+        public static UnaryOp32 FixedUnaryOp(this BufferToken buffer, N32 w, in AsmCode src)
             => buffer.Load(src).AsFixedUnaryOp(w, src.Id);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp64 FixedUnaryOp(this BufferToken buffer, N64 w, in AsmCode src)
+        public static UnaryOp64 FixedUnaryOp(this BufferToken buffer, N64 w, in AsmCode src)
             => buffer.Load(src).AsFixedUnaryOp(w, src.Id);
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp256 FixedUnaryOp(this BufferToken buffer, N256 w, in AsmCode src)
+        public static UnaryOp256 FixedUnaryOp(this BufferToken buffer, N256 w, in AsmCode src)
             => buffer.Load(src).AsFixedUnaryOp(w, src.Id);
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline)]
-        public static FixedUnaryOp256 FixedUnaryOp<T>(this Func<Vector256<T>,Vector256<T>> f)
+        public static UnaryOp256 FixedUnaryOp<T>(this Func<Vector256<T>,Vector256<T>> f)
             where T : unmanaged
                 => (Fixed256 a) =>f(a.ToVector<T>()).ToFixed();
     }

@@ -17,32 +17,32 @@ namespace Z0
         /// <summary>
         /// The invariant number of bits covered by the reifying type
         /// </summary>
-        int BitCount {get;}
+        int FixedBitCount {get;}
 
-        int FullByteCount
+        int FixedByteCount
         {
             [MethodImpl(Inline)]
-            get => BitCount / 8;
+            get => FixedBitCount / 8;
         }
 
         bool IsByteAligned
         {
             [MethodImpl(Inline)]
-            get => BitCount % 8 == 0;
+            get => FixedBitCount % 8 == 0;
         }
     }
 
     /// <summary>
     ///  Characterizes a fixed type with storage and reification types of equal size
     /// </summary>
-    /// <typeparam name="S">The storage type</typeparam>
-    public interface IFixed<S> : IFixed
-        where S : unmanaged
+    /// <typeparam name="F">The storage type</typeparam>
+    public interface IFixed<F> : IFixed
+        where F : unmanaged
     {        
-        int IFixed.FullByteCount 
+        int IFixed.FixedByteCount 
         {
             [MethodImpl(Inline)]
-            get => Unsafe.SizeOf<S>();
+            get => Unsafe.SizeOf<F>();
         }
 
         bool IFixed.IsByteAligned 
@@ -51,22 +51,12 @@ namespace Z0
             get => true;
         }
 
-        int IFixed.BitCount
+        int IFixed.FixedBitCount
         {
             [MethodImpl(Inline)]
-            get => 8*FullByteCount;
+            get => 8*FixedByteCount;
         }
     }
 
-    /// <summary>
-    ///  Characterizes a fixed type where the storage and reification sizes may differ
-    /// </summary>
-    /// <typeparam name="F">The reifying type</typeparam>
-    /// <typeparam name="S">The storage type</typeparam>
-    public interface IFixed<F,S> : IFixed
-        where F : unmanaged, IFixed<F,S>
-        where S : unmanaged
-    {
 
-    }
 }

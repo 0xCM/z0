@@ -41,9 +41,4 @@ namespace Z0
         
     }
 
-    public interface IParametricIdentity : ITypeIdentity<ParametricIdentity>
-    {
-
-    }
-
 }

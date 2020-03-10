@@ -6,20 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Security;
 
     using static Root;
+        
 
-    public interface IFixedWidth : IFixed
+    public readonly ref struct AsmBufferSeq
     {
-        /// <summary>
-        /// Specifies the type width in bits
-        /// </summary>
-        FixedWidth FixedWidth {get;}
 
-        int IFixed.FixedBitCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)FixedWidth;
-        }        
     }
+
 }

@@ -14,49 +14,48 @@ namespace Z0
     using static Root;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 Emitter512();
+    public delegate Fixed1024 Emitter1024();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 UnaryOp512(Fixed512 a);
+    public delegate Fixed1024 BinaryOp1024(Fixed1024 a, Fixed1024 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 BinaryOp512(Fixed512 a, Fixed512 b);
-
+    public delegate Fixed1024 UnaryOp1024(Fixed1024 a);
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Fixed512  : IFixed<Fixed512>
+    public struct Fixed1024  : IFixed<Fixed1024>
     {
-        public const int BitWidth = 512;        
+        public const int BitWidth = 1024;        
 
-        Fixed256 X0;
+        Fixed512 X0;
 
-        Fixed256 X1;
+        Fixed512 X1;
 
         public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
 
         [MethodImpl(Inline)]
-        Fixed512(Fixed256 x0, Fixed256 x1)
+        Fixed1024(Fixed512 x0, Fixed512 x1)
         {
             this.X0 = x0;
             this.X1 = x1;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed512((Fixed256 x0, Fixed256 x1) x)
-            => new Fixed512(x.x0,x.x1);
+        public static implicit operator Fixed1024((Fixed512 x0, Fixed512 x1) x)
+            => new Fixed1024(x.x0,x.x1);
 
         public string Format() 
             => array(X0,X1).FormatDataList();
 
         [MethodImpl(Inline)]
-        public bool Equals(Fixed512 src)
+        public bool Equals(Fixed1024 src)
             => X0.Equals(src.X0) && X1.Equals(src.X1);
 
         public override int GetHashCode()
             => HashCode.Combine(X0,X1);
         
         public override bool Equals(object src)
-            => src is Fixed512 x && Equals(x);
+            => src is Fixed1024 x && Equals(x);
 
         public override string ToString() 
             => Format();                      

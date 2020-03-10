@@ -62,15 +62,25 @@ namespace Z0
                 return src.Cell(3);
         }    
 
-        [MethodImpl(Inline)]
-        public static Vector512<T> ToVector<T>(this in Fixed512 src)
-            where T : unmanaged
-                => Unsafe.As<Fixed512,Vector512<T>>(ref Unsafe.AsRef(in src));
 
         [MethodImpl(Inline)]
         public static Fixed512 ToFixed<T>(this Vector512<T> x)
             where T : unmanaged
                 => Unsafe.As<Vector512<T>,Fixed512>(ref x);
-                
+
+
+        [MethodImpl(Inline)]
+        public static Vector512<T> Apply<T>(this UnaryOp512 f, Vector512<T> x)
+           where T : unmanaged
+                => f(x.ToFixed()).ToVector<T>();
+
+        [MethodImpl(Inline)]
+        public static Vector512<T> Apply<T>(this BinaryOp512 f, Vector512<T> x, Vector512<T> y)
+            where T : unmanaged
+        {
+            var zf = f(Unsafe.As<Vector512<T>,Fixed512>(ref x), Unsafe.As<Vector512<T>,Fixed512>(ref y));
+            return Unsafe.As<Fixed512,Vector512<T>>(ref zf);
+        }
+               
     }
 }
