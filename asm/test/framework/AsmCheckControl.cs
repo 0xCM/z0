@@ -81,8 +81,8 @@ namespace Z0.Asm
 
             Notify($"Found {hostedIndex.EntryCount} {host} operations defined by the implementation type");
 
-
-            var index = Checks.IndexApiCode(host, paths.CodePath);                        
+            var correlator = Context.ApiCorrelator();
+            var index = correlator.IndexMemberCode(host, paths.CodePath);                        
                         
 
             Notify($"Correlated {index.EntryCount} {host} implemented operations with executable code");

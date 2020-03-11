@@ -5,17 +5,14 @@
 namespace Z0
 {
     using System;
-    
     using static Root;
 
-
-
-    public interface IWorkflowRunner<B,C> : IWorkflowRunner
-        where B : IWorkflowEventBroker
+    public interface IWorkflowEventBroker :  IAppEventRelay
     {
-        void Run(C config);
+        StepStart<T> StepStarted<T>() => StepStart<T>.Empty;
 
-        B EventBroker {get;}
+        StepEnd<T> StepEnded<T>() => StepEnd<T>.Empty;
+
+        WorkflowError Error => WorkflowError.Empty;
     }
-
 }

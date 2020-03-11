@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    public sealed class AsmContext : IAsmContext 
+    public class AsmContext : IAsmContext 
     {               
         /// <summary>
         /// Creates a rooted context with selected assemblies
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="root">The root context</param>
         /// <param name="resolutions">The assemblies to share with the context</param>
         public static IAsmContext Rooted(IContext root, params IAssemblyResolution[] resolutions)
-            => new AsmContext(root, resolutions.Assemble(), DataResourceIndex.Empty, AsmFormatConfig.New);
+            => new AsmContext(root, resolutions.Assemble(), AsmFormatConfig.New);
 
         /// <summary>
         /// Creates a rooted context with a specified composition
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="root">The root context</param>
         /// <param name="assemblies">The composition</param>
         public static IAsmContext Rooted(IContext root, IAssemblyComposition assemblies)
-            => new AsmContext(root, assemblies, DataResourceIndex.Empty, AsmFormatConfig.New);
+            => new AsmContext(root, assemblies, AsmFormatConfig.New);
 
         /// <summary>
         /// Creates a rooted context with specified indexes
@@ -35,8 +35,8 @@ namespace Z0
         /// <param name="root">The root context</param>
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
-        public static IAsmContext Rooted(IContext root, DataResourceIndex resources)             
-            => new AsmContext(root, AssemblyComposition.Empty, resources, AsmFormatConfig.New);
+        public static IAsmContext Rooted(IContext root)
+            => new AsmContext(root, AssemblyComposition.Empty, AsmFormatConfig.New);
 
         /// <summary>
         /// Creates a rooted context with specified indexes and format configuration
@@ -45,22 +45,22 @@ namespace Z0
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
         /// <param name="format">The context format configuration</param>
-        public static IAsmContext Rooted(IContext root, DataResourceIndex resources,  AsmFormatConfig format)             
-            => new AsmContext(root, AssemblyComposition.Empty, resources, format);
+        public static IAsmContext Rooted(IContext root, AsmFormatConfig format)             
+            => new AsmContext(root, AssemblyComposition.Empty, format);
 
         /// <summary>
         /// Creates a base context with a specified composition
         /// </summary>
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
         public static IAsmContext New(IAssemblyComposition assemblies)
-            => new AsmContext(assemblies, DataResourceIndex.Empty, AsmFormatConfig.New);
+            => new AsmContext(assemblies, AsmFormatConfig.New);
 
         /// <summary>
         /// Creates a base context with selected assemblies
         /// </summary>
         /// <param name="resolutions">The assemblies to share with the context</param>
         public static IAsmContext New(params IAssemblyResolution[] resolutions)
-            => new AsmContext(resolutions.Assemble(), DataResourceIndex.Empty, AsmFormatConfig.New);
+            => new AsmContext(resolutions.Assemble(), AsmFormatConfig.New);
 
         /// <summary>
         /// Creates a base context with specified indexes and format configuration
@@ -68,26 +68,25 @@ namespace Z0
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
         /// <param name="format">The context format configuration</param>
-        public static IAsmContext New(DataResourceIndex resources,  AsmFormatConfig format)             
-            => new AsmContext(AssemblyComposition.Empty, resources, format);
+        public static IAsmContext New(AsmFormatConfig format)             
+            => new AsmContext(AssemblyComposition.Empty, format);
 
-        /// <summary>
-        /// Creates a base context with specified indexes
-        /// </summary>
-        /// <param name="clrindex">The clr index</param>
-        /// <param name="resources">The resource index</param>
-        public static IAsmContext New(DataResourceIndex resources)             
-            => new AsmContext(AssemblyComposition.Empty, resources, AsmFormatConfig.New);
-
-        AsmContext(IContext root, IAssemblyComposition assemblies, DataResourceIndex resources, AsmFormatConfig format)
+        AsmContext(IContext root, IAssemblyComposition assemblies, AsmFormatConfig format)
         {
             this.RootContext = root != null ? some(root) : none<IContext>();
-            this.State = AsmContextData.New(assemblies ?? AssemblyComposition.Empty, resources,format);
+            this.State = AsmContextData.New(assemblies ?? AssemblyComposition.Empty, format);
             this.Identity = Context.NextId();
         }
 
-        AsmContext(IAssemblyComposition assemblies, DataResourceIndex resources, AsmFormatConfig format)
-            : this(null,assemblies, resources, format)
+        protected AsmContext(IContext root, AsmContextData state)
+        {
+            this.RootContext = some(root);
+            this.State = state;
+            this.Identity = Context.NextId();
+        }
+
+        AsmContext(IAssemblyComposition assemblies, AsmFormatConfig format)
+            : this(null,assemblies, format)
         {
 
         }
@@ -116,7 +115,7 @@ namespace Z0
             => State.Assemblies;
 
         public IAsmContext WithFormat(AsmFormatConfig config)
-            => new AsmContext(RootContext.ValueOrDefault(),Context.NextId(), AsmContextData.New(Compostion, State.Resources, config));
+            => new AsmContext(RootContext.ValueOrDefault(),Context.NextId(), AsmContextData.New(Compostion, config));
 
         public void Notify(AppMsg msg)
             => MsgSink.OnSome(sink => sink.Notify(msg));
@@ -130,4 +129,5 @@ namespace Z0
         public IReadOnlyList<AppMsg> Flush(Exception e)
             => MsgSink ? MsgSink.Value.Flush(e) : array<AppMsg>();
     }   
+
 }

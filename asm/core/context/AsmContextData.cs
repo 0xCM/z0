@@ -6,19 +6,16 @@ namespace Z0.Asm
 {
     using System;
 
-    class AsmContextData
+    public class AsmContextData
     {
-        public static AsmContextData New(IAssemblyComposition assemblies, DataResourceIndex resources, AsmFormatConfig format)
-                => new AsmContextData(assemblies, resources, format);
+        public static AsmContextData New(IAssemblyComposition assemblies, AsmFormatConfig format = null)
+            => new AsmContextData(assemblies, format ?? AsmFormatConfig.New);
 
-        AsmContextData(IAssemblyComposition assemblies, DataResourceIndex resources, AsmFormatConfig format)
+        AsmContextData(IAssemblyComposition assemblies, AsmFormatConfig format)
         {
             this.Assemblies = assemblies;
-            this.Resources = resources;
             this.AsmFormat = format;
         }
-
-        public DataResourceIndex Resources {get;}
 
         public IAssemblyComposition Assemblies {get;}
 

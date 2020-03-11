@@ -29,9 +29,4 @@ namespace Z0
         IAsmContext WithFormat(AsmFormatConfig config);  
     }
 
-    public interface IAsmContext<D> : IRootContext<IAsmContext, D>
-        where D : IRootedContext<IAsmContext>
-    {
-        
-    }
 }

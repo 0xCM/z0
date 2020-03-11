@@ -11,11 +11,16 @@ namespace Z0
     using System.Reflection;
 
     using Z0.Asm;
+
+    using Svc = Z0.Asm;
     
     using static Root;
 
     public static class AsmCoreServices
     {            
+        public static IApiCorrelator ApiCorrelator(this IAsmContext c)
+            => Svc.ApiCorrelator.Create(c);
+            
         [MethodImpl(Inline)]
         public static IAsmFunctionBuilder FunctionBuilder(this IAsmContext context)
             => AsmFunctionBuilder.Create(context);        

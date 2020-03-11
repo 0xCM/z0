@@ -7,21 +7,18 @@ namespace Z0.Asm
     using System;
     
     using static Root;
-    using static AsmWorkflowReports;
     
-    partial class HostCaptureWorkflow
+    public interface IHostCaptureRunner : IAsmWorkflowRunner<HostCaptureConfig, IHostCaptureEventBroker>
     {
-        
- 
-        public interface IHostCaptureRunner :  IWorkflowRunner<IHostCaptureEventBroker, RootEmissionPaths>
-        {
-            void Run(FolderPath dst); 
-        }
 
-        public interface IHostCaptureWorkflow : IAsmWorkflow, IHostCaptureRunner
-        {
+    }
 
+    public interface IHostCaptureWorkflow : IAsmWorkflow
+    {
 
-        }
+        IHostCaptureRunner Runner {get;}
+
+        IHostCaptureEventBroker Broker {get;}        
+
     }
 }

@@ -4,23 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    public interface IAppService : IService, IContextual
+    {
+        
+    }     
+
     public interface IAppService<C> : IService, IContextual<C>
         where C : IContext
     {
         
     }
 
-    public interface IAppService : IAppService<IContext>
-    {
-
-    }     
 
     public interface IAppServiceAlloction : IAppService, IServiceAllocation
     {
 
     }
 
-    public interface IAppServiceAlloction<C> : IServiceAllocation, IContextual<C>
+    public interface IAppServiceAlloction<C> : IServiceAllocation, IAppService<C>
         where C : IContext
     {
         

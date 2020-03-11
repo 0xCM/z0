@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
 
@@ -54,6 +56,13 @@ namespace Z0.Asm
             => text.concat(Op.Identifier, text.spaces(5), Bits.Format());
 
         public string Format(int uripad)
-            => text.concat(Op.Identifier.PadRight(uripad), Bits.Format());
+            => text.concat(Op.Identifier.PadRight(uripad), Bits.Format());            
+    }
+
+    public static class AsmOpBitsOps
+    {
+        public static OpIndex<AsmOpBits> ToOpIndex(this IEnumerable<AsmOpBits> src)
+            => OpIndex.From(src.Select(x => (x.Op.OpId, x)));
+
     }
 }

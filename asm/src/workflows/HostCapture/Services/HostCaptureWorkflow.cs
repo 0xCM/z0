@@ -8,32 +8,27 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static HostCaptureWorkflow;
-
+    
     public partial class HostCaptureWorkflow : IHostCaptureWorkflow
     {
-        public IAsmContext Context {get;}
+        public IAsmWorkflowContext Context {get;}
 
-        readonly IHostCaptureRunner Runner;
+        public IHostCaptureEventBroker Broker {get;}
+
+        public IHostCaptureRunner Runner {get;}
         
         [MethodImpl(Inline)]
-        public static IHostCaptureRunner Create(IAsmContext context)
+        public static IHostCaptureWorkflow Create(IAsmWorkflowContext context)
             => new HostCaptureWorkflow(context);      
 
         [MethodImpl(Inline)]
-        HostCaptureWorkflow(IAsmContext context)
+        HostCaptureWorkflow(IAsmWorkflowContext context)
         {
             this.Context = context;
-            this.Runner =new HostCaptureRunner(context);       
+            this.Broker = HostCaptureBroker.Create(context);
+            this.Runner = new HostCaptureRunner(context,Broker);
         }
-
-        public IHostCaptureEventBroker EventBroker
-            => Runner.EventBroker;
  
-        void IHostCaptureRunner.Run(FolderPath dst)
-            => Runner.Run(dst);
-
-        public void Run(RootEmissionPaths root)
-            => Runner.Run(root);
+        public void Run(HostCaptureConfig dst) => Runner.Run(dst);
     }
 }

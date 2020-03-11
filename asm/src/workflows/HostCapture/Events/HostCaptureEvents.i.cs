@@ -7,42 +7,31 @@ namespace Z0.Asm
     using System;
     
     using static Root;
-    using static AsmWorkflowReports;
-    
-    partial class HostCaptureWorkflow
+    using static AsmWorkflowReports;    
+    using static HostCaptureWorkflow;
+
+    public interface IHostCaptureEventBroker : IWorkflowEventBroker
     {
+        MembersLocated MembersLocated => MembersLocated.Empty;
 
-        public interface IHostCaptureEventBroker : IWorkflowEventBroker
-        {
-            MembersLocated MembersLocated => MembersLocated.Empty;
+        ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
 
-            ExtractReportCreated ExtractReportCreated => ExtractReportCreated.Empty;
+        ExtractsParsed ExtractsParsed => ExtractsParsed.Empty;            
+        
+        ParseReportCreated ParseReportCreated => ParseReportCreated.Empty;
 
-            ExtractsParsed ExtractsParsed => ExtractsParsed.Empty;            
-            
-            ParseReportCreated ParseReportCreated => ParseReportCreated.Empty;
+        FunctionsDecoded FunctionsDecoded => FunctionsDecoded.Empty;
+        
+        AsmHexSaved HexSaved => AsmHexSaved.Empty;
 
-            FunctionsDecoded FunctionsDecoded => FunctionsDecoded.Empty;
-            
-            AsmHexSaved HexSaved => AsmHexSaved.Empty;
+        ExtractReportSaved HostReportSaved => ExtractReportSaved.Empty;
 
-            ExtractReportSaved HostReportSaved => ExtractReportSaved.Empty;
+        StepStart<IAssemblyCatalog> CaptureCatalogStart => StepStarted<IAssemblyCatalog>();
 
-            StepStart<IAssemblyCatalog> CaptureCatalogStart => StepStarted<IAssemblyCatalog>();
+        StepEnd<IAssemblyCatalog> CaptureCatalogEnd => StepEnded<IAssemblyCatalog>();
 
-            StepEnd<IAssemblyCatalog> CaptureCatalogEnd => StepEnded<IAssemblyCatalog>();
+        StepStart<ApiHost> CaptureApiHostStart => StepStarted<ApiHost>();
 
-            StepStart<ApiHost> CaptureApiHostStart => StepStarted<ApiHost>();
-
-            StepEnd<ApiHost> CaptureApiHostEnd => StepEnded<ApiHost>();
-
-        }
-
-
-        interface IHostCaptureEventRelay : IHostCaptureEventBroker, IAppEventRelay
-        {
-
-        }
-
+        StepEnd<ApiHost> CaptureApiHostEnd => StepEnded<ApiHost>();
     }
 }

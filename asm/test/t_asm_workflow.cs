@@ -15,12 +15,6 @@ namespace Z0.Asm
     using static AsmServiceMessages;
 
 
-
-    public abstract class WorkflowHost
-    {
-
-    }
-
     public enum OverwriteOption
     {
         Overwrite = 0,
@@ -52,9 +46,11 @@ namespace Z0.Asm
         
         public void ExecuteWorkflow()
         {
-            var workflow = HostCaptureWorkflow.Create(Context);
-            ConnectReceivers(workflow.EventBroker);
-            workflow.Run(Root);
+            var workflow = HostCaptureWorkflow.Create(AsmWorkflowContext.Rooted(Context));
+            require(workflow.Broker != null);
+            ConnectReceivers(workflow.Broker);
+            var config = Z0.Asm.HostCaptureConfig.Define(DefaultDataDir);
+            workflow.Runner.Run(config);
         }
 
         public override void Dispose()
@@ -173,17 +169,18 @@ namespace Z0.Asm
 
             NotifyConsole(accepted.Message);
         }
-
-
+        
         void Analyze(in ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
         {
-            var analyzer = FunctionAnalyzer.Create();
-            var analyses = analyzer.Analyze(functions);
-            var counts = analyses.Map(a => a.InstructionCount);
-            var total = gspan.sum(counts.AsUInt64());
-            NotifyConsole($"The {host} host members define a total of {total} instructions", AppMsgColor.Cyan);            
-        }
+            static int CountInstructions(in AsmFunction f)
+                => f.InstructionCount;
 
+            var _analyzer = SpanAnalyzer.Create<AsmFunction,int>(CountInstructions);
+            var _counts = _analyzer.Analyze(functions);
+            var _total = gspan.sum(_counts.AsUInt64());
+
+            NotifyConsole($"The {host} host members define a total of {_total} instructions", AppMsgColor.Cyan);            
+        }
             
         void Analyze(in ApiHostUri hosturi, ReadOnlySpan<AsmOpBits> ops, FilePath dst)
         {
@@ -241,6 +238,5 @@ namespace Z0.Asm
                 log.Write(messages.ToArray());
             }
         }
-
     }
 }

@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading;
 
     using static Root;
     using static AsmWorkflowReports;
@@ -17,7 +16,7 @@ namespace Z0.Asm
     {
         class HostCaptureRunner : IHostCaptureRunner
         {
-            public IAsmContext Context {get;}
+            public IAsmWorkflowContext Context {get;}
 
             readonly IHostOpExtractor Extractor;
 
@@ -27,23 +26,24 @@ namespace Z0.Asm
 
             readonly AsmFormatConfig Format;
 
-            readonly IHostCaptureEventRelay Broker;
+            IHostCaptureEventBroker Broker {get;}
 
-            public HostCaptureRunner(IAsmContext context)
+            IContext IContextual.Context
+                => Context;
+
+            public HostCaptureRunner(IAsmWorkflowContext context, IHostCaptureEventBroker broker)
             {
                 this.Context = context;
                 Extractor = Context.HostExtractor(Context.DefaultBufferLength);
                 Parser = Context.ExtractParser(Context.DefaultBufferLength);
                 Decoder = Context.AsmFunctionDecoder();
                 Format = Context.AsmFormat.WithSectionDelimiter();
-                Broker = HostCaptureBroker.Connect(this);
+                Broker = broker;
                 step = 0;
             }
 
             int step;
 
-            IHostCaptureEventBroker IWorkflowRunner<IHostCaptureEventBroker, RootEmissionPaths>.EventBroker 
-                => Broker;
 
             [MethodImpl(Inline)]
             CorrelationToken Correlate()
@@ -58,10 +58,10 @@ namespace Z0.Asm
                 where E : IAppEvent
                     => ref Broker.RaiseEvent(e);
 
-            public void Run(FolderPath dst)
+            public void Run(HostCaptureConfig config)
             {
-                var root = RootEmissionPaths.Define(dst);
-                Run(root);
+                var root = RootEmissionPaths.Define(config.EmissionRoot);
+               Run(root);
             }
 
             public void Run(RootEmissionPaths root)
@@ -157,7 +157,7 @@ namespace Z0.Asm
                 writer.Write(src);
             }
 
-            public ParsedExtract[] ParseMembers(in ApiHost host,  MemberExtract[] extracts)
+            public ParsedExtract[] ParseMembers(in ApiHost host, MemberExtract[] extracts)
             {
                 var parsed = Parser.Parse(extracts);                
                 Raise(new ExtractsParsed(host, parsed));
@@ -196,6 +196,7 @@ namespace Z0.Asm
                 Raise(report.CreatedEvent());
                 return report;
             }
+
         }   
     }
 }
