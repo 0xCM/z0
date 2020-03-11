@@ -15,7 +15,7 @@ namespace  Z0
         /// Covers a token-identified buffer with a span
         /// </summary>
         [MethodImpl(Inline)]
-        public static unsafe Span<T> Content<T>(this BufferToken src)
+        public static unsafe Span<T> Content<T>(this IBufferToken src)
             where T : unmanaged
                 => Spans.cover((byte*)src.Handle.ToPointer(), src.Length).As<T>();
 
@@ -24,7 +24,7 @@ namespace  Z0
         /// </summary>
         /// <param name="src">The source content</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static unsafe Span<T> Fill<T>(this BufferToken dst, ReadOnlySpan<T> src)
+        public static unsafe Span<T> Fill<T>(this IBufferToken dst, ReadOnlySpan<T> src)
             where T : unmanaged
         {
             var srcBytes = src.AsBytes();
@@ -41,21 +41,11 @@ namespace  Z0
             return dst.Content<T>();         
         }
 
-        // [MethodImpl(Inline)]
-        // public static void Fill<T>(this BufferToken dst, Span<T> src)
-        //     where T : unmanaged        
-        //         => dst.Fill(src.ReadOnly());
-
-        // [MethodImpl(Inline)]
-        // public static void Fill<T>(this BufferToken dst, T[] src)   
-        //     where T : unmanaged
-        //         => dst.Fill(src.AsSpan().ReadOnly());
-
         /// <summary>
         /// Zero-fills a token-identified buffer
         /// </summary>
         [MethodImpl(Inline)]
-        public static void Clear(this BufferToken src)
+        public static void Clear(this IBufferToken src)
             => src.Content<byte>().Clear();
     }
 }

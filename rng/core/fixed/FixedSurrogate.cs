@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         /// <typeparam name="F">The fixed type</typeparam>
         public static IFixedEmitter<F,T> emitter<F,T>(IPolyrand random)
-            where F : unmanaged, IFixedWidth
+            where F : unmanaged, IFixed
             where T : unmanaged
                 => new FixedEmitter<F, T>(random, random.FixedSurrogate<F, T>());
     }
@@ -37,7 +37,7 @@ namespace Z0
                 => new NumericEmitter<T>(random);
 
         public static IFixedEmitter<F,T> FixedEmitter<F,T>(this IPolyrand random)
-            where F : unmanaged, IFixedWidth
+            where F : unmanaged, IFixed
             where T : unmanaged
                 => FixedRng.emitter<F,T>(random);
     }
@@ -45,16 +45,16 @@ namespace Z0
     static class FixedRngSurrogateOps
     {
         internal static FixedEmitterSurrogate<F,T> FixedSurrogate<F,T>(this IPolyrand random)
-            where F : unmanaged, IFixedWidth
+            where F : unmanaged, IFixed
             where T : unmanaged
                 => random.ToFixedSurrogate<F,T>();
 
        static FixedEmitterSurrogate<F,T> ToFixedSurrogate<F,T>(this IPolyrand random)
-            where F : unmanaged, IFixedWidth
+            where F : unmanaged, IFixed
             where T : unmanaged
         {
             const string name = "fixedrand";
-            var width = default(F).FixedWidth;
+            var width = (FixedWidth)default(F).FixedBitCount;
             var kind = typeof(T).NumericKind();
 
             F f8u()

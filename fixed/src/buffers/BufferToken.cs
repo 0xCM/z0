@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Describes an allocated buffer
     /// </summary>
-    public readonly struct BufferToken
+    public readonly struct BufferToken : IBufferToken
     {                
         /// <summary>
         /// Creates an array of tokens that identify a squence of buffers
@@ -29,9 +29,9 @@ namespace Z0
             return tokens;
         }
         
-        public readonly IntPtr Handle;
+        public IntPtr Handle {get;}
 
-        public readonly int Length;
+        public int Length {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator BufferToken((IntPtr handle, int length) src)

@@ -41,6 +41,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Fixed64 From<T>(T src)
+            where T : unmanaged
+                => From(Cast.to<T,ulong>(src));
+
+        [MethodImpl(Inline)]
         public static Fixed64 From(int src)
             => new Fixed64((ulong)(long)src);
 
@@ -99,6 +104,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(Fixed64 x)
             => x.X0;
+
+        [MethodImpl(Inline)]
+        public T As<T>()
+            where T : unmanaged
+                => Cast.to<T>(X0);
 
         [MethodImpl(Inline)]
         public bool Equals(ulong src)

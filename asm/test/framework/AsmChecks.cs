@@ -31,6 +31,16 @@ namespace Z0
             this.RepCount = 128;
             this.Random = random;
         }
+                
+        public F ExecBinaryOperator<F>(in AsmBuffers buffers, AsmCode src, F x, F y)
+            where F : unmanaged, IFixed
+        {
+
+            var f = buffers.MainExec.LoadFixedBinaryOp<F>(src);
+            return f(x,y);
+
+        }
+
 
         protected string Math
             => nameof(math);
@@ -66,7 +76,7 @@ namespace Z0
         /// <param name="g">The second operator, often interpreted as the operator under test</param>
         /// <param name="name">The operator name</param>
         /// <typeparam name="T">The operator domain type</typeparam>
-        protected TestCaseRecord CheckMatch<T>(in AsmBuffers buffers, string basename, UnaryOp<T> f, UnaryOp<T> g)
+        TestCaseRecord CheckMatch<T>(in AsmBuffers buffers, string basename, UnaryOp<T> f, UnaryOp<T> g)
             where T :unmanaged
         {
             void check()
@@ -88,7 +98,7 @@ namespace Z0
         /// <param name="g">The second operator, often interpreted as the operator under test</param>
         /// <param name="name">The operator name</param>
         /// <typeparam name="T">The operator domain type</typeparam>
-        protected TestCaseRecord CheckMatch<T>(in AsmBuffers buffers, string opname, BinaryOp<T> f, BinaryOp<T> g)
+        TestCaseRecord CheckMatch<T>(in AsmBuffers buffers, string opname, BinaryOp<T> f, BinaryOp<T> g)
             where T :unmanaged
         {
             void check()
@@ -106,7 +116,7 @@ namespace Z0
         protected TestCaseRecord CheckAsmMatch<T>(in AsmBuffers buffers, UnaryOp<T> f, AsmCode src)
             where T : unmanaged
         {
-            var g = buffers.MainExec.Load(src).FixedUnaryAdapter<T>(src.Id);            
+            var g = buffers.MainExec.Load(src).AsUnaryOp<T>(src.Id);            
 
             void check()
             {

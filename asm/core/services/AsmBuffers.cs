@@ -23,11 +23,11 @@ namespace Z0
 
         readonly Span<byte> CaptureState;
 
-        readonly ExecBuffer MBuffer;
+        readonly BufferAllocation MBuffer;
         
-        readonly ExecBuffer LBuffer;
+        readonly BufferAllocation LBuffer;
 
-        readonly ExecBuffer RBuffer;
+        readonly BufferAllocation RBuffer;
 
         [MethodImpl(Inline)]
         public static AsmBuffers New(IAsmContext context, AsmCaptureEventObserver observer, int? size = null)

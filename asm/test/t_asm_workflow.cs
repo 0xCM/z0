@@ -43,8 +43,19 @@ namespace Z0.Asm
             Root = RootEmissionPaths.Define(DefaultDataDir);
             Root.LogDir.Clear();
         }
-
         
+        public void CheckAsm()
+        {
+            var control = AsmCheckCountrol.Create(Context);
+            control.CheckAsm();
+        }
+        void ExecuteWorkflow()
+        {
+            var workflow = HostCaptureWorkflow.Create(Context);
+            ConnectReceivers(workflow.EventBroker);
+            workflow.Run(Root);
+        }
+
         public override void Dispose()
         {
             base.Dispose();
@@ -162,12 +173,6 @@ namespace Z0.Asm
             NotifyConsole(accepted.Message);
         }
 
-        public void ExecuteWorkflow()
-        {
-            var workflow = HostCaptureWorkflow.Create(Context);
-            ConnectReceivers(workflow.EventBroker);
-            workflow.Run(Root);
-        }
 
         void Analyze(in ApiHostUri host, ReadOnlySpan<AsmFunction> functions)
         {

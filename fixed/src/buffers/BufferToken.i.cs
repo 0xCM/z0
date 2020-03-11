@@ -1,3 +1,4 @@
+
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
@@ -6,15 +7,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Security;
-
+    
     using static Root;
-        
 
-    public readonly ref struct AsmBufferSeq
+    public interface IBufferToken 
+    {
+        IntPtr Handle {get;} 
+
+        int Length {get;}  
+    }
+
+    public interface IFixedBufferToken : IBufferToken
     {
 
     }
+
+    public interface IBufferToken<F> : IFixedBufferToken
+        where F : unmanaged, IFixed
+    {
+
+    }
+
 
 }

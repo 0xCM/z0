@@ -15,7 +15,7 @@ namespace Z0
     partial class FixedRngOps
     {
         public static IEnumerable<F> FixedStream<F>(this IPolyrand random, F t = default)
-            where F:unmanaged, IFixedWidth
+            where F:unmanaged, IFixed
                 => FixedRng.stream<F>(random);         
     }    
 
@@ -27,9 +27,10 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <typeparam name="F">The fixed type</typeparam>
         public static IEnumerable<F> stream<F>(IPolyrand random)
-            where F: unmanaged, IFixedWidth
+            where F: unmanaged, IFixed
         {
-            var w = default(F).FixedWidth;
+            //var w = default(F).FixedWidth;
+            var w = (FixedWidth)default(F).FixedBitCount;
             switch(w)
             {
                 case FixedWidth.W8: return random.FixedStream<F>(n8);
@@ -41,7 +42,6 @@ namespace Z0
                 case FixedWidth.W512: return random.FixedStream<F>(n512);
                 default: return items<F>();                    
             }
-
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N8 w)
@@ -75,7 +75,7 @@ namespace Z0
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N64 w)
-            where T :unmanaged, IFixedWidth
+            where T :unmanaged, IFixed
         {
             while(true)
             {
@@ -85,7 +85,7 @@ namespace Z0
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N128 w)
-            where T :unmanaged, IFixedWidth
+            where T :unmanaged, IFixed
         {
             while(true)
             {
@@ -95,7 +95,7 @@ namespace Z0
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N256 w)
-            where T :unmanaged, IFixedWidth
+            where T :unmanaged, IFixed
         {
             while(true)
             {
@@ -105,7 +105,7 @@ namespace Z0
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N512 w)
-            where T :unmanaged, IFixedWidth
+            where T :unmanaged, IFixed
         {
             while(true)
             {

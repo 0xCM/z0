@@ -11,55 +11,14 @@ namespace Z0
 
     using static Root;
 
-    public static class BufferSeq
-    {
-        /// <summary>
-        /// Allocates a bufer sequence over segments of fixed type
-        /// </summary>
-        /// <param name="count">The number of buffers in the sequence</param>
-        /// <typeparam name="F">The buffer segment type</typeparam>
-        [MethodImpl(Inline)]
-        public static BufferSeq<F> alloc<F>(int count)
-            where F : unmanaged, IFixed    
-                => new BufferSeq<F>(count);
-
-        /// <summary>
-        /// Allocates a bufer sequence over segments of width = 128 bits / 16 bytes
-        /// </summary>
-        /// <param name="count">The number of buffers in the sequence</param>
-        /// <typeparam name="F">The buffer segment type</typeparam>
-        [MethodImpl(Inline)]
-        public static BufferSeq<Fixed128> alloc(N128 width, int count)
-            => new BufferSeq<Fixed128>(count);
-
-        /// <summary>
-        /// Allocates a bufer sequence over segments of width = 256 bits / 32 bytes
-        /// </summary>
-        /// <param name="count">The number of buffers in the sequence</param>
-        /// <typeparam name="F">The buffer segment type</typeparam>
-        [MethodImpl(Inline)]
-        public static BufferSeq<Fixed256> alloc(N256 width, int count)
-            => new BufferSeq<Fixed256>(count);
-
-        /// <summary>
-        /// Allocates a bufer sequence over segments of width = 512 bits / 64 bytes
-        /// </summary>
-        /// <param name="count">The number of buffers in the sequence</param>
-        /// <typeparam name="F">The buffer segment type</typeparam>
-        [MethodImpl(Inline)]
-        public static BufferSeq<Fixed512> alloc(N512 width, int count)
-            => new BufferSeq<Fixed512>(count);
-
-    }
-
     public readonly ref struct BufferSeq<F>
         where F : unmanaged, IFixed    
     {
         readonly Span<F> View;
 
-        readonly Span<BufferToken> Tokens;
+        readonly Span<BufferToken<F>> Tokens;
 
-        readonly ExecBuffer Buffered;
+        readonly BufferAllocation Buffered;
 
         readonly int BufferCount;
 
@@ -74,7 +33,7 @@ namespace Z0
             this.TotalLength = BufferCount*BufferLength;
             this.Buffered = Buffers.alloc(TotalLength);
             this.View = new Span<F>(Buffered.Handle.ToPointer(), BufferCount);
-            this.Tokens = BufferToken.Tokenize(Buffered.Handle, BufferLength, BufferCount);
+            this.Tokens = BufferToken<F>.Tokenize(Buffered.Handle, BufferLength, BufferCount);
         }
 
         /// <summary>
@@ -106,10 +65,10 @@ namespace Z0
         /// Presents an index-identifed buffer as a span of bytes
         /// </summary>
         /// <param name="index">The buffer index</param>
-        public Span<byte> this[int index]
+        public ref readonly BufferToken<F> this[int index]
         {
             [MethodImpl(Inline)]
-            get => Bytes(index);
+            get => ref Token(index);
         }
 
         /// <summary>
@@ -117,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public ref readonly BufferToken Token(int index)
+        public ref readonly BufferToken<F> Token(int index)
             => ref skip(Tokens,index);
 
         /// <summary>
@@ -127,7 +86,7 @@ namespace Z0
         public Span<byte> Clear(int index)
         {
             Token(index).Clear();
-            return this[index];            
+            return Bytes(index);
         }
 
         /// <summary>
@@ -153,5 +112,4 @@ namespace Z0
         public void Dispose()
             => Buffered.Dispose();
     }
-
 }

@@ -53,6 +53,11 @@ namespace Z0
             => new Fixed32((uint)src);
 
         [MethodImpl(Inline)]
+        public static Fixed32 From<T>(T src)
+            where T : unmanaged
+                => From(Cast.to<T,uint>(src));
+
+        [MethodImpl(Inline)]
         Fixed32(uint x0)
             => X0 = x0;
 
@@ -95,6 +100,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(Fixed32 x)
             => (ulong)x.X0;
+
+ 
+        [MethodImpl(Inline)]
+        public T As<T>()
+            where T : unmanaged
+                => Cast.to<T>(X0);
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed32 src)

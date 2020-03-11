@@ -14,6 +14,17 @@ namespace Z0
 
     public readonly struct FixedDelegate
     {
+        /// <summary>
+        /// The operation identity
+        /// </summary>
+        public readonly OpIdentity Id;
+
+        public readonly IntPtr SourceAddress;
+
+        public readonly DynamicMethod Enclosure;
+
+        public readonly Delegate DynamicOp;        
+
         [MethodImpl(Inline)]
         public static FixedDelegate Define(OpIdentity id, IntPtr src, DynamicMethod enclosure, Delegate dynop)        
             => new FixedDelegate(id,src,enclosure,dynop);
@@ -30,13 +41,5 @@ namespace Z0
             this.Enclosure = enclosure;
             this.DynamicOp = dynop;
         }
-
-        public readonly OpIdentity Id;
-
-        public readonly IntPtr SourceAddress;
-
-        public readonly DynamicMethod Enclosure;
-
-        public readonly Delegate DynamicOp;        
     }    
 }

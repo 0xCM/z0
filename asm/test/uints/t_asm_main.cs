@@ -275,7 +275,7 @@ namespace Z0
 
             iter(asm.Instructions, i => Trace(i));  
 
-            var g = buffers.MainExec.FixedBinaryOp<Fixed256>(asm.Code);
+            var g = buffers.MainExec.LoadFixedBinaryOp<Fixed256>(asm.Code);
             var z3 = g(x,y).ToVector<ushort>();
             Claim.eq(z1,z3);
         }

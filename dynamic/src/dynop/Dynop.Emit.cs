@@ -22,12 +22,12 @@ namespace Z0
         /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
         /// <typeparam name="T">The primal operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryOp<T> EmitBinaryOp<T>(this BufferToken buffer, OpIdentity id)
+        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, OpIdentity id)
             where T : unmanaged
-                => (BinaryOp<T>)buffer.FixedBinaryAdapter(id,typeof(BinaryOp<T>), typeof(T));
+                => (BinaryOp<T>)buffer.AsFixedBinaryOp(id,typeof(BinaryOp<T>), typeof(T));
 
         [MethodImpl(Inline)]
-        public static BinaryOp<T> EmitBinary<T>(this BufferToken buffer, in AsmCode<T> src)
+        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, in AsmCode src)
             where T : unmanaged
                 => buffer.Load(src).EmitBinaryOp<T>(src.Id);
 

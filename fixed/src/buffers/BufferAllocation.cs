@@ -10,22 +10,22 @@ namespace Z0
     
     using static Root;
 
-    public readonly struct ExecBuffer : IDisposable
+    public readonly struct BufferAllocation : IDisposable
     {
         public readonly IntPtr Handle;
 
         public readonly int Length;
 
         [MethodImpl(Inline)]
-        public static ExecBuffer Own(BufferToken token)
-            => new ExecBuffer(token);
+        public static BufferAllocation Own(BufferToken token)
+            => new BufferAllocation(token);
 
         [MethodImpl(Inline)]
-        public static implicit operator BufferToken(ExecBuffer src)
+        public static implicit operator BufferToken(BufferAllocation src)
             => src.Token;
 
         [MethodImpl(Inline)]
-        ExecBuffer(BufferToken token)
+        BufferAllocation(BufferToken token)
         {
             this.Handle = token.Handle;
             this.Length = token.Length;

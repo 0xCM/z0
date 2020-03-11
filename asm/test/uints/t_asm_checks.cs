@@ -154,7 +154,7 @@ namespace Z0
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffers.MainExec.FixedBinaryOp<Fixed128>(asm.Code);
+            var f = buffers.MainExec.LoadFixedBinaryOp<Fixed128>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -178,7 +178,7 @@ namespace Z0
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffer.FixedBinaryOp<Fixed256>(asm.Code);
+            var f = buffer.LoadFixedBinaryOp<Fixed256>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -202,7 +202,7 @@ namespace Z0
             Trace(asm.Id);
             iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffers.MainExec.FixedUnaryOp<Fixed256>(capture.Code);
+            var f = buffers.MainExec.LoadFixedUnaryOp<Fixed256>(capture.Code);
             var z2 = f(x.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -238,26 +238,16 @@ namespace Z0
         }
 
 
-        void CheckUnaryOp<T>(in AsmBuffers buffers, AsmCode src, Func<T,T> f)
-            where T : unmanaged, IFixedWidth
-
-        {            
-            TraceCaller($"Checking {src.Id}");
-            var g = (FixedFunc<T,T>)buffers.MainExec.Load(src).FixedUnaryAdapter(src.Id, typeof(FixedFunc<T,T>),typeof(T));
-            var points = Random.FixedStream<T>().Take(RepCount);
-            iter(points, x => Claim.eq(f(x), g(x)));            
-            
-        }   
-        
-        void CheckUnaryOp<T>(in AsmBuffers buffers, in FixedAsm<T> a, in FixedAsm<T> b)
-            where T : unmanaged, IFixedWidth
+        void CheckUnaryOp<F>(in AsmBuffers buffers, in FixedAsm<F> a, in FixedAsm<F> b)
+            where F : unmanaged, IFixedWidth
         {            
             TraceCaller($"Checking {a.Id} == {b.Id} match");
             
-            var f = (FixedFunc<T,T>)buffers.LeftExec.Load(a.Code).FixedUnaryAdapter(a.Id, typeof(FixedFunc<T,T>),typeof(T));
-            var g = (FixedFunc<T,T>)buffers.RightExec.Load(b.Code).FixedUnaryAdapter(b.Id, typeof(FixedFunc<T,T>),typeof(T));
 
-            var stream = Random.FixedStream<T>();
+            var f = buffers.LeftExec.LoadFixedUnaryOp<F>(a.Code);
+            var g = buffers.RightExec.LoadFixedUnaryOp<F>(b.Code);            
+
+            var stream = Random.FixedStream<F>();
             if(stream == null)
                 Claim.fail($"random stream null!");
 
@@ -272,85 +262,39 @@ namespace Z0
             switch(nk)
             {
                 case NumericKind.I8:
-                    var f8i = buffers.MainExec.FixedUnaryOp<Fixed8>(src);
+                    var f8i = buffers.MainExec.LoadFixedUnaryOp<Fixed8>(src);
                     Trace((sbyte)f8i((sbyte) -9));
                     break;
                 case NumericKind.U8:
-                    var f8u = buffers.MainExec.FixedUnaryOp<Fixed8>(src);
+                    var f8u = buffers.MainExec.LoadFixedUnaryOp<Fixed8>(src);
                     Trace(f8u((byte) 7));
                     break;
                 case NumericKind.I16:
-                    var f16i = buffers.MainExec.FixedUnaryOp<Fixed16>(src);
+                    var f16i = buffers.MainExec.LoadFixedUnaryOp<Fixed16>(src);
                     Trace((short)f16i((short) -17));
                     break;
                 case NumericKind.U16:
-                    var f16u = buffers.MainExec.FixedUnaryOp<Fixed16>(src);
+                    var f16u = buffers.MainExec.LoadFixedUnaryOp<Fixed16>(src);
                     Trace(f16u((ushort) 15));
                     break;                    
                 case NumericKind.I32:
-                    var f32i = buffers.MainExec.FixedUnaryOp<Fixed32>(src);
+                    var f32i = buffers.MainExec.LoadFixedUnaryOp<Fixed32>(src);
                     Trace((int)f32i((int) -33));
                     break;
                 case NumericKind.U32:
-                    var f32u = buffers.MainExec.FixedUnaryOp<Fixed32>(src);
+                    var f32u = buffers.MainExec.LoadFixedUnaryOp<Fixed32>(src);
                     Trace(f32u((uint) 31));
                     break;                    
                 case NumericKind.I64:
-                    var f64i = buffers.MainExec.FixedUnaryOp<Fixed64>(src);
+                    var f64i = buffers.MainExec.LoadFixedUnaryOp<Fixed64>(src);
                     Trace((long)f64i((long) -65));
                     break;
                 case NumericKind.U64:
-                    var f64u = buffers.MainExec.FixedUnaryOp<Fixed64>(src);
+                    var f64u = buffers.MainExec.LoadFixedUnaryOp<Fixed64>(src);
                     Trace(f64u((ulong) 63));
                     break;   
                 default:
                     throw new Exception($"Unanticipated numeric kind {nk}");                                 
-            }
-        }
-
-        void CheckBinaryFunc(in AsmBuffers buffers, AsmCode src)
-        {
-            var kind = Numeric.kind(src.Id.TextComponents.Last());
-            if(kind.IsNone())
-                return;
-
-            switch(kind)
-            {
-                case NumericKind.I8:
-                    var f8i = buffers.MainExec.FixedBinaryOp<Fixed8>(src);
-                    Trace(f8i(5,7));
-                    break;
-                case NumericKind.U8:
-                    var f8u = buffers.MainExec.FixedBinaryOp<Fixed8>(src);
-                    Trace(f8u(5,7));
-                    break;
-                case NumericKind.I16:
-                    var f16i = buffers.MainExec.FixedBinaryOp<Fixed16>(src);
-                    Trace(f16i(3,6));
-                    break;
-                case NumericKind.U16:
-                    var f16u = buffers.MainExec.FixedBinaryOp<Fixed16>(src);
-                    Trace(f16u(12,12));
-                    break;                    
-                case NumericKind.I32:
-                    var f32i = buffers.MainExec.FixedBinaryOp<Fixed32>(src);
-                    Trace(f32i(10,10));
-                    break;
-                case NumericKind.U32:
-                    var f32u = buffers.MainExec.FixedBinaryOp<Fixed32>(src);
-                    Trace(f32u(20,10));
-                    break;                    
-                case NumericKind.I64:
-                    var f64i = buffers.MainExec.FixedBinaryOp<Fixed64>(src);
-                    Trace(f64i(50,50));
-                    break;
-                case NumericKind.U64:
-                    var f64u = buffers.MainExec.FixedBinaryOp<Fixed64>(src);
-                    Trace(f64u(13,13));
-                    break;                    
-                default:
-                    Trace($"{kind}");
-                    break;
             }
         }
 

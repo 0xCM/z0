@@ -19,17 +19,8 @@ namespace Z0
         /// </summary>
         /// <param name="length">The buffer length in bytes</param>
         [MethodImpl(Inline)]
-        public static ExecBuffer alloc(int length)
-            => ExecBuffer.Own((liberate(Marshal.AllocHGlobal(length), length), length));        
-
-        // [MethodImpl(Inline)]
-        // public static ExecBufferSpan spanalloc(int length)
-        // {
-        //     var handle = liberate(Marshal.AllocHGlobal(length), length);            
-        //     var content = new Span<byte>(handle.ToPointer(), length);
-        //     content.Clear();
-        //     return ExecBufferSpan.Own(handle,content);
-        // }
+        public static BufferAllocation alloc(int length)
+            => BufferAllocation.Own((liberate(Marshal.AllocHGlobal(length), length), length));        
 
         /// <summary>
         /// Deallocates a native allocation

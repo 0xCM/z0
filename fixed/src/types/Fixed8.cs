@@ -58,6 +58,11 @@ namespace Z0
             => new Fixed8((byte)src);
 
         [MethodImpl(Inline)]
+        public static Fixed8 From<T>(T src)
+            where T : unmanaged
+                => From(Cast.to<T,byte>(src));
+
+        [MethodImpl(Inline)]
         Fixed8(byte x0)
             => X0 = x0;
 
@@ -84,6 +89,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator byte(Fixed8 x)
             => (byte)x.X0;
+
+        [MethodImpl(Inline)]
+        public T As<T>()
+            where T : unmanaged
+                => Cast.to<T>(X0);
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed8 src)
@@ -136,6 +146,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinaryOp8 ToFixedBinOp(this MethodInfo f, NumericTypeKind<sbyte> k)
             => f.CreateDelegate<Func<sbyte,sbyte,sbyte>>().ToFixed();
-
     }
 }

@@ -11,7 +11,6 @@ namespace Z0
     
     using static Root;
     
-
     public class AsmCheckCountrol
     {
         IAsmContext Context {get;}
@@ -22,11 +21,15 @@ namespace Z0
             => new AsmCheckCountrol(context.RootedComposition());
 
         AsmCheckCountrol(IAsmContext context)
-        {
-        
+        {        
             
             this.Context = context;
             this.Checks = AsmChecks.Create(context, Rng.Pcg64(Seed64.Seed08));
+        }
+
+        public void CheckAsm()
+        {
+
         }
 
     }

@@ -14,16 +14,6 @@ namespace Z0
 
     public static class AsmCodeExtensions
     {
-        /// <summary>
-        /// Loads native code into the buffer for execution
-        /// </summary>
-        /// <param name="src">The source code (pun intended)</param>
-        [MethodImpl(Inline)]
-        public static BufferToken Load(this BufferToken buffer, in AsmCode src)
-        {
-            buffer.Fill(src.Bytes);
-            return buffer;
-        }
 
         [MethodImpl(Inline)]
         public static AsmCode WithIdentity(this AsmCode src, OpIdentity id)

@@ -57,6 +57,11 @@ namespace Z0
             => new Fixed16((ushort)src);
 
         [MethodImpl(Inline)]
+        public static Fixed16 From<T>(T src)
+            where T : unmanaged
+                => From(Cast.to<T,ushort>(src));
+
+        [MethodImpl(Inline)]
         Fixed16(ushort x)
             => X0 = x;
 
@@ -91,6 +96,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ushort(Fixed16 x)
             => x.X0;
+
+        [MethodImpl(Inline)]
+        public T As<T>()
+            where T : unmanaged
+                => Cast.to<T>(X0);
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed16 src)

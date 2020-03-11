@@ -98,7 +98,7 @@ namespace Z0
         protected TestCaseRecord CheckAsmMatch<T>(in AsmBuffers buffers, UnaryOp<T> f, AsmCode src)
             where T : unmanaged
         {
-            var g = buffers.MainExec.Load(src).FixedUnaryAdapter<T>(src.Id);            
+            var g = buffers.MainExec.Load(src).AsUnaryOp<T>(src.Id);            
 
             void check()
             {
