@@ -12,17 +12,17 @@ namespace Z0
 
     using static Root;
 
-    readonly struct MemberOpCollector : IMemberOpCollector
+    readonly struct ApiOpCollector : IApiCollector
     {
         public IContext Context {get;}
 
 
         [MethodImpl(Inline)]
-        public static IMemberOpCollector Create(IContext context)
-            => new MemberOpCollector(context);
+        public static IApiCollector Create(IContext context)
+            => new ApiOpCollector(context);
     
         [MethodImpl(Inline)]
-        internal MemberOpCollector(IContext context)
+        internal ApiOpCollector(IContext context)
         {
             this.Context = context;
         }

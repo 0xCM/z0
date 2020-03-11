@@ -116,7 +116,7 @@ namespace Z0
             => State.Assemblies;
 
         public IAsmContext WithFormat(AsmFormatConfig config)
-            => new AsmContext(RootContext.ValueOrDefault(),Context.NextId(),AsmContextData.New(Compostion, State.Resources, config));
+            => new AsmContext(RootContext.ValueOrDefault(),Context.NextId(), AsmContextData.New(Compostion, State.Resources, config));
 
         public void Notify(AppMsg msg)
             => MsgSink.OnSome(sink => sink.Notify(msg));

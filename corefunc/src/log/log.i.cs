@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static zfunc;
-
     public enum LogArea
     {
         Test,

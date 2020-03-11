@@ -31,14 +31,14 @@ namespace Z0.Asm
             this.StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        public void Write(in AsmOpData src, int? uripad = null)
+        public void Write(in AsmOpBits src, int? uripad = null)
         {
             StreamOut.WriteLine(src.Format(uripad ?? 5));
         }
 
-        public void Write(AsmOpData[] src)
+        public void Write(AsmOpBits[] src)
         {
-            var uripad = src.Max(x => x.Uri.Identifier.Length) + 1;
+            var uripad = src.Max(x => x.Op.Identifier.Length) + 1;
             for(var i=0; i< src.Length; i++)
             {
                 Write(src[i], uripad);

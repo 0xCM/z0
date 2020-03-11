@@ -17,7 +17,7 @@ namespace  Z0
         [MethodImpl(Inline)]
         public static unsafe Span<T> Content<T>(this IBufferToken src)
             where T : unmanaged
-                => Spans.cover((byte*)src.Handle.ToPointer(), src.Length).As<T>();
+                => Spans.cover((byte*)src.Handle.ToPointer(), src.Size).As<T>();
 
         /// <summary>
         /// Fills a token-identified buffer with data from a source span and returns the target memory to the caller as a span
@@ -29,15 +29,15 @@ namespace  Z0
         {
             var srcBytes = src.AsBytes();
             var dstBytes = dst.Content<byte>();
-            if(srcBytes.Length <= dst.Length)
+            if(srcBytes.Length <= dst.Size)
             {
-                if(srcBytes.Length < dst.Length)
+                if(srcBytes.Length < dst.Size)
                     dstBytes.Clear();
 
                 srcBytes.CopyTo(dstBytes);
             }
             else
-                srcBytes.Slice(dst.Length).CopyTo(dstBytes);  
+                srcBytes.Slice(dst.Size).CopyTo(dstBytes);  
             return dst.Content<T>();         
         }
 

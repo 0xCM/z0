@@ -12,10 +12,11 @@ namespace Z0
 
     using static Root;
 
+
     /// <summary>
     /// Identifies a host-defined operation 
     /// </summary>
-    public readonly struct HostedMember : IHostedMember<HostedMember>, INullary<HostedMember>
+    public readonly struct HostedMember : IMemberOp<HostedMember>, INullary<HostedMember>
     {
         public static HostedMember Empty => Define(ApiHostUri.Empty, OpIdentity.Empty, null);
         

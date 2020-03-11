@@ -40,9 +40,9 @@ namespace Z0
         public void Configure(ITestConfig config)
             => Config = config;
                 
-
         protected FolderPath DefaultDataDir
             => Context.Paths.TestDataDir(GetType());                
+
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>

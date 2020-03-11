@@ -154,7 +154,7 @@ namespace Z0
              => Identity.close(op);
 
         [MethodImpl(Inline)]
-        public static IMemberOpCollector OpCollector(this IContext context)
-            => MemberOpCollector.Create(context);
+        public static IApiCollector OpCollector(this IContext context)
+            => ApiOpCollector.Create(context);
     }    
 }

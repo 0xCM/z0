@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Linq;
@@ -13,6 +13,31 @@ namespace Z0
     using static Root;
     using static Nats;
     using static time;
+
+    public static class AsmCheckOps
+    {
+
+        public static OpIndex<AsmOpBits> ToOpIndex(this IEnumerable<AsmOpBits> src)
+            => OpIndex.From(src.Select(x => (x.Op.OpId, x)));
+
+
+        public static IEnumerable<M> KindedOperators<M>(this IEnumerable<M> src, int? arity = null)
+            where M : struct, IMemberOp<M>
+            => from located in src
+                let m = located.Method
+                let id = m.KindId()
+                where id.HasValue && m.IsOperator() && (arity != null ? m.Arity() == arity : true)
+                select located;
+
+        public static IEnumerable<M> KindedNumericOperators<M>(this IEnumerable<M> src, int arity)
+            where M : struct, IMemberOp<M>
+                => from located in src
+                    let m = located.Method
+                    let id = m.KindId()
+                    where id.HasValue && m.IsNumericOperator(arity)
+                    select located;
+
+    }
 
     public class AsmChecks : IAsmService
     {
@@ -30,17 +55,68 @@ namespace Z0
             this.Context = context;
             this.RepCount = 128;
             this.Random = random;
-        }
-                
-        public F ExecBinaryOperator<F>(in AsmBuffers buffers, AsmCode src, F x, F y)
-            where F : unmanaged, IFixed
+        }                
+
+        public OpIndex<ApiMemberCode> IndexApiCode(ApiHostUri host, FilePath src)
         {
+            var loaded = LoadCode(src);
+            var hosted = HostedMembers(host).ToArray();
+            
+            var codeidx = loaded.ToEnumerable().ToOpIndex();
+            var hostedidx = hosted.ToOpIndex();
 
-            var f = buffers.MainExec.LoadFixedBinaryOp<F>(src);
-            return f(x,y);
-
+            var apicode = from pair in hostedidx.Intersect(codeidx).Enumerated
+                          let l = pair.Item1
+                          let r = pair.Item2
+                          select ApiMemberCode.Define(r.left, r.right.Bits);                                      
+            return apicode.Select(c => (c.Id, c)).ToOpIndex();
         }
 
+        /// <summary>
+        /// Loads executable code into an index-identifed target buffer and manufactures a fixed binary operator 
+        /// that executes the code in the buffer upon invocation
+        /// </summary>
+        /// <param name="buffers">The target buffer sequence</param>
+        /// <param name="index">The index of the target buffer</param>
+        /// <param name="src">The executable source that conforms to a fixed binary operator</param>
+        /// <typeparam name="F">The operand type</typeparam>
+        public FixedBinaryOp<F> LoadBinaryOp<F>(in BufferSeq buffers, int index, AsmCode src)
+            where F : unmanaged, IFixed
+                => buffers[index].LoadFixedBinaryOp<F>(src);
+
+        /// <summary>
+        /// Loads and invokes a fixed binary operator
+        /// </summary>
+        /// <param name="buffers">The target buffer sequence</param>
+        /// <param name="index">The index of the target buffer</param>
+        /// <param name="src">The executable source that conforms to a fixed binary operator</param>
+        /// <param name="x">The first operand</param>
+        /// <param name="y">The second operand</param>
+        /// <typeparam name="F">The operand type</typeparam>
+        public F ExecBinaryOp<F>(in BufferSeq buffers, int index, AsmCode src, F x, F y)
+            where F : unmanaged, IFixed
+                => LoadBinaryOp<F>(buffers, index, src)(x,y);
+
+        /// <summary>
+        /// Retrieves the members defined by an api host
+        /// </summary>
+        /// <param name="host">The host uri</param>
+        public IEnumerable<HostedMember> HostedMembers(in ApiHostUri host)
+            => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
+
+        /// <summary>
+        /// Retrieves located members defined by an api host
+        /// </summary>
+        /// <param name="host">The host uri</param>
+        public IEnumerable<LocatedMember> LocateMembers(in ApiHostUri host)
+            => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Located(host));
+
+        /// <summary>
+        /// Reads code from a hex file
+        /// </summary>
+        /// <param name="src">The source path</param>
+        public ReadOnlySpan<AsmOpBits> LoadCode(FilePath src)
+            => Context.HexReader().Read(src).ToArray();
 
         protected string Math
             => nameof(math);

@@ -11,17 +11,25 @@ namespace Z0
 
     public readonly struct AsmEmissionPaths
     {
-        static LogPaths Paths => LogPaths.The;
+        public static AsmEmissionPaths The => Define();
 
-        public static AsmEmissionPaths The => default(AsmEmissionPaths);
+        public static AsmEmissionPaths Define()
+            => new AsmEmissionPaths(Env.Current.LogDir);
 
-        FolderName ReportFolder => FolderName.Define($"asm.reports");  
+        readonly FolderPath LogRoot;
+
+        AsmEmissionPaths(FolderPath root)
+        {
+            this.LogRoot = root;
+        }
+
+        FolderName ReportFolder => FolderName.Define($"reports");  
         
-        FolderPath ReportRootDir => Paths.DataDir(ReportFolder);
+        FolderPath ReportRootDir => LogRoot + ReportFolder;
 
         FolderName DataRootFolder => FolderName.Define("asm");
 
-        FolderPath DataRootDir => Paths.DataDir(DataRootFolder);
+        FolderPath DataRootDir => LogRoot + DataRootFolder;
 
         public FolderPath DataSubDir(FolderName folder) => DataRootDir + folder; 
 

@@ -12,12 +12,6 @@ namespace Z0
 
     public interface IAppMsgSink : ISink<AppMsg>
     {
-        
-    }
-
-
-    public interface IAppMsgQueue : IAppMsgSink
-    {
         /// <summary>
         /// Posts a message to the context queue
         /// </summary>
@@ -48,7 +42,11 @@ namespace Z0
         void Notify(string msg, AppMsgKind? severity = null);
 
         void ISink<AppMsg>.Accept(in AppMsg src)
-            => Notify(src);
+            => Notify(src);        
+    }
+
+    public interface IAppMsgQueue : IAppMsgSink
+    {
 
         IReadOnlyList<AppMsg> Flush();        
 
@@ -79,6 +77,5 @@ namespace Z0
         
         void ISink<AppMsg>.Accept(in AppMsg src)
             => Write(src);
-
     }    
 }

@@ -32,6 +32,11 @@ namespace Z0
         /// Marker for memory-located operations
         /// </summary>
         Located,
+
+        /// <summary>
+        /// Scheme used when origin/location semantics should be eliminated from consideration
+        /// </summary>
+        Any,
     }
 
     public static class OpUriSchemeOps

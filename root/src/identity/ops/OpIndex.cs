@@ -15,19 +15,30 @@ namespace Z0
 
     public static class OpIndex
     {        
-        [MethodImpl(Inline)]
         public static OpIndex<T> From<T>(IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
-            where T : struct
                 => new OpIndex<T>(src, deduplicate);
 
-        [MethodImpl(Inline)]
         public static OpIndex<T> ToOpIndex<T>(this IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
-            where T : struct
-                => new OpIndex<T>(src, deduplicate);
+            => new OpIndex<T>(src, deduplicate);
+
+         public static OpIndex<(L left, R right)> Intersect<L,R>(this IOpIndex<L> left, IOpIndex<R> right)
+         {
+             var keys = left.Keys.ToHashSet();
+             keys.IntersectWith(right.Keys);
+             var keylist = keys.ToArray();
+             var count = keylist.Length;
+             var entries = Arrays.alloc<(OpIdentity,(L,R))>(count);
+             for(var i=0; i<count; i++)
+             {
+                var key = keylist[i];
+                entries[i] = (key, (left[key], right[key]));
+             }
+             return entries.ToOpIndex();
+         }   
     }
 
-    public readonly struct OpIndex<T> : IEnumerable<KeyedValue<OpIdentity, T>>
-        where T : struct
+
+    public readonly struct OpIndex<T> : IEnumerable<KeyedValue<OpIdentity, T>>, IOpIndex<T>
     {
         readonly Dictionary<OpIdentity, T> HashTable;
 
@@ -68,6 +79,12 @@ namespace Z0
             }
         }
 
+        public int EntryCount => HashTable.Count;
+
+        public IEnumerable<(OpIdentity, T)> Enumerated => HashTable.Select(kvp => (kvp.Key, kvp.Value));
+
+        public IEnumerable<OpIdentity> Keys => HashTable.Keys;
+        
         public IReadOnlyList<OpIdentity> DuplicateKeys
             => Duplicates;
 

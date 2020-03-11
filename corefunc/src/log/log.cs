@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public static class Log
     {
@@ -21,7 +22,7 @@ namespace Z0
             if(records.Length == 0)
                 return FilePath.Empty;
                         
-            return Log.Get(LogTarget.Define(LogArea.Bench)).Write(records,FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
+            return Log.Get(LogTarget.Define(LogArea.Bench)).Write(records, FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
         public static FilePath LogTestResults<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
@@ -124,7 +125,16 @@ namespace Z0
             {
                 lock(locker)
                     LogPath.Append(text);
-            }            
+            }
+
+            [MethodImpl(Inline)]
+            public void Notify(AppMsg msg)
+                => Write(msg);
+
+
+            [MethodImpl(Inline)]
+            public void Notify(string msg, AppMsgKind? severity = null)
+                => Write(AppMsg.NoCaller(msg,severity ?? AppMsgKind.Info));
         }
 
         sealed class AppLog : Logger<AppLog>

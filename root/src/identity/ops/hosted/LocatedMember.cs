@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Identifies a host-defined operation and the memory address that leads the member's executable code
     /// </summary>
-    public readonly struct LocatedMember :  IHostedMember<LocatedMember>, IAddressable
+    public readonly struct LocatedMember :  IMemberOp<LocatedMember>, IAddressable
     {
         public static LocatedMember Empty => Define(ApiHostUri.Empty, OpIdentity.Empty, null, MemoryAddress.Zero);
 

@@ -46,10 +46,11 @@ namespace Z0.Asm
         
         public void CheckAsm()
         {
-            var control = AsmCheckCountrol.Create(Context);
+            var control = AsmCheckCountrol.Create(Context, this, DefaultDataDir);
             control.CheckAsm();
         }
-        void ExecuteWorkflow()
+        
+        public void ExecuteWorkflow()
         {
             var workflow = HostCaptureWorkflow.Create(Context);
             ConnectReceivers(workflow.EventBroker);
@@ -183,13 +184,14 @@ namespace Z0.Asm
             NotifyConsole($"The {host} host members define a total of {total} instructions", AppMsgColor.Cyan);            
         }
 
-        void Analyze(in ApiHostUri hosturi, ReadOnlySpan<AsmOpData> ops, FilePath dst)
+            
+        void Analyze(in ApiHostUri hosturi, ReadOnlySpan<AsmOpBits> ops, FilePath dst)
         {
             var hosted = Context.FindHost(hosturi).MapRequired(host => Context.MemberLocator().Hosted(host)).ToOpIndex();            
             var saved = Context.HexReader().Read(dst).ToArray();
             Claim.eq(saved.Length, ops.Length);
             
-            var emptycount = saved.Where(s => s.Uri.IsEmpty).Count();
+            var emptycount = saved.Where(s => s.Op.IsEmpty).Count();
             Claim.eq(emptycount,0);
 
             ref readonly var src = ref head(ops);
@@ -197,8 +199,8 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var subject = ref skip(src, i);   
-                Claim.eq(saved[i].Uri, subject.Uri);  
-                Claim.eq(saved[i].Bytes.Length, subject.Bytes.Length);           
+                Claim.eq(saved[i].Op, subject.Op);  
+                Claim.eq(saved[i].Bits.Length, subject.Bits.Length);           
             }
         }
 

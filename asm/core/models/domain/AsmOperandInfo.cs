@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     /// <summary>
     /// Describes an operand in the context of an assembly instruction
     /// </summary>

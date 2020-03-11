@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct EnvVarNames
     {
-        public const string RunDir = "ZLogs";
+        public const string LogDir = "ZLogs";
         
         public const string DevDir = "ZDev";
     }
@@ -22,19 +22,19 @@ namespace Z0
         {
             get
             {
-                var run = EnvVar.Read(EnvVarNames.RunDir).Transform(FolderPath.Define);
+                var log = EnvVar.Read(EnvVarNames.LogDir).Transform(FolderPath.Define);
                 var dev = EnvVar.Read(EnvVarNames.DevDir).Transform(FolderPath.Define);
-                return new Env(run,dev);
+                return new Env(log,dev);
             }
         }
 
-        Env(EnvVar<FolderPath> run, EnvVar<FolderPath> dev)
+        Env(EnvVar<FolderPath> log, EnvVar<FolderPath> dev)
         {
-            this.RunDir = run;
+            this.LogDir = log;
             this.DevDir = dev;
         }
 
-        public EnvVar<FolderPath> RunDir {get;}
+        public EnvVar<FolderPath> LogDir {get;}
     
         public EnvVar<FolderPath> DevDir {get;}
     }

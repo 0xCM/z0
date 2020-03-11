@@ -41,14 +41,14 @@ namespace Z0.Asm
         /// <param name="formatted">The formatted text</param>
         /// <param name="idsep">A character that partitions the identifier and the code</param>
         /// <param name="bytesep">A character that partitions the code bytes</param>
-        Option<AsmOpData> Parse(string formatted)
+        Option<AsmOpBits> Parse(string formatted)
         {
             try
             {
                 var uritext = formatted.TakeBefore(IdSep).Trim();
                 var uri = OpUri.Parse(uritext);
                 var bytes = formatted.TakeAfter(IdSep).SplitClean(ByteSep).Select(Hex.parsebyte).ToArray();
-                return AsmOpData.Define(uri, bytes);                
+                return AsmOpBits.Define(uri, bytes);                
             }
             catch(Exception e)
             {
@@ -57,7 +57,7 @@ namespace Z0.Asm
             }
         }
 
-        public IEnumerable<AsmOpData> Read(FilePath src)
+        public IEnumerable<AsmOpBits> Read(FilePath src)
             => from line in src.ReadLines().Select(Parse)
                 where line.IsSome()
                 select line.Value;

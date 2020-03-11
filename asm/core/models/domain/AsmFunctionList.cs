@@ -6,7 +6,7 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using Z0;
+
     using static Root;
 
     public readonly struct AsmFunctionList : IFiniteSeq<AsmFunctionList, AsmFunction>

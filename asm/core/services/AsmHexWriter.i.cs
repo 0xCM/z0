@@ -8,8 +8,8 @@ namespace Z0.Asm
     
     public interface IAsmHexWriter : IAsmStreamWriter
     {
-        void Write(in AsmOpData src, int? uripad = null);
+        void Write(in AsmOpBits src, int? uripad = null);
 
-        void Write(AsmOpData[] src);
+        void Write(AsmOpBits[] src);
     }
 }

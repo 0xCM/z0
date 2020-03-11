@@ -5,14 +5,8 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
-    using System.Reflection;
 
     using Z0.Asm;
-
-    using static zfunc;
 
 	public static class AsmCoreEx
     {

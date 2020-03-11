@@ -12,22 +12,16 @@ namespace Z0
         
     public static class OpIndexX
     {
-        public static OpIndex<HostedMember> ToOpIndex(this IEnumerable<HostedMember> src)
-            => OpIndex.From(src.Select(h => (h.Id, h)));
+        public static OpIndex<M> ToOpIndex<M>(this IEnumerable<M> src)
+            where M : struct, IMemberOp
+                => OpIndex.From(src.Select(h => (h.Id, h)));
 
-        public static OpIndex<HostedMember> ToOpIndex(this ReadOnlySpan<HostedMember> src)
-            => OpIndex.From(src.ArrayMap(h => (h.Id, h)));
-            
-        public static OpIndex<HostedMember> ToOpIndex(this Span<HostedMember> src)
-            => src.ReadOnly().ToOpIndex();
+        public static OpIndex<M> ToOpIndex<M>(this ReadOnlySpan<M> src)
+            where M : struct, IMemberOp
+                => OpIndex.From(src.ArrayMap(h => (h.Id, h)));
 
-        public static OpIndex<LocatedMember> ToOpIndex(this IEnumerable<LocatedMember> src)
-            => OpIndex.From(src.Select(h => (h.Id, h)));
-
-        public static OpIndex<LocatedMember> ToOpIndex(this ReadOnlySpan<LocatedMember> src)
-            => OpIndex.From(src.ArrayMap(h => (h.Id, h)));
-            
-        public static OpIndex<LocatedMember> ToOpIndex(this Span<LocatedMember> src)
-            => src.ReadOnly().ToOpIndex();
+        public static OpIndex<M> ToOpIndex<M>(this Span<M> src)
+            where M : struct, IMemberOp
+               => src.ReadOnly().ToOpIndex();
     }        
 }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace  Z0
+namespace Z0
 {
     using System;
     using System.Collections;
@@ -98,23 +98,17 @@ namespace  Z0
     }
 
 
-    public interface IFiniteEnumerable<S,T> : IEnumerableContainer<S,T>
+    public interface IFiniteEnumerable<S,T> : IEnumerableContainer<S,T>, ICountable<int>
         where S : IFiniteEnumerable<S,T>, new()
     {
-        /// <summary>
-        /// The count providing evidence that the content is finite
-        /// </summary>
-        int Count {get;}
+
     }
 
 
-    public interface IIndexedSeq<S,T> : ISeq<S,T>, IFiniteEnumerable<S,T>
+    public interface IIndexedSeq<S,T> : ISeq<S,T>, IFiniteEnumerable<S,T>, IIndexed<T>
         where S : IIndexedSeq<S,T>, new()
     {
-        /// <summary>
-        /// Retrieves the 0-based i'th element of the sequence
-        /// </summary>
-        T this[int i] {get;}
+
     }
 
     /// <summary>

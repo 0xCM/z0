@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     /// <summary>
     /// Defines a classifier relative to a predefined application area
     /// </summary>

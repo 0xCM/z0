@@ -12,8 +12,8 @@ namespace Z0
 
         public void t_env_read()
         {
-            var rundir = Env.Current.RunDir;
-            var rundir_expect = EnvVar.Define(EnvVarNames.RunDir, FolderPath.Define(Environment.GetEnvironmentVariable(EnvVarNames.RunDir)));
+            var rundir = Env.Current.LogDir;
+            var rundir_expect = EnvVar.Define(EnvVarNames.LogDir, FolderPath.Define(Environment.GetEnvironmentVariable(EnvVarNames.LogDir)));
             Claim.exists(rundir);
             Claim.eq(rundir_expect, rundir);
 

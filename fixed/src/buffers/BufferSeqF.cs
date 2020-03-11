@@ -6,20 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Security;
 
     using static Root;
 
-
-    public readonly ref struct BufferSeq
+    public readonly ref struct BufferSeq<F>
+        where F : unmanaged, IFixed    
     {
-        public static BufferSeq alloc(int size, int count)
-            => new BufferSeq(size,count);
+        readonly Span<F> View;
 
-        readonly Span<byte> View;
+        readonly Span<BufferToken<F>> Tokens;
 
-        readonly Span<BufferToken> Tokens;
-
-        readonly BufferAllocation Allocation;
+        readonly BufferAllocation Buffered;
 
         readonly int BufferCount;
 
@@ -27,41 +26,58 @@ namespace Z0
 
         readonly int TotalSize;
 
-        unsafe BufferSeq(int size, int count)
+        internal unsafe BufferSeq(int count)
         {
             this.BufferCount = count;
-            this.BufferSize = size;
+            this.BufferSize = default(F).FixedByteCount;
             this.TotalSize = BufferCount*BufferSize;
-            this.Allocation = Buffers.alloc(TotalSize);
-            this.View = new Span<byte>(Allocation.Handle.ToPointer(), TotalSize);
-            this.Tokens = BufferToken.Tokenize(Allocation.Handle, BufferSize, BufferCount);
+            this.Buffered = Buffers.alloc(TotalSize);
+            this.View = new Span<F>(Buffered.Handle.ToPointer(), TotalSize);
+            this.Tokens = BufferToken<F>.Tokenize(Buffered.Handle, BufferSize, BufferCount);
         }
+
+        /// <summary>
+        /// The leading buffer
+        /// </summary>
+        ref F Head
+        {
+            [MethodImpl(Inline)]
+            get => ref MemoryMarshal.GetReference(View);
+        }
+
+        /// <summary>
+        /// Retrieves the content of an index-identified buffer
+        /// </summary>
+        /// <param name="index">The buffer index</param>
+        [MethodImpl(Inline)]
+        public ref F Buffer(int index)    
+            => ref seek(ref Head, index);
 
         /// <summary>
         /// Presents an index-identifed buffer as a span of bytes
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public Span<byte> Buffer(int index)    
-            => View.Slice(index*BufferSize, BufferSize);
+        public unsafe Span<byte> Bytes(int index)
+            => new Span<byte>(Token(index).Handle.ToPointer(), BufferSize);
+
+        /// <summary>
+        /// Presents an index-identifed buffer as a span of bytes
+        /// </summary>
+        /// <param name="index">The buffer index</param>
+        public ref readonly BufferToken<F> this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Token(index);
+        }
 
         /// <summary>
         /// Retrieves an index-identifed token
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public ref readonly BufferToken Token(int index)
+        public ref readonly BufferToken<F> Token(int index)
             => ref skip(Tokens,index);
-
-        /// <summary>
-        /// Retrieves an index-identifed token
-        /// </summary>
-        /// <param name="index">The buffer index</param>
-        public ref readonly BufferToken this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Token(index);
-        }
 
         /// <summary>
         /// Zero-fills a token-identified buffer and returns the cleared memory content
@@ -70,7 +86,7 @@ namespace Z0
         public Span<byte> Clear(int index)
         {
             Token(index).Clear();
-            return Buffer(index);
+            return Bytes(index);
         }
 
         /// <summary>
@@ -80,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe Span<T> Cells<T>(int index)
             where T : unmanaged
-                =>  Buffer(index).As<T>();
+                => Spans.cover<T>(Token(index).Handle.ToPointer<T>(), BufferSize);
 
         /// <summary>
         /// Fills a token-identifed buffer with content from a source span and returns the covering span
@@ -94,6 +110,6 @@ namespace Z0
                 => Token(index).Fill(src);
 
         public void Dispose()
-            => Allocation.Dispose();
+            => Buffered.Dispose();
     }
 }

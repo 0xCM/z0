@@ -59,14 +59,6 @@ namespace Z0
             return attributions;
         }
 
-
-        [MethodImpl(Inline)]
-        public static IntPtr Jit(this MethodInfo src)            
-        {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            return src.MethodHandle.GetFunctionPointer();
-        }
-
          /// <summary>
         /// Determines whether a type is anonymous
         /// </summary>
@@ -88,9 +80,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsNamed(this Type t)
             => !t.IsAnonymous();
-
-
-
+            
         /// <summary>
         /// Retrieves the inheritance chain for a specifed type, up to, but not including, <see cref="object"/>
         /// </summary>

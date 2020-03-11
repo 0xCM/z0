@@ -16,26 +16,32 @@ namespace Z0
     public readonly struct BufferToken : IBufferToken
     {                
         /// <summary>
+        /// The location of the represented buffer allocation
+        /// </summary>
+        public IntPtr Handle {get;}
+
+        /// <summary>
+        /// The size, in bytes, of the represented buffer
+        /// </summary>
+        public int Size {get;}
+
+        /// <summary>
         /// Creates an array of tokens that identify a squence of buffers
         /// </summary>
         /// <param name="base">The base address</param>
-        /// <param name="width">The width of each represented buffer</param>
+        /// <param name="size">The number of bytes covered by each buffer</param>
         /// <param name="count">The length of the buffer sequence</param>
-        public static BufferToken[] Tokenize(IntPtr @base, int width, int count)
+        public static BufferToken[] Tokenize(IntPtr @base, int size, int count)
         {
             var tokens = new BufferToken[count];
             for(var i=0; i<count; i++)
-                tokens[i] = (IntPtr.Add(@base, width*i), width); 
+                tokens[i] = (IntPtr.Add(@base, size*i), size); 
             return tokens;
         }
         
-        public IntPtr Handle {get;}
-
-        public int Length {get;}
-
         [MethodImpl(Inline)]
-        public static implicit operator BufferToken((IntPtr handle, int length) src)
-            => new BufferToken(src.handle, src.length);
+        public static implicit operator BufferToken((IntPtr handle, int size) src)
+            => new BufferToken(src.handle, src.size);
 
         [MethodImpl(Inline)]
         public static implicit operator IntPtr(BufferToken src)
@@ -45,7 +51,7 @@ namespace Z0
         public BufferToken(IntPtr handle, int length)
         {
             this.Handle = handle;
-            this.Length = length;
+            this.Size = length;
         }        
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
             => Assembly.GetEntryAssembly().Id();
         
         IAppPaths Paths 
-            => AppPathProvider.Create(Owner, Env.Current.RunDir);                         
+            => AppPathProvider.Create(Owner, Env.Current.LogDir);                         
     }
 
     /// <summary>

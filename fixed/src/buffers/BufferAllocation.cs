@@ -28,7 +28,7 @@ namespace Z0
         BufferAllocation(BufferToken token)
         {
             this.Handle = token.Handle;
-            this.Length = token.Length;
+            this.Length = token.Size;
         }
 
         public BufferToken Token

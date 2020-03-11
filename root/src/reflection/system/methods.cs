@@ -8,15 +8,21 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Linq.Expressions;
 
     using static Root;
     using static ReflectionFlags;
     
-
     partial class RootReflections
     {
+        [MethodImpl(Inline)]
+        public static IntPtr Jit(this MethodInfo src)            
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
+        }
+
         /// <summary>
         /// Creates a delegate for a static method via the expression api
         /// </summary>

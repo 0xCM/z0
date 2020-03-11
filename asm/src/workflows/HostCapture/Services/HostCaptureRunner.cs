@@ -140,10 +140,10 @@ namespace Z0.Asm
                 return dst;
             }
 
-            AsmOpData[] HandleSave(in ApiHost host, ParsedExtract[] src, FilePath dst)
+            AsmOpBits[] HandleSave(in ApiHost host, ParsedExtract[] src, FilePath dst)
             {
                 using var writer = Context.HexWriter(dst);
-                var data = src.Map(x => AsmOpData.Define(x.Uri, x.ParsedContent.Bytes));
+                var data = src.Map(x => AsmOpBits.Define(x.Uri, x.ParsedContent.Bytes));
                 writer.Write(data);
                 return data;
             }

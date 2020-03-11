@@ -149,17 +149,18 @@ namespace Z0
 
         public static IEnumerable<AssemblyId> ActiveAssemblies(this IAsmContext context)
         {
-            var settings = AppSettings.Load("z0.control").Pairs;
-            foreach(var (key,value) in settings)
-            {
-                var index = key.Split(text.colon());            
-                if(index.Length == 2 && bit.Parse(index[1]))
-                {
-                    var id = Enums.parse<AssemblyId>(value, AssemblyId.None);
-                    if(id != AssemblyId.None)
-                        yield return id;                        
-                }
-            }
+            return context.Compostion.Resolved.Select(r => r.Id);
+            // var settings = AppSettings.Load("z0.control").Pairs;
+            // foreach(var (key,value) in settings)
+            // {
+            //     var index = key.Split(text.colon());            
+            //     if(index.Length == 2 && bit.Parse(index[1]))
+            //     {
+            //         var id = Enums.parse<AssemblyId>(value, AssemblyId.None);
+            //         if(id != AssemblyId.None)
+            //             yield return id;                        
+            //     }
+            // }
         }
     }
 }

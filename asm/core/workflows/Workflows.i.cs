@@ -2,12 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-    
-    public interface IMemoryExtractParser : IAsmService
+
+    using static Root;
+
+    public interface IWorkflow : IService
     {
-        Option<MemoryExtract> Parse(MemoryExtract src);        
+        
     }
+
+    public interface IAsmWorkflow : IWorkflow, IAsmService
+    {
+        
+    }
+
+    public interface IWorkflowRunner : IAsmService, IAppEventSource
+    {
+
+    }
+
+
 }

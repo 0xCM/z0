@@ -17,23 +17,29 @@ namespace Z0
         where F : unmanaged, IFixed
     {                
         /// <summary>
+        /// The location of the represented buffer allocation
+        /// </summary>
+        public IntPtr Handle {get;}
+
+        /// <summary>
+        /// The size, in bytes, of the represented buffer
+        /// </summary>
+        public int Size {get;}
+
+        /// <summary>
         /// Creates an array of tokens that identify a squence of buffers
         /// </summary>
         /// <param name="base">The base address</param>
-        /// <param name="width">The width of each represented buffer</param>
+        /// <param name="size">The number of bytes covered by each represented buffer</param>
         /// <param name="count">The length of the buffer sequence</param>
-        public static BufferToken<F>[] Tokenize(IntPtr @base, int width, int count)
+        public static BufferToken<F>[] Tokenize(IntPtr @base, int size, int count)
         {
             var tokens = new BufferToken<F>[count];
             for(var i=0; i<count; i++)
-                tokens[i] = (IntPtr.Add(@base, width*i), width); 
+                tokens[i] = (IntPtr.Add(@base, size*i), size); 
             return tokens;
         }
         
-        public IntPtr Handle {get;}
-
-        public int Length {get;}
-
         [MethodImpl(Inline)]
         public static implicit operator BufferToken<F>((IntPtr handle, int length) src)
             => new BufferToken<F>(src.handle, src.length);
@@ -43,10 +49,10 @@ namespace Z0
             => src.Handle;
 
         [MethodImpl(Inline)]
-        public BufferToken(IntPtr handle, int length)
+        public BufferToken(IntPtr handle, int size)
         {
             this.Handle = handle;
-            this.Length = length;
+            this.Size = size;
         }        
 
         /// <summary>
@@ -55,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe Span<T> Content<T>()
             where T : unmanaged
-                => Spans.cover((byte*)Handle.ToPointer(), Length).As<T>();
+                => Spans.cover((byte*)Handle.ToPointer(), Size).As<T>();
 
         /// <summary>
         /// Fills a token-identified buffer with data from a source span and returns the target memory to the caller as a span
@@ -68,18 +74,17 @@ namespace Z0
             var dst = this;
             var srcBytes = src.AsBytes();
             var dstBytes = dst.Content<byte>();
-            if(srcBytes.Length <= dst.Length)
+            if(srcBytes.Length <= dst.Size)
             {
-                if(srcBytes.Length < dst.Length)
+                if(srcBytes.Length < dst.Size)
                     dstBytes.Clear();
 
                 srcBytes.CopyTo(dstBytes);
             }
             else
-                srcBytes.Slice(dst.Length).CopyTo(dstBytes);  
+                srcBytes.Slice(dst.Size).CopyTo(dstBytes);  
             return dst.Content<T>();         
         }
-
 
         /// <summary>
         /// Zero-fills a token-identified buffer

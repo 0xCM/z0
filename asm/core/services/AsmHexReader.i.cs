@@ -15,6 +15,6 @@ namespace Z0.Asm
         /// Reads the content of a source file
         /// </summary>
         /// <param name="src">The source file path</param>
-        IEnumerable<AsmOpData> Read(FilePath src);        
+        IEnumerable<AsmOpBits> Read(FilePath src);        
     }
 }

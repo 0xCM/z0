@@ -12,7 +12,7 @@ namespace Z0
 
     using static Root;
         
-    public interface IHostedMember
+    public interface IMemberOp
     {
         /// <summary>
         /// The globally-unique host uri
@@ -41,17 +41,12 @@ namespace Z0
             => OpUri.hex(Host, Method.Name, Id);        
     }        
 
-    public interface IHostedMember<T> : IHostedMember, IEquatable<T>, IFormattable<T>
-        where T : IHostedMember
+    public interface IMemberOp<T> : IMemberOp, IEquatable<T>, IFormattable<T>
+        where T : IMemberOp<T>
     {
         string ICustomFormattable.Format()
             => Uri.Format();    
     }
 
-    public static class HostedMemberOps
-    {
-        public static OpIndex<M> CreateIndex<M>(this IEnumerable<M> members)
-            where M : struct, IHostedMember
-                => members.Select(m => (m.Id, m)).ToOpIndex();
-    }
+
 }

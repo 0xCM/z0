@@ -111,6 +111,9 @@ namespace Z0
         public string Format()
             => IdentityShare.format(this);
         
+        public OpUri WithScheme(OpUriScheme scheme)
+            => Define(scheme, HostPath, GroupName, OpId);
+            
         [MethodImpl(Inline)]
         public int CompareTo(OpUri other)
             => compare(this, other);
