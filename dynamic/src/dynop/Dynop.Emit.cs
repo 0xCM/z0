@@ -15,6 +15,11 @@ namespace Z0
 
     partial class Dynop
     {
+        [MethodImpl(Inline)]
+        public static FixedBinaryOp<F> EmitFixedBinaryOp<F>(this IBufferToken buffer, in AsmCode src)
+            where F : unmanaged, IFixed
+                => (FixedBinaryOp<F>)buffer.Load(src).AsFixedBinaryOp(src.Id, typeof(FixedBinaryOp<F>), typeof(F));
+
         /// <summary>
         /// Creates a binary operator over a primal type to execute specified asm code
         /// </summary>

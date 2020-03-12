@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Security;
 
     /// <summary>
@@ -45,4 +46,14 @@ namespace Z0
     {
 
     }    
+
+    /// <summary>
+    /// Characterizes a span operator that shifts each source element by the same amount
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IImm8ShiftSpanOp<T> : IShiftSpanOp
+    {
+        Span<T> Invoke(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
+    }
 }

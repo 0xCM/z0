@@ -33,7 +33,28 @@ namespace Z0
         public static IFixedEmitter<F,T> FixedEmitter<F,T>(this IPolyrand random)
             where F : unmanaged, IFixed
             where T : unmanaged
-                => RngEmitters.fixedwidth<F,T>(random);
+                => RngEmitters.fixedValue<F,T>(random);
+
+        /// <summary>
+        /// Creates a fixed F-celled span emitter over T-segmented cells
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="F">The fixed type</typeparam>
+        /// <typeparam name="T">The numeric type</typeparam>
+        public static IFixedSpanEmitter<F> FixedSpanEmitter<F>(this IPolyrand random, int length)
+            where F : unmanaged, IFixed
+                => RngEmitters.fixedSpan<F>(random, length);
+
+        /// <summary>
+        /// Creates a fixed F-celled span emitter over T-segmented cells
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="F">The fixed type</typeparam>
+        /// <typeparam name="T">The numeric type</typeparam>
+        public static IFixedSpanEmitter<F,T> FixedSpanEmitter<F,T>(this IPolyrand random, int length)
+            where F : unmanaged, IFixed
+            where T : unmanaged
+                => RngEmitters.fixedSpan<F,T>(random, length);
 
         public static IEnumerable<F> FixedStream<F>(this IPolyrand random, F t = default)
             where F:unmanaged, IFixed

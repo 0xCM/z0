@@ -9,31 +9,14 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct NumericRngEmitter<T> : IEmitter<T>
-        where T : unmanaged
-    {
-        public const string Name = "random";
-
-        readonly IPolyrand Random;
-
-        public OpIdentity Id => OpIdentity.contracted<T>(Name);
-
-        [MethodImpl(Inline)]
-        public NumericRngEmitter(IPolyrand random)            
-            => this.Random = random;
-        
-        [MethodImpl(Inline)]
-        public T Invoke() => Random.Next<T>();
-    }
-
-    public readonly struct FixedRngEmitter<F> : IFixedEmitter<F>
+   public readonly struct FixedRngSpanEmitter<F> : IFixedSpanEmitter<F>
         where F : unmanaged, IFixed
     {
         readonly IPolyrand Random;
         
-        readonly FixedEmitterSurrogate<F> f;
+        readonly FixedSpanEmitterSurrogate<F> f;
 
-        public const string Name = "fixedemitter";
+        public static string Name => $"fixed_span_rng_{bitsize<F>()}";
 
         public static int Width => bitsize<F>();
 
@@ -46,24 +29,25 @@ namespace Z0
         public OpIdentity Id => OpIdentity.fixedop(Name, (FixedWidth)Width, NumericKind);
 
         [MethodImpl(Inline)]
-        public FixedRngEmitter(IPolyrand random, FixedEmitterSurrogate<F> f)      
+        public FixedRngSpanEmitter(IPolyrand random, FixedSpanEmitterSurrogate<F> f)      
         {      
             this.Random = random;
             this.f = f;
         }
 
         [MethodImpl(Inline)]
-        public F Invoke() => f.Invoke();
-    }    
-    public readonly struct FixedRngEmitter<F,T> : IFixedEmitter<F,T>
+        public Span<F> Invoke() => f.Invoke();
+    }
+    
+    public readonly struct FixedRngSpanEmitter<F,T> : IFixedSpanEmitter<F,T>
         where F : unmanaged, IFixed
-        where T :unmanaged
+        where T : unmanaged
     {
         readonly IPolyrand Random;
         
-        readonly FixedEmitterSurrogate<F,T> f;
+        readonly FixedSpanEmitterSurrogate<F,T> f;
 
-        public const string Name = "fixedemitter";
+        public static string Name => $"fixed_span_rng_{default(F).FixedBitCount}x{bitsize<T>()}";
 
         public static int Width => bitsize<F>();
 
@@ -76,13 +60,13 @@ namespace Z0
         public OpIdentity Id => OpIdentity.fixedop(Name, (FixedWidth)Width, NumericKind);
 
         [MethodImpl(Inline)]
-        public FixedRngEmitter(IPolyrand random, FixedEmitterSurrogate<F,T> f)      
+        public FixedRngSpanEmitter(IPolyrand random, FixedSpanEmitterSurrogate<F,T> f)      
         {      
             this.Random = random;
             this.f = f;
         }
 
         [MethodImpl(Inline)]
-        public F Invoke() => f.Invoke();
+        public Span<F> Invoke() => f.Invoke();
     }
 }

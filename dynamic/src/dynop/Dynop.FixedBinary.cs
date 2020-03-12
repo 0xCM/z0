@@ -12,6 +12,10 @@ namespace Z0
 
     partial class Dynop
     {
+        public static FixedBinaryOp<F> FixedBinaryOp<F>(this IBufferToken buffer, in AsmCode src)
+            where F : unmanaged, IFixed
+                => buffer.EmitFixedBinaryOp<F>(src);
+
         /// <summary>
         /// Creates a fixed 8-bit binary operator from caller-supplied x86 source code
         /// </summary>

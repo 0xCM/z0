@@ -14,16 +14,20 @@ namespace Z0
     
     public static partial class RngEmitters
     {
+        public static IFixedEmitter<F> fixedValue<F>(IPolyrand random)
+            where F : unmanaged, IFixed
+                => new FixedRngEmitter<F>(random, RngSurrogates.value<F>(random));
+
         /// <summary>
         /// Creates a fixed emitter that produces F-values defined over numeric T-cells
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="T">The primal type</typeparam>
         /// <typeparam name="F">The fixed type</typeparam>
-        public static IFixedEmitter<F,T> fixedwidth<F,T>(IPolyrand random)
+        public static IFixedEmitter<F,T> fixedValue<F,T>(IPolyrand random)
             where F : unmanaged, IFixed
             where T : unmanaged
-                => new FixedRngEmitter<F, T>(random, RngSurrogates.emitter<F,T>(random));
+                => new FixedRngEmitter<F, T>(random, RngSurrogates.value<F,T>(random));
 
         /// <summary>
         /// Creates a numeric emitter predicated on a random source
@@ -34,6 +38,30 @@ namespace Z0
         public static NumericRngEmitter<T> numeric<T>(IPolyrand random)
             where T : unmanaged
                 => new NumericRngEmitter<T>(random);
+
+        /// <summary>
+        /// Creates a fixed emitter that produces F-celled spans defined over numeric T-cells
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        /// <typeparam name="F">The fixed type</typeparam>
+        [MethodImpl(Inline)]
+        public static IFixedSpanEmitter<F> fixedSpan<F>(IPolyrand random, int length)
+            where F : unmanaged, IFixed
+                => new FixedRngSpanEmitter<F>(random, RngSurrogates.span<F>(random,length));        
+
+
+        /// <summary>
+        /// Creates a fixed emitter that produces F-celled spans defined over numeric T-cells
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        /// <typeparam name="F">The fixed type</typeparam>
+        [MethodImpl(Inline)]
+        public static IFixedSpanEmitter<F,T> fixedSpan<F,T>(IPolyrand random, int length)
+            where F : unmanaged, IFixed
+            where T : unmanaged        
+                => new FixedRngSpanEmitter<F, T>(random, RngSurrogates.span<F,T>(random,length));        
 
         /// <summary>
         /// Creates a stream of fixed values
@@ -57,6 +85,5 @@ namespace Z0
                 default: return items<F>();                    
             }
         }
-
     }
 }

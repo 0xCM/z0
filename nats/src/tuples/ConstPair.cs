@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// An homogenous immutable 2-tuple
     /// </summary>
-    public readonly struct ConstPair<T> : ITuple<ConstPair<T>, T,T>
+    public readonly struct ConstPair<T> : ITuple<ConstPair<T>, T,T>, IFormattable<ConstPair<T>>
     {
         /// <summary>
         /// The first/left/lo member of the pair
@@ -77,8 +77,11 @@ namespace Z0
         public bool Equals(ConstPair<T> rhs)
             => A.Equals(rhs.A) && B.Equals(rhs.B);
 
-        public string Format(TupleFormat style = TupleFormat.Coordinate)
+        public string Format(TupleFormat style)
             => style == TupleFormat.Coordinate ? $"({A},{B})" : $"{A}x{B}";
+
+        public string Format()
+            =>Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(A,B);
@@ -88,8 +91,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-
     }
-
 }

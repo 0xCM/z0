@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// An homogenous mutable 2-tuple
     /// </summary>
-    public struct Pair<T> : IMutableTuple<Pair<T>, T ,T>
+    public struct Pair<T> : IMutableTuple<Pair<T>, T ,T>, IFormattable<Pair<T>>
     {
         /// <summary>
         /// The first member
@@ -94,8 +94,11 @@ namespace Z0
         public bool Equals(Pair<T> rhs)
             => A.Equals(rhs.A) && B.Equals(rhs.B);
 
-        public string Format(TupleFormat style = TupleFormat.Coordinate)
+        public string Format(TupleFormat style)
             => style == TupleFormat.Coordinate ? $"({A},{B})" : $"{A}x{B}";
+
+        public string Format()
+            => Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(A,B);

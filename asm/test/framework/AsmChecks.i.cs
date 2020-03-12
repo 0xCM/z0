@@ -9,7 +9,9 @@ namespace Z0.Asm.Validation
 
     public interface IAsmChecks : IAsmWorkflowService
     {
-        
+        void CheckExecution(in BufferSeq buffers, ApiMemberCode code);        
+
+        void CheckExecution(in BufferSeq buffers, ApiMemberCode[] code);        
     }
 
 }

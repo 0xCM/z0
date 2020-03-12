@@ -29,6 +29,10 @@ namespace Z0.Asm
             => new ApiMemberCode(member, code);
 
         [MethodImpl(Inline)]
+        public static implicit operator AsmCode(ApiMemberCode src)
+            => AsmCode.Define(src.Id,MemoryAddress.Zero, src.Code);
+
+        [MethodImpl(Inline)]
         ApiMemberCode(HostedMember member, BinaryCode code)
         {
             this.Member = member;

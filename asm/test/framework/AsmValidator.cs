@@ -88,32 +88,23 @@ namespace Z0.Asm.Validation
 
             Notify($"Correlated {index.EntryCount} {host} implemented operations with executable code");
 
+            var binops = index.KindedOperators(2).ToArray();
 
-            var kinded = index.KindedOperators(2).ToArray();
+            Notify($"Found {binops.Length} {host} kinded binary operarators");
 
-            Notify($"Found {kinded.Length} {host} kinded binary operarators");
-
-
-            var messages = list<AppMsg>(kinded.Length);        
-            foreach(var k in kinded)
+            var messages = list<AppMsg>(binops.Length);        
+            foreach(var k in binops)
             {
                 var uri = k.Uri;
                 var oc = k.Method.ClassifyTypedOperator().Format();
                 var kind = k.Method.KindId().Format();
                 messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
-            }
-            
+            }            
 
             using var log = OpenLog("kinded-binary-ops", FileExtensions.Csv, OverwriteOption.Append);
             log.Write(messages.ToArray());
-
             
-            foreach(var c in kinded)
-            {
-                Checks.CheckExecution(c);
-            }
-
-   
+            Checks.CheckExecution(buffers, binops);            
         }
 
     }

@@ -18,4 +18,15 @@ namespace Z0
     {
 
     }
+
+    /// <summary>
+    /// Characterizes a function that accepts a source span and produces a target span
+    /// </summary>
+    /// <typeparam name="A">The source span cell type</typeparam>
+    /// <typeparam name="B">The target span cell type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISpanMap<A,B> : IFunc
+    {
+        Span<B> Invoke(Span<A> src);
+    }    
 }

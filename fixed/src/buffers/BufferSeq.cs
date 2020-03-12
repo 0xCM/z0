@@ -9,6 +9,12 @@ namespace Z0
 
     using static Root;
 
+    public enum BufferSeqId : int
+    {
+        Left = 0,
+
+        Right = 1
+    }
 
     public readonly ref struct BufferSeq
     {
@@ -61,6 +67,16 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Token(index);
+        }
+
+        /// <summary>
+        /// Retrieves a token identified by sequence id
+        /// </summary>
+        /// <param name="index">The buffer index</param>
+        public ref readonly BufferToken this[BufferSeqId id]
+        {
+            [MethodImpl(Inline)]
+            get => ref Token((int)id);
         }
 
         /// <summary>

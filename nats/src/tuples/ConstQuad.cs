@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// An homogenous immutable 4-tuple
     /// </summary>
-    public readonly struct ConstQuad<T> : ITuple<ConstQuad<T>,T,T,T,T>
+    public readonly struct ConstQuad<T> : ITuple<ConstQuad<T>,T,T,T,T>, IFormattable<ConstQuad<T>>
     {
         /// <summary>
         /// The first member
@@ -93,8 +93,11 @@ namespace Z0
         public bool Equals(ConstQuad<T> rhs)
             => A.Equals(rhs.A) && B.Equals(rhs.B) && C.Equals(rhs.C) && D.Equals(rhs.D);
 
-        public string Format(TupleFormat style = TupleFormat.Coordinate)
+        public string Format(TupleFormat style)
             => style == TupleFormat.Coordinate ? $"({A},{B},{C},{D})" : $"{A}x{B}x{C}x{D}";
+
+        public string Format()
+            => Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(A,B,C);

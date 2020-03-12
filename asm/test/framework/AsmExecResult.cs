@@ -16,13 +16,15 @@ namespace Z0.Asm.Validation
     {
         Sequence = 0 | (10ul << 32),
 
-        Uri =  1 | (70ul << 32),
+        CaseName =  1 | (70ul << 32),
 
         Status =  2 | (10 << 32),
 
         Duration = 3  | (14ul << 32),
         
-        Timestamp =  4 | (26ul << 32)
+        Timestamp =  4 | (26ul << 32),
+
+        Message = 5
     }
 
     public enum AsmExecStatus : byte
@@ -37,23 +39,40 @@ namespace Z0.Asm.Validation
     /// </summary>
     public class AsmExecResult : IRecord<F,R>
     {        
-        public static AsmExecResult Define(int seq, OpUri uri, bool succeeded, Duration duration)
-            => new AsmExecResult(seq,uri, succeeded, duration);
-        
-        AsmExecResult(int seq, OpUri uri, bool succeeded, Duration duration)
+        public static AsmExecResult Define<T>(int seq, in T id, Duration duration, Exception error)
+            => new AsmExecResult(seq, $"{id}", false, duration, error != null? AppMsg.Error(error) : AppMsg.Empty);
+
+        public static AsmExecResult Define<T>(int seq, in T id, Duration duration, bool succeeded)
+            => new AsmExecResult(seq, $"{id}", succeeded, duration, AppMsg.Empty);
+
+        public static AsmExecResult Define<T>(int seq, in T id, Duration duration, AppMsg message)
+            => new AsmExecResult(seq,$"{id}", message.Kind != AppMsgKind.Error, duration, message);
+
+        // public static AsmExecResult Define(int seq, in ConstPair<OpUri> paired, Duration duration, Exception error)
+        //     => new AsmExecResult(seq, paired, false, duration, error != null? AppMsg.Error(error) : AppMsg.Empty);
+
+        // public static AsmExecResult Define(int seq, in ConstPair<OpUri> paired, Duration duration, bool succeeded)
+        //     => new AsmExecResult(seq, paired, succeeded, duration, AppMsg.Empty);
+
+        // public static AsmExecResult Define(int seq, in ConstPair<OpUri> paired, Duration duration, AppMsg message)
+        //     => new AsmExecResult(seq, paired, message.Kind != AppMsgKind.Error, duration, message);
+
+        AsmExecResult(int seq, string name, bool succeeded, Duration duration, AppMsg message)
         {
             this.Sequence = seq;
-            this.Uri = uri;
+            this.CaseName = name;
             this.Status = succeeded ? AsmExecStatus.Passed : AsmExecStatus.Failed;
             this.Duration = duration;
             this.Timestamp = DateTime.Now;
+            this.Message = message;
         }
+        
 
         [ReportField(F.Sequence)]
         public int Sequence {get;}
 
-        [ReportField(F.Uri)]
-        public OpUri Uri {get;}
+        [ReportField(F.CaseName)]
+        public string CaseName {get;}
 
         [ReportField(F.Status)]
         public AsmExecStatus Status {get;}
@@ -64,14 +83,18 @@ namespace Z0.Asm.Validation
         [ReportField(F.Timestamp)]
         public DateTime Timestamp {get;}
 
+        [ReportField(F.Message)]
+        public AppMsg Message {get;}
+
         public string DelimitedText(char delimiter)
         {
             var dst = Model.Formatter.Reset();
             dst.AppendField(F.Sequence, Sequence);
-            dst.DelimitField(F.Uri, Uri, delimiter);
+            dst.DelimitField(F.CaseName, CaseName, delimiter);
             dst.DelimitField(F.Status, Status, delimiter);
             dst.DelimitField(F.Duration, Duration, delimiter);            
             dst.DelimitField(F.Timestamp, Timestamp, delimiter);
+            dst.DelimitField(F.Message, Message, delimiter);
             return dst.ToString();
         }
 

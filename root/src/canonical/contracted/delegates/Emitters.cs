@@ -55,4 +55,17 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public delegate IEnumerable<T> ValueStreamEmitter<T>(int? count = null)
         where T : struct;    
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Span<T> SpanEmitter<T>();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Span<F> FixedSpanEmitter<F>()
+        where F : unmanaged, IFixed;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Span<F> FixedSpanEmitter<F,T>()
+        where F : unmanaged, IFixed
+        where T : unmanaged;
+
 }

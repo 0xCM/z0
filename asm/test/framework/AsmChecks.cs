@@ -40,35 +40,16 @@ namespace Z0.Asm.Validation
             this.Executioner = AsmExecutioner.Create(context, sink);
         }                
 
-        public void CheckExecution(ApiMemberCode code)
+        public void CheckExecution(in BufferSeq buffers, ApiMemberCode code)
         {
-            Executioner.CheckExecution(code);
+            Executioner.CheckExecution(buffers, code);
         }
 
-        /// <summary>
-        /// Loads executable code into an index-identifed target buffer and manufactures a fixed binary operator 
-        /// that executes the code in the buffer upon invocation
-        /// </summary>
-        /// <param name="buffers">The target buffer sequence</param>
-        /// <param name="index">The index of the target buffer</param>
-        /// <param name="src">The executable source that conforms to a fixed binary operator</param>
-        /// <typeparam name="F">The operand type</typeparam>
-        public FixedBinaryOp<F> LoadBinaryOp<F>(in BufferSeq buffers, int index, AsmCode src)
-            where F : unmanaged, IFixed
-                => buffers[index].LoadFixedBinaryOp<F>(src);
+        public void CheckExecution(in BufferSeq buffers, ApiMemberCode[] code)
+        {
+            Executioner.CheckExecution(buffers, code);
+        }
 
-        /// <summary>
-        /// Loads and invokes a fixed binary operator
-        /// </summary>
-        /// <param name="buffers">The target buffer sequence</param>
-        /// <param name="index">The index of the target buffer</param>
-        /// <param name="src">The executable source that conforms to a fixed binary operator</param>
-        /// <param name="x">The first operand</param>
-        /// <param name="y">The second operand</param>
-        /// <typeparam name="F">The operand type</typeparam>
-        public F ExecBinaryOp<F>(in BufferSeq buffers, int index, AsmCode src, F x, F y)
-            where F : unmanaged, IFixed
-                => LoadBinaryOp<F>(buffers, index, src)(x,y);
 
         /// <summary>
         /// Retrieves the members defined by an api host
