@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    
     using Z0.Asm;
 
     using static Root;
 
     public class AsmContext : IAsmContext 
     {               
-
         /// <summary>
         /// Creates a rooted context with a specified composition
         /// </summary>
@@ -21,15 +21,6 @@ namespace Z0
         /// <param name="assemblies">The composition</param>
         public static IAsmContext Rooted(IContext root, IAssemblyComposition assemblies)
             => new AsmContext(root, assemblies, AsmFormatConfig.New);
-
-        /// <summary>
-        /// Creates a rooted context with specified indexes
-        /// </summary>
-        /// <param name="root">The root context</param>
-        /// <param name="clrindex">The clr index</param>
-        /// <param name="resources">The resource index</param>
-        public static IAsmContext Rooted(IComposedContext root)
-            => new AsmContext(root, root.Compostion, AsmFormatConfig.New);
 
         /// <summary>
         /// Creates a base context with a specified composition
@@ -102,5 +93,4 @@ namespace Z0
         public IReadOnlyList<AppMsg> Flush(Exception e)
             => MsgSink ? MsgSink.Value.Flush(e) : array<AppMsg>();
     }   
-
 }

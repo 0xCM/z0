@@ -2,20 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Validation
 {
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     
-    using static Root;
-    
-    public interface IAsmValidator : IAsmWorkflowService
-    {
-        
-    }
-
+    using static Root;    
 
     class AsmValidator : IAsmValidator
     {
@@ -46,17 +40,17 @@ namespace Z0.Asm
             => Sink.NotifyConsole(msg);
 
         public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
-            => Sink.NotifyConsole(AppMsg.Colorize(content, color));
+            => Sink.NotifyConsole(content, color);
 
         public static AsmValidator Create(IAsmContext context, IAppMsgSink sink, FolderPath root)
             => new AsmValidator(context.RootedComposition(), sink, root);
 
         AsmValidator(IAsmContext context, IAppMsgSink msgsink, FolderPath root)
         {                    
-            this.Context = AsmWorkflowContext.Rooted(context);
             this.Random = Rng.Pcg64(Seed64.Seed08);
-            this.Checks = AsmChecks.Create(context, Random);
             this.Sink = msgsink;
+            this.Context = AsmWorkflowContext.Rooted(context, Random);
+            this.Checks = AsmChecks.Create(Context, msgsink);
             this.BufferSize = 1024;
             this.BufferCount = 3;
             this.RootPaths = RootEmissionPaths.Define(root);
@@ -118,11 +112,6 @@ namespace Z0.Asm
             {
                 Checks.CheckExecution(c);
             }
-
-
-
-
-
 
    
         }

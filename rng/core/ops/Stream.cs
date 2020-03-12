@@ -39,7 +39,7 @@ namespace Z0
                     yield return src.Next();
             }
 
-            return CoreRng.stream(produce(), src.RngKind);            
+            return Rng.stream(produce(), src.RngKind);            
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
                     yield return random.Next<T>();
             }
             
-            return CoreRng.stream(produce(), random.RngKind);
+            return Rng.stream(produce(), random.RngKind);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRngStream<T> Stream<T>(this IPolyrand random, T min, T max)
             where T : unmanaged
-                => CoreRng.stream(random.UniformStream(min,max), random.RngKind);
+                => Rng.stream(random.UniformStream(min,max), random.RngKind);
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -79,7 +79,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRngStream<T> Stream<T>(this IPolyrand random, Interval<T> domain)
             where T : unmanaged
-                => CoreRng.stream(random.UniformStream(domain), random.RngKind);
+                => Rng.stream(random.UniformStream(domain), random.RngKind);
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -90,7 +90,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRngStream<T> Stream<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => CoreRng.stream(random.UniformStream(domain,filter), random.RngKind);
+                => Rng.stream(random.UniformStream(domain,filter), random.RngKind);
 
         static IEnumerable<T> UniformStream<T>(this IPolyrand src, T min, T max)
             where T : unmanaged

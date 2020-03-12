@@ -23,8 +23,8 @@ namespace Z0
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind, caller, FilePath.Define(file), line);
 
-        public static AppMsg NoCaller(object content, AppMsgKind kind)
-            => new AppMsg(content, kind, (AppMsgColor)kind, text.blank, FilePath.Empty, null);
+        public static AppMsg NoCaller(object content, AppMsgKind? kind = null)
+            => new AppMsg(content, kind ?? AppMsgKind.Info, (AppMsgColor)(kind ?? AppMsgKind.Info), text.blank, FilePath.Empty, null);
 
         public static AppMsg SpecificCaller(object content, AppMsgKind kind, string caller, string file = null, int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind,  caller, FilePath.Define(file),line);

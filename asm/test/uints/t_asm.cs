@@ -20,7 +20,8 @@ namespace Z0
         
         public t_asm()
         {
-            Context = AsmContext.Rooted(this, DefaultComposition.Create());
+            //Context = AsmContext.Rooted(this, DefaultComposition.Create());
+            Context = AsmContext.Rooted(this, AsmCompostionRoot.Compose());
         }
 
 

@@ -18,7 +18,7 @@ namespace Z0.Asm
 
         IHostCaptureRunner Runner {get;}
 
-        IHostCaptureEventBroker Broker {get;}        
+        IHostCaptureEventBroker EventBroker {get;}        
 
     }
 }

@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRngStream<T> NonZeroStream<T>(this IPolyrand random, Interval<T> domain)
             where T : unmanaged
-                => CoreRng.stream(random.UniformStream(domain, x => gmath.nonz(x)), random.RngKind);
+                => Rng.stream(random.UniformStream(domain, x => gmath.nonz(x)), random.RngKind);
 
         /// <summary>
         /// Queries the source for the next nonzero value within a range

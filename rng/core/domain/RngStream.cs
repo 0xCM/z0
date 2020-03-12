@@ -12,14 +12,6 @@ namespace Z0
 
     using static Root;
 
-    public static class RandomStream
-    {
-        [MethodImpl(Inline)]
-        public static IRngStream<T> From<T>(IEnumerable<T> src, RngKind rng)
-            where T : struct
-                => new RandomStream<T>(rng,src);
-    }
-
     /// <summary>
     /// Captures a random stream along with the generator classification
     /// </summary>

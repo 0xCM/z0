@@ -2,9 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.AsmTest)]
-
-namespace Z0.Resolutions
+namespace Z0.Asm.Validation
 {
-    public sealed class AsmCoreTest : AssemblyResolution<AsmCoreTest> { public AsmCoreTest() : base(AssemblyId.AsmTest) {} }
+
+    using System;
+
+    public interface IAsmChecks : IAsmWorkflowService
+    {
+        
+    }
+
 }

@@ -68,7 +68,7 @@ namespace Z0
                             yield return bytes[i];
                 }
             }
-            return CoreRng.stream(produce(), random.RngKind);
+            return Rng.stream(produce(), random.RngKind);
         }
 
     }

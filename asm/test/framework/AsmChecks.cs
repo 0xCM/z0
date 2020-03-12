@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Asm.Validation
 {
     using System;
     using System.Linq;
@@ -17,57 +17,33 @@ namespace Z0.Asm
     using static time;
     using static NKT;
 
-    public static class AsmCheckOps
+    public class AsmChecks : IAsmChecks
     {
+        public IAsmWorkflowContext Context {get;}
 
-        // public static OpIndex<AsmOpBits> ToOpIndex(this IEnumerable<AsmOpBits> src)
-        //     => OpIndex.From(src.Select(x => (x.Op.OpId, x)));
+        readonly IAsmExecutioner Executioner;
 
-
-
-        public static IEnumerable<M> KindedOperators<M>(this IEnumerable<M> src, int? arity = null)
-            where M : struct, IMemberOp<M>
-            => from located in src
-                let m = located.Method
-                let id = m.KindId()
-                where id.HasValue && m.IsOperator() && (arity != null ? m.Arity() == arity : true)
-                select located;
-
-        public static IEnumerable<M> KindedNumericOperators<M>(this IEnumerable<M> src, int arity)
-            where M : struct, IMemberOp<M>
-                => from located in src
-                    let m = located.Method
-                    let id = m.KindId()
-                    where id.HasValue && m.IsNumericOperator(arity)
-                    select located;
-
-    }
-
-    public class AsmChecks : IAsmService
-    {
-        public IAsmContext Context {get;set;}
+        readonly IAppMsgSink MsgSink;
         
-        IPolyrand Random ;
+        IPolyrand Random => Context.Random;
         
-        int RepCount;
+        readonly int RepCount;
 
-        public static AsmChecks Create(IAsmContext context, IPolyrand random)
-            => new AsmChecks(context, random);
+        public static AsmChecks Create(IAsmWorkflowContext context, IAppMsgSink sink)
+            => new AsmChecks(context,sink);
 
-        AsmChecks(IAsmContext context, IPolyrand random)
+        AsmChecks(IAsmWorkflowContext context, IAppMsgSink sink)
         {
             this.Context = context;
             this.RepCount = 128;
-            this.Random = random;
+            this.MsgSink = sink;
+            this.Executioner = AsmExecutioner.Create(context, sink);
         }                
-
 
         public void CheckExecution(ApiMemberCode code)
         {
-            
-
+            Executioner.CheckExecution(code);
         }
-
 
         /// <summary>
         /// Loads executable code into an index-identifed target buffer and manufactures a fixed binary operator 

@@ -13,13 +13,67 @@ namespace Z0
 
     public static class Rng
     {
+        [MethodImpl(Inline)]
+        public static IRngStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
+            where T : struct
+                => new RandomStream<T>(rng,src);
+
+        /// <summary>
+        /// Defines a default T-valued domain
+        /// </summary>
+        /// <typeparam name="T">The domain type</typeparam>
+        public static Interval<T> domain<T>()
+            where T : unmanaged
+        {            
+            if(typeof(T) == typeof(double))
+                return (convert<T>(long.MinValue/2), convert<T>(long.MaxValue/2));
+            else if(typeof(T) == typeof(float))
+                return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
+            else
+            {
+                var min = Numeric.signed<T>() 
+                    ? gmath.negate(gmath.sar(maxval<T>(), 1)) 
+                    : minval<T>();                        
+                
+                var max = Numeric.signed<T>() 
+                    ? gmath.sar(maxval<T>(), 1) 
+                    : maxval<T>();
+
+                return (min,max);
+            }            
+        }
+
+        /// <summary>
+        /// Creates a polyrand rng from a point source
+        /// </summary>
+        /// <param name="rng">The source rng</param>
+        public static IPolyrand polyrand(IRngBoundPointSource<ulong> src)        
+            => Polyrand.Create(src);
+
+        /// <summary>
+        /// Creates a polyrand based on a specified source
+        /// </summary>
+        /// <param name="src">The random source</param>
+        [MethodImpl(Inline)]
+        public static IPolyrand polynav(IRngNav<ulong> src)
+            => Polyrand.Create(src);
+
+        /// <summary>
+        /// Presents the polysource as a point source
+        /// </summary>
+        /// <param name="src">The randon source</param>
+        /// <typeparam name="T">The point type</typeparam>
+        [MethodImpl(Inline)]
+        public static IRngPointSource<T> points<T>(IPolyrand src)
+            where T : unmanaged
+                => src as IRngPointSource<T>;
 
         /// <summary>
         /// Creates a new WyHash16 generator
         /// </summary>
         /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
         public static IPolyrand WyHash64(ulong? seed = null)
-            => CoreRng.polyrand(new WyHash64(seed ?? Seed64.Seed00));
+            => polyrand(new WyHash64(seed ?? Seed64.Seed00));
 
         /// <summary>
         /// Creates a 128-bit xorshift rng initialized with a specified seed
@@ -39,14 +93,14 @@ namespace Z0
         /// </summary>
         /// <param name="seed">The initial state</param>
         public static IPolyrand XOrShift1024(ulong[] seed = null)
-            => CoreRng.polyrand(new XOrShift1024(seed ?? Seed1024.Default));
+            => polyrand(new XOrShift1024(seed ?? Seed1024.Default));
 
         /// <summary>
         /// Creates an XOrShift 1024 rng
         /// </summary>
         /// <param name="seed">The initial state</param>
         public static IPolyrand XOrStarStar256(ulong[] seed = null)
-            => CoreRng.polyrand(XOrShift256.Define(seed ?? Seed256.Default));
+            => polyrand(XOrShift256.Define(seed ?? Seed256.Default));
  
         /// <summary>
         /// Creates a splitmix 64-bit generator
@@ -54,7 +108,7 @@ namespace Z0
         /// <param name="seed">The initial state of the generator, if specified; 
         /// otherwise, the seed is obtained from an entropy source</param>
         public static IPolyrand SplitMix(ulong? seed = null)
-            => CoreRng.polyrand(SplitMix64.Define(seed ?? Seed64.Seed00));
+            => polyrand(SplitMix64.Define(seed ?? Seed64.Seed00));
 
         /// <summary>
         /// Creates a 32-bit Pcg RNG
@@ -70,7 +124,7 @@ namespace Z0
         /// <param name="seed">The inital rng state</param>
         /// <param name="index">The stream index, if any</param>
         public static IPolyrand Pcg64(ulong? seed = null, ulong? index = null)
-            => CoreRng.polynav(Z0.Pcg64.Define(seed ?? Seed64.Seed00, index));
+            => polynav(Z0.Pcg64.Define(seed ?? Seed64.Seed00, index));
 
         /// <summary>
         /// Creates a new WyHash16 generator
@@ -91,7 +145,7 @@ namespace Z0
             for(var i=0; i < suite.Length; i++)
             {
                 (var seed, var index) = specs[i];
-                suite[i] = Rng.Pcg32(seed, index);
+                suite[i] = Pcg32(seed, index);
             }
             return suite;
         }
@@ -106,10 +160,8 @@ namespace Z0
             var count = seeds.Length;
             var g = alloc<IRngNav<uint>>(count);
             for(var i=0; i<count; i++)
-                g[i] = Rng.Pcg32(seeds[i], indices[i]);
+                g[i] = Pcg32(seeds[i], indices[i]);
             return g;
         }  
-
     }
-
 }

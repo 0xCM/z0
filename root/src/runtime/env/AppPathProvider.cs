@@ -18,7 +18,6 @@ namespace Z0
             return new AppPathProvider(id,root,data, stdout, stderr, test, bench);
         }
 
- 
         AppPathProvider(AssemblyId id, FolderPath root, FolderPath data, FolderPath stdout, FolderPath stderr, FolderPath test, FolderPath bench)
         {
             this.AppId = id;

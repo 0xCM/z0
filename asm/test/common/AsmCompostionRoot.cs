@@ -25,7 +25,7 @@ namespace Z0
                 R.Root.Resolution,R.Vectorized.Resolution}
                 ;
 
-        static IAssemblyComposition Compose(params IAssemblyResolution[] src)
+        public static IAssemblyComposition Compose(params IAssemblyResolution[] src)
         {
             var resolutions = src.Length != 0 ? src : DefaultResolutions;
             return resolutions.Assemble();
@@ -34,5 +34,4 @@ namespace Z0
         public static IAsmContext RootedComposition(this IAsmContext context, params IAssemblyResolution[] resolutions)
             => AsmContext.Rooted(context, Compose(resolutions));
     }
-
 }

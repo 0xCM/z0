@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, Span<T> dst)
             where T : unmanaged
-                => random.Fill(CoreRng.domain<T>(), dst.Length, ref head(dst));
+                => random.Fill(Rng.domain<T>(), dst.Length, ref head(dst));
 
         /// <summary>
         /// Fills a caller-allocated span with random values

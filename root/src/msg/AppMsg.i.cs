@@ -19,6 +19,12 @@ namespace Z0
         void Notify(AppMsg msg);        
 
         /// <summary>
+        /// Posts a text message to the context queue with optional severity
+        /// </summary>
+        /// <param name="msg">The message to post</param>
+        void Notify(string msg, AppMsgKind? severity = null);
+
+        /// <summary>
         /// Posts an arbitrary number of messages to the queue
         /// </summary>
         /// <param name="msg">The message to post</param>
@@ -35,11 +41,9 @@ namespace Z0
             Notify(msg.Printed());
         }        
 
-        /// <summary>
-        /// Posts a text message to the context queue with optional severity
-        /// </summary>
-        /// <param name="msg">The message to post</param>
-        void Notify(string msg, AppMsgKind? severity = null);
+        void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
+            => NotifyConsole(AppMsg.Colorize(content, color));
+
 
         void ISink<AppMsg>.Accept(in AppMsg src)
             => Notify(src);        

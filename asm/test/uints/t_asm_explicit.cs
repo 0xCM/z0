@@ -16,7 +16,8 @@ namespace Z0
 
         public t_asm_explicit()
         {
-            Context = AsmContext.Rooted(this,DefaultComposition.Create());
+            //Context = AsmContext.Rooted(this,DefaultComposition.Create());
+            Context = AsmContext.Rooted(this, AsmCompostionRoot.Compose());
                                     
         }
    

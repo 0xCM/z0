@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             Span<T> dst = new T[length];
-            random.Fill(domain.ValueOrElse(() => CoreRng.domain<T>()), length,ref head(dst), filter);
+            random.Fill(domain.ValueOrElse(() => Rng.domain<T>()), length,ref head(dst), filter);
             return dst;
         }
 
@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples)
             where T : unmanaged
-                => random.Span<T>(samples, CoreRng.domain<T>(), x => gmath.nonz(x));
+                => random.Span<T>(samples, Rng.domain<T>(), x => gmath.nonz(x));
                  
     }
 }

@@ -11,7 +11,6 @@ namespace Z0
     /// </summary>
     public interface IAsmService :  IAppService<IAsmContext>
     {
-        
     }
 
 

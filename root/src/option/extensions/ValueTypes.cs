@@ -14,55 +14,6 @@ namespace Z0
 
     partial class OptionX
     {
-        public static Y? TryMap<X,Y>(this X? x, Func<X,Y> f)
-            where X : struct
-            where Y : struct
-                => x.HasValue ? f(x.Value) : (Y?)null;
-
-        public static Y Map<X,Y>(this X? x, Func<X,Y> f)
-            where X : struct
-            where Y : struct
-                => x.HasValue ? f(x.Value) : default(Y);
-
-        public static bool IsSome<T>(this T? x, Action<T> f)
-            where T : struct
-                => x.HasValue;
-
-        public static bool IsNone<T>(this T? x, Action<T> f)
-            where T : struct
-                => !x.HasValue; 
-
-        [MethodImpl(Inline)]
-        public static T ValueOrElse<T>(this T? x,  Func<T> @else)
-            where T : struct
-                => x != null ? x.Value : @else();
-
-        [MethodImpl(Inline)]
-        public static T ValueOrElse<T>(this T? x, T @else)
-            where T : struct
-                => x != null ? x.Value : @else;
-
-        [MethodImpl(Inline)]
-        public static S MapValueOrDefault<T, S>(this T? x, Func<T, S> f, S @default = default(S))
-            where T : struct
-                => x != null ? f(x.Value) : @default;
-
-        [MethodImpl(Inline)]
-        public static S? TryMapValue<T, S>(this T? x, Func<T, S> f)
-            where T : struct
-            where S : struct
-                => x != null ? f(x.Value) : (S?)null;
-
-        [MethodImpl(Inline)]
-        public static S Map<T, S>(this T? x, Func<T, S> ifSome, Func<S> ifNone)
-            where T : struct
-                    => x != null ? ifSome(x.Value) : ifNone();
-
-        [MethodImpl(Inline)]
-        public static S MapValueOrElse<T, S>(this T? x, Func<T, S> f, Func<S> @else)
-            where T : struct
-                => x != null ? f(x.Value) : @else();
-
         /// <summary>
         /// Transforms a nulluble value into an optional value
         /// </summary>

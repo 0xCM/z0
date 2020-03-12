@@ -41,7 +41,7 @@ namespace Z0
                 }            
             }
 
-            return CoreRng.stream(produce(), random.RngKind);
+            return Rng.stream(produce(), random.RngKind);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
                     yield return Enum.Parse<E>(names[stream.Next()]);
             }
 
-            return CoreRng.stream(produce(), random.RngKind);
+            return Rng.stream(produce(), random.RngKind);
         }
     }
 }

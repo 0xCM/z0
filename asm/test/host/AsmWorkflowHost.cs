@@ -14,6 +14,7 @@ namespace Z0.Asm
     using static HostCaptureWorkflow;
     using static AsmServiceMessages;
 
+    using V = Asm.Validation;
 
     public enum OverwriteOption
     {
@@ -32,25 +33,35 @@ namespace Z0.Asm
     public class t_asm_workflow : t_asm<t_asm_workflow>
     {
 
+        FolderPath RootEmissionPath
+            => Context.Paths.TestDataDir(GetType());                
+
         public t_asm_workflow()
         {
-            Root = RootEmissionPaths.Define(DefaultDataDir);
+            Root = RootEmissionPaths.Define(RootEmissionPath);
             Root.LogDir.Clear();
         }
         
         
-        void ExecuteWorkflow()
+        public void EmitArtifacts()
         {
-            var workflow = HostCaptureWorkflow.Create(AsmWorkflowContext.Rooted(Context));
-            require(workflow.Broker != null);
-            ConnectReceivers(workflow.Broker);
-            var config = Z0.Asm.HostCaptureConfig.Define(DefaultDataDir);
+            if(ArtifactEmissionDisabled)
+                return;
+
+            var context = AsmWorkflowContext.Rooted(Context, Random);
+            var workflow = HostCaptureWorkflow.Create(context);
+            require(workflow.EventBroker != null);
+            ConnectReceivers(workflow.EventBroker);
+            var config = Z0.Asm.HostCaptureConfig.Define(RootEmissionPath);
             workflow.Runner.Run(config);
         }
 
-        public void CheckAsm()
+        public void ValidateArtifacts()
         {
-            var control = AsmValidator.Create(Context, this, DefaultDataDir);
+            if(ArtifactValidationDisabled)
+                return;
+
+            var control = V.AsmValidator.Create(Context, this, RootEmissionPath);
             control.CheckAsm();
         }
 
@@ -62,6 +73,9 @@ namespace Z0.Asm
 
         RootEmissionPaths Root {get;}
 
+        public bool ArtifactEmissionDisabled {get;} = true;
+
+        public bool ArtifactValidationDisabled {get;} = false;
 
         public bool HandleMembersLocated {get;} = true;
 
@@ -130,7 +144,6 @@ namespace Z0.Asm
             var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.Magenta);
             NotifyConsole(msg);            
         }
-
 
         void ConnectReceivers(IHostCaptureEventBroker broker)
         {

@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public IAsmWorkflowContext Context {get;}
 
-        public IHostCaptureEventBroker Broker {get;}
+        public IHostCaptureEventBroker EventBroker {get;}
 
         public IHostCaptureRunner Runner {get;}
         
@@ -25,8 +25,8 @@ namespace Z0.Asm
         HostCaptureWorkflow(IAsmWorkflowContext context)
         {
             this.Context = context;
-            this.Broker = HostCaptureBroker.Create(context);
-            this.Runner = new HostCaptureRunner(context,Broker);
+            this.EventBroker = HostCaptureBroker.Create(context);
+            this.Runner = new HostCaptureRunner(context,EventBroker);
         }
  
         public void Run(HostCaptureConfig dst) => Runner.Run(dst);
