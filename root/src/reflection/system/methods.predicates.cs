@@ -34,35 +34,7 @@ namespace Z0
         public static bool IsNonGeneric(this MethodInfo src)
             => !src.IsGenericMethod && !src.IsConstructedGenericMethod;
     
-        /// <summary>
-        /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool AcceptsImmediate(this MethodInfo m)        
-            => m.GetParameters().Where(IsImmediate).Any();
  
-        /// <summary>
-        /// Determines whether a method is an action
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsAction(this MethodInfo m)
-            => m.ReturnType == typeof(void);
-
-        /// <summary>
-        /// Returns true if all non-void input/output values are of the same type
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsHomogenous(this MethodInfo m)
-        {
-            var inputs = m.ParameterTypes().ToHashSet();
-            if(inputs.Count == 1)
-                return inputs.Single() == m.ReturnType;
-            else if(inputs.Count == 0)
-                return m.ReturnType == typeof(void);
-            else
-                return false;
-        }
-
         /// <summary>
         /// Determines whether a method has a void return and, consequently, cannot be a function
         /// </summary>
@@ -70,20 +42,6 @@ namespace Z0
         public static bool HasVoidReturn(this MethodInfo m)
             => m.ReturnType == typeof(void);
 
-        /// <summary>
-        /// Determines whether a method is a function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsFunction(this MethodInfo m)
-            => ! m.HasVoidReturn();
-
-        /// <summary>
-        /// Determines whether a method is a function with specified arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="arity">The arith to match</param>
-        public static bool IsFunction(this MethodInfo m, int arity)
-            => m.IsFunction() && m.HasArity(arity);
 
         /// <summary>
         /// Determines whether a method is an homogneous function
@@ -91,20 +49,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsHomogenousFunction(this MethodInfo m)
             => m.IsHomogenous() && m.IsFunction();
-
-        /// <summary>
-        /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsEmitter(this MethodInfo m)
-            => m.IsFunction() && m.HasArity(0);
-
-        /// <summary>
-        /// Determines whether a method defines an operator over a (common) domain
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsOperator(this MethodInfo m)
-            => m.IsFunction() && m.IsHomogenous() && m.Arity() >= 1;
  
         /// <summary>
         /// Determines whether a method defines a unary function

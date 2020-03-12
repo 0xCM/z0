@@ -111,4 +111,14 @@ namespace Z0
 
         Avg,
     }
+
+    public static class OpKindIdOps
+    {
+        public static string Format(this OpKindId id)
+            => id.ToString().ToLower();
+
+        public static string Format(this OpKindId? id)
+            => id.HasValue ? id.Value.Format() : "unkinded";
+
+    }
 }

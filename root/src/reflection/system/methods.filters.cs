@@ -81,13 +81,6 @@ namespace Z0
 
                           
         /// <summary>
-        /// Selects functions from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Functions(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsFunction());
-
-        /// <summary>
         /// Selects the non-public methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>

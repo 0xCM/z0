@@ -13,13 +13,6 @@ namespace Z0
 
     public class AsmContext : IAsmContext 
     {               
-        /// <summary>
-        /// Creates a rooted context with selected assemblies
-        /// </summary>
-        /// <param name="root">The root context</param>
-        /// <param name="resolutions">The assemblies to share with the context</param>
-        public static IAsmContext Rooted(IContext root, params IAssemblyResolution[] resolutions)
-            => new AsmContext(root, resolutions.Assemble(), AsmFormatConfig.New);
 
         /// <summary>
         /// Creates a rooted context with a specified composition
@@ -35,18 +28,8 @@ namespace Z0
         /// <param name="root">The root context</param>
         /// <param name="clrindex">The clr index</param>
         /// <param name="resources">The resource index</param>
-        public static IAsmContext Rooted(IContext root)
-            => new AsmContext(root, AssemblyComposition.Empty, AsmFormatConfig.New);
-
-        /// <summary>
-        /// Creates a rooted context with specified indexes and format configuration
-        /// </summary>
-        /// <param name="root">The root context</param>
-        /// <param name="clrindex">The clr index</param>
-        /// <param name="resources">The resource index</param>
-        /// <param name="format">The context format configuration</param>
-        public static IAsmContext Rooted(IContext root, AsmFormatConfig format)             
-            => new AsmContext(root, AssemblyComposition.Empty, format);
+        public static IAsmContext Rooted(IComposedContext root)
+            => new AsmContext(root, root.Compostion, AsmFormatConfig.New);
 
         /// <summary>
         /// Creates a base context with a specified composition
@@ -55,25 +38,13 @@ namespace Z0
         public static IAsmContext New(IAssemblyComposition assemblies)
             => new AsmContext(assemblies, AsmFormatConfig.New);
 
-        /// <summary>
-        /// Creates a base context with selected assemblies
-        /// </summary>
-        /// <param name="resolutions">The assemblies to share with the context</param>
-        public static IAsmContext New(params IAssemblyResolution[] resolutions)
-            => new AsmContext(resolutions.Assemble(), AsmFormatConfig.New);
-
-        /// <summary>
-        /// Creates a base context with specified indexes and format configuration
-        /// </summary>
-        /// <param name="clrindex">The clr index</param>
-        /// <param name="resources">The resource index</param>
-        /// <param name="format">The context format configuration</param>
-        public static IAsmContext New(AsmFormatConfig format)             
-            => new AsmContext(AssemblyComposition.Empty, format);
+        public static IAsmContext New()
+            => new AsmContext(AssemblyComposition.Empty, AsmFormatConfig.New);
 
         AsmContext(IContext root, IAssemblyComposition assemblies, AsmFormatConfig format)
         {
-            this.RootContext = root != null ? some(root) : none<IContext>();
+            require(root != null);
+            this.RootContext = some(root);
             this.State = AsmContextData.New(assemblies ?? AssemblyComposition.Empty, format);
             this.Identity = Context.NextId();
         }
@@ -86,9 +57,11 @@ namespace Z0
         }
 
         AsmContext(IAssemblyComposition assemblies, AsmFormatConfig format)
-            : this(null,assemblies, format)
         {
-
+            require(assemblies != null && format != null);
+            this.RootContext = none<IContext>();
+            this.State = AsmContextData.New(assemblies, format);
+            this.Identity = Context.NextId();
         }
 
         AsmContext(IContext root, int id, AsmContextData data)

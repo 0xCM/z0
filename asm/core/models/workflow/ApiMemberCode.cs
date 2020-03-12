@@ -6,10 +6,11 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
 
-    public readonly struct ApiMemberCode : IFormattable<ApiMemberCode>, INullary<ApiMemberCode>
+    public readonly struct ApiMemberCode : IFormattable<ApiMemberCode>, INullary<ApiMemberCode>, IMethodSource<ApiMemberCode>
     {
         public static ApiMemberCode Empty => Define(HostedMember.Empty, BinaryCode.Empty);
 
@@ -18,6 +19,10 @@ namespace Z0.Asm
         public readonly BinaryCode Code;
 
         public OpIdentity Id => Member.Id;
+
+        public MethodInfo Method => Member.Method;
+
+        public OpUri Uri => Member.Uri;
 
         [MethodImpl(Inline)]
         public static ApiMemberCode Define(HostedMember member, BinaryCode code)

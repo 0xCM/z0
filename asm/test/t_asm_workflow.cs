@@ -38,19 +38,20 @@ namespace Z0.Asm
             Root.LogDir.Clear();
         }
         
-        public void CheckAsm()
-        {
-            var control = AsmCheckCountrol.Create(Context, this, DefaultDataDir);
-            control.CheckAsm();
-        }
         
-        public void ExecuteWorkflow()
+        void ExecuteWorkflow()
         {
             var workflow = HostCaptureWorkflow.Create(AsmWorkflowContext.Rooted(Context));
             require(workflow.Broker != null);
             ConnectReceivers(workflow.Broker);
             var config = Z0.Asm.HostCaptureConfig.Define(DefaultDataDir);
             workflow.Runner.Run(config);
+        }
+
+        public void CheckAsm()
+        {
+            var control = AsmValidator.Create(Context, this, DefaultDataDir);
+            control.CheckAsm();
         }
 
         public override void Dispose()
@@ -61,19 +62,12 @@ namespace Z0.Asm
 
         RootEmissionPaths Root {get;}
 
-        ILogDevice OpenLog(WorkflowLogKind kind, string name = null, FileExtension ext = null, OverwriteOption? overwrite = null,  bool display = false)
-        {
-            var devname = name  ?? kind.ToString();            
-            var target = Root.LogDir + FileName.Define(devname, ext ?? FileExtensions.Log);
-            var append = (overwrite ?? OverwriteOption.Overwrite) == OverwriteOption.Append;
-            return Context.OpenLogDevice(target, devname, append, display);
-        }
 
         public bool HandleMembersLocated {get;} = true;
 
         public bool HandleExtractsParsed {get;} = true;
 
-        public bool HandleFunctionsDecoded {get;} = true;
+        public bool HandleFunctionsDecoded {get;} = false;
 
         public bool HandleParsedExtractSaved {get;} = true;
 
@@ -201,42 +195,11 @@ namespace Z0.Asm
             }
         }
 
-        IEnumerable<LocatedMember> KindedOperators(IEnumerable<LocatedMember> src, int? arity = null)
-            => from located in src
-                let m = located.Method
-                let id = m.KindId()
-                where id.HasValue && m.IsOperator() && (arity != null ? m.Arity() == arity : true)
-                select located;
-
-        IEnumerable<LocatedMember> KindedNumericOperators(IEnumerable<LocatedMember> src, int arity)
-            => from located in src
-                let m = located.Method
-                let id = m.KindId()
-                where id.HasValue && m.IsNumericOperator(arity)
-                select located;
-
         void Analyze(in ApiHostUri host, ReadOnlySpan<LocatedMember> src)
         {
             var index = src.ToOpIndex();
             foreach(var key in index.DuplicateKeys)
                 NotifyConsole(DuplicateWarning(host,key));
-
-            var kinded = (from located in KindedOperators(src.ToEnumerable())
-                         let m = located.Method
-                         let id = m.KindId().Value
-                         let c = TypedOperatorClass.Infer(m)
-                         select (located.Uri, m, c,  id)).ToArray();
-
-
-            var messages = list<AppMsg>(kinded.Length);        
-            foreach(var (uri,method,oc,kind) in kinded)
-                messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
-
-            if(messages.Count != 0)
-            {
-                using var log = OpenLog(WorkflowLogKind.IdentifiedKind, "numeric-binary-ops", FileExtensions.Csv, OverwriteOption.Append);
-                log.Write(messages.ToArray());
-            }
         }
     }
 }

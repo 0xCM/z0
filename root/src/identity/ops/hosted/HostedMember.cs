@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Identifies a host-defined operation 
     /// </summary>
-    public readonly struct HostedMember : IMemberOp<HostedMember>, INullary<HostedMember>
+    public readonly struct HostedMember : IMemberOp<HostedMember>, INullary<HostedMember>, IMethodSource<HostedMember>
     {
         public static HostedMember Empty => Define(ApiHostUri.Empty, OpIdentity.Empty, null);
         

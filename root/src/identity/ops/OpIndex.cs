@@ -79,11 +79,14 @@ namespace Z0
             }
         }
 
-        public int EntryCount => HashTable.Count;
+        public int EntryCount 
+            => HashTable.Count;
 
-        public IEnumerable<(OpIdentity, T)> Enumerated => HashTable.Select(kvp => (kvp.Key, kvp.Value));
+        public IEnumerable<(OpIdentity, T)> Enumerated 
+            => HashTable.Select(kvp => (kvp.Key, kvp.Value));
 
-        public IEnumerable<OpIdentity> Keys => HashTable.Keys;
+        public IEnumerable<OpIdentity> Keys 
+            => HashTable.Keys;
         
         public IReadOnlyList<OpIdentity> DuplicateKeys
             => Duplicates;

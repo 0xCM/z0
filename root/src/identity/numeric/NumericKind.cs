@@ -129,30 +129,7 @@ namespace Z0
         Width64 = U64 | I64 | F64
     }
 
-    /// <summary>
-    /// Defines a parition over primal numeric types: signed ints, unsigned ints and floating-point
-    /// </summary>
-    enum NumericClass : uint
-    {
-        None = 0,
-
-        /// <summary>
-        /// A signed integral type
-        /// </summary>
-        Signed = 1u << 31,
-
-        /// <summary>
-        /// A floating-point type
-        /// </summary>
-        Float = 1u << 30,
-
-        /// <summary>
-        /// An unsigned integral type
-        /// </summary>
-        Unsigned = 1u << 29,
-    }
-
-    public static class NumericKindOps
+    partial class ReflectedClass
     {
         /// <summary>
         /// Determines whether kind has a nonzero value

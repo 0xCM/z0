@@ -45,7 +45,7 @@ namespace Z0.Asm
         public ReadOnlySpan<AsmOpBits> LoadCode(FilePath src)
             => Context.HexReader().Read(src).ToArray();
 
-        public OpIndex<ApiMemberCode> IndexMemberCode(ApiHostUri host, FilePath src)
+        public ApiCodeIndex IndexMemberCode(ApiHostUri host, FilePath src)
         {
             var loaded = LoadCode(src);
             var hosted = FindHostedMembers(host).ToArray();
@@ -57,7 +57,7 @@ namespace Z0.Asm
                           let l = pair.Item1
                           let r = pair.Item2
                           select ApiMemberCode.Define(r.left, r.right.Bits);                                      
-            return apicode.Select(c => (c.Id, c)).ToOpIndex();
+            return  ApiCodeIndex.Create(apicode.Select(c => (c.Id, c)).ToOpIndex());
         }
     }
 }

@@ -11,15 +11,15 @@ namespace Z0.Asm
     
     using static Root;
     
-    public interface IAsmCheckControl : IAsmService, IAppMsgSink, IRngProvider
+    public interface IAsmValidator : IAsmWorkflowService
     {
         
     }
 
 
-    public class AsmCheckCountrol : IAsmCheckControl
+    class AsmValidator : IAsmValidator
     {
-        public IAsmContext Context {get;}
+        public IAsmWorkflowContext Context {get;}
 
         public IPolyrand Random {get;}
 
@@ -48,18 +48,25 @@ namespace Z0.Asm
         public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
             => Sink.NotifyConsole(AppMsg.Colorize(content, color));
 
-        public static AsmCheckCountrol Create(IAsmContext context, IAppMsgSink sink, FolderPath root)
-            => new AsmCheckCountrol(context.RootedComposition(), sink, root);
+        public static AsmValidator Create(IAsmContext context, IAppMsgSink sink, FolderPath root)
+            => new AsmValidator(context.RootedComposition(), sink, root);
 
-        AsmCheckCountrol(IAsmContext context, IAppMsgSink msgsink, FolderPath root)
+        AsmValidator(IAsmContext context, IAppMsgSink msgsink, FolderPath root)
         {                    
-            this.Context = context;
+            this.Context = AsmWorkflowContext.Rooted(context);
             this.Random = Rng.Pcg64(Seed64.Seed08);
             this.Checks = AsmChecks.Create(context, Random);
             this.Sink = msgsink;
             this.BufferSize = 1024;
             this.BufferCount = 3;
             this.RootPaths = RootEmissionPaths.Define(root);
+        }
+
+        ILogDevice OpenLog(string name, FileExtension ext = null, OverwriteOption? overwrite = null,  bool display = false)
+        {
+            var target = RootPaths.LogDir + FileName.Define(name, ext ?? FileExtensions.Log);
+            var append = (overwrite ?? OverwriteOption.Overwrite) == OverwriteOption.Append;
+            return Context.OpenLogDevice(target, name, append, display);
         }
 
         public void CheckAsm()
@@ -88,7 +95,23 @@ namespace Z0.Asm
             Notify($"Correlated {index.EntryCount} {host} implemented operations with executable code");
 
 
-            //var hostedBinOps = hosted.KindedOperators(2).ToOpIndex();
+            var kinded = index.KindedOperators(2).ToArray();
+
+            Notify($"Found {kinded.Length} {host} kinded binary operarators");
+
+
+            var messages = list<AppMsg>(kinded.Length);        
+            foreach(var k in kinded)
+            {
+                var uri = k.Uri;
+                var oc = k.Method.ClassifyTypedOperator().Format();
+                var kind = k.Method.KindId().Format();
+                messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
+            }
+            
+
+            using var log = OpenLog("kinded-binary-ops", FileExtensions.Csv, OverwriteOption.Append);
+            log.Write(messages.ToArray());
 
             
             

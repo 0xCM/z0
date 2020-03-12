@@ -5,36 +5,37 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
+    using System.Linq;
+    using System.Reflection;
+
     using static Root;
-
     using static ArityClass;
-    using static ExchangeClass;
 
-    public enum ReceiverClass : ulong
+    public enum ActionClass : ulong
     { 
         None = 0,
 
         /// <summary>
         /// An operation that accepts no arguments and has a void return type
         /// </summary>
-        Sink0 = Nullary | Receiver,
+        Sink0 = Nullary | Action,
 
        /// <summary>
        /// An operation that accepts one argument and has a void return type
        /// </summary>
-        Sink1 = Unary | Receiver,
+        Sink1 = Unary | Action,
 
        /// <summary>
        /// An operation that accepts two arguments and has a void return type
        /// </summary>
-        Sink2 = Binary | Receiver,
+        Sink2 = Binary | Action,
 
        /// <summary>
        /// An operation that accepts three arguments and has a void return type
        /// </summary>
-        Sink3 = Ternary | Receiver,
+        Sink3 = Ternary | Action,
         
         /// <summary>
         /// A synonym for Sink0
@@ -55,5 +56,10 @@ namespace Z0
         /// A synonym for Func3
         /// </summary>
         TernarySink = Sink3,
+
+        Action = OperationClass.Action,    
     }
+
+
+
 }

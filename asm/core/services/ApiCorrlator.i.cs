@@ -15,6 +15,6 @@ namespace Z0.Asm
     {
         IEnumerable<HostedMember> FindHostedMembers(in ApiHostUri host);
 
-        OpIndex<ApiMemberCode> IndexMemberCode(ApiHostUri host, FilePath src);
+        ApiCodeIndex IndexMemberCode(ApiHostUri host, FilePath src);
     }
 }

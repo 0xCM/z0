@@ -32,7 +32,7 @@ namespace Z0
         Unsigned =  (ushort)IDI.Unsigned,
     }
 
-    public static class NumericIndicatorOps
+    partial class ReflectedClass
     {
         /// <summary>
         /// Determines whether the kind has a nonzero value

@@ -10,38 +10,14 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TypedOperatorClass : IFormattable<TypedOperatorClass>
+    public static class TypedOperatorClassOps
     {
-        public static Option<TypedOperatorClass> Infer(MethodInfo src)
-        {
-            var no = none<TypedOperatorClass>();
-            var c = src.ClassifyOperator();
-            if(c.IsNone())
-                return no;
-            var kind =  src.ReturnType;
-            return Define(c,src.ReturnType);
-        }
+        public static string Format(this TypedOperatorClass src)
+            =>  src.IsNone 
+                ? string.Empty 
+                : "f:" +  Identity.identify(src.OperandType).Format().Replicate(src.OperatorClass.Arity() + 1).Intersperse(ArrowSymbols.AsciArrow).Concat();
 
-        [MethodImpl(Inline)]
-        public static TypedOperatorClass Define(OperatorClass @class, Type type)
-            => new TypedOperatorClass(@class, type);
-
-        [MethodImpl(Inline)]
-        TypedOperatorClass(OperatorClass @class, Type type)
-        {
-            this.OperatorClass = @class;
-            this.OperandType = type;
-        }
-        
-        public readonly OperatorClass OperatorClass;
-        
-        public readonly Type OperandType;
-
-        public string Format()
-            => "f:" +  Identity.identify(OperandType).Format().Replicate(OperatorClass.Arity() + 1).Intersperse("->").Concat();
-        
-        public override string ToString()
-            => Format();
     }
+
 
 }

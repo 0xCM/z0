@@ -15,7 +15,7 @@ namespace Z0
     {
         internal static MethodSig Define(MethodInfo method)
         {            
-            var valparams = method.GetParameters().Select(p => new MethodParameter(TypeSig.FromParameter(p), p.Variance(), p.Name, p.Position)).ToArray();
+            var valparams = method.GetParameters().Select(p => new MethodParameter(TypeSig.FromParameter(p), p.ClassifyVariance(), p.Name, p.Position)).ToArray();
             var typeparams = TypeParameters(method);
             return new MethodSig(
                 MethodId: method.MetadataToken,

@@ -24,7 +24,7 @@ namespace Z0
         
         public TestController()
         {
-            this.Context = AsmContext.New(C.Resolution.Designates.Where(d => d.Id.IsTest()).Select(x => x).ToArray());
+            this.Context = AsmContext.New(C.Resolution.Designates.Where(d => d.Id.IsTest()).Select(x => x).ToArray().Assemble());
         }
 
         static IEnumerable<IAssemblyResolution> TestHosts

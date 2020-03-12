@@ -18,6 +18,6 @@ namespace Z0
 
         public const char MapsTo = '↦';
 
+        public const string AsciArrow = "->";
     }
-
 }

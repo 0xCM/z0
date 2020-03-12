@@ -5,41 +5,14 @@
 namespace Z0
 {        
     using System;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Reflection;
 
-    using FC = FunctionClass;
+    using static Root;
     using static ArityClass;
-    using static ExchangeClass;
 
-    public enum ArityClass : ulong
-    {
-        None = 0,
-
-        Nullary = Pow2.T00,
-       
-        /// <summary>
-        /// Classifies a function as a unary predicate
-        /// </summary>        
-        Unary = Pow2.T01,
-
-        /// <summary>
-        /// Classifies a function as a binary predicate
-        /// </summary>        
-        Binary = Pow2.T02,
-
-       /// <summary>
-       /// Classifies a function as a ternary predicate
-       /// </summary>        
-       Ternary = Pow2.T03,   
-    }    
-
-    public enum ExchangeClass : ulong
-    {
-        None = 0,
-
-        Receiver = Pow2.T55,
-
-        Function = Pow2.T56
-    }
 
     /// <summary>
     /// Defines higher-kinded function classifications
@@ -161,5 +134,12 @@ namespace Z0
 
         Fixed = Pow2.T49,     
 
+        Function = OperationClass.Function
+
     } 
+
+    partial class ReflectedClass
+    {
+
+    }    
 }
