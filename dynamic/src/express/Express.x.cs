@@ -447,6 +447,17 @@ namespace Z0
             return XPR.Lambda<Func<X1, X2, Y>>(callResult, x1, x2).Compile();
         }
 
+
+        /// <summary>
+        /// Creates a delegate for a binary operator f:X->X->X realized by a specified method
+        /// </summary>
+        /// <param name="member">The source method</param>
+        /// <param name="host">An instance of the declaring type, if applicable</param>
+        /// <typeparam name="X">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BinaryOp<X> BinaryOp<X>(this MethodInfo method, object host = null)
+            => method.Func<X,X,X>(host).ToBinaryOp();
+
         /// <summary>
         /// Creates a delegate for a function f:X1->X2->X3->Y realized by a specified method
         /// </summary>

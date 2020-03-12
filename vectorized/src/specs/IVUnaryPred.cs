@@ -26,7 +26,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred<W,V> : IVFunc, IUnaryPred<V>
+    public interface IVUnaryPred<W,V> : IVFunc, IUnaryPredicate<V>
         where W : unmanaged, ITypeNat
         where V : struct
     {

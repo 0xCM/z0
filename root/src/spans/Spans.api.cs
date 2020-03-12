@@ -499,7 +499,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-            where F : IBinaryPred<T>
+            where F : IBinaryPredicate<T>
         {
             var count = dst.Length;
             ref readonly var lSrc = ref head(lhs);
@@ -526,7 +526,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> src, Span<bit> dst)
-            where F : IUnaryPred<T>
+            where F : IUnaryPredicate<T>
         {
             var count = dst.Length;
             ref readonly var input = ref head(src);

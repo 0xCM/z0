@@ -61,20 +61,13 @@ namespace Z0.Asm
             this.Random = random;
         }                
 
-        // public OpIndex<ApiMemberCode> IndexApiCode(ApiHostUri host, FilePath src)
-        // {
-        //     var loaded = LoadCode(src);
-        //     var hosted = HostedMembers(host).ToArray();
-            
-        //     var codeidx = loaded.ToEnumerable().ToOpIndex();
-        //     var hostedidx = hosted.ToOpIndex();
 
-        //     var apicode = from pair in hostedidx.Intersect(codeidx).Enumerated
-        //                   let l = pair.Item1
-        //                   let r = pair.Item2
-        //                   select ApiMemberCode.Define(r.left, r.right.Bits);                                      
-        //     return apicode.Select(c => (c.Id, c)).ToOpIndex();
-        // }
+        public void CheckExecution(ApiMemberCode code)
+        {
+            
+
+        }
+
 
         /// <summary>
         /// Loads executable code into an index-identifed target buffer and manufactures a fixed binary operator 

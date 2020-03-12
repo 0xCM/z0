@@ -132,7 +132,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOpImm8<W,V,T> : IUnaryOpImm8<V>
+    public interface IVUnaryOpImm8<W,V,T> : IImm8UnaryOp<V>
     {
         FunctionClass IFunc.Class => FunctionClass.BinaryImm | FunctionClass.Vectorized;
     }
@@ -144,7 +144,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOpImm8x2<W,V,T> : IUnaryOpImm8x2<V>
+    public interface IVUnaryOpImm8x2<W,V,T> : IImm8x2UnaryOp<V>
     {
         FunctionClass IFunc.Class => FunctionClass.TernaryImm | FunctionClass.Vectorized;
 

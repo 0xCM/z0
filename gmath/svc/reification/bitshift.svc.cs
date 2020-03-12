@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Srl<T> : IShiftOp<T>, IShiftSpanOp<T>
+        public readonly struct Srl<T> : IImm8ShiftOp<T>, IImm8ShiftSpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "srl";
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Sll<T> : IShiftOp<T>, IShiftSpanOp<T>
+        public readonly struct Sll<T> : IImm8ShiftOp<T>, IImm8ShiftSpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "sll";

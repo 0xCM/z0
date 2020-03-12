@@ -31,7 +31,7 @@ namespace Z0
         T InvokeScalar(T a, T b);
     }
 
-    public interface IBVUnaryPred<T> : IUnaryPred<BitVector<T>>
+    public interface IBVUnaryPred<T> : IUnaryPredicate<BitVector<T>>
         where T : unmanaged
     {
 
@@ -44,7 +44,7 @@ namespace Z0
     }
 
 
-    public interface IBVBinaryPred<T> : IBinaryPred<BitVector<T>>
+    public interface IBVBinaryPred<T> : IBinaryPredicate<BitVector<T>>
         where T : unmanaged
     {
 

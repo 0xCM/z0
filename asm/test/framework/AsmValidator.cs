@@ -114,7 +114,10 @@ namespace Z0.Asm
             log.Write(messages.ToArray());
 
             
-            
+            foreach(var c in kinded)
+            {
+                Checks.CheckExecution(c);
+            }
 
 
 

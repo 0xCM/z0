@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BitCoreServices
     {
-        public readonly struct Dot<T> : IBinaryPred<T>
+        public readonly struct Dot<T> : IBinaryPredicate<T>
             where T : unmanaged        
         {
             public static Dot<T> Op => default;

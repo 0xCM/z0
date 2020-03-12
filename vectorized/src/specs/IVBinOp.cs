@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOpImm8<W,V,T> : IVFunc, IBinOpImm8<V>
+    public interface IVBinOpImm8<W,V,T> : IVFunc, IImm8BinOp<V>
     {
 
     }    

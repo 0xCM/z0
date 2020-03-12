@@ -11,26 +11,6 @@ namespace Z0
 
     using static Root;
 
-    public static class CoreRngSeed
-    {
-        /// <summary>
-        /// Produces a non-deterministic seed
-        /// </summary>
-        /// <typeparam name="T">The seed type</typeparam>
-        public static T entropic<T>()            
-            where T : unmanaged
-                => Entropy.Value<T>();
-        
-        /// <summary>
-        /// Produces a seed from embedded application resources that, for a given index, remanins fixed
-        /// </summary>
-        /// <typeparam name="T">The seed type</typeparam>
-        [MethodImpl(Inline)]
-        public static T configured<T>(T index)
-            where T : unmanaged
-                => RngSeed.TakeSingle<T>(convert<T,int>(index));
-
-    }
 
     public static class CoreRng
     {

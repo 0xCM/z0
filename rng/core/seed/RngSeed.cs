@@ -16,6 +16,23 @@ namespace Z0
     /// </summary>
     public static class RngSeed
     {
+        /// <summary>
+        /// Produces a non-deterministic seed
+        /// </summary>
+        /// <typeparam name="T">The seed type</typeparam>
+        public static T Entropic<T>()            
+            where T : unmanaged
+                => Entropy.Value<T>();
+        
+        /// <summary>
+        /// Produces a seed from embedded application resources that, for a given index, remanins fixed
+        /// </summary>
+        /// <typeparam name="T">The seed type</typeparam>
+        [MethodImpl(Inline)]
+        public static T Configured<T>(T index)
+            where T : unmanaged
+                => TakeSingle<T>(convert<T,int>(index));
+
         public static IEnumerable<ulong> ToU64Stream(this IEnumerable<Guid> guids)
         {
             foreach(var guid in guids)

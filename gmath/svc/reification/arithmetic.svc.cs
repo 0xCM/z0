@@ -122,7 +122,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Even<T> : IUnaryPred<T>, IUnarySpanPred<T>
+        public readonly struct Even<T> : IUnaryPredicate<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
             public const string Name = "even";
@@ -140,7 +140,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Odd<T> : IUnaryPred<T>, IUnarySpanPred<T>
+        public readonly struct Odd<T> : IUnaryPredicate<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
             public const string Name = "odd";

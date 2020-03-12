@@ -17,14 +17,14 @@ namespace Z0
     }
 
 
-    public interface IVChecker128<S,T> : IBinaryPred<S, Vector128<T>>
+    public interface IVChecker128<S,T> : IBinaryPredicate<S, Vector128<T>>
         where S : unmanaged
         where T : unmanaged
     {
         
     }
 
-    public interface IVChecker256<S,T> : IBinaryPred<S, Vector256<T>>
+    public interface IVChecker256<S,T> : IBinaryPredicate<S, Vector256<T>>
         where S : unmanaged
         where T : unmanaged
     {

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using static OpSurrogates;
+    using static FunctionSurrogates;
     using static Nats;
 
     public class t_bitlogic : t_gmath<t_bitlogic>

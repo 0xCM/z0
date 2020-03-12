@@ -7,7 +7,6 @@ namespace Z0
     using System.Security;
     using System.Runtime.Intrinsics;
 
-
     /// <summary>
     /// Characterizes a vectorized pattern source
     /// </summary>
@@ -15,7 +14,7 @@ namespace Z0
     /// <typeparam name="V">The vector type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVPatternSource<W,V,T> : IVFunc, IPatternSource<V>
+    public interface IVPatternSource<W,V,T> : IVFunc, IFunc<V>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged

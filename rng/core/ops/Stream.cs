@@ -14,6 +14,18 @@ namespace Z0
     partial class CoreRngOps
     {
         /// <summary>
+        /// Produces a random stream predicated on a point source
+        /// </summary>
+        /// <param name="random">The point source</param>
+        /// <typeparam name="T">The point type</typeparam>
+        public static IEnumerable<T> Stream<T>(this IRngBoundPointSource<T> random)
+            where T : unmanaged
+        {
+            while(true)
+                yield return random.Next();
+        }
+
+        /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
         /// </summary>
         /// <param name="src">The random source</param>

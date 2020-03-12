@@ -13,6 +13,16 @@ namespace Z0
 
     partial class CoreRngOps
     {
+        public static NatSpan<N,T> Contract<N,T>(this NatSpan<N,T> src, NatSpan<N,T> max)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var dst = Z0.NatSpan.alloc<N, T>();
+            for(var i=0; i<dst.Length; i++)
+                dst[i] = Scale.contract(src[i],max[i]);
+            return dst;
+        }
+
         /// <summary>
         /// Allocates a span of natural dimensions and populates it with random values
         /// </summary>

@@ -13,6 +13,7 @@ namespace Z0
 
     public static class Rng
     {
+
         /// <summary>
         /// Creates a new WyHash16 generator
         /// </summary>
