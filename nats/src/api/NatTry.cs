@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static NatProve;
+    using static NatClaim;
     using static nfunc;
     using static Root;
 

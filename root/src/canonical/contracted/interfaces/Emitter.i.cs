@@ -18,8 +18,6 @@ namespace Z0
         
     }
 
-
-
     [SuppressUnmanagedCodeSecurity]
     public interface IFixedEmitter : IFunc
     {
@@ -54,7 +52,6 @@ namespace Z0
         Span<T> Invoke();
 
         FunctionClass IFunc.Class => FunctionClass.Emitter;
-
     }
 
     /// <summary>

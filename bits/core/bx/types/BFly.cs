@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BitCoreServices
     {
-        public readonly struct Bfly<N,T> : INaturalUnaryOp<N,T>
+        public readonly struct Bfly<N,T> : INatUnaryOp<N,T>
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

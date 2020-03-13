@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
 
     using static nfunc;
@@ -330,7 +329,7 @@ namespace Z0
         {                        
             var tval = Nat.nat<K2>();
             var sval = Nat.nat<K1>();
-            NatProve.eq(tval, sval);
+            NatClaim.eq(tval, sval);
             return tval;
         }
 

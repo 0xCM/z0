@@ -21,13 +21,6 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Characterizes a type-level sequence of typenats
-    /// </summary>
-    public interface NatSeq : ITypeNat
-    {
-
-    }
 
     /// <summary>
     /// Characterizes a typenat
@@ -43,43 +36,6 @@ namespace Z0
         }
     }
 
-    /// <summary>
-    /// Characterizes a natural sequence with an unspecified number of terms
-    /// </summary>
-    /// <typeparam name="S">The reifying type</typeparam>
-    public interface INatSeq<S> : ITypeNat<S>, NatSeq
-        where S : unmanaged, INatSeq<S>
-    {
-
-    }
-
-    public interface INatSeq<K,K1,K2> : INatSeq<K>
-        where K : unmanaged, INatSeq<K,K1,K2>
-        where K1 : unmanaged, INatPrimitive<K1>
-        where K2 : unmanaged, INatPrimitive<K2>
-    {
-
-        NatSeq<K1,K2> SeqRep
-        {
-            [MethodImpl(Inline)]
-            get => NatSeq<K1,K2>.Rep;
-        }     
-
-    }
-     
-    public interface INatSeq<K,K1,K2,K3> : INatSeq<K>
-        where K : unmanaged, INatSeq<K,K1,K2,K3>
-        where K1 : unmanaged, INatPrimitive<K1>
-        where K2 : unmanaged, INatPrimitive<K2>
-        where K3 : unmanaged, INatPrimitive<K3>
-    {
-
-        NatSeq<K1,K2,K3> SeqRep
-        {
-            [MethodImpl(Inline)]
-            get => NatSeq<K1,K2,K3>.Rep;
-        }        
-    }
 
     public interface INatDemand 
     {
@@ -153,73 +109,6 @@ namespace Z0
         
     }
 
-    /// <summary>
-    /// Requires k1 == k2
-    /// </summary>
-    /// <typeparam name="K1">The first nat type</typeparam>
-    /// <typeparam name="K2">The second nat type</typeparam>
-    public interface INatEq<K1,K2> : INatDemand<K1,K2>
-        where K1: unmanaged, ITypeNat
-        where K2: unmanaged, ITypeNat
-    {
-        
-    }
-
-    /// <summary>
-    /// Requires k1 != k2
-    /// </summary>
-    /// <typeparam name="K1">The first nat type</typeparam>
-    /// <typeparam name="K2">The second nat type</typeparam>
-    public interface INatNEq<K1,K2> : INatDemand<K1,K2>
-        where K1: unmanaged, ITypeNat
-        where K2: unmanaged, ITypeNat
-    {
-        
-    }
-
-    /// <summary>
-    /// Requires k1 < k2
-    /// </summary>
-    public interface INatLt<K1,K2> : INatDemand<K1,K2>
-        where K1: unmanaged, ITypeNat
-        where K2: unmanaged, ITypeNat
-    {
-        
-    }
-
-    /// <summary>
-    /// Requires k1 <= k2
-    /// </summary>
-    public interface INatLtEq<K1,K2> : INatDemand<K1,K2>
-        where K1: unmanaged, ITypeNat
-        where K2: unmanaged, ITypeNat
-    {
-        
-    }
-
-    /// <summary>
-    /// Requires k1 > k2
-    /// </summary>
-    /// <typeparam name="K1">The larger nat type</typeparam>
-    /// <typeparam name="K2">The smaller nat type</typeparam>
-    public interface INatGt<K1,K2> : INatDemand<K1,K2>
-        where K1: unmanaged, ITypeNat
-        where K2: unmanaged, ITypeNat
-    {
-        
-    }
-
-    /// <summary>
-    /// Requires k1 >= k2
-    /// </summary>
-    /// <typeparam name="K1">The larger nat type</typeparam>
-    /// <typeparam name="K2">The smaller nat type</typeparam>
-    public interface INatGtEq<K1,K2> : INatDemand<K1,K2>
-        where K1: unmanaged, ITypeNat
-        where K2: unmanaged, ITypeNat
-    {
-        
-    }
 
     /// <summary>
     /// Requires k1:K1 & k2:K2 & k3:K3 => k1 % k2 = k3
@@ -231,26 +120,6 @@ namespace Z0
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
         where K3 : unmanaged, ITypeNat
-    {
-
-    }
-
-    /// <summary>
-    /// Requires k:K => k % 2 == 0
-    /// </summary>
-    /// <typeparam name="K">An even natural type</typeparam>
-    public interface INatEven<K> : ITypeNat, INatDivisible<K,N2>
-        where K : unmanaged, ITypeNat<K>
-    {
-
-    }
-
-    /// <summary>
-    /// Requires k:K => k % 2 != 0
-    /// </summary>
-    /// <typeparam name="K">An Odd natural type</typeparam>
-    public interface INatOdd<K> : ITypeNat
-        where K : unmanaged, ITypeNat
     {
 
     }
@@ -281,53 +150,6 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Characterizes a natural k such that b:B & e:E => k = b^e
-    /// </summary>
-    /// <typeparam name="B">The base type</typeparam>
-    /// <typeparam name="E">The exponent type</typeparam>
-    public interface INatPow<B,E> : ITypeNat
-        where B : unmanaged, ITypeNat
-        where E : unmanaged, ITypeNat
-    {
-        
-    }
-
-    public interface INatPow2 : ITypeNat
-    {
-        
-    }
-
-    /// <summary>
-    /// Characterizes a natural k such that e:E => k = 2^e
-    /// </summary>
-    /// <typeparam name="B">The base type</typeparam>
-    /// <typeparam name="E">The exponent type</typeparam>
-    public interface INatPow2<E> : INatPow2, INatPow<N2,E>, INatEven<E>
-        where E : unmanaged, ITypeNat<E>
-    {
-        E Exp
-        {
-            [MethodImpl(Inline)]
-            get => default(E);
-        }
-         
-
-    }
-
-    /// <summary>
-    /// Characterizes the reification of a natural k such that 
-    /// b:B & e:E => k = b^e
-    /// </summary>
-    /// <typeparam name="B">The base type</typeparam>
-    /// <typeparam name="E">The exponent type</typeparam>
-    public interface INatPow<S,B,E> : INatPow<B,E>, ITypeNat<S>
-        where S : unmanaged, INatPow<S,B,E>
-        where B : unmanaged, ITypeNat
-        where E : unmanaged, ITypeNat
-    {
-        
-    }
 
     /// <summary>
     /// Characterizes the reification of a natural number k such that 

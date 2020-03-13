@@ -12,56 +12,56 @@ namespace Z0
     {    
         public static void equality()
         {
-            NatProve.eq<N16>(16);
-            NatProve.eq<N512>(512);
-            NatProve.eq<NatSeq<N8, N2, N1>>(821);
+            NatClaim.eq<N16>(16);
+            NatClaim.eq<N512>(512);
+            NatClaim.eq<NatSeq<N8, N2, N1>>(821);
         }
         public static void smaller()
         {
-            NatProve.lt(n11, n12);
-            NatProve.lt(n512, n1024);
+            NatClaim.lt(n11, n12);
+            NatClaim.lt(n512, n1024);
         }
 
         public static void larger()
         {
-            NatProve.gt(n12, n11);
-            NatProve.gt(n1024, n512);
+            NatClaim.gt(n12, n11);
+            NatClaim.gt(n1024, n512);
         }
 
         public static void nonzero()
         {
-            NatProve.nonzero(n12);
-            NatProve.nonzero(n4);
-            NatProve.nonzero(n1);
+            NatClaim.nonzero(n12);
+            NatClaim.nonzero(n4);
+            NatClaim.nonzero(n1);
 
         }
 
         public static void sum()
         {
-            NatProve.add(n5, n5, n10.NatValue);
-            NatProve.add(n13, n0, n13.NatValue);
-            NatProve.add(n512, n10, 522);
+            NatClaim.add(n5, n5, n10.NatValue);
+            NatClaim.add(n13, n0, n13.NatValue);
+            NatClaim.add(n512, n10, 522);
         }
 
         public static void product()
         {
-            NatProve.mul(n5, n5, 25);
-            NatProve.mul(n13, n10, 130);
-            NatProve.mul(n512, n10, 5120);
+            NatClaim.mul(n5, n5, 25);
+            NatClaim.mul(n13, n10, 130);
+            NatClaim.mul(n512, n10, 5120);
         }
 
         public static void next()
         {
-            NatProve.next(n0, n1);            
-            NatProve.next(n5, n6);            
-            NatProve.next(n15, n16);
+            NatClaim.next(n0, n1);            
+            NatClaim.next(n5, n6);            
+            NatClaim.next(n15, n16);
             
             var n11 = Nat.next(n10);
             var n12 = Nat.next(n11);
             var n13 = Nat.next(n12);
-            NatProve.next(n10, n11);
-            NatProve.next(n11, n12);
-            NatProve.next(n12, n13);
+            NatClaim.next(n10, n11);
+            NatClaim.next(n11, n12);
+            NatClaim.next(n12, n13);
 
         }
 

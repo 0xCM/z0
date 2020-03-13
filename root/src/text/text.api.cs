@@ -163,14 +163,17 @@ namespace Z0
             => string.Join(sep,src);
 
         /// <summary>
-        /// Joins the string representation of a sequence of values
+        /// Joins the string representation of a sequence of items interspersed by a separator
         /// </summary>
-        /// <param name="src">The values to be joined</param>
         /// <param name="sep">The value delimiter</param>
+        /// <param name="src">The values to be joined</param>
         public static string concat(string sep, IEnumerable<object> src)
             => string.Join(sep, src);
 
-
+        /// <summary>
+        /// Joins the string representation of a sequence of items with no interspersed separator
+        /// </summary>
+        /// <param name="src">The values to be joined</param>
         public static string concat(params object[] src)    
             => string.Concat(src);
 

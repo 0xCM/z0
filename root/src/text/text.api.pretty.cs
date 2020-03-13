@@ -288,6 +288,14 @@ namespace Z0
             => enclose(concat(content.Select(x => x.ToString())), lparen(), rparen());
 
         /// <summary>
+        /// Encloses content between '(' and ')' where items are interspersed with a separator
+        /// </summary>
+        /// <param name="content">The items to be enclosed</param>
+        [MethodImpl(Inline)]
+        public static string parenthetical(char sep, params object[] content)
+            => enclose(concat(sep,content.Select(x => x.ToString())), lparen(), rparen());
+
+        /// <summary>
         /// Renders a content array as a comma-separated list of values
         /// </summary>
         /// <param name="content">The data to delimit and format</param>

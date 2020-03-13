@@ -3,14 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Linq;
-    using System.ComponentModel;
     using System.Runtime.CompilerServices;
- 
-    public static partial class NatClaim
+
+    using static Root;
+
+    /// <summary>
+    /// Requires k:K => k % 2 != 0
+    /// </summary>
+    /// <typeparam name="K">An Odd natural type</typeparam>
+    public interface INatOdd<K> : ITypeNat
+        where K : unmanaged, ITypeNat
     {
-        
+
     }
 }

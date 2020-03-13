@@ -3,14 +3,21 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Linq;
-    using System.ComponentModel;
     using System.Runtime.CompilerServices;
- 
-    public static partial class NatClaim
+
+    using static Root;
+
+    /// <summary>
+    /// Requires k:K => k % 2 == 0
+    /// </summary>
+    /// <typeparam name="K">An even natural type</typeparam>
+    public interface INatEven<K> : ITypeNat, INatDivisible<K,N2>
+        where K : unmanaged, ITypeNat<K>
     {
-        
+
     }
+
+
 }

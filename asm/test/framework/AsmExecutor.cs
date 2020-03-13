@@ -9,10 +9,12 @@ namespace Z0.Asm.Validation
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Root;
+    using static Z0.Root;
     using static time;
-    using static Nats;
-    using static BufferSeqId;
+    using static Z0.Nats;
+    using static Z0.BufferSeqId;
+    using Z0;
+    using Z0.Asm;
 
     public interface IAsmExecutor : IAsmWorkflowService
     {
@@ -20,12 +22,16 @@ namespace Z0.Asm.Validation
 
         AsmExecResult ExecAction(Action action, OpUri f, OpUri g);        
 
-        AsmExecResult MatchBinaryOps(in BufferSeq buffers, FixedWidth width, in ConstPair<ApiMemberCode> paired); 
+        AsmExecResult MatchBinaryOps(in BufferSeq buffers, FixedWidth width, in ConstPair<ApiMemberCode> paired);
 
         FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode code, int count)
             where F : unmanaged, IFixed;
 
-        FixedIndex<F,T> ExecBinaryOp<F,T>(in BufferSeq buffers, in ApiMemberCode code, int count)
+        Span<P> ExecBinaryOp<P>(in BufferSeq buffers, in ApiMemberCode code, int count, ISpanEmitter<P> cases)
+            where P:unmanaged, IPointCell<P>;
+
+
+        FixedIndex<F, T> ExecBinaryOp<F,T>(in BufferSeq buffers, in ApiMemberCode code, int count)
             where F : unmanaged, IFixed
             where T : unmanaged;
 
@@ -58,6 +64,13 @@ namespace Z0.Asm.Validation
             get => increment(ref _checkseq);
         }
 
+
+        public Span<P> ExecBinaryOp<P>(in BufferSeq buffers, in ApiMemberCode code, int count, ISpanEmitter<P> cases) 
+            where P : unmanaged, IPointCell<P>
+        {
+            throw new NotImplementedException();
+        }
+        
         public FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode code, int count)
             where F : unmanaged, IFixed
         {
@@ -74,11 +87,11 @@ namespace Z0.Asm.Validation
             return dst;
         }
 
-        public FixedIndex<F,T> ExecBinaryOp<F,T>(in BufferSeq buffers, in ApiMemberCode code, int count)
+        public FixedIndex<F, T> ExecBinaryOp<F,T>(in BufferSeq buffers, in ApiMemberCode code, int count)
             where F : unmanaged, IFixed
             where T : unmanaged
         {
-            var emitter = Random.FixedSpanEmitter<F,T>(count);
+            var emitter = Random.FixedSpanEmitter<F, T>(count);
             var a = emitter.Invoke();
             var b = emitter.Invoke();
             var dst = new F[count];
@@ -335,5 +348,7 @@ namespace Z0.Asm.Validation
                 return AsmExecResult.Define(seq, (f,g), clock, e);
             }
         }
+
+
     }
 }

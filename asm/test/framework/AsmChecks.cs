@@ -21,7 +21,7 @@ namespace Z0.Asm.Validation
     {
         public IAsmWorkflowContext Context {get;}
 
-        readonly IAsmExecutioner Executioner;
+        readonly IAsmExecControl Executioner;
 
         readonly IAppMsgSink MsgSink;
         
@@ -37,7 +37,7 @@ namespace Z0.Asm.Validation
             this.Context = context;
             this.RepCount = 128;
             this.MsgSink = sink;
-            this.Executioner = AsmExecutioner.Create(context, sink);
+            this.Executioner = AsmExecControl.Create(context, sink);
         }                
 
         public void CheckExecution(in BufferSeq buffers, ApiMemberCode code)
