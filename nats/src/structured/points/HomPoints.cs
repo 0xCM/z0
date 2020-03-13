@@ -39,13 +39,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Point(index);
-        }
+        }        
 
         public int Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;
         }
-
     }
 }

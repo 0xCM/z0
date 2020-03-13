@@ -40,37 +40,14 @@ namespace Z0.Asm.Validation
             => Sink.NotifyConsole(content, color);
 
 
-        public void CheckExecution(in BufferSeq buffers, ApiMemberCode[] api)
+        public bit EvalBinaryOp(in BufferSeq buffers, ApiMemberCode[] api)
         {
             for(var i=0; i<api.Length; i++)
-                CheckExecution(buffers, api[i]);
-
+                EvalBinaryOp(buffers, api[i]);
+            return 0;
         }
 
-        public void CheckExecution(in BufferSeq buffers, ApiMemberCode api)
-        {
-            var kind = api.Member.KindId;
-            if(kind.IsSome())
-            {
-                var apiclass = api.Method.ClassifyOperator();
-                switch(apiclass)
-                {
-                    case UnaryOp:
-
-                    break;
-                    
-                    case BinaryOp:
-                        ExecuteBinaryOp(buffers, api);
-                    break;
-
-                    case TernaryOp:
-
-                    break;
-                }
-            }
-        }
         
-
         void Analyze(in FixedTripleIndex<Fixed8> outcome, in ApiMemberCode api)
         {
 
@@ -95,7 +72,115 @@ namespace Z0.Asm.Validation
 
         }
 
-        public void ExecuteBinaryOp(in BufferSeq buffers, in ApiMemberCode api)
+        void Analyze(in HomPoints<N2,byte> src, in HomPoints<N3,byte> dst, in ApiMemberCode api)
+        {
+            for(var i=0; i< 10; i++)
+            {
+                ref readonly var eval = ref dst[i];
+                var x0 = eval[n0];
+                var x1 = eval[n1];
+                var x2 = eval[n2];
+                Sink.EvaluatedPoint(api.Member.KindId.Format(),x0,x1,x2);
+            }
+        }
+
+        bit EvalOperator(in BufferSeq buffers, in HomPoints<N2,byte> src, in ApiMemberCode api)
+        {
+            var dst = Executor.EvaluateOperator(buffers, api, src);
+            Analyze(src, dst, api);
+            return 1;
+        }
+
+        public bit EvalBinaryOp(in BufferSeq buffers, ApiMemberCode api)
+        {
+            var kid = api.Member.KindId;
+            int count = 128;
+            if(kid == OpKindId.Div || kid == OpKindId.Mod)
+            {
+                return 0;
+            }
+            var nk = api.Method.ReturnType.NumericKind();
+
+            if(kid.IsSome())
+            {
+                var apiclass = api.Method.ClassifyOperator();
+                switch(apiclass)
+                {
+                    case UnaryOp:
+
+                    break;
+                    
+                    case BinaryOp:
+                    {
+                        switch(nk)
+                        {
+                            case NumericKind.U8:
+                                return EvalOperator(buffers, Random.HomPointIndex(count,n2,z8), api);
+                            case NumericKind.I8:
+                                return 0;
+                            case NumericKind.I16:
+                                return 0;
+                            case NumericKind.U16:
+                                return 0;
+                            case NumericKind.I32:
+                                return 0;
+                            case NumericKind.U32:
+                                return 0;
+                            case NumericKind.I64:
+                                return 0;
+                            case NumericKind.U64:
+                                return 0;
+                            default:
+                                return 0;
+
+                        }
+                    }
+
+                    case TernaryOp:
+                        return 0;                    
+                }
+            }
+            return 0;
+        }
+
+        public bit EvalFixedBinaryOp(in BufferSeq buffers, in ApiMemberCode api)
+        {
+            Sink.ValidatingOperator(api.Uri, BinaryOp);
+
+            var nk = api.Method.ReturnType.NumericKind();
+            var kid = api.Member.KindId;
+            if(kid == OpKindId.Div || kid == OpKindId.Mod)
+            {
+                return 0;
+            }
+
+            var count = 128;
+
+            switch(nk)
+            {
+                case NumericKind.U8:
+                    return EvalOperator(buffers, Random.HomPointIndex(count,n2,z8), api);
+                case NumericKind.I8:
+                    var cases = Random.LoadPointSpanEmitter(count,(z8,z8,z8));
+                    Analyze(Executor.ExecBinaryOp<Fixed8>(buffers, api, count), api);
+                    break;
+                case NumericKind.I16:
+                case NumericKind.U16:
+                    Analyze(Executor.ExecBinaryOp<Fixed16>(buffers, api, count),api);
+                    break;
+                case NumericKind.I32:
+                case NumericKind.U32:
+                    Analyze(Executor.ExecBinaryOp<Fixed32>(buffers, api, count),api);
+                    break;
+                case NumericKind.I64:
+                case NumericKind.U64:
+                    Analyze(Executor.ExecBinaryOp<Fixed64>(buffers, api, count),api);
+                    break;
+            }
+            return 0;
+        }
+
+        public void ExecBinaryOp(in BufferSeq buffers, in ApiMemberCode api)
         {
             Sink.ValidatingOperator(api.Uri, BinaryOp);
 

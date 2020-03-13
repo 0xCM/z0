@@ -11,7 +11,7 @@ namespace Z0.Asm.Validation
     
     using static Root;    
 
-    class AsmValidator : IAsmValidator
+    class ValididationWorkflow : IValidationWorkflow
     {
         public IAsmWorkflowContext Context {get;}
 
@@ -42,10 +42,10 @@ namespace Z0.Asm.Validation
         public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
             => Sink.NotifyConsole(content, color);
 
-        public static AsmValidator Create(IAsmContext context, IAppMsgSink sink, FolderPath root)
-            => new AsmValidator(context.RootedComposition(), sink, root);
+        public static ValididationWorkflow Create(IAsmContext context, IAppMsgSink sink, FolderPath root)
+            => new ValididationWorkflow(context.RootedComposition(), sink, root);
 
-        AsmValidator(IAsmContext context, IAppMsgSink msgsink, FolderPath root)
+        ValididationWorkflow(IAsmContext context, IAppMsgSink msgsink, FolderPath root)
         {                    
             this.Random = Rng.Pcg64(Seed64.Seed08);
             this.Sink = msgsink;
@@ -63,7 +63,7 @@ namespace Z0.Asm.Validation
             return Context.OpenLogDevice(target, name, append, display);
         }
 
-        public void CheckAsm()
+        public void Execute()
         {
             using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
 
@@ -104,7 +104,7 @@ namespace Z0.Asm.Validation
             using var log = OpenLog("kinded-binary-ops", FileExtensions.Csv, OverwriteOption.Append);
             log.Write(messages.ToArray());
             
-            Checks.CheckExecution(buffers, binops);            
+            Checks.Execute(buffers, binops);            
         }
 
     }

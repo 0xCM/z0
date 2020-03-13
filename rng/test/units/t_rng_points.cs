@@ -15,7 +15,7 @@ namespace Z0
 
         public void rng_point_stream()
         {
-            var source = Random.Points((z8,z16,z32));
+            var source = Random.PointStream((z8,z16,z32));
             var dst = source.Take(100).ToArray();
             var indexed = dst.Index();
         }
@@ -31,7 +31,7 @@ namespace Z0
 
         public void rng_nat_point_span_emitter()
         {
-            var emitter = Random.LoadPointSpanEmitter(100, n3, z32);
+            var emitter = Random.HomPointSpanEmitter(100, n3, z32);
             var emission = emitter.Invoke();
             Claim.eq(100, emission.Length);
             for(var i=0; i< emission.Length; i++)

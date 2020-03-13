@@ -15,16 +15,16 @@ namespace Z0
 
     public static class Points
     {
-        public static Points<X0,X1> alloc<X0,X1>(int count) 
-            where X0 : unmanaged, IPointed<X0>
-            where X1 : unmanaged, IPointed<X1>
-                => new Het.Point<X0,X1>[count];
+        [MethodImpl(Inline)]
+        public static HomPoint<N2,T> hom<T>(T x0, T x1)
+            where T : unmanaged
+                => new HomPoint<N2, T>(x0,x1);         
 
-        public static Points<X0,X1,X2> alloc<X0,X1,X2>(int count) 
-            where X0 : unmanaged, IPointed<X0>
-            where X1 : unmanaged, IPointed<X1>
-            where X2 : unmanaged, IPointed<X2>
-                => new Het.Point<X0,X1,X2>[count];
+
+        [MethodImpl(Inline)]
+        public static HomPoint<N3,T> hom<T>(T x0, T x1, T x2)
+            where T : unmanaged
+                => new HomPoint<N3, T>(x0,x1,x2);         
 
 
         [MethodImpl(Inline)]
@@ -70,5 +70,24 @@ namespace Z0
             where X1 : unmanaged, IPointed<X1>
             where X2 : unmanaged, IPointed<X2>
                 => points.Cellularize();
+
+
+        [MethodImpl(Inline)]
+        public static HomPoints<N,T> alloc<N,T>(int count, N n = default, T t = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => new Span<HomPoint<N,T>>(new HomPoint<N,T>[count]);
+
+        public static Points<X0,X1> alloc<X0,X1>(int count) 
+            where X0 : unmanaged, IPointed<X0>
+            where X1 : unmanaged, IPointed<X1>
+                => new Het.Point<X0,X1>[count];
+
+        public static Points<X0,X1,X2> alloc<X0,X1,X2>(int count) 
+            where X0 : unmanaged, IPointed<X0>
+            where X1 : unmanaged, IPointed<X1>
+            where X2 : unmanaged, IPointed<X2>
+                => new Het.Point<X0,X1,X2>[count];
+
     }
 }

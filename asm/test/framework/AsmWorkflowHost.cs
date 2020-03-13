@@ -61,8 +61,8 @@ namespace Z0.Asm
             if(ArtifactValidationDisabled)
                 return;
 
-            var control = V.AsmValidator.Create(Context, this, RootEmissionPath);
-            control.CheckAsm();
+            var workflow = V.ValididationWorkflow.Create(Context, this, RootEmissionPath);
+            workflow.Execute();
         }
 
         public override void Dispose()

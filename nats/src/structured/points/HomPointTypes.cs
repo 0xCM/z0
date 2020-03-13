@@ -18,8 +18,36 @@ namespace Z0
     {        
         public readonly T[] data;        
 
+        public ref T this[N0 n]
+        {
+            get => ref data[0];
+        }
+
+        public ref T this[N1 n]
+        {
+            get => ref data[1];
+        }
+
+        public ref T this[N2 n]
+        {
+            get => ref data[2];
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator HomPoint<N,T>(T x)
+            => new HomPoint<N,T>(x);         
+
+        [MethodImpl(Inline)]
+        public static implicit operator HomPoint<N,T>((T x0, T x1) x)
+            => new HomPoint<N,T>(x);         
+
+        [MethodImpl(Inline)]
+        public static implicit operator HomPoint<N,T>((T x0, T x1, T x2) x)
+            => new HomPoint<N,T>(x);         
+
         public int Dimension 
         {
+            [MethodImpl(Inline)]
             get => Nats.natval<N>();
         }
 
@@ -295,6 +323,4 @@ namespace Z0
         public override string ToString()
             => Format();
     }    
-
-
 }

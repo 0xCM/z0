@@ -40,16 +40,15 @@ namespace Z0.Asm.Validation
             this.Executioner = AsmExecControl.Create(context, sink);
         }                
 
-        public void CheckExecution(in BufferSeq buffers, ApiMemberCode code)
+        public void Execute(in BufferSeq buffers, ApiMemberCode code)
         {
-            Executioner.CheckExecution(buffers, code);
+            Executioner.EvalBinaryOp(buffers, code);
         }
 
-        public void CheckExecution(in BufferSeq buffers, ApiMemberCode[] code)
+        public void Execute(in BufferSeq buffers, ApiMemberCode[] code)
         {
-            Executioner.CheckExecution(buffers, code);
+            Executioner.EvalBinaryOp(buffers, code);
         }
-
 
         /// <summary>
         /// Retrieves the members defined by an api host

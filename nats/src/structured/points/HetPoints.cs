@@ -13,24 +13,6 @@ namespace Z0
 
     using Het = HetPoints;
 
-    public static class PointOps
-    {
-        [MethodImpl(Inline)]
-        public static Points<P> Index<P>(this Span<P> src)
-            where P : unmanaged, IPointCell<P>
-                => src;
-
-        [MethodImpl(Inline)]
-        public static Points<P> Index<P>(this P[] src)
-            where P : unmanaged, IPointCell<P>
-                => src;
-
-        [MethodImpl(Inline)]
-        public static Points<P> Index<P>(this IEnumerable<P> src)
-            where P : unmanaged, IPointCell<P>
-                => src.ToArray();
-    }
-
     public readonly ref struct Points<P>
         where P : unmanaged, IPointCell<P>
     {
@@ -137,16 +119,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public Points<Het.Point<X0,X1>> Cellularize()
             => Data;
-
     }
 
     public readonly ref struct Points<X0,X1,X2>
-        where X0 : unmanaged, IPointed<X0>
-        where X1 : unmanaged, IPointed<X1>
-        where X2 : unmanaged, IPointed<X2>
+        where X0 : unmanaged
+        where X1 : unmanaged
+        where X2 : unmanaged
     {
-        readonly Span<Het.Point<X0,X1,X2>> Data;
-        
+        readonly Span<Het.Point<X0,X1,X2>> Data;        
 
         [MethodImpl(Inline)]
         public static implicit operator Points<X0,X1,X2>(Het.Point<X0,X1,X2>[] src)

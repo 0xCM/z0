@@ -9,33 +9,10 @@ namespace Z0.Asm.Validation
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Z0.Root;
+    using static Root;
     using static time;
-    using static Z0.Nats;
-    using static Z0.BufferSeqId;
-    using Z0;
-    using Z0.Asm;
-
-    public interface IAsmExecutor : IAsmWorkflowService
-    {
-        AsmExecResult ExecAction(Action action, OpUri f);   
-
-        AsmExecResult ExecAction(Action action, OpUri f, OpUri g);        
-
-        AsmExecResult MatchBinaryOps(in BufferSeq buffers, FixedWidth width, in ConstPair<ApiMemberCode> paired);
-
-        FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode code, int count)
-            where F : unmanaged, IFixed;
-
-        Span<P> ExecBinaryOp<P>(in BufferSeq buffers, in ApiMemberCode code, int count, ISpanEmitter<P> cases)
-            where P:unmanaged, IPointCell<P>;
-
-
-        FixedIndex<F, T> ExecBinaryOp<F,T>(in BufferSeq buffers, in ApiMemberCode code, int count)
-            where F : unmanaged, IFixed
-            where T : unmanaged;
-
-    }
+    using static Nats;
+    using static BufferSeqId;
 
     class AsmExecutor : IAsmExecutor
     {
@@ -63,14 +40,23 @@ namespace Z0.Asm.Validation
             [MethodImpl(Inline)]
             get => increment(ref _checkseq);
         }
-
-
-        public Span<P> ExecBinaryOp<P>(in BufferSeq buffers, in ApiMemberCode code, int count, ISpanEmitter<P> cases) 
-            where P : unmanaged, IPointCell<P>
-        {
-            throw new NotImplementedException();
-        }
         
+        public HomPoints<N3,T> EvaluateOperator<T>(in BufferSeq buffers, in ApiMemberCode code, HomPoints<N2,T> src)
+            where T : unmanaged
+        {
+            var count = src.Count;
+            var f = buffers[Left].EmitBinaryOp<T>(code);
+            var dst = Points.alloc<N3,T>(src.Count);
+            for(var i=0; i<count; i++)
+            {
+                var point = src[i];
+                ref readonly var x0 = ref point[n0];
+                ref readonly var x1 = ref point[n1];
+                dst[i] = (x0, x1, f(x0,x1));
+            }
+            return dst;
+        }
+
         public FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode code, int count)
             where F : unmanaged, IFixed
         {
@@ -348,7 +334,5 @@ namespace Z0.Asm.Validation
                 return AsmExecResult.Define(seq, (f,g), clock, e);
             }
         }
-
-
     }
 }
