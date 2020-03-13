@@ -43,5 +43,10 @@ namespace Z0
         public static TernaryOp<T> AsTernaryOp<T>(this IBufferToken buffer, OpIdentity id)
             where T : unmanaged
                 => (TernaryOp<T>)buffer.AsFixedTernaryOp(id,typeof(TernaryOp<T>), typeof(T));
+
+        [MethodImpl(Inline)]
+        static FixedDelegate AsFixedTernaryOp(this IBufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
+            => buffer.Handle.EmitFixedAdapter(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType));
+
     }
 }

@@ -31,6 +31,7 @@ namespace Z0.Asm.Validation
 
         IPolyrand Random => Context.Random;
 
+
         readonly int RepCount;
 
         static int _checkseq;
@@ -41,53 +42,39 @@ namespace Z0.Asm.Validation
             get => increment(ref _checkseq);
         }
         
-        public HomPoints<N3,T> EvaluateOperator<T>(in BufferSeq buffers, in ApiMemberCode code, HomPoints<N2,T> src)
-            where T : unmanaged
-        {
-            var count = src.Count;
-            var f = buffers[Left].EmitBinaryOp<T>(code);
-            var dst = Points.alloc<N3,T>(src.Count);
-            for(var i=0; i<count; i++)
-            {
-                var point = src[i];
-                ref readonly var x0 = ref point[n0];
-                ref readonly var x1 = ref point[n1];
-                dst[i] = (x0, x1, f(x0,x1));
-            }
-            return dst;
-        }
-
-        public FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode code, int count)
+        public FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode src, int count)
             where F : unmanaged, IFixed
         {
-            var emitter = Random.FixedSpanEmitter<F>(count);
-            var a = emitter.Invoke();
-            var b = emitter.Invoke();
-            var dst = FixedIndex.AllocTriple<F>(count);
+            // var emitter = Random.FixedSpanEmitter<F>(count);
+            // var a = emitter.Invoke();
+            // var b = emitter.Invoke();
+            // var dst = FixedIndex.AllocTriple<F>(count);
 
-            var f = buffers[Left].FixedBinaryOp<F>(code);
+            // var f = buffers[Left].LoadFixedBinaryOp<F>(src.ApiCode);
 
-            for(var i=0; i<a.Length; i++)
-                dst[i] = (a[i],b[i],f(a[i],b[i]));
+            // for(var i=0; i<a.Length; i++)
+            //     dst[i] = (a[i],b[i],f(a[i],b[i]));
 
-            return dst;
+            // return dst;
+            return default;
         }
 
-        public FixedIndex<F, T> ExecBinaryOp<F,T>(in BufferSeq buffers, in ApiMemberCode code, int count)
+        public FixedIndex<F, T> ExecBinaryOp<F,T>(in BufferSeq buffers, in ApiMemberCode src, int count)
             where F : unmanaged, IFixed
             where T : unmanaged
         {
-            var emitter = Random.FixedSpanEmitter<F, T>(count);
-            var a = emitter.Invoke();
-            var b = emitter.Invoke();
-            var dst = new F[count];
+            // var emitter = Random.FixedSpanEmitter<F, T>(count);
+            // var a = emitter.Invoke();
+            // var b = emitter.Invoke();
+            // var dst = new F[count];
 
-            var f = buffers[Left].FixedBinaryOp<F>(code);
+            // var f = buffers[Left].LoadFixedBinaryOp<F>(src.ApiCode);
 
-            for(var i=0; i<a.Length; i++)
-                dst[i] = f(a[i],b[i]);
+            // for(var i=0; i<a.Length; i++)
+            //     dst[i] = f(a[i],b[i]);
 
-            return FixedIndex.From<F,T>(dst);
+            // return FixedIndex.From<F,T>(dst);
+            return default;
         }
 
         public AsmExecResult MatchBinaryOps(in BufferSeq buffers, FixedWidth w, in ConstPair<ApiMemberCode> paired)
@@ -127,43 +114,43 @@ namespace Z0.Asm.Validation
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N8 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].FixedBinaryOp(w, pair.A);
-            var g = buffers[Right].FixedBinaryOp(w, pair.B);
+            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N16 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].FixedBinaryOp(w, pair.A);
-            var g = buffers[Right].FixedBinaryOp(w, pair.B);
+            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N32 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].FixedBinaryOp(w, pair.A);
-            var g = buffers[Right].FixedBinaryOp(w, pair.B);
+            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N64 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].FixedBinaryOp(w, pair.A);
-            var g = buffers[Right].FixedBinaryOp(w, pair.B);
+            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N128 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].FixedBinaryOp(w, pair.A);
-            var g = buffers[Right].FixedBinaryOp(w, pair.B);
+            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N256 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].FixedBinaryOp(w, pair.A);
-            var g = buffers[Right].FixedBinaryOp(w, pair.B);
+            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 

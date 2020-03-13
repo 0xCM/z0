@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The executable source</param>
         /// <typeparam name="T">The concrete token type</typeparam>
         [MethodImpl(Inline)]
-        public static T Load<T>(this T dst, in AsmCode src)
+        public static T Load<T>(this T dst, in BinaryCode src)
             where T : IBufferToken
         {
             dst.Fill(src.Bytes);
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
         [MethodImpl(Inline)]
-        public static FixedTernaryOp<F> LoadFixedTernaryOp<F>(this IBufferToken dst, in AsmCode src)
+        public static FixedTernaryOp<F> LoadFixedTernaryOp<F>(this IBufferToken dst, in ApiCode src)
             where F : unmanaged, IFixed
                 => (FixedTernaryOp<F>)dst.Handle.EmitFixedAdapter(src.Id,  typeof(FixedTernaryOp<F>), typeof(F), typeof(F), typeof(F), typeof(F));
 
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,R> LoadFixedFunc<X0,R>(this IBufferToken dst, in AsmCode src)
+        public static FixedFunc<X0,R> LoadFixedFunc<X0,R>(this IBufferToken dst, in ApiCode src)
             where X0 : unmanaged, IFixed
             where R : unmanaged, IFixed
                 => (FixedFunc<X0,R>)dst.Handle.EmitFixedAdapter(src.Id, typeof(FixedFunc<X0,R>), typeof(R), typeof(X0));
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,X1,R> LoadFixedFunc<X0,X1,R>(this IBufferToken dst, in AsmCode src)
+        public static FixedFunc<X0,X1,R> LoadFixedFunc<X0,X1,R>(this IBufferToken dst, in ApiCode src)
             where X0 : unmanaged, IFixed
             where X1 : unmanaged, IFixed
             where R : unmanaged, IFixed
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
         [MethodImpl(Inline)]
-        public static FixedFunc<X0,X1,X2,R> LoadFixedFunc<X0,X1,X2,R>(this IBufferToken dst, in AsmCode src)
+        public static FixedFunc<X0,X1,X2,R> LoadFixedFunc<X0,X1,X2,R>(this IBufferToken dst, in ApiCode src)
             where X0 : unmanaged, IFixed
             where X1 : unmanaged, IFixed
             where X2 : unmanaged, IFixed

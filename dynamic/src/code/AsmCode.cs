@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a block of encoded assembly
     /// </summary>
-    public readonly struct AsmCode : IFormattable<AsmCode>
+    public readonly struct AsmCode : IFormattable<AsmCode>, IByteSpanProvider<AsmCode>
     {
         /// <summary>
         /// The canonical zero
@@ -59,11 +59,20 @@ namespace Z0
         public static AsmCode Define(OpIdentity id, MemoryAddress @base, byte[] data)
             => new AsmCode(id, MemoryExtract.Define(@base,data));
 
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(in AsmCode src)
+            => BinaryCode.Define(src.Data.Bytes);
 
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
             get => Data.Bytes;
+        }
+
+        public BinaryCode BinaryCode
+        {
+            [MethodImpl(Inline)]
+            get => BinaryCode.Define(Data.Bytes);
         }
 
         public int Length
@@ -81,6 +90,11 @@ namespace Z0
             get => Data.IsEmpty;
         }
 
+        public ApiCode ApiCode
+        {
+            [MethodImpl(Inline)]
+            get => ApiCode.Define(Id, Data.Bytes);
+        }
 
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes

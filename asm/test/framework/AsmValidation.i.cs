@@ -23,11 +23,15 @@ namespace Z0.Asm.Validation
         void Execute(in BufferSeq buffers, ApiMemberCode[] code);        
     }
 
-    public interface IAsmExecControl : IAsmWorkflowService
+    public interface IAsmEvalDispatcher : IAsmWorkflowService
     {
-        bit EvalBinaryOp(in BufferSeq buffers, ApiMemberCode api);        
+        bit EvalOperator(in BufferSeq buffers, ApiMemberCode api);        
 
-        bit EvalBinaryOp(in BufferSeq buffers, ApiMemberCode[] api);
+        bit EvalOperators(in BufferSeq buffers, ApiMemberCode[] api);
+
+        bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api);
+
+        bit EvalFixedOperator(in BufferSeq buffers, in ApiMemberCode api);
     }
 
     public interface IAsmExecutor : IAsmWorkflowService
@@ -35,11 +39,6 @@ namespace Z0.Asm.Validation
         AsmExecResult ExecAction(Action action, OpUri f);   
 
         AsmExecResult ExecAction(Action action, OpUri f, OpUri g);        
-
-        AsmExecResult MatchBinaryOps(in BufferSeq buffers, FixedWidth width, in ConstPair<ApiMemberCode> paired);
-
-        HomPoints<N3,T> EvaluateOperator<T>(in BufferSeq buffers, in ApiMemberCode code, HomPoints<N2,T> src)
-            where T : unmanaged;
 
         FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode code, int count)
             where F : unmanaged, IFixed;

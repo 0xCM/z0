@@ -23,7 +23,7 @@ namespace Z0
         public void rng_point_span_emitter()
         {
             
-            var emitter = Random.LoadPointSpanEmitter(100, (z8,z16,z32));
+            var emitter = Random.PointSpanEmitter(100, (z8,z16,z32));
             var emisson = emitter.Invoke();
             Claim.eq(100, emisson.Length);
 

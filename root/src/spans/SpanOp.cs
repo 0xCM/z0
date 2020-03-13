@@ -19,15 +19,4 @@ namespace Z0
 
         }
     }    
-
-    public static class SpanOpTagOps
-    {
-
-        /// <summary>
-        /// Determines whether a method is classified as a span op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsSpanOp(this MethodInfo m)
-            => m.Tagged<SpanOpAttribute>();
-    }
 }

@@ -57,4 +57,11 @@ namespace Z0
         public override string ToString()
             => IsNone ? string.Empty :  OperandType.DisplayName().Replicate(OperatorClass.Arity() + 1).Intersperse(ArrowSymbols.AsciArrow).Concat();        
     }
+
+    partial class ReflectedClass
+    {
+
+        public static TypedOperatorClass ClassifyTypedOperator(this MethodInfo src)
+            => TypedOperatorClass.Infer(src);
+    }        
 }

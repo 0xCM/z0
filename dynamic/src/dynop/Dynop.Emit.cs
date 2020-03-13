@@ -15,26 +15,31 @@ namespace Z0
 
     partial class Dynop
     {
-        [MethodImpl(Inline)]
-        public static FixedBinaryOp<F> EmitFixedBinaryOp<F>(this IBufferToken buffer, in AsmCode src)
-            where F : unmanaged, IFixed
-                => (FixedBinaryOp<F>)buffer.Load(src).AsFixedBinaryOp(src.Id, typeof(FixedBinaryOp<F>), typeof(F));
 
-        /// <summary>
-        /// Creates a binary operator over a primal type to execute specified asm code
-        /// </summary>
-        /// <param name="id">Identity conferred upon the manufactured operator</param>
-        /// <param name="buffer">A pointer to executable memory loaded with selected code</param>
-        /// <typeparam name="T">The primal operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, OpIdentity id)
+        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, in ApiCode src)
+            where T : unmanaged
+                => buffer.Load(src.Data).AsFixedBinaryOp<T>(src.Id);
+
+        [MethodImpl(Inline)]
+        static BinaryOp<T> AsFixedBinaryOp<T>(this IBufferToken buffer, OpIdentity id)
             where T : unmanaged
                 => (BinaryOp<T>)buffer.AsFixedBinaryOp(id,typeof(BinaryOp<T>), typeof(T));
 
-        [MethodImpl(Inline)]
-        public static BinaryOp<T> EmitBinaryOp<T>(this IBufferToken buffer, in AsmCode src)
+        public static DynamicDelegate<UnaryBlockedOp128<T>> ImmBlockedUnaryOp<T>(N128 w, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
-                => buffer.Load(src).EmitBinaryOp<T>(src.Id);
+        {
+            var reified = src.Reify(typeof(T));
+            var operand = typeof(Block128<T>); 
+            var generated = DynamicSignature(reified.Name, reified.DeclaringType, @return: operand, args: array(operand, operand));            
+            var gen = generated.GetILGenerator();
+            gen.Emit(OpCodes.Ldarg_0);
+            gen.EmitImmLoad(imm8);
+            gen.Emit(OpCodes.Ldarg_1);
+            gen.EmitCall(OpCodes.Call, reified, null);
+            gen.Emit(OpCodes.Ret);
+            return generated.CreateDynamicDelegate<UnaryBlockedOp128<T>>(id.WithImm8(imm8), reified);
+        }
 
         /// <summary>
         /// Creates a binary operator delegate from a conforming method that is optionally invoked via the Calli opcode

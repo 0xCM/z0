@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IIndexed<T> : ICountable<int>
+    public interface IIndexed<T> : ICounted<int>
     {
         T this[int i] {get;}
     }

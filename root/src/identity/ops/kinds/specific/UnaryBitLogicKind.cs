@@ -8,10 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static OpKindId;    
-    
-    using A = OpKindAttribute;
-    using K = UnaryBitLogicKind;
 
     /// <summary>
     /// Classifies unary logic operators
@@ -37,13 +33,6 @@ namespace Z0
         /// The unary operator that always returns true
         /// </summary>
         True = 0b11,
-    }
-
-    public sealed class NotAttribute : A { public NotAttribute() : base(Not) {} }
-
-    partial class OpKinds
-    {
-        public readonly struct Not : IOpKind<Not,K> { public K Kind { [MethodImpl(Inline)] get => K.Not;}}
     }
 
     partial class ClassifierFormat

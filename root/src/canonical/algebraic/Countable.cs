@@ -9,17 +9,17 @@ namespace Z0
 
     using static Root;
 
-    public interface ICountable
+    public interface ICounted
     {
         ulong Count {get;}
     }
 
-    public interface ICountable<T> : ICountable
+    public interface ICounted<T> : ICounted
         where T : unmanaged
     {
         new T Count {get;}
 
-        ulong ICountable.Count
+        ulong ICounted.Count
         {
             [MethodImpl(Inline)]
             get => Cast.to<T,ulong>(Count);

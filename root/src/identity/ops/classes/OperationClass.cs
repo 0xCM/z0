@@ -13,15 +13,108 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Defines a methods equivalence class: a method is either an action or a function
+    /// Classifes an operation in various ways
     /// </summary>
+    [Flags]
     public enum OperationClass : ulong
     {
         None = 0,
 
-        Action = Pow2.T55,
+        /// <summary>
+        /// Classifies operations as those with void return
+        /// </summary>        
+        Action = 1,
 
-        Function = Pow2.T56,
+        /// <summary>
+        /// Classifies operations as those with non-void return
+        /// </summary>        
+        Function = 2,
+        
+        /// <summary>
+        /// Classifies an operation that accepts no arguments
+        /// </summary>        
+        Nullary = 4,
+
+        /// <summary>
+        /// Classifies an operation that accepts 1 argument
+        /// </summary>        
+        Unary = 8,
+
+        /// <summary>
+        /// Classifies an operation that accepts 2 arguments
+        /// </summary>        
+        Binary = 16,
+
+        /// <summary>
+        /// Classifies an operation that accepts 3 arguments
+        /// </summary>        
+        Ternary = 32,
+
+        /// <summary>
+        /// Classifies functions for which operands, totgeher with the return type, are homogenous
+        /// </summary>        
+        Operator = 64,
+
+        
+        /// <summary>
+        /// Classifies functions that adjudicate boolen truth predicated on input values and
+        /// report said adjudication by returning a bit (0/1) or system boolean value
+        /// </summary>        
+        Predicate = 128,
+        
+        
+        /// <summary>
+        /// Classifies an operation as a receiver
+        /// </summary>        
+        Receiver = Action | Unary,
+
+        /// <summary>
+        /// Classifies an operation as an emitter
+        /// </summary>        
+        Emitter = Function | Nullary,
+
+        /// <summary>
+        /// Classifies an operation as a unary function
+        /// </summary>        
+        UnaryFunction = Unary | Function,
+
+        /// <summary>
+        /// Classifies an operation as a binary function
+        /// </summary>        
+        BinaryFunction = Binary | Function,
+
+        /// <summary>
+        /// Classifies an operation as a ternary function
+        /// </summary>        
+        TernaryFunction = Ternary | Function,
+
+        UnaryAction = Unary | Action,
+
+        BinaryAction = Binary | Action,
+
+        TernaryAction = Ternary | Action,
+
+        UnaryOperator = Operator | Unary | Function,
+
+        BinaryOperator = Operator | Binary | Function,
+
+        TernaryOperator = Operator | Ternary | Function,
+
+        /// <summary>
+        /// Classifies an operation as a unary predicate
+        /// </summary>        
+        UnaryPred = Predicate | UnaryFunction,
+
+        /// <summary>
+        /// Classifies an operation as a binary predicate
+        /// </summary>        
+        BinaryPred = Predicate  | BinaryFunction,
+
+        /// <summary>
+        /// Classifies an operation as a ternary predicate
+        /// </summary>        
+        TernaryPred = Predicate  | TernaryFunction,                        
+
     }
 
     partial class ReflectedClass
@@ -40,28 +133,18 @@ namespace Z0
         public static bool IsFunction(this MethodInfo m)
             => ! m.HasVoidReturn();
 
-        public static OperationClass ClassifyOperation(this MethodInfo m)            
-            => m.IsAction() ? OperationClass.Action : OperationClass.Function;
-
-        /// <summary>
-        /// Queries the stream for methods with a specified operation classification
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        public static IEnumerable<MethodInfo> WithOperationClass(this IEnumerable<MethodInfo> src, OperationClass @class)
-            => from m in src where m.ClassifyOperation() == @class select m;
-
         /// <summary>
         /// Queries the stream for methods that are functions
         /// </summary>
         /// <param name="src">The source stream</param>
         public static IEnumerable<MethodInfo> Functions(this IEnumerable<MethodInfo> src)
-            => from m in src where m.ClassifyOperation() == OperationClass.Function select m;
+            => src.Where(IsFunction);
 
         /// <summary>
         /// Queries the stream for methods that are actions
         /// </summary>
         /// <param name="src">The source stream</param>
         public static IEnumerable<MethodInfo> Actions(this IEnumerable<MethodInfo> src)
-            => from m in src where m.ClassifyOperation() == OperationClass.Action select m;
+            => src.Where(IsAction);
     }
 }

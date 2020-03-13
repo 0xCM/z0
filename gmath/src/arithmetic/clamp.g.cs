@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="max">The maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Clamp, NumericClosures(NumericKind.Integers)]
         public static T clamp<T>(T a, T b)
             where T : unmanaged
         {

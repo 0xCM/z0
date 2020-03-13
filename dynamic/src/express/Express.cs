@@ -62,8 +62,8 @@ namespace Z0
         /// <typeparam name="Y">The return type</typeparam>
         /// <param name="m">The source method</param>
         /// <param name="instance">An object instance for the method, if applicable</param>
-        public static Option<Func<X, Y>> func<X, Y>(MethodInfo m, object instance = null)
-            => Root.Try(() => (Func<X, Y>)_cache.GetOrAdd(m, method =>
+        public static Option<Func<X,Y>> func<X,Y>(MethodInfo m, object instance = null)
+            => Root.Try(() => (Func<X,Y>)_cache.GetOrAdd(m, method =>
             {
                 var args = items(paramX<X>("x1"));
                 var f = call(instance, m, args.ToArray());
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="declarer">The declaring type</param>
         /// <param name="name">The name of the method</param>
         /// <param name="instance">An object instance for the method, if applicable</param>
-        public static Option<Func<X, Y>> func<X, Y>(Type declarer, string name, object instance = null)
+        public static Option<Func<X,Y>> func<X,Y>(Type declarer, string name, object instance = null)
             => from m in declarer.MatchMethod(name, typeof(X))
                 from f in func<X, Y>(m, instance)
                 select f;
@@ -99,7 +99,6 @@ namespace Z0
             var del = l.Compile();
             return x => del.DynamicInvoke(x);
         }
-
 
         /// <summary>
         /// Creates and caches a function delegate for a method realizing a function f:(X1,X2) -> Y
@@ -242,12 +241,20 @@ namespace Z0
             where T : Delegate => XPR.Lambda<T>(body);
 
         /// <summary>
+        /// Creates a an emitter expression
+        /// </summary>
+        /// <param name="parameters">The expression parameters</param>
+        /// <param name="body">The expression body</param>
+        public static Expression<Func<T>> emitter<T>(XPR body)
+            => XPR.Lambda<Func<T>>(body);
+
+        /// <summary>
         /// Creates a 1-argument lambda expression
         /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="body"></param>
+        /// <param name="parameters">The expression parameters</param>
+        /// <param name="body">The expression body</param>
         public static Expression<Func<X, Y>> lambda<X, Y>(IEnumerable<PX> parameters, XPR body)
-                => XPR.Lambda<Func<X, Y>>(body, parameters);
+            => XPR.Lambda<Func<X, Y>>(body, parameters);
 
         /// <summary>
         /// Creates a 2-argument lambda expression

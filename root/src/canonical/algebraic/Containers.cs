@@ -98,7 +98,7 @@ namespace Z0
     }
 
 
-    public interface IFiniteEnumerable<S,T> : IEnumerableContainer<S,T>, ICountable<int>
+    public interface IFiniteEnumerable<S,T> : IEnumerableContainer<S,T>, ICounted<int>
         where S : IFiniteEnumerable<S,T>, new()
     {
 

@@ -20,7 +20,7 @@ namespace Z0
             where F : unmanaged, IFixed
                 => buffers[index].LoadFixedBinaryOp<F>(src);
 
-        public static FixedTernaryOp<F> LoadTernaryOp<F>(this in BufferSeq<F> buffers, int index, AsmCode src)
+        public static FixedTernaryOp<F> LoadTernaryOp<F>(this in BufferSeq<F> buffers, int index, in ApiCode src)
             where F : unmanaged, IFixed
                 => buffers[index].LoadFixedTernaryOp<F>(src);
     }

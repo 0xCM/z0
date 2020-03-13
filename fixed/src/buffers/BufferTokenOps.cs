@@ -38,6 +38,7 @@ namespace  Z0
             }
             else
                 srcBytes.Slice(dst.Size).CopyTo(dstBytes);  
+
             return dst.Content<T>();         
         }
 

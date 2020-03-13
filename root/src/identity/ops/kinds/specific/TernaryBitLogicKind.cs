@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static OpKindId;
-
-    using A = OpKindAttribute;
 
     /// <summary>
     /// Classifies ternary logic and bitwise operators
@@ -1299,8 +1296,6 @@ namespace Z0
         /// </summary>
         XFF = 0xff,
     }    
-
-    public sealed class SelectAttribute : A { public SelectAttribute() : base(Select) {} }
 
     public static class TernaryBitLogicKindOps
     {

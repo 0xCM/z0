@@ -33,6 +33,10 @@ namespace Z0.Asm
             => AsmCode.Define(src.Id,MemoryAddress.Zero, src.Code);
 
         [MethodImpl(Inline)]
+        public static implicit operator ApiCode(ApiMemberCode src)
+            => src.ApiCode;
+
+        [MethodImpl(Inline)]
         ApiMemberCode(HostedMember member, BinaryCode code)
         {
             this.Member = member;
@@ -43,6 +47,12 @@ namespace Z0.Asm
 
         ApiMemberCode INullary<ApiMemberCode>.Empty 
             => Empty;
+
+        public ApiCode ApiCode
+        {
+            [MethodImpl(Inline)]
+            get => ApiCode.Define(Id,Code);
+        }
 
         public string Format(int uripad)
             => text.concat(Member.Uri.Format().PadRight(uripad), Code.Format());

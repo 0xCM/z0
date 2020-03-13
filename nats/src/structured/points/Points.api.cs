@@ -16,10 +16,14 @@ namespace Z0
     public static class Points
     {
         [MethodImpl(Inline)]
+        public static HomPoint<N1,T> hom<T>(T x0)
+            where T : unmanaged
+                => new HomPoint<N1, T>(x0);         
+        
+        [MethodImpl(Inline)]
         public static HomPoint<N2,T> hom<T>(T x0, T x1)
             where T : unmanaged
                 => new HomPoint<N2, T>(x0,x1);         
-
 
         [MethodImpl(Inline)]
         public static HomPoint<N3,T> hom<T>(T x0, T x1, T x2)

@@ -5,13 +5,15 @@
 namespace Z0
 {        
     using System;
-    
+
     /// <summary>
     /// Defines operand kind identifiers
     /// </summary>
     public enum OpKindId : ulong
     {
-        False = 0,
+        None = 0,
+
+        False = 1,
 
         And,
 
@@ -67,9 +69,15 @@ namespace Z0
 
         Div,
 
+        Divides,
+
         Mod,
 
         Clamp,
+
+        Distance,
+
+        Dot,
 
         Sll = 300,
 
@@ -119,6 +127,5 @@ namespace Z0
 
         public static string Format(this OpKindId? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
-
-    }
+    }   
 }

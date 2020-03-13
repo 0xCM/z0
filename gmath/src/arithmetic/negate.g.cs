@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Negate, NumericClosures(NumericKind.Integers)]
         public static T negate<T>(T src)
             where T : unmanaged
             => negate_u(src);

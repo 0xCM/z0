@@ -11,10 +11,17 @@ namespace Z0
 
     using static Root;
 
+
+    public interface IBinaryCode<T> : IFormattable<BinaryCode>, INullary<BinaryCode>, IEquatable<BinaryCode>, IIndexed<byte>, ILengthwise, IByteSpanProvider<BinaryCode>, ICounted<int>
+        where T : IBinaryCode<T>
+    {
+
+    }
+
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
     /// </summary>
-    public readonly struct BinaryCode : IFormattable<BinaryCode>, INullary<BinaryCode>, IEquatable<BinaryCode>, IIndexed<byte>, ILengthwise
+    public readonly struct BinaryCode : IBinaryCode<BinaryCode>
     {
         /// <summary>
         /// The canonical zero
@@ -24,7 +31,7 @@ namespace Z0
         /// <summary>
         /// The encoded bytes
         /// </summary>
-        public readonly byte[] Bytes;
+        readonly byte[] Data;
 
         /// <summary>
         /// Defines a block of encoded data based at a specifed address
@@ -36,7 +43,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static implicit operator byte[](BinaryCode src)
-            => src.Bytes;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(byte[] src)
@@ -44,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(BinaryCode src)
-            => src.Bytes;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static bool operator==(BinaryCode a, BinaryCode b)
@@ -54,29 +61,28 @@ namespace Z0
         public static bool operator!=(BinaryCode a, BinaryCode b)
             => !a.Equals(b);
 
-
         [MethodImpl(Inline)]
         BinaryCode(byte[] bytes)
         {
-            this.Bytes = bytes;
+            this.Data = bytes;
         }
         
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Bytes.Length;
+            get => Data.Length;
         }
 
         public int Count
         {
             [MethodImpl(Inline)]
-            get => Bytes.Length;
+            get => Data.Length;
         }
 
         public byte LastByte
         {
             [MethodImpl(Inline)]
-            get => Bytes.LastOrDefault();
+            get => Data.LastOrDefault();
         }
 
         /// <summary>
@@ -85,7 +91,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Length == 0 ) || (Length == 1 && Bytes[0] == 0);
+            get => (Length == 0 ) || (Length == 1 && Data[0] == 0);
         }
 
         public bool IsNonEmpty
@@ -94,13 +100,19 @@ namespace Z0
             get => !IsEmpty;
         }
 
+        public ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         BinaryCode INullary<BinaryCode>.Empty 
             => Empty;
 
-        public byte this[int i] { [MethodImpl(Inline)] get=> Bytes[i]; }
+        public byte this[int i] { [MethodImpl(Inline)] get=> Data[i]; }
 
         public string Format()
-            => Bytes.FormatHex();
+            => Data.FormatHex();
 
         
         public override string ToString() 
@@ -109,13 +121,13 @@ namespace Z0
         public bool Equals(BinaryCode rhs)
         {
             if(this.IsNonEmpty && rhs.IsNonEmpty)
-                return Bytes.SequenceEqual(rhs.Bytes);
+                return Data.SequenceEqual(rhs.Data);
             else
                 return false;
         }
 
         public override int GetHashCode()
-            => Bytes.GetHashCode();
+            => Data.GetHashCode();
         
         public override bool Equals(object src)
             => src is BinaryCode c && Equals(c);

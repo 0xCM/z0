@@ -13,7 +13,6 @@ namespace Z0
     using static Root;
     using static ArityClass;
 
-
     /// <summary>
     /// Defines higher-kinded function classifications
     /// </summary>
@@ -134,7 +133,7 @@ namespace Z0
 
         Fixed = Pow2.T49,     
 
-        Function = OperationClass.Function
+        Function = Pow2.T56
 
     } 
 

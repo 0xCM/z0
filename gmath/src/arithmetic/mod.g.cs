@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Mod, NumericClosures(NumericKind.Integers)]
         public static T mod<T>(T a, T m)
             where T : unmanaged
         {

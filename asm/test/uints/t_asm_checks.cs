@@ -120,7 +120,6 @@ namespace Z0
             }
         }
 
-
         void CheckUnaryOp<F>(in AsmBuffers buffers, in FixedAsm<F> a, in FixedAsm<F> b)
             where F : unmanaged, IFixedWidth
         {            
@@ -130,7 +129,7 @@ namespace Z0
             var f = buffers.LeftExec.LoadFixedUnaryOp<F>(a.Code);
             var g = buffers.RightExec.LoadFixedUnaryOp<F>(b.Code);            
 
-            var stream = Random.FixedStream<F>();
+            var stream = Random.StreamFixed<F>();
             if(stream == null)
                 Claim.fail($"random stream null!");
 

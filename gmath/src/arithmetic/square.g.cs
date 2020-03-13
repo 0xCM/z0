@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Square, NumericClosures(NumericKind.Integers)]
         public static T square<T>(T a)
             where T : unmanaged
                 => square_u(a);

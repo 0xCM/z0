@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static MathSvcHosts;
     
-    using OT = OpKinds;    
+    using OT = BitLogicKinds;    
 
     partial class MathSvcFactory
     {
@@ -77,23 +77,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T eval<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IBitLogicKind      
                 => eval_1(kind,a,b);
 
         [MethodImpl(Inline)]
         public static T eval<T,K>(K kind, T a)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IBitLogicKind      
                 => eval_1(kind,a);
 
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IBitLogicKind      
         {
-            if(typeof(K) == typeof(OT.Negate))
-                return negate<T>().Invoke(a);
-            else if(typeof(K) == typeof(OT.Not))
+            if(typeof(K) == typeof(OT.Not))
                 return not<T>().Invoke(a);
             else 
                 throw unsupported<T>();
@@ -102,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IBitLogicKind      
         {
             if(typeof(K) == typeof(OT.And))
                 return and<T>().Invoke(a,b);
@@ -123,7 +121,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static T eval_2<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IBitLogicKind      
         {
             if(typeof(K) == typeof(OT.Impl))
                 return impl<T>().Invoke(a,b);

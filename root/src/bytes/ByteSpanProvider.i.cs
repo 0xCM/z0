@@ -6,15 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Root;
 
-    partial class Dynop
+    public interface IByteSpanProvider
+    {
+        ReadOnlySpan<byte> Bytes {get;}
+    }
+
+    public interface IByteSpanProvider<T> : IByteSpanProvider
+        where T : IByteSpanProvider<T>
     {
 
-        [MethodImpl(Inline)]
-        public static FixedDelegate AsFixedTernaryOp(this IBufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
-            => buffer.Handle.EmitFixedAdapter(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType));
-
     }
+
 }

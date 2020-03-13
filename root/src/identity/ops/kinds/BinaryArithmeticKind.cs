@@ -10,29 +10,9 @@ namespace Z0
     using static Root;
     using static OpKindId;
     
-    using Id = OpKindId;
-
+    using K = OpKindId;
     using A = OpKindAttribute;
 
-    /// <summary>
-    /// Classsifies binary arithmetic operators
-    /// </summary>
-    public enum BinaryArithmeticKind : ulong
-    {
-        None = 0,
-
-        Add = Id.Add,
-
-        Sub = Id.Sub,
-
-        Mul = Id.Mul,
-
-        Div = Id.Div,
-
-        Mod = Id.Mod,
-
-        Clamp = Id.Clamp,
-    }    
 
     public sealed class SubAttribute : A { public SubAttribute() : base(Sub) {} }
 
@@ -44,15 +24,16 @@ namespace Z0
 
     public sealed class ClampAttribute : A { public ClampAttribute() : base(Clamp) {} }
 
+    public sealed class DistanceAttribute : A { public DistanceAttribute() : base(Distance) {} }
 
-    partial class ClassifierFormat
+    public sealed class DividesAttribute : A { public DividesAttribute() : base(Divides) {} }
+
+    public sealed class DotAttribute : A { public DotAttribute() : base(Dot) {} }
+
+    partial class OpKinds
     {
-        [MethodImpl(Inline)]
-        public static string Format(this BinaryArithmeticKind kind)
-            => kind.ToString().ToLower();
 
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryArithmeticKind kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
+
     }
+
 }

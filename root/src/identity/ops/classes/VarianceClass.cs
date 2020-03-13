@@ -35,11 +35,9 @@ namespace Z0
             ? Z0.ParamVarianceClass.Out : src.ParameterType.IsByRef 
             ? Z0.ParamVarianceClass.Ref : Z0.ParamVarianceClass.None;
 
-
         [MethodImpl(Inline)]
         public static bool IsSome(this ParamVarianceClass src)        
             => src != ParamVarianceClass.None;
-
 
         public static string Keyword(this ParamVarianceClass src)        
             => src switch{
