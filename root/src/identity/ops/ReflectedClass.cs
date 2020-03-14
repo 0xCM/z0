@@ -31,6 +31,16 @@ namespace Z0
             => m.GetParameters().Where(IsImmediate).Any();
 
         /// <summary>
+        /// Determines whether a method defines an index-identified parameter that requires an 8-bit immediate immediate
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool AcceptsImmediate(this MethodInfo m, int index)        
+        {
+            var parameters = m.GetParameters().ToArray();
+            return parameters.Length > index && parameters[index].IsImmediate();
+        }
+
+        /// <summary>
         /// Determines the numeric kind of a type, possibly none
         /// </summary>
         /// <param name="src">The type to examine</param>

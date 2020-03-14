@@ -124,7 +124,7 @@ public enum AssemblyId : ulong
 
     Dynamic = 290,
 
-    DynamicTest = T29 | Test,
+    DynamicTest = Dynamic | Test,
     
     AsmCore = 300,
 

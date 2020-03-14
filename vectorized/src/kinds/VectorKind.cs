@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static VectorKind;
 
     /// <summary>
     /// Clasifies concrete intrinsic vectors of total width w over components of width t and sign indicator s where:

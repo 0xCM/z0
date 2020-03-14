@@ -17,23 +17,6 @@ namespace Z0
     public readonly struct DynamicDelegate<D>
         where D : Delegate
     {
-        [MethodImpl(Inline)]
-        public static implicit operator DynamicDelegate(DynamicDelegate<D> src)
-            => new DynamicDelegate(src.Id, src.SourceMethod, src.DynamicMethod, src.DynamicOp);
-
-        [MethodImpl(Inline)]
-        public static implicit operator D(DynamicDelegate<D> d)
-            => d.DynamicOp;
-
-        [MethodImpl(Inline)]
-        public DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, D op)
-        {
-            this.Id = id;
-            this.SourceMethod = src;
-            this.DynamicOp = op;
-            this.DynamicMethod = dst;
-        }
-
         /// <summary>
         /// The delegate identity
         /// </summary>
@@ -42,16 +25,38 @@ namespace Z0
         /// <summary>
         /// The method invoked by the dynamic operator that provides the substance of the operation
         /// </summary>
-        public readonly MethodInfo SourceMethod;
+        public readonly MethodInfo Source;
+
+        /// <summary>
+        /// The dynamically-generated method that backs the dynamic operator
+        /// </summary>
+        public readonly DynamicMethod Target;           
 
         /// <summary>
         /// The dynamic operation
         /// </summary>
         public readonly D DynamicOp;
 
-        /// <summary>
-        /// The dynamically-generated method that backs the dynamic operator
-        /// </summary>
-        public readonly DynamicMethod DynamicMethod;           
+
+        [MethodImpl(Inline)]
+        public static implicit operator DynamicDelegate(DynamicDelegate<D> src)
+            => src.AsNonParametric();
+
+        [MethodImpl(Inline)]
+        public static implicit operator D(DynamicDelegate<D> d)
+            => d.DynamicOp;
+
+        [MethodImpl(Inline)]
+        internal DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, D op)
+        {
+            this.Id = id;
+            this.Source = src;
+            this.Target = dst;
+            this.DynamicOp = op;
+        }
+
+        [MethodImpl(Inline)]
+        public DynamicDelegate AsNonParametric()
+            => DynamicDelegate.Define(Id, Source, Target, DynamicOp);
     }
 }

@@ -216,20 +216,21 @@ namespace Z0
             if(def == null)
                 return false;
 
-            return(        
-                def == typeof(Vector128<>) 
-             || def == typeof(Vector256<>) 
-             || def == typeof(Vector1024<>) 
-             || def == typeof(Vector512<>)
-             || def == typeof(Vector1024<>)
-             );
+            return def == typeof(Vector128<>) || def == typeof(Vector256<>) || IntrinsicVectorAttribute.Test(def);
+             
+            // return(        
+            //     def == typeof(Vector128<>) 
+            //  || def == typeof(Vector256<>) 
+            //  || def == typeof(Vector512<>)
+            //  || def == typeof(Vector1024<>)
+            //  );
         }
 
         /// <summary>
         /// Determines whether a type is an intrinsic vector of specified width
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static bool vector(Type t, int? w)        
+        public static bool test(Type t, int? w)        
         {
             if(!test(t))
                 return false;

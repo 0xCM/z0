@@ -33,7 +33,7 @@ namespace Z0
         }
 
         public static CilBody Load(DynamicDelegate src)
-            => Load(src.DynamicMethod);
+            => Load(src.TargetMethod);
         
         /// <summary>
         /// See https://stackoverflow.com/questions/4148297/resolving-the-tokens-found-in-the-il-from-a-dynamic-method/35711376#35711376

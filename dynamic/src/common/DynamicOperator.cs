@@ -14,6 +14,25 @@ namespace Z0
     using static Root;
     using static express;
 
+    public static class DynamicOpFactories
+    {
+        [MethodImpl(Inline)]
+        public static IDynamicEmitterOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N0 n, T t = default)        
+            => new DynamicEmitterOpFactory<T>(context);
+
+        [MethodImpl(Inline)]
+        public static IDynamicUnaryOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N1 n, T t = default)        
+            => new DynamicUnaryOpFactory<T>(context);
+
+        [MethodImpl(Inline)]
+        public static IDynamicBinaryOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N2 n, T t = default)        
+            => new DynamicBinaryOpFactory<T>(context);
+
+        [MethodImpl(Inline)]
+        public static IDynamicTernaryOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N3 n, T t = default)        
+            => new DynamicTernaryOpFactory<T>(context);
+    }
+
     readonly struct DynamicEmitterOpFactory<T> : IDynamicEmitterOpFactory<T>
     {
         public IContext Context {get;}

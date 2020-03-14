@@ -18,64 +18,64 @@ namespace Z0
         /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="w">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Vector128<T> vbroadcast<T>(N128 n, T src)
+        public static Vector128<T> vbroadcast<T>(N128 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vbroadcast_u(n, src);
+                return vbroadcast_u(w, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vbroadcast_i(n, src);
+                return vbroadcast_i(w, src);
             else
-                return vbroadcast_f(n, src);
+                return vbroadcast_f(w, src);
         }
 
         /// <summary>
         /// Projects a scalar value onto each component of a 256-bit vector
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="w">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Vector256<T> vbroadcast<T>(N256 n, T src)
+        public static Vector256<T> vbroadcast<T>(N256 w, T src)
             where T : unmanaged
         {
              if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vbroadcast_u(n, src);
+                return vbroadcast_u(w, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vbroadcast_i(n, src);
+                return vbroadcast_i(w, src);
             else
-                return vbroadcast_f(n, src);
+                return vbroadcast_f(w, src);
        }
 
         /// <summary>
         /// Projects a scalar value onto each component of a 512-bit vector
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="w">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Vector512<T> vbroadcast<T>(N512 n, T src)
+        public static Vector512<T> vbroadcast<T>(N512 w, T src)
             where T : unmanaged
                 => (vbroadcast(n256,src), vbroadcast(n256,src));
 
         [MethodImpl(Inline)]
-        static Vector128<T> vbroadcast_i<T>(N128 n, T src)
+        static Vector128<T> vbroadcast_i<T>(N128 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -89,7 +89,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vbroadcast_u<T>(N128 n, T src)
+        static Vector128<T> vbroadcast_u<T>(N128 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -103,7 +103,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vbroadcast_f<T>(N128 n, T src)
+        static Vector128<T> vbroadcast_f<T>(N128 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -115,7 +115,7 @@ namespace Z0
         }
  
         [MethodImpl(Inline)]
-        static Vector256<T> vbroadcast_i<T>(N256 n, T src)
+        static Vector256<T> vbroadcast_i<T>(N256 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

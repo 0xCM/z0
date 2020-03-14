@@ -95,8 +95,15 @@ namespace Z0
         /// Returns a method's parameter types
         /// </summary>
         /// <param name="m">The method to examine</param>
+        public static IEnumerable<Type> EffectiveParameterTypes(this MethodInfo m)
+            => m.ParameterTypes().Select(t => t.EffectiveType());
+
+        /// <summary>
+        /// Returns a method's parameter types
+        /// </summary>
+        /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool effective)
-            => effective ? m.ParameterTypes().Select(t => t.EffectiveType()) : m.ParameterTypes();
+            => effective ? m.EffectiveParameterTypes() : m.ParameterTypes();
 
         /// <summary>
         /// Determines the type of an index-identified parameter
@@ -131,6 +138,23 @@ namespace Z0
         {
             if(!src.IsConstructedGenericMethod)
                 throw AppErrors.NonGenericMethod(src);
+        }
+
+        public static Option<MethodInfo> FirstMatchedMethod(this Type declarer, string name, params Type[] paramTypes)
+        {
+            foreach(var m in declarer.DeclaredMethods())
+            {
+                var pTypes = m.ParameterTypes(true).ToArray();
+                if(pTypes.Length >= paramTypes.Length)
+                {
+                    var matched = false;
+                    for(var i=0; i<paramTypes.Length; i++)
+                        matched &= (pTypes[i] == paramTypes[i]);
+                    if(matched)
+                        return m;
+                }
+            }
+            return none<MethodInfo>();
         }
 
         /// <summary>

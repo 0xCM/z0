@@ -31,6 +31,9 @@ namespace Z0
         {
 
         }
+
+        protected virtual bool TraceDetailEnabled
+            => false;
         
         /// <summary>
         /// Creates a new stopwatch and optionally start it

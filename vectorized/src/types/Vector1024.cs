@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// 4x256 / 2x512
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 128)]
+    [StructLayout(LayoutKind.Sequential, Size = 128), IntrinsicVector(1024)]
     public readonly struct Vector1024<T>
         where T : unmanaged
     {

@@ -12,10 +12,8 @@ namespace Z0
 
     using static Root;
 
-    /// <summary>
-    /// 2x256
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 64)]
+
+    [StructLayout(LayoutKind.Sequential, Size = 64), IntrinsicVector(512)]
     public readonly struct Vector512<T>
         where T : unmanaged
     {        

@@ -64,6 +64,7 @@ namespace Z0
         public static Vector128<sbyte> vsll(Vector128<sbyte> src, [Imm] byte count)
             => v8i(vsll(src.AsByte(), count));
 
+
         /// <summary>
         /// Shifts each component in the source vector leftwards by a specified number of bits
         /// </summary>
@@ -72,6 +73,16 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vsll(Vector256<sbyte> src, [Imm] byte count)
             => vsll(src.AsByte(), count).AsSByte();
+
+        /// <summary>
+        /// __m128i _mm_slli_epi16 (__m128i a, int immediate) PSLLW xmm, imm8
+        /// Shifts each component of the source vector leftwards by a common number of bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The number of bits to count</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<short> vsll(Vector128<short> src, [Imm] byte count)
+            => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
         /// __m128i _mm_slli_epi16 (__m128i a, int immediate) PSLLW xmm, imm8
@@ -137,15 +148,6 @@ namespace Z0
             return dvec.vand(y,m);
         }
 
-        /// <summary>
-        /// __m128i _mm_slli_epi16 (__m128i a, int immediate) PSLLW xmm, imm8
-        /// Shifts each component of the source vector leftwards by a common number of bits
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="count">The number of bits to count</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<short> vsll(Vector128<short> src, [Imm] byte count)
-            => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
         /// __m256i _mm256_slli_epi16 (__m256i a, int imm8) VPSLLW ymm, ymm, imm8

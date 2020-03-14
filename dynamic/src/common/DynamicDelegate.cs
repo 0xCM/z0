@@ -27,36 +27,56 @@ namespace Z0
         public readonly MethodInfo SourceMethod;
 
         /// <summary>
+        /// The dynamically-generated method that backs the dynamic operator
+        /// </summary>
+        public readonly DynamicMethod TargetMethod;
+
+        /// <summary>
         /// The dynamic operation
         /// </summary>
         public readonly Delegate DynamicOp;
 
-        /// <summary>
-        /// The dynamically-generated method that backs the dynamic operator
-        /// </summary>
-        public readonly DynamicMethod DynamicMethod;
-
-        public static DynamicDelegate<D> Create<D>(DynamicMethod dst, OpIdentity id,  MethodInfo src)
+        [MethodImpl(Inline)]
+        public static DynamicDelegate<D> Create<D>(OpIdentity id, MethodInfo src, DynamicMethod dst)
             where D : Delegate
                 => new DynamicDelegate<D>(id, src,dst, (D)dst.CreateDelegate(typeof(D)));
 
-        public static DynamicDelegate Create(DynamicMethod dst, OpIdentity id, MethodInfo src, Type @delegate)
+        [MethodImpl(Inline)]
+        public static DynamicDelegate Create(OpIdentity id, MethodInfo src, DynamicMethod dst, Type @delegate)
             => new DynamicDelegate(id, src, dst, dst.CreateDelegate(@delegate));
+
+        [MethodImpl(Inline)]
+        public static DynamicDelegate Define(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
+            => new DynamicDelegate(id, src, dst, op);
 
         [MethodImpl(Inline)]
         public static implicit operator Delegate(DynamicDelegate d)
             => d.DynamicOp;
 
         [MethodImpl(Inline)]
-        public DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
+        DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
         {
             this.Id = id;
             this.SourceMethod = src;
-            this.DynamicMethod = dst;
+            this.TargetMethod = dst;
             this.DynamicOp = op;
         }
 
+        /// <summary>
+        /// Invokes the dynamic delegate dynamically
+        /// </summary>
+        /// <param name="args">The arguments to pass to the delegate</param>
+        [MethodImpl(Inline)]
+        public object Invoke(params object[] args)
+            => DynamicOp.DynamicInvoke(args);
 
-
+        /// <summary>
+        /// The existing delegate, parametrically
+        /// </summary>
+        /// <typeparam name="D">The target delegate type</typeparam>
+        [MethodImpl(Inline)]
+        public DynamicDelegate<D> As<D>()
+            where D : Delegate
+                => new DynamicDelegate<D>(Id, SourceMethod, TargetMethod, (D)DynamicOp);
     }
 }

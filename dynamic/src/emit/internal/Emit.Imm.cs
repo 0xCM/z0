@@ -8,17 +8,50 @@ namespace Z0
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Linq;
-
-    using static Root;
-    using static FKT;
-    using static Nats;
 
     partial class Dynop
     {
-        static ILGenerator EmitImmLoad(this ILGenerator g, byte imm)
+        static DynamicDelegate EmitImmV128BinaryOp(OpIdentity id, MethodInfo src, byte imm8, Type tCell)
+        {
+            var wrapped = src.Reify(tCell);
+            var tId = id.WithImm8(imm8);
+            var tOperand = typeof(Vector128<>).MakeGenericType(tCell);  
+            var tOp = typeof(BinaryOp<>).MakeGenericType(tOperand);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
+            return DynamicDelegate.Create(tId, wrapped, target, tOp);
+        }
+
+        static DynamicDelegate EmitImmV256BinaryOp(OpIdentity id, MethodInfo src, byte imm8, Type tCell)
+        {
+            var wrapped = src.Reify(tCell);
+            var tId = id.WithImm8(imm8);
+            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);  
+            var tOp = typeof(BinaryOp<>).MakeGenericType(tOperand);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
+            return DynamicDelegate.Create(tId, wrapped, target, tOp);
+        }
+
+        static DynamicDelegate EmitImmVUnaryOp(Type typedef, OpIdentity id, MethodInfo src, byte imm8, Type tCell)
+        {
+            var wrapped = src.Reify(tCell);
+            var tId = id.WithImm8(imm8);
+            var tOperand = typedef.MakeGenericType(tCell); 
+            var tOp = typeof(UnaryOp<>).MakeGenericType(tOperand);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
+            target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
+            return DynamicDelegate.Create(tId, wrapped, target, tOp);
+        }
+
+        static DynamicDelegate EmitImmV128UnaryOp(OpIdentity id, MethodInfo src, byte imm8, Type tCell)
+            => EmitImmVUnaryOp(typeof(Vector128<>), id, src, imm8, tCell);
+
+        static DynamicDelegate EmitImmV256UnaryOp(OpIdentity id, MethodInfo src, byte imm8, Type tCell)
+            => EmitImmVUnaryOp(typeof(Vector256<>), id, src, imm8, tCell);        
+
+        static ILGenerator EmitImmLoad(this ILGenerator gTarget, byte imm)
         {
             var code = imm switch {
                 0 => OpCodes.Ldc_I4_0,
@@ -33,66 +66,28 @@ namespace Z0
                 _ => OpCodes.Ldc_I4_S
             }; 
             if(imm <= 8)
-                g.Emit(code);
+                gTarget.Emit(code);
             else
-                g.Emit(code, imm);
+                gTarget.Emit(code, imm);
 
-            return g;
+            return gTarget;
         }
 
-        static void EmitImmBinaryCall(this ILGenerator g, MethodInfo reified, byte imm8)        
+        static void EmitImmBinaryCall(this ILGenerator gTarget, MethodInfo wrapped, byte imm8)        
         {
-            g.Emit(OpCodes.Ldarg_0);
-            g.Emit(OpCodes.Ldarg_1);
-            g.EmitImmLoad(imm8);
-            g.EmitCall(OpCodes.Call, reified, null);
-            g.Emit(OpCodes.Ret);
+            gTarget.Emit(OpCodes.Ldarg_0);
+            gTarget.Emit(OpCodes.Ldarg_1);
+            gTarget.EmitImmLoad(imm8);
+            gTarget.EmitCall(OpCodes.Call, wrapped, null);
+            gTarget.Emit(OpCodes.Ret);
         }
 
-        static void EmitImmUnaryCall(this ILGenerator g, MethodInfo reified, byte imm8)        
+        static void EmitImmUnaryCall(this ILGenerator gTarget, MethodInfo wrapped, byte imm8)        
         {
-            g.Emit(OpCodes.Ldarg_0);
-            g.EmitImmLoad(imm8);
-            g.EmitCall(OpCodes.Call, reified, null);
-            g.Emit(OpCodes.Ret);
+            gTarget.Emit(OpCodes.Ldarg_0);
+            gTarget.EmitImmLoad(imm8);
+            gTarget.EmitCall(OpCodes.Call, wrapped, null);
+            gTarget.Emit(OpCodes.Ret);
         }
-
-        static DynamicDelegate EmitImmV128BinaryOp(OpIdentity id, MethodInfo src, byte imm8, Type component)
-        {
-            var reified = src.Reify(component);
-            var operand = typeof(Vector128<>).MakeGenericType(component);  
-            var target = typeof(BinaryOp<>).MakeGenericType(operand);
-            var dst = DynamicSignature(reified.Name, reified.DeclaringType, operand, operand, operand);            
-            var gen = dst.GetILGenerator();
-            dst.GetILGenerator().EmitImmBinaryCall(reified,imm8);
-            return DynamicDelegate.Create(dst, id.WithImm8(imm8),reified, target);
-        }
-
-        static DynamicDelegate EmitImmV256BinaryOp(OpIdentity id, MethodInfo src, byte imm8, Type component)
-        {
-            var reified = src.Reify(component);
-            var operand = typeof(Vector256<>).MakeGenericType(component);  
-            var target = typeof(BinaryOp<>).MakeGenericType(operand);
-            var dst = DynamicSignature(reified.Name, reified.DeclaringType, operand, operand, operand);            
-            var gen = dst.GetILGenerator();
-            dst.GetILGenerator().EmitImmBinaryCall(reified,imm8);
-            return DynamicDelegate.Create(dst, id.WithImm8(imm8),reified, target);
-        }
-
-        static DynamicDelegate EmitImmVUnaryOp(Type typedef, OpIdentity id, MethodInfo inner, byte imm8, Type component)
-        {
-            var reified = inner.Reify(component);
-            var operand = typedef.MakeGenericType(component); 
-            var target = typeof(UnaryOp<>).MakeGenericType(operand);
-            var dst = DynamicSignature(reified.Name, reified.DeclaringType, operand, operand);            
-            dst.GetILGenerator().EmitImmUnaryCall(reified, imm8);
-            return DynamicDelegate.Create(dst, id.WithImm8(imm8), reified, target);
-        }
-
-        static DynamicDelegate EmitImmV128UnaryOp(OpIdentity id, MethodInfo src, byte imm8, Type seg)
-            => EmitImmVUnaryOp(typeof(Vector128<>), id, src, imm8, seg);
-
-        static DynamicDelegate EmitImmV256UnaryOp(OpIdentity id, MethodInfo src, byte imm8, Type seg)
-            => EmitImmVUnaryOp(typeof(Vector256<>), id, src, imm8, seg);        
     }
 }

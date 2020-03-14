@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe DynamicPointer GetDynamicPointer<D>(this DynamicDelegate<D> src)
             where D : Delegate
-                => DynamicPointer.Define(src, src.DynamicMethod.GetNativePointer());
+                => DynamicPointer.Define(src, src.Target.GetNativePointer());
 
         /// <summary>
         /// Returns a dynamic delegate's dynamic pointer
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="src">The source delegate</param>
         [MethodImpl(Inline)]
         public static unsafe DynamicPointer GetDynamicPointer(this DynamicDelegate src)
-            => DynamicPointer.Define(src, src.DynamicMethod.GetNativePointer());
+            => DynamicPointer.Define(src, src.TargetMethod.GetNativePointer());
 
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src) 
             where T : struct
-                => (T)ocast(src.Value, Numeric.kind<T>());
+                => (T)ocast(src.Boxed, Numeric.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -42,7 +42,7 @@ namespace Z0
             try
             {
                 var src = (BoxedNumber)incoming;
-                return ocast(src.Value, dst.NumericKind());
+                return ocast(src.Boxed, dst.NumericKind());
             }
             catch(Exception e)
             {

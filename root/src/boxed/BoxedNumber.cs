@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// In the box
         /// </summary>
-        public readonly object Value;     
+        public readonly object Boxed;     
 
         /// <summary>
         /// Box discriminator for runtime efficiency
@@ -42,23 +42,23 @@ namespace Z0
         [MethodImpl(Inline)]
         BoxedNumber(object src, NumericKind kind)
         {
-            this.Value = src;
+            this.Boxed = src;
             this.Kind = kind;
         }
 
         public bool IsSignedInt
-            => Numeric.signed(Value);
+            => Numeric.signed(Boxed);
 
         public bool IsUnsignedInt
-            => Numeric.unsigned(Value);
+            => Numeric.unsigned(Boxed);
 
         public bool IsFloat
-            => Numeric.floating(Value);
+            => Numeric.floating(Boxed);
 
         [MethodImpl(Inline)]
         public T Unbox<T>()
             where T : unmanaged
-                => (T)Value;
+                => (T)Boxed;
 
         public Biconverter<BoxedNumber> Converter
         {
@@ -68,10 +68,10 @@ namespace Z0
 
         public T Convert<T>()
             where T : unmanaged
-                => (T)typeof(T).NumericKind().Convert(Value);
+                => (T)typeof(T).NumericKind().Convert(Boxed);
 
         public BoxedNumber Convert(NumericKind target)
-            => Define(target.Convert(Value), target);
+            => Define(target.Convert(Boxed), target);
 
         public BoxedNumber Convert(Type target)
             => Convert(target.NumericKind());
@@ -79,19 +79,19 @@ namespace Z0
         IComparable Comparable
         {
             [MethodImpl(Inline)]
-            get => Value as IComparable;
+            get => Boxed as IComparable;
         }
 
         IFormattable Formattable
         {
             [MethodImpl(Inline)]
-            get => Value as IFormattable;
+            get => Boxed as IFormattable;
         }
 
         IConvertible Convertible
         {
             [MethodImpl(Inline)]
-            get => Value as IConvertible;
+            get => Boxed as IConvertible;
         }
 
         [MethodImpl(Inline)]
@@ -184,13 +184,13 @@ namespace Z0
        
         [MethodImpl(Inline)]
         public bool Equals(BoxedNumber other)
-            => Value.Equals(other.Value);
+            => Boxed.Equals(other.Boxed);
 
         public override string ToString()
-            => Value.ToString();
+            => Boxed.ToString();
 
         public override int GetHashCode()
-            => Value.GetHashCode();
+            => Boxed.GetHashCode();
 
         public override bool Equals(object other)
             => other is BoxedNumber n && Equals(n);

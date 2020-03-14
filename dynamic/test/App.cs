@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.DynamicTest)]
+
 namespace Z0
 {        
     
@@ -9,5 +11,14 @@ namespace Z0
     {            
         public static void Main(params string[] args)
             => Run(args);
+    }
+}
+
+namespace Z0.Resolutions
+{        
+    public sealed class DynamicTest : AssemblyResolution<DynamicTest>
+    {
+        public DynamicTest() : base(AssemblyId.DynamicTest) {}
+
     }
 }

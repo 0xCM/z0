@@ -43,6 +43,6 @@ namespace Z0
             => Op.SourceMethod;
 
         public MethodInfo DynamicMethod
-            => Op.DynamicMethod;
+            => Op.TargetMethod;
     }
 }
