@@ -72,8 +72,5 @@ namespace Z0
             var f = factory.Manufacture(m);            
             Claim.eq(f(10,5,5), Add3(10,5,5));        
         }
-
-
     }
-
 }

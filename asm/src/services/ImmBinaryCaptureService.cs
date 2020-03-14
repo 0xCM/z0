@@ -41,7 +41,7 @@ namespace Z0.Asm
 
         public AsmFunction Capture(in OpExtractExchange exchange, byte imm)
         {
-            var op = Dynop.ImmVBinaryDelegate(VK.vk(), Method, BaseId, imm);
+            var op = Dynop.EmitImmVBinaryOp(VK.vk(), Method, BaseId, imm);
             return Context.Decode(Decoder, exchange, op.Id, op);
         }
     }

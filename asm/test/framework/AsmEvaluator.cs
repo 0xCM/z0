@@ -59,7 +59,7 @@ namespace Z0.Asm.Validation
             where F : unmanaged, IFixed
         {
             var count = src.Count;
-            var f = buffers[Left].LoadFixedBinaryOp<F>(api.ApiCode);
+            var f = buffers[Left].EmitFixedBinaryOp<F>(api.ApiCode);
             var dst = Points.alloc<N3,F>(src.Count);
             for(var i=0; i<count; i++)
             {

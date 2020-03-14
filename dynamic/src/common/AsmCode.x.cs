@@ -14,7 +14,6 @@ namespace Z0
 
     public static class AsmCodeExtensions
     {
-
         [MethodImpl(Inline)]
         public static AsmCode WithIdentity(this AsmCode src, OpIdentity id)
             => AsmCode.Define(id, src.Data);
@@ -41,10 +40,5 @@ namespace Z0
             => from code in src
                 where code.ParameterCount() == count
                 select code;
-
-
-        public static AsmCodeIndex ToCodeIndex(this IEnumerable<AsmCode> code)
-            => AsmCodeIndex.Create(code);
-
     }
 }

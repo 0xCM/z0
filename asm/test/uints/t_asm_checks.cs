@@ -126,8 +126,8 @@ namespace Z0
             TraceCaller($"Checking {a.Id} == {b.Id} match");
             
 
-            var f = buffers.LeftExec.LoadFixedUnaryOp<F>(a.Code);
-            var g = buffers.RightExec.LoadFixedUnaryOp<F>(b.Code);            
+            var f = buffers.LeftExec.EmitFixedUnaryOp<F>(a.Code);
+            var g = buffers.RightExec.EmitFixedUnaryOp<F>(b.Code);            
 
             var stream = Random.StreamFixed<F>();
             if(stream == null)

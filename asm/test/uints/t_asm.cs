@@ -273,10 +273,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w,ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w,ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -293,10 +293,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -314,10 +314,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, dCode);
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, dCode);
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, gCode);
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, gCode);
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -335,10 +335,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -355,10 +355,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -375,10 +375,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -395,10 +395,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -415,10 +415,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -435,10 +435,10 @@ namespace Z0
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();

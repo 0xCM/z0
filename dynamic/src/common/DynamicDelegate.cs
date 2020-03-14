@@ -36,6 +36,13 @@ namespace Z0
         /// </summary>
         public readonly DynamicMethod DynamicMethod;
 
+        public static DynamicDelegate<D> Create<D>(DynamicMethod dst, OpIdentity id,  MethodInfo src)
+            where D : Delegate
+                => new DynamicDelegate<D>(id, src,dst, (D)dst.CreateDelegate(typeof(D)));
+
+        public static DynamicDelegate Create(DynamicMethod dst, OpIdentity id, MethodInfo src, Type @delegate)
+            => new DynamicDelegate(id, src, dst, dst.CreateDelegate(@delegate));
+
         [MethodImpl(Inline)]
         public static implicit operator Delegate(DynamicDelegate d)
             => d.DynamicOp;
@@ -48,5 +55,8 @@ namespace Z0
             this.DynamicMethod = dst;
             this.DynamicOp = op;
         }
+
+
+
     }
 }

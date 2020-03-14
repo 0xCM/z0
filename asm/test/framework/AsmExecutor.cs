@@ -114,43 +114,43 @@ namespace Z0.Asm.Validation
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N8 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
-            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N16 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
-            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N32 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
-            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N64 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
-            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N128 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
-            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 
         AsmExecResult MatchBinaryOps(in BufferSeq buffers, N256 w, in ConstPair<ApiMemberCode> pair)
         {
-            var f = buffers[Left].LoadFixedBinaryOp(w, pair.A);
-            var g = buffers[Right].LoadFixedBinaryOp(w, pair.B);
+            var f = buffers[Left].EmitFixedBinaryOp(w, pair.A);
+            var g = buffers[Right].EmitFixedBinaryOp(w, pair.B);
             return CheckMatch(f, pair.A.Uri, g, pair.B.Uri);  
         }
 

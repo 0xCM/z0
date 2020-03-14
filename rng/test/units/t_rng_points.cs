@@ -37,9 +37,29 @@ namespace Z0
             for(var i=0; i< emission.Length; i++)
             {
                 var emitted = emission[i];
-                NotifyConsole(emission[i]);
             }
             
+
+        }
+
+        void print<N,T>(HomPoints<N,T> index)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            for(var i=0; i<index.Count; i++)
+            {
+                var point = index[i];
+                NotifyConsole($"{point}");
+            }
+        }
+        public void rng_fixed_point_index()
+        {
+            var u8Index = Random.FixedHomPointIndex<Fixed8>(100,n2);
+            print(u8Index);
+
+            var u16Index = Random.FixedHomPointIndex<Fixed16>(100,n2);
+            print(u16Index);
+
 
         }
 

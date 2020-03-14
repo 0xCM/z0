@@ -14,12 +14,12 @@ namespace Z0
     using static Root;
     using static express;
 
-    readonly struct DynamicEmitterFactory<T> : IDynamicEmitterFactory<T>
+    readonly struct DynamicEmitterOpFactory<T> : IDynamicEmitterOpFactory<T>
     {
         public IContext Context {get;}
 
         [MethodImpl(Inline)]
-        internal DynamicEmitterFactory(IContext context)
+        internal DynamicEmitterOpFactory(IContext context)
         {
             this.Context = context;
         }

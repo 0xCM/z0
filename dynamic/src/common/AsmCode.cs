@@ -109,7 +109,7 @@ namespace Z0
             => code.Bytes;
 
         [MethodImpl(Inline)]
-        internal AsmCode(OpIdentity id, MemoryExtract encoded)
+        public AsmCode(OpIdentity id, MemoryExtract encoded)
         {
             this.Id = id;
             this.AddressRange = encoded.AddressRange;

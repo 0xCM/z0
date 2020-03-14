@@ -143,27 +143,6 @@ namespace Z0.Asm.Validation
             return CheckAction(check, CaseName(TestOpName<T>(opname)));
         }
 
-        protected TestCaseRecord CheckAsmMatch<T>(in AsmBuffers buffers, UnaryOp<T> f, AsmCode src)
-            where T : unmanaged
-        {
-            var g = buffers.MainExec.Load(src.BinaryCode).AsUnaryOp<T>(src.Id);            
-
-            void check()
-            {
-                for(var i=0; i<RepCount; i++)
-                {
-                    (var x, var y) = Random.NextPair<T>();
-                    Claim.eq(f(x),g(x));
-                }
-            }
-
-            return CheckAction(check, src.Id);
-        }
-
-        protected TestCaseRecord CheckAsmMatch<T>(in AsmBuffers buffers, UnaryOp<T> f, AsmCode<T> asm)
-            where T : unmanaged
-                => CheckAsmMatch(buffers, f, asm.Untyped);
-
         protected TestCaseRecord CheckAsmMatch<T>(in AsmBuffers buffers, BinaryOp<T> f, in ApiCode src)
             where T : unmanaged
         {
@@ -187,7 +166,7 @@ namespace Z0.Asm.Validation
         protected AsmCode ReadAsm(AssemblyId id, string host, OpIdentity m)
             => Context.CodeArchive(id,host).Read(m).Single();
 
-        protected AsmCode<T> ReadAsm<W,T>(AssemblyId catalog, string host, string opname, W w = default, T t = default)
+        protected AsmCode ReadAsm<W,T>(AssemblyId catalog, string host, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
         {
@@ -433,10 +412,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w,ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w,ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -453,10 +432,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -474,10 +453,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, dCode);
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, dCode);
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, gCode);
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, gCode);
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -495,10 +474,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -515,10 +494,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -535,10 +514,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -555,10 +534,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -575,10 +554,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -595,10 +574,10 @@ namespace Z0.Asm.Validation
             var f1 = generic.ToFixed();
             results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
             results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.LoadFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
             results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
             return results.ToArray();
@@ -674,43 +653,43 @@ namespace Z0.Asm.Validation
 
         protected void binop_match(in AsmBuffers buffers, N8 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.LoadFixedBinaryOp(w, a);
-            var g = buffers.RightExec.LoadFixedBinaryOp(w, b);
+            var f = buffers.LeftExec.EmitFixedBinaryOp(w, a);
+            var g = buffers.RightExec.EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N16 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.LoadFixedBinaryOp(w, a);
-            var g = buffers.RightExec.LoadFixedBinaryOp(w, b);
+            var f = buffers.LeftExec.EmitFixedBinaryOp(w, a);
+            var g = buffers.RightExec.EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N32 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.LoadFixedBinaryOp(w, a);
-            var g = buffers.RightExec.LoadFixedBinaryOp(w, b);
+            var f = buffers.LeftExec.EmitFixedBinaryOp(w, a);
+            var g = buffers.RightExec.EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N64 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.LoadFixedBinaryOp(w, a);
-            var g = buffers.RightExec.LoadFixedBinaryOp(w, b);
+            var f = buffers.LeftExec.EmitFixedBinaryOp(w, a);
+            var g = buffers.RightExec.EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N128 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.LoadFixedBinaryOp(w, a);
-            var g = buffers.RightExec.LoadFixedBinaryOp(w, b);
+            var f = buffers.LeftExec.EmitFixedBinaryOp(w, a);
+            var g = buffers.RightExec.EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(in AsmBuffers buffers, N256 w, AsmCode a, AsmCode b)
         {
-            var f = buffers.LeftExec.LoadFixedBinaryOp(w, a);
-            var g = buffers.RightExec.LoadFixedBinaryOp(w, b);
+            var f = buffers.LeftExec.EmitFixedBinaryOp(w, a);
+            var g = buffers.RightExec.EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
 
@@ -761,7 +740,6 @@ namespace Z0.Asm.Validation
         static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
             => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
 
-
         void capture_shuffler(in AsmBuffers buffers)
         {
             var f = shuffler<uint>(n2);
@@ -791,7 +769,7 @@ namespace Z0.Asm.Validation
             var name = nameof(dinx.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
 
-            var provider = Dynop.ImmProvider(VK.vk256<ushort>(),FK.op(n2));
+            var provider = Context.ImmV256BinaryOpProvider<ushort>();
             var x = Random.CpuVector<ushort>(w);
             var y = Random.CpuVector<ushort>(w);
             
@@ -804,7 +782,7 @@ namespace Z0.Asm.Validation
             var asm = decoder.DecodeFunction(captured);        
 
 
-            var g = buffers.MainExec.LoadFixedBinaryOp<Fixed256>(asm.Code);
+            var g = buffers.MainExec.EmitFixedBinaryOp<Fixed256>(asm.Code);
             var z3 = g(x,y).ToVector<ushort>();
             Claim.eq(z1,z3);
         }
@@ -844,7 +822,7 @@ namespace Z0.Asm.Validation
         void CheckBinaryImm<T>(in AsmBuffers buffers, N128 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = Dynop.ImmProvider(VK.vk128<T>(), FK.op(n2));
+            var provider = Context.ImmV128BinaryOpProvider<T>();
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -859,7 +837,7 @@ namespace Z0.Asm.Validation
             // Trace(asm.Id);
             // iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffers.MainExec.LoadFixedBinaryOp<Fixed128>(asm.Code);
+            var f = buffers.MainExec.EmitFixedBinaryOp<Fixed128>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -867,7 +845,7 @@ namespace Z0.Asm.Validation
         void CheckBinaryImm<T>(in OpExtractExchange exchange, BufferToken buffer, N256 w, string name, byte imm)
             where T : unmanaged
         {            
-            var provider = Dynop.ImmProvider<T>(VK.vk256<T>(), FK.op(n2));
+            var provider = Context.ImmV256BinaryOpProvider<T>();
 
             var x = Random.CpuVector<T>(w);
             var y = Random.CpuVector<T>(w);
@@ -883,7 +861,7 @@ namespace Z0.Asm.Validation
             // Trace(asm.Id);
             // iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffer.LoadFixedBinaryOp<Fixed256>(asm.Code);
+            var f = buffer.EmitFixedBinaryOp<Fixed256>(asm.Code);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -892,7 +870,7 @@ namespace Z0.Asm.Validation
             where T : unmanaged
         {            
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
-            var provider = Dynop.ImmProvider<T>(VK.vk256<T>(), FK.op(n1));
+            var provider = Context.ImmV256UnaryOpProvider<T>();
 
             
             var dynop = provider.CreateOp(method,imm);
@@ -907,7 +885,7 @@ namespace Z0.Asm.Validation
             // Trace(asm.Id);
             // iter(asm.Instructions, i => Trace(i));  
 
-            var f = buffers.MainExec.LoadFixedUnaryOp<Fixed256>(capture.Code);
+            var f = buffers.MainExec.EmitFixedUnaryOp<Fixed256>(capture.Code);
             var z2 = f(x.ToFixed()).ToVector<T>();
             Claim.eq(z1,z2);
         }
@@ -937,83 +915,7 @@ namespace Z0.Asm.Validation
             Claim.yea(binop_match(buffers, w,d,g));
         }
 
-        // bit binop_match(in AsmBuffers buffers, FixedWidth w, AsmCode a, AsmCode b)
-        // {
-        //     switch(w)
-        //     {
-        //         case FixedWidth.W8:
-        //             binop_match(buffers, n8,a,b);
-        //             break;
 
-        //         case FixedWidth.W16:
-        //             binop_match(buffers, n16,a,b);
-        //             break;
-
-        //         case FixedWidth.W32:
-        //             binop_match(buffers, n32,a,b);
-        //             break;
-
-        //         case FixedWidth.W64:
-        //             binop_match(buffers, n64,a,b);
-        //             break;
-
-        //         case FixedWidth.W128:
-        //             binop_match(buffers, n128,a,b);
-        //             break;
-
-        //         case FixedWidth.W256:
-        //             binop_match(buffers, n256, a, b);
-        //             break;
-
-        //         default:
-        //             Claim.fail();
-        //         break;
-        //     }
-        //     return bit.On;
-        // }
-
-        // protected void binop_match(in AsmBuffers buffers, N8 w, AsmCode a, AsmCode b)
-        // {
-        //     var f = buffers.LeftExec.FixedBinaryOp(w, a);
-        //     var g = buffers.RightExec.FixedBinaryOp(w, b);
-        //     CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        // }
-
-        // protected void binop_match(in AsmBuffers buffers, N16 w, AsmCode a, AsmCode b)
-        // {
-        //     var f = buffers.LeftExec.FixedBinaryOp(w, a);
-        //     var g = buffers.RightExec.FixedBinaryOp(w, b);
-        //     CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        // }
-
-        // protected void binop_match(in AsmBuffers buffers, N32 w, AsmCode a, AsmCode b)
-        // {
-        //     var f = buffers.LeftExec.FixedBinaryOp(w, a);
-        //     var g = buffers.RightExec.FixedBinaryOp(w, b);
-        //     CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        // }
-
-        // protected void binop_match(in AsmBuffers buffers, N64 w, AsmCode a, AsmCode b)
-        // {
-
-        //     var f = buffers.LeftExec.FixedBinaryOp(w, a);
-        //     var g = buffers.RightExec.FixedBinaryOp(w, b);
-        //     CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        // }
-
-        // protected void binop_match(in AsmBuffers buffers, N128 w, AsmCode a, AsmCode b)
-        // {
-        //     var f = buffers.LeftExec.FixedBinaryOp(w, a);
-        //     var g = buffers.RightExec.FixedBinaryOp(w, b);
-        //     CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
-        // }
-
-        // protected void binop_match(in AsmBuffers buffers, N256 w, AsmCode a, AsmCode b)
-        // {
-        //     var f = buffers.LeftExec.FixedBinaryOp(w, a);
-        //     var g = buffers.RightExec.FixedBinaryOp(w, b);
-        //     CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
-        // }
 
         public void vadd_check(in AsmBuffers buffers)
         {
@@ -1021,11 +923,11 @@ namespace Z0.Asm.Validation
             var subject = nameof(dinx);
             var name = nameof(dinx.vadd);
 
-            vadd_check(buffers, n128, ReadAsm(catalog, subject, name, n128, z8));            
-            vadd_check(buffers, n128, ReadAsm(catalog, subject, name, n128,z16));
-            vadd_check(buffers, n128, ReadAsm(catalog, subject, name, n128,z32));
-            vadd_check(buffers, n256, ReadAsm(catalog, subject, name, n256,z16));
-            vadd_check(buffers, n256, ReadAsm(catalog, subject, name, n256,z32));
+            vadd_check<byte>(buffers, n128, ReadAsm(catalog, subject, name, n128, z8));            
+            vadd_check<ushort>(buffers, n128, ReadAsm(catalog, subject, name, n128,z16));
+            vadd_check<uint>(buffers, n128, ReadAsm(catalog, subject, name, n128,z32));
+            vadd_check<ushort>(buffers, n256, ReadAsm(catalog, subject, name, n256,z16));
+            vadd_check<uint>(buffers, n256, ReadAsm(catalog, subject, name, n256,z32));
         }
 
         public void add_megacheck(in AsmBuffers buffers)
@@ -1051,18 +953,18 @@ namespace Z0.Asm.Validation
             }
         }
 
-
-        void vadd_check<T>(in AsmBuffers buffers, N128 w, AsmCode<T> asm)
+        void vadd_check<T>(in AsmBuffers buffers, N128 w, AsmCode asm)
             where T : unmanaged
         {            
-            var f = buffers.MainExec.LoadFixedBinaryOp(w,asm);            
+            var f = buffers.MainExec.EmitFixedBinaryOp(w,asm);            
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
-        void vadd_check<T>(in AsmBuffers buffers, N256 w, AsmCode<T> asm)
+
+        void vadd_check<T>(in AsmBuffers buffers, N256 w, AsmCode asm)
             where T : unmanaged
         {            
-            var f = buffers.MainExec.LoadFixedBinaryOp(w,asm);
+            var f = buffers.MainExec.EmitFixedBinaryOp(w,asm);
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
@@ -1131,7 +1033,6 @@ namespace Z0.Asm.Validation
             listcount++;
             return src;
         }
-
 
         void RunPipe()
         {

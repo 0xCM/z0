@@ -96,7 +96,7 @@ namespace Z0
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="id">The identifying moniker</param>
-        public Option<AsmCode<T>> Read<T>(OpIdentity id, T t = default)
+        public Option<AsmCode> Read<T>(OpIdentity id, T t = default)
             where T : unmanaged
                 => Read(Context.EmissionPaths().HexPath(RootFolder, id), id, t);
         
@@ -105,11 +105,11 @@ namespace Z0
         /// </summary>
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
-        static AsmCode<T> Parse<T>(string data, OpIdentity id, T t = default)
+        static AsmCode Parse<T>(string data, OpIdentity id, T t = default)
             where T : unmanaged
-                => new AsmCode<T>(id, MemoryExtract.Define(MemoryAddress.Zero, Hex.parsebytes(data).ToArray()));
+                => new AsmCode(id, MemoryExtract.Define(MemoryAddress.Zero, Hex.parsebytes(data).ToArray()));
 
-        Option<AsmCode<T>> Read<T>(FilePath src, OpIdentity m, T t = default)
+        Option<AsmCode> Read<T>(FilePath src, OpIdentity m, T t = default)
             where T : unmanaged
                 => Root.Try(() => Parse<T>(src.ReadText(), m,t ));
 

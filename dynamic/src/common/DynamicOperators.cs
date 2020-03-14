@@ -12,8 +12,8 @@ namespace Z0
     public static class DynamicOperators
     {
         [MethodImpl(Inline)]
-        public static IDynamicEmitterFactory<T> DynamicOperatorFactory<T>(this IContext context, N0 n, T t = default)        
-            => new DynamicEmitterFactory<T>(context);
+        public static IDynamicEmitterOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N0 n, T t = default)        
+            => new DynamicEmitterOpFactory<T>(context);
 
         [MethodImpl(Inline)]
         public static IDynamicUnaryOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N1 n, T t = default)        

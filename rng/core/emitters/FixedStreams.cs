@@ -62,13 +62,19 @@ namespace Z0
         {
             if(sign.IsNonNegative())
             {
-                Fixed16 next = random.Next<ushort>();
-                yield return Unsafe.As<Fixed16, T>(ref next);
+                while(true)
+                {
+                    Fixed16 next = random.Next<ushort>();
+                    yield return Unsafe.As<Fixed16, T>(ref next);
+                }
             }
             else
             {
-                Fixed16 next = random.Next<short>();
-                yield return Unsafe.As<Fixed16, T>(ref next);
+                while(true)
+                {
+                    Fixed16 next = random.Next<short>();
+                    yield return Unsafe.As<Fixed16, T>(ref next);
+                }
             }
         }
 
@@ -90,17 +96,28 @@ namespace Z0
                     Fixed32 next = random.Next<int>();
                     yield return Unsafe.As<Fixed32, T>(ref next);
                 }
-
             }
         }
 
         static IEnumerable<T> FixedStream<T>(this IPolyrand random, N64 w, Sign sign = Sign.Pos)
             where T :unmanaged, IFixed
         {
-            while(true)
+            if(sign.IsNonNegative())
             {
-                Fixed64 next = random.Next<ulong>();
-                yield return Unsafe.As<Fixed64, T>(ref next);
+                while(true)
+                {
+                    Fixed64 next = random.Next<ulong>();
+                    yield return Unsafe.As<Fixed64, T>(ref next);
+                }
+            }
+            else
+            {
+                while(true)
+                {
+                    Fixed64 next = random.Next<long>();
+                    yield return Unsafe.As<Fixed64, T>(ref next);
+                }
+
             }
         }
 

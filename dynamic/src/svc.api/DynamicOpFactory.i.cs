@@ -17,7 +17,7 @@ namespace Z0
             => Manufacture(method,null);
     }
 
-    public interface IDynamicEmitterFactory<T> : IDynamicOpFactory<Func<T>,T>
+    public interface IDynamicEmitterOpFactory<T> : IDynamicOpFactory<Func<T>,T>
     {
 
     }

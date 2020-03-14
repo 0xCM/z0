@@ -111,7 +111,6 @@ namespace Z0
             where F : unmanaged, IFixed
             where T : struct
                 => ref From<Vector128<T>,F>(in src);
-
     }
 
     partial class FixedVectorOps
