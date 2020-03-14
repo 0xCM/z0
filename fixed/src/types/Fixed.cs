@@ -23,7 +23,6 @@ namespace Z0
 
         public Sign Sign {get;}
         
-
         [MethodImpl(Inline)]        
         public static implicit operator F(Fixed<F> src)
             => src.Content;

@@ -38,10 +38,6 @@ namespace Z0.Asm.Validation
     {
         AsmExecResult ExecAction(Action action, OpUri f);   
 
-        AsmExecResult ExecAction(Action action, OpUri f, OpUri g);        
-
-        FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode code, int count)
-            where F : unmanaged, IFixed;
-
+        AsmExecResult ExecAction(Action action, OpUri f, OpUri g);
     }
 }

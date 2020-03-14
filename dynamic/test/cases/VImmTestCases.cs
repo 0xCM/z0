@@ -44,6 +44,10 @@ namespace Z0
         public static IEnumerable<MethodInfo> V256UnaryShifts => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_256");
 
         [MethodImpl(Inline)]
+        public static Func<object,object,object> vsll_128x16i_dynamic()
+            => express.func2(typeof(VImmTestCases).GetMethod(nameof(vsll_128x16i)));
+
+        [MethodImpl(Inline)]
         public static Vector128<short> vsll_128x16i(Vector128<short> src, [Imm] byte count)
             => ShiftLeftLogical(src, (byte)count);
 

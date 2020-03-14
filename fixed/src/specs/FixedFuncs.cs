@@ -40,6 +40,4 @@ namespace Z0
         where X1 : IFixed
         where X2 : IFixed
         where X3 : IFixed;
-    
- 
 }

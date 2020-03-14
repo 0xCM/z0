@@ -26,7 +26,7 @@ namespace Z0
 
     public interface IFixed<C,F> : IFixed<F>
         where F : unmanaged, IFixed
-        where C : IFixed<C, F>
+        where C : IFixed<C,F>
     {
         
     }

@@ -22,7 +22,7 @@ namespace Z0
     public delegate Fixed128V BinaryOp128V(Fixed128V a, Fixed128V b);
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Fixed128V : IFixed<Fixed128V>, IEquatable<Fixed128V>
+    public struct Fixed128V : IFixed<Fixed128V>, IEquatable<Fixed128V>, IFormattable<Fixed128V>
     {
         public const int BitWidth = 128;        
 
@@ -106,14 +106,17 @@ namespace Z0
         public bool Equals(Fixed128V src)
             => data.Equals(src.data);
         
+        public string Format()
+            => data.ToString();
+
         public override int GetHashCode()
             => data.GetHashCode();
         
         public override bool Equals(object src)
             => src is Fixed128V x && Equals(x);
-
+        
         public override string ToString() 
-            => data.ToString();
+            => Format();
     }
 
     partial class FixedVectorOps

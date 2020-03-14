@@ -10,15 +10,11 @@ namespace Z0
 
     using static Root;
 
-    public static class FixedIndex
+    public static class FixedIndexes
     {
         public static FixedIndex<F> Alloc<F>(int length)
             where F : unmanaged, IFixed
                 => new FixedIndex<F>(new F[length]);
-
-        public static FixedTripleIndex<F> AllocTriple<F>(int length)
-            where F : unmanaged, IFixed
-                => new FixedTripleIndex<F>(new F[length], new F[length], new F[length]);
 
         [MethodImpl(Inline)]
         public static FixedIndex<F> From<F>(Span<F> src)
@@ -30,13 +26,13 @@ namespace Z0
             where F : unmanaged, IFixed
             where T : unmanaged
                 => new FixedIndex<F,T>(src);
-
     }
 
     public readonly ref struct FixedIndex<F>
-        where F : unmanaged, IFixed
-     
+        where F : unmanaged, IFixed     
     {
+        public static int ItemWidth => bitsize<F>();
+
         readonly Span<F> data;
 
         [MethodImpl(Inline)]
@@ -52,10 +48,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref F Element(int index)
+        public ref F Seek(int index)
             => ref this[index];
         
         public int Length
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        public int ItemCount
         {
             [MethodImpl(Inline)]
             get => data.Length;
@@ -73,58 +75,14 @@ namespace Z0
             => data.ToArray();
     }
 
-    public readonly ref struct FixedTripleIndex<F>
-        where F : unmanaged, IFixed     
-    {
-        readonly Span<F> a;
-
-        readonly Span<F> b;
-
-        readonly Span<F> c;
-
-        [MethodImpl(Inline)]
-        internal FixedTripleIndex(Span<F> a, Span<F> b, Span<F> c)
-        {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-        }
-
-        public (F a, F b, F c) this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => Element(index);
-
-            [MethodImpl(Inline)]
-            set => Element(index,value);            
-        }
-
-        [MethodImpl(Inline)]
-        public  (F a, F b, F c) Element(int index)
-        {
-            return (seek(a, index), seek(b,index), seek(c,index));
-        }
-
-        [MethodImpl(Inline)]
-        public  void Element(int index, (F a, F b, F c) x)
-        {
-            seek(a, index) = x.a;
-            seek(b, index) = x.b; 
-            seek(c, index) = x.c;
-        }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => a.Length;
-        }
-
-    }
-
     public readonly ref struct FixedIndex<F,T>
         where F : unmanaged, IFixed
         where T : unmanaged
     {
+        public static int ItemWidth => bitsize<F>();
+        
+        public static int CellWidth => bitsize<T>();        
+        
         readonly Span<F> data;
 
         [MethodImpl(Inline)]
@@ -133,16 +91,26 @@ namespace Z0
             this.data = src;
         }
 
-        public ref F this[int index]
+        public ref F this[int item]
         {
             [MethodImpl(Inline)]
-            get => ref seek(data, index);
+            get => ref seek(data, item);
+        }
+
+        public ref T this[int item, int cell]
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.As<F,T>(ref seek(ref seek(data, item), cell));
         }
 
         [MethodImpl(Inline)]
-        public ref F Element(int index)
-            => ref this[index];
-        
+        public ref F Seek(int item)
+            => ref this[item];
+
+        [MethodImpl(Inline)]
+        public ref T Seek(int item, int cell)
+            => ref this[item,cell];
+
         [MethodImpl(Inline)]
         public Span<F> ToSpan()
             => data;
@@ -153,5 +121,29 @@ namespace Z0
 
         public F[] ToArray()
             => data.ToArray();
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => data.As<F,T>();
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        public int ItemCount
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
     }    
 }

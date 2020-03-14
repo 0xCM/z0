@@ -46,12 +46,11 @@ namespace Z0
             var vbroadcast = Search.vbroadcast(tCell,w);
             var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});            
 
-            // foreach(var imm in Immediates)
-            // {
-            //     var method = src.V128EmbedUnaryImm(imm);
-            //     var vOutput = method.Invoke(vones);
-            //     Trace(vOutput.ToString());
-            // }
+            foreach(var imm in Immediates)
+            {
+                var method = src.V128EmbedUnaryImm(imm);
+                var vOutput = method.Invoke(vones);
+            }
         }
 
         void v256imm_unary_shift_check(MethodInfo src)

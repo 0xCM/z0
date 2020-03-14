@@ -42,41 +42,6 @@ namespace Z0.Asm.Validation
             get => increment(ref _checkseq);
         }
         
-        public FixedTripleIndex<F> ExecBinaryOp<F>(in BufferSeq buffers, in ApiMemberCode src, int count)
-            where F : unmanaged, IFixed
-        {
-            // var emitter = Random.FixedSpanEmitter<F>(count);
-            // var a = emitter.Invoke();
-            // var b = emitter.Invoke();
-            // var dst = FixedIndex.AllocTriple<F>(count);
-
-            // var f = buffers[Left].LoadFixedBinaryOp<F>(src.ApiCode);
-
-            // for(var i=0; i<a.Length; i++)
-            //     dst[i] = (a[i],b[i],f(a[i],b[i]));
-
-            // return dst;
-            return default;
-        }
-
-        public FixedIndex<F, T> ExecBinaryOp<F,T>(in BufferSeq buffers, in ApiMemberCode src, int count)
-            where F : unmanaged, IFixed
-            where T : unmanaged
-        {
-            // var emitter = Random.FixedSpanEmitter<F, T>(count);
-            // var a = emitter.Invoke();
-            // var b = emitter.Invoke();
-            // var dst = new F[count];
-
-            // var f = buffers[Left].LoadFixedBinaryOp<F>(src.ApiCode);
-
-            // for(var i=0; i<a.Length; i++)
-            //     dst[i] = f(a[i],b[i]);
-
-            // return FixedIndex.From<F,T>(dst);
-            return default;
-        }
-
         public AsmExecResult MatchBinaryOps(in BufferSeq buffers, FixedWidth w, in ConstPair<ApiMemberCode> paired)
         {
             var clock = counter();

@@ -84,7 +84,7 @@ namespace Z0
                 select f;
 
         /// <summary>
-        /// Creates and caches a weakly-typed delegate for a function f:X->Y
+        /// Creates a weakly-typed delegate for a function f:X->Y
         /// </summary>
         /// <param name="m">The source method</param>
         /// <param name="instance">The instance of the declaring type, if method is not static</param>
@@ -98,6 +98,31 @@ namespace Z0
             var l = Expression.Lambda(type, call, args);
             var del = l.Compile();
             return x => del.DynamicInvoke(x);
+        }
+
+        /// <summary>
+        /// Creates a weakly-typed delegate for a function f:X->Y
+        /// </summary>
+        /// <param name="m">The source method</param>
+        /// <param name="instance">The instance of the declaring type, if method is not static</param>
+        public static Func<object, object, object> func2(MethodInfo method, object instance = null)
+        {
+            var parameters = method.GetParameters().ToArray();
+            if(parameters.Length != 1)
+                throw new ArgumentException($"There are {parameters.Length} parameters in the source method instead of the 2 required");
+
+            var types = new Type[]{parameters[0].ParameterType, parameters[1].ParameterType, method.ReturnType};
+            var typeDef = typeof(Func<,,>).GetGenericTypeDefinition();
+            var type = typeDef.MakeGenericType(types);
+            var args = new PX[]{
+                paramX(parameters[0].ParameterType, parameters[0].Name), 
+                paramX(parameters[1].ParameterType, parameters[1].Name)
+                };
+
+            var call = Expression.Call(ifNotNull(instance, x => constant(x)), method, args);
+            var l = Expression.Lambda(type, call, args);
+            var del = l.Compile();
+            return (x,y) => del.DynamicInvoke(x,y);
         }
 
         /// <summary>
@@ -115,7 +140,6 @@ namespace Z0
                 var f = call(instance, m, args.ToArray());
                 return lambda<X1, X2, Y>(args, f).Compile();
             }));
-
 
         /// <summary>
         /// Creates and caches a function delegate for a method realizing a function f:(X1,X2,X3) -> Y
