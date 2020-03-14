@@ -19,9 +19,10 @@ namespace Z0
     using static Root;    
 
     /// <summary>
-    /// Floating-point scalar intrinsics
+    /// Direct floating-point scalar intrinsics
     /// </summary>
-    partial class dinxsfp
+    [ApiHost(ApiHostKind.Direct)]
+    public static class dinxsfp
     {
         /// <summary>
         ///  __m128 _mm_load_ss (float const* mem_address) MOVSS xmm, m32

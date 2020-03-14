@@ -8,7 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
-    <ProjectReference Include="$(TopDir)data/src/z0.data.csproj" />    
+    <ProjectReference Include="$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj" />    
     <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />

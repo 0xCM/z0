@@ -15,6 +15,17 @@ namespace Z0
     partial class gvec
     {
         /// <summary>
+        /// Creates a vector populated with component values that alternate between the first operand and the second
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> valt<T>(N256 n, T a, T b)
+            where T : unmanaged
+                => gvec.vblend(vgeneric.vbroadcast(n,a), vgeneric.vbroadcast(n,b), VectorData.blendspec<T>(n,false));
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="x">The left vector</param>

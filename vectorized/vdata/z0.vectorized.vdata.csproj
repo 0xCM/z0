@@ -8,7 +8,9 @@
   <ItemGroup>
     <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)identity/src/z0.identity.csproj" />
+    <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />        
+    <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />
+    <ProjectReference Include="$(TopDir)vectorized/src/z0.vectorized.csproj" />
   </ItemGroup>
 
 </Project>

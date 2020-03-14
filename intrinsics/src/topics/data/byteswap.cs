@@ -15,6 +15,7 @@ namespace Z0
 
     partial class VectorData
     {        
+
         /// <summary>
         /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation 
         /// of each  unsigned 16,32, or 64-bit integer component value

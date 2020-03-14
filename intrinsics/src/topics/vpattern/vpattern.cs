@@ -13,6 +13,7 @@ namespace Z0
     using static As;
     using static vgeneric;
  
+    [ApiHost("vpattern", ApiHostKind.Generic)]
     public static partial class vpattern
     {
         /// <summary>

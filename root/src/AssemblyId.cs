@@ -134,6 +134,16 @@ public enum AssemblyId : ulong
 
     Vectorized = 330,
 
+    VData = 331,
+
+    DVec = 332,
+
+    GVec = 333,
+
+    DVecTest = DVec | Test,
+
+    GVecTest = GVec | Test,
+
     VectorizedTest = Vectorized | Test,
 
     WorkflowCore = 340,

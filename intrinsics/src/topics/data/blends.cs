@@ -15,6 +15,7 @@ namespace Z0
 
     partial class VectorData
     {        
+
         /// <summary>
         /// Defines a blend specification for combining 2 256-bit vectors that selects the odd components from each vector
         /// </summary>
