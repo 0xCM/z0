@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
 
-    partial class gvec
+    partial class vgeneric
     {
         /// <summary>
         /// Reinterprets the source vector as a vector over parametric T-cells

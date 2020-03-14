@@ -192,7 +192,7 @@ namespace Z0
             var w = Z0.BitVector128<N,T>.MaxWidth;
             var v = random.CpuVector<T>(w);
             var clamp = w - math.min(w, natval(n));
-            return ginx.vsrlx(v,(byte)clamp);
+            return gvec.vsrlx(v,(byte)clamp);
         }
     }
 }

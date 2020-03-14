@@ -9,7 +9,7 @@ namespace Z0.Logix
     
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     using static VectorizedOps;
     
@@ -142,13 +142,13 @@ namespace Z0.Logix
             var actual = vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {                
-                expect = ginx.vlt(x,y);
+                expect = gvec.vlt(x,y);
                 actual = lt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =gvec.vbroadcast(n,Random.Next<T>());
-                x = ginx.vxor(x,a);
-                y = ginx.vxor(y,a);                
+                var a =vgeneric.vbroadcast(n,Random.Next<T>());
+                x = gvec.vxor(x,a);
+                y = gvec.vxor(y,a);                
             }
         }
 
@@ -161,13 +161,13 @@ namespace Z0.Logix
             var actual = vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {                
-                expect = ginx.vlt(x,y);
+                expect = gvec.vlt(x,y);
                 actual = lt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =gvec.vbroadcast(n,Random.Next<T>());
-                x = ginx.vxor(x,a);
-                y = ginx.vxor(y,a);                
+                var a =vgeneric.vbroadcast(n,Random.Next<T>());
+                x = gvec.vxor(x,a);
+                y = gvec.vxor(y,a);                
             }
 
         }
@@ -181,13 +181,13 @@ namespace Z0.Logix
             var actual = vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {                
-                expect = ginx.vgt(x,y);
+                expect = gvec.vgt(x,y);
                 actual = gt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =gvec.vbroadcast(n,Random.Next<T>());
-                x = ginx.vxor(x,a);
-                y = ginx.vxor(y,a);                
+                var a =vgeneric.vbroadcast(n,Random.Next<T>());
+                x = gvec.vxor(x,a);
+                y = gvec.vxor(y,a);                
             }
 
         }
@@ -201,13 +201,13 @@ namespace Z0.Logix
             var actual = vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {                
-                expect = ginx.vgt(x,y);
+                expect = gvec.vgt(x,y);
                 actual = gt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =gvec.vbroadcast(n,Random.Next<T>());
-                x = ginx.vxor(x,a);
-                y = ginx.vxor(y,a);                
+                var a =vgeneric.vbroadcast(n,Random.Next<T>());
+                x = gvec.vxor(x,a);
+                y = gvec.vxor(y,a);                
             }
 
         }

@@ -16,9 +16,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte clmul(byte a, byte b)
         {
-            var p = dinx.clmul(a,b);
-            p ^= dinx.clmul((byte)(p >> 3), Reducer);
-            p ^= dinx.clmul((byte)(p >> 3), Reducer);
+            var p = dvec.clmul(a,b);
+            p ^= dvec.clmul((byte)(p >> 3), Reducer);
+            p ^= dvec.clmul((byte)(p >> 3), Reducer);
             return (byte)p;
         }
 

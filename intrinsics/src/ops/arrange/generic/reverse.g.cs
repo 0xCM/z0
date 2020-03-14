@@ -11,9 +11,9 @@ namespace Z0
     
     using static As;
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Reverses the source vector components
@@ -40,13 +40,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vreverse(v8u(x)));
+                return vgeneric<T>(dvec.vreverse(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vreverse(v16u(x)));
+                return vgeneric<T>(dvec.vreverse(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vreverse(v32u(x)));
+                return vgeneric<T>(dvec.vreverse(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vreverse(v64u(x)));
+                return vgeneric<T>(dvec.vreverse(v64u(x)));
             else
                 return vreverse_i(x);
         }
@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vreverse(v8i(x)));
+                return vgeneric<T>(dvec.vreverse(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vreverse(v16i(x)));
+                return vgeneric<T>(dvec.vreverse(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vreverse(v32i(x)));
+                return vgeneric<T>(dvec.vreverse(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vreverse(v64i(x)));
+                return vgeneric<T>(dvec.vreverse(v64i(x)));
             else
                 throw unsupported<T>();
         }
@@ -72,13 +72,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vreverse(v8u(x)));
+                return vgeneric<T>(dvec.vreverse(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vreverse(v16u(x)));
+                return vgeneric<T>(dvec.vreverse(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vreverse(v32u(x)));
+                return vgeneric<T>(dvec.vreverse(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vreverse(v64u(x)));
+                return vgeneric<T>(dvec.vreverse(v64u(x)));
             else
                 return vreverse_i(x);
         }
@@ -88,13 +88,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vreverse(v8i(x)));
+                return vgeneric<T>(dvec.vreverse(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vreverse(v16i(x)));
+                return vgeneric<T>(dvec.vreverse(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vreverse(v32i(x)));
+                return vgeneric<T>(dvec.vreverse(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vreverse(v64i(x)));
+                return vgeneric<T>(dvec.vreverse(v64i(x)));
             else
                 throw unsupported<T>();
         }

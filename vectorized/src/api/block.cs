@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class gvec
+    partial class vgeneric
     {
         /// <summary>
         /// Allocates and deposits vector content to a data block

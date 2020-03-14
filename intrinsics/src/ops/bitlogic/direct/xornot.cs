@@ -16,7 +16,7 @@ namespace Z0
     
     using static Root;
 
-    partial class dinx
+    partial class dvec
     {         
         /// <summary>
         /// Computes x ^ ~y for vectors x and y

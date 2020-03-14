@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Permutes 4 128-bit source lanes from 2 256-bit vectors as described by the perm spec
@@ -53,13 +53,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vperm2x128(v8u(lhs), v8u(rhs), spec));
+                return generic<T>(dvec.vperm2x128(v8u(lhs), v8u(rhs), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vperm2x128(v16u(lhs), v16u(rhs), spec));
+                return generic<T>(dvec.vperm2x128(v16u(lhs), v16u(rhs), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vperm2x128(v32u(lhs), v32u(rhs), spec));
+                return generic<T>(dvec.vperm2x128(v32u(lhs), v32u(rhs), spec));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vperm2x128(v64u(lhs), v64u(rhs), spec));
+                return generic<T>(dvec.vperm2x128(v64u(lhs), v64u(rhs), spec));
             else
                 return vperm2x128_i(lhs,rhs,spec);
         }
@@ -69,13 +69,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vperm2x128(v8i(lhs), v8i(rhs), spec));
+                return generic<T>(dvec.vperm2x128(v8i(lhs), v8i(rhs), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vperm2x128(v16i(lhs), v16i(rhs), spec));
+                return generic<T>(dvec.vperm2x128(v16i(lhs), v16i(rhs), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vperm2x128(v32i(lhs), v32i(rhs), spec));
+                return generic<T>(dvec.vperm2x128(v32i(lhs), v32i(rhs), spec));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vperm2x128(v64i(lhs), v64i(rhs), spec));
+                return generic<T>(dvec.vperm2x128(v64i(lhs), v64i(rhs), spec));
             else
                 return vperm2x128_f(lhs,rhs,spec);
         }

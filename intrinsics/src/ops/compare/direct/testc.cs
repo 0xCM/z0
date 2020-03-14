@@ -15,10 +15,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
     
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128

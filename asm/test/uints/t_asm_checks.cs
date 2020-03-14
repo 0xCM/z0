@@ -26,7 +26,7 @@ namespace Z0
 
         public void CheckCapture(in AsmBuffers buffers)
         {
-            var name = nameof(ginx.vcimpl);         
+            var name = nameof(gvec.vcimpl);         
             var width = n256;                        
             var args = NumericKind.Integers.DistinctKinds().Map(arg => arg.ToClrType().Require());
             var generic = Intrinsics.VectorizedGeneric(width,name).CloseGenericMethods(args);

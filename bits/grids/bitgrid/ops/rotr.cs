@@ -52,13 +52,13 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vrotr<T>(g,(byte)shift);
+                => gvec.vrotr<T>(g,(byte)shift);
 
         [MethodImpl(Inline)]
         public static BitGrid256<M,N,T> rotr<M,N,T>(in BitGrid256<M,N,T> g, int shift)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vrotr<T>(g,(byte)shift);
+                => gvec.vrotr<T>(g,(byte)shift);
     }
 }

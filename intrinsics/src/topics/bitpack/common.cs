@@ -11,8 +11,8 @@ namespace Z0
     
     using static Root;
     using static Nats;
-    using static dinx;
-    using static gvec;
+    using static dvec;
+    using static vgeneric;
 
     partial class bitpack
     {
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ushort maskpack16<T>(in T src)
             where T : unmanaged
-                => vtakemask(ginx.vsll(vload(n128, refs.const64(src)),7));
+                => vtakemask(gvec.vsll(vload(n128, refs.const64(src)),7));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint maskpack32<T>(in T src)
             where T : unmanaged
-                => vtakemask(ginx.vsll(vload(n256, refs.const64(src)),7));
+                => vtakemask(gvec.vsll(vload(n256, refs.const64(src)),7));
 
         [MethodImpl(Inline)]
         static ulong maskpack64<T>(in T src)

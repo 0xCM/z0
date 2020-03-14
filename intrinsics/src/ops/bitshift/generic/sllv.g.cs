@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     
-    partial class ginx
+    partial class gvec
     {        
         /// <summary>
         /// Computes z[i] := x[i] << s[i] for i = 0..n-1 for vectors of length n
@@ -39,13 +39,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsllv(v8u(x), v8u(counts)));
+                return generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsllv(v16u(x), v16u(counts)));
+                return generic<T>(dvec.vsllv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vsllv(v32u(x), v32u(counts)));
+                return generic<T>(dvec.vsllv(v32u(x), v32u(counts)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vsllv(v64u(x), v64u(counts)));            
+                return generic<T>(dvec.vsllv(v64u(x), v64u(counts)));            
             else
                 return vsllv_i(x,counts);
         }
@@ -55,13 +55,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vsllv(v8i(x), v8i(counts)));
+                return generic<T>(dvec.vsllv(v8i(x), v8i(counts)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vsllv(v16i(x), v16i(counts)));
+                return generic<T>(dvec.vsllv(v16i(x), v16i(counts)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vsllv(v32i(x), v32i(counts)));
+                return generic<T>(dvec.vsllv(v32i(x), v32i(counts)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vsllv(v64i(x), v64i(counts)));            
+                return generic<T>(dvec.vsllv(v64i(x), v64i(counts)));            
             else
                 throw unsupported<T>();
         }
@@ -71,13 +71,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsllv(v8u(x), v8u(counts)));
+                return generic<T>(dvec.vsllv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsllv(v16u(x), v16u(counts)));
+                return generic<T>(dvec.vsllv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vsllv(v32u(x), v32u(counts)));
+                return generic<T>(dvec.vsllv(v32u(x), v32u(counts)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vsllv(v64u(x), v64u(counts)));            
+                return generic<T>(dvec.vsllv(v64u(x), v64u(counts)));            
             else
                 return vsllv_i(x,counts);
         }
@@ -87,13 +87,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vsllv(v8i(x), v8i(counts)));
+                return generic<T>(dvec.vsllv(v8i(x), v8i(counts)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vsllv(v16i(x), v16i(counts)));
+                return generic<T>(dvec.vsllv(v16i(x), v16i(counts)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vsllv(v32i(x), v32i(counts)));
+                return generic<T>(dvec.vsllv(v32i(x), v32i(counts)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vsllv(v64i(x), v64i(counts)));            
+                return generic<T>(dvec.vsllv(v64i(x), v64i(counts)));            
             else
                 throw unsupported<T>();
         }

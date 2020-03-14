@@ -19,10 +19,10 @@ namespace Z0
 
             var n = n128;
             var dst = Blocks.single<byte>(n);
-            var m0 = gvec.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
-            var m1 = dinx.vsllx(m0,32);
-            var m2 = dinx.vsllx(m1,32);
-            var m3 = dinx.vsllx(m2,32);
+            var m0 = vgeneric.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
+            var m1 = dvec.vsllx(m0,32);
+            var m2 = dvec.vsllx(m1,32);
+            var m3 = dvec.vsllx(m2,32);
 
             for(var i = 0; i<RepCount; i++)
             {
@@ -31,13 +31,13 @@ namespace Z0
                 var v2 = Random.CpuVector<byte>(n);
                 var v3 = Random.CpuVector<byte>(n);
 
-                dinx.vmaskstore(v0, m0, dst);
-                dinx.vmaskstore(v1, m1, dst);
-                dinx.vmaskstore(v2, m2, dst);
-                dinx.vmaskstore(v3, m3, dst);
+                dvec.vmaskstore(v0, m0, dst);
+                dvec.vmaskstore(v1, m1, dst);
+                dvec.vmaskstore(v2, m2, dst);
+                dvec.vmaskstore(v3, m3, dst);
 
-                var v4 = gvec.vload(dst);
-                var v5 = gvec.vparts(n128, 
+                var v4 = vgeneric.vload(dst);
+                var v5 = vgeneric.vparts(n128, 
                     vcell(v0,0), vcell(v0,1), vcell(v0,2), vcell(v0,3),
                     vcell(v1,4), vcell(v1,5), vcell(v1,6), vcell(v1,7),
                     vcell(v2,8), vcell(v2,9), vcell(v2,A), vcell(v2,B),
@@ -53,20 +53,20 @@ namespace Z0
             var count = 32;
             var x = Random.CpuVector(n256,z8);
             var storage = Blocks.single(n256,z8);
-            var stored = gvec.vzero(n256,z8);
-            var mask = gvec.vzero(n256,z8);
+            var stored = vgeneric.vzero(n256,z8);
+            var mask = vgeneric.vzero(n256,z8);
 
             // Store every component
             storage.Clear();
             mask = vgbits.vmsb(n256, n8, n1, z8);
-            ginx.vmaskstore8(x,mask,storage);
+            gvec.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
             Claim.eq(x,stored);
 
             // Store odd components
             storage.Clear();
             mask = vgbits.vmsb(n256, n16, n1, z8);
-            ginx.vmaskstore8(x,mask,storage);
+            gvec.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
 
 
@@ -78,8 +78,8 @@ namespace Z0
 
             // Store even components
             storage.Clear();
-            mask = ginx.vbsrl(vgbits.vmsb(n256,n16,n1,z8),1);
-            ginx.vmaskstore8(x, mask, storage);
+            mask = gvec.vbsrl(vgbits.vmsb(n256,n16,n1,z8),1);
+            gvec.vmaskstore8(x, mask, storage);
             stored = storage.LoadVector();
 
 

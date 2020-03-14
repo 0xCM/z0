@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Swaps hi/lo 64 bit segments of the source vector
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vswaphl<T>(Vector128<T> x)
             where T : unmanaged
-                => generic<T>(dinx.vswaphl(v64u(x)));        
+                => generic<T>(dvec.vswaphl(v64u(x)));        
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes of the source vector

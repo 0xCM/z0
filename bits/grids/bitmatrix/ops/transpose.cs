@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     partial class BitMatrix
     {
@@ -32,8 +32,8 @@ namespace Z0
             var x = vscalar(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
             {
-                Z[i] = (byte)dinx.vtakemask(v8u(x));
-                x = dinx.vsll(x,1);
+                Z[i] = (byte)dvec.vtakemask(v8u(x));
+                x = dvec.vsll(x,1);
             }
             return ref Z;
         }
@@ -121,8 +121,8 @@ namespace Z0
 
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
-            var vec = gvec.vload(n128,A.Bytes);
-            vstore(dinx.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
+            var vec = vgeneric.vload(n128,A.Bytes);
+            vstore(dvec.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Data);
         }
 
@@ -137,7 +137,7 @@ namespace Z0
         static Vector128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
-            get => gvec.vload(n128,in head(Tr8x16MaskBytes));
+            get => vgeneric.vload(n128,in head(Tr8x16MaskBytes));
         }
 
         /// <summary>

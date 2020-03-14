@@ -16,9 +16,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {         
         /// <summary>
         /// Computes ~(x & y) for vectors x and y

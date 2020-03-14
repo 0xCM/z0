@@ -20,11 +20,11 @@ namespace Z0
             var v1 = VSvcFactories.vbitlogic<T>(n128).and(x,y);
             var buffer = Fixed.alloc<Fixed128>();
             ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
-            var count = gvec.vcount<T>(n128);            
+            var count = vgeneric.vcount<T>(n128);            
             for(var i=0; i< count; i++)
                 seek(ref dst, i) = svc.and(vcell(x,i), vcell(y,i));
-            var v2 = gvec.vload(n128, in dst);
-            return ginx.vsame(v1,v2);
+            var v2 = vgeneric.vload(n128, in dst);
+            return gvec.vsame(v1,v2);
         }
 
 

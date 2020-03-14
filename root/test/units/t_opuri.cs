@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
     public class t_opuri : UnitTest<t_opuri>
     {

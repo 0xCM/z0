@@ -10,10 +10,10 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static As;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// 
@@ -68,13 +68,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vmergehi(v8i(x), v8i(y)));
+                 return generic<T>(dvec.vmergehi(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vmergehi(v16i(x), v16i(y)));
+                 return generic<T>(dvec.vmergehi(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vmergehi(v32i(x), v32i(y)));
+                 return generic<T>(dvec.vmergehi(v32i(x), v32i(y)));
             else
-                 return generic<T>(dinx.vmergehi(v64i(x), v64i(y)));
+                 return generic<T>(dvec.vmergehi(v64i(x), v64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -82,13 +82,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmergehi(v8u(x), v8u(y)));
+                return generic<T>(dvec.vmergehi(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmergehi(v16u(x), v16u(y)));
+                return generic<T>(dvec.vmergehi(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmergehi(v32u(x), v32u(y)));
+                return generic<T>(dvec.vmergehi(v32u(x), v32u(y)));
             else 
-                return generic<T>(dinx.vmergehi(v64u(x), v64u(y)));
+                return generic<T>(dvec.vmergehi(v64u(x), v64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -96,13 +96,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vmergehi(v8i(x), v8i(y)));
+                 return generic<T>(dvec.vmergehi(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vmergehi(v16i(x), v16i(y)));
+                 return generic<T>(dvec.vmergehi(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vmergehi(v32i(x), v32i(y)));
+                 return generic<T>(dvec.vmergehi(v32i(x), v32i(y)));
             else
-                 return generic<T>(dinx.vmergehi(v64i(x), v64i(y)));
+                 return generic<T>(dvec.vmergehi(v64i(x), v64i(y)));
         }    
 
         [MethodImpl(Inline)]
@@ -110,13 +110,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmergehi(v8u(x), v8u(y)));
+                return generic<T>(dvec.vmergehi(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmergehi(v16u(x), v16u(y)));
+                return generic<T>(dvec.vmergehi(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmergehi(v32u(x), v32u(y)));
+                return generic<T>(dvec.vmergehi(v32u(x), v32u(y)));
             else 
-                return generic<T>(dinx.vmergehi(v64u(x), v64u(y)));
+                return generic<T>(dvec.vmergehi(v64u(x), v64u(y)));
         }    
     }
 }

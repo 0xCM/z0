@@ -9,10 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class ginx
+    partial class gvec
     {        
         /// <summary>
         /// Moves the hi 64 bits of the source vector the the lo 64 bits of a target vector
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => generic<T>(gvec.vscalar(n128, vcell(v64u(src),1)));
+                => generic<T>(vgeneric.vscalar(n128, vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts hi 128-bit lane of the source vector
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vhi<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
-                => dinx.vhi(v64u(src), out x0, out x1);
+                => dvec.vhi(v64u(src), out x0, out x1);
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to a pair
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static ref Pair<ulong> vhi<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged
-                => ref dinx.vhi(src.AsUInt64(), ref dst);
+                => ref dvec.vhi(src.AsUInt64(), ref dst);
 
         /// <summary>
         /// Extracts the upper 256-bits from the source vector
@@ -88,13 +88,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vhi(v8u(src)));
+                return generic<T>(dvec.vhi(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vhi(v16u(src)));
+                return generic<T>(dvec.vhi(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vhi(v32u(src)));
+                return generic<T>(dvec.vhi(v32u(src)));
             else 
-                return generic<T>(dinx.vhi(v64u(src)));
+                return generic<T>(dvec.vhi(v64u(src)));
         }
 
         [MethodImpl(Inline)]
@@ -102,13 +102,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vhi(v8i(src)));
+                return generic<T>(dvec.vhi(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vhi(v16i(src)));
+                return generic<T>(dvec.vhi(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vhi(v32i(src)));
+                return generic<T>(dvec.vhi(v32i(src)));
             else
-                return generic<T>(dinx.vhi(v64i(src)));
+                return generic<T>(dvec.vhi(v64i(src)));
         }
 
         [MethodImpl(Inline)]

@@ -17,7 +17,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    static partial class dvec
+    static partial class vdirect
     {
         /// <summary>
         /// Creates a 256-bit vector by concatenating two 128-bit source vectors

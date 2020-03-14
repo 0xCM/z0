@@ -24,7 +24,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
-                var z = dinx.vmul(x,y);
+                var z = dvec.vmul(x,y);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
@@ -45,7 +45,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
-                var z = dinx.vmul(x,y);
+                var z = dvec.vmul(x,y);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
@@ -66,7 +66,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
-                var z = dinx.vmul(x,y);
+                var z = dvec.vmul(x,y);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
@@ -87,7 +87,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
-                var z = dinx.vmul(x,y);
+                var z = dvec.vmul(x,y);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
@@ -107,8 +107,8 @@ namespace Z0
         
             var a0 = vpattern.vincrements(ws,1u);
             var a1 = vpattern.vincrements(ws,a0.LastCell() + 1);
-            var b0 = dinx.vmul(a0,a1);
-            var b1 = dinx.vmul(dinx.vswaphl(a0), dinx.vswaphl(a1));
+            var b0 = dvec.vmul(a0,a1);
+            var b1 = dvec.vmul(dvec.vswaphl(a0), dvec.vswaphl(a1));
             Trace("x",a0.Format());
             Trace("y",a1.Format());
             Trace("lo", b0.Format());
@@ -122,8 +122,8 @@ namespace Z0
                 var x1 = Math128.mul(vcell(x,1), vcell(y,1));
                 var x2 = Math128.mul(vcell(x,2), vcell(y,2));
                 var x3 = Math128.mul(vcell(x,3), vcell(y,3));
-                var expect = gvec.vparts(wt, x0,x1,x2,x3);
-                var actual = dinx.vmul(x,y);
+                var expect = vgeneric.vparts(wt, x0,x1,x2,x3);
+                var actual = dvec.vmul(x,y);
 
                 Claim.eq(expect,actual);
 
@@ -142,7 +142,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
-                var z = dinx.vmul(x,y);
+                var z = dvec.vmul(x,y);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
@@ -160,7 +160,7 @@ namespace Z0
             
             var zb = Blocks.single(n512,t);
             var eb = Blocks.single(n512,t);            
-            var count = gvec.vcount(w,s);
+            var count = vgeneric.vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)
             {
@@ -170,7 +170,7 @@ namespace Z0
                 var y = Random.CpuVector(w,s);
                 var ys = y.ToSpan();
 
-                dinx.vmul(x,y).StoreTo(zb);
+                dvec.vmul(x,y).StoreTo(zb);
 
                 for(var j=0; j< count; j++)
                     eb[j] = uint32(xs[j] * ys[j]);

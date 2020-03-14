@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     [ApiHost("generic", ApiHostKind.Generic)]
-    public static partial class gvec
+    public static partial class vgeneric
     {
 
 

@@ -10,11 +10,11 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static Nats;
     using static As;
 
-    partial class dinx
+    partial class dvec
     {            
         /// <summary>
         /// Partitions the first 30 bits of a 32-bit source into 30 bytes, each with an effective width of 3
@@ -28,7 +28,7 @@ namespace Z0
             var lo = uint16(BitMasks.Lsb16x16x15 & a);
             var hi = uint16(BitMasks.Lsb16x16x15 & (a >> 15));
             
-            var x = gvec.vbroadcast(n256,uint32(lo | hi << 16));
+            var x = vgeneric.vbroadcast(n256,uint32(lo | hi << 16));
             
             // The pattern repeats every 32 bits
             // Each 32-bit segment can be cut into 2 16-bit parts where both parts 
@@ -44,16 +44,16 @@ namespace Z0
             const uint m2 = BitMasks.Lsb32x16x3 << 6;
             const uint m3 = BitMasks.Lsb32x16x3 << 9;
             const uint m4 = BitMasks.Lsb32x16x3 << 12;
-            var m = gvec.vparts(n256, m0,m1,m2,m3,m4,0,0,0);
-            var shifts =gvec.vparts(n256,0, 3, 6, 9, 12,0,0,0); 
+            var m = vgeneric.vparts(n256, m0,m1,m2,m3,m4,0,0,0);
+            var shifts =vgeneric.vparts(n256,0, 3, 6, 9, 12,0,0,0); 
 
-            var y = v16u(dinx.vsrlv(dinx.vand(x,m), shifts));
+            var y = v16u(dvec.vsrlv(dvec.vand(x,m), shifts));
 
             // The components are now in the following order, from lo to hi:
             // 0, 5, 1, 6, 2, 7, 3, 8, 4, 9
             // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
             // So, they need to be permuted; fake it for now
-            var z = gvec.vparts(n256, 
+            var z = vgeneric.vparts(n256, 
                 vcell(y,0), // 0
                 vcell(y,2), // 1
                 vcell(y,4), // 2
@@ -73,9 +73,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpart32x8x1(uint src)
         {
-            var x = gvec.vbroadcast(n256, src);
-            var y = gvec.vbroadcast(n256,BitMasks.Msb32x8x7);
-            return v8u(dinx.vand(x,y));
+            var x = vgeneric.vbroadcast(n256, src);
+            var y = vgeneric.vbroadcast(n256,BitMasks.Msb32x8x7);
+            return v8u(dvec.vand(x,y));
         }
     }
 }

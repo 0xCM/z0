@@ -105,7 +105,7 @@ namespace Z0
             var dShift = shifter(4);
             target.WriteMember(ops.Capture(in exchange, dShift.Identify(), dShift));
 
-            var methods = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();
+            var methods = typeof(gvec).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();
             
             foreach(var m in methods)
                 target.WriteMember(ops.Capture(in exchange, m.Identify(), m));

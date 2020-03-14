@@ -11,10 +11,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
  
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Computes the carryless product of the operands reduced by a specified polynomial
@@ -25,9 +25,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte clmulr(N8 r, byte a, byte b, ushort poly)
         {
-            var prod = dinx.clmul(a,b);
-            prod ^= (ushort)dinx.clmul((ushort)(prod >> 8), poly);
-            prod ^= (ushort)dinx.clmul((ushort)(prod >> 8), poly);
+            var prod = dvec.clmul(a,b);
+            prod ^= (ushort)dvec.clmul((ushort)(prod >> 8), poly);
+            prod ^= (ushort)dvec.clmul((ushort)(prod >> 8), poly);
             return (byte)prod;
         }
 
@@ -49,9 +49,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort clmulr(N16 r, ushort a, ushort b, uint poly)
         {
-            var prod = dinx.clmul(a,b);
-            prod ^= (uint)dinx.clmul(prod >> 16, poly);
-            prod ^= (uint)dinx.clmul(prod >> 16, poly);
+            var prod = dvec.clmul(a,b);
+            prod ^= (uint)dvec.clmul(prod >> 16, poly);
+            prod ^= (uint)dvec.clmul(prod >> 16, poly);
             return (ushort)prod;
         }
 
@@ -79,8 +79,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ConstPair<ulong> clmul(ulong lhs, ulong rhs)
         {
-            var a = gvec.vscalar(n128, lhs);
-            var b = gvec.vscalar(n128, rhs);
+            var a = vgeneric.vscalar(n128, lhs);
+            var b = vgeneric.vscalar(n128, rhs);
             var result = CarrylessMultiply(a,b,0x00);
             return (vcell(result,0), vcell(result,1));
         }
@@ -88,8 +88,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong clmul64(ulong x, ulong y)
         {
-            var u = gvec.vscalar(n128, x);
-            var v = gvec.vscalar(n128, y);
+            var u = vgeneric.vscalar(n128, x);
+            var v = vgeneric.vscalar(n128, y);
             var z = CarrylessMultiply(u, v, 0);
             return vcell(z,0);
         }

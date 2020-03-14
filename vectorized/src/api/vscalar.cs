@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Root;
-    using D = dvec;
+    using D = vdirect;
 
-    partial class gvec
+    partial class vgeneric
     {
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector

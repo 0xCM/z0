@@ -16,11 +16,11 @@ namespace Z0
     using static X86Missing;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
     using static BitMasks;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// __m128i _mm_cmplt_epi8 (__m128i a, __m128i b)PCMPGTB xmm, xmm/m128
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vlt(Vector128<byte> x, Vector128<byte> y)
         {
-            var mask = gvec.vbroadcast(n128, SignMask8);
+            var mask = vgeneric.vbroadcast(n128, SignMask8);
             var mx = vxor(x,mask).AsSByte();
             var my = vxor(y,mask).AsSByte();
             return CompareLessThan(mx,my).AsByte();
@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vlt(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = gvec.vbroadcast(n128, SignMask16);
+            var mask = vgeneric.vbroadcast(n128, SignMask16);
             var mx = vxor(x,mask).AsInt16();
             var my = vxor(y,mask).AsInt16();
             return CompareLessThan(mx,my).AsUInt16();
@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vlt(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = gvec.vbroadcast(n128, SignMask32);
+            var mask = vgeneric.vbroadcast(n128, SignMask32);
             return v32u(CompareLessThan(v32i(vxor(x,mask)), v32i(vxor(y,mask))));
         }
 
@@ -97,7 +97,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<long> vlt(Vector128<long> x, Vector128<long> y)
         {
-            var a = dvec.vconcat(x,y);
+            var a = vdirect.vconcat(x,y);
             var b = vswaphl(a);
             return vlo(vlt(a,b));
         }
@@ -110,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ulong> vlt(Vector128<ulong> x, Vector128<ulong> y)
         {
-            var a = dvec.vconcat(x,y);
+            var a = vdirect.vconcat(x,y);
             var b = vswaphl(a);
             return vlo(vlt(a,b));
         }
@@ -132,7 +132,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vlt(Vector256<byte> x, Vector256<byte> y)
         {
-            var mask = gvec.vbroadcast(n256,SignMask8);
+            var mask = vgeneric.vbroadcast(n256,SignMask8);
             return v8u(CompareLessThan(v8i(vxor(x,mask)),v8i(vxor(y,mask))));
         }
 
@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vlt(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = gvec.vbroadcast(n256, SignMask16);
+            var mask = vgeneric.vbroadcast(n256, SignMask16);
             return CompareLessThan(v16i(vxor(x,mask)),v16i(vxor(y,mask))).AsUInt16();
         }
 
@@ -174,7 +174,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vlt(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = gvec.vbroadcast(n256, SignMask32);
+            var mask = vgeneric.vbroadcast(n256, SignMask32);
             return v32u(CompareLessThan(v32i(vxor(x,mask)),v32i(vxor(y,mask))));
         }
 
@@ -195,7 +195,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vlt(Vector256<ulong> x, Vector256<ulong> y)
         {
-            var mask = gvec.vbroadcast(n256,SignMask64);
+            var mask = vgeneric.vbroadcast(n256,SignMask64);
             return v64u(CompareLessThan(v64i(vxor(x,mask)),v64i(vxor(y,mask))));
         }    
     }

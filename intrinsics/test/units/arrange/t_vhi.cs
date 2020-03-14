@@ -96,7 +96,7 @@ namespace Z0
             {
                 var x = r.Invoke();
                 var y = f.Invoke(x);
-                var z = ginx.vinsert(y,x,1);
+                var z = gvec.vinsert(y,x,1);
                 Claim.eq(x,z);
             }
         } 

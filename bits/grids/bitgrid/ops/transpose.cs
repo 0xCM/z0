@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     partial class BitGrid
     {        
@@ -20,11 +20,11 @@ namespace Z0
             where T : unmanaged
         {
             var dst = alloc64<N8,N8,byte>();                        
-            var src = dvec.vscalar(n128,g);
+            var src = vdirect.vscalar(n128,g);
             for(var i=7; i>= 0; i--)
             {
-                dst.Cell(i) = (byte)dinx.vtakemask(v8u(src));
-                src = dinx.vsll(src,1);
+                dst.Cell(i) = (byte)dvec.vtakemask(v8u(src));
+                src = dvec.vsll(src,1);
             }
             return dst.As<T>();
         }
@@ -77,7 +77,7 @@ namespace Z0
             const uint E = BitMasks.Even32;
             const uint O = BitMasks.Odd32;
 
-            var mask = ginx.vtakemask(src, (byte)i);
+            var mask = gvec.vtakemask(src, (byte)i);
             var gT = gcell(g0, i, convert<T>(Bits.select(mask, E)));
             gT = gcell(gT, j, convert<T>(Bits.select(mask, O)));
             return gT;

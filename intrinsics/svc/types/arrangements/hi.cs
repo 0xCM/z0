@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => ginx.vhi(x);            
+            public Vector128<T> Invoke(Vector128<T> x) => gvec.vhi(x);            
         }
 
         public readonly struct Hi256<T> : IVReducer256<T>
@@ -39,7 +39,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector256<T> x) => ginx.vhi(x);
+            public Vector128<T> Invoke(Vector256<T> x) => gvec.vhi(x);
            
         }
     }

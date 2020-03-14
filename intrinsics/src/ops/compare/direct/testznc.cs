@@ -15,7 +15,7 @@ namespace Z0
     
     using static Root;    
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// int _mm_testnzc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128

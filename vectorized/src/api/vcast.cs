@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    partial class gvec
+    partial class vgeneric
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref Vector128<sbyte> vcast8i<T>(in Vector128<T> src)

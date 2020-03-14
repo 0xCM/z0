@@ -26,11 +26,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vector128<T> Send(Vector128<T> x)
-            => ginx.vnot(x);
+            => gvec.vnot(x);
 
         [MethodImpl(Inline)]
         public Vector256<T> Send(Vector256<T> x)
-            => ginx.vnot(x);
+            => gvec.vnot(x);
  
 
     }

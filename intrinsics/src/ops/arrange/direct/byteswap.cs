@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {        
         /// <summary>
         /// Effects the reversal of the byte-level representation of each component in the source vector

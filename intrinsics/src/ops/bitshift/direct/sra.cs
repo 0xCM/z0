@@ -14,7 +14,7 @@ namespace Z0
 
     using static Root;    
 
-    partial class dinx
+    partial class dvec
     {         
         /// <summary>
         /// __m128i _mm_srai_epi16 (__m128i a, int immediate) PSRAW xmm, imm8

@@ -14,7 +14,7 @@ namespace Z0
         
     using static Root;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8

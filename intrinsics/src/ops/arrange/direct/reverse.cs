@@ -9,10 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {    
         /// <summary>
         /// Reverses the source vector components
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vreverse(Vector256<sbyte> src)
-            => dvec.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => vdirect.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vreverse(Vector256<short> src)
-            => dvec.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => vdirect.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vreverse(Vector256<ushort> src)
-            => dvec.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => vdirect.vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components

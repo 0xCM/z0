@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {        
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vduplicate(N0 parity, N32 w, Vector256<byte> src)

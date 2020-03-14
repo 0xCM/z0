@@ -10,10 +10,10 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class ginx
+    partial class gvec
     {        
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All & (~NumericKind.U64))]
         public static Vector128<T> vmin<T>(Vector128<T> x, Vector128<T> y)
@@ -30,13 +30,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmin(v8u(x), v8u(y)));
+                return generic<T>(dvec.vmin(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmin(v16u(x), v16u(y)));
+                return generic<T>(dvec.vmin(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmin(v32u(x), v32u(y)));
+                return generic<T>(dvec.vmin(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vmin(v64u(x), v64u(y)));
+                return generic<T>(dvec.vmin(v64u(x), v64u(y)));
             else 
                 return vmin_i(x,y);
         }
@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vmin(v8i(x), v8i(y)));
+                 return generic<T>(dvec.vmin(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vmin(v16i(x), v16i(y)));
+                 return generic<T>(dvec.vmin(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vmin(v32i(x), v32i(y)));
+                 return generic<T>(dvec.vmin(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(dinx.vmin(v64i(x), v64i(y)));
+                 return generic<T>(dvec.vmin(v64i(x), v64i(y)));
             else 
                 return ginxfp.vmin(x,y);
         }
@@ -62,13 +62,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmin(v8u(x), v8u(y)));
+                return generic<T>(dvec.vmin(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmin(v16u(x), v16u(y)));
+                return generic<T>(dvec.vmin(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmin(v32u(x), v32u(y)));
+                return generic<T>(dvec.vmin(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vmin(v64u(x), v64u(y)));
+                return generic<T>(dvec.vmin(v64u(x), v64u(y)));
             else 
                 return vmin_i(x,y);
         } 
@@ -78,13 +78,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vmin(v8i(x), v8i(y)));
+                 return generic<T>(dvec.vmin(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vmin(v16i(x), v16i(y)));
+                 return generic<T>(dvec.vmin(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vmin(v32i(x), v32i(y)));
+                 return generic<T>(dvec.vmin(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(dinx.vmin(v64i(x), v64i(y)));
+                 return generic<T>(dvec.vmin(v64i(x), v64i(y)));
             else 
                 return ginxfp.vmin(x,y);
         }

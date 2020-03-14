@@ -14,9 +14,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;    
      
     using static Root;
-    using static gvec;
+    using static vgeneric;
     
-    partial class dinx
+    partial class dvec
     {                
         /// <summary>
         /// VPMOVZXBD ymm, m64

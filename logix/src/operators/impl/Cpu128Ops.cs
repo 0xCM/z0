@@ -62,12 +62,12 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> not<T>(Vector128<T> a)
             where T : unmanaged
-                => ginx.vnot(a);
+                => gvec.vnot(a);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> and<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vand(a,b);
+                => gvec.vand(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> nand<T>(Vector128<T> a, Vector128<T> b)
@@ -77,22 +77,22 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> or<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vor(a,b);
+                => gvec.vor(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> nor<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vnor(a,b);
+                => gvec.vnor(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> xor<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vxor(a,b);
+                => gvec.vxor(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> xnor<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vxnor(a,b);
+                => gvec.vxnor(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> left<T>(Vector128<T> a, Vector128<T> b)
@@ -117,102 +117,102 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> impl<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vimpl(a,b);
+                => gvec.vimpl(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> nonimpl<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                =>  ginx.vnonimpl(a,b); 
+                =>  gvec.vnonimpl(a,b); 
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> cimpl<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vcimpl(a,b);
+                => gvec.vcimpl(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> cnonimpl<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vcnonimpl(a,b);
+                => gvec.vcnonimpl(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> xornot<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vxornot(a,b);
+                => gvec.vxornot(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> sll<T>(Vector128<T> a, [Imm] byte offset)
             where T : unmanaged
-                => ginx.vsll<T>(a, offset);
+                => gvec.vsll<T>(a, offset);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> srl<T>(Vector128<T> a, [Imm] byte offset)
             where T : unmanaged
-                => ginx.vsrl<T>(a, offset);
+                => gvec.vsrl<T>(a, offset);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> rotl<T>(Vector128<T> a, [Imm] byte offset)
             where T : unmanaged
-                => ginx.vrotl<T>(a, offset);
+                => gvec.vrotl<T>(a, offset);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> rotr<T>(Vector128<T> a, [Imm] byte offset)
             where T : unmanaged
-                => ginx.vrotr<T>(a, offset);
+                => gvec.vrotr<T>(a, offset);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> inc<T>(Vector128<T> a)
             where T : unmanaged
-                => ginx.vinc(a);
+                => gvec.vinc(a);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> dec<T>(Vector128<T> a)
             where T : unmanaged
-                => ginx.vdec(a);
+                => gvec.vdec(a);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> negate<T>(Vector128<T> a)
             where T : unmanaged
-                => ginx.vnegate<T>(a);
+                => gvec.vnegate<T>(a);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> add<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vadd(a,b);
+                => gvec.vadd(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> sub<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vsub(a,b);
+                => gvec.vsub(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> equals<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.veq(a,b);
+                => gvec.veq(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static bit same<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vtestc(equals(a,b));
+                => gvec.vtestc(equals(a,b));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector128<T> lt<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vlt(a,b);
+                => gvec.vlt(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector128<T> gt<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vgt(a,b);
+                => gvec.vgt(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector128<T> max<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vmax(a,b);
+                => gvec.vmax(a,b);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> select<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => ginx.vselect(a,b,c);  
+                => gvec.vselect(a,b,c);  
 
         // a nor (b or c)
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]

@@ -13,10 +13,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
     
-    partial class dinx
+    partial class dvec
     {           
         /// <summary>
         /// The f most significant bits of each 8 bits are enabled
@@ -50,9 +50,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vsll(Vector128<byte> src, [Imm] byte count)
         {
-            var y = v8u(dinx.vsll(v64u(src), count));
+            var y = v8u(dvec.vsll(v64u(src), count));
             var m = vmsb(n128, n8, (byte)(8 - count),z8);
-            return dinx.vand(y,m);
+            return dvec.vand(y,m);
         }
 
         /// <summary>
@@ -132,9 +132,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vsll(Vector256<byte> src, [Imm] byte count)
         {
-            var y = v8u(dinx.vsll(v64u(src), count));
+            var y = v8u(dvec.vsll(v64u(src), count));
             var m = vmsb(n256, n8, (byte)(8 - count),z8);
-            return dinx.vand(y,m);
+            return dvec.vand(y,m);
         }
 
         /// <summary>

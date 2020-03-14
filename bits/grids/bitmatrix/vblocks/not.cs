@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     
     partial class vblock
     {     
@@ -18,16 +18,16 @@ namespace Z0
         public static Vector128<T> vnot<T>(N128 n, in T a)
             where T : unmanaged
         {                    
-            gvec.vload(a, out Vector128<T> vA);
-            return ginx.vnot(vA);
+            vgeneric.vload(a, out Vector128<T> vA);
+            return gvec.vnot(vA);
         }
 
         [MethodImpl(Inline)]
         public static Vector256<T> vnot<T>(N256 n, in T a)
             where T : unmanaged
         {                    
-            gvec.vload(a, out Vector256<T> vA);
-            return ginx.vnot(vA);
+            vgeneric.vload(a, out Vector256<T> vA);
+            return gvec.vnot(vA);
         }
 
         [MethodImpl(Inline)]

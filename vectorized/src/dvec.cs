@@ -18,7 +18,7 @@ namespace Z0
     using static Nats;
 
     [ApiHost(ApiHostKind.Direct)]
-    public static partial class dvec
+    public static partial class vdirect
     {
 
 

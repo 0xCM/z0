@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
     partial class VectorExtensions
@@ -40,7 +40,7 @@ namespace Z0
                 dst[j++] = f(rhsData[i]);
             }
             
-            return gvec.vload(n256, in head(dst));        
+            return vgeneric.vload(n256, in head(dst));        
         } 
 
  

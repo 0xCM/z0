@@ -11,10 +11,10 @@ namespace Z0
         
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
     using static BitPop;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Computes the population count of the content of 3 128-bit vectors
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static uint vpop<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
-                => dinx.vpop(v64u(x), v64u(y), v64u(z));
+                => dvec.vpop(v64u(x), v64u(y), v64u(z));
 
         /// <summary>
         /// Computes the population count of the content of 3 128-bit vectors
@@ -36,10 +36,10 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static uint vpop<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
-                => dinx.vpop(v64u(x), v64u(y), v64u(z));
+                => dvec.vpop(v64u(x), v64u(y), v64u(z));
     }
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Computes the population count of the content of 3 128-bit vectors
@@ -73,7 +73,7 @@ namespace Z0
             odd = vadd(vadd(maj, maj), odd);
 
             var dst = Stacks.alloc(n128);
-            gvec.vstore(odd, ref dst.X0);
+            vgeneric.vstore(odd, ref dst.X0);
             var total = 0ul;
 
             total += (dst.X0 * kf) >> 56;
@@ -115,7 +115,7 @@ namespace Z0
 
             var dst = Stacks.alloc(n256);
             ref var X = ref Stacks.head(ref dst, z64);
-            gvec.vstore(odd, ref X);
+            vgeneric.vstore(odd, ref X);
             
             var total = 0ul;
             total += (seek(ref X, 0) * kf) >> 56;
@@ -129,16 +129,16 @@ namespace Z0
 
     public static class BitPop
     {        
-        public static Vector256<ulong> K1 => gvec.vbroadcast(n256, BitMasks.Even64);
+        public static Vector256<ulong> K1 => vgeneric.vbroadcast(n256, BitMasks.Even64);
 
-        public static Vector256<ulong> K2 => gvec.vbroadcast(n256, BitMasks.Even64x2);
+        public static Vector256<ulong> K2 => vgeneric.vbroadcast(n256, BitMasks.Even64x2);
 
-        public static Vector256<ulong> K4 => gvec.vbroadcast(n256, BitMasks.Lsb64x8x4);        
+        public static Vector256<ulong> K4 => vgeneric.vbroadcast(n256, BitMasks.Lsb64x8x4);        
 
-        public static Vector128<ulong> v128K1 => gvec.vbroadcast(n128, BitMasks.Even64);
+        public static Vector128<ulong> v128K1 => vgeneric.vbroadcast(n128, BitMasks.Even64);
 
-        public static Vector128<ulong> v128K2 => gvec.vbroadcast(n128, BitMasks.Even64x2);
+        public static Vector128<ulong> v128K2 => vgeneric.vbroadcast(n128, BitMasks.Even64x2);
 
-        public static Vector128<ulong> v128K4 => gvec.vbroadcast(n128, BitMasks.Lsb64x8x4);
+        public static Vector128<ulong> v128K4 => vgeneric.vbroadcast(n128, BitMasks.Lsb64x8x4);
     }
 }

@@ -118,7 +118,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(SubGrid256<M,N,T> rhs)
-            => ginx.vsame(data,rhs.data);
+            => gvec.vsame(data,rhs.data);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

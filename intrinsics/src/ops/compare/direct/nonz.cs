@@ -13,7 +13,7 @@ namespace Z0
     
     using static Root;    
     
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise

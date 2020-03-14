@@ -10,11 +10,11 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
 
     using static As;
     
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Rotates each component the source vector leftwards by a constant amount
@@ -26,13 +26,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vrotl(v8u(x), count));
+                return generic<T>(dvec.vrotl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vrotl(v16u(x), count));
+                return generic<T>(dvec.vrotl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vrotl(v32u(x), count));
+                return generic<T>(dvec.vrotl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vrotl(v64u(x), count));
+                return generic<T>(dvec.vrotl(v64u(x), count));
             else
                 throw unsupported<T>();
         }
@@ -47,13 +47,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vrotl(v8u(x), count));
+                return generic<T>(dvec.vrotl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vrotl(v16u(x), count));
+                return generic<T>(dvec.vrotl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vrotl(v32u(x), count));
+                return generic<T>(dvec.vrotl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vrotl(v64u(x), count));
+                return generic<T>(dvec.vrotl(v64u(x), count));
             else
                 throw unsupported<T>();
         }

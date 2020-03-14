@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;    
     
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Returns 1 if the left vector is identical to the right vector and 0 otherwise

@@ -17,18 +17,18 @@ namespace Z0
         public static bit vtestz<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
-            gvec.vload(a, out Vector128<T> vA);
-            gvec.vload(b, out Vector128<T> vB);
-            return ginx.vtestz(vA,vB);
+            vgeneric.vload(a, out Vector128<T> vA);
+            vgeneric.vload(b, out Vector128<T> vB);
+            return gvec.vtestz(vA,vB);
         }
 
         [MethodImpl(Inline)]
         public static bit vtestz<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
-            gvec.vload(a, out Vector256<T> vA);
-            gvec.vload(b, out Vector256<T> vB);
-            return ginx.vtestz(vA,vB);
+            vgeneric.vload(a, out Vector256<T> vA);
+            vgeneric.vload(b, out Vector256<T> vB);
+            return gvec.vtestz(vA,vB);
         }
 
         [MethodImpl(Inline)]

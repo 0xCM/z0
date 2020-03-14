@@ -10,10 +10,10 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;    
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
         
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Computes the component-wise difference between two vectors
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vsub<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vsub(x, gvec.vbroadcast(n128,a));
+                => vsub(x, vgeneric.vbroadcast(n128,a));
 
         /// <summary>
         /// Subtracts each vector component from a constant value
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vsub<T>(T a, Vector128<T> x)
             where T : unmanaged
-                => vsub(gvec.vbroadcast(n128,a), x);
+                => vsub(vgeneric.vbroadcast(n128,a), x);
 
         /// <summary>
         /// Subtracts a constant value from each vector component
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> vsub<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vsub(x, gvec.vbroadcast(n256,a));
+                => vsub(x, vgeneric.vbroadcast(n256,a));
     
         /// <summary>
         /// Subtracts each vector component from a constant value
@@ -79,20 +79,20 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> vsub<T>(T a, Vector256<T> x)
             where T : unmanaged
-                => vsub(gvec.vbroadcast(n256,a), x);
+                => vsub(vgeneric.vbroadcast(n256,a), x);
 
         [MethodImpl(Inline)]
         static Vector128<T> vsub_u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsub(v8u(x), v8u(y)));
+                return generic<T>(dvec.vsub(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsub(v16u(x), v16u(y)));
+                return generic<T>(dvec.vsub(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vsub(v32u(x), v32u(y)));
+                return generic<T>(dvec.vsub(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vsub(v64u(x), v64u(y)));
+                return generic<T>(dvec.vsub(v64u(x), v64u(y)));
             else
                 return vsub_i(x,y);
         }
@@ -102,13 +102,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vsub(v8i(x), v8i(y)));
+                 return generic<T>(dvec.vsub(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vsub(v16i(x), v16i(y)));
+                 return generic<T>(dvec.vsub(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vsub(v32i(x), v32i(y)));
+                 return generic<T>(dvec.vsub(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(dinx.vsub(v64i(x), v64i(y)));
+                 return generic<T>(dvec.vsub(v64i(x), v64i(y)));
             else
                 return ginxfp.vsub(x,y);
         }
@@ -118,13 +118,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsub(v8u(x), v8u(y)));
+                return generic<T>(dvec.vsub(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsub(v16u(x), v16u(y)));
+                return generic<T>(dvec.vsub(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vsub(v32u(x), v32u(y)));
+                return generic<T>(dvec.vsub(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vsub(v64u(x), v64u(y)));
+                return generic<T>(dvec.vsub(v64u(x), v64u(y)));
             else
                 return vsub_i(x,y);
         }    
@@ -134,13 +134,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vsub(v8i(x), v8i(y)));
+                 return generic<T>(dvec.vsub(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vsub(v16i(x), v16i(y)));
+                 return generic<T>(dvec.vsub(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vsub(v32i(x), v32i(y)));
+                 return generic<T>(dvec.vsub(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vsub(v64i(x), v64i(y)));
+                return generic<T>(dvec.vsub(v64i(x), v64i(y)));
             else
                 return ginxfp.vsub(x,y);
         }    

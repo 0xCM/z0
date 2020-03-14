@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vones<T>(N128 n, T t = default)
             where T : unmanaged
-                => ginx.veq(default(Vector128<T>), default(Vector128<T>));
+                => gvec.veq(default(Vector128<T>), default(Vector128<T>));
 
         /// <summary>
         /// Creates a 256-bit vector with all bits enabled
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> vones<T>(N256 n, T t = default)
             where T : unmanaged
-                => ginx.veq(default(Vector256<T>), default(Vector256<T>));
+                => gvec.veq(default(Vector256<T>), default(Vector256<T>));
 
         /// <summary>
         /// Creates a 512-bit vector with all bits enabled
@@ -41,6 +41,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector512<T> vones<T>(N512 n, T t = default)
             where T : unmanaged
-                => ginx.veq(default(Vector512<T>), default(Vector512<T>));
+                => gvec.veq(default(Vector512<T>), default(Vector512<T>));
     }
 }

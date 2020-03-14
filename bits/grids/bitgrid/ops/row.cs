@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static Nats;
     using static As;
-    using static gvec;
+    using static vgeneric;
 
     partial class BitGrid
     {        

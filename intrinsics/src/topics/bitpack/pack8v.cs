@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ushort pack8<T>(Vector128<T> src, byte index)
             where T : unmanaged
-                => ginx.vtakemask(src,index);
+                => gvec.vtakemask(src,index);
 
         /// <summary>
         /// Packs 32 1-bit values taken from each source byte at a specified index
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static uint pack8<T>(Vector256<T> src, byte index)
             where T : unmanaged
-                => ginx.vtakemask(src,index);
+                => gvec.vtakemask(src,index);
 
         /// <summary>
         /// Packs 16 1-bit values taken from the most significant bit of each source byte
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ushort packmsb8<T>(Vector128<T> src)
             where T : unmanaged
-                => ginx.vtakemask(src);
+                => gvec.vtakemask(src);
 
         /// <summary>
         /// Packs 32 1-bit values taken from the most significant bit of each source byte
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ulong packmsb8<T>(Vector256<T> src)
             where T : unmanaged
-                => ginx.vtakemask(src);
+                => gvec.vtakemask(src);
 
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte

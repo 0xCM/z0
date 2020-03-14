@@ -15,9 +15,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
 
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx 
+    partial class dvec 
     {
         /// <summary>
         /// Transposes a 4x4 matrix of unsigned integers, adapted from MSVC intrinsic headers

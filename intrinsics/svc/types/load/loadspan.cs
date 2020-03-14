@@ -25,7 +25,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => gvec.vload(n128,x,offset);            
+            public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => vgeneric.vload(n128,x,offset);            
         }
 
         public readonly struct LoadSpan256<T> : IVSpanSourced256<T>
@@ -40,7 +40,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => gvec.vload(n256,x,offset);
+            public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => vgeneric.vload(n256,x,offset);
         }
     }
 }

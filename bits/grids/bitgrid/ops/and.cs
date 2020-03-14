@@ -57,7 +57,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vand(gx[i],gy[i]);
+                gz[i] = gvec.vand(gx[i],gy[i]);
             return ref gz;
         }
 
@@ -126,7 +126,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vand<T>(gx,gy);    
+                => gvec.vand<T>(gx,gy);    
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
@@ -139,7 +139,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vand<T>(gx,gy);    
+                => gvec.vand<T>(gx,gy);    
 
         /// <summary>
         /// Computes the bitwise AND between natural bitgrids and stores the result to a caller-supplied target
@@ -156,7 +156,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vand(gx[i],gy[i]);
+                gz[i] = gvec.vand(gx[i],gy[i]);
             return ref gz;
         }
 

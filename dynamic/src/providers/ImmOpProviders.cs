@@ -62,7 +62,7 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<BinaryOp<Vector128<T>>> CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmitImmV128BinaryOp<T>(src,imm);
+            => Dynop.CreateImmV128BinaryOp<T>(src,imm);
     }
 
     readonly struct Imm8V256BinaryOpProvider : IImm8OpProvider
@@ -93,7 +93,7 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<BinaryOp<Vector256<T>>> CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmitImmV256BinaryOp<T>(src,imm);
+            => Dynop.CreateImmV256BinaryOp<T>(src,imm);
     }
 
     readonly struct Imm8V256UnaryOpProvider : IImm8OpProvider
@@ -124,7 +124,7 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<UnaryOp<Vector256<T>>> CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmitImmV256UnaryOp<T>(src,imm);
+            => Dynop.CreateImmV256UnaryOp<T>(src,imm);
     }
 
     readonly struct Imm8V128UnaryOpProvider : IImm8OpProvider
@@ -155,7 +155,7 @@ namespace Z0
 
         [MethodImpl(Inline)]            
         public DynamicDelegate<UnaryOp<Vector128<T>>> CreateOp(MethodInfo src, byte imm)
-            => Dynop.EmitImmV128UnaryOp<T>(src,imm);
+            => Dynop.CreateImmV128UnaryOp<T>(src,imm);
     }
 
     readonly struct Imm8OpProvider : IImm8OpProvider

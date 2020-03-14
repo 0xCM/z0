@@ -12,10 +12,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {    
         /// <summary>
         ///  __m128i _mm_i32gather_epi32 (int const* base_addr, __m128i vindex, const int scale) VPGATHERDD xmm, vm32x, xmm
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vgather(N128 w, in ushort src, Vector128<ushort> vidx)
-            => dinx.vcompact(GatherVector256(constptr(in uint32(in src)), v32i(dinx.vinflate(vidx, n256, z32)),2),n128, z16);
+            => dvec.vcompact(GatherVector256(constptr(in uint32(in src)), v32i(dvec.vinflate(vidx, n256, z32)),2),n128, z16);
 
         /// <summary>
         /// Loads a 128x16i vector from index-identified source cells
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vgather(N128 w, in short src, Vector128<short> vidx)
-            => v16i(dinx.vcompact(GatherVector256(constptr(in uint32(in src)), v32i(dinx.vinflate(v16u(vidx), n256, z32)),2),n128, z16));
+            => v16i(dvec.vcompact(GatherVector256(constptr(in uint32(in src)), v32i(dvec.vinflate(v16u(vidx), n256, z32)),2),n128, z16));
 
         /// <summary>
         /// Loads a 128x8u vector from index-identified source cells
@@ -123,10 +123,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<sbyte> vgather(N128 w, in sbyte src, Vector128<sbyte> vidx)
         {
-            (var v0, var v1) = dinx.vinflate(v8u(vidx), n512, z32);
+            (var v0, var v1) = dvec.vinflate(v8u(vidx), n512, z32);
             var x0 = GatherVector256(constptr(in uint32(in src)), v32i(v0),1);
             var x1 = GatherVector256(constptr(in uint32(in src)), v32i(v1),1);
-            return v8i(dinx.vcompact(x0,x1,n128, z8));
+            return v8i(dvec.vcompact(x0,x1,n128, z8));
         }
 
         /// <summary>
@@ -138,37 +138,37 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<byte> vgather(N128 w, in byte src, Vector128<byte> vidx)
         {
-            (var v0, var v1) = dinx.vinflate(vidx, n512, z32);
+            (var v0, var v1) = dvec.vinflate(vidx, n512, z32);
             var x0 = GatherVector256(constptr(in uint32(in src)), v32i(v0),1);
             var x1 = GatherVector256(constptr(in uint32(in src)), v32i(v1),1);
-            return dinx.vcompact(x0,x1,n128, z8);
+            return dvec.vcompact(x0,x1,n128, z8);
         }
 
 
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vgather(N256 w, in sbyte src, Vector256<sbyte> vidx)        
-            => dvec.vconcat(
-                    vgather(n128, in src, dinx.vlo(vidx)), 
-                    vgather(n128, in src, dinx.vhi(vidx)));
+            => vdirect.vconcat(
+                    vgather(n128, in src, dvec.vlo(vidx)), 
+                    vgather(n128, in src, dvec.vhi(vidx)));
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vgather(N256 w, in byte src, Vector256<byte> vidx)        
-            => dvec.vconcat(
-                    vgather(n128, in src, dinx.vlo(vidx)), 
-                    vgather(n128, in src, dinx.vhi(vidx)));
+            => vdirect.vconcat(
+                    vgather(n128, in src, dvec.vlo(vidx)), 
+                    vgather(n128, in src, dvec.vhi(vidx)));
 
 
         [MethodImpl(Inline), Op]
         public static Vector256<short> vgather(N256 w, in short src, Vector256<short> vidx)        
-            => dvec.vconcat(
-                    vgather(n128, in src, dinx.vlo(vidx)), 
-                    vgather(n128, in src, dinx.vhi(vidx)));
+            => vdirect.vconcat(
+                    vgather(n128, in src, dvec.vlo(vidx)), 
+                    vgather(n128, in src, dvec.vhi(vidx)));
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vgather(N256 w, in ushort src, Vector256<ushort> vidx)        
-            => dvec.vconcat(
-                    vgather(n128, in src, dinx.vlo(vidx)), 
-                    vgather(n128, in src, dinx.vhi(vidx)));
+            => vdirect.vconcat(
+                    vgather(n128, in src, dvec.vlo(vidx)), 
+                    vgather(n128, in src, dvec.vhi(vidx)));
 
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale) VPGATHERQQ ymm, vm64y, ymm

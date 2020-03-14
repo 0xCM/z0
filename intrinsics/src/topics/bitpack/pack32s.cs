@@ -9,7 +9,7 @@ namespace Z0
     
     using static Root;    
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     partial class bitpack
     {
@@ -59,7 +59,7 @@ namespace Z0
         static byte pack(Span<bit> src, N8 n)
         {
             var v0 = vload(n256, head(convert(src, 0, bitsize<byte>())));
-            return (byte)packlsb8(dinx.vcompact(v0,n128,z8));
+            return (byte)packlsb8(dvec.vcompact(v0,n128,z8));
         }
 
         /// <summary>

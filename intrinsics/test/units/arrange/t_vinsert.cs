@@ -49,12 +49,12 @@ namespace Z0
                 var v128Src = Random.CpuVector<T>(w);
                 var srcSpan = v128Src.ToSpan();
 
-                var dst = gvec.vzero(n256,t);
+                var dst = vgeneric.vzero(n256,t);
                 
-                var vLo = ginx.vinsert(v128Src, dst,0);
+                var vLo = gvec.vinsert(v128Src, dst,0);
                 var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);
 
-                var vHi = ginx.vinsert(v128Src, dst, 1);
+                var vHi = gvec.vinsert(v128Src, dst, 1);
                 var vHiSpan = vHi.ToSpan().Slice(vLo.Length()/2);
 
                 Claim.numeq(srcSpan, vLoSpan);

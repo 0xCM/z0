@@ -13,7 +13,7 @@ namespace Z0
 
     using static Root;    
 
-    partial class dinx
+    partial class dvec
     {
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsign(Vector128<sbyte> lhs, Vector128<sbyte> rhs)

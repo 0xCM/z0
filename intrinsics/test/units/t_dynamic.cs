@@ -41,8 +41,8 @@ namespace Z0
 
         public void handle_test()
         {   const byte imm8 = 9;
-            var method = typeof(ginx).DeclaredMethods().WithName(nameof(ginx.vbsll)).OfKind(VK.vk128()).Single();
-            var op = Dynop.EmitImmVUnaryOp(VK.vk128<uint>(), Identity.identify(method), method,imm8);
+            var method = typeof(gvec).DeclaredMethods().WithName(nameof(gvec.vbsll)).OfKind(VK.vk128()).Single();
+            var op = Dynop.CreateImmVUnaryOp(VK.vk128<uint>(), Identity.identify(method), method,imm8);
             var handle = GetMethodHandle(op.DynamicMethod);
             Notify(handle.Value.ToString());
 
@@ -58,7 +58,7 @@ namespace Z0
             {
                 var x = Random.CpuVector<uint>(n128);
                 var y = vbsll(x);
-                var z = ginx.vbsll(x,imm8);
+                var z = gvec.vbsll(x,imm8);
                 Claim.eq(z,y);
             }
         }

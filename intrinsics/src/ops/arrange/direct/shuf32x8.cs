@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class dinx    
+    partial class dvec    
     {        
         /// <summary>
         /// Rearranges the source vector according to the indices specified in the control vector dst[i] = src[spec[i]]

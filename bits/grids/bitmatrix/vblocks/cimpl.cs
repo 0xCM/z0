@@ -9,19 +9,19 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     
     partial class vblock
     {     
         [MethodImpl(Inline)]
         public static Vector128<T> vcimpl<T>(N128 w, in T a, in T b)
             where T : unmanaged
-                => ginx.vcimpl(vload(w, in a),vload(w, in b));
+                => gvec.vcimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline)]
         public static Vector256<T> vcimpl<T>(N256 w, in T a, in T b)
             where T : unmanaged
-                => ginx.vcimpl(vload(w, in a),vload(w, in b));
+                => gvec.vcimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline)]
         public static void cimpl<T>(N128 w, in T a, in T b, ref T z)

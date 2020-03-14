@@ -13,37 +13,37 @@ namespace Z0
     {   
         public void vbyteswap_outline()
         {
-            var x16 = gvec.vparts(n128, 
+            var x16 = vgeneric.vparts(n128, 
                 0b0000000011111111, 0b1111111100000000, 
                 0b1100110000110011, 0b0011001111001100,
                 0b1000000000000000, 0b0000000010000000,                
                 0b0000011100000111, 0b0000011100000111
                 );
 
-            var y16 = gvec.vparts(n128, 
+            var y16 = vgeneric.vparts(n128, 
                 0b1111111100000000, 0b0000000011111111, 
                 0b0011001111001100, 0b1100110000110011, 
                 0b0000000010000000, 0b1000000000000000,                 
                 0b0000011100000111, 0b0000011100000111 
                 );
 
-            var z16 = dinx.vbyteswap(x16);
+            var z16 = dvec.vbyteswap(x16);
             var z16s = z16.ToSpan();
 
             Claim.eq(y16,z16);            
             for(var i=0; i<z16s.Length; i+= 2)
                 Claim.eq(Bits.byteswap(z16s[i]), z16s[i+1]);
 
-            var x32 = gvec.vparts(n128, 
+            var x32 = vgeneric.vparts(n128, 
                 0xFFFF0000, 0x0000FFFF,
                 0xFF000000, 0x000000FF
                 );
-            var y32 = gvec.vparts(n128, 
+            var y32 = vgeneric.vparts(n128, 
                 0x0000FFFF, 0xFFFF0000,
                 0x000000FF, 0xFF000000
                 );
             
-            var z32 = dinx.vbyteswap(x32);
+            var z32 = dvec.vbyteswap(x32);
             Claim.eq(y32,z32);
         }
 

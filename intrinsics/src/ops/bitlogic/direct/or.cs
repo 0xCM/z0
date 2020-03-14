@@ -15,9 +15,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
 
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    public static partial class dinx
+    public static partial class dvec
     {
         
         [MethodImpl(Inline), Or]

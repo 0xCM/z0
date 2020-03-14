@@ -16,7 +16,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        static Type ApiG => typeof(ginx);
+        static Type ApiG => typeof(gvec);
 
         static MethodInfo gApiMethod(VKT.Vec128 hk, string name)
             => ApiG.DeclaredMethods().WithName(name).OfKind(hk).Single();

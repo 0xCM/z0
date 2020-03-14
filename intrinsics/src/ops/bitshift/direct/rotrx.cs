@@ -12,7 +12,7 @@ namespace Z0
     using static Root;    
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Rotates the full 128 bits of a vector rightward a bit-level resolution

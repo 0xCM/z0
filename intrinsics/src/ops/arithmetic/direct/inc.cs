@@ -12,7 +12,7 @@ namespace Z0
     using static Root;    
     using static Nats;
 
-    partial class dinx    
+    partial class dvec    
     {
         /// <summary>
         /// Inrements each component by 1

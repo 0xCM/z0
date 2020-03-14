@@ -17,7 +17,7 @@ namespace Z0
 
     using static Root;    
  
-    partial class dinx
+    partial class dvec
     {        
         [MethodImpl(Inline), Op]
         public static long vdot(Vector256<int> x, Vector256<int> y)

@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Applies a rigtward shift over the full 128 vector bits at byte-level resolution
@@ -25,13 +25,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vbsrl(v8u(x), count));
+                return generic<T>(dvec.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbsrl(v16u(x), count));
+                return generic<T>(dvec.vbsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vbsrl(v32u(x), count));
+                return generic<T>(dvec.vbsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbsrl(v64u(x), count));
+                return generic<T>(dvec.vbsrl(v64u(x), count));
             else
                 throw unsupported<T>();
         }
@@ -47,13 +47,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vbsrl(v8u(x), count));
+                return generic<T>(dvec.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbsrl(v16u(x), count));
+                return generic<T>(dvec.vbsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vbsrl(v32u(x), count));
+                return generic<T>(dvec.vbsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbsrl(v64u(x), count));
+                return generic<T>(dvec.vbsrl(v64u(x), count));
             else
                 throw unsupported<T>();
         }

@@ -261,22 +261,22 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static void vstore<T>(Vector128<T> src, ref T dst)
         where T : unmanaged
-            => gvec.vstore(src, ref dst);
+            => vgeneric.vstore(src, ref dst);
 
     [MethodImpl(Inline)]
     public static void vstore<T>(Vector256<T> src, ref T dst)
         where T : unmanaged
-            => gvec.vstore(src, ref dst);
+            => vgeneric.vstore(src, ref dst);
 
     [MethodImpl(Inline)]
     public static Span<T> vstore<T>(Vector128<T> src, Span<T> dst)
         where T : unmanaged            
-            => gvec.vstore(src, dst);
+            => vgeneric.vstore(src, dst);
 
     [MethodImpl(Inline)]
     public static Span<T> vstore<T>(Vector256<T> src, Span<T> dst)
         where T : unmanaged            
-            => gvec.vstore(src, dst);
+            => vgeneric.vstore(src, dst);
 
     /// <summary>
     /// Extracts an index-identified component from the source vector
@@ -287,7 +287,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static T vcell<T>(Vector128<T> src, int index)
         where T : unmanaged
-            => gvec.vcell(src,index);
+            => vgeneric.vcell(src,index);
 
     /// <summary>
     /// Extracts an index-identified component from the source vector
@@ -298,7 +298,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static T vcell<T>(Vector256<T> src, int index)
         where T : unmanaged
-            => gvec.vcell(src,index);
+            => vgeneric.vcell(src,index);
 
     /// <summary>
     /// Computes the vector component count for a given bit-width and component type
@@ -309,7 +309,7 @@ partial class zfunc
     public static int vcount<W,T>(W w = default, T t = default)
         where W : unmanaged, ITypeNat
         where T : unmanaged
-            => gvec.vcount<W,T>();
+            => vgeneric.vcount<W,T>();
 
     /// <summary>
     /// Computes the vector component count for a given bit-width and component type
@@ -319,7 +319,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static int vcount<T>(N128 w, T t = default)
         where T : unmanaged
-            => gvec.vcount<T>(w);
+            => vgeneric.vcount<T>(w);
 
     /// <summary>
     /// Computes the vector component count for a given bit-width and component type
@@ -329,6 +329,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static int vcount<T>(N256 w, T t = default)
         where T : unmanaged
-            => gvec.vcount<T>(w);
+            => vgeneric.vcount<T>(w);
     
 }

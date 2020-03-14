@@ -46,7 +46,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vsame<T>(gx,gy);    
+                => gvec.vsame<T>(gx,gy);    
 
         /// <summary>
         /// Returns 1 if the source grids have identical conent and 0 otherwise
@@ -61,7 +61,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vsame<T>(gx,gy);    
+                => gvec.vsame<T>(gx,gy);    
  
         [MethodImpl(Inline)]
         public static bit same<T>(in BitGrid<T> gx, in BitGrid<T> gy)
@@ -69,7 +69,7 @@ namespace Z0
         {
             var blocks = gx.BlockCount;
             for(var i=0; i<blocks; i++)
-                if(!ginx.vsame(gx[i],gy[i]))
+                if(!gvec.vsame(gx[i],gy[i]))
                        return false;
             return true;        
         }
@@ -90,7 +90,7 @@ namespace Z0
         {
             var blocks = gx.BlockCount;
             for(var i=0; i<blocks; i++)
-                if(!ginx.vsame(gx[i],gy[i]))
+                if(!gvec.vsame(gx[i],gy[i]))
                        return false;
             return true;        
         }

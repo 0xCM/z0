@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public uint Invoke(Vector128<T> x,Vector128<T> y,Vector128<T> z) => ginx.vpop(x,y,z);
+            public uint Invoke(Vector128<T> x,Vector128<T> y,Vector128<T> z) => gvec.vpop(x,y,z);
             
             [MethodImpl(Inline)]
             public uint InvokeScalar(T a, T b, T c) => gbits.pop(a,b,c);
@@ -42,7 +42,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public uint Invoke(Vector256<T> x,Vector256<T> y,Vector256<T> z) => ginx.vpop(x,y,z);
+            public uint Invoke(Vector256<T> x,Vector256<T> y,Vector256<T> z) => gvec.vpop(x,y,z);
 
             [MethodImpl(Inline)]
             public uint InvokeScalar(T a, T b, T c) => gbits.pop(a,b,c);

@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> valt<T>(N256 n, T a, T b)
             where T : unmanaged
-                => ginx.vblend(gvec.vbroadcast(n,a), gvec.vbroadcast(n,b), VectorData.blendspec<T>(n,false));
+                => gvec.vblend(vgeneric.vbroadcast(n,a), vgeneric.vbroadcast(n,b), VectorData.blendspec<T>(n,false));
 
         /// <summary>
         /// Creates a shuffle mask that clears ever-other vector component

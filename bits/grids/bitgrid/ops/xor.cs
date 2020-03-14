@@ -102,7 +102,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vxor<T>(gx,gy);    
+                => gvec.vxor<T>(gx,gy);    
 
         /// <summary>
         /// Computes the bitwise xor between natural bitgrids
@@ -117,7 +117,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vxor<T>(gx,gy);    
+                => gvec.vxor<T>(gx,gy);    
 
  
         /// <summary>
@@ -133,7 +133,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vxor<T>(gx,gy);    
+                => gvec.vxor<T>(gx,gy);    
 
         /// <summary>
         /// Computes the bitwise XOR between generic bitgrids and stores the result to a caller-supplied target
@@ -148,7 +148,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vxor(gx[i],gy[i]);
+                gz[i] = gvec.vxor(gx[i],gy[i]);
             return ref gz;
         }
 
@@ -184,7 +184,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vxor(gx[i],gy[i]);
+                gz[i] = gvec.vxor(gx[i],gy[i]);
             return ref gz;
         }
 

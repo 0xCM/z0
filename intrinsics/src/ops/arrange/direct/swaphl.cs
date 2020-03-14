@@ -11,7 +11,7 @@ namespace Z0
         
     using static Root;
 
-    partial class dinx
+    partial class dvec
     {        
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector

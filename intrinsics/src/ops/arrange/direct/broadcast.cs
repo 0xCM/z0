@@ -15,7 +15,7 @@ namespace Z0
     using static Root;
     using static Nats;
     
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vbroadcast(N256 w, byte lo, byte hi)
-            => dvec.vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
+            => vdirect.vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vbroadcast(N256 w, ushort lo, ushort hi)
-            => dvec.vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
+            => vdirect.vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vbroadcast(N256 w, uint lo, uint hi)
-            => dvec.vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
+            => vdirect.vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbroadcast(N256 w, ulong lo, ulong hi)
-            => dvec.vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
+            => vdirect.vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value

@@ -11,9 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
         
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx    
+    partial class dvec    
     {        
         /// <summary>
         /// __m256i _mm256_permutevar8x32_epi32 (__m256i a, __m256i idx)VPERMD ymm, ymm/m256, ymm

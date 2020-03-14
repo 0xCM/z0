@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Shifts the entire 128-bit vector rightwards at bit-level resolution

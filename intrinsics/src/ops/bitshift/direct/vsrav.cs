@@ -14,7 +14,7 @@ namespace Z0
 
     using static Root;    
 
-    partial class dinx
+    partial class dvec
     {         
         /// <summary>
         /// _mm_srav_epi32, avx2, shift-right variable arithmetic:

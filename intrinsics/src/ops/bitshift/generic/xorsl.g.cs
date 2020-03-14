@@ -11,9 +11,9 @@ namespace Z0
     
     using static As;
     using static Root;    
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Computes z := x^(x << offset)
@@ -26,13 +26,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vxorsl(v8u(x), count));
+                return vgeneric<T>(dvec.vxorsl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsl(v16u(x), count));
+                return vgeneric<T>(dvec.vxorsl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsl(v32u(x), count));
+                return vgeneric<T>(dvec.vxorsl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vxorsl(v64u(x), count));
+                return vgeneric<T>(dvec.vxorsl(v64u(x), count));
             else
                 throw unsupported<T>();
         }
@@ -48,13 +48,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vxorsl(v8u(x), count));
+                return vgeneric<T>(dvec.vxorsl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsl(v16u(x), count));
+                return vgeneric<T>(dvec.vxorsl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsl(v32u(x), count));
+                return vgeneric<T>(dvec.vxorsl(v32u(x), count));
             else if(typeof(T) == typeof(ulong)) 
-                return vgeneric<T>(dinx.vxorsl(v64u(x), count));
+                return vgeneric<T>(dvec.vxorsl(v64u(x), count));
             else
                 throw unsupported<T>();
         }

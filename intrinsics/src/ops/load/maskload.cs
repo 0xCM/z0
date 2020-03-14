@@ -16,7 +16,7 @@ namespace Z0
     using static Root;    
     using static Blocks;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// __m128i _mm_maskload_epi32 (int const* mem_addr, __m128i mask) VPMASKMOVD xmm, xmm, m128

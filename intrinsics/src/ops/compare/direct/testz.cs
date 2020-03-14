@@ -13,22 +13,22 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {
         [MethodImpl(Inline), Op]
         public static bit testz(ulong a, ulong b)
-            => dinx.vtestz(gvec.vbroadcast(n128,a), gvec.vbroadcast(n128,b));
+            => dvec.vtestz(vgeneric.vbroadcast(n128,a), vgeneric.vbroadcast(n128,b));
 
         [MethodImpl(Inline), Op]
         public static bit testc(ulong a, ulong b)
-            => dinx.vtestc(gvec.vbroadcast(n128,a), gvec.vbroadcast(n128,b));
+            => dvec.vtestc(vgeneric.vbroadcast(n128,a), vgeneric.vbroadcast(n128,b));
 
         [MethodImpl(Inline), Op]
         public static bit testc(ulong a)
-            => dinx.vtestc(gvec.vbroadcast(n128,a));
+            => dvec.vtestc(vgeneric.vbroadcast(n128,a));
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128

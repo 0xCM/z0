@@ -9,7 +9,7 @@ namespace Z0
     
     using static Root;    
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     partial class bitpack
     {
@@ -22,7 +22,7 @@ namespace Z0
         public static byte pack32(in uint src, N8 n)
         {
             var v0 = vload(n256, skip(src,0*8));
-            return (byte)bitpack.packlsb8(dinx.vcompact(v0, n128, z8));
+            return (byte)bitpack.packlsb8(dvec.vcompact(v0, n128, z8));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         {
             var v0 = vload(n256, skip(src,0*8));
             var v1 = vload(n256, skip(src,1*8));
-            return bitpack.packlsb8(dinx.vcompact(v0, v1, n128, z8));
+            return bitpack.packlsb8(dvec.vcompact(v0, v1, n128, z8));
         }
 
         /// <summary>
@@ -48,13 +48,13 @@ namespace Z0
         {            
             var v0 = vload(n256, skip(src,0*8));
             var v1 = vload(n256, skip(src,1*8));
-            var x = dinx.vcompact(v0,v1,n256,z16);
+            var x = dvec.vcompact(v0,v1,n256,z16);
 
             v0 = vload(n256, skip(src,2*8));
             v1 = vload(n256, skip(src,3*8));
-            var y = dinx.vcompact(v0,v1,n256,z16);
+            var y = dvec.vcompact(v0,v1,n256,z16);
 
-            return bitpack.packlsb8(dinx.vcompact(x,y,n256,z8));
+            return bitpack.packlsb8(dvec.vcompact(x,y,n256,z8));
         }
 
         /// <summary>
@@ -67,23 +67,23 @@ namespace Z0
         {
             var v0 = vload(n256, skip(src,0*8));
             var v1 = vload(n256, skip(src,1*8));
-            var x = dinx.vcompact(v0,v1,n256,z16);
+            var x = dvec.vcompact(v0,v1,n256,z16);
 
             v0 = vload(n256, skip(src,2*8));
             v1 = vload(n256, skip(src,3*8));
-            var y = dinx.vcompact(v0,v1,n256,z16);
+            var y = dvec.vcompact(v0,v1,n256,z16);
 
-            var packed = (ulong)packlsb8(dinx.vcompact(x,y,n256,z8));
+            var packed = (ulong)packlsb8(dvec.vcompact(x,y,n256,z8));
 
             v0 = vload(n256, skip(src,4*8));
             v1 = vload(n256, skip(src,5*8));
-            x = dinx.vcompact(v0,v1,n256,z16);
+            x = dvec.vcompact(v0,v1,n256,z16);
 
             v0 = vload(n256, skip(src,6*8));
             v1 = vload(n256, skip(src,7*8));
-            y = dinx.vcompact(v0,v1,n256,z16);
+            y = dvec.vcompact(v0,v1,n256,z16);
 
-            packed |= (ulong)packlsb8(dinx.vcompact(x,y,n256,z8)) << 32;
+            packed |= (ulong)packlsb8(dvec.vcompact(x,y,n256,z8)) << 32;
 
             return packed;
         }

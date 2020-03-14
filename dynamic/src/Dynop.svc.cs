@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
     using static Nats;
-    using static FKT;
 
     public static class DynopServices
     {
@@ -31,7 +30,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IImm8OpProvider ImmV256BinaryOpProvider(this IContext context)
             => new Imm8OpProvider(context, VK.vk256(), FK.op(n2));
-
 
         [MethodImpl(Inline)]
         public static IImm8OpProvider<UnaryOp<Vector128<T>>> ImmV128UnaryOpProvider<T>(this IContext context)

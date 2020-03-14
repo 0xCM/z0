@@ -10,10 +10,10 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Computes the component-wise sum of two vectors
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static Vector128<T> vadd<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vadd(x, gvec.vbroadcast(n128,a));
+                => vadd(x, vgeneric.vbroadcast(n128,a));
 
         /// <summary>
         /// Adds a constant value to each vector component
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static Vector256<T> vadd<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vadd(x, gvec.vbroadcast(n256,a));
+                => vadd(x, vgeneric.vbroadcast(n256,a));
 
         /// <summary>
         /// Adds a constant value to each source vector component
@@ -79,20 +79,20 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static Vector512<T> vadd<T>(Vector512<T> x, T a)
             where T : unmanaged
-                => vadd(x, gvec.vbroadcast(n512,a));
+                => vadd(x, vgeneric.vbroadcast(n512,a));
 
         [MethodImpl(Inline)]
         static Vector128<T> vadd_u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vadd(v8u(x), v8u(y)));
+                return generic<T>(dvec.vadd(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vadd(v16u(x), v16u(y)));
+                return generic<T>(dvec.vadd(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vadd(v32u(x), v32u(y)));
+                return generic<T>(dvec.vadd(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vadd(v64u(x), v64u(y)));
+                return generic<T>(dvec.vadd(v64u(x), v64u(y)));
             else
                 return vadd_i(x,y);
         }
@@ -102,13 +102,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vadd(v8i(x), v8i(y)));
+                 return generic<T>(dvec.vadd(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vadd(v16i(x), v16i(y)));
+                 return generic<T>(dvec.vadd(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vadd(v32i(x), v32i(y)));
+                 return generic<T>(dvec.vadd(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(dinx.vadd(v64i(x), v64i(y)));
+                 return generic<T>(dvec.vadd(v64i(x), v64i(y)));
             else
                 return ginxfp.vadd(x,y);
         }
@@ -118,13 +118,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vadd(v8u(x), v8u(y)));
+                return generic<T>(dvec.vadd(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vadd(v16u(x), v16u(y)));
+                return generic<T>(dvec.vadd(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vadd(v32u(x), v32u(y)));
+                return generic<T>(dvec.vadd(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vadd(v64u(x), v64u(y)));
+                return generic<T>(dvec.vadd(v64u(x), v64u(y)));
             else
                 return vadd_i(x,y);
         }    
@@ -134,13 +134,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vadd(v8i(x), v8i(y)));
+                 return generic<T>(dvec.vadd(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vadd(v16i(x), v16i(y)));
+                 return generic<T>(dvec.vadd(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vadd(v32i(x), v32i(y)));
+                 return generic<T>(dvec.vadd(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(dinx.vadd(v64i(x), v64i(y)));
+                 return generic<T>(dvec.vadd(v64i(x), v64i(y)));
             else
                 return ginxfp.vadd(x,y);
         }    

@@ -17,7 +17,7 @@ namespace Z0
 
     using static Root;
     
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// __m128i _mm_insert_epi8 (__m128i a, int i, const int imm8) PINSRB xmm, reg/m8, imm8

@@ -15,9 +15,9 @@ namespace Z0
         public void block_32x8u_to_128x32u()
         {
             var blockA = Blocks.parts<byte>(n32,1,2,3,4);
-            var x = gvec.vparts(n128,1,2,3,4);
+            var x = vgeneric.vparts(n128,1,2,3,4);
             var blockB = x.ToBlock();            
-            var y = dinx.vconvert(blockA, n128, z32);
+            var y = dvec.vconvert(blockA, n128, z32);
             var blockC = y.ToBlock();            
             Claim.eq(x,y);
             Claim.numeq(blockB,blockC);            
@@ -26,48 +26,48 @@ namespace Z0
         public void block_64x8u_to_2x128x32u()
         {
             var block = Blocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
-            var xE = gvec.vparts(n128,1,2,3,4);
-            var yE = gvec.vparts(n128,5,6,7,8);
-            var z = dinx.vconvert(block, n256,z32);
-            Claim.eq(xE, dinx.vlo(z));
-            Claim.eq(yE, dinx.vhi(z));
+            var xE = vgeneric.vparts(n128,1,2,3,4);
+            var yE = vgeneric.vparts(n128,5,6,7,8);
+            var z = dvec.vconvert(block, n256,z32);
+            Claim.eq(xE, dvec.vlo(z));
+            Claim.eq(yE, dvec.vhi(z));
         }
 
         public void block_32x8u_to_2x128x64u()
         {
             var block = Blocks.parts<byte>(n32,1,2,3,4);
-            var xE = gvec.vparts(n128,1,2);
-            var yE = gvec.vparts(n128,3,4);
+            var xE = vgeneric.vparts(n128,1,2);
+            var yE = vgeneric.vparts(n128,3,4);
 
-            var z = dinx.vconvert(block,n256,z64);
-            Claim.eq(xE, dinx.vlo(z));
-            Claim.eq(yE, dinx.vhi(z));
+            var z = dvec.vconvert(block,n256,z64);
+            Claim.eq(xE, dvec.vlo(z));
+            Claim.eq(yE, dvec.vhi(z));
         }
 
         public void block_128x8u_to_2x128x16u()
         {
             var block = Blocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
-            var xE = gvec.vparts(n128,1,2,3,4,5,6,7,8);
-            var yE = gvec.vparts(n128,9,10,11,12,13,14,15,16);
-            var z = dinx.vconvert(block,n256,z16);
+            var xE = vgeneric.vparts(n128,1,2,3,4,5,6,7,8);
+            var yE = vgeneric.vparts(n128,9,10,11,12,13,14,15,16);
+            var z = dvec.vconvert(block,n256,z16);
             
-            Claim.eq(xE, dinx.vlo(z));
-            Claim.eq(yE, dinx.vhi(z));
+            Claim.eq(xE, dvec.vlo(z));
+            Claim.eq(yE, dvec.vhi(z));
         }
 
         public void v128x8u_v128x16u()
         {
-            var x = gvec.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var y = dinx.vmaplo(x, n128, z16);
-            var z = gvec.vparts(n128,0,1,2,3,4,5,6,7);
+            var x = vgeneric.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var y = dvec.vmaplo(x, n128, z16);
+            var z = vgeneric.vparts(n128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);
         }
 
         public void m64x8u_v128x16u()
         {
             var x = Blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            var y = dinx.vconvert(x, n128, z16);
-            var z = gvec.vparts(n128,0,1,2,3,4,5,6,7);            
+            var y = dvec.vconvert(x, n128, z16);
+            var z = vgeneric.vparts(n128,0,1,2,3,4,5,6,7);            
 
             Claim.eq(y,z);            
         }
@@ -75,11 +75,11 @@ namespace Z0
         public void blockspan_128x8u_v128x16u()
         {
             var x = Blocks.parts<byte>(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var q = dinx.vconvert(x, n256, z16);
+            var q = dvec.vconvert(x, n256, z16);
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
-            var y0s = dinx.vlo(q).ToSpan();
-            var y1s = dinx.vhi(q).ToSpan();
+            var y0s = dvec.vlo(q).ToSpan();
+            var y1s = dvec.vhi(q).ToSpan();
 
             for(var i=0; i <8; i++)
             {
@@ -91,11 +91,11 @@ namespace Z0
         public void blockspan_64x8u_v2x128x32u()
         {
             var x = Blocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            var y = dinx.vconvert(x,n256,z32);
+            var y = dvec.vconvert(x,n256,z32);
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);
-            var y0s = dinx.vlo(y).ToSpan();
-            var y1s = dinx.vhi(y).ToSpan();
+            var y0s = dvec.vlo(y).ToSpan();
+            var y1s = dvec.vhi(y).ToSpan();
 
             for(var i=0; i <4; i++)
             {
@@ -120,7 +120,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = dinx.vconvert(sv,tw,tt);
+                var tv = dvec.vconvert(sv,tw,tt);
                 
                 sv.StoreTo(sb);
                 tv.StoreTo(tb);
@@ -148,9 +148,9 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = dinx.vconvert(sv,n256,tt);
-                var tvLo = dinx.vlo(tv);
-                var tvHi = dinx.vhi(tv);
+                var tv = dvec.vconvert(sv,n256,tt);
+                var tvLo = dvec.vlo(tv);
+                var tvHi = dvec.vhi(tv);
                 
                 sv.StoreTo(sb);
                 tvLo.StoreTo(tb,0);

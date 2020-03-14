@@ -337,15 +337,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit testz(in byte A, in byte B)
-            => dinx.testz(Bytes.read64(in A), Bytes.read64(in B));
+            => dvec.testz(Bytes.read64(in A), Bytes.read64(in B));
 
         [MethodImpl(Inline)]
         static bit testc(in byte A, in byte B)
-            => dinx.testc(Bytes.read64(in A),Bytes.read64(in B));
+            => dvec.testc(Bytes.read64(in A),Bytes.read64(in B));
 
         [MethodImpl(Inline)]
         static bit testc(in byte A)
-            => dinx.testc(Bytes.read64(in A));
+            => dvec.testc(Bytes.read64(in A));
 
     }
 }

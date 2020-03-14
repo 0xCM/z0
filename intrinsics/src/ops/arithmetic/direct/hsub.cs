@@ -16,7 +16,7 @@ namespace Z0
         
     using static Root;    
 
-    partial class dinx
+    partial class dvec
     {        
         /// <summary>
         /// __m128i _mm_hsub_epi16 (__m128i a, __m128i b) PHSUBW xmm, xmm/m128

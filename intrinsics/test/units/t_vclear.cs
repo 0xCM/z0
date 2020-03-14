@@ -41,8 +41,8 @@ namespace Z0
                 var cellcount = n/bitsize(t);
                 var x = Random.CpuVector<T>(n);
                 var x1 = vgbits.vbitclear(x, start, length);                                    
-                var x2 = ginx.vsrl(x1,start);
-                Claim.nea(ginx.vnonz(x2));
+                var x2 = gvec.vsrl(x1,start);
+                Claim.nea(gvec.vnonz(x2));
             }
         }
 
@@ -56,8 +56,8 @@ namespace Z0
                 var cellcount = n/bitsize(t);
                 var x = Random.CpuVector<T>(n);
                 var x1 = vgbits.vbitclear(x, start, length);                                    
-                var x2 = ginx.vsrl(x1,start);
-                Claim.nea(ginx.vnonz(x2));
+                var x2 = gvec.vsrl(x1,start);
+                Claim.nea(gvec.vnonz(x2));
             }
         }
 
@@ -67,7 +67,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
-                var y = dinx.vshuf16x8(x, tr);
+                var y = dvec.vshuf16x8(x, tr);
                 var xs = x.ToBlock();
                 for(var j =0; j< xs.CellCount; j++)
                 {

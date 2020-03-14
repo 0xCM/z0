@@ -117,6 +117,6 @@ namespace Z0
             => dinxfp.vperm8x32(src,MRev256f32);    
 
         static Vector256<int> MRev256f32 
-            => gvec.vpartsi(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
+            => vgeneric.vpartsi(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
     }
 }

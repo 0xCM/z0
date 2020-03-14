@@ -15,7 +15,7 @@ namespace Z0
     
     using static Root;
 
-    static partial class dvec
+    static partial class vdirect
     {
         /// <summary>
         /// Stores vector content to a memory location

@@ -14,7 +14,7 @@ namespace Z0
     /// Direct vectorized intrinsics
     /// </summary>
     [ApiHost(ApiHostKind.Direct)]
-    public static partial class dinx
+    public static partial class dvec
     {
 
     }
@@ -72,7 +72,7 @@ namespace Z0
     /// Generic vectorized intrinsics
     /// </summary>
     [ApiHost(ApiHostKind.Generic)]
-    public static partial class ginx
+    public static partial class gvec
     {        
 
     }

@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => ginx.vswaphl(x);            
+            public Vector128<T> Invoke(Vector128<T> x) => gvec.vswaphl(x);            
         }
 
         public readonly struct SwapHiLo256<T> : IVUnaryOp256<T>
@@ -39,7 +39,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x) => ginx.vswaphl(x);
+            public Vector256<T> Invoke(Vector256<T> x) => gvec.vswaphl(x);
         }
     }
 }

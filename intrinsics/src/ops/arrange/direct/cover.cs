@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
         
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// 8x16w -> 16x8w

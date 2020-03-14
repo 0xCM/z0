@@ -17,7 +17,7 @@ namespace Z0
     using static Root;    
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Computes the horizontal sum of the source vectors

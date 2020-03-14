@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     public class t_vblendp : UnitTest<t_vblendp>
     {
@@ -65,10 +65,10 @@ namespace Z0
             var maskspec = MaskSpecs.msb(n2,n1,t);
 
             var source = vpattern.vincrements(w,t);
-            var blendspec = ginx.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
-            var target = ginx.vblendp(source, blendspec);
-            var expect = gvec.vparts(w,0,5,2,7,4,1,6,3);
-            Claim.yea(ginx.vsame(expect,target));
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var target = gvec.vblendp(source, blendspec);
+            var expect = vgeneric.vparts(w,0,5,2,7,4,1,6,3);
+            Claim.yea(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -88,10 +88,10 @@ namespace Z0
             var maskspec = MaskSpecs.msb(n4,n1,t);
 
             var source = vpattern.vincrements(w,t);
-            var blendspec = ginx.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
-            var target = ginx.vblendp(source, blendspec);
-            var expect = gvec.vparts(w,0,1,2,7,4,5,6,3);
-            Claim.yea(ginx.vsame(expect,target));
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var target = gvec.vblendp(source, blendspec);
+            var expect = vgeneric.vparts(w,0,1,2,7,4,5,6,3);
+            Claim.yea(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -111,10 +111,10 @@ namespace Z0
             var maskspec = MaskSpecs.lsb(n2,n1,t);
 
             var source = vpattern.vincrements(w,t);
-            var blendspec = ginx.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
-            var target = ginx.vblendp(source, blendspec);
-            var expect = gvec.vparts(w,4,1,6,3,0,5,2,7);
-            Claim.yea(ginx.vsame(expect,target));
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var target = gvec.vblendp(source, blendspec);
+            var expect = vgeneric.vparts(w,4,1,6,3,0,5,2,7);
+            Claim.yea(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -133,10 +133,10 @@ namespace Z0
             var maskspec = MaskSpecs.jsb(n8,n2,t);
 
             var source = vpattern.vincrements(w,t);
-            var blendspec = ginx.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
-            var target = ginx.vblendp(source, blendspec);
-            var expect = gvec.vparts(w,4,5,2,3,0,1,6,7);
-            Claim.yea(ginx.vsame(expect,target));
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var target = gvec.vblendp(source, blendspec);
+            var expect = vgeneric.vparts(w,4,5,2,3,0,1,6,7);
+            Claim.yea(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -155,11 +155,11 @@ namespace Z0
             var maskspec = MaskSpecs.jsb(n8,n2,t);
 
             var source = vpattern.vincrements(w,t);
-            var blendspec = ginx.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
-            var target = ginx.vblendp(source, blendspec);
-            var expect = gvec.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var target = gvec.vblendp(source, blendspec);
+            var expect = vgeneric.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
             
-            Claim.yea(ginx.vsame(expect,target));
+            Claim.yea(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z16)), source,target);
             if(EmitInfo)
@@ -178,9 +178,9 @@ namespace Z0
             var maskspec = MaskSpecs.jsb(n8,n2,t);
 
             var source = vpattern.vincrements(w,t);
-            var blendspec = ginx.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
-            var target = ginx.vblendp(source, blendspec);
-            var expect = gvec.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var target = gvec.vblendp(source, blendspec);
+            var expect = vgeneric.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z32)), source,target);
@@ -200,8 +200,8 @@ namespace Z0
             var maskspec = MaskSpecs.jsb(n8,n2,t);
 
             var source = vpattern.vincrements(w,t);
-            var blendspec = ginx.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
-            var target = ginx.vblendp(source, blendspec);
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var target = gvec.vblendp(source, blendspec);
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z64)), source,target);
             if(EmitInfo)
@@ -213,14 +213,14 @@ namespace Z0
             var w = n512;
             var t = z8;
             var maskspec = MaskSpecs.jsb(n8,n2,t);
-            var blendspec = ginx.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
 
             var maskbits = BitMask.mask(maskspec.As(z64));
 
             for(var samples=0; samples< RepCount; samples++)
             {
                 var source = Random.CpuVector(w,t);                
-                var target = ginx.vblendp(source,blendspec);
+                var target = gvec.vblendp(source,blendspec);
                 
 
             }
@@ -241,13 +241,13 @@ namespace Z0
             
             var spec = pattern.LoadVector();
             var x = vpattern.vincrements(w, t);
-            var y = ginx.vadd(x, gmath.add(x.LastCell(), one(t)));            
-            var z = ginx.vblendp(x,y,spec);       
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), one(t)));            
+            var z = gvec.vblendp(x,y,spec);       
 
 
             var dst = Blocks.alloc(w,2,t);
-            ginx.vlo(z).StoreTo(dst,0);
-            ginx.vhi(z).StoreTo(dst,1);
+            gvec.vlo(z).StoreTo(dst,0);
+            gvec.vhi(z).StoreTo(dst,1);
 
             var perm = Permute.define(dst.Data);            
             for(var i=0; i< perm.Length; i++)
@@ -278,23 +278,23 @@ namespace Z0
 
         static Vector128<T> rrll_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.even(n2,n2,z64), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.even(n2,n2,z64), enabled(t), Blocks.single(w,t)).LoadVector();
 
         static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.odd(n2,n2,z64), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.odd(n2,n2,z64), enabled(t), Blocks.single(w,t)).LoadVector();
 
         static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), Blocks.single(w,t)).LoadVector();
 
         static Vector128<T> lr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.msb(n2,n1,z64), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.msb(n2,n1,z64), enabled(t), Blocks.single(w,t)).LoadVector();
 
         static Vector256<T> rl_pattern<T>(N256 w, T t = default)
             where T : unmanaged
-                => ginx.broadcast(BitMask.lsb(n2,n1,t), enabled(t), Blocks.single(w,t)).LoadVector();
+                => gvec.broadcast(BitMask.lsb(n2,n1,t), enabled(t), Blocks.single(w,t)).LoadVector();
 
 
         void vblendp_check<T>(Vector128<T> spec, [Caller] string title = null)
@@ -307,13 +307,13 @@ namespace Z0
             Claim.eq(natval(pn),TypeMath.div(w,t) * 2);
 
             var left = vpattern.vincrements(w, t);
-            var right = ginx.vadd(left, gmath.add(left.LastCell(), one(t)));            
-            var blend = ginx.vblendp(left,right,spec);       
+            var right = gvec.vadd(left, gmath.add(left.LastCell(), one(t)));            
+            var blend = gvec.vblendp(left,right,spec);       
 
 
             var dst = Blocks.alloc(w,2,t);
-            ginx.vlo(blend).StoreTo(dst,0);
-            ginx.vhi(blend).StoreTo(dst,1);
+            gvec.vlo(blend).StoreTo(dst,0);
+            gvec.vhi(blend).StoreTo(dst,1);
 
             var perm = Permute.define(dst.Data);            
             var tc = 0;
@@ -409,14 +409,14 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat             
         {
-            var spec = vto(gvec.vbroadcast(w, pattern),t);
+            var spec = vto(vgeneric.vbroadcast(w, pattern),t);
             var x = vpattern.vincrements(w, t);
-            var y = ginx.vadd(x, gmath.add(x.LastCell(), one(t)));            
-            var z = ginx.vblendp(x,y,spec);         
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), one(t)));            
+            var z = gvec.vblendp(x,y,spec);         
 
             var dst = Blocks.alloc(w,2,t);
-            ginx.vlo(z).StoreTo(dst,0);            
-            ginx.vhi(z).StoreTo(dst,1);            
+            gvec.vlo(z).StoreTo(dst,0);            
+            gvec.vhi(z).StoreTo(dst,1);            
 
             var perm = Permute.define(dst.Data);
             for(var i=0; i< perm.Length; i++)
@@ -437,10 +437,10 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat             
         {
-            var spec = vto(gvec.vbroadcast(w, pattern),t);
+            var spec = vto(vgeneric.vbroadcast(w, pattern),t);
             var x = vpattern.vincrements(w, t);
-            var y = ginx.vadd(x, gmath.add(x.LastCell(), one(t)));            
-            var z = ginx.vblendp(x,y,spec);         
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), one(t)));            
+            var z = gvec.vblendp(x,y,spec);         
 
             var dst = Blocks.alloc(w,2,t);
             z.Lo.StoreTo(dst,0);

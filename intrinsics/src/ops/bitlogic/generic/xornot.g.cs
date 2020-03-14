@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Computes x ^ ~y for vectors x and y
@@ -39,13 +39,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vxornot(v8u(x), v8u(y)));
+                return generic<T>(dvec.vxornot(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vxornot(v16u(x), v16u(y)));
+                return generic<T>(dvec.vxornot(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vxornot(v32u(x), v32u(y)));
+                return generic<T>(dvec.vxornot(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vxornot(v64u(x), v64u(y)));
+                return generic<T>(dvec.vxornot(v64u(x), v64u(y)));
             else
                 return vxornot_i(x,y);
         }
@@ -55,13 +55,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vxornot(v8i(x), v8i(y)));
+                return generic<T>(dvec.vxornot(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vxornot(v16i(x), v16i(y)));
+                return generic<T>(dvec.vxornot(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vxornot(v32i(x), v32i(y)));
+                return generic<T>(dvec.vxornot(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vxornot(v64i(x), v64i(y)));
+                return generic<T>(dvec.vxornot(v64i(x), v64i(y)));
             else
                 return vxornot_f(x,y);
         }
@@ -83,13 +83,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vxornot(v8u(x), v8u(y)));
+                return generic<T>(dvec.vxornot(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vxornot(v16u(x), v16u(y)));
+                return generic<T>(dvec.vxornot(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vxornot(v32u(x), v32u(y)));
+                return generic<T>(dvec.vxornot(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vxornot(v64u(x), v64u(y)));
+                return generic<T>(dvec.vxornot(v64u(x), v64u(y)));
             else
                 return vxornot_i(x,y);
         }
@@ -99,13 +99,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vxornot(v8i(x), v8i(y)));
+                return generic<T>(dvec.vxornot(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vxornot(v16i(x), v16i(y)));
+                return generic<T>(dvec.vxornot(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vxornot(v32i(x), v32i(y)));
+                return generic<T>(dvec.vxornot(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vxornot(v64i(x), v64i(y)));
+                return generic<T>(dvec.vxornot(v64i(x), v64i(y)));
             else
                 return vxornot_f(x,y);
         }

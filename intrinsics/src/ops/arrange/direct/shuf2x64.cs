@@ -16,9 +16,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vshuf2x64(Vector128<sbyte> src, [Imm] byte spec)            

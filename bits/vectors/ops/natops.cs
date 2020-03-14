@@ -12,7 +12,7 @@ namespace Z0
     using static Root;    
     using P = parity;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     partial class BitVector
     {
@@ -38,9 +38,9 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var sum = dinx.vadd(v64u(x.data), v64u(y.data));            
+            var sum = dvec.vadd(v64u(x.data), v64u(y.data));            
             bit carry = x.Lo > vcell(sum,0);
-            return  As.vgeneric<T>(dinx.vadd(sum, gvec.vbroadcast(n128, (ulong)carry)));
+            return  As.vgeneric<T>(dvec.vadd(sum, vgeneric.vbroadcast(n128, (ulong)carry)));
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0
         public static BitVector128<N,T> and<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vand(x.data,y.data);
+                => gvec.vand(x.data,y.data);
 
         /// <summary>
         /// Computes the bitvector z := x ^ y from bitvectors x and y
@@ -112,7 +112,7 @@ namespace Z0
         public static BitVector128<N,T> xor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vxor(x.data,y.data);
+                => gvec.vxor(x.data,y.data);
 
         /// <summary>
         /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
@@ -136,7 +136,7 @@ namespace Z0
         public static BitVector128<N,T> nor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vnor(x.data,y.data);
+                => gvec.vnor(x.data,y.data);
 
         /// <summary>
         /// Computes the bitwise complement z:= ~x of a bitvector x
@@ -158,7 +158,7 @@ namespace Z0
         public static BitVector128<N,T> not<N,T>(in BitVector128<N,T> x)
             where N : unmanaged,ITypeNat
             where T : unmanaged
-                => ginx.vnot(x.data);
+                => gvec.vnot(x.data);
 
         /// <summary>
         /// Computes the converse nonimplication, z := x & ~y, for bitvectors x and y
@@ -182,7 +182,7 @@ namespace Z0
         public static BitVector128<N,T> cnonimpl<N,T>(BitVector128<N,T> x, BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vcnonimpl(x.data, y.data);
+                => gvec.vcnonimpl(x.data, y.data);
  
         /// <summary>
         /// Computes the material implication z := x | ~y for bitvectors x and y
@@ -204,7 +204,7 @@ namespace Z0
         public static BitVector128<N,T> impl<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vimpl(x.data, y.data);
+                => gvec.vimpl(x.data, y.data);
  
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -226,7 +226,7 @@ namespace Z0
         public static BitVector128<N,T> nonimpl<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vnonimpl(x.data, y.data);
+                => gvec.vnonimpl(x.data, y.data);
 
         /// <summary>
         /// Computes z := ~(x & y) for bitvectors x and y
@@ -249,7 +249,7 @@ namespace Z0
         public static BitVector128<N,T> nand<N,T>(BitVector128<N,T> x, BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vnand(x.data, y.data);         
+                => gvec.vnand(x.data, y.data);         
  
          /// <summary>
         /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
@@ -273,7 +273,7 @@ namespace Z0
         public static BitVector128<N,T> xnor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vxnor(x.data,y.data); 
+                => gvec.vxnor(x.data,y.data); 
 
         /// <summary>
         /// Computes the bitvector z := x ^ y from bitvectors x and y
@@ -297,7 +297,7 @@ namespace Z0
         public static BitVector128<N,T> select<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y, in BitVector128<N,T> z)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vselect(x.data, y.data, z.data);   
+                => gvec.vselect(x.data, y.data, z.data);   
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of 
@@ -345,7 +345,7 @@ namespace Z0
         public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vbroadcast(w,a);
+                => vgeneric.vbroadcast(w,a);
 
         /// <summary>
         /// Disables a bit if it is enabled
@@ -498,7 +498,7 @@ namespace Z0
         public static BitVector128<N,T> negate<N,T>(in BitVector128<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vnegate(x.data);
+                => gvec.vnegate(x.data);
 
        /// <summary>
         /// Computes the Hamming distance between bitvectors
@@ -612,7 +612,7 @@ namespace Z0
         public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, int s)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vrotrx(x.data, (byte)s);
+                => gvec.vrotrx(x.data, (byte)s);
 
         /// <summary>
         /// Creates a copy of the source vector
@@ -669,7 +669,7 @@ namespace Z0
         public static BitVector128<N,T> rotl<N,T>(in BitVector128<N,T> x, int s)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vrotlx(x.data, (byte)s);
+                => gvec.vrotlx(x.data, (byte)s);
 
         /// <summary>
         /// Computes the parity of a natural bitvector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -703,7 +703,7 @@ namespace Z0
         public static bit same<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vsame(x.data, y.data);
+                => gvec.vsame(x.data, y.data);
 
         /// <summary>
         /// Computes the bitvector z := x ^ y from bitvectors x and y
@@ -727,7 +727,7 @@ namespace Z0
         public static BitVector128<N,T> or<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vor(x.data,y.data);
+                => gvec.vor(x.data,y.data);
  
          /// <summary>
         /// Computes z := x >> s for a bitvector x and shift offset s
@@ -749,7 +749,7 @@ namespace Z0
         public static BitVector128<N,T> sll<N,T>(in BitVector128<N,T> x, byte s)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vsllx(x.data,(byte)s);
+                => gvec.vsllx(x.data,(byte)s);
  
          /// <summary>
         /// Computes the effective width of the bitvector as determined by the number of leading zero bits
@@ -781,7 +781,7 @@ namespace Z0
         public static BitVector128<N,T> zerohi<N,T>(in BitVector128<N,T> x)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vzerohi(x.data);
+                => gvec.vzerohi(x.data);
 
         public static BitVector<N,T> perm<N,T>(BitVector<N,T> src, in Perm spec)
             where T : unmanaged
@@ -836,6 +836,6 @@ namespace Z0
         public static BitVector128<N,T> srl<N,T>(in BitVector128<N,T> x, byte s)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vsrlx(x.data,s); 
+                => gvec.vsrlx(x.data,s); 
     }
 }

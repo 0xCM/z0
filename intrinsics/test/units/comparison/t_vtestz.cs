@@ -69,9 +69,9 @@ namespace Z0
                 // Creates a mask corresponding to each off bit in the source vector
                 // thereby establishing the the context where testz will return true
                 // since all mask-identified source bits are disabled
-                var mask = ginx.vcnonimpl(vpattern.vones(w,t), x);                
+                var mask = gvec.vcnonimpl(vpattern.vones(w,t), x);                
                 
-                Claim.yea(ginx.vtestz(x,mask));
+                Claim.yea(gvec.vtestz(x,mask));
             }
         }
 
@@ -86,9 +86,9 @@ namespace Z0
                 // Creates a mask corresponding to each off bit in the source vector
                 // thereby establishing the the context where testz will return true
                 // since all mask-identified source bits are disabled
-                var mask = ginx.vcnonimpl(vpattern.vones(w,t), x);                
+                var mask = gvec.vcnonimpl(vpattern.vones(w,t), x);                
                 
-                Claim.yea(ginx.vtestz(x,mask));
+                Claim.yea(gvec.vtestz(x,mask));
             }
         }            
     }

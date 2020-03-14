@@ -13,9 +13,9 @@ namespace Z0
     using static As;
     using static AsIn;
     using static Nats;
-    using D = dvec;
+    using D = vdirect;
 
-    partial class gvec
+    partial class vgeneric
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vstore<T>(Vector128<T> src, ref Fixed128 dst)

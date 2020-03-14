@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {        
         /// <summary>
         /// Creates a scalar vector from the lower 64 bits of the source vector
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vlo<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
-                => dinx.vlo(v64u(src), out x0, out x1);
+                => dvec.vlo(v64u(src), out x0, out x1);
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector to a pair
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static ref Pair<ulong> vlo<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged        
-                => ref dinx.vlo(v64u(src), ref dst);
+                => ref dvec.vlo(v64u(src), ref dst);
 
         /// <summary>
         /// Extracts the lower 256-bits from the source vector
@@ -85,13 +85,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vlo(v8i(src)));
+                return generic<T>(dvec.vlo(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vlo(v16i(src)));
+                return generic<T>(dvec.vlo(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vlo(v32i(src)));
+                return generic<T>(dvec.vlo(v32i(src)));
             else
-                return generic<T>(dinx.vlo(v64i(src)));
+                return generic<T>(dvec.vlo(v64i(src)));
         }
 
         [MethodImpl(Inline)]
@@ -99,13 +99,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vlo(v8u(src)));
+                return generic<T>(dvec.vlo(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vlo(v16u(src)));
+                return generic<T>(dvec.vlo(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vlo(v32u(src)));
+                return generic<T>(dvec.vlo(v32u(src)));
             else 
-                return generic<T>(dinx.vlo(v64u(src)));
+                return generic<T>(dvec.vlo(v64u(src)));
         }
 
         [MethodImpl(Inline)]

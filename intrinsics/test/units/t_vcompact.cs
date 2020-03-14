@@ -17,13 +17,13 @@ namespace Z0
             var w = n128;
             var cellmax = u8max;
             
-            var vsmax = gvec.vbroadcast(w, (ushort)cellmax);
-            var vtmax = gvec.vbroadcast(w,cellmax);
-            var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z8));
+            var vsmax = vgeneric.vbroadcast(w, (ushort)cellmax);
+            var vtmax = vgeneric.vbroadcast(w,cellmax);
+            var expect = dvec.vsub(vtmax, vpattern.vincrements(w,z8));
 
-            var x = dinx.vsub(vsmax, vpattern.vincrements(w, z16));
-            var y = dinx.vsub(vsmax, vpattern.vincrements(w, (ushort)8));
-            var actual = dinx.vcompact(x,y,n128,z8);
+            var x = dvec.vsub(vsmax, vpattern.vincrements(w, z16));
+            var y = dvec.vsub(vsmax, vpattern.vincrements(w, (ushort)8));
+            var actual = dvec.vcompact(x,y,n128,z8);
             
             Claim.eq(expect,actual);            
         }
@@ -33,13 +33,13 @@ namespace Z0
             var w = n256;
             var cellmax = u8max;
             
-            var vsmax = gvec.vbroadcast(w, (ushort)cellmax);
-            var vtmax = gvec.vbroadcast(w,cellmax);
-            var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z8));
+            var vsmax = vgeneric.vbroadcast(w, (ushort)cellmax);
+            var vtmax = vgeneric.vbroadcast(w,cellmax);
+            var expect = dvec.vsub(vtmax, vpattern.vincrements(w,z8));
 
-            var x = dinx.vsub(vsmax, vpattern.vincrements(w, z16));
-            var y = dinx.vsub(vsmax, vpattern.vincrements(w, (ushort)16));
-            var actual = dinx.vcompact(x,y,n256,z8);
+            var x = dvec.vsub(vsmax, vpattern.vincrements(w, z16));
+            var y = dvec.vsub(vsmax, vpattern.vincrements(w, (ushort)16));
+            var actual = dvec.vcompact(x,y,n256,z8);
             
             Claim.eq(expect,actual);            
         }
@@ -49,13 +49,13 @@ namespace Z0
             var w = n128;
             var cellmax = u16max;
             
-            var vsmax = gvec.vbroadcast(w, (uint)cellmax);
-            var vtmax = gvec.vbroadcast(w,cellmax);
-            var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z16));
+            var vsmax = vgeneric.vbroadcast(w, (uint)cellmax);
+            var vtmax = vgeneric.vbroadcast(w,cellmax);
+            var expect = dvec.vsub(vtmax, vpattern.vincrements(w,z16));
 
-            var x = dinx.vsub(vsmax, vpattern.vincrements(w, 0u));
-            var y = dinx.vsub(vsmax, vpattern.vincrements(w, 4u));
-            var actual = dinx.vcompact(x,y,n128,z16);
+            var x = dvec.vsub(vsmax, vpattern.vincrements(w, 0u));
+            var y = dvec.vsub(vsmax, vpattern.vincrements(w, 4u));
+            var actual = dvec.vcompact(x,y,n128,z16);
             
             Claim.eq(expect,actual);            
         }
@@ -65,47 +65,47 @@ namespace Z0
             var w = n256;
             var cellmax = u16max;
 
-            var vsmax = gvec.vbroadcast(w,(uint)cellmax);
-            var vtmax = gvec.vbroadcast(w,cellmax);
+            var vsmax = vgeneric.vbroadcast(w,(uint)cellmax);
+            var vtmax = vgeneric.vbroadcast(w,cellmax);
             
-            var x = dinx.vsub(vsmax, vpattern.vincrements(w, 0u));
-            var y = dinx.vsub(vsmax, vpattern.vincrements(w, 8u));
-            var v = dinx.vcompact(x,y,n256,z16);
-            var expect = dinx.vsub(vtmax, vpattern.vincrements(w,z16));
+            var x = dvec.vsub(vsmax, vpattern.vincrements(w, 0u));
+            var y = dvec.vsub(vsmax, vpattern.vincrements(w, 8u));
+            var v = dvec.vcompact(x,y,n256,z16);
+            var expect = dvec.vsub(vtmax, vpattern.vincrements(w,z16));
             Claim.eq(expect,v);            
         }
 
         public void vcompact_2x128x64u_128x32u_outline()
         {
             var n = n128;
-            var x0 = gvec.vparts(n, 25, 50);
-            var x1 = gvec.vparts(n, 75, 10);
-            var dst = dinx.vcompact(x0,x1,n128,z32);
-            var expect = gvec.vparts(n,25,50,75,10);
+            var x0 = vgeneric.vparts(n, 25, 50);
+            var x1 = vgeneric.vparts(n, 75, 10);
+            var dst = dvec.vcompact(x0,x1,n128,z32);
+            var expect = vgeneric.vparts(n,25,50,75,10);
             Claim.eq(expect,dst);
         }
 
         public void vinflate_128x8u_outline()
         {
             var src = vpattern.vincrements<byte>(n128);
-            var z =  dinx.vinflate(src, n256, z16);
-            var lo = dinx.vlo(z);
-            var hi = dinx.vhi(z);
+            var z =  dvec.vinflate(src, n256, z16);
+            var lo = dvec.vlo(z);
+            var hi = dvec.vhi(z);
             var loExpect = vpattern.vincrements<ushort>(n128);
             var hiExpect = vpattern.vincrements<ushort>(n128,8);
             Claim.eq(loExpect, lo);
             Claim.eq(hiExpect, hi);
 
-            var dst = dinx.vcompact(lo,hi,n128,z8);
+            var dst = dvec.vcompact(lo,hi,n128,z8);
             Claim.eq(src,dst);
         }
 
         public void vinflate_128x8u_128x16u_outline()
         {
             var src = vpattern.vincrements<byte>(n128);            
-            var z =  dinx.vinflate(src, n256, z16);
-            var lo = dinx.vlo(z);
-            var hi = dinx.vhi(z);
+            var z =  dvec.vinflate(src, n256, z16);
+            var lo = dvec.vlo(z);
+            var hi = dvec.vhi(z);
             for(var i=0; i<8; i++)
                 Claim.eq(src.Cell(i), lo.Cell(i));            
         }
@@ -118,11 +118,11 @@ namespace Z0
             var c = vpattern.vincrements<uint>(n,8);
             var d = vpattern.vincrements<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
-            var abActual = dinx.vcompact(a,b,n128,z16);
+            var abActual = dvec.vcompact(a,b,n128,z16);
             var abExpect = vpattern.vincrements<ushort>(n);
             Claim.eq(abExpect, abActual);
 
-            var abcdActual = dinx.vcompact(a,b,c,d, n128, z8);
+            var abcdActual = dvec.vcompact(a,b,c,d, n128, z8);
             var abcdExpect = vpattern.vincrements<byte>(n);
             Claim.eq(abcdExpect, abcdActual);
             
@@ -138,10 +138,10 @@ namespace Z0
             var d0 = vpattern.vincrements<uint>(n,24);      
 
 
-            var compacted = dinx.vcompact(a0,b0,c0,d0, n256, z8);        
-            var inflated = dinx.vinflate(compacted, n1024, z32);
+            var compacted = dvec.vcompact(a0,b0,c0,d0, n256, z8);        
+            var inflated = dvec.vinflate(compacted, n1024, z32);
 
-            Claim.eq(vpattern.vincrements<ushort>(n), dinx.vcompact(a0,b0,n256,z16));
+            Claim.eq(vpattern.vincrements<ushort>(n), dvec.vcompact(a0,b0,n256,z16));
             Claim.eq(vpattern.vincrements<byte>(n), compacted);
             Claim.eq(a0,inflated.A);
             Claim.eq(b0,inflated.B);
@@ -153,17 +153,17 @@ namespace Z0
         {
             void case1()
             {
-                var x = gvec.vparts(n128,0,1,2,4,4,5,6,7);
-                var y = gvec.vparts(n128,8,9,10,11,12,13,14,15);
-                var z = dinx.vpackus(x,y);
-                var e = gvec.vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
+                var x = vgeneric.vparts(n128,0,1,2,4,4,5,6,7);
+                var y = vgeneric.vparts(n128,8,9,10,11,12,13,14,15);
+                var z = dvec.vpackus(x,y);
+                var e = vgeneric.vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
                 Claim.eq(e,z);
             }
 
             void case2()
             {
-                var x = gvec.vparts(n128,127,0,127,0,127,0,127,0);
-                var y = dinx.vpackus(x,x);
+                var x = vgeneric.vparts(n128,127,0,127,0,127,0,127,0);
+                var y = dvec.vpackus(x,x);
                 Notify(y.Format());
             }        
             case1();

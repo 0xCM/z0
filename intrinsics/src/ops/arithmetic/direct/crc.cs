@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Surfaces CRC intrinsics
     /// </summary>
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// unsigned int _mm_crc32_u8 (unsigned int crc, unsigned char v) CRC32 reg, reg/m8

@@ -21,23 +21,23 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public Vector128<T> and(Vector128<T> a, Vector128<T> b)
-                => ginx.vand(a,b);
+                => gvec.vand(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> or(Vector128<T> a, Vector128<T> b)
-                => ginx.vor(a,b);
+                => gvec.vor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> xor(Vector128<T> a, Vector128<T> b)
-                => ginx.vxor(a,b);
+                => gvec.vxor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> cimpl(Vector128<T> a, Vector128<T> b)
-                => ginx.vcimpl(a,b);
+                => gvec.vcimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> cnonimpl(Vector128<T> a, Vector128<T> b)
-                => ginx.vcnonimpl(a,b);
+                => gvec.vcnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> @false()
@@ -49,27 +49,27 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> impl(Vector128<T> a, Vector128<T> b)
-                => ginx.vimpl(a,b);
+                => gvec.vimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> nand(Vector128<T> a, Vector128<T> b)
-                => ginx.vnand(a,b);
+                => gvec.vnand(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> nonimpl(Vector128<T> a, Vector128<T> b)
-                => ginx.vnonimpl(a,b);
+                => gvec.vnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> nor(Vector128<T> a, Vector128<T> b)
-                => ginx.vnor(a,b);
+                => gvec.vnor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> not(Vector128<T> a)
-                => ginx.vnot(a);
+                => gvec.vnot(a);
 
             [MethodImpl(Inline)]
             public Vector128<T> select(Vector128<T> a, Vector128<T> b, Vector128<T> c)
-                => ginx.vselect(a,b,c);
+                => gvec.vselect(a,b,c);
 
             [MethodImpl(Inline)]
             public Vector128<T> @true()
@@ -77,7 +77,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> xnor(Vector128<T> a, Vector128<T> b)
-                => ginx.vxnor(a,b);
+                => gvec.vxnor(a,b);
         }
 
         [NumericClosures(NumericKind.Integers)]
@@ -88,23 +88,23 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public Vector256<T> and(Vector256<T> a, Vector256<T> b)
-                => ginx.vand(a,b);
+                => gvec.vand(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> or(Vector256<T> a, Vector256<T> b)
-                => ginx.vor(a,b);
+                => gvec.vor(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> xor(Vector256<T> a, Vector256<T> b)
-                => ginx.vxor(a,b);
+                => gvec.vxor(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> cimpl(Vector256<T> a, Vector256<T> b)
-                => ginx.vcimpl(a,b);
+                => gvec.vcimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> cnonimpl(Vector256<T> a, Vector256<T> b)
-                => ginx.vcnonimpl(a,b);
+                => gvec.vcnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> @false()
@@ -116,27 +116,27 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> impl(Vector256<T> a, Vector256<T> b)
-                => ginx.vimpl(a,b);
+                => gvec.vimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> nand(Vector256<T> a, Vector256<T> b)
-                => ginx.vnand(a,b);
+                => gvec.vnand(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> nonimpl(Vector256<T> a, Vector256<T> b)
-                => ginx.vnonimpl(a,b);
+                => gvec.vnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> nor(Vector256<T> a, Vector256<T> b)
-                => ginx.vnor(a,b);
+                => gvec.vnor(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> not(Vector256<T> a)
-                => ginx.vnot(a);
+                => gvec.vnot(a);
 
             [MethodImpl(Inline)]
             public Vector256<T> select(Vector256<T> a, Vector256<T> b, Vector256<T> c)
-                => ginx.vselect(a,b,c);
+                => gvec.vselect(a,b,c);
 
             [MethodImpl(Inline)]
             public Vector256<T> @true()
@@ -144,7 +144,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> xnor(Vector256<T> a, Vector256<T> b)
-                => ginx.vxnor(a,b);
+                => gvec.vxnor(a,b);
         }         
     }
 }

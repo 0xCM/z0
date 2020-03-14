@@ -19,9 +19,9 @@ namespace Z0
      
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {                
         // ~ Scalar conversions
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vconvert(Vector128<ulong> lo, Vector128<ulong> hi, N128 w, uint t = default)
-            => vconvert(dvec.vconcat(lo,hi), w,t);
+            => vconvert(vdirect.vconcat(lo,hi), w,t);
 
         // ~ 128x8i -> X
         // ~ ------------------------------------------------------------------

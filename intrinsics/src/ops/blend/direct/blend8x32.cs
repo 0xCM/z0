@@ -13,9 +13,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
         
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         ///  __m256i _mm256_blend_epi32 (__m256i a, __m256i b, const int imm8) VPBLENDD ymm,ymm, ymm/m256, imm8

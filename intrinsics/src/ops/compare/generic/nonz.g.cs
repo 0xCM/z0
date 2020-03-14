@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Returns true if at least one of the components of the source vector is nonzero, false otherwise
@@ -75,13 +75,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vnonz(v8i(src));
+                return dvec.vnonz(v8i(src));
             else if(typeof(T) == typeof(short))
-                return dinx.vnonz(v16i(src));
+                return dvec.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
-                return dinx.vnonz(v32i(src));
+                return dvec.vnonz(v32i(src));
             else 
-                return dinx.vnonz(v64i(src));
+                return dvec.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -89,13 +89,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vnonz(v8u(src));
+                return dvec.vnonz(v8u(src));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vnonz(v16u(src));
+                return dvec.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
-                return dinx.vnonz(v32u(src));
+                return dvec.vnonz(v32u(src));
             else 
-                return dinx.vnonz(v64u(src));
+                return dvec.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -115,13 +115,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vnonz(v8i(src));
+                return dvec.vnonz(v8i(src));
             else if(typeof(T) == typeof(short))
-                return dinx.vnonz(v16i(src));
+                return dvec.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
-                return dinx.vnonz(v32i(src));
+                return dvec.vnonz(v32i(src));
             else 
-                return dinx.vnonz(v64i(src));
+                return dvec.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -129,13 +129,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vnonz(v8u(src));
+                return dvec.vnonz(v8u(src));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vnonz(v16u(src));
+                return dvec.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
-                return dinx.vnonz(v32u(src));
+                return dvec.vnonz(v32u(src));
             else 
-                return dinx.vnonz(v64u(src));
+                return dvec.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]

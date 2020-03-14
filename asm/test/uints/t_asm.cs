@@ -263,185 +263,185 @@ namespace Z0
             return CheckAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, NumericTypeKind<byte> kind)
-        {
-            var results = list<TestCaseRecord>();
-            var w = n8;
-            var id = OpIdentity.numeric(name, kind, false);
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, NumericTypeKind<byte> kind)
+        // {
+        //     var results = list<TestCaseRecord>();
+        //     var w = n8;
+        //     var id = OpIdentity.numeric(name, kind, false);
             
-            var f0 = primal.ToFixed();
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f0 = primal.ToFixed();
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w,ReadAsm(AssemblyId.GMath, Math, id));
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w,ReadAsm(AssemblyId.GMath, Math, id));
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericTypeKind<sbyte> kind)
-        {
-            var results = list<TestCaseRecord>();
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericTypeKind<sbyte> kind)
+        // {
+        //     var results = list<TestCaseRecord>();
 
-            var w = n8;
-            var id = OpIdentity.numeric(name, kind, false);
+        //     var w = n8;
+        //     var id = OpIdentity.numeric(name, kind, false);
             
-            var f0 = primal.ToFixed();
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f0 = primal.ToFixed();
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, in AsmCode dCode, in AsmCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericTypeKind<sbyte> kind)
-        {
-            var results = list<TestCaseRecord>();
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, in AsmCode dCode, in AsmCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericTypeKind<sbyte> kind)
+        // {
+        //     var results = list<TestCaseRecord>();
 
-            var w = n8;
+        //     var w = n8;
 
-            var id = OpIdentity.numeric(name, kind, false);
-            var f0 = primal.ToFixed();
+        //     var id = OpIdentity.numeric(name, kind, false);
+        //     var f0 = primal.ToFixed();
 
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, dCode);
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w, dCode);
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, gCode);
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, gCode);
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, NumericTypeKind<ushort> kind)
-        {
-            var results = list<TestCaseRecord>();
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, NumericTypeKind<ushort> kind)
+        // {
+        //     var results = list<TestCaseRecord>();
 
-            var w = n16;
+        //     var w = n16;
 
-            var id = OpIdentity.numeric(name, kind, false);
-            var f0 = primal.ToFixed();
+        //     var id = OpIdentity.numeric(name, kind, false);
+        //     var f0 = primal.ToFixed();
 
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<short,short,short> primal, Func<short,short,short> generic, NumericTypeKind<short> kind)
-        {
-            var results = list<TestCaseRecord>();
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<short,short,short> primal, Func<short,short,short> generic, NumericTypeKind<short> kind)
+        // {
+        //     var results = list<TestCaseRecord>();
 
-            var w = n16;
-            var id = OpIdentity.numeric(name, kind, false);
+        //     var w = n16;
+        //     var id = OpIdentity.numeric(name, kind, false);
             
-            var f0 = primal.ToFixed();
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f0 = primal.ToFixed();
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, NumericTypeKind<uint> kind)
-        {
-            var results = list<TestCaseRecord>();
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, NumericTypeKind<uint> kind)
+        // {
+        //     var results = list<TestCaseRecord>();
 
-            var w = n32;
-            var id = OpIdentity.numeric(name, kind, false);
+        //     var w = n32;
+        //     var id = OpIdentity.numeric(name, kind, false);
             
-            var f0 = primal.ToFixed();
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f0 = primal.ToFixed();
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, NumericTypeKind<int> kind)
-        {
-            var results = list<TestCaseRecord>();
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, NumericTypeKind<int> kind)
+        // {
+        //     var results = list<TestCaseRecord>();
 
-            var w = n32;
-            var id = OpIdentity.numeric(name, kind, false);
+        //     var w = n32;
+        //     var id = OpIdentity.numeric(name, kind, false);
 
-            var f0 = primal.ToFixed();
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f0 = primal.ToFixed();
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, NumericTypeKind<long> kind)
-        {            
-            var results = list<TestCaseRecord>();
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, NumericTypeKind<long> kind)
+        // {            
+        //     var results = list<TestCaseRecord>();
 
-            var w = n64;
-            var id = OpIdentity.numeric(name, kind, false);
+        //     var w = n64;
+        //     var id = OpIdentity.numeric(name, kind, false);
             
-            var f0 = primal.ToFixed();
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f0 = primal.ToFixed();
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, NumericTypeKind<ulong> kind)
-        {            
-            var results = list<TestCaseRecord>();
+        // protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, NumericTypeKind<ulong> kind)
+        // {            
+        //     var results = list<TestCaseRecord>();
 
-            var w = n64;
-            var id = OpIdentity.numeric(name, kind, false);
+        //     var w = n64;
+        //     var id = OpIdentity.numeric(name, kind, false);
             
-            var f0 = primal.ToFixed();
-            var f1 = generic.ToFixed();
-            results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
+        //     var f0 = primal.ToFixed();
+        //     var f1 = generic.ToFixed();
+        //     results.Add(CheckMatch(f0, id, f1, id.WithGeneric()));
 
-            var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
-            results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
+        //     var f2 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, Math, id));
+        //     results.Add(CheckMatch(f0, id, f2, id.WithAsm()));
 
-            var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
-            results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
+        //     var f3 = buffers.MainExec.EmitFixedBinaryOp(w, ReadAsm(AssemblyId.GMath, GMath, id.WithGeneric()));
+        //     results.Add(CheckMatch(f0, id, f3, id.WithGeneric().WithAsm()));
 
-            return results.ToArray();
-        }
+        //     return results.ToArray();
+        // }
     }
 }

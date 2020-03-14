@@ -107,7 +107,7 @@ namespace Z0
             for(var i = 0; i < count; i++)
             {
                 unpack8(skip(in src, i), ref tmp); 
-                dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref seek(ref target, i*8));
+                dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref seek(ref target, i*8));
             }
         }
 
@@ -126,7 +126,7 @@ namespace Z0
             for(var block=0; block < blocks; block++)
             {
                 unpack8(skip(in src, block), ref tmp); 
-                dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref target.BlockRef(block));
+                dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref target.BlockRef(block));
             }
         }
 
@@ -144,7 +144,7 @@ namespace Z0
             ref var dst = ref head(target);
 
             unpack8(src, ref tmp);             
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst);
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst);
         }
 
         /// <summary>
@@ -161,9 +161,9 @@ namespace Z0
             ref var dst = ref head(target);
 
             unpack8((byte)src, ref tmp);             
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst);
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst);
             unpack8((byte)(src >> 8), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 8);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 8);     
         }
 
         /// <summary>
@@ -180,13 +180,13 @@ namespace Z0
             ref var dst = ref head(target);
 
             unpack8((byte)src, ref tmp);             
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst);
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst);
             unpack8((byte)(src >> 8), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 8);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 8);     
             unpack8((byte)(src >> 16), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 16);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 16);     
             unpack8((byte)(src >> 24), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 24);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 24);     
         }
 
         [MethodImpl(Inline)]
@@ -197,21 +197,21 @@ namespace Z0
             ref var dst = ref head(target);
             
             unpack8((byte)src, ref tmp);             
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst);
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst);
             unpack8((byte)(src >> 8), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 8);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 8);     
             unpack8((byte)(src >> 16), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 16);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 16);     
             unpack8((byte)(src >> 24), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 24);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 24);     
             unpack8((byte)(src >> 32), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 32);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 32);     
             unpack8((byte)(src >> 40), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 40);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 40);     
             unpack8((byte)(src >> 48), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 48);                 
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 48);                 
             unpack8((byte)(src >> 56), ref tmp);        
-            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 56);     
+            dvec.vconvert(n64, in tmp, n256, n32).StoreTo(ref dst, 56);     
         } 
     }
 }

@@ -10,11 +10,11 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
 
     using static As;
     
-    partial class ginx
+    partial class gvec
     {        
         /// <summary>
         /// Shifts the full 128 bits of a vector rightward at bit-level resolution
@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vsrlx<T>(Vector128<T> src, [Imm] byte count)        
             where T : unmanaged
-                => generic<T>(dinx.vsrlx(v64u(src), count));
+                => generic<T>(dvec.vsrlx(v64u(src), count));
 
         /// <summary>
         /// Shifts each 128 bit lane rightward at bit-level resolution
@@ -34,6 +34,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vsrlx<T>(Vector256<T> src, [Imm] byte count)        
             where T : unmanaged
-                => generic<T>(dinx.vsrlx(v64u(src), count));
+                => generic<T>(dvec.vsrlx(v64u(src), count));
     }
 }

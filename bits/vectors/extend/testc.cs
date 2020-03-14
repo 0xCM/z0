@@ -60,6 +60,6 @@ namespace Z0
         public static bit TestC<N,T>(this BitVector128<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ginx.vtestc(src.data);
+                => gvec.vtestc(src.data);
     }
 }

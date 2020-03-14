@@ -25,7 +25,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vmin(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vmin(x,y);
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.min(a,b);
@@ -49,7 +49,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vmin(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vmin(x,y);
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.min(a,b);

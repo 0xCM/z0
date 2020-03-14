@@ -13,9 +13,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
         
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm

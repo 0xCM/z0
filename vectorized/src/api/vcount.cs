@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
 
-    partial class gvec
+    partial class vgeneric
     {
         /// <summary>
         /// Computes the vector component count for a given bit-width and component type

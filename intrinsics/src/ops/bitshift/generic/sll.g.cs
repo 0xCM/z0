@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Shifts each source vector component leftwards by a specified number of bits
@@ -40,13 +40,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsll(v8u(x), count));
+                return generic<T>(dvec.vsll(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsll(v16u(x), count));
+                return generic<T>(dvec.vsll(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vsll(v32u(x), count));
+                return generic<T>(dvec.vsll(v32u(x), count));
             else if(typeof(T) == typeof(ulong)) 
-                return generic<T>(dinx.vsll(v64u(x), count));
+                return generic<T>(dvec.vsll(v64u(x), count));
             else
                 return vsll_i(x,count);
         }
@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vsll(v8i(x), count));
+                return generic<T>(dvec.vsll(v8i(x), count));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vsll(v16i(x), count));
+                return generic<T>(dvec.vsll(v16i(x), count));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vsll(v32i(x), count));
+                return generic<T>(dvec.vsll(v32i(x), count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vsll(v64i(x), count));            
+                return generic<T>(dvec.vsll(v64i(x), count));            
             else
                 throw unsupported<T>();
         }
@@ -72,13 +72,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsll(v8u(x), count));
+                return generic<T>(dvec.vsll(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsll(v16u(x), count));
+                return generic<T>(dvec.vsll(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vsll(v32u(x), count));
+                return generic<T>(dvec.vsll(v32u(x), count));
             else if(typeof(T) == typeof(ulong)) 
-                return generic<T>(dinx.vsll(v64u(x), count));
+                return generic<T>(dvec.vsll(v64u(x), count));
             else
                 return vsll_i(x,count);
         }
@@ -88,13 +88,13 @@ namespace Z0
             where T : unmanaged
         {
              if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vsll(v8i(x), count));
+                return generic<T>(dvec.vsll(v8i(x), count));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vsll(v16i(x), count));
+                return generic<T>(dvec.vsll(v16i(x), count));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vsll(v32i(x), count));
+                return generic<T>(dvec.vsll(v32i(x), count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vsll(v64i(x), count));            
+                return generic<T>(dvec.vsll(v64i(x), count));            
             else
                 throw unsupported<T>();
        }

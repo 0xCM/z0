@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;    
     
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Implements a carry-save adder that deposits the bitwise sum of three input vectors into two output vectors
@@ -30,9 +30,9 @@ namespace Z0
         public static Vector512<T> vcsa<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
         {
-            var u = ginx.vxor(a,b);
-            var lo = ginx.vxor(u,c);            
-            var hi = ginx.vor(ginx.vand(a,b), ginx.vand(u,c));
+            var u = gvec.vxor(a,b);
+            var lo = gvec.vxor(u,c);            
+            var hi = gvec.vor(gvec.vand(a,b), gvec.vand(u,c));
             return(lo,hi);
         }
 

@@ -15,10 +15,10 @@ namespace Z0
 
     using static Root;    
     using static Nats;
-    using static gvec;
+    using static vgeneric;
     using static Blocks;
     
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// void _mm_maskmoveu_si128 (__m128i a, __m128i mask, char* mem_address) MASKMOVDQU xmm, xmm

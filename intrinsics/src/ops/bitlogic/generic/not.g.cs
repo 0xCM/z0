@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Computes the bitwise complement ~x for a vector x
@@ -52,13 +52,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vnot(v8u(x)));
+                return generic<T>(dvec.vnot(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnot(v16u(x)));
+                return generic<T>(dvec.vnot(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnot(v32u(x)));
+                return generic<T>(dvec.vnot(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vnot(v64u(x)));
+                return generic<T>(dvec.vnot(v64u(x)));
             else
                 return vnot_i(x);
         }
@@ -68,13 +68,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vnot(v8i(x)));
+                return generic<T>(dvec.vnot(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vnot(v16i(x)));
+                return generic<T>(dvec.vnot(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vnot(v32i(x)));
+                return generic<T>(dvec.vnot(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vnot(v64i(x)));
+                return generic<T>(dvec.vnot(v64i(x)));
             else
                 throw unsupported<T>();
         }
@@ -84,13 +84,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vnot(v8u(x)));
+                return generic<T>(dvec.vnot(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnot(v16u(x)));
+                return generic<T>(dvec.vnot(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnot(v32u(x)));
+                return generic<T>(dvec.vnot(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vnot(v64u(x)));
+                return generic<T>(dvec.vnot(v64u(x)));
             else
                 return vnot_i(x);
         }
@@ -100,13 +100,13 @@ namespace Z0
             where T : unmanaged
         {
              if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vnot(v8i(x)));
+                return generic<T>(dvec.vnot(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vnot(v16i(x)));
+                return generic<T>(dvec.vnot(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vnot(v32i(x)));
+                return generic<T>(dvec.vnot(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vnot(v64i(x)));
+                return generic<T>(dvec.vnot(v64i(x)));
             else
                 throw unsupported<T>();
        }

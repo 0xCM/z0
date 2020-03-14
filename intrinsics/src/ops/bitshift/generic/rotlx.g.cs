@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     
-    partial class ginx
+    partial class gvec
     {        
         /// <summary>
         /// Rotates the full 128 bits of a vector leftward at bit-level resolution
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vrotlx<T>(Vector128<T> src, [Imm] byte count)        
             where T : unmanaged
-                => generic<T>(dinx.vrotlx(v64u(src), count));
+                => generic<T>(dvec.vrotlx(v64u(src), count));
 
         /// <summary>
         /// Rotates each 128 bit lane vector leftward at bit-level resolution
@@ -32,6 +32,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vrotlx<T>(Vector256<T> src, [Imm] byte count)        
             where T : unmanaged
-                => generic<T>(dinx.vrotlx(v64u(src), count));
+                => generic<T>(dvec.vrotlx(v64u(src), count));
     }
 }

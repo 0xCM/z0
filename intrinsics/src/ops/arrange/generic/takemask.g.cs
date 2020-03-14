@@ -14,9 +14,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// _mm_movemask_epi8 (__m128i a) PMOVMSKB reg, xmm
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static ushort vtakemask<T>(Vector128<T> src, [Imm] byte index)
             where T : unmanaged
-                => (ushort)MoveMask(v8u(dinx.vsll(v64u(src), (byte)(7 - index))));
+                => (ushort)MoveMask(v8u(dvec.vsll(v64u(src), (byte)(7 - index))));
 
         /// <summary>
         /// Creates a 32-bit mask from each byte in the source vector at a byte-relative bit index
@@ -56,6 +56,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static uint vtakemask<T>(Vector256<T> src, [Imm] byte index)
             where T : unmanaged
-                => (uint)MoveMask(v8u(dinx.vsll(v64u(src), (byte)(7 - index))));
+                => (uint)MoveMask(v8u(dvec.vsll(v64u(src), (byte)(7 - index))));
     }
 }

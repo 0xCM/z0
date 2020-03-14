@@ -255,7 +255,7 @@ namespace Z0
                     var y = right.LoadVector(block);
                     var actual = f.Invoke(x,y);
                     var expect = dst.LoadVector(block);
-                    Claim.yea(ginx.vsame(actual,expect));
+                    Claim.yea(gvec.vsame(actual,expect));
                 }
             }
             catch(Exception e)
@@ -289,7 +289,7 @@ namespace Z0
                     var y = right.LoadVector(block);
                     var actual = f.Invoke(x,y);
                     var expect = dst.LoadVector(block);
-                    Claim.yea(ginx.vsame(actual,expect));
+                    Claim.yea(gvec.vsame(actual,expect));
                 }
             }
             catch(Exception e)

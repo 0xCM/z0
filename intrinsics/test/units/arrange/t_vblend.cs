@@ -17,10 +17,10 @@ namespace Z0
         public void vblend_256x32f_outline()
         {
             var w = n256;
-            var x = gvec.vpartsf(w, 0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
-            var y = gvec.vpartsf(w, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
-            var spec = gvec.vpartsf(w, 0f,-1,0f,-1,0f,-1,0f,-1);
-            var z = dinx.vblendv(x,y,spec);
+            var x = vgeneric.vpartsf(w, 0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
+            var y = vgeneric.vpartsf(w, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
+            var spec = vgeneric.vpartsf(w, 0f,-1,0f,-1,0f,-1,0f,-1);
+            var z = dvec.vblendv(x,y,spec);
         }
 
         public void vblend_256x8u_outline()
@@ -28,18 +28,18 @@ namespace Z0
             var w = n256;
             var x = vpattern.vincrements(w, z8);
             var y = vpattern.decrements(w, u8max);
-            var spec = v8u(gvec.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
-            var z = ginx.vblend(x,y,spec);            
+            var spec = v8u(vgeneric.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
+            var z = gvec.vblend(x,y,spec);            
         }        
 
         public void vblend_128x16u_outline()
         {
             var w = n128;
             var alt = (uint)BitMasks.Msb16x8x1 << 16; 
-            dinx.vcover(v16u(gvec.vbroadcast(w,alt)), out Vector128<byte> spec);
+            dvec.vcover(v16u(vgeneric.vbroadcast(w,alt)), out Vector128<byte> spec);
             var x = vpattern.vincrements(w,z16);
             var y = vpattern.decrements(w,u16max);
-            var z = ginx.vblend(x,y,spec);
+            var z = gvec.vblend(x,y,spec);
         }
 
         public void vblend_256x16u_outline()
@@ -47,10 +47,10 @@ namespace Z0
             var w = n256;
             var altOdd = (uint)BitMasks.Msb16x8x1 << 16; 
             var altEven = (uint)BitMasks.Msb16x8x1; 
-            dinx.vcover(v16u(gvec.vbroadcast(w,altOdd)), out Vector256<byte> spec);
+            dvec.vcover(v16u(vgeneric.vbroadcast(w,altOdd)), out Vector256<byte> spec);
             var x = vpattern.vincrements(w,z16);
             var y = vpattern.decrements(w,u16max);
-            var z = ginx.vblend(x,y,spec);
+            var z = gvec.vblend(x,y,spec);
         }
 
         public void valignr_examples()
@@ -58,31 +58,31 @@ namespace Z0
             void example1()
             {
                 var n = n128;
-                var x = gvec.vbroadcast(n, (byte)1);
-                var y = gvec.vbroadcast(n, (byte)2);
+                var x = vgeneric.vbroadcast(n, (byte)1);
+                var y = vgeneric.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format());
                 Trace($"y{n}", y.Format());                
-                Trace("valignr/3",ginx.valignr(x,y, 3).Format());
-                Trace("valignr/4",ginx.valignr(x,y, 4).Format());
-                Trace("valignr/5",ginx.valignr(x,y, 5).Format());
-                Trace("valignr/6",ginx.valignr(x,y, 6).Format());
-                Trace("valignr/7",ginx.valignr(x,y, 7).Format());
-                Trace("valignr/8",ginx.valignr(x,y, 8).Format());
+                Trace("valignr/3",gvec.valignr(x,y, 3).Format());
+                Trace("valignr/4",gvec.valignr(x,y, 4).Format());
+                Trace("valignr/5",gvec.valignr(x,y, 5).Format());
+                Trace("valignr/6",gvec.valignr(x,y, 6).Format());
+                Trace("valignr/7",gvec.valignr(x,y, 7).Format());
+                Trace("valignr/8",gvec.valignr(x,y, 8).Format());
             }
 
             void example2()
             {
                 var n = n256;
-                var x = gvec.vbroadcast(n, (byte)1);
-                var y = gvec.vbroadcast(n, (byte)2);
+                var x = vgeneric.vbroadcast(n, (byte)1);
+                var y = vgeneric.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format(seplanes:true));
                 Trace($"y{n}", y.Format(seplanes:true));                
-                Trace("valignr/3",ginx.valignr(x,y, 3).Format(seplanes:true));
-                Trace("valignr/4",ginx.valignr(x,y, 4).Format(seplanes:true));
-                Trace("valignr/5",ginx.valignr(x,y, 5).Format(seplanes:true));
-                Trace("valignr/6",ginx.valignr(x,y, 6).Format(seplanes:true));
-                Trace("valignr/7",ginx.valignr(x,y, 7).Format(seplanes:true));
-                Trace("valignr/8",ginx.valignr(x,y, 8).Format(seplanes:true));
+                Trace("valignr/3",gvec.valignr(x,y, 3).Format(seplanes:true));
+                Trace("valignr/4",gvec.valignr(x,y, 4).Format(seplanes:true));
+                Trace("valignr/5",gvec.valignr(x,y, 5).Format(seplanes:true));
+                Trace("valignr/6",gvec.valignr(x,y, 6).Format(seplanes:true));
+                Trace("valignr/7",gvec.valignr(x,y, 7).Format(seplanes:true));
+                Trace("valignr/8",gvec.valignr(x,y, 8).Format(seplanes:true));
             }
 
         }
@@ -91,13 +91,13 @@ namespace Z0
         public void vblend_8x16_basecases()
         {
             var n = n128;
-            var x = gvec.vparts(n, 0,2,4,6,8,A,C,E); 
-            var y = gvec.vparts(n, 1,3,5,7,9,B,D,F); 
+            var x = vgeneric.vparts(n, 0,2,4,6,8,A,C,E); 
+            var y = vgeneric.vparts(n, 1,3,5,7,9,B,D,F); 
             
-            Claim.eq(x, dinx.vblend(x,y, Blend8x16.LLLLLLLL));          
-            Claim.eq(y, dinx.vblend(x,y, Blend8x16.RRRRRRRR));
-            Claim.eq(gvec.vparts(n, 0,2,4,6,9,B,D,F), dinx.vblend(x,y, Blend8x16.LLLLRRRR));
-            Claim.eq(gvec.vparts(n, 1,3,5,7,8,A,C,E), dinx.vblend(x,y, Blend8x16.RRRRLLLL));
+            Claim.eq(x, dvec.vblend(x,y, Blend8x16.LLLLLLLL));          
+            Claim.eq(y, dvec.vblend(x,y, Blend8x16.RRRRRRRR));
+            Claim.eq(vgeneric.vparts(n, 0,2,4,6,9,B,D,F), dvec.vblend(x,y, Blend8x16.LLLLRRRR));
+            Claim.eq(vgeneric.vparts(n, 1,3,5,7,8,A,C,E), dvec.vblend(x,y, Blend8x16.RRRRLLLL));
 
         }
 
@@ -105,58 +105,58 @@ namespace Z0
         {            
             var n = n256;
             var w = n64;
-            var left = gvec.vparts(n,0,1,2,3);
-            var right = gvec.vparts(n,4,5,6,7);
+            var left = vgeneric.vparts(n,0,1,2,3);
+            var right = vgeneric.vparts(n,4,5,6,7);
 
-            Claim.eq(gvec.vparts(n,0,5,2,7),dinx.vblend(left, right, Blend4x64.LRLR));    
-            Claim.eq(gvec.vparts(n,4,1,6,3),dinx.vblend(left, right, Blend4x64.RLRL));    
-            Claim.eq(gvec.vparts(n,0,1,2,3),dinx.vblend(left, right, Blend4x64.LLLL));    
-            Claim.eq(gvec.vparts(n,4,5,6,7),dinx.vblend(left, right, Blend4x64.RRRR));    
+            Claim.eq(vgeneric.vparts(n,0,5,2,7),dvec.vblend(left, right, Blend4x64.LRLR));    
+            Claim.eq(vgeneric.vparts(n,4,1,6,3),dvec.vblend(left, right, Blend4x64.RLRL));    
+            Claim.eq(vgeneric.vparts(n,0,1,2,3),dvec.vblend(left, right, Blend4x64.LLLL));    
+            Claim.eq(vgeneric.vparts(n,4,5,6,7),dvec.vblend(left, right, Blend4x64.RRRR));    
         }
 
         public void vblend_2x64_basecases()
         {
             var n = n128;
             var w = n64;
-            var left =  gvec.vparts(n,0,1);
-            var right = gvec.vparts(n,4,5);
-            Claim.eq(gvec.vparts(n, 0, 5),dinx.vblend(left, right, Blend2x64.LR));
-            Claim.eq(gvec.vparts(n, 4, 1),dinx.vblend(left, right, Blend2x64.RL));
-            Claim.eq(gvec.vparts(n, 0, 1),dinx.vblend(left, right, Blend2x64.LL));
-            Claim.eq(gvec.vparts(n, 4, 5),dinx.vblend(left, right, Blend2x64.RR));
+            var left =  vgeneric.vparts(n,0,1);
+            var right = vgeneric.vparts(n,4,5);
+            Claim.eq(vgeneric.vparts(n, 0, 5),dvec.vblend(left, right, Blend2x64.LR));
+            Claim.eq(vgeneric.vparts(n, 4, 1),dvec.vblend(left, right, Blend2x64.RL));
+            Claim.eq(vgeneric.vparts(n, 0, 1),dvec.vblend(left, right, Blend2x64.LL));
+            Claim.eq(vgeneric.vparts(n, 4, 5),dvec.vblend(left, right, Blend2x64.RR));
         }
 
         public void vblend_4x32_basecases()
         {
             var n = n128;
             var w = n32;
-            var left =  gvec.vparts(n,0,1,2,3);
-            var right = gvec.vparts(n,4,5,6,7);
-            Claim.eq(gvec.vparts(n,0,5,2,7), dinx.vblend(left,right,Blend4x32.LRLR));
-            Claim.eq(gvec.vparts(n,4,1,6,3), dinx.vblend(left,right,Blend4x32.RLRL));
-            Claim.eq(gvec.vparts(n,0,1,6,7), dinx.vblend(left,right,Blend4x32.LLRR));
-            Claim.eq(gvec.vparts(n,4,5,2,3), dinx.vblend(left,right,Blend4x32.RRLL));
+            var left =  vgeneric.vparts(n,0,1,2,3);
+            var right = vgeneric.vparts(n,4,5,6,7);
+            Claim.eq(vgeneric.vparts(n,0,5,2,7), dvec.vblend(left,right,Blend4x32.LRLR));
+            Claim.eq(vgeneric.vparts(n,4,1,6,3), dvec.vblend(left,right,Blend4x32.RLRL));
+            Claim.eq(vgeneric.vparts(n,0,1,6,7), dvec.vblend(left,right,Blend4x32.LLRR));
+            Claim.eq(vgeneric.vparts(n,4,5,2,3), dvec.vblend(left,right,Blend4x32.RRLL));
         }
 
         public void vblend_8x32_basecases()
         {
             var n = n256;
             var w = n32;    
-            var left =  gvec.vparts(n,0,1,2,3,4,5,6,7);
-            var right = gvec.vparts(n,8,9,A,B,C,D,E,F);            
-            Claim.eq(gvec.vparts(n,0,9,2,B,4,D,6,F),dinx.vblend(left,right, Blend8x32.LRLRLRLR));
-            Claim.eq(gvec.vparts(n,8,1,A,3,C,5,E,7),dinx.vblend(left,right, Blend8x32.RLRLRLRL));
-            Claim.eq(gvec.vparts(n,0,1,A,B,4,5,E,F),dinx.vblend(left,right, Blend8x32.LLRRLLRR));
-            Claim.eq(gvec.vparts(n,8,9,2,3,C,D,6,7),dinx.vblend(left,right, Blend8x32.RRLLRRLL));
+            var left =  vgeneric.vparts(n,0,1,2,3,4,5,6,7);
+            var right = vgeneric.vparts(n,8,9,A,B,C,D,E,F);            
+            Claim.eq(vgeneric.vparts(n,0,9,2,B,4,D,6,F),dvec.vblend(left,right, Blend8x32.LRLRLRLR));
+            Claim.eq(vgeneric.vparts(n,8,1,A,3,C,5,E,7),dvec.vblend(left,right, Blend8x32.RLRLRLRL));
+            Claim.eq(vgeneric.vparts(n,0,1,A,B,4,5,E,F),dvec.vblend(left,right, Blend8x32.LLRRLLRR));
+            Claim.eq(vgeneric.vparts(n,8,9,2,3,C,D,6,7),dvec.vblend(left,right, Blend8x32.RRLLRRLL));
 
             
-            var lrpattern = v32u(gvec.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
+            var lrpattern = v32u(vgeneric.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(var i=0; i < 8; i++)
                 Claim.eq(vcell(lrpattern,i), parity.even(i) ? 0u : uint.MaxValue);
             
-            var zero = gvec.vzero<uint>(n);            
+            var zero = vgeneric.vzero<uint>(n);            
             var ones = vpattern.vones<uint>(n);
-            Claim.eq(lrpattern, dinx.vblend(zero, ones, Blend8x32.LRLRLRLR));
+            Claim.eq(lrpattern, dvec.vblend(zero, ones, Blend8x32.LRLRLRLR));
             
         }
 
@@ -164,28 +164,28 @@ namespace Z0
         {
             var n = n256;
             var w = n32;
-            var x = gvec.vparts(n,0,1,2,3,4,5,6,7);
-            var y = gvec.vparts(n,8,9,A,B,C,D,E,F);
-            var e = gvec.vparts(n,0,9,2,B,4,D,6,F);
-            var o = gvec.vparts(n,8,1,A,3,C,5,E,7);
+            var x = vgeneric.vparts(n,0,1,2,3,4,5,6,7);
+            var y = vgeneric.vparts(n,8,9,A,B,C,D,E,F);
+            var e = vgeneric.vparts(n,0,9,2,B,4,D,6,F);
+            var o = vgeneric.vparts(n,8,1,A,3,C,5,E,7);
             var mEven = VectorData.blendspec(n,false,w);
             var mOdd = VectorData.blendspec(n,true,w);
-            Claim.eq(e,ginx.vblend(x,y,mEven));
-            Claim.eq(o,ginx.vblend(x,y,mOdd));
+            Claim.eq(e,gvec.vblend(x,y,mEven));
+            Claim.eq(o,gvec.vblend(x,y,mOdd));
         }
 
         public void vblend_32x8_256x64u_basecase()
         {
             var n = n256;
             var w = n64;
-            var x = gvec.vparts(n,0,1,2,3);
-            var y = gvec.vparts(n,4,5,6,7);
-            var e = gvec.vparts(n,0,5,2,7);
-            var o = gvec.vparts(n,4,1,6,3);
+            var x = vgeneric.vparts(n,0,1,2,3);
+            var y = vgeneric.vparts(n,4,5,6,7);
+            var e = vgeneric.vparts(n,0,5,2,7);
+            var o = vgeneric.vparts(n,4,1,6,3);
             var mEven = VectorData.blendspec(n,false,w);
             var mOdd = VectorData.blendspec(n,true,w);
-            Claim.eq(e,ginx.vblend(x,y,mEven));
-            Claim.eq(o,ginx.vblend(x,y,mOdd));
+            Claim.eq(e,gvec.vblend(x,y,mEven));
+            Claim.eq(o,gvec.vblend(x,y,mOdd));
 
         }
 
@@ -199,11 +199,11 @@ namespace Z0
             {
                 var xs = Random.Blocks<ulong>(n);
                 var x = xs.LoadVector();
-                Claim.eq(x,gvec.vparts(n, xs[0], xs[1], xs[2], xs[3]));
+                Claim.eq(x,vgeneric.vparts(n, xs[0], xs[1], xs[2], xs[3]));
 
                 var ys = Random.Blocks<ulong>(n);
                 var y = ys.LoadVector();
-                Claim.eq(y,gvec.vparts(n, ys[0], ys[1], ys[2], ys[3]));
+                Claim.eq(y,vgeneric.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
                 var m = VectorData.blendspec(n256,false,n64);
 
@@ -211,7 +211,7 @@ namespace Z0
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = parity.odd(i) ? ys[i] : xs[i];
                 var expect = es.LoadVector();
-                var actual = ginx.vblend(x,y,m);
+                var actual = gvec.vblend(x,y,m);
 
                 Claim.eq(expect,actual);
 

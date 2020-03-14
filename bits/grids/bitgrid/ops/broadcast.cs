@@ -39,7 +39,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.broadcast<T,uint>(cell);
+                => gvec.broadcast<T,uint>(cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -54,7 +54,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.broadcast<T,ulong>(cell);
+                => gvec.broadcast<T,ulong>(cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -69,7 +69,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vbroadcast(n128,cell);
+                => vgeneric.vbroadcast(n128,cell);
     
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -84,7 +84,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vbroadcast(n256,cell);
+                => vgeneric.vbroadcast(n256,cell);
 
         /// <summary>
         /// Fills a caller-allocated natural grid

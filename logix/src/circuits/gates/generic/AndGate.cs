@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="y">The right operands</param>
         [MethodImpl(Inline)]
         public Vector128<T> Send(Vector128<T> x, Vector128<T> y)
-            => ginx.vand(x,y);
+            => gvec.vand(x,y);
 
         /// <summary>
         /// Computes 256 boolean OR functions simultaneously
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="y">The right operands</param>
         [MethodImpl(Inline)]
         public Vector256<T> Send(Vector256<T> a, Vector256<T> b)
-            => ginx.vand<T>(a,b);
+            => gvec.vand<T>(a,b);
 
     }
 }

@@ -277,16 +277,16 @@ namespace Z0.Logix
                 if(!NumericOps.same(z3, z0.Scalar))
                     Claim.failwith($"Evalutation of ternary op {id} failed");
 
-                var v1 = gvec.vbroadcast(n256,sa);
-                var v2 = gvec.vbroadcast(n256,sb);
-                var v3 = gvec.vbroadcast(n256,sc);
+                var v1 = vgeneric.vbroadcast(n256,sa);
+                var v2 = vgeneric.vbroadcast(n256,sb);
+                var v3 = vgeneric.vbroadcast(n256,sc);
                 var v4 = Vector256.GetElement(V256(v1,v2,v3), 0);
                 Claim.eq(v4,z3);
 
 
-                var u1 = ginx.vlo(v1);
-                var u2 = ginx.vlo(v2);
-                var u3 = ginx.vlo(v3);
+                var u1 = gvec.vlo(v1);
+                var u2 = gvec.vlo(v2);
+                var u3 = gvec.vlo(v3);
                 var u4 = Vector128.GetElement(V128(u1,u2,u3),0);
                 Claim.eq(u4, z3);
             }

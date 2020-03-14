@@ -28,7 +28,7 @@ namespace Z0
             Claim.eq(x,table.Data);   
 
             var items = vpattern.vincrements<byte>(n, 64);
-            var selected = dinx.vshuf16x8(items, table);
+            var selected = dvec.vshuf16x8(items, table);
             Claim.eq(items,selected);
         }
 
@@ -48,7 +48,7 @@ namespace Z0
             Claim.eq(x,table.Data);   
 
             var items = vpattern.vincrements<byte>(n, 64);
-            var selected = dinx.vshuf32x8(items, table);
+            var selected = dvec.vshuf32x8(items, table);
             Claim.eq(items,selected);
 
         }

@@ -33,7 +33,7 @@ namespace Z0
             public static CAnd128<T> Op => new CAnd128<T>();
 
             [MethodImpl(Inline)]
-            public override Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vand(x,y);
+            public override Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vand(x,y);
         }
 
         public sealed class CAnd256<T> : CAnd<N256,Vector256<T>,T>
@@ -42,7 +42,7 @@ namespace Z0
             public static CAnd256<T> Op => new CAnd256<T>();
 
             [MethodImpl(Inline)]
-            public override Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vand(x,y);
+            public override Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vand(x,y);
         }
 
     }

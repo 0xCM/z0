@@ -17,10 +17,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Ssse3;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Computes the full 16-bit product of corresponding left and right source components
@@ -88,7 +88,7 @@ namespace Z0
         {
             var lo = Multiply(x, y);                        
             var hi = Multiply(vswaphl(x), vswaphl(y));
-            return dvec.vconcat(lo,hi);
+            return vdirect.vconcat(lo,hi);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0
         {
             var lo = Multiply(x, y);                        
             var hi = Multiply(vswaphl(x), vswaphl(y));
-            return dvec.vconcat(lo,hi);
+            return vdirect.vconcat(lo,hi);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
-            var loMask = gvec.vbroadcast(n256, 0x00000000fffffffful);                
+            var loMask = vgeneric.vbroadcast(n256, 0x00000000fffffffful);                
             var xh = v32u(vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
             return vadd(

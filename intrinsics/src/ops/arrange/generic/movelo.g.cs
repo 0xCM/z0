@@ -10,11 +10,11 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static Nats;
     using static As;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// src[0..n-1] -> rm[n]:[0..n-1] where m = bitsize[T]
@@ -32,13 +32,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(dinx.vmovelo(v8u(x), n8));
+                 return generic<T>(dvec.vmovelo(v8u(x), n8));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(dinx.vmovelo(v16u(x), n16));
+                 return generic<T>(dvec.vmovelo(v16u(x), n16));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(dinx.vmovelo(v32u(x), n32));
+                 return generic<T>(dvec.vmovelo(v32u(x), n32));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(dinx.vmovelo(v64u(x), n64));
+                 return generic<T>(dvec.vmovelo(v64u(x), n64));
             else
                 return vmovelo_i(x);
         }
@@ -48,13 +48,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vmovelo(v8i(x), n8));
+                 return generic<T>(dvec.vmovelo(v8i(x), n8));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vmovelo(v16i(x), n16));
+                 return generic<T>(dvec.vmovelo(v16i(x), n16));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vmovelo(v32i(x), n32));
+                 return generic<T>(dvec.vmovelo(v32i(x), n32));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(dinx.vmovelo(v64i(x), n64));
+                 return generic<T>(dvec.vmovelo(v64i(x), n64));
             else
                 throw unsupported<T>();
         }

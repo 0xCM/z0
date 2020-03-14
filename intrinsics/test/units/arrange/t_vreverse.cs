@@ -54,7 +54,7 @@ namespace Z0
         {            
             var v1 = vpattern.vincrements<T>(w);
             var v2 = vpattern.decrements<T>(w);
-            var v3 = ginx.vreverse(v1);
+            var v3 = gvec.vreverse(v1);
             Claim.eq(v2,v3);
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         {
             var v1 = vpattern.vincrements<T>(w);
             var v2 = vpattern.decrements<T>(w);            
-            var v3 = ginx.vreverse(v1);
+            var v3 = gvec.vreverse(v1);
             Claim.eq(v2,v3);
         }
 
@@ -78,9 +78,9 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = gvec.vzero(w,t);
+                var expect = vgeneric.vzero(w,t);
                 for(var j = 0; j < n; j++)
-                    expect = gvec.vcell(gvec.vcell(input,(n - 1) - j),j,expect);
+                    expect = vgeneric.vcell(vgeneric.vcell(input,(n - 1) - j),j,expect);
 
                 Claim.eq(expect,output);
             }
@@ -99,9 +99,9 @@ namespace Z0
             {
                 var input = r.Invoke();                
                 var output = f.Invoke(input);
-                var expect = gvec.vzero(w,t);
+                var expect = vgeneric.vzero(w,t);
                 for(var j = 0; j < n; j++)
-                    expect = gvec.vcell(vcell(input,(n - 1) - j),j,expect);
+                    expect = vgeneric.vcell(vcell(input,(n - 1) - j),j,expect);
 
                 Claim.eq(expect,output);
             }

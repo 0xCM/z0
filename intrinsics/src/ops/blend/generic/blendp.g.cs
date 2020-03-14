@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Efects a "paired" or "permutation" blend that computes vectors
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vblendp<T>(Vector128<T> x, Vector128<T> y, Vector128<T> spec)        
             where T : unmanaged
-                => gvec.vconcat(vblendv(x,y,spec),vblendv(x,y,vnot(spec)));
+                => vgeneric.vconcat(vblendv(x,y,spec),vblendv(x,y,vnot(spec)));
 
         /// <summary>
         /// Efects a "paired" or "permutation" blend that computes vectors
@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vblendp<T>(Vector256<T> x, Vector128<T> spec)        
             where T : unmanaged
-                => gvec.vconcat(vblendv(vlo(x),vhi(x),spec),vblendv(vlo(x),vhi(x),vnot(spec)));
+                => vgeneric.vconcat(vblendv(vlo(x),vhi(x),spec),vblendv(vlo(x),vhi(x),vnot(spec)));
 
     }
 

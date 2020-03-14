@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> decrements<T>(N128 n, T first)
             where T : unmanaged
-                => ginx.vsub(first, decrements<T>(n));
+                => gvec.vsub(first, decrements<T>(n));
 
         /// <summary>
         /// Creates a 256-bit vector with components that decrease by unit step from an initial value
@@ -76,6 +76,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> decrements<T>(N256 n, T first)
             where T : unmanaged
-                => ginx.vsub(first, decrements<T>(n));
+                => gvec.vsub(first, decrements<T>(n));
     }
 }

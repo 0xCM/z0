@@ -14,7 +14,7 @@ namespace Z0
         public void vswap_128x8u()
         {
             var src = vpattern.vincrements(n128, z8);
-            var dst = dinx.vswap(src,2,3);
+            var dst = dvec.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            
 
@@ -23,7 +23,7 @@ namespace Z0
         public void vswap_128x16u()
         {
             var src = vpattern.vincrements(n128, z16);
-            var dst = dinx.vswap(src,2,3);
+            var dst = dvec.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            
 
@@ -46,14 +46,14 @@ namespace Z0
             var b = src.LoadVector(1);
             var c = src.LoadVector(2);
             var d = src.LoadVector(3);
-            dinx.vtranspose(ref a, ref b, ref c, ref d);
+            dvec.vtranspose(ref a, ref b, ref c, ref d);
             
             
             var dst = new uint[cells];
-            gvec.vstore(a, ref head(dst), step*0);
-            gvec.vstore(b, ref head(dst), step*1);
-            gvec.vstore(c, ref head(dst), step*2);
-            gvec.vstore(d, ref head(dst), step*3);
+            vgeneric.vstore(a, ref head(dst), step*0);
+            vgeneric.vstore(b, ref head(dst), step*1);
+            vgeneric.vstore(c, ref head(dst), step*2);
+            vgeneric.vstore(d, ref head(dst), step*3);
 
             var A = Matrix.load(order, src.Data.ToArray());
             var B = Matrix.load(order, dst);
@@ -74,7 +74,7 @@ namespace Z0
                 else
                     spec[k] = k;
             }
-            return dinx.vperm8x32(src, gvec.vload(n256, head(spec)));
+            return dvec.vperm8x32(src, vgeneric.vload(n256, head(spec)));
         }
 
         public void swap_256_i32()

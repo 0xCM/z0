@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;    
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     /// <summary>
     /// Defines a natural bitvector over an intrinsic vector

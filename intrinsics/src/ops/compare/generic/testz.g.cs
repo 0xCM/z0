@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Returns 1 if all mask-identified source bits are disabled, 0 otherwise
@@ -49,13 +49,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vtestz(v8u(src), v8u(mask));
+                return dvec.vtestz(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vtestz(v16u(src), v16u(mask));
+                return dvec.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dinx.vtestz(v32u(src), v32u(mask));
+                return dvec.vtestz(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return dinx.vtestz(v64u(src), v64u(mask));
+                return dvec.vtestz(v64u(src), v64u(mask));
             else
                 return vtestz_i(src,mask);
         }
@@ -65,13 +65,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vtestz(v8i(src), v8i(mask));
+                return dvec.vtestz(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return dinx.vtestz(v16i(src), v16i(mask));
+                return dvec.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return dinx.vtestz(v32i(src), v32i(mask));
+                return dvec.vtestz(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return dinx.vtestz(v64i(src), v64i(mask));
+                return dvec.vtestz(v64i(src), v64i(mask));
             else 
                 return vtestz_f<T>(src,mask);
         }
@@ -93,13 +93,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vtestz(v8u(src), v8u(mask));
+                return dvec.vtestz(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vtestz(v16u(src), v16u(mask));
+                return dvec.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dinx.vtestz(v32u(src), v32u(mask));
+                return dvec.vtestz(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return dinx.vtestz(v64u(src), v64u(mask));
+                return dvec.vtestz(v64u(src), v64u(mask));
             else
                 return vtestz_i(src,mask);
         }
@@ -109,13 +109,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vtestz(v8i(src), v8i(mask));
+                return dvec.vtestz(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return dinx.vtestz(v16i(src), v16i(mask));
+                return dvec.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return dinx.vtestz(v32i(src), v32i(mask));
+                return dvec.vtestz(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return dinx.vtestz(v64i(src), v64i(mask));
+                return dvec.vtestz(v64i(src), v64i(mask));
             else 
                 return vtestz_f<T>(src,mask);
         }

@@ -25,7 +25,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public bit Invoke(Vector128<T> x,Vector128<T> y) => ginx.vtestz(x,y);
+            public bit Invoke(Vector128<T> x,Vector128<T> y) => gvec.vtestz(x,y);
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a, T b) => default;
@@ -48,7 +48,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public bit Invoke(Vector256<T> x,Vector256<T> y) => ginx.vtestz(x,y);
+            public bit Invoke(Vector256<T> x,Vector256<T> y) => gvec.vtestz(x,y);
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a, T b) => default;

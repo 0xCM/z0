@@ -12,9 +12,9 @@ namespace Z0
         
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx    
+    partial class dvec    
     {        
        /// <summary>
         /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8

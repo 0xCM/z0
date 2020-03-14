@@ -12,7 +12,7 @@ namespace Z0
     using static As;
     using static AsIn;
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     
     /// <summary>
     /// Generic scalar intrinsics over floating-point domains

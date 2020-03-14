@@ -25,7 +25,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public bit Invoke(Vector128<T> x) => ginx.vnonz(x);
+            public bit Invoke(Vector128<T> x) => gvec.vnonz(x);
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a) => gmath.nonz(a);
@@ -49,7 +49,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public bit Invoke(Vector256<T> x) => ginx.vnonz(x);
+            public bit Invoke(Vector256<T> x) => gvec.vnonz(x);
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a) => gmath.nonz(a);

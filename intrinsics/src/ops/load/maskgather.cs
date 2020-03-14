@@ -13,7 +13,7 @@ namespace Z0
     
     using static Root;    
 
-    partial class dinx
+    partial class dvec
     {    
         /// <summary>
         /// __m128i _mm_mask_i32gather_epi32 (__m128i src, int const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERDD xmm, vm32x, xmm

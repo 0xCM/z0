@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Surfaces AES intrinsics
     /// </summary>
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// __m128i _mm_aesenc_si128 (__m128i a, __m128i RoundKey) AESENC xmm, xmm/m128
@@ -81,14 +81,14 @@ namespace Z0
         public static void aesEncode(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 gvec.vstore(aesEncode(src.LoadVector(block),key), ref dst.BlockRef(block));
+                 vgeneric.vstore(aesEncode(src.LoadVector(block),key), ref dst.BlockRef(block));
         }
 
         [MethodImpl(Inline)]
         public static void aesdec(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 gvec.vstore(aesDecode(src.LoadVector(block),key), ref dst.BlockRef(block));
+                 vgeneric.vstore(aesDecode(src.LoadVector(block),key), ref dst.BlockRef(block));
         }
     }
 }

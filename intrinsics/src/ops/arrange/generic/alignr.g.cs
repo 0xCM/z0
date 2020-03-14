@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// 
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> valignr<T>(Vector128<T> x, Vector128<T> y, [Imm] byte offset)        
             where T : unmanaged
-                => generic<T>(dinx.valignr(v64u(x), v64u(y), offset));
+                => generic<T>(dvec.valignr(v64u(x), v64u(y), offset));
 
         /// <summary>
         /// 
@@ -34,6 +34,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> valignr<T>(Vector256<T> x, Vector256<T> y, [Imm] byte offset)        
             where T : unmanaged
-                => generic<T>(dinx.valignr(v64u(x), v64u(y), offset));
+                => generic<T>(dvec.valignr(v64u(x), v64u(y), offset));
     }
 }

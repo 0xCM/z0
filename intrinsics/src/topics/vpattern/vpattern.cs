@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;    
     using static As;
-    using static gvec;
+    using static vgeneric;
  
     public static partial class vpattern
     {

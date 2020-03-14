@@ -10,10 +10,10 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Root;
-    using static gvec;
-    using D = dvec;
+    using static vgeneric;
+    using D = vdirect;
 
-    partial class gvec
+    partial class vgeneric
     {
         /// <summary>
         /// Creates a 256-bit vector from two 128-bit vectors    

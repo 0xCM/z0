@@ -10,29 +10,29 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     
     partial class vblock
     {     
         [MethodImpl(Inline)]
         public static bit vtestc<T>(N128 w, in T a)
             where T : unmanaged
-                => ginx.vtestc(vload(w, in a));
+                => gvec.vtestc(vload(w, in a));
 
         [MethodImpl(Inline)]
         public static bit vtestc<T>(N128 w, in T a, in T b)
             where T : unmanaged
-                => ginx.vtestc(vload(w, in a), vload(w, in b));
+                => gvec.vtestc(vload(w, in a), vload(w, in b));
 
         [MethodImpl(Inline)]
         public static bit vtestc<T>(N256 w, in T a)
             where T : unmanaged
-                => ginx.vtestc(vload(w, in a));
+                => gvec.vtestc(vload(w, in a));
 
         [MethodImpl(Inline)]
         public static bit vtestc<T>(N256 w, in T a, in T b)
             where T : unmanaged
-                => ginx.vtestc(vload(w, in a), vload(w, in b));
+                => gvec.vtestc(vload(w, in a), vload(w, in b));
 
         [MethodImpl(Inline)]
         public static bit testc<T>(N128 n, int vcount, int blocklen, in T a)

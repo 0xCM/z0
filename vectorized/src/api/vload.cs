@@ -19,7 +19,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class gvec
+    partial class vgeneric
     {
         /// <summary>
         /// Loads a 128-bit vector from a readonly memory reference

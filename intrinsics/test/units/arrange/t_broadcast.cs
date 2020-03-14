@@ -17,7 +17,7 @@ namespace Z0
                 ulong pattern = 0b11001100;
                 var expect = pattern << 0  | pattern << 8  | pattern << 16 | pattern << 24 | 
                                pattern << 32 | pattern << 40 | pattern << 48 | pattern << 56;
-                var actual = ginx.broadcast<byte,ulong>((byte)pattern);
+                var actual = gvec.broadcast<byte,ulong>((byte)pattern);
                 Claim.eq(expect,actual);
 
             }
@@ -26,7 +26,7 @@ namespace Z0
             {
                 ulong pattern = ushort.MaxValue;
                 var expect = pattern << 0 | pattern << 16 | pattern << 32 | pattern << 48;  
-                var actual = ginx.broadcast<ushort,ulong>((ushort)pattern);
+                var actual = gvec.broadcast<ushort,ulong>((ushort)pattern);
                 Claim.eq(expect,actual);
             }
 
@@ -34,7 +34,7 @@ namespace Z0
             {
                 ulong pattern = uint.MaxValue;
                 var expect = pattern << 0 | pattern << 32;
-                var actual = ginx.broadcast<uint,ulong>((uint)pattern);
+                var actual = gvec.broadcast<uint,ulong>((uint)pattern);
                 Claim.eq(expect,actual);
             }
 
@@ -42,7 +42,7 @@ namespace Z0
             {
                 ulong pattern = ulong.MaxValue;
                 var expect = byte.MaxValue;
-                var actual = ginx.broadcast<ulong,byte>(pattern);
+                var actual = gvec.broadcast<ulong,byte>(pattern);
                 Claim.eq(expect,actual);
             }
 

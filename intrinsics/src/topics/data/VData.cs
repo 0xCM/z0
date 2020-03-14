@@ -13,7 +13,7 @@ namespace Z0
     using static Nats;
     using static HexConst;
     using static As;
-    using static gvec;
+    using static vgeneric;
 
     public static partial class VectorData
     {        
@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> load<T>(N128 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(gvec.vload(n, in head(src)));
+                => generic<T>(vgeneric.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> load<T>(N256 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(gvec.vload(n, in head(src)));
+                => generic<T>(vgeneric.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 256-bit pattern described by a readonly bytespan
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> load<T>(N512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(gvec.vload(n, in head(src)));
+                => generic<T>(vgeneric.vload(n, in head(src)));
 
         /// <summary>
         /// Creates a vector that decribes a lo/hi lane merge permutation
@@ -139,19 +139,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N24 offset)
-            => gvec.vload(n,RotR24_128x8u);
+            => vgeneric.vload(n,RotR24_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N32 offset)
-            => gvec.vload(n, RotR32_128x8u);
+            => vgeneric.vload(n, RotR32_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N40 offset)
-            => gvec.vload(n,RotR40_128x8u);
+            => vgeneric.vload(n,RotR40_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N48 offset)
-            => gvec.vload(n,RotR48_128x8u);
+            => vgeneric.vload(n,RotR48_128x8u);
 
         public static ReadOnlySpan<byte> RotL_128x8u
             => new byte[16*7]

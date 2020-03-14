@@ -27,11 +27,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vector128<T> Send(Vector128<T> x, Vector128<T> y, Vector128<T> z)
-            => ginx.vselect(x,y,z);
+            => gvec.vselect(x,y,z);
 
         [MethodImpl(Inline)]
         public Vector256<T> Send(Vector256<T> x, Vector256<T> y, Vector256<T> z)
-            => ginx.vselect(x,y,z);
+            => gvec.vselect(x,y,z);
 
     }
 }

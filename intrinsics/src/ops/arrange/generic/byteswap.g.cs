@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Effects the reversal of the byte-level representation of each component in the source vector
@@ -25,11 +25,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbyteswap(v16u(x)));
+                return generic<T>(dvec.vbyteswap(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vbyteswap(v32u(x)));            
+                return generic<T>(dvec.vbyteswap(v32u(x)));            
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbyteswap(v64u(x)));            
+                return generic<T>(dvec.vbyteswap(v64u(x)));            
             else
                 throw unsupported<T>();
         }
@@ -45,11 +45,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbyteswap(v16u(x)));
+                return generic<T>(dvec.vbyteswap(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vbyteswap(v32u(x)));            
+                return generic<T>(dvec.vbyteswap(v32u(x)));            
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbyteswap(v64u(x)));            
+                return generic<T>(dvec.vbyteswap(v64u(x)));            
             else
                 throw unsupported<T>();
         }

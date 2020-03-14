@@ -8,7 +8,7 @@ namespace Z0
     
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     public class t_vnonz : t_vinx<t_vnonz>
     {
@@ -49,7 +49,7 @@ namespace Z0
             var max = maxval(t);
             var f = VSvcFactories.vnonz(w,t);
 
-            Claim.nea(ginx.vnonz(vzero(w,t)));
+            Claim.nea(gvec.vnonz(vzero(w,t)));
             
             for(var i=0; i<RepCount; i++)
                 Claim.yea(f.Invoke(Random.CpuVector(w,min,max)));            
@@ -62,7 +62,7 @@ namespace Z0
             var max = maxval(t);
             var f = VSvcFactories.vnonz(w,t);
 
-            Claim.nea(ginx.vnonz(vzero(w,t)));
+            Claim.nea(gvec.vnonz(vzero(w,t)));
             
             for(var i=0; i<RepCount; i++)
                 Claim.yea(f.Invoke(Random.CpuVector(w,min,max)));

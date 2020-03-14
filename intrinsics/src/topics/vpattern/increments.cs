@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;    
-    using static ginx;
+    using static gvec;
     using static Data;
  
     partial class vpattern

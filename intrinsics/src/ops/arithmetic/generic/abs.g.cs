@@ -10,23 +10,23 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static As;
 
-    partial class ginx
+    partial class gvec
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.SignedInts)]
         public static Vector128<T> vabs<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vabs(v8i(x)));
+                return vgeneric<T>(dvec.vabs(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vabs(v16i(x)));
+                return vgeneric<T>(dvec.vabs(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vabs(v32i(x)));
+                return vgeneric<T>(dvec.vabs(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vabs(v64i(x)));
+                return vgeneric<T>(dvec.vabs(v64i(x)));
             else
                 throw unsupported<T>();
         }
@@ -36,13 +36,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vabs(v8i(x)));
+                return vgeneric<T>(dvec.vabs(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vabs(v16i(x)));
+                return vgeneric<T>(dvec.vabs(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vabs(v32i(x)));
+                return vgeneric<T>(dvec.vabs(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vabs(v64i(x)));
+                return vgeneric<T>(dvec.vabs(v64i(x)));
             else
                 throw unsupported<T>();
         }

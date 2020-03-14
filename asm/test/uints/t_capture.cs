@@ -24,7 +24,7 @@ namespace Z0
             var control = exchange.Operations;
             
             
-            var src = Intrinsics.Direct.Where(m => m.Name == nameof(dinx.vand)).First();
+            var src = Intrinsics.Direct.Where(m => m.Name == nameof(dvec.vand)).First();
             control.Capture(exchange, src.Identify(), src);
 
         }

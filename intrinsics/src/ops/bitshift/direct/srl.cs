@@ -14,10 +14,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {         
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -54,7 +54,7 @@ namespace Z0
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
             var m = vlsb(n128, n8, (byte)(8 - count),z8);
-            return dinx.vand(y,m);
+            return dvec.vand(y,m);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
             var x = v16u(ShiftRightLogical(vinflate(src, n256, z16i),count));
-            var y = vand(x,v16u(gvec.vbroadcast(n256, byte.MaxValue)));
+            var y = vand(x,v16u(vgeneric.vbroadcast(n256, byte.MaxValue)));
             return v8i(vcompact(y,n128,z8));
         } 
 
@@ -140,7 +140,7 @@ namespace Z0
         {
             var x = v16u(ShiftRightLogical(vinflate(vlo(src), n256, z16i),count));
             var y = v16u(ShiftRightLogical(vinflate(vhi(src), n256, z16i),count));
-            var m = v16u(gvec.vbroadcast(n256, byte.MaxValue));
+            var m = v16u(vgeneric.vbroadcast(n256, byte.MaxValue));
             return v8i(vcompact(vand(x,m),vand(y,m),n256,z8));
         } 
 
@@ -154,7 +154,7 @@ namespace Z0
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
             var m = vlsb(n256, n8, (byte)(8 - count),z8);
-            return dinx.vand(y,m);
+            return dvec.vand(y,m);
         } 
 
         /// <summary>

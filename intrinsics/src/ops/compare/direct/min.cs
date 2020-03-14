@@ -16,10 +16,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;    
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    public partial class dinx
+    public partial class dvec
     {
         /// <summary>
         /// __m128i _mm_min_epu8 (__m128i a, __m128i b) PMINUB xmm, xmm/m128

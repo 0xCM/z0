@@ -174,7 +174,7 @@ namespace Z0
             BitGrid.and(gx,gy,gz);
             
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.eq(ginx.vand(gx[block], gy[block]), gz[block]);   
+                Claim.eq(gvec.vand(gx[block], gy[block]), gz[block]);   
 
         }
 
@@ -193,7 +193,7 @@ namespace Z0
             BitGrid.xor(gx,gy,gz);
             
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.eq(ginx.vxor(gx[block], gy[block]), gz[block]);   
+                Claim.eq(gvec.vxor(gx[block], gy[block]), gz[block]);   
         }
 
         protected void bg_and_check<T>(int m, int n, T t = default)
@@ -209,7 +209,7 @@ namespace Z0
             BitGrid.and(gx,gy,gz);
             
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.eq(ginx.vand(gx[block], gy[block]), gz[block]);   
+                Claim.eq(gvec.vand(gx[block], gy[block]), gz[block]);   
 
         }
 
@@ -226,7 +226,7 @@ namespace Z0
             BitGrid.xor(gx,gy,gz);
             
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.eq(ginx.vxor(gx[block], gy[block]), gz[block]);   
+                Claim.eq(gvec.vxor(gx[block], gy[block]), gz[block]);   
 
         }
     }

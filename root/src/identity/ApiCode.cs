@@ -27,29 +27,33 @@ namespace Z0
             => new ApiCode(id,data);        
 
         [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(ApiCode src)
+            => src.BinaryCode;
+
+        [MethodImpl(Inline)]
         public ApiCode(OpIdentity id, in BinaryCode data)
         {
             this.Id = id;
-            this.Data = data;
+            this.BinaryCode = data;
         }
 
-        public readonly BinaryCode Data;
+        public readonly BinaryCode BinaryCode;
 
         public readonly OpIdentity Id;
 
         public ReadOnlySpan<byte> Bytes 
         {
             [MethodImpl(Inline)]
-            get => Data.Bytes;
+            get => BinaryCode.Bytes;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.IsEmpty && Id.IsEmpty;
+            get => BinaryCode.IsEmpty && Id.IsEmpty;
         }
 
         public string Format()
-            => Data.Format();
+            => BinaryCode.Format();
     }
 }

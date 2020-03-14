@@ -95,7 +95,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vnand<T>(x,y);    
+                => gvec.vnand<T>(x,y);    
 
         /// <summary>
         /// Computes the bitwise nand between natural bitgrids
@@ -108,7 +108,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vnand<T>(x,y);    
+                => gvec.vnand<T>(x,y);    
 
         /// <summary>
         /// Computes the bitwise NAND between generic bitgrids and stores the result to a caller-supplied target
@@ -123,7 +123,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vnand(x[i],y[i]);
+                gz[i] = gvec.vnand(x[i],y[i]);
             return ref gz;
         }
 
@@ -157,7 +157,7 @@ namespace Z0
         {
             var blocks = BitCalcs.tableblocks<M,N,T>(n256);
             for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vnand(x[i],y[i]);
+                gz[i] = gvec.vnand(x[i],y[i]);
             return ref gz;
         }
 

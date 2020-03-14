@@ -16,7 +16,7 @@ namespace Z0
  
     using static Root;
     
-    public static partial class dinx
+    public static partial class dvec
     {                
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y

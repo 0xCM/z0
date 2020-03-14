@@ -12,10 +12,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8
@@ -139,6 +139,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vlo(Vector128<ulong> src)
-            =>  dvec.vscalar(n128,src.GetElement(0));
+            =>  vdirect.vscalar(n128,src.GetElement(0));
     }
 }

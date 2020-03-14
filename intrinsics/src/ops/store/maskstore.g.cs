@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static Root;    
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Conditionally stores 8-bit segments from the source vector to memory according to a vectorized mask
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore8<T>(Vector128<T> src, Vector128<byte> mask, in Block128<byte> dst)
             where T : unmanaged
-                => dinx.vmaskstore(v8u(src),mask, dst);
+                => dvec.vmaskstore(v8u(src),mask, dst);
 
         /// <summary>
         /// Conditionally stores 8-bit segments from the source vector to memory according to a vectorized mask
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore8<T>(Vector256<T> src, Vector256<byte> mask, in Block256<byte> dst)
             where T : unmanaged
-                => dinx.vmaskstore(v8u(src),mask, dst);
+                => dvec.vmaskstore(v8u(src),mask, dst);
 
         /// <summary>
         /// Conditionally stores 32-bit segments from the source vector to memory according to a vectorized mask
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore32<T>(Vector128<T> src, Vector128<uint> mask, in Block128<uint> dst)
             where T : unmanaged
-                => dinx.vmaskstore(v32u(src),mask,dst);
+                => dvec.vmaskstore(v32u(src),mask,dst);
 
         /// <summary>
         /// Conditionally stores 32-bit segments from the source vector to memory according to a vectorized mask
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore32<T>(Vector256<T> src, Vector256<uint> mask, in Block256<uint> dst)
             where T : unmanaged
-                => dinx.vmaskstore(v32u(src),mask, dst);
+                => dvec.vmaskstore(v32u(src),mask, dst);
 
         /// <summary>
         /// Conditionally stores 64-bit segments from the source vector to memory according to a vectorized mask
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore64<T>(Vector128<T> src, Vector128<ulong> mask, in Block128<ulong> dst)
             where T : unmanaged
-                => dinx.vmaskstore(v64u(src),mask,dst);
+                => dvec.vmaskstore(v64u(src),mask,dst);
 
         /// <summary>
         /// Conditionally stores 64-bit segments from the source vector to memory according to a vectorized mask
@@ -95,6 +95,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore64<T>(Vector256<T> src, Vector256<ulong> mask, in Block256<ulong> dst)
             where T : unmanaged
-                => dinx.vmaskstore(v64u(src),mask, dst);
+                => dvec.vmaskstore(v64u(src),mask, dst);
     }
 }

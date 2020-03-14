@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;    
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Rotates the full 128 bits of a vector leftward a bit-level resolution

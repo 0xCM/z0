@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
     using static Nats;    
-    using static gvec;
+    using static vgeneric;
     
     partial class vgbits
     {
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         static Vector128<T> veven<T>(N128 w, N2 f = default, N1 d = default, T t = default)
             where T : unmanaged
-                => gvec.vbroadcast(w,BitMask.even(f,d,t));
+                => vgeneric.vbroadcast(w,BitMask.even(f,d,t));
                 
         /// <summary>
         /// [01010101]

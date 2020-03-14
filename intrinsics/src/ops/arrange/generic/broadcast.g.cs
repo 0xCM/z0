@@ -10,10 +10,10 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
     using static Nats;
     
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Expands a bit-level S-pattern to a vector-level T-pattern
@@ -110,6 +110,6 @@ namespace Z0
         public static T broadcast<S,T>(S src, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => gvec.vfirst<S,T>(gvec.vbroadcast(n128, src));                
+                => vgeneric.vfirst<S,T>(vgeneric.vbroadcast(n128, src));                
     }
 }

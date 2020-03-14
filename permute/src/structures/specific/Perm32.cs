@@ -20,11 +20,11 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static Perm32 from(NatPerm<N32,byte> spec)
-            => new Perm32(gvec.vload(w, spec.Terms));
+            => new Perm32(vgeneric.vload(w, spec.Terms));
 
         [MethodImpl(Inline)]
         public static Perm32 from(Vector256<byte> data)
-            => new Perm32(dinx.vand(data, gvec.vbroadcast(w, BitMasks.Msb8x8x3)));
+            => new Perm32(dvec.vand(data, vgeneric.vbroadcast(w, BitMasks.Msb8x8x3)));
 
         /// <summary>
         /// Creates the identity permutation

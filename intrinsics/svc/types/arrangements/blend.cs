@@ -25,11 +25,11 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => Dynop.EmitImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.CreateImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
-                => ginx.vblend2x64(x,y,spec);            
+                => gvec.vblend2x64(x,y,spec);            
         }
 
         public readonly struct Blend4x64x256<T> : IVBinOp256Imm8<T>, IImm8V256BinaryResolver<T>
@@ -44,11 +44,11 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => Dynop.EmitImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.CreateImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
-                => ginx.vblend4x64(x,y,spec);
+                => gvec.vblend4x64(x,y,spec);
         }
 
         public readonly struct Blend4x32x128<T> : IVBinOp128Imm8<T>, IImm8V128BinaryResolver<T>
@@ -63,11 +63,11 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => Dynop.EmitImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.CreateImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
-                => ginx.vblend4x32(x,y,spec);            
+                => gvec.vblend4x32(x,y,spec);            
         }
 
         public readonly struct Blend8x32x256<T> : IVBinOp256Imm8<T>, IImm8V256BinaryResolver<T>
@@ -82,11 +82,11 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => Dynop.EmitImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.CreateImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
-                =>  ginx.vblend8x32(x,y,spec);
+                =>  gvec.vblend8x32(x,y,spec);
 
         }
 
@@ -102,11 +102,11 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => Dynop.EmitImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.CreateImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
-                => ginx.vblend8x16(x,y,spec);            
+                => gvec.vblend8x16(x,y,spec);            
         }
 
         public readonly struct Blend8x16x256<T> : IVBinOp256Imm8<T>, IImm8V256BinaryResolver<T>
@@ -121,11 +121,11 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => Dynop.EmitImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.CreateImmVBinaryOp<T>(hk, Id, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
-                =>  ginx.vblend8x16(x,y,spec);
+                =>  gvec.vblend8x16(x,y,spec);
         }
     }
 }

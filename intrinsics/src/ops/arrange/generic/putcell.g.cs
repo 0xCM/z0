@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
     
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Inserts a cell into the target at an index-identified location of a target vector

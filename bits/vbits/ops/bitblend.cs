@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;    
-    using static dinx;
+    using static dvec;
 
     partial class vBits
     {

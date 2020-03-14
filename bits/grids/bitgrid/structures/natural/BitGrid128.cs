@@ -139,7 +139,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid128<M,N,T> rhs)
-            => ginx.vtestc(ginx.veq(data,rhs));
+            => gvec.vtestc(gvec.veq(data,rhs));
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

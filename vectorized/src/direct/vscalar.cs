@@ -17,7 +17,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    static partial class dvec
+    static partial class vdirect
     {
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector

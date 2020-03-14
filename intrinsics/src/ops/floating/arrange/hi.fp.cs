@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
 
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
     partial class dinxfp
     {

@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    partial class dinx
+    partial class dvec
     {
         // [7      6     5    4     3     2     1     0    ]
         // [15_14 13_12 11_10 09_08 07_06 05_04 03_02 01_00]
@@ -43,10 +43,10 @@ namespace Z0
             var j0 = index8x16(j,bit.Off);
             var j1 = index8x16(j,bit.On);
 
-            perm = gvec.vcell(i0, j0, perm);
-            perm = gvec.vcell(i1, j1, perm);
-            perm = gvec.vcell(j0, i0, perm);
-            perm = gvec.vcell(j1, i1, perm);
+            perm = vgeneric.vcell(i0, j0, perm);
+            perm = vgeneric.vcell(i1, j1, perm);
+            perm = vgeneric.vcell(j0, i0, perm);
+            perm = vgeneric.vcell(j1, i1, perm);
 
             return vshuf16x8(src,perm);            
         }

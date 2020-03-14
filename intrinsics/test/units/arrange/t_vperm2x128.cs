@@ -15,7 +15,7 @@ namespace Z0
         static string describe<T>(Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
             where T : unmanaged
         {
-            var dst = ginx.vperm2x128(src, p0, p1);
+            var dst = gvec.vperm2x128(src, p0, p1);
             var sym0 = p0.Symbols().ToString();
             var sym1 = p1.Symbols().ToString();
             var description = $"{src.Format()} |> {sym0}{sym1} = {dst.Format()}";
@@ -31,8 +31,8 @@ namespace Z0
                 var p0 = Perm2x4.DA;
                 var p1 = Perm2x4.BC;
                 var src = vpattern.vincrements<ulong>(n512);
-                var expect = gvec.vparts(n512,6, 7, 0, 1, 2, 3, 4, 5);
-                var actual = ginx.vperm2x128(src, p0, p1);
+                var expect = vgeneric.vparts(n512,6, 7, 0, 1, 2, 3, 4, 5);
+                var actual = gvec.vperm2x128(src, p0, p1);
                 Claim.eq(actual,expect);
                 Notify(describe(src,p0,p1));
 

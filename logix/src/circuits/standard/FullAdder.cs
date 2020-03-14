@@ -61,11 +61,11 @@ namespace Z0
         public static void Compute<T>(Vector256<T> x, Vector256<T> y, Vector256<T> cin, out Vector256<T> sum, out Vector256<T> cout)
             where T : unmanaged
         {
-            var a = ginx.vxor(x,y);
-            var b = ginx.vand(a,cin);
-            var c = ginx.vand(x,y);
-            sum = ginx.vxor(a, cin);
-            cout = ginx.vor(b, c);
+            var a = gvec.vxor(x,y);
+            var b = gvec.vand(a,cin);
+            var c = gvec.vand(x,y);
+            sum = gvec.vxor(a, cin);
+            cout = gvec.vor(b, c);
         }
 
         [MethodImpl(Inline)]
@@ -80,11 +80,11 @@ namespace Z0
         public static void Compute<T>(Vector128<T> x, Vector128<T> y, Vector128<T> cin, out Vector128<T> sum, out Vector128<T> cout)
             where T : unmanaged
         {
-            var a = ginx.vxor(x,y);
-            var b = ginx.vand(a,cin);
-            var c = ginx.vand(x,y);
-            sum = ginx.vxor(a, cin);
-            cout = ginx.vor(b, c);
+            var a = gvec.vxor(x,y);
+            var b = gvec.vand(a,cin);
+            var c = gvec.vand(x,y);
+            sum = gvec.vxor(a, cin);
+            cout = gvec.vor(b, c);
         }
 
         [MethodImpl(Inline)]

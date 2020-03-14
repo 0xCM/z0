@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Permutes 4 64-bit source vector segments
@@ -41,13 +41,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(v8u(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v8u(dvec.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(v16u(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v16u(dvec.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(v32u(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v32u(dvec.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vperm4x64(v64u(x), spec));
+                return generic<T>(dvec.vperm4x64(v64u(x), spec));
             else
                 return vperm4x64_i(x,spec);
 
@@ -58,13 +58,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(v8i(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v8i(dvec.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(v16i(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v16i(dvec.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(v32i(dinx.vperm4x64(v64u(x), spec)));
+                return generic<T>(v32i(dvec.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vperm4x64(v64i(x), spec));
+                return generic<T>(dvec.vperm4x64(v64i(x), spec));
             else 
                 return vperm4x64_f(x,spec);
         }

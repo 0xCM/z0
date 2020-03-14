@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;    
 
     using static Root;    
-    using static gvec;
+    using static vgeneric;
 
-    partial class dinx
+    partial class dvec
     {
         /// <summary>
         /// Computes x^(x << count)
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector128<byte> vxorsl(Vector128<byte> x, [Imm] byte count)
-            => dinx.vxor(x, vsll(x,count));
+            => dvec.vxor(x, vsll(x,count));
 
         /// <summary>
         /// Computes x^(x << count)
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector128<ushort> vxorsl(Vector128<ushort> x, [Imm] byte count)
-            => dinx.vxor(x, vsll(x,count));
+            => dvec.vxor(x, vsll(x,count));
 
         /// <summary>
         /// Computes x^(x << count)
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector128<uint> vxorsl(Vector128<uint> x, [Imm] byte count)
-            => dinx.vxor(x, vsll(x,count));
+            => dvec.vxor(x, vsll(x,count));
 
         /// <summary>
         /// Computes x^(x << count)
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector128<ulong> vxorsl(Vector128<ulong> x, [Imm] byte count)
-            => dinx.vxor(x, vsll(x,count));
+            => dvec.vxor(x, vsll(x,count));
 
         /// <summary>
         /// Computes x^(x << count)
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector256<byte> vxorsl(Vector256<byte> x, [Imm] byte count)
-            => dinx.vxor(x, vsll(x,count));
+            => dvec.vxor(x, vsll(x,count));
 
         /// <summary>
         /// Computes x^(x << count)
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector256<ushort> vxorsl(Vector256<ushort> x, [Imm] byte count)
-            => dinx.vxor(x, vsll(x,count));
+            => dvec.vxor(x, vsll(x,count));
 
         /// <summary>
         /// Computes x^(x << count)
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector256<uint> vxorsl(Vector256<uint> x, [Imm] byte count)
-            => dinx.vxor(x, vsll(x,count));
+            => dvec.vxor(x, vsll(x,count));
 
         /// <summary>
         /// Computes x^(x << count)
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector256<ulong> vxorsl(Vector256<ulong> x, [Imm] byte count)
-            => dinx.vxor(x, vsll(x,count));
+            => dvec.vxor(x, vsll(x,count));
 
         /// <summary>
         /// Computes x[i]^(x[i] << count[i])
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="counts">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector128<uint> vxorslv(Vector128<uint> x, Vector128<uint> counts)
-            => dinx.vxor(x, dinx.vsllv(x,counts));
+            => dvec.vxor(x, dvec.vsllv(x,counts));
 
         /// <summary>
         /// Computes x[i]^(x[i] << count[i])
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="counts">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector128<ulong> vxorslv(Vector128<ulong> x, Vector128<ulong> counts)
-            => dinx.vxor(x,dinx.vsllv(x,counts));
+            => dvec.vxor(x,dvec.vsllv(x,counts));
 
         /// <summary>
         /// Computes x[i]^(x[i] << count[i])
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="counts">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector256<uint> vxorslv(Vector256<uint> x, Vector256<uint> counts)
-            => dinx.vxor(x, dinx.vsllv(x,counts));
+            => dvec.vxor(x, dvec.vsllv(x,counts));
 
         /// <summary>
         /// Computes x[i]^(x[i] << count[i])
@@ -119,6 +119,6 @@ namespace Z0
         /// <param name="counts">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSl]
         public static Vector256<ulong> vxorslv(Vector256<ulong> x, Vector256<ulong> counts)
-            => dinx.vxor(x, dinx.vsllv(x,counts));
+            => dvec.vxor(x, dvec.vsllv(x,counts));
     }
 }

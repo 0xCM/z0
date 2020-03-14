@@ -16,10 +16,10 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = vpattern.vunits<byte>(n128);            
-                Claim.eq(ginx.vrotrx(x,8), dinx.vrotrx(x,n8));
-                Claim.eq(ginx.vrotrx(x,16), dinx.vrotrx(x,n16));
-                Claim.eq(ginx.vrotrx(x,24), dinx.vrotrx(x,n24));
-                Claim.eq(ginx.vrotrx(x,32), dinx.vrotrx(x,n32));
+                Claim.eq(gvec.vrotrx(x,8), dvec.vrotrx(x,n8));
+                Claim.eq(gvec.vrotrx(x,16), dvec.vrotrx(x,n16));
+                Claim.eq(gvec.vrotrx(x,24), dvec.vrotrx(x,n24));
+                Claim.eq(gvec.vrotrx(x,32), dvec.vrotrx(x,n32));
             }
 
         }
@@ -29,10 +29,10 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = vpattern.vunits<byte>(n128);            
-                Claim.eq(ginx.vrotlx(x,8), dinx.vrotlx(x,n8));
-                Claim.eq(ginx.vrotlx(x,16), dinx.vrotlx(x,n16));
-                Claim.eq(ginx.vrotlx(x,24), dinx.vrotlx(x,n24));
-                Claim.eq(ginx.vrotlx(x,32), dinx.vrotlx(x,n32));
+                Claim.eq(gvec.vrotlx(x,8), dvec.vrotlx(x,n8));
+                Claim.eq(gvec.vrotlx(x,16), dvec.vrotlx(x,n16));
+                Claim.eq(gvec.vrotlx(x,24), dvec.vrotlx(x,n24));
+                Claim.eq(gvec.vrotlx(x,32), dvec.vrotlx(x,n32));
             }
         }
 

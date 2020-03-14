@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Defines the ternary bitwise select operator over three vectors,

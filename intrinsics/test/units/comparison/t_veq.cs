@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
     using static Nats;
-    using static gvec;
+    using static vgeneric;
 
     public class t_veq : t_vinx<t_veq>
     {     

@@ -11,9 +11,9 @@ namespace Z0
     
     using static As;
     using static Root;
-    using static gvec;
+    using static vgeneric;
 
-    partial class ginx
+    partial class gvec
     {
         /// <summary>
         /// Shuffles unsigned 32-bit source segments to/from arbitrary locations according to the shuffle spec
@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vshuf4x32<T>(Vector128<T> src, [Imm] byte spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf4x32(v32u(src), spec));
+                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 32-bit source segments within 128-bit lanes according to the shuffle spec
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vshuf4x32<T>(Vector256<T> src, [Imm] byte spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf4x32(v32u(src), spec));
+                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 32-bit source segments to/from arbitrary locations according to the shuffle spec
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vshuf4x32<T>(Vector128<T> src, Arrange4L spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf4x32(v32u(src), spec));
+                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 32-bit source segments within 128-bit lanes according to the shuffle spec
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vshuf4x32<T>(Vector256<T> src, Arrange4L spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf4x32(v32u(src), spec));
+                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 8-bit source segments according to the shuffle spec
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vshuf16x8<T>(Vector128<T> src, Vector128<byte> spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf16x8(v8u(src), spec));
+                => generic<T>(dvec.vshuf16x8(v8u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 8-bit source segments within 128-bit lanes according to the shuffle spec
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vshuf16x8<T>(Vector256<T> src, Vector256<byte> spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf16x8(v8u(src), spec));
+                => generic<T>(dvec.vshuf16x8(v8u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 8-bit source segments to/from arbitrary locations according to the shuffle spec
@@ -88,6 +88,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vshuf32x8<T>(Vector256<T> src, Vector256<byte> spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf32x8(v8u(src), spec));
+                => generic<T>(dvec.vshuf32x8(v8u(src), spec));
     }
 }
