@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
+    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(TopDir)containers/src/z0.containers.csproj" />
+    <ProjectReference Include="$(TopDir)data/src/z0.data.csproj" />    
+    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
+    <ProjectReference Include="$(TopDir)vectorizied/src/z0.vectorizied.csproj" />
+  </ItemGroup>
+
+</Project>
