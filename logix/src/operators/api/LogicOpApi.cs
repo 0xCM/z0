@@ -9,10 +9,12 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static LogicOps;
     using static OpHelpers;
     using static TernaryBitLogicOpKind;
+    using LO = LogicOps;
 
     //[ApiHost("logic.api",ApiHostKind.Direct)]
     public static class LogicOpApi
@@ -103,7 +105,7 @@ namespace Z0.Logix
             switch(kind)
             {
                 case UnaryBitLogicOpKind.False: return @false;
-                case UnaryBitLogicOpKind.Not: return not;
+                case UnaryBitLogicOpKind.Not: return LO.not;
                 case UnaryBitLogicOpKind.Identity: return identity;
                 case UnaryBitLogicOpKind.True: return @true;
                 default: throw new NotSupportedException(sig(kind));
@@ -365,5 +367,4 @@ namespace Z0.Logix
             }
         }
     }
-
 }

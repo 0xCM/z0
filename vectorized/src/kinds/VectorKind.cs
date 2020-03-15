@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static VectorKind;
 
     /// <summary>
     /// Clasifies concrete intrinsic vectors of total width w over components of width t and sign indicator s where:
@@ -250,27 +246,5 @@ namespace Z0
         /// A 512-bit vector covering 4 64-bit floating-point segments
         /// </summary>
         v512x64f = v512 | v64f,
-    }
-
-    public static class VectorKindX
-    {
-        /// <summary>
-        /// Determines whether kind has a nonzero value
-        /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSome(this VectorKind k)
-            => k != 0;
-
-        public static string Format(this VectorKind k)
-            => k.IsSome() ? k.ToString() : string.Empty;
-
-        /// <summary>
-        /// Specifies the bit-width of a classified cpu vector
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static int BitWidth(this VectorKind k)
-            => VectorType.width(k);
     }
 }

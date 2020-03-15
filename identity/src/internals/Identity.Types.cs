@@ -55,6 +55,14 @@ namespace Z0
             return none<SegmentedIdentity>();                
         }
 
+        /// <summary>
+        /// Returns true if the source type is intrinsic or blocked
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsSegmented(this Type t)
+            => t.IsBlocked() || t.IsVector();
+
         static Option<TypeIdentity> CommonId(this Type arg)
         {
             if(arg.IsPointer)
@@ -82,11 +90,11 @@ namespace Z0
 
         static Option<TypeIdentity> SegmentedId(this Type t)
             =>  from i in t.SegIndicator()
-                let segwidth = t.Width()                
+                let segwidth = Identity.width(t)
                 where segwidth.IsSome()
                 let segfmt = segwidth.Format()
                 let arg = t.GetGenericArguments().Single()
-                let argwidth = arg.Width()                
+                let argwidth = Identity.width(arg)
                 where   argwidth.IsSome()
                 let argfmt = argwidth.Format()
                 let nk = arg.NumericKind()

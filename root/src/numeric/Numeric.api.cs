@@ -16,7 +16,7 @@ namespace Z0
     using TC = System.TypeCode;
     using FW = FixedWidth;
     using NI = NumericIndicator;
-    using ID = NumericId;
+    using ID = NumericKindId;
 
     [ApiHost("numeric")]
     public static class Numeric
@@ -381,7 +381,7 @@ namespace Z0
         /// <param name="k">The source kind</param>
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline), Op]
-        public static bool contains(NumericKind k, NumericId match)        
+        public static bool contains(NumericKind k, NumericKindId match)        
             => ((uint)k & (uint)match) != 0;
 
         [MethodImpl(Inline)]

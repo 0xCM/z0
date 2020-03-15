@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
 
     using NK = NumericKind;
-    using NT = NumericType;
+    using NT = NumericTypeKind;
     using NI = NumericIndicator;
 
     public static class NumericExtensions
@@ -88,13 +88,6 @@ namespace Z0
         public static NT NumericType(this Type src)
             => NT.From(src);
 
-        /// <summary>
-        /// Returns a kind-identified system type if possible; throws an exception otherwise
-        /// </summary>
-        /// <param name="k">The identifying kind</param>
-        [MethodImpl(Inline)]
-        public static Option<Type> ToClrType(this NumericKind k)
-            => from nt in NT.From(k) select nt.Subject;
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
@@ -116,21 +109,12 @@ namespace Z0
             => Numeric.from(w, i);
             
         /// <summary>
-        /// Tests whether the source kind, considered as a bitfield, contains the match kind
-        /// </summary>
-        /// <param name="k">The source kind</param>
-        /// <param name="match">The kind to match</param>
-        [MethodImpl(Inline)]
-        public static bool Is(this NumericKind k, NK match)        
-            => Numeric.contains(k,match);
-
-        /// <summary>
         /// Tests whether the source kind, considered as a bitfield, contains the match id
         /// </summary>
         /// <param name="k">The source kind</param>
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline)]
-        public static bool Is(this NK k, NumericId match)        
+        public static bool Is(this NK k, NumericKindId match)        
             => Numeric.contains(k,match);
 
         /// <summary>
@@ -196,11 +180,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source model</param>
         [MethodImpl(Inline)]
-        public static bool IsSome(this NumericType src)
+        public static bool IsSome(this NumericTypeKind src)
             => !src.IsEmpty;
-
-        [MethodImpl(Inline)]
-        public static string Format(this NumericKind k)
-            => $"{k.Width()}{k.Indicator().Format()}";
     }
 }

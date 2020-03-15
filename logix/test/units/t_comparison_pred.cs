@@ -6,9 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static zfunc;
-    
+        
     using static LogicEngine;
     using static PredicateSpec;
     using static ComparisonOpKindId;
@@ -146,7 +144,5 @@ namespace Z0.Logix
                 Claim.eq(expect,result);            
             }
         }
-
     }
-
 }

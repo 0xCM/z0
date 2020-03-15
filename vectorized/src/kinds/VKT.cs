@@ -11,6 +11,29 @@ namespace Z0
     
     using static Root;
 
+    public interface IVectorKind : ITypeKind
+    {
+
+    }
+
+    public interface IVectorType : IVectorKind, IFixedWidth
+    {
+
+    }    
+
+    public interface IVectorType<F> : IVectorType, IFixedKind<F>
+        where F : unmanaged, IFixed
+    {
+
+    }
+
+    public interface IVectorType<V,T> : ITypeKind<T>, IVectorType
+        where V : struct
+        where T : unmanaged
+    {
+
+    }
+    
     public static class VKT
     {
         public readonly struct Vec : IVectorKind

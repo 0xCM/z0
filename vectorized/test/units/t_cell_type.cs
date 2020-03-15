@@ -18,7 +18,8 @@ namespace Z0
     {    
         public void check_cell_types()
         {
-
+            iter(VectorType.Types128, t => check_cell_type(t,n128));
+            iter(VectorType.Types256, t => check_cell_type(t,n256));
             
         }
         void check_cell_type(Type tVector, N128 w)
@@ -75,8 +76,21 @@ namespace Z0
                 Claim.yea(tCell == typeof(ulong));
                 Claim.eq(VectorKind.v128x64u, kVector);
             }
+            else if(tVector == typeof(Vector128<float>))
+            {
+                Claim.yea(tCell == typeof(float));
+                Claim.eq(VectorKind.v128x32f, kVector);
+            }
+            else if(tVector == typeof(Vector128<double>))
+            {
+                Claim.yea(tCell == typeof(double));
+                Claim.eq(VectorKind.v128x64f, kVector);
+            }
             else
+            {
+                Notify($"{tVector.DisplayName()} is not a recognized 128-bit vector type");
                 Claim.fail();
+            }
         }
 
         void check_cell_type(Type tVector, N256 w)
@@ -133,11 +147,21 @@ namespace Z0
                 Claim.yea(tCell == typeof(ulong));
                 Claim.eq(VectorKind.v256x64u, kVector);
             }
+            else if(tVector == typeof(Vector256<float>))
+            {
+                Claim.yea(tCell == typeof(float));
+                Claim.eq(VectorKind.v256x32f, kVector);
+            }
+            else if(tVector == typeof(Vector256<double>))
+            {
+                Claim.yea(tCell == typeof(double));
+                Claim.eq(VectorKind.v256x64f, kVector);
+            }
             else
+            {
+                Notify($"{tVector.DisplayName()} is not a recognized 256-bit vector type");
                 Claim.fail();
+            }
         }
-
-
     }
-
 }

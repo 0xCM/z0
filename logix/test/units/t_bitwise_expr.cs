@@ -5,11 +5,10 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static TypedLogicSpec;
 
     public class t_bitwise_expr : UnitTest<t_bitwise_expr>

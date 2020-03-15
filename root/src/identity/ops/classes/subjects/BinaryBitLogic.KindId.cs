@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
-    using static Root;
-
-    using K = BinaryBitLogicOpKind;
     using Id = OpKindId;
 
     public enum BinaryBitLogicKindId : ulong
@@ -45,8 +41,5 @@ namespace Z0
         Nand = Id.Nand, 
         
         True = Id.True,
-
     }
-
-
 }

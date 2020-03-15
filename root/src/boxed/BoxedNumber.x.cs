@@ -11,8 +11,12 @@ namespace Z0
 
     public static class BoxedNumberExtensions
     {
+        /// <summary>
+        /// Returns 0 in a box
+        /// </summary>
+        /// <param name="kind">The numeric kind of 0 to be put into the box</param>
         [MethodImpl(Inline)]
-        public static BoxedNumber Zero(this NumericKind kind)
+        public static BoxedNumber BoxedZero(this NumericKind kind)
             => BoxedNumber.Define(Cast.ocast(byte.MinValue, kind), kind); 
 
         /// <summary>
@@ -25,8 +29,8 @@ namespace Z0
         public static BoxedNumber Box<T>(this NumericKind dst, T src)
             where T : unmanaged
                 => BoxedNumber.Define(Cast.ocast(src,dst), dst);
-
-        [MethodImpl(Inline)]
+        
+        [MethodImpl(Inline)]        
         public static bool LiberalEquals(this BoxedNumber lhs, BoxedNumber rhs)
         {
             if(lhs.IsSignedInt && rhs.IsSignedInt)

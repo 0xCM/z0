@@ -20,6 +20,4 @@ namespace Z0
 
         public NumericKind NumericPrimitive {get;}
     }
-
-
 }

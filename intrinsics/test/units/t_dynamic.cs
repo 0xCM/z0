@@ -11,7 +11,8 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Collections.Generic;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_dynamic : t_vinx<t_dynamic>
     {   
@@ -24,7 +25,7 @@ namespace Z0
                 foreach(var t in method.ParameterTypes())
                 {
                     Claim.yea(t.IsBlocked());
-                    Claim.yea(t.Width() == FixedWidth.W128 || t.Width() == FixedWidth.W256);
+                    Claim.yea(Identity.width(t) == FixedWidth.W128 || Identity.width(t) == FixedWidth.W256);
                 }
                     
                 var id = Identity.generic(method);

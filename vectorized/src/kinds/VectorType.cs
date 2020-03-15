@@ -6,21 +6,73 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Linq;
     using System.Collections.Generic;
 
     using static Root;
+    using static Nats;
 
     public static class VectorType
     {
-        static N128 n128 => default;
+        /// <summary>
+        /// Closed vector types of width 128
+        /// </summary>
+        public static IEnumerable<Type> Types128
+            => types(n128);
+
+        /// <summary>
+        /// Closed vector types of width 256
+        /// </summary>
+        public static IEnumerable<Type> Types256
+            => types(n256);
+
+        /// <summary>
+        /// Closed vector types of width 512
+        /// </summary>
+        public static IEnumerable<Type> Types512
+            => types(n512);
         
-        static N256 n256 => default;
+        /// <summary>
+        /// System-defined closed vector types
+        /// </summary>
+        public static IEnumerable<Type> SystemTypes
+            => Types128.Union(Types256);
 
-        static N512 n512 => default;
+        /// <summary>
+        /// User-defined closed vector types
+        /// </summary>
+        public static IEnumerable<Type> UserTypes
+            => Types512;
 
+        /// <summary>
+        /// All closed vector types
+        /// </summary>
+        public static IEnumerable<Type> Types
+            => SystemTypes.Union(UserTypes);
+
+        [MethodImpl(Inline)]
+        public static Type definition(N128 w)        
+            => typeof(Vector128<>);
+        
+        [MethodImpl(Inline)]
+        public static Type definition(N256 w)
+            => typeof(Vector256<>);
+
+        [MethodImpl(Inline)]
+        public static Type definition(N512 w)
+            => typeof(Vector512<>);
+
+        public static IEnumerable<Type> types(N128 w)
+            => from nt in Numeric.Types select definition(w).MakeGenericType(nt);
+
+        public static IEnumerable<Type> types(N256 w)
+            => from nt in Numeric.Types select definition(w).MakeGenericType(nt);
+
+        public static IEnumerable<Type> types(N512 w)
+            => from nt in Numeric.Types select definition(w).MakeGenericType(nt);
+            
+        
         /// <summary>
         /// Determines the component width of a k-kinded vector
         /// </summary>
@@ -111,11 +163,6 @@ namespace Z0
         public static VectorKind kind<T>(N512 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
-
-        public static IEnumerable<Type> types(N128 w)
-        {
-            yield return default;
-        }
         
         [MethodImpl(Inline)]
         public static VectorKind kind(Type src)

@@ -58,6 +58,25 @@ namespace Z0
                 from s in segmented(p)
                 select s;
 
+        /// <summary>
+        /// Divines the bit-width of a specified type, if possible
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static FixedWidth width(Type t)
+        {
+            if(VectorType.test(t))
+                return VectorType.width(t);
+            else if(t.IsBlocked())
+                return BK.width(t);
+            if(t.IsNumeric())
+                return Numeric.width(t);
+            else if(t == typeof(bit))
+                return FixedWidth.W1;
+            else
+                return FixedWidth.None;
+        }
+
         public static string identify(ParameterInfo p)
         {
             if(!p.IsParametric())
@@ -98,9 +117,9 @@ namespace Z0
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = text.concat(IDI.Vector,argtype.Width().Format());
+                        last = text.concat(IDI.Vector, width(argtype).Format());
                     else if(argtype.IsBlocked())
-                        last = text.concat(IDI.Block, argtype.Width().Format());
+                        last = text.concat(IDI.Block, width(argtype).Format());
                     else if(argtype.IsSpan())
                         last = argtype.SpanKind().Format();
                 }

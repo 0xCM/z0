@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
  
-    using NK = NumericKind;
     using static ImmediateClass;
 
     partial class ReflectedClass

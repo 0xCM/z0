@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Characterizes a claim that two variable-dependent comparison expressions are equivalent

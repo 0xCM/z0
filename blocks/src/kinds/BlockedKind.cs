@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;    
-    using static SegmentKind;
+    using static NumericSegmentKind;
     using static FixedWidth;
 
     /// <summary>

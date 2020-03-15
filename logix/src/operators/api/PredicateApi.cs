@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     using static OpHelpers;
 

@@ -34,5 +34,4 @@ namespace Z0
     }
 
     public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(Identity) {} }
-
 }

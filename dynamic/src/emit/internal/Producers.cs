@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Linq;
 
     using static Root;
@@ -23,7 +19,7 @@ namespace Z0
         {
             (var celltype, var width) = method.ParameterTypes()
                     .Where(p => p.IsVector())
-                    .Select(x => (x.SuppliedTypeArgs().Single(),x.Width()))
+                    .Select(x => (x.SuppliedTypeArgs().Single(), Identity.width(x)))
                     .FirstOrDefault();            
 
             var factory = width switch{
@@ -44,7 +40,7 @@ namespace Z0
         {
             (var celltype, var width) = method.ParameterTypes()
                     .Where(p => p.IsVector())
-                    .Select(x => (x.SuppliedTypeArgs().Single(),x.Width()))
+                    .Select(x => (x.SuppliedTypeArgs().Single(), Identity.width(x)))
                     .FirstOrDefault();            
 
             var factory = width switch{
@@ -60,8 +56,5 @@ namespace Z0
 
         static Func<byte,DynamicDelegate> EmitImmV256BinaryOpProducer(OpIdentity id, MethodInfo src, Type component)
             => imm8 => EmitImmV256BinaryOp(id, src,imm8,component);
-
-
-
     }
 }

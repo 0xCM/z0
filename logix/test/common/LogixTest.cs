@@ -10,7 +10,8 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static NumericOpApi;
     using static LogicOpApi;
     
@@ -452,7 +453,5 @@ namespace Z0.Logix
                 Claim.eq(result4, result5);
             }
         }
-
      }
 }
-

@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E zero<E>()
             where E : unmanaged, Enum
-            => (E)typeof(E).GetEnumUnderlyingType().NumericKind().Zero().Boxed;
+            => (E)typeof(E).GetEnumUnderlyingType().NumericKind().BoxedZero().Boxed;
 
         /// <summary>
         /// Reads a generic numeric value from a generic enum. 

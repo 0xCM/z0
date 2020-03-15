@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Root;
-
 
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
-    /// </summary>
+    /// </summary>    
     public enum BinaryBitLogicOpKind : byte
     {         
         /// <summary>

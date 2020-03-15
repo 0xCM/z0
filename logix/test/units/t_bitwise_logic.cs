@@ -8,7 +8,6 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
     using static BinaryBitLogicOpKind;
 
     /// <summary>

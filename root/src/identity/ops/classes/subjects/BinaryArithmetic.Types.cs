@@ -13,7 +13,6 @@ namespace Z0
     using K = OpKindId;
     using A = OpKindAttribute;
 
-
     public sealed class SubAttribute : A { public SubAttribute() : base(Sub) {} }
 
     public sealed class MulAttribute : A { public MulAttribute() : base(Mul) {} }
@@ -29,5 +28,4 @@ namespace Z0
     public sealed class DividesAttribute : A { public DividesAttribute() : base(Divides) {} }
 
     public sealed class DotAttribute : A { public DotAttribute() : base(Dot) {} }
-
 }

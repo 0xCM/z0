@@ -386,88 +386,88 @@ namespace Z0
         public static Block512x64f bk512x64f()
             => default;       
 
-       public static BlockedKind kind(FixedWidth width, NumericId id)            
+       public static BlockedKind kind(FixedWidth width, NumericKindId id)            
         {
             var k = width switch 
                     { FixedWidth.W16 => 
                         id switch {
-                            NumericId.U8 => b16x8u,
-                            NumericId.I8 => b16x8i,
-                            NumericId.I16 => b16x16i,
-                            NumericId.U16 => b16x16u,
+                            NumericKindId.U8 => b16x8u,
+                            NumericKindId.I8 => b16x8i,
+                            NumericKindId.I16 => b16x16i,
+                            NumericKindId.U16 => b16x16u,
                             _ => None
                             }, 
 
                         FixedWidth.W32 => 
                         id switch {
-                            NumericId.U8 => b32x8u,
-                            NumericId.I8 => b32x8i,
-                            NumericId.I16 => b32x16i,
-                            NumericId.U16 => b32x16u,
-                            NumericId.I32 => b32x32i,
-                            NumericId.U32 => b32x32u,
-                            NumericId.F32 => b32x32f,
+                            NumericKindId.U8 => b32x8u,
+                            NumericKindId.I8 => b32x8i,
+                            NumericKindId.I16 => b32x16i,
+                            NumericKindId.U16 => b32x16u,
+                            NumericKindId.I32 => b32x32i,
+                            NumericKindId.U32 => b32x32u,
+                            NumericKindId.F32 => b32x32f,
                             _ => None
                             }, 
 
                         FixedWidth.W64 => 
                         id switch {
-                            NumericId.U8 => b64x8u,
-                            NumericId.I8 => b64x8i,
-                            NumericId.U16 => b64x16u,
-                            NumericId.I16 => b64x16i,
-                            NumericId.U32 => b64x32i,
-                            NumericId.I32 => b64x32i,
-                            NumericId.U64 => b64x64u,
-                            NumericId.I64 => b64x64i,
-                            NumericId.F32 => b64x32f,
-                            NumericId.F64 => b64x64f,
+                            NumericKindId.U8 => b64x8u,
+                            NumericKindId.I8 => b64x8i,
+                            NumericKindId.U16 => b64x16u,
+                            NumericKindId.I16 => b64x16i,
+                            NumericKindId.U32 => b64x32i,
+                            NumericKindId.I32 => b64x32i,
+                            NumericKindId.U64 => b64x64u,
+                            NumericKindId.I64 => b64x64i,
+                            NumericKindId.F32 => b64x32f,
+                            NumericKindId.F64 => b64x64f,
                             _ => None
                             }, 
 
                         FixedWidth.W128 => 
                         id switch {
-                            NumericId.U8 => b128x8u,
-                            NumericId.I8 => b128x8i,
-                            NumericId.U16 => b128x16u,
-                            NumericId.I16 => b128x16i,
-                            NumericId.U32 => b128x32i,
-                            NumericId.I32 => b128x32i,
-                            NumericId.U64 => b128x64u,
-                            NumericId.I64 => b128x64i,
-                            NumericId.F32 => b128x32f,
-                            NumericId.F64 => b128x64f,
+                            NumericKindId.U8 => b128x8u,
+                            NumericKindId.I8 => b128x8i,
+                            NumericKindId.U16 => b128x16u,
+                            NumericKindId.I16 => b128x16i,
+                            NumericKindId.U32 => b128x32i,
+                            NumericKindId.I32 => b128x32i,
+                            NumericKindId.U64 => b128x64u,
+                            NumericKindId.I64 => b128x64i,
+                            NumericKindId.F32 => b128x32f,
+                            NumericKindId.F64 => b128x64f,
                             _ => None
                             }, 
 
 
                         FixedWidth.W256 => 
                         id switch {
-                            NumericId.U8 => b256x8u,
-                            NumericId.I8 => b256x8i,
-                            NumericId.U16 => b256x16u,
-                            NumericId.I16 => b256x16i,
-                            NumericId.U32 => b256x32i,
-                            NumericId.I32 => b256x32i,
-                            NumericId.U64 => b256x64u,
-                            NumericId.I64 => b256x64i,
-                            NumericId.F32 => b256x32f,
-                            NumericId.F64 => b256x64f,
+                            NumericKindId.U8 => b256x8u,
+                            NumericKindId.I8 => b256x8i,
+                            NumericKindId.U16 => b256x16u,
+                            NumericKindId.I16 => b256x16i,
+                            NumericKindId.U32 => b256x32i,
+                            NumericKindId.I32 => b256x32i,
+                            NumericKindId.U64 => b256x64u,
+                            NumericKindId.I64 => b256x64i,
+                            NumericKindId.F32 => b256x32f,
+                            NumericKindId.F64 => b256x64f,
                             _ => None
                             }, 
 
                         FixedWidth.W512 => 
                         id switch {
-                            NumericId.U8 => b512x8u,
-                            NumericId.I8 => b512x8i,
-                            NumericId.U16 => b512x16u,
-                            NumericId.I16 => b512x16i,
-                            NumericId.U32 => b512x32i,
-                            NumericId.I32 => b512x32i,
-                            NumericId.U64 => b512x64u,
-                            NumericId.I64 => b512x64i,
-                            NumericId.F32 => b512x32f,
-                            NumericId.F64 => b512x64f,
+                            NumericKindId.U8 => b512x8u,
+                            NumericKindId.I8 => b512x8i,
+                            NumericKindId.U16 => b512x16u,
+                            NumericKindId.I16 => b512x16i,
+                            NumericKindId.U32 => b512x32i,
+                            NumericKindId.I32 => b512x32i,
+                            NumericKindId.U64 => b512x64u,
+                            NumericKindId.I64 => b512x64i,
+                            NumericKindId.F32 => b512x32f,
+                            NumericKindId.F64 => b512x64f,
                             _ => None
                             }, 
 

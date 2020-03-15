@@ -109,7 +109,5 @@ namespace Z0
         public readonly struct CNonImpl : IBitLogicKind<CNonImpl,K> { public K Kind { [MethodImpl(Inline)] get => K.CNonImpl;}}
 
         public readonly struct Not : IBitLogicKind<Not,UnaryBitLogicOpKind> { public UnaryBitLogicOpKind Kind { [MethodImpl(Inline)] get => UnaryBitLogicOpKind.Not;}}
-
     }
-
 }

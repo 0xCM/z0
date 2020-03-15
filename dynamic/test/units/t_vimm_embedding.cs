@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
     using static Nats;
-    using static VectorSurrogates;
 
     public class t_vimm_imbedding : UnitTest<t_vimm_imbedding>
     {    
@@ -201,6 +200,5 @@ namespace Z0
             else
                 Claim.fail();
         }
-
     }
 }

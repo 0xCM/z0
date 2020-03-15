@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
     /// <summary>
     /// Classifier for logical expressions
