@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public ComparisonKind ComparisonKind {get;}
+        public ComparisonOpKindId ComparisonKind {get;}
 
         /// <summary>
         /// The left expression
@@ -37,7 +37,7 @@ namespace Z0.Logix
 
 
         [MethodImpl(Inline)]
-        public ComparisonExpr(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
+        public ComparisonExpr(ComparisonOpKindId kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
         {
             this.ComparisonKind = kind;
             this.LeftArg = lhs;

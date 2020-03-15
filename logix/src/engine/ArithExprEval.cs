@@ -72,8 +72,8 @@ namespace Z0.Logix
                 default:
                     switch(expr.OpKind)
                     {
-                        case BinaryArithmeticKind.Add: return add(expr);
-                        case BinaryArithmeticKind.Sub: return sub(expr);
+                        case BinaryArithmeticKindId.Add: return add(expr);
+                        case BinaryArithmeticKindId.Sub: return sub(expr);
                         default: throw new NotSupportedException(sig<T>(expr.OpKind));
                     }
             }
@@ -84,9 +84,9 @@ namespace Z0.Logix
         {
             switch(expr.OpKind)               
             {
-                case UnaryArithmeticKind.Inc: return inc(expr);
-                case UnaryArithmeticKind.Dec: return dec(expr);
-                case UnaryArithmeticKind.Negate: return negate(expr);
+                case UnaryArithmeticKindId.Inc: return inc(expr);
+                case UnaryArithmeticKindId.Dec: return dec(expr);
+                case UnaryArithmeticKindId.Negate: return negate(expr);
                 default: throw new NotSupportedException(sig<T>(expr.OpKind));
             }
         }

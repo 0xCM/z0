@@ -11,7 +11,7 @@ namespace Z0.Logix
         
     }
 
-    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, ShiftKind>
+    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, ShiftOpKindId>
         where T : unmanaged
     {
         /// <summary>

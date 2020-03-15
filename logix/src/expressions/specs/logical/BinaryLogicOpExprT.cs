@@ -26,7 +26,7 @@ namespace Z0.Logix
         public new ILogicExpr<T> RightArg {get;}
 
         [MethodImpl(Inline)]
-        public BinaryLogicOpExpr(BinaryBitLogicKind op, ILogicExpr<T> left, ILogicExpr<T> right)
+        public BinaryLogicOpExpr(BinaryBitLogicOpKind op, ILogicExpr<T> left, ILogicExpr<T> right)
             : base(op,left,right)
         {
             this.LeftArg = left;

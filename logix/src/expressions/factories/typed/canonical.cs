@@ -62,7 +62,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryBitwiseOpExpr<T> and<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
-                => binary(BinaryBitLogicKind.And, lhs,rhs);
+                => binary(BinaryBitLogicOpKind.And, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise and expression with literal operands
@@ -84,7 +84,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryBitwiseOpExpr<T> or<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
-                => binary(BinaryBitLogicKind.Or, lhs,rhs);
+                => binary(BinaryBitLogicOpKind.Or, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise or expression with literal operands
@@ -106,7 +106,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryBitwiseOpExpr<T> xor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
-                => binary(BinaryBitLogicKind.Xor, lhs,rhs);
+                => binary(BinaryBitLogicOpKind.Xor, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise xor expression with literal operands
@@ -127,7 +127,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static UnaryBitwiseOpExpr<T> not<T>(IExpr<T> operand)
             where T : unmanaged
-                => unary(UnaryBitLogicKind.Not, operand);
+                => unary(UnaryBitLogicOpKind.Not, operand);
 
         /// <summary>
         /// Defines a a bitwise complement expression with a literal operand
@@ -148,7 +148,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryBitwiseOpExpr<T> nand<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
-                => binary(BinaryBitLogicKind.Nand, lhs,rhs);
+                => binary(BinaryBitLogicOpKind.Nand, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise NAND expression with literal operands
@@ -170,7 +170,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryBitwiseOpExpr<T> nor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
-                => binary(BinaryBitLogicKind.Nor, lhs,rhs);
+                => binary(BinaryBitLogicOpKind.Nor, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise NOR expression with literal operands
@@ -192,7 +192,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryBitwiseOpExpr<T> xnor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
-                => binary(BinaryBitLogicKind.Xnor, lhs,rhs);
+                => binary(BinaryBitLogicOpKind.Xnor, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise XNOR expression with literal operands

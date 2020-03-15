@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static BinaryBitLogicKind;
+    using static BinaryBitLogicOpKind;
 
     /// <summary>
     /// Verifies the bit-level equivalence of the binary bitwise operators and the binary logical operators

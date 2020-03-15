@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Classifies unary logic operators
     /// </summary>
-    public enum UnaryBitLogicKind : byte
+    public enum UnaryBitLogicOpKind : byte
     {
         /// <summary>
         /// The unary operator that always returns false
@@ -33,16 +33,5 @@ namespace Z0
         /// The unary operator that always returns true
         /// </summary>
         True = 0b11,
-    }
-
-    partial class ClassifierFormat
-    {
-        [MethodImpl(Inline)]
-        public static string Format(this UnaryBitLogicKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryBitLogicKind kind, T arg)
-            => $"{kind.Format()}({arg})";
-    }   
+    }  
 }

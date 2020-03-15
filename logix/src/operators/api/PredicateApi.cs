@@ -19,41 +19,41 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the supported comparison predicates
         /// </summary>
-        public static ReadOnlySpan<ComparisonKind> ComparisonKinds
+        public static ReadOnlySpan<ComparisonOpKindId> ComparisonKinds
             => array(
-                ComparisonKind.Eq, ComparisonKind.Neq, 
-                ComparisonKind.Lt, ComparisonKind.LtEq, 
-                ComparisonKind.Gt, ComparisonKind.GtEq );
+                ComparisonOpKindId.Eq, ComparisonOpKindId.Neq, 
+                ComparisonOpKindId.Lt, ComparisonOpKindId.LtEq, 
+                ComparisonOpKindId.Gt, ComparisonOpKindId.GtEq );
 
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static bit eval<T>(ComparisonKind kind, T a, T b)
+        public static bit eval<T>(ComparisonOpKindId kind, T a, T b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonKind.Eq: return gmath.eq(a,b);
-                case ComparisonKind.Neq: return gmath.neq(a,b);
-                case ComparisonKind.Lt: return gmath.lt(a,b);
-                case ComparisonKind.LtEq: return gmath.lteq(a,b);
-                case ComparisonKind.Gt: return gmath.gt(a,b);
-                case ComparisonKind.GtEq: return gmath.gteq(a,b);
+                case ComparisonOpKindId.Eq: return gmath.eq(a,b);
+                case ComparisonOpKindId.Neq: return gmath.neq(a,b);
+                case ComparisonOpKindId.Lt: return gmath.lt(a,b);
+                case ComparisonOpKindId.LtEq: return gmath.lteq(a,b);
+                case ComparisonOpKindId.Gt: return gmath.gt(a,b);
+                case ComparisonOpKindId.GtEq: return gmath.gteq(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryPred<T> lookup<T>(ComparisonKind kind)
+        public static BinaryPred<T> lookup<T>(ComparisonOpKindId kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonKind.Eq: return gmath.eq;
-                case ComparisonKind.Neq: return gmath.neq;
-                case ComparisonKind.Lt: return gmath.lt;
-                case ComparisonKind.LtEq: return gmath.lteq;
-                case ComparisonKind.Gt: return gmath.gt;
-                case ComparisonKind.GtEq: return gmath.gteq;
+                case ComparisonOpKindId.Eq: return gmath.eq;
+                case ComparisonOpKindId.Neq: return gmath.neq;
+                case ComparisonOpKindId.Lt: return gmath.lt;
+                case ComparisonOpKindId.LtEq: return gmath.lteq;
+                case ComparisonOpKindId.Gt: return gmath.gt;
+                case ComparisonOpKindId.GtEq: return gmath.gteq;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

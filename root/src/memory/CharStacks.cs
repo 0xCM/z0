@@ -210,8 +210,8 @@ namespace Z0
         {
             const int block = 2;
             var dst = chars(p2x2);
-            Cells.copy(in first(in head), ref chead(ref dst), block);
-            Cells.copy(in first(in tail), ref seek(ref chead(ref dst),block), block);            
+            memory.copy(in first(in head), ref chead(ref dst), block);
+            memory.copy(in first(in tail), ref seek(ref chead(ref dst), block), block);            
             return dst;
         }
 
@@ -220,8 +220,8 @@ namespace Z0
         {
             const int block = 4;
             var dst = chars(p2x3);
-            Cells.copy(in first(in head), ref chead(ref dst), block);
-            Cells.copy(in first(in tail), ref seek(ref chead(ref dst), block), block);            
+            memory.copy(in first(in head), ref chead(ref dst), block);
+            memory.copy(in first(in tail), ref seek(ref chead(ref dst), block), block);            
             return dst;
         }
 
@@ -230,8 +230,8 @@ namespace Z0
         {
             const int block = 8;
             var dst = chars(p2x4);
-            Cells.copy(in first(in head), ref chead(ref dst), block);
-            Cells.copy(in first(in tail), ref seek(ref chead(ref dst),block), block);            
+            memory.copy(in first(in head), ref chead(ref dst), block);
+            memory.copy(in first(in tail), ref seek(ref chead(ref dst), block), block);            
             return dst;
         }
 
@@ -239,8 +239,8 @@ namespace Z0
         public static ref CharStack32 concat(in CharStack16 head, in CharStack16 tail, ref CharStack32 dst)
         {
             const int block = 16;
-            Cells.copy(in first(in head), ref chead(ref dst), block);
-            Cells.copy(in first(in tail), ref seek(ref chead(ref dst),block), block);            
+            memory.copy(in first(in head), ref chead(ref dst), block);
+            memory.copy(in first(in tail), ref seek(ref chead(ref dst), block), block);            
             return ref dst;
         }
 
@@ -256,8 +256,8 @@ namespace Z0
         public static ref CharStack64 concat(in CharStack32 head, in CharStack32 tail, ref CharStack64 dst)
         {
             const int block = 32;
-            Cells.copy(in first(in head), ref chead(ref dst), block);
-            Cells.copy(in first(in tail), ref seek(ref chead(ref dst),block), block);            
+            memory.copy(in first(in head), ref chead(ref dst), block);
+            memory.copy(in first(in tail), ref seek(ref chead(ref dst), block), block);            
             return ref dst;
         }
 

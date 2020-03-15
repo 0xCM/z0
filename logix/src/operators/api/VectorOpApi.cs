@@ -11,7 +11,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
-    using static TernaryBitLogicKind;
+    using static TernaryBitLogicOpKind;
     using static OpHelpers;
     using static VectorizedOps;
 
@@ -24,26 +24,26 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary bitlogic operators
         /// </summary>
-        public static ReadOnlySpan<UnaryBitLogicKind> UnaryBitLogicKinds
+        public static ReadOnlySpan<UnaryBitLogicOpKind> UnaryBitLogicKinds
             => NumericOpApi.UnaryBitLogicKinds;
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
         /// </summary>
-        public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitLogicKinds
+        public static ReadOnlySpan<BinaryBitLogicOpKind> BinaryBitLogicKinds
             => NumericOpApi.BinaryBitLogicKinds;
 
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators
         /// </summary>
-        public static ReadOnlySpan<TernaryBitLogicKind> TernaryBitLogicKinds
-            => Numeric.range((byte)1,(byte)X18).Cast<TernaryBitLogicKind>().ToArray();
+        public static ReadOnlySpan<TernaryBitLogicOpKind> TernaryBitLogicKinds
+            => Numeric.range((byte)1,(byte)X18).Cast<TernaryBitLogicOpKind>().ToArray();
 
         /// <summary>
         /// Specifies the supported comparison operators
         /// </summary>
-        public static ReadOnlySpan<ComparisonKind> ComparisonKinds
-            => array(ComparisonKind.Eq, ComparisonKind.Lt, ComparisonKind.Gt);            
+        public static ReadOnlySpan<ComparisonOpKindId> ComparisonKinds
+            => array(ComparisonOpKindId.Eq, ComparisonOpKindId.Lt, ComparisonOpKindId.Gt);            
 
         /// <summary>
         /// Evaluates an identified unary operator over a supplied operand
@@ -52,15 +52,15 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector128<T> eval<T>(UnaryBitLogicKind kind, Vector128<T> a)
+        public static Vector128<T> eval<T>(UnaryBitLogicOpKind kind, Vector128<T> a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not(a);
-                case UnaryBitLogicKind.Identity: return identity(a);
-                case UnaryBitLogicKind.False: return @false(a);
-                case UnaryBitLogicKind.True: return @true(a);
+                case UnaryBitLogicOpKind.Not: return not(a);
+                case UnaryBitLogicOpKind.Identity: return identity(a);
+                case UnaryBitLogicOpKind.False: return @false(a);
+                case UnaryBitLogicOpKind.True: return @true(a);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -72,15 +72,15 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> eval<T>(UnaryBitLogicKind kind, Vector256<T> a)
+        public static Vector256<T> eval<T>(UnaryBitLogicOpKind kind, Vector256<T> a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not(a);
-                case UnaryBitLogicKind.Identity: return identity(a);
-                case UnaryBitLogicKind.False: return @false(a);
-                case UnaryBitLogicKind.True: return @true(a);
+                case UnaryBitLogicOpKind.Not: return not(a);
+                case UnaryBitLogicOpKind.Identity: return identity(a);
+                case UnaryBitLogicOpKind.False: return @false(a);
+                case UnaryBitLogicOpKind.True: return @true(a);
                 default: throw new NotSupportedException(sig<T>(kind));
              }
         }
@@ -93,14 +93,14 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.All)]
-        public static Vector128<T> eval<T>(ComparisonKind kind, Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> eval<T>(ComparisonOpKindId kind, Vector128<T> a, Vector128<T> b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonKind.Eq: return equals(a,b);
-                case ComparisonKind.Lt: return lt(a,b);
-                case ComparisonKind.Gt: return gt(a,b);
+                case ComparisonOpKindId.Eq: return equals(a,b);
+                case ComparisonOpKindId.Lt: return lt(a,b);
+                case ComparisonOpKindId.Gt: return gt(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }         
         }
@@ -113,14 +113,14 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> eval<T>(ComparisonKind kind, Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> eval<T>(ComparisonOpKindId kind, Vector256<T> a, Vector256<T> b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonKind.Eq: return equals(a,b);
-                case ComparisonKind.Lt: return lt(a,b);
-                case ComparisonKind.Gt: return gt(a,b);
+                case ComparisonOpKindId.Eq: return equals(a,b);
+                case ComparisonOpKindId.Lt: return lt(a,b);
+                case ComparisonOpKindId.Gt: return gt(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }         
         }
@@ -133,27 +133,27 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector128<T> eval<T>(BinaryBitLogicKind kind, Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> eval<T>(BinaryBitLogicOpKind kind, Vector128<T> a, Vector128<T> b)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true(a,b);
-                case BinaryBitLogicKind.False: return @false(a,b);
-                case BinaryBitLogicKind.And: return and(a,b);
-                case BinaryBitLogicKind.Nand: return nand(a,b);
-                case BinaryBitLogicKind.Or: return or(a,b);
-                case BinaryBitLogicKind.Nor: return nor(a,b);
-                case BinaryBitLogicKind.Xor: return xor(a,b);
-                case BinaryBitLogicKind.Xnor: return xnor(a,b);
-                case BinaryBitLogicKind.LProject: return left(a,b);
-                case BinaryBitLogicKind.RProject: return right(a,b);
-                case BinaryBitLogicKind.LNot: return lnot(a,b);
-                case BinaryBitLogicKind.RNot: return rnot(a,b);
-                case BinaryBitLogicKind.Impl: return impl(a,b);
-                case BinaryBitLogicKind.NonImpl: return nonimpl(a,b);
-                case BinaryBitLogicKind.CImpl: return cimpl(a,b);
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl(a,b);
+                case BinaryBitLogicOpKind.True: return @true(a,b);
+                case BinaryBitLogicOpKind.False: return @false(a,b);
+                case BinaryBitLogicOpKind.And: return and(a,b);
+                case BinaryBitLogicOpKind.Nand: return nand(a,b);
+                case BinaryBitLogicOpKind.Or: return or(a,b);
+                case BinaryBitLogicOpKind.Nor: return nor(a,b);
+                case BinaryBitLogicOpKind.Xor: return xor(a,b);
+                case BinaryBitLogicOpKind.Xnor: return xnor(a,b);
+                case BinaryBitLogicOpKind.LProject: return left(a,b);
+                case BinaryBitLogicOpKind.RProject: return right(a,b);
+                case BinaryBitLogicOpKind.LNot: return lnot(a,b);
+                case BinaryBitLogicOpKind.RNot: return rnot(a,b);
+                case BinaryBitLogicOpKind.Impl: return impl(a,b);
+                case BinaryBitLogicOpKind.NonImpl: return nonimpl(a,b);
+                case BinaryBitLogicOpKind.CImpl: return cimpl(a,b);
+                case BinaryBitLogicOpKind.CNonImpl: return cnonimpl(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -166,27 +166,27 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> eval<T>(BinaryBitLogicKind kind, Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> eval<T>(BinaryBitLogicOpKind kind, Vector256<T> a, Vector256<T> b)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true(a,b);
-                case BinaryBitLogicKind.False: return @false(a,b);
-                case BinaryBitLogicKind.And: return and(a,b);
-                case BinaryBitLogicKind.Nand: return nand(a,b);
-                case BinaryBitLogicKind.Or: return or(a,b);
-                case BinaryBitLogicKind.Nor: return nor(a,b);
-                case BinaryBitLogicKind.Xor: return xor(a,b);
-                case BinaryBitLogicKind.Xnor: return xnor(a,b);
-                case BinaryBitLogicKind.LProject: return left(a,b);
-                case BinaryBitLogicKind.RProject: return right(a,b);
-                case BinaryBitLogicKind.LNot: return lnot(a,b);
-                case BinaryBitLogicKind.RNot: return rnot(a,b);
-                case BinaryBitLogicKind.Impl: return impl(a,b);
-                case BinaryBitLogicKind.NonImpl: return nonimpl(a,b);
-                case BinaryBitLogicKind.CImpl: return cimpl(a,b);
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl(a,b);
+                case BinaryBitLogicOpKind.True: return @true(a,b);
+                case BinaryBitLogicOpKind.False: return @false(a,b);
+                case BinaryBitLogicOpKind.And: return and(a,b);
+                case BinaryBitLogicOpKind.Nand: return nand(a,b);
+                case BinaryBitLogicOpKind.Or: return or(a,b);
+                case BinaryBitLogicOpKind.Nor: return nor(a,b);
+                case BinaryBitLogicOpKind.Xor: return xor(a,b);
+                case BinaryBitLogicOpKind.Xnor: return xnor(a,b);
+                case BinaryBitLogicOpKind.LProject: return left(a,b);
+                case BinaryBitLogicOpKind.RProject: return right(a,b);
+                case BinaryBitLogicOpKind.LNot: return lnot(a,b);
+                case BinaryBitLogicOpKind.RNot: return rnot(a,b);
+                case BinaryBitLogicOpKind.Impl: return impl(a,b);
+                case BinaryBitLogicOpKind.NonImpl: return nonimpl(a,b);
+                case BinaryBitLogicOpKind.CImpl: return cimpl(a,b);
+                case BinaryBitLogicOpKind.CNonImpl: return cnonimpl(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -200,7 +200,7 @@ namespace Z0.Logix
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector128<T> eval<T>(TernaryBitLogicKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
+        public static Vector128<T> eval<T>(TernaryBitLogicOpKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
                 => lookup<T>(n128,kind)(x,y,z);
 
@@ -213,7 +213,7 @@ namespace Z0.Logix
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> eval<T>(TernaryBitLogicKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
+        public static Vector256<T> eval<T>(TernaryBitLogicOpKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => lookup<T>(n256,kind)(x,y,z);
 
@@ -225,15 +225,15 @@ namespace Z0.Logix
         /// <param name="count">The shift bit count</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector128<T> eval<T>(ShiftKind kind, Vector128<T> a, [Imm] byte count)
+        public static Vector128<T> eval<T>(ShiftOpKindId kind, Vector128<T> a, [Imm] byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftKind.Sll: return sll(a,count);
-                case ShiftKind.Srl: return srl(a,count);
-                case ShiftKind.Rotl: return rotl(a,count);
-                case ShiftKind.Rotr: return rotr(a,count);
+                case ShiftOpKindId.Sll: return sll(a,count);
+                case ShiftOpKindId.Srl: return srl(a,count);
+                case ShiftOpKindId.Rotl: return rotl(a,count);
+                case ShiftOpKindId.Rotr: return rotr(a,count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -246,39 +246,39 @@ namespace Z0.Logix
         /// <param name="count">The shift amount</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector256<T> eval<T>(ShiftKind kind, Vector256<T> a, [Imm] byte count)
+        public static Vector256<T> eval<T>(ShiftOpKindId kind, Vector256<T> a, [Imm] byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftKind.Sll: return sll(a,count);
-                case ShiftKind.Srl: return srl(a,count);
-                case ShiftKind.Rotl: return rotl(a,count);
-                case ShiftKind.Rotr: return rotr(a,count);
+                case ShiftOpKindId.Sll: return sll(a,count);
+                case ShiftOpKindId.Srl: return srl(a,count);
+                case ShiftOpKindId.Rotl: return rotl(a,count);
+                case ShiftOpKindId.Rotr: return rotr(a,count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.All)]
-        public static Vector128<T> eval<T>(BinaryArithmeticKind kind, Vector128<T> x, Vector128<T> y)
+        public static Vector128<T> eval<T>(BinaryArithmeticKindId kind, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryArithmeticKind.Add: return add(x,y);
-                case BinaryArithmeticKind.Sub: return sub(x,y);
+                case BinaryArithmeticKindId.Add: return add(x,y);
+                case BinaryArithmeticKindId.Sub: return sub(x,y);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.All)]
-        public static Vector256<T> eval<T>(BinaryArithmeticKind kind, Vector256<T> x, Vector256<T> y)
+        public static Vector256<T> eval<T>(BinaryArithmeticKindId kind, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryArithmeticKind.Add: return add(x,y);
-                case BinaryArithmeticKind.Sub: return sub(x,y);
+                case BinaryArithmeticKindId.Add: return add(x,y);
+                case BinaryArithmeticKindId.Sub: return sub(x,y);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -289,13 +289,13 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static UnaryOp<Vector128<T>> lookup<T>(N128 w, UnaryBitLogicKind kind)
+        public static UnaryOp<Vector128<T>> lookup<T>(N128 w, UnaryBitLogicOpKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not;
-                case UnaryBitLogicKind.Identity: return identity;
+                case UnaryBitLogicOpKind.Not: return not;
+                case UnaryBitLogicOpKind.Identity: return identity;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -306,39 +306,39 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static UnaryOp<Vector256<T>> lookup<T>(N256 w, UnaryBitLogicKind kind)
+        public static UnaryOp<Vector256<T>> lookup<T>(N256 w, UnaryBitLogicOpKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case UnaryBitLogicKind.Not: return not;
-                case UnaryBitLogicKind.Identity: return identity;
+                case UnaryBitLogicOpKind.Not: return not;
+                case UnaryBitLogicOpKind.Identity: return identity;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryOp<Vector128<T>> lookup<T>(N128 w,ComparisonKind kind)
+        public static BinaryOp<Vector128<T>> lookup<T>(N128 w,ComparisonOpKindId kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ComparisonKind.Eq: return equals;
-                case ComparisonKind.Lt: return lt;
-                case ComparisonKind.Gt: return gt;
+                case ComparisonOpKindId.Eq: return equals;
+                case ComparisonOpKindId.Lt: return lt;
+                case ComparisonOpKindId.Gt: return gt;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryOp<Vector256<T>> lookup<T>(N256 w, ComparisonKind kind)
+        public static BinaryOp<Vector256<T>> lookup<T>(N256 w, ComparisonOpKindId kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ComparisonKind.Eq: return equals;
-                case ComparisonKind.Lt: return lt;
-                case ComparisonKind.Gt: return gt;
+                case ComparisonOpKindId.Eq: return equals;
+                case ComparisonOpKindId.Lt: return lt;
+                case ComparisonOpKindId.Gt: return gt;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -349,15 +349,15 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<Vector128<T>> lookup<T>(N128 w, ShiftKind kind)
+        public static Shifter<Vector128<T>> lookup<T>(N128 w, ShiftOpKindId kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftKind.Sll: return sll;
-                case ShiftKind.Srl: return srl;
-                case ShiftKind.Rotl: return rotl;
-                case ShiftKind.Rotr: return rotr;
+                case ShiftOpKindId.Sll: return sll;
+                case ShiftOpKindId.Srl: return srl;
+                case ShiftOpKindId.Rotl: return rotl;
+                case ShiftOpKindId.Rotr: return rotr;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -368,15 +368,15 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<Vector256<T>> lookup<T>(N256 w, ShiftKind kind)
+        public static Shifter<Vector256<T>> lookup<T>(N256 w, ShiftOpKindId kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftKind.Sll: return sll;
-                case ShiftKind.Srl: return srl;
-                case ShiftKind.Rotl: return rotl;
-                case ShiftKind.Rotr: return rotr;
+                case ShiftOpKindId.Sll: return sll;
+                case ShiftOpKindId.Srl: return srl;
+                case ShiftOpKindId.Rotl: return rotl;
+                case ShiftOpKindId.Rotr: return rotr;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -387,27 +387,27 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryOp<Vector128<T>> lookup<T>(N128 w, BinaryBitLogicKind kind)
+        public static BinaryOp<Vector128<T>> lookup<T>(N128 w, BinaryBitLogicOpKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true;
-                case BinaryBitLogicKind.False: return @false;
-                case BinaryBitLogicKind.And: return and;
-                case BinaryBitLogicKind.Nand: return nand;
-                case BinaryBitLogicKind.Or: return or;
-                case BinaryBitLogicKind.Nor: return nor;
-                case BinaryBitLogicKind.Xor: return xor;
-                case BinaryBitLogicKind.Xnor: return xnor;
-                case BinaryBitLogicKind.LProject: return left;
-                case BinaryBitLogicKind.RProject: return right;
-                case BinaryBitLogicKind.LNot: return lnot;
-                case BinaryBitLogicKind.RNot: return rnot;
-                case BinaryBitLogicKind.Impl: return impl;
-                case BinaryBitLogicKind.NonImpl: return nonimpl;
-                case BinaryBitLogicKind.CImpl: return cimpl;
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl;
+                case BinaryBitLogicOpKind.True: return @true;
+                case BinaryBitLogicOpKind.False: return @false;
+                case BinaryBitLogicOpKind.And: return and;
+                case BinaryBitLogicOpKind.Nand: return nand;
+                case BinaryBitLogicOpKind.Or: return or;
+                case BinaryBitLogicOpKind.Nor: return nor;
+                case BinaryBitLogicOpKind.Xor: return xor;
+                case BinaryBitLogicOpKind.Xnor: return xnor;
+                case BinaryBitLogicOpKind.LProject: return left;
+                case BinaryBitLogicOpKind.RProject: return right;
+                case BinaryBitLogicOpKind.LNot: return lnot;
+                case BinaryBitLogicOpKind.RNot: return rnot;
+                case BinaryBitLogicOpKind.Impl: return impl;
+                case BinaryBitLogicOpKind.NonImpl: return nonimpl;
+                case BinaryBitLogicOpKind.CImpl: return cimpl;
+                case BinaryBitLogicOpKind.CNonImpl: return cnonimpl;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -418,27 +418,27 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryOp<Vector256<T>> lookup<T>(N256 w, BinaryBitLogicKind kind)
+        public static BinaryOp<Vector256<T>> lookup<T>(N256 w, BinaryBitLogicOpKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitLogicKind.True: return @true;
-                case BinaryBitLogicKind.False: return @false;
-                case BinaryBitLogicKind.And: return and;
-                case BinaryBitLogicKind.Nand: return nand;
-                case BinaryBitLogicKind.Or: return or;
-                case BinaryBitLogicKind.Nor: return nor;
-                case BinaryBitLogicKind.Xor: return xor;
-                case BinaryBitLogicKind.Xnor: return xnor;
-                case BinaryBitLogicKind.LProject: return left;
-                case BinaryBitLogicKind.RProject: return right;
-                case BinaryBitLogicKind.LNot: return lnot;
-                case BinaryBitLogicKind.RNot: return rnot;
-                case BinaryBitLogicKind.Impl: return impl;
-                case BinaryBitLogicKind.NonImpl: return nonimpl;
-                case BinaryBitLogicKind.CImpl: return cimpl;
-                case BinaryBitLogicKind.CNonImpl: return cnonimpl;
+                case BinaryBitLogicOpKind.True: return @true;
+                case BinaryBitLogicOpKind.False: return @false;
+                case BinaryBitLogicOpKind.And: return and;
+                case BinaryBitLogicOpKind.Nand: return nand;
+                case BinaryBitLogicOpKind.Or: return or;
+                case BinaryBitLogicOpKind.Nor: return nor;
+                case BinaryBitLogicOpKind.Xor: return xor;
+                case BinaryBitLogicOpKind.Xnor: return xnor;
+                case BinaryBitLogicOpKind.LProject: return left;
+                case BinaryBitLogicOpKind.RProject: return right;
+                case BinaryBitLogicOpKind.LNot: return lnot;
+                case BinaryBitLogicOpKind.RNot: return rnot;
+                case BinaryBitLogicOpKind.Impl: return impl;
+                case BinaryBitLogicOpKind.NonImpl: return nonimpl;
+                case BinaryBitLogicOpKind.CImpl: return cimpl;
+                case BinaryBitLogicOpKind.CNonImpl: return cnonimpl;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -448,7 +448,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static TernaryOp<Vector128<T>> lookup<T>(N128 w, TernaryBitLogicKind kind)
+        public static TernaryOp<Vector128<T>> lookup<T>(N128 w, TernaryBitLogicOpKind kind)
             where T : unmanaged
         {
             switch(kind)
@@ -490,7 +490,7 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static TernaryOp<Vector256<T>> lookup<T>(N256 w, TernaryBitLogicKind kind)
+        public static TernaryOp<Vector256<T>> lookup<T>(N256 w, TernaryBitLogicOpKind kind)
             where T : unmanaged
         {
             switch(kind)

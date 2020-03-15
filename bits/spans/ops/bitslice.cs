@@ -66,13 +66,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(bitslice_8u(src,offset,count));
+                return generic<T>(bitslice_8u(src, offset, count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(bitslice_16u(src,offset,count));
+                return generic<T>(bitslice_16u(src, offset, count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(bitslice_32u(src,offset,count));
+                return generic<T>(bitslice_32u(src, offset, count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(bitslice_64u(src,offset,count));
+                return generic<T>(bitslice_64u(src, offset, count));
             else    
                 return bitslice_i<T>(src,offset,count);
         }
@@ -82,13 +82,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(bitslice_8i(src,offset,count));
+                return generic<T>(bitslice_8i(src, offset, count));
             else if(typeof(T) == typeof(short))
-                return generic<T>(bitslice_16i(src,offset,count));
+                return generic<T>(bitslice_16i(src, offset,count));
             else if(typeof(T) == typeof(int))
-                return generic<T>(bitslice_32i(src,offset,count));
+                return generic<T>(bitslice_32i(src, offset,count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(bitslice_64i(src,offset,count));
+                return generic<T>(bitslice_64i(src, offset, count));
             else
                 throw unsupported<T>();
         }
@@ -99,7 +99,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x6);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
+            memory.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z8i);
         }
 
@@ -109,7 +109,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x6);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
+            memory.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z8);
         }
 
@@ -119,7 +119,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x7);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
+            memory.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z16i);
         }
 
@@ -129,7 +129,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x7);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
+            memory.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z16);
         }
 
@@ -139,7 +139,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x8);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
+            memory.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked,z32i);
         }
 
@@ -159,7 +159,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x9);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
+            memory.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked, z64i);
         }
 
@@ -169,7 +169,7 @@ namespace Z0
             var buffer = Stacks.alloc(p2x9);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
-            Cells.copy(in skip(src.Bits, offset), ref dst, count);        
+            memory.copy(in skip(src.Bits, offset), ref dst, count);        
             return bitpack.pack(unpacked, z64);
         }
     }

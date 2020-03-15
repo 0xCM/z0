@@ -13,49 +13,49 @@ namespace Z0.Logix
     internal static class OpHelpers
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig(UnaryBitLogicKind kind)
+        public static string sig(UnaryBitLogicOpKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig(BinaryBitLogicKind kind)
+        public static string sig(BinaryBitLogicOpKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig(TernaryBitLogicKind kind)
+        public static string sig(TernaryBitLogicOpKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(UnaryBitLogicKind kind)
+        public static string sig<T>(UnaryBitLogicOpKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(BinaryBitLogicKind kind)
+        public static string sig<T>(BinaryBitLogicOpKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(TernaryBitLogicKind kind)
+        public static string sig<T>(TernaryBitLogicOpKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(ShiftKind kind)
+        public static string sig<T>(ShiftOpKindId kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(ComparisonKind kind)
+        public static string sig<T>(ComparisonOpKindId kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(UnaryArithmeticKind kind)
+        public static string sig<T>(UnaryArithmeticKindId kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(BinaryArithmeticKind kind)
+        public static string sig<T>(BinaryArithmeticKindId kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 

@@ -23,12 +23,12 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var matrix = alloc<N,T>();
-            var count = BitBlock<N,T>.CellCount;
-            var n= natval<N>();
+            var srcCellCount = BitBlock<N,T>.CellCount;
+            var srcBitCount = natval<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
-            for(var i=0; i< n; i++)
-                memory.copy(in src, ref seek(ref dst, i*count), (uint)count);
+            for(var i=0; i<srcBitCount; i++)
+                memory.copy(in src, ref seek(ref dst, i*srcCellCount), srcCellCount);
             return matrix;
         }
 
@@ -44,12 +44,12 @@ namespace Z0
             where M : unmanaged, ITypeNat
         {
             var matrix = alloc<M,N,T>();
-            var count = BitBlock<N,T>.CellCount;
-            var n= natval<N>();
+            var srcCellCount = BitBlock<N,T>.CellCount;
+            var srcBitCount = natval<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
-            for(var i=0; i< n; i++)
-                memory.copy(in src, ref seek(ref dst, i*count), (uint)count);
+            for(var i=0; i< srcBitCount; i++)
+                memory.copy(in src, ref seek(ref dst, i*srcCellCount), srcCellCount);
             return matrix;
         }
 

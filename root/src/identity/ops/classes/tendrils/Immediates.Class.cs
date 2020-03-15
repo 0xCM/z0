@@ -90,4 +90,14 @@ namespace Z0
         /// </summary>
         TernaryImm8x2 = Imm8 | ImmCount2 | ImmSlot3 | ImmSlot4        
     }
+
+    /// <summary>
+    /// Identifies a parameter that accepts an immediate value
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public class ImmAttribute : Attribute
+    {
+
+    }
+
 }

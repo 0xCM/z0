@@ -13,7 +13,23 @@ namespace Z0
     using K = OpKindId;
     using A = OpKindAttribute;
 
+    /// <summary>
+    /// Characterizes a type that represents an operation kind
+    /// </summary>
+    public interface IBitLogicKind
+    {
+        string Name {get;}
+    }
 
+    public interface IBitLogicKind<K,E> : IBitLogicKind
+        where E : unmanaged, Enum
+        where K : unmanaged, IBitLogicKind<K,E>
+    {        
+        E Kind {get;}
+
+        string IBitLogicKind.Name => Kind.ToString().ToLower();        
+        
+    }   
     // ~ Binary bitlogic
     // ~ ----------------------------------------------------------------------
 
@@ -69,4 +85,31 @@ namespace Z0
         public readonly struct NonImpl : IOpKind<NonImpl> { public K Id => K.NonImpl;}
 
     }
+
+    partial class BitLogicKinds
+    {
+        public readonly struct And : IBitLogicKind<And,K> { public K Kind { [MethodImpl(Inline)] get => K.And;}}
+
+        public readonly struct Or : IBitLogicKind<Or,K> { public K Kind { [MethodImpl(Inline)] get => K.Or;}}
+
+        public readonly struct Xor : IBitLogicKind<Xor,K> { public K Kind { [MethodImpl(Inline)] get => K.Xor;}}
+
+        public readonly struct Nand : IBitLogicKind<Nand,K> { public K Kind { [MethodImpl(Inline)] get => K.Nand;}}
+
+        public readonly struct Nor : IBitLogicKind<Nor,K> { public K Kind { [MethodImpl(Inline)] get => K.Nor;}}
+
+        public readonly struct Xnor : IBitLogicKind<Xnor,K> { public K Kind { [MethodImpl(Inline)] get => K.Xnor;}}
+
+        public readonly struct Impl : IBitLogicKind<Impl,K> { public K Kind { [MethodImpl(Inline)] get => K.Impl;}}
+
+        public readonly struct NonImpl : IBitLogicKind<NonImpl,K> { public K Kind { [MethodImpl(Inline)] get => K.NonImpl;}}
+
+        public readonly struct CImpl : IBitLogicKind<CImpl,K> { public K Kind { [MethodImpl(Inline)] get => K.CImpl;}}
+
+        public readonly struct CNonImpl : IBitLogicKind<CNonImpl,K> { public K Kind { [MethodImpl(Inline)] get => K.CNonImpl;}}
+
+        public readonly struct Not : IBitLogicKind<Not,UnaryBitLogicOpKind> { public UnaryBitLogicOpKind Kind { [MethodImpl(Inline)] get => UnaryBitLogicOpKind.Not;}}
+
+    }
+
 }

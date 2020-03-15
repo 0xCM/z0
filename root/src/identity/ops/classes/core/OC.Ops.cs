@@ -16,7 +16,7 @@ namespace Z0
     using static OperatorClass;
     
 
-    partial class ReflectedClass
+    public static class OperationClassOps
     {
         /// <summary>
         /// Dtermines whether a method has a void return

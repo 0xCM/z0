@@ -9,12 +9,11 @@ namespace Z0
     
     using static Root;
 
-    using K = BinaryBitLogicKind;
 
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>
-    public enum BinaryBitLogicKind : byte
+    public enum BinaryBitLogicOpKind : byte
     {         
         /// <summary>
         /// Classifies a logical  binary operator false(a,b) := bv(0000)
@@ -213,59 +212,4 @@ namespace Z0
         /// </remarks>
         True = 0b1111,
     } 
-
-    /// <summary>
-    /// Characterizes a type that represents an operation kind
-    /// </summary>
-    public interface IBitLogicKind
-    {
-        string Name {get;}
-    }
-
-    public interface IBitLogicKind<K,E> : IBitLogicKind
-        where E : unmanaged, Enum
-        where K : unmanaged, IBitLogicKind<K,E>
-    {        
-        E Kind {get;}
-
-        string IBitLogicKind.Name => Kind.ToString().ToLower();        
-        
-    }   
-
-    partial class BitLogicKinds
-    {
-        public readonly struct And : IBitLogicKind<And,K> { public K Kind { [MethodImpl(Inline)] get => K.And;}}
-
-        public readonly struct Or : IBitLogicKind<Or,K> { public K Kind { [MethodImpl(Inline)] get => K.Or;}}
-
-        public readonly struct Xor : IBitLogicKind<Xor,K> { public K Kind { [MethodImpl(Inline)] get => K.Xor;}}
-
-        public readonly struct Nand : IBitLogicKind<Nand,K> { public K Kind { [MethodImpl(Inline)] get => K.Nand;}}
-
-        public readonly struct Nor : IBitLogicKind<Nor,K> { public K Kind { [MethodImpl(Inline)] get => K.Nor;}}
-
-        public readonly struct Xnor : IBitLogicKind<Xnor,K> { public K Kind { [MethodImpl(Inline)] get => K.Xnor;}}
-
-        public readonly struct Impl : IBitLogicKind<Impl,K> { public K Kind { [MethodImpl(Inline)] get => K.Impl;}}
-
-        public readonly struct NonImpl : IBitLogicKind<NonImpl,K> { public K Kind { [MethodImpl(Inline)] get => K.NonImpl;}}
-
-        public readonly struct CImpl : IBitLogicKind<CImpl,K> { public K Kind { [MethodImpl(Inline)] get => K.CImpl;}}
-
-        public readonly struct CNonImpl : IBitLogicKind<CNonImpl,K> { public K Kind { [MethodImpl(Inline)] get => K.CNonImpl;}}
-
-        public readonly struct Not : IBitLogicKind<Not,UnaryBitLogicKind> { public UnaryBitLogicKind Kind { [MethodImpl(Inline)] get => UnaryBitLogicKind.Not;}}
-
-    }
-
-    partial class ClassifierFormat
-    {
-        [MethodImpl(Inline)]
-        public static string Format(this BinaryBitLogicKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryBitLogicKind kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
-    }    
 }

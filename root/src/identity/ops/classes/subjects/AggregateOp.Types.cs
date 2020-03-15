@@ -8,21 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
+    using static OpKindId;
 
+    using A = OpKindAttribute;
 
-    public enum ApiSubject
-    {
-        None = 0,
+    public sealed class SumAttribute : A { public SumAttribute() : base(Sum) {} }
 
-        NumericOps,
-    
-        BlockedOps,
-        
-        VectorOps,
-
-
-
-        
-    }
-
+    public sealed class AvgAttribute : A { public AvgAttribute() : base(Avg) {} }
 }

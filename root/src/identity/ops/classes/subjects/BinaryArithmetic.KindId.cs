@@ -6,14 +6,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Root;
-    using static OpKindId;
-
+        
     using Id = OpKindId;
-    using A = OpKindAttribute;
 
-    public sealed class SumAttribute : A { public SumAttribute() : base(Sum) {} }
+    /// <summary>
+    /// Identifies binary arithmetic operators classes
+    /// </summary>
+    public enum BinaryArithmeticKindId : ulong
+    {
+        None = 0,
 
-    public sealed class AvgAttribute : A { public AvgAttribute() : base(Avg) {} }
+        Add = Id.Add,
+
+        Sub = Id.Sub,
+
+        Mul = Id.Mul,
+
+        Div = Id.Div,
+
+        Mod = Id.Mod,
+
+        Clamp = Id.Clamp,
+    }    
 }

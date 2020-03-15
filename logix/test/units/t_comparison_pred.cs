@@ -11,7 +11,7 @@ namespace Z0.Logix
     
     using static LogicEngine;
     using static PredicateSpec;
-    using static ComparisonKind;
+    using static ComparisonOpKindId;
     using static NumericOps;
     using static LogicOps;
     
@@ -107,9 +107,9 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var vc = var_c<T>();
-            var x = compare(ComparisonKind.Lt,va,vb);
-            var y = compare(ComparisonKind.Lt,vb,vc);
-            var z = compare(ComparisonKind.Lt,vc,va);
+            var x = compare(ComparisonOpKindId.Lt,va,vb);
+            var y = compare(ComparisonOpKindId.Lt,vb,vc);
+            var z = compare(ComparisonOpKindId.Lt,vc,va);
             for(var i=0; i<RepCount; i++)
             {
                 var a = va.Set(Random);
@@ -131,7 +131,7 @@ namespace Z0.Logix
 
         }
         
-        void predicate_check<T>(ComparisonKind kind)
+        void predicate_check<T>(ComparisonOpKindId kind)
             where T : unmanaged
         {
             var va = var_a<T>();

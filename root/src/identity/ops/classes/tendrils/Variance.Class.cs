@@ -5,16 +5,21 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
-    public interface IOpKind<T>
-        where T : unmanaged, IOpKind<T>
-    {   
-        OpKindId Id {get;}    
-    }
+    using System.Linq;
+    using System.Reflection;
 
-    public static partial class OpKinds
+    using static Root;
+
+    public enum ParamVarianceClass
     {
+        None = 0, 
 
+        In = 1,
+
+        Out = 2,
+
+        Ref = 3
     }
 }

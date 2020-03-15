@@ -17,7 +17,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public ComparisonKind ComparisonKind {get;}
+        public ComparisonOpKindId ComparisonKind {get;}
 
         /// <summary>
         /// The left operand
@@ -35,15 +35,15 @@ namespace Z0.Logix
         public ILogicVarExpr[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> Define<T>(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
+        public static ComparisonExpr<T> Define<T>(ComparisonOpKindId kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
             where T : unmanaged
                 => new ComparisonExpr<T>(kind,lhs,rhs,vars);
         
         [MethodImpl(Inline)]
-        public static ComparisonExpr Define(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
+        public static ComparisonExpr Define(ComparisonOpKindId kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
             => new ComparisonExpr(kind,lhs,rhs,vars);
             
-        ComparisonExpr(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
+        ComparisonExpr(ComparisonOpKindId kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
         {
             this.ComparisonKind = kind;
             this.Lhs = lhs;

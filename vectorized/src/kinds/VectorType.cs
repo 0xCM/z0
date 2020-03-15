@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Root;
 
@@ -110,6 +112,11 @@ namespace Z0
             where T : unmanaged
                 => kind_u(w,t);
 
+        public static IEnumerable<Type> types(N128 w)
+        {
+            yield return default;
+        }
+        
         [MethodImpl(Inline)]
         public static VectorKind kind(Type src)
         {

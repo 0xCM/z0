@@ -6,15 +6,28 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
+    
+    using static Root;
+
+    using Id = OpKindId;
 
     /// <summary>
-    /// Identifies a parameter that accepts an immediate value
+    /// Classifies unary arithmetic operators
     /// </summary>
-    [AttributeUsage(AttributeTargets.Parameter)]
-    public class ImmAttribute : Attribute
+    public enum UnaryArithmeticKindId : ulong
     {
+        None = 0,
 
-    }
+        Inc = Id.Inc,
 
+        Dec = Id.Dec,
+
+        Negate = Id.Negate,
+
+        Abs = Id.Abs,
+
+        Square = Id.Square,
+
+        Sqrt = Id.Sqrt,
+    }    
 }

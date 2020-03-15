@@ -8,15 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static OpKindId;
 
-    using A = OpKindAttribute;
     using Id = OpKindId;
 
     /// <summary>
     /// Classifies bitwise shift operators
     /// </summary>
-    public enum ShiftKind : ulong
+    public enum ShiftOpKindId : ulong
     {
         /// <summary>
         /// Classifies a logical left-shift
@@ -53,19 +51,4 @@ namespace Z0
         /// </summary>
         Xors = Id.Xors,
     }    
-
-    partial class ClassifierFormat
-    {
-       public static string Format(this ShiftKind kind)        
-            => kind switch {
-                ShiftKind.Sll => "<<",
-                ShiftKind.Srl => ">>",
-                ShiftKind.Rotl => "<<>",
-                ShiftKind.Rotr => ">><",
-                _ => kind.ToString()
-            };
-
-        public static string Format<S,T>(this ShiftKind kind, S arg1, T arg2)
-            => $"{arg1} {kind.Format()} {arg2}"; 
-    }
 }

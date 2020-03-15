@@ -9,12 +9,8 @@ namespace Z0
 
     using static Root;
 
-    public interface INumericTypeKind : ITypeKind<NumericKind>
-    {        
-    
-    }
 
-    public interface INumericTypeKind<T> : INumericTypeKind, IFixedWidth
+    public interface INumericTypeKind<T> : ITypeKind<NumericKind>, IFixedWidth
         where T : unmanaged
     {
         FixedWidth IFixedWidth.FixedWidth => (FixedWidth)bitsize<T>();            

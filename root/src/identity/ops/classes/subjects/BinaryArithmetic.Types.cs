@@ -30,10 +30,4 @@ namespace Z0
 
     public sealed class DotAttribute : A { public DotAttribute() : base(Dot) {} }
 
-    partial class OpKinds
-    {
-
-
-    }
-
 }

@@ -30,6 +30,4 @@ namespace Z0
     public sealed class XorSrAttribute : A { public XorSrAttribute() : base(XorSr) {} }
 
     public sealed class XorsAttribute : A { public XorsAttribute() : base(Xors) {} }
-
-
 }

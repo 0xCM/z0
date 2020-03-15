@@ -22,6 +22,12 @@ namespace Z0
     public static class Numeric
     {
         /// <summary>
+        /// Recognized unsigned integral types
+        /// </summary>
+        public static IEnumerable<Type> UnsignedIntegralTypes
+            => items(typeof(byte), typeof(ushort),  typeof(uint), typeof(ulong));
+
+        /// <summary>
         /// Recognized unsigned integral kinds
         /// </summary>
         public static IEnumerable<NumericKind> UnsignedIntegralKinds
@@ -30,8 +36,20 @@ namespace Z0
         /// <summary>
         /// Recognized signed integral kinds
         /// </summary>
+        public static IEnumerable<Type> SignedIntegralTypes
+            => items(typeof(sbyte), typeof(short), typeof(int), typeof(long));
+        
+        /// <summary>
+        /// Recognized signed integral kinds
+        /// </summary>
         public static IEnumerable<NumericKind> SignedIntegralKinds
             => items(NK.I8, NK.I16, NK.I32, NK.I64);
+
+        /// <summary>
+        /// Recognized integral types
+        /// </summary>
+        public static IEnumerable<Type> IntegralTypes
+            => SignedIntegralTypes.Union(UnsignedIntegralTypes);
 
         /// <summary>
         /// Recognized integral kinds
@@ -40,15 +58,27 @@ namespace Z0
             => UnsignedIntegralKinds.Union(SignedIntegralKinds);
 
         /// <summary>
+        /// recognized floating-point types
+        /// </summary>
+        public static IEnumerable<Type> FloatTypes
+            => items(typeof(float), typeof(double));
+
+        /// <summary>
         /// Recognized floating-point kinds
         /// </summary>
         public static IEnumerable<NumericKind> FloatKinds
             => items(NK.F32, NK.F64);
 
         /// <summary>
-        /// All recognized numeric kinds
+        /// Recognized numeric types
         /// </summary>
-        public static IEnumerable<NumericKind> DistinctKinds
+        public static IEnumerable<Type> Types
+            => IntegralTypes.Union(FloatTypes);
+
+        /// <summary>
+        /// Recognized numeric kinds
+        /// </summary>
+        public static IEnumerable<NumericKind> Kinds
             => IntegralKinds.Union(FloatKinds);
 
         /// <summary>
@@ -83,7 +113,6 @@ namespace Z0
         public static IEnumerable<T> range<T>(T x0, T x1, T step)
             where T : unmanaged
                 => NumericRange.step(x0,x1,step);
-
 
         /// <summary>
         /// Determines the primal kind (if any) of a parametrically-identifed type
