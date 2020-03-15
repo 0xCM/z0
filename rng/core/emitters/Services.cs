@@ -26,44 +26,37 @@ namespace Z0
         public T Invoke() => Random.Next<T>();
     }
 
-    public readonly struct FixedRngEmitter<F> : IFixedEmitter<F>
-        where F : unmanaged, IFixed
+    public readonly struct RngEmitter<T> : IEmitter<T>
+        where T : unmanaged
     {
+        public OpIdentity Id {get;}
+
         readonly IPolyrand Random;
         
-        readonly FixedEmitterSurrogate<F> f;
-
-        public const string Name = "fixedemitter";
-
-        public static int Width => bitsize<F>();
-
-        public static NumericKind NumericKind 
-        {
-            [MethodImpl(Inline)]
-            get => typeof(F).NumericKind();
-        }
-        
-        public OpIdentity Id => OpIdentity.fixedop(Name, (FixedWidth)Width, NumericKind);
+        readonly Emitter<T> f;
 
         [MethodImpl(Inline)]
-        public FixedRngEmitter(IPolyrand random, FixedEmitterSurrogate<F> f)      
+        public RngEmitter(IPolyrand random, Emitter<T> f, OpIdentity id)      
         {      
             this.Random = random;
             this.f = f;
+            this.Id = id;
         }
 
         [MethodImpl(Inline)]
-        public F Invoke() => f.Invoke();
+        public T Invoke() => f.Invoke();
     }    
-    public readonly struct FixedRngEmitter<F,T> : IFixedEmitter<F,T>
-        where F : unmanaged, IFixed
+
+    public readonly struct SegmentedRngEmitter<F,T> : IEmitter<F>
+        where F : unmanaged
         where T :unmanaged
     {
+        public OpIdentity Id {get;}
         readonly IPolyrand Random;
         
-        readonly FixedEmitterSurrogate<F,T> f;
+        readonly Emitter<F> f;
 
-        public const string Name = "fixedemitter";
+        public const string Name = "segmented_emitter";
 
         public static int Width => bitsize<F>();
 
@@ -73,13 +66,13 @@ namespace Z0
             get => typeof(T).NumericKind();
         }
         
-        public OpIdentity Id => OpIdentity.fixedop(Name, (FixedWidth)Width, NumericKind);
-
         [MethodImpl(Inline)]
-        public FixedRngEmitter(IPolyrand random, FixedEmitterSurrogate<F,T> f)      
+        public SegmentedRngEmitter(IPolyrand random, Emitter<F> f, OpIdentity id)      
         {      
             this.Random = random;
             this.f = f;
+            this.Id = id;
+
         }
 
         [MethodImpl(Inline)]

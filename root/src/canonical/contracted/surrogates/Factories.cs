@@ -46,7 +46,7 @@ namespace Z0
         /// <typeparam name="T">The delegate domain/codomain type</typeparam>
         [MethodImpl(Inline)]
         public static TernaryOpSurrogate<T> ternary<T>(Func<T,T,T,T> f, string name, T t = default)
-            => new TernaryOpSurrogate<T>(f, name);
+            => new TernaryOpSurrogate<T>(f.ToTernaryOp(), name);
             
         /// <summary>
         /// Captures a delegate and presents it as a binary predicate
@@ -56,40 +56,7 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryPredSurrogate<T> predicate<T>(Func<T,T,bit> f, string name, T t = default)
-            => new BinaryPredSurrogate<T>(f,name);
-
-        /// <summary>
-        /// Captures a delegate and presents it as a binary operator
-        /// </summary>
-        /// <param name="f">The delegate to capture</param>
-        /// <param name="name">The operator name</param>
-        /// <param name="t">A point representative</param>
-        /// <typeparam name="T">The delegate domain/codomain type</typeparam>
-        [MethodImpl(Inline)]
-        public static BinaryOpSurrogate2<T> binary2<T>(BinaryOp<T> f, string name, T t = default)
-            => new BinaryOpSurrogate2<T>(f,name);
-
-        /// <summary>
-        /// Captures a delegate and presents it as a unary predicate
-        /// </summary>
-        /// <param name="f">The delegate to capture</param>
-        /// <param name="name">The operator name</param>
-        /// <param name="t">A point representative</param>
-        /// <typeparam name="T">The delegate domain type</typeparam>
-        [MethodImpl(Inline)]
-        public static UnaryPredicateSurrogate<T> predicate<T>(UnaryPredicate<T> f, string name, T t = default)
-            => new UnaryPredicateSurrogate<T>(f,name);
-
-        /// <summary>
-        /// Captures a delegate and presents it as a binary predicate
-        /// </summary>
-        /// <param name="f">The delegate to capture</param>
-        /// <param name="name">The operator name</param>
-        /// <param name="t">A point representative</param>
-        /// <typeparam name="T">The delegate domain type</typeparam>
-        [MethodImpl(Inline)]
-        public static EmitterSurrogate<T> emitter<T>(Emitter<T> f, string name, T t = default)
-            => new EmitterSurrogate<T>(f,name);    
+        public static BinaryPredicateSurrogate<T> predicate<T>(Func<T,T,bit> f, string name, T t = default)
+            => new BinaryPredicateSurrogate<T>(f,name);
     }
 }

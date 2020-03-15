@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void eq_check<T>(BinaryPredSurrogate<T> f, T t = default)
+        void eq_check<T>(BinaryPredicateSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
             var g = MathSvcFactory.eq(t);
@@ -58,7 +58,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void neq_check<T>(BinaryPredSurrogate<T> f, T t = default)
+        void neq_check<T>(BinaryPredicateSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
             var g = MathSvcFactory.neq(t);
@@ -85,7 +85,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void gt_check<T>(BinaryPredSurrogate<T> f, T t = default)
+        void gt_check<T>(BinaryPredicateSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
             var g = MathSvcFactory.gt(t);
@@ -110,7 +110,7 @@ namespace Z0
             gteq_check(predicate(fmath.gteq, name, z64f));            
         }
 
-        void gteq_check<T>(BinaryPredSurrogate<T> f, T t = default)
+        void gteq_check<T>(BinaryPredicateSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
             var g = MathSvcFactory.gteq(t);
@@ -136,7 +136,7 @@ namespace Z0
 
         }
 
-        void lt_check<T>(BinaryPredSurrogate<T> f, T t = default)
+        void lt_check<T>(BinaryPredicateSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
             var g = MathSvcFactory.lt(t);
@@ -162,7 +162,7 @@ namespace Z0
 
         }
 
-        void lteq_check<T>(BinaryPredSurrogate<T> f, T t = default)
+        void lteq_check<T>(BinaryPredicateSurrogate<T> f, T t = default)
             where  T : unmanaged
         {
             var g = MathSvcFactory.lteq(t);

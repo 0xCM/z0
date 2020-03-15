@@ -13,23 +13,55 @@ namespace Z0
     public static class DelegateConverters
     {
         [MethodImpl(Inline)]
-        public static Emitter<T> ToEmitter<T>(this Func<T> f)
-            => new Emitter<T>(f);
+        public static Z0.Emitter<T> ToEmitter<T>(this System.Func<T> f)
+            => new Z0.Emitter<T>(f);
 
         [MethodImpl(Inline)]
-        public static UnaryOp<T> ToUnaryOp<T>(this Func<T,T> f)
-            => new UnaryOp<T>(f);
+        public static System.Func<T> ToFunc<T>(this Z0.Emitter<T> f)
+            => new System.Func<T>(f);
 
         [MethodImpl(Inline)]
-        public static BinaryOp<T> ToBinaryOp<T>(this Func<T,T,T> f)
-            => new BinaryOp<T>(f);
+        public static System.Func<T> ToFunc<T,C>(this Z0.Emitter<T,C> f)
+            where T : unmanaged
+            where C : unmanaged
+                => new System.Func<T>(f);
 
         [MethodImpl(Inline)]
-        public static TernaryOp<T> ToTernaryOp<T>(this Func<T,T,T,T> f)
-            => new TernaryOp<T>(f);
+        public static Z0.Emitter<T,C> ToEmitter<T,C>(this System.Func<T> f)
+            where T : unmanaged
+            where C : unmanaged
+                => new Z0.Emitter<T,C>(f);
 
         [MethodImpl(Inline)]
-        public static UnaryPredicate<T> ToUnaryPredicate<T>(this Func<T,bit> f)
-            => new UnaryPredicate<T>(f);
+        public static Z0.UnaryOp<T> ToUnaryOp<T>(this System.Func<T,T> f)
+            => new Z0.UnaryOp<T>(f);
+
+        [MethodImpl(Inline)]
+        public static System.Func<T,T> ToFunc<T>(this Z0.UnaryOp<T> f)
+            => new System.Func<T,T>(f);
+
+        [MethodImpl(Inline)]
+        public static Z0.BinaryOp<T> ToBinaryOp<T>(this System.Func<T,T,T> f)
+            => new Z0.BinaryOp<T>(f);
+
+        [MethodImpl(Inline)]
+        public static System.Func<T,T,T> ToFunc<T>(this Z0.BinaryOp<T> f)
+            => new System.Func<T,T,T>(f);
+
+        [MethodImpl(Inline)]
+        public static Z0.TernaryOp<T> ToTernaryOp<T>(this System.Func<T,T,T,T> f)
+            => new Z0.TernaryOp<T>(f);
+
+        [MethodImpl(Inline)]
+        public static System.Func<T,T,T,T> ToFunc<T>(this Z0.TernaryOp<T> f)
+            => new System.Func<T,T,T,T>(f);
+
+        [MethodImpl(Inline)]
+        public static Z0.UnaryPredicate<T> ToUnaryPredicate<T>(this System.Func<T,bit> f)
+            => new Z0.UnaryPredicate<T>(f);
+
+        [MethodImpl(Inline)]
+        public static System.Func<T,bit> ToFunc<T>(this Z0.UnaryPredicate<T> f)
+            => new System.Func<T,bit>(f);
     }
 }

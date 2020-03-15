@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     
-    public readonly struct BinaryPredSurrogate<T> : IBinaryPredicate<T>
+    public readonly struct BinaryPredicateSurrogate<T> : IBinaryPredicate<T>
     {
         public readonly string Name;
 
@@ -17,7 +17,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        internal BinaryPredSurrogate(Func<T,T,bit> f, string name)            
+        internal BinaryPredicateSurrogate(Func<T,T,bit> f, string name)            
         {
             this.F = f;
             this.Name = name;

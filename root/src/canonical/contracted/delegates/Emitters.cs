@@ -18,6 +18,14 @@ namespace Z0
     public delegate T Emitter<T>();
 
     /// <summary>
+    /// Defines the canonical shape of an emitter
+    /// </summary>
+    /// <typeparam name="T">The production type</typeparam>
+    /// <typeparam name="C">The cell type into which the production type is segmented</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public delegate T Emitter<T,C>();
+
+    /// <summary>
     /// Delegate synonym for an emitter
     /// </summary>
     /// <typeparam name="T">The production type</typeparam>
@@ -59,13 +67,5 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public delegate Span<T> SpanEmitter<T>();
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Span<F> FixedSpanEmitter<F>()
-        where F : unmanaged, IFixed;
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Span<F> FixedSpanEmitter<F,T>()
-        where F : unmanaged, IFixed
-        where T : unmanaged;
 
 }

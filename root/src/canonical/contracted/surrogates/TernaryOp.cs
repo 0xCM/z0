@@ -13,10 +13,10 @@ namespace Z0
     {
         public readonly string Name;
 
-        readonly Func<T,T,T,T> F;
+        readonly TernaryOp<T> F;
 
         [MethodImpl(Inline)]
-        internal TernaryOpSurrogate(Func<T,T,T,T> f, string name)            
+        internal TernaryOpSurrogate(TernaryOp<T> f, string name)            
         {
             this.F = f;
             this.Name = name;
