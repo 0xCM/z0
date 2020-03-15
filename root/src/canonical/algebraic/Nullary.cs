@@ -4,6 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+    
+    using static Root;
 
     /// <summary>
     /// Characterizes operations over a nullary type
@@ -45,7 +49,10 @@ namespace Z0
 
         bool IsEmpty {get;}
     
+        bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
     }
-
-
 }

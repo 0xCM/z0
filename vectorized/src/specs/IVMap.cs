@@ -41,7 +41,6 @@ namespace Z0
         where T1 : unmanaged
         where T2 : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.Converter | FunctionClass.Vectorized;
 
     }
 
@@ -55,7 +54,6 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.Converter | FunctionClass.V128;
 
     }
 
@@ -68,7 +66,7 @@ namespace Z0
     public interface IVMap128<T> : IVMap128<T,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.UnaryOp | FunctionClass.V128;
+
 
     }
 
@@ -82,7 +80,6 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.Converter | FunctionClass.V256;
 
     }
 
@@ -95,8 +92,6 @@ namespace Z0
     public interface IVMap256<T> : IVMap256<T,T>
         where T : unmanaged
     {
-
-        FunctionClass IFunc.Class => FunctionClass.UnaryOp | FunctionClass.V256;
 
     }
 

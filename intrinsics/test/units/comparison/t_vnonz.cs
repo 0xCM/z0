@@ -47,12 +47,13 @@ namespace Z0
         {            
             var min = one(t);
             var max = maxval(t);
+            var domain = Interval.closed(one(t), maxval(t));
             var f = VSvcFactories.vnonz(w,t);
 
             Claim.nea(gvec.vnonz(vzero(w,t)));
             
             for(var i=0; i<RepCount; i++)
-                Claim.yea(f.Invoke(Random.CpuVector(w,min,max)));            
+                Claim.yea(f.Invoke(Random.CpuVector(w, domain)));            
         }
 
         protected void vnonz_check<T>(N256 w, T t = default)
@@ -60,12 +61,13 @@ namespace Z0
         {
             var min = one(t);
             var max = maxval(t);
+            var domain = Interval.closed(one(t), maxval(t));
             var f = VSvcFactories.vnonz(w,t);
 
             Claim.nea(gvec.vnonz(vzero(w,t)));
             
             for(var i=0; i<RepCount; i++)
-                Claim.yea(f.Invoke(Random.CpuVector(w,min,max)));
+                Claim.yea(f.Invoke(Random.CpuVector(w,domain)));
         }
     }
 }

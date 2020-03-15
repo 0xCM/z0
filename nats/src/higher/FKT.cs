@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         public readonly struct FuncType<R> : IFuncType<R>
         {
-            public const FunctionClass Kind = FunctionClass.Func0;
+            public const FunctionClass Kind = FunctionClass.Emitter;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(FuncType<R> src)

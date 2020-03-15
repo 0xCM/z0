@@ -172,14 +172,14 @@ namespace Z0
         v256x16i = v256 | v16i,
 
         /// <summary>
+        /// A 256-bit vector covering 8 32-bit signed segments
+        /// </summary>
+        v256x32i = v256 | v32i,
+
+        /// <summary>
         /// A 256-bit vector covering 8 32-bit unsigned segments
         /// </summary>
         v256x32u = v256 | v32u,
-
-        /// <summary>
-        /// A 256-bit vector covering 8 32-bit signed segments
-        /// </summary>
-        Vector256x32i = v256 | v32i,
 
         /// <summary>
         /// A 256-bit vector covering 4 64-bit unsigned segments

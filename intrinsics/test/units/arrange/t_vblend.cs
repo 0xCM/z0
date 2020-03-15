@@ -60,14 +60,14 @@ namespace Z0
                 var n = n128;
                 var x = vgeneric.vbroadcast(n, (byte)1);
                 var y = vgeneric.vbroadcast(n, (byte)2);
-                Trace($"x{n}", x.Format());
-                Trace($"y{n}", y.Format());                
-                Trace("valignr/3",gvec.valignr(x,y, 3).Format());
-                Trace("valignr/4",gvec.valignr(x,y, 4).Format());
-                Trace("valignr/5",gvec.valignr(x,y, 5).Format());
-                Trace("valignr/6",gvec.valignr(x,y, 6).Format());
-                Trace("valignr/7",gvec.valignr(x,y, 7).Format());
-                Trace("valignr/8",gvec.valignr(x,y, 8).Format());
+                Trace($"x{n}", x.FormatAsList());
+                Trace($"y{n}", y.FormatAsList());                
+                Trace("valignr/3",gvec.valignr(x,y, 3).FormatAsList());
+                Trace("valignr/4",gvec.valignr(x,y, 4).FormatAsList());
+                Trace("valignr/5",gvec.valignr(x,y, 5).FormatAsList());
+                Trace("valignr/6",gvec.valignr(x,y, 6).FormatAsList());
+                Trace("valignr/7",gvec.valignr(x,y, 7).FormatAsList());
+                Trace("valignr/8",gvec.valignr(x,y, 8).FormatAsList());
             }
 
             void example2()

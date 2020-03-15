@@ -42,13 +42,12 @@ namespace Z0
         void vsllv_check<T>(N128 w, T t = default)
             where T : unmanaged        
         {
-            var min = zero(t);
-            var max = convert<int,T>(bitsize(t) - 1);
+            var domain = Interval.closed(zero(t),convert<int,T>(bitsize(t) - 1));
             
             Pair<Vector128<T>> @case(int i)
             {
                 var x = Random.CpuVector(w,t);
-                var offsets = Random.CpuVector(w, min, max);
+                var offsets = Random.CpuVector(w, domain);
                 return (x,offsets);
             }
 
@@ -58,13 +57,12 @@ namespace Z0
         void vsllv_check<T>(N256 w, T t = default)
             where T : unmanaged        
         {
-            var min = zero(t);
-            var max = convert<int,T>(bitsize(t) - 1);
+            var domain = Interval.closed(zero(t),convert<int,T>(bitsize(t) - 1));
             
             Pair<Vector256<T>> @case(int i)
             {
                 var x = Random.CpuVector(w,t);
-                var offsets = Random.CpuVector(w, min, max);
+                var offsets = Random.CpuVector(w, domain);
                 return (x,offsets);
             }
 

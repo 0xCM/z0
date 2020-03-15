@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         public readonly struct TernaryFuncType : IFuncType, IFuncArity<N3>
         {
-            public const FunctionClass Kind = FunctionClass.TernaryFunc;
+            public const FunctionClass Kind = FunctionClass.Function3;
 
 
             [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         public readonly struct FuncType<T1,T2,T3,R> : IFuncType<T1,T2,T3,R>
         {
-            public const FunctionClass Kind = FunctionClass.Func3;
+            public const FunctionClass Kind = FunctionClass.Function3;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(FuncType<T1,T2,T3,R> src)
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         public readonly struct TernaryOpType : IOperatorFuncType<N3>
         {
-            public const FunctionClass Kind = FunctionClass.TernaryOp;
+            public const FunctionClass Kind = FunctionClass.TernaryOperator;
 
             public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
 
@@ -77,7 +77,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public readonly struct TernaryOpType<T> : IOperatorFuncType<N3,T>
         {
-            public const FunctionClass Kind = FunctionClass.TernaryOp;
+            public const FunctionClass Kind = FunctionClass.TernaryOperator;
 
             public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
 

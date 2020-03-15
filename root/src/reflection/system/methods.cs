@@ -113,12 +113,6 @@ namespace Z0
         public static Type ParameterType(this MethodInfo m, int index)
             => m.Arity() >= index + 1 ? m.GetParameters()[index].ParameterType : typeof(void);
 
-        /// <summary>
-        /// Returns a method's parameter types
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> ImmediateParameters(this MethodInfo m)
-            => m.GetParameters().Where(p => p.Tagged<ImmAttribute>()).Select(p => p.ParameterType);
 
         /// <summary>
         /// Raises an error if the source method is any flavor of generic

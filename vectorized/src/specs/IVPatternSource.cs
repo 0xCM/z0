@@ -19,7 +19,7 @@ namespace Z0
         where V : struct
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.Emitter | FunctionClass.Vectorized;        
+
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
     public interface IVPatternSource128<T> : IVPatternSource<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.Emitter | FunctionClass.V128;        
+
     }
 
     /// <summary>
@@ -41,6 +41,6 @@ namespace Z0
     public interface IVPatternSource256<T> : IVPatternSource<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.Emitter | FunctionClass.V256;
+
     }
 }

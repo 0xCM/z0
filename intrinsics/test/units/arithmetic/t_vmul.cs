@@ -109,8 +109,8 @@ namespace Z0
             var a1 = vpattern.vincrements(ws,a0.LastCell() + 1);
             var b0 = dvec.vmul(a0,a1);
             var b1 = dvec.vmul(dvec.vswaphl(a0), dvec.vswaphl(a1));
-            Trace("x",a0.Format());
-            Trace("y",a1.Format());
+            Trace("x",a0.FormatAsList());
+            Trace("y",a1.FormatAsList());
             Trace("lo", b0.Format());
             Trace("hi", b1.Format());
 

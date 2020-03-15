@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="f">The receiver</param>
         /// <typeparam name="T">The transmission type</typeparam>
         [MethodImpl(Inline)]
-        public static IValueObserverPipe<T> ValueObserverPipe<T>(SinkReceiver<T> f)
+        public static IValueObserverPipe<T> ValueObserverPipe<T>(Receiver<T> f)
             where T : struct
                 => Z0.ValueObserverPipe<T>.Create(f);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="f">The receiver upon which the observation pipe will be predicated</param>
         /// <typeparam name="T">The transmission type</typeparam>
         [MethodImpl(Inline)]
-        public static void RunObservationFlow<T>(IEnumerable<T> src, SinkReceiver<T> f)
+        public static void RunObservationFlow<T>(IEnumerable<T> src, Receiver<T> f)
             where T : struct
                 => ValueObserverFlow<T>().Flow(src,ValueObserverPipe(f)).Force();
 

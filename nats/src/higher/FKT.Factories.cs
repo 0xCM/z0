@@ -104,9 +104,9 @@ namespace Z0
         public static FunctionClass ofk<N>(N n = default)
             where N : unmanaged, ITypeNat
             => nateval<N>() switch {
-                1 => FunctionClass.UnaryOp,
-                2 => FunctionClass.BinaryOp,
-                3 => FunctionClass.TernaryOp,
+                1 => FunctionClass.UnaryOperator,
+                2 => FunctionClass.BinaryOperator,
+                3 => FunctionClass.TernaryOperator,
                 _ => FunctionClass.None
             };         
     }

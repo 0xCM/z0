@@ -56,7 +56,7 @@ namespace Z0
     public interface IVBinPred128<T> : IVBinaryPred<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryPred | FunctionClass.V128;
+
 
     }
 
@@ -68,7 +68,7 @@ namespace Z0
     public interface IVBinPred256<T> : IVBinaryPred<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryPred | FunctionClass.V256;        
+        
     }
 
     /// <summary>
@@ -94,6 +94,4 @@ namespace Z0
     {
     
     }
-
-
 }

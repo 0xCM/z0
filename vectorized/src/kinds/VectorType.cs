@@ -151,7 +151,7 @@ namespace Z0
             else if(t == typeof(Vector256<short>))
                 return VectorKind.v256x16i;
             else if(t == typeof(Vector256<int>))
-                return VectorKind.Vector256x32i;
+                return VectorKind.v256x32i;
             else if(t == typeof(Vector256<long>))
                 return VectorKind.v256x64i;
 
@@ -310,7 +310,7 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return VectorKind.v256x16i;
             else if(typeof(T) == typeof(int))
-                return VectorKind.Vector256x32i;
+                return VectorKind.v256x32i;
             else if(typeof(T) == typeof(long))
                 return VectorKind.v256x64i;
             else
@@ -443,7 +443,7 @@ namespace Z0
             else if(typeof(T) == typeof(Vector256<short>))
                 return VectorKind.v256x16i;
             else if(typeof(T) == typeof(Vector256<int>))
-                return VectorKind.Vector256x32i;
+                return VectorKind.v256x32i;
             else if(typeof(T) == typeof(Vector256<long>))
                 return VectorKind.v256x64i;
             else

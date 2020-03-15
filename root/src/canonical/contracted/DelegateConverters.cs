@@ -61,6 +61,10 @@ namespace Z0
             => new Z0.UnaryPredicate<T>(f);
 
         [MethodImpl(Inline)]
+        public static Z0.BinaryPredicate<T> ToBinaryPredicate<T>(this System.Func<T,T,bit> f)
+            => new Z0.BinaryPredicate<T>(f);
+
+        [MethodImpl(Inline)]
         public static System.Func<T,bit> ToFunc<T>(this Z0.UnaryPredicate<T> f)
             => new System.Func<T,bit>(f);
     }

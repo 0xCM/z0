@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         public readonly struct BinaryFuncType : IFuncType, IFuncArity<N2>
         {
-            public const FunctionClass Kind = FunctionClass.BinaryFunc;
+            public const FunctionClass Kind = FunctionClass.Function2;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(BinaryFuncType src)
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         public readonly struct FuncType<T1,T2,R> : IFuncType<T1,T2,R>
         {
-            public const FunctionClass Kind = FunctionClass.Func2;
+            public const FunctionClass Kind = FunctionClass.Function2;
 
 
             [MethodImpl(Inline)]
@@ -43,13 +43,12 @@ namespace Z0
             public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
         }
 
-
         /// <summary>
         /// Nonparametric classification of binary operators
         /// </summary>
         public readonly struct BinaryOpType : IFuncArity<N2>
         {
-            public const FunctionClass Kind = FunctionClass.BinaryOp;
+            public const FunctionClass Kind = FunctionClass.BinaryOperator;
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorType<N2>(BinaryOpType src)
@@ -72,7 +71,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public readonly struct BinaryOpType<T> : IFuncType<N2,T>
         {
-            public const FunctionClass Kind = FunctionClass.BinaryOp;
+            public const FunctionClass Kind = FunctionClass.BinaryOperator;
 
             public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
 

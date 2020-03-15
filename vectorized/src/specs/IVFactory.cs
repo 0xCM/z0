@@ -23,7 +23,7 @@ namespace Z0
         where T : unmanaged
         where V : struct
     {
-        FunctionClass IFunc.Class => FunctionClass.UnaryFunc | FunctionClass.Vectorized;
+
 
     }
 
@@ -36,7 +36,6 @@ namespace Z0
     public interface IVFactory128<S,T> : IVFactory<N128,S,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.UnaryFunc | FunctionClass.V128;
 
     }
 
@@ -49,7 +48,6 @@ namespace Z0
     public interface IVFactory256<S,T> : IVFactory<N256,S,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.UnaryFunc | FunctionClass.V256;
 
     }
 }

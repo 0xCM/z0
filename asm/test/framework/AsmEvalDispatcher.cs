@@ -63,11 +63,11 @@ namespace Z0.Asm.Validation
                 var apiclass = api.Method.ClassifyOperator();
                 switch(apiclass)
                 {
-                    case UnaryOp:
+                    case UnaryOperator:
 
                     break;
                     
-                    case BinaryOp:
+                    case BinaryOperator:
                     {
                         switch(nk)
                         {
@@ -93,7 +93,7 @@ namespace Z0.Asm.Validation
                         }
                     }
 
-                    case TernaryOp:
+                    case TernaryOperator:
                         return 0;                    
                 }
             }
@@ -120,7 +120,7 @@ namespace Z0.Asm.Validation
             var apiclass = api.Method.ClassifyOperator();
             switch(apiclass)
             {
-                case OperatorClass.BinaryOp:
+                case OperatorClass.BinaryOperator:
                 switch(nk)
                 {
                     case NumericKind.U8:

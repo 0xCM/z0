@@ -86,9 +86,9 @@ namespace Z0
             var pad = 5;
             Trace("left", x.FormatList(pad:pad));
             Trace("right", y.FormatList(pad:pad));
-            Trace("expect", expect.FormatList(pad:pad));
-            Trace("actual", actual.FormatList(pad:pad));
-            Trace("result", result.FormatList(pad:pad));
+            Trace("expect", expect.FormatAsList(pad:pad));
+            Trace("actual", actual.FormatAsList(pad:pad));
+            Trace("result", result.FormatAsList(pad:pad));
 
         }
 
@@ -98,9 +98,9 @@ namespace Z0
             var pad = 5;
             Trace("left", x.FormatList(pad:pad));
             Trace("right", y.FormatList(pad:pad));
-            Trace("expect", expect.FormatList(pad:pad));
-            Trace("actual", actual.FormatList(pad:pad));
-            Trace("result", result.FormatList(pad:pad));
+            Trace("expect", expect.Format(pad:pad));
+            Trace("actual", actual.Format(pad:pad));
+            Trace("result", result.Format(pad:pad));
 
         }
     }

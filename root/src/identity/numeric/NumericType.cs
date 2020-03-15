@@ -22,8 +22,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
-        public static Option<NumericType> From(Type src)
-            => from k in Numeric.kind(src) select new NumericType(src,k);
+        public static NumericType From(Type src)
+            => Numeric.kind(src).MapValueOrDefault(k => new NumericType(src,k),NumericType.Empty);
         
         /// <summary>
         /// Returns numeric type associated with a specified numeric kind, or the empty

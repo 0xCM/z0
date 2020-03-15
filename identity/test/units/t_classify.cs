@@ -268,7 +268,7 @@ namespace Z0
             Claim.eq(VectorType.kind(typeof(Vector256<ushort>)), VectorKind.v256x16u);
             Claim.eq(VectorType.kind(typeof(Vector256<short>)), VectorKind.v256x16i);
             Claim.eq(VectorType.kind(typeof(Vector256<uint>)), VectorKind.v256x32u);
-            Claim.eq(VectorType.kind(typeof(Vector256<int>)), VectorKind.Vector256x32i);
+            Claim.eq(VectorType.kind(typeof(Vector256<int>)), VectorKind.v256x32i);
             Claim.eq(VectorType.kind(typeof(Vector256<ulong>)), VectorKind.v256x64u);
             Claim.eq(VectorType.kind(typeof(Vector256<long>)), VectorKind.v256x64i);
             Claim.eq(VectorType.kind(typeof(Vector256<float>)), VectorKind.v256x32f);
@@ -297,7 +297,7 @@ namespace Z0
             Claim.eq(VectorType.kind(typeof(Vector256<short>)), VectorKind.v256x16i);
             Claim.eq(VectorType.kind(typeof(Vector256<ushort>)), VectorKind.v256x16u);
 
-            Claim.eq(VectorType.kind(typeof(Vector256<int>)), VectorKind.Vector256x32i);
+            Claim.eq(VectorType.kind(typeof(Vector256<int>)), VectorKind.v256x32i);
             Claim.eq(VectorType.kind(typeof(Vector256<uint>)), VectorKind.v256x32u);
             Claim.eq(VectorType.kind(typeof(Vector256<float>)), VectorKind.v256x32f);
 

@@ -8,7 +8,6 @@ namespace Z0
     using System.Security;
     using System.Runtime.Intrinsics;
 
-
     /// <summary>
     /// Characterizes a unary function that accepts a vector argument and returns a scalar value
     /// </summary>
@@ -23,7 +22,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.UnaryMeasure | FunctionClass.Vectorized;
+        
     }
 
     /// <summary>
@@ -40,7 +39,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryMeasure | FunctionClass.Vectorized;
+
     }
 
     /// <summary>
@@ -63,7 +62,6 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryMeasure | FunctionClass.Vectorized;
 
     }
 
@@ -87,7 +85,6 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.TernaryMeasure | FunctionClass.Vectorized;
 
     }
 
@@ -114,7 +111,6 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.TernaryMeasure | FunctionClass.Vectorized;
 
     }
 
@@ -128,7 +124,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.UnaryMeasure | FunctionClass.V128;
+        
     }
 
     /// <summary>
@@ -141,7 +137,6 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryMeasure | FunctionClass.V128;
 
     }
 
@@ -274,8 +269,7 @@ namespace Z0
         where K : unmanaged
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.UnaryMeasure | FunctionClass.V256;
-
+        
     }
 
     /// <summary>
@@ -288,7 +282,6 @@ namespace Z0
         where K : unmanaged
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryMeasure | FunctionClass.V256;
 
     }
 
@@ -330,7 +323,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryMeasure | FunctionClass.V256;
+
     }    
 
     /// <summary>
@@ -357,7 +350,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.TernaryMeasure | FunctionClass.V256;
+
     }    
 
     /// <summary>
@@ -373,5 +366,4 @@ namespace Z0
     {
 
     }    
-
 }

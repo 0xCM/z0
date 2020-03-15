@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
-        public static Option<NT> NumericType(this Type src)
+        public static NT NumericType(this Type src)
             => NT.From(src);
 
         /// <summary>

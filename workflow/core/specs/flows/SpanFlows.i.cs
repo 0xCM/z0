@@ -9,6 +9,11 @@ namespace Z0
 
     using static Root;
 
+    public interface ISpanSource<T>
+    {
+        Span<T> Data {get;}   
+    }
+
     /// <summary>
     /// Characterizes an orchestrator that coordinates data transmission
     /// </summary>

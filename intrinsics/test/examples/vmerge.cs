@@ -58,10 +58,10 @@ namespace Z0
                 var lo = gvec.vmergelo(x,y);
                 var hi = gvec.vmergehi(x,y);
 
-                Notify(x.Format(pad:2));
-                Notify(y.Format(pad:2));
-                Notify(lo.Format(pad:2));
-                Notify(hi.Format(pad:2));
+                Notify(x.FormatAsList(pad:2));
+                Notify(y.FormatAsList(pad:2));
+                Notify(lo.FormatAsList(pad:2));
+                Notify(hi.FormatAsList(pad:2));
             }
 
             void merge_hi()

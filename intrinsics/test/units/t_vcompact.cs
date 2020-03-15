@@ -164,7 +164,7 @@ namespace Z0
             {
                 var x = vgeneric.vparts(n128,127,0,127,0,127,0,127,0);
                 var y = dvec.vpackus(x,x);
-                Notify(y.Format());
+                Notify(y.FormatAsList());
             }        
             case1();
             case2();

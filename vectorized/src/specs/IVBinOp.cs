@@ -7,7 +7,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-
     /// <summary>
     /// Characterizes a binary vectorized operator that accepts an 8-bit immediate
     /// </summary>
@@ -32,7 +31,7 @@ namespace Z0
         where V : struct
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryOp | FunctionClass.Vectorized;
+
     }
 
     /// <summary>
@@ -54,7 +53,7 @@ namespace Z0
     public interface IVBinOp128<T> : IVBinOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryOp | FunctionClass.V128;
+
     }
 
     /// <summary>
@@ -65,7 +64,7 @@ namespace Z0
     public interface IVBinOp256<T> : IVBinOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.BinaryOp | FunctionClass.V256;        
+
     }
 
     /// <summary>
@@ -97,8 +96,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IVBinOp128Imm8<T> : IVBinOpImm8<N128,Vector128<T>,T>
         where T : unmanaged
-    {
-        FunctionClass IFunc.Class => FunctionClass.TernaryImm | FunctionClass.V256;
+    {        
         
     }
 
@@ -110,6 +108,6 @@ namespace Z0
     public interface IVBinOp256Imm8<T> : IVBinOpImm8<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionClass IFunc.Class => FunctionClass.TernaryImm | FunctionClass.V256;
+        
     }   
 }

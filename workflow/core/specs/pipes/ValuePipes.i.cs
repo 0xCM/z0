@@ -57,7 +57,7 @@ namespace Z0
     public interface IValueObserverPipe<T> : IValueObserverPipe, IValuePipe<T>
         where T : struct
     {
-        SinkReceiver<T> Receiver {get;}
+        Receiver<T> Receiver {get;}
 
         [MethodImpl(Inline)]
         ref readonly T Flow(in T src)
