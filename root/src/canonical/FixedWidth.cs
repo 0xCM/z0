@@ -106,6 +106,7 @@ namespace Z0
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline)]
         public static string Format(this FixedWidth src)
-            => Numeric.format(src);
+            => $"{Numeric.@int(src)}";
+
     }
 }

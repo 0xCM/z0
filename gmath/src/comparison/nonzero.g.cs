@@ -9,7 +9,6 @@ namespace Z0
         
     using static Root;    
     using static As;
-    using static AsIn;
 
     partial class gmath
     {
@@ -21,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static bit nonz<T>(T a)
             where T : unmanaged
-                => nonz_u(a);
+                => Numeric.nonz(a);
 
         [MethodImpl(Inline)]
         static bit nonz_u<T>(T a)
@@ -52,7 +51,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return math.nonzero(int64(a));
             else 
-                return gfp.nonzero(a);
+                return gfp.nonz(a);
         }
     }
 }

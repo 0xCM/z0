@@ -174,6 +174,10 @@ public enum AssemblyId : ulong
     
     Symbolic = 410,
 
+    Polyrand = 420,
+
+    PolyrandTest = Polyrand | Test,
+    
     Control = 1000,        
 
     Svc = T16,

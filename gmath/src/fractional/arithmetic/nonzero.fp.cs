@@ -13,7 +13,7 @@ namespace Z0
     partial class gfp
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
-        public static bit nonzero<T>(T a)
+        public static bit nonz<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

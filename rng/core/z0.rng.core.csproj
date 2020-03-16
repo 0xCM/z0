@@ -10,6 +10,8 @@
     <ProjectReference Include="$(TopDir)symbolic/src/z0.symbolic.csproj" />
 
     <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(TopDir)polyrand/src/z0.polyrand.csproj" />
+
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
     <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />
     <ProjectReference Include="$(TopDir)math/src/z0.math.csproj" />

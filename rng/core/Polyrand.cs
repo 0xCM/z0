@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Root;
-    using static As;
+    using static Z0.Root;
+    using static Z0.As;
 
     public class Polyrand : IPolyrand
     {
@@ -185,7 +185,7 @@ namespace Z0
             var counter = 0;
             while(counter++ < count)
                 yield return Next<T>();
-        } 
+        }
 
         IBoundValueSource<sbyte> Int8Source
         {
@@ -204,7 +204,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => this;
         }
-        
+
 
         IBoundValueSource<ushort> UInt16Source
         {
@@ -250,13 +250,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         sbyte ISource<sbyte>.Next()
-             => (sbyte) (Points.Next((ulong)SByte.MaxValue*2) - (ulong)SByte.MaxValue);
+             => (sbyte) (Points.Next((ulong)sbyte.MaxValue*2) - (ulong)SByte.MaxValue);
  
         [MethodImpl(Inline)]
         sbyte IBoundValueSource<sbyte>.Next(sbyte max)
         {
             var amax = (ulong)math.abs(max);
-            return (sbyte) (Points.Next(amax*2) - amax);
+            return (sbyte) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
@@ -278,17 +278,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         byte ISource<byte>.Next()
-            => (byte)Points.Next((ulong)Byte.MaxValue);
+            => (byte)Points.Next((ulong)byte.MaxValue);
 
         [MethodImpl(Inline)]
         short ISource<short>.Next()
-            => (short) (Points.Next((ulong)Int16.MaxValue*2) - (ulong)Int16.MaxValue);
+            => (short) (Points.Next((ulong)short.MaxValue*2) - (ulong)Int16.MaxValue);
 
         [MethodImpl(Inline)]
         short IBoundValueSource<short>.Next(short max)
         {
             var amax = (ulong)math.abs(max);
-            return (short) (Points.Next(amax*2) - amax);
+            return (short) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
@@ -302,11 +302,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         short NextI16()
-            => (short) Points.Next(((ulong)Int16.MaxValue*2) - (ulong)Int16.MaxValue);
+            => (short)Points.Next(((ulong)short.MaxValue*2) - (ulong)short.MaxValue);
 
         [MethodImpl(Inline)]
         ushort ISource<ushort>.Next()
-            => (ushort)Points.Next((ushort)UInt16.MaxValue);
+            => (ushort)Points.Next((ushort)ushort.MaxValue);
 
         [MethodImpl(Inline)]
         ushort IBoundValueSource<ushort>.Next(ushort max)
@@ -318,13 +318,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         int ISource<int>.Next()
-            => (int) (Points.Next((ulong)Int32.MaxValue*2) - Int32.MaxValue);
+            => (int) (Points.Next((ulong)int.MaxValue*2) - Int32.MaxValue);
 
         [MethodImpl(Inline)]
         int IBoundValueSource<int>.Next(int max)
         {
             var amax = (ulong)math.abs(max);
-            return (int) (Points.Next(amax*2) - amax);
+            return (int) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
@@ -338,11 +338,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         int NextI32()
-            => (int) (Points.Next((ulong)Int32.MaxValue*2) - Int32.MaxValue);
+            => (int) (Points.Next((ulong)int.MaxValue*2) - Int32.MaxValue);
 
         [MethodImpl(Inline)]
         uint ISource<uint>.Next()
-            =>(uint)Points.Next((ulong)UInt32.MaxValue);
+            =>(uint)Points.Next((ulong)uint.MaxValue);
 
         [MethodImpl(Inline)]
         uint IBoundValueSource<uint>.Next(uint max)
@@ -368,7 +368,7 @@ namespace Z0
         [MethodImpl(Inline)]
         long ISource<long>.Next()
         {
-            var next = (long)Points.Next(Int64.MaxValue);
+            var next = (long)Points.Next(long.MaxValue);
             var negative = bit.test(next, 7);
             var result = bit.test(next, 7) ? enable(next, 63) : next;
             return result;
@@ -378,7 +378,7 @@ namespace Z0
         long IBoundValueSource<long>.Next(long max)
         {
             var amax = (ulong)math.abs(max);
-            return (long) (Points.Next(amax*2) - amax);
+            return (long) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
@@ -445,5 +445,22 @@ namespace Z0
         [MethodImpl(Inline)]
         double NextF64()
             => ((double)Points.Next())/double.MaxValue;
+
+        public Interval<T> Domain<T>() 
+            where T : unmanaged
+        {            
+            if(typeof(T) == typeof(double))
+                return (convert<T>(long.MinValue/2), convert<T>(long.MaxValue/2));
+            else if(typeof(T) == typeof(float))
+                return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
+            else
+            {
+                var min = Numeric.signed<T>() ? gmath.negate(gmath.sar(maxval<T>(), 1)) : minval<T>();                        
+                
+                var max = Numeric.signed<T>() ? gmath.sar(maxval<T>(), 1)  : maxval<T>();
+
+                return (min,max);
+            }            
+        }
     }
 }

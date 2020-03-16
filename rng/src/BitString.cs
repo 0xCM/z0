@@ -66,7 +66,7 @@ namespace Z0
                     yield return random.BitString(minlen, maxlen);
             }
             
-            return Rng.stream(produce(), random.RngKind);
+            return PolyOps.stream(produce(), random.RngKind);
         }
     }
 }

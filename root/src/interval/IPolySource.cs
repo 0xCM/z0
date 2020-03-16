@@ -43,5 +43,13 @@ namespace Z0
         /// <typeparam name="T">The point type</typeparam>
         T Next<T>(Interval<T> domain)
             where T : unmanaged;
+
+        /// <summary>
+        /// Returns the default domain used when producing random points for a parametrically-identifed type
+        /// </summary>
+        /// <typeparam name="T">The point type</typeparam>
+        Interval<T> Domain<T>()
+            where T : unmanaged;
+
     }    
 }
