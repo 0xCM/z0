@@ -64,10 +64,19 @@ namespace Z0
             }
 
             var correlated = Enums.correlate<BinaryBitLogicKindId, BinaryBitLogicOpKind>();
-
             Claim.eq(correlated.Count, first.Length);
 
-            iter(correlated, (k,v) => Notify(v.Format()));
+        }
+
+        public void check_numeric_class()
+        {
+            
+            Claim.eq(NumericClass.Int16u.Width(), 16);
+            Claim.eq(NumericClass.Int32i.Width(), 32);
+            Claim.eq(NumericClass.All.Width(), null);
+            Claim.yea(NumericClass.Float32.Identifies(NumericTypeId.Float32));
+            Claim.nea(NumericClass.Float.Identifies(NumericTypeId.Float32));
+
         }
     }
 }

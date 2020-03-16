@@ -53,7 +53,7 @@ namespace Z0
 
             foreach(var imm in Immediates)
             {
-                var method = src.V128EmbedUnaryImm(imm);
+                var method = Dynop.EmbedVUnaryOpImm(src,imm);//src.V128EmbedUnaryImm(imm);
                 var vOutput = method.Invoke(vones);
             }
         }
@@ -79,7 +79,7 @@ namespace Z0
 
             foreach(var imm in Immediates)
             {
-                var method = src.V256EmbedUnaryImm(imm);
+                var method = Dynop.EmbedVUnaryOpImm(src,imm);
                 var vOutput = method.Invoke(vones);
                 Trace(vOutput.ToString());
             }            

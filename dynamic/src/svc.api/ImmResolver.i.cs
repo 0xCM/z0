@@ -8,20 +8,5 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImmResolver : IFunc
-    {
-        NumericKind ImmKind => NumericKind.None;
 
-        ArityValue ResolvedArity => ArityValue.Nullary;
-
-        FixedWidth OperandWidth => FixedWidth.None;
-
-    }
-
-    public interface IImmResolver<T> : IImmResolver
-        where T : unmanaged
-    {
-        NumericKind IImmResolver.ImmKind => Numeric.kind<T>();
-    }
 }

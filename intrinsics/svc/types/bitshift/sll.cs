@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
-                => Dynop.CreateImmVUnaryOp<T>(hk, Id, gApiMethod(hk,Name),count);
+                => Dynop.EmbedVUnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);
             
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte count) 
@@ -48,7 +48,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
-                => Dynop.CreateImmVUnaryOp<T>(hk, Id, gApiMethod(hk,Name),count);
+                => Dynop.EmbedVUnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte count) 

@@ -43,7 +43,7 @@ namespace Z0
         public void handle_test()
         {   const byte imm8 = 9;
             var method = typeof(gvec).DeclaredMethods().WithName(nameof(gvec.vbsll)).OfKind(VK.vk128()).Single();
-            var op = Dynop.CreateImmVUnaryOp(VK.vk128<uint>(), Identity.identify(method), method,imm8);
+            var op = Dynop.EmbedVUnaryOpImm(VK.vk128<uint>(), Identity.identify(method), method,imm8);
             var handle = GetMethodHandle(op.Target);
             Notify(handle.Value.ToString());
         }

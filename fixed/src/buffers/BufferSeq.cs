@@ -13,7 +13,10 @@ namespace Z0
     {
         Left = 0,
 
-        Right = 1
+        Right = 1,
+
+        Main = 2,
+
     }
 
     public readonly ref struct BufferSeq

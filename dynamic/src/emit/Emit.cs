@@ -5,15 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
     using static Root;
-    using static FKT;
-    using static Nats;
 
     partial class Dynop
     {
@@ -96,17 +90,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinaryOp16 EmitFixedBinaryOp(this IBufferToken buffer, N16 w, in ApiCode src)
             => buffer.Load(src.BinaryCode).EmitFixedBinaryOp(w, src.Id);
-
-        /// <summary>
-        /// Loads source into the identifed buffer and covers it with a fixed binary operator
-        /// </summary>
-        /// <param name="buffer">The target buffer</param>
-        /// <param name="src">The soruce to load</param>
-        /// <typeparam name="F">The fixed operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static FixedBinaryOp<F> EmitFixedBinaryOp<F>(this IBufferToken buffer, in ApiCode src)
-            where F : unmanaged, IFixed
-                => (FixedBinaryOp<F>)buffer.Load(src.BinaryCode).EmitFixedBinaryOp(src.Id, typeof(FixedBinaryOp<F>), typeof(F));
 
         /// <summary>
         /// Creates a fixed 32-bit binary operator from caller-supplied x86 source code

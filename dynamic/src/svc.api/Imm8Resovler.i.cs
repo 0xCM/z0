@@ -7,34 +7,41 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Security;
+    using System.Reflection;
+
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IImm8Resolver : IImmResolver<byte>
+    public interface IImmResolver : IFunc
     {
-            
+        NumericKind ImmKind => NumericKind.None;
+
+        ArityValue ResolvedArity => ArityValue.Nullary;
+
+        FixedWidth OperandWidth => FixedWidth.None;
+
+    }
+
+    public interface IImmResolver<T> : IImmResolver
+        where T : unmanaged
+    {
+        NumericKind IImmResolver.ImmKind => Numeric.kind<T>();
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IImm8Resolver<T> : IImm8Resolver
+    public interface IImm8Resolver<T> : IImmResolver<byte>
+        where T : struct
     {
 
     }
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImm8UnaryResolver<T> : IImm8Resolver
-        where T :struct
-    {
-        DynamicDelegate<UnaryOp<T>>  @delegate(byte imm8);  
+    public interface IDynamicImmInjector : IAppService
+    {     
 
-        ArityValue IImmResolver.ResolvedArity => ArityValue.Unary;
     }
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImm8BinaryResolver<T> : IImm8Resolver
-        where T :struct
+    public interface IDynamicImmInjector<D> : IDynamicImmInjector
+        where D : Delegate
     {
-        DynamicDelegate<BinaryOp<T>>  @delegate(byte imm8);  
-
-        ArityValue IImmResolver.ResolvedArity => ArityValue.Binary;        
-    }
+        DynamicDelegate<D> EmbedImmediate(MethodInfo src, byte imm);    
+    }        
 }

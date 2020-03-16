@@ -16,7 +16,7 @@ namespace Z0
 
     partial class Dynop
     {
-        public static DynamicDelegate<BinaryOp<Vector128<T>>> CreateImmVBinaryOp<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<BinaryOp<Vector128<T>>> EmbedVBinaryOpImm<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -27,7 +27,7 @@ namespace Z0
             return DynamicDelegate.Create<BinaryOp<Vector128<T>>>(tId, wrapped, target);
         }
 
-        public static DynamicDelegate<BinaryOp<Vector256<T>>> CreateImmVBinaryOp<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmVBinaryOpImm<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -38,7 +38,7 @@ namespace Z0
             return DynamicDelegate.Create<BinaryOp<Vector256<T>>>(tId, wrapped, target);
         }
 
-        public static DynamicDelegate<UnaryBlockedOp128<T>> CreateImmBlockedUnaryOp<T>(N128 w, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryBlockedOp128<T>> EmbedBlockedUnaryOpImm<T>(N128 w, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -54,47 +54,18 @@ namespace Z0
             return DynamicDelegate.Create<UnaryBlockedOp128<T>>(tId, wrapped, target);
         }
 
-        public static DynamicDelegate CreateImmV128UnaryOp(MethodInfo src, byte imm8)
-        {
-            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
-            return CreateImmV128UnaryOp(src, tCell, imm8);
-        }
-
-        public static DynamicDelegate CreateImmV128UnaryOp(MethodInfo src, Type celltype, byte imm8)
-        {
-            var wrapped = src.Reify(celltype);
-            var tId = Identity.identify(src).WithImm8(imm8);
-            var tOperand = typeof(Vector128<>).MakeGenericType(celltype);
-            var tOp = typeof(UnaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
-            target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
-            return DynamicDelegate.Create(tId, wrapped, target, tOp);
-        }
-
-        public static DynamicDelegate CreateImmV256UnaryOp(MethodInfo src, byte imm8)
-        {
-            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
-            var wrapped = src.Reify(tCell);
-            var tId = Identity.identify(src).WithImm8(imm8);
-            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);
-            var tOp = typeof(UnaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
-            target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
-            return DynamicDelegate.Create(tId, wrapped, target, tOp);
-        }
-
-        public static DynamicDelegate<UnaryOp<Vector128<T>>> CreateImmVUnaryOp<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedVUnaryOpImm<T>(VKT.Vec128<T> k, OpIdentity baseid, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
-            var tId = id.WithImm8(imm8);
+            var tId = baseid.WithImm8(imm8);
             var tOperand = typeof(Vector128<T>); 
             var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
             return DynamicDelegate.Create<UnaryOp<Vector128<T>>>(tId, wrapped, target);
         }
 
-        public static DynamicDelegate<UnaryOp<Vector256<T>>> CreateImmVUnaryOp<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryOp<Vector256<T>>> EmbedVUnaryOpImm<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -105,7 +76,6 @@ namespace Z0
             return DynamicDelegate.Create<UnaryOp<Vector256<T>>>(tId, wrapped, target);
         }
 
-
         /// <summary>
         /// Creates a 128-bit vectorized parametric unary operator that consumes an immediate value in the second argument
         /// </summary>
@@ -115,12 +85,7 @@ namespace Z0
         [MethodImpl(Inline)]            
         public static DynamicDelegate<UnaryOp<Vector128<T>>> CreateImmV128UnaryOp<T>(MethodInfo src, byte imm)
             where T : unmanaged
-        {
-            static Func<byte,DynamicDelegate<UnaryOp<Vector128<T>>>> producer(OpIdentity id, MethodInfo src)
-                => imm8 => CreateImmVUnaryOp(VK.vk128<T>(), id, src, imm8);
-                        
-            return producer(Identity.identify(src), src)(imm);
-        }
+                => EmbedVUnaryOpImm(VK.vk128<T>(), Identity.identify(src), src, imm);
 
         /// <summary>
         /// Creates a parametric 128-bit vectorized binary operator that adapts a like-kinded operator that consumes an immediate value in the third argument
@@ -130,13 +95,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public static DynamicDelegate<BinaryOp<Vector128<T>>> CreateImmV128BinaryOp<T>(MethodInfo src, byte imm)
             where T : unmanaged
-        {
-            static Func<byte,DynamicDelegate<BinaryOp<Vector128<T>>>> producer(OpIdentity id, MethodInfo src)            
-                => imm8 => CreateImmVBinaryOp(VK.vk128<T>(), id, src, imm8);
-
-            return producer(Identity.identify(src), src)(imm);
-        }
-
+                => EmbedVBinaryOpImm(VK.vk128<T>(), Identity.identify(src), src, imm);
 
         /// <summary>
         /// Creates a parametric 128-bit vectorized unary operator that adapts a like-kinded operator that consumes an immediate value in the second argument
@@ -146,12 +105,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public static DynamicDelegate<UnaryOp<Vector256<T>>> CreateImmV256UnaryOp<T>(MethodInfo src, byte imm)        
             where T : unmanaged
-        {
-            static Func<byte,DynamicDelegate<UnaryOp<Vector256<T>>>> producer(MethodInfo src, OpIdentity id)
-                => imm8 => CreateImmVUnaryOp(VK.vk256<T>(), id, src, imm8);
-
-            return producer(src,Identity.identify(src))(imm);
-        }
+                => EmbedVUnaryOpImm(VK.vk256<T>(), Identity.identify(src), src, imm);
 
         /// <summary>
         /// Creates a parametric 256-bit vectorized binary operator that adapts a like-kinded operator that consumes an immediate value in the third argument
@@ -159,13 +113,82 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static DynamicDelegate<BinaryOp<Vector256<T>>> CreateImmV256BinaryOp<T>(MethodInfo src, byte imm)        
+        public static DynamicDelegate<BinaryOp<Vector256<T>>> EmbedV256BinaryOpImm<T>(MethodInfo src, byte imm)        
             where T : unmanaged
-        {            
-            static Func<byte,DynamicDelegate<BinaryOp<Vector256<T>>>> producer(MethodInfo src, OpIdentity id)
-                => imm8 => CreateImmVBinaryOp(VK.vk256<T>(), id, src, imm8);
+                => EmbedImmVBinaryOpImm(VK.vk256<T>(), Identity.identify(src), src, imm);
 
-            return producer(src,Identity.identify(src))(imm);
+        public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedV128UnaryOpImm<T>(MethodInfo src, byte imm8, OpIdentity? baseid = null)
+            where T : unmanaged
+        {
+            var idSrc = baseid ?? src.Identify();
+            var tCell = typeof(T);
+            var wrapped = src.Reify(typeof(T));
+            var idTarget = idSrc.WithImm8(imm8);
+            var tOperand = typeof(Vector128<T>); 
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
+            target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
+            return DynamicDelegate.Create<UnaryOp<Vector128<T>>>(idTarget, wrapped, target);
+        }
+
+        public static DynamicDelegate EmbedV128BinaryOpImm(MethodInfo src, byte imm8, OpIdentity? baseid = null)
+        {
+            var idSrc = baseid ?? src.Identify();
+            var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
+            var wrapped = src.Reify(tCell);
+            var idTarget = idSrc.WithImm8(imm8);
+            var tOperand = typeof(Vector128<>).MakeGenericType(tCell);  
+            var tWrapper = typeof(BinaryOp<>).MakeGenericType(tOperand);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
+            return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
+        }
+
+        public static DynamicDelegate EmbedV256BinaryOpImm(MethodInfo src, byte imm8, OpIdentity? baseid = null)
+        {
+            var idSrc = baseid ?? src.Identify();
+            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
+            var wrapped = src.Reify(tCell);
+            var idTarget = idSrc.WithImm8(imm8);
+            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);  
+            var tWrapper = typeof(BinaryOp<>).MakeGenericType(tOperand);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
+            return DynamicDelegate.Create(idTarget, wrapped, target, tWrapper);
+        }
+
+        /// <summary>
+        /// Creates a non-parametric vectorized unary operator that adapts a like-kinded 
+        /// operator that consumes an immediate value in the second argument
+        /// </summary>
+        /// <param name="src">The defining method</param>
+        /// <param name="imm">The immediate value to embed</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        public static DynamicDelegate EmbedVUnaryOpImm(MethodInfo src, byte imm8, OpIdentity? baseid = null)
+        {
+            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
+            var id = baseid ?? src.Identify();
+            require(tCell.IsNumeric());
+            var wrapped = src.Reify(tCell);
+            var wrapperId = id.WithImm8(imm8);
+            var tOperand = src.ReturnType;
+            var tWrapper =typeof(UnaryOp<>).MakeGenericType(tOperand); 
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand); 
+            target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
+            return DynamicDelegate.Create(wrapperId, wrapped, target, tWrapper);            
+        }
+
+        public static DynamicDelegate EmbedVBinaryOpImm(MethodInfo src, byte imm8, OpIdentity? baseid = null)
+        {
+            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
+            var id = baseid ?? src.Identify();
+            require(tCell.IsNumeric());
+            var wrapped = src.Reify(tCell);
+            var wrapperId = id.WithImm8(imm8);
+            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);  
+            var tWrapper = typeof(BinaryOp<>).MakeGenericType(tOperand);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
+            return DynamicDelegate.Create(wrapperId, wrapped, target, tWrapper);
         }
     }
 }

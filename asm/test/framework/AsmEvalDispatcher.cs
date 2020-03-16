@@ -158,7 +158,7 @@ namespace Z0.Asm.Validation
         /// <typeparam name="F">The operand type</typeparam>
         FixedBinaryOp<F> LoadFixedinaryOp<F>(in BufferSeq buffers, int index, ApiMemberCode src)
             where F : unmanaged, IFixed
-                => buffers[index].EmitFixedBinaryOp<F>((AsmCode)src);
+                => buffers[index].EmitFixedBinaryOp<F>(src);
 
         /// <summary>
         /// Loads and invokes a fixed binary operator

@@ -11,7 +11,6 @@ namespace Z0
 
     using static Root;
 
-
     [SuppressUnmanagedCodeSecurity]
     public delegate Fixed8 BinaryOp8(Fixed8 a, Fixed8 b);
 
