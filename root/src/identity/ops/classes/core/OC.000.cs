@@ -10,7 +10,7 @@ namespace Z0
     /// Classifes an operation in various ways
     /// </summary>
     [Flags]
-    public enum OperationClass : ulong
+    public enum OperationClass : ushort
     {
         /// <summary>
         /// The empty class

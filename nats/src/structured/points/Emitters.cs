@@ -11,7 +11,6 @@ namespace Z0
 
     using static Root;
     
-    using Het = HetPoints;
 
    public readonly struct HomPointSpanEmitter<N,T> : ISpanEmitter<HomPoint<N,T>>
         where T : unmanaged
@@ -37,27 +36,27 @@ namespace Z0
             => cases;
     }
 
-   public readonly struct PointSpanEmitter<X0, X1, R> : ISpanEmitter<Het.Point<X0, X1, R>>
+   public readonly struct PointSpanEmitter<X0, X1, R> : ISpanEmitter<Point<X0, X1, R>>
         where X0 : unmanaged
         where X1 : unmanaged
         where R : unmanaged
     {
-        readonly Het.Point<X0,X1,R>[] cases;
+        readonly Point<X0,X1,R>[] cases;
         
         public OpIdentity Id {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator PointSpanEmitter<X0,X1,R>(Het.Point<X0,X1,R>[] src)
+        public static implicit operator PointSpanEmitter<X0,X1,R>(Point<X0,X1,R>[] src)
             => new PointSpanEmitter<X0,X1,R>(src);
 
         [MethodImpl(Inline)]
-        public PointSpanEmitter(Het.Point<X0,X1,R>[] cases)
+        public PointSpanEmitter(Point<X0,X1,R>[] cases)
         {
             this.cases = cases;
         }
 
         [MethodImpl(Inline)]
-        public Span<Het.Point<X0, X1, R>> Invoke()
+        public Span<Point<X0, X1, R>> Invoke()
             => cases;
     }
 }

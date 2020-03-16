@@ -9,7 +9,7 @@ namespace Z0
     using OC = OperationClass;
 
     [Flags]
-    public enum ArityClass : ulong
+    public enum ArityClass : ushort
     {
         /// <summary>
         /// The empty class

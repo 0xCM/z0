@@ -44,13 +44,13 @@ namespace Z0.Asm.Validation
         {
             var count = src.Count;
             var f = buffers[Left].EmitBinaryOp<T>(api);
-            var dst = Points.alloc<N3,T>(src.Count);
+            var dst = Points.homalloc<N3,T>(src.Count,n3);
             for(var i=0; i<count; i++)
             {
                 var point = src[i];
                 ref readonly var x0 = ref point[n0];
                 ref readonly var x1 = ref point[n1];
-                dst[i] = (x0, x1, f(x0,x1));
+                dst[i] =  Points.point(x0, x1, f(x0,x1),n3);
             }
             return dst;
         }
@@ -60,7 +60,7 @@ namespace Z0.Asm.Validation
         {
             var count = src.Count;
             var f = buffers[Left].EmitFixedBinaryOp<F>(api.ApiCode);
-            var dst = Points.alloc<N3,F>(src.Count);
+            var dst = Points.homalloc<N3,F>(src.Count);
             for(var i=0; i<count; i++)
             {
                 var point = src[i];

@@ -12,7 +12,7 @@ namespace Z0
     /// Classifies operators of arity either 1, 2, or 3
     /// </summary>
     [Flags]
-    public enum OperatorClass : ulong
+    public enum OperatorClass : ushort
     {
         /// <summary>
         /// The empty class

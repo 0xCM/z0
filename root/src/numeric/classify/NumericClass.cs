@@ -6,6 +6,16 @@ namespace Z0
 {
     using System;
 
+    public enum NumericSign : byte
+    {
+        None = 0,
+        
+        Unsigned = 0,
+
+        Signed = 2,
+
+    }
+
     [Flags]
     public enum NumericClass : byte
     {        
@@ -15,14 +25,14 @@ namespace Z0
         None = 0,
 
         /// <summary>
-        /// Classifies unsigned integral types
+        /// Classifies numeric 1-bit types that don't exist
         /// </summary>
-        Unsigned = 1,
+        W1 = 1,
 
         /// <summary>
-        /// Classifies signed integral types
+        /// Classifies signed integral types; if sign bit is not enabled and float bit is not enabled, the number is considered unsigned
         /// </summary>
-        Signed = 2,
+        Signed = NumericSign.Signed,
 
         /// <summary>
         /// Classifies floating-point types
@@ -50,24 +60,29 @@ namespace Z0
         W64 = 64,
 
         /// <summary>
+        /// Classifies the conceptually useful, but practically non-extant, 1-bit unsigned integer type
+        /// </summary>
+        Int1u = W1,
+
+        /// <summary>
         /// Classifies the 8-bit unsigned integer type
         /// </summary>
-        Int8u = Unsigned | W8,
+        Int8u = W8,
 
         /// <summary>
         /// Classifies the 16-bit unsigned integer type
         /// </summary>
-        Int16u = Unsigned | W16,
+        Int16u = W16,
 
         /// <summary>
         /// Classifies the 32-bit unsigned integer type
         /// </summary>
-        Int32u = Unsigned | W32,
+        Int32u = W32,
 
         /// <summary>
         /// Classifies the 64-bit unsigned integer type
         /// </summary>
-        Int64u = Unsigned | W64,
+        Int64u = W64,
 
         /// <summary>
         /// Classifies the 8-bit signed integer type

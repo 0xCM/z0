@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Defines fixed bit-width classifiers/identifiers
     /// </summary>
-    public enum FixedWidth : uint
+    public enum FixedWidth : ushort
     {
         /// <summary>
         /// Indicates the width is not fixed or is unknown

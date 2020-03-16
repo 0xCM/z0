@@ -8,10 +8,10 @@ namespace Z0
 
     using OC = OperationClass;
 
-    public enum OperationClassId : ulong
+    public enum OperationClassId : ushort
     {
         /// <summary>
-        /// The empty class
+        /// The identity that identifies nothing
         /// </summary>
         None = 0,
 
@@ -54,5 +54,10 @@ namespace Z0
         /// Classifer identity for functions that return a system boolean value or a bit value
         /// </summary>        
         Predicate = OC.Predicate,
+        
+        /// <summary>
+        /// Specifies the upper numeric bound for operaton class identity
+        /// </summary>        
+        LastIdentity = Predicate,
     }
 }

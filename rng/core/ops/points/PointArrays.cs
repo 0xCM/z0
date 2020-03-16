@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="X0">The domain of the first coordinate</typeparam>
         /// <typeparam name="X1">The domain of the second coordinate</typeparam>
         /// <typeparam name="X2">The domain of the third coordinate</typeparam>
-        public static HetPoints.Point<X0,X1,X2>[] PointArray<X0,X1,X2>(this IPolyrand random, int count, (X0 x0, X1 x1, X2 x2) t = default)
+        public static Point<X0,X1,X2>[] PointArray<X0,X1,X2>(this IPolyrand random, int count, (X0 x0, X1 x1, X2 x2) t = default)
             where X0 : unmanaged
             where X1 : unmanaged
             where X2 : unmanaged

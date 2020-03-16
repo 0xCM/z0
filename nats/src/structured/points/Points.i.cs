@@ -11,10 +11,6 @@ namespace Z0
 
     using static Root;
 
-    public interface IPointed
-    {
-        
-    }
 
     public interface IPoint
     {
@@ -24,7 +20,7 @@ namespace Z0
 
     public interface INatPoint<N,P,T> 
         where N : unmanaged, ITypeNat
-        where P : unmanaged, IPointed
+        where P : unmanaged
         where T : unmanaged
     {
 
@@ -33,55 +29,26 @@ namespace Z0
     }
 
 
-    public interface IPointed<X> : IPointed
-        where X : unmanaged, IPointed<X>
 
-    {
-        
-    }
-
-    public interface IPointed<X0,X1> : IPointed<X0>
-        where X0 : unmanaged, IPointed<X0>
-        where X1 : unmanaged, IPointed<X0,X1>
-    {
-
-    }
-
-    public interface IPointed<X0,X1,X2> : IPointed<X0,X2>
-        where X0 : unmanaged, IPointed<X0>
-        where X1 : unmanaged, IPointed<X0,X1>
-        where X2 : unmanaged, IPointed<X0,X1,X2>
-    {
-
-    }
-
-
-     public interface IPoint<X0> : IPoint
-        where X0 : unmanaged
+    public interface IPoint<X0> : IPoint
     {
 
 
     }
 
-     public interface IPoint<X0,X1> : IPoint
-        where X0 : unmanaged
-        where X1 : unmanaged
+    public interface IPoint<X0,X1> : IPoint
     {
 
 
     }
 
-     public interface IPoint<X0,X1,X3> : IPoint
-        where X0 : unmanaged
-        where X1 : unmanaged
-        where X3 : unmanaged
+    public interface IPoint<X0,X1,X3> : IPoint
     {
 
 
     }
 
-    public interface IPointCell<P> : IPointed, IFormattable<P>
-        where P : unmanaged, IPointed        
+    public interface IPointCell<P> : IFormattable<P>
     {
           
     }

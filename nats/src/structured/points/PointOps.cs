@@ -11,7 +11,6 @@ namespace Z0
 
     using static Root;
 
-    using Het = HetPoints;
 
     public static class PointOps
     {
@@ -36,7 +35,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => src;
 
-        public static PointSpanEmitter<X0,X1,R> Emitter<X0,X1,R>(this IEnumerable<Het.Point<X0,X1,R>> src)
+        public static PointSpanEmitter<X0,X1,R> Emitter<X0,X1,R>(this IEnumerable<Point<X0,X1,R>> src)
             where X0 : unmanaged
             where X1 : unmanaged
             where R : unmanaged

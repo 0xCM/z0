@@ -11,14 +11,14 @@ namespace Z0
     /// <summary>
     /// Applies to a generic type/method to advertise the types over which type parameter(s) may be closed
     /// </summary>
-    public class NumericClosuresAttribute : TypeClosuresAttribute
+    public class FixedClosuresAttribute : TypeClosuresAttribute
     {
-        public NumericClosuresAttribute(NumericKind nk)
-            : base((ulong)nk)
+        public FixedClosuresAttribute(FixedTypeKind fk)
+            : base((ulong)fk)
         {
-            this.NumericPrimitive = nk;
+            this.FixedKind = fk;
         }
 
-        public NumericKind NumericPrimitive {get;}
+        public FixedTypeKind FixedKind {get;}
     }
 }

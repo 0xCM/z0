@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="X0">The domain of the first coordinate</typeparam>
         /// <typeparam name="X1">The domain of the second coordinate</typeparam>
-        public static IEnumerable<HetPoints.Point<X0,X1>> PointStream<X0,X1>(this IPolyrand random,  (X0 x0, X1 x1) t = default)
+        public static IEnumerable<Point<X0,X1>> PointStream<X0,X1>(this IPolyrand random,  (X0 x0, X1 x1) t = default)
             where X0 : unmanaged
             where X1 : unmanaged
         {
@@ -79,7 +79,7 @@ namespace Z0
         /// <typeparam name="X0">The domain of the first coordinate</typeparam>
         /// <typeparam name="X1">The domain of the second coordinate</typeparam>
         /// <typeparam name="X2">The domain of the third coordinate</typeparam>
-        public static IEnumerable<HetPoints.Point<X0,X1,X2>> PointStream<X0,X1,X2>(this IPolyrand random,  (X0 x0, X1 x1, X2 x2) t = default)
+        public static IEnumerable<Point<X0,X1,X2>> PointStream<X0,X1,X2>(this IPolyrand random,  (X0 x0, X1 x1, X2 x2) t = default)
             where X0 : unmanaged
             where X1 : unmanaged
             where X2 : unmanaged

@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     
@@ -33,6 +30,10 @@ namespace Z0
             get => ref data[2];
         }
 
+        public static implicit operator HomPoint<N,T>(Point<T,T,T> src)
+            => new HomPoint<N,T>(src.x0, src.x1, src.x2);
+    
+
         [MethodImpl(Inline)]
         public static implicit operator HomPoint<N,T>(T x)
             => new HomPoint<N,T>(x);         
@@ -41,9 +42,8 @@ namespace Z0
         public static implicit operator HomPoint<N,T>((T x0, T x1) x)
             => new HomPoint<N,T>(x);         
 
-        [MethodImpl(Inline)]
-        public static implicit operator HomPoint<N,T>((T x0, T x1, T x2) x)
-            => new HomPoint<N,T>(x);         
+        public static implicit operator HomPoint<N,T>((T x0, T x1, T x2) src)
+            => new HomPoint<N,T>(src.x0, src.x1, src.x2);
 
         public int Dimension 
         {

@@ -9,7 +9,7 @@ namespace Z0
     using OC = OperationClass;
 
     [Flags]
-    public enum FunctionClass : ulong
+    public enum FunctionClass : ushort
     {
         /// <summary>
         /// The empty class

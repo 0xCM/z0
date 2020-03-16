@@ -32,6 +32,7 @@ namespace Z0
         }
     }
 
+
     /// <summary>
     ///  Characterizes a fixed type with storage and reification types of equal size
     /// </summary>
