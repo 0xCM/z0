@@ -13,14 +13,6 @@ namespace Z0
 
     using static Root;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 Emitter512V();
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512V UnaryOp512V(Fixed512V a);
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512V BinaryOp512V(Fixed512V a, Fixed512V b);
 
 
     [StructLayout(LayoutKind.Sequential)]

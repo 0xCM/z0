@@ -7,11 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
 
     public static class EnumX
     {
+        [MethodImpl(Inline)]
+        public static bool IsDefined<E>(this E e)
+            where E : unmanaged, Enum
+                => Enum.IsDefined(typeof(E), e);
+
         [MethodImpl(Inline)]
         public static bool IsSome<E>(this E src)        
             where E : unmanaged, Enum            
@@ -38,11 +44,15 @@ namespace Z0
                 => Enums.box(src);
 
         [MethodImpl(Inline)]
-        public static TypeCode TypeCode(this EnumKind k)
-            =>( System.TypeCode)k;
+        public static TypeCode TypeCode(this EnumValueCode k)
+            =>(System.TypeCode)k;
 
         [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this EnumKind k)
+        public static NumericKind NumericKind(this EnumValueCode k)
             => k.TypeCode().NumericKind();
+
+        public static EnumLiterals<E> ToIndex<E>(this IEnumerable<EnumLiteral<E>> src)
+            where E : unmanaged, Enum
+                => new EnumLiterals<E>(src.ToArray());
     }
 }

@@ -14,6 +14,8 @@ namespace Z0
     /// </summary>
     public enum UnaryBitLogicOpKind : byte
     {
+        None = 0,
+        
         /// <summary>
         /// The unary operator that always returns false
         /// </summary>

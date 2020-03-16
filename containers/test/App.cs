@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.ContainerTest)]
+
 namespace Z0
 {
     class App : TestApp<App>
@@ -12,8 +14,5 @@ namespace Z0
 
 namespace Z0.Resolutions
 {
-    public sealed class ContainerTest : AssemblyResolution<ContainerTest> 
-    {
-        public ContainerTest() : base(AssemblyId.ContainerTest) {} 
-    } 
+    public sealed class ContainerTest : AssemblyResolution<ContainerTest> { } 
 }

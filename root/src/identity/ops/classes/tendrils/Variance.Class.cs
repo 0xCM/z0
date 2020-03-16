@@ -8,7 +8,10 @@ namespace Z0
  
     public enum ParamVarianceClass
     {
-        None = 0, 
+        /// <summary>
+        /// The empty class
+        /// </summary>
+        None = 0,
 
         In = 1,
 

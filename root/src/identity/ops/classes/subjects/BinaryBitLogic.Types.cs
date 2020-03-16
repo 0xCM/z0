@@ -27,9 +27,9 @@ namespace Z0
     {        
         E Kind {get;}
 
-        string IBitLogicKind.Name => Kind.ToString().ToLower();        
-        
+        string IBitLogicKind.Name => Kind.ToString().ToLower();                
     }   
+
     // ~ Binary bitlogic
     // ~ ----------------------------------------------------------------------
 
@@ -66,7 +66,6 @@ namespace Z0
     public sealed class ImplAttribute : A { public ImplAttribute() : base(Impl) {} }
 
     public sealed class LNotAttribute : A { public LNotAttribute() : base(LNot) {} }
-
 
     public sealed class NotAttribute : A { public NotAttribute() : base(Not) {} }
 

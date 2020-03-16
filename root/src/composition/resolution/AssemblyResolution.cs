@@ -14,10 +14,10 @@ namespace Z0
     {
         protected AssemblyResolution()
         {
-            this.Id = 0;
+            this.Id = typeof(T).Assembly.Id();
         }
 
-        protected AssemblyResolution(AssemblyId id)
+        protected internal AssemblyResolution(AssemblyId id)
         {
             this.Id = id;   
         }
@@ -69,7 +69,6 @@ namespace Z0
         {
             
         }
-            
     }
 
     [Ignore]

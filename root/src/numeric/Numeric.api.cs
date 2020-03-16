@@ -18,7 +18,7 @@ namespace Z0
     using NI = NumericIndicator;
     using ID = NumericKindId;
 
-    [ApiHost("numeric")]
+    [ApiHost("numeric.api")]
     public static class Numeric
     {
         /// <summary>
@@ -82,6 +82,15 @@ namespace Z0
             => IntegralKinds.Union(FloatKinds);
 
         /// <summary>
+        /// Creates a parametric numeric comparer
+        /// </summary>
+        /// <typeparam name="T">The numeric type to compare</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static NumericComparer<T> comparer<T>()
+            where T : unmanaged
+                => NumericComparer.create<T>();
+
+        /// <summary>
         /// Creates the numeric sequence {0,1,...,count-1}
         /// </summary>
         /// <param name="count">The number of elements in the sequence</param>
@@ -125,9 +134,19 @@ namespace Z0
                 => kind_u<T>();
 
         /// <summary>
+        ///  Attempts to parse the source string as a numeric value
+        /// </summary>
+        /// <param name="src">The text to parse</param>
+        /// <typeparam name="T">The target numeric type</typeparam>
+        public static ParseResult<T> parse<T>(string src)
+            where T : unmanaged
+                 => Try(() => NumericParser.parse<T>(src)).MapValueOrElse(v => ParseResult.Success<T>(src, v), () => ParseResult.Fail<T>(src));
+
+        /// <summary>
         /// Determines the numeric kind identified by a type code, if any
         /// </summary>
         /// <param name="tc">The type code to evaluate</param>
+        [Op]
         public static NumericKind kind(TypeCode tc)
         {
             switch(tc)
@@ -342,13 +361,6 @@ namespace Z0
         public static int @int(FixedWidth src)
             => (int)src;
 
-        /// <summary>
-        /// Produces a canonical text representation of the source kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static string format(FixedWidth src)
-            => $"{@int(src)}";
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
@@ -469,6 +481,14 @@ namespace Z0
                     : kind(part)
                 select x;
 
+        /// <summary>
+        /// Produces a canonical text representation of the source kind
+        /// </summary>
+        /// <param name="src">The source kind</param>
+        [MethodImpl(Inline)]
+        public static string format(FixedWidth src)
+            => $"{@int(src)}";
+
         static HashSet<Type> CreateTypeset(NumericKind k)
             => GetKindset(k).Select(type).ToHashSet();         
 
@@ -508,6 +528,7 @@ namespace Z0
             
             return dst;
         }
+
 
         [MethodImpl(Inline)]
         static HashSet<NumericKind> GetKindset(NumericKind kind)

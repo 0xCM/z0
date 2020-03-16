@@ -23,13 +23,13 @@ namespace Z0.Logix
         /// Advertises the supported unary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<UnaryBitLogicOpKind> UnaryBitLogicKinds
-            => Enums.literals<UnaryBitLogicOpKind>();
+            => Enums.valarray<UnaryBitLogicOpKind>();
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<BinaryBitLogicOpKind> BinaryBitLogicKinds
-            => Enums.literals<BinaryBitLogicOpKind>();
+            => Enums.valarray<BinaryBitLogicOpKind>();
 
         /// <summary>
         /// Advertises the supported ternary bitlogic opeators
@@ -41,19 +41,19 @@ namespace Z0.Logix
         /// Advertises the supported unary arithmetic operators
         /// </summary>
         public static ReadOnlySpan<UnaryArithmeticKindId> UnaryAritmeticKinds
-            => Enums.literals<UnaryArithmeticKindId>();
+            => Enums.valarray<UnaryArithmeticKindId>();
 
         /// <summary>
         /// Advertises the supported binary arithmetic operators
         /// </summary>
         public static ReadOnlySpan<BinaryArithmeticKindId> BinaryArithmeticKinds
-            => Enums.literals<BinaryArithmeticKindId>();
+            => Enums.valarray<BinaryArithmeticKindId>();
 
         /// <summary>
         /// Advertises the supported comparison operators
         /// </summary>
         public static ReadOnlySpan<ComparisonOpKindId> ComparisonKinds
-            => Enums.literals<ComparisonOpKindId>();
+            => Enums.valarray<ComparisonOpKindId>();
 
 
         [Op, NumericClosures(NumericKind.Integers)]

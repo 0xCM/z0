@@ -30,10 +30,5 @@ namespace Z0
 
     }
 
-    public interface IMonoidalWord<W,A> : IFreeMonoid<W>, ISymbolic
-        where A : struct, IAlphabet<A>
-        where W : struct, IMonoidalWord<W,A>, IFreeMonoid<W>
-    {
 
-    }
 }

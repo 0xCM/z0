@@ -23,13 +23,13 @@ namespace Z0.Logix
         /// Advertises the supported unary opeators
         /// </summary>
         public static ReadOnlySpan<UnaryBitLogicOpKind> UnaryOpKinds
-            => Enums.literals<UnaryBitLogicOpKind>();
+            => Enums.valarray<UnaryBitLogicOpKind>();
 
         /// <summary>
         /// Advertises the supported binary opeators
         /// </summary>
         public static ReadOnlySpan<BinaryBitLogicOpKind> BinaryOpKinds
-            => Enums.literals<BinaryBitLogicOpKind>();
+            => Enums.valarray<BinaryBitLogicOpKind>();
          
         /// <summary>
         /// Advertises the supported ternary opeators

@@ -18,7 +18,7 @@ partial class zfunc
     /// <param name="f">The receiver</param>
     /// <typeparam name="T">The item type</typeparam>
     public static void iter<T>(IEnumerable<T> items, Action<T> action, bool pll = false)
-        => Root.iter(items,action,pll);
+        => Root.iter(items,action,pll);        
 
     /// <summary>
     /// Aplies an action to the sequence of integers min,min+1,...,max - 1

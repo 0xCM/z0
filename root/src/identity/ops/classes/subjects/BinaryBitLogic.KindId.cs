@@ -10,6 +10,11 @@ namespace Z0
 
     public enum BinaryBitLogicKindId : ulong
     {
+        /// <summary>
+        /// The empty identity
+        /// </summary>
+        None = 0,
+        
         False = Id.False,
 
         And = Id.And,

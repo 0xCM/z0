@@ -121,23 +121,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static FixedType<F> kind<F>(F f = default)
-            where F : unmanaged, IFixed
-                => default;
-
-        [MethodImpl(Inline)]
-        public static FixedNumeric<F,T> numeric<F,T>(F f = default, T t = default)
-            where F : unmanaged, IFixedNumeric<T>
-            where T : unmanaged
-                => default; 
-
-        [MethodImpl(Inline)]
-        public static ref readonly F From<T,F>(in T src)
+        public static ref readonly F from<T,F>(in T src)
             where F : unmanaged, IFixed
             where T : struct
                 => ref Unsafe.As<T,F>(ref  Unsafe.AsRef(in src));
-
         
+        [MethodImpl(Inline)]
+        public static ref readonly F from<T,F>(in Vector128<T> src)
+            where F : unmanaged, IFixed
+            where T : struct
+                => ref from<Vector128<T>,F>(in src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly F from<T,F>(in Vector256<T> src)
+            where F : unmanaged, IFixed
+            where T : struct
+                => ref from<Vector256<T>,F>(in src);
+
         [MethodImpl(Inline)]
         static unsafe void store<S,T>(in S src, int bytecount, ref T dst)
             where S : unmanaged

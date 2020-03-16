@@ -10,6 +10,9 @@ namespace Z0
 
     public enum OperationClassId : ulong
     {
+        /// <summary>
+        /// The empty class
+        /// </summary>
         None = 0,
 
         /// <summary>

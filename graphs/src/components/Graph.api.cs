@@ -27,7 +27,7 @@ namespace Z0
         public static Graph<V,T> define<V,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
             where V : unmanaged
             where T : unmanaged
-                => new Graph<V,T>(vertices.OrderBy(x => x.Index, PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
+                => new Graph<V,T>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
 
         /// <summary>
         /// Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted
@@ -53,7 +53,7 @@ namespace Z0
 
         public static Graph<V> define<V>(IEnumerable<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
             where V : unmanaged
-                => new Graph<V>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
+                => new Graph<V>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
         
         public static Graph<V> define<V>(params Edge<V>[] edges)
             where V : unmanaged
@@ -66,7 +66,7 @@ namespace Z0
             where V : unmanaged
             where W : unmanaged
             where T : unmanaged
-                => new Graph<V,W,T>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
+                => new Graph<V,W,T>(vertices.OrderBy(x => x.Index, Numeric.comparer<V>()).ToArray(), edges.ToArray());
 
         /// <summary>
         /// Defines an edge from an index-identified source to an index identified target

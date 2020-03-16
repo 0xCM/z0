@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: AssemblyId(AssemblyId.GraphTest)]
+
 namespace Z0
 {
     class App : TestApp<App>
@@ -14,6 +16,6 @@ namespace Z0.Resolutions
 {
     public sealed class GraphTest : AssemblyResolution<GraphTest> 
     {
-        public GraphTest() : base(AssemblyId.GraphTest) {} 
+
     } 
 }

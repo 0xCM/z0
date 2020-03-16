@@ -12,34 +12,41 @@ namespace Z0
 
     using static Root;
 
+    public readonly struct EnumValue
+    {
+        public static EnumValue<E,V> Define<E,V>(EnumLiteral<E> literal, V value)
+        where E : unmanaged, Enum
+        where V : unmanaged
+            => new EnumValue<E,V>(literal,value);
+
+    }
+
     public readonly struct EnumValue<E,V>
         where E : unmanaged, Enum
         where V : unmanaged
     {
-        public readonly int Index;
+        
+        readonly EnumLiteral<E> Literal;
 
-        public readonly E Enum;
+        public readonly V NumericValue;
 
-        public readonly V Value;
+        public E LiteralValue => Literal.Value;
+
+        public int Index => Literal.Index;
 
         [MethodImpl(Inline)]
-        public static implicit operator EnumValue<E,V>((int i, E e, V v) src)
-            => new EnumValue<E,V>(src.i, src.e,src.v);
-
-        [MethodImpl(Inline)]
-        internal EnumValue(int i, E e, V v)
+        internal EnumValue(EnumLiteral<E> literal, V v)
         {
-            this.Index = i;
-            this.Enum = e;
-            this.Value = v;    
+            this.Literal = literal;
+            this.NumericValue = v;    
         }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out int i, out E e, out V v)
         {
             i = Index;
-            e = Enum;
-            v = Value;
+            e = LiteralValue;
+            v = NumericValue;
         }
     }
 
@@ -79,7 +86,7 @@ namespace Z0
         IEnumerator IEnumerable.GetEnumerator()
             => values.GetEnumerator();
 
-        public LiteralIndices<E> Indices
-            => Enums.indices<E>();
+        public EnumLiterals<E> Indices
+            => Enums.literals<E>();
     }
 }

@@ -12,10 +12,8 @@ namespace Z0
 
     using static Root;
 
-    using OC = OperationClass;
     using static OperatorClass;
     
-
     public static class OperationClassOps
     {
         /// <summary>
@@ -78,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         public static IEnumerable<MethodInfo> WithArityClass(this IEnumerable<MethodInfo> src)
-            => from m in src where m.ClassifyArity().IsSome() select m;
+            => from m in src where m.ClassifyArity() != 0 select m;
 
         /// <summary>
         /// Queries the stream for methods with a specified measure classification
@@ -141,7 +139,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         public static IEnumerable<MethodInfo> WithOperatorClass(this IEnumerable<MethodInfo> src)
-            => from m in src where m.ClassifyOperator().IsSome() select m;
+            => from m in src where m.ClassifyOperator() != 0 select m;
 
         /// <summary>
         /// Queries the stream for methods with a specified operator classification
@@ -189,6 +187,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         public static IEnumerable<MethodInfo> WithPredicateClass(this IEnumerable<MethodInfo> src)
-            => from m in src where m.ClassifyPredicate().IsSome() select m; 
+            => from m in src where m.ClassifyPredicate() != 0 select m; 
     }
 }

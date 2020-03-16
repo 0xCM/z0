@@ -37,7 +37,7 @@ namespace Z0
         
         public bool IsComplete
         {
-            get => Scheme.IsSome() && !HostPath.IsEmpty && text.nonempty(GroupName) && OpId.IsNonEmpty;
+            get => Scheme != 0 && !HostPath.IsEmpty && text.nonempty(GroupName) && OpId.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]

@@ -15,7 +15,8 @@ namespace Z0.Asm.Validation
     using static Root;
     using static Nats;
     using static time;
-    using static NKT;
+    using static NumericKinds;
+    
 
     public class AsmChecks : IAsmChecks
     {
@@ -402,7 +403,7 @@ namespace Z0.Asm.Validation
             return CheckAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, NumericTypeKind<byte> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, U8 kind)
         {
             var results = list<TestCaseRecord>();
             var w = n8;
@@ -421,7 +422,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericTypeKind<sbyte> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, 
+            I8 kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -441,7 +443,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, in ApiCode dCode, in ApiCode gCode, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, NumericTypeKind<sbyte> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, in ApiCode dCode, in ApiCode gCode, 
+            Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, I8 kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -462,7 +465,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, NumericTypeKind<ushort> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, 
+            Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, U16 kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -483,7 +487,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<short,short,short> primal, Func<short,short,short> generic, NumericTypeKind<short> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, 
+            Func<short,short,short> primal, Func<short,short,short> generic, I16 kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -503,7 +508,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, NumericTypeKind<uint> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, 
+            Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, U32 kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -523,7 +529,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<int,int,int> primal, Func<int,int,int> generic, NumericTypeKind<int> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, 
+            Func<int,int,int> primal, Func<int,int,int> generic, I32 kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -543,7 +550,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<long,long,long> primal, Func<long,long,long> generic, NumericTypeKind<long> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, 
+            Func<long,long,long> primal, Func<long,long,long> generic, I64 kind)
         {            
             var results = list<TestCaseRecord>();
 
@@ -563,7 +571,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, NumericTypeKind<ulong> kind)
+        protected TestCaseRecord[] megacheck(in AsmBuffers buffers, string name, 
+            BinaryOp<ulong> primal, BinaryOp<ulong> generic, U64 kind)
         {            
             var results = list<TestCaseRecord>();
 

@@ -8,7 +8,7 @@ namespace Z0.Resolutions
 {
     public sealed class CoreFunc : AssemblyResolution<CoreFunc>
     {
-        public CoreFunc() : base(AssemblyId.CoreFunc) {}
+        
                 
     }
 }

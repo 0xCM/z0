@@ -121,19 +121,6 @@ namespace Z0
                 yield return (i, (T)Convert.ChangeType(literals[i].GetValue(null), typeof(T)));
         }
 
-        /// <summary>
-        /// Enumerates the literals defined by a type indexed by declaration order
-        /// </summary>
-        /// <param name="src">The source type</param>
-        /// <param name="declared">Whether a literal is rquired to be declared by the type</param>
-        public static IEnumerable<(int index, T value)> LiteralValues<T>(this Type src, int? maxcount = null)  
-            where T : unmanaged  
-        {
-            var literals = src.LiteralFields().ToArray();
-            var count = Math.Min(maxcount ?? literals.Length, literals.Length);
-            for(var i=0; i<count; i++)
-                yield return (i, (T)Convert.ChangeType(literals[i].GetValue(null), typeof(T)));
-        }
 
     }
 }

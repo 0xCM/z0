@@ -13,6 +13,6 @@ namespace Z0.Resolutions
 {        
     public sealed class RngCoreTest : AssemblyResolution<RngCoreTest>
     {
-        public RngCoreTest() : base(AssemblyId.RngTest){}
+        
     }
 }

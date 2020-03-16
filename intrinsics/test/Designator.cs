@@ -8,6 +8,6 @@ namespace Z0.Resolutions
 {
     public sealed class IntrinsicsTest : AssemblyResolution<IntrinsicsTest> 
     {
-         public IntrinsicsTest() : base(AssemblyId.IntrinsicsTest) {} 
+         
     }
 }

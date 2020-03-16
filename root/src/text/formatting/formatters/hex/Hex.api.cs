@@ -193,7 +193,7 @@ namespace Z0
         }
 
         static string clean(string src)
-            => src.Remove("0x").RemoveAny(AsciLower.h);
+            => src.Remove("0x").RemoveAny('h');
 
         /// <summary>
         /// Parses the Hex digit if possible; otherwise raises an error

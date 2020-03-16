@@ -11,15 +11,6 @@ namespace Z0
 
     using static Root;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed32 Emitter32();
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed32 UnaryOp32(Fixed32 a);
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed32 BinaryOp32(Fixed32 a, Fixed32 b);
-
     public struct Fixed32 : IFixedNumeric<Fixed32,uint>, IEquatable<Fixed32>
     {
         public const int BitWidth = 32;        
@@ -124,41 +115,4 @@ namespace Z0
         public override string ToString() 
             => X0.ToString();
     }
-
-    partial class FixedNumericOps
-    {
-        [MethodImpl(Inline)]
-        public static Fixed32 ToFixed(this int src)
-            => src;
-
-        [MethodImpl(Inline)]
-        public static Fixed32 ToFixed(this uint src)
-            => src;
-
-        [MethodImpl(Inline)]
-        public static UnaryOp32 ToFixed(this Func<uint,uint> f)
-            => (Fixed32 a) =>f(a.Data);
-
-        [MethodImpl(Inline)]
-        public static UnaryOp32 ToFixed(this Func<int,int> f)
-            => (Fixed32 a) =>f((int)a.Data);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp32 ToFixed(this Func<int,int,int> f)
-            => (Fixed32 a, Fixed32 b) =>f((int)a.Data, (int)b.Data);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp32 ToFixed(this Func<uint,uint,uint> f)
-            => (Fixed32 a, Fixed32 b) =>f(a.Data, b.Data);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp32 ToFixedBinOp(this MethodInfo f, NumericTypeKind<uint> k)
-            => f.CreateDelegate<Func<uint,uint,uint>>().ToFixed();
-
-        [MethodImpl(Inline)]
-        public static BinaryOp32 ToFixedBinOp(this MethodInfo f, NumericTypeKind<int> k)
-            => f.CreateDelegate<Func<int,int,int>>().ToFixed();
-
-    }
-
 }

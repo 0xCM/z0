@@ -17,17 +17,17 @@ namespace Z0
         /// <summary>
         /// When enabled, indicates a signed integral type
         /// </summary>
-        Signed = NumericClass.Signed,
+        Signed = 1u << 31,
 
         /// <summary>
         /// When enabled, indicates a floating-point type
         /// </summary>
-        Float = NumericClass.Float,
+        Float = 1u << 30,
 
         /// <summary>
         /// When enabled, indicates an unsigned integral type
         /// </summary>
-        Unsigned = NumericClass.Unsigned,
+        Unsigned = 1u << 29,
 
         /// <summary>
         /// Identifies an unsigned 8-bit integral type

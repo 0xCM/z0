@@ -375,14 +375,6 @@ namespace Z0
         public static string remove(string text, string substring)
             => text.Replace(substring, String.Empty);
 
-        /// <summary>
-        /// Defines a symbol
-        /// </summary>
-        /// <param name="name">The name of the symbol</param>
-        /// <param name="description">Formal or informal description depending on context/needs</param>
-        [MethodImpl(Inline)]   
-        public static Symbol symbol(string name)
-            => new Symbol(name);
 
         /// <summary>
         /// Encloses the potential text in quotation marks
@@ -398,13 +390,6 @@ namespace Z0
         public static string format(object first, params object[] rest)
             => first.ToString() + concat(rest.Select(x => x.ToString()));
         
-        /// <summary>
-        /// Constructs a depiction of the empty set, {∅}
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static string emptyset()
-            => embrace(MathSym.EmptySet.ToString());
-
         /// <summary>
         /// Returns the substring [0,chars-1]
         /// </summary>

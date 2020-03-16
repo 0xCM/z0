@@ -11,6 +11,9 @@ namespace Z0
     [Flags]
     public enum FunctionClass : ulong
     {
+        /// <summary>
+        /// The empty class
+        /// </summary>
         None = 0,
 
         Emitter = OC.Emitter,

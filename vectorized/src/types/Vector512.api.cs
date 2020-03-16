@@ -20,7 +20,7 @@ namespace Z0
         public static ref readonly F ToFixed<T,F>(this in Vector512<T> src)
             where F : unmanaged, IFixed
             where T : unmanaged
-                => ref Fixed.From<Vector512<T>,F>(in src);
+                => ref Fixed.from<Vector512<T>,F>(in src);
 
         [MethodImpl(Inline)]
         public static Vector512<T> ToVector<T>(this in Fixed512 src)

@@ -19,7 +19,7 @@ namespace Z0
         public static Option<ulong> ParseHex(string src)
         {            
             static string clean(string src)
-                => src.Remove("0x").RemoveAny(AsciLower.h);            
+                => src.Remove("0x").RemoveAny('h');            
 
             if(ulong.TryParse(clean(src), NumberStyles.HexNumber, null,  out ulong value))
                 return value;

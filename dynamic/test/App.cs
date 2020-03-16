@@ -16,9 +16,5 @@ namespace Z0
 
 namespace Z0.Resolutions
 {        
-    public sealed class DynamicTest : AssemblyResolution<DynamicTest>
-    {
-        public DynamicTest() : base(AssemblyId.DynamicTest) {}
-
-    }
+    public sealed class DynamicTest : AssemblyResolution<DynamicTest> { }
 }

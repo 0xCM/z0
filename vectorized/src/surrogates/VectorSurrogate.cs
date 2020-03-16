@@ -14,98 +14,120 @@ namespace Z0
 
     using static Z0.Root;
 
+    [ApiHost("vsurrogates")]
     public static partial class VectorSurrogates
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128<T> define<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128<T>(src);
         
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static V128x8u define(Vector128<byte> src)
             => new V128x8u(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static V128x8i define(Vector128<sbyte> src)
             => new V128x8i(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static V128x16i define(Vector128<short> src)
             => new V128x16i(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static V128x16u define(Vector128<ushort> src)
             => new V128x16u(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static V128x32i define(Vector128<int> src)
             => new V128x32i(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static V128x32u define(Vector128<uint> src)
             => new V128x32u(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static V128x64i define(Vector128<long> src)
             => new V128x64i(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static V128x64u define(Vector128<ulong> src)
             => new V128x64u(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
+        public static V128x32f define(Vector128<float> src)
+            => new V128x32f(src);
+
+        [MethodImpl(Inline), Op]
+        public static V128x64f define(Vector128<double> src)
+            => new V128x64f(src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V256<T> define<T>(Vector256<T> src)
             where T : unmanaged
                 => new V256<T>(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128x8u v8u<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128x8u(vgeneric.v8u(src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128x8i v8i<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128x8i(vgeneric.v8i(src));
         
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128x16i v16i<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128x16i(vgeneric.v16i(src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128x16u v16u<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128x16u(vgeneric.v16u(src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128x32i v32i<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128x32i(vgeneric.v32i(src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128x32u v32u<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128x32u(vgeneric.v32u(src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128x64i v64i<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128x64i(vgeneric.v64i(src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static V128x64u v64u<T>(Vector128<T> src)
             where T : unmanaged
                 => new V128x64u(vgeneric.v64u(src));
 
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static V128x32f v32f<T>(Vector128<T> src)
+            where T : unmanaged
+                => new V128x32f(vgeneric.v32f(src));
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static V128x64f v64f<T>(Vector128<T> src)
+            where T : unmanaged
+                => new V128x64f(vgeneric.v64f(src));
+
+        [Op, NumericClosures(NumericKind.All)]
         public static IEnumerable<V128<T>> stream<T>(IEnumerable<Vector128<T>> src)
             where T : unmanaged
                 => src.Select(define);
 
+        [Op, NumericClosures(NumericKind.All)]
         public static IEnumerable<V256<T>> stream<T>(IEnumerable<Vector256<T>> src)
             where T : unmanaged
                 => src.Select(define);        
 
+        [Op, NumericClosures(NumericKind.All)]
         public static IVec128 Convert<T>(IVec128<T> src, NumericKind dst)
             where T : unmanaged
                 => dst switch{
@@ -117,6 +139,8 @@ namespace Z0
                     NumericKind.I32 => v32u(src.Vector<T>()),
                     NumericKind.U64 => v64i(src.Vector<T>()),
                     NumericKind.I64 => v64u(src.Vector<T>()),
+                    NumericKind.F32 => v32f(src.Vector<T>()),
+                    NumericKind.F64 => v64f(src.Vector<T>()),
                     _ => src,
                 };
     }

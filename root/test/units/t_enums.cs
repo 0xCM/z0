@@ -6,8 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
-    using static zfunc;
+    using static Root;
 
     public sealed class t_enums : UnitTest<t_enums>
     {
@@ -32,18 +34,40 @@ namespace Z0
 
             for(var i = 0; i<values.Length; i++)
             {
-                var ival = values[i].Value;
+                var ival = values[i].NumericValue;
                 if(ival == byte.MaxValue)
                     break;
 
                 var member = Enums.literal<Choices32i,int>(ival);
-                Claim.eq(member, values[i].Enum);
+                Claim.eq(member, values[i].LiteralValue);
 
                 var expect = (int)Math.Pow(2,i);
                 if(expect != ival)
                     Notify($"{values[i]} = {ival} != {expect}");
                 Claim.eq(expect, ival);                            
             }
+        }
+
+        public void check_literal_correlation()
+        {
+            var first = Enums.literals<BinaryBitLogicKindId>();
+            var second = Enums.literals<BinaryBitLogicOpKind>();            
+            if(first.Length != second.Length)
+            {
+                var firstNames = first.NamedValues.Names();
+                var secondNames = second.NamedValues.Names();
+                var q1 = from n in firstNames where !secondNames.Contains(n) select n;
+                var q2 = from n in secondNames where !firstNames.Contains(n) select n;
+
+                iter(q2, n => Notify($"Missing from first: {n}"));
+                iter(q1, n => Notify($"Missing from second: {n}"));
+            }
+
+            var correlated = Enums.correlate<BinaryBitLogicKindId, BinaryBitLogicOpKind>();
+
+            Claim.eq(correlated.Count, first.Length);
+
+            iter(correlated, (k,v) => Notify(v.Format()));
         }
     }
 }

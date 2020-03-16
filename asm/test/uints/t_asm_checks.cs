@@ -16,7 +16,6 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
-    using static NKT;
 
     public class t_asm_checks : t_asm<t_asm_checks>
     {                   
@@ -151,9 +150,6 @@ namespace Z0
             foreach(var d in Data.Resources)
                 Claim.eq(d.Location, ptr(d.GetBytes()));
         }
-
-
-
        
     }
 }

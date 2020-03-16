@@ -8,6 +8,6 @@ namespace Z0.Resolutions
 {
     public sealed class PermuteTest : AssemblyResolution<PermuteTest> 
     {
-         public PermuteTest() : base(AssemblyId.PermuteTest) {} 
+         
     }
 }

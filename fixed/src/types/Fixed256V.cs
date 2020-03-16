@@ -12,14 +12,8 @@ namespace Z0
 
     using static Root;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256V Emitter256V();
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256V UnaryOp256V(Fixed256V a);
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256V BinaryOp256V(Fixed256V a, Fixed256V b);
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Fixed256V : IFixed<Fixed256V>, IEquatable<Fixed256V>

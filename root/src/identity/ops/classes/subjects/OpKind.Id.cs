@@ -11,6 +11,9 @@ namespace Z0
     /// </summary>
     public enum OpKindId : ulong
     {
+        /// <summary>
+        /// The empty identity
+        /// </summary>
         None = 0,
 
         False = 1,

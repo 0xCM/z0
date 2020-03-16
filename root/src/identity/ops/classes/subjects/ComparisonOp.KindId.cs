@@ -14,6 +14,11 @@ namespace Z0
     public enum ComparisonOpKindId : ulong
     {        
         /// <summary>
+        /// The empty identity
+        /// </summary>
+        None = 0,
+        
+        /// <summary>
         /// Classifies a binary operator that returns true iff its operands are equal
         /// </summary>
         Eq = Id.Eq,

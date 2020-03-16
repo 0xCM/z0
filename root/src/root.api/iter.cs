@@ -10,8 +10,7 @@ namespace Z0
     using System.Linq;
 
     partial class Root
-    {
-            
+    {            
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each
         /// </summary>
@@ -67,5 +66,18 @@ namespace Z0
             while(it.MoveNext())
                 action(index++, it.Current);
         }        
+
+        /// <summary>
+        /// Invokes a handler for each key-value pair in the source
+        /// </summary>
+        /// <param name="items">The source items</param>
+        /// <param name="action">The hanlder</param>
+        /// <typeparam name="K">The key type</typeparam>
+        /// <typeparam name="V">The value type</typeparam>
+        public static void iter<K,V>(IEnumerable<KeyValuePair<K,V>> items, Action<K,V> action)
+        {
+            foreach(var kvp in items)
+                action(kvp.Key, kvp.Value);
+        }
     }
 }

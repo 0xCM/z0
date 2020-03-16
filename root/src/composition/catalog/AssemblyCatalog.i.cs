@@ -47,7 +47,7 @@ namespace Z0
         /// Specifies whether the catalog contains content from an identifid assembly
         /// </summary>
         bool IsIdentified
-            => AssemblyId.IsSome();
+            => AssemblyId != 0;
 
         /// <summary>
         /// Specifies the number of api hosts described by the catalog

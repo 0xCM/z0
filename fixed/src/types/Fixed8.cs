@@ -11,16 +11,6 @@ namespace Z0
 
     using static Root;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed8 Emitter8();
-
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed8 UnaryOp8(Fixed8 a);
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed8 BinaryOp8(Fixed8 a, Fixed8 b);
-
     public struct Fixed8 : IFixedNumeric<Fixed8, byte>, IEquatable<Fixed8>
     {
         public const int BitWidth = 8;
@@ -111,40 +101,5 @@ namespace Z0
         
         public override string ToString() 
             => X0.ToString();
-    }
-
-    partial class FixedNumericOps
-    {
-        [MethodImpl(Inline)]
-        public static Fixed8 ToFixed(this byte src)
-            => src;
-
-        [MethodImpl(Inline)]
-        public static Fixed8 ToFixed(this sbyte src)
-            => src;
-
-        [MethodImpl(Inline)]
-        public static UnaryOp8 ToFixed(this Func<byte,byte> f)
-            => (Fixed8 a) =>f(a.Data);
-
-        [MethodImpl(Inline)]
-        public static UnaryOp8 ToFixed(this Func<sbyte,sbyte> f)
-            => (Fixed8 a) =>f((sbyte)a.Data);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp8 ToFixed(this Func<sbyte,sbyte,sbyte> f)
-            => (Fixed8 a, Fixed8 b) =>f((sbyte)a.Data, (sbyte)b.Data);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp8 ToFixed(this Func<byte,byte,byte> f)
-            => (Fixed8 a, Fixed8 b) =>f(a.Data, b.Data);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp8 ToFixedBinOp(this MethodInfo f, NumericTypeKind<byte> k)
-            => f.CreateDelegate<Func<byte,byte,byte>>().ToFixed();
-
-        [MethodImpl(Inline)]
-        public static BinaryOp8 ToFixedBinOp(this MethodInfo f, NumericTypeKind<sbyte> k)
-            => f.CreateDelegate<Func<sbyte,sbyte,sbyte>>().ToFixed();
     }
 }

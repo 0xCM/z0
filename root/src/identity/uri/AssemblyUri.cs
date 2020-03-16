@@ -39,7 +39,7 @@ namespace Z0
         AssemblyUri(AssemblyId id)
         {
             this.Id = id;
-            this.Identifier = id.IsSome() ? id.Format() : text.blank;
+            this.Identifier = id != 0 ? id.Format() : text.blank;
         }
 
         [MethodImpl(Inline)]

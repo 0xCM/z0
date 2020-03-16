@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
     using static Root;
 
     /// <summary>
@@ -24,4 +26,18 @@ namespace Z0
         
     }
 
+    public interface INumericKindType : ITypeKind<NumericKind>,  IIdentity<NumericKindType>
+    {
+        
+    }
+
+    public interface INumericKindType<T> : INumericKindType, ITypeKind<NumericKind>, IFixedWidth
+        where T : unmanaged
+    {
+        FixedWidth IFixedWidth.FixedWidth => (FixedWidth)bitsize<T>();            
+
+        NumericKind NumericKind { [MethodImpl(Inline)] get=> Numeric.kind<T>();}
+
+        string IIdentity.Identifier => Numeric.kind<T>().Format();
+    }
 }

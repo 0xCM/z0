@@ -12,7 +12,7 @@ namespace Z0
     public enum PredicateClass : ulong
     {
         /// <summary>
-        /// The empty classifier
+        /// The empty class
         /// </summary>        
         None = 0,
        

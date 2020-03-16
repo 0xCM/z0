@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
 
-    using static Root;
-
     using TC = System.TypeCode;
 
-    public enum EnumKind : byte
+    /// <summary>
+    /// Defines type-code equivalent identifiers for valid numeric enumeration types
+    /// </summary>
+    public enum EnumValueCode : byte
     {
         None = 0,
 

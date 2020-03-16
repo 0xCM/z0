@@ -172,6 +172,8 @@ public enum AssemblyId : ulong
 
     PermuteTest = Permute | Test,
     
+    Symbolic = 410,
+
     Control = 1000,        
 
     Svc = T16,

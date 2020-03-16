@@ -76,7 +76,6 @@ namespace Z0
                 return range64u(x0,x1,step);
             else
                 return range_3(x0,x1,step);
-
         }
 
         [MethodImpl(Inline)]

@@ -6,11 +6,27 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
     
     using static Root;
     
+    public static class NamedValue
+    {
+        [MethodImpl(Inline)]
+        public static NamedValue<V> Define<V>(string name, V value)
+            => new NamedValue<V>(name,value);
+
+        public static IDictionary<string,V> ToDictionary<V>(this IEnumerable<NamedValue<V>> src)
+            => src.Select(x => (x.Name, x.Value)).ToDictionary();
+
+        public static HashSet<string> Names<V>(this IEnumerable<NamedValue<V>> src)
+            => src.Select(x => x.Name).ToHashSet();
+
+    }
+
     /// <summary>
-    /// Confers a name onto a value
+    /// Names a value
     /// </summary>
     public readonly struct NamedValue<V> 
     {

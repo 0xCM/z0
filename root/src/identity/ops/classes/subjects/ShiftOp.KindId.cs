@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Root;
 
     using Id = OpKindId;
 
@@ -15,7 +12,12 @@ namespace Z0
     /// Classifies bitwise shift operators
     /// </summary>
     public enum ShiftOpKindId : ulong
-    {
+    {    
+        /// <summary>
+        /// The empty identity
+        /// </summary>
+        None = 0,
+
         /// <summary>
         /// Classifies a logical left-shift
         /// </summary>

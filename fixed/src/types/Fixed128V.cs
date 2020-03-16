@@ -12,15 +12,6 @@ namespace Z0
 
     using static Root;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128V Emitter128V();
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128V UnaryOp128V(Fixed128V a);
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128V BinaryOp128V(Fixed128V a, Fixed128V b);
-
     [StructLayout(LayoutKind.Sequential)]
     public struct Fixed128V : IFixed<Fixed128V>, IEquatable<Fixed128V>, IFormattable<Fixed128V>
     {
@@ -117,28 +108,5 @@ namespace Z0
         
         public override string ToString() 
             => Format();
-    }
-
-    partial class FixedVectorOps
-    {
-        [MethodImpl(Inline)]
-        public static Vector128<T> ToVector<T>(this in Fixed128V src)
-            where T : unmanaged
-                => src.data.As<ulong,T>();
-
-        [MethodImpl(Inline)]
-        public static Fixed128V ToFixedV<T>(this Vector128<T> x)
-            where T : unmanaged
-                => Fixed128V.From(x);
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> Apply<T>(this UnaryOp128V f, Vector128<T> x)
-            where T : unmanaged
-                => f(x.ToFixedV()).ToVector<T>();
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> ApplyV<T>(this BinaryOp128 f, Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-                => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
     }
 }

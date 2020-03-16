@@ -409,11 +409,11 @@ namespace Z0
                     if(configured.LineLabels)
                     {
                         builder.Append(i.FormatHex(true,false,false,true));
-                        builder.Append(AsciLower.h);
+                        builder.Append('h');
                         builder.Append(AsciSym.Space);
 
                         line.Append(i.FormatHex(true,false,false,true));
-                        line.Append(AsciLower.h);
+                        line.Append('h');
                         line.Append(AsciSym.Space);
                     }
                 }

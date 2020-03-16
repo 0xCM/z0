@@ -63,13 +63,13 @@ namespace Z0
     {
 
         int FieldCount 
-            => Enums.literals<F>().Length;
+            => Enums.valarray<F>().Length;
                 
         string[] FieldNames
             => Enums.names<F>();
         
-        LiteralIndices<F> FieldIndices
-            => Enums.indices<F>();
+        EnumLiterals<F> FieldIndices
+            => Enums.literals<F>();
 
         EnumValues<F,int> FieldWidths
             => Enums.values<F,int>();

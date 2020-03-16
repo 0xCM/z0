@@ -13,15 +13,6 @@ namespace Z0
 
     using static Root;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 Emitter512();
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 UnaryOp512(Fixed512 a);
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed512 BinaryOp512(Fixed512 a, Fixed512 b);
-
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Fixed512  : IFixed<Fixed512>

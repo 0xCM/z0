@@ -27,7 +27,7 @@ namespace Z0
         public static TypedOperatorClass Infer(MethodInfo src)
         {
             var c = src.ClassifyOperator();
-            if(c.IsSome())
+            if(c != 0)
                 return Define(src.ReturnType,c);
             else
                 return None;

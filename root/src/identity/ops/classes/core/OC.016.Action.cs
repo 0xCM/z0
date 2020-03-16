@@ -12,8 +12,8 @@ namespace Z0
     public enum ActionClass : ulong
     { 
         /// <summary>
-        /// The empty classifier
-        /// </summary>        
+        /// The empty class
+        /// </summary>
         None = 0,
 
         /// <summary>

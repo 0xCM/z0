@@ -12,12 +12,17 @@ namespace Z0
     public enum BinaryBitLogicOpKind : byte
     {         
         /// <summary>
+        /// The empty identity which, unfortunately conflicts with the inescapable defintion of 'False'
+        /// </summary>
+        None = 0b000,
+
+        /// <summary>
         /// Classifies a logical  binary operator false(a,b) := bv(0000)
         /// </summary>
         /// <remarks>
         /// bv(0000) = id(True)
         /// </remarks>
-        False = 0b0000,
+        False = 0b000,
 
         /// <summary>
         /// Classifies a logical binary operator and(a,b) := bv(1000)

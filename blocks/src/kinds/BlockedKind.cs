@@ -11,6 +11,7 @@ namespace Z0
     using static Root;    
     using static NumericSegmentKind;
     using static FixedWidth;
+    using NK = NumericKind;
 
     /// <summary>
     /// Clasifies concrete storage blocks of total width w over segments of width t and sign indicator s where:
@@ -278,4 +279,63 @@ namespace Z0
         /// </summary>
         b512x64f = W512 | Seg64f,         
     }
+
+
+     /// <summary>
+    /// Identifies the types over which segmented types can close
+    /// </summary>
+    public enum NumericSegmentKind  : uint
+    {
+        None = 0,
+
+        /// <summary>
+        /// A block defined over 8-bit unsigned segments
+        /// </summary>
+        Seg8u = PrimitiveId.U8 | NK.Unsigned,
+
+        /// <summary>
+        /// A block defined over 8-bit signed segments
+        /// </summary>
+        Seg8i = PrimitiveId.I8 | NK.Signed,
+
+        /// <summary>
+        /// A block defined over 16-bit unsigned segments
+        /// </summary>
+        Seg16u = PrimitiveId.U16 | NK.Unsigned,
+
+        /// <summary>
+        /// A block defined over 16-bit signed segments
+        /// </summary>
+        Seg16i = PrimitiveId.I16 | NK.Signed,
+
+        /// <summary>
+        /// A block defined over 32-bit unsigned segments
+        /// </summary>
+        Seg32u = PrimitiveId.U32 | NK.Unsigned,
+
+        /// <summary>
+        /// A block defined over 32-bit signed segments
+        /// </summary>
+        Seg32i = PrimitiveId.I32 | NK.Signed,
+
+        /// <summary>
+        /// A block defined over 64-bit unsigned segments
+        /// </summary>
+        Seg64u = PrimitiveId.U64 | NK.Unsigned,
+
+        /// <summary>
+        /// A block defined over 64-bit signed segments
+        /// </summary>
+        Seg64i = PrimitiveId.I64 | NK.Signed,
+
+        /// <summary>
+        /// A block defined over 32-bit floating-point segments
+        /// </summary>
+        Seg32f = PrimitiveId.F32 | NK.Float,
+
+        /// <summary>
+        /// A block defined over 64-bit floating-point segments
+        /// </summary>
+        Seg64f = PrimitiveId.F64 | NK.Float,
+    }   
 }

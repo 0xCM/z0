@@ -12,6 +12,9 @@ namespace Z0
     [Flags]
     public enum OperationClass : ulong
     {
+        /// <summary>
+        /// The empty class
+        /// </summary>
         None = 0,
 
         /// <summary>

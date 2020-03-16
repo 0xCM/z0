@@ -5,15 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Root;
 
     /// <summary>
     /// Classifies ternary logic and bitwise operators
     /// </summary>
     public enum TernaryBitLogicOpKind : byte
     {
+        /// <summary>
+        /// The empty identity
+        /// </summary>
+        None = 0,
+
         X00 = 0x00,
         
         /// <summary>

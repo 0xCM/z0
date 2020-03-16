@@ -13,6 +13,9 @@ namespace Z0
     /// </summary>
     public enum BinaryArithmeticKindId : ulong
     {
+        /// <summary>
+        /// The empty identity
+        /// </summary>
         None = 0,
 
         Add = Id.Add,

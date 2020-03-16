@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Contains<T>(this ReadOnlySpan<T> src, T target)        
             where T : unmanaged
-                => src.BinarySearch(target, PrimalComparer.Get<T>()) >= 0;
+                => src.BinarySearch(target, Numeric.comparer<T>()) >= 0;
 
         [MethodImpl(Inline)]
         public static T FirstCell<T>(this Vector128<T> src)
@@ -62,12 +62,10 @@ namespace Z0
                 return src.Cell(3);
         }    
 
-
         [MethodImpl(Inline)]
         public static Fixed512 ToFixed<T>(this Vector512<T> x)
             where T : unmanaged
                 => Unsafe.As<Vector512<T>,Fixed512>(ref x);
-
 
         [MethodImpl(Inline)]
         public static Vector512<T> Apply<T>(this UnaryOp512 f, Vector512<T> x)
