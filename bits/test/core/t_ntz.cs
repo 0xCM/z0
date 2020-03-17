@@ -42,8 +42,8 @@ namespace Z0
 
                 if(ntzX != ntzY)
                 {
-                    Trace("scalar", x.ToString());
-                    Trace("bitstring", y.Format());
+                    trace("scalar", x.ToString());
+                    trace("bitstring", y.Format());
                 }
 
                 Claim.eq(ntzX, ntzY);

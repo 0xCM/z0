@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a kind with which a fixed bit-width is associated
     /// </summary>
-    public interface IFixedKind : IHigherKind
+    public interface IFixedKind : IKind
     {
         int BitWidth {get;}
     }

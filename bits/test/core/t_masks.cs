@@ -107,9 +107,9 @@ namespace Z0
                 var pop = gbits.pop(mask);
                 if(pop != count)
                 {
-                    Trace("count", count.ToString());
-                    Trace("popcount", pop.ToString());
-                    Trace("mask", BitString.scalar(mask).Format());
+                    trace("count", count.ToString());
+                    trace("popcount", pop.ToString());
+                    trace("mask", BitString.scalar(mask).Format());
                 }
                 
                 Claim.eq(count, gbits.pop(mask));
@@ -118,8 +118,8 @@ namespace Z0
                 var width = gbits.effwidth(lowered);
                 if(count != width)
                 {
-                    Trace("mask", BitString.scalar(mask).Format());
-                    Trace("lowered", BitString.scalar(lowered).Format());
+                    trace("mask", BitString.scalar(mask).Format());
+                    trace("lowered", BitString.scalar(lowered).Format());
                 }
                 Claim.eq(count, width);
             }

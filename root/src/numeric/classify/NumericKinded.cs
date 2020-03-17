@@ -12,37 +12,53 @@ namespace Z0
     //using NK = NumericKind;
     using static NumericKind;
 
-    public readonly struct NumericKindType<T> : INumericKindType<T> 
+    /// <summary>
+    /// Represents the parametrically-identified numeric kind
+    /// </summary>
+    public readonly struct NK<T> : INumericKind<T> 
         where T : unmanaged
     {
+        [MethodImpl(Inline)]
+        public static implicit operator NumericKind(NK<T> src)
+            => Numeric.kind<T>();
 
         [MethodImpl(Inline)]
-        public static implicit operator NumericKind(NumericKindType<T> src)
-            => Numeric.kind<T>();
+        public static implicit operator T(NK<T> src)
+            => default;
     }
     
     /// <summary>
     /// Joins numeric types and kinds
     /// </summary>
-    public readonly struct NumericKindType : INumericKindType
-    {        
-        public static NumericKindType Empty => new NumericKindType(typeof(void), NumericKind.None);
+    public readonly struct NumericKinded : INumericKind
+    {                
+        public Type Subject {get;}
+
+        public string Identifier {get;}
+
+        public NumericKind Class {get;}
+
+        public static NumericKinded Empty => new NumericKinded(typeof(void), NumericKind.None);
+
+        [MethodImpl(Inline)]
+        public static NK<T> From<T>(T t = default)
+            where T : unmanaged
+                => default(NK<T>);
 
         /// <summary>
-        /// Returns numeric type associated with a specified clr type, or the empty
-        /// numeric type if no association exists
+        /// Returns numeric type associated with a specified clr type, or the empty numeric type if no association exists
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
-        public static NumericKindType From(Type src)
-            => Numeric.kind(src).MapValueOrDefault(k => new NumericKindType(src,k),NumericKindType.Empty);
+        public static NumericKinded From(Type src)
+            => Numeric.kind(src).MapValueOrDefault(k => new NumericKinded(src,k), NumericKinded.Empty);
         
         /// <summary>
         /// Returns numeric type associated with a specified numeric kind, or the empty
         /// numeric type if no association exists
         /// </summary>
         /// <param name="src">The source kind</param>
-        public static Option<NumericKindType> From(NumericKind src)
+        public static Option<NumericKinded> From(NumericKind src)
         {
             var t = src switch {
                 U8 => typeof(byte),
@@ -57,42 +73,36 @@ namespace Z0
                 F64 => typeof(double),
                 _ => typeof(void)
             };
-            return t.IsSome() ? some(new NumericKindType(t,src)) : none<NumericKindType>();
+            return t.IsSome() ? some(new NumericKinded(t,src)) : none<NumericKinded>();
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator NumericKind(NumericKindType src)
-            => src.Kind;
+        public static implicit operator NumericKind(NumericKinded src)
+            => src.Class;
 
         [MethodImpl(Inline)]
-        public static implicit operator Type(NumericKindType src)
+        public static implicit operator Type(NumericKinded src)
             => src.Subject;
 
         [MethodImpl(Inline)]
-        public static implicit operator string(NumericKindType src)
+        public static implicit operator string(NumericKinded src)
             => src.Identifier;
 
         [MethodImpl(Inline)]
-        public static bool operator==(NumericKindType a, NumericKindType b)
+        public static bool operator==(NumericKinded a, NumericKinded b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(NumericKindType a, NumericKindType b)
+        public static bool operator!=(NumericKinded a, NumericKinded b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        NumericKindType(Type t, NumericKind k)
+        NumericKinded(Type t, NumericKind k)
         {
             this.Subject = t;
-            this.Kind = k;
+            this.Class = k;
             this.Identifier = k.Format();
         }
-
-        public Type Subject {get;}
-
-        public string Identifier {get;}
-
-        public readonly NumericKind Kind;
 
         public bool IsEmpty
         {
@@ -104,15 +114,15 @@ namespace Z0
         public void Deconstruct(out Type clrtype, out NumericKind kind)
         {
             clrtype = Subject;
-            kind = Kind;                
+            kind = Class;                
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(NumericKindType src)
+        public bool Equals(NumericKinded src)
              => IdentityShare.equals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(NumericKindType other)
+        public int CompareTo(NumericKinded other)
             => IdentityShare.compare(this, other);
 
         public override string ToString()

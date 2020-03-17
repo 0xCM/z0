@@ -102,9 +102,9 @@ namespace Z0
 
         public static int Arity(this OperatorClass src)
             => src switch{
-               UnaryOperator => 1,
-               BinaryOperator => 2,
-               TernaryOperator => 3,     
+               UnaryOp => 1,
+               BinaryOp => 2,
+               TernaryOp => 3,     
                 _  => 0,
             };
 
@@ -124,9 +124,9 @@ namespace Z0
             if(m.IsOperator())
             {
                 return m.Arity() switch {
-                    1 => OperatorClass.UnaryOperator,
-                    2 => OperatorClass.BinaryOperator,
-                    3 => OperatorClass.TernaryOperator,
+                    1 => OperatorClass.UnaryOp,
+                    2 => OperatorClass.BinaryOp,
+                    3 => OperatorClass.TernaryOp,
                     _ => OperatorClass.None
 
                 };

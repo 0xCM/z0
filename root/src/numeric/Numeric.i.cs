@@ -26,17 +26,17 @@ namespace Z0
         
     }
 
-    public interface INumericKindType : ITypeKind<NumericKind>,  IIdentity<NumericKindType>
+    public interface INumericKind : IKind<NumericKind>,  IIdentity<NumericKinded>
     {
         
     }
 
-    public interface INumericKindType<T> : INumericKindType, ITypeKind<NumericKind>, IFixedWidth
+    public interface INumericKind<T> : INumericKind, IKind<NumericKind>, IFixedWidth
         where T : unmanaged
     {
         FixedWidth IFixedWidth.FixedWidth => (FixedWidth)bitsize<T>();            
 
-        NumericKind NumericKind { [MethodImpl(Inline)] get=> Numeric.kind<T>();}
+        NumericKind IKind<NumericKind>.Class { [MethodImpl(Inline)] get=> Numeric.kind<T>();}
 
         string IIdentity.Identifier => Numeric.kind<T>().Format();
     }

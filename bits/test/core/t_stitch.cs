@@ -49,11 +49,11 @@ namespace Z0
 
             void report()
             {
-                Trace("00", src.FormatBits());
-                Trace("in  lo", x0.FormatBits());
-                Trace("out lo", y0.FormatBits());
-                Trace("in  hi", x1.FormatBits());
-                Trace("out hi", y1.FormatBits());
+                trace("00", src.FormatBits());
+                trace("in  lo", x0.FormatBits());
+                trace("out lo", y0.FormatBits());
+                trace("in  hi", x1.FormatBits());
+                trace("out hi", y1.FormatBits());
             }
             
         }

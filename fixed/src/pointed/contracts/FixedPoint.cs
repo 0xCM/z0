@@ -15,7 +15,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IFixedPoint<X0,X1> : IPointed<Point<X0,X1>>
+    public interface IFixedPoint<X0,X1> : IPointed<MixedPoint<X0,X1>>
         where X0 : unmanaged,IFixed
         where X1 : unmanaged,IFixed
     {
@@ -23,7 +23,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IFixedPoint<X0,X1,X2> : IPointed<Point<X0,X1,X2>>
+    public interface IFixedPoint<X0,X1,X2> : IPointed<MixedPoint<X0,X1,X2>>
         where X0 : unmanaged,IFixed
         where X1 : unmanaged,IFixed
         where X2 : unmanaged,IFixed

@@ -63,22 +63,22 @@ namespace Z0.Asm.Validation
                 var apiclass = api.Method.ClassifyOperator();
                 switch(apiclass)
                 {
-                    case UnaryOperator:
+                    case UnaryOp:
 
                     break;
                     
-                    case BinaryOperator:
+                    case BinaryOp:
                     {
                         switch(nk)
                         {
                             case NumericKind.U8:
-                                return Dispatch(buffers, Random.HomPointIndex(count,n2,z8), api);
+                                return Dispatch(buffers, Random.Points(count,n2,z8), api);
                             case NumericKind.I8:
                                 return 0;                            
                             case NumericKind.I16:
                                 return 0;                            
                             case NumericKind.U16:
-                                return Dispatch(buffers, Random.HomPointIndex(count,n2,z16), api);
+                                return Dispatch(buffers, Random.Points(count,n2,z16), api);
                             case NumericKind.I32:
                                 return 0;
                             case NumericKind.U32:
@@ -93,7 +93,7 @@ namespace Z0.Asm.Validation
                         }
                     }
 
-                    case TernaryOperator:
+                    case TernaryOp:
                         return 0;                    
                 }
             }
@@ -120,11 +120,11 @@ namespace Z0.Asm.Validation
             var apiclass = api.Method.ClassifyOperator();
             switch(apiclass)
             {
-                case OperatorClass.BinaryOperator:
+                case OperatorClass.BinaryOp:
                 switch(nk)
                 {
                     case NumericKind.U8:
-                        return Dispatch(buffers, Random.FixedHomPointIndex<Fixed8>(count,n2), api);                    
+                        return Dispatch(buffers, Random.FixedPoints<Fixed8>(count,n2), api);                    
                     case NumericKind.I8:
                         return 0;                            
                     case NumericKind.I16:
@@ -173,7 +173,7 @@ namespace Z0.Asm.Validation
             where F : unmanaged, IFixed
                 => LoadFixedinaryOp<F>(buffers, index, src)(x,y);
 
-        void Analyze(in HomPoints<N2,byte> src, in HomPoints<N3,byte> dst, in ApiMemberCode api)
+        void Analyze(in Points<N2,byte> src, in Points<N3,byte> dst, in ApiMemberCode api)
         {
             for(var i=0; i< 10; i++)
             {
@@ -185,7 +185,7 @@ namespace Z0.Asm.Validation
             }
         }
 
-        void Analyze(in HomPoints<N2,ushort> src, in HomPoints<N3,ushort> dst, in ApiMemberCode api)
+        void Analyze(in Points<N2,ushort> src, in Points<N3,ushort> dst, in ApiMemberCode api)
         {
             for(var i=0; i< 10; i++)
             {
@@ -197,7 +197,7 @@ namespace Z0.Asm.Validation
             }
         }
 
-        bit Dispatch(in BufferSeq buffers, in HomPoints<N2,byte> src, in ApiMemberCode api)
+        bit Dispatch(in BufferSeq buffers, in Points<N2,byte> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalOperator(api,src);
@@ -205,7 +205,7 @@ namespace Z0.Asm.Validation
             return 1;
         }
 
-        bit Dispatch(in BufferSeq buffers, in HomPoints<N2,ushort> src, in ApiMemberCode api)
+        bit Dispatch(in BufferSeq buffers, in Points<N2,ushort> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalOperator(api,src);
@@ -213,7 +213,7 @@ namespace Z0.Asm.Validation
             return 1;
         }
 
-        void Analyze(in HomPoints<N2,Fixed8> src, in HomPoints<N3,Fixed8> dst, in ApiMemberCode api)
+        void Analyze(in Points<N2,Fixed8> src, in Points<N3,Fixed8> dst, in ApiMemberCode api)
         {
             for(var i=0; i< 10; i++)
             {
@@ -225,7 +225,7 @@ namespace Z0.Asm.Validation
             }
         }
 
-        void Analyze(in HomPoints<N2,Fixed16> src, in HomPoints<N3,Fixed16> dst, in ApiMemberCode api)
+        void Analyze(in Points<N2,Fixed16> src, in Points<N3,Fixed16> dst, in ApiMemberCode api)
         {
             for(var i=0; i< 10; i++)
             {
@@ -237,7 +237,7 @@ namespace Z0.Asm.Validation
             }
         }
 
-        bit Dispatch(in BufferSeq buffers, in HomPoints<N2,Fixed8> src, in ApiMemberCode api)
+        bit Dispatch(in BufferSeq buffers, in Points<N2,Fixed8> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalFixedOperator(api,src);
@@ -245,7 +245,7 @@ namespace Z0.Asm.Validation
             return 1;
         }
 
-        bit Dispatch(in BufferSeq buffers, in HomPoints<N2,Fixed16> src, in ApiMemberCode api)
+        bit Dispatch(in BufferSeq buffers, in Points<N2,Fixed16> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalFixedOperator(api,src);

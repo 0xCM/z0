@@ -6,12 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static FixedWidth;
-    using FT = FixedTypeKind;
-
     using FC = FixedOpClass;
-    using ID = OperationClassId;
-
 
     public enum FixedOpClassId : ushort
     {

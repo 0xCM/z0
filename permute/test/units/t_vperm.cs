@@ -239,7 +239,7 @@ namespace Z0
         void perm4x64_mapformat()
         {
             var pmaps = Permute.mappings(n4);
-            iter(pmaps, m => Trace(m.perm.ToString(), m.format));
+            iter(pmaps, m => trace(m.perm.ToString(), m.format));
         }
 
         public void vperm_2x128_outline()

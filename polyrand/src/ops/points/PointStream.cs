@@ -23,11 +23,11 @@ namespace Z0
         /// <param name="n">The dimension selector</param>
         /// <param name="t">A point domain representative</param>
         /// <typeparam name="T">The point domain</typeparam>
-        public static IEnumerable<HomPoint<N1,T>> HomPointStream<T>(this IPolyrand random, N1 n, T t = default)
+        public static IEnumerable<Point<N1,T>> PointStream<T>(this IPolyrand random, N1 n, T t = default)
             where T : unmanaged
         {
             while(true)
-                yield return PointApi.hom(random.Next<T>());
+                yield return PointApi.point(random.Next<T>());
         }
 
         /// <summary>
@@ -37,11 +37,11 @@ namespace Z0
         /// <param name="n">The dimension selector</param>
         /// <param name="t">A point domain representative</param>
         /// <typeparam name="T">The point domain</typeparam>
-        public static IEnumerable<HomPoint<N2,T>> HomPointStream<T>(this IPolyrand random, N2 n, T t = default)
+        public static IEnumerable<Point<N2,T>> PointStream<T>(this IPolyrand random, N2 n, T t = default)
             where T : unmanaged
         {
             while(true)
-                yield return PointApi.hom(random.Next<T>(), random.Next<T>());
+                yield return PointApi.point(random.Next<T>(), random.Next<T>());
         }
 
         /// <summary>
@@ -51,11 +51,11 @@ namespace Z0
         /// <param name="n">The dimension selector</param>
         /// <param name="t">A point domain representative</param>
         /// <typeparam name="T">The point domain</typeparam>
-        public static IEnumerable<HomPoint<N3,T>> HomPointStream<T>(this IPolyrand random, N3 n, T t = default)
+        public static IEnumerable<Point<N3,T>> PointStream<T>(this IPolyrand random, N3 n, T t = default)
             where T : unmanaged
         {
             while(true)
-                yield return PointApi.hom(random.Next<T>(), random.Next<T>(), random.Next<T>());
+                yield return PointApi.point(random.Next<T>(), random.Next<T>(), random.Next<T>());
         }
 
         /// <summary>
@@ -65,12 +65,12 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="X0">The domain of the first coordinate</typeparam>
         /// <typeparam name="X1">The domain of the second coordinate</typeparam>
-        public static IEnumerable<Point<X0,X1>> PointStream<X0,X1>(this IPolyrand random,  (X0 x0, X1 x1) t = default)
+        public static IEnumerable<MixedPoint<X0,X1>> MixedPointStream<X0,X1>(this IPolyrand random,  (X0 x0, X1 x1) t = default)
             where X0 : unmanaged
             where X1 : unmanaged
         {
             while(true)
-                yield return PointApi.point(random.Next<X0>(), random.Next<X1>());
+                yield return PointApi.mixed(random.Next<X0>(), random.Next<X1>());
         }
 
         /// <summary>
@@ -81,13 +81,13 @@ namespace Z0
         /// <typeparam name="X0">The domain of the first coordinate</typeparam>
         /// <typeparam name="X1">The domain of the second coordinate</typeparam>
         /// <typeparam name="X2">The domain of the third coordinate</typeparam>
-        public static IEnumerable<Point<X0,X1,X2>> PointStream<X0,X1,X2>(this IPolyrand random,  (X0 x0, X1 x1, X2 x2) t = default)
+        public static IEnumerable<MixedPoint<X0,X1,X2>> MixedPointStream<X0,X1,X2>(this IPolyrand random,  (X0 x0, X1 x1, X2 x2) t = default)
             where X0 : unmanaged
             where X1 : unmanaged
             where X2 : unmanaged
         {
             while(true)
-                yield return PointApi.point(random.Next<X0>(), random.Next<X1>(), random.Next<X2>());
+                yield return PointApi.mixed(random.Next<X0>(), random.Next<X1>(), random.Next<X2>());
         }
 
     }

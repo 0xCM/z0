@@ -12,6 +12,9 @@ namespace Z0
     using static Root;
 
     [SuppressUnmanagedCodeSecurity]
+    public delegate bit Emitter1();
+
+    [SuppressUnmanagedCodeSecurity]
     public delegate Fixed8 Emitter8();
 
     [SuppressUnmanagedCodeSecurity]
@@ -40,6 +43,4 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public delegate Fixed512 Emitter512V();
-
-
 }

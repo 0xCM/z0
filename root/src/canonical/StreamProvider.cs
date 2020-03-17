@@ -5,18 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
-
-    public interface IHomPoint<N,T>
-        where N : unmanaged, ITypeNat
-        where T : unmanaged
+    public interface IStreamProvider<T>
     {
-        int Dimension => (int)Nats.nateval<N>();
+        /// <summary>
+        /// In infinite T-stream
+        /// </summary>
+        IEnumerable<T> Stream {get;}   
 
-        Span<T> Components {get;}
     }
+
 }

@@ -11,38 +11,39 @@ namespace Z0
 
     using static Root;
 
-    partial class FixedNumericOps
+    partial class Fixed
     {
+
         [MethodImpl(Inline)]
-        public static Fixed8 ToFixed(this byte src)
+        public static Fixed8 fix(byte src)
             => src;
 
         [MethodImpl(Inline)]
-        public static Fixed8 ToFixed(this sbyte src)
+        public static Fixed8 fix(sbyte src)
             => src;
 
         [MethodImpl(Inline)]
-        public static Fixed16 ToFixed(this ushort src)
+        public static Fixed16 fix(short src)
             => src;
 
         [MethodImpl(Inline)]
-        public static Fixed16 ToFixed(this short src)
+        public static Fixed16 fix(ushort src)
             => src;
 
         [MethodImpl(Inline)]
-        public static Fixed32 ToFixed(this int src)
+        public static Fixed32 fix(int src)
             => src;
 
         [MethodImpl(Inline)]
-        public static Fixed32 ToFixed(this uint src)
+        public static Fixed32 fix(uint src)
             => src;
 
         [MethodImpl(Inline)]
-        public static Fixed64 ToFixed(this long src)
+        public static Fixed64 fix(long src)
             => src;
 
         [MethodImpl(Inline)]
-        public static Fixed64 ToFixed(this ulong src)
+        public static Fixed64 fix(ulong src)
             => src;
     }
 }

@@ -23,14 +23,14 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IPointed<X0,X1> : IPointed<Point<X0,X1>>
+    public interface IPointed<X0,X1> : IPointed<MixedPoint<X0,X1>>
         
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IPointed<X0,X1,X2> : IPointed<Point<X0,X1,X2>>
+    public interface IPointed<X0,X1,X2> : IPointed<MixedPoint<X0,X1,X2>>
         
     {
         

@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
 
     using NK = NumericKind;
-    using NT = NumericKindType;
+    using NT = NumericKinded;
     using NI = NumericIndicator;
 
     partial class RootNumericOps

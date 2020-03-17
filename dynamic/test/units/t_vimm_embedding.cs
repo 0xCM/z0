@@ -81,7 +81,7 @@ namespace Z0
             {
                 var method = Dynop.EmbedVUnaryOpImm(src,imm);
                 var vOutput = method.Invoke(vones);
-                Trace(vOutput.ToString());
+                trace(vOutput.ToString());
             }            
         }
 

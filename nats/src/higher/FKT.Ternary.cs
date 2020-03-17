@@ -20,14 +20,14 @@ namespace Z0
         /// </summary>
         public readonly struct TernaryFuncType : IFuncType, IFuncArity<N3>
         {
-            public const FunctionClass Kind = FunctionClass.Function3;
+            public const FunctionClass Kind = FunctionClass.Func3;
 
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(TernaryFuncType src)
-                =>  src.Classifier;
+                =>  src.Class;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
         /// <summary>
@@ -35,13 +35,13 @@ namespace Z0
         /// </summary>
         public readonly struct FuncType<T1,T2,T3,R> : IFuncType<T1,T2,T3,R>
         {
-            public const FunctionClass Kind = FunctionClass.Function3;
+            public const FunctionClass Kind = FunctionClass.Func3;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(FuncType<T1,T2,T3,R> src)
-                =>  src.Classifier;
+                =>  src.Class;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
 
@@ -50,9 +50,9 @@ namespace Z0
         /// </summary>
         public readonly struct TernaryOpType : IOperatorFuncType<N3>
         {
-            public const FunctionClass Kind = FunctionClass.TernaryOperator;
+            public const FunctionClass Kind = FunctionClass.TernaryOp;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorType<N3>(TernaryOpType src)
@@ -64,7 +64,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(TernaryOpType src)
-                => src.Classifier;
+                => src.Class;
 
             [MethodImpl(Inline)]
             public static implicit operator TernaryFuncType(TernaryOpType src)
@@ -77,13 +77,13 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public readonly struct TernaryOpType<T> : IOperatorFuncType<N3,T>
         {
-            public const FunctionClass Kind = FunctionClass.TernaryOperator;
+            public const FunctionClass Kind = FunctionClass.TernaryOp;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(TernaryOpType<T> src)
-                => src.Classifier;
+                => src.Class;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType<T,T,T,T>(TernaryOpType<T> src)

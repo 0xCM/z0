@@ -7,25 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Security;
     using System.Collections.Generic;
 
     using static Root;
     using static Nats;
 
-    public interface IFixedStreamProvider<F>
+    [SuppressUnmanagedCodeSecurity]
+    public delegate IEnumerable<F> FixedStreamEmitter<F>();
+
+    public interface IFixedStreamProvider<F> : IStreamProvider<F>
         where F : unmanaged, IFixed
     {
-        IEnumerable<F> Stream {get;}   
-    }
-    public static class FixedStreamProvider
-    {   
-        public static IFixedStreamProvider<F> Create<F,T>(IPolyrand random, Interval<T>? celldomain = null)
-            where F : unmanaged, IFixed
-            where T : unmanaged
-                => new FixedStreamFactory<F,T>(random, celldomain);
+        new IEnumerable<F> Stream {get;}   
+
+        IEnumerable<F> IStreamProvider<F>.Stream
+            => Stream;
     }
 
-    public class FixedStreamFactory<F,T> : IFixedStreamProvider<F>
+    class FixedStreamProvider<F,T> : IFixedStreamProvider<F>
         where F : unmanaged, IFixed
         where T : unmanaged
     {
@@ -37,17 +37,18 @@ namespace Z0
 
         readonly NumericKind Kind;
 
-        readonly Func<F> Emitter;
+        readonly Func<F> ValueEmitter;
         
         readonly Interval<T> CellDomain;
-        public FixedStreamFactory(IPolyrand random, Interval<T>? domain = null)
+
+        public FixedStreamProvider(IPolyrand random, Interval<T>? domain = null)
         {
             this.random = random;
             this.Name = $"fixed_rng_{default(F).FixedBitCount}x{bitsize<T>()}";
             this.Width = (FixedWidth)default(F).FixedBitCount;
             this.Kind = typeof(T).NumericKind();            
-            this.Emitter = CreateEmitter();
-            //this.CellDomain = domain ?? RngDefaults.get<T>().SampleDomain;
+            this.ValueEmitter = CreateEmitter();
+            this.CellDomain = domain ?? random.Domain<T>();
         }
 
         public IEnumerable<F> Stream
@@ -55,7 +56,7 @@ namespace Z0
             get
             {
                 while(true)
-                    yield return Emitter();
+                    yield return ValueEmitter();
             }
         }
             

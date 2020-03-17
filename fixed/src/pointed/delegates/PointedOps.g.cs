@@ -19,13 +19,13 @@ namespace Z0
         where R : unmanaged, IFixed;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Point<R> PointedFunc<X0,X1,R>(in Point<X0,X1> x0)
+    public delegate Point<R> PointedFunc<X0,X1,R>(in MixedPoint<X0,X1> x0)
         where X0 : unmanaged, IFixed
         where X1 : unmanaged, IFixed
         where R : unmanaged, IFixed;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Point<R> PointedFunc<X0,X1,X2,R>(in Point<X0,X1,X2> x0)
+    public delegate Point<R> PointedFunc<X0,X1,X2,R>(in MixedPoint<X0,X1,X2> x0)
         where X0 : unmanaged, IFixed
         where X1 : unmanaged, IFixed
         where X2 : unmanaged, IFixed

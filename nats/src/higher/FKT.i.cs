@@ -41,7 +41,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a higher-kinded function representation
     /// </summary>
-    public interface IFuncType : IHigherKind<FunctionClass>
+    public interface IFuncType : IKind<FunctionClass>
     {
 
     }

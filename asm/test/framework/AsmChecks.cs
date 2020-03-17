@@ -404,7 +404,7 @@ namespace Z0.Asm.Validation
             return CheckAction(check, CaseName($"{fId}~/~{gId}"));
         }
 
-        protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, U8 kind)
+        protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, BinaryOp<byte> primal, BinaryOp<byte> generic, NK<byte> kind)
         {
             var results = list<TestCaseRecord>();
             var w = n8;
@@ -423,8 +423,8 @@ namespace Z0.Asm.Validation
             return results.ToArray();
         }
 
-        protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, 
-            I8 kind)
+        protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, BinaryOp<sbyte> primal, BinaryOp<sbyte> generic, 
+            NK<sbyte> kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -445,7 +445,7 @@ namespace Z0.Asm.Validation
         }
 
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, in ApiCode dCode, in ApiCode gCode, 
-            Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, I8 kind)
+            BinaryOp<sbyte> primal, BinaryOp<sbyte> generic, NK<sbyte> kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -467,7 +467,7 @@ namespace Z0.Asm.Validation
         }
 
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, 
-            Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, U16 kind)
+            BinaryOp<ushort> primal, BinaryOp<ushort> generic, NK<ushort> kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -489,7 +489,7 @@ namespace Z0.Asm.Validation
         }
 
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, 
-            Func<short,short,short> primal, Func<short,short,short> generic, I16 kind)
+            BinaryOp<short> primal, BinaryOp<short> generic, NK<short> kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -510,7 +510,7 @@ namespace Z0.Asm.Validation
         }
 
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, 
-            Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, U32 kind)
+            BinaryOp<uint> primal, BinaryOp<uint> generic, NK<uint> kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -531,7 +531,7 @@ namespace Z0.Asm.Validation
         }
 
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, 
-            Func<int,int,int> primal, Func<int,int,int> generic, I32 kind)
+            BinaryOp<int> primal, BinaryOp<int> generic, NK<int> kind)
         {
             var results = list<TestCaseRecord>();
 
@@ -552,7 +552,7 @@ namespace Z0.Asm.Validation
         }
 
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, 
-            Func<long,long,long> primal, Func<long,long,long> generic, I64 kind)
+            BinaryOp<long> primal, BinaryOp<long> generic, NK<long> kind)
         {            
             var results = list<TestCaseRecord>();
 
@@ -1117,7 +1117,7 @@ namespace Z0.Asm.Validation
             var f = dst[Left].EmitFixedUnaryOp<F>(a.Code.ApiCode);
             var g = dst[Right].EmitFixedUnaryOp<F>(b.Code.ApiCode);            
 
-            var stream = Random.StreamFixed<F>();
+            var stream = Random.FixedStream<F>();
             if(stream == null)
                 Claim.fail($"random stream null!");
 

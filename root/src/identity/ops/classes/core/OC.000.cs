@@ -85,32 +85,32 @@ namespace Z0
         /// <summary>
         /// Classifies functions that accept one argument
         /// </summary>
-        Function1 = Function | Unary,
+        Func1 = Function | Unary,
 
         /// <summary>
         /// Classifies functions that accept two arguments
         /// </summary>
-        Function2 = Function | Binary,
+        Func2 = Function | Binary,
 
         /// <summary>
         /// Classifies functions that accept three arguments
         /// </summary>
-        Function3 = Function | Ternary,
+        Func3 = Function | Ternary,
 
         /// <summary>
         /// Classifies functions that accept one argument
         /// </summary>        
-        UnaryFunction = Unary | Function ,
+        UnaryFunc = Unary | Function ,
 
         /// <summary>
         /// Classifies functions that accept two arguments
         /// </summary>        
-        BinaryFunction =  Binary | Function ,
+        BinaryFunc =  Binary | Function ,
 
         /// <summary>
         /// Classifies functions that accept three arguments
         /// </summary>        
-        TernaryFunction = Ternary | Function,
+        TernaryFunc = Ternary | Function,
 
         /// <summary>
         /// Classifies actions that accept one arguments
@@ -130,31 +130,31 @@ namespace Z0
         /// <summary>
         /// Classifies operators that accept one argument
         /// </summary>        
-        UnaryOperator = Unary | Operator | Function1,
+        UnaryOp = Unary | Operator | Func1,
 
         /// <summary>
         /// Classifies operators that accept two arguments
         /// </summary>        
-        BinaryOperator = Binary | Operator | Function2,
+        BinaryOp = Binary | Operator | Func2,
         
         /// <summary>
         /// Classifies operators that accept three arguments
         /// </summary>        
-        TernaryOperator = Ternary | Operator | Function3,
+        TernaryOp = Ternary | Operator | Func3,
 
         /// <summary>
         /// Classifies an operation as a unary predicate
         /// </summary>        
-        UnaryPredicate = Unary | Function | Predicate,
+        UnaryPred = Unary | Function | Predicate,
 
         /// <summary>
         /// Classifies an operation as a binary predicate
         /// </summary>        
-        BinaryPredicate = Binary | Function | Predicate,
+        BinaryPred = Binary | Function | Predicate,
 
         /// <summary>
         /// Classifies an operation as a ternary predicate
         /// </summary>        
-        TernaryPredicate = Ternary | Function | Predicate
+        TernaryPred = Ternary | Function | Predicate
     }
 }

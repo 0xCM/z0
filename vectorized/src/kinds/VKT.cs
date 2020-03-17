@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
 
-    public interface IVectorKind : ITypeKind
+    public interface IVectorKind : IKind
     {
 
     }

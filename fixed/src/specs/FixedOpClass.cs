@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static FixedWidth;
-    using FT = FixedTypeKind;
-
-    using FC = FixedOpClass;
     using ID = OperationClassId;
 
     [Flags]
@@ -92,10 +88,6 @@ namespace Z0
         /// <summary>
         /// Specifies the upper bound for fixed classifiers
         /// </summary>        
-        LastClass = 2048
-    
+        LastClass = 2048    
     }
-
-
-
 }

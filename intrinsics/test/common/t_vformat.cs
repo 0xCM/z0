@@ -84,24 +84,22 @@ namespace Z0
             where T : unmanaged
         {
             var pad = 5;
-            Trace("left", x.FormatList(pad:pad));
-            Trace("right", y.FormatList(pad:pad));
-            Trace("expect", expect.FormatAsList(pad:pad));
-            Trace("actual", actual.FormatAsList(pad:pad));
-            Trace("result", result.FormatAsList(pad:pad));
-
+            trace("left", x.FormatList(pad:pad));
+            trace("right", y.FormatList(pad:pad));
+            trace("expect", expect.FormatAsList(pad:pad));
+            trace("actual", actual.FormatAsList(pad:pad));
+            trace("result", result.FormatAsList(pad:pad));
         }
 
         public void Report<T>(Block256<T> x, Block256<T> y, Vector256<T> expect, Vector256<T> actual, Vector256<T> result)
             where T : unmanaged
         {
             var pad = 5;
-            Trace("left", x.FormatList(pad:pad));
-            Trace("right", y.FormatList(pad:pad));
-            Trace("expect", expect.Format(pad:pad));
-            Trace("actual", actual.Format(pad:pad));
-            Trace("result", result.Format(pad:pad));
-
+            trace("left", x.FormatList(pad:pad));
+            trace("right", y.FormatList(pad:pad));
+            trace("expect", expect.Format(pad:pad));
+            trace("actual", actual.Format(pad:pad));
+            trace("result", result.Format(pad:pad));
         }
     }
 }

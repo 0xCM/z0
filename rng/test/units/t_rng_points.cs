@@ -15,7 +15,7 @@ namespace Z0
 
         public void rng_point_stream()
         {
-            var source = Random.PointStream((z8,z16,z32));
+            var source = Random.MixedPointStream((z8,z16,z32));
             var dst = source.Take(100).ToArray();
             var indexed = dst.Index();
         }
@@ -42,7 +42,7 @@ namespace Z0
 
         }
 
-        void print<N,T>(HomPoints<N,T> index)
+        void print<N,T>(Points<N,T> index)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -54,10 +54,10 @@ namespace Z0
         }
         public void rng_fixed_point_index()
         {
-            var u8Index = Random.FixedHomPointIndex<Fixed8>(100,n2);
+            var u8Index = Random.FixedPoints<Fixed8>(100,n2);
             print(u8Index);
 
-            var u16Index = Random.FixedHomPointIndex<Fixed16>(100,n2);
+            var u16Index = Random.FixedPoints<Fixed16>(100,n2);
             print(u16Index);
 
 

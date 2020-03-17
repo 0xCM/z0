@@ -170,9 +170,4 @@ namespace Z0
 
         LastClass = 1024
     }
-
-    public enum FixedTypeKindId : ushort
-    {
-
-    }
 }

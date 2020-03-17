@@ -125,23 +125,29 @@ namespace Z0
         /// Submits a diagnostic message to the message queue without including caller information
         /// </summary>
         /// <param name="msg">The source message</param>
-        protected void Trace(object msg)
+        protected void trace(object msg)
         {
             if(TraceEnabled)
                 Notify(AppMsg.Info(msg));
         }
 
+        protected void print(object msg, AppMsgKind? k = null)
+            => NotifyConsole(AppMsg.NoCaller(msg, k));
+
+        protected void colorize(object msg, AppMsgColor color)
+            => NotifyConsole(msg, color);
+
         /// <summary>
         /// Submits a diagnostic message to the message queue without including caller information
         /// </summary>
         /// <param name="msg">The source message</param>
-        protected void Trace(object title, object msg)
+        protected void trace(object title, object msg)
         {
             if(TraceEnabled)
                 Notify(AppMsg.Info($"{title} - {msg}"));
         }
 
-        protected void Trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null)
+        protected void trace(string title, string msg, int? tpad = null, AppMsgKind? severity = null)
         {
             if(TraceEnabled)
             {
@@ -156,7 +162,7 @@ namespace Z0
         /// <param name="msg">The source message</param>
         /// <param name="severity">The diagnostic severity level that, if specified, 
         /// replaces the exising source message severity prior to queue submission</param>
-        protected void Trace(AppMsg msg, AppMsgKind? severity = null)
+        protected void trace(AppMsg msg, AppMsgKind? severity = null)
         {
             if(TraceEnabled)
                 Notify(msg.AsKind(severity ?? AppMsgKind.Babble));

@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
 
     using NK = NumericKind;
-    using NT = NumericKindType;
+    using NT = NumericKinded;
     using NI = NumericIndicator;
 
     partial class RootNumericOps
@@ -122,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source model</param>
         [MethodImpl(Inline)]
-        public static bool IsSome(this NumericKindType src)
+        public static bool IsSome(this NumericKinded src)
             => !src.IsEmpty;
     }
 }

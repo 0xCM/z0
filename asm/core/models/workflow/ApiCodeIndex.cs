@@ -66,13 +66,13 @@ namespace Z0.Asm
             => Values.Where(x => x.Member.Method.IsOperator());
 
         public IEnumerable<ApiMemberCode> UnaryOperators
-            => Search(OperatorClass.UnaryOperator);
+            => Search(OperatorClass.UnaryOp);
 
         public IEnumerable<ApiMemberCode> BinaryOperators
-            => Search(OperatorClass.BinaryOperator);
+            => Search(OperatorClass.BinaryOp);
 
         public IEnumerable<ApiMemberCode> TernaryOperators
-            => Search(OperatorClass.TernaryOperator);
+            => Search(OperatorClass.TernaryOp);
 
         public IEnumerable<ApiMemberCode> NumericOperators(int? arity = null)
             => Values.Where(x => x.Member.Method.IsNumericOperator(arity));

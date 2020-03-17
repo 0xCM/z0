@@ -60,14 +60,14 @@ namespace Z0
                 var n = n128;
                 var x = vgeneric.vbroadcast(n, (byte)1);
                 var y = vgeneric.vbroadcast(n, (byte)2);
-                Trace($"x{n}", x.FormatAsList());
-                Trace($"y{n}", y.FormatAsList());                
-                Trace("valignr/3",gvec.valignr(x,y, 3).FormatAsList());
-                Trace("valignr/4",gvec.valignr(x,y, 4).FormatAsList());
-                Trace("valignr/5",gvec.valignr(x,y, 5).FormatAsList());
-                Trace("valignr/6",gvec.valignr(x,y, 6).FormatAsList());
-                Trace("valignr/7",gvec.valignr(x,y, 7).FormatAsList());
-                Trace("valignr/8",gvec.valignr(x,y, 8).FormatAsList());
+                trace($"x{n}", x.FormatAsList());
+                trace($"y{n}", y.FormatAsList());                
+                trace("valignr/3",gvec.valignr(x,y, 3).FormatAsList());
+                trace("valignr/4",gvec.valignr(x,y, 4).FormatAsList());
+                trace("valignr/5",gvec.valignr(x,y, 5).FormatAsList());
+                trace("valignr/6",gvec.valignr(x,y, 6).FormatAsList());
+                trace("valignr/7",gvec.valignr(x,y, 7).FormatAsList());
+                trace("valignr/8",gvec.valignr(x,y, 8).FormatAsList());
             }
 
             void example2()
@@ -75,14 +75,14 @@ namespace Z0
                 var n = n256;
                 var x = vgeneric.vbroadcast(n, (byte)1);
                 var y = vgeneric.vbroadcast(n, (byte)2);
-                Trace($"x{n}", x.Format(seplanes:true));
-                Trace($"y{n}", y.Format(seplanes:true));                
-                Trace("valignr/3",gvec.valignr(x,y, 3).Format(seplanes:true));
-                Trace("valignr/4",gvec.valignr(x,y, 4).Format(seplanes:true));
-                Trace("valignr/5",gvec.valignr(x,y, 5).Format(seplanes:true));
-                Trace("valignr/6",gvec.valignr(x,y, 6).Format(seplanes:true));
-                Trace("valignr/7",gvec.valignr(x,y, 7).Format(seplanes:true));
-                Trace("valignr/8",gvec.valignr(x,y, 8).Format(seplanes:true));
+                trace($"x{n}", x.Format(seplanes:true));
+                trace($"y{n}", y.Format(seplanes:true));                
+                trace("valignr/3",gvec.valignr(x,y, 3).Format(seplanes:true));
+                trace("valignr/4",gvec.valignr(x,y, 4).Format(seplanes:true));
+                trace("valignr/5",gvec.valignr(x,y, 5).Format(seplanes:true));
+                trace("valignr/6",gvec.valignr(x,y, 6).Format(seplanes:true));
+                trace("valignr/7",gvec.valignr(x,y, 7).Format(seplanes:true));
+                trace("valignr/8",gvec.valignr(x,y, 8).Format(seplanes:true));
             }
 
         }

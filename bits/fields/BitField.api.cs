@@ -86,7 +86,6 @@ namespace Z0
             where T : unmanaged
                 => new NumericBits<S,I,T>(specify<I,T,W>());
 
-
         /// <summary>
         /// Defines and creates a fixed-width bitfield
         /// </summary>
@@ -129,6 +128,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FieldSegment segment(string name, byte index, byte startpos, byte endpos, byte width)
             => new FieldSegment(name,index, startpos, endpos, width);
+
+        [MethodImpl(Inline)]
+        public static FieldSegment segment<E>(E segid, byte startpos, byte endpos)
+            where E : unmanaged, Enum
+                => BitField.segment(segid.ToString(), Enums.numeric<E,byte>(segid), startpos, endpos, (byte)(endpos - startpos + 1));
 
         static FixedData<T> fixedalloc<T>(int bitcount)
             where T : unmanaged

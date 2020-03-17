@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FieldSegment segment<E>(E segid, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => BitField.segment(segid.ToString(), Enums.numeric<E,byte>(segid), startpos, endpos, (byte)(endpos - startpos + 1));
+                => BitField.segment(segid, startpos, endpos); //BitField.segment(segid.ToString(), Enums.numeric<E,byte>(segid), startpos, endpos, (byte)(endpos - startpos + 1));
 
         enum BF_A : byte
         {
@@ -225,7 +225,7 @@ namespace Z0
             var tmp = alloc<ulong>(spec.FieldCount);
             var positions = spec.Segments.Map(s => s.StartPos);
 
-            Trace(spec);
+            trace(spec);
 
             for(var rep=0; rep < RepCount; rep++)
             {
@@ -248,9 +248,9 @@ namespace Z0
                 
                 if(expect != result1)
                 {
-                    Trace(src.FormatBits());
+                    trace(src.FormatBits());
                     for(var i=0; i<dst.Length; i++)
-                        Trace(dst[i].FormatBits(tlz:true));
+                        trace(dst[i].FormatBits(tlz:true));
                 }
 
 
@@ -270,7 +270,7 @@ namespace Z0
             var bf = BitField.@fixed<BFD_I,byte,BFD_W>(64);
 
             bf[3] = byte.MaxValue;
-            Trace(bf.FormatBits(32));                            
+            trace(bf.FormatBits(32));                            
 
         }
     }

@@ -153,7 +153,7 @@ namespace Z0
                 return OpIdentity.Define(text.concat($"{opname}_{g}{k.Format()}{suffixPart}"));
         }
  
-         /// <summary>
+        /// <summary>
         /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
         /// </summary>
         /// <param name="opname">The base operator name</param>
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity numeric<T>(string opname, NumericKindType<T> hk = default, bool generic = true)
+        public static OpIdentity numeric<T>(string opname, NK<T> hk = default, bool generic = true)
             where T : unmanaged
                 => OpIdentity.operation(opname, FixedWidth.None, typeof(T).NumericKind(), generic);       
 

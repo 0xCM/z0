@@ -19,13 +19,13 @@ namespace Z0
         /// </summary>
         public readonly struct BinaryFuncType : IFuncType, IFuncArity<N2>
         {
-            public const FunctionClass Kind = FunctionClass.Function2;
+            public const FunctionClass Kind = FunctionClass.Func2;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(BinaryFuncType src)
-                =>  src.Classifier;
+                =>  src.Class;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
         /// <summary>
@@ -33,14 +33,14 @@ namespace Z0
         /// </summary>
         public readonly struct FuncType<T1,T2,R> : IFuncType<T1,T2,R>
         {
-            public const FunctionClass Kind = FunctionClass.Function2;
+            public const FunctionClass Kind = FunctionClass.Func2;
 
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(FuncType<T1,T2,R> src)
-                =>  src.Classifier;
+                =>  src.Class;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         public readonly struct BinaryOpType : IFuncArity<N2>
         {
-            public const FunctionClass Kind = FunctionClass.BinaryOperator;
+            public const FunctionClass Kind = FunctionClass.BinaryOp;
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorType<N2>(BinaryOpType src)
@@ -71,9 +71,9 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public readonly struct BinaryOpType<T> : IFuncType<N2,T>
         {
-            public const FunctionClass Kind = FunctionClass.BinaryOperator;
+            public const FunctionClass Kind = FunctionClass.BinaryOp;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorType<N2>(BinaryOpType<T> src)
@@ -89,7 +89,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(BinaryOpType<T> src)
-                => src.Classifier;
+                => src.Class;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType<T,T,T>(BinaryOpType<T> src)

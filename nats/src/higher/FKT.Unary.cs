@@ -19,13 +19,13 @@ namespace Z0
         /// </summary>
         public readonly struct UnaryFuncType : IFuncType, IFuncArity<N1>
         {
-            public const FunctionClass Kind = FunctionClass.Function1;
+            public const FunctionClass Kind = FunctionClass.Func1;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(UnaryFuncType src)
-                =>  src.Classifier;
+                =>  src.Class;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace Z0
         /// </summary>
         public readonly struct FuncType<T1,R> : IFuncType<T1,R>
         {
-            public const FunctionClass Kind = FunctionClass.Function1;
+            public const FunctionClass Kind = FunctionClass.Func1;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(FuncType<T1,R> src)
-                =>  src.Classifier;
+                =>  src.Class;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
         /// <summary>
@@ -47,11 +47,11 @@ namespace Z0
         /// </summary>
         public readonly struct UnaryOpType : IOperatorFuncType<N1>
         {
-            public const FunctionClass Kind = FunctionClass.UnaryOperator;
+            public const FunctionClass Kind = FunctionClass.UnaryOp;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(UnaryOpType src)
-                => src.Classifier;
+                => src.Class;
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorType<N1>(UnaryOpType src)
@@ -61,7 +61,7 @@ namespace Z0
             public static implicit operator UnaryOpType(OperatorType<N1> src)
                 => default;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         public readonly struct UnaryOpType<T> : IFuncType<N1,T>
         {
-            public const FunctionClass Kind = FunctionClass.UnaryOperator;
+            public const FunctionClass Kind = FunctionClass.UnaryOp;
 
             [MethodImpl(Inline)]
             public static implicit operator OperatorType<N1>(UnaryOpType<T> src)
@@ -87,7 +87,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(UnaryOpType<T> src)
-                => src.Classifier;
+                => src.Class;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType<T,T>(UnaryOpType<T> src)
@@ -97,7 +97,7 @@ namespace Z0
             public static implicit operator UnaryOpType(UnaryOpType<T> src)
                 => default;
             
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
     }
 }

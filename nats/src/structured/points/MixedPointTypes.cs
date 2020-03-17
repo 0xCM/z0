@@ -35,7 +35,7 @@ namespace Z0
             => Format();
     }
 
-    public readonly struct Point<X0,X1> : IPoint<X0,X1>, IPointCell<Point<X0,X1>>
+    public readonly struct MixedPoint<X0,X1> : IMixedPoint<X0,X1>, IPointCell<MixedPoint<X0,X1>>
     {
         public readonly X0 x0;
 
@@ -43,7 +43,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        internal Point(X0 x0, X1 x1)
+        internal MixedPoint(X0 x0, X1 x1)
         {
             this.x0 = x0;
             this.x1 = x1;
@@ -56,7 +56,7 @@ namespace Z0
             => Format();
     }    
 
-    public readonly struct Point<X0,X1,X2> : IPoint<X0,X0,X2>,  IPointCell<Point<X0,X1,X2>>
+    public readonly struct MixedPoint<X0,X1,X2> : IMixedPoint<X0,X0,X2>,  IPointCell<MixedPoint<X0,X1,X2>>
     {
         public readonly X0 x0;
 
@@ -66,7 +66,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        internal Point(X0 x0, X1 x1, X2 x2)
+        internal MixedPoint(X0 x0, X1 x1, X2 x2)
         {
             this.x0 = x0;
             this.x1 = x1;
@@ -78,7 +78,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
     }    
-
 }

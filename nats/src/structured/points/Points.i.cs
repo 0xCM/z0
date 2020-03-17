@@ -17,32 +17,29 @@ namespace Z0
 
     }
 
-
-    public interface INatPoint<N,P,T> 
-        where N : unmanaged, ITypeNat
-        where P : unmanaged
-        where T : unmanaged
-    {
-
-        Span<T> Components {get;}
-
-    }
-
-
-
     public interface IPoint<X0> : IPoint
     {
 
 
     }
 
-    public interface IPoint<X0,X1> : IPoint
+    public interface IPoint<N,T> : IPoint
+        where N : unmanaged, ITypeNat
+        where T : unmanaged
+    {
+        int Dimension => (int)Nats.nateval<N>();
+
+        Span<T> Components {get;}
+    }
+
+
+    public interface IMixedPoint<X0,X1> : IPoint
     {
 
 
     }
 
-    public interface IPoint<X0,X1,X3> : IPoint
+    public interface IMixedPoint<X0,X1,X3> : IPoint
     {
 
 

@@ -23,10 +23,10 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(FuncType<R> src)
-                =>  src.Classifier;
+                =>  src.Class;
 
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
         /// <summary>
@@ -40,9 +40,9 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(OperatorType<N> src)
-                => src.Classifier;
+                => src.Class;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
         /// <summary>
@@ -57,13 +57,13 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(OperatorType<N,T> src)
-                => src.Classifier;
+                => src.Class;
 
             [MethodImpl(Inline)]
             public static implicit operator FuncType<T,T>(OperatorType<N,T> src)
                 => default;
 
-            public FunctionClass Classifier { [MethodImpl(Inline)] get=> Kind;}
+            public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
 
     }

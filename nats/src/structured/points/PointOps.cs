@@ -11,7 +11,6 @@ namespace Z0
 
     using static Root;
 
-
     public static class PointOps
     {
         [MethodImpl(Inline)]
@@ -30,18 +29,18 @@ namespace Z0
                 => src.ToArray();
 
         [MethodImpl(Inline)]
-        public static HomPoints<N,T> Index<N,T>(this Span<HomPoint<N,T>> src)
+        public static Points<N,T> Index<N,T>(this Span<Point<N,T>> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => src;
 
-        public static PointSpanEmitter<X0,X1,R> Emitter<X0,X1,R>(this IEnumerable<Point<X0,X1,R>> src)
+        public static MixedPointSpanEmitter<X0,X1,R> Emitter<X0,X1,R>(this IEnumerable<MixedPoint<X0,X1,R>> src)
             where X0 : unmanaged
             where X1 : unmanaged
             where R : unmanaged
                 => src.ToArray();
 
-        public static HomPointSpanEmitter<N,T> Emitter<N,T>(this IEnumerable<HomPoint<N,T>> src, N n = default)
+        public static PointSpanEmitter<N,T> Emitter<N,T>(this IEnumerable<Point<N,T>> src, N n = default)
             where T : unmanaged
             where N : unmanaged,ITypeNat
                 => src.ToArray();

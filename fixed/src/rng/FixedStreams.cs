@@ -15,40 +15,22 @@ namespace Z0
 
     public static partial class FixedRngOps
     {
-        [MethodImpl(Inline)]
-        public static Fixed8 Fixed(this IPolyrand random, N8 w)
-            => random.Next<byte>();
+        public static IEnumerable<F> FixedStream<F,T>(this IPolyrand random, F f = default, T t = default)
+            where F : unmanaged, IFixed
+            where T : unmanaged
+                => new FixedStreamProvider<F,T>(random, random.Domain<T>()).Stream;
 
-        [MethodImpl(Inline)]
-        public static Fixed16 Fixed(this IPolyrand random, N16 w)
-            => random.Next<ushort>();
+        public static IEnumerable<F> FixedStream<F,T>(this IPolyrand random, Interval<T> celldomain)
+            where F : unmanaged, IFixed
+            where T : unmanaged
+                => new FixedStreamProvider<F,T>(random, celldomain).Stream;
 
-        [MethodImpl(Inline)]
-        public static Fixed32 Fixed(this IPolyrand random, N32 w)
-            => random.Next<uint>();
-
-        [MethodImpl(Inline)]
-        public static Fixed64 Fixed(this IPolyrand random, N64 w)
-            => random.Next<ulong>();
-
-        [MethodImpl(Inline)]
-        public static Fixed128 Fixed(this IPolyrand random, N128 w)
-            => random.NextPair<ulong>();
-
-        [MethodImpl(Inline)]
-        public static Fixed256 Fixed(this IPolyrand random, N256 w)
-            =>  (random.Fixed(n128), random.Fixed(n128));
-
-        [MethodImpl(Inline)]
-        public static Fixed512 Fixed(this IPolyrand random, N512 w)
-            => (random.Fixed(n256), random.Fixed(n256));
- 
         /// <summary>
         /// Creates a stream of fixed values
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="F">The fixed type</typeparam>
-        public static IEnumerable<F> StreamFixed<F>(this IPolyrand random, NumericKind cellkind = default)
+        public static IEnumerable<F> FixedStream<F>(this IPolyrand random)
             where F: unmanaged, IFixed
         {
             var w = (FixedWidth)default(F).FixedBitCount;
@@ -179,49 +161,5 @@ namespace Z0
                 yield return Unsafe.As<Fixed512, T>(ref next);
             }
         }
- 
-
-
-        /// <summary>
-        /// Produces an homogenous point index of dimension 2
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="count">The number of points to load into the index</param>
-        /// <typeparam name="T">The coordinate domain</typeparam>
-        public static HomPoints<N2,F> FixedHomPointIndex<F>(this IPolyrand random, int count, N2 n, F t = default)
-            where F : unmanaged, IFixed
-        {
-            var s1 = random.StreamFixed<F>().Take(count);
-            var s2 = random.StreamFixed<F>().Take(count);
-            return s1.Zip(s2).Select(a =>  Points.hom(a.First, a.Second)).ToArray();
-        }
-
-        /// <summary>
-        /// Produces an homogenous point index of dimension 2
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="count">The number of points to load into the index</param>
-        /// <typeparam name="T">The coordinate domain</typeparam>
-        public static HomPoints<N3,F> FixedHomPointIndex<F>(this IPolyrand random, int count, N3 n, F t = default)
-            where F : unmanaged, IFixed
-        {
-            var s1 = random.StreamFixed<F>().Take(count);
-            var s2 = random.StreamFixed<F>().Take(count);
-            var s3 = random.StreamFixed<F>().Take(count);
-            return s1.Zip(s2).Zip(s3).Select(a =>  Points.hom(a.First.First, a.First.Second, a.Second)).ToArray();
-        }
-
-
-        public static NatSpan<N,T> Contract<N,T>(this NatSpan<N,T> src, NatSpan<N,T> max)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            var dst = Z0.NatSpan.alloc<N, T>();
-            for(var i=0; i<dst.Length; i++)
-                dst[i] = Scale.contract(src[i],max[i]);
-            return dst;
-        }
-
-   }
-
+    }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    [SuppressUnmanagedCodeSecurity]
+    [SuppressUnmanagedCodeSecurity, ApiHost("api")]
     public static partial class Fixed
     {
         /// <summary>

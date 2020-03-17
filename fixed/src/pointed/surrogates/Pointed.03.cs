@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Pointed<X0,X1,X2,R> : IPointedSurrogate<PointedFunc<X0,X1,X2,R>, Point<X0,X1,X2>, Point<R>>
+    public readonly struct Pointed<X0,X1,X2,R> : IPointedSurrogate<PointedFunc<X0,X1,X2,R>, MixedPoint<X0,X1,X2>, Point<R>>
         where X0 : unmanaged, IFixed
         where X1 : unmanaged, IFixed
         where X2 : unmanaged, IFixed
@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Point<R> Evaluate(in Point<X0,X1,X2> x0) => F(x0);
+        public Point<R> Evaluate(in MixedPoint<X0,X1,X2> x0) => F(x0);
 
         public PointedFunc<X0,X1,X2,R> Evaluator  => F;        
     }

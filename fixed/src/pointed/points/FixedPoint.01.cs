@@ -15,18 +15,18 @@ namespace Z0
         where X0 : unmanaged,IFixed
         where X1 : unmanaged, IFixed
     {
-        public Point<X0,X1> Point {get;}
+        public MixedPoint<X0,X1> Point {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator Point<X0,X1>(FixedPoint<X0,X1> f)
+        public static implicit operator MixedPoint<X0,X1>(FixedPoint<X0,X1> f)
             => f.Point;
         
         [MethodImpl(Inline)]
-        public static implicit operator FixedPoint<X0,X1>(Point<X0,X1> p)
+        public static implicit operator FixedPoint<X0,X1>(MixedPoint<X0,X1> p)
             => new FixedPoint<X0,X1>(p);
 
         [MethodImpl(Inline)]
-        public FixedPoint(Point<X0,X1> p)
+        public FixedPoint(MixedPoint<X0,X1> p)
             => this.Point = p;    
     }
 }
