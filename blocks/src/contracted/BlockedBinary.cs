@@ -73,5 +73,4 @@ namespace Z0
     {
         ref readonly Block512<T> Invoke(in Block512<T> a, in Block512<T> b, in Block512<T> dst);
     }
-
 }

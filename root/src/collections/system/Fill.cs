@@ -20,22 +20,16 @@ namespace Z0
         /// <typeparam name="T">The array element type</typeparam>
         [MethodImpl(Inline)]
         public static T[] Clear<T>(this T[] src)
-        {
-            src?.Fill(default(T));
-            return src;
-        }
+            => Arrays.clear(src);
 
         /// <summary>
         /// Fills an array, in-place, with a specified value
         /// </summary>
-        /// <param name="src">The input array</param>
-        /// <param name="value">The fill value</param>
+        /// <param name="dst">The target array</param>
+        /// <param name="src">The source value</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static T[] Fill<T>(this T[] src, T value)
-        {
-            for(var i=0; i<src.Length; i++)
-                src[i] = value;
-            return src;
-        }
+        [MethodImpl(Inline)]
+        public static T[] Fill<T>(this T[] dst, T src)
+            => Arrays.fill(dst,src);
     }
 }

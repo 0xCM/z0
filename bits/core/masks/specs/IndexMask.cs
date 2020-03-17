@@ -27,7 +27,7 @@ namespace Z0
         NumericKind IMaskSpec.K 
         {
             [MethodImpl(Inline)]
-            get => Numeric.kind<T>();
+            get => NumericIdentity.kind<T>();
         }
     }
 }

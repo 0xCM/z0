@@ -6,9 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Reflection;
 
-    using static Root;
 
+    public readonly struct ApiSigBuilder
+    {
+
+        public ApiSig BuildSig(MethodInfo src)
+        {
+
+            
+            return ApiSig.Empty;
+            
+        }
+    }
 
 }

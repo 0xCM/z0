@@ -10,34 +10,34 @@ namespace Z0
     using static Root;
     using static IdentityShare;
 
-    public readonly struct ScalarIdentity  : IScalarIdentity
+    public readonly partial struct NumericIdentity  : INumericIdentity
     {
         public string Identifier {get;}            
 
         public NumericKind NumericKind {get;}           
 
         [MethodImpl(Inline)]
-        public static ScalarIdentity Define(NumericKind kind)
-            => new ScalarIdentity(kind);
+        public static NumericIdentity Define(NumericKind kind)
+            => new NumericIdentity(kind);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(ScalarIdentity src)
+        public static implicit operator string(NumericIdentity src)
             => src.Identifier;
 
         [MethodImpl(Inline)]
-        public static implicit operator TypeIdentity(ScalarIdentity src)
+        public static implicit operator TypeIdentity(NumericIdentity src)
             => src.AsTypeIdentity();
 
         [MethodImpl(Inline)]
-        public static bool operator==(ScalarIdentity a, ScalarIdentity b)
+        public static bool operator==(NumericIdentity a, NumericIdentity b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(ScalarIdentity a, ScalarIdentity b)
+        public static bool operator!=(NumericIdentity a, NumericIdentity b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        ScalarIdentity(NumericKind kind)
+        NumericIdentity(NumericKind kind)
         {
             this.NumericKind = kind;
             this.Identifier = $"{kind.WidthKind().Format()}{NumericKind.Indicator().Format()}";
@@ -54,11 +54,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(ScalarIdentity src)
+        public bool Equals(NumericIdentity src)
             => equals(this, src);
 
         [MethodImpl(Inline)]
-        public int CompareTo(ScalarIdentity other)
+        public int CompareTo(NumericIdentity other)
             => compare(this, other);
  
         public override int GetHashCode()

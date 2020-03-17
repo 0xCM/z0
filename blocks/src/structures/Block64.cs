@@ -14,6 +14,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 64-bit blocks
     /// </summary>
+    [Segmented(FixedWidth.W64,true,FixedWidth.NumericWidths)]
     public readonly ref struct Block64<T>
         where T : unmanaged
     {

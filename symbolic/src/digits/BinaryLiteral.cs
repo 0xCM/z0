@@ -64,7 +64,7 @@ namespace Z0
         public NumericKind Kind 
         {
             [MethodImpl(Inline)]
-            get => Numeric.kind<T>();
+            get => NumericIdentity.kind<T>();
         }
 
         public override string ToString()

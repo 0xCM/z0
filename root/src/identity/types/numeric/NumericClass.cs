@@ -6,14 +6,19 @@ namespace Z0
 {
     using System;
 
-    public enum NumericSign : byte
+    public enum SignAspect : byte
     {
-        None = 0,
-        
-        Unsigned = 0,
+        None = 0,        
 
         Signed = 2,
 
+    }
+
+    public enum FloatingAspect : byte
+    {
+        None = 0,
+
+        Float = 4,
     }
 
     [Flags]
@@ -32,12 +37,12 @@ namespace Z0
         /// <summary>
         /// Classifies signed integral types; if sign bit is not enabled and float bit is not enabled, the number is considered unsigned
         /// </summary>
-        Signed = NumericSign.Signed,
+        Signed = SignAspect.Signed,
 
         /// <summary>
         /// Classifies floating-point types
         /// </summary>
-        Float = 4,
+        Float = FloatingAspect.Float,
 
         /// <summary>
         /// Classifies numeric types that are 8-bits wide

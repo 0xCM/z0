@@ -12,8 +12,9 @@ namespace Z0
     using static Blocks;
 
     /// <summary>
-    /// Encapsulates a span that can be evenly partitioned into 32-bit blocks
+    /// Encapsulates a span that can be evenly partitioned into 16-bit blocks
     /// </summary>
+    [Segmented(FixedWidth.W16,true,FixedWidth.W8, FixedWidth.W16)]
     public readonly ref struct Block16<T>
         where T : unmanaged
     {
@@ -28,7 +29,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in Block16<T> src)
             => src.data;
-
                     
         [MethodImpl(Inline)]
         internal Block16(Span<T> src)

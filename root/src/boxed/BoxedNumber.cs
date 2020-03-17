@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber Define<T>(T src)
             where T : unmanaged
-                => new BoxedNumber(src, Numeric.kind<T>());
+                => new BoxedNumber(src, NumericIdentity.kind<T>());
 
         [MethodImpl(Inline)]
         public static BoxedNumber Define(object src, NumericKind kind)

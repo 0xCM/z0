@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using static AsIn;
     using static As;    
     using static Root;
     using static CastInternals;

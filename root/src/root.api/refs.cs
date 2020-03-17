@@ -100,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T head<T>(Span<T> src)
             => ref refs.head(src);
-
+        
         /// <summary>
         /// Returns a reference to the head of a span, offset by a specified amount
         /// </summary>
@@ -128,6 +128,18 @@ namespace Z0
         public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
             where T : unmanaged
                 => ref refs.head(src,offset);
+
+        [MethodImpl(Inline)]
+        public static unsafe ref T head<T>(T[] src)
+            => ref refs.head(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(T[] src, int count)
+            => ref refs.skip(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek<T>(T[] src, int count)
+            => ref refs.seek(src,count);
 
         /// <summary>
         /// Presents generic reference as a generic pointer

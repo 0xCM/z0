@@ -7,16 +7,24 @@ namespace Z0
     using System;
     using System.Reflection;
 
+
     /// <summary>
     /// A succinct type signature
     /// </summary>
-    public class TypeSig
+    public readonly struct TypeSig
     {        
         public static TypeSig FromType(Type src)
-            => new TypeSig(src.DisplayName(), src.IsConstructedGenericType,  src.IsGenericType && !src.IsConstructedGenericType, src.IsByRef, src.IsPointer);
+            => new TypeSig(
+                src.DisplayName(), 
+                src.IsConstructedGenericType,  
+                src.IsGenericType && 
+                !src.IsConstructedGenericType, 
+                src.IsByRef, 
+                src.IsPointer);
 
         public static TypeSig FromParameter(ParameterInfo src)
         {            
+            
             var type = src.ParameterType;
             var name = type.EffectiveType().DisplayName();            
             return new TypeSig(name, 
@@ -28,9 +36,9 @@ namespace Z0
                 type.IsPointer);
         }
 
-        public TypeSig(string Name, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn = false, bool IsOut = false, bool IsPointer = false)
+        TypeSig(string DisplayName, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn = false, bool IsOut = false, bool IsPointer = false)
         {
-            this.Name = Name;
+            this.DisplayName = DisplayName;
             this.IsOpenGeneric = IsOpenGeneric;
             this.IsClosedGeneric = IsClosedGeneric;
             this.IsByRef = IsByRef;
@@ -39,7 +47,7 @@ namespace Z0
             this.IsPointer = IsPointer;
         }
 
-        public string Name {get;}
+        public string DisplayName {get;}
 
         public bool IsOpenGeneric {get;}
 
@@ -57,7 +65,7 @@ namespace Z0
             => IsIn ? "in " : IsOut ? "out " : IsByRef ? "ref " : string.Empty;
 
         public string Format()
-            => $"{Modifier}{Name}";        
+            => $"{Modifier}{DisplayName}";        
  
         public override string ToString()
             => Format();

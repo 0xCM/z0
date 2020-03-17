@@ -90,7 +90,7 @@ namespace Z0
             Vector128<U> IVec128.Vector<U>()
                 => Subject.As<T,U>();
 
-            S INullary<S>.Empty
+            S INullary<S>.Zero
                 => default;
             
             bool INullary<S>.IsEmpty
@@ -148,7 +148,7 @@ namespace Z0
             Vector256<U> IVec256.ToVector<U>()
                 =>  Subject.As<T,U>();
 
-            S INullary<S>.Empty
+            S INullary<S>.Zero
                 => default;
 
             bool INullary<S>.IsEmpty

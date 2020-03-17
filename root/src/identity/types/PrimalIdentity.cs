@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         PrimalIdentity(NumericKind kind, string keyword)
         {
-            this.Identifier = ScalarIdentity.Define(kind);
+            this.Identifier = NumericIdentity.Define(kind);
             this.Keyword = keyword;
         }
 

@@ -251,14 +251,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static bool IsNonNumericSystemType(this Type src)
-            => src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString() || src.IsObject();
+            => TypeIdentities.IsNonNumericSystemType(src);
 
         /// <summary>
         /// Determines whether a type is system-defined
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static bool IsSystemType(this Type src)
-            => src.IsNumeric() || src.IsNonNumericSystemType();
+            => TypeIdentities.IsSystemType(src);
         
         public static bool IsCoreClrType(this Type src)
             => src.Assembly == typeof(int).Assembly;

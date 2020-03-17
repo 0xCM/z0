@@ -173,7 +173,7 @@ namespace Z0.Asm.Validation
             where W : unmanaged, ITypeNat
         {
             var archive = Context.CodeArchive(catalog,host);
-            var id = NaturalIdentity.contracted(opname, w, Numeric.kind<T>());
+            var id = NaturalIdentity.contracted(opname, w, NumericIdentity.kind<T>());
             Context.Notify($"{id}");
             var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)

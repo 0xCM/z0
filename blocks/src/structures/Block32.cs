@@ -14,6 +14,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 32-bit blocks
     /// </summary>
+    [Segmented(FixedWidth.W32,true,FixedWidth.W8, FixedWidth.W16, FixedWidth.W32)]
     public readonly ref struct Block32<T>
         where T : unmanaged
     {
@@ -28,7 +29,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in Block32<T> src)
             => src.data;
-
                     
         [MethodImpl(Inline)]
         internal Block32(Span<T> src)

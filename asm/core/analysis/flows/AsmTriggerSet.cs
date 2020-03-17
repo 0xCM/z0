@@ -37,7 +37,7 @@ namespace Z0.Asm
         public bool IsEmpty 
             => InstructionTriggers.Count == 0 && FunctionTriggers.Count == 0;
         
-        AsmTriggerSet INullary<AsmTriggerSet>.Empty 
+        AsmTriggerSet INullary<AsmTriggerSet>.Zero 
             => Empty;
 
         public void FireOnMatch(AsmInstructionList instructions)

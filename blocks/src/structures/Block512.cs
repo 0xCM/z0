@@ -15,6 +15,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 512-bit blocks
     /// </summary>
+    [Segmented(FixedWidth.W512,true,FixedWidth.NumericWidths)]
     public readonly ref struct Block512<T>
         where T : unmanaged
     {
@@ -115,7 +116,6 @@ namespace Z0
             get => data.AsBytes();
         }
 
-
         /// <summary>
         /// Mediates access to the the underlying storage cells via block index and block-relative cell index
         /// </summary>
@@ -178,8 +178,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();                           
-        
-        
+            => ref data.GetPinnableReference();            
     }
 }

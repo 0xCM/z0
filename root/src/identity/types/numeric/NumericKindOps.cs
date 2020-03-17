@@ -99,14 +99,14 @@ namespace Z0
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline)]
         public static bool Is(this NK k, NumericKindId match)        
-            => Numeric.contains(k,match);
+            => NumericIdentity.contains(k,match);
 
         /// <summary>
         /// Enumerates the distinct numeric kinds represented by the (bitfield) source kind
         /// </summary>
         /// <param name="k">The kind to evaluate</param>
         public static ISet<NK> DistinctKinds(this NK k)  
-            => Numeric.kindset(k);    
+            => NumericIdentity.kindset(k);    
 
         /// <summary>
         /// Determines whether a type is a primal float

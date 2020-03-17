@@ -45,7 +45,7 @@ namespace Z0.Asm
 
         public bool IsEmpty => Code.IsEmpty && Member.IsEmpty;
 
-        ApiMemberCode INullary<ApiMemberCode>.Empty 
+        ApiMemberCode INullary<ApiMemberCode>.Zero 
             => Empty;
 
         public ApiCode ApiCode

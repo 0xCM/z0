@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src) 
             where T : struct
-                => (T)ocast(src.Boxed, Numeric.kind<T>());
+                => (T)ocast(src.Boxed, NumericIdentity.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BoxedNumber Convert<T>(T src) 
             where T : struct
-                => BoxedNumber.Define(src, Numeric.kind<T>());
+                => BoxedNumber.Define(src, NumericIdentity.kind<T>());
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
         {

@@ -10,7 +10,6 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static ReflectionFlags;
     using static Root;
 
     partial class RootReflections
@@ -200,5 +199,42 @@ namespace Z0
             return null;
         }
 
+        /// <summary>
+        /// Returns the underlying system type if enclosed by a source type, otherwise returns the source type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static Type Unwrap(this Type src)
+            => src.GetElementType() ?? src;
+
+        /// <summary>
+        /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static Type EffectiveType(this Type src)
+            => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
+
+        /// <summary>
+        /// If a value type and not an enum, returns the type; 
+        /// If an enum returns the unerlying integral type; 
+        /// If a nullable value typethat is not an enum, returns the underlying type; 
+        /// if nullable enum, returns the non-nullable underlying integral type
+        /// If a pointer returns the pointee type
+        /// Otherwise, reurns the effective type
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static Type GetRootType(this Type t)
+        {
+            if (t.IsNullableType())
+            {
+                var _t = Nullable.GetUnderlyingType(t);
+                return _t.IsEnum ? _t.GetEnumUnderlyingType() : _t;
+            }
+            else if(t.IsEnum)
+                return t.GetEnumUnderlyingType();
+            else if(t.IsPointer)
+                return t.GetElementType() ?? typeof(void);
+            else
+                return t.EffectiveType();
+        }
     }
 }

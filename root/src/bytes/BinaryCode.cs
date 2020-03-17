@@ -106,7 +106,7 @@ namespace Z0
             get => Data;
         }
 
-        BinaryCode INullary<BinaryCode>.Empty 
+        BinaryCode INullary<BinaryCode>.Zero 
             => Empty;
 
         public byte this[int i] { [MethodImpl(Inline)] get=> Data[i]; }

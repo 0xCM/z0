@@ -305,6 +305,10 @@ namespace Z0
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
             => ref refs.skip(in head(src), count);
 
+        [MethodImpl(Inline)]
+        static ref T spanhead<T>(Span<T> src)
+            => ref refs.head(src);
+
         /// <summary>
         /// Returns a reference to the location of the first element
         /// </summary>
@@ -312,7 +316,28 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static unsafe ref T head<T>(T[] src)
-            => ref src[0];
+            => ref spanhead<T>(src);
+
+        /// <summary>
+        /// Adds an offset to the head of an array, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ref T seek<T>(T[] src, int count)
+            => ref seek(ref head<T>(src), count);
+
+        /// <summary>
+        /// Adds an offset to the head of an array, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ref readonly T skip<T>(T[] src, int count)
+            => ref skip(in head<T>(src), count);
+
 
         /// <summary>
         /// Adds an offset to the head of a span, measured relative to the reference type
@@ -322,9 +347,10 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref T seek<T>(Span<T> src, int count)
-            => ref refs.seek(ref head(src), count);
+            => ref seek(ref head(src), count);
 
-       /// <summary>
+
+        /// <summary>
         /// Presents the bytespan head as a reference to an unsigned 8-bit integer
         /// </summary>
         /// <param name="src">The source span</param>

@@ -23,7 +23,7 @@ namespace Z0
         public static T foldA<T>(IEnumerable<T> src)
             where T : unmanaged, IMonoidA<T>
         {        
-            var cumulant = default(T).Empty;
+            var cumulant = default(T).Zero;
             var items = src.ToArray();
             var count = items.Length;
             for(var i=0; i<count; i++)

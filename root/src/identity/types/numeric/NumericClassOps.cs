@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="k">The class to query</param>
         /// <param name="id">The identity to match</param>
         [MethodImpl(Inline), Op]
-        public static bool Identifies(this NumericClass k, NumericTypeId id)
+        public static bool Identifies(this NumericClass k, NumericClassId id)
             => ((uint)k & (uint)id) == (uint)id;
     }
 }

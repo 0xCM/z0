@@ -16,7 +16,7 @@ namespace Z0
     using NT = NumericKinded;
     using NI = NumericIndicator;
 
-    partial class RootNumericOps
+    public static class NumericIdentityOps
     {
         /// <summary>
         /// Determines the numeric kind of a type, possibly none
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline)]
         public static NK NumericKind(this Type src)
-            => Numeric.kind(src).ValueOrDefault();
+            => NumericIdentity.kind(src).ValueOrDefault();
 
         /// <summary>
         /// Determines the numeric kind identified by a type code, if any
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="tc">The type code to evaluate</param>
         [MethodImpl(Inline)]
         public static NumericKind NumericKind(this TypeCode tc)
-            => Numeric.kind(tc);
+            => NumericIdentity.kind(tc);
 
         /// <summary>
         /// Returns true if the source type represents a primal numeric type
@@ -40,44 +40,14 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
         public static bool IsNumeric(this Type src)
-            => src.NumericKind().IsSome();
+            => TypeIdentities.IsNumeric(src);
 
         /// <summary>
         /// Determines whether a method has numeric operands (if any) and a numeric return type (if any)
         /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNumeric(this MethodInfo m)
-            => (m.HasVoidReturn() || m.ReturnType.IsNumeric()) && m.ParameterTypes().All(t => t.IsNumeric());
-
-        /// <summary>
-        /// Determines whether a method is a function with numeric operands (if any) and return type
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNumericFunction(this MethodInfo m)
-            => m.IsFunction() 
-            && m.ReturnType.IsNumeric()
-            && m.ParameterTypes().All(t => t.NumericKind() != NK.None);
-
-        /// <summary>
-        /// Determines whether a method is a numeric operator with a specified arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNumericOperator(this MethodInfo m, int? arity = null)
-            => m.IsOperator()  && m.IsNumeric() && (arity != null ? m.Arity() == arity : true);        
-
-        /// <summary>
-        /// Queries the stream for methods that are recognized as numeric operators
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        public static IEnumerable<MethodInfo> NumericOperators(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsNumericOperator());
-
-        /// <summary>
-        /// Selects numeric operators with a specifed arity from the source stream
-        /// </summary>
-        /// <param name="src">The methods to filter</param>
-        public static IEnumerable<MethodInfo> NumericOperators(this IEnumerable<MethodInfo> src, int arity)
-            => src.Where(x => x.IsNumericOperator(arity));
+        /// <param name="src">The method to examine</param>
+        public static bool IsNumeric(this MethodInfo src)
+            => TypeIdentities.IsNumeric(src);
 
         /// <summary>
         /// Defines a numeric type model over a clr type that represents a numeric type; if
@@ -93,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         public static ISet<Type> DistinctTypes(this NK k)
-            => Numeric.typeset(k);
+            => NumericIdentity.typeset(k);
 
         /// <summary>
         /// Convers a source value, which is hopefully a supported kind, to a target kind
@@ -124,5 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsSome(this NumericKinded src)
             => !src.IsEmpty;
+
+            
     }
 }

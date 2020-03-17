@@ -8,6 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static Root;
 
+    public interface IAs
+    {
+
+    }
+
+    public interface IAs<S,T> : IAs        
+    {
+        T As(S src);
+    }
+    
     public interface IAsNumeric<S,T> : IAs<S,T>
         where T : unmanaged
         

@@ -386,7 +386,7 @@ namespace Z0
         public static Block512x64f bk512x64f()
             => default;       
 
-       public static BlockedKind kind(FixedWidth width, NumericKindId id)            
+        public static BlockedKind kind(FixedWidth width, NumericKindId id)            
         {
             var k = width switch 
                     { FixedWidth.W16 => 

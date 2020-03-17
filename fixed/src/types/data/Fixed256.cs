@@ -13,6 +13,7 @@ namespace Z0
     using static Root;
 
     [StructLayout(LayoutKind.Sequential)]
+    [Segmented(FixedWidth.W256,false,FixedWidth.NumericWidths)]
     public struct Fixed256  : IFixed<Fixed256>, IEquatable<Fixed256>
     {
         public const int BitWidth = 256;        
@@ -86,11 +87,6 @@ namespace Z0
 
         public override string ToString() 
             => array(X0,X1).FormatDataList();
-    }
-
-    partial class Fixed
-    {
-
     }
 
 }

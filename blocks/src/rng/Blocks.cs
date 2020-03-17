@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Root;
-    using static Nats;
 
     using B = Blocks;
 
@@ -301,6 +298,5 @@ namespace Z0
         public static Block512<T> Blocks<T>(this IPolyrand random, N512 w, int count, T t)
             where T : unmanaged
                 => random.Blocks<T>(w,count); 
-
     }
 }

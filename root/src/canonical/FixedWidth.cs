@@ -71,7 +71,9 @@ namespace Z0
         /// <summary>
         /// Indicates a bit-width of 1024
         /// </summary>
-        W1024 = 1024
+        W1024 = 1024,
+
+        NumericWidths = W8 | W16 | W32 | W64,
     }
 
     public static class FixedWidthOps

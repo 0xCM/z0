@@ -11,6 +11,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
+    using static TypeIdentities;
 
     public static partial class Identity
     {
@@ -120,8 +121,8 @@ namespace Z0
                         last = text.concat(IDI.Vector, width(argtype).Format());
                     else if(argtype.IsBlocked())
                         last = text.concat(IDI.Block, width(argtype).Format());
-                    else if(argtype.IsSpan())
-                        last = argtype.SpanKind().Format();
+                    else if(IsSpan(argtype))
+                        last = SpanKind(argtype).Format();
                 }
                 
                 id += last;

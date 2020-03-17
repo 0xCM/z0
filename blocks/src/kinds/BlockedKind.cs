@@ -281,7 +281,7 @@ namespace Z0
     }
 
 
-     /// <summary>
+    /// <summary>
     /// Identifies the types over which segmented types can close
     /// </summary>
     public enum NumericSegmentKind  : uint

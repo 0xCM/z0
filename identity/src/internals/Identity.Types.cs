@@ -10,6 +10,32 @@ namespace Z0
     using System.Linq;
 
     using static Root;
+    using static TypeIdentities;
+
+    // public readonly struct TypeIdentityWorkflow
+    // {
+    //     static Option<TypeIdentity> CommonId(Type arg)
+    //     {
+    //         if(arg.IsPointer)
+    //             return arg.PointerId();
+    //         else if(arg.IsNat())
+    //             return arg.NatId();
+    //         else if(arg.IsSystemType())
+    //             return arg.PrimalId();
+    //         else if(arg.IsEnum)
+    //             return arg.EnumId();
+    //         else if(arg.IsSegmented())
+    //             return arg.SegmentedId();
+    //         else if(IsSpan(arg))
+    //             return arg.SpanId();
+    //         else if(arg.IsNatSpan())
+    //             return arg.NatSpanId();  
+    //         else           
+    //             return TypeIdentity.Define(arg.DisplayName());
+    //     }
+
+
+    // }
 
     partial class Identity
     {
@@ -31,13 +57,13 @@ namespace Z0
         /// Transforms a nonspecific identity part into a specialized scalar part, if the source part is indeed a scalar identity
         /// </summary>
         /// <param name="part">The source part</param>
-        static Option<ScalarIdentity> scalar(IdentityPart part)
+        static Option<NumericIdentity> scalar(IdentityPart part)
         {
-            var nk = part.PartKind == IdentityPartKind.Scalar ? Numeric.kind(part.Identifier) : NumericKind.None;
+            var nk = part.PartKind == IdentityPartKind.Scalar ? NumericIdentity.kind(part.Identifier) : NumericKind.None;
             if(nk.IsSome())
-                return ScalarIdentity.Define(nk);                
+                return NumericIdentity.Define(nk);                
             else                
-                return none<ScalarIdentity>();                
+                return none<NumericIdentity>();                
         }
         
         /// <summary>
@@ -70,9 +96,9 @@ namespace Z0
             else if(arg.IsNat())
                 return arg.NatId();
             else if(arg.IsSystemType())
-                return arg.PrimalId();
+                return IdentifyPrimitive(arg);
             else if(arg.IsEnum)
-                return arg.EnumId();
+                return IdentifyEnum(arg);
             else if(arg.IsSegmented())
                 return arg.SegmentedId();
             else if(IsSpan(arg))
@@ -103,44 +129,27 @@ namespace Z0
                 let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)                
                 select SegmentedIdentity.Define(i,segwidth,nk).AsTypeIdentity();
 
-        static Option<TypeIdentity> EnumId(this Type t)        
-        {
-            var id = EnumIdentity.From(t);
-            return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
-        } 
+        // static Option<TypeIdentity> EnumId(this Type t)        
+        // {
+        //     var id = EnumIdentity.From(t);
+        //     return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
+        // } 
                 
         static Option<TypeIdentity> NatId(this Type arg)
             => from v in arg.NatValue() 
                 let id = text.concat(IDI.Nat, v.ToString())
                 select TypeIdentity.Define(id);
         
-        static Option<TypeIdentity> PrimalId(this Type arg)
-        {
-            var id = PrimalIdentity.From(arg);
-            return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
-        }
+        // static Option<TypeIdentity> PrimalId(this Type arg)
+        // {
+        //     var id = PrimalIdentity.From(arg);
+        //     return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
+        // }
 
-        /// <summary>
-        /// Classifies a type according to whether it is a span, a readonly span, or otherwise
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        static SpanKind SpanKind(this Type t)
-            => t.GenericDefinition() == typeof(Span<>) ? Z0.SpanKind.Mutable
-              : t.GenericDefinition() == typeof(ReadOnlySpan<>) ? Z0.SpanKind.Immutable
-              : 0;
-
-        /// <summary>
-        /// Determines whether a type is parametric over the natural numbers
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        static bool IsSpan(this Type t)
-            => t.SpanKind().IsSome();
 
         static Option<TypeIdentity> SpanId(this Type arg)
         {
-            var kind = arg.SpanKind();
+            var kind = SpanKind(arg);
             if(kind.IsSome())
             {
                 var cellid = arg.GetGenericArguments().Single().CommonId();

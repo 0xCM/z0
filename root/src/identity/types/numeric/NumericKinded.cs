@@ -20,7 +20,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static implicit operator NumericKind(NK<T> src)
-            => Numeric.kind<T>();
+            => NumericIdentity.kind<T>();
 
         [MethodImpl(Inline)]
         public static implicit operator T(NK<T> src)
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
         public static NumericKinded From(Type src)
-            => Numeric.kind(src).MapValueOrDefault(k => new NumericKinded(src,k), NumericKinded.Empty);
+            => NumericIdentity.kind(src).MapValueOrDefault(k => new NumericKinded(src,k), NumericKinded.Empty);
         
         /// <summary>
         /// Returns numeric type associated with a specified numeric kind, or the empty

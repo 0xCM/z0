@@ -16,6 +16,7 @@ namespace Z0
 
 
     [StructLayout(LayoutKind.Sequential)]
+    [Segmented(FixedWidth.W512,false,FixedWidth.NumericWidths)]
     public struct Fixed512V  : IFixed<Fixed512V>
     {
         public const int BitWidth = 512;        

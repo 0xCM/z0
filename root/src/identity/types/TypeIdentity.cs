@@ -21,8 +21,8 @@ namespace Z0
         /// </summary>
         /// <param name="width">The scalar bit-width</param>
         [MethodImpl(Inline)]
-        public static ScalarIdentity Scalar(NumericKind kind)
-            => ScalarIdentity.Define(kind);
+        public static NumericIdentity Scalar(NumericKind kind)
+            => NumericIdentity.Define(kind);
 
         [MethodImpl(Inline)]
         public static TypeIdentity Define(string identifier)

@@ -13,6 +13,7 @@ namespace Z0
     using static Root;
 
     [StructLayout(LayoutKind.Sequential)]
+    [Segmented(FixedWidth.W128,false,FixedWidth.NumericWidths)]
     public struct Fixed128 : IFixed<Fixed128>, IEquatable<Fixed128>
     {
         public const int BitWidth = 128;        

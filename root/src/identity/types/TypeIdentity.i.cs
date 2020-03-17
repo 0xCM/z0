@@ -35,7 +35,7 @@ namespace Z0
 
     }
 
-    public interface IScalarIdentity : ITypeIdentity<ScalarIdentity>
+    public interface INumericIdentity : ITypeIdentity<NumericIdentity>
     {
 
         

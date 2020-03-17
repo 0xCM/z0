@@ -8,7 +8,7 @@ namespace Z0
 
     using NC = NumericClass;
 
-    public enum NumericTypeId : byte
+    public enum NumericClassId : byte
     {
         /// <summary>
         /// The nonidentifing identifier
