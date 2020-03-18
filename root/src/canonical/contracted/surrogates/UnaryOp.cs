@@ -9,25 +9,44 @@ namespace Z0
 
     using static Root;
 
-    /// <summary>
-    /// Captures a delegate that is exposed as a unary operator
-    /// </summary>
-    public readonly struct UnaryOpSurrogate<T> : IUnaryOp<T>
+    partial class Surrogates
     {
-        public readonly string Name;
-
-        readonly Func<T,T> f;
-
-        [MethodImpl(Inline)]
-        internal UnaryOpSurrogate(Func<T,T> f, string name)            
+        public readonly struct UnaryOp<T> : IUnaryOp<T>
         {
-            this.f = f;
-            this.Name = name;
-        }
-        
-        public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id {get;}
 
-        [MethodImpl(Inline)]
-        public T Invoke(T a) => f(a);
+            readonly Z0.UnaryOp<T> F;
+
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T,T>(UnaryOp<T> src)
+                => src.ToFunc();
+
+            [MethodImpl(Inline)]
+            internal UnaryOp(Z0.UnaryOp<T> f, OpIdentity id)            
+            {
+                this.F = f;
+                this.Id = id;
+            }
+
+            [MethodImpl(Inline)]
+            internal UnaryOp(Z0.UnaryOp<T> f, string name)            
+            {
+                this.F = f;
+                this.Id = OpIdentity.contracted<T>(name);
+            }
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a) => F(a);
+
+            public Z0.UnaryOp<T> Subject
+            {
+                [MethodImpl(Inline)]
+                get => F;
+            }
+
+            [MethodImpl(Inline)]
+            public Func<T,T> AsFunc()
+                => this.ToFunc();
+        }            
     }
 }

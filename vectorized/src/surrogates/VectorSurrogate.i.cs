@@ -14,6 +14,12 @@ namespace Z0
     using static Nats;
     using VT = Z0.VectorType;
 
+    public interface ISurrogate<S,T>
+        where S : struct, ISurrogate<S,T>
+    {
+        T Subject {get;}
+    }
+    
     public static partial class VectorSurrogates
     {
         public interface IVec : ICustomFormattable

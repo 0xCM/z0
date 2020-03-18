@@ -28,7 +28,7 @@ namespace Z0
         IEnumerable<IAssemblyResolution> Designates {get;}
 
 
-        IAssemblyCatalog Catalog {get;}
+        IApiCatalog Catalog {get;}
 
         /// <summary>
         /// The resolved assembly

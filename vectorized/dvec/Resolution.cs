@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public DVec() : base(AssemblyId.DVec) {}
         
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.DVec) {} }            
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.DVec) {} }            
     }
 }

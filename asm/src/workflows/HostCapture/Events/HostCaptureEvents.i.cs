@@ -26,9 +26,9 @@ namespace Z0.Asm
 
         ExtractReportSaved HostReportSaved => ExtractReportSaved.Empty;
 
-        StepStart<IAssemblyCatalog> CaptureCatalogStart => StepStarted<IAssemblyCatalog>();
+        StepStart<IApiCatalog> CaptureCatalogStart => StepStarted<IApiCatalog>();
 
-        StepEnd<IAssemblyCatalog> CaptureCatalogEnd => StepEnded<IAssemblyCatalog>();
+        StepEnd<IApiCatalog> CaptureCatalogEnd => StepEnded<IApiCatalog>();
 
         StepStart<ApiHost> CaptureApiHostStart => StepStarted<ApiHost>();
 

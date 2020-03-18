@@ -47,10 +47,10 @@ namespace Z0
             where T : unmanaged        
                 => Dot<T>.Op;
 
-        readonly struct ByteSwapFactory<T> : IOpSvcFactory<ByteSwapFactory<T>, ByteSwap<T>>
+        readonly struct ByteSwapFactory<T> : IOpServiceFactory<ByteSwapFactory<T>, ByteSwap<T>>
             where T : unmanaged { public ByteSwap<T> Service => ByteSwap<T>.Op; }
 
-        readonly struct BitSliceFactory<T> : IOpSvcFactory<BitSliceFactory<T>, BitSlice<T>>
+        readonly struct BitSliceFactory<T> : IOpServiceFactory<BitSliceFactory<T>, BitSlice<T>>
             where T : unmanaged { public BitSlice<T> Service => BitSlice<T>.Op; }
     }
 }

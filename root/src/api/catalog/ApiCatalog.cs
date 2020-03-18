@@ -13,8 +13,8 @@ namespace Z0
     /// Catalogs resource, operations and services provied by an assembly
     /// </summary>
     /// <typeparam name="C">The reifying type</typeparam>
-    public abstract class AssemblyCatalog<C> : IAssemblyCatalog
-        where C : AssemblyCatalog<C>
+    public abstract class ApiCatalog<C> : IApiCatalog
+        where C : ApiCatalog<C>
     {
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
@@ -33,13 +33,13 @@ namespace Z0
 
         public DataResourceIndex Resources  {get;}
 
-        public Type[] ServiceHostTypes {get;}
+        public Type[] HostTypes {get;}
 
         public ApiHost[] GenericApiHosts {get;}
 
         public ApiHost[] DirectApiHosts {get;}
 
-        protected AssemblyCatalog(AssemblyId id)
+        protected ApiCatalog(AssemblyId id)
         {
             AssemblyId = id;
             CatalogedAssembly = typeof(C).Assembly;
@@ -47,17 +47,17 @@ namespace Z0
             Resources = DataResourceIndex.Empty;
             DirectApiHosts = ApiHosts.Where(h => h.HostKind.DefinesDirectOps()).ToArray();
             GenericApiHosts = ApiHosts.Where(h => h.HostKind.DefinesGenericOps()).ToArray();
-            ServiceHostTypes = OpServices.ProviderTypes(CatalogedAssembly).ToArray();
+            HostTypes = OpServices.ProviderTypes(CatalogedAssembly).ToArray();
         }
         
-        protected AssemblyCatalog(AssemblyId id, DataResourceIndex resources)
+        protected ApiCatalog(AssemblyId id, DataResourceIndex resources)
             : this(id)
         {
             Resources = resources ?? DataResourceIndex.Empty;
         }                    
     }
 
-    public sealed class EmptyCatalog : AssemblyCatalog<EmptyCatalog>
+    public sealed class EmptyCatalog : ApiCatalog<EmptyCatalog>
     {
         public EmptyCatalog()
             : base(AssemblyId.None)

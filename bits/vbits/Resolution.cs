@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public VBits() : base (AssemblyId.VBits) {}
 
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.VBits) { } }
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.VBits) { } }
     }
 }

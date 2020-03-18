@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public VData() : base(AssemblyId.VData) {}
         
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.VData, DataResourceIndex.Create(Z0.Data.Resources)) {} }            
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.VData, DataResourceIndex.Create(Z0.Data.Resources)) {} }            
     }
 }

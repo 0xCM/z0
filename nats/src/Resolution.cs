@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Nats() : base(AssemblyId.Nats) {}
 
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Nats) {} }
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Nats) {} }
     }
 }

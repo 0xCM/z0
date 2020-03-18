@@ -12,6 +12,6 @@ namespace Z0.Resolutions
 
         public Matrix() : base(Identity) {}
     
-        public class C : AssemblyCatalog<C> { public C() : base(Identity) { } }
+        public class C : ApiCatalog<C> { public C() : base(Identity) { } }
     }
 }

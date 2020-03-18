@@ -42,10 +42,10 @@ namespace Z0
         public virtual IEnumerable<IAssemblyResolution> Designates {get;}
             = new IAssemblyResolution[]{};
 
-        public IAssemblyCatalog Catalog
-            =>(IAssemblyCatalog)CatalogProvider.Define(Id, Resolved, Operations);
+        public IApiCatalog Catalog
+            =>(IApiCatalog)ApiCatalogProvider.Define(Id, Resolved, Operations);
 
-        public virtual IAssemblyCatalog Operations {get;}
+        public virtual IApiCatalog Operations {get;}
             = new EmptyCatalog();
 
         public string Format()
@@ -60,9 +60,9 @@ namespace Z0
 
     public abstract class AssemblyResolution<T,C> : AssemblyResolution<T>
         where T : AssemblyResolution<T,C>, new()
-        where C : AssemblyCatalog<C>, new()
+        where C : ApiCatalog<C>, new()
     {
-        public override IAssemblyCatalog Operations  => new C();
+        public override IApiCatalog Operations  => new C();
 
         protected AssemblyResolution(AssemblyId id)
             : base(id)

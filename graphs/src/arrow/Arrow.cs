@@ -12,7 +12,7 @@ namespace Z0
     using static Arrows;
     using Z0;
 
-    public interface IArrow<A> : IFormattable<A>, ILengthwise
+    public interface IArrow<A> : ICustomFormattable, ILengthwise
         where A : IEquatable<A>
     {
         Span<A> Nodes {get;}

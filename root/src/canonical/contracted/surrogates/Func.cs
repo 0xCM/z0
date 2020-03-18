@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct Func<R> : IFunc<Func<R>,R>
+        public readonly struct Func<R> : Z0.IFunc<R>
         {
             internal readonly System.Func<R> F;
 
@@ -38,7 +38,7 @@ namespace Z0
             }
         }
 
-        public readonly struct Func<X0,R> : IFunc<Func<X0,R>,X0,R>
+        public readonly struct Func<X0,R> : Z0.IFunc<X0,R>
         {
             readonly System.Func<X0,R> F;
 
@@ -65,7 +65,7 @@ namespace Z0
             }
         }
 
-        public readonly struct Func<X0,X1,R> : IFunc<Func<X0,X1,R>,X0,X1,R>
+        public readonly struct Func<X0,X1,R> : Z0.IFunc<X0,X1,R>
         {
             readonly System.Func<X0,X1,R> F;
 
@@ -92,7 +92,7 @@ namespace Z0
             }
         }
 
-        public readonly struct Func<X0,X1,X2,R> : IFunc<Func<X0,X1,X2,R>,X0,X1,X2,R>
+        public readonly struct Func<X0,X1,X2,R> : Z0.IFunc<X0,X1,X2,R>
         {
             readonly System.Func<X0,X1,X2,R> F;
 

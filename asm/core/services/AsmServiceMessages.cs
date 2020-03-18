@@ -13,10 +13,10 @@ namespace Z0
 
     public static class AsmServiceMessages
     {
-        public static AppMsg CatalogEmitted(IAssemblyCatalog catalog)
+        public static AppMsg CatalogEmitted(IApiCatalog catalog)
             => AppMsg.Define($"Successfully emitted {catalog.CatalogName} catalog",AppMsgKind.Info);
 
-        public static AppMsg CatalogEmissionFailed(IAssemblyCatalog catalog, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppMsg CatalogEmissionFailed(IApiCatalog catalog, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppMsg.Error($"Error occurred while emitting catalog {catalog.CatalogName}", caller, file, line);
 
         public static AppMsg Emitted(AsmEmissionToken src)

@@ -45,7 +45,7 @@ namespace Z0
 
     }
 
-    public interface IPointCell<P> : IFormattable<P>
+    public interface IPointCell<P> : ICustomFormattable
     {
           
     }

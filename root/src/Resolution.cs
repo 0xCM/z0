@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Root() : base(AssemblyId.Root) {}
 
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Root) { } }            
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Root) { } }            
     }
 }

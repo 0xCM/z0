@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Captures a delegate that is exposed as an emitter
         /// </summary>
-        public readonly struct SpanEmitter<T> : ISpanEmitter<SpanEmitter<T>,T>
+        public readonly struct SpanEmitter<T> : ISpanEmitter<T>
         {
             public OpIdentity Id {get;}
 

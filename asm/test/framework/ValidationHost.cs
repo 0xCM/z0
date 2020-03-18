@@ -133,13 +133,13 @@ namespace Z0.Asm
             NotifyConsole(AppMsg.Error(e.EventData));    
         }
 
-        void OnEvent(StepStart<IAssemblyCatalog> e)
+        void OnEvent(StepStart<IApiCatalog> e)
         {
             var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.Green);
             NotifyConsole(msg);
         }
 
-        void OnEvent(StepEnd<IAssemblyCatalog> e)
+        void OnEvent(StepEnd<IApiCatalog> e)
         {
             var msg = AppMsg.Colorize($"{e}: {e.EventData.CatalogName}", AppMsgColor.Magenta);
             NotifyConsole(msg);            

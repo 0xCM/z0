@@ -13,36 +13,36 @@ namespace Z0
     /// <summary>
     /// Describes an assembly that provides cataloged operations
     /// </summary>
-    readonly struct CatalogProvider : ICatalogProvider
+    readonly struct ApiCatalogProvider : IApiCatalogProvider
     {        
         public AssemblyId AssemblyId {get;}
 
         public Assembly CatalogedAssembly {get;}           
  
-        public IAssemblyCatalog Operations {get;}
+        public IApiCatalog Operations {get;}
 
         [MethodImpl(Inline)]
-        public static ICatalogProvider Define(AssemblyId id, Assembly src, IAssemblyCatalog catalog)
-            => new CatalogProvider(id,src,catalog);
+        public static IApiCatalogProvider Define(AssemblyId id, Assembly src, IApiCatalog catalog)
+            => new ApiCatalogProvider(id,src,catalog);
 
         [MethodImpl(Inline)]
-        CatalogProvider(AssemblyId id, Assembly src, IAssemblyCatalog catalog)
+        ApiCatalogProvider(AssemblyId id, Assembly src, IApiCatalog catalog)
         {
             this.AssemblyId = id;
             this.CatalogedAssembly = src;
             this.Operations = catalog;
         }
 
-        Type[] IOpSvcHostProvider.ServiceHostTypes 
-            => Operations.ServiceHostTypes;
+        Type[] IOpServiceHosts.HostTypes 
+            => Operations.HostTypes;
 
-        ApiHost[] IAssemblyCatalog.GenericApiHosts 
+        ApiHost[] IApiCatalog.GenericApiHosts 
             => Operations.GenericApiHosts;
 
-        ApiHost[] IAssemblyCatalog.DirectApiHosts 
+        ApiHost[] IApiCatalog.DirectApiHosts 
             => Operations.DirectApiHosts;
 
-        DataResourceIndex IAssemblyCatalog.Resources 
+        DataResourceIndex IApiCatalog.Resources 
             => Operations.Resources;
 
         public ApiHost[] ApiHosts 

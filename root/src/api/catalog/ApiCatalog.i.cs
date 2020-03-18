@@ -8,10 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
+    using static Root;
+
+
     /// <summary>
     /// Characterizes a type that supports operation discovery
     /// </summary>
-    public interface IAssemblyCatalog : IOpSvcHostProvider
+    public interface IApiCatalog : IOpServiceHosts
     {
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
@@ -65,4 +68,14 @@ namespace Z0
         string CatalogName
             => AssemblyId.Format();        
     }
+    /// <summary>
+    /// Characterizes a type that provides access to an operation catalog
+    /// </summary>
+    public interface IApiCatalogProvider : IApiCatalog
+    {
+        /// <summary>
+        /// The provided catalog
+        /// </summary>
+        IApiCatalog Operations {get;}
+    } 
 }

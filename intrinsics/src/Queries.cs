@@ -13,7 +13,7 @@ namespace Z0
 
     public static class Intrinsics
     {
-        public static IAssemblyCatalog Catalog => new C();
+        public static IApiCatalog Catalog => new C();
                 
         public static IEnumerable<MethodInfo> Generic
             => from host in Catalog.GenericApiHosts

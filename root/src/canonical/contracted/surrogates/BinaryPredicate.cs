@@ -8,24 +8,45 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    
-    public readonly struct BinaryPredicateSurrogate<T> : IBinaryPredicate<T>
+
+    partial class Surrogates
     {
-        public readonly string Name;
-
-        readonly Func<T,T,bit> F;
-
-
-        [MethodImpl(Inline)]
-        internal BinaryPredicateSurrogate(Func<T,T,bit> f, string name)            
+        public readonly struct BinaryPredicate<T> : IBinaryPredicate<T>
         {
-            this.F = f;
-            this.Name = name;
-        }
-        
-        public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id {get;}
 
-        [MethodImpl(Inline)]
-        public bit Invoke(T a, T b) => F(a, b);
+            readonly Z0.BinaryPredicate<T> F;
+
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T,T,bit>(BinaryPredicate<T> src)
+                => src.ToFunc();
+
+            [MethodImpl(Inline)]
+            internal BinaryPredicate(Z0.BinaryPredicate<T> f, OpIdentity id)            
+            {
+                this.F = f;
+                this.Id = id;
+            }
+
+            [MethodImpl(Inline)]
+            internal BinaryPredicate(Z0.BinaryPredicate<T> f, string name)            
+            {
+                this.F = f;
+                this.Id = OpIdentity.contracted<T>(name);
+            }
+
+            [MethodImpl(Inline)]
+            public bit Invoke(T a, T b) => F(a,b);
+
+            public Z0.BinaryPredicate<T> Subject
+            {
+                [MethodImpl(Inline)]
+                get => F;
+            }
+
+            [MethodImpl(Inline)]
+            public Func<T,T,bit> AsFunc()
+                => this.ToFunc();
+        }
     }
 }

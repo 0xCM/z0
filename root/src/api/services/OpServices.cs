@@ -12,21 +12,21 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct OpServices : IOpSvcFactory
+    public readonly struct OpServices : IOpServiceFactory
     {
         /// <summary>
         /// Searches an assembly for types that are attributed with the provider attribute
         /// </summary>
         /// <param name="src">The assembly to search</param>
         public static IEnumerable<Type> ProviderTypes(Assembly src)
-            => src.GetTypes().Where(t => t.IsAttributed<OpSvcHostProviderAttribute>());
+            => src.GetTypes().Where(t => t.IsAttributed<OpServiceHostProviderAttribute>());
 
         /// <summary>
         /// Creates a service provider reified by a specified type
         /// </summary>
         /// <param name="provider">The provider type</param>
-        public static IOpSvcHostProvider Provider(Type provider)
-            => (IOpSvcHostProvider)Activator.CreateInstance(provider);
+        public static IOpServiceHosts Provider(Type provider)
+            => (IOpServiceHosts)Activator.CreateInstance(provider);
 
         /// <summary>
         /// Instantiates a service operation host

@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Time() : base(AssemblyId.Time){}
 
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Time) { } }
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Time) { } }
     }    
 }

@@ -76,7 +76,7 @@ namespace Z0.Asm
                 }
             }
 
-            public void CaptureCatalog(IAssemblyCatalog src, in RootEmissionPaths dst)
+            public void CaptureCatalog(IApiCatalog src, in RootEmissionPaths dst)
             {
                 if(src.HasApiHostContent)
                 {

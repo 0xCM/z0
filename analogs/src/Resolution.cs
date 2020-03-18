@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Analogs() : base(AssemblyId.Analogs) {}
 
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Analogs){ }}
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Analogs){ }}
     }
 }

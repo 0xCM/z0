@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Z0.Resolutions;
 
-    [OpSvcFactoryProvider(MathServices.SvcCollectionName)]
+    [OpSeviceFactoryProvider(MathServices.SvcCollectionName)]
     public partial class MathSvcFactory : OpSvcFactoryProvider<MathSvcFactory>
     {
 

@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Symbolic() : base(AssemblyId.Symbolic) {}
         
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Symbolic) {} }            
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Symbolic) {} }            
     }
 }

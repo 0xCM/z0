@@ -78,6 +78,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public delegate Span<T> SpanValueEmitter<T>()
         where T : unmanaged;
+
     /// <summary>
     /// Chracterizes an operation that produces a value that does not depend on arguments
     /// </summary>

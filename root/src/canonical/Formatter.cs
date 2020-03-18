@@ -5,16 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-        
+
     using static Root;
 
-    [OpServiceHostProvider("bitcore.services")]
-    public partial class BitCoreServices : IOpServiceHosts
+    public interface ICustomFormatter
     {
-        public Type[] HostTypes {get;}
-            = typeof(BitCoreServices).GetNestedTypes().Realize<IFunc>().ToArray();
+
     }
+
+    public interface ICustomFormatter<T> : ICustomFormatter
+    {
+        string Format(T src);
+    }
+
+    public interface ICustomFormatter<T,C> : ICustomFormatter<T>
+        where C : IFormatConfig
+    {
+        string Format(T src, C config);        
+
+    }
+
 }

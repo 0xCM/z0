@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T head<T>(Span<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
-        
+
         /// <summary>
         /// Returns a reference to the head of a span, offset by a specified amount
         /// </summary>

@@ -12,14 +12,14 @@ namespace Z0
 
     using static Root;
 
-    public interface IOpSvcFactory 
+    public interface IOpServiceFactory 
     {
         S Service<S>()   
             where S : unmanaged, IFunc
                 => OpServices.Service<S>();
     }
 
-    public interface IOpSvcFactory<S> :  IOpSvcFactory
+    public interface IOpServiceFactory<S> :  IOpServiceFactory
         where S : unmanaged, IFunc
     {
         S Service  
@@ -29,20 +29,20 @@ namespace Z0
         }
     }
 
-    public interface IOpSvcFactory<F,S> :  IOpSvcFactory<S>
-        where F : unmanaged, IOpSvcFactory<S>
+    public interface IOpServiceFactory<F,S> :  IOpServiceFactory<S>
+        where F : unmanaged, IOpServiceFactory<S>
         where S : unmanaged, IFunc
         
     {
 
     }
 
-    public interface IOpSvcFactoryProvider
+    public interface IOpServiceFactoryProvider
     {
         IEnumerable<MethodInfo> FactoryMethods {get;}
     }
 
-    public abstract class OpSvcFactoryProvider<F> : IOpSvcFactoryProvider
+    public abstract class OpSvcFactoryProvider<F> : IOpServiceFactoryProvider
         where F : OpSvcFactoryProvider<F>, new()
     {
         public IEnumerable<MethodInfo> FactoryMethods 
@@ -52,14 +52,14 @@ namespace Z0
     /// <summary>
     /// Identifies an operation service provider
     /// </summary>
-    public class OpSvcFactoryProviderAttribute : Attribute, IOpSvcProvisioner
+    public class OpSeviceFactoryProviderAttribute : Attribute, IOpServiceProvisioner
     {
-        public OpSvcFactoryProviderAttribute()
+        public OpSeviceFactoryProviderAttribute()
         {
             this.ServiceCollectionName = string.Empty;
         }
 
-        public OpSvcFactoryProviderAttribute(string name)
+        public OpSeviceFactoryProviderAttribute(string name)
         {
             this.ServiceCollectionName =name;
         }

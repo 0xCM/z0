@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Containers() : base(AssemblyId.Containers) {}
         
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Containers) {} }            
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Containers) {} }            
     }
 }

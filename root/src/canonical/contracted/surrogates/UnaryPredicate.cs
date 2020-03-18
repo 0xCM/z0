@@ -11,39 +11,42 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct BinaryOp<T> : IBinaryOp<BinaryOp<T>,T>
+        public readonly struct UnaryPredicate<T> : IUnaryPredicate<T>
         {
-            internal readonly Z0.BinaryOp<T> F;
-            
             public OpIdentity Id {get;}
 
+            readonly Z0.UnaryPredicate<T> F;
+
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T,T>(BinaryOp<T> src)
+            public static implicit operator Func<T,bit>(UnaryPredicate<T> src)
                 => src.ToFunc();
 
             [MethodImpl(Inline)]
-            public static implicit operator BinaryOp<T>(Func<T,T,T> src)
-                => src.ToBinaryOp();
-
-            [MethodImpl(Inline)]
-            internal BinaryOp(Z0.BinaryOp<T> f, OpIdentity id)            
+            internal UnaryPredicate(Z0.UnaryPredicate<T> f, OpIdentity id)            
             {
                 this.F = f;
                 this.Id = id;
             }
-            
-            [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => F(a, b);
 
-            public Z0.BinaryOp<T> Subject
+            [MethodImpl(Inline)]
+            internal UnaryPredicate(Z0.UnaryPredicate<T> f, string name)            
+            {
+                this.F = f;
+                this.Id = OpIdentity.contracted<T>(name);
+            }
+
+            [MethodImpl(Inline)]
+            public bit Invoke(T a) => F(a);
+
+            public Z0.UnaryPredicate<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
 
             [MethodImpl(Inline)]
-            public Func<T,T,T> AsFunc()
+            public Func<T,bit> AsFunc()
                 => this.ToFunc();
-        }            
+        }
     }
 }

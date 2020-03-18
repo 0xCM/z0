@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Math() : base(AssemblyId.Math) {}
         
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Math) {} }            
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Math) {} }            
     }
 }

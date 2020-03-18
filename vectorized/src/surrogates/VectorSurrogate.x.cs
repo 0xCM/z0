@@ -125,7 +125,7 @@ namespace Z0
         {
             S.UnaryOp<V128<T>> surrogate()
             {
-                return  S.unaryop(x => src(x.Subject).Surrogate(), id, default(V128<T>));
+                return  S.unary(x => src(x.Subject).Surrogate(), id, default(V128<T>));
             }
             
             return surrogate();
@@ -155,7 +155,7 @@ namespace Z0
         {
             S.BinaryOp<V128<T>> surrogate()
             {
-                return S.binaryop((x,y) => src(x.Subject,y.Subject).Surrogate(), id, default(V128<T>));
+                return S.binary((x,y) => src(x.Subject,y.Subject).Surrogate(), id, default(V128<T>));
             }
             
             return surrogate();
@@ -183,7 +183,7 @@ namespace Z0
             where T : unmanaged
         {
             UnaryOp<IVec128> f = x => src.Invoke((V128<T>)x);
-            return S.unaryop(f, src.Id);                
+            return S.unary(f, src.Id);                
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Z0
             where T : unmanaged
         {
             BinaryOp<IVec128> f = (x,y) => src.Invoke((V128<T>)x, (V128<T>)y);
-            return S.binaryop(f, src.Id);                
+            return S.binary(f, src.Id);                
         } 
     }
 }

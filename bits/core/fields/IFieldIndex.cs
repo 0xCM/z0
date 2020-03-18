@@ -33,7 +33,7 @@ namespace Z0
         Enum FieldWidth {get;}
     }
 
-    public interface IFieldIndexEntry<F> : IFieldIndexEntry, IFormattable<F>, IEquatable<F>, IComparable<F>
+    public interface IFieldIndexEntry<F> : IFieldIndexEntry, ICustomFormattable, IEquatable<F>, IComparable<F>
     {
     }
 

@@ -57,6 +57,18 @@ namespace Z0
     }
 
     /// <summary>
+    /// Characterizes a binary operator
+    /// </summary>
+    /// <typeparam name="A">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IBinaryOp<S,A> : IBinaryFunc<A,A,A>
+        where S : struct, IBinaryOp<S,A>
+    {
+
+    }
+
+
+    /// <summary>
     /// Characterizes a ternary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>

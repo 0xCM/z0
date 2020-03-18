@@ -18,13 +18,13 @@ namespace Z0
 
     }
 
-    [OpSvcHostProvider(vBitServices.CollectionName)]
-    public partial class vBitSvcHosts  : OpSvcHostProvider<vBitSvcHosts>
+    [OpServiceHostProvider(vBitServices.CollectionName)]
+    public partial class vBitSvcHosts  : OpServiceHosts<vBitSvcHosts>
     {        
 
     }
 
-    [OpSvcFactoryProvider(CollectionName)]
+    [OpSeviceFactoryProvider(CollectionName)]
     public partial class vBitServices : OpSvcFactoryProvider<vBitServices>
     {
         public const string CollectionName = "vbits.services";

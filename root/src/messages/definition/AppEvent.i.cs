@@ -26,7 +26,7 @@ namespace Z0
     /// Characterizes an system event with a parametric payload
     /// </summary>
     /// <typeparam name="T">The payload type</typeparam>
-    public interface IAppEvent<T> : IAppEvent, IFormattable<T>
+    public interface IAppEvent<T> : IAppEvent
     {
         new T EventData {get;}
 

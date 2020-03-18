@@ -51,10 +51,12 @@ namespace Z0
             => Format((C)config);
     }
 
+
     /// <summary>
-    /// Characterizes a type that provides intrinsic formatting capability
+    /// Characterizes a type that formats a parametrically-specified type
     /// </summary>
     public interface IFormattable<F> : ICustomFormattable
+        where F : IFormattable<F>
     {
         
     }    

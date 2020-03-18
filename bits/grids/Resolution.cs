@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public BitGrids() : base (AssemblyId.BitGrids) {}
 
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.BitGrids) { } }
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.BitGrids) { } }
     }
 }

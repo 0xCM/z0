@@ -12,6 +12,6 @@ namespace Z0.Resolutions
 
         public MathServices() : base(AssemblyId.MathSvc) {}
 
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.MathSvc) {} }    
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.MathSvc) {} }    
     }
 }

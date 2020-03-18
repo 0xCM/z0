@@ -10,6 +10,6 @@ namespace Z0.Resolutions
     {
         public Blocks() : base(AssemblyId.Blocks) {}
 
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Blocks){ }}
+        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Blocks){ }}
     }
 }
