@@ -1,6 +1,9 @@
 export ProjectId="$(dirname "$0")"
 AddCmd=$ZDev/.scripts/sln-add.sh
 
+export Kind=collective
+bash $AddCmd
+
 export Kind=monadic
 bash $AddCmd
 

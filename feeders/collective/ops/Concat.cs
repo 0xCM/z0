@@ -1,17 +1,17 @@
+//-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
+    using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
-    
-    partial class SystemCollections
+    using static Collective;
+
+    partial class CollectiveOps
     {
         /// <summary>
         /// Forms a new span by the concatenation [head,tail]
@@ -37,7 +37,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Concat<T>(this Span<T> head, ReadOnlySpan<T> tail)
             => head.ReadOnly().Concat(tail);
-
-            
     }
 }

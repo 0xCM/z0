@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Root;
+    using static Texting;
 
-    partial class TextExtensions
+    partial class TextingOps
     {
         /// <summary>
         /// Gets the string to the right of, but not including, the first instance of a specified character
@@ -57,5 +54,7 @@ namespace Z0
             else
                 return string.Empty;
         }
+ 
+
     }
 }

@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
+    using static Collective;
+    
     public static class Arrays
     {    
         /// <summary>
@@ -57,20 +58,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] fill<T>(T[] dst, T src)
         {
-            Array.Fill(dst,src);
+            Array.Fill(dst, src);
             return dst;
         }
 
         /// <summary>
         /// Fills an array with the element type's default value
         /// </summary>
-        /// <param name="src">The source array</param>
+        /// <param name="dst">The source array</param>
         /// <typeparam name="T">The array element type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] clear<T>(T[] src)
+        public static T[] clear<T>(T[] dst)
         {
-            src?.Fill(default(T));
-            return src;
+            if(dst != null)
+                Array.Fill(dst, default(T));
+            return dst;
         }
 
         /// <summary>
@@ -99,7 +101,7 @@ namespace Z0
         }
 
         public static void copy<T>(T[] src, T[] dst)
-            => Array.Copy(src,dst, Checks.length(src,dst));
+            => Array.Copy(src,dst, src.Length);
 
         /// <summary>
         /// Concatentates two byte arrays
@@ -178,5 +180,20 @@ namespace Z0
         public static IEnumerable<T> singletons<T>(params IEnumerable<T>[] src)
             where T : unmanaged
                 => src.SelectMany(x => x);
+
+        /// <summary>
+        /// Creates a new array by sampling the source array at each specified index
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <param name="indices">The indices that define the values to be extracted from the source</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static T[] indexed<T>(T[] src, int[] indices)
+        {
+            var dst = new T[indices.Length];
+            for(var i=0; i< indices.Length; i++)
+                dst[i] = src[indices[i]];
+            return dst;
+        }            
+
     }
 }

@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    using static Root;
-    
-    public static partial class TextExtensions
+    using static Texting;
+
+    partial class TextingOps
     {
+
         /// <summary>
         /// Formamats a number with comma separators
         /// </summary>
@@ -23,14 +24,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source number</param>
         public static string CommaSeparated(this ushort src)
-                => src.ToString("#,#");
+            => src.ToString("#,#");
 
         /// <summary>
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
         public static string CommaSeparated(this int src)
-                => src.ToString("#,#");
+            => src.ToString("#,#");
 
         /// <summary>
         /// Formamats a number with comma separators

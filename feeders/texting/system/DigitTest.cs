@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Root;
-    
-    public static partial class CharExtensions
+    using static Texting;
+
+    partial class TextingOps
     {
+
         /// <summary>
         /// Determines whether the source character is a decimal digit per the unicode standard
         /// </summary>
@@ -55,5 +54,6 @@ namespace Z0
             else
                 return '∅';                        
         }            
+ 
     }
 }

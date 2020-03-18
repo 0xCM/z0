@@ -15,31 +15,31 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> eq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => Spans.apply(MathSvcFactory.eq<T>(), l, r, dst);
+                => SpanOps.apply(MathSvcFactory.eq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> neq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => Spans.apply(MathSvcFactory.neq<T>(), l, r, dst);
+                => SpanOps.apply(MathSvcFactory.neq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> lt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => Spans.apply(MathSvcFactory.lt<T>(), l, r, dst);
+                => SpanOps.apply(MathSvcFactory.lt<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> lteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => Spans.apply(MathSvcFactory.lteq<T>(), l, r, dst);
+                => SpanOps.apply(MathSvcFactory.lteq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> gt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => Spans.apply(MathSvcFactory.gt<T>(), l, r, dst);
+                => SpanOps.apply(MathSvcFactory.gt<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> gteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => Spans.apply(MathSvcFactory.gteq<T>(), l, r, dst);
+                => SpanOps.apply(MathSvcFactory.gteq<T>(), l, r, dst);
     }
 }

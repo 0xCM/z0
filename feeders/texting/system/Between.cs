@@ -5,10 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
-    using static Root;
+    using static Texting;
 
-    partial class TextExtensions
+    partial class TextingOps
     {
         public static string Between(this string src, char left, char right)
         {

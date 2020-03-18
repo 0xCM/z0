@@ -1,15 +1,18 @@
+//-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
     using System.Linq;
 
-    partial class SystemCollections
-    {  
+    using static Collective;
+
+    partial class CollectiveOps
+    {
         /// <summary>
         /// Interleaves a specified value between each element of the source
         /// </summary>
@@ -27,7 +30,6 @@ namespace Z0
                 if(i != last)
                     yield return x;
             }
-
         }
 
         /// <summary>

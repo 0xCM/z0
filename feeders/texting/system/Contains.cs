@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Text;
+    using System.Linq;
 
-    using static Root;
+    using static Texting;
 
-    partial class TextExtensions
+    partial class TextingOps
     {
         /// <summary>
         /// Determines whether a string contains any of the characters in a supplied sequence
@@ -60,5 +58,6 @@ namespace Z0
         /// <param name="substrings">The characters for which to search</param>
         public static bool ContainsAny(this string src, IEnumerable<string> substrings)
             => substrings.Any(ss => src.Contains(ss));
+
     }
 }

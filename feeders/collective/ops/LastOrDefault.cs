@@ -1,15 +1,19 @@
+//-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-    
-    partial class SystemCollections
+
+    using static Collective;
+
+    partial class CollectiveOps
     {
+
         /// <summary>
         /// Returns the last element if it exists; otherwise returns the supplied default
         /// </summary>
@@ -28,5 +32,6 @@ namespace Z0
         /// <param name="default">The function invoked to produce a default value</param>
         public static T LastOrDefault<T>(this IEnumerable<T> src, Func<T> @default)
             => src.Any() ? src.Last() : @default();
+ 
     }
 }

@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Root;
+    using static Texting;
 
-    partial class TextExtensions
+    partial class TextingOps
     {
+
         /// <summary>
         /// Partitions a string into parts of a specified maximum width
         /// </summary>
@@ -38,5 +36,6 @@ namespace Z0
             if(trim.Length != 0)
                 yield return new string(trim);                
         }
+
     }
 }

@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
-    public static class Texting
+    public static class Collective
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 
-    public static partial class TextingOps    
+    public static partial class CollectiveOps    
     {
-        internal static StringBuilder builder()
-            => new StringBuilder();
+
     }
 }

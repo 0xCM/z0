@@ -255,7 +255,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref T head<T>(Span<T> src)
-            => ref MemoryMarshal.GetReference<T>(src);
+            => ref Spans.head(src);
 
         /// <summary>
         /// Returns a reference to the head of a span, offset by a specified amount
@@ -264,7 +264,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref T head<T>(Span<T> src, int offset)
-            => ref Unsafe.Add(ref head(src), offset);        
+            => ref Spans.head(src,offset);
 
         /// <summary>
         /// Returns a reference to the head of a readonly span
@@ -273,7 +273,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T head<T>(ReadOnlySpan<T> src)
-            => ref MemoryMarshal.GetReference<T>(src);
+            => ref Spans.head(src);
 
         /// <summary>
         /// Returns a readonly reference to the head of a readonly span, offset by a specified amount
@@ -283,7 +283,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
             where T : unmanaged
-                =>  ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
+                => ref Spans.head(src,offset);
 
         /// <summary>
         /// Adds an offset to the head of a span, measured relative to the reference type
@@ -293,7 +293,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T skip<T>(Span<T> src, int count)
-            => ref refs.seek(ref head(src), count);
+            => ref Spans.skip(src,count);
 
         /// <summary>
         /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance
@@ -303,7 +303,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
-            => ref refs.skip(in head(src), count);
+            => ref Spans.skip(src,count);
 
         [MethodImpl(Inline)]
         static ref T spanhead<T>(Span<T> src)
@@ -316,7 +316,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static unsafe ref T head<T>(T[] src)
-            => ref spanhead<T>(src);
+            => ref Spans.head(src);
 
         /// <summary>
         /// Adds an offset to the head of an array, measured relative to the reference type

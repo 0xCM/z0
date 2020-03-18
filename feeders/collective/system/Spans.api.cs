@@ -11,10 +11,109 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
+    using static Collective;
 
     public static class Spans
     {    
+        /// <summary>
+        /// Returns a reference to the head of a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T head<T>(Span<T> src)
+            => ref MemoryMarshal.GetReference<T>(src);
+        
+        /// <summary>
+        /// Returns a reference to the head of a span, offset by a specified amount
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T head<T>(Span<T> src, int offset)
+            => ref Unsafe.Add(ref head(src), offset);        
+
+        /// <summary>
+        /// Returns a reference to the head of a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T head<T>(ReadOnlySpan<T> src)
+            => ref MemoryMarshal.GetReference<T>(src);
+
+        /// <summary>
+        /// Returns a readonly reference to the head of a readonly span, offset by a specified amount
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
+            where T : unmanaged
+                => ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
+
+        /// <summary>
+        /// Adds an offset to the head of a span, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(Span<T> src, int count)
+            => ref seek(ref head(src), count);
+
+        /// <summary>
+        /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="count">The number of elements to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
+            => ref skip(in head(src), count);
+
+        /// <summary>
+        /// Returns a reference to the location of the first element
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe ref T head<T>(T[] src)
+            => ref spanhead<T>(src);
+
+        [MethodImpl(Inline)]
+        static ref T spanhead<T>(Span<T> src)
+            => ref head(src);
+
+        /// <summary>
+        /// Presents a readonly reference as reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        static ref T edit<T>(in T src)
+            => ref Unsafe.AsRef(in src);
+
+        /// <summary>
+        /// Adds an offset to a reference, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        static ref T seek<T>(ref T src, int count)
+            => ref Unsafe.Add(ref src, count);
+
+        /// <summary>
+        /// Skips a specified number of source elements and returns a readonly reference to the resulting element
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The number of elements to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        static ref readonly T skip<T>(in T src, int count)
+            => ref Unsafe.Add(ref edit(in src), count);
+
         /// <summary>
         /// Loads a span from a memory reference
         /// </summary>
@@ -42,7 +141,7 @@ namespace Z0
         /// <param name="size">The number of bytes to cover</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Span<T> cover<T>(T* pSrc, ByteSize size)
+        public static unsafe Span<T> cover<T>(T* pSrc, int size)
             where T : unmanaged
                 => new Span<T>(pSrc, size);
 
@@ -51,7 +150,6 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline)]
         public static Span<T> alloc<T>(int length, T t = default)
             => new Span<T>(new T[length]);
 
@@ -60,7 +158,6 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline)]
         public static Span<T> alloc<T>(ushort length, T t = default)
             => new Span<T>(new T[length]);
 
@@ -69,7 +166,6 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline)]
         public static Span<T> alloc<T>(byte length, T t = default)
             => new Span<T>(new T[length]);
 
@@ -468,78 +564,9 @@ namespace Z0
             return dst;     
         }
 
-        [MethodImpl(Inline)]
-        public static Span<T3> apply<F,T0,T1,T2,T3>(F f, ReadOnlySpan<T0> A, ReadOnlySpan<T1> B, ReadOnlySpan<T2> C,  Span<T3> dst)
-            where F : ITernaryFunc<T0,T1,T2,T3>
-        {
-            var count = dst.Length;
-            ref readonly var a = ref head(A);
-            ref readonly var b = ref head(B);
-            ref readonly var c = ref head(C);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in a, i), skip(in b, i), skip(in c, i));
-            return dst;
-        }        
-
-        [MethodImpl(Inline)]
-        public static Span<T2> apply<F,T0,T1,T2>(F f, ReadOnlySpan<T0> lhs, ReadOnlySpan<T1> rhs, Span<T2> dst)
-            where F : IBinaryFunc<T0,T1,T2>
-        {
-            var count = dst.Length;
-            ref readonly var lSrc = ref head(lhs);
-            ref readonly var rSrc = ref head(rhs);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
-            return dst;
-        }        
-
-        [MethodImpl(Inline)]
-        public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-            where F : IBinaryPredicate<T>
-        {
-            var count = dst.Length;
-            ref readonly var lSrc = ref head(lhs);
-            ref readonly var rSrc = ref head(rhs);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Span<T2> apply<F,T1,T2>(F f, ReadOnlySpan<T1> src, Span<T2> dst)
-            where F : IUnaryFunc<T1,T2>
-        {
-            var count = dst.Length;
-            ref readonly var input = ref head(src);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in input, i));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> src, Span<bit> dst)
-            where F : IUnaryPredicate<T>
-        {
-            var count = dst.Length;
-            ref readonly var input = ref head(src);
-            ref var target = ref head(dst);
-
-            for(var i=0; i<count; i++)
-                seek(ref target, i) = f.Invoke(skip(in input, i));
-            return dst;
-        }
-
         public static Span<T> Fuse<T>(this Span<T> xs, Span<T> ys, Func<T,T,T> f)
         {        
-            var len = Checks.length(xs,ys);
+            var len = xs.Length;
             ref var xh = ref head(xs);
             ref var yh = ref head(ys);        
             for(var i = 0; i < len ; i++)
@@ -572,7 +599,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void iter<T>(ReadOnlySpan<T> first, ReadOnlySpan<T> second, Action<T,T> f)
         {
-            var count = Checks.length(first,second);
+            var count = first.Length;
             ref readonly var x = ref head(first);
             ref readonly var y = ref head(second);
             
