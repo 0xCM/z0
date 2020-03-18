@@ -24,21 +24,13 @@ namespace Z0
             where M : struct, IMemberOp            
                => src.ReadOnly().ToOpIndex();
 
-        /// <summary>
-        /// Determines whether a method is a function with numeric operands (if any) and return type
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNumericFunction(this MethodInfo m)
-            => m.IsFunction() 
-            && m.ReturnType.IsNumeric()
-            && m.ParameterTypes().All(t => t.NumericKind() != NumericKind.None);
 
         /// <summary>
         /// Determines whether a method is a numeric operator with a specified arity
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsNumericOperator(this MethodInfo m, int? arity = null)
-            => m.IsOperator()  && m.IsNumeric() && (arity != null ? m.Arity() == arity : true);        
+            => m.IsOperator()  && m.IsNumeric() && (arity != null ? m.ArityValue() == arity : true);        
 
         /// <summary>
         /// Queries the stream for methods that are recognized as numeric operators

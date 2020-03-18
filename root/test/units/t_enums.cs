@@ -48,25 +48,25 @@ namespace Z0
             }
         }
 
-        public void check_literal_correlation()
-        {
-            var first = Enums.literals<BinaryBitLogicKindId>();
-            var second = Enums.literals<BinaryBitLogicOpKind>();            
-            if(first.Length != second.Length)
-            {
-                var firstNames = first.NamedValues.Names();
-                var secondNames = second.NamedValues.Names();
-                var q1 = from n in firstNames where !secondNames.Contains(n) select n;
-                var q2 = from n in secondNames where !firstNames.Contains(n) select n;
+        // public void check_literal_correlation()
+        // {
+        //     var first = Enums.literals<BinaryBitLogicKindId>();
+        //     var second = Enums.literals<BinaryBitLogicOpKind>();            
+        //     if(first.Length != second.Length)
+        //     {
+        //         var firstNames = first.NamedValues.Names();
+        //         var secondNames = second.NamedValues.Names();
+        //         var q1 = from n in firstNames where !secondNames.Contains(n) select n;
+        //         var q2 = from n in secondNames where !firstNames.Contains(n) select n;
 
-                iter(q2, n => Notify($"Missing from first: {n}"));
-                iter(q1, n => Notify($"Missing from second: {n}"));
-            }
+        //         iter(q2, n => Notify($"Missing from first: {n}"));
+        //         iter(q1, n => Notify($"Missing from second: {n}"));
+        //     }
 
-            var correlated = Enums.correlate<BinaryBitLogicKindId, BinaryBitLogicOpKind>();
-            Claim.eq(correlated.Count, first.Length);
+        //     var correlated = Enums.correlate<BinaryBitLogicKindId, BinaryBitLogicOpKind>();
+        //     Claim.eq(correlated.Count, first.Length);
 
-        }
+        // }
 
         public void check_numeric_class()
         {

@@ -26,7 +26,18 @@ namespace Z0
             return default;
         }
 
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Try<T>(string src)
+            where T : unmanaged
+        {
+            if(parse(src, out T dst))
+                return ParseResult.Success(src,dst);
+            else
+                return ParseResult.Fail<T>(src);
+        }
+
+
+        [MethodImpl(Inline)]
         public static T parse<T>(string src)
             where T : unmanaged
         {

@@ -12,14 +12,6 @@ namespace Z0
     using static Root;
     using static ReflectionFlags;
     
-    public enum ParametricTarget : ulong
-    {
-        None = 0,
-
-        MethodParameter,
-
-        TypeParameter
-    }
 
     partial class RootReflections
     {

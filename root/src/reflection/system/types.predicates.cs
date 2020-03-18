@@ -13,8 +13,6 @@ namespace Z0
     using static Root;
 
     using static ReflectionFlags;
-    using GK = GenericKind;
-
 
     partial class RootReflections
     {
@@ -149,6 +147,13 @@ namespace Z0
             => t.IsTypeOf<bool>();
 
         /// <summary>
+        /// Determines whether a supplied type is predicated on a bit, including nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsBit(this Type t)
+            => t.IsTypeOf<bit>();
+
+        /// <summary>
         /// Determines whether a supplied type is predicated on a string, including references
         /// </summary>
         /// <param name="t">The type to examine</param>
@@ -262,18 +267,6 @@ namespace Z0
         
         public static bool IsCoreClrType(this Type src)
             => src.Assembly == typeof(int).Assembly;
-
-        public static GenericKind GenericKind(this Type src, bool effective)
-            =>   src.IsOpenGeneric(false) ? GK.Open 
-               : src.IsClosedGeneric(false) ? GK.Closed 
-               : src.IsGenericTypeDefinition ? GK.Definition 
-               : 0;
-
-        public static GenericKind GenericKind(this MethodInfo src, bool effective)
-            =>   src.IsOpenGeneric() ? GK.Open 
-               : src.IsClosedGeneric() ? GK.Closed 
-               : src.IsGenericMethodDefinition ? GK.Definition 
-               : 0;
 
         /// <summary>
         /// Determines whether an attribute of parametric type is applied to a source type

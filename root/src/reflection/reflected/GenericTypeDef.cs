@@ -31,11 +31,11 @@ namespace Z0
         GenericTypeDef(Type src)
         {
             this.Definition = src;
-            this.Kind = GenericKind.Definition;
+            this.Kind = GenericState.Definition;
         }
 
         public Type Definition  {get;}
 
-        public GenericKind Kind {get;}
+        public GenericState Kind {get;}
     }
 }

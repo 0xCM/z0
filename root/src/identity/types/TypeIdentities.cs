@@ -84,6 +84,14 @@ namespace Z0
             => NumericIdentity.kind(src).ValueOrDefault();
 
         /// <summary>
+        /// Determines the numeric kind of a type, possibly none
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static NumericClass NumericClass(Type src)
+            => NumericClasses.classify(src);
+
+        /// <summary>
         /// Determines the numeric kind identified by a type code, if any
         /// </summary>
         /// <param name="tc">The type code to evaluate</param>
@@ -106,6 +114,19 @@ namespace Z0
         public static bool IsNumeric(MethodInfo m)
             => (m.HasVoidReturn() || IsNumeric(m.ReturnType)) 
              && m.ParameterTypes().All(t => IsNumeric(t));
+
+        /// <summary>
+        /// Creates a type identity provider from a host type that realizes the required interface, if possible;
+        /// otherwise, returns none
+        /// </summary>
+        /// <param name="host">A type that realizes an identity provider</param>
+        public static Option<ITypeIdentityProvider> HostedProvider(Type host)
+            => Root.Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
+
+        public static Option<ITypeIdentityProvider> AttributedProvider(Type t)
+            => from a in t.Tag<IdentityProviderAttribute>()
+               from tid in  HostedProvider(a.Host.ValueOrDefault(t))
+               select tid;
 
     }
 

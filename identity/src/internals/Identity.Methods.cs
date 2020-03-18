@@ -13,14 +13,15 @@ namespace Z0
     partial class Identity
     {
         static string name(MethodInfo m)
-        {
-            var attrib = m.Tag<OpAttribute>();
-            if(attrib.IsNone())
-                return m.Name;
+            => OpIdentities.name(m);
+        // {
+        //     var attrib = m.Tag<OpAttribute>();
+        //     if(attrib.IsNone())
+        //         return m.Name;
 
-            var attribVal = attrib.Value;              
-            return attribVal.Name.IsNotBlank() ? attribVal.Name : m.Name;                
-        }
+        //     var attribVal = attrib.Value;              
+        //     return attribVal.Name.IsNotBlank() ? attribVal.Name : m.Name;                
+        // }
 
         static OpIdentity constructed(MethodInfo src)
         {
@@ -60,18 +61,6 @@ namespace Z0
 
             return OpIdentity.Define(id);
         }        
-
-        static OpIdentity group(MethodInfo method)            
-        {
-            var id = name(method);
-            var args = ParameterIdentities(method).ToArray();
-            for(var i=0; i<args.Length; i++)            
-            {
-                id += IDI.PartSep;                    
-                id += args[i];
-            }
-            return OpIdentity.Define(id);            
-        }
 
         static string FormatParameterIdentity(this MethodInfo src)
             => formatargs(IDI.ValueArgsOpen, IDI.ValueArgsClose, IDI.ArgSep, ParameterIdentities(src));

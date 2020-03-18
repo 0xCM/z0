@@ -15,7 +15,7 @@ namespace Z0
     {
         TypeIdentity DefineIdentity(Type src);        
 
-        IdentityKind IIdentityProvider.ProviderKind => IdentityKind.Type;
+        IdentityTarget IIdentityProvider.ProviderKind => IdentityTarget.Type;
 
         IEnumerable<Type> Identifiable 
             => array<Type>();

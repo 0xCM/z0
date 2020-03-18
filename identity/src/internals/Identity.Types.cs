@@ -12,31 +12,6 @@ namespace Z0
     using static Root;
     using static TypeIdentities;
 
-    // public readonly struct TypeIdentityWorkflow
-    // {
-    //     static Option<TypeIdentity> CommonId(Type arg)
-    //     {
-    //         if(arg.IsPointer)
-    //             return arg.PointerId();
-    //         else if(arg.IsNat())
-    //             return arg.NatId();
-    //         else if(arg.IsSystemType())
-    //             return arg.PrimalId();
-    //         else if(arg.IsEnum)
-    //             return arg.EnumId();
-    //         else if(arg.IsSegmented())
-    //             return arg.SegmentedId();
-    //         else if(IsSpan(arg))
-    //             return arg.SpanId();
-    //         else if(arg.IsNatSpan())
-    //             return arg.NatSpanId();  
-    //         else           
-    //             return TypeIdentity.Define(arg.DisplayName());
-    //     }
-
-
-    // }
-
     partial class Identity
     {
         /// <summary>
@@ -96,12 +71,12 @@ namespace Z0
             else if(arg.IsNat())
                 return arg.NatId();
             else if(arg.IsSystemType())
-                return IdentifyPrimitive(arg);
+                return TypeIdentities.IdentifyPrimitive(arg);
             else if(arg.IsEnum)
-                return IdentifyEnum(arg);
+                return TypeIdentities.IdentifyEnum(arg);
             else if(arg.IsSegmented())
                 return arg.SegmentedId();
-            else if(IsSpan(arg))
+            else if(TypeIdentities.IsSpan(arg))
                 return arg.SpanId();
             else if(arg.IsNatSpan())
                 return arg.NatSpanId();  
@@ -188,6 +163,10 @@ namespace Z0
                 return none<TypeIdentity>();
         }
 
+        static readonly ITypeIdentityProvider DefaultProvider
+            = new FunctionalProvider(arg => arg.CommonId().ValueOrElse(() => TypeIdentity.Empty));
+
+
         /// <summary>
         /// Retrieves a cached identity provider, if found; otherwise, creates and caches the identity provider for the source type
         /// </summary>
@@ -196,21 +175,6 @@ namespace Z0
         static ITypeIdentityProvider provider(Type src)
             => IdentityProviders.find(src, CreateProvider);
 
-        static readonly ITypeIdentityProvider DefaultProvider
-            = new FunctionalProvider(arg => arg.CommonId().ValueOrElse(() => TypeIdentity.Empty));
-
-        /// <summary>
-        /// Creates a type identity provider from a host type that realizes the required interface, if possible;
-        /// otherwise, returns none
-        /// </summary>
-        /// <param name="host">A type that realizes an identity provider</param>
-        static Option<ITypeIdentityProvider> FromHost(this Type host)
-            => Root.Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
-
-        static Option<ITypeIdentityProvider> FromAttributed(this Type t)
-            => from a in t.Tag<IdentityProviderAttribute>()
-               from tid in  FromHost(a.Host.ValueOrDefault(t))
-               select tid;
 
         /// <summary>
         /// Determines whether a type is parametric over the natural numbers
@@ -224,9 +188,9 @@ namespace Z0
             var provider = none<ITypeIdentityProvider>();   
 
             if(t.IsAttributed<IdentityProviderAttribute>())
-                provider = t.FromAttributed();
+                provider = TypeIdentities.AttributedProvider(t);
             else if(t.Realizes<ITypeIdentityProvider>())
-                provider = t.FromHost();
+                provider = TypeIdentities.HostedProvider(t);
 
             return provider.ValueOrElse(() => DefaultProvider);
         }

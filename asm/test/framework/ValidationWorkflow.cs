@@ -93,10 +93,11 @@ namespace Z0.Asm.Validation
             Notify($"Found {binops.Length} {host} kinded binary operarators");
 
             var messages = list<AppMsg>(binops.Length);        
+            
             foreach(var k in binops)
             {
                 var uri = k.Uri;
-                var oc = k.Method.ClassifyTypedOperator().Format();
+                var oc = OperatorTypeClass.Infer(k.Method).Format();
                 var kind = k.Method.KindId().Format();
                 messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
             }            

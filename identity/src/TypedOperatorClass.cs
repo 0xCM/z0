@@ -12,10 +12,10 @@ namespace Z0
 
     public static class TypedOperatorClassOps
     {
-        public static string Format(this TypedOperatorClass src)
+        public static string Format(this OperatorTypeClass src)
             =>  src.IsNone 
                 ? string.Empty 
-                : "f:" +  Identity.identify(src.OperandType).Format().Replicate(src.OperatorClass.Arity() + 1).Intersperse(ArrowSymbols.AsciArrow).Concat();
+                : "f:" +  Identity.identify(src.OperandType).Format().Replicate(src.OperatorClass.ArityValue() + 1).Intersperse(ArrowSymbols.AsciArrow).Concat();
 
     }
 

@@ -16,7 +16,7 @@ namespace Z0.Asm
             => from located in src
                 let m = located.Method
                 let id = m.KindId()
-                where id.HasValue && m.IsOperator() && (arity != null ? m.Arity() == arity : true)
+                where id.HasValue && m.IsOperator() && (arity != null ? m.ArityValue() == arity : true)
                 select located;
 
         public static IEnumerable<M> KindedNumericOperators<M>(this IEnumerable<M> src, int arity)

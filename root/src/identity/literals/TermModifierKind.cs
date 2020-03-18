@@ -12,7 +12,7 @@ namespace Z0
     /// <example>
     /// In the identifier 'load_g[8u](b16x8u~in,n1,n16)', the term 'in' is a modifier for the term 'b16x8u'
     /// </example>
-    public enum TermModifierKind : ushort
+    public enum TermModifierKind : byte
     {
         None = 0,
 

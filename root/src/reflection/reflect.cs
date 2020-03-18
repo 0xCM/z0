@@ -15,6 +15,8 @@ namespace Z0
     using static Root;
     using static ReflectionFlags;
 
+    public static partial class RootReflections{}
+
     public static class reflect
     {
         /// <summary>

@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="arity">The arity to match</param>
         public static bool HasArity(this MethodInfo m, int arity)
-            => m.Arity() == arity;
+            => m.ArityValue() == arity;
 
         /// <summary>
         /// Determines whether the method is an implicit conversion operator
@@ -81,7 +81,7 @@ namespace Z0
         /// Determines the number of parameters defined by a method
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static int Arity(this MethodInfo m)
+        public static int ArityValue(this MethodInfo m)
             => m.GetParameters().Length;
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="index">The parameter index</param>
         public static Type ParameterType(this MethodInfo m, int index)
-            => m.Arity() >= index + 1 ? m.GetParameters()[index].ParameterType : typeof(void);
+            => m.ArityValue() >= index + 1 ? m.GetParameters()[index].ParameterType : typeof(void);
 
 
         /// <summary>

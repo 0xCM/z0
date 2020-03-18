@@ -11,18 +11,9 @@ namespace Z0
 
     public readonly struct GenericType
     {
-        [MethodImpl(Inline)]
-        public static GenericType? From(Type src)
-        {
-            var kind = src.GenericKind(false);
-            if(kind.IsSome()) 
-                return new GenericType(src,kind);
-            else
-                return null;
-        }
         
         [MethodImpl(Inline)]
-        GenericType(Type src, GenericKind kind)
+        GenericType(Type src, GenericState kind)
         {
             this.Element = src;
             this.Kind = kind;                
@@ -30,7 +21,7 @@ namespace Z0
 
         public Type Element  {get;}
 
-        public GenericKind Kind {get;}
+        public GenericState Kind {get;}
 
     }
 }

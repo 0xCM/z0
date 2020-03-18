@@ -122,27 +122,6 @@ namespace Z0
             => src.Where(x => x.ReturnType == rt);
 
         /// <summary>
-        /// Selects unary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> UnaryOperators(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsUnaryOperator());
-
-        /// <summary>
-        /// Selects binary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> BinaryOperators(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsBinaryOperator());
-
-        /// <summary>
-        /// Selects ternary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> TernaryOperators(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsTernaryOperator());
-
-        /// <summary>
         /// Selects the concrete (not abstract) methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>

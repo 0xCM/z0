@@ -47,7 +47,7 @@ namespace Z0.Asm
         public IEnumerable<ApiMemberCode> Search(ArityClass arity)
             => from code in  Values
                 let method = code.Member.Method
-                where method.Arity() == (int)arity
+                where method.ArityValue() == (int)arity
                 select code;    
 
         public IEnumerable<ApiMemberCode> Search(OperatorClass @class)
@@ -84,7 +84,7 @@ namespace Z0.Asm
 
         public IEnumerable<ApiMemberCode> KindedOperators(int arity)
             => from code in Values
-                where code.Method.IsKindedOperator() && code.Method.Arity() == arity
+                where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;
 
     }

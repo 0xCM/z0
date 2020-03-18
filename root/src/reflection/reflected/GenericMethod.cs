@@ -12,25 +12,25 @@ namespace Z0
 
     public readonly struct GenericMethod
     {
-        [MethodImpl(Inline)]
-        public static GenericMethod? From(MethodInfo src)
-        {
-            var kind = src.GenericKind(false);
-            if(kind.IsSome())
-                return new GenericMethod(src,kind);
-            else
-                return null;            
-        }
+        // [MethodImpl(Inline)]
+        // public static GenericMethod? From(MethodInfo src)
+        // {
+        //     var kind = src.GenericState(false);
+        //     if(kind.IsSome())
+        //         return new GenericMethod(src,kind);
+        //     else
+        //         return null;            
+        // }
         
         [MethodImpl(Inline)]
-        GenericMethod(MethodInfo src, GenericKind kind)
+        GenericMethod(MethodInfo src, GenericState kind)
         {
             this.Element = src;
             this.Kind = kind;
         }
         public MethodInfo Element  {get;}
 
-        public GenericKind Kind {get;}
+        public GenericState Kind {get;}
 
     }
 }

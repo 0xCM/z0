@@ -66,17 +66,17 @@ namespace Z0
         /// <summary>
         /// Indicates a signed integral type
         /// </summary>
-        SignedIndicator = IdentityIndicatorKind.Signed,
+        SignedIndicator = IdentityIndicatorDocs.Signed,
 
         /// <summary>
         /// Indicates an unsigned integral type
         /// </summary>
-        UnsignedIndicator = IdentityIndicatorKind.Unsigned,
+        UnsignedIndicator = IdentityIndicatorDocs.Unsigned,
 
         /// <summary>
         /// Indicates a floating-point type
         /// </summary>
-        FloatIndicator = IdentityIndicatorKind.Float,
+        FloatIndicator = IdentityIndicatorDocs.Float,
 
         /// <summary>
         /// A numeric specifier of the form {width}{numeric_indicator}

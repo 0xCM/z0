@@ -12,7 +12,7 @@ namespace Z0
 
     public interface IOpIdentityProvider : IIdentityProvider<MethodInfo,OpIdentity>
     {
-        IdentityKind IIdentityProvider.ProviderKind => IdentityKind.Operation;
+        IdentityTarget IIdentityProvider.ProviderKind => IdentityTarget.Operation;
 
         OpIdentity DefineIdentity(MethodInfo method);
 

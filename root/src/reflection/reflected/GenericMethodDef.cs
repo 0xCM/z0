@@ -31,12 +31,12 @@ namespace Z0
         GenericMethodDef(MethodInfo src)
         {
             this.Definition = src;
-            this.Kind = GenericKind.Definition;
+            this.Kind = GenericState.Definition;
         }
 
         public MethodInfo Definition  {get;}
 
-        public GenericKind Kind {get;}
+        public GenericState Kind {get;}
 
     }
 
