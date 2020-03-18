@@ -18,8 +18,9 @@
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)monadic/src/z0.monadic.csproj" />
-    <ProjectReference Include="$(TopDir)reflections/src/z0.reflections.csproj" />
+    <ProjectReference Include="$(TopDir)feeders/reflections/z0.feeders.reflections.csproj" />
+    <ProjectReference Include="$(TopDir)feeders/texting/z0.feeders.texting.csproj" />
+    <ProjectReference Include="$(TopDir)feeders/monadic/z0.feeders.monadic.csproj" />  
   </ItemGroup>
 
 </Project>

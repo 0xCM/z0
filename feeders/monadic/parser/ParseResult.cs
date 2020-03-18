@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Monadic;
+    using static Option;
 
-    public readonly struct ParseResult : IParseResult, IFormattable<ParseResult>
+    public readonly struct ParseResult : IParseResult//, IFormattable<ParseResult>
     {
         /// <summary>
         /// The text that was parsed...or not
@@ -82,7 +82,7 @@ namespace Z0
              => Format();
     }
 
-    public readonly struct ParseResult<T> : IParseResult<T>, IFormattable<ParseResult<T>>
+    public readonly struct ParseResult<T> : IParseResult<T>//, IFormattable<ParseResult<T>>
     {
         /// <summary>
         /// The text that was parsed...or not
