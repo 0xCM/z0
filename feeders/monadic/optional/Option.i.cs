@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an untyped optional value
     /// </summary>
-    public interface IOption
+    public interface IOption : IMonadic
     {
         /// <summary>
         /// True if a value does exists, false otherwise

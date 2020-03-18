@@ -25,7 +25,7 @@ namespace Z0
         
     }
 
-    public interface IParseResult
+    public interface IParseResult : IMonadic
     {
         Type TargetType {get;}
 
@@ -36,7 +36,6 @@ namespace Z0
 
     public interface IParseResult<T> : IParseResult
     {
-
         Type IParseResult.TargetType
             => typeof(T);
 
