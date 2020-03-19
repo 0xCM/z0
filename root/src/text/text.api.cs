@@ -98,6 +98,10 @@ namespace Z0
         public static bool equals(string a, string b, bool cased = false)
             => string.Equals(a,b, cased ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase);
 
+        [MethodImpl(Inline)]
+        public static int compare(string a, string b)
+            => text.denullify(a).CompareTo(b);
+
         /// <summary>
         /// Creates a span of replicated characters 
         /// </summary>

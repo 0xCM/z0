@@ -69,11 +69,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed256(in Pair<Fixed128> x)
-            => new Fixed256(x.A,x.B);
+            => new Fixed256(x.Left,x.Right);
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed256(in ConstPair<Fixed128> x)
-            => new Fixed256(x.A,x.B);
+            => new Fixed256(x.Left,x.Right);
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed256 src)

@@ -27,11 +27,6 @@ namespace Z0
         public OpKindId KindId {get;}
     }
 
-    public interface IOpKind<T>
-        where T : unmanaged, IOpKind<T>
-    {   
-        OpKindId Id {get;}    
-    }
 
     public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(Identity) {} }
 }

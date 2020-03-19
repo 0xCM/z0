@@ -12,6 +12,9 @@ bash $AddCmd
 export Kind=decode
 bash $AddCmd
 
+export Kind=app
+bash $AddCmd
+
 export Kind=test
 bash $AddCmd
 

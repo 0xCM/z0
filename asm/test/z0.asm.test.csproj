@@ -19,6 +19,8 @@
 
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
     <ProjectReference Include="$(TopDir)libm/src/z0.libm.csproj" />
+
+    <ProjectReference Include="$(TopDir)asm/app/z0.asm.app.csproj" />
   </ItemGroup>
 
 </Project>

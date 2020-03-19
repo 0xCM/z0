@@ -65,8 +65,8 @@ namespace Z0
         public static uint clmulr(N32 r, uint a, uint b, ulong poly)
         {
             var prod = clmul(a,b);
-            prod ^= clmul(prod >> 32, poly).A;
-            prod ^= clmul(prod >> 32, poly).A;
+            prod ^= clmul(prod >> 32, poly).Left;
+            prod ^= clmul(prod >> 32, poly).Left;
             return (uint)prod;
         }
 
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline), Op]
         public static ulong clmul(uint lhs, uint rhs)
-            => clmul((ulong)lhs, (ulong)rhs).A;
+            => clmul((ulong)lhs, (ulong)rhs).Left;
 
         /// <summary>
         /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8

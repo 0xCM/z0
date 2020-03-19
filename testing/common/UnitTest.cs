@@ -26,12 +26,6 @@ namespace Z0
 
             }        
 
-
-        public virtual void Dispose()
-        {
-
-        }
-
         protected virtual bool TraceDetailEnabled
             => false;
         

@@ -11,10 +11,6 @@ namespace Z0.Asm.Validation
     
     using static Root;
     
-    public interface IValidationWorkflow : IAsmWorkflow
-    {
-        void Execute();
-    }
 
     public interface IAsmChecks : IAsmWorkflowService
     {
@@ -34,10 +30,5 @@ namespace Z0.Asm.Validation
         bit EvalFixedOperator(in BufferSeq buffers, in ApiMemberCode api);
     }
 
-    public interface IAsmExecutor : IAsmWorkflowService
-    {
-        AsmExecResult ExecAction(Action action, OpUri f);   
 
-        AsmExecResult ExecAction(Action action, OpUri f, OpUri g);
-    }
 }

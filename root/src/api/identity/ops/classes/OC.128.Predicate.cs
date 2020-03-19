@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static OpTypes;
+    using static OpClasses;
     using OC = OperationClass;
     using C = PredicateClass;
 
@@ -40,22 +40,22 @@ namespace Z0
         TernaryPred = OC.TernaryPred,
     }    
 
-    public static partial class OpTypes
+    public static partial class OpClasses
     {
-        public readonly struct UnaryPred : IKind<UnaryPred, C> { public C Class => C.UnaryPred; }
+        public readonly struct UnaryPred : IOpClass<C> { public C Class => C.UnaryPred; }
 
-        public readonly struct BinaryPred : IKind<BinaryPred, C> { public C Class => C.BinaryPred; }
+        public readonly struct BinaryPred : IOpClass<C> { public C Class => C.BinaryPred; }
 
-        public readonly struct TernaryPred : IKind<TernaryPred, C> { public C Class => C.TernaryPred; }
+        public readonly struct TernaryPred : IOpClass<C> { public C Class => C.TernaryPred; }
 
-        public readonly struct UnaryPred<T> : IKind<UnaryPred<T>, C, T> where T : unmanaged { public C Class => C.UnaryPred; }
+        public readonly struct UnaryPred<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.UnaryPred; }
 
-        public readonly struct BinaryPred<T> : IKind<BinaryPred<T>, C, T> where T : unmanaged { public C Class => C.BinaryPred; }
+        public readonly struct BinaryPred<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.BinaryPred; }
 
-        public readonly struct TernaryPred<T> : IKind<TernaryPred<T>, C, T> where T : unmanaged { public C Class => C.TernaryPred; }
+        public readonly struct TernaryPred<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.TernaryPred; }
     }
 
-    public static partial class OpReps
+    public static partial class OpClassReps
     {
         public static UnaryPred UnaryPred => default;
 

@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The type of the left value</typeparam>
     /// <typeparam name="B">The type of the left value</typeparam>
-    public interface IPair<A,B>
+    public interface IPairing<A,B>
     {
         A Left {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The type of the potential left value</typeparam>
     /// <typeparam name="B">The type of the potential left value</typeparam>
-    public interface ICopair<A,B>
+    public interface ICopairing<A,B>
     {
         /// <summary>
         /// The potential left value

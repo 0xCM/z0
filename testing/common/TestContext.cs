@@ -25,6 +25,19 @@ namespace Z0
             this.Context = this;
         }
 
+        protected TestContext(IExternalTestContext external)
+        {
+            this.Random = external.Random;
+            this.Config = TestConfigDefaults.Default();
+            this.Queue = external;
+            this.Context = this;
+        }
+
+        public virtual void Dispose()
+            => OnDispose();
+
+        protected virtual void OnDispose() { }
+
         public IPolyrand Random {get;}
 
         IAppMsgContext Queue {get;set;}
@@ -40,9 +53,6 @@ namespace Z0
         public void Configure(ITestConfig config)
             => Config = config;
                 
-        protected FolderPath DefaultDataDir
-            => Context.Paths.TestDataDir(GetType());                
-
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>
@@ -261,6 +271,9 @@ namespace Z0
         public void Flush(Exception e, IAppMsgLog target)
             => Queue.Flush(e, target);
 
+        public void Flush(FilePath dst) 
+            => Queue.Flush(dst);
+            
         /// <summary>
         /// Allocates and optionally starts a system counter
         /// </summary>
@@ -268,4 +281,16 @@ namespace Z0
         protected static SystemCounter counter(bool start = false) 
             => SystemCounter.Create(start);
     }
+
+    public abstract class TestContext<H,C> : TestContext<H>
+        where C : IContext
+    {
+        public new C Context {get;}
+
+        protected TestContext(C context)
+        {
+            this.Context = context;
+        }
+    }
+
 }

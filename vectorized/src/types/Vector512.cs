@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector512<T>(in ConstPair<Vector256<T>> src)
-            => new Vector512<T>(src.A, src.B);
+            => new Vector512<T>(src.Left, src.Right);
          
         [MethodImpl(Inline)]
         public static implicit operator ConstPair<Vector256<T>>(Vector512<T> src)

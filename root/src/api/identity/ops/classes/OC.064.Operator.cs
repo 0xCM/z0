@@ -12,8 +12,9 @@ namespace Z0
 
     using OC = OperationClass;
     using C = OperatorClass;
+    using K = OpClasses;
     
-    using static OpTypes;
+    using static OpClasses;
 
 
     /// <summary>
@@ -48,22 +49,26 @@ namespace Z0
         TernaryOp = OC.TernaryOp,
     }
 
-    public static partial class OpTypes
+    public static class OpClassOps
     {
-        public readonly struct UnaryOp : IKind<UnaryOp, C> { public C Class => C.UnaryOp; }
-
-        public readonly struct BinaryOp : IKind<BinaryOp, C> { public C Class => C.BinaryOp; }
-
-        public readonly struct TernaryOp : IKind<TernaryOp, C> { public C Class => C.TernaryOp; }
-
-        public readonly struct UnaryOp<T> : IKind<UnaryOp<T>, C, T> where T : unmanaged { public C Class => C.UnaryOp; }
-
-        public readonly struct BinaryOp<T> : IKind<BinaryOp<T>, C, T> where T : unmanaged { public C Class => C.BinaryOp; }
-
-        public readonly struct TernaryOp<T> : IKind<TernaryOp<T>, C, T> where T : unmanaged { public C Class => C.TernaryOp; }
     }
 
-    public static partial class OpReps
+    public static partial class OpClasses
+    {
+        public readonly struct UnaryOp : IOpClass<C> { public C Class => C.UnaryOp; }
+
+        public readonly struct BinaryOp : IOpClass<C> { public C Class => C.BinaryOp; }
+
+        public readonly struct TernaryOp : IOpClass<C> { public C Class => C.TernaryOp; }
+
+        public readonly struct UnaryOp<T> : IOpClass<C> where T : unmanaged { public C Class => C.UnaryOp; }
+
+        public readonly struct BinaryOp<T> : IOpClass<C> where T : unmanaged { public C Class => C.BinaryOp; }
+
+        public readonly struct TernaryOp<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.TernaryOp; }
+    }
+
+    public static partial class OpClassReps
     {
         public static UnaryOp UnaryOp => default;
 
@@ -71,11 +76,11 @@ namespace Z0
 
         public static TernaryOp TernaryOp => default;
 
-        public static UnaryOp<T> unaryOp<T>() where T : unmanaged => default;
+        public static K.UnaryOp<T> unaryOp<T>() where T : unmanaged => default;
 
-        public static BinaryOp<T> binaryOp<T>() where T : unmanaged => default;
+        public static K.BinaryOp<T> binaryOp<T>() where T : unmanaged => default;
 
-        public static TernaryOp<T> ternaryOp<T>() where T : unmanaged => default;
+        public static K.TernaryOp<T> ternaryOp<T>() where T : unmanaged => default;
     }
 
     public readonly struct OperatorTypeClass

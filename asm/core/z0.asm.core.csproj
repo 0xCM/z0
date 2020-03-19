@@ -17,8 +17,6 @@
     <ProjectReference Include="$(TopDir)graphs/src/z0.graphs.csproj" />
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />
 
-
-    <!-- <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" /> -->
   </ItemGroup>
 
 </Project>

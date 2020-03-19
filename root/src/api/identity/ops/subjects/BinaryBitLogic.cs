@@ -220,26 +220,22 @@ namespace Z0
         /// </remarks>
         True = 0b1111,
     } 
-
     
     /// <summary>
     /// Characterizes a type that represents an operation kind
     /// </summary>
-    public interface IBitLogicKind
+    public interface IBitLogicKind : IOpKind
     {
-        string Name {get;}
+        
     }
 
-    public interface IBitLogicKind<K,E> : IBitLogicKind
-        where E : unmanaged, Enum
-        where K : unmanaged, IBitLogicKind<K,E>
-    {        
-        E Kind {get;}
+    public interface IBinaryBitlogicKind : IBitLogicKind, IOpKind<BinaryBitLogicOpKind>
+    {
+        BinaryBitLogicOpKind IKind<BinaryBitLogicOpKind>.Class 
+            => Enums.parse<BinaryBitLogicOpKind>(KindId.ToString()).ValueOrDefault();
+    }    
 
-        string IBitLogicKind.Name => Kind.ToString().ToLower();                
-    }   
-
-    // ~ Binary bitlogic
+    // ~ Attributes
     // ~ ----------------------------------------------------------------------
 
     public sealed class FalseAttribute : A { public FalseAttribute() : base(False) {} }
@@ -276,33 +272,30 @@ namespace Z0
 
     public sealed class LNotAttribute : A { public LNotAttribute() : base(LNot) {} }
 
-    public sealed class NotAttribute : A { public NotAttribute() : base(Not) {} }
-
     public sealed class SelectAttribute : A { public SelectAttribute() : base(Select) {} }    
 
 
-    partial class BitLogicKinds
+    partial class OpKinds
     {
-        public readonly struct And : IBitLogicKind<And,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.And;}}
+        public readonly struct And : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.And;}}
 
-        public readonly struct Or : IBitLogicKind<Or,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.Or;}}
+        public readonly struct Or : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Or;}}
 
-        public readonly struct Xor : IBitLogicKind<Xor,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.Xor;}}
+        public readonly struct Xor : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Xor;}}
 
-        public readonly struct Nand : IBitLogicKind<Nand,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.Nand;}}
+        public readonly struct Nand : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Nand;}}
 
-        public readonly struct Nor : IBitLogicKind<Nor,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.Nor;}}
+        public readonly struct Nor : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Nor;}}
 
-        public readonly struct Xnor : IBitLogicKind<Xnor,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.Xnor;}}
+        public readonly struct Xnor : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Xnor;}}
 
-        public readonly struct Impl : IBitLogicKind<Impl,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.Impl;}}
+        public readonly struct Impl : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Impl;}}
 
-        public readonly struct NonImpl : IBitLogicKind<NonImpl,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.NonImpl;}}
+        public readonly struct NonImpl : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.NonImpl;}}
 
-        public readonly struct CImpl : IBitLogicKind<CImpl,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.CImpl;}}
+        public readonly struct CImpl : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.CImpl;}}
 
-        public readonly struct CNonImpl : IBitLogicKind<CNonImpl,Id> { public Id Kind { [MethodImpl(Inline)] get => Id.CNonImpl;}}
+        public readonly struct CNonImpl : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.CNonImpl;}}
 
-        public readonly struct Not : IBitLogicKind<Not,UnaryBitLogicOpKind> { public UnaryBitLogicOpKind Kind { [MethodImpl(Inline)] get => UnaryBitLogicOpKind.Not;}}
     }
 }

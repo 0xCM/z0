@@ -64,9 +64,21 @@ public enum AssemblyId : ulong
 
     LogixTest = Logix | Test,
 
-    Asm = 130,
+
+
+    Asm = 300,
 
     AsmTest = Asm | Test,
+
+    AsmApp = Asm | App,
+    
+    AsmCore = 305,
+
+    AsmEncoder = 310,
+    
+    AsmDecoder = 315,
+
+    Vectorized = 330,
 
     Data = 140,
 
@@ -126,13 +138,6 @@ public enum AssemblyId : ulong
 
     DynamicTest = Dynamic | Test,
     
-    AsmCore = 300,
-
-    AsmEncoder = 310,
-    
-    AsmDecoder = 320,
-
-    Vectorized = 330,
 
     VData = 331,
 
@@ -182,7 +187,9 @@ public enum AssemblyId : ulong
 
     Svc = T16,
 
-    Test = T17
+    Test = T17,
+
+    App = T18,
 }
 
 [AttributeUsage(AttributeTargets.Assembly)]

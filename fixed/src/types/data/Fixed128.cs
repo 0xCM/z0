@@ -43,11 +43,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed128(in Pair<ulong> x)
-            => new Fixed128(x.A,x.B);
+            => new Fixed128(x.Left,x.Right);
         
         [MethodImpl(Inline)]
         public static implicit operator Fixed128(in ConstPair<ulong> x)
-            => new Fixed128(x.A,x.B);
+            => new Fixed128(x.Left,x.Right);
         
         [MethodImpl(Inline)]
         public static implicit operator Fixed128(Vector128<byte> x)

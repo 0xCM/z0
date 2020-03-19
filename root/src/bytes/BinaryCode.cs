@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
 
 
-    public interface IBinaryCode<T> : IFormattable<BinaryCode>, INullary<BinaryCode>, IEquatable<BinaryCode>, IIndexed<byte>, ILengthwise, IByteSpanProvider<BinaryCode>, ICounted<int>
+    public interface IBinaryCode<T> : IFormattable<BinaryCode>, INullary<BinaryCode>, IEquatable<BinaryCode>, ILengthwise, IByteSpanProvider<BinaryCode>
         where T : IBinaryCode<T>
     {
 

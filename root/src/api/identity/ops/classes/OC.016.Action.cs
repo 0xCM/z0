@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static OpTypes;
+    using static OpClasses;
 
     using C = ActionClass;
     using OC = OperationClass;
@@ -46,15 +46,15 @@ namespace Z0
         Action3 = OC.Action3
     }
 
-    public static partial class OpTypes
+    public static partial class OpClasses
     {
 
-        public readonly struct Receiver : IKind<Receiver, C> { public C Class => C.Receiver; }
+        public readonly struct Receiver : IOpClass<C> { public C Class => C.Receiver; }
 
-        public readonly struct Receiver<T> : IKind<Receiver, C, T> where T : unmanaged { public C Class => C.Receiver; }
+        public readonly struct Receiver<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.Receiver; }
     }
 
-    public static partial class OpReps
+    public static partial class OpClassReps
     {
         public static Receiver Receiver => default;
 

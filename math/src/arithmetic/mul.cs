@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
         public static unsafe void mul32x64(in Pair<uint> src, ref Pair<uint> dst)                 
-            => dst.B = Bmi2.MultiplyNoFlags(src.A, src.B, ptr(ref dst.A));
+            => dst.Right = Bmi2.MultiplyNoFlags(src.Left, src.Right, ptr(ref dst.Left));
 
         /// <summary>
         /// Computes the full 128-bit product between two unsigned 64-bit integers
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
         public static unsafe void mul64x128(in Pair<ulong> src, ref Pair<ulong> dst)                 
-            => dst.B = Bmi2.X64.MultiplyNoFlags(src.A, src.B, ptr(ref dst.A));
+            => dst.Right = Bmi2.X64.MultiplyNoFlags(src.Left, src.Right, ptr(ref dst.Left));
 
         /// <summary>
         /// Computes the full 64-bit product between two unsigned 32-bit integers

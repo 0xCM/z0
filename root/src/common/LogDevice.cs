@@ -12,9 +12,10 @@ namespace Z0
     
     public readonly struct LogDevice : ILogDevice
     {
-        public static LogDevice Open(IContext context, FilePath target, string name = null, bool append = false, bool display = false, AppMsgColor? color = null)
+        public static LogDevice Open(IContext context, FilePath target, string name = null, 
+            FileWriteMode mode = FileWriteMode.Overwrite, bool display = false, AppMsgColor? color = null)
         {
-            var writer = target.CreateParentIfMissing().Writer(append);
+            var writer = target.CreateParentIfMissing().Writer(mode);
             var devname = name ?? ("log" + increment(ref devid).ToString());
             return new LogDevice(context, writer, devname, display, color ?? AppMsgColor.Green);            
         }

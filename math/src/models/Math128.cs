@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="x">The integer, represented via paired hi/lo components</param>
         [MethodImpl(Inline)]
         public static Pair<ulong> not(in Pair<ulong> x)
-            => (~x.A, ~x.B);
+            => (~x.Left, ~x.Right);
 
         /// <summary>
         /// Computes the bitwise AND of two 128-bit integers
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         [MethodImpl(Inline)]
         public static Pair<ulong> and(in Pair<ulong> x, in Pair<ulong> y)
-            => (x.A & y.A, x.B & y.B);
+            => (x.Left & y.Left, x.Right & y.Right);
 
         /// <summary>
         /// Computes the bitwise NAND of two 128-bit integers
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         [MethodImpl(Inline)]
         public static Pair<ulong> or(in Pair<ulong> x, in Pair<ulong> y)
-            => (x.A | y.A, x.B | y.B);
+            => (x.Left | y.Left, x.Right | y.Right);
 
         /// <summary>
         /// Computes the bitwise NOR of two 128-bit integers
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         [MethodImpl(Inline)]
         public static Pair<ulong> xor(in Pair<ulong> x, in Pair<ulong> y)
-            => (x.A ^ y.A, x.B ^ y.B);
+            => (x.Left ^ y.Left, x.Right ^ y.Right);
 
         /// <summary>
         /// Computes the bitwise XNOR of two 128-bit integers
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         [MethodImpl(Inline)]
         public static bit same(in Pair<ulong> x, in Pair<ulong> y)
-            => x.A == y.A && x.B == y.B;
+            => x.Left == y.Left && x.Right == y.Right;
 
         /// <summary>
         /// Determines whether the left operand is less than the right operand
@@ -107,7 +107,7 @@ namespace Z0
         /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline)]
         public static bit lt(in Pair<ulong> x, in Pair<ulong> y)
-            => x.B < y.B | ((x.B == y.B) && (x.A < y.A));
+            => x.Right < y.Right | ((x.Right == y.Right) && (x.Left < y.Left));
 
         /// <summary>
         /// Determines whether the left operand is less than or equal the right operand
@@ -117,7 +117,7 @@ namespace Z0
         /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline)]
         public static bit lteq(in Pair<ulong> x, in Pair<ulong> y)
-            => x.B < y.B | ((x.B == y.B) && (x.A <= y.A));
+            => x.Right < y.Right | ((x.Right == y.Right) && (x.Left <= y.Left));
 
         /// <summary>
         /// Determines whether the left operand is greater than the right operand
@@ -148,9 +148,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Pair<ulong> add(in Pair<ulong> x, in Pair<ulong> y)
         {
-            var lo = x.A + y.A;
-            bit carry = x.A > lo;
-            var hi = x.B + y.B + (uint)carry;
+            var lo = x.Left + y.Left;
+            bit carry = x.Left > lo;
+            var hi = x.Right + y.Right + (uint)carry;
             return (lo,hi);
         }
 
@@ -178,9 +178,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Pair<ulong> sub(in Pair<ulong> x, in Pair<ulong> y)
         {
-            var lo = x.A - y.A;
-            bit borrow = x.A < lo;
-            var hi = x.B - y.B - (uint)borrow;
+            var lo = x.Left - y.Left;
+            bit borrow = x.Left < lo;
+            var hi = x.Right - y.Right - (uint)borrow;
             return (lo,hi);
         }
 
@@ -225,7 +225,7 @@ namespace Z0
         public static ref ulong inc(ref ulong x)
         {
             var o = one;
-            add(in x, in o.A, ref x);
+            add(in x, in o.Left, ref x);
             return ref x;
         }
 
@@ -233,14 +233,14 @@ namespace Z0
         public static void inc(in ulong x, ref ulong y)
         {
             var o = one;
-            add(in x, in o.A, ref y);
+            add(in x, in o.Left, ref y);
         }
 
         [MethodImpl(Inline)]
         public static ref ulong dec(ref ulong x)
         {
             var o = one;
-            sub(in x, in o.A, ref x);
+            sub(in x, in o.Left, ref x);
             return ref x;
         }
 
@@ -248,7 +248,7 @@ namespace Z0
         public static void dec(in ulong x, ref ulong y)
         {
             var o = one;
-            sub(in x, in o.A, ref y);
+            sub(in x, in o.Left, ref y);
         }
 
         /// <summary>
@@ -260,9 +260,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Pair<ulong> sll(in Pair<ulong> x, int offset)
             => offset < 64 
-              ?  ((x.B << offset) | ((x.A >> 1) >> 63 - offset), x.A << offset) 
+              ?  ((x.Right << offset) | ((x.Left >> 1) >> 63 - offset), x.Left << offset) 
               : offset < 128 
-              ? (x.A << (offset - 64),0) 
+              ? (x.Left << (offset - 64),0) 
               : zero;
 
         /// <summary>
@@ -274,9 +274,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Pair<ulong> srl(in Pair<ulong> x, int offset)
             => offset < 64 
-              ?  ((x.B >> offset), (x.A >> offset) | ((x.B << 1) << 63 - offset))
+              ?  ((x.Right >> offset), (x.Left >> offset) | ((x.Right << 1) << 63 - offset))
               : offset < 128 
-              ? (0, x.A >> (offset - 64)) 
+              ? (0, x.Left >> (offset - 64)) 
               : zero;
 
         [MethodImpl(Inline)]
@@ -301,14 +301,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref Pair<ulong> mul(in Pair<ulong> src, ref Pair<ulong> dst)  
         {               
-            dst.B = Bmi2.X64.MultiplyNoFlags(src.A, src.B, ptr(ref dst.A));
+            dst.Right = Bmi2.X64.MultiplyNoFlags(src.Left, src.Right, ptr(ref dst.Left));
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public static ref Pair<ulong> mul(ulong x, ulong y, out Pair<ulong> dst)                 
         {
-            mul(x,y, out dst.A, out dst.B);
+            mul(x,y, out dst.Left, out dst.Right);
             return ref dst;
         }
 
@@ -346,14 +346,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Pair<uint> mul(uint x, uint y, out Pair<uint> dst)                 
         {
-            mul(x,y, out dst.A, out dst.B);
+            mul(x,y, out dst.Left, out dst.Right);
             return ref dst;
         }
             
         [MethodImpl(Inline)]
         public static unsafe ref Pair<uint> mul(in Pair<uint> src, ref Pair<uint> dst)                 
         {
-            dst.B = Bmi2.MultiplyNoFlags(src.A, src.B, ptr(ref dst.A));
+            dst.Right = Bmi2.MultiplyNoFlags(src.Left, src.Right, ptr(ref dst.Left));
             return ref dst;
         }
 

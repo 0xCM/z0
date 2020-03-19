@@ -12,20 +12,6 @@ namespace Z0
     //using NK = NumericKind;
     using static NumericKind;
 
-    /// <summary>
-    /// Represents the parametrically-identified numeric kind
-    /// </summary>
-    public readonly struct NK<T> : INumericKind<T> 
-        where T : unmanaged
-    {
-        [MethodImpl(Inline)]
-        public static implicit operator NumericKind(NK<T> src)
-            => NumericIdentity.kind<T>();
-
-        [MethodImpl(Inline)]
-        public static implicit operator T(NK<T> src)
-            => default;
-    }
     
     /// <summary>
     /// Joins numeric types and kinds
@@ -119,11 +105,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(NumericKinded src)
-             => IdentityShare.equals(this, src);
+             => text.equals(Identifier, src.Identifier);
 
         [MethodImpl(Inline)]
         public int CompareTo(NumericKinded other)
-            => IdentityShare.compare(this, other);
+            => text.compare(this.Identifier, other.Identifier);
 
         public override string ToString()
             => Identifier;

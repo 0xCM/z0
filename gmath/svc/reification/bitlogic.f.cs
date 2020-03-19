@@ -10,8 +10,8 @@ namespace Z0
     using static Root;
     using static MathSvcHosts;
     
-    using OT = BitLogicKinds;    
-
+    using OK = OpKinds;
+    
     partial class MathSvcFactory
     {
        [MethodImpl(Inline)]
@@ -91,7 +91,7 @@ namespace Z0
             where T : unmanaged  
             where K : unmanaged, IBitLogicKind      
         {
-            if(typeof(K) == typeof(OT.Not))
+            if(typeof(K) == typeof(OK.Not))
                 return not<T>().Invoke(a);
             else 
                 throw unsupported<T>();
@@ -102,17 +102,17 @@ namespace Z0
             where T : unmanaged  
             where K : unmanaged, IBitLogicKind      
         {
-            if(typeof(K) == typeof(OT.And))
+            if(typeof(K) == typeof(OK.And))
                 return and<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OT.Or))
+            else if(typeof(K) == typeof(OK.Or))
                 return or<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OT.Xor))
+            else if(typeof(K) == typeof(OK.Xor))
                 return xor<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OT.Nand))
+            else if(typeof(K) == typeof(OK.Nand))
                 return nand<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OT.Nor))
+            else if(typeof(K) == typeof(OK.Nor))
                 return nor<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OT.Xnor))
+            else if(typeof(K) == typeof(OK.Xnor))
                 return xnor<T>().Invoke(a,b);
             else
                 return eval_2(kind,a,b);
@@ -123,13 +123,13 @@ namespace Z0
             where T : unmanaged  
             where K : unmanaged, IBitLogicKind      
         {
-            if(typeof(K) == typeof(OT.Impl))
+            if(typeof(K) == typeof(OK.Impl))
                 return impl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OT.NonImpl))
+            else if(typeof(K) == typeof(OK.NonImpl))
                 return nonimpl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OT.CImpl))
+            else if(typeof(K) == typeof(OK.CImpl))
                 return cimpl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OT.CNonImpl))
+            else if(typeof(K) == typeof(OK.CNonImpl))
                 return cnonimpl<T>().Invoke(a,b);
             else
                 throw unsupported<K>();

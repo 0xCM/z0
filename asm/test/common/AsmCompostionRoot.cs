@@ -31,7 +31,5 @@ namespace Z0
             return resolutions.Assemble();
         }
 
-        public static IAsmContext RootedComposition(this IAsmContext context, params IAssemblyResolution[] resolutions)
-            => AsmContext.Rooted(context, Compose(resolutions));
     }
 }

@@ -23,7 +23,7 @@ namespace Z0.Asm.Validation
     {
         public IAsmWorkflowContext Context {get;}
 
-        readonly IAsmEvalDispatcher Executioner;
+        //readonly IAsmEvalDispatcher Executioner;
 
         readonly IAppMsgSink MsgSink;
         
@@ -39,17 +39,17 @@ namespace Z0.Asm.Validation
             this.Context = context;
             this.RepCount = 128;
             this.MsgSink = sink;
-            this.Executioner = AsmEvalDispatcher.Create(context, sink);
+            //this.Executioner = AsmEvalDispatcher.Create(context, sink);
         }                
 
         public void Execute(in BufferSeq buffers, ApiMemberCode code)
         {
-            Executioner.EvalOperator(buffers, code);
+            //Executioner.EvalOperator(buffers, code);
         }
 
         public void Execute(in BufferSeq buffers, ApiMemberCode[] code)
         {
-            Executioner.EvalOperators(buffers, code);
+            //Executioner.EvalOperators(buffers, code);
             //Executioner.EvalFixedOperators(buffers, code);
         }
 

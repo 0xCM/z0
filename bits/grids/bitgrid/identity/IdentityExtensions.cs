@@ -56,7 +56,7 @@ namespace Z0
         public static bool BitGridOpen(this Type src)
             => src.GridKind().MapValueOrDefault(k => src.OpenTypeParameterCount() != 0);
         
-        public static Triple<FixedWidth,FixedWidth,NumericKind> GridClosures(this Type src )
+        public static Tripled<FixedWidth,FixedWidth,NumericKind> GridClosures(this Type src )
         {
             var args = src.GridKind().MapValueOrDefault(k => src.SuppliedTypeArgs().ToArray(), array<Type>());
             if(args.Length == 1)
@@ -68,11 +68,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool IsSome(this Triple<FixedWidth,FixedWidth,NumericKind> src)
+        public static bool IsSome(this Tripled<FixedWidth,FixedWidth,NumericKind> src)
             => src.A.IsSome() || src.B.IsSome() || src.C.IsSome();
 
         [MethodImpl(Inline)]
-        public static int NonEmptyCount(this Triple<FixedWidth,FixedWidth,NumericKind> src)
+        public static int NonEmptyCount(this Tripled<FixedWidth,FixedWidth,NumericKind> src)
             => (src.A.IsSome() ? 1 : 0) + (src.B.IsSome() ? 1 : 0)  + (src.C.IsSome() ? 1 : 0);
 
         public static Option<GridKind> GridKind(this Type src)

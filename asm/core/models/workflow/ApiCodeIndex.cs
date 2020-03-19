@@ -12,6 +12,7 @@ namespace Z0.Asm
 
     using static Root;
 
+
     public readonly struct ApiCodeIndex : IMethodStreamSource<ApiCodeIndex>
     {
         readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;

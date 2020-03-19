@@ -299,9 +299,7 @@ namespace Z0
             finally
             {            
                 AppMessages.emit(Context, messages);
-                iter(messages.Where(m => !m.Displayed), term.print);       
-
-                //term.print(messages);
+                iter(messages.Where(m => !m.Displayed), term.print);
             }
 
             return clock;

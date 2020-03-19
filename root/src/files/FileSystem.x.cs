@@ -70,6 +70,9 @@ namespace Z0
         public static StreamWriter Writer(this FilePath dst, bool append = false)
             => new StreamWriter(dst.CreateParentIfMissing().FullPath, append);
 
+        public static StreamWriter Writer(this FilePath dst, FileWriteMode mode)
+            => new StreamWriter(dst.CreateParentIfMissing().FullPath, mode == FileWriteMode.Append);
+
         /// <summary>
         /// Determines whether a file exists
         /// </summary>

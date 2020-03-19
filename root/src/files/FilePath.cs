@@ -10,6 +10,13 @@ namespace Z0
 
     using static Root;
 
+    public enum FileWriteMode
+    {
+        Overwrite = 0,
+
+        Append = 1
+    }
+
     /// <summary>
     /// Represents a fully-qualified path to a file on the local machine
     /// </summary>

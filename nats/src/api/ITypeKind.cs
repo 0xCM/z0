@@ -9,33 +9,32 @@ namespace Z0
 
     using static Root;
 
-    public interface ITypeKindN<N> : ITypeKind
+    public interface ITypeArity<N> : ITypeArity
         where N : unmanaged, ITypeNat
     {
-        int NaturalArity
+        int ITypeArity.Arity
         {
             [MethodImpl(Inline)]
             get => (int)NatMath2.natval<N>();
         }
     }
 
-    public interface ITypeKindN1<N> : ITypeKindN<N1>, ITypeKind<N>
+    public interface ITypeArity<N,T> : ITypeArity<N>, ITypeKind<N,T>
         where N : unmanaged, ITypeNat
     {
 
     }
 
-    public interface ITypeKindN1<N,T> : ITypeKindN<N1>, ITypeKind<N,T>
-        where N : unmanaged, ITypeNat
+    public interface ITypeWidth<W> : ITypeWidth
+        where W : unmanaged, ITypeNat
     {
-
+        FixedWidth ITypeWidth.Width => (FixedWidth)NatMath2.natval<W>();
     }
 
-
-    public interface ITypeKindN2<M,N,T> : ITypeKindN<N2>, ITypeKind<M,N>
-        where M : unmanaged, ITypeNat
-        where N : unmanaged, ITypeNat
+    public interface ITypeWidth<W,T> : ITypeWidth<W>
+        where W : unmanaged, ITypeNat
     {
+        
 
     }
 }

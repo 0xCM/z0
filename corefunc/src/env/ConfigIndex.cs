@@ -8,11 +8,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Configuration.Json;
+    //using Microsoft.Extensions.Configuration.Json;
 
     using static zfunc;
 
-    public class AppSettings : IAppSettings
+    class AppSettingsDeprecated : IAppSettings
     {
         public static IAppSettings Load(string name)
         {
@@ -20,10 +20,10 @@ namespace Z0
             path.FolderPath.CreateIfMissing();
             var builder = new ConfigurationBuilder();
             builder.AddJsonFile(path.Name,true);
-            return new AppSettings(builder.Build());            
+            return new AppSettingsDeprecated(builder.Build());            
         }
 
-        AppSettings(IConfigurationRoot root)
+        AppSettingsDeprecated(IConfigurationRoot root)
         {
             this.Root = root;
             this.Values = new Dictionary<string, string>();
@@ -49,7 +49,7 @@ namespace Z0
         int Age
             => (int)(now() - Loaded).TotalSeconds;
 
-        public Option<string> Read(string name)
+        public Option<string> Setting(string name)
         {
             try            
             {
@@ -66,11 +66,11 @@ namespace Z0
             return default;
         }
 
-        public Option<T> Read<T>(string name)
+        public Option<T> Setting<T>(string name)
         {
             try
             {
-                return Read(name).TryMap(v => (T) Convert.ChangeType(v,typeof(T)));
+                return Setting(name).TryMap(v => (T) Convert.ChangeType(v,typeof(T)));
             }
             catch(Exception e)
             {
@@ -81,7 +81,7 @@ namespace Z0
 
         public string this[string name]
         {
-            get => Read(name).ValueOrElse(() => string.Empty);
+            get => Setting(name).ValueOrElse(() => string.Empty);
         }
 
         public IEnumerable<Pair<string>> Pairs => Values.Select(kvp => Tuples.pair<string>(kvp.Key, kvp.Value));

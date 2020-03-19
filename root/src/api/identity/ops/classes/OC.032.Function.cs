@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static OpTypes;
+    using static OpClasses;
 
     using OC = OperationClass;
     using C = FunctionClass;
@@ -52,27 +52,26 @@ namespace Z0
         TernaryOp = OC.TernaryOp,
     } 
 
-    public static partial class OpTypes
+    public static partial class OpClasses
     {
-        public readonly struct Emitter : IKind<Emitter, C> { public C Class => C.Emitter; }
+        public readonly struct Emitter : IOpClass<C> { public C Class => C.Emitter; }
 
-        public readonly struct Func1 : IKind<Func1, C> { public C Class => C.Func1; }
+        public readonly struct Func1 : IOpClass<C> { public C Class => C.Func1; }
 
-        public readonly struct Func2 : IKind<Func2, C> { public C Class => C.Func2; }
+        public readonly struct Func2 : IOpClass<C> { public C Class => C.Func2; }
 
-        public readonly struct Func3 : IKind<Func3, C> { public C Class => C.Func3; }
+        public readonly struct Func3 : IOpClass<C> { public C Class => C.Func3; }
      
+        public readonly struct Emitter<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.Emitter; }
 
-        public readonly struct Emitter<T> : IKind<Emitter<T>, C, T> where T : unmanaged { public C Class => C.Emitter; }
+        public readonly struct Func1<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.Func1; }
 
-        public readonly struct Func1<T> : IKind<Func1<T>, C, T> where T : unmanaged { public C Class => C.Func1; }
+        public readonly struct Func2<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.Func2; }
 
-        public readonly struct Func2<T> : IKind<Func2<T>, C, T> where T : unmanaged { public C Class => C.Func2; }
-
-        public readonly struct Func3<T> : IKind<Func3<T>, C, T> where T : unmanaged { public C Class => C.Func3; }
+        public readonly struct Func3<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.Func3; }
     }    
 
-    public static partial class OpReps
+    public static partial class OpClassReps
     {
         public static Emitter Emitter => default;
 

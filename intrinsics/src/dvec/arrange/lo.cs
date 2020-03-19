@@ -128,8 +128,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Pair<ulong> vlo(Vector256<ulong> src, ref Pair<ulong> dst)
         {            
-            dst.A = src.GetElement(0);
-            dst.B = src.GetElement(1);
+            dst.Left = src.GetElement(0);
+            dst.Right = src.GetElement(1);
             return ref dst;
         }
 

@@ -10,6 +10,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
+    using static Root;
+     
 
     public interface IContentAggregate : ICustomFormattable
     {
@@ -97,15 +99,23 @@ namespace Z0
 
     }
 
-
     public interface IFiniteEnumerable<S,T> : IEnumerableContainer<S,T>, ICounted<int>
         where S : IFiniteEnumerable<S,T>, new()
     {
+        ulong ICounted.Count
+        {
+            [MethodImpl(Inline)]
+            get => (ulong)Count;
+        }
 
     }
 
+    public interface IIndexedSeq<T> : ICounted<int>
+    {
+        T this[int i] {get;}        
+    }
 
-    public interface IIndexedSeq<S,T> : ISeq<S,T>, IFiniteEnumerable<S,T>, IIndexed<T>
+    public interface IIndexedSeq<S,T> : ISeq<S,T>, IFiniteEnumerable<S,T>, IIndexedSeq<T>
         where S : IIndexedSeq<S,T>, new()
     {
 

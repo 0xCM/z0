@@ -11,19 +11,33 @@ namespace Z0
 
     using NK = NumericKind;
 
-    public interface INumericKind : IKind<NumericKind>,  IIdentity<NumericKinded>
+    public interface INumericKind : IKind
     {
         
     }
 
-    public interface INumericKind<T> : INumericKind, IKind<NumericKind>, IFixedWidth
+    public interface INumericKind<T> : INumericKind, IFixedWidth//, IKind<NumericKind>  
         where T : unmanaged
     {
         FixedWidth IFixedWidth.FixedWidth => (FixedWidth)bitsize<T>();            
 
-        NumericKind IKind<NumericKind>.Class { [MethodImpl(Inline)] get=> NumericIdentity.kind<T>();}
+        NumericKind NumericKind { [MethodImpl(Inline)] get=> NumericIdentity.kind<T>();}
 
-        string IIdentity.Identifier => NumericIdentity.kind<T>().Format();
+    }
+
+    /// <summary>
+    /// Represents the parametrically-identified numeric kind
+    /// </summary>
+    public readonly struct NK<T> : INumericKind<T> 
+        where T : unmanaged
+    {
+        [MethodImpl(Inline)]
+        public static implicit operator NumericKind(NK<T> src)
+            => NumericIdentity.kind<T>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(NK<T> src)
+            => default;
     }
 
     public static class NumericKinds

@@ -152,10 +152,12 @@ namespace Z0
                 where r.Id == id
                 select r.Resolved).FirstOrDefault();
 
+
+
         public static IEnumerable<AssemblyId> ActiveAssemblies(this IAsmContext context)
         {
             return context.Compostion.Resolved.Select(r => r.Id);
-            // var settings = AppSettings.Load("z0.control").Pairs;
+             //var settings = AppSettings.Load("z0.control").Pairs;
             // foreach(var (key,value) in settings)
             // {
             //     var index = key.Split(text.colon());            

@@ -57,38 +57,5 @@ namespace Z0
             while(true)
                 yield return PointApi.point(random.Next<T>(), random.Next<T>(), random.Next<T>());
         }
-
-        /// <summary>
-        /// Produces a randomized stream of points of dimenion 2 over a possibly heterogenous dommain
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="t">A point representative</param>
-        /// <typeparam name="X0">The domain of the first coordinate</typeparam>
-        /// <typeparam name="X1">The domain of the second coordinate</typeparam>
-        public static IEnumerable<MixedPoint<X0,X1>> MixedPointStream<X0,X1>(this IPolyrand random,  (X0 x0, X1 x1) t = default)
-            where X0 : unmanaged
-            where X1 : unmanaged
-        {
-            while(true)
-                yield return PointApi.mixed(random.Next<X0>(), random.Next<X1>());
-        }
-
-        /// <summary>
-        /// Produces a randomized stream of points of dimenion 3 over a (possibly) heterogenous dommain
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="t">A point representative</param>
-        /// <typeparam name="X0">The domain of the first coordinate</typeparam>
-        /// <typeparam name="X1">The domain of the second coordinate</typeparam>
-        /// <typeparam name="X2">The domain of the third coordinate</typeparam>
-        public static IEnumerable<MixedPoint<X0,X1,X2>> MixedPointStream<X0,X1,X2>(this IPolyrand random,  (X0 x0, X1 x1, X2 x2) t = default)
-            where X0 : unmanaged
-            where X1 : unmanaged
-            where X2 : unmanaged
-        {
-            while(true)
-                yield return PointApi.mixed(random.Next<X0>(), random.Next<X1>(), random.Next<X2>());
-        }
-
     }
 }

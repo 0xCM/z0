@@ -195,8 +195,8 @@ namespace Z0
         public static ref Pair<ulong> vhi(Vector256<ulong> src, ref Pair<ulong> dst)
         {
             var x = vhi(src);
-            dst.A = x.GetElement(0);
-            dst.B = x.GetElement(1);
+            dst.Left = x.GetElement(0);
+            dst.Right = x.GetElement(1);
             return ref dst;
         }
     }

@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Fixed128V From(in ConstPair<ulong> x)
-            => new Fixed128V(x.A,x.B);
+            => new Fixed128V(x.Left,x.Right);
 
 
         [MethodImpl(Inline)]

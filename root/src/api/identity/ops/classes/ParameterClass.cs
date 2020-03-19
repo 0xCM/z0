@@ -16,9 +16,7 @@ namespace Z0
     public enum ParameterClass : byte
     {
         None = 0,
-
-        
-
+    
     }
 
     /// <summary>
