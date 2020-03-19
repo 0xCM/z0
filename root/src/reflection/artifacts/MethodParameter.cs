@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     public class MethodParameter : ClrArtifact
     {        
-        public MethodParameter(TypeSig Type, ParamRefClass Variance, string ParamName, int Position)
+        public MethodParameter(TypeSig Type, ParamRefAspect Variance, string ParamName, int Position)
             : base(ParamName)            
         {
             this.Type = Type;
@@ -21,7 +21,7 @@ namespace Z0
 
         public TypeSig Type {get;}
 
-        public ParamRefClass Variance {get;}
+        public ParamRefAspect Variance {get;}
         
         public int Position {get;}
 

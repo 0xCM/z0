@@ -12,38 +12,38 @@ namespace Z0
 
     using static Root;
 
-    public interface IOpServiceFactory 
+    public interface IApiServiceFactory 
     {
         S Service<S>()   
             where S : unmanaged, IFunc
-                => OpServices.Service<S>();
+                => ApiServices.Service<S>();
     }
 
-    public interface IOpServiceFactory<S> :  IOpServiceFactory
+    public interface IApiServiceFactory<S> :  IApiServiceFactory
         where S : unmanaged, IFunc
     {
         S Service  
         {
             [MethodImpl(Inline)]
-            get => OpServices.Service<S>();
+            get => ApiServices.Service<S>();
         }
     }
 
-    public interface IOpServiceFactory<F,S> :  IOpServiceFactory<S>
-        where F : unmanaged, IOpServiceFactory<S>
+    public interface IApiServiceFactory<F,S> :  IApiServiceFactory<S>
+        where F : unmanaged, IApiServiceFactory<S>
         where S : unmanaged, IFunc
         
     {
 
     }
 
-    public interface IOpServiceFactoryProvider
+    public interface IApiServiceFactoryProvider
     {
         IEnumerable<MethodInfo> FactoryMethods {get;}
     }
 
-    public abstract class OpSvcFactoryProvider<F> : IOpServiceFactoryProvider
-        where F : OpSvcFactoryProvider<F>, new()
+    public abstract class ApiSvcFactoryProvider<F> : IApiServiceFactoryProvider
+        where F : ApiSvcFactoryProvider<F>, new()
     {
         public IEnumerable<MethodInfo> FactoryMethods 
             => typeof(F).DeclaredStaticMethods().Where(m => m.ReturnType.Realizes(typeof(IFunc)));
@@ -52,14 +52,14 @@ namespace Z0
     /// <summary>
     /// Identifies an operation service provider
     /// </summary>
-    public class OpSeviceFactoryProviderAttribute : Attribute, IOpServiceProvisioner
+    public class ApiSeviceFactoryProviderAttribute : Attribute, IApiServiceProvisioner
     {
-        public OpSeviceFactoryProviderAttribute()
+        public ApiSeviceFactoryProviderAttribute()
         {
             this.ServiceCollectionName = string.Empty;
         }
 
-        public OpSeviceFactoryProviderAttribute(string name)
+        public ApiSeviceFactoryProviderAttribute(string name)
         {
             this.ServiceCollectionName =name;
         }

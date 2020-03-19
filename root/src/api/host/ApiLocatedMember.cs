@@ -13,9 +13,9 @@ namespace Z0
     /// <summary>
     /// Identifies a host-defined operation and the memory address that leads the member's executable code
     /// </summary>
-    public readonly struct LocatedMember :  IMemberOp<LocatedMember>, IAddressable
+    public readonly struct ApiLocatedMember :  IApiMember<ApiLocatedMember>, IAddressable
     {
-        public static LocatedMember Empty => Define(ApiHostUri.Empty, OpIdentity.Empty, null, MemoryAddress.Zero);
+        public static ApiLocatedMember Empty => Define(ApiHostUri.Empty, OpIdentity.Empty, null, MemoryAddress.Zero);
 
         public ApiHostUri Host {get;}
         
@@ -30,19 +30,19 @@ namespace Z0
         public OpUri Uri => OpUri.located(this);
 
         [MethodImpl(Inline)]
-        public static LocatedMember Define(ApiHostUri host, OpIdentity id, MethodInfo src, MemoryAddress address)
-            => new LocatedMember(host,id, src, address);
+        public static ApiLocatedMember Define(ApiHostUri host, OpIdentity id, MethodInfo src, MemoryAddress address)
+            => new ApiLocatedMember(host,id, src, address);
         
         [MethodImpl(Inline)]
-        public static bool operator==(LocatedMember a, LocatedMember b)
+        public static bool operator==(ApiLocatedMember a, ApiLocatedMember b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(LocatedMember a, LocatedMember b)
+        public static bool operator!=(ApiLocatedMember a, ApiLocatedMember b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        LocatedMember(ApiHostUri host, OpIdentity id, MethodInfo src, MemoryAddress address)
+        ApiLocatedMember(ApiHostUri host, OpIdentity id, MethodInfo src, MemoryAddress address)
         {
             this.Host = host;
             this.Id = id;
@@ -64,14 +64,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(LocatedMember src)
+        public bool Equals(ApiLocatedMember src)
             => Host == src.Host && Id == src.Id && Method == src.Method && Address == src.Address;
 
          public override int GetHashCode()
             => Uri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is LocatedMember m && Equals(m);        
+            => src is ApiLocatedMember m && Equals(m);        
 
         public override string ToString()
             => ((ICustomFormattable)this).Format();

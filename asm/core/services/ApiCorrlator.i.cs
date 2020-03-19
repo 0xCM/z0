@@ -13,10 +13,10 @@ namespace Z0.Asm
 
     public interface IApiCorrelator : IAsmService
     {
-        IEnumerable<HostedMember> FindHostedMembers(in ApiHostUri host);
+        IEnumerable<ApiStatelessMember> FindHostedMembers(in ApiHostUri host);
 
         ApiCodeIndex CreateApiIndex(ApiHostUri host, FilePath src);
 
-        ApiCodeIndex CreateApiIndex(OpIndex<HostedMember> members, OpIndex<AsmOpBits> code);        
+        ApiCodeIndex CreateApiIndex(OpIndex<ApiStatelessMember> members, OpIndex<AsmOpBits> code);        
     }
 }

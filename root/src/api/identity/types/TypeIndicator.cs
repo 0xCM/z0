@@ -34,7 +34,7 @@ namespace Z0
             this.IsEmpty = c == null;
             this.Indication = c ?? 'x';
         }
-
+        
         public string Format()
             => IsEmpty ? string.Empty : Indication.ToString();        
 

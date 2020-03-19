@@ -42,7 +42,7 @@ namespace Z0.Asm.Check
             Dispatcher.EvalOperators(buffers, code);
         }
 
-        public PairEval<T> Evaluate<T>(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp<T> @class)
+        public BinaryEval<T> Evaluate<T>(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp<T> @class)
             where T : unmanaged
                 => Context.Evaluate(buffers, api, @class);
     }

@@ -35,14 +35,14 @@ namespace Z0.Asm
         /// Extracts encoded content that defines executable code for a located member
         /// </summary>
         /// <param name="src">The source member</param>
-        public MemberExtract Extract(LocatedMember src)
+        public MemberExtract Extract(ApiLocatedMember src)
         {
             Span<byte> buffer = stackalloc byte[BufferLength];
             var reader = Context.MemoryReader();
             return Extract(src, reader, buffer);
         }
 
-        public MemberExtract[] Extract(LocatedMember[] members)
+        public MemberExtract[] Extract(ApiLocatedMember[] members)
         {
             var dst = new MemberExtract[members.Length];
             Span<byte> buffer = stackalloc byte[BufferLength];            
@@ -64,7 +64,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        MemberExtract Extract(LocatedMember src, IMemoryReader reader,  Span<byte> buffer)
+        MemberExtract Extract(ApiLocatedMember src, IMemoryReader reader,  Span<byte> buffer)
         {
             buffer.Clear();                
             var length = reader.Read(src.Address, BufferLength, buffer);

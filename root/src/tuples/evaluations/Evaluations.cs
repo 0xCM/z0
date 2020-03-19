@@ -6,13 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+    using System.Collections.Generic;
+    using System.Linq;
+
     using static Root;
-    using static OpKindId;
 
-    using A = OpSubjectAttribute;
+    public static class Evaluations
+    {
 
-    public sealed class SumAttribute : A { public SumAttribute() : base(Sum) {} }
+        [MethodImpl(Inline)]
+        public static BinaryEval<T> binary<T>(in Pairs<T> src, PairEval<T> dst)
+            where T : unmanaged
+                => new BinaryEval<T>(src,  dst);
 
-    public sealed class AvgAttribute : A { public AvgAttribute() : base(Avg) {} }
+    }
+
 }

@@ -259,27 +259,13 @@ namespace Z0
             return FixedWidth.None;
         }
 
+
         /// <summary>
         /// Determines whether a type is classified as an intrinsic vector
         /// </summary>
         /// <param name="t">The type to test</param>
         public static bool test(Type t)
             => TypeIdentities.IsCpuVector(t);
-        // {
-        //     var eff = t.EffectiveType();
-        //     var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
-        //     if(def == null)
-        //         return false;
-
-        //     return def == typeof(Vector128<>) || def == typeof(Vector256<>) || IntrinsicVectorAttribute.Test(def);
-             
-        //     // return(        
-        //     //     def == typeof(Vector128<>) 
-        //     //  || def == typeof(Vector256<>) 
-        //     //  || def == typeof(Vector512<>)
-        //     //  || def == typeof(Vector1024<>)
-        //     //  );
-        // }
 
         /// <summary>
         /// Determines whether a type is an intrinsic vector of specified width

@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-        
+    
     using static Root;
+    using static OpKindId;
 
-    [ApiServiceHostProvider("bitcore.services")]
-    public partial class BitCoreServices : IApiServiceHosts
-    {
-        public Type[] HostTypes {get;}
-            = typeof(BitCoreServices).GetNestedTypes().Realize<IFunc>().ToArray();
-    }
+    using A = OpKindAttribute;
+
+    public sealed class SumAttribute : A { public SumAttribute() : base(Sum) {} }
+
+    public sealed class AvgAttribute : A { public AvgAttribute() : base(Avg) {} }
 }

@@ -85,12 +85,16 @@ namespace Z0
             => new OpUri(OpUriScheme.Asm, ApiHostUri.FromHost(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri located(LocatedMember src)        
+        public static OpUri located(ApiLocatedMember src)        
             => new OpUri(OpUriScheme.Located, src.Host, src.Method.Name, src.Id);
 
         [MethodImpl(Inline)]
-        public static OpUri hosted(HostedMember src)        
-            => new OpUri(OpUriScheme.Hosted, src.Host, src.Method.Name, src.Id);
+        public static OpUri hosted(ApiStatelessMember src)        
+            => new OpUri(OpUriScheme.Stateless, src.Host, src.Method.Name, src.Id);
+
+        [MethodImpl(Inline)]
+        public static OpUri serviced(ApiServiceMember src)        
+            => new OpUri(OpUriScheme.Serviced, src.Host, src.Method.Name, src.Id);
 
         [MethodImpl(Inline)]
         OpUri(OpUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)

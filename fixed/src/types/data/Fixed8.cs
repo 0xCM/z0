@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Security;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Root;
 
+    [Fixed(FixedWidth.W8,false,FixedWidth.W8)]
     public struct Fixed8 : IFixedNumeric<Fixed8, byte>, IEquatable<Fixed8>
     {
         public const int BitWidth = 8;

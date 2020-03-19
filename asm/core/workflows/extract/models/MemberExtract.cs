@@ -16,12 +16,12 @@ namespace Z0
     public readonly struct MemberExtract
     {        
         [MethodImpl(Inline)]
-        public static MemberExtract Define(LocatedMember member, MemoryExtract encoded)
+        public static MemberExtract Define(ApiLocatedMember member, MemoryExtract encoded)
             => new MemberExtract(member.Id, member.Uri, member, encoded);
 
          
         [MethodImpl(Inline)]
-        MemberExtract(OpIdentity id, OpUri uri, LocatedMember member, MemoryExtract encoded)
+        MemberExtract(OpIdentity id, OpUri uri, ApiLocatedMember member, MemoryExtract encoded)
         {
             this.Id = id;
             this.Uri = uri;
@@ -33,7 +33,7 @@ namespace Z0
 
         public readonly OpUri Uri;
 
-        public readonly LocatedMember Member;
+        public readonly ApiLocatedMember Member;
 
         public readonly MemoryExtract EncodedData;
     }

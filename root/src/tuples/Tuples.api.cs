@@ -101,11 +101,5 @@ namespace Z0
         public static Triples<T> index<T>(Triple<T>[] src)
             where T : unmanaged
                 => src;
-
-        [MethodImpl(Inline)]
-        public static PairEval<T> eval<T>(in Pairs<T> src, string leftLabel, string rightLabel, in Pairs<T> dst)
-            where T : unmanaged
-                => PairEval.Define(src, leftLabel, rightLabel, dst);                   
-
     }
 }

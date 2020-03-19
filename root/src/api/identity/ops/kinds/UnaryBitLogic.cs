@@ -11,9 +11,8 @@ namespace Z0
     using static OpKindId;
 
     using Id = OpKindId;
-    using A = OpSubjectAttribute;
+    using A = OpKindAttribute;
     
-
     /// <summary>
     /// Classifies unary logic operators
     /// </summary>

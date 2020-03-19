@@ -8,11 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static IdentityShare;
 
     public enum TypeRoleAspect : byte
     {
-
         None = 0,
 
         /// <summary>
@@ -30,6 +28,4 @@ namespace Z0
         /// </summary>
         Ref = 3
     }
-
-
 }

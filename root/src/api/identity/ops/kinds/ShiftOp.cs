@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static OpKindId;
 
-    using A = OpSubjectAttribute;
+    using A = OpKindAttribute;
     using Id = OpKindId;
 
     /// <summary>
@@ -58,6 +58,7 @@ namespace Z0
         /// </summary>
         Xors = Id.Xors,
     }    
+    
     public sealed class SllAttribute : A { public SllAttribute() : base(Sll) {} }
 
     public sealed class SrlAttribute : A { public SrlAttribute() : base(Srl) {} }

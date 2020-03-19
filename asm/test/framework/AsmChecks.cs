@@ -57,14 +57,14 @@ namespace Z0.Asm.Validation
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public IEnumerable<HostedMember> HostedMembers(in ApiHostUri host)
+        public IEnumerable<ApiStatelessMember> HostedMembers(in ApiHostUri host)
             => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
 
         /// <summary>
         /// Retrieves located members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public IEnumerable<LocatedMember> LocateMembers(in ApiHostUri host)
+        public IEnumerable<ApiLocatedMember> LocateMembers(in ApiHostUri host)
             => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Located(host));
 
         /// <summary>

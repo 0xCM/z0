@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSlice<T> bitslice2<T>(T t = default)
             where T : unmanaged        
-                => OpServices.Service<BitSlice<T>>();
+                => ApiServices.Service<BitSlice<T>>();
 
         [MethodImpl(Inline)]
         public static PopCount<T> pop<T>(T t = default)
@@ -47,10 +47,10 @@ namespace Z0
             where T : unmanaged        
                 => Dot<T>.Op;
 
-        readonly struct ByteSwapFactory<T> : IOpServiceFactory<ByteSwapFactory<T>, ByteSwap<T>>
+        readonly struct ByteSwapFactory<T> : IApiServiceFactory<ByteSwapFactory<T>, ByteSwap<T>>
             where T : unmanaged { public ByteSwap<T> Service => ByteSwap<T>.Op; }
 
-        readonly struct BitSliceFactory<T> : IOpServiceFactory<BitSliceFactory<T>, BitSlice<T>>
+        readonly struct BitSliceFactory<T> : IApiServiceFactory<BitSliceFactory<T>, BitSlice<T>>
             where T : unmanaged { public BitSlice<T> Service => BitSlice<T>.Op; }
     }
 }

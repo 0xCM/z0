@@ -12,6 +12,6 @@ namespace Z0.Asm.Check
     public interface IBinaryOpEvaluator<T> : IApiEvaluator<BinaryOp, T>
         where T : unmanaged
     {
-        ref readonly PairEval<T> Evaluate(in BinaryOpPackage<T> package);
+        ref readonly BinaryEval<T> Evaluate(in BinaryOpPackage<T> package);
     }
 }

@@ -10,7 +10,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-
     public readonly struct ApiSigBuilder
     {
         public ParameterSig BuildSig(ParameterInfo src)
@@ -27,9 +26,7 @@ namespace Z0
             for(var i=0; i<paramCount; i++)
                 dstParams[i] = BuildSig(srcParams[i]);
 
-            return ApiSig.Empty;
-            
+            return ApiSig.Empty;            
         }
     }
-
 }

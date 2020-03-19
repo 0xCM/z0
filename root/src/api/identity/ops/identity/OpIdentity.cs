@@ -13,7 +13,6 @@ namespace Z0
     using static Root;
     using static IdentityShare;
 
-
     public readonly struct OpIdentity : IOpIdentity<OpIdentity>
     {            
         /// <summary>

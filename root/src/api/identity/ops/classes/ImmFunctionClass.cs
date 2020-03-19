@@ -12,7 +12,7 @@ namespace Z0
 
     using static Root;
  
-    using static ImmClass;
+    using static ImmFunctionClass;
 
     /// <summary>
     /// Identifies a parameter that accepts an immediate value
@@ -27,7 +27,7 @@ namespace Z0
     /// Classfies operations according to their immediate needs
     /// </summary>
     [Flags]
-    public enum ImmClass : byte
+    public enum ImmFunctionClass : byte
     {
         /// <summary>
         /// The empty class
@@ -147,7 +147,7 @@ namespace Z0
             return parameters.Length > index && parameters[index].IsImmediate();
         }
 
-        static ImmClass ImmSlotClass(this ParameterInfo p)
+        static ImmFunctionClass ImmSlot(this ParameterInfo p)
         {
             switch(p.Position)
             {
@@ -170,7 +170,7 @@ namespace Z0
         /// Calculates a method's immediate class
         /// </summary>
         /// <param name="src">The method to classify</param>
-        public static ImmClass ImmClass(this MethodInfo src)
+        public static ImmFunctionClass ImmFunctionClass(this MethodInfo src)
         {
             var parms = src.ImmParameters().ToArray();
             var count = parms.Length;
@@ -183,14 +183,14 @@ namespace Z0
             {
                 case 1:
                     immc |= ImmCount1;
-                    immc |= first.ImmSlotClass();
+                    immc |= first.ImmSlot();
                 break;
 
                 case 2:
                     var second = parms.Last();
                     immc |= ImmCount2;
-                    immc |= first.ImmSlotClass();
-                    immc |= second.ImmSlotClass();
+                    immc |= first.ImmSlot();
+                    immc |= second.ImmSlot();
                 break;
             }
             

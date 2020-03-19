@@ -16,9 +16,9 @@ namespace Z0
     /// <summary>
     /// Identifies a host-defined operation 
     /// </summary>
-    public readonly struct HostedMember : IMemberOp<HostedMember>, INullary<HostedMember>, IMethodSource<HostedMember>
+    public readonly struct ApiServiceMember : IApiMember<ApiServiceMember>, INullary<ApiServiceMember>, IMethodSource<ApiServiceMember>
     {
-        public static HostedMember Empty => Define(ApiHostUri.Empty, OpIdentity.Empty, null);
+        public static ApiServiceMember Empty => Define(ApiHostUri.Empty, OpIdentity.Empty, null);
         
         public ApiHostUri Host {get;}
         
@@ -28,22 +28,22 @@ namespace Z0
 
         public OpKindId? KindId {get;}
 
-        public OpUri Uri => OpUri.hosted(this);
+        public OpUri Uri => OpUri.serviced(this);
 
         [MethodImpl(Inline)]
-        public static HostedMember Define(ApiHostUri host, OpIdentity id, MethodInfo src)
-            => new HostedMember(host,id, src);
+        public static ApiServiceMember Define(ApiHostUri host, OpIdentity id, MethodInfo src)
+            => new ApiServiceMember(host,id, src);
 
         [MethodImpl(Inline)]
-        public static bool operator==(HostedMember a, HostedMember b)
+        public static bool operator==(ApiServiceMember a, ApiServiceMember b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(HostedMember a, HostedMember b)
+        public static bool operator!=(ApiServiceMember a, ApiServiceMember b)
             => !a.Equals(b);
         
         [MethodImpl(Inline)]
-        HostedMember(ApiHostUri host, OpIdentity id, MethodInfo src)
+        ApiServiceMember(ApiHostUri host, OpIdentity id, MethodInfo src)
         {
             this.Host = host;
             this.Id = id;
@@ -63,18 +63,18 @@ namespace Z0
             get => !IsEmpty;
         }
 
-        HostedMember INullary<HostedMember>.Zero 
+        ApiServiceMember INullary<ApiServiceMember>.Zero 
             => Empty;
 
         [MethodImpl(Inline)]
-        public bool Equals(HostedMember src)
+        public bool Equals(ApiServiceMember src)
             => Host == src.Host && Id == src.Id && Method == src.Method;
         
         public override int GetHashCode()
             => Uri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is HostedMember m && Equals(m);
+            => src is ApiServiceMember m && Equals(m);
 
         public override string ToString()
             => ((ICustomFormattable)this).Format();       

@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static OpKindId? KindId(this MethodInfo m)
-            => m.Tag<OpSubjectAttribute>().MapValueOrNull(a => a.KindId);
+            => m.Tag<OpKindAttribute>().MapValueOrNull(a => a.KindId);
 
         /// <summary>
         /// Determines whether the method has a kind identifier
@@ -77,6 +77,38 @@ namespace Z0
         public static bool IsTernaryOperator(this MethodInfo m)
             => m.IsHomogenous() && m.IsTernaryFunction();
 
+        /// <summary>
+        /// Determines whether a type is an intrinsic vector
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsVector(this Type t)
+            => TypeIdentities.IsCpuVector(t);
+
+        /// <summary>
+        /// Determines whether a method returns an intrinsic vector
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        public static bool ReturnsVector(this MethodInfo src)
+            => src.ReturnType.IsVector();
+
+        /// <summary>
+        /// Determines whether a method is a vectorized operator which, by definition, is an operator 
+        /// (which, by definition, is an homogenous function) with a vectorized operand which, by definition, 
+        /// is an operand of intrinsic vector type (which, by definition, is one of the system-defined intrinsic vector types
+        /// or a custom instrinsic vector type)
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        public static bool IsVectorizedOperator(this MethodInfo src)
+            => src.IsOperator() && src.ReturnType.IsVector();
+
+        /// <summary>
+        /// Determines whether a method has intrinsic parameters or return type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        public static bool IsFullyVectorized(this MethodInfo src)        
+            => TypeIdentities.IsCpuVector(src.ReturnType) 
+            && src.ParameterTypes().All(TypeIdentities.IsCpuVector);
 
         /// <summary>
         /// Selects unary operators from a stream

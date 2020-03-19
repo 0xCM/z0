@@ -47,6 +47,5 @@ namespace Z0
         /// Enumerates the key/value index pairs
         /// </summary>
         IEnumerable<(OpIdentity, T)> Enumerated {get;}       
-
     }
 }

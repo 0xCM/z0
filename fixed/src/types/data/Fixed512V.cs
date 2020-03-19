@@ -13,10 +13,8 @@ namespace Z0
 
     using static Root;
 
-
-
     [StructLayout(LayoutKind.Sequential)]
-    [Segmented(FixedWidth.W512,false,FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W512,false,FixedWidth.NumericWidths)]
     public struct Fixed512V  : IFixed<Fixed512V>
     {
         public const int BitWidth = 512;        

@@ -5,14 +5,12 @@
 namespace Z0
 {        
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Runtime.CompilerServices;
 
     using static Root;
-        
-    public interface IMemberOp
+
+    public interface IApiMember
     {
         /// <summary>
         /// The globally-unique host uri
@@ -41,12 +39,10 @@ namespace Z0
             => OpUri.hex(Host, Method.Name, Id);        
     }        
 
-    public interface IMemberOp<T> : IMemberOp, IEquatable<T>, IFormattable<T>
-        where T : IMemberOp<T>
+    public interface IApiMember<T> : IApiMember, IEquatable<T>, IFormattable<T>
+        where T : IApiMember<T>
     {
         string ICustomFormattable.Format()
             => Uri.Format();    
     }
-
-
 }

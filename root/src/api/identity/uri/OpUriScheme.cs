@@ -24,9 +24,14 @@ namespace Z0
         Hex,
 
         /// <summary>
-        /// Marker for hosted operations
+        /// Marker for stateless hosted operations
         /// </summary>
-        Hosted,
+        Stateless,
+
+        /// <summary>
+        /// Marker for serviced hosted operations
+        /// </summary>
+        Serviced,
 
         /// <summary>
         /// Marker for memory-located operations

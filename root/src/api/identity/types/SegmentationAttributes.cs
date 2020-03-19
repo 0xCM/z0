@@ -25,25 +25,34 @@ namespace Z0
         public bool Sequenced {get;}
     }
 
+    public class BlockedAttribute : SegmentedAttribute
+    {
+        public BlockedAttribute(object totalwidth, bool sequenced, params object[] segwidths)
+            : base(totalwidth, sequenced, segwidths)
+        {
+        }
+
+    }
+
+    public class FixedAttribute : SegmentedAttribute
+    {
+        public FixedAttribute(object totalwidth, bool sequenced, params object[] segwidths)
+            : base(totalwidth, sequenced, segwidths)
+        {
+        }
+    }
 
     /// <summary>
     /// Applied to a user-defined type to identify it as an intrinsic vector (or, rather, should be treated/classified as one)
     /// </summary>
-    [AttributeUsage(AttributeTargets.Struct)]
-    public class IntrinsicVectorAttribute : Attribute
+    public class CpuVectorAttribute : SegmentedAttribute
     {
         public static bool Test(Type src)
-            => Attribute.IsDefined(src, typeof(IntrinsicVectorAttribute));
+            => Attribute.IsDefined(src, typeof(CpuVectorAttribute));
 
-        public IntrinsicVectorAttribute(int width)
+        public CpuVectorAttribute(object totalwidth)
+            : base(totalwidth,false, FixedWidth.NumericWidths)
         {
-            this.Width = width;
         }
-
-        /// <summary>
-        /// The vector width
-        /// </summary>
-        public BitSize Width {get;}
     }
-
 }

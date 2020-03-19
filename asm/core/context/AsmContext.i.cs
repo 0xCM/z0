@@ -9,8 +9,6 @@ namespace Z0
     /// </summary>
     public interface IAsmContext : IComposedContext<IAsmContext>, IAppMsgQueue
     {
-        int Identity {get;}
-
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
         /// </summary>
@@ -27,7 +25,6 @@ namespace Z0
         /// </summary>
         /// <param name="config">The new formatting configuration</param>
         IAsmContext WithFormat(AsmFormatConfig config);  
-
 
     }   
 }

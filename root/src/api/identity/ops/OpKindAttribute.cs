@@ -10,14 +10,14 @@ namespace Z0
 
     using static OpKindId;
 
-    using A = OpSubjectAttribute;
+    using A = OpKindAttribute;
 
     /// <summary>
     /// Identifies a formal operation and its kind
     /// </summary>
-    public abstract class OpSubjectAttribute : OpAttribute
+    public abstract class OpKindAttribute : OpAttribute
     {
-        protected OpSubjectAttribute(object id) 
+        protected OpKindAttribute(object id) 
             : base(false) 
         {
 
@@ -26,7 +26,6 @@ namespace Z0
 
         public OpKindId KindId {get;}
     }
-
 
     public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(Identity) {} }
 }

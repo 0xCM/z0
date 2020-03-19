@@ -15,13 +15,6 @@ namespace Z0
 
     partial class VectorTypeOps
     {
-        /// <summary>
-        /// Determines whether a type is an intrinsic vector
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsVector(this Type t)
-            => VectorType.test(t);
 
         /// <summary>
         /// Determines whether a type is a 128-bit intrinsic vector

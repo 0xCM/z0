@@ -201,7 +201,7 @@ namespace Z0.Asm.Check
             }
         }
 
-        void Analyze(in ApiHostUri host, ReadOnlySpan<LocatedMember> src)
+        void Analyze(in ApiHostUri host, ReadOnlySpan<ApiLocatedMember> src)
         {
             var index = src.ToOpIndex();
             foreach(var key in index.DuplicateKeys)

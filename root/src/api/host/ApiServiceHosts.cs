@@ -12,26 +12,26 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct OpServiceHosts : IOpServiceHosts
+    public readonly struct ApiServiceHosts : IApiServiceHosts
     {
         Func<IEnumerable<Type>> Factory {get;}
         
         [MethodImpl(Inline)]
-        public static IOpServiceHosts Create(Func<IEnumerable<Type>> hosts)
-            => new OpServiceHosts(hosts);
+        public static IApiServiceHosts Create(Func<IEnumerable<Type>> hosts)
+            => new ApiServiceHosts(hosts);
 
         public Type[] HostTypes
             => Factory?.Invoke()?.ToArray() ?? array<Type>();
 
         [MethodImpl(Inline)]
-        OpServiceHosts(Func<IEnumerable<Type>> f)
+        ApiServiceHosts(Func<IEnumerable<Type>> f)
         {
             this.Factory = f;
         }
     }
 
-    public abstract class OpServiceHosts<P>: IOpServiceHosts<P>
-        where P : IOpServiceHosts<P>, new()
+    public abstract class ApiServiceHosts<P>: IApiServiceHosts<P>
+        where P : IApiServiceHosts<P>, new()
     {
         public Type[] HostTypes 
             => typeof(P).GetNestedTypes().Realize<IFunc>().ToArray();

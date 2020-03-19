@@ -12,9 +12,9 @@ namespace Z0.Asm
 
     public readonly struct ApiMemberCode : IFormattable<ApiMemberCode>, INullary<ApiMemberCode>, IMethodSource<ApiMemberCode>
     {
-        public static ApiMemberCode Empty => Define(HostedMember.Empty, BinaryCode.Empty);
+        public static ApiMemberCode Empty => Define(ApiStatelessMember.Empty, BinaryCode.Empty);
 
-        public readonly HostedMember Member;
+        public readonly ApiStatelessMember Member;
 
         public readonly BinaryCode Code;
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
         public OpUri Uri => Member.Uri;
 
         [MethodImpl(Inline)]
-        public static ApiMemberCode Define(HostedMember member, BinaryCode code)
+        public static ApiMemberCode Define(ApiStatelessMember member, BinaryCode code)
             => new ApiMemberCode(member, code);
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0.Asm
             => src.ApiCode;
 
         [MethodImpl(Inline)]
-        ApiMemberCode(HostedMember member, BinaryCode code)
+        ApiMemberCode(ApiStatelessMember member, BinaryCode code)
         {
             this.Member = member;
             this.Code = code;            

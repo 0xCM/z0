@@ -13,72 +13,53 @@ namespace Z0
     using static Root;
 
     public class AsmContext : IAsmContext 
-    {               
+    {            
+        readonly AsmContextData State;
+
+        readonly Option<IContext> RootContext;
+
         /// <summary>
         /// Creates a rooted context with a specified composition
         /// </summary>
         /// <param name="root">The root context</param>
         /// <param name="assemblies">The composition</param>
-        public static IAsmContext Rooted(IContext root, IAssemblyComposition assemblies, IAppSettings settings = null)
-            => new AsmContext(root, assemblies, AsmFormatConfig.New, settings);
+        public static IAsmContext Rooted(IContext root, IAssemblyComposition assemblies, IAppSettings settings = null, IPolyrand random = null)
+            => new AsmContext(root, CreateState(assemblies, AsmFormatConfig.New, settings, random));
+
+        public static IAsmContext Rooted(IComposedContext composed, AsmFormatConfig format = null, IAppSettings settings = null,  IPolyrand random = null)
+            => new AsmContext(composed, CreateState(composed.Compostion, format, settings, random));
 
         /// <summary>
         /// Creates a base context with a specified composition
         /// </summary>
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
-        public static IAsmContext New(IAssemblyComposition assemblies, IAppSettings settings = null)
-            => new AsmContext(assemblies, AsmFormatConfig.New);
+        public static IAsmContext New(IAssemblyComposition assemblies, IAppSettings settings = null, IPolyrand random = null)
+            => new AsmContext(null, CreateState(assemblies, AsmFormatConfig.New, settings, random));
 
-        public static IAsmContext New()
-            => new AsmContext(AssemblyComposition.Empty, AsmFormatConfig.New);
+        public static IAsmContext New(IPolyrand random = null)
+            => new AsmContext(null, CreateState(random:random));
 
-        AsmContext(IContext root, IAssemblyComposition assemblies, AsmFormatConfig format, IAppSettings settings = null)
-        {
-            require(root != null);
-            this.RootContext = some(root);
-            this.State = AsmContextData.New(assemblies ?? AssemblyComposition.Empty, format);
-            this.Identity = Context.NextId();
-            this.Settings = settings ?? AppSettings.Empty;
+        static AsmContextData CreateState(IAssemblyComposition assemblies = null, AsmFormatConfig format = null, IAppSettings settings = null, IPolyrand random = null)
+            => AsmContextData.New(assemblies ?? AssemblyComposition.Empty, format ?? AsmFormatConfig.New, settings, random);
 
-        }
-
-        protected AsmContext(IContext root, AsmContextData state, IAppSettings settings = null)
-        {
-            this.RootContext = some(root);
-            this.State = state;
-            this.Identity = Context.NextId();
-            this.Settings = settings ?? AppSettings.Empty;
-        }
-
-        AsmContext(IAssemblyComposition assemblies, AsmFormatConfig format, IAppSettings settings = null)
-        {
-            require(assemblies != null && format != null);
-            this.RootContext = none<IContext>();
-            this.State = AsmContextData.New(assemblies, format);
-            this.Identity = Context.NextId();
-            this.Settings = settings ?? AppSettings.Empty;
-        }
-
-        AsmContext(IContext root, int id, AsmContextData data, IAppSettings settings = null)
+        protected AsmContext(IContext root, AsmContextData state)
         {
             this.RootContext = root != null ? some(root) : none<IContext>();
-            this.State = data;
-            this.Identity = id;
-            this.Settings = settings ?? AppSettings.Empty;
+            this.State = state;
         }
 
-        readonly AsmContextData State;
+        Option<IAppMsgContext> MsgContext 
+            => RootContext.TryMap(c => c as IAppMsgContext);
 
-        readonly Option<IContext> RootContext;
-
-        public IAppSettings Settings {get;}
-
-        Option<IAppMsgContext> MsgContext => RootContext.TryMap(c => c as IAppMsgContext);
-
-        Option<IAppMsgQueue> MsgSink => MsgContext.TryMap(c => c as IAppMsgQueue);
+        Option<IAppMsgQueue> MsgSink 
+            => MsgContext.TryMap(c => c as IAppMsgQueue);
         
-        public int Identity {get;}
-        
+        public IAppSettings Settings 
+            => State.Settings;
+
+        public Option<IPolyrand> Random 
+            => State.Random;
+                
         public AsmFormatConfig AsmFormat 
             => State.AsmFormat;
         
@@ -86,7 +67,7 @@ namespace Z0
             => State.Assemblies;
 
         public IAsmContext WithFormat(AsmFormatConfig config)
-            => new AsmContext(RootContext.ValueOrDefault(),Context.NextId(), AsmContextData.New(Compostion, config));
+            => new AsmContext(RootContext.ValueOrDefault(), AsmContextData.New(Compostion, config, Settings, Random.Value));
 
         public void Notify(AppMsg msg)
             => MsgSink.OnSome(sink => sink.Notify(msg));
@@ -100,7 +81,8 @@ namespace Z0
         public IReadOnlyList<AppMsg> Flush(Exception e)
             => MsgSink ? MsgSink.Value.Flush(e) : array<AppMsg>();
 
-        public void Flush(FilePath dst) => MsgSink.OnSome(q => q.Flush(dst));
+        public void Flush(FilePath dst) 
+            => MsgSink.OnSome(q => q.Flush(dst));
 
     }   
 }

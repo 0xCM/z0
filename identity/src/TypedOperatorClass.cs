@@ -16,8 +16,5 @@ namespace Z0
             =>  src.IsNone 
                 ? string.Empty 
                 : "f:" +  Identity.identify(src.OperandType).Format().Replicate(src.OperatorClass.ArityValue() + 1).Intersperse(ArrowSymbols.AsciArrow).Concat();
-
     }
-
-
 }

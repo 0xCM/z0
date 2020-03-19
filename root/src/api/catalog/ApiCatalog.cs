@@ -47,7 +47,7 @@ namespace Z0
             Resources = DataResourceIndex.Empty;
             DirectApiHosts = ApiHosts.Where(h => h.HostKind.DefinesDirectOps()).ToArray();
             GenericApiHosts = ApiHosts.Where(h => h.HostKind.DefinesGenericOps()).ToArray();
-            HostTypes = OpServices.ProviderTypes(CatalogedAssembly).ToArray();
+            HostTypes = ApiServices.ProviderTypes(CatalogedAssembly).ToArray();
         }
         
         protected ApiCatalog(AssemblyId id, DataResourceIndex resources)

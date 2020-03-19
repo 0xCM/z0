@@ -37,7 +37,7 @@ namespace Z0
             Claim.yea(src.IsVectorized(w));
             Claim.yea(src.AcceptsVector(0,w));
             Claim.yea(src.AcceptsImmediate(1));
-            Claim.eq(ImmClass.UnaryImm8, src.ImmClass());
+            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass());
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);
@@ -63,7 +63,7 @@ namespace Z0
             Claim.yea(src.IsVectorized(w));
             Claim.yea(src.AcceptsVector(0,w));
             Claim.yea(src.AcceptsImmediate(1));
-            Claim.eq(ImmClass.UnaryImm8, src.ImmClass());
+            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass());
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);

@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Security;
-    using System.Reflection;
 
     using static Root;
 
+    [Fixed(FixedWidth.W32,false,FixedWidth.W8 | FixedWidth.W16 | FixedWidth.W32)]
     public struct Fixed32 : IFixedNumeric<Fixed32,uint>, IEquatable<Fixed32>
     {
         public const int BitWidth = 32;        

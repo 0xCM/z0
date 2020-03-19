@@ -13,12 +13,6 @@ namespace Z0
 
     partial class VectorTypeOps
     {
-        /// <summary>
-        /// Determines whether a method returns an intrinsic vector
-        /// </summary>
-        /// <param name="src">The method to test</param>
-        public static bool ReturnsVector(this MethodInfo src)
-            => VectorType.test(src.ReturnType);
 
         /// <summary>
         /// Determines whether a method returns a 128-bit intrinsic vector

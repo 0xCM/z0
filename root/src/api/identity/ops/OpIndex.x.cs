@@ -13,17 +13,16 @@ namespace Z0
     public static class OpIndexX
     {
         public static OpIndex<M> ToOpIndex<M>(this IEnumerable<M> src)
-            where M : struct, IMemberOp
+            where M : struct, IApiMember
                 => OpIndex.From(src.Select(h => (h.Id, h)));
 
         public static OpIndex<M> ToOpIndex<M>(this ReadOnlySpan<M> src)
-            where M : struct, IMemberOp
+            where M : struct, IApiMember
                 => OpIndex.From(src.ArrayMap(h => (h.Id, h)));
 
         public static OpIndex<M> ToOpIndex<M>(this Span<M> src)
-            where M : struct, IMemberOp            
+            where M : struct, IApiMember            
                => src.ReadOnly().ToOpIndex();
-
 
         /// <summary>
         /// Determines whether a method is a numeric operator with a specified arity
@@ -45,7 +44,5 @@ namespace Z0
         /// <param name="src">The methods to filter</param>
         public static IEnumerable<MethodInfo> NumericOperators(this IEnumerable<MethodInfo> src, int arity)
             => src.Where(x => x.IsNumericOperator(arity));
-
-
     }        
 }

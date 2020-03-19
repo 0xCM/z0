@@ -78,10 +78,10 @@ namespace Z0.Asm.Check
         /// Retrieves the members defined by an api host
         /// </summary>
         /// <param name="host">The host uri</param>
-        public IEnumerable<HostedMember> HostedMembers(in ApiHostUri host)
+        public IEnumerable<ApiStatelessMember> HostedMembers(in ApiHostUri host)
             => Context.FindHost(host).MapRequired(host => Context.MemberLocator().Hosted(host));
 
-        OpIndex<HostedMember> HostMemberIndex(ApiHostUri host)
+        OpIndex<ApiStatelessMember> HostMemberIndex(ApiHostUri host)
         {
             var hosted = HostedMembers(host);
             var index = hosted.ToOpIndex();
@@ -135,7 +135,7 @@ namespace Z0.Asm.Check
 
         }
 
-        void Analyze<T>(in ApiMemberCode api, in PairEval<T> eval)
+        void Analyze<T>(in ApiMemberCode api, in BinaryEval<T> eval)
             where T : unmanaged
         {
             var name = api.Member.Id.Name;
@@ -143,16 +143,21 @@ namespace Z0.Asm.Check
             var sampleMax = 10;
             NotifyConsole(api.Uri);
 
+            var xLabel = eval.LeftLabel;                
+            var yLabel = eval.RightLabel;
+
             for(var i=0; i<eval.Count; i++, sample++)
             {
                 ref readonly var input = ref eval.Source[i];
-                ref readonly var result = ref eval.Target[i];
+                ref readonly var result = ref eval.Target;
+                var x = result.Target[i].Left;
+                var y = result.Target[i].Right;
                 if(i < sampleMax)
                 {
-                    NotifyConsole($"{name}[{eval.LeftLabel}]{input} = {result.Left}");
-                    NotifyConsole($"{name}[{eval.RightLabel}]{input} = {result.Right}");
+                    NotifyConsole($"{name}[{xLabel}]{input} = {x}");
+                    NotifyConsole($"{name}[{yLabel}]{input} = {y}");
                 }
-                Claim.eq(result.Left, result.Right);
+                Claim.eq(x, y);
             }
         }
 

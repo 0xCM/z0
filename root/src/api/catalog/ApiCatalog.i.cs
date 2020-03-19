@@ -10,11 +10,10 @@ namespace Z0
 
     using static Root;
 
-
     /// <summary>
     /// Characterizes a type that supports operation discovery
     /// </summary>
-    public interface IApiCatalog : IOpServiceHosts
+    public interface IApiCatalog : IApiServiceHosts
     {
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog

@@ -13,7 +13,6 @@ namespace Z0
 
     using static Root;
 
-
     public readonly struct OpIndex<T> : IEnumerable<KeyedValue<OpIdentity, T>>, IOpIndex<T>
     {
         readonly Dictionary<OpIdentity, T> HashTable;

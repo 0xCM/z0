@@ -14,7 +14,6 @@ namespace Z0
 
     public static class TypeIdentities
     {
-
         /// <summary>
         /// Classifies a type according to whether it is a span, a readonly span, or otherwise
         /// </summary>
@@ -46,7 +45,28 @@ namespace Z0
             if(def == null)
                 return false;
 
-            return def == typeof(Vector128<>) || def == typeof(Vector256<>) || IntrinsicVectorAttribute.Test(def);             
+            return def == typeof(Vector128<>) || def == typeof(Vector256<>) || CpuVectorAttribute.Test(def);             
+        }
+
+        [MethodImpl(Inline)]
+        public static FixedWidth CpuVectorWidth(Type t)
+        {
+            var eff = t.EffectiveType();
+            var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
+            if(def == null)
+                return FixedWidth.None;
+            else if(def == typeof(Vector128<>))            
+                return FixedWidth.W128;
+            else if(def == typeof(Vector256<>))
+                return FixedWidth.W256;
+            else
+            {
+                var tag = t.Tag<CpuVectorAttribute>();
+                if(tag)
+                    return tag.Value.TotalWdth;
+                else
+                    return FixedWidth.None;
+            }                                         
         }
 
         public static Option<TypeIdentity> IdentifyEnum(Type t)        

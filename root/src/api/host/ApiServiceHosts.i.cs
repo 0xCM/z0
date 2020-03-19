@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public interface IOpServiceHosts
+    public interface IApiServiceHosts
     {        
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic
@@ -27,13 +27,13 @@ namespace Z0
         bool IsNonEmpty => HostCount != 0;
     }
 
-    public interface IOpServiceHosts<P> : IOpServiceHosts
-        where P : IOpServiceHosts<P>, new()
+    public interface IApiServiceHosts<P> : IApiServiceHosts
+        where P : IApiServiceHosts<P>, new()
     {
 
     }
 
-    public interface IOpServiceProvisioner
+    public interface IApiServiceProvisioner
     {
         string ServiceCollectionName {get;}
     }
@@ -41,14 +41,14 @@ namespace Z0
     /// <summary>
     /// Identifies a service host provider
     /// </summary>
-    public class OpServiceHostProviderAttribute : Attribute, IOpServiceProvisioner
+    public class ApiServiceHostProviderAttribute : Attribute, IApiServiceProvisioner
     {
-        public OpServiceHostProviderAttribute()
+        public ApiServiceHostProviderAttribute()
         {
             this.ServiceCollectionName = string.Empty;
         }
 
-        public OpServiceHostProviderAttribute(string name)
+        public ApiServiceHostProviderAttribute(string name)
         {
             this.ServiceCollectionName = name;
         }

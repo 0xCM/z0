@@ -17,8 +17,7 @@ namespace Z0
     /// </summary>
     [Flags]
     public enum SegmentedClass : ushort
-    {
-        
+    {        
         /// <summary>
         /// Classifier that classifies nothing
         /// </summary>

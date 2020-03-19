@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 256-bit blocks
     /// </summary>
-    [Segmented(FixedWidth.W256,true,FixedWidth.NumericWidths)]
+    [Blocked(FixedWidth.W256,true,FixedWidth.NumericWidths)]
     public readonly ref struct Block256<T>
         where T : unmanaged
     {

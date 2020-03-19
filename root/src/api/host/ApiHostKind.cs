@@ -29,14 +29,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool DefinesGenericOps(this ApiHostKind src)
-            => (src & ApiHostKind.Generic) != 0;
-        
-        [MethodImpl(Inline)]
-        public static bool IsSome(this ApiHostKind src)
-            => src != 0;
-
-        [MethodImpl(Inline)]
-        public static bool IsNone(this ApiHostKind src)
-            => src == 0;
+            => (src & ApiHostKind.Generic) != 0;        
     }    
 }

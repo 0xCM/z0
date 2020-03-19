@@ -125,7 +125,7 @@ namespace Z0.Asm
 
             }
 
-            public LocatedMember[] LocateMembers(in ApiHost host)
+            public ApiLocatedMember[] LocateMembers(in ApiHost host)
             {
                 var locator = Context.MemberLocator();  
                 var located = locator.Located(host).ToArray();

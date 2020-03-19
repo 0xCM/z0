@@ -16,7 +16,7 @@ namespace Z0.Asm.Check
 
     public static partial class EvalPackages
     {
-        public static BinaryOpPackage<T> Package<T>(this in ApiEvalContext context, in PairEval<T> content, C.BinaryOp<T> @class)
+        public static BinaryOpPackage<T> Package<T>(this in ApiEvalContext context, in BinaryEval<T> content, C.BinaryOp<T> @class)
             where T : unmanaged
                 => new BinaryOpPackage<T>(context, content);
 
@@ -31,22 +31,23 @@ namespace Z0.Asm.Check
 
     public static class Evaluation
     {            
-        public static PairEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, in BufferSeq buffers, in ApiMemberCode code, 
-            Pair<T>[] sourceBuffer, Pair<T>[] targetBuffer,  C.BinaryOp<T> k)
+        public static BinaryEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, 
+            in BufferSeq execBuffers, Pair<T>[] sourceBuffer, Pair<T>[] targetBuffer, 
+            in ApiMemberCode code,  C.BinaryOp<T> k)
                 where T : unmanaged
         {
             var count = sourceBuffer.Length;
-            var context = ApiEvalContext.Define(buffers, code);
+            var context = ApiEvalContext.Define(execBuffers, code);
             var source = workflow.Random.Pairs<T>(sourceBuffer);
-            var target = Tuples.index(targetBuffer);
-            var content = Tuples.eval(source, "method", "asm", target);
+            var target =  PairEval.Define(("methd", "asm"), Tuples.index(targetBuffer));
+            var content = Evaluations.binary(source, target);
             var package = context.Package(content, k);
             var evaluator = workflow.Evaluator(k);
             return evaluator.Evaluate(package);
         }
 
-        public static PairEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, in BufferSeq buffers, in ApiMemberCode code, C.BinaryOp<T> @class)
+        public static BinaryEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, in BufferSeq buffers, in ApiMemberCode code, C.BinaryOp<T> @class)
             where T : unmanaged
-                => workflow.Evaluate(buffers, code, new Pair<T>[100], new Pair<T>[100], @class);
+                => workflow.Evaluate(buffers, new Pair<T>[100], new Pair<T>[100], code, @class);
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static OpKindId;
     
     using Id = OpKindId;
-    using A = OpSubjectAttribute;
+    using A = OpKindAttribute;
 
     /// <summary>
     /// Identifies binary arithmetic operators classes

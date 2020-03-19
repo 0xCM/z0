@@ -36,7 +36,7 @@ namespace Z0.Asm.Check
 
         void Execute(in BufferSeq buffers, ApiMemberCode[] code);        
 
-        PairEval<T> Evaluate<T>(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp<T> @class)
+        BinaryEval<T> Evaluate<T>(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp<T> @class)
             where T : unmanaged;        
     }
 }

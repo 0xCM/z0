@@ -11,44 +11,6 @@ namespace Z0
 
     using static Root;
 
-    public static class Pairs
-    {
-        public static Pairs<T> alloc<T>(int count)
-            where T : unmanaged
-                => new Pairs<T>(new Pair<T>[count]);
-    }
-
-    public static class PairEval
-    {
-        [MethodImpl(Inline)]
-        public static PairEval<T> Define<T>(in Pairs<T> src, string leftLabel, string rightLabel, in Pairs<T> dst)
-            where T : unmanaged
-                => new PairEval<T>(src, leftLabel, rightLabel, dst);
-    }
-
-    public readonly ref struct PairEval<T>
-        where T : unmanaged
-    {
-        public readonly Pairs<T> Source;
-
-        public readonly string LeftLabel;
-
-        public readonly string RightLabel;
-
-        public readonly Pairs<T> Target;        
-        
-        [MethodImpl(Inline)]
-        public PairEval(in Pairs<T> src, string leftLabel, string rightLabel,  in Pairs<T> dst)
-        {
-            this.Source = src;
-            this.LeftLabel = leftLabel;
-            this.RightLabel = rightLabel;
-            this.Target = dst;
-        }        
-
-        public int Count => Source.Count;
-    }
-
     public readonly ref struct Pairs<T>
         where T : unmanaged
     {

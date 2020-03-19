@@ -13,9 +13,9 @@ namespace Z0
     public interface IMemberLocator : IAsmService
     {
 
-        IEnumerable<HostedMember> Hosted(ApiHost src);
+        IEnumerable<ApiStatelessMember> Hosted(ApiHost src);
 
-        IEnumerable<LocatedMember> Located(ApiHost host);        
+        IEnumerable<ApiLocatedMember> Located(ApiHost host);        
 
     }
 }

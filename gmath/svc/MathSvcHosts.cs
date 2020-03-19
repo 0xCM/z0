@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Z0.Resolutions;
 
-    [OpServiceHostProvider(MathServices.SvcCollectionName)]
-    public sealed partial class MathSvcHosts  : OpServiceHosts<MathSvcHosts>
+    [ApiServiceHostProvider(MathServices.SvcCollectionName)]
+    public sealed partial class MathSvcHosts  : ApiServiceHosts<MathSvcHosts>
     {
         public const string SvcCollectionName = "math.services";        
     }

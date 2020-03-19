@@ -12,11 +12,8 @@ namespace Z0
 
     using static Root;
 
-
-
-
     [StructLayout(LayoutKind.Sequential)]
-    [Segmented(FixedWidth.W256,false,FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W256,false,FixedWidth.NumericWidths)]
     public struct Fixed256V : IFixed<Fixed256V>, IEquatable<Fixed256V>
     {
         public const int BitWidth = 256;        

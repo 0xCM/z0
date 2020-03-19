@@ -16,7 +16,7 @@ namespace Z0.Asm.Check
             where T : unmanaged
         {            
             [MethodImpl(Inline)]
-            internal BinaryOpPackage(in ApiEvalContext context, in PairEval<T> content)
+            internal BinaryOpPackage(in ApiEvalContext context, in BinaryEval<T> content)
             {
                 this.Context = context;
                 this.Content = content;
@@ -24,7 +24,7 @@ namespace Z0.Asm.Check
 
             public readonly ApiEvalContext Context;
 
-            public readonly PairEval<T> Content;
+            public readonly BinaryEval<T> Content;
 
             public Pairs<T> Src 
             {
@@ -32,7 +32,7 @@ namespace Z0.Asm.Check
                 get => Content.Source;
             }
 
-            public Pairs<T> Dst 
+            public PairEval<T> Dst 
             {
                 [MethodImpl(Inline)]
                 get => Content.Target;
