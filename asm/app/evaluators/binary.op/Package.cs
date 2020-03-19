@@ -31,11 +31,11 @@ namespace Z0.Asm.Check
                 [MethodImpl(Inline)]
                 get => Content.Source;
             }
-            
-            public ref Triple<T> this[int i]
+
+            public Pairs<T> Dst 
             {
                 [MethodImpl(Inline)]
-                get => ref Content.Target[i];
+                get => Content.Target;
             }
 
             public int SrcCount

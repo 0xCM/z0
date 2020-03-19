@@ -25,11 +25,15 @@ namespace Z0.Asm.Check
 
         public ref readonly PairEval<T> Evaluate(in BinaryOpPackage<T> package)
         {
-            var f = package.Buffers[Left].EmitBinaryOp<T>(package.ApiCode);
+            var f = package.ApiCode.Member.Method.CreateDelegate<BinaryOp<T>>();
+            var g = package.Buffers[Left].EmitBinaryOp<T>(package.ApiCode);
             for(var i=0; i<package.SrcCount; i++)
             {
                 ref readonly var pair = ref package.Src[i];
-                package[i] = Tuples.triple(pair.Left, pair.Right, f(pair.Left,pair.Right));
+                ref readonly var x = ref pair.Left;
+                ref readonly var y = ref pair.Right;
+                
+                package.Dst[i] = Tuples.pair(f(x,y), g(x, y));
             }   
             return ref package.Content;         
         }

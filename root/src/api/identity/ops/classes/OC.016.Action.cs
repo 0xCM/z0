@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static OpClasses;
+    using static Classes;
 
     using C = ActionClass;
     using OC = OperationClass;
@@ -46,15 +46,14 @@ namespace Z0
         Action3 = OC.Action3
     }
 
-    public static partial class OpClasses
+    public static partial class Classes
     {
-
         public readonly struct Receiver : IOpClass<C> { public C Class => C.Receiver; }
 
         public readonly struct Receiver<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.Receiver; }
     }
 
-    public static partial class OpClassReps
+    public static partial class ClassReps
     {
         public static Receiver Receiver => default;
 

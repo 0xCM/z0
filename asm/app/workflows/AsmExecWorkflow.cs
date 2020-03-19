@@ -9,8 +9,8 @@ namespace Z0.Asm.Check
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     
-    using C = OpClasses;
-    using Reps = OpClassReps;
+    using C = Classes;
+    using Reps = ClassReps;
     
 
     using static Root;    
@@ -120,17 +120,7 @@ namespace Z0.Asm.Check
             Notify($"Found {selected.Length} {host} kinded binary operarators");
 
             var messages = list<AppMsg>(selected.Length);        
-            
-            // foreach(var api in selected)
-            // {
-            //     var uri = api.Uri;
-            //     var oc = OperatorTypeClass.Infer(api.Method).Format();
-            //     var kind = api.Method.KindId().Format();
-            //     messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
-            // }            
-
-            
-            
+                        
             foreach(var api in selected)
             {
                 var uri = api.Uri;
@@ -140,29 +130,33 @@ namespace Z0.Asm.Check
                 Dispatch(buffers, api, default(C.BinaryOp));
             }
             
-            //Checks.Execute(buffers, selected);            
-
             using var log = OpenLog("kinded-binary-ops", FileExtensions.Csv, FileWriteMode.Append);
             log.Write(messages.ToArray());
 
         }
 
-        void Analyze<T>(in ApiMemberCode api,  in PairEval<T> eval)
+        void Analyze<T>(in ApiMemberCode api, in PairEval<T> eval)
             where T : unmanaged
         {
             var name = api.Member.Id.Name;
-            var count = math.min(eval.Source.Count,10);
+            var sample = 0;
+            var sampleMax = 10;
             NotifyConsole(api.Uri);
 
-            for(var i=0; i<count; i++)
+            for(var i=0; i<eval.Count; i++, sample++)
             {
-                var input = eval.Source[i];
-                var result = eval.Target[i];
-                NotifyConsole($"{name}{input} = {result.Third}");
+                ref readonly var input = ref eval.Source[i];
+                ref readonly var result = ref eval.Target[i];
+                if(i < sampleMax)
+                {
+                    NotifyConsole($"{name}[{eval.LeftLabel}]{input} = {result.Left}");
+                    NotifyConsole($"{name}[{eval.RightLabel}]{input} = {result.Right}");
+                }
+                Claim.eq(result.Left, result.Right);
             }
         }
 
-        void Dispatch(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp @class)
+        void Dispatch(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp k)
         {
             var kid = api.Member.KindId;
             int count = 128;
@@ -174,28 +168,28 @@ namespace Z0.Asm.Check
             switch(nk)
             {
                 case NumericKind.U8:
-                    Analyze(api,Context.Evaluate(buffers, api, Reps.binaryOp<byte>()));
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<byte>()));
                     break;
                 case NumericKind.I8:
-                    Analyze(api,Context.Evaluate(buffers, api, Reps.binaryOp<sbyte>()));
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<sbyte>()));
                     break;
                 case NumericKind.I16:
-                    Analyze(api,Context.Evaluate(buffers, api, Reps.binaryOp<short>()));
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<short>()));
                     break;
                 case NumericKind.U16:
-                    Analyze(api,Context.Evaluate(buffers, api, Reps.binaryOp<ushort>()));
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<ushort>()));
                     break;
                 case NumericKind.I32:
-                    Analyze(api,Context.Evaluate(buffers, api, Reps.binaryOp<int>()));
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<int>()));
                     break;
                 case NumericKind.U32:
-                    Analyze(api,Context.Evaluate(buffers, api, Reps.binaryOp<uint>()));
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<uint>()));
                     break;
                 case NumericKind.I64:
-                    Analyze(api,Context.Evaluate(buffers, api, Reps.binaryOp<long>()));
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<long>()));
                     break;
                 case NumericKind.U64:
-                    Analyze(api,Context.Evaluate(buffers, api, Reps.binaryOp<ulong>()));
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<ulong>()));
                     break;
                 default:
                     break;

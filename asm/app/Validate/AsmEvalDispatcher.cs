@@ -11,7 +11,7 @@ namespace Z0.Asm.Check
     using static Nats;
 
     using static OperatorClass;
-    using Reps = OpClassReps;
+    using Reps = ClassReps;
     
     class AsmEvalDispatcher : IAsmEvalDispatcher
     {        

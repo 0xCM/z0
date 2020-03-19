@@ -11,7 +11,7 @@ namespace Z0
     
     using static Root;
     using static Nats;
-    using R = OpClassReps;
+    using R = ClassReps;
 
     public class t_fixed_rng : UnitTest<t_fixed_rng>
     {        

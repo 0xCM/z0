@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    using K = OpClasses;
+    using K = Classes;
 
     partial class Fixed
     {

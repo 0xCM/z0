@@ -13,7 +13,7 @@ namespace Z0
 
     using static Root;
     
-    using K = OpClasses;
+    using K = Classes;
 
     public static class Delegates
     {

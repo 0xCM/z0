@@ -7,11 +7,12 @@ namespace Z0.Asm.Check
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
     using static EvalPackages;
 
-    using C = OpClasses;
+    using C = Classes;
 
     public static partial class EvalPackages
     {
@@ -30,22 +31,22 @@ namespace Z0.Asm.Check
 
     public static class Evaluation
     {            
-        public static PairEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, in BufferSeq buffers, in ApiMemberCode code, Pair<T>[] sourceBuffer, Triple<T>[] targetBuffer,  C.BinaryOp<T> @class)
-            where T : unmanaged
+        public static PairEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, in BufferSeq buffers, in ApiMemberCode code, 
+            Pair<T>[] sourceBuffer, Pair<T>[] targetBuffer,  C.BinaryOp<T> k)
+                where T : unmanaged
         {
-            var count = 100;
+            var count = sourceBuffer.Length;
             var context = ApiEvalContext.Define(buffers, code);
             var source = workflow.Random.Pairs<T>(sourceBuffer);
             var target = Tuples.index(targetBuffer);
-            var content = Tuples.eval(source, target);
-            var package = context.Package(content, @class);
-            var evaluator = workflow.Evaluator(@class);
+            var content = Tuples.eval(source, "method", "asm", target);
+            var package = context.Package(content, k);
+            var evaluator = workflow.Evaluator(k);
             return evaluator.Evaluate(package);
         }
 
         public static PairEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, in BufferSeq buffers, in ApiMemberCode code, C.BinaryOp<T> @class)
             where T : unmanaged
-                => workflow.Evaluate(buffers, code, new Pair<T>[100], new Triple<T>[100], @class);
-
+                => workflow.Evaluate(buffers, code, new Pair<T>[100], new Pair<T>[100], @class);
     }
 }

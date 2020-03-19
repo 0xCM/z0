@@ -2,16 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Check
+namespace Z0
 {
     using System;
 
-    using static EvalPackages;
     using static Classes;
 
-    public interface IBinaryOpEvaluator<T> : IApiEvaluator<BinaryOp, T>
-        where T : unmanaged
+
+    public enum OperandClass : byte
     {
-        ref readonly PairEval<T> Evaluate(in BinaryOpPackage<T> package);
+        None = 0,
+
+        Numeric = 1,
+
+        Blocked = 2,
+
+        CpuVector = 4,
+
+        BitVector = 8,
+
+        BitMatrix = 16,
     }
+
 }

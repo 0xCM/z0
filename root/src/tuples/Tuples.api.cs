@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="b">The second member</param>
         /// <typeparam name="T">The member type</typeparam>
         [MethodImpl(Inline)]
-        public static Pair<T> pair<T>(T a = default, T b = default)
+        public static Pair<T> pair<T>(T a, T b)
             => new Pair<T>(a,b);
 
         /// <summary>
@@ -103,8 +103,9 @@ namespace Z0
                 => src;
 
         [MethodImpl(Inline)]
-        public static PairEval<T> eval<T>(in Pairs<T> src, in Triples<T> dst)
+        public static PairEval<T> eval<T>(in Pairs<T> src, string leftLabel, string rightLabel, in Pairs<T> dst)
             where T : unmanaged
-                => PairEval.Define(src,dst);                   
+                => PairEval.Define(src, leftLabel, rightLabel, dst);                   
+
     }
 }

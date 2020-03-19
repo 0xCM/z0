@@ -7,7 +7,7 @@ namespace Z0.Asm.Check
     using System;
     using System.Runtime.CompilerServices;    
 
-    using C = OpClasses;
+    using C = Classes;
 
     class AsmChecks : IAsmExecChecks
     {

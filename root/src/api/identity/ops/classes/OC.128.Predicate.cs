@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static OpClasses;
+    using static Classes;
     using OC = OperationClass;
     using C = PredicateClass;
-
 
     [Flags]
     public enum PredicateClass : ushort
@@ -40,7 +39,7 @@ namespace Z0
         TernaryPred = OC.TernaryPred,
     }    
 
-    public static partial class OpClasses
+    public static partial class Classes
     {
         public readonly struct UnaryPred : IOpClass<C> { public C Class => C.UnaryPred; }
 
@@ -55,7 +54,7 @@ namespace Z0
         public readonly struct TernaryPred<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.TernaryPred; }
     }
 
-    public static partial class OpClassReps
+    public static partial class ClassReps
     {
         public static UnaryPred UnaryPred => default;
 

@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
 
-    using static OpClasses;
+    using static Classes;
 
     using OC = OperationClass;
     using C = ArityClass;
-    using K = OpClasses;
+    using K = Classes;
 
 
     [Flags]
@@ -42,7 +42,7 @@ namespace Z0
         Ternary = OC.Ternary,   
     }    
 
-    public static partial class OpClasses
+    public static partial class Classes
     {
         public readonly struct Unary : ILiteral<C> { public C Class => C.Unary; }
 
@@ -57,7 +57,7 @@ namespace Z0
         public readonly struct Ternary<T> : ILiteral<C,T>  where T : unmanaged { public C Class => C.Ternary; }
     }
 
-    public static partial class OpClassReps
+    public static partial class ClassReps
     {
         public static K.Unary Unary => default;
 

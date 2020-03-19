@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static OpClasses;
+    using static Classes;
 
     using OC = OperationClass;
     using C = FunctionClass;
@@ -52,7 +52,7 @@ namespace Z0
         TernaryOp = OC.TernaryOp,
     } 
 
-    public static partial class OpClasses
+    public static partial class Classes
     {
         public readonly struct Emitter : IOpClass<C> { public C Class => C.Emitter; }
 
@@ -71,7 +71,7 @@ namespace Z0
         public readonly struct Func3<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.Func3; }
     }    
 
-    public static partial class OpClassReps
+    public static partial class ClassReps
     {
         public static Emitter Emitter => default;
 

@@ -105,7 +105,6 @@ namespace Z0
         TernaryImm8x2 = Imm8 | ImmCount2 | ImmSlot3 | ImmSlot4        
     }
 
-
     public static class ImmClassOps
     {
         /// <summary>

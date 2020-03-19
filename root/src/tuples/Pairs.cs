@@ -21,9 +21,9 @@ namespace Z0
     public static class PairEval
     {
         [MethodImpl(Inline)]
-        public static PairEval<T> Define<T>(in Pairs<T> src, in Triples<T> dst)
+        public static PairEval<T> Define<T>(in Pairs<T> src, string leftLabel, string rightLabel, in Pairs<T> dst)
             where T : unmanaged
-                => new PairEval<T>(src,dst);
+                => new PairEval<T>(src, leftLabel, rightLabel, dst);
     }
 
     public readonly ref struct PairEval<T>
@@ -31,14 +31,22 @@ namespace Z0
     {
         public readonly Pairs<T> Source;
 
-        public readonly Triples<T> Target;        
+        public readonly string LeftLabel;
+
+        public readonly string RightLabel;
+
+        public readonly Pairs<T> Target;        
         
         [MethodImpl(Inline)]
-        public PairEval(in Pairs<T> src, in Triples<T> dst)
+        public PairEval(in Pairs<T> src, string leftLabel, string rightLabel,  in Pairs<T> dst)
         {
             this.Source = src;
+            this.LeftLabel = leftLabel;
+            this.RightLabel = rightLabel;
             this.Target = dst;
         }        
+
+        public int Count => Source.Count;
     }
 
     public readonly ref struct Pairs<T>

@@ -10,7 +10,7 @@ namespace Z0.Asm.Check
 
     using static Root;
 
-    using C = OpClasses;
+    using C = Classes;
 
     public interface IAsmExecWorkflow : IAsmWorkflow
     {
