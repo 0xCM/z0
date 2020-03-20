@@ -52,7 +52,7 @@ namespace Z0
 
         Select,
 
-        Inc = 100,
+        Inc,
 
         Dec,
 
@@ -64,7 +64,7 @@ namespace Z0
 
         Sqrt,
 
-        Add = 200,
+        Add,
 
         Sub,
 
@@ -82,7 +82,7 @@ namespace Z0
 
         Dot,
 
-        Sll = 300,
+        Sll,
 
         Srl,
 
@@ -100,9 +100,7 @@ namespace Z0
 
         Xors,
 
-        Pred = 400,
-
-        Eq = 500,
+        Eq,
 
         Neq,
 
@@ -116,9 +114,9 @@ namespace Z0
 
         Between,
 
-        Identity = 600,
+        Identity,
 
-        Sum = 700,
+        Sum,
 
         Avg,
     }

@@ -40,17 +40,17 @@ namespace Z0.Logix
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(ShiftOpKindId kind)
+        public static string sig<T>(ShiftOpKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(ComparisonOpKindId kind)
+        public static string sig<T>(ComparisonOpKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(UnaryArithmeticKindId kind)
+        public static string sig<T>(UnaryArithmeticKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 

@@ -195,7 +195,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static string FormatLabelAddress(string text, ulong baseaddress)
-            => Hex.parse(text).Map(address => (address - baseaddress).FormatSmallHex(true),  
+            => Hex.parse(text).ToOption().Map(address => (address - baseaddress).FormatSmallHex(true),  
                     () => $"{text}?");
 
         class AsmOutput : Iced.FormatterOutput

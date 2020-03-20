@@ -288,7 +288,7 @@ namespace Z0
             {
                 ref readonly var row = ref doc[i];
                 for(var j = 0; j<row.Cells.Length; j++)
-                    dst[i,j] = NumericParser.parse<T>(row.Cells[j].CellValue);
+                    dst[i,j] = Numeric.parse<T>(row.Cells[j].CellValue);
             }
 
             return dst;

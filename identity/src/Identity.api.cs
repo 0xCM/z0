@@ -11,84 +11,9 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
-    using static TypeIdentities;
 
     public static partial class Identity
     {
-        /// <summary>
-        /// Identifies the method
-        /// </summary>
-        /// <param name="m">The method to identify</param>
-        public static OpIdentity identify(MethodInfo src)
-        {            
-            if(src.IsOpenGeneric())
-                return Identity.generic(src);
-            else if(src.IsConstructedGenericMethod)
-                return constructed(src);
-            else
-                return nongeneric(src);
-        }            
-
-        public static OpIdentity identify(MethodInfo src, NumericKind k)
-        {
-            var pt = k.ToClrType();
-            if(src.IsOpenGeneric() && pt.IsSome())
-                return identify(src.MakeGenericMethod(pt.Value));
-            else
-                return identify(src);
-        }
-        
-        /// <summary>
-        /// Identifies the delegate
-        /// </summary>
-        /// <param name="m">The method to identify</param>
-        public static OpIdentity identify(Delegate m)
-            => identify(m.Method);
-
-        [MethodImpl(Inline)]
-        public static TypeIdentity identify(Type t)
-            => provider(t).DefineIdentity(t);
-
-        /// <summary>
-        /// Extracts an index-identified segmented identity part from an operation identity
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        /// <param name="partidx">The 0-based part index</param>
-        public static Option<SegmentedIdentity> segment(OpIdentity src, int partidx)
-            => from p in part(src, partidx)
-                from s in segmented(p)
-                select s;
-
-        /// <summary>
-        /// Divines the bit-width of a specified type, if possible
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static FixedWidth width(Type t)
-        {
-            if(VectorType.test(t))
-                return VectorType.width(t);
-            else if(t.IsBlocked())
-                return BK.width(t);
-            if(t.IsNumeric())
-                return Numeric.width(t);
-            else if(t == typeof(bit))
-                return FixedWidth.W1;
-            else
-                return FixedWidth.None;
-        }
-
-        public static string identify(ParameterInfo p)
-        {
-            if(!p.IsParametric())
-            {
-                var id = Identity.identify(p.ParameterType.EffectiveType());
-                if(!id.IsEmpty)
-                    return text.concat(id.Identifier, p.ClassifyVariance().Format());                
-            }
-            return string.Empty;                        
-        }
-
         /// <summary>
         /// Defines the identity of a generic method
         /// </summary>
@@ -121,14 +46,88 @@ namespace Z0
                         last = text.concat(IDI.Vector, width(argtype).Format());
                     else if(argtype.IsBlocked())
                         last = text.concat(IDI.Block, width(argtype).Format());
-                    else if(IsSpan(argtype))
-                        last = SpanKind(argtype).Format();
+                    else if(argtype.IsSpan())
+                        last = argtype.SpanKind().Format();
                 }
                 
                 id += last;
             }
 
             return GenericOpIdentity.Define(id);        
+        }
+
+        /// <summary>
+        /// Identifies the method
+        /// </summary>
+        /// <param name="m">The method to identify</param>
+        public static OpIdentity identify(MethodInfo src)
+        {            
+            if(src.IsOpenGeneric())
+                return generic(src);
+            else if(src.IsConstructedGenericMethod)
+                return constructed(src);
+            else
+                return nongeneric(src);
+        }            
+
+        public static OpIdentity identify(MethodInfo src, NumericKind k)
+        {
+            var t = k.ToClrType();
+            if(src.IsOpenGeneric() && t.IsSome())
+                return identify(src.MakeGenericMethod(t.Value));
+            else
+                return identify(src);
+        }
+        
+        /// <summary>
+        /// Identifies the delegate
+        /// </summary>
+        /// <param name="m">The method to identify</param>
+        public static OpIdentity identify(Delegate m)
+            => identify(m.Method);
+
+        [MethodImpl(Inline)]
+        public static TypeIdentity identify(Type t)
+            => provider(t).DefineIdentity(t);
+
+        /// <summary>
+        /// Extracts an index-identified segmented identity part from an operation identity
+        /// </summary>
+        /// <param name="src">The source identity</param>
+        /// <param name="partidx">The 0-based part index</param>
+        public static Option<SegmentedIdentity> segment(OpIdentity src, int partidx)
+            => from p in part(src, partidx)
+                from s in segmented(p)
+                select s;
+
+        /// <summary>
+        /// Divines the bit-width of a specified type, if possible
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static FixedWidth width(Type t)
+        {
+            if(t.IsVector())
+                return VectorType.width(t);
+            else if(t.IsBlocked())
+                return BK.width(t);
+            if(t.IsNumeric())
+                return t.NumericWidth();
+            else if(t == typeof(bit))
+                return FixedWidth.W1;
+            else
+                return FixedWidth.None;
+        }
+
+        public static string identify(ParameterInfo p)
+        {
+            if(!p.IsParametric())
+            {
+                var id = Identity.identify(p.ParameterType.EffectiveType());
+                if(!id.IsEmpty)
+                    return text.concat(id.Identifier, p.ClassifyVariance().Format());                
+            }
+            return string.Empty;                        
         }
 
         /// <summary>

@@ -12,11 +12,11 @@ namespace Z0
     public static class OpSubjectFormatting
     {
         [MethodImpl(Inline)]
-        public static string Format(this ComparisonOpKindId kind)
+        public static string Format(this ComparisonOpKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this ComparisonOpKindId kind, T arg1, T arg2)
+        public static string Format<T>(this ComparisonOpKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         public static string Format(this OpKindId id)
@@ -45,16 +45,16 @@ namespace Z0
         public static string Format<T>(this TernaryBitLogicOpKind kind, T arg1, T arg2, T arg3)
             => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
 
-        public static string Format(this ShiftOpKindId kind)        
+        public static string Format(this ShiftOpKind kind)        
             => kind switch {
-                ShiftOpKindId.Sll => "<<",
-                ShiftOpKindId.Srl => ">>",
-                ShiftOpKindId.Rotl => "<<>",
-                ShiftOpKindId.Rotr => ">><",
+                ShiftOpKind.Sll => "<<",
+                ShiftOpKind.Srl => ">>",
+                ShiftOpKind.Rotl => "<<>",
+                ShiftOpKind.Rotr => ">><",
                 _ => kind.ToString()
             };
 
-        public static string Format<S,T>(this ShiftOpKindId kind, S arg1, T arg2)
+        public static string Format<S,T>(this ShiftOpKind kind, S arg1, T arg2)
             => $"{arg1} {kind.Format()} {arg2}"; 
  
          [MethodImpl(Inline)]
@@ -66,16 +66,16 @@ namespace Z0
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string Format(this UnaryArithmeticKindId kind)
+        public static string Format(this UnaryArithmeticKind kind)
             => kind switch {
-                UnaryArithmeticKindId.Inc => "++",
-                UnaryArithmeticKindId.Dec => "--",
-                UnaryArithmeticKindId.Negate => "-",
+                UnaryArithmeticKind.Inc => "++",
+                UnaryArithmeticKind.Dec => "--",
+                UnaryArithmeticKind.Negate => "-",
                 _ => kind.ToString()
             };
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryArithmeticKindId kind, T arg)
+        public static string Format<T>(this UnaryArithmeticKind kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]

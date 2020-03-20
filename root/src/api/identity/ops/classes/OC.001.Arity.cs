@@ -12,7 +12,6 @@ namespace Z0
     using C = ArityClass;
     using K = Classes;
 
-
     [Flags]
     public enum ArityClass : ushort
     {

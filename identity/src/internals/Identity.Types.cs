@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="part">The source part</param>
         static Option<NumericIdentity> scalar(IdentityPart part)
         {
-            var nk = part.PartKind == IdentityPartKind.Scalar ? NumericIdentity.kind(part.Identifier) : NumericKind.None;
+            var nk = part.PartKind == IdentityPartKind.Numeric ? NumericIdentity.kind(part.Identifier) : NumericKind.None;
             if(nk.IsSome())
                 return NumericIdentity.Define(nk);                
             else                
@@ -104,28 +104,15 @@ namespace Z0
                 let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)                
                 select SegmentedIdentity.Define(i,segwidth,nk).AsTypeIdentity();
 
-        // static Option<TypeIdentity> EnumId(this Type t)        
-        // {
-        //     var id = EnumIdentity.From(t);
-        //     return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
-        // } 
-                
         static Option<TypeIdentity> NatId(this Type arg)
             => from v in arg.NatValue() 
                 let id = text.concat(IDI.Nat, v.ToString())
                 select TypeIdentity.Define(id);
         
-        // static Option<TypeIdentity> PrimalId(this Type arg)
-        // {
-        //     var id = PrimalIdentity.From(arg);
-        //     return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
-        // }
-
-
         static Option<TypeIdentity> SpanId(this Type arg)
         {
             var kind = SpanKind(arg);
-            if(kind.IsSome())
+            if(kind != 0)
             {
                 var cellid = arg.GetGenericArguments().Single().CommonId();
                 return cellid.TryMap(id => TypeIdentity.Define(text.concat(kind.Format(), id)));
@@ -166,7 +153,6 @@ namespace Z0
         static readonly ITypeIdentityProvider DefaultProvider
             = new FunctionalProvider(arg => arg.CommonId().ValueOrElse(() => TypeIdentity.Empty));
 
-
         /// <summary>
         /// Retrieves a cached identity provider, if found; otherwise, creates and caches the identity provider for the source type
         /// </summary>
@@ -174,7 +160,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static ITypeIdentityProvider provider(Type src)
             => IdentityProviders.find(src, CreateProvider);
-
 
         /// <summary>
         /// Determines whether a type is parametric over the natural numbers

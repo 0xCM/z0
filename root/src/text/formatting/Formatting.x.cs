@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Exposes formatting capabilites via exension methods
     /// </summary>
-    public static partial class CustomFormatting
+    public static partial class FormattingOps
     {
         /// <summary>
         /// Formats a type that provides intrinsic format capability
@@ -35,5 +35,4 @@ namespace Z0
             where F : ICustomFormattable
             => src.AppendLines(items.FormatLines());
     }
-
 }

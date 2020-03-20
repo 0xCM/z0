@@ -22,7 +22,7 @@ namespace Z0
             public OpIdentity Id => OpIdentity.contracted<T>(Name);
 
             [MethodImpl(Inline)]
-            public readonly T Invoke(string a) => NumericParser.parse<T>(a);
+            public readonly T Invoke(string a) => Numeric.parse<T>(a);
         }
     }
 }

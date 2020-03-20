@@ -11,7 +11,9 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
- 
+
+    using GS = GenericStateKind;
+
     public static partial class ReflectedClass
     {
         /// <summary>
@@ -81,9 +83,22 @@ namespace Z0
         /// Determines whether a type is an intrinsic vector
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
         public static bool IsVector(this Type t)
             => TypeIdentities.IsCpuVector(t);
+
+        /// <summary>
+        /// Determines whether a type is a span
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsSpan(this Type t)
+            => TypeIdentities.IsSpan(t);
+
+        /// <summary>
+        /// Classifies a type according to whether it is a span and, if so, what sort of span
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static SpanKind SpanKind(this Type t)
+            => TypeIdentities.SpanKind(t);
 
         /// <summary>
         /// Determines whether a method returns an intrinsic vector
@@ -92,6 +107,15 @@ namespace Z0
         public static bool ReturnsVector(this MethodInfo src)
             => src.ReturnType.IsVector();
 
+        public static FixedWidth NumericWidth(this Type t)
+        {
+            var k = t.NumericKind();
+            if(k.IsSome())
+                return (FixedWidth)(ushort)k;
+            else
+                return FixedWidth.None;            
+        }
+        
         /// <summary>
         /// Determines whether a method is a vectorized operator which, by definition, is an operator 
         /// (which, by definition, is an homogenous function) with a vectorized operand which, by definition, 
@@ -109,6 +133,18 @@ namespace Z0
         public static bool IsFullyVectorized(this MethodInfo src)        
             => TypeIdentities.IsCpuVector(src.ReturnType) 
             && src.ParameterTypes().All(TypeIdentities.IsCpuVector);
+
+        public static GenericStateKind GenericState(this Type src, bool effective)
+            =>   src.IsOpenGeneric(false) ? GS.Open 
+               : src.IsClosedGeneric(false) ? GS.Closed 
+               : src.IsGenericTypeDefinition ? GS.Definition 
+               : 0;
+
+        public static GenericStateKind GenericState(this MethodInfo src, bool effective)
+            =>   src.IsOpenGeneric() ? GS.Open 
+               : src.IsClosedGeneric() ? GS.Closed 
+               : src.IsGenericMethodDefinition ? GS.Definition 
+               : 0;
 
         /// <summary>
         /// Selects unary operators from a stream

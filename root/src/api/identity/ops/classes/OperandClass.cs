@@ -8,7 +8,6 @@ namespace Z0
 
     using static Classes;
 
-
     public enum OperandClass : byte
     {
         None = 0,

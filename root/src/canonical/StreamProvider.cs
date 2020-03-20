@@ -15,7 +15,5 @@ namespace Z0
         /// In infinite T-stream
         /// </summary>
         IEnumerable<T> Stream {get;}   
-
     }
-
 }

@@ -26,6 +26,61 @@ namespace Z0
         /// </summary>
         public const char PostSpec = 'h';
 
+        /// <summary>
+        /// Attempts to parse a hex string as an unsigned long
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static ParseResult<ulong> parse(string src)
+            => hexoption(src)
+                .MapValueOrElse(
+                    value => ParseResult.Success(src,value), 
+                    () => ParseResult.Fail<ulong>(src));                    
+
+        /// <summary>
+        /// Parses the Hex digit if possible; otherwise raises an error
+        /// </summary>
+        /// <param name="c">The source character</param>
+        public static byte parse(char c)
+        {
+            var u = Char.ToUpperInvariant(c);
+            if(islo(u))
+                return (byte)((byte)u - MinCode);
+            else if(ishi(u))
+                return (byte)((byte)u - MinHiCode + 0xA);
+            else
+                throw AppErrors.BadArg(c);
+        }
+
+        /// <summary>
+        /// Parses a hex byte
+        /// </summary>
+        /// <param name="src">hex text</param>
+        public static byte parsebyte(string src)    
+            => byte.Parse(clean(src), NumberStyles.HexNumber);
+
+        /// <summary>
+        /// Parses a delimited sequence of hex bytes
+        /// </summary>
+        /// <param name="src">The delimited hex</param>
+        /// <param name="sep">The delimiter</param>
+        public static IEnumerable<byte> parsebytes(string src, char sep = AsciSym.Comma)
+            => src.Split(sep).Select(parsebyte);
+ 
+        /// <summary>
+        /// Attempts to parse a hex string as an unsigned long
+        /// </summary>
+        /// <param name="src">The source text</param>
+        static Option<ulong> hexoption(string src)
+        {            
+            if(ulong.TryParse(clean(src), NumberStyles.HexNumber, null,  out ulong value))
+                return value;
+            return default;
+        }
+
+        static string clean(string src)
+            => src.Remove("0x").RemoveAny('h');
+
+
         [MethodImpl(Inline)]
         public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
@@ -192,49 +247,7 @@ namespace Z0
             return charspan(ref storage);
         }
 
-        static string clean(string src)
-            => src.Remove("0x").RemoveAny('h');
 
-        /// <summary>
-        /// Parses the Hex digit if possible; otherwise raises an error
-        /// </summary>
-        /// <param name="c">The source character</param>
-        public static byte parse(char c)
-        {
-            var u = Char.ToUpperInvariant(c);
-            if(islo(u))
-                return (byte)((byte)u - MinCode);
-            else if(ishi(u))
-                return (byte)((byte)u - MinHiCode + 0xA);
-            else
-                throw AppErrors.BadArg(c);
-        }
-
-        /// <summary>
-        /// Attempts to parse a hex string as an unsigned long
-        /// </summary>
-        /// <param name="src">The source text</param>
-        public static Option<ulong> parse(string src)
-        {
-            if(ulong.TryParse(clean(src), NumberStyles.HexNumber, null,  out ulong value))
-                return value;
-            return default;
-        }
-
-        /// <summary>
-        /// Parses a hex byte
-        /// </summary>
-        /// <param name="src">hex text</param>
-        public static byte parsebyte(string src)    
-            => byte.Parse(clean(src), NumberStyles.HexNumber);
-
-        /// <summary>
-        /// Parses a delimited sequence of hex bytes
-        /// </summary>
-        /// <param name="src">The delimited hex</param>
-        /// <param name="sep">The delimiter</param>
-        public static IEnumerable<byte> parsebytes(string src, char sep = AsciSym.Comma)
-            => src.Split(sep).Select(parsebyte);
                
         [MethodImpl(Inline)]
         static string format_hex_digits<T>(string digits, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)

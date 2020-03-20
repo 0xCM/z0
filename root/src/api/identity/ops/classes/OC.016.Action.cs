@@ -11,7 +11,6 @@ namespace Z0
     using C = ActionClass;
     using OC = OperationClass;
 
-
     [Flags]
     public enum ActionClass : ushort
     { 
@@ -58,6 +57,5 @@ namespace Z0
         public static Receiver Receiver => default;
 
         public static Receiver<T> receiver<T>() where T : unmanaged => default;
-
     }
 }

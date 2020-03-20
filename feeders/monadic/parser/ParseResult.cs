@@ -10,7 +10,7 @@ namespace Z0
     using static Monadic;
     using static Option;
 
-    public readonly struct ParseResult : IParseResult//, IFormattable<ParseResult>
+    public readonly struct ParseResult : IParseResult
     {
         /// <summary>
         /// The text that was parsed...or not
@@ -82,7 +82,7 @@ namespace Z0
              => Format();
     }
 
-    public readonly struct ParseResult<T> : IParseResult<T>//, IFormattable<ParseResult<T>>
+    public readonly struct ParseResult<T> : IParseResult<T>
     {
         /// <summary>
         /// The text that was parsed...or not
@@ -222,6 +222,10 @@ namespace Z0
             else
                 return ParseResult<Z>.Fail(src);
         }
+
+        [MethodImpl(Inline)]
+        public Option<T> ToOption()
+            => Succeeded ? some(Value) : none<T>();
 
         public string Format()
             => ParseResult.Format(this);

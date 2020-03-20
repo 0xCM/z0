@@ -5,13 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Root;
 
-   public interface ISpanFormatter<T> : ISeqFormatter<T>
+    public interface ISpanFormatter<T> : ISeqFormatter<T>
     {
         string Format(ReadOnlySpan<T> src);
         
@@ -53,7 +51,5 @@ namespace Z0
         string Format(ReadOnlySpan<T> src, in C seqconfig, in E itemconfig);
 
         ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in C seqconfig, in E itemconfig);
-
     }
-
 }

@@ -84,9 +84,9 @@ namespace Z0.Logix
         {
             switch(expr.OpKind)               
             {
-                case UnaryArithmeticKindId.Inc: return inc(expr);
-                case UnaryArithmeticKindId.Dec: return dec(expr);
-                case UnaryArithmeticKindId.Negate: return negate(expr);
+                case UnaryArithmeticKind.Inc: return inc(expr);
+                case UnaryArithmeticKind.Dec: return dec(expr);
+                case UnaryArithmeticKind.Negate: return negate(expr);
                 default: throw new NotSupportedException(sig<T>(expr.OpKind));
             }
         }

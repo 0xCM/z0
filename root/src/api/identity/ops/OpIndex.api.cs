@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.Reflection;
-    using System.Collections;
     using System.Collections.Generic;
 
     using static Root;
@@ -21,9 +19,8 @@ namespace Z0
         public static OpIndex<T> ToOpIndex<T>(this IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
             => new OpIndex<T>(src, deduplicate);
 
-    
-         public static OpIndex<Paired<L,R>> Intersect<L,R>(this IOpIndex<L> left, IOpIndex<R> right)
-         {
+        public static OpIndex<Paired<L,R>> Intersect<L,R>(this IOpIndex<L> left, IOpIndex<R> right)
+        {
              var keys = left.Keys.ToHashSet();
              keys.IntersectWith(right.Keys);
              var keylist = keys.ToArray();

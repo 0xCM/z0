@@ -4,23 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Enumerates the identifiable things
     /// </summary>
-    public enum IdentityTarget
+    public enum IdentityTargetKind
     {
         None = 0,
 
         /// <summary>
         /// Designates type identity
         /// </summary>
-        Type,
+        Type = 2,
 
         /// <summary>
         /// Designates operation identity
         /// </summary>
-        Operation,
+        Method = 4,
     }
 }

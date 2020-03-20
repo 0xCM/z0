@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Reflection;
 
     using static Root;
@@ -42,6 +40,10 @@ namespace Z0
         public static bool IsHomogenous(this MethodInfo src)
             => OperationClasses.IsHomogenous(src);
 
+        /// <summary>
+        /// Determines the numeric arity of a classified operator
+        /// </summary>
+        /// <param name="src">The operator class</param>
         public static int ArityValue(this OperatorClass src)
             => OperationClasses.ArityValue(src);
 

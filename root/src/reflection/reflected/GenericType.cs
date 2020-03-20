@@ -13,7 +13,7 @@ namespace Z0
     {
         
         [MethodImpl(Inline)]
-        GenericType(Type src, GenericState kind)
+        GenericType(Type src, GenericStateKind kind)
         {
             this.Element = src;
             this.Kind = kind;                
@@ -21,7 +21,6 @@ namespace Z0
 
         public Type Element  {get;}
 
-        public GenericState Kind {get;}
-
+        public GenericStateKind Kind {get;}
     }
 }

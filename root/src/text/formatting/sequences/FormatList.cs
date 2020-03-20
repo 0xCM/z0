@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Exposes formatting capabilites via exension methods
     /// </summary>
-    partial class CustomFormatting
+    partial class FormattingOps
     {
         /// <summary>
         /// Formats a sequence of formattable things as delimited list

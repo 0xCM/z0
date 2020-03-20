@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     using AC = ArityClass;
     using OC = OperatorClass;
@@ -141,9 +141,6 @@ namespace Z0
                 };
             }
             return 0;
-        }          
-
-
+        }
     }
-
 }

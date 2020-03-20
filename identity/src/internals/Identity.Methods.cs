@@ -14,14 +14,6 @@ namespace Z0
     {
         static string name(MethodInfo m)
             => OpIdentities.name(m);
-        // {
-        //     var attrib = m.Tag<OpAttribute>();
-        //     if(attrib.IsNone())
-        //         return m.Name;
-
-        //     var attribVal = attrib.Value;              
-        //     return attribVal.Name.IsNotBlank() ? attribVal.Name : m.Name;                
-        // }
 
         static OpIdentity constructed(MethodInfo src)
         {

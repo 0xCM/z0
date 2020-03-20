@@ -9,15 +9,19 @@ namespace Z0
 
     using static Root;
 
-    public interface IOpIdentity : IIdentity
+    public interface INumericFormatProvider<T> :  IFormatProvider<T>
+        where T : unmanaged
     {
+        new INumericFormatter<T> Formatter {get;}
+
+        IFormatter<T> IFormatProvider<T>.Formatter
+            => Formatter;
 
     }
-    
-    public interface IOpIdentity<T> : IOpIdentity, IIdentity<T>
-        where T : IOpIdentity<T>, new()    
+
+    public interface INumericFormatProvider<F,T> : INumericFormatProvider<T>
+        where T : unmanaged
     {
-        Func<string,T> Factory {get;}
 
     }
 }

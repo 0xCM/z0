@@ -31,8 +31,8 @@ namespace Z0
             var parts = s.Split('x');
             if(parts.Length == 2)
             {
-                if(NumericParser.parse(parts[0], out int m))
-                if(NumericParser.parse(parts[1], out int n))
+                if(Numeric.parse(parts[0], out int m))
+                if(Numeric.parse(parts[1], out int n))
                     return (m,n);
             }
             return Empty;

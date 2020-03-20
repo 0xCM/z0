@@ -94,13 +94,6 @@ namespace Z0
         public static bool IsNone(this FixedWidth src)
             => src == 0;
 
-        /// <summary>
-        /// Converts a fixed width kind to an integer corresponding to the with represented by the kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline)]
-        public static int ToInteger(this FixedWidth src)
-            => Numeric.@int(src);
 
         /// <summary>
         /// Produces a canonical text representation of the source kind
@@ -108,7 +101,6 @@ namespace Z0
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline)]
         public static string Format(this FixedWidth src)
-            => $"{Numeric.@int(src)}";
-
+            => $"{(int)src}";
     }
 }

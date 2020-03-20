@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Classifies unary arithmetic operators
     /// </summary>
-    public enum UnaryArithmeticKindId : ulong
+    public enum UnaryArithmeticKind : ulong
     {
         None = 0,
 

@@ -17,7 +17,6 @@ namespace Z0
         public static IFormatter<T,BitFormatConfig>  BitFormatter<T>()
             where T : struct
                 =>  default(BitFormatter<T>);
-
     }
 
     public static class Formatting

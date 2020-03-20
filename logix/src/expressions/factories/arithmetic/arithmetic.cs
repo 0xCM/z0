@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static UnaryArithmeticKindId;
+    using static UnaryArithmeticKind;
     using static BinaryArithmeticKind;
     using static TypedLogicSpec;
 
@@ -21,7 +21,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticKindId op, IExpr<T> a)
+        public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticKind op, IExpr<T> a)
             where T : unmanaged
                 => new UnaryAritheticOpExpr<T>(op,a);
 
@@ -32,7 +32,7 @@ namespace Z0.Logix
         /// <param name="operand">The literal value</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticKindId op, T a)
+        public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticKind op, T a)
             where T : unmanaged
                 => new UnaryAritheticOpExpr<T>(op, literal(a));
 

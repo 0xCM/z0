@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Text;
 
     using static Root;
 
     /// <summary>
     /// Exposes formatting capabilites via exension methods
     /// </summary>
-    partial class CustomFormatting
+    partial class FormattingOps
     {
         public static string FormatNumeric<T>(this T src, NumericKind kind)
             where T : unmanaged, IFixed

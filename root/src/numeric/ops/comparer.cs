@@ -7,27 +7,40 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
-    
-    public readonly struct NumericComparer<T> : IComparer<T>
-        where T : unmanaged
+
+    partial class Numeric
     {
-        readonly Func<T,T,int> comparer;
-
-        [MethodImpl(Inline)]
-        internal NumericComparer(Func<T,T,int> comparer)
-            => this.comparer = comparer;
-
-        [MethodImpl(Inline)]
-        public int Compare(T x, T y)
-            => comparer(x,y);
+        /// <summary>
+        /// Creates a parametric numeric comparer
+        /// </summary>
+        /// <typeparam name="T">The numeric type to compare</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static IComparer<T> comparer<T>()
+            where T : unmanaged
+                => NumericCompare.create<T>();
     }
 
-    static class NumericComparer
+    static class NumericCompare
     {        
+        readonly struct NumericComparer<T> : IComparer<T>
+            where T : unmanaged
+        {
+            readonly Func<T,T,int> comparer;
+
+            [MethodImpl(Inline)]
+            internal NumericComparer(Func<T,T,int> comparer)
+                => this.comparer = comparer;
+
+            [MethodImpl(Inline)]
+            public int Compare(T x, T y)
+                => comparer(x,y);
+        }
+
         [MethodImpl(Inline)]
-        public static NumericComparer<T> create<T>()
+        public static IComparer<T> create<T>()
             where T : unmanaged
                 => comparer<T>();
 
@@ -62,7 +75,6 @@ namespace Z0
             else
                 return comparer_f<T>();
         }
-
 
         [MethodImpl(Inline)]
         static NumericComparer<T> comparer_f<T>()

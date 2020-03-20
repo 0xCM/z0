@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Identifies comparison operator classes
     /// </summary>
-    public enum ComparisonOpKindId : ulong
+    public enum ComparisonOpKind : ulong
     {        
         /// <summary>
         /// The empty identity

@@ -15,7 +15,7 @@ namespace Z0
                 where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
                 let args = t.SuppliedTypeArgs().ToArray()
                 let pair = (nat: args[0], cell: args[1])
-                let w = (int)Numeric.width(pair.cell)
+                let w = (int)pair.cell.NumericWidth()
                 from n in pair.nat.NatValue()
                 from i in pair.cell.NumericIndicator()
                 select Define((int)n, w, i.ToChar());

@@ -9,20 +9,14 @@ namespace Z0
 
     using static Root;
 
-    public interface INumericFormatProvider<T> :  IFormatProvider<T>
-        where T : unmanaged
+    public interface ISeqFormatConfig : IFormatConfig
     {
-        new INumericFormatter<T> Formatter {get;}
-
-        IFormatter<T> IFormatProvider<T>.Formatter
-            => Formatter;
-
+        string Delimiter {get;}
     }
 
-    public interface INumericFormatProvider<F,T> : INumericFormatProvider<T>
-        where T : unmanaged
+    public interface ISeqFormatConfig<C> : ISeqFormatConfig
+        where C : ISeqFormatConfig
     {
-
 
     }
 }

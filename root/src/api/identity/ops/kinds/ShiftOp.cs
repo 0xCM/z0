@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Classifies bitwise shift operators
     /// </summary>
-    public enum ShiftOpKindId : ulong
+    public enum ShiftOpKind : ulong
     {    
         /// <summary>
         /// The empty identity

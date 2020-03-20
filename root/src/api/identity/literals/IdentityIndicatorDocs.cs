@@ -24,8 +24,12 @@ namespace Z0
         SuffixSep,
 
         /// <summary>
-        /// A separator between the bit width of a segmented type and the width of each segment
+        /// A 'x' character between two integer bit-widths
         /// </summary>
+        /// <example>
+        /// In the identifier 'load_g[8u](b16x8u~in,n1,n16)' the segment separator delimits a bit-width of 16 and a bit-width of 8
+        /// in the identifier 'vnand_(v128x16u,v128x16u)', the segment separator delimits bit-widths 128 and 16 in both value arguments
+        /// </example>
         SegSep,
 
         /// <summary>
@@ -102,5 +106,44 @@ namespace Z0
         /// Indicates a floating-point type
         /// </summary>
         Float = NumericIndicator.Float,
+
+        /// <summary>
+        /// One or more comma-separated parenthetical terms
+        /// </summary>
+        /// <example>
+        /// In the identifier 'load_g[8u](b16x8u~in,n1,n16)', the value paramter list is the term sequence 'b16x8u~in,n1,n16'
+        /// The parenthesis demarcate/identify the list but are not considered part of the list
+        /// </example>
+        ValueArgList,
+
+        /// <summary>
+        /// An item in a value arg list
+        /// </summary>
+        ValueArg,
+
+        /// <summary>
+        /// One or more comma-separated bracketed terms
+        /// </summary>
+        /// <example>
+        /// In the identifier 'load_g[8u](b16x8u~in,n1,n16)', the type arg list is the term '8u'
+        /// The brackets demarcate/identify the list but are not considered part of the list
+        /// </example>
+        TypeArgList,
+
+        /// <summary>
+        /// An item in a type arg list
+        /// </summary>
+        TypeArg,
+
+        /// <summary>
+        /// A classifying prefix term
+        /// </summary>
+        /// <example>
+        /// In the identifier 'load_g[8u](b16x8u~in,n1,n16)', the letter 'b' in the first value argument indicates 
+        /// a (b)locked type; in the identifier 'vnand_(v128x16u,v128x16u)', the letter 'v' initiating each value argument
+        /// indicates a (v)ector type (the 'v' in 'vnand' is part of the function name itself, and not part of the indentity syntax)
+        /// </example>
+        TypeIndicator,    
+
     }
 }

@@ -15,43 +15,29 @@ namespace Z0
         public static ITypeIdentityProvider find(Type src, Func<Type,ITypeIdentityProvider> fallback)
             => TypeIdentityProviders.GetOrAdd(src.EffectiveType(), fallback);
 
-        public static IOpIdentityProvider find(Type src, Func<IOpIdentityProvider> fallback)
-            => OpIdentityProviders.GetOrAdd(src.EffectiveType(),t => fallback());
-
-        static ConcurrentDictionary<Type, IOpIdentityProvider> OpIdentityProviders 
-            = new ConcurrentDictionary<Type, IOpIdentityProvider>();
-
         static ConcurrentDictionary<Type, ITypeIdentityProvider> TypeIdentityProviders 
             = new ConcurrentDictionary<Type, ITypeIdentityProvider>();
-    }    
-
-    public interface IIdentityProvider
-    {
-        IdentityTarget ProviderKind {get;}   
-    }
-    
-    public interface IIdentityProvider<S,T> : IIdentityProvider
-        where T : IIdentity
-    {
-
     }
 
-    public class IdentityProviderAttribute : Attribute
+    public class TypeIdentityProviders : ITypeIdentityProviders
     {
-        /// <summary>
-        /// Use of this constructor implies that the attribution target is the provider
-        /// </summary>
-        public IdentityProviderAttribute()
-        {
-            Host = Option.none<Type>();
-        }
+        public IContext Context {get;}
         
-        public IdentityProviderAttribute(Type host)
+        readonly ITypeIdentityProvider DefaultProvider;
+
+        public static ITypeIdentityProviders Create(IContext context, ITypeIdentityProvider @default, params ITypeIdentityProvider[] known)
+            => new TypeIdentityProviders(context,  @default, known);
+
+        TypeIdentityProviders(IContext context, ITypeIdentityProvider @default,  ITypeIdentityProvider[] known)
         {
-            this.Host = host;
+            this.Context = context;            
+            this.DefaultProvider = @default;
         }
 
-        public Option<Type> Host;
+        public ITypeIdentityProvider Find(Type src, Func<Type, ITypeIdentityProvider> fallback)
+            => Cache.GetOrAdd(src.EffectiveType(), fallback);
+
+        ConcurrentDictionary<Type, ITypeIdentityProvider> Cache 
+            = new ConcurrentDictionary<Type, ITypeIdentityProvider>();
     }    
-        
 }

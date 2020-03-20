@@ -40,8 +40,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary arithmetic operators
         /// </summary>
-        public static ReadOnlySpan<UnaryArithmeticKindId> UnaryAritmeticKinds
-            => Enums.valarray<UnaryArithmeticKindId>();
+        public static ReadOnlySpan<UnaryArithmeticKind> UnaryAritmeticKinds
+            => Enums.valarray<UnaryArithmeticKind>();
 
         /// <summary>
         /// Advertises the supported binary arithmetic operators
@@ -52,8 +52,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported comparison operators
         /// </summary>
-        public static ReadOnlySpan<ComparisonOpKindId> ComparisonKinds
-            => Enums.valarray<ComparisonOpKindId>();
+        public static ReadOnlySpan<ComparisonOpKind> ComparisonKinds
+            => Enums.valarray<ComparisonOpKind>();
 
 
         [Op, NumericClosures(NumericKind.Integers)]
@@ -95,17 +95,17 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static T eval<T>(ComparisonOpKindId kind, T a, T b)
+        public static T eval<T>(ComparisonOpKind kind, T a, T b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonOpKindId.Eq: return equals(a,b);
-                case ComparisonOpKindId.Neq: return neq(a,b);
-                case ComparisonOpKindId.Lt: return lt(a,b);
-                case ComparisonOpKindId.LtEq: return lteq(a,b);
-                case ComparisonOpKindId.Gt: return gt(a,b);
-                case ComparisonOpKindId.GtEq: return gteq(a,b);
+                case ComparisonOpKind.Eq: return equals(a,b);
+                case ComparisonOpKind.Neq: return neq(a,b);
+                case ComparisonOpKind.Lt: return lt(a,b);
+                case ComparisonOpKind.LtEq: return lteq(a,b);
+                case ComparisonOpKind.Gt: return gt(a,b);
+                case ComparisonOpKind.GtEq: return gteq(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -223,45 +223,45 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static T eval<T>(ShiftOpKindId kind, T a, byte count)
+        public static T eval<T>(ShiftOpKind kind, T a, byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKindId.Sll: return sll(a, count);
-                case ShiftOpKindId.Srl: return srl(a, count);
-                case ShiftOpKindId.Rotl: return rotl(a, count);
-                case ShiftOpKindId.Rotr: return rotr(a, count);
+                case ShiftOpKind.Sll: return sll(a, count);
+                case ShiftOpKind.Srl: return srl(a, count);
+                case ShiftOpKind.Rotl: return rotl(a, count);
+                case ShiftOpKind.Rotr: return rotr(a, count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
             
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<T> lookup<T>(ShiftOpKindId kind)
+        public static Shifter<T> lookup<T>(ShiftOpKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ShiftOpKindId.Sll: return sll;
-                case ShiftOpKindId.Srl: return srl;
-                case ShiftOpKindId.Rotl: return rotl;
-                case ShiftOpKindId.Rotr: return rotr;
+                case ShiftOpKind.Sll: return sll;
+                case ShiftOpKind.Srl: return srl;
+                case ShiftOpKind.Rotl: return rotl;
+                case ShiftOpKind.Rotr: return rotr;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.All)]
-        public static BinaryOp<T> lookup<T>(ComparisonOpKindId kind)
+        public static BinaryOp<T> lookup<T>(ComparisonOpKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ComparisonOpKindId.Eq: return equals;
-                case ComparisonOpKindId.Neq: return neq;
-                case ComparisonOpKindId.Lt: return lt;
-                case ComparisonOpKindId.LtEq: return lteq;
-                case ComparisonOpKindId.Gt: return gt;
-                case ComparisonOpKindId.GtEq: return gteq;
+                case ComparisonOpKind.Eq: return equals;
+                case ComparisonOpKind.Neq: return neq;
+                case ComparisonOpKind.Lt: return lt;
+                case ComparisonOpKind.LtEq: return lteq;
+                case ComparisonOpKind.Gt: return gt;
+                case ComparisonOpKind.GtEq: return gteq;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

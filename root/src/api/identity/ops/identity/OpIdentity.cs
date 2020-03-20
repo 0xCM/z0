@@ -269,9 +269,9 @@ namespace Z0
                         else
                         {
                             if(i == 1 && part[0] == IDI.Generic && Char.IsDigit(part.TakeAfter(IDI.Generic).First()))
-                                partkind = IdentityPartKind.Scalar;
+                                partkind = IdentityPartKind.Numeric;
                             else if(Char.IsDigit(part.First()))
-                                partkind = IdentityPartKind.Scalar;                                
+                                partkind = IdentityPartKind.Numeric;                                
                         }
                     }
                     yield return (i, partkind, part);

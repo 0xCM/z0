@@ -16,7 +16,6 @@ namespace Z0
     
     using static Classes;
 
-
     /// <summary>
     /// Classifies operators of arity either 1, 2, or 3
     /// </summary>
@@ -51,9 +50,9 @@ namespace Z0
 
     public static class OpClassOps
     {
+    
     }
     
-
     public static partial class Classes
     {
         public readonly struct UnaryOp : IOpClass<C> { public C Class => C.UnaryOp; }
@@ -144,6 +143,11 @@ namespace Z0
         }
 
         public override string ToString()
-            => IsNone ? string.Empty :  OperandType.DisplayName().Replicate(OperatorClass.ArityValue() + 1).Intersperse(ArrowSymbols.AsciArrow).Concat();        
+            => IsNone 
+            ? string.Empty 
+            : OperandType.DisplayName()
+                         .Replicate(OperatorClass.ArityValue() + 1)
+                         .Intersperse(ArrowSymbols.AsciArrow)
+                         .Concat();        
     }    
 }

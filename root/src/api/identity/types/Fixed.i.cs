@@ -32,7 +32,19 @@ namespace Z0
         }
     }
 
+    public interface IFixedWidth : IFixed
+    {
+        /// <summary>
+        /// Specifies the type width in bits
+        /// </summary>
+        FixedWidth FixedWidth {get;}
 
+        int IFixed.FixedBitCount
+        {
+            [MethodImpl(Inline)]
+            get => (int)FixedWidth;
+        }        
+    }
     /// <summary>
     ///  Characterizes a fixed type with storage and reification types of equal size
     /// </summary>
@@ -60,4 +72,24 @@ namespace Z0
     }
 
 
+    /// <summary>
+    /// Characterizes a kind with which a fixed bit-width is associated
+    /// </summary>
+    public interface IFixedKind : IKind
+    {
+        int BitWidth {get;}
+    }
+
+    /// <summary>
+    /// Characterizes a reified kind with which a fixed bit-width is associated
+    /// </summary>
+    public interface IFixedKind<F> : IFixedKind
+        where F : unmanaged, IFixed
+    {
+        int IFixedKind.BitWidth
+        {
+            [MethodImpl(Inline)]
+            get => bitsize<F>();
+        }
+    }
 }

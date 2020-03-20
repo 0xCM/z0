@@ -14,10 +14,7 @@ namespace Z0
 
     using NK = NumericKind;
     using TC = System.TypeCode;
-    using FW = FixedWidth;
-    using NI = NumericIndicator;
     using ID = NumericKindId;
-
 
     partial struct NumericIdentity
     {
@@ -203,7 +200,7 @@ namespace Z0
         /// <typeparam name="T">The target numeric type</typeparam>
         public static ParseResult<T> parse<T>(string src)
             where T : unmanaged
-                 => Try(() => NumericParser.parse<T>(src)).MapValueOrElse(v => ParseResult.Success<T>(src, v), () => ParseResult.Fail<T>(src));
+                 => Try(() => Numeric.parse<T>(src)).MapValueOrElse(v => ParseResult.Success<T>(src, v), () => ParseResult.Fail<T>(src));
 
         /// <summary>
         /// Attempts to parse a sequence of numeric kinds from a sequennce of strings in the form {width}{indicator} 
@@ -305,7 +302,6 @@ namespace Z0
             = new ConcurrentDictionary<NumericKind, HashSet<NumericKind>>();
 
         static ConcurrentDictionary<NumericKind, HashSet<Type>> TypesetCache {get;}       
-            = new ConcurrentDictionary<NumericKind, HashSet<Type>>();
-                 
+            = new ConcurrentDictionary<NumericKind, HashSet<Type>>();                 
     }
 }

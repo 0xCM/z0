@@ -8,18 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static SpanKind;
 
-    public interface IFixedWidth : IFixed
+    public enum SpanKind
     {
-        /// <summary>
-        /// Specifies the type width in bits
-        /// </summary>
-        FixedWidth FixedWidth {get;}
+        None = 0,
 
-        int IFixed.FixedBitCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)FixedWidth;
-        }        
+        Mutable = 1,
+
+        Immutable = 2
     }
+
+    public static class SpanKindOps
+    {
+        public static string Format(this SpanKind kind)
+            => kind != 0 ? (kind == Mutable ? IDI.Span : IDI.USpan) : string.Empty;
+    }    
 }

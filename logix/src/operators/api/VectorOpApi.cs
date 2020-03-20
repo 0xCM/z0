@@ -42,8 +42,8 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the supported comparison operators
         /// </summary>
-        public static ReadOnlySpan<ComparisonOpKindId> ComparisonKinds
-            => array(ComparisonOpKindId.Eq, ComparisonOpKindId.Lt, ComparisonOpKindId.Gt);            
+        public static ReadOnlySpan<ComparisonOpKind> ComparisonKinds
+            => array(ComparisonOpKind.Eq, ComparisonOpKind.Lt, ComparisonOpKind.Gt);            
 
         /// <summary>
         /// Evaluates an identified unary operator over a supplied operand
@@ -93,14 +93,14 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.All)]
-        public static Vector128<T> eval<T>(ComparisonOpKindId kind, Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> eval<T>(ComparisonOpKind kind, Vector128<T> a, Vector128<T> b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonOpKindId.Eq: return equals(a,b);
-                case ComparisonOpKindId.Lt: return lt(a,b);
-                case ComparisonOpKindId.Gt: return gt(a,b);
+                case ComparisonOpKind.Eq: return equals(a,b);
+                case ComparisonOpKind.Lt: return lt(a,b);
+                case ComparisonOpKind.Gt: return gt(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }         
         }
@@ -113,14 +113,14 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> eval<T>(ComparisonOpKindId kind, Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> eval<T>(ComparisonOpKind kind, Vector256<T> a, Vector256<T> b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonOpKindId.Eq: return equals(a,b);
-                case ComparisonOpKindId.Lt: return lt(a,b);
-                case ComparisonOpKindId.Gt: return gt(a,b);
+                case ComparisonOpKind.Eq: return equals(a,b);
+                case ComparisonOpKind.Lt: return lt(a,b);
+                case ComparisonOpKind.Gt: return gt(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }         
         }
@@ -225,15 +225,15 @@ namespace Z0.Logix
         /// <param name="count">The shift bit count</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector128<T> eval<T>(ShiftOpKindId kind, Vector128<T> a, [Imm] byte count)
+        public static Vector128<T> eval<T>(ShiftOpKind kind, Vector128<T> a, [Imm] byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKindId.Sll: return sll(a,count);
-                case ShiftOpKindId.Srl: return srl(a,count);
-                case ShiftOpKindId.Rotl: return rotl(a,count);
-                case ShiftOpKindId.Rotr: return rotr(a,count);
+                case ShiftOpKind.Sll: return sll(a,count);
+                case ShiftOpKind.Srl: return srl(a,count);
+                case ShiftOpKind.Rotl: return rotl(a,count);
+                case ShiftOpKind.Rotr: return rotr(a,count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -246,15 +246,15 @@ namespace Z0.Logix
         /// <param name="count">The shift amount</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector256<T> eval<T>(ShiftOpKindId kind, Vector256<T> a, [Imm] byte count)
+        public static Vector256<T> eval<T>(ShiftOpKind kind, Vector256<T> a, [Imm] byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKindId.Sll: return sll(a,count);
-                case ShiftOpKindId.Srl: return srl(a,count);
-                case ShiftOpKindId.Rotl: return rotl(a,count);
-                case ShiftOpKindId.Rotr: return rotr(a,count);
+                case ShiftOpKind.Sll: return sll(a,count);
+                case ShiftOpKind.Srl: return srl(a,count);
+                case ShiftOpKind.Rotl: return rotl(a,count);
+                case ShiftOpKind.Rotr: return rotr(a,count);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -318,46 +318,27 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryOp<Vector128<T>> lookup<T>(N128 w,ComparisonOpKindId kind)
+        public static BinaryOp<Vector128<T>> lookup<T>(N128 w,ComparisonOpKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ComparisonOpKindId.Eq: return equals;
-                case ComparisonOpKindId.Lt: return lt;
-                case ComparisonOpKindId.Gt: return gt;
+                case ComparisonOpKind.Eq: return equals;
+                case ComparisonOpKind.Lt: return lt;
+                case ComparisonOpKind.Gt: return gt;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryOp<Vector256<T>> lookup<T>(N256 w, ComparisonOpKindId kind)
+        public static BinaryOp<Vector256<T>> lookup<T>(N256 w, ComparisonOpKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ComparisonOpKindId.Eq: return equals;
-                case ComparisonOpKindId.Lt: return lt;
-                case ComparisonOpKindId.Gt: return gt;
-                default: throw new NotSupportedException(sig<T>(kind));
-            }
-        }
-
-        /// <summary>
-        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
-        /// </summary>
-        /// <param name="kind">The operator kind</param>
-        /// <typeparam name="T">The primal vector component type</typeparam>
-        [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<Vector128<T>> lookup<T>(N128 w, ShiftOpKindId kind)
-            where T : unmanaged
-        {
-            switch(kind)
-            {
-                case ShiftOpKindId.Sll: return sll;
-                case ShiftOpKindId.Srl: return srl;
-                case ShiftOpKindId.Rotl: return rotl;
-                case ShiftOpKindId.Rotr: return rotr;
+                case ComparisonOpKind.Eq: return equals;
+                case ComparisonOpKind.Lt: return lt;
+                case ComparisonOpKind.Gt: return gt;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -368,15 +349,34 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, NumericClosures(NumericKind.Integers)]
-        public static Shifter<Vector256<T>> lookup<T>(N256 w, ShiftOpKindId kind)
+        public static Shifter<Vector128<T>> lookup<T>(N128 w, ShiftOpKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKindId.Sll: return sll;
-                case ShiftOpKindId.Srl: return srl;
-                case ShiftOpKindId.Rotl: return rotl;
-                case ShiftOpKindId.Rotr: return rotr;
+                case ShiftOpKind.Sll: return sll;
+                case ShiftOpKind.Srl: return srl;
+                case ShiftOpKind.Rotl: return rotl;
+                case ShiftOpKind.Rotr: return rotr;
+                default: throw new NotSupportedException(sig<T>(kind));
+            }
+        }
+
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+        [Op, NumericClosures(NumericKind.Integers)]
+        public static Shifter<Vector256<T>> lookup<T>(N256 w, ShiftOpKind kind)
+            where T : unmanaged
+        {
+            switch(kind)
+            {
+                case ShiftOpKind.Sll: return sll;
+                case ShiftOpKind.Srl: return srl;
+                case ShiftOpKind.Rotl: return rotl;
+                case ShiftOpKind.Rotr: return rotr;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

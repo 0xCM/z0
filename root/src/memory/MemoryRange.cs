@@ -56,7 +56,6 @@ namespace Z0
         public static bool operator>=(MemoryRange a, MemoryRange b)
             => a.Start >= b.Start;
 
-
         /// <summary>
         /// Attempts to parse an address segment in standard form, [start,end]
         /// </summary>
@@ -67,8 +66,8 @@ namespace Z0
                 let inner = src.Substring(i0 + 1, i1 - i0 - 1)
                 let parts = inner.Split(text.comma()).Trim()
                 where parts.Length == 2
-                from start in NumericParser.ParseHex(parts[0])
-                from end in NumericParser.ParseHex(parts[1])
+                from start in Hex.parse(parts[0]).ToOption()
+                from end in Hex.parse(parts[1]).ToOption()
                 select Define(start, end);
                                 
 

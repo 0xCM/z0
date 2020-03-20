@@ -11,26 +11,16 @@ namespace Z0
     using static Root;
 
     public readonly struct GenericMethod
-    {
-        // [MethodImpl(Inline)]
-        // public static GenericMethod? From(MethodInfo src)
-        // {
-        //     var kind = src.GenericState(false);
-        //     if(kind.IsSome())
-        //         return new GenericMethod(src,kind);
-        //     else
-        //         return null;            
-        // }
-        
+    {        
         [MethodImpl(Inline)]
-        GenericMethod(MethodInfo src, GenericState kind)
+        GenericMethod(MethodInfo src, GenericStateKind kind)
         {
             this.Element = src;
             this.Kind = kind;
         }
         public MethodInfo Element  {get;}
 
-        public GenericState Kind {get;}
+        public GenericStateKind Kind {get;}
 
     }
 }
