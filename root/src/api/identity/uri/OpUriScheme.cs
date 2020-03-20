@@ -26,12 +26,12 @@ namespace Z0
         /// <summary>
         /// Marker for stateless hosted operations
         /// </summary>
-        Stateless,
+        Type,
 
         /// <summary>
         /// Marker for serviced hosted operations
         /// </summary>
-        Serviced,
+        Svc,
 
         /// <summary>
         /// Marker for memory-located operations

@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Identifies binary arithmetic operators classes
     /// </summary>
-    public enum BinaryArithmeticKindId : ulong
+    public enum BinaryArithmeticKind : ulong
     {
         /// <summary>
         /// The empty identity
@@ -34,6 +34,10 @@ namespace Z0
         Mod = Id.Mod,
 
         Clamp = Id.Clamp,
+
+        Distance = Id.Distance,
+
+        Dot = Id.Dot,
     }    
     
     public sealed class SubAttribute : A { public SubAttribute() : base(Sub) {} }
@@ -51,4 +55,21 @@ namespace Z0
     public sealed class DividesAttribute : A { public DividesAttribute() : base(Divides) {} }
 
     public sealed class DotAttribute : A { public DotAttribute() : base(Dot) {} }
+
+    public interface IArithmeticKind : IOpKind
+    {
+        
+    }
+
+    public interface IBinaryArithmeticKind : IArithmeticKind, IOpKind<BinaryArithmeticKind>
+    {
+        BinaryArithmeticKind IKind<BinaryArithmeticKind>.Class 
+            => Enums.parse<BinaryArithmeticKind>(KindId.ToString()).ValueOrDefault();
+    }    
+
+    partial class OpKinds
+    {
+
+
+    }
 }

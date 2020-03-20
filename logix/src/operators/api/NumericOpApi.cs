@@ -46,8 +46,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary arithmetic operators
         /// </summary>
-        public static ReadOnlySpan<BinaryArithmeticKindId> BinaryArithmeticKinds
-            => Enums.valarray<BinaryArithmeticKindId>();
+        public static ReadOnlySpan<BinaryArithmeticKind> BinaryArithmeticKinds
+            => Enums.valarray<BinaryArithmeticKind>();
 
         /// <summary>
         /// Advertises the supported comparison operators

@@ -18,7 +18,7 @@ namespace Z0
 
     }
 
-    [ApiHost("vdata")]
+    [ApiHost("api")]
     public static partial class Data
     {        
         const int IndexWidth = 8;

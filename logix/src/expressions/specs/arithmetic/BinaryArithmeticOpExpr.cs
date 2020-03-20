@@ -16,7 +16,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryArithmeticKindId OpKind {get;}
+        public BinaryArithmeticKind OpKind {get;}
 
         /// <summary>
         /// The left operand
@@ -28,7 +28,7 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> RightArg {get;}
 
-        public BinaryArithmeticOpExpr(BinaryArithmeticKindId op, IExpr<T> lhs, IExpr<T> rhs)
+        public BinaryArithmeticOpExpr(BinaryArithmeticKind op, IExpr<T> lhs, IExpr<T> rhs)
         {
             this.OpKind = op;
             this.LeftArg= lhs;

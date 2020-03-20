@@ -55,7 +55,7 @@ namespace Z0.Logix
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(BinaryArithmeticKindId kind)
+        public static string sig<T>(BinaryArithmeticKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 

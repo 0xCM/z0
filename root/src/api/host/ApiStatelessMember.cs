@@ -28,7 +28,7 @@ namespace Z0
 
         public OpKindId? KindId {get;}
 
-        public OpUri Uri => OpUri.hosted(this);
+        public OpUri Uri => OpUri.type(this);
 
         [MethodImpl(Inline)]
         public static ApiStatelessMember Define(ApiHostUri host, OpIdentity id, MethodInfo src)

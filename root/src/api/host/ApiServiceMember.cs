@@ -28,7 +28,7 @@ namespace Z0
 
         public OpKindId? KindId {get;}
 
-        public OpUri Uri => OpUri.serviced(this);
+        public OpUri Uri => OpUri.service(this);
 
         [MethodImpl(Inline)]
         public static ApiServiceMember Define(ApiHostUri host, OpIdentity id, MethodInfo src)

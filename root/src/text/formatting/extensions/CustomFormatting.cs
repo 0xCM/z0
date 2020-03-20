@@ -26,26 +26,6 @@ namespace Z0
         public static string Format<T>(this T src)
             where T : ICustomFormattable
                 => src.Format();
-
-        /// <summary>
-        /// Formats a type that provides intrinsic format capability
-        /// </summary>
-        /// <param name="src">The value to format</param>
-        /// <typeparam name="T">The formattable value type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Format<T>(this T src, IFormatConfig config)
-            where T : IConfiguredCustomFormattable
-                => src.Format(config);
-
-        /// <summary>
-        /// Formats a type that provides intrinsic format capability
-        /// </summary>
-        /// <param name="src">The value to format</param>
-        /// <typeparam name="T">The formattable value type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Format<T,C>(this T src, C config)
-            where T : IConfiguredCustomFormattable<C>
-                => src.Format(config);
  
         public static IEnumerable<string> FormatLines<F>(this IEnumerable<F> items)
             where F : ICustomFormattable

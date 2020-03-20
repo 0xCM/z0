@@ -39,9 +39,25 @@ namespace Z0
         /// Writes formattables to the console in a contiguous block
         /// </summary>
         /// <param name="content">The content to print</param>    
-        public static void print<F>(params F[] content)
+        public static void print<F>(F src, AppMsgColor color)
             where F : ICustomFormattable
-                => T.WriteLines(content);
+                => T.WriteLine(src, color);
+
+        /// <summary>
+        /// Writes formattables to the console in a contiguous block
+        /// </summary>
+        /// <param name="content">The content to print</param>    
+        public static void print<F>(F src)
+            where F : ICustomFormattable
+                => T.WriteLine(src, AppMsgColor.Green);
+
+        /// <summary>
+        /// Writes formattables to the console in a contiguous block
+        /// </summary>
+        /// <param name="content">The content to print</param>    
+        public static void print<F>(params F[] src)
+            where F : ICustomFormattable
+                => T.WriteLines(src);
 
         /// <summary>
         /// Writes formattables to the console in a contiguous block using a specified foreground color

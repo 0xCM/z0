@@ -7,6 +7,7 @@
 namespace Z0.Asm.Check
 { 
     using R = Z0.Resolutions;
+    using static Root;
 
     class App : ConsoleApp<App,IAsmContext>
     {
@@ -19,20 +20,21 @@ namespace Z0.Asm.Check
                 R.Blocks.Resolution, R.Fixed.Resolution, R.Math.Resolution,
                 R.GMath.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
                 R.IntrinsicsSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
-                R.Root.Resolution,R.Vectorized.Resolution};
+                R.Root.Resolution,R.Vectorized.Resolution, R.VData.Resolution};
 
 
         static IAppSettings LoadSettings()
         {
-            var dir = Env.Current.DevDir + FolderName.Define("asm");
+            var dir = Env.Current.DevDir + RelativeLocation.Define("asm/app");
             var path = dir + FileName.Define("config.json");
             return AppSettings.Load(path);
         }
 
         static IAsmContext CreateContext()
         {
-
-            return AsmContext.New(Resolutions.Assemble(), LoadSettings());
+            var settings = LoadSettings();
+            iter(settings.All, term.print);
+            return AsmContext.New(Resolutions.Assemble(), settings);
         }
 
         public App()
@@ -41,13 +43,18 @@ namespace Z0.Asm.Check
 
         }
             
-        protected override void Execute(params string[] args)
+        void ExecuteValidationWorkflow()
         {
             var rng = Rng.Pcg64(Seed64.Seed05);                
             var context = AsmWorkflowContext.Rooted(Context, rng);
             using var host = ValidationHost.Create(context);
-            //host.EmitArtifacts();
             host.Run();
+
+        }
+        protected override void Execute(params string[] args)
+        {
+
+            ExecuteValidationWorkflow();
         }
 
         public static void Main(params string[] args) { Run(args); }

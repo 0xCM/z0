@@ -36,21 +36,10 @@ namespace Z0
 
     }
 
-    public interface IConfiguredCustomFormattable : ICustomFormattable
+    public interface IConfiguredFormattable : ICustomFormattable
     {
         string Format(IFormatConfig config);        
-
     }
-
-    public interface IConfiguredCustomFormattable<C> : IConfiguredCustomFormattable
-    {
-        string Format(C config);
-
-        [MethodImpl(Inline)]
-        string IConfiguredCustomFormattable.Format(IFormatConfig config)
-            => Format((C)config);
-    }
-
 
     /// <summary>
     /// Characterizes a type that formats a parametrically-specified type
@@ -60,4 +49,15 @@ namespace Z0
     {
         
     }    
+
+    public interface IFormattable<F,C> : IFormattable<F>, IConfiguredFormattable
+        where F : IFormattable<F,C>
+    {
+        string Format(C config);
+
+        [MethodImpl(Inline)]
+        string IConfiguredFormattable.Format(IFormatConfig config)
+            => Format((C)config);
+    }
+
 }

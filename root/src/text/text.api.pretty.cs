@@ -375,13 +375,17 @@ namespace Z0
         public static string remove(string text, string substring)
             => text.Replace(substring, String.Empty);
 
-
         /// <summary>
-        /// Encloses the potential text in quotation marks
+        /// Encloses text in quotation marks if nonempty; otherwirse returns empty
         /// </summary>
-        /// <param name="text">The text to be quoted</param>
-        public static string enquote(Option<string> text)
-            => enquote(text ? text.ValueOrDefault() ?? String.Empty : String.Empty);
+        /// <param name="src">The text to be quoted</param>
+        public static string enquote(string src)
+        {
+            if(!string.IsNullOrWhiteSpace(src))
+                return concat(AsciSym.Quote, src, AsciSym.Quote);
+            else
+                return string.Empty;
+        }
 
         /// <summary>
         /// Formats and concatenates an arbitrary number of elements

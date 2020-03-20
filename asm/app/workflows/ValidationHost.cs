@@ -14,12 +14,6 @@ namespace Z0.Asm.Check
     using static HostCaptureWorkflow;
     using static AsmServiceMessages;
 
-    public class ValidationHostConfig
-    {
-
-
-        
-    }
 
     class ValidationHost : TestContext<ValidationHost,IAsmWorkflowContext>, IAsmValidationHost
     {                

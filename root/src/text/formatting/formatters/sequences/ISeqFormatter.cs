@@ -40,7 +40,7 @@ namespace Z0
 
 
     public interface IElementConfiguredSeqFormatter<T,C> : ISeqFormatter<T,C>
-        where T : IConfiguredCustomFormattable
+        where T : IConfiguredFormattable
         where C : ISeqFormatConfig
     {
         string FormatItem(T src, IFormatConfig c)
@@ -48,7 +48,7 @@ namespace Z0
     }      
 
     public interface IElementConfiguredSeqFormatter<T,C,E> : IElementConfiguredSeqFormatter<T,C>
-        where T : IConfiguredCustomFormattable
+        where T : IConfiguredFormattable
         where C : ISeqFormatConfig
         where E : IFormatConfig
     {

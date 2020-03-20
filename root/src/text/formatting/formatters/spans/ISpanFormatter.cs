@@ -35,7 +35,7 @@ namespace Z0
     }
 
    public interface IElementConfiguredSpanFormatter<T,C> : ISpanFormatter<T>, IElementConfiguredSeqFormatter<T,C>
-        where T : IConfiguredCustomFormattable
+        where T : IConfiguredFormattable
         where C : ISeqFormatConfig
     {
         string Format(ReadOnlySpan<T> src, in C config);
@@ -45,7 +45,7 @@ namespace Z0
     }
 
    public interface IElementConfiguredSpanFormatter<T,C,E> : IElementConfiguredSpanFormatter<T,C>, IElementConfiguredSeqFormatter<T,C,E>
-        where T : IConfiguredCustomFormattable
+        where T : IConfiguredFormattable
         where C : ISeqFormatConfig
         where E : IFormatConfig
     {

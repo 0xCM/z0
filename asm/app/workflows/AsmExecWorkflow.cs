@@ -101,7 +101,6 @@ namespace Z0.Asm.Check
         IApiCorrelator Correlator
             => Context.ApiCorrelator();
         
-
         public void Run()
         {
             using var buffers = BufferSeq.alloc(BufferSize, BufferCount);

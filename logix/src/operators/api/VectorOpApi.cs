@@ -260,25 +260,25 @@ namespace Z0.Logix
         }
 
         [Op, NumericClosures(NumericKind.All)]
-        public static Vector128<T> eval<T>(BinaryArithmeticKindId kind, Vector128<T> x, Vector128<T> y)
+        public static Vector128<T> eval<T>(BinaryArithmeticKind kind, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryArithmeticKindId.Add: return add(x,y);
-                case BinaryArithmeticKindId.Sub: return sub(x,y);
+                case BinaryArithmeticKind.Add: return add(x,y);
+                case BinaryArithmeticKind.Sub: return sub(x,y);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.All)]
-        public static Vector256<T> eval<T>(BinaryArithmeticKindId kind, Vector256<T> x, Vector256<T> y)
+        public static Vector256<T> eval<T>(BinaryArithmeticKind kind, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryArithmeticKindId.Add: return add(x,y);
-                case BinaryArithmeticKindId.Sub: return sub(x,y);
+                case BinaryArithmeticKind.Add: return add(x,y);
+                case BinaryArithmeticKind.Sub: return sub(x,y);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

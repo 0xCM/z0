@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;    
     using System.Linq;
 
@@ -51,23 +52,19 @@ namespace Z0
 
         AppSettings(IPairProvider<string> provider)
         {
-
-            this.Pairs = provider.Pairs;
-            
+            this.Pairs = provider.Pairs;            
         }
 
         public IEnumerable<Pair<string>> Pairs {get;}
-                
-        
-        void IndexPairs()
-        {
-            Index = Pairs.Select(x => (x.Left, x.Right)).ToDictionary();
-        }
-
-        Dictionary<string,string> Index;                
-
+                        
         public Option<string> Setting(string name)
-            => Index.TryGetValue(name, out var value) ? some(value) : none<string>();
+        {
+            var matches = Pairs.Where(p => p.Left == name).ToArray();
+            if(matches.Length == 0)
+                return none<string>();
+            else
+                return matches[0].Right;
+        }
 
         public Option<T> Setting<T>(string name)        
         {
@@ -82,7 +79,10 @@ namespace Z0
             return none<T>();
         }
 
+        public IEnumerable<AppSetting> All
+            => from p in Pairs select new AppSetting(p.Left, p.Right);        
+
         public string this[string name]
-            => Index.TryGetValue(name, out var value) ? value : string.Empty;
+            => Setting(name).ValueOrDefault(string.Empty);
     }    
 }

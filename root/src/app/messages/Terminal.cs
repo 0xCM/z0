@@ -140,24 +140,36 @@ namespace Z0
                 WriteLine(msg, msg.Color); 
         }
 
-        public void WriteLines<F>(params F[] formattables)
+        public void WriteLines<F>(params F[] src)
             where F : ICustomFormattable
         {
             lock(locker)            
             {
-                foreach(var msg in formattables)
-                    Console.WriteLine(msg);
+                foreach(var item in src)
+                    Console.WriteLine(item.Format());
             }            
         }
 
-        public void WriteLines<F>(AppMsgColor color, params F[] formattables)
+        public void WriteLine<F>(F src, AppMsgColor color)
             where F : ICustomFormattable
         {
             lock(locker)            
             {
                 var current = Console.ForegroundColor;
                 Console.ForegroundColor = (ConsoleColor)color;
-                foreach(var msg in formattables)
+                Console.WriteLine(src.Format());
+                Console.ForegroundColor = current;
+            }
+        }
+
+        public void WriteLines<F>(AppMsgColor color, params F[] src)
+            where F : ICustomFormattable
+        {
+            lock(locker)            
+            {
+                var current = Console.ForegroundColor;
+                Console.ForegroundColor = (ConsoleColor)color;
+                foreach(var msg in src)
                     Console.WriteLine(msg);
                 Console.ForegroundColor = current;
             }            

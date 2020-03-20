@@ -72,8 +72,8 @@ namespace Z0.Logix
                 default:
                     switch(expr.OpKind)
                     {
-                        case BinaryArithmeticKindId.Add: return add(expr);
-                        case BinaryArithmeticKindId.Sub: return sub(expr);
+                        case BinaryArithmeticKind.Add: return add(expr);
+                        case BinaryArithmeticKind.Sub: return sub(expr);
                         default: throw new NotSupportedException(sig<T>(expr.OpKind));
                     }
             }

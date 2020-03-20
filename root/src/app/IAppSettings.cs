@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;    
+    using System.Runtime.CompilerServices;    
     using System.Linq;
 
     using static Root;
+
 
     public interface IPairProvider<T>
     {
@@ -34,6 +36,6 @@ namespace Z0
 
         string this[string name] {get;}
 
+        IEnumerable<AppSetting> All {get;}
     }
-
 }

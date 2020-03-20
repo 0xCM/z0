@@ -26,11 +26,11 @@ namespace Z0
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryArithmeticKindId kind)
+        public static string Format(this BinaryArithmeticKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryArithmeticKindId kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryArithmeticKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
              
         [MethodImpl(Inline)]
