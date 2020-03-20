@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
 
     public readonly struct HalfAdder
     {
@@ -31,7 +31,6 @@ namespace Z0
 
         static readonly AndGate<T> andg = Gates.and<T>();
 
-
         [MethodImpl(Inline)]
         public (T s, T c) Send(T a, T b)
             => (xorg.Send(a,b), andg.Send(a,b));
@@ -42,8 +41,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public (Vector256<T> s, Vector256<T> c) Send(Vector256<T> a, Vector256<T> b)
-            => (xorg.Send(a,b), andg.Send(a,b));
-        
+            => (xorg.Send(a,b), andg.Send(a,b));        
     }
-
 }

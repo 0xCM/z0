@@ -10,7 +10,7 @@
     <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />
     <ProjectReference Include="$(TopDir)time/src/z0.time.csproj" />
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />        
-    <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />        
+    <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(TopDir)vectorized/src/z0.vectorized.csproj" />            
     <ProjectReference Include="$(TopDir)identity/src/z0.identity.csproj" />    
     <ProjectReference Include="$(TopDir)dynamic/src/z0.dynamic.csproj" />

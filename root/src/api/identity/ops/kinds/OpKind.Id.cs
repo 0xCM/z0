@@ -16,37 +16,36 @@ namespace Z0
         /// </summary>
         None = 0,
 
-        False = 1,
+        And = 0b0001,
 
-        And,
+        CNonImpl = 0b0010,               
 
-        CNonImpl,
-     
-        LProject,
+        LProject = 0b0011, 
 
-        NonImpl,
+        NonImpl = 0b0100,
 
-        RProject,
+        RProject = 0b0101,
 
-        Xor,
+        Xor = 0b0110,
+
+        Or = 0b0111,
+
+        Nor = 0b1000, 
+
+        Xnor = 0b1001, 
+
+        RNot = 0b1010, 
+
+        Impl = 0b1011,
+
+        LNot = 0b1100, 
+
+        CImpl = 0b1101,
+
+        Nand = 0b1110, 
         
-        Or,
-
-        Nor,
-
-        Xnor,
-
-        RNot,
-
-        Impl,
-
-        LNot,
-
-        CImpl,
-
-        Nand,
+        BinaryTrue = 0b1111,
         
-        True,
 
         Not,
 
@@ -68,7 +67,27 @@ namespace Z0
 
         Add,
 
+        /// <summary>
+        /// Saturated addition
+        /// </summary>        
+        AddS,
+
+        /// <summary>
+        /// Horizontal addition
+        /// </summary>        
+        AddH,
+
+        /// <summary>
+        /// Horizontal saturated addition
+        /// </summary>        
+        AddHS,
+
+        /// <summary>
+        /// Horizontal subtraction
+        /// </summary>        
         Sub,
+
+        SubH,
 
         Mul,
 
@@ -134,8 +153,8 @@ namespace Z0
 
         Avgz,
 
-        AggregateMax,
+        AggMax,
 
-        AggregateMin,
+        AggMin,
     }
 }

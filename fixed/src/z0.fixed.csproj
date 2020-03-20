@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)polyrand/src/z0.polyrand.csproj" />
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Polyrand)"/>
   </ItemGroup>
 
 </Project>

@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
-    <ProjectReference Include="$(TopDir)math/src/z0.math.csproj" />
+    <ProjectReference Include="$(Math)" />
   </ItemGroup>
 
 </Project>

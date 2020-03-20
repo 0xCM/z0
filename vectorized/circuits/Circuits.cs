@@ -5,20 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
-
+    /// <summary>
+    /// Generic vectorized intrinsics
+    /// </summary>
+    [ApiHost("api")]
     public static class Circuits
     {
-
         [MethodImpl(Inline)]
         public static ref readonly HalfAdder<T> halfadder<T>()
             where T : unmanaged 
                 => ref HalfAdder<T>.Circuit;            
-
     }
-
 }

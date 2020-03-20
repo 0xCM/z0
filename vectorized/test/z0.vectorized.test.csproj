@@ -8,9 +8,9 @@
   <Import Project="$(TopDir)vectorized/z0.vectorized.exports.props"/>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
+    <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
-    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
+    <ProjectReference Include="$(TestApp)" />
   </ItemGroup>
 
 </Project>

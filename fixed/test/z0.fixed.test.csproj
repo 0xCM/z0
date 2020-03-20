@@ -6,14 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Nats)" />
     
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />        
-    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />  
+    <ProjectReference Include="$(TestApp)" />  
   </ItemGroup>
 
 </Project>

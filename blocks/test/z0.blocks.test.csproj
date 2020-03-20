@@ -6,15 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />        
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Blocks)" />        
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />        
-    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />  
+    <ProjectReference Include="$(TestApp)" />  
   </ItemGroup>
 
 </Project>

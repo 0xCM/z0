@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(TopDir)graphs/src/z0.graphs.csproj" />
     <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
     <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />

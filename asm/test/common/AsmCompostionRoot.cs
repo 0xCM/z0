@@ -21,7 +21,7 @@ namespace Z0
                 R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
                 R.Blocks.Resolution, R.Fixed.Resolution, R.Math.Resolution,
                 R.GMath.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
-                R.IntrinsicsSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
+                R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
                 R.Root.Resolution,R.Vectorized.Resolution}
                 ;
 

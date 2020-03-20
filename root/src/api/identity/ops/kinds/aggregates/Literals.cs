@@ -5,18 +5,24 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
+    
+    using Id = OpKindId;
 
-    public readonly struct AndGate : IBinaryLogicGate
+    public enum NumericAggregateKind : ulong
     {
-        internal static readonly AndGate Gate = default;        
-        
-        [MethodImpl(Inline)]
-        public bit Send(bit x, bit y)
-            => (x & y);
-    }
+        None = 0,
 
+        Sum = Id.Sum,
+
+        Avg = Id.Avg,
+
+        Avgz = Id.Avgz,
+
+        AggMax = Id.AggMax,
+
+        AggMin = Id.AggMin
+    }
 }

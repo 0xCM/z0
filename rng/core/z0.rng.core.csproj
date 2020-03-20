@@ -6,16 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
-    <ProjectReference Include="$(TopDir)symbolic/src/z0.symbolic.csproj" />
-
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
-    <ProjectReference Include="$(TopDir)polyrand/src/z0.polyrand.csproj" />
-
-    <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
-    <ProjectReference Include="$(TopDir)blocks/src/z0.blocks.csproj" />
-    <ProjectReference Include="$(TopDir)math/src/z0.math.csproj" />
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Symbolic)" />
+    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Polyrand)"/>
+    <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(Blocks)" />
+    <ProjectReference Include="$(Math)" />
+    <ProjectReference Include="$(GenericNumerics)" />
   </ItemGroup>
 
 </Project>

@@ -10,39 +10,19 @@ namespace Z0
     using static Root;
     using static BinaryArithmeticKind;
     
-    using Id = OpKindId;
     using A = OpKindAttribute;
 
-    /// <summary>
-    /// Identifies binary arithmetic operators classes
-    /// </summary>
-    public enum BinaryArithmeticKind : ulong
-    {
-        /// <summary>
-        /// The empty identity
-        /// </summary>
-        None = 0,
-
-        Add = Id.Add,
-
-        Sub = Id.Sub,
-
-        Mul = Id.Mul,
-
-        Div = Id.Div,
-
-        Mod = Id.Mod,
-
-        Clamp = Id.Clamp,
-
-        Distance = Id.Distance,
-
-        Dot = Id.Dot,
-    }    
-    
     public sealed class AddAttribute : A { public AddAttribute() : base(Add) {} }
 
+    public sealed class AddSAttribute : A { public AddSAttribute() : base(AddS) {} }
+
+    public sealed class AddHAttribute : A { public AddHAttribute() : base(AddH) {} }
+
+    public sealed class AddHSAttribute : A { public AddHSAttribute() : base(AddHS) {} }
+
     public sealed class SubAttribute : A { public SubAttribute() : base(Sub) {} }
+
+    public sealed class SubHAttribute : A { public SubHAttribute() : base(SubH) {} }
 
     public sealed class MulAttribute : A { public MulAttribute() : base(Mul) {} }
 
@@ -56,20 +36,4 @@ namespace Z0
 
     public sealed class DotAttribute : A { public DotAttribute() : base(Dot) {} }
 
-    public interface IArithmeticKind : IOpKind
-    {
-        
-    }
-
-    public interface IBinaryArithmeticKind : IArithmeticKind, IOpKind<BinaryArithmeticKind>
-    {
-        BinaryArithmeticKind IKind<BinaryArithmeticKind>.Class 
-            => Enums.parse<BinaryArithmeticKind>(KindId.ToString()).ValueOrDefault();
-    }    
-
-    partial class OpKinds
-    {
-
-
-    }
 }

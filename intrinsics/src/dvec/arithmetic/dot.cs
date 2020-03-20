@@ -19,7 +19,7 @@ namespace Z0
  
     partial class dvec
     {        
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dot]
         public static long vdot(Vector256<int> x, Vector256<int> y)
         {
             var product = Multiply(x,y);
@@ -27,7 +27,7 @@ namespace Z0
             return sum.Cell(0) + sum.Cell(1);
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Dot]
         public static ulong vdot(Vector256<uint> x, Vector256<uint> y)
         {
             var product = Multiply(x,y);

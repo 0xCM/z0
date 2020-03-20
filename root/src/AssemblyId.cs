@@ -31,9 +31,9 @@ public enum AssemblyId : ulong
 
     MathTest = Math | Test,
     
-    GMath = 50,
+    GenericNumerics = 50,
 
-    GMathTest = GMath | Test,
+    GeneriNumericsTest = GenericNumerics | Test,
 
     MathSvc = 51,
 
@@ -41,7 +41,7 @@ public enum AssemblyId : ulong
 
     IntrinsicsTest = Intrinsics | Test,
 
-    IntrinsicsSvc = 75,
+    VSvc = 75,
 
     BitCore = 80,
 
@@ -57,13 +57,9 @@ public enum AssemblyId : ulong
 
     VBits = 110,
 
-
-
     Logix = 120,
 
     LogixTest = Logix | Test,
-
-
 
     Asm = 300,
 
@@ -185,6 +181,12 @@ public enum AssemblyId : ulong
     BitGrids = 700,
 
     BitPack = 710,
+
+    Circuits = 720,
+
+    Testing = 730,
+
+    TestApp = Testing | App,
 
     Control = 1000,        
 

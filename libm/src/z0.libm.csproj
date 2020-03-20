@@ -7,7 +7,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
+    <ProjectReference Include="$(Root)" />
   </ItemGroup>
 
   <ItemGroup>

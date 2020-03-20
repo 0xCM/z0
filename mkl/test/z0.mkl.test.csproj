@@ -7,11 +7,11 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
-    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />        
-    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
+    <ProjectReference Include="$(TestApp)" />
     <ProjectReference Include="$(TopDir)mkl/src/z0.mkl.csproj" />        
 
   </ItemGroup>

@@ -8,15 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static OpKindId;
 
     using Id = OpKindId;
     using A = OpKindAttribute;
 
+    using static BinaryBitLogicOpKind;
+
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>    
-    public enum BinaryBitLogicOpKind : byte
+    public enum BinaryBitLogicOpKind : ulong
     {         
         /// <summary>
         /// The empty identity which, unfortunately conflicts with the inescapable defintion of 'False'
@@ -29,7 +30,7 @@ namespace Z0
         /// <remarks>
         /// bv(0000) = id(True)
         /// </remarks>
-        False = 0b000,
+        False = Id.None,
 
         /// <summary>
         /// Classifies a logical binary operator and(a,b) := bv(1000)
@@ -41,7 +42,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        And = 0b0001,
+        And = Id.And,
 
         /// <summary>
         /// Classifies a logical binary operator cnotimply(a,b) := and(a, ~b) = bv(0010)
@@ -54,7 +55,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        CNonImpl = 0b0010,               
+        CNonImpl = Id.CNonImpl,
 
         /// <summary>
         /// Classifes a logical binary operator left(a,b) := a = bv(1010)
@@ -67,7 +68,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        LProject = 0b0011, 
+        LProject = Id.LProject,
 
         /// <summary>
         /// Identifies a logical binary operator notimply(a,b) := and(~a, b) = bv(0100)
@@ -80,7 +81,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        NonImpl = 0b0100,        
+        NonImpl = Id.NonImpl,
 
         /// <summary>
         /// Classifies a logical binary operator right(a,b) := b = bv(1100)
@@ -93,7 +94,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        RProject = 0b0101,
+        RProject = Id.RProject,
 
         /// <summary>
         /// Classifies a logical binary operator xor(a,b) := bv(0110)
@@ -106,7 +107,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        Xor = 0b0110,
+        Xor = Id.Xor,
 
         /// <summary>
         /// Classifies a logical binary operator or(a,b) := bv(1110)
@@ -119,7 +120,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        Or = 0b0111,
+        Or = Id.Or,
 
         /// <summary>
         /// Classifies a logical binary operator that computes nor(a,b) := not(or(a,b)) = bv(0001)
@@ -132,7 +133,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        Nor = 0b1000, 
+        Nor = Id.Nor, 
 
         /// <summary>
         /// Classifies a binary operator xnor(a,b) := not(xor(a,b)) = bv(1001)
@@ -145,7 +146,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        Xnor = 0b1001, 
+        Xnor = Id.Xnor, 
 
         /// <summary>
         /// Classifes a logical binary operator rnot(a,b) := not(b) = bv(0011)
@@ -158,7 +159,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        RNot = 0b1010, 
+        RNot = Id.RNot, 
 
         /// <summary>
         /// Classifies a logical binary operator imply(a,b) := or(a, not(b)) = bv(1011)
@@ -171,7 +172,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        Impl = 0b1011,
+        Impl = Id.Impl,
 
         /// <summary>
         /// Classifies a logical binary operator lnot(a,b) := not(a) = bv(0101)
@@ -184,7 +185,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        LNot = 0b1100, 
+        LNot = Id.LNot, 
 
         /// <summary>
         /// Classifies a logical binary operator cimply(a,b) := or(not(a), b) = bv(1101)
@@ -197,7 +198,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        CImpl = 0b1101,
+        CImpl = Id.CImpl,
 
         /// <summary>
         /// Classifies a logical binary operator nand(a,b) := not(and(a,b)) = bv(0111)
@@ -210,7 +211,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        Nand = 0b1110, 
+        Nand = Id.Nand, 
         
         /// <summary>
         /// Classifies a logical binary operator true(a,b) = bv(1111)
@@ -218,82 +219,13 @@ namespace Z0
         /// <remarks>
         /// bv(1111) = id(False)
         /// </remarks>
-        True = 0b1111,
-    } 
-    
-    /// <summary>
-    /// Characterizes a type that represents an operation kind
-    /// </summary>
-    public interface IBitLogicKind : IOpKind
-    {
-        
-    }
-
-    public interface IBinaryBitlogicKind : IBitLogicKind, IOpKind<BinaryBitLogicOpKind>
-    {
-        BinaryBitLogicOpKind IKind<BinaryBitLogicOpKind>.Class 
-            => Enums.parse<BinaryBitLogicOpKind>(KindId.ToString()).ValueOrDefault();
-    }    
+        True = Id.BinaryTrue,
+    }     
 
     // ~ Attributes
     // ~ ----------------------------------------------------------------------
 
     public sealed class FalseAttribute : A { public FalseAttribute() : base(False) {} }
 
-    public sealed class AndAttribute : A { public AndAttribute() : base(And) {} }
-
-    public sealed class CNonImplAttribute : A { public CNonImplAttribute() : base(CNonImpl) {} }
-
-    public sealed class LProjectAttribute : A { public LProjectAttribute() : base(LProject) {} }
-
-    public sealed class NonImplAttribute : A { public NonImplAttribute() : base(NonImpl) {} }
-
-    public sealed class RProjectAttribute : A { public RProjectAttribute() : base(RProject) {} }
-
-    public sealed class OrAttribute : A { public OrAttribute() : base(Or) {} }
-
-    public sealed class XorAttribute : A { public XorAttribute() : base(Xor) {} }
-
-    public sealed class NorAttribute : A { public NorAttribute() : base(Nor) {} }
-
-    public sealed class XnorAttribute : A { public XnorAttribute() : base(Xnor) {} }
-
-    public sealed class RNotAttribute : A { public RNotAttribute() : base(RNot) {} }
-
-    public sealed class CImplAttribute : A { public CImplAttribute() : base(CImpl) {} }
-
-    public sealed class NandAttribute : A { public NandAttribute() : base(Nand) {} }
-
-    public sealed class TrueAttribute : A { public TrueAttribute() : base(True) {} }
-
-    public sealed class ImplAttribute : A { public ImplAttribute() : base(Impl) {} }
-
-    public sealed class LNotAttribute : A { public LNotAttribute() : base(LNot) {} }
-
-    public sealed class SelectAttribute : A { public SelectAttribute() : base(Select) {} }    
-
-
-    partial class OpKinds
-    {
-        public readonly struct And : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.And;}}
-
-        public readonly struct Or : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Or;}}
-
-        public readonly struct Xor : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Xor;}}
-
-        public readonly struct Nand : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Nand;}}
-
-        public readonly struct Nor : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Nor;}}
-
-        public readonly struct Xnor : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Xnor;}}
-
-        public readonly struct Impl : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Impl;}}
-
-        public readonly struct NonImpl : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.NonImpl;}}
-
-        public readonly struct CImpl : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.CImpl;}}
-
-        public readonly struct CNonImpl : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.CNonImpl;}}
-
-    }
+    public sealed class SelectAttribute : A { public SelectAttribute() : base(Id.Select) {} } 
 }

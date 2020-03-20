@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
-    using static OpKindId;
-
-    using A = OpKindAttribute;
+    using static Root;    
     using Id = OpKindId;
 
     /// <summary>
@@ -22,6 +19,16 @@ namespace Z0
         /// The empty identity
         /// </summary>
         None = 0,
+
+        /// <summary>
+        /// Classifies an arithmetic left-shift
+        /// </summary>
+        Sal = Id.Sal,
+
+        /// <summary>
+        /// Classifies an arithmetic right-shift
+        /// </summary>
+        Sar = Id.Sar,
 
         /// <summary>
         /// Classifies a logical left-shift
@@ -58,22 +65,4 @@ namespace Z0
         /// </summary>
         Xors = Id.Xors,
     }    
-    
-    public sealed class SllAttribute : A { public SllAttribute() : base(Sll) {} }
-
-    public sealed class SrlAttribute : A { public SrlAttribute() : base(Srl) {} }
-
-    public sealed class SalAttribute : A { public SalAttribute() : base(Sal) {} }
-
-    public sealed class SarAttribute : A { public SarAttribute() : base(Sar) {} }
-
-    public sealed class RotlAttribute : A { public RotlAttribute() : base(Rotl) {} }
-        
-    public sealed class RotrAttribute : A { public RotrAttribute() : base(Rotr) {} }
-
-    public sealed class XorSlAttribute : A { public XorSlAttribute() : base(XorSl) {} }
-
-    public sealed class XorSrAttribute : A { public XorSrAttribute() : base(XorSr) {} }
-
-    public sealed class XorsAttribute : A { public XorsAttribute() : base(Xors) {} }
 }
