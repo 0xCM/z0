@@ -22,7 +22,6 @@ namespace Z0.Asm.Check
         void Run();
     }
 
-
     public interface IAsmExecutor : IAsmWorkflowService
     {
         AsmExecResult ExecAction(Action action, OpUri f);   

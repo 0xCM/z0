@@ -31,8 +31,13 @@ namespace Z0.Asm.Check
         {            
             Root = RootEmissionPaths.Define(RootEmissionPath);
             Root.LogDir.Clear();
+            Settings = ValidationHostConfig.From(context.Settings);            
         }
-        
+
+        ValidationHostConfig Settings {get;}
+
+        RootEmissionPaths Root {get;}
+
         protected override void OnDispose()
         {
             term.print($"Writting app messages to {AppMsgLogPath}");
@@ -41,10 +46,10 @@ namespace Z0.Asm.Check
 
         public void Run()
         {
-            if(EmitArtifacts)
+            if(Settings.EmitArtifacts)
                 Emit();
 
-            if(CheckExecution)
+            if(Settings.CheckExecution)
                 Exec();
         }
 
@@ -60,30 +65,9 @@ namespace Z0.Asm.Check
 
         void Exec()
         {
-
             var workflow = AsmExecWorkflow.Create(Context, this, RootEmissionPath);
             workflow.Run();
         }
-
-        RootEmissionPaths Root {get;}
-
-        public bool EmitArtifacts {get;} = true;
-
-        public bool CheckExecution {get;} = true;
-
-        public bool HandleMembersLocated {get;} = true;
-
-        public bool HandleExtractsParsed {get;} = true;
-
-        public bool HandleFunctionsDecoded {get;} = false;
-
-        public bool HandleParsedExtractSaved {get;} = true;
-
-        public bool HandleHostReportSaved {get;} = false;
-
-        public bool HandleExtractReportCreated {get;} = false;
-
-        public bool HandleParseReportCreated {get;} = false;
 
         void OnEvent(MembersLocated e)
         {
@@ -142,22 +126,22 @@ namespace Z0.Asm.Check
         void ConnectReceivers(IHostCaptureEventBroker broker)
         {
             broker.Error.Receive(broker, OnEvent);
-            if(HandleExtractReportCreated)
+            if(Settings.HandleExtractReportCreated)
                 broker.ExtractReportCreated.Receive(broker, OnEvent);
 
-            if(HandleParseReportCreated)
+            if(Settings.HandleParseReportCreated)
                 broker.ParseReportCreated.Receive(broker, OnEvent);
 
-            if(HandleFunctionsDecoded)
+            if(Settings.HandleFunctionsDecoded)
                 broker.FunctionsDecoded.Receive(broker, OnEvent);
 
-            if(HandleParsedExtractSaved)            
+            if(Settings.HandleParsedExtractSaved)            
                 broker.HexSaved.Receive(broker, OnEvent);
 
-            if(HandleHostReportSaved)
+            if(Settings.HandleHostReportSaved)
                 broker.HostReportSaved.Receive(broker, OnEvent);
             
-            if(HandleMembersLocated)
+            if(Settings.HandleMembersLocated)
                 broker.MembersLocated.Receive(broker, OnEvent);
 
             Witness(broker.CaptureCatalogEnd.Receive(broker, OnEvent));

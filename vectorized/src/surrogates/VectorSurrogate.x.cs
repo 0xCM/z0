@@ -108,7 +108,6 @@ namespace Z0
         public static IVec128 Forget<T>(this IVec128<T> src)
             where T : unmanaged
                 => src;
-
         
         [MethodImpl(Inline)]
         public static IVec128 NonGeneric<T>(this IVec128<T> src)
@@ -130,7 +129,6 @@ namespace Z0
             
             return surrogate();
         }
-
 
         public static Imm8UnaryOp<V128<T>> Surrogate<T>(Imm8UnaryOp<Vector128<T>> src)
             where T : unmanaged

@@ -14,7 +14,7 @@ namespace Z0
 
     using static Z0.Root;
 
-    [ApiHost("vsurrogates")]
+    [ApiHost("surrogates")]
     public static partial class VectorSurrogates
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
@@ -126,6 +126,7 @@ namespace Z0
         public static IEnumerable<V256<T>> stream<T>(IEnumerable<Vector256<T>> src)
             where T : unmanaged
                 => src.Select(define);        
+
 
         [Op, NumericClosures(NumericKind.All)]
         public static IVec128 Convert<T>(IVec128<T> src, NumericKind dst)

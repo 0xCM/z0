@@ -11,7 +11,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static Nats;
     using VT = Z0.VectorType;
 
     public interface ISurrogate<S,T>
@@ -38,7 +37,6 @@ namespace Z0
 
             IVec Convert(NumericKind dst);
         }
-
 
         public interface IVec<S,V,T> : IVec, ISurrogate<S,V>, IFormattable<S>, IEquatable<S>, INullary<S>
             where S : struct, IVec<S,V,T>
@@ -117,7 +115,6 @@ namespace Z0
 
             IVec IVec.Convert(NumericKind dst)
                 => default;
-
         }
 
         public interface IVec256<T> : IVec256

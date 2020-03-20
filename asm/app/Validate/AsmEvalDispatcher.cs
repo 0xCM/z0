@@ -7,11 +7,12 @@ namespace Z0.Asm.Check
     using System;
     using System.Linq;
 
+    using C = Classes;
+    using R = ClassReps;
+    
+    using static OperatorClass;
     using static Root;
     using static Nats;
-
-    using static OperatorClass;
-    using Reps = ClassReps;
     
     class AsmEvalDispatcher : IAsmEvalDispatcher
     {        
@@ -37,10 +38,10 @@ namespace Z0.Asm.Check
         AsmEvaluator Evaluator(in BufferSeq buffers)
             => AsmEvaluator.Create(Context, buffers);
 
-        public void Publish(AppMsg msg)
+        public void Notify(AppMsg msg)
             => Sink.NotifyConsole(msg);
 
-        public void Publish(object content, AppMsgColor color = AppMsgColor.Green)
+        public void Notify(object content, AppMsgColor color = AppMsgColor.Green)
             => Sink.NotifyConsole(content, color);
 
         public bit EvalOperators(in BufferSeq buffers, ApiMemberCode[] api)
@@ -149,6 +150,71 @@ namespace Z0.Asm.Check
             }
         }
 
+       void Analyze<T>(in ApiMemberCode api, in BinaryEval<T> eval)
+            where T : unmanaged
+        {
+            var name = api.Member.Id.Name;
+            var sample = 0;
+            var sampleMax = 10;
+            Notify(api.Uri);
+
+            var xLabel = eval.LeftLabel;                
+            var yLabel = eval.RightLabel;
+
+            for(var i=0; i<eval.Count; i++, sample++)
+            {
+                ref readonly var input = ref eval.Source[i];
+                ref readonly var result = ref eval.Target;
+                var x = result.Target[i].Left;
+                var y = result.Target[i].Right;
+                if(i < sampleMax)
+                {
+                    Notify($"{name}[{xLabel}]{input} = {x}");
+                    Notify($"{name}[{yLabel}]{input} = {y}");
+                }
+                Claim.eq(x, y);
+            }
+        }
+
+        public void Dispatch(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp k)
+        {
+            var kid = api.Member.KindId;
+            int count = 128;
+            if(kid == 0 || kid == OpKindId.Div || kid == OpKindId.Mod)
+                return;
+
+            var nk = api.Method.ReturnType.NumericKind();
+
+            switch(nk)
+            {
+                case NumericKind.U8:
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<byte>()));
+                    break;
+                case NumericKind.I8:
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<sbyte>()));
+                    break;
+                case NumericKind.I16:
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<short>()));
+                    break;
+                case NumericKind.U16:
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<ushort>()));
+                    break;
+                case NumericKind.I32:
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<int>()));
+                    break;
+                case NumericKind.U32:
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<uint>()));
+                    break;
+                case NumericKind.I64:
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<long>()));
+                    break;
+                case NumericKind.U64:
+                    Analyze(api,Context.Evaluate(buffers, api, k.As<ulong>()));
+                    break;
+                default:
+                    break;
+            }            
+        }
 
         /// <summary>
         /// Loads executable code into an index-identifed target buffer and manufactures a fixed binary operator 
@@ -175,30 +241,6 @@ namespace Z0.Asm.Check
             where F : unmanaged, IFixed
                 => LoadFixedinaryOp<F>(buffers, index, src)(x,y);
 
-        void Analyze(in Points<N2,byte> src, in Points<N3,byte> dst, in ApiMemberCode api)
-        {
-            for(var i=0; i< 10; i++)
-            {
-                ref readonly var eval = ref dst[i];
-                var x0 = eval[n0];
-                var x1 = eval[n1];
-                var x2 = eval[n2];
-                Sink.EvaluatedPoint(api.Member.KindId.Format(),x0,x1,x2);
-            }
-        }
-
-        void Analyze(in Points<N2,ushort> src, in Points<N3,ushort> dst, in ApiMemberCode api)
-        {
-            for(var i=0; i< 10; i++)
-            {
-                ref readonly var eval = ref dst[i];
-                var x0 = eval[n0];
-                var x1 = eval[n1];
-                var x2 = eval[n2];
-                Sink.EvaluatedPoint(api.Member.KindId.Format(),x0,x1,x2);
-            }
-        }
-
         void Analyze(in Pairs<byte> src, in Triples<byte> dst, in ApiMemberCode api)
         {
             for(var i=0; i< 10; i++)
@@ -214,7 +256,7 @@ namespace Z0.Asm.Check
         bit Dispatch(in BufferSeq buffers, in Pairs<byte> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).Eval(api, Reps.BinaryOp, src);
+            var dst = Evaluator(buffers).Eval(api, R.BinaryOp, src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -231,26 +273,13 @@ namespace Z0.Asm.Check
             }
         }
 
-        void Analyze(in Points<N2,Fixed16> src, in Points<N3,Fixed16> dst, in ApiMemberCode api)
-        {
-            for(var i=0; i< 10; i++)
-            {
-                ref readonly var eval = ref dst[i];
-                var x0 = eval[n0];
-                var x1 = eval[n1];
-                var x2 = eval[n2];
-                Sink.EvaluatedPoint(api.Member.KindId.Format(),x0,x1,x2);
-            }
-        }
-
         bit Dispatch(in BufferSeq buffers, in Pairs<Fixed8> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).EvalFixed(api, Reps.BinaryOp, src);
+            var dst = Evaluator(buffers).EvalFixed(api, R.BinaryOp, src);
             Analyze(src, dst, api);
             return 1;
         }
-
 
         void Analyze<T>(in Pairs<T> src, in Triples<T> dst, in ApiMemberCode api)
             where T : unmanaged
@@ -265,7 +294,7 @@ namespace Z0.Asm.Check
         {        
             
             var evaluator = Context.Evaluator0(buffers, k);
-            var dst = evaluator.Eval(api, Reps.BinaryOp, src);
+            var dst = evaluator.Eval(api, R.BinaryOp, src);
             Analyze(src, dst, api);
             return dst;
         }

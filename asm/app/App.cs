@@ -26,14 +26,17 @@ namespace Z0.Asm.Check
         static IAppSettings LoadSettings()
         {
             var dir = Env.Current.DevDir + RelativeLocation.Define("asm/app");
-            var path = dir + FileName.Define("config.json");
-            return AppSettings.Load(path);
+            var src = dir + FileName.Define("config.json");
+            return AppSettings.Load(src);
         }
 
         static IAsmContext CreateContext()
         {
             var settings = LoadSettings();
-            iter(settings.All, term.print);
+            
+            // var config = ValidationHostConfig.From(settings);
+            // term.print(config);
+
             return AsmContext.New(Resolutions.Assemble(), settings);
         }
 
@@ -49,11 +52,9 @@ namespace Z0.Asm.Check
             var context = AsmWorkflowContext.Rooted(Context, rng);
             using var host = ValidationHost.Create(context);
             host.Run();
-
         }
         protected override void Execute(params string[] args)
         {
-
             ExecuteValidationWorkflow();
         }
 

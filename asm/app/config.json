@@ -1,5 +1,11 @@
 {
-    "A": "Root",
-    "B": "DataCore",
-    "C": "AsmCore"
+    "EmitArtifacts": "False",
+    "CheckExecution": "True",
+    "HandleMembersLocated": "True",
+    "HandleExtractsParsed": "True",
+    "HandleFunctionsDecoded": "False",
+    "HandleParsedExtractSaved": "True",
+    "HandleHostReportSaved": "False",
+    "HandleExtractReportCreated": "False",
+    "HandleParseReportCreated": "False"
 }

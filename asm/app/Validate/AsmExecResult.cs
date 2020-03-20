@@ -12,7 +12,6 @@ namespace Z0.Asm.Check
     using F = AsmExecField;
     using R = AsmExecResult;
 
-
     public enum WorkflowLogKind
     {
         None = 0,
@@ -56,7 +55,6 @@ namespace Z0.Asm.Check
         public static AsmExecResult Define<T>(int seq, in T id, Duration duration, AppMsg message)
             => new AsmExecResult(seq,$"{id}", message.Kind != AppMsgKind.Error, duration, message);
 
-
         AsmExecResult(int seq, string name, bool succeeded, Duration duration, AppMsg message)
         {
             this.Sequence = seq;
@@ -67,7 +65,6 @@ namespace Z0.Asm.Check
             this.Message = message;
         }
         
-
         [ReportField(F.Sequence)]
         public int Sequence {get;}
 

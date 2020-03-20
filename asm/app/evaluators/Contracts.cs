@@ -20,6 +20,8 @@ namespace Z0.Asm.Check
 
         bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api);
 
+        void Dispatch(in BufferSeq buffers, in ApiMemberCode api, C.BinaryOp k);    
+
         bit EvalFixedOperator(in BufferSeq buffers, in ApiMemberCode api);
     }
 

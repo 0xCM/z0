@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     /// <summary>
     /// Clasifies system-defined numeric primitive types
@@ -122,5 +125,14 @@ namespace Z0
         /// Defines a classification that includes kinds of width 64
         /// </summary>
         Width64 = U64 | I64 | F64
+    }
+
+    public readonly struct NumericKind<T>
+        where T : unmanaged
+    {
+        [MethodImpl(Inline)]
+        public static implicit operator NumericKind(NumericKind<T> src)
+            => NumericIdentity.kind<T>();
+
     }
 }

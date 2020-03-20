@@ -29,5 +29,7 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         public static Type EffectiveType(this Type src)
             => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
+        
+
     }
 }

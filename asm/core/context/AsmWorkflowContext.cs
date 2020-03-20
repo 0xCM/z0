@@ -15,7 +15,7 @@ namespace Z0.Asm
         public new IPolyrand Random {get;} 
 
         public static IAsmWorkflowContext Rooted(IComposedContext composed, IPolyrand random, AsmFormatConfig format = null)
-            => new AsmWorkflowContext(composed, random, AsmContextData.New(composed.Compostion, format ?? AsmFormatConfig.New, null, random));
+            => new AsmWorkflowContext(composed, random, AsmContextData.New(composed.Compostion, format ?? AsmFormatConfig.New, composed.Settings, random));
         
         AsmWorkflowContext(IContext root, IPolyrand random, AsmContextData state)
             : base(root, state)

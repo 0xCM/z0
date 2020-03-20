@@ -8,6 +8,11 @@ namespace Z0.Asm.Check
 
     public class ValidationHostConfig : AppSettingSet<ValidationHostConfig>
     {
+        public static ValidationHostConfig From(IAppSettings src)
+            => AppSettingSet<ValidationHostConfig>.From(src);
+
+        public AppSettingSet Ops => this;        
+
         public bool EmitArtifacts {get; set;} = true;
 
         public bool CheckExecution {get; set;} = true;
@@ -27,6 +32,6 @@ namespace Z0.Asm.Check
         public bool HandleParseReportCreated {get; set;} = false;        
 
         public override string ToString()
-            => this.Format();
+            => Ops.Format();
     }
 }
