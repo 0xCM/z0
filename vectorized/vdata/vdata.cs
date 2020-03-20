@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
 
-    public static partial class vdata
-    {
+    // public static class vdata
+    // {
 
-    }
+    // }
 
 
 }

@@ -1,0 +1,10 @@
+﻿<Project>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)vectorized/src/z0.vectorized.csproj" />
+    <ProjectReference Include="$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj" />
+    <ProjectReference Include="$(TopDir)vectorized/dvec/z0.vectorized.dvec.csproj" />
+    <ProjectReference Include="$(TopDir)vectorized/gvec/z0.vectorized.gvec.csproj" />
+  </ItemGroup>
+
+</Project>

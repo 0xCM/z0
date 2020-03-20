@@ -15,6 +15,7 @@
     <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
     <ProjectReference Include="$(TopDir)bits/fields/z0.bits.fields.csproj" />
     <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
+    <ProjectReference Include="$(TopDir)bits/bitpack/z0.bits.bitpack.csproj" />
 
 
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />    

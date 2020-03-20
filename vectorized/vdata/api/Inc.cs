@@ -5,13 +5,79 @@
 namespace Z0
 {
     using System;
-    
+    using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
+        
     using static HexConst;
     using static Root;    
     using static Nats;
 
     public static partial class Data
     {
+        /// <summary>
+        /// Creates a 128-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        public static Vector128<T> vincrements<T>(N128 w)
+            where T : unmanaged
+       {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return vload<T>(w,Inc128x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return vload<T>(w,Inc128x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
+                return vload<T>(w,Inc128x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return vload<T>(w,Inc128x64u);
+            else
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// Creates a 256-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        public static Vector256<T> vincrements<T>(N256 w)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return vload<T>(w,Inc256x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return vload<T>(w,Inc256x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int)  || typeof(T) == typeof(float))
+                return vload<T>(w,Inc256x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return vload<T>(w,Inc256x64u);
+            else
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// Creates a 512-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        public static Vector512<T> vincrements<T>(N512 w)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return vload<T>(w,Inc512x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return vload<T>(w,Inc512x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
+                return vload<T>(w,Inc512x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return vload<T>(w,Inc512x64u);
+            else
+                throw unsupported<T>();
+        }
+
         [Op]
         public static ReadOnlySpan<byte> Inc128x8u  
             => new byte[16]{0,1,2,3,4,5,6,7,8,9,10,B,12,13,14,F};

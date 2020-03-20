@@ -105,8 +105,8 @@ namespace Z0
             var t = z64;
             var count = vcount(ws,s);
         
-            var a0 = vpattern.vincrements(ws,1u);
-            var a1 = vpattern.vincrements(ws,a0.LastCell() + 1);
+            var a0 = gvec.vinc(ws,1u);
+            var a1 = gvec.vinc(ws,a0.LastCell() + 1);
             var b0 = dvec.vmul(a0,a1);
             var b1 = dvec.vmul(dvec.vswaphl(a0), dvec.vswaphl(a1));
             trace("x",a0.FormatAsList());

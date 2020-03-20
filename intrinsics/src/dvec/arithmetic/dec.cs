@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vdec(Vector128<sbyte> src)
-            =>  vsub(src, vpattern.vunits<sbyte>(n128));
+            =>  vsub(src, Data.vunits<sbyte>(n128));
 
         /// <summary>
         /// Decrements each component by 1
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vdec(Vector128<byte> src)
-            =>  vsub(src, vpattern.vunits<byte>(n128));
+            =>  vsub(src, Data.vunits<byte>(n128));
 
         /// <summary>
         /// Decrements each component by 1
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vdec(Vector128<short> src)
-            =>  vsub(src, vpattern.vunits<short>(n128));
+            =>  vsub(src, Data.vunits<short>(n128));
 
         /// <summary>
         /// Decrements each component by 1
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vdec(Vector128<ushort> src)
-            =>  vsub(src, vpattern.vunits<ushort>(n128));
+            =>  vsub(src, Data.vunits<ushort>(n128));
 
         /// <summary>
         /// Decrements each component by 1
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vdec(Vector128<int> src)
-            =>  vsub(src, vpattern.vunits<int>(n128));
+            =>  vsub(src, Data.vunits<int>(n128));
 
         /// <summary>
         /// Decrements each component by 1
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vdec(Vector128<uint> src)
-            =>  vsub(src, vpattern.vunits<uint>(n128));
+            =>  vsub(src, Data.vunits<uint>(n128));
 
         /// <summary>
         /// Decrements each component by 1
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<long> vdec(Vector128<long> src)
-            =>  vsub(src, vpattern.vunits<long>(n128));
+            =>  vsub(src, Data.vunits<long>(n128));
 
         /// <summary>
         /// Decrements each component by 1
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vdec(Vector128<ulong> src)
-            =>  vsub(src, vpattern.vunits<ulong>(n128));
+            =>  vsub(src, Data.vunits<ulong>(n128));
 
         /// <summary>
         /// Decrements each component by 1
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vdec(Vector256<sbyte> src)
-            =>  vsub(src, vpattern.vunits<sbyte>(n256));
+            =>  vsub(src, Data.vunits<sbyte>(n256));
 
         /// <summary>
         /// Decrements each component by 1
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vdec(Vector256<byte> src)
-            =>  vsub(src, vpattern.vunits<byte>(n256));
+            =>  vsub(src, Data.vunits<byte>(n256));
 
         /// <summary>
         /// Decrements each component by 1
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vdec(Vector256<short> src)
-            =>  vsub(src, vpattern.vunits<short>(n256));
+            =>  vsub(src, Data.vunits<short>(n256));
 
         /// <summary>
         /// Decrements each component by 1
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vdec(Vector256<ushort> src)
-            =>  vsub(src, vpattern.vunits<ushort>(n256));
+            =>  vsub(src, Data.vunits<ushort>(n256));
 
         /// <summary>
         /// Decrements each component by 1
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vdec(Vector256<int> src)
-            =>  vsub(src, vpattern.vunits<int>(n256));
+            =>  vsub(src, Data.vunits<int>(n256));
 
         /// <summary>
         /// Decrements each component by 1
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vdec(Vector256<uint> src)
-            =>  vsub(src, vpattern.vunits<uint>(n256));
+            =>  vsub(src, Data.vunits<uint>(n256));
 
         /// <summary>
         /// Decrements each component by 1
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vdec(Vector256<long> src)
-            =>  vsub(src, vpattern.vunits<long>(n256));
+            =>  vsub(src, Data.vunits<long>(n256));
 
         /// <summary>
         /// Decrements each component by 1
@@ -140,6 +140,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vdec(Vector256<ulong> src)
-            =>  vsub(src, vpattern.vunits<ulong>(n256));
+            =>  vsub(src, Data.vunits<ulong>(n256));
     }
 }

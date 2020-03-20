@@ -14,7 +14,7 @@ namespace Z0
     using static Nats;
         
     partial class gvec
-    {
+    {                        
         /// <summary>
         /// Computes the component-wise difference between two vectors
         /// </summary>

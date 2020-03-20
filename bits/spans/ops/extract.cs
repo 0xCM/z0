@@ -61,28 +61,28 @@ namespace Z0
         static byte extract(in BitSpan src, N8 n, int offset)
         {
             var v0 = vgeneric.vload(n256, head(extract(src, offset, bitsize<byte>())));
-            return (byte)bitpack.packlsb8(dvec.vcompact(v0,n128,z8));
+            return (byte)BitPack.packlsb8(dvec.vcompact(v0,n128,z8));
         }
 
         [MethodImpl(Inline)]
         static ushort extract(in BitSpan src, N16 n, int offset)
         {
             ref readonly var unpacked = ref head(extract(src, offset, bitsize<ushort>())); 
-            return bitpack.pack32(unpacked, n);
+            return BitPack.pack32(unpacked, n);
         }
 
         [MethodImpl(Inline)]
         static uint extract(in BitSpan src, N32 n, int offset)
         {
             ref readonly var unpacked = ref head(extract(src, offset, bitsize<uint>()));            
-            return bitpack.pack32(unpacked,n);            
+            return BitPack.pack32(unpacked,n);            
         }
 
         [MethodImpl(Inline)]
         static ulong extract(in BitSpan src, N64 n, int offset)
         {
             ref readonly var unpacked = ref head(extract(src, offset, bitsize<ulong>()));
-            return bitpack.pack32(unpacked,n);
+            return BitPack.pack32(unpacked,n);
         }
 
         [MethodImpl(Inline)]

@@ -57,7 +57,6 @@ public enum AssemblyId : ulong
 
     VBits = 110,
 
-    BitGrids = 700,
 
 
     Logix = 120,
@@ -179,10 +178,14 @@ public enum AssemblyId : ulong
     
     Symbolic = 410,
 
-    Polyrand = 420,
+    Polyrand = 420,    
 
     PolyrandTest = Polyrand | Test,
     
+    BitGrids = 700,
+
+    BitPack = 710,
+
     Control = 1000,        
 
     Svc = T16,

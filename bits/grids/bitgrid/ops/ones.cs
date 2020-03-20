@@ -111,7 +111,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => vpattern.vones<T>(width);
+                => gvec.vones<T>(width);
 
         /// <summary>
         /// Returns a 1-filled natural bitgrid 
@@ -128,7 +128,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => vpattern.vones<T>(width);
+                => gvec.vones<T>(width);
 
         [MethodImpl(Inline)]
         public static ref readonly BitGrid<M,N,T> ones<M,N,T>(in BitGrid<M,N,T> dst)

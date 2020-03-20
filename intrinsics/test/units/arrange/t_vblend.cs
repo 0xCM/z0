@@ -12,8 +12,7 @@ namespace Z0
     using static HexConst;
 
     public class t_vblend : t_vinx<t_vblend>
-    {
-            
+    {            
         public void vblend_256x32f_outline()
         {
             var w = n256;
@@ -26,8 +25,8 @@ namespace Z0
         public void vblend_256x8u_outline()
         {
             var w = n256;
-            var x = vpattern.vincrements(w, z8);
-            var y = vpattern.decrements(w, u8max);
+            var x = gvec.vinc(w, z8);
+            var y = gvec.vdec(w, u8max);
             var spec = v8u(vgeneric.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
             var z = gvec.vblend(x,y,spec);            
         }        
@@ -37,8 +36,8 @@ namespace Z0
             var w = n128;
             var alt = (uint)BitMasks.Msb16x8x1 << 16; 
             dvec.vcover(v16u(vgeneric.vbroadcast(w,alt)), out Vector128<byte> spec);
-            var x = vpattern.vincrements(w,z16);
-            var y = vpattern.decrements(w,u16max);
+            var x = gvec.vinc(w,z16);
+            var y = gvec.vdec(w,u16max);
             var z = gvec.vblend(x,y,spec);
         }
 
@@ -48,8 +47,8 @@ namespace Z0
             var altOdd = (uint)BitMasks.Msb16x8x1 << 16; 
             var altEven = (uint)BitMasks.Msb16x8x1; 
             dvec.vcover(v16u(vgeneric.vbroadcast(w,altOdd)), out Vector256<byte> spec);
-            var x = vpattern.vincrements(w,z16);
-            var y = vpattern.decrements(w,u16max);
+            var x = gvec.vinc(w,z16);
+            var y = gvec.vdec(w,u16max);
             var z = gvec.vblend(x,y,spec);
         }
 
@@ -155,7 +154,7 @@ namespace Z0
                 Claim.eq(vcell(lrpattern,i), parity.even(i) ? 0u : uint.MaxValue);
             
             var zero = vgeneric.vzero<uint>(n);            
-            var ones = vpattern.vones<uint>(n);
+            var ones = gvec.vones<uint>(n);
             Claim.eq(lrpattern, dvec.vblend(zero, ones, Blend8x32.LRLRLRLR));
             
         }
@@ -168,8 +167,8 @@ namespace Z0
             var y = vgeneric.vparts(n,8,9,A,B,C,D,E,F);
             var e = vgeneric.vparts(n,0,9,2,B,4,D,6,F);
             var o = vgeneric.vparts(n,8,1,A,3,C,5,E,7);
-            var mEven = VectorData.blendspec(n,false,w);
-            var mOdd = VectorData.blendspec(n,true,w);
+            var mEven = Data.blendspec(n,false,w);
+            var mOdd = Data.blendspec(n,true,w);
             Claim.eq(e,gvec.vblend(x,y,mEven));
             Claim.eq(o,gvec.vblend(x,y,mOdd));
         }
@@ -182,8 +181,8 @@ namespace Z0
             var y = vgeneric.vparts(n,4,5,6,7);
             var e = vgeneric.vparts(n,0,5,2,7);
             var o = vgeneric.vparts(n,4,1,6,3);
-            var mEven = VectorData.blendspec(n,false,w);
-            var mOdd = VectorData.blendspec(n,true,w);
+            var mEven = Data.blendspec(n,false,w);
+            var mOdd = Data.blendspec(n,true,w);
             Claim.eq(e,gvec.vblend(x,y,mEven));
             Claim.eq(o,gvec.vblend(x,y,mOdd));
 
@@ -205,8 +204,7 @@ namespace Z0
                 var y = ys.LoadVector();
                 Claim.eq(y,vgeneric.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
-                var m = VectorData.blendspec(n256,false,n64);
-
+                var m = Data.blendspec(n256,false,n64);
                 var es = Blocks.single<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = parity.odd(i) ? ys[i] : xs[i];

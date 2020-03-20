@@ -8,7 +8,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_vlut : UnitTest<t_vlut>
     {     
@@ -24,10 +25,10 @@ namespace Z0
             for(var i=0; i< table.Count; i++)
                 Claim.eq(table[i], (byte)i);
 
-            var x = vpattern.vincrements<byte>(n);
+            var x = Data.vincrements<byte>(n);
             Claim.eq(x,table.Data);   
 
-            var items = vpattern.vincrements<byte>(n, 64);
+            var items = gvec.vinc<byte>(n, 64);
             var selected = dvec.vshuf16x8(items, table);
             Claim.eq(items,selected);
         }
@@ -44,10 +45,10 @@ namespace Z0
             for(var i=0; i< table.Count; i++)
                 Claim.eq(table[i], (byte)i);
 
-            var x = vpattern.vincrements<byte>(n);
+            var x = Data.vincrements<byte>(n);
             Claim.eq(x,table.Data);   
 
-            var items = vpattern.vincrements<byte>(n, 64);
+            var items = gvec.vinc<byte>(n, 64);
             var selected = dvec.vshuf32x8(items, table);
             Claim.eq(items,selected);
 

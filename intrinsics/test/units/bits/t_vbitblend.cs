@@ -17,7 +17,7 @@ namespace Z0
             var n = n256;
             var mask = vgeneric.vbroadcast(n, BitMask.msb(n2,n1,z8));
             var zero = vgeneric.vzero<byte>(n);
-            var ones = vpattern.vones<byte>(n);
+            var ones = gvec.vones<byte>(n);
             var blend = vBits.vbitblend(zero,ones,mask);
             Claim.eq(blend,mask);
 

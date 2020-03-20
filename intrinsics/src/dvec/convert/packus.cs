@@ -55,8 +55,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector128<byte> vpackus_alt(Vector128<ushort> x, Vector128<ushort> y)
             => v8u(vor(
-                    vshuf16x8(x, VectorData.packusLo(n128,n16,n8)),
-                    vshuf16x8(y, VectorData.packusHi(n128,n16,n8))));
+                    vshuf16x8(x, Data.packusLo(n128,n16,n8)),
+                    vshuf16x8(y, Data.packusHi(n128,n16,n8))));
 
         /// <summary>
         ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128 
@@ -93,8 +93,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector128<ushort> vpackus_alt(Vector128<uint> x, Vector128<uint> y)
         {
-            var v1 = dvec.vshuf16x8(x, VectorData.packusLo(n128,n32,n16));
-            var v2 = dvec.vshuf16x8(y, VectorData.packusHi(n128,n32,n16));
+            var v1 = dvec.vshuf16x8(x, Data.packusLo(n128,n32,n16));
+            var v2 = dvec.vshuf16x8(y, Data.packusHi(n128,n32,n16));
             return v16u(dvec.vor(v1,v2));
         }
 
@@ -132,8 +132,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector256<byte> vpackus_alt(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var v1 = dvec.vshuf16x8(x,VectorData.packusLo(n256,n16,n8));
-            var v2 = dvec.vshuf16x8(y,VectorData.packusHi(n256,n16,n8));
+            var v1 = dvec.vshuf16x8(x, Data.packusLo(n256,n16,n8));
+            var v2 = dvec.vshuf16x8(y, Data.packusHi(n256,n16,n8));
             return v8u(dvec.vor(v1,v2));
         }
 
@@ -172,8 +172,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector256<ushort> vpackus_alt(Vector256<uint> x, Vector256<uint> y)
         {
-            var v1 = vshuf16x8(x, VectorData.packusLo(n256,n32,n16));
-            var v2 = vshuf16x8(y, VectorData.packusHi(n256,n32,n16));
+            var v1 = vshuf16x8(x, Data.packusLo(n256,n32,n16));
+            var v2 = vshuf16x8(y, Data.packusHi(n256,n32,n16));
             return v16u(vor(v1,v2));
         }
    }

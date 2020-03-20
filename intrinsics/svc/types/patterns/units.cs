@@ -24,7 +24,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => vpattern.vunits<T>(w);            
+            public Vector128<T> Invoke() => Data.vunits<T>(w);            
         }
 
         public readonly struct Units256<T> : IVPatternSource256<T>
@@ -38,7 +38,7 @@ namespace Z0
             public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => vpattern.vunits<T>(w);
+            public Vector256<T> Invoke() => Data.vunits<T>(w);
 
         }
     }

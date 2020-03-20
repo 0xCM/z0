@@ -63,7 +63,7 @@ namespace Z0
 
         public void clearalt_256x8()
         {
-            var tr = VectorData.vclearalt<byte>(n256);
+            var tr = Data.clearalt<byte>(n256);
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);

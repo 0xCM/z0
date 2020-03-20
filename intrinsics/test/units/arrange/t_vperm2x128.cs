@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_vperm2x128 : t_vinx<t_vperm2x128>
     {
@@ -30,7 +31,7 @@ namespace Z0
                 // [0, 1, 2, 3, 4, 5, 6, 7] |> DABC = [6, 7, 0, 1, 2, 3, 4, 5] - rotate right
                 var p0 = Perm2x4.DA;
                 var p1 = Perm2x4.BC;
-                var src = vpattern.vincrements<ulong>(n512);
+                var src = Data.vincrements<ulong>(n512);
                 var expect = vgeneric.vparts(n512,6, 7, 0, 1, 2, 3, 4, 5);
                 var actual = gvec.vperm2x128(src, p0, p1);
                 Claim.eq(actual,expect);
@@ -41,8 +42,5 @@ namespace Z0
             case1();
 
         }
-
-
-
     }
 }

@@ -45,7 +45,7 @@ namespace Z0.Asm.Check
         {
             var rng = Rng.Pcg64(Seed64.Seed05);                
             var context = AsmWorkflowContext.Rooted(Context, rng);
-            using var host = AsmValidationHost.Create(context);
+            using var host = ValidationHost.Create(context);
             //host.EmitArtifacts();
             host.Run();
         }

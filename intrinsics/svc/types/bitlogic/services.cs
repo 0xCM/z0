@@ -73,7 +73,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> @true()
-                => vpattern.vones<T>(n128);
+                => gvec.vones<T>(n128);
 
             [MethodImpl(Inline)]
             public Vector128<T> xnor(Vector128<T> a, Vector128<T> b)
@@ -140,7 +140,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> @true()
-                => vpattern.vones<T>(n256);
+                => gvec.vones<T>(n256);
 
             [MethodImpl(Inline)]
             public Vector256<T> xnor(Vector256<T> a, Vector256<T> b)

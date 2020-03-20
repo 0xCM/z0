@@ -7,13 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_vswaps : t_vinx<t_vswaps>
     {        
         public void vswap_128x8u()
         {
-            var src = vpattern.vincrements(n128, z8);
+            var src = gvec.vinc(n128, z8);
             var dst = dvec.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            
@@ -22,7 +23,7 @@ namespace Z0
 
         public void vswap_128x16u()
         {
-            var src = vpattern.vincrements(n128, z16);
+            var src = gvec.vinc(n128, z16);
             var dst = dvec.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            
@@ -84,7 +85,5 @@ namespace Z0
             var expect = Vector256.Create(2, 4, 8, 6, 10, 12, 14, 16);
             Claim.eq(expect, swapped);
         }
-
-
     }
 }

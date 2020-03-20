@@ -14,15 +14,47 @@ namespace Z0
     
     partial class gvec
     {
+        /// <summary>
+        /// Decrements each component by unit value
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vdec<T>(Vector128<T> src)
             where T : unmanaged
                 => vdec_u(src);
 
+        /// <summary>
+        /// Decrements each component by unit value
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vdec<T>(Vector256<T> src)
             where T : unmanaged
                 => vdec_u(src);
+
+        /// <summary>
+        /// Creates a 128-bit vector with components that decrease by unit step from an initial value
+        /// </summary>
+        /// <param name="first">The value of the first component</param>
+        /// <param name="step">The distance between adjacent components</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        public static Vector128<T> vdec<T>(N128 n, T first)
+            where T : unmanaged
+                => vsub(first, Data.decrements<T>(n));
+
+        /// <summary>
+        /// Creates a 256-bit vector with components that decrease by unit step from an initial value
+        /// </summary>
+        /// <param name="first">The value of the first component</param>
+        /// <param name="step">The distance between adjacent components</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        public static Vector256<T> vdec<T>(N256 n, T first)
+            where T : unmanaged
+                => vsub(first, Data.decrements<T>(n));
 
         [MethodImpl(Inline)]
         static Vector128<T> vdec_u<T>(Vector128<T> src)

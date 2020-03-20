@@ -22,5 +22,8 @@ bash $AddCmd
 export Kind=vbits
 bash $AddCmd
 
+export Kind=bitpack
+bash $AddCmd
+
 export Kind=test
 bash $AddCmd

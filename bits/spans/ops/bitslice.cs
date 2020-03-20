@@ -28,7 +28,7 @@ namespace Z0
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(count, src.Length - offset);
             Cells.copy(src.Bits, offset, len, dst);
-            return bitpack.pack<T>(dst);
+            return BitPack.pack<T>(dst);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(dst.Length, src.Length - offset);
             Cells.copy(src.Bits, offset, len, dst);
-            return bitpack.pack<T>(dst);
+            return BitPack.pack<T>(dst);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
             Span<bit> dst = new bit[bitsize<T>()];
             var len = math.min(dst.Length, src.Length);
             Cells.copy(src.Bits, 0, len, dst);
-            return bitpack.pack<T>(dst);
+            return BitPack.pack<T>(dst);
         }
 
         [MethodImpl(Inline)]
@@ -100,7 +100,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return bitpack.pack(unpacked,z8i);
+            return BitPack.pack(unpacked,z8i);
         }
 
         [MethodImpl(Inline)]
@@ -110,7 +110,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return bitpack.pack(unpacked,z8);
+            return BitPack.pack(unpacked,z8);
         }
 
         [MethodImpl(Inline)]
@@ -120,7 +120,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return bitpack.pack(unpacked,z16i);
+            return BitPack.pack(unpacked,z16i);
         }
 
         [MethodImpl(Inline)]
@@ -130,7 +130,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return bitpack.pack(unpacked,z16);
+            return BitPack.pack(unpacked,z16);
         }
 
         [MethodImpl(Inline)]
@@ -140,7 +140,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return bitpack.pack(unpacked,z32i);
+            return BitPack.pack(unpacked,z32i);
         }
 
         [MethodImpl(Inline)]
@@ -150,7 +150,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);
             var take = math.min(src.Bits.Length -offset, count);
             src.Bits.Slice(offset,take).CopyTo(unpacked);
-            return bitpack.pack(unpacked, z32);
+            return BitPack.pack(unpacked, z32);
         }
 
         [MethodImpl(Inline)]
@@ -160,7 +160,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return bitpack.pack(unpacked, z64i);
+            return BitPack.pack(unpacked, z64i);
         }
 
         [MethodImpl(Inline)]
@@ -170,7 +170,7 @@ namespace Z0
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
-            return bitpack.pack(unpacked, z64);
+            return BitPack.pack(unpacked, z64);
         }
     }
 }

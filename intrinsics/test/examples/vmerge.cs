@@ -24,8 +24,8 @@ namespace Z0
             var t = z32;
             var count = vgeneric.vcount(w,t);
 
-            var x = vpattern.vincrements(w,t);
-            var y = vpattern.vincrements(w, (x.LastCell() + 1));
+            var x = gvec.vinc(w,t);
+            var y = gvec.vinc(w, (x.LastCell() + 1));
             var z = dvec.vmergelo(x,y);
             var fmt = $"({x.Format()},{y.Format()}) -> {z.Format()}";
         }
@@ -52,7 +52,7 @@ namespace Z0
 
             void report()
             {
-                var x = vpattern.vincrements<byte>(n128);
+                var x = Data.vincrements<byte>(n128);
                 var y = dvec.vadd(x, vgeneric.vbroadcast(n128, (byte)16));
 
                 var lo = gvec.vmergelo(x,y);
@@ -68,8 +68,8 @@ namespace Z0
             {
                 var w = n256;
                 var t = z8;
-                var x = vpattern.vincrements(w,t);
-                var y = vpattern.vincrements(w, (byte)(x.LastCell() + 1));
+                var x = gvec.vinc(w,t);
+                var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
                 var z = dvec.vmergehi(x,y);
                 Notify($"mergehi");
                 Notify(x.Format(pad:2));
@@ -81,8 +81,8 @@ namespace Z0
             {
                 var w = n256;
                 var t = z8;
-                var x = vpattern.vincrements(w,t);
-                var y = vpattern.vincrements(w, (byte)(x.LastCell() + 1));
+                var x = gvec.vinc(w,t);
+                var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
                 var z = dvec.vmerge(x,y);
                 Notify(x.Format(pad:2));
                 Notify(y.Format(pad:2));

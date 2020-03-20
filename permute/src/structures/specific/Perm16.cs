@@ -29,13 +29,13 @@ namespace Z0
         /// Creates the identity permutation
         /// </summary>
         public static Perm16 identity()
-            => new Perm16(vpattern.vincrements<byte>(w));
+            => new Perm16(Data.vincrements<byte>(w));
 
         /// <summary>
         /// Creates the reversal of the identity permutation
         /// </summary>
         public static Perm16 reverse()
-            => new Perm16(vpattern.decrements<byte>(w));
+            => new Perm16(Data.decrements<byte>(w));
 
         Perm16(Vector128<byte> data)
             => this.data = data;

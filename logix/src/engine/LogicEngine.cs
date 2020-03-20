@@ -152,7 +152,7 @@ namespace Z0.Logix
         {
             expr.SetVars(a,b);
             var result = eval(expr);
-            return gvec.vtestc(result.Value, vpattern.vones<T>(n128));
+            return gvec.vtestc(result.Value, gvec.vones<T>(n128));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Z0.Logix
         {
             expr.SetVars(a,b);
             var result = eval(expr);
-            return gvec.vtestc(result.Value, vpattern.vones<T>(n256));
+            return gvec.vtestc(result.Value, gvec.vones<T>(n256));
         }
 
         /// <summary>
