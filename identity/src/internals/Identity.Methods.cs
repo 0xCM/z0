@@ -54,16 +54,17 @@ namespace Z0
             return OpIdentity.Define(id);
         }        
 
-        static string FormatParameterIdentity(this MethodInfo src)
-            => formatargs(IDI.ValueArgsOpen, IDI.ValueArgsClose, IDI.ArgSep, ParameterIdentities(src));
-
         static IEnumerable<string> TypeArgIdentities(this MethodInfo src)
             => src.GenericArguments().Select(targ => identify(targ).Identifier);
+
+        static string formatargs(char open, char close, char sep, IEnumerable<string> args)
+            => text.concat(open, string.Join(sep,args), close);
+
+        static string FormatParameterIdentity(this MethodInfo src)
+            => formatargs(IDI.ValueArgsOpen, IDI.ValueArgsClose, IDI.ArgSep, ParameterIdentities(src));
 
         static string FormatTypeArgIdentity(this MethodInfo src)
             => formatargs(IDI.TypeArgsOpen, IDI.TypeArgsClose, IDI.ArgSep, TypeArgIdentities(src));
 
-        static string formatargs(char open, char close, char sep, IEnumerable<string> args)
-            => text.concat(open, string.Join(sep,args), close);
     }
 }

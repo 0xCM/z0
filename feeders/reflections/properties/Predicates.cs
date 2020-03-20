@@ -8,10 +8,12 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
- 
-    using static ReflectionFlags;
+    using System.Runtime.CompilerServices;
+    using System.Linq.Expressions;
 
-    partial class RootReflections
+    using static ReflectionFlags;
+    
+    partial class Reflections
     {
         public static bool IsStatic(this PropertyInfo p)
             => p.GetGetMethod()?.IsStatic == true 

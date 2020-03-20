@@ -82,7 +82,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         static bool IsNatSpan(this Type t)
-            => NatSpan.@is(t);
+            => NatSpan.test(t);
 
         public static string testcase<W,C>(Type host, string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeNat

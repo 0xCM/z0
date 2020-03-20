@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to classify</param>
         public static bool IsSource(MethodInfo m)
-            => m.IsFunction() && m.HasArity(0);
+            => m.IsFunction() && m.HasArityValue(0);
 
         /// <summary>
         /// Determines whether a method has void return and has arity = 1

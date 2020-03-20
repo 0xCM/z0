@@ -8,11 +8,30 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Linq.Expressions;
 
-    using static Root;
- 
-    partial class RootReflections
+    using static ReflectionFlags;
+    
+    partial class Reflections
     {
+        /// <summary>
+        /// Raises an error if a method is nongeneric
+        /// </summary>
+        /// <param name="src">the source method</param>
+        public static void RequireGeneric(this MethodInfo src)        
+        {
+            if (src.IsNonGeneric())
+                throw src.RequireGenericError();
+        }
+
+        /// <summary>
+        /// Populates an exception with a message, but does not verify that the constraint has actually failed
+        /// </summary>
+        /// <param name="src">The source method</param>
+        public static Exception RequireGenericError(this MethodInfo src)
+            => new Exception($"The method {src} is nongenric");
+
         /// <summary>
         /// Returns the arguments supplied to a constructed generic method; if the method is 
         /// nongeneric, a generic type definition or some other variant, an empty result is returned
@@ -37,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> OpenGeneric(this IEnumerable<MethodInfo> src)
-            => src.Where(IsOpenGeneric);
+            => src.Where(m => m.IsOpenGeneric());
 
         /// <summary>
         /// Selects the closed generic methods from a stream
@@ -200,8 +219,5 @@ namespace Z0
         /// <param name="effective">Whether to yield effective types or types as reported by the framework reflection api</param>
         public static Type[] SuppliedTypeArgs(this MethodInfo m, bool effective = true)
             => m.IsConstructedGenericMethod ? m.GenericParameters(effective) : new Type[]{};
-
-
-
     }
 }

@@ -9,11 +9,11 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Linq.Expressions;
 
     using static ReflectionFlags;
-    using static Root;
-
-    partial class RootReflections
+    
+    partial class Reflections
     {
         /// <summary>
         /// Retrieves the public and non-public static properties declared by a type
@@ -42,6 +42,5 @@ namespace Z0
         /// <param name="this">The type to examine</param>
         public static IEnumerable<PropertyInfo> StaticProperties(this Type src)
             => src.GetProperties(BF_AllStatic);
-
     }
 }

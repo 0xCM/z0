@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsUnaryFunction(this MethodInfo m)
-            => m.IsFunction() && m.HasArity(1);
+            => m.IsFunction() && m.HasArityValue(1);
 
         /// <summary>
         /// Determines whether a method is a unary operator
@@ -63,14 +63,14 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBinaryFunction(this MethodInfo m)
-            => m.IsFunction() && m.HasArity(2);
+            => m.IsFunction() && m.HasArityValue(2);
 
         /// <summary>
         /// Determines whether a method defines a binary function
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsTernaryFunction(this MethodInfo m)
-            => m.IsFunction() && m.HasArity(3);
+            => m.IsFunction() && m.HasArityValue(3);
 
         /// <summary>
         /// Determines whether a method is a ternary operator

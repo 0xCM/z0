@@ -8,11 +8,24 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
- 
-    using static ReflectionFlags;
+    using System.Runtime.CompilerServices;
+    using System.Linq.Expressions;
 
-    partial class RootReflections
+    using static ReflectionFlags;
+    
+    partial class Reflections
     {
+
+        /// <summary>
+        /// Selects the instance properties from a stream
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        public static IEnumerable<PropertyInfo> Instance(this IEnumerable<PropertyInfo> src)    
+            =>  from p in src
+                let m = p.GetGetMethod() ?? p.GetSetMethod()                
+                where m != null && !m.IsStatic
+                select p;            
+
         /// <summary>
         /// Selects properaties from a source stream to which a parametrically-identified attribute is attached
         /// </summary>
@@ -77,6 +90,5 @@ namespace Z0
         /// <param name="src">The source properties</param>
         public static IEnumerable<Type> PropertyTypes(this IEnumerable<PropertyInfo> src)
             => src.Select(x => x.PropertyType);
-
     }
 }

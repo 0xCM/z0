@@ -8,12 +8,12 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Linq.Expressions;
 
-    using static Root;
     using static ReflectionFlags;
     
-
-    partial class RootReflections
+    partial class Reflections
     {
         /// <summary>
         /// Determines whether a parameter has a parametrically-identified attribute
@@ -28,7 +28,6 @@ namespace Z0
             => src.ParameterType.IsGenericParameter 
             || src.ParameterType.IsGenericMethodParameter 
             || src.ParameterType.IsGenericTypeParameter;
-
 
         /// <summary>
         /// Selects the method parameters that satisfy a predicate

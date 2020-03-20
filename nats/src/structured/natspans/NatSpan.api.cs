@@ -17,14 +17,8 @@ namespace Z0
         /// Determines whether a type is a natural span
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static bool @is(Type t)
-        {            
-            var query =    
-                from def in t.GenericDefinition() 
-                where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
-                select def;
-            return query.IsSome();            
-        }
+        public static bool test(Type t)
+            => t.GenericDefinition2() == typeof(NatSpan<,>) && t.IsClosedGeneric();
 
         /// <summary>
         /// Loads a bytespan of natural length from a generic source span

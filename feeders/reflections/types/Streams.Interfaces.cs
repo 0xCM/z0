@@ -13,9 +13,14 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    public static partial class Reflections
+    partial class Reflections
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
+        /// <summary>
+        /// Returns all interfaces realized by the type, including those inherited from
+        /// supertypes
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static IEnumerable<Type> Interfaces(this Type src)
+            => src.GetInterfaces() ?? new Type[]{};
     }
 }
