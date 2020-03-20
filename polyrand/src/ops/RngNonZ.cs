@@ -12,7 +12,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Polyfun
+    public static class RngNonz
     {        
         /// <summary>
         /// Produces a stream of nonzero uniformly random values
@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IRngStream<T> NonZeroStream<T>(this IPolyrand random, Interval<T> domain)
+        public static IRngStream<T> NonZStream<T>(this IPolyrand random, Interval<T> domain)
             where T : unmanaged
-                => PolyOps.stream(random.UniformStream(domain, x => Numeric.nonz(x)), random.RngKind);
+                => PolyStream.create(random.UniformStream(domain, x => Numeric.nonz(x)), random.RngKind);
 
         /// <summary>
         /// Queries the source for the next nonzero value within a range
@@ -31,9 +31,9 @@ namespace Z0
         /// <param name="min">The inclusive min value</param>
         /// <param name="max">The exclusive max value</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static T NonZero<T>(this IPolyrand src, T min, T max)
+        public static T NonZ<T>(this IPolyrand src, T min, T max)
             where T : unmanaged
-                => src.NonZeroStream<T>((min,max)).First();
+                => src.NonZStream<T>((min,max)).First();
 
         /// <summary>
         /// Queries the source for the next nonzero value within a range
@@ -41,9 +41,9 @@ namespace Z0
         /// <param name="src">The random source</param>
         /// <param name="domain">The range of potential values</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static T NonZero<T>(this IPolyrand src, Interval<T> domain)
+        public static T NonZ<T>(this IPolyrand src, Interval<T> domain)
             where T : unmanaged
-                => src.NonZeroStream<T>(domain).First();
+                => src.NonZStream<T>(domain).First();
 
         /// <summary>
         /// Queries the source for the next nonzero value less than a specified upper bound
@@ -52,9 +52,9 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <param name="max">The exclusive uper bound</param>
         [MethodImpl(Inline)]
-        public static T NonZero<T>(this IPolyrand src, T max)
+        public static T NonZ<T>(this IPolyrand src, T max)
             where T : unmanaged
-                => src.NonZeroStream<T>((minval<T>(),max)).First();
+                => src.NonZStream<T>((minval<T>(),max)).First();
 
         /// <summary>
         /// Queries the source for the next nonzero value
@@ -62,8 +62,8 @@ namespace Z0
         /// <param name="src">The random source</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static T NonZero<T>(this IPolyrand src)
+        public static T NonZ<T>(this IPolyrand src)
             where T : unmanaged
-                => src.NonZeroStream<T>((minval<T>(), maxval<T>())).First();
+                => src.NonZStream<T>((minval<T>(), maxval<T>())).First();
     }
 }

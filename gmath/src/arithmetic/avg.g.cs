@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Avgz, NumericClosures(NumericKind.UnsignedInts)]
         public static T avgz<T>(T a, T b)
             where T : unmanaged
         {

@@ -172,7 +172,7 @@ namespace Z0
         public static ref readonly Block16<T> Block<T>(this IPolyrand random, in Block16<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.SpanFill(dst.Block(block));
             return ref dst;
         }
 
@@ -186,7 +186,7 @@ namespace Z0
         public static ref readonly Block32<T> Block<T>(this IPolyrand random, in Block32<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.SpanFill(dst.Block(block));
             return ref dst;
         }
 
@@ -200,7 +200,7 @@ namespace Z0
         public static ref readonly Block64<T> Block<T>(this IPolyrand random, in Block64<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.SpanFill(dst.Block(block));
             return ref dst;
         }
 
@@ -214,7 +214,7 @@ namespace Z0
         public static ref readonly Block128<T> Block<T>(this IPolyrand random, in Block128<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.SpanFill(dst.Block(block));
             return ref dst;
         }
 
@@ -228,7 +228,7 @@ namespace Z0
         public static ref readonly Block256<T> Block<T>(this IPolyrand random, in Block256<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.SpanFill(dst.Block(block));
             return ref dst;
         }
 
@@ -242,7 +242,7 @@ namespace Z0
         public static ref readonly Block512<T> Block<T>(this IPolyrand random, in Block512<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.SpanFill(dst.Block(block));
             return ref dst;
         }
 
@@ -258,7 +258,7 @@ namespace Z0
         public static ref readonly Block16<T> Block<T>(this IPolyrand random, T min, T max, in Block16<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.SpanFill(min,max,dst.Block(block));
             return ref dst;
         }
 
@@ -274,7 +274,7 @@ namespace Z0
         public static ref readonly Block32<T> Block<T>(this IPolyrand random, T min, T max, in Block32<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.SpanFill(min,max,dst.Block(block));
             return ref dst;
         }
 
@@ -290,7 +290,7 @@ namespace Z0
         public static ref readonly Block64<T> Block<T>(this IPolyrand random, T min, T max, in Block64<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.SpanFill(min,max,dst.Block(block));
             return ref dst;
         }
 
@@ -306,7 +306,7 @@ namespace Z0
         public static ref readonly Block128<T> Block<T>(this IPolyrand random, T min, T max, in Block128<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.SpanFill(min,max,dst.Block(block));
             return ref dst;
         }
 
@@ -322,7 +322,7 @@ namespace Z0
         public static ref readonly Block256<T> Block<T>(this IPolyrand random, T min, T max, in Block256<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.SpanFill(min,max,dst.Block(block));
             return ref dst;
         }
 
@@ -338,7 +338,7 @@ namespace Z0
         public static ref readonly Block512<T> Block<T>(this IPolyrand random, T min, T max, in Block512<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.SpanFill(min,max,dst.Block(block));
             return ref dst;
         }
 

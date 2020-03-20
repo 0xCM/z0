@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial class Polyfun
-    {        
-
+    public static class RngBytes
+    {
         /// <summary>
         /// Produces an interminable stream of random bytes
         /// </summary>
@@ -69,7 +68,7 @@ namespace Z0
                             yield return bytes[i];
                 }
             }
-            return PolyOps.stream(produce(), random.RngKind);
+            return PolyStream.create(produce(), random.RngKind);
         }
     }
 }

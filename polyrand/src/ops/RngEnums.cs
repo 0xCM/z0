@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Polyfun
+    public static class RngEnums
     {        
         /// <summary>
         /// Produces a stream of values sampled from an enum
@@ -41,7 +41,7 @@ namespace Z0
                 }            
             }
 
-            return PolyOps.stream(produce(), random.RngKind);
+            return PolyStream.create(produce(), random.RngKind);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
                     yield return Enum.Parse<E>(names[stream.Next()]);
             }
 
-            return PolyOps.stream(produce(), random.RngKind);
+            return PolyStream.create(produce(), random.RngKind);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static ref readonly BitSpan Clear(this in BitSpan src)
-        {
+        {            
             clear(src);        
             return ref src;
         }

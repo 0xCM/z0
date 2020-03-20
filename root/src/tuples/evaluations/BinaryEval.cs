@@ -17,8 +17,7 @@ namespace Z0
         public readonly Pairs<T> Source;
 
         public readonly PairEval<T> Target;
-        
-        
+                
         [MethodImpl(Inline)]
         public BinaryEval(in Pairs<T> src, PairEval<T> dst)
         {
@@ -31,6 +30,5 @@ namespace Z0
         public string LeftLabel => Target.LeftLabel;
 
         public string RightLabel => Target.RightLabel;
-
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, in Block16<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.SpanFill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, in Block32<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.SpanFill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, in Block64<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.SpanFill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, in Block128<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.SpanFill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, in Block256<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.SpanFill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, in Block512<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.SpanFill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, T min, T max, in Block16<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.SpanFill(min,max,dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -105,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, T min, T max, in Block32<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.SpanFill(min,max,dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, T min, T max, in Block64<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.SpanFill(min,max,dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -131,7 +131,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, T min, T max, in Block128<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.SpanFill(min,max,dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -144,7 +144,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random, T min, T max, in Block256<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.SpanFill(min,max,dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -157,6 +157,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyrand random,T min, T max, in Block512<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data); 
+                => random.SpanFill(min,max,dst.Data); 
     }
 }

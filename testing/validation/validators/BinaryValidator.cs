@@ -26,10 +26,10 @@ namespace Z0
             var clock = counter();
 
             T1 next_x()
-                => ExcludeZero ? Random.NonZero<T1>() : Random.Next<T1>();
+                => ExcludeZero ? Random.NonZ<T1>() : Random.Next<T1>();
 
             T2 next_y()
-                => ExcludeZero ? Random.NonZero<T2>() : Random.Next<T2>();
+                => ExcludeZero ? Random.NonZ<T2>() : Random.Next<T2>();
 
             clock.Start();
             try

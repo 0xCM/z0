@@ -45,6 +45,7 @@ namespace Z0.Asm.Validation
         public void Execute(in BufferSeq buffers, ApiMemberCode code)
         {
             //Executioner.EvalOperator(buffers, code);
+
         }
 
         public void Execute(in BufferSeq buffers, ApiMemberCode[] code)
@@ -705,7 +706,7 @@ namespace Z0.Asm.Validation
 
         void capture_constants(in AsmBuffers buffers)
         {
-            var src = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
+            var src = typeof(gmath).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
 
             using var rawout = HexWriter(Context);            
             using var hexout = CodeWriter(Context);

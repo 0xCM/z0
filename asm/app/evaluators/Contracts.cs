@@ -14,9 +14,6 @@ namespace Z0.Asm.Check
 
     interface IAsmEvalDispatcher : IAsmWorkflowService
     {
-        bit EvalOperator(in BufferSeq buffers, ApiMemberCode api);        
-
-        bit EvalOperators(in BufferSeq buffers, ApiMemberCode[] api);
 
         bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api);
 

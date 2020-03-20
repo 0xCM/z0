@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static Root;    
     using static As;
 
-    [ApiHost("scalar.ops", ApiHostKind.Generic)]
+    [ApiHost("numeric.ops", ApiHostKind.Generic)]
     public static class NumericOps
     {        
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
@@ -91,102 +91,102 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="src">The source bit</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]   
+        [MethodImpl(Inline)]   
         public static T promote<T>(bit src)
             where T : unmanaged
                 => src ? ones<T>() : default;
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static bit testc<T>(T a)
             where T : unmanaged
                 => gbits.pop(a) == bitsize<T>();
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T and<T>(T a, T b)
             where T : unmanaged
                 => gmath.and(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T nand<T>(T a, T b)
             where T : unmanaged
                 => gmath.nand(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T or<T>(T a, T b)
             where T : unmanaged
                 => gmath.or(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T nor<T>(T a, T b)
             where T : unmanaged
                 => gmath.nor(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T xor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xor(a,b);
 
-        [MethodImpl(Inline),  Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xnor(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T left<T>(T a, T b)
             where T : unmanaged
                 => gmath.left(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T right<T>(T a, T b)
             where T : unmanaged
                 => gmath.right(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T lnot<T>(T a, T b)
             where T : unmanaged
                 => gmath.lnot(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T rnot<T>(T a, T b)
             where T : unmanaged
                 => gmath.rnot(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T impl<T>(T a, T b)
             where T : unmanaged
                 => gmath.impl(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T nonimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.nonimpl(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T cimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.cimpl(a,b);
         
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T cnonimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.cnonimpl(a,b);
                 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T xornot<T>(T a, T b)
             where T : unmanaged
                 => gmath.xornot(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T equals<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.eq(a,b));
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T neq<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.neq(a,b));
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline)]
         public static T lt<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.lt(a,b));

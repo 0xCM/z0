@@ -25,8 +25,7 @@ namespace Z0
             csp.GetBytes(dst);
             return dst;
         }
-        
-        /// <summary>
+
         /// Produces a specified number of entropic primal values
         /// </summary>
         /// <param name="count">The number of bytes</param>
@@ -40,18 +39,6 @@ namespace Z0
             var src = Bytes(bz);
             return MemoryMarshal.Cast<byte,T>(src);
         }
-
-        /// <summary>
-        /// Produces an entropic primal sequence of natural length
-        /// </summary>
-        /// <param name="count">The number of bytes</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        /// <typeparam name="N">The length type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatSpan<N,T> Values<N,T>(N n = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged        
-                => Values<T>((int)n.NatValue);
 
         /// <summary>
         /// Produces a single entropic value of primal type

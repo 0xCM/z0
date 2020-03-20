@@ -11,57 +11,19 @@ namespace Z0
 
     using static Root;
 
-    partial class Polyfun
-    {        
+    public static class RngSpan
+    {
         /// <summary>
-        /// Allocates a span of natural dimensions and populates it with random values
+        /// Fills a caller-allocated span with random values
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="n">The natural length of the produced span</param>
-        /// <param name="domain">An optional domain to which values are constrained</param>
-        /// <param name="filter">An optional filter that refines the domain</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The primal random value type</typeparam>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<N,T> NatSpan<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : unmanaged  
-            where N : unmanaged, ITypeNat
-                => Z0.NatSpan.load(random.Span<T>((int)n.NatValue, domain, filter),n);                                    
+        public static void SpanFill<T>(this IPolyrand random, Span<T> dst)
+            where T : unmanaged
+                => random.Fill(random.Domain<T>(), dst.Length, ref head(dst));
 
-        /// <summary>
-        /// Allocates a table span of natural dimensions and populates the cells with random values
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="rows">The row count</param>
-        /// <param name="cols">The column count</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The primal random value type</typeparam>
-        [MethodImpl(Inline)]
-        public static TableSpan<M,N,T> NatSpan<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
-            where T : unmanaged  
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-                => Z0.TableSpan.load<M, N, T>(random.Span<T>(nfunc.muli(rows, cols)), rows, cols);
-
-        /// <summary>
-        /// Allocates a table span of natural dimensions and populates the cells with random values that
-        /// are confined to a specified domain
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="rows">The row count</param>
-        /// <param name="cols">The column count</param>
-        /// <param name="cols">The interval domain to which values are confined</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The primal random value type</typeparam>
-        [MethodImpl(Inline)]
-        public static TableSpan<M,N,T> NatSpan<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
-            where T : unmanaged  
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-                => TableSpan.load<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
-         
         /// <summary>
         /// Produces a span of random values
         /// </summary>
@@ -114,7 +76,41 @@ namespace Z0
         public static Span<T> Span<T>(this IPolyrand random, int length, T t)
             where T : unmanaged
                 => random.Span<T>(length);
+
+        /// <summary>
+        /// Fills a caller-allocated span with random values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="dst">The target span</param>
+        /// <param name="min">The inclusive lower bound</param>
+        /// <param name="max">The exclusive upper bound</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void SpanFill<T>(this IPolyrand random, T min, T max, Span<T> dst)
+            where T : unmanaged
+                => random.Fill((min,max), dst.Length, ref head(dst));
+
+        /// <summary>
+        /// Fills a caller-supplied target with random bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static void SpanFill(this IPolyrand random, Span<bit> dst)
+        {
+            const int w = 64;
+            var pos = -1;
+            var last = dst.Length - 1;
+
+            while(pos <= last)
+            {
+                var data = random.Next<ulong>();
                 
+                var i = -1;
+                while(++pos <= last && ++i < w)
+                    dst[pos] = bit.test(data,i);
+            }
+        }
+
         /// <summary>
         /// Allocates and produces a readonly span populated with random values
         /// </summary>
@@ -153,7 +149,5 @@ namespace Z0
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples)
             where T : unmanaged
                 => random.Span<T>(samples, random.Domain<T>(), x => Numeric.nonz(x));
-
-
     }
 }

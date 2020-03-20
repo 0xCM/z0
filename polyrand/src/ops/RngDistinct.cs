@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Polyfun
+    public static class RngDistinct
     {        
         /// <summary>
         /// Samples the source values without replacement

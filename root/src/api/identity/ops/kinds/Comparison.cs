@@ -29,10 +29,14 @@ namespace Z0
         /// </summary>
         Eq = Id.Eq,
 
+        Eqz = Id.Eqz,
+
         /// <summary>
         /// Classifies a binary operator that returns true if the left operand is strictly smaller than the left operand
         /// </summary>
         Lt = Id.Lt,
+
+        Ltz = Id.Ltz,
 
         /// <summary>
         /// Classifies a binary operator that returns true if the left operand is smaller than or equal to the left operand
@@ -44,6 +48,8 @@ namespace Z0
         /// </summary>
         Gt  = Id.Gt,
 
+        Gtz = Id.Gtz,
+
         /// <summary>
         /// Classifies a binary operator that returns true if the left operand is greater than or equal to the left operand
         /// </summary>
@@ -53,19 +59,38 @@ namespace Z0
         /// Classifies a binary operator that returns true iff its operands are not equal
         /// </summary>
         Neq = Id.Neq,
+
+        Max = Id.Max,
+
+        Min = Id.Min
     }    
 
     public sealed class EqAttribute : A { public EqAttribute() : base(Eq) {} }
+
+    public sealed class EqzAttribute : A { public EqzAttribute() : base(Eqz) {} }
 
     public sealed class NeqAttribute : A { public NeqAttribute() : base(Neq) {} }
 
     public sealed class LtAttribute : A { public LtAttribute() : base(Lt) {} }
 
+    public sealed class LtzAttribute : A { public LtzAttribute() : base(Ltz) {} }
+
     public sealed class LtEqAttribute : A { public LtEqAttribute() : base(LtEq) {} }
 
     public sealed class GtAttribute : A { public GtAttribute() : base(Gt) {} }
 
+    public sealed class GtzAttribute : A { public GtzAttribute() : base(Gtz) {} }
+
     public sealed class GtEqAttribute : A { public GtEqAttribute() : base(GtEq) {} }
 
     public sealed class BetweenAttribute : A { public BetweenAttribute() : base(Between) {} }
+
+    public sealed class MaxAttribute : A { public MaxAttribute() : base(Max) {} }
+
+    public sealed class MinAttribute : A { public MinAttribute() : base(Min) {} }
+
+    public sealed class AggregateMaxAttribute : A { public AggregateMaxAttribute() : base(AggregateMax) {} }
+
+    public sealed class AggregateMinAttribute : A { public AggregateMinAttribute() : base(AggregateMin) {} }
+
 }

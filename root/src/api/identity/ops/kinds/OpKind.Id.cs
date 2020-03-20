@@ -58,6 +58,8 @@ namespace Z0
 
         Negate,
 
+        Negative,
+
         Abs,
 
         Square,
@@ -102,22 +104,38 @@ namespace Z0
 
         Eq,
 
+        Eqz,
+
         Neq,
 
         Lt,
+
+        Ltz,
 
         LtEq,
 
         Gt,
 
+        Gtz,
+
         GtEq,
 
         Between,
+
+        Max,
+
+        Min,
 
         Identity,
 
         Sum,
 
         Avg,
+
+        Avgz,
+
+        AggregateMax,
+
+        AggregateMin,
     }
 }

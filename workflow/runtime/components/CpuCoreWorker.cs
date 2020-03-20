@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public class CpuCoreWorker<T>
     {        
-        internal CpuCoreWorker(IRngContext Context, uint CoreNumber, Func<T,T> Worker, T Data, TimeSpan Frequency, ulong? MaxCycles = null)
+        internal CpuCoreWorker(IPolyrandContext Context, uint CoreNumber, Func<T,T> Worker, T Data, TimeSpan Frequency, ulong? MaxCycles = null)
         {
             this.Context = Context;
             this.CoreNumber = CoreNumber;
@@ -61,7 +61,7 @@ namespace Z0
 
         T State;
 
-        IRngContext Context;
+        IPolyrandContext Context;
 
         /// <summary>
         /// Executes a single work cycle

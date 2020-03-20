@@ -12,12 +12,12 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Eq, NumericClosures(NumericKind.Integers)]
         public static bit eq<T>(T a, T b)
             where T : unmanaged
                 => eq_u(a,b);
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Eqz, NumericClosures(NumericKind.Integers)]
         public static T eqz<T>(T a, T b)
             where T : unmanaged
                 => gmath.mul(convert<T>((uint)gmath.eq(a,b)),ones<T>());

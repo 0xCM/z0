@@ -47,6 +47,20 @@ namespace Z0
         }    
 
         /// <summary>
+        /// Produces an entropic primal sequence of natural length
+        /// </summary>
+        /// <param name="count">The number of bytes</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        /// <typeparam name="N">The length type</typeparam>
+        [MethodImpl(Inline)]
+        static NatSpan<N,T> Values<N,T>(N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged        
+                => Entropy.Values<T>((int)n.NatValue);
+
+        /// <summary>
+
+        /// <summary>
         /// Creates a WyHash64 generator suite
         /// </summary>
         /// <param name="n">The number of suite generators</param>
@@ -57,7 +71,7 @@ namespace Z0
         {
             NatSpan<N,ulong> states;
             if(seed.Length == 0)
-                states = Entropy.Values<N,ulong>();
+                states = Values<N,ulong>();
             else if(seed.Length == (int)n.NatValue)
                 states = NatSpan.load(ref seed[0], n);
             else

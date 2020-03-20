@@ -13,10 +13,19 @@ namespace Z0
     using Id = OpKindId;
     using A = OpKindAttribute;
 
-    public enum NumericPredicateKind
+    public enum NumericPredicate : ulong
     {
 
+        None = 0,
 
+        Negative = Id.Negative,
+
+        Divides  = Id.Divides,
     }
+
+
+    public sealed class NegativeAttribute : A { public NegativeAttribute() : base(Negative) {} }
+
+    public sealed class DividesAttribute : A { public DividesAttribute() : base(Divides) {} }
 
 }

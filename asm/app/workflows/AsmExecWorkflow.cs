@@ -100,39 +100,70 @@ namespace Z0.Asm.Check
         IApiCorrelator Correlator
             => Context.ApiCorrelator();
         
+
+        void ExecuteHost(in BufferSeq buffers, in ApiHost host)
+        {
+            var paths = HostPaths(host);
+            if(paths.CodePath.Exists())
+            {
+                var apiIndex = Correlator.CreateApiIndex(HostMemberIndex(host), HostCodeIndex(host));
+                Notify($"Correlated {apiIndex.EntryCount} {host} implemented operations with executable code");
+
+                foreach(var api in apiIndex.BinaryOperators)
+                {
+                    var uri = api.Uri;
+                    var oc = OperatorTypeClass.Infer(api.Method).Format();
+                    var kind = api.Method.KindId().Format();
+                    var ok = default(C.BinaryOp);
+                    Dispatcher.Dispatch(buffers, api, ok);
+                }
+            }
+        }
+
+        void ExecuteCatalog(IApiCatalog catalog)
+        {
+            using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
+            
+            foreach(var host in catalog.ApiHosts)
+            {
+                ExecuteHost(buffers, host);
+            }
+
+        }
         public void Run()
         {
             using var buffers = BufferSeq.alloc(BufferSize, BufferCount);
 
             Notify($"{BufferCount} buffers of length {BufferSize} successfully allocated");
+            var catalogs = Context.Compostion.Catalogs;
+            iter(catalogs,ExecuteCatalog);
 
-            var host = ApiHostUri.FromHost(typeof(math));
-            var paths = HostPaths(host);
+
+            // var host = ApiHostUri.FromHost(typeof(math));
+            // var paths = HostPaths(host);
+            // var apiIndex = Correlator.CreateApiIndex(HostMemberIndex(host), HostCodeIndex(host));
+
+            //Notify($"Correlated {apiIndex.EntryCount} {host} implemented operations with executable code");
+
+            // var selected = apiIndex.BinaryOperators;
+
+            // Notify($"Found {selected.Length} {host} kinded binary operarators");
+
+            // var messages = list<AppMsg>(selected.Length);        
+
+
+            // foreach(var api in selected)
+            // {
+            //     var uri = api.Uri;
+            //     var oc = OperatorTypeClass.Infer(api.Method).Format();
+            //     var kind = api.Method.KindId().Format();
+            //     var ok = default(C.BinaryOp);
+            //     messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
+            //     Dispatcher.Dispatch(buffers, api, ok);
+            // }
             
-            var apiIndex = Correlator.CreateApiIndex(HostMemberIndex(host), HostCodeIndex(host));
-
-            Notify($"Correlated {apiIndex.EntryCount} {host} implemented operations with executable code");
-
-            var selected = apiIndex.KindedOperators(2).ToArray();
-
-            Notify($"Found {selected.Length} {host} kinded binary operarators");
-
-            var messages = list<AppMsg>(selected.Length);        
-
-
-            foreach(var api in selected)
-            {
-                var uri = api.Uri;
-                var oc = OperatorTypeClass.Infer(api.Method).Format();
-                var kind = api.Method.KindId().Format();
-                var ok = default(C.BinaryOp);
-                messages.Add(AppMsg.NoCaller(text.concat(uri.Identifier.PadRight(90), text.spaced(text.pipe()), kind.ToString().PadRight(14), oc), AppMsgKind.Info));
-                Dispatcher.Dispatch(buffers, api, ok);
-                //Dispatch(buffers, api, default(C.BinaryOp));
-            }
-            
-            using var log = OpenLog("kinded-binary-ops", FileExtensions.Csv, FileWriteMode.Append);
-            log.Write(messages.ToArray());
+            // using var log = OpenLog("kinded-binary-ops", FileExtensions.Csv, FileWriteMode.Append);
+            // log.Write(messages.ToArray());
         }
 
     }

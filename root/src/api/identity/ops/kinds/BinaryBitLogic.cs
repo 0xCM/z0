@@ -266,8 +266,6 @@ namespace Z0
 
     public sealed class TrueAttribute : A { public TrueAttribute() : base(True) {} }
 
-    public sealed class AddAttribute : A { public AddAttribute() : base(Add) {} }
-
     public sealed class ImplAttribute : A { public ImplAttribute() : base(Impl) {} }
 
     public sealed class LNotAttribute : A { public LNotAttribute() : base(LNot) {} }

@@ -16,38 +16,27 @@ namespace Z0.Asm.Check
 
     public static partial class EvalPackages
     {
-        public static BinaryOpPackage<T> Package<T>(this in ApiEvalContext context, in BinaryEval<T> content, C.BinaryOp<T> @class)
-            where T : unmanaged
-                => new BinaryOpPackage<T>(context, content);
 
-    }
-
-    public static class Evaluators
-    {
-        public static IBinaryOpEvaluator<T> Evaluator<T>(this IAsmWorkflowContext context, C.BinaryOp<T> @class)
-            where T : unmanaged
-                => new BinaryOpEvaluator<T>(context);        
     }
 
     public static class Evaluation
     {            
-        public static BinaryEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, 
+        public static BinaryEval<T> Evaluate<T>(this IAsmWorkflowContext context, 
             in BufferSeq execBuffers, Pair<T>[] sourceBuffer, Pair<T>[] targetBuffer, 
             in ApiMemberCode code,  C.BinaryOp<T> k)
                 where T : unmanaged
         {
             var count = sourceBuffer.Length;
-            var context = ApiEvalContext.Define(execBuffers, code);
-            var source = workflow.Random.Pairs<T>(sourceBuffer);
-            var target =  PairEval.Define(("methd", "asm"), Tuples.index(targetBuffer));
+            var source = context.Random.Pairs<T>(sourceBuffer);
+            var target =  PairEval.Define(("method", "asm"), Tuples.index(targetBuffer));
             var content = Evaluations.binary(source, target);
-            var package = context.Package(content, k);
-            var evaluator = workflow.Evaluator(k);
+            var package = new BinaryOpPackage<T>(ApiEvalContext.Define(execBuffers, code), content);
+            var evaluator = new BinaryOpEvaluator<T>(context);
             return evaluator.Evaluate(package);
         }
 
-        public static BinaryEval<T> Evaluate<T>(this IAsmWorkflowContext workflow, in BufferSeq buffers, in ApiMemberCode code, C.BinaryOp<T> @class)
+        public static BinaryEval<T> Evaluate<T>(this IAsmWorkflowContext context, in BufferSeq buffers, in ApiMemberCode code, C.BinaryOp<T> @class)
             where T : unmanaged
-                => workflow.Evaluate(buffers, new Pair<T>[100], new Pair<T>[100], code, @class);
+                => context.Evaluate(buffers, new Pair<T>[100], new Pair<T>[100], code, @class);
     }
 }

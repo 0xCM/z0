@@ -44,63 +44,7 @@ namespace Z0.Asm.Check
         public void Notify(object content, AppMsgColor color = AppMsgColor.Green)
             => Sink.NotifyConsole(content, color);
 
-        public bit EvalOperators(in BufferSeq buffers, ApiMemberCode[] api)
-        {
-            for(var i=0; i<api.Length; i++)
-                EvalOperator(buffers, api[i]);
-            return 0;
-        }
 
-        public bit EvalOperator(in BufferSeq buffers, ApiMemberCode api)
-        {
-            var kid = api.Member.KindId;
-            int count = 128;
-            if(kid == OpKindId.Div || kid == OpKindId.Mod)
-                return 0;
-
-            var nk = api.Method.ReturnType.NumericKind();
-
-            if(kid.IsSome())
-            {
-                var apiclass = api.Method.ClassifyOperator();
-                switch(apiclass)
-                {
-                    case UnaryOp:
-
-                    break;
-                    
-                    case BinaryOp:
-                    {
-                        switch(nk)
-                        {
-                            case NumericKind.U8:
-                                return Dispatch(buffers, Random.Pairs<byte>(count), api);
-                            case NumericKind.I8:
-                                return 0;                            
-                            case NumericKind.I16:
-                                return 0;                            
-                            case NumericKind.U16:
-                                return 0;
-                            case NumericKind.I32:
-                                return 0;
-                            case NumericKind.U32:
-                                return 0;
-                            case NumericKind.I64:
-                                return 0;
-                            case NumericKind.U64:
-                                return 0;
-                            default:
-                                return 0;
-
-                        }
-                    }
-
-                    case TernaryOp:
-                        return 0;                    
-                }
-            }
-            return 0;
-        }
 
         public bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api)
         {
@@ -184,36 +128,42 @@ namespace Z0.Asm.Check
                 return;
 
             var nk = api.Method.ReturnType.NumericKind();
-
-            switch(nk)
+            try
             {
-                case NumericKind.U8:
-                    Analyze(api,Context.Evaluate(buffers, api, k.As<byte>()));
-                    break;
-                case NumericKind.I8:
-                    Analyze(api,Context.Evaluate(buffers, api, k.As<sbyte>()));
-                    break;
-                case NumericKind.I16:
-                    Analyze(api,Context.Evaluate(buffers, api, k.As<short>()));
-                    break;
-                case NumericKind.U16:
-                    Analyze(api,Context.Evaluate(buffers, api, k.As<ushort>()));
-                    break;
-                case NumericKind.I32:
-                    Analyze(api,Context.Evaluate(buffers, api, k.As<int>()));
-                    break;
-                case NumericKind.U32:
-                    Analyze(api,Context.Evaluate(buffers, api, k.As<uint>()));
-                    break;
-                case NumericKind.I64:
-                    Analyze(api,Context.Evaluate(buffers, api, k.As<long>()));
-                    break;
-                case NumericKind.U64:
-                    Analyze(api,Context.Evaluate(buffers, api, k.As<ulong>()));
-                    break;
-                default:
-                    break;
-            }            
+                switch(nk)
+                {
+                    case NumericKind.U8:
+                        Analyze(api,Context.Evaluate(buffers, api, k.As<byte>()));
+                        break;
+                    case NumericKind.I8:
+                        Analyze(api,Context.Evaluate(buffers, api, k.As<sbyte>()));
+                        break;
+                    case NumericKind.I16:
+                        Analyze(api,Context.Evaluate(buffers, api, k.As<short>()));
+                        break;
+                    case NumericKind.U16:
+                        Analyze(api,Context.Evaluate(buffers, api, k.As<ushort>()));
+                        break;
+                    case NumericKind.I32:
+                        Analyze(api,Context.Evaluate(buffers, api, k.As<int>()));
+                        break;
+                    case NumericKind.U32:
+                        Analyze(api,Context.Evaluate(buffers, api, k.As<uint>()));
+                        break;
+                    case NumericKind.I64:
+                        Analyze(api,Context.Evaluate(buffers, api, k.As<long>()));
+                        break;
+                    case NumericKind.U64:
+                        Analyze(api,Context.Evaluate(buffers, api, k.As<ulong>()));
+                        break;
+                    default:
+                        break;
+                } 
+            }
+            catch(Exception e)
+            {
+                Notify(AppMsg.Error(e));
+            }           
         }
 
         /// <summary>

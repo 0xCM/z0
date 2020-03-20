@@ -5,11 +5,22 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using static Root;
+
+    public static class RngSys
+    {        
+        /// <summary>
+        /// Converts a polyrand to the pitiful System.Random
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static System.Random ToSysRand(this IPolyrand random)
+            => SysRand.From(random);
+    }
 
     /// <summary>
     /// Adapter for client code that expects to interface with the System.Random class
@@ -57,5 +68,5 @@ namespace Z0
      
         public override double NextDouble()
             => Random.Next<double>();
-    }
+    }    
 }

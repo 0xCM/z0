@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static OpKindId;
+    using static BinaryArithmeticKind;
     
     using Id = OpKindId;
     using A = OpKindAttribute;
@@ -40,6 +40,8 @@ namespace Z0
         Dot = Id.Dot,
     }    
     
+    public sealed class AddAttribute : A { public AddAttribute() : base(Add) {} }
+
     public sealed class SubAttribute : A { public SubAttribute() : base(Sub) {} }
 
     public sealed class MulAttribute : A { public MulAttribute() : base(Mul) {} }
@@ -51,8 +53,6 @@ namespace Z0
     public sealed class ClampAttribute : A { public ClampAttribute() : base(Clamp) {} }
 
     public sealed class DistanceAttribute : A { public DistanceAttribute() : base(Distance) {} }
-
-    public sealed class DividesAttribute : A { public DividesAttribute() : base(Divides) {} }
 
     public sealed class DotAttribute : A { public DotAttribute() : base(Dot) {} }
 

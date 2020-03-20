@@ -57,7 +57,7 @@ namespace Z0
             var clock = counter();
 
             T1 next_x()
-                => ExcludeZero ? Random.NonZero<T1>() : Random.Next<T1>();
+                => ExcludeZero ? Random.NonZ<T1>() : Random.Next<T1>();
 
             clock.Start();
             try

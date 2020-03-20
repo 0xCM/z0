@@ -4,16 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    public static partial class Polyfun
-    {        
+    
+    /// <summary>
+    /// Characterizes a stream of random values of parametric type
+    /// </summary>
+    /// <typeparam name="T">The random value type</typeparam>
+    public interface IRngStream<T> : IRngPointSource<T>, IValueStream<T> 
+        where T : struct
+    {
 
     }
 }

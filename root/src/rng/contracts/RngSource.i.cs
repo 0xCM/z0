@@ -7,13 +7,14 @@ namespace Z0
     using System.Collections.Generic;
     
     /// <summary>
-    /// Characterizes a stream of random values of parametric type
+    /// Identifies a source of random data
     /// </summary>
-    /// <typeparam name="T">The random value type</typeparam>
-    public interface IRngStream<T> : IRngPointSource<T>, IValueStream<T> 
-        where T : struct
+    public interface IRngSource
     {
-
+        /// <summary>
+        /// Identifies the rng that drives the source
+        /// </summary>
+        RngKind RngKind {get;}
     }
 
 }

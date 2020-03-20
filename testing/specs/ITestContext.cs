@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface ITestContext : IDisposable, IRngContext, IAppMsgContext, ITestResultSink, ITestResultSource, IBenchResultSink, IBenchResultSource
+    public interface ITestContext : IDisposable, IPolyrandContext, IAppMsgContext, ITestResultSink, ITestResultSource, IBenchResultSink, IBenchResultSource
     {
         ITestConfig Config {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
         int RepCount {get;}
     }
 
-    public interface IExternalTestContext : IRngContext, IAppMsgContext
+    public interface IExternalTestContext : IPolyrandContext, IAppMsgContext
     {
 
     }

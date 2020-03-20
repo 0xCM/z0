@@ -12,19 +12,8 @@ namespace Z0
 
     using static Root;
 
-    partial class Polyfun
-    {        
-
-        /// <summary>
-        /// Creates a numeric emitter predicated on a random source
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline)]
-        public static NumericRngEmitter<T> NumericEmitter<T>(this IPolyrand random, T t = default)
-            where T : unmanaged
-                => new NumericRngEmitter<T>(random);
-
+    public static class RngStream
+    {
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
         /// </summary>
@@ -39,7 +28,7 @@ namespace Z0
                     yield return random.Next<T>();
             }
             
-            return PolyOps.stream(produce(), random.RngKind);
+            return PolyStream.create(produce(), random.RngKind);
         }
 
         /// <summary>
@@ -51,18 +40,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRngStream<T> Stream<T>(this IPolyrand random, T min, T max)
             where T : unmanaged
-                => PolyOps.stream(random.UniformStream(min,max), random.RngKind);
-
-        /// <summary>
-        /// Produces a stream of values from the random source
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="domain">The domain of the random variable</param>
-        /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static IRngStream<T> Stream<T>(this IPolyrand random, Interval<T> domain)
-            where T : unmanaged
-                => PolyOps.stream(random.UniformStream(domain), random.RngKind);
+                => PolyStream.create(random.UniformStream(min,max), random.RngKind);
 
         public static IEnumerable<T> UniformStream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
@@ -74,6 +52,27 @@ namespace Z0
         }
 
         /// <summary>
+        /// Selects the next sequence of values from the source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="count">The number of values to select</param>
+        /// <typeparam name="T">The value type</typeparam>
+        public static IEnumerable<T> Take<T>(this IRngBoundPointSource<T> random, int count)
+            where T : unmanaged
+                => random.Stream().Take(count);
+
+        /// <summary>
+        /// Produces a stream of values from the random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="domain">The domain of the random variable</param>
+        /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static IRngStream<T> Stream<T>(this IPolyrand random, Interval<T> domain)
+            where T : unmanaged
+                => PolyStream.create(random.UniformStream(domain), random.RngKind);
+
+        /// <summary>
         /// Produces a stream of values from the random source
         /// </summary>
         /// <param name="random">The random source</param>
@@ -82,7 +81,21 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRngStream<T> Stream<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => PolyOps.stream(random.UniformStream(domain,filter), random.RngKind);
+                => PolyStream.create(random.UniformStream(domain,filter), random.RngKind);
+        static IEnumerable<T> UnfilteredStream<T>(this IPolyrand src, T min, T max)
+            where T : unmanaged
+        {
+            while(true)
+                yield return src.Next<T>(min, max);
+        }
+
+        static IEnumerable<T> UniformStream<T>(this IPolyrand src, T min, T max)
+            where T : unmanaged
+                => src.UnfilteredStream(min,max);
+
+        static IEnumerable<T> UniformStream<T>(this IPolyrand src, Interval<T> domain)
+            where T : unmanaged
+                => src.UnfilteredStream(domain);
 
         /// <summary>
         /// Produces a random stream predicated on a point source
@@ -94,13 +107,6 @@ namespace Z0
         {
             while(true)
                 yield return random.Next();
-        }
-
-        static IEnumerable<T> UnfilteredStream<T>(this IPolyrand src, T min, T max)
-            where T : unmanaged
-        {
-            while(true)
-                yield return src.Next<T>(min, max);
         }
 
         static IEnumerable<T> UnfilteredStream<T>(this IPolyrand src, Interval<T> domain)
@@ -117,14 +123,6 @@ namespace Z0
                     yield return src.Next<T>(domain.Left, domain.Right);
             }
         }
-
-        static IEnumerable<T> UniformStream<T>(this IPolyrand src, T min, T max)
-            where T : unmanaged
-                => src.UnfilteredStream(min,max);
-
-        static IEnumerable<T> UniformStream<T>(this IPolyrand src, Interval<T> domain)
-            where T : unmanaged
-                => src.UnfilteredStream(domain);
 
         static IEnumerable<T> FilteredStream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged

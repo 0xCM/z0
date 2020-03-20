@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    public interface IAsmWorkflowContext : IAsmContext, IRngProvider
+    public interface IAsmWorkflowContext : IAsmContext, IPolyrandProvider
     {
     
     
