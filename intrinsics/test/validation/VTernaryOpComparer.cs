@@ -8,7 +8,7 @@ namespace Z0
     
     using static vgeneric;
 
-    sealed class VTernaryValidator128D<T> : Validator, IVTernaryValidator128D<T>
+    sealed class VTernaryValidator128D<T> : FuncComparer, IVTernaryOpComparer128D<T>
         where T : unmanaged
     {
         public VTernaryValidator128D(ITestContext context, bool xzero = false)
@@ -19,7 +19,7 @@ namespace Z0
 
         N128 w => default;
 
-        void IVTernaryValidator128D<T>.CheckScalarMatch<F>(F f)
+        void IVTernaryOpComparer128D<T>.CheckScalarMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);
@@ -52,7 +52,7 @@ namespace Z0
         }
     }
 
-    sealed class VTernaryValidator256D<T> : Validator, IVTernaryValidator256D<T>
+    sealed class VTernaryValidator256D<T> : FuncComparer, IVTernaryOpComparer256D<T>
         where T : unmanaged
     {
         public VTernaryValidator256D(ITestContext context, bool xzero = false)
@@ -63,7 +63,7 @@ namespace Z0
 
         N256 w => default;
 
-        void IVTernaryValidator256D<T>.CheckScalarMatch<F>(F f)
+        void IVTernaryOpComparer256D<T>.CheckScalarMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);

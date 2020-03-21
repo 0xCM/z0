@@ -25,6 +25,13 @@ namespace Z0
 
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface IImm8Func<W> : IImm8Func
+        where W : struct, ITypeWidthKind<W>
+    {
+
+    }
+
     /// <summary>
     /// Characterizes a binary function F:A -> byte -> A that accepts an 8-bit 
     /// immediate value in the second parameter. 

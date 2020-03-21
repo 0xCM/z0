@@ -31,7 +31,7 @@ public enum AssemblyId : ulong
     
     GenericNumerics = 50 | Lib,
 
-    GeneriNumericsTest = GenericNumerics | Test,
+    GenericNumericsTest = GenericNumerics | Test,
 
     MathSvc = 51,
 

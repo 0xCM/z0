@@ -141,42 +141,42 @@ namespace Z0
         protected void CheckUnaryScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVUnaryOp128D<T>
-                => this.VUnaryValidator(w,t).CheckScalarMatch(f);
+                => this.VUnaryOpComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckUnaryScalarMatch<F,T>(F f, N256 w, T t = default)
             where T : unmanaged
             where F : IVUnaryOp256D<T>
-                => this.VUnaryValidator(w,t).CheckScalarMatch(f);
+                => this.VUnaryOpComparer(w,t).CheckScalarMatch(f);
     
         protected void CheckShiftScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVShiftOp128D<T>
-                => this.VShiftValidator(w,t).CheckScalarMatch(f);
+                => this.VShiftOpComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckShiftScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVShiftOp256D<T>
-                => this.VShiftValidator(w,t).CheckScalarMatch(f);
+                => this.VShiftComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckBinaryScalarMatch<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
             where F : IVBinOp128D<T>
-                => this.VBinaryValidator(w,t).CheckScalarMatch(f);
+                => this.VBinaryOpComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckBinaryScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinOp256D<T>
-                => this.VBinaryValidator(w,t).CheckScalarMatch(f);
+                => this.VBinaryOpComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckTernaryScalarMatch<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
             where F : IVTernaryOp128D<T>
-                => this.VTernaryValidator(w,t).CheckScalarMatch(f);
+                => this.VTernaryOpComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckTernaryScalarMatch<F,T>(F f, N256 w, T t = default)
             where T : unmanaged
             where F : IVTernaryOp256D<T>
-                => this.VTernaryValidator(w,t).CheckScalarMatch(f);
+                => this.VTernaryOpComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src, SystemCounter count = default)
             where T : unmanaged

@@ -42,5 +42,6 @@ namespace Z0
         [MethodImpl(Inline), LtEq]
         public static bit lteq(ulong a, ulong b)
             => a <= b; 
+
     }
 }

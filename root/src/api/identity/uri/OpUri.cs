@@ -13,6 +13,8 @@ namespace Z0
     
     public readonly struct OpUri : IUri<OpUri>
     {
+        public const char PartSep = '/';
+        
         public static OpUri Empty => new OpUri(OpUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
         
         public readonly OpUriScheme Scheme;

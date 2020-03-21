@@ -23,6 +23,13 @@ namespace Z0
 
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISpanOp<W> : ISpanOp, IWFunc<W>
+        where W : struct, ITypeWidthKind<W>
+    {
+
+    }
+
     /// <summary>
     /// Characterizes an operator that applies a bitwise shift or rotation to elements in a source span
     /// </summary>

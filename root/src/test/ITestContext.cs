@@ -17,6 +17,8 @@ namespace Z0
         ITestConfig Config {get;}
 
         string CaseName(IFunc f);
+
+        Type HostType {get;}
     }
 
 }

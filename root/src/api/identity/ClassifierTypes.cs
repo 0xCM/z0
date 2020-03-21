@@ -29,6 +29,13 @@ namespace Z0
         string Name => Class.ToString().ToLower();
     }
 
+    public interface IKind<K,E> : IKind<E>
+        where E : unmanaged, Enum
+        where K : struct, IKind<K,E>
+    {
+
+    }
+
     public interface ILiteral<E> : IKind<E>
         where E : unmanaged, Enum
     {

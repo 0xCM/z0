@@ -36,7 +36,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.eq(t);
-            var validator = this.BinaryPredicateValidator(t);
+            var validator = this.BinaryPredicateComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -63,7 +63,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.neq(t);
-            var validator = this.BinaryPredicateValidator(t);
+            var validator = this.BinaryPredicateComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -90,7 +90,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.gt(t);
-            var validator = this.BinaryPredicateValidator(t);
+            var validator = this.BinaryPredicateComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -115,7 +115,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.gteq(t);
-            var validator = this.BinaryPredicateValidator(t);
+            var validator = this.BinaryPredicateComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -141,7 +141,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.lt(t);
-            var validator = this.BinaryPredicateValidator(t);
+            var validator = this.BinaryPredicateComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -167,7 +167,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.lteq(t);
-            var validator = this.BinaryPredicateValidator(t);
+            var validator = this.BinaryPredicateComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -192,7 +192,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.max(t);
-            var validator = this.BinaryValidator(t);
+            var validator = this.BinaryOpComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -217,7 +217,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.min(t);
-            var validator = this.BinaryValidator(t);
+            var validator = this.BinaryOpComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }

@@ -8,19 +8,19 @@ namespace Z0
     
     using static Root;
 
-    sealed class UnaryValidator<T1,T2> : Validator, IUnaryValidator<T1,T2>
+    sealed class UnaryFuncComparer<T1,T2> : FuncComparer, IUnaryFuncComparer<T1,T2>
         where T1 : unmanaged
         where T2 : unmanaged
     {
-        public UnaryValidator(ITestContext context, bool xzero = false)
+        public UnaryFuncComparer(ITestContext context, bool xzero = false)
             : base(context,xzero)
         {
 
         }
 
-        void IUnaryValidator<T1,T2>.CheckSpan<F, G>(F baseline, G subject)
+        void IUnaryFuncComparer<T1,T2>.CheckSpan<F, G>(F baseline, G subject)
         {
-            var casename = TestIdentity.testcase(GetType(),$"{subject.Id}_span");
+            var casename = TestIdentity.testcase(Context.HostType, subject);
             var succeeded = true;
             var count = RepCount;
             var clock = counter();
@@ -50,9 +50,9 @@ namespace Z0
             }
         }
 
-        void IUnaryValidator<T1,T2>.CheckMatch<F, G>(F baseline, G subject)
+        void IUnaryFuncComparer<T1,T2>.CheckMatch<F, G>(F baseline, G subject)
         {
-            var casename = Context.CaseName(subject);
+            var casename = TestIdentity.testcase(Context.HostType, $"{subject.Id}_span");
             var succeeded = true;       
             var clock = counter();
 

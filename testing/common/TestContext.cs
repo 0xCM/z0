@@ -17,6 +17,8 @@ namespace Z0
     {
         public ITestContext Context {get;}
 
+        public Type HostType => typeof(U);
+        
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
         {
             this.Random = random ?? Rng.WyHash64(Seed64.Seed00);
@@ -104,7 +106,7 @@ namespace Z0
         protected string CaseName<W,C>(string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where C : unmanaged
-                => NaturalIdentity.testcase(GetType(),root, w, t, generic);
+                => NaturalIdentity.testcase(GetType(), root, w, t, generic);
 
         protected static OpIdentity SubjectId(string opname, NumericKind kind)
             => OpIdentity.numeric(opname,kind);

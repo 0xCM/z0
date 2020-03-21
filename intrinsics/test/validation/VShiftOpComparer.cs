@@ -6,12 +6,13 @@ namespace Z0
 {
     using System;
 
+    using static Root;
     using static vgeneric;
 
-    sealed class VUnaryValidator128D<T> : Validator, IVUnaryValidator128D<T>
+    sealed class VShiftComparer128D<T> : FuncComparer, IVShiftOpComparer128D<T>
         where T : unmanaged
     {
-        public VUnaryValidator128D(ITestContext context, bool xzero = false)
+        public VShiftComparer128D(ITestContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -19,13 +20,14 @@ namespace Z0
 
         N128 w => default;
 
-        void IVUnaryValidator128D<T>.CheckScalarMatch<F>(F f)
+        void IVShiftOpComparer128D<T>.CheckScalarMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);
             var succeeded = true;
             var casename = Context.CaseName(f);
             var clock = counter();
+            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
 
             clock.Start();
             try
@@ -33,9 +35,10 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
-                    var z = f.Invoke(x);
+                    var offset = Random.Next<byte>(bounds);
+                    var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        Claim.numeq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                        Claim.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -50,10 +53,10 @@ namespace Z0
         }
     }
     
-    sealed class VUnaryValidator256D<T> : Validator, IVUnaryValidator256D<T>
+    sealed class VShiftValidator256D<T> : FuncComparer, IVShiftOpComparer256D<T>
         where T : unmanaged
     {
-        public VUnaryValidator256D(ITestContext context, bool xzero = false)
+        public VShiftValidator256D(ITestContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -61,13 +64,14 @@ namespace Z0
 
         N256 w => default;
 
-        void IVUnaryValidator256D<T>.CheckScalarMatch<F>(F f)
+        void IVShiftOpComparer256D<T>.CheckScalarMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);
             var succeeded = true;
             var casename = Context.CaseName(f);
             var clock = counter();
+            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
 
             clock.Start();
             try
@@ -75,9 +79,10 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
-                    var z = f.Invoke(x);
+                    var offset = Random.Next<byte>(bounds);
+                    var z = f.Invoke(x,offset);
                     for(var j=0; j< cells; j++)
-                        Claim.numeq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                        Claim.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
                 }
             }
             catch(Exception e)

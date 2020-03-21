@@ -8,20 +8,20 @@ namespace Z0
 
     using static Root;
 
-    class BinaryValidator<T1,T2,T3> : Validator, IBinaryValidator<T1,T2,T3>
+    class BinaryFuncComparer<T1,T2,T3> : FuncComparer, IBinaryFuncComparer<T1,T2,T3>
         where T1 : unmanaged
         where T2 : unmanaged
         where T3 : unmanaged
     {
-        public BinaryValidator(ITestContext context, bool xzero = false)
+        public BinaryFuncComparer(ITestContext context, bool xzero = false)
             : base(context,xzero)
         {
             
         }
 
-        void IBinaryValidator<T1,T2,T3>.CheckMatch<F, G>(F baseline, G subject)
+        void IBinaryFuncComparer<T1,T2,T3>.CheckMatch<F, G>(F baseline, G subject)
         {
-            var casename = Context.CaseName(subject);
+            var casename = TestIdentity.testcase(Context.HostType, subject);
             var succeeded = true;       
             var clock = counter();
 
@@ -52,9 +52,9 @@ namespace Z0
             }
         }
 
-        void IBinaryValidator<T1,T2,T3>.CheckSpan<F, G>(F baseline, G subject)
+        void IBinaryFuncComparer<T1,T2,T3>.CheckSpan<F, G>(F baseline, G subject)
         {
-            var casename = TestIdentity.testcase(GetType(), $"{subject.Id}_span");
+            var casename = TestIdentity.testcase(Context.HostType, $"{subject.Id}_span");
             var succeeded = true;
             var count = RepCount;
             var clock = counter();

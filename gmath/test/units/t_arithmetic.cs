@@ -35,7 +35,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.add(t);
-            var validator = this.BinaryValidator(t);
+            var validator = this.BinaryOpComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -61,7 +61,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.sub(t);
-            var validator = this.BinaryValidator(t);
+            var validator = this.BinaryOpComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -87,7 +87,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.mul(t);
-            var validator = this.BinaryValidator(t);
+            var validator = this.BinaryOpComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -113,7 +113,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.div(t);
-            var validator = this.BinaryValidator(true,t);
+            var validator = this.BinaryOpComparer(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -139,7 +139,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.mod(t);
-            var validator = this.BinaryValidator(true,t);
+            var validator = this.BinaryOpComparer(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -165,7 +165,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.modmul(t);
-            var validator = this.TernaryValidator(true,t);
+            var validator = this.TernaryOpComparer(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -191,7 +191,7 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.clamp(t);
-            var validator = this.BinaryValidator(t);
+            var validator = this.BinaryOpComparer(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
         }
@@ -217,9 +217,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.inc(t);
-            var validator = this.UnaryValidator(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);            
+            var comparer = this.UnaryOpComparer(t);
+            comparer.CheckMatch(f, g);
+            comparer.CheckSpan(f, g);            
         }
 
         public void dec_check()
@@ -243,9 +243,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.dec(t);
-            var validator = this.UnaryValidator(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);            
+            var comparer = this.UnaryOpComparer(t);
+            comparer.CheckMatch(f,g);
+            comparer.CheckSpan(f,g);            
         }
 
         public void negate_check()
@@ -269,9 +269,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.negate(t);
-            var validator = this.UnaryValidator(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);            
+            var comparer = this.UnaryOpComparer(t);
+            comparer.CheckMatch(f, g);
+            comparer.CheckSpan(f, g);            
         }
 
         public void abs_check()
@@ -291,9 +291,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.abs(t);
-            var validator = this.UnaryValidator(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);            
+            var comparer = this.UnaryOpComparer(t);
+            comparer.CheckMatch(f,g);
+            comparer.CheckSpan(f,g);            
         }
 
         public void check_increments()

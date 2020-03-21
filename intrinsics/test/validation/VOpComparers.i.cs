@@ -6,21 +6,21 @@ namespace Z0
 {
     using System;
 
-    public interface IVShiftValidator128D<T> : IValidator
+    public interface IVShiftOpComparer128D<T> : IFuncComparer
         where T : unmanaged
     {
         void CheckScalarMatch<F>(F f)
             where F : IVShiftOp128D<T>;
     }
 
-    public interface IVShiftValidator256D<T> : IValidator
+    public interface IVShiftOpComparer256D<T> : IFuncComparer
         where T : unmanaged
     {
         void CheckScalarMatch<F>(F f)
             where F : IVShiftOp256D<T>;
     }
 
-    public interface IVUnaryValidator128D<T> : IValidator
+    public interface IVUnaryOpComparer128D<T> : IFuncComparer
         where T : unmanaged
 
     {
@@ -28,7 +28,7 @@ namespace Z0
             where F : IVUnaryOp128D<T>;
     }
 
-    public interface IVUnaryValidator256D<T> : IValidator
+    public interface IVUnaryOpComparer256D<T> : IFuncComparer
         where T : unmanaged
 
     {
@@ -36,7 +36,7 @@ namespace Z0
             where F : IVUnaryOp256D<T>;
     }
 
-    public interface IVBinaryValidator128D<T> : IValidator
+    public interface IVBinaryOpComparer128D<T> : IFuncComparer
         where T : unmanaged
 
     {
@@ -44,7 +44,7 @@ namespace Z0
             where F : IVBinOp128D<T>;
     }
     
-    public interface IVBinaryValidator256D<T> : IValidator
+    public interface IVBinaryOpComparer256D<T> : IFuncComparer
         where T : unmanaged
 
     {
@@ -52,7 +52,7 @@ namespace Z0
             where F : IVBinOp256D<T>;
     }
 
-    public interface IVTernaryValidator128D<T> : IValidator
+    public interface IVTernaryOpComparer128D<T> : IFuncComparer
         where T : unmanaged
 
     {
@@ -61,7 +61,7 @@ namespace Z0
     }
     
 
-    public interface IVTernaryValidator256D<T> : IValidator
+    public interface IVTernaryOpComparer256D<T> : IFuncComparer
         where T : unmanaged
 
     {

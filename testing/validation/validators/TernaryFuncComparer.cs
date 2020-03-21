@@ -8,21 +8,21 @@ namespace Z0
 
     using static Root;
 
-    class TernaryValidator<T1,T2,T3,T4> : Validator, ITernaryValidator<T1,T2,T3,T4>
+    class TernaryFuncComparer<T1,T2,T3,T4> : FuncComparer, ITernaryFuncComparer<T1,T2,T3,T4>
         where T1 : unmanaged
         where T2 : unmanaged
         where T3 : unmanaged
         where T4 : unmanaged
     {
-        public TernaryValidator(ITestContext context, bool xzero = false)
+        public TernaryFuncComparer(ITestContext context, bool xzero = false)
             : base(context,xzero)
         {
             
         }
 
-        void ITernaryValidator<T1,T2,T3,T4>.CheckMatch<F, G>(F baseline, G subject)
+        void ITernaryFuncComparer<T1,T2,T3,T4>.CheckMatch<F, G>(F baseline, G subject)
         {
-            var casename = Context.CaseName(subject);
+            var casename = TestIdentity.testcase(Context.HostType, subject);
             var succeeded = true;       
             var clock = counter();
 
@@ -57,9 +57,9 @@ namespace Z0
             }
         }
 
-        void ITernaryValidator<T1,T2,T3,T4>.CheckSpan<F, G>(F baseline, G subject)
+        void ITernaryFuncComparer<T1,T2,T3,T4>.CheckSpan<F, G>(F baseline, G subject)
         {
-            var casename = TestIdentity.testcase(GetType(),$"{subject.Id}_span");
+            var casename = TestIdentity.testcase(Context.HostType, $"{subject.Id}_span");
             var succeeded = true;
             var count = RepCount;
             var clock = counter();

@@ -55,7 +55,6 @@ namespace Z0
                 return gfp.between(x,min,max);
         }
 
-
         [MethodImpl(Inline)]
         public static S add<S,T>(S lhs, S rhs)
             where S : struct, IInterval<S,T>
@@ -78,6 +77,5 @@ namespace Z0
             where S : struct, IInterval<S,T>
             where T : unmanaged
                  => default(S).New(left, right, src.Kind);
-
     }
 }

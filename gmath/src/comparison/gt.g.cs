@@ -15,17 +15,17 @@ namespace Z0
         [MethodImpl(Inline), Gt, NumericClosures(NumericKind.Integers)]
         public static bit gt<T>(T a, T b)
             where T : unmanaged
-                => gt_u(a,b);
+                => Numeric.gt(a,b);
+
+        [MethodImpl(Inline), GtEq, NumericClosures(NumericKind.Integers)]
+        public static bit gteq<T>(T a, T b)
+            where T : unmanaged
+                => Numeric.gteq(a,b);
 
         [MethodImpl(Inline), Gtz, NumericClosures(NumericKind.Integers)]
         public static T gtz<T>(T a, T b)
             where T : unmanaged
                 => gmath.mul(convert<T>((uint)gt(a,b)),ones<T>());
-
-        [MethodImpl(Inline), GtEq, NumericClosures(NumericKind.Integers)]
-        public static bit gteq<T>(T a, T b)
-            where T : unmanaged
-                => gteq_u(a,b);
 
         [MethodImpl(Inline)]
         static bit gt_u<T>(T a, T b)

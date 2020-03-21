@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Numeric
     {
-        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline)]
         public static bit eq<T>(T a, T b)
             where T : unmanaged
                 => eq_u(a,b);

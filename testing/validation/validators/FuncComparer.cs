@@ -13,7 +13,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public abstract class Validator : IValidator
+    public abstract class FuncComparer : IFuncComparer
     {
         /// <summary>
         /// Allocates and optionally starts a system counter
@@ -22,7 +22,7 @@ namespace Z0
         protected static SystemCounter counter(bool start = false, int? reps = null) 
             => SystemCounter.Create(start);
 
-        protected Validator(ITestContext context, bool xzero = false, int? reps = null)
+        protected FuncComparer(ITestContext context, bool xzero = false, int? reps = null)
         {
             this.Context = context;
             this.RepCount = reps ?? Pow2.T07;

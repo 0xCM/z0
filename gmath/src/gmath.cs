@@ -6,6 +6,7 @@ namespace Z0
 {
     
     using System;
+    using System.Runtime.CompilerServices;
 
     [ApiHost("api", ApiHostKind.Generic)]
     public static partial class gmath
