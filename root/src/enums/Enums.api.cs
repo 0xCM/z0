@@ -12,16 +12,12 @@ namespace Z0
 
     using static Root;
 
-    public static class Enums
+    public static partial class Enums
     {
-        /// <summary>
-        /// Gets the declaration-order indices for each named literal
-        /// </summary>
-        /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        public static EnumLiterals<E> literals<E>(bool peek = false)
+        [MethodImpl(Inline)]
+        public static E zero<E>()
             where E : unmanaged, Enum
-                => peek ? CreateLiteralIndex<E>() : (EnumLiterals<E>)IndicesCache.GetOrAdd(typeof(E), _ => CreateLiteralIndex<E>());
+                => default(E);
 
         /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values
@@ -33,51 +29,6 @@ namespace Z0
             where E : unmanaged, Enum
             where V : unmanaged
                 => peek ? CreateValueIndex<E,V>() : (EnumValues<E,V>)ValueCache.GetOrAdd(typeof(E), _ => CreateValueIndex<E,V>());
-
-        /// <summary>
-        /// Attempts to parses an enumeration literal, ignoring case, and returns a default value if parsing failed
-        /// </summary>
-        /// <param name="name">The literal name</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static E parse<E>(string name, E @default)
-            where E : unmanaged, Enum
-                => Root.Try(() => Enum.Parse<E>(name, true)).ValueOrDefault(@default);
-
-        /// <summary>
-        /// Attempts o parse an enum literal, ignoring case, and returns a null value if parsing failed
-        /// </summary>
-        /// <param name="name">The literal name</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        public static ParseResult<E> parse<E>(string name)
-            where E : unmanaged, Enum
-        {
-            try
-            {                
-                return ParseResult.Success(name,Enum.Parse<E>(name,true));
-            }
-            catch(Exception e)
-            {
-                return ParseResult.Fail<E>(name, e);
-            }
-        }
-
-        [MethodImpl(Inline)]
-        public static E zero<E>()
-            where E : unmanaged, Enum
-            => (E)typeof(E).GetEnumUnderlyingType().NumericKind().BoxedZero().Boxed;
-
-        /// <summary>
-        /// Reads a generic numeric value from a generic enum. 
-        /// </summary>
-        /// <param name="e">The enum value to reinterpret</param>
-        /// <typeparam name="E">The enum source type</typeparam>
-        /// <typeparam name="V">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe V numeric<E,V>(E e)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<V>((V*)(&e));
 
         /// <summary>
         /// Determines whether an enum has a specified integral value
@@ -100,37 +51,6 @@ namespace Z0
         public static bool defined<E>(string name)
             where E : unmanaged, Enum
                 => Enum.IsDefined(typeof(E), name);
-
-        /// <summary>
-        /// Reads a generic numeric value from a boxed enum
-        /// </summary>
-        /// <param name="e">The enum value to reinterpret</param>
-        /// <typeparam name="V">The numeric value type</typeparam>
-        [MethodImpl(Inline)]
-        public static V numeric<V>(Enum e)
-            where V : unmanaged
-                => (V)Convert.ChangeType(e, e.GetTypeCode());
-
-        /// <summary>
-        /// Determines an enumeration's underlying kind
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static EnumValueCode kind<E>()
-            where E : unmanaged, Enum
-                => (EnumValueCode)default(E).GetTypeCode();
-
-        /// <summary>
-        /// Reads a generic enum member from a generic value
-        /// </summary>
-        /// <param name="v">The value to reinterpret</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="V">The numeric value type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe E literal<E,V>(V v)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<E>((E*)&v);
         
         /// <summary>
         /// Puts an enum value into a (numeric) box
@@ -169,103 +89,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Correlates literal values predicated on identifier equality
-        /// </summary>
-        /// <typeparam name="E1">The first enum type</typeparam>
-        /// <typeparam name="E2">The second enum type</typeparam>
-        public static IDictionary<string, LiteralCorrelation<E1,E2>> correlate<E1,E2>()
-            where E1: unmanaged, Enum
-            where E2: unmanaged, Enum
-                => LiteralCorrelation.Discover<E1,E2>();
-
-        /// <summary>
         /// Gets the names of the (unique) enumeration literals
         /// </summary>
         /// <param name="e">An enum type representative</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
         public static string[] names<E>()
-            => Enum.GetNames(typeof(E));
-        
-        /// <summary>
-        /// Interprets an enum value as a signed byte
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static sbyte i8<E>(E e = default)
-            where E : unmanaged, Enum
-                => Enums.numeric<E,sbyte>(e);
-
-        /// <summary>
-        /// Interprets an enum value as a byte
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static byte u8<E>(E e)
-            where E : unmanaged, Enum
-                => Enums.numeric<E,byte>(e);
-
-        /// <summary>
-        /// Interprets an enum value as an unsigned 16-bit integer
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static ushort u16<E>(E e)
-            where E : unmanaged, Enum
-                => Enums.numeric<E,ushort>(e);
-
-        /// <summary>
-        /// Interprets an enum value as a signed 16-bit integer
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static short i16<E>(E e)
-            where E : unmanaged, Enum
-                => Enums.numeric<E,short>(e);
-
-        /// <summary>
-        /// Interprets an enum value as a signed 32-bit integer
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static int i32<E>(E e)
-            where E : unmanaged, Enum
-                => Enums.numeric<E,int>(e);
-
-        /// <summary>
-        /// Interprets an enum value as an unsigned 32-bit integer
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static uint u32<E>(E e)
-            where E : unmanaged, Enum
-                => Enums.numeric<E,uint>(e);
-
-        /// <summary>
-        /// Interprets an enum value as a signed 64-bit integer
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static long i64<E>(E e)
-            where E : unmanaged, Enum
-                => Enums.numeric<E,long>(e);
-
-        /// <summary>
-        /// Interprets an enum value as an unsigned 64-bit integer
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static ulong u64<E>(E e)
-            where E : unmanaged, Enum
-                => Enums.numeric<E,ulong>(e);
+            => Enum.GetNames(typeof(E));        
 
         /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values
@@ -299,23 +129,6 @@ namespace Z0
                 dst[j] = i[j].Value;
             return dst;    
         }
-
-        static EnumLiterals<E> CreateLiteralIndex<E>()
-            where E : unmanaged, Enum
-        {
-            var fields = typeof(E).LiteralFields().ToArray();
-            var indices = list<EnumLiteral<E>>(fields.Length);
-            for(var i=0; i< fields.Length; i++)
-            {
-                var field = fields[i];
-                var value = (E)field.GetRawConstantValue();
-                indices.Add((i, field.Name, value));
-            }
-            return indices.ToIndex();
-        }
-
-        static ConcurrentDictionary<Type,object> LiteralCache {get;}
-            = new ConcurrentDictionary<Type, object>();
 
         static ConcurrentDictionary<Type,object> IndicesCache {get;}
             = new ConcurrentDictionary<Type, object>();

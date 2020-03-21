@@ -12,67 +12,107 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline), Op]
+        /// <summary>
+        /// Returns true if the source value is greater than zero, false otherwise
+        /// </summary>
+        /// <param name="a">The value to inspect</param>
+        [MethodImpl(Inline), Positive]
+        public static bit positive(float a)
+            => a > 0;
+
+        /// <summary>
+        /// Returns true if the source value is greater than zero, false otherwise
+        /// </summary>
+        /// <param name="a">The value to inspect</param>
+        [MethodImpl(Inline), Positive]
+        public static bit positive(double a)
+            => a > 0;
+
+        /// <summary>
+        /// Returns true if the source value is less than zero, false otherwise
+        /// </summary>
+        /// <param name="x">The value to inspect</param>
+        [MethodImpl(Inline), Negative]
+        public static bit negative(float x)
+            => x < 0;
+
+        /// <summary>
+        /// Returns true if the source value is less than zero, false otherwise
+        /// </summary>
+        /// <param name="x">The value to inspect</param>
+        [MethodImpl(Inline), Negative]
+        public static bit negative(double x)
+            => x < 0;
+
+        [MethodImpl(Inline), Eq]
         public static bit eq(float a, float b)
             => a == b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Eq]
         public static bit eq(double a, double b)
             => a == b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Neq]
         public static bit neq(float a, float b)
             => a != b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Neq]
         public static bit neq(double a, double b)
             => a != b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Gt]
         public static bit gt(float a, float b)
             => a > b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Gt]
         public static bit gt(double a, double b)
             => a > b;        
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), GtEq]
         public static bit gteq(float a, float b)
             => a >= b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), GtEq]
         public static bit gteq(double a, double b)
             => a >= b;        
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static bit lt(float lhs, float rhs)
             => lhs < rhs;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Lt]
         public static bit lt(double lhs, double rhs)
             => lhs < rhs;        
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), LtEq]
         public static bit lteq(float lhs, float rhs)
             => lhs <= rhs;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), LtEq]
         public static bit lteq(double lhs, double rhs)
             => lhs <= rhs;        
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Nonz]
+        public static bit nonz(float src)
+            => src != 0;
+            
+        [MethodImpl(Inline), Nonz]
+        public static bit nonz(double src)
+            => src != 0;
+
+        [MethodImpl(Inline), Max]
         public static float max(float a, float b)
             => a > b ? a : b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Max]
         public static double max(double a, double b)
             => a > b ? a : b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static float min(float a, float b)
             => a < b ? a : b;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Min]
         public static double min(double a, double b)
             => a < b ? a : b;
 
@@ -93,13 +133,14 @@ namespace Z0
         public static bit within(double a, double b, double delta)
             => a > b ? a - b <= delta 
               : b - a <= delta;
+
         /// <summary>
         /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
         /// </summary>
         /// <param name="x">The test value</param>
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Between]
         public static bit between(float x, float a, float b)    
             => x >= a && x <= b;
 
@@ -109,7 +150,7 @@ namespace Z0
         /// <param name="x">The test value</param>
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Between]
         public static bit between(double x, double a, double b)    
             => x >= a && x <= b;
 

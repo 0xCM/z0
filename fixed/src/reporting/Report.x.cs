@@ -8,8 +8,6 @@ namespace Z0
     using System.Text;
     using System.Linq.Expressions;
 
-    using static Root;
-
     public static class ReportingExtensions
     {
         /// <summary>

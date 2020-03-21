@@ -11,12 +11,6 @@ namespace Z0
 
     using Id = OpKindId;
 
-    public interface IBinaryBitlogicKind : IBitLogicKind, IOpKind<BinaryBitLogicOpKind>
-    {
-        BinaryBitLogicOpKind IKind<BinaryBitLogicOpKind>.Class 
-            => Enums.parse<BinaryBitLogicOpKind>(KindId.ToString()).ValueOrDefault();
-    }    
-
     partial class OpKinds
     {
         public readonly struct And : IBinaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.And;}}

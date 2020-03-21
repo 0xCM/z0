@@ -59,7 +59,7 @@ namespace Z0
 
         void ITernaryValidator<T1,T2,T3,T4>.CheckSpan<F, G>(F baseline, G subject)
         {
-            var casename = Context.CaseName($"{subject.Id}_span");
+            var casename = TestIdentity.testcase(GetType(),$"{subject.Id}_span");
             var succeeded = true;
             var count = RepCount;
             var clock = counter();

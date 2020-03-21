@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
-    using static Root;
     using static BinaryArithmeticKind;
     
     using A = OpKindAttribute;
@@ -35,5 +33,4 @@ namespace Z0
     public sealed class DistanceAttribute : A { public DistanceAttribute() : base(Distance) {} }
 
     public sealed class DotAttribute : A { public DotAttribute() : base(Dot) {} }
-
 }

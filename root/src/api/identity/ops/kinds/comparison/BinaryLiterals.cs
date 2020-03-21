@@ -5,16 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
-    using static Root;
-
     using Id = OpKindId;
 
     /// <summary>
-    /// Identifies comparison operator classes
+    /// Identifies binary comparison predicates
     /// </summary>
-    public enum ComparisonOpKind : ulong
+    public enum BinaryComparisonKind : ulong
     {        
         /// <summary>
         /// The empty identity
@@ -59,8 +56,6 @@ namespace Z0
 
         Max = Id.Max,
 
-        Min = Id.Min,
-
-        Between = Id.Between,
+        Min = Id.Min,        
     }    
 }

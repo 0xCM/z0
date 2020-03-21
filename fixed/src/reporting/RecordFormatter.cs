@@ -57,17 +57,6 @@ namespace Z0
             Builder.Append($"{content?.Format()}".PadRight(width(f)));
         }
 
-        // public void AppendField(F f, DateTime content)
-        // {
-        //     Builder.Append($"{content.ToLexicalString()}".PadRight(width(f)));
-        // }
-
-        // public void DelimitField(F f, DateTime content, char delimiter)
-        // {
-        //     Builder.Append(text.rspace(delimiter));            
-        //     Builder.Append($"{content.ToLexicalString()}".PadRight(width(f)));
-        // }
-
         public string Format()
             => Builder.ToString();
         

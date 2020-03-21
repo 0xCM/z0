@@ -7,19 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Linq;
-    using System.Collections;
 
     using static Root;
 
-    public static class LiteralCorrelation
+    partial class Enums
     {
         /// <summary>
-        /// Computes a dictionary of literal correlations from a pair of enumeration types
+        /// Correlates literal values predicated on identifier equality
         /// </summary>
-        /// <typeparam name="E1">The first type</typeparam>
-        /// <typeparam name="E2">The second type</typeparam>
-        public static IDictionary<string,LiteralCorrelation<E1,E2>> Discover<E1,E2>()
+        /// <typeparam name="E1">The first enum type</typeparam>
+        /// <typeparam name="E2">The second enum type</typeparam>
+        public static IDictionary<string, LiteralCorrelation<E1,E2>> correlate<E1,E2>()
             where E1: unmanaged, Enum
             where E2: unmanaged, Enum
         {

@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Root;
+    using System;    
 
     /// <summary>
     /// Defines numeric arity values and is independent of the arity classifier/classification scheme

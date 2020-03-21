@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Neq, NumericClosures(NumericKind.Integers)]
         public static bit neq<T>(T a, T b)
             where T : unmanaged
                 => neq_u(a,b);

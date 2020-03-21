@@ -77,7 +77,8 @@ namespace Z0
     public interface IOpKind<E> : IOpKind, ILiteral<E>
         where E : unmanaged, Enum
     {
-
+        E IKind<E>.Class 
+            => Enums.convert<E>(KindId.ToUInt64());
 
     }
 

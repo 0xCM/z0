@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static ComparisonOpKind;
+    using static BinaryComparisonKind;
     using static TypedLogicSpec;
 
     public static class PredicateSpec
@@ -21,7 +21,7 @@ namespace Z0.Logix
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonPredExpr<T> compare<T>(ComparisonOpKind kind, IExpr<T> a, IExpr<T> b)
+        public static ComparisonPredExpr<T> compare<T>(BinaryComparisonKind kind, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new ComparisonPredExpr<T>(kind,a,b);
 
@@ -33,7 +33,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonPredExpr<T> compare<T>(ComparisonOpKind kind, T a, T b)
+        public static ComparisonPredExpr<T> compare<T>(BinaryComparisonKind kind, T a, T b)
             where T : unmanaged
                 => new ComparisonPredExpr<T>(kind, literal(a), literal(b));
 

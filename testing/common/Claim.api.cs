@@ -295,7 +295,7 @@ namespace Z0
             if(typeof(T) == typeof(bit))
                 Claim.eq(As.ubit(lhs), As.ubit(rhs));
             else
-                gmath.eq(lhs,rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
+                Numeric.eq(lhs,rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
         }
 
         /// <summary>
@@ -369,7 +369,7 @@ namespace Z0
             where T : unmanaged 
         {
             for(var i = 0; i< lhs.CellCount; i++)
-                if(!gmath.eq(lhs[i],rhs[i]))
+                if(!Numeric.eq(lhs[i],rhs[i]))
                     throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
@@ -386,7 +386,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i = 0; i< Blocks.length(xb,yb); i++)
-                if(!gmath.eq(xb[i],yb[i]))
+                if(!Numeric.eq(xb[i],yb[i]))
                     throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
 
@@ -403,7 +403,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i = 0; i< Blocks.length(xb,yb); i++)
-                if(!gmath.eq(xb[i],yb[i]))
+                if(!Numeric.eq(xb[i],yb[i]))
                     throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
 
@@ -449,19 +449,6 @@ namespace Z0
         public static bool neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => !lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, Equal(lhs, rhs, caller, file, line));
         
-        /// <summary>
-        /// Asserts that a value is between inclusive upper and lower bounds
-        /// </summary>
-        /// <param name="x">The value to test</param>
-        /// <param name="lhs">The lower bound</param>
-        /// <param name="rhs">The uper bound</param>
-        /// <param name="caller">The caller member name</param>
-        /// <param name="file">The source file of the calling function</param>
-        /// <param name="line">The source file line number where invocation ocurred</param>
-        /// <typeparam name="T">The source value type</typeparam>
-        public static bool between<T>(T x, T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged
-                => gmath.between(x,lhs,rhs) ? true : throw failed(ClaimOpKind.Between, NotBetween(x, lhs, rhs, caller, file, line));
 
         /// <summary>
         /// Asserts that the left value is larger than the right value
@@ -525,7 +512,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool nonzero<T>(T x, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
-                => gmath.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
+                => Numeric.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
 
         /// <summary>
         /// Asserts that the source value is zero
@@ -537,7 +524,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool zero<T>(T x, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
-                => !gmath.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
+                => !Numeric.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
 
         /// <summary>
         /// Asserts the operand is true

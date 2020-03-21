@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static OpKindId;
+    using static BinaryBitLogicKind;
 
     using A = OpKindAttribute;
 
@@ -36,10 +36,12 @@ namespace Z0
 
     public sealed class NandAttribute : A { public NandAttribute() : base(Nand) {} }
 
-    public sealed class TrueAttribute : A { public TrueAttribute() : base(BinaryTrue) {} }
+    public sealed class TrueAttribute : A { public TrueAttribute() : base(True) {} }
 
     public sealed class ImplAttribute : A { public ImplAttribute() : base(Impl) {} }
 
     public sealed class LNotAttribute : A { public LNotAttribute() : base(LNot) {} }
+
+    public sealed class FalseAttribute : A { public FalseAttribute() : base(False) {} }
 
 }

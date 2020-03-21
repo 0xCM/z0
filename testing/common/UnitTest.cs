@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    public abstract class UnitTest<U> : TestContext<U>, IUnitTest
+    public abstract class UnitTest<U> : TestContext<U>, IUnitTest, ITestControl
         where U : UnitTest<U>
     {
         protected UnitTest()

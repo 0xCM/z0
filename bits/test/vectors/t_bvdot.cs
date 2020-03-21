@@ -306,7 +306,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, CaseName(opname));
+            CheckAction(check, TestIdentity.testcase(GetType(),opname));
         }
     }
 }

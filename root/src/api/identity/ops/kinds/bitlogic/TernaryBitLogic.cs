@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Classifies ternary logic and bitwise operators
     /// </summary>
-    public enum TernaryBitLogicOpKind : byte
+    public enum TernaryBitLogicKind : byte
     {
         /// <summary>
         /// The empty identity

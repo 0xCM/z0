@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
-    using static ComparisonOpKind;
+    using static BinaryComparisonKind;
 
     using A = OpKindAttribute;
 
@@ -29,8 +28,6 @@ namespace Z0
     public sealed class GtzAttribute : A { public GtzAttribute() : base(Gtz) {} }
 
     public sealed class GtEqAttribute : A { public GtEqAttribute() : base(GtEq) {} }
-
-    public sealed class BetweenAttribute : A { public BetweenAttribute() : base(Between) {} }
 
     public sealed class MaxAttribute : A { public MaxAttribute() : base(Max) {} }
 

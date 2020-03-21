@@ -148,6 +148,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> equals<T>(IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.Eq, lhs,rhs,variables);
+                => new ComparisonExpr<T>(BinaryComparisonKind.Eq, lhs,rhs,variables);
     }
 }

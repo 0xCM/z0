@@ -44,9 +44,8 @@ namespace Z0
 
         Nand = 0b1110, 
         
-        BinaryTrue = 0b1111,
+        True = 0b1111,
         
-
         Not,
 
         Select,
@@ -58,6 +57,13 @@ namespace Z0
         Negate,
 
         Negative,
+
+        Positive,
+
+        /// <summary>
+        /// Classifies a unary operator that returns true iff its operand has a non-zero value
+        /// </summary>
+        Nonz,
 
         Abs,
 
@@ -138,8 +144,10 @@ namespace Z0
         Gtz,
 
         GtEq,
-
+        
         Between,
+
+        Within,
 
         Max,
 

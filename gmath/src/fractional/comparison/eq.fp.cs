@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Eq, NumericClosures(NumericKind.Floats)]
         public static bit eq<T>(T a, T b)
             where T : unmanaged
         {
@@ -25,7 +25,7 @@ namespace Z0
         }
 
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Neq, NumericClosures(NumericKind.Floats)]
         public static bit neq<T>(T a, T b)
             where T : unmanaged
         {

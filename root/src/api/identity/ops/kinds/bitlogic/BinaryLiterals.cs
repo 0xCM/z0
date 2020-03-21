@@ -10,14 +10,11 @@ namespace Z0
     using static Root;
 
     using Id = OpKindId;
-    using A = OpKindAttribute;
-
-    using static BinaryBitLogicOpKind;
 
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>    
-    public enum BinaryBitLogicOpKind : ulong
+    public enum BinaryBitLogicKind : ulong
     {         
         /// <summary>
         /// The empty identity which, unfortunately conflicts with the inescapable defintion of 'False'
@@ -219,13 +216,6 @@ namespace Z0
         /// <remarks>
         /// bv(1111) = id(False)
         /// </remarks>
-        True = Id.BinaryTrue,
-    }     
-
-    // ~ Attributes
-    // ~ ----------------------------------------------------------------------
-
-    public sealed class FalseAttribute : A { public FalseAttribute() : base(False) {} }
-
-    public sealed class SelectAttribute : A { public SelectAttribute() : base(Id.Select) {} } 
+        True = Id.True,
+    }      
 }

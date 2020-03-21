@@ -12,11 +12,11 @@ namespace Z0
     public static class OpSubjectFormatting
     {
         [MethodImpl(Inline)]
-        public static string Format(this ComparisonOpKind kind)
+        public static string Format(this BinaryComparisonKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this ComparisonOpKind kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryComparisonKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         public static string Format(this OpKindId id)
@@ -34,15 +34,15 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
              
         [MethodImpl(Inline)]
-        public static TernaryBitLogicOpKind Next(this TernaryBitLogicOpKind src)
-            => src != TernaryBitLogicOpKind.XFF 
-                ? (TernaryBitLogicOpKind)((uint)(src) + 1u)
-                : TernaryBitLogicOpKind.X00; 
+        public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
+            => src != TernaryBitLogicKind.XFF 
+                ? (TernaryBitLogicKind)((uint)(src) + 1u)
+                : TernaryBitLogicKind.X00; 
 
-        public static string Format(this TernaryBitLogicOpKind kind)
+        public static string Format(this TernaryBitLogicKind kind)
             => kind.ToString();
 
-        public static string Format<T>(this TernaryBitLogicOpKind kind, T arg1, T arg2, T arg3)
+        public static string Format<T>(this TernaryBitLogicKind kind, T arg1, T arg2, T arg3)
             => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
 
         public static string Format(this ShiftOpKind kind)        
@@ -58,11 +58,11 @@ namespace Z0
             => $"{arg1} {kind.Format()} {arg2}"; 
  
          [MethodImpl(Inline)]
-        public static string Format(this UnaryBitLogicOpKind kind)
+        public static string Format(this UnaryBitLogicKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryBitLogicOpKind kind, T arg)
+        public static string Format<T>(this UnaryBitLogicKind kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
@@ -79,11 +79,11 @@ namespace Z0
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryBitLogicOpKind kind)
+        public static string Format(this BinaryBitLogicKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryBitLogicOpKind kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryBitLogicKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
     }

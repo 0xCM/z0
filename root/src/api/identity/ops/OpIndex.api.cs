@@ -9,8 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Root;
-
     public static class OpIndex
     {        
         public static OpIndex<T> From<T>(IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)

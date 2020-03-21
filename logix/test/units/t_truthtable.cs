@@ -11,7 +11,7 @@ namespace Z0.Logix
     using static Root;
     using static Nats;
 
-    using static BinaryBitLogicOpKind;
+    using static BinaryBitLogicKind;
 
     public class t_truthtable : UnitTest<t_truthtable>
     {
@@ -135,7 +135,7 @@ namespace Z0.Logix
         public void check_typed_cnotimply_truth()
             => check_typed_truth(CNonImpl);
 
-        void check_typed_truth(BinaryBitLogicOpKind op)
+        void check_typed_truth(BinaryBitLogicKind op)
         {               
             const byte on = 1;
             const byte off = 0;
@@ -149,7 +149,7 @@ namespace Z0.Logix
             Claim.eq(sig,dst);
         }
         
-        void check_truth(BinaryBitLogicOpKind op)
+        void check_truth(BinaryBitLogicKind op)
         {
             var dst = BitVector.alloc(n4);
             dst[0] = LogicOpApi.eval(op, bit.Off,bit.Off);
@@ -162,9 +162,9 @@ namespace Z0.Logix
 
         public void truth_vectors()
         {
-            Notify(TruthTables.definition(BinaryBitLogicOpKind.And).Format());
-            Notify(TruthTables.definition(BinaryBitLogicOpKind.Or).Format());
-            Notify(TruthTables.definition(BinaryBitLogicOpKind.Nand).Format());        
+            Notify(TruthTables.definition(BinaryBitLogicKind.And).Format());
+            Notify(TruthTables.definition(BinaryBitLogicKind.Or).Format());
+            Notify(TruthTables.definition(BinaryBitLogicKind.Nand).Format());        
         }
     }
 }

@@ -15,10 +15,9 @@ namespace Z0
     public readonly struct EnumValue
     {
         public static EnumValue<E,V> Define<E,V>(EnumLiteral<E> literal, V value)
-        where E : unmanaged, Enum
-        where V : unmanaged
-            => new EnumValue<E,V>(literal,value);
-
+            where E : unmanaged, Enum
+            where V : unmanaged
+                => new EnumValue<E,V>(literal,value);
     }
 
     public readonly struct EnumValue<E,V>

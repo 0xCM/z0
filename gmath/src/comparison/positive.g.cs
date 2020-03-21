@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Positive, NumericClosures(NumericKind.Integers)]
         public static bit positive<T>(T a)
             where T : unmanaged 
                 => positive_u(a);
@@ -59,9 +59,9 @@ namespace Z0
             where T : unmanaged
         {                        
             if(typeof(T) == typeof(float))
-                return math.positive(float32(src));
+                return fmath.positive(float32(src));
             else if(typeof(T) == typeof(double))
-                return math.positive(float64(src));
+                return fmath.positive(float64(src));
             else            
                  throw unsupported<T>();
        }           

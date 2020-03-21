@@ -19,13 +19,13 @@ namespace Z0
         /// Allocates and optionally starts a system counter
         /// </summary>
         [MethodImpl(Inline)]   
-        protected static SystemCounter counter(bool start = false) 
+        protected static SystemCounter counter(bool start = false, int? reps = null) 
             => SystemCounter.Create(start);
 
-        protected Validator(ITestContext context, bool xzero = false)
+        protected Validator(ITestContext context, bool xzero = false, int? reps = null)
         {
             this.Context = context;
-            this.RepCount = context.RepCount;
+            this.RepCount = reps ?? Pow2.T07;
             this.ExcludeZero = xzero;
         }
         

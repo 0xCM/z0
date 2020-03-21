@@ -5,16 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
+    using static Root;
 
-    public interface IUnitTest : IDisposable, ITestContext, IAppService<ITestContext>
+    partial class Numeric
     {
-        
-    }    
 
-    public interface IExplicitTest : IUnitTest, IExecutable
-    {
-        
-    }    
+
+        static class LtEq
+        {
+
+            
+        }
+
+    }
 }

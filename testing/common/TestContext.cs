@@ -13,7 +13,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public class TestContext<U> : ITestContext<U>
+    public class TestContext<U> : ITestContext
     {
         public ITestContext Context {get;}
 
@@ -22,14 +22,6 @@ namespace Z0
             this.Random = random ?? Rng.WyHash64(Seed64.Seed00);
             this.Config = config ?? TestConfigDefaults.Default();
             this.Queue = AppMsgContext.Create();
-            this.Context = this;
-        }
-
-        protected TestContext(IExternalTestContext external)
-        {
-            this.Random = external.Random;
-            this.Config = TestConfigDefaults.Default();
-            this.Queue = external;
             this.Context = this;
         }
 
@@ -79,9 +71,6 @@ namespace Z0
         
         public virtual bool Enabled 
             => true;
-
-        int ITestContext.RepCount 
-            => RepCount;
 
         /// <summary>
         /// Produces the name of the test case for the specified function
@@ -233,18 +222,16 @@ namespace Z0
                 yield return Benchmarks.Dequeue();
         }
 
-        public TestCaseRecord ReportOutcome(string casename, bool succeeded, TimeSpan duration)
+        public void ReportOutcome(string casename, bool succeeded, TimeSpan duration)
         {
             var record = TestCaseRecord.Define(casename,succeeded,duration);
             Outcomes.Enqueue(record);
-            return record;
         }
 
-        public BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration)
+        public void ReportBenchmark(string name, long opcount, TimeSpan duration)
         {
             var record = BenchmarkRecord.Define(opcount, duration, name);
             Benchmarks.Enqueue(record);
-            return record;
         }
 
         public void ReportBenchmark(BenchmarkRecord record)

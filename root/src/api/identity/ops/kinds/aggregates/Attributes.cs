@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Root;
     using static NumericAggregateKind;
     
     using A = OpKindAttribute;
@@ -21,5 +18,4 @@ namespace Z0
     public sealed class AggMaxAttribute : A { public AggMaxAttribute() : base(AggMax) {} }
 
     public sealed class AggMinAttribute : A { public AggMinAttribute() : base(AggMin) {} }
-
 }

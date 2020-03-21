@@ -12,14 +12,14 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Nonz, NumericClosures(NumericKind.Floats)]
         public static bit nonz<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return math.nonzero(float32(a));
+                return fmath.nonz(float32(a));
             else if(typeof(T) == typeof(double))
-                return math.nonzero(float64(a));
+                return fmath.nonz(float64(a));
             else            
                 throw unsupported<T>();
         }

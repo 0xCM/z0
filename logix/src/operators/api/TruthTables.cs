@@ -19,7 +19,7 @@ namespace Z0.Logix
         /// Computes a the signature, also referred to as the truth vector, for an identified unary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector4 sig(UnaryBitLogicOpKind kind)
+        public static BitVector4 sig(UnaryBitLogicKind kind)
         {
             var x = BitVector4.Zero;
             x[0] = Api.eval(kind, off);
@@ -31,7 +31,7 @@ namespace Z0.Logix
         /// Computes a the signature, also referred to as the truth vector, for an identified binary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector4 sig(BinaryBitLogicOpKind kind)
+        public static BitVector4 sig(BinaryBitLogicKind kind)
         {
             var x = BitVector.alloc(n4);
             x[0] = Api.eval(kind, off, off);
@@ -45,7 +45,7 @@ namespace Z0.Logix
         /// Computes a the signature, also referred to as the truth vector, for an identified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector8 sig(TernaryBitLogicOpKind kind)
+        public static BitVector8 sig(TernaryBitLogicKind kind)
         {
             var x = BitVector8.Zero;
             x[0] = Api.eval(kind, off,off,off);
@@ -63,7 +63,7 @@ namespace Z0.Logix
         /// Constructs a canonical vector that defines a kind-identified operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector16 definition(BinaryBitLogicOpKind kind)
+        public static BitVector16 definition(BinaryBitLogicKind kind)
         {
             var dst = BitVector.alloc(n16);
             var s = ((byte)sig(kind)).ToBitString().Truncate(4);            
@@ -87,7 +87,7 @@ namespace Z0.Logix
             return dst;
         }
 
-        public static BitMatrix<N2,N2,byte> build(UnaryBitLogicOpKind kind)
+        public static BitMatrix<N2,N2,byte> build(UnaryBitLogicKind kind)
         {
             var f = Api.lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
@@ -96,7 +96,7 @@ namespace Z0.Logix
             return table;            
         }
 
-        public static BitMatrix<N4,N3,byte> build(BinaryBitLogicOpKind kind)
+        public static BitMatrix<N4,N3,byte> build(BinaryBitLogicKind kind)
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = Api.lookup(kind);
@@ -107,7 +107,7 @@ namespace Z0.Logix
             return tt;
         }
 
-        public static BitMatrix<N8,N4,byte> build(TernaryBitLogicOpKind kind)
+        public static BitMatrix<N8,N4,byte> build(TernaryBitLogicKind kind)
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = Api.lookup(kind);
@@ -122,19 +122,19 @@ namespace Z0.Logix
             return tt;
         }
 
-        public static void emit(TextWriter dst, ReadOnlySpan<UnaryBitLogicOpKind> kinds)
+        public static void emit(TextWriter dst, ReadOnlySpan<UnaryBitLogicKind> kinds)
         {
             for(var i=0; i<kinds.Length; i++)
                 emit(kinds[i],dst);
         }
 
-        public static void emit(TextWriter dst, ReadOnlySpan<BinaryBitLogicOpKind> kinds)
+        public static void emit(TextWriter dst, ReadOnlySpan<BinaryBitLogicKind> kinds)
         {
             for(var i=0; i<kinds.Length; i++)
                 emit(kinds[i],dst);
         }
 
-        public static void emit(TextWriter dst, ReadOnlySpan<TernaryBitLogicOpKind> kinds)
+        public static void emit(TextWriter dst, ReadOnlySpan<TernaryBitLogicKind> kinds)
         {
             for(var i=0; i<kinds.Length; i++)
                 emit(kinds[i],dst);
@@ -153,21 +153,21 @@ namespace Z0.Logix
             }
         }
 
-        static BitMatrix<N2,N2,byte> emit(UnaryBitLogicOpKind kind, TextWriter dst)
+        static BitMatrix<N2,N2,byte> emit(UnaryBitLogicKind kind, TextWriter dst)
         {
             var table = build(kind);
             table.emit(kind,dst);
             return table;
         }
 
-        static BitMatrix<N4,N3,byte> emit(BinaryBitLogicOpKind kind, TextWriter dst)
+        static BitMatrix<N4,N3,byte> emit(BinaryBitLogicKind kind, TextWriter dst)
         {
             var table = build(kind);
             table.emit(kind,dst);
             return table;
         }
 
-        static BitMatrix<N8,N4,byte> emit(TernaryBitLogicOpKind kind, TextWriter dst)
+        static BitMatrix<N8,N4,byte> emit(TernaryBitLogicKind kind, TextWriter dst)
         {
             var table = build(kind);
             table.emit(kind,dst);

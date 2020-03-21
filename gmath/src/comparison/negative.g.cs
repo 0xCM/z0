@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Negative, NumericClosures(NumericKind.Integers)]
         public static bit negative<T>(T src)
             where T : unmanaged
         {                        
@@ -30,9 +30,9 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return math.negative(int64(src));
             else if(typeof(T) == typeof(float))
-                return math.negative(float32(src));
+                return fmath.negative(float32(src));
             else if(typeof(T) == typeof(double))
-                return math.negative(float64(src));
+                return fmath.negative(float64(src));
             else            
                  return false;
        }           

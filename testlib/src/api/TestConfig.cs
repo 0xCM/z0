@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Interval;
-        
+                
     public class TestConfig : ITestConfig
     {
         public TestConfig(ITestConfig Defaults)

@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
-    using static Root;    
     using static ShiftOpKind;
     
     using A = OpKindAttribute;
@@ -29,5 +27,4 @@ namespace Z0
     public sealed class XorSrAttribute : A { public XorSrAttribute() : base(XorSr) {} }
 
     public sealed class XorsAttribute : A { public XorsAttribute() : base(Xors) {} }
-
 }

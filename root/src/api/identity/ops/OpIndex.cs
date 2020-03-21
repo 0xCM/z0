@@ -11,8 +11,6 @@ namespace Z0
     using System.Collections;
     using System.Collections.Generic;
 
-    using static Root;
-
     public readonly struct OpIndex<T> : IEnumerable<KeyedValue<OpIdentity, T>>, IOpIndex<T>
     {
         readonly Dictionary<OpIdentity, T> HashTable;

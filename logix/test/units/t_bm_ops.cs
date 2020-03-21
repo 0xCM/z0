@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static BinaryBitLogicOpKind;
+    using static BinaryBitLogicKind;
 
     public class t_bm_ops : LogixTest<t_bm_ops>
     {

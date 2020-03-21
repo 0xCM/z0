@@ -19,41 +19,41 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the supported comparison predicates
         /// </summary>
-        public static ReadOnlySpan<ComparisonOpKind> ComparisonKinds
+        public static ReadOnlySpan<BinaryComparisonKind> ComparisonKinds
             => array(
-                ComparisonOpKind.Eq, ComparisonOpKind.Neq, 
-                ComparisonOpKind.Lt, ComparisonOpKind.LtEq, 
-                ComparisonOpKind.Gt, ComparisonOpKind.GtEq );
+                BinaryComparisonKind.Eq, BinaryComparisonKind.Neq, 
+                BinaryComparisonKind.Lt, BinaryComparisonKind.LtEq, 
+                BinaryComparisonKind.Gt, BinaryComparisonKind.GtEq );
 
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static bit eval<T>(ComparisonOpKind kind, T a, T b)
+        public static bit eval<T>(BinaryComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonOpKind.Eq: return gmath.eq(a,b);
-                case ComparisonOpKind.Neq: return gmath.neq(a,b);
-                case ComparisonOpKind.Lt: return gmath.lt(a,b);
-                case ComparisonOpKind.LtEq: return gmath.lteq(a,b);
-                case ComparisonOpKind.Gt: return gmath.gt(a,b);
-                case ComparisonOpKind.GtEq: return gmath.gteq(a,b);
+                case BinaryComparisonKind.Eq: return gmath.eq(a,b);
+                case BinaryComparisonKind.Neq: return gmath.neq(a,b);
+                case BinaryComparisonKind.Lt: return gmath.lt(a,b);
+                case BinaryComparisonKind.LtEq: return gmath.lteq(a,b);
+                case BinaryComparisonKind.Gt: return gmath.gt(a,b);
+                case BinaryComparisonKind.GtEq: return gmath.gteq(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
         [Op, NumericClosures(NumericKind.Integers)]
-        public static BinaryPred<T> lookup<T>(ComparisonOpKind kind)
+        public static BinaryPred<T> lookup<T>(BinaryComparisonKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonOpKind.Eq: return gmath.eq;
-                case ComparisonOpKind.Neq: return gmath.neq;
-                case ComparisonOpKind.Lt: return gmath.lt;
-                case ComparisonOpKind.LtEq: return gmath.lteq;
-                case ComparisonOpKind.Gt: return gmath.gt;
-                case ComparisonOpKind.GtEq: return gmath.gteq;
+                case BinaryComparisonKind.Eq: return gmath.eq;
+                case BinaryComparisonKind.Neq: return gmath.neq;
+                case BinaryComparisonKind.Lt: return gmath.lt;
+                case BinaryComparisonKind.LtEq: return gmath.lteq;
+                case BinaryComparisonKind.Gt: return gmath.gt;
+                case BinaryComparisonKind.GtEq: return gmath.gteq;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

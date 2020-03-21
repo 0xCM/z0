@@ -15,11 +15,12 @@ namespace Z0
     
     using static Root;    
 
+    
     /// <summary>
     /// Base type for test applications
     /// </summary>
     /// <typeparam name="A">The concrete subtype</typeparam>
-    public abstract class TestApp<A> : TestContext<A>
+    public abstract class TestApp<A> : TestContext<A>, ITestControl
         where A : TestApp<A>, new()
     {
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
@@ -95,10 +96,11 @@ namespace Z0
                 var clock = counter(false);
                 
                 unit = host.Instantiate<IUnitTest>();
+                var control = unit as ITestControl;
                 if(!unit.Enabled)
                     return;
 
-                unit.Configure(Config); 
+                control.Configure(Config); 
                                 
                 clock.Start();
                 
@@ -109,7 +111,7 @@ namespace Z0
                 else
                 {
                     iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));                                    
-                    PostBenchResult(unit.TakeBenchmarks().ToArray());
+                    PostBenchResult(control.TakeBenchmarks().ToArray());
                 }                
                 clock.Stop();
 
@@ -196,10 +198,12 @@ namespace Z0
             var messages = new List<AppMsg>();
             var clock = counter(false);
             var casename = unit.TestActionName();
+            var control = unit as ITestControl;
             
             try
             {                
-                unit.Configure(Config);     
+                control.Configure(Config);    
+ 
                 
                 var tsStart = time.now();
                 messages.Add(PreCaseMsg(casename, tsStart));                
@@ -208,10 +212,10 @@ namespace Z0
                 exec();
                 clock.Stop();
 
-                messages.AddRange(unit.Flush());
+                messages.AddRange(control.Flush());
                 messages.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
 
-                var outcomes = unit.TakeOutcomes().ToArray();                
+                var outcomes = control.TakeOutcomes().ToArray();                
                 if(outcomes.Length != 0)
                     PostTestResults(outcomes);
                 else
@@ -221,7 +225,7 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
-                messages.AddRange(unit.Flush());                
+                messages.AddRange(control.Flush());                
                 messages.AddRange(CreateErrorMessages(casename,e));
                 PostTestResult(TestCaseRecord.Define(casename,false,clock.Time));                
             }
@@ -251,10 +255,11 @@ namespace Z0
             yield return AppMsg.Error($"{name} failed.");
         }
 
-        AppMsg[] CollectMessages(IUnitTest src, string testName, Duration runtime, Exception e = null)
+        AppMsg[] CollectMessages(IUnitTest unit, string testName, Duration runtime, Exception e = null)
         {
             var messages = new List<AppMsg>();
-            messages.AddRange(src.Flush());
+            var control = unit as ITestControl;
+            messages.AddRange(control.Flush());
             if(e != null)
                 messages.AddRange(CreateErrorMessages(testName,e));
             else
@@ -264,12 +269,13 @@ namespace Z0
 
         TestCaseRecord[] CollectTestResults(IExplicitTest unit, string casename, Duration runtime, Exception e = null)
         {
+            var control = unit as ITestControl;
             var outcomes = new List<TestCaseRecord>();
             if(e!= null)
                 outcomes.Add(TestCaseRecord.Define(casename,false,runtime));
             else
             {
-                outcomes.AddRange(unit.TakeOutcomes());
+                outcomes.AddRange(control.TakeOutcomes());
                 if(outcomes.Count == 0)
                     outcomes.Add(TestCaseRecord.Define(casename,true,runtime));
             }
@@ -312,6 +318,7 @@ namespace Z0
             var exectime = Duration.Zero;
             var casename = TestIdentity.testcase(method);
             var clock = counter(false);
+            var control = unit as ITestControl;
 
             var collected = new List<AppMsg>();
             try
@@ -324,10 +331,10 @@ namespace Z0
                 clock.Stop();
 
 
-                collected.AddRange(unit.Flush());
+                collected.AddRange(control.Flush());
                 collected.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
                 
-                var outcomes = unit.TakeOutcomes().ToArray();
+                var outcomes = control.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
                     cases.WithItems(outcomes);
                 else
@@ -336,7 +343,7 @@ namespace Z0
             catch(Exception e)
             {                
                 clock.Stop();
-                collected.AddRange(unit.Flush());                
+                collected.AddRange(control.Flush());                
                 collected.AddRange(CreateErrorMessages(casename, e));
              
                 cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              

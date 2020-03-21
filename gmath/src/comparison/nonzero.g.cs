@@ -27,13 +27,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return math.nonzero(uint8(a));
+                 return math.nonz(uint8(a));
             else if(typeof(T) == typeof(ushort))
-                 return math.nonzero(uint16(a));
+                 return math.nonz(uint16(a));
             else if(typeof(T) == typeof(uint))
-                 return math.nonzero(uint32(a));
+                 return math.nonz(uint32(a));
             else if(typeof(T) == typeof(ulong))
-                 return math.nonzero(uint64(a));
+                 return math.nonz(uint64(a));
             else 
                 return nonz_i(a);
         }
@@ -43,13 +43,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return math.nonzero(int8(a));
+                 return math.nonz(int8(a));
             else if(typeof(T) == typeof(short))
-                 return math.nonzero(int16(a));
+                 return math.nonz(int16(a));
             else if(typeof(T) == typeof(int))
-                 return math.nonzero(int32(a));
+                 return math.nonz(int32(a));
             else if(typeof(T) == typeof(long))
-                 return math.nonzero(int64(a));
+                 return math.nonz(int64(a));
             else 
                 return gfp.nonz(a);
         }

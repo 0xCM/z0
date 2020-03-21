@@ -13,7 +13,7 @@ namespace Z0.Logix
     using static BitLogicSpec;
     using static LogicEngine;
     
-    using BL = BinaryBitLogicOpKind;
+    using BL = BinaryBitLogicKind;
 
     public class t_binary_logic : LogixTest<t_binary_logic>
     {

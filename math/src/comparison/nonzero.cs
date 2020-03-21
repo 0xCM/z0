@@ -12,43 +12,35 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline), Op]
-        public static bit nonzero(sbyte src)
+        public static bit nonz(sbyte src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
-        public static bit nonzero(byte src)
+        public static bit nonz(byte src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
-        public static bit nonzero(short src)
+        public static bit nonz(short src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
-        public static bit nonzero(ushort src)
+        public static bit nonz(ushort src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
-        public static bit nonzero(int src)
+        public static bit nonz(int src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
-        public static bit nonzero(uint src)
+        public static bit nonz(uint src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
-        public static bit nonzero(long src)
+        public static bit nonz(long src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
-        public static bit nonzero(ulong src)
-            => src != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit nonzero(float src)
-            => src != 0;
-            
-        [MethodImpl(Inline), Op]
-        public static bit nonzero(double src)
+        public static bit nonz(ulong src)
             => src != 0;
     }
 }

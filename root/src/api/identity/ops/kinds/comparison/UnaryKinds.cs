@@ -9,12 +9,6 @@ namespace Z0
     
     using static Root;
 
-    /// <summary>
-    /// Characterizes a type that represents an operation kind
-    /// </summary>
-    public interface IBitLogicKind : IOpKind
-    {
-        
-    }
+    using Id = OpKindId;
 
 }

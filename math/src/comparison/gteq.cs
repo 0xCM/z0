@@ -42,8 +42,5 @@ namespace Z0
         [MethodImpl(Inline), GtEq]
         public static bit gteq(ulong a, ulong b)
             => a >= b;
-
-
     }
-
 }

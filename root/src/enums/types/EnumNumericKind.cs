@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Defines type-code equivalent identifiers for valid numeric enumeration types
     /// </summary>
-    public enum EnumValueCode : byte
+    public enum EnumNumericKind : byte
     {
         None = 0,
 

@@ -168,7 +168,6 @@ namespace Z0
         public static double mod(double a, double b)
             => a % b;
 
-
         /// <summary>
         /// Computes the smallest integral value greater than or equal to the source value
         /// </summary>
@@ -206,7 +205,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="max">The maximum value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Clamp]
         public static float clamp(float src, float max)
             => src > max ? max : src;
 
@@ -215,7 +214,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="max">The maximum value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Clamp]
         public static double clamp(double src, double max)
             => src > max ? max : src;
 
@@ -228,11 +227,11 @@ namespace Z0
         public static ulong dist(double a, double b)
             => a >= b ? (ulong)(a - b) : (ulong)(b - a);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Divides]
         public static bit divides(float a, float b)
             => b % a == 0;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Divides]
         public static bit divides(double a, double b)
             => b % a == 0;
  
@@ -261,7 +260,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static double fmod(double a, double b)
             => Math.IEEERemainder(a,b);
-
 
         [MethodImpl(Inline), Op]
         public static float round(float src, int scale)
@@ -299,7 +297,7 @@ namespace Z0
         /// Computes the square root of the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Sqrt]
         public static float sqrt(float src)
             => MathF.Sqrt(src);
 
@@ -307,23 +305,23 @@ namespace Z0
         /// Computes the square root of the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Sqrt]
         public static double sqrt(double src)
             => Math.Sqrt(src); 
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static float avg(ReadOnlySpan<float> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static double avg(ReadOnlySpan<double> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static float avg(ReadOnlySpan<float> src)
             => avg(src,true);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Avg]
         public static double avg(ReadOnlySpan<double> src)
             => avg(src,true);
 

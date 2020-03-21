@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Root;
-    using static BinaryArithmeticKind;
     
     using Id = OpKindId;
     using A = OpKindAttribute;
@@ -16,8 +15,7 @@ namespace Z0
 
     public interface IUnaryArithmeticKind : IArithmeticKind, IOpKind<UnaryArithmeticKind>
     {
-        UnaryArithmeticKind IKind<UnaryArithmeticKind>.Class 
-            => Enums.parse<UnaryArithmeticKind>(KindId.ToString()).ValueOrDefault();
+
     }    
 
     partial class OpKinds

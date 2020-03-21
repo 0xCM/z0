@@ -6,11 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Root;
 
-    public interface IArithmeticKind : IOpKind
+    partial class Numeric
     {
-        
+
+        static class GtEq
+        {
+
+            
+        }
+
+
     }
 }

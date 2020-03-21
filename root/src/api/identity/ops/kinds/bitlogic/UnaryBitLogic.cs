@@ -5,18 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    using static Root;
-    using static OpKindId;
-
-    using Id = OpKindId;
-    using A = OpKindAttribute;
     
     /// <summary>
     /// Classifies unary logic operators
     /// </summary>
-    public enum UnaryBitLogicOpKind : byte
+    public enum UnaryBitLogicKind : byte
     {
         None = 0,
         
@@ -40,17 +33,4 @@ namespace Z0
         /// </summary>
         True = 0b11,
     }  
-
-    public sealed class NotAttribute : A { public NotAttribute() : base(Not) {} }
-
-    public interface IUnaryBitlogicKind : IBitLogicKind, IOpKind<UnaryBitLogicOpKind>
-    {
-        UnaryBitLogicOpKind IKind<UnaryBitLogicOpKind>.Class 
-            => Enums.parse<UnaryBitLogicOpKind>(KindId.ToString()).ValueOrDefault();
-    }    
-
-    partial class OpKinds
-    {
-        public readonly struct Not : IUnaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Not;}}
-    }
 }

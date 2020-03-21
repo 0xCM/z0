@@ -13,29 +13,29 @@ namespace Z0.Logix
     internal static class OpHelpers
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig(UnaryBitLogicOpKind kind)
+        public static string sig(UnaryBitLogicKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig(BinaryBitLogicOpKind kind)
+        public static string sig(BinaryBitLogicKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig(TernaryBitLogicOpKind kind)
+        public static string sig(TernaryBitLogicKind kind)
                 => $"{kind}:bit";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(UnaryBitLogicOpKind kind)
+        public static string sig<T>(UnaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(BinaryBitLogicOpKind kind)
+        public static string sig<T>(BinaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(TernaryBitLogicOpKind kind)
+        public static string sig<T>(TernaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
@@ -45,7 +45,7 @@ namespace Z0.Logix
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static string sig<T>(ComparisonOpKind kind)
+        public static string sig<T>(BinaryComparisonKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 

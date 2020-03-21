@@ -38,24 +38,24 @@ namespace Z0.Asm
 
 
         [MethodImpl(NotInline), Op]
-        public static uint compute_32u(BinaryBitLogicOpKind op, uint a, uint b)            
+        public static uint compute_32u(BinaryBitLogicKind op, uint a, uint b)            
             => op switch {
-                BinaryBitLogicOpKind.False => zero<uint>(),
-                BinaryBitLogicOpKind.And => math.and(a,b),
-                BinaryBitLogicOpKind.CNonImpl => math.cnonimpl(a,b),
-                BinaryBitLogicOpKind.LProject => a,
-                BinaryBitLogicOpKind.NonImpl => math.nonimpl(a,b),   
-                BinaryBitLogicOpKind.RProject => b,
-                BinaryBitLogicOpKind.Xor => math.xor(a,b),
-                BinaryBitLogicOpKind.Or => math.or(a,b),
-                BinaryBitLogicOpKind.Nor => math.nor(a,b),
-                BinaryBitLogicOpKind.Xnor => math.xnor(a,b),
-                BinaryBitLogicOpKind.RNot => math.not(b),
-                BinaryBitLogicOpKind.Impl => math.impl(a,b),                
-                BinaryBitLogicOpKind.LNot => math.not(a),
-                BinaryBitLogicOpKind.CImpl => math.cimpl(a,b),
-                BinaryBitLogicOpKind.Nand => math.nand(a,b),
-                BinaryBitLogicOpKind.True => ones<uint>(),
+                BinaryBitLogicKind.False => zero<uint>(),
+                BinaryBitLogicKind.And => math.and(a,b),
+                BinaryBitLogicKind.CNonImpl => math.cnonimpl(a,b),
+                BinaryBitLogicKind.LProject => a,
+                BinaryBitLogicKind.NonImpl => math.nonimpl(a,b),   
+                BinaryBitLogicKind.RProject => b,
+                BinaryBitLogicKind.Xor => math.xor(a,b),
+                BinaryBitLogicKind.Or => math.or(a,b),
+                BinaryBitLogicKind.Nor => math.nor(a,b),
+                BinaryBitLogicKind.Xnor => math.xnor(a,b),
+                BinaryBitLogicKind.RNot => math.not(b),
+                BinaryBitLogicKind.Impl => math.impl(a,b),                
+                BinaryBitLogicKind.LNot => math.not(a),
+                BinaryBitLogicKind.CImpl => math.cimpl(a,b),
+                BinaryBitLogicKind.Nand => math.nand(a,b),
+                BinaryBitLogicKind.True => ones<uint>(),
                 _ => 0
             };
     }
