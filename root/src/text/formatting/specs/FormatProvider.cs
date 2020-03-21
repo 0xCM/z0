@@ -8,7 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
-
+    public interface IFormatProvider<T> 
+    {
+        IFormatter<T> Formatter {get;}
+    }    
 }

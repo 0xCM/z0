@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
     /// <summary>
     /// Applied to a type to specify a non-default formatter
     /// </summary>
@@ -51,7 +49,6 @@ namespace Z0
         /// Default untyped implemntation predicated on a typed implementation
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
         string IFormatter.Format(object src)
             => Format(src);
     } 
@@ -63,7 +60,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="config">The configuration</param>
-        [MethodImpl(Inline)]
         string Format(object src, IFormatConfig config)
             => Format(src);
     }
@@ -78,7 +74,6 @@ namespace Z0
         /// <param name="config">The configuration</param>
         string Format(object src, in C config);
 
-        [MethodImpl(Inline)]
         string IConfigurableFormatter.Format(object src, IFormatConfig config)
             => Format(src, (C)config);
     }
@@ -95,18 +90,7 @@ namespace Z0
         /// <param name="config">The configuration</param>
         string Format(T src, in C config);
 
-        [MethodImpl(Inline)]
         string IConfigurableFormatter<C>.Format(object src, in C config)
             => Format((T)src, config);
-    }    
-
-    public interface IBaseFormatter
-    {
-        string Format(object src, string config = null);
-    }
-
-    public interface IFormatProvider<T> 
-    {
-        IFormatter<T> Formatter {get;}
     }    
 }

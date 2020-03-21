@@ -58,7 +58,6 @@ namespace Z0
         public static BitFormatConfig Limited(int maxbits)
             => new BitFormatConfig(true, maxbits: maxbits);
 
-
         [MethodImpl(Inline)]
         public static BitFormatConfig Blocked(int width, char? sep = null)
             => new BitFormatConfig(blockWidth: width, blocksep: sep);

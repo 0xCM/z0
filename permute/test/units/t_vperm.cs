@@ -32,6 +32,38 @@ namespace Z0
         //         Claim.eq(bf[i], expect[i]);
         // }
 
+        /// <summary>
+        /// Asserts content equality for two natural spans of coincident length
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="N">The length type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        public static void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
+            where T : unmanaged 
+            where N : unmanaged, ITypeNat             
+                => Claim.numeq(lhs.Data,rhs.Data);
+
+        /// <summary>
+        /// Asserts content equality for two tabular spans of coincident dimension
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="M">The row dimension type</typeparam>
+        /// <typeparam name="N">The column dimension type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        public static void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs)
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+            where T : unmanaged 
+                => Claim.numeq(lhs.Data,rhs.Data);
+
 
 
         public void perm_symbols()
@@ -52,16 +84,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            Claim.numeq(NatSpan.parts(n4, A, B, C, D), dABCD);
+            numeq(NatSpan.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            Claim.numeq(NatSpan.parts(n4, D, C, B, A), dDCBA);
+            numeq(NatSpan.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            Claim.numeq(NatSpan.parts(n4, A, C, B, D), dACBD);
+            numeq(NatSpan.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            Claim.numeq(NatSpan.parts(n4, C, B, D, A), dCBDA);
+            numeq(NatSpan.parts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermlo_4x16_outline()

@@ -150,7 +150,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static ref BitMatrix<T> right<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => ref BitMatrix.right(A,B, ref Z);
+                => ref BitMatrix.right(A, B, ref Z);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> lnot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
@@ -160,7 +160,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static ref BitMatrix<T> lnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => ref BitMatrix.lnot(A,B, ref Z);
+                => ref BitMatrix.lnot(A, B, ref Z);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
@@ -170,7 +170,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static ref BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => ref BitMatrix.rnot(A,B, ref Z);
+                => ref BitMatrix.rnot(A, B, ref Z);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B)

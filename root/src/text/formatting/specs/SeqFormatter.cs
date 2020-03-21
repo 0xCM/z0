@@ -14,6 +14,17 @@ namespace Z0
         string FormatItem(object src);
     }
     
+    public interface ISeqFormatConfig : IFormatConfig
+    {
+        string Delimiter {get;}
+    }
+
+    public interface ISeqFormatConfig<C> : ISeqFormatConfig
+        where C : ISeqFormatConfig
+    {
+
+    }
+        
     public interface ISeqFormatter<T> : ISeqFormatter
     {
         [MethodImpl(Inline)]

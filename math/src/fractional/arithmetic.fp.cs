@@ -223,7 +223,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The first number</param>
         /// <param name="b">The second number</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Distance]
         public static ulong dist(double a, double b)
             => a >= b ? (ulong)(a - b) : (ulong)(b - a);
 

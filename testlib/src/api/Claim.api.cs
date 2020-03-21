@@ -231,16 +231,32 @@ namespace Z0
         public static bool eq(ulong lhs, ulong rhs, AppMsg msg)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
 
+        [MethodImpl(Inline)]
+        static ulong dist(double a, double b)
+            => a >= b ? (ulong)(a - b) : (ulong)(b - a);
+
+        [MethodImpl(Inline)]
+        static double relerr(double lhs, double rhs)
+        {
+            var err = dist(lhs,rhs)/lhs;
+            return err.IsNaN() ? 0 : err;
+        }
+
+        [MethodImpl(Inline)]
+        static bit within(double a, double b, double delta)
+            => a > b ? a - b <= delta 
+              : b - a <= delta;
+
         public static bool eq(float lhs, float rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            var err = fmath.relerr(lhs,rhs);
+            var err = relerr(lhs,rhs);
             var tolerance = .1f;            
             return err < tolerance ? true : throw failed(ClaimOpKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
         public static bool eq(double lhs, double rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            var err = fmath.relerr(lhs,rhs);
+            var err = relerr(lhs,rhs);
             var tolerance = .1f;            
             return err < tolerance ? true : throw failed(ClaimOpKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
@@ -324,132 +340,9 @@ namespace Z0
             where T : unmanaged 
                 => iter(lhs,rhs,numeq);
 
-        /// <summary>
-        /// Asserts content equality for two natural spans of coincident length
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        public static void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
-            where N : unmanaged, ITypeNat             
-                => numeq(lhs.Data,rhs.Data, caller,file,line);
-
-        /// <summary>
-        /// Asserts content equality for two tabular spans of coincident dimension
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="M">The row dimension type</typeparam>
-        /// <typeparam name="N">The column dimension type</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        public static void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where N : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-            where T : unmanaged 
-                => numeq(lhs.Data,rhs.Data, caller, file, line);
-
-        /// <summary>
-        /// Asserts content equality for two 128-bit blocked spans
-        /// </summary>
-        /// <param name="xb">The left span</param>
-        /// <param name="yb">The right span</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void numeq<T>(Block128<T> lhs, Block128<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
-        {
-            for(var i = 0; i< lhs.CellCount; i++)
-                if(!Numeric.eq(lhs[i],rhs[i]))
-                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
-        }
-
-        /// <summary>
-        /// Asserts content equality for two 256-bit blocked spans
-        /// </summary>
-        /// <param name="xb">The left block</param>
-        /// <param name="yb">The right block</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void numeq<T>(Block256<T> xb, Block256<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged
-        {
-            for(var i = 0; i< Blocks.length(xb,yb); i++)
-                if(!Numeric.eq(xb[i],yb[i]))
-                    throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
-        }
-
-        /// <summary>
-        /// Asserts content equality for two 256-bit blocked spans
-        /// </summary>
-        /// <param name="xb">The left block</param>
-        /// <param name="yb">The right block</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void numeq<T>(Block512<T> xb, Block512<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged
-        {
-            for(var i = 0; i< Blocks.length(xb,yb); i++)
-                if(!Numeric.eq(xb[i],yb[i]))
-                    throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
-        }
-
-        /// <summary>
-        /// Asserts that corresponding elements of two source spans of the same length are "close" as determined by a specified tolerance
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <param name="tolerance">The acceptable difference between corresponding left/right elements</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, Action<int,T,T> handler,  [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
-        {
-            for(var i = 0; i< length(lhs,rhs); i++)
-                if(!gmath.within(lhs[i],rhs[i],tolerance))
-                {
-                    handler(i, lhs[i], rhs[i]);
-                    break;                    
-                }  
-        }
-
-        /// <summary>
-        /// Asserts that corresponding elements of two source spans of the same length are "close" as determined by a specified tolerance
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <param name="tolerance">The acceptable difference between corresponding left/right elements</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void close<T>(this Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
-        {
-            for(var i = 0; i< length(lhs,rhs); i++)
-                if(!gmath.within(lhs[i],rhs[i],tolerance))
-                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
-        }
-
         public static bool neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => !lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, Equal(lhs, rhs, caller, file, line));
         
-
         /// <summary>
         /// Asserts that the left value is larger than the right value
         /// </summary>
@@ -461,7 +354,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool gt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.gt(lhs,rhs) ? true : throw failed(ClaimOpKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
+                => Numeric.gt(lhs,rhs) ? true : throw failed(ClaimOpKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
 
         /// <summary>
         /// Asserts that the left value is larger or equal to the right value
@@ -474,7 +367,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool gteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.gteq(lhs,rhs) ? true : throw failed(ClaimOpKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
+                => Numeric.gteq(lhs,rhs) ? true : throw failed(ClaimOpKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
         /// <summary>
         /// Asserts that the left value is smaller than the right value
@@ -487,7 +380,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool lt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.lt(lhs,rhs) ? true : throw failed(ClaimOpKind.Lt, NotLessThan(lhs, rhs, caller, file, line));
+                => Numeric.lt(lhs,rhs) ? true : throw failed(ClaimOpKind.Lt, NotLessThan(lhs, rhs, caller, file, line));
 
         /// <summary>
         /// Asserts that the left value is smaller or equal to the right value
@@ -500,7 +393,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool lteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.lteq(lhs,rhs) ? true : throw failed(ClaimOpKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
+                => Numeric.lteq(lhs,rhs) ? true : throw failed(ClaimOpKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
         /// <summary>
         /// Asserts that the source value is nonzero

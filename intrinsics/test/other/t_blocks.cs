@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    public class t_blocks : t_identity<t_blocks>
+    public class t_blocks : t_vinx<t_blocks>
     {        
         
         public  void CellSize()
@@ -37,7 +37,6 @@ namespace Z0
             Claim.eq(8, Blocks.cellsize<ulong>());
             Claim.eq(8, Blocks.cellsize<double>());
             Claim.eq(8, Blocks.cellsize<long>());
-
         }
 
 
@@ -96,7 +95,7 @@ namespace Z0
         {
             var x = Blocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            Claim.numeq(x, Blocks.parts(n128,1,2,3,4,5,6,7,8));
+            numeq(x, Blocks.parts(n128,1,2,3,4,5,6,7,8));
             
         }
 
@@ -117,7 +116,7 @@ namespace Z0
                     dst[block*blocklen + i] = src[block*blocklen + i];                
             }
 
-            Claim.numeq(src,dst);
+            numeq(src,dst);
 
         }
 

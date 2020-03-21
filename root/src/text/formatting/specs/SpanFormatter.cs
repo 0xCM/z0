@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
     public interface ISpanFormatter<T> : ISeqFormatter<T>
     {
         string Format(ReadOnlySpan<T> src);

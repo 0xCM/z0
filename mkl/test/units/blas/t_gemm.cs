@@ -8,11 +8,34 @@ namespace Z0.Mkl.Test
     using System.Linq;
     using System.Collections.Generic;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
+
     using static Nats;
     using static nfunc;
     
     public class t_gemm : UnitTest<t_gemm>
     {        
+        /// <summary>
+        /// Asserts that corresponding elements of two source spans of the same length are "close" as determined by a specified tolerance
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        /// <param name="tolerance">The acceptable difference between corresponding left/right elements</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="T">The element type</typeparam>        
+        public static void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged 
+        {
+            for(var i = 0; i< Checks.length(lhs,rhs); i++)
+                if(!gmath.within(lhs[i],rhs[i],tolerance))
+                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
+        }
+
         internal static void refmul<M,N,T>(Matrix256<M,N,T> A, RowVector256<N,T> B, RowVector256<M,T> X)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -156,7 +179,7 @@ namespace Z0.Mkl.Test
                     Notify($"E = {E.Format()}");
                 }
                 
-                Claim.close(E.Unblocked, X.Unblocked, epsilon);
+                close(E.Unblocked, X.Unblocked, epsilon);
             }
 
             BenchmarkRecord timing = optime(CycleCount, runtime, label);

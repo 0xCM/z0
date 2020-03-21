@@ -21,7 +21,7 @@ namespace Z0
             var y = dvec.vconvert(blockA, n128, z32);
             var blockC = y.ToBlock();            
             Claim.eq(x,y);
-            Claim.numeq(blockB,blockC);            
+            numeq(blockB,blockC);            
         }
 
         public void block_64x8u_to_2x128x32u()
