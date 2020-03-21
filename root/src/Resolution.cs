@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class Root : AssemblyResolution<Root, Root.C>
+    public sealed class Root : ApiResolution<Root, Root.C>
     {
         public Root() : base(AssemblyId.Root) {}
 

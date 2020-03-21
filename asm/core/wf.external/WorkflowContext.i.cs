@@ -16,7 +16,7 @@ namespace Z0
         
     }
 
-    public interface IWorkflowContext : IComposedContext
+    public interface IWorkflowContext : IComposedApiContext
     {
         IAppMsgSink MsgSink {get;}
 
@@ -24,8 +24,8 @@ namespace Z0
         
     }
 
-    public interface IWorkflowContext<C> : IWorkflowContext, IComposedContext<C>
-        where C : IComposedContext<C>
+    public interface IWorkflowContext<C> : IWorkflowContext, IComposedApiContext<C>
+        where C : IComposedApiContext<C>
     {
 
     }   

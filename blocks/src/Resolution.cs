@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class Blocks : AssemblyResolution<Blocks, Blocks.C>
+    public sealed class Blocks : ApiResolution<Blocks, Blocks.C>
     {
         public Blocks() : base(AssemblyId.Blocks) {}
 

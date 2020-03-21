@@ -14,5 +14,5 @@ namespace Z0
 
 namespace Z0.Resolutions
 {
-    public sealed class IdentityTest : AssemblyResolution<IdentityTest> { }
+    public sealed class IdentityTest : ApiResolution<IdentityTest> { }
 }

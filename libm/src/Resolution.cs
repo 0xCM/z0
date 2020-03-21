@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class LibM : AssemblyResolution<LibM, LibM.C>
+    public sealed class LibM : ApiResolution<LibM, LibM.C>
     {
         public LibM() : base(AssemblyId.LibM) {}
 

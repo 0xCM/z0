@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class WorkflowRuntime : AssemblyResolution<WorkflowRuntime, WorkflowRuntime.C>
+    public sealed class WorkflowRuntime : ApiResolution<WorkflowRuntime, WorkflowRuntime.C>
     {
         public WorkflowRuntime() : base(AssemblyId.WorkflowRuntime){}
 

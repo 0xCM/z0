@@ -8,8 +8,12 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface ITestContext : IDisposable, IPolyrandContext, IAppMsgContext, ITestResultSink, ITestResultSource, IBenchResultSink, IBenchResultSource
+    public interface ITestContext : IDisposable, IPolyrandContext, IAppMsgContext
     {
+        BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration);        
+
+        IEnumerable<BenchmarkRecord> TakeBenchmarks();
+
         ITestConfig Config {get;}
 
         void Configure(ITestConfig config);
@@ -21,6 +25,11 @@ namespace Z0
         string CaseName(string fullname);
 
         int RepCount {get;}
+
+        IEnumerable<TestCaseRecord> TakeOutcomes();
+
+        TestCaseRecord ReportOutcome(string casename, bool succeeded, TimeSpan duration);
+
     }
 
     public interface IExternalTestContext : IPolyrandContext, IAppMsgContext
@@ -32,5 +41,4 @@ namespace Z0
     {
 
     }
-
 }

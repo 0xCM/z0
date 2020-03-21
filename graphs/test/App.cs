@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Resolutions
 {
-    public sealed class GraphTest : AssemblyResolution<GraphTest> 
+    public sealed class GraphTest : ApiResolution<GraphTest> 
     {
 
     } 

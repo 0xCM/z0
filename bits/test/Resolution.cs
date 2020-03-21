@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class BitTest : AssemblyResolution<BitTest> 
+    public sealed class BitTest : ApiResolution<BitTest> 
     {
          
     }

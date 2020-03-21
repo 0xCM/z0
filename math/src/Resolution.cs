@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Math : AssemblyResolution<Math, Math.C>
+    public sealed class Math : ApiResolution<Math, Math.C>
     {
         public Math() : base(AssemblyId.Math) {}
         

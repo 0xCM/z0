@@ -27,7 +27,7 @@ namespace Z0
             this.Context = AsmContext.New(C.Resolution.Designates.Where(d => d.Id.IsTest()).Select(x => x).ToArray().Assemble());
         }
 
-        static IEnumerable<IAssemblyResolution> TestHosts
+        static IEnumerable<IApiAssembly> TestHosts
             => C.Resolution.Designates.Where(d => d.Id.IsTest()).Select(x => x);
 
         // AsmFunction[] ResolveExample<T>(in CaptureExchange exchange, N128 w, T t = default)
@@ -58,7 +58,7 @@ namespace Z0
         //     return r1.Union(r2).ToArray();            
         // }
 
-        static double RunTests(IAssemblyResolution host)
+        static double RunTests(IApiAssembly host)
         {
             var clock = SystemCounter.Create(true);
             var runtime = 0.0;

@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Vectorized : AssemblyResolution<Vectorized, Vectorized.C>
+    public sealed class Vectorized : ApiResolution<Vectorized, Vectorized.C>
     {
         public Vectorized() : base(AssemblyId.Vectorized) {}
 

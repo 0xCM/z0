@@ -17,28 +17,28 @@ namespace Z0
     public static class DynamicOpFactories
     {
         [MethodImpl(Inline)]
-        public static IDynamicEmitterOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N0 n, T t = default)        
+        public static IDynamicEmitterOpFactory<T> DynamicOperatorFactory<T>(this IAppContext context, N0 n, T t = default)        
             => new DynamicEmitterOpFactory<T>(context);
 
         [MethodImpl(Inline)]
-        public static IDynamicUnaryOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N1 n, T t = default)        
+        public static IDynamicUnaryOpFactory<T> DynamicOperatorFactory<T>(this IAppContext context, N1 n, T t = default)        
             => new DynamicUnaryOpFactory<T>(context);
 
         [MethodImpl(Inline)]
-        public static IDynamicBinaryOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N2 n, T t = default)        
+        public static IDynamicBinaryOpFactory<T> DynamicOperatorFactory<T>(this IAppContext context, N2 n, T t = default)        
             => new DynamicBinaryOpFactory<T>(context);
 
         [MethodImpl(Inline)]
-        public static IDynamicTernaryOpFactory<T> DynamicOperatorFactory<T>(this IContext context, N3 n, T t = default)        
+        public static IDynamicTernaryOpFactory<T> DynamicOperatorFactory<T>(this IAppContext context, N3 n, T t = default)        
             => new DynamicTernaryOpFactory<T>(context);
     }
 
     readonly struct DynamicEmitterOpFactory<T> : IDynamicEmitterOpFactory<T>
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]
-        internal DynamicEmitterOpFactory(IContext context)
+        internal DynamicEmitterOpFactory(IAppContext context)
         {
             this.Context = context;
         }
@@ -54,10 +54,10 @@ namespace Z0
 
     readonly struct DynamicUnaryOpFactory<T> : IDynamicUnaryOpFactory<T>
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]
-        internal DynamicUnaryOpFactory(IContext context)
+        internal DynamicUnaryOpFactory(IAppContext context)
         {
             this.Context = context;
         }
@@ -73,10 +73,10 @@ namespace Z0
 
     readonly struct DynamicBinaryOpFactory<T> : IDynamicBinaryOpFactory<T>
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]
-        internal DynamicBinaryOpFactory(IContext context)
+        internal DynamicBinaryOpFactory(IAppContext context)
         {
             this.Context = context;
         }
@@ -92,10 +92,10 @@ namespace Z0
 
     readonly struct DynamicTernaryOpFactory<T> : IDynamicTernaryOpFactory<T>
     {     
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]
-        internal DynamicTernaryOpFactory(IContext context)
+        internal DynamicTernaryOpFactory(IAppContext context)
         {
             this.Context = context;
         }

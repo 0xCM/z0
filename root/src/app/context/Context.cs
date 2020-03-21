@@ -29,8 +29,8 @@ namespace Z0
         /// <param name="composition">The composition to which the context has access</param>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static ComposedContext Compose(IAssemblyComposition composition)
-            => new ComposedContext(NextId(), composition);
+        public static ComposedApiContext Compose(IApiComposition composition)
+            => new ComposedApiContext(NextId(), composition);
 
         /// <summary>
         /// Defines a stateful composed context
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="composition">The composition to which the context has access</param>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static ComposedContext<S> Compose<S>(S state, IAssemblyComposition composition)
+        public static ComposedContext<S> Compose<S>(S state, IApiComposition composition)
             => new ComposedContext<S>(NextId(), state, composition);
 
         static int LastId = 0;
@@ -55,7 +55,7 @@ namespace Z0
     /// <summary>
     /// Defines a stateful context
     /// </summary>
-    public readonly struct Context<S> : IContext<S>
+    public readonly struct Context<S> : IAppContext<S>
     {
         [MethodImpl(Inline)]
         internal Context(int id, S state)

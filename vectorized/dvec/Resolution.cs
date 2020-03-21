@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class DVec : AssemblyResolution<DVec, DVec.C>
+    public sealed class DVec : ApiResolution<DVec, DVec.C>
     {
         public DVec() : base(AssemblyId.DVec) {}
         

@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class GVec : AssemblyResolution<GVec, GVec.C>
+    public sealed class GVec : ApiResolution<GVec, GVec.C>
     {
         public GVec() : base(AssemblyId.GVec) {}
         

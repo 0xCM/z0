@@ -13,6 +13,9 @@ bash $AddCmd
 export Kind=reflections
 bash $AddCmd
 
+export Kind=components
+bash $AddCmd
+
 export Kind=test
 bash $AddCmd
 

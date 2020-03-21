@@ -29,7 +29,7 @@ namespace Z0.Asm
             Resources = Context.Compostion.FindCatalog(AssemblyId.Data).MapValueOrElse(c => c.Resources, () => DataResourceIndex.Empty);
         }
 
-        IAssemblyComposition Resolved 
+        IApiComposition Resolved 
             => Context.Compostion;
 
         IEnumerable<AssemblyId> ActiveAssemblies

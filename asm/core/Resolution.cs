@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class AsmCore : AssemblyResolution<AsmCore, AsmCore.C>
+    public sealed class AsmCore : ApiResolution<AsmCore, AsmCore.C>
     {
         public AsmCore() : base(AssemblyId.AsmCore) {}
 

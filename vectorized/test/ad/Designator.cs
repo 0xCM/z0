@@ -6,7 +6,7 @@ namespace Z0.Resolutions
 {        
     using System;
 
-    public sealed class VectorizedTest : AssemblyResolution<VectorizedTest>
+    public sealed class VectorizedTest : ApiResolution<VectorizedTest>
     {
         const AssemblyId Identity = AssemblyId.VectorizedTest;
 

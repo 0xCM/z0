@@ -49,6 +49,7 @@ namespace Z0
         P IUnmanagedConversionProvider<P,S>.Converter {[MethodImpl(Inline)] get => default(P);}
     }
 
+
     public interface IValueConverter<P,S> : IValueConverter<S>, IValueConversionProvider<P,S>
         where S : struct
         where P : struct, IValueConverter<P,S>

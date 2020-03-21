@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class MathServices : AssemblyResolution<MathServices, MathServices.C>
+    public sealed class MathServices : ApiResolution<MathServices, MathServices.C>
     {        
         public const string SvcCollectionName = "math.services";                
 

@@ -16,35 +16,35 @@ namespace Z0
     {            
         readonly AsmContextData State;
 
-        readonly Option<IContext> RootContext;
+        readonly Option<IAppContext> RootContext;
 
         /// <summary>
         /// Creates a rooted context with a specified composition
         /// </summary>
         /// <param name="root">The root context</param>
         /// <param name="assemblies">The composition</param>
-        public static IAsmContext Rooted(IContext root, IAssemblyComposition assemblies, IAppSettings settings = null, IPolyrand random = null)
+        public static IAsmContext Rooted(IAppContext root, IApiComposition assemblies, IAppSettings settings = null, IPolyrand random = null)
             => new AsmContext(root, CreateState(assemblies, AsmFormatConfig.New, settings, random));
 
-        public static IAsmContext Rooted(IComposedContext composed, AsmFormatConfig format = null, IAppSettings settings = null,  IPolyrand random = null)
+        public static IAsmContext Rooted(IComposedApiContext composed, AsmFormatConfig format = null, IAppSettings settings = null,  IPolyrand random = null)
             => new AsmContext(composed, CreateState(composed.Compostion, format, settings, random));
 
         /// <summary>
         /// Creates a base context with a specified composition
         /// </summary>
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
-        public static IAsmContext New(IAssemblyComposition assemblies, IAppSettings settings = null, IPolyrand random = null)
+        public static IAsmContext New(IApiComposition assemblies, IAppSettings settings = null, IPolyrand random = null)
             => new AsmContext(null, CreateState(assemblies, AsmFormatConfig.New, settings, random));
 
         public static IAsmContext New(IPolyrand random = null)
             => new AsmContext(null, CreateState(random:random));
 
-        static AsmContextData CreateState(IAssemblyComposition assemblies = null, AsmFormatConfig format = null, IAppSettings settings = null, IPolyrand random = null)
-            => AsmContextData.New(assemblies ?? AssemblyComposition.Empty, format ?? AsmFormatConfig.New, settings, random);
+        static AsmContextData CreateState(IApiComposition assemblies = null, AsmFormatConfig format = null, IAppSettings settings = null, IPolyrand random = null)
+            => AsmContextData.New(assemblies ?? ApiComposition.Empty, format ?? AsmFormatConfig.New, settings, random);
 
-        protected AsmContext(IContext root, AsmContextData state)
+        protected AsmContext(IAppContext root, AsmContextData state)
         {
-            this.RootContext = root != null ? some(root) : none<IContext>();
+            this.RootContext = root != null ? some(root) : none<IAppContext>();
             this.State = state;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         public AsmFormatConfig AsmFormat 
             => State.AsmFormat;
         
-        public IAssemblyComposition Compostion
+        public IApiComposition Compostion
             => State.Assemblies;
 
         public IAsmContext WithFormat(AsmFormatConfig config)

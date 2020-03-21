@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Symbolic : AssemblyResolution<Symbolic, Symbolic.C>
+    public sealed class Symbolic : ApiResolution<Symbolic, Symbolic.C>
     {
         public Symbolic() : base(AssemblyId.Symbolic) {}
         

@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Identity : AssemblyResolution<Identity, Identity.C>
+    public sealed class Identity : ApiResolution<Identity, Identity.C>
     {
         public Identity() : base(AssemblyId.Identity) {}
         

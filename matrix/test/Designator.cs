@@ -6,7 +6,7 @@ namespace Z0.Resolutions
 {        
     using System;
 
-    public sealed class MatrixTest : AssemblyResolution<MatrixTest>
+    public sealed class MatrixTest : ApiResolution<MatrixTest>
     {
         const AssemblyId Identity = AssemblyId.MatrixTest;
 

@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Dynamic : AssemblyResolution<Dynamic, Dynamic.C>
+    public sealed class Dynamic : ApiResolution<Dynamic, Dynamic.C>
     {
         public Dynamic() : base(AssemblyId.Dynamic) {}
 

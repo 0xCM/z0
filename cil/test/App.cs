@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Resolutions
 {
-    public sealed class CilTest : AssemblyResolution<CilTest> 
+    public sealed class CilTest : ApiResolution<CilTest> 
     {
         
     } 

@@ -12,7 +12,7 @@ namespace Z0
     
     public readonly struct LogDevice : ILogDevice
     {
-        public static LogDevice Open(IContext context, FilePath target, string name = null, 
+        public static LogDevice Open(IAppContext context, FilePath target, string name = null, 
             FileWriteMode mode = FileWriteMode.Overwrite, bool display = false, AppMsgColor? color = null)
         {
             var writer = target.CreateParentIfMissing().Writer(mode);
@@ -20,7 +20,7 @@ namespace Z0
             return new LogDevice(context, writer, devname, display, color ?? AppMsgColor.Green);            
         }
 
-        LogDevice(IContext context, StreamWriter writer, string name, bool display, AppMsgColor color)
+        LogDevice(IAppContext context, StreamWriter writer, string name, bool display, AppMsgColor color)
         {
             this.Context = context;
             this.Writer = writer;
@@ -32,7 +32,7 @@ namespace Z0
 
         static int devid;        
 
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         readonly AppMsgColor Color;    
         

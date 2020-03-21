@@ -14,15 +14,15 @@ namespace Z0
 
     readonly struct ApiOpCollector : IApiCollector
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
 
         [MethodImpl(Inline)]
-        public static IApiCollector Create(IContext context)
+        public static IApiCollector Create(IAppContext context)
             => new ApiOpCollector(context);
     
         [MethodImpl(Inline)]
-        internal ApiOpCollector(IContext context)
+        internal ApiOpCollector(IAppContext context)
         {
             this.Context = context;
         }

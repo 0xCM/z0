@@ -30,6 +30,18 @@ namespace Z0
         Passed = 1
     }
 
+    public class TestCaseResult
+    {
+        public string Case {get;}
+
+        public TestCaseStatus Status {get;}
+
+        public readonly Duration Duration;
+
+        public DateTime Executed {get;}
+
+    }
+
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>

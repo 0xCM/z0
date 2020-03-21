@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// A context that carries an RNG state
     /// </summary>
-    public interface IPolyrandContext : IPolyrandProvider, IContext
+    public interface IPolyrandContext : IPolyrandProvider, IAppContext
     {   
            
     }

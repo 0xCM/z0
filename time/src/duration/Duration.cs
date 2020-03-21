@@ -13,7 +13,7 @@ namespace Z0
     /// Captures the length of a time period predicated on timer ticks
     /// </summary>
     [
-        ConversionProvider(typeof(DurationConverter)),
+        //ConversionProvider(typeof(DurationConverter)),
         UserType(TypeCodes.DurationId)
     ]
     public readonly struct Duration : IFormattable<Duration>, IEquatable<Duration>, IComparable<Duration>
@@ -38,7 +38,6 @@ namespace Z0
         {
             this.Ticks = ticks;
         }
-
 
         [MethodImpl(Inline)]
         public static implicit operator TimeSpan(Duration src)

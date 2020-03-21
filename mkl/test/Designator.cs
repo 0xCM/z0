@@ -9,7 +9,7 @@ namespace Z0.Resolutions
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class MklApiTest : AssemblyResolution<MklApiTest>
+    public sealed class MklApiTest : ApiResolution<MklApiTest>
     {
         const AssemblyId Identity = AssemblyId.MklApiTest;
 

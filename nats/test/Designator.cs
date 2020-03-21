@@ -6,7 +6,7 @@ namespace Z0.Resolutions
 {
     using System;
     
-    public sealed class NatsTest : AssemblyResolution<NatsTest>
+    public sealed class NatsTest : ApiResolution<NatsTest>
     {
         const AssemblyId Identity = AssemblyId.NatsTest;
 

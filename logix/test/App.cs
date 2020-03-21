@@ -17,7 +17,7 @@ namespace Z0
 namespace Z0.Resolutions
 {        
 
-    public sealed class LogixTest : AssemblyResolution<LogixTest>
+    public sealed class LogixTest : ApiResolution<LogixTest>
     {
     }
 }

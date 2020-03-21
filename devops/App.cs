@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
 
-    class App : IContext
+    class App : IAppContext
     {
 
         public App()

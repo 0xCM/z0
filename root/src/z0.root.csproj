@@ -18,10 +18,11 @@
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)feeders/reflections/z0.feeders.reflections.csproj" />
-    <ProjectReference Include="$(TopDir)feeders/texting/z0.feeders.texting.csproj" />
-    <ProjectReference Include="$(TopDir)feeders/monadic/z0.feeders.monadic.csproj" />  
-    <ProjectReference Include="$(TopDir)feeders/collective/z0.feeders.collective.csproj" />  
+    <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Reflections)" />
+    <ProjectReference Include="$(Texting)" />
+    <ProjectReference Include="$(Monadic)" />
+    <ProjectReference Include="$(Collective)" />
   </ItemGroup>
 
 </Project>

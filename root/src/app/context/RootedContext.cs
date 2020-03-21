@@ -12,14 +12,14 @@ namespace Z0
     /// Defines a context that is predicated on an existing context
     /// </summary>
     /// <typeparam name="R">The root context type</typeparam>
-    public interface IRootedContext<R> : IContext
-        where R : IContext
+    public interface IRootedContext<R> : IAppContext
+        where R : IAppContext
     {
         R Root {get;}
     }
 
-    public interface IRootContext<R,D> : IContext
-        where R : IContext
+    public interface IRootContext<R,D> : IAppContext
+        where R : IAppContext
         where D : IRootedContext<R>
     {
         D Descendant {get;}

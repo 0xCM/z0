@@ -28,7 +28,7 @@ namespace Z0.Asm
 
             IHostCaptureEventBroker Broker {get;}
 
-            IContext IContextual.Context
+            IAppContext IContextual.Context
                 => Context;
 
             public HostCaptureRunner(IAsmWorkflowContext context, IHostCaptureEventBroker broker)

@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class PolyrandTest : AssemblyResolution<PolyrandTest> 
+    public sealed class PolyrandTest : ApiResolution<PolyrandTest> 
     {
          public PolyrandTest() : base(AssemblyId.PolyrandTest) {} 
     }

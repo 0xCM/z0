@@ -8,7 +8,7 @@ namespace Z0.Resolutions
     using System.Linq;
     using System.Collections.Generic;
 
-    public sealed class AnalogsTest : AssemblyResolution<AnalogsTest>
+    public sealed class AnalogsTest : ApiResolution<AnalogsTest>
     {    
         const AssemblyId Identity = AssemblyId.AnalogsTest;
 

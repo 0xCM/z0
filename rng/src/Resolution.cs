@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions 
 { 
-    public sealed class RngSuite : AssemblyResolution<RngSuite> 
+    public sealed class RngSuite : ApiResolution<RngSuite> 
     { 
         public override AssemblyId Id  => AssemblyId.RngSuite;
     } 

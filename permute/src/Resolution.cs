@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Permute : AssemblyResolution<Permute, Permute.C>
+    public sealed class Permute : ApiResolution<Permute, Permute.C>
     {
         public Permute() : base(AssemblyId.Permute) {}
         

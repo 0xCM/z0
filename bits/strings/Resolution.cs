@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class BitString : AssemblyResolution<BitString, BitString.C>
+    public sealed class BitString : ApiResolution<BitString, BitString.C>
     {
         public BitString() : base(AssemblyId.BitString) {}
         

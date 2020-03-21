@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Cil : AssemblyResolution<Cil, Cil.C>
+    public sealed class Cil : ApiResolution<Cil, Cil.C>
     {
         public Cil() : base(AssemblyId.Cil) {}
         

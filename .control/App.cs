@@ -26,7 +26,7 @@ namespace Z0
         protected override void Execute(params string[] args)
             => Context.Archiver().Execute();
 
-        public override IAssemblyResolution[] Resolved{get;}
+        public override IApiAssembly[] Resolved{get;}
 
         static void Main(params string[] args)
             => Run(args);

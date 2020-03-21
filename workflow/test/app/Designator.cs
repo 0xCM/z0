@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class WorkflowTest : AssemblyResolution<WorkflowTest>
+    public sealed class WorkflowTest : ApiResolution<WorkflowTest>
     {
 
     }

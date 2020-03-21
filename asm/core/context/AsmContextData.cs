@@ -9,10 +9,10 @@ namespace Z0.Asm
 
     public class AsmContextData
     {
-        public static AsmContextData New(IAssemblyComposition assemblies, AsmFormatConfig format = null, IAppSettings settings = null, IPolyrand random = null)
+        public static AsmContextData New(IApiComposition assemblies, AsmFormatConfig format = null, IAppSettings settings = null, IPolyrand random = null)
             => new AsmContextData(assemblies, format ?? AsmFormatConfig.New,  settings, random);
 
-        AsmContextData(IAssemblyComposition assemblies, AsmFormatConfig format, IAppSettings settings, IPolyrand random)
+        AsmContextData(IApiComposition assemblies, AsmFormatConfig format, IAppSettings settings, IPolyrand random)
         {
             this.Assemblies = assemblies;
             this.AsmFormat = format;
@@ -20,7 +20,7 @@ namespace Z0.Asm
             this.Random = random != null ? Option.some(random) : default;
         }
 
-        public IAssemblyComposition Assemblies {get;}
+        public IApiComposition Assemblies {get;}
 
         public AsmFormatConfig AsmFormat {get;}
 

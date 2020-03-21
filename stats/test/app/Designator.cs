@@ -6,7 +6,7 @@ namespace Z0.Resolutions
 {        
     using System;
 
-    public sealed class StatsTest : AssemblyResolution<StatsTest>
+    public sealed class StatsTest : ApiResolution<StatsTest>
     {
         const AssemblyId Identity = 0;
 

@@ -9,7 +9,7 @@ namespace Z0.Resolutions
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class CoreFuncTest : AssemblyResolution<CoreFuncTest>
+    public sealed class CoreFuncTest : ApiResolution<CoreFuncTest>
     {
         const AssemblyId Identity = AssemblyId.CoreFuncTest;
 

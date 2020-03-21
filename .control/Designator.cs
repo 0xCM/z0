@@ -13,7 +13,7 @@ namespace Z0.Resolutions
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Control : AssemblyResolution<Control>
+    public sealed class Control : ApiResolution<Control>
     {
         const AssemblyId Identity = AssemblyId.Control;
 

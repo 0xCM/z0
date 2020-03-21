@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class BitSpan : AssemblyResolution<BitSpan, BitSpan.C>
+    public sealed class BitSpan : ApiResolution<BitSpan, BitSpan.C>
     {
         public BitSpan() : base(AssemblyId.BitSpan) {}
 

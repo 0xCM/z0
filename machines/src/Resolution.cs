@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {    
-    public sealed class Machines : AssemblyResolution<Machines>
+    public sealed class Machines : ApiResolution<Machines>
     {
         
     }

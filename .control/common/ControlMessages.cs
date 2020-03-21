@@ -13,10 +13,10 @@ namespace Z0
 
     static class ControlMessages
     {
-        public static AppMsg ExecutingHost(IAssemblyResolution host)
+        public static AppMsg ExecutingHost(IApiAssembly host)
             => msg($"{time.now().ToLexicalString()} Executing {host.Name}");
 
-        public static AppMsg FinishedHostExecution(IAssemblyResolution host, double runtime)
+        public static AppMsg FinishedHostExecution(IApiAssembly host, double runtime)
             => msg($"{time.now().ToLexicalString()} Finished {host.Name} execution after {runtime} ms");
 
         public static AppMsg ExecutingSuites()

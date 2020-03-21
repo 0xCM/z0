@@ -28,7 +28,7 @@ namespace Z0.Asm
         HostCaptureService(IAsmContext context, AssemblyId[] selected)
         {
             this.Context = context;
-            this.Selected = selected.Length == 0 ? context.Assemblies.ToHashSet() : selected.ToHashSet();
+            this.Selected = selected.Length == 0 ? context.Components.ToHashSet() : selected.ToHashSet();
         }
 
         AsmEmissionPaths Paths

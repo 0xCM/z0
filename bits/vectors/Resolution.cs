@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class BitVectors : AssemblyResolution<BitVectors, BitVectors.C>
+    public sealed class BitVectors : ApiResolution<BitVectors, BitVectors.C>
     {
         public BitVectors() : base(AssemblyId.BitVectors) {}
 

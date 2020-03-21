@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class GMath : AssemblyResolution<GMath, GMath.C>
+    public sealed class GMath : ApiResolution<GMath, GMath.C>
     {        
         public GMath() : base(AssemblyId.GenericNumerics) {}
 

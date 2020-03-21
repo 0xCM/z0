@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class BitGrids : AssemblyResolution<BitGrids, BitGrids.C>
+    public sealed class BitGrids : ApiResolution<BitGrids, BitGrids.C>
     {
         public BitGrids() : base (AssemblyId.BitGrids) {}
 

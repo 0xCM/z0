@@ -9,7 +9,7 @@ namespace Z0
 
     public static partial class RootServices
     {
-        public static ILogDevice OpenLogDevice(this IContext context, FilePath target, string devname = null, 
+        public static ILogDevice OpenLogDevice(this IAppContext context, FilePath target, string devname = null, 
             FileWriteMode mode = FileWriteMode.Overwrite, bool display = false)
                 => LogDevice.Open(context, target, devname, mode, display);
     }

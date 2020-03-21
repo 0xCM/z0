@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class VBits : AssemblyResolution<VBits, VBits.C>
+    public sealed class VBits : ApiResolution<VBits, VBits.C>
     {
         public VBits() : base (AssemblyId.VBits) {}
 

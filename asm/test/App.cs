@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Resolutions
 {
-    public sealed class AsmCoreTest : AssemblyResolution<AsmCoreTest> 
+    public sealed class AsmCoreTest : ApiResolution<AsmCoreTest> 
     { 
         
     }

@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class VSvc : AssemblyResolution<VSvc, VSvc.C>
+    public sealed class VSvc : ApiResolution<VSvc, VSvc.C>
     {        
         public VSvc() : base(AssemblyId.VSvc) {}
 

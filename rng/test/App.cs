@@ -11,7 +11,7 @@ namespace Z0
 
 namespace Z0.Resolutions
 {        
-    public sealed class RngCoreTest : AssemblyResolution<RngCoreTest>
+    public sealed class RngCoreTest : ApiResolution<RngCoreTest>
     {
         
     }

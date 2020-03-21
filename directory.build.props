@@ -44,9 +44,19 @@
     <Polyrand>$(TopDir)polyrand/src/z0.polyrand.csproj</Polyrand>
     <Symbolic>$(TopDir)symbolic/src/z0.symbolic.csproj</Symbolic>
     <TestApp>$(TopDir)testing/z0.testing.csproj</TestApp>
+    <TestLib>$(TopDir)testlib/src/z0.testlib.csproj</TestLib>
     <Time>$(TopDir)time/src/z0.time.csproj</Time>
     <Vectorized>$(TopDir)vectorized/src/z0.vectorized.csproj</Vectorized>
     <VSvc>$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj</VSvc>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Feeders>$(TopDir)feeders/</Feeders>
+    <Collective>$(Feeders)collective/z0.feeders.collective.csproj</Collective>
+    <Components>$(Feeders)components/z0.feeders.components.csproj</Components>
+    <Monadic>$(Feeders)monadic/z0.feeders.monadic.csproj</Monadic>
+    <Reflections>$(Feeders)reflections/z0.feeders.reflections.csproj</Reflections>
+    <Texting>$(Feeders)texting/z0.feeders.texting.csproj</Texting>
   </PropertyGroup>
 
 </Project>

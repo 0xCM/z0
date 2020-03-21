@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class AsmEncoder : AssemblyResolution<AsmEncoder, AsmEncoder.C>
+    public sealed class AsmEncoder : ApiResolution<AsmEncoder, AsmEncoder.C>
     {
         public AsmEncoder() : base(AssemblyId.AsmEncoder) {}
         

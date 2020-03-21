@@ -21,14 +21,14 @@ namespace Z0
 
     public class TypeIdentityProviders : ITypeIdentityProviders
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
         
         readonly ITypeIdentityProvider DefaultProvider;
 
-        public static ITypeIdentityProviders Create(IContext context, ITypeIdentityProvider @default, params ITypeIdentityProvider[] known)
+        public static ITypeIdentityProviders Create(IAppContext context, ITypeIdentityProvider @default, params ITypeIdentityProvider[] known)
             => new TypeIdentityProviders(context,  @default, known);
 
-        TypeIdentityProviders(IContext context, ITypeIdentityProvider @default,  ITypeIdentityProvider[] known)
+        TypeIdentityProviders(IAppContext context, ITypeIdentityProvider @default,  ITypeIdentityProvider[] known)
         {
             this.Context = context;            
             this.DefaultProvider = @default;

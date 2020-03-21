@@ -283,7 +283,7 @@ namespace Z0
     }
 
     public abstract class TestContext<H,C> : TestContext<H>
-        where C : IContext
+        where C : IAppContext
     {
         public new C Context {get;}
 

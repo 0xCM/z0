@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public interface IAgentContext : IContext
+    public interface IAgentContext : IAppContext
     {
         IEnumerable<ISystemAgent> Memberhsip {get;}   
 

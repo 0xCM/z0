@@ -8,7 +8,7 @@ namespace Z0
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Time;
 
     /// <summary>
     /// Describes the relationship between hardware ticks and measured time

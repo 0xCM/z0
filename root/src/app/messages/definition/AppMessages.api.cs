@@ -17,7 +17,7 @@ namespace Z0
 
     public static class AppMessages
     {
-        public static IEnumerable<AppMsg> emit(IContext context, IEnumerable<AppMsg> src)
+        public static IEnumerable<AppMsg> emit(IAppContext context, IEnumerable<AppMsg> src)
         {                    
             var errors = src.Where(m => m.Kind == AppMsgKind.Error).FormatLines().ToArray();
             if(errors.Length != 0)

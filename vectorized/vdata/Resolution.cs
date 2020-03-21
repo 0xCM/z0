@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class VData : AssemblyResolution<VData, VData.C>
+    public sealed class VData : ApiResolution<VData, VData.C>
     {
         public VData() : base(AssemblyId.VData) {}
         

@@ -11,11 +11,11 @@ namespace Z0
     public abstract class ConsoleApp<A> : IConsoleApp<A>
         where A : ConsoleApp<A>, new()
     {        
-        readonly IContext Context;
+        IAppContext Context {get;}
 
         readonly IAppMsgQueue MsgQueue;
                 
-        protected ConsoleApp(IComposedContext context)
+        protected ConsoleApp(IComposedApiContext context)
         {
             this.Context = context;
             this.MsgQueue = AppMsgQueue.Create();
@@ -24,7 +24,7 @@ namespace Z0
 
         protected abstract void Execute(params string[] args);
 
-        public virtual IAssemblyResolution[] Resolved {get;}
+        public virtual IApiAssembly[] Resolved {get;}
 
         public void RunApp(params string[] args)
         {
@@ -47,7 +47,7 @@ namespace Z0
 
     public abstract class ConsoleApp<A,C> :  ConsoleApp<A>, IConsoleApp<A,C>
         where A : ConsoleApp<A,C>, new()
-        where C : IComposedContext
+        where C : IComposedApiContext
     {
         public C Context {get;}
 

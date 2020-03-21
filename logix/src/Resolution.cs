@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class Logix : AssemblyResolution<Logix, Logix.C>
+    public sealed class Logix : ApiResolution<Logix, Logix.C>
     {
         public Logix() : base(AssemblyId.Logix) {}
 

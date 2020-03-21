@@ -16,12 +16,12 @@ namespace Z0
     readonly struct ImmInjector<D> : IDynamicImmInjector<D>
         where D : Delegate
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         readonly IDynamicImmInjector<D> ImmProvider;
         
         [MethodImpl(Inline)]
-        public ImmInjector(IContext context, IDynamicImmInjector<D> factory)
+        public ImmInjector(IAppContext context, IDynamicImmInjector<D> factory)
         {
             this.Context = context;
             this.ImmProvider = factory;
@@ -34,10 +34,10 @@ namespace Z0
 
     readonly struct V128BinaryOpImmInjector : IDynamicImmInjector
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal V128BinaryOpImmInjector(IContext context)
+        internal V128BinaryOpImmInjector(IAppContext context)
         {
             this.Context = context;
         }
@@ -50,11 +50,11 @@ namespace Z0
     readonly struct V128BinaryOpImmInjector<T> : IDynamicImmInjector<BinaryOp<Vector128<T>>>
         where T : unmanaged
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
 
         [MethodImpl(Inline)]            
-        internal V128BinaryOpImmInjector(IContext context)
+        internal V128BinaryOpImmInjector(IAppContext context)
         {
             this.Context = context;
         }
@@ -66,10 +66,10 @@ namespace Z0
 
     readonly struct V256BinaryOpImmInjector : IDynamicImmInjector
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal V256BinaryOpImmInjector(IContext context)
+        internal V256BinaryOpImmInjector(IAppContext context)
         {
             this.Context = context;
         }
@@ -82,10 +82,10 @@ namespace Z0
     readonly struct V256BinaryOpImmInjector<T> : IDynamicImmInjector<BinaryOp<Vector256<T>>>
         where T : unmanaged
     { 
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal V256BinaryOpImmInjector(IContext context)
+        internal V256BinaryOpImmInjector(IAppContext context)
         {
             this.Context = context;
         }
@@ -97,10 +97,10 @@ namespace Z0
 
     readonly struct V256UnaryOpImmInjector : IDynamicImmInjector
     {        
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal V256UnaryOpImmInjector(IContext context)
+        internal V256UnaryOpImmInjector(IAppContext context)
         {
             this.Context = context;
         }
@@ -113,10 +113,10 @@ namespace Z0
     readonly struct VUnaryOpImmInjector<T> : IDynamicImmInjector<UnaryOp<Vector256<T>>>
         where T : unmanaged
     {            
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal VUnaryOpImmInjector(IContext context)
+        internal VUnaryOpImmInjector(IAppContext context)
         {
             this.Context = context;
         }
@@ -128,10 +128,10 @@ namespace Z0
 
     readonly struct V128UnaryOpImmInjector : IDynamicImmInjector
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal V128UnaryOpImmInjector(IContext context)
+        internal V128UnaryOpImmInjector(IAppContext context)
         {
             this.Context = context;
         }
@@ -144,10 +144,10 @@ namespace Z0
     readonly struct V128UnaryOpImmInjector<T> : IDynamicImmInjector<UnaryOp<Vector128<T>>>
         where T : unmanaged
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         [MethodImpl(Inline)]            
-        internal V128UnaryOpImmInjector(IContext context)
+        internal V128UnaryOpImmInjector(IAppContext context)
         {
             this.Context = context;
         }
@@ -159,33 +159,33 @@ namespace Z0
 
     readonly struct ImmInjector : IDynamicImmInjector
     {        
-        public IContext Context {get;}
+        public IAppContext Context {get;}
 
         readonly IDynamicImmInjector Embedder;
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, VKT.Vec128 vk, OperatorType<N1> opk)
+        internal ImmInjector(IAppContext context, VKT.Vec128 vk, OperatorType<N1> opk)
         {
             this.Context = context;
             this.Embedder = new V128UnaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, VKT.Vec256 vk, OperatorType<N1> opk)
+        internal ImmInjector(IAppContext context, VKT.Vec256 vk, OperatorType<N1> opk)
         {
             this.Context = context;
             this.Embedder = new V256UnaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, VKT.Vec128 vk, OperatorType<N2> opk)
+        internal ImmInjector(IAppContext context, VKT.Vec128 vk, OperatorType<N2> opk)
         {
             this.Context = context;
             this.Embedder = new V128BinaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, VKT.Vec256 vk, OperatorType<N2> opk)
+        internal ImmInjector(IAppContext context, VKT.Vec256 vk, OperatorType<N2> opk)
         {
             this.Context = context;
             this.Embedder = new V256BinaryOpImmInjector(context);

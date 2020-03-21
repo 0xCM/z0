@@ -6,7 +6,7 @@ namespace Z0.Resolutions
 {        
     using System;
 
-    public sealed class MachineTest : AssemblyResolution<MachineTest>
+    public sealed class MachineTest : ApiResolution<MachineTest>
     {
         const AssemblyId Identity = AssemblyId.MachinesTest;
 

@@ -5,7 +5,7 @@
 namespace Z0.Resolutions
 {
  
-    public sealed class GMathTest : AssemblyResolution<GMathTest>
+    public sealed class GMathTest : ApiResolution<GMathTest>
     {
         const AssemblyId Identity = AssemblyId.GeneriNumericsTest;
 

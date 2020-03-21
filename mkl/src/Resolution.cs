@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class MklApi : AssemblyResolution<MklApi>
+    public sealed class MklApi : ApiResolution<MklApi>
     {
         const AssemblyId Identity = AssemblyId.MklApi;
         

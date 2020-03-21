@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
     /// <summary>
     /// Classifies the precision with which time value should be interpreted

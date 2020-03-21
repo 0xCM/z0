@@ -11,24 +11,7 @@ namespace Z0
 
     using static Root;
 
-
-    public interface IPairProvider<T>
-    {
-        IEnumerable<Pair<T>> Pairs {get;}
-    }
-
-    public readonly struct PairProvider<T> : IPairProvider<T>
-    {
-        public PairProvider(IEnumerable<Pair<T>> src)
-        {
-            this.Pairs = src;
-        }
-
-        public IEnumerable<Pair<T>> Pairs {get;}
-
-    }
-
-    public interface IAppSettings : IPairProvider<string>
+    public interface IAppSettings
     {
         Option<string> Setting(string name);
         
@@ -37,5 +20,28 @@ namespace Z0
         string this[string name] {get;}
 
         IEnumerable<AppSetting> All {get;}
+    }
+
+    public interface IAppSettingSet : ICustomFormattable
+    {
+        IEnumerable<AppSetting> Settings{get;}
+        
+        void Save(FilePath dst);        
+    }
+
+    public interface IAppSettingSet<S> : IAppSettingSet, IFormattable<S>
+        where S : IAppSettingSet<S>, new()
+    {
+        static S From(IAppSettings src)
+            => AppSettingsOps.From<S>(src);
+        
+        IEnumerable<AppSetting> IAppSettingSet.Settings 
+            => AppSettingsOps.Get<S>(this);
+
+        string ICustomFormattable.Format()
+            => AppSettingsOps.Format(Settings);
+        
+        void IAppSettingSet.Save(FilePath dst)
+            => AppSettingsOps.Save(this,dst);
     }
 }

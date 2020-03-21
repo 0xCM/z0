@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class BitPack : AssemblyResolution<BitPack, BitPack.C>
+    public sealed class BitPack : ApiResolution<BitPack, BitPack.C>
     {
         public BitPack() : base (AssemblyId.BitPack) {}
 

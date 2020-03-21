@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class BitFields : AssemblyResolution<BitFields, BitFields.C>
+    public sealed class BitFields : ApiResolution<BitFields, BitFields.C>
     {
         public BitFields() : base(AssemblyId.BitFields) {}
 

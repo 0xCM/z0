@@ -8,7 +8,7 @@ namespace Z0.Resolutions
 {        
     using System;
 
-    public sealed class TimeTest : AssemblyResolution<TimeTest>
+    public sealed class TimeTest : ApiResolution<TimeTest>
     {
 
     }

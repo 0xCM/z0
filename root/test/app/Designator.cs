@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class RootTest : AssemblyResolution<RootTest>
+    public sealed class RootTest : ApiResolution<RootTest>
     {
 
     }

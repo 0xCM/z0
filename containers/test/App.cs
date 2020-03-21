@@ -14,5 +14,5 @@ namespace Z0
 
 namespace Z0.Resolutions
 {
-    public sealed class ContainerTest : AssemblyResolution<ContainerTest> { } 
+    public sealed class ContainerTest : ApiResolution<ContainerTest> { } 
 }

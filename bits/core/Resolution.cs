@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class BitCore : AssemblyResolution<BitCore, BitCore.C>
+    public sealed class BitCore : ApiResolution<BitCore, BitCore.C>
     {
         public BitCore() : base(AssemblyId.BitCore) {}
 

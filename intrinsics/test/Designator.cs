@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class IntrinsicsTest : AssemblyResolution<IntrinsicsTest> 
+    public sealed class IntrinsicsTest : ApiResolution<IntrinsicsTest> 
     {
          
     }

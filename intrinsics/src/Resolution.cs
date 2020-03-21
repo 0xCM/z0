@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Intrinsics : AssemblyResolution<Intrinsics, Intrinsics.C>
+    public sealed class Intrinsics : ApiResolution<Intrinsics, Intrinsics.C>
     {        
         public Intrinsics() : base(AssemblyId.Intrinsics) {}
 

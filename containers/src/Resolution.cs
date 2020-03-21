@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Containers : AssemblyResolution<Containers, Containers.C>
+    public sealed class Containers : ApiResolution<Containers, Containers.C>
     {
         public Containers() : base(AssemblyId.Containers) {}
         

@@ -6,7 +6,7 @@ namespace Z0.Resolutions
 {        
     using System;
 
-    public sealed class LibMTest : AssemblyResolution<LibMTest>
+    public sealed class LibMTest : ApiResolution<LibMTest>
     {
         const AssemblyId Identity = AssemblyId.LibMTest;
 

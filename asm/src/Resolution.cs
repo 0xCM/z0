@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Asm : AssemblyResolution<Asm,Asm.C>
+    public sealed class Asm : ApiResolution<Asm,Asm.C>
     {
         public Asm() : base(AssemblyId.Asm) {}
 

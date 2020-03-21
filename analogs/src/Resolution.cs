@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class Analogs : AssemblyResolution<Analogs, Analogs.C>
+    public sealed class Analogs : ApiResolution<Analogs, Analogs.C>
     {
         public Analogs() : base(AssemblyId.Analogs) {}
 

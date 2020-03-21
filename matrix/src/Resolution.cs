@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Matrix : AssemblyResolution<Matrix, Matrix.C>
+    public sealed class Matrix : ApiResolution<Matrix, Matrix.C>
     {
         const AssemblyId Identity = AssemblyId.Matrix;
 

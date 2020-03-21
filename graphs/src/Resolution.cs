@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Graphs : AssemblyResolution<Graphs, Graphs.C>
+    public sealed class Graphs : ApiResolution<Graphs, Graphs.C>
     {
         public Graphs() : base(AssemblyId.Graphs) {}
         

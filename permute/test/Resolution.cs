@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class PermuteTest : AssemblyResolution<PermuteTest> 
+    public sealed class PermuteTest : ApiResolution<PermuteTest> 
     {
          
     }

@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Math)" />    
     <ProjectReference Include="$(GenericNumerics)" />    
+    <ProjectReference Include="$(TestLib)" />    
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
   </ItemGroup>
 

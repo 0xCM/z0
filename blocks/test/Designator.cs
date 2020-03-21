@@ -8,7 +8,7 @@ namespace Z0.Resolutions
 {
     using System;
 
-    public sealed class DataBlocksTest : AssemblyResolution<DataBlocksTest>
+    public sealed class DataBlocksTest : ApiResolution<DataBlocksTest>
     {
 
     }

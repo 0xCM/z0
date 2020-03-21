@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class RngCore : AssemblyResolution<RngCore, RngCore.C>
+    public sealed class RngCore : ApiResolution<RngCore, RngCore.C>
     {
         public RngCore() : base(AssemblyId.RngCore) {}
         

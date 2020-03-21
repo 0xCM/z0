@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class Fixed : AssemblyResolution<Fixed, Fixed.C>
+    public sealed class Fixed : ApiResolution<Fixed, Fixed.C>
     {
         public Fixed() : base(AssemblyId.Fixed) {}
 

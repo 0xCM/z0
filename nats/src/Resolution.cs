@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Nats : AssemblyResolution<Nats, Nats.C>
+    public sealed class Nats : ApiResolution<Nats, Nats.C>
     {
         public Nats() : base(AssemblyId.Nats) {}
 

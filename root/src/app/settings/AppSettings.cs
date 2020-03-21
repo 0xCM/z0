@@ -26,7 +26,7 @@ namespace Z0
     */
     public class AppSettings : IAppSettings
     {
-        public static IAppSettings Empty => new AppSettings(new PairProvider<string>(new Pair<string>[]{}));
+        public static IAppSettings Empty => new AppSettings(new KeyValuePair<string,string>[]{});
         
         public static IAppSettings Load(FilePath src)
         {
@@ -47,23 +47,28 @@ namespace Z0
                 }
             }
 
-            return new AppSettings(new PairProvider<string>(settings.Select(kvp => Tuples.pair(kvp.Key, kvp.Value))));            
+            return new AppSettings(settings.Select(kvp => (kvp.Key, kvp.Value)));            
         }
 
-        AppSettings(IPairProvider<string> provider)
+        AppSettings(IEnumerable<(string,string)> pairs)
         {
-            this.Pairs = provider.Pairs;            
+            this.Pairs = pairs.Select(pair => new KeyValuePair<string, string>(pair.Item1, pair.Item2)).ToArray();
         }
 
-        public IEnumerable<Pair<string>> Pairs {get;}
+        AppSettings(IEnumerable<KeyValuePair<string,string>> pairs)
+        {
+            this.Pairs = pairs.ToArray();
+        }
+
+        IEnumerable<KeyValuePair<string,string>> Pairs {get;}
                         
         public Option<string> Setting(string name)
         {
-            var matches = Pairs.Where(p => p.Left == name).ToArray();
+            var matches = Pairs.Where(p => p.Key == name).ToArray();
             if(matches.Length == 0)
                 return none<string>();
             else
-                return matches[0].Right;
+                return matches[0].Value;
         }
 
         public Option<T> Setting<T>(string name)        
@@ -80,7 +85,7 @@ namespace Z0
         }
 
         public IEnumerable<AppSetting> All
-            => from p in Pairs select new AppSetting(p.Left, p.Right);        
+            => from p in Pairs select new AppSetting(p.Key, p.Value);        
 
         public string this[string name]
             => Setting(name).ValueOrDefault(string.Empty);

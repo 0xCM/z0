@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Resolutions
 {
-    public sealed class MathTest : AssemblyResolution<MathTest> 
+    public sealed class MathTest : ApiResolution<MathTest> 
     {
         
     } 

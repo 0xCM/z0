@@ -6,7 +6,7 @@
 
 namespace Z0.Resolutions
 {        
-    public sealed class Time : AssemblyResolution<Time, Time.C>
+    public sealed class Time : ApiResolution<Time, Time.C>
     {
         public Time() : base(AssemblyId.Time){}
 

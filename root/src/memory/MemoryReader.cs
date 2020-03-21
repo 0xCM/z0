@@ -12,14 +12,14 @@ namespace Z0
 
     public readonly struct MemoryReader : IMemoryReader
     {
-        public IContext Context {get;}
+        public IAppContext Context {get;}
         
         [MethodImpl(Inline)]
-        public static MemoryReader Create(IContext context)
+        public static MemoryReader Create(IAppContext context)
             => new MemoryReader(context);
 
         [MethodImpl(Inline)]
-        MemoryReader(IContext context)
+        MemoryReader(IAppContext context)
         {
             this.Context = context;
         }
@@ -62,7 +62,7 @@ namespace Z0
     partial class RootX
     {
         [MethodImpl(Inline)]
-        public static IMemoryReader MemoryReader(this IContext context)
+        public static IMemoryReader MemoryReader(this IAppContext context)
             => Z0.MemoryReader.Create(context);        
 
     }    

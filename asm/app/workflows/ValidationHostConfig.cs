@@ -6,12 +6,12 @@ namespace Z0.Asm.Check
 {
     using System;
 
-    public class ValidationHostConfig : AppSettingSet<ValidationHostConfig>
+    public class ValidationHostConfig : IAppSettingSet<ValidationHostConfig>
     {
         public static ValidationHostConfig From(IAppSettings src)
-            => AppSettingSet<ValidationHostConfig>.From(src);
+            => IAppSettingSet<ValidationHostConfig>.From(src);
 
-        public AppSettingSet Ops => this;        
+        public IAppSettingSet Ops => this;        
 
         public bool EmitArtifacts {get; set;} = true;
 

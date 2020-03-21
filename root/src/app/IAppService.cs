@@ -10,7 +10,7 @@ namespace Z0
     }     
 
     public interface IAppService<C> : IService, IContextual<C>
-        where C : IContext
+        where C : IAppContext
     {
         
     }
@@ -22,7 +22,7 @@ namespace Z0
     }
 
     public interface IAppServiceAlloction<C> : IServiceAllocation, IAppService<C>
-        where C : IContext
+        where C : IAppContext
     {
         
     }
