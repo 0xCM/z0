@@ -5,13 +5,10 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Nats;
     using static nfunc;
-    
+        
     public class t_getrf : t_mkl<t_getrf>
     {
         // Taken from https://www.ibm.com/support/knowledgecenter/en/SSFHY8_6.1/reference/am5gr_hsgetrf.html

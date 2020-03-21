@@ -9,11 +9,10 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Nats;
     
     public class t_bm_outer : t_bm<t_bm_outer>
     {
-
         public void outer_product_32()
         {
             const uint fill = 0x55555555;

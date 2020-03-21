@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-    using static zfunc;
 
     /// <summary>
     /// Reprsents a subset of 32 distinct choices, including the empty set
@@ -88,6 +83,4 @@ namespace Z0
             | Choice17 | Choice18 | Choice19 | Choice20 | Choice21 | Choice22 | Choice23 | Choice24 
             | Choice25 | Choice26 | Choice27 | Choice28 | Choice29 | Choice30 | Choice31 | Choice32
     }
-
-
 }

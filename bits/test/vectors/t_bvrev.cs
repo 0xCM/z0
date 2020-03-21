@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     public class t_bvrev : t_bitvectors<t_bvrev>
     {
         public void bvrev_n2x8()

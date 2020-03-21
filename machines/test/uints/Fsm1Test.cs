@@ -12,8 +12,6 @@ namespace Z0
 
     using Z0.Machines;
 
-    using static zfunc;
-
     using static Fsm1Spec.States;
     
     public class Fsm1Test : UnitTest<Fsm1Test>
@@ -33,7 +31,5 @@ namespace Z0
             }
             Task.WaitAll(tasks);                            
         }
-
-
     }
 }

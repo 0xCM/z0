@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static VSvcHosts;
+    using static Nats;
 
     public class t_vconcat : t_vinx<t_vconcat>
     {     

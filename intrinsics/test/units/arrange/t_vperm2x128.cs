@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Root;
     using static Nats;
 
     public class t_vperm2x128 : t_vinx<t_vperm2x128>

@@ -46,7 +46,7 @@ namespace Z0
             var description = text.factory.Builder();
             var indent = "/// ";
             var bits = BitString.scalar(sample).Format(specifier:true);
-            var header = $"{indent}512x{zfunc.bitsize(default(T))}, {maskspec}, {bits}";            
+            var header = $"{indent}512x{bitsize(default(T))}, {maskspec}, {bits}";            
             description.AppendLine(header);
             description.AppendLine($"{indent}source: {source.Format(pad:2)}");
             description.AppendLine($"{indent}target: {target.Format(pad:2)}");            

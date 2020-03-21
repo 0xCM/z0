@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-
-    using static zfunc;
-    using static nfunc;
  
     public sealed class t_uint8 : UnitTest<t_uint8>
     {

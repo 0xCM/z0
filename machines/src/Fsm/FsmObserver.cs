@@ -5,10 +5,6 @@
 namespace Z0.Machines
 {
     using System;
-    using System.Threading.Tasks;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using static zfunc;
 
     /// <summary>
     /// Receives notifications from an active machine
@@ -49,7 +45,7 @@ namespace Z0.Machines
         
         void Trace(AppMsg msg)
         {
-            print(msg);
+            term.print(msg);
         }
 
         /// <summary>

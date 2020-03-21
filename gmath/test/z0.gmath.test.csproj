@@ -12,7 +12,6 @@
 
     <ProjectReference Include="$(TestApp)" />
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
   </ItemGroup>
 
 </Project>

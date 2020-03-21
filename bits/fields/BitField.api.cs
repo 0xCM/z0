@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public static class BitField
     {

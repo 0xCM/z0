@@ -8,9 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TopDir)asm/core/z0.asm.core.csproj" />   
-    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />    
-  </ItemGroup>
+    <ProjectReference Include="$(AsmCore)" />   
+    <ProjectReference Include="$(BitCore)" />    
+    <ProjectReference Include="$(BitFields)" />   
 
+  </ItemGroup>
 
 </Project>

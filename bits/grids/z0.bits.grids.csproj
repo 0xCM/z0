@@ -8,8 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(TopDir)graphs/src/z0.graphs.csproj" />
-    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
+    <ProjectReference Include="$(Graphs)" />
+    <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    

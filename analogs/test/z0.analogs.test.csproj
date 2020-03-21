@@ -7,13 +7,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(TopDir)analogs/src/z0.analogs.csproj" />        
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(TestApp)" />  
+    <ProjectReference Include="$(Analogs)" />        
   </ItemGroup>
 
 </Project>

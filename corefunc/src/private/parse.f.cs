@@ -87,92 +87,28 @@ partial class zfunc
     /// <param name="f1">The non-null evaluator</param>
     /// <param name="f2">The null evaluator</param>
     [MethodImpl(Inline)]
-    public static T ifvalue<S, T>(S x, Func<S, T> f1, Func<T> f2)
+    static T ifvalue<S, T>(S x, Func<S, T> f1, Func<T> f2)
         where S : class => (x != null) ? f1(x) : f2();
-
+ 
     /// <summary>
     /// Attempts to parse the supplied value
     /// </summary>
     /// <typeparam name="T">The target type</typeparam>
     /// <param name="s">The value to parse</param>
-    public static T parse<T>(string s)
-        => ifvalue(s, _ => (T)parsers[typeof(T)](s), () => default(T));
-
-    /// <summary>
-    /// Attempts to parse the supplied value
-    /// </summary>
-    /// <typeparam name="T">The target type</typeparam>
-    /// <param name="s">The value to parse</param>
-    public static Option<T> tryParse<T>(string s, Action<Exception> error = null)
+    static Option<T> tryParse<T>(string s, Action<Exception> error = null)
     {
         try
         {
-            return ifvalue(s, _ => (T)parsers[typeof(T)](s), () => none<T>());
+            return ifvalue(s, _ => (T)parsers[typeof(T)](s), () => Option.none<T>());
         }
         catch (Exception e)
         {
             error?.Invoke(e);
-            return none<T>();
+            return Option.none<T>();
         }
     }
     
-    /// <summary>
-    /// Returns a parsed value if successful, otherwise none
-    /// </summary>
-    /// <param name="t">The type to be hydrated</param>
-    /// <param name="s">The text to be parsed</param>
-    public static Option<object> tryParse(Type t, string s, Action<Exception> error = null)
-    {
-        try
-        {
-            return s != null  ? parsers[t](s) : null;
-        
-        }
-        catch (Exception e)
-        {
-            error?.Invoke(e);
-            return none<object>();
-        }
-    }
-
-    /// <summary>
-    /// Parses a list of name-value pairs and hydrates a conforming type
-    /// </summary>
-    /// <typeparam name="T">The type to materialize from the sequence of (name,value) pairs</typeparam>
-    /// <param name="values">The values to parse</param>
-    public static T parse<T>(IEnumerable<(string name, string value)> values)
-        where T : new()
-    {
-        var element = new T();
-        var properties = typeof(T).GetProperties().ToDictionary(x => x.Name);
-        iter(values,
-            kvp => properties.TryFind(kvp.name)
-                             .OnSome(p => p.SetValue(element, parse(p.PropertyType, kvp.value))));
-        return element;
-    }
-
-
-    /// <summary>
-    /// Parse an enum or returns a default value if parsing fails
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="text"></param>
-    /// <param name="default"></param>
-    public static T parseEnum<T>(string text, T @default)
-        where T : unmanaged
-    {
-        var result = @default;
-        Enum.TryParse(text, true, out result);
-        return result;
-    }
-
-    /// <summary>
-    /// Parses an enumeration
-    /// </summary>
-    /// <typeparam name="T">The enumeration type</typeparam>
-    /// <param name="value">The value of the enumeration</param>
-    public static T parseEnum<T>(string value)
-        => (T)Enum.Parse(typeof(T), value, true);
+ 
 
     /// <summary>
     /// Helper to parse a boolean value in a more reasonable fashion than the intrinsic <see cref="bool.Parse(string)"/> method

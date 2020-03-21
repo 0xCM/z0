@@ -8,11 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TestApp)" />
 
     <ProjectReference Include="$(TopDir)bits/strings/z0.bits.strings.csproj" />
-    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
+    <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(TopDir)bits/fields/z0.bits.fields.csproj" />
     <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
     <ProjectReference Include="$(TopDir)bits/bitpack/z0.bits.bitpack.csproj" />

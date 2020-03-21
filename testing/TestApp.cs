@@ -94,7 +94,7 @@ namespace Z0
                 var runtimer = time.stopwatch();
                 var clock = counter(false);
                 
-                unit = host.CreateInstance<IUnitTest>();
+                unit = host.Instantiate<IUnitTest>();
                 if(!unit.Enabled)
                     return;
 
@@ -366,6 +366,36 @@ namespace Z0
         protected virtual bool RunCustom()
             => true;
 
+        static ILogger GetLogger(ILogTarget dst)
+            => dst.Area switch{
+                LogArea.App => Log.App,
+                LogArea.Bench => Log.Bench,
+                LogArea.Test => Log.Test,
+                _ => throw new ArgumentException()
+            };
+
+        static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
+            where R : IRecord
+        {
+            if(records.Length == 0)
+                return FilePath.Empty;
+            
+            return GetLogger(LogTarget.Define(LogArea.Test)).Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
+        }
+
+        static FilePath LogTestResults<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
+            where R : IRecord
+                => LogTestResults(FolderName.Empty, basename, records, mode, header, delimiter);
+
+        static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = AsciSym.Pipe)
+            where R : IRecord
+        {
+            if(records.Length == 0)
+                return FilePath.Empty;
+                        
+            return GetLogger(LogTarget.Define(LogArea.Bench)).Write(records, FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
+        }
+
         void EmitLogs()
         {
             var basename = AppName;
@@ -373,17 +403,17 @@ namespace Z0
             var benchmarks = TakeSortedBenchmarks();
             if(benchmarks.Any())
             {
-                Log.LogBenchmarks(basename.Replace(".test",".bench"),benchmarks, LogWriteMode.Overwrite);
+                LogBenchmarks(basename.Replace(".test",".bench"),benchmarks, LogWriteMode.Overwrite);
             }
             
             var results = TakeSortedResults();
             if(results.Any())
             {
                 // Emit a unique file
-                Log.LogTestResults(FolderName.Define("history"), basename, results, LogWriteMode.Create);
+                LogTestResults(FolderName.Define("history"), basename, results, LogWriteMode.Create);
                 
                 // Overwrite the current test log file for the app
-                Log.LogTestResults(basename, results, LogWriteMode.Overwrite);
+                LogTestResults(basename, results, LogWriteMode.Overwrite);
             }
         }
 

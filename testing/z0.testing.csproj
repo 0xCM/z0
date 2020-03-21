@@ -7,12 +7,16 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />
+    <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(TopDir)time/src/z0.time.csproj" />
+    <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Math)" />    
     <ProjectReference Include="$(GenericNumerics)" />    
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(TopDir).settings/Settings.cs" />
   </ItemGroup>
 
 </Project>

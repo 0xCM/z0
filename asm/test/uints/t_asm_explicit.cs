@@ -14,10 +14,13 @@ namespace Z0
     {
         protected new IAsmContext Context;
 
+        FolderPath LogDir;
+
         public t_asm_explicit()
         {
             //Context = AsmContext.Rooted(this,DefaultComposition.Create());
             Context = AsmContext.Rooted(this, AsmCompostionRoot.Compose());
+            this.LogDir = Context.EmissionPaths().DataSubDir(FolderName.Define(GetType().Name));
                                     
         }
    
@@ -35,23 +38,5 @@ namespace Z0
         protected abstract void OnExecute(in AsmBuffers buffers);
 
 
-        protected static IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Hex);    
-            return  context.CodeWriter(dst);
-        }
-
-        protected static IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Raw);    
-            return  context.CodeWriter(dst);
-        }
-
-        protected static IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(typeof(E).Name), test, FileExtensions.Asm);
-            var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.WithFormat(format).AsmWriter(path);
-        }
     }
 }

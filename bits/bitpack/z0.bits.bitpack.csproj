@@ -12,7 +12,7 @@
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
 
     <!-- <ProjectReference Include="$(TopDir)containers/src/z0.containers.csproj" />
-    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
+    <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" /> -->
   </ItemGroup>
 

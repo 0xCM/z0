@@ -6,8 +6,6 @@ namespace Z0.Logix
 {
     using System;
     
-    using static zfunc;
-
     using static BitLogicSpec;
     using static LogicEngine;
 

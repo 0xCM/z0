@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
 
     public class t_unpack : t_bitcore<t_unpack>
     {
@@ -115,6 +115,5 @@ namespace Z0
 
             ReportBenchmark(opname,opcount,counter);
         }
-
     }
 }

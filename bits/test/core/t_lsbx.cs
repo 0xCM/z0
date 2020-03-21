@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static zfunc;
-
+    
     public class t_lsbx : t_bitcore<t_lsbx>
     {
         public void xlsb_outline()
@@ -42,6 +40,6 @@ namespace Z0
                 Claim.eq(x,y);
             }
         }
- 
+
     }
 }

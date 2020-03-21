@@ -5,12 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
-    using static zfunc;
     using static TypedLogicSpec;
-    using static LogicEngine;
 
     public abstract class TypedLogixTest<X> : LogixTest<X>
         where X : TypedLogixTest<X>

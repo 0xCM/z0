@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     
-    using static zfunc;
+    using static Nats;
 
     public class t_mux : t_bitcore<t_mux>
     {

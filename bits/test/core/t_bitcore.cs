@@ -6,10 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static As;
-
-    using static zfunc;
-
+    
     public abstract class t_bitcore<X> : UnitTest<X>
         where X : t_bitcore<X>, new()
     {

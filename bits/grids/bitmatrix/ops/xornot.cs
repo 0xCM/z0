@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-    using static As;
+    using static Root;
+    using static Nats;
 
     partial class BitMatrix
     {
@@ -89,5 +89,4 @@ namespace Z0
             return ref Z;
         }
    }
-
 }

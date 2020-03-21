@@ -8,7 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_bitstring : t_bitcore<t_bitstring>
     {                
@@ -333,11 +334,10 @@ namespace Z0
                 gbits.parse(x, 0, out T y);
                 Claim.eq(src[i], y);                
             }
-
         }
 
-        void TraceError(string msg)
-            => trace(appMsg(msg, AppMsgKind.Error));
+        void TraceError(string description)
+            => trace(msg(description, AppMsgKind.Error));
 
         void bs_parse_range_check(int minlen, int maxlen)
         {

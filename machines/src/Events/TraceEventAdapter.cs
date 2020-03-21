@@ -9,8 +9,6 @@ namespace Z0
     using Microsoft.Diagnostics.Tracing.Session;
     using System.Linq.Expressions;
     
-    using static zfunc;
-
     public static class TraceEventAdapter
     {
         public static T Payload<T>(this TraceEvent e, string name)

@@ -11,6 +11,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Linq;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using Z0.Asm;
 
@@ -46,6 +47,28 @@ namespace Z0
                             select c.AssemblyId;
             foreach(var id in selection)
                 archive.Archive(id);    
+        }
+
+        static IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
+            return  context.CodeWriter(dstPath);
+        }
+
+        static IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Raw);    
+            return  context.CodeWriter(dstPath);
+        }
+
+        static IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Asm);    
+            var format = AsmFormatConfig.New.WithFunctionTimestamp();
+            return context.WithFormat(format).AsmWriter(dstPath);
         }
 
         static void buffer_client(IAsmContext context)

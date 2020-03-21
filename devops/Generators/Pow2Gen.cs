@@ -33,11 +33,12 @@ namespace Z0
 
         public static void GenToFile()
         {
-            var filename = OutFile;
-            var outpath = LogArea.App.TargetPath(filename);
-            term.print($"Generating {outpath}");
+            var outpath = FilePath.Empty;
+            // var filename = OutFile;
+            // var outpath = LogArea.App.TargetPath(filename);
+            // term.print($"Generating {outpath}");
 
-            using var dst = LogArea.App.LogWriter(filename);
+            using var dst = outpath.Writer();
             dst.WriteLine($"public static class {ClassName}");
             dst.WriteLine("{");
             dst.WriteLine(GenAccessor<ulong>());

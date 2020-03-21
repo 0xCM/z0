@@ -5,7 +5,8 @@
 namespace Z0
 {
     using System;
-    using static zfunc;
+
+    using static vgeneric;
 
     sealed class VUnaryValidator128D<T> : Validator, IVUnaryValidator128D<T>
         where T : unmanaged
@@ -39,7 +40,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                term.error(e, casename);
                 succeeded = false;
             }
             finally
@@ -81,7 +82,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                term.error(e, casename);
                 succeeded = false;
             }
             finally

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Nats;
+    using static vgeneric;
 
     public class t_vtakemask : t_vinx<t_vtakemask>
     {

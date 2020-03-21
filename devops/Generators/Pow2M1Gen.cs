@@ -39,11 +39,13 @@ namespace Z0
 
         public static void GenToFile()
         {
-            var filename = OutFile;
-            var outpath = LogArea.App.TargetPath(filename);
-            term.print($"Generating {outpath}");
+            // var filename = OutFile;
+            // var outpath = LogArea.App.TargetPath(filename);
+            // term.print($"Generating {outpath}");
 
-            using var dst = LogArea.App.LogWriter(filename);
+            // using var dst = LogArea.App.LogWriter(filename);
+            var outpath = FilePath.Empty;
+            using var dst = outpath.Writer();
             dst.WriteLine($"public static class {ClassName}");
             dst.WriteLine("{");
             dst.WriteLine(GenAccessor<sbyte>());
@@ -55,8 +57,6 @@ namespace Z0
             dst.WriteLine(GenAccessor<long>());
             dst.WriteLine(GenAccessor<ulong>());
             dst.WriteLine("}");
-
         }
     }
-
 }

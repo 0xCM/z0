@@ -67,6 +67,5 @@ namespace Z0
                 Claim.nea(gmath.nonz(y1));                        
             }
         }
-
     }
 }

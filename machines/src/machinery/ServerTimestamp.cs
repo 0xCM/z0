@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public readonly struct ServerTimestamp
     {
         [MethodImpl(Inline)]
         public static ulong Timestamp(uint ServerId = 0)        
-            => (ulong)(now().Ticks - TimeOrigin.Ticks);                        
+            => (ulong)(time.now().Ticks - TimeOrigin.Ticks);                        
 
         static DateTime TimeOrigin => new DateTime(2019,01,01);        
     }

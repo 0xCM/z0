@@ -15,11 +15,12 @@ namespace Z0
     public sealed class t_native_reader : t_asm<t_native_reader>
     {
         protected override bool TraceEnabled => true;
-        
+
         StreamWriter NativeTestWriter([Caller] string test = null)
         {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
-            return  new StreamWriter(path.CreateParentIfMissing().FullPath);
+            var dstDir = Context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_native_reader).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
+            return dstPath.Writer();
         }
 
         public void parse_address_segment()

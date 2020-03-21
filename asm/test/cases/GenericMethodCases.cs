@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     static class GenericMethodCases
     {
@@ -27,6 +27,4 @@ namespace Z0
             where T : unmanaged
                 => gmath.xor(a,b);
     }
-
-
 }

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Threading.Tasks;
 
-    using static zfunc;
-
     /// <summary>
     /// Defines base type for event originators
     /// </summary>

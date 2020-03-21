@@ -27,9 +27,6 @@ namespace Z0
             var dst = dvec.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            
-
-            // Trace(src.Format());
-            // Trace(dst.Format());
         }
 
         public void transpose_4x4_check()

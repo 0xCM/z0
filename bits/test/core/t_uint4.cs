@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
-
     public class t_uint4 : t_bitcore<t_uint4>
     {
         public void add_4u_check()

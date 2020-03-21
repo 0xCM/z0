@@ -9,7 +9,6 @@ namespace Z0
 
     partial class Root
     {
-
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref sbyte int8<T>(in T src)
             => ref Unsafe.As<T,sbyte>(ref edit(in src));

@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.IO;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     using System.Runtime.CompilerServices;
-    using static zfunc;
+
+    using static Root;
 
     static class VectorizedCases
     {
@@ -54,8 +51,5 @@ namespace Z0
         public static Vector256<T> vxor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => gvec.vxor(x,y);
-
     }
-
-
 }

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
     
     public class t_bg_layout : t_bg<t_bg_layout>
     {        
-
         public void bg_layout_21x32x32()
         {
             var a0 = GridSpec.Define(n21,n32,0u);
@@ -87,7 +87,5 @@ namespace Z0
                 state = !state;
             }        
         }
-
     }
-
 }

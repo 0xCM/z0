@@ -51,7 +51,7 @@ namespace Z0
 
         public void part0()
         {
-            var src = zfunc.ldomain(5,12);
+            var src = Interval.closed(5,12);
             var dst = Partition.measuredPoints(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.CompilerServices;
 
     using static Root;
     using static Nats;

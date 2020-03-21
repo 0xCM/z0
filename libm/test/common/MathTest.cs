@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
+    using static Root;
 
     public class t_libm<T> : UnitTest<T>
         where T : t_libm<T>, new()

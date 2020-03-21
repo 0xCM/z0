@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_bitspan_ops : UnitTest<t_bitspan_ops>
     {

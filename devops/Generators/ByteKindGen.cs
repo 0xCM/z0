@@ -15,8 +15,6 @@ namespace Z0
         public static ByteKindGen Define(bool hex)
             => new ByteKindGen(hex);
         
-        static LogPaths Paths => LogPaths.The;
-
         public bool HexEnum {get;}
         
         ByteKindGen(bool HexEnum)
@@ -67,11 +65,11 @@ namespace Z0
 
         public Option<FilePath> Save(CSharpSource src)
         {
-            var filename = HexEnum ? FileName.Define("HexByteKind.cs") :  FileName.Define("ByteKind.cs");
-            var dstpath = Paths.TargetPath(LogArea.App,filename);
-            using var dst = dstpath.Writer();
+            // var filename = HexEnum ? FileName.Define("HexByteKind.cs") :  FileName.Define("ByteKind.cs");
+            // var dstpath = Paths.TargetPath(LogArea.App,filename);
+            using var dst = FilePath.Empty.Writer();
             dst.WriteLine(src);
-            return dstpath;
+            return FilePath.Empty;
         }
 
         public Option<FilePath> GenToFile()

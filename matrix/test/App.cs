@@ -5,10 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using static zfunc;
 
     class App : TestApp<App>
     {                    
@@ -19,7 +15,6 @@ namespace Z0
         }
         
         public static void Main(params string[] args)
-            => Run(args);
-    
+            => Run(args);    
     }
 }

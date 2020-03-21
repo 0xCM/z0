@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-    using static zfunc;
 
     /// <summary>
     /// Reprsents a subset of 8 distinct choices, including the empty set

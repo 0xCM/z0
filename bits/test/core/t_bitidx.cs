@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     public class t_bitidx : t_bitcore<t_bitidx>
     {
         public void bit_index_inc()

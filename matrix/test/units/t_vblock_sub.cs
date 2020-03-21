@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using VecLen = NatSeq<N1,N2,N3>;
     
-    using static zfunc;
+    using static Root;
 
     public class vblock_sub : UnitTest<vblock_sub>
     {   
@@ -114,7 +114,7 @@ namespace Z0
         static Span<T> sub<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
-            var count = length(lhs,rhs);
+            var count = Checks.length(lhs,rhs);
             for(var i = 0; i< count; i++)
                 lhs[i] = gmath.sub(lhs[i], rhs[i]);
             return lhs;

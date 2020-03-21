@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Nats;
 
     public class t_bm_cnonimpl : t_bm<t_bm_cnonimpl>
     {                

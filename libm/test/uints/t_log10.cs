@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public class t_log10 : t_libm<t_log10>
     {
         public void log10_libm_validate()

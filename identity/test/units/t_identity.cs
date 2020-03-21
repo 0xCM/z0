@@ -9,8 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     public abstract class t_identity<U> : UnitTest<U>
         where U : t_identity<U>
     {

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public class t_bitrev : t_bitcore<t_bitrev>
     {
         public void bitrev_8()

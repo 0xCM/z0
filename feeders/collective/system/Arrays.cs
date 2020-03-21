@@ -49,6 +49,9 @@ namespace Z0
             return fill(dst,src);
         }            
 
+        public static T[] from<T>(IEnumerable<T> src)
+            => src.ToArray();
+
         /// <summary>
         /// Fills an array, in-place, with a specified value
         /// </summary>
@@ -194,6 +197,5 @@ namespace Z0
                 dst[i] = src[indices[i]];
             return dst;
         }            
-
     }
 }

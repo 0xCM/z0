@@ -10,8 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
-
     public static class SeedGenerators
     {
     }

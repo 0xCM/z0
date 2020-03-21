@@ -8,8 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
+    using static Root;
 
     public static class Gates
     {
@@ -60,7 +59,5 @@ namespace Z0
         public static ref readonly MuxGate<T> mux<T>()
             where T : unmanaged
                 => ref MuxGate<T>.Gate;
-
     }
-
 }

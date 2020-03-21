@@ -8,6 +8,7 @@ namespace Z0
 
     using static Root;
         
+        
     public class t_bitview : t_bitcore<t_bitview>
     {
         public void bitview_8()

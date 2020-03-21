@@ -10,7 +10,7 @@ namespace Z0.Resolutions
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static zfunc;
+    using static Root;
 
 
     /// <summary>
@@ -20,8 +20,5 @@ namespace Z0.Resolutions
     {
         public override AssemblyRole Role 
             => AssemblyRole.Library;
-
     }
-
-
 }

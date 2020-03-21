@@ -8,7 +8,7 @@ namespace Z0.CpuModel
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    using static zfunc;
+    using static Root;
     using static Registers;
 
     [StructLayout(LayoutKind.Explicit, Size = 128)]

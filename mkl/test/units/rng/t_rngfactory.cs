@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.IO;
+
     using Z0.Mkl;
 
-    using static zfunc;
+    using static Root;
     
     public class t_rngfactory : UnitTest<t_rngfactory>
     {

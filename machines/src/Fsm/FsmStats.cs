@@ -5,10 +5,6 @@
 namespace Z0.Machines
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static zfunc;
 
     /// <summary>
     /// Captures state machine execution metrics

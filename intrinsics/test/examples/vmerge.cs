@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     
-    using static Root;
     using static Nats;
     using static vgeneric;
 

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
+    using static vgeneric;
 
     partial class Linear
     {
@@ -68,7 +69,5 @@ namespace Z0
             gblocks.vsub(x.Data,y.Data,z.Data);
             return ref z;
         }
-
-
     }
 }

@@ -41,7 +41,7 @@ namespace Z0.Asm.Check
         }
 
         public App()
-            : base(CreateContext(), Log.Get(LogTarget.Define(LogArea.App)))
+            : base(CreateContext())
         {
 
         }

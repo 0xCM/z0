@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Threading;
-    using static zfunc;
+
+    using static Root;
 
     public class App : TestApp<App>
     {            
@@ -19,22 +20,22 @@ namespace Z0
         {
             Terminal.Get().SetTerminationHandler(OnTerminate);
             
-            cyan($"Starting server complex");
+            term.cyan($"Starting server complex");
             ServerComplex.Start(AgentContext).ContinueWith(complex => 
                 {
                     Complex = complex.Result;
-                    magenta("Server complex started");
+                    term.magenta("Server complex started");
 
                 });
 
             var control = AgentControl.FromContext(this);
             control.Configure(AgentContext).ContinueWith(_ => 
             {
-                inform($"There are {control.SummaryStats.AgentCount.ToString()} agents in play");
+                term.inform($"There are {control.SummaryStats.AgentCount.ToString()} agents in play");
             });
 
             
-            readKey("Press any key to terminate the application");            
+            term.readKey("Press any key to terminate the application");            
         }
 
         void OnTerminate()
@@ -43,9 +44,9 @@ namespace Z0
             {                          
 
                 Complex.OnSome(c => {
-                    cyan($"Shutting down server complex");
+                    term.cyan($"Shutting down server complex");
                     c.Stop().Wait();
-                    magenta($"Server complex shut down complete");                    
+                    term.magenta($"Server complex shut down complete");                    
                 });
             }
         }   

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Nats;
 
     public class t_bvperm : t_bitvectors<t_bvperm>
     {        

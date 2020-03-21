@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Root;
 
     public readonly ref struct BitFieldSpecV1
     {
@@ -29,7 +29,7 @@ namespace Z0
         public FieldSegment this[int i]
         {
             [MethodImpl(Inline)]
-            get => skip<FieldSegment>(Fields,i);
+            get => refs.skip<FieldSegment>(Fields,i);
         }
 
         public int FieldCount

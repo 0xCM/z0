@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     public sealed class VariableExpr<T> : IVarExpr<T>
         where T : unmanaged

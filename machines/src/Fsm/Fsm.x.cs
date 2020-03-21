@@ -9,7 +9,7 @@ namespace Z0.Machines
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     using static ObserverTrace;
 
@@ -57,6 +57,5 @@ namespace Z0.Machines
         /// <param name="trace">The trace specification</param>
         public static bool TraceErrors(this ObserverTrace trace)
             => (trace & Errors) == Errors;
-
     }
 }

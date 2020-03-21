@@ -13,22 +13,12 @@ namespace Z0
     {        
         readonly IContext Context;
 
-        readonly IAppMsgLog MsgLog;
-
         readonly IAppMsgQueue MsgQueue;
                 
-        // protected ConsoleApp(IContext context, IAppMsgLog log)
-        // {
-        //     this.Context = context;
-        //     this.MsgQueue = AppMsgQueue.Create();
-        //     this.MsgLog = log;
-        // }
-
-        protected ConsoleApp(IComposedContext context, IAppMsgLog log)
+        protected ConsoleApp(IComposedContext context)
         {
             this.Context = context;
             this.MsgQueue = AppMsgQueue.Create();
-            this.MsgLog = log;
             this.Resolved = context.Compostion.Resolved;
         }
 
@@ -61,8 +51,8 @@ namespace Z0
     {
         public C Context {get;}
 
-        protected ConsoleApp(C context, IAppMsgLog log)
-            : base(context, log)
+        protected ConsoleApp(C context)
+            : base(context)
         {
             Context = context;
         }

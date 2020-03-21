@@ -10,11 +10,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_vperm : UnitTest<t_vperm>
     {
-
 
         // [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] 
         //

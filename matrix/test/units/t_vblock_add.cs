@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_vblock_add : UnitTest<t_vblock_add>
     {   
@@ -75,7 +76,7 @@ namespace Z0
         public static Span<T> add<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged        
         {
-            for(var i=0; i< length(lhs,rhs); i++)
+            for(var i=0; i< Checks.length(lhs,rhs); i++)
                 lhs[i] = gmath.add(lhs[i], rhs[i]);
             return lhs;
         }

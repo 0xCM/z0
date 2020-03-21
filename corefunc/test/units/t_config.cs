@@ -8,8 +8,6 @@ namespace Z0
 
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
-
     public sealed class t_config : UnitTest<t_config>
     {
 

@@ -8,15 +8,15 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Nats;
 
     public class t_bb_extract : t_bitblock<t_bb_extract>
     {
         public void bb_extract_64()
         {
             var src = Random.Stream<ulong>().Take(RepCount).ToArray();
-            var lower = Random.Stream(ldomain<byte>(0,32)).Take(RepCount).ToArray();
-            var upper = Random.Stream(ldomain<byte>(32,64)).Take(RepCount).ToArray();
+            var lower = Random.Stream(Interval.closed<byte>(0,32)).Take(RepCount).ToArray();
+            var upper = Random.Stream(Interval.closed<byte>(32,64)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
                 var v1 = Blocks.literals(n256,src[i]);
@@ -41,8 +41,8 @@ namespace Z0
         public void bb_extract_32()
         {
             var src = Random.Stream<uint>().Take(RepCount).ToArray();
-            var lower = Random.Stream(ldomain<byte>(0,16)).Take(RepCount).ToArray();
-            var upper = Random.Stream(ldomain<byte>(16,32)).Take(RepCount).ToArray();
+            var lower = Random.Stream(Interval.closed<byte>(0,16)).Take(RepCount).ToArray();
+            var upper = Random.Stream(Interval.closed<byte>(16,32)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
                 var v1 = Blocks.literals(n256,src[i]);
@@ -58,8 +58,8 @@ namespace Z0
         public void bb_extract_16()
         {
             var src = Random.Stream<ushort>().Take(RepCount).ToArray();
-            var lower = Random.Stream(ldomain<byte>(0,8)).Take(RepCount).ToArray();
-            var upper = Random.Stream(ldomain<byte>(8,16)).Take(RepCount).ToArray();
+            var lower = Random.Stream(Interval.closed<byte>(0,8)).Take(RepCount).ToArray();
+            var upper = Random.Stream(Interval.closed<byte>(8,16)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
                 var v1 = Blocks.literals(n256,src[i]);

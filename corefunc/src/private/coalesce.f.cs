@@ -20,7 +20,7 @@ partial class zfunc
     /// <param name="x">The object to test</param>
     /// <param name="replace">The function that yields a replacement value in the event that the supplied value is null</param>
     [MethodImpl(Inline)]
-    public static T coalesce<T>(T x, Func<T> replace)
+    static T coalesce<T>(T x, Func<T> replace)
         where T : class => x ?? replace();
 
     /// <summary>
@@ -30,7 +30,7 @@ partial class zfunc
     /// <param name="fallback">The value to return when the source is null</param>
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
-    public static T coalesce<T>(T x, T replace)
+    static T coalesce<T>(T x, T replace)
         where T : class => x ?? replace;
 
     /// <summary>
@@ -40,7 +40,7 @@ partial class zfunc
     /// <param name="fallback">A function that produces a value if needed</param>
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
-    public static T coalesce<T>(T? x, Func<T> fallback)
+    static T coalesce<T>(T? x, Func<T> fallback)
         where T : unmanaged
             => x == null ? fallback() : x.Value;
 
@@ -51,7 +51,7 @@ partial class zfunc
     /// <param name="fallback">The value to return when the source is null</param>
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
-    public static T coalesce<T>(T? x, T fallback)
+    static T coalesce<T>(T? x, T fallback)
         where T : unmanaged
             => x == null ? fallback : x.Value;
 }

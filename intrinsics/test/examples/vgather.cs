@@ -9,7 +9,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static vgeneric;
     using static dvec;
 
     partial class vexamples

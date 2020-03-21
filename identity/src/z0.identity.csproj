@@ -8,11 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />        
+    <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />        
-    <ProjectReference Include="$(TopDir)graphs/src/z0.graphs.csproj" />        
-
-    <ProjectReference Include="$(TopDir)vectorized/src/z0.vectorized.csproj" />        
+    <ProjectReference Include="$(Graphs)" />
+    <ProjectReference Include="$(Vectorized)" />        
 
   </ItemGroup>
 

@@ -8,7 +8,8 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using TL = TypedLogicSpec;
     
     public class t_typed_identities : UnitTest<t_typed_identities>

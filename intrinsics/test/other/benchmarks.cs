@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static vgeneric;
 
     public class t_intrinsic_bench : t_vinx<t_intrinsic_bench>
     {

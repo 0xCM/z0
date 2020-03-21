@@ -5,11 +5,7 @@
 namespace Z0.Machines
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
  
-    using static zfunc;
-
     /// <summary>
     /// Defines a key, predicated on input event and current state, identifies a transition rule
     /// </summary>

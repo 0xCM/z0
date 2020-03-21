@@ -10,7 +10,6 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
-    using static zfunc;
 
     public static class Fsm
     {
@@ -202,9 +201,9 @@ namespace Z0.Machines
                     machine.Submit(eventstream.First());
                 return machine.QueryStats();
             }
-            catch(Exception error)
+            catch(Exception e)
             {
-                print(appMsg(error));
+                term.error(e);
                 return default;
             }
 

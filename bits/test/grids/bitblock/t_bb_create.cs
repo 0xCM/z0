@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     public class t_bb_create : t_bitblock<t_bb_create>
     {
         public void bb_create_124x8()

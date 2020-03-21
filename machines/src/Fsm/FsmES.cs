@@ -10,7 +10,7 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a state machine with minimal feature-set
@@ -29,7 +29,7 @@ namespace Z0.Machines
             this.Transition = transition;
             this.ReceiptCount = 0;
             this.TransitionCount = 0;
-            this.Runtime = stopwatch(false);
+            this.Runtime = time.stopwatch(false);
         }
 
         /// <summary>

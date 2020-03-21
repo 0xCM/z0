@@ -5,13 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Linq;
     using System.Collections.Generic;
 
-    using static zfunc;
-    using static As;
+    using static Root;
+    using static Nats;
 
     public class t_masks : t_bitcore<t_masks>
     {                    

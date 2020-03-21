@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Nats;
+    using static vgeneric;
     using static HexConst;
 
     public class t_vmaskstore : t_vinx<t_vmaskstore>

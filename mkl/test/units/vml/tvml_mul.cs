@@ -5,9 +5,6 @@
 namespace Z0.Mkl.Test
 {
     using System;
-
-    using static zfunc;
-    using static nfunc;
     
     public class tvml_mul : t_mkl<tvml_mul>
     {

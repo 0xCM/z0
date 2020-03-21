@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Diagnostics.Tracing;
-    using System.Collections.Generic;
-    using static zfunc;
-
 
     [EventSource(Name = SourceName)]    
     public sealed class SystemEventWriter : EventWriter, IPulseEventReceiver
@@ -23,7 +20,7 @@ namespace Z0
         }
 
         protected override void OnEventCommand(EventCommandEventArgs command)        
-            => inform($"Received the {command.Command} command");    
+            => term.inform($"Received the {command.Command} command");    
 
         void Pulse(ulong EventKind, uint ServerId, uint AgentId, ulong Timestamp)
             => WriteEvent(1, EventKind, ServerId, AgentId, Timestamp);    
@@ -52,5 +49,4 @@ namespace Z0
 
 
     }
-
 }

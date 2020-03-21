@@ -9,9 +9,7 @@ namespace Z0.Machines
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using Z0.Logix;
-
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Defines a partial state machine output function of the form 

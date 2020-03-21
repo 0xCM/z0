@@ -25,18 +25,28 @@
     <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
   </PropertyGroup>
 
-
   <PropertyGroup>
+    <Analogs>$(TopDir)analogs/src/z0.analogs.csproj</Analogs>
+    <AsmCore>$(TopDir)asm/core/z0.asm.core.csproj</AsmCore>
+    <BitCore>$(TopDir)bits/core/z0.bits.core.csproj</BitCore>
+    <BitFields>$(TopDir)bits/fields/z0.bits.fields.csproj</BitFields>
+    <BitStrings>$(TopDir)bits/strings/z0.bits.strings.csproj</BitStrings>
+    <Blocks>$(TopDir)blocks/src/z0.blocks.csproj</Blocks>
+    <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
+    <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
+    <Fixed>$(TopDir)fixed/src/z0.fixed.csproj</Fixed>
+    <GenericNumerics>$(TopDir)gmath/src/z0.gmath.csproj</GenericNumerics>
+    <Graphs>$(TopDir)graphs/src/z0.graphs.csproj</Graphs>
+    <Identity>$(TopDir)identity/src/z0.identity.csproj</Identity>
+    <Math>$(TopDir)math/src/z0.math.csproj</Math>
+    <Nats>$(TopDir)nats/src/z0.nats.csproj</Nats>
     <Root>$(TopDir)root/src/z0.root.csproj</Root>
     <Polyrand>$(TopDir)polyrand/src/z0.polyrand.csproj</Polyrand>
-    <Nats>$(TopDir)nats/src/z0.nats.csproj</Nats>
-    <VSvc>$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj</VSvc>
     <Symbolic>$(TopDir)symbolic/src/z0.symbolic.csproj</Symbolic>
     <TestApp>$(TopDir)testing/z0.testing.csproj</TestApp>
-    <Math>$(TopDir)math/src/z0.math.csproj</Math>
-    <GenericNumerics>$(TopDir)gmath/src/z0.gmath.csproj</GenericNumerics>
-    <Blocks>$(TopDir)blocks/src/z0.blocks.csproj</Blocks>
-    <Fixed>$(TopDir)fixed/src/z0.fixed.csproj</Fixed>
+    <Time>$(TopDir)time/src/z0.time.csproj</Time>
+    <Vectorized>$(TopDir)vectorized/src/z0.vectorized.csproj</Vectorized>
+    <VSvc>$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj</VSvc>
   </PropertyGroup>
 
 </Project>

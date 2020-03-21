@@ -24,8 +24,9 @@ namespace Z0
 
         public static void GenToFile()
         {
-            var filename = FileName.Define($"PopCounts.cs");
-            using var dst = LogArea.App.LogWriter(filename);
+            var dstpath = FilePath.Empty;
+            //var filename = FileName.Define($"PopCounts.cs");
+            using var dst = dstpath.Writer();
             dst.WriteLine("public static class PopCountData");
             dst.WriteLine("{");
             dst.WriteLine(GenAccessor("PopCounts"));

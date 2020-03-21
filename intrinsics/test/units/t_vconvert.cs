@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static HexConst;
 
     public class t_vconvert : t_vinx<t_vconvert>

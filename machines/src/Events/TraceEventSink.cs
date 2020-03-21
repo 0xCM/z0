@@ -10,7 +10,8 @@ namespace Z0
     using System.Collections.Concurrent;
     using Microsoft.Diagnostics.Tracing;
     using Microsoft.Diagnostics.Tracing.Session;
-    using static zfunc;
+
+    using static Root;
 
     public sealed class TraceEventSink : SystemAgent
     {        
@@ -30,7 +31,7 @@ namespace Z0
         void OnPulse(TraceEvent data)
         {
             EventIdentity identity = data.EventIdentity();            
-            magenta($"Received event {identity}");
+            term.magenta($"Received event {identity}");
 
             RecieptQueue.Enqueue(identity);
         }
@@ -39,13 +40,13 @@ namespace Z0
         {
             var adapter = data.Adapt<AgentTransitioned>();
             var body = adapter.Body;
-            magenta($"Received transition event: {body}");
+            term.magenta($"Received transition event: {body}");
         }
 
         void OnUnhandled(TraceEvent data)
         {
             if ((int)data.ID != 0xFFFE)         // The EventSource manifest events show up as unhanded, filter them out.
-                babble("GOT UNHANDLED EVENT: " + data.Dump());
+                term.babble("GOT UNHANDLED EVENT: " + data.Dump());
         }
 
         void ConfigureSession()
@@ -53,7 +54,7 @@ namespace Z0
             Session = new TraceEventSession(nameof(TraceEventSink));
             var restarted = Session.EnableProvider(SystemEventWriter.SourceName);
             if(restarted)
-                warn($"Session was already in progress");            
+                term.warn($"Session was already in progress");            
 
             Session.Source.UnhandledEvents += OnUnhandled;
 
@@ -73,9 +74,9 @@ namespace Z0
         {
             Task.Factory.StartNew(() => 
             {
-                babble("Processing events");
+                term.babble("Processing events");
                 Session.Source.Process();
-                babble("Finished processing events");
+                term.babble("Finished processing events");
 
             });
         }

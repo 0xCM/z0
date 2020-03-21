@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
-    using static As;
+    using static Nats;
 
     public class t_vcompact : t_vinx<t_vcompact>
     {

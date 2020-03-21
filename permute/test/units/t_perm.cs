@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-
     using System.Runtime.CompilerServices;
-    using static zfunc;
+    
+    using static Nats;
     using static nfunc;
  
     public sealed class t_perm : UnitTest<t_perm>

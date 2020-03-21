@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Nats;
 
     public class t_vbfly : t_vinx<t_vbfly>
     {
@@ -140,9 +140,5 @@ namespace Z0
                 Claim.eq(z,y);
             }
         }
-
-
-
     }
-
 }

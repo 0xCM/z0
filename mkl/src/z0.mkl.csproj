@@ -10,10 +10,9 @@
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(TopDir)analogs/src/z0.analogs.csproj" />
+    <ProjectReference Include="$(Analogs)" />
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />     
-    <!-- <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" /> -->
 
   </ItemGroup>
 

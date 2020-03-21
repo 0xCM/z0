@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using System.Runtime.CompilerServices;
-    using static zfunc;
 
     public sealed class t_mul : UnitTest<t_mul>
     {

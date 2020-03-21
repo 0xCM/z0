@@ -10,8 +10,6 @@ namespace Z0.Resolutions
 
     using D = Z0.Resolutions;
 
-    using static zfunc;
-
     /// <summary>
     /// Represents the assembly
     /// </summary>

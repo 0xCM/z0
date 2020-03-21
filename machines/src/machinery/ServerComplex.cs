@@ -9,8 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using static Root;
-
     /// <summary>
     /// Agent that manages a collection of servers
     /// </summary>

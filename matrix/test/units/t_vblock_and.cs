@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
     
-    using static zfunc;
+    using static Nats;
 
     public class t_vblock_and : UnitTest<t_vblock_and>
     {

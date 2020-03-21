@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;    
 
     public static class FixedSegment
     {
@@ -58,5 +58,4 @@ namespace Z0
             this.Width = width;
         }
     }
-
 }

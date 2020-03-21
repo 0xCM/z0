@@ -10,7 +10,7 @@ namespace Z0.Mkl
     using System.Security;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
+    using static Root;
     using static nfunc;
     using static Examples;
 
@@ -35,8 +35,8 @@ namespace Z0.Mkl
             var line2 = Divider;
             if(!silent)
             {
-                cyan(line1);
-                cyan(line2);
+                term.cyan(line1);
+                term.cyan(line2);
             }
             return  (method, line1 + text.eol() + line2);
         }
@@ -48,9 +48,9 @@ namespace Z0.Mkl
             var line2 = Divider;
             if(!silent)
             {
-                print();
-                cyan($"{variant} => {Intro}");
-                cyan(Divider);
+                term.print();
+                term.cyan($"{variant} => {Intro}");
+                term.cyan(Divider);
             }
             return (variant, line1 + text.eol() + line2);
         }
@@ -63,8 +63,8 @@ namespace Z0.Mkl
             
             if(!silent)
             {
-                magenta(line1);
-                cyan(line2);
+                term.magenta(line1);
+                term.cyan(line2);
             }
             
             return line1 + text.eol() + line2;
@@ -78,7 +78,7 @@ namespace Z0.Mkl
         {
             var msg = $" Actual: {output}";
             if(!silent)
-                magenta(msg);
+                term.magenta(msg);
             return msg;
         }
 
@@ -86,7 +86,7 @@ namespace Z0.Mkl
         {
             var msg = $" Expect: {expect}";
             if(!silent)
-                magenta(msg);
+                term.magenta(msg);
             return msg;
         }
 
@@ -96,21 +96,21 @@ namespace Z0.Mkl
             var msg = $"Runtime: {format(time)}";
             if(!silent)            
             {
-                cyan(msg);
-                print();
+                term.cyan(msg);
+                term.print();
             }
             return msg;
         }
 
         public static void input(object input)
-            => cyan("  Input", input);
+            => term.cyan("  Input", input);
 
         public static string input(string title, object input, bool silent = true)
         {
             var msg = $"Input {title}: {input}";
             if(!silent)
             {
-                cyan(msg);
+                term.cyan(msg);
             }
             return msg;
         }
@@ -122,7 +122,7 @@ namespace Z0.Mkl
             var report = text.factory.Builder();
             report.AppendLine(input(firstTitle, firstValue, silent));
             report.AppendLine(input(secondTitle, secondValue, silent));
-            return (stopwatch(), report.ToString());
+            return (time.stopwatch(), report.ToString());
         }
 
     
@@ -137,8 +137,8 @@ namespace Z0.Mkl
             var line2 = $"Runtime: {format(time)}";
             if(!silent)
             {
-                magenta(line1);
-                magenta(line2);
+                term.magenta(line1);
+                term.magenta(line2);
             }
             return line1 + text.eol() + line2;
 
@@ -165,7 +165,7 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         static Stopwatch start()
-            => stopwatch();
+            => time.stopwatch();
 
         public static void sasum()
         {
@@ -176,13 +176,13 @@ namespace Z0.Mkl
             Span<float> x = new float[]{1.0f,  -2.0f,  3.0f,  4.0f,  -5.0f,  6.0f,  -7.0f,  8.0f,  -9.0f,  10.0f};
             input(x.FormatAsVector());
 
-            var sw = stopwatch();
+            var sw = time.stopwatch();
             var result = CBLAS.cblas_sasum(n, ref x[0], incx);
-            var time = snap(sw);            
+            var ss = snap(sw);            
 
             msg += output(result, silent);            
             msg += text.eol();
-            msg += conclude(time, silent);            
+            msg += conclude(ss, silent);            
         }
 
         public static void dzasum()
@@ -216,12 +216,12 @@ namespace Z0.Mkl
             Span<float> y = new float[]{.5f, .5f, .5f, .5f, .5f};
             input($"alpha={alpha}, x = {x.FormatAsVector()}, y = {y.FormatAsVector()}");
 
-            var sw = stopwatch();
+            var sw = time.stopwatch();
             CBLAS.cblas_saxpy(n, alpha, ref x[0], incx, ref y[0], incy);
-            var time = snap(sw);            
+            var ss = snap(sw);            
 
             output(y.FormatAsVector());
-            conclude(time);                                    
+            conclude(ss);                                    
         }
 
         static string gemm<M,N>(bool silent = true)

@@ -7,11 +7,9 @@ namespace Z0
     using System;
 
     using System.Runtime.CompilerServices;
-    using static zfunc;
 
     public sealed class t_convert : UnitTest<t_convert>
     {
-
         public void convert_32u_to_bytes_check()
         {
             for(var i=0; i<RepCount; i++)

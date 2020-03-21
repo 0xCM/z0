@@ -5,7 +5,9 @@
 namespace Z0
 {
     using System;
-    using static zfunc;
+
+    using static Root;
+    using static vgeneric;
 
     sealed class VShiftValidator128D<T> : Validator, IVShiftValidator128D<T>
         where T : unmanaged
@@ -41,7 +43,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                term.error(e, casename);
                 succeeded = false;
             }
             finally
@@ -85,7 +87,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                term.error(e, casename);
                 succeeded = false;
             }
             finally

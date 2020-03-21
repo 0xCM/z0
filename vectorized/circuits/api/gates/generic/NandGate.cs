@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
 
      public readonly struct NandGate<T> : IBinaryGate<T>, IBinaryGate<Vector128<T>>, IBinaryGate<Vector256<T>>
         where T : unmanaged
@@ -31,10 +31,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public Vector256<T> Send(Vector256<T> x, Vector256<T> y)
             => gvec.vnot(gvec.vand(x, y));
-
-
     }
-
-
-
 }

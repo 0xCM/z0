@@ -10,8 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static zfunc;
-
     public class Byte256 
     {
         char MakeBitChar(byte src, int pos)

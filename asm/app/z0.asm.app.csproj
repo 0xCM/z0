@@ -12,6 +12,8 @@
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
 
     <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(Analogs)" />
+
     <ProjectReference Include="$(TopDir)gmath/svc/z0.gmath.svc.csproj" />
     <ProjectReference Include="$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj" />
     <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />

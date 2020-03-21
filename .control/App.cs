@@ -18,7 +18,7 @@ namespace Z0
         }
 
         public ConsoleControl()
-            : base(CreateContext(), Log.Get(LogTarget.Define(LogArea.App)))
+            : base(CreateContext())
         {
 
         }

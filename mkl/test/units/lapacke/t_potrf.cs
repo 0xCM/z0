@@ -5,11 +5,8 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    using static zfunc;
-    using static nfunc;
+    using static Nats;
     
     public class t_potrf : UnitTest<t_potrf>
     {

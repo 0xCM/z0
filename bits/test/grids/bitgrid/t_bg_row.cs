@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Nats;
     
     public class t_bg_row : t_bg<t_bg_row>
     {        

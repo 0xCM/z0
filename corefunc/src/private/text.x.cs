@@ -12,7 +12,7 @@ namespace Z0
     using System.Text.RegularExpressions;
     using System.Text;
 
-    using static zfunc;
+    using static Root;
 
     partial class xfunc
     {
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="s">The string to search</param>
         /// <param name="l">The left boundary</param>
         /// <param name="r">The right boundary</param>
-        public static IEnumerable<string> GetBoundedContent(this string s, char l, char r)
+        static IEnumerable<string> GetBoundedContent(this string s, char l, char r)
             => s.GetBoundedContent((l, r));
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to search</param>
         /// <param name="boundary">The boundary characters</param>
-        public static IEnumerable<string> GetBoundedContent(this string s, (char l, char r) boundary)
+        static IEnumerable<string> GetBoundedContent(this string s, (char l, char r) boundary)
         {
             var next = Next(s, boundary);
 
@@ -128,7 +128,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The match</param>
         /// <param name="name">The candidate group name</param>
-        public static bool HasGroupValue(this Match m, string name)
+        static bool HasGroupValue(this Match m, string name)
             => m.Groups[name].Success;
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The matched expression</param>
         /// <param name="name">The name of the group</param>
-        public static string GetGroupValue(this Match m, string name)
+        static string GetGroupValue(this Match m, string name)
         {
             if (!m.Groups[name].Success)
                 throw new ArgumentException($"The group {name} was not matched successfully");
@@ -144,13 +144,13 @@ namespace Z0
             return m.Groups[name].Value;
         }
 
-        public static Option<string> TryGetGroupValue(this Regex x, string input, string group)
+        static Option<string> TryGetGroupValue(this Regex x, string input, string group)
         {
             var match = x.Match(input);
             if (match.Success && match.Groups[group].Success)
                 return match.Groups[group].Value;
             else
-                return none<string>();
+                return Option.none<string>();
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Z0
         /// <typeparam name="T">The group value type</typeparam>
         /// <param name="m">The matched expression</param>
         /// <param name="name">The name of the group</param>
-        public static T GetGroupValue<T>(this Match m, string name)
+        static T GetGroupValue<T>(this Match m, string name)
         {
             var result = default(object);
 

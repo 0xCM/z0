@@ -7,14 +7,15 @@ namespace Z0.Logix
     using System;
 
 
-    using static zfunc;
-
     public class t_survey : UnitTest<t_survey>
     {
 
         void emit_asci_table()
         {
-            using var dst = LogArea.Test.LogWriter(FileName.Define("Asci.csv"));                
+            
+            var dstpath = (Env.Current.LogDir + FolderName.Define(nameof(t_survey).ToLower())) + FileName.Define("Asci.csv");
+            
+            using var dst = dstpath.Writer();
             
             var min = (int)'A';
             var max = (int)'Z';

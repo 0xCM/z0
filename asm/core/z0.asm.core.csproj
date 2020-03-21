@@ -8,13 +8,13 @@
   <ItemGroup>
     <ProjectReference Include="$(TopDir)containers/src/z0.containers.csproj" />
     <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />
-    <ProjectReference Include="$(TopDir)time/src/z0.time.csproj" />
-    <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />        
+    <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />        
-    <ProjectReference Include="$(TopDir)vectorized/src/z0.vectorized.csproj" />            
-    <ProjectReference Include="$(TopDir)identity/src/z0.identity.csproj" />    
+    <ProjectReference Include="$(Vectorized)" />            
+    <ProjectReference Include="$(Identity)" />    
     <ProjectReference Include="$(TopDir)dynamic/src/z0.dynamic.csproj" />
-    <ProjectReference Include="$(TopDir)graphs/src/z0.graphs.csproj" />
+    <ProjectReference Include="$(Graphs)" />
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />
 
   </ItemGroup>

@@ -11,7 +11,6 @@ namespace Z0
     using System.IO;
 
     using Z0.Mkl;
-    using static zfunc;
 
     static class MklListGenerator
     {

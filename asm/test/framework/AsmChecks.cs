@@ -31,6 +31,8 @@ namespace Z0.Asm.Validation
         
         readonly int RepCount;
 
+        FolderPath LogDir;
+
         public static AsmChecks Create(IAsmWorkflowContext context, IAppMsgSink sink)
             => new AsmChecks(context,sink);
 
@@ -39,6 +41,7 @@ namespace Z0.Asm.Validation
             this.Context = context;
             this.RepCount = 128;
             this.MsgSink = sink;
+            this.LogDir = context.EmissionPaths().DataSubDir(FolderName.Define(GetType().Name));
             //this.Executioner = AsmEvalDispatcher.Create(context, sink);
         }                
 
@@ -804,21 +807,22 @@ namespace Z0.Asm.Validation
 
         IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
         {
-            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
+            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Hex);
             return  context.CodeWriter(dst);
         }
 
         protected IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Raw);    
+        {            
+
+            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Raw);
             return  context.CodeWriter(dst);
         }
 
         protected IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
         {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Asm);
+            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Asm);
             var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.WithFormat(format).AsmWriter(path);
+            return context.WithFormat(format).AsmWriter(dst);
         }
 
 

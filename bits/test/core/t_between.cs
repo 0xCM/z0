@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public class t_between : t_bitcore<t_between>
     {
         public void between_outline()

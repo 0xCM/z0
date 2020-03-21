@@ -11,7 +11,6 @@ namespace Z0
     
     using static Root;
 
-
     public static class FullAdder
     {
         [MethodImpl(Inline)]
@@ -94,7 +93,5 @@ namespace Z0
             Compute(x,y,cin, out Vector128<T> sum, out Vector128<T> cout);
             return(sum,cout);
         }
-
     }
-
 }

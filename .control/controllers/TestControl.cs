@@ -16,7 +16,7 @@ namespace Z0
     using D = Z0.Resolutions;
     
     using static ControlMessages;
-    using static zfunc;
+    using static Root;
 
     class TestController : IExecutable//Controller<TestController>
     {       
@@ -62,7 +62,7 @@ namespace Z0
         {
             var clock = SystemCounter.Create(true);
             var runtime = 0.0;
-            print(ExecutingHost(host));
+            term.print(ExecutingHost(host));
 
             try
             {
@@ -70,13 +70,13 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                term.error(e);
             }
             finally
             {
                 clock.Stop();
                 runtime = clock.Time.TotalMilliseconds;
-                print(FinishedHostExecution(host,runtime));
+                term.print(FinishedHostExecution(host,runtime));
             }
             
             return runtime;
@@ -119,7 +119,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                term.error(e);
             }
             
             return runtime;
@@ -127,11 +127,11 @@ namespace Z0
 
         public void Execute()
         {
-           print(ExecutingSuites());
+           term.print(ExecutingSuites());
            
            var runtime = RunTests();
            
-           print(FinishedSuiteExecution(runtime));
+           term.print(FinishedSuiteExecution(runtime));
         }
     }
 }

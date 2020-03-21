@@ -60,6 +60,5 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Option<ProcessThread> thread(uint id)
             => CurrentProcess.ProcessThread(id);
-
     }
 }

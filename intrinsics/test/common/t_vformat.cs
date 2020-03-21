@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     public class t_vformat : t_vinx<t_vformat>
     {   

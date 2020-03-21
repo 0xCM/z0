@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static zfunc;
+    
+    using static Nats;
 
     public class t_bvxor : t_bitvectors<t_bvxor>
     {

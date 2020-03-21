@@ -98,7 +98,7 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(SubGrid16<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(SubGrid16<M,N,T> g, FilePath dst,  bool showrow = false,  [CallerMemberName] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
@@ -128,7 +128,7 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(SubGrid64<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(SubGrid64<M,N,T> g, FilePath dst, bool showrow = false, [CallerMemberName] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
@@ -143,7 +143,7 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string export<M,N,T>(SubGrid128<M,N,T> g, bool showrow = false, [CallerMemberName] string label = null)
+        public static string export<M,N,T>(SubGrid128<M,N,T> g, FilePath dst, bool showrow = false, [CallerMemberName] string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
@@ -188,7 +188,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged        
-                => LogPaths.The.DataPath(FolderName.Define("grids"), filename(label,w,m,n,t)).Writer();
+                => ((Env.Current.LogDir + FolderName.Define("grids")) +  filename(label,w,m,n,t) ).Writer();
 
         /// <summary>
         /// Exports grid data to a file

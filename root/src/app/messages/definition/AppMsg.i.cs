@@ -56,9 +56,7 @@ namespace Z0
 
         IReadOnlyList<AppMsg> Flush(Exception e);
 
-        void Flush(FilePath dst);            
-
-
+        void Flush(FilePath dst);
     }
 
     /// <summary>

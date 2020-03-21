@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Nats;
 
     public class t_vrotl : t_vinx<t_vrotl>
     {

@@ -10,11 +10,8 @@
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
     <ProjectReference Include="$(GenericNumerics)" />    
     <ProjectReference Include="$(TopDir)gmath/svc/z0.gmath.svc.csproj" />    
-    <!-- <ProjectReference Include="$(TopDir)vectorized/src/z0.vectorized.csproj" />     -->
     <ProjectReference Include="$(TopDir)bits/strings/z0.bits.strings.csproj" />    
-
     <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
-    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
 
   </ItemGroup>
 

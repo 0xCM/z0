@@ -7,12 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Linq;
 
-    using static zfunc;
-    using static nfunc;
-
     public class tss_task : UnitTest<tss_task>
     {
-
         public void radixSort()
         {
             var obs = Pow2.T10;
@@ -31,5 +27,4 @@ namespace Z0.Mkl
             }                    
         }
     }
-
 }

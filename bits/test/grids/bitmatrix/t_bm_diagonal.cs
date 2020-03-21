@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static Nats;
     
     public class t_bm_diagonal : t_bm<t_bm_diagonal>

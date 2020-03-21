@@ -7,9 +7,6 @@ namespace Z0.Mkl.Test
     using System;
     using System.Linq;
 
-    using static zfunc;
-    using static nfunc;
-
     public class tvml_add : t_mkl<tvml_add>
     {
 

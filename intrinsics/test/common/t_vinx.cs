@@ -9,7 +9,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
     
-    using static zfunc;
+    //using static zfunc;
+    using static Root;
+    using static Nats;
+    using static vgeneric;
 
     /// <summary>
     /// Base type for vectorized intrinsic tests
@@ -196,7 +199,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                term.error(e, casename);
                 succeeded = false;
             }
             finally
@@ -226,7 +229,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                term.error(e, casename);
                 succeeded = false;
             }
             finally
@@ -260,7 +263,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                term.error(e, casename);
                 succeeded = false;
             }
             finally
@@ -294,7 +297,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e,casename);
+                term.error(e,casename);
                 succeeded = false;
             }
             finally

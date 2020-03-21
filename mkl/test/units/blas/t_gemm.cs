@@ -8,7 +8,7 @@ namespace Z0.Mkl.Test
     using System.Linq;
     using System.Collections.Generic;
 
-    using static zfunc;
+    using static Nats;
     using static nfunc;
     
     public class t_gemm : UnitTest<t_gemm>
@@ -283,7 +283,7 @@ namespace Z0.Mkl.Test
         static float Dot(Span<float> x, Span<float> y)
         {
             var result = 0f;
-            for(var i=0; i< length(x,y); i++)
+            for(var i=0; i< Checks.length(x,y); i++)
             {
                 result += x[i]*y[i];
             }
@@ -293,7 +293,7 @@ namespace Z0.Mkl.Test
         static double Dot(Span<double> x, Span<double> y)
         {
             var result = 0d;
-            for(var i=0; i< length(x,y); i++)
+            for(var i=0; i< Checks.length(x,y); i++)
             {
                 result += x[i]*y[i];
             }

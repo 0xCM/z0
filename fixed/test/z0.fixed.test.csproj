@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)fixed/src/z0.fixed.csproj" />        
+    <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(TestApp)" />  
   </ItemGroup>
 

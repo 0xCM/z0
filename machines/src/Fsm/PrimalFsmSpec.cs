@@ -5,10 +5,7 @@
 namespace Z0.Machines
 {        
     using System;
-    using System.Linq;
-    using System.Threading;
-    using System.Collections.Generic;
- 
+
     /// <summary>
     /// Specifies a state machine via scalar values
     /// </summary>

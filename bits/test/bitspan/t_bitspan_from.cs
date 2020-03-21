@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Nats;
 
     public class t_bitspan_from : UnitTest<t_bitspan_from>
     {
@@ -374,6 +374,5 @@ namespace Z0
                     Claim.eq(x[j],y[j]);                
             }           
         }
-
     }
 }

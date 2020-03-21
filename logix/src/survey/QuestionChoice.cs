@@ -5,11 +5,9 @@
 namespace Z0.Logix
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Threading;
-    using static zfunc;
+
+    using static Root;
 
     /// <summary>
     /// Defines a choice in the context of a survey question
@@ -45,6 +43,4 @@ namespace Z0.Logix
         public override string ToString()
             => Title;
     }
-
-
 }

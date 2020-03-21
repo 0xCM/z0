@@ -12,8 +12,6 @@ namespace Z0
 
     using Z0.Machines;
 
-    using static zfunc;
-
     using static Fsm1Spec;
     using static Fsm1Spec.States;
     using static Fsm1Spec.Events;

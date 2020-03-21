@@ -9,7 +9,7 @@
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(GenericNumerics)" />
 
-    <ProjectReference Include="$(TopDir)bits/core/z0.bits.core.csproj" />
+    <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(TopDir)bits/bitpack/z0.bits.bitpack.csproj" />
 
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />

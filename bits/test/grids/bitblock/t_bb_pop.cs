@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-
     public class t_bb_pop : t_bitblock<t_bb_pop>
     {
         public void gbb_pop_64()

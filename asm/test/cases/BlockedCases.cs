@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.IO;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
     using static vfunc;
 
     static class BlockedCases

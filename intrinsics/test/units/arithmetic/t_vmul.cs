@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static vgeneric;
     using static As;
 
     public class tv_mul : t_vinx<tv_mul>

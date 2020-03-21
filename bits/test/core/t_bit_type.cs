@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public class t_bit_type : t_bitcore<t_bit_type>
     {
         static bit On = bit.On;

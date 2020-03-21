@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static zfunc;
+    using static Nats;
 
     public class t_bvpow : t_bitvectors<t_bvpow>
     {

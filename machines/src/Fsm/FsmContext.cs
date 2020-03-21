@@ -5,12 +5,6 @@
 namespace Z0.Machines
 {
     using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-
-    using static zfunc;
     
     class FsmContext : IFsmContext
     {
@@ -28,5 +22,4 @@ namespace Z0.Machines
         /// </summary>
         public ulong? ReceiptLimit {get;}
     }
-
 }

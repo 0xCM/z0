@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.IO;
     using System.IO.Pipes;
     using System.Buffers;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
 
     public readonly struct InPort<T>
         where T : unmanaged
@@ -28,7 +25,6 @@ namespace Z0
     public readonly struct OutPort<T>
         where T : unmanaged
     {
-
         public static readonly BitSize PortWidth = bitsize<T>();
 
         public ReadOnlySequence<T> Receive()
@@ -65,8 +61,6 @@ namespace Z0
         public ReadOnlySequence<T> Receive()
         {
             return default;
-        }
-        
-    
+        }        
     }
 }

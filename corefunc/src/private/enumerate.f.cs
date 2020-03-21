@@ -18,7 +18,7 @@ partial class zfunc
     /// <param name="src">The source items</param>
     /// <typeparam name="T">The item type</typeparam>
     [MethodImpl(Inline)]
-    public static IEnumerable<T> items<T>(params T[] src)
+    static IEnumerable<T> items<T>(params T[] src)
         => src;
 
     /// <summary>
@@ -26,7 +26,7 @@ partial class zfunc
     /// </summary>
     /// <param name="left">The left sequence</param>
     /// <param name="right">The right sequence</param>
-    public static (IEnumerator<T> left, IEnumerator<T> right) enumerator<T>(IEnumerable<T> lhs, IEnumerable<T> rhs)
+    static (IEnumerator<T> left, IEnumerator<T> right) enumerator<T>(IEnumerable<T> lhs, IEnumerable<T> rhs)
         => (lhs.GetEnumerator(),rhs.GetEnumerator());
 
     /// <summary>
@@ -37,7 +37,7 @@ partial class zfunc
     /// <typeparam name="T"></typeparam>
     /// <returns>Returns false if either enumerator as advanced past the end of its respective sequence</returns>
     [MethodImpl(Inline)]   
-    public static bool next<T>((IEnumerator<T> left, IEnumerator<T> right) enumerator)
+    static bool next<T>((IEnumerator<T> left, IEnumerator<T> right) enumerator)
         => enumerator.left.MoveNext() && enumerator.right.MoveNext();
 
     /// <summary>
@@ -47,7 +47,7 @@ partial class zfunc
     /// <param name="right">The right enumerator</param>
     /// <typeparam name="T"></typeparam>
     [MethodImpl(Inline)]   
-    public static (T left, T right) current<T>((IEnumerator<T> left, IEnumerator<T> right) enumerator)
+    static (T left, T right) current<T>((IEnumerator<T> left, IEnumerator<T> right) enumerator)
         => (enumerator.left.Current, enumerator.right.Current);
     
     /// <summary>
@@ -58,7 +58,7 @@ partial class zfunc
     /// <param name="right">The right pair component</param>
     /// <typeparam name="T">The sequence element type</typeparam>
     [MethodImpl(Inline)]   
-    public static bool any<T>(IEnumerable<(T left, T right)> src, Func<T,T,bool> predicate)
+    static bool any<T>(IEnumerable<(T left, T right)> src, Func<T,T,bool> predicate)
         => src.Any(pair => predicate(pair.left, pair.right));
 
     /// <summary>
@@ -69,7 +69,7 @@ partial class zfunc
     /// <param name="predicate">The predcicate to eveluate</param>
     /// <typeparam name="T">The sequence element type</typeparam>
     [MethodImpl(Inline)]   
-    public static bool any<T>(IEnumerable<T> src, Func<T,bool> predicate)
+    static bool any<T>(IEnumerable<T> src, Func<T,bool> predicate)
         => src.Any(predicate);
 
     /// <summary>
@@ -80,20 +80,20 @@ partial class zfunc
     /// <param name="predicate">The predicate to evaluate over sequence elements</param>
     /// <typeparam name="T">The sequence element type</typeparam>
     [MethodImpl(Inline)] 
-    public static Option<T> first<T>(IEnumerable<T> src, Func<T,bool> predicate)
+    static Option<T> first<T>(IEnumerable<T> src, Func<T,bool> predicate)
         => src.FirstOrDefault(predicate);
 
     /// <summary>
     /// Produces a new guid
     /// </summary>
     [MethodImpl(Inline)] 
-    public static Guid guid()
+    static Guid guid()
         => Guid.NewGuid();
 
     /// <summary>
     /// Produces a stream of new guids
     /// </summary>
-    public static IEnumerable<Guid> guids()
+    static IEnumerable<Guid> guids()
     {
         while(true)
             yield return guid();

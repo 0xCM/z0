@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Nats;
     
     public class t_vector_ops : UnitTest<t_vector_ops>
     {

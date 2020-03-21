@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static zfunc;
-
     public class t_nist : t_libm<t_nist>
     {
         void add_check()

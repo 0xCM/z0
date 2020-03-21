@@ -7,12 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
+    using static Nats;
 
     public class t_vsll : t_vinx<t_vsll>
     {
-
-
         public void vsll_check()
         {
             vsll_check(n128);

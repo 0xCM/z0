@@ -7,7 +7,8 @@ namespace Z0.Test
     using System;
     using System.Runtime.CompilerServices;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public class t_mb_write : UnitTest<t_mb_write>
     {
@@ -23,8 +24,7 @@ namespace Z0.Test
         }
 
         static FolderPath DataDir
-            => LogPaths.The.DataDir(FolderName.Define("matrices"));
-
+            =>  Env.Current.LogDir + FolderName.Define(typeof(t_mb_write).Name);  
 
         static T round<T>(T src)
             where T : unmanaged

@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
-    using System.Collections.Generic;
-
 
     /// <summary>
     /// Bears witness to an occurence of something of identifiable interest 

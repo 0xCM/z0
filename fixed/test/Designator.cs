@@ -8,8 +8,6 @@ namespace Z0.Resolutions
     using System.Linq;
     using System.Collections.Generic;
 
-    using static zfunc;
-
     public sealed class FixedTest : AssemblyResolution<FixedTest>
     {
         const AssemblyId Identity = AssemblyId.FixedTest;

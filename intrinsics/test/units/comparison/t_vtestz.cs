@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static zfunc;
+    using static Nats;
 
     public class t_vtestz : t_vinx<t_vtestz>
     {

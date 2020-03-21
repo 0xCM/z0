@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
 
-    using static zfunc;    
+    using static Root;    
     using static OpHelpers;
     using static BitMatrixOps;
 

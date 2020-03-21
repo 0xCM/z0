@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public class t_broadcast : t_vinx<t_broadcast>
     {
         public void broadcast_outline()

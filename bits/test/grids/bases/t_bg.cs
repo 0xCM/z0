@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public abstract class t_bg<X> : t_bitgrids_base<X>
         where X : t_bg<X>, new()
@@ -227,8 +228,6 @@ namespace Z0
             
             for(var block=0; block<gx.BlockCount; block++)
                 Claim.eq(gvec.vxor(gx[block], gy[block]), gz[block]);   
-
         }
     }
-
 }

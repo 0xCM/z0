@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static Nats;
     
     public class t_bg_define : t_bg<t_bg_define>

@@ -12,11 +12,9 @@ namespace Z0
 
     using Z0.Machines;
 
-    using static zfunc;
     
     public class Fsm2Test : UnitTest<Fsm2Test>
     {
-
 
         public void run()
         {
@@ -25,9 +23,7 @@ namespace Z0
             var stats = PrimalFsm.Run(spec1, machineCount);
             var counts = stats.Select(x => x.ReceiptCount).ToArray().AsSpan().ReadOnly();
             var count = gspan.sum(counts);
-            inform($"A total of {count} events were processed");
-
-
+            term.inform($"A total of {count} events were processed");
         }
     }
 }

@@ -6,9 +6,7 @@ namespace Z0.Mkl
 {
     using System;
     using System.Linq;
-
-    using static zfunc;
-    
+   
     public class t_vslinit : UnitTest<t_vslinit>
     {
         public void t_bernoulli()

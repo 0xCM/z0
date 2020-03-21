@@ -6,10 +6,6 @@ namespace Z0.Machines
 {
     using System;
     using System.Collections.Generic;
-    using Z0.Logix;
-
-    using static zfunc;
-
 
     /// <summary>
     /// Delegate for event that fires when an input event has been received

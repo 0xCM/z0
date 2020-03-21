@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Nats;
 
     /// <summary>
     /// Shows the "extended" De Morgan's laws hold as specified in Chapter 2 of Hacker's Delight

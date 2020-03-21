@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static zfunc;    
-
 
     class App : IContext
     {
@@ -21,7 +19,7 @@ namespace Z0
 
         void Describe(TextDoc doc)
         {
-            inform($"Document contains {doc.DataLineCount} data lines, {doc.HeaderLineCount} header line and {doc.TotalLineCount} total file lines, including comments");
+            term.print($"Document contains {doc.DataLineCount} data lines, {doc.HeaderLineCount} header line and {doc.TotalLineCount} total file lines, including comments");
             var bins = new Dictionary<int,int>();
             foreach(var row in doc.Rows)
             {
@@ -33,14 +31,14 @@ namespace Z0
             }
             foreach(var bin in bins)
             {
-                inform($"{bin.Value} rows have {bin.Key} cells");
+                term.print($"{bin.Value} rows have {bin.Key} cells");
             }
 
-            doc.Header.OnSome(h => inform($"Header: {h}"));
+            doc.Header.OnSome(h => term.print($"Header: {h}"));
 
             for(var i=0; i<15; i++)
             {
-                inform(doc.Rows[i]);
+                term.print(doc.Rows[i]);
             }
         }
         

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static zfunc;
     using static As;
 
     public class t_bitslice : t_bitcore<t_bitslice>

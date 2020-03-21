@@ -11,46 +11,41 @@ namespace Z0
 
     using static Root;
 
-    public static class Log
+    enum LogWriteMode
     {
+        Create,
+        
+        Overwrite,
+        
+        Append
+    }
+
+    /// <summary>
+    /// Defines minimal contract for a log message sink
+    /// </summary>
+    interface ILogger : IAppMsgLog
+    {
+        /// <summary>
+        /// Appends unstructured text content to the log
+        /// </summary>
+        /// <param name="text">The text to append</param>
+        void Write(string text);
+
+        FilePath Write<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
+            where R : IRecord;                
+    }
+
+    static class Log
+    {
+        
         static LogPaths Paths 
             => LogPaths.The;
             
-        public static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = AsciSym.Pipe)
-            where R : IRecord
-        {
-            if(records.Length == 0)
-                return FilePath.Empty;
-                        
-            return Log.Get(LogTarget.Define(LogArea.Bench)).Write(records, FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
-        }
-
-        public static FilePath LogTestResults<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
-            where R : IRecord
-                => LogTestResults(FolderName.Empty, basename, records, mode, header, delimiter);
-
-        public static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
-            where R : IRecord
-        {
-            if(records.Length == 0)
-                return FilePath.Empty;
-            
-            return Log.Get(LogTarget.Define(LogArea.Test)).Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
-        }
-
         public static ILogger Test => TestLog.TheOnly;
 
         public static ILogger Bench => BenchLog.TheOnly;
 
         public static ILogger App => AppLog.TheOnly;
-
-        public static ILogger Get(ILogTarget dst)
-            => dst.Area switch{
-                LogArea.App => App,
-                LogArea.Bench => Bench,
-                LogArea.Test => Test,
-                _ => throw new ArgumentException()
-            };
 
         abstract class Logger<A> : ILogger
             where A : Logger<A>, new()

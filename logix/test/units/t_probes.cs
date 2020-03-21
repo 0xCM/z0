@@ -5,13 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
-    using static zfunc;
-    using static BitLogicSpec;
-
+    using static Nats;
 
 
     public class t_probes : UnitTest<t_probes>

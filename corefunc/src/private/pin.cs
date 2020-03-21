@@ -9,7 +9,7 @@ namespace  Z0
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
     
-    using static zfunc;
+    using static Root;
 
     /// <summary>
     /// Generates a dynamic method that pins a pointer before delegate invocation and unpins it after

@@ -13,11 +13,11 @@ using Z0;
 partial class zfunc
 {
     [MethodImpl(Inline)]   
-    public static IEnumerable<T> map<S,T>(IEnumerable<S> src, Func<S,T> f)
+    static IEnumerable<T> map<S,T>(IEnumerable<S> src, Func<S,T> f)
         => src.Select(x => f(x));
 
     [MethodImpl(Inline)]   
-    public static T[] map<S,T>(S[] src, Func<S,T> f)
+    static T[] map<S,T>(S[] src, Func<S,T> f)
     {
         var dst = new T[src.Length];
         for(var i = 0; i<src.Length; i++)
@@ -34,7 +34,7 @@ partial class zfunc
     /// <typeparam name="A">The source value type</typeparam>
     /// <typeparam name="B">The target value type</typeparam>
     /// <returns>The transformed sequence</returns>
-    public static IEnumerable<B> mapi<A,B>(Func<int,A,B> f, IEnumerable<A> src)
+    static IEnumerable<B> mapi<A,B>(Func<int,A,B> f, IEnumerable<A> src)
     {
         var i = 0;
         foreach(var item in src)
@@ -49,7 +49,7 @@ partial class zfunc
     /// <typeparam name="X">The source value type</typeparam>
     /// <typeparam name="Y">The output value type</typeparam>
     [MethodImpl(Inline)]   
-    public static Y apply<X,Y>(X x,Func<X,Y> f)
+    static Y apply<X,Y>(X x,Func<X,Y> f)
         => f(x);
 
     /// <summary>
@@ -60,7 +60,7 @@ partial class zfunc
     /// <param name="a0">The seed value</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static T fold<T>(IEnumerable<T> src, Func<T,T,T> f, T a0 = default(T))
+    static T fold<T>(IEnumerable<T> src, Func<T,T,T> f, T a0 = default(T))
     {
         var cumulant = a0;
         foreach(var item in src)
@@ -75,7 +75,7 @@ partial class zfunc
     /// <typeparam name="T">The second argument type</typeparam>
     /// <typeparam name="U">The codomain</typeparam>
     [MethodImpl(Inline)]
-    public static Func<S,T,U> curry<S,T,U>(Func<(S,T), U> f)
+    static Func<S,T,U> curry<S,T,U>(Func<(S,T), U> f)
     {        
         U g(S a, T b) => f((a,b));        
         return g;
@@ -88,7 +88,7 @@ partial class zfunc
     /// <typeparam name="T">The second argument type</typeparam>
     /// <typeparam name="U">The codomain</typeparam>
     [MethodImpl(Inline)]
-    public static Func<(S,T),U> uncurry<S,T,U>(Func<S,T,U> f)
+    static Func<(S,T),U> uncurry<S,T,U>(Func<S,T,U> f)
     {        
         U g((S a, T b) x) => f(x.a,x.b);
         return g;

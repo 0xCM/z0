@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public ref struct BitField64<I,W>
         where I : unmanaged, Enum
@@ -54,7 +54,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Read(Span<ulong> dst)
             => Ops.read(spec, data, dst);
-
     }
-
 }

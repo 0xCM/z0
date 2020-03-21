@@ -7,7 +7,8 @@ namespace Z0.Logix
 {
     using System;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     using static BitLogicSpec;
 
@@ -35,7 +36,7 @@ namespace Z0.Logix
 
         public void identity_bench()
         {
-            if(parity.odd(now().Ticks))
+            if(parity.odd(time.now().Ticks))
             {
                 evaluator_bench();
             }

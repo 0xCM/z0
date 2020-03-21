@@ -7,9 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TopDir)corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TestApp)" />
-
     <ProjectReference Include="$(Math)" />    
   </ItemGroup>
 

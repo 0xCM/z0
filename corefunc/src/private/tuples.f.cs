@@ -10,24 +10,14 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Defines an homogenous pair
-    /// </summary>
-    /// <param name="a">The first member</param>
-    /// <param name="b">The second member</param>
-    /// <typeparam name="T">The member type</typeparam>
-    [MethodImpl(Inline)]
-    public static Pair<T> pair<T>(T a, T b)
-        => Tuples.pair<T>(a,b);
-
-    /// <summary>
     /// Determines the tuple's style, if possible; otherwise, returns None
     /// </summary>
     /// <param name="src">The putative tuple representation</param>
     static Option<TupleFormat> style(string src)
-        => src.EnclosedBy(text.lparen(), text.rparen()) ? some(TupleFormat.Coordinate)
-        : src.EnclosedBy(text.lbracket(), text.rbracket()) ? some(TupleFormat.List)
-        : src.EnclosedBy(text.lbrace(), text.rbrace()) ? some(TupleFormat.Record)
-        : none<TupleFormat>();
+        => src.EnclosedBy(text.lparen(), text.rparen()) ? Option.some(TupleFormat.Coordinate)
+        : src.EnclosedBy(text.lbracket(), text.rbracket()) ? Option.some(TupleFormat.List)
+        : src.EnclosedBy(text.lbrace(), text.rbrace()) ? Option.some(TupleFormat.Record)
+        : Option.none<TupleFormat>();
 
     static char leftBound(TupleFormat style)
         => (style == TupleFormat.Coordinate ? text.lparen()
@@ -42,13 +32,13 @@ partial class zfunc
         : text.rparen())[0];
 
     static char[] bounds(TupleFormat style)
-        => zfunc. array(leftBound(style), rightBound(style));
+        => Root.array(leftBound(style), rightBound(style));
 
     /// <summary>
     /// Gets the boundary production function as determined by a style
     /// </summary>
     /// <param name="style">The tuple representation style</param>
-    internal static Func<string, string> boundaryFn(TupleFormat style)
+    static Func<string, string> boundaryFn(TupleFormat style)
         => style == TupleFormat.List ? new Func<string, string>(text.bracket)
         : style == TupleFormat.Record ? new Func<string, string>(text.embrace)
         : new Func<string, string>(x => text.parenthetical(x));
@@ -59,7 +49,7 @@ partial class zfunc
     /// <typeparam name="X1">The type of the first coordinate</typeparam>
     /// <typeparam name="X2">The type of the second coordinate</typeparam>
     /// <param name="text">The text to parse</param>
-    public static Option<(X1 x1, X2 x2)> parsetuple<X1, X2>(string text)
+    static Option<(X1 x1, X2 x2)> parsetuple<X1, X2>(string text)
         => from style in style(text)
            let components = text.Trim(bounds(style)).Split(',')
            where components.Length == 3
@@ -74,7 +64,7 @@ partial class zfunc
     /// <typeparam name="X2">The type of the second coordinate</typeparam>
     /// <typeparam name="X3">The type of the third coordinate</typeparam>
     /// <param name="text">The text to parse</param>
-    public static Option<(X1 x1, X2 x2, X3 x3)> parsetuple<X1, X2, X3>(string text)
+    static Option<(X1 x1, X2 x2, X3 x3)> parsetuple<X1, X2, X3>(string text)
         => from style in style(text)
            let components = text.Trim(bounds(style)).Split(',')
            where components.Length == 3
@@ -82,6 +72,4 @@ partial class zfunc
            from x2 in tryParse<X2>(components[1])
            from x3 in tryParse<X3>(components[2])
            select (x1, x2, x3);
-
-
 }

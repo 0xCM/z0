@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public readonly struct XOrGate : IBinaryLogicGate
     {
@@ -18,5 +18,4 @@ namespace Z0
         public bit Send(bit x, bit y)
             => (x ^ y);
     }
-
 }

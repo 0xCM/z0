@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
+    using static Root;
+    using static Nats;
 
     public abstract class t_bm<X> : t_bitgrids_base<X>
         where X : t_bm<X>, new()
@@ -52,7 +53,7 @@ namespace Z0
         static Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
-            for(var i=0; i< length(lhs,rhs); i++)
+            for(var i=0; i< Checks.length(lhs,rhs); i++)
                 dst[i] = gmath.xor(lhs[i], rhs[i]);
            return dst;        
         }

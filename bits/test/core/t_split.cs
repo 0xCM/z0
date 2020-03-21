@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public class t_split : t_bitcore<t_split>
     {
         public void sb_part_64x1()

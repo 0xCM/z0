@@ -6,7 +6,6 @@ namespace Z0.Logix
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using static zfunc;
 
     /// <summary>
     /// Defines a response to a survey question

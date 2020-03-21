@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static zfunc;
-
     public class t_ntz : t_bitcore<t_ntz>
     {        
         public void ntz_outline()

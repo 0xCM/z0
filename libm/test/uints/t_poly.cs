@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static zfunc;
-
     public class t_poly : t_libm<t_poly>
     {
 

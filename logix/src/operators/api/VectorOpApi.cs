@@ -10,7 +10,8 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static Root;    
+    using static Nats;
     using static TernaryBitLogicOpKind;
     using static OpHelpers;
     using static VectorizedOps;

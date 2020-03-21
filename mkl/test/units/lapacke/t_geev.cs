@@ -5,12 +5,6 @@
 namespace Z0.Mkl.Test
 {
     using System;
-    using System.Linq;
-
-    using static zfunc;
-    using static nfunc;
-    
-    using static Examples;
 
     public class t_geev : UnitTest<t_geev>
     {

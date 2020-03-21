@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
+    using static Root;
 
     public static class GridWriter
     {
@@ -18,7 +18,9 @@ namespace Z0
             void Emit(ushort segwidth, ushort minsegs, ushort maxsegs)
             {
                 var filename = FileName.Define($"GridMap{segwidth}.csv");
-                using var dst = LogArea.Test.LogWriter(filename);
+                var dstpath = (Env.Current.LogDir + FolderName.Define(nameof(GridWriter).ToLower())) + filename;
+
+                using var dst = dstpath.Writer();
                 dst.WriteLine(GridStats.FormatHeader());
                 var points = (
                     from row in Numeric.range(minsegs,maxsegs)

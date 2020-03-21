@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
+    using static Root;
+    using static Nats;
+    using static vgeneric;
 
     public class t_vbitblend : t_vinx<t_vbitblend>
     {                
@@ -98,5 +100,4 @@ namespace Z0
             }
         }
     }
-
 }

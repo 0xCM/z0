@@ -5,12 +5,10 @@
 namespace Z0.Machines
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
  
-    using static zfunc;
-    
+    using static Root;
+   
     /// <summary>
     /// Identifies an action rule for lookup purposes
     /// </summary>
