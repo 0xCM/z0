@@ -6,11 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TestLib)" />    
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="$(TopDir).settings/Settings.cs" />
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
 </Project>

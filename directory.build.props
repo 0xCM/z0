@@ -64,6 +64,7 @@
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
     <TestLib>$(TopDir)testlib/src/z0.testlib.csproj</TestLib>
     <Time>$(TopDir)time/src/z0.time.csproj</Time>
+    <Validity>$(TopDir)validity/src/z0.validity.csproj</Validity>
     <VData>$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj</VData>
     <Vectorized>$(TopDir)vectorized/src/z0.vectorized.csproj</Vectorized>
     <VSvc>$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj</VSvc>

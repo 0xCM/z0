@@ -7,6 +7,7 @@ namespace Z0
     using System;
     
     using static Root;
+    using static Validity;
 
     class UnaryFuncComparer<T1,T2> : FuncComparer, IUnaryFuncComparer<T1,T2>
         where T1 : unmanaged

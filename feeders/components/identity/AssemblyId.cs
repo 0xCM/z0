@@ -175,6 +175,10 @@ public enum AssemblyId : ulong
     Polyrand = 420,
 
     PolyrandTest = Polyrand | Test,
+
+    Validity = 430,
+
+    ValidityTest = Validity | Test,
     
     BitGrids = 700,
 

@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static Root;
+    using static Validity;
 
     class BinaryFuncComparer<T1,T2,T3> : FuncComparer, IBinaryFuncComparer<T1,T2,T3>
         where T1 : unmanaged

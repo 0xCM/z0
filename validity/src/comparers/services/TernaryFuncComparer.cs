@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static Root;
+    using static Validity;
 
     class TernaryFuncComparer<T1,T2,T3,T4> : FuncComparer, ITernaryFuncComparer<T1,T2,T3,T4>
         where T1 : unmanaged
