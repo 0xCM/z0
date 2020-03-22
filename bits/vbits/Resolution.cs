@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.VBits)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class VBits : ApiResolution<VBits, VBits.C>
     {

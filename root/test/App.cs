@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.RootTest)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class RootTest : ApiResolution<RootTest>
     {

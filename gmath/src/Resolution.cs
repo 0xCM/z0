@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.GenericNumerics)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class GMath : ApiResolution<GMath, GMath.C>
     {        

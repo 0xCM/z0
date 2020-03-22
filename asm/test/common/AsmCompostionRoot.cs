@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     
-    using R = Z0.Resolutions;
+    using R = Z0.Parts;
 
     static class AsmCompostionRoot
     {

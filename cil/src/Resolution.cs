@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Cil)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Cil : ApiResolution<Cil, Cil.C>
     {

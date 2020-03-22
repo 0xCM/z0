@@ -2,12 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.CilTest)]
-
-namespace Z0.Resolutions
+namespace Z0
 {
-    public sealed class CilTest : AssemblyResolution<CilTest> 
+    using System;
+
+    public interface IUnaryOpComparer<T> : IUnaryFuncComparer<T,T>
     {
-         public CilTest() : base(AssemblyId.CilTest) {} 
+
+        
     }
 }

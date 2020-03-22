@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Matrix)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Matrix : ApiResolution<Matrix, Matrix.C>
     {

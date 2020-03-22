@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Dynamic)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Dynamic : ApiResolution<Dynamic, Dynamic.C>
     {

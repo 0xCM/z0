@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Nats)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Nats : ApiResolution<Nats, Nats.C>
     {

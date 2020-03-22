@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.BitFields)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class BitFields : ApiResolution<BitFields, BitFields.C>
     {

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Analogs)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Analogs : ApiResolution<Analogs, Analogs.C>
     {

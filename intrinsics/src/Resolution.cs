@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Intrinsics)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Intrinsics : ApiResolution<Intrinsics, Intrinsics.C>
     {        

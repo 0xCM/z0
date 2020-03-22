@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Monadic)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Monadic : Resolution<Monadic>
     {

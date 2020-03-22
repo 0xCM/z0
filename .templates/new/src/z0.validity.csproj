@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Math)" />    
+    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
 </Project>

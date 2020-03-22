@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.BlocksTest)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     using System;
 

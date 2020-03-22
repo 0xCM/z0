@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.DVec)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class DVec : ApiResolution<DVec, DVec.C>
     {

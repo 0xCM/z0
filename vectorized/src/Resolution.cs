@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Vectorized)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Vectorized : ApiResolution<Vectorized, Vectorized.C>
     {

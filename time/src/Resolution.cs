@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Time)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Time : ApiResolution<Time, Time.C>
     {

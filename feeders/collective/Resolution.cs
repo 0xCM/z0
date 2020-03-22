@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Collective)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Collective : Resolution<Collective>
     {

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.WorkflowTest)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class WorkflowTest : ApiResolution<WorkflowTest>
     {

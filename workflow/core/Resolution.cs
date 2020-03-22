@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.WorkflowCore)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class WorkflowCore : ApiResolution<WorkflowCore, WorkflowCore.C>
     {

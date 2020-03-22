@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.BitGrids)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class BitGrids : ApiResolution<BitGrids, BitGrids.C>
     {

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Root)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Root : ApiResolution<Root, Root.C>
     {

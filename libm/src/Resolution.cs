@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.LibM)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class LibM : ApiResolution<LibM, LibM.C>
     {

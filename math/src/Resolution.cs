@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Math)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Math : ApiResolution<Math, Math.C>
     {

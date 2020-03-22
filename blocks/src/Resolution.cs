@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Blocks)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Blocks : ApiResolution<Blocks, Blocks.C>
     {

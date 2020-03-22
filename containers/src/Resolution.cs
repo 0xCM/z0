@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Containers)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Containers : ApiResolution<Containers, Containers.C>
     {

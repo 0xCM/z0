@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Identity)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class Identity : ApiResolution<Identity, Identity.C>
     {

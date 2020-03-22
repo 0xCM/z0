@@ -6,7 +6,7 @@
 
 namespace Z0.Asm.Check
 { 
-    using R = Z0.Resolutions;
+    using R = Z0.Parts;
     using static Root;
 
     class App : ConsoleApp<App,IAsmContext>

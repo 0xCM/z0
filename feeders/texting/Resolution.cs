@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Texting)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Texting : Resolution<Texting>
     {

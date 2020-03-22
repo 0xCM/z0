@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.VSvc)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class VSvc : ApiResolution<VSvc, VSvc.C>
     {        

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.AsmDecoder)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class AsmDecoder : ApiResolution<AsmDecoder, AsmDecoder.C>
     {

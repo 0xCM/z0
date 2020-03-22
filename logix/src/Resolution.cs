@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Logix)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Logix : ApiResolution<Logix, Logix.C>
     {

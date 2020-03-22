@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.AsmCore)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {
     public sealed class AsmCore : ApiResolution<AsmCore, AsmCore.C>
     {

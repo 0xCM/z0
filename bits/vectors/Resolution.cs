@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.BitVectors)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class BitVectors : ApiResolution<BitVectors, BitVectors.C>
     {

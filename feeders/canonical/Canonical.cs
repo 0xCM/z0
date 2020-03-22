@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.Canonical)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class Canonical : Resolution<Canonical>
     {

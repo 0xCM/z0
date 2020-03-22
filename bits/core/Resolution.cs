@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 [assembly: AssemblyId(AssemblyId.BitCore)]
 
-namespace Z0.Resolutions
+namespace Z0.Parts
 {        
     public sealed class BitCore : ApiResolution<BitCore, BitCore.C>
     {

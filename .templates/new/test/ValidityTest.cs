@@ -2,14 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Cil)]
+[assembly: AssemblyId(AssemblyId.ValidityTest)]
+
+namespace Z0
+{
+    class App : TestApp<App>
+    { 
+        public static void Main(params string[] args) => Run(args); 
+    } 
+}
 
 namespace Z0.Resolutions
 {
-    public sealed class Cil : AssemblyResolution<Cil, Cil.C>
+    public sealed class ValidityTest : ApiResolution<ValidityTest> 
     {
-        public Cil() : base(AssemblyId.Cil) {}
         
-        public class C : AssemblyCatalog<C> { public C() : base(AssemblyId.Cil) {} }            
-    }
+    } 
 }
