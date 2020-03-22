@@ -9,31 +9,31 @@ namespace Z0
 
     using static Root;    
 
-    public static class ScalarSeq
+    public static class NumericSeq
     {
         [MethodImpl(Inline)]
-        public static ScalarSeq<T> Empty<T>()
+        public static NumericSeq<T> Empty<T>()
             where T : unmanaged
-                => ScalarSeq<T>.Empty;
+                => NumericSeq<T>.Empty;
         
         [MethodImpl(Inline)]
-        public static ScalarSeq<T> From<T>(params T[] src)
+        public static NumericSeq<T> From<T>(params T[] src)
             where T : unmanaged
-                => new ScalarSeq<T>(src);
+                => new NumericSeq<T>(src);
 
         [MethodImpl(Inline)]
-        public static ScalarSeq<T> From<T>(Span<T> src)
+        public static NumericSeq<T> From<T>(Span<T> src)
             where T : unmanaged
-                => new ScalarSeq<T>(src);
+                => new NumericSeq<T>(src);
 
         [MethodImpl(Inline)]
-        public static ScalarSeq<T> From<T>(ReadOnlySpan<T> src)
+        public static NumericSeq<T> From<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => new ScalarSeq<T>(src.ToArray());
+                => new NumericSeq<T>(src.ToArray());
 
         [MethodImpl(Inline)]
-        public static ScalarSeq<T> From<T>(params ScalarSeqTerm<T>[] src)
+        public static NumericSeq<T> From<T>(params NumericSeqTerm<T>[] src)
             where T : unmanaged
-                => new ScalarSeq<T>(src);
+                => new NumericSeq<T>(src);
     }
 }

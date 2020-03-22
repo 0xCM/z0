@@ -6,25 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;    
 
     /// <summary>
     /// Defines a data structure for sparse/partial sequence representation
     /// </summary>
-    public readonly ref struct ScalarSeq<T>
+    public readonly ref struct NumericSeq<T>
         where T : unmanaged
     {            
-        readonly Span<ScalarSeqTerm<T>> terms;
+        readonly Span<NumericSeqTerm<T>> terms;
 
-        public static ScalarSeq<T> Empty => new ScalarSeq<T>(ScalarSeqTerm<T>.Empty);
+        public static NumericSeq<T> Empty => new NumericSeq<T>(NumericSeqTerm<T>.Empty);
 
-        internal ScalarSeq(params T[] terms)
+        internal NumericSeq(params T[] terms)
         {
             if(terms.Length != 0)
             {
-                this.terms = new ScalarSeqTerm<T>[terms.Length];
+                this.terms = new NumericSeqTerm<T>[terms.Length];
                 for(var i=0; i<terms.Length; i++)
                     this.terms[i] = (i,terms[i]);
             }
@@ -33,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal ScalarSeq(params ScalarSeqTerm<T>[] terms)
+        internal NumericSeq(params NumericSeqTerm<T>[] terms)
         {
             if(terms.Length != 0)
                 this.terms = terms;
@@ -41,11 +40,11 @@ namespace Z0
                 this.terms = Empty.terms;
         }
 
-        internal ScalarSeq(Span<T> terms)
+        internal NumericSeq(Span<T> terms)
         {
             if(terms.Length != 0)
             {
-                this.terms = new ScalarSeqTerm<T>[terms.Length];
+                this.terms = new NumericSeqTerm<T>[terms.Length];
                 for(var i=0; i<terms.Length; i++)
                     this.terms[i] = (i,terms[i]);
             }
@@ -56,7 +55,7 @@ namespace Z0
         /// <summary>
         /// The sequence terms
         /// </summary>
-        public ReadOnlySpan<ScalarSeqTerm<T>> Terms
+        public ReadOnlySpan<NumericSeqTerm<T>> Terms
         {
             [MethodImpl(Inline)]
             get => terms;
@@ -74,7 +73,7 @@ namespace Z0
         /// <summary>
         /// Returns a reference to an index-identified term
         /// </summary>
-        public ref ScalarSeqTerm<T> this[int idx]
+        public ref NumericSeqTerm<T> this[int idx]
         {
             [MethodImpl(Inline)]
             get => ref seek(terms, idx);
@@ -83,13 +82,13 @@ namespace Z0
         /// <summary>
         /// Returns a reference to the first term of the seqence
         /// </summary>
-        public ref ScalarSeqTerm<T> First
+        public ref NumericSeqTerm<T> First
         {
             [MethodImpl(Inline)]
             get => ref this[0];
         }
 
-        public ref readonly ScalarSeqTerm<T> Last
+        public ref readonly NumericSeqTerm<T> Last
         {
             [MethodImpl(Inline)]
             get => ref this[Length - 1];

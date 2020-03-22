@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Nats)" />    
     <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
   </ItemGroup>
 </Project>

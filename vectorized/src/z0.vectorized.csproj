@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />
+    <ProjectReference Include="$(RngCore)" />
   </ItemGroup>
 
 </Project>

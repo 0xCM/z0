@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;    
     using System.Text;
-
-    using static Root;
     
     /// <summary>
     /// Associates a contiguous sequence of dividends with their divisor lists

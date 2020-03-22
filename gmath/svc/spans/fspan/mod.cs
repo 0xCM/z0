@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static Root;    
-    using static As;
     using static Checks;
         
     partial class fspan
@@ -22,6 +21,5 @@ namespace Z0
                 dst[i] = gfp.mod(lhs[i], rhs[i]);
             return dst;
         }
-
     }
 }

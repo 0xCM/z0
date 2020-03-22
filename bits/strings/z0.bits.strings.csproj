@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Math)" />        
-
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(Vectorized)" />        

@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
+    using BS = Z0.BitString;
 
-    partial class RngX
+    public static class RandomBitStrings
     {
         /// <summary>
         /// Produces a bitstring with a specified length
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="len">The bitstring length</param>
         [MethodImpl(Inline)]
         public static BitString BitString(this IPolyrand random, BitSize len)
-            => Z0.BitString.scalars(random.Span<byte>(len.MaxByteCount), len);        
+            => BS.scalars(random.Span<byte>(len.MaxByteCount), len);        
 
         /// <summary>
         /// Produces a bitstring with randomized length

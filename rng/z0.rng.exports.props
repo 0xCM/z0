@@ -1,8 +1,0 @@
-﻿<Project>
-
-  <ItemGroup>
-    <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
-  </ItemGroup>
-
-</Project>

@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(TestApp)" />
     <ProjectReference Include="$(Identity)" />    
   </ItemGroup>

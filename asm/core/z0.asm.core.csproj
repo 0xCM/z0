@@ -6,17 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)containers/src/z0.containers.csproj" />
-    <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />
+    <ProjectReference Include="$(Containers)" />
+    <ProjectReference Include="$(WorkflowCore)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(Vectorized)" />            
     <ProjectReference Include="$(Identity)" />    
-    <ProjectReference Include="$(TopDir)dynamic/src/z0.dynamic.csproj" />
+    <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Graphs)" />
-    <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />
-
+    <ProjectReference Include="$(RngCore)" />
   </ItemGroup>
 
 </Project>

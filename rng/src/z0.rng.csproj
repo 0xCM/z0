@@ -6,15 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
-    <ProjectReference Include="$(GenericNumerics)" />    
-    <ProjectReference Include="$(TopDir)gmath/svc/z0.gmath.svc.csproj" />    
-    <ProjectReference Include="$(TopDir)bits/strings/z0.bits.strings.csproj" />    
-    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
-
+    <ProjectReference Include="$(RngCore)" />    
+    <ProjectReference Include="$(Matrix)" />    
   </ItemGroup>
-
 
 </Project>
 

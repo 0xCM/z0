@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(TestApp)" />
-    <ProjectReference Include="$(TopDir)cil/src/z0.cil.csproj" />    
+    <ProjectReference Include="$(Cil)" />    
   </ItemGroup>
 
 </Project>

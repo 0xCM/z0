@@ -29,7 +29,7 @@ namespace Z0
         {
             this.Domain = Domain;
             this.BinWidth = BinWidth;
-            this.Partitions = Domain.PartPointStream(BinWidth).ToArray();
+            this.Partitions = Domain.PartitionPoints(BinWidth).ToArray();
             this.Counts = array<int>(Partitions.Length);
         }
 

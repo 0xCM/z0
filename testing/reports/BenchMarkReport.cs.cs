@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-
     
     /// <summary>
     /// Defines a benchmark measure for an operator
@@ -94,6 +93,5 @@ namespace Z0
 
         public int CompareTo(object obj)
             => obj is BenchmarkRecord r ? CompareTo(r) : -1;
-
     }
 }

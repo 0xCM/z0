@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
  
     public sealed class t_bitstream : UnitTest<t_bitstream>
     {

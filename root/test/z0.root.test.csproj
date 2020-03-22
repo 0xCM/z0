@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(TestApp)" />
+    <ProjectReference Include="$(Root)" />
   </ItemGroup>
 
 </Project>

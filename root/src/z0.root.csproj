@@ -24,6 +24,8 @@
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Canonical)" />
+    <ProjectReference Include="$(Symbolic)" />        
+
   </ItemGroup>
 
 </Project>

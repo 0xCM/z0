@@ -9,11 +9,9 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static vgeneric;
 
     public class t_opuri : UnitTest<t_opuri>
     {
-
         public void parse_uri_1()
         {
             var opid = OpIdentity.Define("vgeneric_g[8u](v512x8i~in)");
@@ -23,7 +21,7 @@ namespace Z0
             var uri = attempt.Value;
 
             Claim.eq(OpUriScheme.Hex, uri.Scheme);
-            Claim.eq(ApiHostUri.Define(AssemblyId.Fixed, nameof(Vector512)), uri.HostPath);
+            Claim.eq(ApiHostUri.Define(AssemblyId.Fixed, "Vector512"), uri.HostPath);
             Claim.eq("vgeneric", uri.GroupName);
             Claim.eq(opid, uri.OpId);
             Claim.eq(true, opid.IsGeneric);

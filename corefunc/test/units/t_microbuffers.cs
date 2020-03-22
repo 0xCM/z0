@@ -40,24 +40,24 @@ namespace Z0
             Claim.yea(stack.Pop());
         }
 
-        public void bitstack()
-        {
-            for(var i=0; i< RepCount; i++)
-            {
-                var bits = Random.BitString(Random.Next<int>(2,50));
-                var stack = MicroBuffers.bitstack();
-                for(var j = 0; j < bits.Length; j++)   
-                    stack.Push(bits[j]);
+        // public void bitstack()
+        // {
+        //     for(var i=0; i< RepCount; i++)
+        //     {
+        //         var bits = Random.BitString(Random.Next<int>(2,50));
+        //         var stack = MicroBuffers.bitstack();
+        //         for(var j = 0; j < bits.Length; j++)   
+        //             stack.Push(bits[j]);
                 
-                var rbits = bits.Reverse();
-                for(var j=0; j< bits.Length; j++)
-                {
-                    var actual = stack.Pop();
-                    var expect = rbits[j];
-                    Claim.eq(actual,expect);
-                }
-            }
-        }
+        //         var rbits = bits.Reverse();
+        //         for(var j=0; j< bits.Length; j++)
+        //         {
+        //             var actual = stack.Pop();
+        //             var expect = rbits[j];
+        //             Claim.eq(actual,expect);
+        //         }
+        //     }
+        // }
 
         public void ringbuffer_32()
         {

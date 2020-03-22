@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Vectorized)" />
-    <ProjectReference Include="$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj" />
+    <ProjectReference Include="$(VData)" />
     <ProjectReference Include="$(TopDir)vectorized/dvec/z0.vectorized.dvec.csproj" />
     <ProjectReference Include="$(TopDir)vectorized/gvec/z0.vectorized.gvec.csproj" />
   </ItemGroup>

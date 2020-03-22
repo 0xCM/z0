@@ -9,18 +9,16 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TestApp)" />
+
     <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(TopDir)gmath/svc/z0.gmath.svc.csproj" />
-
+    <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(VSvc)" /> 
-    <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />
-    <ProjectReference Include="$(TopDir)bits/vbits/z0.bits.vbits.csproj" />
-    <ProjectReference Include="$(TopDir)permute/src/z0.permute.csproj" />
-
-    <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
-    <ProjectReference Include="$(TopDir)libm/src/z0.libm.csproj" />
-
-    <ProjectReference Include="$(TopDir)asm/app/z0.asm.app.csproj" />
+    <ProjectReference Include="$(BitGrids)" />
+    <ProjectReference Include="$(VBits)" />
+    <ProjectReference Include="$(Permute)" />
+    <ProjectReference Include="$(Logix)" />
+    <ProjectReference Include="$(LibM)" />
+    <ProjectReference Include="$(AsmApp)" />
   </ItemGroup>
 
 </Project>

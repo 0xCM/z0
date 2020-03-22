@@ -11,7 +11,7 @@ namespace Z0
     using static nfunc;
     using static Nats;
 
-    partial class RngX
+    public static class Markovian
     {
         /// <summary>
         /// Produces a stochastic vector of *unspecified* length
@@ -158,6 +158,6 @@ namespace Z0
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Data.Avg() * length);
             return dst; 
-        }
+        }       
     }
 }

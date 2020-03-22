@@ -6,12 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(AsmCore)" />   
-    <ProjectReference Include="$(BitCore)" />    
     <ProjectReference Include="$(BitFields)" />   
-
   </ItemGroup>
 
 </Project>

@@ -6,13 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(WorkflowCore)" />            
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Fixed)" />
-    <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />
-
-    <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />            
+    <ProjectReference Include="$(RngCore)" />
   </ItemGroup>
 
 </Project>

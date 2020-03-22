@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(Dynamic)" />    
     <ProjectReference Include="$(TestApp)" />
+    <ProjectReference Include="$(Dynamic)" />    
   </ItemGroup>
 
 </Project>

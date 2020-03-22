@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TopDir)stats/src/z0.stats.csproj" />        
+    <ProjectReference Include="$(Stats)" />        
     <ProjectReference Include="$(TestApp)" />
   </ItemGroup>
 

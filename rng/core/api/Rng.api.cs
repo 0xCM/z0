@@ -6,14 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Root;
 
     public static class Rng
     {
-
         /// <summary>
         /// Creates a polyrand rng from a point source
         /// </summary>
@@ -28,7 +25,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IPolyrand polynav(IRngNav<ulong> src)
             => Polyrand.Create(src);
-
 
         /// <summary>
         /// Creates a new WyHash16 generator

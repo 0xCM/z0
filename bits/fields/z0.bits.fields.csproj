@@ -10,8 +10,7 @@
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
+    <ProjectReference Include="$(Intrinsics)" />
   </ItemGroup>
 
 </Project>

@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static Root;
+    using static Root;    
 
-    public static partial class CoreRngOps
-    {        
+    public static class Polynomial
+    {
 
-
+        [MethodImpl(Inline)]
+        public static Polynomial<T> Define<T>(params (T scalar, uint exp)[] terms)
+            where T : unmanaged
+                => Polynomial<T>.Define(terms);
     }
 }

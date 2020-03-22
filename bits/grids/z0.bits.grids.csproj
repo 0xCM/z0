@@ -8,12 +8,12 @@
   <ItemGroup>
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(MathSvc)" />    
     <ProjectReference Include="$(Graphs)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
-    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
+    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(Matrix)" />    
+    <ProjectReference Include="$(Intrinsics)" />
   </ItemGroup>
 
 </Project>

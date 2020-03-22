@@ -5,14 +5,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />        
     <ProjectReference Include="$(TestApp)" />
-    <ProjectReference Include="$(TopDir)mkl/src/z0.mkl.csproj" />        
-
+    <ProjectReference Include="$(MklApi)" />        
   </ItemGroup>
 
 </Project>

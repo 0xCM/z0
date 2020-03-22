@@ -6,23 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(TestApp)" />
 
-    <ProjectReference Include="$(TopDir)bits/strings/z0.bits.strings.csproj" />
+    <ProjectReference Include="$(BitStrings)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(TopDir)bits/fields/z0.bits.fields.csproj" />
-    <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
-    <ProjectReference Include="$(TopDir)bits/bitpack/z0.bits.bitpack.csproj" />
-
-
-    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />    
-    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />    
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
-    
-    <ProjectReference Include="$(TopDir)bits/spans/z0.bits.spans.csproj" />
-    <ProjectReference Include="$(TopDir)bits/grids/z0.bits.grids.csproj" />
+    <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(BitPack)" />
+    <ProjectReference Include="$(BitSpans)" />
+    <ProjectReference Include="$(BitGrids)" />
   </ItemGroup>
 
 </Project>

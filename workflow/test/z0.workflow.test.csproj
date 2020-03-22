@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)workflow/core/z0.workflow.core.csproj" />        
-    <ProjectReference Include="$(TopDir)workflow/runtime/z0.workflow.runtime.csproj" />
     <ProjectReference Include="$(TestApp)" />  
+    <ProjectReference Include="$(WorkflowCore)" />        
+    <ProjectReference Include="$(WorkflowRuntime)" />
   </ItemGroup>
 
 </Project>

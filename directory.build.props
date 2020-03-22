@@ -27,27 +27,50 @@
 
   <PropertyGroup>
     <Analogs>$(TopDir)analogs/src/z0.analogs.csproj</Analogs>
+    <AsmApp>$(TopDir)asm/app/z0.asm.app.csproj</AsmApp>
     <AsmCore>$(TopDir)asm/core/z0.asm.core.csproj</AsmCore>
+    <AsmDecode>$(TopDir)asm/decode/z0.asm.decode.csproj</AsmDecode>
+    <AsmEncode>$(TopDir)asm/encode/z0.asm.encode.csproj</AsmEncode>
+    <AsmSuite>$(TopDir)asm/src/z0.asm.csproj</AsmSuite>
     <BitCore>$(TopDir)bits/core/z0.bits.core.csproj</BitCore>
     <BitFields>$(TopDir)bits/fields/z0.bits.fields.csproj</BitFields>
+    <BitGrids>$(TopDir)/bits/grids/z0.bits.grids.csproj</BitGrids>
+    <BitPack>$(TopDir)bits/bitpack/z0.bits.bitpack.csproj</BitPack>
+    <BitSpans>$(TopDir)bits/spans/z0.bits.spans.csproj</BitSpans>
     <BitStrings>$(TopDir)bits/strings/z0.bits.strings.csproj</BitStrings>
+    <BitVectors>$(TopDir)bits/vectors/z0.bits.vectors.csproj</BitVectors>
     <Blocks>$(TopDir)blocks/src/z0.blocks.csproj</Blocks>
+    <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
+    <Circuits>$(TopDir)vectorized/circuits/z0.vectorized.circuits.csproj</Circuits>
     <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
     <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
     <Fixed>$(TopDir)fixed/src/z0.fixed.csproj</Fixed>
     <GenericNumerics>$(TopDir)gmath/src/z0.gmath.csproj</GenericNumerics>
     <Graphs>$(TopDir)graphs/src/z0.graphs.csproj</Graphs>
     <Identity>$(TopDir)identity/src/z0.identity.csproj</Identity>
+    <Intrinsics>$(TopDir)intrinsics/src/z0.intrinsics.csproj</Intrinsics>
+    <LibM>$(TopDir)libm/src/z0.libm.csproj</LibM>
+    <Logix>$(TopDir)logix/src/z0.logix.csproj</Logix>
+    <Machines>$(TopDir)machines/src/z0.machines.csproj</Machines>
+    <Matrix>$(TopDir)matrix/src/z0.matrix.csproj</Matrix>
     <Math>$(TopDir)math/src/z0.math.csproj</Math>
+    <MathSvc>$(TopDir)gmath/svc/z0.gmath.svc.csproj</MathSvc>
+    <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
     <Nats>$(TopDir)nats/src/z0.nats.csproj</Nats>
     <Root>$(TopDir)root/src/z0.root.csproj</Root>
+    <Permute>$(TopDir)permute/src/z0.permute.csproj</Permute>
     <Polyrand>$(TopDir)polyrand/src/z0.polyrand.csproj</Polyrand>
-    <Symbolic>$(TopDir)symbolic/src/z0.symbolic.csproj</Symbolic>
+    <RngCore>$(TopDir)rng/core/z0.rng.core.csproj</RngCore>
+    <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
     <TestApp>$(TopDir)testing/z0.testing.csproj</TestApp>
     <TestLib>$(TopDir)testlib/src/z0.testlib.csproj</TestLib>
     <Time>$(TopDir)time/src/z0.time.csproj</Time>
+    <VData>$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj</VData>
     <Vectorized>$(TopDir)vectorized/src/z0.vectorized.csproj</Vectorized>
     <VSvc>$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj</VSvc>
+    <VBits>$(TopDir)bits/vbits/z0.bits.vbits.csproj</VBits>
+    <WorkflowCore>$(TopDir)workflow/core/z0.workflow.core.csproj</WorkflowCore>
+    <WorkflowRuntime>$(TopDir)workflow/runtime/z0.workflow.runtime.csproj</WorkflowRuntime>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -58,6 +81,8 @@
     <Reflections>$(Feeders)reflections/z0.feeders.reflections.csproj</Reflections>
     <Texting>$(Feeders)texting/z0.feeders.texting.csproj</Texting>
     <Canonical>$(Feeders)canonical/z0.feeders.canonical.csproj</Canonical>
+    <Symbolic>$(Feeders)symbolic/z0.feeders.symbolic.csproj</Symbolic>
+
   </PropertyGroup>
 
 </Project>

@@ -6,10 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(TestApp)" />
-
-    <ProjectReference Include="$(TopDir)containers/src/z0.containers.csproj" />    
+    <ProjectReference Include="$(Containers)" />    
   </ItemGroup>
 
 </Project>

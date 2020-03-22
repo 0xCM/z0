@@ -11,7 +11,7 @@
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(Vectorized)" />
-    <ProjectReference Include="$(TopDir)bits/strings/z0.bits.strings.csproj" />    
+    <ProjectReference Include="$(BitStrings)" />    
   </ItemGroup>
 
 </Project>

@@ -117,8 +117,6 @@ namespace Z0
             where C : unmanaged
                 => NaturalIdentity.testcase(GetType(), root, w, t, generic);
 
-        protected static OpIdentity SubjectId(string opname, NumericKind kind)
-            => OpIdentity.numeric(opname,kind);
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged

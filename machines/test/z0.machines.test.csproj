@@ -6,15 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(TopDir)bits/vectors/z0.bits.vectors.csproj" />
-    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
-    <ProjectReference Include="$(TopDir)machines/src/z0.machines.csproj" />
     <ProjectReference Include="$(TestApp)" />
-
+    <ProjectReference Include="$(Machines)" />
   </ItemGroup>
 
 </Project>

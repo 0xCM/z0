@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    
-    using static Root;
 
     using F = TestCaseField;
     using R = TestCaseRecord;

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TopDir)asm/core/z0.asm.core.csproj" />
+    <ProjectReference Include="$(AsmCore)" />
   </ItemGroup>
 
   <ItemGroup>

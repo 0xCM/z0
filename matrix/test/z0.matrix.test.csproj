@@ -6,13 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-    <ProjectReference Include="$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj" />
-    <ProjectReference Include="$(TopDir)matrix/src/z0.matrix.csproj" />
-    <ProjectReference Include="$(TestApp)" />
-    
+    <ProjectReference Include="$(TestApp)" />    
+    <ProjectReference Include="$(Matrix)" />
+    <ProjectReference Include="$(Intrinsics)" />
+    <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(VSvc)" />
   </ItemGroup>
 
 </Project>

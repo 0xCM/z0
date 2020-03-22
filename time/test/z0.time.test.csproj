@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(TestApp)" />
+    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
 </Project>

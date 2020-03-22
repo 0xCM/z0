@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
-    using static Root;
-
     public interface ITestControl : IAppMsgQueue
     {
         void Configure(ITestConfig config);
@@ -18,7 +14,5 @@ namespace Z0
         IEnumerable<BenchmarkRecord> TakeBenchmarks();
 
         IEnumerable<TestCaseRecord> TakeOutcomes();
-
     }
-
 }

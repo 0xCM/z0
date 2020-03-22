@@ -10,7 +10,7 @@ namespace Z0
        
     using static Root;
 
-    public static class IntervalX
+    public static class IntervalOps
     {
         /// <summary>
         /// Computes the length of the interval by finding the magnituded of the difference 
@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static IEnumerable<T> PartPointStream<S,T>(this S src, T width, int? precision = null)
+        public static IEnumerable<T> PartitionPoints<S,T>(this S src, T width, int? precision = null)
             where S : struct, IInterval<S,T>
             where T : unmanaged
         {            
@@ -66,7 +66,7 @@ namespace Z0
             if(src.RightClosed)
                 yield return src.Right;
         }
-
+        
         public static string Format<S,T>(this Span<S> parts, char? sep = null)
             where S : struct, IInterval<S,T>
             where T : unmanaged
@@ -93,5 +93,6 @@ namespace Z0
             
             return increments.ToArray();
         }
+
     }
 }

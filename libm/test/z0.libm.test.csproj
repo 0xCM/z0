@@ -6,12 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-    <ProjectReference Include="$(TestApp)" />    
-    <ProjectReference Include="$(TopDir)libm/src/z0.libm.csproj" />
-    
+    <ProjectReference Include="$(TestApp)" />        
+    <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(LibM)" />    
   </ItemGroup>
 
 

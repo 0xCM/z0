@@ -6,20 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TopDir)cil/src/z0.cil.csproj" />
-
-    <ProjectReference Include="$(TopDir)asm/core/z0.asm.core.csproj" />
-    <ProjectReference Include="$(TopDir)asm/encode/z0.asm.encode.csproj" />
-    <ProjectReference Include="$(TopDir)asm/decode/z0.asm.decode.csproj" />
-    
-    <ProjectReference Include="$(TopDir)dynamic/src/z0.dynamic.csproj" />
-
-    <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(BitCore)" />    
-    <ProjectReference Include="$(TopDir)bits/fields/z0.bits.fields.csproj" />    
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
+    <ProjectReference Include="$(Cil)" />    
+    <ProjectReference Include="$(AsmCore)" />
+    <ProjectReference Include="$(AsmEncode)" />
+    <ProjectReference Include="$(AsmDecode)" />    
   </ItemGroup>
 
   <ItemGroup>

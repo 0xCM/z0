@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Z0.Root;
-    using static Z0.As;
+    using static Root;
+    using static As;
 
     public class Polyrand : IPolyrand
     {

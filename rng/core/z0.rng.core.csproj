@@ -7,11 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Polyrand)"/>
-    <ProjectReference Include="$(Fixed)" />
-    <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(GenericNumerics)" />
   </ItemGroup>

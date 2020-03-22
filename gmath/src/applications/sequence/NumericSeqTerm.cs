@@ -6,16 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static Root;    
-    using static As;
 
     /// <summary>
     /// Defines a sequence term
     /// </summary>
-    public readonly struct ScalarSeqTerm<T> : IEquatable<ScalarSeqTerm<T>>
+    public readonly struct NumericSeqTerm<T> : IEquatable<NumericSeqTerm<T>>
         where T : unmanaged
     {
         /// <summary>
@@ -28,22 +25,22 @@ namespace Z0
         /// </summary>        
         public readonly T Value;
 
-        public static ScalarSeqTerm<T> Empty => default;
+        public static NumericSeqTerm<T> Empty => default;
                         
         [MethodImpl(Inline)]
-        public static implicit operator (int i, T t)(ScalarSeqTerm<T> src)
+        public static implicit operator (int i, T t)(NumericSeqTerm<T> src)
             => (src.Index, src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator T(ScalarSeqTerm<T> src)
+        public static implicit operator T(NumericSeqTerm<T> src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator ScalarSeqTerm<T>((int i, T t) src)
-            => new ScalarSeqTerm<T>(src.i, src.t);
+        public static implicit operator NumericSeqTerm<T>((int i, T t) src)
+            => new NumericSeqTerm<T>(src.i, src.t);
 
         [MethodImpl(Inline)]
-        public ScalarSeqTerm(int index, T value)
+        public NumericSeqTerm(int index, T value)
         {
             this.Index = index;
             this.Value = value;
@@ -63,11 +60,11 @@ namespace Z0
             => IsEmpty ? "{}" : $"{id ?? 'a'}_{Index} = {Value}";
         
         [MethodImpl(Inline)]
-        public bool Equals(ScalarSeqTerm<T> rhs)
+        public bool Equals(NumericSeqTerm<T> rhs)
             => Index == rhs.Index && gmath.eq(Value, rhs.Value);
         
         public override bool Equals(object rhs)
-            => rhs is ScalarSeqTerm<T> t && Equals(t);
+            => rhs is NumericSeqTerm<T> t && Equals(t);
         
         public override int GetHashCode()
             => HashCode.Combine(Index,Value);
