@@ -14,6 +14,6 @@ namespace Z0.Asm
         /// The identifer of the .net assembly for which native asm should be captured and persisted to an archive
         /// </summary>
         /// <param name="id">The .net assembly identifier</param>
-        void Archive(AssemblyId id);        
+        void Archive(PartId id);        
     }
 }

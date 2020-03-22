@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.AsmCore)]
+[assembly: PartId(PartId.Root)]
 
 namespace Z0.Parts
-{
-    public sealed class AsmCore : ApiResolution<AsmCore, AsmCore.C>
+{        
+    public sealed class Root : ApiPart<Root, Root.C>
     {
-        public AsmCore() : base(AssemblyId.AsmCore) {}
+        public Root() : base(PartId.Root) {}
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.AsmCore) { } }
+        public class C : ApiCatalog<C> { public C() : base(PartId.Root) { } }            
     }
 }

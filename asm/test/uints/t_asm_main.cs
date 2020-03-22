@@ -33,7 +33,7 @@ namespace Z0.Asm
         {
             var archive = Context.Archiver();
             var selection = from c in Context.Compostion.Catalogs
-                            where c.AssemblyId != AssemblyId.Data
+                            where c.AssemblyId != PartId.Data
                             orderby c.AssemblyId
                             select c.AssemblyId;
             foreach(var id in selection)

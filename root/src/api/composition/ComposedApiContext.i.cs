@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The assemblies available via the assigned composition
         /// </summary>
-        IEnumerable<AssemblyId> IComposedContext.Components
+        IEnumerable<PartId> IComposedContext.Components
             => from r in Compostion.Resolved
                 select r.Id;        
 

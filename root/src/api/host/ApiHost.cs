@@ -24,13 +24,13 @@ namespace Z0
 
         public ApiHostKind HostKind {get;}
 
-        public AssemblyId Owner {get;}
+        public PartId Owner {get;}
 
         public ApiHostUri Path {get;}
         
         public Type HostingType {get;}
 
-        public static ApiHost Empty = new ApiHost(AssemblyId.None, typeof(void));
+        public static ApiHost Empty = new ApiHost(PartId.None, typeof(void));
         
         /// <summary>
         /// Searches an assembly for api host types
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ApiHost Define(AssemblyId owner, Type src)
+        public static ApiHost Define(PartId owner, Type src)
         {
             return new ApiHost(owner, src);
         }
@@ -68,7 +68,7 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        ApiHost(AssemblyId id, Type t)
+        ApiHost(PartId id, Type t)
         {
             this.Owner = id;
             this.HostingType = t;
@@ -83,7 +83,7 @@ namespace Z0
             => HostingType.DeclaredMethods(false);
 
         public bool IsEmtpy 
-            => Owner == AssemblyId.None && HostingType == typeof(void);
+            => Owner == PartId.None && HostingType == typeof(void);
 
         public string Format()
             => Identifier;

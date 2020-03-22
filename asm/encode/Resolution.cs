@@ -2,15 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.AsmEncoder)]
+[assembly: PartId(PartId.AsmEncoder)]
 
 namespace Z0.Parts
 {
-    public sealed class AsmEncoder : ApiResolution<AsmEncoder, AsmEncoder.C>
+    public sealed class AsmEncoder : ApiPart<AsmEncoder, AsmEncoder.C>
     {
-        public AsmEncoder() : base(AssemblyId.AsmEncoder) {}
+        public AsmEncoder() : base(PartId.AsmEncoder) {}
         
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.AsmEncoder) {} }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.AsmEncoder) {} }            
     }
 }

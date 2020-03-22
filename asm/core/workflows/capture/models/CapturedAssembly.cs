@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// <summary>
         /// The assembly id
         /// </summary>
-        public readonly AssemblyId Assembly;
+        public readonly PartId Assembly;
 
         /// <summary>
         /// The captured operations
@@ -25,11 +25,11 @@ namespace Z0.Asm
         public readonly CapturedOp[] Captured;        
 
         [MethodImpl(Inline)]
-        public static CapturedAssembly Define(AssemblyId owner, CapturedOp[] ops)
+        public static CapturedAssembly Define(PartId owner, CapturedOp[] ops)
             => new CapturedAssembly(owner, ops);
         
         [MethodImpl(Inline)]
-        CapturedAssembly(AssemblyId id, CapturedOp[] ops)
+        CapturedAssembly(PartId id, CapturedOp[] ops)
         {
             this.Assembly = id;
             this.Captured = ops;

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.RngTest)]
+[assembly: PartId(PartId.RngTest)]
 
 namespace Z0
 {            
@@ -11,7 +11,7 @@ namespace Z0
 
 namespace Z0.Parts
 {        
-    public sealed class RngCoreTest : ApiResolution<RngCoreTest>
+    public sealed class RngCoreTest : ApiPart<RngCoreTest>
     {
         
     }

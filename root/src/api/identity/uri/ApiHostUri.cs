@@ -12,9 +12,9 @@ namespace Z0
 
     public readonly struct ApiHostUri : IUri<ApiHostUri>, INullary<ApiHostUri>
     {
-        public static ApiHostUri Empty = new ApiHostUri(AssemblyId.None, string.Empty);
+        public static ApiHostUri Empty = new ApiHostUri(PartId.None, string.Empty);
         
-        public readonly AssemblyId Owner;
+        public readonly PartId Owner;
 
         public readonly string Name;        
 
@@ -52,7 +52,7 @@ namespace Z0
         }
                 
         [MethodImpl(Inline)]
-        public static ApiHostUri Define(AssemblyId owner, string name)
+        public static ApiHostUri Define(PartId owner, string name)
             => new ApiHostUri(owner,name);
      
         [MethodImpl(Inline)]
@@ -68,7 +68,7 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        ApiHostUri(AssemblyId owner, string name)
+        ApiHostUri(PartId owner, string name)
         {
             this.Owner = owner;
             this.Name = name;
@@ -78,7 +78,7 @@ namespace Z0
         ParseResult<ApiHostUri> IParser<ApiHostUri>.Parse(string text)
         {
             var parts = text.Split('/');
-            if(parts.Length == 2 && Enum.TryParse(parts[0], true, out AssemblyId owner))
+            if(parts.Length == 2 && Enum.TryParse(parts[0], true, out PartId owner))
                 return ParseResult.Success(text,Define(owner, parts[1]));
             else
                 return ParseResult.Fail<ApiHostUri>(text);

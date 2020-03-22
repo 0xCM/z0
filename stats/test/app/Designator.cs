@@ -1,18 +1,9 @@
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
-//-----------------------------------------------------------------------------
+[assembly: PartId(PartId.StatsTest)]
+
 namespace Z0.Parts
 {        
-    using System;
-
-    public sealed class StatsTest : ApiResolution<StatsTest>
+    public sealed class StatsTest : Part<StatsTest>
     {
-        const AssemblyId Identity = 0;
 
-        public override AssemblyId Id 
-            => Identity;
-
-        public override void Run(params string[] args) => App.Run(args);
     }
 }

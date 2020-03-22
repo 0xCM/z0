@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.PolyrandTest)]
+[assembly: PartId(PartId.PolyrandTest)]
 
 namespace Z0.Parts
 {
-    public sealed class PolyrandTest : ApiResolution<PolyrandTest> 
+    public sealed class PolyrandTest : ApiPart<PolyrandTest> 
     {
-         public PolyrandTest() : base(AssemblyId.PolyrandTest) {} 
+         public PolyrandTest() : base(PartId.PolyrandTest) {} 
     }
 }

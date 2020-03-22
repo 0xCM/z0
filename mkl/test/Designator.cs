@@ -9,11 +9,11 @@ namespace Z0.Parts
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class MklApiTest : ApiResolution<MklApiTest>
+    public sealed class MklApiTest : ApiPart<MklApiTest>
     {
-        const AssemblyId Identity = AssemblyId.MklApiTest;
+        const PartId Identity = PartId.MklApiTest;
 
-        public override AssemblyId Id 
+        public override PartId Id 
             => Identity;
 
         public override void Run(params string[] args)

@@ -11,7 +11,7 @@ namespace Z0
         /// <summary>
         /// The current assembly
         /// </summary>
-        AssemblyId AppId {get;}
+        PartId AppId {get;}
 
         /// <summary>
         /// The application-wide root output directory
@@ -61,7 +61,7 @@ namespace Z0
         FolderPath TestDataDir<T>()
             => TestDataDir(typeof(T));
         
-        FolderPath ComponentDataDir(AssemblyId owner, string subfolder = null)
+        FolderPath ComponentDataDir(PartId owner, string subfolder = null)
             => (DataRootDir + FolderName.Define(owner.Format())) + FolderName.Define(text.denullify(subfolder));
     }
 

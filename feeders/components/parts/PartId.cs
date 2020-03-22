@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 /// <summary>
 /// Defines identifiers for known system assemblies
 /// </summary>
-public enum AssemblyId : ulong
+public enum PartId : ulong
 {
     None = 0,
             
@@ -107,9 +107,9 @@ public enum AssemblyId : ulong
 
     BitStringTest = BitString | Test,
 
-    StatCore = 240,
+    Stats = 240,
 
-    StateCoreTest = StatCore | Test,
+    StatsTest = Stats | Test,
 
     Fixed = 250,
 

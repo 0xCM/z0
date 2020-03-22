@@ -14,7 +14,7 @@ namespace Z0.Asm
     public static class AsmEmissionTokens
     {
         [MethodImpl(Inline)]
-        public static AsmEmissionTokens<AssemblyUri> From(AssemblyId src, AsmEmissionToken[] tokens)
+        public static AsmEmissionTokens<AssemblyUri> From(PartId src, AsmEmissionToken[] tokens)
             => From(AssemblyUri.Define(src),tokens);
 
         [MethodImpl(Inline)]

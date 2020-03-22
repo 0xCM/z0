@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId("FeederTest")]
+[assembly: PartId("FeederTest")]
 
 namespace Z0
 {

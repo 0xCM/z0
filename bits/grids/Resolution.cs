@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.BitGrids)]
+[assembly: PartId(PartId.BitGrids)]
 
 namespace Z0.Parts
 {        
-    public sealed class BitGrids : ApiResolution<BitGrids, BitGrids.C>
+    public sealed class BitGrids : ApiPart<BitGrids, BitGrids.C>
     {
-        public BitGrids() : base (AssemblyId.BitGrids) {}
+        public BitGrids() : base (PartId.BitGrids) {}
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.BitGrids) { } }
+        public class C : ApiCatalog<C> { public C() : base(PartId.BitGrids) { } }
     }
 }

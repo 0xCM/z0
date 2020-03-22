@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.MathTest)]
+[assembly: PartId(PartId.MathTest)]
 
 namespace Z0
 {
@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class MathTest : ApiResolution<MathTest> 
+    public sealed class MathTest : ApiPart<MathTest> 
     {
         
     } 

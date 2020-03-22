@@ -2,14 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Blocks)]
+[assembly: PartId(PartId.Machines)]
 
 namespace Z0.Parts
-{        
-    public sealed class Blocks : ApiResolution<Blocks, Blocks.C>
+{    
+    public sealed class Machines : ApiPart<Machines>
     {
-        public Blocks() : base(AssemblyId.Blocks) {}
-
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Blocks){ }}
+        
     }
 }

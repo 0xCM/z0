@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Asm)]
+[assembly: PartId(PartId.Asm)]
 
 namespace Z0.Parts
 {
-    public sealed class Asm : ApiResolution<Asm,Asm.C>
+    public sealed class Asm : ApiPart<Asm,Asm.C>
     {
-        public Asm() : base(AssemblyId.Asm) {}
+        public Asm() : base(PartId.Asm) {}
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Asm) { } }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.Asm) { } }            
     }
 }

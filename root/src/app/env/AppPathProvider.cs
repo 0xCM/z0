@@ -8,7 +8,7 @@ namespace Z0
 
     public readonly struct AppPathProvider : IAppPaths<AppPathProvider>
     {
-        public static AppPathProvider Create(AssemblyId id, FolderPath root)
+        public static AppPathProvider Create(PartId id, FolderPath root)
         {
             var data = root + FolderName.Define("data");
             var stdout = root + FolderName.Define("test");
@@ -18,7 +18,7 @@ namespace Z0
             return new AppPathProvider(id,root,data, stdout, stderr, test, bench);
         }
 
-        AppPathProvider(AssemblyId id, FolderPath root, FolderPath data, FolderPath stdout, FolderPath stderr, FolderPath test, FolderPath bench)
+        AppPathProvider(PartId id, FolderPath root, FolderPath data, FolderPath stdout, FolderPath stderr, FolderPath test, FolderPath bench)
         {
             this.AppId = id;
             this.GlobalRootDir = root;
@@ -29,7 +29,7 @@ namespace Z0
             this.BenchResultDir = bench;
         }
 
-        public AssemblyId AppId {get;}
+        public PartId AppId {get;}
 
         public FolderPath GlobalRootDir {get;}
 

@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.DVec)]
+[assembly: PartId(PartId.Cil)]
 
 namespace Z0.Parts
 {
-    public sealed class DVec : ApiPart<DVec, DVec.C>
+    public sealed class Cil : ApiPart<Cil, Cil.C>
     {
-        public DVec() : base(PartId.DVec) {}
+        public Cil() : base(PartId.Cil) {}
         
-        public class C : ApiCatalog<C> { public C() : base(PartId.DVec) {} }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.Cil) {} }            
     }
 }

@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.VSvc)]
+[assembly: PartId(PartId.VSvc)]
 
 namespace Z0.Parts
 {
-    public sealed class VSvc : ApiResolution<VSvc, VSvc.C>
+    public sealed class VSvc : ApiPart<VSvc, VSvc.C>
     {        
-        public VSvc() : base(AssemblyId.VSvc) {}
+        public VSvc() : base(PartId.VSvc) {}
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.VSvc) { } }
+        public class C : ApiCatalog<C> { public C() : base(PartId.VSvc) { } }
     }
 }

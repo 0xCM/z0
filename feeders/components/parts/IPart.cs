@@ -8,15 +8,15 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    public interface IComponentIdentity
+    public interface IPartIdentity
     {
         /// <summary>
         /// The assembly identification
         /// </summary>
-        AssemblyId Id {get;}   
+        PartId Id {get;}   
     }
 
-    public interface IResolution : IComponentIdentity
+    public interface IPart : IPartIdentity
     {
         /// <summary>
         /// The resolved assembly
@@ -29,26 +29,26 @@ namespace Z0
         string Name {get;}        
     }
 
-    public interface IResolution<A> : IResolution
-        where A : IResolution<A>, new()   
+    public interface IPart<A> : IPart
+        where A : IPart<A>, new()   
     {
-        Assembly IResolution.Resolved 
+        Assembly IPart.Resolved 
             => typeof(A).Assembly;
 
-        string IResolution.Name 
+        string IPart.Name 
             => Resolved.GetName().Name;
 
-        AssemblyId IComponentIdentity.Id 
-            =>  Attribute.IsDefined(Resolved, typeof(AssemblyIdAttribute))  
-              ? ((AssemblyIdAttribute)Attribute.GetCustomAttribute(Resolved, typeof(AssemblyIdAttribute))).Id
-              : AssemblyId.None;
+        PartId IPartIdentity.Id 
+            =>  Attribute.IsDefined(Resolved, typeof(PartIdAttribute))  
+              ? ((PartIdAttribute)Attribute.GetCustomAttribute(Resolved, typeof(PartIdAttribute))).Id
+              : PartId.None;
     }
 
-    public abstract class Resolution<A> : IResolution<A>
-        where A : IResolution<A>, new()
+    public abstract class Part<A> : IPart<A>
+        where A : IPart<A>, new()
     {
         public string Format()
-            =>  (this as IComponentIdentity).Id.Format();
+            =>  (this as IPartIdentity).Id.Format();
         
         public override string ToString()
             => Format();

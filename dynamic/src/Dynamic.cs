@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Cil)]
+[assembly: PartId(PartId.Dynamic)]
 
 namespace Z0.Parts
 {
-    public sealed class Cil : ApiResolution<Cil, Cil.C>
+    public sealed class Dynamic : ApiPart<Dynamic, Dynamic.C>
     {
-        public Cil() : base(AssemblyId.Cil) {}
-        
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Cil) {} }            
+        public Dynamic() : base(PartId.Dynamic) {}
+
+        public class C : ApiCatalog<C> { public C() : base(PartId.Dynamic) { } }               
     }
 }

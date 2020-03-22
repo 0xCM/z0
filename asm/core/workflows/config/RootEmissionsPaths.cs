@@ -53,10 +53,10 @@ namespace Z0.Asm
         public FolderPath LogDir
             => RootDir + LogFolder;
 
-        public FolderName AssemblyFolder(AssemblyId id) 
+        public FolderName AssemblyFolder(PartId id) 
             => FolderName.Define(id.Format());
 
-        public FolderPath AssemblyDir(AssemblyId id)
+        public FolderPath AssemblyDir(PartId id)
             => RootDir + AssemblyFolder(id);
 
 

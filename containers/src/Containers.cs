@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Permute)]
+[assembly: PartId(PartId.Containers)]
 
 namespace Z0.Parts
 {
-    public sealed class Permute : ApiResolution<Permute, Permute.C>
+    public sealed class Containers : ApiPart<Containers, Containers.C>
     {
-        public Permute() : base(AssemblyId.Permute) {}
+        public Containers() : base(PartId.Containers) {}
         
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Permute) {} }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.Containers) {} }            
     }
 }

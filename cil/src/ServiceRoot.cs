@@ -5,15 +5,10 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.IO;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    
+    using System.Runtime.CompilerServices;    
 
     using static Root;
-
 
     public interface ICilContext : IAppContext
     {
@@ -69,7 +64,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ICilFunctionWriter CilWriter(this IAppContext context, FilePath dst)
             => CilFunctionWriter.Create(context.CilContext(),dst);
-
-
     }
 }

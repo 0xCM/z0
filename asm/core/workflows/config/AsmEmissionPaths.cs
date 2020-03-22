@@ -78,11 +78,11 @@ namespace Z0.Asm
 
         FileExtension ResourceExt => FileExtensions.Csv;
 
-        public FilePath ResourcePath(AssemblyId id) => ReportRootDir + FileName.Define(id.Format(), ResourceExt);              
+        public FilePath ResourcePath(PartId id) => ReportRootDir + FileName.Define(id.Format(), ResourceExt);              
 
         FileExtension EmissionExt => FileExtensions.Csv;
 
-        public FilePath EmissionPath(AssemblyId id, AsmEmissionKind kind)
+        public FilePath EmissionPath(PartId id, AsmEmissionKind kind)
             => DataRootDir + FolderName.Define($".emissions") 
             + (kind == AsmEmissionKind.Imm 
                     ? FileName.Define($"{id.Format()}-imm", EmissionExt) 
@@ -97,27 +97,27 @@ namespace Z0.Asm
         FileName LocationFileName(ApiHostUri host)
             => FileName.Define(text.concat(host.Owner.Format(), text.dash(), host.Name), LocationExt);
 
-        FileName LocationFileName(AssemblyId assembly) => FileName.Define(assembly.Format(), LocationExt);    
+        FileName LocationFileName(PartId assembly) => FileName.Define(assembly.Format(), LocationExt);    
 
         public FilePath LocationPath(ApiHostUri host) => LocationDir + LocationFileName(host);
 
-        public FilePath LocationPath(AssemblyId assembly) => LocationDir + LocationFileName(assembly);
+        public FilePath LocationPath(PartId assembly) => LocationDir + LocationFileName(assembly);
 
         FileName HexFileName(OpIdentity m) => FileName.Define(m, Ext.Hex);
 
-        public FilePath HexPath(AssemblyId origin, string host, OpIdentity id)
+        public FilePath HexPath(PartId origin, string host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + HexFileName(id);
 
         public FilePath HexPath(FolderPath dir, OpIdentity m) => dir + HexFileName(m);
 
         FileName RawFileName(OpIdentity m) => FileName.Define(m, Ext.Raw);
 
-        public FilePath RawPath(AssemblyId origin, string host, OpIdentity id)
+        public FilePath RawPath(PartId origin, string host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + RawFileName(id);
 
         FileName CilFileName(OpIdentity m) => FileName.Define(m, Ext.Il);
 
-        FilePath CilPath(AssemblyId catalog, string host, OpIdentity id)
+        FilePath CilPath(PartId catalog, string host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(catalog.Format(), host)) + CilFileName(id);
 
         FilePath CilPath(ApiHostUri host, OpIdentity id)
@@ -125,10 +125,10 @@ namespace Z0.Asm
 
         public FileName DecodedOpFileName(OpIdentity m) => FileName.Define(m, DecodedExt);
 
-        public FilePath DecodedOpPath(AssemblyId origin, string host, OpIdentity id)
+        public FilePath DecodedOpPath(PartId origin, string host, OpIdentity id)
             => DataSubDir(RelativeLocation.Define(origin.Format(), host)) + DecodedOpFileName(id);
 
-        public FilePath OpArchivePath(ArchiveFileKind kind, AssemblyId origin, string host, OpIdentity id)
+        public FilePath OpArchivePath(ArchiveFileKind kind, PartId origin, string host, OpIdentity id)
             => kind switch {
                 ArchiveFileKind.Hex  => HexPath(origin, host, id),
                 ArchiveFileKind.Raw  => RawPath(origin, host, id),

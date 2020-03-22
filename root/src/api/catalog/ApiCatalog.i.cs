@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
         /// </summary>
-        AssemblyId AssemblyId {get;}
+        PartId AssemblyId {get;}
 
         /// <summary>
         /// The assembly that defines and owns the catalog

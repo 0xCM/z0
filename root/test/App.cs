@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.RootTest)]
+[assembly: PartId(PartId.RootTest)]
 
 namespace Z0.Parts
 {        
-    public sealed class RootTest : ApiResolution<RootTest>
+    public sealed class RootTest : Part<RootTest>
     {
 
     }

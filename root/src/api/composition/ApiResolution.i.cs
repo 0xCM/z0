@@ -12,7 +12,7 @@ namespace Z0
     /// Characterizes an object that, when extant, proves that the represented assembly 
     /// is resolved/loaded/ready-for-use
     /// </summary>
-    public interface IApiAssembly : IResolution, ICustomFormattable
+    public interface IApiAssembly : IPart, ICustomFormattable
     {
         /// <summary>
         /// The designates delclared by the designate
@@ -32,19 +32,19 @@ namespace Z0
    /// Characterizes an object of parametric type that, when extant, proves that the represented assembly 
    /// is resolved/loaded/ready-for-use
    /// </summary>
-   public interface IApiAssembly<T> : IApiAssembly, IResolution<T>, IFormattable<T>
-        where T : IApiAssembly<T>, new()   
+   public interface IApiPart<T> : IApiAssembly, IPart<T>, IFormattable<T>
+        where T : IApiPart<T>, new()   
     {
         /// <summary>
         /// The resolved assembly
         /// </summary>
-        Assembly IResolution.Resolved
+        Assembly IPart.Resolved
             => typeof(T).Assembly;
 
         /// <summary>
         /// The simple assembly name
         /// </summary>
-        string IResolution.Name
+        string IPart.Name
             => Resolved.GetName().Name;
     }
 }

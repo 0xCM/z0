@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.TestLib)]
+[assembly: PartId(PartId.TestLib)]
 
 namespace Z0
 {

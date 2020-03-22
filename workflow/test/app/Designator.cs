@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.WorkflowTest)]
+[assembly: PartId(PartId.WorkflowTest)]
 
 namespace Z0.Parts
 {        
-    public sealed class WorkflowTest : ApiResolution<WorkflowTest>
+    public sealed class WorkflowTest : ApiPart<WorkflowTest>
     {
 
     }

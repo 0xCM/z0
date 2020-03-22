@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Polyrand)]
+[assembly: PartId(PartId.Polyrand)]
 
 namespace Z0.Parts
 {
-    public sealed class Polyrand : ApiResolution<Polyrand, Polyrand.C>
+    public sealed class Polyrand : ApiPart<Polyrand, Polyrand.C>
     {
-        public Polyrand() : base(AssemblyId.Polyrand) {}
+        public Polyrand() : base(PartId.Polyrand) {}
         
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Polyrand) {} }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.Polyrand) {} }            
     }
 }

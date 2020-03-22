@@ -9,11 +9,11 @@ namespace Z0.Parts
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class CoreFuncTest : ApiResolution<CoreFuncTest>
+    public sealed class CoreFuncTest : ApiPart<CoreFuncTest>
     {
-        const AssemblyId Identity = AssemblyId.CoreFuncTest;
+        const PartId Identity = PartId.CoreFuncTest;
 
-        public override AssemblyId Id 
+        public override PartId Id 
             => Identity;
 
         public override void Run(params string[] args)

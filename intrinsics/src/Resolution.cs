@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Intrinsics)]
+[assembly: PartId(PartId.Intrinsics)]
 
 namespace Z0.Parts
 {
-    public sealed class Intrinsics : ApiResolution<Intrinsics, Intrinsics.C>
+    public sealed class Intrinsics : ApiPart<Intrinsics, Intrinsics.C>
     {        
-        public Intrinsics() : base(AssemblyId.Intrinsics) {}
+        public Intrinsics() : base(PartId.Intrinsics) {}
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Intrinsics) { } }
+        public class C : ApiCatalog<C> { public C() : base(PartId.Intrinsics) { } }
     }
 }

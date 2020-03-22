@@ -7,13 +7,13 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 [AttributeUsage(AttributeTargets.Assembly)]
-public class AssemblyIdAttribute : Attribute
+public class PartIdAttribute : Attribute
 {
     
-    public AssemblyIdAttribute(object id)
+    public PartIdAttribute(object id)
     {
-        Id = (AssemblyId)id;
+        Id = (PartId)id;
     }
 
-    public AssemblyId Id {get;}
+    public PartId Id {get;}
 }

@@ -60,10 +60,10 @@ namespace Z0.Asm
     }
     public class MemberLocationReport : IReport<MemberLocationRecord>
     {
-        public static MemberLocationReport Create(AssemblyId id, Assembly src)
+        public static MemberLocationReport Create(PartId id, Assembly src)
             => MemberLocationReport.Create(id, src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOperators());
 
-        public static MemberLocationReport Create(AssemblyId assemblyid, IEnumerable<MethodInfo> methods)
+        public static MemberLocationReport Create(PartId assemblyid, IEnumerable<MethodInfo> methods)
         {   
             var src = (from m in methods
                       let id = m.IsGenericMethodDefinition ? Identity.generic(m) : Identity.identify(m)
@@ -84,7 +84,7 @@ namespace Z0.Asm
             return new MemberLocationReport(assemblyid, dst);
         }
 
-        MemberLocationReport(AssemblyId id, MemberLocationRecord[] records)
+        MemberLocationReport(PartId id, MemberLocationRecord[] records)
         {
             this.AssemblyId = id;
             this.ApiHost = none<ApiHost>();
@@ -98,7 +98,7 @@ namespace Z0.Asm
             this.Records = records;
         }
 
-        public AssemblyId AssemblyId {get;}
+        public PartId AssemblyId {get;}
          
         public Option<ApiHost> ApiHost {get;}
 

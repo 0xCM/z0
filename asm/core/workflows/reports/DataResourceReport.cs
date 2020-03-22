@@ -67,7 +67,7 @@ namespace Z0.Asm
 
         public readonly struct DataResourceReport : IReport<DataResourceRecord>
         {        
-            public readonly AssemblyId Id;
+            public readonly PartId Id;
 
             public DataResourceRecord[] Records {get;}
 
@@ -76,10 +76,10 @@ namespace Z0.Asm
             
             readonly DataResourceIndex Index;        
 
-            public static DataResourceReport Create(AssemblyId id, DataResourceIndex resources)
+            public static DataResourceReport Create(PartId id, DataResourceIndex resources)
                 => new DataResourceReport(id, resources);
 
-            DataResourceReport(AssemblyId id, DataResourceIndex index)
+            DataResourceReport(PartId id, DataResourceIndex index)
             {
                 Id = id;
                 Index = index;
@@ -89,7 +89,7 @@ namespace Z0.Asm
             public Option<FilePath> Save()
                 => Records.Save(ReportPath); 
 
-            static DataResourceRecord[] CreateRecords(AssemblyId id, DataResourceIndex index)
+            static DataResourceRecord[] CreateRecords(PartId id, DataResourceIndex index)
             {
                 var records = new List<DataResourceRecord>();
                 var start = 0ul;

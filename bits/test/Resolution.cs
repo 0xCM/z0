@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.BitTest)]
+[assembly: PartId(PartId.BitTest)]
 
 namespace Z0.Parts
 {
-    public sealed class BitTest : ApiResolution<BitTest> 
+    public sealed class BitTest : ApiPart<BitTest> 
     {
          
     }

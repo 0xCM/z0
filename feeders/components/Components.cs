@@ -2,6 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: PartId(PartId.Components)]
+
+namespace Z0.Parts
+{        
+    public sealed class Components : Part<Components>
+    {
+
+
+    }
+}
+
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;

@@ -24,7 +24,7 @@ namespace Z0.Asm
         
         public IAsmContext Context {get;}
 
-        public AssemblyId Origin {get;}
+        public PartId Origin {get;}
 
         public string HostName {get;}
 
@@ -42,7 +42,7 @@ namespace Z0.Asm
             => Context.EmissionPaths();
 
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive Create(IAsmContext context, AssemblyId catalog, string host)
+        public static IAsmFunctionArchive Create(IAsmContext context, PartId catalog, string host)
             => new AsmFunctionArchive(context, catalog,host);
 
         [MethodImpl(Inline)]
@@ -62,7 +62,7 @@ namespace Z0.Asm
             this.CilFormatter = context.CilFormatter();
         }
         
-        AsmFunctionArchive(IAsmContext context, AssemblyId catalog, string hostname)
+        AsmFunctionArchive(IAsmContext context, PartId catalog, string hostname)
         {
             this.Context = context;
             this.Origin = catalog;

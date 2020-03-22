@@ -110,7 +110,7 @@ namespace Z0.Asm
         /// <param name="context">The source context</param>
         /// <param name="id">The assembly identifier</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive CodeArchive(this IAsmContext context, AssemblyId id)
+        public static IAsmCodeArchive CodeArchive(this IAsmContext context, PartId id)
             => AsmCodeArchive.New(context,id);
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0.Asm
         /// <param name="catalog">The catalog name</param>
         /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
-        public static IAsmCodeArchive CodeArchive(this IAsmContext context, AssemblyId assembly, string host)
+        public static IAsmCodeArchive CodeArchive(this IAsmContext context, PartId assembly, string host)
             => AsmCodeArchive.New(context, assembly, host);
 
         /// <summary>
@@ -145,12 +145,12 @@ namespace Z0.Asm
             return OpExtractExchange.New(control, cBuffer, sBuffer);
         }        
 
-        public static Option<Assembly> ResolvedAssembly(this IAsmContext context, AssemblyId id)
+        public static Option<Assembly> ResolvedAssembly(this IAsmContext context, PartId id)
             =>  (from r in  context.Compostion.Resolved
                 where r.Id == id
                 select r.Resolved).FirstOrDefault();
 
-        public static IEnumerable<AssemblyId> ActiveAssemblies(this IAsmContext context)
+        public static IEnumerable<PartId> ActiveAssemblies(this IAsmContext context)
         {
             return context.Compostion.Resolved.Select(r => r.Id);
              //var settings = AppSettings.Load("z0.control").Pairs;

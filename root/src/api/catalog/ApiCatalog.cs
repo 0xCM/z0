@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
         /// </summary>
-        public AssemblyId AssemblyId {get;}
+        public PartId AssemblyId {get;}
 
         /// <summary>
         /// The assembly that defines and owns the catalog
@@ -39,7 +39,7 @@ namespace Z0
 
         public ApiHost[] DirectApiHosts {get;}
 
-        protected ApiCatalog(AssemblyId id)
+        protected ApiCatalog(PartId id)
         {
             AssemblyId = id;
             CatalogedAssembly = typeof(C).Assembly;
@@ -50,7 +50,7 @@ namespace Z0
             HostTypes = ApiServices.ProviderTypes(CatalogedAssembly).ToArray();
         }
         
-        protected ApiCatalog(AssemblyId id, DataResourceIndex resources)
+        protected ApiCatalog(PartId id, DataResourceIndex resources)
             : this(id)
         {
             Resources = resources ?? DataResourceIndex.Empty;
@@ -60,7 +60,7 @@ namespace Z0
     public sealed class EmptyCatalog : ApiCatalog<EmptyCatalog>
     {
         public EmptyCatalog()
-            : base(AssemblyId.None)
+            : base(PartId.None)
         {
 
         }               

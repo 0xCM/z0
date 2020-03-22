@@ -21,7 +21,7 @@ namespace Z0
             var uri = attempt.Value;
 
             Claim.eq(OpUriScheme.Hex, uri.Scheme);
-            Claim.eq(ApiHostUri.Define(AssemblyId.Fixed, "Vector512"), uri.HostPath);
+            Claim.eq(ApiHostUri.Define(PartId.Fixed, "Vector512"), uri.HostPath);
             Claim.eq("vgeneric", uri.GroupName);
             Claim.eq(opid, uri.OpId);
             Claim.eq(true, opid.IsGeneric);

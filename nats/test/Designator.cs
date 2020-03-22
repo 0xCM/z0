@@ -6,11 +6,11 @@ namespace Z0.Parts
 {
     using System;
     
-    public sealed class NatsTest : ApiResolution<NatsTest>
+    public sealed class NatsTest : ApiPart<NatsTest>
     {
-        const AssemblyId Identity = AssemblyId.NatsTest;
+        const PartId Identity = PartId.NatsTest;
 
-        public override AssemblyId Id 
+        public override PartId Id 
             => Identity;
 
         public override void Run(params string[] args)

@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="catalog">The catalog identity</param>
         /// <param name="host">The api host name</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(this IAsmContext context, AssemblyId catalog, string host)
+        public static IAsmFunctionArchive FunctionArchive(this IAsmContext context, PartId catalog, string host)
             => AsmFunctionArchive.Create(context, catalog, host);
 
         [MethodImpl(Inline)]

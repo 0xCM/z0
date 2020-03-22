@@ -10,13 +10,13 @@ namespace Z0
 
     public readonly struct OpUriBuilder
     {        
-        public static string PathText(string scheme, AssemblyId catalog, string host)
+        public static string PathText(string scheme, PartId catalog, string host)
             => $"{scheme}{EOS}{FS2}{catalog.Format()}{FS}{host}";
 
-        public static string QueryText(OpUriScheme scheme, AssemblyId catalog, string host, string group)
+        public static string QueryText(OpUriScheme scheme, PartId catalog, string host, string group)
             => $"{scheme.Format()}{EOS}{FS2}{catalog.Format()}{FS}{host}{Q}{group}";
 
-        public static string FullUriText(OpUriScheme scheme, AssemblyId catalog, string host, string group, OpIdentity opid)
+        public static string FullUriText(OpUriScheme scheme, PartId catalog, string host, string group, OpIdentity opid)
             => $"{scheme.Format()}{EOS}{FS2}{catalog.Format()}{FS}{host}?{group}#{opid.Identifier}";
 
         public static string GroupUriText(OpUriScheme scheme, ApiHostUri host, string group)

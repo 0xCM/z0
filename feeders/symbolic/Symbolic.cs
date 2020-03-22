@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Symbolic)]
+[assembly: PartId(PartId.Symbolic)]
 
 namespace Z0.Parts
 {
-    public sealed class Symbolic : Resolution<Symbolic> {  }
+    public sealed class Symbolic : Part<Symbolic> {  }
 }
 
 namespace Z0

@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Circuits)]
+[assembly: PartId(PartId.Circuits)]
 
 namespace Z0.Parts
 {
-    public sealed class Circuits : ApiResolution<Circuits, Circuits.C>
+    public sealed class Circuits : ApiPart<Circuits, Circuits.C>
     {
-        public Circuits() : base(AssemblyId.Circuits) {}
+        public Circuits() : base(PartId.Circuits) {}
         
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Circuits) {} }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.Circuits) {} }            
     }
 }

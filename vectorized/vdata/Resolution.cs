@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.VData)]
+[assembly: PartId(PartId.VData)]
 
 namespace Z0.Parts
 {
-    public sealed class VData : ApiResolution<VData, VData.C>
+    public sealed class VData : ApiPart<VData, VData.C>
     {
-        public VData() : base(AssemblyId.VData) {}
+        public VData() : base(PartId.VData) {}
         
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.VData, DataResourceIndex.Create(Z0.Data.Resources)) {} }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.VData, DataResourceIndex.Create(Z0.Data.Resources)) {} }            
     }
 }

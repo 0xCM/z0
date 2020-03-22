@@ -2,6 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: PartId(PartId.Monadic)]
+
+namespace Z0.Parts
+{        
+    public sealed class Monadic : Part<Monadic>
+    {
+
+
+    }
+}
+
 namespace Z0
 {
     using System;
@@ -14,7 +25,6 @@ namespace Z0
 
     public interface IMonadic
     {
-
         
     }
 }

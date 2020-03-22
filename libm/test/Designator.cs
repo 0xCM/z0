@@ -6,11 +6,11 @@ namespace Z0.Parts
 {        
     using System;
 
-    public sealed class LibMTest : ApiResolution<LibMTest>
+    public sealed class LibMTest : ApiPart<LibMTest>
     {
-        const AssemblyId Identity = AssemblyId.LibMTest;
+        const PartId Identity = PartId.LibMTest;
 
-        public override AssemblyId Id 
+        public override PartId Id 
             => Identity;
 
         public override void Run(params string[] args)

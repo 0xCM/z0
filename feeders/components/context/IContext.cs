@@ -11,7 +11,7 @@ namespace Z0
 
     public interface IContext
     {
-        AssemblyId Owner
+        PartId Owner
             => Assembly.GetEntryAssembly().Id();        
     }
 
@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The assemblies available via the assigned composition
         /// </summary>
-        IEnumerable<AssemblyId> Components {get;}        
+        IEnumerable<PartId> Components {get;}        
     }
 
     /// <summary>

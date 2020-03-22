@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.GraphTest)]
+[assembly: PartId(PartId.GraphTest)]
 
 namespace Z0
 {
@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class GraphTest : ApiResolution<GraphTest> 
+    public sealed class GraphTest : ApiPart<GraphTest> 
     {
 
     } 

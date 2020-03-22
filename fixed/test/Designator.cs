@@ -8,11 +8,11 @@ namespace Z0.Parts
     using System.Linq;
     using System.Collections.Generic;
 
-    public sealed class FixedTest : ApiResolution<FixedTest>
+    public sealed class FixedTest : ApiPart<FixedTest>
     {
-        const AssemblyId Identity = AssemblyId.FixedTest;
+        const PartId Identity = PartId.FixedTest;
 
-        public override AssemblyId Id 
+        public override PartId Id 
             => Identity;
     
         public override void Run(params string[] args)

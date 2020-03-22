@@ -9,20 +9,20 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    public abstract class ApiResolution<T> : Resolution<T>, IApiAssembly<T>
-        where T : ApiResolution<T>, new()
+    public abstract class ApiPart<T> : Part<T>, IApiPart<T>
+        where T : ApiPart<T>, new()
     {
-        protected ApiResolution()
+        protected ApiPart()
         {
             this.Id = typeof(T).Assembly.Id();
         }
 
-        protected internal ApiResolution(AssemblyId id)
+        protected internal ApiPart(PartId id)
         {
             this.Id = id;   
         }
 
-        public virtual AssemblyId Id {get;}
+        public virtual PartId Id {get;}
 
         /// <summary>
         /// The resolved assembly representation
@@ -58,13 +58,13 @@ namespace Z0
             => Format();
     }
 
-    public abstract class ApiResolution<T,C> : ApiResolution<T>
-        where T : ApiResolution<T,C>, new()
+    public abstract class ApiPart<T,C> : ApiPart<T>
+        where T : ApiPart<T,C>, new()
         where C : ApiCatalog<C>, new()
     {
         public override IApiCatalog Operations  => new C();
 
-        protected ApiResolution(AssemblyId id)
+        protected ApiPart(PartId id)
             : base(id)
         {
             
@@ -72,7 +72,7 @@ namespace Z0
     }
 
     [Ignore]
-    sealed class EmptyResolution : ApiResolution<EmptyResolution>
+    sealed class EmptyResolution : ApiPart<EmptyResolution>
     {
 
         public EmptyResolution()
@@ -80,6 +80,6 @@ namespace Z0
 
         }
 
-        public override AssemblyId Id => AssemblyId.None;
+        public override PartId Id => PartId.None;
     }
 }

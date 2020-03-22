@@ -18,14 +18,14 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        public HashSet<AssemblyId> Selected {get;}
+        public HashSet<PartId> Selected {get;}
 
         [MethodImpl(Inline)]
-        public static IHostCapture Create(IAsmContext context, params AssemblyId[] selected)
+        public static IHostCapture Create(IAsmContext context, params PartId[] selected)
             => new HostCaptureService(context,selected);
 
         [MethodImpl(Inline)]
-        HostCaptureService(IAsmContext context, AssemblyId[] selected)
+        HostCaptureService(IAsmContext context, PartId[] selected)
         {
             this.Context = context;
             this.Selected = selected.Length == 0 ? context.Components.ToHashSet() : selected.ToHashSet();
@@ -34,11 +34,11 @@ namespace Z0.Asm
         AsmEmissionPaths Paths
             => Context.EmissionPaths();
 
-        Option<MemberLocationReport> LocationReport(AssemblyId src)
+        Option<MemberLocationReport> LocationReport(PartId src)
             => from a in Context.ResolvedAssembly(src)
                 let methods = a.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOperators()
                 select MemberLocationReport.Create(src, methods);
-        void CreateLocationReport(AssemblyId id)
+        void CreateLocationReport(PartId id)
             => LocationReport(id).OnSome(report => report.Save());
         
         public IEnumerable<CapturedHost> Execute()

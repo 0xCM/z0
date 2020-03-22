@@ -1,4 +1,4 @@
-[assembly: AssemblyId(AssemblyId.GenericNumericsTest)]
+[assembly: PartId(PartId.GenericNumericsTest)]
 
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
@@ -15,7 +15,7 @@ namespace Z0
 
 namespace Z0.Parts
 { 
-    public sealed class GMathTest : ApiResolution<GMathTest>
+    public sealed class GMathTest : ApiPart<GMathTest>
     {
 
     }

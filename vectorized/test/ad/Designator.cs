@@ -6,11 +6,11 @@ namespace Z0.Parts
 {        
     using System;
 
-    public sealed class VectorizedTest : ApiResolution<VectorizedTest>
+    public sealed class VectorizedTest : ApiPart<VectorizedTest>
     {
-        const AssemblyId Identity = AssemblyId.VectorizedTest;
+        const PartId Identity = PartId.VectorizedTest;
 
-        public override AssemblyId Id 
+        public override PartId Id 
             => Identity;
 
         public override void Run(params string[] args)

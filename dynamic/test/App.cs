@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.DynamicTest)]
+[assembly: PartId(PartId.DynamicTest)]
 
 namespace Z0
 {        
@@ -16,5 +16,5 @@ namespace Z0
 
 namespace Z0.Parts
 {        
-    public sealed class DynamicTest : ApiResolution<DynamicTest> { }
+    public sealed class DynamicTest : ApiPart<DynamicTest> { }
 }

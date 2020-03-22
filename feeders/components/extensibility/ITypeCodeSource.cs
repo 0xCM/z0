@@ -12,7 +12,7 @@ namespace Z0
 
     public interface ITypeCodeSource
     {
-        AssemblyId Owner {get;}
+        PartId Owner {get;}
         
         ulong[] AssignedCodes {get;}
     }
@@ -20,7 +20,7 @@ namespace Z0
     public interface ITypeCodeSource<S> : ITypeCodeSource
         where S : struct, ITypeCodeSource<S>
     {
-        AssemblyId ITypeCodeSource.Owner
+        PartId ITypeCodeSource.Owner
             => typeof(S).Assembly.Id();     
 
         ulong[] ITypeCodeSource.AssignedCodes 

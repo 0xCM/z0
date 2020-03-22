@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Analogs)]
+[assembly: PartId(PartId.Logix)]
 
 namespace Z0.Parts
 {        
-    public sealed class Analogs : ApiResolution<Analogs, Analogs.C>
+    public sealed class Logix : ApiPart<Logix, Logix.C>
     {
-        public Analogs() : base(AssemblyId.Analogs) {}
+        public Logix() : base(PartId.Logix) {}
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Analogs){ }}
+        public class C : ApiCatalog<C> { public C() : base(PartId.Logix) { } }
     }
 }

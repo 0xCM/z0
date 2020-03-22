@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Logix)]
+[assembly: PartId(PartId.Graphs)]
 
 namespace Z0.Parts
-{        
-    public sealed class Logix : ApiResolution<Logix, Logix.C>
+{
+    public sealed class Graphs : ApiPart<Graphs, Graphs.C>
     {
-        public Logix() : base(AssemblyId.Logix) {}
-
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Logix) { } }
+        public Graphs() : base(PartId.Graphs) {}
+        
+        public class C : ApiCatalog<C> { public C() : base(PartId.Graphs) {} }
     }
 }

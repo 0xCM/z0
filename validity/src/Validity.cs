@@ -2,15 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Validity)]
+[assembly: PartId(PartId.Validity)]
 
 namespace Z0.Parts
 {
-    public sealed class Validity : ApiResolution<Validity, Validity.C>
+    public sealed class Validity : ApiPart<Validity, Validity.C>
     {
-        public Validity() : base(AssemblyId.Validity) {}
+        public Validity() : base(PartId.Validity) {}
         
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Validity) {} }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.Validity) {} }            
     }
 }
 

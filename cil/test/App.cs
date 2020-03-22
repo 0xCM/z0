@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.CilTest)]
+[assembly: PartId(PartId.CilTest)]
 
 namespace Z0
 {
@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class CilTest : ApiResolution<CilTest> 
+    public sealed class CilTest : ApiPart<CilTest> 
     {
         
     } 

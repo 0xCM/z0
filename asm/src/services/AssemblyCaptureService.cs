@@ -29,7 +29,7 @@ namespace Z0.Asm
         AsmEmissionPaths Paths
             => Context.EmissionPaths();
 
-        public FiniteSeq<CapturedOp> Capture(AssemblyId src)
+        public FiniteSeq<CapturedOp> Capture(PartId src)
         {
             return default;
         }

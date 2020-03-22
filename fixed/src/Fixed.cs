@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Math)]
+[assembly: PartId(PartId.Fixed)]
 
 namespace Z0.Parts
-{
-    public sealed class Math : ApiResolution<Math, Math.C>
+{        
+    public sealed class Fixed : ApiPart<Fixed, Fixed.C>
     {
-        public Math() : base(AssemblyId.Math) {}
-        
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Math) {} }            
+        public Fixed() : base(PartId.Fixed) {}
+
+        public class C : ApiCatalog<C> { public C() : base(PartId.Fixed) { } }            
     }
 }

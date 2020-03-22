@@ -26,16 +26,16 @@ namespace Z0.Asm
         AssemblyArchiverService(IAsmContext context)
         {
             Context = context;
-            Resources = Context.Compostion.FindCatalog(AssemblyId.Data).MapValueOrElse(c => c.Resources, () => DataResourceIndex.Empty);
+            Resources = Context.Compostion.FindCatalog(PartId.Data).MapValueOrElse(c => c.Resources, () => DataResourceIndex.Empty);
         }
 
         IApiComposition Resolved 
             => Context.Compostion;
 
-        IEnumerable<AssemblyId> ActiveAssemblies
+        IEnumerable<PartId> ActiveAssemblies
             => Context.ActiveAssemblies();
 
-        Option<FilePath> ReportEmissions(AssemblyId src, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
+        Option<FilePath> ReportEmissions(PartId src, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
             => AsmEmissionReport.Create(src, emitted, kind).Save(AsmEmissionPaths.The.EmissionPath(src, kind));
 
         AsmEmissionTokens<OpUri>[] EmitPrimary(in OpExtractExchange exchange, IApiCatalogProvider src,  IAsmCatalogEmitter emitter)
@@ -93,7 +93,7 @@ namespace Z0.Asm
             Completed(EmitLocations(src));
         }
 
-        public void Archive(AssemblyId id)
+        public void Archive(PartId id)
         {
             void OnCaptureEvent(in AsmCaptureEvent data)
             {
@@ -121,7 +121,7 @@ namespace Z0.Asm
             foreach(var src in providers)
                 Archive(exchange, src);
 
-            DataResourceReport.Create(AssemblyId.Data, Resources).Save().Require();
+            DataResourceReport.Create(PartId.Data, Resources).Save().Require();
         }
     }
 }

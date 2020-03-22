@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.BlocksTest)]
+[assembly: PartId(PartId.BlocksTest)]
 
 namespace Z0.Parts
 {
     using System;
 
-    public sealed class DataBlocksTest : ApiResolution<DataBlocksTest>
+    public sealed class DataBlocksTest : ApiPart<DataBlocksTest>
     {
 
     }

@@ -15,19 +15,19 @@ namespace Z0
     /// </summary>
     public readonly struct AssemblyUri : IUri<AssemblyUri>, INullary<AssemblyUri>
     {
-        public static AssemblyUri Empty = new AssemblyUri(AssemblyId.None);
+        public static AssemblyUri Empty = new AssemblyUri(PartId.None);
         
         /// <summary>
         /// The assembly identifier, constrained to the defining enumeration
         /// </summary>
-        public readonly AssemblyId Id;
+        public readonly PartId Id;
         
         public string Identifier {get;}
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Id == AssemblyId.None || string.IsNullOrWhiteSpace(Identifier);
+            get => Id == PartId.None || string.IsNullOrWhiteSpace(Identifier);
         }
 
         AssemblyUri INullary<AssemblyUri>.Zero => Empty;
@@ -42,18 +42,18 @@ namespace Z0
             => Parser().Parse(text);
                 
         [MethodImpl(Inline)]
-        public static AssemblyUri Define(AssemblyId id)
+        public static AssemblyUri Define(PartId id)
             => new AssemblyUri(id);
      
         [MethodImpl(Inline)]
-        AssemblyUri(AssemblyId id)
+        AssemblyUri(PartId id)
         {
             this.Id = id;
             this.Identifier = id != 0 ? id.Format() : text.blank;
         }
 
         ParseResult<AssemblyUri> IParser<AssemblyUri>.Parse(string text)
-            => from id in Enums.parse<AssemblyId>(text) select AssemblyUri.Define(id);
+            => from id in Enums.parse<PartId>(text) select AssemblyUri.Define(id);
 
         [MethodImpl(Inline)]
         public bool Equals(AssemblyUri src)

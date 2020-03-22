@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.IdentityTest)]
+[assembly: PartId(PartId.IdentityTest)]
 
 namespace Z0
 {
@@ -14,5 +14,5 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class IdentityTest : ApiResolution<IdentityTest> { }
+    public sealed class IdentityTest : ApiPart<IdentityTest> { }
 }

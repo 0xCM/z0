@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Matrix)]
+[assembly: PartId(PartId.Matrix)]
 
 namespace Z0.Parts
 {
-    public sealed class Matrix : ApiResolution<Matrix, Matrix.C>
+    public sealed class Matrix : ApiPart<Matrix, Matrix.C>
     {
-        const AssemblyId Identity = AssemblyId.Matrix;
+        const PartId Identity = PartId.Matrix;
 
         public Matrix() : base(Identity) {}
     

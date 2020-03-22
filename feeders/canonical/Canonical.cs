@@ -2,14 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.Canonical)]
+[assembly: PartId(PartId.Canonical)]
 
 namespace Z0.Parts
 {        
-    public sealed class Canonical : Resolution<Canonical>
-    {
-
-    }
+    public sealed class Canonical : Part<Canonical> { }
 }
 
 namespace Z0

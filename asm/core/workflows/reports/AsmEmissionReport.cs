@@ -58,11 +58,11 @@ namespace Z0.Asm
 
         public class AsmEmissionReport : Report<F,R>
         {             
-            public AssemblyId Id {get;}
+            public PartId Id {get;}
             
             public AsmEmissionKind EmissionKind {get;}
 
-            public static AsmEmissionReport Create(AssemblyId id, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
+            public static AsmEmissionReport Create(PartId id, AsmEmissionTokens<OpUri>[] emitted, AsmEmissionKind kind)
             {
                 if(emitted.Length == 0)
                     return default;
@@ -77,7 +77,7 @@ namespace Z0.Asm
                 return new AsmEmissionReport(id, records, kind);
             }
 
-            AsmEmissionReport(AssemblyId id, AsmEmissionRecord[] records, AsmEmissionKind kind)
+            AsmEmissionReport(PartId id, AsmEmissionRecord[] records, AsmEmissionKind kind)
                 : base(records)
             {
                 this.Id = id;

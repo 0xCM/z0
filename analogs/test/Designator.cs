@@ -8,11 +8,11 @@ namespace Z0.Parts
     using System.Linq;
     using System.Collections.Generic;
 
-    public sealed class AnalogsTest : ApiResolution<AnalogsTest>
+    public sealed class AnalogsTest : ApiPart<AnalogsTest>
     {    
-        const AssemblyId Identity = AssemblyId.AnalogsTest;
+        const PartId Identity = PartId.AnalogsTest;
 
-        public override AssemblyId Id 
+        public override PartId Id 
             => Identity;
 
         public override void Run(params string[] args)

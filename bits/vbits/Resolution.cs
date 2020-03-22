@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.VBits)]
+[assembly: PartId(PartId.VBits)]
 
 namespace Z0.Parts
 {        
-    public sealed class VBits : ApiResolution<VBits, VBits.C>
+    public sealed class VBits : ApiPart<VBits, VBits.C>
     {
-        public VBits() : base (AssemblyId.VBits) {}
+        public VBits() : base (PartId.VBits) {}
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.VBits) { } }
+        public class C : ApiCatalog<C> { public C() : base(PartId.VBits) { } }
     }
 }

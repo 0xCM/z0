@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.BitFields)]
+[assembly: PartId(PartId.BitFields)]
 
 namespace Z0.Parts
 {        
-    public sealed class BitFields : ApiResolution<BitFields, BitFields.C>
+    public sealed class BitFields : ApiPart<BitFields, BitFields.C>
     {
-        public BitFields() : base(AssemblyId.BitFields) {}
+        public BitFields() : base(PartId.BitFields) {}
 
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.BitFields) {} }
+        public class C : ApiCatalog<C> { public C() : base(PartId.BitFields) {} }
     }
 }

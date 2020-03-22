@@ -6,11 +6,11 @@ namespace Z0.Parts
 {        
     using System;
 
-    public sealed class MatrixTest : ApiResolution<MatrixTest>
+    public sealed class MatrixTest : ApiPart<MatrixTest>
     {
-        const AssemblyId Identity = AssemblyId.MatrixTest;
+        const PartId Identity = PartId.MatrixTest;
 
-        public override AssemblyId Id 
+        public override PartId Id 
             => Identity;
 
         public override void Run(params string[] args)

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.ValidityTest)]
+[assembly: PartId(PartId.ValidityTest)]
 
 namespace Z0
 {
@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class ValidityTest : ApiResolution<ValidityTest> 
+    public sealed class ValidityTest : Part<ValidityTest> 
     {
         
     } 

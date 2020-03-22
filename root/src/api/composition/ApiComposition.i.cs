@@ -24,7 +24,7 @@ namespace Z0
         /// Searches the resolutions for an identified assembly
         /// </summary>
         /// <param name="id">The defining assembly</param>
-        Option<IApiAssembly> FindAssembly(AssemblyId id)
+        Option<IApiAssembly> FindAssembly(PartId id)
             => Resolved.TryFind(r => r.Id == id);
 
         IEnumerable<IApiCatalog> Catalogs

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.LogixTest)]
+[assembly: PartId(PartId.LogixTest)]
 
 namespace Z0
 {        
@@ -17,7 +17,7 @@ namespace Z0
 namespace Z0.Parts
 {        
 
-    public sealed class LogixTest : ApiResolution<LogixTest>
+    public sealed class LogixTest : ApiPart<LogixTest>
     {
     }
 }

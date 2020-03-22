@@ -9,7 +9,7 @@ namespace Z0.Asm
     
     public interface IAssemblyCapture : IAsmService
     {
-        FiniteSeq<CapturedOp> Capture(AssemblyId src);
+        FiniteSeq<CapturedOp> Capture(PartId src);
 
         ParsedExtract[] Parse(MemberExtract[] src);
         

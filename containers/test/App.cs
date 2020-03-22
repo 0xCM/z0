@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: AssemblyId(AssemblyId.ContainerTest)]
+[assembly: PartId(PartId.ContainerTest)]
 
 namespace Z0
 {
@@ -14,5 +14,5 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class ContainerTest : ApiResolution<ContainerTest> { } 
+    public sealed class ContainerTest : ApiPart<ContainerTest> { } 
 }

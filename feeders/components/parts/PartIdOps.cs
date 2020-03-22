@@ -10,10 +10,10 @@ namespace Z0
     
     using static Components;
 
-    public static class AssemblyIdOps
+    public static class PartIdOps
     {
         [MethodImpl(Inline)]
-        public static string Format(this AssemblyId id)
+        public static string Format(this PartId id)
         {
             const string TestSuffix = ".test";
             const string SvcSuffix = ".svc";
@@ -32,36 +32,36 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static bool IsTest(this AssemblyId a)
-            => (a & AssemblyId.Test) != 0;
+        public static bool IsTest(this PartId a)
+            => (a & PartId.Test) != 0;
 
         [MethodImpl(Inline)]
-        public static bool IsSvc(this AssemblyId a)
-            => (a & AssemblyId.Svc) != 0;
+        public static bool IsSvc(this PartId a)
+            => (a & PartId.Svc) != 0;
 
         [MethodImpl(Inline)]
-        public static AssemblyId WithoutTest(this AssemblyId a)
-            => a & ~ AssemblyId.Test;
+        public static PartId WithoutTest(this PartId a)
+            => a & ~ PartId.Test;
 
         [MethodImpl(Inline)]
-        public static AssemblyId WithTest(this AssemblyId a)
-            => a | AssemblyId.Test;
+        public static PartId WithTest(this PartId a)
+            => a | PartId.Test;
 
         [MethodImpl(Inline)]
-        public static AssemblyId WithoutSvc(this AssemblyId a)
-            => a & ~ AssemblyId.Svc;
+        public static PartId WithoutSvc(this PartId a)
+            => a & ~ PartId.Svc;
 
         [MethodImpl(Inline)]
-        public static AssemblyId WithSvc(this AssemblyId a)
-            => a | AssemblyId.Svc;
+        public static PartId WithSvc(this PartId a)
+            => a | PartId.Svc;
 
         [MethodImpl(Inline)]
-        public static AssemblyId Base(this AssemblyId a)
+        public static PartId Base(this PartId a)
             => a.WithoutSvc().WithoutTest();
 
         [MethodImpl(Inline)]
-        public static AssemblyId Id(this Assembly src)
-            =>  src.GetTag<AssemblyIdAttribute>()?.Id ?? AssemblyId.None;
+        public static PartId Id(this Assembly src)
+            =>  src.GetTag<PartIdAttribute>()?.Id ?? PartId.None;
 
         /// <summary>
         /// Gets the identified assembly attribute if present, otherwise NULL
