@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         class HostCaptureRunner : IHostCaptureRunner
         {
-            public IAsmWorkflowContext Context {get;}
+            public IAsmContext Context {get;}
 
             readonly IHostOpExtractor Extractor;
 
@@ -31,7 +31,7 @@ namespace Z0.Asm
             IAppContext IContextual.Context
                 => Context;
 
-            public HostCaptureRunner(IAsmWorkflowContext context, IHostCaptureEventBroker broker)
+            public HostCaptureRunner(IAsmContext context, IHostCaptureEventBroker broker)
             {
                 this.Context = context;
                 Extractor = Context.HostExtractor(Context.DefaultBufferLength);

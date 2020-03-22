@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         public readonly struct BinaryFuncType : IFuncType, IFuncArity<N2>
         {
-            public const FunctionClass Kind = FunctionClass.Func2;
+            public const FunctionClass Kind = FunctionClass.BinaryFunc;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(BinaryFuncType src)
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         public readonly struct FuncType<T1,T2,R> : IFuncType<T1,T2,R>
         {
-            public const FunctionClass Kind = FunctionClass.Func2;
+            public const FunctionClass Kind = FunctionClass.BinaryFunc;
 
 
             [MethodImpl(Inline)]

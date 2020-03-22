@@ -14,14 +14,14 @@ namespace Z0.Asm.Check
 
     class AsmExecutor : IAsmExecutor
     {
-        public IAsmWorkflowContext Context {get;}
+        public IAsmContext Context {get;}
         
         [MethodImpl(Inline)]
-        public static IAsmExecutor Create(IAsmWorkflowContext context)
+        public static IAsmExecutor Create(IAsmContext context)
             => new AsmExecutor(context);
 
         [MethodImpl(Inline)]
-        AsmExecutor(IAsmWorkflowContext context)
+        AsmExecutor(IAsmContext context)
         {
             this.Context = context;
             this.RepCount = 128;

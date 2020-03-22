@@ -15,7 +15,7 @@ namespace Z0.Asm.Check
     using static AsmServiceMessages;
 
 
-    class ValidationHost : TestContext<ValidationHost,IAsmWorkflowContext>, IAsmValidationHost
+    class ValidationHost : TestContext<ValidationHost,IAsmContext>, IAsmValidationHost
     {                
         FolderPath RootEmissionPath
             => Context.Paths.TestDataDir(GetType());                
@@ -23,10 +23,10 @@ namespace Z0.Asm.Check
         FilePath AppMsgLogPath
             => (RootEmissionPath + FolderName.Define("logs")) + FileName.Define("host","log");
 
-        public static IAsmValidationHost Create(IAsmWorkflowContext context)    
+        public static IAsmValidationHost Create(IAsmContext context)    
             => new ValidationHost(context);
 
-        public ValidationHost(IAsmWorkflowContext context)
+        public ValidationHost(IAsmContext context)
             : base(context)
         {            
             Root = RootEmissionPaths.Define(RootEmissionPath);
@@ -41,7 +41,7 @@ namespace Z0.Asm.Check
         protected override void OnDispose()
         {
             term.print($"Writting app messages to {AppMsgLogPath}");
-            Flush(AppMsgLogPath);
+            Emit(AppMsgLogPath);
         }
 
         public void Run()
@@ -55,8 +55,7 @@ namespace Z0.Asm.Check
 
         void Emit()
         {
-            var context = AsmWorkflowContext.Rooted(Context, Random);
-            var workflow = HostCaptureWorkflow.Create(context);
+            var workflow = HostCaptureWorkflow.Create(Context);
             require(workflow.EventBroker != null);
             ConnectReceivers(workflow.EventBroker);
             var config = Z0.Asm.HostCaptureConfig.Define(RootEmissionPath);

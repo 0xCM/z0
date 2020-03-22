@@ -9,27 +9,25 @@ namespace Z0
     using System.Diagnostics;
     
     using static Root;
-    using static Nats;
 
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest, ITestControl
         where U : UnitTest<U>
-    {
-        protected UnitTest()
-            : base(null,null)
-        {
-
-        }
-
-        
+    {        
         protected UnitTest(ITestConfig config)
             : base(config, null)
             {
 
             }        
 
+        protected UnitTest()
+            : this(null)
+        {
+
+        }
+
         protected virtual bool TraceDetailEnabled
             => false;
-        
+
         /// <summary>
         /// Creates a new stopwatch and optionally start it
         /// </summary>
@@ -47,25 +45,13 @@ namespace Z0
             => Duration.Define(sw.ElapsedTicks);        
 
         /// <summary>
-        /// Captures a stopwatch duration and the number of operations executed within the duration period
-        /// </summary>
-        /// <param name="sw">The running/stopped stopwatch</param>
-        /// <param name="opcount">The operation count</param>
-        /// <param name="label">The label associated with the measure, if specified</param>
-        [MethodImpl(Inline)]   
-        protected static BenchmarkRecord optime(long opcount, Stopwatch sw, [CallerMemberName] string label = null)
-            => BenchmarkRecord.Define(opcount, snapshot(sw), label);
-
-        /// <summary>
         /// Captures a duration and the number of operations executed within the period
         /// </summary>
         /// <param name="time">The running time</param>
         /// <param name="opcount">The operation count</param>
         /// <param name="label">The label associated with the measure, if specified</param>
-        [MethodImpl(Inline)]   
         protected static BenchmarkRecord optime(long opcount, Duration time, [CallerMemberName] string label = null)
             => BenchmarkRecord.Define(opcount, time, label);
-
 
         /// <summary>
         /// Manages the execution of an action test case

@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         public readonly struct TernaryFuncType : IFuncType, IFuncArity<N3>
         {
-            public const FunctionClass Kind = FunctionClass.Func3;
+            public const FunctionClass Kind = FunctionClass.TernaryFunc;
 
 
             [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         public readonly struct FuncType<T1,T2,T3,R> : IFuncType<T1,T2,T3,R>
         {
-            public const FunctionClass Kind = FunctionClass.Func3;
+            public const FunctionClass Kind = FunctionClass.TernaryFunc;
 
             [MethodImpl(Inline)]
             public static implicit operator FunctionClass(FuncType<T1,T2,T3,R> src)

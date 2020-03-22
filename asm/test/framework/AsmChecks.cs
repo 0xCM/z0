@@ -21,9 +21,7 @@ namespace Z0.Asm.Validation
 
     public class AsmChecks : IAsmChecks
     {
-        public IAsmWorkflowContext Context {get;}
-
-        //readonly IAsmEvalDispatcher Executioner;
+        public IAsmContext Context {get;}
 
         readonly IAppMsgSink MsgSink;
         
@@ -33,16 +31,15 @@ namespace Z0.Asm.Validation
 
         FolderPath LogDir;
 
-        public static AsmChecks Create(IAsmWorkflowContext context, IAppMsgSink sink)
+        public static AsmChecks Create(IAsmContext context, IAppMsgSink sink)
             => new AsmChecks(context,sink);
 
-        AsmChecks(IAsmWorkflowContext context, IAppMsgSink sink)
+        AsmChecks(IAsmContext context, IAppMsgSink sink)
         {
             this.Context = context;
             this.RepCount = 128;
             this.MsgSink = sink;
             this.LogDir = context.EmissionPaths().DataSubDir(FolderName.Define(GetType().Name));
-            //this.Executioner = AsmEvalDispatcher.Create(context, sink);
         }                
 
         public void Execute(in BufferSeq buffers, ApiMemberCode code)

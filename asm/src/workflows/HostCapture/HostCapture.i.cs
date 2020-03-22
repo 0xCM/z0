@@ -5,9 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    
-    using static Root;
-    
+        
     public interface IHostCaptureRunner : IAsmWorkflowRunner<HostCaptureConfig, IHostCaptureEventBroker>
     {
 
@@ -15,10 +13,8 @@ namespace Z0.Asm
 
     public interface IHostCaptureWorkflow : IAsmWorkflow
     {
-
         IHostCaptureRunner Runner {get;}
 
-        IHostCaptureEventBroker EventBroker {get;}        
-
+        IHostCaptureEventBroker EventBroker {get;}
     }
 }

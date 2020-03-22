@@ -11,18 +11,18 @@ namespace Z0.Asm
     
     public partial class HostCaptureWorkflow : IHostCaptureWorkflow
     {
-        public IAsmWorkflowContext Context {get;}
+        public IAsmContext Context {get;}
 
         public IHostCaptureEventBroker EventBroker {get;}
 
         public IHostCaptureRunner Runner {get;}
         
         [MethodImpl(Inline)]
-        public static IHostCaptureWorkflow Create(IAsmWorkflowContext context)
+        public static IHostCaptureWorkflow Create(IAsmContext context)
             => new HostCaptureWorkflow(context);      
 
         [MethodImpl(Inline)]
-        HostCaptureWorkflow(IAsmWorkflowContext context)
+        HostCaptureWorkflow(IAsmContext context)
         {
             this.Context = context;
             this.EventBroker = HostCaptureBroker.Create(context);

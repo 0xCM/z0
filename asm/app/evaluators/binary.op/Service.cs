@@ -15,10 +15,10 @@ namespace Z0.Asm.Check
     readonly struct BinaryOpEvaluator<T> : IBinaryOpEvaluator<T>
         where T : unmanaged
     {
-        public IAsmWorkflowContext Context {get;}
+        public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
-        public BinaryOpEvaluator(IAsmWorkflowContext context)
+        public BinaryOpEvaluator(IAsmContext context)
         {
             this.Context = context;
         }

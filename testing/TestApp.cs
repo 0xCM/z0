@@ -212,7 +212,7 @@ namespace Z0
                 exec();
                 clock.Stop();
 
-                messages.AddRange(control.Flush());
+                messages.AddRange(control.Dequeue());
                 messages.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
 
                 var outcomes = control.TakeOutcomes().ToArray();                
@@ -225,7 +225,7 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
-                messages.AddRange(control.Flush());                
+                messages.AddRange(control.Dequeue());                
                 messages.AddRange(CreateErrorMessages(casename,e));
                 PostTestResult(TestCaseRecord.Define(casename,false,clock.Time));                
             }
@@ -259,7 +259,7 @@ namespace Z0
         {
             var messages = new List<AppMsg>();
             var control = unit as ITestControl;
-            messages.AddRange(control.Flush());
+            messages.AddRange(control.Dequeue());
             if(e != null)
                 messages.AddRange(CreateErrorMessages(testName,e));
             else
@@ -331,7 +331,7 @@ namespace Z0
                 clock.Stop();
 
 
-                collected.AddRange(control.Flush());
+                collected.AddRange(control.Dequeue());
                 collected.Add(AftCaseMsg(casename, clock.Time, tsStart, time.now()));
                 
                 var outcomes = control.TakeOutcomes().ToArray();
@@ -343,7 +343,7 @@ namespace Z0
             catch(Exception e)
             {                
                 clock.Stop();
-                collected.AddRange(control.Flush());                
+                collected.AddRange(control.Dequeue());                
                 collected.AddRange(CreateErrorMessages(casename, e));
              
                 cases.Add(TestCaseRecord.Define(casename, false, clock.Time));                              

@@ -9,63 +9,18 @@ namespace Z0
 
     using static Root;
 
-    /// <summary>
-    /// Metatype stratification
-    /// </summary>
-    public interface IKind
-    {
-        
-    }
-
-    /// <summary>
-    /// Characterizes type classifiers predicated on enumerations
-    /// </summary>
-    /// <typeparam name="E">The enum type defining potential classifications</typeparam>
-    public interface IKind<E> : IKind
-        where E : unmanaged, Enum
-    {
-        E Class {get;}
-
-        string Name => Class.ToString().ToLower();
-    }
-
-    public interface IKind<K,E> : IKind<E>
-        where E : unmanaged, Enum
-        where K : struct, IKind<K,E>
-    {
-
-    }
-
-    public interface ILiteral<E> : IKind<E>
-        where E : unmanaged, Enum
-    {
-
-    }
-
-    public interface ILiteral<E,T> : ILiteral<E>, INumericKind<T>
-        where T : unmanaged
-        where E : unmanaged, Enum
-
-    {
-
-    }
-
     public interface IOpKind : IKind
     {
         OpKindId KindId {get;}
     }
 
-    public interface IClass
-    {
-
-    }
 
     public interface IOpClass : IClass
     {
 
     }
 
-    public interface IOpClass<E> : IOpClass
+    public interface IOpClass<E> : IOpClass 
         where E : unmanaged, Enum
     {
         E Class {get;}
@@ -81,15 +36,15 @@ namespace Z0
 
     }
 
-    public interface IOpKind<E> : IOpKind, ILiteral<E>
+    public interface IOpKind<E> : IOpKind, ILiteralKind<E>
         where E : unmanaged, Enum
     {
-        E IKind<E>.Class 
+        E ILiftedEnum<E>.Class 
             => Enums.convert<E>(KindId.ToUInt64());
 
     }
 
-    public interface IOpKind<E,T> : IOpKind, ILiteral<E,T>
+    public interface IOpKind<E,T> : IOpKind<E>, ILiteralKind<E,T>
         where T : unmanaged
         where E : unmanaged, Enum
     {   

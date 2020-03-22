@@ -37,6 +37,13 @@ namespace Z0
      
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface ICallbackSouce<T> : ISource
+    {
+
+        event Action<T> Next;
+    }
+
     /// <summary>
     /// Characterizes an emission service taht may run out of values to emit
     /// </summary>

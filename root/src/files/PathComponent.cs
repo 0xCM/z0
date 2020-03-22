@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
     
-    public abstract class PathComponent<T> : IIdentity<T>
+    public abstract class PathComponent<T> : IIdentified<T>
         where T : PathComponent<T>, new()
     {
         public const char PathSeparator = '/';
@@ -40,7 +40,7 @@ namespace Z0
         public bool IsEmpty
             => text.empty(Name);
 
-        string IIdentity.Identifier => Name;
+        string IIdentified.Identifier => Name;
 
         public bool Equals(T src)
             => notnull(src) && string.Compare(src.Name, this.Name, true) == 0;
@@ -57,7 +57,7 @@ namespace Z0
         public override bool Equals(object src)
             => src is T p && Equals(p);
 
-        public int CompareTo(IIdentity src)
+        public int CompareTo(IIdentified src)
             => src is T p ? CompareTo(p) : -1;
     }
 }

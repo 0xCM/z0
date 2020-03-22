@@ -16,7 +16,7 @@ namespace Z0.Asm.Check
     
     class AsmEvalDispatcher : IAsmEvalDispatcher
     {        
-        public IAsmWorkflowContext Context {get;}
+        public IAsmContext Context {get;}
 
         readonly IAppMsgSink Sink;
 
@@ -24,10 +24,10 @@ namespace Z0.Asm.Check
         
         readonly IAsmExecutor Executor;
         
-        public static IAsmEvalDispatcher Create(IAsmWorkflowContext context, IAppMsgSink sink)
+        public static IAsmEvalDispatcher Create(IAsmContext context, IAppMsgSink sink)
             => new AsmEvalDispatcher(context,sink);
 
-        AsmEvalDispatcher(IAsmWorkflowContext context, IAppMsgSink sink)
+        AsmEvalDispatcher(IAsmContext context, IAppMsgSink sink)
         {
             this.Context = context;
             this.Sink = sink;
@@ -132,6 +132,7 @@ namespace Z0.Asm.Check
             {
                 switch(nk)
                 {
+
                     case NumericKind.U8:
                         Analyze(api,Context.Evaluate(buffers, api, k.As<byte>()));
                         break;

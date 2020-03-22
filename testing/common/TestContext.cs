@@ -17,26 +17,13 @@ namespace Z0
     {
         public ITestContext Context {get;}
 
-        public Type HostType => typeof(U);
-        
-        protected TestContext(ITestConfig config = null, IPolyrand random = null)
-        {
-            this.Random = random ?? Rng.WyHash64(Seed64.Seed00);
-            this.Config = config ?? TestConfigDefaults.Default();
-            this.Queue = AppMsgContext.Create();
-            this.Context = this;
-        }
-
-        public virtual void Dispose()
-            => OnDispose();
-
-        protected virtual void OnDispose() { }
-
         public IPolyrand Random {get;}
 
-        IAppMsgContext Queue {get;set;}
+        public event Action<AppMsg> Next;
 
         public ITestConfig Config {get; private set;}
+
+        protected IAppMsgContext Queue {get; private set;}
 
         Queue<TestCaseRecord> Outcomes {get;}
             = new Queue<TestCaseRecord>();
@@ -44,9 +31,31 @@ namespace Z0
         Queue<BenchmarkRecord> Benchmarks {get;}
             = new Queue<BenchmarkRecord>();
 
+        protected TestContext(ITestConfig config = null, IPolyrand random = null)
+        {
+            this.Context = this;            
+            this.Random = random ?? Rng.WyHash64(Seed64.Seed00);
+            this.Config = config ?? TestConfigDefaults.Default();
+            this.Next += BlackHole;
+            this.Queue = AppMsgContext.Create();            
+            this.Queue.Next += Relay;
+        }
+
+        public Type HostType => typeof(U);
+
+        public virtual void Dispose()
+            => OnDispose();
+
+        protected virtual void OnDispose() { }
+
+        void BlackHole(AppMsg msg) {}
+
         public void Configure(ITestConfig config)
             => Config = config;
                 
+        void Relay(AppMsg msg)
+            => Next(msg);
+
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>
@@ -239,8 +248,8 @@ namespace Z0
         public void ReportBenchmark(BenchmarkRecord record)
             => Benchmarks.Enqueue(record);
 
-        public IReadOnlyList<AppMsg> Flush()
-            => Queue.Flush();
+        public IReadOnlyList<AppMsg> Dequeue()
+            => Queue.Dequeue();
 
         public void Notify(string msg, AppMsgKind? severity = null)
             => Queue.Notify(msg, severity);
@@ -260,8 +269,8 @@ namespace Z0
         public void Flush(Exception e, IAppMsgLog target)
             => Queue.Flush(e, target);
 
-        public void Flush(FilePath dst) 
-            => Queue.Flush(dst);
+        public void Emit(FilePath dst) 
+            => Queue.Emit(dst);
             
         /// <summary>
         /// Allocates and optionally starts a system counter
@@ -281,5 +290,4 @@ namespace Z0
             this.Context = context;
         }
     }
-
 }

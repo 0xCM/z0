@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using Asm;
 
     public abstract class t_asm<U> : UnitTest<U>
         where U : t_asm<U>
@@ -13,7 +14,7 @@ namespace Z0
         
         public t_asm()
         {
-            Context = AsmContext.Rooted(this, AsmCompostionRoot.Compose());
+            Context =  AsmContext.Create(AsmCompostionRoot.Compose(), AppSettings.Empty, AppMsgExchange.Create(Queue), Random, AsmFormatConfig.New);
         }
     }
 }

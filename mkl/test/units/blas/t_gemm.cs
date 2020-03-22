@@ -278,7 +278,7 @@ namespace Z0.Mkl.Test
             }
 
             var label = $"gemv<{nati<M>()},{nati<N>()},{typeof(double).DisplayName()}>";
-            return optime(cycles, sw, label);
+            return optime(cycles, snapshot(sw), label);
         }
 
         static double Dot<N>(RowVector256<N,double> x, RowVector256<N,double> y)

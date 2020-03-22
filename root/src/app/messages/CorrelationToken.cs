@@ -10,10 +10,15 @@ namespace Z0
     using static Root;
     using static IdentityShare;
 
+    public interface ICorrelated
+    {
+        CorrelationToken Correlation => CorrelationToken.Empty;
+    }
+    
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
-    public readonly struct CorrelationToken : IIdentity<CorrelationToken>
+    public readonly struct CorrelationToken : IIdentified<CorrelationToken>
     {
         public static CorrelationToken Empty => new CorrelationToken(string.Empty);
 

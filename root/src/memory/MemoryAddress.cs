@@ -9,7 +9,15 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MemoryAddress : IIdentity<MemoryAddress>, IAddressable
+    /// <summary>
+    /// Characterizes an address-identified target
+    /// </summary>
+    public interface IAddressable
+    {
+        MemoryAddress Address {get;}
+    }        
+    
+    public readonly struct MemoryAddress : IIdentified<MemoryAddress>, IAddressable
     {
         public static MemoryAddress Zero => default;
 

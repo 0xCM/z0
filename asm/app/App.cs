@@ -11,7 +11,6 @@ namespace Z0.Asm.Check
 
     class App : ConsoleApp<App,IAsmContext>
     {
-
         static IApiAssembly[] Resolutions
             => new IApiAssembly[]{
                 R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
@@ -33,13 +32,12 @@ namespace Z0.Asm.Check
         static IAsmContext CreateContext()
         {
             var settings = LoadSettings();
-            
-            // var config = ValidationHostConfig.From(settings);
-            // term.print(config);
-
-            return AsmContext.New(Resolutions.Assemble(), settings);
+            var resolved = Resolutions.Assemble();
+            var exchange = AppMsgExchange.Create(AppMsgQueue.Create());
+            var random = Rng.Pcg64(Seed64.Seed05);                
+            return AsmContext.Create(resolved, settings, exchange, random, AsmFormatConfig.New);
         }
-
+        
         public App()
             : base(CreateContext())
         {
@@ -48,9 +46,7 @@ namespace Z0.Asm.Check
             
         void ExecuteValidationWorkflow()
         {
-            var rng = Rng.Pcg64(Seed64.Seed05);                
-            var context = AsmWorkflowContext.Rooted(Context, rng);
-            using var host = ValidationHost.Create(context);
+            using var host = ValidationHost.Create(Context);
             host.Run();
         }
         protected override void Execute(params string[] args)

@@ -8,18 +8,26 @@ namespace Z0
     using System.Collections.Generic;
     using static Root;
 
-    public abstract class ConsoleApp<A> : IConsoleApp<A>
+    public abstract class ConsoleApp<A> : IConsoleApp<A>, IAppMsgSink
         where A : ConsoleApp<A>, new()
     {        
         IAppContext Context {get;}
 
         readonly IAppMsgQueue MsgQueue;
                 
-        protected ConsoleApp(IComposedApiContext context)
+        protected ConsoleApp(IComposedApiContext context, IAppMsgQueue queue)
         {
             this.Context = context;
-            this.MsgQueue = AppMsgQueue.Create();
+            this.MsgQueue = queue;
             this.Resolved = context.Compostion.Resolved;
+
+        }
+
+        protected ConsoleApp(IComposedApiContext context)
+            : this(context, AppMsgQueue.Create())
+        {
+
+
         }
 
         protected abstract void Execute(params string[] args);
@@ -43,6 +51,9 @@ namespace Z0
 
         public string Format()
             => GetType().Name;
+
+        public void Notify(AppMsg msg)
+            => MsgQueue.Accept(msg);
     }
 
     public abstract class ConsoleApp<A,C> :  ConsoleApp<A>, IConsoleApp<A,C>

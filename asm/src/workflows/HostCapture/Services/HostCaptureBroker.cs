@@ -15,15 +15,15 @@ namespace Z0.Asm
     {        
         sealed class HostCaptureBroker : IHostCaptureEventBroker
         {
-            public IAsmWorkflowContext Context {get;}
+            public IAsmContext Context {get;}
             
             readonly Dictionary<Type, IAppEventSink> Sinks;
                         
             [MethodImpl(Inline)]
-            internal static IHostCaptureEventBroker Create(IAsmWorkflowContext context)
+            internal static IHostCaptureEventBroker Create(IAsmContext context)
                 => new HostCaptureBroker(context);            
 
-            HostCaptureBroker(IAsmWorkflowContext context)
+            HostCaptureBroker(IAsmContext context)
             {
                 this.Sinks = new Dictionary<Type, IAppEventSink>();
                 this.Context = context;

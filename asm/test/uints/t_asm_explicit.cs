@@ -12,14 +12,12 @@ namespace Z0
     public abstract class t_asm_explicit<E> : t_asm<E>, IExplicitTest
         where E : t_asm_explicit<E>
     {
-        protected new IAsmContext Context;
 
         FolderPath LogDir;
 
         public t_asm_explicit()
         {
             //Context = AsmContext.Rooted(this,DefaultComposition.Create());
-            Context = AsmContext.Rooted(this, AsmCompostionRoot.Compose());
             this.LogDir = Context.EmissionPaths().DataSubDir(FolderName.Define(GetType().Name));
                                     
         }
@@ -36,7 +34,6 @@ namespace Z0
         }
 
         protected abstract void OnExecute(in AsmBuffers buffers);
-
 
     }
 }

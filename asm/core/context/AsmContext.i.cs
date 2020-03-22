@@ -4,10 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {        
+    using Asm;
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IComposedApiContext<IAsmContext>, IAppMsgQueue
+    public interface IAsmContext : IComposedApiContext<IAsmContext>, IContext<AsmContextData>,  IAppMsgQueue, IPolyrandProvider
     {
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified

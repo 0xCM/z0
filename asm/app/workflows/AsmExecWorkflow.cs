@@ -17,9 +17,7 @@ namespace Z0.Asm.Check
 
     class AsmExecWorkflow : IAsmExecWorkflow
     {
-        public IAsmWorkflowContext Context {get;}
-
-        public IPolyrand Random {get;}
+        public IAsmContext Context {get;}
 
         IAppMsgSink Sink {get;}
         
@@ -51,9 +49,8 @@ namespace Z0.Asm.Check
 
         AsmExecWorkflow(IAsmContext context, IAppMsgSink msgsink, FolderPath root)
         {                    
-            this.Random = Rng.Pcg64(Seed64.Seed08);
             this.Sink = msgsink;
-            this.Context = AsmWorkflowContext.Rooted(context, Random);
+            this.Context = context;
             this.Dispatcher = AsmEvalDispatcher.Create(Context, msgsink);
             this.BufferSize = 1024;
             this.BufferCount = 3;
@@ -100,7 +97,6 @@ namespace Z0.Asm.Check
         IApiCorrelator Correlator
             => Context.ApiCorrelator();
         
-
         void ExecuteHost(in BufferSeq buffers, in ApiHost host)
         {
             var paths = HostPaths(host);

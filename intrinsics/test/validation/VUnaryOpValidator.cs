@@ -8,6 +8,7 @@ namespace Z0
 
     using static vgeneric;
 
+
     sealed class VUnaryValidator128D<T> : FuncComparer, IVUnaryOpComparer128D<T>
         where T : unmanaged
     {

@@ -7,19 +7,10 @@ namespace Z0
     using System;
 
     using static Root;
-
-    public interface IAsmWorkflowContext : IAsmContext, IPolyrandProvider
-    {
-    
-    
-    }   
     
     public interface IAsmWorkflowService : IWorkflowService, IAsmService    
     {
-        new IAsmWorkflowContext Context {get;}    
-
-        IAsmContext IContextual<IAsmContext>.Context
-            => Context;
+     
     }
 
     public interface IAsmWorkflow : IAsmWorkflowService

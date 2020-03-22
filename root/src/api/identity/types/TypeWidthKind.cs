@@ -59,12 +59,12 @@ namespace Z0
         W512 = 512,
     }
 
-    public interface ITypeWidthKind : IKind<TypeWidthKind>, IFixedWidth
+    public interface ITypeWidthKind : IEnumeratedKind<TypeWidthKind>, IFixedWidth
     {
         FixedWidth IFixedWidth.FixedWidth => (FixedWidth)Class;
     }
 
-    public interface ITypeWidthKind<K> : ITypeWidthKind, IKind<K, TypeWidthKind>
+    public interface ITypeWidthKind<K> : ITypeWidthKind, IEnumeratedKind<K, TypeWidthKind>
         where K : struct, ITypeWidthKind<K>
     {
     }

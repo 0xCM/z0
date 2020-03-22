@@ -5,28 +5,35 @@
 namespace Z0.Asm
 {
     using System;
-
+    using static Root;
 
     public class AsmContextData
     {
-        public static AsmContextData New(IApiComposition assemblies, AsmFormatConfig format = null, IAppSettings settings = null, IPolyrand random = null)
-            => new AsmContextData(assemblies, format ?? AsmFormatConfig.New,  settings, random);
+        public static AsmContextData Create(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange,  IPolyrand random, AsmFormatConfig format)
+            => new AsmContextData(assemblies, settings, exchange, random, format);
 
-        AsmContextData(IApiComposition assemblies, AsmFormatConfig format, IAppSettings settings, IPolyrand random)
+        AsmContextData(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange,  IPolyrand random, AsmFormatConfig format)
         {
             this.Assemblies = assemblies;
             this.AsmFormat = format;
             this.Settings = settings ?? AppSettings.Empty;
-            this.Random = random != null ? Option.some(random) : default;
+            
+            require(exchange != null);
+            this.Messaging = exchange;
+            
+            require(random != null);
+            this.Random = random;
         }
 
         public IApiComposition Assemblies {get;}
 
-        public AsmFormatConfig AsmFormat {get;}
-
         public IAppSettings Settings {get;}
 
-        public Option<IPolyrand> Random {get;}
+        public IAppMsgExchange Messaging {get;}
+
+        public IPolyrand Random {get;}
+
+        public AsmFormatConfig AsmFormat {get;}
 
     }
 }

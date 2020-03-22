@@ -9,12 +9,12 @@ namespace Z0
 
     using static Root;
 
-    public interface ITypeIdentity : IIdentity
+    public interface ITypeIdentity : IIdentified
     {
 
     }
     
-    public interface ITypeIdentity<T> : ITypeIdentity, IIdentity<T>
+    public interface ITypeIdentity<T> : ITypeIdentity, IIdentified<T>
         where T : ITypeIdentity<T>, new()    
     {
 

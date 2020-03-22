@@ -11,16 +11,16 @@ namespace Z0
     using static Root;
     using static Arrows;
 
-    public interface IArrow : IIdentity
+    public interface IArrow : IIdentified
     {
         object Src {get;}   
 
         object Dst {get;}
     }
 
-    public interface IArrow<A,S,T> : IArrow, IIdentity<A>
-        where S : IIdentity<S>, new()
-        where T : IIdentity<T>, new()
+    public interface IArrow<A,S,T> : IArrow, IIdentified<A>
+        where S : IIdentified<S>, new()
+        where T : IIdentified<T>, new()
         where A : IArrow<A,S,T>, new()
     {
         new S Src {get;}

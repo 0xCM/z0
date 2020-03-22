@@ -3,12 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    
+{    
     using System;
     using System.Collections.Generic;
 
-    public interface ITestContext : IDisposable, IPolyrandContext, IAppMsgSink
+    public interface ITestContext : IDisposable, IRngContext, IAppMsgSink
     {
         void ReportBenchmark(string name, long opcount, TimeSpan duration);        
 
@@ -19,6 +18,8 @@ namespace Z0
         string CaseName(IFunc f);
 
         Type HostType {get;}
-    }
 
+        void ReportOutcome(TestCaseOutcome outcome)
+            => ReportOutcome(outcome.CaseName, outcome.Succeeded, outcome.Duration);
+    }
 }
