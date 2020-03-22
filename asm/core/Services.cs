@@ -2,15 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
-    using Z0.Asm;
 
     using Svc = Z0.Asm;
     
@@ -35,11 +33,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IMemoryExtractor MemoryExtractor(this IAsmContext context, byte[] buffer)
-            => Z0.MemoryExtractor.New(context, buffer);
+            => Svc.MemoryExtractor.New(context, buffer);
 
         [MethodImpl(Inline)]
         public static IMemoryExtractParser MemoryExtractParser(this IAsmContext context, byte[] buffer)
-            => Z0.Asm.MemoryExtractParser.New(context, buffer);
+            => Svc.MemoryExtractParser.New(context, buffer);
 
         [MethodImpl(Inline)]
         public static ByteParser<EncodingPatternKind> PatternParser(this IAsmContext context, byte[] buffer)
@@ -135,7 +133,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IMemberLocator MemberLocator(this IAsmContext src)
-            => Z0.MemberLocator.New(src);
+            => Svc.MemberLocator.New(src);
 
         public static OpExtractExchange ExtractExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
         {
@@ -151,8 +149,6 @@ namespace Z0
             =>  (from r in  context.Compostion.Resolved
                 where r.Id == id
                 select r.Resolved).FirstOrDefault();
-
-
 
         public static IEnumerable<AssemblyId> ActiveAssemblies(this IAsmContext context)
         {

@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    
     using Z0.Asm;
 
-    using static Z0.Root;
+    using static Root;
 
     public class AsmContext : IAsmContext 
     {            
@@ -17,9 +18,11 @@ namespace Z0
         /// Creates a base context with a specified composition
         /// </summary>
         /// <param name="assemblies">A composition of assemblies to share with the context</param>
+        [MethodImpl(Inline)]
         public static IAsmContext Create(IApiComposition assemblies, IAppSettings settings, IAppMsgExchange exchange,  IPolyrand random, AsmFormatConfig format)
             => new AsmContext(AsmContextData.Create(assemblies, settings, exchange, random, format));
 
+        [MethodImpl(Inline)]
         protected AsmContext(AsmContextData state)
         {
             this.State = state;

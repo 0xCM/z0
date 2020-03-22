@@ -2,12 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public abstract class t_asm_explicit<E> : t_asm<E>, IExplicitTest
         where E : t_asm_explicit<E>

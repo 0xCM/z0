@@ -6,13 +6,8 @@ namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
-
     
     using static Root;
-    using static Nats;
-    using static FKT;
     
     readonly struct ImmV128BinaryCaptureService<T> : IImmBinaryCapture<T>
         where T : unmanaged

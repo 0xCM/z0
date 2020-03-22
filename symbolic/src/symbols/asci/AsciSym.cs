@@ -5,10 +5,6 @@
 namespace Z0
 {    
     using System;
-    using System.Linq;
-
-    using static Root;
-
 
     public sealed class AsciSymSet : SymbolSet<AsciSymSet, AsciAlphabet>
     {

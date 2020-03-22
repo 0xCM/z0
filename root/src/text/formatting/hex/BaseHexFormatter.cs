@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     
     using static Root;
 
-    public readonly struct BaseHexFormatter : IBaseHexFormatter
+    public readonly struct BaseHexFormatter : ISystemHexFormatter
     {
         [MethodImpl(Inline)]
         public static BaseHexFormatter<T> Define<T>(Func<T,string,string> f)
@@ -32,7 +31,7 @@ namespace Z0
             => F(src,config);
     }
      
-    public readonly struct BaseHexFormatter<T> : IBaseHexFormatter<T>
+    public readonly struct BaseHexFormatter<T> : ISystemHexFormatter<T>
         where T : struct
     {
         [MethodImpl(Inline)]

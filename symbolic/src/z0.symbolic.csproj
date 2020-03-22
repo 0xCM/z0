@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Canonical)" />
+    <ProjectReference Include="$(Collective)" />
+
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static BinaryDigit;
-    using static Root;
+    using static Symbolic;
     
     public static class BinaryDigits
     {
@@ -32,7 +32,7 @@ namespace Z0
         {
             var offset = src.StartsWith("0b") ? 2 : 0;
             var len = src.Length - offset;
-            var dst = alloc<BinaryDigit>(len);
+            var dst = new BinaryDigit[len];
             for(var i = offset; i< len; i++)
                 dst[i] = Parse(src[i]);            
             return dst;

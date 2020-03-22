@@ -16,6 +16,9 @@ bash $AddCmd
 export Kind=components
 bash $AddCmd
 
+export Kind=canonical
+bash $AddCmd
+
 export Kind=test
 bash $AddCmd
 

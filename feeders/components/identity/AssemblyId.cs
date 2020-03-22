@@ -188,17 +188,19 @@ public enum AssemblyId : ulong
 
     TestApp = Testing | App,
 
-    Components = 740,
+    Feeders = 1000,
 
-    Collective = 745,
+    Components = 1005,
 
-    Monadic = 750,
+    Collective = 1010,
 
-    Reflections = 755,
+    Monadic = 1015,
 
-    Texting = 760,
+    Reflections = 1020,
 
-    Control = 1000,        
+    Texting = 1025,
+
+    Canonical = 1030,
 
     Svc = ushort.MaxValue + 1,
 

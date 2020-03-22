@@ -6,10 +6,15 @@
 
 namespace Z0.Resolutions
 {
-    public sealed class Symbolic : ApiResolution<Symbolic, Symbolic.C>
+    public sealed class Symbolic : Resolution<Symbolic> {  }
+}
+
+namespace Z0
+{
+    using System.Runtime.CompilerServices;
+    
+    public static class Symbolic
     {
-        public Symbolic() : base(AssemblyId.Symbolic) {}
-        
-        public class C : ApiCatalog<C> { public C() : base(AssemblyId.Symbolic) {} }            
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 }

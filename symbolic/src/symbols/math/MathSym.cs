@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
-
-
     /// <summary>
     /// Random selection of math-related unicode symbols
     /// </summary>

@@ -1,0 +1,23 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Asm
+{        
+    using System;
+
+    public interface IAsmInstructionDecoder : IAsmService
+    {
+        /// <summary>
+        /// Decodes an instruction list
+        /// </summary>
+        /// <param name="src">The code source</param>
+        Option<AsmInstructionList> DecodeInstructions(AsmCode src);        
+
+        /// <summary>
+        /// Decodes an instruction list
+        /// </summary>
+        /// <param name="src">The code source</param>
+        Option<AsmInstructionList> DecodeInstructions(MemoryExtract src);        
+    }
+}

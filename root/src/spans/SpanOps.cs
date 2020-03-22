@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;    
-    using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Root;
 
@@ -26,8 +22,7 @@ namespace Z0
 
     public static class SpanOps
     {
-
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static Span<T3> apply<F,T0,T1,T2,T3>(F f, ReadOnlySpan<T0> A, ReadOnlySpan<T1> B, ReadOnlySpan<T2> C,  Span<T3> dst)
             where F : ITernaryFunc<T0,T1,T2,T3>
         {

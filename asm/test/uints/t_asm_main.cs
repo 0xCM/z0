@@ -2,21 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Linq;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-
-    using Z0.Asm;
-
-    using static Root;
-    using static Nats;
 
     class t_asm_main : t_asm_explicit<t_asm_main>
     {
@@ -109,7 +100,5 @@ namespace Z0
 
             var stateBytes = state.Select(s => s.Payload).ToArray();
         }
-
-
-   }
+    }
 }

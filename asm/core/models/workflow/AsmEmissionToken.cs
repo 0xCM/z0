@@ -2,17 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.IO;
 
     using static Root;    
 
-    public interface AsmEmissionTokenSpec :  IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>, IFormattable<AsmEmissionToken>
+    public interface IAsmEmissionToken :  IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>, IFormattable<AsmEmissionToken>
     {
         
     }
@@ -21,7 +18,7 @@ namespace Z0
     /// Upon success, provides evidence that an operation was extracted, decoded and emitted; upon failure, communicates in the
     /// termination code the basic reason why the capture processes failed
     /// </summary>
-    public readonly struct AsmEmissionToken : AsmEmissionTokenSpec
+    public readonly struct AsmEmissionToken : IAsmEmissionToken
     {
         /// <summary>
         /// Defines a uri relataive to the global asm data root

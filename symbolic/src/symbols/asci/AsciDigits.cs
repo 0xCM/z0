@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using static Root;
-
     public class AsciDigitSet : SymbolSet<AsciDigitSet, AsciAlphabet>
     {
         static AsciDigitSet()

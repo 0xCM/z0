@@ -11,11 +11,23 @@ namespace Z0.Asm
 
     public readonly struct AsmFunctionList : IFiniteSeq<AsmFunctionList, AsmFunction>
     {        
+        
         public static AsmFunctionList Empty = new AsmFunctionList(new AsmFunction[]{});
         
         [MethodImpl(Inline)]
         public static AsmFunctionList Define(params AsmFunction[] src)
             => new AsmFunctionList(src);
+
+        public string Format()
+        {
+            var dst = text.factory.Builder();
+            for(var i=0; i<Content.Length; i++)
+            {
+                dst.Append(Content[i].FormatAsmLines().Concat());
+                dst.AppendLine(text.pagebreak);
+            }
+            return dst.ToString();
+        }
 
         [MethodImpl(Inline)]
         AsmFunctionList(AsmFunction[] src)

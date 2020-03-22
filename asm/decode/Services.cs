@@ -2,17 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
-
-    using Z0.Asm;
 
     using static Root;
+
+    using Svc = Z0.Asm;
 
     public static class AsmDecodingServices
     {
@@ -22,7 +20,7 @@ namespace Z0
         /// <param name="context">The source context</param>
         [MethodImpl(Inline)]
         public static IAsmFormatter AsmFormatter(this IAsmContext context, AsmFormatConfig config = null)
-            => Z0.AsmFormatter.Create(context, config ?? context.AsmFormat);
+            => Svc.AsmFormatter.Create(context, config ?? context.AsmFormat);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer
@@ -45,11 +43,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IAsmFunctionDecoder AsmFunctionDecoder(this IAsmContext context)
-            => Z0.AsmFunctionDecoder.Create(context);
+            => Svc.AsmFunctionDecoder.Create(context);
 
         [MethodImpl(Inline)]
         public static IAsmInstructionDecoder AsmInstructionDecoder(this IAsmContext context)
-            => Z0.AsmInstructionDecoder.Create(context);
+            => Svc.AsmInstructionDecoder.Create(context);
 
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
         {

@@ -5,8 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
@@ -43,8 +41,6 @@ namespace Z0
         /// <param name="context">The source context</param>
         public static IAsmCatalogEmitter CatalogEmitter(this IAsmContext context, IApiCatalog catalog, AsmEmissionObserver observer)
             => AsmCatalogEmitter.Create(context, catalog, observer);
-
-
 
         [MethodImpl(Inline)]
         public static IAssemblyCapture AssemblyCapture(this IAsmContext context)

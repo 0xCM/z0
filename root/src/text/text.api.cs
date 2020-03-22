@@ -32,6 +32,8 @@ namespace Z0
             get => string.Empty;
         }
 
+        public const string pagebreak = "--------------------------------------------------------------------------------------------------------------";
+
         /// <summary>
         /// Tests whether the source string is nonempty
         /// </summary>

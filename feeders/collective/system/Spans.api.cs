@@ -73,6 +73,26 @@ namespace Z0
             => ref skip(in head(src), count);
 
         /// <summary>
+        /// Adds an offset to the head of a span, measured relative to 64-bit segments, and returns the resulting reference
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="count">The number of 64-bit segments to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref ulong seek64<T>(Span<T> src, int count)
+            => ref Unsafe.Add(ref Unsafe.As<T,ulong>(ref head(src)), count);
+
+        /// <summary>
+        /// Adds an offset to the head of a span, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T seek<T>(Span<T> src, int count)
+            => ref Unsafe.Add(ref head(src), count);
+
+        /// <summary>
         /// Returns a reference to the location of the first element
         /// </summary>
         /// <param name="src">The source array</param>
@@ -80,39 +100,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref T head<T>(T[] src)
             => ref spanhead<T>(src);
-
-        [MethodImpl(Inline)]
-        static ref T spanhead<T>(Span<T> src)
-            => ref head(src);
-
-        /// <summary>
-        /// Presents a readonly reference as reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        static ref T edit<T>(in T src)
-            => ref Unsafe.AsRef(in src);
-
-        /// <summary>
-        /// Adds an offset to a reference, measured relative to the reference type
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="bytes">The number of elements to advance</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        static ref T seek<T>(ref T src, int count)
-            => ref Unsafe.Add(ref src, count);
-
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the resulting element
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        static ref readonly T skip<T>(in T src, int count)
-            => ref Unsafe.Add(ref edit(in src), count);
 
         /// <summary>
         /// Loads a span from a memory reference
@@ -672,5 +659,38 @@ namespace Z0
             
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        internal static ref T spanhead<T>(Span<T> src)
+            => ref head(src);
+
+        /// <summary>
+        /// Presents a readonly reference as reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ref T edit<T>(in T src)
+            => ref Unsafe.AsRef(in src);
+
+        /// <summary>
+        /// Adds an offset to a reference, measured relative to the reference type
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="bytes">The number of elements to advance</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ref T seek<T>(ref T src, int count)
+            => ref Unsafe.Add(ref src, count);
+
+        /// <summary>
+        /// Skips a specified number of source elements and returns a readonly reference to the resulting element
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The number of elements to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ref readonly T skip<T>(in T src, int count)
+            => ref Unsafe.Add(ref edit(in src), count);
     }    
 }

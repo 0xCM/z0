@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using static Root;
-
     public class AsciEscapeSet : SymbolSet<AsciEscapeSet, AsciAlphabet>
     {
         static AsciEscapeSet()

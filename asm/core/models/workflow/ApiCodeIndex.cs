@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     using static Root;
 
-
     public readonly struct ApiCodeIndex 
     {
         readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;

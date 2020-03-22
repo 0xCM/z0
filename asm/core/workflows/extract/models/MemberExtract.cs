@@ -2,10 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
  
     using static Root;
@@ -38,7 +37,7 @@ namespace Z0
         public readonly MemoryExtract EncodedData;
     }
 
-    public readonly struct OpExtracts //: IFiniteSeq<OpExtract>
+    public readonly struct OpExtracts
     {
         [MethodImpl(Inline)]
         public static implicit operator OpExtracts(MemberExtract[] src)

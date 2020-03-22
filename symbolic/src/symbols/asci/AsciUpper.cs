@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {    
-    using static Root;
-    using System.Linq;
-    using System.Collections.Generic;
-
     public sealed class AsciUpper : SymbolSet<AsciUpper, AsciAlphabet>
     {        
         public static Symbol<AsciAlphabet>[] All

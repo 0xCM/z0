@@ -23,6 +23,7 @@
     <ProjectReference Include="$(Texting)" />
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Collective)" />
+    <ProjectReference Include="$(Canonical)" />
   </ItemGroup>
 
 </Project>

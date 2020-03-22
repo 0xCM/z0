@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     
-    using static Root;
     using R = Z0.Resolutions;
 
     static class AsmCompostionRoot
@@ -30,6 +27,5 @@ namespace Z0
             var resolutions = src.Length != 0 ? src : DefaultResolutions;
             return resolutions.Assemble();
         }
-
     }
 }

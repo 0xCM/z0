@@ -6,62 +6,61 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     
     using static Root;
 
     static class BaseHexFormatters
     {
         [MethodImpl(Inline)]
-        public static IBaseHexFormatter<T> Create<T>()
+        public static ISystemHexFormatter<T> Create<T>()
             where T : struct
                 => formatter_u<T>();
 
         [MethodImpl(Inline)]
-        static IBaseHexFormatter<T> formatter_u<T>()
+        static ISystemHexFormatter<T> formatter_u<T>()
             where T : struct
         {
             if(typeof(T) == typeof(byte))
-                return generalize<HexFormatter8u,IBaseHexFormatter<T>>(HexFormatter8u.TheOnly);
+                return generalize<HexFormatter8u,ISystemHexFormatter<T>>(HexFormatter8u.TheOnly);
             else if(typeof(T) == typeof(ushort))
-                return generalize<HexFormatter16u,IBaseHexFormatter<T>>(HexFormatter16u.TheOnly);
+                return generalize<HexFormatter16u,ISystemHexFormatter<T>>(HexFormatter16u.TheOnly);
             else if(typeof(T) == typeof(uint))
-                return generalize<HexFormatter32u,IBaseHexFormatter<T>>(HexFormatter32u.TheOnly);
+                return generalize<HexFormatter32u,ISystemHexFormatter<T>>(HexFormatter32u.TheOnly);
             else if(typeof(T) == typeof(ulong))
-                return generalize<HexFormatter64u,IBaseHexFormatter<T>>(HexFormatter64u.TheOnly);
+                return generalize<HexFormatter64u,ISystemHexFormatter<T>>(HexFormatter64u.TheOnly);
             else
                 return formatter_i<T>();
         }
 
         [MethodImpl(Inline)]
-        static IBaseHexFormatter<T> formatter_i<T>()
+        static ISystemHexFormatter<T> formatter_i<T>()
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return generalize<HexFormatter8i,IBaseHexFormatter<T>>(HexFormatter8i.TheOnly);
+                return generalize<HexFormatter8i,ISystemHexFormatter<T>>(HexFormatter8i.TheOnly);
             else if(typeof(T) == typeof(short))
-                return generalize<HexFormatter16i,IBaseHexFormatter<T>>(HexFormatter16i.TheOnly);
+                return generalize<HexFormatter16i,ISystemHexFormatter<T>>(HexFormatter16i.TheOnly);
             else if(typeof(T) == typeof(int))
-                return generalize<HexFormatter32i,IBaseHexFormatter<T>>(HexFormatter32i.TheOnly);
+                return generalize<HexFormatter32i,ISystemHexFormatter<T>>(HexFormatter32i.TheOnly);
             else if(typeof(T) == typeof(long))
-                return generalize<HexFormatter64i,IBaseHexFormatter<T>>(HexFormatter64i.TheOnly);
+                return generalize<HexFormatter64i,ISystemHexFormatter<T>>(HexFormatter64i.TheOnly);
             else
                 return formatter_f<T>();
         }
 
         [MethodImpl(Inline)]
-        static IBaseHexFormatter<T> formatter_f<T>()
+        static ISystemHexFormatter<T> formatter_f<T>()
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return generalize<HexFormatter32f,IBaseHexFormatter<T>>(HexFormatter32f.TheOnly);
+                return generalize<HexFormatter32f,ISystemHexFormatter<T>>(HexFormatter32f.TheOnly);
             else if(typeof(T) == typeof(double))
-                return generalize<HexFormatter64f,IBaseHexFormatter<T>>(HexFormatter64f.TheOnly);
+                return generalize<HexFormatter64f,ISystemHexFormatter<T>>(HexFormatter64f.TheOnly);
             else
                 throw unsupported<T>();
         }
 
-        readonly struct HexFormatter8i : IBaseHexFormatter<HexFormatter8i,sbyte>
+        readonly struct HexFormatter8i : ISystemHexFormatter<HexFormatter8i,sbyte>
         {
             public static HexFormatter8i TheOnly = default;
 
@@ -70,7 +69,7 @@ namespace Z0
                 => src.ToString(format ?? string.Empty);                        
         }
 
-        readonly struct HexFormatter8u : IBaseHexFormatter<HexFormatter8u,byte>
+        readonly struct HexFormatter8u : ISystemHexFormatter<HexFormatter8u,byte>
         {
             public static HexFormatter8u TheOnly = default;
 
@@ -79,7 +78,7 @@ namespace Z0
                 => src.ToString(format ?? string.Empty);            
         }
 
-        readonly struct HexFormatter16i : IBaseHexFormatter<HexFormatter16i,short>
+        readonly struct HexFormatter16i : ISystemHexFormatter<HexFormatter16i,short>
         {
             public static HexFormatter16i TheOnly = default;
 
@@ -88,7 +87,7 @@ namespace Z0
                 => src.ToString(format ?? string.Empty);
         }
 
-        readonly struct HexFormatter16u : IBaseHexFormatter<HexFormatter16u,ushort>
+        readonly struct HexFormatter16u : ISystemHexFormatter<HexFormatter16u,ushort>
         {
             public static HexFormatter16u TheOnly = default;
 
@@ -97,7 +96,7 @@ namespace Z0
                 => src.ToString(format ?? string.Empty);
         }
 
-        readonly struct HexFormatter32i : IBaseHexFormatter<HexFormatter32i,int>
+        readonly struct HexFormatter32i : ISystemHexFormatter<HexFormatter32i,int>
         {
             public static HexFormatter32i TheOnly = default;
 
@@ -106,7 +105,7 @@ namespace Z0
                 => src.ToString(format ?? string.Empty);
         }
 
-        readonly struct HexFormatter32u : IBaseHexFormatter<HexFormatter32u,uint>
+        readonly struct HexFormatter32u : ISystemHexFormatter<HexFormatter32u,uint>
         {
             public static HexFormatter32u TheOnly = default;
 
@@ -115,7 +114,7 @@ namespace Z0
                 => src.ToString(format ?? string.Empty);
         }
 
-        readonly struct HexFormatter64i : IBaseHexFormatter<HexFormatter64i,long>
+        readonly struct HexFormatter64i : ISystemHexFormatter<HexFormatter64i,long>
         {
             public static HexFormatter64i TheOnly = default;
 
@@ -124,7 +123,7 @@ namespace Z0
                 => src.ToString(format ?? string.Empty);
         }
 
-        readonly struct HexFormatter64u : IBaseHexFormatter<HexFormatter64u,ulong>
+        readonly struct HexFormatter64u : ISystemHexFormatter<HexFormatter64u,ulong>
         {
             public static HexFormatter64u TheOnly = default;
 
@@ -133,7 +132,7 @@ namespace Z0
                 => src.ToString(format ?? string.Empty);
         }
 
-        readonly struct HexFormatter32f : IBaseHexFormatter<HexFormatter32f,float>
+        readonly struct HexFormatter32f : ISystemHexFormatter<HexFormatter32f,float>
         {
             public static HexFormatter32f TheOnly = default;
 
@@ -142,7 +141,7 @@ namespace Z0
                 => BitConvert.ToInt32(src).ToString(format ?? string.Empty);
         }
 
-        readonly struct HexFormatter64f : IBaseHexFormatter<HexFormatter64f,double>
+        readonly struct HexFormatter64f : ISystemHexFormatter<HexFormatter64f,double>
         {
             public static HexFormatter64f TheOnly = default;
 

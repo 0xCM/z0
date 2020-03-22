@@ -5,13 +5,7 @@
 namespace Z0.Asm.Validation
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     
-    using static Root;
-    
-
     public interface IAsmChecks : IAsmWorkflowService
     {
         void Execute(in BufferSeq buffers, ApiMemberCode code);        
@@ -29,6 +23,4 @@ namespace Z0.Asm.Validation
 
         bit EvalFixedOperator(in BufferSeq buffers, in ApiMemberCode api);
     }
-
-
 }

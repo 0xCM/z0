@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
-
     /// <summary>
     /// Unicode superscript characters/sympbols
     /// </summary>

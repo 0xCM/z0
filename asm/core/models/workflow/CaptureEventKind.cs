@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public enum CaptureEventKind
     {
@@ -15,5 +14,4 @@ namespace Z0
 
         Complete = 2
     }
-
 }

@@ -9,7 +9,6 @@ namespace Z0
 
     public static class Helpers
     {
-
         /// <summary>
         /// Enables the generic indicator
         /// </summary>

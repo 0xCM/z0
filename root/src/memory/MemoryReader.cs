@@ -59,7 +59,7 @@ namespace Z0
         }
     }
 
-    partial class RootX
+    public static class ReaderExtensions
     {
         [MethodImpl(Inline)]
         public static IMemoryReader MemoryReader(this IAppContext context)

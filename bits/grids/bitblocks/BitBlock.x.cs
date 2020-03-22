@@ -156,6 +156,5 @@ namespace Z0
         public static bit Identical<T>(this Block256<T> xb, Block256<T> yb)        
             where T : unmanaged        
                 => xb.Data.Identical(yb.Data);
-
     }
 }

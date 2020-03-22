@@ -2,13 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-    
-    using static Root;
 
     public sealed class t_capture : t_asm<t_capture>
     {    

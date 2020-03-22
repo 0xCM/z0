@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Symbolic;
 
     public static class DigitsX
     {
@@ -163,6 +161,5 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static string Format(this Span<HexDigit> src, bool specifier = true)
             => src.ReadOnly().Format(specifier);
-
     }
 }

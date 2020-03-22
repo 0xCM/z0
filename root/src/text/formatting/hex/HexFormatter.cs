@@ -26,10 +26,10 @@ namespace Z0
 
         static HexSeqFormatConfig DefaultSeqConfig => HexSeqFormatConfig.Define(DefaultConfig);
 
-        readonly IBaseHexFormatter<T> BaseFormatter;
+        readonly ISystemHexFormatter<T> BaseFormatter;
         
         [MethodImpl(Inline)]
-        internal HexFormatter(IBaseHexFormatter<T> formatter)
+        internal HexFormatter(ISystemHexFormatter<T> formatter)
         {
             this.BaseFormatter = formatter;
         }
