@@ -5,12 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    public static partial class RngX
+    using System.Collections.Generic;
+    
+    public interface ITestControl : IAppMsgQueue
     {
+        void Configure(ITestConfig config);
 
+        IEnumerable<BenchmarkRecord> TakeBenchmarks();
+
+        IEnumerable<TestCaseRecord> TakeOutcomes();
     }
+    
 }

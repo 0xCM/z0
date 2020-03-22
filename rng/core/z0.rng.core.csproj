@@ -6,10 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Polyrand)"/>
-    <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(GenericNumerics)" />
   </ItemGroup>
 

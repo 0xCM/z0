@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(TestApp)" />  
+    <ProjectReference Include="$(TestLib)" />  
     <ProjectReference Include="$(Analogs)" />        
   </ItemGroup>
 

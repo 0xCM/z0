@@ -6,9 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="$(TopDir).settings/Settings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(RngCore)" />
     <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Fixed)" />
   </ItemGroup>
 
 </Project>

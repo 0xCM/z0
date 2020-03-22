@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(TestApp)" />
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
+    <ProjectReference Include="$(TestLib)" />
+    <ProjectReference Include="$(RngCore)" />
   </ItemGroup>
 
 </Project>

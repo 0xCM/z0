@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TestApp)" />
+    <ProjectReference Include="$(TestLib)" />
   </ItemGroup>
 
 </Project>

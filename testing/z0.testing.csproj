@@ -6,11 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(Fixed)" />
-    <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(TestLib)" />    
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
   </ItemGroup>
 
   <ItemGroup>

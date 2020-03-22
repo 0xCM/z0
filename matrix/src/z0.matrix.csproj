@@ -9,5 +9,7 @@
     <ProjectReference Include="$(Nats)" />    
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(Polyrand)" />
+
   </ItemGroup>
 </Project>

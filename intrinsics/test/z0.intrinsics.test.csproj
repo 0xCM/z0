@@ -7,7 +7,7 @@
 
   
   <ItemGroup>
-    <ProjectReference Include="$(TestApp)" />
+    <ProjectReference Include="$(TestLib)" />
 
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitSpans)" />    

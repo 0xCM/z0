@@ -62,7 +62,6 @@
     <Polyrand>$(TopDir)polyrand/src/z0.polyrand.csproj</Polyrand>
     <RngCore>$(TopDir)rng/core/z0.rng.core.csproj</RngCore>
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
-    <TestApp>$(TopDir)testing/z0.testing.csproj</TestApp>
     <TestLib>$(TopDir)testlib/src/z0.testlib.csproj</TestLib>
     <Time>$(TopDir)time/src/z0.time.csproj</Time>
     <VData>$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj</VData>

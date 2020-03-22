@@ -12,6 +12,8 @@
     <ProjectReference Include="$(Nats)" />    
     <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />    
+    <ProjectReference Include="$(RngCore)" />
+    <ProjectReference Include="$(Matrix)" />    
+
   </ItemGroup>
 </Project>

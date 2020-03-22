@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TestApp)" />
+    <ProjectReference Include="$(TestLib)" />
     <ProjectReference Include="$(Math)" />  
 
     <ProjectReference Include="$(TopDir)feeders/reflections/z0.feeders.reflections.csproj" />  

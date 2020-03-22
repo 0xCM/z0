@@ -8,7 +8,7 @@
   <Import Project="$(TopDir)asm/z0.asm.exports.props"/>
 
   <ItemGroup>
-    <ProjectReference Include="$(TestApp)" />
+    <ProjectReference Include="$(TestLib)" />
 
     <ProjectReference Include="$(GenericNumerics)" />
     <ProjectReference Include="$(MathSvc)" />
