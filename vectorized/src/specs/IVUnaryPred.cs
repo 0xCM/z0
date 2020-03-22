@@ -27,7 +27,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryPred<W,V> : IVFunc, IUnaryPredicate<V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
     {
         
@@ -41,7 +41,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryPred<W,V,T> : IVUnaryPred<W,V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
         where T : unmanaged
     {
@@ -53,7 +53,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred128<T> : IVUnaryPred<N128,Vector128<T>,T>
+    public interface IVUnaryPred128<T> : IVUnaryPred<W128,Vector128<T>,T>
         where T : unmanaged
     {
         
@@ -64,7 +64,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred256<T> : IVUnaryPred<N256,Vector256<T>,T>
+    public interface IVUnaryPred256<T> : IVUnaryPred<W256,Vector256<T>,T>
         where T : unmanaged
     {        
         

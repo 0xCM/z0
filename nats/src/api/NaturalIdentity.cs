@@ -29,7 +29,7 @@ namespace Z0
             where W : unmanaged, ITypeNat
             where T : unmanaged
                 => OpIdentity.operation(opname,(FixedWidth)nateval<W>(), NumericIdentity.kind<T>(), generic);
-                
+
         /// <summary>
         /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
         /// </summary>
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w}x{kind.Format()}");
-        
+
         /// <summary>
         /// Defines a numeric resource identity predicated on two natural bitwidths
         /// </summary>

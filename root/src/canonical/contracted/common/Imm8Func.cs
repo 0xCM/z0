@@ -27,9 +27,9 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public interface IImm8Func<W> : IImm8Func
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
-
+        TypeWidthKind WidthKind => default(W).Class;
     }
 
     /// <summary>
@@ -48,16 +48,30 @@ namespace Z0
            
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface IImmUnaryOp<W,A> : IImm8UnaryOp<A>, IImm8Func<W>
+        where W : struct, ITypeWidth<W>
+    {
+
+    }
+
     /// <summary>
     /// Characterizes a ternary function F:A -> A -> byte -> A that accepts an 8-bit 
     /// immediate value in the third parameter. 
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IImm8BinOp<A> : IImm8Func, IFunc<A,A,byte,A>
+    public interface IImm8BinaryOp<A> : IImm8Func, IFunc<A,A,byte,A>
     {
 
     }    
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IImm8BinaryOp<W,A> : IImm8BinaryOp<A>, IImm8Func<W>
+        where W : struct, ITypeWidth<W>
+    {
+
+    }
 
     /// <summary>
     /// Characterizes a ternary function F:A -> byte -> byte -> A that accepts 8-bit 

@@ -16,6 +16,4 @@ namespace Z0
             where F : IBinaryFunc<T1, T2, T3>
             where G : IBinaryFunc<T1, T2, T3>;        
     }
-
-
 }

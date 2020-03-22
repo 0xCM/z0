@@ -73,8 +73,8 @@ namespace Z0
         public MethodInfo SourceMember 
             => SourceExtract.Member.Method;
 
-        public MemberDescriptor Descriptor 
-            => MemberDescriptor.Define(Uri, SourceMember.Signature().Format());
+        public ApiMemberInfo Descriptor 
+            => ApiMemberInfo.Define(Uri, SourceMember.Signature().Format());
         
         public AsmCode Code
             => AsmCode.Define(Id, ParsedContent);
@@ -82,18 +82,18 @@ namespace Z0
 
     public readonly struct ParsedOpExtract
     {
-        public readonly MemberDescriptor Operation;        
+        public readonly ApiMemberInfo Operation;        
 
         public readonly ExtractTermCode TermCode;
 
         public readonly MemoryExtract Content;   
 
         [MethodImpl(Inline)]
-        public static ParsedOpExtract Define(MemberDescriptor op, ExtractTermCode term, MemoryExtract parsed)
+        public static ParsedOpExtract Define(ApiMemberInfo op, ExtractTermCode term, MemoryExtract parsed)
             => new ParsedOpExtract(op,term,parsed);
 
         [MethodImpl(Inline)]
-        ParsedOpExtract(MemberDescriptor op, ExtractTermCode term, MemoryExtract parsed)
+        ParsedOpExtract(ApiMemberInfo op, ExtractTermCode term, MemoryExtract parsed)
         {
             this.Operation = op;
             this.Content = parsed;

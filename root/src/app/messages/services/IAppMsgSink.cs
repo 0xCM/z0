@@ -17,7 +17,11 @@ namespace Z0
         void IMessageSink<AppMsg>.Displayed(AppMsg msg)
             => Notify(msg.Printed());
 
-        void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
-            => NotifyConsole(AppMsg.Colorize(content, color));
+        void NotifyConsole(object content, AppMsgColor color)
+        {
+            var msg = AppMsg.Colorize(content, color);
+            term.print(msg, color);
+            Displayed(msg);            
+        }
     }
 }

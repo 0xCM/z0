@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
     using System.Security;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the canonical shape of a unary operator
@@ -18,14 +16,14 @@ namespace Z0
     public delegate T UnaryOp<T>(T a);
 
     /// <summary>
-    /// Defines the shape of a unary operator that accepts operands of known width
+    /// Characterizes a unary operator with known operand width
     /// </summary>
     /// <param name="a">The operand</param>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate T UnaryOp<W,T>(T a)
-        where W : struct, ITypeWidthKind<W>;
+        where W : struct, ITypeWidth<W>;
 
     /// <summary>
     /// Defines the canonical shape of a binary operator
@@ -37,7 +35,7 @@ namespace Z0
     public delegate T BinaryOp<T>(T a, T b);
 
     /// <summary>
-    /// Defines the shape of a binary operator that accepts operands of known width
+    /// Characterizes a binary operator with known operand width
     /// </summary>
     /// <param name="a">The left operand</param>
     /// <param name="b">The right operand</param>
@@ -45,7 +43,7 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate T BinaryOp<W,T>(T a, T b)
-        where W : struct, ITypeWidthKind<W>;
+        where W : struct, ITypeWidth<W>;
 
     /// <summary>
     /// Defines the canonical shape of a tenary operator
@@ -58,7 +56,7 @@ namespace Z0
     public delegate T TernaryOp<T>(T a, T b, T c);
 
     /// <summary>
-    /// Defines the shape of a ternary operator that accepts operands of known width
+    /// Characterizes a ternary operator with known operand width
     /// </summary>
     /// <param name="a">The first operand</param>
     /// <param name="b">The second operand</param>
@@ -67,7 +65,7 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate T TernaryOp<W,T>(T a, T b, T c)
-        where W : struct, ITypeWidthKind<W>;
+        where W : struct, ITypeWidth<W>;
 
     /// <summary>
     /// Characterizes a unary operator
@@ -80,19 +78,19 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary operator with a known operand width
+    /// Characterizes a structural unary operator with a known operand width
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryOp<W,A> : IUnaryOp<A>, IUnaryFunc<W,A,A>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a binary operator
+    /// Characterizes a structural binary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -102,19 +100,19 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a binary operator with a known operand width
+    /// Characterizes a structural binary operator with a known operand width
     /// </summary>
     /// <typeparam name="W">The width kind</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IBinaryOp<W,A> : IBinaryOp<A>, IBinaryFunc<W,A,A,A>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a ternary operator
+    /// Characterizes a structural ternary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -124,19 +122,20 @@ namespace Z0
     } 
 
     /// <summary>
-    /// Characterizes a ternary operator with a known operand width
+    /// Characterizes a structural ternary operator with a known operand width
     /// </summary>
     /// <typeparam name="W">The width kind</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface ITernaryOp<W,A> : ITernaryOp<A>, ITernaryFunc<W,A,A,A,A>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a function that accepts a source span and a target span over a common element type
+    /// Characterizes a structural function that accepts sourc span and 
+    /// target spans defined over cells of common type
     /// </summary>
     /// <typeparam name="W">The cell width</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
@@ -153,7 +152,7 @@ namespace Z0
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IUnarySpanOp<W,T> : ISpanOp<W>        
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
         Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst);
     }
@@ -169,19 +168,21 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a binary span operator that accepts spans with cells of known width
+    /// Characterizes a structural binary span operator that accepts 
+    /// spans with cells of known width
     /// </summary>
     /// <typeparam name="W">The cell width</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IBinarySpanOp<W,T> : ISpanOp<W>        
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
         Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst);
     }
 
     /// <summary>
-    /// Characterizes a function that accepts two source spans and a target span over a common element type
+    /// Characterizes a structural function that accepts two source spans and a 
+    /// target span defined over cells of common type
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -191,13 +192,13 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a binary span operator that accepts spans with cells of known width
+    /// Characterizes a structural ternary span operator that accepts spans with cells of known width
     /// </summary>
     /// <typeparam name="W">The cell width</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface ITernarySpanOp<W,T> : ISpanOp<W>        
-         where W : struct, ITypeWidthKind<W>
+         where W : struct, ITypeWidth<W>
    {
         Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst);
     }

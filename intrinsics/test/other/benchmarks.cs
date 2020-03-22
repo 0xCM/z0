@@ -186,7 +186,7 @@ namespace Z0
         }
 
         void vbinop_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)
-            where F : IVBinOp128<T>
+            where F : IVBinaryOp128<T>
             where T : unmanaged
         {
             var last = vzero(w,t);
@@ -210,7 +210,7 @@ namespace Z0
         }
 
         void vbinop_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
-            where F : IVBinOp256<T>
+            where F : IVBinaryOp256<T>
             where T : unmanaged
         {
             var last = vzero(w,t);

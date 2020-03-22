@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
 
     public enum OpUriScheme
     {
@@ -48,6 +45,5 @@ namespace Z0
     {
        public static string Format(this OpUriScheme src)
             => src.ToString().ToLower();
-
     }
 }

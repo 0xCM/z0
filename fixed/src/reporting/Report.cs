@@ -42,7 +42,6 @@ namespace Z0
         public Option<FilePath> Save(FilePath dst) => Records.Save(dst);   
 
         public virtual string ReportName  => GetType().DisplayName();
-
     }
     
     public class Report<F,R> : Report<R>

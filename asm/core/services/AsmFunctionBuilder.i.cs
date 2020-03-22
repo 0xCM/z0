@@ -15,6 +15,6 @@ namespace Z0
         /// </summary>
         /// <param name="op">The source operation</param>
         /// <param name="src">The instructions that comprise the function</param>
-        AsmFunction BuildFunction(MemberDescriptor op, AsmInstructionBlock src);   
+        AsmFunction BuildFunction(ApiMemberInfo op, AsmInstructionBlock src);   
     }
 }

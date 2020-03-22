@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
     using System.Text;
 
@@ -15,13 +13,11 @@ namespace Z0
     public readonly struct RecordFormatter<F,R> : IFormattable<RecordFormatter<F,R>>
         where F : unmanaged, Enum
         where R : IRecord<F, R>
-    {
-        
+    {        
         readonly StringBuilder Builder;
 
         readonly ReportInfo Report;
         
-
         [MethodImpl(Inline)]
         static int width(F f)
             => Reports.width(f);

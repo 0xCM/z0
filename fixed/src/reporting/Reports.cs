@@ -10,14 +10,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
-    using System.IO;
 
     using static Root;
 
     public static class Reports
     {
         public static ReportInfo describe(Type record)
-            => Descriptions.GetOrAdd(record,CreateReportDescription);
+            => Descriptions.GetOrAdd(record, DescribeReport);
 
         [MethodImpl(Inline)]
         public static ReportInfo describe<R>()
@@ -70,23 +69,27 @@ namespace Z0
         /// <param name="header">Whether to emit a header row</param>
         /// <param name="overwrite">Whether to overwrite or altnernalely append to an existing file</param>
         /// <typeparam name="R">The source record type</typeparam>
-        public static Option<FilePath> save<R>(R[] records, FilePath dst, char delimiter = AsciSym.Pipe, bool header = true, bool overwrite = true)
-            where R : IRecord
+        public static Option<FilePath> save<R>(R[] records, FilePath dst, char delimiter = AsciSym.Pipe, 
+            bool header = true, FileWriteMode mode = FileWriteMode.Overwrite)
+                where R : IRecord
         {            
             if(records == null)
             {
                 term.error($"The source record array is null!");
                 return none<FilePath>();
             }
-            
+                    
             try
             {
                 if(records.Length == 0)
-                    return FilePath.Empty;
-                            
+                    return FilePath.Empty;                
+
                 dst.FolderPath.CreateIfMissing();                            
-                var emitHeader = header && (overwrite || !dst.Exists());
-                using var writer = new StreamWriter(dst.Name, !overwrite);            
+
+                var overwrite = mode == FileWriteMode.Overwrite;
+                var emitHeader = header && (overwrite || !dst.Exists());                
+                
+                using var writer = dst.Writer(mode);
 
                 if(emitHeader)
                     writer.WriteLine(string.Join(delimiter, records[0].HeaderNames));            
@@ -107,7 +110,7 @@ namespace Z0
             return ReportFieldInfo.Define(attrib.Name.IfBlank(src.Name), attrib.Index ?? 0, attrib.Width ?? 0);            
         }
 
-        static string[] DefineHeaderNames(ReportFieldInfo[] fields)
+        static string[] GetHeaderNames(ReportFieldInfo[] fields)
         {
             var count = fields.Length;
             var headers = new string[count];
@@ -125,7 +128,7 @@ namespace Z0
             return headers;
         }
 
-        static ReportInfo CreateReportDescription(Type record)
+        static ReportInfo DescribeReport(Type record)
         {
             var props = from p in record.DeclaredProperties().Instance()
                         where p.Tagged<ReportFieldAttribute>()
@@ -135,7 +138,7 @@ namespace Z0
                         select DescribeField(f);
             
             var members = props.Union(fields).OrderBy(x => x.Index).ToArray();
-            return ReportInfo.Define(members, DefineHeaderNames(members));
+            return ReportInfo.Define(members, GetHeaderNames(members));
         }
 
         static ConcurrentDictionary<Type,ReportInfo> Descriptions {get;}

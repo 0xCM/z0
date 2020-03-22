@@ -14,11 +14,11 @@ namespace Z0
     /// </summary>
     public readonly struct TypeIndicator : IFormattable<TypeIndicator>
     {
+        public static TypeIndicator Empty = Define(null);
+
         public readonly char Indication;
 
         public readonly bool IsEmpty;
-
-        public static TypeIndicator Empty = Define(null);
                 
         [MethodImpl(Inline)]
         public static TypeIndicator Define(char? c)

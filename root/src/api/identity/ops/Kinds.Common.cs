@@ -74,7 +74,7 @@ namespace Z0
             : base(false) 
         {
 
-            KindId = (OpKindId)id;
+            KindId = (OpKindId)(ulong)Convert.ChangeType(id,typeof(ulong));
         }
 
         public OpKindId KindId {get;}

@@ -41,7 +41,7 @@ namespace Z0
 
     {
         void CheckScalarMatch<F>(F f)
-            where F : IVBinOp128D<T>;
+            where F : IVBinaryOp128D<T>;
     }
     
     public interface IVBinaryOpComparer256D<T> : IFuncComparer
@@ -49,7 +49,7 @@ namespace Z0
 
     {
         void CheckScalarMatch<F>(F f)
-            where F : IVBinOp256D<T>;
+            where F : IVBinaryOp256D<T>;
     }
 
     public interface IVTernaryOpComparer128D<T> : IFuncComparer

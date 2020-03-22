@@ -9,7 +9,15 @@ namespace Z0
 
     public static class TestIdentity
     {
-        const char Sep = OpUri.PartSep;
+        const char Sep = UriDelimiters.FS;
+
+        /// <summary>
+        /// Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly
+        /// and host is the name of the type
+        /// </summary>
+        /// <param name="host">The source type</param>
+        public static string hosturi(Type host)
+            =>  $"{TypeIdentity.owner(host)}{Sep}{host.Name}";
 
         /// <summary>
         /// Produces the name of the test case for the specified function
@@ -17,14 +25,6 @@ namespace Z0
         /// <param name="f">The function</param>
         public static string testcase(Type host, IFunc f)
             => $"{TypeIdentity.owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
-
-        /// <summary>
-        /// Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly
-        /// and host is the name of the type
-        /// </summary>
-        /// <param name="host">The source type</param>
-        public static string testhosturi(Type host)
-            =>  $"{TypeIdentity.owner(host)}{Sep}{host.Name}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name

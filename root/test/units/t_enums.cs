@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using static Root;
 
     public sealed class t_enums : UnitTest<t_enums>
     {
@@ -74,8 +69,6 @@ namespace Z0
             Claim.eq(NumericClass.Int16u.Width(), 16);
             Claim.eq(NumericClass.Int32i.Width(), 32);
             Claim.eq(NumericClass.All.Width(), null);
-            Claim.yea(NumericClass.Float32.Identifies(NumericClassId.Float32));
-            Claim.nea(NumericClass.Float.Identifies(NumericClassId.Float32));
 
         }
     }

@@ -56,9 +56,9 @@ namespace Z0.Asm.Check
         void Emit()
         {
             var workflow = HostCaptureWorkflow.Create(Context);
-            require(workflow.EventBroker != null);
+            var config = HostCaptureConfig.Define(RootEmissionPath);            
+
             ConnectReceivers(workflow.EventBroker);
-            var config = Z0.Asm.HostCaptureConfig.Define(RootEmissionPath);
             workflow.Runner.Run(config);
         }
 
@@ -124,7 +124,9 @@ namespace Z0.Asm.Check
 
         void ConnectReceivers(IHostCaptureEventBroker broker)
         {
+
             broker.Error.Receive(broker, OnEvent);
+
             if(Settings.HandleExtractReportCreated)
                 broker.ExtractReportCreated.Receive(broker, OnEvent);
 
@@ -142,16 +144,10 @@ namespace Z0.Asm.Check
             
             if(Settings.HandleMembersLocated)
                 broker.MembersLocated.Receive(broker, OnEvent);
+            
+            broker.CaptureCatalogStart.Receive(broker, OnEvent);            
+            broker.CaptureCatalogEnd.Receive(broker, OnEvent);
 
-            Witness(broker.CaptureCatalogEnd.Receive(broker, OnEvent));
-            Witness(broker.CaptureCatalogStart.Receive(broker, OnEvent));            
-        }
-
-        void Witness<E>(in BrokerAcceptance<E> accepted)
-            where E : IAppEvent
-        {
-
-            NotifyConsole(accepted.Message);
         }
         
         void Analyze(in ApiHostUri host, ReadOnlySpan<AsmFunction> functions)

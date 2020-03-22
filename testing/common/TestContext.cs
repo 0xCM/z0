@@ -257,8 +257,8 @@ namespace Z0
         public void Notify(AppMsg msg)
             => Queue.Notify(msg);
 
-        public void NotifyConsole(AppMsg msg)
-            => Queue.NotifyConsole(msg);
+        public void NotifyConsole(AppMsg msg)            
+            => Queue.NotifyConsole(msg, msg.Color);
 
         public void NotifyConsole(object content, AppMsgColor color = AppMsgColor.Green)
             => NotifyConsole(AppMsg.Colorize(content, color));

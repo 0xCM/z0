@@ -18,7 +18,7 @@ namespace Z0
 
         Action<TestCaseOutcome> Relay {get;}
         
-        ConcurrentQueue<ComparisonResult> Outcomes {get;}
+        ConcurrentQueue<FuncCompareResult> Outcomes {get;}
 
         public static IComparisonContext From(ITestContext context)
             => new ComparisonContext(context.HostType, context as IAppMsgSink, context.Random, context.ReportOutcome);
@@ -31,7 +31,7 @@ namespace Z0
             this.HostType = host;
             this.Sink = sink;
             this.Random = random;
-            this.Outcomes = new ConcurrentQueue<ComparisonResult>();
+            this.Outcomes = new ConcurrentQueue<FuncCompareResult>();
             this.Relay = relay ?? BlackHole;
         }
 
@@ -42,7 +42,7 @@ namespace Z0
 
         public void ReportOutcome(string casename, bool succeeded, TimeSpan duration, AppMsg msg = null)    
         {
-            var result = new ComparisonResult(casename, succeeded, duration, msg);
+            var result = new FuncCompareResult(casename, succeeded, duration, msg);
             Outcomes.Enqueue(result);
             Relay(result);
         }

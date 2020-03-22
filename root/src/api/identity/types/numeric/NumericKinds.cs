@@ -16,7 +16,7 @@ namespace Z0
         
     }
 
-    public interface INumericKind<T> : INumericKind, IFixedWidth//, IKind<NumericKind>  
+    public interface INumericKind<T> : INumericKind, IFixedWidth
         where T : unmanaged
     {
         FixedWidth IFixedWidth.FixedWidth => (FixedWidth)bitsize<T>();            

@@ -38,8 +38,8 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVFunc<W1,W2,V1,V2,T1,T2> : IVFunc, IFunc<V1,V2>
-        where W1 : unmanaged, ITypeNat
-        where W2 : unmanaged, ITypeNat
+        where W1 : struct, ITypeWidth<W1>
+        where W2 : struct, ITypeWidth<W2>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged
@@ -63,9 +63,9 @@ namespace Z0
     /// <typeparam name="T3">The component type of the result vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3> : IVFunc, IFunc<V1,V2,V3>
-        where W1 : unmanaged, ITypeNat
-        where W2 : unmanaged, ITypeNat
-        where W3 : unmanaged, ITypeNat
+        where W1 : struct, ITypeWidth<W1>
+        where W2 : struct, ITypeWidth<W2>
+        where W3 : struct, ITypeWidth<W3>
         where V1 : struct
         where V2 : struct
         where V3 : struct
@@ -114,7 +114,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVReducer256<T> : IVFunc<N256,N128,Vector256<T>,Vector128<T>,T,T>
+    public interface IVReducer256<T> : IVFunc<W256,W128,Vector256<T>,Vector128<T>,T,T>
         where T : unmanaged
     {
 

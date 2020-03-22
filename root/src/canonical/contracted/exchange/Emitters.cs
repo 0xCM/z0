@@ -8,8 +8,6 @@ namespace Z0
     using System.Security;
     using System.Collections.Generic;
 
-    using static Root;
-
     /// <summary>
     /// Defines the canonical shape of an emitter
     /// </summary>
@@ -53,7 +51,7 @@ namespace Z0
     /// <param name="count">If specified, the number of elements to produce</param>
     /// <typeparam name="T">The emission type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public delegate IEnumerable<T> StreamEmitter<T>(int? count = null);
+    public delegate IEnumerable<T> StreamEmitter<T>();
 
     /// <summary>
     /// Characterizes a function that produces a stream of values
@@ -61,7 +59,7 @@ namespace Z0
     /// <param name="count">If specified, the number of elements to produce</param>
     /// <typeparam name="T">The emission type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public delegate IEnumerable<T> ValueStreamEmitter<T>(int? count = null)
+    public delegate IEnumerable<T> ValueStreamEmitter<T>()
         where T : struct;    
 
     /// <summary>
@@ -70,14 +68,6 @@ namespace Z0
     /// <typeparam name="T">The emission type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate Span<T> SpanEmitter<T>();
-
-    /// <summary>
-    /// Characterizes a function that produces spans values
-    /// </summary>
-    /// <typeparam name="T">The emission type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Span<T> SpanValueEmitter<T>()
-        where T : unmanaged;
 
     /// <summary>
     /// Chracterizes an operation that produces a value that does not depend on arguments
@@ -89,25 +79,30 @@ namespace Z0
         
     }
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISegmentedEmitter<T> : IEmitter<T>
-        where T : unmanaged
-    {
-        NumericKind CellKind {get;}
-    }
-
     /// <summary>
-    /// Chracterizes an operation that produces a value that does not depend on arguments
-    /// and where the production type T covers a whole number of C-segments
+    /// Chracterizes an emitter with a result type of known width
     /// </summary>
     /// <typeparam name="T">The production type</typeparam>
     /// <typeparam name="C">The cell type over which the production type is segmented</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IEmitter<T,C> : ISegmentedEmitter<T>
+    public interface IEmitter<W,T> : IEmitter<T>
+        where W : unmanaged, ITypeWidth<W>
+
+    {
+        
+    }
+
+    /// <summary>
+    /// Chracterizes an emitter where the production type T covers a whole number of C-segments
+    /// </summary>
+    /// <typeparam name="T">The production type</typeparam>
+    /// <typeparam name="C">The cell type over which the production type is segmented</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISegmentedEmitter<T,C> : IEmitter<T>
         where T : unmanaged
         where C : unmanaged
     {
-        NumericKind ISegmentedEmitter<T>.CellKind => typeof(T).NumericKind();            
+        NumericKind CellKind => typeof(T).NumericKind();            
     }
 
     /// <summary>

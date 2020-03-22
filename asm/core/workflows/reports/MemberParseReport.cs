@@ -133,7 +133,7 @@ namespace Z0.Asm
             {
                 var src = this;
                 var count = src.Length;
-                var op = MemberDescriptor.Define(src.Uri, src.OpSig);
+                var op = ApiMemberInfo.Define(src.Uri, src.OpSig);
                 var range = MemoryRange.Define(src.Address, src.Address + (MemoryAddress)count);
                 var final = ExtractionState.Define(op.Id, count, range.End, src.Data.LastByte);
                 var outcome = ExtractionOutcome.Define(final, range, src.TermCode);

@@ -8,13 +8,11 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Linq;
 
     using static Root;
     using static VectorSurrogates;
-    using static Nats;
     using S = Surrogates;
 
     public static class VectorSurrogateOps

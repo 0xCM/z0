@@ -26,7 +26,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp<W,V> : IVUnaryOp<V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
     {
 
@@ -40,7 +40,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp<W,V,T> : IVUnaryOp<W,V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
         where T : unmanaged
     {
@@ -85,7 +85,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp128<T> : IVUnaryOp<N128,Vector128<T>,T>
+    public interface IVUnaryOp128<T> : IVUnaryOp<W128,Vector128<T>,T>
         where T : unmanaged
     {
 
@@ -96,7 +96,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp256<T> : IVUnaryOp<N256,Vector256<T>,T>
+    public interface IVUnaryOp256<T> : IVUnaryOp<W256,Vector256<T>,T>
         where T : unmanaged
     {
                 
@@ -131,6 +131,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOpImm8<W,V,T> : IImm8UnaryOp<V>
+        where W : struct, ITypeWidth<W>
     {
     }
 
@@ -142,6 +143,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOpImm8x2<W,V,T> : IImm8x2UnaryOp<V>
+        where W : struct, ITypeWidth<W>
     {
 
     }
@@ -151,7 +153,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp128Imm8<T> : IVUnaryOpImm8<N128,Vector128<T>,T>
+    public interface IVUnaryOp128Imm8<T> : IVUnaryOpImm8<W128,Vector128<T>,T>
         where T : unmanaged
     {
 
@@ -163,7 +165,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp128Imm8x2<T> : IVUnaryOpImm8x2<N128,Vector128<T>,T>
+    public interface IVUnaryOp128Imm8x2<T> : IVUnaryOpImm8x2<W128,Vector128<T>,T>
         where T : unmanaged
     {
                 
@@ -174,7 +176,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp256Imm8<T> : IVUnaryOpImm8<N256,Vector256<T>,T>
+    public interface IVUnaryOp256Imm8<T> : IVUnaryOpImm8<W256,Vector256<T>,T>
         where T : unmanaged
     {
         
@@ -185,7 +187,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp256Imm8x2<T> : IVUnaryOpImm8x2<N256,Vector256<T>,T>
+    public interface IVUnaryOp256Imm8x2<T> : IVUnaryOpImm8x2<W256,Vector256<T>,T>
         where T : unmanaged
     {
         

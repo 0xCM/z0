@@ -10,9 +10,7 @@ namespace Z0.Asm.Check
     using System.Collections.Generic;
     
     using C = Classes;
-    using Reps = ClassReps;
     
-
     using static Root;    
 
     class AsmExecWorkflow : IAsmExecWorkflow

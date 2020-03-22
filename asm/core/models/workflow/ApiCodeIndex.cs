@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static Root;
 
 
-    public readonly struct ApiCodeIndex : IMethodStreamSource<ApiCodeIndex>
+    public readonly struct ApiCodeIndex 
     {
         readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;
 
@@ -87,6 +87,5 @@ namespace Z0.Asm
             => from code in Values
                 where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;
-
     }
 }

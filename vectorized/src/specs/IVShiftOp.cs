@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
     using System.Security;
 
     /// <summary>
@@ -26,7 +25,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVShiftOp<W,V> : IVShiftOp<V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
     {
 
@@ -40,7 +39,7 @@ namespace Z0
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVShiftOp<W,V,T> : IVShiftOp<W,V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
         where T : unmanaged
     {

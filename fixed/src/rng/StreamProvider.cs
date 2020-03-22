@@ -13,9 +13,6 @@ namespace Z0
     using static Root;
     using static Nats;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate IEnumerable<F> FixedStreamEmitter<F>();
-
     public interface IFixedStreamProvider<F> : IStreamProvider<F>
         where F : unmanaged, IFixed
     {
@@ -134,8 +131,6 @@ namespace Z0
 
         F f256() => Fixed(random.Fixed(n256));
 
-        F f512() => Fixed(random.Fixed(n512));
-    
+        F f512() => Fixed(random.Fixed(n512));    
     }
-
 }

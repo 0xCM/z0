@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct LoadSpan128<T> : IVSpanSourced128<T>
+        public readonly struct LoadSpan128<T> : IVSpanLoad128<T>
             where T : unmanaged
         {
             public const string Name = "vloadspan";
@@ -28,7 +28,7 @@ namespace Z0
             public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => vgeneric.vload(n128,x,offset);            
         }
 
-        public readonly struct LoadSpan256<T> : IVSpanSourced256<T>
+        public readonly struct LoadSpan256<T> : IVSpanLoad256<T>
             where T : unmanaged
         {
             public const string Name = "vloadspan";

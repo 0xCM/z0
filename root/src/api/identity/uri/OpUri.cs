@@ -11,14 +11,21 @@ namespace Z0
     using static Root;
     using static IdentityShare;
     
-    public readonly struct OpUri : IUri<OpUri>
-    {
-        public const char PartSep = '/';
-        
+    public readonly struct OpUri : IUri<OpUri>, INullary<OpUri>
+    {   
+        /// <summary>
+        /// Emptiness of nothing
+        /// </summary>
         public static OpUri Empty => new OpUri(OpUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
         
+        /// <summary>
+        /// The uri scheme, constrained to the defining enumeration
+        /// </summary>
         public readonly OpUriScheme Scheme;
         
+        /// <summary>
+        /// The host fragment, of the form {assmblyid}/{hostname}
+        /// </summary>
         public readonly ApiHostUri HostPath;
         
         /// <summary>
@@ -28,8 +35,14 @@ namespace Z0
         /// </summary>
         public readonly string GroupName;
 
+        /// <summary>
+        /// Defines host-relative identity in the form, for example, {opname}_{typewidth}X{segwidth}{u | i | f}
+        /// </summary>
         public readonly OpIdentity OpId;
 
+        /// <summary>
+        /// The full uri in the form {Scheme}://{HostPath}/{OpId}
+        /// </summary>
         public string Identifier {get;}
 
         public bool IsEmpty
@@ -41,6 +54,11 @@ namespace Z0
         {
             get => Scheme != 0 && !HostPath.IsEmpty && text.nonempty(GroupName) && OpId.IsNonEmpty;
         }
+
+        public OpUri GroupUri
+            => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
+
+        OpUri INullary<OpUri>.Zero => Empty;
 
         [MethodImpl(Inline)]
         static IParser<OpUri> Parser()
@@ -111,8 +129,6 @@ namespace Z0
                 : OpUriBuilder.FullUriText(scheme, host.Owner, host.Name, GroupName, opid);
         }
 
-        public OpUri GroupUri
-            => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
 
         public string Format()
             => IdentityShare.format(this);

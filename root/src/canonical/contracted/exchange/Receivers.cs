@@ -8,55 +8,45 @@ namespace Z0
     using System.Collections.Generic;
     using System.Security;
     using System.Runtime.CompilerServices;
+
     using static Root;
 
     /// <summary>
-    /// Characterizes a function that accepts a single input of any sort
+    /// Characterizes a function that accepts an input of parametric type
     /// </summary>
     /// <typeparam name="T">The input type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate void Receiver<T>(in T src);
 
     /// <summary>
-    /// Characterizes a function that accepts a value
-    /// </summary>
-    /// <typeparam name="T">The value type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate T ValueReceiver<T>(in T src)
-        where T : unmanaged;   
-
-    /// <summary>
-    /// Characterizes a function that accepts a stream of values
+    /// Characterizes a receiver that accepts a stream
     /// </summary>
     /// <typeparam name="T">The stream element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate void StreamReceiver<T>(IEnumerable<T> src);
 
+    /// <summary>
+    /// Characterizes a receiver that accepts a span
+    /// </summary>
+    /// <typeparam name="T">The stream element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate void SpanReceiver<T>(Span<T> src);
 
     /// <summary>
-    /// Characterizes a function that accepts a span
+    /// Defines a root interface for types that reify operations that accept an
+    /// input but yield no output
     /// </summary>
-    /// <typeparam name="T">The span cell type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate void SpanValueReceiver<T>(Span<T> src)
-        where T : unmanaged;
-
-    /// <summary>
-    /// Characterizes a function that accepts a readonly span
-    /// </summary>
-    /// <typeparam name="T">The span cell type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate void ReadOnlySpanValueReceiver<T>(ReadOnlySpan<T> src)
-        where T : unmanaged;
-
     [SuppressUnmanagedCodeSecurity]
     public interface IReceiver : ISink
     {
         
     }
 
+    /// <summary>
+    /// Characterizes a structural operation that reifies a receiver, referred 
+    /// to as a structural receiver or sink
+    /// </summary>
+    /// <typeparam name="T">The input type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IReceiver<T> : IReceiver, ISink<T>
     {
@@ -67,19 +57,26 @@ namespace Z0
         }
     }
 
+    /// <summary>
+    /// Characterizes a structural receiver that accepts a stream
+    /// </summary>
+    /// <typeparam name="T">The stream element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IStreamReceiver<T> : IReceiver<IEnumerable<T>>
     {
         
     }
 
+    /// <summary>
+    /// Characterizes a structural receiver that accepts a span
+    /// </summary>
+    /// <typeparam name="T">The apn element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISpanValueReceiver<T> : IReceiver
-        where T : unmanaged
+    public interface ISpanReceiver<T> : IReceiver
     {
         void Accept(Span<T> src);
 
-        SpanValueReceiver<T> Operation
+        SpanReceiver<T> Operation
         {                    
             [MethodImpl(Inline)]
             get => Accept;

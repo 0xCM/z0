@@ -214,12 +214,12 @@ namespace Z0
 
         protected void CheckBinaryScalarMatch<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
-            where F : IVBinOp128D<T>
+            where F : IVBinaryOp128D<T>
                 => this.VBinaryOpComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckBinaryScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
-            where F : IVBinOp256D<T>
+            where F : IVBinaryOp256D<T>
                 => this.VBinaryOpComparer(w,t).CheckScalarMatch(f);
 
         protected void CheckTernaryScalarMatch<F,T>(F f, N128 w, T t = default)
@@ -234,7 +234,7 @@ namespace Z0
 
         protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src, SystemCounter count = default)
             where T : unmanaged
-            where F : IVBinOp128D<T>
+            where F : IVBinaryOp128D<T>
         {
             var cells = vcount<T>(n128);
             var succeeded = true;
@@ -264,7 +264,7 @@ namespace Z0
 
         protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src, SystemCounter count = default)
             where T : unmanaged
-            where F : IVBinOp256D<T>
+            where F : IVBinaryOp256D<T>
         {
             var cells = vcount<T>(n256);
             var succeeded = true;
@@ -294,7 +294,7 @@ namespace Z0
 
         protected void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null, SystemCounter count = default) 
             where T : unmanaged
-            where F : IVBinOp128<T>
+            where F : IVBinaryOp128<T>
         {
             var casename = name ?? CaseName(f);
             var w = n128;
@@ -328,7 +328,7 @@ namespace Z0
 
         protected void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null, SystemCounter count = default) 
             where T : unmanaged
-            where F : IVBinOp256<T>
+            where F : IVBinaryOp256<T>
         {
             var casename = name ?? CaseName(f);
             var w = n256;

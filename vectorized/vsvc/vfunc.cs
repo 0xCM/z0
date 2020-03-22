@@ -46,33 +46,33 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vcompose<F,G,T>(Vector128<T> x, Vector128<T> y, F f, G g)
             where T : unmanaged
-            where F : IVBinOp128<T>
+            where F : IVBinaryOp128<T>
             where G : IVUnaryOp128<T>
                 => Pipes.compose(x,y,f,g);
 
         [MethodImpl(Inline)]
         public static Vector256<T> vpipe<F,G,T>(Vector256<T> x, Vector256<T> y, F f, G g)
             where T : unmanaged
-            where F : IVBinOp256<T>
+            where F : IVBinaryOp256<T>
             where G : IVUnaryOp256<T>
                 => Pipes.compose(x,y,f,g);
 
         [MethodImpl(Inline)]
         public static Vector128<T> vapply<F,T>(Vector128<T> x, Vector128<T> y, F f)
             where T : unmanaged
-            where F : IVBinOp128<T>
+            where F : IVBinaryOp128<T>
                 => Pipes.apply(x,y,f);
         
         [MethodImpl(Inline)]
         public static Vector256<T> vapply<F,T>(Vector256<T> x, Vector256<T> y, F f)
             where T : unmanaged
-            where F : IVBinOp256<T>
+            where F : IVBinaryOp256<T>
                 => Pipes.apply(x,y,f);
 
         [MethodImpl(Inline)]
         public static ref readonly Block128<T> vzip<F,T>(in Block128<T> lhs, in Block128<T> rhs, in Block128<T> dst, F f)
             where T : unmanaged
-            where F : IVBinOp128<T>
+            where F : IVBinaryOp128<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block256<T> vzip<F,T>(in Block256<T> lhs, in Block256<T> rhs, in Block256<T> dst, F f)
             where T : unmanaged
-            where F : IVBinOp256<T>
+            where F : IVBinaryOp256<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)

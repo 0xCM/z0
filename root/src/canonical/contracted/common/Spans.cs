@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Security;
     
     [SuppressUnmanagedCodeSecurity]
@@ -25,7 +24,7 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public interface ISpanOp<W> : ISpanOp, IWFunc<W>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
@@ -47,17 +46,6 @@ namespace Z0
     public interface IVarShiftSpanOp<T> : IShiftSpanOp
     {
         Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst);
-    }
-
-    /// <summary>
-    /// Characterizes a function that accepts a source span and produces a target
-    /// </summary>
-    /// <typeparam name="A">The source span cell type</typeparam>
-    /// <typeparam name="B">The target type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISpanSourced<A,B> : IFunc
-    {
-        B Invoke(ReadOnlySpan<A> src, int offset);
     }
 
     /// <summary>

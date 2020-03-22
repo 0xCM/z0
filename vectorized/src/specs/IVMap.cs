@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
 
@@ -34,8 +32,8 @@ namespace Z0
     /// <typeparam name="T2">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVMap<W1,W2,V1,V2,T1,T2> : IVMap<V1,V2>
-        where W1 : unmanaged, ITypeNat
-        where W2 : unmanaged, ITypeNat
+        where W1 : struct, ITypeWidth<W1>
+        where W2 : struct, ITypeWidth<W2>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged
@@ -50,7 +48,7 @@ namespace Z0
     /// <typeparam name="S">The source component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMap128<S,T> : IVMap<N128,N128,Vector128<S>,Vector128<T>,S,T>
+    public interface IVMap128<S,T> : IVMap<W128,W128,Vector128<S>,Vector128<T>,S,T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -76,7 +74,7 @@ namespace Z0
     /// <typeparam name="S">The source component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMap256<S,T> : IVMap<N256,N256,Vector256<S>,Vector256<T>,S,T>
+    public interface IVMap256<S,T> : IVMap<W256,W256,Vector256<S>,Vector256<T>,S,T>
         where S : unmanaged
         where T : unmanaged
     {

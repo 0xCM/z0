@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
         public static bit unsigned(VectorKind k)
-            => (k & VectorKind.vUnsigned) != 0;
+            => (k & VectorKind.Unsigned) != 0;
 
         /// <summary>
         /// Determines whether a classfied vector is defined over primal signed integer components
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
         public static bit signed(VectorKind k)
-            => (k & VectorKind.vSigned) != 0;
+            => (k & VectorKind.Signed) != 0;
 
         /// <summary>
         /// Determines whether a classfied vector is defined over floating-point components
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
         public static bit floating(VectorKind k)
-            => (k & VectorKind.vFloat) != 0;
+            => (k & VectorKind.Float) != 0;
 
         /// <summary>
         /// Determines whether a classfied vector is defined over primal integer components

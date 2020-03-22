@@ -6,22 +6,32 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
 
     using static Root;
     using static IdentityShare;
 
-    public readonly struct AssemblyUri : IUri<AssemblyUri>
+    /// <summary>
+    /// Uri for .net clr assembly
+    /// </summary>
+    public readonly struct AssemblyUri : IUri<AssemblyUri>, INullary<AssemblyUri>
     {
         public static AssemblyUri Empty = new AssemblyUri(AssemblyId.None);
         
+        /// <summary>
+        /// The assembly identifier, constrained to the defining enumeration
+        /// </summary>
         public readonly AssemblyId Id;
-
+        
         public string Identifier {get;}
 
-        public FolderName RootFolder
-            => FolderName.Define(Id.Format());
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Id == AssemblyId.None || string.IsNullOrWhiteSpace(Identifier);
+        }
+
+        AssemblyUri INullary<AssemblyUri>.Zero => Empty;
+
         
         [MethodImpl(Inline)]
         static IParser<AssemblyUri> Parser()
@@ -42,6 +52,9 @@ namespace Z0
             this.Identifier = id != 0 ? id.Format() : text.blank;
         }
 
+        ParseResult<AssemblyUri> IParser<AssemblyUri>.Parse(string text)
+            => from id in Enums.parse<AssemblyId>(text) select AssemblyUri.Define(id);
+
         [MethodImpl(Inline)]
         public bool Equals(AssemblyUri src)
             => equals(this, src);
@@ -57,15 +70,6 @@ namespace Z0
             => equals(this, obj);
 
         public override string ToString()
-            => Identifier;
-        
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Id == AssemblyId.None || string.IsNullOrWhiteSpace(Identifier);
-        }
-
-        ParseResult<AssemblyUri> IParser<AssemblyUri>.Parse(string text)
-            => from id in Enums.parse<AssemblyId>(text) select AssemblyUri.Define(id);
+            => Identifier;        
     }
 }

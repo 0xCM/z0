@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
 
@@ -45,7 +43,7 @@ namespace Z0
     /// <typeparam name="Y">The second operand component type</typeparam>
     /// <typeparam name="Z">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp128<X,Y,Z> : IVFunc<N128, N128, N128, Vector128<X>, Vector128<Y>, Vector128<Z>, X, Y,Z>
+    public interface IVMergeOp128<X,Y,Z> : IVFunc<W128, W128, W128, Vector128<X>, Vector128<Y>, Vector128<Z>, X, Y,Z>
         where X : unmanaged
         where Y : unmanaged
         where Z : unmanaged
@@ -60,7 +58,7 @@ namespace Z0
     /// <typeparam name="Y">The second operand component type</typeparam>
     /// <typeparam name="Z">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp256<X,Y,Z> : IVFunc<N256, N256, N256, Vector256<X>, Vector256<Y>, Vector256<Z>, X, Y,Z>
+    public interface IVMergeOp256<X,Y,Z> : IVFunc<W256, W256, W256, Vector256<X>, Vector256<Y>, Vector256<Z>, X, Y,Z>
         where X : unmanaged
         where Y : unmanaged
         where Z : unmanaged
@@ -75,7 +73,7 @@ namespace Z0
     /// <typeparam name="Y">The second operand component type</typeparam>
     /// <typeparam name="Z">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp2x128x256<X,Y,Z> : IVFunc<N128, N128, N256, Vector128<X>, Vector128<Y>, Vector256<Z>, X, Y,Z>
+    public interface IVMergeOp2x128x256<X,Y,Z> : IVFunc<W128, W128, W256, Vector128<X>, Vector128<Y>, Vector256<Z>, X, Y,Z>
         where X : unmanaged
         where Y : unmanaged
         where Z : unmanaged
@@ -89,7 +87,7 @@ namespace Z0
     /// <typeparam name="S">The operand component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp2x128x256<S,T> : IVFunc<N128, N128, N256, Vector128<S>, Vector128<S>, Vector256<T>, S, S, T>
+    public interface IVMergeOp2x128x256<S,T> : IVFunc<W128, W128, W256, Vector128<S>, Vector128<S>, Vector256<T>, S, S, T>
         where S : unmanaged
         where T : unmanaged
     {

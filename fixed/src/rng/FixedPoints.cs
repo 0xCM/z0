@@ -5,13 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Security;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-
-    using static Root;
-    using static Nats;
 
     public static partial class FixedRngOps
     {
@@ -56,6 +51,5 @@ namespace Z0
             var s2 = random.FixedStream<F>().Take(count);
             return s1.Zip(s2).Select(a =>  Tuples.triple(a.First, a.Second)).ToArray();
         }
-
     }
 }

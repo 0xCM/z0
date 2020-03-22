@@ -6,14 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Security;
-    using System.Reflection;
-
 
     using static Root;
-    using static NumericKinds;
 
     partial class FixedNumericOps
     {

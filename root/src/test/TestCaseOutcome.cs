@@ -5,13 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
 
     public class TestCaseOutcome
     {
         public static TestCaseOutcome Define(string name, bool succeeded, TimeSpan duration)
             => new TestCaseOutcome(name, succeeded, duration);
+
 
         public TestCaseOutcome(string name, bool succeeded, TimeSpan duration)
         {

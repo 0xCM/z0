@@ -6,8 +6,13 @@ namespace Z0
 {
     using System;
     using System.Security;
-    using System.Runtime.Intrinsics;
 
+    /// <summary>
+    /// Characterizes a function reified as a (structural) type. 
+    /// </summary>
+    /// <remarks>
+    /// This provides motivation for calling these things structural fuunctions, I suppose
+    /// </remarks>
     [SuppressUnmanagedCodeSecurity]
     public interface IFunc
     {
@@ -22,15 +27,20 @@ namespace Z0
         FunctionClass Class => FunctionClass.None;       
     }
 
+    /// <summary>
+    /// Characterizes a structural function that is width-parametric
+    /// </summary>
+    /// <typeparam name="W">The width type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W> : IFunc
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes an emitter
+    /// Characterizes a structural emitter; that is, the contract charactrizes a type
+    /// that implements an emitter
     /// </summary>
     /// <typeparam name="A">The emission type</typeparam>    
     [SuppressUnmanagedCodeSecurity]
@@ -42,15 +52,19 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Characterizes a structural emitter with emission type of known width
+    /// </summary>
+    /// <typeparam name="W">The width type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W,A> : IFunc<A>, IWFunc<W>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a unary function
+    /// Characterizes a structural unary function
     /// </summary>
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The result type</typeparam>
@@ -64,20 +78,20 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary function with operand and result type of known and common width
+    /// Characterizes a structural unary function with operand and result type of known and common width
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W,A,B> : IFunc<A,B>, IWFunc<W>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a binary function
+    /// Characterizes a structural binary function
     /// </summary>
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The second operand type</typeparam>
@@ -98,7 +112,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a binary function with operands and return type of known and common widths
+    /// Characterizes a structural binary function with operands and return type of known and common widths
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The first operand type</typeparam>
@@ -106,13 +120,13 @@ namespace Z0
     /// <typeparam name="C">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W,A,B,C> : IFunc<A,B,C>, IWFunc<W>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a ternary function
+    /// Characterizes a structural ternary function
     /// </summary>
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The second operand type</typeparam>
@@ -134,7 +148,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a ternary function with operands and return type of known and common widths
+    /// Characterizes a structural ternary function with operands and return type of known and common widths
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The first operand type</typeparam>
@@ -143,13 +157,13 @@ namespace Z0
     /// <typeparam name="D">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W,A,B,C,D> : IFunc<A,B,C,D>, IWFunc<W>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes an emitter
+    /// Characterizes a structural emission function
     /// </summary>
     /// <typeparam name="A">The emission type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -159,19 +173,19 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes an emitter that produces a result of known width
+    /// Characterizes a structural emitter with result type of known width
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The emission type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface INullaryFunc<W,A> : INullaryFunc<A>, IWFunc<W,A>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a unary function
+    /// Characterizes a structural unary function
     /// </summary>
     /// <typeparam name="A">The source operand type</typeparam>
     /// <typeparam name="B">The target type</typeparam>
@@ -182,20 +196,20 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary function with operand and return type of known and common widths
+    /// Characterizes a structural unary function with operand and return type of known and common widths
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The source operand type</typeparam>
     /// <typeparam name="B">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryFunc<W,A,B> : IUnaryFunc<A,B>, IWFunc<W,A,B>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a binary function
+    /// Characterizes a structural binary function
     /// </summary>
     /// <typeparam name="A">The left operand type</typeparam>
     /// <typeparam name="B">The right operand type</typeparam>
@@ -207,7 +221,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a binary function with operands and return type of known and common widths
+    /// Characterizes a structural binary function with operands and return type of known and common widths
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The left operand type</typeparam>
@@ -215,13 +229,13 @@ namespace Z0
     /// <typeparam name="C">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IBinaryFunc<W,A,B,C> : IBinaryFunc<A,B,C>, IWFunc<W,A,B,C>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }
 
     /// <summary>
-    /// Characterizes a ternary function
+    /// Characterizes a structural ternary function
     /// </summary>
     /// <typeparam name="A">The left operand type</typeparam>
     /// <typeparam name="B">The right operand type</typeparam>
@@ -234,7 +248,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a ternary function with operands and return type of known and common widths
+    /// Characterizes a structural ternary function with operands and return type of known and common widths
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The left operand type</typeparam>
@@ -243,7 +257,7 @@ namespace Z0
     /// <typeparam name="D">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface ITernaryFunc<W,A,B,C,D> : ITernaryFunc<A,B,C,D>, IWFunc<W,A,B,C,D>
-        where W : struct, ITypeWidthKind<W>
+        where W : struct, ITypeWidth<W>
     {
 
     }

@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     
     using static Root;
 
     using NK = NumericKind;
-    using NT = NumericKinded;
     using NI = NumericIndicator;
 
     partial class RootNumericOps
@@ -25,9 +25,28 @@ namespace Z0
         /// Returns a kind-identified system type if possible; throws an exception otherwise
         /// </summary>
         /// <param name="k">The identifying kind</param>
-        [MethodImpl(Inline)]
-        public static Option<Type> ToClrType(this NK k)
-            => from nt in NT.From(k) select nt.Subject;
+        public static Option<Type> ToClrType(this NumericKind src)
+        {
+            var t = src switch {
+                NK.U8 => typeof(byte),
+                NK.I8 => typeof(sbyte),
+                NK.U16 => typeof(ushort),
+                NK.I16 => typeof(short),
+                NK.U32 => typeof(uint),
+                NK.I32 => typeof(int),
+                NK.I64 => typeof(long),
+                NK.U64 => typeof(ulong),
+                NK.F32 => typeof(float),
+                NK.F64 => typeof(double),
+                _ => typeof(void)
+            };
+            return t.IsSome() ? some(t) : none<Type>();
+        }
+
+
+        // [MethodImpl(Inline)]
+        // public static Option<Type> ToClrType(this NK k)
+        //     => from nt in NT.From(k) select nt.Subject;
 
         /// <summary>
         /// Determines whether kind has a nonzero value

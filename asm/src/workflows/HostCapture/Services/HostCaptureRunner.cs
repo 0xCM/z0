@@ -61,17 +61,18 @@ namespace Z0.Asm
             public void Run(HostCaptureConfig config)
             {
                 var root = RootEmissionPaths.Define(config.EmissionRoot);
-               Run(root);
+                Run(root);
             }
 
             public void Run(RootEmissionPaths root)
-            {
+            {                
+
                 root.Clear();
                 var catalogs = Context.Compostion.Catalogs;
 
                 foreach(var catalog in catalogs)   
                 {
-                    if(catalog.ApiHostCount != 0)
+                    if(catalog.ApiHostCount != 0)                    
                         CaptureCatalog(catalog, root);
                 }
             }
@@ -81,6 +82,7 @@ namespace Z0.Asm
                 if(src.HasApiHostContent)
                 {
                     var step = Raise(WorkflowStep.Started(src, Correlate()));
+
                     foreach(var host in src.ApiHosts)
                     {
                         CaptureHost(host, dst);

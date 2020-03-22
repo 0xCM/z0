@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static IdentityShare;
 
-    public readonly struct ApiHostUri : IUri<ApiHostUri>
+    public readonly struct ApiHostUri : IUri<ApiHostUri>, INullary<ApiHostUri>
     {
         public static ApiHostUri Empty = new ApiHostUri(AssemblyId.None, string.Empty);
         
@@ -26,6 +26,14 @@ namespace Z0
         public RelativeLocation HostLocation 
             => RelativeLocation.Define(FolderName.Define(Owner.Format()), HostFolder);
         
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Owner.IsNone()  && text.empty(Name);
+        }
+
+        ApiHostUri INullary<ApiHostUri>.Zero => Empty;
+
         [MethodImpl(Inline)]
         static IParser<ApiHostUri> Parser()
             => default(ApiHostUri);
@@ -66,6 +74,15 @@ namespace Z0
             this.Name = name;
             this.Identifier = owner != 0 ? $"{Owner.Format()}/{Name}" : name;
         }
+ 
+        ParseResult<ApiHostUri> IParser<ApiHostUri>.Parse(string text)
+        {
+            var parts = text.Split('/');
+            if(parts.Length == 2 && Enum.TryParse(parts[0], true, out AssemblyId owner))
+                return ParseResult.Success(text,Define(owner, parts[1]));
+            else
+                return ParseResult.Fail<ApiHostUri>(text);
+        }
 
         public string Format()
             => Identifier;
@@ -86,26 +103,5 @@ namespace Z0
 
         public override string ToString()
             => Identifier;        
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Owner.IsNone()  && text.empty(Name);
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !IsEmpty;
-        }
-
-        ParseResult<ApiHostUri> IParser<ApiHostUri>.Parse(string text)
-        {
-            var parts = text.Split('/');
-            if(parts.Length == 2 && Enum.TryParse(parts[0], true, out AssemblyId owner))
-                return ParseResult.Success(text,Define(owner, parts[1]));
-            else
-                return ParseResult.Fail<ApiHostUri>(text);
-        }
     }
 }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -15,7 +14,6 @@ namespace Z0
         string[] HeaderNames {get;}
 
         string ReportName {get;}
-
     }
     
     public readonly struct ReportCreated<T> : IAppEvent<ReportCreated<T>,T>
@@ -56,6 +54,7 @@ namespace Z0
         Option<FilePath> Save(FilePath dst)
             => Records.Save(dst);         
     }
+
 
     public interface IReport<F,R> : IReport<R>
         where R : IRecord<F,R>

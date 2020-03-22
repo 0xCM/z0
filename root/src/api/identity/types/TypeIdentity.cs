@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static IdentityShare;
 
-    public readonly struct TypeIdentity : ITypeIdentity<TypeIdentity>
+    public readonly struct TypeIdentity : IIdentifiedType<TypeIdentity>
     {
         public string Identifier {get;}
 
@@ -21,12 +21,22 @@ namespace Z0
         /// </summary>
         /// <param name="width">The scalar bit-width</param>
         [MethodImpl(Inline)]
-        public static NumericIdentity Scalar(NumericKind kind)
-            => NumericIdentity.Define(kind);
+        public static NumericIdentity numeric(NumericKind nk)
+            => NumericIdentity.Define(nk);
+
+        /// <summary>
+        /// Defines a segmented type identity predicated on type width numeric kind specifications
+        /// </summary>
+        /// <param name="name">The type name</param>
+        /// <param name="wk">The width kind</param>
+        /// <param name="nk">The numeric kind</param>
+        [MethodImpl(Inline)]
+        public static TypeIdentity segmented(string name, TypeWidthKind wk, NumericKind nk)
+            => Define($"{name}{wk.Format()}x{nk.Format()}");
 
         [MethodImpl(Inline)]
-        public static TypeIdentity Define(string identifier)
-            => new TypeIdentity(identifier);
+        public static TypeIdentity Define(string id)
+            => new TypeIdentity(id);
 
         public static TypeIdentity IdentifyNumericClosure(string root, Type arg)
         {

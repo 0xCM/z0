@@ -17,7 +17,7 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFunc<W,V,T,K> : IVFunc, IFunc<V,K>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
         where T : unmanaged
         where K : unmanaged
@@ -34,7 +34,7 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFuncImm8<W,V,T,K> : IVFunc, IFunc<V,byte,K>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
         where T : unmanaged
         where K : unmanaged
@@ -54,8 +54,8 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFunc<W1,W2,V1,V2,T1,T2,K> : IVFunc, IFunc<V1,V2,K>
-        where W1 : unmanaged, ITypeNat
-        where W2 : unmanaged, ITypeNat
+        where W1 : struct, ITypeWidth<W1>
+        where W2 : struct, ITypeWidth<W2>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged
@@ -77,8 +77,8 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFuncImm8<W1,W2,V1,V2,T1,T2,K> : IVFunc, IFunc<V1,V2,byte,K>
-        where W1 : unmanaged, ITypeNat
-        where W2 : unmanaged, ITypeNat
+        where W1 : struct, ITypeWidth<W1>
+        where W2 : struct, ITypeWidth<W2>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged
@@ -103,8 +103,9 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3,K> : IVFunc, IFunc<V1,V2,V3,K>
-        where W1 : unmanaged, ITypeNat
-        where W2 : unmanaged, ITypeNat
+        where W1 : struct, ITypeWidth<W1>
+        where W2 : struct, ITypeWidth<W2>
+        where W3 : struct, ITypeWidth<W3>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged
@@ -120,7 +121,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalar128<T,K> : IVScalarFunc<N128,Vector128<T>,T,K>
+    public interface IVUnaryScalar128<T,K> : IVScalarFunc<W128,Vector128<T>,T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -133,7 +134,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalar128Imm8<T,K> : IVScalarFuncImm8<N128,Vector128<T>,T,K>
+    public interface IVUnaryScalar128Imm8<T,K> : IVScalarFuncImm8<W128,Vector128<T>,T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -184,7 +185,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalar128D<T,K> : IVScalarFunc<N128,Vector128<T>,T,K>, IVUnaryScalarFuncD<T,K>
+    public interface IVUnaryScalar128D<T,K> : IVScalarFunc<W128,Vector128<T>,T,K>, IVUnaryScalarFuncD<T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -198,7 +199,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalar128Imm8D<T,K> : IVScalarFuncImm8<N128,Vector128<T>,T,K>, IVUnaryScalarFuncD<T,K>
+    public interface IVUnaryScalar128Imm8D<T,K> : IVScalarFuncImm8<W128,Vector128<T>,T,K>, IVUnaryScalarFuncD<T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -211,7 +212,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryScalar128<T,K> : IVScalarFunc<N128, N128, Vector128<T>,Vector128<T>,T,T,K>
+    public interface IVBinaryScalar128<T,K> : IVScalarFunc<W128, W128, Vector128<T>,Vector128<T>,T,T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -225,7 +226,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryScalar128D<T,K> : IVScalarFunc<N128, N128, Vector128<T>,Vector128<T>,T,T,K>, IVBinaryScalarFuncD<T,K>
+    public interface IVBinaryScalar128D<T,K> : IVScalarFunc<W128, W128, Vector128<T>,Vector128<T>,T,T,K>, IVBinaryScalarFuncD<T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -238,7 +239,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryScalar128<T,K> : IVScalarFunc<N128, N128, N128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>
+    public interface IVTernaryScalar128<T,K> : IVScalarFunc<W128, W128, W128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>
         where K : unmanaged
         where T : unmanaged
     {
@@ -252,7 +253,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryScalar128D<T,K> : IVScalarFunc<N128, N128, N128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>, IVTernaryScalarFuncD<T,K>
+    public interface IVTernaryScalar128D<T,K> : IVScalarFunc<W128, W128, W128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>, IVTernaryScalarFuncD<T,K>
         where K : unmanaged
         where T : unmanaged
     {
@@ -265,7 +266,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalar256<T,K> : IVScalarFunc<N256,Vector256<T>,T,K>
+    public interface IVUnaryScalar256<T,K> : IVScalarFunc<W256,Vector256<T>,T,K>
         where K : unmanaged
         where T : unmanaged
     {
@@ -278,7 +279,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalar256Imm8<T,K> : IVScalarFuncImm8<N256,Vector256<T>,T,K>
+    public interface IVUnaryScalar256Imm8<T,K> : IVScalarFuncImm8<W256,Vector256<T>,T,K>
         where K : unmanaged
         where T : unmanaged
     {
@@ -292,7 +293,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalar256D<T,K> : IVScalarFunc<N256,Vector256<T>,T,K>, IVUnaryScalarFuncD<T,K>
+    public interface IVUnaryScalar256D<T,K> : IVScalarFunc<W256,Vector256<T>,T,K>, IVUnaryScalarFuncD<T,K>
         where K : unmanaged
         where T : unmanaged
     {
@@ -306,7 +307,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalar256Imm8D<T,K> : IVScalarFuncImm8<N256,Vector256<T>,T,K>, IVUnaryScalarFuncD<T,K>
+    public interface IVUnaryScalar256Imm8D<T,K> : IVScalarFuncImm8<W256,Vector256<T>,T,K>, IVUnaryScalarFuncD<T,K>
         where K : unmanaged
         where T : unmanaged
     {
@@ -319,7 +320,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryScalar256<T,K> : IVScalarFunc<N256, N256, Vector256<T>,Vector256<T>, T,T,K>
+    public interface IVBinaryScalar256<T,K> : IVScalarFunc<W256, W256, Vector256<T>,Vector256<T>, T,T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -333,7 +334,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryScalar256D<T,K> : IVScalarFunc<N256, N256, Vector256<T>,Vector256<T>, T,T,K>, IVBinaryScalarFuncD<T,K>
+    public interface IVBinaryScalar256D<T,K> : IVScalarFunc<W256, W256, Vector256<T>,Vector256<T>, T,T,K>, IVBinaryScalarFuncD<T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -346,7 +347,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryScalar256<T,K> : IVScalarFunc<N256, N256, N256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>
+    public interface IVTernaryScalar256<T,K> : IVScalarFunc<W256, W256, W256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>
         where T : unmanaged
         where K : unmanaged
     {
@@ -360,7 +361,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryScalar256D<T,K> : IVScalarFunc<N256, N256, N256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>, IVTernaryScalarFuncD<T,K>
+    public interface IVTernaryScalar256D<T,K> : IVScalarFunc<W256, W256, W256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>, IVTernaryScalarFuncD<T,K>
         where T : unmanaged
         where K : unmanaged
     {

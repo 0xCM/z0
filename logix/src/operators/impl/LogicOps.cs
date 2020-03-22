@@ -586,7 +586,7 @@ namespace Z0.Logix
         public static bit f5e(bit a, bit b, bit c)
             => or(and(not(c),b),(xor(a,c)));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit f5f(bit a, bit b, bit c)
             => nand(c,a);
 

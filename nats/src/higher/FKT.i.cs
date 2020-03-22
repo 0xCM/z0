@@ -41,7 +41,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a higher-kinded function representation
     /// </summary>
-    public interface IFuncType : IEnumeratedKind<FunctionClass>
+    public interface IFuncType : ILiteralKind<FunctionClass>
     {
 
     }

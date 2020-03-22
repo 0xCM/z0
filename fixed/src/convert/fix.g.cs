@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Security;
-    using System.Reflection;
 
     using static Root;
     using static NumericKinds;
@@ -39,7 +37,7 @@ namespace Z0
                 => (T a, T b) => unfix<F,T>(f(fix<T,F>(a), fix<T,F>(b)));
 
         /// <summary>
-        /// Creates a fixed 16-bit binary operator from caller-supplied delegate
+        /// Creates a fixed 8-bit binary operator from caller-supplied delegate
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
@@ -108,7 +106,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BinaryOp64 fix<T>(Func<T,T,T> f, U64 dst)
             where T : unmanaged
-                => (Fixed64 a, Fixed64 b) => Fixed64.From(f(a.As<T>(),b.As<T>()));
-                 
+                => (Fixed64 a, Fixed64 b) => Fixed64.From(f(a.As<T>(),b.As<T>()));                 
    }
 }

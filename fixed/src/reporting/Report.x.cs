@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Text;
-    using System.Linq.Expressions;
 
     public static class ReportingExtensions
     {
@@ -19,9 +18,10 @@ namespace Z0
         /// <param name="header">Whether to emit a header row</param>
         /// <param name="overwrite">Whether to overwrite or altnernalely append to an existing file</param>
         /// <typeparam name="R">The source record type</typeparam>
-        public static Option<FilePath> Save<R>(this R[] records, FilePath dst, char delimiter = AsciSym.Pipe, bool header = true, bool overwrite = true)
-            where R : IRecord
-                => Reports.save(records, dst, delimiter, header,overwrite);
+        public static Option<FilePath> Save<R>(this R[] records, FilePath dst, char delimiter = AsciSym.Pipe, 
+            bool header = true, FileWriteMode mode = FileWriteMode.Overwrite)
+                where R : IRecord
+                    => Reports.save(records, dst, delimiter, header, mode);
 
         public static void AppendField(this StringBuilder sb, object content)
         {

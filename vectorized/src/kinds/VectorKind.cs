@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using W = FixedWidth;
+    using NK = NumericKind;
+
     /// <summary>
     /// Clasifies concrete intrinsic vectors of total width w over components of width t and sign indicator s where:
     /// w = kind[0..15]
@@ -18,233 +21,233 @@ namespace Z0
         None = 0,
 
         /// <summary>
-        /// A vector defined over signed integers
-        /// </summary>        
-        vSigned = NumericKind.Signed,
-
-        /// <summary>
-        /// A vector defined over unsigned integers
-        /// </summary>        
-        vUnsigned = NumericKind.Unsigned,
-
-        /// <summary>
-        /// A vector defined over floating points
-        /// </summary>        
-        vFloat = NumericKind.Float,
-
-        /// <summary>
-        /// A 128-bit vector
-        /// </summary>
-        v128 = FixedWidth.W128,
-
-        /// <summary>
-        /// A 256-bit vector
-        /// </summary>
-        v256 = FixedWidth.W256,
-
-        /// <summary>
-        /// A 512-bit vector
-        /// </summary>
-        v512 = FixedWidth.W512,
-
-        /// <summary>
-        /// A vector defined over 8-bit unsigned segments
-        /// </summary>
-        v8u = PrimitiveId.U8 | vUnsigned,
-
-        /// <summary>
-        /// A vector defined over 8-bit signed segments
-        /// </summary>
-        v8i = PrimitiveId.I8 | vSigned,
-
-        /// <summary>
-        /// A vector defined over 16-bit unsigned segments
-        /// </summary>
-        v16u = PrimitiveId.U16 | vUnsigned,
-
-        /// <summary>
-        /// A vector defined over 16-bit signed segments
-        /// </summary>
-        v16i = PrimitiveId.I16 | vSigned,
-
-        /// <summary>
-        /// A vector defined over 32-bit unsigned segments
-        /// </summary>
-        v32u = PrimitiveId.U32 | vUnsigned,
-
-        /// <summary>
-        /// A vector defined over 32-bit signed segments
-        /// </summary>
-        v32i = PrimitiveId.I32 | vSigned,
-
-        /// <summary>
-        /// A vector defined over 64-bit unsigned segments
-        /// </summary>
-        v64u = PrimitiveId.U64 | vUnsigned,
-
-        /// <summary>
-        /// A vector defined over 64-bit signed segments
-        /// </summary>
-        v64i = PrimitiveId.I64 | vSigned,
-
-        /// <summary>
-        /// A vector defined over 32-bit floating-point segments
-        /// </summary>
-        v32f = PrimitiveId.F32 | vFloat,
-
-        /// <summary>
-        /// A vector defined over 64-bit floating-point segments
-        /// </summary>
-        v64f = PrimitiveId.F64 | vFloat,
-
-        /// <summary>
         /// A 128-bit vector covering 16 8-bit unsigned segments
         /// </summary>
-        v128x8u = v128 | v8u,
+        v128x8u = W128 | U8,
 
         /// <summary>
         /// A 128-bit vector covering 16 8-bit signed segments
         /// </summary>
-        v128x8i = v128 | v8i,
+        v128x8i = W128 | I8,
 
         /// <summary>
         /// A 128-bit vector covering 8 16-bit unsigned segments
         /// </summary>
-        v128x16u = v128 | v16u,
+        v128x16u = W128 | U16,
 
         /// <summary>
         /// A 128-bit vector covering 8 16-bit signed segments
         /// </summary>
-        v128x16i = v128 | v16i,
+        v128x16i = W128 | I16,
 
         /// <summary>
         /// A 128-bit vector covering 4 32-bit unsigned segments
         /// </summary>
-        v128x32u = v128 | v32u,
+        v128x32u = W128 | U32,
 
         /// <summary>
         /// A 128-bit vector covering 4 32-bit signed segments
         /// </summary>
-        v128x32i = v128 | v32i,
+        v128x32i = W128 | I32,
 
         /// <summary>
         /// A 128-bit vector covering 2 64-bit unsigned segments
         /// </summary>
-        v128x64u = v128 | v64u,
+        v128x64u = W128 | U64,
         
         /// <summary>
         /// A 128-bit vector covering 2 64-bit signed segments
         /// </summary>
-        v128x64i = v128 | v64i,
+        v128x64i = W128 | I64,
 
         /// <summary>
         /// A 128-bit vector covering 4 32-bit floating-point segments
         /// </summary>
-        v128x32f = v128 | v32f,
+        v128x32f = W128 | F32,
 
         /// <summary>
         /// A 128-bit vector covering 2 64-bit floating-point segments
         /// </summary>
-        v128x64f = v128 | v64f,
+        v128x64f = W128 | F64,
 
         /// <summary>
         /// A 256-bit vector covering 32 8-bit unsigned segments
         /// </summary>
-        v256x8u = v256 | v8u,
+        v256x8u = W256 | U8,
 
         /// <summary>
         /// A 256-bit vector covering 32 8-bit signed segments
         /// </summary>
-        v256x8i = v256 | v8i,
+        v256x8i = W256 | I8,
 
         /// <summary>
         /// A 256-bit vector covering 16 16-bit unsigned segments
         /// </summary>
-        v256x16u = v256 | v16u,
+        v256x16u = W256 | U16,
 
         /// <summary>
         /// A 256-bit vector covering 16 16-bit signed segments
         /// </summary>
-        v256x16i = v256 | v16i,
+        v256x16i = W256 | I16,
 
         /// <summary>
         /// A 256-bit vector covering 8 32-bit signed segments
         /// </summary>
-        v256x32i = v256 | v32i,
+        v256x32i = W256 | I32,
 
         /// <summary>
         /// A 256-bit vector covering 8 32-bit unsigned segments
         /// </summary>
-        v256x32u = v256 | v32u,
+        v256x32u = W256 | U32,
 
         /// <summary>
         /// A 256-bit vector covering 4 64-bit unsigned segments
         /// </summary>
-        v256x64u = v256 | v64u,
+        v256x64u = W256 | U64,
 
         /// <summary>
         /// A 256-bit vector covering 4 64-bit signed segments
         /// </summary>
-        v256x64i = v256 | v64i,
+        v256x64i = W256 | I64,
 
         /// <summary>
         /// A 256-bit vector covering 8 32-bit floating-point segments
         /// </summary>
-        v256x32f = v256 | v32f,
+        v256x32f = W256 | F32,
 
         /// <summary>
         /// A 256-bit vector covering 4 64-bit floating-point segments
         /// </summary>
-        v256x64f = v256 | v64f,
+        v256x64f = W256 | F64,
 
         /// <summary>
         /// A 512-bit vector covering 32 8-bit unsigned segments
         /// </summary>
-        v512x8u = v512 | v8u,
+        v512x8u = W512 | U8,
 
         /// <summary>
         /// A 512-bit vector covering 32 8-bit signed segments
         /// </summary>
-        v512x8i = v512 | v8i,
+        v512x8i = W512 | I8,
 
         /// <summary>
         /// A 512-bit vector covering 16 16-bit unsigned segments
         /// </summary>
-        v512x16u = v512 | v16u,
+        v512x16u = W512 | U16,
 
         /// <summary>
         /// A 512-bit vector covering 16 16-bit signed segments
         /// </summary>
-        v512x16i = v512 | v16i,
+        v512x16i = W512 | I16,
 
         /// <summary>
         /// A 512-bit vector covering 8 32-bit unsigned segments
         /// </summary>
-        v512x32u = v512 | v32u,
+        v512x32u = W512 | U32,
 
         /// <summary>
         /// A 512-bit vector covering 8 32-bit signed segments
         /// </summary>
-        v512x32i = v512 | v32i,
+        v512x32i = W512 | I32,
 
         /// <summary>
         /// A 512-bit vector covering 4 64-bit unsigned segments
         /// </summary>
-        v512x64u = v512 | v64u,
+        v512x64u = W512 | U64,
 
         /// <summary>
         /// A 512-bit vector covering 4 64-bit signed segments
         /// </summary>
-        v512x64i = v512 | v64i,
+        v512x64i = W512 | I64,
 
         /// <summary>
         /// A 512-bit vector covering 8 32-bit floating-point segments
         /// </summary>
-        v512x32f = v512 | v32f,
+        v512x32f = W512 | F32,
 
         /// <summary>
         /// A 512-bit vector covering 4 64-bit floating-point segments
         /// </summary>
-        v512x64f = v512 | v64f,
+        v512x64f = W512 | F64,
+
+        /// <summary>
+        /// Redeclaration of <see cref="NK.Signed"/>
+        /// </summary>        
+        Signed = NK.Signed,
+
+        /// <summary>
+        /// Redeclaration of <see cref="NK.Unsigned"/>
+        /// </summary>        
+        Unsigned = NK.Unsigned,
+
+        /// <summary>
+        /// Redeclaration of <see cref="NK.Float"/>
+        /// </summary>        
+        Float = NK.Float,
+
+        /// <summary>
+        /// Redeclaration of <see cref="W.W128"/>
+        /// </summary>        
+        W128 = W.W128,
+
+        /// <summary>
+        /// Redeclaration of <see cref="W.W256"/>
+        /// </summary>        
+        W256 = W.W256,
+
+        /// <summary>
+        /// Redeclaration of <see cref="W.W512"/>
+        /// </summary>        
+        W512 = W.W512,
+
+        /// <summary>
+        /// A vector defined over 8-bit unsigned segments
+        /// </summary>
+        U8 = NK.U8 | Unsigned,
+
+        /// <summary>
+        /// A vector defined over 8-bit signed segments
+        /// </summary>
+        I8 = NK.I8 | Signed,
+
+        /// <summary>
+        /// A vector defined over 16-bit unsigned segments
+        /// </summary>
+        U16 = NK.U16 | Unsigned,
+
+        /// <summary>
+        /// A vector defined over 16-bit signed segments
+        /// </summary>
+        I16 = NK.I16 | Signed,
+
+        /// <summary>
+        /// A vector defined over 32-bit unsigned segments
+        /// </summary>
+        U32 = NK.U32 | Unsigned,
+
+        /// <summary>
+        /// A vector defined over 32-bit signed segments
+        /// </summary>
+        I32 = NK.I32 | Signed,
+
+        /// <summary>
+        /// A vector defined over 64-bit unsigned segments
+        /// </summary>
+        U64 = NK.U64 | Unsigned,
+
+        /// <summary>
+        /// A vector defined over 64-bit signed segments
+        /// </summary>
+        I64 = NK.I64 | Signed,
+
+        /// <summary>
+        /// A vector defined over 32-bit floating-point segments
+        /// </summary>
+        F32 = NK.F32 | Float,
+
+        /// <summary>
+        /// A vector defined over 64-bit floating-point segments
+        /// </summary>
+        F64 = NK.F64 | Float,
     }
 }

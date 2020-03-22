@@ -7,24 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static UriDelimiters;
-
-    class UriDelimiters
-    {
-        /// <summary>
-        /// End of scheme
-        /// </summary>
-        public const string EOS = ":";
-
-        public const string FS = "/";
-
-        public const string FS2 = "//";
-
-        public const char Q = '?';
-
-        public const char H = '#';
-    }
 
     public readonly struct OpUriParser : IParser<OpUriParser,OpUri>
     {        

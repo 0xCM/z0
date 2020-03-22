@@ -14,6 +14,10 @@ namespace Z0
     {
         public static PrimalIdentity Empty => new PrimalIdentity(string.Empty);
 
+        public string Identifier {get;}            
+
+        public string Keyword {get;}
+
         [MethodImpl(Inline)]
         public static PrimalIdentity From(Type t)
             => t.IsSystemType() ? 
@@ -52,10 +56,6 @@ namespace Z0
             this.Identifier = keyword;
             this.Keyword = keyword;
         }
-
-        public string Identifier {get;}            
-
-        public string Keyword {get;}           
 
         public bool IsEmpty
         {

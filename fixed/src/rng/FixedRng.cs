@@ -5,13 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Security;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static Root;
-    using static Nats;
 
     public static partial class FixedRngOps
     {
@@ -24,7 +17,5 @@ namespace Z0
                 dst[i] = Scale.contract(src[i],max[i]);
             return dst;
         }
-
    }
-
 }

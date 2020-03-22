@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IBlockedType : IEnumeratedKind<BlockedKind>, ITypeKind
+    public interface IBlockedType : ILiteralKind<BlockedKind>, ITypeKind
     {
 
     }

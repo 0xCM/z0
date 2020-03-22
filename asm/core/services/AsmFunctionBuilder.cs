@@ -26,7 +26,7 @@ namespace Z0.Asm
             this.Context = context;
         }
 
-        public AsmFunction BuildFunction(MemberDescriptor op, AsmInstructionBlock src)
+        public AsmFunction BuildFunction(ApiMemberInfo op, AsmInstructionBlock src)
         {
             var info = new AsmInstructionInfo[src.InstructionCount];
             var offset = (ushort)0;

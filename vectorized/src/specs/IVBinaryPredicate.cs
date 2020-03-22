@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="V">The non-primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVBinaryPred<W,V> : IVFunc, IBinaryPredicate<V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
     {
 
@@ -41,7 +41,7 @@ namespace Z0
     /// <typeparam name="T">The scalar type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVBinaryPred<W,V,T> : IVBinaryPred<W,V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where V : struct
         where T : unmanaged
     {
@@ -53,10 +53,9 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinPred128<T> : IVBinaryPred<N128,Vector128<T>,T>
+    public interface IVBinPred128<T> : IVBinaryPred<W128,Vector128<T>,T>
         where T : unmanaged
     {
-
 
     }
 
@@ -65,7 +64,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinPred256<T> : IVBinaryPred<N256,Vector256<T>,T>
+    public interface IVBinPred256<T> : IVBinaryPred<W256,Vector256<T>,T>
         where T : unmanaged
     {
         

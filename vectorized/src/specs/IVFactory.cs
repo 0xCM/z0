@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
 
@@ -19,11 +17,10 @@ namespace Z0
     /// <typeparam name="T">The target vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVFactory<W,S,V,T> : IVFunc, IFunc<S,V>
-        where W : unmanaged, ITypeNat
+        where W : struct, ITypeWidth<W>
         where T : unmanaged
         where V : struct
     {
-
 
     }
 
@@ -33,7 +30,7 @@ namespace Z0
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactory128<S,T> : IVFactory<N128,S,Vector128<T>,T>
+    public interface IVFactory128<S,T> : IVFactory<W128,S,Vector128<T>,T>
         where T : unmanaged
     {
 
@@ -45,7 +42,7 @@ namespace Z0
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactory256<S,T> : IVFactory<N256,S,Vector256<T>,T>
+    public interface IVFactory256<S,T> : IVFactory<W256,S,Vector256<T>,T>
         where T : unmanaged
     {
 

@@ -86,7 +86,7 @@ namespace Z0
             if(!HasAny(host,filters))
                 return;
 
-            var hosturi = TestIdentity.testhosturi(host);
+            var hosturi = TestIdentity.hosturi(host);
             var results = new List<TestCaseRecord>();
             var unit = default(IUnitTest);
             try

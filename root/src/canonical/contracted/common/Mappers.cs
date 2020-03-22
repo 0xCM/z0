@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Security;
 
     /// <summary>
-    /// Characterizes a transformation
+    /// Characterizes a structural transformation function
     /// </summary>
     /// <typeparam name="A">The source domain type</typeparam>
     /// <typeparam name="B">The target domain type</typeparam>
@@ -20,7 +19,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a function that accepts a source span and produces a target span
+    /// Characterizes a structural transformation function defined over parametric spans
     /// </summary>
     /// <typeparam name="A">The source span cell type</typeparam>
     /// <typeparam name="B">The target span cell type</typeparam>

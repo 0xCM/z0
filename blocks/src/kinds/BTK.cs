@@ -33,14 +33,14 @@ namespace Z0
                 =>  default;
         }        
 
-        public readonly struct BlockedType<W,T> : ITypeWidth<W,T>
+        public readonly struct BlockedType<W,T>
             where T : unmanaged
             where W : unmanaged, ITypeNat
         {
             
             public static FixedWidth Width => (FixedWidth)nateval<W>();
 
-            
+
             [MethodImpl(Inline)]
             public static implicit operator BlockedType(BlockedType<W,T> src)
                 =>  default;
