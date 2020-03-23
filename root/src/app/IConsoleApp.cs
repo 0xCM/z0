@@ -13,13 +13,13 @@ namespace Z0
     }
 
     public interface IConsoleApp<A> : IConsoleApp, IApiComposition<A>
-        where A : IConsoleApp<A>
+        where A : IConsoleApp<A>, new()
     {
         
     }
 
     public interface IConsoleApp<A,C> : IConsoleApp<A>, IContextual<C>
-        where A : IConsoleApp<A,C>
+        where A : IConsoleApp<A,C>, new()
         where C : IAppContext
     {
         

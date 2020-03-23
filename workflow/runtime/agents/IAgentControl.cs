@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines a means by which agents can be queried and directed
     /// </summary>
-    public interface IAgentControl : IServiceAllocation
+    public interface IAgentControl : IDisposable
     {
         AgentStats SummaryStats {get;}        
 

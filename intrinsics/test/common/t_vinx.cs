@@ -27,7 +27,11 @@ namespace Z0
         protected t_vinx()
         {
             Check = new CheckExec(Config);
+            Comparisons = Context.Comparisons();
+            //Comparisons = ComparisonContext.From(this);
         }
+        
+        protected IComparisonService Comparisons {get;}
         
         protected CheckExec Check {get;}
 
@@ -74,56 +78,6 @@ namespace Z0
             CheckAction(exec, CaseName(f));            
         }
 
-        /// <summary>
-        /// Asserts content equality for two 128-bit blocked spans
-        /// </summary>
-        /// <param name="xb">The left span</param>
-        /// <param name="yb">The right span</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void numeq<T>(Block128<T> lhs, Block128<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
-        {
-            for(var i = 0; i< lhs.CellCount; i++)
-                if(!Numeric.eq(lhs[i],rhs[i]))
-                    throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
-        }
-
-        /// <summary>
-        /// Asserts content equality for two 256-bit blocked spans
-        /// </summary>
-        /// <param name="xb">The left block</param>
-        /// <param name="yb">The right block</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void numeq<T>(Block256<T> xb, Block256<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged
-        {
-            for(var i = 0; i< Blocks.length(xb,yb); i++)
-                if(!Numeric.eq(xb[i],yb[i]))
-                    throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
-        }
-
-        /// <summary>
-        /// Asserts content equality for two 256-bit blocked spans
-        /// </summary>
-        /// <param name="xb">The left block</param>
-        /// <param name="yb">The right block</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void numeq<T>(Block512<T> xb, Block512<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged
-        {
-            for(var i = 0; i< Blocks.length(xb,yb); i++)
-                if(!Numeric.eq(xb[i],yb[i]))
-                    throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
-        }
 
         /// <summary>
         /// Verifies the correct function of a vectorized factory operator
@@ -191,173 +145,180 @@ namespace Z0
 
             CheckAction(exec, casename);
         }
-
-        protected void CheckUnaryScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
+    
+        protected void CheckUnaryScalarMatch<F,T>(F f, W128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVUnaryOp128D<T>
-                => this.VUnaryOpComparer(w,t).CheckScalarMatch(f);
+                => Comparisons.CheckUnaryScalarMatch(f,w,t);
 
-        protected void CheckUnaryScalarMatch<F,T>(F f, N256 w, T t = default)
+        protected void CheckUnaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : IVUnaryOp256D<T>
-                => this.VUnaryOpComparer(w,t).CheckScalarMatch(f);
+                => Comparisons.CheckUnaryScalarMatch(f,w,t);
     
-        protected void CheckShiftScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
+        protected void CheckShiftScalarMatch<F,T>(F f, W128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVShiftOp128D<T>
-                => this.VShiftOpComparer(w,t).CheckScalarMatch(f);
+                => Comparisons.CheckShiftScalarMatch(f,w,t);
 
-        protected void CheckShiftScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
+        protected void CheckShiftScalarMatch<F,T>(F f, W256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVShiftOp256D<T>
-                => this.VShiftComparer(w,t).CheckScalarMatch(f);
+                => Comparisons.CheckShiftScalarMatch(f,w,t);
 
-        protected void CheckBinaryScalarMatch<F,T>(F f, N128 w, T t = default)
+        protected void CheckBinaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : IVBinaryOp128D<T>
-                => this.VBinaryOpComparer(w,t).CheckScalarMatch(f);
+                => Comparisons.CheckBinaryScalarMatch(f,w,t);
 
-        protected void CheckBinaryScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
+        protected void CheckBinaryScalarMatch<F,T>(F f, W256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinaryOp256D<T>
-                => this.VBinaryOpComparer(w,t).CheckScalarMatch(f);
+                => Comparisons.CheckBinaryScalarMatch(f,w,t);
 
-        protected void CheckTernaryScalarMatch<F,T>(F f, N128 w, T t = default)
+        protected void CheckTernaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : IVTernaryOp128D<T>
-                => this.VTernaryOpComparer(w,t).CheckScalarMatch(f);
+                => Comparisons.CheckTernaryScalarMatch(f,w,t);
 
-        protected void CheckTernaryScalarMatch<F,T>(F f, N256 w, T t = default)
+        protected void CheckTernaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : IVTernaryOp256D<T>
-                => this.VTernaryOpComparer(w,t).CheckScalarMatch(f);
+                => Comparisons.CheckTernaryScalarMatch(f,w,t);
 
         protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinaryOp128D<T>
-        {
-            var cells = vcount<T>(n128);
-            var succeeded = true;
-            var casename = CaseName(f);
+                =>  Comparisons.CheckScalarMatch(f,src);
+                
+        // {
+        //     var cells = vcount<T>(n128);
+        //     var succeeded = true;
+        //     var casename = CaseName(f);
             
-            count.Start();
-            try
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    (var x, var y) = src(i);
-                    var z = f.Invoke(x,y);
-                    for(var j=0; j< cells; j++)
-                        Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
-                }
-            }
-            catch(Exception e)
-            {
-                term.error(e, casename);
-                succeeded = false;
-            }
-            finally
-            {
-                ReportOutcome(casename,succeeded,count);
-            }
-        }
+        //     count.Start();
+        //     try
+        //     {
+        //         for(var i=0; i < RepCount; i++)
+        //         {
+        //             (var x, var y) = src(i);
+        //             var z = f.Invoke(x,y);
+        //             for(var j=0; j< cells; j++)
+        //                 Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+        //         }
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         term.error(e, casename);
+        //         succeeded = false;
+        //     }
+        //     finally
+        //     {
+        //         ReportOutcome(casename,succeeded,count);
+        //     }
+        // }
 
         protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinaryOp256D<T>
-        {
-            var cells = vcount<T>(n256);
-            var succeeded = true;
-            var casename = CaseName(f);
+                =>  Comparisons.CheckScalarMatch(f,src);
+
+        // {
+        //     var cells = vcount<T>(n256);
+        //     var succeeded = true;
+        //     var casename = CaseName(f);
             
-            count.Start();
-            try
-            {
-                for(var i=0; i < RepCount; i++)
-                {
-                    (var x, var y) = src(i);
-                    var z = f.Invoke(x,y);
-                    for(var j=0; j< cells; j++)
-                        Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
-                }
-            }
-            catch(Exception e)
-            {
-                term.error(e, casename);
-                succeeded = false;
-            }
-            finally
-            {
-                ReportOutcome(casename,succeeded,count);
-            }
-        }       
+        //     count.Start();
+        //     try
+        //     {
+        //         for(var i=0; i < RepCount; i++)
+        //         {
+        //             (var x, var y) = src(i);
+        //             var z = f.Invoke(x,y);
+        //             for(var j=0; j< cells; j++)
+        //                 Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+        //         }
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         term.error(e, casename);
+        //         succeeded = false;
+        //     }
+        //     finally
+        //     {
+        //         ReportOutcome(casename,succeeded,count);
+        //     }
+        // }       
 
         protected void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null, SystemCounter count = default) 
             where T : unmanaged
             where F : IVBinaryOp128<T>
-        {
-            var casename = name ?? CaseName(f);
-            var w = n128;
-            var t = default(T);
-            var cells = vcount(w,t);
-            var succeeded = true;
-            var blocks = left.BlockCount;
+                => Comparisons.CheckExplicit(f,left,right,dst,name);
 
-            count.Start();
-            try
-            {
-                for(var block=0; block<blocks; block++)
-                {
-                    var x = left.LoadVector(block);
-                    var y = right.LoadVector(block);
-                    var actual = f.Invoke(x,y);
-                    var expect = dst.LoadVector(block);
-                    Claim.yea(gvec.vsame(actual,expect));
-                }
-            }
-            catch(Exception e)
-            {
-                term.error(e, casename);
-                succeeded = false;
-            }
-            finally
-            {
-                ReportOutcome(casename, succeeded,count);
-            }
-        }
+        // {
+        //     var casename = name ?? CaseName(f);
+        //     var w = n128;
+        //     var t = default(T);
+        //     var cells = vcount(w,t);
+        //     var succeeded = true;
+        //     var blocks = left.BlockCount;
+
+        //     count.Start();
+        //     try
+        //     {
+        //         for(var block=0; block<blocks; block++)
+        //         {
+        //             var x = left.LoadVector(block);
+        //             var y = right.LoadVector(block);
+        //             var actual = f.Invoke(x,y);
+        //             var expect = dst.LoadVector(block);
+        //             Claim.yea(gvec.vsame(actual,expect));
+        //         }
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         term.error(e, casename);
+        //         succeeded = false;
+        //     }
+        //     finally
+        //     {
+        //         ReportOutcome(casename, succeeded,count);
+        //     }
+        // }
 
         protected void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null, SystemCounter count = default) 
             where T : unmanaged
             where F : IVBinaryOp256<T>
-        {
-            var casename = name ?? CaseName(f);
-            var w = n256;
-            var t = default(T);
-            var cells = vcount(w,t);
-            var succeeded = true;
-            var blocks = left.BlockCount;
+                => Comparisons.CheckExplicit(f,left,right,dst,name);
+        // {
+        //     var casename = name ?? CaseName(f);
+        //     var w = n256;
+        //     var t = default(T);
+        //     var cells = vcount(w,t);
+        //     var succeeded = true;
+        //     var blocks = left.BlockCount;
             
-            count.Start();
-            try
-            {
-                for(var block=0; block<blocks; block++)
-                {
-                    var x = left.LoadVector(block);
-                    var y = right.LoadVector(block);
-                    var actual = f.Invoke(x,y);
-                    var expect = dst.LoadVector(block);
-                    Claim.yea(gvec.vsame(actual,expect));
-                }
-            }
-            catch(Exception e)
-            {
-                term.error(e,casename);
-                succeeded = false;
-            }
-            finally
-            {
-                ReportOutcome(casename,succeeded,count);
-            }
-        }
+        //     count.Start();
+        //     try
+        //     {
+        //         for(var block=0; block<blocks; block++)
+        //         {
+        //             var x = left.LoadVector(block);
+        //             var y = right.LoadVector(block);
+        //             var actual = f.Invoke(x,y);
+        //             var expect = dst.LoadVector(block);
+        //             Claim.yea(gvec.vsame(actual,expect));
+        //         }
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         term.error(e,casename);
+        //         succeeded = false;
+        //     }
+        //     finally
+        //     {
+        //         ReportOutcome(casename,succeeded,count);
+        //     }
+        // }
     }
 }

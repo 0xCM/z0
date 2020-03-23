@@ -21,6 +21,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(N256 src) => 256;
 
+        [MethodImpl(Inline)]
+        public static implicit operator W256(N256 src) => default(W256);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N256(W256 src) => default(N256);
+
         public ulong NatValue => Value;
         
 

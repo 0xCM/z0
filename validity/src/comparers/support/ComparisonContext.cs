@@ -8,6 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections.Concurrent;
 
+
     public class ComparisonContext : IComparisonContext
     {
         public Type HostType {get;}

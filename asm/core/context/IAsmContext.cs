@@ -5,10 +5,11 @@
 namespace Z0
 {        
     using Asm;
+
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IApiContext<IAsmContext>, IContext<AsmContextData>,  IAppMsgQueue, IPolyrandProvider
+    public interface IAsmContext : IApiContext<IAsmContext>, IContext,  IAppMsgQueue, IPolyrandProvider
     {
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
@@ -26,6 +27,11 @@ namespace Z0
         /// </summary>
         /// <param name="config">The new formatting configuration</param>
         IAsmContext WithFormat(AsmFormatConfig config);  
+
+        /// <summary>
+        /// Encapsulates the state of the context
+        /// </summary>
+        AsmContextData State {get;}
 
     }   
 }

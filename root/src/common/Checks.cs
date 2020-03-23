@@ -75,7 +75,6 @@ namespace Z0
         public static int length<S,T>(ReadOnlySpan<S> lhs, ReadOnlySpan<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.Length == rhs.Length ? lhs.Length : throw AppErrors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
-
         /// <summary>
         /// Asserts the equality of two values via whatever equals operator is implemented
         /// </summary>
@@ -325,11 +324,9 @@ namespace Z0
             }
         }
 
-
         public static bool neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => !lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, Equal(lhs, rhs, caller, file, line));
         
-
         /// <summary>
         /// Asserts the operand is true
         /// </summary>

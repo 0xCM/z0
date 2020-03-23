@@ -95,7 +95,7 @@ namespace Z0
         {
             var x = Blocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            numeq(x, Blocks.parts(n128,1,2,3,4,5,6,7,8));
+            BlockChecks.eq(x, Blocks.parts(n128,1,2,3,4,5,6,7,8));
             
         }
 
@@ -116,8 +116,7 @@ namespace Z0
                     dst[block*blocklen + i] = src[block*blocklen + i];                
             }
 
-            numeq(src,dst);
-
+            BlockChecks.eq(src,dst);
         }
 
     }

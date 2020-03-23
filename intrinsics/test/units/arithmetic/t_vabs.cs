@@ -40,7 +40,6 @@ namespace Z0
         void vabs_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckUnaryScalarMatch(VSvcFactories.vabs(w,t),w,t);
-
     }
 
 }

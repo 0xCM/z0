@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a thread of execution control that has whatever context it needs, if any, to do something of use
     /// </summary>
-    public interface IExecutable : IService
+    public interface IExecutable
     {
         /// <summary>
         /// Executes the supported operation
@@ -22,9 +22,9 @@ namespace Z0
     /// Characterizes a thread of execution control that has whatever context it needs, if any, to do something of use
     /// and returns evidence of accomplishment
     /// </summary>
-    public interface IExecutable<R> : IExecutable
+    public interface IExecutable<T> : IExecutable
     {
-        new IEnumerable<R> Execute();
+        new IEnumerable<T> Execute();
 
         void IExecutable.Execute()
             => Execute();

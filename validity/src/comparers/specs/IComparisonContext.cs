@@ -14,6 +14,5 @@ namespace Z0
 
         string CaseName(IFunc f)
             => TestIdentity.testcase(HostType, f);
-
     }
 }

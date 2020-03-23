@@ -35,21 +35,11 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a stateless composed context reification
+    /// Characterizes an api context reification
     /// </summary>
     public interface IApiContext<C> : IApiContext
         where C : IApiContext<C>
     {
  
-    }
-
-    /// <summary>
-    /// Characterizes a stateful composed context reification
-    /// </summary>
-    public interface IApiContext<C,S> : IApiContext, IAppContext<S>
-        where C : IApiContext<C,S>
-    {
- 
-
     }
 }

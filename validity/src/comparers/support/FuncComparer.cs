@@ -48,4 +48,36 @@ namespace Z0
         protected void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Context.Notify(AppMsg.Error(e, caller,file,line));
     }
+
+    public abstract class OperatorComparer<T> : FuncComparer
+        where T : unmanaged
+    {
+        protected OperatorComparer(IComparisonContext context, bool xzero = false)
+            : base(context,xzero)        
+        {
+
+
+        }
+    }
+
+    public abstract class OperatorComparer<W,T> : FuncComparer
+        where W : struct, ITypeWidth
+        where T : unmanaged
+    {
+        protected OperatorComparer(IComparisonContext context, bool xzero = false)
+            : base(context,xzero)        
+        {
+
+            
+        }
+
+        protected string CaseName(IFunc f)
+        {
+            var id = OpIdentity.operation(f.Id.Name, default(W).Class, NumericIdentity.kind<T>(),true);
+            var owner = TypeIdentity.owner(Context.HostType);
+            var host = Context.HostType.Name;
+            return $"{owner}/{host}/{id}";            
+        }
+    }
+
 }

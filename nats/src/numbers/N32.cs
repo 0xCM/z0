@@ -21,7 +21,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(N32 src) => 32;
 
-        
+        [MethodImpl(Inline)]
+        public static implicit operator W32(N32 src) => default(W32);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N32(W32 src) => default(N32);
 
         public ulong NatValue => Value;
 

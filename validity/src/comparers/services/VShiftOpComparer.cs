@@ -7,12 +7,13 @@ namespace Z0
     using System;
 
     using static Root;
+    using static Validity;
     using static vgeneric;
 
-    sealed class VShiftComparer128D<T> : FuncComparer, IVShiftOpComparer128D<T>
+    sealed class VShiftComparer128D<T> : OperatorComparer<W128,T>, IVShiftOpComparer128D<T>
         where T : unmanaged
     {
-        public VShiftComparer128D(ITestContext context, bool xzero = false)
+        public VShiftComparer128D(IComparisonContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -25,7 +26,7 @@ namespace Z0
             var t = default(T);
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = CaseName(f);
             var clock = counter();
             var bounds = ((byte)0, (byte)(bitsize(t) - 1));
 
@@ -53,10 +54,10 @@ namespace Z0
         }
     }
     
-    sealed class VShiftValidator256D<T> : FuncComparer, IVShiftOpComparer256D<T>
+    sealed class VShiftValidator256D<T> : OperatorComparer<W256,T>, IVShiftOpComparer256D<T>
         where T : unmanaged
     {
-        public VShiftValidator256D(ITestContext context, bool xzero = false)
+        public VShiftValidator256D(IComparisonContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -69,7 +70,7 @@ namespace Z0
             var t = default(T);
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = CaseName(f);
             var clock = counter();
             var bounds = ((byte)0, (byte)(bitsize(t) - 1));
 

@@ -22,11 +22,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(N512 src) => 512;
 
+        [MethodImpl(Inline)]
+        public static implicit operator W512(N512 src) => default(W512);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N512(W512 src) => default(N512);
+
         public ulong NatValue => Value;
 
         public override string ToString() 
             => Value.ToString();
-
     }
-
 }

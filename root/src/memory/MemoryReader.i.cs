@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a service reads data from a source address and deposits to caller-supplied targets
     /// </summary>
-    public interface IMemoryReader : IService
+    public interface IMemoryReader
     {
         int Read(MemoryAddress src, int count, Span<byte> dst);
 

@@ -20,8 +20,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(N128 src) => 128;
         
-        
-        
+        [MethodImpl(Inline)]
+        public static implicit operator W128(N128 src) => default(W128);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N128(W128 src) => default(N128);
+
         public ulong NatValue => Value;
 
                

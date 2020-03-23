@@ -19,6 +19,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(N16 src) => 16;
 
+        [MethodImpl(Inline)]
+        public static implicit operator W16(N16 src) => default(W16);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N16(W16 src) => default(N16);
+
         public ulong NatValue => Value;
 
 

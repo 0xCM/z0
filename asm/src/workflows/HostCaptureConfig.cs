@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct HostCaptureConfig : IWorkflowConfig
+    public readonly struct HostCaptureConfig 
     {
         [MethodImpl(Inline)]
         public static HostCaptureConfig Define(FolderPath root)

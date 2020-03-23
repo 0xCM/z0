@@ -12,7 +12,7 @@ namespace Z0.Asm.Check
     using static Nats;
     using C = Classes;
 
-    interface IAsmEvalDispatcher : IAsmWorkflowService
+    interface IAsmEvalDispatcher : IAsmService
     {
 
         bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api);
@@ -28,7 +28,7 @@ namespace Z0.Asm.Check
 
     }
 
-    public interface IApiEvaluator<C,T> : IApiEvaluator<C>, IAsmWorkflowService
+    public interface IApiEvaluator<C,T> : IApiEvaluator<C>, IAsmService
         where C : IOpClass
         where T : unmanaged
     {

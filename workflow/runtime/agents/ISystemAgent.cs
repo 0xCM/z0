@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a thread of control with independent volition
     /// </summary>
-    public interface ISystemAgent : IServiceAllocation
+    public interface ISystemAgent : IDisposable
     {
         /// <summary>
         /// Identifies the server on which the agent is executing
@@ -53,9 +53,9 @@ namespace Z0
             => (ServerId, AgentId);
     }
 
-    public interface ISystemAgent<C> : ISystemAgent
+    public interface ISystemAgent<C> : ISystemAgent, IServiceAllocation<C>
         where C : IAppContext
     {
-        C Context {get;}
+        
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
             vsllv_check(n256);
         }
 
-        void vsllv_check(N128 w)
+        void vsllv_check(W128 w)
         {
             vsllv_check(w, z8);
             vsllv_check(w, z16);
@@ -29,7 +29,7 @@ namespace Z0
             vsllv_check(w, z64i);
         }
 
-        void vsllv_check(N256 w)
+        void vsllv_check(W256 w)
         {
             vsllv_check(w, z8);
             vsllv_check(w, z16);
@@ -39,7 +39,7 @@ namespace Z0
             vsllv_check(w, z64i);
         }
 
-        void vsllv_check<T>(N128 w, T t = default)
+        void vsllv_check<T>(W128 w, T t = default)
             where T : unmanaged        
         {
             var domain = Interval.closed(zero(t),convert<int,T>(bitsize(t) - 1));
@@ -54,7 +54,7 @@ namespace Z0
             CheckScalarMatch(VSvcFactories.vsllv(w,t),@case);            
         }
 
-        void vsllv_check<T>(N256 w, T t = default)
+        void vsllv_check<T>(W256 w, T t = default)
             where T : unmanaged        
         {
             var domain = Interval.closed(zero(t),convert<int,T>(bitsize(t) - 1));

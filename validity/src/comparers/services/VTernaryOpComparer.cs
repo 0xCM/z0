@@ -6,12 +6,13 @@ namespace Z0
 {
     using System;
     
+    using static Validity;
     using static vgeneric;
 
-    sealed class VTernaryValidator128D<T> : FuncComparer, IVTernaryOpComparer128D<T>
+    sealed class VTernaryValidator128D<T> : OperatorComparer<W128,T>, IVTernaryOpComparer128D<T>
         where T : unmanaged
     {
-        public VTernaryValidator128D(ITestContext context, bool xzero = false)
+        public VTernaryValidator128D(IComparisonContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -24,7 +25,7 @@ namespace Z0
             var t = default(T);
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = CaseName(f);
             var clock = counter();
 
             clock.Start();
@@ -52,10 +53,10 @@ namespace Z0
         }
     }
 
-    sealed class VTernaryValidator256D<T> : FuncComparer, IVTernaryOpComparer256D<T>
+    sealed class VTernaryValidator256D<T> : OperatorComparer<W256,T>, IVTernaryOpComparer256D<T>
         where T : unmanaged
     {
-        public VTernaryValidator256D(ITestContext context, bool xzero = false)
+        public VTernaryValidator256D(IComparisonContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -68,7 +69,7 @@ namespace Z0
             var t = default(T);
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = CaseName(f);
             var clock = counter();
 
             clock.Start();

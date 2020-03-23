@@ -13,11 +13,11 @@ namespace Z0
     {
         public void vsll_check()
         {
-            vsll_check(n128);
-            vsll_check(n256);
+            vsll_check(w128);
+            vsll_check(w256);
         }
 
-        void vsll_check(N128 w)
+        void vsll_check(W128 w)
         {
             vsll_check(w, z8);                
             vsll_check(w, z8i);
@@ -29,7 +29,7 @@ namespace Z0
             vsll_check(w, z64i);
         }
 
-        void vsll_check(N256 w)
+        void vsll_check(W256 w)
         {
             vsll_check(w, z8);                
             vsll_check(w, z8i);
@@ -41,11 +41,11 @@ namespace Z0
             vsll_check(w, z64i);
         }
 
-        void vsll_check<T>(N128 w, T t = default)
+        void vsll_check<T>(W128 w, T t = default)
             where T : unmanaged
                 => CheckShiftScalarMatch(VSvcFactories.vsll(w,t),w,t);
             
-        void vsll_check<T>(N256 w, T t = default)
+        void vsll_check<T>(W256 w, T t = default)
             where T : unmanaged
                 => CheckShiftScalarMatch(VSvcFactories.vsll(w,t),w,t);
 

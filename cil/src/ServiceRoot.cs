@@ -33,7 +33,7 @@ namespace Z0
         public CilFormatConfig CilFormat {get;}
     }
 
-    public interface ICilService : IAppService<ICilContext>
+    public interface ICilService : IService<ICilContext>
     {
         
     }

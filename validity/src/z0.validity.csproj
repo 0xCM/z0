@@ -9,6 +9,8 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Vectorized)" />
+
   </ItemGroup>
 
 </Project>

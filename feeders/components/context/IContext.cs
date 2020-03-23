@@ -15,6 +15,15 @@ namespace Z0
             => Assembly.GetEntryAssembly().Id();        
     }
 
+    /// <summary>
+    /// Characterizes a context that subsumes/extends/covers another context or state
+    /// </summary>
+    /// <typeparam name="R">The root context type</typeparam>
+    public interface IContext<R> : IContext
+    {
+        R Content {get;}
+    }   
+
     public interface IComposedContext : IContext
     {
         /// <summary>
@@ -22,15 +31,14 @@ namespace Z0
         /// </summary>
         IEnumerable<PartId> Components {get;}        
     }
-
+    
     /// <summary>
-    /// A context with parameteric state
+    /// Characterizes a rooted composition
     /// </summary>
-    public interface IContext<S> : IContext
+    /// <typeparam name="R">The root context type</typeparam>
+    public interface IComposedContext<R> : IComposedContext, IContext<R>
+        where R : IContext
     {
-        /// <summary>
-        /// State shared with members of the context
-        /// </summary>
-        S State {get;}
+
     }
 }

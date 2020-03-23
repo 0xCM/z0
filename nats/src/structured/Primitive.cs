@@ -52,6 +52,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(N1 src) => 1;
 
+        [MethodImpl(Inline)]
+        public static implicit operator W1(N1 src) => default(W1);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N1(W1 src) => default(N1);
+
         public NatSeq Sequence => this;
 
         public ulong NatValue => Value;
@@ -262,6 +268,12 @@ namespace Z0
      
         [MethodImpl(Inline)]
         public static implicit operator int(N8 src) => 8;
+
+        [MethodImpl(Inline)]
+        public static implicit operator W8(N8 src) => default(W8);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N8(W8 src) => default(N8);
 
         public ulong NatValue => 8;
 

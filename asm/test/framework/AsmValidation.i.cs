@@ -6,14 +6,14 @@ namespace Z0.Asm.Validation
 {
     using System;
     
-    public interface IAsmChecks : IAsmWorkflowService
+    public interface IAsmChecks : IAsmService
     {
         void Execute(in BufferSeq buffers, ApiMemberCode code);        
 
         void Execute(in BufferSeq buffers, ApiMemberCode[] code);        
     }
 
-    public interface IAsmEvalDispatcher : IAsmWorkflowService
+    public interface IAsmEvalDispatcher : IAsmService
     {
         bit EvalOperator(in BufferSeq buffers, ApiMemberCode api);        
 

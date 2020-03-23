@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
     
-    public interface IHostCapture : IAppService<IAsmContext>, IExecutable<CapturedHost>
+    public interface IHostCapture : IService<IAsmContext>, IExecutable<CapturedHost>
     {
         string Name => GetType().Name;             
     }

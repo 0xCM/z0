@@ -277,6 +277,19 @@ namespace Z0
 
         public static N32768 n32768 => default;             
 
+        public static W8 w8 => default;
+
+        public static W16 w16 => default;
+        
+        public static W32 w32 => default;
+
+        public static W64 w64 => default;
+
+        public static W128 w128 => default;
+
+        public static W256 w256 => default;
+
+        public static W512 w512 => default;
 
         /// <summary>
         /// A bit with state 1

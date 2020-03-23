@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
 
     /// <summary>
     /// A context of everything and yet to everyting nothing
@@ -19,13 +16,5 @@ namespace Z0
 
         IAppSettings Settings
             => AppSettings.Empty;                       
-    }
-
-    /// <summary>
-    /// A context with parameteric state
-    /// </summary>
-    public interface IAppContext<S> : IAppContext, IContext<S>
-    {
-
     }
 }

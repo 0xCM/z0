@@ -9,15 +9,16 @@ namespace Z0
     /// <summary>
     /// Characterizes a contextual asm service where caller-managed lifecyle is not needed
     /// </summary>
-    public interface IAsmService :  IAppService<IAsmContext>
+    public interface IAsmService :  IService<IAsmContext>
     {
+    
     }
 
 
     /// <summary>
     /// Characterizes contexutal asm service with caller-managed lifecycle
     /// </summary>
-    public interface IAsmServiceAllocation : IAsmService, IServiceAllocation
+    public interface IAsmServiceAllocation : IAsmService, IServiceAllocation<IAsmContext>
     {
 
     }

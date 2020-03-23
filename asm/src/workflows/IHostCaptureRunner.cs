@@ -5,12 +5,11 @@
 namespace Z0.Asm
 {
     using System;
-
-    public interface IHostCaptureWorkflow : IAsmWorkflow
+        
+    public interface IHostCaptureRunner :  IAsmService
     {
-        IHostCaptureRunner Runner {get;}
-
-        IHostCaptureEventBroker EventBroker {get;}
+        void Run(HostCaptureConfig config);
     }
+
 
 }

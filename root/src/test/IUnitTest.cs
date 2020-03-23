@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
 
 
-    public interface IUnitTest : IDisposable, ITestContext, IAppService<ITestContext>
+    public interface IUnitTest : IDisposable, ITestContext, IService<ITestContext>
     {
         bool Enabled {get;}
 

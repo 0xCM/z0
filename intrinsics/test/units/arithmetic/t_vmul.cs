@@ -175,7 +175,7 @@ namespace Z0
                 for(var j=0; j< count; j++)
                     eb[j] = uint32(xs[j] * ys[j]);
                 
-                numeq(eb,zb);
+                BlockChecks.eq(eb,zb);
             }
         }
     }

@@ -12,24 +12,24 @@ namespace Z0.Asm.Check
 
     using C = Classes;
 
-    public interface IAsmExecWorkflow : IAsmWorkflow
+    public interface IAsmExecWorkflow : IAsmService
     {
         void Run();
     }
 
-    public interface IAsmValidationHost : IAsmWorkflowService, IDisposable
+    public interface IAsmValidationHost : IAsmService, IDisposable
     {
         void Run();
     }
 
-    public interface IAsmExecutor : IAsmWorkflowService
+    public interface IAsmExecutor : IAsmService
     {
         AsmExecResult ExecAction(Action action, OpUri f);   
 
         AsmExecResult ExecAction(Action action, OpUri f, OpUri g);
     }
 
-    interface IAsmExecChecks : IAsmWorkflowService
+    interface IAsmExecChecks : IAsmService
     {
         void Execute(in BufferSeq buffers, ApiMemberCode code);        
 

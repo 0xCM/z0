@@ -20,9 +20,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator int(N64 src) => 64;
-    
-        
-       
+
+        [MethodImpl(Inline)]
+        public static implicit operator W64(N64 src) => default(W64);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N64(W64 src) => default(N64);
+           
         public ulong NatValue => Value;
         
         public override string ToString() 
