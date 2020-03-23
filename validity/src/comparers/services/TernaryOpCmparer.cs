@@ -15,7 +15,7 @@ namespace Z0
             
         }
 
-        public TernaryOpComparer(IComparisonContext context, bool xzero = false)
+        public TernaryOpComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
             

@@ -13,7 +13,7 @@ namespace Z0
     sealed class VShiftComparer128D<T> : OperatorComparer<W128,T>, IVShiftOpComparer128D<T>
         where T : unmanaged
     {
-        public VShiftComparer128D(IComparisonContext context, bool xzero = false)
+        public VShiftComparer128D(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -57,7 +57,7 @@ namespace Z0
     sealed class VShiftValidator256D<T> : OperatorComparer<W256,T>, IVShiftOpComparer256D<T>
         where T : unmanaged
     {
-        public VShiftValidator256D(IComparisonContext context, bool xzero = false)
+        public VShiftValidator256D(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
 

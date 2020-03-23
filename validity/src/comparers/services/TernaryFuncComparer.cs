@@ -9,7 +9,7 @@ namespace Z0
     using static Root;
     using static Validity;
 
-    class TernaryFuncComparer<T1,T2,T3,T4> : FuncComparer, ITernaryFuncComparer<T1,T2,T3,T4>
+    class TernaryFuncComparer<T1,T2,T3,T4> : FunctionComparer, ITernaryFuncComparer<T1,T2,T3,T4>
         where T1 : unmanaged
         where T2 : unmanaged
         where T3 : unmanaged
@@ -21,7 +21,7 @@ namespace Z0
             
         }
 
-        public TernaryFuncComparer(IComparisonContext context, bool xzero = false)
+        public TernaryFuncComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
             

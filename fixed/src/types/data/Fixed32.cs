@@ -9,11 +9,9 @@ namespace Z0
 
     using static Root;
 
-    [Fixed(FixedWidth.W32,false,FixedWidth.W8 | FixedWidth.W16 | FixedWidth.W32)]
+    [Fixed(FixedWidth.W32, false, FixedWidth.W8 | FixedWidth.W16 | FixedWidth.W32)]
     public struct Fixed32 : IFixedNumeric<Fixed32,uint>, IEquatable<Fixed32>
     {
-        public const int BitWidth = 32;        
-
         uint X0;
 
         public uint Data
@@ -22,11 +20,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int FixedBitCount
-        {
-            [MethodImpl(Inline)]
-            get => BitWidth;
-        }
+        public int BitWidth  { [MethodImpl(Inline)] get => 32; }
 
         public FixedWidth FixedWidth
         {

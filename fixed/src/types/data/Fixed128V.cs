@@ -16,11 +16,10 @@ namespace Z0
     [Fixed(FixedWidth.W128,false,FixedWidth.NumericWidths)]
     public struct Fixed128V : IFixed<Fixed128V>, IEquatable<Fixed128V>, IFormattable<Fixed128V>
     {
-        public const int BitWidth = 128;        
 
         internal Vector128<ulong> data;
 
-        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int BitWidth  { [MethodImpl(Inline)] get => 128; }
 
         public FixedWidth FixedWidth
         {

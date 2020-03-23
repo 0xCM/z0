@@ -8,7 +8,7 @@ namespace Z0
     using static Nats;
     using static vgeneric;
 
-    public interface IComparisonService : IService<IComparisonContext>
+    public interface IComparisonService : IService<IValidationContext>
     {
         void CheckUnaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
@@ -62,9 +62,9 @@ namespace Z0
     
     public readonly struct ComparisonService : IComparisonService
     {
-        public IComparisonContext Context {get;}
+        public IValidationContext Context {get;}
 
-        public ComparisonService(IComparisonContext context)
+        public ComparisonService(IValidationContext context)
         {
             this.Context = context;
             this.RepCount = 250;

@@ -36,22 +36,22 @@ namespace Z0
 
         public F2 Field2;
 
-        public int FixedBitCount
+        public int BitWidth
         {
             [MethodImpl(Inline)]
-            get => Field1.FixedBitCount + Field2.FixedBitCount;
+            get => Field1.BitWidth + Field2.BitWidth;
         }
 
-        public int FixedByteCount 
+        public int ByteCount 
         {
             [MethodImpl(Inline)]
-            get => Field1.FixedByteCount + Field2.FixedByteCount;
+            get => Field1.ByteCount + Field2.ByteCount;
         }
 
         public bool IsByteAligned 
         {
             [MethodImpl(Inline)]
-            get => FixedBitCount % 8 == 0;
+            get => BitWidth % 8 == 0;
         }
 
         [MethodImpl(Inline)]
@@ -84,22 +84,22 @@ namespace Z0
 
         public F3 Field3;
 
-        public int FixedBitCount
+        public int BitWidth
         {
             [MethodImpl(Inline)]
-            get => Field1.FixedBitCount + Field2.FixedBitCount + Field3.FixedBitCount;
+            get => Field1.BitWidth + Field2.BitWidth + Field3.BitWidth;
         }
 
-        public int FixedByteCount 
+        public int ByteCount 
         {
             [MethodImpl(Inline)]
-            get => Field1.FixedByteCount + Field2.FixedByteCount + Field3.FixedByteCount;
+            get => Field1.ByteCount + Field2.ByteCount + Field3.ByteCount;
         }
 
         public bool IsByteAligned 
         {
             [MethodImpl(Inline)]
-            get => FixedBitCount % 8 == 0;
+            get => BitWidth % 8 == 0;
         }
 
         [MethodImpl(Inline)]

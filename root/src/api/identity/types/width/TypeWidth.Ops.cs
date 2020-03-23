@@ -11,7 +11,7 @@ namespace Z0
 
     public static class TypeWidthOps
     {
-        public static string Format(this TypeWidthKind w)
+        public static string Format(this TypeWidth w)
             => w.ToUInt16().ToString();
     }
 }

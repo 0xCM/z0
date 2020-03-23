@@ -26,7 +26,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp<W,V> : IVUnaryOp<V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where V : struct
     {
 
@@ -40,7 +40,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp<W,V,T> : IVUnaryOp<W,V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
     {
@@ -131,7 +131,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOpImm8<W,V,T> : IImm8UnaryOp<V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
     {
     }
 
@@ -143,7 +143,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOpImm8x2<W,V,T> : IImm8x2UnaryOp<V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
     {
 
     }

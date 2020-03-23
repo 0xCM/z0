@@ -39,7 +39,7 @@ namespace Z0
     /// <typeparam name="W">The width type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W> : IFunc
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -64,7 +64,7 @@ namespace Z0
     /// <typeparam name="W">The width type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W,A> : IFunc<A>, IWFunc<W>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -91,7 +91,7 @@ namespace Z0
     /// <typeparam name="B">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W,A,B> : IFunc<A,B>, IWFunc<W>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -126,7 +126,7 @@ namespace Z0
     /// <typeparam name="C">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W,A,B,C> : IFunc<A,B,C>, IWFunc<W>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -163,7 +163,7 @@ namespace Z0
     /// <typeparam name="D">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWFunc<W,A,B,C,D> : IFunc<A,B,C,D>, IWFunc<W>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -185,7 +185,7 @@ namespace Z0
     /// <typeparam name="A">The emission type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface INullaryFunc<W,A> : INullaryFunc<A>, IWFunc<W,A>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -209,7 +209,7 @@ namespace Z0
     /// <typeparam name="B">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryFunc<W,A,B> : IUnaryFunc<A,B>, IWFunc<W,A,B>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -235,7 +235,7 @@ namespace Z0
     /// <typeparam name="C">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IBinaryFunc<W,A,B,C> : IBinaryFunc<A,B,C>, IWFunc<W,A,B,C>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -263,7 +263,7 @@ namespace Z0
     /// <typeparam name="D">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface ITernaryFunc<W,A,B,C,D> : ITernaryFunc<A,B,C,D>, IWFunc<W,A,B,C,D>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }

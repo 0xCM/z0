@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     
-    using C = Classes;
+    using C = OperationClasses;
 
-    partial class ClassReps
+    partial class OperationClassReps
     {
         public static C.OperatorClass Operator => default;
 

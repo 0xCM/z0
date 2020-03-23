@@ -7,8 +7,8 @@ namespace Z0.Asm.Check
     using System;
     using System.Linq;
 
-    using C = Classes;
-    using R = ClassReps;
+    using C = OperationClasses;
+    using R = OperationClassReps;
     
     using static Nats;
     
@@ -233,7 +233,7 @@ namespace Z0.Asm.Check
 
         }
 
-        Triples<T> Dispatch<E,T>(in BufferSeq buffers, in ApiMemberCode api, IOpClass<E,T> k, in Pairs<T> src)
+        Triples<T> Dispatch<E,T>(in BufferSeq buffers, in ApiMemberCode api, IOperationClass<E,T> k, in Pairs<T> src)
             where E : unmanaged, Enum
             where T : unmanaged
         {        

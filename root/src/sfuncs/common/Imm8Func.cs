@@ -27,9 +27,9 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public interface IImm8Func<W> : IImm8Func
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
-        TypeWidthKind WidthKind => default(W).Class;
+        TypeWidth WidthKind => default(W).Class;
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public interface IImmUnaryOp<W,A> : IImm8UnaryOp<A>, IImm8Func<W>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -68,7 +68,7 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public interface IImm8BinaryOp<W,A> : IImm8BinaryOp<A>, IImm8Func<W>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }

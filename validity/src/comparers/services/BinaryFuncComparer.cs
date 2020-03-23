@@ -9,7 +9,7 @@ namespace Z0
     using static Root;
     using static Validity;
 
-    class BinaryFuncComparer<T1,T2,T3> : FuncComparer, IBinaryFuncComparer<T1,T2,T3>
+    class BinaryFuncComparer<T1,T2,T3> : FunctionComparer, IBinaryFuncComparer<T1,T2,T3>
         where T1 : unmanaged
         where T2 : unmanaged
         where T3 : unmanaged
@@ -20,7 +20,7 @@ namespace Z0
             
         }
 
-        public BinaryFuncComparer(IComparisonContext context, bool xzero = false)
+        public BinaryFuncComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
             

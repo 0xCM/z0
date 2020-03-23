@@ -11,9 +11,7 @@ namespace Z0
 
     [Fixed(FixedWidth.W8,false,FixedWidth.W8)]
     public struct Fixed8 : IFixedNumeric<Fixed8, byte>, IEquatable<Fixed8>
-    {
-        public const int BitWidth = 8;
-
+    {        
         byte X0;
 
         public byte Data
@@ -22,7 +20,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int BitWidth  { [MethodImpl(Inline)] get => 8; }
 
         public FixedWidth FixedWidth
         {

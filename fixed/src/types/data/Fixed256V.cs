@@ -16,11 +16,9 @@ namespace Z0
     [Fixed(FixedWidth.W256,false,FixedWidth.NumericWidths)]
     public struct Fixed256V : IFixed<Fixed256V>, IEquatable<Fixed256V>
     {
-        public const int BitWidth = 256;        
-
         internal Vector256<ulong> data;
 
-        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int BitWidth  { [MethodImpl(Inline)] get => 256; }
 
         public FixedWidth FixedWidth
         {

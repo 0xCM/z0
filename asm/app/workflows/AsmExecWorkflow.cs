@@ -9,7 +9,7 @@ namespace Z0.Asm.Check
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     
-    using C = Classes;
+    using C = OperationClasses;
     
     using static Root;    
 

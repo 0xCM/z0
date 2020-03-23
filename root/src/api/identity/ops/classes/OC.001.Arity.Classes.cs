@@ -8,7 +8,8 @@ namespace Z0
 
     using C = ArityClass;
 
-    partial class Classes
+
+    partial class OperationClasses
     {
         public readonly struct Unary : ILiteralKind<C> { public C Class => C.Unary; }
 

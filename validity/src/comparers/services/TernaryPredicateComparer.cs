@@ -15,7 +15,7 @@ namespace Z0
             
         }
 
-        public TernaryPredicateComparer(IComparisonContext context, bool xzero = false)
+        public TernaryPredicateComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
             

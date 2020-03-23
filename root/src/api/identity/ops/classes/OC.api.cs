@@ -15,13 +15,13 @@ namespace Z0
     /// <summary>
     /// Api placeholsder
     /// </summary>
-    public static class FunctionClasses
+    public static class ClassifiedFunctions
     {
 
 
     }    
 
-    public static class OperationClasses
+    public static class ClassifiedOperations
     {
         /// <summary>
         /// Dtermines whether a method has a void return

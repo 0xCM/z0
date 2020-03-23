@@ -12,21 +12,21 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public delegate bit UnaryPredicate<W,T>(T a)
-         where W : struct, ITypeWidth<W>;
+         where W : unmanaged, ITypeWidth<W>;
 
     [SuppressUnmanagedCodeSecurity]
     public delegate bit BinaryPredicate<T>(T a, T b);
 
     [SuppressUnmanagedCodeSecurity]
     public delegate bit BinaryPredicate<W,T>(T a, T b)
-         where W : struct, ITypeWidth<W>;
+         where W : unmanaged, ITypeWidth<W>;
 
     [SuppressUnmanagedCodeSecurity]
     public delegate bit TernaryPredicate<T>(T a, T b, T c);        
 
     [SuppressUnmanagedCodeSecurity]
     public delegate bit TernaryPredicate<W,T>(T a, T b, T c)
-         where W : struct, ITypeWidth<W>;
+         where W : unmanaged, ITypeWidth<W>;
 
     /// <summary>
     /// Characterizes a unary predicate
@@ -40,7 +40,7 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryPredicate<W,A> : IUnaryPredicate<A>, IUnaryFunc<W,A,bit>
-         where W : struct, ITypeWidth<W>
+         where W : unmanaged, ITypeWidth<W>
     {
 
     }
@@ -69,7 +69,7 @@ namespace Z0
     
     [SuppressUnmanagedCodeSecurity]
     public interface IBinaryPredicate<W,A,B> : IBinaryPredicate<A,B>, IBinaryFunc<W,A,B,bit>
-         where W : struct, ITypeWidth<W>
+         where W : unmanaged, ITypeWidth<W>
     {
 
     }

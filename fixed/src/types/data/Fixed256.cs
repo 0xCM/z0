@@ -13,16 +13,14 @@ namespace Z0
     using static Root;
 
     [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W256,false,FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W256, false, FixedWidth.NumericWidths)]
     public struct Fixed256  : IFixed<Fixed256>, IEquatable<Fixed256>
     {
-        public const int BitWidth = 256;        
-
         Fixed128 X0;
 
         Fixed128 X1;
 
-        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int BitWidth  { [MethodImpl(Inline)] get => 256; }
 
         [MethodImpl(Inline)]
         Fixed256(Fixed128 x0, Fixed128 x1)

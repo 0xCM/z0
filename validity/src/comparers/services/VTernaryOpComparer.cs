@@ -12,7 +12,7 @@ namespace Z0
     sealed class VTernaryValidator128D<T> : OperatorComparer<W128,T>, IVTernaryOpComparer128D<T>
         where T : unmanaged
     {
-        public VTernaryValidator128D(IComparisonContext context, bool xzero = false)
+        public VTernaryValidator128D(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -56,7 +56,7 @@ namespace Z0
     sealed class VTernaryValidator256D<T> : OperatorComparer<W256,T>, IVTernaryOpComparer256D<T>
         where T : unmanaged
     {
-        public VTernaryValidator256D(IComparisonContext context, bool xzero = false)
+        public VTernaryValidator256D(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
 

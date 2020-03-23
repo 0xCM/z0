@@ -12,7 +12,7 @@ namespace Z0.Asm.Check
     using static Root;
     using static EvalPackages;
 
-    using C = Classes;
+    using C = OperationClasses;
 
     public static partial class EvalPackages
     {

@@ -134,12 +134,12 @@ namespace Z0
     }
 
     
-    public static partial class Classes
+    public static partial class OperationClasses
     {
     
     }
 
-    public static partial class ClassReps
+    public static partial class OperationClassReps
     {
 
     }

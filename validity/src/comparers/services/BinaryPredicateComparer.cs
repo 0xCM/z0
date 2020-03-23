@@ -15,7 +15,7 @@ namespace Z0
             
         }
 
-        public BinaryPredicateComparer(IComparisonContext context, bool xzero = false)
+        public BinaryPredicateComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
             

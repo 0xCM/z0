@@ -10,7 +10,7 @@ namespace Z0.Asm.Check
 
     using static Root;
     using static Nats;
-    using C = Classes;
+    using C = OperationClasses;
 
     interface IAsmEvalDispatcher : IAsmService
     {
@@ -23,13 +23,13 @@ namespace Z0.Asm.Check
     }
 
     public interface IApiEvaluator<C>
-        where C : IOpClass
+        where C : IOperationClass
     {
 
     }
 
     public interface IApiEvaluator<C,T> : IApiEvaluator<C>, IAsmService
-        where C : IOpClass
+        where C : IOperationClass
         where T : unmanaged
     {
 

@@ -17,7 +17,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVSpanLoad<W,S,V,T> : IVFunc
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where S : unmanaged
         where V : struct
         where T : unmanaged

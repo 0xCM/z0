@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Classes;
+    using static OperationClasses;
 
-    partial class ClassReps
+    partial class OperationClassReps
     {
         public static Emitter Emitter => default;
 

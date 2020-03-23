@@ -17,7 +17,7 @@ namespace Z0
     /// <typeparam name="T">The target vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVFactory<W,S,V,T> : IVFunc, IFunc<S,V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where T : unmanaged
         where V : struct
     {

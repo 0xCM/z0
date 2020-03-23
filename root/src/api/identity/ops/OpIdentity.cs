@@ -140,7 +140,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
         public static OpIdentity contracted<W,T>(string opname, W w = default, T t = default, bool generic = true)
-            where W : struct, ITypeWidth<W>
+            where W : unmanaged, ITypeWidth<W>
             where T : unmanaged
                 => OpIdentity.operation(opname, w.FixedWidth, NumericIdentity.kind<T>(), generic);
 
@@ -179,7 +179,7 @@ namespace Z0
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity operation(string opname, TypeWidthKind w, NumericKind k,  bool generic, string suffix = null)
+        public static OpIdentity operation(string opname, TypeWidth w, NumericKind k,  bool generic, string suffix = null)
             => operation(opname,(FixedWidth)w, k, generic,suffix);                
 
         /// <summary>

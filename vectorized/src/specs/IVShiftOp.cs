@@ -25,7 +25,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVShiftOp<W,V> : IVShiftOp<V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where V : struct
     {
 
@@ -39,7 +39,7 @@ namespace Z0
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVShiftOp<W,V,T> : IVShiftOp<W,V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
     {

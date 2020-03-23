@@ -24,7 +24,7 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public interface ISpanOp<W> : ISpanOp, IWFunc<W>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }

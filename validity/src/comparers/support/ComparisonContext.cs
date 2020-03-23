@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Concurrent;
 
 
-    public class ComparisonContext : IComparisonContext
+    public class ComparisonContext : IValidationContext
     {
         public Type HostType {get;}
 
@@ -21,10 +21,10 @@ namespace Z0
         
         ConcurrentQueue<FuncCompareResult> Outcomes {get;}
 
-        public static IComparisonContext From(ITestContext context)
+        public static IValidationContext From(ITestContext context)
             => new ComparisonContext(context.HostType, context as IAppMsgSink, context.Random, context.ReportOutcome);
 
-        public static IComparisonContext Define(Type host, IAppMsgSink sink, IPolyrand random)
+        public static IValidationContext Define(Type host, IAppMsgSink sink, IPolyrand random)
             => new ComparisonContext(host,sink, random);
 
         public ComparisonContext(Type host, IAppMsgSink sink, IPolyrand random, Action<TestCaseOutcome> relay = null)

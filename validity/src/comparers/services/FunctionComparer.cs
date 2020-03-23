@@ -13,7 +13,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public abstract class FuncComparer : IFuncComparer
+    public abstract class FunctionComparer : IFunctionComparer
     {
         /// <summary>
         /// Allocates and optionally starts a system counter
@@ -22,21 +22,21 @@ namespace Z0
         protected static SystemCounter counter(bool start = false, int? reps = null) 
             => SystemCounter.Create(start);
 
-        protected FuncComparer(ITestContext context, bool xzero = false, int? reps = null)
+        protected FunctionComparer(ITestContext context, bool xzero = false, int? reps = null)
         {
             this.Context = ComparisonContext.From(context);
             this.RepCount = reps ?? Pow2.T07;
             this.ExcludeZero = xzero;
         }
 
-        protected FuncComparer(IComparisonContext context, bool xzero = false, int? reps = null)
+        protected FunctionComparer(IValidationContext context, bool xzero = false, int? reps = null)
         {
             this.Context = context;
             this.RepCount = reps ?? Pow2.T07;
             this.ExcludeZero = xzero;
         }
 
-        public IComparisonContext Context {get;}
+        public IValidationContext Context {get;}
 
         protected IPolyrand Random
             => Context.Random;
@@ -49,10 +49,10 @@ namespace Z0
             => Context.Notify(AppMsg.Error(e, caller,file,line));
     }
 
-    public abstract class OperatorComparer<T> : FuncComparer
+    public abstract class OperatorComparer<T> : FunctionComparer
         where T : unmanaged
     {
-        protected OperatorComparer(IComparisonContext context, bool xzero = false)
+        protected OperatorComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)        
         {
 
@@ -60,11 +60,11 @@ namespace Z0
         }
     }
 
-    public abstract class OperatorComparer<W,T> : FuncComparer
+    public abstract class OperatorComparer<W,T> : FunctionComparer
         where W : struct, ITypeWidth
         where T : unmanaged
     {
-        protected OperatorComparer(IComparisonContext context, bool xzero = false)
+        protected OperatorComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)        
         {
 

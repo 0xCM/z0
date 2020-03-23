@@ -32,8 +32,8 @@ namespace Z0
     /// <typeparam name="T2">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVMap<W1,W2,V1,V2,T1,T2> : IVMap<V1,V2>
-        where W1 : struct, ITypeWidth<W1>
-        where W2 : struct, ITypeWidth<W2>
+        where W1 : unmanaged, ITypeWidth<W1>
+        where W2 : unmanaged, ITypeWidth<W2>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged

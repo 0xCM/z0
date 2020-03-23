@@ -31,7 +31,7 @@ namespace Z0
 
     public static class Validity
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
 
         internal static class Claim

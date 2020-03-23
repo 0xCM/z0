@@ -9,62 +9,6 @@ namespace Z0
 
     using static Root;
 
-    /// <summary>
-    /// Characterizes a type that occupies a fixed amount of space at runtime
-    /// </summary>
-    public interface IFixed
-    {
-        /// <summary>
-        /// The invariant number of bits covered by the reifying type
-        /// </summary>
-        int FixedBitCount {get;}
-
-        int FixedByteCount
-        {
-            [MethodImpl(Inline)]
-            get => FixedBitCount / 8;
-        }
-    }
-
-    public interface IFixedWidth : IFixed
-    {
-        /// <summary>
-        /// Specifies the type width in bits
-        /// </summary>
-        FixedWidth FixedWidth {get;}
-
-        int IFixed.FixedBitCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)FixedWidth;
-        }        
-    }
-
-    /// <summary>
-    ///  Characterizes a fixed type with storage and reification types of equal size
-    /// </summary>
-    /// <typeparam name="F">The storage type</typeparam>
-    public interface IFixed<F> : IFixedWidth
-        where F : unmanaged
-    {        
-        FixedWidth IFixedWidth.FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)bitsize<F>();
-        }
-
-        int IFixed.FixedByteCount 
-        {
-            [MethodImpl(Inline)]
-            get => Unsafe.SizeOf<F>();
-        }
-
-        int IFixed.FixedBitCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)bitsize<F>();
-        }        
-    }
 
     /// <summary>
     /// Characterizes a reified kind with which a fixed bit-width is associated
@@ -72,30 +16,56 @@ namespace Z0
     public interface IFixedKind<F> : IFixed<F>,  IKind
         where F : unmanaged, IFixed
     {
+        int IFixed.BitWidth
+        {
+            [MethodImpl(Inline)]
+            get => (int)bitsize<F>();
+        }        
+        
     }
 
-    public interface ITypeWidth : ILiteralKind<TypeWidthKind>, IFixedWidth
+    public interface ITypeWidth : ILiteralKind<TypeWidth>, IFixedWidth
     {
-        FixedWidth IFixedWidth.FixedWidth => (FixedWidth)Class;
+        /// <summary>
+        /// Refines the specificity of the class specifier
+        /// </summary>
+        TypeWidth TypeWidth {get;}
+
+        FixedWidth IFixedWidth.FixedWidth 
+            => (FixedWidth)TypeWidth;
+
+        TypeWidth ILiftedEnum<TypeWidth>.Class 
+            => TypeWidth;
     }
 
     public interface ITypeWidth<K> : ITypeWidth
-        where K : struct, ITypeWidth<K>
+        where K : unmanaged, ITypeWidth
     {
-    
+        
     }
 
-    public readonly struct TypeWidth<T> : ITypeWidth<TypeWidth<T>>
+    public interface ITypeWidth<K,T> : ITypeWidth<K>
+        where K : unmanaged, ITypeWidth
+        where T : unmanaged
+    {
+        TypeWidth ITypeWidth.TypeWidth 
+        {
+            [MethodImpl(Inline)]
+            get => (TypeWidth)(Unsafe.SizeOf<T>() *8);            
+        }    
+    }
+
+    public readonly struct TypeWidth<T> : ITypeWidth<TypeWidth<T>,T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public static implicit operator TypeWidthKind(TypeWidth<T> src)
+        public static implicit operator TypeWidth(TypeWidth<T> src)
             => src.Class;
 
-        public TypeWidthKind Class 
+        public TypeWidth Class 
         {
             [MethodImpl(Inline)]
-            get => (TypeWidthKind)(Unsafe.SizeOf<T>() *8);            
+            get => (TypeWidth)(Unsafe.SizeOf<T>()*8);            
         }
     }
 }

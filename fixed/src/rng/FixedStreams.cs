@@ -33,7 +33,7 @@ namespace Z0
         public static IEnumerable<F> FixedStream<F>(this IPolyrand random)
             where F: unmanaged, IFixed
         {
-            var w = (FixedWidth)default(F).FixedBitCount;
+            var w = (FixedWidth)default(F).BitWidth;
             switch(w)
             {
                 case FixedWidth.W8: return random.FixedStream<F>(n8);

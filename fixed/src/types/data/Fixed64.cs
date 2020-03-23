@@ -12,8 +12,6 @@ namespace Z0
     [Fixed(FixedWidth.W32,false, FixedWidth.NumericWidths)]
     public struct Fixed64 : IFixedNumeric<Fixed64,ulong>, IEquatable<Fixed64>
     {
-        public const int BitWidth = 64;        
-
         ulong X0;
 
         public ulong Data
@@ -22,7 +20,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int BitWidth  { [MethodImpl(Inline)] get => 64; }
 
         public FixedWidth FixedWidth
         {

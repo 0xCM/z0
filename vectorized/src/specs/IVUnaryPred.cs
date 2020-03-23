@@ -27,7 +27,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryPred<W,V> : IVFunc, IUnaryPredicate<V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
         where V : struct
     {
         
@@ -41,7 +41,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryPred<W,V,T> : IVUnaryPred<W,V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged
     {

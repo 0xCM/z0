@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Defines fixed bit-width classifiers/identifiers
     /// </summary>
+    [Flags]
     public enum FixedWidth : ushort
     {
         /// <summary>
@@ -71,6 +72,19 @@ namespace Z0
         /// </summary>
         W1024 = 1024,
 
-        NumericWidths = W8 | W16 | W32 | W64,
+        /// <summary>
+        /// Classifies widths that correspond numeric primitives
+        /// </summary>
+        NumericWidths =  W1 | W8 | W16 | W32 | W64,
+
+        /// <summary>
+        /// Classifies widths that correspond to vector primitives
+        /// </summary>
+        VectorWidths = W128 | W256 | W512,
+
+        /// <summary>
+        /// Classifies widths that correspond to numeric and vector primitives
+        /// </summary>
+        TypeWidths = NumericWidths | VectorWidths
     }
 }

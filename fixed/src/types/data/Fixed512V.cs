@@ -14,16 +14,14 @@ namespace Z0
     using static Root;
 
     [StructLayout(LayoutKind.Sequential)]
-    [Fixed(FixedWidth.W512,false,FixedWidth.NumericWidths)]
+    [Fixed(FixedWidth.W512, false, FixedWidth.NumericWidths)]
     public struct Fixed512V  : IFixed<Fixed512V>
     {
-        public const int BitWidth = 512;        
-
         Fixed256V X0;
 
         Fixed256V X1;
 
-        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int BitWidth  { [MethodImpl(Inline)] get => 512; }
 
         [MethodImpl(Inline)]
         Fixed512V(Fixed256V x0, Fixed256V x1)

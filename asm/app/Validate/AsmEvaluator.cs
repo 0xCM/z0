@@ -10,13 +10,13 @@ namespace Z0.Asm.Check
 
     using static Root;
     using static Nats;
-    using static Classes;
+    using static OperationClasses;
 
     using static BufferSeqId;
 
     public static class AsmEvaluators
     {
-        public static AsmEvaluator Evaluator0<E,T>(this IAsmContext context, in BufferSeq buffers, IOpClass<E,T> k)
+        public static AsmEvaluator Evaluator0<E,T>(this IAsmContext context, in BufferSeq buffers, IOperationClass<E,T> k)
             where T : unmanaged
             where E : unmanaged, Enum
                 => AsmEvaluator.Create(context, buffers);

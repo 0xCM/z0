@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public interface IFuncComparer : IService<IComparisonContext>
+    public interface IFunctionComparer : IService<IValidationContext>
     {
         
     }

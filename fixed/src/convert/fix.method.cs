@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    using K = Classes;
+    using K = OperationClasses;
 
     partial class Fixed
     {

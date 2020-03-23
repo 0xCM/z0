@@ -41,8 +41,8 @@ namespace Z0
         public FixedStreamProvider(IPolyrand random, Interval<T>? domain = null)
         {
             this.random = random;
-            this.Name = $"fixed_rng_{default(F).FixedBitCount}x{bitsize<T>()}";
-            this.Width = (FixedWidth)default(F).FixedBitCount;
+            this.Name = $"fixed_rng_{default(F).BitWidth}x{bitsize<T>()}";
+            this.Width = (FixedWidth)default(F).BitWidth;
             this.Kind = typeof(T).NumericKind();            
             this.ValueEmitter = CreateEmitter();
             this.CellDomain = domain ?? random.Domain<T>();

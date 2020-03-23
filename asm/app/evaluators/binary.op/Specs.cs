@@ -7,7 +7,7 @@ namespace Z0.Asm.Check
     using System;
 
     using static EvalPackages;
-    using static Classes;
+    using static OperationClasses;
 
     public interface IBinaryOpEvaluator<T> : IApiEvaluator<BinaryOp, T>
         where T : unmanaged

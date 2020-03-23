@@ -29,7 +29,7 @@ namespace Z0
         internal unsafe BufferSeq(int count)
         {
             this.BufferCount = count;
-            this.BufferSize = default(F).FixedByteCount;
+            this.BufferSize = default(F).ByteCount;
             this.TotalSize = BufferCount*BufferSize;
             this.Buffered = Buffers.alloc(TotalSize);
             this.View = new Span<F>(Buffered.Handle.ToPointer(), TotalSize);

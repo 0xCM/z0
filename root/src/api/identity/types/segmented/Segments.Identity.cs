@@ -25,7 +25,7 @@ namespace Z0
         public string Identifier {get;}
 
         [MethodImpl(Inline)]
-        public static SegmentedIdentity Define(TypeIndicator indicator, TypeWidthKind wk, NumericKind segkind)
+        public static SegmentedIdentity Define(TypeIndicator indicator, TypeWidth wk, NumericKind segkind)
             => new SegmentedIdentity(indicator, (FixedWidth)wk, segkind);
 
         [MethodImpl(Inline)]

@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVEmitter<W,V,T> : IVFunc, IEmitter<V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
     {

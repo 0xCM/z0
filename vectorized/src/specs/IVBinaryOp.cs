@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVBinaryOpImm8<W,V,T> : IVFunc, IImm8BinaryOp<W,V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }    
@@ -28,7 +28,7 @@ namespace Z0
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVBinaryOp<W,V,T> : IVFunc, IBinaryOp<V>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged
     {

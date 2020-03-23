@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="wk">The width kind</param>
         /// <param name="nk">The numeric kind</param>
         [MethodImpl(Inline)]
-        public static TypeIdentity segmented(string name, TypeWidthKind wk, NumericKind nk)
+        public static TypeIdentity segmented(string name, TypeWidth wk, NumericKind nk)
             => Define($"{name}{wk.Format()}x{nk.Format()}");
 
         [MethodImpl(Inline)]

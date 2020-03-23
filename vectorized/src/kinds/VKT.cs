@@ -24,6 +24,11 @@ namespace Z0
     public interface IVectorType<F> : IVectorType, IFixedKind<F>
         where F : unmanaged, IFixed
     {
+        int IFixed.BitWidth
+        {
+            [MethodImpl(Inline)]
+            get => (int)bitsize<F>();
+        }        
 
     }
 

@@ -12,8 +12,6 @@ namespace Z0
     [Fixed(FixedWidth.W16,false,FixedWidth.W8 | FixedWidth.W16)]
     public struct Fixed16 : IFixedNumeric<Fixed16,ushort>, IEquatable<Fixed16>
     {
-        public const int BitWidth = 16;
-
         ushort X0;
 
         public ushort Data
@@ -22,7 +20,7 @@ namespace Z0
             [MethodImpl(Inline)] set => X0 = value;
         }
 
-        public int FixedBitCount  { [MethodImpl(Inline)] get => BitWidth; }
+        public int BitWidth  { [MethodImpl(Inline)] get => 16; }
 
         public FixedWidth FixedWidth
         {

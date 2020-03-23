@@ -23,7 +23,7 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate T UnaryOp<W,T>(T a)
-        where W : struct, ITypeWidth<W>;
+        where W : unmanaged, ITypeWidth;
 
     /// <summary>
     /// Defines the canonical shape of a binary operator
@@ -43,7 +43,7 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate T BinaryOp<W,T>(T a, T b)
-        where W : struct, ITypeWidth<W>;
+        where W : unmanaged, ITypeWidth;
 
     /// <summary>
     /// Defines the canonical shape of a tenary operator
@@ -65,7 +65,7 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate T TernaryOp<W,T>(T a, T b, T c)
-        where W : struct, ITypeWidth<W>;
+        where W : unmanaged, ITypeWidth;
 
     /// <summary>
     /// Characterizes a unary operator
@@ -84,7 +84,7 @@ namespace Z0
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryOp<W,A> : IUnaryOp<A>, IUnaryFunc<W,A,A>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -106,7 +106,7 @@ namespace Z0
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IBinaryOp<W,A> : IBinaryOp<A>, IBinaryFunc<W,A,A,A>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -128,7 +128,7 @@ namespace Z0
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface ITernaryOp<W,A> : ITernaryOp<A>, ITernaryFunc<W,A,A,A,A>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
@@ -152,7 +152,7 @@ namespace Z0
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IUnarySpanOp<W,T> : ISpanOp<W>        
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
         Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst);
     }
@@ -175,7 +175,7 @@ namespace Z0
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IBinarySpanOp<W,T> : ISpanOp<W>        
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
     {
         Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst);
     }
@@ -198,7 +198,7 @@ namespace Z0
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface ITernarySpanOp<W,T> : ISpanOp<W>        
-         where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth
    {
         Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst);
     }

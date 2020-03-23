@@ -30,7 +30,7 @@ namespace Z0
             this.C1 = c1;
         }
         
-        public int FixedBitCount
+        public int BitWidth
         {
             [MethodImpl(Inline)]
             get => BitSize;
@@ -68,7 +68,7 @@ namespace Z0
             C1 = c1;
         }
 
-        public int FixedBitCount
+        public int BitWidth
         {
             [MethodImpl(Inline)]
             get => BitSize;
@@ -105,7 +105,7 @@ namespace Z0
             C1 = c1;
         }
 
-        public int FixedBitCount
+        public int BitWidth
         {
             [MethodImpl(Inline)]
             get => BitSize;
@@ -138,7 +138,7 @@ namespace Z0
             C1 = c1;
         }
  
-        public int FixedBitCount
+        public int BitWidth
         {
             [MethodImpl(Inline)]
             get => BitSize;

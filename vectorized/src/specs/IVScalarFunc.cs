@@ -17,7 +17,7 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFunc<W,V,T,K> : IVFunc, IFunc<V,K>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
         where K : unmanaged
@@ -34,7 +34,7 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFuncImm8<W,V,T,K> : IVFunc, IFunc<V,byte,K>
-        where W : struct, ITypeWidth<W>
+        where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
         where K : unmanaged
@@ -54,8 +54,8 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFunc<W1,W2,V1,V2,T1,T2,K> : IVFunc, IFunc<V1,V2,K>
-        where W1 : struct, ITypeWidth<W1>
-        where W2 : struct, ITypeWidth<W2>
+        where W1 : unmanaged, ITypeWidth<W1>
+        where W2 : unmanaged, ITypeWidth<W2>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged
@@ -77,8 +77,8 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFuncImm8<W1,W2,V1,V2,T1,T2,K> : IVFunc, IFunc<V1,V2,byte,K>
-        where W1 : struct, ITypeWidth<W1>
-        where W2 : struct, ITypeWidth<W2>
+        where W1 : unmanaged, ITypeWidth<W1>
+        where W2 : unmanaged, ITypeWidth<W2>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged
@@ -103,9 +103,9 @@ namespace Z0
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVScalarFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3,K> : IVFunc, IFunc<V1,V2,V3,K>
-        where W1 : struct, ITypeWidth<W1>
-        where W2 : struct, ITypeWidth<W2>
-        where W3 : struct, ITypeWidth<W3>
+        where W1 : unmanaged, ITypeWidth<W1>
+        where W2 : unmanaged, ITypeWidth<W2>
+        where W3 : unmanaged, ITypeWidth<W3>
         where V1 : struct
         where V2 : struct
         where T1 : unmanaged

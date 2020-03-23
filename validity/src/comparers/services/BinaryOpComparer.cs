@@ -15,7 +15,7 @@ namespace Z0
             
         }
 
-        public BinaryOpComparer(IComparisonContext context, bool xzero = false)
+        public BinaryOpComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
             

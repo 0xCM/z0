@@ -8,19 +8,19 @@ namespace Z0
 
     public static class OpComparers
     {   
-        public static IUnaryOpComparer<T> define<T>(IComparisonContext context, Classes.UnaryOp<T> unary)
+        public static IUnaryOpComparer<T> define<T>(IValidationContext context, OperationClasses.UnaryOp<T> unary)
             where T : unmanaged
                 => new UnaryOpComparer<T>(context);
 
-        public static IBinaryOpComparer<T> define<T>(IComparisonContext context, Classes.BinaryOp<T> unary)
+        public static IBinaryOpComparer<T> define<T>(IValidationContext context, OperationClasses.BinaryOp<T> unary)
             where T : unmanaged
                 => new BinaryOpComparer<T>(context);
 
-        public static ITernaryOpComparer<T> define<T>(IComparisonContext context, Classes.TernaryOp<T> unary)
+        public static ITernaryOpComparer<T> define<T>(IValidationContext context, OperationClasses.TernaryOp<T> unary)
             where T : unmanaged
                 => new TernaryOpComparer<T>(context);
 
-        public static IBinaryPredicateComparer<T> define<T>(IComparisonContext context, Classes.BinaryPredicate<T> unary)
+        public static IBinaryPredicateComparer<T> define<T>(IValidationContext context, OperationClasses.BinaryPredicate<T> unary)
             where T : unmanaged
                 => new BinaryPredicateComparer<T>(context);
     }
@@ -62,35 +62,35 @@ namespace Z0
             where T : unmanaged
                 => new TernaryFuncComparer<T,T,T,bit>(context);
 
-        public static IVUnaryOpComparer128D<T> UnaryOpComparer<T>(this IComparisonContext context, W128 w, T t = default)
+        public static IVUnaryOpComparer128D<T> UnaryOpComparer<T>(this IValidationContext context, W128 w, T t = default)
             where T : unmanaged
                 => new VUnaryValidator128D<T>(context);
 
-        public static IVUnaryOpComparer256D<T> UnaryOpComparer<T>(this IComparisonContext context, W256 w, T t = default)
+        public static IVUnaryOpComparer256D<T> UnaryOpComparer<T>(this IValidationContext context, W256 w, T t = default)
             where T : unmanaged
                 => new VUnaryValidator256D<T>(context);
 
-        public static IVBinaryOpComparer128D<T> BinaryOpComparer<T>(this IComparisonContext context, W128 w, T t = default)
+        public static IVBinaryOpComparer128D<T> BinaryOpComparer<T>(this IValidationContext context, W128 w, T t = default)
             where T : unmanaged
                 => new VBinaryValidator128D<T>(context);
 
-        public static IVBinaryOpComparer256D<T> BinaryOpComparer<T>(this IComparisonContext context, W256 w, T t = default)
+        public static IVBinaryOpComparer256D<T> BinaryOpComparer<T>(this IValidationContext context, W256 w, T t = default)
             where T : unmanaged
                 => new VBinaryValidator256D<T>(context);
 
-        public static IVShiftOpComparer128D<T> ShiftOpComparer<T>(this IComparisonContext context, W128 w, T t = default)
+        public static IVShiftOpComparer128D<T> ShiftOpComparer<T>(this IValidationContext context, W128 w, T t = default)
             where T : unmanaged
                 => new VShiftComparer128D<T>(context);
 
-        public static IVShiftOpComparer256D<T> ShiftComparer<T>(this IComparisonContext context, W256 w, T t = default)
+        public static IVShiftOpComparer256D<T> ShiftComparer<T>(this IValidationContext context, W256 w, T t = default)
             where T : unmanaged
                 => new VShiftValidator256D<T>(context);
 
-        public static IVTernaryOpComparer128D<T> TernaryOpComparer<T>(this IComparisonContext context, W128 w, T t = default)
+        public static IVTernaryOpComparer128D<T> TernaryOpComparer<T>(this IValidationContext context, W128 w, T t = default)
             where T : unmanaged
                 => new VTernaryValidator128D<T>(context);
 
-        public static IVTernaryOpComparer256D<T> TernaryOpComparer<T>(this IComparisonContext context, W256 w, T t = default)
+        public static IVTernaryOpComparer256D<T> TernaryOpComparer<T>(this IValidationContext context, W256 w, T t = default)
             where T : unmanaged
                 => new VTernaryValidator256D<T>(context);
     }

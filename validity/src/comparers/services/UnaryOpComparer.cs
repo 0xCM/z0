@@ -15,7 +15,7 @@ namespace Z0
             
         }
 
-        public UnaryOpComparer(IComparisonContext context, bool xzero = false)
+        public UnaryOpComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
             

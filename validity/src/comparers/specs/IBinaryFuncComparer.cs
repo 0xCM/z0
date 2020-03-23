@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IBinaryFuncComparer<T1,T2,T3> : IFuncComparer
+    public interface IBinaryFuncComparer<T1,T2,T3> : IFunctionComparer
     {
         void CheckMatch<F, G>(F baseline, G subject)
             where F : IBinaryFunc<T1, T2, T3>

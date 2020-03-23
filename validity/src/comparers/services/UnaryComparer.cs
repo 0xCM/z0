@@ -9,7 +9,7 @@ namespace Z0
     using static Root;
     using static Validity;
 
-    class UnaryFuncComparer<T1,T2> : FuncComparer, IUnaryFuncComparer<T1,T2>
+    class UnaryFuncComparer<T1,T2> : FunctionComparer, IUnaryFuncComparer<T1,T2>
         where T1 : unmanaged
         where T2 : unmanaged
     {
@@ -19,7 +19,7 @@ namespace Z0
 
         }
 
-        public UnaryFuncComparer(IComparisonContext context, bool xzero = false)
+        public UnaryFuncComparer(IValidationContext context, bool xzero = false)
             : base(context,xzero)
         {
 

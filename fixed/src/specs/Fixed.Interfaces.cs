@@ -38,7 +38,7 @@ namespace Z0
     public interface IFixedChar<C> : IFixedChar
         where C : unmanaged    
     {
-        int IFixed.FixedBitCount
+        int IFixed.BitWidth
         {
             [MethodImpl(Inline)]
             get => bitsize<C>();
@@ -62,7 +62,7 @@ namespace Z0
             get => (FixedWidth)bitsize<T>();
         }
 
-        int IFixed.FixedBitCount
+        int IFixed.BitWidth
         {
             [MethodImpl(Inline)]
             get => (int)bitsize<T>();

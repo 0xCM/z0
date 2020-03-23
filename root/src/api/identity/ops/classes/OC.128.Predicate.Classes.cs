@@ -8,22 +8,22 @@ namespace Z0
 
     using C = PredicateClass;
 
-    partial class Classes
+    partial class OperationClasses
     {
-        public readonly struct PredicateClass : IOpClass<C> { public C Class => C.Predicate; }
+        public readonly struct PredicateClass : IOperationClass<C> { public C Class => C.Predicate; }
 
-        public readonly struct UnaryPredicate : IOpClass<C> { public C Class => C.UnaryPredicate; }
+        public readonly struct UnaryPredicate : IOperationClass<C> { public C Class => C.UnaryPredicate; }
 
-        public readonly struct BinaryPredicate : IOpClass<C> { public C Class => C.BinaryPredicate; }
+        public readonly struct BinaryPredicate : IOperationClass<C> { public C Class => C.BinaryPredicate; }
 
-        public readonly struct TernaryPredicate : IOpClass<C> { public C Class => C.TernaryPredicate; }
+        public readonly struct TernaryPredicate : IOperationClass<C> { public C Class => C.TernaryPredicate; }
 
-        public readonly struct PredicateClass<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.Predicate; }
+        public readonly struct PredicateClass<T> : IOperationClass<C,T> where T : unmanaged { public C Class => C.Predicate; }
 
-        public readonly struct UnaryPredicate<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.UnaryPredicate; }
+        public readonly struct UnaryPredicate<T> : IOperationClass<C,T> where T : unmanaged { public C Class => C.UnaryPredicate; }
 
-        public readonly struct BinaryPredicate<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.BinaryPredicate; }
+        public readonly struct BinaryPredicate<T> : IOperationClass<C,T> where T : unmanaged { public C Class => C.BinaryPredicate; }
 
-        public readonly struct TernaryPredicate<T> : IOpClass<C,T> where T : unmanaged { public C Class => C.TernaryPredicate; }
+        public readonly struct TernaryPredicate<T> : IOperationClass<C,T> where T : unmanaged { public C Class => C.TernaryPredicate; }
     }
 }
