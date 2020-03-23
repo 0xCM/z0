@@ -22,8 +22,8 @@ namespace Z0
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
         public static T pipe<F,G,T>(T x, F f, G g)
-            where F : IUnaryOp<T>
-            where G : IUnaryOp<T>
+            where F : ISFUnaryOpApi<T>
+            where G : ISFUnaryOpApi<T>
                 => g.Invoke(f.Invoke(x));
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
         public static T apply<F,T>(T x, F f)
-            where F : IUnaryOp<T>
+            where F : ISFUnaryOpApi<T>
                 => f.Invoke(x);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
         public static T apply<F,T>(T x, T y, F f)
-            where F : IBinaryOp<T>
+            where F : IFSBinaryOpApi<T>
                 => f.Invoke(x,y);
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace Z0
         /// <typeparam name="T">The type over which the operators are defined</typeparam>
         [MethodImpl(Inline)]
         public static T compose<F,G,T>(T x, F f, G g)
-            where F : IBinaryOp<T>
-            where G : IUnaryOp<T>
+            where F : IFSBinaryOpApi<T>
+            where G : ISFUnaryOpApi<T>
                 => f.Invoke(x, g.Invoke(x));
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Z0
         /// <typeparam name="T">The type over which the operators are defined</typeparam>
         [MethodImpl(Inline)]
         public static T compose<F,G,T>(T x, T y, F f, G g)
-            where F : IBinaryOp<T>
-            where G : IUnaryOp<T>
+            where F : IFSBinaryOpApi<T>
+            where G : ISFUnaryOpApi<T>
                 => f.Invoke(g.Invoke(x), g.Invoke(y));
     }
 }

@@ -120,7 +120,7 @@ namespace Z0
             Run(f, run, w, op.Generalized);
         }
 
-        void Run<W>(IFunc f, Action act, W width, C.OperatorClass c)
+        void Run<W>(ISFApi f, Action act, W width, C.OperatorClass c)
             where W : struct, ITypeWidth
         {
             var succeeded = true;
@@ -153,7 +153,7 @@ namespace Z0
             where W : struct, ITypeWidth
                 => default(W).BitWidth/bitsize<T>();
 
-        string CaseName<W>(IFunc f)
+        string CaseName<W>(ISFApi f)
             where W : struct, ITypeWidth
         {
             var id = OpIdentity.operation(f.Id.Name, default(W).Class, NumericIdentity.kind<T>(),true);

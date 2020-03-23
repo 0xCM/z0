@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    class BinaryOpComparer<T> : BinaryFuncComparer<T,T,T>, IBinaryOpComparer<T>
+    class BinaryOpComparer<T> : BinaryFuncComparer<T,T,T>, ISFApiBinaryOpComparer<T>
         where T : unmanaged
     {
         public BinaryOpComparer(ITestContext context, bool xzero = false)

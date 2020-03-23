@@ -15,12 +15,12 @@ namespace Z0
     public interface IApiServiceFactory 
     {
         S Service<S>()   
-            where S : unmanaged, IFunc
+            where S : unmanaged, ISFApi
                 => ApiServices.Service<S>();
     }
 
     public interface IApiServiceFactory<S> :  IApiServiceFactory
-        where S : unmanaged, IFunc
+        where S : unmanaged, ISFApi
     {
         S Service  
         {
@@ -31,7 +31,7 @@ namespace Z0
 
     public interface IApiServiceFactory<F,S> :  IApiServiceFactory<S>
         where F : unmanaged, IApiServiceFactory<S>
-        where S : unmanaged, IFunc
+        where S : unmanaged, ISFApi
         
     {
 
@@ -46,6 +46,6 @@ namespace Z0
         where F : ApiSvcFactoryProvider<F>, new()
     {
         public IEnumerable<MethodInfo> FactoryMethods 
-            => typeof(F).DeclaredStaticMethods().Where(m => m.ReturnType.Realizes(typeof(IFunc)));
+            => typeof(F).DeclaredStaticMethods().Where(m => m.ReturnType.Realizes(typeof(ISFApi)));
     }
 }

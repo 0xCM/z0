@@ -16,14 +16,14 @@ namespace Z0
     }
 
 
-    public interface IVChecker128<S,T> : IBinaryPredicate<S, Vector128<T>>
+    public interface ISFChecker128Api<S,T> : ISFApi<S, Vector128<T>, bit>
         where S : unmanaged
         where T : unmanaged
     {
         
     }
 
-    public interface IVChecker256<S,T> : IBinaryPredicate<S, Vector256<T>>
+    public interface ISFChecker256Api<S,T> : ISFApi<S, Vector256<T>, bit>
         where S : unmanaged
         where T : unmanaged
     {
@@ -52,7 +52,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where F : IVFactory128<S,T>
-            where C : IVChecker128<S,T>
+            where C : ISFChecker128Api<S,T>
         {
             for(var i=0; i < RepCount; i++)
             {
@@ -67,7 +67,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where F : IVFactory256<S,T>
-            where C : IVChecker256<S,T>
+            where C : ISFChecker256Api<S,T>
         {
             for(var i=0; i< RepCount; i++)
             {

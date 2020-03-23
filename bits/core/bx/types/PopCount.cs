@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BitCoreServices
     {
-        public readonly struct PopCount<T> : IFunc<T,uint>
+        public readonly struct PopCount<T> : ISFApi<T,uint>
             where T : unmanaged        
         {
             public static PopCount<T> Op => default;

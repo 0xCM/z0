@@ -5,30 +5,27 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Security;
-    
-    /// <summary>
-    /// Base interface for block-oriented operations
-    /// </summary>
+
     [SuppressUnmanagedCodeSecurity]
-    public interface IBlockedOp : ISFApi
+    public interface ISFWImm8Op<W> : ISFImm8Api
+        where W : unmanaged, ITypeWidth
+    {
+        TypeWidth WidthKind => default(W).Class;
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISFWImm8UnaryOp<W,A> : ISFImm8UnaryOpApi<A>, ISFWImm8Op<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IBlockedOp<W> : IBlockedOp
-        where W : unmanaged, ITypeNat
+    public interface ISFWImm8BinaryOp<W,A> : ISFImm8BinaryOpApi<A>, ISFWImm8Op<W>
+        where W : unmanaged, ITypeWidth
     {
 
     }
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface IBlockedOp<W,T> : IBlockedOp<W>
-        where W : unmanaged, ITypeNat
-        where T : unmanaged
-    {
-
-    }
 }

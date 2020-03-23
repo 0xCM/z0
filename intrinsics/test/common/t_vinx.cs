@@ -95,7 +95,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where F : IVFactory128<S,T>
-            where C : IVChecker128<S,T>
+            where C : ISFChecker128Api<S,T>
         {
             var casename = CaseName(f);
             void exec()
@@ -128,7 +128,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where F : IVFactory256<S,T>
-            where C : IVChecker256<S,T>
+            where C : ISFChecker256Api<S,T>
         {
             var casename = CaseName(f);
 

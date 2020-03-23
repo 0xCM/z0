@@ -45,7 +45,7 @@ namespace Z0
 
     partial class CheckSpecs
     {
-        public readonly struct VBroadcastCheck128<S, T> : IVChecker128<S, T>
+        public readonly struct VBroadcastCheck128<S, T> : ISFChecker128Api<S, T>
             where S : unmanaged
             where T : unmanaged
         {
@@ -72,7 +72,7 @@ namespace Z0
             }
         }
 
-        public readonly struct VBroadcastCheck256<S, T> : IVChecker256<S, T>
+        public readonly struct VBroadcastCheck256<S, T> : ISFChecker256Api<S, T>
             where S : unmanaged
             where T : unmanaged
         {

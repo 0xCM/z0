@@ -12,7 +12,7 @@ namespace Z0
     public abstract class t_bitpart<X> : t_bitgrids_base<X>
         where X : t_bitpart<X>, new()
     {        
-        protected void bitpart_check<A,B>(Partitioner<A,B> part, int count, int width)
+        protected void bitpart_check<A,B>(SpanPartitioner<A,B> part, int count, int width)
             where A : unmanaged
             where B : unmanaged
         {

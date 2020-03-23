@@ -8,21 +8,21 @@ namespace Z0
 
 
 
-    public interface IVShiftOpComparer128D<T> : IFunctionComparer
+    public interface IVShiftOpComparer128D<T> : ISFComparer
         where T : unmanaged
     {
         void CheckScalarMatch<F>(F f)
             where F : IVShiftOp128D<T>;
     }
 
-    public interface IVShiftOpComparer256D<T> : IFunctionComparer
+    public interface IVShiftOpComparer256D<T> : ISFComparer
         where T : unmanaged
     {
         void CheckScalarMatch<F>(F f)
             where F : IVShiftOp256D<T>;
     }
 
-    public interface IVUnaryOpComparer128D<T> : IFunctionComparer
+    public interface IVUnaryOpComparer128D<T> : ISFComparer
         where T : unmanaged
 
     {
@@ -30,7 +30,7 @@ namespace Z0
             where F : IVUnaryOp128D<T>;
     }
 
-    public interface IVUnaryOpComparer256D<T> : IFunctionComparer
+    public interface IVUnaryOpComparer256D<T> : ISFComparer
         where T : unmanaged
 
     {
@@ -38,7 +38,7 @@ namespace Z0
             where F : IVUnaryOp256D<T>;
     }
 
-    public interface IVBinaryOpComparer128D<T> : IFunctionComparer
+    public interface IVBinaryOpComparer128D<T> : ISFComparer
         where T : unmanaged
 
     {
@@ -46,7 +46,7 @@ namespace Z0
             where F : IVBinaryOp128D<T>;
     }
     
-    public interface IVBinaryOpComparer256D<T> : IFunctionComparer
+    public interface IVBinaryOpComparer256D<T> : ISFComparer
         where T : unmanaged
 
     {
@@ -54,7 +54,7 @@ namespace Z0
             where F : IVBinaryOp256D<T>;
     }
 
-    public interface IVTernaryOpComparer128D<T> : IFunctionComparer
+    public interface IVTernaryOpComparer128D<T> : ISFComparer
         where T : unmanaged
 
     {
@@ -63,7 +63,7 @@ namespace Z0
     }
     
 
-    public interface IVTernaryOpComparer256D<T> : IFunctionComparer
+    public interface IVTernaryOpComparer256D<T> : ISFComparer
         where T : unmanaged
 
     {

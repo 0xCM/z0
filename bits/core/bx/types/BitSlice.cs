@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BitCoreServices
     {
-        public readonly struct BitSlice<T> : IImm8x2UnaryOp<T>
+        public readonly struct BitSlice<T> : ISFImm8x2UnaryOpApi<T>
             where T : unmanaged        
         {
             public static BitSlice<T> Op => default;

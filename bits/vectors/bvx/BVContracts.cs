@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IBVUnaryOp<T> : IUnaryOp<BitVector<T>>
+    public interface IBVUnaryOp<T> : ISFUnaryOpApi<BitVector<T>>
         where T : unmanaged
     {
 
@@ -19,7 +19,7 @@ namespace Z0
         T InvokeScalar(T a);
     }
 
-    public interface IBVBinaryOp<T> : IBinaryOp<BitVector<T>>
+    public interface IBVBinaryOp<T> : IFSBinaryOpApi<BitVector<T>>
         where T : unmanaged
     {
 
@@ -31,7 +31,7 @@ namespace Z0
         T InvokeScalar(T a, T b);
     }
 
-    public interface IBVUnaryPred<T> : IUnaryPredicate<BitVector<T>>
+    public interface IBVUnaryPred<T> : ISFApi<BitVector<T>, bit>
         where T : unmanaged
     {
 
@@ -44,7 +44,7 @@ namespace Z0
     }
 
 
-    public interface IBVBinaryPred<T> : IBinaryPredicate<BitVector<T>>
+    public interface IBVBinaryPred<T> : ISFApi<BitVector<T>,BitVector<T>,bit>
         where T : unmanaged
     {
 
@@ -56,7 +56,7 @@ namespace Z0
         bit InvokeScalar(T a, T b);
     }
 
-    public interface IBVTernaryOp<T> : ITernaryOp<BitVector<T>>
+    public interface IBVTernaryOp<T> : IFSTernaryOpApi<BitVector<T>>
         where T : unmanaged
     {
 

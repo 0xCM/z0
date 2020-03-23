@@ -6,11 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IBinaryPredicateComparer<T> : IBinaryFuncComparer<T,T,bit>
-    {
 
-        
-    }
 
 
 }

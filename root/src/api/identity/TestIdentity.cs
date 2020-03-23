@@ -24,7 +24,7 @@ namespace Z0
         /// Produces the name of the test case for the specified function
         /// </summary>
         /// <param name="f">The function</param>
-        public static string testcase(Type host, IFunc f)
+        public static string testcase(Type host, ISFApi f)
             => $"{TypeIdentity.owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
 
         /// <summary>

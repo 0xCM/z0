@@ -6,35 +6,18 @@ namespace Z0
 {
     using System;
     using System.Security;
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate A Imm8UnaryOp<A>(A a, byte b);
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate A Imm8BinaryOp<A>(A a, A b, byte c);
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Span<T> Imm8ShiftSpanOp<T>(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
         
     /// <summary>
     /// Marker for a function that accepts an 8-bit immediate value in one or more parameters
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface IImm8Func : IFunc
+    public interface ISFImm8Api : ISFApi
     {
 
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImm8Func<W> : IImm8Func
-        where W : unmanaged, ITypeWidth
-    {
-        TypeWidth WidthKind => default(W).Class;
     }
 
     /// <summary>
-    /// Characterizes a binary function F:A -> byte -> A that accepts an 8-bit 
-    /// immediate value in the second parameter. 
+    /// Characterizes a binary function F:A -> byte -> A that accepts an 8-bit immediate value in the second parameter. 
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     /// <remarks>
@@ -43,16 +26,9 @@ namespace Z0
     /// justifies the contract name
     /// </remarks>
     [SuppressUnmanagedCodeSecurity]
-    public interface IImm8UnaryOp<A> : IImm8Func, IFunc<A,byte,A>
+    public interface ISFImm8UnaryOpApi<A> : ISFImm8Api, ISFApi<A,byte,A>
     {
            
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImmUnaryOp<W,A> : IImm8UnaryOp<A>, IImm8Func<W>
-        where W : unmanaged, ITypeWidth
-    {
-
     }
 
     /// <summary>
@@ -61,17 +37,10 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IImm8BinaryOp<A> : IImm8Func, IFunc<A,A,byte,A>
+    public interface ISFImm8BinaryOpApi<A> : ISFImm8Api, ISFApi<A,A,byte,A>
     {
 
     }    
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImm8BinaryOp<W,A> : IImm8BinaryOp<A>, IImm8Func<W>
-        where W : unmanaged, ITypeWidth
-    {
-
-    }
 
     /// <summary>
     /// Characterizes a ternary function F:A -> byte -> byte -> A that accepts 8-bit 
@@ -79,7 +48,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IImm8x2UnaryOp<A> : IImm8Func, IFunc<A,byte,byte,A>
+    public interface ISFImm8x2UnaryOpApi<A> : ISFImm8Api, ISFApi<A,byte,byte,A>
     {
 
     }
@@ -89,20 +58,8 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IImm8ShiftOp<A> : IImm8UnaryOp<A>
+    public interface ISFImm8ShiftApi<A> : ISFImm8UnaryOpApi<A>
     {
 
     }    
-
-    /// <summary>
-    /// Characterizes a span operator that shifts each source element by the same amount
-    /// </summary>
-    /// <typeparam name="T">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImm8ShiftSpanOp<T> : IImm8Func, IShiftSpanOp
-    {
-        Span<T> Invoke(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
-
-        Imm8ShiftSpanOp<T> Operation => Invoke;
-    }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using static Root;
     using static Validity;
 
-    class BinaryFuncComparer<T1,T2,T3> : FunctionComparer, IBinaryFuncComparer<T1,T2,T3>
+    class BinaryFuncComparer<T1,T2,T3> : FunctionComparer, ISFApiComparer<T1,T2,T3>
         where T1 : unmanaged
         where T2 : unmanaged
         where T3 : unmanaged
@@ -26,7 +26,7 @@ namespace Z0
             
         }
 
-        void IBinaryFuncComparer<T1,T2,T3>.CheckMatch<F, G>(F baseline, G subject)
+        void ISFApiComparer<T1,T2,T3>.CheckMatch<F, G>(F baseline, G subject)
         {
             var casename = TestIdentity.testcase(Context.HostType, subject);
             var succeeded = true;       
@@ -59,7 +59,7 @@ namespace Z0
             }
         }
 
-        void IBinaryFuncComparer<T1,T2,T3>.CheckSpan<F, G>(F baseline, G subject)
+        void ISFApiComparer<T1,T2,T3>.CheckSpan<F, G>(F baseline, G subject)
         {
             var casename = TestIdentity.testcase(Context.HostType, $"{subject.Id}_span");
             var succeeded = true;

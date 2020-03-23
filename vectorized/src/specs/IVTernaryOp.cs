@@ -13,7 +13,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp<V> : IVFunc, ITernaryOp<V>
+    public interface IVTernaryOp<V> : IVFunc, IFSTernaryOpApi<V>
         where V : struct
     {
         

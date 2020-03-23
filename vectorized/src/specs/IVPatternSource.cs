@@ -14,7 +14,7 @@ namespace Z0
     /// <typeparam name="V">The vector type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVPatternSource<W,V,T> : IVFunc, IFunc<V>
+    public interface IVPatternSource<W,V,T> : IVFunc, ISFApi<V>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged

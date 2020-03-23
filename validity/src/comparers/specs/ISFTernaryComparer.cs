@@ -6,8 +6,5 @@ namespace Z0
 {
     using System;
     
-    public interface IFunctionComparer : IService<IValidationContext>
-    {
-        
-    }
+
 }

@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface INatUnaryOp<N,T> : IUnaryOp<T>
+    public interface INatUnaryOp<N,T> : ISFUnaryOpApi<T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {

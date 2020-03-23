@@ -13,7 +13,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public abstract class FunctionComparer : IFunctionComparer
+    public abstract class FunctionComparer : ISFComparer
     {
         /// <summary>
         /// Allocates and optionally starts a system counter
@@ -71,7 +71,7 @@ namespace Z0
             
         }
 
-        protected string CaseName(IFunc f)
+        protected string CaseName(ISFApi f)
         {
             var id = OpIdentity.operation(f.Id.Name, default(W).Class, NumericIdentity.kind<T>(),true);
             var owner = TypeIdentity.owner(Context.HostType);

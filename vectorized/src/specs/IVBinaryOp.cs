@@ -14,7 +14,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOpImm8<W,V,T> : IVFunc, IImm8BinaryOp<W,V>
+    public interface IVBinaryOpImm8<W,V,T> : IVFunc, ISFWImm8BinaryOp<W,V>
         where W : unmanaged, ITypeWidth
     {
 
@@ -27,7 +27,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOp<W,V,T> : IVFunc, IBinaryOp<V>
+    public interface IVBinaryOp<W,V,T> : IVFunc, IFSBinaryOpApi<V>
         where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged

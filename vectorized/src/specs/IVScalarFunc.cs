@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFunc<W,V,T,K> : IVFunc, IFunc<V,K>
+    public interface IVScalarFunc<W,V,T,K> : IVFunc, ISFApi<V,K>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
@@ -33,7 +33,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFuncImm8<W,V,T,K> : IVFunc, IFunc<V,byte,K>
+    public interface IVScalarFuncImm8<W,V,T,K> : IVFunc, ISFApi<V,byte,K>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
@@ -53,7 +53,7 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFunc<W1,W2,V1,V2,T1,T2,K> : IVFunc, IFunc<V1,V2,K>
+    public interface IVScalarFunc<W1,W2,V1,V2,T1,T2,K> : IVFunc, ISFApi<V1,V2,K>
         where W1 : unmanaged, ITypeWidth<W1>
         where W2 : unmanaged, ITypeWidth<W2>
         where V1 : struct
@@ -76,7 +76,7 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFuncImm8<W1,W2,V1,V2,T1,T2,K> : IVFunc, IFunc<V1,V2,byte,K>
+    public interface IVScalarFuncImm8<W1,W2,V1,V2,T1,T2,K> : IVFunc, ISFApi<V1,V2,byte,K>
         where W1 : unmanaged, ITypeWidth<W1>
         where W2 : unmanaged, ITypeWidth<W2>
         where V1 : struct
@@ -102,7 +102,7 @@ namespace Z0
     /// <typeparam name="T3">The component type of the third vector</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3,K> : IVFunc, IFunc<V1,V2,V3,K>
+    public interface IVScalarFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3,K> : IVFunc, ISFApi<V1,V2,V3,K>
         where W1 : unmanaged, ITypeWidth<W1>
         where W2 : unmanaged, ITypeWidth<W2>
         where W3 : unmanaged, ITypeWidth<W3>

@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct TernaryOp<T> : Z0.ITernaryOp<T> 
+        public readonly struct TernaryOp<T> : Z0.IFSTernaryOpApi<T> 
         {
             readonly Z0.TernaryOp<T> F;
             

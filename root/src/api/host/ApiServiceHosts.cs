@@ -34,6 +34,6 @@ namespace Z0
         where P : IApiServiceHosts<P>, new()
     {
         public Type[] HostTypes 
-            => typeof(P).GetNestedTypes().Realize<IFunc>().ToArray();
+            => typeof(P).GetNestedTypes().Realize<ISFApi>().ToArray();
     }        
 }

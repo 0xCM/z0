@@ -15,7 +15,7 @@ namespace Z0
     {     
         static Span<T> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-            where F : IBinaryOp<T>
+            where F : IFSBinaryOpApi<T>
         {        
             var count = lhs.Length;
             var dst = alloc<T>(count);
@@ -30,7 +30,7 @@ namespace Z0
 
         static Span<T> apply<F,T>(F f, Span<T> lhs, Span<T> rhs)
             where T : unmanaged
-            where F : IBinaryOp<T>
+            where F : IFSBinaryOpApi<T>
                 => apply(f,lhs.ReadOnly(), rhs.ReadOnly());
      
         protected static Span<T> and<T>(Span<T> lhs, Span<T> rhs)

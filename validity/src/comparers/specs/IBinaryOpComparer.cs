@@ -6,9 +6,5 @@ namespace Z0
 {
     using System;
 
-    public interface IBinaryOpComparer<T> : IBinaryFuncComparer<T,T,T>
-    {
 
-        
-    }
 }

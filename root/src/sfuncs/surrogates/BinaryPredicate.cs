@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct BinaryPredicate<T> : IBinaryPredicate<T>
+        public readonly struct BinaryPredicate<T> : ISFApi<T,T,bit>
         {
             public OpIdentity Id {get;}
 

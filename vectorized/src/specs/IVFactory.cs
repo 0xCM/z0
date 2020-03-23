@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="V">The target vector type</typeparam>
     /// <typeparam name="T">The target vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactory<W,S,V,T> : IVFunc, IFunc<S,V>
+    public interface IVFactory<W,S,V,T> : IVFunc, ISFApi<S,V>
         where W : unmanaged, ITypeWidth<W>
         where T : unmanaged
         where V : struct

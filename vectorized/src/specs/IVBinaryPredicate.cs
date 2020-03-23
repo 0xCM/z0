@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="W">The natural type</typeparam>
     /// <typeparam name="V">The non-primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryPred<W,V> : IVFunc, IBinaryPredicate<V>
+    public interface IVBinaryPred<W,V> : IVFunc, ISFApi<V,V,bit>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
     {

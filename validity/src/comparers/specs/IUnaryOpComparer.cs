@@ -6,9 +6,5 @@ namespace Z0
 {
     using System;
 
-    public interface IUnaryOpComparer<T> : IUnaryFuncComparer<T,T>
-    {
 
-        
-    }
 }

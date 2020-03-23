@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Eq<T> : IBinaryPredicate<T>, IBinarySpanPred<T>
+        public readonly struct Eq<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "eq";
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Neq<T> : IBinaryPredicate<T>, IBinarySpanPred<T>
+        public readonly struct Neq<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "neq";
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Lt<T> : IBinaryPredicate<T>, IBinarySpanPred<T>
+        public readonly struct Lt<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "lt";
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct LtEq<T> : IBinaryPredicate<T>, IBinarySpanPred<T>
+        public readonly struct LtEq<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "lteq";
@@ -87,7 +87,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Gt<T> : IBinaryPredicate<T>, IBinarySpanPred<T>
+        public readonly struct Gt<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "gt";
@@ -106,7 +106,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct GtEq<T> : IBinaryPredicate<T>, IBinarySpanPred<T>
+        public readonly struct GtEq<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "gteq";
@@ -125,7 +125,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Between<T> : ITernaryPredicate<T>
+        public readonly struct Between<T> : ISFApi<T,T,T,bit>
             where T : unmanaged        
         {
             public const string Name = "between";
@@ -140,7 +140,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Nonz<T> : IUnaryPredicate<T>, IUnarySpanPred<T>
+        public readonly struct Nonz<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "nonz";
@@ -159,7 +159,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct NegativeOp<T> : IUnaryPredicate<T>, IUnarySpanPred<T>
+        public readonly struct NegativeOp<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "negative";
@@ -178,7 +178,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct PositiveOp<T> : IUnaryPredicate<T>, IUnarySpanPred<T>
+        public readonly struct PositiveOp<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "positive";
@@ -197,7 +197,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Min<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Min<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "min";
@@ -216,7 +216,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Max<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Max<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "max";

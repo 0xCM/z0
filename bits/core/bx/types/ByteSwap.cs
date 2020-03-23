@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BitCoreServices
     {
-        public readonly struct ByteSwap<T> : IUnaryOp<T>
+        public readonly struct ByteSwap<T> : ISFUnaryOpApi<T>
             where T : unmanaged        
         {
             public static ByteSwap<T> Op => default;

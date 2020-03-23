@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Parse<T>  : INumericParser<T>
+        public readonly struct Parse<T>  : ISFNumericParserApi<T>
             where T : unmanaged        
         {
             public const string Name = "parse";

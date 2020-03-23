@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    class UnaryOpComparer<T> : UnaryFuncComparer<T,T>, IUnaryOpComparer<T>
+    class UnaryOpComparer<T> : UnaryFuncComparer<T,T>, ISFApiUnaryOpComparer<T>
         where T : unmanaged
     {
         public UnaryOpComparer(ITestContext context, bool xzero = false)

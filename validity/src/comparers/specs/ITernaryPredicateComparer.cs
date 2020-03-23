@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public interface ITernaryPredicateComparer<T> : ITernaryFuncComparer<T,T,T,bit>
+    public interface ITernaryPredicateComparer<T> : ISFApiComparer<T,T,T,bit>
     {
 
         

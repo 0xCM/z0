@@ -11,7 +11,7 @@ namespace Z0
 
     public static partial class BVTypes
     {
-        public readonly struct Width<T> : IFunc<BitVector<T>,int>
+        public readonly struct Width<T> : ISFApi<BitVector<T>,int>
             where T : unmanaged        
         {    
             public static Width<T> Op => default;

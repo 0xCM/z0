@@ -13,7 +13,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp<V> : IVFunc, IUnaryOp<V>
+    public interface IVUnaryOp<V> : IVFunc, ISFUnaryOpApi<V>
         where V : struct
     {
    
@@ -130,7 +130,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOpImm8<W,V,T> : IImm8UnaryOp<V>
+    public interface IVUnaryOpImm8<W,V,T> : ISFImm8UnaryOpApi<V>
         where W : unmanaged, ITypeWidth<W>
     {
     }
@@ -142,7 +142,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOpImm8x2<W,V,T> : IImm8x2UnaryOp<V>
+    public interface IVUnaryOpImm8x2<W,V,T> : ISFImm8x2UnaryOpApi<V>
         where W : unmanaged, ITypeWidth<W>
     {
 

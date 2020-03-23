@@ -14,7 +14,7 @@ namespace Z0
     /// <typeparam name="U">The source operand type</typeparam>
     /// <typeparam name="T">The target operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMap<U,V> : IVFunc, IMap<U,V>
+    public interface IVMap<U,V> : IVFunc, ISFMapApi<U,V>
         where U : struct
         where V : struct
     {

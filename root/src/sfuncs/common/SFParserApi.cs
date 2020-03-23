@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface INumericParser<T> : IUnaryFunc<string,T>
+    public interface ISFNumericParserApi<T> : ISFApi<string,T>
         where T : unmanaged
     {
         

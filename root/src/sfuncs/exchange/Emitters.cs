@@ -74,7 +74,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The production type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IEmitter<A> : IFunc<A>, ISource
+    public interface IEmitter<A> : ISFApi<A>, ISource
     {
         
     }
@@ -110,10 +110,10 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISpanEmitter<T> : ISpanFunc
+    public interface ISpanEmitter<T> : ISFSpanApi
     {
         Span<T> Invoke();
 
-        FunctionClass IFunc.Class => FunctionClass.Emitter;
+        FunctionClass ISFApi.Class => FunctionClass.Emitter;
     }
 }

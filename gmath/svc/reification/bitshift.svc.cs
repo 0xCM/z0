@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Srl<T> : IImm8ShiftOp<T>, IImm8ShiftSpanOp<T>
+        public readonly struct Srl<T> : ISFImm8ShiftApi<T>, ISFImm8SpanShiftApi<T>
             where T : unmanaged        
         {
             public const string Name = "srl";
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Sll<T> : IImm8ShiftOp<T>, IImm8ShiftSpanOp<T>
+        public readonly struct Sll<T> : ISFImm8ShiftApi<T>, ISFImm8SpanShiftApi<T>
             where T : unmanaged        
         {
             public const string Name = "sll";
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Sllv<T> : IVarShiftSpanOp<T>
+        public readonly struct Sllv<T> : ISFSpanShiftVarApi<T>
             where T : unmanaged        
         {
             public const string Name = "sllv";
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Srlv<T> : IVarShiftSpanOp<T>
+        public readonly struct Srlv<T> : ISFSpanShiftVarApi<T>
             where T : unmanaged        
         {
             public const string Name = "srlv";

@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Add<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Add<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "add";
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Sub<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Sub<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "sub";
@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Mul<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Mul<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "mul";
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Div<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Div<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "div";
@@ -86,7 +86,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct ModOp<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct ModOp<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "mod";
@@ -104,7 +104,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct ModMul<T> : ITernaryOp<T>, ITernarySpanOp<T>
+        public readonly struct ModMul<T> : IFSTernaryOpApi<T>, ISFTernarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "modmul";
@@ -122,7 +122,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Even<T> : IUnaryPredicate<T>, IUnarySpanPred<T>
+        public readonly struct Even<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "even";
@@ -140,7 +140,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Odd<T> : IUnaryPredicate<T>, IUnarySpanPred<T>
+        public readonly struct Odd<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
             where T : unmanaged        
         {
             public const string Name = "odd";
@@ -158,7 +158,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Clamp<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Clamp<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "clamp";
@@ -176,7 +176,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Square<T> : IUnaryOp<T>, IUnarySpanOp<T>
+        public readonly struct Square<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "square";
@@ -195,7 +195,7 @@ namespace Z0
         }
     
         [NumericClosures(NumericKind.All)]
-        public readonly struct Negate<T> : IUnaryOp<T>, IUnarySpanOp<T>
+        public readonly struct Negate<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "negate";
@@ -214,7 +214,7 @@ namespace Z0
     
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Dec<T> : IUnaryOp<T>, IUnarySpanOp<T>
+        public readonly struct Dec<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "dec";
@@ -232,7 +232,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Inc<T> : IUnaryOp<T>, IUnarySpanOp<T>
+        public readonly struct Inc<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
             where T : unmanaged        
         {        
             public const string Name = "inc";
@@ -250,7 +250,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Abs<T>  : IUnaryOp<T>, IUnarySpanOp<T>
+        public readonly struct Abs<T>  : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "abs";
@@ -268,7 +268,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Dist<T> : IFunc<T,T,ulong>
+        public readonly struct Dist<T> : ISFApi<T,T,ulong>
             where T : unmanaged        
         {
             public const string Name = "dist";

@@ -32,8 +32,8 @@ namespace Z0
         /// Instantiates a service operation host
         /// </summary>
         /// <param name="host">The hosting type</param>
-        public static IFunc Service(Type host)
-            => (IFunc)Activator.CreateInstance(host);        
+        public static ISFApi Service(Type host)
+            => (ISFApi)Activator.CreateInstance(host);        
 
         /// <summary>
         /// Instantiates a strongly-typed operation host
@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="S">The host type</typeparam>
         [MethodImpl(Inline)]
         public static S Service<S>()
-            where S : unmanaged, IFunc
+            where S : unmanaged, ISFApi
                 => default(S);
     }
 }

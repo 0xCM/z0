@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct UnaryOp<T> : IUnaryOp<T>
+        public readonly struct UnaryOp<T> : ISFUnaryOpApi<T>
         {
             public OpIdentity Id {get;}
 

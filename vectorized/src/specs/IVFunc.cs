@@ -12,7 +12,7 @@ namespace Z0
     /// Common base interface for vectorized functions
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFunc : IFunc
+    public interface IVFunc : ISFApi
     {
 
 
@@ -37,7 +37,7 @@ namespace Z0
     /// <typeparam name="T1">The component type of the first vector</typeparam>
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFunc<W1,W2,V1,V2,T1,T2> : IVFunc, IFunc<V1,V2>
+    public interface IVFunc<W1,W2,V1,V2,T1,T2> : IVFunc, ISFApi<V1,V2>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
         where V1 : struct
@@ -62,7 +62,7 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="T3">The component type of the result vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3> : IVFunc, IFunc<V1,V2,V3>
+    public interface IVFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3> : IVFunc, ISFApi<V1,V2,V3>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
         where W3 : unmanaged, ITypeWidth
@@ -92,7 +92,7 @@ namespace Z0
     /// <typeparam name="T3">The component type of the third vector</typeparam>
     /// <typeparam name="T4">The component type of the result vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFunc<W1,W2,W3,W4,V1,V2,V3,V4,T1,T2,T3,T4> : IVFunc, IFunc<V1,V2,V3,V4>
+    public interface IVFunc<W1,W2,W3,W4,V1,V2,V3,V4,T1,T2,T3,T4> : IVFunc, ISFApi<V1,V2,V3,V4>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
         where W3 : unmanaged, ITypeWidth
