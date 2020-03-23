@@ -6,19 +6,8 @@ namespace Z0
 {    
     using System;
 
-    public sealed class AsciSymSet : SymbolSet<AsciSymSet, AsciAlphabet>
+    public static class AsciSym
     {
-        static AsciSymSet()
-        {
-            _Symbols = new Symbol<AsciAlphabet>[]
-            {
-                Amp, At, Bang, BSlash, Caret, Colon, Comma,Dollar, Dot, Eq,
-                FSlash, Gt, Hash, LBrace, LBracket, LParen, Lt, Dash, Pipe, Plus,
-                Percent, Quote, RParen, RBrace, RBracket, Semicolon, Space,
-                SQuote, Star, Tilde,
-            };            
-        }
-
         /// <summary>
         /// Defines the '&' symbol
         /// </summary>
@@ -178,6 +167,61 @@ namespace Z0
         /// Defines the '~' character
         /// </summary>
         public const char Underscore = '_'; 
+    }
 
+    public class AsciDigits
+    {        
+        public const char A0 = '0';
+        
+        public const char A1 = '1';
+        
+        public const char A2 = '2';
+        
+        public const char A3 = '3';
+        
+        public const char A4 = '4';
+        
+        public const char A5 = '5';
+        
+        public const char A6 = '6';
+        
+        public const char A7 = '7';
+        
+        public const char A8 = '8';
+        
+        public const char A9 = '9';
+        
+    }    
+
+    public class AsciEscape
+    {
+        
+        public const char Tab = '\t';
+
+        public const char NewLine = '\n';
+
+        public const char LineFeed = '\r';
+
+        /// <summary>
+        /// The end-of-line escape sequence
+        /// </summary>
+        public const string Eol = "\r\n";
+    }    
+
+    public class ArrowSymbols
+    {
+        public const char RightSquiggle = '⇝';
+        
+        public const char LeftSquiggle = '⇜';
+
+        public const char LongRightArrow = '⟶';
+
+        public const char RightArrow = '→';
+
+        public const char LeftArrow = '←';
+
+        public const char MapsTo = '↦';
+
+        public const string AsciArrow = "->";
     }
 }

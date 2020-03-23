@@ -12,27 +12,25 @@ namespace Z0
     using static As;
     using static Cast;
 
-    public readonly struct BitConversion : IUnmanagedConverter<BitConversion, bit>
+    public readonly struct BitConversion : IConversionProvider<BitConversion, bit>, IBiconverter<bit>
     {
+        public BitConversion Converter => default;
+
         [MethodImpl(Inline)]
         public static From<T> FromBit<T>()
-            where T : unmanaged
-                => From<T>.Service;
+            => From<T>.Service;
 
         [MethodImpl(Inline)]
         public static To<T> ToBit<T>()
-            where T : unmanaged
-                => To<T>.Service;
+            => To<T>.Service;
 
         [MethodImpl(Inline)]
         public T Convert<T>(bit src)
-            where T : unmanaged
-                => FromBit<T>().Convert(src);
+            => FromBit<T>().Convert(src);
 
         [MethodImpl(Inline)]
         public bit Convert<T>(T src) 
-            where T : unmanaged
-                => ToBit<T>().Convert(src);
+            => ToBit<T>().Convert(src);
 
         static Option<object> FromTarget(object incoming, Type dst)
             => Try(() => ocast((uint)(bit)incoming, dst.NumericKind()));
@@ -48,8 +46,7 @@ namespace Z0
         public Option<object> ConvertToTarget(object incoming)
             => ToTarget(incoming);
 
-        public readonly struct From<T> : IUnmanagedConveter<bit,T>
-            where T : unmanaged
+        public readonly struct From<T> : IConverter<bit,T>
         {            
             public static From<T> Service => default(From<T>);
 
@@ -83,8 +80,7 @@ namespace Z0
             }
         }
 
-        public readonly struct To<T> : IUnmanagedConveter<T, bit>
-            where T : unmanaged
+        public readonly struct To<T> : IConverter<T, bit>
         {
             public static To<T> Service => default(To<T>);
 

@@ -148,7 +148,7 @@ namespace Z0.Asm
         public static Option<Assembly> ResolvedAssembly(this IAsmContext context, PartId id)
             =>  (from r in  context.Compostion.Resolved
                 where r.Id == id
-                select r.Resolved).FirstOrDefault();
+                select r.Owner).FirstOrDefault();
 
         public static IEnumerable<PartId> ActiveAssemblies(this IAsmContext context)
         {

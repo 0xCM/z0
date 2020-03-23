@@ -9,7 +9,6 @@ namespace Z0
         
     using static Root;    
     using static As;
-    using static AsIn;
 
     partial class gmath
     {

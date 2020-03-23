@@ -15,10 +15,28 @@ namespace Z0
 
     using static Root;
 
+    public interface IAppMsg : ICustomFormattable
+    {
+        /// <summary>
+        /// The message body
+        /// </summary>
+        object Content {get;}
+
+        /// <summary>
+        /// The message classification
+        /// </summary>
+        AppMsgKind Kind {get;}
+
+        /// <summary>
+        /// The message foreground color when rendered for display
+        /// </summary>
+        AppMsgColor Color {get;}        
+    }
+    
     /// <summary>
     /// Defines a message that encapsulates application diagnstic/status/error message content
     /// </summary>
-    public class AppMsg  : IFormattable<AppMsg>
+    public class AppMsg  : IAppMsg
     {
         public static AppMsg Define(object content, AppMsgKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind, caller, FilePath.Define(file), line);

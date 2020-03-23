@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     public static partial class Root
-    {        
+    {                
         [MethodImpl(Inline)]
         public static TheEmpty empty() 
             => TheEmpty.The;
@@ -48,14 +48,6 @@ namespace Z0
             => Unsafe.SizeOf<T>();
 
         /// <summary>
-        /// Computes the byte-size of a type
-        /// </summary>
-        /// <typeparam name="T">The type</typeparam>
-        [MethodImpl(Inline)]
-        public static int size<T>(T t)
-            => Unsafe.SizeOf<T>();
-
-        /// <summary>
         /// Computes the bit-width of a type
         /// </summary>
         /// <param name="t">A type representative</param>
@@ -64,6 +56,15 @@ namespace Z0
         public static int bitsize<T>()            
             where T : unmanaged
                 => Unsafe.SizeOf<T>()*8;
+
+        /// <summary>
+        /// Computes the byte-size of a type
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        [MethodImpl(Inline)]
+        public static int size<T>(T t)
+            => Unsafe.SizeOf<T>();
+
 
         /// <summary>
         /// Computes the bit-width of a type

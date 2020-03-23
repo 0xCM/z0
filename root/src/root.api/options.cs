@@ -10,6 +10,15 @@ namespace Z0
     partial class Root
     {
         /// <summary>
+        /// Returns the null value for a nullable value type
+        /// </summary>
+        /// <typeparam name="T">The nullable value type</typeparam>
+        [MethodImpl(Inline)]
+        public static T? unvalued<T>()
+            where T : struct
+                => (T?)null;
+
+        /// <summary>
         /// Defines a non-valued option
         /// </summary>
         /// <typeparam name="T">The value type, if the value existed</typeparam>

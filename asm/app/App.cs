@@ -11,8 +11,8 @@ namespace Z0.Asm.Check
 
     class App : ConsoleApp<App,IAsmContext>
     {
-        static IApiAssembly[] Resolutions
-            => new IApiAssembly[]{
+        static IApiPart[] Resolutions
+            => new IApiPart[]{
                 R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
                 R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
                 R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,

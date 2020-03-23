@@ -206,6 +206,8 @@ public enum PartId : ulong
 
     Canonical = 1030,
 
+    Memories = 1035,
+
     Svc = ushort.MaxValue + 1,
 
     Test = Svc << 1,

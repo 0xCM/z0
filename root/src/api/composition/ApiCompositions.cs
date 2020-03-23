@@ -14,7 +14,7 @@ namespace Z0
         /// Covers the source resolutions with an assembly composition
         /// </summary>
         /// <param name="resolutions">The resolutions</param>
-        public static ApiComposition Assemble(this IEnumerable<IApiAssembly> resolutions)
+        public static ApiComposition Assemble(this IEnumerable<IApiPart> resolutions)
             => ApiComposition.Assemble(resolutions.Where(r => r.Id != 0).ToArray());
     }
 }

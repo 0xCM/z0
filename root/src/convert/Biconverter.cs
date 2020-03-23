@@ -37,7 +37,7 @@ namespace Z0
             = new Dictionary<Type, Option<IBiconverter>>();
     }
 
-    public readonly struct Biconverter<S> : IBiconverter<S>
+    public readonly struct Biconverter<S> //: IBiconverter<S>
     {        
         
         /// <summary>

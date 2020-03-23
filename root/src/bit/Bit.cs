@@ -52,6 +52,14 @@ namespace Z0
         public static bit Parse(char c)
             => c == One;
 
+        [MethodImpl(Inline)]
+        public static T generic<T>(bit src)
+            => Unsafe.As<bit,T>(ref src);                 
+
+        [MethodImpl(Inline)]
+        public static bit ubit<T>(T src)
+            => Unsafe.As<T,bit>(ref src);        
+
         public static bit Parse(string src)
             => OnLabels.Contains(src.Trim().ToLower());
 

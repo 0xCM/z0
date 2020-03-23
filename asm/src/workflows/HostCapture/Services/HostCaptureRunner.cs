@@ -109,11 +109,14 @@ namespace Z0.Asm
                     SaveReport(CreateReport(host, extracts), paths.ExtractPath);
 
                     var parsed = ParseMembers(host, extracts);
-                    SaveReport(CreateReport(host, parsed), paths.ParsedPath);
-                    SaveCode(host, parsed, paths.CodePath);
-                    
-                    var decoded = DecodeParsed(host, parsed);
-                    SaveDecoded(host, decoded, paths.DecodedPath);
+                    if(parsed.Length != 0)
+                    {
+                        SaveReport(CreateReport(host, parsed), paths.ParsedPath);
+                        SaveCode(host, parsed, paths.CodePath);
+                        
+                        var decoded = DecodeParsed(host, parsed);
+                        SaveDecoded(host, decoded, paths.DecodedPath);
+                    }
                 }
                 catch(Exception e)
                 {

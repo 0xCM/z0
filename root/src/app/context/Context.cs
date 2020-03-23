@@ -29,8 +29,8 @@ namespace Z0
         /// <param name="composition">The composition to which the context has access</param>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static ComposedApiContext Compose(IApiComposition composition)
-            => new ComposedApiContext(NextId(), composition);
+        public static ApiContext Compose(IApiComposition composition)
+            => new ApiContext(NextId(), composition);
 
         /// <summary>
         /// Defines a stateful composed context
@@ -39,8 +39,8 @@ namespace Z0
         /// <param name="composition">The composition to which the context has access</param>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static ComposedContext<S> Compose<S>(S state, IApiComposition composition)
-            => new ComposedContext<S>(NextId(), state, composition);
+        public static ApiContext<S> Compose<S>(S state, IApiComposition composition)
+            => new ApiContext<S>(NextId(), state, composition);
 
         static int LastId = 0;
 

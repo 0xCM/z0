@@ -12,7 +12,6 @@ namespace Z0
 
     partial class TextingOps
     {
-
         /// <summary>
         /// Determines whether the source character is a decimal digit per the unicode standard
         /// </summary>
@@ -53,7 +52,6 @@ namespace Z0
                 return '9';
             else
                 return '∅';                        
-        }            
- 
+        }             
     }
 }

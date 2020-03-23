@@ -58,6 +58,5 @@ namespace Z0
         /// <param name="substrings">The characters for which to search</param>
         public static bool ContainsAny(this string src, IEnumerable<string> substrings)
             => substrings.Any(ss => src.Contains(ss));
-
     }
 }

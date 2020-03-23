@@ -18,17 +18,17 @@ namespace Z0
         public static IApiComposition Empty => Assemble();
 
         [MethodImpl(Inline)]
-        public static ApiComposition Assemble(params IApiAssembly[] resolved)
+        public static ApiComposition Assemble(params IApiPart[] resolved)
             => new ApiComposition(resolved);
 
         [MethodImpl(Inline)]
-        ApiComposition(IApiAssembly[] resolved)
+        ApiComposition(IApiPart[] resolved)
             => Resolved = resolved;
 
         /// <summary>
         /// The members of the compostion
         /// </summary>
-        public IApiAssembly[] Resolved {get;}   
+        public IApiPart[] Resolved {get;}   
 
         public bool IsEmpty
             => Resolved.Length == 0;

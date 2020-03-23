@@ -13,7 +13,6 @@ namespace Z0
 
     partial class CollectiveOps
     {
-        
         /// <summary>
         /// Determines whether the dictionary has any the keys that are specified in a set
         /// </summary>
@@ -33,6 +32,5 @@ namespace Z0
         /// <param name="keys">The keys to check</param>
         public static bool HasAllKeys<K, V>(this IReadOnlyDictionary<K, V> subject, IEnumerable<K> keys)
             => keys.Count(k => subject.ContainsKey(k)) == keys.Count();
-
     }
 }

@@ -309,7 +309,7 @@ namespace Z0
             where T : unmanaged 
         {
             if(typeof(T) == typeof(bit))
-                Claim.eq(As.ubit(lhs), As.ubit(rhs));
+                Claim.eq(bit.ubit(lhs), bit.ubit(rhs));
             else
                 Numeric.eq(lhs,rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
         }

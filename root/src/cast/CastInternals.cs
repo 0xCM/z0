@@ -13,7 +13,6 @@ namespace Z0
     using NK = NumericKind;
 
     using static Root;
-    using static As;
 
     [ApiHost("cast.internals", ApiHostKind.Direct)]
     static class CastInternals

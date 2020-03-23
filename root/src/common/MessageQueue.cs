@@ -18,7 +18,7 @@ namespace Z0
     }
 
     public interface IMessageSink<M> : ISink<M>
-        where  M : ICustomFormattable
+        where  M : IAppMsg
     {
         void Notify(M msg);        
         
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         void NotifyConsole(M msg)
-            => NotifyConsole(msg, AppMsgColor.Green);
+            => NotifyConsole(msg, msg.Color);
 
         void Displayed(M msg) {}
 
@@ -42,7 +42,7 @@ namespace Z0
 
 
     public interface IMessageQueue<M> : IMessageSink<M>, ICallbackSouce<M>
-        where M : ICustomFormattable
+        where M : IAppMsg
     {
         IReadOnlyList<M> Dequeue();       
 
@@ -50,7 +50,7 @@ namespace Z0
     }
 
     public interface IMessageLog<M> : IMessageSink<M>
-        where M : ICustomFormattable
+        where M : IAppMsg
     {
         void Write(IEnumerable<M> src);
         

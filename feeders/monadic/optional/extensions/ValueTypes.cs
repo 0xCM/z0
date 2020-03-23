@@ -14,6 +14,11 @@ namespace Z0
 
     partial class OptionX
     {
+        [MethodImpl(Inline)]
+        public static Option<T> ToOption<T>(this T? src)
+            where T : struct
+                =>  src.HasValue ? src.Value : Option.none<T>();
+
         /// <summary>
         /// Transforms a nulluble value into an optional value
         /// </summary>

@@ -11,8 +11,8 @@ namespace Z0
 
     static class AsmCompostionRoot
     {
-        static IEnumerable<IApiAssembly> DefaultResolutions 
-            => new IApiAssembly[]{
+        static IEnumerable<IApiPart> DefaultResolutions 
+            => new IApiPart[]{
                 R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
                 R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
                 R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
@@ -22,7 +22,7 @@ namespace Z0
                 R.Root.Resolution,R.Vectorized.Resolution}
                 ;
 
-        public static IApiComposition Compose(params IApiAssembly[] src)
+        public static IApiComposition Compose(params IApiPart[] src)
         {
             var resolutions = src.Length != 0 ? src : DefaultResolutions;
             return resolutions.Assemble();

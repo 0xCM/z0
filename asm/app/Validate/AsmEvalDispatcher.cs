@@ -10,8 +10,6 @@ namespace Z0.Asm.Check
     using C = Classes;
     using R = ClassReps;
     
-    using static OperatorClass;
-    using static Root;
     using static Nats;
     
     class AsmEvalDispatcher : IAsmEvalDispatcher
@@ -43,8 +41,6 @@ namespace Z0.Asm.Check
 
         public void Notify(object content, AppMsgColor color = AppMsgColor.Green)
             => Sink.NotifyConsole(content, color);
-
-
 
         public bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api)
         {
@@ -94,13 +90,15 @@ namespace Z0.Asm.Check
             }
         }
 
+        
        void Analyze<T>(in ApiMemberCode api, in BinaryEval<T> eval)
             where T : unmanaged
         {
             var name = api.Member.Id.Name;
             var sample = 0;
             var sampleMax = 10;
-            Notify(api.Uri);
+
+            Context.AnalyzingEvaluation(api);
 
             var xLabel = eval.LeftLabel;                
             var yLabel = eval.RightLabel;
@@ -111,11 +109,6 @@ namespace Z0.Asm.Check
                 ref readonly var result = ref eval.Target;
                 var x = result.Target[i].Left;
                 var y = result.Target[i].Right;
-                if(i < sampleMax)
-                {
-                    Notify($"{name}[{xLabel}]{input} = {x}");
-                    Notify($"{name}[{yLabel}]{input} = {y}");
-                }
                 Claim.eq(x, y);
             }
         }

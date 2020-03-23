@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static NumericKind kind<T>()
-            where T : struct
+            //where T : struct
                 => kind_u<T>();
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static NumericKind kind_u<T>()
-            where T : struct
+            //where T : struct
         {
             if(typeof(T) == typeof(byte))
                 return NumericKind.U8;
@@ -136,7 +136,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static NumericKind kind_i<T>()
-            where T : struct
+            //where T : struct
         {
             if(typeof(T) == typeof(sbyte))
                 return NumericKind.I8;
@@ -152,7 +152,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static NumericKind kind_f<T>()
-            where T : struct
+            //where T : struct
         {
             if(typeof(T) == typeof(float))
                 return NumericKind.F32;

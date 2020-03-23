@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines an inclusive address range
     /// </summary>
-    public readonly struct MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>, IFormattable<MemoryRange>
+    public readonly struct MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>
     {
         public static MemoryRange Empty => default;
         
@@ -61,8 +61,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         public static Option<MemoryRange> Parse(string src)    
-             => from i0 in src.FirstIndexOf(text.lbracket())
-                from i1 in src.FirstIndexOf(text.rbracket())
+             => from i0 in src.FirstIndexOf(text.lbracket()).ToOption()
+                from i1 in src.FirstIndexOf(text.rbracket()).ToOption()
                 let inner = src.Substring(i0 + 1, i1 - i0 - 1)
                 let parts = inner.Split(text.comma()).Trim()
                 where parts.Length == 2

@@ -19,6 +19,9 @@ bash $AddCmd
 export Kind=canonical
 bash $AddCmd
 
+export Kind=memories
+bash $AddCmd
+
 export Kind=test
 bash $AddCmd
 

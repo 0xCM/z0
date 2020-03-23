@@ -15,28 +15,6 @@ namespace Z0
     {
 
         /// <summary>
-        /// Copies the source span to a target span begininning at a specified target offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="dst">The target span</param>
-        /// <param name="offset">The target offset</param>
-        /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this Span<T> src, Span<T> dst, int offset)
-            => src.CopyTo(dst.Slice(offset));
-
-        /// <summary>
-        /// Copies the source span to a target span begininning at a specified target offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="dst">The target span</param>
-        /// <param name="offset">The target offset</param>
-        /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this ReadOnlySpan<T> src, Span<T> dst, int offset)
-            => src.CopyTo(dst.Slice(offset));
-
-        /// <summary>
         /// Copies a source list to a target array
         /// </summary>
         /// <param name="src">The list containing the elements to copy</param>

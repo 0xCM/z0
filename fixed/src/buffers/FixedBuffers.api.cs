@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="count">The number of buffers in the sequence</param>
         /// <typeparam name="F">The buffer segment type</typeparam>
         [MethodImpl(Inline)]
-        public static BufferSeq<Fixed128V> alloc(N128 width, int count)
+        public static BufferSeq<Fixed128V> alloc(W128 width, int count)
             => new BufferSeq<Fixed128V>(count);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="count">The number of buffers in the sequence</param>
         /// <typeparam name="F">The buffer segment type</typeparam>
         [MethodImpl(Inline)]
-        public static BufferSeq<Fixed256V> alloc(N256 width, int count)
+        public static BufferSeq<Fixed256V> alloc(W256 width, int count)
             => new BufferSeq<Fixed256V>(count);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="count">The number of buffers in the sequence</param>
         /// <typeparam name="F">The buffer segment type</typeparam>
         [MethodImpl(Inline)]
-        public static BufferSeq<Fixed512V> alloc(N512 width, int count)
+        public static BufferSeq<Fixed512V> alloc(W512 width, int count)
             => new BufferSeq<Fixed512V>(count);
     }
 }

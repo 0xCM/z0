@@ -78,6 +78,7 @@
     <Collective>$(Feeders)collective/z0.feeders.collective.csproj</Collective>
     <Components>$(Feeders)components/z0.feeders.components.csproj</Components>
     <Monadic>$(Feeders)monadic/z0.feeders.monadic.csproj</Monadic>
+    <Memories>$(Feeders)memories/z0.feeders.memories.csproj</Memories>
     <Reflections>$(Feeders)reflections/z0.feeders.reflections.csproj</Reflections>
     <Texting>$(Feeders)texting/z0.feeders.texting.csproj</Texting>
     <Canonical>$(Feeders)canonical/z0.feeders.canonical.csproj</Canonical>

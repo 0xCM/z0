@@ -1,5 +1,5 @@
 {
-    "EmitArtifacts": "True",
+    "EmitArtifacts": "False",
     "CheckExecution": "True",
     "HandleMembersLocated": "True",
     "HandleExtractsParsed": "True",

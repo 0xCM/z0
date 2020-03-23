@@ -23,14 +23,14 @@ namespace Z0
         public static Option<IApiCatalogProvider> CatalogProvider(this IApiComposition src, PartId id)
             => from r in  src.Resolved.TryFind(x => x.Id == id)
                 where r.Catalog.IsIdentified
-                select OP.Define(r.Id, r.Resolved, r.Catalog);
+                select OP.Define(r.Id, r.Owner, r.Catalog);
 
         /// <summary>
         /// Searches the resolutions for an identified nonempy catalog
         /// </summary>
         /// <param name="id">The defining assembly</param>
         public static Option<IApiCatalog> FindCatalog(this IApiComposition src, PartId id)
-            => from r in src.FindAssembly(id)
+            => from r in src.FindPart(id)
                 where r.Catalog.IsIdentified
                 select r.Catalog;
         
@@ -46,7 +46,7 @@ namespace Z0
         public static IEnumerable<IApiCatalogProvider> CatalogProviders(this IApiComposition src)
             =>  from r in src.Resolved                
                 where r.Catalog.IsIdentified
-                select OP.Define(r.Id, r.Resolved, r.Catalog);
+                select OP.Define(r.Id, r.Owner, r.Catalog);
 
         /// <summary>
         /// Queries a composition for supported catalog providers that are identified by a filter
@@ -56,6 +56,6 @@ namespace Z0
         public static IEnumerable<IApiCatalogProvider> CatalogProviders(this IApiComposition src, IEnumerable<PartId> filter)
             =>  from r in src.Resolved                
                 where filter.Contains(r.Id) && r.Catalog.IsIdentified
-                select OP.Define(r.Id, r.Resolved, r.Catalog);
+                select OP.Define(r.Id, r.Owner, r.Catalog);
     }
 }

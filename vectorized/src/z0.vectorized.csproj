@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(RngCore)" />
   </ItemGroup>
 
 </Project>

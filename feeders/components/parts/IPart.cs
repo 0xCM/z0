@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The resolved assembly
         /// </summary>
-        Assembly Resolved {get;}
+        Assembly Owner {get;}
 
         /// <summary>
         /// The name of the assembly
@@ -32,25 +32,15 @@ namespace Z0
     public interface IPart<A> : IPart
         where A : IPart<A>, new()   
     {
-        Assembly IPart.Resolved 
+        Assembly IPart.Owner 
             => typeof(A).Assembly;
 
         string IPart.Name 
-            => Resolved.GetName().Name;
+            => Owner.GetName().Name;
 
         PartId IPartIdentity.Id 
-            =>  Attribute.IsDefined(Resolved, typeof(PartIdAttribute))  
-              ? ((PartIdAttribute)Attribute.GetCustomAttribute(Resolved, typeof(PartIdAttribute))).Id
+            =>  Attribute.IsDefined(Owner, typeof(PartIdAttribute))  
+              ? ((PartIdAttribute)Attribute.GetCustomAttribute(Owner, typeof(PartIdAttribute))).Id
               : PartId.None;
-    }
-
-    public abstract class Part<A> : IPart<A>
-        where A : IPart<A>, new()
-    {
-        public string Format()
-            =>  (this as IPartIdentity).Id.Format();
-        
-        public override string ToString()
-            => Format();
     }
 }

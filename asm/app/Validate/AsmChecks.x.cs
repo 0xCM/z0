@@ -6,7 +6,6 @@ namespace Z0.Asm.Check
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
     static class AsmCheckOps
