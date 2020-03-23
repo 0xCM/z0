@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="V">The target vector type</typeparam>
     /// <typeparam name="T">The target vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactory<W,S,V,T> : IVFunc, ISFApi<S,V>
+    public interface ISVFactoryApi<W,S,V,T> : ISVFuncApi, ISFApi<S,V>
         where W : unmanaged, ITypeWidth<W>
         where T : unmanaged
         where V : struct
@@ -30,7 +30,7 @@ namespace Z0
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactory128<S,T> : IVFactory<W128,S,Vector128<T>,T>
+    public interface ISVFactory128Api<S,T> : ISVFactoryApi<W128,S,Vector128<T>,T>
         where T : unmanaged
     {
 
@@ -42,7 +42,7 @@ namespace Z0
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactory256<S,T> : IVFactory<W256,S,Vector256<T>,T>
+    public interface ISVFactory256Api<S,T> : ISVFactoryApi<W256,S,Vector256<T>,T>
         where T : unmanaged
     {
 

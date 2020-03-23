@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="Y">The second operand component type</typeparam>
     /// <typeparam name="Z">The the target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeFunc<X,Y,Z> : IVFunc
+    public interface ISVFMergeApi<X,Y,Z> : ISVFuncApi
         where X : unmanaged
         where Y : unmanaged
         where Z : unmanaged
@@ -29,7 +29,7 @@ namespace Z0
     /// <typeparam name="S">The operand component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOpD<S,T> : IVMergeFunc<S,S,T>
+    public interface ISVFMergeDApi<S,T> : ISVFMergeApi<S,S,T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -43,7 +43,7 @@ namespace Z0
     /// <typeparam name="Y">The second operand component type</typeparam>
     /// <typeparam name="Z">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp128<X,Y,Z> : IVFunc<W128, W128, W128, Vector128<X>, Vector128<Y>, Vector128<Z>, X, Y,Z>
+    public interface ISVMergeOp128Api<X,Y,Z> : ISVFApi<W128, W128, W128, Vector128<X>, Vector128<Y>, Vector128<Z>, X, Y,Z>
         where X : unmanaged
         where Y : unmanaged
         where Z : unmanaged
@@ -58,7 +58,7 @@ namespace Z0
     /// <typeparam name="Y">The second operand component type</typeparam>
     /// <typeparam name="Z">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp256<X,Y,Z> : IVFunc<W256, W256, W256, Vector256<X>, Vector256<Y>, Vector256<Z>, X, Y,Z>
+    public interface ISVFMergeOp256Api<X,Y,Z> : ISVFApi<W256, W256, W256, Vector256<X>, Vector256<Y>, Vector256<Z>, X, Y,Z>
         where X : unmanaged
         where Y : unmanaged
         where Z : unmanaged
@@ -73,7 +73,7 @@ namespace Z0
     /// <typeparam name="Y">The second operand component type</typeparam>
     /// <typeparam name="Z">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp2x128x256<X,Y,Z> : IVFunc<W128, W128, W256, Vector128<X>, Vector128<Y>, Vector256<Z>, X, Y,Z>
+    public interface IVMergeOp2x128x256Api<X,Y,Z> : ISVFApi<W128, W128, W256, Vector128<X>, Vector128<Y>, Vector256<Z>, X, Y,Z>
         where X : unmanaged
         where Y : unmanaged
         where Z : unmanaged
@@ -87,7 +87,7 @@ namespace Z0
     /// <typeparam name="S">The operand component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp2x128x256<S,T> : IVFunc<W128, W128, W256, Vector128<S>, Vector128<S>, Vector256<T>, S, S, T>
+    public interface ISVMergeOp2x128x256Api<S,T> : ISVFApi<W128, W128, W256, Vector128<S>, Vector128<S>, Vector256<T>, S, S, T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -99,7 +99,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeOp2x128x256<T> : IVMergeOp2x128x256<T,T>
+    public interface ISVMergeOp2x128x256Api<T> : ISVMergeOp2x128x256Api<T,T>
         where T : unmanaged
     {
 

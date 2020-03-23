@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Negate128<T> : IVUnaryOp128D<T>, IUnaryBlockedOp128<T>
+        public readonly struct Negate128<T> : ISVUnaryOp128DApi<T>, IUnaryBlockedOp128<T>
             where T : unmanaged
         {
             public const string Name = "vnegate";
@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Negate256<T> : IVUnaryOp256D<T>, IUnaryBlockedOp256<T>
+        public readonly struct Negate256<T> : ISVUnaryOp256DApi<T>, IUnaryBlockedOp256<T>
             where T : unmanaged
         {
             public const string Name = "vnegate";

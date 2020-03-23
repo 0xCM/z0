@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Srl<T> : ISFImm8ShiftApi<T>, ISFImm8SpanShiftApi<T>
+        public readonly struct Srl<T> : ISImm8UnaryOpApi<T>, ISFImm8SpanShiftApi<T>
             where T : unmanaged        
         {
             public const string Name = "srl";
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Sll<T> : ISFImm8ShiftApi<T>, ISFImm8SpanShiftApi<T>
+        public readonly struct Sll<T> : ISImm8UnaryOpApi<T>, ISFImm8SpanShiftApi<T>
             where T : unmanaged        
         {
             public const string Name = "sll";

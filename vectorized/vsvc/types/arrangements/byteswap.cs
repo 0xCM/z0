@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct ByteSwap128<T> : IVUnaryOp128D<T>
+        public readonly struct ByteSwap128<T> : ISVUnaryOp128DApi<T>
             where T : unmanaged
         {
             public const string Name = "vbyteswap";
@@ -30,7 +30,7 @@ namespace Z0
             public T InvokeScalar(T a) => gbits.byteswap(a);
         }
 
-        public readonly struct ByteSwap256<T> : IVUnaryOp256D<T>
+        public readonly struct ByteSwap256<T> : ISVUnaryOp256DApi<T>
             where T : unmanaged
         {
             public const string Name = "vbyteswap";

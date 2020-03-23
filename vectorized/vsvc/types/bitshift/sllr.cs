@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Sllr128<T> : IVBinaryOp128D<T>
+        public readonly struct Sllr128<T> : ISVBinaryOp128DApi<T>
             where T : unmanaged
         {
             public const string Name = "vsllr";
@@ -32,7 +32,7 @@ namespace Z0
                 => gmath.sll(a,convert<T,byte>(offset));            
         }
 
-        public readonly struct Sllr256<T> : IVBinaryOp256D<T>
+        public readonly struct Sllr256<T> : ISVBinaryOp256DApi<T>
             where T : unmanaged
         {
             public const string Name = "vsllr";

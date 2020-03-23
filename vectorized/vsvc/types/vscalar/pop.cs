@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Pop128<T> : IVTernaryScalar128D<T,uint>
+        public readonly struct Pop128<T> : ISVTernaryScalar128DApi<T,uint>
             where T : unmanaged
         {
             public const string Name = "vpop";
@@ -30,7 +30,7 @@ namespace Z0
             public uint InvokeScalar(T a, T b, T c) => gbits.pop(a,b,c);
         }
 
-        public readonly struct Pop256<T> : IVTernaryScalar256D<T,uint>
+        public readonly struct Pop256<T> : ISVTernaryScalar256DApi<T,uint>
             where T : unmanaged
         {
             public const string Name = "vpop";

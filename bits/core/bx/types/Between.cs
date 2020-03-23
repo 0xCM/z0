@@ -9,7 +9,7 @@ namespace Z0
         
     partial class BitCoreServices
     {
-        public readonly struct Between<T> : ISFImm8x2UnaryOpApi<T>
+        public readonly struct Between<T> : ISImm8x2UnaryOpApi<T>
             where T : unmanaged        
         {
             public static Between<T> Op => default;

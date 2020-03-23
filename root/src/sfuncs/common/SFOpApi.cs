@@ -34,7 +34,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IFSBinaryOpApi<A> : ISFApi<A,A,A>
+    public interface ISFBinaryOpApi<A> : ISFApi<A,A,A>
     {
         new BinaryOp<A> Operation => (this as ISFApi<A,A,A>).Operation.ToBinaryOp();    
     }
@@ -45,7 +45,7 @@ namespace Z0
     /// <typeparam name="W">The width kind</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IFSWBinaryOpApi<W,A> : IFSBinaryOpApi<A>, ISFWApi<W,A,A,A>
+    public interface ISFWBinaryOpApi<W,A> : ISFBinaryOpApi<A>, ISFWApi<W,A,A,A>
         where W : unmanaged, ITypeWidth
     {
 
@@ -56,7 +56,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IFSTernaryOpApi<A> : ISFApi<A,A,A,A>
+    public interface ISFTernaryOpApi<A> : ISFApi<A,A,A,A>
     {
         new TernaryOp<A> Operation => (this as ISFApi<A,A,A,A>).Operation.ToTernaryOp();
     } 
@@ -67,7 +67,7 @@ namespace Z0
     /// <typeparam name="W">The width kind</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IFSWTernaryOpApi<W,A> : IFSTernaryOpApi<A>, ISFWApi<W,A,A,A,A>
+    public interface ISFWTernaryOpApi<W,A> : ISFTernaryOpApi<A>, ISFWApi<W,A,A,A,A>
         where W : unmanaged, ITypeWidth
     {
 

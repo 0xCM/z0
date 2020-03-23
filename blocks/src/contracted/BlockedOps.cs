@@ -12,7 +12,7 @@ namespace Z0
     /// Base interface for block-oriented operations
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface IBlockedOp : ISFApi
+    public interface IBlockedOp : ISFuncApi
     {
 
     }

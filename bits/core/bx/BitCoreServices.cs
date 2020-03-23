@@ -15,6 +15,6 @@ namespace Z0
     public partial class BitCoreServices : IApiServiceHosts
     {
         public Type[] HostTypes {get;}
-            = typeof(BitCoreServices).GetNestedTypes().Realize<ISFApi>().ToArray();
+            = typeof(BitCoreServices).GetNestedTypes().Realize<ISFuncApi>().ToArray();
     }
 }

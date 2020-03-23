@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Units128<T> : IVPatternSource128<T>
+        public readonly struct Units128<T> : ISVPatternSource128Api<T>
             where T : unmanaged
         {
             public const string Name = "vunits";
@@ -27,7 +27,7 @@ namespace Z0
             public Vector128<T> Invoke() => Data.vunits<T>(w);            
         }
 
-        public readonly struct Units256<T> : IVPatternSource256<T>
+        public readonly struct Units256<T> : ISVPatternSource256Api<T>
             where T : unmanaged
         {
             public const string Name = "vunits";

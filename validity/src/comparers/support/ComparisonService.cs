@@ -12,51 +12,51 @@ namespace Z0
     {
         void CheckUnaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : IVUnaryOp128D<T>;
+            where F : ISVUnaryOp128DApi<T>;
 
         void CheckUnaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : IVUnaryOp256D<T>;                
+            where F : ISVUnaryOp256DApi<T>;                
 
         void CheckShiftScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : IVShiftOp128D<T>;
+            where F : ISVShiftOp128DApi<T>;
 
         void CheckShiftScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : IVShiftOp256D<T>;
+            where F : ISVShiftOp256DApi<T>;
 
         void CheckBinaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : IVBinaryOp128D<T>;            
+            where F : ISVBinaryOp128DApi<T>;            
 
         void CheckBinaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : IVBinaryOp256D<T>;
+            where F : ISVBinaryOp256DApi<T>;
 
         void CheckTernaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : IVTernaryOp128D<T>;
+            where F : ISVTernaryOp128DApi<T>;
 
         void CheckTernaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : IVTernaryOp256D<T>;
+            where F : ISVTernaryOp256DApi<T>;
 
         void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src)
             where T : unmanaged
-            where F : IVBinaryOp128D<T>;    
+            where F : ISVBinaryOp128DApi<T>;    
             
         void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src)
             where T : unmanaged
-            where F : IVBinaryOp256D<T>;
+            where F : ISVBinaryOp256DApi<T>;
 
         void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null) 
                     where T : unmanaged
-                    where F : IVBinaryOp128<T>;
+                    where F : ISVBinaryOp128Api<T>;
 
         void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null) 
             where T : unmanaged
-            where F : IVBinaryOp256<T>;
+            where F : ISVBinaryOp256Api<T>;
 
     }
     
@@ -74,47 +74,47 @@ namespace Z0
 
         public void CheckUnaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : IVUnaryOp128D<T>
+            where F : ISVUnaryOp128DApi<T>
                 => Context.UnaryOpComparer(w,t).CheckScalarMatch(f);
 
         public void CheckUnaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : IVUnaryOp256D<T>
+            where F : ISVUnaryOp256DApi<T>
                 => Context.UnaryOpComparer(w,t).CheckScalarMatch(f);
     
         public void CheckShiftScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : IVShiftOp128D<T>
+            where F : ISVShiftOp128DApi<T>
                 => Context.ShiftOpComparer(w,t).CheckScalarMatch(f);
 
         public void CheckShiftScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : IVShiftOp256D<T>
+            where F : ISVShiftOp256DApi<T>
                 => Context.ShiftComparer(w,t).CheckScalarMatch(f);
 
         public void CheckBinaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : IVBinaryOp128D<T>
+            where F : ISVBinaryOp128DApi<T>
                 => Context.BinaryOpComparer(w,t).CheckScalarMatch(f);
 
         public void CheckBinaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : IVBinaryOp256D<T>
+            where F : ISVBinaryOp256DApi<T>
                 => Context.BinaryOpComparer(w,t).CheckScalarMatch(f);
 
         public void CheckTernaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
-            where F : IVTernaryOp128D<T>
+            where F : ISVTernaryOp128DApi<T>
                 => Context.TernaryOpComparer(w,t).CheckScalarMatch(f);
 
         public void CheckTernaryScalarMatch<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
-            where F : IVTernaryOp256D<T>
+            where F : ISVTernaryOp256DApi<T>
                 => Context.TernaryOpComparer(w,t).CheckScalarMatch(f);
 
         public void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src)
             where T : unmanaged
-            where F : IVBinaryOp128D<T>
+            where F : ISVBinaryOp128DApi<T>
         {
             var cells = vcount<T>(n128);
             var succeeded = true;
@@ -145,7 +145,7 @@ namespace Z0
 
         public void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src)
             where T : unmanaged
-            where F : IVBinaryOp256D<T>
+            where F : ISVBinaryOp256DApi<T>
         {
             var cells = vcount<T>(n256);
             var succeeded = true;
@@ -176,7 +176,7 @@ namespace Z0
 
         public void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null) 
             where T : unmanaged
-            where F : IVBinaryOp128<T>
+            where F : ISVBinaryOp128Api<T>
         {
             var casename = name ?? Context.CaseName(f);
             var w = n128;
@@ -211,7 +211,7 @@ namespace Z0
 
         public void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null) 
             where T : unmanaged
-            where F : IVBinaryOp256<T>
+            where F : ISVBinaryOp256Api<T>
         {
             var casename = name ?? Context.CaseName(f);
             var w = n256;

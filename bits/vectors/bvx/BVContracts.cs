@@ -19,7 +19,7 @@ namespace Z0
         T InvokeScalar(T a);
     }
 
-    public interface IBVBinaryOp<T> : IFSBinaryOpApi<BitVector<T>>
+    public interface IBVBinaryOp<T> : ISFBinaryOpApi<BitVector<T>>
         where T : unmanaged
     {
 
@@ -56,7 +56,7 @@ namespace Z0
         bit InvokeScalar(T a, T b);
     }
 
-    public interface IBVTernaryOp<T> : IFSTernaryOpApi<BitVector<T>>
+    public interface IBVTernaryOp<T> : ISFTernaryOpApi<BitVector<T>>
         where T : unmanaged
     {
 

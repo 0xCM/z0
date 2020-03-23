@@ -14,7 +14,7 @@ namespace Z0
     /// <typeparam name="V">The vector type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVPatternSource<W,V,T> : IVFunc, ISFApi<V>
+    public interface ISVPatternSourceApi<W,V,T> : ISVFuncApi, ISFApi<V>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
@@ -27,7 +27,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVPatternSource128<T> : IVPatternSource<W128,Vector128<T>,T>
+    public interface ISVPatternSource128Api<T> : ISVPatternSourceApi<W128,Vector128<T>,T>
         where T : unmanaged
     {
 
@@ -38,7 +38,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVPatternSource256<T> : IVPatternSource<W256,Vector256<T>,T>
+    public interface ISVPatternSource256Api<T> : ISVPatternSourceApi<W256,Vector256<T>,T>
         where T : unmanaged
     {
 

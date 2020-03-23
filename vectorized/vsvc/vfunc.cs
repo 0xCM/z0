@@ -32,47 +32,47 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vpipe<F,G,T>(Vector128<T> x, F f, G g)
             where T : unmanaged
-            where F : IVUnaryOp128<T>
-            where G : IVUnaryOp128<T>
+            where F : ISVUnaryOp128Api<T>
+            where G : ISVUnaryOp128Api<T>
                 => Pipes.pipe(x,f,g);
 
         [MethodImpl(Inline)]
         public static Vector256<T> vpipe<F,G,T>(Vector256<T> x, F f, G g)
             where T : unmanaged
-            where F : IVUnaryOp256<T>
-            where G : IVUnaryOp256<T>
+            where F : ISVUnaryOp256Api<T>
+            where G : ISVUnaryOp256Api<T>
                 => Pipes.pipe(x,f,g);
 
         [MethodImpl(Inline)]
         public static Vector128<T> vcompose<F,G,T>(Vector128<T> x, Vector128<T> y, F f, G g)
             where T : unmanaged
-            where F : IVBinaryOp128<T>
-            where G : IVUnaryOp128<T>
+            where F : ISVBinaryOp128Api<T>
+            where G : ISVUnaryOp128Api<T>
                 => Pipes.compose(x,y,f,g);
 
         [MethodImpl(Inline)]
         public static Vector256<T> vpipe<F,G,T>(Vector256<T> x, Vector256<T> y, F f, G g)
             where T : unmanaged
-            where F : IVBinaryOp256<T>
-            where G : IVUnaryOp256<T>
+            where F : ISVBinaryOp256Api<T>
+            where G : ISVUnaryOp256Api<T>
                 => Pipes.compose(x,y,f,g);
 
         [MethodImpl(Inline)]
         public static Vector128<T> vapply<F,T>(Vector128<T> x, Vector128<T> y, F f)
             where T : unmanaged
-            where F : IVBinaryOp128<T>
+            where F : ISVBinaryOp128Api<T>
                 => Pipes.apply(x,y,f);
         
         [MethodImpl(Inline)]
         public static Vector256<T> vapply<F,T>(Vector256<T> x, Vector256<T> y, F f)
             where T : unmanaged
-            where F : IVBinaryOp256<T>
+            where F : ISVBinaryOp256Api<T>
                 => Pipes.apply(x,y,f);
 
         [MethodImpl(Inline)]
         public static ref readonly Block128<T> vzip<F,T>(in Block128<T> lhs, in Block128<T> rhs, in Block128<T> dst, F f)
             where T : unmanaged
-            where F : IVBinaryOp128<T>
+            where F : ISVBinaryOp128Api<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block256<T> vzip<F,T>(in Block256<T> lhs, in Block256<T> rhs, in Block256<T> dst, F f)
             where T : unmanaged
-            where F : IVBinaryOp256<T>
+            where F : ISVBinaryOp256Api<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block128<T> vzip<F,T>(in Block128<T> a, in Block128<T> b, in Block128<T> c, in Block128<T> dst, F f)
             where T : unmanaged
-            where F : IVTernaryOp128<T>
+            where F : ISVTernaryOp128Api<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
@@ -105,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block256<T> vzip<F,T>(in Block256<T> a, in Block256<T> b, in Block256<T> c, in Block256<T> dst, F f)
             where T : unmanaged
-            where F : IVTernaryOp256<T>
+            where F : ISVTernaryOp256Api<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
@@ -116,7 +116,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vall<F,T>(in Block128<T> lhs, F f)
             where T : unmanaged
-            where F : IVUnaryPred128<T>
+            where F : ISVUnaryPredicate128Api<T>
         {
             var blocks = lhs.BlockCount;
             var result = bit.On;
@@ -128,7 +128,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vall<F,T>(in Block256<T> lhs, F f)
             where T : unmanaged
-            where F : IVUnaryPred256<T>
+            where F : ISVUnaryPredicate256Api<T>
         {
             var blocks = lhs.BlockCount;
             var result = bit.On;
@@ -140,7 +140,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vall<F,T>(in Block128<T> lhs, in Block128<T> rhs, F f)
             where T : unmanaged
-            where F : IVBinPred128<T>
+            where F : ISVBinaryPredicate128Api<T>
         {
             var blocks = lhs.BlockCount;
             var result = bit.On;
@@ -152,7 +152,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vall<F,T>(in Block256<T> lhs, in Block256<T> rhs, F f)
             where T : unmanaged
-            where F : IVBinPred256<T>
+            where F : ISVBinaryPredicate256Api<T>
         {
             var blocks = lhs.BlockCount;
             var result = bit.On;
@@ -164,7 +164,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block128<T> vzip<F,T>(in Block128<T> src, byte offset, in Block128<T> dst, F f)
             where T : unmanaged
-            where F : IVShiftOp128<T>
+            where F : ISVShiftOp128Api<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
@@ -175,7 +175,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block256<T> vzip<F,T>(in Block256<T> src, byte offset, in Block256<T> dst, F f)
             where T : unmanaged
-            where F : IVShiftOp256<T>
+            where F : ISVShiftOp256Api<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
@@ -186,7 +186,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block128<T> vmap<F,T>(in Block128<T> src, in Block128<T> dst, F f)
             where T : unmanaged
-            where F : IVUnaryOp128<T>
+            where F : ISVUnaryOp128Api<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
@@ -197,7 +197,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block256<T> vmap<F,T>(in Block256<T> src, in Block256<T> dst, F f)
             where T : unmanaged
-            where F : IVUnaryOp256<T>
+            where F : ISVUnaryOp256Api<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)

@@ -8,13 +8,25 @@ namespace Z0
     using System.Security;
 
     /// <summary>
+    /// Defines trait for vecorized binary operators that are accompanied by componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinOpD<T>
+        where T : unmanaged
+    {
+        T InvokeScalar(T a, T b);
+    }
+
+
+    /// <summary>
     /// Characterizes a binary vectorized operator that accepts an 8-bit immediate
     /// </summary>
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOpImm8<W,V,T> : IVFunc, ISFWImm8BinaryOp<W,V>
+    public interface ISVImm8BinaryOpApi<W,V,T> : ISVFuncApi, ISWImm8BinaryOp<W,V>
         where W : unmanaged, ITypeWidth
     {
 
@@ -27,23 +39,12 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOp<W,V,T> : IVFunc, IFSBinaryOpApi<V>
+    public interface ISVBinaryOpApi<W,V,T> : ISVFuncApi, ISFBinaryOpApi<V>
         where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged
     {
 
-    }
-
-    /// <summary>
-    /// Defines trait for vecorized binary operators that are accompanied by componentwise decomposition/evaluation
-    /// </summary>
-    /// <typeparam name="T">The component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOpD<T> : IVDecompositionFacet
-        where T : unmanaged
-    {
-        T InvokeScalar(T a, T b);
     }
     
     /// <summary>
@@ -51,7 +52,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOp128<T> : IVBinaryOp<W128,Vector128<T>,T>
+    public interface ISVBinaryOp128Api<T> : ISVBinaryOpApi<W128,Vector128<T>,T>
         where T : unmanaged
     {
 
@@ -62,7 +63,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOp256<T> : IVBinaryOp<W256,Vector256<T>,T>
+    public interface ISVBinaryOp256Api<T> : ISVBinaryOpApi<W256,Vector256<T>,T>
         where T : unmanaged
     {
 
@@ -73,7 +74,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOp128D<T> : IVBinaryOp128<T>, IVBinOpD<T>
+    public interface ISVBinaryOp128DApi<T> : ISVBinaryOp128Api<T>, IVBinOpD<T>
         where T : unmanaged
     {
     
@@ -84,7 +85,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOp256D<T> : IVBinaryOp256<T>, IVBinOpD<T>
+    public interface ISVBinaryOp256DApi<T> : ISVBinaryOp256Api<T>, IVBinOpD<T>
         where T : unmanaged
     {
         
@@ -95,7 +96,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOp128Imm8<T> : IVBinaryOpImm8<W128,Vector128<T>,T>
+    public interface ISVImm8BinaryOp128Api<T> : ISVImm8BinaryOpApi<W128,Vector128<T>,T>
         where T : unmanaged
     {        
         
@@ -106,7 +107,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryOp256Imm8<T> : IVBinaryOpImm8<W256,Vector256<T>,T>
+    public interface ISVImm8BinaryOp256Api<T> : ISVImm8BinaryOpApi<W256,Vector256<T>,T>
         where T : unmanaged
     {
         

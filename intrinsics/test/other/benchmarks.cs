@@ -186,7 +186,7 @@ namespace Z0
         }
 
         void vbinop_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)
-            where F : IVBinaryOp128<T>
+            where F : ISVBinaryOp128Api<T>
             where T : unmanaged
         {
             var last = vzero(w,t);
@@ -210,7 +210,7 @@ namespace Z0
         }
 
         void vbinop_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
-            where F : IVBinaryOp256<T>
+            where F : ISVBinaryOp256Api<T>
             where T : unmanaged
         {
             var last = vzero(w,t);
@@ -234,7 +234,7 @@ namespace Z0
         }
 
         void vshift_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)
-            where F : IVUnaryOp128Imm8<T>
+            where F : ISVImm8UnaryOp128Api<T>
             where T : unmanaged
         {
             var last = vzero(w,t);
@@ -258,7 +258,7 @@ namespace Z0
         }
 
         void vshift_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
-            where F : IVUnaryOp256Imm8<T>
+            where F : ISVImm8UnaryOp256Api<T>
             where T : unmanaged
         {
             var last = vzero(w,t);

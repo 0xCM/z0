@@ -46,7 +46,7 @@ namespace Z0
         }
 
         public void Validate<F>(F f, C.UnaryOp op, W128 w)
-            where F : IVUnaryOp128D<T>
+            where F : ISVUnaryOp128DApi<T>
         {            
             void run()
             {
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         public void Validate<F>(F f, C.UnaryOp op,  W256 w)
-            where F : IVUnaryOp256D<T>
+            where F : ISVUnaryOp256DApi<T>
         {
 
             void run()
@@ -83,7 +83,7 @@ namespace Z0
         }
 
         public void Validate<F>(F f, C.BinaryOp op,  W128 w)
-            where F : IVBinaryOp128D<T>
+            where F : ISVBinaryOp128DApi<T>
         {
             void run()
             {
@@ -102,7 +102,7 @@ namespace Z0
         }
 
         public void Validate<F>(F f, C.BinaryOp op,  W256 w)
-            where F : IVBinaryOp256D<T>
+            where F : ISVBinaryOp256DApi<T>
         {
             void run()
             {
@@ -120,7 +120,7 @@ namespace Z0
             Run(f, run, w, op.Generalized);
         }
 
-        void Run<W>(ISFApi f, Action act, W width, C.OperatorClass c)
+        void Run<W>(ISFuncApi f, Action act, W width, C.OperatorClass c)
             where W : struct, ITypeWidth
         {
             var succeeded = true;
@@ -153,7 +153,7 @@ namespace Z0
             where W : struct, ITypeWidth
                 => default(W).BitWidth/bitsize<T>();
 
-        string CaseName<W>(ISFApi f)
+        string CaseName<W>(ISFuncApi f)
             where W : struct, ITypeWidth
         {
             var id = OpIdentity.operation(f.Id.Name, default(W).Class, NumericIdentity.kind<T>(),true);

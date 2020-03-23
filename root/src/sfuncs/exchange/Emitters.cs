@@ -114,6 +114,6 @@ namespace Z0
     {
         Span<T> Invoke();
 
-        FunctionClass ISFApi.Class => FunctionClass.Emitter;
+        FunctionClass ISFuncApi.Class => FunctionClass.Emitter;
     }
 }

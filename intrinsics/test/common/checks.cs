@@ -51,7 +51,7 @@ namespace Z0
         public void CheckFactory<F,C,S,T>(N128 w, F f, C check, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-            where F : IVFactory128<S,T>
+            where F : ISVFactory128Api<S,T>
             where C : ISFChecker128Api<S,T>
         {
             for(var i=0; i < RepCount; i++)
@@ -66,7 +66,7 @@ namespace Z0
         public void CheckFactory<F,C,S,T>(N256 w, F f, C check, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-            where F : IVFactory256<S,T>
+            where F : ISVFactory256Api<S,T>
             where C : ISFChecker256Api<S,T>
         {
             for(var i=0; i< RepCount; i++)

@@ -11,7 +11,7 @@ namespace Z0
     /// Base interface for span-oriented operations
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFSpanApi : ISFApi
+    public interface ISFSpanApi : ISFuncApi
     {
 
     }
@@ -86,7 +86,7 @@ namespace Z0
     /// <typeparam name="A">The source span cell type</typeparam>
     /// <typeparam name="B">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFSpanFactoryApi<A,B> : ISFApi
+    public interface ISFSpanFactoryApi<A,B> : ISFuncApi
     {
         Span<B> Invoke(A src);
     }
@@ -169,7 +169,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImm8SpanShiftApi<T> : ISFImm8Api, ISFSpanShiftApi
+    public interface ISFImm8SpanShiftApi<T> : ISFSpanShiftApi
     {
         Span<T> Invoke(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
 

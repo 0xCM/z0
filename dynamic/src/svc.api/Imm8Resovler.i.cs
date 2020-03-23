@@ -11,7 +11,7 @@ namespace Z0
 
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IImmResolver : ISFApi
+    public interface IImmResolver : ISFuncApi
     {
         NumericKind ImmKind => NumericKind.None;
 

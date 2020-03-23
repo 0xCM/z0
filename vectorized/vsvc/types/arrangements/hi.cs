@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Hi128<T> : IVUnaryOp128<T>
+        public readonly struct Hi128<T> : ISVUnaryOp128Api<T>
             where T : unmanaged
         {
             public const string Name = "vhi";
@@ -27,7 +27,7 @@ namespace Z0
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vhi(x);            
         }
 
-        public readonly struct Hi256<T> : IVReducer256<T>
+        public readonly struct Hi256<T> : ISVFReduder256Api<T>
             where T : unmanaged
         {
             public const string Name = "vhi";

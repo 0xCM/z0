@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Reverse128<T> : IVUnaryOp128<T>
+        public readonly struct Reverse128<T> : ISVUnaryOp128Api<T>
             where T : unmanaged
         {
             public const string Name = "vreverse";
@@ -28,7 +28,7 @@ namespace Z0
             
         }
 
-        public readonly struct Reverse256<T> : IVUnaryOp256<T>
+        public readonly struct Reverse256<T> : ISVUnaryOp256Api<T>
             where T : unmanaged
         {
             public const string Name = "vreverse";

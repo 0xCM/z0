@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct TakeMask128<T> : IVUnaryScalar128<T,ushort>
+        public readonly struct TakeMask128<T> : ISVUnaryScalar128Api<T,ushort>
             where T : unmanaged
         {
             public const string Name = "vtakemask";
@@ -28,7 +28,7 @@ namespace Z0
                 => gvec.vtakemask(x);            
         }
 
-        public readonly struct TakeMask256<T> : IVUnaryScalar256<T,uint>
+        public readonly struct TakeMask256<T> : ISVUnaryScalar256Api<T,uint>
             where T : unmanaged
         {
             public const string Name = "vtakemask";

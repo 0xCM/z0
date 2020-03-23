@@ -12,7 +12,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFWApi<W> : ISFApi
+    public interface ISFWApi<W> : ISFuncApi
         where W : unmanaged, ITypeWidth
     {
 

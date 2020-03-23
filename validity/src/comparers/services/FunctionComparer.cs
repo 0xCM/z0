@@ -71,7 +71,7 @@ namespace Z0
             
         }
 
-        protected string CaseName(ISFApi f)
+        protected string CaseName(ISFuncApi f)
         {
             var id = OpIdentity.operation(f.Id.Name, default(W).Class, NumericIdentity.kind<T>(),true);
             var owner = TypeIdentity.owner(Context.HostType);

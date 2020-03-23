@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPredD<T>
+    public interface IVUnaryPredicateD<T>
         where T : unmanaged
     {
         bit InvokeScalar(T x);
@@ -26,7 +26,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred<W,V> : IVFunc, ISFApi<V,bit>
+    public interface ISVUnaryPredicateApi<W,V> : ISVFuncApi, ISFApi<V,bit>
         where W : unmanaged, ITypeWidth
         where V : struct
     {
@@ -40,7 +40,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred<W,V,T> : IVUnaryPred<W,V>
+    public interface ISVUnaryPredicateApi<W,V,T> : ISVUnaryPredicateApi<W,V>
         where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged
@@ -53,7 +53,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred128<T> : IVUnaryPred<W128,Vector128<T>,T>
+    public interface ISVUnaryPredicate128Api<T> : ISVUnaryPredicateApi<W128,Vector128<T>,T>
         where T : unmanaged
     {
         
@@ -64,7 +64,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred256<T> : IVUnaryPred<W256,Vector256<T>,T>
+    public interface ISVUnaryPredicate256Api<T> : ISVUnaryPredicateApi<W256,Vector256<T>,T>
         where T : unmanaged
     {        
         
@@ -75,7 +75,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred128D<T> : IVUnaryPred128<T>, IVUnaryPredD<T>
+    public interface ISVUnaryPredicate128DApi<T> : ISVUnaryPredicate128Api<T>, IVUnaryPredicateD<T>
         where T : unmanaged
     {
     
@@ -86,7 +86,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred256D<T> : IVUnaryPred256<T>, IVUnaryPredD<T>
+    public interface ISVUnaryPredicate256DApi<T> : ISVUnaryPredicate256Api<T>, IVUnaryPredicateD<T>
         where T : unmanaged
     {
     

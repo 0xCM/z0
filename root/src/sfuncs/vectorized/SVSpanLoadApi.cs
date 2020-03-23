@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="V">The target vector type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSpanLoad<W,S,V,T> : IVFunc
+    public interface ISVFSpanLoadApi<W,S,V,T> : ISVFuncApi
         where W : unmanaged, ITypeWidth<W>
         where S : unmanaged
         where V : struct
@@ -27,7 +27,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSpanLoad128<S,T> : IVSpanLoad<W128, S, Vector128<T>,T>
+    public interface ISVFSpanLoad128Api<S,T> : ISVFSpanLoadApi<W128, S, Vector128<T>,T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -35,14 +35,14 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSpanLoad128<T> : IVSpanLoad128<T,T>
+    public interface ISVFSpanLoad128Api<T> : ISVFSpanLoad128Api<T,T>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSpanLoad256<S,T> : IVSpanLoad<W128, S, Vector256<T>,T>
+    public interface ISVFSpanLoad256Api<S,T> : ISVFSpanLoadApi<W128, S, Vector256<T>,T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -51,7 +51,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVSpanLoad256<T> : IVSpanLoad256<T,T>
+    public interface ISVFSpanLoad256Api<T> : ISVFSpanLoad256Api<T,T>
         where T : unmanaged
     {
 

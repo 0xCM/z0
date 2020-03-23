@@ -9,30 +9,6 @@ namespace Z0
     using System.Security;
 
     /// <summary>
-    /// Characterizes a vectorized ternary operator
-    /// </summary>
-    /// <typeparam name="V">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp<V> : IVFunc, IFSTernaryOpApi<V>
-        where V : struct
-    {
-        
-    }
- 
-    /// <summary>
-    /// Characterizes a vectorized ternary operator parameterized by operand bit-width
-    /// </summary>
-    /// <typeparam name="W">The bit-width type</typeparam>
-    /// <typeparam name="V">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp<W,V> : IVTernaryOp<V>
-        where W : unmanaged, ITypeWidth<W>
-        where V : struct
-    {
-
-    }
-
-    /// <summary>
     /// Defines trait for vecorized ternary operators that support evaluation via scalar decomposition
     /// </summary>
     /// <typeparam name="T">The component type</typeparam>
@@ -44,14 +20,38 @@ namespace Z0
     }
 
     /// <summary>
+    /// Characterizes a vectorized ternary operator
+    /// </summary>
+    /// <typeparam name="V">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISVTernaryOpApi<V> : ISVFuncApi, ISFTernaryOpApi<V>
+        where V : struct
+    {
+        
+    }
+ 
+    /// <summary>
+    /// Characterizes a vectorized ternary operator parameterized by operand bit-width
+    /// </summary>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISVTernaryOpApi<W,V> : ISVTernaryOpApi<V>
+        where W : unmanaged, ITypeWidth
+        where V : struct
+    {
+
+    }
+
+    /// <summary>
     /// Characterizes a vectorized ternary operator parameterized by operand bit width and component type
     /// </summary>
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp<W,V,T> : IVTernaryOp<W,V>
-        where W : unmanaged, ITypeWidth<W>
+    public interface ISVTernaryOpApi<W,V,T> : ISVTernaryOpApi<W,V>
+        where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged
     {
@@ -63,7 +63,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp128<T> : IVTernaryOp<W128,Vector128<T>,T>
+    public interface ISVTernaryOp128Api<T> : ISVTernaryOpApi<W128,Vector128<T>,T>
         where T : unmanaged
     {
 
@@ -74,7 +74,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp256<T> : IVTernaryOp<W256,Vector256<T>,T>
+    public interface ISVTernaryOp256Api<T> : ISVTernaryOpApi<W256,Vector256<T>,T>
         where T : unmanaged
     {
                 
@@ -85,7 +85,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp128D<T> : IVTernaryOp128<T>, IVTernaryOpD<T>
+    public interface ISVTernaryOp128DApi<T> : ISVTernaryOp128Api<T>, IVTernaryOpD<T>
         where T : unmanaged
     {
     
@@ -96,7 +96,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp256D<T> : IVTernaryOp256<T>, IVTernaryOpD<T>
+    public interface ISVTernaryOp256DApi<T> : ISVTernaryOp256Api<T>, IVTernaryOpD<T>
         where T : unmanaged
     {
         

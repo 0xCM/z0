@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Concat2x128<T> : IVMergeOp2x128x256<T>
+        public readonly struct Concat2x128<T> : ISVMergeOp2x128x256Api<T>
             where T : unmanaged
         {
             public const string Name = "vconcat";

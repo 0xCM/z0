@@ -11,7 +11,7 @@ namespace Z0
     /// Characterizes an identified structural function
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFApi : ISFunc
+    public interface ISFuncApi : ISFunc
     {
         /// <summary>
         /// The operation identity
@@ -25,25 +25,22 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a structural emitter; that is, the contract charactrizes a type
-    /// that implements an emitter
+    /// Characterizes a structural emitter; that is, the contract charactrizes a type that implements an emitter
     /// </summary>
     /// <typeparam name="A">The emission type</typeparam>    
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFApi<A> : ISFApi
+    public interface ISFApi<A> : ISFuncApi, ISFunc<A>
     {
-        A Invoke();
 
-        Func<A> Operation => Invoke;
     }
 
     /// <summary>
-    /// Characterizes a structural unary function
+    /// Characterizes an identified structural unary function
     /// </summary>
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFApi<A,B> : ISFApi
+    public interface ISFApi<A,B> : ISFuncApi
     {
         B Invoke(A a);
 
@@ -57,7 +54,7 @@ namespace Z0
     /// <typeparam name="B">The second operand type</typeparam>
     /// <typeparam name="C">The third result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFApi<A,B,C> : ISFApi
+    public interface ISFApi<A,B,C> : ISFuncApi
     {
         /// <summary>
         /// Invokes the reified function over supplied operands
@@ -71,14 +68,14 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a structural ternary function
+    /// Characterizes an identified structural ternary function
     /// </summary>
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The second operand type</typeparam>
     /// <typeparam name="C">The third operand type</typeparam>
     /// <typeparam name="D">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFApi<A,B,C,D> : ISFApi
+    public interface ISFApi<A,B,C,D> : ISFuncApi
     {
         /// <summary>
         /// Invokes the reified function over supplied operands
@@ -90,4 +87,5 @@ namespace Z0
 
         Func<A,B,C,D> Operation => Invoke;
     }
+
 }

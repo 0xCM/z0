@@ -13,7 +13,7 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Blend2x64x128<T> : IVBinaryOp128Imm8<T>, IImm8V128BinaryResolver<T>
+        public readonly struct Blend2x64x128<T> : ISVImm8BinaryOp128Api<T>, IImm8V128BinaryResolver<T>
             where T : unmanaged
         {
             public const string Name = "vblend2x64";
@@ -32,7 +32,7 @@ namespace Z0
                 => gvec.vblend2x64(x,y,spec);            
         }
 
-        public readonly struct Blend4x64x256<T> : IVBinaryOp256Imm8<T>, IImm8V256BinaryResolver<T>
+        public readonly struct Blend4x64x256<T> : ISVImm8BinaryOp256Api<T>, IImm8V256BinaryResolver<T>
             where T : unmanaged
         {
             public const string Name = "vblend4x64";
@@ -51,7 +51,7 @@ namespace Z0
                 => gvec.vblend4x64(x,y,spec);
         }
 
-        public readonly struct Blend4x32x128<T> : IVBinaryOp128Imm8<T>, IImm8V128BinaryResolver<T>
+        public readonly struct Blend4x32x128<T> : ISVImm8BinaryOp128Api<T>, IImm8V128BinaryResolver<T>
             where T : unmanaged
         {
             public const string Name = "vblend4x32";
@@ -70,7 +70,7 @@ namespace Z0
                 => gvec.vblend4x32(x,y,spec);            
         }
 
-        public readonly struct Blend8x32x256<T> : IVBinaryOp256Imm8<T>, IImm8V256BinaryResolver<T>
+        public readonly struct Blend8x32x256<T> : ISVImm8BinaryOp256Api<T>, IImm8V256BinaryResolver<T>
             where T : unmanaged
         {
             public const string Name = "vblend8x32";
@@ -90,7 +90,7 @@ namespace Z0
 
         }
 
-        public readonly struct Blend8x16x128<T> : IVBinaryOp128Imm8<T>, IImm8V128BinaryResolver<T>
+        public readonly struct Blend8x16x128<T> : ISVImm8BinaryOp128Api<T>, IImm8V128BinaryResolver<T>
             where T : unmanaged
         {
             public const string Name = "vblend8x16";
@@ -109,7 +109,7 @@ namespace Z0
                 => gvec.vblend8x16(x,y,spec);            
         }
 
-        public readonly struct Blend8x16x256<T> : IVBinaryOp256Imm8<T>, IImm8V256BinaryResolver<T>
+        public readonly struct Blend8x16x256<T> : ISVImm8BinaryOp256Api<T>, IImm8V256BinaryResolver<T>
             where T : unmanaged
         {
             public const string Name = "vblend8x16";

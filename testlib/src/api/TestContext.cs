@@ -87,7 +87,7 @@ namespace Z0
         /// Produces the name of the test case for the specified function
         /// </summary>
         /// <param name="f">The function</param>
-        public string CaseName(ISFApi f)
+        public string CaseName(ISFuncApi f)
             => TestIdentity.testcase(GetType(),f);
 
         /// <summary>

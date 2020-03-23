@@ -197,7 +197,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Min<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Min<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "min";
@@ -216,7 +216,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Max<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Max<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "max";

@@ -8,11 +8,22 @@ namespace Z0
     using System.Security;
 
     /// <summary>
+    /// Characterizes a vectorized shift operator that also supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVShiftOpD<T>
+        where T : unmanaged
+    {
+        T InvokeScalar(T a, byte offset);           
+    }
+
+    /// <summary>
     /// Characterizes a vectorized shift operator
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<V> : IVFunc, ISFImm8ShiftApi<V>
+    public interface ISVShiftOpApi<V> : ISVFuncApi, ISImm8UnaryOpApi<V>
         where V : struct
     {
         
@@ -24,7 +35,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<W,V> : IVShiftOp<V>
+    public interface ISVShiftOpApi<W,V> : ISVShiftOpApi<V>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
     {
@@ -38,7 +49,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<W,V,T> : IVShiftOp<W,V>
+    public interface ISVShiftOpApi<W,V,T> : ISVShiftOpApi<W,V>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
@@ -47,22 +58,11 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a vectorized shift operator that also supports componentwise decomposition/evaluation
-    /// </summary>
-    /// <typeparam name="T">The component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOpD<T>
-        where T : unmanaged
-    {
-        T InvokeScalar(T a, byte offset);           
-    }
-
-    /// <summary>
     /// Characterizes a vectorized shift operator over 128-bit operands
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp128<T> : IVUnaryOp128Imm8<T>
+    public interface ISVShiftOp128Api<T> : ISVImm8UnaryOp128Api<T>
         where T : unmanaged
     {
     }
@@ -72,7 +72,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp256<T> : IVUnaryOp256Imm8<T>
+    public interface ISVShiftOp256Api<T> : ISVImm8UnaryOp256Api<T>
         where T : unmanaged
     {
         
@@ -83,7 +83,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp128D<T> : IVUnaryOp128Imm8D<T>
+    public interface ISVShiftOp128DApi<T> : ISVImm8UnaryOp128DApi<T>
         where T : unmanaged
     {
     }
@@ -93,7 +93,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp256D<T>  : IVUnaryOp256Imm8D<T>
+    public interface ISVShiftOp256DApi<T>  : ISVImm8UnaryOp256DApi<T>
         where T : unmanaged
     {
         

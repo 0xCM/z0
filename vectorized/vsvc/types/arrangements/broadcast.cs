@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Broadcast128<T> : IVFactory128<T,T>
+        public readonly struct Broadcast128<T> : ISVFactory128Api<T,T>
             where T : unmanaged
         {
             public const string Name = "vbroadcast";
@@ -28,7 +28,7 @@ namespace Z0
             public Vector128<T> Invoke(T a) => vgeneric.vbroadcast(n128, a);            
         }
 
-        public readonly struct Broadcast128<S,T> : IVFactory128<S,T>
+        public readonly struct Broadcast128<S,T> : ISVFactory128Api<S,T>
             where T : unmanaged
             where S : unmanaged
         {
@@ -44,7 +44,7 @@ namespace Z0
             public Vector128<T> Invoke(S a) => vgeneric.vbroadcast(n128, convert<S,T>(a));            
         }
 
-        public readonly struct Broadcast256<T> : IVFactory256<T,T>
+        public readonly struct Broadcast256<T> : ISVFactory256Api<T,T>
             where T : unmanaged
         {
             public const string Name = "vbroadcast";
@@ -59,7 +59,7 @@ namespace Z0
             public Vector256<T> Invoke(T a) => vgeneric.vbroadcast(n256, a);            
         }
 
-        public readonly struct Broadcast256<S,T> : IVFactory256<S,T>
+        public readonly struct Broadcast256<S,T> : ISVFactory256Api<S,T>
             where T : unmanaged
             where S : unmanaged
         {

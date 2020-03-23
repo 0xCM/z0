@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="V">The vector type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVEmitter<W,V,T> : IVFunc, IEmitter<V>
+    public interface ISVEmitterApi<W,V,T> : ISVFuncApi, IEmitter<V>
         where W : unmanaged, ITypeWidth<W>
         where V : struct
         where T : unmanaged
@@ -24,14 +24,14 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVEmitter128<T> : IVEmitter<W128,Vector128<T>,T>
+    public interface ISVEmitter128Api<T> : ISVEmitterApi<W128,Vector128<T>,T>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVEmitter256<T> : IVEmitter<W256,Vector256<T>,T>
+    public interface ISVEmitter256Api<T> : ISVEmitterApi<W256,Vector256<T>,T>
         where T : unmanaged
     {
 

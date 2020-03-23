@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct And<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct And<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "and";
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Or<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Or<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "or";
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Xor<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Xor<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "xor";
@@ -69,7 +69,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Nand<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Nand<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "nand";
@@ -88,7 +88,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Nor<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Nor<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "not";
@@ -106,7 +106,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Xnor<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Xnor<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "xnor";
@@ -125,7 +125,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Select<T> : IFSTernaryOpApi<T>, ISFTernarySpanOpApi<T>
+        public readonly struct Select<T> : ISFTernaryOpApi<T>, ISFTernarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "select";
@@ -163,7 +163,7 @@ namespace Z0
         }    
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Impl<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Impl<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "impl";
@@ -182,7 +182,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct NonImpl<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct NonImpl<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "impl";
@@ -202,7 +202,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct CImpl<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct CImpl<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "cimpl";
@@ -221,7 +221,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct CNonImpl<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct CNonImpl<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "cnonimpl";

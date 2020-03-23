@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Add<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Add<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "add";
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Sub<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Sub<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "sub";
@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Mul<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Mul<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "mul";
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Div<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Div<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "div";
@@ -86,7 +86,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct ModOp<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct ModOp<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "mod";
@@ -104,7 +104,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct ModMul<T> : IFSTernaryOpApi<T>, ISFTernarySpanOpApi<T>
+        public readonly struct ModMul<T> : ISFTernaryOpApi<T>, ISFTernarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "modmul";
@@ -158,7 +158,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Clamp<T> : IFSBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Clamp<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "clamp";

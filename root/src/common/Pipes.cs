@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
         public static T apply<F,T>(T x, T y, F f)
-            where F : IFSBinaryOpApi<T>
+            where F : ISFBinaryOpApi<T>
                 => f.Invoke(x,y);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The type over which the operators are defined</typeparam>
         [MethodImpl(Inline)]
         public static T compose<F,G,T>(T x, F f, G g)
-            where F : IFSBinaryOpApi<T>
+            where F : ISFBinaryOpApi<T>
             where G : ISFUnaryOpApi<T>
                 => f.Invoke(x, g.Invoke(x));
 
@@ -78,7 +78,7 @@ namespace Z0
         /// <typeparam name="T">The type over which the operators are defined</typeparam>
         [MethodImpl(Inline)]
         public static T compose<F,G,T>(T x, T y, F f, G g)
-            where F : IFSBinaryOpApi<T>
+            where F : ISFBinaryOpApi<T>
             where G : ISFUnaryOpApi<T>
                 => f.Invoke(g.Invoke(x), g.Invoke(y));
     }

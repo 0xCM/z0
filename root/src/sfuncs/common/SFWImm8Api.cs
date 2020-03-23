@@ -8,24 +8,23 @@ namespace Z0
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFWImm8Op<W> : ISFImm8Api
+    public interface ISWImm8Op<W> : ISFuncApi
         where W : unmanaged, ITypeWidth
     {
         TypeWidth WidthKind => default(W).Class;
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFWImm8UnaryOp<W,A> : ISFImm8UnaryOpApi<A>, ISFWImm8Op<W>
+    public interface ISWImm8UnaryOp<W,A> : ISImm8UnaryOpApi<A>, ISWImm8Op<W>
         where W : unmanaged, ITypeWidth
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFWImm8BinaryOp<W,A> : ISFImm8BinaryOpApi<A>, ISFWImm8Op<W>
+    public interface ISWImm8BinaryOp<W,A> : ISFImm8BinaryOpApi<A>, ISWImm8Op<W>
         where W : unmanaged, ITypeWidth
     {
 
     }
-
 }

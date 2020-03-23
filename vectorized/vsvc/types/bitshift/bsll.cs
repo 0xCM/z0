@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Bsll128<T> : IVShiftOp128<T>, IImm8V128UnaryResolver<T>, IUnaryBlockedOp128Imm8<T>
+        public readonly struct Bsll128<T> : ISVShiftOp128Api<T>, IImm8V128UnaryResolver<T>, IUnaryBlockedOp128Imm8<T>
             where T : unmanaged
         {
             public const string Name = "vbsll";
@@ -36,7 +36,7 @@ namespace Z0
                 => ref gblocks.bsll(a,count,c);            
         }
 
-        public readonly struct Bsll256<T> : IVShiftOp256<T>, IImm8V256UnaryResolver<T>, IUnaryBlockedOp256Imm8<T>
+        public readonly struct Bsll256<T> : ISVShiftOp256Api<T>, IImm8V256UnaryResolver<T>, IUnaryBlockedOp256Imm8<T>
             where T : unmanaged
         {
             public const string Name = "vbsll";
