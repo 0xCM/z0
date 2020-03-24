@@ -17,59 +17,24 @@ namespace Z0
     /// </summary>
     public static class BK
     {
-        /// <summary>
-        /// Determines whether a type is classified as a blocked type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
+
         public static bool test(Type src)
-        {
-            var t = src.EffectiveType();
-            var def = t.IsGenericType ? t.GetGenericTypeDefinition() : (t.IsGenericTypeDefinition ? t : null);
-            if(def == null)
-                return false;
-            return( 
-                 def == typeof(Block16<>)  || 
-                 def == typeof(Block32<>)  || 
-                 def == typeof(Block64<>)  || 
-                 def == typeof(Block128<>) || 
-                 def == typeof(Block256<>) || 
-                 def == typeof(Block512<>));
-        }
+            => BlockedType.test(src);
+
 
         /// <summary>
         /// Determines the width of a blocked type
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static FixedWidth width(Type src)
-        {
-            if(!BK.test(src))
-                return FixedWidth.None;
-
-            var t = src.EffectiveType();
-            var def = t.IsGenericTypeDefinition ? t : t.GetGenericTypeDefinition(); 
-
-            if(def == typeof(Block16<>))
-                return FixedWidth.W16;
-            else if(def == typeof(Block32<>))
-                return FixedWidth.W32;
-            else if (def == typeof(Block64<>))
-                return FixedWidth.W64;
-            else if (def == typeof(Block128<>))
-                return FixedWidth.W128;
-            else if (def == typeof(Block256<>))
-                return FixedWidth.W256;
-            else if (def == typeof(Block512<>))
-                return FixedWidth.W512;
-            else
-                return FixedWidth.None;
-        }
+            => BlockedType.width(src);
 
         /// <summary>
         /// Determines the segment kind classifier for a blocked type
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static NumericKind segment(Type t)
-            => BK.test(t) ?  t.SuppliedTypeArgs().First().NumericKind() : NumericKind.None;
+            => BlockedType.segment(t);
 
         /// <summary>
         /// Determines the block classifier for a blocked type

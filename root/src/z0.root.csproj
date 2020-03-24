@@ -15,18 +15,18 @@
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="$(Components)" />
-    <ProjectReference Include="$(Reflections)" />
-    <ProjectReference Include="$(Texting)" />
-    <ProjectReference Include="$(Monadic)" />
-    <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(Symbolic)" />        
+    <ProjectReference Include="$(Collective)" />
+    <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Custom)" />
+    <ProjectReference Include="$(Identity)" />  
+    <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Memories)" />    
-    <ProjectReference Include="$(Time)" />    
+    <ProjectReference Include="$(Reflections)" />
     <ProjectReference Include="$(SFuncs)" />    
-
-
+    <ProjectReference Include="$(Symbolic)" />        
+    <ProjectReference Include="$(Texting)" />
+    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
 </Project>

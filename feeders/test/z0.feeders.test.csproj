@@ -9,11 +9,14 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(TestLib)" />
     <ProjectReference Include="$(Math)" />  
-    <ProjectReference Include="$(Components)" />  
+    
     <ProjectReference Include="$(Canonical)" />  
     <ProjectReference Include="$(Collective)" />  
-    <ProjectReference Include="$(Monadic)" />  
+    <ProjectReference Include="$(Components)" />  
+    <ProjectReference Include="$(Custom)" />  
+    <ProjectReference Include="$(Identity)" />  
     <ProjectReference Include="$(Memories)" />  
+    <ProjectReference Include="$(Monadic)" />  
     <ProjectReference Include="$(Reflections)" />  
     <ProjectReference Include="$(Symbolic)" />  
     <ProjectReference Include="$(SFuncs)" />  

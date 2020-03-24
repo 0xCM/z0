@@ -7,7 +7,16 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
+    using Z0;
+
+    readonly struct NatSpanIdentity : ITypeIdentityProvider
+    {
+        public TypeIdentity DefineIdentity(Type src)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public readonly struct NatSpanSig : IEquatable<NatSpanSig>
     {
         public static Option<NatSpanSig> From(Type t)
@@ -87,5 +96,7 @@ namespace Z0
         
         public override string ToString()
             => text.concat(IDI.Nat, Length.ToString(), IDI.SegSep, CellWidth.ToString(), Indicator);
+
+
     }
 }

@@ -168,5 +168,14 @@ namespace Z0
                 return typeof(void);            
         }
 
+        internal static IEnumerable<Type> SuppliedTypeArgs(this Type t)
+        {
+            var x = t.EffectiveType();
+            if(x.IsConstructedGenericType)
+                return x.GetGenericArguments();
+            else
+                return  new Type[]{};
+        }
+
     }
 }

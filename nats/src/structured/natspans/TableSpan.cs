@@ -18,6 +18,7 @@ namespace Z0
     /// <typeparam name="M">The row count type</typeparam>
     /// <typeparam name="N">The row count type</typeparam>
     /// <typeparam name="T">The span element type</typeparam>
+    [CustomSpan("table")]
      public readonly ref struct TableSpan<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat

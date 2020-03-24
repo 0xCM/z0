@@ -1,5 +1,6 @@
 <Project>
 
+
   <PropertyGroup>
     <TopDir>$(MSBuildThisFileDirectory)</TopDir>
     <PlatformTarget>x64</PlatformTarget>    
@@ -73,18 +74,8 @@
     <Feeders>$(TopDir)feeders/</Feeders>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <Components>$(Feeders)components/z0.components.csproj</Components>
-    <Canonical>$(Feeders)canonical/z0.canonical.csproj</Canonical>
-    <Collective>$(Feeders)collective/z0.collective.csproj</Collective>
-    <Monadic>$(Feeders)monadic/z0.monadic.csproj</Monadic>
-    <Memories>$(Feeders)memories/z0.memories.csproj</Memories>
-    <Reflections>$(Feeders)reflections/z0.reflections.csproj</Reflections>
-    <Symbolic>$(Feeders)symbolic/z0.symbolic.csproj</Symbolic>
-    <SFuncs>$(Feeders)sfuncs/z0.sfuncs.csproj</SFuncs>
-    <Texting>$(Feeders)texting/z0.texting.csproj</Texting>
-    <Time>$(Feeders)time/z0.time.csproj</Time>
-  </PropertyGroup>
+  <Import Project="$(Feeders)export.props"/>
+
 
 </Project>
 

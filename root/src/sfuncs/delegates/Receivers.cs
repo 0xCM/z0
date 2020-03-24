@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Security;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
+    
     /// <summary>
     /// Characterizes a function that accepts an input of parametric type
     /// </summary>

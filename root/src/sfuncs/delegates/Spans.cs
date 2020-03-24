@@ -35,7 +35,4 @@ namespace Z0
     /// <typeparam name="T">The stream element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate void SpanReceiver<T>(Span<T> src);
-
-
-
 }

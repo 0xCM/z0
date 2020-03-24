@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Security;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Characterizes an operator that emits a potentially modified receipt value
