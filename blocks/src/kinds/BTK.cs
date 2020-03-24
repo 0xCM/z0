@@ -93,7 +93,7 @@ namespace Z0
         {
             public const FixedWidth Width = FixedWidth.W128;
 
-            public static N128 W => default;
+            public static W128 W => default;
 
             [MethodImpl(Inline)]
             public static implicit operator BlockedType(Blocked128 src)
@@ -106,7 +106,7 @@ namespace Z0
         {
             public const FixedWidth Width = FixedWidth.W256;
 
-            public static N256 W => default;
+            public static W256 W => default;
 
             [MethodImpl(Inline)]
             public static implicit operator BlockedType(Blocked256 src)

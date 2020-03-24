@@ -20,12 +20,12 @@ namespace Z0
 
             public static Blend2x64x128<T> Op => default;
 
-            public static VKT.Vec128<T> hk => default;
+            public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => Dynop.EmbedVBinaryOpImm<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.EmbedVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -37,14 +37,14 @@ namespace Z0
         {
             public const string Name = "vblend4x64";
 
-            public static VKT.Vec256<T> hk => default;
+            public Vec256Kind<T> VKind => default;
 
             public static Blend4x64x256<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => Dynop.EmbedImmVBinaryOpImm<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.EmbedImmVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
@@ -58,12 +58,12 @@ namespace Z0
 
             public static Blend4x32x128<T> Op => default;
 
-            public static VKT.Vec128<T> hk => default;
+            public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => Dynop.EmbedVBinaryOpImm<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.EmbedVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -77,12 +77,12 @@ namespace Z0
 
             public static Blend8x32x256<T> Op => default;
 
-            public static VKT.Vec256<T> hk => default;
+            public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => Dynop.EmbedImmVBinaryOpImm<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.EmbedImmVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
@@ -97,12 +97,12 @@ namespace Z0
 
             public static Blend8x16x128<T> Op => default;
 
-            public static VKT.Vec128<T> hk => default;
+            public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
-                => Dynop.EmbedVBinaryOpImm<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.EmbedVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -114,14 +114,14 @@ namespace Z0
         {
             public const string Name = "vblend8x16";
 
-            public static VKT.Vec256<T> hk => default;
+            public Vec256Kind<T> VKind => default;
 
             public static Blend8x16x256<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
-                => Dynop.EmbedImmVBinaryOpImm<T>(hk, Id, gApiMethod(hk,Name),spec);
+                => Dynop.EmbedImmVBinaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 

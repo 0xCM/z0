@@ -27,11 +27,11 @@ namespace Z0
         protected t_vinx()
         {
             Check = new CheckExec(Config);
-            Comparisons = Context.Comparisons();
+            Comparisons = Context.Decompostions();
             //Comparisons = ComparisonContext.From(this);
         }
         
-        protected IComparisonService Comparisons {get;}
+        protected ISVValidatorD Comparisons {get;}
         
         protected CheckExec Check {get;}
 
@@ -191,134 +191,22 @@ namespace Z0
             where F : ISVBinaryOp128DApi<T>
                 =>  Comparisons.CheckScalarMatch(f,src);
                 
-        // {
-        //     var cells = vcount<T>(n128);
-        //     var succeeded = true;
-        //     var casename = CaseName(f);
-            
-        //     count.Start();
-        //     try
-        //     {
-        //         for(var i=0; i < RepCount; i++)
-        //         {
-        //             (var x, var y) = src(i);
-        //             var z = f.Invoke(x,y);
-        //             for(var j=0; j< cells; j++)
-        //                 Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
-        //         }
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         term.error(e, casename);
-        //         succeeded = false;
-        //     }
-        //     finally
-        //     {
-        //         ReportOutcome(casename,succeeded,count);
-        //     }
-        // }
 
         protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src, SystemCounter count = default)
             where T : unmanaged
             where F : ISVBinaryOp256DApi<T>
                 =>  Comparisons.CheckScalarMatch(f,src);
 
-        // {
-        //     var cells = vcount<T>(n256);
-        //     var succeeded = true;
-        //     var casename = CaseName(f);
-            
-        //     count.Start();
-        //     try
-        //     {
-        //         for(var i=0; i < RepCount; i++)
-        //         {
-        //             (var x, var y) = src(i);
-        //             var z = f.Invoke(x,y);
-        //             for(var j=0; j< cells; j++)
-        //                 Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
-        //         }
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         term.error(e, casename);
-        //         succeeded = false;
-        //     }
-        //     finally
-        //     {
-        //         ReportOutcome(casename,succeeded,count);
-        //     }
-        // }       
 
         protected void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null, SystemCounter count = default) 
             where T : unmanaged
             where F : ISVBinaryOp128Api<T>
                 => Comparisons.CheckExplicit(f,left,right,dst,name);
 
-        // {
-        //     var casename = name ?? CaseName(f);
-        //     var w = n128;
-        //     var t = default(T);
-        //     var cells = vcount(w,t);
-        //     var succeeded = true;
-        //     var blocks = left.BlockCount;
-
-        //     count.Start();
-        //     try
-        //     {
-        //         for(var block=0; block<blocks; block++)
-        //         {
-        //             var x = left.LoadVector(block);
-        //             var y = right.LoadVector(block);
-        //             var actual = f.Invoke(x,y);
-        //             var expect = dst.LoadVector(block);
-        //             Claim.yea(gvec.vsame(actual,expect));
-        //         }
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         term.error(e, casename);
-        //         succeeded = false;
-        //     }
-        //     finally
-        //     {
-        //         ReportOutcome(casename, succeeded,count);
-        //     }
-        // }
 
         protected void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null, SystemCounter count = default) 
             where T : unmanaged
             where F : ISVBinaryOp256Api<T>
                 => Comparisons.CheckExplicit(f,left,right,dst,name);
-        // {
-        //     var casename = name ?? CaseName(f);
-        //     var w = n256;
-        //     var t = default(T);
-        //     var cells = vcount(w,t);
-        //     var succeeded = true;
-        //     var blocks = left.BlockCount;
-            
-        //     count.Start();
-        //     try
-        //     {
-        //         for(var block=0; block<blocks; block++)
-        //         {
-        //             var x = left.LoadVector(block);
-        //             var y = right.LoadVector(block);
-        //             var actual = f.Invoke(x,y);
-        //             var expect = dst.LoadVector(block);
-        //             Claim.yea(gvec.vsame(actual,expect));
-        //         }
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         term.error(e,casename);
-        //         succeeded = false;
-        //     }
-        //     finally
-        //     {
-        //         ReportOutcome(casename,succeeded,count);
-        //     }
-        // }
     }
 }

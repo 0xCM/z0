@@ -6,92 +6,45 @@ namespace Z0
 {
     using System;
 
-    public static class OpComparers
-    {   
-        public static ISFApiUnaryOpComparer<T> define<T>(IValidationContext context, OperationClasses.UnaryOp<T> unary)
-            where T : unmanaged
-                => new UnaryOpComparer<T>(context);
-
-        public static ISFApiBinaryOpComparer<T> define<T>(IValidationContext context, OperationClasses.BinaryOp<T> unary)
-            where T : unmanaged
-                => new BinaryOpComparer<T>(context);
-
-        public static ITernaryOpComparer<T> define<T>(IValidationContext context, OperationClasses.TernaryOp<T> unary)
-            where T : unmanaged
-                => new TernaryOpComparer<T>(context);
-
-        public static ISFApiBinaryPredicateComparer<T> define<T>(IValidationContext context, OperationClasses.BinaryPredicate<T> unary)
-            where T : unmanaged
-                => new BinaryPredicateComparer<T>(context);
-    }
-
-    public static class FuncComparers
+    public static class SFMatchServices
     {
-        public static IComparisonService Comparisons(this ITestContext context)
-            => new ComparisonService(ComparisonContext.From(context));
+        public static ISVValidatorD<T> Decomposer<T>(this IValidationContext context)
+            where T : unmanaged
+             => new SVValidatorD<T>(context);
+
+        public static ISVValidatorD Decompostions(this ITestContext context)
+            => new SVValidatorD(ValidationContext.From(context));
             
-        public static ISFApiUnaryOpComparer<T> UnaryOpComparer<T>(this ITestContext context, T t = default)
+        public static ISFMatch<T,T> UnaryOpMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new UnaryOpComparer<T>(context);
+                => new SFOpMatch1<T>(context);
 
-        public static ISFApiUnaryOpComparer<T> UnaryOpComparer<T>(this ITestContext context, bool xzero, T t = default)
-            where T : unmanaged
-                => new UnaryOpComparer<T>(context,xzero);
+        // public static ISFComparer<T,T> UnaryOpComparer<T>(this ITestContext context, bool xzero, T t = default)
+        //     where T : unmanaged
+        //         => new SUnaryOpComparer<T>(context,xzero);
 
-        public static ISFApiBinaryOpComparer<T> BinaryOpComparer<T>(this ITestContext context, T t = default)
+        public static ISFMatch<T,T,T> BinaryOpMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new BinaryOpComparer<T>(context);
+                => new SBinaryOpComparer<T>(context);
 
-        public static ISFApiBinaryOpComparer<T> BinaryOpComparer<T>(this ITestContext context, bool xzero, T t = default)
+        public static ISFMatch<T,T,T> BinaryOpMatch<T>(this ITestContext context, bool xzero, T t = default)
             where T : unmanaged
-            => new BinaryOpComparer<T>(context,xzero);
+            => new SBinaryOpComparer<T>(context,xzero);
 
-        public static ITernaryOpComparer<T> TernaryOpComparer<T>(this ITestContext context, T t = default)
-            where T : unmanaged
-                => new TernaryOpComparer<T>(context);
+        // public static ISFComparer<T,T,T,T> TernaryOpComparer<T>(this ITestContext context, T t = default)
+        //     where T : unmanaged
+        //         => new STernaryOpComparer<T>(context);
 
-        public static ITernaryOpComparer<T> TernaryOpComparer<T>(this ITestContext context, bool xzero = false, T t = default)
+        public static ISFMatch<T,T,T,T> TernaryOpMatch<T>(this ITestContext context, bool xzero = false, T t = default)
             where T : unmanaged
-                => new TernaryOpComparer<T>(context,xzero);
+                => new SFOpMatch3<T>(context,xzero);
 
-        public static ISFApiBinaryPredicateComparer<T> BinaryPredicateComparer<T>(this ITestContext context, T t = default)
+        public static ISFMatch<T,T,bit> BinaryPredicateMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new BinaryPredicateComparer<T>(context);
+                => new SBinaryPredMatch<T>(context);
 
-        public static ISFApiComparer<T,T,T,bit> TernaryPredicateComparer<T>(this ITestContext context, T t = default)
+        public static ISFMatch<T,T,T,bit> TernaryPredicateComparer<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new TernaryFuncComparer<T,T,T,bit>(context);
-
-        public static IVUnaryOpComparer128D<T> UnaryOpComparer<T>(this IValidationContext context, W128 w, T t = default)
-            where T : unmanaged
-                => new VUnaryValidator128D<T>(context);
-
-        public static IVUnaryOpComparer256D<T> UnaryOpComparer<T>(this IValidationContext context, W256 w, T t = default)
-            where T : unmanaged
-                => new VUnaryValidator256D<T>(context);
-
-        public static IVBinaryOpComparer128D<T> BinaryOpComparer<T>(this IValidationContext context, W128 w, T t = default)
-            where T : unmanaged
-                => new VBinaryValidator128D<T>(context);
-
-        public static IVBinaryOpComparer256D<T> BinaryOpComparer<T>(this IValidationContext context, W256 w, T t = default)
-            where T : unmanaged
-                => new VBinaryValidator256D<T>(context);
-
-        public static IVShiftOpComparer128D<T> ShiftOpComparer<T>(this IValidationContext context, W128 w, T t = default)
-            where T : unmanaged
-                => new VShiftComparer128D<T>(context);
-
-        public static IVShiftOpComparer256D<T> ShiftComparer<T>(this IValidationContext context, W256 w, T t = default)
-            where T : unmanaged
-                => new VShiftValidator256D<T>(context);
-
-        public static IVTernaryOpComparer128D<T> TernaryOpComparer<T>(this IValidationContext context, W128 w, T t = default)
-            where T : unmanaged
-                => new VTernaryValidator128D<T>(context);
-
-        public static IVTernaryOpComparer256D<T> TernaryOpComparer<T>(this IValidationContext context, W256 w, T t = default)
-            where T : unmanaged
-                => new VTernaryValidator256D<T>(context);
+                => new STernaryPredMatch<T>(context);
     }
 }

@@ -55,7 +55,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVFImm8Scalar128DApi<T,K> : ISVFImm8ScalarApi<W128,Vector128<T>,T,K>, IVUnaryScalarFuncD<T,K>
+    public interface ISVFImm8Scalar128DApi<T,K> : ISVFImm8ScalarApi<W128,Vector128<T>,T,K>, IVUnaryScalarFuncD<T,K>, ISVFunc128Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -68,7 +68,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryScalar128Api<T,K> : ISVFImm8ScalarApi<W128,Vector128<T>,T,K>
+    public interface ISVImm8UnaryScalar128Api<T,K> : ISVFImm8ScalarApi<W128,Vector128<T>,T,K>, ISVFunc128Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -83,7 +83,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryScalar128DApi<T,K> : ISVScalarApi<W128,Vector128<T>,T,K>, IVUnaryScalarFuncD<T,K>
+    public interface ISVImm8UnaryScalar128DApi<T,K> : ISVScalarApi<W128,Vector128<T>,T,K>, IVUnaryScalarFuncD<T,K>, ISVFunc128Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -96,7 +96,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryScalar256Api<T,K> : ISVFImm8ScalarApi<W256,Vector256<T>,T,K>
+    public interface ISVImm8UnaryScalar256Api<T,K> : ISVFImm8ScalarApi<W256,Vector256<T>,T,K>, ISVFunc256Api<T>
         where K : unmanaged
         where T : unmanaged
     {
@@ -110,7 +110,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryScalar256DApi<T,K> : ISVFImm8ScalarApi<W256,Vector256<T>,T,K>, IVUnaryScalarFuncD<T,K>
+    public interface ISVImm8UnaryScalar256DApi<T,K> : ISVFImm8ScalarApi<W256,Vector256<T>,T,K>, IVUnaryScalarFuncD<T,K>, ISVFunc256Api<T>
         where K : unmanaged
         where T : unmanaged
     {

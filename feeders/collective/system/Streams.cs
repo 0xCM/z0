@@ -33,10 +33,7 @@ namespace Z0
         /// <param name="src">The stream elements</param>
         /// <typeparam name="T">The streamed element type</typeparam>
         public static IEnumerable<T> from<T>(params T[] src)
-        {
-            foreach (var t in src)
-                yield return t;
-        }
+            => src;
 
         /// <summary>
         /// Concatenates the source streams to create a unified stream

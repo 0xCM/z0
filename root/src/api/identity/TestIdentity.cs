@@ -19,7 +19,6 @@ namespace Z0
         public static string hosturi(Type host)
             =>  $"{TypeIdentity.owner(host)}{Sep}{host.Name}";
 
-
         /// <summary>
         /// Produces the name of the test case for the specified function
         /// </summary>

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Root;
-    using static VKT;
 
     public static class VK
     {
@@ -18,21 +17,21 @@ namespace Z0
         /// Reifies a non-parametric vector kind
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec vk()
+        public static VectorTypeKind vk()
             => default;
 
         /// <summary>
         /// Reifies a non-parametric 128-bit vector kind
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec128 vk128()
+        public static Vec128Kind vk128()
             => default;
 
         /// <summary>
         /// Reifies a cell-parametric 128-bit vector kind
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec128<T> vk128<T>(T t = default)
+        public static Vec128Kind<T> vk128<T>(T t = default)
             where T : unmanaged
                 => default;
 
@@ -40,14 +39,14 @@ namespace Z0
         /// Reifies a non-parametric 256-bit vector kind
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec256 vk256()
+        public static Vec256Kind vk256()
             => default;
 
         /// <summary>
         /// Reifies a cell-parametric 256-bit vector kind
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec256<T> vk256<T>(T t = default)
+        public static Vec256Kind<T> vk256<T>(T t = default)
             where T : unmanaged
                 => default;
     }

@@ -20,6 +20,16 @@ namespace Z0
                 => default(E);
 
         /// <summary>
+        /// Reads a generic numeric value from a boxed enum
+        /// </summary>
+        /// <param name="e">The enum value to reinterpret</param>
+        /// <typeparam name="V">The numeric value type</typeparam>
+        [MethodImpl(Inline)]
+        public static V numeric<V>(Enum e)
+            where V : unmanaged
+                => (V)Convert.ChangeType(e, e.GetTypeCode());
+ 
+        /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values
         /// </summary>
         /// <param name="peek">If true, extracts the content, bypassing any caching</param>

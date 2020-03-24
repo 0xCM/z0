@@ -240,17 +240,30 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity contracted<T>(string opname, T t = default)
-            => OpIdentity.numeric(opname,typeof(T).NumericKind());
+        public static OpIdentity sfunc<T>(string opname)
+            => OpIdentity.numeric(opname, typeof(T).NumericKind());
 
         /// <summary>
-        /// Produces an identifier of the form {opname}_{w}{typesig(nk)}
+        /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
         /// </summary>
         /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity fixedop(string opname, FixedWidth w, NumericKind nk)
-            => OpIdentity.operation(opname,w,nk,false);
+        public static OpIdentity sfunc<T>(string opname, Vec128Kind<T> k)
+            where T : unmanaged
+                => operation(opname, k.FixedWidth, typeof(T).NumericKind(), true);
+
+        /// <summary>
+        /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
+        /// </summary>
+        /// <param name="opname">The base operator name</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static OpIdentity sfunc<T>(string opname, Vec256Kind<T> k)
+            where T : unmanaged
+                => operation(opname, k.FixedWidth, typeof(T).NumericKind(), true);
 
         [MethodImpl(Inline)]
         public bool Equals(OpIdentity src)

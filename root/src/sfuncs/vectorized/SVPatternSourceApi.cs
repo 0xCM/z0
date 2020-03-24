@@ -27,7 +27,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVPatternSource128Api<T> : ISVPatternSourceApi<W128,Vector128<T>,T>
+    public interface ISVPatternSource128Api<T> : ISVPatternSourceApi<W128,Vector128<T>,T>, ISVFunc128Api<T>
         where T : unmanaged
     {
 
@@ -38,7 +38,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVPatternSource256Api<T> : ISVPatternSourceApi<W256,Vector256<T>,T>
+    public interface ISVPatternSource256Api<T> : ISVPatternSourceApi<W256,Vector256<T>,T>, ISVFunc256Api<T>
         where T : unmanaged
     {
 

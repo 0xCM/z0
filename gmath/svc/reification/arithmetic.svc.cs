@@ -19,7 +19,7 @@ namespace Z0
 
             public static Add<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.add(a, b);
@@ -37,7 +37,7 @@ namespace Z0
 
             public static Sub<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.sub(a,b);
@@ -55,7 +55,7 @@ namespace Z0
 
             public static Mul<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
 
             [MethodImpl(Inline)]
@@ -75,7 +75,7 @@ namespace Z0
 
             public static Div<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.div(a, b);
@@ -93,7 +93,7 @@ namespace Z0
 
             public static ModOp<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.mod(a,b);
@@ -111,7 +111,7 @@ namespace Z0
 
             public static ModMul<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T m) => gmath.modmul(a,b,m);
@@ -129,7 +129,7 @@ namespace Z0
 
             public static Even<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => parity.even(a);
@@ -147,7 +147,7 @@ namespace Z0
 
             public static Odd<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => parity.odd(a);
@@ -165,7 +165,7 @@ namespace Z0
 
             public static Clamp<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.clamp(a,b);
@@ -183,7 +183,7 @@ namespace Z0
 
             public static Square<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.square(a);
@@ -202,7 +202,7 @@ namespace Z0
 
             public static Negate<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.negate(a);
@@ -221,7 +221,7 @@ namespace Z0
 
             public static Dec<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.dec(a);
@@ -239,7 +239,7 @@ namespace Z0
 
             public static Inc<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.inc(a);
@@ -257,7 +257,7 @@ namespace Z0
 
             public static Abs<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.abs(a);
@@ -275,7 +275,7 @@ namespace Z0
 
             public static Dist<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly ulong Invoke(T a, T b) => gmath.dist(a,b);

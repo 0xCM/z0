@@ -16,6 +16,46 @@ namespace Z0
     public static class VRandX
     {
         /// <summary>
+        /// Produces a 128-bit cpu vector over random T-cells
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The width selector</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w)        
+            where T : unmanaged
+                => random.Blocks<T>(w).LoadVector();
+
+        /// <summary>
+        /// Produces a random 256-bit cpu vector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The vector width selector</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w)        
+            where T : unmanaged
+                => random.Blocks<T>(w).LoadVector();
+                
+        /// <summary>
+        /// Produces a 128-bit cpu vector over random T-cells
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The width selector</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, Vec128Kind<T> k, W128 w = default)        
+            where T : unmanaged
+                => random.Blocks<T>(w).LoadVector();
+
+        /// <summary>
+        /// Produces a random 256-bit cpu vector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The vector width selector</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static Vector256<T> CpuVector<T>(this IPolyrand random, Vec256Kind<T> k, W256 w = default)        
+            where T : unmanaged
+                => random.Blocks<T>(w).LoadVector();
+
+        /// <summary>
         /// Creates a 128-bit vectorized emitter predicated a random source
         /// </summary>
         /// <param name="random">The random source</param>
@@ -37,15 +77,6 @@ namespace Z0
             where T : unmanaged
                 => VRand.emitter(w,random,t);
 
-        /// <summary>
-        /// Produces a 128-bit cpu vector over random T-cells
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="w">The width selector</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w)        
-            where T : unmanaged
-                => random.Blocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a stream of 128-bit cpu vectors over random T-cells
@@ -59,16 +90,6 @@ namespace Z0
             while(true)
                 yield return random.CpuVector<T>(w);
         }
-
-        /// <summary>
-        /// Produces a random 256-bit cpu vector
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="w">The vector width selector</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w)        
-            where T : unmanaged
-                => random.Blocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a stream of 256-bit cpu vectors over random T-cells

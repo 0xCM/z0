@@ -164,28 +164,28 @@ namespace Z0
         readonly IDynamicImmInjector Embedder;
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IAppContext context, VKT.Vec128 vk, OperatorType<N1> opk)
+        internal ImmInjector(IAppContext context, Vec128Kind vk, OperatorType<N1> opk)
         {
             this.Context = context;
             this.Embedder = new V128UnaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IAppContext context, VKT.Vec256 vk, OperatorType<N1> opk)
+        internal ImmInjector(IAppContext context, Vec256Kind vk, OperatorType<N1> opk)
         {
             this.Context = context;
             this.Embedder = new V256UnaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IAppContext context, VKT.Vec128 vk, OperatorType<N2> opk)
+        internal ImmInjector(IAppContext context, Vec128Kind vk, OperatorType<N2> opk)
         {
             this.Context = context;
             this.Embedder = new V128BinaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IAppContext context, VKT.Vec256 vk, OperatorType<N2> opk)
+        internal ImmInjector(IAppContext context, Vec256Kind vk, OperatorType<N2> opk)
         {
             this.Context = context;
             this.Embedder = new V256BinaryOpImmInjector(context);

@@ -53,7 +53,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryPredicate128Api<T> : ISVUnaryPredicateApi<W128,Vector128<T>,T>
+    public interface ISVUnaryPredicate128Api<T> : ISVUnaryPredicateApi<W128,Vector128<T>,T>, ISVFunc128Api<T>
         where T : unmanaged
     {
         
@@ -64,7 +64,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryPredicate256Api<T> : ISVUnaryPredicateApi<W256,Vector256<T>,T>
+    public interface ISVUnaryPredicate256Api<T> : ISVUnaryPredicateApi<W256,Vector256<T>,T>, ISVFunc256Api<T>
         where T : unmanaged
     {        
         

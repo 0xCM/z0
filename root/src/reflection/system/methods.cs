@@ -40,16 +40,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Gets the value of a member attribute if it exists 
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="m">The member</param>
-        public static Option<A> Tag<A>(this MemberInfo m) 
-            where A : Attribute
-                => m.GetCustomAttribute<A>();
-
-
-        /// <summary>
         /// Raises an error if the source method is any flavor of generic
         /// </summary>
         /// <param name="src">The method to examine</param>
@@ -69,33 +59,12 @@ namespace Z0
                 throw AppErrors.NonGenericMethod(src);
         }
 
-        public static Option<MethodInfo> FirstMatchedMethod(this Type declarer, string name, params Type[] paramTypes)
-        {
-            foreach(var m in declarer.DeclaredMethods())
-            {
-                var pTypes = m.ParameterTypes(true).ToArray();
-                if(pTypes.Length >= paramTypes.Length)
-                {
-                    var matched = false;
-                    for(var i=0; i<paramTypes.Length; i++)
-                        matched &= (pTypes[i] == paramTypes[i]);
-                    if(matched)
-                        return m;
-                }
-            }
-            return none<MethodInfo>();
-        }
-
         /// <summary>
-        /// Searches a type for any method that matches the supplied signature
+        /// Selects the first method found on the type, if any, that has a specified name
         /// </summary>
-        /// <param name="declarer">The type to search</param>
-        /// <param name="name">The name of the method</param>
-        /// <param name="paramTypes">The method parameter types in ordinal position</param>
-        public static Option<MethodInfo> MatchMethod(this Type declarer, string name, params Type[] paramTypes)
-            => paramTypes.Length != 0
-                ? declarer.GetMethod(name, bindingAttr: AnyVisibilityOrInstanceType, binder: null, types: paramTypes, modifiers: null)
-                : declarer.GetMethod(name, AnyVisibilityOrInstanceType);
-
+        /// <param name="src">The type to examine</param>
+        /// <param name="name">The name to match</param>
+        public static Option<MethodInfo> Method(this Type src, string name)
+            => src.DeclaredMethods().WithName(name).FirstOrDefault();
    }
 }

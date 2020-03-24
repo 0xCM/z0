@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.Intrinsics;
 
     using static Root;
     using static Nats;
@@ -19,7 +15,7 @@ namespace Z0
         public void surrogat_stream_128()
         {
             var n = n128;
-            foreach(var k in Numeric.IntegralKinds)
+            foreach(var k in NumericTypes.IntegralKinds)
             {                
                 var emitter = Random.CpuSurrogateEmitter(n, k);
                 var emission = emitter().Take(10);

@@ -6,33 +6,28 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
-    using static Root;
-
-    partial class VectorTypeOps
+    partial class ReflectedVectorOps
     {
-
         /// <summary>
         /// Determines whether a method returns a 128-bit intrinsic vector
         /// </summary>
         /// <param name="src">The method to test</param>
-        public static bool ReturnsVector(this MethodInfo src, N128 w)
+        public static bool ReturnsVector(this MethodInfo src, W128 w)
             => src.ReturnType.IsVector(w);
 
         /// <summary>
         /// Determines whether a method returns a 256-bit intrinsic vector
         /// </summary>
         /// <param name="src">The method to test</param>
-        public static bool ReturnsVector(this MethodInfo src, N256 w)
+        public static bool ReturnsVector(this MethodInfo src, W256 w)
             => src.ReturnType.IsVector(w);
 
         /// <summary>
         /// Determines whether a method returns a 256-bit intrinsic vector
         /// </summary>
         /// <param name="src">The method to test</param>
-        public static bool ReturnsVector(this MethodInfo src, N512 w)
+        public static bool ReturnsVector(this MethodInfo src, W512 w)
             => src.ReturnType.IsVector(w);
 
         /// <summary>
@@ -41,7 +36,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool ReturnsVector(this MethodInfo src, N128 w, Type tCell)
+        public static bool ReturnsVector(this MethodInfo src, W128 w, Type tCell)
             => src.ReturnType.IsVector(w, tCell);
 
         /// <summary>
@@ -50,7 +45,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool ReturnsVector(this MethodInfo src, N256 w, Type tCell)
+        public static bool ReturnsVector(this MethodInfo src, W256 w, Type tCell)
             => src.ReturnType.IsVector(w, tCell);
 
         /// <summary>
@@ -59,7 +54,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool ReturnsVector(this MethodInfo src, N512 w, Type tCell)
+        public static bool ReturnsVector(this MethodInfo src, W512 w, Type tCell)
             => src.ReturnType.IsVector(w, tCell);
     }
 }

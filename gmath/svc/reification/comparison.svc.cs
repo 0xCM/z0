@@ -19,7 +19,7 @@ namespace Z0
 
             public static Eq<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) 
@@ -38,7 +38,7 @@ namespace Z0
 
             public static Neq<T> Op => default;
             
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.neq(x,y);
@@ -56,7 +56,7 @@ namespace Z0
 
             public static Lt<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) 
@@ -75,7 +75,7 @@ namespace Z0
 
             public static LtEq<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T x, T y) 
@@ -94,7 +94,7 @@ namespace Z0
 
             public static Gt<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) 
@@ -113,7 +113,7 @@ namespace Z0
 
             public static GtEq<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) 
@@ -132,7 +132,7 @@ namespace Z0
 
             public static Between<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T a, T b) 
@@ -147,7 +147,7 @@ namespace Z0
 
             public static Nonz<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a) 
@@ -166,7 +166,7 @@ namespace Z0
 
             public static NegativeOp<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a) 
@@ -185,7 +185,7 @@ namespace Z0
 
             public static PositiveOp<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a) 
@@ -204,7 +204,7 @@ namespace Z0
 
             public static Min<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -223,7 +223,7 @@ namespace Z0
 
             public static Max<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted<T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 

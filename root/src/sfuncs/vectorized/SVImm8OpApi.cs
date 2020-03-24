@@ -47,7 +47,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryOp128Api<T> : ISVImm8UnaryOpApi<W128,Vector128<T>,T>
+    public interface ISVImm8UnaryOp128Api<T> : ISVImm8UnaryOpApi<W128,Vector128<T>,T>, ISVFunc128Api<T>
         where T : unmanaged
     {
 
@@ -58,7 +58,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8UnaryOp256Api<T> : ISVImm8UnaryOpApi<W256,Vector256<T>,T>
+    public interface ISVImm8UnaryOp256Api<T> : ISVImm8UnaryOpApi<W256,Vector256<T>,T>, ISVFunc256Api<T>
         where T : unmanaged
     {
         
@@ -82,7 +82,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8x2UnaryOp128Api<T> : ISVImm8x2UnaryOpApi<W128,Vector128<T>,T>
+    public interface ISVImm8x2UnaryOp128Api<T> : ISVImm8x2UnaryOpApi<W128,Vector128<T>,T>, ISVFunc128Api<T>
         where T : unmanaged
     {
                 
@@ -93,7 +93,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8x2UnaryOp256Api<T> : ISVImm8x2UnaryOpApi<W256,Vector256<T>,T>
+    public interface ISVImm8x2UnaryOp256Api<T> : ISVImm8x2UnaryOpApi<W256,Vector256<T>,T>, ISVFunc256Api<T>
         where T : unmanaged
     {
         

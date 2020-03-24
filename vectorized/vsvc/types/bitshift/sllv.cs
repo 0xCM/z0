@@ -17,11 +17,11 @@ namespace Z0
         {
             public const string Name = "vsllv";
              
-            public static VKT.Vec128<T> hk => default;
+            public Vec128Kind<T> VKind => default;
 
             public static Sllv128<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets) 
@@ -37,11 +37,11 @@ namespace Z0
         {
             public const string Name = "vsllv";
              
-            public static VKT.Vec256<T> hk => default;
+            public Vec256Kind<T> VKind => default;
 
             public static Sllv256<T> Op => default;
             
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offsets) 

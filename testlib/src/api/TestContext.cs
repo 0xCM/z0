@@ -124,7 +124,7 @@ namespace Z0
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
-                => OpIdentity.contracted<K>($"{opname}_baseline");
+                => OpIdentity.sfunc<K>($"{opname}_baseline");
 
         protected virtual bool TraceEnabled
             => true;

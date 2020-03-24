@@ -36,7 +36,7 @@ namespace Z0
             internal BinaryOp(Z0.BinaryOp<T> f, string name)            
             {
                 this.F = f;
-                this.Id = OpIdentity.contracted<T>(name);
+                this.Id = OpIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

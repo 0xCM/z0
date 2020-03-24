@@ -15,6 +15,7 @@ namespace Z0
     
     partial class Reflections
     {
+
         /// <summary>
         /// Raises an error if a method is nongeneric
         /// </summary>

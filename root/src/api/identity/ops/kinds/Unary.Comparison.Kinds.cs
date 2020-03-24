@@ -10,10 +10,6 @@ namespace Z0
 
     using A = OpKindAttribute;
 
-    public interface IUnaryComparisonKind : IComparisonKind, IOpKind<UnaryComparisonKind>
-    {
-
-    }    
 
     partial class OpKinds
     {

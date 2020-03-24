@@ -33,11 +33,11 @@ namespace Z0
         {
             public const string Name = "vbitclear";
 
-            public static VKT.Vec128<T> hk => default;
+            public Vec128Kind<T> VKind => default;
 
             public static BitClear128<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
 
             [MethodImpl(Inline)]
@@ -55,11 +55,11 @@ namespace Z0
         {
             public const string Name = "vbitclear";
              
-            public static VKT.Vec256<T> hk => default;
+            public Vec256Kind<T> VKind => default;
 
             public static BitClear256<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) 

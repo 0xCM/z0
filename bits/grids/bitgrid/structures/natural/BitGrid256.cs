@@ -32,7 +32,7 @@ namespace Z0
         /// <summary>
         /// The grid width
         /// </summary>
-        public static N256 W => default;
+        public static W256 W => default;
 
         /// <summary>
         /// The grid dimension

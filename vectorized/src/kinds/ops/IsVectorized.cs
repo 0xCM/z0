@@ -8,19 +8,17 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
     using static Root;
 
-    partial class VectorTypeOps
+    partial class ReflectedVectorOps
     {
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>
         /// <param name="src">The method to test</param>
         public static bool IsVectorized(this MethodInfo src)        
-            => src.ReturnsVector() || src.ParameterTypes().Any(VectorType.test);
+            => src.ReturnsVector() || src.ParameterTypes().Any(VectorTypes.test);
 
         /// <summary>
         /// Determines whether a method has intrinsic paremeters or return type of specified width
@@ -37,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo m, N128 w)        
+        public static bool IsVectorized(this MethodInfo m, W128 w)        
             => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
 
         /// <summary>
@@ -45,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo m, N256 w)        
+        public static bool IsVectorized(this MethodInfo m, W256 w)        
             => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
 
         /// <summary>
@@ -53,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo m, N512 w)        
+        public static bool IsVectorized(this MethodInfo m, W512 w)        
             => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
 
         /// <summary>
@@ -61,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo m, N128 w, Type tCell)        
+        public static bool IsVectorized(this MethodInfo m, W128 w, Type tCell)        
             => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,tCell)).Count() != 0;
 
         /// <summary>
@@ -69,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo m, N256 w, Type tCell)        
+        public static bool IsVectorized(this MethodInfo m, W256 w, Type tCell)        
             => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,tCell)).Count() != 0;
 
         /// <summary>
@@ -77,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo m, N512 w, Type tCell)        
+        public static bool IsVectorized(this MethodInfo m, W512 w, Type tCell)        
             => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,tCell)).Count() != 0;
     }
 }

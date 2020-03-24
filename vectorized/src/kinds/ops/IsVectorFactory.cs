@@ -8,14 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
-    using static Root;
-
-    partial class VectorTypeOps
+    partial class ReflectedVectorOps
     {
-
         /// <summary>
         /// Determines whether a method produces, but does not accept, vector values
         /// </summary>

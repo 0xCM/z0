@@ -52,7 +52,7 @@ namespace Z0
                     width = FixedWidth.W64;
                 }
 
-                if(kind.IsSome() && width.IsSome())
+                if(kind != 0 && width != 0)
                     return TypeIdentity.Define(text.concat(prefix, width.Format(), IDI.SegSep, kind.Format()));
             }
 

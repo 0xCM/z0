@@ -42,7 +42,7 @@ namespace Z0
                 where   argwidth.IsSome()
                 let argfmt = argwidth.Format()
                 let nk = arg.NumericKind()
-                where  nk.IsSome()                
+                where  nk != 0
                 let nki = nk.Indicator().Format()
                 let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)                
                 select SegmentedIdentity.Define(i,segwidth,nk).AsTypeIdentity();

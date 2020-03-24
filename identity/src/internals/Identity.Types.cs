@@ -32,7 +32,7 @@ namespace Z0
             else if(arg.IsSystemType())
                 return TypeIdentities.IdentifyPrimitive(arg);
             else if(arg.IsEnum)
-                return TypeIdentities.IdentifyEnum(arg);
+                return EnumTypes.identify(arg).ToOption();
             else if(IsSegmented(arg))
                 return SegmentedIdentity(arg);
             else if(TypeIdentities.IsSpan(arg))

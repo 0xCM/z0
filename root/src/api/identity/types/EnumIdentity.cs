@@ -52,7 +52,7 @@ namespace Z0
         {
             this.Name = name;
             this.BaseType = basetype;
-            this.Identifier = basetype.IsSome() ? $"{Name}{IDI.ModSep}{basetype.Format()}" : string.Empty;
+            this.Identifier = basetype != 0 ? $"{Name}{IDI.ModSep}{basetype.Format()}" : string.Empty;
         }
      
         public bool IsEmpty

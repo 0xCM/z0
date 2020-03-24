@@ -17,19 +17,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public static class Components
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-    }
 
-    static class ComponentInternals
-    {
+        [MethodImpl(Inline)]
+        internal static int bitsize<T>()            
+            where T : unmanaged
+                => Unsafe.SizeOf<T>()*8;
+
         /// <summary>
         /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static Type EffectiveType(this Type src)
-            => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;        
+        internal static Type EffectiveType(this Type src)
+            => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
+
+        internal static IEnumerable<T> items<T>(params T[] src)
+            => src;
     }
 }

@@ -18,10 +18,10 @@ namespace Z0
     {
         static Type ApiG => typeof(gvec);
 
-        static MethodInfo gApiMethod(VKT.Vec128 hk, string name)
+        static MethodInfo gApiMethod(Vec128Kind hk, string name)
             => ApiG.DeclaredMethods().WithName(name).OfKind(hk).Single();
 
-        static MethodInfo gApiMethod(VKT.Vec256 hk, string name)
+        static MethodInfo gApiMethod(Vec256Kind hk, string name)
             => ApiG.DeclaredMethods().WithName(name).OfKind(hk).Single();
     }
 }

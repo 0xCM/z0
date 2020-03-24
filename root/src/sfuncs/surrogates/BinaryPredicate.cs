@@ -32,7 +32,7 @@ namespace Z0
             internal BinaryPredicate(Z0.BinaryPredicate<T> f, string name)            
             {
                 this.F = f;
-                this.Id = OpIdentity.contracted<T>(name);
+                this.Id = OpIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

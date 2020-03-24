@@ -1,0 +1,50 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Concurrent;
+
+    public class ValidationContext : IValidationContext
+    {
+        public Type HostType {get;}
+
+        public IPolyrand Random {get;}
+        
+        IAppMsgSink Sink {get;}
+
+        Action<TestCaseOutcome> Relay {get;}
+        
+        ConcurrentQueue<SFCaseResult> Outcomes {get;}
+
+        public static IValidationContext From(ITestContext context)
+            => new ValidationContext(context.HostType, context as IAppMsgSink, context.Random, context.ReportOutcome);
+
+        public static IValidationContext Define(Type host, IAppMsgSink sink, IPolyrand random)
+            => new ValidationContext(host,sink, random);
+
+        public ValidationContext(Type host, IAppMsgSink sink, IPolyrand random, Action<TestCaseOutcome> relay = null)
+        {
+            this.HostType = host;
+            this.Sink = sink;
+            this.Random = random;
+            this.Outcomes = new ConcurrentQueue<SFCaseResult>();
+            this.Relay = relay ?? BlackHole;
+        }
+
+        public void Notify(AppMsg msg)        
+            => Sink?.Notify(msg);
+
+        void BlackHole(TestCaseOutcome outcome) {}
+
+        public void ReportOutcome(string casename, bool succeeded, TimeSpan duration, AppMsg msg = null)    
+        {
+            var result = new SFCaseResult(casename, succeeded, duration, msg);
+            Outcomes.Enqueue(result);
+            Relay(result);
+        }
+    }
+}

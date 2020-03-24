@@ -72,9 +72,9 @@ namespace Z0
 
         public static OpIdentity identify(MethodInfo src, NumericKind k)
         {
-            var t = k.ToClrType();
+            var t = k.SystemType();
             if(src.IsOpenGeneric() && t.IsSome())
-                return identify(src.MakeGenericMethod(t.Value));
+                return identify(src.MakeGenericMethod(t));
             else
                 return identify(src);
         }
@@ -136,7 +136,7 @@ namespace Z0
         /// <param name="generics">Metadata for generic operations</param>
         public static IEnumerable<ClosedOp> close(GenericOp op)
              => from k in op.Kinds
-                let pt = k.ToClrType() where pt.IsSome()
+                let pt = k.SystemType().ToOption() where pt.IsSome()
                 let id = Identity.identify(op.Definition, k) where !id.IsEmpty
                 select ClosedOp.Define(op.Host, id, k, op.Definition.MakeGenericMethod(pt.Value)); 
     }

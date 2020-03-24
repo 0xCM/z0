@@ -15,6 +15,30 @@ namespace Z0
     public static partial class ReflectedClass
     {
         /// <summary>
+        /// Determines whether a type is a span
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsSpan(this Type t)
+            => SpanTypes.test(t);
+
+        /// <summary>
+        /// Classifies a type according to whether it is a span and, if so, what sort of span
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static SpanKind SpanKind(this Type t)
+            => SpanTypes.kind(t);
+
+        /// <summary>
+        /// Determines whether a method is a vectorized operator which, by definition, is an operator 
+        /// (which, by definition, is an homogenous function) with a vectorized operand which, by definition, 
+        /// is an operand of intrinsic vector type (which, by definition, is one of the system-defined intrinsic vector types
+        /// or a custom instrinsic vector type)
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        public static bool IsVectorizedOperator(this MethodInfo src)
+            => src.IsOperator() && src.ReturnType.IsVector();
+
+        /// <summary>
         /// Returns the source method's kind identifier if it exists
         /// </summary>
         /// <param name="m">The method to examine</param>
@@ -76,53 +100,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsTernaryOperator(this MethodInfo m)
             => m.IsHomogenous() && m.IsTernaryFunction();
-
-        /// <summary>
-        /// Determines whether a type is an intrinsic vector
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static bool IsVector(this Type t)
-            => TypeIdentities.IsCpuVector(t);
-
-        /// <summary>
-        /// Determines whether a type is a span
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static bool IsSpan(this Type t)
-            => TypeIdentities.IsSpan(t);
-
-        /// <summary>
-        /// Classifies a type according to whether it is a span and, if so, what sort of span
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static SpanKind SpanKind(this Type t)
-            => TypeIdentities.SpanKind(t);
-
-        /// <summary>
-        /// Determines whether a method returns an intrinsic vector
-        /// </summary>
-        /// <param name="src">The method to test</param>
-        public static bool ReturnsVector(this MethodInfo src)
-            => src.ReturnType.IsVector();
-
-        public static FixedWidth NumericWidth(this Type t)
-        {
-            var k = t.NumericKind();
-            if(k.IsSome())
-                return (FixedWidth)(ushort)k;
-            else
-                return FixedWidth.None;            
-        }
-        
-        /// <summary>
-        /// Determines whether a method is a vectorized operator which, by definition, is an operator 
-        /// (which, by definition, is an homogenous function) with a vectorized operand which, by definition, 
-        /// is an operand of intrinsic vector type (which, by definition, is one of the system-defined intrinsic vector types
-        /// or a custom instrinsic vector type)
-        /// </summary>
-        /// <param name="src">The method to test</param>
-        public static bool IsVectorizedOperator(this MethodInfo src)
-            => src.IsOperator() && src.ReturnType.IsVector();
 
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type

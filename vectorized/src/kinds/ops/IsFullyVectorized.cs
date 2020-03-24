@@ -8,20 +8,15 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
-    using static Root;
-
-    partial class VectorTypeOps
-    {
-        
+    partial class ReflectedVectorOps
+    {        
         /// <summary>
         /// Determines whether all parameters of a method are 128-bit intrinsic vectors
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsFullyVectorized(this MethodInfo src, N128 w)        
+        public static bool IsFullyVectorized(this MethodInfo src, W128 w)        
             => src.IsFullyVectorized() && src.EffectiveParameterTypes().All(t => t.IsVector(w));
 
         /// <summary>
@@ -29,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsFullyVectorized(this MethodInfo src, N256 w)        
+        public static bool IsFullyVectorized(this MethodInfo src, W256 w)        
             => src.IsFullyVectorized() && src.EffectiveParameterTypes().All(t => t.IsVector(w));
 
         /// <summary>
@@ -37,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsFullyVectorized(this MethodInfo src, N512 w)        
+        public static bool IsFullyVectorized(this MethodInfo src, W512 w)        
             => src.IsFullyVectorized() && src.EffectiveParameterTypes().All(t => t.IsVector(w));
 
         /// <summary>
@@ -46,7 +41,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool IsFullyVectorized(this MethodInfo src, N128 w, Type tCell)        
+        public static bool IsFullyVectorized(this MethodInfo src, W128 w, Type tCell)        
             => src.IsFullyVectorized(w) && src.ReturnType.IsVector(w,tCell);
 
         /// <summary>
@@ -55,7 +50,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool IsFullyVectorized(this MethodInfo src, N256 w, Type tCell)        
+        public static bool IsFullyVectorized(this MethodInfo src, W256 w, Type tCell)        
             => src.IsFullyVectorized(w) && src.ReturnType.IsVector(w,tCell);
 
         /// <summary>
@@ -64,7 +59,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool IsFullyVectorized(this MethodInfo src, N512 w, Type tCell)        
+        public static bool IsFullyVectorized(this MethodInfo src, W512 w, Type tCell)        
             => src.IsFullyVectorized(w) && src.ReturnType.IsVector(w,tCell);
     }
 }

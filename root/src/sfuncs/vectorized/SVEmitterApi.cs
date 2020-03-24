@@ -24,14 +24,14 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVEmitter128Api<T> : ISVEmitterApi<W128,Vector128<T>,T>
+    public interface ISVEmitter128Api<T> : ISVEmitterApi<W128,Vector128<T>,T>, ISVFunc128Api<T>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVEmitter256Api<T> : ISVEmitterApi<W256,Vector256<T>,T>
+    public interface ISVEmitter256Api<T> : ISVEmitterApi<W256,Vector256<T>,T>, ISVFunc256Api<T>
         where T : unmanaged
     {
 

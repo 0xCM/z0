@@ -28,7 +28,7 @@ namespace Z0
         /// Computes the primal types identified by a specified kind
         /// </summary>
         /// <param name="k">The primal kind</param>
-        public static ISet<Type> DistinctTypes(this NK k)
+        public static ISet<Type> DistinctTypes(this NumericKind k)
             => NumericIdentity.typeset(k);
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
             if(t == typeof(bit))
                 return NI.Unsigned; 
             var i = t.NumericKind().Indicator();
-            return i.IsSome() ? some(i) : none<NI>();
+            return i != 0 ? some(i) : none<NI>();
         }           
     }
 }

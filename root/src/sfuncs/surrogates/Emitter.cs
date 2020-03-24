@@ -39,7 +39,7 @@ namespace Z0
             public Emitter(Z0.Emitter<T> f, string name)            
             {
                 this.F = f;
-                this.Id = OpIdentity.contracted<T>(name);
+                this.Id = OpIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

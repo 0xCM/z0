@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Root;
-
     public static class NumericMethods
     {
         /// <summary>

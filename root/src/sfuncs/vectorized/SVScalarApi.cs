@@ -118,7 +118,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryScalar128Api<T,K> : ISVScalarApi<W128,Vector128<T>,T,K>
+    public interface ISVUnaryScalar128Api<T,K> : ISVScalarApi<W128,Vector128<T>,T,K>, ISVFunc128Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -131,7 +131,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryScalar128Api<T,K> : ISVScalarApi<W128, W128, Vector128<T>,Vector128<T>,T,T,K>
+    public interface ISVBinaryScalar128Api<T,K> : ISVScalarApi<W128, W128, Vector128<T>,Vector128<T>,T,T,K>, ISVFunc128Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -145,7 +145,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryScalar128DApi<T,K> : ISVScalarApi<W128, W128, Vector128<T>,Vector128<T>,T,T,K>, IVBinaryScalarFuncD<T,K>
+    public interface ISVBinaryScalar128DApi<T,K> : ISVScalarApi<W128, W128, Vector128<T>,Vector128<T>,T,T,K>, IVBinaryScalarFuncD<T,K>, ISVFunc128Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -158,7 +158,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVTernaryScalar128Api<T,K> : ISVScalarApi<W128, W128, W128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>
+    public interface ISVTernaryScalar128Api<T,K> : ISVScalarApi<W128, W128, W128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>, ISVFunc128Api<T>
         where K : unmanaged
         where T : unmanaged
     {
@@ -172,7 +172,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVTernaryScalar128DApi<T,K> : ISVScalarApi<W128, W128, W128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>, IVTernaryScalarFuncD<T,K>
+    public interface ISVTernaryScalar128DApi<T,K> : ISVScalarApi<W128, W128, W128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>, IVTernaryScalarFuncD<T,K>, ISVFunc128Api<T>
         where K : unmanaged
         where T : unmanaged
     {
@@ -185,7 +185,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryScalar256Api<T,K> : ISVScalarApi<W256,Vector256<T>,T,K>
+    public interface ISVUnaryScalar256Api<T,K> : ISVScalarApi<W256,Vector256<T>,T,K>, ISVFunc256Api<T>
         where K : unmanaged
         where T : unmanaged
     {
@@ -200,7 +200,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryScalar256DApi<T,K> : ISVScalarApi<W256,Vector256<T>,T,K>, IVUnaryScalarFuncD<T,K>
+    public interface ISVUnaryScalar256DApi<T,K> : ISVScalarApi<W256,Vector256<T>,T,K>, IVUnaryScalarFuncD<T,K>, ISVFunc256Api<T>
         where K : unmanaged
         where T : unmanaged
     {
@@ -214,7 +214,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryScalar256Api<T,K> : ISVScalarApi<W256, W256, Vector256<T>,Vector256<T>, T,T,K>
+    public interface ISVBinaryScalar256Api<T,K> : ISVScalarApi<W256, W256, Vector256<T>,Vector256<T>, T,T,K>, ISVFunc256Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -228,7 +228,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryScalar256DApi<T,K> : ISVScalarApi<W256, W256, Vector256<T>,Vector256<T>, T,T,K>, IVBinaryScalarFuncD<T,K>
+    public interface ISVBinaryScalar256DApi<T,K> : ISVScalarApi<W256, W256, Vector256<T>,Vector256<T>, T,T,K>, IVBinaryScalarFuncD<T,K>, ISVFunc256Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -241,7 +241,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVTernaryScalar256Api<T,K> : ISVScalarApi<W256, W256, W256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>
+    public interface ISVTernaryScalar256Api<T,K> : ISVScalarApi<W256, W256, W256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>, ISVFunc256Api<T>
         where T : unmanaged
         where K : unmanaged
     {
@@ -255,7 +255,7 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVTernaryScalar256DApi<T,K> : ISVScalarApi<W256, W256, W256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>, IVTernaryScalarFuncD<T,K>
+    public interface ISVTernaryScalar256DApi<T,K> : ISVScalarApi<W256, W256, W256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>, IVTernaryScalarFuncD<T,K>, ISVFunc256Api<T>
         where T : unmanaged
         where K : unmanaged
     {

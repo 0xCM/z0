@@ -17,11 +17,11 @@ namespace Z0
         {
             public const string Name = "vtakeimask";
 
-            public static VKT.Vec128<T> hk => default;
+            public Vec128Kind<T> VKind => default;
 
             public static TakeIMask128<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x, byte index) 
@@ -33,11 +33,11 @@ namespace Z0
         {
             public const string Name = "vtakeimask";
 
-            public static VKT.Vec256<T> hk => default;
+            public Vec256Kind<T> VKind => default;
 
             public static TakeIMask256<T> Op => default;
             
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x,byte index) 

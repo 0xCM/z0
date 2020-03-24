@@ -32,7 +32,7 @@ namespace Z0
             internal UnaryOp(Z0.UnaryOp<T> f, string name)            
             {
                 this.F = f;
-                this.Id = OpIdentity.contracted<T>(name);
+                this.Id = OpIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

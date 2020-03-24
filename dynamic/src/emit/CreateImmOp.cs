@@ -16,7 +16,7 @@ namespace Z0
 
     partial class Dynop
     {
-        public static DynamicDelegate<BinaryOp<Vector128<T>>> EmbedVBinaryOpImm<T>(VKT.Vec128<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<BinaryOp<Vector128<T>>> EmbedVBinaryOpImm<T>(Vec128Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -27,7 +27,7 @@ namespace Z0
             return DynamicDelegate.Create<BinaryOp<Vector128<T>>>(tId, wrapped, target);
         }
 
-        public static DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmVBinaryOpImm<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<BinaryOp<Vector256<T>>> EmbedImmVBinaryOpImm<T>(Vec256Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -54,7 +54,7 @@ namespace Z0
             return DynamicDelegate.Create<UnaryBlockedOp128<T>>(tId, wrapped, target);
         }
 
-        public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedVUnaryOpImm<T>(VKT.Vec128<T> k, OpIdentity baseid, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryOp<Vector128<T>>> EmbedVUnaryOpImm<T>(Vec128Kind<T> k, OpIdentity baseid, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -65,7 +65,7 @@ namespace Z0
             return DynamicDelegate.Create<UnaryOp<Vector128<T>>>(tId, wrapped, target);
         }
 
-        public static DynamicDelegate<UnaryOp<Vector256<T>>> EmbedVUnaryOpImm<T>(VKT.Vec256<T> k, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnaryOp<Vector256<T>>> EmbedVUnaryOpImm<T>(Vec256Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));

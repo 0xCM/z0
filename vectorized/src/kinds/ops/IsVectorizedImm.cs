@@ -9,9 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     
-    using static Root;
-
-    partial class VectorTypeOps
+    partial class ReflectedVectorOps
     {
         /// <summary>
         /// Determines whether a method is (partially) vectorized and accepts an immediate value

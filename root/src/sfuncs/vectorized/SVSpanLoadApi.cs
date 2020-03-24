@@ -27,7 +27,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVFSpanLoad128Api<S,T> : ISVFSpanLoadApi<W128, S, Vector128<T>,T>
+    public interface ISVFSpanLoad128Api<S,T> : ISVFSpanLoadApi<W128, S, Vector128<T>,T>, ISVFunc128Api<T> 
         where S : unmanaged
         where T : unmanaged
     {
@@ -35,14 +35,14 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVFSpanLoad128Api<T> : ISVFSpanLoad128Api<T,T>
+    public interface ISVFSpanLoad128Api<T> : ISVFSpanLoad128Api<T,T>, ISVFunc256Api<T>
         where T : unmanaged
     {
 
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVFSpanLoad256Api<S,T> : ISVFSpanLoadApi<W128, S, Vector256<T>,T>
+    public interface ISVFSpanLoad256Api<S,T> : ISVFSpanLoadApi<W128, S, Vector256<T>,T>, ISVFunc256Api<T>
         where S : unmanaged
         where T : unmanaged
     {

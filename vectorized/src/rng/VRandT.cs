@@ -15,18 +15,18 @@ namespace Z0
     {
         public const string Name = "vrandom";
 
-        static N128 w => default;
+        public Vec128Kind<T> VKind => default;
 
         readonly IPolyrand Random;
 
-        public OpIdentity Id => OpIdentity.contracted(Name,w);
+        public OpIdentity Id => OpIdentity.sfunc(Name, VKind);
 
         [MethodImpl(Inline)]
         internal VRandom128(IPolyrand random)            
             => this.Random = random;
         
         [MethodImpl(Inline)]
-        public Vector128<T> Invoke() => Random.CpuVector<T>(w);
+        public Vector128<T> Invoke() => Random.CpuVector<T>(VKind);
     }
 
     public readonly struct VRandom256<T> : ISVEmitter256Api<T>
@@ -36,15 +36,15 @@ namespace Z0
 
         readonly IPolyrand Random;
 
-        static N256 w => default;
+        public Vec256Kind<T> VKind => default;
 
-        public OpIdentity Id => OpIdentity.contracted(Name,w);
+        public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
         [MethodImpl(Inline)]
         internal VRandom256(IPolyrand random)            
             => this.Random = random;
         
         [MethodImpl(Inline)]
-        public Vector256<T> Invoke() => Random.CpuVector<T>(w);
+        public Vector256<T> Invoke() => Random.CpuVector<T>(VKind);
     }
 }

@@ -319,6 +319,7 @@ namespace Z0
             return lambda<Func<X, Y, Z>>(items(p1, p2), eval);
         }
 
+
         /// <summary>
         /// Defines a function that will invoke the default constructor to create
         /// an instance of type <typeparamref name="X"/>

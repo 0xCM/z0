@@ -30,7 +30,7 @@ namespace Z0
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVFactory128Api<S,T> : ISVFactoryApi<W128,S,Vector128<T>,T>
+    public interface ISVFactory128Api<S,T> : ISVFactoryApi<W128,S,Vector128<T>,T>, ISVFunc128Api<T>
         where T : unmanaged
     {
 
@@ -42,7 +42,7 @@ namespace Z0
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVFactory256Api<S,T> : ISVFactoryApi<W256,S,Vector256<T>,T>
+    public interface ISVFactory256Api<S,T> : ISVFactoryApi<W256,S,Vector256<T>,T>, ISVFunc256Api<T>
         where T : unmanaged
     {
 

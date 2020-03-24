@@ -8,12 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
-    using static Root;
-
-    partial class VectorTypeOps
+    partial class ReflectedVectorOps
     {
         /// <summary>
         /// Determines whether a method accepts an intrinsic vector in some parameter slot
@@ -36,7 +32,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
-        public static bool AcceptsVector(this MethodInfo src, int index, N128 w)
+        public static bool AcceptsVector(this MethodInfo src, int index, W128 w)
             => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
 
         /// <summary>
@@ -45,7 +41,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
-        public static bool AcceptsVector(this MethodInfo src, int index, N256 w)
+        public static bool AcceptsVector(this MethodInfo src, int index, W256 w)
             => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
 
         /// <summary>
@@ -54,7 +50,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
-        public static bool AcceptsVector(this MethodInfo src, int index, N512 w)
+        public static bool AcceptsVector(this MethodInfo src, int index, W512 w)
             => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
 
         /// <summary>
@@ -64,7 +60,7 @@ namespace Z0
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool AcceptsVector(this MethodInfo src, int index, N128 w, Type tCell)
+        public static bool AcceptsVector(this MethodInfo src, int index, W128 w, Type tCell)
             => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();
 
         /// <summary>
@@ -74,7 +70,7 @@ namespace Z0
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool AcceptsVector(this MethodInfo src, int index, N256 w, Type tCell)
+        public static bool AcceptsVector(this MethodInfo src, int index, W256 w, Type tCell)
             => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();
 
         /// <summary>
@@ -84,7 +80,7 @@ namespace Z0
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
-        public static bool AcceptsVector(this MethodInfo src, int index, N512 w, Type tCell)
+        public static bool AcceptsVector(this MethodInfo src, int index, W512 w, Type tCell)
             => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();
     }
 }

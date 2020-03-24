@@ -13,16 +13,16 @@ namespace Z0
     partial class VSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Negate128<T> : ISVUnaryOp128DApi<T>, IUnaryBlockedOp128<T>
+        public readonly struct Negate128<T> : ISVUnaryOp128DApi<T>, ISBUnaryOp128Api<T>
             where T : unmanaged
         {
             public const string Name = "vnegate";
 
-            public static VKT.Vec128<T> hk => default;
+            public Vec128Kind<T> VKind => default;
 
             public static Negate128<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) 
@@ -38,16 +38,16 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Negate256<T> : ISVUnaryOp256DApi<T>, IUnaryBlockedOp256<T>
+        public readonly struct Negate256<T> : ISVUnaryOp256DApi<T>, ISBUnaryOp256Api<T>
             where T : unmanaged
         {
             public const string Name = "vnegate";
 
-            public static VKT.Vec256<T> hk => default;
+            public Vec256Kind<T> VKind => default;
 
             public static Negate256<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) 

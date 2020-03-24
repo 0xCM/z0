@@ -25,15 +25,5 @@ namespace Z0
             where E : unmanaged, Enum
             where V : unmanaged
                 => Unsafe.Read<V>((V*)(&e));
-
-        /// <summary>
-        /// Reads a generic numeric value from a boxed enum
-        /// </summary>
-        /// <param name="e">The enum value to reinterpret</param>
-        /// <typeparam name="V">The numeric value type</typeparam>
-        [MethodImpl(Inline)]
-        public static V numeric<V>(Enum e)
-            where V : unmanaged
-                => (V)Convert.ChangeType(e, e.GetTypeCode());
     }
 }

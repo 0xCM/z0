@@ -18,6 +18,20 @@ namespace Z0
 
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISVFunc128Api<T> : ISVFuncApi
+        where T : unmanaged
+    {
+        Vec128Kind<T> VKind => default;
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISVFunc256Api<T> : ISVFuncApi
+        where T : unmanaged
+    {
+        Vec256Kind<T> VKind => default;
+    }
+
     /// <summary>
     /// Characterizes a vectorized unary function
     /// </summary>

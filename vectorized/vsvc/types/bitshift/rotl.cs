@@ -17,14 +17,14 @@ namespace Z0
         {
             public const string Name = "vrotl";
 
-            public static VKT.Vec128<T> hk => default;
+            public Vec128Kind<T> VKind => default;
 
             public static Rotl128<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
-                => Dynop.EmbedVUnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);
+                => Dynop.EmbedVUnaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),count);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte count) 
@@ -40,14 +40,14 @@ namespace Z0
         {
             public const string Name = "vrotl";
 
-            public static VKT.Vec256<T> hk => default;
+            public Vec256Kind<T> VKind => default;
 
             public static Rotl256<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.contracted(Name,hk);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
-                => Dynop.EmbedVUnaryOpImm<T>(hk, Id, gApiMethod(hk,Name),count);
+                => Dynop.EmbedVUnaryOpImm<T>(VKind, Id, gApiMethod(VKind,Name),count);
             
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte count) 

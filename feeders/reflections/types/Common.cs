@@ -12,18 +12,18 @@ namespace Z0
     partial class Reflections
     {
         /// <summary>
-        /// Returns the underlying system type if enclosed by a source type, otherwise returns the source type
-        /// </summary>
-        /// <param name="src">The source type</param>
-        public static Type Unwrap(this Type src)
-            => src.GetElementType() ?? src;
-
-        /// <summary>
         /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static Type EffectiveType(this Type src)
             => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
+
+        /// <summary>
+        /// Returns the underlying system type if enclosed by a source type, otherwise returns the source type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static Type Unwrap(this Type src)
+            => src.GetElementType() ?? src;
         
         /// <summary>
         /// Creates an instance of a type and casts the instance value as specified by a type parameter

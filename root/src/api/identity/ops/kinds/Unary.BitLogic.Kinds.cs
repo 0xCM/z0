@@ -11,10 +11,6 @@ namespace Z0
 
     using Id = OpKindId;
 
-    public interface IUnaryBitlogicKind : IBitLogicKind, IOpKind<UnaryBitLogicKind>
-    {
-    }    
-
     partial class OpKinds
     {
         public readonly struct Not : IUnaryBitlogicKind { public Id KindId { [MethodImpl(Inline)] get => Id.Not;}}

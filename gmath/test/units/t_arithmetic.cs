@@ -35,9 +35,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.add(t);
-            var validator = this.BinaryOpComparer(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);
+            var validator = this.BinaryOpMatch(t);
+            validator.Match(f,g);
+            validator.MatchSpan(f,g);
         }
         
         public void sub_check()
@@ -61,9 +61,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.sub(t);
-            var validator = this.BinaryOpComparer(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);
+            var validator = this.BinaryOpMatch(t);
+            validator.Match(f,g);
+            validator.MatchSpan(f,g);
         }
 
         public void mul_check()
@@ -87,9 +87,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.mul(t);
-            var validator = this.BinaryOpComparer(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);
+            var validator = this.BinaryOpMatch(t);
+            validator.Match(f,g);
+            validator.MatchSpan(f,g);
         }
 
         public void div_check()
@@ -113,9 +113,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.div(t);
-            var validator = this.BinaryOpComparer(true,t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);
+            var validator = this.BinaryOpMatch(true,t);
+            validator.Match(f,g);
+            validator.MatchSpan(f,g);
         }
 
         public void mod_check()
@@ -139,9 +139,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.mod(t);
-            var validator = this.BinaryOpComparer(true,t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);
+            var validator = this.BinaryOpMatch(true,t);
+            validator.Match(f,g);
+            validator.MatchSpan(f,g);
         }
 
         public void modmul_check()
@@ -165,9 +165,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.modmul(t);
-            var validator = this.TernaryOpComparer(true,t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);
+            var validator = this.TernaryOpMatch(true,t);
+            validator.Match(f,g);
+            validator.MatchSpan(f,g);
         }
 
         public void clamp_check()
@@ -191,9 +191,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.clamp(t);
-            var validator = this.BinaryOpComparer(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpan(f,g);
+            var validator = this.BinaryOpMatch(t);
+            validator.Match(f,g);
+            validator.MatchSpan(f,g);
         }
 
         public void inc_check()
@@ -217,9 +217,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.inc(t);
-            var comparer = this.UnaryOpComparer(t);
-            comparer.CheckMatch(f, g);
-            comparer.CheckSpan(f, g);            
+            var comparer = this.UnaryOpMatch(t);
+            comparer.Match(f, g);
+            comparer.MatchSpan(f, g);            
         }
 
         public void dec_check()
@@ -243,9 +243,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.dec(t);
-            var comparer = this.UnaryOpComparer(t);
-            comparer.CheckMatch(f,g);
-            comparer.CheckSpan(f,g);            
+            var comparer = this.UnaryOpMatch(t);
+            comparer.Match(f,g);
+            comparer.MatchSpan(f,g);            
         }
 
         public void negate_check()
@@ -269,9 +269,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.negate(t);
-            var comparer = this.UnaryOpComparer(t);
-            comparer.CheckMatch(f, g);
-            comparer.CheckSpan(f, g);            
+            var comparer = this.UnaryOpMatch(t);
+            comparer.Match(f, g);
+            comparer.MatchSpan(f, g);            
         }
 
         public void abs_check()
@@ -291,9 +291,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = MathSvcFactory.abs(t);
-            var comparer = this.UnaryOpComparer(t);
-            comparer.CheckMatch(f,g);
-            comparer.CheckSpan(f,g);            
+            var comparer = this.UnaryOpMatch(t);
+            comparer.Match(f,g);
+            comparer.MatchSpan(f,g);            
         }
 
         public void check_increments()

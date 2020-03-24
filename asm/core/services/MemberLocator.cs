@@ -61,7 +61,7 @@ namespace Z0.Asm
                   where m.Tagged<OpAttribute>() && m.Tagged<NumericClosuresAttribute>()  && !m.AcceptsImmediate()
                   let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
                   where c != NumericKind.None
-                  from t in c.DistinctKinds().Select(x => x.ToClrType())
+                  from t in c.DistinctKinds().Select(x => x.SystemType().ToOption())
                   where t.IsSome()
                   let concrete = m.MakeGenericMethod(t.Value)
                   select ApiStatelessMember.Define(src.Path, concrete.Identify(), concrete);
@@ -71,7 +71,7 @@ namespace Z0.Asm
                   where m.Tagged<OpAttribute>() && m.Tagged<NumericClosuresAttribute>()  && !m.AcceptsImmediate()
                   let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
                   where c != NumericKind.None
-                  from t in c.DistinctKinds().Select(x => x.ToClrType())
+                  from t in c.DistinctKinds().Select(x => x.SystemType().ToOption())
                   where t.IsSome()
                   let concrete = m.MakeGenericMethod(t.Value)
                   let address = MemoryAddress.Define(concrete.Jit())
