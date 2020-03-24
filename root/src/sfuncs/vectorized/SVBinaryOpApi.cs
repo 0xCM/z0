@@ -25,7 +25,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVImm8BinaryOpApi<W,V,T> : ISVFuncApi, ISWImm8BinaryOp<W,V>
+    public interface ISVImm8BinaryOpApi<W,V,T> : ISVFuncApi, ISWImm8BinaryOpApi<W,V>
         where W : unmanaged, ITypeWidth
     {
 

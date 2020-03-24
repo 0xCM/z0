@@ -1,30 +1,33 @@
-export ProjectId="$(dirname "$0")"
-AddCmd=$ZDev/.scripts/sln-add.sh
+export ProjectRoot="$(dirname "$0")"
+AddCmd=$ZDev/$ProjectRoot/add-project.sh
 
-export Kind=collective
+export ProjectId=collective
 bash $AddCmd
 
-export Kind=monadic
+export ProjectId=monadic
 bash $AddCmd
 
-export Kind=texting
+export ProjectId=texting
 bash $AddCmd
 
-export Kind=reflections
+export ProjectId=reflections
 bash $AddCmd
 
-export Kind=components
+export ProjectId=components
 bash $AddCmd
 
-export Kind=canonical
+export ProjectId=canonical
 bash $AddCmd
 
-export Kind=memories
+export ProjectId=memories
 bash $AddCmd
 
-export Kind=time
+export ProjectId=time
 bash $AddCmd
 
-export Kind=test
+export ProjectId=sfuncs
 bash $AddCmd
+
+
+dotnet sln add $ProjectRoot/test/z0.feeders.test.csproj
 

@@ -70,20 +70,20 @@
     <VBits>$(TopDir)bits/vbits/z0.bits.vbits.csproj</VBits>
     <WorkflowCore>$(TopDir)workflow/core/z0.workflow.core.csproj</WorkflowCore>
     <WorkflowRuntime>$(TopDir)workflow/runtime/z0.workflow.runtime.csproj</WorkflowRuntime>
+    <Feeders>$(TopDir)feeders/</Feeders>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Feeders>$(TopDir)feeders/</Feeders>
-    <Collective>$(Feeders)collective/z0.feeders.collective.csproj</Collective>
-    <Components>$(Feeders)components/z0.feeders.components.csproj</Components>
-    <Monadic>$(Feeders)monadic/z0.feeders.monadic.csproj</Monadic>
-    <Memories>$(Feeders)memories/z0.feeders.memories.csproj</Memories>
-    <Reflections>$(Feeders)reflections/z0.feeders.reflections.csproj</Reflections>
-    <Texting>$(Feeders)texting/z0.feeders.texting.csproj</Texting>
-    <Time>$(Feeders)time/z0.feeders.time.csproj</Time>
-    <Canonical>$(Feeders)canonical/z0.feeders.canonical.csproj</Canonical>
-    <Symbolic>$(Feeders)symbolic/z0.feeders.symbolic.csproj</Symbolic>
-
+    <Components>$(Feeders)components/z0.components.csproj</Components>
+    <Canonical>$(Feeders)canonical/z0.canonical.csproj</Canonical>
+    <Collective>$(Feeders)collective/z0.collective.csproj</Collective>
+    <Monadic>$(Feeders)monadic/z0.monadic.csproj</Monadic>
+    <Memories>$(Feeders)memories/z0.memories.csproj</Memories>
+    <Reflections>$(Feeders)reflections/z0.reflections.csproj</Reflections>
+    <Symbolic>$(Feeders)symbolic/z0.symbolic.csproj</Symbolic>
+    <SFuncs>$(Feeders)sfuncs/z0.sfuncs.csproj</SFuncs>
+    <Texting>$(Feeders)texting/z0.texting.csproj</Texting>
+    <Time>$(Feeders)time/z0.time.csproj</Time>
   </PropertyGroup>
 
 </Project>

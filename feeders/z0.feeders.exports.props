@@ -1,8 +1,0 @@
-﻿<Project>
-
-  <ItemGroup>
-    <ProjectReference Include="$(TopDir)feeders/reflections/z0.feeders.reflections.csproj" />
-    <ProjectReference Include="$(TopDir)feeders/texting/z0.feeders.texting.csproj" />
-  </ItemGroup>
-
-</Project>

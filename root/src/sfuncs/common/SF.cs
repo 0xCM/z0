@@ -39,7 +39,9 @@ namespace Z0
     /// <typeparam name="W">The width type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface ISWFunc<W> : IStructuralOperation
+        where W : unmanaged, ITypeWidth
     {
+        TypeWidth WidthKind => default(W).Class;
 
     }
 

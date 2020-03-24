@@ -23,7 +23,7 @@ namespace Z0
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFWUnaryOpApi<W,A> : ISFUnaryOpApi<A>, ISFWApi<W,A,A>
+    public interface ISFWUnaryOpApi<W,A> : ISFUnaryOpApi<A>, ISWFuncApi<W,A,A>
         where W : unmanaged, ITypeWidth
     {
 
@@ -45,7 +45,7 @@ namespace Z0
     /// <typeparam name="W">The width kind</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFWBinaryOpApi<W,A> : ISFBinaryOpApi<A>, ISFWApi<W,A,A,A>
+    public interface ISFWBinaryOpApi<W,A> : ISFBinaryOpApi<A>, ISWFuncApi<W,A,A,A>
         where W : unmanaged, ITypeWidth
     {
 
@@ -67,7 +67,7 @@ namespace Z0
     /// <typeparam name="W">The width kind</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFWTernaryOpApi<W,A> : ISFTernaryOpApi<A>, ISFWApi<W,A,A,A,A>
+    public interface ISFWTernaryOpApi<W,A> : ISFTernaryOpApi<A>, ISWFuncApi<W,A,A,A,A>
         where W : unmanaged, ITypeWidth
     {
 

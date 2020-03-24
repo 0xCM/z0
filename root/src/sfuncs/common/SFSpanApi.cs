@@ -92,7 +92,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFWSpanApi<W> : ISFSpanApi, ISFWApi<W>
+    public interface ISFWSpanApi<W> : ISFSpanApi, ISWFuncApi<W>
         where W : unmanaged, ITypeWidth
     {
 

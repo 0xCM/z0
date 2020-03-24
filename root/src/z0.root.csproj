@@ -24,6 +24,7 @@
     <ProjectReference Include="$(Symbolic)" />        
     <ProjectReference Include="$(Memories)" />    
     <ProjectReference Include="$(Time)" />    
+    <ProjectReference Include="$(SFuncs)" />    
 
 
   </ItemGroup>
