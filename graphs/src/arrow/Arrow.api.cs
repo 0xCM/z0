@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
-    using static Arrows;
-
 
     public static class Arrow
     {

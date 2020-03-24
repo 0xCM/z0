@@ -145,7 +145,7 @@ namespace Z0
 
         public static Option<ITypeIdentityProvider> AttributedProvider(Type t)
             => from a in t.Tag<IdentityProviderAttribute>()
-               from tid in  HostedProvider(a.Host.ValueOrDefault(t))
+               from tid in  HostedProvider(a.Host.ToOption().ValueOrDefault(t))
                select tid;
 
     }

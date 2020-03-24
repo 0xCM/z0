@@ -12,10 +12,10 @@ namespace Z0
     readonly struct SpanPipe<T> : ISpanPipe<T>
         where T : struct
     {
-        readonly ValueEditor<T> Editor;
+        readonly EditorOp<T> Editor;
         
         [MethodImpl(Inline)]
-        public SpanPipe(ValueEditor<T> editor)
+        public SpanPipe(EditorOp<T> editor)
             => Editor = editor;
 
         [MethodImpl(Inline)]

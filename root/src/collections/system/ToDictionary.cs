@@ -14,38 +14,6 @@ namespace Z0
     partial class SystemCollections
     {
         /// <summary>
-        /// Creates a dictionary from a span using the element indices as keys
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static IDictionary<int,T> ToDictionary<T>(this ReadOnlySpan<T> src)
-        {
-            var dst = new Dictionary<int,T>(src.Length);
-            for(var i = 0; i< src.Length; i++)
-                dst[i] = src[i];
-            return dst;
-        }
-
-        /// <summary>
-        /// Creates a dictionary from a span using the element indices as keys
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static IDictionary<int,T> ToDictionary<T>(this Span<T> src)        
-            => src.ReadOnly().ToDictionary();
-
-        /// <summary>
-        /// Constructs a mutable dictionary from a sequence of key-value pairs
-        /// </summary>
-        /// <param name="key">The key</param>
-        /// <param name="value">The indexed value</param>
-        /// <typeparam name="K">The key type</typeparam>
-        /// <typeparam name="V">The value type</typeparam>
-        public static Dictionary<K,V> ToDictionary<K,V>(this IEnumerable<(K key, V value)> src)
-            => new Dictionary<K,V>(src.Select(x => new KeyValuePair<K,V>(x.key,x.value)));
-
-        /// <summary>
         /// Creates a read-only dictionary from the supplied enumerable and selector
         /// </summary>
         /// <param name="this">The extended type</param>

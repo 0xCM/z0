@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
     
-    public abstract class PathComponent<T> : IIdentified<T>
+    public abstract class PathComponent<T> : IIdentifiedTarget<T>
         where T : PathComponent<T>, new()
     {
         public const char PathSeparator = '/';

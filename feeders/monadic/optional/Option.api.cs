@@ -85,5 +85,90 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Option<Y> guard<X, Y>(X x, Func<X, bool> predicate, Func<X, Option<Y>> f)
             => predicate(x) ? f(x) : none<Y>();
+
+        /// <summary>
+        /// Evaluates a function within a try block and returns the value of the computation if 
+        /// successful; otherwise, returns None and invokes an error handler if supplied
+        /// </summary>
+        /// <typeparam name="T">The result type</typeparam>
+        /// <param name="f">The function to evaluate</param>
+        public static Option<T> Try<T>(Func<T> f, Action<Exception> handler = null)
+        {
+            try
+            {
+                return f();
+            }
+            catch (Exception e)
+            {
+                Handle(e,handler);
+                return none<T>();
+            }
+        }
+
+        /// <summary>
+        /// Evaluates a function within a try block and returns the value of the computation if 
+        /// successful; otherwise, returns None together with the reported exception
+        /// </summary>
+        /// <param name="f">The function to evaluate</param>
+        /// <typeparam name="T">The function result type, if successful</typeparam>
+        public static Option<T> Try<T>(Func<Option<T>> f, Action<Exception> handler = null)
+        {
+            try
+            {
+                return f();
+            }
+            catch (Exception e)
+            {
+                Handle(e,handler);
+                return none<T>();
+            }
+        }
+
+        /// <summary>
+        /// Invokes an action within a try block and, upon error, calls
+        /// the handler if specified. If no handler is specified, the exception
+        /// message is emitted to stderr
+        /// </summary>
+        /// <param name="f">The action to invoke</param>
+        /// <param name="onerror">The error handler to call, if specified</param>
+        public static void Try(Action f, Action<Exception> handler = null)
+        {
+            try
+            {
+                f();
+            }
+            catch(Exception e)
+            {
+                Handle(e,handler);
+            }
+        }
+
+        /// <summary>
+        /// Evaluates a function within a try block and returns the value of the computation if 
+        /// successful; otherwise, returns None together with the reported exception
+        /// </summary>
+        /// <typeparam name="X">The input type</typeparam>
+        /// <typeparam name="Y">The output type</typeparam>
+        /// <param name="x">The input value</param>
+        /// <param name="f">The function to evaluate</param>
+        [MethodImpl(Inline)]   
+        public static Option<Y> Try<X, Y>(X x, Func<X, Y> f, Action<Exception> handler = null)
+        {
+            try
+            {
+                return f(x);
+            }
+            catch (Exception e)
+            {
+                Handle(e,handler);
+                return none<Y>();
+            }
+        }
+
+        static void Handle(Exception e, Action<Exception> handler)
+        {
+            if(handler != null) handler.Invoke(e); else Console.Error.WriteLine(e);
+        }
+
     }
 }

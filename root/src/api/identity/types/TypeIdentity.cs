@@ -44,6 +44,7 @@ namespace Z0
             var indicator = kind.Indicator().ToChar();
             var width = kind.Width();
             return TypeIdentity.Define($"{root}{width}{indicator}");
+
         }
 
         /// <summary>

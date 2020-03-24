@@ -5,9 +5,6 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="$(TopDir)/shared/TypeCodes.cs" />
-  </ItemGroup>
 
   <PropertyGroup>
     <ProjectFolder>$[System.IO.Path]::GetFileName($(MSBuildThisFileDirectory))</ProjectFolder>
@@ -25,7 +22,9 @@
     <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Symbolic)" />        
-    <ProjectReference Include="$(Memories)" />        
+    <ProjectReference Include="$(Memories)" />    
+    <ProjectReference Include="$(Time)" />    
+
 
   </ItemGroup>
 

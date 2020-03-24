@@ -8,15 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Z0.Root;
     using static Arrows;
-    using Z0;
 
     public interface IArrow<A> : ICustomFormattable, ILengthwise
         where A : IEquatable<A>
     {
         Span<A> Nodes {get;}
-
     }
 
     public readonly struct Arrow<A> : IArrow<A>, IEquatable<Arrow<A>>, INullary<Arrow<A>>
@@ -26,7 +23,7 @@ namespace Z0
         
         A[] Tail {get;}
 
-        public static Arrow<A> Empty => new Arrow<A>(array<A>());        
+        public static Arrow<A> Empty => new Arrow<A>(Arrays.empty<A>());        
 
         public Span<A> Nodes => Head.Concat(Tail).ToSpan();
         
@@ -75,14 +72,13 @@ namespace Z0
         Arrow<A> INullary<Arrow<A>>.Zero 
             => Empty;
 
-
         [MethodImpl(Inline)]
         public ref readonly A Node(int index)
         {
             if(index < Head.Length)
-                return ref skip(Head, index);
+                return ref refs.skip(Head, index);
             else
-                return ref skip(Tail, index);
+                return ref refs.skip(Tail, index);
         }
 
         public ref readonly A this[int index]
@@ -118,7 +114,5 @@ namespace Z0
  
         static string DefineIdentifier(A[] head, A[] tail)
             => head.Concat(tail).Select(c => $"{c}").Intersperse(Connector).Concat();
-
     }
-
 }

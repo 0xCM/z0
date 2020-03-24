@@ -16,18 +16,7 @@ namespace Z0
         /// <typeparam name="T">The result type</typeparam>
         /// <param name="f">The function to evaluate</param>
         public static Option<T> Try<T>(Func<T> f, Action<Exception> handler = null)
-        {
-            try
-            {
-                return f();
-            }
-            catch (Exception e)
-            {
-                handler?.Invoke(e);
-                term.error(e);            
-                return none<T>();
-            }
-        }
+            => Option.Try(f, handler ?? term.error);
 
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 
@@ -36,18 +25,7 @@ namespace Z0
         /// <param name="f">The function to evaluate</param>
         /// <typeparam name="T">The function result type, if successful</typeparam>
         public static Option<T> Try<T>(Func<Option<T>> f, Action<Exception> handler = null)
-        {
-            try
-            {
-                return f();
-            }
-            catch (Exception e)
-            {
-                handler?.Invoke(e);
-                term.error(e);            
-                return none<T>();
-            }
-        }
+            => Option.Try(f, handler ?? term.error);
 
         /// <summary>
         /// Invokes an action within a try block and, upon error, calls
@@ -57,18 +35,8 @@ namespace Z0
         /// <param name="f">The action to invoke</param>
         /// <param name="onerror">The error handler to call, if specified</param>
         public static void Try(Action f, Action<Exception> handler = null)
-        {
-            try
-            {
-                f();
-            }
-            catch(Exception e)
-            {
-                handler?.Invoke(e);
-                term.error(e);            
-            }
-        }
-
+            => Option.Try(f,handler);
+ 
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 
         /// successful; otherwise, returns None together with the reported exception
@@ -79,17 +47,6 @@ namespace Z0
         /// <param name="f">The function to evaluate</param>
         [MethodImpl(Inline)]   
         public static Option<Y> Try<X, Y>(X x, Func<X, Y> f, Action<Exception> handler = null)
-        {
-            try
-            {
-                return f(x);
-            }
-            catch (Exception e)
-            {
-                handler?.Invoke(e);
-                term.error(e);                
-                return none<Y>();
-            }
-        }
+            => Option.Try(x,f,handler ?? term.error);
     }
 }

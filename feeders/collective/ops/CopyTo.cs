@@ -13,7 +13,6 @@ namespace Z0
 
     partial class CollectiveOps
     {
-
         /// <summary>
         /// Copies a source list to a target array
         /// </summary>
@@ -28,6 +27,5 @@ namespace Z0
             for(var i=0; i< src.Count; i++)
                 dst[i] = src[i];
         }
-
     }
 }

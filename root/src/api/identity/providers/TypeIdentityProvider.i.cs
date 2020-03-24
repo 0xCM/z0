@@ -13,12 +13,16 @@ namespace Z0
 
     public interface ITypeIdentityProvider : IIdentityProvider<Type,TypeIdentity>
     {
-        TypeIdentity DefineIdentity(Type src);        
-
-        IdentityTargetKind IIdentityProvider.ProviderKind => IdentityTargetKind.Type;
+        TypeIdentity DefineIdentity(Type src);  
 
         IEnumerable<Type> Identifiable 
             => Arrays.empty<Type>();
+
+        IIdentified IIdentifier<Type>.Identify(Type src)
+            => DefineIdentity(src);
+
+        IdentityTargetKind IIdentityProvider.ProviderKind 
+            => IdentityTargetKind.Type;
     }
 
     /// <summary>

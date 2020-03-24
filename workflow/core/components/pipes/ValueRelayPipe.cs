@@ -12,10 +12,10 @@ namespace Z0
     readonly struct ValueRelayPipe<T> : IValueRelayPipe<T>
         where T : struct
     {
-        readonly ValueRelay<T> f;
+        readonly RelayOp<T> f;
         
         [MethodImpl(Inline)]
-        public ValueRelayPipe(ValueRelay<T> f)
+        public ValueRelayPipe(RelayOp<T> f)
             => this.f = f;
 
         [MethodImpl(Inline)]

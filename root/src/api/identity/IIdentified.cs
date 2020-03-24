@@ -9,19 +9,10 @@ namespace Z0
 
     using static Root;
     
-    /// <summary>
-    /// Specifies what it means to be an identifier
-    /// </summary>
-    public interface IIdentified : ICustomFormattable, IComparable
-    {        
-        string Identifier {get;}
+    public interface IIdentifiedTarget : IIdentified, ICustomFormattable, IComparable
+    {
+        IdentityTargetKind TargetKind  => IdentityTargetKind.Type;
 
-        bool IsEmpty 
-        {
-            [MethodImpl(Inline)]
-            get => text.empty(Identifier);
-        }
-        
         [MethodImpl(Inline)]
         string ICustomFormattable.Format()
             => text.denullify(Identifier);
@@ -34,8 +25,8 @@ namespace Z0
     /// <summary>
     /// Specifies what it means to be a reified identifier
     /// </summary>
-    public interface IIdentified<T> :  IIdentified, IEquatable<T>, IFormattable<T>, IComparable<T>
-        where T : IIdentified<T>, new()
+    public interface IIdentifiedTarget<T> :  IIdentifiedTarget, IEquatable<T>, IFormattable<T>, IComparable<T>
+        where T : IIdentifiedTarget<T>, new()
     {
         [MethodImpl(Inline)]
         bool IEquatable<T>.Equals(T src)
@@ -46,23 +37,24 @@ namespace Z0
             => text.denullify(Identifier).CompareTo(src?.Identifier); 
     }    
 
-    public interface IIdentfiedOp : IIdentified
+    public interface IIdentfiedOp : IIdentifiedTarget
     {
-
+        IdentityTargetKind IIdentifiedTarget.TargetKind => IdentityTargetKind.Method;
     }
     
-    public interface IIdentifedOp<T> : IIdentfiedOp, IIdentified<T>
+    public interface IIdentifedOp<T> : IIdentfiedOp, IIdentifiedTarget<T>
         where T : IIdentifedOp<T>, new()    
     {
         Func<string,T> Factory {get;}
     }
 
-    public interface IIdentifiedType : IIdentified
+    public interface IIdentifiedType : IIdentifiedTarget
     {
+        IdentityTargetKind IIdentifiedTarget.TargetKind => IdentityTargetKind.Type;
 
     }
     
-    public interface IIdentifiedType<T> : IIdentifiedType, IIdentified<T>
+    public interface IIdentifiedType<T> : IIdentifiedType, IIdentifiedTarget<T>
         where T : IIdentifiedType<T>, new()    
     {
 

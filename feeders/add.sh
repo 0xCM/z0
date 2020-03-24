@@ -22,6 +22,9 @@ bash $AddCmd
 export Kind=memories
 bash $AddCmd
 
+export Kind=time
+bash $AddCmd
+
 export Kind=test
 bash $AddCmd
 

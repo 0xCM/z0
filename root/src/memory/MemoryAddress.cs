@@ -17,7 +17,7 @@ namespace Z0
         MemoryAddress Address {get;}
     }        
     
-    public readonly struct MemoryAddress : IAddressable, IIdentified<MemoryAddress>
+    public readonly struct MemoryAddress : IAddressable, IIdentifiedTarget<MemoryAddress>
     {
         public static MemoryAddress Zero => default;
 

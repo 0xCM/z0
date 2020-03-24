@@ -16,10 +16,10 @@ namespace Z0
         where S : struct
         where T : struct
     {        
-        readonly ValueTransformer<S,T> Producer;
+        readonly Mapper<S,T> Producer;
         
         [MethodImpl(Inline)]
-        public ValueFactoryPipe(ValueTransformer<S,T> producer)
+        public ValueFactoryPipe(Mapper<S,T> producer)
             => this.Producer = producer;
 
         /// <summary>

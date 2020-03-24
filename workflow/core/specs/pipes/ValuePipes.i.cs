@@ -66,7 +66,7 @@ namespace Z0
             return ref src;
         }
 
-        ValueRelay<T> Relay 
+        RelayOp<T> Relay 
             => Flow;
 
         IEnumerable<T> Flow(IEnumerable<T> src)

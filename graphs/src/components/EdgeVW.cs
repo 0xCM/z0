@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Arrows;
 
     /// <summary>
     /// Defines a weighted edge, parameterized by the vertex index type and the weight type

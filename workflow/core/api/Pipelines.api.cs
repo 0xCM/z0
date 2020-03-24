@@ -56,7 +56,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static IValueRelayPipe<T> RelayPipe<T>(ValueRelay<T> f)
+        public static IValueRelayPipe<T> RelayPipe<T>(RelayOp<T> f)
             where T : struct 
                 => new ValueRelayPipe<T>(f);
             
@@ -67,7 +67,7 @@ namespace Z0
         /// <typeparam name="S">The source value type</typeparam>
         /// <typeparam name="T">The target value type</typeparam>
         [MethodImpl(Inline)]
-        public static IValueFactoryPipe<S,T> ValueFactoryPipe<S,T>(ValueTransformer<S,T> f)
+        public static IValueFactoryPipe<S,T> ValueFactoryPipe<S,T>(Mapper<S,T> f)
             where S : struct
                 where T : struct
                     => new ValueFactoryPipe<S,T>(f);
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="f">The editer function</param>
         /// <typeparam name="T">The spann cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ISpanPipe<T> SpanPipe<T>(ValueEditor<T> f)
+        public static ISpanPipe<T> SpanPipe<T>(EditorOp<T> f)
             where T : struct
                 => new SpanPipe<T>(f);
 

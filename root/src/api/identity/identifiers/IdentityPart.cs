@@ -43,7 +43,7 @@ namespace Z0
     }
 
 
-    public readonly struct IdentityPart : IIdentified<IdentityPart>
+    public readonly struct IdentityPart : IIdentifiedTarget<IdentityPart>
     {        
         public readonly byte PartIndex;
 

@@ -12,27 +12,6 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Characterizes a function that accepts an input of parametric type
-    /// </summary>
-    /// <typeparam name="T">The input type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate void Receiver<T>(in T src);
-
-    /// <summary>
-    /// Characterizes a receiver that accepts a stream
-    /// </summary>
-    /// <typeparam name="T">The stream element type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate void StreamReceiver<T>(IEnumerable<T> src);
-
-    /// <summary>
-    /// Characterizes a receiver that accepts a span
-    /// </summary>
-    /// <typeparam name="T">The stream element type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate void SpanReceiver<T>(Span<T> src);
-
-    /// <summary>
     /// Defines a root interface for types that reify operations that accept an
     /// input but yield no output
     /// </summary>

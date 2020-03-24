@@ -17,7 +17,7 @@ namespace Z0
             where S : ITypeCodeSource
         {
             if(!source.AssignedCodes.Contains(id))
-                throw unsupported<T>();
+               Unsupported.raise<T>();
             return new UserTypeCode<T>(id);
         }
     }

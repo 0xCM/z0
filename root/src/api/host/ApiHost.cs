@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Identifies/describes a type that declares a formalized api set
     /// </summary>
-    public readonly struct ApiHost : IIdentified<ApiHost>
+    public readonly struct ApiHost : IIdentifiedTarget<ApiHost>
     {        
         public string HostName {get;}
 

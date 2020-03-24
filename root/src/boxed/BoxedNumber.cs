@@ -14,8 +14,8 @@ namespace Z0
     /// A numbered box
     /// </summary>
     [
-        IdentityProvider, 
-        UserType(TypeCodes.BoxedNumberId), 
+        IdentityProvider,
+        UserType(UserTypeId.BoxedNumberId), 
         ConversionProvider(typeof(BoxedNumberConverter))
     ]
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>

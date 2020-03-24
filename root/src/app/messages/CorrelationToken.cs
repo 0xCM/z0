@@ -18,7 +18,7 @@ namespace Z0
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
-    public readonly struct CorrelationToken : IIdentified<CorrelationToken>
+    public readonly struct CorrelationToken : IIdentifiedType<CorrelationToken>
     {
         public static CorrelationToken Empty => new CorrelationToken(string.Empty);
 
@@ -55,7 +55,6 @@ namespace Z0
 
         public bool IsEmpty => text.empty(Identifier);
          
-
         [MethodImpl(Inline)]
         public bool Equals(CorrelationToken src)
             => equals(this, src);

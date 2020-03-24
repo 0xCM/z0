@@ -11,31 +11,6 @@ namespace Z0
 
     using static Root;
 
-    /// <summary>
-    /// Characterizes a function that emits a potentially modified receipt value
-    /// </summary>
-    /// <param name="src">The source value</param>
-    /// <typeparam name="T">The value type</typeparam>
-    public delegate ref T ValueEditor<T>(ref T src)
-        where T : struct;
-
-    /// <summary>
-    /// Characterizes a function that produces T-values from S-values
-    /// </summary>
-    /// <param name="src">The source value</param>
-    /// <typeparam name="S">The source type</typeparam>
-    /// <typeparam name="T">The target type</typeparam>
-    public delegate T ValueTransformer<S,T>(in S src)
-        where S : struct        
-        where T : struct;
-
-    /// <summary>
-    /// Characterizes a function that emits a value identical to that which was received
-    /// </summary>
-    /// <param name="src">The source value</param>
-    /// <typeparam name="T">The value type</typeparam>
-    public delegate ref readonly T ValueRelay<T>(in T src)
-        where T : struct;
 
     public interface IValueFlow : IFlow
     {

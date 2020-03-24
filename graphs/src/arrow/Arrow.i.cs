@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-
-    using static Root;
-    using static Arrows;
 
     public interface IArrow : IIdentified
     {
@@ -18,9 +14,9 @@ namespace Z0
         object Dst {get;}
     }
 
-    public interface IArrow<A,S,T> : IArrow, IIdentified<A>
-        where S : IIdentified<S>, new()
-        where T : IIdentified<T>, new()
+    public interface IArrow<A,S,T> : IArrow, IIdentifiedTarget<A>
+        where S : IIdentifiedTarget<S>, new()
+        where T : IIdentifiedTarget<T>, new()
         where A : IArrow<A,S,T>, new()
     {
         new S Src {get;}
@@ -47,7 +43,6 @@ namespace Z0
 
         object[] IPath.Nodes
             => Nodes.Map(x => (object)x);
-
     }
 
     public interface IMixedPath<A,B> : IPath
@@ -77,5 +72,4 @@ namespace Z0
         object[] IPath.Nodes
             => new object[]{Src,Dst,c,c};
     }
-
 }

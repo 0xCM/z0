@@ -9,6 +9,10 @@ using System.Runtime.CompilerServices;
 /// <summary>
 /// Defines identifiers for known system assemblies
 /// </summary>
+/// <remarks>
+/// Somehow, there needs to be a convenient extensibility mechansim provided for
+/// the parti identifier and the type code collection that follows. 
+/// </remarks>
 public enum PartId : ulong
 {
     None = 0,
@@ -216,3 +220,26 @@ public enum PartId : ulong
 
     Lib = App << 1,
 }
+
+public enum UserTypeId : uint
+{
+    None = 0,
+
+    BitId = 256,
+
+    DurationId = BitId + 1,
+
+    BoxedNumberId = DurationId + 1,
+
+    FirstId = BitId,
+    
+}
+
+// public static class UserTypeId
+// {
+//     public const ulong BitId = 256;
+
+//     public const ulong DurationId = BitId + 1;
+
+//     public const ulong BoxedNumberId = DurationId + 1;
+// }

@@ -11,7 +11,7 @@ namespace Z0
         
     }
     
-    public interface IUri<T> : IUri, IIdentified<T>, IParser<T>
+    public interface IUri<T> : IUri, IIdentifiedTarget<T>, IParser<T>
         where T : IUri<T>, new()
     {
         

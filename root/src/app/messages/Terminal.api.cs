@@ -195,5 +195,13 @@ namespace Z0
         /// <param name="title">The name/context of the error</param>
         public static void error(Exception e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => T.WriteMessage(AppMsg.Error($"{title} | {e}", caller, file, line));
+
+        /// <summary>
+        /// Emits a message to the error output stream
+        /// </summary>
+        /// <param name="e">The raised exception</param>
+        /// <param name="title">The name/context of the error</param>
+        public static void error(Exception e)
+            => T.WriteMessage(AppMsg.NoCaller($"{e}", AppMsgKind.Error));
     }
 }

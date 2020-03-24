@@ -7,16 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
-
     public static class Arrows
     {
         public const string Connector = " -> ";
 
         [MethodImpl(Inline)]
         public static ArrowPath<S,T> connect<S,T>(S src, T dst)
-            where S : IIdentified<S>, new()
-            where T : IIdentified<T>, new()
+            where S : IIdentifiedTarget<S>, new()
+            where T : IIdentifiedTarget<T>, new()
                 => new ArrowPath<S,T>(src,dst);
 
         internal static string format<S,T>(S src, T dst)            
@@ -43,5 +41,6 @@ namespace Z0
         public static ArrowPath<A,C> remove<A,B,C>(in MixedPath<A,B,C> x0, B y)
             => path<A,C>(x0.Src, x0.c);
 
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Root;
+    //using static Root;
 
     /// <summary>
     /// An anti-succinct representation of a bit 
@@ -24,12 +24,14 @@ namespace Z0
     /// a constant barrage of shifts, movements, etc. from not being 32-bit aligned.
     /// </remarks>    
     [
-        IdentityProvider, 
-        UserType(TypeCodes.BitId), 
+        IdentityProvider,
+        UserType(UserTypeId.BitId), 
         ConversionProvider(typeof(BitConversion))
     ]
     public readonly struct bit : ITypeIdentityProvider<bit>, IFormattable<bit>
     {
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
         public const char Zero = '0';
 
         public const char One = '1';
@@ -398,7 +400,6 @@ namespace Z0
         public static bit select(bit a, bit b, bit c)
             => SafeWrap((a.state & b.state) | (~a.state & c.state));
 
-
         /// <summary>
         /// Returns true if the bit is enabled, false otherwise
         /// </summary>
@@ -658,6 +659,8 @@ namespace Z0
 
     public static class BitTypeExtensions
     {
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
         public static string Format(this IEnumerable<bit> src, bool reversed = true)
         {
             var chars = src.Map(x => x.ToChar());

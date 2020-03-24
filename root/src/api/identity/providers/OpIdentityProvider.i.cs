@@ -9,8 +9,6 @@ namespace Z0
 
     public interface IOpIdentityProvider : IIdentityProvider<MethodInfo,OpIdentity>
     {
-        IdentityTargetKind IIdentityProvider.ProviderKind => IdentityTargetKind.Method;
-
         OpIdentity DefineIdentity(MethodInfo method);
 
         OpIdentity GroupIdentity(MethodInfo method);                    
@@ -18,5 +16,13 @@ namespace Z0
         OpIdentity GenericIdentity(MethodInfo method);                    
 
         OpIdentity DefineIdentity(MethodInfo method, NumericKind k);
+
+
+        IdentityTargetKind IIdentityProvider.ProviderKind 
+            => IdentityTargetKind.Method;
+
+        IIdentified IIdentifier<MethodInfo>.Identify(MethodInfo src)
+            => DefineIdentity(src);
+
     }
 }

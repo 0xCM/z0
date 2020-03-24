@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Collections.Generic;
 
     using static Memories;
 
@@ -34,6 +35,6 @@ namespace Z0
         public static ReadOnlySpan<T> As<S,T>(this ReadOnlySpan<S> src)
             where S : unmanaged
             where T : unmanaged
-                => MemoryMarshal.Cast<S,T>(src);                                    
+                => MemoryMarshal.Cast<S,T>(src);
     }
 }

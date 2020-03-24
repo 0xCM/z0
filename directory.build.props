@@ -63,7 +63,6 @@
     <RngCore>$(TopDir)rng/core/z0.rng.core.csproj</RngCore>
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
     <TestLib>$(TopDir)testlib/src/z0.testlib.csproj</TestLib>
-    <Time>$(TopDir)time/src/z0.time.csproj</Time>
     <Validity>$(TopDir)validity/src/z0.validity.csproj</Validity>
     <VData>$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj</VData>
     <Vectorized>$(TopDir)vectorized/src/z0.vectorized.csproj</Vectorized>
@@ -81,6 +80,7 @@
     <Memories>$(Feeders)memories/z0.feeders.memories.csproj</Memories>
     <Reflections>$(Feeders)reflections/z0.feeders.reflections.csproj</Reflections>
     <Texting>$(Feeders)texting/z0.feeders.texting.csproj</Texting>
+    <Time>$(Feeders)time/z0.feeders.time.csproj</Time>
     <Canonical>$(Feeders)canonical/z0.feeders.canonical.csproj</Canonical>
     <Symbolic>$(Feeders)symbolic/z0.feeders.symbolic.csproj</Symbolic>
 
