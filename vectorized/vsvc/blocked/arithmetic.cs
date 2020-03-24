@@ -18,61 +18,61 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block128<T> add<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VSvcFactories.vadd<T>(n128));
+                => ref vzip(a,b,c,VSvc.vadd<T>(n128));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> add<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VSvcFactories.vadd<T>(n256));
+                => ref vzip(a,b,c,VSvc.vadd<T>(n256));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block128<T> vsub<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VSvcFactories.vsub<T>(n128));
+                => ref vzip(a,b,c,VSvc.vsub<T>(n128));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> vsub<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
-                => ref vzip(a,b,c,VSvcFactories.vsub<T>(n256));
+                => ref vzip(a,b,c,VSvc.vsub<T>(n256));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.SignedInts)]
         public static ref readonly Block128<T> vabs<T>(in Block128<T> a, in Block128<T> c)
             where T : unmanaged
-                => ref vmap(a, c,VSvcFactories.vabs<T>(n128));
+                => ref vmap(a, c,VSvc.vabs<T>(n128));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.SignedInts)]
         public static ref readonly Block256<T> vabs<T>(in Block256<T> a, in Block256<T> c)
             where T : unmanaged
-                => ref vmap(a, c, VSvcFactories.vabs<T>(n256));
+                => ref vmap(a, c, VSvc.vabs<T>(n256));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block128<T> vdec<T>(in Block128<T> a, in Block128<T> c)
             where T : unmanaged
-                => ref vmap(a, c,VSvcFactories.vdec<T>(n128));
+                => ref vmap(a, c,VSvc.vdec<T>(n128));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> vdec<T>(in Block256<T> a, in Block256<T> c)
             where T : unmanaged
-                => ref vmap(a, c,VSvcFactories.vdec<T>(n256));
+                => ref vmap(a, c,VSvc.vdec<T>(n256));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block128<T> vinc<T>(in Block128<T> a, in Block128<T> c)
             where T : unmanaged
-                => ref vmap(a, c,VSvcFactories.vinc<T>(n128));
+                => ref vmap(a, c,VSvc.vinc<T>(n128));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> vinc<T>(in Block256<T> a, in Block256<T> c)
             where T : unmanaged
-                => ref vmap(a, c,VSvcFactories.vinc<T>(n256));
+                => ref vmap(a, c,VSvc.vinc<T>(n256));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block128<T> vnegate<T>(in Block128<T> a, in Block128<T> c)
             where T : unmanaged
-                => ref vmap(a, c,VSvcFactories.vnegate<T>(n128));
+                => ref vmap(a, c,VSvc.vnegate<T>(n128));
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> vnegate<T>(in Block256<T> a, in Block256<T> c)
             where T : unmanaged
-                => ref vmap(a, c, VSvcFactories.vnegate<T>(n256));
+                => ref vmap(a, c, VSvc.vnegate<T>(n256));
     }
 }

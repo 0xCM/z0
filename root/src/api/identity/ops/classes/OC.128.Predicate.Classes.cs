@@ -8,7 +8,7 @@ namespace Z0
 
     using C = PredicateClass;
 
-    partial class OperationClasses
+    partial class OpClass
     {
         public readonly struct PredicateClass : IOperationClass<C> { public C Class => C.Predicate; }
 

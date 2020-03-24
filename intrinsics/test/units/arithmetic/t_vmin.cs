@@ -46,10 +46,14 @@ namespace Z0
 
         void vmin_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvcFactories.vmin(w,t), w, t);
+        {
+            var f = VSvc.vmin(w,t);
+            Validator<T>().Validate(f, f.Class, w);
+        }
+
             
         void vmin_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvcFactories.vmin(w,t), w, t);
+                => Comparisons.CheckBinaryScalarMatch(VSvc.vmin(w,t), w, t);
     }
 }

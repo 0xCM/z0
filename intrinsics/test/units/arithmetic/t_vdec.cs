@@ -44,11 +44,11 @@ namespace Z0
 
         void vdec_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvcFactories.vdec(w,t),w,t);
+                => Comparisons.CheckUnaryScalarMatch(VSvc.vdec(w,t),w,t);
             
         void vdec_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckUnaryScalarMatch(VSvcFactories.vdec(w,t),w,t);
+                => Comparisons.CheckUnaryScalarMatch(VSvc.vdec(w,t),w,t);
 
     }
 }

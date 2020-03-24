@@ -5,10 +5,12 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using static Root;
 
     using C = OperatorClass;
 
-    partial class OperationClasses
+    partial class OpClass
     {
         public readonly struct OperatorClass : IOperationClass<C> 
         {
@@ -19,6 +21,7 @@ namespace Z0
         {
             public C Class => C.UnaryOp; 
 
+            [MethodImpl(Inline)]
             public static implicit operator OperatorClass(UnaryOp src)
                 => default;
 
@@ -57,9 +60,15 @@ namespace Z0
             public static implicit operator OperatorClass<T>(UnaryOp<T> src)
                 => default;
             
+            [MethodImpl(Inline)]
+            public static implicit operator UnaryOp(UnaryOp<T> src)
+                => default;
+                        
             public C Class => C.UnaryOp; 
 
             public OperatorClass<T> Generalized => default;
+
+            public UnaryOp NonGeneric => default;
         }
 
         public readonly struct BinaryOp<T> : IOperationClass<C,T> 
@@ -68,20 +77,35 @@ namespace Z0
             public static implicit operator OperatorClass<T>(BinaryOp<T> src)
                 => default;
             
+            [MethodImpl(Inline)]
+            public static implicit operator BinaryOp(BinaryOp<T> src)
+                => default;
+                        
             public C Class => C.BinaryOp; 
 
             public OperatorClass<T> Generalized => default;
+
+            public BinaryOp NonGeneric => default;
+            
         }
 
         public readonly struct TernaryOp<T> : IOperationClass<C,T> 
             where T : unmanaged 
         {
+            [MethodImpl(Inline)]
             public static implicit operator OperatorClass<T>(TernaryOp<T> src)
                 => default;
-                
-                public C Class => C.TernaryOp; 
+
+            [MethodImpl(Inline)]
+            public static implicit operator TernaryOp(TernaryOp<T> src)
+                => default;
+
+            public C Class => C.TernaryOp; 
 
             public OperatorClass<T> Generalized => default;
+
+            public TernaryOp NonGeneric => default;
+
         }
     }
 }

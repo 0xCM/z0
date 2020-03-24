@@ -43,11 +43,11 @@ namespace Z0
 
         void vsll_check<T>(W128 w, T t = default)
             where T : unmanaged
-                => CheckShiftScalarMatch(VSvcFactories.vsll(w,t),w,t);
+                => Comparisons.CheckShiftScalarMatch(VSvc.vsll(w,t),w,t);
             
         void vsll_check<T>(W256 w, T t = default)
             where T : unmanaged
-                => CheckShiftScalarMatch(VSvcFactories.vsll(w,t),w,t);
+                => Comparisons.CheckShiftScalarMatch(VSvc.vsll(w,t),w,t);
 
     }
 }

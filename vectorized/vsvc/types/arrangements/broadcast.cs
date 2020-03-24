@@ -36,9 +36,9 @@ namespace Z0
 
             public static Broadcast128<S,T> Op => default;
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>($"{Name}_{TypeIdentity.numeric<S>()}",w);
+            public OpIdentity Id => OpIdentity.sfunc<T>($"{Name}_{TypeIdentity.numeric<S>()}", VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(S a) => vgeneric.vbroadcast(n128, convert<S,T>(a));            
@@ -67,9 +67,9 @@ namespace Z0
 
             public static Broadcast256<S,T> Op => default;
 
-            static N256 w => default;
+            public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>($"{Name}_{TypeIdentity.numeric<S>()}",w);
+            public OpIdentity Id => OpIdentity.sfunc<T>($"{Name}_{TypeIdentity.numeric<S>()}", VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(S a) => vgeneric.vbroadcast(n256, convert<S,T>(a));            

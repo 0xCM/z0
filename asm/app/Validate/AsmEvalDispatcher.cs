@@ -7,8 +7,8 @@ namespace Z0.Asm.Check
     using System;
     using System.Linq;
 
-    using C = OperationClasses;
-    using R = OperationClassReps;
+    using C = OpClass;
+    using R = OpReps;
     
     using static Nats;
     

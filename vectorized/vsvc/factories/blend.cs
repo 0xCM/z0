@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static VSvcHosts;
 
-    partial class VSvcFactories
+    partial class VSvc
     {
         [MethodImpl(Inline)]
         public static Blend4x32x128<T> vblend4x32<T>(N128 w, T t = default)

@@ -86,5 +86,18 @@ namespace Z0
         public static implicit operator Vec256Kind(Vec256Kind<T> src)
             =>  default;                    
         public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> Width;}
-    }        
+    }   
+
+    public static class VecKindOps     
+    {
+        [MethodImpl(Inline)]
+        public static Vec128Kind<T> VectorKind<T>(this W128 w)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static Vec256Kind<T> VectorKind<T>(this W256 w)
+            where T : unmanaged
+                => default;
+    }
 }

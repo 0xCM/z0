@@ -10,7 +10,7 @@ namespace Z0.Asm.Check
 
     using static Root;
     using static Nats;
-    using static OperationClasses;
+    using static OpClass;
 
     using static BufferSeqId;
 

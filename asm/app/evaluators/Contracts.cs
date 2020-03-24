@@ -10,7 +10,7 @@ namespace Z0.Asm.Check
 
     using static Root;
     using static Nats;
-    using C = OperationClasses;
+    using C = OpClass;
 
     interface IAsmEvalDispatcher : IAsmService
     {

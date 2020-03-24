@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity contracted<W,T>(string opname, W w = default, T t = default, bool generic = true)
+        public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
                 => OpIdentity.operation(opname,(FixedWidth)nateval<W>(), NumericIdentity.kind<T>(), generic);
@@ -39,9 +39,9 @@ namespace Z0
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity contracted<T>(string opname, N128 w, bool generic = true)
+        public static OpIdentity sfunc<T>(string opname, N128 w, bool generic = true)
             where T : unmanaged
-                => contracted(opname,w, NumericIdentity.kind<T>(), generic);
+                => sfunc(opname,w, NumericIdentity.kind<T>(), generic);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -52,9 +52,9 @@ namespace Z0
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
-        public static OpIdentity contracted<T>(string opname, N256 w, bool generic = true)
+        public static OpIdentity sfunc<T>(string opname, N256 w, bool generic = true)
             where T : unmanaged
-                => contracted(opname, w, NumericIdentity.kind<T>(), generic);
+                => sfunc(opname, w, NumericIdentity.kind<T>(), generic);
 
         /// <summary>
         /// Defines a numeric resource identity predicated on natural bitwidth

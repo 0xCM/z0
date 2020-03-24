@@ -18,12 +18,12 @@ namespace Z0
         {
             public const string Name = "vmax";
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
 
             public static Max128<T> Op => default;
 
             public OpIdentity Id 
-                => NaturalIdentity.contracted<T>(Name,w);
+                => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) 
@@ -46,10 +46,10 @@ namespace Z0
 
             public static Max256<T> Op => default;
 
-            static N256 w => default;
+            public Vec256Kind<T> VKind => default;
 
             public OpIdentity Id 
-                => NaturalIdentity.contracted<T>(Name,w);
+                => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) 

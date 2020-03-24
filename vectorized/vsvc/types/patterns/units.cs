@@ -19,12 +19,12 @@ namespace Z0
 
             public static Units128<T> Op => default;
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name, VKind);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => Data.vunits<T>(w);            
+            public Vector128<T> Invoke() => Data.vunits(VKind);            
         }
 
         public readonly struct Units256<T> : ISVPatternSource256Api<T>
@@ -34,11 +34,11 @@ namespace Z0
 
             public static Units256<T> Op => default;
 
-            static N256 w => default;
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public Vec256Kind<T> VKind => default;
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => Data.vunits<T>(w);
+            public Vector256<T> Invoke() => Data.vunits<T>(VKind);
 
         }
     }

@@ -48,7 +48,7 @@ namespace Z0
             var min = one(t);
             var max = maxval(t);
             var domain = Interval.closed(one(t), maxval(t));
-            var f = VSvcFactories.vnonz(w,t);
+            var f = VSvc.vnonz(w,t);
 
             Claim.nea(gvec.vnonz(vzero(w,t)));
             
@@ -62,7 +62,7 @@ namespace Z0
             var min = one(t);
             var max = maxval(t);
             var domain = Interval.closed(one(t), maxval(t));
-            var f = VSvcFactories.vnonz(w,t);
+            var f = VSvc.vnonz(w,t);
 
             Claim.nea(gvec.vnonz(vzero(w,t)));
             

@@ -33,6 +33,9 @@ namespace Z0
         
         protected ISVValidatorD Comparisons {get;}
         
+        protected ISVValidatorD<T> Validator<T>()
+            where T : unmanaged
+                => Context.Decomposer<T>();
         protected CheckExec Check {get;}
 
         static void CheckFailed()

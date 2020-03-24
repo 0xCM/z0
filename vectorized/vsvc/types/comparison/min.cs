@@ -7,22 +7,30 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using static Z0.Root;
 
-    using static Root;
+    public interface IClassifiedOperator<K>
+        where K : IOperationClass<OperatorClass>
+
+    {
+        K Class  => default;
+    }
 
     partial class VSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Min128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>
+        public readonly struct Min128<T> : ISVBinaryOp128DApi<T>, ISBBinaryOp128Api<T>, IClassifiedOperator<OpClass.BinaryOp<T>>
             where T : unmanaged
         {
             public const string Name = "vmin";
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
 
             public static Min128<T> Op => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
+
+            public OpClass.BinaryOp<T> Class => default;
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vmin(x,y);
@@ -42,11 +50,11 @@ namespace Z0
         {
             public const string Name = "vmin";
             
-            static N256 w => default;
+            public Vec256Kind<T> VKind => default;
 
             public static Min256<T> Op => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vmin(x,y);

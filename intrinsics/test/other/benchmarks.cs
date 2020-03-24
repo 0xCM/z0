@@ -90,11 +90,11 @@ namespace Z0
 
         void vand_bench<T>(N128 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, VSvcFactories.vand(w,t),t);
+                => vbinop_bench(w, VSvc.vand(w,t),t);
 
         void vand_bench<T>(N256 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, VSvcFactories.vand(w,t),t);
+                => vbinop_bench(w, VSvc.vand(w,t),t);
 
         void vxor_bench(N128 w)
         {
@@ -114,75 +114,75 @@ namespace Z0
 
         void vxor_bench<T>(N128 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, VSvcFactories.vxor(w,t),t);
+                => vbinop_bench(w, VSvc.vxor(w,t),t);
 
         void vxor_bench<T>(N256 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, VSvcFactories.vxor(w,t),t);
+                => vbinop_bench(w, VSvc.vxor(w,t),t);
 
         void rotl_bench(N128 w)
         {
-            vshift_bench(w, VSvcFactories.vrotl(w, z8), z8);
-            vshift_bench(w, VSvcFactories.vrotl(w, z16),z16);
-            vshift_bench(w, VSvcFactories.vrotl(w, z32), z32);
-            vshift_bench(w, VSvcFactories.vrotl(w, z64), z64);
+            vshift_bench(w, VSvc.vrotl(w, z8), z8);
+            vshift_bench(w, VSvc.vrotl(w, z16),z16);
+            vshift_bench(w, VSvc.vrotl(w, z32), z32);
+            vshift_bench(w, VSvc.vrotl(w, z64), z64);
         }
 
         void rotl_bench(N256 w)
         {
-            vshift_bench(w, VSvcFactories.vrotl(w, z8), z8);
-            vshift_bench(w, VSvcFactories.vrotl(w, z16),z16);
-            vshift_bench(w, VSvcFactories.vrotl(w, z32), z32);
-            vshift_bench(w, VSvcFactories.vrotl(w, z64), z64);
+            vshift_bench(w, VSvc.vrotl(w, z8), z8);
+            vshift_bench(w, VSvc.vrotl(w, z16),z16);
+            vshift_bench(w, VSvc.vrotl(w, z32), z32);
+            vshift_bench(w, VSvc.vrotl(w, z64), z64);
         }
 
         void vrotr_bench(N128 w)
         {
-            vshift_bench(w, VSvcFactories.vrotr(w, z8), z8);
-            vshift_bench(w, VSvcFactories.vrotr(w, z16),z16);
-            vshift_bench(w, VSvcFactories.vrotr(w, z32), z32);
-            vshift_bench(w, VSvcFactories.vrotr(w, z64), z64);
+            vshift_bench(w, VSvc.vrotr(w, z8), z8);
+            vshift_bench(w, VSvc.vrotr(w, z16),z16);
+            vshift_bench(w, VSvc.vrotr(w, z32), z32);
+            vshift_bench(w, VSvc.vrotr(w, z64), z64);
         }
 
         void vrotr_bench(N256 w)
         {
-            vshift_bench(w, VSvcFactories.vrotr(w, z8), z8);
-            vshift_bench(w, VSvcFactories.vrotr(w, z16),z16);
-            vshift_bench(w, VSvcFactories.vrotr(w, z32), z32);
-            vshift_bench(w, VSvcFactories.vrotr(w, z64), z64);
+            vshift_bench(w, VSvc.vrotr(w, z8), z8);
+            vshift_bench(w, VSvc.vrotr(w, z16),z16);
+            vshift_bench(w, VSvc.vrotr(w, z32), z32);
+            vshift_bench(w, VSvc.vrotr(w, z64), z64);
         }
 
         void vsll_bench(N128 w)
         {
-            vshift_bench(w,VSvcFactories.vsll(w, z8), z8);
-            vshift_bench(w,VSvcFactories.vsll(w, z16), z16);
-            vshift_bench(w,VSvcFactories.vsll(w, z32), z32);
-            vshift_bench(w,VSvcFactories.vsll(w, z64), z64);            
+            vshift_bench(w,VSvc.vsll(w, z8), z8);
+            vshift_bench(w,VSvc.vsll(w, z16), z16);
+            vshift_bench(w,VSvc.vsll(w, z32), z32);
+            vshift_bench(w,VSvc.vsll(w, z64), z64);            
         }
 
         void vsll_bench(N256 w)
         {
 
-            vshift_bench(w,VSvcFactories.vsll(w, z8), z8);
-            vshift_bench(w,VSvcFactories.vsll(w, z16), z16);
-            vshift_bench(w,VSvcFactories.vsll(w, z32), z32);
-            vshift_bench(w,VSvcFactories.vsll(w, z64), z64);            
+            vshift_bench(w,VSvc.vsll(w, z8), z8);
+            vshift_bench(w,VSvc.vsll(w, z16), z16);
+            vshift_bench(w,VSvc.vsll(w, z32), z32);
+            vshift_bench(w,VSvc.vsll(w, z64), z64);            
         }
 
         void vsrl_bench(N256 w)
         {
-            vshift_bench(w,VSvcFactories.vsrl(w, z8), z8);
-            vshift_bench(w,VSvcFactories.vsrl(w, z16), z16);
-            vshift_bench(w,VSvcFactories.vsrl(w, z32), z32);
-            vshift_bench(w,VSvcFactories.vsrl(w, z64), z64);            
+            vshift_bench(w,VSvc.vsrl(w, z8), z8);
+            vshift_bench(w,VSvc.vsrl(w, z16), z16);
+            vshift_bench(w,VSvc.vsrl(w, z32), z32);
+            vshift_bench(w,VSvc.vsrl(w, z64), z64);            
         }
 
         void vsrl_bench(N128 w)
         {
-            vshift_bench(w,VSvcFactories.vsrl(w, z8), z8);
-            vshift_bench(w,VSvcFactories.vsrl(w, z16), z16);
-            vshift_bench(w,VSvcFactories.vsrl(w, z32), z32);
-            vshift_bench(w,VSvcFactories.vsrl(w, z64), z64);            
+            vshift_bench(w,VSvc.vsrl(w, z8), z8);
+            vshift_bench(w,VSvc.vsrl(w, z16), z16);
+            vshift_bench(w,VSvc.vsrl(w, z32), z32);
+            vshift_bench(w,VSvc.vsrl(w, z64), z64);            
         }
 
         void vbinop_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)

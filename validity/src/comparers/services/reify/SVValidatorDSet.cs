@@ -13,7 +13,7 @@ namespace Z0
     using static Validity;
     using static vgeneric;
 
-    using C = OperationClasses;
+    using C = OpClass;
 
     class SVValidatorD<T> : ISVValidatorD<T>
         where T : unmanaged
@@ -29,6 +29,13 @@ namespace Z0
         public SVValidatorD(IValidationContext context)
         {
             this.Context = context;
+            this.Random = context.Random;
+
+        }
+
+        public SVValidatorD(ITestContext context)
+        {
+            this.Context = ValidationContext.From(context);
             this.Random = context.Random;
 
         }

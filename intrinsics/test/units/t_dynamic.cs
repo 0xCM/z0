@@ -51,7 +51,7 @@ namespace Z0
         {
             const byte imm8 = 9;
 
-            var vbsll = VSvcFactories.vbsll<uint>(n128).@delegate(imm8).DynamicOp;            
+            var vbsll = VSvc.vbsll<uint>(n128).@delegate(imm8).DynamicOp;            
                     
             for(var i=0; i<RepCount; i++)
             {

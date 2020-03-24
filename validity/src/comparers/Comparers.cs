@@ -12,6 +12,10 @@ namespace Z0
             where T : unmanaged
              => new SVValidatorD<T>(context);
 
+        public static ISVValidatorD<T> Decomposer<T>(this ITestContext context)
+            where T : unmanaged
+             => new SVValidatorD<T>(context);
+
         public static ISVValidatorD Decompostions(this ITestContext context)
             => new SVValidatorD(ValidationContext.From(context));
             

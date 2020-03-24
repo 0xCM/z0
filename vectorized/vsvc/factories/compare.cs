@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static VSvcHosts;
 
-    partial class VSvcFactories
+    partial class VSvc
     {
         [MethodImpl(Inline)]
         public static Eq128<T> veq<T>(N128 w, T t = default)
@@ -53,12 +53,12 @@ namespace Z0
                 => Max256<T>.Op;
 
         [MethodImpl(Inline)]
-        public static Min128<T> vmin<T>(N128 w, T t = default)
+        public static Min128<T> vmin<T>(W128 w, T t = default)
             where T : unmanaged
                 => Min128<T>.Op;
 
         [MethodImpl(Inline)]
-        public static Min256<T> vmin<T>(N256 w, T t = default)
+        public static Min256<T> vmin<T>(W256 w, T t = default)
             where T : unmanaged
                 => Min256<T>.Op;
 

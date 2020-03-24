@@ -19,12 +19,12 @@ namespace Z0
 
             public static Ones128<T> Op => default;
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => gvec.vones<T>(w);            
+            public Vector128<T> Invoke() => gvec.vones<T>(VKind);            
         }
 
         public readonly struct Ones256<T> : ISVPatternSource256Api<T>
@@ -34,12 +34,12 @@ namespace Z0
 
             public static Ones256<T> Op => default;
 
-            static N256 w => default;
+            public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => gvec.vones<T>(w);
+            public Vector256<T> Invoke() => gvec.vones<T>(VKind);
         }
     }
 }

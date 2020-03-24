@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static OperationClasses;
+    using static OpClass;
 
-    partial class OperationClassReps
+    partial class OpReps
     {
         public static Unary Unary => default;
 

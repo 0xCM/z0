@@ -8,7 +8,7 @@ namespace Z0
     using static Nats;
     using static vgeneric;
 
-    using C = OperationClasses;
+    using C = OpClass;
 
     public interface ISVValidatorD<T> : IValidator<T>
         where T : unmanaged
@@ -19,10 +19,10 @@ namespace Z0
         void Validate<F>(F f, C.UnaryOp op, W256 w)
             where F : ISVUnaryOp256DApi<T>;
 
-        void Validate<F>(F f, C.BinaryOp op,  W128 w)
+        void Validate<F>(F f, C.BinaryOp op, W128 w)
             where F : ISVBinaryOp128DApi<T>;
 
-        void Validate<F>(F f, C.BinaryOp op,  W256 w)
+        void Validate<F>(F f, C.BinaryOp op, W256 w)
             where F : ISVBinaryOp256DApi<T>;
     }
 

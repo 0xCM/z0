@@ -18,11 +18,11 @@ namespace Z0
         {
             public const string Name = "vtestz";
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
 
             public static TestZ128<T> Op => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x,Vector128<T> y) => gvec.vtestz(x,y);
@@ -41,11 +41,11 @@ namespace Z0
         {
             public const string Name = "vtestz";
 
-            static N256 w => default;
+            public Vec256Kind<T> VKind => default;
 
             public static TestZ256<T> Op => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x,Vector256<T> y) => gvec.vtestz(x,y);

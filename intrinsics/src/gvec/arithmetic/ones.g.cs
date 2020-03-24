@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;    
     
-    using static Root;    
+    using static Root;  
+    using static Nats;  
         
     partial class gvec
     {
@@ -42,5 +43,16 @@ namespace Z0
         public static Vector512<T> vones<T>(N512 n, T t = default)
             where T : unmanaged
                 => veq(default(Vector512<T>), default(Vector512<T>));
+
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vones<T>(Vec128Kind<T> kind)
+            where T : unmanaged
+                => vones<T>(w128);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vones<T>(Vec256Kind<T> kind)
+            where T : unmanaged
+                => vones<T>(w256);
     }
 }

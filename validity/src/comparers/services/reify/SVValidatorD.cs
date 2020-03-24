@@ -8,7 +8,7 @@ namespace Z0
     using static Nats;
     using static vgeneric;
 
-    using R = OperationClassReps;
+    using R = OpReps;
     
     public readonly struct SVValidatorD : ISVValidatorD
     {
@@ -35,7 +35,6 @@ namespace Z0
             where T : unmanaged
             where F : ISVUnaryOp256DApi<T>
                 => Decomposer<T>().Validate(f, R.UnaryOp, w);
-                //=> Context.UnaryOpMatchD(w,t).CheckMatch(f);
 
         public void CheckShiftScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged

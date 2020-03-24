@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static VSvcHosts;
 
-    partial class VSvcFactories
+    partial class VSvc
     {
         [MethodImpl(Inline)]
         public static Concat2x128<T> vconcat<T>(N128 w, T t = default)

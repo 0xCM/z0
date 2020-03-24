@@ -8,11 +8,12 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class VSvcFactories
+    partial class VSvc
     {
 
 
     }
+
 
     partial class VSvcHosts
     {

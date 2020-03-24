@@ -20,9 +20,9 @@ namespace Z0
 
             public static Select128<T> Op => default;
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
  
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, Vector128<T> z) => gvec.vselect(x,y,z);
@@ -43,9 +43,9 @@ namespace Z0
 
             public static Select256<T> Op => default;
 
-            static N256 w => default;
+            public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, Vector256<T> z) => gvec.vselect(x,y,z);

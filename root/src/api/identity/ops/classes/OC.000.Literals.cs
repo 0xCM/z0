@@ -133,13 +133,12 @@ namespace Z0
         TernaryPredicate = Ternary | Function | Predicate
     }
 
-    
-    public static partial class OperationClasses
+    public static partial class OpClass
     {
     
     }
 
-    public static partial class OperationClassReps
+    public static partial class OpReps
     {
 
     }

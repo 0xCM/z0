@@ -19,9 +19,9 @@ namespace Z0
 
             public static Reverse128<T> Op => default;
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vreverse(x);
@@ -35,9 +35,9 @@ namespace Z0
 
             public static Reverse256<T> Op => default;
 
-            static N256 w => default;
+            public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => gvec.vreverse(x);

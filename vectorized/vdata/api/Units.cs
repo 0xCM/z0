@@ -35,6 +35,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+
         /// <summary>
         /// Creates a 256-bit vector where each component is of unit value 
         /// </summary>
@@ -55,6 +56,16 @@ namespace Z0
             else
                 throw unsupported<T>();
         }        
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vunits<T>(Vec128Kind<T> kind)
+            where T : unmanaged
+                => vunits<T>(w128);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vunits<T>(Vec256Kind<T> kind)
+            where T : unmanaged
+                => vunits<T>(w256);
 
         public static ReadOnlySpan<byte> Units128x8u
             => new byte[16]{

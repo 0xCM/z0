@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static OperationClasses;
+    using static OpClass;
 
-    public static partial class OperationClassReps
+    public static partial class OpReps
     {
         public static PredicateClass Predicate => default;
 

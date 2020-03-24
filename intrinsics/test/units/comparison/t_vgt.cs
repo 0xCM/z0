@@ -44,10 +44,10 @@ namespace Z0
 
         void v_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvcFactories.vgt(w,t), w, t);
+                => CheckBinaryScalarMatch(VSvc.vgt(w,t), w, t);
 
         void v_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvcFactories.vgt(w,t), w, t);            
+                => CheckBinaryScalarMatch(VSvc.vgt(w,t), w, t);            
     }
 }

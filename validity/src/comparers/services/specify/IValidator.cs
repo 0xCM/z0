@@ -13,7 +13,7 @@ namespace Z0
     using static Validity;
     using static vgeneric;
 
-    using C = OperationClasses;
+    using C = OpClass;
 
     public interface IValidator : IService<IValidationContext>
     {

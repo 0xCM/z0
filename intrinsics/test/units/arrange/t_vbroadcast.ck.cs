@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
         {
             var svc = MathSvcFactory.bitlogic<T>();
-            var v1 = VSvcFactories.vbitlogic<T>(n128).and(x,y);
+            var v1 = VSvc.vbitlogic<T>(n128).and(x,y);
             var buffer = Fixed.alloc<Fixed128>();
             ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
             var count = vgeneric.vcount<T>(n128);            
@@ -53,17 +53,13 @@ namespace Z0
             
             public const string Name = "vbroadcast_check";
 
-            static N128 w => default;
-
-            static S s => default;
+            public Vec128Kind<T> VKind => default;
             
-            static T t => default;
-
-            public OpIdentity Id => NaturalIdentity.contracted(Name,w,t);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public bit Invoke(S a, Vector128<T> x)
             {
-                var count = vcount(w,t);
+                var count = vcount<T>(w128);
                 var result = bit.On;
                 var y = x.As<T,S>();
                 for(var i=0; i< count; i++)
@@ -78,19 +74,15 @@ namespace Z0
         {
             public static VBroadcastCheck256<S, T> Op => default;
 
-            static N256 w => default;
-
-            static S s => default;
+            public Vec256Kind<T> VKind => default;
             
-            static T t => default;
-
             public const string Name = "vbroadcast_check";
 
-            public OpIdentity Id => NaturalIdentity.contracted<N256,T>(Name);
+            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
 
             public bit Invoke(S a, Vector256<T> x)
             {
-                var count = vcount(w,t);
+                var count = vcount<T>(w256);
                 var result = bit.On;
                 var y = x.As<T,S>();
                 for(var i=0; i< count; i++)

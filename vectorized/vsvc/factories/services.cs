@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static VSvcHosts;
 
-    partial class VSvcFactories
+    partial class VSvc
     {
         [MethodImpl(Inline)]
         public static BitLogic128<T> vbitlogic<T>(N128 w, T t = default)

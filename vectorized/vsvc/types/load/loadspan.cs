@@ -20,9 +20,9 @@ namespace Z0
 
             public static LoadSpan128<T> Op => default;
 
-            static N128 w => default;
+            public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => vgeneric.vload(n128,x,offset);            
@@ -35,9 +35,9 @@ namespace Z0
 
             public static LoadSpan256<T> Op => default;
 
-            static N256 w => default;
+            public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => NaturalIdentity.contracted<T>(Name,w);
+            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => vgeneric.vload(n256,x,offset);

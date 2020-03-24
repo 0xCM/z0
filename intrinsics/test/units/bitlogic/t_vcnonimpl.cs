@@ -44,10 +44,10 @@ namespace Z0
 
         void vcnonimpl_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvcFactories.vcnonimpl(w,t), w, t);
+                => CheckBinaryScalarMatch(VSvc.vcnonimpl(w,t), w, t);
             
         void vcnonimpl_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VSvcFactories.vcnonimpl(w,t), w, t);
+                => CheckBinaryScalarMatch(VSvc.vcnonimpl(w,t), w, t);
      }
 }

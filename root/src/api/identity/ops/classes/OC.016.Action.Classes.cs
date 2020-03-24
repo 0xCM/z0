@@ -8,7 +8,7 @@ namespace Z0
 
     using C = ActionClass;
 
-    public static partial class OperationClasses
+    public static partial class OpClass
     {
         public readonly struct ActionClass : IOperationClass<C> { public C Class => C.Action; }
 

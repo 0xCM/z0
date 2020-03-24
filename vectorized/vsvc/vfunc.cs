@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Vectorized functions
     /// </summary>
-    public static partial class VSvcFactories
+    public static partial class VSvc
     {
 
     }

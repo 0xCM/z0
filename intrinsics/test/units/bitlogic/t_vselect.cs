@@ -35,10 +35,10 @@ namespace Z0
 
         void vselect_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckTernaryScalarMatch(VSvcFactories.vselect(w,t), w, t);
+                => CheckTernaryScalarMatch(VSvc.vselect(w,t), w, t);
             
         void vselect_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckTernaryScalarMatch(VSvcFactories.vselect(w,t), w, t);
+                => CheckTernaryScalarMatch(VSvc.vselect(w,t), w, t);
      }
 }
