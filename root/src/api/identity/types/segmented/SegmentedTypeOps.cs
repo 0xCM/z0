@@ -39,6 +39,33 @@ namespace Z0
             && t.GenericParameters().Single() == tCell;
      
         /// <summary>
+        /// Determines whether a method returns a 128-bit intrinsic vector of specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool ReturnsVector(this MethodInfo src, W128 w, Type tCell)
+            => src.ReturnType.IsVector(w, tCell);
+
+        /// <summary>
+        /// Determines whether a method returns a 256-bit intrinsic vector of specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool ReturnsVector(this MethodInfo src, W256 w, Type tCell)
+            => src.ReturnType.IsVector(w, tCell);
+
+        /// <summary>
+        /// Determines whether a method returns a 512-bit intrinsic vector with of specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool ReturnsVector(this MethodInfo src, W512 w, Type tCell)
+            => src.ReturnType.IsVector(w, tCell);
+
+        /// <summary>
         /// Returns true if a method parameter is a 128-bit intrinsic vector closed over a specified argument type
         /// </summary>
         /// <param name="param">The source parameter</param>
@@ -136,5 +163,379 @@ namespace Z0
         /// <param name="w">The vector width</param>
         public static bool IsClosedVector(this ParameterInfo param, W512 w)
             => param.ParameterType.IsClosedGeneric() && param.ParameterType.IsVector(w); 
+
+        /// <summary>
+        /// Determines whether a method accepts an intrinsic vector in some parameter slot
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        public static bool AcceptsVector(this MethodInfo src)
+            => src.Parameters(p => p.IsVector()).Any();
+
+        /// <summary>
+        /// Determines whether a method accepts an intrinsic vector at an index-identified parameter
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="index">THe parameter index to match</param>
+        public static bool AcceptsVector(this MethodInfo src, int index)
+            => src.Parameters(p => p.Position == index && p.IsVector()).Any();
+
+        /// <summary>
+        /// Determines whether a method accepts a 128-bit intrinsic vector at an index-identified parameter
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="index">THe parameter index to match</param>
+        /// <param name="w">The width to match</param>
+        public static bool AcceptsVector(this MethodInfo src, int index, W128 w)
+            => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
+
+        /// <summary>
+        /// Determines whether a method accepts a 128-bit intrinsic vector at an index-identified parameter
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="index">THe parameter index to match</param>
+        /// <param name="w">The width to match</param>
+        public static bool AcceptsVector(this MethodInfo src, int index, W256 w)
+            => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
+
+        /// <summary>
+        /// Determines whether a method accepts a 128-bit intrinsic vector at an index-identified parameter
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="index">THe parameter index to match</param>
+        /// <param name="w">The width to match</param>
+        public static bool AcceptsVector(this MethodInfo src, int index, W512 w)
+            => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
+
+        /// <summary>
+        /// Determines whether a method accepts a 128-bit intrinsic vector at an index-identified parameter of specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="index">THe parameter index to match</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool AcceptsVector(this MethodInfo src, int index, W128 w, Type tCell)
+            => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();
+
+        /// <summary>
+        /// Determines whether a method accepts a 256-bit intrinsic vector at an index-identified parameter of specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="index">THe parameter index to match</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool AcceptsVector(this MethodInfo src, int index, W256 w, Type tCell)
+            => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();
+
+        /// <summary>
+        /// Determines whether a method accepts a 512-bit intrinsic vector at an index-identified parameter of specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="index">The parameter index to match</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool AcceptsVector(this MethodInfo src, int index, W512 w, Type tCell)
+            => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();            
+
+        /// <summary>
+        /// Determines whether a method has intrinsic parameters or return type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        public static bool IsFullyVectorized(this MethodInfo src)        
+            => TypeIdentities.IsCpuVector(src.ReturnType) && src.ParameterTypes().All(TypeIdentities.IsCpuVector);
+
+        /// <summary>
+        /// Determines whether all parameters of a method are 128-bit intrinsic vectors
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsFullyVectorized(this MethodInfo src, W128 w)        
+            => src.IsFullyVectorized() && src.EffectiveParameterTypes().All(t => t.IsVector(w));
+
+        /// <summary>
+        /// Determines whether all parameters of a method are 256-bit intrinsic vectors
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsFullyVectorized(this MethodInfo src, W256 w)        
+            => src.IsFullyVectorized() && src.EffectiveParameterTypes().All(t => t.IsVector(w));
+
+        /// <summary>
+        /// Determines whether all parameters of a method are 256-bit intrinsic vectors
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsFullyVectorized(this MethodInfo src, W512 w)        
+            => src.IsFullyVectorized() && src.EffectiveParameterTypes().All(t => t.IsVector(w));
+
+        /// <summary>
+        /// Determines whether all parameters of a method are 128-bit intrinsic vectors with a specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool IsFullyVectorized(this MethodInfo src, W128 w, Type tCell)        
+            => src.IsFullyVectorized(w) && src.ReturnType.IsVector(w,tCell);
+
+        /// <summary>
+        /// Determines whether all parameters of a method are 256-bit intrinsic vectors with a specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool IsFullyVectorized(this MethodInfo src, W256 w, Type tCell)        
+            => src.IsFullyVectorized(w) && src.ReturnType.IsVector(w,tCell);
+
+        /// <summary>
+        /// Determines whether all parameters of a method are 512-bit intrinsic vectors with a specified cell type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        /// <param name="w">The width to match</param>
+        /// <param name="tCell">The cell type to match</param>
+        public static bool IsFullyVectorized(this MethodInfo src, W512 w, Type tCell)        
+            => src.IsFullyVectorized(w) && src.ReturnType.IsVector(w,tCell);
+
+        /// <summary>
+        /// Determines whether a method produces, but does not accept, vector values
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsVectorFactory(this MethodInfo m)        
+            => m.ParameterTypes(true).Where(t => t.IsVector()).Count() == 0 && m.ReturnType.IsVector();
+
+        /// <summary>
+        /// Determines whether a method has intrinsic parameters or return type
+        /// </summary>
+        /// <param name="src">The method to test</param>
+        public static bool IsVectorized(this MethodInfo src)        
+            => src.ReturnsVector() || src.ParameterTypes().Any(VectorType.test);
+
+        /// <summary>
+        /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsVectorized(this MethodInfo m, W512 w)        
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
+
+        /// <summary>
+        /// Determines whether a method has at least one 128-bit intrinsic vector parameter closed over a specified type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsVectorized(this MethodInfo m, W128 w, Type tCell)        
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,tCell)).Count() != 0;
+
+        /// <summary>
+        /// Determines whether a method has at least one 256-bit intrinsic vector parameter closed over a specified type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsVectorized(this MethodInfo m, W256 w, Type tCell)        
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,tCell)).Count() != 0;
+
+        /// <summary>
+        /// Determines whether a method has at least one 512-bit intrinsic vector parameter closed over a specified type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsVectorized(this MethodInfo m, W512 w, Type tCell)        
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w,tCell)).Count() != 0;
+
+        /// <summary>
+        /// Determines whether a method is (partially) vectorized and accepts an immediate value
+        /// </summary>
+        /// <param name="src">The method to query</param>
+        public static bool IsVectorizedImm(this MethodInfo src)
+            => src.IsVectorized() && src.AcceptsImmediate();
+        
+        /// <summary>
+        /// Determines whether a method is a vectorized unary operator that accepts an immediate value
+        /// </summary>
+        /// <param name="src">The method to query</param>
+        public static bool IsVectorizedUnaryImm(this MethodInfo src)
+        {
+            var parameters = src.GetParameters().ToArray();
+            return parameters.Length == 2 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].IsImmediate();
+        }
+
+        /// <summary>
+        /// Determines whether a method is a vectorized binary operator that accepts an immediate value
+        /// </summary>
+        /// <param name="src">The method to query</param>
+        public static bool IsVectorizedBinaryImm(this MethodInfo src)
+        {
+            var parameters = src.GetParameters().ToArray();
+            return parameters.Length == 3 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].ParameterType.IsVector() 
+                && parameters[2].IsImmediate();
+        }
+
+        /// <summary>
+        /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsVectorized(this MethodInfo m, W128 w)        
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
+
+        /// <summary>
+        /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="w">The width to match</param>
+        public static bool IsVectorized(this MethodInfo m, W256 w)        
+            => m.IsVectorized() && m.Parameters(p => p.ParameterType.IsVector(w)).Count() != 0;
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 128-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W128 w)
+            => src.NonGeneric().Where(m => m.IsVectorized(w));
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 256-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W256 w)
+            => src.NonGeneric().Where(m => m.IsVectorized(w));
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 512-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W512 w)
+            => src.NonGeneric().Where(m => m.IsVectorized(w));
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 128-bit vector parameter closed over a specified type
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W128 w, Type tCell)
+            => src.NonGeneric().WithParameter(p => p.IsVector(w,tCell));
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 256-bit vector parameter closed over a specified type
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W256 w, Type tCell)
+            => src.NonGeneric().WithParameter(p => p.IsVector(w,tCell));
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 512-bit vector parameter closed over a specified type
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W512 w, Type tCell)
+            => src.NonGeneric().WithParameter(p => p.IsVector(w,tCell));
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 128-bit vector parameter closed over a specified parametric type
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        /// <typeparam name="T">The type to match</typeparam>
+        public static IEnumerable<MethodInfo> VectorizedDirect<T>(this IEnumerable<MethodInfo> src, W128 w)
+            where T : unmanaged
+                => src.VectorizedDirect(w,typeof(T));
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 256-bit vector parameter closed over a specified parametric type
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        /// <typeparam name="T">The type to match</typeparam>
+        public static IEnumerable<MethodInfo> VectorizedDirect<T>(this IEnumerable<MethodInfo> src, W256 w)
+            where T : unmanaged
+                => src.VectorizedDirect(w,typeof(T));
+
+        /// <summary>
+        /// Selects nongeneric source methods that have at least one 512-bit vector parameter closed over a specified parametric type
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        /// <typeparam name="T">The type to match</typeparam>
+        public static IEnumerable<MethodInfo> VectorizedDirect<T>(this IEnumerable<MethodInfo> src, W512 w)
+            where T : unmanaged
+                => src.VectorizedDirect(w,typeof(T));
+
+        /// <summary>
+        /// Selects nongeneric source methods with a specified name that have at least one 128-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W128 w, string name)
+            => src.NonGeneric().WithName(name).WithParameter(p => p.IsClosedVector(w));
+
+        /// <summary>
+        /// Selects nongeneric source methods with a specified name that have at least one 256-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W256 w, string name)
+            => src.NonGeneric().WithName(name).WithParameter(p => p.IsClosedVector(w));
+
+        /// <summary>
+        /// Selects nongeneric source methods with a specified name that have at least one 512-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedDirect(this IEnumerable<MethodInfo> src, W512 w, string name)
+            => src.NonGeneric().WithName(name).WithParameter(p => p.IsClosedVector(w));
+ 
+        /// <summary>
+        /// Selects open generic source methods that have at least one 128-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W128 w)
+            => src.OpenGeneric().Where(m => m.IsVectorized(w));
+
+        /// <summary>
+        /// Selects open generic source methods that have at least one 256-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W256 w)
+            => src.OpenGeneric().Where(m => m.IsVectorized(w));
+
+        /// <summary>
+        /// Selects open generic source methods that have at least one 512-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W512 w)
+            => src.OpenGeneric().Where(m => m.IsVectorized(w));
+
+        /// <summary>
+        /// Selects open generic source methods with a specified name that have at least one 128-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W128 w, string name)
+            => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));
+
+        /// <summary>
+        /// Selects open generic source methods with a specified name that have at least one 256-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W256 w, string name)
+            => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));
+
+        /// <summary>
+        /// Selects open generic source methods with a specified name that have at least one 512-bit vector parameter
+        /// </summary>
+        /// <param name="src">The source methods</param>
+        /// <param name="w">The vector width</param>
+        public static IEnumerable<MethodInfo> VectorizedGeneric(this IEnumerable<MethodInfo> src, W512 w, string name)
+            => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));         
     }
 }

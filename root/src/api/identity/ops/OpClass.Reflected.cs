@@ -101,13 +101,6 @@ namespace Z0
         public static bool IsTernaryOperator(this MethodInfo m)
             => m.IsHomogenous() && m.IsTernaryFunction();
 
-        /// <summary>
-        /// Determines whether a method has intrinsic parameters or return type
-        /// </summary>
-        /// <param name="src">The method to test</param>
-        public static bool IsFullyVectorized(this MethodInfo src)        
-            => TypeIdentities.IsCpuVector(src.ReturnType) 
-            && src.ParameterTypes().All(TypeIdentities.IsCpuVector);
 
         public static GenericStateKind GenericState(this Type src, bool effective)
             =>   src.IsOpenGeneric(false) ? GS.Open 

@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to test</param>
         public static bool IsCpuVector(Type t)
-            => VectorTypes.test(t);
+            => VectorType.test(t);
 
         public static Option<TypeIdentity> IdentifyPrimitive(Type arg)
         {

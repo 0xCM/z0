@@ -22,6 +22,7 @@ namespace Z0
             iter(VectorType.Types256, t => check_cell_type(t,n256));
             
         }
+        
         void check_cell_type(Type tVector, N128 w)
         {
             var kVector = VectorType.kind(tVector);

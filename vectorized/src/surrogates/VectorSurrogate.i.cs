@@ -11,7 +11,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using VT = Z0.VectorType;
 
     public interface ISurrogate<S,T>
         where S : struct, ISurrogate<S,T>
@@ -63,7 +62,7 @@ namespace Z0
             Type IVec.VectorType => typeof(Vector128<T>);
 
             VectorKind IVec.Kind 
-                => VT.kind(typeof(Vector128<T>));
+                => Z0.VectorType.kind(typeof(Vector128<T>));
 
             Type IVec.CellType 
                 => typeof(T);
@@ -123,7 +122,7 @@ namespace Z0
             Type IVec.VectorType => typeof(Vector256<T>);
 
             VectorKind IVec.Kind 
-                => VT.kind(typeof(Vector256<T>));
+                => Z0.VectorType.kind(typeof(Vector256<T>));
 
             Type IVec.CellType 
                 => typeof(T);

@@ -19,6 +19,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     public static class Components
     {
@@ -38,5 +39,22 @@ namespace Z0
 
         internal static IEnumerable<T> items<T>(params T[] src)
             => src;
+
+        /// <summary>
+        /// Selects the method parameters that satisfy a predicate
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        /// <param name="predicate">The predicate to match</param>
+        internal static IEnumerable<ParameterInfo> Parameters(this MethodInfo src, Func<ParameterInfo,bool> predicate)
+            => src.GetParameters().Where(predicate);
+
+        /// <summary>
+        /// Returns a method's parameter types
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        internal static IEnumerable<Type> ParameterTypes(this MethodInfo m)
+            => m.GetParameters().Select(p => p.ParameterType);
+
+
     }
 }
