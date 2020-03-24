@@ -10,6 +10,11 @@ namespace Z0
     using static Root;
     using static IdentityShare;
 
+    public interface IIdentifiedEnum : IIdentifiedType<EnumIdentity>
+    {
+
+    }
+
     /// <summary>
     /// Defines enumeration identifiers
     /// </summary>

@@ -10,6 +10,11 @@ namespace Z0
     using static Root;
     using static IdentityShare;
 
+    public interface IPrimalIdentity : IIdentifiedType<PrimalIdentity>
+    {
+
+    }
+
     public readonly struct PrimalIdentity  : IPrimalIdentity
     {
         public static PrimalIdentity Empty => new PrimalIdentity(string.Empty);

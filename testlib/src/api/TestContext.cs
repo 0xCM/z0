@@ -120,7 +120,7 @@ namespace Z0
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
-                => OpIdentity.numeric(opname, NumericIdentity.kind<T>());
+                => OpIdentity.numeric(opname, NumericTypes.kind<T>());
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged

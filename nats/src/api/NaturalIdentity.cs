@@ -28,7 +28,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => OpIdentity.operation(opname,(FixedWidth)nateval<W>(), NumericIdentity.kind<T>(), generic);
+                => OpIdentity.operation(opname,(FixedWidth)nateval<W>(), NumericTypes.kind<T>(), generic);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(string opname, N128 w, bool generic = true)
             where T : unmanaged
-                => sfunc(opname,w, NumericIdentity.kind<T>(), generic);
+                => sfunc(opname,w, NumericTypes.kind<T>(), generic);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity sfunc<T>(string opname, N256 w, bool generic = true)
             where T : unmanaged
-                => sfunc(opname, w, NumericIdentity.kind<T>(), generic);
+                => sfunc(opname, w, NumericTypes.kind<T>(), generic);
 
         /// <summary>
         /// Defines a numeric resource identity predicated on natural bitwidth
@@ -87,6 +87,6 @@ namespace Z0
         public static string testcase<W,C>(Type host, string root, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where C : unmanaged
-                => $"{TypeIdentity.owner(host)}{host.Name}/{OpIdentity.operation(root, (FixedWidth)w.NatValue, NumericIdentity.kind<C>(), generic)}";
+                => $"{TypeIdentity.owner(host)}{host.Name}/{OpIdentity.operation(root, (FixedWidth)w.NatValue, NumericTypes.kind<C>(), generic)}";
     }
 }

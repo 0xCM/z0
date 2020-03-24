@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static TypeIdentities;
 
     public interface ITypeIdentityDispatcher
     {
@@ -23,6 +22,25 @@ namespace Z0
         public static ITypeIdentityDispatcher Create()
             => default(TypeIdentityDispatcher);
 
+        public static Option<TypeIdentity> IdentifyPrimitive(Type arg)
+        {
+            var id = PrimalIdentity.From(arg);
+            return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
+        }
+
+        /// <summary>
+        /// Creates a type identity provider from a host type that realizes the required interface, if possible;
+        /// otherwise, returns none
+        /// </summary>
+        /// <param name="host">A type that realizes an identity provider</param>
+        public static Option<ITypeIdentityProvider> HostedProvider(Type host)
+            => Option.Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
+
+        public static Option<ITypeIdentityProvider> AttributedProvider(Type t)
+            => from a in t.Tag<IdentityProviderAttribute>()
+               from tid in HostedProvider(a.Host.ToOption().ValueOrDefault(t))
+               select tid;
+
         public Option<TypeIdentity> Dispatch(Type arg)
         {
             if(arg.IsPointer)
@@ -30,12 +48,12 @@ namespace Z0
             else if(arg.IsNat())
                 return NatId(arg);
             else if(arg.IsSystemType())
-                return TypeIdentities.IdentifyPrimitive(arg);
+                return IdentifyPrimitive(arg);
             else if(arg.IsEnum)
                 return EnumTypes.identify(arg).ToOption();
             else if(IsSegmented(arg))
                 return SegmentedIdentity(arg);
-            else if(TypeIdentities.IsSpan(arg))
+            else if(SpanTypes.test(arg))
                 return SpanId(arg);
             else if(IsNatSpan(arg))
                 return NatSpanId(arg);  
@@ -95,7 +113,7 @@ namespace Z0
         
         internal static Option<TypeIdentity> SpanId(Type arg)
         {
-            var kind = SpanKind(arg);
+            var kind = SpanTypes.kind(arg);
             if(kind != 0)
             {
                 var cellid = arg.GetGenericArguments().Single().Dispatch();
@@ -157,9 +175,9 @@ namespace Z0
             var provider = none<ITypeIdentityProvider>();   
 
             if(t.IsAttributed<IdentityProviderAttribute>())
-                provider = TypeIdentities.AttributedProvider(t);
+                provider = AttributedProvider(t);
             else if(t.Realizes<ITypeIdentityProvider>())
-                provider = TypeIdentities.HostedProvider(t);
+                provider = HostedProvider(t);
 
             return provider.ValueOrElse(() => DefaultProvider);
         }
@@ -176,7 +194,6 @@ namespace Z0
             public TypeIdentity DefineIdentity(Type src)
                 => f(src);
         }
-
     }
 
     partial class Identity

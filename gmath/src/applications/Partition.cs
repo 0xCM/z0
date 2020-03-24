@@ -32,7 +32,7 @@ namespace Z0
         public static Span<T> measuredPoints<S,T>(S src, T width)
             where S : struct, IInterval<S,T>
             where T : unmanaged
-                => Numeric.floating<T>() ? points_f<S,T>(src, width) : points_i<S,T>(src,width);
+                => NumericTypes.floating<T>() ? points_f<S,T>(src, width) : points_i<S,T>(src,width);
 
         /// <summary>
         /// Calculates the points that determine a partitioning predicated on partition count

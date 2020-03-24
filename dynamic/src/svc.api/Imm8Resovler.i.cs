@@ -24,7 +24,7 @@ namespace Z0
     public interface IImmResolver<T> : IImmResolver
         where T : unmanaged
     {
-        NumericKind IImmResolver.ImmKind => NumericIdentity.kind<T>();
+        NumericKind IImmResolver.ImmKind => NumericTypes.kind<T>();
     }
 
     [SuppressUnmanagedCodeSecurity]

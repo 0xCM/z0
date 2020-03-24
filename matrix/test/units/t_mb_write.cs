@@ -38,7 +38,7 @@ namespace Z0.Test
             where T : unmanaged    
         {
             var folder = FolderName.Define("matrices");
-            var isFp = Numeric.floating<T>();
+            var isFp = NumericTypes.floating<T>();
             
             Matrix256<M,N,T> Write(FilePath dst)
             {

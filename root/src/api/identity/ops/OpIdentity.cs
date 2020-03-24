@@ -142,7 +142,7 @@ namespace Z0
         public static OpIdentity contracted<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeWidth<W>
             where T : unmanaged
-                => OpIdentity.operation(opname, w.FixedWidth, NumericIdentity.kind<T>(), generic);
+                => OpIdentity.operation(opname, w.FixedWidth, NumericTypes.kind<T>(), generic);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -155,7 +155,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity contracted<T>(string opname, W128 w, bool generic = true)
             where T : unmanaged
-                => contracted(opname, w, NumericIdentity.kind<T>(), generic);
+                => contracted(opname, w, NumericTypes.kind<T>(), generic);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -168,7 +168,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static OpIdentity contracted<T>(string opname, W256 w, bool generic = true)
             where T : unmanaged
-                => contracted(opname, w, NumericIdentity.kind<T>(), generic);
+                => contracted(opname, w, NumericTypes.kind<T>(), generic);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
