@@ -40,7 +40,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T to_x<T>(ulong src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return As.generic<T>((float)src);

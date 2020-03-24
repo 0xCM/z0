@@ -113,5 +113,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+        
+        [MethodImpl(Inline)]
+        public Option<TypeIdentity> ToOption()
+            => IsEmpty ? none<TypeIdentity>() : some(this);
     }
 }

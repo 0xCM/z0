@@ -384,7 +384,6 @@ namespace Z0
         }
   
         public static T unhandled<S,T>(S src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged
-                => Unsupported.raise<T>($"The conversion {typeof(S).Name} -> {typeof(T).Name} needed for the value {src} doesn't exist {caller} ,{file},{line}");
+            => Unsupported.raise<T>($"The conversion {typeof(S).Name} -> {typeof(T).Name} needed for the value {src} doesn't exist {caller} ,{file},{line}");
     }
 }

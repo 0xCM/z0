@@ -25,9 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]   
         public static T to<S,T>(S src)
-            where S : unmanaged
-            where T : unmanaged
-                => to_u<S,T>(src);        
+            => to_u<S,T>(src);        
 
         // [MethodImpl(Inline)]   
         // public static T to<T>(bit src, T t = default)
@@ -36,7 +34,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(sbyte src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
@@ -59,7 +56,6 @@ namespace Z0
         /// <typeparam name="T">The target conversion type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(byte src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
@@ -77,7 +73,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(short src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
@@ -95,12 +90,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(ushort src)
-            where T : unmanaged
-                => to_u<T>(src);
+            => to_u<T>(src);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(int src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
@@ -118,7 +111,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(uint src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
@@ -136,7 +128,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(long src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
@@ -154,7 +145,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(ulong src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
@@ -172,13 +162,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(float src)
-            where T : unmanaged
-                => to_u<T>(src);
+            => to_u<T>(src);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(double src)
-            where T : unmanaged
-                => to_u<T>(src);
+            => to_u<T>(src);
 
         [Op]
         public static object ocast(object src, NumericKind dst)

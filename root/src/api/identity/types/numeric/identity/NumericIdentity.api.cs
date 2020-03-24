@@ -13,7 +13,6 @@ namespace Z0
     using static Root;
 
     using NK = NumericKind;
-    using TC = System.TypeCode;
     using ID = NumericKindId;
 
     partial struct NumericIdentity
@@ -24,19 +23,7 @@ namespace Z0
         /// <param name="k">The identifying kind</param>
         [Op]
         public static Type type(NumericKind k)
-            => k switch {
-                NK.U8 => typeof(byte),
-                NK.I8 => typeof(sbyte),
-                NK.U16 => typeof(ushort),
-                NK.I16 => typeof(short),
-                NK.U32 => typeof(uint),
-                NK.I32 => typeof(int),
-                NK.I64 => typeof(long),
-                NK.U64 => typeof(ulong),
-                NK.F32 => typeof(float),
-                NK.F64 => typeof(double),
-                _ => throw new NotSupportedException(k.ToString())
-            };
+            => NumericTypes.type(k);
 
         /// <summary>
         /// Determines the primal kind (if any) of a parametrically-identifed type
@@ -45,35 +32,15 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static NumericKind kind<T>()
-            //where T : struct
-                => kind_u<T>();
-
+            => NumericTypes.kind<T>();
+        
         /// <summary>
         /// Determines the numeric kind of a type, possibly none
         /// </summary>
         /// <param name="t">The type to examine</param>
         [Op]
-        public static Option<NumericKind> kind(Type t)
-        {
-            var k = t.IsEnum 
-                ? NumericKind.None 
-                : Type.GetTypeCode(t.EffectiveType()) 
-                switch
-                {
-                    TC.SByte => NK.I8,
-                    TC.Byte => NK.U8,
-                    TC.Int16 => NK.I16,
-                    TC.UInt16 => NK.U16,
-                    TC.Int32 => NK.I32,
-                    TC.UInt32 => NK.U32,
-                    TC.Int64 => NK.I64,
-                    TC.UInt64 => NK.U64,
-                    TC.Single => NK.F32,
-                    TC.Double => NK.F64,
-                    _ => NK.None
-                };
-            return k.IsSome() ? some(k) : none<NumericKind>();
-        }
+        public static NumericKind kind(Type t)
+            => NumericTypes.kind(t);
 
         /// <summary>
         /// Determines the numeric kind identified by a type code, if any
@@ -81,86 +48,16 @@ namespace Z0
         /// <param name="tc">The type code to evaluate</param>
         [Op]
         public static NumericKind kind(TypeCode tc)
-        {
-            switch(tc)
-            {
-                case TC.SByte:
-                    return NK.I8;
+            => NumericTypes.kind(tc);
 
-                case TC.Byte:
-                    return NK.U8;
-
-                case TC.Int16:
-                    return NK.I16;
-
-                case TC.UInt16:
-                    return NK.U16;
-                
-                case TC.Int32:
-                    return NK.I32;
-
-                case TC.UInt32:
-                    return NK.U32;
-
-                case TC.Int64:
-                    return NK.I64;
-
-                case TC.UInt64:
-                    return NK.U64;
-
-                case TC.Single:
-                    return NK.F32;
-
-                case TC.Double:
-                    return NK.F64;
-            }
-            
-            return NK.None;
-        }
-
-        [MethodImpl(Inline)]
-        static NumericKind kind_u<T>()
-            //where T : struct
-        {
-            if(typeof(T) == typeof(byte))
-                return NumericKind.U8;
-            else if(typeof(T) == typeof(ushort))
-                return NumericKind.U16;
-            else if(typeof(T) == typeof(uint))
-                return NumericKind.U32;
-            else if(typeof(T) == typeof(ulong))
-                return NumericKind.U64;
-            else
-                return kind_i<T>();
-        }
-
-        [MethodImpl(Inline)]
-        static NumericKind kind_i<T>()
-            //where T : struct
-        {
-            if(typeof(T) == typeof(sbyte))
-                return NumericKind.I8;
-            else if(typeof(T) == typeof(short))
-                return NumericKind.I16;
-            else if(typeof(T) == typeof(int))
-                return NumericKind.I32;
-            else if(typeof(T) == typeof(long))
-                return NumericKind.I64;
-            else
-                return kind_f<T>();
-        }
-
-        [MethodImpl(Inline)]
-        static NumericKind kind_f<T>()
-            //where T : struct
-        {
-            if(typeof(T) == typeof(float))
-                return NumericKind.F32;
-            else if(typeof(T) == typeof(double))
-                return NumericKind.F64;
-            else
-                return NumericKind.None;            
-        }
+        /// <summary>
+        /// Tests whether the source kind, considered as a bitfield, contains the match id
+        /// </summary>
+        /// <param name="k">The source kind</param>
+        /// <param name="match">The kind to match</param>
+        [MethodImpl(Inline), Op]
+        public static bool contains(NumericKind k, NumericKindId match)        
+            => NumericTypes.contains(k,match);
 
         /// <summary>
         /// Attempts to parse a numeric kind from a string in the form {width}{indicator} 
@@ -192,7 +89,6 @@ namespace Z0
             return kind;                            
         }
 
-
         /// <summary>
         ///  Attempts to parse the source string as a numeric value
         /// </summary>
@@ -212,16 +108,6 @@ namespace Z0
                     ? kind(part.Substring(1, part.Length - 1)) 
                     : kind(part)
                 select x;        
-
-        /// <summary>
-        /// Tests whether the source kind, considered as a bitfield, contains the match id
-        /// </summary>
-        /// <param name="k">The source kind</param>
-        /// <param name="match">The kind to match</param>
-        [MethodImpl(Inline), Op]
-        public static bool contains(NumericKind k, NumericKindId match)        
-            => ((uint)k & (uint)match) != 0;
-
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
@@ -247,7 +133,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool contains(NumericKind k, NumericKind match)        
             => kindset(k).Contains(match);
-
 
         static HashSet<Type> CreateTypeset(NumericKind k)
             => GetKindset(k).Select(NumericIdentity.type).ToHashSet();         

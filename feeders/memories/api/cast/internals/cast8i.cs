@@ -14,7 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         static T to_i<T>(sbyte src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>((sbyte)src);
@@ -28,7 +27,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T to_u<T>(sbyte src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);
@@ -42,7 +40,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T to_x<T>(sbyte src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return generic<T>((float)src);

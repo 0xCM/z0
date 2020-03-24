@@ -14,7 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T to<T>(char src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
@@ -58,7 +57,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T convertx<T>(char src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return generic<T>((float)src);

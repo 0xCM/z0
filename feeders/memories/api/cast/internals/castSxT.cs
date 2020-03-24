@@ -14,8 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         static T to_u<S,T>(S src)
-            where S : unmanaged
-            where T : unmanaged
         {
             if(typeof(S) == typeof(byte))
                 return to<T>(uint8(src));
@@ -31,8 +29,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T to_i<S,T>(S src)
-            where S : unmanaged
-            where T : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return to<T>(int8(src));
@@ -48,8 +44,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T to_x<S,T>(S src)
-            where S : unmanaged
-            where T : unmanaged
         {
             if(typeof(S) == typeof(float))
                 return to<T>(float32(src));

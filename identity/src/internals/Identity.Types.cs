@@ -34,7 +34,7 @@ namespace Z0
             else if(arg.IsEnum)
                 return TypeIdentities.IdentifyEnum(arg);
             else if(IsSegmented(arg))
-                return SegmentedId(arg);
+                return SegmentedIdentity(arg);
             else if(TypeIdentities.IsSpan(arg))
                 return SpanId(arg);
             else if(IsNatSpan(arg))
@@ -83,22 +83,10 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static bool IsSegmented(Type t)
-            => t.IsBlocked() || t.IsVector();
+            => SegmentedTypes.test(t);
 
-        internal static Option<TypeIdentity> SegmentedId(Type t)
-            =>  from i in SegIndicator(t)
-                let segwidth = Identity.width(t)
-                where segwidth.IsSome()
-                let segfmt = segwidth.Format()
-                let arg = t.GetGenericArguments().Single()
-                let argwidth = Identity.width(arg)
-                where   argwidth.IsSome()
-                let argfmt = argwidth.Format()
-                let nk = arg.NumericKind()
-                where  nk.IsSome()                
-                let nki = nk.Indicator().Format()
-                let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)                
-                select SegmentedIdentity.Define(i,segwidth,nk).AsTypeIdentity();
+        internal static Option<TypeIdentity> SegmentedIdentity(Type t)
+            => SegmentedTypes.identify(t);
 
         internal static Option<TypeIdentity> NatId(Type arg)
             => from v in arg.NatValue() 

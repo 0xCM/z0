@@ -196,5 +196,13 @@ namespace Z0
         public static Span<T> Convert<T>(this Span<double> src)
             where T : unmanaged
                  => Cast.to<double,T>(src);
+
+        /// <summary>
+        /// Convers a source value, which is hopefully a supported kind, to a target kind
+        /// </summary>
+        /// <param name="k">The primal kind</param>
+        [MethodImpl(Inline)]
+        public static object Convert(this NumericKind dst, object src)
+            => Cast.ocast(src,dst);
     }
 }
