@@ -14,15 +14,6 @@ namespace Z0
     partial class MemoryOps
     {
         /// <summary>
-        /// Presents a mutable span as a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> ReadOnly<T>(this Span<T> src)
-            => src;
-
-        /// <summary>
         /// Determines whether any elements of a span satisfy a supplied predicate
         /// </summary>
         /// <param name="src">The source span</param>

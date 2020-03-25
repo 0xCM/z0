@@ -25,7 +25,7 @@ bash $AddCmd
 export ProjectId=monadic
 bash $AddCmd
 
-export ProjectId=reflections
+export ProjectId=reflective
 bash $AddCmd
 
 export ProjectId=symbolic

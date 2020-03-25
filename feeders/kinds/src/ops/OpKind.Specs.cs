@@ -10,7 +10,7 @@ namespace Z0
     public interface IOpKind<E> : IOpKind, ILiteralKind<E>
         where E : unmanaged, Enum
     {
-        E ITypeLevelEnum<E>.Class 
+        E ITypedLiteral<E>.Class 
             => default; //Enums.convert<E>(KindId.ToUInt64());
     }
 

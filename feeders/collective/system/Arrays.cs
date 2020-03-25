@@ -52,6 +52,9 @@ namespace Z0
         public static T[] from<T>(IEnumerable<T> src)
             => src.ToArray();
 
+        public static T[] from<T>(params T[] src)
+            => src.ToArray();
+
         /// <summary>
         /// Fills an array, in-place, with a specified value
         /// </summary>

@@ -35,8 +35,6 @@ namespace Z0
             get => ref data[3];
         }
 
-        public static implicit operator Point<N,T>(MixedPoint<T,T,T> src)
-            => new Point<N,T>(src.x0, src.x1, src.x2);
     
         [MethodImpl(Inline)]
         public static implicit operator Point<N,T>(T x)

@@ -9,7 +9,7 @@
     <Kinds>$(Feeders)kinds/z0.kinds.csproj</Kinds>
     <Monadic>$(Feeders)monadic/z0.monadic.csproj</Monadic>
     <Memories>$(Feeders)memories/z0.memories.csproj</Memories>
-    <Reflections>$(Feeders)reflections/z0.reflections.csproj</Reflections>
+    <Reflective>$(Feeders)reflective/z0.reflective.csproj</Reflective>
     <Symbolic>$(Feeders)symbolic/z0.symbolic.csproj</Symbolic>
     <SFuncs>$(Feeders)sfuncs/z0.sfuncs.csproj</SFuncs>
     <Texting>$(Feeders)texting/z0.texting.csproj</Texting>

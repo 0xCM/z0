@@ -21,11 +21,12 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
+    using static Components;
+
     public static partial class ComponentOps
     {
 
     }
-
 
     public static class Components
     {

@@ -14,7 +14,7 @@
     <ProjectReference Include="$(Kinds)" />  
     <ProjectReference Include="$(Memories)" />  
     <ProjectReference Include="$(Monadic)" />  
-    <ProjectReference Include="$(Reflections)" />  
+    <ProjectReference Include="$(Reflective)" />  
     <ProjectReference Include="$(Symbolic)" />  
     <ProjectReference Include="$(SFuncs)" />  
     <ProjectReference Include="$(Texting)" />  

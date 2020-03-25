@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
-    <ProjectReference Include="$(Reflections)" />
+    <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Monadic)" />
   </ItemGroup>
 

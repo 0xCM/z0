@@ -12,17 +12,6 @@ namespace Z0
 
     partial class TextingOps
     {
-        /// <summary>
-        /// Joins the strings provided by the enumerable with an optional separator
-        /// </summary>
-        /// <param name="src">The source strings</param>
-        /// <param name="sep">The separator, if any</param>
-        public static string Concat(this IEnumerable<string> src, string sep = null)
-            => string.Join(sep ?? string.Empty, src);
-
-        public static string Concat(this IEnumerable<string> src, char sep)
-            => string.Join(sep, src);
-
         public static string Concat(this ReadOnlySpan<string> src, string delimiter = null)
         {
             var dst = builder();

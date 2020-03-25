@@ -18,6 +18,8 @@ namespace Z0
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
+        internal const string Kernel32 = "kernel32.dll";
+
         /// <summary>
         /// Computes the byte-size of a type
         /// </summary>

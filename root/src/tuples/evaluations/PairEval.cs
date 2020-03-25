@@ -6,18 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static Root;
+    using static Custom;
 
     public static class PairEval
     {
-
         public static PairEval<T> Define<T>(Pair<string> labels, in Pairs<T> dst)
             where T : unmanaged
                 => new PairEval<T>(labels, dst);
-
     }
 
     /// <summary>
