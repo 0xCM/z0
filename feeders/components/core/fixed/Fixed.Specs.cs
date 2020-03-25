@@ -9,6 +9,8 @@ namespace Z0
 
     using static Components;
 
+    
+
     /// <summary>
     /// Characterizes a type that occupies a fixed amount of space at runtime
     /// </summary>

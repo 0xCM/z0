@@ -26,5 +26,4 @@ namespace Z0
     {
         OpKindId KindId {get;}
     }
-
 }

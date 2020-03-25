@@ -22,25 +22,25 @@ namespace Z0
         /// Recognized unsigned integral types
         /// </summary>
         public static IEnumerable<Type> Unsigned
-            => items(typeof(byte), typeof(ushort),  typeof(uint), typeof(ulong));
+            => seq(typeof(byte), typeof(ushort),  typeof(uint), typeof(ulong));
 
         /// <summary>
         /// Recognized unsigned integral kinds
         /// </summary>
         public static IEnumerable<NumericKind> UnsignedKinds
-            => items(NK.U8, NK.U16, NK.U32, NK.U64);
+            => seq(NK.U8, NK.U16, NK.U32, NK.U64);
 
         /// <summary>
         /// Recognized signed integral kinds
         /// </summary>
         public static IEnumerable<Type> Signed
-            => items(typeof(sbyte), typeof(short), typeof(int), typeof(long));
+            => seq(typeof(sbyte), typeof(short), typeof(int), typeof(long));
         
         /// <summary>
         /// Recognized signed integral kinds
         /// </summary>
         public static IEnumerable<NumericKind> SignedKinds
-            => items(NK.I8, NK.I16, NK.I32, NK.I64);
+            => seq(NK.I8, NK.I16, NK.I32, NK.I64);
 
         /// <summary>
         /// Recognized integral types
@@ -58,13 +58,13 @@ namespace Z0
         /// recognized floating-point types
         /// </summary>
         public static IEnumerable<Type> Floating
-            => items(typeof(float), typeof(double));
+            => seq(typeof(float), typeof(double));
 
         /// <summary>
         /// Recognized floating-point kinds
         /// </summary>
         public static IEnumerable<NumericKind> FloatKinds
-            => items(NK.F32, NK.F64);
+            => seq(NK.F32, NK.F64);
 
         /// <summary>
         /// Recognized numeric types

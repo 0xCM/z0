@@ -3,8 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+
+using Z0;
 
 /// <summary>
 /// Defines identifiers for known system assemblies
@@ -135,7 +135,6 @@ public enum PartId : ulong
 
     DynamicTest = Dynamic | Test,
     
-
     VData = 331,
 
     DVec = 332,
@@ -206,7 +205,7 @@ public enum PartId : ulong
 
     Reflections = 1020,
 
-    Texting = 1025,
+    Textual = 1025,
 
     Canonical = 1030,
 
@@ -243,11 +242,34 @@ public enum UserTypeId : uint
     
 }
 
-// public static class UserTypeId
-// {
-//     public const ulong BitId = 256;
 
-//     public const ulong DurationId = BitId + 1;
+public static class PartIdentity
+{
+    public sealed class Canonical : PartId<Canonical> { public override PartId Id => PartId.Canonical; }
 
-//     public const ulong BoxedNumberId = DurationId + 1;
-// }
+    public sealed class Collective : PartId<Collective> { public override PartId Id => PartId.Collective;}
+
+    public sealed class Components : PartId<Components> { public override PartId Id => PartId.Components;}
+
+    public sealed class Custom : PartId<Custom> { public override PartId Id => PartId.Custom;}
+
+    public sealed class Identify : PartId<Identify> { public override PartId Id => PartId.Identify; }
+
+    public sealed class Kinds : PartId<Kinds> { public override PartId Id => PartId.Kinds;}
+
+    public sealed class Memories : PartId<Memories> { public override PartId Id => PartId.Memories;}
+
+    public sealed class Monadic : PartId<Monadic> { public override PartId Id => PartId.Monadic; }
+
+    public sealed class Nats : PartId<Nats> { public override PartId Id => PartId.Nats;}
+
+    public sealed class Reflective : PartId<Reflective> { public override PartId Id => PartId.Reflections; }
+
+    public sealed class SFuncs : PartId<SFuncs> { public override PartId Id => PartId.SFuncs;}
+
+    public sealed class Symbolic : PartId<Symbolic> { public override PartId Id => PartId.Symbolic;}
+
+    public sealed class Textual : PartId<Textual> { public override PartId Id => PartId.Textual;}
+
+    public sealed class Root : PartId<Root> { public override PartId Id => PartId.Root;}
+}

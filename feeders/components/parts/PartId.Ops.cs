@@ -13,6 +13,12 @@ namespace Z0
     public static class PartIdOps
     {
         [MethodImpl(Inline)]
+        public static PartArrow<S,T> Needs<S,T>(this S source, T target = default)        
+            where S : struct, IPartId<S>
+            where T : struct, IPartId<T>
+                => new PartArrow<S,T>(source,target);
+
+        [MethodImpl(Inline)]
         public static string Format(this PartId id)
         {
             const string TestSuffix = ".test";

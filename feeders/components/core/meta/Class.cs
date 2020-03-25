@@ -12,7 +12,7 @@ namespace Z0
         
     }
 
-    public interface IClassifier
+    public interface IClassifier : IMetaclass
     {
         
     }
@@ -20,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Metaclassification
     /// </summary>
-    public interface IClass : IMetaclass, IClassifier
+    public interface IClass :  IClassifier
     {
 
     }

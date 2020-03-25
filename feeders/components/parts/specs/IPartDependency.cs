@@ -5,14 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Characterizes metaclass stratifiers
+    /// Characterizes a directed dependency d:S -> T from a client s:S to a suppler t:T
     /// </summary>
-    public interface IKind : IClassifier
+    /// <typeparam name="S">The source client type</typeparam>
+    /// <typeparam name="T">The target supplier type</typeparam>
+    public interface IDependency<S,T>
     {
-        
+        S Source {get;}
+
+        T Target {get;}
     }
+
 
 }

@@ -44,8 +44,9 @@ namespace Z0
         internal static Type EffectiveType(this Type src)
             => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
 
+
         [MethodImpl(Inline)]
-        internal static IEnumerable<T> items<T>(params T[] src)
+        public static IEnumerable<T> seq<T>(params T[] src)
             => src;
     }
 }
