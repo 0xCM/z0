@@ -15,6 +15,7 @@
     <ProjectReference Include="$(Components)" />  
     <ProjectReference Include="$(Custom)" />  
     <ProjectReference Include="$(Identify)" />  
+    <ProjectReference Include="$(Kinds)" />  
     <ProjectReference Include="$(Memories)" />  
     <ProjectReference Include="$(Monadic)" />  
     <ProjectReference Include="$(Reflections)" />  

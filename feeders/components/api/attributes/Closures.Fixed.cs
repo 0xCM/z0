@@ -11,12 +11,12 @@ namespace Z0
     /// </summary>
     public class FixedClosuresAttribute : TypeClosuresAttribute
     {
-        public FixedClosuresAttribute(FixedTypeKind fk)
-            : base((ulong)fk)
+        public FixedClosuresAttribute(DataWidth width)
+            : base((ulong)width)
         {
-            this.FixedKind = fk;
+            this.Width = width;
         }
 
-        public FixedTypeKind FixedKind {get;}
+        public DataWidth Width {get;}
     }
 }

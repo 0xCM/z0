@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="k">The source kind</param>
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline), Op]
-        public static bool contains(NumericKind k, NumericKindId match)        
+        public static bool contains(NumericKind k, NumericTypeId match)        
             => ((uint)k & (uint)match) != 0;
 
         /// <summary>

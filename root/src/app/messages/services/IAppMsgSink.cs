@@ -24,9 +24,4 @@ namespace Z0
             Displayed(msg);            
         }
     }
-
-    public interface IAppMsgSinkProvider
-    {
-        IAppMsgSink Sink {get;}
-    }
 }

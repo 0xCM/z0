@@ -7,7 +7,6 @@
 namespace Z0.Asm.Check
 { 
     using R = Z0.Parts;
-    using static Root;
 
     class App : ConsoleApp<App,IAsmContext>
     {
@@ -49,12 +48,16 @@ namespace Z0.Asm.Check
             using var host = ValidationHost.Create(Context);
             host.Run();
         }
-        protected override void Execute(params string[] args)
+
+        protected override void OnExecute(params string[] args)
         {
             ExecuteValidationWorkflow();
         }
 
-        public static void Main(params string[] args) { Run(args); }
+        public static void Main(params string[] args)
+        {
+            Launch(args);
+        }
 
     } 
 }

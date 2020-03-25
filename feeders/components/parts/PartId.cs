@@ -218,6 +218,8 @@ public enum PartId : ulong
 
     Identify = 1050,
 
+    Kinds = 1055,
+
     Svc = ushort.MaxValue + 1,
 
     Test = Svc << 1,

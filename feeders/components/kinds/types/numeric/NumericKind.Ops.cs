@@ -67,11 +67,11 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal classifier</param>
         [MethodImpl(Inline)]
-        public static NumericKindId GetNumericId(this NumericKind k)
+        public static NumericTypeId GetNumericId(this NumericKind k)
         {
             var noclass = ((uint)k << 3) >> 3;
             var nowidth = (noclass >> 16) << 16;
-            return (NumericKindId)nowidth;            
+            return (NumericTypeId)nowidth;            
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="k">The source kind</param>
         /// <param name="match">The kind to match</param>
         [MethodImpl(Inline)]
-        public static bool Is(this NumericKind k, NumericKindId match)        
+        public static bool Is(this NumericKind k, NumericTypeId match)        
             => NumericTypes.contains(k, match);
 
         /// <summary>

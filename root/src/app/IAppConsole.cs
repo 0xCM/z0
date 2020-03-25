@@ -5,15 +5,11 @@
 namespace Z0
 {
     using System;
-
-
-    public class t_unit : UnitTest<t_unit>
-    {    
-
-        public void test_1()
-        {
-            
-        }
+    using System.Collections.Generic;
+    
+    public interface IConsoleApp<A> : IShell, IApiComposition<A>, IAppContext
+        where A : IConsoleApp<A>, new()
+    {
+        
     }
-
 }

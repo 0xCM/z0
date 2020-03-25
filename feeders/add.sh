@@ -16,6 +16,9 @@ bash $AddCmd
 export ProjectId=identify
 bash $AddCmd
 
+export ProjectId=kinds
+bash $AddCmd
+
 export ProjectId=memories
 bash $AddCmd
 

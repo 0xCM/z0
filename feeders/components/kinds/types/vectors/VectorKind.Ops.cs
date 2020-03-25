@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, sbyte t)
-            => ((uint)k & (uint)NumericKindId.I8) != 0;
+            => ((uint)k & (uint)NumericTypeId.I8) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 8-bit cell type
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, byte t)
-            => ((uint)k & (uint)NumericKindId.U8) != 0;
+            => ((uint)k & (uint)NumericTypeId.U8) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 16-bit cell type
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, short t)
-            => ((uint)k & (uint)NumericKindId.I16) != 0;
+            => ((uint)k & (uint)NumericTypeId.I16) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 16-bit cell type
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, ushort t)
-            => ((uint)k & (uint)NumericKindId.U16) != 0;
+            => ((uint)k & (uint)NumericTypeId.U16) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 32-bit cell type
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, int t)
-             => ((uint)k & (uint)NumericKindId.I32) != 0;
+             => ((uint)k & (uint)NumericTypeId.I32) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 32-bit cell type
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, uint t)
-            => ((uint)k & (uint)NumericKindId.U32) != 0;
+            => ((uint)k & (uint)NumericTypeId.U32) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 64-bit cell type
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, long t)
-            => ((uint)k & (uint)NumericKindId.I64) != 0;
+            => ((uint)k & (uint)NumericTypeId.I64) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 64-bit cell type
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, ulong t)
-            => ((uint)k & (uint)NumericKindId.U64) != 0;
+            => ((uint)k & (uint)NumericTypeId.U64) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a 32-bit floating-point cell type
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, float t)
-             => ((uint)k & (uint)NumericKindId.F32) != 0;
+             => ((uint)k & (uint)NumericTypeId.F32) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a 64-bit floating-point cell type
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline)]
         public static bool HasCellType(this VectorKind k, double t)
-             => ((uint)k & (uint)NumericKindId.F64) != 0;
+             => ((uint)k & (uint)NumericTypeId.F64) != 0;
 
         /// <summary>
         /// Returns the clr cell type of a vector of specified kind

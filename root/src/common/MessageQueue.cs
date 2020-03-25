@@ -40,7 +40,6 @@ namespace Z0
             => Notify(src);        
     }
 
-
     public interface IMessageQueue<M> : IMessageSink<M>, ICallbackSouce<M>
         where M : IAppMsg
     {

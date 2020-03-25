@@ -6,6 +6,7 @@
     <Collective>$(Feeders)collective/z0.collective.csproj</Collective>
     <Custom>$(Feeders)custom/z0.custom.csproj</Custom>
     <Identify>$(Feeders)identify/z0.identify.csproj</Identify>
+    <Kinds>$(Feeders)kinds/z0.kinds.csproj</Kinds>
     <Monadic>$(Feeders)monadic/z0.monadic.csproj</Monadic>
     <Memories>$(Feeders)memories/z0.memories.csproj</Memories>
     <Reflections>$(Feeders)reflections/z0.reflections.csproj</Reflections>

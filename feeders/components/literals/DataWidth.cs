@@ -5,87 +5,73 @@
 namespace Z0
 {
     using System;
-    using DW = DataWidth;
+    using System.Reflection;
 
     /// <summary>
-    /// Defines fixed bit-width classifiers/identifiers
+    /// Root source for width-related kinds throughout the system
     /// </summary>
-    [Flags]
-    public enum FixedWidth : ushort
+    public enum DataWidth : ushort
     {
         /// <summary>
-        /// Vaccuous
+        /// Nothingness
         /// </summary>
         None = 0,
 
         /// <summary>
         /// Indicates a bit-width of 1
         /// </summary>
-        W1 = DW.W1,
+        W1 = 1,
 
         /// <summary>
         /// Indicates a bit-width of 2
         /// </summary>
-        W2 = DW.W2,
+        W2 = 2,
 
         /// <summary>
         /// Indicates a bit-width of 4
         /// </summary>
-        W4 = DW.W4,
+        W4 = 4,
 
         /// <summary>
         /// Indicates a bit-width of 8
         /// </summary>
-        W8 = DW.W8,
+        W8 = 8,
 
         /// <summary>
         /// Indicates a bit-width of 16
         /// </summary>
-        W16 = DW.W16,
+        W16 = 16,
 
         /// <summary>
         /// Indicates a bit-width of 32
         /// </summary>
-        W32 = DW.W32,
+        W32 = 32,
 
         /// <summary>
         /// Indicates a bit-width of 64
         /// </summary>
-        W64 = DW.W64,
+        W64 = 64,
 
         /// <summary>
         /// Indicates a bit-width of 128
         /// </summary>
-        W128 = DW.W128,
+        W128 = 128,
 
         /// <summary>
         /// Indicates a bit-width of 256
         /// </summary>
-        W256 = DW.W256,
+        W256 = 256,
 
         /// <summary>
         /// Indicates a bit-width of 512
         /// </summary>
-        W512 = DW.W512,
+        W512 = 512,
 
         /// <summary>
         /// Indicates a bit-width of 1024
         /// </summary>
-        W1024 = DW.W1024,
+        W1024 = 1024,
 
-        /// <summary>
-        /// Classifies widths that correspond numeric primitives
-        /// </summary>
-        NumericWidths =  W1 | W8 | W16 | W32 | W64,
-
-        /// <summary>
-        /// Classifies widths that correspond to vector primitives
-        /// </summary>
-        VectorWidths = W128 | W256 | W512,
-
-        /// <summary>
-        /// Classifies widths that correspond to numeric and vector primitives
-        /// </summary>
-        TypeWidths = NumericWidths | VectorWidths
     }
+
 }

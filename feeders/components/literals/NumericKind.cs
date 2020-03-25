@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using DW = DataWidth;
+    using ID = NumericTypeId;
 
     /// <summary>
     /// Clasifies system-defined numeric primitive types
@@ -32,52 +34,52 @@ namespace Z0
         /// <summary>
         /// Identifies an unsigned 8-bit integral type
         /// </summary>
-        U8 = NumericKindId.U8 | FixedWidth.W8 | Unsigned,
+        U8 = ID.U8 | DW.W8 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 8-bit integral type
         /// </summary>
-        I8 = NumericKindId.I8 | FixedWidth.W8 | Signed,
+        I8 = ID.I8 | DW.W8 | Signed,
 
         /// <summary>
         /// Identifies an usigned 16-bit integral type
         /// </summary>
-        U16 = NumericKindId.U16 | FixedWidth.W16 | Unsigned,
+        U16 = ID.U16 | DW.W16 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 16-bit integral type
         /// </summary>
-        I16 = NumericKindId.I16 | FixedWidth.W16 | Signed,
+        I16 = ID.I16 | DW.W16 | Signed,
 
         /// <summary>
         /// Identifies an usigned 32-bit integral type
         /// </summary>
-        U32 = NumericKindId.U32 | FixedWidth.W32 | Unsigned, 
+        U32 = ID.U32 | DW.W32 | Unsigned, 
 
         /// <summary>
         /// Identifies a signed 32-bit integral type
         /// </summary>
-        I32 = NumericKindId.I32 | FixedWidth.W32 | Signed,
+        I32 = ID.I32 | DW.W32 | Signed,
 
         /// <summary>
         /// Identifies an usigned 64-bit integral type
         /// </summary>
-        U64 = NumericKindId.U64 | FixedWidth.W64 | Unsigned,
+        U64 = ID.U64 | DW.W64 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 64-bit integral type
         /// </summary>
-        I64 = NumericKindId.I64 | FixedWidth.W64 | Signed,
+        I64 = ID.I64 | DW.W64 | Signed,
 
         /// <summary>
         /// Identifies a 32-bit floating-point type
         /// </summary>
-        F32 = NumericKindId.F32 | FixedWidth.W32 | Float,
+        F32 = ID.F32 | DW.W32 | Float,
         
         /// <summary>
         /// Identifies a 64-bit floating-point type
         /// </summary>
-        F64 = NumericKindId.F64 | FixedWidth.W64 | Float, 
+        F64 = ID.F64 | DW.W64 | Float, 
         
         /// <summary>
         /// Defines a classification that includes all signed primal integral types and no others
@@ -123,4 +125,32 @@ namespace Z0
         /// </summary>
         Width64 = U64 | I64 | F64
     }
+
+    /// <summary>
+    /// Defines numeric identifiers for primal numeric types
+    /// </summary>
+    public enum NumericTypeId : uint
+    {
+        None = 0,
+
+        U8 = (1u << 16),
+
+        I8 = (2u << 16),
+
+        U16 = 4u << 16,
+
+        I16 = 8u << 16,
+
+        U32 = 16u << 16,
+
+        I32 = 32u << 16,
+
+        U64 = 64u << 16,
+
+        I64 = 128u << 16,
+        
+        F32 = 512u << 16,
+
+        F64 = 1024u << 16,
+    }        
 }
