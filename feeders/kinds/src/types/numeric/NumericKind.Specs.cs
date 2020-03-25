@@ -16,10 +16,10 @@ namespace Z0
         
     }
 
-    public interface INumericKind<T> : INumericKind, IFixedWidth
+    public interface INumericKind<T> : INumericKind
         where T : unmanaged
     {
-        FixedWidth IFixedWidth.FixedWidth => (FixedWidth)bitsize<T>();            
+        TypeWidth Width => (TypeWidth)bitsize<T>();            
 
         NumericKind NumericKind { [MethodImpl(Inline)] get=> NumericTypes.kind<T>();}
     }

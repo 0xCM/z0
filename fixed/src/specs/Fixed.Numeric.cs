@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public interface IFixedNumeric<T> : IFixed<T>, IFixedWidth
+    public interface IFixedNumeric<T> : IFixed<T>
         where T : unmanaged        
     {
         T Data {get;set;}
@@ -18,12 +18,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => typeof(T).NumericKind();
-        }
-
-        FixedWidth IFixedWidth.FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => (FixedWidth)bitsize<T>();
         }
 
         int IFixed.BitWidth

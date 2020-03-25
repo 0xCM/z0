@@ -8,10 +8,12 @@
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Canonical)" />
+    <ProjectReference Include="$(Custom)" />
     <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Reflections)" />
     <ProjectReference Include="$(Texting)" />
+    <ProjectReference Include="$(Kinds)" />
   </ItemGroup>
 
 </Project>

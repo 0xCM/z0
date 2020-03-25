@@ -5,6 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Components;
+    
     using DW = DataWidth;
     using ID = NumericTypeId;
     using TC = System.TypeCode;
@@ -183,11 +187,62 @@ namespace Z0
                 };
             return k;
         }
+
+        /// <summary>
+        /// Determines the numeric kind identified by a type code, if any
+        /// </summary>
+        /// <param name="tc">The type code to evaluate</param>
+        [Op]
+        public static NumericKind kind(TypeCode tc)
+        {
+            switch(tc)
+            {
+                case TC.SByte:
+                    return NK.I8;
+
+                case TC.Byte:
+                    return NK.U8;
+
+                case TC.Int16:
+                    return NK.I16;
+
+                case TC.UInt16:
+                    return NK.U16;
+                
+                case TC.Int32:
+                    return NK.I32;
+
+                case TC.UInt32:
+                    return NK.U32;
+
+                case TC.Int64:
+                    return NK.I64;
+
+                case TC.UInt64:
+                    return NK.U64;
+
+                case TC.Single:
+                    return NK.F32;
+
+                case TC.Double:
+                    return NK.F64;
+            }
+            
+            return NK.None;
+        }
     }    
 
     public static class SystemNumericOps
     {
         public static NumericKind NumericKind(this Type src)
             => SystemNumeric.kind(src);
+
+        /// <summary>
+        /// Determines the numeric kind identified by a type code, if any
+        /// </summary>
+        /// <param name="tc">The type code to evaluate</param>
+        [MethodImpl(Inline)]
+        public static NumericKind NumericKind(this TypeCode tc)
+            => SystemNumeric.kind(tc);
     }
 }

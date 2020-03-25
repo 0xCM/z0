@@ -27,7 +27,6 @@ namespace Z0
         where T : unmanaged
         where W : unmanaged, ITypeWidth
     {            
-        public static FixedWidth Width => default(W).FixedWidth;
 
         [MethodImpl(Inline)]
         public static implicit operator BlockedTypeKind(BlockedTypeKind<W,T> src)
@@ -162,27 +161,30 @@ namespace Z0
             public BlockedKind Class => b64x8u;
         }
         
-        public readonly struct Block64x8i : IBlockedType<W64,sbyte> { public const BlockedKind Kind = b64x8i; public BlockedKind Class => Kind;}
+        public readonly struct Block64x8i : IBlockedType<W64,sbyte> 
+        { 
+            public BlockedKind Class => b64x8i;
+        }
         
-        public readonly struct Block64x16u : IBlockedType<W64,ushort> { public const BlockedKind Kind = b64x16u; public BlockedKind Class => Kind;}
+        public readonly struct Block64x16u : IBlockedType<W64,ushort> { public BlockedKind Class => b64x16u;}
 
-        public readonly struct Block64x16i : IBlockedType<W64,short> { public const BlockedKind Kind = b64x16i; public BlockedKind Class => Kind;}
+        public readonly struct Block64x16i : IBlockedType<W64,short> { public BlockedKind Class => b64x16i;}
 
-        public readonly struct Block64x32u : IBlockedType<W64,uint> { public const BlockedKind Kind = b64x32u; public BlockedKind Class => Kind;}
+        public readonly struct Block64x32u : IBlockedType<W64,uint> { public BlockedKind Class => b64x32u;}
 
-        public readonly struct Block64x32i : IBlockedType<W64,int> { public const BlockedKind Kind = b64x32i; public BlockedKind Class => Kind;}
+        public readonly struct Block64x32i : IBlockedType<W64,int> { public BlockedKind Class => b64x32i;}
 
-        public readonly struct Block64x64u : IBlockedType<W64,ulong> { public const BlockedKind Kind = b64x64u; public BlockedKind Class => Kind;}
+        public readonly struct Block64x64u : IBlockedType<W64,ulong> { public BlockedKind Class => b64x64u;}
 
-        public readonly struct Block64x64i : IBlockedType<W64,long> { public const BlockedKind Kind = b128x64i; public BlockedKind Class => Kind;}
+        public readonly struct Block64x64i : IBlockedType<W64,long> { public BlockedKind Class => b128x64i;}
 
-        public readonly struct Block128x8u : IBlockedType { public const BlockedKind Kind = b128x8u; public BlockedKind Class => Kind;}
+        public readonly struct Block128x8u : IBlockedType { public const BlockedKind Kind = b128x8u; public BlockedKind Class => b128x8u;}
         
-        public readonly struct Block128x8i : IBlockedType { public const BlockedKind Kind = b128x8i; public BlockedKind Class => Kind;}
+        public readonly struct Block128x8i : IBlockedType { public const BlockedKind Kind = b128x8i; public BlockedKind Class => b128x8i;}
         
-        public readonly struct Block128x16u : IBlockedType { public const BlockedKind Kind = b128x16u; public BlockedKind Class => Kind;}
+        public readonly struct Block128x16u : IBlockedType { public const BlockedKind Kind = b128x16u; public BlockedKind Class => b128x16u;}
 
-        public readonly struct Block128x16i : IBlockedType { public const BlockedKind Kind = b128x16i; public BlockedKind Class => Kind;}
+        public readonly struct Block128x16i : IBlockedType { public const BlockedKind Kind = b128x16i; public BlockedKind Class => b128x16i;}
 
         public readonly struct Block128x32u : IBlockedType { public const BlockedKind Kind = b128x32u; public BlockedKind Class => Kind;}
 
@@ -257,8 +259,6 @@ namespace Z0
             
             public BlockedKind Class => Kind;
         }        
- 
-        
+       
     }
-
 }

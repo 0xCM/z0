@@ -25,7 +25,6 @@ namespace Z0
 
     }
 
-
     [SuppressUnmanagedCodeSecurity]
     public interface ISAction<A> : IStructuralOperation
     {
@@ -41,7 +40,7 @@ namespace Z0
     public interface ISWFunc<W> : IStructuralOperation
         where W : unmanaged, ITypeWidth
     {
-        TypeWidth WidthKind => default(W).Class;
+        TypeWidth WidthKind => default(W).TypeWidth;
 
     }
 
@@ -110,6 +109,4 @@ namespace Z0
 
         Func<A,B,C,D> Operation => Invoke;
     }
-
-
 }

@@ -1111,9 +1111,8 @@ namespace Z0.Asm.Validation
             }
         }
 
-
          void CheckUnaryOp<F>(in BufferSeq dst, in FixedAsm<F> a, in FixedAsm<F> b)
-            where F : unmanaged, IFixedWidth
+            where F : unmanaged, IFixed
         {                        
 
             var f = dst[Left].EmitFixedUnaryOp<F>(a.Code.ApiCode);

@@ -12,6 +12,18 @@ namespace Z0
 
     using static Root;
 
+    public interface IApiCollector<S> : IAppService
+    {
+        IEnumerable<DirectOpGroup> CollectDirect(S source);
+
+        IEnumerable<GenericOp> CollectGeneric(S src);
+    }
+
+    public interface IApiCollector : IApiCollector<ApiHost>, IApiCollector<Assembly>
+    {
+        
+    } 
+    
     readonly struct ApiOpCollector : IApiCollector
     {
         public IAppContext Context {get;}

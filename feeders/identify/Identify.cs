@@ -20,7 +20,7 @@ namespace Z0
 
     public static class Identify
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 
 }

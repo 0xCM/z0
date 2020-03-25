@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The type member uri
         /// </summary>
-        public OpUri Uri => OpUri.type(this);
+        public OpUri Uri => ApiHost.MemberUri(this);
 
         [MethodImpl(Inline)]
         public static ApiStatelessMember Define(ApiHostUri host, OpIdentity id, MethodInfo src)

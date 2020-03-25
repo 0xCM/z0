@@ -186,7 +186,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static int vcount<W>(W w = default)
             where W : struct, ITypeWidth
-                => default(W).BitWidth/bitsize<T>();
+                => ((int)default(W).TypeWidth)/bitsize<T>();
 
         string CaseName<W>(ISFuncApi f)
             where W : struct, ITypeWidth

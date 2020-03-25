@@ -13,14 +13,6 @@ namespace Z0
     public static class NumericTypeOps
     {
         /// <summary>
-        /// Determines the numeric kind identified by a type code, if any
-        /// </summary>
-        /// <param name="tc">The type code to evaluate</param>
-        [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this TypeCode tc)
-            => NumericTypes.kind(tc);
-
-        /// <summary>
         /// Returns true if the source type represents a primal numeric type
         /// </summary>
         /// <param name="src">The source type</param>

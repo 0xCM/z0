@@ -27,7 +27,7 @@ namespace Z0
 
         void ISFMatch<T,R>.MatchSpan<F, G>(F baseline, G subject)
         {
-            var casename = TestIdentity.testcase(Context.HostType, subject);
+            var casename = Validity.testcase(Context.HostType, subject);
             var succeeded = true;
             var count = RepCount;
             var clock = counter();

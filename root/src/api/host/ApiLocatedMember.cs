@@ -27,7 +27,7 @@ namespace Z0
 
         public MemoryAddress Address {get;}
 
-        public OpUri Uri => OpUri.located(this);
+        public OpUri Uri => ApiHost.MemberUri(this);
 
         public bool IsEmpty
         {

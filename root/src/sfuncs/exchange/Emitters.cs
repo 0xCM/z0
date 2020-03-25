@@ -61,7 +61,5 @@ namespace Z0
     public interface ISpanEmitter<T> : ISFSpanApi
     {
         Span<T> Invoke();
-
-        FunctionClass ISFuncApi.Class => FunctionClass.Emitter;
     }
 }

@@ -29,7 +29,7 @@ namespace Z0
 
         void ISFMatch<T0,T1,T2,R>.Match<F, G>(F baseline, G subject)
         {
-            var casename = TestIdentity.testcase(Context.HostType, subject);
+            var casename = Validity.testcase(Context.HostType, subject);
             var succeeded = true;       
             var clock = counter();
 

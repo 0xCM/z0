@@ -18,10 +18,7 @@ namespace Z0
         /// </summary>
         OpIdentity Id {get;} 
 
-        /// <summary>
-        /// Specifies the function kind classification
-        /// </summary>
-        FunctionClass Class => FunctionClass.None;       
+        //FunctionClass Class => FunctionClass.None;       
     }
 
     /// <summary>
@@ -87,5 +84,4 @@ namespace Z0
 
         Func<A,B,C,D> Operation => Invoke;
     }
-
 }

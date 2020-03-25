@@ -32,7 +32,14 @@ namespace Z0
     public static class Validity
     {
         //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        const char Sep = UriDelimiters.FS;
 
+        /// <summary>
+        /// Produces the name of the test case for the specified function
+        /// </summary>
+        /// <param name="f">The function</param>
+        public static string testcase(Type host, ISFuncApi f)
+            => $"{TypeIdentity.owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
 
         internal static class Claim
         {

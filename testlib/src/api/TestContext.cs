@@ -83,12 +83,22 @@ namespace Z0
         public virtual bool Enabled 
             => true;
 
+        //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        const char Sep = UriDelimiters.FS;
+
+        /// <summary>
+        /// Produces the name of the test case for the specified function
+        /// </summary>
+        /// <param name="f">The function</param>
+        public static string testcase(Type host, ISFuncApi f)
+            => $"{TypeIdentity.owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
+
         /// <summary>
         /// Produces the name of the test case for the specified function
         /// </summary>
         /// <param name="f">The function</param>
         public string CaseName(ISFuncApi f)
-            => TestIdentity.testcase(GetType(),f);
+            => testcase(GetType(),f);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name

@@ -12,7 +12,7 @@ namespace Z0
 
     }
 
-    public interface IBlockedType<W,T> : IBlockedType, IFixedWidth<W>
+    public interface IBlockedType<W,T> : IBlockedType
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {

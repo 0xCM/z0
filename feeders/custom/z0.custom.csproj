@@ -10,6 +10,8 @@
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Monadic)" />
+    <ProjectReference Include="$(Texting)" />
+    <ProjectReference Include="$(Collective)" />
   </ItemGroup>
 
 </Project>

@@ -21,6 +21,16 @@ namespace Z0
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
     {
         /// <summary>
+        /// Puts an enum value into a (numeric) box
+        /// </summary>
+        /// <param name="e">The enumeration value</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static BoxedNumber From<E>(E e)
+            where E : unmanaged, Enum
+                => BoxedNumber.Define(System.Convert.ChangeType(e, Enums.kind<E>().TypeCode()), Enums.kind<E>().NumericKind());
+
+        /// <summary>
         /// In the box
         /// </summary>
         public readonly object Boxed;     

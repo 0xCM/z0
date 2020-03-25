@@ -18,6 +18,18 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHost : IIdentifiedTarget<ApiHost>
     {        
+        [MethodImpl(Inline)]
+        public static OpUri MemberUri(ApiLocatedMember src)        
+            => OpUri.Define(OpUriScheme.Located, src.Host, src.Method.Name, src.Id);
+
+        [MethodImpl(Inline)]
+        public static OpUri MemberUri(ApiStatelessMember src)        
+            => OpUri.Define(OpUriScheme.Type, src.Host, src.Method.Name, src.Id);
+
+        [MethodImpl(Inline)]
+        public static OpUri MemberUri(ApiServiceMember src)        
+            => OpUri.Define(OpUriScheme.Svc, src.Host, src.Method.Name, src.Id);
+
         public string HostName {get;}
 
         public string Identifier {get;}            
@@ -58,6 +70,10 @@ namespace Z0
         {
             return new ApiHost(owner, src);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiHostUri(ApiHost src)
+            => src.Path;
 
         [MethodImpl(Inline)]
         public static bool operator==(ApiHost a, ApiHost b)

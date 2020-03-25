@@ -26,34 +26,6 @@ namespace Z0
         }
     }
 
-    public interface IFixedWidth : IFixed
-    {
-        /// <summary>
-        /// Specifies the type width in bits
-        /// </summary>
-        FixedWidth FixedWidth {get;}
-
-        int IFixed.BitWidth
-        {
-            [MethodImpl(Inline)]
-            get => (int)FixedWidth;
-        }        
-    }
-
-    /// <summary>
-    /// Characterizes a type that is naturally-parametric with natural widths that can be specified as a fixed-width
-    /// </summary>
-    /// <typeparam name="W">The natural width type</typeparam>
-    public interface IFixedWidth<W> : IFixedWidth
-        where W : unmanaged, ITypeWidth
-    {
-        FixedWidth IFixedWidth.FixedWidth
-        {
-            [MethodImpl(Inline)]
-            get => default(W).FixedWidth;
-        }
-    }
-
     /// <summary>
     ///  Characterizes a fixed type with storage and reification types of equal size
     /// </summary>
@@ -86,5 +58,4 @@ namespace Z0
             get => (int)bitsize<F>();
         }                
     }
-
 }

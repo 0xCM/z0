@@ -13,6 +13,6 @@ namespace Z0
         Type HostType {get;}
 
         string CaseName(ISFuncApi f)
-            => TestIdentity.testcase(HostType, f);
+            => Validity.testcase(HostType, f);
     }
 }

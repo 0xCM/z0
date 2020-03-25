@@ -30,6 +30,16 @@ namespace Z0
             where T : unmanaged
                 => BoxedNumber.Define(Cast.ocast(src,dst), dst);
         
+        /// <summary>
+        /// Puts an enum value into a (numeric) box
+        /// </summary>
+        /// <param name="e">The enumeration value</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static BoxedNumber Box<E>(this E src)
+            where E : unmanaged, Enum            
+                => BoxedNumber.From(src);
+
         [MethodImpl(Inline)]        
         public static bool LiberalEquals(this BoxedNumber lhs, BoxedNumber rhs)
         {
