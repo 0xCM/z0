@@ -49,7 +49,7 @@ namespace Z0.Asm.Check
             host.Run();
         }
 
-        protected override void OnExecute(params string[] args)
+        protected override void Execute(params string[] args)
         {
             ExecuteValidationWorkflow();
         }

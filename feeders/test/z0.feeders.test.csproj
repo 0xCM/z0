@@ -5,11 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Math)" />  
-    
+  <ItemGroup>    
     <ProjectReference Include="$(Canonical)" />  
     <ProjectReference Include="$(Collective)" />  
     <ProjectReference Include="$(Components)" />  

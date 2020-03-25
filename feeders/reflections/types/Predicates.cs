@@ -218,73 +218,260 @@ namespace Z0
             => src.IsTypeOf<Char>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on a byte, including enums, nullable wrappers and references
+        /// Determines whether a type is the sytem-defined 8-bit unsigned integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsByte(this Type t)
             => t.IsTypeOf<byte>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on an sbyte, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 8-bit signed integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsSByte(this Type t)
             => t.IsTypeOf<sbyte>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on a ushort, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 8-bit unsigned integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsUInt8(this Type t)
+            => t.IsTypeOf<byte>();
+
+        /// <summary>
+        /// Determines whether a type the sytem-defined 8-bit signed integer type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsInt8(this Type t)
+            => t.IsTypeOf<sbyte>();
+
+        /// <summary>
+        /// Determines whether a type the sytem-defined 16-bit unsigned integer type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsUInt16(this Type t)
             => t.IsTypeOf<ushort>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on a short, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 16-bit signed integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsInt16(this Type t)
             => t.IsTypeOf<short>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on a uint, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 32-bit unsigned integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsUInt32(this Type t)
             => t.IsTypeOf<uint>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on an int, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 32-bit signed integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsInt32(this Type t)
             => t.IsTypeOf<int>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on a ulong, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 64-bit unsigned integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsUInt64(this Type t)
             => t.IsTypeOf<ulong>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on a long, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 64-bit signed integer type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsInt64(this Type t)
             => t.IsTypeOf<long>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on a float, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 32-bit floating-point type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsSingle(this Type t)
             => t.IsTypeOf<float>();
 
         /// <summary>
-        /// Determines whether a supplied type is predicated on a double, including enums, nullable wrappers and references
+        /// Determines whether a type the sytem-defined 32-bit floating-point type or a system-defined variation thereof
         /// </summary>
         /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsFloat32(this Type t)
+            => t.IsTypeOf<float>();
+
+        /// <summary>
+        /// Determines whether a type the sytem-defined 64-bit floating-point type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
         public static bool IsDouble(this Type t)
             => t.IsTypeOf<double>();
+
+        /// <summary>
+        /// Determines whether a type the sytem-defined 64-bit floating-point type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsFloat64(this Type t)
+            => t.IsTypeOf<double>();
+
+        /// <summary>
+        /// Determines whether a type is a system-defined and architecture-supported unsigned integral type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsSignedInt(this Type t)
+            => t.IsInt8() || t.IsInt16() || t.IsInt32() || t.IsInt64();
+
+        /// <summary>
+        /// Determines whether a type is a system-defined and architecture-supported signed integral type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsUnsignedInt(this Type t)
+            => t.IsUInt8() || t.IsUInt16() || t.IsUInt32() || t.IsUInt64();
+
+        /// <summary>
+        /// Determines whether a type is a system-defined and architecture-supported floating-point type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsFloating(this Type t)
+            => t.IsFloat32() || t.IsFloat64();
+        
+        /// <summary>
+        /// Determines whether a type is a system-defined and architecture-supported integral type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsIntegral(this Type t)
+            => t.IsSignedInt() || t.IsUnsignedInt();
+
+        /// <summary>
+        /// Determines whether a type is a system-defined and architecture-suppored numeric type or a system-defined variation thereof
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+         /// <remarks>
+        /// Variations accounted for include
+        /// A) System-defined nullable parametric closures over the type 
+        /// B) System-defined reference types that cover the type, including ref/out parameters and such
+        /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
+        /// </remarks>
+        public static bool IsSysNumeric(this Type t)
+            => t.IsFloating() || t.IsIntegral();
+    
+        public static bool IsSysNonNumeric(this Type src)
+            => src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString() || src.IsObject();
+
+        /// <summary>
+        /// Determines whether a type is system-defined primitive
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static bool IsSystemType(this Type src)
+            => src.IsSysNumeric() || src.IsSysNonNumeric();
     }
 }

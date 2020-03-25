@@ -11,8 +11,15 @@ namespace Z0
 
     public interface IContext
     {
+        internal static IContext Default => default(Context);        
+        
         PartId Owner
             => Assembly.GetEntryAssembly().Id();        
+    }
+
+    public readonly struct Context : IContext
+    {
+        public static IContext Default => default(Context);
     }
 
     /// <summary>

@@ -12,13 +12,6 @@ namespace Z0
     partial class Reflections
     {
         /// <summary>
-        /// Determines whether a type is system-defined
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static bool IsSystemType(this Type src)
-            => SystemTypes.test(src);        
-
-        /// <summary>
         /// For a system-defined type, returns the C#-specific keyword for the type if it has one; 
         /// otherwise, returns an empty string
         /// </summary>

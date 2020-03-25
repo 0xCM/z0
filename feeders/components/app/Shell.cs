@@ -22,7 +22,7 @@ namespace Z0
         {
             try   
             {
-                 OnExecute(args); 
+                 Execute(args); 
             }
             catch (Exception e) 
             { 
@@ -33,9 +33,27 @@ namespace Z0
         protected virtual void OnFatalError(Exception e)
             => Console.Error.WriteLine(e);
 
-        protected abstract void OnExecute(params string[] args);
+        protected abstract void Execute(params string[] args);
 
         protected static void Launch(params string[] args)
             => new A().Run();
     }
+
+    public abstract class Shell<A> : Shell<A, IContext>
+        where A : Shell<A>, new()
+    {
+
+        protected Shell()
+            : base(IContext.Default)
+        {
+
+        }
+
+        protected Shell(IContext context)
+            : base(context)
+        {
+
+        }
+    }
+         
 }

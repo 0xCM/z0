@@ -28,6 +28,39 @@ namespace Z0
                 => t.GetCustomAttribute<A>();
 
         /// <summary>
+        /// Gets the value of a member attribute if it exists 
+        /// </summary>
+        /// <typeparam name="A">The attribute type</typeparam>
+        /// <param name="m">The member</param>
+        public static Option<A> Tag<A>(this MethodInfo t) 
+            where A : Attribute
+                => t.GetCustomAttribute<A>();
+        /// <summary>
+        /// Gets the value of a member attribute if it exists 
+        /// </summary>
+        /// <typeparam name="A">The attribute type</typeparam>
+        /// <param name="m">The member</param>
+        public static Option<A> Tag<A>(this MemberInfo m) 
+            where A : Attribute
+                => m.GetCustomAttribute<A>();
+
+        /// <summary>
+        /// Selects source types from the stream to wich a parametrically-identified attribute is applied
+        /// </summary>
+        /// <param name="src">The source stypes</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static IEnumerable<Type> Tagged<A>(this IEnumerable<Type> src)
+            where A : Attribute
+                => src.Where(t => System.Attribute.IsDefined(t, typeof(A)));
+
+        /// <summary>
+        /// Returns the source method's kind identifier if it exists
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static OpKindId? KindId(this MethodInfo m)
+            => m.Tag<OpKindAttribute>().MapValueOrNull(a => a.KindId);
+
+        /// <summary>
         /// Attempts to retrieve the value of an instance or static field
         /// </summary>
         /// <param name="field">The field</param>
@@ -43,15 +76,6 @@ namespace Z0
         /// <param name="declared">Whether the field is required to be declared by the source type</param>
         public static Option<FieldInfo> Field(this Type src, string name)        
             => src.GetFields(BF_All).FirstOrDefault(f => f.Name == name);
-
-        /// <summary>
-        /// Gets the value of a member attribute if it exists 
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="m">The member</param>
-        public static Option<A> Tag<A>(this MemberInfo m) 
-            where A : Attribute
-                => m.GetCustomAttribute<A>();
 
         public static Option<PropertyInfo> Property(this Type src, string name)
             => src.GetProperties(BF_Declared).Where(p => p.Name == name).FirstOrDefault();
@@ -106,14 +130,6 @@ namespace Z0
                 return default;            
         }        
 
-        /// <summary>
-        /// Selects source types from the stream to wich a parametrically-identified attribute is applied
-        /// </summary>
-        /// <param name="src">The source stypes</param>
-        /// <typeparam name="A">The attribute type</typeparam>
-        public static IEnumerable<Type> Tagged<A>(this IEnumerable<Type> src)
-            where A : Attribute
-                => src.Where(t => System.Attribute.IsDefined(t, typeof(A)));
 
         /// <summary>
         /// Searches a type for any method that matches the supplied signature

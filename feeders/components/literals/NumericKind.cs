@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using DW = DataWidth;
     using ID = NumericTypeId;
+    using TC = System.TypeCode;
+    using NK = NumericKind;
 
     /// <summary>
     /// Clasifies system-defined numeric primitive types
@@ -153,4 +155,39 @@ namespace Z0
 
         F64 = 1024u << 16,
     }        
+
+    public static class SystemNumeric
+    {
+        /// <summary>
+        /// Determines the numeric kind of a type, possibly none
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static NumericKind kind(Type t)
+        {
+            var k = t.IsEnum 
+                ? NumericKind.None 
+                : Type.GetTypeCode(t.EffectiveType()) 
+                switch
+                {
+                    TC.SByte => NK.I8,
+                    TC.Byte => NK.U8,
+                    TC.Int16 => NK.I16,
+                    TC.UInt16 => NK.U16,
+                    TC.Int32 => NK.I32,
+                    TC.UInt32 => NK.U32,
+                    TC.Int64 => NK.I64,
+                    TC.UInt64 => NK.U64,
+                    TC.Single => NK.F32,
+                    TC.Double => NK.F64,
+                    _ => NK.None
+                };
+            return k;
+        }
+    }    
+
+    public static class SystemNumericOps
+    {
+        public static NumericKind NumericKind(this Type src)
+            => SystemNumeric.kind(src);
+    }
 }
