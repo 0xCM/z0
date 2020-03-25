@@ -18,9 +18,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static class Identify
+    public static partial class Identify
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-    }
 
+
+        [MethodImpl(Inline)]
+        public static Option<TypeIdentity> ToOption(this TypeIdentity src)
+            => src.IsEmpty ? Option.none<TypeIdentity>() : Option.some(src);
+    }
 }

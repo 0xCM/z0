@@ -8,14 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Identify;
-    using static IdentityShare;
 
-    public interface IPrimalIdentity : IIdentifiedType<PrimalIdentity>
-    {
-
-    }
-
-    public readonly struct PrimalIdentity  : IPrimalIdentity
+    public readonly struct PrimalIdentity : IIdentifiedType<PrimalIdentity>
     {
         public static PrimalIdentity Empty => new PrimalIdentity(string.Empty);
 
@@ -24,13 +18,12 @@ namespace Z0
         public string Keyword {get;}
 
         [MethodImpl(Inline)]
-        public static PrimalIdentity From(Type t)
-            => t.IsSystemType() ? 
-               ( t.IsNumeric()
-               ? new PrimalIdentity(t.NumericKind(), t.SystemKeyword())
-               : new PrimalIdentity(t.SystemKeyword())
-               )
-               : Empty;
+        internal static PrimalIdentity Define(NumericKind kind, string keyword)
+            => new PrimalIdentity(kind,keyword);
+
+        [MethodImpl(Inline)]
+        internal static PrimalIdentity Define(string keyword)
+            => new PrimalIdentity(keyword);
 
         [MethodImpl(Inline)]
         public static implicit operator string(PrimalIdentity src)
@@ -48,6 +41,7 @@ namespace Z0
         public static bool operator!=(PrimalIdentity a, PrimalIdentity b)
             => !a.Equals(b);
 
+
         [MethodImpl(Inline)]
         PrimalIdentity(NumericKind kind, string keyword)
         {
@@ -62,31 +56,19 @@ namespace Z0
             this.Keyword = keyword;
         }
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
-        }
-
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
             => TypeIdentity.Define(Identifier);
 
-        [MethodImpl(Inline)]
-        public bool Equals(PrimalIdentity src)
-            => equals(this, src);
-
-        [MethodImpl(Inline)]
-        public int CompareTo(PrimalIdentity other)
-            => compare(this, other);
+        IIdentifiedType<PrimalIdentity> Identified => this;
  
         public override int GetHashCode()
-            => hash(this);
+            => Identified.HashCode;
 
         public override bool Equals(object obj)
-            => equals(this, obj);
+            => Identified.Same(obj);
 
         public override string ToString()
-            => Identifier;
+            => Identified.Format();
     }
 }

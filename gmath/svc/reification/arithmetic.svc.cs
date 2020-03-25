@@ -12,14 +12,14 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Add<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Add<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "add";
 
             public static Add<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.add(a, b);
@@ -30,14 +30,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Sub<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Sub<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "sub";
 
             public static Sub<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.sub(a,b);
@@ -48,14 +48,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Mul<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Mul<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "mul";
 
             public static Mul<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
 
             [MethodImpl(Inline)]
@@ -68,14 +68,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Div<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Div<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "div";
 
             public static Div<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.div(a, b);
@@ -86,14 +86,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct ModOp<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct ModOp<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "mod";
 
             public static ModOp<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.mod(a,b);
@@ -104,14 +104,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct ModMul<T> : ISFTernaryOpApi<T>, ISFTernarySpanOpApi<T>
+        public readonly struct ModMul<T> : ISTernaryOpApi<T>, ISTernarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "modmul";
 
             public static ModMul<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T m) => gmath.modmul(a,b,m);
@@ -122,14 +122,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Even<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
+        public readonly struct Even<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "even";
 
             public static Even<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => parity.even(a);
@@ -140,14 +140,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Odd<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
+        public readonly struct Odd<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "odd";
 
             public static Odd<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => parity.odd(a);
@@ -158,14 +158,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Clamp<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Clamp<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "clamp";
 
             public static Clamp<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.clamp(a,b);
@@ -176,14 +176,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Square<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
+        public readonly struct Square<T> : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "square";
 
             public static Square<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.square(a);
@@ -195,14 +195,14 @@ namespace Z0
         }
     
         [NumericClosures(NumericKind.All)]
-        public readonly struct Negate<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
+        public readonly struct Negate<T> : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "negate";
 
             public static Negate<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.negate(a);
@@ -214,14 +214,14 @@ namespace Z0
     
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Dec<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
+        public readonly struct Dec<T> : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "dec";
 
             public static Dec<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.dec(a);
@@ -232,14 +232,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Inc<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
+        public readonly struct Inc<T> : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>
             where T : unmanaged        
         {        
             public const string Name = "inc";
 
             public static Inc<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.inc(a);
@@ -250,14 +250,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Abs<T>  : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
+        public readonly struct Abs<T>  : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "abs";
 
             public static Abs<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.abs(a);
@@ -275,7 +275,7 @@ namespace Z0
 
             public static Dist<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly ulong Invoke(T a, T b) => gmath.dist(a,b);

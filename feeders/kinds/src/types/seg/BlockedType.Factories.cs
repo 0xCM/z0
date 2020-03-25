@@ -11,6 +11,7 @@ namespace Z0
     using static BlockedKind;
     using static BlockedTypeKinds;
     using static Kinds;
+    using TW = TypeWidth;
 
     /// <summary>
     /// Block kinds api
@@ -24,7 +25,7 @@ namespace Z0
         /// Determines the width of a blocked type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static FixedWidth width(Type src)
+        public static TypeWidth width(Type src)
             => BlockedType.width(src);
 
         /// <summary>
@@ -349,10 +350,10 @@ namespace Z0
         public static Block512x64f bk512x64f()
             => default;       
 
-        public static BlockedKind kind(FixedWidth width, NumericTypeId id)            
+        public static BlockedKind kind(TypeWidth width, NumericTypeId id)            
         {
             var k = width switch 
-                    { FixedWidth.W16 => 
+                    { TW.W16 => 
                         id switch {
                             NumericTypeId.U8 => b16x8u,
                             NumericTypeId.I8 => b16x8i,
@@ -361,7 +362,7 @@ namespace Z0
                             _ => None
                             }, 
 
-                        FixedWidth.W32 => 
+                        TW.W32 => 
                         id switch {
                             NumericTypeId.U8 => b32x8u,
                             NumericTypeId.I8 => b32x8i,
@@ -373,7 +374,7 @@ namespace Z0
                             _ => None
                             }, 
 
-                        FixedWidth.W64 => 
+                        TW.W64 => 
                         id switch {
                             NumericTypeId.U8 => b64x8u,
                             NumericTypeId.I8 => b64x8i,
@@ -388,7 +389,7 @@ namespace Z0
                             _ => None
                             }, 
 
-                        FixedWidth.W128 => 
+                        TW.W128 => 
                         id switch {
                             NumericTypeId.U8 => b128x8u,
                             NumericTypeId.I8 => b128x8i,
@@ -404,7 +405,7 @@ namespace Z0
                             }, 
 
 
-                        FixedWidth.W256 => 
+                        TW.W256 => 
                         id switch {
                             NumericTypeId.U8 => b256x8u,
                             NumericTypeId.I8 => b256x8i,
@@ -419,7 +420,7 @@ namespace Z0
                             _ => None
                             }, 
 
-                        FixedWidth.W512 => 
+                        TW.W512 => 
                         id switch {
                             NumericTypeId.U8 => b512x8u,
                             NumericTypeId.I8 => b512x8i,
@@ -679,5 +680,4 @@ namespace Z0
                 return BlockedKind.None;
         }
     }
-
 }

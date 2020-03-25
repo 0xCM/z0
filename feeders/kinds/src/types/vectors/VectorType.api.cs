@@ -43,23 +43,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static FixedWidth width(Type t)
+        public static TypeWidth width(Type t)
         {
             var eff = t.EffectiveType();
             var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
             if(def == null)
-                return FixedWidth.None;
+                return TypeWidth.None;
             else if(def == typeof(Vector128<>))            
-                return FixedWidth.W128;
+                return TypeWidth.W128;
             else if(def == typeof(Vector256<>))
-                return FixedWidth.W256;
+                return TypeWidth.W256;
             else
             {
                 var tag = t.GetCustomAttribute<VectorAttribute>();
                 if(tag != null)
                     return tag.TotalWdth;
                 else
-                    return FixedWidth.None;
+                    return TypeWidth.None;
             }            
         }
 

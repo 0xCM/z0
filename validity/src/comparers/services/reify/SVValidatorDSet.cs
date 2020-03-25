@@ -191,8 +191,8 @@ namespace Z0
         string CaseName<W>(ISFuncApi f)
             where W : struct, ITypeWidth
         {
-            var id = OpIdentity.operation(f.Id.Name, default(W).Class, NumericTypes.kind<T>(),true);
-            var owner = TypeIdentity.owner(Context.HostType);
+            var id = Identify.Op(f.Id.Name, default(W).Class, NumericTypes.kind<T>(),true);
+            var owner = Identify.Owner(Context.HostType);
             var host = Context.HostType.Name;
             return $"{owner}/{host}/{id}";            
         }

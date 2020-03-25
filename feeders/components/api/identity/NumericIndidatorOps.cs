@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    
-    using static Kinds;
-    
-    public static class LiteralFormatOps
-    {
 
+    using static Components;
+    using static NumericKind;
+    
+    partial class ComponentOps
+    {
         /// <summary>
         /// Converts the source indicator to a character representation
         /// </summary>

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Identify;
-    using static IdentityShare;
 
     public readonly struct DelegateIdentity : IIdentifiedType<DelegateIdentity>
     {
@@ -36,30 +35,16 @@ namespace Z0
         DelegateIdentity(string id)
             => Identifier = id;
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => text.empty(Identifier);
-        }
+        IIdentifiedType<DelegateIdentity> Identified => this;
 
-        [MethodImpl(Inline)]
-        public bool Equals(DelegateIdentity src)
-            => equals(this, src);
-
-        [MethodImpl(Inline)]
-        public int CompareTo(DelegateIdentity src)
-            => compare(this, src); 
-
-        public string Format()
-            => IdentityShare.format(this);
-
+        
         public override int GetHashCode()
-            => hash(this);
+            => Identified.HashCode;
 
         public override bool Equals(object obj)
-            => equals(this, obj);
+            => Identified.Same(obj);
 
         public override string ToString()
-            => Format();
+            => Identified.Format();
     }
 }

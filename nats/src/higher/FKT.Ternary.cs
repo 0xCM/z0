@@ -14,11 +14,10 @@ namespace Z0
     /// </summary>
     partial class FKT
     {
-
         /// <summary>
         /// Nonparametric classification of ternary functions
         /// </summary>
-        public readonly struct TernaryFuncType : IFuncType, IFuncArity<N3>
+        public readonly struct TernaryFuncType : IFuncType
         {
             public const FunctionClass Kind = FunctionClass.TernaryFunc;
 
@@ -43,7 +42,6 @@ namespace Z0
 
             public FunctionClass Class { [MethodImpl(Inline)] get=> Kind;}
         }
-
 
         /// <summary>
         /// Nonparametric classification of ternary operators
@@ -105,6 +103,5 @@ namespace Z0
             public static implicit operator TernaryOpType<T>(OperatorType<N3,T> src)
                 => default;
         }        
-
     }
 }

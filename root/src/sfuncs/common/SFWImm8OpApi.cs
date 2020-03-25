@@ -15,17 +15,15 @@ namespace Z0
     public interface ISWImm8Op<W> : ISWFunc<W>
         where W : unmanaged, ITypeWidth
     {
-        //TypeWidth WidthKind => default(W).Class;
+        
     }
 
     [SuppressUnmanagedCodeSecurity]
     public interface ISWImm8OpApi<W> : ISWFuncApi<W>
         where W : unmanaged, ITypeWidth
     {
-        //TypeWidth WidthKind => default(W).Class;
+        
     }
-
-
 
     [SuppressUnmanagedCodeSecurity]
     public interface ISWImm8UnaryOpApi<W,A> : ISImm8UnaryOpApi<A>, ISWImm8OpApi<W>
@@ -35,7 +33,7 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ISWImm8BinaryOpApi<W,A> : ISFImm8BinaryOpApi<A>, ISWImm8OpApi<W>
+    public interface ISWImm8BinaryOpApi<W,A> : ISImm8BinaryOpApi<A>, ISWImm8OpApi<W>
         where W : unmanaged, ITypeWidth
     {
 

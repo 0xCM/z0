@@ -11,7 +11,7 @@ namespace Z0
     /// Base interface for span-oriented operations
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFSpanApi : ISFuncApi
+    public interface ISSpanApi : ISFuncApi
     {
 
     }
@@ -20,7 +20,7 @@ namespace Z0
     /// Characterizes an operator that applies a bitwise shift or rotation to elements in a source span
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFSpanShiftApi : ISFSpanApi
+    public interface ISSpanShiftApi : ISSpanApi
     {
 
     }
@@ -31,7 +31,7 @@ namespace Z0
     /// <typeparam name="A">The source span cell type</typeparam>
     /// <typeparam name="B">The target span cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFSpanMapApi<A,B> : ISFSpanApi
+    public interface ISSpanMapApi<A,B> : ISSpanApi
     {
         Span<B> Invoke(Span<A> src);
     }    
@@ -43,19 +43,7 @@ namespace Z0
     /// <typeparam name="W">The cell width</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFUnarySpanOpApi<T> : ISFSpanApi        
-    {
-        Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst);
-    }
-
-    /// <summary>
-    /// Characterizes a unary span operator that accepts spans with cells of known width
-    /// </summary>
-    /// <typeparam name="W">The cell width</typeparam>
-    /// <typeparam name="T">The cell type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFWUnarySpanOpApi<W,T> : ISFWSpanApi<W>        
-        where W : unmanaged, ITypeWidth
+    public interface ISUnarySpanOpApi<T> : ISSpanApi        
     {
         Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst);
     }
@@ -65,7 +53,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFBinarySpanOpApi<T> : ISFSpanApi        
+    public interface ISBinarySpanOpApi<T> : ISSpanApi        
     {
         Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst);
     }
@@ -75,7 +63,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFSpanShiftVarApi<T> : ISFSpanShiftApi
+    public interface ISSpanShiftVarApi<T> : ISSpanShiftApi
     {
         Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst);
     }
@@ -86,29 +74,9 @@ namespace Z0
     /// <typeparam name="A">The source span cell type</typeparam>
     /// <typeparam name="B">The target type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFSpanFactoryApi<A,B> : ISFuncApi
+    public interface ISSpanFactoryApi<A,B> : ISFuncApi
     {
         Span<B> Invoke(A src);
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFWSpanApi<W> : ISFSpanApi, ISWFuncApi<W>
-        where W : unmanaged, ITypeWidth
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes a structural binary span operator that accepts 
-    /// spans with cells of known width
-    /// </summary>
-    /// <typeparam name="W">The cell width</typeparam>
-    /// <typeparam name="T">The cell type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFWBinarySpanOpApi<W,T> : ISFWSpanApi<W>        
-        where W : unmanaged, ITypeWidth
-    {
-        Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst);
     }
 
     /// <summary>
@@ -117,20 +85,8 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFTernarySpanOpApi<T> : ISFSpanApi        
+    public interface ISTernarySpanOpApi<T> : ISSpanApi        
     {
-        Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst);
-    }
-
-    /// <summary>
-    /// Characterizes a structural ternary span operator that accepts spans with cells of known width
-    /// </summary>
-    /// <typeparam name="W">The cell width</typeparam>
-    /// <typeparam name="T">The cell type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISFWTernarySpanOpApi<W,T> : ISFWSpanApi<W>        
-        where W : unmanaged, ITypeWidth
-   {
         Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst);
     }
 
@@ -139,7 +95,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFUnarySpanPredicateApi<T> : ISFSpanApi        
+    public interface ISUnarySpanPredApi<T> : ISSpanApi        
     {
         Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst);
     }
@@ -149,7 +105,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFBinarySpanPredicateApi<T> : ISFSpanApi        
+    public interface ISBinarySpanPredApi<T> : ISSpanApi        
     {
         Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst);
     }
@@ -159,7 +115,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFTernarySpanPredicateApi<T> : ISFSpanApi        
+    public interface ISTernarySpanPredApi<T> : ISSpanApi        
     {
         Span<bit> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<bit> dst);
     }    
@@ -169,7 +125,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImm8SpanShiftApi<T> : ISFSpanShiftApi
+    public interface ISImm8SpanShiftApi<T> : ISSpanShiftApi
     {
         Span<T> Invoke(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
 

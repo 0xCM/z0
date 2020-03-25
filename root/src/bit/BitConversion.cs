@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Root;
+    using static Custom;
     using static As;
     using static Cast;
 
@@ -33,10 +33,10 @@ namespace Z0
             => ToBit<T>().Convert(src);
 
         static Option<object> FromTarget(object incoming, Type dst)
-            => Try(() => ocast((uint)(bit)incoming, dst.NumericKind()));
+            => Option.Try(() => ocast((uint)(bit)incoming, dst.NumericKind()));
 
         static Option<object> ToTarget(object incoming)
-            => Try(() => (bit)(byte)ocast(incoming, NumericKind.U8));
+            => Option.Try(() => (bit)(byte)ocast(incoming, NumericKind.U8));
 
         [MethodImpl(Inline)]
         public Option<object> ConvertFromTarget(object incoming, Type dst)
@@ -76,7 +76,7 @@ namespace Z0
                 else if(typeof(T) == typeof(ulong))
                     return generic<T>((ulong)src);
                 else
-                    throw unsupported<T>();
+                    throw Unsupported.define<T>();
             }
         }
 
@@ -110,7 +110,7 @@ namespace Z0
                 else if(typeof(T) == typeof(ulong))
                     return (bit)uint64(src);
                 else
-                    throw unsupported<T>();
+                    throw Unsupported.define<T>();
             }
         }
     }

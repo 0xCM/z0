@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         public static ISet<Type> DistinctTypes(this NumericKind k)
-            => NumericIdentity.typeset(k);
+            => Identify.TypeSet(k);
 
         [MethodImpl(Inline)]
         public static Option<NI> NumericIndicator(this Type t)
@@ -45,6 +45,6 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind to evaluate</param>
         public static ISet<NK> DistinctKinds(this NK k)  
-            => NumericIdentity.kindset(k);    
+            => Identify.KindSet(k);    
     }
 }

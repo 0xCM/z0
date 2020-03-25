@@ -12,14 +12,14 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Eq<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
+        public readonly struct Eq<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "eq";
 
             public static Eq<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) 
@@ -31,14 +31,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Neq<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
+        public readonly struct Neq<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "neq";
 
             public static Neq<T> Op => default;
             
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.neq(x,y);
@@ -49,14 +49,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Lt<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
+        public readonly struct Lt<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "lt";
 
             public static Lt<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) 
@@ -68,14 +68,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct LtEq<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
+        public readonly struct LtEq<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "lteq";
 
             public static LtEq<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T x, T y) 
@@ -87,14 +87,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Gt<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
+        public readonly struct Gt<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "gt";
 
             public static Gt<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) 
@@ -106,14 +106,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct GtEq<T> : ISFApi<T,T,bit>, ISFBinarySpanPredicateApi<T>
+        public readonly struct GtEq<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "gteq";
 
             public static GtEq<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) 
@@ -132,7 +132,7 @@ namespace Z0
 
             public static Between<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T a, T b) 
@@ -140,14 +140,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Nonz<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
+        public readonly struct Nonz<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "nonz";
 
             public static Nonz<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a) 
@@ -159,14 +159,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct NegativeOp<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
+        public readonly struct NegativeOp<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "negative";
 
             public static NegativeOp<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a) 
@@ -178,14 +178,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct PositiveOp<T> : ISFApi<T,bit>, ISFUnarySpanPredicateApi<T>
+        public readonly struct PositiveOp<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "positive";
 
             public static PositiveOp<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a) 
@@ -197,14 +197,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Min<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Min<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "min";
 
             public static Min<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -216,14 +216,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Max<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Max<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "max";
 
             public static Max<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 

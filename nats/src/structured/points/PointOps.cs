@@ -34,15 +34,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => src;
 
-        public static MixedPointSpanEmitter<X0,X1,R> Emitter<X0,X1,R>(this IEnumerable<MixedPoint<X0,X1,R>> src)
-            where X0 : unmanaged
-            where X1 : unmanaged
-            where R : unmanaged
-                => src.ToArray();
-
-        public static PointSpanEmitter<N,T> Emitter<N,T>(this IEnumerable<Point<N,T>> src, N n = default)
-            where T : unmanaged
-            where N : unmanaged,ITypeNat
-                => src.ToArray();
     }
 }

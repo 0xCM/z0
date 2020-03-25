@@ -17,7 +17,7 @@ namespace Z0
     /// justifies the contract name
     /// </remarks>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImm8UnaryOp<A> : ISFunc<A,byte,A>
+    public interface ISImm8UnaryOp<A> : ISFunc<A,byte,A>
     {
            
     }
@@ -28,7 +28,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImm8BinaryOp<A> : ISFApi<A,A,byte,A>
+    public interface ISImm8BinaryOp<A> : ISFApi<A,A,byte,A>
     {
 
     }    
@@ -39,7 +39,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImm8x2UnaryOp<A> : ISFApi<A,byte,byte,A>
+    public interface ISImm8x2UnaryOp<A> : ISFApi<A,byte,byte,A>
     {
 
     }

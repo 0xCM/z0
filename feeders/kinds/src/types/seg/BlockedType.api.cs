@@ -5,14 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
-
-    using static Components;
-    using static TypeWidths;
 
     public static class BlockedType
     {
@@ -26,8 +21,8 @@ namespace Z0
         public static bool test(Type t)
             => tag(t) != null;
 
-        public static FixedWidth width(Type src)
-            => tag(src)?.TotalWdth ?? FixedWidth.None;
+        public static TypeWidth width(Type src)
+            => tag(src)?.TotalWdth ?? TypeWidth.None;
 
         /// <summary>
         /// Determines the segment kind classifier for a blocked type

@@ -47,12 +47,14 @@ namespace Z0
 
         public bool IsEmpty
         {
+            [MethodImpl(Inline)]            
             get => Scheme.IsNone() && HostPath.IsEmpty && text.empty(GroupName) && OpId.IsEmpty;
         }
         
         public bool IsComplete
         {
-            get => Scheme != 0 && !HostPath.IsEmpty && text.nonempty(GroupName) && OpId.IsNonEmpty;
+            [MethodImpl(Inline)]
+            get => Scheme != 0 && !HostPath.IsEmpty && text.nonempty(GroupName) && !OpId.IsEmpty;
         }
 
         public OpUri GroupUri
@@ -116,7 +118,6 @@ namespace Z0
                 ? OpUriBuilder.QueryText(scheme, host.Owner, host.Name, group) 
                 : OpUriBuilder.FullUriText(scheme, host.Owner, host.Name, GroupName, opid);
         }
-
 
         public string Format()
             => IdentityShare.format(this);

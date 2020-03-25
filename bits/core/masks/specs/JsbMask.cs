@@ -59,11 +59,9 @@ namespace Z0
                 => default;
 
         public string Format()
-            => $"jsb(f:{natval<F>()}, d:{natval<D>()}, t:{TypeIdentity.numeric<T>()})";
+            => $"jsb(f:{natval<F>()}, d:{natval<D>()}, t:{Identify.NumericType<T>()})";
 
         public override string ToString()
             => Format();
-
     }
-
 }

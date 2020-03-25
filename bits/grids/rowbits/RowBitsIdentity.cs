@@ -38,7 +38,7 @@ namespace Z0
             else
             {
                 var arg = src.GetGenericArguments().Single();
-                return TypeIdentity.IdentifyNumericClosure(@base, arg);
+                return Identify.NumericClosure(@base, arg);
             }
         }
     }

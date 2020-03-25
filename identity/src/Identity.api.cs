@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
-        public static FixedWidth width(Type t)
+        public static TypeWidth width(Type t)
         {
             if(t.IsVector())
                 return VectorType.width(t);
@@ -114,9 +114,9 @@ namespace Z0
             if(t.IsNumeric())
                 return t.NumericWidth();
             else if(t == typeof(bit))
-                return FixedWidth.W1;
+                return TypeWidth.W1;
             else
-                return FixedWidth.None;
+                return TypeWidth.None;
         }
 
         public static string identify(ParameterInfo p)

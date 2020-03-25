@@ -36,5 +36,4 @@ namespace Z0
     {
         new TernaryOp<A> Operation => (this as ISFunc<A,A,A,A>).Operation.ToTernaryOp();
     }
-
 }

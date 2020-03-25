@@ -59,7 +59,7 @@ namespace Z0
 
         void ISFMatch<T,R>.Match<F, G>(F baseline, G subject)
         {
-            var casename = TestIdentity.testcase(Context.HostType, $"{subject.Id}_span");
+            var casename = Identify.TestCase(Context.HostType, $"{subject.Id}_span");
             var succeeded = true;       
             var clock = counter();
 

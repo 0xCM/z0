@@ -52,16 +52,16 @@ namespace Z0
 
         public void classify_numeric_width()
         {
-            Claim.eq(FixedWidth.W8, NumericKind.U8.WidthKind());
-            Claim.eq(FixedWidth.W8, NumericKind.I8.WidthKind());
-            Claim.eq(FixedWidth.W16, NumericKind.U16.WidthKind());
-            Claim.eq(FixedWidth.W16, NumericKind.I16.WidthKind());
-            Claim.eq(FixedWidth.W32, NumericKind.U32.WidthKind());
-            Claim.eq(FixedWidth.W32, NumericKind.I32.WidthKind());
-            Claim.eq(FixedWidth.W32, NumericKind.F32.WidthKind());
-            Claim.eq(FixedWidth.W64, NumericKind.I64.WidthKind());
-            Claim.eq(FixedWidth.W64, NumericKind.U64.WidthKind());
-            Claim.eq(FixedWidth.W64, NumericKind.F64.WidthKind());
+            Claim.eq(TypeWidth.W8, NumericKind.U8.TypeWidth());
+            Claim.eq(TypeWidth.W8, NumericKind.I8.TypeWidth());
+            Claim.eq(TypeWidth.W16, NumericKind.U16.TypeWidth());
+            Claim.eq(TypeWidth.W16, NumericKind.I16.TypeWidth());
+            Claim.eq(TypeWidth.W32, NumericKind.U32.TypeWidth());
+            Claim.eq(TypeWidth.W32, NumericKind.I32.TypeWidth());
+            Claim.eq(TypeWidth.W32, NumericKind.F32.TypeWidth());
+            Claim.eq(TypeWidth.W64, NumericKind.I64.TypeWidth());
+            Claim.eq(TypeWidth.W64, NumericKind.U64.TypeWidth());
+            Claim.eq(TypeWidth.W64, NumericKind.F64.TypeWidth());
         }
 
         public void check_numeric_identity()
@@ -116,19 +116,19 @@ namespace Z0
 
         public void classify_block_width()
         {
-            Claim.eq(FixedWidth.W16, BK.width(typeof(Block16<byte>)));
-            Claim.eq(FixedWidth.W32, BK.width(typeof(Block32<byte>)));
-            Claim.eq(FixedWidth.W64, BK.width(typeof(Block64<byte>)));
-            Claim.eq(FixedWidth.W128, BK.width(typeof(Block128<byte>)));
-            Claim.eq(FixedWidth.W256, BK.width(typeof(Block256<byte>)));
-            Claim.eq(FixedWidth.W512, BK.width(typeof(Block512<byte>)));
+            Claim.eq(TypeWidth.W16, BK.width(typeof(Block16<byte>)));
+            Claim.eq(TypeWidth.W32, BK.width(typeof(Block32<byte>)));
+            Claim.eq(TypeWidth.W64, BK.width(typeof(Block64<byte>)));
+            Claim.eq(TypeWidth.W128, BK.width(typeof(Block128<byte>)));
+            Claim.eq(TypeWidth.W256, BK.width(typeof(Block256<byte>)));
+            Claim.eq(TypeWidth.W512, BK.width(typeof(Block512<byte>)));
 
-            Claim.eq(FixedWidth.W16, BK.width(typeof(Block16<>)));
-            Claim.eq(FixedWidth.W32, BK.width(typeof(Block32<>)));
-            Claim.eq(FixedWidth.W64, BK.width(typeof(Block64<>)));
-            Claim.eq(FixedWidth.W128, BK.width(typeof(Block128<>)));
-            Claim.eq(FixedWidth.W256, BK.width(typeof(Block256<>)));
-            Claim.eq(FixedWidth.W512, BK.width(typeof(Block512<>)));
+            Claim.eq(TypeWidth.W16, BK.width(typeof(Block16<>)));
+            Claim.eq(TypeWidth.W32, BK.width(typeof(Block32<>)));
+            Claim.eq(TypeWidth.W64, BK.width(typeof(Block64<>)));
+            Claim.eq(TypeWidth.W128, BK.width(typeof(Block128<>)));
+            Claim.eq(TypeWidth.W256, BK.width(typeof(Block256<>)));
+            Claim.eq(TypeWidth.W512, BK.width(typeof(Block512<>)));
         }
 
         public void test_generic_blocks()
@@ -304,10 +304,7 @@ namespace Z0
             Claim.eq(VectorType.kind(typeof(Vector256<ulong>)), VectorKind.v256x64u);
             Claim.eq(VectorType.kind(typeof(Vector256<long>)), VectorKind.v256x64i);
             Claim.eq(VectorType.kind(typeof(Vector256<double>)), VectorKind.v256x64f);
-
         }
-
-
     }
 
 }

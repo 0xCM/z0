@@ -24,7 +24,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVUnaryOpApi<V> : ISVFuncApi, ISFUnaryOpApi<V>
+    public interface ISVUnaryOpApi<V> : ISVFuncApi, ISUnaryOpApi<V>
         where V : struct
     {
    
@@ -101,5 +101,4 @@ namespace Z0
     {
         
     }
-
 }

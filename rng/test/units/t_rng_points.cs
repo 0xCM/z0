@@ -13,20 +13,6 @@ namespace Z0
     public class t_rng_points : UnitTest<t_rng_points>
     {    
 
-
-        public void rng_nat_point_span_emitter()
-        {
-            var emitter = Random.PointSpan(100, n3, z32);
-            var emission = emitter.Invoke();
-            Claim.eq(100, emission.Length);
-            for(var i=0; i< emission.Length; i++)
-            {
-                var emitted = emission[i];
-            }
-            
-
-        }
-
         void print<N,T>(Points<N,T> index)
             where N : unmanaged, ITypeNat
             where T : unmanaged

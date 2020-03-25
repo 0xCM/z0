@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void run<F,T>(F f, ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-            where F : ISFUnaryOpApi<T>
+            where F : ISUnaryOpApi<T>
         {
             var end = dst.Length;
             ref readonly var input = ref head(src);
@@ -96,7 +96,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static void run<F,T>(F f, in T src, ref T dst, int count)
-            where F : ISFUnaryOpApi<T>
+            where F : ISUnaryOpApi<T>
         {                        
             for(var i=0; i<count; i++)
                 seek(ref dst, i) = f.Invoke(skip(src, i));                

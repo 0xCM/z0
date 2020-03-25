@@ -91,7 +91,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function</param>
         public static string testcase(Type host, ISFuncApi f)
-            => $"{TypeIdentity.owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
+            => $"{Identify.Owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
 
         /// <summary>
         /// Produces the name of the test case for the specified function
@@ -105,14 +105,14 @@ namespace Z0
         /// </summary>
         /// <param name="id">Moniker that identifies the operation under test</param>
         public string CaseName(OpIdentity id)
-            => TestIdentity.testcase(GetType(),id);
+            => Identify.TestCase(GetType(), id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         public string CaseName(string fullname)
-            => TestIdentity.testcase(GetType(), fullname);
+            => Identify.TestCase(GetType(), fullname);
 
         /// <summary>
         /// Produces the name of the test case predicated on a root name and parametric type
@@ -120,21 +120,20 @@ namespace Z0
         /// <param name="root">The root name</param>
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
-            => TestIdentity.testcase(GetType(),root, t);
+            => Identify.TestCase(GetType(),root, t);
 
         protected string CaseName<W,C>(string root, W w = default, C t = default, bool generic = true)
-            where W : unmanaged, ITypeNat
+            where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => NaturalIdentity.testcase(GetType(), root, w, t, generic);
-
+                => Identify.TestCase(GetType(), root, w, t, generic);
 
         protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
-                => OpIdentity.numeric(opname, NumericTypes.kind<T>());
+                => Identify.NumericOp(opname, NumericTypes.kind<T>());
 
         protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
-                => OpIdentity.sfunc<K>($"{opname}_baseline");
+                => Identify.SFunc<K>($"{opname}_baseline");
 
         protected virtual bool TraceEnabled
             => true;

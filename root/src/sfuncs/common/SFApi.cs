@@ -17,8 +17,6 @@ namespace Z0
         /// The operation identity
         /// </summary>
         OpIdentity Id {get;} 
-
-        //FunctionClass Class => FunctionClass.None;       
     }
 
     /// <summary>

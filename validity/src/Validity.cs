@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function</param>
         public static string testcase(Type host, ISFuncApi f)
-            => $"{TypeIdentity.owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
+            => $"{Identify.Owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
 
         internal static class Claim
         {

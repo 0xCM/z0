@@ -59,7 +59,7 @@ namespace Z0
                 => default;
 
         public string Format()
-            => $"central(f:{nateval<F>()}, d:{nateval<D>()}, t:{TypeIdentity.numeric<T>()})";
+            => $"central(f:{nateval<F>()}, d:{nateval<D>()}, t:{Identify.NumericType<T>()})";
 
         public override string ToString()
             => Format();

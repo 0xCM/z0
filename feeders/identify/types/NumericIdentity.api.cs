@@ -10,35 +10,31 @@ namespace Z0
     using System.Linq;
     using System.Collections.Concurrent;
 
-    using static Identify;
-
     using NK = NumericKind;
     using ID = NumericTypeId;
 
-    public interface INumericIdentity : IIdentifiedType<NumericIdentity>
+    partial class Identify
     {
+        public static TypeIdentity EnumType(Type src)        
+            => src.IsEnum ? EnumIdentity.Define(src.Name, src.GetEnumUnderlyingType().NumericKind()) : EnumIdentity.Empty;
 
-        
-    }    
-    
-    partial struct NumericIdentity
-    {
-        
-        /// <summary>
-        /// Tests whether the source kind, considered as a bitfield, contains the match id
-        /// </summary>
-        /// <param name="k">The source kind</param>
-        /// <param name="match">The kind to match</param>
-        [MethodImpl(Inline), Op]
-        public static bool contains(NumericKind k, NumericTypeId match)        
-            => NumericTypes.contains(k,match);
+        public static EnumIdentity EnumType(string name, NumericKind basetype)
+            => EnumIdentity.Define(name, basetype);
+
+        [MethodImpl(Inline)]
+        public static PrimalIdentity Primal(Type t)
+            => t.IsSystemType() ? 
+               ( t.IsNumeric()
+               ? PrimalIdentity.Define(t.NumericKind(), t.SystemKeyword())
+               : PrimalIdentity.Define(t.SystemKeyword())
+               )
+               : PrimalIdentity.Empty;
 
         /// <summary>
         /// Attempts to parse a numeric kind from a string in the form {width}{indicator} 
         /// </summary>
         /// <param name="src">The source text</param>
-        [Op]
-        public static NumericKind kind(string src)
+        public static NumericKind Numeric(string src)
         {
             var input = src.Trim();
             if(string.IsNullOrWhiteSpace(input))
@@ -63,78 +59,67 @@ namespace Z0
             return kind;                            
         }
 
-
         /// <summary>
-        /// Attempts to parse a sequence of numeric kinds from a sequennce of strings in the form {width}{indicator} 
+        /// Attempts to parse a sequence of numeric kinds from a sequence of strings in the form {width}{indicator} 
         /// </summary>
         /// <param name="src">The source text</param>
-        public static IEnumerable<NumericKind> kinds(IEnumerable<string> kinds)
+        public static IEnumerable<NumericKind> Numeric(IEnumerable<string> kinds)
             => from part in kinds
                let x = part.StartsWith(OpIdentity.GenericLocator)
-                    ? kind(part.Substring(1, part.Length - 1)) 
-                    : kind(part)
+                    ? Identify.Numeric(part.Substring(1, part.Length - 1)) 
+                    : Identify.Numeric(part)
                 select x;        
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
         /// </summary>
         /// <param name="k">The primal kind</param>
-        [MethodImpl(Inline), Op]
-        public static ISet<Type> typeset(NumericKind k)
+        [MethodImpl(Inline)]
+        public static ISet<Type> TypeSet(NumericKind k)
             => GetTypeset(k);
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
         /// </summary>
         /// <param name="k">The primal kind</param>
-        [MethodImpl(Inline), Op]
-        public static ISet<NumericKind> kindset(NumericKind k)
+        [MethodImpl(Inline)]
+        public static ISet<NumericKind> KindSet(NumericKind k)
             => GetKindset(k);
-
-        /// <summary>
-        /// Tests whether the source kind, considered as a bitfield, contains the match kind
-        /// </summary>
-        /// <param name="k">The source kind</param>
-        /// <param name="match">The kind to match</param>
-        [MethodImpl(Inline), Op]
-        public static bool contains(NumericKind k, NumericKind match)        
-            => kindset(k).Contains(match);
 
         static HashSet<Type> CreateTypeset(NumericKind k)
             => GetKindset(k).Select(NumericTypes.type).ToHashSet();         
 
-        [Op]
         static HashSet<NumericKind> CreateKindset(NumericKind k)       
         {
             var dst = new HashSet<NumericKind>();
-            if(contains(k, ID.U8))
+            if(NumericTypes.contains(k, ID.U8))
                 dst.Add(NK.U8);
 
-            if(contains(k, ID.I8))
+            if(NumericTypes.contains(k, ID.I8))
                 dst.Add(NK.I8);
 
-            if(contains(k, ID.U16))
+            if(NumericTypes.contains(k, ID.U16))
                 dst.Add(NK.U16);
 
-            if(contains(k, ID.I16))
+            if(NumericTypes.contains(k, ID.I16))
                 dst.Add(NK.I16);
 
-            if(contains(k, ID.U32))
+            if(NumericTypes.contains(k, ID.U32))
                 dst.Add(NK.U32);
 
-            if(contains(k, ID.I32))
+            if(NumericTypes.contains(k, ID.I32))
                 dst.Add(NK.I32);
 
-            if(contains(k, ID.U64))
+            if(NumericTypes.contains(k, ID.U64))
                 dst.Add(NK.U64);
 
-            if(contains(k, ID.I64))
+            if(NumericTypes.contains(k, ID.I64))
                 dst.Add(NK.I64);
 
-            if(contains(k, ID.F32))
+            if(NumericTypes.contains(k, ID.F32))
                 dst.Add(NK.F32);
 
-            if(contains(k, ID.F64))
+            if(NumericTypes.contains(k, ID.F64))
                 dst.Add(NK.F64);
             
             return dst;
@@ -154,5 +139,5 @@ namespace Z0
 
         static ConcurrentDictionary<NumericKind, HashSet<Type>> TypesetCache {get;}       
             = new ConcurrentDictionary<NumericKind, HashSet<Type>>();                 
-    }
+    }    
 }

@@ -19,7 +19,7 @@ namespace Z0
             => AsmCode.Define(id, src.Data);
 
         public static bool AcceptsParameter(this AsmCode src, NumericKind kind)
-            => NumericIdentity.kinds(src.Id.TextComponents.Skip(1)).Contains(kind);
+            => Identify.Numeric(src.Id.TextComponents.Skip(1)).Contains(kind);
 
         [MethodImpl(Inline)]
         public static int ParameterCount(this AsmCode src)
@@ -32,7 +32,7 @@ namespace Z0
                     
         public static IEnumerable<AsmCode> AcceptsParameters(this IEnumerable<AsmCode> src, NumericKind k1, NumericKind k2)
             => from code in src
-                let kinds = NumericIdentity.kinds(code.Id.TextComponents.Skip(1))
+                let kinds = Identify.Numeric(code.Id.TextComponents.Skip(1))
                 where kinds.Contains(k1) && kinds.Contains(k2)
                 select code;
 

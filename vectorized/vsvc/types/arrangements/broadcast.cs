@@ -38,7 +38,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>($"{Name}_{TypeIdentity.numeric<S>()}", VKind);
+            public OpIdentity Id => OpIdentity.sfunc<T>($"{Name}_{Identify.NumericType<S>()}", VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(S a) => vgeneric.vbroadcast(n128, convert<S,T>(a));            
@@ -69,7 +69,7 @@ namespace Z0
 
             public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>($"{Name}_{TypeIdentity.numeric<S>()}", VKind);
+            public OpIdentity Id => OpIdentity.sfunc<T>($"{Name}_{Identify.NumericType<S>()}", VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(S a) => vgeneric.vbroadcast(n256, convert<S,T>(a));            

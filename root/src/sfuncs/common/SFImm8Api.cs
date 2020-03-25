@@ -9,31 +9,31 @@ namespace Z0
 
     
     /// <summary>
-    /// Characterizes an identified <see cref="ISFImm8UnaryOp{A}"/> operator
+    /// Characterizes an identified <see cref="ISImm8UnaryOp{A}"/> operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8UnaryOpApi<A> : ISFImm8UnaryOp<A>
+    public interface ISImm8UnaryOpApi<A> : ISImm8UnaryOp<A>
     {
            
     }
 
     /// <summary>
-    /// Characterizes an identified <see cref="ISFImm8BinaryOp{A}"/> operator
+    /// Characterizes an identified <see cref="ISImm8BinaryOp{A}"/> operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISFImm8BinaryOpApi<A> : ISFImm8BinaryOp<A>
+    public interface ISImm8BinaryOpApi<A> : ISImm8BinaryOp<A>
     {
 
     }    
 
     /// <summary>
-    /// Characterizes an identified <see cref="ISFImm8x2UnaryOp{A}"/> operator
+    /// Characterizes an identified <see cref="ISImm8x2UnaryOp{A}"/> operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISImm8x2UnaryOpApi<A> : ISFImm8x2UnaryOp<A>
+    public interface ISImm8x2UnaryOpApi<A> : ISImm8x2UnaryOp<A>
     {
 
     }

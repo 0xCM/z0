@@ -12,14 +12,14 @@ namespace Z0
     {            
         public SegmentedAttribute(object totalwidth, bool sequenced, params object[] segwidths)
         {
-            this.TotalWdth = (FixedWidth)totalwidth;
+            this.TotalWdth = (TypeWidth)totalwidth;
             this.Sequenced = sequenced;
-            this.SegWidths = segwidths.Select(w => (FixedWidth)w).ToArray();
+            this.SegWidths = segwidths.Select(w => (TypeWidth)w).ToArray();
         }
 
-        public FixedWidth TotalWdth {get;}
+        public TypeWidth TotalWdth {get;}
 
-        public FixedWidth[] SegWidths {get;}
+        public TypeWidth[] SegWidths {get;}
 
         public bool Sequenced {get;}
     }

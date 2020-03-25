@@ -94,7 +94,7 @@ namespace Z0.Asm
                 }
             }
 
-            ReportDuplicates(OpIdentity.duplicates(records.Select(x => x.Uri.OpId)));
+            ReportDuplicates(Identify.Duplicates(records.Select(x => x.Uri.OpId)));
             return MemberParseReport.Create(host, records.ToArray());
         }
 

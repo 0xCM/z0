@@ -23,7 +23,7 @@ namespace Z0
                 foreach(var t in method.ParameterTypes())
                 {
                     Claim.yea(t.IsBlocked());
-                    Claim.yea(Identity.width(t) == FixedWidth.W128 || Identity.width(t) == FixedWidth.W256);
+                    Claim.yea(Identity.width(t) == TypeWidth.W128 || Identity.width(t) == TypeWidth.W256);
                 }
                     
                 var id = Identity.generic(method);

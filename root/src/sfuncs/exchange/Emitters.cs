@@ -58,7 +58,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISpanEmitter<T> : ISFSpanApi
+    public interface ISpanEmitter<T> : ISSpanApi
     {
         Span<T> Invoke();
     }

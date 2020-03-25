@@ -21,6 +21,12 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
+    public static partial class ComponentOps
+    {
+
+    }
+
+
     public static class Components
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
@@ -40,6 +46,5 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static IEnumerable<T> items<T>(params T[] src)
             => src;
-
     }
 }

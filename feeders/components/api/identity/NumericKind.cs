@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static Components;
     
     using DW = DataWidth;
     using ID = NumericTypeId;
@@ -231,18 +229,4 @@ namespace Z0
             return NK.None;
         }
     }    
-
-    public static class SystemNumericOps
-    {
-        public static NumericKind NumericKind(this Type src)
-            => SystemNumeric.kind(src);
-
-        /// <summary>
-        /// Determines the numeric kind identified by a type code, if any
-        /// </summary>
-        /// <param name="tc">The type code to evaluate</param>
-        [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this TypeCode tc)
-            => SystemNumeric.kind(tc);
-    }
 }

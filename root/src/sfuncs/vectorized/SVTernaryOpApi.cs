@@ -24,7 +24,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVTernaryOpApi<V> : ISVFuncApi, ISFTernaryOpApi<V>
+    public interface ISVTernaryOpApi<V> : ISVFuncApi, ISTernaryOpApi<V>
         where V : struct
     {
         
@@ -50,7 +50,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVTernaryOpApi<W,V,T> : ISVTernaryOpApi<W,V>
+    public interface ISWVTernaryOpApi<W,V,T> : ISVTernaryOpApi<W,V>
         where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged
@@ -63,7 +63,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVTernaryOp128Api<T> : ISVTernaryOpApi<W128,Vector128<T>,T>, ISVFunc128Api<T>
+    public interface ISVTernaryOp128Api<T> : ISWVTernaryOpApi<W128,Vector128<T>,T>, ISVFunc128Api<T>
         where T : unmanaged
     {
 
@@ -74,7 +74,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVTernaryOp256Api<T> : ISVTernaryOpApi<W256,Vector256<T>,T>, ISVFunc256Api<T>
+    public interface ISVTernaryOp256Api<T> : ISWVTernaryOpApi<W256,Vector256<T>,T>, ISVFunc256Api<T>
         where T : unmanaged
     {
                 
@@ -101,5 +101,4 @@ namespace Z0
     {
         
     }
-
 }

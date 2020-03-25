@@ -12,14 +12,14 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct And<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct And<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "and";
 
             public static And<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -31,14 +31,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Or<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Or<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "or";
 
             public static Or<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -50,14 +50,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Xor<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Xor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "xor";
 
             public static Xor<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -69,14 +69,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Nand<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Nand<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "nand";
 
             public static Nand<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -88,13 +88,13 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Nor<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Nor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "not";
 
             public static Nor<T> Op => default;
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -106,14 +106,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Xnor<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Xnor<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "xnor";
 
             public static Xnor<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -125,14 +125,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Select<T> : ISFTernaryOpApi<T>, ISFTernarySpanOpApi<T>
+        public readonly struct Select<T> : ISTernaryOpApi<T>, ISTernarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "select";
 
             public static Select<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c) 
@@ -144,14 +144,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Not<T> : ISFUnaryOpApi<T>, ISFUnarySpanOpApi<T>
+        public readonly struct Not<T> : ISUnaryOpApi<T>, ISUnarySpanOpApi<T>
             where T : unmanaged        
         {
             public const string Name = "not";
 
             public static Not<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) 
@@ -163,14 +163,14 @@ namespace Z0
         }    
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Impl<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct Impl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "impl";
 
             public static Impl<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -182,14 +182,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct NonImpl<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct NonImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "impl";
 
             public static NonImpl<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -202,14 +202,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct CImpl<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct CImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "cimpl";
 
             public static CImpl<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 
@@ -221,14 +221,14 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct CNonImpl<T> : ISFBinaryOpApi<T>, ISFBinarySpanOpApi<T>
+        public readonly struct CNonImpl<T> : ISBinaryOpApi<T>, ISBinarySpanOpApi<T>
             where T : unmanaged        
         {    
             public const string Name = "cnonimpl";
 
             public static CNonImpl<T> Op => default;
             
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+            public OpIdentity Id => Identify.SFunc<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) 

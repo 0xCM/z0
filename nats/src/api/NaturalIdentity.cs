@@ -28,33 +28,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => OpIdentity.operation(opname,(FixedWidth)nateval<W>(), NumericTypes.kind<T>(), generic);
-
-        /// <summary>
-        /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="w">The covering bit width representative</param>
-        /// <param name="t">A primal cell type representative</param>
-        /// <typeparam name="W">The bit width type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static OpIdentity sfunc<T>(string opname, N128 w, bool generic = true)
-            where T : unmanaged
-                => sfunc(opname,w, NumericTypes.kind<T>(), generic);
-
-        /// <summary>
-        /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="w">The covering bit width representative</param>
-        /// <param name="t">A primal cell type representative</param>
-        /// <typeparam name="W">The bit width type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static OpIdentity sfunc<T>(string opname, N256 w, bool generic = true)
-            where T : unmanaged
-                => sfunc(opname, w, NumericTypes.kind<T>(), generic);
+                => OpIdentity.operation(opname, (TypeWidth)nateval<W>(), NumericTypes.kind<T>(), generic);
 
         /// <summary>
         /// Defines a numeric resource identity predicated on natural bitwidth
@@ -77,16 +51,5 @@ namespace Z0
         public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");   
 
-        /// <summary>
-        /// Determines whether a type is parametric over the natural numbers
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        static bool IsNatSpan(this Type t)
-            => NatSpan.test(t);
-
-        public static string testcase<W,C>(Type host, string root, W w = default, C t = default, bool generic = true)
-            where W : unmanaged, ITypeNat
-            where C : unmanaged
-                => $"{TypeIdentity.owner(host)}{host.Name}/{OpIdentity.operation(root, (FixedWidth)w.NatValue, NumericTypes.kind<C>(), generic)}";
     }
 }

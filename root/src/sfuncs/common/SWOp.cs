@@ -8,32 +8,38 @@ namespace Z0
     using System.Security;
 
     /// <summary>
-    /// Characterizes a unary operator
+    /// Characterizes a structural unary operator with a known operand width
     /// </summary>
+    /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISUnaryOpApi<A> : ISFApi<A,A>
+    public interface ISWUnaryOp<W,A> : ISWFunc<W,A,A>
+        where W : unmanaged, ITypeWidth
     {
-        new UnaryOp<A> Operation => (this as ISFApi<A,A>).Operation.ToUnaryOp();
+
     }
 
     /// <summary>
-    /// Characterizes a structural binary operator
+    /// Characterizes a structural unary operator with a known operand width
     /// </summary>
+    /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISBinaryOpApi<A> : ISFApi<A,A,A>
+    public interface ISWBinaryOp<W,A> : ISWFunc<W,A,A,A>
+        where W : unmanaged, ITypeWidth
     {
-        new BinaryOp<A> Operation => (this as ISFApi<A,A,A>).Operation.ToBinaryOp();    
+
     }
 
     /// <summary>
-    /// Characterizes a structural ternary operator
+    /// Characterizes a structural unary operator with a known operand width
     /// </summary>
+    /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISTernaryOpApi<A> : ISFApi<A,A,A,A>
+    public interface ISWTernaryOp<W,A> : ISWFunc<W,A,A,A,A>
+        where W : unmanaged, ITypeWidth
     {
-        new TernaryOp<A> Operation => (this as ISFApi<A,A,A,A>).Operation.ToTernaryOp();
-    } 
+
+    }
 }

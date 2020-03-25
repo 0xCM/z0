@@ -22,12 +22,6 @@ namespace Z0
         public static ITypeIdentityDispatcher Create()
             => default(TypeIdentityDispatcher);
 
-        public static Option<TypeIdentity> IdentifyPrimitive(Type arg)
-        {
-            var id = PrimalIdentity.From(arg);
-            return id.IsEmpty ? none<TypeIdentity>() : id.AsTypeIdentity();
-        }
-
         /// <summary>
         /// Creates a type identity provider from a host type that realizes the required interface, if possible;
         /// otherwise, returns none
@@ -48,11 +42,11 @@ namespace Z0
             else if(arg.IsNat())
                 return NatId(arg);
             else if(arg.IsSystemType())
-                return IdentifyPrimitive(arg);
+                return Identify.Primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
-                return EnumTypes.identify(arg).ToOption();
-            else if(IsSegmented(arg))
-                return SegmentedIdentity(arg);
+                return Identify.EnumType(arg).ToOption();
+            else if(SegmentedTypes.test(arg))
+                return SegmentedTypes.identify(arg);
             else if(SpanTypes.test(arg))
                 return SpanId(arg);
             else if(IsNatSpan(arg))
@@ -66,19 +60,6 @@ namespace Z0
                 let idptr = text.concat(id, IDI.ModSep, IDI.Pointer)
                 select TypeIdentity.Define(idptr);    
 
-        /// <summary>
-        /// Extracts an index-identified operation identity part from an operation identity
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        /// <param name="partidx">The 0-based part index</param>
-        internal static Option<IdentityPart> part(OpIdentity src, int partidx)
-        {
-            var parts = src.Parts.ToArray();
-            if(partidx <= parts.Length - 1)
-                return parts[partidx];
-            else
-                return none<IdentityPart>();
-        }
         
         /// <summary>
         /// Transforms a nonspecific identity part into a specialized segment part, if the source part is indeed a segment identity
@@ -102,9 +83,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsSegmented(Type t)
             => SegmentedTypes.test(t);
-
-        internal static Option<TypeIdentity> SegmentedIdentity(Type t)
-            => SegmentedTypes.identify(t);
 
         internal static Option<TypeIdentity> NatId(Type arg)
             => from v in arg.NatValue() 

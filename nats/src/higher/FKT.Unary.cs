@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// Nonparametric classification of unary functions
         /// </summary>
-        public readonly struct UnaryFuncType : IFuncType, IFuncArity<N1>
+        public readonly struct UnaryFuncType : IFuncType
         {
             public const FunctionClass Kind = FunctionClass.UnaryFunc;
 

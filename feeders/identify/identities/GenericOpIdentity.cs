@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Identify;
-    using static IdentityShare;
 
     public readonly struct GenericOpIdentity : IIdentifedOp<GenericOpIdentity>
     {            
@@ -37,26 +36,17 @@ namespace Z0
         [MethodImpl(Inline)]
         GenericOpIdentity(string src)
             => this.Identifier = text.denullify(src);
-
-        [MethodImpl(Inline)]
-        public bool Equals(GenericOpIdentity src)
-            => equals(this, src);
-
-        [MethodImpl(Inline)]
-        public int CompareTo(GenericOpIdentity other)
-            => compare(this, other);
  
-        public string Format()
-            => Identifier;
+        IIdentifedOp<GenericOpIdentity> Identified => this;
 
         public override int GetHashCode()
-            => hash(this);
+            => Identified.HashCode;
 
         public override bool Equals(object obj)
-            => equals(this, obj);
+            => Identified.Same(obj);
 
         public override string ToString()
-            => Format();
+            => Identified.Format();
 
         public Func<string, GenericOpIdentity> Factory => Define;
     }

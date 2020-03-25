@@ -14,7 +14,7 @@ namespace Z0
         /// parametrically-identified type is not supported
         /// </summary>
         /// <typeparam name="T">The unsupported type</typeparam>
-        public static NotSupportedException error<T>()
+        public static NotSupportedException define<T>()
             => new NotSupportedException($"The type {typeof(T).Name} is not supported in the current context");
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The unsupported type</typeparam>
         public static T raise<T>()
-            => throw error<T>();
+            => throw define<T>();
 
         /// <summary>
         /// Raises <see cref="NotSupportedException"/> populated with a custom message describing why a 
@@ -39,6 +39,6 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The unsupported type</typeparam>
         public static T raise<T>(string description)
-            => throw error<T>();
+            => throw define<T>();
     }
 }

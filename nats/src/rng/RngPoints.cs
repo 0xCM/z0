@@ -22,18 +22,6 @@ namespace Z0
         /// <typeparam name="X0">The domain of the first coordinate</typeparam>
         /// <typeparam name="X1">The domain of the second coordinate</typeparam>
         /// <typeparam name="X2">The domain of the third coordinate</typeparam>
-        public static PointSpanEmitter<N3,T> PointSpan<T>(this IPolyrand random, int count, N3 n, T t = default)
-            where T : unmanaged
-                => random.PointArray(count,n,t);
-
-        /// <summary>
-        /// Loads a point span emitter with specified number of points
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="count">The number of points to load into the emitter</param>
-        /// <typeparam name="X0">The domain of the first coordinate</typeparam>
-        /// <typeparam name="X1">The domain of the second coordinate</typeparam>
-        /// <typeparam name="X2">The domain of the third coordinate</typeparam>
         public static Point<N3,T>[] PointArray<T>(this IPolyrand random, int count, N3 n, T t = default)
             where T : unmanaged
                 => random.PointStream(n,t).Take(count).ToArray(); 

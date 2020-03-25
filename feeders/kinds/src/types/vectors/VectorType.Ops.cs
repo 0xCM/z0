@@ -25,13 +25,13 @@ namespace Z0
         public static bool ReturnsVector(this MethodInfo src)
             => src.ReturnType.IsVector();
 
-        public static FixedWidth NumericWidth(this Type t)
+        public static TypeWidth NumericWidth(this Type t)
         {
             var k = NumericTypes.kind(t);
             if(k != 0)
-                return (FixedWidth)(ushort)k;
+                return (TypeWidth)(ushort)k;
             else
-                return FixedWidth.None;            
+                return TypeWidth.None;            
         }         
 
         /// <summary>
@@ -39,21 +39,21 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static bool IsVector(this Type t, W128 w)
-            => VectorType.width(t) == FixedWidth.W128;
+            => VectorType.width(t) == TypeWidth.W128;
 
         /// <summary>
         /// Determines whether a type is a 256-bit intrinsic vector
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static bool IsVector(this Type t, W256 w)
-            => VectorType.width(t) == FixedWidth.W256;
+            => VectorType.width(t) == TypeWidth.W256;
 
         /// <summary>
         /// Determines whether a type is a 512-bit intrinsic vector
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static bool IsVector(this Type t, W512 w)
-            => VectorType.width(t) == FixedWidth.W512;
+            => VectorType.width(t) == TypeWidth.W512;
 
         /// <summary>
         /// Determines whether a parameter is of intrinsic vector type
@@ -67,21 +67,21 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static bool IsVector(this ParameterInfo t, W128 w)
-            => VectorType.width(t.ParameterType) == FixedWidth.W128;
+            => VectorType.width(t.ParameterType) == TypeWidth.W128;
 
         /// <summary>
         /// Determines whether a parameter is of type 256-bit intrinsic vector
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static bool IsVector(this ParameterInfo t, W256 w)
-            => VectorType.width(t.ParameterType) == FixedWidth.W256;
+            => VectorType.width(t.ParameterType) == TypeWidth.W256;
 
         /// <summary>
         /// Determines whether a parameter is of type 512-bit intrinsic vector
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static bool IsVector(this ParameterInfo t, W512 w)
-            => VectorType.width(t.ParameterType) == FixedWidth.W512;
+            => VectorType.width(t.ParameterType) == TypeWidth.W512;
 
         /// <summary>
         /// Determines whether a method has intrinsic paremeters or return type of specified width

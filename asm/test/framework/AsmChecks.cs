@@ -86,18 +86,18 @@ namespace Z0.Asm.Validation
         /// </summary>
         /// <param name="id">Moniker that identifies the operation under test</param>
         string CaseName(OpIdentity id)
-            => TestIdentity.testcase(GetType(),id);
+            => Identify.TestCase(GetType(),id);
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         string CaseName(string fullname)
-            => TestIdentity.testcase(GetType(), fullname);
+            => Identify.TestCase(GetType(), fullname);
 
         protected OpIdentity TestOpName<T>(string basename, T t = default)
             where T : unmanaged
-                => OpIdentity.numeric($"{basename}_asm",typeof(T).NumericKind());
+                => Identify.NumericOp($"{basename}_asm",typeof(T).NumericKind());
 
         protected AsmFormatConfig DefaultAsmFormat
             => AsmFormatConfig.New.WithoutFunctionTimestamp();
@@ -174,7 +174,7 @@ namespace Z0.Asm.Validation
             where W : unmanaged, ITypeNat
         {
             var archive = Context.CodeArchive(catalog,host);
-            var id = OpIdentity.operation(opname, (TypeWidth)w.NatValue, NumericTypes.kind<T>(), true);
+            var id = Identify.Op(opname, (TypeWidth)w.NatValue, NumericTypes.kind<T>(), true);
             Context.Notify($"{id}");
             var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)
@@ -409,7 +409,7 @@ namespace Z0.Asm.Validation
         {
             var results = list<TestCaseRecord>();
             var w = n8;
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -430,7 +430,7 @@ namespace Z0.Asm.Validation
             var results = list<TestCaseRecord>();
 
             var w = n8;
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -452,7 +452,7 @@ namespace Z0.Asm.Validation
 
             var w = n8;
 
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
             var f0 = primal.ToFixed();
 
             var f1 = generic.ToFixed();
@@ -474,7 +474,7 @@ namespace Z0.Asm.Validation
 
             var w = n16;
 
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
             var f0 = primal.ToFixed();
 
             var f1 = generic.ToFixed();
@@ -495,7 +495,7 @@ namespace Z0.Asm.Validation
             var results = list<TestCaseRecord>();
 
             var w = n16;
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -516,7 +516,7 @@ namespace Z0.Asm.Validation
             var results = list<TestCaseRecord>();
 
             var w = n32;
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -537,7 +537,7 @@ namespace Z0.Asm.Validation
             var results = list<TestCaseRecord>();
 
             var w = n32;
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
 
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -558,7 +558,7 @@ namespace Z0.Asm.Validation
             var results = list<TestCaseRecord>();
 
             var w = n64;
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -579,7 +579,7 @@ namespace Z0.Asm.Validation
             var results = list<TestCaseRecord>();
 
             var w = n64;
-            var id = OpIdentity.numeric(name, kind, false);
+            var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
             var f1 = generic.ToFixed();
@@ -602,21 +602,21 @@ namespace Z0.Asm.Validation
         {
             var names = PrimalBitLogicOps;
             var kinds = NumericKind.Integers.DistinctKinds();
-            var widths = array(FixedWidth.W8, FixedWidth.W16, FixedWidth.W32, FixedWidth.W64);
+            var widths = array(TypeWidth.W8, TypeWidth.W16, TypeWidth.W32, TypeWidth.W64);
             foreach(var n in names)
             foreach(var w in widths)
             foreach(var k in kinds)
                 primal_match(buffers, n, w, k);                        
         }
 
-        void primal_match(in BufferSeq buffers, string name, FixedWidth w, NumericKind kind)
+        void primal_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         {
             var catalog = PartId.GenericNumerics;
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = OpIdentity.numeric(name, kind, false);
-            var gId = OpIdentity.numeric(name, kind, true);
+            var dId = Identify.NumericOp(name, kind, false);
+            var gId = Identify.NumericOp(name, kind, true);
 
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);
@@ -627,31 +627,31 @@ namespace Z0.Asm.Validation
             Claim.yea(binop_match(buffers, w,d,g));                                     
         }
 
-        bit binop_match(in BufferSeq buffers, FixedWidth w, ApiCode a, ApiCode b)
+        bit binop_match(in BufferSeq buffers, TypeWidth w, ApiCode a, ApiCode b)
         {
             switch(w)
             {
-                case FixedWidth.W8:
+                case TypeWidth.W8:
                     binop_match(buffers, n8,a,b);
                     break;
 
-                case FixedWidth.W16:
+                case TypeWidth.W16:
                     binop_match(buffers, n16,a,b);
                     break;
 
-                case FixedWidth.W32:
+                case TypeWidth.W32:
                     binop_match(buffers, n32,a,b);
                     break;
 
-                case FixedWidth.W64:
+                case TypeWidth.W64:
                     binop_match(buffers, n64,a,b);
                     break;
 
-                case FixedWidth.W128:
+                case TypeWidth.W128:
                     binop_match(buffers, n128,a,b);
                     break;
 
-                case FixedWidth.W256:
+                case TypeWidth.W256:
                     binop_match(buffers, n256, a, b);
                     break;
 
@@ -906,7 +906,7 @@ namespace Z0.Asm.Validation
         {
             var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
             var kinds = NumericKind.Integers.DistinctKinds();
-            var widths = array(FixedWidth.W128, FixedWidth.W256);
+            var widths = array(TypeWidth.W128, TypeWidth.W256);
             foreach(var n in names)
             foreach(var w in widths)
             foreach(var k in kinds)
@@ -914,7 +914,7 @@ namespace Z0.Asm.Validation
         }
 
 
-        void vector_match(in BufferSeq buffers, string name, FixedWidth w, NumericKind kind)
+        void vector_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         {
             var catalog = PartId.Intrinsics;
             

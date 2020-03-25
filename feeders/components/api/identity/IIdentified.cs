@@ -11,6 +11,24 @@ namespace Z0
     using static Components;
 
     /// <summary>
+    /// Enumerates the identifiable things
+    /// </summary>
+    public enum IdentityTargetKind
+    {
+        None = 0,
+
+        /// <summary>
+        /// Designates type identity
+        /// </summary>
+        Type = 2,
+
+        /// <summary>
+        /// Designates operation identity
+        /// </summary>
+        Method = 4,
+    }
+    
+    /// <summary>
     /// Specifies what it means to be an identifier
     /// </summary>
     public interface IIdentified
@@ -19,16 +37,33 @@ namespace Z0
 
         bool IsEmpty 
         {
+            [MethodImpl(Inline)]
             get => string.IsNullOrWhiteSpace(Identifier);
         }               
+
+        bool IsNonEmpty
+        {            
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
     }
 
     public interface IIdentifiedTarget : IIdentified, ICustomFormattable, IComparable
     {
-        IdentityTargetKind TargetKind  => IdentityTargetKind.Type;
+        IdentityTargetKind TargetKind  
+            => IdentityTargetKind.Type;
 
-        protected string DenullifiedIdentity => Identifier ?? string.Empty;
+        protected string DenullifiedIdentity 
+            => Identifier ?? string.Empty;
 
+        int HashCode 
+            => DenullifiedIdentity.GetHashCode();
+
+        bool Same(object src) 
+            => src is IIdentifiedTarget t 
+            && string.Equals(DenullifiedIdentity, t.DenullifiedIdentity, 
+                    StringComparison.InvariantCultureIgnoreCase);
+    
         [MethodImpl(Inline)]
         string ICustomFormattable.Format() => DenullifiedIdentity;
 
@@ -59,7 +94,7 @@ namespace Z0
     public interface IIdentifedOp<T> : IIdentfiedOp, IIdentifiedTarget<T>
         where T : IIdentifedOp<T>, new()    
     {
-        Func<string,T> Factory {get;}
+        Func<string,T> Factory  => s => new T();
     }
 
     public interface IIdentifiedType : IIdentifiedTarget
@@ -71,6 +106,6 @@ namespace Z0
     public interface IIdentifiedType<T> : IIdentifiedType, IIdentifiedTarget<T>
         where T : IIdentifiedType<T>, new()    
     {
-
+        Func<string,T> Factory  => s => new T();
     }
 }

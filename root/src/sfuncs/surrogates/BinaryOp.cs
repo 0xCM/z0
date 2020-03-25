@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct BinaryOp<T> : Z0.ISFBinaryOpApi<T> 
+        public readonly struct BinaryOp<T> : Z0.ISBinaryOpApi<T> 
         {
             readonly Z0.BinaryOp<T> F;
             

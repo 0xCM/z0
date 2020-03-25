@@ -32,17 +32,6 @@ namespace Z0
 
         Action<A> Operation => Invoke;
     }    
-    /// <summary>
-    /// Characterizes a structural function that is width-parametric
-    /// </summary>
-    /// <typeparam name="W">The width type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISWFunc<W> : IStructuralOperation
-        where W : unmanaged, ITypeWidth
-    {
-        TypeWidth WidthKind => default(W).TypeWidth;
-
-    }
 
     /// <summary>
     /// Characterizes a structural emitter; that is, the contract charactrizes a type that implements an emitter

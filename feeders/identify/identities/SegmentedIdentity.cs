@@ -12,12 +12,7 @@ namespace Z0
     using static IdentityShare;
     using static text;
 
-    public interface ISegmentedIdentity : IIdentifiedType<SegmentedIdentity>
-    {
-
-    }
-
-    public readonly struct SegmentedIdentity : ISegmentedIdentity
+    public readonly struct SegmentedIdentity : IIdentifiedType<SegmentedIdentity>
     {        
         public static SegmentedIdentity Empty => Define(TypeIndicator.Empty, FixedWidth.None, NumericKind.None);
 

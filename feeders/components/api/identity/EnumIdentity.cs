@@ -7,18 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Identify;
-    using static IdentityShare;
+    using static Components;
 
-    public interface IIdentifiedEnum : IIdentifiedType<EnumIdentity>
-    {
-
-    }
-
-    /// <summary>
-    /// Defines enumeration identifiers
-    /// </summary>
-    public readonly struct EnumIdentity  : IIdentifiedEnum
+    public readonly struct EnumIdentity : IIdentifiedType<EnumIdentity>
     {
         public static EnumIdentity Empty = Define(string.Empty, NumericKind.None);
 
@@ -28,10 +19,6 @@ namespace Z0
         
         public NumericKind BaseType {get;}           
 
-        [MethodImpl(Inline)]
-        public static EnumIdentity From(Type src)
-            => src.IsEnum ? Define(src.Name, src.GetEnumUnderlyingType().NumericKind()) : Empty;
-                 
         [MethodImpl(Inline)]
         public static EnumIdentity Define(string name, NumericKind basetype)
             => new EnumIdentity(name, basetype);
@@ -60,31 +47,19 @@ namespace Z0
             this.Identifier = basetype != 0 ? $"{Name}{IDI.ModSep}{basetype.Format()}" : string.Empty;
         }
      
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => text.empty(Identifier);
-        }
+        IIdentifiedType<EnumIdentity> Identified => this;
+        
+        public override int GetHashCode()
+            => Identified.HashCode;
+
+        public override bool Equals(object obj)
+            => Identified.Same(obj);
+
+        public override string ToString()
+            => Identified.Format();
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.Define(Identifier);
-
-        [MethodImpl(Inline)]
-        public bool Equals(EnumIdentity src)
-            => IdentityShare.equals(this, src);
-
-        [MethodImpl(Inline)]
-        public int CompareTo(EnumIdentity src)
-            => compare(this, src);
- 
-        public override int GetHashCode()
-            => hash(this);
-
-        public override bool Equals(object obj)
-            => equals(this, obj);
-
-        public override string ToString()
-            => Identifier;
+            => TypeIdentity.Define(Identifier); 
     }
 }

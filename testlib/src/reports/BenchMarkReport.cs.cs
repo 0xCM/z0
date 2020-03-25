@@ -89,7 +89,7 @@ namespace Z0
             => Format();
 
         public int CompareTo(BenchmarkRecord other)
-            => OpId.CompareTo(other.OpId);
+            => OpId.Identifier.CompareTo(other.OpId.Identifier);
 
         public int CompareTo(object obj)
             => obj is BenchmarkRecord r ? CompareTo(r) : -1;

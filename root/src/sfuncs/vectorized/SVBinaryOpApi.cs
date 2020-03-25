@@ -38,7 +38,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ISVBinaryOpApi<W,V,T> : ISVFuncApi, ISFBinaryOpApi<V>
+    public interface ISVBinaryOpApi<W,V,T> : ISVFuncApi, ISBinaryOpApi<V>
         where W : unmanaged, ITypeWidth
         where V : struct
         where T : unmanaged

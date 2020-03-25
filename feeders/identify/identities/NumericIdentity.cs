@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Identify;
-    using static IdentityShare;
 
-    public readonly partial struct NumericIdentity  : INumericIdentity
+    public readonly struct NumericIdentity : IIdentifiedType<NumericIdentity>
     {
         public string Identifier {get;}            
 
@@ -40,34 +39,22 @@ namespace Z0
         NumericIdentity(NumericKind kind)
         {
             this.NumericKind = kind;
-            this.Identifier = $"{kind.WidthKind().Format()}{NumericKind.Indicator().Format()}";
+            this.Identifier = $"{kind.TypeWidth().Format()}{NumericKind.Indicator().Format()}";
         }
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
             => TypeIdentity.Define(Identifier);
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => text.empty(Identifier);
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(NumericIdentity src)
-            => equals(this, src);
-
-        [MethodImpl(Inline)]
-        public int CompareTo(NumericIdentity other)
-            => compare(this, other);
+        IIdentifiedType<NumericIdentity> Identified => this;
  
         public override int GetHashCode()
-            => hash(this);
+            => Identified.HashCode;
 
         public override bool Equals(object obj)
-            => equals(this, obj);
+            => Identified.Same(obj);
 
         public override string ToString()
-            => Identifier;
+            => Identified.Format();
     }
 }

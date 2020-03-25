@@ -17,11 +17,11 @@ namespace Z0
 
         public void vgather_check()
         {
-            vgather_check(n128);
-            vgather_check(n256);
+            vgather_check(w128);
+            vgather_check(w256);
         }
 
-        void vgather_check(N128 w)
+        void vgather_check(W128 w)
         {
             vgather_check(w,z8);
             vgather_check(w,z8i);
@@ -33,7 +33,7 @@ namespace Z0
             vgather_check(w,z64i);
         }
 
-        void vgather_check(N256 w)
+        void vgather_check(W256 w)
         {
             vgather_check(w,z8);
             vgather_check(w,z8i);
@@ -45,7 +45,7 @@ namespace Z0
             vgather_check(w,z64i);
         }
 
-        void vgather_check<T>(N128 w, T t = default)
+        void vgather_check<T>(W128 w, T t = default)
             where T : unmanaged
         {
             void check()
@@ -67,7 +67,7 @@ namespace Z0
             CheckAction(check, CaseName("vgather", w, t));
         }
 
-        void vgather_check<T>(N256 w, T t = default)
+        void vgather_check<T>(W256 w, T t = default)
             where T : unmanaged
         {
             void check()

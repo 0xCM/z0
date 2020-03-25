@@ -20,7 +20,7 @@ namespace Z0
             public static Concat2x128<T> Op => default;
 
             public OpIdentity Id 
-                => OpIdentity.Define($"{Name}_2x128x{TypeIdentity.numeric<T>()}");
+                => OpIdentity.Define($"{Name}_2x128x{Identify.NumericType<T>()}");
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y) 

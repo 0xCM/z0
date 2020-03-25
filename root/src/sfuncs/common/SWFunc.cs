@@ -8,6 +8,18 @@ namespace Z0
     using System.Security;
 
     /// <summary>
+    /// Characterizes a structural function that is width-parametric
+    /// </summary>
+    /// <typeparam name="W">The width type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface ISWFunc<W> : IStructuralOperation
+        where W : unmanaged, ITypeWidth
+    {
+        TypeWidth TypeWidth => default(W).TypeWidth;
+
+    }
+
+    /// <summary>
     /// Characterizes a structural emitter with emission type of known width
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
@@ -30,7 +42,6 @@ namespace Z0
     {
 
     }
-
 
     /// <summary>
     /// Characterizes a structural binary function with operands and return type of known and common widths
@@ -60,5 +71,4 @@ namespace Z0
     {
 
     }
-
 }
