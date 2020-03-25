@@ -2,25 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Root)]
-
-namespace Z0.Parts
-{        
-    public sealed class Root : ApiPart<Root, Root.C>
-    {
-        public class C : ApiCatalog<C> { public C() : base(PartId.Root) { } }            
-    }
-}
-
 namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    public static partial class Root
-    {                        
 
+    using static Components;
+
+    public readonly struct FixedType<F> : IFixedKind<F>
+        where F : unmanaged, IFixed
+    {
+        public static int BitCount => bitsize<F>();
+
+        public FixedWidth FixedWidth { [MethodImpl(Inline)] get=> (FixedWidth) BitCount;}
     }
 
 }
-
-    

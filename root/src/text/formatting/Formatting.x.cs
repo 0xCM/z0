@@ -18,6 +18,19 @@ namespace Z0
     public static partial class FormattingOps
     {
         /// <summary>
+        /// Joins a sequence of source characters with optional interspersed separator
+        /// </summary>
+        /// <param name="chars">The characters to join</param>
+        /// <param name="sep">The character to intersperse</param>
+        public static string Concat(this IEnumerable<char> chars, char? sep = null)
+        {
+            if(sep == null)
+                return new string(chars.ToSpan());
+            else
+                return new string(chars.Intersperse(sep.Value).ToSpan());                        
+        }
+
+        /// <summary>
         /// Formats a type that provides intrinsic format capability
         /// </summary>
         /// <param name="src">The value to format</param>

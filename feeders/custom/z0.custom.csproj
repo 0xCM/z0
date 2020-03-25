@@ -7,8 +7,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
-    <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Canonical)" />
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Monadic)" />
   </ItemGroup>
 
 </Project>

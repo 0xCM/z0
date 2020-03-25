@@ -15,7 +15,6 @@ namespace Z0
 
     public class t_dynamic : t_vinx<t_dynamic>
     {   
-
         public void check_blocks()
         {
             var methods = typeof(gblocks).DeclaredMethods().Tagged<OpAttribute>().WithName("add");

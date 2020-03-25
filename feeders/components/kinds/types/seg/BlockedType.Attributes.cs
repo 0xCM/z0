@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
 
-
-    public static partial class OpClass
+    public class BlockedAttribute : SegmentedAttribute
     {
-    
-    }
-
-    public static partial class OpReps
-    {
-
+        public BlockedAttribute(object totalwidth, bool sequenced, params object[] segwidths)
+            : base(totalwidth, sequenced, segwidths)
+        {
+        }
     }
 }

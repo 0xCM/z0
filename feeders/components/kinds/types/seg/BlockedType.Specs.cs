@@ -5,14 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-
-    public static partial class OpClass
+    public interface IBlockedType : ILiteralKind<BlockedKind>, ITypeKind
     {
-    
+
     }
 
-    public static partial class OpReps
+    public interface IBlockedType<W,T> : IBlockedType, IFixedWidth<W>
+        where W : unmanaged, ITypeWidth
+        where T : unmanaged
     {
 
     }

@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-
-    public static partial class OpClass
+    partial class Root
     {
-    
-    }
-
-    public static partial class OpReps
-    {
-
+        [MethodImpl(Inline)]
+        public static Span<byte> bytes<T>(T src)
+            where T : unmanaged
+                => Bytes.from(src);
     }
 }

@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-
-    public static partial class OpClass
-    {
-    
-    }
-
-    public static partial class OpReps
-    {
-
+    partial class Root
+    {                
+        [MethodImpl(Inline)]
+        public static Factory<T> factory<T>()
+            => default;
     }
 }

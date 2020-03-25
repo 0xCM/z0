@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    
     using static Root;
 
     public abstract class ConsoleApp<A> : IConsoleApp<A>, IAppMsgSink

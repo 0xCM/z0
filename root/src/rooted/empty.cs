@@ -2,25 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Root)]
-
-namespace Z0.Parts
-{        
-    public sealed class Root : ApiPart<Root, Root.C>
-    {
-        public class C : ApiCatalog<C> { public C() : base(PartId.Root) { } }            
-    }
-}
-
 namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    public static partial class Root
-    {                        
 
+    partial class Root
+    {                
+        [MethodImpl(Inline)]
+        public static TheEmpty empty() 
+            => TheEmpty.The;
+
+        [MethodImpl(Inline)]
+        public static TheEmpty<T> empty<T>(T zero = default) 
+            => TheEmpty<T>.The(zero);
     }
-
 }
-
-    
