@@ -21,7 +21,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name, VKind);
+            public OpIdentity Id => Identify.SFunc<T>(Name, VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke() => Data.vunits(VKind);            
@@ -35,7 +35,7 @@ namespace Z0
             public static Units256<T> Op => default;
 
             public Vec256Kind<T> VKind => default;
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke() => Data.vunits<T>(VKind);

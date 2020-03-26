@@ -67,7 +67,7 @@ namespace Z0
         {
             var m1 = BitMatrix.alloc<N7,N9,byte>();
             m1.Fill(bit.On);
-            var fmt = m1.Format().RemoveWhitespace();
+            var fmt = m1.Format().RemoveBlanks();
 
             Claim.eq(7*9, fmt.Length);    
         }

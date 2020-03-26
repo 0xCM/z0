@@ -11,7 +11,6 @@ namespace Z0
 
     partial class TextingOps
     {
-
         /// <summary>
         /// Formamats a number with comma separators
         /// </summary>

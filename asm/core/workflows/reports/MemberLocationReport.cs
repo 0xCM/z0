@@ -66,20 +66,11 @@ namespace Z0.Asm
         public static MemberLocationReport Create(PartId assemblyid, IEnumerable<MethodInfo> methods)
         {   
             var src = (from m in methods
-                      let id = m.IsGenericMethodDefinition ? Identity.generic(m) : Identity.identify(m)
+                      let id = m.IsGenericMethodDefinition ? Identity.generic(m).Generialize() : Identity.identify(m)
                       let address = MemoryAddress.Define(m.MethodHandle.GetFunctionPointer())
                       orderby address.Location
                       select (id,address)).ToArray();
 
-            // var records = new MemberLocationRecord[src.Length];
-            // var lastaddress = MemoryAddress.Zero;
-            // for(var i=0; i< src.Length; i++)
-            // {
-            //     (var id, var address)  = src[i];
-            //     var gap = lastaddress.NonZero ? address - lastaddress : MemoryAddress.Zero;
-            //     records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
-            //     lastaddress =  address;
-            // }
             var dst = new MemberLocationRecord[src.Length];
             return new MemberLocationReport(assemblyid, dst);
         }

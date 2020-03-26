@@ -21,7 +21,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vreverse(x);
@@ -37,7 +37,7 @@ namespace Z0
 
             public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => gvec.vreverse(x);

@@ -36,7 +36,7 @@ namespace Z0
             internal BinaryOp(Z0.BinaryOp<T> f, string name)            
             {
                 this.F = f;
-                this.Id = OpIdentity.sfunc<T>(name);
+                this.Id = Identify.SFunc<T>(name);
             }
 
             [MethodImpl(Inline)]

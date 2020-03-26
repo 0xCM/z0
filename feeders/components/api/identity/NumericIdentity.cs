@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Identify;
+    using static Components;
 
     public readonly struct NumericIdentity : IIdentifiedType<NumericIdentity>
     {

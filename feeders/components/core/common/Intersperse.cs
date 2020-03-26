@@ -7,13 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Text;
     using System.Linq;
 
-    using static Collective;
+    using static Components;
 
-    partial class CollectiveOps
+    partial class ComponentOps
     {
-        /// <summary>
+       /// <summary>
         /// Interleaves a specified value between each element of the source
         /// </summary>
         /// <param name="src">The source stream</param>

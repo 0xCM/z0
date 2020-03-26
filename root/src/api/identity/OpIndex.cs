@@ -35,7 +35,7 @@ namespace Z0
             else
                 HashTable = src.ToDictionary();
             
-            Duplicates = duplicates.Select(d => OpIdentity.Define(d)).ToArray();
+            Duplicates = duplicates.Select(d => Identify.Op(d)).ToArray();
         }
     
         public Option<T> Lookup(OpIdentity id)

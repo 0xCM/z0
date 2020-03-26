@@ -13,7 +13,6 @@
     <ProjectReference Include="$(Texting)" />
     <ProjectReference Include="$(Collective)" />    
     <ProjectReference Include="$(Reflective)" />
-    <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Kinds)" />
   </ItemGroup>
 

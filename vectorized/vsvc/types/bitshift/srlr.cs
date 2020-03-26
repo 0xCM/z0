@@ -21,7 +21,7 @@ namespace Z0
 
             public static Srlr128<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
+            public OpIdentity Id => Identify.SFunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> count) 
@@ -41,7 +41,7 @@ namespace Z0
 
             public static Srlr256<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
+            public OpIdentity Id => Identify.SFunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> count) 

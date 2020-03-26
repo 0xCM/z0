@@ -21,7 +21,7 @@ namespace Z0
 
             public static TakeMask128<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
+            public OpIdentity Id => Identify.SFunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x) 
@@ -37,7 +37,7 @@ namespace Z0
 
             public static TakeMask256<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc(Name,VKind);
+            public OpIdentity Id => Identify.SFunc(Name,VKind);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x) 

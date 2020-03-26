@@ -9,14 +9,14 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    using static Identify;
+    using static Components;
 
     public interface ITypeIdentityProvider : IIdentityProvider<Type,TypeIdentity>
     {
         TypeIdentity DefineIdentity(Type src);  
 
         IEnumerable<Type> Identifiable 
-            => Arrays.empty<Type>();
+            => seq<Type>();
 
         IIdentified IIdentifier<Type>.Identify(Type src)
             => DefineIdentity(src);
@@ -34,7 +34,7 @@ namespace Z0
         TypeIdentity DefineIdentity();
         
         IEnumerable<Type> ITypeIdentityProvider.Identifiable
-            => Arrays.empty<Type>();
+            => seq<Type>();
 
         TypeIdentity ITypeIdentityProvider.DefineIdentity(Type src)
             => DefineIdentity();

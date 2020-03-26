@@ -53,7 +53,7 @@ namespace Z0
                 id += last;
             }
 
-            return GenericOpIdentity.Define(id);        
+            return GenericOpIdentity.Define(id);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         public static OpIdentity identify(MethodInfo src)
         {            
             if(src.IsOpenGeneric())
-                return generic(src);
+                return generic(src).Generialize();
             else if(src.IsConstructedGenericMethod)
                 return constructed(src);
             else

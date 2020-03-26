@@ -176,7 +176,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         public static BitString parse(string src)                
         {            
-            src = src.RemoveWhitespace();
+            src = src.RemoveBlanks();
             var len = src.Length;
             var lastix = len - 1;
             Span<byte> dst = new byte[len];

@@ -23,7 +23,10 @@ namespace Z0
             
             return new AsmFunctionGroup(id, members);
         }
-        
+
+        public static AsmFunctionGroup Define(GenericOpIdentity id, AsmFunction[] members)
+            => Define(id.Generialize(), members);
+
         AsmFunctionGroup(OpIdentity id, AsmFunction[] members)
         {
             this.Id = id;

@@ -36,7 +36,7 @@ namespace Z0
         {
             try
             {
-                var id = OpIdentity.Define(formatted.TakeBefore(idsep).Trim());
+                var id = Identify.Op(formatted.TakeBefore(idsep).Trim());
                 var bytes = formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(Hex.parsebyte).ToArray();
                 var encoded = MemoryExtract.Define(bytes);
                 return Define(id, encoded);                

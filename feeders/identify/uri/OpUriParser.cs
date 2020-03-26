@@ -34,7 +34,7 @@ namespace Z0
                     msg = $"Failed to parse {pathText} as an api host path";
                 else
                 {
-                    var id = OpIdentity.Define(rest.TakeAfter(H));
+                    var id = Identify.Op(rest.TakeAfter(H));
                     var group = rest.Between(Q,H);
                     var uri = OpUri.Define(scheme, path.Value, group, id);
                     return ParseResult.Success(text,uri);

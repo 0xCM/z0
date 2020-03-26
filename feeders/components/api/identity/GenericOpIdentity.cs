@@ -7,13 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Identify;
+    using static Components;
 
     public readonly struct GenericOpIdentity : IIdentifedOp<GenericOpIdentity>
     {            
-        [MethodImpl(Inline)]
-        public static implicit operator OpIdentity(GenericOpIdentity src)
-            => OpIdentity.Define(src.Identifier);
 
         /// <summary>
         /// The operation identifier
@@ -35,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         GenericOpIdentity(string src)
-            => this.Identifier = text.denullify(src);
+            => this.Identifier = src ?? string.Empty;
  
         IIdentifedOp<GenericOpIdentity> Identified => this;
 

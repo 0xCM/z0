@@ -28,7 +28,7 @@ namespace Z0
         UserType(UserTypeId.BitId), 
         ConversionProvider(typeof(BitConversion))
     ]
-    public readonly struct bit : IFormattable<bit>//, ITypeIdentityProvider<bit> 
+    public readonly struct bit : IFormattable<bit>, ITypeIdentityProvider<bit> 
     {
         const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 

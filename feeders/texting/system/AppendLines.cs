@@ -8,12 +8,13 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Text;
 
     using static Texting;
 
     partial class TextingOps
     {
-
-
+        public static void AppendLines(this StringBuilder src, IEnumerable<string> lines)
+            => Streams.iter(lines, line => src.AppendLine(line));            
     }
 }

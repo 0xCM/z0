@@ -22,7 +22,7 @@ namespace Z0
 
             public Vec128Kind<T> VKind => default;
  
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, Vector128<T> z) => gvec.vselect(x,y,z);
@@ -45,7 +45,7 @@ namespace Z0
 
             public Vec256Kind<T> VKind => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, Vector256<T> z) => gvec.vselect(x,y,z);

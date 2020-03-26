@@ -918,8 +918,8 @@ namespace Z0.Asm.Validation
         {
             var catalog = PartId.Intrinsics;
             
-            var idD = OpIdentity.operation(name, w, kind, false);
-            var idG = OpIdentity.operation(name, w, kind, true);
+            var idD = Identify.Op(name, w, kind, false);
+            var idG = Identify.Op(name, w, kind, true);
 
             var d = Context.CodeArchive(catalog, nameof(dvec)).Read(idD).Single().ApiCode;
             var g = Context.CodeArchive(catalog, nameof(gvec)).Read(idG).Single().ApiCode;

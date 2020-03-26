@@ -26,13 +26,16 @@ namespace Z0
                 return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
 
             if(src.IsEnum)
-                return src.Name + AsciSym.Colon + src.GetEnumUnderlyingType().DisplayName();
+                return src.Name + ':' + src.GetEnumUnderlyingType().DisplayName();
 
             if(src.IsPointer)
                 return $"{src.GetElementType().DisplayName()}*";
             
             if(src.IsSystemType())
-                return src.SystemKeyword().IfBlank(src.Name);
+            {
+                var kw = src.SystemKeyword();
+                return string.IsNullOrWhiteSpace(kw) ? src.Name : kw;
+            }
 
             if(src.IsGenericType && !src.IsRef())
                 return src.FormatGeneric();
@@ -62,11 +65,18 @@ namespace Z0
             return name;
         } 
 
+        /// <summary>
+        /// Encloses text between less than and greater than characters
+        /// </summary>
+        /// <param name="content">The content to enclose</param>
+        static string angled(string content)
+            => String.IsNullOrWhiteSpace(content) ? string.Empty : $"<{content}>";
+
         static string GenericMethodDisplayName(this MethodInfo src, IReadOnlyList<Type> args)
         {                
             var argFmt = args.Count != 0 ? args.Select(t => t.DisplayName()).Concat(", ") : string.Empty;            
             var typeName = src.Name.Replace($"`{args.Count}", string.Empty);
-            return typeName + (args.Count != 0 ? text.angled(argFmt) : string.Empty);
+            return typeName + (args.Count != 0 ? angled(argFmt) : string.Empty);
         }
 
         /// <summary>

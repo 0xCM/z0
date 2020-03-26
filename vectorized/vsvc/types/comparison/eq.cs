@@ -22,7 +22,7 @@ namespace Z0
 
             public static Eq128<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.veq(x,y);
@@ -46,7 +46,7 @@ namespace Z0
 
             public static Eq256<T> Op => default;
 
-            public OpIdentity Id => OpIdentity.sfunc<T>(Name,VKind);
+            public OpIdentity Id => Identify.SFunc<T>(Name,VKind);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.veq(x,y);

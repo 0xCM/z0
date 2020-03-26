@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Identify;
+    using static Components;
 
     public readonly struct PrimalIdentity : IIdentifiedType<PrimalIdentity>
     {
@@ -18,11 +18,11 @@ namespace Z0
         public string Keyword {get;}
 
         [MethodImpl(Inline)]
-        internal static PrimalIdentity Define(NumericKind kind, string keyword)
+        public static PrimalIdentity Define(NumericKind kind, string keyword)
             => new PrimalIdentity(kind,keyword);
 
         [MethodImpl(Inline)]
-        internal static PrimalIdentity Define(string keyword)
+        public static PrimalIdentity Define(string keyword)
             => new PrimalIdentity(keyword);
 
         [MethodImpl(Inline)]

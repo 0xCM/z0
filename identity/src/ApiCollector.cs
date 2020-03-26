@@ -47,7 +47,7 @@ namespace Z0
 
         public IEnumerable<DirectOpGroup> CollectDirect(ApiHost src)        
             => from d in DirectOpSpecs(src).GroupBy(op => op.ConcreteMethod.Name)
-                select DirectOpGroup.Define(src, OpIdentity.Define(d.Key), d);
+                select DirectOpGroup.Define(src, Identify.Op(d.Key), d);
                         
         public IEnumerable<GenericOp> CollectGeneric(ApiHost src)
              => from m in Tagged(src).OpenGeneric()

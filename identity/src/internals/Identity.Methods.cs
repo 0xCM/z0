@@ -27,7 +27,7 @@ namespace Z0
             id += IDI.Generic;                           
             id += src.FormatTypeArgIdentity();
             id += src.FormatParameterIdentity();
-            return OpIdentity.Define(id);
+            return Identify.Op(id);
         }        
 
         static IEnumerable<string> ParameterIdentities(this MethodInfo method)
@@ -51,7 +51,7 @@ namespace Z0
             id += IDI.PartSep;
             id += formatargs(IDI.ValueArgsOpen, IDI.ValueArgsClose, IDI.ArgSep, src.ParameterIdentities());
 
-            return OpIdentity.Define(id);
+            return Identify.Op(id);
         }        
 
         static IEnumerable<string> TypeArgIdentities(this MethodInfo src)

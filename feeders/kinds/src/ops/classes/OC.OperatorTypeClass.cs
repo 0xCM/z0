@@ -33,11 +33,9 @@ namespace Z0
                 return None;
         }
 
-        [MethodImpl(Inline)]
         public static OperatorTypeClass Define(Type type, OperatorClass @class)
             => new OperatorTypeClass(type, @class);
 
-        [MethodImpl(Inline)]
         OperatorTypeClass(Type type, OperatorClass @class)
         {
             this.OperatorClass = @class;
@@ -56,12 +54,12 @@ namespace Z0
 
         const string AsciArrow = "->";
 
-        // public override string ToString()
-        //     => IsNone 
-        //     ? string.Empty 
-        //     : OperandType.DisplayName()
-        //                  .Replicate(OperatorClass.ArityValue() + 1)
-        //                  .Intersperse(AsciArrow)
-        //                  .Concat();        
+        public override string ToString()
+            => IsNone 
+            ? string.Empty 
+            : OperandType.DisplayName()
+                         .Replicate(OperatorClass.ArityValue() + 1)
+                         .Intersperse(AsciArrow)
+                         .Concat();        
     }    
 }

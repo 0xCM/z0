@@ -203,7 +203,7 @@ namespace Z0
             if(src.TextComponents.Skip(1).First()[0] == IDI.Generic)
                 return src;
             else
-               return OpIdentity.Define(
+               return Identify.Op(
                    text.concat(src.Identifier.LeftOf(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOf(IDI.PartSep)));
         }
 
@@ -212,7 +212,7 @@ namespace Z0
         /// </summary>
         public static OpIdentity WithoutGeneric(this OpIdentity src)
         {
-            var parts = src.Parts.ToArray();
+            var parts = Identify.Parts(src).ToArray();
             if(parts.Length < 2)
                 return src;
             
@@ -220,7 +220,7 @@ namespace Z0
                 return src;
 
             parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
-            return parts;
+            return Identify.Op(parts);
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace Z0
             if(src.Identifier.Contains(OpIdentity.AsmLocator))
                 return src;
             else
-                return OpIdentity.Define(src.Identifier + OpIdentity.AsmLocator);
+                return Identify.Op(src.Identifier + OpIdentity.AsmLocator);
         }            
 
         static IEnumerable<string> SuffixText(OpIdentity src)
@@ -261,12 +261,16 @@ namespace Z0
 
         public static Option<IdentityPart> Part(OpIdentity src, int partidx)
         {
-            var parts = src.Parts.ToArray();
+            var parts = Identify.Parts(src).ToArray();
             if(partidx <= parts.Length - 1)
                 return parts[partidx];
             else
                 return Option.none<IdentityPart>();
         }
+
+        [MethodImpl(Inline)]
+        public static OpIdentity Generialize(this GenericOpIdentity src)
+            => Op(src.Identifier);
 
         public static IEnumerable<IdentityPart> Parts(OpIdentity src)
         {

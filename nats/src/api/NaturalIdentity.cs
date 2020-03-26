@@ -28,7 +28,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => OpIdentity.operation(opname, (TypeWidth)nateval<W>(), NumericTypes.kind<T>(), generic);
+                => Identify.Op(opname, (TypeWidth)nateval<W>(), NumericTypes.kind<T>(), generic);
 
         /// <summary>
         /// Defines a numeric resource identity predicated on natural bitwidth

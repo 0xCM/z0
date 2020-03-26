@@ -20,6 +20,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Text;
 
     public static class Kinds
     {
@@ -29,9 +30,5 @@ namespace Z0
         internal static int bitsize<T>()            
             where T : unmanaged
                 => Unsafe.SizeOf<T>()*8;
-
-        [MethodImpl(Inline)]
-        internal static IEnumerable<T> items<T>(params T[] src)
-            => src;
     }
 }

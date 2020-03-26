@@ -19,7 +19,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
+    using System.Text;
 
     using static Components;
 
@@ -48,5 +48,58 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IEnumerable<T> seq<T>(params T[] src)
             => src;
+
+        /// <summary>
+        /// Creates a stream of replicated characters 
+        /// </summary>
+        /// <param name="src">The character to replicate</param>
+        /// <param name="count">The replication count</param>
+        public static IEnumerable<char> replicate(char src, int count)
+            => new string(src,count);
+
+        public static IEnumerable<string> replicate(string src, int count)
+        {
+            for(var i=0; i<count; i++)
+                yield return src;
+        }
+
+        /// <summary>
+        /// Creates a new stringbuilder
+        /// </summary>
+        static StringBuilder build()
+            => new StringBuilder();
+
+        /// <summary>
+        /// Creates a new string by weaving a specified character between each character in the source
+        /// </summary>
+        /// <param name="src">The source string</param>
+        /// <param name="c">The character to intersperse</param>
+        public static string intersperse(string src, char c)
+        {
+            var builder = build();
+            foreach(var item in src)
+            {
+                builder.Append(item);
+                builder.Append(c);
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Creates a new string by weaving a substring between each character in the source
+        /// </summary>
+        /// <param name="src">The source string</param>
+        /// <param name="sep">The value to intersperse</param>
+        public static string intersperse(string src, string sep)
+        {
+            var builder = build();
+            foreach(var item in src)
+            {
+                builder.Append(item);
+                builder.Append(sep);
+            }
+            return builder.ToString();
+        }
+
     }
 }

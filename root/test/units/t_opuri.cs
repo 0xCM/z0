@@ -14,7 +14,7 @@ namespace Z0
     {
         public void parse_uri_1()
         {
-            var opid = OpIdentity.Define("vgeneric_g[8u](v512x8i~in)");
+            var opid = Identify.Op("vgeneric_g[8u](v512x8i~in)");
             var input = $"hex://fixed/Vector512?vgeneric#{opid}";
             var attempt = OpUri.Parse(input);
             Claim.yea(attempt.Succeeded);
@@ -26,7 +26,7 @@ namespace Z0
             Claim.eq(opid, uri.OpId);
             Claim.eq(true, opid.IsGeneric);
             Claim.eq("vgeneric", opid.Name);
-            var parts  = opid.Parts.ToArray();
+            var parts  = Identify.Parts(opid).ToArray();
             foreach(var p in parts)
                 trace(p.PartKind, p);                            
         }

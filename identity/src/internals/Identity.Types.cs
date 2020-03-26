@@ -205,7 +205,7 @@ namespace Z0
         /// <param name="partidx">The 0-based part index</param>
         internal static Option<IdentityPart> part(OpIdentity src, int partidx)
         {
-            var parts = src.Parts.ToArray();
+            var parts = Identify.Parts(src).ToArray();
             if(partidx <= parts.Length - 1)
                 return parts[partidx];
             else

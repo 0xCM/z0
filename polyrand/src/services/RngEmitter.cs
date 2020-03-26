@@ -16,7 +16,7 @@ namespace Z0
 
         readonly IPolyrand Random;
 
-        public OpIdentity Id => OpIdentity.sfunc<T>(Name);
+        public OpIdentity Id => Identify.SFunc<T>(Name);
 
         [MethodImpl(Inline)]
         public NumericRngEmitter(IPolyrand random)            

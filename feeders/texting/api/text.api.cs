@@ -111,12 +111,23 @@ namespace Z0
             => text.denullify(a).CompareTo(b);
 
         /// <summary>
-        /// Creates a span of replicated characters 
+        /// Creates a stream of replicated characters 
         /// </summary>
         /// <param name="src">The character to replicate</param>
         /// <param name="count">The replication count</param>
         public static IEnumerable<char> replicate(char src, int count)
             => new string(src,count);
+
+        /// <summary>
+        /// Repeats a string a specified number of times
+        /// </summary>
+        /// <param name="src">The text content to replicate</param>
+        /// <param name="count">The number of copies to produce</param>
+        public static IEnumerable<string> replicate(string src, int count)
+        {
+            for(var i=0; i<count; i++)
+                yield return src;
+        }
 
         /// <summary>
         /// Concatenates a sequence of values with no intervening delimiter
@@ -218,24 +229,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Repeats a string a specified number of times
-        /// </summary>
-        /// <param name="src">The text content to replicate</param>
-        /// <param name="count">The number of copies to produce</param>
-        public static IEnumerable<string> replicate(string src, int count)
-        {
-            for(var i=0; i<count; i++)
-                yield return src;
-        }
-
-        /// <summary>
         /// Creates a new string by weaving a specified character between each character in the source
         /// </summary>
         /// <param name="src">The source string</param>
         /// <param name="c">The character to intersperse</param>
         public static string intersperse(string src, char c)
         {
-            var builder = text.factory.Builder();
+            var builder = build();
             foreach(var item in src)
             {
                 builder.Append(item);
@@ -251,7 +251,7 @@ namespace Z0
         /// <param name="sep">The value to intersperse</param>
         public static string intersperse(string src, string sep)
         {
-            var builder = text.factory.Builder();
+            var builder = build();
             foreach(var item in src)
             {
                 builder.Append(item);

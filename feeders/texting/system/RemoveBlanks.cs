@@ -13,7 +13,11 @@ namespace Z0
 
     partial class TextingOps
     {
-
-
+        /// <summary>
+        /// Removes whitespace characters from a string
+        /// </summary>
+        /// <param name="src">The source string</param>
+        public static string RemoveBlanks(this string src)
+            => src.RemoveAny(items(AsciSym.Space, AsciEscape.LineFeed, AsciEscape.NewLine, AsciEscape.Tab));
     }
 }
