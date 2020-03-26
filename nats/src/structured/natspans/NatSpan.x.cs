@@ -13,6 +13,16 @@ namespace Z0
 
     public static class NatSpanX
     {
+        public static NatSpan<N,T> Contract<N,T>(this NatSpan<N,T> src, NatSpan<N,T> max)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var dst = NatSpan.alloc<N, T>();
+            for(var i=0; i<dst.Length; i++)
+                dst[i] = Scale.contract(src[i],max[i]);
+            return dst;
+        }
+
         [MethodImpl(Inline)]
         public static void Fill<N,T>(this in NatSpan<N,T> dst, T data)
             where N : unmanaged, ITypeNat

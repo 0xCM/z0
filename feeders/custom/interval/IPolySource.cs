@@ -6,7 +6,8 @@ namespace Z0
 {
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using static Root;
+
+    using static Custom;
 
     /// <summary>
     /// Characterizes a fountain of generic points
@@ -54,6 +55,5 @@ namespace Z0
         T Next<T>(Interval<T> domain)
             where T : unmanaged
                 => Next(domain.Left, domain.Right);
-
     }    
 }

@@ -6,10 +6,14 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;    
-    using System.Runtime.CompilerServices;    
     using System.Linq;
 
-    using static Root;
+    public interface IAppSetting : ICustomFormattable
+    {
+        string Name {get;}        
+
+        string Value {get;}        
+    }
 
     public interface IAppSettings
     {
@@ -19,12 +23,12 @@ namespace Z0
 
         string this[string name] {get;}
 
-        IEnumerable<AppSetting> All {get;}
+        IEnumerable<IAppSetting> All {get;}
     }
 
     public interface IAppSettingSet : ICustomFormattable
     {
-        IEnumerable<AppSetting> Settings{get;}
+        IEnumerable<IAppSetting> Settings{get;}
         
         void Save(FilePath dst);        
     }
@@ -32,16 +36,6 @@ namespace Z0
     public interface IAppSettingSet<S> : IAppSettingSet, IFormattable<S>
         where S : IAppSettingSet<S>, new()
     {
-        static S From(IAppSettings src)
-            => AppSettingsOps.From<S>(src);
         
-        IEnumerable<AppSetting> IAppSettingSet.Settings 
-            => AppSettingsOps.Get<S>(this);
-
-        string ICustomFormattable.Format()
-            => AppSettingsOps.Format(Settings);
-        
-        void IAppSettingSet.Save(FilePath dst)
-            => AppSettingsOps.Save(this,dst);
     }
 }

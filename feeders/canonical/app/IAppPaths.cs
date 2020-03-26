@@ -62,7 +62,7 @@ namespace Z0
             => TestDataDir(typeof(T));
         
         FolderPath ComponentDataDir(PartId owner, string subfolder = null)
-            => (DataRootDir + FolderName.Define(owner.Format())) + FolderName.Define(text.denullify(subfolder));
+            => (DataRootDir + FolderName.Define(owner.Format())) + FolderName.Define(subfolder ?? string.Empty);
     }
 
     public interface IAppPaths<T> : IAppPaths,  IFormattable<T>

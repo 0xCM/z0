@@ -9,10 +9,10 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Linq;
     
-    using static Root;
+    using static Canonical;
     using static AppSetting;
 
-    public readonly struct AppSetting : IFormattable<AppSetting, FormatConfig>
+    public readonly struct AppSetting : IFormattable<AppSetting, FormatConfig>, IAppSetting
     {
         public readonly struct FormatConfig
         {
@@ -42,7 +42,6 @@ namespace Z0
         {
             if(config.FormatAsJson)
                 return text.concat(text.enquote(Name), text.colon(), text.space(), text.enquote(Value));
-                //return $"{text.enquote(Name)}: {text.enquote(Value)}";
             else 
                 return $"{Name}: {Value}";
         }        

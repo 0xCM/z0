@@ -11,9 +11,9 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static Nats;
+    using static Widths;
 
-    public static partial class FixedRngOps
+    public static class RngFixedStreams
     {
         public static IEnumerable<F> FixedStream<F,T>(this IPolyrand random, F f = default, T t = default)
             where F : unmanaged, IFixed
@@ -36,18 +36,18 @@ namespace Z0
             var w = (FixedWidth)default(F).BitWidth;
             switch(w)
             {
-                case FixedWidth.W8: return random.FixedStream<F>(n8);
-                case FixedWidth.W16: return random.FixedStream<F>(n16);
-                case FixedWidth.W32: return random.FixedStream<F>(n32);
-                case FixedWidth.W64: return random.FixedStream<F>(n64);
-                case FixedWidth.W128: return random.FixedStream<F>(n128);
-                case FixedWidth.W256: return random.FixedStream<F>(n256);
-                case FixedWidth.W512: return random.FixedStream<F>(n512);
+                case FixedWidth.W8: return random.FixedStream<F>(w8);
+                case FixedWidth.W16: return random.FixedStream<F>(w16);
+                case FixedWidth.W32: return random.FixedStream<F>(w32);
+                case FixedWidth.W64: return random.FixedStream<F>(w64);
+                case FixedWidth.W128: return random.FixedStream<F>(w128);
+                case FixedWidth.W256: return random.FixedStream<F>(w256);
+                case FixedWidth.W512: return random.FixedStream<F>(w512);
                 default: return items<F>();                    
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, N8 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W8 w, Sign sign = Sign.Pos)
             where T :unmanaged, IFixed
         {
             if(sign.IsNonNegative())
@@ -68,7 +68,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, N16 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W16 w, Sign sign = Sign.Pos)
             where T :unmanaged, IFixed
         {
             if(sign.IsNonNegative())
@@ -89,7 +89,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, N32 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W32 w, Sign sign = Sign.Pos)
             where T :unmanaged, IFixed
         {
             if(sign.IsNonNegative())
@@ -110,7 +110,7 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, N64 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W64 w, Sign sign = Sign.Pos)
             where T :unmanaged, IFixed
         {
             if(sign.IsNonNegative())
@@ -128,11 +128,10 @@ namespace Z0
                     Fixed64 next = random.Next<long>();
                     yield return Unsafe.As<Fixed64, T>(ref next);
                 }
-
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, N128 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W128 w, Sign sign = Sign.Pos)
             where T :unmanaged, IFixed
         {
             while(true)
@@ -142,22 +141,22 @@ namespace Z0
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, N256 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W256 w, Sign sign = Sign.Pos)
             where T :unmanaged, IFixed
         {
             while(true)
             {
-                Fixed256 next = (random.Fixed(n128), random.Fixed(n128));
+                Fixed256 next = (random.Fixed(w128), random.Fixed(w128));
                 yield return Unsafe.As<Fixed256, T>(ref next);
             }
         }
 
-        static IEnumerable<T> FixedStream<T>(this IPolyrand random, N512 w, Sign sign = Sign.Pos)
+        static IEnumerable<T> FixedStream<T>(this IPolyrand random, W512 w, Sign sign = Sign.Pos)
             where T :unmanaged, IFixed
         {
             while(true)
             {
-                Fixed512 next = (random.Fixed(n256), random.Fixed(n256));
+                Fixed512 next = (random.Fixed(w256), random.Fixed(w256));
                 yield return Unsafe.As<Fixed512, T>(ref next);
             }
         }

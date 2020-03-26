@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Root;
+    using static Custom;
 
     public static class Reports
     {
@@ -75,8 +75,8 @@ namespace Z0
         {            
             if(records == null)
             {
-                term.error($"The source record array is null!");
-                return none<FilePath>();
+                Console.Error.WriteLine($"The source record array is null!");
+                return Option.none<FilePath>();
             }
                     
             try
@@ -93,13 +93,13 @@ namespace Z0
 
                 if(emitHeader)
                     writer.WriteLine(string.Join(delimiter, records[0].HeaderNames));            
-                iter(records, r => writer.WriteLine(r.DelimitedText(delimiter)));
+                Streams.iter(records, r => writer.WriteLine(r.DelimitedText(delimiter)));
                 
                 return dst;
             }
             catch(Exception e)
             {
-                term.error(e);
+                Console.Error.WriteLine(e);
                 return default;
             }
         }        

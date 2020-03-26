@@ -9,12 +9,12 @@ namespace Z0
     /// <summary>
     /// A context of everything and yet to everyting nothing
     /// </summary>
-    public interface IAppContext : IContext
+    public interface IAppContext : IAppEnv
     {        
-        IAppPaths Paths 
+        IAppPaths IAppEnv.Paths 
             => AppPathProvider.Create(Owner, Env.Current.LogDir);  
 
-        IAppSettings Settings
+        IAppSettings IAppEnv.Settings
             => AppSettings.Empty;                       
     }
 }

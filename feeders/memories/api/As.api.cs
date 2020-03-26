@@ -14,6 +14,10 @@ namespace Z0
     public static class As
     {
         [MethodImpl(Inline)]
+        public static ref T generic<S,T>(in S src)
+            => ref Unsafe.As<S,T>(ref refs.edit(in src));
+
+        [MethodImpl(Inline)]
         public static ref T refAdd<T>(ref T src, IntPtr offset)
             => ref Unsafe.Add(ref src, offset);
 

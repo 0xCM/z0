@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using static Root;
 
@@ -28,12 +26,5 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Produces an interminable stream of random bits from a value sequence of parametric type
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IEnumerable<bit> BitStream<T>(this IPolyrand random)
-            where T : unmanaged
-                => Z0.BitStream.from(random.Stream<T>());      
     }
 }

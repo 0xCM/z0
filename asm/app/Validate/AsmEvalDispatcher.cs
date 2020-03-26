@@ -50,6 +50,20 @@ namespace Z0.Asm.Check
             return 0;
         }
 
+        /// <summary>
+        /// Produces an homogenous point index of dimension 2
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="count">The number of points to load into the index</param>
+        /// <typeparam name="T">The coordinate domain</typeparam>
+        public Pairs<F> FixedPairs<F>(int count, F t = default)
+            where F : unmanaged, IFixed
+        {
+            var s1 = Random.FixedStream<F>().Take(count);
+            var s2 = Random.FixedStream<F>().Take(count);
+            return s1.Zip(s2).Select(a =>  Tuples.pair(a.First, a.Second)).ToArray();
+        }
+
         public bit EvalFixedOperator(in BufferSeq buffers, in ApiMemberCode api)
         {
             var nk = api.Method.ReturnType.NumericKind();
@@ -67,7 +81,7 @@ namespace Z0.Asm.Check
                 switch(nk)
                 {
                     case NumericKind.U8:
-                        return Dispatch(buffers, Random.FixedPairs<Fixed8>(count,n2), api);                    
+                        return Dispatch(buffers, FixedPairs<Fixed8>(count), api);                    
                     case NumericKind.I8:
                         return 0;                            
                     case NumericKind.I16:

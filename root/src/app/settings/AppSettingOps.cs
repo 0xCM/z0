@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;    
-    using System.Runtime.CompilerServices;    
     using System.Linq;
-    using System.Reflection;
 
     static class AppSettingsOps
     {
@@ -71,7 +69,7 @@ namespace Z0
             }
         }
 
-        public static string Format(IEnumerable<AppSetting> settings)
+        public static string Format(IEnumerable<IAppSetting> settings)
         {            
             var dst = text.factory.Builder();
             var src = settings.ToArray();

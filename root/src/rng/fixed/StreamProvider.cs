@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
-    using static Nats;
+    using static Widths;
 
     public interface IFixedStreamProvider<F> : IStreamProvider<F>
         where F : unmanaged, IFixed
@@ -127,10 +127,10 @@ namespace Z0
 
         F f64f() => Fixed(random.Next<double>());
 
-        F f128() => Fixed(random.Fixed(n128));
+        F f128() => Fixed(random.Fixed(w128));
 
-        F f256() => Fixed(random.Fixed(n256));
+        F f256() => Fixed(random.Fixed(w256));
 
-        F f512() => Fixed(random.Fixed(n512));    
+        F f512() => Fixed(random.Fixed(w512));    
     }
 }

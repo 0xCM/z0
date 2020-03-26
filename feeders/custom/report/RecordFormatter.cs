@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Root;
+    using static Custom;
 
     public readonly struct RecordFormatter<F,R> : IFormattable<RecordFormatter<F,R>>
         where F : unmanaged, Enum

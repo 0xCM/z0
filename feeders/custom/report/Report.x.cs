@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Text;
 
-    public static class ReportingExtensions
+    public static class XReport
     {
         /// <summary>
         /// Saves an array of records to a filee

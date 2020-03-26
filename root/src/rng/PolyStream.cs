@@ -60,7 +60,5 @@ namespace Z0
             IEnumerator IEnumerable.GetEnumerator()
                 => src.GetEnumerator();
         }
-
     }
-
 }

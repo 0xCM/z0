@@ -66,5 +66,15 @@ namespace Z0
         public static T[] Array<T>(this IPolyrand random, int length, T min, T max)
             where T : unmanaged
                 => random.Stream(min,max).TakeArray(length);
+
+
+        /// <summary>
+        /// Produces an interminable stream of random bits from a value sequence of parametric type
+        /// </summary>
+        /// <param name="random">The random source</param>
+        public static IEnumerable<bit> BitStream<T>(this IPolyrand random)
+            where T : unmanaged
+                => Z0.BitStream.from(random.Stream<T>());      
+
     }
 }

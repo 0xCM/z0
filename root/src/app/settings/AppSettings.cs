@@ -84,8 +84,8 @@ namespace Z0
             return none<T>();
         }
 
-        public IEnumerable<AppSetting> All
-            => from p in Pairs select new AppSetting(p.Key, p.Value);        
+        public IEnumerable<IAppSetting> All
+            => from p in Pairs select new AppSetting(p.Key, p.Value) as IAppSetting;        
 
         public string this[string name]
             => Setting(name).ValueOrDefault(string.Empty);

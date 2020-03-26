@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Custom;
+    using static Literals;
 
     /// <summary>
     /// Defines a contiguous segment of homogenous values that lie within left and right boundaries 
@@ -102,7 +103,7 @@ namespace Z0
         public ulong Width
         {
             [MethodImpl(Inline)]
-            get => convert<T,ulong>(Right) - convert<T,ulong>(Left);
+            get => Cast.to<T,ulong>(Right) - Cast.to<T,ulong>(Left);
         }
 
         /// <summary>
@@ -258,8 +259,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval<U> Convert<U>()
             where U : unmanaged
-                => new Interval<U>(convert<T,U>(Left),convert<T,U>(Right),Kind);
-
+                => new Interval<U>(Cast.to<T,U>(Left), Cast.to<T,U>(Right),Kind);
 
         /// <summary>
         /// Creates a view of the data in the inverval as seen through the
@@ -269,7 +269,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval<U> As<U>()
             where U : unmanaged
-                => new Interval<U>(Root.generic<T,U>(in Left), Root.generic<T,U>(in Right), Kind);
+                => new Interval<U>(Z0.As.generic<T,U>(in Left), Z0.As.generic<T,U>(in Right), Kind);
 
         public string Format()
             => text.concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);

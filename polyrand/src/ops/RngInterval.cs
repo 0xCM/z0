@@ -40,8 +40,5 @@ namespace Z0
             while(true)
                 yield return random.Interval(min,max);
         }
-
-
-
     }
 }

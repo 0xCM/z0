@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Custom;
 
     public interface IReport
     {
@@ -15,25 +15,7 @@ namespace Z0
 
         string ReportName {get;}
     }
-    
-    public readonly struct ReportCreated<T> : IAppEvent<ReportCreated<T>,T>
-        where T : IReport
-    {
-        [MethodImpl(Inline)]
-        public ReportCreated(T report)
-        {
-            this.EventData = report;
-        }
-
-        public T EventData {get;}
-
-        public string Description
-            => $"{EventData.ReportName} created";
         
-        public string Format()
-            => Description;         
-    }
-    
     public interface IReport<R> : IReport
         where R : IRecord<R>
     {
@@ -54,7 +36,6 @@ namespace Z0
         Option<FilePath> Save(FilePath dst)
             => Records.Save(dst);         
     }
-
 
     public interface IReport<F,R> : IReport<R>
         where R : IRecord<F,R>

@@ -4,8 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using System.Collections.Generic;
     
+    /// <summary>
+    /// Identifies a source of random data
+    /// </summary>
+    public interface IRngSource
+    {
+        /// <summary>
+        /// Identifies the rng that drives the source
+        /// </summary>
+        RngKind RngKind {get;}
+    }
+
     /// <summary>
     /// Identifies a supported random number generator
     /// </summary>
