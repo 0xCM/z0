@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Text;
 
-    using static Texting;
+    using static Textual;
     
     public static partial class ApiOps
     {

@@ -10,9 +10,9 @@ namespace Z0
     using System.Linq;
     using System.Text;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         public static void AppendLines(this StringBuilder src, IEnumerable<string> lines)
             => Streams.iter(lines, line => src.AppendLine(line));            

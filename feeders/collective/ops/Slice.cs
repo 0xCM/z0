@@ -11,7 +11,7 @@ namespace Z0
 
     using static Collective;
 
-    partial class CollectiveOps
+    partial class XCollective
     {
         /// <summary>
         /// Creates a new array from a (contiguous) subset of an existing array

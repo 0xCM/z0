@@ -11,7 +11,7 @@ namespace Z0
 
     using static Memories;
 
-    partial class MemoryOps
+    partial class XMem
     {
         /// <summary>
         /// Constructs a span of specified length from a sequence

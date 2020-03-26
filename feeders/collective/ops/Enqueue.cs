@@ -12,7 +12,7 @@ namespace Z0
 
     using static Collective;
 
-    partial class CollectiveOps
+    partial class XCollective
     {
         /// <summary>
         /// Enqueues a stream

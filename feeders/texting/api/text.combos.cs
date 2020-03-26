@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Texting;
+    using static Textual;
     using static AsciSym;
 
     partial class text

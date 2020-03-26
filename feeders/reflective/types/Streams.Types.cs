@@ -13,7 +13,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
         /// <summary>
         /// Selects the concrete types from a stream

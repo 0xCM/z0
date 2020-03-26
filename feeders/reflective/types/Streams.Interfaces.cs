@@ -13,7 +13,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
         /// <summary>
         /// Returns all interfaces realized by the type, including those inherited from

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Collective;
 
-    partial class CollectiveOps
+    partial class XCollective
     {
         /// <summary>
         /// Reverses an array in-place

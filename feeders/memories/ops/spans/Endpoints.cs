@@ -9,7 +9,7 @@ namespace Z0
 
     using static Memories;
 
-    partial class MemoryOps
+    partial class XMem
     {
         static void ThrowEmptySpanError()
             => throw new Exception($"The span is empty");

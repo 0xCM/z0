@@ -9,7 +9,7 @@ namespace Z0
 
     using static Components;
 
-    public static class TypeWidths
+    public static class Widths
     {        
         public static W1 w1 => default(W1);
 

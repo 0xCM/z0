@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         /// <summary>
         /// Formats a sequence of objects as a delimited list

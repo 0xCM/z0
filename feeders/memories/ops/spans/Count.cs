@@ -9,7 +9,7 @@ namespace Z0
 
     using static Memories;
 
-    partial class MemoryOps
+    partial class XMem
     {
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate

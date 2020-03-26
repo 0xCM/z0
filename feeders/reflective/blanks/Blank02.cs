@@ -13,7 +13,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
 
         public static IEnumerable<object> Values(this IEnumerable<FieldInfo> src, object o = null)

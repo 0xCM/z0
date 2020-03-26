@@ -13,7 +13,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
         /// <summary>
         /// Selects the static fields from a stream

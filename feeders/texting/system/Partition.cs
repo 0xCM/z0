@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         /// <summary>
         /// Partitions a string into parts of a specified maximum width

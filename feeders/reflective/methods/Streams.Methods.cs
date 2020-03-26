@@ -13,7 +13,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
         /// <summary>
         /// Returns the methods from the source type per the binding flags

@@ -13,7 +13,7 @@ namespace Z0
     using static Memories;
     using static Spans;
     
-    partial class MemoryOps
+    partial class XMem
     {
         /// <summary>
         /// Projects a source span to target span via a supplied transformation

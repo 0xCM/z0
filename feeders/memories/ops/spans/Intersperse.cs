@@ -11,7 +11,7 @@ namespace Z0
 
     using static Memories;
 
-    partial class MemoryOps
+    partial class XMem
     {
         /// <summary>
         /// Creates a new span by interposing a specified element between each element of an existing span

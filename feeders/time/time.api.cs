@@ -10,17 +10,7 @@ namespace Z0
     using System.Diagnostics;
 
     using static Time;
-
-    public static class Time 
-    {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
-        internal const string Kernel32 = "kernel32.dll";
-        
-        internal static T[] array<T>(params T[] src)
-            => src;
-    }
-
+    
     public static class time
     {
         /// <summary>

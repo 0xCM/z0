@@ -11,7 +11,7 @@ namespace Z0
 
     using static Memories;
 
-    partial class MemoryOps
+    partial class XMem
     {
         /// <summary>
         /// Presents a span of one value-type as a span of another value-type

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Memories;
 
-    partial class MemoryOps
+    partial class XMem
     {
         /// <summary>
         /// Copies the source span to a target span begininning at a specified target offset

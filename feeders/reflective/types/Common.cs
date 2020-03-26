@@ -9,7 +9,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
         /// <summary>
         /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Memories;
 
-    partial class MemoryOps
+    partial class XMem
     {
         /// <summary>
         /// Determines whether all of the elements of a source span satisfy a supplied predicate

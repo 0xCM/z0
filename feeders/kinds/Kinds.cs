@@ -27,4 +27,10 @@ namespace Z0
             where T : unmanaged
                 => Unsafe.SizeOf<T>()*8;
     }
+
+    public static partial class XKind
+    {
+
+
+    }
 }

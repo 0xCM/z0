@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
 
         public static IEnumerable<string> Trim(this IEnumerable<string> src)

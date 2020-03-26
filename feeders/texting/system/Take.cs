@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         /// <summary>
         /// Selects the substring prior to the first occurrence of a specified character if it is found in the string; otherwise, 

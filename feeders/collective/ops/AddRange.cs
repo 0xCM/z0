@@ -13,7 +13,7 @@ namespace Z0
  
     using static Collective;
 
-    partial class CollectiveOps
+    partial class XCollective
     {
         /// <summary>
         /// Adds a collection of items to a bag

@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         public static string Between(this string src, char left, char right)
         {

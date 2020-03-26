@@ -12,7 +12,7 @@ namespace Z0
 
     using static Components;
 
-    partial class ComponentOps
+    partial class XComponent
     {
         /// <summary>
         /// Creates a new stringbuilder
@@ -54,6 +54,13 @@ namespace Z0
             }
             return dst.ToString();
         }
+
+        /// <summary>
+        /// Forms a string by source character justapostion
+        /// </summary>
+        /// <param name="src">The characters to concatenate</param>
+        public static string Concat(this IEnumerable<char> src)
+            => new string(src.ToArray());
 
         /// <summary>
         /// Forms a string by source character justapostion

@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         /// <summary>
         /// Gets the string to the left of, but not including, a specified index

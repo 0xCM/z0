@@ -12,7 +12,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Kinds;
-    using static TypeWidths;
+    using static Widths;
 
     public static class VectorType
     {

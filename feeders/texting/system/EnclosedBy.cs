@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         /// <summary>
         /// Determines whether the subject is contained betwee specified left and right markers

@@ -8,9 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         /// <summary>
         /// Determines whether a string contains any of the characters in a supplied sequence

@@ -11,7 +11,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
         /// <summary>
         /// Returns true if the method has unspecified generic parameters, false otherwise

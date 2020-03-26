@@ -10,9 +10,9 @@ namespace Z0
     using System.Text;
     using System.Linq;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         public static StringBuilder WithLabel(this StringBuilder sb, object label, object content)
         {

@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Texting;
+    using static Textual;
 
-    partial class TextingOps
+    partial class XText
     {
         /// <summary>
         /// Returns true if a string is null or whitespace; otherwise, returns false
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="s">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool IsBlank(this string s)
-            => empty(s);
+            => text.empty(s);
 
         /// <summary>
         /// Returns true if a string has at least one character that is not considered whitespace
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="s">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool IsNotBlank(this string s)
-            => nonempty(s);
+            => text.nonempty(s);
 
         /// <summary>
         /// Returns the source string if it is not blank; otherwise, returns an alternate string
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="alt">The alternate string</param>
         [MethodImpl(Inline)]
         public static string IfBlank(this string src, string alt)
-            => empty(src) ? alt : src;
+            => text.empty(src) ? alt : src;
 
         /// <summary>
         /// Invokes an action if the source string is nonempty
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void OnSome(this string s, Action<string> f)
         {
-            if(nonempty(s))
+            if(text.nonempty(s))
                 f(s);
         }
     }

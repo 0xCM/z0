@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Text;
-    using System.Linq;
 
     using static Components;
 
-    partial class ComponentOps
+    partial class XComponent
     {
         /// <summary>
         /// Creates a new string by weaving a specified character between each character in the source
@@ -20,7 +17,15 @@ namespace Z0
         /// <param name="src">The source string</param>
         /// <param name="c">The character to intersperse</param>
         public static string Intersperse(this string src, char c)
-            => intersperse(src, c);
+        {
+            var builder = build();
+            foreach(var item in src)
+            {
+                builder.Append(item);
+                builder.Append(c);
+            }
+            return builder.ToString();
+        }
 
         /// <summary>
         /// Creates a new string by weaving a substring between each character in the source
@@ -28,6 +33,14 @@ namespace Z0
         /// <param name="src">The source string</param>
         /// <param name="sep">The value to intersperse</param>
         public static string Intersperse(this string src, string sep)
-            => intersperse(src, sep);
+        {
+            var builder = build();
+            foreach(var item in src)
+            {
+                builder.Append(item);
+                builder.Append(sep);
+            }
+            return builder.ToString();
+        }
     }
 }

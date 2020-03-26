@@ -11,7 +11,7 @@ namespace Z0
 
     using static Collective;
 
-    partial class CollectiveOps
+    partial class XCollective
     {
 
         public static IEnumerable<S> TakeAtMost<S>(this IEnumerable<S> src, int count)

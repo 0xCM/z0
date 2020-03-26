@@ -11,7 +11,7 @@ namespace Z0
 
     using static Collective;
 
-    partial class CollectiveOps
+    partial class XCollective
     {
         /// <summary>
         /// Returns the index of the first value that matches a specified value, if any. Otherwise, returns -1

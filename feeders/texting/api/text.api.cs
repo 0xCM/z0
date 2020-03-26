@@ -13,7 +13,7 @@ namespace Z0
     using System.Text.RegularExpressions;
     using System.Text;
 
-    using static Texting;
+    using static Textual;
 
     public static partial class text
     {
@@ -124,10 +124,7 @@ namespace Z0
         /// <param name="src">The text content to replicate</param>
         /// <param name="count">The number of copies to produce</param>
         public static IEnumerable<string> replicate(string src, int count)
-        {
-            for(var i=0; i<count; i++)
-                yield return src;
-        }
+            => src.Replicate(count);
 
         /// <summary>
         /// Concatenates a sequence of values with no intervening delimiter
@@ -141,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
         public static string concat(IEnumerable<char> src)
-            => new string(src.ToArray());
+            => src.Concat();
 
         /// <summary>
         /// Formats a custom-formattable elements
@@ -234,15 +231,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         /// <param name="c">The character to intersperse</param>
         public static string intersperse(string src, char c)
-        {
-            var builder = build();
-            foreach(var item in src)
-            {
-                builder.Append(item);
-                builder.Append(c);
-            }
-            return builder.ToString();
-        }
+            => src.Intersperse(c);
 
         /// <summary>
         /// Creates a new string by weaving a substring between each character in the source
@@ -250,15 +239,23 @@ namespace Z0
         /// <param name="src">The source string</param>
         /// <param name="sep">The value to intersperse</param>
         public static string intersperse(string src, string sep)
-        {
-            var builder = build();
-            foreach(var item in src)
-            {
-                builder.Append(item);
-                builder.Append(sep);
-            }
-            return builder.ToString();
-        }
+            => src.Intersperse(sep);
+            
+        /// <summary>
+        /// Applies a function to a value
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="f">The function to apply</param>
+        /// <typeparam name="X">The source value type</typeparam>
+        /// <typeparam name="Y">The output value type</typeparam>
+        [MethodImpl(Inline)]   
+        internal static Y apply<X,Y>(X x,Func<X,Y> f)
+            => f(x);
+
+        [MethodImpl(Inline)]
+        internal static T? unvalued<T>()
+            where T : struct
+                => (T?)null;
 
         /// <summary>
         /// Creates a complied regular expression and (c)aches it

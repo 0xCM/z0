@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Blocks;
-    using static TypeWidths;
+    using static Widths;
 
     partial class XBlocks    
     {

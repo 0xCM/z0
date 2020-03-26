@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Linq;
 
     using static Components;
 
-    partial class ComponentOps
+    partial class XComponent
     {
         /// <summary>
         /// Creates a stream of replicated strings
@@ -20,7 +17,10 @@ namespace Z0
         /// <param name="src">The character to replicate</param>
         /// <param name="count">The replication count</param>
         public static IEnumerable<string> Replicate(this string src, int count)
-            => replicate(src,count);
+        {
+            for(var i=0; i<count; i++)
+                yield return src;
+        }
 
         /// <summary>
         /// Creates a span of replicated characters 
@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="src">The character to replicate</param>
         /// <param name="count">The replication count</param>
         public static IEnumerable<char> Replicate(this char src, int count)
-            => replicate(src,count);
+            => new string(src,count);
     }
 }

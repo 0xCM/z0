@@ -11,7 +11,7 @@ namespace Z0
 
     using static Collective;
 
-    partial class CollectiveOps
+    partial class XCollective
     {
         public static ISet<T> Unions<T>(this ISet<T> a, params ISet<T>[]  sets)
         {

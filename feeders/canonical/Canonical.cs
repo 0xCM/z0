@@ -28,7 +28,7 @@ namespace Z0
             => seq<IPartId>(T.Components.Part, T.Monadic.Part);
     }
 
-    public static partial class CanonicalOps    
+    public static partial class XCanonical    
     {
 
     }

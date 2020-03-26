@@ -12,7 +12,7 @@ namespace Z0
 
     using static Memories;
 
-    partial class MemoryOps
+    partial class XMem
     {
         /// <summary>
         /// Reimagines a readonly span of generic values as a span of signed bytes

@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Text;
     using System.Linq;
 
     using static Components;
 
-    partial class ComponentOps
+    partial class XComponent
     {
        /// <summary>
         /// Interleaves a specified value between each element of the source

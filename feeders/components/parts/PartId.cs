@@ -203,7 +203,7 @@ public enum PartId : ulong
 
     Monadic = 806,
 
-    Reflections = 808,
+    Reflective = 808,
 
     Textual = 810,
 
@@ -266,7 +266,7 @@ public static class PartIdentity
 
     public sealed class Nats : PartId<Nats> { public override PartId Id => PartId.Nats;}
 
-    public sealed class Reflective : PartId<Reflective> { public override PartId Id => PartId.Reflections; }
+    public sealed class Reflective : PartId<Reflective> { public override PartId Id => PartId.Reflective; }
 
     public sealed class SFuncs : PartId<SFuncs> { public override PartId Id => PartId.SFuncs;}
 

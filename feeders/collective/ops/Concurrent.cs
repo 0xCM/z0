@@ -14,7 +14,7 @@ namespace Z0
 
     using static Collective;
 
-    partial class CollectiveOps
+    partial class XCollective
     {
         /// <summary>
         /// Creates a concurrent dictionary from an ordinary dictionary

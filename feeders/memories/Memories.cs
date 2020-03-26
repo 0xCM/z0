@@ -44,7 +44,7 @@ namespace Z0
 
     }
 
-    public static partial class MemoryOps    
+    public static partial class XMem    
     {
 
     }

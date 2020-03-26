@@ -11,7 +11,7 @@ namespace Z0
 
     using static Components;
     
-    partial class ComponentOps
+    partial class XComponent
     {
         /// <summary>
         /// Presents a mutable span as a readonly span

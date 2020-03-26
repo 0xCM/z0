@@ -13,7 +13,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
 
         static ReadOnlySpan<char> SpecialChars => new char[]{'<','>','|'};

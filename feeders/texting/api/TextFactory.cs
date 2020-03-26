@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Texting;
+    using static Textual;
 
     public interface ITextFactory : IFactory<string>
     {

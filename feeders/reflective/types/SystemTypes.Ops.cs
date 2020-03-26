@@ -9,7 +9,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflections
+    partial class Reflective
     {
         /// <summary>
         /// For a system-defined type, returns the C#-specific keyword for the type if it has one; 
