@@ -9,9 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Components;
-
-    partial class XComponent
+    partial class XTend
     {
        /// <summary>
         /// Interleaves a specified value between each element of the source

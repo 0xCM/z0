@@ -12,19 +12,6 @@ namespace Z0
     
     public static class ReflectedOperationClass
     {
-        /// <summary>
-        /// Dtermines whether a method has a void return
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsAction(this MethodInfo m)
-            => ClassifiedOperations.IsAction(m);
-
-        /// <summary>
-        /// Determines whether a method is a function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsFunction(this MethodInfo m)
-            => ClassifiedOperations.IsFunction(m);
 
         /// <summary>
         /// Assigns an arity classification, if any, to a method

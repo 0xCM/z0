@@ -16,14 +16,14 @@ namespace Z0
     }
 
 
-    public interface ISFChecker128Api<S,T> : ISFApi<S, Vector128<T>, bit>
+    public interface ISFChecker128Api<S,T> : ISFuncApi<S, Vector128<T>, bit>
         where S : unmanaged
         where T : unmanaged
     {
         
     }
 
-    public interface ISFChecker256Api<S,T> : ISFApi<S, Vector256<T>, bit>
+    public interface ISFChecker256Api<S,T> : ISFuncApi<S, Vector256<T>, bit>
         where S : unmanaged
         where T : unmanaged
     {

@@ -122,7 +122,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Even<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
+        public readonly struct Even<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "even";
@@ -140,7 +140,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.Integers)]
-        public readonly struct Odd<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
+        public readonly struct Odd<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "odd";
@@ -268,7 +268,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Dist<T> : ISFApi<T,T,ulong>
+        public readonly struct Dist<T> : ISFuncApi<T,T,ulong>
             where T : unmanaged        
         {
             public const string Name = "dist";

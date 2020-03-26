@@ -10,9 +10,6 @@ bash $Test
 Test=blocks/test.sh
 bash $Test
 
-# Test=corefunc/test.sh
-# bash $Test
-
 Test=gmath/test.sh
 bash $Test
 
@@ -40,14 +37,14 @@ bash $Test
 Test=root/test.sh
 bash $Test
 
-Test=rng/test.sh
-bash $Test
+# Test=rng/test.sh
+# bash $Test
 
-Test=statcore/test.sh
-bash $Test
+# Test=statcore/test.sh
+# bash $Test
 
-Test=stats/test.sh
-bash $Test
+# Test=stats/test.sh
+# bash $Test
 
-Test=vfuncs/test.sh
-bash $Test
+# Test=vfuncs/test.sh
+# bash $Test

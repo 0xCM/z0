@@ -28,14 +28,14 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsAction(MethodInfo m)
-            => m.HasVoidReturn();
+            => m.IsAction();
 
         /// <summary>
         /// Determines whether a method is a function
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsFunction(MethodInfo m)
-            => ! m.HasVoidReturn();
+            => m.IsFunction();
 
         /// <summary>
         /// Determines whether a method is a function with numeric operands (if any) and return type

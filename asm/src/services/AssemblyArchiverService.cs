@@ -16,7 +16,7 @@ namespace Z0.Asm
     {                
         public IAsmContext Context {get;}
 
-        readonly DataResourceIndex Resources;
+        readonly ByteSourceIndex Resources;
 
         [MethodImpl(Inline)]
         public static AssemblyArchiverService Create(IAsmContext context)
@@ -26,7 +26,7 @@ namespace Z0.Asm
         AssemblyArchiverService(IAsmContext context)
         {
             Context = context;
-            Resources = Context.Compostion.FindCatalog(PartId.Data).MapValueOrElse(c => c.Resources, () => DataResourceIndex.Empty);
+            Resources = Context.Compostion.FindCatalog(PartId.Data).MapValueOrElse(c => c.Resources, () => ByteSourceIndex.Empty);
         }
 
         IApiComposition Resolved 

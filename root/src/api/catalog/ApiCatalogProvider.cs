@@ -42,7 +42,7 @@ namespace Z0
         ApiHost[] IApiCatalog.DirectApiHosts 
             => Operations.DirectApiHosts;
 
-        DataResourceIndex IApiCatalog.Resources 
+        ByteSourceIndex IApiCatalog.Resources 
             => Operations.Resources;
 
         public ApiHost[] ApiHosts 

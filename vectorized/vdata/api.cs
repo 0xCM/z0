@@ -37,11 +37,11 @@ namespace Z0
 
         const int ResCount = LastIndex;
 
-        static readonly DataResource[] Described = new DataResource[ResCount];
+        static readonly ByteSource[] Described = new ByteSource[ResCount];
         
         static bool Initialized = false;
 
-        public static IEnumerable<DataResource> Resources
+        public static IEnumerable<ByteSource> Resources
         {
             get 
             {
@@ -70,6 +70,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void Register(int index, string name, ReadOnlySpan<byte> src)
-            => Described[index] = DataResource.Define(name, src); 
+            => Described[index] = ByteSource.Define(name, src); 
     }
 }

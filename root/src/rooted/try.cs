@@ -19,15 +19,6 @@ namespace Z0
             => Option.Try(f, handler ?? term.error);
 
         /// <summary>
-        /// Evaluates a function within a try block and returns the value of the computation if 
-        /// successful; otherwise, returns None together with the reported exception
-        /// </summary>
-        /// <param name="f">The function to evaluate</param>
-        /// <typeparam name="T">The function result type, if successful</typeparam>
-        public static Option<T> Try<T>(Func<Option<T>> f, Action<Exception> handler = null)
-            => Option.Try(f, handler ?? term.error);
-
-        /// <summary>
         /// Invokes an action within a try block and, upon error, calls
         /// the handler if specified. If no handler is specified, the exception
         /// message is emitted to stderr
@@ -38,24 +29,12 @@ namespace Z0
             => Option.Try(f,handler);
  
         /// <summary>
-        /// Evaluates a function within a try block and returns the value of the computation if 
-        /// successful; otherwise, returns None together with the reported exception
-        /// </summary>
-        /// <typeparam name="X">The input type</typeparam>
-        /// <typeparam name="Y">The output type</typeparam>
-        /// <param name="x">The input value</param>
-        /// <param name="f">The function to evaluate</param>
-        [MethodImpl(Inline)]   
-        public static Option<Y> Try<X, Y>(X x, Func<X, Y> f, Action<Exception> handler = null)
-            => Option.Try(x,f,handler ?? term.error);
-
-        /// <summary>
         /// Casts a value if possible, otherwise returns none
         /// </summary>
         /// <typeparam name="T">The target type</typeparam>
         /// <param name="item">The object to cast</param>
         [MethodImpl(Inline)]   
         public static Option<T> TryCast<T>(object item)
-            => item is T ? some((T)item) : none<T>();
+            => Option.TryCast<T>(item);
     }
 }

@@ -14,6 +14,7 @@
     <Symbolic>$(Feeders)symbolic/z0.symbolic.csproj</Symbolic>
     <SFuncs>$(Feeders)sfuncs/z0.sfuncs.csproj</SFuncs>
     <Texting>$(Feeders)texting/z0.texting.csproj</Texting>
+    <Textual>$(Feeders)texting/z0.texting.csproj</Textual>
     <Time>$(Feeders)time/z0.time.csproj</Time>
   </PropertyGroup>
 

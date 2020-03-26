@@ -43,7 +43,7 @@ namespace Z0
         /// <summary>
         /// The global data resource index
         /// </summary>
-        DataResourceIndex Resources {get;}
+        ByteSourceIndex Resources {get;}
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identifid assembly
@@ -90,7 +90,7 @@ namespace Z0
 
         public ApiHost[] DirectApiHosts => new ApiHost[]{};
 
-        public DataResourceIndex Resources => DataResourceIndex.Empty;
+        public ByteSourceIndex Resources => ByteSourceIndex.Empty;
 
         public Type[] HostTypes => new Type[]{};
 

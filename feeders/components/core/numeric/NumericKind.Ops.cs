@@ -11,7 +11,7 @@ namespace Z0
     using static NumericKind;
     using NK = NumericKind;
     
-    partial class XComponent
+    partial class XTend
     {
         public static NumericKind NumericKind(this Type src)
             => SystemNumeric.kind(src);

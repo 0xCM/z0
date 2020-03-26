@@ -31,7 +31,7 @@ namespace Z0
         T InvokeScalar(T a, T b);
     }
 
-    public interface IBVUnaryPred<T> : ISFApi<BitVector<T>, bit>
+    public interface IBVUnaryPred<T> : ISFuncApi<BitVector<T>, bit>
         where T : unmanaged
     {
 
@@ -44,7 +44,7 @@ namespace Z0
     }
 
 
-    public interface IBVBinaryPred<T> : ISFApi<BitVector<T>,BitVector<T>,bit>
+    public interface IBVBinaryPred<T> : ISFuncApi<BitVector<T>,BitVector<T>,bit>
         where T : unmanaged
     {
 

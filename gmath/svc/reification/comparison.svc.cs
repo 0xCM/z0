@@ -12,7 +12,7 @@ namespace Z0
     partial class MathSvcHosts
     {
         [NumericClosures(NumericKind.All)]
-        public readonly struct Eq<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
+        public readonly struct Eq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "eq";
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Neq<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
+        public readonly struct Neq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "neq";
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Lt<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
+        public readonly struct Lt<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "lt";
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct LtEq<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
+        public readonly struct LtEq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "lteq";
@@ -87,7 +87,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Gt<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
+        public readonly struct Gt<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "gt";
@@ -106,7 +106,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct GtEq<T> : ISFApi<T,T,bit>, ISBinarySpanPredApi<T>
+        public readonly struct GtEq<T> : ISFuncApi<T,T,bit>, ISBinarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "gteq";
@@ -125,7 +125,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Between<T> : ISFApi<T,T,T,bit>
+        public readonly struct Between<T> : ISFuncApi<T,T,T,bit>
             where T : unmanaged        
         {
             public const string Name = "between";
@@ -140,7 +140,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct Nonz<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
+        public readonly struct Nonz<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "nonz";
@@ -159,7 +159,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct NegativeOp<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
+        public readonly struct NegativeOp<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "negative";
@@ -178,7 +178,7 @@ namespace Z0
         }
 
         [NumericClosures(NumericKind.All)]
-        public readonly struct PositiveOp<T> : ISFApi<T,bit>, ISUnarySpanPredApi<T>
+        public readonly struct PositiveOp<T> : ISFuncApi<T,bit>, ISUnarySpanPredApi<T>
             where T : unmanaged        
         {
             public const string Name = "positive";

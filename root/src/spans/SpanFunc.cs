@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Span<T3> apply<F,T0,T1,T2,T3>(F f, ReadOnlySpan<T0> A, ReadOnlySpan<T1> B, ReadOnlySpan<T2> C,  Span<T3> dst)
-            where F : ISFApi<T0,T1,T2,T3>
+            where F : ISFuncApi<T0,T1,T2,T3>
         {
             var count = dst.Length;
             ref readonly var a = ref head(A);
@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T2> apply<F,T0,T1,T2>(F f, ReadOnlySpan<T0> lhs, ReadOnlySpan<T1> rhs, Span<T2> dst)
-            where F : ISFApi<T0,T1,T2>
+            where F : ISFuncApi<T0,T1,T2>
         {
             var count = dst.Length;
             ref readonly var lSrc = ref head(lhs);
@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-            where F : ISFApi<T,T,bit>
+            where F : ISFuncApi<T,T,bit>
         {
             var count = dst.Length;
             ref readonly var lSrc = ref head(lhs);
@@ -58,7 +58,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T2> apply<F,T1,T2>(F f, ReadOnlySpan<T1> src, Span<T2> dst)
-            where F : ISFApi<T1,T2>
+            where F : ISFuncApi<T1,T2>
         {
             var count = dst.Length;
             ref readonly var input = ref head(src);
@@ -71,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> src, Span<bit> dst)
-            where F : ISFApi<T,bit>
+            where F : ISFuncApi<T,bit>
         {
             var count = dst.Length;
             ref readonly var input = ref head(src);

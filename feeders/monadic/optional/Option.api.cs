@@ -165,6 +165,15 @@ namespace Z0
             }
         }
 
+        /// <summary>
+        /// Casts a value if possible, otherwise returns none
+        /// </summary>
+        /// <typeparam name="T">The target type</typeparam>
+        /// <param name="item">The object to cast</param>
+        [MethodImpl(Inline)]   
+        public static Option<T> TryCast<T>(object item)
+            => item is T ? some((T)item) : none<T>();
+
         static void Handle(Exception e, Action<Exception> handler)
         {
             if(handler != null) handler.Invoke(e); else Console.Error.WriteLine(e);

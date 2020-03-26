@@ -15,6 +15,15 @@ namespace Z0
     
     partial class Reflective
     {
+
+        /// <summary>
+        /// Selects the first method found on the type, if any, that has a specified name
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        /// <param name="name">The name to match</param>
+        public static Option<MethodInfo> Method(this Type src, string name)
+            => src.DeclaredMethods().WithName(name).FirstOrDefault();
+
         /// <summary>
         /// Determines whether a parameter has a parametrically-identified attribute
         /// </summary>

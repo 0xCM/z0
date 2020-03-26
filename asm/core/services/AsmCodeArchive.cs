@@ -107,7 +107,7 @@ namespace Z0.Asm
         /// <param name="id">The identity to confer</param>
         static AsmCode Parse<T>(string data, OpIdentity id, T t = default)
             where T : unmanaged
-                => new AsmCode(id, MemoryExtract.Define(MemoryAddress.Zero, Hex.parsebytes(data).ToArray()));
+                => new AsmCode(id, MemoryExtract.Define(MemoryAddress.Zero, HexParser.parsebytes(data).ToArray()));
 
         Option<AsmCode> Read<T>(FilePath src, OpIdentity m, T t = default)
             where T : unmanaged

@@ -62,22 +62,22 @@ namespace Z0
 
         public void hexdigits_parse()
         {
-            Claim.eq((byte)0, Hex.parse('0'));
-            Claim.eq((byte)1, Hex.parse('1'));
-            Claim.eq((byte)2, Hex.parse('2'));
-            Claim.eq((byte)3, Hex.parse('3'));
-            Claim.eq((byte)4, Hex.parse('4'));
-            Claim.eq((byte)5, Hex.parse('5'));
-            Claim.eq((byte)6, Hex.parse('6'));
-            Claim.eq((byte)7, Hex.parse('7'));
-            Claim.eq((byte)8, Hex.parse('8'));
-            Claim.eq((byte)9, Hex.parse('9'));
-            Claim.eq((byte)10, Hex.parse('A'));
-            Claim.eq((byte)11, Hex.parse('B'));
-            Claim.eq((byte)12, Hex.parse('C'));
-            Claim.eq((byte)13, Hex.parse('D'));
-            Claim.eq((byte)14, Hex.parse('E'));
-            Claim.eq((byte)15, Hex.parse('F'));
+            Claim.eq((byte)0, HexParser.parse('0'));
+            Claim.eq((byte)1, HexParser.parse('1'));
+            Claim.eq((byte)2, HexParser.parse('2'));
+            Claim.eq((byte)3, HexParser.parse('3'));
+            Claim.eq((byte)4, HexParser.parse('4'));
+            Claim.eq((byte)5, HexParser.parse('5'));
+            Claim.eq((byte)6, HexParser.parse('6'));
+            Claim.eq((byte)7, HexParser.parse('7'));
+            Claim.eq((byte)8, HexParser.parse('8'));
+            Claim.eq((byte)9, HexParser.parse('9'));
+            Claim.eq((byte)10, HexParser.parse('A'));
+            Claim.eq((byte)11, HexParser.parse('B'));
+            Claim.eq((byte)12, HexParser.parse('C'));
+            Claim.eq((byte)13, HexParser.parse('D'));
+            Claim.eq((byte)14, HexParser.parse('E'));
+            Claim.eq((byte)15, HexParser.parse('F'));
 
         }
     }

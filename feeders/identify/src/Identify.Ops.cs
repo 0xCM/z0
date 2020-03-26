@@ -8,9 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Reflection;
     
     partial class Identify
     {
+
+        /// <summary>
+        /// Derives a signature from reflected method metadata
+        /// </summary>
+        /// <param name="src">The source method</param>
+        [MethodImpl(Inline)]
+        public static MethodSig Signature(this MethodInfo src)
+            => MethodSig.Define(src);
+
         public static OpIdentity Op(string src)
         {
             var id = src ?? 0.ToString();

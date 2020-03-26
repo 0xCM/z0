@@ -74,12 +74,12 @@ namespace Z0.Asm
             public readonly FilePath ReportPath
                 => AsmEmissionPaths.The.ResourcePath(Id);
             
-            readonly DataResourceIndex Index;        
+            readonly ByteSourceIndex Index;        
 
-            public static DataResourceReport Create(PartId id, DataResourceIndex resources)
+            public static DataResourceReport Create(PartId id, ByteSourceIndex resources)
                 => new DataResourceReport(id, resources);
 
-            DataResourceReport(PartId id, DataResourceIndex index)
+            DataResourceReport(PartId id, ByteSourceIndex index)
             {
                 Id = id;
                 Index = index;
@@ -89,7 +89,7 @@ namespace Z0.Asm
             public Option<FilePath> Save()
                 => Records.Save(ReportPath); 
 
-            static DataResourceRecord[] CreateRecords(PartId id, DataResourceIndex index)
+            static DataResourceRecord[] CreateRecords(PartId id, ByteSourceIndex index)
             {
                 var records = new List<DataResourceRecord>();
                 var start = 0ul;

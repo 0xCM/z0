@@ -11,7 +11,7 @@
     <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Reflective)" />
-    <ProjectReference Include="$(Texting)" />
+    <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Kinds)" />
   </ItemGroup>
 

@@ -10,6 +10,6 @@ namespace Z0.Parts
     {
         public VData() : base(PartId.VData) {}
         
-        public class C : ApiCatalog<C> { public C() : base(PartId.VData, DataResourceIndex.Create(Z0.Data.Resources)) {} }            
+        public class C : ApiCatalog<C> { public C() : base(PartId.VData, ByteSourceIndex.Create(Z0.Data.Resources)) {} }            
     }
 }

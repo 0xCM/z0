@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         public ApiHost[] ApiHosts {get;}
 
-        public DataResourceIndex Resources  {get;}
+        public ByteSourceIndex Resources  {get;}
 
         public Type[] HostTypes {get;}
 
@@ -44,16 +44,16 @@ namespace Z0
             AssemblyId = id;
             CatalogedAssembly = typeof(C).Assembly;
             ApiHosts = ApiHost.HostTypes(CatalogedAssembly).Select(t => ApiHost.Define(AssemblyId, t)).ToArray();
-            Resources = DataResourceIndex.Empty;
+            Resources = ByteSourceIndex.Empty;
             DirectApiHosts = ApiHosts.Where(h => h.HostKind.DefinesDirectOps()).ToArray();
             GenericApiHosts = ApiHosts.Where(h => h.HostKind.DefinesGenericOps()).ToArray();
             HostTypes = ApiServices.ProviderTypes(CatalogedAssembly).ToArray();
         }
         
-        protected ApiCatalog(PartId id, DataResourceIndex resources)
+        protected ApiCatalog(PartId id, ByteSourceIndex resources)
             : this(id)
         {
-            Resources = resources ?? DataResourceIndex.Empty;
+            Resources = resources ?? ByteSourceIndex.Empty;
         }                    
     }
 

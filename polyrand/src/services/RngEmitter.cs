@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct NumericRngEmitter<T> : IEmitter<T>
+    public readonly struct NumericRngEmitter<T> : ISEmitter<T>
         where T : unmanaged
     {
         public const string Name = "random";
@@ -26,7 +26,7 @@ namespace Z0
         public T Invoke() => Random.Next<T>();
     }
 
-    public readonly struct RngEmitter<T> : IEmitter<T>
+    public readonly struct RngEmitter<T> : ISEmitter<T>
         where T : unmanaged
     {
         public OpIdentity Id {get;}
@@ -47,7 +47,7 @@ namespace Z0
         public T Invoke() => f.Invoke();
     }    
 
-    public readonly struct SegmentedRngEmitter<F,T> : IEmitter<F>
+    public readonly struct SegmentedRngEmitter<F,T> : ISEmitter<F>
         where F : unmanaged
         where T :unmanaged
     {

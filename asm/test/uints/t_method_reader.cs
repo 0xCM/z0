@@ -31,7 +31,7 @@ namespace Z0.Asm
                 var end = Random.Next((ulong)uint.MaxValue, ulong.MaxValue);
                 var expect = MemoryRange.Define(start,end);
                 var format = expect.Format();
-                var actual = MemoryRange.Parse(format).OnNone(() => Notify(format)).Require();
+                var actual = HexParser.memrange(format).OnNone(() => Notify(format)).Require();
                 Claim.eq(expect,actual);
             }
         }

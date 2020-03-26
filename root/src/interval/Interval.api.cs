@@ -10,14 +10,6 @@ namespace Z0
     
     using static Root;    
 
-    /// <summary>
-    /// Implements Leimire's algorithm for sampling a uniformly distribute random number
-    /// in an interval [0,..,max)
-    /// </summary>
-    /// <param name="random">A random source</param>
-    /// <param name="max">The upper bound for the sample</param>
-    /// <remarks>Reference: Fast Random Integer Generation in an Interval, Daniel Lemire 2018</remarks>
-    /// <remarks>Reference: https://github.com/lemire/fastrange</reference>
     public static class Interval
     {
         /// <summary>

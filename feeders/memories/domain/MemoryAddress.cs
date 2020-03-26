@@ -8,14 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Memories;
-
-    /// <summary>
-    /// Characterizes an address-identified target
-    /// </summary>
-    public interface IAddressable
-    {
-        MemoryAddress Address {get;}
-    }        
     
     public readonly struct MemoryAddress : IAddressable, IIdentifiedTarget<MemoryAddress>
     {

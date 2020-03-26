@@ -42,6 +42,20 @@ namespace Z0
             => m.ReturnType == typeof(void);
 
         /// <summary>
+        /// Dtermines whether a method has a void return
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsAction(this MethodInfo m)
+            => m.HasVoidReturn();
+
+        /// <summary>
+        /// Determines whether a method is a function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsFunction(this MethodInfo m)
+            => ! m.HasVoidReturn();
+
+        /// <summary>
         /// Determines the number of parameters defined by a method
         /// </summary>
         /// <param name="m">The method to examine</param>

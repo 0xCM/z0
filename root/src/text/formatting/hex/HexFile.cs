@@ -17,7 +17,7 @@ namespace Z0
         {
             var dst = new List<HexLine>();
             foreach(var line in src.ReadLines())
-                HexLine.Parse(line).OnSome(dst.Add);            
+                HexParser.hexline(line).OnSome(dst.Add);            
             return new HexFile(dst.ToArray());
         }
 

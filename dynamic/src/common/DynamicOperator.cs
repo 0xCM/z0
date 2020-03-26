@@ -12,7 +12,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static express;
+    using static XPressive;
 
     public static class DynamicOpFactories
     {

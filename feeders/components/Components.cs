@@ -23,7 +23,7 @@ namespace Z0
 
     public static class Components
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
         /// <summary>
         /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
@@ -33,7 +33,7 @@ namespace Z0
             => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
     }
 
-    public static partial class XComponent
+    public static partial class XTend
     {
 
     }
@@ -48,8 +48,21 @@ namespace Z0
         public static int size<T>()
             => Unsafe.SizeOf<T>();
 
+        /// <summary>
+        /// Explicitly casts a source value to value of the indicated type, raising an exception if operation fails
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T cast<T>(object src) 
+            => (T)src;
+
         [MethodImpl(Inline)]
         public static IEnumerable<T> seq<T>(params T[] src)
+            => src;
+        
+        [MethodImpl(Inline)]
+        public static T[] array<T>(params T[] src)
             => src;
     }
 }

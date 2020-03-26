@@ -9,7 +9,7 @@ namespace Z0
 
     using static Components;
 
-    partial class XComponent
+    partial class XTend
     {
         /// <summary>
         /// Creates a stream of replicated strings

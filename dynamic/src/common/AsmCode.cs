@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
         public static AsmCode Parse(OpIdentity id, string data)
-            => Define(id, MemoryExtract.Define(Hex.parsebytes(data).ToArray()));
+            => Define(id, MemoryExtract.Define(HexParser.parsebytes(data).ToArray()));
                 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)

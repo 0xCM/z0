@@ -11,7 +11,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class XComponent
+    partial class XTend
     {
         /// <summary>
         /// Selects all instance/static and public/non-public fields declared by a type

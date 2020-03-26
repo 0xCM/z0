@@ -34,15 +34,6 @@ namespace Z0
         internal static IEnumerable<FieldInfo> Literal(this IEnumerable<FieldInfo> src)
             => src.Where(x => x.IsLiteral);
 
-        /// <summary>
-        /// Selects the literal fields defined by a type
-        /// </summary>
-        /// <param name="src">The source type</param>
-        /// <param name="declared">Whether a literal is rquired to be declared by the type</param>
-        internal static IEnumerable<FieldInfo> LiteralFields(this Type src)
-            => src.DeclaredFields().Literal();
-
-        /// <summary>
         /// Selects all instance/static and public/non-public fields declared by a type
         /// </summary>
         /// <param name="src">The type to examine</param>

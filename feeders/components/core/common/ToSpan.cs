@@ -13,7 +13,7 @@ namespace Z0
     using static ReflectionFlags;
     using static Components;
     
-    partial class XComponent
+    partial class XTend
     {
         /// <summary>
         /// Presents a mutable span as a readonly span
