@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
-    
     partial class math
     {
         [MethodImpl(Inline), LtEq]
@@ -42,6 +40,5 @@ namespace Z0
         [MethodImpl(Inline), LtEq]
         public static bit lteq(ulong a, ulong b)
             => a <= b; 
-
     }
 }

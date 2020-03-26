@@ -16,7 +16,7 @@ namespace Z0
         TypeIdentity DefineIdentity(Type src);  
 
         IEnumerable<Type> Identifiable 
-            => seq<Type>();
+            => core.seq<Type>();
 
         IIdentified IIdentifier<Type>.Identify(Type src)
             => DefineIdentity(src);
@@ -34,7 +34,7 @@ namespace Z0
         TypeIdentity DefineIdentity();
         
         IEnumerable<Type> ITypeIdentityProvider.Identifiable
-            => seq<Type>();
+            => core.seq<Type>();
 
         TypeIdentity ITypeIdentityProvider.DefineIdentity(Type src)
             => DefineIdentity();

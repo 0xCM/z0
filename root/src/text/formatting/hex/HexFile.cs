@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Root;
+    using static Textual;
 
     public readonly struct HexFile
     {        
@@ -41,7 +41,7 @@ namespace Z0
             catch(Exception e)
             {
                 term.error(e);
-                return none<FilePath>();
+                return Option.none<FilePath>();
             }
         }
     }

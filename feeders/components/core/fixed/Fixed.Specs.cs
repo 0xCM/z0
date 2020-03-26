@@ -9,8 +9,6 @@ namespace Z0
 
     using static Components;
 
-    
-
     /// <summary>
     /// Characterizes a type that occupies a fixed amount of space at runtime
     /// </summary>
@@ -44,7 +42,7 @@ namespace Z0
         int IFixed.BitWidth
         {
             [MethodImpl(Inline)]
-            get => (int)bitsize<F>();
+            get => (int)core.bitsize<F>();
         }        
     }
 
@@ -57,7 +55,7 @@ namespace Z0
         int IFixed.BitWidth
         {
             [MethodImpl(Inline)]
-            get => (int)bitsize<F>();
+            get => (int)core.bitsize<F>();
         }                
     }
 }

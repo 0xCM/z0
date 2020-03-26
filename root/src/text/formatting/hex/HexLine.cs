@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Textual;
 
     /// <summary>
     /// Defines a line of text that contains an identifier and a sequence of bytes

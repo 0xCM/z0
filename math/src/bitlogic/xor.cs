@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Root;    
-
     partial class math
     {
-
         [MethodImpl(Inline), Xor]
         public static sbyte xor(sbyte a, sbyte b)
             => (sbyte)(a ^ b);

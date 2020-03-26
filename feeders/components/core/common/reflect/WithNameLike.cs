@@ -13,7 +13,7 @@ namespace Z0
 
     using static ReflectionFlags;
     
-    partial class Reflective
+    partial class XComponent
     {
         /// <summary>
         /// Selects the members with a particular name

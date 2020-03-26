@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    using static Root;    
-
+    using static refs;
+    
     partial class fmath
     {
         const uint Float32SignMask = 0x7fffffff;

@@ -3,25 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    using System;
+{    
     using System.Runtime.CompilerServices;
-    
-    using static Root;
 
-    public interface IP2Kind<T>
-        where T : IP2Kind<T>
+    [ApiHost("api", ApiHostKind.Direct)]
+    public static partial class math
     {
-        byte Exponent {get;}
-
-        ulong Value {get;}
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    
     }
-
-    public interface IP2m1Kind<T> : IP2Kind<T>
-        where T : IP2Kind<T>
-    {
-
-    }
-
-
 }

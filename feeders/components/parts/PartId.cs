@@ -219,6 +219,8 @@ public enum PartId : ulong
 
     Kinds = 822,
 
+    Api = 824,
+
     RngPcg = 1024,
 
     RngWy = 1023,
@@ -248,6 +250,8 @@ public enum UserTypeId : uint
 
 public static class PartIdentity
 {
+    public sealed class Api : PartId<Api> { public override PartId Id => PartId.Api;}
+
     public sealed class Canonical : PartId<Canonical> { public override PartId Id => PartId.Canonical; }
 
     public sealed class Collective : PartId<Collective> { public override PartId Id => PartId.Collective;}
@@ -256,9 +260,13 @@ public static class PartIdentity
 
     public sealed class Custom : PartId<Custom> { public override PartId Id => PartId.Custom;}
 
+    public sealed class Dynamic : PartId<Dynamic> { public override PartId Id => PartId.Dynamic;}
+
     public sealed class Identify : PartId<Identify> { public override PartId Id => PartId.Identify; }
 
     public sealed class Kinds : PartId<Kinds> { public override PartId Id => PartId.Kinds;}
+
+    public sealed class Math : PartId<Math> { public override PartId Id => PartId.Math;}
 
     public sealed class Memories : PartId<Memories> { public override PartId Id => PartId.Memories;}
 
@@ -267,6 +275,8 @@ public static class PartIdentity
     public sealed class Nats : PartId<Nats> { public override PartId Id => PartId.Nats;}
 
     public sealed class Reflective : PartId<Reflective> { public override PartId Id => PartId.Reflective; }
+
+    public sealed class Vectorized : PartId<Vectorized> { public override PartId Id => PartId.Vectorized;}
 
     public sealed class SFuncs : PartId<SFuncs> { public override PartId Id => PartId.SFuncs;}
 

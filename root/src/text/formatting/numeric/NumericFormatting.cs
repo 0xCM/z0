@@ -11,7 +11,7 @@ namespace Z0
 
     public static class NumericFormatting
     {
-         [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static string Format<F>(this F src)
             where F : unmanaged, INumericFormatProvider<F>
                 => src.Formatter.Format(src);

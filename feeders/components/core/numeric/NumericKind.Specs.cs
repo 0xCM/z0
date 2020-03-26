@@ -17,7 +17,7 @@ namespace Z0
     public interface INumericKind<T> : INumericKind, ITypeKind<T>
         where T : unmanaged
     {
-        TypeWidth Width => (TypeWidth)bitsize<T>();            
+        TypeWidth Width => (TypeWidth)core.bitsize<T>();            
 
         NumericKind NumericKind { [MethodImpl(Inline)] get=> NumericTypes.kind<T>();}
     }

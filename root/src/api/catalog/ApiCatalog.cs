@@ -57,12 +57,5 @@ namespace Z0
         }                    
     }
 
-    public sealed class EmptyCatalog : ApiCatalog<EmptyCatalog>
-    {
-        public EmptyCatalog()
-            : base(PartId.None)
-        {
 
-        }               
-    }    
 }

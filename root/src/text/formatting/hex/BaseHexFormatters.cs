@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Textual;
 
     static class BaseHexFormatters
     {
@@ -57,7 +57,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generalize<HexFormatter64f,ISystemHexFormatter<T>>(HexFormatter64f.TheOnly);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         readonly struct HexFormatter8i : ISystemHexFormatter<HexFormatter8i,sbyte>

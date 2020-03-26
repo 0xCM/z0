@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
+ 
     public interface INumericFormatter : IFormatter
     {
         

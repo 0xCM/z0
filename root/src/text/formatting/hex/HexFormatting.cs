@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Root;
+    using static Textual;
 
     public static class HexFormatting
     {
@@ -260,7 +260,7 @@ namespace Z0
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
-            var builder = factory<string>().Builder();
+            var builder = text.build();
             var pre = (specifier && prespec) ? "0x" : string.Empty;
             var post = (specifier && !prespec) ? "h" : string.Empty;
             var spec = HexFmtSpec(uppercase);
@@ -343,7 +343,7 @@ namespace Z0
             where T : unmanaged
         {
             var delimiter = sep ?? AsciSym.Space;
-            var builder = factory<string>().Builder();
+            var builder = text.build();
             if(bracket)
                 builder.Append(AsciSym.LBracket);
 
@@ -389,10 +389,10 @@ namespace Z0
         /// <param name="fmt">The format options</param>
         public static IReadOnlyList<string> FormatHexLines(this ReadOnlySpan<byte> data, HexLineFormat? fmt = null)
         {
-            var builder = factory<string>().Builder();
+            var builder = text.build();
             var configured = fmt ?? HexLineFormat.Default;  
             var lines = new List<string>();
-            var line = factory<string>().Builder();
+            var line = text.build();
             for(ushort i=0; i< data.Length; i++)
             {                
                 if(i % configured.BytesPerLine == 0)

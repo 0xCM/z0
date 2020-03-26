@@ -48,11 +48,8 @@ namespace Z0
         public virtual IApiCatalog Operations {get;}
             = new EmptyCatalog();
 
-        // public string Format()
-        //     => Id.Format();
-
         public virtual void Run(params string[] args)
-            => term.error("Assembly has no executor");
+            => Console.Error.Write("Assembly has no executor");
 
         public override string ToString()
             => Format();

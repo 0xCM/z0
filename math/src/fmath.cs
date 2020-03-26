@@ -3,9 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
-    
+{    
     using System;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Defines floating-point operations
@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost(ApiHostKind.Direct)]
     public static partial class fmath
     {
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
     }
-
 }

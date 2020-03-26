@@ -37,13 +37,6 @@ namespace Z0
             => src.Where(x => x.IsInitOnly || x.IsLiteral);
 
         /// <summary>
-        /// Selects the literal fields from a stream
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        public static IEnumerable<FieldInfo> Literal(this IEnumerable<FieldInfo> src)
-            => src.Where(x => x.IsLiteral);
-
-        /// <summary>
         /// Selects the mmutable fields from a stream
         /// </summary>
         /// <param name="src">The source stream</param>

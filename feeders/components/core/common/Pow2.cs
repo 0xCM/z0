@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     
-    using static Root;
+    using static Components;
     
     /// <summary>
     /// Defines power-of-2 literals raning from 2^0 - 2^63
@@ -469,21 +469,21 @@ namespace Z0
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,            
         };
 
-       [MethodImpl(Inline)]
-        public static int i32M1(int index)
-            => M1Bytes32i.Slice(index*4,4).TakeInt32();
+        // [MethodImpl(Inline)]
+        // public static int i32M1(int index)
+        //     => M1Bytes32i.Slice(index*4,4).TakeInt32();
 
-        [MethodImpl(Inline)]
-        public static int u32M1(int index)
-            => M1Bytes32u.Slice(index*4,4).TakeInt32();
+        // [MethodImpl(Inline)]
+        // public static int u32M1(int index)
+        //     => M1Bytes32u.Slice(index*4,4).TakeInt32();
 
-        [MethodImpl(Inline)]
-        public static ulong u64M1(int index)
-            => M1Bytes64u.Slice(index*8,8).TakeUInt64();
+        // [MethodImpl(Inline)]
+        // public static ulong u64M1(int index)
+        //     => M1Bytes64u.Slice(index*8,8).TakeUInt64();
 
-        [MethodImpl(Inline)]
-        public static long i64M1(int index)
-            => M1Bytes64u.Slice(index*8,8).TakeInt64();
+        // [MethodImpl(Inline)]
+        // public static long i64M1(int index)
+        //     => M1Bytes64u.Slice(index*8,8).TakeInt64();
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> slice32iM1(int index)
@@ -556,7 +556,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))                
                 return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 63);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         static ReadOnlySpan<byte> M1Bytes32i => new byte[]

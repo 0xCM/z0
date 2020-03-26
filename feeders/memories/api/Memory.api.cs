@@ -35,7 +35,7 @@ namespace Z0
         static unsafe void copy<S,T>(in S src, ref T dst, uint targets)
             where T : unmanaged
             where S : unmanaged
-                =>  Unsafe.CopyBlock(refs.ptr(ref dst),  Unsafe.AsPointer(ref Unsafe.AsRef(in src)), targets*(uint)size<T>());
+                =>  Unsafe.CopyBlock(refs.ptr(ref dst),  Unsafe.AsPointer(ref Unsafe.AsRef(in src)), targets*(uint)core.size<T>());
 
         /// <summary>
         /// Copies a contiguous segments of bytes from one location to another
@@ -56,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void copy<T>(T* pSrc, T* pDst, uint srcCount)
             where T : unmanaged
-                => Unsafe.CopyBlock(pDst, pSrc, (uint)(size<T>()*srcCount));
+                => Unsafe.CopyBlock(pDst, pSrc, (uint)(core.size<T>()*srcCount));
 
         /// <summary>
         /// Copies a contiguous segments of values to a span

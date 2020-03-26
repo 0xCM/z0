@@ -6,12 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Root;    
-    
+        
     partial class math
     {
-
         [MethodImpl(Inline), Op]
         public static sbyte not(sbyte src)
             => (sbyte)(~ src);

@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Api;
 
     /// <summary>
     /// Describes an assembly that provides cataloged operations

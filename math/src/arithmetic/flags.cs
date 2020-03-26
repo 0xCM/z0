@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics.X86;
     using FCM =System.Runtime.Intrinsics.X86.FloatComparisonMode;
 
     [Flags]

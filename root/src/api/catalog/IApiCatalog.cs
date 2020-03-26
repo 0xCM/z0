@@ -76,5 +76,23 @@ namespace Z0
         /// The provided catalog
         /// </summary>
         IApiCatalog Operations {get;}
-    } 
+    }
+
+    public sealed class EmptyCatalog : IApiCatalog
+    {    
+        public PartId AssemblyId => PartId.None;
+
+        public Assembly CatalogedAssembly => Assembly.GetEntryAssembly();
+
+        public ApiHost[] ApiHosts => new ApiHost[]{};
+
+        public ApiHost[] GenericApiHosts => new ApiHost[]{};
+
+        public ApiHost[] DirectApiHosts => new ApiHost[]{};
+
+        public DataResourceIndex Resources => DataResourceIndex.Empty;
+
+        public Type[] HostTypes => new Type[]{};
+
+    }
 }

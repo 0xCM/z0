@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Text;
     
-    using static Root;
+    using static Textual;
 
     public static class HexFormatter 
     {
@@ -50,7 +49,7 @@ namespace Z0
         public string FormatItem(T src, in HexFormatConfig hex)
             => text.concat(
                 hex.Specifier && hex.Specifier ? HexFormatConfig.PreSpecString : string.Empty, 
-                hex.ZPad ? BaseFormatter.Format(src, hex.FormatString).PadLeft(size<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatString),
+                hex.ZPad ? BaseFormatter.Format(src, hex.FormatString).PadLeft(Root.size<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatString),
                 hex.Specifier && !hex.PreSpec ? HexFormatConfig.PostSpecString : string.Empty
                 );
 
@@ -64,7 +63,7 @@ namespace Z0
 
         public string Format(ReadOnlySpan<T> src, in HexSeqFormatConfig seq, in HexFormatConfig hex)
         {            
-            var result = new StringBuilder();
+            var result = text.build();
 
             for(var i = 0; i<src.Length; i++)
             {
@@ -79,7 +78,7 @@ namespace Z0
 
         public string Format(ReadOnlySpan<T> src, in HexSeqFormatConfig seq)
         {
-            var result = new StringBuilder();
+            var result = text.build();
             var config = seq.HexFormat;
 
             for(var i = 0; i<src.Length; i++)

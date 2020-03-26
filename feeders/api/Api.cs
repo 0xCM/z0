@@ -2,11 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Memories)]
+[assembly: PartId(PartId.Api)]
 
 namespace Z0.Parts
 {        
-    public sealed class Memories : Part<Memories> { }
+    public sealed class Api : Part<Api>
+    {
+
+
+    }
 }
 
 namespace Z0
@@ -14,21 +18,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static class Memories
+    public static class Api
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
-        internal const string Kernel32 = "kernel32.dll";
-
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        internal static ref byte uint8<T>(ref T src)
-            => ref Unsafe.As<T,byte>(ref src);
-
     }
 
-    public static partial class XMem    
-    {
-
-    }
 }

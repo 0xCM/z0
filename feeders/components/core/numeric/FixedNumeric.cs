@@ -23,7 +23,7 @@ namespace Z0
         int IFixed.BitWidth
         {
             [MethodImpl(Inline)]
-            get => (int)bitsize<T>();
+            get => (int)core.bitsize<T>();
         }    
     }
 

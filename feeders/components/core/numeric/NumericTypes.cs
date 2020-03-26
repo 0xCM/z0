@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
 
     using NK = NumericKind;
-    using TC = System.TypeCode;
     using NI = NumericIndicator;
     using FW = FixedWidth;
 
@@ -22,25 +21,25 @@ namespace Z0
         /// Recognized unsigned integral types
         /// </summary>
         public static IEnumerable<Type> Unsigned
-            => seq(typeof(byte), typeof(ushort),  typeof(uint), typeof(ulong));
+            => core.seq(typeof(byte), typeof(ushort),  typeof(uint), typeof(ulong));
 
         /// <summary>
         /// Recognized unsigned integral kinds
         /// </summary>
         public static IEnumerable<NumericKind> UnsignedKinds
-            => seq(NK.U8, NK.U16, NK.U32, NK.U64);
+            => core.seq(NK.U8, NK.U16, NK.U32, NK.U64);
 
         /// <summary>
         /// Recognized signed integral kinds
         /// </summary>
         public static IEnumerable<Type> Signed
-            => seq(typeof(sbyte), typeof(short), typeof(int), typeof(long));
+            => core.seq(typeof(sbyte), typeof(short), typeof(int), typeof(long));
         
         /// <summary>
         /// Recognized signed integral kinds
         /// </summary>
         public static IEnumerable<NumericKind> SignedKinds
-            => seq(NK.I8, NK.I16, NK.I32, NK.I64);
+            => core.seq(NK.I8, NK.I16, NK.I32, NK.I64);
 
         /// <summary>
         /// Recognized integral types
@@ -58,13 +57,13 @@ namespace Z0
         /// recognized floating-point types
         /// </summary>
         public static IEnumerable<Type> Floating
-            => seq(typeof(float), typeof(double));
+            => core.seq(typeof(float), typeof(double));
 
         /// <summary>
         /// Recognized floating-point kinds
         /// </summary>
         public static IEnumerable<NumericKind> FloatKinds
-            => seq(NK.F32, NK.F64);
+            => core.seq(NK.F32, NK.F64);
 
         /// <summary>
         /// Recognized numeric types

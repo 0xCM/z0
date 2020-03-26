@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Symbolic)" />
+    <ProjectReference Include="$(Memories)" />
   </ItemGroup>
 
 </Project>

@@ -15,7 +15,7 @@ namespace Z0
         /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
         public static int size<T>()
-            => Unsafe.SizeOf<T>();
+            => core.size<T>();
 
         /// <summary>
         /// Computes the byte-size of a type
@@ -23,6 +23,6 @@ namespace Z0
         /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
         public static int size<T>(T t)
-            => Unsafe.SizeOf<T>();
+            => core.size<T>();
     }
 }

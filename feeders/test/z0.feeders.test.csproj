@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>    
+    <ProjectReference Include="$(Api)" />  
     <ProjectReference Include="$(Canonical)" />  
     <ProjectReference Include="$(Collective)" />  
     <ProjectReference Include="$(Components)" />  

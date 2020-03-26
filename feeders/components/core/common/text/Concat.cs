@@ -56,6 +56,14 @@ namespace Z0
         }
 
         /// <summary>
+        /// Joins a sequence of source characters interspersed with a supplied separator
+        /// </summary>
+        /// <param name="chars">The characters to join</param>
+        /// <param name="sep">The character to intersperse</param>
+        public static string Concat(this IEnumerable<char> chars, char sep)
+            => new string(chars.Intersperse(sep).ToSpan());
+
+        /// <summary>
         /// Forms a string by source character justapostion
         /// </summary>
         /// <param name="src">The characters to concatenate</param>

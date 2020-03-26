@@ -1,6 +1,7 @@
 <Project>
 
   <PropertyGroup>
+    <Api>$(Feeders)api/z0.api.csproj</Api>
     <Components>$(Feeders)components/z0.components.csproj</Components>
     <Canonical>$(Feeders)canonical/z0.canonical.csproj</Canonical>
     <Collective>$(Feeders)collective/z0.collective.csproj</Collective>

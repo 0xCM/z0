@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Memories;
 
     /// <summary>
     /// Characterizes an address-identified target

@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Reflection;
+    
+    using static ReflectionFlags;
     using static Components;
     
     partial class XComponent

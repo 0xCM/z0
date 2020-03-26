@@ -7,8 +7,22 @@ namespace Z0
      using System;
      using System.Runtime.CompilerServices;
 
-     using static Root;
+    using static Components;
      using static Pow2;
+
+     public interface IP2Kind<T>
+          where T : IP2Kind<T>
+     {
+          byte Exponent {get;}
+
+          ulong Value {get;}
+     }
+
+     public interface IP2m1Kind<T> : IP2Kind<T>
+          where T : IP2Kind<T>
+     {
+
+     }
 
      public static class P2K
      {

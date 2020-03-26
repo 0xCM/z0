@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Root;
+    using static Textual;
 
     public static class Formatters
     {

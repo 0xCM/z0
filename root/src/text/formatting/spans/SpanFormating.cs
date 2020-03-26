@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Textual;
 
     public static class SpanFormatting
     {
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         public static string FormatLines<T>(this ReadOnlySpan<T> src)
         {
-            var lines = text.factory.Builder();
+            var lines = text.build();
             for(var i=0; i<src.Length; i++)
                 lines.AppendLine(src[i].ToString());
             return lines.ToString();
@@ -72,7 +72,7 @@ namespace Z0
             var padlen = cellpad ?? Unsafe.SizeOf<T>()*4;
             var filler = padchar ?? ' ';
             var pad = GetPadFunc<T>(padright);
-            var sb = text.factory.Builder();
+            var sb = text.build();
             sb.Append("[");
             for(var i = 0; i< src.Length; i++)
             {

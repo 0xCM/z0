@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    using static Root;
+    using static Memories;
+    using static refs;
     using static P2K;
 
     public static class CharStacks
@@ -298,7 +299,6 @@ namespace Z0
             public char C0;
 
             char C1;
-
         }
 
         public ref struct CharStack4
