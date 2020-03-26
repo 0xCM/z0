@@ -12,7 +12,7 @@ namespace Z0
 
     using static Root;
 
-    public interface IApiCollector<S> : IAppService
+    public interface IApiCollector<S> : IService
     {
         IEnumerable<DirectOpGroup> CollectDirect(S source);
 
@@ -26,15 +26,15 @@ namespace Z0
     
     readonly struct ApiOpCollector : IApiCollector
     {
-        public IAppContext Context {get;}
+        public IContext Context {get;}
 
 
         [MethodImpl(Inline)]
-        public static IApiCollector Create(IAppContext context)
+        public static IApiCollector Create(IContext context)
             => new ApiOpCollector(context);
     
         [MethodImpl(Inline)]
-        internal ApiOpCollector(IAppContext context)
+        internal ApiOpCollector(IContext context)
         {
             this.Context = context;
         }

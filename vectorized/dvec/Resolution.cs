@@ -7,9 +7,7 @@
 namespace Z0.Parts
 {
     public sealed class DVec : ApiPart<DVec, DVec.C>
-    {
-        public DVec() : base(PartId.DVec) {}
-        
+    {        
         public class C : ApiCatalog<C> { public C() : base(PartId.DVec) {} }            
     }
 }

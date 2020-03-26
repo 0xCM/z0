@@ -7,9 +7,7 @@
 namespace Z0.Parts
 {
     public sealed class Validity : ApiPart<Validity, Validity.C>
-    {
-        public Validity() : base(PartId.Validity) {}
-        
+    {        
         public class C : ApiCatalog<C> { public C() : base(PartId.Validity) {} }            
     }
 }
@@ -27,7 +25,7 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static Root;
-    using static AppMessages;
+    using static AppErrorMsg;
 
     public static class Validity
     {

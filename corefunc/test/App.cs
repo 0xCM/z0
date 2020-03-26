@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: PartId(PartId.CoreFuncTest)]
+
 namespace Z0
 {        
     
@@ -10,4 +12,9 @@ namespace Z0
         public static void Main(params string[] args)
             => Run(args);
     }
+}
+
+namespace Z0.Parts
+{        
+    public sealed class CoreFuncTest : ApiPart<CoreFuncTest> { }
 }

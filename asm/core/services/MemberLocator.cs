@@ -32,7 +32,7 @@ namespace Z0.Asm
 
       public IEnumerable<ApiStatelessMember> Hosted(Type src)
       {
-          var host = ApiHost.FromType(src);
+          var host = Api.Host(src);
           return HostedGeneric(host).Union(HostedDirect(host)).OrderBy(x => x.Method.MetadataToken);
       }
 
@@ -44,7 +44,7 @@ namespace Z0.Asm
 
       public IEnumerable<ApiLocatedMember> Located(Type src)
       {
-            var host = ApiHost.FromType(src);
+            var host = Api.Host(src);
             return LocatedGeneric(host).Union(LocatedDirect(host)).OrderBy(x => x.Address);
       }
 

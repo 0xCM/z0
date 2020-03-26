@@ -18,7 +18,7 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static Root;
-    using static AppMessages;
+    using static AppErrorMsg;
 
     public static class Checks
     {

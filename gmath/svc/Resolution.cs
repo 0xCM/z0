@@ -10,8 +10,6 @@ namespace Z0.Parts
     {        
         public const string SvcCollectionName = "math.services";                
 
-        public MathServices() : base(PartId.MathSvc) {}
-
         public class C : ApiCatalog<C> { public C() : base(PartId.MathSvc) {} }    
     }
 }

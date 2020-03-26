@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Components;
@@ -37,7 +36,7 @@ namespace Z0
         bool IEquatable<P>.Equals(P src)
             => this.Id == src.Id;
 
-        int HashCode
+        public int HashCode
             => Id.GetHashCode();     
 
         [MethodImpl(Inline)]

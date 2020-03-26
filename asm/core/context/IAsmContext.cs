@@ -6,10 +6,12 @@ namespace Z0
 {        
     using Asm;
 
+
+
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IApiContext<IAsmContext>, IContext,  IAppMsgQueue, IPolyrandProvider
+    public interface IAsmContext : IApiContext<IAsmContext>, IContext,  IAppMsgQueue, IPolyrandProvider, IAppEnv
     {
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified
@@ -32,6 +34,9 @@ namespace Z0
         /// Encapsulates the state of the context
         /// </summary>
         AsmContextData State {get;}
+
+        IAppPaths IAppEnv.Paths 
+            => AppPathProvider.Create(Owner, Env.Current.LogDir);  
 
     }   
 }

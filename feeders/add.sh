@@ -13,6 +13,9 @@ bash $AddCmd
 export ProjectId=custom
 bash $AddCmd
 
+export ProjectId=fixed
+bash $AddCmd
+
 export ProjectId=identify
 bash $AddCmd
 
@@ -38,6 +41,9 @@ export ProjectId=texting
 bash $AddCmd
 
 export ProjectId=time
+bash $AddCmd
+
+export ProjectId=tuples
 bash $AddCmd
 
 dotnet sln add $ProjectRoot/test/z0.feeders.test.csproj

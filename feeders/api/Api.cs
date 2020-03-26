@@ -18,7 +18,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static class Api
+    public static partial class Api
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }

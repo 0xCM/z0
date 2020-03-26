@@ -45,7 +45,6 @@
     <Circuits>$(TopDir)vectorized/circuits/z0.vectorized.circuits.csproj</Circuits>
     <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
     <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
-    <Fixed>$(TopDir)fixed/src/z0.fixed.csproj</Fixed>
     <GenericNumerics>$(TopDir)gmath/src/z0.gmath.csproj</GenericNumerics>
     <Graphs>$(TopDir)graphs/src/z0.graphs.csproj</Graphs>
     <Identity>$(TopDir)identity/src/z0.identity.csproj</Identity>

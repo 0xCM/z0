@@ -6,18 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
-    using System.Linq;
     using System.Collections.Generic;
     
     using static Root;    
  
-    [AttributeUsage(AttributeTargets.Method)]
-    public class DataRegistryAttribute : Attribute
-    {
-
-    }
-
     [ApiHost("api")]
     public static partial class Data
     {        
@@ -37,11 +29,12 @@ namespace Z0
 
         const int ResCount = LastIndex;
 
-        static readonly ByteSource[] Described = new ByteSource[ResCount];
+        static readonly BinaryResource[] Described = new BinaryResource[ResCount];
         
         static bool Initialized = false;
 
-        public static IEnumerable<ByteSource> Resources
+        
+        public static IEnumerable<BinaryResource> Resources
         {
             get 
             {
@@ -51,7 +44,7 @@ namespace Z0
                     {
                         try
                         {
-                            iter(typeof(Data).DeclaredStaticMethods().Tagged<DataRegistryAttribute>(), m => m.Invoke(null, new object[]{}));
+                            iter(typeof(Data).DeclaredStaticMethods().Tagged<ResourceProviderAttribute>(), m => m.Invoke(null, new object[]{}));
                             Initialized = true;
                         }
                         catch(Exception e)
@@ -70,6 +63,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void Register(int index, string name, ReadOnlySpan<byte> src)
-            => Described[index] = ByteSource.Define(name, src); 
+            => Described[index] = BinaryResource.Define(name, src); 
     }
 }

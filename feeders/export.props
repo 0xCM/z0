@@ -6,6 +6,7 @@
     <Canonical>$(Feeders)canonical/z0.canonical.csproj</Canonical>
     <Collective>$(Feeders)collective/z0.collective.csproj</Collective>
     <Custom>$(Feeders)custom/z0.custom.csproj</Custom>
+    <Fixed>$(Feeders)fixed/z0.fixed.csproj</Fixed>
     <Identify>$(Feeders)identify/z0.identify.csproj</Identify>
     <Kinds>$(Feeders)kinds/z0.kinds.csproj</Kinds>
     <Monadic>$(Feeders)monadic/z0.monadic.csproj</Monadic>
@@ -16,6 +17,7 @@
     <Texting>$(Feeders)texting/z0.texting.csproj</Texting>
     <Textual>$(Feeders)texting/z0.texting.csproj</Textual>
     <Time>$(Feeders)time/z0.time.csproj</Time>
+    <Tuples>$(Feeders)tuples/z0.tuples.csproj</Tuples>
   </PropertyGroup>
 
 </Project>

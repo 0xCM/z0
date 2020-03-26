@@ -12,7 +12,7 @@ namespace Z0
         
     using static Root;
     using static Checks;
-    using static AppMessages;
+    using static AppErrorMsg;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;

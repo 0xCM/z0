@@ -55,10 +55,10 @@ namespace Z0.Asm.Check
             this.RootPaths = RootEmissionPaths.Define(root);
         }
 
-        ILogDevice OpenLog(string name, FileExtension ext = null, FileWriteMode mode = FileWriteMode.Overwrite,  bool display = false)
+        IAppMsgWriter OpenLog(string name, FileExtension ext = null, FileWriteMode mode = FileWriteMode.Overwrite,  bool display = false)
         {
             var target = RootPaths.LogDir + FileName.Define(name, ext ?? FileExtensions.Log);
-            return Context.OpenLogDevice(target, name, mode, display);
+            return Context.OpenAppMsgLog(target, name, mode, display);
         }
 
         /// <summary>

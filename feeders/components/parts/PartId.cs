@@ -221,6 +221,8 @@ public enum PartId : ulong
 
     Api = 824,
 
+    Tuples = 826,
+
     RngPcg = 1024,
 
     RngWy = 1023,

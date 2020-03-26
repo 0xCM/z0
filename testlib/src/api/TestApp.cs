@@ -246,7 +246,7 @@ namespace Z0
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else                
-                yield return AppMessages.Unanticipated(e?.InnerException ?? e);
+                yield return AppErrorMsg.Unanticipated(e?.InnerException ?? e);
 
             yield return AppMsg.Error($"{name} failed.");
         }
@@ -302,7 +302,7 @@ namespace Z0
             }
             finally
             {            
-                AppMessages.emit(Context, messages);
+                AppErrorMsg.emit(Context, messages);
                 iter(messages.Where(m => !m.Displayed), term.print);
             }
 
@@ -346,7 +346,7 @@ namespace Z0
             }
             finally
             {     
-                AppMessages.emit(Context, collected);
+                AppErrorMsg.emit(Context, collected);
                 iter(collected.Where(m => !m.Displayed), term.print);       
                 //print(messages);
             }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    public interface ICilContext : IAppContext
+    public interface ICilContext : IContext
     {
         CilFormatConfig CilFormat {get;}         
     }
@@ -18,13 +18,13 @@ namespace Z0
     readonly struct CilContext : ICilContext
     {
         [MethodImpl(Inline)]
-        public static ICilContext Rooted(IAppContext root)
+        public static ICilContext Rooted(IContext root)
             => new CilContext(root);
 
-        readonly IAppContext root;
+        readonly IContext root;
 
         [MethodImpl(Inline)]
-        CilContext(IAppContext root)
+        CilContext(IContext root)
         {
             this.root = root;
             this.CilFormat = CilFormatConfig.Default;
@@ -43,14 +43,14 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        internal static ICilContext CilContext(this IAppContext root)
+        internal static ICilContext CilContext(this IContext root)
             => Z0.CilContext.Rooted(root);
 
         /// <summary>
         /// Instantiates a contextual cil formatter
         /// </summary>
         /// <param name="context">The source context</param>
-        public static ICilFunctionFormatter CilFormatter(this IAppContext context)
+        public static ICilFunctionFormatter CilFormatter(this IContext context)
             => CilFunctionFormatter.New(context.CilContext());
 
         public static IClrIndexer CreateClrIndex(this Assembly src)
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="context">The source context</param>
         /// <param name="dst">The target path</param>
         [MethodImpl(Inline)]
-        public static ICilFunctionWriter CilWriter(this IAppContext context, FilePath dst)
+        public static ICilFunctionWriter CilWriter(this IContext context, FilePath dst)
             => CilFunctionWriter.Create(context.CilContext(),dst);
     }
 }

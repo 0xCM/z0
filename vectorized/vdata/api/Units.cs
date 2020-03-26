@@ -111,7 +111,7 @@ namespace Z0
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
                 }; 
 
-        [DataRegistry]
+        [ResourceProvider]
         static void RegisterUnits()
         {
             const string basename = "Units";

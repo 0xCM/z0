@@ -8,8 +8,6 @@ namespace Z0.Parts
 {
     public sealed class GenericNumerics : ApiPart<GenericNumerics, GenericNumerics.C>
     {        
-        public GenericNumerics() : base(PartId.GenericNumerics) {}
-
         public class C : ApiCatalog<C> { public C() : base(PartId.GenericNumerics) {} }    
     }
 }

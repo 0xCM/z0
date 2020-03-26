@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Security;
     using System.Runtime.Intrinsics;
-    using System.Reflection;
 
     using static Root;
     using static Nats;
@@ -16,7 +14,7 @@ namespace Z0
     public static class DynopServices
     {
         [MethodImpl(Inline)]
-        public static IDynamicImmInjector VUnaryImmInjector<W>(this IAppContext context, W w = default)
+        public static IDynamicImmInjector VUnaryImmInjector<W>(this IContext context, W w = default)
             where W : ITypeNat
         {
             if(typeof(W) == typeof(N128))
@@ -28,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static IDynamicImmInjector VBinaryImmInjector<W>(this IAppContext context, W w = default)
+        public static IDynamicImmInjector VBinaryImmInjector<W>(this IContext context, W w = default)
             where W : ITypeNat
         {
             if(typeof(W) == typeof(N128))
@@ -41,22 +39,22 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static IDynamicImmInjector<UnaryOp<Vector128<T>>> V128UnaryOpImmInjector<T>(this IAppContext context)
+        public static IDynamicImmInjector<UnaryOp<Vector128<T>>> V128UnaryOpImmInjector<T>(this IContext context)
             where T : unmanaged
                 => new ImmInjector<UnaryOp<Vector128<T>>>(context, new V128UnaryOpImmInjector<T>(context));
 
         [MethodImpl(Inline)]
-        public static IDynamicImmInjector<BinaryOp<Vector128<T>>> V128BinaryOpImmInjector<T>(this IAppContext context)
+        public static IDynamicImmInjector<BinaryOp<Vector128<T>>> V128BinaryOpImmInjector<T>(this IContext context)
             where T : unmanaged
                 => new ImmInjector<BinaryOp<Vector128<T>>>(context, new V128BinaryOpImmInjector<T>(context));
 
         [MethodImpl(Inline)]
-        public static IDynamicImmInjector<UnaryOp<Vector256<T>>> V256UnaryOpImmInjector<T>(this IAppContext context)
+        public static IDynamicImmInjector<UnaryOp<Vector256<T>>> V256UnaryOpImmInjector<T>(this IContext context)
             where T : unmanaged
                 => new ImmInjector<UnaryOp<Vector256<T>>>(context, new VUnaryOpImmInjector<T>(context));
 
         [MethodImpl(Inline)]
-        public static IDynamicImmInjector<BinaryOp<Vector256<T>>> V256BinaryOpImmInjector<T>(this IAppContext context)
+        public static IDynamicImmInjector<BinaryOp<Vector256<T>>> V256BinaryOpImmInjector<T>(this IContext context)
             where T : unmanaged
                 => new ImmInjector<BinaryOp<Vector256<T>>>(context, new V256BinaryOpImmInjector<T>(context));
     }

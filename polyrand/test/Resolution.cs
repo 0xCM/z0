@@ -8,6 +8,6 @@ namespace Z0.Parts
 {
     public sealed class PolyrandTest : ApiPart<PolyrandTest> 
     {
-         public PolyrandTest() : base(PartId.PolyrandTest) {} 
+         
     }
 }

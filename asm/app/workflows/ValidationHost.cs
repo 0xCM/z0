@@ -7,16 +7,14 @@ namespace Z0.Asm.Check
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using static Root;
     using static AsmWorkflowReports;
     using static HostCaptureWorkflow;
     using static AsmServiceMessages;
 
-
     class ValidationHost : TestContext<ValidationHost,IAsmContext>, IAsmValidationHost
-    {                
+    {               
         FolderPath RootEmissionPath
             => Context.Paths.TestDataDir(GetType());                
 

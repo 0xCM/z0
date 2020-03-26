@@ -139,7 +139,7 @@ namespace Z0
                 0,1,4,5,8,9,12,13
                 };                
 
-        [DataRegistry]
+        [ResourceProvider]
         static void RegisterPacks()
         {
             var name = string.Empty;

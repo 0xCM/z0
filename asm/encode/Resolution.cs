@@ -7,10 +7,7 @@
 namespace Z0.Parts
 {
     public sealed class AsmEncoder : ApiPart<AsmEncoder, AsmEncoder.C>
-    {
-        public AsmEncoder() : base(PartId.AsmEncoder) {}
-        
-
+    {        
         public class C : ApiCatalog<C> { public C() : base(PartId.AsmEncoder) {} }            
     }
 }

@@ -7,15 +7,27 @@
 namespace Z0.Asm.Check
 { 
     using R = Z0.Parts;
+    using System.Reflection;
 
     class App : ConsoleApp<App,IAsmContext>
     {
+
+        static IPart[] Dependencies
+            => new IPart[]{
+                R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
+                R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
+                R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
+                R.Blocks.Resolution, R.Fixed.Resolution, R.Math.Resolution,
+                R.GenericNumerics.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
+                R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
+                R.Root.Resolution,R.Vectorized.Resolution, R.VData.Resolution};
+
         static IApiPart[] Resolutions
             => new IApiPart[]{
                 R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
                 R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
                 R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
-                R.Blocks.Resolution, R.Fixed.Resolution, R.Math.Resolution,
+                R.Blocks.Resolution, R.Math.Resolution,
                 R.GenericNumerics.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
                 R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
                 R.Root.Resolution,R.Vectorized.Resolution, R.VData.Resolution};

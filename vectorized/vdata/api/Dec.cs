@@ -93,7 +93,7 @@ namespace Z0
                 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
                 };
 
-        [DataRegistry]
+        [ResourceProvider]
         static void RegisterDec()
         {
             const string basename = "Dec";

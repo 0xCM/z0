@@ -158,7 +158,7 @@ namespace Z0
                 6,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,
                 };
 
-        [DataRegistry]
+        [ResourceProvider]
         static void RegisterInc()
         {
             const string basename = "Inc";

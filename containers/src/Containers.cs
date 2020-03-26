@@ -7,9 +7,7 @@
 namespace Z0.Parts
 {
     public sealed class Containers : ApiPart<Containers, Containers.C>
-    {
-        public Containers() : base(PartId.Containers) {}
-        
+    {        
         public class C : ApiCatalog<C> { public C() : base(PartId.Containers) {} }            
     }
 }

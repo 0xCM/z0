@@ -8,8 +8,6 @@ namespace Z0.Parts
 {        
     public sealed class BitGrids : ApiPart<BitGrids, BitGrids.C>
     {
-        public BitGrids() : base (PartId.BitGrids) {}
-
         public class C : ApiCatalog<C> { public C() : base(PartId.BitGrids) { } }
     }
 }

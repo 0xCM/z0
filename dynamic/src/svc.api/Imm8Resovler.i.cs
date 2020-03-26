@@ -34,7 +34,7 @@ namespace Z0
 
     }
 
-    public interface IDynamicImmInjector : IAppService
+    public interface IDynamicImmInjector : IService
     {     
 
     }

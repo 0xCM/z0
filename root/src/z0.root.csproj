@@ -20,6 +20,7 @@
     <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Custom)" />
+    <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(Identify)" />  
     <ProjectReference Include="$(Kinds)" />  
     <ProjectReference Include="$(Monadic)" />
@@ -29,6 +30,8 @@
     <ProjectReference Include="$(Symbolic)" />        
     <ProjectReference Include="$(Texting)" />
     <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Tuples)" />
+
   </ItemGroup>
 
 </Project>

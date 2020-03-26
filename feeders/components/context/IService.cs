@@ -21,6 +21,12 @@ namespace Z0
         
     }
 
+    public interface IServiceAllocation : IService, IDisposable
+    {
+
+
+    }
+
     /// <summary>
     /// A stateful service, by definition, extends a state (referred to througout as a context) 
     /// with operational semantics. 
@@ -36,7 +42,7 @@ namespace Z0
     /// Characterizes a service that requires explcit resource managment
     /// </summary>
     /// <typeparam name="C">The context type</typeparam>
-    public interface IServiceAllocation<C> : IContextual<C>, IDisposable
+    public interface IServiceAllocation<C> : IContextual<C>, IServiceAllocation
         where C : IContext
     {
         
