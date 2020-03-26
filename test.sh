@@ -1,29 +1,17 @@
 Test=analogs/test.sh
 bash $Test
 
-Test=asm/test.sh
+Test=asm/app.sh
 bash $Test
 
-Test=bitcore/test.sh
-bash $Test
-
-Test=bitfields/test.sh
-bash $Test
-
-Test=bitgrids/test.sh
-bash $Test
-
-Test=bitspan/test.sh
-bash $Test
-
-Test=bitvectors/test.sh
+Test=bits/test.sh
 bash $Test
 
 Test=blocks/test.sh
 bash $Test
 
-Test=corefunc/test.sh
-bash $Test
+# Test=corefunc/test.sh
+# bash $Test
 
 Test=gmath/test.sh
 bash $Test

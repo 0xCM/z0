@@ -6,16 +6,16 @@
 
 namespace Z0
 {
-    class App : TestApp<App>
+    using System;
+
+    class App : Shell<App>
     { 
-        public static void Main(params string[] args) => Run(args); 
+        protected override void Execute(params string[] args)
+        {
+            Console.WriteLine("I do nothing");
+        }
+
+        public static void Main(params string[] args) => Launch(args); 
     } 
 }
 
-namespace Z0.Parts
-{
-    public sealed class MathTest : ApiPart<MathTest> 
-    {
-        
-    } 
-}

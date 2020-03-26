@@ -13,3 +13,22 @@ namespace Z0.Parts
         public class C : ApiCatalog<C> { public C() : base(PartId.Blocks){ }}
     }
 }
+
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Security;
+     
+    [ApiHost("api")]
+    public static partial class Blocks
+    {
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
+    }
+
+    public static partial class XBlocks    
+    {
+    
+    }    
+}

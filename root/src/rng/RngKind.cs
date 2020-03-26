@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-
+    
     /// <summary>
     /// Identifies a supported random number generator
     /// </summary>

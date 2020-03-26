@@ -77,15 +77,4 @@ namespace Z0
         }
     }
 
-    [Ignore]
-    sealed class EmptyPart : ApiPart<EmptyPart>
-    {
-
-        public EmptyPart()
-        {
-
-        }
-
-        public override PartId Id => PartId.None;
-    }
 }

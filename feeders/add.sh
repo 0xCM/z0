@@ -1,5 +1,5 @@
 export ProjectRoot="$(dirname "$0")"
-AddCmd=$ZDev/$ProjectRoot/add-project.sh
+AddCmd=$ZDev/.scripts/add-rooted.sh
 
 export ProjectId=canonical
 bash $AddCmd

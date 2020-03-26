@@ -195,30 +195,34 @@ public enum PartId : ulong
 
     TestApp = Testing | App,
 
-    Feeders = 1000,
+    Feeders = 800,
 
-    Components = 1005,
+    Components = 802,
 
-    Collective = 1010,
+    Collective = 804,
 
-    Monadic = 1015,
+    Monadic = 806,
 
-    Reflections = 1020,
+    Reflections = 808,
 
-    Textual = 1025,
+    Textual = 810,
 
-    Canonical = 1030,
+    Canonical = 812,
 
-    Memories = 1035,
+    Memories = 814,
 
-    SFuncs = 1040,
+    SFuncs = 816,
 
-    Custom = 1045,
+    Custom = 818,
 
-    Identify = 1050,
+    Identify = 820,
 
-    Kinds = 1055,
+    Kinds = 822,
 
+    RngPcg = 1024,
+
+    RngWy = 1023,
+    
     Svc = ushort.MaxValue + 1,
 
     Test = Svc << 1,
@@ -238,8 +242,7 @@ public enum UserTypeId : uint
 
     BoxedNumberId = DurationId + 1,
 
-    FirstId = BitId,
-    
+    FirstId = BitId,    
 }
 
 

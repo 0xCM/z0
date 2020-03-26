@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Root;
     using static Nats;
 
     public class t_vor : t_vinx<t_vor>
@@ -146,11 +145,11 @@ namespace Z0
         public void vor_blocks_256x64u()
             => vor_blocks_check<ulong>(n256);
 
-        protected void vor_blocks_check<T>(N128 w, T t = default)
+        protected void vor_blocks_check<T>(W128 w, T t = default)
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = BlockStats.Calc<N128,T>(blocks);
+            var stats = BlockStats.Calc(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -163,11 +162,11 @@ namespace Z0
                 Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
         }
 
-        protected void vor_blocks_check<T>(N256 w, T t = default)
+        protected void vor_blocks_check<T>(W256 w, T t = default)
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = BlockStats.Calc<N256,T>(blocks);
+            var stats = BlockStats.Calc(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
