@@ -75,7 +75,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(v64i(dvec.vblend4x32(v32u(x), v32u(y), spec)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -107,7 +107,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(v64i(dvec.vblend8x32(v32u(x), v32u(y), spec)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

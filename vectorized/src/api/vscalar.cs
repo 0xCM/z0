@@ -96,7 +96,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(D.vscalar(n,float64(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -136,7 +136,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(D.vscalar(n,float64(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

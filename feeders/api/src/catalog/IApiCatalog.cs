@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-
     /// <summary>
     /// Characterizes a type that supports operation discovery
     /// </summary>

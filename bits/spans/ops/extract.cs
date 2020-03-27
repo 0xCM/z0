@@ -54,7 +54,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return convert<T>(extract(src, n64, offset));
             else
-                throw unsupported<T>();            
+                throw Unsupported.define<T>();            
         }
 
         [MethodImpl(Inline)]

@@ -73,6 +73,9 @@
     <Feeders>$(TopDir)feeders/</Feeders>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <RngPcg>$(TopDir)rng/sources/pcg/z0.rng.pcg.csproj</RngPcg>
+  </PropertyGroup>
   <Import Project="$(Feeders)export.props"/>
 
 </Project>

@@ -73,7 +73,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return generic<T>(Bits.toggle(float64(src), pos));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
  
 

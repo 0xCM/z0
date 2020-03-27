@@ -85,7 +85,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(dvec.vdec(v64i(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -117,7 +117,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(dvec.vdec(v64i(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

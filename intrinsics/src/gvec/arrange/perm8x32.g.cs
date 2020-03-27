@@ -54,7 +54,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(dvec.vperm8x32(v64i(src), spec));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
     }

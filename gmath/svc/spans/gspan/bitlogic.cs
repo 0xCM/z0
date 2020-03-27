@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Root;
-    using static As;  
+    using static SFuncs;
+    using static refs;
 
     partial class gspan
     {

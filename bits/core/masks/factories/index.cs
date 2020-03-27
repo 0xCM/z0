@@ -73,7 +73,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Index64x8x0);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -89,7 +89,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Index64x8x1);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -105,7 +105,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Index64x8x2);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -121,7 +121,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Index64x8x3);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -137,7 +137,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Index64x8x4);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -153,7 +153,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Index64x8x5);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -169,7 +169,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Index64x8x6);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -185,7 +185,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Index64x8x7);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

@@ -111,7 +111,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(D.vbroadcast(n128, float64(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
  
         [MethodImpl(Inline)]
@@ -151,7 +151,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(D.vbroadcast(n256, float64(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

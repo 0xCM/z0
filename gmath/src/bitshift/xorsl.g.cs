@@ -52,7 +52,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.xorsl(int64(a), offset));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }           
     }
 }

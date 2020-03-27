@@ -11,13 +11,6 @@ namespace Z0
 
     using static Tuples;
 
-    public static class Triples
-    {
-        public static Triples<T> alloc<T>(int count)
-            where T : unmanaged
-                => new Triples<T>(new Triple<T>[count]);
-    }
-
     public readonly ref struct Triples<T>
         where T : unmanaged
     {

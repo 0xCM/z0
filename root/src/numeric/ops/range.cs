@@ -87,7 +87,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return range64f(x0,x1,step);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         static IEnumerable<T> range8i<T>(T x0, T x1, T? step = null)

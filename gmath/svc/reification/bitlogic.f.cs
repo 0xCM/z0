@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Root;
+    using static SFuncs;
     using static MathSvcHosts;
     
     using OK = OpKinds;
@@ -94,7 +94,7 @@ namespace Z0
             if(typeof(K) == typeof(OK.Not))
                 return not<T>().Invoke(a);
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -132,7 +132,8 @@ namespace Z0
             else if(typeof(K) == typeof(OK.CNonImpl))
                 return cnonimpl<T>().Invoke(a,b);
             else
-                throw unsupported<K>();
+                 throw Unsupported.define<T>();
+
         }
     }
 }

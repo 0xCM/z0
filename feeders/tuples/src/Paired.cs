@@ -24,6 +24,18 @@ namespace Z0
         /// </summary>
         public T1 Right;
 
+        T0 ITupled<Paired<T0, T1>, T0, T1>.Left
+        {
+            [MethodImpl(Inline)]
+            get => Left;
+        }
+
+        T1 ITupled<Paired<T0, T1>, T0, T1>.Right 
+        {
+            [MethodImpl(Inline)]
+            get => Right;
+        }
+
         public static Paired<T0,T1> Empty => default;
 
         [MethodImpl(Inline)]
@@ -78,8 +90,11 @@ namespace Z0
         public bool Equals(Paired<T0,T1> rhs)
             => Left.Equals(rhs.Left) && Right.Equals(rhs.Right);
 
-        public string Format(TupleFormat style = TupleFormat.Coordinate)
+        public string Format(TupleFormat style)
             => style == TupleFormat.Coordinate ? $"({Left},{Right})" : $"{Left}x{Right}";
+
+        public string Format()
+            => Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(Left,Right);

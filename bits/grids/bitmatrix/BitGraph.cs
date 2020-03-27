@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return define(BitMatrix.load(n64,A.Data));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>

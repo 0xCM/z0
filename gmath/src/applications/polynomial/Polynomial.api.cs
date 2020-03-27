@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static gmath;    
 
     public static class Polynomial
     {
-
         [MethodImpl(Inline)]
         public static Polynomial<T> Define<T>(params (T scalar, uint exp)[] terms)
             where T : unmanaged

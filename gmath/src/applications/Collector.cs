@@ -9,7 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static gmath;
+    using static refs;
+    using static CastNumeric;
     using static As;
 
     /// <summary>
@@ -555,7 +557,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 Merge(float64(src));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

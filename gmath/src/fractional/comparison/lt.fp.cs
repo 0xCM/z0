@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return fmath.lt(float64(lhs), float64(rhs));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), LtEq, NumericClosures(NumericKind.Floats)]
@@ -33,7 +33,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return fmath.lteq(float64(lhs), float64(rhs));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

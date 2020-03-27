@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Root;    
     using static As;
 
     partial class gfp
@@ -21,7 +20,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.pow(float64(b), exp));
             else            
-               throw unsupported<T>();            
+               throw Unsupported.define<T>();            
         }
     }
 }

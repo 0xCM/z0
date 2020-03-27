@@ -101,7 +101,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return testbit(float64(src), pos);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }           
     }
 }

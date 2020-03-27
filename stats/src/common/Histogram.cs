@@ -74,12 +74,10 @@ namespace Z0
         public void Deposit(T value)
         {
             var partition = gmath.div(gmath.sub(value, Domain.Left), BinWidth);
-            
-            
+                        
             var deposited = false;
             for(int i = 1; i< Partitions.Length; i++)                    
-            {
-                
+            {                
                 if(PartitionDomain(i).Contains(value))
                 {
                     Counts[i-1] = gmath.inc(Counts[i-1]);

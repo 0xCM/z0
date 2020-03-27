@@ -27,7 +27,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(ulong))
                 sample.bits(Source,  Spans.s64u(buffer));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
             
             return buffer.Length;
         }

@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using static Tuples;
 
     /// <summary>
     /// An homogenous mutable 2-tuple
     /// </summary>
-    public struct Pair<T> : IPair<Pair<T>, T>, IFormattable<Pair<T>>
+    public struct Pair<T> : IPair<Pair<T>, T>
     {
         /// <summary>
         /// The first member
@@ -23,6 +22,18 @@ namespace Z0
         /// The second member
         /// </summary>
         public T Right;
+
+        T IPair<Pair<T>, T>.Left 
+        {
+            [MethodImpl(Inline)]
+            get => Left;
+        }
+
+        T IPair<Pair<T>, T>.Right 
+        {
+            [MethodImpl(Inline)]
+            get => Right;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator Pair<T>((T a, T b) src)

@@ -47,7 +47,7 @@ namespace Z0.Mkl
                 VSL.vsldSSNewTask(ref TaskPtr, ref Dim[0], ref SampleCount[0], ref MatrixFormat[0], 
                     ref MemoryMarshal.Cast<T,double>(samples)[0]).AutoThrow();
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
 
             
         }

@@ -33,7 +33,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return vload<T>(w, Dec128x64u);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return vload<T>(w,Dec256x64u);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         public static ReadOnlySpan<byte> Dec128x8u 

@@ -32,7 +32,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.mix(parity,uint64(x), uint64(y)));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.mix(parity,uint64(x), uint64(y)));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

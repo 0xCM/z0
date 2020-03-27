@@ -9,10 +9,14 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
 
-    using static Root;
+    using static gmath;
 
     public static class Divisors
     {
+        static Divisors<T> divisors<T>()
+            where T : unmanaged
+                => default;
+
         /// <summary>
         /// Constructs a divisor list
         /// </summary>
@@ -35,17 +39,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] Compute<T>(T src)
             where T : unmanaged
-                => Divisors<T>.Inhabitant.divisors(src);
+                => divisors<T>().divisors(src);
 
         [MethodImpl(Inline)]
         public static DivisorIndex<T> Compute<T>(Interval<T> interval)
             where T : unmanaged
-                => Divisors<T>.Inhabitant.Compute(interval);
+                => divisors<T>().index(interval);
 
         [MethodImpl(Inline)]
         public static IEnumerable<DivisorIndex<T>> Compute<T>(Interval<T> interval, T step)        
             where T : unmanaged
-                => Divisors<T>.Inhabitant.Compute(interval,step);
+                => divisors<T>().indices(interval,step);
 
         public static ulong[] Compute(ulong src)
         {

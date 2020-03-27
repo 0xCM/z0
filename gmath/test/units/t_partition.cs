@@ -98,8 +98,7 @@ namespace Z0
             Claim.eq(1, dst.First());
             Claim.eq(100, dst.Last());
         }
-        
-        
+                
         public void part6()
         {
             var src = Interval.closed(1,103);
@@ -109,7 +108,7 @@ namespace Z0
         }
 
         protected void points_check<T>(T min, T max, T width)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>, IEquatable<T>
         {
             var points = Partition.measuredPoints(Interval.open(min, max), width);
             var len = gmath.sub(max,min);

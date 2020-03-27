@@ -28,7 +28,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return vgeneric<T>(dvec.vabs(v64i(x)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.SignedInts)]
@@ -44,7 +44,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return vgeneric<T>(dvec.vabs(v64i(x)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

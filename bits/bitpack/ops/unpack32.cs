@@ -32,7 +32,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 unpack32(uint64(src), dst);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>

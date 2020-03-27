@@ -56,7 +56,7 @@ namespace Z0.Logix
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint) || typeof(T) == typeof(ulong))
                 return gmath.eq(Value,other);
             else
-                throw unsupported<T>();            
+                throw Unsupported.define<T>();            
         }
 
         public override int GetHashCode()

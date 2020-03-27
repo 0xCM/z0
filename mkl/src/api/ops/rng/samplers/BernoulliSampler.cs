@@ -22,7 +22,7 @@ namespace Z0.Mkl
             if(typeof(T) == typeof(int))
                 sample.bernoulli(Source,  DistSpec, Spans.s32i(buffer));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
             
             return buffer.Length;
         }

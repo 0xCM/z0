@@ -56,6 +56,18 @@ namespace Z0
             b = this.Right;
         }
 
+        T IPair<ConstPair<T>, T>.Left 
+        {
+            [MethodImpl(Inline)]
+            get => Left;
+        }
+
+        T IPair<ConstPair<T>, T>.Right 
+        {
+            [MethodImpl(Inline)]
+            get => Right;
+        }
+
         /// <summary>
         /// Interprets the pair over an alternate domain
         /// </summary>
@@ -73,7 +85,7 @@ namespace Z0
             => style == TupleFormat.Coordinate ? $"({Left},{Right})" : $"{Left}x{Right}";
 
         public string Format()
-            =>Format(TupleFormat.Coordinate);
+            => Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(Left,Right);

@@ -85,7 +85,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return (NumericComparer<T>)(object)Compare64f;
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         static NumericComparer<sbyte> Compare8i 

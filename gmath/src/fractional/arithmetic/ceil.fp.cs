@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.ceil(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

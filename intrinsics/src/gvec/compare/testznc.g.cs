@@ -65,7 +65,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return dvec.vtestznc(v64f(src), v64f(mask));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -109,7 +109,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return dvec.vtestznc(v64f(src), v64f(mask));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

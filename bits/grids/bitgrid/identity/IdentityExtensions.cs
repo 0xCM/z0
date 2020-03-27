@@ -69,11 +69,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool IsSome(this Tripled<FixedWidth,FixedWidth,NumericKind> src)
-            => src.A.IsSome() || src.B.IsSome() || src.C.IsSome();
+            => src.First.IsSome() || src.Second.IsSome() || src.Third.IsSome();
 
         [MethodImpl(Inline)]
         public static int NonEmptyCount(this Tripled<FixedWidth,FixedWidth,NumericKind> src)
-            => (src.A.IsSome() ? 1 : 0) + (src.B.IsSome() ? 1 : 0)  + (src.C.IsSome() ? 1 : 0);
+            => (src.First.IsSome() ? 1 : 0) + (src.Second.IsSome() ? 1 : 0)  + (src.Third.IsSome() ? 1 : 0);
 
         public static Option<GridKind> GridKind(this Type src)
         {

@@ -281,7 +281,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 D.vstore(vcast64f(src), ref float64(ref dst));
             else 
-                throw unsupported<T>();                
+                throw Unsupported.define<T>();                
         }
 
         [MethodImpl(Inline)]
@@ -321,7 +321,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 D.vstore(vcast64f(src), ref float64(ref dst));
             else 
-                throw unsupported<T>();                
+                throw Unsupported.define<T>();                
         }
 
         [MethodImpl(Inline)]
@@ -361,7 +361,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 D.vstore(vcast64f(src), ref float64(ref dst), offset);
             else 
-                throw unsupported<T>();                
+                throw Unsupported.define<T>();                
         }
 
         [MethodImpl(Inline)]
@@ -401,7 +401,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 D.vstore(vcast64f(src), ref float64(ref dst), offset);
             else 
-                throw unsupported<T>();                
+                throw Unsupported.define<T>();                
         }
     }
 }

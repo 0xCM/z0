@@ -27,7 +27,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 random.MarkovSpan(Spans.s64f(dst));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return random.MarkovBlock(length, 1.0, length << 4).As<T>();
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>

@@ -27,10 +27,10 @@ namespace Z0
         public static T to<S,T>(S src)
             => to_u<S,T>(src);        
 
-        // [MethodImpl(Inline)]   
-        // public static T to<T>(bit src, T t = default)
-        //     where T : unmanaged
-        //         => to_u<T>(src);
+        [MethodImpl(Inline)]   
+        public static T to<T>(bit src, T t = default)
+            where T : unmanaged
+                => to_u<T>(src);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T to<T>(sbyte src)

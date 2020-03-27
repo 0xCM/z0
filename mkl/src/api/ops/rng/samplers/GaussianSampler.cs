@@ -31,7 +31,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))
                 sample.gaussian(Source, float64(DistSpec.Mean), float64(DistSpec.StdDev), Spans.s64f(buffer));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
 
             return buffer.Length;
 

@@ -72,7 +72,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(blsmsk(uint64(src)));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }           
 
         /// <summary>

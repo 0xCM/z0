@@ -56,26 +56,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static S add<S,T>(S lhs, S rhs)
-            where S : struct, IInterval<S,T>
-            where T : unmanaged
-            => lhs.WithEndpoints(gmath.add(lhs.Left, rhs.Left), gmath.add(lhs.Right, rhs.Right));
+        public static Interval<T> add<T>(Interval<T> lhs, Interval<T> rhs)
+            where T : unmanaged, IComparable<T>, IEquatable<T>
+                => lhs.WithEndpoints(gmath.add(lhs.Left, rhs.Left), gmath.add(lhs.Right, rhs.Right));
 
         [MethodImpl(Inline)]
-        public static S sub<S,T>(S lhs, S rhs)
-            where S : struct, IInterval<S,T>
-            where T : unmanaged
+        public static Interval<T> sub<S,T>(Interval<T> lhs, Interval<T> rhs)
+            where T : unmanaged, IComparable<T>, IEquatable<T>
                 => lhs.WithEndpoints(gmath.sub(lhs.Left, rhs.Left), gmath.sub(lhs.Right, rhs.Right));
-
-        /// <summary>
-        /// Creates the same kind of interval with alternate endpoints
-        /// </summary>
-        /// <param name="left">The left endpoint</param>
-        /// <param name="right">The right endpoint</param>
-        [MethodImpl(Inline)]
-        static S WithEndpoints<S,T>(this S src, T left, T right)
-            where S : struct, IInterval<S,T>
-            where T : unmanaged
-                 => default(S).New(left, right, src.Kind);
     }
 }

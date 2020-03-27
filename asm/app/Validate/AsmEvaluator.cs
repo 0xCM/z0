@@ -9,7 +9,6 @@ namespace Z0.Asm.Check
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Nats;
     using static OpClass;
 
     using static BufferSeqId;
@@ -69,7 +68,7 @@ namespace Z0.Asm.Check
         /// <typeparam name="T">The operand type</typeparam>
         public Triples<T> Eval<T>(in ApiMemberCode api, BinaryOp op, in Pairs<T> src)
             where T : unmanaged
-                => Eval(api,op, src, Triples.alloc<T>(src.Count));
+                => Eval(api,op, src, Tuples.triples<T>(src.Count));
 
         /// <summary>
         /// Evaluates a binary operator over a pair index of fixed types
@@ -82,7 +81,7 @@ namespace Z0.Asm.Check
         {
             var count = src.Count;
             var f = buffers[Left].EmitBinaryOp<F>(api);
-            var dst = Triples.alloc<F>(src.Count);
+            var dst = Tuples.triples<F>(src.Count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var pair = ref src[i];

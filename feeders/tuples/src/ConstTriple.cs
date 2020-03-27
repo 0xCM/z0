@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using static Tuples;
 
     /// <summary>
     /// An homogenous immutable 3-tuple
     /// </summary>
-    public readonly struct ConstTriple<T> : ITriple<ConstTriple<T>,T>
+    public readonly struct ConstTriple<T> : ITriple<ConstTriple<T>, T>
     {
         /// <summary>
         /// The first member
@@ -27,7 +26,25 @@ namespace Z0
         /// <summary>
         /// The third member
         /// </summary>
-        public readonly T Third;        
+        public readonly T Third;
+
+        T ITriple<ConstTriple<T>, T>.First 
+        {
+            [MethodImpl(Inline)]
+            get => First;
+        }
+
+        T ITriple<ConstTriple<T>, T>.Second 
+        {
+            [MethodImpl(Inline)]
+            get => Second;
+        }
+
+        T ITriple<ConstTriple<T>, T>.Third 
+        {
+            [MethodImpl(Inline)]
+            get => Third;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator ConstTriple<T>((T a, T b, T c) src)
@@ -46,7 +63,6 @@ namespace Z0
         {
             First = a; Second = b; Third = c; 
         }                
-
         
         public T this[int i]
         {
@@ -73,9 +89,11 @@ namespace Z0
         public bool Equals(ConstTriple<T> rhs)
             => First.Equals(rhs.First) && Second.Equals(rhs.Second) && Third.Equals(rhs.Third);
 
-        public string Format(TupleFormat style = TupleFormat.Coordinate)
+        public string Format(TupleFormat style)
             => style == TupleFormat.Coordinate ? $"({First},{Second},{Third})" : $"{First}x{Second}x{Third}";
 
+        public string Format() => Format(TupleFormat.Coordinate);
+         
         public override int GetHashCode()
             => HashCode.Combine(First,Second,Third);
         

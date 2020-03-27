@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Root;    
     using static As;
 
     partial class gfp
@@ -27,7 +26,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return generic<T>(fmath.div(float64(a), float64(b)));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Divides, NumericClosures(NumericKind.Floats)]
@@ -39,7 +38,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return fmath.divides(float64(a), float64(b));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(Bits.bitfill(int64(src), index, count));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
    }
 }

@@ -81,7 +81,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 dst = generic<T>(ref packseq(src, out ulong _));
             else            
-                throw unsupported<T>();            
+                throw Unsupported.define<T>();            
             return ref dst;
         }        
 

@@ -7,13 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
-    using static AsIn;
-
     partial class gmath
     {
-
         [MethodImpl(Inline), LProject, NumericClosures(NumericKind.Integers)]
         public static T left<T>(T a, T b)
             where T : unmanaged

@@ -89,7 +89,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vperm2x128(v64f(lhs), v64f(rhs),spec));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

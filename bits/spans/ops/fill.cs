@@ -53,7 +53,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return ref fill(convert<T,ulong>(src),dst);
             else
-                throw unsupported<T>();            
+                throw Unsupported.define<T>();            
         }
 
         [MethodImpl(Inline)]

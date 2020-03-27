@@ -34,7 +34,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dvec.vrotl(v64u(x), count));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dvec.vrotl(v64u(x), count));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

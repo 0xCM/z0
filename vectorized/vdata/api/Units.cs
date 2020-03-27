@@ -32,7 +32,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return vload<T>(w,Units128x64u);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
 
@@ -54,7 +54,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return vload<T>(w,Units256x64u);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
 
         [MethodImpl(Inline)]

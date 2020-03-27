@@ -63,7 +63,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(D.vconcat(v64f(lo), v64f(hi)));
             else
-                throw unsupported<T>();                
+                throw Unsupported.define<T>();                
         }
     }
 }

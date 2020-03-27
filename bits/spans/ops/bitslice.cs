@@ -90,7 +90,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(bitslice_64i(src, offset, count));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]

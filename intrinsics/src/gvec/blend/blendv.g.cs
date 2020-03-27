@@ -94,7 +94,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dvec.vblendv(v64f(x), v64f(y), v64f(spec)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -123,7 +123,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dvec.vblendv(v64f(x), v64f(y), v64f(spec)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

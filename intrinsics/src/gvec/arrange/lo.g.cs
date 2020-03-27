@@ -117,7 +117,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vlo(v64f(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Root;    
     using static As;
 
     partial class gfp
@@ -21,7 +20,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.sin(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -33,7 +32,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.cos(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -45,7 +44,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.tan(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -57,7 +56,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.sinh(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -69,7 +68,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.cosh(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -81,7 +80,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.tanh(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -93,7 +92,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.asin(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
 
@@ -106,7 +105,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.acos(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -118,7 +117,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.atan(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -130,7 +129,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.asinh(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -142,7 +141,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.acosh(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -154,7 +153,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.atanh(float64(src)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

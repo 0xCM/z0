@@ -25,14 +25,14 @@ namespace Z0
             var count = closures.NonEmptyCount();
 
             if(count == 1)
-                return TypeIdentity.Define(text.concat(kind.Indicator(), closures.C.Format()));
+                return TypeIdentity.Define(text.concat(kind.Indicator(), closures.Third.Format()));
             else if(count == 3)
                 return TypeIdentity.Define(text.concat(
                         kind.Indicator(), segsep, 
                         kind.Width().Format(), segsep, 
-                        closures.A.Format(), segsep,
-                        closures.B.Format(), segsep,
-                        closures.C.Format()
+                        closures.First.Format(), segsep,
+                        closures.Second.Format(), segsep,
+                        closures.Third.Format()
                         ));
             else 
                 return TypeIdentity.Empty;            

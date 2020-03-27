@@ -40,7 +40,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.stitch(uint64(left), ldx, uint64(right), rdx));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

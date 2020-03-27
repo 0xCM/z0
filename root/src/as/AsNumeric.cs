@@ -167,7 +167,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))            
                 return generic<T>(F64<S>().As(src));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
     }

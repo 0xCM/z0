@@ -40,7 +40,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.not(n, 16, 4, in A, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -56,7 +56,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.select(n, 16, 4, in A, in B, in C, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -72,7 +72,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.and(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
  
         [MethodImpl(Inline)]
@@ -88,7 +88,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.nand(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -104,7 +104,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.or(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -120,7 +120,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.nor(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -136,7 +136,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.xor(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -152,7 +152,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.xnor(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -168,7 +168,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.impl(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -184,7 +184,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.nonimpl(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -200,7 +200,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.cimpl(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -216,7 +216,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.cnonimpl(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -232,7 +232,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 vblock.xornot(n, 16, 4, in A, in B, ref Z);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -248,7 +248,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                return vblock.testz(n, 16, 4, in uint64(in A), in uint64(in B));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
         
         [MethodImpl(Inline)]
@@ -264,7 +264,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return vblock.testc(n, 16, 4, in A);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -280,7 +280,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return vblock.testc(n, 16, 4, in A, in B);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]

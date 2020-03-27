@@ -33,7 +33,7 @@ namespace Z0.Mkl
             else if (typeof(T) == typeof(double))
                 sample.laplace(Source, float64(DistSpec.Location), float64(DistSpec.Scale), s64f(buffer));
             else 
-                throw unsupported<T>();            
+                throw Unsupported.define<T>();            
             return buffer.Length;
         }
     }

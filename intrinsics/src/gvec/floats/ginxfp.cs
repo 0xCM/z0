@@ -28,7 +28,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vadd(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
 
        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -40,7 +40,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vadd(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }     
 
        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -52,7 +52,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vsub(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
 
        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -64,7 +64,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vsub(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -76,7 +76,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vhadd(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -88,7 +88,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vhadd(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -100,7 +100,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vdiv(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -112,7 +112,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vdiv(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
 
@@ -125,7 +125,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vand(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
                     
         }
 
@@ -138,7 +138,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vand(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
                     
         }
 
@@ -151,7 +151,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vor(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();                    
+                throw Unsupported.define<T>();                    
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -163,7 +163,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vor(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();                    
+                throw Unsupported.define<T>();                    
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -175,7 +175,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vxor(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();                    
+                throw Unsupported.define<T>();                    
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -187,7 +187,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vxor(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();                    
+                throw Unsupported.define<T>();                    
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -199,7 +199,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vxornot(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();                    
+                throw Unsupported.define<T>();                    
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -211,7 +211,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vxornot(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();                    
+                throw Unsupported.define<T>();                    
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -223,7 +223,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmin(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
          
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -235,7 +235,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmin(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -247,7 +247,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmax(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -259,7 +259,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmax(v64f(x), v64f(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -271,7 +271,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vnegate(v64f(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -283,7 +283,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vnegate(v64f(src)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>

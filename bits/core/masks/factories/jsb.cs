@@ -33,7 +33,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Jsb64x8x1);
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Jsb64x8x2);
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return convert<ulong,T>(Jsb64x8x3);
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>

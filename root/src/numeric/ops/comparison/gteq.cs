@@ -57,7 +57,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return GtEq.gteq(float64(a), float64(b));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         static class GtEq

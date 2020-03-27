@@ -26,7 +26,7 @@ namespace Z0.Mkl
             if(typeof(T) == typeof(int))
                 sample.poisson(Source,  float64(DistSpec.Rate), Spans.s32i(buffer));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
             
             return buffer.Length;
         }

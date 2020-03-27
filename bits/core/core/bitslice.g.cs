@@ -36,7 +36,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(Bits.bitslice(int64(lhs), start, length));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }           
 
         [MethodImpl(Inline)]

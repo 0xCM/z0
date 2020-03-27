@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static As;
-    using static Root;
 
     partial class gfp
     {

@@ -17,22 +17,22 @@ namespace Z0
         /// <summary>
         /// The first member
         /// </summary>
-        public readonly T A;
+        public readonly T First;
         
         /// <summary>
         /// The second member
         /// </summary>
-        public readonly T B;
+        public readonly T Second;
 
         /// <summary>
         /// The third member
         /// </summary>
-        public readonly T C;
+        public readonly T Third;
         
         /// <summary>
         /// The fourth member
         /// </summary>
-        public readonly T D;
+        public readonly T Fourth;
 
         [MethodImpl(Inline)]
         public static implicit operator ConstQuad<T>(in (T a, T b, T c, T d) src)
@@ -53,19 +53,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public ConstQuad(T a, T b, T c, T d)
         {
-            A = a; B = b; C = c; D = d;
+            First = a; Second = b; Third = c; Fourth = d;
         }                
 
         public T this[int i]
         {
             [MethodImpl(Inline)]
-            get => i == 0 ? A : i == 1 ? B : i == 2 ? C : D;
+            get => i == 0 ? First : i == 1 ? Second : i == 2 ? Third : Fourth;
         }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T a, out T b, out T c, out T d)
         {
-            a = A; b = B; c = C; d = D;
+            a = First; b = Second; c = Third; d = Fourth;
         }
 
         /// <summary>
@@ -79,16 +79,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(ConstQuad<T> rhs)
-            => A.Equals(rhs.A) && B.Equals(rhs.B) && C.Equals(rhs.C) && D.Equals(rhs.D);
+            => First.Equals(rhs.First) && Second.Equals(rhs.Second) && Third.Equals(rhs.Third) && Fourth.Equals(rhs.Fourth);
 
         public string Format(TupleFormat style)
-            => style == TupleFormat.Coordinate ? $"({A},{B},{C},{D})" : $"{A}x{B}x{C}x{D}";
+            => style == TupleFormat.Coordinate ? $"({First},{Second},{Third},{Fourth})" : $"{First}x{Second}x{Third}x{Fourth}";
 
         public string Format()
             => Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
-            => HashCode.Combine(A,B,C);
+            => HashCode.Combine(First,Second,Third);
         
         public override bool Equals(object obj)
             => obj is ConstQuad<T> x && Equals(x);

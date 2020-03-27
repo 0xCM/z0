@@ -30,6 +30,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool ContentEqual(this Span<char> lhs, ReadOnlySpan<char> rhs)        
              => lhs.ReadOnly().ContentEqual(rhs);
-
     }
 }

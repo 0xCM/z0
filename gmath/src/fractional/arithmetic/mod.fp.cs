@@ -27,7 +27,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return generic<T>(fmath.mod(float64(a), float64(b)));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -39,7 +39,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(math.modmul(float64(a), float64(b), float64(m)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

@@ -1,5 +1,6 @@
-export ProjectRoot=rng/"$(dirname "$0")"
-AddCmd=$ZDev/.scripts/add-rooted.sh
+export ParentId=rng
+export SrcRootName="sources"
+AddCmd=$ZDev/$ParentId/$SrcRootName/add-src.sh
 
-export ProjectId=rng.pcg
+export SrcId=pcg
 bash $AddCmd

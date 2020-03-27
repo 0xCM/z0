@@ -445,7 +445,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 dst = generic<T>(LoadVector256((double*)pSrc));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -487,7 +487,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 dst = generic<T>(LoadVector128((double*)pSrc));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }         
     }
 }

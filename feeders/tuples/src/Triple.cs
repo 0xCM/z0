@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// An homogenous mutable 3-tuple
     /// </summary>
-    public struct Triple<T> : ITupled<Triple<T>,T,T,T>
+    public struct Triple<T> : ITriple<Triple<T>, T>
     {
         /// <summary>
         /// The first member
@@ -74,6 +74,24 @@ namespace Z0
             }
         }
 
+        T ITriple<Triple<T>, T>.First 
+        {
+            [MethodImpl(Inline)]
+            get => First;
+        }
+
+        T ITriple<Triple<T>, T>.Second 
+        {
+            [MethodImpl(Inline)]
+            get => Second;
+        }
+
+        T ITriple<Triple<T>, T>.Third 
+        {
+            [MethodImpl(Inline)]
+            get => Third;
+        }
+
         /// <summary>
         /// Interprets the pair over an alternate domain
         /// </summary>
@@ -87,8 +105,10 @@ namespace Z0
         public bool Equals(Triple<T> rhs)
             => First.Equals(rhs.First) && Second.Equals(rhs.Second) && Third.Equals(rhs.Third);
 
-        public string Format(TupleFormat style = TupleFormat.Coordinate)
+        public string Format(TupleFormat style)
             => style == TupleFormat.Coordinate ? $"({First},{Second},{Third})" : $"{First}x{Second}x{Third}";
+
+        public string Format() => Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(First,Second,Third);

@@ -13,8 +13,6 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(RngCore)" />
-    <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Fixed)" />
   </ItemGroup>
 
 </Project>

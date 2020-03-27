@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Tuples)" />
   </ItemGroup>
 
 </Project>

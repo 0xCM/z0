@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Root;    
+    using static CastNumeric;    
     using static As;
 
     partial class gmath
@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.avgz(uint64(a), uint64(b)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.avgi(uint64(a), uint64(b)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

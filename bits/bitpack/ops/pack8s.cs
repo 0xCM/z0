@@ -70,7 +70,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return convert<T>(pack64x8(src,offset));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>

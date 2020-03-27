@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
-    using static Root;    
     using static As;
 
     partial class gmath
@@ -32,10 +28,8 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return 64;
             else
-                throw unsupported<T>();
-            
+                throw Unsupported.define<T>();            
         }
-
         
         [MethodImpl(Inline), NumericClosures(NumericKind.UnsignedInts)]
         public static T log2<T>(T a)
@@ -50,7 +44,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.log2(uint64(a)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

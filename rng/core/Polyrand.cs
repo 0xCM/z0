@@ -82,7 +82,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next());                
             else 
-                throw unsupported<T>();                
+                throw Unsupported.define<T>();                
         }
 
         [MethodImpl(Inline)]
@@ -126,7 +126,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next(float64(max)));                
             else 
-                throw unsupported<T>();                
+                throw Unsupported.define<T>();                
         }
 
         [MethodImpl(Inline)]
@@ -171,7 +171,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next(float64(min), float64(max)));                
             else 
-                throw unsupported<T>();                
+                throw Unsupported.define<T>();                
         }
 
         [MethodImpl(Inline)]

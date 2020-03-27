@@ -11,23 +11,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-
-    public interface IApiCollector<S> : IService
-    {
-        IEnumerable<DirectOpGroup> CollectDirect(S source);
-
-        IEnumerable<GenericOp> CollectGeneric(S src);
-    }
-
-    public interface IApiCollector : IApiCollector<ApiHost>, IApiCollector<Assembly>
-    {
-        
-    } 
     
     readonly struct ApiOpCollector : IApiCollector
     {
         public IContext Context {get;}
-
 
         [MethodImpl(Inline)]
         public static IApiCollector Create(IContext context)
@@ -39,25 +26,25 @@ namespace Z0
             this.Context = context;
         }
 
-        public IEnumerable<DirectOpGroup> CollectDirect(Assembly src)
+        public IEnumerable<DirectApiGroup> CollectDirect(Assembly src)
             => src.ApiHosts().SelectMany(CollectDirect);
 
-        public IEnumerable<GenericOp> CollectGeneric(Assembly src)
+        public IEnumerable<GenericApiOp> CollectGeneric(Assembly src)
             => src.ApiHosts().SelectMany(CollectGeneric);
 
-        public IEnumerable<DirectOpGroup> CollectDirect(ApiHost src)        
-            => from d in DirectOpSpecs(src).GroupBy(op => op.ConcreteMethod.Name)
-                select DirectOpGroup.Define(src, Identify.Op(d.Key), d);
+        public IEnumerable<DirectApiGroup> CollectDirect(ApiHost src)        
+            => from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
+                select DirectApiGroup.Define(src, Identify.Op(d.Key), d);
                         
-        public IEnumerable<GenericOp> CollectGeneric(ApiHost src)
+        public IEnumerable<GenericApiOp> CollectGeneric(ApiHost src)
              => from m in Tagged(src).OpenGeneric()
                 let closures = NumericClosures(m)
                 where closures.Length != 0
-                select GenericOp.Define(src, Identity.generic(m), m.GetGenericMethodDefinition(), closures);
+                select GenericApiOp.Define(src, Identity.generic(m), m.GetGenericMethodDefinition(), closures);
 
-        static IEnumerable<DirectOp> DirectOpSpecs(ApiHost src)
+        static IEnumerable<DirectApiOp> DirectOpSpecs(ApiHost src)
             => from m in Tagged(src).NonGeneric()
-                select DirectOp.Define(src, Identity.identify(m), m);
+                select DirectApiOp.Define(src, Identity.identify(m), m);
 
         static IEnumerable<MethodInfo> Tagged(ApiHost src)
             => src.DeclaredMethods.Tagged<OpAttribute>();

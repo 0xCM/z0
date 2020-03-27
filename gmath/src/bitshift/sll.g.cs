@@ -64,7 +64,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(math.sll(int64(a), count));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

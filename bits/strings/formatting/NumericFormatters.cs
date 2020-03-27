@@ -63,7 +63,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return get<F64Formatter, double>().As<T>();
             else    
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]

@@ -11,6 +11,8 @@
     <ProjectReference Include="$(Custom)" />
     <ProjectReference Include="$(Root)" />
 
+    <ProjectReference Include="$(Tuples)" />
+
   </ItemGroup>
 
 </Project>

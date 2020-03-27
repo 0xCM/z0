@@ -76,7 +76,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(dvec.vnonimpl(v64i(x), v64i(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
 
@@ -109,7 +109,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(dvec.vnonimpl(v64i(x), v64i(y)));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

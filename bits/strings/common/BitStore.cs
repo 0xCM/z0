@@ -294,7 +294,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 bitseq(float64(src),dst,offset);
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
 
         [MethodImpl(Inline)]
@@ -334,7 +334,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 bitchars(float64(src),dst,offset);
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
          
         static ReadOnlySpan<byte> PopCounts => new byte[]

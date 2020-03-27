@@ -38,7 +38,7 @@ namespace Z0
                 mkl.add(x.As<double>(), y.As<double>(), ref dst);
             }
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
 
             return ref z;
         }

@@ -7,12 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Root;    
-    using static As;
-
     partial class gmath
     {        
-
         /// <summary>
         /// Computes xor(a,not(b))
         /// </summary>
@@ -24,5 +20,4 @@ namespace Z0
             where T : unmanaged
                 => xor(a,not(b));
     }
-
 }

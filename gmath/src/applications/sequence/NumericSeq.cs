@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static gmath;
+    using static refs;
 
     /// <summary>
     /// Defines a data structure for sparse/partial sequence representation

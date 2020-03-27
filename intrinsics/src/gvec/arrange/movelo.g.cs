@@ -56,7 +56,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(dvec.vmovelo(v64i(x), n64));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

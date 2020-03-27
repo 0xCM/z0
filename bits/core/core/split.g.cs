@@ -49,7 +49,7 @@ namespace Z0
                 x1 = generic<T>(y1);
             }
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

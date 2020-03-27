@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return Bits.rank(uint64(src), pos);
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

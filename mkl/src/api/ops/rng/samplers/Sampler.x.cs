@@ -37,7 +37,7 @@ namespace Z0.Mkl
                     sampler = rng.GaussianSampler<T>(GaussianSpec.From(spec));                    
                     break;
                 default:
-                    throw unsupported<T>();
+                    throw Unsupported.define<T>();
             }
 
             return sampler;
@@ -62,7 +62,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))                    
                 sampler = samplers.uniform(rng, _spec.ToFloat64()) as IRngSampler<T>;
             else
-                throw unsupported<T>();                                        
+                throw Unsupported.define<T>();                                        
             return sampler;
         }
 
@@ -83,7 +83,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(ulong))
                 sampler = samplers.bits(rng, _spec.ToUInt64()) as IRngSampler<T>;
             else
-                throw unsupported<T>();                                        
+                throw Unsupported.define<T>();                                        
             return sampler;
         }
 
@@ -101,7 +101,7 @@ namespace Z0.Mkl
             if(typeof(T) == typeof(int))
                 sampler = samplers.bernoulli(rng,spec) as IRngSampler<T>;
             else
-                throw unsupported<T>();                                        
+                throw Unsupported.define<T>();                                        
             return sampler;
         }
 
@@ -121,7 +121,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))
                 sampler = samplers.gaussian(rng, spec.ToFloat64()) as IRngSampler<T>;
             else
-                throw unsupported<T>();                                        
+                throw Unsupported.define<T>();                                        
             return sampler;
         }
     }

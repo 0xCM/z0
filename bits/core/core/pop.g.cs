@@ -81,7 +81,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return Bits.pop(int64(src));
              else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
        }
     }
 }

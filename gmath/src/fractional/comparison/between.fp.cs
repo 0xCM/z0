@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return fmath.between(float64(x), float64(a), float64(b));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }        
     }
 }

@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static Root;    
     using static As;
-    using static AsIn;
-
 
     partial class gmath
     {
@@ -54,7 +51,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(math.sal(int64(src), offset));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

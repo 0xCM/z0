@@ -62,7 +62,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return NonZ.nonz(float64(a));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }    
 
         static class NonZ

@@ -13,12 +13,8 @@ namespace Z0
         
     public readonly struct Divisors<T> 
         where T : unmanaged
-    {
-        public static readonly Divisors<T> Inhabitant = default;
-            
-        static readonly T Zero = zero<T>();
-
-        static readonly T One = one<T>();
+    {            
+        static T One => Literals.one<T>();
 
         [MethodImpl(Inline)]
         public T[] divisors(T src)
@@ -31,9 +27,9 @@ namespace Z0
         /// <param name="max">The maximum dividend</param>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="T">The numeric type</typeparam>
-        public DivisorIndex<T> Compute(Interval<T> interval)
+        public DivisorIndex<T> index(Interval<T> interval)
         {
-            var results = from n in Range(interval).AsParallel()
+            var results = from n in range(interval).AsParallel()
                         let d = Divisors.Compute(n)
                         select Divisors.DefineList(n, d);
 
@@ -47,7 +43,7 @@ namespace Z0
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <typeparam name="T"></typeparam>
-        public IEnumerable<DivisorIndex<T>> Compute(Interval<T> interval, T step)
+        public IEnumerable<DivisorIndex<T>> indices(Interval<T> interval, T step)
         {
             var min = interval.LeftClosed ? interval.Left : gmath.inc(interval.Left);
             var max = interval.RightClosed ? interval.Right : gmath.dec(interval.Right);
@@ -56,20 +52,18 @@ namespace Z0
                 var divMin = gmath.add(i, One);
                 var divMax = gmath.add(i, step);
                 var next = Interval.closed(divMin, divMax);
-                yield return Compute(next);
+                yield return index(next);
             }
         }
 
-        [MethodImpl(Inline)]
-        public IEnumerable<T> Range(Interval<T> src)
+        public IEnumerable<T> range(Interval<T> src)
         {
             var first = src.LeftClosed ? src.Left : gmath.inc(src.Left);
             var last = src.RightClosed ? src.Right : gmath.dec(src.Right);
-            return Range(first,last);
+            return range(first,last);
         }
 
-        [MethodImpl(Inline)]
-        public IEnumerable<T> Range(T first, T last)
+        public IEnumerable<T> range(T first, T last)
         {
             var current = first;
             if(gmath.lt(first, last))

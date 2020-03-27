@@ -35,7 +35,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))
                 VSL.vsldSSEditTask(task, param, ref As.float64(ref value)).AutoThrow(file,line); 
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
             
         [MethodImpl(Inline)]
@@ -55,7 +55,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))
                 VSL.vsldSSCompute(task, routine, method).AutoThrow(file, line);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
    }
 }

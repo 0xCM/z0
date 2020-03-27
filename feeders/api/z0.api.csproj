@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Tuples)" />
   </ItemGroup>
 
 </Project>

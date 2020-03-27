@@ -17,7 +17,7 @@ namespace Z0
         /// between its left/right endpoints
         /// </summary>
         /// <param name="src">The source interval</param>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
         [MethodImpl(Inline)]
         public static T Length<T>(this IInterval<T> src)
             where T : unmanaged
@@ -28,10 +28,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source interval</param>
         /// <param name="point">The point to test</param>
-        /// <typeparam name="T">The interval primal type</typeparam>
+        /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
         [MethodImpl(Inline)]
-        public static bool Contains<S,T>(this S src, T point)
-            where S : struct, IInterval<S,T>
+        public static bool Contains<T>(this Interval<T> src, T point)
             where T : unmanaged
         {
             switch(src.Kind)
@@ -47,9 +46,15 @@ namespace Z0
             }
         }
 
+        /// <summary>
+        /// Slices an interval into manageable pieces, disjoint even
+        /// </summary>
+        /// <param name="src">The source interval</param>
+        /// <param name="width">The partition width</param>
+        /// <param name="precision">The precision with which the calculations are carried out</param>
+        /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<T> PartitionPoints<S,T>(this S src, T width, int? precision = null)
-            where S : struct, IInterval<S,T>
+        public static IEnumerable<T> PartitionPoints<T>(this Interval<T> src, T width, int? precision = null)
             where T : unmanaged
         {            
             var scale = precision ?? 4;
@@ -67,13 +72,11 @@ namespace Z0
                 yield return src.Right;
         }
         
-        public static string Format<S,T>(this Span<S> parts, char? sep = null)
-            where S : struct, IInterval<S,T>
+        public static string Format<T>(this Span<Interval<T>> parts, char? sep = null)
             where T : unmanaged
                 => parts.Map(x => x.Format()).Concat($" {sep ?? AsciSym.Plus} ");            
 
-        public static T[] Increments<S,T>(this S src, T t = default)
-            where S : struct, IInterval<S,T>
+        public static T[] Increments<T>(this Interval<T> src, T t = default)
             where T : unmanaged
         {
             var min = src.Left;
@@ -93,6 +96,5 @@ namespace Z0
             
             return increments.ToArray();
         }
-
     }
 }

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static CastNumeric;    
+    using static As;
 
     partial class gmath
     {
@@ -50,7 +51,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.impl(int64(a), int64(b)));
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

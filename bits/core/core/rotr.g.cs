@@ -47,7 +47,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotr(uint64(src), shift));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }           
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotr(uint64(src), shift, width));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }           
 
     }

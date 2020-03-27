@@ -70,6 +70,21 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> MapRange<S,T>(this Span<S> src, int offset, int length, Func<S, T> f)
-            => src.ReadOnly().MapRange(offset,length, f);                
+            => src.ReadOnly().MapRange(offset,length, f);     
+
+        /// <summary>
+        /// Projects a source span to target span via a supplied transformation
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="f">The transformation</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        public static T[] MapArray<S,T>(this ReadOnlySpan<S> src, Func<S, T> f)
+        {
+            var dst = new T[src.Length];
+            for(var i= 0; i<src.Length; i++)
+                dst[i] = f(src[i]);
+            return dst;
+        }
     }
 }

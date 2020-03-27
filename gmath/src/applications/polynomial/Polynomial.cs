@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
 
-    using static Root;    
-    using static As;
+    using static gmath;    
+    using static Literals;
 
     /// <summary>
     /// Represents a polynomial 
@@ -196,11 +195,10 @@ namespace Z0
         /// </summary>
         public static readonly Polynomial<M,N,T> Zero = new Polynomial<M, N, T>(Monomial<M,T>.Zero(Degree));
 
-
         [MethodImpl(Inline)]
         public Polynomial(params Monomial<M,T>[] terms)
         {
-            require(terms[0].Exp == Degree);
+            core.require(terms[0].Exp == Degree);
             this.Terms = terms;
         }
 

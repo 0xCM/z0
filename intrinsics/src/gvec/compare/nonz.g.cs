@@ -107,7 +107,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return dinxfp.vnonz(v64f(src));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -147,7 +147,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return dinxfp.vnonz(v64f(src));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

@@ -82,7 +82,7 @@ namespace Z0.Logix
             else if(typeof(T) == typeof(ulong))
                 return As.generic<T>(uint64(a)^ ulong.MaxValue);
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>

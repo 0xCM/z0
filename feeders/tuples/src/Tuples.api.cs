@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static Tuples;
 
     /// <summary>
     /// Defines tuple api surface 
@@ -13,6 +14,24 @@ namespace Z0
     public static class Tuples
     {        
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+
+        /// <summary>
+        /// Allocates an homogenous pair store
+        /// </summary>
+        /// <param name="count">The store capacity</param>
+        /// <typeparam name="T">The member type</typeparam>
+        public static Pairs<T> pairs<T>(int count)
+            where T : unmanaged
+                => new Pairs<T>(new Pair<T>[count]);
+
+        /// <summary>
+        /// Allocates an homogenous triplestore
+        /// </summary>
+        /// <param name="count">The store capacity</param>
+        /// <typeparam name="T">The member type</typeparam>
+        public static Triples<T> triples<T>(int count)
+            where T : unmanaged
+                => new Triples<T>(new Triple<T>[count]);
 
         /// <summary>
         /// Creates an homogenous pair
@@ -91,7 +110,6 @@ namespace Z0
         public static ConstQuad<T> constant<T>(T a, T b, T c, T d)
             => new ConstQuad<T>(a,b,c,d);
 
-
         [MethodImpl(Inline)]
         public static Pairs<T> index<T>(Pair<T>[] src)
             where T : unmanaged
@@ -101,5 +119,19 @@ namespace Z0
         public static Triples<T> index<T>(Triple<T>[] src)
             where T : unmanaged
                 => src;
+    }
+
+    public static partial class XTuple
+    {
+        /// <summary>
+        /// Creates the same kind of interval with alternate endpoints
+        /// </summary>
+        /// <param name="left">The left endpoint</param>
+        /// <param name="right">The right endpoint</param>
+        [MethodImpl(Inline)]
+        public static S WithEndpoints<S,T>(this S src, T left, T right)
+            where S : struct, IInterval<S,T>
+            where T : unmanaged, IComparable<T>, IEquatable<T>
+                => default(S).New(left, right, src.Kind);
     }
 }

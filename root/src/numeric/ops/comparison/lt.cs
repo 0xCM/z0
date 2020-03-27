@@ -57,7 +57,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return Lt.lt(float64(lhs), float64(rhs));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         static class Lt

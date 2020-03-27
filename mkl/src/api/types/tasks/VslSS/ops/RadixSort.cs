@@ -70,7 +70,7 @@ namespace Z0.Mkl
                 VSL.vsldSSNewTask(ref taskPtr, ref dim, ref sampleCount, ref mformat, 
                     ref MemoryMarshal.Cast<T,double>(samples)[0]).AutoThrow();
             else
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
             
             using var handle = VslSSTaskHandle.Wrap<T>(taskPtr);
             handle.Set(VSL_SS_ED_OBSERV_STORAGE, ref iStorage);

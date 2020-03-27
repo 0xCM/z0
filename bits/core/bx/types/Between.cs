@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
+    using static SFuncs;
+
     partial class BitCoreServices
     {
         public readonly struct Between<T> : ISImm8x2UnaryOpApi<T>
@@ -18,6 +20,7 @@ namespace Z0
 
             public OpIdentity Id => Identify.SFunc<T>(Name);
 
+            [MethodImpl(Inline)]
             public T Invoke(T a, byte k1, byte k2) => gbits.between(a,k1,k2);
         }
     }

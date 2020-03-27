@@ -32,7 +32,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))
                 sample.gamma(Source, float64(DistSpec.Alpha), float64(DistSpec.Dx), float64(DistSpec.Beta), Spans.s64f(buffer));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
 
             return buffer.Length;
         }

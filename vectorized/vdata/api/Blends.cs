@@ -34,7 +34,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return blend(n, n64, odd);
             else
-                throw unsupported<T>();            
+                throw Unsupported.define<T>();            
         }
 
         /// <summary>

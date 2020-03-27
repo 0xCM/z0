@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using static Tuples;
 
     /// <summary>
@@ -15,22 +14,40 @@ namespace Z0
     /// <typeparam name="T0">The type of the first member</typeparam>
     /// <typeparam name="T1">The type of the second member</typeparam>
     /// <typeparam name="T2">The type of the third member</typeparam>
-    public struct Tripled<T0,T1,T2> : ITupled<Tripled<T0,T1,T2>,T0,T1,T2>
+    public struct Tripled<T0,T1,T2> : ITupled<Tripled<T0, T1, T2>, T0, T1, T2>
     {
         /// <summary>
         /// The first member
         /// </summary>
-        public T0 A;
+        public T0 First;
         
         /// <summary>
         /// The second member
         /// </summary>
-        public T1 B;
+        public T1 Second;
 
         /// <summary>
         /// The third member
         /// </summary>
-        public T2 C;
+        public T2 Third;
+
+        T0 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.First
+        {
+            [MethodImpl(Inline)]
+            get => First;
+        }
+
+        T1 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.Second 
+        {
+            [MethodImpl(Inline)]
+            get => Second;
+        }
+
+        T2 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.Third
+        {
+            [MethodImpl(Inline)]
+            get => Third;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator Tripled<T0,T1,T2>((T0 a, T1 b, T2 c) src)
@@ -47,17 +64,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public Tripled(T0 a, T1 b, T2 c)
         {
-            this.A = a;
-            this.B = b;
-            this.C = c;
+            this.First = a;
+            this.Second = b;
+            this.Third = c;
         }                
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T0 a, out T1 b, out T2 c)
         {
-            a = this.A;
-            b = this.B;
-            c = this.C;
+            a = this.First;
+            b = this.Second;
+            c = this.Third;
         }
 
         /// <summary>
@@ -73,13 +90,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(Tripled<T0,T1,T2> rhs)
-            => A.Equals(rhs.A) && B.Equals(rhs.B);
+            => First.Equals(rhs.First) && Second.Equals(rhs.Second) && Third.Equals(rhs.Third);
 
-        public string Format(TupleFormat style = TupleFormat.Coordinate)
-            => style == TupleFormat.Coordinate ? $"({A},{B},{C})" : $"{A}x{B}x{C}";
+        public string Format(TupleFormat style)
+            => style == TupleFormat.Coordinate ? $"({First},{Second},{Third})" : $"{First}x{Second}x{Third}";
+        public string Format()
+            => Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
-            => HashCode.Combine(A,B);
+            => HashCode.Combine(First,Second);
         
         public override bool Equals(object obj)
             => obj is Paired<T0,T1> x && Equals(x);

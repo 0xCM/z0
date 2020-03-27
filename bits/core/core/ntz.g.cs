@@ -30,7 +30,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                  return Bits.ntz(uint64(src));
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

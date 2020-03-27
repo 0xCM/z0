@@ -58,10 +58,6 @@ namespace Z0
         /// The interval width
         /// </summary>
         ulong Width {get;}
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => convert<T,ulong>(Right) - convert<T,ulong>(Left);
-        // }
  
         /// <summary>
         /// Specifies whether the interval is open on the right and closed on the left, denoted by [Left,Right)
@@ -82,7 +78,7 @@ namespace Z0
         }
     } 
 
-    public interface IInterval<S,T> : IInterval<T>, IFormattable<S>
+    public interface IInterval<S,T> : IInterval<T>, IFormattable<S>, IPair<S,T>
         where S : struct, IInterval<S,T>
         where T : unmanaged
     {

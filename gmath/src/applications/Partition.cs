@@ -18,8 +18,7 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <typeparam name="T">The interval primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T length<S,T>(S src)
-            where S : struct, IInterval<S,T>
+        public static T length<T>(Interval<T> src)
             where T : unmanaged
                 => gmath.abs(gmath.sub(src.Right, src.Left));
 
@@ -29,10 +28,11 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="width">The partition width</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        public static Span<T> measuredPoints<S,T>(S src, T width)
-            where S : struct, IInterval<S,T>
+        public static Span<T> measuredPoints<T>(Interval<T> src, T width)
             where T : unmanaged
-                => NumericTypes.floating<T>() ? points_f<S,T>(src, width) : points_i<S,T>(src,width);
+                => NumericTypes.floating<T>() 
+                 ? points_f<T>(src, width) 
+                 : points_i<T>(src,width);
 
         /// <summary>
         /// Calculates the points that determine a partitioning predicated on partition count
@@ -40,13 +40,9 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="count">The number of desired partitions</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        public static Span<T> countedPoints<S,T>(S src, int count)
-            where S : struct, IInterval<S,T>
+        public static Span<T> countedPoints<T>(Interval<T> src, int count)
             where T : unmanaged
-        {            
-            var w = gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count - 1));
-            return measuredPoints(src,w);            
-        }
+            => measuredPoints(src,gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count - 1)));
 
         /// <summary>
         /// Partitions an interval predicated on partition count
@@ -54,14 +50,9 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="count">The number of partitions</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        public static Span<S> counted<S,T>(S src, int count)
-            where S : struct, IInterval<S,T>
+        public static Span<Interval<T>> counted<S,T>(Interval<T> src, int count)
             where T : unmanaged
-        {
-            var delta = gmath.sub(src.Right, src.Left);
-            var width = gmath.div(delta, convert<T>(count));
-            return width<S,T>(src,width);
-        }
+                => width(src,gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count)));
 
         /// <summary>
         /// Partiions an invterval predicated on partition width
@@ -69,15 +60,14 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="width">The partition width</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        public static Span<S> width<S,T>(S src, T width)
-            where S : struct, IInterval<S,T>
+        public static Span<Interval<T>> width<T>(Interval<T> src, T width)
             where T : unmanaged
         {
-            var points = measuredPoints<S,T>(src,width);
-            var dst = alloc<S>(points.Length - 1);
+            var points = measuredPoints(src,width);
+            var dst = alloc<Interval<T>>(points.Length - 1);
             var lastIx = points.Length - 1;
             var lastCycleIx = lastIx - 1;
-            var model = default(S);
+            var model = default(Interval<T>);
             
             for(var i = 0; i < lastIx; i++)
             {
@@ -105,11 +95,10 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="width">The partition width</param>
         /// <typeparam name="T">The interval primal type</typeparam>
-        static Span<T> points_i<S,T>(S src, T width)
-            where S : struct, IInterval<S,T>
+        static Span<T> points_i<T>(Interval<T> src, T width)
             where T : unmanaged
         {
-            var len =  length<S,T>(src);
+            var len =  length(src);
             var count = Cast.to<T,int>(gmath.div(len, width));            
             var dst = alloc<T>(count + 1);
             var point = src.Left;
@@ -131,12 +120,11 @@ namespace Z0
             return dst;
         }
 
-        static Span<T> points_f<S,T>(S src, T width)
-            where S : struct, IInterval<S,T>
+        static Span<T> points_f<T>(Interval<T> src, T width)
             where T : unmanaged
         {
             var scale = 4;
-            var len =  gfp.round(length<S,T>(src), scale);
+            var len =  gfp.round(length(src), scale);
             var fcount = gfp.div(len, width);
             var count = convert<T,int>(gfp.ceil(fcount));            
             var dst = alloc<T>(count + 1);

@@ -46,11 +46,5 @@ namespace Z0
         public static Dot<T> dot<T>(T t = default)
             where T : unmanaged        
                 => Dot<T>.Op;
-
-        readonly struct ByteSwapFactory<T> : IApiServiceFactory<ByteSwapFactory<T>, ByteSwap<T>>
-            where T : unmanaged { public ByteSwap<T> Service => ByteSwap<T>.Op; }
-
-        readonly struct BitSliceFactory<T> : IApiServiceFactory<BitSliceFactory<T>, BitSlice<T>>
-            where T : unmanaged { public BitSlice<T> Service => BitSlice<T>.Op; }
     }
 }

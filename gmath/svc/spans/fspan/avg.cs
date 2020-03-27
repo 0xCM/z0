@@ -22,7 +22,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.avg(Spans.s64f(src), @checked));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }           
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]

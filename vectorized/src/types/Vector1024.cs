@@ -53,7 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector1024<T>(in ConstQuad<Vector256<T>> src)
-            => new Vector1024<T>(src.A, src.B, src.C, src.D);
+            => new Vector1024<T>(src.First, src.Second, src.Third, src.Fourth);
          
         [MethodImpl(Inline)]
         public static implicit operator ConstQuad<Vector256<T>>(in Vector1024<T> src)

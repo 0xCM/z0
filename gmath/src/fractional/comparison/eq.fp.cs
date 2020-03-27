@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return fmath.eq(float64(a), float64(b));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
 
@@ -34,7 +34,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return fmath.neq(float64(a), float64(b));
             else            
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
     }
 }

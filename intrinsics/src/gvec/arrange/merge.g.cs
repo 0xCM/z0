@@ -34,7 +34,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vmerge_i(x,y);
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vmerge_i(x,y);
             else 
-                throw unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
