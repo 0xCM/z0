@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class GVec : ApiPart<GVec>
+    public sealed class GVec : Part<GVec>
     {        
         
     }

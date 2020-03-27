@@ -16,13 +16,13 @@ namespace Z0
         /// <summary>
         /// The resolved assemblies that comprise the composition
         /// </summary>
-        IApiPart[] Resolved {get;}   
+        IPart[] Resolved {get;}   
 
         /// <summary>
         /// Searches the resolutions for an identified assembly
         /// </summary>
         /// <param name="id">The defining assembly</param>
-        Option<IApiPart> FindPart(PartId id)
+        Option<IPart> FindPart(PartId id)
             => Resolved.TryFind(r => r.Id == id);
 
         IEnumerable<IApiCatalog> Catalogs

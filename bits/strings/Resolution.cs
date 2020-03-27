@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class BitString : ApiPart<BitString>
+    public sealed class BitString : Part<BitString>
     {        
 
     }

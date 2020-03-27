@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Threading;
 
-    using static Root;
-
     public class App : TestApp<App>
     {            
         AgentContext AgentContext;

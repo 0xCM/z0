@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class WorkflowCore : ApiPart<WorkflowCore>
+    public sealed class WorkflowCore : Part<WorkflowCore>
     {        
         
     }

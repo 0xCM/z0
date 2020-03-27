@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class MklApi : ApiPart<MklApi>
+    public sealed class MklApi : Part<MklApi>
     {
 
     }

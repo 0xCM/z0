@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Dynamic : ApiPart<Dynamic>
+    public sealed class Dynamic : Part<Dynamic>
     {
         
     }

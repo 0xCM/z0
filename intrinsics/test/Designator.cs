@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class IntrinsicsTest : ApiPart<IntrinsicsTest> 
+    public sealed class IntrinsicsTest : Part<IntrinsicsTest> 
     {
          
     }

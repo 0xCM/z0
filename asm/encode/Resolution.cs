@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class AsmEncoder : ApiPart<AsmEncoder>
+    public sealed class AsmEncoder : Part<AsmEncoder>
     {        
         
     }

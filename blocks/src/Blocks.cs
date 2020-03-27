@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class Blocks : ApiPart<Blocks>
+    public sealed class Blocks : Part<Blocks>
     {
         
     }

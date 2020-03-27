@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class BitCore : ApiPart<BitCore>
+    public sealed class BitCore : Part<BitCore>
     {
         
     }

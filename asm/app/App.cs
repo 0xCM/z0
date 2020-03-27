@@ -24,31 +24,6 @@ namespace Z0.Asm.Check
                 R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
                 R.Root.Resolution,R.Vectorized.Resolution, R.VData.Resolution};
 
-        static IApiPart[] Resolutions
-            => new IApiPart[]{
-                // R.Analogs.Resolution, 
-                // R.AsmCore.Resolution, 
-                // R.BitCore.Resolution,
-                // R.BitGrids.Resolution, 
-                // R.BitSpan.Resolution, 
-                // R.BitFields.Resolution,
-                // R.BitVectors.Resolution, 
-                // R.VBits.Resolution, 
-                // R.Permute.Resolution,
-                // R.Blocks.Resolution, 
-                R.Math.Resolution,
-                R.GenericNumerics.Resolution, 
-                R.MathServices.Resolution, 
-                R.Intrinsics.Resolution,
-                // R.VSvc.Resolution, 
-                // R.LibM.Resolution, 
-                // R.Logix.Resolution, 
-                // R.Root.Resolution,
-                // R.Vectorized.Resolution, 
-                // R.VData.Resolution
-                };
-
-
         static IAppSettings LoadSettings()
         {
             var dir = Env.Current.DevDir + RelativeLocation.Define("asm/app");
@@ -65,7 +40,7 @@ namespace Z0.Asm.Check
             var settings = LoadSettings();
             term.print($"loaded settings");
 
-            var resolved = ApiComposition.Assemble(Resolutions.Where(r => r.Id != 0));
+            var resolved = ApiComposition.Assemble(Dependencies.Where(r => r.Id != 0));
             term.print($"Assembled {resolved.Resolved.Length} parts");
 
             var exchange = AppMsgExchange.Create(AppMsgQueue.Create());

@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class Stats : ApiPart<Stats>
+    public sealed class Stats : Part<Stats>
     {
         
     }

@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: PartId(PartId.MklApiTest)]
+
 namespace Z0.Parts
 {        
     using System;
@@ -9,14 +11,8 @@ namespace Z0.Parts
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class MklApiTest : ApiPart<MklApiTest>
+    public sealed class MklApiTest : Part<MklApiTest>
     {
-        const PartId Identity = PartId.MklApiTest;
 
-        public override PartId Id 
-            => Identity;
-
-        public override void Run(params string[] args)
-            => App.Run(args);
     }
 }

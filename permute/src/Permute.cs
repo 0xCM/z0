@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Permute : ApiPart<Permute>
+    public sealed class Permute : Part<Permute>
     {        
         
     }

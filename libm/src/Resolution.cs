@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class LibM : ApiPart<LibM>
+    public sealed class LibM : Part<LibM>
     {        
         
     }

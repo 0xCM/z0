@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Nats : ApiPart<Nats>
+    public sealed class Nats : Part<Nats>
     {
         
     }

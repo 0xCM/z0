@@ -14,8 +14,8 @@ namespace Z0.Asm
     {
         protected new IAsmContext Context;
         
-        public static IApiPart[] DefaultResolutions 
-            => new IApiPart[]{
+        public static IPart[] DefaultResolutions 
+            => new IPart[]{
                 R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
                 R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
                 R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,

@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Matrix : ApiPart<Matrix>
+    public sealed class Matrix : Part<Matrix>
     {
             
         

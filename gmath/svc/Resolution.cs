@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class MathServices : ApiPart<MathServices>
+    public sealed class MathServices : Part<MathServices>
     {        
         public const string SvcCollectionName = "math.services";                
         

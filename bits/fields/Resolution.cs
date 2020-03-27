@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class BitFields : ApiPart<BitFields>
+    public sealed class BitFields : Part<BitFields>
     {
         
     }

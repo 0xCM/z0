@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Circuits : ApiPart<Circuits>
+    public sealed class Circuits : Part<Circuits>
     {        
         
     }

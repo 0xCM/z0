@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class GenericNumerics : ApiPart<GenericNumerics>
+    public sealed class GenericNumerics : Part<GenericNumerics>
     {        
         
     }

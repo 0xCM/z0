@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class PermuteTest : ApiPart<PermuteTest> 
+    public sealed class PermuteTest : Part<PermuteTest> 
     {
          
     }

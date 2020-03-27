@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class BitPack : ApiPart<BitPack>
+    public sealed class BitPack : Part<BitPack>
     {
         
     }

@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class PolyrandTest : ApiPart<PolyrandTest> 
+    public sealed class PolyrandTest : Part<PolyrandTest> 
     {
          
     }

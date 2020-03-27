@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class AsmCoreTest : ApiPart<AsmCoreTest> 
+    public sealed class AsmCoreTest : Part<AsmCoreTest> 
     { 
         
     }

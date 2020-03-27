@@ -17,7 +17,7 @@ namespace Z0
 namespace Z0.Parts
 {        
 
-    public sealed class LogixTest : ApiPart<LogixTest>
+    public sealed class LogixTest : Part<LogixTest>
     {
     }
 }

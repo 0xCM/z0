@@ -7,7 +7,7 @@
 namespace Z0.Parts
 {
     using System;
-    public sealed class AnalogsTest : ApiPart<AnalogsTest>
+    public sealed class AnalogsTest : Part<AnalogsTest>
     {    
 
     }

@@ -15,7 +15,7 @@ namespace Z0
 
 namespace Z0.Parts
 { 
-    public sealed class GMathTest : ApiPart<GMathTest>
+    public sealed class GMathTest : Part<GMathTest>
     {
 
     }

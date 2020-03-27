@@ -15,7 +15,7 @@ namespace Z0
     {
         readonly IAppMsgQueue MsgQueue;
 
-        public virtual IApiPart[] Resolved {get;}
+        public virtual IPart[] Resolved {get;}
 
         protected ConsoleApp(C context)
             : base(context)

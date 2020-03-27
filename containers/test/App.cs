@@ -14,5 +14,5 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class ContainerTest : ApiPart<ContainerTest> { } 
+    public sealed class ContainerTest : Part<ContainerTest> { } 
 }

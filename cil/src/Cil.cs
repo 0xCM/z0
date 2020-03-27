@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Cil : ApiPart<Cil>
+    public sealed class Cil : Part<Cil>
     {        
         
     }

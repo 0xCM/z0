@@ -16,5 +16,5 @@ namespace Z0
 
 namespace Z0.Parts
 {        
-    public sealed class CoreFuncTest : ApiPart<CoreFuncTest> { }
+    public sealed class CoreFuncTest : Part<CoreFuncTest> { }
 }

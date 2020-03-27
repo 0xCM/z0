@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class RngCore : ApiPart<RngCore>
+    public sealed class RngCore : Part<RngCore>
     {        
         
         

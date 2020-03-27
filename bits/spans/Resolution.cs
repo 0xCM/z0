@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class BitSpan : ApiPart<BitSpan>
+    public sealed class BitSpan : Part<BitSpan>
     {
         
     }

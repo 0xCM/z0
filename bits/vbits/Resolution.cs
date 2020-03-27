@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class VBits : ApiPart<VBits>
+    public sealed class VBits : Part<VBits>
     {
         
     }

@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Asm : ApiPart<Asm>
+    public sealed class Asm : Part<Asm>
     {
         
     }

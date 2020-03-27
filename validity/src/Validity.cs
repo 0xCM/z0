@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Validity : ApiPart<Validity>
+    public sealed class Validity : Part<Validity>
     {        
         
     }

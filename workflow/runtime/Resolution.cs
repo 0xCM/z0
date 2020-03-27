@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class WorkflowRuntime : ApiPart<WorkflowRuntime>
+    public sealed class WorkflowRuntime : Part<WorkflowRuntime>
     {
         
     }

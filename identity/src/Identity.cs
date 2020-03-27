@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Identity : ApiPart<Identity>
+    public sealed class Identity : Part<Identity>
     {                
         
     }

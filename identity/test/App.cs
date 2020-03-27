@@ -14,5 +14,5 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class IdentityTest : ApiPart<IdentityTest> { }
+    public sealed class IdentityTest : Part<IdentityTest> { }
 }

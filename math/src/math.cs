@@ -7,7 +7,7 @@
 
 namespace Z0.Parts
 {    
-    public sealed class Math : ApiPart<Math>
+    public sealed class Math : Part<Math>
     {        
         
     }

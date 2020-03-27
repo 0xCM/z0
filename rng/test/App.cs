@@ -11,7 +11,7 @@ namespace Z0
 
 namespace Z0.Parts
 {        
-    public sealed class RngCoreTest : ApiPart<RngCoreTest>
+    public sealed class RngCoreTest : Part<RngCoreTest>
     {
         
     }

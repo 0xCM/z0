@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Graphs : ApiPart<Graphs>
+    public sealed class Graphs : Part<Graphs>
     {        
         
     }

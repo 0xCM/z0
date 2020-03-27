@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class BitTest : ApiPart<BitTest> 
+    public sealed class BitTest : Part<BitTest> 
     {
          
     }

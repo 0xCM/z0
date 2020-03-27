@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class Root : ApiPart<Root>
+    public sealed class Root : Part<Root>
     {
         
     }

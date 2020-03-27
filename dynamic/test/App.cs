@@ -16,5 +16,5 @@ namespace Z0
 
 namespace Z0.Parts
 {        
-    public sealed class DynamicTest : ApiPart<DynamicTest> { }
+    public sealed class DynamicTest : Part<DynamicTest> { }
 }

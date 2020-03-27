@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Vectorized : ApiPart<Vectorized>
+    public sealed class Vectorized : Part<Vectorized>
     {
         
     }   

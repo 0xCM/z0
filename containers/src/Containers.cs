@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Containers : ApiPart<Containers>
+    public sealed class Containers : Part<Containers>
     {        
         
     }

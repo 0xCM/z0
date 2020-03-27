@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class VSvc : ApiPart<VSvc>
+    public sealed class VSvc : Part<VSvc>
     {        
         
     }

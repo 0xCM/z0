@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class Logix : ApiPart<Logix>
+    public sealed class Logix : Part<Logix>
     {
         
     }

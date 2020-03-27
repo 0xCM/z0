@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {    
-    public sealed class Machines : ApiPart<Machines>
+    public sealed class Machines : Part<Machines>
     {
         
     }

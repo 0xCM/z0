@@ -19,21 +19,21 @@ namespace Z0
         public static IApiComposition Empty => Assemble();
 
         [MethodImpl(Inline)]
-        public static ApiComposition Assemble(params IApiPart[] parts)
+        public static ApiComposition Assemble(params IPart[] parts)
             => new ApiComposition(parts);
 
         [MethodImpl(Inline)]
-        public static ApiComposition Assemble(IEnumerable<IApiPart> parts)
+        public static ApiComposition Assemble(IEnumerable<IPart> parts)
             => new ApiComposition(parts.ToArray());
 
         [MethodImpl(Inline)]
-        ApiComposition(IApiPart[] resolved)
+        ApiComposition(IPart[] resolved)
             => Resolved = resolved;
 
         /// <summary>
         /// The members of the compostion
         /// </summary>
-        public IApiPart[] Resolved {get;}   
+        public IPart[] Resolved {get;}   
 
         public bool IsEmpty
             => Resolved.Length == 0;

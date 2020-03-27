@@ -9,11 +9,10 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using C = Z0.Parts.Intrinsics.C;
 
     public static class Intrinsics
     {
-        public static IApiCatalog Catalog => new C();
+        public static IApiCatalog Catalog => Z0.Parts.Intrinsics.Resolution.ApiCatalog();
                 
         public static IEnumerable<MethodInfo> Generic
             => from host in Catalog.GenericApiHosts

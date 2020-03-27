@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class GraphTest : ApiPart<GraphTest> 
+    public sealed class GraphTest : Part<GraphTest> 
     {
 
     } 

@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {        
-    public sealed class WorkflowTest : ApiPart<WorkflowTest>
+    public sealed class WorkflowTest : Part<WorkflowTest>
     {
 
     }

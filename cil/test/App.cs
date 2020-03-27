@@ -14,7 +14,7 @@ namespace Z0
 
 namespace Z0.Parts
 {
-    public sealed class CilTest : ApiPart<CilTest> 
+    public sealed class CilTest : Part<CilTest> 
     {
         
     } 
