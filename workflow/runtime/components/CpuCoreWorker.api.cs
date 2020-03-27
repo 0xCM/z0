@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Threading;
-    using System.Threading.Tasks;
-
-    using static Root;
 
     public static class CpuCoreWorker
     {
@@ -22,7 +19,7 @@ namespace Z0
         /// <param name="frequency">The worker frequence</param>
         /// <param name="MaxCycles">The maximum number of cycles the worker will be allowed to execute before forceful termination</param>
         /// <typeparam name="T">The subject type</typeparam>
-        public static CpuCoreWorker<T> Start<T>(IRngContext context, uint cpucore, Func<T,T> worker, T state, TimeSpan frequency, ulong? MaxCycles = null)
+        public static CpuCoreWorker<T> Start<T>(IContext context, uint cpucore, Func<T,T> worker, T state, TimeSpan frequency, ulong? MaxCycles = null)
         {
             var cpuWorker = new CpuCoreWorker<T>(context, cpucore, worker, state, frequency, MaxCycles);
             var workerThread = new Thread(new ThreadStart(cpuWorker.Control))
@@ -40,7 +37,7 @@ namespace Z0
         static string WorkerName(uint cpucore)
             => $"{Interlocked.Increment(ref WorkerId)}/{cpucore}";
 
-        static CpuCoreWorker<ulong> Example(IRngContext context)
+        static CpuCoreWorker<ulong> Example(IContext context)
         {
             ulong Sum(ulong max)
             {

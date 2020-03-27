@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    public static class Arrows
-    {
-        public const string Connector = " -> ";
+    using static Graphs;
 
+    public static class Arrows
+    {        
         [MethodImpl(Inline)]
         public static ArrowPath<S,T> connect<S,T>(S src, T dst)
             where S : IIdentifiedTarget<S>, new()
@@ -41,6 +41,6 @@ namespace Z0
         public static ArrowPath<A,C> remove<A,B,C>(in MixedPath<A,B,C> x0, B y)
             => path<A,C>(x0.Src, x0.c);
 
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity, ApiHost("api")]
     public static partial class Fixed
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
 
         /// <summary>
         /// Creates a fixed-type value

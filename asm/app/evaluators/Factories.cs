@@ -5,11 +5,7 @@
 namespace Z0.Asm.Check
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    using static Root;
     using static EvalPackages;
 
     using C = OpClass;
@@ -28,7 +24,7 @@ namespace Z0.Asm.Check
         {
             var count = sourceBuffer.Length;
             var source = context.Random.Pairs<T>(sourceBuffer);
-            var target =  PairEval.Define(("method", "asm"), Tuples.index(targetBuffer));
+            var target =  Evaluations.pairs(("method", "asm"), Tuples.index(targetBuffer));
             var content = Evaluations.binary(source, target);
             var package = new BinaryOpPackage<T>(ApiEvalContext.Define(execBuffers, code), content);
             var evaluator = new BinaryOpEvaluator<T>(context);

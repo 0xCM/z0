@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Graphs;
 
     public class NodeIndex<V>
         where V : unmanaged

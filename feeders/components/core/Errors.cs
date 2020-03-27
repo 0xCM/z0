@@ -18,6 +18,13 @@ namespace Z0
             => new NotSupportedException($"The type {typeof(T).Name} is not supported in the current context");
 
         /// <summary>
+        /// Populates a <see cref="NotSupportedException"/> complaining that a specified numeric kind isn't supported
+        /// </summary>
+        /// <typeparam name="T">The unsupported type</typeparam>
+        public static NotSupportedException define(NumericKind k)
+            => new NotSupportedException($"The type {k.Format()} is not supported in the current context");
+
+        /// <summary>
         /// Populates a <see cref="NotSupportedException"/>, populated with a custom message describing why a 
         /// parametrically-identified type is not supported
         /// </summary>

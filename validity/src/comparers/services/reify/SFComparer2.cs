@@ -78,7 +78,7 @@ namespace Z0
             clock.Start();
             try
             {                
-                SpanFunc.apply(subject, lhs, rhs, dst);
+                SFuncs.apply(subject, lhs, rhs, dst);
                 for(var i=0; i<count; i++)
                     Claim.numeq(baseline.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
             }

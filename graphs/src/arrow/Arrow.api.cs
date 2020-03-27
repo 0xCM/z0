@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-
     public static class Arrow
     {
         public static Arrow<A> Define<A>(params A[] nodes)
@@ -22,5 +21,4 @@ namespace Z0
             where A : IEquatable<A>
                 => new Arrow<A>(src,dst);        
     }
-
 }

@@ -220,13 +220,18 @@ public enum PartId : ulong
     Kinds = 822,
 
     Api = 824,
-
+    
     Tuples = 826,
-
+        
+    Apps = 828,
+    
+    Numeric = 830,
+            
     RngPcg = 1024,
 
     RngWy = 1023,
     
+
     Svc = ushort.MaxValue + 1,
 
     Test = Svc << 1,

@@ -15,6 +15,7 @@
   </Target>
 
   <ItemGroup>
+    <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Collective)" />
@@ -25,6 +26,7 @@
     <ProjectReference Include="$(Kinds)" />  
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Memories)" />    
+    <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(SFuncs)" />    
     <ProjectReference Include="$(Symbolic)" />        

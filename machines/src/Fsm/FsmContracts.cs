@@ -55,11 +55,10 @@ namespace Z0.Machines
     /// <summary>
     /// Defines context specialization for FSM
     /// </summary>
-    public interface IFsmContext : IRngContext
+    public interface IFsmContext : IPolyrandProvider, IAppContext
     {
         ulong? ReceiptLimit {get;}
     }
-
     
 
     public interface IRuleKey

@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Arrows;
+    using static Graphs;
 
-    public static class GraphX
+    public static class XGraph
     {
         [MethodImpl(Inline)]
         public static void Deconstruct<T>(this Edge<T> edge, out T source, out T target)

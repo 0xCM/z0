@@ -34,40 +34,40 @@ namespace Z0
             where T : unmanaged
             where F : ISVUnaryOp128Api<T>
             where G : ISVUnaryOp128Api<T>
-                => Pipes.pipe(x,f,g);
+                => SPipes.pipe(x,f,g);
 
         [MethodImpl(Inline)]
         public static Vector256<T> vpipe<F,G,T>(Vector256<T> x, F f, G g)
             where T : unmanaged
             where F : ISVUnaryOp256Api<T>
             where G : ISVUnaryOp256Api<T>
-                => Pipes.pipe(x,f,g);
+                => SPipes.pipe(x,f,g);
 
         [MethodImpl(Inline)]
         public static Vector128<T> vcompose<F,G,T>(Vector128<T> x, Vector128<T> y, F f, G g)
             where T : unmanaged
             where F : ISVBinaryOp128Api<T>
             where G : ISVUnaryOp128Api<T>
-                => Pipes.compose(x,y,f,g);
+                => SPipes.compose(x,y,f,g);
 
         [MethodImpl(Inline)]
         public static Vector256<T> vpipe<F,G,T>(Vector256<T> x, Vector256<T> y, F f, G g)
             where T : unmanaged
             where F : ISVBinaryOp256Api<T>
             where G : ISVUnaryOp256Api<T>
-                => Pipes.compose(x,y,f,g);
+                => SPipes.compose(x,y,f,g);
 
         [MethodImpl(Inline)]
         public static Vector128<T> vapply<F,T>(Vector128<T> x, Vector128<T> y, F f)
             where T : unmanaged
             where F : ISVBinaryOp128Api<T>
-                => Pipes.apply(x,y,f);
+                => SPipes.apply(x,y,f);
         
         [MethodImpl(Inline)]
         public static Vector256<T> vapply<F,T>(Vector256<T> x, Vector256<T> y, F f)
             where T : unmanaged
             where F : ISVBinaryOp256Api<T>
-                => Pipes.apply(x,y,f);
+                => SPipes.apply(x,y,f);
 
         [MethodImpl(Inline)]
         public static ref readonly Block128<T> vzip<F,T>(in Block128<T> lhs, in Block128<T> rhs, in Block128<T> dst, F f)

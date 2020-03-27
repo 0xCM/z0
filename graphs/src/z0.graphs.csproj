@@ -6,8 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
-    <!-- <ProjectReference Include="$(Nats)" /> -->
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Collective)" />
+    <ProjectReference Include="$(Numeric)" />
 
   </ItemGroup>
 

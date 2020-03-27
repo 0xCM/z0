@@ -16,13 +16,28 @@ namespace Z0.Asm.Check
 
         static IPart[] Dependencies
             => new IPart[]{
-                R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
-                R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
-                R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
-                R.Blocks.Resolution, R.Fixed.Resolution, R.Math.Resolution,
-                R.GenericNumerics.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
-                R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
-                R.Root.Resolution,R.Vectorized.Resolution, R.VData.Resolution};
+                R.Analogs.Resolution, 
+                R.AsmCore.Resolution, 
+                R.BitCore.Resolution,
+                R.BitGrids.Resolution, 
+                R.BitSpan.Resolution, 
+                R.BitFields.Resolution,
+                R.BitVectors.Resolution, 
+                R.VBits.Resolution, 
+                R.Permute.Resolution,
+                R.Blocks.Resolution, 
+                R.Fixed.Resolution, 
+                R.Math.Resolution,
+                R.GenericNumerics.Resolution, 
+                R.MathServices.Resolution, 
+                R.Intrinsics.Resolution,
+                R.VSvc.Resolution, 
+                R.LibM.Resolution, 
+                R.Logix.Resolution, 
+                R.Root.Resolution,
+                R.Vectorized.Resolution, 
+                R.VData.Resolution
+                };
 
         static IAppSettings LoadSettings()
         {
@@ -31,7 +46,7 @@ namespace Z0.Asm.Check
             return AppSettings.Load(src);
         }
 
-        //ApiComposition.Assemble(resolutions.Where(r => r.Id != 0).ToArray())
+        
         static IAsmContext CreateContext()
         {
             var random = Rng.Pcg64(Seed64.Seed05);                

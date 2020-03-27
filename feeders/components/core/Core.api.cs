@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Threading;
 
     using static Components;
 
@@ -49,5 +50,24 @@ namespace Z0
             if(!invariant)
                 throw new Exception($"Application invaraiant failed");
         }
+
+        /// <summary>
+        /// Atomically increments a value in-place
+        /// </summary>
+        /// <param name="src">The value to increment in-place</param>
+        [MethodImpl(Inline)]
+        public static int increment(ref int src)
+            => Interlocked.Increment(ref src);
+ 
+        /// <summary>
+        /// Atomically increments a value in-place
+        /// </summary>
+        /// <param name="src">The value to increment in-place</param>
+        [MethodImpl(Inline)]
+        public static long increment(ref long src)
+            => Interlocked.Increment(ref src);
+
+        public static void error(Exception e)
+            => Console.Error.WriteLine(e);
     }
 }

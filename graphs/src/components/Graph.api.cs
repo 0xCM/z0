@@ -10,7 +10,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Root;
+    using static Graphs;
+    using static CastNumeric;
 
     /// <summary>
     /// Defines the primary API surface for manipulated graphs

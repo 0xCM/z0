@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    
     using static Tuples;
 
     /// <summary>
@@ -13,7 +14,7 @@ namespace Z0
     /// </summary>
     public static class Tuples
     {        
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
 
         /// <summary>
         /// Allocates an homogenous pair store

@@ -10,8 +10,9 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Root;
-    
+    using static Graphs;
+    using static CastNumeric;
+
     /// <summary>
     /// Defines a directed graph parameterized by the vertex index type
     /// </summary>

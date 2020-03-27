@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IValidationContext : IRngContext, IAppMsgSink
+    public interface IValidationContext : IPolyrandProvider, IAppMsgSink, IAppContext
     {
         void ReportOutcome(string casename, bool succeeded, TimeSpan duration, AppMsg msg = null);
 

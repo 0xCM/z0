@@ -7,6 +7,7 @@
 
   <ItemGroup>    
     <ProjectReference Include="$(Api)" />  
+    <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Canonical)" />  
     <ProjectReference Include="$(Collective)" />  
     <ProjectReference Include="$(Components)" />  
@@ -15,6 +16,7 @@
     <ProjectReference Include="$(Kinds)" />  
     <ProjectReference Include="$(Memories)" />  
     <ProjectReference Include="$(Monadic)" />  
+    <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Reflective)" />  
     <ProjectReference Include="$(Symbolic)" />  
     <ProjectReference Include="$(SFuncs)" />  

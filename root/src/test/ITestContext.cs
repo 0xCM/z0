@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface ITestContext : IDisposable, IRngContext, IAppMsgSink
+    public interface ITestContext : IDisposable, IAppMsgSink, IPolyrandProvider, IAppContext
     {
         void ReportBenchmark(string name, long opcount, TimeSpan duration);        
 

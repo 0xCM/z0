@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections.Concurrent;
     using System.Linq;
-
  
     using static Collective;
 

@@ -11,3 +11,16 @@ namespace Z0.Parts
         
     }
 }
+
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public static partial class Graphs
+    {
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+
+        public const string Connector = " -> ";
+    }
+}

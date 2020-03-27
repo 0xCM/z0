@@ -6,12 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Tuples)" />
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(Api)" />
-
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Collective)" />
   </ItemGroup>
 
 </Project>

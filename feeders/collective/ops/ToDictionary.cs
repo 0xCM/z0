@@ -23,5 +23,34 @@ namespace Z0
         /// <typeparam name="V">The value type</typeparam>
         public static Dictionary<K,V> ToDictionary<K,V>(this IEnumerable<(K key, V value)> src)
             => new Dictionary<K,V>(src.Select(x => new KeyValuePair<K,V>(x.key,x.value)));
+
+        /// <summary>
+        /// Creates a read-only dictionary from the supplied enumerable and selector
+        /// </summary>
+        /// <param name="this">The extended type</param>
+        /// <param name="keySelector"></param>
+        /// <typeparam name="K">The key type</typeparam>
+        /// <typeparam name="V">The value type</typeparam>
+        public static IReadOnlyDictionary<K, V> ToReadOnlyDictionary<K, V>(this IEnumerable<V> @this, 
+            Func<V, K> keySelector) => @this.ToDictionary(keySelector);
+
+        /// <summary>
+        /// Creates a read-only dictionary from an existing mutable dictionary
+        /// </summary>
+        /// <typeparam name="K">The dictionary key type</typeparam>
+        /// <typeparam name="V">The dictionary value type</typeparam>
+        /// <param name="this">The extended type</param>
+        public static IReadOnlyDictionary<K, V> ToReadOnlyDictionary<K, V>(this IDictionary<K, V> @this)
+            => new Dictionary<K, V>(@this);
+
+        /// <summary>
+        /// Creates a read-only dictionary from a stream of tuples
+        /// </summary>
+        /// <typeparam name="K">The dictionary key type</typeparam>
+        /// <typeparam name="V">The dictionary value type</typeparam>
+        /// <param name="this">The extended type</param>
+        public static IReadOnlyDictionary<K, V> ToReadOnlyDictionary<K, V>(this IEnumerable<(K key, V value)> @this)
+            => @this.ToDictionary(x => x.key, x => x.value);
+
     }
 }

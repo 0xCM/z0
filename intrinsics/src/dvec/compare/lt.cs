@@ -11,14 +11,13 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx;    
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static X86Missing;
 
-    using static Root;    
     using static vgeneric;
     using static Nats;
     using static BitMasks;
+    using static dvec;
 
     partial class dvec
     {

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Monadic)" />
+    <ProjectReference Include="$(Canonical)" />
+    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Collective)" />    
+    <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Textual)" />
+  </ItemGroup>
+
+</Project>

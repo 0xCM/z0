@@ -235,11 +235,19 @@ namespace Z0
         static ulong dist(double a, double b)
             => a >= b ? (ulong)(a - b) : (ulong)(b - a);
 
+        /// <summary>
+        /// Returns true if a value is the NaN representative
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        static bool IsNaN(this float src)
+            => float.IsNaN(src);
+
         [MethodImpl(Inline)]
         static double relerr(double lhs, double rhs)
         {
             var err = dist(lhs,rhs)/lhs;
-            return err.IsNaN() ? 0 : err;
+            return double.IsNaN(err) ? 0 : err;
         }
 
         [MethodImpl(Inline)]

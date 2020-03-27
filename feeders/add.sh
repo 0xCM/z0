@@ -1,6 +1,9 @@
 export ProjectRoot="$(dirname "$0")"
 AddCmd=$ZDev/.scripts/add-rooted.sh
 
+export ProjectId=apps
+bash $AddCmd
+
 export ProjectId=canonical
 bash $AddCmd
 
@@ -28,6 +31,9 @@ bash $AddCmd
 export ProjectId=monadic
 bash $AddCmd
 
+export ProjectId=numeric
+bash $AddCmd
+
 export ProjectId=reflective
 bash $AddCmd
 
@@ -45,5 +51,6 @@ bash $AddCmd
 
 export ProjectId=tuples
 bash $AddCmd
+
 
 dotnet sln add $ProjectRoot/test/z0.feeders.test.csproj

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Graphs;
+    using static CastNumeric;
     
     /// <summary>
     /// Defines a graph in which data may be associated with each node and edges are weighted

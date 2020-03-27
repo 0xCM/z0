@@ -9,7 +9,7 @@ namespace Z0
 
     using static SFuncs;
 
-    public static class Pipes
+    public static class SPipes
     {
         /// <summary>
         /// Computes y := x |> f |> g := g(f(x)) for unary operators f and g

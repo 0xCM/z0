@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> and<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.and<T>(), l,r,dst);
+                => SFuncs.apply(MathSvcFactory.and<T>(), l,r,dst);
 
         /// <summary>
         /// Computes the bitwise or between corresponding span elements
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> or<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.or<T>(), l, r, dst);
+                => SFuncs.apply(MathSvcFactory.or<T>(), l, r, dst);
 
         /// <summary>
         /// Computes the aggregate bitwise or of the source elements
@@ -61,51 +61,51 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> xor<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.xor<T>(), l, r, dst);
+                => SFuncs.apply(MathSvcFactory.xor<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> nand<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.nand<T>(), l,r,dst);
+                => SFuncs.apply(MathSvcFactory.nand<T>(), l,r,dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> nor<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.nor<T>(), l, r, dst);
+                => SFuncs.apply(MathSvcFactory.nor<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> xnor<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.xnor<T>(), l, r, dst);
+                => SFuncs.apply(MathSvcFactory.xnor<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> impl<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.impl<T>(), l, r, dst);
+                => SFuncs.apply(MathSvcFactory.impl<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> nonimpl<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.nonimpl<T>(), l, r, dst);
+                => SFuncs.apply(MathSvcFactory.nonimpl<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> cimpl<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.cimpl<T>(), l, r, dst);
+                => SFuncs.apply(MathSvcFactory.cimpl<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> cnonimpl<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.cnonimpl<T>(), l, r, dst);
+                => SFuncs.apply(MathSvcFactory.cnonimpl<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> select<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.select<T>(), a, b, c, dst);
+                => SFuncs.apply(MathSvcFactory.select<T>(), a, b, c, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> not<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => SpanOps.apply(MathSvcFactory.not<T>(), src, dst);
+                => SFuncs.apply(MathSvcFactory.not<T>(), src, dst);
     }
 }
