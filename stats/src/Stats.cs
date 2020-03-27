@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {        
-    public sealed class Stats : ApiPart<Stats, Stats.C>
+    public sealed class Stats : ApiPart<Stats>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.Stats) { } }            
+        
     }
 }

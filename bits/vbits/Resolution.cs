@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {        
-    public sealed class VBits : ApiPart<VBits, VBits.C>
+    public sealed class VBits : ApiPart<VBits>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.VBits) { } }
+        
     }
 }

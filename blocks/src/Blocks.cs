@@ -6,9 +6,9 @@
 
 namespace Z0.Parts
 {        
-    public sealed class Blocks : ApiPart<Blocks, Blocks.C>
+    public sealed class Blocks : ApiPart<Blocks>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.Blocks){ }}
+        
     }
 }
 

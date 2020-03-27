@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class GVec : ApiPart<GVec, GVec.C>
+    public sealed class GVec : ApiPart<GVec>
     {        
-        public class C : ApiCatalog<C> { public C() : base(PartId.GVec) {} }            
+        
     }
 }

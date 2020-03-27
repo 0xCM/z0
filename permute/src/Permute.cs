@@ -6,9 +6,9 @@
 
 namespace Z0.Parts
 {
-    public sealed class Permute : ApiPart<Permute, Permute.C>
+    public sealed class Permute : ApiPart<Permute>
     {        
-        public class C : ApiCatalog<C> { public C() : base(PartId.Permute) {} }            
+        
     }
 }
 

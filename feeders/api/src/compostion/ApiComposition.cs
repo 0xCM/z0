@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
 
@@ -18,8 +19,12 @@ namespace Z0
         public static IApiComposition Empty => Assemble();
 
         [MethodImpl(Inline)]
-        public static ApiComposition Assemble(params IApiPart[] resolved)
-            => new ApiComposition(resolved);
+        public static ApiComposition Assemble(params IApiPart[] parts)
+            => new ApiComposition(parts);
+
+        [MethodImpl(Inline)]
+        public static ApiComposition Assemble(IEnumerable<IApiPart> parts)
+            => new ApiComposition(parts.ToArray());
 
         [MethodImpl(Inline)]
         ApiComposition(IApiPart[] resolved)

@@ -7,7 +7,9 @@
 namespace Z0.Asm.Check
 { 
     using R = Z0.Parts;
+
     using System.Reflection;
+    using System.Linq;
 
     class App : ConsoleApp<App,IAsmContext>
     {
@@ -24,13 +26,27 @@ namespace Z0.Asm.Check
 
         static IApiPart[] Resolutions
             => new IApiPart[]{
-                R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
-                R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
-                R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
-                R.Blocks.Resolution, R.Math.Resolution,
-                R.GenericNumerics.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
-                R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
-                R.Root.Resolution,R.Vectorized.Resolution, R.VData.Resolution};
+                // R.Analogs.Resolution, 
+                // R.AsmCore.Resolution, 
+                // R.BitCore.Resolution,
+                // R.BitGrids.Resolution, 
+                // R.BitSpan.Resolution, 
+                // R.BitFields.Resolution,
+                // R.BitVectors.Resolution, 
+                // R.VBits.Resolution, 
+                // R.Permute.Resolution,
+                // R.Blocks.Resolution, 
+                R.Math.Resolution,
+                R.GenericNumerics.Resolution, 
+                R.MathServices.Resolution, 
+                R.Intrinsics.Resolution,
+                // R.VSvc.Resolution, 
+                // R.LibM.Resolution, 
+                // R.Logix.Resolution, 
+                // R.Root.Resolution,
+                // R.Vectorized.Resolution, 
+                // R.VData.Resolution
+                };
 
 
         static IAppSettings LoadSettings()
@@ -40,19 +56,26 @@ namespace Z0.Asm.Check
             return AppSettings.Load(src);
         }
 
+        //ApiComposition.Assemble(resolutions.Where(r => r.Id != 0).ToArray())
         static IAsmContext CreateContext()
         {
-            var settings = LoadSettings();
-            var resolved = Resolutions.Assemble();
-            var exchange = AppMsgExchange.Create(AppMsgQueue.Create());
             var random = Rng.Pcg64(Seed64.Seed05);                
+            term.print($"Created {random.RngKind} random source");
+
+            var settings = LoadSettings();
+            term.print($"loaded settings");
+
+            var resolved = ApiComposition.Assemble(Resolutions.Where(r => r.Id != 0));
+            term.print($"Assembled {resolved.Resolved.Length} parts");
+
+            var exchange = AppMsgExchange.Create(AppMsgQueue.Create());
             return AsmContext.Create(resolved, settings, exchange, random, AsmFormatConfig.New);
         }
         
         public App()
             : base(CreateContext())
         {
-
+            term.print("Created application");
         }
             
         void ExecuteValidationWorkflow()
@@ -73,4 +96,3 @@ namespace Z0.Asm.Check
 
     } 
 }
-

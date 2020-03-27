@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {        
-    public sealed class Analogs : ApiPart<Analogs, Analogs.C>
+    public sealed class Analogs : Part<Analogs>
     {    
-        public class C : ApiCatalog<C> { public C() : base(PartId.Analogs){ }}
+        
     }
 }

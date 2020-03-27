@@ -12,13 +12,7 @@ namespace Z0
     /// </summary>
     public interface IApiPart : IPart, ICustomFormattable
     {
-        IApiCatalog Catalog {get;}
 
-        /// <summary>
-        /// If designate supports a means of execution, invokes it; otherwise, does nothing
-        /// </summary>
-        /// <param name="args">Arguments passed to the execution controller</param>
-        void Run(params string[] args);
     }
 
    /// <summary>

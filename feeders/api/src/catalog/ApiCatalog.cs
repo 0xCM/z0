@@ -14,12 +14,12 @@ namespace Z0
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
         /// </summary>
-        public PartId AssemblyId {get;}
+        public PartId PartId {get;}
 
         /// <summary>
         /// The assembly that defines and owns the catalog
         /// </summary>
-        public Assembly CatalogedAssembly {get;}
+        public Assembly Part {get;}
 
         /// <summary>
         /// The api hosts known to the catalog
@@ -36,13 +36,13 @@ namespace Z0
 
         public ApiCatalog(Assembly source, PartId id)
         {
-            AssemblyId = id;
-            CatalogedAssembly = source;
-            ApiHosts = Api.HostTypes(CatalogedAssembly).Select(t => ApiHost.Define(AssemblyId, t)).ToArray();
+            PartId = id;
+            Part = source;
+            ApiHosts = Api.HostTypes(Part).Select(t => ApiHost.Define(PartId, t)).ToArray();
             Resources = BinaryResources.Empty;
             DirectApiHosts = ApiHosts.Where(h => h.HostKind.DefinesDirectOps()).ToArray();
             GenericApiHosts = ApiHosts.Where(h => h.HostKind.DefinesGenericOps()).ToArray();
-            HostTypes = ApiServices.ProviderTypes(CatalogedAssembly).ToArray();
+            HostTypes = ApiServices.ProviderTypes(Part).ToArray();
         }
         
         public ApiCatalog(Assembly source, PartId id, BinaryResources resources)

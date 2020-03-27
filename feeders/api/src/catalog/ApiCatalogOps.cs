@@ -18,32 +18,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source composition</param>
         public static Option<IApiCatalogProvider> CatalogProvider(this IApiComposition src, PartId id)
-            => from r in  src.Resolved.TryFind(x => x.Id == id)
-                where r.Catalog.IsIdentified
-                select OP.Define(r.Id, r.Owner, r.Catalog);
+            => from c in src.FindCatalog(id) select OP.Define(id, c.Part, c);
 
         /// <summary>
         /// Searches the resolutions for an identified nonempy catalog
         /// </summary>
         /// <param name="id">The defining assembly</param>
         public static Option<IApiCatalog> FindCatalog(this IApiComposition src, PartId id)
-            => from r in src.FindPart(id)
-                where r.Catalog.IsIdentified
-                select r.Catalog;
-        
-        public static IEnumerable<IApiCatalog> Catalogs(this IApiComposition src)
-            => from r in src.Resolved
-                where r.Catalog.IsIdentified
-                select r.Catalog;
-
-        /// <summary>
-        /// Queries a composition for supported catalog providers
-        /// </summary>
-        /// <param name="src">The source composition</param>
-        public static IEnumerable<IApiCatalogProvider> CatalogProviders(this IApiComposition src)
-            =>  from r in src.Resolved                
-                where r.Catalog.IsIdentified
-                select OP.Define(r.Id, r.Owner, r.Catalog);
+        {
+            var c = src.ApiCatalogs().Where(c => c.PartId == id).FirstOrDefault();
+            if(c != null)
+                return Option.some(c);
+            else
+                return Option.none<IApiCatalog>();
+        }
+            
+        public static IEnumerable<IApiCatalog> ApiCatalogs(this IApiComposition src)
+            => src.Resolved.Select( r => r.ApiCatalog());
 
         /// <summary>
         /// Queries a composition for supported catalog providers that are identified by a filter
@@ -51,8 +42,8 @@ namespace Z0
         /// <param name="src">The source composition</param>
         /// <param name="filter">The filter criteria</param>
         public static IEnumerable<IApiCatalogProvider> CatalogProviders(this IApiComposition src, IEnumerable<PartId> filter)
-            =>  from r in src.Resolved                
-                where filter.Contains(r.Id) && r.Catalog.IsIdentified
-                select OP.Define(r.Id, r.Owner, r.Catalog);
+            => from c in src.ApiCatalogs() 
+                where filter.Contains(c.PartId)
+                select OP.Define(c.PartId, c.Part, c);
     }
 }

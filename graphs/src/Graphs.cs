@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class Graphs : ApiPart<Graphs, Graphs.C>
+    public sealed class Graphs : ApiPart<Graphs>
     {        
-        public class C : ApiCatalog<C> { public C() : base(PartId.Graphs) {} }
+        
     }
 }

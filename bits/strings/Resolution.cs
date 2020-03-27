@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class BitString : ApiPart<BitString, BitString.C>
+    public sealed class BitString : ApiPart<BitString>
     {        
-        public class C : ApiCatalog<C> { public C() : base(PartId.BitString) {} }            
+
     }
 }

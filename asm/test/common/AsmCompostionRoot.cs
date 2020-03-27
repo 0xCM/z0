@@ -11,21 +11,6 @@ namespace Z0
 
     static class AsmCompostionRoot
     {
-        static IEnumerable<IApiPart> DefaultResolutions 
-            => new IApiPart[]{
-                R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
-                R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
-                R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
-                R.Blocks.Resolution, R.Math.Resolution,
-                R.GenericNumerics.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
-                R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
-                R.Root.Resolution,R.Vectorized.Resolution}
-                ;
 
-        public static IApiComposition Compose(params IApiPart[] src)
-        {
-            var resolutions = src.Length != 0 ? src : DefaultResolutions;
-            return resolutions.Assemble();
-        }
     }
 }

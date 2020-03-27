@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class VSvc : ApiPart<VSvc, VSvc.C>
+    public sealed class VSvc : ApiPart<VSvc>
     {        
-        public class C : ApiCatalog<C> { public C() : base(PartId.VSvc) { } }
+        
     }
 }

@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class Vectorized : ApiPart<Vectorized, Vectorized.C>
+    public sealed class Vectorized : ApiPart<Vectorized>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.Vectorized) {} }    
+        
     }   
 }

@@ -20,42 +20,46 @@ namespace Z0
         public static P Resolution 
             => new P();
         
-        [MethodImpl(Inline)]
-        public static bool operator ==(Part<P> p1, Part<P> p2)
-            => p2.Me.Equals(p1.Me);
+        public Assembly Owner {get;}
 
-        [MethodImpl(Inline)]
-        public static bool operator !=(Part<P> p1, Part<P> p2)
-            => !p1.Me.Equals(p2.Me);
+        public string Name {get;}
 
-        protected P Me => (P)this;
-
-        IPart<P> Base => this;
-    
-        public static Assembly Component =>  typeof(P).Assembly;
-        
-        public Assembly Owner 
-            => Base.Owner;
-            
-        public string Name 
-            => Base.Name;
-
-        public virtual PartId Id
-            => Base.Id;
+        public PartId Id {get;}
 
         public virtual IBinaryResourceProvider ResourceProvider => default(ProvidedResources);
 
-        public string Format() 
-            => Base.Formatted;
+        protected Part()
+        {
+            Owner = typeof(P).Assembly;            
+            Name = Owner.GetName().Name;
+            Id = Attribute.IsDefined(Owner, typeof(PartIdAttribute))  
+              ? ((PartIdAttribute)Attribute.GetCustomAttribute(Owner, typeof(PartIdAttribute))).Id
+              : PartId.None;
+        }
 
-        public override bool Equals(object obj)
-            => Base.BoxedEquals(obj);
+        [MethodImpl(Inline)]
+        public static bool operator ==(Part<P> p1, Part<P> p2)
+            => p1.Id == p2.Id;
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Part<P> p1, Part<P> p2)
+            => p1.Id != p2.Id;
+                                    
+        [MethodImpl(Inline)]
+        public bool Equals(P src)
+            => this.Id == src.Id;
+
+        public string Format() 
+            => Id.Format();
+
+        public override bool Equals(object src)
+            => src is P a && a.Id == Id;
 
         public override int GetHashCode() 
-            => Base.HashCode;
+            => Id.GetHashCode();     
 
         public override string ToString()
-            => Base.Formatted;
+            => Format();
 
         readonly struct ProvidedResources : IBinaryResourceProvider
         {

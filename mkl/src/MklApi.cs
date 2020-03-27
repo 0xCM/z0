@@ -8,9 +8,6 @@ namespace Z0.Parts
 {        
     public sealed class MklApi : ApiPart<MklApi>
     {
-        const PartId Identity = PartId.MklApi;
-        
-        public override PartId Id 
-            => Identity;
+
     }
 }

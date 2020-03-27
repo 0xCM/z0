@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {        
-    public sealed class WorkflowRuntime : ApiPart<WorkflowRuntime, WorkflowRuntime.C>
+    public sealed class WorkflowRuntime : ApiPart<WorkflowRuntime>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.WorkflowRuntime) { } }            
+        
     }
 }

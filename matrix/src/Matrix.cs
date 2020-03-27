@@ -6,10 +6,9 @@
 
 namespace Z0.Parts
 {
-    public sealed class Matrix : ApiPart<Matrix, Matrix.C>
+    public sealed class Matrix : ApiPart<Matrix>
     {
-        const PartId Identity = PartId.Matrix;
-    
-        public class C : ApiCatalog<C> { public C() : base(Identity) { } }
+            
+        
     }
 }

@@ -6,9 +6,9 @@
 
 namespace Z0.Parts
 {
-    public sealed class Validity : ApiPart<Validity, Validity.C>
+    public sealed class Validity : ApiPart<Validity>
     {        
-        public class C : ApiCatalog<C> { public C() : base(PartId.Validity) {} }            
+        
     }
 }
 

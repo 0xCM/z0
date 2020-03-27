@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {        
-    public sealed class BitSpan : ApiPart<BitSpan, BitSpan.C>
+    public sealed class BitSpan : ApiPart<BitSpan>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.BitSpan) { } }
+        
     }
 }

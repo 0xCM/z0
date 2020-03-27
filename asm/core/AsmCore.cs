@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class AsmCore : ApiPart<AsmCore, AsmCore.C>
+    public sealed class AsmCore : ApiPart<AsmCore>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.AsmCore) { } }
+        
     }
 }

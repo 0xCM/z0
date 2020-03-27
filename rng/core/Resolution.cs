@@ -6,9 +6,9 @@
 
 namespace Z0.Parts
 {
-    public sealed class RngCore : ApiPart<RngCore, RngCore.C>
+    public sealed class RngCore : ApiPart<RngCore>
     {        
         
-        public class C : ApiCatalog<C> { public C() : base(PartId.RngCore) {} }            
+        
     }
 }

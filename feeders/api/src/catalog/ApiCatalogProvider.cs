@@ -15,9 +15,9 @@ namespace Z0
     /// </summary>
     readonly struct ApiCatalogProvider : IApiCatalogProvider
     {        
-        public PartId AssemblyId {get;}
+        public PartId PartId {get;}
 
-        public Assembly CatalogedAssembly {get;}           
+        public Assembly Part {get;}           
  
         public IApiCatalog Operations {get;}
 
@@ -28,8 +28,8 @@ namespace Z0
         [MethodImpl(Inline)]
         ApiCatalogProvider(PartId id, Assembly src, IApiCatalog catalog)
         {
-            this.AssemblyId = id;
-            this.CatalogedAssembly = src;
+            this.PartId = id;
+            this.Part = src;
             this.Operations = catalog;
         }
 

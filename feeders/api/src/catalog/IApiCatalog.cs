@@ -15,12 +15,12 @@ namespace Z0
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
         /// </summary>
-        PartId AssemblyId {get;}
+        PartId PartId {get;}
 
         /// <summary>
         /// The assembly that defines and owns the catalog
         /// </summary>
-        Assembly CatalogedAssembly {get;}
+        Assembly Part {get;}
 
         /// <summary>
         /// The api hosts known to the catalog
@@ -46,7 +46,7 @@ namespace Z0
         /// Specifies whether the catalog contains content from an identifid assembly
         /// </summary>
         bool IsIdentified
-            => AssemblyId != 0;
+            => PartId != 0;
 
         /// <summary>
         /// Specifies the number of api hosts described by the catalog
@@ -62,7 +62,7 @@ namespace Z0
         /// The name of the catalog, which should be unique with respect to known catalogs
         /// </summary>
         string CatalogName
-            => AssemblyId.Format();        
+            => PartId.Format();        
     }
     /// <summary>
     /// Characterizes a type that provides access to an operation catalog
@@ -77,9 +77,9 @@ namespace Z0
 
     public sealed class EmptyCatalog : IApiCatalog
     {    
-        public PartId AssemblyId => PartId.None;
+        public PartId PartId => PartId.None;
 
-        public Assembly CatalogedAssembly => Assembly.GetEntryAssembly();
+        public Assembly Part => Assembly.GetEntryAssembly();
 
         public ApiHost[] ApiHosts => new ApiHost[]{};
 

@@ -24,28 +24,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator ==(PartId<P> p1, PartId<P> p2)
-            => p2.Me.Equals(p1.Me);
+            => p1.Id == p2.Id;
 
         [MethodImpl(Inline)]
         public static bool operator !=(PartId<P> p1, PartId<P> p2)
-            => !p1.Me.Equals(p2.Me);
+            => p1.Id != p2.Id;
 
-        protected P Me => (P)this;
-        
+
         [MethodImpl(Inline)]
         public bool Equals(P src)
-            => Me.Equals(src);    
+            => Id == src.Id;
         
         public string Format() 
-            => Me.Formatted;
+            => Id.Format();
 
         public override bool Equals(object src)
             => src is P a && a.Id == Id;
 
         public override int GetHashCode() 
-            => Me.HashCode;
+            => Id.GetHashCode();
 
         public override string ToString()
-            => Me.Formatted;
+            => Format();
     }
 }

@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {        
-    public sealed class BitFields : ApiPart<BitFields, BitFields.C>
+    public sealed class BitFields : ApiPart<BitFields>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.BitFields) {} }
+        
     }
 }

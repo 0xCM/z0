@@ -62,7 +62,7 @@ namespace Z0.Asm
 
         Option<FilePath> EmitLocations(IApiCatalogProvider src)
         {
-            return MemberLocationReport.Create(src.AssemblyId, src.CatalogedAssembly).Save();
+            return MemberLocationReport.Create(src.PartId, src.Part).Save();
         }
 
         void Completed(Option<FilePath> report)
@@ -79,16 +79,16 @@ namespace Z0.Asm
 
             }
 
-            var metadata = src.CatalogedAssembly.CreateClrIndex();
+            var metadata = src.Part.CreateClrIndex();
             var emitter = Context.CatalogEmitter(src.Operations, OnEmission);
 
             var primary = EmitPrimary(exchange, src, emitter);
             if(primary.Length != 0)
-                Completed(ReportEmissions(src.AssemblyId, primary, AsmEmissionKind.Primary));
+                Completed(ReportEmissions(src.PartId, primary, AsmEmissionKind.Primary));
             
             var imm = EmitImm(exchange, src, emitter);
             if(imm.Length != 0)
-                Completed(ReportEmissions(src.AssemblyId, imm, AsmEmissionKind.Imm));
+                Completed(ReportEmissions(src.PartId, imm, AsmEmissionKind.Imm));
             
             Completed(EmitLocations(src));
         }

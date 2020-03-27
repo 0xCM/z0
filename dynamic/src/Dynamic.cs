@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class Dynamic : ApiPart<Dynamic, Dynamic.C>
+    public sealed class Dynamic : ApiPart<Dynamic>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.Dynamic) { } }               
+        
     }
 }

@@ -26,9 +26,10 @@ namespace Z0
             => Resolved.TryFind(r => r.Id == id);
 
         IEnumerable<IApiCatalog> Catalogs
-            => from a in Resolved
-                where a.Catalog.IsIdentified 
-                select a.Catalog;
+            => from part in Resolved
+                let c = part.ApiCatalog()
+                where c.IsIdentified 
+                select c;
     }
 
     public interface IApiComposition<T> :  IApiComposition, IFormattable<T>

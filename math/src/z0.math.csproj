@@ -8,10 +8,9 @@
   <ItemGroup>
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Custom)" />
-    <ProjectReference Include="$(Root)" />
-
     <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Api)" />
 
   </ItemGroup>
 

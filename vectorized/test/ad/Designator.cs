@@ -6,14 +6,8 @@ namespace Z0.Parts
 {        
     using System;
 
-    public sealed class VectorizedTest : ApiPart<VectorizedTest>
+    public sealed class VectorizedTest : Part<VectorizedTest>
     {
-        const PartId Identity = PartId.VectorizedTest;
 
-        public override PartId Id 
-            => Identity;
-
-        public override void Run(params string[] args)
-            => App.Run(args);
     }
 }

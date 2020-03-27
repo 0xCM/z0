@@ -6,9 +6,9 @@
 
 namespace Z0.Parts
 {        
-    public sealed class BitVectors : ApiPart<BitVectors, BitVectors.C>
+    public sealed class BitVectors : Part<BitVectors>
     {
-        public class C : ApiCatalog<C> { public C() : base(PartId.BitVectors) { } }
+
     }
 }
 

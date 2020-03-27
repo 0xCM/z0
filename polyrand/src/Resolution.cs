@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class Polyrand : ApiPart<Polyrand, Polyrand.C>
+    public sealed class Polyrand : ApiPart<Polyrand>
     {        
-        public class C : ApiCatalog<C> { public C() : base(PartId.Polyrand) {} }            
+        
     }
 }

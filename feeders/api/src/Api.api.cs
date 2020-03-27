@@ -44,6 +44,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static OpUri MemberUri(ApiServiceMember src)        
             => OpUri.Define(OpUriScheme.Svc, src.HostUri, src.Method.Name, src.Id);
+
+        /// <summary>
+        /// Creates a (possibly empy) api catalog for the source part
+        /// </summary>
+        /// <param name="src">The part to catalog</param>
+        public static IApiCatalog ApiCatalog(this IPart src)
+            => (IApiCatalog)ApiCatalogProvider.Define(src.Id, src.Owner, new ApiCatalog(src.Owner, src.Id, src.ResourceProvider));
+        
     }
 
 }

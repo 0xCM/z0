@@ -247,7 +247,7 @@ namespace Z0.Asm
             => Archive(ArchiveSubject(host,true));
 
         IAsmFunctionArchive Archive(string subject)
-            => Context.FunctionArchive(Catalog.AssemblyId, subject);
+            => Context.FunctionArchive(Catalog.PartId, subject);
 
         static byte[] ImmSelection => new byte[]{5,9,13};
     }
