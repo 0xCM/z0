@@ -6,12 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(GenericNumerics)" />
-    <ProjectReference Include="$(TestLib)" />  
+    <ProjectReference Include="$(TestLib)" />
     <ProjectReference Include="$(Analogs)" />        
   </ItemGroup>
-
 </Project>

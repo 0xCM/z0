@@ -15,6 +15,50 @@ namespace Z0
 
     public class Polyrand : IPolyrand
     {
+        /// <summary>
+        /// Creates a 64-bit Pcg RNG
+        /// </summary>
+        /// <param name="seed">The inital rng state</param>
+        /// <param name="index">The stream index, if any</param>
+        public static IPolyrand Pcg64(ulong? seed = null, ulong? index = null)
+            => Pcg.Pcg64(seed,index);
+
+        /// <summary>
+        /// Creates a splitmix 64-bit generator
+        /// </summary>
+        /// <param name="seed">The initial state of the generator, if specified; 
+        /// otherwise, the seed is obtained from an entropy source</param>
+        public static IPolyrand SplitMix(ulong? seed = null)
+            => Polyrand.Create(SplitMix64.Define(seed ?? Seed64.Seed00));
+
+        /// <summary>
+        /// Creates an XOrShift 1024 rng
+        /// </summary>
+        /// <param name="seed">The initial state</param>
+        public static IPolyrand XOrStarStar256(ulong[] seed = null)
+            => Polyrand.Create(XOrShift256.Define(seed ?? Seed256.Default));
+
+        /// <summary>
+        /// Creates a new WyHash16 generator
+        /// </summary>
+        /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
+        public static IPolyrand WyHash64(ulong? seed = null)
+            => Polyrand.Create(new WyHash64(seed ?? Seed64.Seed00));
+
+        /// <summary>
+        /// Creates an XOrShift 1024 rng
+        /// </summary>
+        /// <param name="seed">The initial state</param>
+        public static IPolyrand XOrShift1024(ulong[] seed = null)
+            => Polyrand.Create(new XOrShift1024(seed ?? Seed1024.Default));
+
+        /// <summary>
+        /// Creates a polyrand rng from a point source
+        /// </summary>
+        /// <param name="rng">The source rng</param>
+        public static IPolyrand FromSource(IRngBoundPointSource<ulong> src)        
+            => Polyrand.Create(src);
+
         readonly IRngBoundPointSource<ulong> Points;
 
         public Option<IRngNav> Navigator {get;}

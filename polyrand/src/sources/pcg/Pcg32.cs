@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Pcg32(ulong s0, ulong? index = null)
         {
-            Init(s0, index ?? Pcg.DefaultIndex);
+            Init(s0, index ?? PcgInternal.DefaultIndex);
         }
 
         ulong State;
@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Advance(ulong delta)  
-            => State = Pcg.advance(State, delta, Multiplier, Index);
+            => State = PcgInternal.advance(State, delta, Multiplier, Index);
 
         [MethodImpl(Inline)]
         public void Retreat(ulong count)
@@ -80,7 +80,7 @@ namespace Z0
             => $"{State}[{Index}]";
 
         const ulong Multiplier 
-            = Pcg.DefaultMultiplier;
+            = PcgInternal.DefaultMultiplier;
             
         /// <summary>
         /// Rotates bits in the source rightwards by a specified offset

@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
 
-    public interface IValidationContext : IPolyrandProvider, IAppMsgSink, IAppContext
+    public interface IValidationContext : ITestContext //IPolyrandProvider, IAppMsgSink, IAppContext
     {
-        void ReportOutcome(string casename, bool succeeded, TimeSpan duration, AppMsg msg = null);
+        //void ReportOutcome(string casename, bool succeeded, TimeSpan duration, AppMsg msg = null);
 
-        Type HostType {get;}
+        //Type HostType {get;}
 
-        string CaseName(ISFuncApi f)
+        string ITestContext.CaseName(ISFuncApi f)
             => Validity.testcase(HostType, f);
     }
 }

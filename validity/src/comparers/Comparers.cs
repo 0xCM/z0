@@ -8,10 +8,6 @@ namespace Z0
 
     public static class SFMatchServices
     {
-        public static ISVValidatorD<T> Decomposer<T>(this IValidationContext context)
-            where T : unmanaged
-             => new SVValidatorD<T>(context);
-
         public static ISVValidatorD<T> Decomposer<T>(this ITestContext context)
             where T : unmanaged
              => new SVValidatorD<T>(context);
@@ -23,10 +19,6 @@ namespace Z0
             where T : unmanaged
                 => new SFOpMatch1<T>(context);
 
-        // public static ISFComparer<T,T> UnaryOpComparer<T>(this ITestContext context, bool xzero, T t = default)
-        //     where T : unmanaged
-        //         => new SUnaryOpComparer<T>(context,xzero);
-
         public static ISFMatch<T,T,T> BinaryOpMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
                 => new SBinaryOpComparer<T>(context);
@@ -34,10 +26,6 @@ namespace Z0
         public static ISFMatch<T,T,T> BinaryOpMatch<T>(this ITestContext context, bool xzero, T t = default)
             where T : unmanaged
             => new SBinaryOpComparer<T>(context,xzero);
-
-        // public static ISFComparer<T,T,T,T> TernaryOpComparer<T>(this ITestContext context, T t = default)
-        //     where T : unmanaged
-        //         => new STernaryOpComparer<T>(context);
 
         public static ISFMatch<T,T,T,T> TernaryOpMatch<T>(this ITestContext context, bool xzero = false, T t = default)
             where T : unmanaged

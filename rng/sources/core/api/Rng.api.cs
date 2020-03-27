@@ -9,30 +9,8 @@ namespace Z0
 
     using static Polyfun;
 
-    public static class Rng
+    public static class RngPoints
     {
-        /// <summary>
-        /// Creates a polyrand rng from a point source
-        /// </summary>
-        /// <param name="rng">The source rng</param>
-        public static IPolyrand polyrand(IRngBoundPointSource<ulong> src)        
-            => Polyrand.Create(src);
-
-        /// <summary>
-        /// Creates a polyrand based on a specified source
-        /// </summary>
-        /// <param name="src">The random source</param>
-        [MethodImpl(Inline)]
-        public static IPolyrand polynav(IRngNav<ulong> src)
-            => Polyrand.Create(src);
-
-        /// <summary>
-        /// Creates a new WyHash16 generator
-        /// </summary>
-        /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
-        public static IPolyrand WyHash64(ulong? seed = null)
-            => polyrand(new WyHash64(seed ?? Seed64.Seed00));
-
         /// <summary>
         /// Creates a 128-bit xorshift rng initialized with a specified seed
         /// </summary>
@@ -47,18 +25,43 @@ namespace Z0
             => new XOrShift128(state.Slice(offset));
 
         /// <summary>
+        /// Creates a new WyHash16 generator
+        /// </summary>
+        /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
+        /// <param name="increment">The generator step size</param>
+        public static IRngBoundPointSource<ushort> WyHash16(ushort? seed = null, ushort? increment = null)
+            => new WyHash16(seed ?? BitConverter.ToUInt16(Entropy.Bytes(2)),increment);
+    }
+
+    public static class Rng
+    {
+        /// <summary>
+        /// Creates a polyrand rng from a point source
+        /// </summary>
+        /// <param name="rng">The source rng</param>
+        public static IPolyrand polyrand(IRngBoundPointSource<ulong> src)        
+            => Polyrand.FromSource(src);
+
+        /// <summary>
+        /// Creates a new WyHash16 generator
+        /// </summary>
+        /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
+        public static IPolyrand WyHash64(ulong? seed = null)
+            => Polyrand.Create(new WyHash64(seed ?? Seed64.Seed00));
+
+        /// <summary>
         /// Creates an XOrShift 1024 rng
         /// </summary>
         /// <param name="seed">The initial state</param>
         public static IPolyrand XOrShift1024(ulong[] seed = null)
-            => polyrand(new XOrShift1024(seed ?? Seed1024.Default));
+            => Polyrand.Create(new XOrShift1024(seed ?? Seed1024.Default));
 
         /// <summary>
         /// Creates an XOrShift 1024 rng
         /// </summary>
         /// <param name="seed">The initial state</param>
         public static IPolyrand XOrStarStar256(ulong[] seed = null)
-            => polyrand(XOrShift256.Define(seed ?? Seed256.Default));
+            => Polyrand.Create(XOrShift256.Define(seed ?? Seed256.Default));
  
         /// <summary>
         /// Creates a splitmix 64-bit generator
@@ -66,15 +69,7 @@ namespace Z0
         /// <param name="seed">The initial state of the generator, if specified; 
         /// otherwise, the seed is obtained from an entropy source</param>
         public static IPolyrand SplitMix(ulong? seed = null)
-            => polyrand(SplitMix64.Define(seed ?? Seed64.Seed00));
-
-        /// <summary>
-        /// Creates a 32-bit Pcg RNG
-        /// </summary>
-        /// <param name="seed">The inital rng state</param>
-        /// <param name="index">The stream index, if any</param>
-        public static IRngNav<uint> Pcg32(ulong? seed = null, ulong? index = null)
-            => Z0.Pcg32.Define(seed ?? Seed64.Seed00, index);        
+            => Polyrand.Create(SplitMix64.Define(seed ?? Seed64.Seed00));
 
         /// <summary>
         /// Creates a 64-bit Pcg RNG
@@ -82,44 +77,7 @@ namespace Z0
         /// <param name="seed">The inital rng state</param>
         /// <param name="index">The stream index, if any</param>
         public static IPolyrand Pcg64(ulong? seed = null, ulong? index = null)
-            => polynav(Z0.Pcg64.Define(seed ?? Seed64.Seed00, index));
+            => Pcg.Pcg64(seed,index);
 
-        /// <summary>
-        /// Creates a new WyHash16 generator
-        /// </summary>
-        /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
-        /// <param name="increment">The generator step size</param>
-        public static IRngBoundPointSource<ushort> WyHash16(ushort? seed = null, ushort? increment = null)
-            => new WyHash16(seed ?? BitConverter.ToUInt16(Entropy.Bytes(2)),increment);
-
-        /// <summary>
-        /// Creates a 64-bit Pcg RNG suite predicated on an array of seed and stream indices
-        /// </summary>
-        /// <param name="seed">The initial state of a generator</param>
-        /// <param name="index">The stream index</param>
-        public static IRngNav<uint>[] Pcg32Suite(params (ulong seed, ulong index)[] specs)
-        {
-            var suite = new IRngNav<uint>[specs.Length];
-            for(var i=0; i < suite.Length; i++)
-            {
-                (var seed, var index) = specs[i];
-                suite[i] = Pcg32(seed, index);
-            }
-            return suite;
-        }
-
-        /// <summary>
-        /// Creates a 32-bit Pcg RNG suite predicated on spans of seeds and stream indices
-        /// </summary>
-        /// <param name="seeds">A span of seed values</param>
-        /// <param name="indices">A span of index values</param>
-        public static Span<IRngNav<uint>> Pcg32Suite(Span<ulong> seeds, Span<ulong> indices)        
-        {
-            var count = seeds.Length;
-            var g = Spans.alloc<IRngNav<uint>>(count);
-            for(var i=0; i<count; i++)
-                g[i] = Pcg32(seeds[i], indices[i]);
-            return g;
-        }  
     }
 }

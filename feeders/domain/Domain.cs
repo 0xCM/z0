@@ -18,6 +18,22 @@ namespace Z0
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
 
+        /// <summary>
+        /// Appends a space to the source content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        internal static string rspace(object content)
+            => $"{content} ";
+
+        /// <summary>
+        /// Prepends a space to the source content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        [MethodImpl(Inline)]
+        internal static string lspace(object content)
+            => $" {content}";
+
+
     }
 
     public static partial class XDomain    

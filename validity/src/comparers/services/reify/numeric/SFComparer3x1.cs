@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
 
-    public interface IValidator : IService<IValidationContext>
-    {
-
-    }
-
-    public interface IValidator<T> : IValidator
+    class STernaryPredMatch<T> : SFMatch<T,T,T,bit>, ISFMatch<T,T,T,bit>
         where T : unmanaged
-    {   
-        
-    }
+    {
+        public STernaryPredMatch(ITestContext context, bool xzero = false)
+            : base(context,xzero)
+        {
+            
+        }
 
-
+    }    
 }

@@ -5,17 +5,15 @@
 namespace Z0
 {
     using System;
-
-    public interface IValidator : IService<IValidationContext>
-    {
-
-    }
-
-    public interface IValidator<T> : IValidator
+    
+    class SBinaryPredMatch<T> : SFComparer<T,T,bit>, ISFMatch<T,T,bit>
         where T : unmanaged
-    {   
-        
-    }
+    {
+        public SBinaryPredMatch(ITestContext context, bool xzero = false)
+            : base(context,xzero)
+        {
+            
+        }
 
-
+    }    
 }

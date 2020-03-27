@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
-
     <ProjectReference Include="$(BitStrings)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />

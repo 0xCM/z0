@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
 
-    public interface IValidator : IService<IValidationContext>
-    {
-
-    }
-
-    public interface IValidator<T> : IValidator
+    class SFOpMatch3<T> : SFMatch<T,T,T,T>, ISFMatch<T,T,T,T>
         where T : unmanaged
-    {   
-        
+    {
+        public SFOpMatch3(ITestContext context, bool xzero = false)
+            : base(context,xzero)
+        {
+            
+        }
+
     }
-
-
 }

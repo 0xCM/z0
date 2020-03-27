@@ -12,6 +12,8 @@
     <ProjectReference Include="$(Analogs)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(Polyrand)" />
+
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Permute)" />
     <ProjectReference Include="$(Logix)" />

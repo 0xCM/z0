@@ -29,7 +29,6 @@ namespace Z0
 
     public static class Validity
     {
-        //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
         const char Sep = UriDelimiters.FS;
 
         /// <summary>

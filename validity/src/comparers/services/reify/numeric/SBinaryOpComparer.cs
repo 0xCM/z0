@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
 
-    public interface IValidator : IService<IValidationContext>
-    {
-
-    }
-
-    public interface IValidator<T> : IValidator
+    class SBinaryOpComparer<T> : SFComparer<T,T,T>, ISFMatch<T,T,T>
         where T : unmanaged
-    {   
-        
+    {
+        public SBinaryOpComparer(ITestContext context, bool xzero = false)
+            : base(context,xzero)
+        {
+            
+        }
+
     }
-
-
 }

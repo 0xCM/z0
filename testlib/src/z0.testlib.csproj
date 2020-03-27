@@ -10,9 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Custom)" />
-    <ProjectReference Include="$(RngSourced)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Time)" />
   </ItemGroup>

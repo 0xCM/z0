@@ -22,7 +22,6 @@ namespace Z0
                 var m1 = ops.mod(a);
                 Claim.eq(m0,m1);
             }
-
         }
 
         public void mod18()

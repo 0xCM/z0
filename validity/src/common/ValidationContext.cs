@@ -20,11 +20,10 @@ namespace Z0
         
         ConcurrentQueue<SFCaseResult> Outcomes {get;}
 
+        public ITestConfig Config  => TestConfigDefaults.Default();
+
         public static IValidationContext From(ITestContext context)
             => new ValidationContext(context.HostType, context as IAppMsgSink, context.Random, context.ReportOutcome);
-
-        public static IValidationContext Define(Type host, IAppMsgSink sink, IPolyrand random)
-            => new ValidationContext(host,sink, random);
 
         public ValidationContext(Type host, IAppMsgSink sink, IPolyrand random, Action<TestCaseOutcome> relay = null)
         {
@@ -40,11 +39,19 @@ namespace Z0
 
         void BlackHole(TestCaseOutcome outcome) {}
 
-        public void ReportOutcome(string casename, bool succeeded, TimeSpan duration, AppMsg msg = null)    
+        public void ReportOutcome(string casename, bool succeeded, TimeSpan duration)    
         {
-            var result = new SFCaseResult(casename, succeeded, duration, msg);
+            var result = new SFCaseResult(casename, succeeded, duration);
             Outcomes.Enqueue(result);
             Relay(result);
+        }
+
+        public void ReportBenchmark(string name, long opcount, TimeSpan duration)
+        {}
+
+        public void Dispose()
+        {
+            
         }
     }
 }

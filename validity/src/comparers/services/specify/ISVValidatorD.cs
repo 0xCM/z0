@@ -4,10 +4,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Root;
-    using static Nats;
-    using static vgeneric;
-
     using C = OpClass;
 
     public interface ISVValidatorD<T> : IValidator<T>
@@ -26,7 +22,7 @@ namespace Z0
             where F : ISVBinaryOp256DApi<T>;
     }
 
-    public interface ISVValidatorD :  IValidator
+    public interface ISVValidatorD : IValidator
     {
         void CheckUnaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged

@@ -49,7 +49,7 @@ namespace Z0.Asm.Check
         
         static IAsmContext CreateContext()
         {
-            var random = Rng.Pcg64(Seed64.Seed05);                
+            var random = Polyrand.Pcg64(Seed64.Seed05);                
             term.print($"Created {random.RngKind} random source");
 
             var settings = LoadSettings();

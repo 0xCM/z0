@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Pcg64(ulong s0, ulong? index = null)
         {
-            Init(s0, index ?? Pcg.DefaultIndex);
+            Init(s0, index ?? PcgInternal.DefaultIndex);
         }
 
         ulong State;
@@ -61,7 +61,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Advance(ulong count)  
-            => State = Pcg.advance(State, count, Multiplier, Index);
+            => State = PcgInternal.advance(State, count, Multiplier, Index);
 
         [MethodImpl(Inline)]
         public void Retreat(ulong count)
@@ -82,7 +82,7 @@ namespace Z0
         public override string ToString()
             => $"{State}[{Index}]";
 
-        const ulong Multiplier = Pcg.DefaultMultiplier;
+        const ulong Multiplier = PcgInternal.DefaultMultiplier;
 
         /// <summary>
         /// Produces a pseudorandom output predicated on a state

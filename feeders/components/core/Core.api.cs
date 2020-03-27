@@ -69,5 +69,18 @@ namespace Z0
 
         public static void error(Exception e)
             => Console.Error.WriteLine(e);
+
+        public static void error(object src)
+            => Console.Error.WriteLine(src);
+
+
+        [MethodImpl(Inline)]
+        public static bool empty(string src)
+            => string.IsNullOrWhiteSpace(src);
+
+        [MethodImpl(Inline)]
+        public static bool nonempty(string src)
+            => !string.IsNullOrWhiteSpace(src);
+
     }
 }
