@@ -7,9 +7,10 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Canonical)" />
+
     <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Kinds)" />

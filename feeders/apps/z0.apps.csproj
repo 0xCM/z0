@@ -7,14 +7,15 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
-    <ProjectReference Include="$(Errors)" />
-    <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Monadic)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Canonical)" />
+
+    <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Collective)" />    
+    <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Domain)" />
-    <ProjectReference Include="$(Collective)" />    
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />
   </ItemGroup>

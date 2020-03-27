@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Fixed;
-    using static Widths;
+    using static Widths;    
 
     public interface IFixedStreamProvider<F> : IStreamProvider<F>
         where F : unmanaged, IFixed

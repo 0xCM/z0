@@ -31,6 +31,18 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         internal static Type EffectiveType(this Type src)
             => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
+
+        [MethodImpl(Inline)]
+        internal static IEnumerable<T> seq<T>(params T[] src)
+            => src;
+
+        [MethodImpl(Inline)]
+        internal static int bitsize<T>()            
+            => Unsafe.SizeOf<T>()*8;
+
+        [MethodImpl(Inline)]
+        internal static int size<T>()
+            => Unsafe.SizeOf<T>();
     }
 
     public static partial class XTend

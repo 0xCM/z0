@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Reflection;
 
     using static Components;
 
@@ -16,7 +14,7 @@ namespace Z0
         TypeIdentity DefineIdentity(Type src);  
 
         IEnumerable<Type> Identifiable 
-            => core.seq<Type>();
+            => seq<Type>();
 
         IIdentified IIdentifier<Type>.Identify(Type src)
             => DefineIdentity(src);
@@ -34,7 +32,7 @@ namespace Z0
         TypeIdentity DefineIdentity();
         
         IEnumerable<Type> ITypeIdentityProvider.Identifiable
-            => core.seq<Type>();
+            => seq<Type>();
 
         TypeIdentity ITypeIdentityProvider.DefineIdentity(Type src)
             => DefineIdentity();

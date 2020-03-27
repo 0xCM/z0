@@ -192,10 +192,6 @@ namespace Z0
         bool ITimeInterval.RightInclusive
             => true;
 
-        /// <summary>
-        /// Returns the range intersection where, if empty, none is returned
-        /// </summary>
-        /// <param name="src"></param>
         public Option<DateRange> Intersect(DateRange src)
         {
             var dates = GetDates().Intersect(src.GetDates()).ToList();

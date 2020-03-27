@@ -7,11 +7,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
-    <ProjectReference Include="$(Monadic)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Canonical)" />
+    
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Domain)" />
-
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Textual)" />

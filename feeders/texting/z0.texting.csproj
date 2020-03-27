@@ -7,11 +7,13 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Monadic)" />
-    <ProjectReference Include="$(Symbolic)" />
+
     <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Collective)" />    
+    <ProjectReference Include="$(Symbolic)" />
+    
     <ProjectReference Include="$(Domain)" />
 
   </ItemGroup>

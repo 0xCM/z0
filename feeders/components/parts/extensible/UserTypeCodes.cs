@@ -17,7 +17,7 @@ namespace Z0
             where S : ITypeCodeSource
         {
             if(!source.AssignedCodes.Contains(id))
-               Unsupported.raise<T>();
+               throw new Exception($"I dont understand {typeof(T)}");
             return new UserTypeCode<T>(id);
         }
     }
