@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
     
-    using static Root;
+    using static TestLib;
 
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest, ITestControl
         where U : UnitTest<U>

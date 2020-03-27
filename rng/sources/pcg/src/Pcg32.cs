@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Polyfun;
 
     public class Pcg32 : IRngNav<uint>
     {
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Pcg32(ulong s0, ulong? index = null)
         {
-            Init(s0, index ?? PcgShared.DefaultIndex);
+            Init(s0, index ?? Pcg.DefaultIndex);
         }
 
         ulong State;
@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Next(uint max)
-            => Next().contract(max);
+            => Next().Contract(max);
 
         [MethodImpl(Inline)]
         public uint Next(uint min, uint max)        
@@ -47,11 +47,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Advance(ulong delta)  
-            => State = PcgShared.Advance(State, delta, Multiplier, Index);
+            => State = Pcg.advance(State, delta, Multiplier, Index);
 
         [MethodImpl(Inline)]
         public void Retreat(ulong count)
-            => Advance(math.negate(count));        
+            => Advance(Numeric.negate(count));        
 
         /// <summary>
         /// Advances the generator to the next state and returns the prior state for consumption
@@ -80,7 +80,7 @@ namespace Z0
             => $"{State}[{Index}]";
 
         const ulong Multiplier 
-            = PcgShared.DefaultMultiplier;
+            = Pcg.DefaultMultiplier;
             
         /// <summary>
         /// Rotates bits in the source rightwards by a specified offset

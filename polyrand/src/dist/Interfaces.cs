@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     
+    
     public interface IDistributionSpec
     {
         DistKind DistKind {get;}        

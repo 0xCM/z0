@@ -19,7 +19,7 @@ namespace Z0
         {
             var dst = NatSpan.alloc<N, T>();
             for(var i=0; i<dst.Length; i++)
-                dst[i] = Scale.contract(src[i],max[i]);
+                dst[i] = Numeric.contract(src[i],max[i]);
             return dst;
         }
 

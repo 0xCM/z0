@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     public static class Seed32
-    {    
+    {            
 
         public static uint Seed00 => (uint)Seed64.Lookup(0);
 

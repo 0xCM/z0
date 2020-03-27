@@ -9,13 +9,8 @@ namespace Z0
     
     using static Tuples;
 
-    /// <summary>
-    /// Defines tuple api surface 
-    /// </summary>
-    public static class Tuples
+    partial class Tuples
     {        
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
-
         /// <summary>
         /// Allocates an homogenous pair store
         /// </summary>

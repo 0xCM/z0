@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Security.Cryptography;
 
-    using static Root;
+    using static Polyfun;
 
     public static class Seed1024
     {
@@ -50,16 +50,16 @@ namespace Z0
            };
  
         public static ulong[] TestSeed 
-            = items(
+            = Arrays.from(
                 FixedGuids[0],FixedGuids[1],FixedGuids[2],FixedGuids[3],
                 FixedGuids[4],FixedGuids[5],FixedGuids[6],FixedGuids[7]).ToU64Array();
                
         public static ulong[] AppSeed 
-            = items(FixedGuids[16],FixedGuids[17],FixedGuids[18],FixedGuids[19],
+            = Arrays.from(FixedGuids[16],FixedGuids[17],FixedGuids[18],FixedGuids[19],
                 FixedGuids[20],FixedGuids[21],FixedGuids[22],FixedGuids[23]).ToU64Array();
 
         public static ulong[] Default
-            = items(FixedGuids[24],FixedGuids[25],FixedGuids[26],FixedGuids[27],
+            = Arrays.from(FixedGuids[24],FixedGuids[25],FixedGuids[26],FixedGuids[27],
                 FixedGuids[28],FixedGuids[29],FixedGuids[30],FixedGuids[31]).ToU64Array();
 
         static ulong[] Entropy()

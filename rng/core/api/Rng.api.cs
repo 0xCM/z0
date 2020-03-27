@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Polyfun;
 
     public static class Rng
     {
@@ -116,7 +116,7 @@ namespace Z0
         public static Span<IRngNav<uint>> Pcg32Suite(Span<ulong> seeds, Span<ulong> indices)        
         {
             var count = seeds.Length;
-            var g = alloc<IRngNav<uint>>(count);
+            var g = Spans.alloc<IRngNav<uint>>(count);
             for(var i=0; i<count; i++)
                 g[i] = Pcg32(seeds[i], indices[i]);
             return g;

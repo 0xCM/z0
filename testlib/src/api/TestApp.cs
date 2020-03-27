@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Concurrent;
     
-    using static Root;    
+    using static TestLib;    
     
     /// <summary>
     /// Base type for test applications
@@ -106,7 +106,7 @@ namespace Z0
                     ExecExplicit(et, host.Name,results);
                 else
                 {
-                    iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));                                    
+                    Streams.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));                                    
                     PostBenchResult(control.TakeBenchmarks().ToArray());
                 }                
                 clock.Stop();
@@ -151,7 +151,7 @@ namespace Z0
 
         static AppMsg PreCaseMsg(string testName, DateTime start)
         {
-            var fields = items(
+            var fields = Arrays.from(
                 FormatName(testName), 
                 FormatStatus("executing"), 
                 DurationPlaceholder, 
@@ -163,7 +163,7 @@ namespace Z0
 
         static AppMsg AftCaseMsg(string testName, TimeSpan elapsed, DateTime start, DateTime end)
         {
-            var fields = items(
+            var fields = Arrays.from(
                 FormatName(testName), 
                 FormatStatus("executed"), 
                 Format(elapsed), 
@@ -177,7 +177,7 @@ namespace Z0
 
         static AppMsg AftUnitMsg(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
         {
-            var fields = items(
+            var fields = Arrays.from(
                 FormatName(hosturi), 
                 FormatStatus("completed"), 
                 Format(elapsed), 
@@ -233,7 +233,7 @@ namespace Z0
         }
 
         void Run(bool concurrent, params string[] filters)
-            => iter(Hosts(), h =>  Run(h,filters), concurrent);
+            => Streams.iter(Hosts(), h =>  Run(h,filters), concurrent);
         
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
@@ -281,7 +281,7 @@ namespace Z0
         Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
         {
             var clock = counter(false);
-            var messages = array<AppMsg>();
+            var messages = Arrays.empty<AppMsg>();
             var casename = unit.TestCaseName();
 
             try
@@ -303,7 +303,7 @@ namespace Z0
             finally
             {            
                 AppErrorMsg.emit(Context, messages);
-                iter(messages.Where(m => !m.Displayed), term.print);
+                Streams.iter(messages.Where(m => !m.Displayed), term.print);
             }
 
             return clock;
@@ -347,7 +347,7 @@ namespace Z0
             finally
             {     
                 AppErrorMsg.emit(Context, collected);
-                iter(collected.Where(m => !m.Displayed), term.print);       
+                Streams.iter(collected.Where(m => !m.Displayed), term.print);       
                 //print(messages);
             }
             return exectime;

@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
+    using static Polyfun;
+    using static CastNumeric;
 
     public static class RngPow2
     {
@@ -50,6 +51,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Pow2Exp<T>(this IPolyrand random, T t = default)
             where T : unmanaged
-                => random.Single(0, bitsize<T>());
+                => random.Single(0, core.bitsize<T>());
     }
 }

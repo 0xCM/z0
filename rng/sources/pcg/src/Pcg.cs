@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
 
-    public static class PcgShared
+    static class Pcg
     {
         public const ulong DefaultMultiplier = 6364136223846793005;
 
         public const ulong DefaultIndex = 1442695040888963407;
 
-        public static ulong Advance(ulong state, ulong delta, ulong multiplier, ulong index)
+        public static ulong advance(ulong state, ulong delta, ulong multiplier, ulong index)
         {
             ulong factor = 1u;
             ulong increment = 0u;

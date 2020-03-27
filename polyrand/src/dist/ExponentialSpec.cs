@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Polyfun;
 
     /// <summary>
     /// Characterizes a Exponential (normal) distribution

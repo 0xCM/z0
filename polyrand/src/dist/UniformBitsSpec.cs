@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Polyfun;
 
     /// <summary>
     /// Defines operations specific to uniform bit distributions

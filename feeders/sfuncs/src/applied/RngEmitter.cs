@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static SFuncs;
 
     public readonly struct NumericRngEmitter<T> : ISEmitter<T>
         where T : unmanaged
@@ -58,7 +58,7 @@ namespace Z0
 
         public const string Name = "segmented_emitter";
 
-        public static int Width => bitsize<F>();
+        public static int Width => core.bitsize<F>();
 
         public static NumericKind NumericKind 
         {

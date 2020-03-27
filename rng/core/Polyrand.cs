@@ -8,8 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Root;
+    using static Polyfun;
     using static As;
+    using static CastNumeric;
+    using static Literals;
 
     public class Polyrand : IPolyrand
     {
@@ -36,7 +38,7 @@ namespace Z0
         Polyrand(IRngNav<ulong> Points)
         {
             this.Points = Points;            
-            this.Navigator = some(Points as IRngNav);
+            this.Navigator = Option.some(Points as IRngNav);
         }
 
         public RngKind RngKind 
@@ -455,9 +457,9 @@ namespace Z0
                 return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
             else
             {
-                var min = NumericTypes.signed<T>() ? gmath.negate(gmath.sar(maxval<T>(), 1)) : minval<T>();                        
+                var min = NumericTypes.signed<T>() ? Numeric.negate(Numeric.sar(maxval<T>(), 1)) : minval<T>();                        
                 
-                var max = NumericTypes.signed<T>() ? gmath.sar(maxval<T>(), 1)  : maxval<T>();
+                var max = NumericTypes.signed<T>() ? Numeric.sar(maxval<T>(), 1)  : maxval<T>();
 
                 return (min,max);
             }            

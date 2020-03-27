@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
 
     /// <summary>
     /// Facilities deterministic/repeatable executions of pseudorandom processes
@@ -187,7 +184,7 @@ namespace Z0
             Guid.Parse("8cf3136f-6af6-4a4d-9cbf-013602b6103d"),
         };
 
-        public static ulong[] Default = items(guids[18],guids[19]).ToU64Array();        
+        public static ulong[] Default = Arrays.from(guids[18],guids[19]).ToU64Array();        
 
         static string enquote(object content)
             => "\"" + content + "\"";
@@ -197,7 +194,7 @@ namespace Z0
                 => enquote(Guid.NewGuid().ToString());
             
             for(var i = 0; i< 200; i++)
-                term.inform($"Guid.Parse({guid()}),");
+                Console.WriteLine($"Guid.Parse({guid()}),");
         }
     }
 }

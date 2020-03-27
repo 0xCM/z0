@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static TestLib;
 
     enum LogWriteMode
     {
@@ -86,7 +86,7 @@ namespace Z0
                 if(header)
                     dst.AppendLine(string.Join(delimiter, records[0].HeaderNames));
                 
-                iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
+                Streams.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
             }
 
             FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)

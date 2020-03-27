@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Polyfun;
 
     public static class Seed64
     {            
@@ -20,8 +20,8 @@ namespace Z0
                 return Cells.cell<ulong>(RawBytes, (int)(i*8));
             else
             {               
-                AppErrors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 
-                return 0;
+                //AppErrors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 
+                    throw new Exception($"bad");                
             }
         }
                             

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
         
-    using static Root;
+    using static TestLib;
     using static Checks;
     using static AppErrorMsg;
     
@@ -333,7 +333,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static void numeq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged 
-                => iter(lhs,rhs,numeq);
+                => Spans.iter(lhs,rhs,numeq);
 
         /// <summary>
         /// Asserts content equality for two spans with numeric content
@@ -346,7 +346,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static void numeq<T>(Span<T> lhs, Span<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
-                => iter(lhs,rhs,numeq);
+                => Spans.iter(lhs,rhs,numeq);
 
         public static bool neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => !lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, Equal(lhs, rhs, caller, file, line));
@@ -480,6 +480,5 @@ namespace Z0
 
         public static void exists(FolderPath path,[Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => path.Exists().IfNone(() => throw AppException.Define($"The folder {path} does not exist", caller, file,line));
-
     }
 }

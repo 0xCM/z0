@@ -2,24 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.RngPcg)]
+[assembly: PartId(PartId.TestLib)]
 
 namespace Z0.Parts
-{        
-    public sealed class RngPcg : Part<RngPcg>
-    {
-
-
+{
+    public sealed class TestLib : Part<TestLib>
+    {        
+        
     }
 }
 
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
-    public static partial class RngPcg
+    public static partial class TestLib
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;   
     }
+
 }

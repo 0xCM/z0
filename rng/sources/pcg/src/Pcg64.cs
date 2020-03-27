@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
-    using static math;
+    using static Polyfun;
 
     /// <summary>
     /// Implemements a 64-bit PCG generator
@@ -27,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Pcg64(ulong s0, ulong? index = null)
         {
-            Init(s0, index ?? PcgShared.DefaultIndex);
+            Init(s0, index ?? Pcg.DefaultIndex);
         }
 
         ulong State;
@@ -54,7 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Next().contract(max);
+            => Next().Contract(max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)        
@@ -62,11 +61,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Advance(ulong count)  
-            => State = PcgShared.Advance(State, count, Multiplier, Index);
+            => State = Pcg.advance(State, count, Multiplier, Index);
 
         [MethodImpl(Inline)]
         public void Retreat(ulong count)
-            => Advance(negate(count));        
+            => Advance(Numeric.negate(count));        
 
         void Init(ulong s0, ulong index)
         {
@@ -83,7 +82,7 @@ namespace Z0
         public override string ToString()
             => $"{State}[{Index}]";
 
-        const ulong Multiplier = PcgShared.DefaultMultiplier;
+        const ulong Multiplier = Pcg.DefaultMultiplier;
 
         /// <summary>
         /// Produces a pseudorandom output predicated on a state

@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
+    using static Polyfun;
+    using static CastNumeric;
 
     /// <summary>
     /// Defines a permanent/immutable seed store to support pseudorandom reproducibility
@@ -103,8 +104,8 @@ namespace Z0
                 return offset;
             else
             {
-                AppErrors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
-                return 0;
+                throw new Exception($"bad");
+                //AppErrors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
             }
         }
 

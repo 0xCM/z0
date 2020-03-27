@@ -14,6 +14,5 @@ namespace Z0
         IEnumerable<BenchmarkRecord> TakeBenchmarks();
 
         IEnumerable<TestCaseRecord> TakeOutcomes();
-    }
-    
+    }    
 }

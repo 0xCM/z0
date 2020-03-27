@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static As;
-    using static Tuples;    
+    using static Numeric;
 
-    public static class Scale
+    partial class Numeric
     {
         [MethodImpl(Inline)]
         public static T contract<T>(T src, T max)
@@ -29,10 +29,6 @@ namespace Z0
             else
                 throw Unsupported.define<T>();
         }
-
-        [MethodImpl(Inline)]
-        internal static ulong mulhi(ulong x, ulong y)
-            => Bmi2.X64.MultiplyNoFlags(x,y);
 
         /// <summary>
         /// Evenly projects points from the interval [0,2^8 - 1] onto the interval [0,max]
@@ -68,10 +64,10 @@ namespace Z0
         /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline)]
         static ulong contract(ulong src, ulong max)
-            => Scale.mulhi(src,max);
-   }
+            => Numeric.mulhi(src,max);
+    }
 
-    public static class ScaleExtend
+    partial class XNumeric
     {
         /// <summary>
         /// Evenly projects points from the interval [0,2^31 - 1] onto the interval [0,max]
@@ -79,7 +75,7 @@ namespace Z0
         /// <param name="src">The value to contract</param>
         /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline)]
-        public static uint contract(this uint src, uint max)
+        public static uint Contract(this uint src, uint max)
             => (uint)(((ulong)src * (ulong)max) >> 32);
 
         /// <summary>
@@ -88,7 +84,30 @@ namespace Z0
         /// <param name="src">The value to contract</param>
         /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline)]
-        public static ulong contract(this ulong src, ulong max)
-            => Scale.mulhi(src,max); 
+        public static ulong Contract(this ulong src, ulong max)
+            => Numeric.mulhi(src,max); 
+
+        /// <summary>
+        /// Determines whether an interval contains a specified point
+        /// </summary>
+        /// <param name="src">The source interval</param>
+        /// <param name="point">The point to test</param>
+        /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
+        [MethodImpl(Inline)]
+        public static bool Contains<T>(this Interval<T> src, T point)
+            where T : unmanaged
+        {
+            switch(src.Kind)
+            {
+                case IntervalKind.Closed:
+                    return Numeric.gteq(point, src.Left) && Numeric.lteq(point, src.Right);
+                case IntervalKind.Open:
+                    return Numeric.gt(point, src.Left) && Numeric.lt(point, src.Right);
+                case IntervalKind.LeftClosed:
+                    return Numeric.gteq(point, src.Left) && Numeric.lt(point, src.Right);
+                default:        
+                    return Numeric.gt(point, src.Left) && Numeric.lteq(point, src.Right);
+            }
+        }
     }
 }

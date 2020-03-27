@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Root;
+    using static TestLib;
     
     /// <summary>
     /// Defines a benchmark measure for an operator

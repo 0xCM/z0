@@ -3,7 +3,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Polyfun;
 
     /// <summary>
     /// Implements an XOrShift generator
@@ -67,7 +67,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Next().contract(max);
+            => Next().Contract(max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)        

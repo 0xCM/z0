@@ -2,24 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.RngPcg)]
-
-namespace Z0.Parts
-{        
-    public sealed class RngPcg : Part<RngPcg>
-    {
-
-
-    }
-}
-
 namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    public static partial class RngPcg
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
+        
+    partial class Numeric
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        [MethodImpl(Inline)]
+        public static ulong mulhi(ulong x, ulong y)
+            => Bmi2.X64.MultiplyNoFlags(x,y);
     }
 }

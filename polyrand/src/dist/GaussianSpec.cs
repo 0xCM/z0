@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Polyfun;
+    using static CastNumeric;
 
     /// <summary>
     /// Defines operations specific to Gaussian distributions
@@ -86,7 +87,7 @@ namespace Z0
             get
             {
                 var sig = convert<T,double>(StdDev);
-                require(sig != 0);
+                core.require(sig != 0);
 
                 return convert<T>(sig*sig);
             }            
@@ -98,7 +99,7 @@ namespace Z0
             get
             {
                 var sig = convert<T,double>(StdDev);
-                require(sig != 0);
+                core.require(sig != 0);
 
                 var prec = MathUtil.recip(sig*sig);
                 return convert<T>(prec);

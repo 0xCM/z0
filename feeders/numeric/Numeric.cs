@@ -16,20 +16,13 @@ namespace Z0
 
     public static partial class XNumeric
     {
-
         
     }
 
     [ApiHost("numeric.api")]
     public static partial class Numeric
     {
-
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
-    // public static class Numeric
-    // {
-    //     public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
-    // }
 
 }

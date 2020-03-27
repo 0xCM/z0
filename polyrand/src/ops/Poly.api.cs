@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Root;
 
     public static partial class Polyfun
-    {        
+    {
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
 
     }
 }

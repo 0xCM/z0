@@ -24,29 +24,6 @@ namespace Z0
                 => gmath.abs(gmath.sub(src.Right, src.Left));
 
         /// <summary>
-        /// Determines whether an interval contains a specified point
-        /// </summary>
-        /// <param name="src">The source interval</param>
-        /// <param name="point">The point to test</param>
-        /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
-        [MethodImpl(Inline)]
-        public static bool Contains<T>(this Interval<T> src, T point)
-            where T : unmanaged
-        {
-            switch(src.Kind)
-            {
-                case IntervalKind.Closed:
-                    return gmath.gteq(point, src.Left) && gmath.lteq(point, src.Right);
-                case IntervalKind.Open:
-                    return gmath.gt(point, src.Left) && gmath.lt(point, src.Right);
-                case IntervalKind.LeftClosed:
-                    return gmath.gteq(point, src.Left) && gmath.lt(point, src.Right);
-                default:        
-                    return gmath.gt(point, src.Left) && gmath.lteq(point, src.Right);
-            }
-        }
-
-        /// <summary>
         /// Slices an interval into manageable pieces, disjoint even
         /// </summary>
         /// <param name="src">The source interval</param>

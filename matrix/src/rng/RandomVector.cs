@@ -267,7 +267,7 @@ namespace Z0
         {
             var dst = Z0.NatSpan.alloc<N, T>();
             for(var i=0; i<dst.Length; i++)
-                dst[i] = Scale.contract(src[i],max[i]);
+                dst[i] = Numeric.contract(src[i],max[i]);
             return dst;
         }
 
@@ -286,7 +286,7 @@ namespace Z0
             require(len == max.Length);
             var dst = Z0.RowVector.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
-                dst[i] = Scale.contract(src[i],max[i]);
+                dst[i] = Numeric.contract(src[i],max[i]);
             return dst;
         }
 

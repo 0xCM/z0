@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Text;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.InteropServices;    
         
-    using static Root;
+    using static Polyfun;
 
     public readonly ref struct Dataset<T>
         where T : unmanaged
@@ -58,7 +58,7 @@ namespace Z0
         {
             this.Dim = dim;            
             this.Count = Math.DivRem(src.Length, dim, out int remainder);    
-            require(remainder == 0);
+            core.require(remainder == 0);
             Data = src;
         }
 
@@ -67,7 +67,7 @@ namespace Z0
         {
             this.Dim = dim;            
             this.Count = Math.DivRem(src.Length, dim, out int remainder);    
-            require(remainder == 0);
+            core.require(remainder == 0);
             Data = src;
         }
                 
@@ -119,7 +119,7 @@ namespace Z0
 
         public string Format()
         {
-            var fmt = text.factory.Builder();
+            var fmt = new StringBuilder();
             for(var i=0; i<Count; i++)
             {
                 var v = Observation(i);
