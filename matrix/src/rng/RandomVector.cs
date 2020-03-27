@@ -283,7 +283,7 @@ namespace Z0
             where T : unmanaged
         {
             var len = src.Length;
-            require(len == max.Length);
+            core.require(len == max.Length);
             var dst = Z0.RowVector.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Numeric.contract(src[i],max[i]);

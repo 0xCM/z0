@@ -53,7 +53,7 @@ namespace Z0.Mkl.Test
 
             var x = mkl.dot(v1,v2).Round(4);
             var y = Dot(v1,v2).Round(4);
-            Claim.eq(x,y);
+            Claim.almost(x,y);
         }
 
         public void gemm8u()

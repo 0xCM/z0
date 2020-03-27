@@ -8,9 +8,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.InteropServices;
 
-    using static Root;
+    using static Core;
 
     public interface ISurrogate<S,T>
         where S : struct, ISurrogate<S,T>

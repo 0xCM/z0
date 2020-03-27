@@ -213,23 +213,45 @@ namespace Z0
         public static bool eq(uint lhs, uint rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool eq(uint lhs, uint rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
-
         public static bool eq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         public static bool neq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs != rhs ? true : throw failed(ClaimOpKind.NEq, Equal(lhs, rhs, caller, file, line));
 
-        public static bool eq(long lhs, long rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
-
         public static bool eq(ulong lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
+        public static bool eq(long lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => lhs == (long)rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+
+        public static bool eq(ulong lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => (long)lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+
+        public static bool eq(byte lhs, byte rhs, AppMsg msg)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
+
+        public static bool eq(sbyte lhs, sbyte rhs, AppMsg msg)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
+
+        public static bool eq(short lhs, short rhs, AppMsg msg)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
+
+        public static bool eq(ushort lhs, ushort rhs, AppMsg msg)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
+
+        public static bool eq(int lhs, int rhs, AppMsg msg)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
+
+        public static bool eq(uint lhs, uint rhs, AppMsg msg)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
+
+        public static bool eq(long lhs, long rhs, AppMsg msg)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
+
         public static bool eq(ulong lhs, ulong rhs, AppMsg msg)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, msg);
+
 
         [MethodImpl(Inline)]
         static ulong dist(double a, double b)
@@ -255,14 +277,14 @@ namespace Z0
             => a > b ? a - b <= delta 
               : b - a <= delta;
 
-        public static bool eq(float lhs, float rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool almost(float lhs, float rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var err = relerr(lhs,rhs);
             var tolerance = .1f;            
             return err < tolerance ? true : throw failed(ClaimOpKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
-        public static bool eq(double lhs, double rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool almost(double lhs, double rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var err = relerr(lhs,rhs);
             var tolerance = .1f;            

@@ -33,9 +33,9 @@ public enum PartId : ulong
 
     MathTest = Math | Test,
     
-    GenericNumerics = 50 | Lib,
+    GMath = 50 | Lib,
 
-    GenericNumericsTest = GenericNumerics | Test,
+    GMathTest = GMath | Test,
 
     MathSvc = 51,
 
@@ -179,21 +179,25 @@ public enum PartId : ulong
 
     PolyrandTest = Polyrand | Test,
 
-    Validity = 430,
+    Testing = 430,
+
+    TestLib = Testing | Lib,
+
+    TestApp = Testing | App,
+
+    Validity = 432,
+
+    ValidityCore = 434,
+
+    ValidityVectors = 436,
 
     ValidityTest = Validity | Test,
-    
+        
     BitGrids = 700,
 
     BitPack = 710,
 
     Circuits = 720,
-
-    Testing = 730,
-
-    TestLib = Testing | Lib,
-
-    TestApp = Testing | App,
 
     Feeders = 800,
 

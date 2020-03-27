@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
     
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Root;
+    using static Core;
 
     public static class BlockChecks
     {

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Validity;
     using static vgeneric;
 
     sealed class SVBinaryOp128DApiComparer<T> : OperatorComparer<W128,T>, ISVBinaryOpMatch128D<T>

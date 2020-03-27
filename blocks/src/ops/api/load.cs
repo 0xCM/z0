@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16)]
-        public static Block16<T> load<T>(N16 w, Span<T> src, int offset = 0)
+        public static Block16<T> load<T>(W16 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Width8 | NumericKind.Width16 | NumericKind.Width32)]
-        public static Block32<T> load<T>(N32 w, Span<T> src, int offset = 0)
+        public static Block32<T> load<T>(W32 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Block64<T> load<T>(N64 w, Span<T> src, int offset = 0)
+        public static Block64<T> load<T>(W64 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Block128<T> load<T>(N128 w, Span<T> src, int offset = 0)
+        public static Block128<T> load<T>(W128 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(w, src.Length - offset))
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Block256<T> load<T>(N256 w, Span<T> src, int offset = 0)
+        public static Block256<T> load<T>(W256 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static Block512<T> load<T>(N512 w, Span<T> src, int offset = 0)
+        public static Block512<T> load<T>(W512 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))

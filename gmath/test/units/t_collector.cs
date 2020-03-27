@@ -72,8 +72,8 @@ namespace Z0
             var min = gspan.min(data.ReadOnly());
             var max = gspan.max(data.ReadOnly());
 
-            Claim.eq(min, c.Min);
-            Claim.eq(max, c.Max);
+            Claim.almost(min, c.Min);
+            Claim.almost(max, c.Max);
             Claim.eq(avg, (int)c.Mean);            
         }
 
@@ -96,8 +96,8 @@ namespace Z0
             Notify($"{usAvg1} vs {usAvg2}");
 
 
-            Claim.eq(min, c.Min);
-            Claim.eq(max, c.Max);
+            Claim.almost(min, c.Min);
+            Claim.almost(max, c.Max);
             Claim.eq(msAvg, (uint)c.Mean);            
         }
 
@@ -120,8 +120,8 @@ namespace Z0
             Notify($"{usAvg1} vs {usAvg2}");
 
 
-            Claim.eq(min, c.Min);
-            Claim.eq(max, c.Max);
+            Claim.almost(min, c.Min);
+            Claim.almost(max, c.Max);
             Claim.eq(msAvg, (ulong)c.Mean);            
         }
 
@@ -139,8 +139,8 @@ namespace Z0
             var min = gspan.min(data.ReadOnly());
             var max = gspan.max(data.ReadOnly());
 
-            Claim.eq(min, c.Min);
-            Claim.eq(max, c.Max);
+            Claim.almost(min, c.Min);
+            Claim.almost(max, c.Max);
             Claim.eq(msAvg, (long)c.Mean);            
         }
 

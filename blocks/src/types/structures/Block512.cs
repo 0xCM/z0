@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
-    using System.Runtime.Intrinsics;    
         
     using static Blocks;
 
@@ -20,7 +19,7 @@ namespace Z0
     {
         internal readonly Span<T> data;
 
-        public static N512 N => default;
+        public static W512 W => default;
 
         [MethodImpl(Inline)]
         public static explicit operator Span<T>(in Block512<T> src)
@@ -76,7 +75,7 @@ namespace Z0
         public int BlockCount 
         {
             [MethodImpl(Inline)]
-            get => blockcount<T>(N,CellCount);
+            get => blockcount<T>(W,CellCount);
         }
 
         /// <summary>
@@ -85,7 +84,7 @@ namespace Z0
         public int BlockLength 
         {
             [MethodImpl(Inline)]
-            get => length<T>(N);
+            get => length<T>(W);
         }            
 
         /// <summary>

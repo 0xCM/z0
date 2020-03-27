@@ -11,3 +11,17 @@ namespace Z0.Parts
         
     }   
 }
+
+namespace Z0
+{
+    using System.Runtime.CompilerServices;
+
+    static class Root
+    {
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+
+        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;        
+
+    }
+
+}

@@ -1,4 +1,4 @@
-[assembly: PartId(PartId.GenericNumericsTest)]
+[assembly: PartId(PartId.GMathTest)]
 
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020

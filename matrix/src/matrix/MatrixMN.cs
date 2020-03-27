@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            require(src.Length >= CellCount);
+            core.require(src.Length >= CellCount);
             data = src;
         }
 

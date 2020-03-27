@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
 
-    <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(VSvc)" /> 
     <ProjectReference Include="$(BitGrids)" />

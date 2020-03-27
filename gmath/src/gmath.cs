@@ -12,6 +12,8 @@ namespace Z0
     public static partial class gmath
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
+        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;        
     }
 
 }

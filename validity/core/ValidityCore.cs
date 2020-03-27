@@ -2,19 +2,44 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: PartId(PartId.ValidityCore)]
+
+namespace Z0.Parts
+{
+    public sealed class ValidityCore : Part<ValidityCore>
+    {        
+        
+    }
+}
+
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public static class SFMatchServices
+    using static Core;
+    using static AppErrorMsg;
+
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
+    public static class Validity
     {
-        public static ISVValidatorD<T> Decomposer<T>(this ITestContext context)
-            where T : unmanaged
-             => new SVValidatorD<T>(context);
+        const char Sep = UriDelimiters.FS;
 
-        public static ISVValidatorD Decompostions(this ITestContext context)
-            => new SVValidatorD(ValidationContext.From(context));
-            
+        /// <summary>
+        /// Produces the name of the test case for the specified function
+        /// </summary>
+        /// <param name="f">The function</param>
+        public static string testcase(Type host, ISFuncApi f)
+            => $"{Identify.Owner(host)}{Sep}{host.Name}{Sep}{f.Id}";
+
+    }
+
+    public static class ServiceFactory
+    {
+
         public static ISFMatch<T,T> UnaryOpMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
                 => new SFOpMatch1<T>(context);
@@ -37,6 +62,6 @@ namespace Z0
 
         public static ISFMatch<T,T,T,bit> TernaryPredicateComparer<T>(this ITestContext context, T t = default)
             where T : unmanaged
-                => new STernaryPredMatch<T>(context);
+                => new STernaryPredMatch<T>(context);        
     }
 }

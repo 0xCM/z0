@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static Root;
-    using static Validity;
+    using static Core;
     using static vgeneric;
 
     using C = OpClass;
@@ -111,7 +110,7 @@ namespace Z0
             where F : ISVShiftOp128DApi<T>
         {
             var t = default(T);
-            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
+            var bounds = ((byte)0, (byte)(core.bitsize<T>() - 1));
 
             void run()
             {
@@ -131,7 +130,7 @@ namespace Z0
             where F : ISVShiftOp256DApi<T>
         {
             var t = default(T);
-            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
+            var bounds = ((byte)0, (byte)(core.bitsize<T>() - 1));
 
             void run()
             {
@@ -178,7 +177,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static int vcount<W>(W w = default)
             where W : struct, ITypeWidth
-                => ((int)default(W).TypeWidth)/bitsize<T>();
+                => ((int)default(W).TypeWidth)/core.bitsize<T>();
 
         string CaseName<W>(ISFuncApi f)
             where W : struct, ITypeWidth

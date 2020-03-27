@@ -9,7 +9,7 @@
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(GenericNumerics)" />      
+    <ProjectReference Include="$(GMath)" />
   </ItemGroup>
 
 </Project>

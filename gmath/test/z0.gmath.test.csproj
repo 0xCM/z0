@@ -7,8 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(ValidityCore)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
   </ItemGroup>
 

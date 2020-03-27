@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
+    using static Core;
     using static VectorSurrogates;
+
     using S = Surrogates;
 
     public static class VectorSurrogateOps

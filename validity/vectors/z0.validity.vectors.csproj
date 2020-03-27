@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(Vectorized)" />
+    <ProjectReference Include="$(ValidityCore)" />
 
   </ItemGroup>
 

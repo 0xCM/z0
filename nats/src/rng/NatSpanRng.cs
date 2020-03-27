@@ -58,6 +58,6 @@ namespace Z0
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => TableSpan.load<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
+                => TableSpan.load<M,N,T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
     }
 }

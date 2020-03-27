@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Root;
-    using static vgeneric;
-    using static Nats;
+    using static Core;
 
     partial class VectorExtensions
     {
@@ -60,7 +58,5 @@ namespace Z0
         public static T Cell<T>(this Vector256<T> src, int index)
             where T : unmanaged 
                 => src.GetElement(index);
-
-
    }
 }

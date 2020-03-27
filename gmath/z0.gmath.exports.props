@@ -1,7 +1,7 @@
 ﻿<Project>
 
   <ItemGroup>
-    <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(TopDir)gmath/svc/z0.gmath.svc.csproj" />
   </ItemGroup>
 

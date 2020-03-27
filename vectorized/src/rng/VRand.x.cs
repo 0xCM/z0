@@ -9,9 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     using System.Linq;
+    
+    using static Core;
     using static VectorSurrogates;
-
-    using static Root;
 
     public static class VRandX
     {
@@ -271,7 +271,7 @@ namespace Z0
                 case NumericKind.I64:
                     return () => from v in random.CpuVectors<ulong>(w).Surrogates() select v.NonGeneric();
                 default:
-                    return () => array<IVec128>();
+                    return () => core.array<IVec128>();
             }
         }
 

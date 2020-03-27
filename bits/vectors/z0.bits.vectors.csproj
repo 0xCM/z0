@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Nats)" />    
-    <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Matrix)" />    
     <ProjectReference Include="$(Intrinsics)" />
     <ProjectReference Include="$(Permute)" />

@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Root;
-    using static Validity;
+    using static refs;
 
     class SFOpMatch<T,R> : SFMatch, ISFMatch<T,R>
         where T : unmanaged
@@ -30,7 +29,7 @@ namespace Z0
             ref readonly var leftIn = ref head(lhs);            
             
             
-            var dst = alloc<R>(count);
+            var dst = Spans.alloc<R>(count);
             ref var target = ref head(dst);
             
             clock.Start();

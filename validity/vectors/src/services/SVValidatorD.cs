@@ -4,7 +4,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Root;
+    using static Core;
     using static Nats;
     using static vgeneric;
 

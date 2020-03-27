@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Z0.Root;
+    using static Core;
 
     [ApiHost("surrogates")]
     public static partial class VectorSurrogates

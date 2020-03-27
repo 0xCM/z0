@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Avx;
     
-    using static Root;
+    using static Core;
     using static Blocks;
 
     partial class dinx

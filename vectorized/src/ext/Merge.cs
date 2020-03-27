@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Root;
+    using static Core;
+    using static refs;
     using static vgeneric;
     using static Nats;
 
@@ -41,9 +42,6 @@ namespace Z0
             }
             
             return vgeneric.vload(n256, in head(dst));        
-        } 
-
- 
- 
+        }  
     }
 }

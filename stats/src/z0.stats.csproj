@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Nats)" />    
-    <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(RngSourced)" />
     <ProjectReference Include="$(Matrix)" />    

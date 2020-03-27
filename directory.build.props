@@ -45,7 +45,7 @@
     <Circuits>$(TopDir)vectorized/circuits/z0.vectorized.circuits.csproj</Circuits>
     <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
     <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
-    <GenericNumerics>$(TopDir)gmath/src/z0.gmath.csproj</GenericNumerics>
+    <GMath>$(TopDir)gmath/src/z0.gmath.csproj</GMath>
     <Graphs>$(TopDir)graphs/src/z0.graphs.csproj</Graphs>
     <Identity>$(TopDir)identity/src/z0.identity.csproj</Identity>
     <Intrinsics>$(TopDir)intrinsics/src/z0.intrinsics.csproj</Intrinsics>
@@ -63,7 +63,10 @@
     <RngSourced>$(TopDir)rng/sources/core/z0.rng.sources.csproj</RngSourced>
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
     <TestLib>$(TopDir)testlib/src/z0.testlib.csproj</TestLib>
-    <Validity>$(TopDir)validity/src/z0.validity.csproj</Validity>
+    <Validity>$(TopDir)validity/src/z0.validity.src.csproj</Validity>
+    <ValidityCore>$(TopDir)validity/core/z0.validity.core.csproj</ValidityCore>
+    <ValidityVectors>$(TopDir)validity/vectors/z0.validity.vectors.csproj</ValidityVectors>
+
     <VData>$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj</VData>
     <Vectorized>$(TopDir)vectorized/src/z0.vectorized.csproj</Vectorized>
     <VSvc>$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj</VSvc>

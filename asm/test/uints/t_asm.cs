@@ -20,7 +20,7 @@ namespace Z0.Asm
                 R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
                 R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
                 R.Blocks.Resolution, R.Math.Resolution,
-                R.GenericNumerics.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
+                R.GMath.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
                 R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
                 R.Root.Resolution,R.Vectorized.Resolution}
                 ;        

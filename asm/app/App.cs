@@ -28,7 +28,7 @@ namespace Z0.Asm.Check
                 R.Blocks.Resolution, 
                 R.Fixed.Resolution, 
                 R.Math.Resolution,
-                R.GenericNumerics.Resolution, 
+                R.GMath.Resolution, 
                 R.MathServices.Resolution, 
                 R.Intrinsics.Resolution,
                 R.VSvc.Resolution, 

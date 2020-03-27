@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Root;
-    using static Validity;
+    using static Core;
+    using static refs;
 
     class SFMatch<T0,T1,T2,R> : SFMatch, ISFMatch<T0,T1,T2,R>
         where T0 : unmanaged
@@ -74,7 +74,7 @@ namespace Z0
             var inC = (ExcludeZero ? Random.NonZeroSpan<T2>(count) : Random.Span<T2>(count)).ReadOnly();
             ref readonly var inCTarget = ref head(inC);
 
-            var dst = alloc<R>(count);
+            var dst = Spans.alloc<R>(count);
             ref var target = ref head(dst);
             
             clock.Start();

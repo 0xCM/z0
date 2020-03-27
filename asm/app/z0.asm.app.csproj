@@ -11,7 +11,7 @@
     <ProjectReference Include="$(TestLib)" />
     <ProjectReference Include="$(Analogs)" />
     <ProjectReference Include="$(BitGrids)" />
-    <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Polyrand)" />
 
     <ProjectReference Include="$(MathSvc)" />

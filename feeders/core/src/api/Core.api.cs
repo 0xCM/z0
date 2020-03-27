@@ -18,6 +18,10 @@ namespace Z0
             => Unsafe.SizeOf<T>()*8;
 
         [MethodImpl(Inline)]
+        public static int bitsize<T>(T t)            
+            => Unsafe.SizeOf<T>()*8;
+
+        [MethodImpl(Inline)]
         public static int size<T>()
             => Unsafe.SizeOf<T>();
 
@@ -49,6 +53,12 @@ namespace Z0
         {
             if(!invariant)
                 throw new Exception($"Application invaraiant failed");
+        }
+
+        public static void require(bool invariant, string msg)
+        {
+            if(!invariant)
+                throw new Exception($"Application invaraiant failed: {msg}");
         }
 
         /// <summary>

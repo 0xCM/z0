@@ -126,12 +126,13 @@ namespace Z0
         /// <typeparam name="N">The column type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<M,N,T>(N512 n)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
+        public static int blockcount<M,N,T>(W512 n)
+            where M : unmanaged, ITypeWidth
+            where N : unmanaged, ITypeWidth
             where T : unmanaged        
         {
-            var srclen = NatMath.mul<M,N>();
+            //var srclen = NatMath.mul<M,N>();
+            var srclen = ((int)default(M).TypeWidth) * ((int)default(N).TypeWidth);            
             var bz = blockcount<T>(n,srclen, out int remainder);
             return remainder == 0 ? bz : bz + 1;
         }

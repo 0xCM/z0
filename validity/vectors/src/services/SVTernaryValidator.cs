@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-
-    using static Validity;
+    
     using static vgeneric;
 
-    sealed class SVUnaryValidator128D<T> : OperatorComparer<W128,T>, IVUnaryOpMatch128D<T>
+    sealed class SVTernaryValidator128D<T> : OperatorComparer<W128,T>, ISVTernaryOpMatch128D<T>
         where T : unmanaged
     {
-        public SVUnaryValidator128D(ITestContext context, bool xzero = false)
+        public SVTernaryValidator128D(ITestContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -20,7 +19,7 @@ namespace Z0
 
         N128 w => default;
 
-        void IVUnaryOpMatch128D<T>.CheckMatch<F>(F f)
+        void ISVTernaryOpMatch128D<T>.CheckMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);
@@ -34,9 +33,11 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
-                    var z = f.Invoke(x);
+                    var y = Random.CpuVector(w,t);
+                    var z = Random.CpuVector(w,t);
+                    var result = f.Invoke(x,y,z);
                     for(var j=0; j< cells; j++)
-                        Claim.numeq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                        Claim.numeq(f.InvokeScalar(vcell(x,j),vcell(y,j),vcell(z,j)), vcell(result,j));
                 }
             }
             catch(Exception e)
@@ -50,12 +51,11 @@ namespace Z0
             }
         }
     }
-    
-    sealed class SVUnaryValidator256D<T> : OperatorComparer<W256,T>, ISVUnaryOpMatch256D<T>
+
+    sealed class SVTernaryValidator256D<T> : OperatorComparer<W256,T>, ISVTernaryOpMatch256D<T>
         where T : unmanaged
     {
-
-        public SVUnaryValidator256D(ITestContext context, bool xzero = false)
+        public SVTernaryValidator256D(ITestContext context, bool xzero = false)
             : base(context,xzero)
         {
 
@@ -63,7 +63,7 @@ namespace Z0
 
         N256 w => default;
 
-        void ISVUnaryOpMatch256D<T>.CheckMatch<F>(F f)
+        void ISVTernaryOpMatch256D<T>.CheckMatch<F>(F f)
         {
             var t = default(T);
             var cells = vcount(w,t);
@@ -77,9 +77,11 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
-                    var z = f.Invoke(x);
+                    var y = Random.CpuVector(w,t);
+                    var z = Random.CpuVector(w,t);
+                    var result = f.Invoke(x,y,z);
                     for(var j=0; j< cells; j++)
-                        Claim.numeq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                        Claim.numeq(f.InvokeScalar(vcell(x,j),vcell(y,j),vcell(z,j)), vcell(result,j));
                 }
             }
             catch(Exception e)

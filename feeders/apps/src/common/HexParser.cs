@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
 
 
-    using static Root;
+    using static Apps;
 
     public static class HexParser
     {

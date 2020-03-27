@@ -7,10 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Texting)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Identify)" />
   </ItemGroup>
 

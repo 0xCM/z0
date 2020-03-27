@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.InteropServices;
 
-    using static Root;
-    using static Nats;
+    using static Core;
 
     partial class VectorSurrogates
     {

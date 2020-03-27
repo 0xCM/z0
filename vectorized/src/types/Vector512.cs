@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics.X86;
 
-    using static Root;
+    using static Core;
 
     [StructLayout(LayoutKind.Sequential, Size = 64), Vector(FixedWidth.W512)]
     public readonly struct Vector512<T>

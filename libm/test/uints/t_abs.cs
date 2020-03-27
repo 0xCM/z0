@@ -14,8 +14,8 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next<double>();
-                Claim.eq(src < 0 ? -src : src, fmath.abs(src));
-                Claim.eq(fmath.abs(src), libm.fabs(src));
+                Claim.almost(src < 0 ? -src : src, fmath.abs(src));
+                Claim.almost(fmath.abs(src), libm.fabs(src));
             }
         }
 

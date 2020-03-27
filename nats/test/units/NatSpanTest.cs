@@ -17,7 +17,7 @@ namespace Z0
             
             var m = nati<N4>();
             var n = nati<N3>();
-            var src = Random.NatSpan(n4, n5, Interval.closed(1,1000));
+            var src = Random.NatSpan(n4, n3, Interval.closed(1,1000));
             Claim.eq(src.Dim.I, m);
             Claim.eq(src.Dim.J, n);            
 

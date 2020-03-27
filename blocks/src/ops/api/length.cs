@@ -90,12 +90,12 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int length<N,T>(N w = default, T t = default)
-            where N : unmanaged, ITypeNat
+        public static int length<W,T>(W w = default, T t = default)
+            where W : unmanaged, ITypeNat
             where T : unmanaged
-                => NatMath.div(w,N8.Rep)/Unsafe.SizeOf<T>();
- 
-         /// <summary>
+                => NatMath.div(w, N8.Rep)/Unsafe.SizeOf<T>(); 
+
+        /// <summary>
         /// Returns the length of equal-length blocks; otherwise raises an error
         /// </summary>
         /// <param name="lhs">The left span</param>

@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Root;
-    using static Validity;
+    using static Core;
     using static vgeneric;
 
     sealed class SVShiftValidator128D<T> : OperatorComparer<W128,T>, ISVShiftMatch128D<T>
@@ -28,7 +27,7 @@ namespace Z0
             var succeeded = true;
             var casename = CaseName(f);
             var clock = counter();
-            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
+            var bounds = ((byte)0, (byte)(core.bitsize(t) - 1));
 
             clock.Start();
             try
@@ -72,7 +71,7 @@ namespace Z0
             var succeeded = true;
             var casename = CaseName(f);
             var clock = counter();
-            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
+            var bounds = ((byte)0, (byte)(core.bitsize(t) - 1));
 
             clock.Start();
             try

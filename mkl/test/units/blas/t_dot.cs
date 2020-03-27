@@ -29,7 +29,7 @@ namespace Z0.Mkl
             {
                 var x = RVecF32(RepCount);
                 var y = RVecF32(RepCount);
-                Claim.eq(mkl.dot(x,y),dot(x,y));
+                Claim.almost(mkl.dot(x,y),dot(x,y));
             }
         }
 
@@ -39,7 +39,7 @@ namespace Z0.Mkl
             {
                 var x = RVecF32(n256);
                 var y = RVecF32(n256);
-                Claim.eq(mkl.dot(x,y),dot(x,y));
+                Claim.almost(mkl.dot(x,y),dot(x,y));
             }
         }
 
@@ -49,7 +49,7 @@ namespace Z0.Mkl
             {
                 var x = RVecF64(RepCount);
                 var y = RVecF64(RepCount);
-                Claim.eq(mkl.dot(x,y),dot(x,y));
+                Claim.almost(mkl.dot(x,y),dot(x,y));
             }
         }
 
@@ -59,7 +59,7 @@ namespace Z0.Mkl
             {
                 var x = RVecF64(n256);
                 var y = RVecF64(n256);                
-                Claim.eq(mkl.dot(x,y),dot(x,y));
+                Claim.almost(mkl.dot(x,y),dot(x,y));
             }
         }
     }

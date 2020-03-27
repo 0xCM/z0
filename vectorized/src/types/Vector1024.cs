@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.InteropServices;
 
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// 4x256 / 2x512

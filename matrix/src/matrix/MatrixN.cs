@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static nfunc;
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The size, in bytes, of each cell
         /// </summary>
-        public static readonly ByteSize CellSize = size<T>();
+        public static readonly ByteSize CellSize = core.size<T>();
 
         /// <summary>
         /// The Row dimension representative
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            require(src.Length >= CellCount);
+            core.require(src.Length >= CellCount);
             data = src;
         }
 

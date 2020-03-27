@@ -190,7 +190,7 @@ namespace Z0
             var wordLen = 8;
             var wordCount = Pow2.pow(wordLen);
             var words = BinaryLanguage.Get().Words(wordLen).ToArray();
-            Claim.eq(wordCount, words.Length);
+            Claim.almost(wordCount, words.Length);
             
             iter(words, w => Claim.eq(wordLen, w.Format().Length));
             
@@ -198,7 +198,7 @@ namespace Z0
             {
                 var w = words[i];
                 var value = w.TakeScalar<byte>();
-                Claim.eq(i, value);
+                Claim.numeq(i, value);
             }
         }    
 

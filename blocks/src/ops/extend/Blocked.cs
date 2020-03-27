@@ -17,9 +17,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Blocked<T>(this Span<T> src, N16 n)
+        public static Block16<T> Blocked<T>(this Span<T> src, W16 w)
              where T : unmanaged
-                => Blocks.load(n,src);
+                => Blocks.load(w,src);
 
         /// <summary>
         /// Constructs a 32-bit blocked span from an unblocked span
@@ -27,9 +27,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block32<T> Blocked<T>(this Span<T> src, N32 n)
+        public static Block32<T> Blocked<T>(this Span<T> src, W32 w)
              where T : unmanaged
-                => Blocks.load(n,src);
+                => Blocks.load(w,src);
 
         /// <summary>
         /// Constructs a 16-bit blocked span from an unblocked span
@@ -37,9 +37,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> Blocked<T>(this Span<T> src, N64 n)
+        public static Block64<T> Blocked<T>(this Span<T> src, W64 w)
              where T : unmanaged
-                => Blocks.load(n,src);
+                => Blocks.load(w,src);
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -47,9 +47,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> Blocked<T>(this Span<T> src, N128 n)
+        public static Block128<T> Blocked<T>(this Span<T> src, W128 w)
              where T : unmanaged
-                => Blocks.load(n,src);
+                => Blocks.load(w,src);
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -57,9 +57,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> Blocked<T>(this Span<T> src, N256 n)
+        public static Block256<T> Blocked<T>(this Span<T> src, W256 w)
              where T : unmanaged
-                => Blocks.load(n,src);
+                => Blocks.load(w,src);
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -67,8 +67,8 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block512<T> Blocked<T>(this Span<T> src, N512 n)
+        public static Block512<T> Blocked<T>(this Span<T> src, W512 w)
              where T : unmanaged
-                => Blocks.load(n,src);
+                => Blocks.load(w,src);
     }
 }

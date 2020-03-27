@@ -8,7 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitPack)" />
-    <ProjectReference Include="$(GenericNumerics)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Intrinsics)" />
     <ProjectReference Include="$(Nats)" />
   </ItemGroup>

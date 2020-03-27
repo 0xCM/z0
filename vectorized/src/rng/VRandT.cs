@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Root;
+    using static Core;
     
     public readonly struct VRandom128<T> : ISVEmitter128Api<T>
         where T : unmanaged

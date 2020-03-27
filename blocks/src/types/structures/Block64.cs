@@ -19,7 +19,7 @@ namespace Z0
     {
         internal readonly Span<T> data;
 
-        public static N64 N => default;
+        public static W64 W => default;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block64<T> src)
@@ -72,7 +72,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => length<T>(N);
+            get => length<T>(W);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         public int BlockCount 
         {
             [MethodImpl(Inline)]
-            get => blockcount<T>(N,CellCount);
+            get => blockcount<T>(W,CellCount);
         }
 
         /// <summary>

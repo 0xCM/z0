@@ -20,6 +20,8 @@ namespace Z0
     public static class Core
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
+        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;          
     }
 
     public static partial class XTend

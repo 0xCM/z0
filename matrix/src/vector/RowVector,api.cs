@@ -11,6 +11,7 @@ namespace Z0
 
     using static Root;
     using static Nats;
+    using static CastNumeric;
 
     /// <summary>
     /// Defines the vector api surface

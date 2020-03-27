@@ -40,7 +40,7 @@ namespace Z0
             {
                 var bc = Random.BitBlock<N,T>();
                 var bs = bc.ToBitString();
-                Claim.eq(bc.Width, n.NatValue);
+                Claim.almost(bc.Width, n.NatValue);
                 Claim.eq(bc.Width, bs.Length);
                 for(var i=0; i<bc.Width; i+= 2)
                 {

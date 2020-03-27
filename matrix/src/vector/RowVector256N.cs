@@ -87,7 +87,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal RowVector256(Block256<T> src)
         {
-            require(src.CellCount >= Length);
+            core.require(src.CellCount >= Length);
             data = src;
         }
 
