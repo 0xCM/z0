@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Components;
 
     /// <summary>
     /// Exposes a basic api for natural negotiation and defines static properties

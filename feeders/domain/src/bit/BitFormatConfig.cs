@@ -72,7 +72,7 @@ namespace Z0
             this.TrimLeadingZeros = tlz;
             this.SpecifierPrefix = specifier;
             this.BlockWidth = blockWidth ?? 0;
-            this.BlockSep = blocksep ?? AsciSym.Space;
+            this.BlockSep = blocksep ?? Chars.Space;
             this.RowWidth = rowWidth ?? 0;
             this.MaxBitCount = maxbits ?? int.MaxValue;
         }

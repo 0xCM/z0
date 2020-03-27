@@ -31,16 +31,16 @@ namespace Z0
         {
             var rendered = text.factory.Builder();
 
-            var margin = new string(AsciSym.Space,4);
+            var margin = new string(Chars.Space,4);
             rendered.AppendLine(Comment(f.FullName));
             f.Sig.TryMap(s => rendered.AppendLine(Comment(s.Format())));
             rendered.AppendLine(Comment(f.ImplSpec.ToString()));            
             rendered.AppendLine(f.Sig.MapValueOrElse(s => s.Format(), () => string.Empty));
-            rendered.AppendLine(AsciSym.LBrace);                    
+            rendered.AppendLine(Chars.LBrace);                    
             
             foreach(var i in f.Instructions)
                 rendered.AppendLine(margin + i.ToString());
-            rendered.AppendLine(AsciSym.RBrace);                        
+            rendered.AppendLine(Chars.RBrace);                        
             
             return rendered.ToString();
         }

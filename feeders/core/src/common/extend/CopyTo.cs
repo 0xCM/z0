@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static Memories;
+    using static Components;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Copies the source span to a target span begininning at a specified target offset
@@ -34,6 +32,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void CopyTo<T>(this ReadOnlySpan<T> src, Span<T> dst, int offset)
             => src.CopyTo(dst.Slice(offset));
-
     }
 }

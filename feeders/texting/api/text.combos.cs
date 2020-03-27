@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Textual;
-    using static AsciSym;
+    using static Chars;
 
     partial class text
     {
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="c">The padding character, if specifed; otherwise, a space is used as the filler</param>
         [MethodImpl(Inline)]   
         public static string rpad(string src, int width, char? c = null)
-            => src.PadRight(width, c ?? AsciSym.Space);
+            => src.PadRight(width, c ?? Chars.Space);
 
         /// <summary>
         /// Produces a left parenthesis character
@@ -71,14 +71,14 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static char lbracket()
-            => AsciSym.LBracket;
+            => Chars.LBracket;
 
         /// <summary>
         /// Produces a ']' character
         /// </summary>
         [MethodImpl(Inline)]
         public static char rbracket()
-            => AsciSym.RBracket;
+            => Chars.RBracket;
 
         /// <summary>
         /// Produces a right parenthesis character
@@ -92,7 +92,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static char quote()
-            => AsciSym.Quote;
+            => Chars.Quote;
 
         /// <summary>
         /// Produces a quote
@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static char space()
-            => AsciSym.Space;
+            => Chars.Space;
 
         /// <summary>
         /// Prepends a space to the source content
@@ -132,7 +132,7 @@ namespace Z0
             => $" {content} ";
 
         public static string spaced(char c)
-            => concat(AsciSym.Space, c, AsciSym.Space);
+            => concat(Chars.Space, c, Chars.Space);
 
         /// <summary>
         /// Separates each item with a space
@@ -145,21 +145,21 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static char pipe()
-            => AsciSym.Pipe;
+            => Chars.Pipe;
 
         /// <summary>
         /// Produces a '-' character
         /// </summary>
         [MethodImpl(Inline)]
         public static string dash()
-            => AsciSym.Dash.ToString();
+            => Chars.Dash.ToString();
 
         /// <summary>
         /// Produces a ',' character
         /// </summary>
         [MethodImpl(Inline)]
         public static char comma()
-            => AsciSym.Comma;
+            => Chars.Comma;
 
         /// <summary>
         /// Produces a left-brace character as a string
@@ -178,34 +178,34 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static string fslash()
-            => AsciSym.FSlash.ToString();
+            => Chars.FSlash.ToString();
 
         /// <summary>
         /// Produces a '\' character
         /// </summary>
         [MethodImpl(Inline)]
         public static string bslash()
-            => AsciSym.BSlash.ToString();
+            => Chars.BSlash.ToString();
 
         /// <summary>
         /// Produces a ";" character
         /// </summary>
         public static string semicolon()
-            => AsciSym.Semicolon.ToString();
+            => Chars.Semicolon.ToString();
 
         /// <summary>
         /// Produces a "." character
         /// </summary>
         [MethodImpl(Inline)]
         public static string dot()
-            => AsciSym.Dot.ToString();
+            => Chars.Dot.ToString();
 
         /// <summary>
         /// Produces a ':' character
         /// </summary>
         [MethodImpl(Inline)]
         public static char colon()
-            => AsciSym.Colon;
+            => Chars.Colon;
 
         /// <summary>
         /// Produces a line of content
@@ -221,7 +221,7 @@ namespace Z0
         /// <param name="content">The content to be quoted</param>
         [MethodImpl(Inline)]
         public static string enquote(object content)
-            => $"{AsciSym.Quote}{content}{AsciSym.Quote}";
+            => $"{Chars.Quote}{content}{Chars.Quote}";
 
         /// <summary>
         /// Encloses text within (possibly distinct) left and right boundaries
@@ -277,7 +277,7 @@ namespace Z0
         /// <param name="src">The text to enclose</param>
         [MethodImpl(Inline)]
         public static string squote(object src)
-            => enclose(src, AsciSym.SQuote.ToString());
+            => enclose(src, Chars.SQuote.ToString());
 
         /// <summary>
         /// Encloses content between '(' and ')' characters
@@ -301,7 +301,7 @@ namespace Z0
         /// <param name="content">The data to delimit and format</param>
         [MethodImpl(Inline)]
         public static string csv(object o1, object o2, params object[] content)
-            =>  string.Join(AsciSym.Comma, o1, o2) + string.Join(AsciSym.Comma, content);
+            =>  string.Join(Chars.Comma, o1, o2) + string.Join(Chars.Comma, content);
 
         /// <summary>
         /// Renders each item from a sequence as list of values, delimited by end-of-line
@@ -350,7 +350,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static string dots(int count = 3)
-            => new string(AsciSym.Dot, count);
+            => new string(Chars.Dot, count);
 
         /// <summary>
         /// Produces an indented string
@@ -358,7 +358,7 @@ namespace Z0
         /// <param name="offset">The left indentation offset </param>
         [MethodImpl(Inline)]
         public static string indented(string content, int offset = 4)
-            => content + new string(AsciSym.Space, offset);
+            => content + new string(Chars.Space, offset);
 
         /// <summary>
         /// Produces a string containing a specified number of spaces
@@ -366,7 +366,7 @@ namespace Z0
         /// <param name="count">The number of spaces the output string should contain</param>
         [MethodImpl(Inline)]
         public static string spaces(int count = 3)
-            => new string(AsciSym.Space, count);
+            => new string(Chars.Space, count);
 
         /// <summary>
         /// Removes a substring from the subject
@@ -382,7 +382,7 @@ namespace Z0
         public static string enquote(string src)
         {
             if(!string.IsNullOrWhiteSpace(src))
-                return concat(AsciSym.Quote, src, AsciSym.Quote);
+                return concat(Chars.Quote, src, Chars.Quote);
             else
                 return string.Empty;
         }

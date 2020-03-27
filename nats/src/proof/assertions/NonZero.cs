@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static nfunc;
-    using static Root;    
+    using static Components;    
     
     partial class NatClaim
     {
@@ -36,7 +32,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Nonzero<K> nonzero<K>(K k)
             where K: unmanaged, ITypeNat
-                => new Nonzero<K>(k);                             
-
+                => new Nonzero<K>(k);
     }
 }

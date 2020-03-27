@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="prespec">Indicates where the specifier, if applied, is a prefix specifier (true) or a postfix specifier (false)</param>
         public static string FormatHexList(this IEnumerable<byte> src, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true)
-                => text.bracket(src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(AsciSym.Comma));
+                => text.bracket(src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(Chars.Comma));
 
         /// <summary>
         /// Formats a scalar value as a sequence of hex digits
@@ -257,7 +257,7 @@ namespace Z0
         public static string HexDigits(this ulong src, bool uppercase)
             => src.ToString(uppercase ? UC : LC);
 
-        public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
+        public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = Chars.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
             var builder = text.build();
@@ -342,10 +342,10 @@ namespace Z0
         public static string FormatHex<T>(this ReadOnlySpan<T> src, bool bracket = false, char? sep = null, bool specifier = false)
             where T : unmanaged
         {
-            var delimiter = sep ?? AsciSym.Space;
+            var delimiter = sep ?? Chars.Space;
             var builder = text.build();
             if(bracket)
-                builder.Append(AsciSym.LBracket);
+                builder.Append(Chars.LBracket);
 
             for(var i = 0; i<src.Length; i++)
             {
@@ -355,7 +355,7 @@ namespace Z0
             }
             
             if(bracket)
-                builder.Append(AsciSym.RBracket);
+                builder.Append(Chars.RBracket);
             
             return builder.ToString();
         }
@@ -373,13 +373,13 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().FormatHex(bracket, sep, specifier);
                 
-        public static string FormatHex(this ReadOnlySpan<byte> src, char sep = AsciSym.Space)
+        public static string FormatHex(this ReadOnlySpan<byte> src, char sep = Chars.Space)
             => src.FormatHexBytes(sep:sep, zpad:true, specifier:false, uppercase: false);
 
-        public static string FormatHex(this byte[] src, char sep = AsciSym.Space)
+        public static string FormatHex(this byte[] src, char sep = Chars.Space)
             => src.AsSpan().ReadOnly().FormatHex(sep);
 
-        public static string FormatHex(this Span<byte> src, char sep = AsciSym.Space)
+        public static string FormatHex(this Span<byte> src, char sep = Chars.Space)
             => src.ReadOnly().FormatHex(sep);
 
         /// <summary>
@@ -410,19 +410,19 @@ namespace Z0
                     {
                         builder.Append(i.FormatHex(true,false,false,true));
                         builder.Append('h');
-                        builder.Append(AsciSym.Space);
+                        builder.Append(Chars.Space);
 
                         line.Append(i.FormatHex(true,false,false,true));
                         line.Append('h');
-                        line.Append(AsciSym.Space);
+                        line.Append(Chars.Space);
                     }
                 }
 
                 builder.Append(data[i].FormatHex(true, true, false, true));
-                builder.Append(AsciSym.Space);
+                builder.Append(Chars.Space);
 
                 line.Append(data[i].FormatHex(true, true, false, true));
-                line.Append(AsciSym.Space);
+                line.Append(Chars.Space);
             }
             var last = line.ToString();
             if(last.IsNotBlank())

@@ -57,11 +57,11 @@ namespace Z0.Logix
         {
             var format = text.factory.Builder();
             format.Append(Label.PadRight(12));
-            format.Append(AsciSym.Colon);
-            format.Append(AsciSym.Space);
-            format.Append(AsciSym.LBracket);
-            format.Append(string.Join(MultipleChoice ? AsciSym.Pipe : AsciSym.Caret, Choices.Select(c => c.Format())));
-            format.Append(AsciSym.RBracket);
+            format.Append(Chars.Colon);
+            format.Append(Chars.Space);
+            format.Append(Chars.LBracket);
+            format.Append(string.Join(MultipleChoice ? Chars.Pipe : Chars.Caret, Choices.Select(c => c.Format())));
+            format.Append(Chars.RBracket);
             return format.ToString();
         }
 

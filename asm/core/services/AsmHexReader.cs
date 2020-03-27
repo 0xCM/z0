@@ -13,9 +13,9 @@ namespace Z0.Asm
 
     readonly struct AsmHexReader : IAsmHexReader
     {
-        const char DefaultIdSep = AsciSym.Space;
+        const char DefaultIdSep = Chars.Space;
 
-        const char DefaultByteSep = AsciSym.Space;
+        const char DefaultByteSep = Chars.Space;
 
         public IAsmContext Context {get;}
 

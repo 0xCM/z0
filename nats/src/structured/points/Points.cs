@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Components;
+    using static refs;
 
     public readonly ref struct Points<P>
         where P : IPointCell<P>

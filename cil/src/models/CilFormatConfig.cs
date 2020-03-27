@@ -24,7 +24,7 @@ namespace Z0
             = true;
 
         public string SectionDelimiter {get;set;}
-            = new string(AsciSym.Dash, 120);        
+            = new string(Chars.Dash, 120);        
 
         public bool EmitSectionDelimiter {get;set;}
             = true;

@@ -27,7 +27,7 @@ namespace Z0
 
         public override string ToString() 
         {
-            return text.concat(nameof(FunctionCount), text.spaced(AsciSym.Eq), FunctionCount.ToString());
+            return text.concat(nameof(FunctionCount), text.spaced(Chars.Eq), FunctionCount.ToString());
         }
     }
 

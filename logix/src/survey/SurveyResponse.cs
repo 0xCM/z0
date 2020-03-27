@@ -37,8 +37,8 @@ namespace Z0.Logix
             for(var i=0; i<Answered.Length; i++)
             {
                 sb.Append(Answered[i].QuestionId);
-                sb.Append(AsciSym.Colon);
-                sb.Append(AsciSym.Space);
+                sb.Append(Chars.Colon);
+                sb.Append(Chars.Space);
                 sb.Append(Answered[i].Format());
                 sb.AppendLine();
             }

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Components;
+    using static refs;
     
     public readonly struct BinaryPoint<T> : IPoint<N2,T>
         where T : unmanaged

@@ -56,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static HexFormatConfig Define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
-            => new HexFormatConfig(zpad,specifier,uppercase,prespec, delimiter ?? AsciSym.Comma);
+            => new HexFormatConfig(zpad,specifier,uppercase,prespec, delimiter ?? Chars.Comma);
         
         [MethodImpl(Inline)]
         HexFormatConfig(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)

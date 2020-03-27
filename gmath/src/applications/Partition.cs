@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using static Root;
+    using static gmath;
+    using static CastNumeric;
 
     public static class Partition
     {
@@ -64,7 +65,7 @@ namespace Z0
             where T : unmanaged
         {
             var points = measuredPoints(src,width);
-            var dst = alloc<Interval<T>>(points.Length - 1);
+            var dst = Spans.alloc<Interval<T>>(points.Length - 1);
             var lastIx = points.Length - 1;
             var lastCycleIx = lastIx - 1;
             var model = default(Interval<T>);
@@ -100,7 +101,7 @@ namespace Z0
         {
             var len =  length(src);
             var count = Cast.to<T,int>(gmath.div(len, width));            
-            var dst = alloc<T>(count + 1);
+            var dst = Spans.alloc<T>(count + 1);
             var point = src.Left;
             var lastix = dst.Length - 1;
 
@@ -127,7 +128,7 @@ namespace Z0
             var len =  gfp.round(length(src), scale);
             var fcount = gfp.div(len, width);
             var count = convert<T,int>(gfp.ceil(fcount));            
-            var dst = alloc<T>(count + 1);
+            var dst = Spans.alloc<T>(count + 1);
 
             var point = src.Left;
             var lastix = dst.Length - 1;

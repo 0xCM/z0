@@ -5,17 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using static Textual;
-
-    /// <summary>
-    /// Exposes formatting capabilites via exension methods
-    /// </summary>
-    partial class XText
+    using static Components;
+ 
+    partial class XTend
     {
         /// <summary>
         /// Formats a type that provides intrinsic format capability

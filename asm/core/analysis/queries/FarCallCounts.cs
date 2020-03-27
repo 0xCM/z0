@@ -48,11 +48,11 @@ namespace Z0
         /// </summary>
         public readonly int UnhostedReceivers;
 
-        const char eol = AsciSym.Colon;
+        const char eol = Chars.Colon;
 
         const int pad = 10;
 
-        const char sep = AsciSym.Pipe;
+        const char sep = Chars.Pipe;
 
         public string Format()
         {            

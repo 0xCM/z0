@@ -5,11 +5,9 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Components;
 
     /// <summary>
     /// Implements parametric computations

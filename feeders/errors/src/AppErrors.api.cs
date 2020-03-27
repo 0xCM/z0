@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    using static Apps;
+    using static Components;
 
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -120,7 +120,7 @@ namespace Z0
             where T : Enum
                 => AppException.Define(AppErrorMsg.KindOpUnsupported(src,dst, caller, file, line));
 
-        public static IndexOutOfRangeException TooManyBytes(ByteSize requested, ByteSize available, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static IndexOutOfRangeException TooManyBytes(int requested, int available, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new IndexOutOfRangeException(AppErrorMsg.TooManyBytes(requested, available, caller, file, line).ToString());
 
         public static IndexOutOfRangeException IndexOutOfRange(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

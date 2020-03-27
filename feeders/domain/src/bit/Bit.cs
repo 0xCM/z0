@@ -682,18 +682,6 @@ namespace Z0
                 f();
         }
 
-        [MethodImpl(Inline)]
-        public static void IfSome(this bool x, Action f)
-        {
-            if(x)
-                f();
-        }
 
-        [MethodImpl(Inline)]
-        public static void IfNone(this bool x, Action f)
-        {
-            if(!x)
-                f();
-        }                    
     }
 }

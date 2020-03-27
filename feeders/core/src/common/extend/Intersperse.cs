@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
-
-    using static Components;
 
     partial class XTend
     {

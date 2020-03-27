@@ -8,7 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
        
-    using static Root;
+    using static gmath;
+    using static CastNumeric;
 
     public static class IntervalOps
     {
@@ -51,7 +52,7 @@ namespace Z0
         
         public static string Format<T>(this Span<Interval<T>> parts, char? sep = null)
             where T : unmanaged
-                => parts.Map(x => x.Format()).Concat($" {sep ?? AsciSym.Plus} ");            
+                => parts.Map(x => x.Format()).Concat($" {sep ?? Chars.Plus} ");            
 
         public static T[] Increments<T>(this Interval<T> src, T t = default)
             where T : unmanaged

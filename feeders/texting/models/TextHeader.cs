@@ -22,7 +22,7 @@ namespace Z0
             => Names;
 
         public string Format(char? sep = null)
-            => string.Join(sep ?? AsciSym.Pipe, Names);
+            => string.Join(sep ?? Chars.Pipe, Names);
 
         public override string ToString()
             => Format();

@@ -52,7 +52,7 @@ namespace Z0
         public static string FormatHeader(int? colpad = null, char? delimiter = null)
         {
             var pad = colpad ?? 10;
-            var sep = delimiter ?? AsciSym.Pipe;
+            var sep = delimiter ?? Chars.Pipe;
             var format = text.factory.Builder();
             format.Append($"moniker".PadRight(pad));
             format.Append($" {sep} rows".PadRight(pad));
@@ -73,7 +73,7 @@ namespace Z0
         {
             var format = text.factory.Builder();
             var pad = colpad ?? 10;
-            var sep = delimiter ?? AsciSym.Pipe;
+            var sep = delimiter ?? Chars.Pipe;
             format.Append($" {sep} {stats.RowCount}".PadRight(pad));
             format.Append($" {sep} {stats.ColCount}".PadRight(pad));
             format.Append($" {sep} {stats.SegWidth}".PadRight(pad));

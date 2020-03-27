@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Root;
-
     public class t_gcd : t_gmath<t_arithmetic>
     {
         public void gcdbin_8u()

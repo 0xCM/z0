@@ -133,7 +133,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         static string EmbraceHex(AsmCode src)
-            => text.embrace(src.Bytes.FormatHexBytes(sep: AsciSym.Comma, uppercase:true));
+            => text.embrace(src.Bytes.FormatHexBytes(sep: Chars.Comma, uppercase:true));
 
         static string FormatEncodingProp(AsmCode src)
             => Comment($"static ReadOnlySpan<byte> {src.Id}_Bytes => new byte[{src.Data.Length}]{EmbraceHex(src)};");
@@ -150,7 +150,7 @@ namespace Z0.Asm
             {
                 var formatter = HexFormatter.Define<byte>();
                 var formatted = formatter.Format(code.Data, Config.FunctionHeaderEncodingFormat);                
-                dataline += text.concat(text.spaced(AsciSym.Eq), text.embrace(formatted));
+                dataline += text.concat(text.spaced(Chars.Eq), text.embrace(formatted));
             }
             return dataline;
         }
@@ -174,7 +174,7 @@ namespace Z0.Asm
             {
                 var cidesc = string.Empty;
                 if(Config.EmitCaptureTermCode)
-                    cidesc += text.concat(nameof(src.TermCode), text.spaced(AsciSym.Eq), src.TermCode.ToString());
+                    cidesc += text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString());
 
                 lines.Add(Comment(cidesc));
             }

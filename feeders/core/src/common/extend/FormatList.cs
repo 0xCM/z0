@@ -8,10 +8,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Text;
 
-    using static Textual;
+    using static Components;
 
-    partial class XText
+    partial class XTend
     {
         /// <summary>
         /// Formats a sequence of objects as a delimited list
@@ -21,8 +22,7 @@ namespace Z0
         /// <param name="offset">The index of the source element at which formatting will begin</param>
         /// <typeparam name="T">A formattable type</typeparam>
         public static string FormatList(this IEnumerable<object> items, char? delimiter = null)
-            => string.Join(delimiter ?? ',', items);
-
+            => string.Join(delimiter ?? Chars.Comma, items);
 
         /// <summary>
         /// Formats a sequence of formattable things as delimited list
@@ -38,15 +38,15 @@ namespace Z0
             if(src.Length == 0)
                 return string.Empty;
 
-            var sep = delimiter ?? text.comma();
-            var dst = text.factory.Builder();
+            var sep = delimiter ?? Chars.Comma;
+            var dst = new StringBuilder();
             
             for(var i = offset; i< src.Length; i++)
             {
                 if(i!=offset)
                 {
                     dst.Append(sep);
-                    dst.Append(text.space());
+                    dst.Append(Chars.Space);
                 }
                 dst.Append(src[i].Format());
             }
@@ -63,7 +63,6 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static string FormatList<T>(this IEnumerable<T> items, char? delimiter = null, int offset = 0)
             where T : ICustomFormattable
-                => string.Join(delimiter ?? AsciSym.Comma, items.Skip(0).Select(x => x.Format()));
-
+                => string.Join(delimiter ?? Chars.Comma, items.Skip(0).Select(x => x.Format()));
     }
 }

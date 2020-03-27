@@ -16,7 +16,7 @@ namespace Z0
 
     public static class AppErrorMsg
     {
-        public static IEnumerable<AppMsg> emit(IAppContext context, IEnumerable<AppMsg> src)
+        public static IEnumerable<AppMsg> emit(IAppEnv context, IEnumerable<AppMsg> src)
         {                    
             var errors = src.Where(m => m.Kind == AppMsgKind.Error).FormatLines().ToArray();
             if(errors.Length != 0)
@@ -103,7 +103,7 @@ namespace Z0
         public static AppMsg IndexOutOfRange(int index, int min, int max, string caller, string file, int? line)
             => AppMsg.Define($"The index {index} is not between {min} and {max}", AppMsgKind.Error, caller, file, line);
 
-        public static AppMsg TooManyBytes(ByteSize requested, ByteSize available, string caller, string file, int? line)
+        public static AppMsg TooManyBytes(int requested, int available, string caller, string file, int? line)
             => AppMsg.Define($"The number of bytes, {requested} exceeds the maximum available, {available}", AppMsgKind.Error, caller, file, line);
 
         public static AppMsg Unanticipated(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

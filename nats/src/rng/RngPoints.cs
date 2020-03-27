@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Components;
     using PointApi = Points;
 
     public static class RngPoints

@@ -21,10 +21,10 @@ namespace Z0
             where T : unmanaged
             where S : IFieldSegment<T>
         {
-            var sep =$"{AsciSym.Comma}{AsciSym.Space}";
+            var sep =$"{Chars.Comma}{Chars.Space}";
             var segformat = FieldSegments.formatter<T>();            
             var formatted = new StringBuilder();
-            formatted.Append(AsciSym.LBracket);
+            formatted.Append(Chars.LBracket);
             for(var i=0; i< src.Length; i++)
             {
                 formatted.Append(segformat.Format(src[(byte)i]));
@@ -32,7 +32,7 @@ namespace Z0
                     formatted.Append(sep);
             }
 
-            formatted.Append(AsciSym.RBracket);            
+            formatted.Append(Chars.RBracket);            
             return formatted.ToString();
         }
 

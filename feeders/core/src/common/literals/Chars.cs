@@ -6,7 +6,7 @@ namespace Z0
 {    
     using System;
 
-    public static class AsciSym
+    public static class Chars
     {
         /// <summary>
         /// Defines the '&' symbol

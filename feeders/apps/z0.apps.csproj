@@ -6,8 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Errors)" />
+    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Identify)" />

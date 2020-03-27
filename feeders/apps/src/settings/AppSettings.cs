@@ -31,13 +31,13 @@ namespace Z0
         public static IAppSettings Load(FilePath src)
         {
             var settings = new Dictionary<string,string>();
-            var ignore = new char[]{AsciSym.Quote, AsciSym.Comma};
+            var ignore = new char[]{Chars.Quote, Chars.Comma};
             if(src.Exists())
             {
                 var lines = src.ReadLines().Select(l => l.Trim().RemoveAny(ignore));
                 foreach(var line in lines)
                 {   
-                    var parts = line.SplitClean(AsciSym.Colon);
+                    var parts = line.SplitClean(Chars.Colon);
                     if(parts.Length == 2)                        
                     {
                         var key = parts[0].Trim();

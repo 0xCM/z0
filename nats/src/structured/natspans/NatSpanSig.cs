@@ -6,8 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-    using Z0;
 
     readonly struct NatSpanIdentity : ITypeIdentityProvider
     {
@@ -38,7 +36,7 @@ namespace Z0
                 var part2 = parts[1];
                 var n = ulong.MaxValue;
                 var w = int.MaxValue;                
-                var indicator = AsciSym.Question;
+                var indicator = Chars.Question;
                 if(part1[0] == IDI.Nat)
                 {
                     var number =  part1.TakeAfter(IDI.Nat);
@@ -60,7 +58,7 @@ namespace Z0
                         int.TryParse(digits, out w);                    
                 }         
                      
-                if(n != ulong.MaxValue && w != int.MaxValue && indicator != AsciSym.Question) 
+                if(n != ulong.MaxValue && w != int.MaxValue && indicator != Chars.Question) 
                     return NatSpanSig.Define((int)n, w, indicator);
                 else 
                     return default;             
@@ -96,7 +94,5 @@ namespace Z0
         
         public override string ToString()
             => text.concat(IDI.Nat, Length.ToString(), IDI.SegSep, CellWidth.ToString(), Indicator);
-
-
     }
 }

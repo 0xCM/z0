@@ -24,11 +24,11 @@ namespace Z0.Logix
 
         public QuestionChoice<T>[] Chosen {get;}
 
-        public string Format(bool bracket = false, char sep = AsciSym.Comma)
+        public string Format(bool bracket = false, char sep = Chars.Comma)
         {
             var sb = text.factory.Builder();
             if(bracket)
-                sb.Append(AsciSym.LBracket);
+                sb.Append(Chars.LBracket);
 
             for(var i=0; i<Chosen.Length; i++)
             {
@@ -37,13 +37,13 @@ namespace Z0.Logix
                 if(i != Chosen.Length - 1)
                 {
                     sb.Append(sep);
-                    sb.Append(AsciSym.Space);
+                    sb.Append(Chars.Space);
                 }
 
             }
 
             if(bracket)
-                sb.Append(AsciSym.RBracket);
+                sb.Append(Chars.RBracket);
             return sb.ToString();
 
         }

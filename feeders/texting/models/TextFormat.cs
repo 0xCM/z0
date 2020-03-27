@@ -10,7 +10,7 @@ namespace Z0
     {        
         public static readonly TextFormat Default = Define();
 
-        public static TextFormat Define(bool HasHeader = true, char Delimiter = AsciSym.Pipe, char CommentPrefix = AsciSym.Hash, int? ColWidth = null)
+        public static TextFormat Define(bool HasHeader = true, char Delimiter = Chars.Pipe, char CommentPrefix = Chars.Hash, int? ColWidth = null)
             => new TextFormat(HasHeader, Delimiter, CommentPrefix,ColWidth);
         
         TextFormat(bool HasHeader, char Delimiter, char? CommentPrefix, int? ColWidth)

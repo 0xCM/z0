@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Components;
     using static Nats;
 
     public interface IExp<R,B> : IFormattable<R>

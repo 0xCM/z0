@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static Root;
+    using static Components;
 
     /// <summary>
     /// Constructs natural number prepresentatives and calculates related values

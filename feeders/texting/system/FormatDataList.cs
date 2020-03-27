@@ -35,7 +35,7 @@ namespace Z0
                 if(i != src.Length - 1)
                 {
                     sb.Append(sep);
-                    sb.Append(AsciSym.Space);
+                    sb.Append(Chars.Space);
                 }
             }
             return bracketed ? $"[{sb.ToString()}]" : sb.ToString();

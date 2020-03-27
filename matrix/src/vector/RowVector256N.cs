@@ -169,7 +169,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(char? delimiter = null)
-            => data.FormatList(delimiter ?? AsciSym.Comma);    
+            => data.FormatList(delimiter ?? Chars.Comma);    
 
         public RowVector256<N,T> Replicate()
             => new RowVector256<N,T>(data.Replicate());

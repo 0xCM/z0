@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="header">Whether to emit a header row</param>
         /// <param name="overwrite">Whether to overwrite or altnernalely append to an existing file</param>
         /// <typeparam name="R">The source record type</typeparam>
-        public static Option<FilePath> save<R>(R[] records, FilePath dst, char delimiter = AsciSym.Pipe, 
+        public static Option<FilePath> save<R>(R[] records, FilePath dst, char delimiter = Chars.Pipe, 
             bool header = true, FileWriteMode mode = FileWriteMode.Overwrite)
                 where R : IRecord
         {            

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static nfunc;
-    using static Root;
+    using static Components;
 
     /// <summary>
     /// Encodes a natural number k := b^e

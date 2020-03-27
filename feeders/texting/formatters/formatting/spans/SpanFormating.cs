@@ -21,7 +21,7 @@ namespace Z0
         {
             var components = src.Map(x => x.ToString());
             var body = components.Concat(sep);
-            return AsciSym.Lt + body + AsciSym.Gt;
+            return Chars.Lt + body + Chars.Gt;
         }
  
         /// <summary>

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Components;
 
     /// <summary>
     /// Characterizes an atom of the type natural grammar

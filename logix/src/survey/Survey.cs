@@ -37,7 +37,7 @@ namespace Z0.Logix
         {
             var format = text.factory.Builder();
             format.AppendLine(Name);
-            format.AppendLine(new string(AsciSym.Dash,80));
+            format.AppendLine(new string(Chars.Dash,80));
             Questions.Iter(q => format.AppendLine(q.Format()));
             return format.ToString();
         }

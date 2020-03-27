@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         public static Swap<T> Parse(string src)
         {
-            var indices = src.RemoveAny(AsciSym.LParen, AsciSym.RParen).Trim().Split(AsciSym.Space);
+            var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
             if(indices.Length != 2)
                 return Zero;
             

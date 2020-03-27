@@ -30,7 +30,7 @@ namespace Z0
         }   
 
         public string Format()
-            => core.concat($"{Index}".PadLeft(2,'0'), AsciSym.Space, $"{Width}".PadLeft(2,'0'), AsciSym.Space, Name);
+            => core.concat($"{Index}".PadLeft(2,'0'), Chars.Space, $"{Width}".PadLeft(2,'0'), Chars.Space, Name);
 
         public override string ToString()
             => Format();     

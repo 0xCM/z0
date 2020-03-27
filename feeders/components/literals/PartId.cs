@@ -228,7 +228,11 @@ public enum PartId : ulong
     Numeric = 830,
 
     Domain = 832,
-            
+
+    Errors = 834,
+
+    Core = 836,
+
     Svc = ushort.MaxValue + 1,
 
     Test = Svc << 1,

@@ -377,7 +377,7 @@ namespace Z0
                 _ => throw new ArgumentException()
             };
 
-        static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
+        static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
             where R : IRecord
         {
             if(records.Length == 0)
@@ -386,11 +386,11 @@ namespace Z0
             return GetLogger(LogTarget.Define(LogArea.Test)).Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
-        static FilePath LogTestResults<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
+        static FilePath LogTestResults<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = Chars.Pipe)
             where R : IRecord
                 => LogTestResults(FolderName.Empty, basename, records, mode, header, delimiter);
 
-        static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = AsciSym.Pipe)
+        static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = Chars.Pipe)
             where R : IRecord
         {
             if(records.Length == 0)

@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(Math)" />

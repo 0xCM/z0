@@ -134,7 +134,7 @@ namespace Z0
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         static string BlockedBits<T>(T src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
             where T : unmanaged
-            => text.bracket(BitString.scalar(src,maxbits).Format(false, specifier, blocksize ?? 8, underscores ? AsciSym.Underscore : AsciSym.Space, null));
+            => text.bracket(BitString.scalar(src,maxbits).Format(false, specifier, blocksize ?? 8, underscores ? Chars.Underscore : Chars.Space, null));
 
         /// <summary>
         /// Block-formats the source value

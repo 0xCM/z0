@@ -50,8 +50,8 @@ namespace Z0
                 fmt.Append($"{index}:{f.StartPos}..{f.EndPos}");
                 if(i != FieldCount - 1)
                 {
-                    fmt.Append(AsciSym.Comma);
-                    fmt.Append(AsciSym.Space);
+                    fmt.Append(Chars.Comma);
+                    fmt.Append(Chars.Space);
                 }
             }
             return text.bracket(fmt.ToString());

@@ -9,7 +9,7 @@ namespace Z0
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
  
-    using static Root;
+    using static Components;
 
     /// <summary>
     /// Captures the value of a type natural

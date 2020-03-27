@@ -121,5 +121,30 @@ namespace Z0
         /// <param name="src">The source text</param>
         public static string Concat(this Span<string> src, char sep)
             => src.Concat(sep.ToString()); 
+
+        /// <summary>
+        /// Forms a new span by the concatenation [head,tail]
+        /// </summary>
+        /// <param name="head">The first span</param>
+        /// <param name="tail">The second span</param>
+        /// <typeparam name="T">The span element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> Concat<T>(this ReadOnlySpan<T> head, ReadOnlySpan<T> tail)
+        {
+            Span<T> dst = new T[head.Length + tail.Length];
+            head.CopyTo(dst);
+            tail.CopyTo(dst, head.Length);
+            return dst;
+        }
+
+        /// <summary>
+        /// Forms a new span by the concatenation [head,tail]
+        /// </summary>
+        /// <param name="head">The first span</param>
+        /// <param name="tail">The second span</param>
+        /// <typeparam name="T">The span element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> Concat<T>(this Span<T> head, ReadOnlySpan<T> tail)
+            => head.ReadOnly().Concat(tail);
     }
 }

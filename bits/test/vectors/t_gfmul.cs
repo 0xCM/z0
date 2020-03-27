@@ -59,7 +59,7 @@ namespace Z0
                 {                    
                     description.Append(expect[i,j].ToBitString().Truncate(3).Format());
                     if(j != 6)
-                        description.Append(AsciSym.Pipe);
+                        description.Append(Chars.Pipe);
                 }
                 description.AppendLine();
             }

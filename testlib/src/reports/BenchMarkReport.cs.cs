@@ -75,14 +75,14 @@ namespace Z0
         
         string IRecord.DelimitedText(char delimiter)
             => text.concat(
-                $"{OpId.Format().PadRight(OpNamePad)}{delimiter}{AsciSym.Space}",  
-                 OpCount.ToString("#,#").PadRight(OpCountPad),  $"{delimiter}{AsciSym.Space}",
+                $"{OpId.Format().PadRight(OpNamePad)}{delimiter}{Chars.Space}",  
+                 OpCount.ToString("#,#").PadRight(OpCountPad),  $"{delimiter}{Chars.Space}",
                 $"{Timing.Ms}");
 
         public IReadOnlyList<string> GetHeaders()
             => new string[]{    nameof(OpId).PadRight(OpNamePad), 
-                AsciSym.Space + nameof(OpCount).PadRight(OpCountPad), 
-                AsciSym.Space + nameof(Timing),
+                Chars.Space + nameof(OpCount).PadRight(OpCountPad), 
+                Chars.Space + nameof(Timing),
                 };
 
         public override string ToString()

@@ -45,4 +45,9 @@ namespace Z0
         internal static StringBuilder builder()
             => new StringBuilder();
     }
+
+    public static partial class XTend
+    {
+
+    }
 }

@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
 
     using static nfunc;
-    using static Root;    
+    using static Components;    
 
     partial class NatClaim
     {
@@ -39,7 +35,6 @@ namespace Z0
         public static NatPrior<K1,K2> prior<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => new NatPrior<K1,K2>(k1,k2);                             
-
+                => new NatPrior<K1,K2>(k1,k2);
     }
 }

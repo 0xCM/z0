@@ -61,7 +61,7 @@ namespace Z0
         {
             var sigtext = text.factory.Builder();            
             sigtext.Append(ReturnType.Format());
-            sigtext.Append(AsciSym.Space);
+            sigtext.Append(Chars.Space);
             sigtext.Append(MethodName);
             sigtext.Append(ValueParams.Format(true));
             return sigtext.ToString();            

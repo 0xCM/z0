@@ -8,7 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Z0;
-using static Z0.Root;
+using static Z0.Components;
 
 public static class nfunc
 {

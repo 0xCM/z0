@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static As;
-    using static Root;
+    using static gmath;
+    using static refs;
 
     public static class XGSpan
     {

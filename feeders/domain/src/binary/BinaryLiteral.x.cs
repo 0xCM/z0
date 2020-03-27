@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="content">The content to be quoted</param>
         public static string enquote(object content)
-            => $"{AsciSym.Quote}{content}{AsciSym.Quote}";
+            => $"{Chars.Quote}{content}{Chars.Quote}";
 
         /// <summary>
         /// Selects the binary literals declared by a type that are of a specified parametric primal type

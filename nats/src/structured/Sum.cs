@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static Root;
+    using static Components;
 
     public readonly struct NatSum<K> : INatSum<K>
         where K : unmanaged, ITypeNat

@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
         
-    using static Root;    
+    using static Components;  
+    using static CastNumeric;  
 
     /// <summary>
     /// Represents div/mod operations for a divisor of type N; This type forms a commutative

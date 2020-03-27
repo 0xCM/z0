@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;    
+    using static Components;    
     using static nfunc;
 
     public readonly struct N2048 : INatSeq<N2048>, INatPow<N2048, N2, N11>, INatPow2<N11>,

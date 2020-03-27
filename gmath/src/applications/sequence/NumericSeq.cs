@@ -98,17 +98,17 @@ namespace Z0
         public string Format(char? delimiter = null)
         {
             var fmt = text.factory.Builder();
-            fmt.Append(AsciSym.LBrace);
+            fmt.Append(Chars.LBrace);
             for(var i=0; i<terms.Length; i++)
             {
                 fmt.Append(terms[i].Format());
                 if(i != terms.Length - 1)
                 {
-                    fmt.Append(delimiter ?? AsciSym.Comma);
-                    fmt.Append(AsciSym.Space);
+                    fmt.Append(delimiter ?? Chars.Comma);
+                    fmt.Append(Chars.Space);
                 }                
             }
-            fmt.Append(AsciSym.RBrace);
+            fmt.Append(Chars.RBrace);
             return fmt.ToString();
         }        
     }

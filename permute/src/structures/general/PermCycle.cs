@@ -37,15 +37,15 @@ namespace Z0
         public string Format()
         {
             var sb = text.factory.Builder();
-            sb.Append(AsciSym.LParen);
+            sb.Append(Chars.LParen);
             for(var i=0; i< Terms.Length; i++)            
             {
                 sb.Append(Terms[i].Source);
                 if(i != Terms.Length - 1)                
-                    sb.Append(AsciSym.Space);
+                    sb.Append(Chars.Space);
             }
 
-            sb.Append(AsciSym.RParen);
+            sb.Append(Chars.RParen);
             return sb.ToString();
         }
 

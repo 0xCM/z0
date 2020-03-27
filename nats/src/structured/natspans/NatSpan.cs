@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static nfunc;
-    using static Root;
+    using static Components;
 
     /// <summary>
     /// Defines a span of natural length N

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Root;
 
     public class t_partition : t_gmath<t_partition>
     {        
@@ -55,7 +54,7 @@ namespace Z0
             var dst = Partition.measuredPoints(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            
-            Claim.numeq(items(5,6,7,8,9,10,11,12).ToSpan(),dst);
+            Claim.numeq(Arrays.from(5,6,7,8,9,10,11,12).ToSpan(),dst);
         }
 
         public void part1()

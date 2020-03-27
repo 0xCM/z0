@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static Components;    
 
     public readonly struct N36 : INatSeq<N36>, INatEven<N36>, INatDivisible<N36,N6>, INatDivisible<N36,N12>
     {
@@ -19,9 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator int(N36 src) => 36;
-
-        
-
+    
         public ulong NatValue => Value;
 
         public override string ToString() 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static Components;    
 
     public readonly struct N41 : INatSeq<N41>
     {
@@ -19,9 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator int(N41 src) => 41;
-
         
-
         public ulong NatValue => Value;
 
         public override string ToString() 

@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Api;
+    using static SFuncs;
 
     public readonly struct ApiServices : IApiServiceFactory
     {

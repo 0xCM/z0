@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static Components;    
 
     public readonly struct N52 : INatSeq<N52,N5,N2>
     {
@@ -15,7 +15,6 @@ namespace Z0
 
         public static N52 Rep => default;
                 
-
         [MethodImpl(Inline)]
         public static implicit operator int(N52 src) => 52;
 

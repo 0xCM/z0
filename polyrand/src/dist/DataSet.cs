@@ -123,14 +123,14 @@ namespace Z0
             for(var i=0; i<Count; i++)
             {
                 var v = Observation(i);
-                fmt.Append(AsciSym.Lt);                
+                fmt.Append(Chars.Lt);                
                 for(var j = 0; j< Dim; j++)
                 {
                     fmt.Append($"{v[j]}");
                     if(j != Dim - 1)
                         fmt.Append(", ");
                 }
-                fmt.Append(AsciSym.Gt);                
+                fmt.Append(Chars.Gt);                
                 
                 if(i != Count - 1)
                     fmt.AppendLine();

@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
-
     public class t_special : t_gmath<t_special>
     {
         public void ilog2()

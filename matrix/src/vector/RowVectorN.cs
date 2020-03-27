@@ -149,7 +149,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(char? delimiter = null)
-            => data.FormatDataList(delimiter ?? AsciSym.Comma);    
+            => data.FormatDataList(delimiter ?? Chars.Comma);    
 
         public override bool Equals(object rhs)
             => rhs is RowVector<N,T> x && Equals(x);

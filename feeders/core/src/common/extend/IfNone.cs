@@ -7,14 +7,19 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Text;
+    
+    using static Components;
 
-    using static Textual;
-
-    partial class XText
+    partial class XTend
     {
-        public static void AppendLines(this StringBuilder src, IEnumerable<string> lines)
-            => Streams.iter(lines, line => src.AppendLine(line));            
+
+        [MethodImpl(Inline)]
+        public static void IfNone(this bool x, Action f)
+        {
+            if(!x)
+                f();
+        }
+
     }
 }

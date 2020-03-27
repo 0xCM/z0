@@ -53,8 +53,8 @@ namespace Z0
             var line1 = text.factory.Builder();
             var line2 = text.factory.Builder();
             var pad = colwidth ?? 3;
-            var leftBoundary = $"{AsciSym.Pipe}";
-            var rightBoundary = $"{AsciSym.Pipe}".PadLeft(2);
+            var leftBoundary = $"{Chars.Pipe}";
+            var rightBoundary = $"{Chars.Pipe}".PadLeft(2);
             
             line1.Append(leftBoundary);
             line2.Append(leftBoundary);
@@ -80,7 +80,7 @@ namespace Z0
         public static string FormatBlock(this Perm4L src, bool bracketed = true)
         {
             var bs = BitString.scalar((byte)src);
-            var data = bs.Format(false,false,2, AsciSym.Space);
+            var data = bs.Format(false,false,2, Chars.Space);
             return bracketed ? text.bracket(data) : data;
         }
 

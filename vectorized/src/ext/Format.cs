@@ -82,10 +82,10 @@ namespace Z0
         public static string Format<T>(this Vector1024<T> src, char sep = ',', int pad = 0)
             where T : unmanaged
             => text.bracket(text.concat(
-                    src.A.Format(sep:AsciSym.Comma, bracketed:false), $"{sep} ",
-                    src.B.Format(sep:AsciSym.Comma,bracketed:false), $"{sep} ",
-                    src.C.Format(sep:AsciSym.Comma,bracketed:false), $"{sep} ",
-                    src.D.Format(sep:AsciSym.Comma,bracketed:false))
+                    src.A.Format(sep:Chars.Comma, bracketed:false), $"{sep} ",
+                    src.B.Format(sep:Chars.Comma,bracketed:false), $"{sep} ",
+                    src.C.Format(sep:Chars.Comma,bracketed:false), $"{sep} ",
+                    src.D.Format(sep:Chars.Comma,bracketed:false))
                     ); 
     }
 }

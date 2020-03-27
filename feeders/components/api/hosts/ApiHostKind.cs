@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Components;
-
     
     [Flags]
     public enum ApiHostKind

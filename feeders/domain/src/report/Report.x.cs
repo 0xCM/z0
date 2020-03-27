@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="header">Whether to emit a header row</param>
         /// <param name="overwrite">Whether to overwrite or altnernalely append to an existing file</param>
         /// <typeparam name="R">The source record type</typeparam>
-        public static Option<FilePath> Save<R>(this R[] records, FilePath dst, char delimiter = AsciSym.Pipe, 
+        public static Option<FilePath> Save<R>(this R[] records, FilePath dst, char delimiter = Chars.Pipe, 
             bool header = true, FileWriteMode mode = FileWriteMode.Overwrite)
                 where R : IRecord
                     => Reports.save(records, dst, delimiter, header, mode);
@@ -58,7 +58,7 @@ namespace Z0
         {
             sb.Append(label);
             sb.Append(eol);
-            sb.Append(AsciSym.Space);
+            sb.Append(Chars.Space);
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace Z0
         /// <param name="delimiter">The content delimiter</param>
         public static void DelimitLabeled(this StringBuilder sb, string label, char eol, object content, int pad, char delimiter)
         {
-            sb.Append(AsciSym.Space);
+            sb.Append(Chars.Space);
             sb.Append(delimiter);
-            sb.Append(AsciSym.Space);
+            sb.Append(Chars.Space);
             sb.AppendLabel(label, eol);
             sb.Append($"{content}".PadRight(pad));
         }
@@ -118,9 +118,9 @@ namespace Z0
         public static void DelimitLabeled<T>(this StringBuilder sb, string label, char eol, T content, int pad, char delimiter)
             where T : ICustomFormattable
         {
-            sb.Append(AsciSym.Space);
+            sb.Append(Chars.Space);
             sb.Append(delimiter);
-            sb.Append(AsciSym.Space);
+            sb.Append(Chars.Space);
             sb.AppendLabel(label, eol);
             sb.Append($"{content.Format()}".PadRight(pad));
         }

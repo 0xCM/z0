@@ -109,7 +109,7 @@ namespace Z0
         /// <param name="delimiter">The component delimiter</param>
         [MethodImpl(Inline)]
         public string Format(char? delimiter = null)
-            => data.FormatDataList(delimiter ?? AsciSym.Comma);    
+            => data.FormatDataList(delimiter ?? Chars.Comma);    
 
         /// <summary>
         /// Copies vector content into a caller-provided span

@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The delimited hex</param>
         /// <param name="sep">The delimiter</param>
-        public static IEnumerable<byte> parsebytes(string src, char sep = AsciSym.Comma)
+        public static IEnumerable<byte> parsebytes(string src, char sep = Chars.Comma)
             => src.Split(sep).Select(parsebyte);
  
         /// <summary>

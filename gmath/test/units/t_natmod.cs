@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Root;
     using static Nats;
 
     public class t_natmod : t_gmath<t_natmod>

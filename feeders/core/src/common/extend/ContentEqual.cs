@@ -9,9 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Memories;
+    using static Components;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -30,5 +30,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool ContentEqual(this Span<char> lhs, ReadOnlySpan<char> rhs)        
              => lhs.ReadOnly().ContentEqual(rhs);
+
+
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        [MethodImpl(Inline)]
+        public static bool ContentEqual(this Span<char> lhs, Span<char> rhs)        
+             => lhs.ReadOnly().ContentEqual(rhs);
+
     }
 }

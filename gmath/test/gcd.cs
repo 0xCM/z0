@@ -2,8 +2,6 @@ namespace Z0
 {
     using System;
 
-    using static Root;
-
     public static class MM
     {
 

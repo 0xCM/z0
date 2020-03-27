@@ -55,5 +55,11 @@ bash $AddCmd
 export ProjectId=domain
 bash $AddCmd
 
+export ProjectId=errors
+bash $AddCmd
+
+export ProjectId=core
+bash $AddCmd
+
 
 dotnet sln add $ProjectRoot/test/z0.feeders.test.csproj

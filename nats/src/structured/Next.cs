@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static Root;
+    using static Components;
     
     /// <summary>
     /// Encodes a natural number k such that k1:K1 & k2:K2 => k = k1 + 1

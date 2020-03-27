@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Apps;
-
     public readonly struct EnvVarNames
     {
         public const string LogDir = "ZLogs";

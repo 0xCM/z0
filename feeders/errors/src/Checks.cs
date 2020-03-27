@@ -15,7 +15,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Apps;
+    using static Errors;
     using static AppErrorMsg;    
 
     public static class Checks
@@ -257,14 +257,6 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void eq(bool lhs, bool rhs)
-            => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
-
-        /// <summary>
-        /// Asserts the equality of two bit values
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        public static void eq(bit lhs, bit rhs)
             => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
 
         public static bool eq(HexByteKind lhs, HexByteKind rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

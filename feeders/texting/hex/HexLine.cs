@@ -14,9 +14,9 @@ namespace Z0
     /// </summary>
     public readonly struct HexLine : IFormattable<HexLine>
     {
-        public const char DefaultIdSep = AsciSym.Space;
+        public const char DefaultIdSep = Chars.Space;
 
-        public const char DefaultByteSep = AsciSym.Space;
+        public const char DefaultByteSep = Chars.Space;
 
         public static FileExtension FileExt => FileExtensions.Hex;
 

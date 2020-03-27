@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Numerics;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static nfunc;
 
@@ -35,7 +30,6 @@ namespace Z0
         public static NatNext<K1,K2> next<K1,K2>(K1 k1, K2 k2)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => new NatNext<K1,K2>(k1,k2);                             
-
+                => new NatNext<K1,K2>(k1,k2);
     }
 }

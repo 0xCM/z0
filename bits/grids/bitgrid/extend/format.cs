@@ -28,7 +28,7 @@ namespace Z0
                 var segment = math.min(remaining, rowlen);
                 var rowbits = dst.Slice(i, segment);
                 var rowprefix = showrow ? $"{rowidx.ToString().PadRight(3)} | " : string.Empty;
-                var rowformat = rowprefix + new string(rowbits.Intersperse(AsciSym.Space));
+                var rowformat = rowprefix + new string(rowbits.Intersperse(Chars.Space));
                 sb.AppendLine(rowformat);
             }
             return sb.ToString();

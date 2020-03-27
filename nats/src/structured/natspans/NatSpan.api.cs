@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static nfunc;
-    using static Root;
+    using static Components;
 
     public static class NatSpan
     {
