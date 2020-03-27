@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static Root;    
     using static Nats;
     using static vgeneric;
+    using static refs;
 
     partial class BitPack
     {

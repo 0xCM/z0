@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Polyrand)"/>
-    <ProjectReference Include="$(Math)"/>
   </ItemGroup>
 
 </Project>

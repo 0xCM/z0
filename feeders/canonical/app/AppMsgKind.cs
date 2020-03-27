@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     /// <summary>
     /// Classifier for application messages
     /// </summary>

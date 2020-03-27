@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static refs;
-    using static Textual;
-
+    using static Domain;
     
     public readonly struct BitFormatter<T> : IFormatter<T,BitFormatConfig>
         where T : struct

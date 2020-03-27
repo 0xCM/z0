@@ -19,9 +19,6 @@ namespace Z0
         {
             if(!condition)
                 @false();
-
         }
-
-
     }
 }

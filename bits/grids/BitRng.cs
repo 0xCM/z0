@@ -15,7 +15,6 @@ namespace Z0
     using BG = Z0.BitGrid;
     using BS = Z0.BitBlocks;
     using BM = Z0.BitMatrix;
-    using BV = Z0.BitVector;
 
     public static class BitRng
     {   

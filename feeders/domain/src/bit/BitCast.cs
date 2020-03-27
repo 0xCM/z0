@@ -5,14 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
+    using static Domain;
     using static As;
-    using static CastInternals;
 
-    partial class Cast
+    public static class BitCast
     {
         [MethodImpl(Inline)]   
+        public static T to<T>(bit src, T t = default)
+            where T : unmanaged
+                => to_u<T>(src);
+
+        [MethodImpl(Inline)]           
         static T to_u<T>(bit src, T t = default)
             where T : unmanaged
         {
@@ -42,6 +47,6 @@ namespace Z0
                 return generic<T>((long)src);
             else
                 return Unsupported.raise<T>();
-        }
-    }
+        }        
+    }    
 }

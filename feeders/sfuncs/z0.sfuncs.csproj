@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Canonical)" />
+    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identify)" />
   </ItemGroup>

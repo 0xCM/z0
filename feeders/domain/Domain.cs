@@ -2,15 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.RngPcg)]
+[assembly: PartId(PartId.Domain)]
 
 namespace Z0.Parts
 {        
-    public sealed class RngPcg : Part<RngPcg>
-    {
-
-
-    }
+    public sealed class Domain : Part<Domain> { }
 }
 
 namespace Z0
@@ -18,8 +14,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static partial class RngPcg
+    public static class Domain
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
+
+    }
+
+    public static partial class XDomain    
+    {
+
     }
 }

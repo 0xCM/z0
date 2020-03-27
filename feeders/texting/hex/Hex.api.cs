@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
-        public static bit isdigit(char c)
+        public static bool isdigit(char c)
         {
             var u = Char.ToUpper(c);
             return islo(u) || ishi(u);
@@ -260,11 +260,11 @@ namespace Z0
             => new byte[]{48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70};
 
         [MethodImpl(Inline)]
-        static bit islo(char c)
+        static bool islo(char c)
             => (byte)c >= MinCode && (byte)c <= MaxLoCode;
 
         [MethodImpl(Inline)]
-        static bit ishi(char c)
+        static bool ishi(char c)
             => (byte)c >= MinHiCode && (byte)c <= MaxCode;
     }
 }

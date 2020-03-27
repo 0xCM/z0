@@ -37,35 +37,35 @@ namespace Z0
             => new AppMsg(content, kind, (AppMsgColor)kind, caller, FilePath.Define(file), line);
 
         public static AppMsg NoCaller(object content, AppMsgKind? kind = null)
-            => new AppMsg(content, kind ?? AppMsgKind.Info, (AppMsgColor)(kind ?? AppMsgKind.Info), text.blank, FilePath.Empty, null);
+            => new AppMsg(content, kind ?? AppMsgKind.Info, (AppMsgColor)(kind ?? AppMsgKind.Info), string.Empty, FilePath.Empty, null);
 
         public static AppMsg SpecificCaller(object content, AppMsgKind kind, string caller, string file = null, int? line = null)
             => new AppMsg(content, kind, (AppMsgColor)kind,  caller, FilePath.Define(file),line);
 
         public static AppMsg Colorize(object content, AppMsgColor color)
-            => new AppMsg(content, AppMsgKind.Info, color, text.blank, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Info, color, string.Empty, FilePath.Empty, null);
 
         public static AppMsg Info(object content)
-            => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, text.blank, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Info, AppMsgColor.Green, string.Empty, FilePath.Empty, null);
 
         public static AppMsg Babble(object content)
-            => new AppMsg(content, AppMsgKind.Babble, AppMsgColor.Gray, text.blank, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Babble, AppMsgColor.Gray, string.Empty, FilePath.Empty, null);
 
         public static AppMsg Warn(object content)
-            => new AppMsg(content, AppMsgKind.Warning, AppMsgColor.Yellow, text.blank, FilePath.Empty, null);
+            => new AppMsg(content, AppMsgKind.Warning, AppMsgColor.Yellow, string.Empty, FilePath.Empty, null);
 
         public static AppMsg Error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, AppMsgKind.Error, AppMsgColor.Red, caller, FilePath.Define(file), line);
         
         public static AppMsg Empty
-            => new AppMsg(string.Empty, AppMsgKind.Info, AppMsgColor.Unspecified, text.blank, FilePath.Empty, null);
+            => new AppMsg(string.Empty, AppMsgKind.Info, AppMsgColor.Unspecified, string.Empty, FilePath.Empty, null);
 
         AppMsg(object content, AppMsgKind kind, AppMsgColor color, string caller, FilePath file, int? line, bool displayed = false)
         {
             this.Content = content ?? string.Empty;
             this.Kind = kind;
             this.Color = color;
-            this.Caller =  text.denullify(caller);
+            this.Caller =  caller ?? string.Empty;
             this.CallerFile = file;
             this.FileLine = line;
             this.Displayed = displayed;    
@@ -107,7 +107,7 @@ namespace Z0
         public bool Displayed {get;}
 
         public bool IsEmpty
-            => Content == null || (Content is string s && text.empty(s));
+            => Content == null || (Content is string s && string.IsNullOrWhiteSpace(s));
 
         /// <summary>
         /// Returns a kind-aligned messages
@@ -152,7 +152,7 @@ namespace Z0
 
             var formatted = string.Empty;
             
-            if(text.nonempty(Caller))
+            if(!string.IsNullOrWhiteSpace(Caller))
                 formatted += $"{Caller}(";
 
             if(CallerFile.IsNonEmpty)
@@ -161,10 +161,10 @@ namespace Z0
             if(FileLine != null)
                 formatted += $", Line: {FileLine}";
 
-            if(text.nonempty(Caller))
+            if(!string.IsNullOrWhiteSpace(Caller))
                 formatted += ")";
             
-            return formatted.IsBlank() ? $"{Content}" : $"{formatted.Trim()} | {Content}" ;
+            return string.IsNullOrWhiteSpace(formatted) ? $"{Content}" : $"{formatted.Trim()} | {Content}" ;
         }
         
         public override string ToString()

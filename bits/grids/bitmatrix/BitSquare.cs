@@ -14,6 +14,7 @@ namespace Z0
     using static As;
     using static Root;
     using static Nats;
+    using static refs;
 
     static partial class vblock
     {
@@ -346,6 +347,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static bit testc(in byte A)
             => dvec.testc(Bytes.read64(in A));
-
     }
 }

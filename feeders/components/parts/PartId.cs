@@ -226,12 +226,9 @@ public enum PartId : ulong
     Apps = 828,
     
     Numeric = 830,
+
+    Domain = 832,
             
-    RngPcg = 1024,
-
-    RngWy = 1023,
-    
-
     Svc = ushort.MaxValue + 1,
 
     Test = Svc << 1,

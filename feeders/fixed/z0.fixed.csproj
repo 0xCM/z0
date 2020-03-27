@@ -10,6 +10,8 @@
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Domain)" />
+
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Textual)" />

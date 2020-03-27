@@ -7,6 +7,7 @@
     <Canonical>$(Feeders)canonical/z0.canonical.csproj</Canonical>
     <Collective>$(Feeders)collective/z0.collective.csproj</Collective>
     <Custom>$(Feeders)custom/z0.custom.csproj</Custom>
+    <Domain>$(Feeders)domain/z0.domain.csproj</Domain>
     <Fixed>$(Feeders)fixed/z0.fixed.csproj</Fixed>
     <Identify>$(Feeders)identify/z0.identify.csproj</Identify>
     <Kinds>$(Feeders)kinds/z0.kinds.csproj</Kinds>

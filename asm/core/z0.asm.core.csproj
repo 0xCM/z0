@@ -15,7 +15,6 @@
     <ProjectReference Include="$(Identity)" />    
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Graphs)" />
-    <ProjectReference Include="$(RngCore)" />
   </ItemGroup>
 
 </Project>

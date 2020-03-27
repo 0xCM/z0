@@ -9,20 +9,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Root;
+    using static Textual;
 
-    public readonly struct HexFile
+    public readonly struct HexDoc
     {        
-        public static HexFile Read(FilePath src)
-        {
-            var dst = new List<HexLine>();
-            foreach(var line in src.ReadLines())
-                HexParser.hexline(line).OnSome(dst.Add);            
-            return new HexFile(dst.ToArray());
-        }
-
         [MethodImpl(Inline)]
-        HexFile(HexLine[] lines)
+        public HexDoc(HexLine[] lines)
         {
             this.Lines = lines;
         }
@@ -40,7 +32,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.error(e);
+                core.error(e);
                 return Option.none<FilePath>();
             }
         }

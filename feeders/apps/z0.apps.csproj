@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Collective)" />    
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />

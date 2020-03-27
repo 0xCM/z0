@@ -10,15 +10,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Textual;
+    using static Components;
 
-    partial class XText
+    partial class XTend
     {
         /// <summary>
         /// Partitions a string into parts of a specified maximum width
         /// </summary>
         /// <param name="src">The source string</param>
-        /// <param name="maxlen"></param>
+        /// <param name="maxlen">The maximum length of a partition</param>
         public static IEnumerable<string> Partition(this string src, int maxlen)
         {
             Span<char> buffer = stackalloc char[maxlen];
@@ -38,7 +38,6 @@ namespace Z0
             if(trim.Length != 0)
                 yield return new string(trim);                
         }
-
 
         /// <summary>
         /// Block-formats a string using specified block length and separator

@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Fixed)" />
-    <ProjectReference Include="$(RngCore)" />
+    <ProjectReference Include="$(RngSourced)" />
   </ItemGroup>
 
 </Project>

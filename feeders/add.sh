@@ -52,5 +52,8 @@ bash $AddCmd
 export ProjectId=tuples
 bash $AddCmd
 
+export ProjectId=domain
+bash $AddCmd
+
 
 dotnet sln add $ProjectRoot/test/z0.feeders.test.csproj

@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Vectorized)" />
 

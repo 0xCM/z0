@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Memories)" />    
     <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 
 </Project>

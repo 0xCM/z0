@@ -23,7 +23,7 @@ namespace Z0
 
         const byte MaxCode = 70;
 
-       /// <summary>
+        /// <summary>
         /// Attempts to parse a hex string as an unsigned long
         /// </summary>
         /// <param name="src">The source text</param>
@@ -32,6 +32,14 @@ namespace Z0
                 .MapValueOrElse(
                     value => ParseResult.Success(src,value), 
                     () => ParseResult.Fail<ulong>(src));                    
+
+        public static HexDoc parse(FilePath src)
+        {
+            var dst = new List<HexLine>();
+            foreach(var line in src.ReadLines())
+                HexParser.hexline(line).OnSome(dst.Add);            
+            return new HexDoc(dst.ToArray());
+        }
 
         /// <summary>
         /// Parses the Hex digit if possible; otherwise raises an error

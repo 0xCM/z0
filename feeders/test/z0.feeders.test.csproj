@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Collective)" />  
     <ProjectReference Include="$(Components)" />  
     <ProjectReference Include="$(Custom)" />  
+    <ProjectReference Include="$(Domain)" />  
     <ProjectReference Include="$(Identify)" />  
     <ProjectReference Include="$(Kinds)" />  
     <ProjectReference Include="$(Memories)" />  

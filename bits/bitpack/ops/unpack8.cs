@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static Root;    
+    using static refs;    
     using static Nats;
 
     partial class BitPack
@@ -63,6 +63,5 @@ namespace Z0
             unpack8((uint)packed, ref unpacked);
             unpack8((uint)(packed >> 32), ref seek(ref unpacked, 32));
         }
-
     }
 }

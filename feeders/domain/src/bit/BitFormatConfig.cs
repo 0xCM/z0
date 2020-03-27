@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Textual;
+    using static Domain;
 
     /// <summary>
     /// Controls formatting when bitstring content is rendered as text

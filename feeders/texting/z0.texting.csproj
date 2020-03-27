@@ -12,6 +12,8 @@
     <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Domain)" />
+
   </ItemGroup>
 
 </Project>
