@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
 
     partial class Dynop
     {
-
         /// <summary>
         /// Creates a fixed 8-bit binary operator from caller-supplied x86 source code
         /// </summary>

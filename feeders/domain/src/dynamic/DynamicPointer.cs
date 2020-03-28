@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Encloses a pointer to the native definition of a dynamic delegate

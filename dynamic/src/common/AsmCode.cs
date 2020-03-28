@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Z0.Root;
+    using static Core;
 
     /// <summary>
     /// Encapsulates a block of encoded assembly

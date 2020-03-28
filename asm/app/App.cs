@@ -23,6 +23,7 @@ namespace Z0.Asm.Check
                 R.BitSpan.Resolution, 
                 R.BitFields.Resolution,
                 R.BitVectors.Resolution, 
+                R.Components.Resolution,
                 R.VBits.Resolution, 
                 R.Permute.Resolution,
                 R.Blocks.Resolution, 
@@ -45,7 +46,6 @@ namespace Z0.Asm.Check
             var src = dir + FileName.Define("config.json");
             return AppSettings.Load(src);
         }
-
         
         static IAsmContext CreateContext()
         {

@@ -13,7 +13,6 @@ namespace Z0
 
     partial class ServiceFactory
     {
-
         [MethodImpl(Inline)]
         public static IEmitterFactory<T> OperatorFactory<T>(this IContext context, C.Emitter<T> op)        
             where T : unmanaged
@@ -33,7 +32,5 @@ namespace Z0
         public static ITernaryOpFactory<T> OperatorFactory<T>(this IContext context, C.TernaryOp<T> op)        
             where T : unmanaged
                 => default(TernaryOpFactory<T>);
-
     }
-
 }

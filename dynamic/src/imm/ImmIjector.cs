@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
    
-    using static Root;
+    using static Core;
     using static FKT;
 
     readonly struct ImmInjector<D> : IImmInjector<D>

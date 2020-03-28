@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
 
     public static class AsmCodeExtensions
     {

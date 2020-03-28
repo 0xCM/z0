@@ -8,8 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Reflection.Emit;
 
-    using static Root;
-
     public class CilBody
     {
         public static CilBody Load(MethodInfo method)

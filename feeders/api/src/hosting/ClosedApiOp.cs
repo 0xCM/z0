@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Identify;
-    
+
     /// <summary>
     /// Captures identifying/descriptive information about a generic closure
     /// </summary>

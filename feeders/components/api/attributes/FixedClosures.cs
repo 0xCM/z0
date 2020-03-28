@@ -12,7 +12,6 @@ namespace Z0
     public class FixedClosuresAttribute : TypeClosuresAttribute
     {
         public FixedClosuresAttribute(DataWidth width)
-            : base((ulong)width)
         {
             this.Width = width;
         }

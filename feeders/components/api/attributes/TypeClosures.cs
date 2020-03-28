@@ -8,11 +8,7 @@ namespace Z0
 
     public abstract class TypeClosuresAttribute : Attribute
     {
-        protected TypeClosuresAttribute(ulong selected)
-        {
-            this.Selected = selected;
-        }
 
-        public ulong Selected {get;}
+
     }
 }

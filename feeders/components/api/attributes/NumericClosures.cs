@@ -12,7 +12,6 @@ namespace Z0
     public class NumericClosuresAttribute : TypeClosuresAttribute
     {
         public NumericClosuresAttribute(NumericKind nk)
-            : base((ulong)nk)
         {
             this.NumericPrimitive = nk;
         }

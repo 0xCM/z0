@@ -12,7 +12,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
+    using static Core;
 
     partial class Dynop
     {
@@ -167,7 +167,7 @@ namespace Z0
         {
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var id = baseid ?? src.Identify();
-            require(tCell.IsNumeric());
+            core.require(tCell.IsNumeric());
             var wrapped = src.Reify(tCell);
             var wrapperId = id.WithImm8(imm8);
             var tOperand = src.ReturnType;
@@ -181,7 +181,7 @@ namespace Z0
         {
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var id = baseid ?? src.Identify();
-            require(tCell.IsNumeric());
+            core.require(tCell.IsNumeric());
             var wrapped = src.Reify(tCell);
             var wrapperId = id.WithImm8(imm8);
             var tOperand = typeof(Vector256<>).MakeGenericType(tCell);  

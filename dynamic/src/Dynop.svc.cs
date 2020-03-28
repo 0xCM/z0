@@ -15,7 +15,6 @@ namespace Z0
     public static partial class ServiceFactory
     {
 
-
     }
 
     public static class DynopServices

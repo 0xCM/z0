@@ -1,0 +1,220 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Components;
+
+    [ApiHost]
+    public static class WMath
+    {
+        [MethodImpl(Inline),Op]
+        public static uint mul16x8()
+            => mul<W16,W8>();
+
+        [MethodImpl(Inline),Op]
+        public static uint mul16x16()
+            => mul<W16,W16>();
+
+        [MethodImpl(Inline)]
+        public static uint uint32<W>(W w = default)
+            where W : unmanaged, ITypeWidth
+                => (uint)default(W).TypeWidth;
+        
+        [MethodImpl(Inline)]
+        public static uint mul<A,B>(A a = default, B b = default)
+            where A : unmanaged,ITypeWidth
+            where B : unmanaged, ITypeWidth
+        {
+            if(typeof(A) == typeof(W1))
+                return uint32(b);
+            else if(typeof(B) == typeof(W1))
+                return uint32(a);
+            else 
+                return mul_lo(a,b);
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul_lo<A,B>(A a = default, B b = default)
+            where A : unmanaged,ITypeWidth
+            where B : unmanaged, ITypeWidth
+        {
+            if(typeof(A) == typeof(W8))                
+                return mul8(b);
+            else if(typeof(A) == typeof(W16))
+                return mul16(b);
+            else if(typeof(A) == typeof(W32))
+                return mul32(b);
+            else
+                return mul_hi(a,b);
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul_hi<A,B>(A a = default, B b = default)
+            where A : unmanaged,ITypeWidth
+            where B : unmanaged, ITypeWidth
+        {
+            if(typeof(A) == typeof(W64))
+                return mul64(b);
+            else if(typeof(A) == typeof(W128))
+                return mul128(b);
+            else if(typeof(A) == typeof(W256))
+                return mul256(b);
+            else if(typeof(A) == typeof(W512))
+                return mul512(b);
+            else
+                return 0;
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul8<W>(W w = default)
+            where W : unmanaged,ITypeWidth
+        {
+            const uint a = 8;
+            if(typeof(W) == typeof(W8))
+                return a*8;
+            else if(typeof(W) == typeof(W16))
+                return a*16;
+            else if(typeof(W) == typeof(W32))
+                return a*32;
+            else if(typeof(W) == typeof(W64))
+                return a*64;
+            else if(typeof(W) == typeof(W128))
+                return a*128;
+            else if(typeof(W) == typeof(W256))
+                return a*256;
+            else 
+                return a*512;
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul16<W>(W w = default)
+            where W : unmanaged,ITypeWidth
+        {
+            const uint a = 16;
+            if(typeof(W) == typeof(W8))
+                return a*8;
+            else if(typeof(W) == typeof(W16))
+                return a*16;
+            else if(typeof(W) == typeof(W32))
+                return a*32;
+            else if(typeof(W) == typeof(W64))
+                return a*64;
+            else if(typeof(W) == typeof(W128))
+                return a*128;
+            else if(typeof(W) == typeof(W256))
+                return a*256;
+            else 
+                return a*512;
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul32<W>(W w = default)
+            where W : unmanaged,ITypeWidth
+        {
+            const uint a = 32;
+            if(typeof(W) == typeof(W8))
+                return a*8;
+            else if(typeof(W) == typeof(W16))
+                return a*16;
+            else if(typeof(W) == typeof(W32))
+                return a*32;
+            else if(typeof(W) == typeof(W64))
+                return a*64;
+            else if(typeof(W) == typeof(W128))
+                return a*128;
+            else if(typeof(W) == typeof(W256))
+                return a*256;
+            else 
+                return a*512;
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul64<W>(W w = default)
+            where W : unmanaged,ITypeWidth
+        {
+            const uint a = 64;
+            if(typeof(W) == typeof(W8))
+                return a*8;
+            else if(typeof(W) == typeof(W16))
+                return a*16;
+            else if(typeof(W) == typeof(W32))
+                return a*32;
+            else if(typeof(W) == typeof(W64))
+                return a*64;
+            else if(typeof(W) == typeof(W128))
+                return a*128;
+            else if(typeof(W) == typeof(W256))
+                return a*256;
+            else 
+                return a*512;
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul128<W>(W w = default)
+            where W : unmanaged,ITypeWidth
+        {
+            const uint a = 128;
+            if(typeof(W) == typeof(W8))
+                return a*8;
+            else if(typeof(W) == typeof(W16))
+                return a*16;
+            else if(typeof(W) == typeof(W32))
+                return a*32;
+            else if(typeof(W) == typeof(W64))
+                return a*64;
+            else if(typeof(W) == typeof(W128))
+                return a*128;
+            else if(typeof(W) == typeof(W256))
+                return a*256;
+            else 
+                return a*512;
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul256<W>(W w = default)
+            where W : unmanaged,ITypeWidth
+        {
+            const uint a = 256;
+            if(typeof(W) == typeof(W8))
+                return a*8;
+            else if(typeof(W) == typeof(W16))
+                return a*16;
+            else if(typeof(W) == typeof(W32))
+                return a*32;
+            else if(typeof(W) == typeof(W64))
+                return a*64;
+            else if(typeof(W) == typeof(W128))
+                return a*128;
+            else if(typeof(W) == typeof(W256))
+                return a*256;
+            else 
+                return a*512;
+        }
+
+        [MethodImpl(Inline)]
+        static uint mul512<W>(W w = default)
+            where W : unmanaged,ITypeWidth
+        {
+            const uint a = 512;
+            if(typeof(W) == typeof(W8))
+                return a*8;
+            else if(typeof(W) == typeof(W16))
+                return a*16;
+            else if(typeof(W) == typeof(W32))
+                return a*32;
+            else if(typeof(W) == typeof(W64))
+                return a*64;
+            else if(typeof(W) == typeof(W128))
+                return a*128;
+            else if(typeof(W) == typeof(W256))
+                return a*256;
+            else 
+                return a*512;
+        }
+    }
+}

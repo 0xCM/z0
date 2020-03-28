@@ -10,94 +10,94 @@ namespace Z0
     partial class Blocks
     {
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W8 n, int cellcount)
+        public static int blockcount<T>(W8 w, int cellcount)
             where T : unmanaged
-                => cellcount/length<T>(n);
+                => cellcount/length<T>(w);
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W16 n, int cellcount)
+        public static int blockcount<T>(W16 w, int cellcount)
             where T : unmanaged
-                => cellcount/length<T>(n);
+                => cellcount/length<T>(w);
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W32 n, int cellcount)
+        public static int blockcount<T>(W32 w, int cellcount)
             where T : unmanaged
-                => cellcount/length<T>(n);
+                => cellcount/length<T>(w);
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W64 n, int cellcount)
+        public static int blockcount<T>(W64 w, int cellcount)
             where T : unmanaged
-                => cellcount/length<T>(n);
+                => cellcount/length<T>(w);
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W128 n, int cellcount)
+        public static int blockcount<T>(W128 w, int cellcount)
             where T : unmanaged
-                => cellcount/length<T>(n);
+                => cellcount/length<T>(w);
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W256 n, int cellcount)
+        public static int blockcount<T>(W256 w, int cellcount)
             where T : unmanaged
-                => cellcount/length<T>(n);
+                => cellcount/length<T>(w);
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W512 n, int cellcount)
+        public static int blockcount<T>(W512 w, int cellcount)
             where T : unmanaged
-                => cellcount/length<T>(n);
+                => cellcount/length<T>(w);
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W8 n, int length, out int uncovered)
+        public static int blockcount<T>(W8 w, int length, out int uncovered)
             where T : unmanaged   
         {       
-            uncovered = length % length<T>(n);
-            return length/length<T>(n);
+            uncovered = length % length<T>(w);
+            return length/length<T>(w);
         }
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W16 n, int length, out int uncovered)
+        public static int blockcount<T>(W16 w, int length, out int uncovered)
             where T : unmanaged   
         {       
-            uncovered = length % length<T>(n);
-            return length/length<T>(n);
+            uncovered = length % length<T>(w);
+            return length/length<T>(w);
         }
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W32 n, int length, out int uncovered)
+        public static int blockcount<T>(W32 w, int length, out int uncovered)
             where T : unmanaged   
         {       
-            uncovered = length % length<T>(n);
-            return length/length<T>(n);
+            uncovered = length % length<T>(w);
+            return length/length<T>(w);
         }
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W64 n, int length, out int uncovered)
+        public static int blockcount<T>(W64 w, int length, out int uncovered)
             where T : unmanaged   
         {       
-            uncovered = length % length<T>(n);
-            return length/length<T>(n);
+            uncovered = length % length<T>(w);
+            return length/length<T>(w);
         }
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W128 n, int length, out int uncovered)
+        public static int blockcount<T>(W128 w, int length, out int uncovered)
             where T : unmanaged          
         {       
-            uncovered = length % length<T>(n);
-            return length/length<T>(n);
+            uncovered = length % length<T>(w);
+            return length/length<T>(w);
         }
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W256 n, int length, out int uncovered)
+        public static int blockcount<T>(W256 w, int length, out int uncovered)
             where T : unmanaged          
         {       
-            uncovered = length % length<T>(n);
-            return length/length<T>(n);
+            uncovered = length % length<T>(w);
+            return length/length<T>(w);
         }
 
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W512 n, int length, out int uncovered)
+        public static int blockcount<T>(W512 w, int length, out int uncovered)
             where T : unmanaged          
         {       
-            uncovered = length % length<T>(n);
-            return length/length<T>(n);
+            uncovered = length % length<T>(w);
+            return length/length<T>(w);
         }
 
         /// <summary>
@@ -108,13 +108,13 @@ namespace Z0
         /// <typeparam name="N">The column type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<M,N,T>(N256 n)
+        public static int blockcount<M,N,T>(N256 w)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged        
         {
             var srclen = NatMath.mul<M,N>();
-            var bz = blockcount<T>(n,srclen, out int remainder);
+            var bz = blockcount<T>(w,srclen, out int remainder);
             return remainder == 0 ? bz : bz + 1;
         }
 
@@ -126,14 +126,13 @@ namespace Z0
         /// <typeparam name="N">The column type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<M,N,T>(W512 n)
+        public static int blockcount<M,N,T>(W512 w)
             where M : unmanaged, ITypeWidth
             where N : unmanaged, ITypeWidth
             where T : unmanaged        
         {
-            //var srclen = NatMath.mul<M,N>();
             var srclen = ((int)default(M).TypeWidth) * ((int)default(N).TypeWidth);            
-            var bz = blockcount<T>(n,srclen, out int remainder);
+            var bz = blockcount<T>(w,srclen, out int remainder);
             return remainder == 0 ? bz : bz + 1;
         }
 

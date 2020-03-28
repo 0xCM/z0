@@ -9,8 +9,6 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Linq;
 
     using static Core;
 
@@ -173,9 +171,6 @@ namespace Z0
                 return (Func<T,T,T>)method.CreateDelegate(typeof(Func<T,T,T>));
             }
         }
-
-
     }
-
-    
+   
 }

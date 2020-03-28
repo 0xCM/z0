@@ -9,7 +9,7 @@ namespace Z0
 
     using static Components;
 
-    public interface ITypeWidth //: ILiteralKind<TypeWidth>, IFixedWidth
+    public interface ITypeWidth
     {
         /// <summary>
         /// Refines the specificity of the class specifier
@@ -19,11 +19,6 @@ namespace Z0
 
         TypeWidth Class => TypeWidth;
 
-        // FixedWidth IFixedWidth.FixedWidth 
-        //     => (FixedWidth)TypeWidth;
-
-        // TypeWidth ITypeLevelEnum<TypeWidth>.Class 
-        //     => TypeWidth;
     }
 
     public interface ITypeWidth<K> : ITypeWidth

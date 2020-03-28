@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Reflection.Emit;
 
-    using static Root;
+    using static Core;
 
     public static class DynamicOps
     {
