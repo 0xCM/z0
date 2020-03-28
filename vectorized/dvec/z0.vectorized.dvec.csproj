@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Containers)" />
-    <ProjectReference Include="$(Vectorized)" />
     <ProjectReference Include="$(VData)" />    
     <ProjectReference Include="$(BitCore)" />
   </ItemGroup>

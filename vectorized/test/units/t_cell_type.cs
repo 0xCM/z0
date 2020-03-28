@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Root;
     using static Nats;
 
 
@@ -18,8 +17,8 @@ namespace Z0
     {    
         public void check_cell_types()
         {
-            iter(VectorType.Types128, t => check_cell_type(t,n128));
-            iter(VectorType.Types256, t => check_cell_type(t,n256));
+            Streams.iter(VectorType.Types128, t => check_cell_type(t,n128));
+            Streams.iter(VectorType.Types256, t => check_cell_type(t,n256));
             
         }
         

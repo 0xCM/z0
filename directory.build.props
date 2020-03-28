@@ -44,6 +44,9 @@
     <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
     <Circuits>$(TopDir)vectorized/circuits/z0.vectorized.circuits.csproj</Circuits>
     <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
+    <DVec>$(TopDir)vectorized/dvec/z0.vectorized.dvec.csproj</DVec>
+    <FVec>$(TopDir)vectorized/fvec/z0.vectorized.fvec.csproj</FVec>
+
     <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
     <GMath>$(TopDir)gmath/src/z0.gmath.csproj</GMath>
     <Graphs>$(TopDir)graphs/src/z0.graphs.csproj</Graphs>

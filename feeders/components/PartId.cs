@@ -141,6 +141,8 @@ public enum PartId : ulong
 
     GVec = 333,
 
+    FVec = 334,
+
     DVecTest = DVec | Test,
 
     GVecTest = GVec | Test,

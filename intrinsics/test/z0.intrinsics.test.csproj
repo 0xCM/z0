@@ -20,6 +20,7 @@
     <ProjectReference Include="$(VBits)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(VData)" />
+
   </ItemGroup>
 
 </Project>

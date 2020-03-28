@@ -12,6 +12,9 @@ bash $AddCmd
 export Kind=gvec
 bash $AddCmd
 
+export Kind=fvec
+bash $AddCmd
+
 export Kind=circuits
 bash $AddCmd
 

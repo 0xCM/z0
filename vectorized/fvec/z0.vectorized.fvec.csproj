@@ -6,11 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Fixed)" />        
-    <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(Custom)" />
-
+    <ProjectReference Include="$(Vectorized)" />    
   </ItemGroup>
 
 </Project>

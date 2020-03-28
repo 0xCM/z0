@@ -8,7 +8,8 @@
   <Import Project="$(TopDir)vectorized/z0.vectorized.exports.props"/>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Vectorized)" />
+    <ProjectReference Include="$(FVec)" />
     <ProjectReference Include="$(TestLib)" />
   </ItemGroup>
 
