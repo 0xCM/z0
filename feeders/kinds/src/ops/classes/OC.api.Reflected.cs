@@ -12,55 +12,54 @@ namespace Z0
     
     public static class ReflectedOperationClass
     {
-
         /// <summary>
         /// Assigns an arity classification, if any, to a method
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static ArityClass ClassifyArity(this MethodInfo m)
-            => ClassifiedOperations.ArityClass(m);
+            => ClassifiedOps.ArityClass(m);
 
         /// <summary>
         /// Returns true if all non-void input/output values are of the same type
         /// </summary>
         /// <param name="src">The method to examine</param>
         public static bool IsHomogenous(this MethodInfo src)
-            => ClassifiedOperations.IsHomogenous(src);
+            => ClassifiedOps.IsHomogenous(src);
 
         /// <summary>
         /// Determines the numeric arity of a classified operator
         /// </summary>
         /// <param name="src">The operator class</param>
         public static int ArityValue(this OperatorClass src)
-            => ClassifiedOperations.ArityValue(src);
+            => ClassifiedOps.ArityValue(src);
 
         /// <summary>
         /// Determines whether a method defines an operator over a (common) domain
         /// </summary>
         /// <param name="src">The method to examine</param>
         public static bool IsOperator(this MethodInfo src)
-            => ClassifiedOperations.IsOperator(src);
+            => ClassifiedOps.IsOperator(src);
 
         /// <summary>
         /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
         /// </summary>
         /// <param name="src">The method to examine</param>
         public static OperatorClass ClassifyOperator(this MethodInfo src)
-            => ClassifiedOperations.ClassifyOperator(src);
+            => ClassifiedOps.ClassifyOperator(src);
 
         /// <summary>
         /// Determines whether a method defines a predicate that returns a bit or bool value
         /// </summary>
         /// <param name="src">The method to examine</param>
         public static bool IsPredicate(this MethodInfo src)        
-            => ClassifiedOperations.IsPredicate(src);
+            => ClassifiedOps.IsPredicate(src);
 
         /// <summary>
         /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
         /// </summary>
         /// <param name="src">The method to examine</param>
         public static PredicateClass ClassifyPredicate(this MethodInfo src)
-            => ClassifiedOperations.ClassifyPredicate(src);
+            => ClassifiedOps.ClassifyPredicate(src);
 
 
         /// <summary>
@@ -68,14 +67,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         public static IEnumerable<MethodInfo> Functions(this IEnumerable<MethodInfo> src)
-            => src.Where(ClassifiedOperations.IsFunction);
+            => src.Where(ClassifiedOps.IsFunction);
 
         /// <summary>
         /// Queries the stream for methods that are actions
         /// </summary>
         /// <param name="src">The source stream</param>
         public static IEnumerable<MethodInfo> Actions(this IEnumerable<MethodInfo> src)
-            => src.Where(ClassifiedOperations.IsAction);
+            => src.Where(ClassifiedOps.IsAction);
 
         /// <summary>
         /// Queries the stream for methods with a nonempty measure classification

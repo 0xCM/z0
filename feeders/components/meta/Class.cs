@@ -26,13 +26,31 @@ namespace Z0
     }
 
     /// <summary>
-    /// Class reification
+    /// Characterizes an F-bound polymorphic class
     /// </summary>
-    public interface IClass<C> : IClass
-        where C : IClass<C>, new()
+    /// <typeparam name="T">The parametric type</typeparam>    
+    public interface IClassF<F> : IClass
+        where F : IClassF<F>, new()
     {
 
     }
 
+    /// <summary>
+    /// Characterizes a parametric class
+    /// </summary>
+    /// <typeparam name="T">The parametric type</typeparam>    
+    public interface IClassT<T> : IClass
+    {
 
+    }
+
+    /// <summary>
+    /// Characterizes a F-bound polymorphic and T-parametric class
+    /// </summary>
+    /// <typeparam name="T">The parametric type</typeparam>    
+    public interface IClassT<F,T> : IClassF<F>, IClassT<T>
+        where F : IClassT<F,T>, new()
+    {
+
+    }
 }

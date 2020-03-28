@@ -13,12 +13,12 @@ namespace Z0
 
     partial class OpClass
     {
-        public readonly struct OperatorClass : IOperationClass<C> 
+        public readonly struct OperatorClass : IOpClassF<OperatorClass,C> 
         {
             public C Class => C.Operator; 
         } 
 
-        public readonly struct UnaryOp : IOperationClass<C> 
+        public readonly struct UnaryOp : IOpClassF<UnaryOp,C> 
         {
             public C Class => C.UnaryOp; 
 
@@ -29,7 +29,7 @@ namespace Z0
             public OperatorClass Generalized => default;
         }
 
-        public readonly struct BinaryOp : IOperationClass<C> 
+        public readonly struct BinaryOp : IOpClassF<BinaryOp,C> 
         {
             public C Class => C.BinaryOp; 
 
@@ -39,7 +39,7 @@ namespace Z0
             public OperatorClass Generalized => default;
         }
 
-        public readonly struct TernaryOp : IOperationClass<C> 
+        public readonly struct TernaryOp : IOpClassF<TernaryOp,C> 
         {
             public C Class => C.TernaryOp; 
 
@@ -49,13 +49,13 @@ namespace Z0
             public OperatorClass Generalized => default;
         }
 
-        public readonly struct OperatorClass<T> : IOperationClass<C,T> 
+        public readonly struct OperatorClass<T> : IOpClass<C,T> 
             where T : unmanaged 
         { 
             public C Class => C.Operator; 
         }
 
-        public readonly struct UnaryOp<T> : IOperationClass<C,T> 
+        public readonly struct UnaryOp<T> : IOpClassF<UnaryOp<T>, C,T> 
             where T : unmanaged 
         { 
             public static implicit operator OperatorClass<T>(UnaryOp<T> src)
@@ -72,7 +72,7 @@ namespace Z0
             public UnaryOp NonGeneric => default;
         }
 
-        public readonly struct BinaryOp<T> : IOperationClass<C,T> 
+        public readonly struct BinaryOp<T> : IOpClassF<BinaryOp<T>,C,T> 
             where T : unmanaged 
         { 
             public static implicit operator OperatorClass<T>(BinaryOp<T> src)
@@ -86,11 +86,10 @@ namespace Z0
 
             public OperatorClass<T> Generalized => default;
 
-            public BinaryOp NonGeneric => default;
-            
+            public BinaryOp NonGeneric => default;            
         }
 
-        public readonly struct TernaryOp<T> : IOperationClass<C,T> 
+        public readonly struct TernaryOp<T> : IOpClassF<TernaryOp<T>,C,T> 
             where T : unmanaged 
         {
             [MethodImpl(Inline)]
@@ -106,7 +105,6 @@ namespace Z0
             public OperatorClass<T> Generalized => default;
 
             public TernaryOp NonGeneric => default;
-
         }
     }
 }

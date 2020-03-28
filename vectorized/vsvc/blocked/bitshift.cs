@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static Root;
 
@@ -21,7 +19,7 @@ namespace Z0
         /// <param name="dst">The blocked computation target</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static void vxors<T>(in Block128<T> x, [Imm] byte count, in Block128<T> dst)
+        public static void xors<T>(in Block128<T> x, [Imm] byte count, in Block128<T> dst)
             where T : unmanaged
         {
             var blocks = dst.BlockCount;
@@ -37,7 +35,7 @@ namespace Z0
         /// <param name="dst">The blocked computation target</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static void vxors<T>(in Block256<T> x, [Imm] byte count, in Block256<T> dst)
+        public static void xors<T>(in Block256<T> x, [Imm] byte count, in Block256<T> dst)
             where T : unmanaged
         {
             var blocks = dst.BlockCount;

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VSvcHosts
     {
-        public readonly struct Srlx128<T> : ISVShiftOp128Api<T>, IImm8V128UnaryResolver<T>
+        public readonly struct Srlx128<T> : ISVShiftOp128Api<T>, ISVImm8UnaryResolver128Api<T>
             where T : unmanaged
         {
             public const string Name = "vsrlx";
@@ -31,7 +31,7 @@ namespace Z0
                 => gvec.vsrlx(x,count);            
         }
 
-        public readonly struct Srlx256<T> : ISVShiftOp256Api<T>, IImm8V256UnaryResolver<T>
+        public readonly struct Srlx256<T> : ISVShiftOp256Api<T>, ISVImm8UnaryResolver256Api<T>
             where T : unmanaged
         {
             public const string Name = "vsrlx";

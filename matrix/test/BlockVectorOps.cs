@@ -66,7 +66,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            gblocks.vsub(x.Data,y.Data,z.Data);
+            gblocks.sub(x.Data,y.Data,z.Data);
             return ref z;
         }
     }

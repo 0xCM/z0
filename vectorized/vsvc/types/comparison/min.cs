@@ -10,7 +10,7 @@ namespace Z0
     using static Z0.Root;
 
     public interface IClassifiedOperator<K>
-        where K : IOperationClass<OperatorClass>
+        where K : IOpClass<OperatorClass>
 
     {
         K Class  => default;

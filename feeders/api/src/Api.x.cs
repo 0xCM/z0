@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class XApi
+    partial class XTend
     {
         /// <summary>
         /// Searches an assembly for api host types

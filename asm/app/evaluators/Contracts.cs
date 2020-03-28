@@ -23,13 +23,13 @@ namespace Z0.Asm.Check
     }
 
     public interface IApiEvaluator<C>
-        where C : IOperationClass
+        where C : IOpClass
     {
 
     }
 
     public interface IApiEvaluator<C,T> : IApiEvaluator<C>, IAsmService
-        where C : IOperationClass
+        where C : IOpClass
         where T : unmanaged
     {
 

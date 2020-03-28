@@ -12,7 +12,7 @@ namespace Z0
     
     using OK = OpKinds;
     
-    partial class MathSvcFactory
+    partial class MathServices
     {
        [MethodImpl(Inline)]
        public static And<T> and<T>(T t = default)

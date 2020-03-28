@@ -8,7 +8,6 @@ namespace Z0
 
     using OC = OperationClass;
 
-
     [Flags]
     public enum ArityClass : ushort
     {

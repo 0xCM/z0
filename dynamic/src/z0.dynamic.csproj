@@ -7,11 +7,13 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />        
     <ProjectReference Include="$(Vectorized)" />            
     <ProjectReference Include="$(Identity)" />
+
   </ItemGroup>
 
 </Project>

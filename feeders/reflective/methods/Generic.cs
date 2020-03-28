@@ -95,8 +95,9 @@ namespace Z0
         public static MethodInfo GenericDefintion(this MethodInfo src)
         {
             src.RequireGeneric();
-
-            return src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();
+            return src.IsGenericMethodDefinition 
+                ? src 
+                : src.GetGenericMethodDefinition();
         }
 
         /// <summary>

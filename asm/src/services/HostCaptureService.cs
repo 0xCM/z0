@@ -41,7 +41,7 @@ namespace Z0.Asm
         void CreateLocationReport(PartId id)
             => LocationReport(id).OnSome(report => report.Save());
         
-        public IEnumerable<CapturedHost> Execute()
+        public IEnumerable<CapturedHost> Execute(params string[] args)
         {            
             var owners = Context.Compostion.Catalogs.SelectMany(c => c.ApiHosts).GroupBy(x => x.Owner);
             var config = Context.AsmFormat.WithSectionDelimiter();

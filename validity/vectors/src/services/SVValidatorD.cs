@@ -8,7 +8,7 @@ namespace Z0
     using static Nats;
     using static vgeneric;
 
-    using R = OpReps;
+    using R = OpClasses;
     
     public readonly struct SVValidatorD : ISVValidatorD
     {

@@ -14,14 +14,14 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        readonly IImm8V128BinaryResolver<T> Resolver;
+        readonly ISVImm8BinaryResolver128Api<T> Resolver;
 
         [MethodImpl(Inline)]
-        public static IImmBinaryCapture<T> New(IAsmContext context, IImm8V128BinaryResolver<T> resolver)
+        public static IImmBinaryCapture<T> New(IAsmContext context, ISVImm8BinaryResolver128Api<T> resolver)
             => new ImmV128BinaryCaptureService<T>(context, resolver);
 
         [MethodImpl(Inline)]
-        ImmV128BinaryCaptureService(IAsmContext context, IImm8V128BinaryResolver<T> resolver)
+        ImmV128BinaryCaptureService(IAsmContext context, ISVImm8BinaryResolver128Api<T> resolver)
         {
             this.Context = context;        
             this.Resolver = resolver;
@@ -41,14 +41,14 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        readonly IImm8V256BinaryResolver<T> Resolver;
+        readonly ISVImm8BinaryResolver256Api<T> Resolver;
 
         [MethodImpl(Inline)]
-        public static IImmBinaryCapture<T> New(IAsmContext context, IImm8V256BinaryResolver<T> resolver)
+        public static IImmBinaryCapture<T> New(IAsmContext context, ISVImm8BinaryResolver256Api<T> resolver)
             => new ImmV256BinaryCaptureService<T>(context, resolver);
 
         [MethodImpl(Inline)]
-        ImmV256BinaryCaptureService(IAsmContext context, IImm8V256BinaryResolver<T> resolver)
+        ImmV256BinaryCaptureService(IAsmContext context, ISVImm8BinaryResolver256Api<T> resolver)
         {
             this.Context = context;        
             this.Resolver = resolver;

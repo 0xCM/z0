@@ -29,7 +29,7 @@ namespace Z0
         public void Notify(AppMsg msg)
             => MsgQueue.Accept(msg);
 
-        protected override void OnFatalError(Exception e)
+        public override void OnFatalError(Exception e)
             => Streams.iter(MsgQueue.Flush(e), term.print);
     }
 }

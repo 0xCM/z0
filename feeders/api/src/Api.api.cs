@@ -13,25 +13,18 @@ namespace Z0
     partial class Api
     {
         /// <summary>
-        /// Searches an assembly for api host types
+        /// Selects the host-attributed types from an assembly
         /// </summary>
-        /// <param name="src">The assembly to search</param>
+        /// <param name="src">The source assembly</param>
         public static IEnumerable<Type> HostTypes(Assembly src)
             => src.GetTypes().Tagged<ApiHostAttribute>();
 
         /// <summary>
-        /// Instantiates the api hosts found in a specified assembly
+        /// Instantiates the api hosts define in a .net assembly
         /// </summary>
         /// <param name="src">The assembly to search</param>
         public static IEnumerable<ApiHost> Hosts(Assembly src)
-            => HostTypes(src).Select(Host);
-
-        [MethodImpl(Inline)]
-        public static ApiHost Host(Type src)
-        {
-            var owner = src.Assembly.Id();            
-            return  ApiHost.Define(owner, src);
-        }
+            => HostTypes(src).Select(h => ApiHost.Define(h.Assembly.Id(), h));
 
         [MethodImpl(Inline)]
         public static OpUri MemberUri(ApiLocatedMember src)        

@@ -14,15 +14,15 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        readonly IImm8V128UnaryResolver<T> Resolver;
+        readonly ISVImm8UnaryResolver128Api<T> Resolver;
 
 
         [MethodImpl(Inline)]
-        public static IImmUnaryCapture<T> New(IAsmContext context, IImm8V128UnaryResolver<T> resolver)
+        public static IImmUnaryCapture<T> New(IAsmContext context, ISVImm8UnaryResolver128Api<T> resolver)
             => new ImmV128UnaryCaptureService<T>(context, resolver);
 
         [MethodImpl(Inline)]
-        ImmV128UnaryCaptureService(IAsmContext context, IImm8V128UnaryResolver<T> resolver)
+        ImmV128UnaryCaptureService(IAsmContext context, ISVImm8UnaryResolver128Api<T> resolver)
         {
             this.Resolver = resolver;
             this.Context = context;
@@ -39,14 +39,14 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        readonly IImm8V256UnaryResolver<T> Resolver;
+        readonly ISVImm8UnaryResolver256Api<T> Resolver;
 
         [MethodImpl(Inline)]
-        public static IImmUnaryCapture<T> New(IAsmContext context, IImm8V256UnaryResolver<T> resolver)
+        public static IImmUnaryCapture<T> New(IAsmContext context, ISVImm8UnaryResolver256Api<T> resolver)
             => new ImmV256UnaryCaptureService<T>(context,resolver);
 
         [MethodImpl(Inline)]
-        ImmV256UnaryCaptureService(IAsmContext context, IImm8V256UnaryResolver<T> resolver)
+        ImmV256UnaryCaptureService(IAsmContext context, ISVImm8UnaryResolver256Api<T> resolver)
         {
             this.Resolver = resolver;
             this.Context = context;

@@ -14,36 +14,6 @@ namespace Z0
     public static partial class OperationConverters
     {
         [MethodImpl(Inline)]
-        public static System.Func<T> ToFunc<T>(this Emitter<T> f)
-            => new System.Func<T>(f);
-
-        [MethodImpl(Inline)]
-        public static System.Func<T> ToFunc<T,C>(this Emitter<T,C> f)
-            where T : unmanaged
-            where C : unmanaged
-                => new System.Func<T>(f);
-
-        [MethodImpl(Inline)]
-        public static System.Func<T,T> ToFunc<T>(this Z0.UnaryOp<T> f)
-            => new System.Func<T,T>(f);
-
-        [MethodImpl(Inline)]
-        public static System.Func<T,T,T> ToFunc<T>(this BinaryOp<T> f)
-            => new System.Func<T,T,T>(f);
-
-        [MethodImpl(Inline)]
-        public static System.Func<T,T,T,T> ToFunc<T>(this Z0.TernaryOp<T> f)
-            => new System.Func<T,T,T,T>(f);
-
-        [MethodImpl(Inline)]
-        public static System.Func<T,bit> ToFunc<T>(this UnaryPredicate<T> f)
-            => new System.Func<T,bit>(f);
-
-        [MethodImpl(Inline)]
-        public static System.Func<T,T,bit> ToFunc<T>(this BinaryPredicate<T> f)
-            => new System.Func<T,T,bit>(f);
-
-        [MethodImpl(Inline)]
         public static S.Func<T> ToFunc<T>(this S.Emitter<T> src)
             => new S.Func<T>(src.Subject.ToFunc(), src.Id);
 

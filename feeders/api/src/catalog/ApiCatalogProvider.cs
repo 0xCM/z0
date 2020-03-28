@@ -33,7 +33,7 @@ namespace Z0
             this.Operations = catalog;
         }
 
-        Type[] IApiServiceHosts.HostTypes 
+        Type[] IApiCatalog.HostTypes 
             => Operations.HostTypes;
 
         ApiHost[] IApiCatalog.GenericApiHosts 

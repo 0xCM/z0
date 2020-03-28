@@ -10,7 +10,7 @@ namespace Z0
 
     using static Kinds;
 
-    public static class ParamAspectOps
+    partial class XKind
     {
         /// <summary>
         /// Determines the variance of a parameter

@@ -171,10 +171,10 @@ namespace Z0.Asm.Validation
 
         protected ApiCode ReadAsm<W,T>(PartId catalog, string host, string opname, W w = default, T t = default)
             where T : unmanaged
-            where W : unmanaged, ITypeNat
+            where W : unmanaged, ITypeWidth
         {
             var archive = Context.CodeArchive(catalog,host);
-            var id = Identify.Op(opname, (TypeWidth)w.NatValue, NumericTypes.kind<T>(), true);
+            var id = Identify.Op(opname, w.Class, NumericTypes.kind<T>(), true);
             Context.Notify($"{id}");
             var result = Context.CodeArchive(catalog,host).Read<T>(id);
             if(!result)
@@ -185,7 +185,7 @@ namespace Z0.Asm.Validation
         protected TestCaseRecord CheckMatch<T>(in BufferSeq buffers, BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
             where T : unmanaged
         {
-            var w = n128;
+            var w = w128;
             var t = default(T);
 
             void check()
@@ -205,7 +205,7 @@ namespace Z0.Asm.Validation
         protected TestCaseRecord CheckMatch<T>(in BufferSeq buffers, BinaryOp<Vector256<T>> f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
             where T : unmanaged
         {
-            var w = n256;
+            var w = w256;
             var t = default(T);
 
             void check()            
@@ -277,12 +277,13 @@ namespace Z0.Asm.Validation
         /// <param name="gId">The identity of the second operator</param>
         protected TestCaseRecord CheckMatch(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
         {
+            var w = w8;
             void check()
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(n8);
-                    var y = Random.Fixed(n8);
+                    var x = Random.Fixed(w);
+                    var y = Random.Fixed(w);
                     Claim.eq(f(x,y),g(x,y));
                 }
             }
@@ -299,12 +300,13 @@ namespace Z0.Asm.Validation
         /// <param name="gId">The identity of the second operator</param>
         protected TestCaseRecord CheckMatch(BinaryOp16 f, OpIdentity fId, BinaryOp16 g, OpIdentity gId)
         {
+            var w = w16;
             void check()
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(n16);
-                    var y = Random.Fixed(n16);
+                    var x = Random.Fixed(w);
+                    var y = Random.Fixed(w);
                     Claim.eq(f(x,y),g(x,y));
                 }
             }
@@ -321,7 +323,7 @@ namespace Z0.Asm.Validation
         /// <param name="gId">The identity of the second operator</param>
         protected TestCaseRecord CheckMatch(BinaryOp32 f, OpIdentity fId, BinaryOp32 g, OpIdentity gId)
         {
-            var w = n32;
+            var w = w32;
             void check()
             {
                 for(var i=0; i < RepCount; i++)
@@ -344,7 +346,7 @@ namespace Z0.Asm.Validation
         /// <param name="gId">The identity of the second operator</param>
         protected TestCaseRecord CheckMatch(BinaryOp64 f, OpIdentity fId, BinaryOp64 g, OpIdentity gId)
         {
-            var w = n64;
+            var w = w64;
             void check()
             {
                 for(var i=0; i < RepCount; i++)
@@ -367,7 +369,7 @@ namespace Z0.Asm.Validation
         /// <param name="gId">The identity of the second operator</param>
         protected TestCaseRecord CheckMatch(BinaryOp128 f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
         {
-            var w = n128;
+            var w = w128;
             
             void check()
             {
@@ -391,7 +393,7 @@ namespace Z0.Asm.Validation
         /// <param name="gId">The identity of the second operator</param>
         protected TestCaseRecord CheckMatch(BinaryOp256 f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
         {
-            var w = n256;
+            var w = w256;
             void check()
             {
                 for(var i=0; i < RepCount; i++)
@@ -408,7 +410,7 @@ namespace Z0.Asm.Validation
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, BinaryOp<byte> primal, BinaryOp<byte> generic, NK<byte> kind)
         {
             var results = list<TestCaseRecord>();
-            var w = n8;
+            var w = w8;
             var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
@@ -429,7 +431,7 @@ namespace Z0.Asm.Validation
         {
             var results = list<TestCaseRecord>();
 
-            var w = n8;
+            var w = w8;
             var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
@@ -450,7 +452,7 @@ namespace Z0.Asm.Validation
         {
             var results = list<TestCaseRecord>();
 
-            var w = n8;
+            var w = w8;
 
             var id = Identify.NumericOp(name, kind, false);
             var f0 = primal.ToFixed();
@@ -472,7 +474,7 @@ namespace Z0.Asm.Validation
         {
             var results = list<TestCaseRecord>();
 
-            var w = n16;
+            var w = w16;
 
             var id = Identify.NumericOp(name, kind, false);
             var f0 = primal.ToFixed();
@@ -494,7 +496,7 @@ namespace Z0.Asm.Validation
         {
             var results = list<TestCaseRecord>();
 
-            var w = n16;
+            var w = w16;
             var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
@@ -515,7 +517,7 @@ namespace Z0.Asm.Validation
         {
             var results = list<TestCaseRecord>();
 
-            var w = n32;
+            var w = w32;
             var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
@@ -536,7 +538,7 @@ namespace Z0.Asm.Validation
         {
             var results = list<TestCaseRecord>();
 
-            var w = n32;
+            var w = w32;
             var id = Identify.NumericOp(name, kind, false);
 
             var f0 = primal.ToFixed();
@@ -557,7 +559,7 @@ namespace Z0.Asm.Validation
         {            
             var results = list<TestCaseRecord>();
 
-            var w = n64;
+            var w = w64;
             var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
@@ -578,7 +580,7 @@ namespace Z0.Asm.Validation
         {            
             var results = list<TestCaseRecord>();
 
-            var w = n64;
+            var w = w64;
             var id = Identify.NumericOp(name, kind, false);
             
             var f0 = primal.ToFixed();
@@ -662,42 +664,42 @@ namespace Z0.Asm.Validation
             return bit.On;
         }
 
-        protected void binop_match(in BufferSeq buffers, N8 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W8 w, ApiCode a, ApiCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, N16 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W16 w, ApiCode a, ApiCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, N32 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W32 w, ApiCode a, ApiCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, N64 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W64 w, ApiCode a, ApiCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, N128 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W128 w, ApiCode a, ApiCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
-        protected void binop_match(in BufferSeq buffers, N256 w, ApiCode a, ApiCode b)
+        protected void binop_match(in BufferSeq buffers, W256 w, ApiCode a, ApiCode b)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, a);
             var g = buffers[Right].EmitFixedBinaryOp(w, b);
@@ -776,7 +778,7 @@ namespace Z0.Asm.Validation
 
         void binary_imm(in AsmBuffers buffers)
         {
-            var w = n256;
+            var w = w256;
             var name = nameof(dvec.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
 
@@ -822,16 +824,15 @@ namespace Z0.Asm.Validation
             return context.WithFormat(format).AsmWriter(dst);
         }
 
-
         void CheckImm(in BufferSeq buffers, in OpExtractExchange exchange)
         {
-            CheckBinaryImm<uint>(buffers, exchange, n128, nameof(dvec.vblend4x32), (byte)Blend4x32.LRLR);    
-            CheckBinaryImm<uint>(buffers, exchange, n128, nameof(dvec.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
-            CheckUnaryImm<ushort>(buffers, exchange, n256, nameof(dvec.vbsll), 3);        
+            CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend4x32), (byte)Blend4x32.LRLR);    
+            CheckBinaryImm<uint>(buffers, exchange, w128, nameof(dvec.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
+            CheckUnaryImm<ushort>(buffers, exchange, w256, nameof(dvec.vbsll), 3);        
         }
 
 
-        void CheckBinaryImm<T>(in BufferSeq buffers, in OpExtractExchange exchange, N128 w, string name, byte imm)
+        void CheckBinaryImm<T>(in BufferSeq buffers, in OpExtractExchange exchange, W128 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = Context.V128BinaryOpImmInjector<T>();
@@ -854,7 +855,7 @@ namespace Z0.Asm.Validation
             Claim.eq(z1,z2);
         }
 
-        void CheckBinaryImm<T>(in OpExtractExchange exchange, BufferToken buffer, N256 w, string name, byte imm)
+        void CheckBinaryImm<T>(in OpExtractExchange exchange, BufferToken buffer, W256 w, string name, byte imm)
             where T : unmanaged
         {            
             var provider = Context.V256BinaryOpImmInjector<T>();
@@ -878,7 +879,7 @@ namespace Z0.Asm.Validation
             Claim.eq(z1,z2);
         }
 
-        void CheckUnaryImm<T>(in BufferSeq buffers, in OpExtractExchange exchange, N256 w, string name, byte imm)
+        void CheckUnaryImm<T>(in BufferSeq buffers, in OpExtractExchange exchange, W256 w, string name, byte imm)
             where T : unmanaged
         {            
             var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
@@ -927,18 +928,17 @@ namespace Z0.Asm.Validation
             Claim.yea(binop_match(buffers, w,d,g));
         }
 
-
         public void vadd_check(in BufferSeq buffers)
         {
             var catalog = PartId.Intrinsics;
             var subject = nameof(dvec);
             var name = nameof(dvec.vadd);
 
-            vadd_check<byte>(buffers, n128, ReadAsm(catalog, subject, name, n128, z8));            
-            vadd_check<ushort>(buffers, n128, ReadAsm(catalog, subject, name, n128,z16));
-            vadd_check<uint>(buffers, n128, ReadAsm(catalog, subject, name, n128,z32));
-            vadd_check<ushort>(buffers, n256, ReadAsm(catalog, subject, name, n256,z16));
-            vadd_check<uint>(buffers, n256, ReadAsm(catalog, subject, name, n256,z32));
+            vadd_check<byte>(buffers, w128, ReadAsm(catalog, subject, name, w128, z8));            
+            vadd_check<ushort>(buffers, w128, ReadAsm(catalog, subject, name, w128,z16));
+            vadd_check<uint>(buffers, w128, ReadAsm(catalog, subject, name, w128,z32));
+            vadd_check<ushort>(buffers, w256, ReadAsm(catalog, subject, name, w256,z16));
+            vadd_check<uint>(buffers, w256, ReadAsm(catalog, subject, name, w256,z32));
         }
 
         public void add_megacheck(in BufferSeq buffers)
@@ -964,7 +964,7 @@ namespace Z0.Asm.Validation
             }
         }
 
-        void vadd_check<T>(in BufferSeq buffers, N128 w, ApiCode asm)
+        void vadd_check<T>(in BufferSeq buffers, W128 w, ApiCode asm)
             where T : unmanaged
         {            
             var f = buffers[Main].EmitFixedBinaryOp(w,asm);            
@@ -972,7 +972,7 @@ namespace Z0.Asm.Validation
         }
 
 
-        void vadd_check<T>(in BufferSeq buffers, N256 w, ApiCode asm)
+        void vadd_check<T>(in BufferSeq buffers, W256 w, ApiCode asm)
             where T : unmanaged
         {            
             var f = buffers[Main].EmitFixedBinaryOp(w,asm);

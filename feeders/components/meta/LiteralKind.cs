@@ -37,11 +37,12 @@ namespace Z0
     /// Characterizes typed literals that support kind partitioning
     /// </summary>
     /// <typeparam name="E">The classifying enum type</typeparam>
-     public interface ILiteralKind<E> : IKind, ITypedLiteral<E>
+    public interface ILiteralKind<E> : IKind, ITypedLiteral<E>
         where E : unmanaged, Enum
     {
 
     }
+
 
     /// <summary>
     /// Characterizes numerically-parametric typed literals that support kind partitioning
@@ -54,6 +55,42 @@ namespace Z0
     {
 
     }    
+
+    /// <summary>
+    /// Characterizes a F-bound polymorphic literal reification
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    /// <typeparam name="E">T literal type</typeparam>
+    public interface ILiteral<F,E> : ILiteralKind<E>
+        where F : ILiteral<F,E>, new()
+        where E : unmanaged, Enum
+    {}
+
+    public readonly struct Literal<F,E> : ILiteral<Literal<F, E>, E>
+        where E : unmanaged, Enum
+    {
+        [MethodImpl(Inline)]
+        public Literal(E @class)
+        {
+            this.Class = @class;
+        }
+
+        public E Class {get;}
+    }
+
+    /// <summary>
+    /// Characterizes a T-parametric F-bound polymorphic literal reification
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    /// <typeparam name="E">T literal type</typeparam>
+    public interface ILiteral<F,E,T> : ILiteral<F,E>, ILiteralKind<E,T>
+        where F : ILiteral<F,E,T>, new()
+        where E : unmanaged, Enum
+        where T : unmanaged
+    {
+
+
+    }
 
     public static class TypedLiteral
     {

@@ -10,7 +10,7 @@ namespace Z0
     using static SFuncs;
     using static MathSvcHosts;
 
-    partial class MathSvcFactory
+    partial class MathServices
     {
         [MethodImpl(Inline)]
         public static Eq<T> eq<T>(T t = default)

@@ -20,12 +20,6 @@ namespace Z0
 
     public static class Checks
     {
-        [MethodImpl(Inline)]
-        public static IntPtr Jit(this MethodInfo src)            
-        {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            return src.MethodHandle.GetFunctionPointer();
-        }
 
         /// <summary>
         /// Raises an error if the source method is any flavor of generic

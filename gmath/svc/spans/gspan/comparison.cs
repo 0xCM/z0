@@ -14,31 +14,31 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> eq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathSvcFactory.eq<T>(), l, r, dst);
+                => SFuncs.apply(MathServices.eq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> neq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathSvcFactory.neq<T>(), l, r, dst);
+                => SFuncs.apply(MathServices.neq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> lt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathSvcFactory.lt<T>(), l, r, dst);
+                => SFuncs.apply(MathServices.lt<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> lteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathSvcFactory.lteq<T>(), l, r, dst);
+                => SFuncs.apply(MathServices.lteq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> gt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathSvcFactory.gt<T>(), l, r, dst);
+                => SFuncs.apply(MathServices.gt<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> gteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathSvcFactory.gteq<T>(), l, r, dst);
+                => SFuncs.apply(MathServices.gteq<T>(), l, r, dst);
     }
 }

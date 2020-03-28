@@ -37,11 +37,14 @@ namespace Z0
 
     static class VImmTestCases
     {           
-        public static IEnumerable<MethodInfo> VUnaryShifts => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_");
+        public static IEnumerable<MethodInfo> VUnaryShifts 
+            => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_");
 
-        public static IEnumerable<MethodInfo> V128UnaryShifts => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_128");
+        public static IEnumerable<MethodInfo> V128UnaryShifts 
+            => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_128");
 
-        public static IEnumerable<MethodInfo> V256UnaryShifts => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_256");
+        public static IEnumerable<MethodInfo> V256UnaryShifts 
+            => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_256");
 
 
         [MethodImpl(Inline)]

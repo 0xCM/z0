@@ -108,7 +108,7 @@ namespace Z0.Asm
             }
         }
 
-        public void Execute()
+        public void Execute(params string[] args)
         {             
             void OnCaptureEvent(in AsmCaptureEvent data)
             {

@@ -10,12 +10,15 @@ namespace Z0
 
     class App : Shell<App>
     { 
-        protected override void Execute(params string[] args)
+        public override void RunShell(params string[] args)
         {
             Console.WriteLine("I do nothing");
+
         }
 
         public static void Main(params string[] args) => Launch(args); 
     } 
+
+
 }
 

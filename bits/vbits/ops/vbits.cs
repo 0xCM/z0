@@ -18,14 +18,13 @@ namespace Z0
 
     }
 
-    [ApiServiceHostProvider(vBitServices.CollectionName)]
-    public partial class vBitSvcHosts  : ApiServiceHosts<vBitSvcHosts>
+    public partial class vBitSvcHosts
     {        
 
     }
 
-    [ApiSeviceFactoryProvider(CollectionName)]
-    public partial class vBitServices : ApiSvcFactoryProvider<vBitServices>
+    [ApiServiceProvider(vBitServices.CollectionName)]
+    public partial class vBitServices : IApiServiceProvider<vBitSvcHosts>
     {
         public const string CollectionName = "vbits.services";
     }

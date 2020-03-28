@@ -11,7 +11,6 @@ namespace Z0
     using System.Linq;
     
     using static Core;
-    using static VectorSurrogates;
 
     public static class VRandX
     {
@@ -244,37 +243,30 @@ namespace Z0
             where T : unmanaged
                 => random.Blocks<T>(w,1).LoadVector();
                     
-        /// <summary>
-        /// Producs a stream-yielding surrogate vector emitter
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="kind">THe vector cell kind</param>
-        public static Emitter<IEnumerable<IVec128>> CpuSurrogateEmitter(this IPolyrand random, N128 w, NumericKind kind)
-        {
-            switch(kind)
-            {
-                case NumericKind.U8:
-                    return () => from v in random.CpuVectors<byte>(w).Surrogates() select v.NonGeneric();
-                case NumericKind.I8:
-                    return () => from v in random.CpuVectors<sbyte>(w).Surrogates() select v.NonGeneric();
-                case NumericKind.U16:
-                    return () => from v in random.CpuVectors<ushort>(w).Surrogates() select v.NonGeneric();
-                case NumericKind.I16:
-                    return () => from v in random.CpuVectors<short>(w).Surrogates() select v.NonGeneric();
-                case NumericKind.U32:
-                    return () => from v in random.CpuVectors<uint>(w).Surrogates() select v.NonGeneric();
-                case NumericKind.I32:
-                    return () => from v in random.CpuVectors<int>(w).Surrogates() select v.NonGeneric();
-                case NumericKind.U64:
-                    return () => from v in random.CpuVectors<long>(w).Surrogates() select v.NonGeneric();
-                case NumericKind.I64:
-                    return () => from v in random.CpuVectors<ulong>(w).Surrogates() select v.NonGeneric();
-                default:
-                    return () => core.array<IVec128>();
-            }
-        }
-
+        // public static Emitter<IEnumerable<IVec128>> CpuSurrogateEmitter(this IPolyrand random, N128 w, NumericKind kind)
+        // {
+        //     switch(kind)
+        //     {
+        //         case NumericKind.U8:
+        //             return () => from v in random.CpuVectors<byte>(w).Surrogates() select v.NonGeneric();
+        //         case NumericKind.I8:
+        //             return () => from v in random.CpuVectors<sbyte>(w).Surrogates() select v.NonGeneric();
+        //         case NumericKind.U16:
+        //             return () => from v in random.CpuVectors<ushort>(w).Surrogates() select v.NonGeneric();
+        //         case NumericKind.I16:
+        //             return () => from v in random.CpuVectors<short>(w).Surrogates() select v.NonGeneric();
+        //         case NumericKind.U32:
+        //             return () => from v in random.CpuVectors<uint>(w).Surrogates() select v.NonGeneric();
+        //         case NumericKind.I32:
+        //             return () => from v in random.CpuVectors<int>(w).Surrogates() select v.NonGeneric();
+        //         case NumericKind.U64:
+        //             return () => from v in random.CpuVectors<long>(w).Surrogates() select v.NonGeneric();
+        //         case NumericKind.I64:
+        //             return () => from v in random.CpuVectors<ulong>(w).Surrogates() select v.NonGeneric();
+        //         default:
+        //             return () => core.array<IVec128>();
+        //     }
+        // }
                 
     }
 }

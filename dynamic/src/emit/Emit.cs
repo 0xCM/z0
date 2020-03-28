@@ -11,65 +11,6 @@ namespace Z0
 
     partial class Dynop
     {
-        /// <summary>
-        /// Creates a fixed 8-bit unary operator from caller-supplied x86 source code
-        /// </summary>
-        /// <param name="dst">Identifies the target buffer</param>
-        /// <param name="w">The width selector</param>
-        /// <param name="src">The source code</param>
-        [MethodImpl(Inline)]
-        public static UnaryOp8 EmitFixedUnaryOp(this IBufferToken dst, N8 w, in ApiCode src)
-            => dst.Load(src).EmitFixedUnaryOp(w, src.Id);
-
-        /// <summary>
-        /// Creates a fixed 16-bit unary operator from caller-supplied x86 source code
-        /// </summary>
-        /// <param name="dst">Identifies the target buffer</param>
-        /// <param name="w">The width selector</param>
-        /// <param name="src">The source code</param>
-        [MethodImpl(Inline)]
-        public static UnaryOp16 EmitFixedUnaryOp(this IBufferToken dst, N16 w, in ApiCode src)               
-            => dst.Load(src.BinaryCode).EmitFixedUnaryOp(w, src.Id);
-
-        /// <summary>
-        /// Creates a fixed 32-bit unary operator from caller-supplied x86 source code
-        /// </summary>
-        /// <param name="dst">Identifies the target buffer</param>
-        /// <param name="w">The width selector</param>
-        /// <param name="src">The source code</param>
-        [MethodImpl(Inline)]
-        public static UnaryOp32 EmitFixedUnaryOp(this IBufferToken dst, N32 w, in ApiCode src)
-            => dst.Load(src.BinaryCode).EmitFixedUnaryOp(w, src.Id);
-
-        /// <summary>
-        /// Creates a fixed 64-bit unary operator from caller-supplied x86 source code
-        /// </summary>
-        /// <param name="dst">Identifies the target buffer</param>
-        /// <param name="w">The width selector</param>
-        /// <param name="src">The source code</param>
-        [MethodImpl(Inline)]
-        public static UnaryOp64 EmitFixedUnaryOp(this IBufferToken dst, N64 w, in ApiCode src)
-            => dst.Load(src.BinaryCode).EmitFixedUnaryOp(w, src.Id);
-
-        /// <summary>
-        /// Creates a fixed 128-bit unary operator from caller-supplied x86 source code
-        /// </summary>
-        /// <param name="dst">Identifies the target buffer</param>
-        /// <param name="w">The width selector</param>
-        /// <param name="src">The source code</param>
-        [MethodImpl(Inline)]
-        public static UnaryOp128 EmitFixedUnaryOp(this IBufferToken dst, N128 w, in ApiCode src)
-            => dst.Load(src.BinaryCode).EmitFixedUnaryOp(w, src.Id);
-
-        /// <summary>
-        /// Creates a fixed 256-bit unary operator from caller-supplied x86 source code
-        /// </summary>
-        /// <param name="dst">Identifies the target buffer</param>
-        /// <param name="w">The width selector</param>
-        /// <param name="src">The source code</param>
-        [MethodImpl(Inline)]
-        public static UnaryOp256 EmitFixedUnaryOp(this IBufferToken dst, N256 w, in ApiCode src)
-            => dst.Load(src.BinaryCode).EmitFixedUnaryOp(w, src.Id);
 
         /// <summary>
         /// Creates a fixed 8-bit binary operator from caller-supplied x86 source code

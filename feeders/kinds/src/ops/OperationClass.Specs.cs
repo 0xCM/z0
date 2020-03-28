@@ -9,16 +9,37 @@ namespace Z0
     /// <summary>
     /// Identifies a class that classifies operations
     /// </summary>
-    public interface IOperationClass : IClass
+    public interface IOpClass : IClass
     {
 
     }
     
     /// <summary>
+    /// Charactrizes an operand-parametric operation class
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
+    public interface IOpClassT<T> : IClassT<T>
+    {
+
+
+    }
+
+    /// <summary>
+    /// Characterizes an F-bound polymorphic operation class
+    /// </summary>
+    /// <typeparam name="F">The reified type</typeparam>
+    public interface IOpClassF<F> : IClassF<F>
+        where F : IOpClassF<F>, new()
+    {
+
+    }
+
+
+    /// <summary>
     /// Charactrizes a class-parametric operation class
     /// </summary>
     /// <typeparam name="E">The class type</typeparam>
-    public interface IOperationClass<E> : IOperationClass 
+    public interface IOpClass<E> : IOpClass 
         where E : unmanaged, Enum
     {
         E Class {get;}
@@ -27,16 +48,39 @@ namespace Z0
     }
 
     /// <summary>
-    /// Charactrizes a class-parametric operation class that is also operand-parametric
+    /// Charactrizes an operation class that both operand and class parametric
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     /// <typeparam name="E">The class type</typeparam>
-    public interface IOperationClass<E,T> : IOperationClass<E>
-        where T : unmanaged
+    public interface IOpClass<E,T> : IOpClass<E>, IOpClassT<T>
         where E : unmanaged, Enum
+        where T : unmanaged
     {
 
     }
 
+    /// <summary>
+    /// Characterizes an operation class that is both class-parametric and F-bound polymorphic
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    /// <typeparam name="E">The class type</typeparam>
+    public interface IOpClassF<F,E> : IOpClass<E>, IClassF<F>
+        where E : unmanaged, Enum
+        where F : IOpClassF<F,E>, new()
+    {
 
+    }
+
+    /// <summary>
+    /// Charactrizes an operation class that is operand, class parametric, and F-bound polymorphic
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
+    /// <typeparam name="E">The class type</typeparam>
+    public interface IOpClassF<F,E,T> : IOpClass<E,T>, IOpClassF<F,E>
+        where E : unmanaged, Enum
+        where T : unmanaged
+        where F : IOpClassF<F,E,T>, new()
+    {
+
+    }
 }

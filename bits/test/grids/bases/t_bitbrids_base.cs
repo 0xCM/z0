@@ -35,7 +35,7 @@ namespace Z0
      
         protected static Span<T> and<T>(Span<T> lhs, Span<T> rhs)
             where T : unmanaged
-                => apply(MathSvcFactory.and<T>(),lhs,rhs);
+                => apply(MathServices.and<T>(),lhs,rhs);
 
         /// <summary>
         /// Asserts logical bitvector/bitstring equality

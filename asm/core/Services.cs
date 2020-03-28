@@ -131,9 +131,6 @@ namespace Z0.Asm
         public static IAsmInstructionFlow InstructionFlow(this IAsmContext context, IAsmInstructionSource source, AsmTriggerSet triggers)
             => AsmInstructionFlow.Create(context, source, triggers);
 
-        [MethodImpl(Inline)]
-        public static IMemberLocator MemberLocator(this IAsmContext src)
-            => Svc.MemberLocator.New(src);
 
         public static OpExtractExchange ExtractExchange(this IAsmContext context, AsmCaptureEventObserver observer, int? size = null)
         {
