@@ -6,16 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static SFuncs;
-    using static MathSvcHosts;
 
-    partial class MathServices
+    public sealed partial class MathSvcHosts
     {
+    
+    }
 
-        [MethodImpl(Inline)]
-        public static BitLogicOps<T> bitlogic<T>(T t = default)
-            where T : unmanaged        
-                => BitLogicOps<T>.Ops;
+    [ApiServiceProvider(Parts.MathServices.SvcCollectionName)]
+    public partial class MathSvc : IApiServiceProvider<MathSvcHosts>
+    {
+        public const string SvcCollectionName = "math.services";        
     }
 }

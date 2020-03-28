@@ -8,7 +8,7 @@
   
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Validity)" />
+    <ProjectReference Include="$(ValidityVectors)" />
 
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitSpans)" />    

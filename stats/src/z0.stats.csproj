@@ -12,7 +12,7 @@
     <ProjectReference Include="$(Nats)" />    
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(RngSourced)" />
+    <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Matrix)" />    
 
   </ItemGroup>

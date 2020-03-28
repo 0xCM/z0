@@ -5,13 +5,9 @@
 namespace Z0
 {
 	using System;
-	using System.Linq;
-	using System.Collections.Generic;
 	using System.Runtime.CompilerServices;
-	using System.Runtime.InteropServices;
-    using System.Security;
 
-	using static Root;
+	using static Core;
     
     [ApiHost("api", ApiHostKind.Direct)]
     public static class libm

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Core;
 
     public static partial class CheckSpecs
     {   

@@ -8,8 +8,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
     using static Nats;
+    using static refs;
+    using static CastNumeric;
 
     public class t_vgather : t_vinx<t_vgather>
     {
@@ -53,7 +55,7 @@ namespace Z0
                 var N = BufferSize/size<T>();
                 var d = bounds(N,t);
                 
-                var data = gmath.increments(alloc(N,t));
+                var data = gmath.increments(Spans.alloc(N,t));
                 ref readonly var src = ref head(data);
 
                 for(var rep = 0; rep < RepCount; rep++)
@@ -75,7 +77,7 @@ namespace Z0
                 var N = BufferSize/size<T>();
                 var d = bounds(N,t);
                 
-                var data = gmath.increments(alloc(N,t));
+                var data = gmath.increments(Spans.alloc(N,t));
                 ref readonly var src = ref head(data);
 
                 for(var rep = 0; rep < RepCount; rep++)

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static As;
-    using static Root;    
+    using static Core;    
     using static vgeneric;
     
     /// <summary>
@@ -63,8 +63,7 @@ namespace Z0
                 return generic<T>(dinxsfp.sub(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.sub(v64f(x), v64f(y)));
-            throw 
-                unsupported<T>();
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -195,8 +194,8 @@ namespace Z0
                 return dinxsfp.eq(v32f(x), v32f(y));
             else if(typeof(T) == typeof(double))
                 return dinxsfp.eq(v64f(x), v64f(y));
-            throw 
-                unsupported<T>();
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]

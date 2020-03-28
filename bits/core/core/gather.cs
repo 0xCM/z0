@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="mask">The mask that defines the bits to select</param>
         [MethodImpl(Inline), Op]
         public static uint gather(uint src, uint mask)        
-            => ParallelBitExtract(src,mask);
+            => ParallelBitExtract(src, mask);
 
         /// <summary>
         /// __int64 _pext_u64 (unsigned __int64 a, unsigned __int64 mask) PEXT r64a, r64b, reg/m64 

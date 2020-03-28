@@ -9,7 +9,6 @@ namespace Z0
 
     public class t_poly : t_libm<t_poly>
     {
-
         static unsafe double polevl(double[] coef)
         {
             var ans = coef[0];

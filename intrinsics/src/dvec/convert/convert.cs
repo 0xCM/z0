@@ -17,7 +17,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse2.X64;
      
-    using static Root;
+    using static Core;
     using static Nats;
     using static vgeneric;
 

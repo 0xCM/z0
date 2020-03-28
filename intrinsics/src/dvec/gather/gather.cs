@@ -11,9 +11,10 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static Root;
     using static vgeneric;
     using static Nats;
+    using static refs;
+    using static AsIn;
 
     partial class dvec
     {    

@@ -8,17 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Root;
+    using static Core;
     using static Nats;
     using static vgeneric;
     using static CheckSpecs;
+    using static refs;
 
     static class VChecks
     {
         public static bit vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
-            var svc = MathServices.bitlogic<T>();
+            var svc = MathSvc.bitlogic<T>();
             var v1 = VSvc.vbitlogic<T>(n128).and(x,y);
             var buffer = Fixed.alloc<Fixed128>();
             ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);

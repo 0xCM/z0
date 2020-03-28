@@ -12,8 +12,13 @@ namespace Z0
     
     using OK = OpKinds;
     
-    partial class MathServices
+    partial class MathSvc
     {
+        [MethodImpl(Inline)]
+        public static BitLogicOps<T> bitlogic<T>(T t = default)
+            where T : unmanaged        
+                => BitLogicOps<T>.Ops;
+
        [MethodImpl(Inline)]
        public static And<T> and<T>(T t = default)
             where T : unmanaged        

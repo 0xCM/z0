@@ -39,7 +39,6 @@ namespace Z0
 
     public static class ServiceFactory
     {
-
         public static ISFMatch<T,T> UnaryOpMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
                 => new SFOpMatch1<T>(context);

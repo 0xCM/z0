@@ -15,47 +15,47 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> add<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.add<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.add<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> sub<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.sub<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.sub<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> mul<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.mul<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.mul<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> div<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.div<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.div<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> mod<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.mod<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.mod<T>(), l, r, dst);
 
         [MethodImpl(Inline), NumericClosures(NumericKind.Integers)]
         public static Span<T> modmul<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.modmul<T>(), a,b,c, dst);
+                => SFuncs.apply(MathSvc.modmul<T>(), a,b,c, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> negate<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.negate<T>(), src, dst);
+                => SFuncs.apply(MathSvc.negate<T>(), src, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> inc<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.inc<T>(), src, dst);
+                => SFuncs.apply(MathSvc.inc<T>(), src, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> dec<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.dec<T>(), src, dst);
+                => SFuncs.apply(MathSvc.dec<T>(), src, dst);
 
         [MethodImpl(Inline)]
         public static T sum<T>(ReadOnlySpan<T> src)
@@ -81,26 +81,26 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> clamp<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.clamp<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.clamp<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> square<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.square<T>(), src, dst);
+                => SFuncs.apply(MathSvc.square<T>(), src, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.abs<T>(), src, dst);
+                => SFuncs.apply(MathSvc.abs<T>(), src, dst);
 
         [MethodImpl(Inline)]
         public static Span<bit> even<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.even<T>(), src,dst);
+                => SFuncs.apply(MathSvc.even<T>(), src,dst);
 
         [MethodImpl(Inline)]
         public static Span<bit> odd<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.odd<T>(), src,dst);
+                => SFuncs.apply(MathSvc.odd<T>(), src,dst);
     }
 }

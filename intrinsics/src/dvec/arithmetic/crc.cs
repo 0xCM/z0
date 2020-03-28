@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
             
-    using static Root;    
+    using static Core;    
 
     using CRC = System.Runtime.Intrinsics.X86.Sse42;
     using CRC64 = System.Runtime.Intrinsics.X86.Sse42.X64; 

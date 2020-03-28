@@ -9,10 +9,11 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static Root;
-    using static vgeneric;
+    using static vgeneric;    
     using static Nats;
-    
+    using static refs;
+    using static AsIn;
+        
     partial class gvec
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]

@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Core;
     using static Nats;
 
     public class t_blocks : t_vinx<t_blocks>
@@ -93,7 +93,7 @@ namespace Z0
         }
         public void Load1()
         {
-            var x = Blocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
+            var x = Blocks.safeload(n128, span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
             BlockChecks.eq(x, Blocks.parts(n128,1,2,3,4,5,6,7,8));
             

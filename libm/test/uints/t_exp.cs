@@ -9,8 +9,8 @@ namespace Z0
 
     public class t_exp : t_libm<t_exp>
     {
-
         const double MinExp = 2.0;
+     
         const double MaxExp = 50.0;
 
         public void exp_libm_valid()

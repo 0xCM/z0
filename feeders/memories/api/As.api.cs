@@ -434,7 +434,6 @@ namespace Z0
         public static T generic<T>(ulong src)
             => Unsafe.As<ulong,T>(ref src);
 
-
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref T generic<T>(ref ulong src)
             => ref Unsafe.As<ulong,T>(ref src);

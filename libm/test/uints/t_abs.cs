@@ -8,7 +8,6 @@ namespace Z0
 
     public class t_abs : t_libm<t_abs>
     {
-
         public void fabs64_libm_validate()
         {
             for(var i=0; i<RepCount; i++)

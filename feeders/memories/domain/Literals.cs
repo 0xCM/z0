@@ -158,6 +158,16 @@ namespace Z0
                 => default;
 
         /// <summary>
+        /// Returns generic 0 for a primal source type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T zero<T>(T rep)
+            where T : unmanaged
+                => default;
+
+        /// <summary>
         /// Returns generic 1 for a primal source type
         /// </summary>
         /// <param name="t">A primal type representative</param>
@@ -168,12 +178,32 @@ namespace Z0
                 => Cast.to<T>(1);
 
         /// <summary>
+        /// Returns generic 1 for a primal source type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T one<T>(T rep)
+            where T : unmanaged
+                => one<T>();
+
+        /// <summary>
         /// Ones all bits each and every ... one
         /// </summary>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
         public static T ones<T>()
+            where T : unmanaged
+                => ones_u<T>();
+
+        /// <summary>
+        /// Ones all bits each and every ... one
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T ones<T>(T rep)
             where T : unmanaged
                 => ones_u<T>();
 
@@ -199,6 +229,11 @@ namespace Z0
                 return minval_f<T>();
         }                
 
+        [MethodImpl(Inline)]
+        public static T minval<T>(T rep)
+            where T : unmanaged
+                => minval<T>();
+
         /// <summary>
         /// Returns the maximum value for a primal source type
         /// </summary>
@@ -221,6 +256,10 @@ namespace Z0
                 return maxval_f<T>();
         }                
 
+        [MethodImpl(Inline)]
+        public static T maxval<T>(T rep)
+            where T : unmanaged
+                => maxval<T>();
 
         [MethodImpl(Inline)]
         static T minval_i<T>()

@@ -14,6 +14,8 @@ namespace Z0
 
     partial class vgeneric
     {
+
+
         /// <summary>
         /// Allocates and deposits vector content to a data block
         /// </summary>

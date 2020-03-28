@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
  
-    using static Root;    
+    using static Core;    
     using static vgeneric;
     using static Nats;
 

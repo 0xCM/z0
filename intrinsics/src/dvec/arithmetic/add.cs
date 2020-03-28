@@ -14,8 +14,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
 
-    using static Root;    
-
     public static partial class dvec
     {
         /// <summary>

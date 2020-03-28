@@ -34,12 +34,31 @@ namespace Z0
         public static T cast<T>(object src) 
             => (T)src;
 
+        /// <summary>
+        /// Constructs a enumerable from a parameter array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static IEnumerable<T> seq<T>(params T[] src)
             => src;
         
+        /// <summary>
+        /// Constructs an array from a parameter array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static T[] array<T>(params T[] src)
+            => src;
+
+        /// <summary>
+        /// Constructs a span from a parameter array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> span<T>(params T[] src)
             => src;
 
         /// <summary>

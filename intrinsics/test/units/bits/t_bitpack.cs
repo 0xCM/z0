@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Root;
+    using static Core;
     using static Nats;
 
     public class t_bitpack : t_vinx<t_bitpack>
@@ -68,6 +68,20 @@ namespace Z0
                 var packed = BitPack.pack8(bitseq);
                 Claim.eq(bs.TakeScalar<byte>(), packed);
             }
+        }
+
+        public void pack_32x4_2()
+        {
+            var block1 = Blocks.alloc<ushort>(w16,1);
+            block1[0] = ushort.MaxValue;
+            var val1 = block1.BlockRef(0);
+            trace(val1.ToBitString());
+
+            var block2 = Blocks.alloc<uint>(w32,1);
+            block2[0] = uint.MaxValue;
+            var val2 = block2.BlockRef(0);
+            trace(val2.ToBitString());
+
         }
 
 

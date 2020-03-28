@@ -14,18 +14,6 @@ namespace Z0
     
     readonly struct ApiOpCollector : IApiCollector
     {
-        public IContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public static IApiCollector Create(IContext context)
-            => new ApiOpCollector(context);
-    
-        [MethodImpl(Inline)]
-        internal ApiOpCollector(IContext context)
-        {
-            this.Context = context;
-        }
-
         public IEnumerable<DirectApiGroup> CollectDirect(Assembly src)
             => src.ApiHosts().SelectMany(CollectDirect);
 

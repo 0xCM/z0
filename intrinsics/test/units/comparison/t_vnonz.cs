@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
     
-    using static Root;
+    using static Core;
     using static Nats;
     using static vgeneric;
+    using static Literals;
+
 
     public class t_vnonz : t_vinx<t_vnonz>
     {

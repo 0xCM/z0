@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Polyfun;
+    using static Core;
     using static Literals;
 
     public static class RngNonz

@@ -11,7 +11,7 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Analogs)" />
-    <ProjectReference Include="$(RngSourced)" />
+    <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Matrix)" />     
 
   </ItemGroup>

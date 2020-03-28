@@ -11,7 +11,7 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Avx;
     
-    using static Root;
+    using static Core;
     using static vgeneric;
     using static Nats;
 

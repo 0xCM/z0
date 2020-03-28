@@ -14,31 +14,31 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> eq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.eq<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.eq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> neq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.neq<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.neq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> lt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.lt<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.lt<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> lteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.lteq<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.lteq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> gt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.gt<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.gt<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, NumericClosures(NumericKind.Integers)]
         public static Span<bit> gteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
-                => SFuncs.apply(MathServices.gteq<T>(), l, r, dst);
+                => SFuncs.apply(MathSvc.gteq<T>(), l, r, dst);
     }
 }

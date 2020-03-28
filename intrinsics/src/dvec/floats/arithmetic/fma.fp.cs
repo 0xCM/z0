@@ -11,7 +11,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Fma;        
     
-    using static Root;
+    using static Core;
 
     partial class dinxfp
     {

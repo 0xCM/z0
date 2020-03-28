@@ -17,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IApiCollector OpCollector(this IContext context)
-            => ApiOpCollector.Create(context);
+            => default(ApiOpCollector);
 
         [MethodImpl(Inline)]
         public static ITypeIdentityDiviner TypeIdDiviner(this IContext context)

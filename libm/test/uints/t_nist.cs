@@ -26,10 +26,7 @@ namespace Z0
             var c = BitConverter.ToInt64(a);
             Claim.eq(z, c);
 
-
         }
-
-
     }
 
 }

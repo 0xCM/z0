@@ -8,8 +8,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Core;
     using static Nats;
+    using static CastNumeric;
+    using static Literals;
 
     public class t_vsllv : t_vinx<t_vsllv>
     {

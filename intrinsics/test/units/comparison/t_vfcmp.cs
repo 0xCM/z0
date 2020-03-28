@@ -11,8 +11,9 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Avx;
     
-    using static Root;
+    using static Core;
     using static Nats;
+    using static refs;
 
     public class t_vfcmp : t_vinx<t_vfcmp>
     {                    
@@ -174,7 +175,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         static bool[] TestNaN(Vector128<double> src)
-            => array(src.GetElement(0).IsNaN(), src.GetElement(1).IsNaN());
+            => core.array(src.GetElement(0).IsNaN(), src.GetElement(1).IsNaN());
 
         /// <summary>
         /// __m128d _mm_cmp_pd (__m128d a, __m128d b, const int imm8)VCMPPD xmm, xmm, xmm/m128, imm8

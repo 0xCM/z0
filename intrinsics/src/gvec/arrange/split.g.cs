@@ -8,13 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
-    using static Root;
-    using static vgeneric;
-    
+        
     partial class gvec
     {
-
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Pair<Vector128<T>> vsplit<T>(Vector256<T> src)
             where T : unmanaged

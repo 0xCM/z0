@@ -30,7 +30,7 @@ namespace Z0
               => src.ApiHosts().SelectMany(Hosted);
 
         [MethodImpl(Inline)]
-        public static IntPtr Jit(MethodInfo src)
+        static IntPtr Jit(MethodInfo src)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
             return src.MethodHandle.GetFunctionPointer();
