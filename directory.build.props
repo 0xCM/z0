@@ -77,6 +77,7 @@
     <WorkflowCore>$(TopDir)workflow/core/z0.workflow.core.csproj</WorkflowCore>
     <WorkflowRuntime>$(TopDir)workflow/runtime/z0.workflow.runtime.csproj</WorkflowRuntime>
     <Feeders>$(TopDir)a/</Feeders>
+    <Z>$(TopDir)a/z/z0.z.csproj</Z>
   </PropertyGroup>
 
   <Import Project="$(Feeders)export.props"/>

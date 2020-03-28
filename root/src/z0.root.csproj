@@ -16,6 +16,10 @@
 
   <Import Project="$(Feeders)z.exports.props"/>
 
+  <ItemGroup>
+    <ProjectReference Include="$(Z)" />
+  </ItemGroup>
+
   <!-- <ItemGroup>
     <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Api)" />

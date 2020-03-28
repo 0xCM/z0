@@ -14,12 +14,6 @@ namespace Z0.Parts
 
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    public static partial class Root
-    {                        
-
-    }
 
 }
 
