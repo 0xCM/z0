@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    using static Root;
-    using static Nats;
+    using static Core;
 	using static As;
 
 	[StructLayout(LayoutKind.Sequential, Size = 64)]
@@ -249,7 +248,5 @@ namespace Z0
 
 		public override bool Equals(object rhs)
             => rhs is BitPos x && Equals(x);
-	}		 
-
-
+	}
 }

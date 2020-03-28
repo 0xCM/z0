@@ -9,10 +9,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Z0.Root;
-    using Z0;
+    using static Core;
 
-    public readonly struct FiniteSeq<T> : IIndexedSeq<FiniteSeq<T>, T>, IFiniteSeq<T>
+
+    public readonly struct FiniteSeq<T> : IIndexedSeq<FiniteSeq<T>, T>
     {
         public static readonly FiniteSeq<T> Empty = default;
 
@@ -75,6 +75,5 @@ namespace Z0
 
         public FiniteSeq<T> Where(Func<T, bool> predicate)
             => Seq.finite(from x in Content where predicate(x) select x);
-
     }
 }

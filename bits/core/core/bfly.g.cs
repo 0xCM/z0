@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
     using static Nats;
     using static As;
 
@@ -30,7 +30,7 @@ namespace Z0
             else if(typeof(N) == typeof(N16))
                 return bfly(n16,a);
             else
-                throw unsupported<N>();
+                throw Unsupported.define<N>();
         }            
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static Core;
     
     partial class Bits
     {                
@@ -86,6 +86,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong rotl(ulong src, int shift, int width)
             => (src << shift) | (src >> (width - shift));
-
     }
 }

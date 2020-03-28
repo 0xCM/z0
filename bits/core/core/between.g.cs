@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
     using static As;
     
     partial class gbits
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static void between<T>(T a, byte first, byte last, Span<byte> dst, int offset)
             where T : unmanaged
-                => bytes(gbits.between(a,first,last)).Slice(0, BitCalcs.minbytes(last - first + 1)).CopyTo(dst,offset);
+                => Bytes.from(gbits.between(a,first,last)).Slice(0, BitCalcs.minbytes(last - first + 1)).CopyTo(dst,offset);
 
         [MethodImpl(Inline)]
         static T between_i<T>(T src, byte p0, byte p1)

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Characterizes an injective linear mapping from a monotonic sequence of bit positions to 

@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
  
-    using static Root;
-   
+    using static Core;
+  
     partial class Bits
     {                
         /// <summary>

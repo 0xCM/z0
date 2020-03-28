@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Text;
 
-    using static Root;
+    using static Core;
 
     public readonly struct BitMap : IBitMap
     {
@@ -89,8 +89,7 @@ namespace Z0
         public static ref readonly BitMap256<T> Map256<T>()        
             where T : unmanaged
                 => ref BitMap256<T>.TheOnly;
-
-        
+    
         [MethodImpl(Inline)]
         BitMap(int cellcount, BitSize cellwidth, BitIndex[] indices)
         {

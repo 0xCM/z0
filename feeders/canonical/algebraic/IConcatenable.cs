@@ -18,27 +18,4 @@ namespace Z0
         T Concat(T lhs, T rhs);
     }
 
-    /// <summary>
-    /// Characterizes a reification that defines an intrinsic concatentation operator
-    /// </summary>
-    /// <typeparam name="S">The reifying type</typeparam>
-    public interface IConcatenable<S> : IConcrete<S>
-        where S : IConcatenable<S>, new()
-    {
-        /// <summary>
-        /// Concatenates the intrinsic value with a suplied value 
-        /// </summary>
-        /// <param name="rhs">The right value supplied to the concatenation operator</param>
-        S Concat(S rhs);
-    }
-
-    /// <summary>
-    /// Characterizes a parametric conatenable thing 
-    /// </summary>
-    /// <typeparam name="S">The reifying type</typeparam>
-    public interface IConcatenable<S,T> : IConcatenable<S>
-        where S : IConcatenable<S,T>, new()
-    {
-
-    }
 }

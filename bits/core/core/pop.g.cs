@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
+    using static CastNumeric;
     using static As;
 
     partial class gbits

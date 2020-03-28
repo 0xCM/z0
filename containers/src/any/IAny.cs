@@ -22,25 +22,6 @@ namespace Z0
         
     }
 
-    public interface IFiniteSeq : IContentAggregate
-    {
-    }
-
-    public interface IFiniteSeq<T> : IFiniteSeq, IContainer<T[]>,  IContentAggregate<T>
-    {
-        IEnumerable<T> IContentAggregate<T>.Items    
-            => Content;
-
-        int Length
-            => Content.Length;
-        
-        T this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => Content[index];
-        }
-    }
-
     public delegate C FiniteSeqFactory<T,C>(T[] terms)
         where C : IFiniteSeq<C,T>, new();         
 
@@ -66,4 +47,25 @@ namespace Z0
         /// <param name="src">The term source</param>
         public static C Create(T[] src) => Empty.Factory(src);
     }
+
+    public interface IFiniteSeq : IContentAggregate
+    {
+    }
+
+    public interface IFiniteSeq<T> : IFiniteSeq, IContainer<T[]>,  IContentAggregate<T>
+    {
+        IEnumerable<T> IContentAggregate<T>.Items    
+            => Content;
+
+        int Length
+            => Content.Length;
+        
+        T this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => Content[index];
+        }
+    }
+
+
 }

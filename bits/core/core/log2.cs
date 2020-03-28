@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Numerics;
  
-    using static Root;
+    using static Core;
     
     partial class Bits
     {                
-
         /// <summary>
         /// Computes floor(log(src,2))
         /// </summary>

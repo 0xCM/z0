@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
     using static As;
 
     partial class gbits
@@ -74,7 +74,6 @@ namespace Z0
                  return generic<T>(Bits.disable(float64(src), pos));
             else
                 throw Unsupported.define<T>();
-        }
-         
+        }         
     }
 }

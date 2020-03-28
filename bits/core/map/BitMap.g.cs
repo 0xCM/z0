@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Defines a bitmap over cells of unmanaged parameteric type

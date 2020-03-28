@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using static Root;
+    using static Core;
 
     partial class Bits
     {
-
         [MethodImpl(Inline), Op]
         public static ushort byteswap(ushort src)
         {
@@ -46,7 +45,5 @@ namespace Z0
             dst |= (ulong)(byte)(src >> 0*8) << 56;
             return dst;
         }
-
     }
-
 }
