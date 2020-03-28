@@ -1,22 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project>
 
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-  </PropertyGroup>
-
-
-  <PropertyGroup>
-    <ProjectFolder>$[System.IO.Path]::GetFileName($(MSBuildThisFileDirectory))</ProjectFolder>
-  </PropertyGroup>
-
-  <Target Name="Diagnostic">
-    <Message Text="ProjectFolder = $(ProjectFolder)" Importance="high" />
-  </Target>
-
-  <Import Project="$(Feeders)z.exports.props"/>
-
-  <!-- <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Canonical)" />
@@ -36,6 +20,6 @@
     <ProjectReference Include="$(Texting)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Tuples)" />
-  </ItemGroup> -->
+  </ItemGroup>
 
 </Project>

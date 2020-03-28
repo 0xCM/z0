@@ -76,7 +76,7 @@
     <VBits>$(TopDir)bits/vbits/z0.bits.vbits.csproj</VBits>
     <WorkflowCore>$(TopDir)workflow/core/z0.workflow.core.csproj</WorkflowCore>
     <WorkflowRuntime>$(TopDir)workflow/runtime/z0.workflow.runtime.csproj</WorkflowRuntime>
-    <Feeders>$(TopDir)feeders/</Feeders>
+    <Feeders>$(TopDir)a/</Feeders>
   </PropertyGroup>
 
   <Import Project="$(Feeders)export.props"/>
