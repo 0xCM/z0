@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
     using static UnaryArithmeticKind;
     using static BinaryArithmeticKind;
     using static TypedLogicSpec;

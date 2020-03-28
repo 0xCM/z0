@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class Root
+    partial class root
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref sbyte int8<T>(in T src)

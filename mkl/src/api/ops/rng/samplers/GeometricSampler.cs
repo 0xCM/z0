@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     sealed class GeometricSampler<T> : Sampler<T, GeometricSpec<T>>
         where T : unmanaged

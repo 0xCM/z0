@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Root;
+    using static root;
 
     public sealed class t_classify : t_identity<t_classify>
     {

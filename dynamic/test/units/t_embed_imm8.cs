@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Root;
+    using static root;
     using static Nats;
 
     public class t_embed_imm8 : UnitTest<t_embed_imm8>

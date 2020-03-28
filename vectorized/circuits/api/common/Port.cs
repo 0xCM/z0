@@ -9,7 +9,7 @@ namespace Z0
     using System.IO.Pipes;
     using System.Buffers;
     
-    using static Root;
+    using static root;
 
     public readonly struct InPort<T>
         where T : unmanaged

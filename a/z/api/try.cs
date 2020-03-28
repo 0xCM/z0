@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class Root
+    partial class root
     {
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 

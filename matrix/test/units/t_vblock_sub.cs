@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using VecLen = NatSeq<N1,N2,N3>;
     
-    using static Root;
+    using static root;
 
     public class vblock_sub : UnitTest<vblock_sub>
     {   

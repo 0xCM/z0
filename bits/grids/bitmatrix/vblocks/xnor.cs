@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static gvec;
-    using static Root;
+    using static root;
     using static vgeneric;
     
     partial class vblock

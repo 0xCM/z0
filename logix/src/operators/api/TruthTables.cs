@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.IO;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
     using static Nats;
 
     using Api = LogicOpApi;

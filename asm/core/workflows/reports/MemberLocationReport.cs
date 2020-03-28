@@ -10,7 +10,7 @@ namespace Z0.Asm
     using System.Linq;
     using System.Reflection;
 
-    using static Root;
+    using static root;
 
     using F = MemberLocationField;
     using R = MemberLocationRecord;

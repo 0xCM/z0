@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
     
-    using static Root;
+    using static root;
 
     public ref struct ByteParser<T>
         where T : unmanaged, Enum

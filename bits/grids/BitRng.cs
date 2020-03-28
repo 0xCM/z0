@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
 
-    using static Root;
+    using static root;
     using static Nats;
 
     using BG = Z0.BitGrid;

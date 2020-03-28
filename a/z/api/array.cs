@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class Root
+    partial class root
     {                        
         /// <summary>
         /// Consructs an array from a parameter array

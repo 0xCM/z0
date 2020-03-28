@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Root;
+    using static root;
     using static XPressive;
 
     readonly struct EmitterFactory<T> : IEmitterFactory<T>

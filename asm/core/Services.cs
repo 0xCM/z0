@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using Svc = Z0.Asm;
     
-    using static Root;
+    using static root;
 
     public static class AsmCoreServices
     {            

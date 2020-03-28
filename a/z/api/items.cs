@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    partial class Root
+    partial class root
     {
         /// <summary>
         /// Consructs an enumerable from a parameter array

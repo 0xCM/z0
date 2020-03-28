@@ -10,7 +10,7 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Diagnostics;
 
-    partial class Root
+    partial class root
     {
         /// <summary>
         /// Searches for a thread given an OS-assigned id, not the useless clr id

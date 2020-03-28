@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
         
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Identifies an application-level/logical event

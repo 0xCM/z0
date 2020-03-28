@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class Root
+    partial class root
     {                
         /// <summary>
         /// Computes the bit-width of a type

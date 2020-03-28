@@ -7,7 +7,7 @@ namespace Z0.Asm.Check
     using System;
     using System.Collections.Generic;
     
-    using static Root;
+    using static root;
 
     using F = AsmExecField;
     using R = AsmExecResult;

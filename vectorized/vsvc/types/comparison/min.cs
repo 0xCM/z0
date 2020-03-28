@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using static Z0.Root;
+    using static Z0.root;
 
     public interface IClassifiedOperator<K>
         where K : IOpClass<OperatorClass>

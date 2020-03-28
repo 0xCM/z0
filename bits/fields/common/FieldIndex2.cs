@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static root;    
 
     public readonly struct FieldIndex<I,W> : IFieldIndex<FieldIndexEntry<I,W>>, IFormattable<FieldIndex<I,W>>
         where I : unmanaged, Enum

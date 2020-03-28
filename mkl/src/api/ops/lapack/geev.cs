@@ -7,7 +7,7 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
  
-    using static Root;
+    using static root;
     using static nfunc;
 
     partial class mkl

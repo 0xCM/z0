@@ -8,7 +8,7 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Characterizes a thread of control with independent volition

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class Root
+    partial class root
     {                
         [MethodImpl(Inline)]
         public static Factory<T> factory<T>()

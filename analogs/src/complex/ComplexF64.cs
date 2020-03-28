@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
 	/// <summary>
 	/// Represents a 32-bit floating point complex number

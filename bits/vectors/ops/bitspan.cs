@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Root;    
+    using static root;    
     using static Nats;
 
     partial class BitVector

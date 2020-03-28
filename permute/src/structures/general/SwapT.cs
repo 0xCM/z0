@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
   
     /// <summary>
     /// Defines a transposition, i.e. a specification for the transposition
@@ -56,7 +56,7 @@ namespace Z0
             if(indices.Length != 2)
                 return Zero;
             
-            var result = Root.Try(() => (Numeric.parse<T>(indices[0]), Numeric.parse<T>(indices[1])));
+            var result = root.Try(() => (Numeric.parse<T>(indices[0]), Numeric.parse<T>(indices[1])));
             if(result.IsSome())
                 return result.Value();
             else

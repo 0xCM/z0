@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
 
     public interface IIndexedBits<F> : IBitField
         where F : unmanaged, Enum

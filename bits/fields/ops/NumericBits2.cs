@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Defines a stateful numeric bitfield api surface parametrized by an indexing enum and numeric type

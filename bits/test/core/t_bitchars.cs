@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     public class t_bitchars : t_bitcore<t_bitchars>
     {

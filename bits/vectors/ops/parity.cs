@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
 
-    using static Root;    
+    using static root;    
     using P = parity;
 
     partial class BitVector

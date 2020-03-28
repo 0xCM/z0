@@ -9,7 +9,7 @@ namespace Z0
     using System.Threading;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
     using static Nats;
 
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]

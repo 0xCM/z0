@@ -9,7 +9,7 @@ namespace Z0.Mkl
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Defines distribution sample operations

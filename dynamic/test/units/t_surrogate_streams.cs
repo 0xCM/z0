@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Root;
+    using static root;
     using static Nats;
 
     public class t_surrogate_streams : UnitTest<t_surrogate_streams>

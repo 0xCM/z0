@@ -13,7 +13,7 @@ namespace Z0
 
     using Z0.ClrSpecs;
 
-    using static Root;
+    using static root;
 
     using DnLib = dnlib.DotNet.Emit;
     using Dn = dnlib.DotNet;

@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    using static Root;
+    using static root;
 
     public static partial class AsmExtend
     {

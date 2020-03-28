@@ -12,7 +12,7 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
 
     public interface IConcurrentLookup<K,V>
     {

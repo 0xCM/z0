@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Defines a group of related assembly functions

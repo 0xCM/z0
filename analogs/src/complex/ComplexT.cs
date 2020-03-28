@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Defines a complex number parameterized over the primal types

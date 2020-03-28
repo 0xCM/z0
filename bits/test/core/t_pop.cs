@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
     using static Nats;
 
     public class t_pop : t_bitcore<t_pop>

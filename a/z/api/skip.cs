@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class Root
+    partial class root
     {
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the resulting element

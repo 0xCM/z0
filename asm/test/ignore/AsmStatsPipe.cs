@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     public readonly struct AsmStats
     {

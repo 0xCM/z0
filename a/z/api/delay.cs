@@ -10,7 +10,7 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Diagnostics;
 
-    partial class Root
+    partial class root
     {
         /// <summary>
         /// Returns after specified duration has elapsed

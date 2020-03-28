@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Root;
+    using static root;
 
     public class t_bitcopy : t_bitcore<t_bitcopy>
     {            

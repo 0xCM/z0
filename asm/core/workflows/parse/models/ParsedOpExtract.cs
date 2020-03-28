@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Linq;
     using System.Runtime.CompilerServices;
  
-    using static Root;    
+    using static root;    
 
     public readonly struct ParsedExtract
     {

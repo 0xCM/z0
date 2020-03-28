@@ -7,7 +7,7 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
 
-	using static Root;
+	using static root;
 
     sealed class BernoulliSampler<T> : Sampler<T, BernoulliSpec<double>>
         where T : unmanaged

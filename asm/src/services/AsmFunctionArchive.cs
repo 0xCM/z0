@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     using static AsmServiceMessages;
 
-    using static Root;
+    using static root;
 
     class AsmFunctionArchive : IAsmFunctionArchive
     {        

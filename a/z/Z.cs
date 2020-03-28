@@ -14,7 +14,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public static partial class Root
+    public static partial class root
     {                        
             
     }

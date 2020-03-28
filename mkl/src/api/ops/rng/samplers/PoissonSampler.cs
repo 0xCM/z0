@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
     using static As;
 
     sealed class PoissonSampler<T> : Sampler<T, PoissonSpec<T>>

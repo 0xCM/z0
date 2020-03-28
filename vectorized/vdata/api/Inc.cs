@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
         
     using static HexConst;
-    using static Root;    
+    using static root;    
     using static Nats;
 
     public static partial class Data

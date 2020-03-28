@@ -12,7 +12,7 @@ namespace Z0
     // using static Root;
     // using static Nats;
     using static As;
-    using static Root;
+    using static root;
     using static Nats;
     using static refs;
 

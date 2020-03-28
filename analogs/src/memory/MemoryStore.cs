@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.InteropServices;    
     using System.Buffers;
     
-    using static Root;
+    using static root;
 
     public static class MemoryStore
     {

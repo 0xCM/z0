@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class Root
+    partial class root
     {
         /// <summary>
         /// Specifies the name of the windows kernel32 dll, primarily intended for use in DllImport attributions

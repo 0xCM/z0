@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Mkl;        
 
-    using static Root;
+    using static root;
 
     public static class MatrixOps
     {

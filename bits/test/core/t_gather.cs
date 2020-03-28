@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
     using static As;
 
     public class t_gather : t_bitcore<t_gather>

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Defines an anti-succinct data structure for bit representation

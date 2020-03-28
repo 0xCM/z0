@@ -12,7 +12,7 @@ namespace Z0.Asm.Validation
     using System.Runtime.Intrinsics.X86;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Root;
+    using static root;
     using static Nats;
     using static time;
     using static NumericKinds;

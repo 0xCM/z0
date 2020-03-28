@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using static Root;
+    using static root;
 
     public interface IWorkflowEventBroker :  IAppEventRelay
     {

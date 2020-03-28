@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Correlates a linear bit index, a cell index and bit offset, and a row/column coordinate in a grid/matrix

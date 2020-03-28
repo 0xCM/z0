@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
     using static Nats;
 
     public class t_bitstring : t_bitcore<t_bitstring>

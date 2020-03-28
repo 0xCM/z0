@@ -8,7 +8,7 @@ namespace Z0.Machines
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Defines a set of rules that define actions associated with state entry

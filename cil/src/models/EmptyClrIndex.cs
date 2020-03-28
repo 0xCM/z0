@@ -9,7 +9,7 @@ namespace Z0
     using System.Threading;
     using System.Reflection;
     
-    using static Root;
+    using static root;
 
     public readonly struct EmptyClrIndex : IClrIndexer
     {

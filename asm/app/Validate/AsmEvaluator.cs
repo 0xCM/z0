@@ -8,7 +8,7 @@ namespace Z0.Asm.Check
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
     using static OpClass;
 
     using static BufferSeqId;

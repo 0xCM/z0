@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Characterizes any refiication

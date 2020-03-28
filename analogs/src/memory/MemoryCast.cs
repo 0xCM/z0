@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;
     using System.Buffers;
-    using static Root;
+    using static root;
     
     //https://stackoverflow.com/questions/54511330/how-can-i-cast-memoryt-to-another
     sealed class MemoryCast<S, T> : MemoryManager<T>

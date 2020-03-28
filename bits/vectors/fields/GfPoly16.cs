@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static root;    
 
     /// <summary>
     /// Represents a base-2 polynomial of degree at most N = 15. The represented polynomial is of the form

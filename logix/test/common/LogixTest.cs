@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static Root;
+    using static root;
     using static Nats;
     using static NumericOpApi;
     using static LogicOpApi;

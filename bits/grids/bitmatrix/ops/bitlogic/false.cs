@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     partial class BitMatrix
     {
@@ -30,7 +30,7 @@ namespace Z0
         public static ref BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T:unmanaged
         {
-            Z.Data.Fill(Root.zero<T>());
+            Z.Data.Fill(root.zero<T>());
             return ref Z;
         }
     }

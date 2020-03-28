@@ -9,7 +9,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Root;
+    using static root;
     using static Nats;
     using static vgeneric;
 

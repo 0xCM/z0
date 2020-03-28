@@ -11,7 +11,7 @@ namespace Z0.Mkl
     using System.Collections;
     using System.Linq;
 
-	using static Root;
+	using static root;
     abstract class Sampler<T,S> : IRngSampler<T>    
         where T : unmanaged
         where S : IDistributionSpec

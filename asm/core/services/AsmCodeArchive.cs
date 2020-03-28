@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     readonly struct AsmCodeArchive : IAsmCodeArchive
     {
@@ -111,7 +111,7 @@ namespace Z0.Asm
 
         Option<AsmCode> Read<T>(FilePath src, OpIdentity m, T t = default)
             where T : unmanaged
-                => Root.Try(() => Parse<T>(src.ReadText(), m,t ));
+                => root.Try(() => Parse<T>(src.ReadText(), m,t ));
 
         public IAsmCodeArchive Clear()
         {

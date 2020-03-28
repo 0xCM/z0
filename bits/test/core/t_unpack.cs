@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Root;
+    using static root;
 
     public class t_unpack : t_bitcore<t_unpack>
     {
@@ -76,7 +76,7 @@ namespace Z0
                 var bs = BitString.scalar(src);
                 for(var i = 0; i< bs.Length; i++)
                 {
-                    var expect = bs[i] ? Root.one<T>() : Root.zero<T>();
+                    var expect = bs[i] ? root.one<T>() : root.zero<T>();
                     var actual = dst[i];
                     Claim.eq(expect,actual);
                 }
@@ -88,7 +88,7 @@ namespace Z0
             var y2 = BitString.scalars(x);
             for(var i=0; i< y1.Length; i++)
             {
-                var expect = y2[i] ? Root.one<T>() : Root.zero<T>();
+                var expect = y2[i] ? root.one<T>() : root.zero<T>();
                 var actual = y1[i];
                 Claim.yea(gmath.eq(expect,actual));
             }

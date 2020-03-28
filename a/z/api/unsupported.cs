@@ -10,7 +10,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    partial class Root
+    partial class root
     {        
         public static AppException unsupported(object feature, [Caller] string caller = null, [File] string file = null,  [Line] int? line = null)
             => AppErrors.FeatureUnsupported(feature, caller,file,line);

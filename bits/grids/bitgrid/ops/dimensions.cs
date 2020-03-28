@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static Root;
+    using static root;
     using static Nats;
 
     partial class BitGrid

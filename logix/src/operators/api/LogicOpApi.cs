@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
-    using static Root;
+    using static root;
     using static Nats;
     using static LogicOps;
     using static OpHelpers;

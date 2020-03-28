@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Embodies an asynchrounous thread of execution that is assigned to a specific CPU core

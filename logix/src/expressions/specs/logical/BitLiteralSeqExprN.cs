@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
 
    /// <summary>
    /// Defines a natural-length sequence of literal bit values

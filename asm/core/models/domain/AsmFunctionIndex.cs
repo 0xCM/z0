@@ -12,7 +12,7 @@ namespace Z0
     
     using Z0.Asm;
 
-    using static Root;
+    using static root;
 
     public class AsmFunctionIndex
     {

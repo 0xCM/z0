@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static root;    
 
     /// <summary>
     /// Defines a field segment, i.e. a congiguous run of bits that, together with other segments,

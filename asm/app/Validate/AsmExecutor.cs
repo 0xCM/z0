@@ -7,7 +7,7 @@ namespace Z0.Asm.Check
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
     using static time;
     using static Nats;
     using static BufferSeqId;

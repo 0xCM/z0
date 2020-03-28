@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Threading;
 
-    partial class Root
+    partial class root
     {        
         /// <summary>
         /// Atomically increments a value in-place

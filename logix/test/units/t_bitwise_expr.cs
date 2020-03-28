@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Root;
+    using static root;
     using static Nats;
     using static TypedLogicSpec;
 

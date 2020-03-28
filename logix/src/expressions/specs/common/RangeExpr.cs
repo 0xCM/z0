@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Defines a stewise-contiguous sequence of scalar values, available on-demand, 

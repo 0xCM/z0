@@ -7,7 +7,7 @@ namespace Z0.Logix
 {
     using System;
     
-    using static Root;
+    using static root;
     using static Nats;
 
     using static BitLogicSpec;

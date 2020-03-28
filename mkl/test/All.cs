@@ -10,7 +10,7 @@ namespace Z0.Mkl
     using System.Security;
     using System.Runtime.InteropServices;
 
-    using static Root;
+    using static root;
     using static nfunc;
     using static Examples;
 

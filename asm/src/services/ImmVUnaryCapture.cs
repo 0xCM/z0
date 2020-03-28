@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
     
     readonly struct ImmV128UnaryCaptureService<T> : IImmUnaryCapture<T>
         where T : unmanaged

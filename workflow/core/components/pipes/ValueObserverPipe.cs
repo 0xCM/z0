@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
     
     readonly struct ValueObserverPipe<T> : IValueObserverPipe<T>
         where T : struct

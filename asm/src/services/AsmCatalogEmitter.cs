@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
     using static AsmServiceMessages;
 
     class AsmCatalogEmitter : IAsmCatalogEmitter

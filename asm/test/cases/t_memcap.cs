@@ -11,7 +11,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Root;
+    using static root;
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {

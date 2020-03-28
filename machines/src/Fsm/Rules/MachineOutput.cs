@@ -9,7 +9,7 @@ namespace Z0.Machines
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     /// <summary>
     /// Defines a partial state machine output function of the form 

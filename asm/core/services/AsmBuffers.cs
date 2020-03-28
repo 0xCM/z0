@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
         
     /// <summary>
     /// Gathers a set of frequently-used buffers that is a by-convention asm service

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static root;
 
     public sealed class t_span_convert : UnitTest<t_span_convert>
     {

@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
 
-    using static Root;
+    using static root;
 
     public class t_solve : UnitTest<t_solve>
     {

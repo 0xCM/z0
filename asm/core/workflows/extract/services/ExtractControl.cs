@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Runtime.CompilerServices;
     
-    using static Root;
+    using static root;
 
     readonly struct ExtractControl : IExtractControl
     {                    

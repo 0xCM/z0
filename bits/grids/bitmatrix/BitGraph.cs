@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     
-    using static Root;
+    using static root;
     using static Nats;
 
     public static class BitGraph

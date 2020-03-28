@@ -10,7 +10,7 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Diagnostics;
 
-    partial class Root
+    partial class root
     {        
         /// <summary>
         /// Executes a worker that computes a value within the context of a new task

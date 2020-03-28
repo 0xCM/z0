@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Root;
+    using static root;
     using static Nats;
 
     public class t_masks : t_bitcore<t_masks>

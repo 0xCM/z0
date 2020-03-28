@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;    
+    using static root;    
     
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length
@@ -60,7 +60,7 @@ namespace Z0
             if(indices.Length != 2)
                 return Empty;
 
-            var result = Root.Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
+            var result = root.Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
             if(result.IsSome())
                 return result.Value();
             else

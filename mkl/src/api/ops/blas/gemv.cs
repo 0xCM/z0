@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Root;
+    using static root;
 
     using static nfunc;
 

@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using static AsmServiceMessages;
     using static AsmWorkflowReports;
-    using static Root;
+    using static root;
 
     readonly struct HostCaptureService : IHostCapture
     {

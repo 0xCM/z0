@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Root;
+    using static root;
     using static Nats;
 
     public abstract class t_bm<X> : t_bitgrids_base<X>

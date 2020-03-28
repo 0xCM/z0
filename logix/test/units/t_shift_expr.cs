@@ -11,7 +11,7 @@ namespace Z0.Logix
     using static TypedLogicSpec;
     using static LogicEngine;
     
-    using static Root;
+    using static root;
     using static Nats;
 
     public class t_shift_expr : TypedLogixTest<t_shift_expr>
