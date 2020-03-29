@@ -7,11 +7,20 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
  
-    using static root;
     using static nfunc;
 
     partial class mkl
     {
+        static NatSpan<N,Complex<T>> FromPaired<N,T>(NatSpan<N,T> re, NatSpan<N,T> im)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            Span<Complex<T>> dst = new Complex<T>[nati<N>()];
+            for(var i=0; i< dst.Length; i++)
+                dst[i] = (re[i], im[i]);
+            return dst;
+        }
+
         public static EigenResult<N,double> geev<N>(Matrix256<N,double> A)
             where N : unmanaged, ITypeNat
         {
@@ -33,7 +42,7 @@ namespace Z0.Mkl
             if(exitcode != 0)
                 MklException.Throw(exitcode);
 
-            return EigenResult.Define(ComplexNumber.FromPaired<N,double>(wr, wi), lVec, rVec);
+            return EigenResult.Define(FromPaired<N,double>(wr, wi), lVec, rVec);
         }
     }
 }

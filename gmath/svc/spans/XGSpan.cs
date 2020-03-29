@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static As;
     using static gmath;
     using static refs;
 
@@ -57,36 +56,36 @@ namespace Z0
             {
                 length -= 8;
                 
-                x = refAdd(ref first, offset + 0);
-                y = refAdd(ref second, offset + 0);
+                x = offset<T>(ref first, offset + 0);
+                y = offset<T>(ref second, offset + 0);
                 if(gmath.neq(x, y))
                     return false;                
-                x = refAdd(ref first, offset + 1);
-                y = refAdd(ref second, offset + 1);
+                x = offset<T>(ref first, offset + 1);
+                y = offset<T>(ref second, offset + 1);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 2);
-                y = refAdd(ref second, offset + 2);
+                x = offset<T>(ref first, offset + 2);
+                y = offset<T>(ref second, offset + 2);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 3);
-                y = refAdd(ref second, offset + 3);
+                x = offset<T>(ref first, offset + 3);
+                y = offset<T>(ref second, offset + 3);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 4);
-                y = refAdd(ref second, offset + 4);
+                x = offset<T>(ref first, offset + 4);
+                y = offset<T>(ref second, offset + 4);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 5);
-                y = refAdd(ref second, offset + 5);
+                x = offset<T>(ref first, offset + 5);
+                y = offset<T>(ref second, offset + 5);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 6);
-                y = refAdd(ref second, offset + 6);
+                x = offset<T>(ref first, offset + 6);
+                y = offset<T>(ref second, offset + 6);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 7);
-                y = refAdd(ref second, offset + 7);
+                x = offset<T>(ref first, offset + 7);
+                y = offset<T>(ref second, offset + 7);
                 if(gmath.neq(x, y))
                     return false;
 
@@ -97,20 +96,20 @@ namespace Z0
             {
                 length -= 4;
 
-                x = refAdd(ref first, offset);
-                y = refAdd(ref second, offset);
+                x = offset<T>(ref first, offset);
+                y = offset<T>(ref second, offset);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 1);
-                y = refAdd(ref second, offset + 1);
+                x = offset<T>(ref first, offset + 1);
+                y = offset<T>(ref second, offset + 1);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 2);
-                y = refAdd(ref second, offset + 2);
+                x = offset<T>(ref first, offset + 2);
+                y = offset<T>(ref second, offset + 2);
                 if(gmath.neq(x, y))
                     return false;
-                x = refAdd(ref first, offset + 3);
-                y = refAdd(ref second, offset + 3);
+                x = offset<T>(ref first, offset + 3);
+                y = offset<T>(ref second, offset + 3);
                 if(gmath.neq(x, y))
                     return false;
 
@@ -119,8 +118,8 @@ namespace Z0
 
             while (length > 0)
             {
-                x = refAdd(ref first, offset);
-                y = refAdd(ref second, offset);
+                x = offset<T>(ref first, offset);
+                y = offset<T>(ref second, offset);
                 if(gmath.neq(x, y))
                     return false;
                 offset += 1;
@@ -140,14 +139,14 @@ namespace Z0
             {
                 length -= 8;
 
-                if (gmath.eq(match, refAdd(ref src, index + 0)) ||
-                    gmath.eq(match, refAdd(ref src, index + 1)) ||
-                    gmath.eq(match, refAdd(ref src, index + 2)) ||
-                    gmath.eq(match, refAdd(ref src, index + 3)) ||
-                    gmath.eq(match, refAdd(ref src, index + 4)) ||
-                    gmath.eq(match, refAdd(ref src, index + 5)) ||
-                    gmath.eq(match, refAdd(ref src, index + 6)) ||
-                    gmath.eq(match, refAdd(ref src, index + 7)))
+                if (gmath.eq(match, offset(ref src, index + 0)) ||
+                    gmath.eq(match, offset(ref src, index + 1)) ||
+                    gmath.eq(match, offset(ref src, index + 2)) ||
+                    gmath.eq(match, offset(ref src, index + 3)) ||
+                    gmath.eq(match, offset(ref src, index + 4)) ||
+                    gmath.eq(match, offset(ref src, index + 5)) ||
+                    gmath.eq(match, offset(ref src, index + 6)) ||
+                    gmath.eq(match, offset(ref src, index + 7)))
                 return true;
                 
                 index += 8;
@@ -157,10 +156,10 @@ namespace Z0
             {
                 length -= 4;
 
-                if (gmath.eq(match, refAdd(ref src, index + 0)) ||
-                    gmath.eq(match, refAdd(ref src, index + 1)) ||
-                    gmath.eq(match, refAdd(ref src, index + 2)) ||
-                    gmath.eq(match, refAdd(ref src, index + 3)))
+                if (gmath.eq(match, offset(ref src, index + 0)) ||
+                    gmath.eq(match, offset(ref src, index + 1)) ||
+                    gmath.eq(match, offset(ref src, index + 2)) ||
+                    gmath.eq(match, offset(ref src, index + 3)))
                 return true;
 
                 index += 4;
@@ -170,7 +169,7 @@ namespace Z0
             {
                 length -= 1;
 
-                if (gmath.eq(match, refAdd(ref src, index)))
+                if (gmath.eq(match, offset(ref src, index)))
                     return true;
 
                 index += 1;

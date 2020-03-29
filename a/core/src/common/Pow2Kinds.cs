@@ -7,7 +7,7 @@ namespace Z0
      using System;
      using System.Runtime.CompilerServices;
 
-    using static Components;
+     using static Components;
      using static Pow2;
 
      public interface IP2Kind<T>

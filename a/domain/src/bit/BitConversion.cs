@@ -33,10 +33,10 @@ namespace Z0
             => ToBit<T>().Convert(src);
 
         static Option<object> FromTarget(object incoming, Type dst)
-            => Option.Try(() => ocast((uint)(bit)incoming, dst.NumericKind()));
+            => Option.Try(() => to((uint)(bit)incoming, dst.NumericKind()));
 
         static Option<object> ToTarget(object incoming)
-            => Option.Try(() => (bit)(byte)ocast(incoming, NumericKind.U8));
+            => Option.Try(() => (bit)(byte)to(incoming, NumericKind.U8));
 
         [MethodImpl(Inline)]
         public Option<object> ConvertFromTarget(object incoming, Type dst)

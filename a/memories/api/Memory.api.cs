@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;    
+    using System.Collections.Generic;
 
     using static Memories;
 
@@ -93,5 +95,68 @@ namespace Z0
             ref var dstBytes = ref Unsafe.As<T, byte>(ref refs.head(dst));
             Unsafe.WriteUnaligned<S>(ref dstBytes, src);
         }
+
+        /// <summary>
+        /// Constructs a mutable memory segment from a readonly memory segment
+        /// </summary>
+        /// <param name="src">The source memory</param>
+        /// <typeparam name="T">The memory cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Memory<T> edit<T>(ReadOnlyMemory<T> src)
+            => MemoryMarshal.AsMemory(src);
+
+        /// <summary>
+        /// Casts memory cells of one type to another
+        /// </summary>
+        /// <param name="src">The source memory</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static Memory<T> cast<S,T>(Memory<S> src)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            if (typeof(S) == typeof(T)) 
+                return (Memory<T>)(object)src;
+            return new MemoryCast<S,T>(src).Memory;
+        }
+
+        /// <summary>
+        /// Reverses the memory cells in-place
+        /// </summary>
+        /// <param name="src">The source memory</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Memory<T> reverse<T>(Memory<T> src)
+        {
+            src.Span.Reverse();
+            return src;
+        }
+
+        /// <summary>
+        /// Enumerates the content of a readonly memory segment
+        /// </summary>
+        /// <param name="src">The source memory</param>
+        /// <typeparam name="T">The memory cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static IEnumerable<T> enumerate<T>(ReadOnlyMemory<T> src)
+            => MemoryMarshal.ToEnumerable(src);
+
+
+        /// <summary>
+        /// Projects a memory source to target via a supplied transformation
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="f">The transformation</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        public static Span<T> map<S,T>(Memory<S> src, Func<S, T> f)
+        {
+            var dst = new T[src.Length];
+            for(var i= 0; i<src.Length; i++)
+                dst[i] = f(src.Span[i]);
+            return dst;
+        }
+
     }
 }

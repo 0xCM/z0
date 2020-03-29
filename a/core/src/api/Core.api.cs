@@ -11,7 +11,7 @@ namespace Z0
 
     using static Components;
 
-    public static class core
+    public static partial class core
     {
         [MethodImpl(Inline)]
         public static int bitsize<T>()            
@@ -109,6 +109,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool nonempty(string src)
             => !string.IsNullOrWhiteSpace(src);
+
 
     }
 }

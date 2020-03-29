@@ -7,200 +7,168 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using TC = System.TypeCode;
+    using static Memories;
+    using static As;
 
-    using static CastInternals;
-
-    [ApiHost("cast", ApiHostKind.Generic)]
+    [ApiHost(ApiHostKind.Generic)]
     public static partial class Cast
     {
         /// <summary>
-        /// Explicitly casts a source value to value of the indicated type, raising an exception if operation fails
+        /// Unconditionally converts, with much haste and no waste, a value of parametric numeric kind 
+        /// to a value of another parametric numeric kind.
         /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The target type</typeparam>
+        /// <param name="src">The soruce value</param>
+        /// <typeparam name="S">The source numeric kind</typeparam>
+        /// <typeparam name="T">The target numeric kind</typeparam>
         [MethodImpl(Inline)]   
+        public static T to<S,T>(S src)
+            => ToNumeric.to<S,T>(src);        
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(sbyte src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(byte src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(short src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(ushort src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(int src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(uint src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(long src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(ulong src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(float src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static T to<T>(double src)
+            => ToNumeric.to<T>(src);
+
+        [MethodImpl(Inline)]   
+        public static object to(object src, NumericKind dst)
+            => ToNumeric.to(src,dst);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static T force<T>(object src) 
             => (T)src;
 
+        /// <summary>
+        /// If possible, applies the conversion S -> T for each element of a source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]   
-        public static T to<S,T>(S src)
-            => to_u<S,T>(src);        
-
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(sbyte src)
+        public static Span<T> to<S,T>(Span<S> src)
         {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return to_i<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return to_u<T>(src);
-            else
-                return to_x<T>(src);
+            Span<T> dst = new T[src.Length];
+            for(var i=0; i< src.Length; i++)
+                dst[i] = to<S,T>(src[i]);
+            return dst;
         }
 
         /// <summary>
-        /// byte -> T
+        /// Converts values in the source to values of the target type
         /// </summary>
-        /// <param name="src">The value to convert</param>
-        /// <typeparam name="T">The target conversion type</typeparam>
+        /// <param name="src">The source values</param>
+        /// <typeparam name="T">The target type</typeparam>
+        public static Span<T> to<S,T>(ReadOnlySpan<S> src)
+        {
+            Span<T> dst = new T[src.Length];
+            for(var i=0; i<src.Length; i++)
+                dst[i] = to<S,T>(src[i]);
+            return dst;
+        }
+
+        /// <summary>
+        /// If possible, applies the conversion S -> T for each element of an array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T[] to<S,T>(S[] src)
+        {
+            var dst = new T[src.Length];
+            for(var i=0; i< src.Length; i++)
+                dst[i] = to<S,T>(src[i]);
+            return dst;
+        }
+ 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(byte src)
+        public static T to<T>(char src)
         {
             if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return to_i<T>(src);
+                return converti<T>(src);
             else if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return to_u<T>(src);
+                return convertu<T>(src);
             else
-                return to_x<T>(src);
+                return convertx<T>(src);
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(short src)
+        [MethodImpl(Inline)]
+        static T converti<T>(char src)
         {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return to_i<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return to_u<T>(src);
-            else
-                return to_x<T>(src);
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>((sbyte)src);
+            else if(typeof(T) == typeof(short))
+                return generic<T>((short)src);
+            else if(typeof(T) == typeof(int))
+                return generic<T>((int)src);
+            else  
+                return generic<T>((long)src);           
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(ushort src)
-            => to_u<T>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(int src)
+        [MethodImpl(Inline)]
+        static T convertu<T>(char src)
         {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return to_i<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return to_u<T>(src);
-            else
-                return to_x<T>(src);
+            if(typeof(T) == typeof(byte))
+                return generic<T>((byte)src);
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>((ushort)src);
+            else if(typeof(T) == typeof(uint))
+                return generic<T>((uint)src);
+            else  
+                return generic<T>((ulong)src);
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(uint src)
+        [MethodImpl(Inline)]
+        static T convertx<T>(char src)
         {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return to_i<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return to_u<T>(src);
-            else
-                return to_x<T>(src);
-        }
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(long src)
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return to_i<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return to_u<T>(src);
-            else
-                return to_x<T>(src);
-        }
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(ulong src)
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return to_i<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return to_u<T>(src);
-            else
-                return to_x<T>(src);
-        }
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(float src)
-            => to_u<T>(src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static T to<T>(double src)
-            => to_u<T>(src);
-
-        [Op]
-        public static object ocast(object src, NumericKind dst)
-        {
-            var tc = Type.GetTypeCode(src?.GetType());
-            switch(tc)
-            {
-                case TC.SByte:
-                    return from8i(dst, src);
-
-                case TC.Byte:
-                    return from8u(dst, src);
-
-                case TC.Int16:
-                    return from16i(dst, src);
-
-                case TC.UInt16:
-                    return from16u(dst, src);
-                
-                case TC.Int32:
-                    return from32i(dst, src);
-
-                case TC.UInt32:
-                    return from32u(dst, src);
-
-                case TC.Int64:
-                    return from64i(dst, src);
-
-                case TC.UInt64:
-                    return from64u(dst, src);
-
-                case TC.Single:
-                    return from32f(dst, src);
-
-                case TC.Double:
-                    return from64f(dst,src);
-            }
-            return src;
-        }
+            if(typeof(T) == typeof(float))
+                return generic<T>((float)src);
+            else if(typeof(T) == typeof(double))
+                return generic<T>((double)(src));
+            else if(typeof(T) == typeof(char))
+                return generic<T>((char)src);
+            else            
+                return Unsupported.define<char,T>(src);
+       }         
     }
 }

@@ -291,6 +291,8 @@ namespace Z0
 
         public static W512 w512 => default;
 
+        public static W1024 w1024 => default;
+
         /// <summary>
         /// A bit with state 1
         /// </summary>
@@ -443,7 +445,6 @@ namespace Z0
 
         const ulong Ones64u = ulong.MaxValue;
 
-        const long Ones64i = -1;
- 
+        const long Ones64i = -1; 
     }
 }

@@ -41,7 +41,7 @@ namespace Z0.Mkl
         {
             var cycles = Pow2.T12;
             var samples = Pow2.T14;
-            var src = Random.Span<long>(samples, Interval.closed(-2000L, 2000L)).Convert<double>();
+            var src = Random.Span<long>(samples, Interval.closed(-2000L, 2000L)).To<double>();
             var ds = Dataset.Load(src);
             var dst = 0.0;
             var last = 0.0;

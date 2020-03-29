@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static root;
-
+    using static Core;
+	
 	/// <summary>
 	/// Represents a complex value with signed 32-bit integer components
 	/// </summary>

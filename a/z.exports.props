@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Custom)" />
     <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(Identify)" />  
     <ProjectReference Include="$(Kinds)" />  

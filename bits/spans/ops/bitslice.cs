@@ -9,7 +9,6 @@ namespace Z0
 
     using static root;
     using static As;
-    using static P2K;
     using static Nats;
  
     partial struct BitSpan
@@ -96,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static sbyte bitslice_8i(in BitSpan src, int offset, int count)
         {
-            var buffer = Stacks.alloc(p2x6);
+            var buffer = Stacks.alloc(w64);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
@@ -106,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static byte bitslice_8u(in BitSpan src, int offset, int count)
         {
-            var buffer = Stacks.alloc(p2x6);
+            var buffer = Stacks.alloc(w64);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
@@ -116,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static short bitslice_16i(in BitSpan src, int offset, int count)
         {
-            var buffer = Stacks.alloc(p2x7);
+            var buffer = Stacks.alloc(w128);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
@@ -126,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ushort bitslice_16u(in BitSpan src, int offset, int count)
         {
-            var buffer = Stacks.alloc(p2x7);
+            var buffer = Stacks.alloc(w128);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
@@ -136,7 +135,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static int bitslice_32i(in BitSpan src, int offset, int count)
         {
-            var buffer = Stacks.alloc(p2x8);
+            var buffer = Stacks.alloc(w256);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
@@ -146,7 +145,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint bitslice_32u(in BitSpan src, int offset, int count)
         {
-            var buffer = Stacks.alloc(p2x8);
+            var buffer = Stacks.alloc(w256);
             var unpacked = Stacks.span<bit>(ref buffer);
             var take = math.min(src.Bits.Length -offset, count);
             src.Bits.Slice(offset,take).CopyTo(unpacked);
@@ -156,7 +155,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static long bitslice_64i(in BitSpan src, int offset, int count)
         {
-            var buffer = Stacks.alloc(p2x9);
+            var buffer = Stacks.alloc(w512);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        
@@ -166,7 +165,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ulong bitslice_64u(in BitSpan src, int offset, int count)
         {
-            var buffer = Stacks.alloc(p2x9);
+            var buffer = Stacks.alloc(w512);
             var unpacked = Stacks.span<bit>(ref buffer);   
             ref var dst = ref Stacks.head<bit>(ref buffer);            
             memory.copy(in skip(src.Bits, offset), ref dst, count);        

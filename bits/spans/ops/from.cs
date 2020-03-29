@@ -72,10 +72,10 @@ namespace Z0
         [MethodImpl(Inline)]
         static BitSpan from(byte src)
         {
-            var buffer = Stacks.alloc(n64);
+            var buffer = Stacks.alloc(w64);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
             
-            var storage = Stacks.alloc(n256);
+            var storage = Stacks.alloc(w256);
             ref var target = ref Stacks.head<uint>(ref storage);
 
             BitPack.unpack8(src, ref tmp); 
@@ -86,10 +86,10 @@ namespace Z0
         [MethodImpl(Inline)]
         static BitSpan from(ushort src)
         {
-            var buffer = Stacks.alloc(n128);
+            var buffer = Stacks.alloc(w128);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
 
-            var storage = Stacks.alloc(n512);
+            var storage = Stacks.alloc(w512);
             ref var target = ref Stacks.head<uint>(ref storage);            
             
             BitPack.unpack8(src, ref tmp); 
@@ -101,10 +101,10 @@ namespace Z0
         [MethodImpl(Inline)]
         static BitSpan from(uint src)
         {
-            var buffer = Stacks.alloc(n256);
+            var buffer = Stacks.alloc(w256);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
 
-            var storage = Stacks.alloc(n1024);
+            var storage = Stacks.alloc(w1024);
             ref var target = ref Stacks.head<uint>(ref storage);            
             
             BitPack.unpack8(src, ref tmp); 

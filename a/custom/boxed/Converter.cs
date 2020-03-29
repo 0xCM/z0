@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src) 
-            => (T)ocast(src.Boxed, NumericTypes.kind<T>());
+            => (T)to(src.Boxed, NumericTypes.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -40,7 +40,7 @@ namespace Z0
             try
             {
                 var src = (BoxedNumber)incoming;
-                return ocast(src.Boxed, dst.NumericKind());
+                return to(src.Boxed, dst.NumericKind());
             }
             catch(Exception e)
             {

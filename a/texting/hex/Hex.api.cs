@@ -6,13 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
 
     using static Textual;
-    using static P2K;     
-    using static CharStacks;
     using static refs;
     using static As;
 
@@ -136,12 +131,12 @@ namespace Z0
         static ReadOnlySpan<char> digits(byte value)
         {
             ref readonly var codes = ref head(HexCodes);
-            var storage = chars(p2x1);
+            var storage = Stacks.char2();
             ref var dst = ref storage.C0;
             
             seek(ref dst,0) = (char)skip(in codes, 0xF & value);
             seek(ref dst,1) = (char)skip(in codes, (value >> 4) & 0xF);
-            return charspan(ref storage);
+            return Stacks.span(ref storage);
         }
 
         /// <summary>
@@ -153,12 +148,12 @@ namespace Z0
         {
             const int count = 4;
             ref readonly var codes = ref head(HexCodes);
-            var storage = chars(p2x2);
+            var storage = Stacks.char4();
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                @char(ref dst, i) = (char)skip(in codes, (value >> i*4) & 0xF);
-            return charspan(ref storage);
+                Stacks.cell(ref dst, i) = (char)skip(in codes, (value >> i*4) & 0xF);
+            return Stacks.span(ref storage);
         }
 
         /// <summary>
@@ -170,12 +165,12 @@ namespace Z0
         {
             const int count = 8;
             ref readonly var codes = ref head(HexCodes);
-            var storage = chars(p2x3);
+            var storage = Stacks.char8();
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                @char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
-            return charspan(ref storage);
+                Stacks.cell(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
+            return Stacks.span(ref storage);
         }
 
         /// <summary>
@@ -187,12 +182,12 @@ namespace Z0
         {
             const int count = 16;
             ref readonly var codes = ref head(HexCodes);
-            var storage = chars(p2x4);
+            var storage = Stacks.char16();
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                @char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
-            return charspan(ref storage);
+                Stacks.cell(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
+            return Stacks.span(ref storage);
         }
 
 

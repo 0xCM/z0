@@ -16,9 +16,15 @@ namespace Z0
     {
         public const ulong Value = 1ul << 10;
         
-
         [MethodImpl(Inline)]
         public static implicit operator int(N1024 src) => 1024;
+
+        [MethodImpl(Inline)]
+        public static implicit operator W1024(N1024 src) => default(W1024);
+
+        [MethodImpl(Inline)]
+        public static implicit operator N1024(W1024 src) => default(N1024);
+
         public ulong NatValue => Value;
 
         public override string ToString() 

@@ -12,7 +12,7 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
 
     public interface IConcurrentLookup<K,V>
     {
@@ -105,7 +105,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public V Acquire(K key, Func<K,V> factory)
-            => GetOrCreate(key, () => task(factory,key)).Result;
+            => GetOrCreate(key, () => core.task(factory,key)).Result;
 
         [MethodImpl(Inline)]
         public void Add(K key, V value)        

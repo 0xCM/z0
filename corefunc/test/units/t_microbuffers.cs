@@ -14,7 +14,7 @@ namespace Z0
     {
         public void stacked_basecase()
         {
-            var stack = MicroBuffers.stack<uint>(3);
+            var stack = SpanBuffers.stack<uint>(3);
             stack.Push(1);
             stack.Push(2);
             stack.Push(3);
@@ -29,7 +29,7 @@ namespace Z0
 
         public void bitstack_basecase()
         {
-            var stack = MicroBuffers.bitstack(0b101011);
+            var stack = BitStack.Create(0b101011);
             Claim.yea(stack.Pop());
             Claim.yea(stack.Pop());
             Claim.nea(stack.Pop());
@@ -61,7 +61,7 @@ namespace Z0
 
         public void ringbuffer_32()
         {
-            var buffer = MicroBuffers.ring<uint>(Pow2.T08);
+            var buffer = SpanBuffers.ring<uint>(Pow2.T08);
             var count = Random.Next<int>(20,Pow2.T07);
             var points = Random.Span<uint>(count);
 
@@ -76,7 +76,7 @@ namespace Z0
         {
             var capacity = Pow2.T10;
             var partwidth = 4;
-            var buffer = MicroBuffers.parts<byte,ulong>(capacity);  
+            var buffer = SpanBuffers.parts<byte,ulong>(capacity);  
             buffer.Next = 0xFul;
             buffer.Next = 0xFFul;
             buffer.Next = 0xFFFul;
