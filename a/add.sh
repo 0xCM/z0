@@ -61,5 +61,8 @@ bash $Cmd
 export ProjectId=core
 bash $Cmd
 
+export ProjectId=graphs
+bash $Cmd
+
 export ProjectId=z
 bash $Cmd

@@ -10,7 +10,8 @@ namespace Z0
     using System.Reflection;
    
     using static Core;
-    using static FKT;
+
+    using C = OpClass;
 
     readonly struct ImmInjector<D> : IImmInjector<D>
         where D : Delegate
@@ -163,28 +164,28 @@ namespace Z0
         readonly IImmInjector Embedder;
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, Vec128Kind vk, OperatorType<N1> opk)
+        internal ImmInjector(IContext context, Vec128Kind vk, C.UnaryOp opk)
         {
             this.Context = context;
             this.Embedder = new V128UnaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, Vec256Kind vk, OperatorType<N1> opk)
+        internal ImmInjector(IContext context, Vec256Kind vk, C.UnaryOp opk)
         {
             this.Context = context;
             this.Embedder = new V256UnaryOpImmInjector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, Vec128Kind vk, OperatorType<N2> opk)
+        internal ImmInjector(IContext context, Vec128Kind vk, C.BinaryOp opk)
         {
             this.Context = context;
             this.Embedder = new VImm8BinaryOp128Injector(context);
         }
 
         [MethodImpl(Inline)]
-        internal ImmInjector(IContext context, Vec256Kind vk, OperatorType<N2> opk)
+        internal ImmInjector(IContext context, Vec256Kind vk, C.BinaryOp opk)
         {
             this.Context = context;
             this.Embedder = new VImm8BinaryOp256Injector(context);

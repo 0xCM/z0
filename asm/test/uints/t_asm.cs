@@ -16,7 +16,7 @@ namespace Z0.Asm
         
         public static IPart[] DefaultResolutions 
             => new IPart[]{
-                R.Analogs.Resolved, R.AsmCore.Resolved, R.BitCore.Resolved,
+                R.AsmCore.Resolved, R.BitCore.Resolved,
                 R.BitGrids.Resolved, R.BitSpan.Resolved, R.BitFields.Resolved,
                 R.BitVectors.Resolved, R.VBits.Resolved, R.Permute.Resolved,
                 R.Blocks.Resolved, R.Math.Resolved,

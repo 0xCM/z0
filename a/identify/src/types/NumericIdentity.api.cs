@@ -23,8 +23,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static PrimalIdentity Primal(Type t)
-            => t.IsSystemType() ? 
-               ( t.IsNumeric()
+            => t.IsSystemDefined() ? 
+               (NumericTypeOps.IsNumeric(t)
                ? PrimalIdentity.Define(t.NumericKind(), t.SystemKeyword())
                : PrimalIdentity.Define(t.SystemKeyword())
                )
@@ -124,7 +124,6 @@ namespace Z0
             
             return dst;
         }
-
 
         [MethodImpl(Inline)]
         static HashSet<NumericKind> GetKindset(NumericKind kind)

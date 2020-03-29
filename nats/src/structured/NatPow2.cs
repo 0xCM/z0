@@ -11,6 +11,28 @@ namespace Z0
     using static Components;
 
     /// <summary>
+    /// Requires z = p^k for some prime number p
+    /// </summary>
+    /// <typeparam name="K"></typeparam>
+    public interface IPrimePower<K>
+        where K : unmanaged, ITypeNat
+    {
+
+    }
+
+    /// <summary>
+    /// Requires z = p^k where p is prime
+    /// </summary>
+    /// <typeparam name="P">The prime type</typeparam>
+    /// <typeparam name="K">The power type</typeparam>
+    public interface IPrimePower<P,K> : INatRelation<P,K>
+        where P : unmanaged, ITypeNat, INatPrime<P>
+        where K : unmanaged, ITypeNat
+    {
+
+    }
+
+    /// <summary>
     /// Reifies a natural k such that e:E => k = 2^e
     /// </summary>
     public readonly struct NatPow2<E> : INatPow2<E>
@@ -58,6 +80,5 @@ namespace Z0
 
         public bool Equals(NatSeq other)
             => Value == other.NatValue;
-
     }
 }

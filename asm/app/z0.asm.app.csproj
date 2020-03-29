@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Analogs)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Polyrand)" />

@@ -8,10 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Linq.Expressions;
-
-    using static ReflectionFlags;
     
     partial class XTend
     {
@@ -32,6 +28,15 @@ namespace Z0
         public static bool Untagged<T>(this MemberInfo m) 
             where T : Attribute
                 => !m.Tagged<T>();
+
+        /// <summary>
+        /// Determines whether an attribute of parametric type is applied to a source type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static bool IsAttributed<A>(this Type src)
+            where A : Attribute
+                => System.Attribute.IsDefined(src,typeof(A));
 
         /// <summary>
         /// Determines whether an attribute of specified type is attached to a member

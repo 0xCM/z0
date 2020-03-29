@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(WorkflowCore)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Fixed)" />        

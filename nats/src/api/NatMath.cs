@@ -411,9 +411,7 @@ namespace Z0
                 return 1ul << 63;
             else
                 return 0;
-
         }
-
     }
 
     public static class NatMath
@@ -421,7 +419,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatVal natval<K>(K n = default)
             where K : unmanaged, ITypeNat
-                => NatVal.From(default(K).NatValue);
+                => Components.natval<K>();
 
         /// <summary>
         /// For k1 % k2 = 0, computes k := k1 / k2
@@ -968,5 +966,4 @@ namespace Z0
             where K5 : unmanaged, INatPrimitive<K5>
                 => NatVal.From(NatSeq<K1,K2,K3,K4,K5>.Value);
     }
-
 }

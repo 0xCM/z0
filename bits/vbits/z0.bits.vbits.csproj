@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(VData)" />    
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Intrinsics)" />

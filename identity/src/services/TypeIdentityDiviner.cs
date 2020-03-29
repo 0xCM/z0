@@ -21,9 +21,9 @@ namespace Z0
         {
             if(arg.IsPointer)
                 return PointerId(arg);
-            else if(arg.IsNat())
+            else if(arg.IsTypeNat())
                 return NatId(arg);
-            else if(arg.IsSystemType())
+            else if(arg.IsSystemDefined())
                 return Identify.Primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
                 return Identify.EnumType(arg).ToOption();

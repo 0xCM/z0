@@ -25,7 +25,6 @@ public static class nfunc
         return chars;
     }
 
-
     [MethodImpl(Inline)]   
     internal static T[] repeat<T>(T value, ulong count)
     {
@@ -77,7 +76,7 @@ public static class nfunc
     [MethodImpl(Inline)]   
     public static NatVal natval<N>()
         where N : unmanaged, ITypeNat
-            => NatMath.natval<N>();
+            => Components.natval<N>();
 
     /// <summary>
     /// Retrieves the value of the natural number associated with a typenat
@@ -198,10 +197,8 @@ public static class nfunc
         where K2 : unmanaged, ITypeNat
             => NatSum<K1,K2>.Rep;
 
-
     [MethodImpl(Inline)]
     public static void require<N>(int value)
         where N : unmanaged, ITypeNat
             => demand(nati<N>() == value, $"The source value {value} does not match the required natural {new N()}");
-
 }

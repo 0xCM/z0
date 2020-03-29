@@ -7,77 +7,72 @@ namespace Z0
 
     public class Primes
     {
-        public static readonly N2 P2 = default; 
+        public static N2 P2 => default; 
         
-        public static readonly N3 P3 = default; 
+        public static N3 P3 => default; 
         
-        public static readonly N7 P7 = default;
+        public static N7 P7 => default;
         
-        public static readonly NatSeq<N1,N1> P11 = default;
+        public static NatSeq<N1,N1> P11 => default;
         
-        public static readonly NatSeq<N1,N7> P17 = default;
+        public static NatSeq<N1,N7> P17 => default;
         
-        public static readonly NatSeq<N1,N9> P19 = default;
+        public static NatSeq<N1,N9> P19 => default;
         
-        public static readonly NatSeq<N2,N3> P23 = default;
+        public static NatSeq<N2,N3> P23 => default;
         
-        public static readonly NatSeq<N2,N9> P29 = default;
+        public static NatSeq<N2,N9> P29 => default;
         
-        public static readonly NatSeq<N3,N1> P31 = default;
+        public static NatSeq<N3,N1> P31 => default;
         
-        public static readonly NatSeq<N3,N7> P37 = default;
+        public static NatSeq<N3,N7> P37 => default;
         
-        public static readonly NatSeq<N4,N1> P41 = default;
+        public static NatSeq<N4,N1> P41 => default;
         
-        public static readonly NatSeq<N4,N3> P43 = default;
+        public static NatSeq<N4,N3> P43 => default;
         
-        public static readonly NatSeq<N4,N7> P47 = default;
+        public static NatSeq<N4,N7> P47 => default;
         
-        public static readonly NatSeq<N5,N3> P53 = default;
+        public static NatSeq<N5,N3> P53 => default;
         
-        public static readonly NatSeq<N5,N9> P59 = default;
+        public static NatSeq<N5,N9> P59 => default;
         
-        public static readonly NatSeq<N6,N1> P61 = default;
+        public static NatSeq<N6,N1> P61 => default;
         
-        public static readonly NatSeq<N6,N7> P67 = default;
+        public static NatSeq<N6,N7> P67 => default;
         
-        public static readonly NatSeq<N7,N1> P71 = default;
+        public static NatSeq<N7,N1> P71 => default;
         
-        public static readonly NatSeq<N7,N3> P73 = default;
+        public static NatSeq<N7,N3> P73 => default;
         
-        public static readonly NatSeq<N7,N9> P79 = default;
+        public static NatSeq<N7,N9> P79 => default;
         
-        public static readonly NatSeq<N8,N3> P83 = default;
+        public static NatSeq<N8,N3> P83 => default;
         
-        public static readonly NatSeq<N8,N9> P89 = default;
+        public static NatSeq<N8,N9> P89 => default;
 
-        public static readonly NatSeq<N9,N7> P97 = default;
+        public static NatSeq<N9,N7> P97 => default;
 
-        public static readonly NatSeq<N1,N0,N1> P101 = default;
+        public static NatSeq<N1,N0,N1> P101 => default;
 
-        public static readonly NatSeq<N1,N0,N3> P103 = default;
+        public static NatSeq<N1,N0,N3> P103 => default;
 
-        public static readonly NatSeq<N1,N0,N7> P107 = default;
+        public static NatSeq<N1,N0,N7> P107 => default;
 
-        public static readonly NatSeq<N1,N0,N9> P109 = default;
+        public static NatSeq<N1,N0,N9> P109 => default;
 
-        public static readonly NatSeq<N1,N1,N3> P113 = default;
+        public static NatSeq<N1,N1,N3> P113 => default;
 
-        public static readonly NatSeq<N1,N2,N7> P127 = default;
+        public static NatSeq<N1,N2,N7> P127 => default;
 
-        public static readonly NatSeq<N1,N3,N1> P131 = default;
+        public static NatSeq<N1,N3,N1> P131 => default;
 
-        public static readonly NatSeq<N1,N3,N7> P137 = default;
+        public static NatSeq<N1,N3,N7> P137 => default;
 
-        public static readonly NatSeq<N1,N4,N9> P149 = default;
+        public static NatSeq<N1,N4,N9> P149 => default;
 
-        public static readonly NatSeq<N1,N5,N1> P151 = default;
+        public static NatSeq<N1,N5,N1> P151 => default;
 
-        public static readonly NatSeq<N1,N5,N7> P157 = default;
-
-        /*
-            163, 167, 173, 179, 181, 191, 193, 197, 199        
-         */
+        public static NatSeq<N1,N5,N7> P157 => default;
     }
-
 }

@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(VData)" />    
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(FVec)" />

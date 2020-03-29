@@ -9,13 +9,9 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Linq.Expressions;
-
-    using static ReflectionFlags;
     
     partial class Reflective
     {
-
         /// <summary>
         /// Selects the first method found on the type, if any, that has a specified name
         /// </summary>
@@ -54,8 +50,6 @@ namespace Z0
         public static IEnumerable<MethodInfo> WithParameter(this IEnumerable<MethodInfo> src, Func<ParameterInfo,bool> predicate)
             => from m in src
                 where m.Parameters(predicate).Count() != 0
-                select m;
-
-                
+                select m;                
     }
 }

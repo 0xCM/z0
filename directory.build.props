@@ -27,7 +27,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Analogs>$(TopDir)analogs/src/z0.analogs.csproj</Analogs>
     <AsmApp>$(TopDir)asm/app/z0.asm.app.csproj</AsmApp>
     <AsmCore>$(TopDir)asm/core/z0.asm.core.csproj</AsmCore>
     <AsmDecode>$(TopDir)asm/decode/z0.asm.decode.csproj</AsmDecode>
@@ -49,7 +48,6 @@
 
     <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
     <GMath>$(TopDir)gmath/src/z0.gmath.csproj</GMath>
-    <Graphs>$(TopDir)graphs/src/z0.graphs.csproj</Graphs>
     <Identity>$(TopDir)identity/src/z0.identity.csproj</Identity>
     <Intrinsics>$(TopDir)intrinsics/src/z0.intrinsics.csproj</Intrinsics>
     <LibM>$(TopDir)libm/src/z0.libm.csproj</LibM>

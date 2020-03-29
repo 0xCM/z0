@@ -21,7 +21,6 @@ namespace Z0
     public interface IOpClassT<T> : IClassT<T>
     {
 
-
     }
 
     /// <summary>
@@ -34,7 +33,11 @@ namespace Z0
 
     }
 
+    public interface IFuncType : ILiteralKind<FunctionClass>
+    {
 
+    }
+    
     /// <summary>
     /// Charactrizes a class-parametric operation class
     /// </summary>

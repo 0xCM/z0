@@ -8,13 +8,13 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Texting)" />
-    <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Tuples)" />
 
   </ItemGroup>
 

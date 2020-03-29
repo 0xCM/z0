@@ -13,6 +13,10 @@ namespace Z0
     
     partial class XTend
     {
+        /// <summary>
+        /// Determines a type's numeric kind, if any
+        /// </summary>
+        /// <param name="src">The type to examine</param>
         public static NumericKind NumericKind(this Type src)
             => SystemNumeric.kind(src);
 
@@ -158,6 +162,5 @@ namespace Z0
                 F64 => "double",
                  _ => throw new NotSupportedException(k.ToString())
            };
-
     }
 }

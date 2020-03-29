@@ -90,7 +90,7 @@ namespace Z0
                 return VectorType.width(t);
             else if(t.IsBlocked())
                 return BK.width(t);
-            if(t.IsNumeric())
+            if(NumericTypeOps.IsNumeric(t))
                 return t.NumericWidth();
             else if(t == typeof(bit))
                 return TypeWidth.W1;

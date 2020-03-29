@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
-    using static ReflectionFlags;
     
     partial class Reflective
     {
@@ -90,7 +88,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsConversionOperator(this MethodInfo m)
             => m.IsExplicitConverter() || m.IsImplicitConverter();
-
 
         /// <summary>
         /// Returns a method's parameter types

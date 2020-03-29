@@ -44,8 +44,8 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsNumericFunction(MethodInfo m)
             => m.IsFunction() 
-            && m.ReturnType.IsNumeric()
-            && m.ParameterTypes().All(t => t.NumericKind() != NumericKind.None);
+            && NumericTypeOps.IsNumeric(m.ReturnType)
+            && Enumerable.All<Type>(m.ParameterTypes(), t => t.NumericKind() != NumericKind.None);
 
         /// <summary>
         /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input

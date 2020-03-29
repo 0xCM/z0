@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Vectorized)" />
     <ProjectReference Include="$(TopDir)vectorized/dvec/z0.vectorized.dvec.csproj" />

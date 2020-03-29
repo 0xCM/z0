@@ -9,8 +9,6 @@
     <ProjectReference Include="$(TestLib)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(Analogs)" />
-    <ProjectReference Include="$(Containers)" />
   </ItemGroup>
 
 </Project>

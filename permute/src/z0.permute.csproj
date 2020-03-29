@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Intrinsics)" />
   </ItemGroup>

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Encodes a natural number k := k1 - k2
     /// </summary>
-    public readonly struct Sub<K1, K2> : INatSub<Sub<K1,K2>, K1,K2>
+    public readonly struct Sub<K1, K2> : INatDifference<Sub<K1,K2>, K1,K2>
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
     {

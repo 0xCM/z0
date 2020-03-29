@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;
+    using static Core;
+    using C = OpClasses;
 
     [ServiceFactory]
     public static partial class ServiceFactory
@@ -21,28 +21,27 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static IImmInjector VUnaryImmInjector<W>(this IContext context, W w = default)
-            where W : ITypeNat
+            where W : ITypeWidth
         {
-            if(typeof(W) == typeof(N128))
-                return new ImmInjector(context, VK.vk128(), FK.op(n1));
-            else if(typeof(W) == typeof(N256))
-                return new ImmInjector(context, VK.vk256(), FK.op(n1));
+            if(typeof(W) == typeof(W128))
+                return new ImmInjector(context, VK.vk128(), C.UnaryOp);
+            else if(typeof(W) == typeof(W256))
+                return new ImmInjector(context, VK.vk256(), C.UnaryOp);
             else 
-                throw unsupported<W>();
+                throw Unsupported.define<W>();
         }
 
         [MethodImpl(Inline)]
         public static IImmInjector VBinaryImmInjector<W>(this IContext context, W w = default)
-            where W : ITypeNat
+            where W : ITypeWidth
         {
-            if(typeof(W) == typeof(N128))
-                return new ImmInjector(context,VK.vk128(), FK.op(n2));
-            else if(typeof(W) == typeof(N256))
-                return new ImmInjector(context, VK.vk256(), FK.op(n2));
+            if(typeof(W) == typeof(W128))
+                return new ImmInjector(context,VK.vk128(), C.BinaryOp);
+            else if(typeof(W) == typeof(W256))
+                return new ImmInjector(context, VK.vk256(), C.BinaryOp);
             else 
-                throw unsupported<W>();
+                throw Unsupported.define<W>();
         }
-
 
         [MethodImpl(Inline)]
         public static IImmInjector<UnaryOp<Vector128<T>>> V128UnaryOpImmInjector<T>(this IContext context)

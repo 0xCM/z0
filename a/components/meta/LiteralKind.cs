@@ -89,7 +89,6 @@ namespace Z0
         where T : unmanaged
     {
 
-
     }
 
     public static class TypedLiteral

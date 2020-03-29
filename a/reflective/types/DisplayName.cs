@@ -31,7 +31,7 @@ namespace Z0
             if(src.IsPointer)
                 return $"{src.GetElementType().DisplayName()}*";
             
-            if(src.IsSystemType())
+            if(src.IsSystemDefined())
             {
                 var kw = src.SystemKeyword();
                 return string.IsNullOrWhiteSpace(kw) ? src.Name : kw;

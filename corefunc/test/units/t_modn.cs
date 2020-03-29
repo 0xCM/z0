@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;
-
     public sealed class t_modn : UnitTest<t_modn>
     {
-
         public void mod16()
         {
             var ops = ModN.Ops(16);
