@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Polyfun;
+    using static Core;
 
     /// <summary>
     /// Implemements a 64-bit PCG generator

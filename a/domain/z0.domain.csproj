@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Memories)" />    
     <ProjectReference Include="$(Reflective)" />
+
   </ItemGroup>
 
 </Project>

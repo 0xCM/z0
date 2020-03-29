@@ -6,11 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Intrinsics)" />
-    <ProjectReference Include="$(Nats)" />
   </ItemGroup>
 
 </Project>

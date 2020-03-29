@@ -12,6 +12,7 @@
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Vectorized)" />
     <ProjectReference Include="$(BitStrings)" />    
+    <ProjectReference Include="$(Identity)" />    
   </ItemGroup>
 
 </Project>

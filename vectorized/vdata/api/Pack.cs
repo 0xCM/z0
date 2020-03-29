@@ -146,16 +146,16 @@ namespace Z0
             var index = PackIndex;
 
             name = "PackUSLo";
-            Register(index++, NaturalIdentity.resource(name, n16, n128, NumericKind.U8), PackUSLo16x128x8u);
-            Register(index++, NaturalIdentity.resource(name, n32, n128, NumericKind.U16), PackUSLo32x128x16u);
-            Register(index++, NaturalIdentity.resource(name, n16, n256, NumericKind.U8), PackUSLo16x256x8u);
-            Register(index++, NaturalIdentity.resource(name, n32, n256, NumericKind.U16), PackUSLo32x256x16u);
+            Register(index++, Identify.Resource(name, n16, n128, NumericKind.U8), PackUSLo16x128x8u);
+            Register(index++, Identify.Resource(name, n32, n128, NumericKind.U16), PackUSLo32x128x16u);
+            Register(index++, Identify.Resource(name, n16, n256, NumericKind.U8), PackUSLo16x256x8u);
+            Register(index++, Identify.Resource(name, n32, n256, NumericKind.U16), PackUSLo32x256x16u);
 
             name = "PackUSHi";
-            Register(index++, NaturalIdentity.resource(name, n16, n128, NumericKind.U8), PackUSHi16x128x8u);
-            Register(index++, NaturalIdentity.resource(name, n32, n128, NumericKind.U16), PackUSHi32x128x16u);
-            Register(index++, NaturalIdentity.resource(name, n16, n256, NumericKind.U8), PackUSHi16x256x8u);
-            Register(index++, NaturalIdentity.resource(name, n32, n256, NumericKind.U16), PackUSHi32x256x16u);
+            Register(index++, Identify.Resource(name, n16, n128, NumericKind.U8), PackUSHi16x128x8u);
+            Register(index++, Identify.Resource(name, n32, n128, NumericKind.U16), PackUSHi32x128x16u);
+            Register(index++, Identify.Resource(name, n16, n256, NumericKind.U8), PackUSHi16x256x8u);
+            Register(index++, Identify.Resource(name, n32, n256, NumericKind.U16), PackUSHi32x256x16u);
         }
     }
 }

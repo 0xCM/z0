@@ -11,8 +11,11 @@
     <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Texting)" />
-    <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Numeric)" />
+
   </ItemGroup>
 
 </Project>

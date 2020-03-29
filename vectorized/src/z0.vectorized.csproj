@@ -6,11 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Nats)" />        
     <ProjectReference Include="$(Fixed)" />        
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Custom)" />
-
   </ItemGroup>
 
 </Project>

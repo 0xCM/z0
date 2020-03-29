@@ -9,34 +9,6 @@ namespace Z0
 
     using static Components;
 
-    /// <summary>
-    /// Characterizes a type-level natural number, a *typenat*
-    /// </summary>
-    public interface ITypeNat
-    {
-        /// <summary>
-        /// The number's value
-        /// </summary>
-        ulong NatValue {get;}
-
-    }
-
-
-    /// <summary>
-    /// Characterizes a typenat
-    /// </summary>
-    /// <typeparam name="T">The represented type</typeparam>
-    public interface ITypeNat<K> : ITypeNat, INatDivisible<K>
-        where K: unmanaged, ITypeNat
-    {
-        K NatRep
-        {
-            [MethodImpl(Inline)]
-            get => default(K);
-        }
-    }
-
-
     public interface INatDemand 
     {
 

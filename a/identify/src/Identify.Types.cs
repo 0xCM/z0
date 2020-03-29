@@ -73,5 +73,27 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TypeIdentity Type(string basename, TypeWidth w1, TypeWidth w2, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");
+
+        /// <summary>
+        /// Defines a numeric resource identity predicated on natural bitwidth
+        /// </summary>
+        /// <param name="basename">The base name of the resource</param>
+        /// <param name="w">The resource bit width</param>
+        /// <param name="kind">The numeric kind of the resource</param>
+        [MethodImpl(Inline)]
+        public static TypeIdentity Resource(string basename, ITypeNat w, NumericKind kind)
+            => TypeIdentity.Define($"{basename}{w}x{kind.Format()}");
+
+        /// <summary>
+        /// Defines a numeric resource identity predicated on two natural bitwidths
+        /// </summary>
+        /// <param name="basename">The base name of the resource</param>
+        /// <param name="w1">The first bit width</param>
+        /// <param name="w2">The second bit width</param>
+        /// <param name="kind">The numeric kind of the resource</param>
+        [MethodImpl(Inline)]
+        public static TypeIdentity Resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
+            => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");   
+
     }
 }

@@ -10,9 +10,8 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Memories)" />    
-    <ProjectReference Include="$(Domain)" />
-
     <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 
 </Project>
