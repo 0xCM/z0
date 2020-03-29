@@ -12,8 +12,7 @@ namespace Z0.Asm.Validation
     using System.Runtime.Intrinsics.X86;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static root;
-    using static Nats;
+    using static Core;
     using static time;
     using static NumericKinds;
     using static BufferSeqId;
@@ -429,7 +428,7 @@ namespace Z0.Asm.Validation
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, BinaryOp<sbyte> primal, BinaryOp<sbyte> generic, 
             NK<sbyte> kind)
         {
-            var results = list<TestCaseRecord>();
+            var results = root.list<TestCaseRecord>();
 
             var w = w8;
             var id = Identify.NumericOp(name, kind, false);
@@ -597,7 +596,7 @@ namespace Z0.Asm.Validation
         }
 
         IEnumerable<string> PrimalBitLogicOps
-            => items("and", "or", "xor", "nand", "nor", "xnor",
+            => seq("and", "or", "xor", "nand", "nor", "xnor",
                 "impl","nonimpl", "cimpl", "cnonimpl");
 
         void bitlogic_match(in BufferSeq buffers)
@@ -634,27 +633,27 @@ namespace Z0.Asm.Validation
             switch(w)
             {
                 case TypeWidth.W8:
-                    binop_match(buffers, n8,a,b);
+                    binop_match(buffers, w8,a,b);
                     break;
 
                 case TypeWidth.W16:
-                    binop_match(buffers, n16,a,b);
+                    binop_match(buffers, w16,a,b);
                     break;
 
                 case TypeWidth.W32:
-                    binop_match(buffers, n32,a,b);
+                    binop_match(buffers, w32,a,b);
                     break;
 
                 case TypeWidth.W64:
-                    binop_match(buffers, n64,a,b);
+                    binop_match(buffers, w64,a,b);
                     break;
 
                 case TypeWidth.W128:
-                    binop_match(buffers, n128,a,b);
+                    binop_match(buffers, w128,a,b);
                     break;
 
                 case TypeWidth.W256:
-                    binop_match(buffers, n256, a, b);
+                    binop_match(buffers, w256, a, b);
                     break;
 
                 default:
@@ -992,7 +991,7 @@ namespace Z0.Asm.Validation
         {
             void check()
             {
-                var w = n128;
+                var w = w128;
                 var t = default(T);
                 for(var i=0; i<RepCount; i++)
                 {
@@ -1017,7 +1016,7 @@ namespace Z0.Asm.Validation
         {
             void check()
             {
-                var w = n256;
+                var w = w256;
                 var t = default(T);
                 for(var i=0; i<RepCount; i++)
                 {

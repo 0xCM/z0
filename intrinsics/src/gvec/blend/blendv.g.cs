@@ -21,9 +21,9 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> valt<T>(N256 n, T a, T b)
+        public static Vector256<T> valt<T>(W256 w, T a, T b)
             where T : unmanaged
-                => gvec.vblend(vgeneric.vbroadcast(n,a), vgeneric.vbroadcast(n,b), Data.blendspec<T>(n,false));
+                => gvec.vblend(vgeneric.vbroadcast(w,a), vgeneric.vbroadcast(w,b), Data.blendspec<T>(w,false));
 
         /// <summary>
         /// 

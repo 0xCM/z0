@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Time;
+    using static Core;
 
     readonly struct DurationConverter : IConversionProvider<Duration>, IBiconverter<Duration>
     {
@@ -24,9 +24,9 @@ namespace Z0
             => Cast.to<T,long>(src);
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
-            => Option.Try(() => Cast.to(((Duration)incoming).Ticks, dst.NumericKind()));
+            => Try(() => Cast.to(((Duration)incoming).Ticks, dst.NumericKind()));
 
         public Option<object> ConvertToTarget(object incoming)
-            => Option.Try(() => (Duration)(long)Cast.to(incoming, NumericKind.I64));
+            => Try(() => (Duration)(long)Cast.to(incoming, NumericKind.I64));
     }
 }

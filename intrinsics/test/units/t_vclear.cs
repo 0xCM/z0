@@ -9,11 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;
-    using static Nats;
 
     public class t_vclear :  t_vinx<t_vconvert>
     {
-
         public void vclear_128x8()
             => vclear_check(n128,z8);
 

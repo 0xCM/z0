@@ -9,7 +9,7 @@ namespace Z0
     using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Components;
     using static refs;
 
     [SuppressUnmanagedCodeSecurity]

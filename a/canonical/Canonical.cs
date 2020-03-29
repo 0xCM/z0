@@ -16,7 +16,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Components;
+    using static Core;
     
     using T = PartIdentity;
 
@@ -25,7 +25,7 @@ namespace Z0
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     
         public static IEnumerable<IPartId> Dependencies
-            => core.seq<IPartId>(T.Components.Part, T.Monadic.Part);
+            => seq<IPartId>(T.Components.Part, T.Monadic.Part);
     }
 
     public static partial class XCanonical    

@@ -15,8 +15,7 @@ namespace Z0
      
     using static AsIn;
     using static vgeneric;
-    using static refs;
-
+    using static Core;
     
     partial class dvec
     {                

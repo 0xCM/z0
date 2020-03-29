@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
  
-    using static root;
+    using static Core;
+    using static CastNumeric;
 
     /// <summary>
     /// Defines a permutation over an integral type based at 0, [0, 1, ..., n - 1] where n is the permutation length

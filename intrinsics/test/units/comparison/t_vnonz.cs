@@ -7,7 +7,6 @@ namespace Z0
     using System;
     
     using static Core;
-    using static Nats;
     using static vgeneric;
     using static Literals;
 

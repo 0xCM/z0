@@ -11,7 +11,6 @@ namespace Z0
 
     using static Core;
     using static As;
-    using static Nats;
     using D = vdirect;
 
     partial class vgeneric

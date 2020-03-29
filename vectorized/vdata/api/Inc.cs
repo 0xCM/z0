@@ -10,8 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
         
     using static HexConst;
-    using static root;    
-    using static Nats;
+    using static Core;    
 
     public static partial class Data
     {
@@ -162,16 +161,16 @@ namespace Z0
         static void RegisterInc()
         {
             const string basename = "Inc";
-            var w = default(ITypeNat);
+            var w = default(ITypeWidth);
             var index = IncIndex;
 
-            w = n128;
+            w = w128;
             Register(index++, Identify.Resource(basename, w, NumericKind.U8), Inc128x8u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U16), Inc128x16u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U32), Inc128x32u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U64), Inc128x64u);
             
-            w = n256;
+            w = w256;
             Register(index++, Identify.Resource(basename, w, NumericKind.U8), Inc256x8u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U16), Inc256x16u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U32), Inc256x32u);

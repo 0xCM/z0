@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static root;
-    using static Nats;
+    using static Core;
     using static HexConst;
  
     partial class Data
@@ -97,16 +96,16 @@ namespace Z0
         static void RegisterDec()
         {
             const string basename = "Dec";
-            var w = default(ITypeNat);
+            var w = default(ITypeWidth);
             var index = DecIndex;
 
-            w = n128;
+            w = w128;
             Register(index++, Identify.Resource(basename, w, NumericKind.U8), Dec128x8u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U16), Dec128x16u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U32), Dec128x32u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U64), Dec128x64u);
             
-            w = n256;
+            w = w256;
             Register(index++, Identify.Resource(basename, w, NumericKind.U8), Dec256x8u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U16), Dec256x16u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U32), Dec256x32u);

@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     
     using static nfunc;
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Defines a blocked primal matrix of natural dimensions
@@ -71,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256(in Block256<T> src)
         {
-            core.require(src.CellCount >= CellCount);
+            require(src.CellCount >= CellCount);
             data = src;
         }
 

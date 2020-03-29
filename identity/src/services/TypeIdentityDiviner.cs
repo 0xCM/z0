@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
 
     using static Core;
-    using static Option;
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
     {        

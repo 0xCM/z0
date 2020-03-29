@@ -10,7 +10,6 @@ namespace Z0
     {
         
     }
-
     
     /// <summary>
     /// Characterizes an untyped optional value

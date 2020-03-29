@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Core;
-    using static Nats;
     using static CastNumeric;
     using static Literals;
 

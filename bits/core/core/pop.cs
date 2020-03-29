@@ -11,7 +11,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Popcnt.X64;
  
     using static Core;
-    using static refs;
     
     partial class Bits
     {                

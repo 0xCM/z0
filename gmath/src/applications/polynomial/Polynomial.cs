@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static gmath;    
+    using static Core;    
     using static Literals;
 
     /// <summary>
@@ -198,7 +198,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Polynomial(params Monomial<M,T>[] terms)
         {
-            core.require(terms[0].Exp == Degree);
+            require(terms[0].Exp == Degree);
             this.Terms = terms;
         }
 

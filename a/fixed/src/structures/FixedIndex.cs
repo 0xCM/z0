@@ -8,8 +8,7 @@ namespace Z0
     using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Fixed;
-    using static refs;
+    using static Core;
 
     public static class FixedIndexes
     {
@@ -32,7 +31,7 @@ namespace Z0
     public readonly ref struct FixedIndex<F>
         where F : unmanaged, IFixed     
     {
-        public static int ItemWidth => core.bitsize<F>();
+        public static int ItemWidth => bitsize<F>();
 
         readonly Span<F> data;
 
@@ -80,9 +79,9 @@ namespace Z0
         where F : unmanaged, IFixed
         where T : unmanaged
     {
-        public static int ItemWidth => core.bitsize<F>();
+        public static int ItemWidth => bitsize<F>();
         
-        public static int CellWidth => core.bitsize<T>();        
+        public static int CellWidth => bitsize<T>();        
         
         readonly Span<F> data;
 

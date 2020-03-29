@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Collections.Generic;
     
-    using static Nats;
+    using static Core;
 
     public class t_dynamic : t_vinx<t_dynamic>
     {   

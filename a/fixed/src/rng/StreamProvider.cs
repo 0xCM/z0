@@ -9,8 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Fixed;
-    using static Widths;    
+    using static Core;
 
     public interface IFixedStreamProvider<F> : IStreamProvider<F>
         where F : unmanaged, IFixed
@@ -40,7 +39,7 @@ namespace Z0
         public FixedStreamProvider(IPolyrand random, Interval<T>? domain = null)
         {
             this.random = random;
-            this.Name = $"fixed_rng_{default(F).BitWidth}x{core.bitsize<T>()}";
+            this.Name = $"fixed_rng_{default(F).BitWidth}x{bitsize<T>()}";
             this.Width = (FixedWidth)default(F).BitWidth;
             this.Kind = typeof(T).NumericKind();            
             this.ValueEmitter = CreateEmitter();

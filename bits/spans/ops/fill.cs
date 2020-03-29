@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
+    using static CastNumeric;
     using static As;
 
     partial struct BitSpan
@@ -117,10 +117,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void distribute(in byte src, int step, ref uint dst)
-            => vgeneric.vstore(dvec.vconvert(n64, in skip(in src, step*8), n256, n32), ref seek(ref dst, step*8));
+            => vgeneric.vstore(dvec.vconvert(w64, in skip(in src, step*8), w256, w32), ref seek(ref dst, step*8));
 
         [MethodImpl(Inline)]
         static void distribute(in byte src, int srcstep, ref uint dst, int dststep)
-            => vgeneric.vstore(dvec.vconvert(n64, in skip(in src, srcstep*8), n256, n32), ref seek(ref dst, dststep*8));
+            => vgeneric.vstore(dvec.vconvert(w64, in skip(in src, srcstep*8), w256, w32), ref seek(ref dst, dststep*8));
     }
 }

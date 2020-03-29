@@ -18,8 +18,6 @@ namespace Z0
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
-        internal const string Kernel32 = "kernel32.dll";
-
     }
 
     public static partial class XMem    

@@ -10,9 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static refs;
     using static As;
-    using static Nats;
     using D = vdirect;
 
     partial class vgeneric

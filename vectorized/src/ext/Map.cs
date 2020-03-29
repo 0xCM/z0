@@ -11,8 +11,6 @@ namespace Z0
     
     using static Core;
     using static vgeneric;
-    using static Nats;
-    using static refs;
 
     partial class VectorExtensions
     {

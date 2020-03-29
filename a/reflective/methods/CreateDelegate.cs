@@ -10,6 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Linq.Expressions;
+    using static Core;
 
     partial class Reflective
     {
@@ -25,7 +26,7 @@ namespace Z0
             var dType
                 = m.IsAction()
                 ? Expression.GetActionType(argTypes)
-                : Expression.GetFuncType(argTypes.Concat(core.array(m.ReturnType)).ToArray());
+                : Expression.GetFuncType(argTypes.Concat(array(m.ReturnType)).ToArray());
             return (D)Delegate.CreateDelegate(typeof(D), null, m);
         }
     }

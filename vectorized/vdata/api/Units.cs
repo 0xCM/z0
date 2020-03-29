@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static root;
-    using static Nats;
+    using static Core;
  
     partial class Data
     {
@@ -115,16 +114,16 @@ namespace Z0
         static void RegisterUnits()
         {
             const string basename = "Units";
-            var w = default(ITypeNat);
+            var w = default(ITypeWidth);
             var index = UnitsIndex;
 
-            w = n128;
+            w = w128;
             Register(index++, Identify.Resource(basename, w, NumericKind.U8), Units128x8u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U16), Units128x16u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U32), Units128x32u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U64), Units128x64u);
             
-            w = n256;
+            w = w256;
             Register(index++, Identify.Resource(basename, w, NumericKind.U8), Units256x8u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U16), Units256x16u);
             Register(index++, Identify.Resource(basename, w, NumericKind.U32), Units256x32u);

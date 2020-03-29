@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Core;
-    using static Nats;
 
     public class t_vgt : t_vinx<t_vgt>
     {        

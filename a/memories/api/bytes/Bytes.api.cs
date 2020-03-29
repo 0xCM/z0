@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Memories;
+    using static Core;
     using static As;
-    using static refs;
 
     [ApiHost]
     public static class Bytes
@@ -34,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Span<byte> from<T>(ref T src)
             where T : struct
-                => MemoryMarshal.CreateSpan(ref refs.byterefR(ref src), core.size<T>()); 
+                => MemoryMarshal.CreateSpan(ref refs.byterefR(ref src), size<T>()); 
 
         /// <summary>
         /// Constructs a span from a parameter array
@@ -110,7 +109,7 @@ namespace Z0
         public static Span<byte> write<T>(in T src)
             where T : unmanaged
         {
-            Span<byte> dst =  new byte[core.size<T>()];
+            Span<byte> dst =  new byte[size<T>()];
             generic<T>(ref head(dst)) = src;
             return dst;
         }

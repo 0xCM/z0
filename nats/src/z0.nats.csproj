@@ -7,15 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Errors)" />
-    <ProjectReference Include="$(Domain)" />
-    <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Tuples)" />
-
   </ItemGroup>
 
 </Project>

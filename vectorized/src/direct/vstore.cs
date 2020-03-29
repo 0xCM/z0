@@ -14,7 +14,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static Core;
-    using static refs;    
 
     static partial class vdirect
     {

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static nfunc;
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256(Block256<T> src)
         {
-            core.require(src.CellCount >= CellCount);
+            require(src.CellCount >= CellCount);
             data = src;
         }
         

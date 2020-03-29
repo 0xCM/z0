@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static refs;    
+    using static Core;    
     using static vgeneric;
     using static Blocks;
     

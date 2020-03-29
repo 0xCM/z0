@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Components;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Exposes a basic api for natural negotiation and defines static properties
@@ -28,7 +27,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => Identify.Op(opname, (TypeWidth)nateval<W>(), NumericTypes.kind<T>(), generic);
+                => Identify.Op(opname, (TypeWidth)Nats.nateval<W>(), NumericTypes.kind<T>(), generic);
 
     }
 }

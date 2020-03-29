@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Core;
-    using static refs;
 
     public ref struct RingBuffer<T>
         where T : unmanaged
@@ -44,7 +43,7 @@ namespace Z0
             if(count != capacity)
                 count++;
             
-            seek(ref Head, inpos++) = src; 
+            refs.seek(ref Head, inpos++) = src; 
         }
 
         [MethodImpl(Inline)]
@@ -55,7 +54,7 @@ namespace Z0
 
             count--;
 
-            return ref seek(ref Head, outpos++);
+            return ref refs.seek(ref Head, outpos++);
         }
 
         ref T Head

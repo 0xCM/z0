@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Collective;
+    using static Core;
 
     partial class XCollective
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <typeparam name="T">The item type</typeparam>
         public static IEnumerable<IEnumerable<T>> Singletons<T>(this IEnumerable<T> src)
-            => from item in src select core.seq(item);
+            => from item in src select seq(item);
 
         /// <summary>
         /// Reduces a stream of element streams to an element stream

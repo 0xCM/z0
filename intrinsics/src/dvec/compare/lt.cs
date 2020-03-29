@@ -15,9 +15,8 @@ namespace Z0
     using static X86Missing;
 
     using static vgeneric;
-    using static Nats;
+    using static Core;
     using static BitMasks;
-    using static dvec;
 
     partial class dvec
     {
@@ -202,19 +201,20 @@ namespace Z0
     static class X86Missing
     {
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> CompareLessThan(Vector256<sbyte> x, Vector256<sbyte> y)
+        internal static Vector256<sbyte> CompareLessThan(Vector256<sbyte> x, Vector256<sbyte> y)
             => CompareGreaterThan(y,x);
 
         [MethodImpl(Inline)]
-        public static Vector256<short> CompareLessThan(Vector256<short> x, Vector256<short> y)
+        internal static Vector256<short> CompareLessThan(Vector256<short> x, Vector256<short> y)
             => CompareGreaterThan(y,x);
 
         [MethodImpl(Inline)]
-        public static Vector256<int> CompareLessThan(Vector256<int> x, Vector256<int> y)
+        internal static Vector256<int> CompareLessThan(Vector256<int> x, Vector256<int> y)
             => CompareGreaterThan(y,x);
 
         [MethodImpl(Inline)]
-        public static Vector256<long> CompareLessThan(Vector256<long> x, Vector256<long> y)
+        internal static Vector256<long> CompareLessThan(Vector256<long> x, Vector256<long> y)
             => CompareGreaterThan(y,x);
+
     }
 }

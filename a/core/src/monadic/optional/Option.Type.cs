@@ -48,19 +48,15 @@ namespace Z0
         /// <param name="Value">The encapsulated value</param>
         [MethodImpl(Inline)]
         public static Option<T> Some(T Value)
-            => new Option<T>(Value);
+            => new Option<T>(Value, true);
 
-        /// <summary>
-        /// Initializes a valued option
-        /// </summary>
-        /// <param name="value">The encapsulated value</param>
         [MethodImpl(Inline)]
-        Option(T value)
+        Option(T value, bool exists)
         {
             this.value = value;
-            this.Exists = true;
+            this.Exists = exists;
         }
-        
+
         [MethodImpl(Inline)]
         public static implicit operator Option<T>(T x)
             => x != null  ? Some(x) : None();

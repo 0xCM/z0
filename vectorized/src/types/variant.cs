@@ -12,9 +12,9 @@ namespace Z0
     
     using NK = NumericKind;
 
-    using static Root;
+    using static Core;
 
-    public interface Variant
+    public interface IVariant
     {
         /// <summary>
         /// The number of bits that are used to store the enclosed data
@@ -47,25 +47,20 @@ namespace Z0
             => CellWidth < DataWidth;        
     }
 
-    public interface Variant<V>  : Variant, IEquatable<V>, IFormattable<V>
-        where V : unmanaged, Variant<V>
+    public interface IVariant<V>  : IVariant, IEquatable<V>, IFormattable<V>
+        where V : unmanaged, IVariant<V>
     {
 
     }
 
-    public interface ScalarVariant : Variant
-    {
-
-    }
-
-    public interface ScalarVariant<V> : ScalarVariant, Variant<V>
-        where V : unmanaged, ScalarVariant<V>
+    public interface IScalarVariant<V> : IVariant<V>
+        where V : unmanaged, IScalarVariant<V>
     {
 
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 16)]
-    public readonly struct variant : ScalarVariant<variant>
+    public readonly struct variant : IScalarVariant<variant>
     {
         public static variant Zero => FromScalar(0);
 
@@ -74,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static variant FromGeneric<T>(T src)
             where T : unmanaged
-                => new variant(Store((ulong)Cast.to<T,ulong>(src), NumericTypes.kind<T>(), (uint)core.bitsize<T>()));
+                => new variant(Store((ulong)Cast.to<T,ulong>(src), NumericTypes.kind<T>(), (uint)bitsize<T>()));
 
         [MethodImpl(Inline)]
         public static variant FromScalar(sbyte src)

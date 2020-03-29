@@ -18,6 +18,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
+    using static Core;
+
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
@@ -28,10 +30,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Option<TypeIdentity> ToOption(this TypeIdentity src)
-            => src.IsEmpty ? Option.none<TypeIdentity>() : Option.some(src);
+            => src.IsEmpty ? none<TypeIdentity>() : some(src);
 
         internal static Exception DuplicateKeys(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new Exception(core.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
+            => new Exception(concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 
     }
 

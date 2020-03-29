@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static refs;
     using static Core;
-    using static Nats;
     
     partial class gvec
     {
@@ -31,7 +29,7 @@ namespace Z0
             Span<T> buffer = stackalloc T[count];
             ref var dst = ref head(buffer);
 
-            var length = math.min(count, core.bitsize<S>());
+            var length = math.min(count, bitsize<S>());
             for(var i=0; i< length; i++)
                 seek(ref dst, i) = gbits.testbit(src,i) ? enabled : default;
             

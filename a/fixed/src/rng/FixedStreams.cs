@@ -10,8 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Fixed;
-    using static Widths;
+    using static Core;
 
     public static class RngFixedStreams
     {
@@ -43,7 +42,7 @@ namespace Z0
                 case FixedWidth.W128: return random.FixedStream<F>(w128);
                 case FixedWidth.W256: return random.FixedStream<F>(w256);
                 case FixedWidth.W512: return random.FixedStream<F>(w512);
-                default: return core.seq<F>();                    
+                default: return seq<F>();                    
             }
         }
 

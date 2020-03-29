@@ -51,11 +51,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static FixedDelegate EmitFixedBinaryOp(this IBufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
-            => buffer.Handle.EmitFixed(id,functype:operatorType, result:operandType, args: core.array(operandType, operandType));
+            => buffer.Handle.EmitFixed(id,functype:operatorType, result:operandType, args: array(operandType, operandType));
 
         [MethodImpl(Inline)]
         static FixedDelegate EmitFixedTernaryOp(this IBufferToken buffer, OpIdentity id, Type operatorType, Type operandType)        
-            => buffer.Handle.EmitFixed(id, functype:operatorType, result:operandType, args: core.array(operandType, operandType, operandType));
+            => buffer.Handle.EmitFixed(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType));
 
         [MethodImpl(Inline)]
         static UnaryOp8 EmitFixedUnaryOp(this IBufferToken buffer, N8 w, OpIdentity id)
@@ -171,6 +171,5 @@ namespace Z0
                 return (Func<T,T,T>)method.CreateDelegate(typeof(Func<T,T,T>));
             }
         }
-    }
-   
+    }  
 }

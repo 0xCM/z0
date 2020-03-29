@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Characterizes a suite of random number generators
@@ -74,13 +74,13 @@ namespace Z0
         public RngSuite256(IPolyrand[] members)
         {
             this.members = members.ToArray();
-            core.require(this.members.Length == n);
+            require(this.members.Length == n);
         }
 
         public RngSuite256(IEnumerable<IPolyrand> members)
         {
             this.members = members.ToArray();
-            core.require(this.members.Length == n);
+            require(this.members.Length == n);
         }
 
         public RowVector256<N, T> Next<T>() 
@@ -121,8 +121,5 @@ namespace Z0
 
         public IPolyrand Select(int index)
             => members[index];
-
-
     }
-
 }

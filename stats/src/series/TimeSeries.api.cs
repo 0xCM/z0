@@ -12,14 +12,12 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static root;    
+    using static Core;    
+    using static Literals;
 
     public static class TimeSeries
     {
         static long LastSeriesId;
-
-        static long NextId(ref long x)
-            => Interlocked.Increment(ref x);
 
         static readonly ConcurrentDictionary<long, IPolyrand> States
             = new ConcurrentDictionary<long, IPolyrand>();
@@ -58,7 +56,7 @@ namespace Z0
         public static TimeSeries<T> Define<T>(Interval<T> domain, ulong[] seed)
             where T : unmanaged
         {
-            var id = NextId(ref LastSeriesId);
+            var id = increment(ref LastSeriesId);
             var rng = Polyrand.XOrShift1024(seed);
             if(!States.TryAdd(id,rng))
                 throw new Exception($"Key {id} already exists");
@@ -67,8 +65,7 @@ namespace Z0
 
         public static void EvolveSeries<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)
             where T : unmanaged
-        {
-            
+        {            
             var sw = time.stopwatch();
             var series = Define(domain, seed); 
             var terms = series.Terms().ToSpan(count);
@@ -108,7 +105,7 @@ namespace Z0
                     let status = evolve.ContinueWith(t => receiver(t.Result))
                     select evolve;
             
-            await core.task(() => Task.WaitAll(variations.ToArray()));
+            await task(() => Task.WaitAll(variations.ToArray()));
         }
     }
 }

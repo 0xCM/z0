@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Textual;
-    using static refs;
+    using static Core;
     using static As;
 
     public static class Hex
@@ -23,7 +22,6 @@ namespace Z0
         /// </summary>
         public const char PostSpec = 'h';
 
- 
         [MethodImpl(Inline)]
         public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
@@ -189,15 +187,13 @@ namespace Z0
                 Stacks.cell(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
             return Stacks.span(ref storage);
         }
-
-
                
         [MethodImpl(Inline)]
         static string format_hex_digits<T>(string digits, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
         {
             var spec = specifier ? PreSpec : string.Empty;
-            return zpad ?  (spec + digits.PadLeft(core.size<T>() * 2, '0')) : (spec + digits);
+            return zpad ?  (spec + digits.PadLeft(size<T>() * 2, '0')) : (spec + digits);
         }
 
         [MethodImpl(Inline)]

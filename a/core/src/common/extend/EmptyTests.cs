@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static Components;
+    using static Core;
 
     partial class XTend
     {
@@ -19,7 +17,7 @@ namespace Z0
         /// <param name="s">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool IsBlank(this string s)
-            => core.empty(s);
+            => empty(s);
 
         /// <summary>
         /// Returns true if a string has at least one character that is not considered whitespace
@@ -27,7 +25,7 @@ namespace Z0
         /// <param name="s">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool IsNotBlank(this string s)
-            => core.nonempty(s);
+            => nonempty(s);
 
         /// <summary>
         /// Returns the source string if it is not blank; otherwise, returns an alternate string
@@ -36,7 +34,7 @@ namespace Z0
         /// <param name="alt">The alternate string</param>
         [MethodImpl(Inline)]
         public static string IfBlank(this string src, string alt)
-            => core.empty(src) ? alt : src;
+            => empty(src) ? alt : src;
 
         /// <summary>
         /// Invokes an action if the source string is nonempty
@@ -46,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void OnSome(this string s, Action<string> f)
         {
-            if(core.nonempty(s))
+            if(nonempty(s))
                 f(s);
         }
     }

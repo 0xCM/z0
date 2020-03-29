@@ -12,23 +12,23 @@ namespace Z0
 
     public class NatSpanTest : UnitTest<NatSpanTest>
     {
-        public void Transpose()
-        {
+        // public void Transpose()
+        // {
             
-            var m = nati<N4>();
-            var n = nati<N3>();
-            var src = Random.NatSpan(n4, n3, Interval.closed(1,1000));
-            Claim.eq(src.Dim.I, m);
-            Claim.eq(src.Dim.J, n);            
+        //     var m = nati<N4>();
+        //     var n = nati<N3>();
+        //     var src = Random.NatSpan(n4, n3, Interval.closed(1,1000));
+        //     Claim.eq(src.Dim.I, m);
+        //     Claim.eq(src.Dim.J, n);            
 
-            var dst = src.Transpose();
+        //     var dst = src.Transpose();
 
-            Claim.eq(dst.Dim.I, n);
-            Claim.eq(dst.Dim.J, m);
+        //     Claim.eq(dst.Dim.I, n);
+        //     Claim.eq(dst.Dim.J, m);
 
-            for(var i=0; i< m; i++)
-            for(var j=0; j < n; j++)
-                Claim.eq(src[i,j], dst[j,i]);            
-        }        
+        //     for(var i=0; i< m; i++)
+        //     for(var j=0; j < n; j++)
+        //         Claim.eq(src[i,j], dst[j,i]);            
+        // }        
     }
 }

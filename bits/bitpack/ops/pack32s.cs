@@ -12,7 +12,7 @@ namespace Z0
     using static refs;
     using static CastNumeric;
     using static vgeneric;
-
+    
     partial class BitPack
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static byte pack(Span<bit> src, N8 n)
         {
-            var v0 = vload(n256, head(convert(src, 0, core.bitsize<byte>())));
+            var v0 = vload(n256, head(convert(src, 0, Core.bitsize<byte>())));
             return (byte)packlsb8(dvec.vcompact(v0,n128,z8));
         }
 
@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ushort pack(Span<bit> src, N16 n)
         {
-            ref readonly var unpacked = ref head(convert(src, 0, core.bitsize<ushort>())); 
+            ref readonly var unpacked = ref head(convert(src, 0, Core.bitsize<ushort>())); 
             return pack32(unpacked, n);
         }
 
@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint pack(Span<bit> src, N32 n)
         {
-            ref readonly var unpacked = ref head(convert(src, 0, core.bitsize<uint>()));
+            ref readonly var unpacked = ref head(convert(src, 0, Core.bitsize<uint>()));
             return pack32(unpacked,n);            
         }
 
@@ -96,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ulong pack(Span<bit> src, N64 n)
         {
-            ref readonly var unpacked = ref head(convert(src, 0, core.bitsize<ulong>()));
+            ref readonly var unpacked = ref head(convert(src, 0, Core.bitsize<ulong>()));
             return pack32(unpacked,n);
         }
     }

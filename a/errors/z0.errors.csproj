@@ -6,9 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Canonical)" />
   </ItemGroup>
 
 </Project>

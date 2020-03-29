@@ -10,91 +10,8 @@ namespace Z0
     using static Components;
 
 
-    /// <summary>
-    /// Reifies a one-term natural sequence
-    /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    public readonly struct NatSeq1<K1> : INatSeq<NatSeq1<K1>>
-        where K1 : unmanaged, INatPrimitive<K1>
-    {
-        public static NatSeq1<K1> Rep => default;
-        
-        public static ulong Value => Nat.nat<K1>().NatValue;
-                
-        public ulong NatValue 
-            => Value;
 
-        public ITypeNat NatRep
-            => Rep; 
 
-        public NatSeq Sequence
-            => Rep; 
-
-        public string format()
-            => Value.ToString();
-
-        public override string ToString() 
-            => format();
-    }
-
-    /// <summary>
-    /// Reifies a two-term natural sequence
-    /// </summary>
-    public readonly struct NatSeq<K1,K2> : INatSeq<NatSeq<K1,K2>>
-        where K1 : unmanaged, INatPrimitive<K1>
-        where K2 : unmanaged, INatPrimitive<K2>
-    {
-        public static NatSeq<K1,K2> Rep => default;
-
-        public static ulong Value
-        {
-            [MethodImpl(Inline)]
-            get => Nat.nat<K1>().NatValue * 10 + Nat.nat<K2>().NatValue;
-        }
-
-        public ulong NatValue => Value;
-
-        public NatSeq Sequence => Rep; 
-    
-        public string format()
-            => Value.ToString();
-
-        public override string ToString() 
-            => Value.ToString();
-    }
-
-    /// <summary>
-    /// Reifies a three-term natural sequence
-    /// </summary>
-    public readonly struct NatSeq<K1,K2,K3> : INatSeq<NatSeq<K1,K2,K3>>
-        where K1 : unmanaged, INatPrimitive<K1>
-        where K2 : unmanaged, INatPrimitive<K2>
-        where K3 : unmanaged, INatPrimitive<K3>
-    {
-        public static NatSeq<K1,K2,K3> Rep => default;
-        
-        public static ulong Value 
-        {            
-            [MethodImpl(Inline)]
-            get => 
-              Nat.nat<K1>().NatValue * 100
-            + Nat.nat<K2>().NatValue * 10
-            + Nat.nat<K3>().NatValue;
-
-        }
-        
-        public ulong NatValue 
-            => Value;
-
-        public NatSeq Sequence
-            => Rep; 
-
-        public string format()
-            => Value.ToString();
-
-        public override string ToString() 
-            => Value.ToString();
-    }
 
     /// <summary>
     /// Reifies a four-term natural sequence
@@ -111,10 +28,10 @@ namespace Z0
         {            
             [MethodImpl(Inline)]
             get => 
-              Nat.nat<K1>().NatValue * 1000
-            + Nat.nat<K2>().NatValue * 100
-            + Nat.nat<K3>().NatValue * 10
-            + Nat.nat<K4>().NatValue;
+              natval<K1>().Value * 1000ul
+            + natval<K2>().Value * 100ul
+            + natval<K3>().Value * 10ul
+            + natval<K4>().Value;
         }
 
         public ulong NatValue => Value;

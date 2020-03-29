@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static Core;
-    using static Nats;
 
     public class t_vxor : t_vinx<t_vxor>
     {

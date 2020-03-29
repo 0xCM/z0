@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static refs;
 
     partial class gbits
     {
@@ -26,5 +25,4 @@ namespace Z0
             return ref dst;
         }
     }
-
 }

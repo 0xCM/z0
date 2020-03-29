@@ -9,6 +9,8 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(Nats)" />  
+    <ProjectReference Include="$(Numeric)" />  
+
   </ItemGroup>
 
 </Project>

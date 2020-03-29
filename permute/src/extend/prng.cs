@@ -10,8 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static root;
-
+    using static Core;
 
     public static class PRngX
     {

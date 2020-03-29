@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static Nats;
-    using static refs;
     using static CastNumeric;
 
     public class t_vgather : t_vinx<t_vgather>

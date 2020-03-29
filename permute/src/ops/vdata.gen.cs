@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     
-    using static root;
-    using static Nats;
+    using static Core;
+    using static CastNumeric;
+    using static Literals;
 
     /// <summary>
     /// Generates the data presented by VData

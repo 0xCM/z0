@@ -8,13 +8,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Core;
-    using static Nats;
     using static vgeneric;
-    using static refs;
 
     public class t_intrinsic_bench : t_vinx<t_intrinsic_bench>
-    {
-        
+    {        
         protected override int CycleCount => Pow2.T08;
 
         protected override int RepCount => Pow2.T10;
@@ -32,48 +29,48 @@ namespace Z0
 
         public void vand_bench()
         {
-            vand_bench(n128);
-            vand_bench(n256);
+            vand_bench(w128);
+            vand_bench(w256);
         }
 
         public void vxor_bench()
         {
-            vxor_bench(n128);
-            vxor_bench(n256);
+            vxor_bench(w128);
+            vxor_bench(w256);
         }
 
         public void vrotl_bench()
         {
-            rotl_bench(n128);
-            rotl_bench(n256);
+            rotl_bench(w128);
+            rotl_bench(w256);
         }
 
         public void vrotr_bench()
         {
-            vrotr_bench(n128);
-            vrotr_bench(n256);
+            vrotr_bench(w128);
+            vrotr_bench(w256);
         }
 
         public void vsll_bench()
         {
-            vsll_bench(n128);
-            vsll_bench(n256);
+            vsll_bench(w128);
+            vsll_bench(w256);
         }
 
         public void vsrl_bench()
         {         
-            vsrl_bench(n128);
-            vsrl_bench(n256);
+            vsrl_bench(w128);
+            vsrl_bench(w256);
         }
 
         public void vpop_bench()
         {
             vpop_bench_ref();
-            vpop_bench(n128);
-            vpop_bench(n256);
+            vpop_bench(w128);
+            vpop_bench(w256);
         }
 
-        void vand_bench(N128 w)
+        void vand_bench(W128 w)
         {
             vand_bench(w, z8);
             vand_bench(w, z16);
@@ -81,7 +78,7 @@ namespace Z0
             vand_bench(w, z64);
         }
 
-        void vand_bench(N256 w)
+        void vand_bench(W256 w)
         {
             vand_bench(w, z8);
             vand_bench(w, z16);
@@ -89,15 +86,15 @@ namespace Z0
             vand_bench(w, z64);
         }
 
-        void vand_bench<T>(N128 w, T t)
+        void vand_bench<T>(W128 w, T t)
             where T : unmanaged
                 => vbinop_bench(w, VSvc.vand(w,t),t);
 
-        void vand_bench<T>(N256 w, T t)
+        void vand_bench<T>(W256 w, T t)
             where T : unmanaged
                 => vbinop_bench(w, VSvc.vand(w,t),t);
 
-        void vxor_bench(N128 w)
+        void vxor_bench(W128 w)
         {
             vxor_bench(w, z8);
             vxor_bench(w, z16);
@@ -105,7 +102,7 @@ namespace Z0
             vxor_bench(w, z64);
         }
 
-        void vxor_bench(N256 w)
+        void vxor_bench(W256 w)
         {
             vxor_bench(w, z8);
             vxor_bench(w, z16);
@@ -113,15 +110,15 @@ namespace Z0
             vxor_bench(w, z64);
         }
 
-        void vxor_bench<T>(N128 w, T t)
+        void vxor_bench<T>(W128 w, T t)
             where T : unmanaged
                 => vbinop_bench(w, VSvc.vxor(w,t),t);
 
-        void vxor_bench<T>(N256 w, T t)
+        void vxor_bench<T>(W256 w, T t)
             where T : unmanaged
                 => vbinop_bench(w, VSvc.vxor(w,t),t);
 
-        void rotl_bench(N128 w)
+        void rotl_bench(W128 w)
         {
             vshift_bench(w, VSvc.vrotl(w, z8), z8);
             vshift_bench(w, VSvc.vrotl(w, z16),z16);
@@ -129,7 +126,7 @@ namespace Z0
             vshift_bench(w, VSvc.vrotl(w, z64), z64);
         }
 
-        void rotl_bench(N256 w)
+        void rotl_bench(W256 w)
         {
             vshift_bench(w, VSvc.vrotl(w, z8), z8);
             vshift_bench(w, VSvc.vrotl(w, z16),z16);
@@ -137,7 +134,7 @@ namespace Z0
             vshift_bench(w, VSvc.vrotl(w, z64), z64);
         }
 
-        void vrotr_bench(N128 w)
+        void vrotr_bench(W128 w)
         {
             vshift_bench(w, VSvc.vrotr(w, z8), z8);
             vshift_bench(w, VSvc.vrotr(w, z16),z16);
@@ -145,7 +142,7 @@ namespace Z0
             vshift_bench(w, VSvc.vrotr(w, z64), z64);
         }
 
-        void vrotr_bench(N256 w)
+        void vrotr_bench(W256 w)
         {
             vshift_bench(w, VSvc.vrotr(w, z8), z8);
             vshift_bench(w, VSvc.vrotr(w, z16),z16);
@@ -153,7 +150,7 @@ namespace Z0
             vshift_bench(w, VSvc.vrotr(w, z64), z64);
         }
 
-        void vsll_bench(N128 w)
+        void vsll_bench(W128 w)
         {
             vshift_bench(w,VSvc.vsll(w, z8), z8);
             vshift_bench(w,VSvc.vsll(w, z16), z16);
@@ -178,7 +175,7 @@ namespace Z0
             vshift_bench(w,VSvc.vsrl(w, z64), z64);            
         }
 
-        void vsrl_bench(N128 w)
+        void vsrl_bench(W128 w)
         {
             vshift_bench(w,VSvc.vsrl(w, z8), z8);
             vshift_bench(w,VSvc.vsrl(w, z16), z16);
@@ -342,7 +339,7 @@ namespace Z0
             ReportBenchmark($"vpop_3x256", opcount,counter);
         }
 
-        void vpop_bench(N128 n, SystemCounter counter = default)
+        void vpop_bench(W128 n, SystemCounter counter = default)
         {            
             var total = 0ul;
             var opcount = 0;

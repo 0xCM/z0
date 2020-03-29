@@ -11,7 +11,6 @@ namespace Z0
     
     using static As;
     using static Core;
-    using static Nats;
 
     partial class dvec
     {

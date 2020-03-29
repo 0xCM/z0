@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.IO;
 
-    using static Apps;
+    using static Core;
     
     public static class AppServices
     {
@@ -22,7 +22,7 @@ namespace Z0
             FileWriteMode mode = FileWriteMode.Overwrite, bool display = false, AppMsgColor? color = null)
         {
             var writer = target.CreateParentIfMissing().Writer(mode);
-            var devname = name ?? ("log" + core.increment(ref devid).ToString());
+            var devname = name ?? ("log" + increment(ref devid).ToString());
             return new AppMsgWriter(context, writer, devname, display, color ?? AppMsgColor.Green);            
         }
 
@@ -65,7 +65,7 @@ namespace Z0
 
             foreach(var m in messages)
                 Writer.WriteLine(m.Format());
-        }
+        }       
         
         public void Dispose()
         {

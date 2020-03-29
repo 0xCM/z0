@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     public static partial class PermX
     {
@@ -53,7 +52,7 @@ namespace Z0
         public static Vector128<byte> ToShuffleSpec(this NatPerm<N16> src)
         {
             var data = src.Terms.To<byte>();
-            return vgeneric.vload(n128,in head(data));
+            return vgeneric.vload(n128,in refs.head(data));
         }
     }
 }

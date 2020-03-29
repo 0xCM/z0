@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Option;
-    using static Custom;
+    using static Core;
 
     public static class Biconverter
     {
@@ -56,7 +55,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                core.error(e);
+                error(e);
                 return none<T>();
             }
         }
@@ -77,7 +76,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                core.error(e);
+                error(e);
                 return none<S>();
             }
         }
@@ -93,7 +92,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                core.error(e);
+                error(e);
                 return none<object>();
             }
         }
@@ -109,7 +108,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                core.error(e);
+                error(e);
                 return none<S>();
             }
         }

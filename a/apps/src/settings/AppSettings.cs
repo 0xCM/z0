@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;    
     using System.Linq;
 
-    using static Apps;
+    using static Core;
 
     /*
     {
@@ -66,7 +66,7 @@ namespace Z0
         {
             var matches = Pairs.Where(p => p.Key == name).ToArray();
             if(matches.Length == 0)
-                return Option.none<string>();
+                return none<string>();
             else
                 return matches[0].Value;
         }
@@ -81,7 +81,7 @@ namespace Z0
             {
                 term.error(e);
             }
-            return Option.none<T>();
+            return none<T>();
         }
 
         public IEnumerable<IAppSetting> All

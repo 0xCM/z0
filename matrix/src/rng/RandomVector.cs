@@ -9,8 +9,7 @@ namespace Z0
     using System.IO;
 
     using static nfunc;
-    using static Nats;
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Defines the matrix api surface
@@ -283,12 +282,11 @@ namespace Z0
             where T : unmanaged
         {
             var len = src.Length;
-            core.require(len == max.Length);
+            require(len == max.Length);
             var dst = Z0.RowVector.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Numeric.contract(src[i],max[i]);
             return dst;
         }
-
     }
 }

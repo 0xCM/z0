@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Core;
-    using static Nats;
     using static vgeneric;
 
     public class t_vbitblend : t_vinx<t_vbitblend>

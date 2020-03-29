@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static nfunc;
-    using static Root;
-    using static Nats;
+    using static Core;
 
     public readonly ref struct RowVector256<N,T>
         where N : unmanaged, ITypeNat
@@ -81,20 +80,20 @@ namespace Z0
         [MethodImpl(Inline)]
         internal RowVector256(Span<T> src)
         {
-            data = Blocks.safeload(n256,src);
+            data = Blocks.safeload(Nats.n256,src);
         }
 
         [MethodImpl(Inline)]
         internal RowVector256(Block256<T> src)
         {
-            core.require(src.CellCount >= Length);
+            require(src.CellCount >= Length);
             data = src;
         }
 
         [MethodImpl(Inline)]
         internal RowVector256(NatSpan<N,T> src)
         {
-            data = RowVector.safeload(n256,src);
+            data = RowVector.safeload(Nats.n256,src);
         }
                     
         public ref T this[int index] 

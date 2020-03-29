@@ -10,7 +10,7 @@ namespace Z0.Machines
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Defines a state machine with minimal feature-set
@@ -202,8 +202,7 @@ namespace Z0.Machines
                 OnError(e);
             }
                     
-            Runtime.Stop();
-                        
+            Runtime.Stop();                        
         }
 
         void OnComplete(bool asPlanned)
@@ -246,7 +245,7 @@ namespace Z0.Machines
         void OnReceipt(E input)        
         {
             ReceiptCount++;
-            root.Try(() => InputReceipt?.Invoke(input));
+            Try(() => InputReceipt?.Invoke(input));
         }
 
         void OnWarning(AppMsg msg)
@@ -258,7 +257,7 @@ namespace Z0.Machines
         {       
             Error = e;
                        
-            root.Try(() => Oops?.Invoke(e));
+            Try(() => Oops?.Invoke(e));
 
             OnComplete(false);
         }                     

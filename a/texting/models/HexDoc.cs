@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static Textual;
+    using static Core;
 
     public readonly struct HexDoc
     {        
@@ -32,8 +30,8 @@ namespace Z0
             }
             catch(Exception e)
             {
-                core.error(e);
-                return Option.none<FilePath>();
+                error(e);
+                return none<FilePath>();
             }
         }
     }

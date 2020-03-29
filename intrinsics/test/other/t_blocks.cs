@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static Core;
-    using static Nats;
 
     public class t_blocks : t_vinx<t_blocks>
     {        

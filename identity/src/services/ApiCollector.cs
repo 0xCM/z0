@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
     
     readonly struct ApiOpCollector : IApiCollector
     {
@@ -40,7 +40,7 @@ namespace Z0
         static NumericKind[] NumericClosures(MethodInfo m)
             => m.Tag<NumericClosuresAttribute>()
               .MapValueOrElse(a => a.NumericPrimitive.DistinctKinds(), 
-                () => items<NumericKind>()).ToArray();
+                () => seq<NumericKind>()).ToArray();
 
     }
 }

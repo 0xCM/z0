@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static nfunc;
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Defines a blocked primal matrix of natural dimensions
@@ -29,37 +29,37 @@ namespace Z0
         /// <summary>
         /// The number of rows in the structure
         /// </summary>
-        static readonly int _RowCount = nati<M>();
+        static int _RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
-        static readonly int _ColCount = nati<N>();
+        static int _ColCount => nati<N>();
 
         /// <summary>
         /// The number of cells in each row
         /// </summary>
-        static readonly int _RowLenth = _ColCount;
+        static int _RowLenth => nati<N>();
 
         /// <summary>
         /// The number of cells in each column
         /// </summary>
-        static readonly int _ColLength = _RowCount;
+        static int _ColLength => nati<M>();
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static readonly int CellCount = _RowLenth * _ColLength;
+        public static int CellCount => _RowLenth * _ColLength;
 
         /// <summary>
         /// The Row dimension representative
         /// </summary>
-        public static readonly M RowRep = default;
+        public static M RowRep => default;
 
         /// <summary>
         /// The Column dimension representative
         /// </summary>
-        public static readonly N ColRep = default;
+        public static N ColRep => default;
 
         [MethodImpl(Inline)]
         public static bool operator == (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs) 
@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            core.require(src.Length >= CellCount);
+            require(src.Length >= CellCount);
             data = src;
         }
 
@@ -91,7 +91,7 @@ namespace Z0
         public readonly int RowLength
         {
             [MethodImpl(Inline)]
-            get => _RowLenth;
+            get => nati<N>();
         }
 
         /// <summary>
@@ -120,7 +120,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
-
 
         [MethodImpl(Inline)]        
         public ref T Cell(int r, int c)

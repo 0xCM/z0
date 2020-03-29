@@ -11,7 +11,8 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Domain;
+    using static Core;
+
 
     public static class Reports
     {
@@ -75,8 +76,8 @@ namespace Z0
         {            
             if(records == null)
             {
-                core.error($"The source record array is null!");
-                return Option.none<FilePath>();
+                error($"The source record array is null!");
+                return none<FilePath>();
             }
                     
             try
@@ -99,7 +100,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                core.error(e);
+                error(e);
                 return default;
             }
         }        
@@ -109,6 +110,14 @@ namespace Z0
             var attrib = src.Tag<ReportFieldAttribute>().Require();
             return ReportFieldInfo.Define(attrib.Name.IfBlank(src.Name), attrib.Index ?? 0, attrib.Width ?? 0);            
         }
+
+        /// <summary>
+        /// Prepends a space to the source content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        [MethodImpl(Inline)]
+        internal static string lspace(object content)
+            => $" {content}";
 
         static string[] GetHeaderNames(ReportFieldInfo[] fields)
         {

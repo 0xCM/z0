@@ -25,7 +25,7 @@ namespace Z0
 
         public XOrShift128(ReadOnlySpan<uint> state)
         {
-            core.require(state.Length >= 4);
+            require(state.Length >= 4);
             this.a = state[0];
             this.b = state[1];            
             this.c = state[2];

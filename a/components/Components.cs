@@ -25,6 +25,8 @@ namespace Z0
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
+        public const string Kernel32 = "kernel32.dll";
+
         /// <summary>
         /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
         /// </summary>
@@ -44,12 +46,10 @@ namespace Z0
         internal static int size<T>()
             => Unsafe.SizeOf<T>();
 
-
         [MethodImpl(Inline)]
         public static NatVal natval<K>(K n = default)
             where K : unmanaged, ITypeNat
                 => NatVal.From(default(K).NatValue);
-
     }
 
     public static partial class XTend

@@ -9,7 +9,6 @@ namespace Z0
  
     using static Core;
     using static Nats;
-    using static refs;
     using static CastNumeric;
    
     partial class Bits

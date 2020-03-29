@@ -10,9 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static refs;
     using static vgeneric;
-    using static Nats;
 
     partial class VectorExtensions
     {

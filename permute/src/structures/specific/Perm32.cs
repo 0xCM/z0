@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
+    using static Core;
     
     /// <summary>
     /// Defines a 32-symbol permutation

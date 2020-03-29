@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static Core;
-    using static refs;
 
     class SFMatch<T0,T1,T2,R> : SFMatch, ISFMatch<T0,T1,T2,R>
         where T0 : unmanaged

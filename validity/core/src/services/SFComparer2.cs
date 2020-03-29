@@ -8,7 +8,6 @@ namespace Z0
 
     using static Core;
     using static Validity;
-    using static refs;
 
     class SFComparer<T0,T1,R> : SFMatch, ISFMatch<T0,T1,R>
         where T0 : unmanaged

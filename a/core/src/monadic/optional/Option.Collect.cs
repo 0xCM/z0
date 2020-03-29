@@ -12,7 +12,6 @@ namespace Z0
     using System.Collections.Concurrent;
 
     using static Core;
-    using static Option;
 
     partial class XTend
     {

@@ -10,10 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static Nats;
     using static vgeneric;
     using static dvec;
-    using static refs;
 
     partial class vexamples
     {
@@ -59,47 +57,47 @@ namespace Z0
 
             var i2x2 = vgeneric.vparts(n256, 2, 4, 8, 16);
             var v2x2 = vgather(n128, in src32, i2x2);
-            Claim.eq(dvec.vcompact(i2x2, n128, z32i), v2x2);            
+            Claim.eq(dvec.vcompact(i2x2, n128, Core.z32i), v2x2);            
 
             var i3x3 = vgeneric.vparts(n256, 3, 6, 12, 24);
             var v3x3 = vgather(n128, in src32, i3x3); 
-            Claim.eq(dvec.vcompact(i3x3, n128, z32i), v3x3);
+            Claim.eq(dvec.vcompact(i3x3, n128, Core.z32i), v3x3);
 
             var i3_3 = vgeneric.vparts(n256, 3, 6, 9, 12);
             var v3_3 = vgather(n128, in src32, i3_3); 
-            Claim.eq(dvec.vcompact(i3_3, n128, z32i), v3_3);
+            Claim.eq(dvec.vcompact(i3_3, n128, Core.z32i), v3_3);
 
             var i4x2 = vgeneric.vparts(n256, 4, 8, 16, 32);
             var v4x2 = vgather(n128, in src32, i4x2);
-            Claim.eq(dvec.vcompact(i4x2, n128, z32i), v4x2);
+            Claim.eq(dvec.vcompact(i4x2, n128, Core.z32i), v4x2);
 
             var i5_5 = vgeneric.vparts(n256, 5, 10, 15, 20);
             var v5_5 = vgather(n128, in src32, i5_5);
-            Claim.eq(dvec.vcompact(i5_5, n128, z32i), v5_5);
+            Claim.eq(dvec.vcompact(i5_5, n128, Core.z32i), v5_5);
 
             var i9_9 = vgeneric.vparts(n256, 9, 18, 27, 36);
             var v9_9 = vgather(n128, in src32, i9_9);
-            Claim.eq(dvec.vcompact(i9_9, n128, z32i), v9_9);
+            Claim.eq(dvec.vcompact(i9_9, n128, Core.z32i), v9_9);
 
             var i10_10 = vgeneric.vparts(n256, 10, 20, 30, 40);
             var v10_10 = vgather(n128, in src32, i10_10);
-            Claim.eq(dvec.vcompact(i10_10, n128, z32i), v10_10);
+            Claim.eq(dvec.vcompact(i10_10, n128, Core.z32i), v10_10);
 
             var i16x2 = vgeneric.vparts(n256, 16, 32, 64, 128);
             var v16x2 = vgather(n128, in src32, i16x2);
-            Claim.eq(dvec.vcompact(i16x2, n128, z32i), v16x2);
+            Claim.eq(dvec.vcompact(i16x2, n128, Core.z32i), v16x2);
 
             var i20_5 = vgeneric.vparts(n256, 20, 25, 30, 35);
             var v20_5 = vgather(n128, in src32, i20_5);
-            Claim.eq(dvec.vcompact(i20_5, n128, z32i), v20_5);
+            Claim.eq(dvec.vcompact(i20_5, n128, Core.z32i), v20_5);
 
             var i40_3 = vgeneric.vparts(n256, 40, 43, 46, 49);
             var v40_3 = vgather(n128, in src32, i40_3);
-            Claim.eq(dvec.vcompact(i40_3, n128, z32i), v40_3);
+            Claim.eq(dvec.vcompact(i40_3, n128, Core.z32i), v40_3);
 
             var i4x128 = vgeneric.vpartsi(n256, 0, 128 - 1, 128*2 - 1, 128*4 - 1);
             var v4x128 = vgather(n128, in src32, v512idx);
-            Claim.eq(dvec.vcompact(i4x128, n128, z32i), v32i(v4x128));            
+            Claim.eq(dvec.vcompact(i4x128, n128, Core.z32i), v32i(v4x128));            
         }
 
         public void vgather_256()
@@ -127,7 +125,7 @@ namespace Z0
             const int BlockCount = CellCount / BlockLength;
 
             var w = n128;
-            var t = z32;
+            var t = Core.z32;
             var A = Blocks.alloc(w,BlockCount, t);                
             var B = Blocks.alloc(w,BlockCount, t);
 

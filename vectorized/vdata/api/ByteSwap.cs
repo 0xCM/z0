@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     
-    using static root;
+    using static Core;
     using static HexConst;
-    using static Nats;
  
     partial class Data
     {
@@ -32,7 +31,7 @@ namespace Z0
             else if(typeof(N) == typeof(N64))
                 return vload<byte>(w, ByteSwap128x64u);
             else
-                throw unsupported<N>();            
+                throw Unsupported.define<N>();            
         }
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace Z0
             else if(typeof(N) == typeof(N64))
                 return vload<byte>(w, ByteSwap256x64u);
             else
-                throw unsupported<N>();            
+                throw Unsupported.define<N>();            
         }
          
         /// <summary>

@@ -11,7 +11,6 @@ namespace Z0
     
     using static Core;    
     using static vgeneric;
-    using static Nats;
 
     /// <summary>
     /// Generic intrinsics over floating-point domains

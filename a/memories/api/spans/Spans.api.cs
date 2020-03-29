@@ -578,6 +578,22 @@ namespace Z0
         }
 
         /// <summary>
+        /// Inovkes an action for each element in a source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="f">The receiver</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static void iteri<T>(ReadOnlySpan<T> src, Action<int,T> f)
+        {
+            ref readonly var input = ref head(src);
+            int count = src.Length;
+
+            for(var i=0; i<count; i++)
+                f(i,skip(input,i));
+        }
+
+        /// <summary>
         /// Inovkes an action for each pair of elements in source spans of equal length
         /// </summary>
         /// <param name="src">The source span</param>
@@ -604,21 +620,6 @@ namespace Z0
         public static void iter<T>(Span<T> first, Span<T> second, Action<T,T> f)
             => iter(first.ReadOnly(), second.ReadOnly(),f);
 
-        /// <summary>
-        /// Inovkes an action for each element in a source span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="f">The receiver</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static void iteri<T>(ReadOnlySpan<T> src, Action<int,T> f)
-        {
-            ref readonly var input = ref head(src);
-            int count = src.Length;
-
-            for(var i=0; i<count; i++)
-                f(i,skip(input,i));
-        }
 
         /// <summary>
         /// Maps the elements of a source span to a target span

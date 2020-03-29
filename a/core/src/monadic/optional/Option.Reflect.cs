@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="field">The field</param>
         /// <param name="instance">The object instance, if applicable</param>
         public static Option<object> Value(this FieldInfo field, object instance = null)
-            => Option.Try(() => field.GetValue(instance));
+            => Try(() => field.GetValue(instance));
 
         /// <summary>
         /// Attempts to retrieve a name-identified field from a type
@@ -84,13 +84,13 @@ namespace Z0
         /// <param name="p">The property</param>
         /// <param name="instance">The object instance, if applicable</param>
         public static Option<object> TryGetValue(this PropertyInfo p, object instance = null)
-            => Option.Try(() => p.GetValue(instance));
+            => Try(() => p.GetValue(instance));
 
         public static Option<object> Read(this PropertyInfo p, object src)
-            => Option.Try(() => p.GetValue(src));
+            => Try(() => p.GetValue(src));
         
         public static Option<T> Read<T>(this PropertyInfo p, object src)
-            => Option.Try(() => (T)p.GetValue(src));
+            => Try(() => (T)p.GetValue(src));
 
         public static Option<object> Write(this PropertyInfo p, object src, object dst)
         {

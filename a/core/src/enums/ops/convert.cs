@@ -13,35 +13,35 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static E convert<E>(byte value, E @default = default)
-            => Option.Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
+            => Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
 
         [MethodImpl(Inline)]
         public static E convert<E>(sbyte value, E @default = default)
-            => Option.Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
+            => Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
 
         [MethodImpl(Inline)]
         public static E convert<E>(short value, E @default = default)
-            => Option.Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
+            => Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
 
         [MethodImpl(Inline)]
         public static E convert<E>(ushort value, E @default = default)
-            => Option.Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
+            => Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
 
         [MethodImpl(Inline)]
         public static E convert<E>(int value, E @default = default)
-            => Option.Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
+            => Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
 
         [MethodImpl(Inline)]
         public static E convert<E>(uint value, E @default = default)
-            => Option.Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
+            => Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
 
         [MethodImpl(Inline)]
         public static E convert<E>(long value, E @default = default)
-            => Option.Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
+            => Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
 
         [MethodImpl(Inline)]
         public static E convert<E>(ulong value, E @default = default)
-            => Option.Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
+            => Try(() => (E)Enum.ToObject(typeof(E), value)).ValueOrDefault(@default);
 
         /// <summary>
         /// Interprets an enum value as a signed byte

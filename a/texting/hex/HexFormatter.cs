@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
     
-    using static Textual;
+    using static Core;
 
     public static class HexFormatter 
     {
@@ -47,9 +47,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string FormatItem(T src, in HexFormatConfig hex)
-            => text.concat(
+            => concat(
                 hex.Specifier && hex.Specifier ? HexFormatConfig.PreSpecString : string.Empty, 
-                hex.ZPad ? BaseFormatter.Format(src, hex.FormatString).PadLeft(core.size<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatString),
+                hex.ZPad ? BaseFormatter.Format(src, hex.FormatString).PadLeft(size<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatString),
                 hex.Specifier && !hex.PreSpec ? HexFormatConfig.PostSpecString : string.Empty
                 );
 

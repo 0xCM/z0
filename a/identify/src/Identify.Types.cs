@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="w">The resource bit width</param>
         /// <param name="kind">The numeric kind of the resource</param>
         [MethodImpl(Inline)]
-        public static TypeIdentity Type(string basename, TypeWidth w, NumericKind kind)
+        public static TypeIdentity Resource(string basename, ITypeWidth w, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w}x{kind.Format()}");
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="w2">The second bit width</param>
         /// <param name="kind">The numeric kind of the resource</param>
         [MethodImpl(Inline)]
-        public static TypeIdentity Type(string basename, TypeWidth w1, TypeWidth w2, NumericKind kind)
+        public static TypeIdentity Resource(string basename, ITypeWidth w1, ITypeWidth w2, NumericKind kind)
             => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Format()}");
 
         /// <summary>

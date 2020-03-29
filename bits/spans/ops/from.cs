@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
     using static As;
+    using static CastNumeric;
 
     partial struct BitSpan
     {
@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static BitSpan from(ulong src)
         {
-            var buffer = Stacks.alloc(n512);
+            var buffer = Stacks.alloc(w512);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
 
             Span<uint> storage = new uint[64];

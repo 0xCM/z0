@@ -113,7 +113,6 @@ namespace Z0
                 _ => NK.None
             };
 
-
         /// <summary>
         /// Returns a kind-identified system type if possible; throws an exception otherwise
         /// </summary>

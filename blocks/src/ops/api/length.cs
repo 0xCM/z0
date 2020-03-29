@@ -93,7 +93,7 @@ namespace Z0
         public static int length<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => NatMath.div(w, N8.Rep)/Unsafe.SizeOf<T>(); 
+                => NatMath.div(w,default(N8))/Unsafe.SizeOf<T>(); 
 
         /// <summary>
         /// Returns the length of equal-length blocks; otherwise raises an error

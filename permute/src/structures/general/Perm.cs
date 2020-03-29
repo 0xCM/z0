@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;    
+    using static CastNumeric;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
@@ -272,7 +273,6 @@ namespace Z0
 
             return swaps.Slice(0,count);
         }
-
 
         /// <summary>
         /// Computes a permutation cycle originating at a specified point

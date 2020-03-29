@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static refs;
 
     public static class RngShuffle
     {

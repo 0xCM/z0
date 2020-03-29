@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static Core;
-    using static Nats;
     using static vgeneric;
     using static As;
 

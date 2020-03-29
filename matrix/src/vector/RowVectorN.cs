@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static Root;
+    using static Core;
 
     public struct RowVector<N,T>  
         where N : unmanaged, ITypeNat
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector(T[] src)
         {
-            core.require(src.Length >= Dim, $"{src.Length} < {Dim}");
+            require(src.Length >= Dim, $"{src.Length} < {Dim}");
             data = src;
         }
                     

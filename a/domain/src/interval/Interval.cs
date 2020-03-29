@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Memories;
+    using static Core;
     using static Literals;
 
     /// <summary>
@@ -273,7 +273,7 @@ namespace Z0
                 => new Interval<U>(Z0.As.generic<T,U>(in Left), Z0.As.generic<T,U>(in Right), Kind);
 
         public string Format()
-            => core.concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);
+            => concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);
 
         public override string ToString()
             => Format();        

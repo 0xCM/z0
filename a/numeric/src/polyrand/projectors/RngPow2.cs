@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Core;
     using static CastNumeric;
@@ -51,6 +49,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Pow2Exp<T>(this IPolyrand random, T t = default)
             where T : unmanaged
-                => random.Single(0, core.bitsize<T>());
+                => random.Single(0, bitsize<T>());
     }
 }

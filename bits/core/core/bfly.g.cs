@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static Nats;
     using static As;
 
     partial class gbits
@@ -28,7 +27,7 @@ namespace Z0
             else if(typeof(N) == typeof(N8))
                 return bfly(n8,a);
             else if(typeof(N) == typeof(N16))
-                return bfly(n16,a);
+                return bfly(Nats.n16,a);
             else
                 throw Unsupported.define<N>();
         }            

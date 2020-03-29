@@ -22,6 +22,16 @@ namespace Z0
         T[] data;
 
         /// <summary>
+        /// The square matrix dimension
+        /// </summary>
+        public static int Order => nati<N>();
+        
+        /// <summary>
+        /// The total number of allocated elements
+        /// </summary>
+        public static int CellCount => nati<N>() * nati<N>();
+
+        /// <summary>
         /// The number of rows in the structure
         /// </summary>
         static readonly int _RowCount = nati<N>();
@@ -34,32 +44,13 @@ namespace Z0
         /// <summary>
         /// The number of cells in each row
         /// </summary>
-        static readonly int _RowLenth = _ColCount;
+        static readonly int _RowLenth = nati<N>();
 
         /// <summary>
         /// The number of cells in each column
         /// </summary>
-        static readonly int _ColLength = _RowCount;
+        static readonly int _ColLength = nati<N>();
 
-        /// <summary>
-        /// The total number of allocated elements
-        /// </summary>
-        public static readonly int CellCount = _RowCount * _ColCount;
-
-        /// <summary>
-        /// The size, in bytes, of each cell
-        /// </summary>
-        public static readonly ByteSize CellSize = core.size<T>();
-
-        /// <summary>
-        /// The Row dimension representative
-        /// </summary>
-        public static N RowRep = default;
-
-        /// <summary>
-        /// The Column dimension representative
-        /// </summary>
-        public static N ColRep = default;
 
         [MethodImpl(Inline)]
         public static implicit operator Matrix<N,T>(Matrix<N,N,T> src)
@@ -88,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            core.require(src.Length >= CellCount);
+            require(src.Length >= CellCount);
             data = src;
         }
 

@@ -27,7 +27,7 @@ namespace Z0
             var succeeded = true;
             var casename = CaseName(f);
             var clock = counter();
-            var bounds = ((byte)0, (byte)(core.bitsize(t) - 1));
+            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
 
             clock.Start();
             try
@@ -71,7 +71,7 @@ namespace Z0
             var succeeded = true;
             var casename = CaseName(f);
             var clock = counter();
-            var bounds = ((byte)0, (byte)(core.bitsize(t) - 1));
+            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
 
             clock.Start();
             try
