@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Security;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
@@ -30,7 +29,7 @@ namespace Z0
         /// <summary>
         /// The originating memory location
         /// </summary>
-        public readonly MemoryRange AddressRange;
+        public readonly MemoryRange Location;
 
         /// <summary>
         /// The data, encoded
@@ -38,7 +37,7 @@ namespace Z0
         public readonly MemoryExtract Data;
         
         public MemoryAddress BaseAddress 
-            => AddressRange.Start;
+            => Location.Start;
 
         /// <summary>
         /// Defines a code block for an identified operation 
@@ -112,7 +111,7 @@ namespace Z0
         public AsmCode(OpIdentity id, MemoryExtract encoded)
         {
             this.Id = id;
-            this.AddressRange = encoded.AddressRange;
+            this.Location = encoded.AddressRange;
             this.Data = encoded;
         }
 

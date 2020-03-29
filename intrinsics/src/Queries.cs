@@ -9,10 +9,9 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-
     public static class Intrinsics
     {
-        public static IApiCatalog Catalog => Z0.Parts.Intrinsics.Resolution.ApiCatalog();
+        public static IApiCatalog Catalog => Z0.Parts.Intrinsics.Resolved.ApiCatalog();
                 
         public static IEnumerable<MethodInfo> Generic
             => from host in Catalog.GenericApiHosts

@@ -8,8 +8,6 @@ namespace Z0.Asm.Check
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static root;
-
     using C = OpClass;
 
     public interface IAsmExecWorkflow : IAsmService

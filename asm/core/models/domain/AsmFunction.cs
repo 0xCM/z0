@@ -77,7 +77,7 @@ namespace Z0.Asm
         public MemoryRange AddressRange
         {
             [MethodImpl(Inline)]
-            get => Code.AddressRange;    
+            get => Code.Location;    
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0.Asm
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Code.AddressRange.Start;
+            get => Code.Location.Start;
         }
 
         /// <summary>

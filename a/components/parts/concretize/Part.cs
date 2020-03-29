@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The resolved part
         /// </summary>
-        public static P Resolution 
+        public static P Resolved 
             => new P();
         
         public Assembly Owner {get;}

@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using static As;    
-
-    [ApiHost]
+    [ApiHost("from.numeric")]
     public static partial class FromNumeric
     {
 

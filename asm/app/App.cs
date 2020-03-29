@@ -6,7 +6,7 @@
 
 namespace Z0.Asm.Check
 { 
-    using R = Z0.Parts;
+    using P = Z0.Parts;
 
     using System.Reflection;
     using System.Linq;
@@ -16,28 +16,29 @@ namespace Z0.Asm.Check
 
         static IPart[] Dependencies
             => new IPart[]{
-                R.Analogs.Resolution, 
-                R.AsmCore.Resolution, 
-                R.BitCore.Resolution,
-                R.BitGrids.Resolution, 
-                R.BitSpan.Resolution, 
-                R.BitFields.Resolution,
-                R.BitVectors.Resolution, 
-                R.Components.Resolution,
-                R.VBits.Resolution, 
-                R.Permute.Resolution,
-                R.Blocks.Resolution, 
-                R.Fixed.Resolution, 
-                R.Math.Resolution,
-                R.GMath.Resolution, 
-                R.MathServices.Resolution, 
-                R.Intrinsics.Resolution,
-                R.VSvc.Resolution, 
-                R.LibM.Resolution, 
-                R.Logix.Resolution, 
-                R.Root.Resolution,
-                R.Vectorized.Resolution, 
-                R.VData.Resolution
+                P.Analogs.Resolved, 
+                P.AsmCore.Resolved, 
+                P.BitCore.Resolved,
+                P.BitGrids.Resolved, 
+                P.BitSpan.Resolved, 
+                P.BitFields.Resolved,
+                P.BitVectors.Resolved, 
+                P.Components.Resolved,
+                P.VBits.Resolved, 
+                P.Permute.Resolved,
+                P.Blocks.Resolved, 
+                P.Fixed.Resolved, 
+                P.Math.Resolved,
+                P.GMath.Resolved, 
+                P.MathServices.Resolved, 
+                P.Memories.Resolved, 
+                P.Intrinsics.Resolved,
+                P.VSvc.Resolved, 
+                P.LibM.Resolved, 
+                P.Logix.Resolved, 
+                P.Root.Resolved,
+                P.Vectorized.Resolved, 
+                P.VData.Resolved
                 };
 
         static IAppSettings LoadSettings()

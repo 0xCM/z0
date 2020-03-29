@@ -16,13 +16,13 @@ namespace Z0.Asm
         
         public static IPart[] DefaultResolutions 
             => new IPart[]{
-                R.Analogs.Resolution, R.AsmCore.Resolution, R.BitCore.Resolution,
-                R.BitGrids.Resolution, R.BitSpan.Resolution, R.BitFields.Resolution,
-                R.BitVectors.Resolution, R.VBits.Resolution, R.Permute.Resolution,
-                R.Blocks.Resolution, R.Math.Resolution,
-                R.GMath.Resolution, R.MathServices.Resolution, R.Intrinsics.Resolution,
-                R.VSvc.Resolution, R.LibM.Resolution, R.Logix.Resolution, 
-                R.Root.Resolution,R.Vectorized.Resolution}
+                R.Analogs.Resolved, R.AsmCore.Resolved, R.BitCore.Resolved,
+                R.BitGrids.Resolved, R.BitSpan.Resolved, R.BitFields.Resolved,
+                R.BitVectors.Resolved, R.VBits.Resolved, R.Permute.Resolved,
+                R.Blocks.Resolved, R.Math.Resolved,
+                R.GMath.Resolved, R.MathServices.Resolved, R.Intrinsics.Resolved,
+                R.VSvc.Resolved, R.LibM.Resolved, R.Logix.Resolved, 
+                R.Root.Resolved,R.Vectorized.Resolved}
                 ;        
         public t_asm()
         {

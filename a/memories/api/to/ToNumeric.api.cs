@@ -13,7 +13,7 @@ namespace Z0
 
     using TC = System.TypeCode;
 
-    [ApiHost]
+    [ApiHost("to.numeric")]
     public static partial class ToNumeric
     {
         [MethodImpl(Inline)]

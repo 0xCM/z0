@@ -50,7 +50,7 @@ namespace Z0.Asm
         }
 
         public readonly MemoryRange AddressRange    
-            => Code.AddressRange;        
+            => Code.Location;        
     }
 
     public readonly struct CapturedOps : IFiniteSeq<CapturedOp>

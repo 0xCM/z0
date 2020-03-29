@@ -141,10 +141,8 @@ namespace Z0.Asm
         string FormatHeaderCode(AsmCode code)
         {
             var dataline = Comment(code.Id);
-            if(Config.EmitFunctionOrigin)
-                dataline += code.AddressRange.Format();
 
-            dataline += text.bracket(code.AddressRange.Length);
+            dataline += text.bracket(code.Location.Length);
 
             if(Config.EmitFunctionHeaderEncoding)
             {
@@ -169,6 +167,9 @@ namespace Z0.Asm
                 lines.Add(FormatEncodingProp(src.Code));
 
             lines.Add(FormatHeaderCode(src.Code));
+
+            if(Config.EmitLocation)
+                lines.Add(Comment(text.concat(nameof(src.Code.Location), text.spaced(Chars.Eq), src.Code.Location.Format())));
                 
             if(Config.EmitCaptureTermCode)
             {

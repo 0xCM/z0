@@ -24,8 +24,8 @@ namespace Z0.Asm
         public HexFormatConfig FunctionHeaderEncodingFormat {get;set;}
             = HexFormatConfig.Define();
 
-        public bool EmitFunctionOrigin {get;set;}
-            = false;
+        public bool EmitLocation {get;set;}
+            = true;
 
         public bool EmitFunctionHeader {get; set;}
             = true;
@@ -65,13 +65,13 @@ namespace Z0.Asm
 
         public AsmFormatConfig WithoutFunctionOrigin()
         {
-            EmitFunctionOrigin = false;
+            EmitLocation = false;
             return this;
         }
 
         public AsmFormatConfig WithFunctionOrigin()
         {
-            EmitFunctionOrigin = true;
+            EmitLocation = true;
             return this;
         }
 
