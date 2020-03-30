@@ -21,7 +21,7 @@ namespace Z0
         /// B) System-defined reference types that cover the type, including ref/out parameters and such
         /// C) THe sytem-defined pseudo-refinement mechanism known as an Enum
         /// </remarks>
-        public static bool IsNumeric(this Type t)
+        public static bool IsPrimalNumeric(this Type t)
             => t.IsFloatingPoint() || t.IsIntegral();
 
         /// <summary>

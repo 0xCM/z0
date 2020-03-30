@@ -65,8 +65,6 @@ namespace Z0
         /// Specifies the (fixed) number of bits required to represent the numeric value
         /// </summary>
         int BitSize {get;}
-
-
     }
 
     /// <summary>

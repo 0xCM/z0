@@ -32,6 +32,18 @@ namespace Z0
     }
 
     /// <summary>
+    /// Characterizes a sign adjudication operation
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
+    public interface ISignableOps<T>
+    {
+        /// <summary>
+        /// Determines the sign of the supplied value
+        /// </summary>
+        Sign Sign(T x);
+    }
+
+    /// <summary>
     /// Characterizes operations over a signed interal type
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>

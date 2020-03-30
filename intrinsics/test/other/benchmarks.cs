@@ -188,7 +188,7 @@ namespace Z0
             where T : unmanaged
         {
             var last = vzero(w,t);
-            var blocklen = TypeMath.div(w,t);
+            var blocklen = (int)NatCalc.divT(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
             var ops = 0;
@@ -212,7 +212,7 @@ namespace Z0
             where T : unmanaged
         {
             var last = vzero(w,t);
-            var blocklen = TypeMath.div(w,t);
+            var blocklen = (int)NatCalc.divT(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
             var ops = 0;
@@ -236,7 +236,7 @@ namespace Z0
             where T : unmanaged
         {
             var last = vzero(w,t);
-            var blocklen = TypeMath.div(w,t);
+            var blocklen = (int)NatCalc.divT(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
             var ops = 0;
@@ -260,7 +260,7 @@ namespace Z0
             where T : unmanaged
         {
             var last = vzero(w,t);
-            var blocklen = TypeMath.div(w,t);
+            var blocklen = (int)NatCalc.divT(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
             var ops = 0;

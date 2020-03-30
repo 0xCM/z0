@@ -12,10 +12,7 @@ namespace Z0
     public readonly struct N257 : INatSeq<N257,N2,N5,N7>
     {
         public const ulong Value = 257;
-
-        public static N257 Rep => default;
         
-
         [MethodImpl(Inline)]
         public static implicit operator int(N257 src) => 257;
 

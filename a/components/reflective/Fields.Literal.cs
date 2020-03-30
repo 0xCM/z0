@@ -8,12 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
-    using static ReflectionFlags;
     
     partial class XTend
     {
-
         /// <summary>
         /// Selects the literal fields from a stream
         /// </summary>

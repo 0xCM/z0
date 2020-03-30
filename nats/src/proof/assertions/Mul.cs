@@ -5,6 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+
+    using static Components;
 
     partial class NatClaim
     {
@@ -20,7 +25,7 @@ namespace Z0
             where K2 : unmanaged, ITypeNat
         {
             eq<Product<K1,K2>>(expected);
-            return Nat.product<K1,K2>();
+            return product<K1,K2>();
         } 
 
         /// <summary>
@@ -37,8 +42,18 @@ namespace Z0
             where K2 : unmanaged, ITypeNat
         {
             eq<Product<K1,K2>>(expected);
-            return Nat.product<K1,K2>();
+            return product<K1,K2>();
         } 
-    }
 
+        /// <summary>
+        /// Constructs a natural representative that encodes the product of two naturals
+        /// </summary>
+        /// <typeparam name="K1">The first operand type</typeparam>
+        /// <typeparam name="K2">The second operand type</typeparam>
+        [MethodImpl(Inline)]   
+        static Product<K1,K2> product<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat        
+            where K2 : unmanaged, ITypeNat
+                => Product<K1,K2>.Rep;
+    }
 }

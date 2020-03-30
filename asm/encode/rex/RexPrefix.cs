@@ -79,6 +79,5 @@ namespace Z0.Asm
 
         INumericFormatter<byte> INumericFormatProvider<byte>.Formatter
             => NumericFormatters.get<byte>();        
-
     }
 }

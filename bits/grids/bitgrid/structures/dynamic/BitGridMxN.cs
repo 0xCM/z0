@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Defines a maximally packed data structure of natural dimensions over a primal type
@@ -62,12 +61,12 @@ namespace Z0
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public int RowCount => natval<M>();
+        public int RowCount => val8u<M>();
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public int ColCount => natval<N>();
+        public int ColCount => val8u<N>();
 
         /// <summary>
         /// The number of allocated 256-bit blocks 

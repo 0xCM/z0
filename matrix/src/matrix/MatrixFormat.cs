@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
-
-    using static nfunc;
-    using static Root;
+    
+    using static Core;
 
     public static class MatrixFormat
     {
@@ -33,7 +32,6 @@ namespace Z0
                 return 22;            
         }
 
-
         [MethodImpl(Inline)]
         public static int ColFormatWidth<M,N,T>(this Matrix256<M,N,T> src)
             where M: unmanaged, ITypeNat
@@ -55,8 +53,8 @@ namespace Z0
         {
             var width = cellwidth ?? src.ColFormatWidth();
             var sep = cellsep ?? '|';
-            var rows = natval<M>();
-            var cols = natval<N>();
+            var rows = (int)value<M>();
+            var cols = (int)value<N>();
             var sb = new StringBuilder();                        
             for(var row = 0; row < rows; row++)
             {
@@ -84,8 +82,8 @@ namespace Z0
         {
             var width = cellwidth ?? src.ColFormatWidth();
             var sep = cellsep ?? '|';
-            var rows = natval<M>();
-            var cols = natval<N>();
+            var rows = (int)value<M>();
+            var cols = (int)value<N>();
             var sb = new StringBuilder();                        
             for(var row = 0; row < rows; row++)
             {

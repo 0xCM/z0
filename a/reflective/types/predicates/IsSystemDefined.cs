@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static bool IsSystemDefined(this Type src)
-            => src.IsNumeric() || src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString() || src.IsObject(); 
+            => src.IsPrimalNumeric() || src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString() || src.IsObject(); 
 
         /// <summary>
         /// Determines whether a supplied type is predicated on a bool, including nullable wrappers and references

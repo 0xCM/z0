@@ -11,23 +11,10 @@ namespace Z0
     using System.Reflection;
 
     using GS = GenericStateKind;
+    using static Components;
 
     public static partial class ReflectedClass
     {
-        /// <summary>
-        /// Determines whether a type is a span
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static bool IsSpan(this Type t)
-            => SpanTypes.test(t);
-
-        /// <summary>
-        /// Classifies a type according to whether it is a span and, if so, what sort of span
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static SpanKind SpanKind(this Type t)
-            => SpanTypes.kind(t);
-
         /// <summary>
         /// Determines whether a method is a vectorized operator which, by definition, is an operator 
         /// (which, by definition, is an homogenous function) with a vectorized operand which, by definition, 

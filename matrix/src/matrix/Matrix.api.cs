@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static nfunc;
-    using static Nats;
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Defines the matrix api surface
@@ -58,7 +56,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Matrix<N, T>(
-                    Arrays.alloc((int)(natval<N>()* natval<N>()), fill));
+                    Arrays.alloc((int)(value<N>()* value<N>()), fill));
 
         /// <summary>
         /// Allocates a blocked square matrix of natual dimension
@@ -71,7 +69,7 @@ namespace Z0
         public static Matrix256<N,T> blockalloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.rectangle<T>(n256, natval(n), natval(n)); 
+                => Blocks.rectangle<T>(n256, (int)value(n), (int)value(n)); 
 
         /// <summary>
         /// Allocates a blocked matrix of natual dimensions
@@ -87,7 +85,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.rectangle<T>(n256, natval(m), natval(n)); 
+                => Blocks.rectangle<T>(n256, (int)value(m), (int)value(n)); 
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -103,7 +101,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new Matrix<M, N, T>(array<T>(nati<M>()* nati<N>(),fill));
+                => new Matrix<M, N, T>(array<T>((int)(value<M>() * value<N>()),fill));
          
         /// <summary>
         /// Loads a matrix of natural dimensions from an array
@@ -238,8 +236,8 @@ namespace Z0
             var options = fmt ?? TextFormat.Default;
             var width = fmt?.ColWidth ?? src.ColFormatWidth();
             var sep = options.Delimiter;
-            var rows = nati<M>();
-            var cols = nati<N>();
+            var rows = (int)value<M>();
+            var cols = (int)value<N>();
             dst.WriteLine($"{options.CommentPrefix} {typeof(T).Name}[{rows}x{cols}]");
             if(options.HasHeader)
             {
@@ -274,8 +272,8 @@ namespace Z0
             where T : unmanaged    
         {
             var doc = src.ReadTextDoc().Require();
-            var m = nati<M>();
-            var n = nati<N>();
+            var m = (int)value<M>();
+            var n = (int)value<N>();
 
             if(m != doc.DataLineCount)
                 return default;
@@ -283,7 +281,7 @@ namespace Z0
             if(n != doc.Rows[0].Cells.Length)
                 return default;
 
-            var dst =  Matrix.blockload<M,N,T>(Blocks.rectangle<T>(n256,natval<M>(),natval<N>()));
+            var dst =  Matrix.blockload<M,N,T>(Blocks.rectangle<T>(n256,(int)value<M>(),(int)value<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];
@@ -324,8 +322,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var m = natval<M>();
-            var n = natval<N>();
+            var m = (int)value<M>();
+            var n = (int)value<N>();
             var tB = B.Transpose();
 
             for(var i=0; i< m; i++)

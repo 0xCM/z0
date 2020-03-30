@@ -19,14 +19,10 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static implicit operator int(N127 src) => 127;
-        
-        
-        
+                    
         public ulong NatValue => Value;
                 
         public override string ToString() 
             => Value.ToString();
     }
-
-
 }

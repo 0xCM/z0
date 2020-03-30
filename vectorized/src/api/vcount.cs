@@ -22,7 +22,7 @@ namespace Z0
         public static int vcount<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => TypeMath.div(w,t);
+                => (int)NatCalc.divT(w,t);
 
         /// <summary>
         /// Computes the vector component count for a given bit-width and component type

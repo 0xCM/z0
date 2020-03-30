@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="member">The property</param>
         /// <param name="instance">The object instance, if applicable</param>
         public static Option<V> value<V>(PropertyInfo member, object instance = null)
-            => from o in member.TryGetValue(instance)
+            => from o in member.Read(instance)
                 from v in Option.TryCast<V>(o)
                 select v;
 

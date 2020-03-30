@@ -23,4 +23,10 @@ namespace Z0
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 
+    public static partial class XTend
+    {
+
+        
+    }
+
 }

@@ -13,16 +13,35 @@ namespace Z0
         /// Classifies a type according to whether it is a span, a readonly span, or otherwise
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static SpanKind kind(Type t)
-            =>  t.GenericDefinition2() == typeof(Span<>) ? Z0.SpanKind.Mutable
-              : t.GenericDefinition2() == typeof(ReadOnlySpan<>) ? Z0.SpanKind.Immutable
+        public static SpanKind Kind(Type t)
+            =>  t.GenericDefinition2() == typeof(Span<>) ? SpanKind.Mutable
+              : t.GenericDefinition2() == typeof(ReadOnlySpan<>) ? SpanKind.Immutable
+              : t.Tagged<CustomSpanAttribute>() ? SpanKind.Custom
               : 0;
 
         /// <summary>
-        /// Determines whether a type is parametric over the natural numbers
+        /// Determines whether a type is a span
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static bool test(Type t)
-            => kind(t) != 0;    
+        public static bool IsSpan(Type t)
+            => Kind(t) != 0;    
+        
+        public static bool IsSystemSpan(SpanKind kind)
+            => kind == Z0.SpanKind.Mutable || kind == Z0.SpanKind.Immutable;
+
+        /// <summary>
+        /// Tests whether a type defines a system-defined span
+        /// </summary>
+        /// <param name="t">The type to test</param>
+        public static bool IsSystemSpan(Type t)
+             => IsSystemSpan(Kind(t));
+
+        /// <summary>
+        /// Tests whether a type defines a system-defined span
+        /// </summary>
+        /// <param name="t">The type to test</param>
+        public static bool IsCustomSpan(Type t)
+             => Kind(t) == SpanKind.Custom;
+
     }
 }

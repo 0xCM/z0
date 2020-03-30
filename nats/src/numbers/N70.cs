@@ -20,8 +20,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(N70 src) => 70;
 
-        
-
         public ulong NatValue => Value;
 
         public override string ToString() 

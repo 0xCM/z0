@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
+    using static CastNumeric;
 
     partial class BitMask
     {           
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong hi<N>(N n = default)
             where N : unmanaged, ITypeNat
-                => hi<ulong>((int)NatMath2.natval(n));
+                => hi<ulong>((int)TypeNats.value(n));
 
         /// <summary>
         /// Produces a sequence of n enabled hi bits

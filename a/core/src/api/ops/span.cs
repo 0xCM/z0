@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Runtime.InteropServices;
 
     using static Components;
 
@@ -23,7 +19,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> span<T>(params T[] src)
             => src;
-
-
     }
 }

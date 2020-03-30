@@ -6,11 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
-
-    using static Components;
 
     partial class Core
     {
@@ -25,5 +20,13 @@ namespace Z0
             if(!invariant)
                 throw new Exception($"Application invaraiant failed: {msg}");
         }
+
+        public static void require<N>(ulong src)
+            where N : unmanaged, ITypeNat
+                => require(value<N>() == src, $"The source value {src} does not match the required natural value {value<N>()}");        
+
+        public static void require<N>(int src)
+            where N : unmanaged, ITypeNat
+                => require<N>((ulong)src);
     }
 }

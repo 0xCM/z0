@@ -76,7 +76,7 @@ namespace Z0
                     return seg;                
             }
 
-            return Option.none<SegmentedIdentity>();                
+            return none<SegmentedIdentity>();                
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
                 return VectorType.width(t);
             else if(t.IsBlocked())
                 return BK.width(t);
-            if(NumericTypeOps.IsNumeric(t))
+            if(NumericTypes.test(t))
                 return t.NumericWidth();
             else if(t == typeof(bit))
                 return TypeWidth.W1;

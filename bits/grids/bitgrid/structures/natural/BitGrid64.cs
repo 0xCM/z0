@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = W := 64
@@ -52,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<T>(BitGrid64<M,N,T> src)
-            => new BitGrid64<T>(src.data, natval<M>(), natval<N>());
+            => new BitGrid64<T>(src.data, val8u<M>(), val8u<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<M,N,T>(BitGrid64<T> src)
@@ -104,18 +103,18 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => NatMath.mul<M,N>();
+            get => (int)NatCalc.mul<M,N>();
         }
 
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public int RowCount => natval<M>();         
+        public int RowCount => val8u<M>();         
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public int ColCount => natval<N>();  
+        public int ColCount => val8u<N>();  
 
         /// <summary>
         /// Reads/writes an index-identified cell

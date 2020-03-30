@@ -13,8 +13,6 @@ namespace Z0
     {
         public const ulong Value = (1ul << 8) - 1;
 
-        public static N255 Rep => default;
-
         public static NatSeq<N2,N5,N5> Seq => default;
 
         [MethodImpl(Inline)]
@@ -24,10 +22,7 @@ namespace Z0
 
         public ulong NatValue => Value;
 
-
         public override string ToString() 
-            => Value.ToString();
-        
+            => Value.ToString();        
     }
-
 }

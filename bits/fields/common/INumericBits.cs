@@ -15,9 +15,11 @@ namespace Z0
 
     }
 
-    public interface INumericBits<T> : IBitField, IFixedNumeric<T>
+    public interface INumericBits<T> : IBitField
         where T : unmanaged
     {
+        T Data {get;set;}
+
         int IBitField.TotalWidth
         {
             [MethodImpl(Inline)]

@@ -28,8 +28,8 @@ namespace Z0
                 return Identify.EnumType(arg).ToOption();
             else if(IsSegmented(arg))
                 return SegmentedId(arg);
-            else if(SpanTypes.test(arg))
-                return SpanId(arg);
+            else if(SpanTypes.IsSystemSpan(arg))
+                return SystemSpanId(arg);
             else if(NatSpan.test(arg))
                 return NatSpanId(arg);  
             else           
@@ -102,10 +102,10 @@ namespace Z0
                 let id = concat(IDI.Nat, v.ToString())
                 select TypeIdentity.Define(id);
         
-        static Option<TypeIdentity> SpanId(Type arg)
+        static Option<TypeIdentity> SystemSpanId(Type arg)
         {
-            var kind = SpanTypes.kind(arg);
-            if(kind != 0)
+            var kind = SpanTypes.Kind(arg);
+            if(kind != 0 && kind != SpanKind.Custom)
             {
                 var cellid = DoDivination(arg.GetGenericArguments().Single());
                 return TypeIdentity.Define(text.concat(kind.Format(), cellid));

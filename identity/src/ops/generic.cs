@@ -46,8 +46,8 @@ namespace Z0
                         last = text.concat(IDI.Vector, width(argtype).Format());
                     else if(argtype.IsBlocked())
                         last = text.concat(IDI.Block, width(argtype).Format());
-                    else if(argtype.IsSpan())
-                        last = argtype.SpanKind().Format();
+                    else if(SpanTypes.IsSystemSpan(argtype))
+                        last = SpanTypes.Kind(argtype).Format();
                 }
                 
                 id += last;

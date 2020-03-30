@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
-    using static Nats;
+    using static Core;    
+    using static Literals;
+    using static CastNumeric;
 
     /// <summary>
     /// Defines a natural bitvector over a primal cell
@@ -38,7 +39,7 @@ namespace Z0
         public static T MaxValue 
         {
             [MethodImpl(Inline)]
-            get => convert<ulong,T>(NatMath.pow2m1<N>());
+            get => convert<ulong,T>(NatCalc.pow2m1<N>());
         }
 
         public static T Zero => default;
@@ -266,7 +267,7 @@ namespace Z0
         public int Width
         {
             [MethodImpl(Inline)]
-            get => natval<N>();
+            get => (int)value<N>();
         }
 
         /// <summary>

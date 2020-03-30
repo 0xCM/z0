@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Defines a 64-bit grid

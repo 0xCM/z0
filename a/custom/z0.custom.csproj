@@ -6,13 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Collective)" />    
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />
+    <ProjectReference Include="$(Errors)" />
+    <ProjectReference Include="$(Numeric)" />
   </ItemGroup>
 
 </Project>

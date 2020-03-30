@@ -10,15 +10,8 @@ namespace Z0
 
     using static Kinds;
 
-    public static class NumericTypeOps
+    partial class XKind
     {
-        /// <summary>
-        /// Returns true if the source type represents a primal numeric type
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [MethodImpl(Inline)]
-        public static bool IsNumeric(this Type src)
-            => NumericTypes.test(src);
 
         [MethodImpl(Inline)]
         public static NumericKind ToNumericKind(this FixedWidth width, NumericIndicator indicator) 

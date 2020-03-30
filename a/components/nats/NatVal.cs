@@ -5,8 +5,6 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.ComponentModel;
     using System.Runtime.CompilerServices;
  
     using static Components;
@@ -57,6 +55,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ulong(NatVal src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator NatVal(ulong src)
+            => From(src);
 
         [MethodImpl(Inline)]
         NatVal(ulong src)

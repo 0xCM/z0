@@ -11,7 +11,6 @@ namespace Z0
 
     using NK = NumericKind;
 
-
     /// <summary>
     /// Represents the parametrically-identified numeric kind
     /// </summary>

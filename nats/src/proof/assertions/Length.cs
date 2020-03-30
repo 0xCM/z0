@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-    using static Components;    
+    using static Core;    
 
     partial class NatClaim
     {
@@ -27,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static IReadOnlyList<T> length<K,T>(IReadOnlyList<T> src)
             where K : unmanaged, ITypeNat
-                => natu<K>() == (ulong)src.Count 
+                => value<K>() == (ulong)src.Count 
                 ? src : failure<K,IReadOnlyList<T>>(nameof(length), src);
 
         /// <summary>
@@ -67,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static T[] length<K,T>(params T[] src)
             where K : unmanaged, ITypeNat
-                => natu<K>() == (ulong)src.Length ? src : failure<K,T[]>(nameof(length), src); 
+                => value<K>() == (ulong)src.Length ? src : failure<K,T[]>(nameof(length), src); 
     }
 
 }

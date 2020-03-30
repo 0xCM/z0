@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
 
     public static class ExprX
     {        
@@ -279,7 +279,7 @@ namespace Z0.Logix
         public static LiteralLogicSeqExpr<N> ToLogicSeq<N>(this BitString src, N n = default)
             where N : unmanaged, ITypeNat
         {
-            Nat.require<N>(src.Length);
+            require<N>(src.Length);
             return new LiteralLogicSeqExpr<N>(src.ToLogicSeq().Terms);
         }
 

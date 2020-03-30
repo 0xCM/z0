@@ -59,7 +59,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var bg = BitGrid.alloc(m,n,zero);
-                var bs = Random.BitString((int)NatMath.mul(m,n));
+                var bs = Random.BitString((int)NatCalc.mul(m,n));
 
                 for(var i=0; i<bs.Length; i++)
                     bg.SetBit(i, bs[i]);

@@ -5,6 +5,8 @@
     <Apps>$(Feeders)apps/z0.apps.csproj</Apps>
     <Components>$(Feeders)components/z0.components.csproj</Components>
     <Canonical>$(Feeders)canonical/z0.canonical.csproj</Canonical>
+    <Cast>$(Feeders)cast/z0.cast.csproj</Cast>
+
     <Collective>$(Feeders)collective/z0.collective.csproj</Collective>
     <Core>$(Feeders)core/z0.core.csproj</Core>
     <Custom>$(Feeders)custom/z0.custom.csproj</Custom>

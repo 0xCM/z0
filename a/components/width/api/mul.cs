@@ -13,7 +13,7 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static uint mul<A,B>(A a = default, B b = default)
-            where A : unmanaged,ITypeWidth
+            where A : unmanaged, ITypeWidth
             where B : unmanaged, ITypeWidth
         {
             if(typeof(A) == typeof(W1))

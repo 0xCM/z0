@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-    using static Components;
+    using static Core;
 
     /// <summary>
     /// Captures evidence that n1 == n2
@@ -27,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatEq(K1 k1, K2 k2)
         {
-            demand(NatMath.eq(k1,k2));
+            require(NatCalc.eq(k1,k2));
         }
         
         public override string ToString()
@@ -53,11 +52,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatNEq(K1 n1, K2 n2)
         {
-            demand(n1.NatValue != n2.NatValue);
+            require(n1.NatValue != n2.NatValue);
         }
                 
         public override string ToString()
             => Description;
     }
-
 }

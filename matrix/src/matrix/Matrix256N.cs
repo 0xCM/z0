@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    
-    using static nfunc;
+
     using static Core;
 
     /// <summary>
@@ -27,12 +25,12 @@ namespace Z0
         /// <summary>
         /// The square matrix dimension
         /// </summary>
-        public static int Order => natval<N>();
+        public static int Order => (int)value<N>();
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static int CellCount => NatMath.square<N>();
+        public static int CellCount => (int)NatCalc.square<N>();
 
         [MethodImpl(Inline)]
         public static implicit operator Matrix256<N,T>(Block256<T> src)

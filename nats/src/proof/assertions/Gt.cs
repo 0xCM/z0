@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-    using static Components;    
+    using static Core;    
 
     partial class NatClaim
     {
@@ -22,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static bool gt<K>(K k, ulong a)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() > a ? true : failure<K>("gt", a);
+                =>  value<K>() > a ? true : failure<K>("gt", a);
 
         /// <summary>
         /// Attempts to prove k >= a
@@ -34,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static bool gteq<K>(K k, ulong a)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() >= a ? true : failure<K>("gteq", a);
+                =>  value<K>() >= a ? true : failure<K>("gteq", a);
 
         /// <summary>
         /// Attempts to prove k1 > k2

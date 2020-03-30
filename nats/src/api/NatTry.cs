@@ -35,19 +35,6 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 + k2 = expected 
-        /// Signals success by returning evidence
-        /// Signals failure by raising an error
-        /// </summary>
-        /// <typeparam name="K1">The first type</typeparam>
-        /// <typeparam name="K2">The second type</typeparam>
-        public static Option<NatSum<K1,K2>> TryAdd<K1,K2>(uint expected)
-            where K1 : unmanaged, ITypeNat
-            where K2 : unmanaged, ITypeNat
-                => Try(() => add<K1,K2>(expected));
-
-        /// <summary>
         /// Attempts to prove that k1:K1 & k2:K2 =>  k1 + k2 = expected 
         /// Signals success by returning evidence
         /// Signals failure by raising an error
@@ -56,7 +43,7 @@ namespace Z0
         /// <param name="k2">The second operand value</param>
         /// <typeparam name="K1">The first type</typeparam>
         /// <typeparam name="K2">The second type</typeparam>
-        public static Option<NatSum<K1,K2>> TryAdd<K1,K2>(K1 k1, K2 k2, uint expected)
+        public static Option<NatSum<K1,K2>> TryAdd<K1,K2>(K1 k1, K2 k2, ulong expected)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => Try(() => sum(k1,k2,expected));

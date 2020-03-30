@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-    using static Components;
+    using static Core;
 
     partial class NatClaim
     {
@@ -23,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static bool lt<K>(K k, ulong a)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() < a ? true : failure<K>("lt", a);
+                =>  value<K>() < a ? true : failure<K>("lt", a);
 
         /// <summary>
         /// Attempts to prove k <= a
@@ -36,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static bool lteq<K>(K k, ulong t)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() <= t ? true : failure<K>("lteq", t);
+                =>  value<K>() <= t ? true : failure<K>("lteq", t);
 
         /// <summary>
         /// Attempts to construct evidence that k1 < k2
@@ -48,6 +47,5 @@ namespace Z0
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
                 => new NatLt<K1,K2>(k1,k2);
-
     }
 }

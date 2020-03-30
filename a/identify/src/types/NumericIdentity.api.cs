@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static PrimalIdentity Primal(Type t)
             => t.IsSystemDefined() ? 
-               (NumericTypeOps.IsNumeric(t)
+               (NumericTypes.test(t)
                ? PrimalIdentity.Define(t.NumericKind(), t.SystemKeyword())
                : PrimalIdentity.Define(t.SystemKeyword())
                )

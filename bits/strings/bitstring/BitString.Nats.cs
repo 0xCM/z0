@@ -23,13 +23,13 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var bitcount = NatMath.mul(m,n);
+            var bitcount = (int)NatCalc.mul(m,n);
             if(src.Length < bitcount)
                 return BitString.Empty;
 
             var dst = BitString.alloc(bitcount);
 
-            var cols = (int)NatMath2.natval(n);
+            var cols = (int)TypeNats.value(n);
             var k = 0;
 
             for(var col = 0; col < cols; col++)

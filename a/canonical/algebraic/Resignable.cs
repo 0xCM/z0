@@ -15,14 +15,13 @@ namespace Z0
         /// Aligns the value with a specified sign
         /// </summary>
         T Resign(T x, Sign s);
-
     }
 
     /// <summary>
     /// Characterizes a structure whose sign can be reversed
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface IResignable<S> : ISignable<S>, INegatable<S>
+    public interface IResignable<S> : ISigned<S>, INegatable<S>
         where S : IResignable<S>, new()
     {
         /// <summary>

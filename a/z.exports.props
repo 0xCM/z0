@@ -23,6 +23,7 @@
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Messages)" />
+    <ProjectReference Include="$(Cast)" />
   </ItemGroup>
 
 </Project>

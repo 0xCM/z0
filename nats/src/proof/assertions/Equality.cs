@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-    using static Components;    
+    using static Core;    
 
     partial class NatClaim
     {
@@ -22,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static ulong eq<K>(ulong expected)
             where K : unmanaged, ITypeNat
-                => natu<K>() == expected  ? expected : failure<K,ulong>("eq", expected);
+                => value<K>() == expected  ? expected : failure<K,ulong>("eq", expected);
 
         /// <summary>
         /// Retrieves the value of the natural number associated with a typenat
@@ -47,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static uint eq<K>(int expected)
             where K : unmanaged, ITypeNat
-                => natu<K>() == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
+                => value<K>() == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
 
         /// <summary>
         /// Attempts to prove that k:K => k == expected
@@ -60,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static uint eq<K>(K k, int expected)
             where K : unmanaged, ITypeNat
-                => nati<K>() == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
+                => value<K>() == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
 
         /// <summary>
         /// Prooves that a test value is equal to the value of a natural representative
@@ -71,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static bool eq<K>(uint test, bool raise = true)
             where K : unmanaged, ITypeNat 
-                => natu<K>() == test ? true : failure<K>("eq", test, raise);
+                => value<K>() == test ? true : failure<K>("eq", test, raise);
 
         /// <summary>
         /// Attemts to construct evidence that k1 == k2
@@ -94,6 +93,5 @@ namespace Z0
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
                 => new NatNEq<K1,K2>(k1,k2);
-
     }
 }

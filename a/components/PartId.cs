@@ -235,7 +235,9 @@ public enum PartId : ulong
     Rng = 838,
 
     Messages = 840,
-    
+
+    Cast = 842,
+
     Z = 1024,
 
     Svc = ushort.MaxValue + 1,

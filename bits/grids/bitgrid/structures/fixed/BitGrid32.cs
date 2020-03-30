@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Defines a 32-bit grid
@@ -56,7 +56,7 @@ namespace Z0
             this.rows = (byte)rows;
             this.cols = (byte)cols;
         }
-        
+
         public uint Data
         {
             [MethodImpl(Inline)]

@@ -15,6 +15,11 @@ namespace Z0
     /// </summary>
     public static class Nats
     {
+        [MethodImpl(Inline)]   
+        public static Next<K> next<K>(K k = default)
+            where K : unmanaged, ITypeNat
+                => default;
+
         /// <summary>
         /// Returns the value represented by a natural type
         /// </summary>
@@ -159,8 +164,6 @@ namespace Z0
         public static N256 n256 => default;
 
         public static N512 n512 => default;
-
-        public static N70 n70 => default;
 
         public static N87 n87 => default;
 

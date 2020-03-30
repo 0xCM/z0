@@ -27,12 +27,6 @@ namespace Z0
 
     }
 
-    public interface ISemigroup<S>
-        where S : ISemigroup<S>, new()
-    {
-
-    }
-
     public interface ISemigroupM<S>: ISemigroup<S>, IMultiplicative<S>
         where S : ISemigroupM<S>, new()
     {
@@ -45,11 +39,6 @@ namespace Z0
 
     }            
 
-    public interface ISemigroup<S,T> : ISemigroup<S>
-        where S : ISemigroup<S,T>, new()
-    {
-        
-    }            
 
     public interface ISemigroupA<S,T> : ISemigroup<S,T>, ISemigroupA<S>,  IAdditive<S>
         where S : ISemigroupA<S,T>, new()

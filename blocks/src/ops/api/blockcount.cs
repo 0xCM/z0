@@ -9,49 +9,81 @@ namespace Z0
         
     partial class Blocks
     {
+
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W8 w, int cellcount)
+        public static int blockcount<T>(W16 w, int cells)
             where T : unmanaged
-                => cellcount/length<T>(w);
+                => cells/length<T>(w);
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W16 w, int cellcount)
+        public static int blockcount<T>(W32 w, int cells)
             where T : unmanaged
-                => cellcount/length<T>(w);
+                => cells/length<T>(w);
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W32 w, int cellcount)
+        public static int blockcount<T>(W64 w, int cells)
             where T : unmanaged
-                => cellcount/length<T>(w);
+                => cells/length<T>(w);
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W64 w, int cellcount)
+        public static int blockcount<T>(W128 w, int cells)
             where T : unmanaged
-                => cellcount/length<T>(w);
+                => cells/length<T>(w);
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W128 w, int cellcount)
+        public static int blockcount<T>(W256 w, int cells)
             where T : unmanaged
-                => cellcount/length<T>(w);
+                => cells/length<T>(w);
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<T>(W256 w, int cellcount)
+        public static int blockcount<T>(W512 w, int cells)
             where T : unmanaged
-                => cellcount/length<T>(w);
+                => cells/length<T>(w);
 
-        [MethodImpl(Inline)]
-        public static int blockcount<T>(W512 w, int cellcount)
-            where T : unmanaged
-                => cellcount/length<T>(w);
-
-        [MethodImpl(Inline)]
-        public static int blockcount<T>(W8 w, int length, out int uncovered)
-            where T : unmanaged   
-        {       
-            uncovered = length % length<T>(w);
-            return length/length<T>(w);
-        }
-
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// and reveals the number of cells that remain uncovered
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <param name="uncovered">The number of cells that remain uncovered</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int blockcount<T>(W16 w, int length, out int uncovered)
             where T : unmanaged   
@@ -60,6 +92,14 @@ namespace Z0
             return length/length<T>(w);
         }
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// and reveals the number of cells that remain uncovered
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <param name="uncovered">The number of cells that remain uncovered</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int blockcount<T>(W32 w, int length, out int uncovered)
             where T : unmanaged   
@@ -68,6 +108,14 @@ namespace Z0
             return length/length<T>(w);
         }
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// and reveals the number of cells that remain uncovered
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <param name="uncovered">The number of cells that remain uncovered</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int blockcount<T>(W64 w, int length, out int uncovered)
             where T : unmanaged   
@@ -76,6 +124,14 @@ namespace Z0
             return length/length<T>(w);
         }
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// and reveals the number of cells that remain uncovered
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <param name="uncovered">The number of cells that remain uncovered</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int blockcount<T>(W128 w, int length, out int uncovered)
             where T : unmanaged          
@@ -84,6 +140,14 @@ namespace Z0
             return length/length<T>(w);
         }
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// and reveals the number of cells that remain uncovered
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <param name="uncovered">The number of cells that remain uncovered</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int blockcount<T>(W256 w, int length, out int uncovered)
             where T : unmanaged          
@@ -92,6 +156,14 @@ namespace Z0
             return length/length<T>(w);
         }
 
+        /// <summary>
+        /// Computes the whole number of blocks that cover a specified count of T-cells
+        /// and reveals the number of cells that remain uncovered
+        /// </summary>
+        /// <param name="w">The block width</param>
+        /// <param name="cells">The cell count</param>
+        /// <param name="uncovered">The number of cells that remain uncovered</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int blockcount<T>(W512 w, int length, out int uncovered)
             where T : unmanaged          
@@ -113,7 +185,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged        
         {
-            var srclen = NatMath.mul<M,N>();
+            var srclen = (int)NatCalc.mul<M,N>();
             var bz = blockcount<T>(w,srclen, out int remainder);
             return remainder == 0 ? bz : bz + 1;
         }
@@ -135,6 +207,5 @@ namespace Z0
             var bz = blockcount<T>(w,srclen, out int remainder);
             return remainder == 0 ? bz : bz + 1;
         }
-
     }
 }

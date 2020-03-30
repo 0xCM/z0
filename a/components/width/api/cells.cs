@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Widths
     {        
-       /// <summary>
+        /// <summary>
         /// Counts the number of numeric T-cells that can be convered by contiguous memory of width W
         /// </summary>
         /// <param name="w">The memory bit-width</param>

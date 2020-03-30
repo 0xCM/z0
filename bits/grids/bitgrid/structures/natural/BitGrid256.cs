@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = W := 256
@@ -119,18 +118,18 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => NatMath.mul<M,N>();
+            get => (int)NatCalc.mul<M,N>();
         }
 
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => natval<M>();         
+        public int RowCount => val8u<M>();         
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => natval<N>();  
+        public int ColCount => val8u<N>();  
 
         /// <summary>
         /// Reads an index-identified cell

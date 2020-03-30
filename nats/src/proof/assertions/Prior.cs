@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-    using static Components;    
+    using static Core;
 
     partial class NatClaim
     {
@@ -24,7 +23,7 @@ namespace Z0
         public static bool successor<K1,K2>(bool raise = true)
             where K1 : unmanaged, ITypeNat 
             where K2 : unmanaged, ITypeNat
-                =>  natu<K1>() == natu<K2>() + 1 ? true : failure<K1,K2>(nameof(successor), raise);
+                =>  value<K1>() == value<K2>() + 1 ? true : failure<K1,K2>(nameof(successor), raise);
 
         /// <summary>
         /// Attempts construct evidence that k1 = k2 + 1;

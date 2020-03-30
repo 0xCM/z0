@@ -9,7 +9,7 @@ namespace Z0
  
     using static Custom;
 
-    public static class BoxedNumberExtensions
+    partial class XTend
     {
         /// <summary>
         /// Returns 0 in a box

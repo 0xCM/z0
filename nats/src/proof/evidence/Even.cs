@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatEven(K k)
         {
-            demand(NatMath.even(k));
+            demand(NatCalc.even(k));
         }
         
         public ulong NatValue 

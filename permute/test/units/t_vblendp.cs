@@ -304,7 +304,7 @@ namespace Z0
             var t = default(T);
             var pn = n32;
 
-            Claim.eq(natval(pn),TypeMath.div(w,t) * 2);
+            Claim.eq(Core.value(pn), NatCalc.divT(w,t) * 2);
 
             var left = gvec.vinc(w, t);
             var right = gvec.vadd(left, gmath.add(left.LastCell(), one(t)));            

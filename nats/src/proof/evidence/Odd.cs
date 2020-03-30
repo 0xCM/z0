@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-    using static Components;
+    using static Core;
 
     /// <summary>
     /// Captures evidence that k % 2 != 0
@@ -24,16 +23,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatOdd(K k)
         {
-            demand(NatMath.odd(k));
+            require(NatCalc.odd(k));
         }
         
         public ulong NatValue 
             => k.NatValue;
-
-        
+       
         public override string ToString()
             => Description;
     }
-
-
 }

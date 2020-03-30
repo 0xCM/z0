@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Defines a grid of bits over a contiguous sequence of primal values stored in blocks of 256 bits

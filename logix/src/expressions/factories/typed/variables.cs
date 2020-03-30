@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
 
     public static partial class TypedLogicSpec
     {
@@ -31,7 +31,6 @@ namespace Z0.Logix
         public static VariableExpr<T> variable<T>(char name, IExpr<T> value)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), value);
-
 
         /// <summary>
         /// Defines a bit variable expression where the variable name is defined by an integer
@@ -84,7 +83,6 @@ namespace Z0.Logix
             where T : unmanaged             
                 => new VariedExpr<T>(baseExpr, variables);
 
-
         /// <summary>
         /// Creates a varied expression predicated on a typed variable sequence of natural length
         /// </summary>
@@ -95,7 +93,7 @@ namespace Z0.Logix
             where T : unmanaged             
             where N : unmanaged, ITypeNat
         {
-            Nat.require<N>(variables.Length);
+            require<N>(variables.Length);
             return new VariedExpr<N,T>(baseExpr, variables);
         }
 

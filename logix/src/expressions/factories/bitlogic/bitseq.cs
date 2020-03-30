@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
     
     partial class BitLogicSpec
     {
@@ -28,7 +28,7 @@ namespace Z0.Logix
         public static LiteralLogicSeqExpr<N> bitseq<N>(N length, params bit[] terms)
             where N : unmanaged, ITypeNat
         {
-            Nat.require<N>(terms.Length);
+            require<N>(terms.Length);
             return new LiteralLogicSeqExpr<N>(terms);
         }
     }
