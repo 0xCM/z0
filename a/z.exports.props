@@ -21,6 +21,8 @@
     <ProjectReference Include="$(Texting)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Rng)" />
+    <ProjectReference Include="$(Messages)" />
   </ItemGroup>
 
 </Project>

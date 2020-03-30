@@ -251,7 +251,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void eq(bool lhs, bool rhs)
-            => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
+            => (lhs == rhs).OnNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
 
         public static bool eq(HexByteKind lhs, HexByteKind rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
@@ -347,7 +347,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void yea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => src.IfNone(() => throw ClaimException.Define(NotTrue(msg, caller, file,line)));
+            => src.OnNone(() => throw ClaimException.Define(NotTrue(msg, caller, file,line)));
 
         /// <summary>
         /// Asserts the operand is true
@@ -359,7 +359,7 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void yea<T>(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => src.IfNone(() => throw ClaimException.Define(NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line)));
+                => src.OnNone(() => throw ClaimException.Define(NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line)));
 
         /// <summary>
         /// Asserts the operand is false
@@ -370,7 +370,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void nea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => src.IfSome(() => throw ClaimException.Define(NotFalse(msg, caller, file,line)));
+            => src.OnSome(() => throw ClaimException.Define(NotFalse(msg, caller, file,line)));
 
         /// <summary>
         /// Asserts the pointer is not null
@@ -381,15 +381,15 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static unsafe void notnull(void* p, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => (p != null).IfNone(() => throw new ArgumentNullException(AppMsg.Define($"Pointer was null", AppMsgKind.Error, caller,file,line).ToString()));
+            => (p != null).OnNone(() => throw new ArgumentNullException(AppMsg.Define($"Pointer was null", AppMsgKind.Error, caller,file,line).ToString()));
 
         public static bool notnull<T>(T src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => !(src is null) ? true : throw new ArgumentNullException(AppMsg.Define($"Argument was null", AppMsgKind.Error, caller,file,line).ToString());
 
         public static void exists(FilePath path,[Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => path.Exists().IfNone(() => throw AppException.Define($"The file {path} does not exist", caller, file,line));
+            => path.Exists().OnNone(() => throw AppException.Define($"The file {path} does not exist", caller, file,line));
 
         public static void exists(FolderPath path,[Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => path.Exists().IfNone(() => throw AppException.Define($"The folder {path} does not exist", caller, file,line));
+            => path.Exists().OnNone(() => throw AppException.Define($"The folder {path} does not exist", caller, file,line));
     }
 }

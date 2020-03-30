@@ -50,6 +50,6 @@ namespace Z0
         public static T hi<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => hi<T>((int)nateval(n));
+                => hi<T>((int)TypeNats.value(n));
     }
 }

@@ -74,7 +74,7 @@ namespace Z0
             where K2 : unmanaged, ITypeNat
         {
             if(raise)
-                DemandException.Throw(name, Nat.pair<K1,K2>());
+                DemandException.Throw(name, TypeNats.pairval<K1,K2>());
             return false;
         } 
     }

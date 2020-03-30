@@ -8,32 +8,32 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Components;
+    using static TypeNats;
 
     /// <summary>
-    /// Reifies a three-term natural sequence
+    /// Reifies a four-term natural sequence
     /// </summary>
-    public readonly struct NatSeq<K1,K2,K3> : INatSeq<NatSeq<K1,K2,K3>>
-        where K1 : unmanaged, INatPrimitive<K1>
-        where K2 : unmanaged, INatPrimitive<K2>
-        where K3 : unmanaged, INatPrimitive<K3>
+    public readonly struct NatSeq<D0,D1,D2,D3> : INatSeq<NatSeq<D0,D1,D2,D3>>
+        where D0 : unmanaged, INatPrimitive<D0>
+        where D1 : unmanaged, INatPrimitive<D1>
+        where D2 : unmanaged, INatPrimitive<D2>
+        where D3 : unmanaged, INatPrimitive<D3>
     {
-        public static NatSeq<K1,K2,K3> Rep => default;
-        
+        public static NatSeq<D0,D1,D2,D3> Rep => default;
+
         public static ulong Value 
         {            
             [MethodImpl(Inline)]
             get => 
-              natval<K1>().Value * 100ul
-            + natval<K2>().Value * 10ul
-            + natval<K3>().Value;
-
+              value<D0>() * 1000ul
+            + value<D1>() * 100ul
+            + value<D2>() * 10ul
+            + value<D3>();
         }
-        
-        public ulong NatValue 
-            => Value;
 
-        public NatSeq Sequence
-            => Rep; 
+        public ulong NatValue => Value;
+
+        public NatSeq Sequence => Rep; 
 
         public string format()
             => Value.ToString();

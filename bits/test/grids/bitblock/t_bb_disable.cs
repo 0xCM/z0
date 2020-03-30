@@ -52,7 +52,7 @@ namespace Z0
 
         void bb_disable_n707x64u()
         {
-            var n707 = nat(n7,n0,n7);
+            var n707 = TypeNats.seq(n7,n0,n7);
             Claim.eq(707,(int)n707.NatValue);
             bitblock_disable_check(n707, (ulong)0);
         }

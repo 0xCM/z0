@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     
-    using static Apps;
-
     public abstract class ConsoleApp<A,C> : Shell<A,C>, IConsoleApp<A>, IAppMsgSink 
         where A : ConsoleApp<A,C>, new()
         where C : IApiContext

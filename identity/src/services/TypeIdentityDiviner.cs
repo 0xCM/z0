@@ -89,18 +89,17 @@ namespace Z0
                 let segfmt = segwidth.Format()
                 let arg = t.GetGenericArguments().Single()
                 let argwidth = Identity.width(arg)
-                where   argwidth.IsSome()
+                where argwidth.IsSome()
                 let argfmt = argwidth.Format()
                 let nk = arg.NumericKind()
                 where  nk != 0
                 let nki = nk.Indicator().Format()
-                let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)                
+                let identifer = concat(i, segfmt, IDI.SegSep,argfmt, nki)                
                 select SegmentedIdentity.Define(i,segwidth,nk).AsTypeIdentity();
-
 
         static Option<TypeIdentity> NatId(Type arg)
             => from v in arg.NatValue() 
-                let id = text.concat(IDI.Nat, v.ToString())
+                let id = concat(IDI.Nat, v.ToString())
                 select TypeIdentity.Define(id);
         
         static Option<TypeIdentity> SpanId(Type arg)
@@ -140,12 +139,10 @@ namespace Z0
         internal static ITypeIdentityProvider CreateProvider(Type t)
         {
             var provider = none<ITypeIdentityProvider>();   
-
-            if(t.IsAttributed<IdentityProviderAttribute>())
+            if(t.Tagged<IdentityProviderAttribute>())
                 provider = AttributedProvider(t);
             else if(t.Realizes<ITypeIdentityProvider>())
                 provider = HostedProvider(t);
-
             return provider.ValueOrElse(() => DefaultProvider);
         }
 

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;    
-    using static Nats;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
@@ -20,7 +19,7 @@ namespace Z0
     {
         readonly Perm perm;
 
-        static int n => natval<N>();
+        static int n => (int)value<N>();
 
         /// <summary>
         /// The canonical identity permutation of length N

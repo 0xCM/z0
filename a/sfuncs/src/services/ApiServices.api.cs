@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The assembly to search</param>
         public static IEnumerable<Type> ProviderTypes(Assembly src)
-            => src.GetTypes().Where(t => t.IsAttributed<ApiServiceProviderAttribute>());
+            => src.GetTypes().Where(t => t.Tagged<ApiServiceProviderAttribute>());
 
         /// <summary>
         /// Creates a service provider reified by a specified type

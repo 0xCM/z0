@@ -61,7 +61,6 @@
     <Root>$(TopDir)root/src/z0.root.csproj</Root>
     <Permute>$(TopDir)permute/src/z0.permute.csproj</Permute>
     <Polyrand>$(TopDir)polyrand/src/z0.polyrand.csproj</Polyrand>
-    <RngSourced>$(TopDir)rng/sources/core/z0.rng.sources.csproj</RngSourced>
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>
     <TestLib>$(TopDir)testlib/src/z0.testlib.csproj</TestLib>
     <Validity>$(TopDir)validity/src/z0.validity.src.csproj</Validity>

@@ -11,7 +11,6 @@ namespace Z0
 
     using static Core;    
     using static CastNumeric;
-    using static Nats;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
@@ -22,9 +21,9 @@ namespace Z0
     {
         readonly Perm<T> perm;
 
-        static T nT => convert<T>(natval<N>());
+        static T nT => convert<T>(TypeNats.value<N>());
 
-        static int n => natval<N>();
+        static int n => (int)TypeNats.value<N>();
 
         /// <summary>
         /// The canonical identity permutation of length N

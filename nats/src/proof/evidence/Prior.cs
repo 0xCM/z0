@@ -18,6 +18,7 @@ namespace Z0
     {
 
     } 
+    
     /// <summary>
     /// Captures evidence that k1 + 1 = k2
     /// </summary>
@@ -60,7 +61,9 @@ namespace Z0
             => valid = demand(n1.NatValue - 1 == n2.NatValue);
 
         public bool valid {get;}
-        
+
+        public ulong NatValue => TypeNats.value<K1>() -1;
+
         public override string ToString()
             => Description;
     }

@@ -12,18 +12,17 @@ using static Z0.Components;
 
 public static class nfunc
 {
+    [MethodImpl(Inline)]   
+    public static NatVal natval<N>()
+        where N : unmanaged, ITypeNat
+            => NatVal.From(TypeNats.value<N>());
+
     /// <summary>
     /// Converts an integer to a sequence of digits
     /// </summary>
     /// <param name="src">The source value</param>
     internal static byte[] digits(ulong src)
-    {
-        var text = src.ToString();
-        var chars = new byte[text.Length];
-        for(var i=0; i<text.Length; i++)
-            chars[i] = byte.Parse(text[i].ToString());                
-        return chars;
-    }
+        => TypeNats.digits(src);
 
     [MethodImpl(Inline)]   
     internal static T[] repeat<T>(T value, ulong count)
@@ -73,11 +72,6 @@ public static class nfunc
         return divisors(x).Count() == 0;
     }                
 
-    [MethodImpl(Inline)]   
-    public static NatVal natval<N>()
-        where N : unmanaged, ITypeNat
-            => Components.natval<N>();
-
     /// <summary>
     /// Retrieves the value of the natural number associated with a typenat
     /// </summary>
@@ -85,7 +79,7 @@ public static class nfunc
     [MethodImpl(Inline)]   
     public static ulong natu<N>() 
         where N : unmanaged, ITypeNat
-            => natval<N>();
+            => TypeNats.value<N>();
 
     /// <summary>
     /// Retrieves the value of a type natural represented as a signed integer
@@ -94,7 +88,7 @@ public static class nfunc
     [MethodImpl(Inline)]   
     public static int nati<N>() 
         where N : unmanaged, ITypeNat
-            => natval<N>();
+            => (int)TypeNats.value<N>();
 
     /// <summary>
     /// Constructs a natural representative

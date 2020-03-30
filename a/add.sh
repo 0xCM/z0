@@ -64,5 +64,11 @@ bash $Cmd
 export ProjectId=graphs
 bash $Cmd
 
+export ProjectId=rng
+bash $Cmd
+
+export ProjectId=messages
+bash $Cmd
+
 export ProjectId=z
 bash $Cmd

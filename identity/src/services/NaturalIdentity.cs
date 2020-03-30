@@ -27,7 +27,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => Identify.Op(opname, (TypeWidth)Nats.nateval<W>(), NumericTypes.kind<T>(), generic);
+                => Identify.Op(opname, (TypeWidth)TypeNats.value<W>(), NumericTypes.kind<T>(), generic);
 
     }
 }

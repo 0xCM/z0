@@ -96,7 +96,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Dim2 Define(ulong i, ulong j)
             => new Dim2(i,j);
-
     }
 
     /// <summary>
@@ -110,11 +109,11 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static implicit operator (ulong i, ulong j)(Dim<M,N> x)
-            => Nat.pair<M,N>();
+            => (TypeNats.value<M>(), TypeNats.value<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator (int i, int j)(Dim<M,N> x)
-            => Nat.pairi<M,N>();
+            => ((int)TypeNats.value<M>(), (int)TypeNats.value<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator Dim2(Dim<M,N> x)

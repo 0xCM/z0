@@ -46,7 +46,7 @@ namespace Z0
             /// <param name="lhs">The left operand</param>
             /// <param name="rhs">The right operand</param>
             public static void eq(bit lhs, bit rhs)
-                => (lhs == rhs).IfNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
+                => (lhs == rhs).OnNone(() => AppErrors.ThrowNotEqualNoCaller(lhs,rhs));
 
             /// <summary>
             /// Asserts the equality of two values via whatever equals operator is implemented

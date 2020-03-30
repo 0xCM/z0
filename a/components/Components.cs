@@ -19,20 +19,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Components;
-
     public static class Components
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
         public const string Kernel32 = "kernel32.dll";
-
-        /// <summary>
-        /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        internal static Type EffectiveType(this Type src)
-            => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
 
         [MethodImpl(Inline)]
         internal static IEnumerable<T> seq<T>(params T[] src)
@@ -47,7 +38,7 @@ namespace Z0
             => Unsafe.SizeOf<T>();
 
         [MethodImpl(Inline)]
-        public static NatVal natval<K>(K n = default)
+        internal static NatVal natval<K>(K n = default)
             where K : unmanaged, ITypeNat
                 => NatVal.From(default(K).NatValue);
     }

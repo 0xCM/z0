@@ -18,6 +18,8 @@
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />
+    <ProjectReference Include="$(Messages)" />
+
   </ItemGroup>
 
 </Project>

@@ -44,13 +44,13 @@ namespace Z0
         uint IBitFrequency.F 
         {
             [MethodImpl(Inline)]
-            get => (uint)nateval<F>();
+            get => (uint)TypeNats.value<F>();
         }
 
         uint IBitDensity.D 
         {
             [MethodImpl(Inline)]
-            get => (uint)nateval<D>();
+            get => (uint)TypeNats.value<D>();
         }
 
         [MethodImpl(Inline)]

@@ -16,9 +16,4 @@ namespace Z0
     {
 
     }
-    
-    // public interface IGenericArtifact<T> : IClrArtifact
-    // {        
-    //     GenericStateKind Kind {get;}
-    // }
 }

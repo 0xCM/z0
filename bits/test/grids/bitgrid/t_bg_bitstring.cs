@@ -18,6 +18,6 @@ namespace Z0
             => nbg_bitstring_check(n64,n4, z8);
 
         public void nbg_bitstring_113x201x64()
-            => nbg_bitstring_check(natseq(n1,n1,n3), natseq(n2,n0,n1), z64);
+            => nbg_bitstring_check(TypeNats.seq(n1,n1,n3), TypeNats.seq(n2,n0,n1), z64);
     }
 }

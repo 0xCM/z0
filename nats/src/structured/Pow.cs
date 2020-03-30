@@ -34,9 +34,9 @@ namespace Z0
         public static ulong Value
             => pow(Nat.nat<B>().NatValue, Nat.nat<E>().NatValue);
             
-        public static byte[] Digits => digits(Value);
+        public static byte[] Digits => TypeNats.digits(Value);
 
-        public static NatSeq Seq => Nat.reflect(Digits);
+        public static NatSeq Seq => TypeNats.seq(Digits);
 
 
         public NatSeq Sequence

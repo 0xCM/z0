@@ -6,12 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Rng)" />
     <ProjectReference Include="$(Math)"/>
-
   </ItemGroup>
 
 </Project>

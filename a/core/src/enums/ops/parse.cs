@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Components;
 
     partial class Enums
     {
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E parse<E>(string name, E @default)
             where E : unmanaged, Enum
-                => Try(() => Enum.Parse<E>(name, true)).ValueOrDefault(@default);
+                => Option.Try(() => Enum.Parse<E>(name, true)).ValueOrDefault(@default);
 
         /// <summary>
         /// Attempts o parse an enum literal, ignoring case, and returns a null value if parsing failed

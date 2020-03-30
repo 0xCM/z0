@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Nats;
+    using static Core;
 
     public class t_vsll : t_vinx<t_vsll>
     {
@@ -48,6 +48,5 @@ namespace Z0
         void vsll_check<T>(W256 w, T t = default)
             where T : unmanaged
                 => Comparisons.CheckShiftScalarMatch(VSvc.vsll(w,t),w,t);
-
     }
 }

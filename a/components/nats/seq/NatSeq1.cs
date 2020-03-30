@@ -8,31 +8,33 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Components;
+    using static TypeNats;
 
     /// <summary>
-    /// Reifies a one-term natural sequence
+    /// Reifies a two-term natural sequence that represents the value k := k1*10 + k2
     /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    public readonly struct NatSeq1<K1> : INatSeq<NatSeq1<K1>>
-        where K1 : unmanaged, INatPrimitive<K1>
+    public readonly struct NatSeq<D0,D1> : INatSeq<NatSeq<D0,D1>>
+        where D0 : unmanaged, INatPrimitive<D0>
+        where D1 : unmanaged, INatPrimitive<D1>
     {
-        public static NatSeq1<K1> Rep => default;
-        
-        public static ulong Value => natval<K1>();
-                
-        public ulong NatValue 
-            => Value;
+        public static NatSeq<D0,D1> Rep => default;
 
-        public ITypeNat NatRep
-            => Rep; 
+        public static ulong Value
+        {
+            [MethodImpl(Inline)]
+            get => 
+                value<D0>() * 10ul 
+              + value<D1>();
+        }
 
-        public NatSeq Sequence
-            => Rep; 
+        public ulong NatValue => Value;
 
+        public NatSeq Sequence => Rep; 
+    
         public string format()
             => Value.ToString();
 
         public override string ToString() 
-            => format();
+            => Value.ToString();
     }
 }

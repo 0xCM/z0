@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Rng)" />
   </ItemGroup>
 
 </Project>

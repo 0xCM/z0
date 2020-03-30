@@ -25,7 +25,7 @@ namespace Z0
     {
         public readonly uint Power;
 
-        public uint Base => (uint)nateval<B>();
+        public uint Base => (uint)TypeNats.value<B>();
 
         [MethodImpl(Inline)]
         public static Exp<B> operator *(Exp<B> a, Exp<B> b)

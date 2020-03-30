@@ -5,22 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-
-    using static Components;
-    using static nfunc;
 
     /// <summary>
     /// Encodes a natural number k such that k:K & j:Prior[K] => k = j + 1
     /// </summary>
     public readonly struct Prior<K1> : ITypeNat
         where K1 : unmanaged, ITypeNat
-    {
-        
+    {        
         static K1 k => default;
 
         public static Prior<K1> Rep = default;
@@ -29,9 +20,9 @@ namespace Z0
 
         static string description => $"--{k} = {Value}";
 
-        public static byte[] Digits  => digits(Value);
+        public static byte[] Digits  => TypeNats.digits(Value);
 
-        public static NatSeq Seq => Nat.reflect(Digits);
+        public static NatSeq Seq => TypeNats.seq(Digits);
 
         public ITypeNat rep 
             => Rep;

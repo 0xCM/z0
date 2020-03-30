@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static Nats;
 
     partial class Permute
     {
@@ -110,7 +109,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            if(terms.Length != natval(n))
+            if(terms.Length != (int)value(n))
                 AppErrors.ThrowInvariantFailure($"{n} != {terms.Length}");
             return new NatPerm<N,T>(define(terms));
         }

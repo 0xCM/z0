@@ -215,7 +215,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dim = $"{nateval<M>()}x{nateval<N>()}";
+            var dim = $"{TypeNats.value<M>()}x{TypeNats.value<N>()}";
             var kind = typeof(T).NumericKind().Format();
             var @base = $"mat_{kind}[{dim}]";
             var suffix  = index.MapValueOrDefault(i => text.dot() + index.ToString().PadLeft(3,'0'), string.Empty);

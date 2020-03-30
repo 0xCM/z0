@@ -77,7 +77,7 @@ namespace Z0
         public static BitSpan bitspan<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitSpan.from(x.Scalar, (int)nateval<N>());
+                => BitSpan.from(x.Scalar, (int)TypeNats.value<N>());
 
     }
 

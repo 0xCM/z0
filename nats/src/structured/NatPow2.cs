@@ -55,7 +55,7 @@ namespace Z0
             = digits(Value);
 
         public static readonly NatSeq Seq
-            = Nat.reflect(Digits);
+            = TypeNats.seq(Digits);
 
         public ITypeNat rep 
             => Rep;

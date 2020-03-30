@@ -21,6 +21,8 @@ namespace Z0
         
         public static string Description => $"{k} != 0";
 
+        public ulong NatValue => TypeNats.value(k);
+
         [MethodImpl(Inline)]
         public Nonzero(K n)
         {
@@ -30,5 +32,4 @@ namespace Z0
         public override string ToString()
             => Description;
     }
-
 }

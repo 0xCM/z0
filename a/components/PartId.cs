@@ -95,13 +95,6 @@ public enum PartId : ulong
 
     MachinesTest = Machines | Test,
 
-    RngCore = 190,
-
-    RngEmitters = 200,
-
-    RngSuite = 210,
-
-    RngTest = RngSuite | Test,
     
     MklApi = 220,
 
@@ -235,10 +228,14 @@ public enum PartId : ulong
 
     Domain = 832,
 
-    Errors = 834,
+    Errors = 834,    
 
     Core = 836,
 
+    Rng = 838,
+
+    Messages = 840,
+    
     Z = 1024,
 
     Svc = ushort.MaxValue + 1,

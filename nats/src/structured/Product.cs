@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static nfunc;
-
     /// <summary>
     /// Encodes a natural number k := k1*k2
     /// </summary>
@@ -26,9 +24,9 @@ namespace Z0
 
         static string description => $"{k1} * {k2} = {Value}";
 
-        public static byte[] Digits  => digits(Value);
+        public static byte[] Digits  => TypeNats.digits(Value);
 
-        public static NatSeq Seq => Nat.reflect(Digits);
+        public static NatSeq Seq => TypeNats.seq(Digits);
 
         public ITypeNat rep 
             => Rep;

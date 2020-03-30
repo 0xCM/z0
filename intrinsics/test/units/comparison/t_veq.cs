@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
 
     using static Literals;
-    using static Nats;
+    using static Core;
     using static vgeneric;
 
     public class t_veq : t_vinx<t_veq>

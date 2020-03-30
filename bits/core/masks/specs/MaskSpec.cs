@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static root;
-    using static Nats;
 
     /// <summary>
     /// Defines a specification for producing classified bitmasks
@@ -24,7 +23,7 @@ namespace Z0
             where F : unmanaged, ITypeNat
             where D : unmanaged, ITypeNat
             where T : unmanaged
-                => new MaskSpec(m, NumericTypes.kind<T>(), (uint)nateval<F>(),(uint)nateval<D>());
+                => new MaskSpec(m, NumericTypes.kind<T>(), (uint)TypeNats.value<F>(), (uint)TypeNats.value<D>());
 
         [MethodImpl(Inline)]
         MaskSpec(MaskKind m, NumericKind k, uint f, uint d)

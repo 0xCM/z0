@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Core;
 
     public class t_bm_xor : t_bm<t_bm_xor>
     {        
@@ -39,7 +39,7 @@ namespace Z0
             => bm_xor_check<N256,uint>();
 
         public void bm_xor_n331x331x8()
-            => bm_xor_check(natseq(n3,n3,n1), z8);
+            => bm_xor_check(TypeNats.seq(n3,n3,n1), z8);
     }
 
 }

@@ -48,7 +48,7 @@ namespace Z0
 
         public static byte[] Digits => digits(Value);
 
-        public static NatSeq Seq => Nat.reflect(Digits);
+        public static NatSeq Seq => TypeNats.seq(Digits);
 
         [MethodImpl(Inline)]
         public static implicit operator int(NatSum<K1,K2> src)

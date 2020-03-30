@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Components;
 
     /// <summary>
     /// Appropriately defines an enumeration literal as the triple (index,name,value)

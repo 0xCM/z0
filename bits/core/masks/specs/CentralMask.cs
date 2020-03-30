@@ -44,13 +44,13 @@ namespace Z0
         uint IBitFrequency.F 
         {
             [MethodImpl(Inline)]
-            get => (uint)nateval<F>();
+            get => (uint)TypeNats.value<F>();
         }
 
         uint IBitDensity.D 
         {
             [MethodImpl(Inline)]
-            get => (uint)nateval<D>();
+            get => (uint)TypeNats.value<D>();
         }
 
         [MethodImpl(Inline)]
@@ -59,7 +59,7 @@ namespace Z0
                 => default;
 
         public string Format()
-            => $"central(f:{nateval<F>()}, d:{nateval<D>()}, t:{Identify.NumericType<T>()})";
+            => $"central(f:{TypeNats.value<F>()}, d:{TypeNats.value<D>()}, t:{Identify.NumericType<T>()})";
 
         public override string ToString()
             => Format();

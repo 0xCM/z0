@@ -30,7 +30,7 @@ namespace Z0
             => digits(Value);
 
         public static NatSeq Seq
-            => Nat.reflect(Digits);
+            => TypeNats.seq(Digits);
 
         ulong ITypeNat.NatValue 
             => Value;
