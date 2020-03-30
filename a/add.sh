@@ -70,5 +70,8 @@ bash $Cmd
 export ProjectId=messages
 bash $Cmd
 
+export ProjectId=interval
+bash $Cmd
+
 export ProjectId=z
 bash $Cmd

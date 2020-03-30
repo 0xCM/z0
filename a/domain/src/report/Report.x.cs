@@ -7,10 +7,16 @@ namespace Z0
     using System;
     using System.Text;
 
-    using static Domain;
+    using static Components;
 
     public static class XReport
     {
+        /// <summary>
+        /// Appends a space to the source content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        static string rspace(object content)
+            => $"{content} ";
 
         /// <summary>
         /// Saves an array of records to a filee

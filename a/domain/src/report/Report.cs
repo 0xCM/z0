@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Domain;
+    using static Components;
 
     public class Report<R> : IReport<R>
         where R : IRecord<R>

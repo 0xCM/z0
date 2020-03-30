@@ -11,9 +11,8 @@ namespace Z0
     
     using static Core;
     
-    partial class XMem
+    partial class XTend
     {
-
         /// <summary>
         /// Constructs a memory segment of specified length from a stream (allocating)
         /// </summary>

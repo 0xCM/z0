@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;    
     
     using static Core;
     
-    partial class XMem
+    partial class XTend
     {
-
         [MethodImpl(Inline)]
         public static byte[] ToBytes(this int src)
             => BitConverter.GetBytes(src);

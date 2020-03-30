@@ -60,9 +60,9 @@ namespace Z0
             static T convert_a(bit src)
             {
                 if(typeof(T) == typeof(bool))
-                    return  generic<T>((bool)src);
+                    return generic<T>((bool)src);
                 else if(typeof(T) == typeof(char))
-                    return  generic<T>(src ? bit.One : bit.Zero);
+                    return generic<T>(src ? bit.One : bit.Zero);
                 else 
                     return convert_b(src);
             }

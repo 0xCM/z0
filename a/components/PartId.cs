@@ -238,6 +238,8 @@ public enum PartId : ulong
 
     Cast = 842,
 
+    Interval = 844,
+
     Z = 1024,
 
     Svc = ushort.MaxValue + 1,

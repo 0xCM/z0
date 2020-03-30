@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    using static Memories;
+    using static Components;
     
     public static class PointerExtensons
     {

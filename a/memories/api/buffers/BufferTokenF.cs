@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Security;
 
-    using static Memories;
+    using static Components;
 
     /// <summary>
     /// Describes a fixed-width allocated buffer

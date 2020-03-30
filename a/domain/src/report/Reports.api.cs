@@ -11,8 +11,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Core;
-
+    using static Components;
 
     public static class Reports
     {
@@ -76,8 +75,8 @@ namespace Z0
         {            
             if(records == null)
             {
-                error($"The source record array is null!");
-                return none<FilePath>();
+                Console.Error.WriteLine($"The source record array is null!");
+                return Option.none<FilePath>();
             }
                     
             try
@@ -100,7 +99,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                Console.Error.WriteLine(e);
                 return default;
             }
         }        

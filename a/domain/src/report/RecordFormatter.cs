@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Domain;
+    using static Components;
 
     public readonly struct RecordFormatter<F,R> : IFormattable<RecordFormatter<F,R>>
         where F : unmanaged, Enum
@@ -21,6 +21,13 @@ namespace Z0
         [MethodImpl(Inline)]
         static int width(F f)
             => Reports.width(f);
+
+        /// <summary>
+        /// Appends a space to the source content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        static string rspace(object content)
+            => $"{content} ";
 
         [MethodImpl(Inline)]
         internal RecordFormatter(ReportInfo report)

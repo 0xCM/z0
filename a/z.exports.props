@@ -24,6 +24,7 @@
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Messages)" />
     <ProjectReference Include="$(Cast)" />
+    <ProjectReference Include="$(Interval)" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Components;
 
     public readonly struct ReportFieldInfo : IFormattable<ReportFieldInfo>
     {
@@ -30,7 +30,7 @@ namespace Z0
         }   
 
         public string Format()
-            => concat($"{Index}".PadLeft(2,'0'), Chars.Space, $"{Width}".PadLeft(2,'0'), Chars.Space, Name);
+            => String.Concat($"{Index}".PadLeft(2,'0'), Chars.Space, $"{Width}".PadLeft(2,'0'), Chars.Space, Name);
 
         public override string ToString()
             => Format();     
