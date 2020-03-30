@@ -556,7 +556,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))                
                 return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 63);
             else
-                throw Unsupported.define<T>();
+                throw new Exception("");
         }
 
         static ReadOnlySpan<byte> M1Bytes32i => new byte[]

@@ -74,7 +74,7 @@ namespace Z0
 
         static string GenericMethodDisplayName(this MethodInfo src, IReadOnlyList<Type> args)
         {                
-            var argFmt = args.Count != 0 ? args.Select(t => t.DisplayName()).Concat(", ") : string.Empty;            
+            var argFmt = args.Count != 0 ?  string.Join(", ", args.Select(t => t.DisplayName()).ToArray()) : string.Empty;            
             var typeName = src.Name.Replace($"`{args.Count}", string.Empty);
             return typeName + (args.Count != 0 ? angled(argFmt) : string.Empty);
         }

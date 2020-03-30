@@ -12,7 +12,6 @@ namespace Z0
     
     partial class XCollective
     {
-
         /// <summary>
         /// Addes the entries of the source dictionary to the destination dictionary
         /// </summary>

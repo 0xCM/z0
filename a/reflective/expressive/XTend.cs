@@ -11,12 +11,16 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Components;
 
     using XPR = System.Linq.Expressions.Expression;
 
     partial class XTend
     {
+        [MethodImpl(Inline)]
+        static T cast<T>(object src)
+            => (T)src;
+
         /// <summary>
         /// Tests whether an expression is a conversion
         /// </summary>

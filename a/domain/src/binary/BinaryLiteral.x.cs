@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     
-    public static partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Encloses the supplied text in quotation marks

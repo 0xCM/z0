@@ -12,7 +12,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Reflective;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="m">The source method</param>
         /// <param name="instance">An object instance for the method, if applicable</param>
         public static Option<Func<X>> func<X>(MethodInfo m, object instance = null)
-            => Try(() => (Func<X>)_cache.GetOrAdd(m, method =>
+            => Option.Try(() => (Func<X>)_cache.GetOrAdd(m, method =>
             {
                 var result = conversion<X>(call(instance, m));
                 return XPR.Lambda<Func<X>>(result).Compile();
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="m">The source method</param>
         /// <param name="instance">An object instance for the method, if applicable</param>
         public static Option<Func<X,Y>> func<X,Y>(MethodInfo m, object instance = null)
-            => Try(() => (Func<X,Y>)_cache.GetOrAdd(m, method =>
+            => Option.Try(() => (Func<X,Y>)_cache.GetOrAdd(m, method =>
             {
                 var args = seq(paramX<X>("x1"));
                 var f = call(instance, m, args.ToArray());
@@ -134,7 +134,7 @@ namespace Z0
         /// <param name="m">The source method</param>
         /// <param name="instance">The instance of the declaring type, if method is not static</param>
         public static Option<Func<X1, X2, Y>> func<X1, X2, Y>(MethodInfo m, object instance = null)
-            => Try(() => (Func<X1, X2, Y>)_cache.GetOrAdd(m, method =>
+            => Option.Try(() => (Func<X1, X2, Y>)_cache.GetOrAdd(m, method =>
             {
                 var args = seq(paramX<X1>("x1"), paramX<X2>("x2"));
                 var f = call(instance, m, args.ToArray());
@@ -484,7 +484,7 @@ namespace Z0
         /// <param name="p1">The first predicate</param>
         /// <param name="p2">The second predicate</param>
         public static Option<Func<X1, X2, bool>> and<X1, X2>(Func<X1, bool> p1, Func<X2, bool> p2)
-            => from args in some(paramsX<X1, X2>())
+            => from args in Option.some(paramsX<X1, X2>())
                 let left = invoke(func(p1), args.x1)
                 let right = invoke(func(p2), args.x2)
                 let body = and(left, right)
@@ -498,7 +498,7 @@ namespace Z0
         /// <param name="p1">The first predicate</param>
         /// <param name="p2">The second predicate</param>
         public static Option<Func<X1, X2, bool>> or<X1, X2>(Func<X1, bool> p1, Func<X2, bool> p2)
-            => from args in some(paramsX<X1, X2>())
+            => from args in Option.some(paramsX<X1, X2>())
                 let left = invoke(func(p1), args.x1)
                 let right = invoke(func(p2), args.x2)
                 let body = or(left, right)
