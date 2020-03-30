@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static As;
+    using static Components;
 
     partial class Numeric
     {
@@ -28,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Negate.negate(uint8(src)));
+                return generic<T>(Z0.Scalar.negate(uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Negate.negate(uint16(src)));
+                return generic<T>(Z0.Scalar.negate(uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Negate.negate(uint32(src)));
+                return generic<T>(Z0.Scalar.negate(uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Negate.negate(uint64(src)));
+                return generic<T>(Z0.Scalar.negate(uint64(src)));
             else
                 return negate_i(src);
         }
@@ -44,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(Negate.negate(int8(src)));
+                 return generic<T>(Z0.Scalar.negate(int8(src)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(Negate.negate(int16(src)));
+                 return generic<T>(Z0.Scalar.negate(int16(src)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(Negate.negate(int32(src)));
+                 return generic<T>(Z0.Scalar.negate(int32(src)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(Negate.negate(int64(src)));
+                 return generic<T>(Z0.Scalar.negate(int64(src)));
             else 
                 return negate_f(src);
         }
@@ -60,54 +61,54 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(Negate.negate(float32(lhs)));
+                return generic<T>(Z0.Scalar.negate(float32(lhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(Negate.negate(float64(lhs)));
+                return generic<T>(Z0.Scalar.negate(float64(lhs)));
             else            
                 throw Unsupported.define<T>();
         }
+    }
 
-        static class Negate
-        {
-            [MethodImpl(Inline)]
-            public static sbyte negate(sbyte src)
-                => (sbyte)(- src);
+    partial class Scalar
+    {
+        [MethodImpl(Inline)]
+        public static sbyte negate(sbyte src)
+            => (sbyte)(- src);
 
-            [MethodImpl(Inline)]
-            public static byte negate(byte src)
-                => (byte)(~src + 1);
+        [MethodImpl(Inline)]
+        public static byte negate(byte src)
+            => (byte)(~src + 1);
 
-            [MethodImpl(Inline)]
-            public static short negate(short src)
-                => (short)(- src);
+        [MethodImpl(Inline)]
+        public static short negate(short src)
+            => (short)(- src);
 
-            [MethodImpl(Inline)]
-            public static ushort negate(ushort src)
-                => (ushort)(~src + 1);
+        [MethodImpl(Inline)]
+        public static ushort negate(ushort src)
+            => (ushort)(~src + 1);
 
-            [MethodImpl(Inline)]
-            public static int negate(int src)
-                => -src;
+        [MethodImpl(Inline)]
+        public static int negate(int src)
+            => -src;
 
-            [MethodImpl(Inline)]
-            public static uint negate(uint src)
-                => ~src + 1;
+        [MethodImpl(Inline)]
+        public static uint negate(uint src)
+            => ~src + 1;
 
-            [MethodImpl(Inline)]
-            public static long negate(long src)
-                => -src;
+        [MethodImpl(Inline)]
+        public static long negate(long src)
+            => -src;
 
-            [MethodImpl(Inline)]
-            public static ulong negate(ulong src)
-                => ~src + 1;
+        [MethodImpl(Inline)]
+        public static ulong negate(ulong src)
+            => ~src + 1;
 
-            [MethodImpl(Inline)]
-            public static float negate(float src)
-                => -src;
+        [MethodImpl(Inline)]
+        public static float negate(float src)
+            => -src;
 
-            [MethodImpl(Inline)]
-            public static double negate(double src)
-                => -src;
-        }
+        [MethodImpl(Inline)]
+        public static double negate(double src)
+            => -src;        
     }
 }

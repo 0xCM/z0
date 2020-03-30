@@ -64,7 +64,7 @@ bash $Cmd
 export ProjectId=graphs
 bash $Cmd
 
-export ProjectId=rng
+export ProjectId=polyrand
 bash $Cmd
 
 export ProjectId=messages

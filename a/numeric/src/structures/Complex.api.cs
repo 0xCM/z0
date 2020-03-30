@@ -20,9 +20,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Complex<T> Define<T>(T re, T im = default)   
             where T : unmanaged
-                => (re,im);
-
-        
+                => (re,im);        
     }
-
 }

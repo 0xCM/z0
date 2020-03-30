@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Components;
     using static CastNumeric;
 
     partial class Numeric

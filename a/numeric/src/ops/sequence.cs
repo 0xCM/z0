@@ -9,10 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Memories;
-    using static CastNumeric;
-    using static As;
-
     partial class Numeric
     {
         /// <summary>

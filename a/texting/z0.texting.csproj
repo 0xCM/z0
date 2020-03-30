@@ -6,16 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Canonical)" />
-
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Collective)" />    
-    <ProjectReference Include="$(Symbolic)" />
-    
-    <ProjectReference Include="$(Domain)" />
-
+    <ProjectReference Include="$(Symbolic)" />  
   </ItemGroup>
 
 </Project>

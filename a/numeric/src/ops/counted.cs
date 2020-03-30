@@ -9,8 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Memories;
-
     partial class Numeric
     {
         /// <summary>

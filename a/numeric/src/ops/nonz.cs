@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Components;
     using static As;
 
     partial class Numeric
@@ -27,13 +27,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return NonZ.nonz(uint8(a));
+                 return Z0.Scalar.nonz(uint8(a));
             else if(typeof(T) == typeof(ushort))
-                 return NonZ.nonz(uint16(a));
+                 return Z0.Scalar.nonz(uint16(a));
             else if(typeof(T) == typeof(uint))
-                 return NonZ.nonzero(uint32(a));
+                 return Z0.Scalar.nonzero(uint32(a));
             else if(typeof(T) == typeof(ulong))
-                 return NonZ.nonz(uint64(a));
+                 return Z0.Scalar.nonz(uint64(a));
             else 
                 return nonz_i(a);
         }
@@ -43,13 +43,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return NonZ.nonz(int8(a));
+                 return Z0.Scalar.nonz(int8(a));
             else if(typeof(T) == typeof(short))
-                 return NonZ.nonz(int16(a));
+                 return Z0.Scalar.nonz(int16(a));
             else if(typeof(T) == typeof(int))
-                 return NonZ.nonzero(int32(a));
+                 return Z0.Scalar.nonzero(int32(a));
             else if(typeof(T) == typeof(long))
-                 return NonZ.nonzero(int64(a));
+                 return Z0.Scalar.nonzero(int64(a));
             else 
                 return nonz_f(a);
         }
@@ -59,54 +59,54 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return NonZ.nonz(float32(a));
+                return Z0.Scalar.nonz(float32(a));
             else if(typeof(T) == typeof(double))
-                return NonZ.nonz(float64(a));
+                return Z0.Scalar.nonz(float64(a));
             else            
                 throw Unsupported.define<T>();
         }    
-
-        static class NonZ
-        {
-            [MethodImpl(Inline)]
-            public static bit nonz(sbyte src)
-                => src != 0;
-
-            [MethodImpl(Inline)]
-            public static bit nonz(byte src)
-                => src != 0;
-
-            [MethodImpl(Inline)]
-            public static bit nonz(short src)
-                => src != 0;
-
-            [MethodImpl(Inline)]
-            public static bit nonz(ushort src)
-                => src != 0;
-
-            [MethodImpl(Inline)]
-            public static bit nonzero(int src)
-                => src != 0;
-
-            [MethodImpl(Inline)]
-            public static bit nonzero(uint src)
-                => src != 0;
-
-            [MethodImpl(Inline)]
-            public static bit nonzero(long src)
-                => src != 0;
-
-            [MethodImpl(Inline)]
-            public static bit nonz(ulong src)
-                => src != 0;
-
-            [MethodImpl(Inline)]
-            public static bit nonz(float src)
-                => src != 0;
-                
-            [MethodImpl(Inline)]
-            public static bit nonz(double src)
-                => src != 0;
-        }        
     }
+
+    partial class Scalar
+    {
+        [MethodImpl(Inline)]
+        public static bit nonz(sbyte src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bit nonz(byte src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bit nonz(short src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bit nonz(ushort src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bit nonzero(int src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bit nonzero(uint src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bit nonzero(long src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bit nonz(ulong src)
+            => src != 0;
+
+        [MethodImpl(Inline)]
+        public static bit nonz(float src)
+            => src != 0;
+            
+        [MethodImpl(Inline)]
+        public static bit nonz(double src)
+            => src != 0;
+    }            
 }

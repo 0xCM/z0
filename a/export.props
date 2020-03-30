@@ -19,7 +19,7 @@
     <Memories>$(Feeders)memories/z0.memories.csproj</Memories>
     <Numeric>$(Feeders)numeric/z0.numeric.csproj</Numeric>
     <Reflective>$(Feeders)reflective/z0.reflective.csproj</Reflective>
-    <Rng>$(Feeders)rng/z0.rng.csproj</Rng>
+    <Polyrand>$(Feeders)polyrand/z0.polyrand.csproj</Polyrand>
     <Messages>$(Feeders)messages/z0.messages.csproj</Messages>
 
     <Symbolic>$(Feeders)symbolic/z0.symbolic.csproj</Symbolic>
