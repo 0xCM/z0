@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Core;
     using static BitVector;
 
     /// <summary>
@@ -15,8 +15,8 @@ namespace Z0
     /// </summary>
     public class t_bvdot : t_bitvectors<t_bvdot>
     {
-        public void bvdot_n87x128x64()
-            => bvdot_check_n128<N87,ulong>();
+        public void bvdot_n64x128x64()
+            => bvdot_check_n128<N63,ulong>();
 
         public void bvdot_natcheck()
         {

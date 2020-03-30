@@ -12,9 +12,7 @@ namespace Z0.Mkl.Test
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-
-    using static Nats;
-    using static nfunc;
+    using static Core;
     
     public class t_gemm : UnitTest<t_gemm>
     {        

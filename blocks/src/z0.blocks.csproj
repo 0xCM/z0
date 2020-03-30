@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Errors)" />
 
     <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(Nats)" />  
     <ProjectReference Include="$(Numeric)" />  
 
   </ItemGroup>

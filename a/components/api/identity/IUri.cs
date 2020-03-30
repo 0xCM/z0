@@ -6,11 +6,14 @@ namespace Z0
 {
     using System;
 
-    using System.Runtime.CompilerServices;
-    
-    public sealed class t_config : UnitTest<t_config>
+    public interface IUri : IIdentified
     {
-
+        
     }
-
+    
+    public interface IUri<T> : IUri, IIdentifiedTarget<T>
+        where T : IUri<T>, new()
+    {
+        
+    }
 }

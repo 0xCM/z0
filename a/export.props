@@ -17,7 +17,6 @@
     <Interval>$(Feeders)interval/z0.interval.csproj</Interval>
 
     <Kinds>$(Feeders)kinds/z0.kinds.csproj</Kinds>
-    <Monadic>$(Feeders)monadic/z0.monadic.csproj</Monadic>
     <Memories>$(Feeders)memories/z0.memories.csproj</Memories>
     <Numeric>$(Feeders)numeric/z0.numeric.csproj</Numeric>
     <Reflective>$(Feeders)reflective/z0.reflective.csproj</Reflective>

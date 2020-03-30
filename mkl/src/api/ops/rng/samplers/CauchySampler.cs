@@ -7,7 +7,7 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
 
-	using static root;
+	using static Core;
     using static As;
 
     sealed class CauchySampler<T> : Sampler<T, CauchySpec<T>>

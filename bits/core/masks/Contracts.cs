@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Core;
+
     [Flags]
     public enum MaskKind : uint
     {
@@ -28,7 +30,7 @@ namespace Z0
     }
 
 
-    public interface IMaskSpec
+    public interface IMaskSpec : ICustomFormattable
     {        
         MaskKind M {get;}
 
@@ -72,8 +74,10 @@ namespace Z0
         where T : unmanaged
     {
         T t => default;
-    }
 
+        string ICustomFormattable.Format()
+            => $"lsb(f:{value<F>()}, d:{value<D>()}, t:{Identify.NumericType<T>()})";        
+    }
 
     public interface ICompositeMask<T>
         where T :unmanaged

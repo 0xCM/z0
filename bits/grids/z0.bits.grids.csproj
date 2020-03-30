@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />    
     <ProjectReference Include="$(Graphs)" />

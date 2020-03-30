@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
 
     using static VslSSTaskParameter;
     using static VslSSComputeRoutine;

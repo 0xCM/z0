@@ -29,5 +29,8 @@ namespace Z0
             [MethodImpl(Inline)]
             get => NumericTypes.kind<T>();
         }
+
+        public string Format()
+            => $"n(f:{value<N>()}, t:{Identify.NumericType<T>()})";        
     }
 }

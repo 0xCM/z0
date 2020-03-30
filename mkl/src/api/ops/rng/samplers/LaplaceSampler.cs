@@ -6,7 +6,6 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static root;
     using static As;
     using static Spans;
 
@@ -24,7 +23,6 @@ namespace Z0.Mkl
         {
 
         }
-
 
         protected override int FillBuffer(Span<T> buffer)
         {            

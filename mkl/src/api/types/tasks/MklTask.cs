@@ -5,8 +5,6 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
     
     public interface IMklTask : IDisposable
     {
@@ -35,9 +33,7 @@ namespace Z0.Mkl
         {
             Pointer = IntPtr.Zero;
         }
-
         public abstract void Dispose();
-
     }
 
     abstract class MklTask<T> : MklTask, IMklTask<T>
@@ -52,7 +48,6 @@ namespace Z0.Mkl
         protected MklTask()
         {
             
-        }
-                
+        }                
     }
 }

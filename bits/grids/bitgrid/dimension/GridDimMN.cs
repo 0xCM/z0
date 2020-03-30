@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Encapsulates metrics that characterize a grid of natural rectangular dimensions
@@ -33,7 +32,7 @@ namespace Z0
         public int RowCount
         {
             [MethodImpl(Inline)]
-            get => natval<M>();
+            get => nati<M>();
         }
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace Z0
         public int ColCount
         {
             [MethodImpl(Inline)]
-            get => natval<N>();
+            get => nati<N>();
         }
 
         /// <summary>

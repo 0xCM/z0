@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
-    using static Nats;
-    using static nfunc;
+    using static Core;
  
     public sealed class t_perm : UnitTest<t_perm>
     {
@@ -38,7 +36,7 @@ namespace Z0
             perm_invert_check(n64);
             perm_invert_check(n31);
             perm_invert_check(n128);
-            perm_invert_check(n257);
+            perm_invert_check(n256);
         }
 
         public void perm_identity()
@@ -49,7 +47,7 @@ namespace Z0
             perm_identity_check(n64);
             perm_identity_check(n128);
             perm_identity_check(n21);
-            perm_identity_check(n257);
+            perm_identity_check(n256);
         }    
 
         public void perm_comp()
@@ -60,7 +58,7 @@ namespace Z0
             perm_comp_check(n64);
             perm_comp_check(n128);
             perm_comp_check(n21);
-            perm_comp_check(n257);
+            perm_comp_check(n256);
         }
 
         public void perm_format()

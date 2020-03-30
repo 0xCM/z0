@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Nats;
+    using static Core;
 
     public class t_bvxor : t_bitvectors<t_bvxor>
     {
-
         public void bvxor_check()
         {
             bvxor_check(z8);

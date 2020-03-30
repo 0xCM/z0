@@ -83,5 +83,7 @@ namespace Z0
 
         public static N512 n512 => default;
 
+        public static N1024 n1024 => default;
+
     }
 }

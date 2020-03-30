@@ -7,7 +7,7 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
 
-	using static root;
+    using static Core;
 
     public readonly struct MklRng : IRngSource,  IDisposable
     {
@@ -18,8 +18,7 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         internal MklRng(BRNG brng, uint seed = 0, int index = 0)
         {
-            this.Source = brng.NewStream(seed, index);
-            
+            this.Source = brng.NewStream(seed, index);            
         }
         
         internal VslStream Source {get;}        

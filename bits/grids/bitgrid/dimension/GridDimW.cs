@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Defines a parametrically-predicated blocked grid
@@ -25,7 +24,7 @@ namespace Z0
         public int BlockWidth
         {
             [MethodImpl(Inline)]
-            get => natval<W>();
+            get => nati<W>();
         }
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace Z0
         public int RowCount
         {
             [MethodImpl(Inline)]
-            get => natval<M>();
+            get => nati<M>();
         }
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Z0
         public int ColCount
         {
             [MethodImpl(Inline)]
-            get => natval<N>();
+            get => nati<N>();
         }
 
         /// <summary>

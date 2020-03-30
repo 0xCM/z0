@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
         
     using static Components;    
 
@@ -31,8 +29,7 @@ namespace Z0
         const ulong N = 8;
 
         const ulong M = (ulong.MaxValue / N) + 1;
-        
-        
+                
         [MethodImpl(Inline)]
         public static uint mod(uint a)
             => ModOps.mod(M, N, a);

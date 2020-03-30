@@ -61,7 +61,7 @@ namespace Z0
         public void mod_add()
         {
             var samples = Pow2.T08;
-            mod_add_check(samples,n87);
+            mod_add_check(samples,n63);
             mod_add_check(samples,n64);
             mod_add_check(samples,n512);
         }

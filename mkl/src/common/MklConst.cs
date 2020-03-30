@@ -5,7 +5,6 @@
 namespace Z0.Mkl
 {
 	using System;
-	using System.Runtime.CompilerServices;
 	using System.Runtime.InteropServices;
     using System.Security;
     
@@ -13,6 +12,5 @@ namespace Z0.Mkl
     static class MklCommon
     {
         internal const CallingConvention Cdecl = CallingConvention.Cdecl;
-
     }
 }

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// A data structure that covers a natural count of packed bits
@@ -29,7 +28,7 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by an N[T] vector
         /// </summary>
-        public static int BitCount => natval<N>();
+        public static int BitCount => nati<N>();
 
         /// <summary>
         /// The number of segments required to allocate an N[T] vector
@@ -37,7 +36,7 @@ namespace Z0
         public static int CellCount 
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.tablecells((int)natval<N>(), (int)natval<N1>(), (int)bitsize<T>());
+            get => BitCalcs.tablecells(nati<N>(), nati<N1>(), (int)bitsize<T>());
         }
         
         /// <summary>
@@ -213,7 +212,7 @@ namespace Z0
         public void Fill(bit state)
         {            
             if(state)
-                data.Fill(maxval<T>());
+                data.Fill(Literals.maxval<T>());
             else
                 data.Clear();
         }

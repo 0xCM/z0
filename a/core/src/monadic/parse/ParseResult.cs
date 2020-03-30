@@ -81,6 +81,7 @@ namespace Z0
              => Format();
     }
 
+
     public readonly struct ParseResult<T> : IParseResult<T>
     {
         /// <summary>

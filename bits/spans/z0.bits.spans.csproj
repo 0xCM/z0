@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitPack)" />

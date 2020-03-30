@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
     using static Core;
 
     public struct RowVector<N,T>  
@@ -27,7 +26,6 @@ namespace Z0
         /// </summary>
         public static RowVector<N,T> Zero => new RowVector<N,T>(new T[Dim]);
          
-
         [MethodImpl(Inline)]   
         public static implicit operator RowVector<T>(RowVector<N,T> src)
             => new RowVector<T>(src.data);
@@ -158,8 +156,6 @@ namespace Z0
             => data.GetHashCode();
  
         public override string ToString()
-            => Format();
-    
+            => Format();    
     }
 }
-

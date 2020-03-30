@@ -5,7 +5,6 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
     sealed class VslSSTaskF32 : VslSSTask<float>
@@ -44,6 +43,4 @@ namespace Z0.Mkl
 
         }
     }
-
-
 }

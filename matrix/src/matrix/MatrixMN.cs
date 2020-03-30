@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     
-    using static nfunc;
     using static Core;
 
     /// <summary>

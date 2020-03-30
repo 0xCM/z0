@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
         
     using static Components;    
 
@@ -15,13 +17,17 @@ namespace Z0
         public static ulong multiplier(ulong n)
             => (ulong.MaxValue / n) + 1;
 
+        [MethodImpl(Inline)]
+        public static ulong mulhi(ulong x, ulong y)
+            => Bmi2.X64.MultiplyNoFlags(x,y);
+
         /// <summary>
         /// Computes a % N
         /// </summary>
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public static uint mod(ulong m, ulong n, uint a)
-            => (uint) Math128.mulhi(m * a, n);
+            => (uint) mulhi(m * a, n);
 
         /// <summary>
         /// Computes the quotient a / N
@@ -29,7 +35,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public static uint div(ulong m, ulong n, uint a)        
-            => (uint) Math128.mulhi(m, a);
+            => (uint) mulhi(m, a);
 
         /// <summary>
         /// Computes whether a % n == 0

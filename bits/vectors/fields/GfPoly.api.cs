@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using static Core;
+
     /// <summary>
     /// Primitive polynomials for GF reduction
     /// </summary>
@@ -84,7 +86,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var n = nfunc.nati<N>();
+            var n = nati<N>();
             switch(n)
             {
                 case 2:

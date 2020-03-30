@@ -6,9 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static root;
-
-    using static nfunc;
+    using static Core;
 
     partial class mkl
     {

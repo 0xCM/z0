@@ -7,8 +7,6 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
 
-	using static root;
-
     sealed class ChiSquareSampler<T> : Sampler<T, ChiSquareSpec<int>>
         where T : unmanaged
     {

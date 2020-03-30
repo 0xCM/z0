@@ -5,7 +5,6 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
  
     using static MklCommon;
@@ -48,5 +47,4 @@ namespace Z0.Mkl
 		[DllImport(CBlasDll, CallingConvention=Cdecl, ExactSpelling=true)]
         public static extern double cblas_dzasum(int n, ref ComplexF64 X, int incX);
     }
-
 }

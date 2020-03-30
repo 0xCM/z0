@@ -7,6 +7,7 @@ namespace Z0
     using System;
     
     using static BinaryArithmeticKind;
+    using BA = BinaryArithmeticKind;
     
     using A = OpKindAttribute;
 
@@ -26,7 +27,7 @@ namespace Z0
 
     public sealed class DivAttribute : A { public DivAttribute() : base(Div) {} }
         
-    public sealed class ModAttribute : A { public ModAttribute() : base(Mod) {} }
+    public sealed class ModAttribute : A { public ModAttribute() : base(BA.Mod) {} }
 
     public sealed class ClampAttribute : A { public ClampAttribute() : base(Clamp) {} }
 

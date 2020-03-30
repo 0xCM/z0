@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+
     public sealed class t_mul : UnitTest<t_mul>
     {
         protected override int RepCount => Pow2.T12;
@@ -44,7 +45,6 @@ namespace Z0
                 var z = (ulong)xi * (ulong)yi;
                 Claim.eq(z, Math128.mul(xi,yi));
             }
-
         }        
 
         public void mod_32()
@@ -107,8 +107,5 @@ namespace Z0
             }
 
         }
-
-
-
     }
 }

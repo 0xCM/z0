@@ -7,11 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Diagnostics;    
     using System.Runtime.CompilerServices;
-    using System.Security;
-    using System.Runtime.InteropServices;
 
-    using static root;
-    using static nfunc;
+    using static Core;
     using static Examples;
 
     static class Examples
@@ -233,12 +230,12 @@ namespace Z0.Mkl
             (var method, var introMsg) = varintro($"{m}x{n} * {n}x{m} = {m}x{m}", silent);
             var count = m*n;
             
-            var srcA = alloc<double>(count);
+            var srcA = Arrays.alloc<double>(count);
             for(var i=1; i<= count; i++)
                 srcA[i-1] = i;
             var a = Matrix.blockload<M,N,double>(srcA);
 
-            var srcB = alloc<double>(m*n);
+            var srcB = Arrays.alloc<double>(m*n);
             for(var i=1; i<= count; i++)
                 srcB[i-1] = i;
             var b = Matrix.blockload<N,M,double>(srcB);

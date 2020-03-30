@@ -34,7 +34,5 @@ namespace Z0.Mkl
         public readonly Block256<T> LeftVectors;
 
         public readonly Block256<T> RightVectors;
-
     }
-
 }

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Defines a specification for producing LSB-oriented masks
@@ -57,11 +56,9 @@ namespace Z0
         public LsbMask<F,D,S> As<S>(S s = default)
             where S : unmanaged
                 => default;
-
-        public string Format()
-            => $"lsb(f:{natval<F>()}, d:{natval<D>()}, t:{Identify.NumericType<T>()})";
-
+        
         public override string ToString()
-            => Format();
+            => this.Format();
+
     }
 }

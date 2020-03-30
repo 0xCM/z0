@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     public static class BitBlockX
     {
@@ -100,7 +99,7 @@ namespace Z0
         public static BitBlock<T> Unsize<N,T>(this BitBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitBlocks.load(src.Data, natval<N>()); 
+                => BitBlocks.load(src.Data, nati<N>()); 
 
         /// <summary>
         /// Extracts the represented data as a bitstring

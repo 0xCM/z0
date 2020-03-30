@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;
 
     unsafe struct VslSSTaskHandle<T> : IDisposable
         where T : unmanaged
@@ -47,9 +47,7 @@ namespace Z0.Mkl
                 VSL.vsldSSNewTask(ref TaskPtr, ref Dim[0], ref SampleCount[0], ref MatrixFormat[0], 
                     ref MemoryMarshal.Cast<T,double>(samples)[0]).AutoThrow();
             else
-                throw Unsupported.define<T>();
-
-            
+                throw Unsupported.define<T>();            
         }
 
         IntPtr TaskPtr;
@@ -59,13 +57,8 @@ namespace Z0.Mkl
         int[] SampleCount;
 
         VslSSMatrixStorage[] MatrixFormat;
-
         
         public void Dispose()
             => VSL.vslSSDeleteTask(ref edit(in TaskPtr)).AutoThrow();
     }
-
-
-
-
 }

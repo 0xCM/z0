@@ -10,6 +10,15 @@ namespace Z0
     partial class Core
     {
         /// <summary>
+        /// Retrieves the value of a type natural represented as a signed integer
+        /// </summary>
+        /// <typeparam name="N">The nat type</typeparam>
+        [MethodImpl(Inline)]   
+        public static int nati<N>(N n = default) 
+            where N : unmanaged, ITypeNat
+                => (int)value<N>();
+
+        /// <summary>
         /// Returns the numeric value represented by a natural type
         /// </summary>
         /// <param name="n">The natural type representativev</param>

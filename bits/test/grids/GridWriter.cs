@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     public static class GridWriter
     {
@@ -45,7 +43,5 @@ namespace Z0
             Emit(64,1, 256);
 
         }
-
     }
-
 }

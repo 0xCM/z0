@@ -5,7 +5,6 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Wraps a pointer to a VSL stream

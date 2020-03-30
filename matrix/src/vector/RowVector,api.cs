@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Collections.Generic;        
 
-    using static Root;
-    using static Nats;
+    using static Core;
     using static CastNumeric;
 
     /// <summary>
@@ -117,7 +116,7 @@ namespace Z0
         public static RowVector256<N,T> blockalloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => RowVector256<N,T>.Load(Blocks.square<T>(n256, natval(n)));
+                => RowVector256<N,T>.Load(Blocks.square<T>(n256, nati(n)));
         
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value

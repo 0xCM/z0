@@ -19,6 +19,7 @@ namespace Z0
         where K2: unmanaged, ITypeNat
     {
         static K1 k1 => default;
+
         static K2 k2 => default;
         
         public static string Description => $"{k1} == {k2}";

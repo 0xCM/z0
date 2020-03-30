@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Core;
 
     public class t_bvparts : t_bitvectors<t_bvparts>
     {

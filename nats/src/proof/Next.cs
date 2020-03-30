@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static nfunc;
-    using static Components;
     
     /// <summary>
-    /// Encodes a natural number k such that k1:K1 & k2:K2 => k = k1 + 1
+    /// When closed over a natural K, encodes a natural number k:K such that k1:K1 & k2:K2 => k = k1 + 1
     /// </summary>
     public readonly struct Next<K> : ITypeNat
         where K : unmanaged, ITypeNat

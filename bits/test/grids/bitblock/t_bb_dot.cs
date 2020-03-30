@@ -65,8 +65,8 @@ namespace Z0
         public void nbb_dot_63x64()
             => bitblock_dot_check<N63,ulong>();
 
-        public void nbb_dot_87x8()
-            => bitblock_dot_check<N87,byte>();
+        public void nbb_dot_64x8()
+            => bitblock_dot_check<N63,byte>();
 
         public void nbb_dot_128x16()
             => bitblock_dot_check<N128,ushort>();

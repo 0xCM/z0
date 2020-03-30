@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Shows the "extended" De Morgan's laws hold as specified in Chapter 2 of Hacker's Delight
     /// </summary>
     public class t_bvlaws : t_bitvectors<t_bvlaws>
     {
-
         /// <summary>
         /// Verifies the identity  ~(x & y) = ~ x | ~ y holds for 32-bit bitvectors 
         /// </summary>
@@ -27,7 +26,6 @@ namespace Z0
                 Claim.eq(~(x & y), ~x | ~ y);
             }
         }
-
 
         /// <summary>
         /// Verifies the identity  ~(x & y) = ~ x | ~ y holds for 64-bit bitvectors 
@@ -266,7 +264,6 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Verifies the identity ~(x - y) = ~x + y holds for 64-bit bitvectors
         /// </summary>
@@ -280,7 +277,5 @@ namespace Z0
                 Claim.eq(~(y - x), ~y + x);
             }
         }
-
     }
-
 }

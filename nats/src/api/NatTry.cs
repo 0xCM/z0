@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines proof attempts for type naturals
     /// </summary>
-    public static class NatTry
+    static class NatTry
     {
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if 

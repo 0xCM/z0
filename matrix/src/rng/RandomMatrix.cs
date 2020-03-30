@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static nfunc;
-    using static Nats;
-    using static Root;
+    using static Core;
 
     /// <summary>
     /// Defines the matrix api surface

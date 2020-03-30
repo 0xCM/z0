@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static nfunc;
@@ -90,8 +86,5 @@ namespace Z0
         public static NatOdd<K> odd<K>(K k)
             where K: unmanaged, ITypeNat
                 => new NatOdd<K>(k);
-
-
     }
-
 }

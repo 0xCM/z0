@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static nfunc;
-    using static Nats;
+    using static Core;
+    using static CastNumeric;
 
     public static class Markovian
     {

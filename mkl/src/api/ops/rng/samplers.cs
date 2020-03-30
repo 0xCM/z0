@@ -5,10 +5,9 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Defines factory methods for creating distribution samplers
@@ -630,5 +629,4 @@ namespace Z0.Mkl
         public static IRngSampler<double> sampler(MklRng src, LaplaceSpec<double> spec, int? capacity = null)
             => new LaplaceSampler<double>(src, spec, capacity); 
     }
-
 }

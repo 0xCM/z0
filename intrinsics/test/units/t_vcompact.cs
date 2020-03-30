@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Nats;
+    using static Core;
 
     public class t_vcompact : t_vinx<t_vcompact>
     {
@@ -136,7 +136,6 @@ namespace Z0
             var c0 = gvec.vinc<uint>(n,16);
             var d0 = gvec.vinc<uint>(n,24);      
 
-
             var compacted = dvec.vcompact(a0,b0,c0,d0, n256, z8);        
             var inflated = dvec.vinflate(compacted, n1024, z32);
 
@@ -166,10 +165,7 @@ namespace Z0
                 Notify(y.FormatAsList());
             }        
             case1();
-            case2();
-            
+            case2();            
         }
-
     }
-
 }

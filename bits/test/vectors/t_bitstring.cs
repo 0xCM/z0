@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Core;
 
     public class t_bitstring2 : t_bitvectors<t_bitstring2>
     {
@@ -364,18 +364,17 @@ namespace Z0
             where T : unmanaged
         {
             
-            var storage = new byte[natval<N>()];
+            var storage = new byte[value<N>()];
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.BitVector<N,T>();
                 var y = x.ToBitString(storage);
-                Claim.eq(natval<N>(), x.Width);
+                Claim.eq(nati<N>(), x.Width);
                 Claim.eq(x.Width, y.Length);
                 
                 var z = y.ToBitVector<N,T>();                        
                 Claim.eq(x,z);
             }           
         }
-
     }
 }

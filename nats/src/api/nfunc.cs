@@ -8,17 +8,8 @@ using System.Runtime.CompilerServices;
 using Z0;
 using static Z0.Components;
 
-public static class nfunc
+static class nfunc
 {
-    /// <summary>
-    /// Retrieves the value of a type natural represented as a signed integer
-    /// </summary>
-    /// <typeparam name="N">The nat type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int nati<N>() 
-        where N : unmanaged, ITypeNat
-            => (int)TypeNats.value<N>();
-
     /// <summary>
     /// Constructs a natural representative
     /// </summary>

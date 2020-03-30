@@ -12,7 +12,6 @@
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(Identify)" />  
     <ProjectReference Include="$(Kinds)" />  
-    <ProjectReference Include="$(Monadic)" />
     <ProjectReference Include="$(Memories)" />    
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Reflective)" />

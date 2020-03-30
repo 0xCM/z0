@@ -60,16 +60,14 @@ namespace Z0
         public OpUri GroupUri
             => new OpUri(Scheme, HostPath, GroupName, OpIdentity.Empty);
 
-        OpUri INullary<OpUri>.Zero => Empty;
 
-        [MethodImpl(Inline)]
-        static IParser<OpUri> Parser()
-            => default(OpUri);
-        
         [MethodImpl(Inline)]
         public static ParseResult<OpUri> Parse(string text)
-            => Parser().Parse(text);
+            => OpUriParser.The.Parse(text);            
 
+        OpUri INullary<OpUri>.Zero => Empty;
+    
+            
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
             => a.Equals(b);
@@ -142,7 +140,5 @@ namespace Z0
         public override string ToString()
             => Format();
         
-        ParseResult<OpUri> IParser<OpUri>.Parse(string text)
-            => OpUriParser.The.Parse(text);            
     }
 }

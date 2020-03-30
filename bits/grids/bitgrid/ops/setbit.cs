@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     partial class BitGrid
     {
@@ -51,6 +50,6 @@ namespace Z0
         public static void setbit<N,T>(N width, int row, int col, bit state, ref T dst)    
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => setbit(BitCalcs.bitindex(natval(width),row,col), state, ref dst);
+                => setbit(BitCalcs.bitindex(nati(width),row,col), state, ref dst);
     }
 }

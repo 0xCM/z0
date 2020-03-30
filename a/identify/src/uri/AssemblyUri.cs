@@ -30,16 +30,11 @@ namespace Z0
             get => Id == PartId.None || string.IsNullOrWhiteSpace(Identifier);
         }
 
-        AssemblyUri INullary<AssemblyUri>.Zero => Empty;
-
-        
-        [MethodImpl(Inline)]
-        static IParser<AssemblyUri> Parser()
-            => default(AssemblyUri);
+        AssemblyUri INullary<AssemblyUri>.Zero => Empty;        
         
         [MethodImpl(Inline)]
         public static ParseResult<AssemblyUri> Parse(string text)
-            => Parser().Parse(text);
+            => from id in Enums.parse<PartId>(text) select AssemblyUri.Define(id);
                 
         [MethodImpl(Inline)]
         public static AssemblyUri Define(PartId id)
@@ -51,9 +46,6 @@ namespace Z0
             this.Id = id;
             this.Identifier = id != 0 ? id.Format() : text.blank;
         }
-
-        ParseResult<AssemblyUri> IParser<AssemblyUri>.Parse(string text)
-            => from id in Enums.parse<PartId>(text) select AssemblyUri.Define(id);
 
         [MethodImpl(Inline)]
         public bool Equals(AssemblyUri src)

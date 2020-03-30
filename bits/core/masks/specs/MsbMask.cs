@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Defines a specification for producing MSB-oriented masks
@@ -58,10 +57,7 @@ namespace Z0
             where S : unmanaged
                 => default;
 
-        public string Format()
-            => $"msb(f:{natval<F>()}, d:{natval<D>()}, t:{Identify.NumericType<T>()})";
-
         public override string ToString()
-            => Format();
+            => this.Format();
     }
 }

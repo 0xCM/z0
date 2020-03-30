@@ -33,14 +33,16 @@ namespace Z0
         }
 
         ApiHostUri INullary<ApiHostUri>.Zero => Empty;
-
-        [MethodImpl(Inline)]
-        static IParser<ApiHostUri> Parser()
-            => default(ApiHostUri);
         
         [MethodImpl(Inline)]
         public static ParseResult<ApiHostUri> Parse(string text)
-            => Parser().Parse(text);
+        {
+            var parts = text.Split('/');
+            if(parts.Length == 2 && Enum.TryParse(parts[0], true, out PartId owner))
+                return ParseResult.Success(text,Define(owner, parts[1]));
+            else
+                return ParseResult.Fail<ApiHostUri>(text);
+        }
 
         [MethodImpl(Inline)]
         public static ApiHostUri FromHost(Type host)
@@ -71,15 +73,6 @@ namespace Z0
             this.Identifier = owner != 0 ? $"{Owner.Format()}/{Name}" : name;
         }
  
-        ParseResult<ApiHostUri> IParser<ApiHostUri>.Parse(string text)
-        {
-            var parts = text.Split('/');
-            if(parts.Length == 2 && Enum.TryParse(parts[0], true, out PartId owner))
-                return ParseResult.Success(text,Define(owner, parts[1]));
-            else
-                return ParseResult.Fail<ApiHostUri>(text);
-        }
-
         public string Format()
             => Identifier;
 

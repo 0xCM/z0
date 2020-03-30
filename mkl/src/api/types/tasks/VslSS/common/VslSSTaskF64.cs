@@ -5,8 +5,6 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
     
     sealed class VslSSTaskF64 : VslSSTask<double>
     {
@@ -41,5 +39,4 @@ namespace Z0.Mkl
                 return VSL.vsldSSNewTask(ref Pointer, ref Dim, ref SampleCount, ref Storage, ref Samples[0], null, ref Indices[0]);
         }            
     }
-
 }

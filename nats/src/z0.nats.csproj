@@ -9,12 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Custom)" />
 
   </ItemGroup>

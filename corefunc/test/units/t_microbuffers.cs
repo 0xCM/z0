@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Core;
 
     public sealed class t_microbuffers : UnitTest<t_microbuffers>
     {
@@ -35,7 +35,7 @@ namespace Z0
             Claim.yea(stack.Pop());
             Claim.nea(stack.Pop());
             Claim.yea(stack.Pop());            
-            stack.Push(on);
+            stack.Push(bit.On);
             Claim.yea(stack.Pop());
         }
 

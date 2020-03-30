@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
         
     using static Components;  
-    using static CastNumeric;  
-
+    
     /// <summary>
     /// Represents div/mod operations for a divisor of type N; This type forms a commutative
     /// ring over the set of least residues {0,...,N-1}, i.e. the ring of integers modulo N,
@@ -148,10 +147,10 @@ namespace Z0
         public static uint mod(uint a)
             => _Mod.mod(a);
 
-        [MethodImpl(Inline)]
-        public static T mod<T>(T a)
-            where T : unmanaged             
-                => convert<uint,T>(mod(convert<T,uint>(a)));
+        // [MethodImpl(Inline)]
+        // public static T mod<T>(T a)
+        //     where T : unmanaged             
+        //         => convert<uint,T>(mod(convert<T,uint>(a)));
 
         /// <summary>
         /// Computes the quotient a / n

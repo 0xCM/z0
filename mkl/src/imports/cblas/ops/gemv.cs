@@ -5,9 +5,6 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
     using static MklCommon;
@@ -54,7 +51,5 @@ namespace Z0.Mkl
                         ref byte alpha, ref byte A, int lda,
                         ref byte X, int incX, ref byte beta,
                         ref byte Y, int incY);
-
     }
-
 }

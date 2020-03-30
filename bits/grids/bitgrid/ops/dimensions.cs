@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     partial class BitGrid
     {                
@@ -138,7 +137,7 @@ namespace Z0
         /// <typeparam name="W">The grid dimension type</typeparam>
         public static IEnumerable<IDim2> p2dimensions<W>()
             where W : unmanaged,  ITypeNat<W>, INatPow2<W>
-                => p2dimensions(natval<W>());
+                => p2dimensions(value<W>());
 
         /// <summary>
         /// Enunerates the valid grid dimensions where the total bit width is a power of 2

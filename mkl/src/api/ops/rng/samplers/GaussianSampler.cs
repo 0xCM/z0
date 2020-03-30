@@ -6,7 +6,6 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static root;
     using static As;
 
     sealed class GaussianSampler<T> : Sampler<T, GaussianSpec<T>>

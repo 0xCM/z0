@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
         
-    using static Root;
+    using static Core;
 
     public readonly ref struct RowVector256<T>
         where T : unmanaged
@@ -18,11 +18,9 @@ namespace Z0
         public RowVector256(in Block256<T> src)
             => this.data = src;
 
-
         [MethodImpl(Inline)]
         public static implicit operator RowVector256<T>(in Block256<T> src)
             =>  new RowVector256<T>(src);
-
 
         [MethodImpl(Inline)]
         public static implicit operator Block256<T>(in RowVector256<T> src)

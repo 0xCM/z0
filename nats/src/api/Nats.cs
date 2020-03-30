@@ -165,14 +165,6 @@ namespace Z0
 
         public static N512 n512 => default;
 
-        public static N87 n87 => default;
-
-        public static N127 n127 => default;
-
-        public static N255 n255 => default;
-
-        public static N257 n257 => default;
-
         public static N1024 n1024 => default;
 
         public static N2048 n2048 => default;

@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Time)" />

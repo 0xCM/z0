@@ -6,8 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Nats;
-    using static nfunc;
+    using static Core;
         
     public class t_getrf : t_mkl<t_getrf>
     {
@@ -78,5 +77,4 @@ namespace Z0.Mkl
             Getrf64<N8,N8>();                
         }
     }
-
 }
