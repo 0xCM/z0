@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Characterizes the memory layout of a BitMatrix
@@ -45,7 +44,6 @@ namespace Z0
         /// </summary>
         public readonly int StorageSegs;
 
-
         /// <summary>
         /// Defines a grid specification predicated on specified row count, col count and bit width
         /// </summary>
@@ -71,7 +69,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => Define<T>(natval<M>(), natval<N>());
+                => Define<T>((ushort)value<M>(), (ushort)value<N>());
 
         [MethodImpl(Inline)]
         public static bool operator ==(GridSpec a, GridSpec b)

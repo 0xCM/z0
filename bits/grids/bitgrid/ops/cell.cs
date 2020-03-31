@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     partial class BitGrid
     {
@@ -55,8 +54,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
         {
-            int rowcells = (natval<N>() / 8)/size<T>();
-            int rowoffset = ((row*natval<N>())/8)/size<T>();
+            int rowcells = (nati<N>() / 8)/size<T>();
+            int rowoffset = ((row*nati<N>())/8)/size<T>();
             return RowBits.load(g.Data.Slice(rowoffset, rowcells));
         }
     }

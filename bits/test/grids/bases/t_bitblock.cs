@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static root;
-    using static Nats;
+    using static Gone;
 
     public abstract class t_bitblock<X> : t_bitgrids_base<X>
         where X : t_bitblock<X>, new()

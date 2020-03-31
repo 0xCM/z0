@@ -9,7 +9,6 @@ namespace Z0
 
     partial class BitMatrix
     {   
-        //1000010000100001
         public static BitMatrix4 identity(N4 n) 
             => BitMatrix.primal(n,(ushort)0b1000010000100001);
 

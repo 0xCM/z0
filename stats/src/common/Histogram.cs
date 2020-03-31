@@ -8,7 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static root;
+    using static Core;
+    using static CastNumeric;
 
     public class Histogram
     {
@@ -127,7 +128,7 @@ namespace Z0
         /// 
         public Span<Bin<T>> Buckets()            
         {
-            var buckets = alloc<Bin<T>>(Partitions.Length - 1);
+            var buckets = Spans.alloc<Bin<T>>(Partitions.Length - 1);
             for(var i = 1; i< Partitions.Length; i++)
                 buckets[i-1] = Bin.Define(PartitionDomain(i), BucketSize(i));
             return buckets;

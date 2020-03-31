@@ -6,8 +6,6 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
     using static TernaryBitLogicKind;
     using static NumericOps;

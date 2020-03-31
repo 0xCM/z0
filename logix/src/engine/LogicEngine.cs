@@ -9,8 +9,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     
-    using static root;
-    using static Nats;
+    using static Core;
 
     [ApiHost("logic.engine", ApiHostKind.Generic)]
     public static partial class LogicEngine

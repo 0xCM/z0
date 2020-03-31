@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
     using static As;
     using static BitMasks;
 
@@ -57,7 +56,7 @@ namespace Z0
             else if(typeof(N) == typeof(N7))
                 return index<T>(n7);
             else
-                throw unsupported<N>();
+                throw Unsupported.define<N>();
         }
         
         [MethodImpl(Inline)]

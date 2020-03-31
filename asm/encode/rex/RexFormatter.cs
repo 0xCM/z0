@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format(RexPrefix src, NumericBase @base)
-            => src.Data.Format(@base);
+            => src.Scalar.Format(@base);
 
         [MethodImpl(Inline)]
         public string Format(RexPrefix src)

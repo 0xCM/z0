@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static root;
-    using static Nats;
+    using static Gone;
 
     public class t_rotl : t_bitcore<t_rotl>
     {

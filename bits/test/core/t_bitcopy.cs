@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static root;
-
+    using static Core;
+    
     public class t_bitcopy : t_bitcore<t_bitcopy>
     {            
         public void bitcopy_check()
@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {            
             var zed = zero<T>();
-            var lit = ones<T>();
+            var lit = root.ones<T>();
             var min = byte.MinValue;
             var max = (byte)bitsize<T>();
 

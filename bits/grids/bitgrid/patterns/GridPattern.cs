@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;
+    using static Core;
     using static gvec;
     using static BitGrid;
 
@@ -98,7 +95,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var sep = natval(n);
+            var sep = nati(n);
             var pattern = BitMask.lo(sep, z64) << sep;                        
             return vgeneric.generic<T>(vgeneric.vbroadcast(w,gbits.replicate(pattern)));
         }

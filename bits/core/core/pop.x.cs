@@ -9,7 +9,7 @@ namespace Z0
     
     using static Core;
 
-    partial class BitsX
+    partial class XBits
     {               
         [MethodImpl(Inline)]   
         public static ulong PopCount(this Span<byte> src)

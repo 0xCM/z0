@@ -12,6 +12,7 @@ namespace Z0
 
     using static Core;
 
+    [ApiHost]
     public static unsafe class memory
     {
         /// <summary>
@@ -105,6 +106,75 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Memory<T> edit<T>(ReadOnlyMemory<T> src)
             => MemoryMarshal.AsMemory(src);
+
+        /// <summary>
+        /// Reads a single byte froma byte source
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe byte read8(in byte src)
+            => *(byte*)constptr(in src);
+
+        /// <summary>
+        /// Reads 16 bits from a contiguous sequence of 2 bytes
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ushort read16(in byte src)
+            => *(ushort*)constptr(in src);
+
+        /// <summary>
+        /// Reads 32 bits from a contiguous sequence of 4 bytes
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe uint read32(in byte src)
+            => *(uint*)constptr(in src);
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 8 bytes
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong read64(in byte src)
+            => *(ulong*)constptr(in src);
+
+
+        /// <summary>
+        /// Projects a source byte onto a byte reference
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The bit target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe void store8(byte src, ref byte dst)
+            => *((byte*)ptr(ref dst)) = src;
+
+        /// <summary>
+        /// Projects 16 contiguous source bits onto a contiguous sequence of 2 bytes
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The bit target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe void store16(ushort src, ref byte dst)
+            => *((ushort*)ptr(ref dst)) = src;
+
+        /// <summary>
+        /// Projects 32 contiguous source bits onto a contiguous sequence of 4 bytes
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The bit target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe void store32(uint src, ref byte dst)
+            => *((uint*)ptr(ref dst)) = src;
+
+        /// <summary>
+        /// Projects 64 contiguous source bits onto a contiguous sequence of 8 bytes
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The bit target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe void store64(ulong src, ref byte dst)
+            => *((ulong*)ptr(ref dst)) = src;        
 
         /// <summary>
         /// Casts memory cells of one type to another

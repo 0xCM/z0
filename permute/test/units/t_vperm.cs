@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static root;
-    using static Nats;
+    using static Gone;
 
     public class t_vperm : UnitTest<t_vperm>
     {

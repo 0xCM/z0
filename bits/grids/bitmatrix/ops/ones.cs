@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     partial class BitMatrix
     {        
@@ -55,7 +54,7 @@ namespace Z0
             where T : unmanaged
        {            
             var dst = alloc(n, t);
-            var order  = natval(n);
+            var order  = nati(n);
             for(var i = 0; i< order; i++)
                 dst[i,i] = true;            
             return dst;

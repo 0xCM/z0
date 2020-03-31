@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Nats;
+    using static Gone;
     
     public class t_bg_xor : t_bg<t_bg_xor>
     {        

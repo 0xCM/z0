@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static vgeneric;
-    using static Nats;
+    using static Core;
         
     partial class gvec
     {                        

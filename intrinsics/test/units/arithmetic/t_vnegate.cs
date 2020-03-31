@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Nats;
+    using static Gone;
 
     public class t_vnegate : t_vinx<t_vnegate>
     {

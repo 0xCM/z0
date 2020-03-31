@@ -9,7 +9,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Gone;
     
     public class t_bm_equality : t_bm<t_bm_equality>
     {

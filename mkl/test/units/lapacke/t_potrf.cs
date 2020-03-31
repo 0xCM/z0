@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Nats;
+    using static Gone;
     
     public class t_potrf : UnitTest<t_potrf>
     {

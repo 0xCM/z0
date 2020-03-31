@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static root;
-    using static Nats;
+    using static Gone;
     
     public class t_dot : t_mkl<t_dot>
     {

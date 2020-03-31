@@ -353,7 +353,6 @@ namespace Z0
         public static ref T seek<T>(Span<T> src, int count)
             => ref seek(ref head(src), count);
 
-
         /// <summary>
         /// Presents the bytespan head as a reference to an unsigned 8-bit integer
         /// </summary>
@@ -551,43 +550,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref readonly T skipb<T>(ReadOnlySpan<T> src, long count)
             => ref refs.skipb(in head(src), count);     
-
-        /// <summary>
-        /// Projects a source byte onto a byte reference
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
-        public static unsafe void store8(byte src, ref byte dst)
-            => *((byte*)ptr(ref dst)) = src;
-
-        /// <summary>
-        /// Projects 16 contiguous source bits onto a contiguous sequence of 2 bytes
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
-        public static unsafe void store16(ushort src, ref byte dst)
-            => *((ushort*)ptr(ref dst)) = src;
-
-        /// <summary>
-        /// Projects 32 contiguous source bits onto a contiguous sequence of 4 bytes
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
-        public static unsafe void store32(uint src, ref byte dst)
-            => *((uint*)ptr(ref dst)) = src;
-
-        /// <summary>
-        /// Projects 64 contiguous source bits onto a contiguous sequence of 8 bytes
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
-        public static unsafe void store64(ulong src, ref byte dst)
-            => *((ulong*)ptr(ref dst)) = src;        
-
 
         /// <summary>
         /// Presents generic reference as a generic pointer

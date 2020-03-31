@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Controls formatting when bitstring content is rendered as text
     /// </summary>
-    public readonly struct BitFormatConfig : IFormatConfig
+    public readonly struct BitFormatConfig 
     {        
         /// <summary>
         /// Indicates whether leading zeros should be trimmed

@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static LogicEngine;
     
     using static root;
-    using static Nats;
+    using static Gone;
 
     public class t_shift_expr : TypedLogixTest<t_shift_expr>
     {        

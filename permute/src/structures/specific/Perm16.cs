@@ -40,7 +40,7 @@ namespace Z0
         Perm16(Vector128<byte> data)
             => this.data = data;
 
-        static N128 w => Nats.n128;        
+        static N128 w => n128;        
     }
 
 

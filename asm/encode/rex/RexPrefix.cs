@@ -12,7 +12,7 @@ namespace Z0.Asm
     using RFI = RexFieldIndex;   
     using RFW = RexFieldWidth;
 
-    public struct RexPrefix : INumericBits<RexPrefix,byte>, IFormattable<RexPrefix>
+    public struct RexPrefix : IScalarField<RexPrefix,byte>, IFormattable<RexPrefix>
     {                    
         public byte Content;
 
@@ -38,7 +38,7 @@ namespace Z0.Asm
         RexPrefix(byte src)
             => this.Content = src;
 
-        public byte Data
+        public byte Scalar
         {
             [MethodImpl(Inline)] get => Content;
             [MethodImpl(Inline)] set => Content = value;

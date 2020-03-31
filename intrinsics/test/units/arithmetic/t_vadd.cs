@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Nats;
+    using static Core;
 
     public class t_vadd : t_vinx<t_vadd>
     {
@@ -26,7 +26,6 @@ namespace Z0
             vadd_check(w, z32i);
             vadd_check(w, z64);
             vadd_check(w, z64i);
-
         }
 
         void vadd_check(N256 w)

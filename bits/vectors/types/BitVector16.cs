@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
+    using static Core;    
 
     /// <summary>
     /// Defines a 16-bit bitvector
     /// </summary>
-    public struct BitVector16
+    public struct BitVector16 : IBitVector<BitVector16,ushort>
     {
         internal ushort data;            
 
@@ -297,7 +297,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => bytes(data);
+            get => BitVector.bytes(data);
         }
 
         /// <summary>
@@ -333,8 +333,14 @@ namespace Z0
         public override int GetHashCode()
             => data.GetHashCode();
         
+         public string Format(BitFormatConfig config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
         public override string ToString()
-            => this.Format();
-   }
+            => Format();
+  }
 
 }

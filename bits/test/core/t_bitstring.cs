@@ -10,10 +10,8 @@ namespace Z0
     
     using static Core;
 
-    public class t_bitstring : t_bitcore<t_bitstring,IBitStringCheck>
+    public class t_bitstring : t_bitcore<t_bitstring>
     {                
-        protected override IBitStringCheck Claim => IBitStringCheck.Checker;
-
         public void bs_seq_8u()
             => bs_seq_check<byte>();
 
@@ -156,10 +154,10 @@ namespace Z0
             var pairs = srcA.Zip(srcB);
 
             foreach(var aVal in srcA)
-                BitStringCheck.eq(aVal.ToBitString(), aVal.ToBitString());
+                Claim.eq(aVal.ToBitString(), aVal.ToBitString());
             
             foreach(var pair in pairs)
-                BitStringCheck.neq(pair.First.ToBitString(), pair.Second.ToBitString());
+                Claim.neq(pair.First.ToBitString(), pair.Second.ToBitString());
         }
 
         public void bs_truncate()

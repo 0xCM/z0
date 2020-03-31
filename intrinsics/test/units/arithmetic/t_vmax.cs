@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    using static Nats;
+    using static Core;
 
     public class t_vmax : t_vinx<t_vmax>
     {

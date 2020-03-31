@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
 
     public class t_bitspan_from : UnitTest<t_bitspan_from>
     {

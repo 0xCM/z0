@@ -5,7 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     
+    using static Components;
+
+    
+    public static class NextNat
+    {
+        [MethodImpl(Inline)]   
+        public static Next<K> get<K>(K k = default)
+            where K : unmanaged, ITypeNat
+                => default;
+    }
+
     /// <summary>
     /// When closed over a natural K, encodes a natural number k:K such that k1:K1 & k2:K2 => k = k1 + 1
     /// </summary>

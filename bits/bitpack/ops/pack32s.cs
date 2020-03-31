@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     
     using static As;    
-    using static Nats;
-    using static refs;
+    using static Core;
     using static CastNumeric;
     using static vgeneric;
     

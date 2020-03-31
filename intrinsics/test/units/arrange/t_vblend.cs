@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Nats;
+    using static Gone;
     using static vgeneric;
     using static HexConst;
     using K = Core;

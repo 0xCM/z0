@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Nats;
+    using static Gone;
     using static vgeneric;
 
     public class t_vreverse : t_vinx<t_vreverse>

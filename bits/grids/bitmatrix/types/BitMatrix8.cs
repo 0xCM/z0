@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static root;
-    using static Nats;
- 
+    using static Core;
+
     /// <summary>
     /// Defines an 8x8 matrix of bits
     /// </summary>

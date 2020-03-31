@@ -8,8 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     [ApiHost("vector.ops", ApiHostKind.Generic)]
     public static partial class VectorizedOps

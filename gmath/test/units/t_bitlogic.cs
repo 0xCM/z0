@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Gone;
     using S = Surrogates;
 
     public class t_bitlogic : t_gmath<t_bitlogic>

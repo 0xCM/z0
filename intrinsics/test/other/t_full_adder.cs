@@ -11,22 +11,6 @@ namespace Z0
 
     public class t_full_adder : UnitTest<t_full_adder>
     {
-        /// <summary>
-        /// A bit with state 1
-        /// </summary>
-        public static bit on
-        {
-            get => bit.On;
-        }
-
-        /// <summary>
-        /// A bit with state 0
-        /// </summary>
-        public static bit off
-        {
-            get => bit.Off;
-        }
-
         public void fulladder_logical()
         {
             FullAdder.Compute(off, off, off, out bit s0, out bit c0);

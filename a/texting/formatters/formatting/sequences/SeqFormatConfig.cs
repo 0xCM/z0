@@ -9,13 +9,8 @@ namespace Z0
 
     using static Textual;
 
-    public readonly struct SeqFormatConfig : ISeqFormatConfig
+    public readonly struct SeqFormatConfig : ISeqFormatConfig<SeqFormatConfig>
     {
-        [MethodImpl(Inline)]
-        public static SeqFormatConfig<C> Define<C>(C c)
-            where C : ISeqFormatConfig
-            => new SeqFormatConfig<C>(c);
-
         [MethodImpl(Inline)]
         public static SeqFormatConfig Define(string delimiter)
             => new SeqFormatConfig(delimiter);
@@ -30,25 +25,7 @@ namespace Z0
 
     }
 
-    public readonly struct SeqFormatConfig<C> : ISeqFormatConfig<C>
-        where C : ISeqFormatConfig
-    {
-        [MethodImpl(Inline)]
-        internal SeqFormatConfig(C c)
-        {
-            this.BaseConfig = c;
-        }
-
-        public C BaseConfig {get;}
-
-        public string Delimiter
-        {
-            [MethodImpl(Inline)]         
-            get => BaseConfig.Delimiter;
-        }
-    }
-
-    public readonly struct DefaultSeqFormatConfig : ISeqFormatConfig
+    public readonly struct DefaultSeqFormatConfig : ISeqFormatConfig<DefaultSeqFormatConfig>
     {        
         public static DefaultSeqFormatConfig Default => default(DefaultSeqFormatConfig);
         

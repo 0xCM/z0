@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Gone;
 
     public class t_gfmul : t_bitvectors<t_gfmul>
     {

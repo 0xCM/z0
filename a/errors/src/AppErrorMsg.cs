@@ -36,7 +36,8 @@ namespace Z0
                 => AppMsg.Define($"{typeof(T).Name}.{kind} not supported", AppMsgKind.Error, caller, file, line);
      
         public static AppMsg TypeUnsupported(Type t, string caller, string file, int? line)
-                => AppMsg.Define($"Type {t.Name} is not supported in the current context", AppMsgKind.Error, caller, file, line);
+            => AppMsg.Define($"Type {t.Name} is not supported in the current context", AppMsgKind.Error, caller, file, line);
+        
         public static AppMsg KindOpUnsupported<S,T>(S src, T dst, string caller, string file, int? line)
             where S : Enum
             where T : Enum
@@ -44,6 +45,9 @@ namespace Z0
 
         public static AppMsg NotEqual(object lhs, object rhs, string caller, string file, int? line)
             => AppMsg.Define($"Equality failure: {lhs} != {rhs}", AppMsgKind.Error, caller, file, line) ;
+
+        public static AppMsg NotEqual(object lhs, object rhs)
+            => AppMsg.NoCaller($"Equality failure: {lhs} != {rhs}", AppMsgKind.Error);
 
         public static AppMsg NotClose(float lhs, float rhs, float err, float tolerance, string caller, string file, int? line)
             => AppMsg.Define($"Approximate equality failure: relerr({lhs},{rhs}) = {err} > {tolerance}", AppMsgKind.Error, caller, file, line) ;
@@ -53,6 +57,9 @@ namespace Z0
 
         public static AppMsg Equal(object lhs, object rhs, string caller, string file, int? line)
             => AppMsg.Define($"Non-equality failure: {lhs} == {rhs}", AppMsgKind.Error, caller, file, line) ;
+
+        public static AppMsg Equal(object lhs, object rhs)
+            => AppMsg.NoCaller($"Non-equality failure: {lhs} == {rhs}", AppMsgKind.Error);
 
         public static AppMsg NotLessThan(object lhs, object rhs, string caller, string file, int? line)
             => AppMsg.Define($"Not less than failure: !({lhs} < {rhs})", AppMsgKind.Error, caller, file, line) ;

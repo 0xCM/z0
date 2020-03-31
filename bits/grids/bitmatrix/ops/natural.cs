@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;    
     using static As;
 
     partial class BitMatrix
@@ -117,7 +116,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCalcs.mincells<N,T>() * natval<M>();
+                => BitCalcs.mincells<N,T>() * nati<M>();
 
         [MethodImpl(Inline)]
         public static TableIndex tableindex<M,N,T>(int row, int col, M m = default, N n = default, T t =default)
@@ -188,6 +187,5 @@ namespace Z0
             var C = alloc<N,T>();
             return xor(in A, in B, ref C);
         }
-
     }
 }

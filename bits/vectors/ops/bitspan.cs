@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using static root;    
-    using static Nats;
+    using static Core;
 
     partial class BitVector
     {
@@ -78,7 +75,5 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitSpan.from(x.Scalar, (int)TypeNats.value<N>());
-
     }
-
 }

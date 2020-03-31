@@ -6,16 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    // using static Root;
-    // using static Nats;
     using static As;
-    using static root;
-    using static Nats;
-    using static refs;
-
+    using static AsIn;
+    using static Core;
+    
     static partial class vblock
     {
         
@@ -286,66 +281,66 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void not(in byte A, ref byte Z)
-            => store64(gmath.not(Bytes.read64(A)), ref Z);
+            => memory.store64(gmath.not(memory.read64(A)), ref Z);
 
         [MethodImpl(Inline)]
         static void select(in byte A, in byte B, in byte C, ref byte Z)
-            => store64(gmath.select(Bytes.read64(A), Bytes.read64(B), Bytes.read64(C)), ref Z);
+            => memory.store64(gmath.select(memory.read64(A), memory.read64(B), memory.read64(C)), ref Z);
 
         [MethodImpl(Inline)]
         static void and(in byte A, in byte B, ref byte Z)
-            => store64(gmath.and(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.and(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void nand(in byte A, in byte B, ref byte Z)
-            => store64(gmath.nand(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.nand(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void or(in byte A, in byte B, ref byte Z)
-            => store64(gmath.or(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.or(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void nor(in byte A, in byte B, ref byte Z)
-            => store64(gmath.nor(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.nor(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xor(in byte A, in byte B, ref byte Z)
-            => store64(gmath.xor(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.xor(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xnor(in byte A, in byte B, ref byte Z)
-            => store64(gmath.xnor(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.xnor(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void nonimpl(in byte A, in byte B, ref byte Z)
-            => store64(gmath.nonimpl(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.nonimpl(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void impl(in byte A, in byte B, ref byte Z)
-            => store64(gmath.impl(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.impl(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void cimpl(in byte A, in byte B, ref byte Z)
-            => store64(gmath.cimpl(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.cimpl(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void cnonimpl(in byte A, in byte B, ref byte Z)
-            => store64(gmath.cnonimpl(Bytes.read64(A), Bytes.read64(B)), ref Z);
+            => memory.store64(gmath.cnonimpl(memory.read64(A), memory.read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xornot(in byte A, in byte B, ref byte Z)
-            => store64(gmath.xor(Bytes.read64(in A), gmath.not(Bytes.read64(in B))), ref Z);
+            => memory.store64(gmath.xor(memory.read64(in A), gmath.not(memory.read64(in B))), ref Z);
 
         [MethodImpl(Inline)]
         static bit testz(in byte A, in byte B)
-            => dvec.testz(Bytes.read64(in A), Bytes.read64(in B));
+            => dvec.testz(memory.read64(in A), memory.read64(in B));
 
         [MethodImpl(Inline)]
         static bit testc(in byte A, in byte B)
-            => dvec.testc(Bytes.read64(in A),Bytes.read64(in B));
+            => dvec.testc(memory.read64(in A),memory.read64(in B));
 
         [MethodImpl(Inline)]
         static bit testc(in byte A)
-            => dvec.testc(Bytes.read64(in A));
+            => dvec.testc(memory.read64(in A));
     }
 }

@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Nats;
+    using static Core;
 
     public class t_vinc : t_vinx<t_vinc>
     {
-
         public void vinc_check()
         {
             vinc_check(n128);

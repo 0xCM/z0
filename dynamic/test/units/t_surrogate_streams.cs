@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static root;
-    using static Nats;
+    using static Gone;
 
     public class t_surrogate_streams : UnitTest<t_surrogate_streams>
     {    

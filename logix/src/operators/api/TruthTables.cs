@@ -6,15 +6,17 @@ namespace Z0.Logix
 {
     using System;
     using System.IO;
-    using System.Runtime.CompilerServices;
     
-    using static root;
-    using static Nats;
+    using static Core;
 
     using Api = LogicOpApi;
 
     public static class TruthTables
     {
+        static bit on => bit.On;
+        
+        static bit off => bit.Off;
+
         /// <summary>
         /// Computes a the signature, also referred to as the truth vector, for an identified unary operator
         /// </summary>
@@ -149,7 +151,7 @@ namespace Z0.Logix
                 case ArityValue.Binary: emitBinary(dst); break;
                 case ArityValue.Ternary: emitTernary(dst); break;
                 default: 
-                    throw unsupported(arity);
+                    throw Unsupported.value(arity);
             }
         }
 

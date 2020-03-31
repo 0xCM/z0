@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    using static Nats;
+    using static Core;
 
     public class t_vdec : t_vinx<t_vdec>
     {
-
         public void vdec_check()
         {
             vdec_check(n128);

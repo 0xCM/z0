@@ -10,7 +10,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1;
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
 
-    using static root;
+    using static Core;
+    using static CastNumeric;
     using static As;
 
     public static partial class BitMask

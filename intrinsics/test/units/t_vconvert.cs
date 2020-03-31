@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static CastNumeric;
-    using static Nats;
+    using static Core;
     using static HexConst;
 
     public class t_vconvert : t_vinx<t_vconvert>

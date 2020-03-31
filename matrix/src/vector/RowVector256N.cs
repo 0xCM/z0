@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal RowVector256(Span<T> src)
         {
-            data = Blocks.safeload(Nats.n256,src);
+            data = Blocks.safeload(n256, src);
         }
 
         [MethodImpl(Inline)]
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal RowVector256(NatSpan<N,T> src)
         {
-            data = RowVector.safeload(Nats.n256,src);
+            data = RowVector.safeload(n256,src);
         }
                     
         public ref T this[int index] 

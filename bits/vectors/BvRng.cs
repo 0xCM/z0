@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static root;
-    using static Nats;
+    using static Core;
     
     public static class BvRng
     {   
@@ -41,7 +40,7 @@ namespace Z0
         public static BitVector8 BitVector(this IPolyrand random, N8 n, int wmax)
         {
             var v = random.Next<byte>();
-            var clamp = natval(n) - (int)math.min(natval(n), (uint)wmax);
+            var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
             return (v >>= clamp);
         }
 
@@ -64,7 +63,7 @@ namespace Z0
         public static BitVector16 BitVector(this IPolyrand random, N16 n, int wmax)
         {
             var v = random.Next<ushort>();
-            var clamp = natval(n) - (int)math.min(natval(n), (uint)wmax);
+            var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
             return (v >>= clamp);
         }
 
@@ -87,7 +86,7 @@ namespace Z0
         public static BitVector32 BitVector(this IPolyrand random, N32 n, int wmax)
         {
             var v = random.Next<uint>();
-            var clamp = natval(n) - (int)math.min(natval(n), (uint)wmax);
+            var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
             return (v >>= clamp);
         }
 
@@ -110,7 +109,7 @@ namespace Z0
         public static BitVector64 BitVector(this IPolyrand random, N64 n, int wmax)
         {
             var v = random.Next<ulong>();
-            var clamp = natval(n) - (int)math.min(natval(n), (uint)wmax);
+            var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
             return (v >>= clamp);
         }
 
@@ -180,7 +179,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var v = random.Next<T>();
-            var clamp = (byte)(bitsize<T>() - math.min(bitsize<T>(), natval(n)));
+            var clamp = (byte)(bitsize<T>() - math.min(bitsize<T>(), (int)value(n)));
             return gmath.srl(v,clamp);
         }    
 
@@ -191,7 +190,7 @@ namespace Z0
         {
             var w = Z0.BitVector128<N,T>.MaxWidth;
             var v = random.CpuVector<T>(w);
-            var clamp = w - math.min(w, natval(n));
+            var clamp = value(w) - NatCalc.min(w, n);
             return gvec.vsrlx(v,(byte)clamp);
         }
     }

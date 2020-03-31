@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public readonly struct HexSeqFormatConfig : ISeqFormatConfig<HexSeqFormatConfig>, IFormatConfig<HexSeqFormatConfig>
+    public readonly struct HexSeqFormatConfig : ISeqFormatConfig<HexSeqFormatConfig>
     {
         public static HexSeqFormatConfig Define(in HexFormatConfig hex, string delimiter = null)
             => new HexSeqFormatConfig(hex, delimiter ?? hex.Delimiter.ToString());

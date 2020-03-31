@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
 
     using static root;
-    using static Nats;
+    using static Gone;
     using T = t_dynamic_op_factories;
     using C = OpClasses;
 

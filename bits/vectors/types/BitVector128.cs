@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static root;    
-    using static Nats;
+    using static Core;
     using static vgeneric;
 
     /// <summary>
@@ -176,7 +175,7 @@ namespace Z0
         public int Width
         {
             [MethodImpl(Inline)]
-            get => natval<N>();
+            get => nati<N>();
         }
 
         /// <summary>

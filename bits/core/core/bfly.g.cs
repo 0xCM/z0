@@ -27,7 +27,7 @@ namespace Z0
             else if(typeof(N) == typeof(N8))
                 return bfly(n8,a);
             else if(typeof(N) == typeof(N16))
-                return bfly(Nats.n16,a);
+                return bfly(n16,a);
             else
                 throw Unsupported.define<N>();
         }            

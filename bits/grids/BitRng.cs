@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Collections.Generic;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     using BG = Z0.BitGrid;
     using BS = Z0.BitBlocks;

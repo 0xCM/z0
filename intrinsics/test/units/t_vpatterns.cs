@@ -7,7 +7,7 @@ namespace Z0
     using System;
     
     using static Literals;
-    using static Nats;
+    using static Core;
 
     public class t_vpatterns : t_vinx<t_vpatterns>
     {

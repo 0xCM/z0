@@ -6,17 +6,12 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
         
-    using static root;
-    using static Nats;
     using static LogicOps;
     using static OpHelpers;
     using static TernaryBitLogicKind;
     using LO = LogicOps;
 
-    //[ApiHost("logic.api",ApiHostKind.Direct)]
     public static class LogicOpApi
     {
         /// <summary>
@@ -47,10 +42,10 @@ namespace Z0.Logix
         {        
             switch(kind)
             {
-                case UnaryBitLogicKind.False: return off;
+                case UnaryBitLogicKind.False: return bit.Off;
                 case UnaryBitLogicKind.Not: return bit.not(a);
                 case UnaryBitLogicKind.Identity: return a;
-                case UnaryBitLogicKind.True: return on;
+                case UnaryBitLogicKind.True: return bit.On;
                 default: throw new NotSupportedException(sig(kind));
             }
         }    

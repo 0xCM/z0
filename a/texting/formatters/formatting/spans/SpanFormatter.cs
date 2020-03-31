@@ -39,27 +39,4 @@ namespace Z0
             return dst;
         }        
     }
-
-    public readonly struct SpanFormatter<T, C> : ISpanFormatter<T, C>
-        where T : ICustomFormattable
-        where C : ISeqFormatConfig
-    {
-        public string Format(ReadOnlySpan<T> src, in C config)
-            => FormatItems(src).Concat(config.Delimiter);
-
-        public string Format(ReadOnlySpan<T> src)
-            => FormatItems(src).Concat(DefaultSeqFormatConfig.Default.Delimiter);
-
-        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in C config)
-            => FormatItems(src);
-
-        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src)
-        {
-            var dst = new string[src.Length];
-            for(var i=0; i<dst.Length; i++)
-                dst[i] = src[i].Format();
-            return dst;
-        }        
-    }
-
 }

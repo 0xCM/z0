@@ -28,4 +28,20 @@ namespace Z0
 
 
     }
+
+    public interface IEqualCheck : IValidator
+    {
+
+    }
+
+    public interface IEqualCheck<T> : IEqualCheck
+    {
+        void eq(T a, T b);
+    }
+
+    public interface INotEqualCheck<T> : IValidator
+    {
+        void neq(T a, T b);
+    }
+
 }

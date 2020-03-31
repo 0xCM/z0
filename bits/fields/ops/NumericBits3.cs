@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
     /// <typeparam name="I">A indexing enumeration</typeparam>
     public readonly ref struct NumericBits<S,I,T>
-        where S : INumericBits<T>
+        where S : IScalarField<T>
         where I : unmanaged, Enum
         where T : unmanaged
     {
@@ -149,8 +149,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref S Write(ReadOnlySpan<T> src, ref S dst)
         {   
-            var data = dst.Data;
-            dst.Data = Ops.write(Spec, src, ref data);
+            var data = dst.Scalar;
+            dst.Scalar = Ops.write(Spec, src, ref data);
             return ref dst;
         }                 
 

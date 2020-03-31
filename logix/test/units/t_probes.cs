@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     
-    using static Nats;
+    using static Gone;
 
 
     public class t_probes : UnitTest<t_probes>

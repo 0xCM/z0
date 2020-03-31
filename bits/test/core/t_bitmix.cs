@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static root;
-    using static Nats;
+    using static Core;
         
     public class t_bitmix : t_bitcore<t_bitmix>
     {
@@ -88,8 +86,7 @@ namespace Z0
         }
 
         string sb_mix_report()
-        {
-            
+        {            
             var x = Random.Next<uint>();
             var y = Random.Next<uint>();
             var xE = Bits.project(Bits.select(x,BitMasks.Even32), BitMasks.Even32);

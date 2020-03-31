@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;    
     using static As;
-    using static Nats;
+    using static Core;
 
     partial class BitVector
     {
@@ -61,8 +60,7 @@ namespace Z0
         public static BitVector<N,T> natural<N,T>(BitString src, N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BvUtil.packseq(src.Slice(0, natval(n)).BitSeq, out T _);
-
+                => BvUtil.packseq(src.Slice(0, nati(n)).BitSeq, out T _);
     }
 
     static class BvUtil

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;    
 
     partial struct BitSpan
     {
@@ -29,7 +29,6 @@ namespace Z0
                 if(src[i])
                     return i;
             return -1;
-
         }
 
         [MethodImpl(Inline)]

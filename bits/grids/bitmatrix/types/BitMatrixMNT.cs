@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
+    using static Literals;
 
     /// <summary>
     /// Defines bitmatrix of natural dimensions over a primal type
@@ -90,7 +89,7 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => natval<M>();
+            get => nati<M>();
         }
 
         /// <summary>
@@ -99,7 +98,7 @@ namespace Z0
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => natval<N>();
+            get => nati<N>();
         }
 
         /// <summary>

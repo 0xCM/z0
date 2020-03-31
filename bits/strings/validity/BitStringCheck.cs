@@ -10,18 +10,34 @@ namespace Z0
     using static AppErrorMsg;
     using static Core;
     
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+    public interface IBitStringEqualityCheck : IEqualCheck<BitString>, INotEqualCheck<BitString>
+    {
+        void IEqualCheck<BitString>.eq(BitString a, BitString b)
+        {
+            if(!a.Equals(b))
+                throw failed(ValidityClaim.Eq, NotEqual(a,b));
+        }
+
+        void INotEqualCheck<BitString>.neq(BitString a, BitString b)
+        {
+            if(a.Equals(b))
+                throw failed(ValidityClaim.NEq, Equal(a,b));
+        }
+    }
+
+    public interface IBitStringCheck : IBitStringEqualityCheck, ICheckNumeric
+    {
+        static new IBitStringCheck<BitStringCheck> Checker => BitStringCheck.Checker;
+    }
+
+    public interface IBitStringCheck<C> : IBitStringCheck, ICheckNumeric<C>
+        where C : IBitStringCheck<C>, new()
+    {
+
+    }    
 
     public readonly struct BitStringCheck : IBitStringCheck<BitStringCheck>
     {
-        public static IBitStringCheck<BitStringCheck> Checker => default(BitStringCheck);
-        
-        public static bool neq(BitString lhs, BitString rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => !lhs.Equals(rhs) ? true : throw Checker.failed(ValidityClaim.NEq, Equal(lhs, rhs, caller, file, line));        
-
-        public static bool eq(BitString lhs, BitString rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.Equals(rhs) ? true : throw Checker.failed(ValidityClaim.Eq, NotEqual(lhs, rhs, caller, file, line));        
+        public static IBitStringCheck<BitStringCheck> Checker => default(BitStringCheck);        
     }
 }

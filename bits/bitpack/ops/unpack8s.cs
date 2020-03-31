@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
-    using static refs;    
-    using static Nats;
+    using static Core;
 
     partial class BitPack
     {
@@ -24,7 +21,7 @@ namespace Z0
         {
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
-            seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
+            refs.seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
         }
 
         /// <summary>
@@ -37,8 +34,8 @@ namespace Z0
         {
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
-            seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
-            seek64(ref dst, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            refs.seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
+            refs.seek64(ref dst, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
         }
 
         /// <summary>
@@ -52,10 +49,10 @@ namespace Z0
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
 
-            seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
-            seek64(ref dst, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
-            seek64(ref dst, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
-            seek64(ref dst, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
+            refs.seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
+            refs.seek64(ref dst, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            refs.seek64(ref dst, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
+            refs.seek64(ref dst, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
         }
 
         /// <summary>

@@ -16,5 +16,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int bitsize<T>(T rep)            
             => Unsafe.SizeOf<T>()*8;
+        
     }
 }

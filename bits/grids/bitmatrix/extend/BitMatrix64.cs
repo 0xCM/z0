@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     public static class BitMatrix64x
     {   
@@ -17,7 +16,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitBlock<N4096,ulong> ToBitVector(this BitMatrix64 A)
-            => BitBlocks.load(A.Data, n4096);
+            => BitBlocks.load(A.Data, default(N4096));
 
         /// <summary>
         /// Creates the matrix determined by a permutation

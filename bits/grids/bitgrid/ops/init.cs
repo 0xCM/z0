@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     partial class BitGrid
     {
@@ -533,8 +532,8 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = n256;
-            var blocks = Z0.Blocks.alloc<T>(blocksize, BitCalcs.tableblocks<T>(blocksize, natval(m), natval(n)));
-            Z0.Blocks.broadcast(d, blocks);
+            var blocks = Blocks.alloc<T>(blocksize, BitCalcs.tableblocks(blocksize, m,n,d));
+            Blocks.broadcast(d, blocks);
             return new BitGrid<M, N, T>(blocks);
         }
 

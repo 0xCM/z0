@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Defines a square bitmatrix of natural order over a primal type
@@ -29,7 +28,7 @@ namespace Z0
         public static int RowWidth 
         {
             [MethodImpl(Inline)]
-            get => natval<N>();
+            get => nati<N>();
         }
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace Z0
         public static int RowCellCount
         {
             [MethodImpl(Inline)]
-            get =>  BitCalcs.mincells(bitsize<T>(),natval<N>()); 
+            get =>  BitCalcs.mincells(bitsize<T>(),nati<N>()); 
         }
 
         public static int TotalCellCount
@@ -171,7 +170,7 @@ namespace Z0
         public void Fill(bit value)
         {            
             if(value)
-                Data.Fill(maxval<T>());
+                Data.Fill(Literals.maxval<T>());
             else
                 Data.Fill(zero<T>());
         }

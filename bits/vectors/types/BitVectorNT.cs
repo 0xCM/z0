@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;    
+    using static Core;        
     using static CastNumeric;
 
     /// <summary>
@@ -21,7 +21,7 @@ namespace Z0
     /// upper bound for the effective width. Finally, is the effective bitvector width, a value
     /// which is bounded above by the the natural width
     /// </remarks>
-    public struct BitVector<N,T>
+    public struct BitVector<N,T> : IBitVector<BitVector<N,T>,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
@@ -287,6 +287,12 @@ namespace Z0
             get => gmath.nonz(data);
         }
 
+        public Span<byte> Bytes 
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bytes(data);
+        }
+
         /// <summary>
         /// Reads/Manipulates a single bit
         /// </summary>
@@ -329,7 +335,13 @@ namespace Z0
         public readonly override int GetHashCode()
             => data.GetHashCode();
 
+        public string Format(BitFormatConfig config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
         public override string ToString()
-            => this.Format();
+            => Format();    
     }
 }

@@ -7,8 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
@@ -18,7 +17,7 @@ namespace Z0.Logix
     {        
         [MethodImpl(Inline)]
         public static bit zero()
-            => off;
+            => bit.Off;
 
         [MethodImpl(Inline)]
         public static bit one()
@@ -34,19 +33,19 @@ namespace Z0.Logix
 
         [MethodImpl(Inline), Op]
         public static bit @false(bit a)
-            => off;
+            => bit.Off;
 
         [MethodImpl(Inline), Op]
         public static bit @true(bit a)
-            => on;
+            => bit.On;
         
         [MethodImpl(Inline), Op]
         public static bit @false(bit a, bit b)
-            => off;
+            => bit.Off;
 
         [MethodImpl(Inline), Op]
         public static bit @true(bit a, bit b)
-            => on;
+            => bit.On;
 
         [MethodImpl(Inline), Op]
         public static bit and(bit a, bit b)
@@ -114,7 +113,7 @@ namespace Z0.Logix
 
         [MethodImpl(Inline), Op]
         public static bit @false(bit a, bit b, bit c)
-            => off;
+            => bit.Off;
 
         // a nor (b or c)
         [MethodImpl(Inline), Op]
@@ -569,7 +568,7 @@ namespace Z0.Logix
         //((A xor C) or ((A or B) xor 1))
         [MethodImpl(Inline), Op]
         public static bit f5b(bit a, bit b, bit c)
-            => or(xor(a,c), xor(or(a,b),on));
+            => or(xor(a,c), xor(or(a,b),bit.On));
 
         //(A ? not (C) : B)
         [MethodImpl(Inline), Op]
@@ -656,6 +655,6 @@ namespace Z0.Logix
 
         [MethodImpl(Inline), Op]
         public static bit @true(bit a, bit b, bit c)
-            => on;
+            => bit.On;
     }
 }

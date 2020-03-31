@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Reflection;
 
     using static root;
-    using static Nats;
+    using static Gone;
 
     using static TypedLogicSpec;
 

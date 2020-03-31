@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Nats;
+    using static Gone;
     using static vgeneric;
  
     public class t_cnonimpl : t_bitcore<t_cnonimpl>

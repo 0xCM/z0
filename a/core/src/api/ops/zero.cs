@@ -20,5 +20,7 @@ namespace Z0
         public static T zero<T>(T t)
             where T : unmanaged
                 => default(T);
+
+                
     }
 }

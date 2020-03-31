@@ -10,8 +10,8 @@ namespace Z0.Asm.Check
     using C = OpClass;
     using R = OpClasses;
     
-    using static Nats;
-    
+    using static Core;
+
     class AsmEvalDispatcher : IAsmEvalDispatcher
     {        
         public IAsmContext Context {get;}

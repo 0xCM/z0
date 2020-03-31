@@ -7,15 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static refs;
-    using static gmath;
-    using static Nats;
+    using static Core;
     using static CastNumeric;
     using S = Surrogates;
 
     public class t_arithmetic : t_gmath<t_arithmetic>
-    {
-        
+    {        
         public void add_check()
         {
             const string name = "add";

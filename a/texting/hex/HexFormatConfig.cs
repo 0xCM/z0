@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a common set of hex formatting options
     /// </summary>
-    public readonly struct HexFormatConfig : IFormatConfig
+    public readonly struct HexFormatConfig
     {   
         public const string PreSpecString = "0x";             
         

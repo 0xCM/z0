@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using System.Runtime.Intrinsics;
 
-    using static root;    
-    using static Nats;
+    using static Core;    
 
     partial class vBits
     {
@@ -433,7 +432,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<ulong> v0000FFFFFFFF0000(N256 w)
             => vgeneric.vbroadcast(w,BitMasks.Central64x64x32);
- 
-
     }
 }

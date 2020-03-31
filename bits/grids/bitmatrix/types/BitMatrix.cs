@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Defines a square bitmatrix with order determined by the primal type over which it is defined

@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Nats)" />        
   </ItemGroup>
 
   <ItemGroup>

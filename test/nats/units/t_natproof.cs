@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Nats;
+    using static Gone;
 
     public class t_natproof : UnitTest<t_natproof>
     {    
@@ -55,9 +55,9 @@ namespace Z0
             NatClaim.next(n5, n6);            
             NatClaim.next(n15, n16);
             
-            var n11 = Nats.next(n10);
-            var n12 = Nats.next(n11);
-            var n13 = Nats.next(n12);
+            var n11 = NextNat.get(n10);
+            var n12 = NextNat.get(n11);
+            var n13 = NextNat.get(n12);
             NatClaim.next(n10, n11);
             NatClaim.next(n11, n12);
             NatClaim.next(n12, n13);
@@ -66,15 +66,15 @@ namespace Z0
 
         public static void iterate()
         {
-           var n11 = Nats.next(n10);
-           var n12 = Nats.next(n11);
-           var n13 = Nats.next(n12);
-           var n14 = Nats.next(n13);
-           var n15 = Nats.next(n14);
-           var n16 = Nats.next(n15);
-           var n17 = Nats.next(n16);
-           var n18 = Nats.next(n17);
-           var n19 = Nats.next(n18);
+           var n11 = NextNat.get(n10);
+           var n12 = NextNat.get(n11);
+           var n13 = NextNat.get(n12);
+           var n14 = NextNat.get(n13);
+           var n15 = NextNat.get(n14);
+           var n16 = NextNat.get(n15);
+           var n17 = NextNat.get(n16);
+           var n18 = NextNat.get(n17);
+           var n19 = NextNat.get(n18);
            Claim.eq(n19.NatValue,19);
         }
     }

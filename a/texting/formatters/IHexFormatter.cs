@@ -13,7 +13,6 @@ namespace Z0
         string FormatItem(object item, string format);
     }
 
-
     public interface IHexFormatter<T> : IHexFormatter, ISpanFormatter<T,HexSeqFormatConfig,HexFormatConfig>
         where T : struct
          

@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static root;
-    using static Nats;
+    using static Gone;
     using static vgeneric;
 
     using static VectorizedOps;

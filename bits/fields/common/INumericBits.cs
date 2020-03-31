@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;
+    using static Core;    
 
     public interface IIndexedBits<F> : IBitField
         where F : unmanaged, Enum
@@ -15,21 +15,24 @@ namespace Z0
 
     }
 
-    public interface INumericBits<T> : IBitField
+    public interface IScalarField<T> : IBitField, IScalarBits<T>
         where T : unmanaged
     {
-        T Data {get;set;}
-
+        new T Scalar {get;set;}
+        
         int IBitField.TotalWidth
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => bitsize<T>();            
         }
+
+        T IScalarBits<T>.Scalar
+            => Scalar;
     }
 
-    public interface INumericBits<S,T> : INumericBits<T>, INumericFormatProvider<T>
+    public interface IScalarField<S,T> : IScalarField<T>, INumericFormatProvider<T>
         where T : unmanaged
-        where S : INumericBits<T>
+        where S : IScalarField<T>
     {        
     }
 }

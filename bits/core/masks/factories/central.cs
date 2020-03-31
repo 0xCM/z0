@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
+    using static CastNumeric;
     using static BitMasks;
 
     partial class BitMask
@@ -33,7 +33,7 @@ namespace Z0
             else if(typeof(D) == typeof(N6))
                 return central<T>(f,n6);
             else
-                throw unsupported<D>();        
+                throw Unsupported.define<D>();        
         }
 
         /// <summary>

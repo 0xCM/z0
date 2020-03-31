@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;    
+    using static Core;
     using static vgeneric;
     
     partial class vgbits
@@ -317,7 +316,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
- 
+                => generic<T>(vbroadcast<byte>(w, BitMask.lsb8f(d))); 
     }
 }

@@ -43,7 +43,7 @@ namespace Z0
         Perm32(Vector256<byte> data)
             => this.data = data;
 
-        static N256 w => Nats.n256;
+        static N256 w => n256;
     }
 
     /// <summary>

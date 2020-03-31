@@ -115,38 +115,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reads a single byte froma byte source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe byte read8(in byte src)
-            => *(byte*)constptr(in src);
-
-        /// <summary>
-        /// Reads 16 bits from a contiguous sequence of 2 bytes
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ushort read16(in byte src)
-            => *(ushort*)constptr(in src);
-
-        /// <summary>
-        /// Reads 32 bits from a contiguous sequence of 4 bytes
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe uint read32(in byte src)
-            => *(uint*)constptr(in src);
-
-        /// <summary>
-        /// Reads 64 bits from a contiguous sequence of 8 bytes
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ulong read64(in byte src)
-            => *(ulong*)constptr(in src);
-
-        /// <summary>
         /// Reads the bytes that define a numeric value
         /// </summary>
         /// <param name="src">The value to read</param>

@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Nats;    
+    using static Core;
     using static vgeneric;
     
     partial class vgbits
@@ -33,7 +32,7 @@ namespace Z0
             else if(typeof(D) == typeof(N2))
                 return veven(w,n2, n2, t);
             else
-                throw unsupported<D>();
+                throw Unsupported.define<D>();
         }
 
         /// <summary>
@@ -55,7 +54,7 @@ namespace Z0
             else if(typeof(D) == typeof(N2))
                 return veven(w,n2, n2, t);
             else
-                throw unsupported<D>();
+                throw Unsupported.define<D>();
         }
 
         /// <summary>

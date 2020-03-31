@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(VData)" />    
     <ProjectReference Include="$(Intrinsics)" />
     <ProjectReference Include="$(Dynamic)" />    

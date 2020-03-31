@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Nats)" />    
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />

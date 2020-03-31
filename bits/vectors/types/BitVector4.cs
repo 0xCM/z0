@@ -22,7 +22,6 @@ namespace Z0
 
         public static BitVector4 Ones => 0xF;
 
-
         [MethodImpl(Inline)]
         public static implicit operator BitVector4(byte src)
             => new BitVector4(src);

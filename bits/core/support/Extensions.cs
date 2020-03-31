@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static root;
-    using static Nats;
+    using static Gone;
     
-    partial class BitsX
+    partial class XBits
     {    
         /// <summary>
         /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range

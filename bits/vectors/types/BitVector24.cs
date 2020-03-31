@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
-    using static Nats;
+    using static Core;    
 
     /// <summary>
     /// Defines a 32-bit bitvector
@@ -40,7 +39,6 @@ namespace Z0
 
         public static N24 N => default;
         
-
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector24 src)
             => BitVector.create(n64,src.data);
@@ -324,7 +322,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => bytes(data).Slice(0,3);
+            get => BitVector.bytes(data).Slice(0,3);
         }
 
         /// <summary>

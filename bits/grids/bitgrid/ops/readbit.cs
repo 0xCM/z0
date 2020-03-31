@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
+
 
     partial class BitGrid
     {
@@ -35,7 +35,7 @@ namespace Z0
         public static bit readbit<N,T>(N width, in T src, int row, int col)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => readbit(in src, natval<N>()*row + col);
+                => readbit(in src, nati<N>()*row + col);
 
         /// <summary>
         /// Reads a bit from a grid

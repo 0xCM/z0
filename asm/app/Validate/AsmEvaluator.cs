@@ -8,9 +8,8 @@ namespace Z0.Asm.Check
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
     using static OpClass;
-
     using static BufferSeqId;
 
     public static class AsmEvaluators

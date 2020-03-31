@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static root;
-    using static Nats;
+    using static Gone;
     using static As;
 
     public class t_partitions : t_bitcore<t_partitions>    

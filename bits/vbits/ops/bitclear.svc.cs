@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static root;
+    using static Core;
     using static vBitSvcHosts;
 
     partial class vBitServices
     {
-
         [MethodImpl(Inline)]
         public static BitClear128<T> vbitclear<T>(N128 w, T t = default)
             where T : unmanaged

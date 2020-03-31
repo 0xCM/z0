@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     public static class BitField
     {
@@ -81,7 +80,7 @@ namespace Z0
         /// <typeparam name="W">A width-defining enumeration</typeparam>
         [MethodImpl(Inline)]
         public static NumericBits<S,I,T> numeric<S,I,T,W>()
-            where S : INumericBits<T>
+            where S : IScalarField<T>
             where I : unmanaged, Enum
             where W : unmanaged, Enum
             where T : unmanaged
@@ -149,7 +148,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static NumericBits<S,I,T> numeric<S,I,T>(in BitFieldSpec spec)
             where I : unmanaged, Enum
-            where S : INumericBits<T>
+            where S : IScalarField<T>
             where T : unmanaged
                 => new NumericBits<S,I,T>(spec);
 

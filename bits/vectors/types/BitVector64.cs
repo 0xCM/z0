@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
-    using static Nats;
+    using static Core;    
 
     /// <summary>
     /// Defines a 64-bit bitvector
     /// </summary>
-    public struct BitVector64 
+    public struct BitVector64 : IBitVector<BitVector64,ulong>
     {    
         internal ulong data;
 
@@ -24,7 +23,6 @@ namespace Z0
         public static BitVector64 Ones => uint.MaxValue;
 
         public static N64 N => default;
-
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ulong>(BitVector64 src)
@@ -314,7 +312,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => bytes(data);
+            get => BitVector.bytes(data);
         }
 
         /// <summary>
@@ -403,7 +401,13 @@ namespace Z0
         public override int GetHashCode()
             => data.GetHashCode();
  
+        public string Format(BitFormatConfig config)
+            => BitVector.format(this,config);
+
+         public string Format()
+            => BitVector.format(this);
+
         public override string ToString()
-            => this.Format(); 
-    }
+            => Format();
+   }
 }

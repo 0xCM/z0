@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     partial class BitGrid
     {                
@@ -213,6 +212,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int colidx<N>(N width, int row, int col)
             where N : unmanaged, ITypeNat
-                => natval(width) * row + col;        
+                => nati(width) * row + col;        
     }
 }

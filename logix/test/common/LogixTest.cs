@@ -11,7 +11,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
     
     using static root;
-    using static Nats;
+    using static Gone;
     using static NumericOpApi;
     using static LogicOpApi;
     

@@ -9,7 +9,7 @@ namespace Z0
     
     using static As;
     using static CastNumeric;
-    using static refs;
+    using static Core;
 
     partial class BitPack
     {

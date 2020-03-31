@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Nats;
+    using static Gone;
 
 
     public class t_cell_type : UnitTest<t_cell_type>

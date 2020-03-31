@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
  
-    using static root;
-    using static Nats;
-
+    using static Core;
+    
     public static class BitMatrixNx
     {   
         [MethodImpl(NotInline)] 
@@ -23,7 +22,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var order = natval<N>();
+            var order = nati<N>();
             var dst = BitBlocks.alloc<N,T>();
             for(var i=0; i < order; i++)
                 dst[i] = A[i,i];

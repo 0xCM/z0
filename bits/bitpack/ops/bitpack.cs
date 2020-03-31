@@ -11,6 +11,5 @@ namespace Z0
     public static partial class BitPack
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
     }
 }

@@ -50,12 +50,12 @@ namespace Z0
     }
 
     readonly struct NumericBitOps<S,T>
-        where S : INumericBits<T>
+        where S : IScalarField<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
         public T read(in FieldSegment segment, in S src)
-            => gbits.bitslice(src.Data, segment.StartPos, segment.Width);
+            => gbits.bitslice(src.Scalar, segment.StartPos, segment.Width);
 
         [MethodImpl(Inline)]
         public T read(in FieldSegment segment, in S src, bool offset)            
@@ -70,13 +70,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T write(in FieldSegment segment, in S src, ref T dst)
-            => ref gbits.bitcopy(src.Data, segment.StartPos, segment.Width, ref dst);
+            => ref gbits.bitcopy(src.Scalar, segment.StartPos, segment.Width, ref dst);
 
         [MethodImpl(Inline)]
         public ref S write(in FieldSegment segment, in S src, ref S dst)
         {
-            var dstData = dst.Data;
-            dst.Data = gbits.bitcopy(src.Data, segment.StartPos, segment.Width, ref dstData);
+            var dstData = dst.Scalar;
+            dst.Scalar = gbits.bitcopy(src.Scalar, segment.StartPos, segment.Width, ref dstData);
             return ref dst;
         }
 

@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
-    using static Bits;
+    using static Core;
 
-    public struct BitVector8
+    public struct BitVector8 : IBitVector<BitVector8,byte>
     {
         internal byte data;
 
@@ -290,7 +289,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => bytes(data);
+            get => BitVector.bytes(data);
         }
 
         /// <summary>
@@ -326,7 +325,7 @@ namespace Z0
         public readonly BitVector4 Hi
         {
             [MethodImpl(Inline)]
-            get => hi(data);        
+            get => Bits.hi(data);        
         }        
 
         /// <summary>
@@ -335,7 +334,7 @@ namespace Z0
         public readonly BitVector4 Lo
         {
             [MethodImpl(Inline)]
-            get => lo(data);        
+            get => Bits.lo(data);        
         }        
 
         /// <summary>
@@ -370,9 +369,14 @@ namespace Z0
         
         public override int GetHashCode()
             => data.GetHashCode();
-        
-        public override string ToString()
-            => this.Format();
 
+        public string Format(BitFormatConfig config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
+        public override string ToString()
+            => Format();
     }
 }

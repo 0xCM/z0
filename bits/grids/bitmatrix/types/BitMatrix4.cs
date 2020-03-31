@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public ref struct BitMatrix4

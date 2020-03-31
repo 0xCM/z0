@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Literals;
-    using static Nats;
+    using static Gone;
     using static vgeneric;
 
     public class t_vpop : t_vinx<t_vpop>

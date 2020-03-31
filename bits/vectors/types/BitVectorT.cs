@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
+    using static Core;    
 
     /// <summary>
     /// Defines a generic bitvector over a primal cell
     /// </summary>
     /// <typeparam name="T">The cell type</typeparam>
-    public struct BitVector<T>
+    public struct BitVector<T> : IBitVector<BitVector<T>,T>
         where T : unmanaged
     {
         internal T data;
@@ -244,7 +244,7 @@ namespace Z0
         public readonly Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => bytes(data);
+            get => BitVector.bytes(data);
         }
 
         /// <summary>
@@ -298,7 +298,13 @@ namespace Z0
         public readonly override int GetHashCode()
             => data.GetHashCode();
     
+         public string Format(BitFormatConfig config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
         public override string ToString()
-            => this.Format();
-    }
+            => Format();
+   }
 }

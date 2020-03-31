@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
+    using static CastNumeric;
     using static BitMasks;
 
     partial class BitMask
@@ -417,7 +418,7 @@ namespace Z0
             else if(typeof(W) == typeof(N64))
                 return BitMasks.Msb64x2x1;
             else 
-                throw unsupported<W>();                
+                throw Unsupported.define<W>();                
         }
     }
 }

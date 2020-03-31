@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     public static class BitCalcs
     {
@@ -119,7 +118,7 @@ namespace Z0
         /// <typeparam name="N">The grid column type</typeparam>
         public static int bitindex<N>(int row, int col, N n = default)
             where N : unmanaged, ITypeNat
-                => row * natval<N>() + col;
+                => row * nati<N>() + col;
 
         /// <summary>
         /// Computes the number of bytes required to cover a grid, predicated on row/col counts
@@ -186,7 +185,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => tablecells(natval(m), natval(n), bitsize<T>());
+                => tablecells(nati(m), nati(n), bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
@@ -215,6 +214,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.cellcover<T>(w, tablecells<T>(natval(m), natval(n)));        
+                => Blocks.cellcover<T>(w, tablecells<T>(nati(m), nati(n)));        
     }
 }

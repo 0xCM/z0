@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
-    using static Nats;
+    using static Core;
 
     partial class BitMatrix
     {        
@@ -24,7 +23,7 @@ namespace Z0
         {
             var matrix = alloc<N,T>();
             var srcCellCount = BitBlock<N,T>.CellCount;
-            var srcBitCount = natval<N>();
+            var srcBitCount = nati<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0; i<srcBitCount; i++)
@@ -45,7 +44,7 @@ namespace Z0
         {
             var matrix = alloc<M,N,T>();
             var srcCellCount = BitBlock<N,T>.CellCount;
-            var srcBitCount = natval<N>();
+            var srcBitCount = nati<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0; i< srcBitCount; i++)

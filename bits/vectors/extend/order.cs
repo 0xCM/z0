@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;    
 
     partial class BitVectorX
     {
-
         /// <summary>
         /// Computes the smallest integer n > 1 such that v^n = identity
         /// </summary>

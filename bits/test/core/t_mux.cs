@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Linq;
     
-    using static Nats;
+    using static Core;
 
     public class t_mux : t_bitcore<t_mux>
     {

@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.IO;
     
     using static root;
-    using static Nats;
+    using static Gone;
 
     using static BinaryBitLogicKind;
 
