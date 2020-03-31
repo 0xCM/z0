@@ -60,8 +60,8 @@ namespace Z0
         public static void ThrowNotEqual<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw NotEqual(lhs,rhs,caller,file,line);
 
-        public static void ThrowNotEqualNoCaller<T>(T lhs, T rhs)
-            => throw NotEqual(lhs,rhs,null,null,null);
+        public static T ThrowNotEqualNoCaller<T>(T lhs, T rhs)
+            => throw NotEqual(lhs,rhs,null,null,null);        
 
         public static void ThrowNotEqual<T>(T lhs, T rhs, AppMsg msg)
             => throw AppException.Define(msg.WithPrependedContent($"Equality failure, {lhs} != {rhs}:"));

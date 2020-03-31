@@ -155,7 +155,7 @@ namespace Z0
                 var y = Random.BitVector(n4);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.yea(a == b);            
+                Claim.require(a == b);            
             }
         }
 
@@ -167,12 +167,12 @@ namespace Z0
                 var y = Random.BitVector(n8);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.yea(a == b);            
+                Claim.require(a == b);            
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
-                Claim.yea(a == c);
+                Claim.require(a == c);
             }            
         }
 
@@ -184,12 +184,12 @@ namespace Z0
                 var y = Random.BitVector(n16);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.yea(a == b);   
+                Claim.require(a == b);   
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
-                Claim.yea(a == c);
+                Claim.require(a == c);
             }
         }
 
@@ -201,12 +201,12 @@ namespace Z0
                 var y = Random.BitVector(n32);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.yea(a == b);   
+                Claim.require(a == b);   
 
                 var zx = x.ToNatural();
                 var zy = y.ToNatural();
                 var c = zx % zy;
-                Claim.yea(a == c);
+                Claim.require(a == c);
             }
         }
 
@@ -218,12 +218,12 @@ namespace Z0
                 var y = Random.BitVector(n64);
                 bit a = x % y;
                 var b = modprod(x,y);
-                Claim.yea(a == b);
+                Claim.require(a == b);
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 bit c = zx % zy;
-                Claim.yea(a == c);            
+                Claim.require(a == c);            
             }
 
             for(var i=0; i< RepCount; i++)          
@@ -246,13 +246,13 @@ namespace Z0
             {
                 var x = Random.BitVector(n128, n, t);
                 var y = Random.BitVector(n128,n, t);
-                Claim.lteq(x.ToBitString().Nlz(), x.Width);
+                CheckNumeric.lteq(x.ToBitString().Nlz(), x.Width);
 
                 var a = x % y;
                 var xc = x.ToBitCells();
                 var yc = y.ToBitCells();
                 var b = xc % yc;
-                Claim.eq(a,b);
+                CheckNumeric.eq(a,b);
             }
         }
 
@@ -273,8 +273,8 @@ namespace Z0
                     var y = Random.BitVector<T>();
                     var actual = f.Invoke(x,y);
                     var expect = BitVector.modprod(x,y);
-                    Claim.yea(actual == expect);
-                    Claim.yea(actual == f.InvokeScalar(x,y));
+                    Claim.require(actual == expect);
+                    Claim.require(actual == f.InvokeScalar(x,y));
                 }
             }
 

@@ -6,7 +6,7 @@ namespace Z0
 
     using C = OpClass;
 
-    public interface ISVValidatorD<T> : IValidator<T>
+    public interface ISVValidatorD<T> : ISFValidator<T>
         where T : unmanaged
     {   
         void Validate<F>(F f, C.UnaryOp op, W128 w)
@@ -22,7 +22,7 @@ namespace Z0
             where F : ISVBinaryOp256DApi<T>;
     }
 
-    public interface ISVValidatorD : IValidator
+    public interface ISVValidatorD : ISFValidator
     {
         void CheckUnaryScalarMatch<F,T>(F f, W128 w, T t = default)
             where T : unmanaged

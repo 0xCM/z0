@@ -22,8 +22,8 @@ namespace Z0
             {                
                 foreach(var t in method.ParameterTypes())
                 {
-                    Claim.yea(t.IsBlocked());
-                    Claim.yea(Identity.width(t) == TypeWidth.W128 || Identity.width(t) == TypeWidth.W256);
+                    Claim.require(t.IsBlocked());
+                    Claim.require(Identity.width(t) == TypeWidth.W128 || Identity.width(t) == TypeWidth.W256);
                 }
                     
                 var id = Identity.generic(method);
@@ -57,7 +57,7 @@ namespace Z0
                 var x = Random.CpuVector<uint>(n128);
                 var y = vbsll(x);
                 var z = gvec.vbsll(x,imm8);
-                Claim.eq(z,y);
+                Claim.veq(z,y);
             }
         }
     }

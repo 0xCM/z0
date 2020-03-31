@@ -30,9 +30,8 @@ namespace Z0
                 if(i >= first && i < first + count)
                     Claim.nea(bs[i]);
                 else
-                    Claim.yea(bs[i]);
+                    Claim.require(bs[i]);
             }
-        }
-        
+        }       
     }
 }

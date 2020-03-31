@@ -45,7 +45,7 @@ namespace Z0
         public static void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
-                => Claim.numeq(lhs.Data,rhs.Data);
+                => CheckNumeric.eq(lhs.Data,rhs.Data);
 
         /// <summary>
         /// Asserts content equality for two tabular spans of coincident dimension
@@ -62,8 +62,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged 
-                => Claim.numeq(lhs.Data,rhs.Data);
-
+                => CheckNumeric.eq(lhs.Data, rhs.Data);
 
 
         public void perm_symbols()
@@ -84,16 +83,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            numeq(NatSpan.parts(n4, A, B, C, D), dABCD);
+            NatCheck.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            numeq(NatSpan.parts(n4, D, C, B, A), dDCBA);
+            NatCheck.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            numeq(NatSpan.parts(n4, A, C, B, D), dACBD);
+            NatCheck.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            numeq(NatSpan.parts(n4, C, B, D, A), dCBDA);
+            NatCheck.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermlo_4x16_outline()
@@ -105,18 +104,18 @@ namespace Z0
 
             var x = Data.vincrements<ushort>(n128);
             var xs = x.ToSpan();
-            Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
+            Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
             var xABCD = dvec.vpermlo4x16(x, Perm4L.ABCD);
-            Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
+            Claim.veq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
             var xDCBA = dvec.vpermlo4x16(x, Perm4L.DCBA);
-            Claim.eq(xDCBA, Vector128.Create(xs[D], xs[C], xs[B], xs[A], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
+            Claim.veq(xDCBA, Vector128.Create(xs[D], xs[C], xs[B], xs[A], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
             var xACBD = dvec.vpermlo4x16(x, Perm4L.ACBD);
-            Claim.eq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
+            Claim.veq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            Claim.eq(dvec.vpermlo4x16(vgeneric.vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vgeneric.vparts(n128, 0,3,2,1,6,7,8,9));           
+            Claim.veq(dvec.vpermlo4x16(vgeneric.vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vgeneric.vparts(n128, 0,3,2,1,6,7,8,9));           
         }
 
         public void vpermhi_4x16_outline()
@@ -128,18 +127,18 @@ namespace Z0
 
             var x = Data.vincrements<ushort>(n128);
             var xs = x.ToSpan();
-            Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
+            Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
             var xABCD = dvec.vpermhi4x16(x, Perm4L.ABCD);
-            Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
+            Claim.veq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
             var xDCBA = dvec.vpermhi4x16(x, Perm4L.DCBA);
-            Claim.eq(xDCBA, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[D + 4], xs[C + 4], xs[B + 4], xs[A + 4]));
+            Claim.veq(xDCBA, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[D + 4], xs[C + 4], xs[B + 4], xs[A + 4]));
 
             var xACBD = dvec.vpermhi4x16(x, Perm4L.ACBD);
-            Claim.eq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
+            Claim.veq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
 
-            Claim.eq(dvec.vpermhi4x16(vgeneric.vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vgeneric.vparts(n128,0,1,2,3,6,9,8,7));
+            Claim.veq(dvec.vpermhi4x16(vgeneric.vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vgeneric.vparts(n128,0,1,2,3,6,9,8,7));
 
         }
 
@@ -148,13 +147,13 @@ namespace Z0
             var n = n128;
 
             var u = Data.vincrements<uint>(n);
-            Claim.eq(vgeneric.vparts(n,0,1,2,3), u);
+            Claim.veq(vgeneric.vparts(n,0,1,2,3), u);
 
             var v = Data.decrements<uint>(n);
-            Claim.eq(vgeneric.vparts(n,3,2,1,0),v);
+            Claim.veq(vgeneric.vparts(n,3,2,1,0),v);
 
-            Claim.eq(v, dvec.vperm4x32(u, Perm4L.DCBA));
-            Claim.eq(u, dvec.vperm4x32(v, Perm4L.DCBA));
+            Claim.veq(v, dvec.vperm4x32(u, Perm4L.DCBA));
+            Claim.veq(u, dvec.vperm4x32(v, Perm4L.DCBA));
         }
 
         public void vperm_4x16_outline()
@@ -164,27 +163,27 @@ namespace Z0
                         
             var a0 = dvec.vpermlo4x16(x, Perm4L.DCBA);
             var a1 = vgeneric.vparts(n,3,2,1,0,4,5,6,7);
-            Claim.eq(a0,a1);
+            Claim.veq(a0,a1);
 
             var b0 = dvec.vpermhi4x16(x, Perm4L.DCBA);
             var b1 = vgeneric.vparts(n,0,1,2,3,7,6,5,4);
-            Claim.eq(b0,b1);
+            Claim.veq(b0,b1);
 
             var c0 = dvec.vperm4x16(x,Perm4L.DCBA,Perm4L.DCBA);
             var c1 = vgeneric.vparts(n,3,2,1,0,7,6,5,4);
-            Claim.eq(c0,c1);
+            Claim.veq(c0,c1);
 
             var d0 = dvec.vpermlo4x16(x, Perm4L.BADC);
             var d1 = vgeneric.vparts(n,1,0,3,2,4,5,6,7);            
-            Claim.eq(d0,d1);
+            Claim.veq(d0,d1);
 
             var e0 = dvec.vpermhi4x16(x, Perm4L.BADC);
             var e1 = vgeneric.vparts(n,0,1,2,3,5,4,7,6);
-            Claim.eq(e0,e1);
+            Claim.veq(e0,e1);
 
             var f0 = dvec.vperm4x16(x, Perm4L.BADC, Perm4L.BADC);
             var f1 = vgeneric.vparts(n,1,0,3,2,5,4,7,6);
-            Claim.eq(f0,f1);
+            Claim.veq(f0,f1);
         }
 
         public void vperm_4x64_outline()
@@ -193,19 +192,19 @@ namespace Z0
             var n = n256;
             var x = vgeneric.vparts(n,0,1,2,3);
             
-            Claim.eq(vgeneric.vparts(n,0,1,2,3), dvec.vperm4x64(x, Perm4L.ABCD));
-            Claim.eq(vgeneric.vparts(n,0,1,3,2), dvec.vperm4x64(x, Perm4L.ABDC));
-            Claim.eq(vgeneric.vparts(n,0,2,1,3), dvec.vperm4x64(x, Perm4L.ACBD));
-            Claim.eq(vgeneric.vparts(n,0,2,3,1), dvec.vperm4x64(x, Perm4L.ACDB));
-            Claim.eq(vgeneric.vparts(n,0,3,1,2), dvec.vperm4x64(x, Perm4L.ADBC));
-            Claim.eq(vgeneric.vparts(n,0,3,2,1), dvec.vperm4x64(x, Perm4L.ADCB));
+            Claim.veq(vgeneric.vparts(n,0,1,2,3), dvec.vperm4x64(x, Perm4L.ABCD));
+            Claim.veq(vgeneric.vparts(n,0,1,3,2), dvec.vperm4x64(x, Perm4L.ABDC));
+            Claim.veq(vgeneric.vparts(n,0,2,1,3), dvec.vperm4x64(x, Perm4L.ACBD));
+            Claim.veq(vgeneric.vparts(n,0,2,3,1), dvec.vperm4x64(x, Perm4L.ACDB));
+            Claim.veq(vgeneric.vparts(n,0,3,1,2), dvec.vperm4x64(x, Perm4L.ADBC));
+            Claim.veq(vgeneric.vparts(n,0,3,2,1), dvec.vperm4x64(x, Perm4L.ADCB));
             
-            Claim.eq(vgeneric.vparts(n,1,0,2,3), dvec.vperm4x64(x, Perm4L.BACD));
-            Claim.eq(vgeneric.vparts(n,1,0,3,2), dvec.vperm4x64(x, Perm4L.BADC));
-            Claim.eq(vgeneric.vparts(n,1,2,0,3), dvec.vperm4x64(x, Perm4L.BCAD));
-            Claim.eq(vgeneric.vparts(n,1,2,3,0), dvec.vperm4x64(x, Perm4L.BCDA));
-            Claim.eq(vgeneric.vparts(n,1,3,0,2), dvec.vperm4x64(x, Perm4L.BDAC));
-            Claim.eq(vgeneric.vparts(n,1,3,2,0), dvec.vperm4x64(x, Perm4L.BDCA));
+            Claim.veq(vgeneric.vparts(n,1,0,2,3), dvec.vperm4x64(x, Perm4L.BACD));
+            Claim.veq(vgeneric.vparts(n,1,0,3,2), dvec.vperm4x64(x, Perm4L.BADC));
+            Claim.veq(vgeneric.vparts(n,1,2,0,3), dvec.vperm4x64(x, Perm4L.BCAD));
+            Claim.veq(vgeneric.vparts(n,1,2,3,0), dvec.vperm4x64(x, Perm4L.BCDA));
+            Claim.veq(vgeneric.vparts(n,1,3,0,2), dvec.vperm4x64(x, Perm4L.BDAC));
+            Claim.veq(vgeneric.vparts(n,1,3,2,0), dvec.vperm4x64(x, Perm4L.BDCA));
         }
 
         public void perm4_symbols()
@@ -247,7 +246,7 @@ namespace Z0
             Swap s = (0,1);
             var x1 = vswap(src, s);
             var x2 = vswap(x1, s);
-            Claim.eq(x2, src);
+            Claim.veq(x2, src);
 
             //Shuffle the first element all the way through to the last element
             var chain = Swap.Chain((0,1), 15);
@@ -280,17 +279,17 @@ namespace Z0
             var x = vgeneric.vparts(n, 0, 1, 2, 3);
             var y = vgeneric.vparts(n, 4, 5, 6, 7);
 
-            Claim.eq(vgeneric.vparts(n, 0, 1, 4, 5), gvec.vperm2x128(x,y, Perm2x4.AC));
-            Claim.eq(vgeneric.vparts(n, 4, 5, 0, 1), gvec.vperm2x128(x,y, Perm2x4.CA));
+            Claim.veq(vgeneric.vparts(n, 0, 1, 4, 5), gvec.vperm2x128(x,y, Perm2x4.AC));
+            Claim.veq(vgeneric.vparts(n, 4, 5, 0, 1), gvec.vperm2x128(x,y, Perm2x4.CA));
 
-            Claim.eq(vgeneric.vparts(n, 0, 1, 6, 7), gvec.vperm2x128(x,y, Perm2x4.AD));
-            Claim.eq(vgeneric.vparts(n, 6, 7, 0, 1), gvec.vperm2x128(x,y, Perm2x4.DA));
+            Claim.veq(vgeneric.vparts(n, 0, 1, 6, 7), gvec.vperm2x128(x,y, Perm2x4.AD));
+            Claim.veq(vgeneric.vparts(n, 6, 7, 0, 1), gvec.vperm2x128(x,y, Perm2x4.DA));
 
-            Claim.eq(vgeneric.vparts(n, 2, 3, 4, 5), gvec.vperm2x128(x,y, Perm2x4.BC));
-            Claim.eq(vgeneric.vparts(n, 4, 5, 2, 3), gvec.vperm2x128(x,y, Perm2x4.CB));
+            Claim.veq(vgeneric.vparts(n, 2, 3, 4, 5), gvec.vperm2x128(x,y, Perm2x4.BC));
+            Claim.veq(vgeneric.vparts(n, 4, 5, 2, 3), gvec.vperm2x128(x,y, Perm2x4.CB));
 
-            Claim.eq(vgeneric.vparts(n, 2, 3, 6, 7), gvec.vperm2x128(x,y, Perm2x4.BD));
-            Claim.eq(vgeneric.vparts(n, 6, 7, 2, 3), gvec.vperm2x128(x,y, Perm2x4.DB));
+            Claim.veq(vgeneric.vparts(n, 2, 3, 6, 7), gvec.vperm2x128(x,y, Perm2x4.BD));
+            Claim.veq(vgeneric.vparts(n, 6, 7, 2, 3), gvec.vperm2x128(x,y, Perm2x4.DB));
         }
 
         /// <summary>
@@ -313,7 +312,7 @@ namespace Z0
                 var x = Random.CpuVector<byte>(n256);
                 var y = vswaphl(x);
                 var z = dvec.vswaphl(x);
-                Claim.eq(y,z);
+                Claim.veq(y,z);
             }
         }
 
@@ -325,7 +324,7 @@ namespace Z0
                 var x = dvec.vperm4x64(src, Perm4L.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);
-                Claim.eq(x,y);
+                Claim.veq(x,y);
             }
         }
 
@@ -334,7 +333,7 @@ namespace Z0
             var x = Data.vincrements<byte>(n256);
             var y = Data.decrements<byte>(n256);
             var z = dvec.vreverse(dvec.vshuf32x8(x,y));
-            Claim.eq(x,z);
+            Claim.veq(x,z);
         }
 
         public void vperm4_reverse()
@@ -355,7 +354,7 @@ namespace Z0
             var vIn = vgeneric.vparts(0,1,2,3);
             var vExpect = vgeneric.vparts(3,2,1,0);
             var vActual = dvec.vperm4x32(vIn,p);
-            Claim.eq(vExpect, vActual);                                
+            Claim.veq(vExpect, vActual);                                
         }        
 
         void perm4_symbol_check(Perm4L perm, params Perm4L[] expect)
@@ -364,7 +363,7 @@ namespace Z0
             var symbol = default(Perm4L);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.yea(Permute.literal(perm, i, out symbol));
+                Claim.require(Permute.literal(perm, i, out symbol));
                 Claim.eq(expect[i], symbol);
             }
 

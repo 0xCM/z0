@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     
-    using static root;
-    using static Nats;
+    using static Core;
 
-    public class t_bitspan_ops : UnitTest<t_bitspan_ops>
+    public class t_bitspan_ops : t_bitcore<t_bitspan_ops>
     {
         /// <summary>
         /// Asserts the equality of two bitspans
@@ -33,8 +32,8 @@ namespace Z0
                 var a = Random.Single(z64).ToBitSpan();
                 var b = Random.Single(z64).ToBitSpan();
                 var c = a.Replicate();
-                Claim.yea(a != b);
-                Claim.yea(a == c);
+                Claim.require(a != b);
+                Claim.require(a == c);
             }
         }
 
@@ -64,7 +63,6 @@ namespace Z0
 
             var y = bs1.Convert<uint>();
             Claim.eq(x,y);
-
         }
 
         public void bsand_8()
@@ -246,7 +244,7 @@ namespace Z0
             {
                 if(parity.even(i))
                 {
-                    Claim.yea(bitspan[i]);
+                    Claim.require(bitspan[i]);
                     Claim.eq(bit.One, format[j]);
                 }
                 else

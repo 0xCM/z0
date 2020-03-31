@@ -14,7 +14,7 @@ namespace Z0
             Span<bit> dst = new bit[64];
             Bits.part64x1(src,dst);
             for(var i=0; i< dst.Length; i++)
-                Claim.yea(dst[i]);
+                Claim.require(dst[i]);
         }
 
         public void sb_split_16x8()
@@ -80,14 +80,14 @@ namespace Z0
                     pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
                     
                     byte j = 0;
-                    Claim.yea(gbits.bitmatch(dst, j++, x0, pos));
-                    Claim.yea(gbits.bitmatch(dst, j++, x1, pos));
-                    Claim.yea(gbits.bitmatch(dst, j++, x2, pos));
-                    Claim.yea(gbits.bitmatch(dst, j++, x3, pos));
-                    Claim.yea(gbits.bitmatch(dst, j++, x4, pos));
-                    Claim.yea(gbits.bitmatch(dst, j++, x5, pos));
-                    Claim.yea(gbits.bitmatch(dst, j++, x6, pos));
-                    Claim.yea(gbits.bitmatch(dst, j++, x7, pos));                    
+                    Claim.require(gbits.bitmatch(dst, j++, x0, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x1, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x2, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x3, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x4, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x5, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x6, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x7, pos));                    
                 }
             }
 
@@ -117,7 +117,7 @@ namespace Z0
                 byte b = (byte)i;
                 var x = BitStore.bitseq(b);
                 var y = BitStore.select(b);
-                Claim.numeq(x,y);
+                CheckNumeric.eq(x,y);
 
                 var up1 = BitStore.select((byte)i);
                 Span<byte> up2 = stackalloc byte[8];

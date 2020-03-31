@@ -25,28 +25,28 @@ namespace Z0
 
             var fkExpect = set(NumericKind.F32, NumericKind.F64);
             var fkActual = NumericKind.Floats.DistinctKinds();
-            Claim.eq(fkExpect,fkActual);
+            Claim.seteq(fkExpect,fkActual);
 
             var ftExpect = set(typeof(float), typeof(double));
             var ftActual = NumericKind.Floats.DistinctTypes();
-            Claim.eq(ftExpect,ftActual);
+            Claim.seteq(ftExpect,ftActual);
 
 
             var ukExpect = set(NumericKind.U8, NumericKind.U16, NumericKind.U32, NumericKind.U64);
             var ukActual = NumericKind.UnsignedInts.DistinctKinds();
-            Claim.eq(ukExpect,ukActual);
+            Claim.seteq(ukExpect,ukActual);
 
             var utExpect = set(typeof(byte), typeof(ushort), typeof(uint), typeof(ulong));
             var utActual = NumericKind.UnsignedInts.DistinctTypes();
-            Claim.eq(utExpect,utActual);
+            Claim.seteq(utExpect,utActual);
 
             var skExpect = set(NumericKind.I8, NumericKind.I16, NumericKind.I32, NumericKind.I64);
             var skActual = NumericKind.SignedInts.DistinctKinds();
-            Claim.eq(skExpect,skActual);
+            Claim.seteq(skExpect,skActual);
 
             var stExpect = set(typeof(sbyte), typeof(short), typeof(int), typeof(long));
             var stActual = NumericKind.SignedInts.DistinctTypes();
-            Claim.eq(stExpect,stActual);            
+            Claim.seteq(stExpect,stActual);            
 
         }
 
@@ -133,59 +133,59 @@ namespace Z0
 
         public void test_generic_blocks()
         {
-            Claim.yea(BK.test(typeof(Block16<>)));
-            Claim.yea(BK.test(typeof(Block32<>)));
-            Claim.yea(BK.test(typeof(Block64<>)));
-            Claim.yea(BK.test(typeof(Block128<>)));
-            Claim.yea(BK.test(typeof(Block256<>)));
-            Claim.yea(BK.test(typeof(Block512<>)));
+            Claim.require(BK.test(typeof(Block16<>)));
+            Claim.require(BK.test(typeof(Block32<>)));
+            Claim.require(BK.test(typeof(Block64<>)));
+            Claim.require(BK.test(typeof(Block128<>)));
+            Claim.require(BK.test(typeof(Block256<>)));
+            Claim.require(BK.test(typeof(Block512<>)));
         }
 
         public void test_block_16()
         {
-            Claim.yea(BK.test(typeof(Block16<byte>)));
-            Claim.yea(BK.test(typeof(Block16<sbyte>)));
-            Claim.yea(BK.test(typeof(Block16<ushort>)));
-            Claim.yea(BK.test(typeof(Block16<short>)));
+            Claim.require(BK.test(typeof(Block16<byte>)));
+            Claim.require(BK.test(typeof(Block16<sbyte>)));
+            Claim.require(BK.test(typeof(Block16<ushort>)));
+            Claim.require(BK.test(typeof(Block16<short>)));
         }
 
         public void test_block_32()
         {
-            Claim.yea(BK.test(typeof(Block32<byte>)));
-            Claim.yea(BK.test(typeof(Block32<sbyte>)));
-            Claim.yea(BK.test(typeof(Block32<ushort>)));
-            Claim.yea(BK.test(typeof(Block32<short>)));
-            Claim.yea(BK.test(typeof(Block32<int>)));
-            Claim.yea(BK.test(typeof(Block32<uint>)));
-            Claim.yea(BK.test(typeof(Block32<float>)));
+            Claim.require(BK.test(typeof(Block32<byte>)));
+            Claim.require(BK.test(typeof(Block32<sbyte>)));
+            Claim.require(BK.test(typeof(Block32<ushort>)));
+            Claim.require(BK.test(typeof(Block32<short>)));
+            Claim.require(BK.test(typeof(Block32<int>)));
+            Claim.require(BK.test(typeof(Block32<uint>)));
+            Claim.require(BK.test(typeof(Block32<float>)));
         }
 
         public void test_block_64()
         {
-            Claim.yea(BK.test(typeof(Block64<byte>)));
-            Claim.yea(BK.test(typeof(Block64<sbyte>)));
-            Claim.yea(BK.test(typeof(Block64<ushort>)));
-            Claim.yea(BK.test(typeof(Block64<short>)));
-            Claim.yea(BK.test(typeof(Block64<int>)));
-            Claim.yea(BK.test(typeof(Block64<uint>)));
-            Claim.yea(BK.test(typeof(Block64<long>)));
-            Claim.yea(BK.test(typeof(Block64<ulong>)));
-            Claim.yea(BK.test(typeof(Block64<float>)));
-            Claim.yea(BK.test(typeof(Block64<double>)));
+            Claim.require(BK.test(typeof(Block64<byte>)));
+            Claim.require(BK.test(typeof(Block64<sbyte>)));
+            Claim.require(BK.test(typeof(Block64<ushort>)));
+            Claim.require(BK.test(typeof(Block64<short>)));
+            Claim.require(BK.test(typeof(Block64<int>)));
+            Claim.require(BK.test(typeof(Block64<uint>)));
+            Claim.require(BK.test(typeof(Block64<long>)));
+            Claim.require(BK.test(typeof(Block64<ulong>)));
+            Claim.require(BK.test(typeof(Block64<float>)));
+            Claim.require(BK.test(typeof(Block64<double>)));
         }
 
         public void test_block_128()
         {
-            Claim.yea(BK.test(typeof(Block128<byte>)));
-            Claim.yea(BK.test(typeof(Block128<sbyte>)));
-            Claim.yea(BK.test(typeof(Block128<ushort>)));
-            Claim.yea(BK.test(typeof(Block128<short>)));
-            Claim.yea(BK.test(typeof(Block128<int>)));
-            Claim.yea(BK.test(typeof(Block128<uint>)));
-            Claim.yea(BK.test(typeof(Block128<long>)));
-            Claim.yea(BK.test(typeof(Block128<ulong>)));
-            Claim.yea(BK.test(typeof(Block128<float>)));
-            Claim.yea(BK.test(typeof(Block128<double>)));
+            Claim.require(BK.test(typeof(Block128<byte>)));
+            Claim.require(BK.test(typeof(Block128<sbyte>)));
+            Claim.require(BK.test(typeof(Block128<ushort>)));
+            Claim.require(BK.test(typeof(Block128<short>)));
+            Claim.require(BK.test(typeof(Block128<int>)));
+            Claim.require(BK.test(typeof(Block128<uint>)));
+            Claim.require(BK.test(typeof(Block128<long>)));
+            Claim.require(BK.test(typeof(Block128<ulong>)));
+            Claim.require(BK.test(typeof(Block128<float>)));
+            Claim.require(BK.test(typeof(Block128<double>)));
         }
 
         public void classify_block_16()

@@ -240,7 +240,7 @@ namespace Z0
 
         IEnumerable<AppMsg> CreateErrorMessages(string name, Exception e)
         {
-            if(e.InnerException is ClaimException claim)
+            if(e.InnerException is ValidityException claim)
                 yield return claim.Message;
             
             else if(e.InnerException is AppException app)

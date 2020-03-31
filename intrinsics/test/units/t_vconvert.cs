@@ -20,7 +20,7 @@ namespace Z0
             var blockB = x.ToBlock();            
             var y = dvec.vconvert(blockA, n128, z32);
             var blockC = y.ToBlock();            
-            Claim.eq(x,y);
+            Claim.veq(x,y);
             BlockChecks.eq(blockB,blockC);            
         }
 
@@ -30,8 +30,8 @@ namespace Z0
             var xE = vgeneric.vparts(n128,1,2,3,4);
             var yE = vgeneric.vparts(n128,5,6,7,8);
             var z = dvec.vconvert(block, n256,z32);
-            Claim.eq(xE, dvec.vlo(z));
-            Claim.eq(yE, dvec.vhi(z));
+            Claim.veq(xE, dvec.vlo(z));
+            Claim.veq(yE, dvec.vhi(z));
         }
 
         public void block_32x8u_to_2x128x64u()
@@ -41,8 +41,8 @@ namespace Z0
             var yE = vgeneric.vparts(n128,3,4);
 
             var z = dvec.vconvert(block,n256,z64);
-            Claim.eq(xE, dvec.vlo(z));
-            Claim.eq(yE, dvec.vhi(z));
+            Claim.veq(xE, dvec.vlo(z));
+            Claim.veq(yE, dvec.vhi(z));
         }
 
         public void block_128x8u_to_2x128x16u()
@@ -52,8 +52,8 @@ namespace Z0
             var yE = vgeneric.vparts(n128,9,10,11,12,13,14,15,16);
             var z = dvec.vconvert(block,n256,z16);
             
-            Claim.eq(xE, dvec.vlo(z));
-            Claim.eq(yE, dvec.vhi(z));
+            Claim.veq(xE, dvec.vlo(z));
+            Claim.veq(yE, dvec.vhi(z));
         }
 
         public void v128x8u_v128x16u()
@@ -61,7 +61,7 @@ namespace Z0
             var x = vgeneric.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var y = dvec.vmaplo(x, n128, z16);
             var z = vgeneric.vparts(n128,0,1,2,3,4,5,6,7);
-            Claim.eq(y,z);
+            Claim.veq(y,z);
         }
 
         public void m64x8u_v128x16u()
@@ -70,7 +70,7 @@ namespace Z0
             var y = dvec.vconvert(x, n128, z16);
             var z = vgeneric.vparts(n128,0,1,2,3,4,5,6,7);            
 
-            Claim.eq(y,z);            
+            Claim.veq(y,z);            
         }
 
         public void blockspan_128x8u_v128x16u()

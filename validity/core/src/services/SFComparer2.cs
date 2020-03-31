@@ -74,7 +74,7 @@ namespace Z0
             {                
                 SFuncs.apply(subject, lhs, rhs, dst);
                 for(var i=0; i<count; i++)
-                    Claim.numeq(baseline.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
+                    CheckNumeric.eq(baseline.Invoke(skip(in leftIn, i), skip(in rightIn, i)), skip(in target, i));
             }
             catch(Exception e)
             {

@@ -15,14 +15,11 @@
     <Graphs>$(Feeders)graphs/z0.graphs.csproj</Graphs>
     <Identify>$(Feeders)identify/z0.identify.csproj</Identify>
     <Interval>$(Feeders)interval/z0.interval.csproj</Interval>
-
     <Kinds>$(Feeders)kinds/z0.kinds.csproj</Kinds>
     <Memories>$(Feeders)memories/z0.memories.csproj</Memories>
+    <Messages>$(Feeders)messages/z0.messages.csproj</Messages>
     <Numeric>$(Feeders)numeric/z0.numeric.csproj</Numeric>
     <Reflective>$(Feeders)reflective/z0.reflective.csproj</Reflective>
-    <Polyrand>$(Feeders)polyrand/z0.polyrand.csproj</Polyrand>
-    <Messages>$(Feeders)messages/z0.messages.csproj</Messages>
-
     <Symbolic>$(Feeders)symbolic/z0.symbolic.csproj</Symbolic>
     <SFuncs>$(Feeders)sfuncs/z0.sfuncs.csproj</SFuncs>
     <Texting>$(Feeders)texting/z0.texting.csproj</Texting>

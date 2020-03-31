@@ -56,7 +56,7 @@ namespace Z0
             var v1 = Data.vincrements<T>(w);
             var v2 = Data.decrements<T>(w);
             var v3 = gvec.vreverse(v1);
-            Claim.eq(v2,v3);
+            Claim.veq(v2,v3);
         }
 
         void check_invariant<T>(N256 w, T t = default)
@@ -65,7 +65,7 @@ namespace Z0
             var v1 = Data.vincrements<T>(w);
             var v2 = Data.decrements<T>(w);            
             var v3 = gvec.vreverse(v1);
-            Claim.eq(v2,v3);
+            Claim.veq(v2,v3);
         }
 
         void vreverse_check<F,T>(F f, N128 w, T t = default)
@@ -83,7 +83,7 @@ namespace Z0
                 for(var j = 0; j < n; j++)
                     expect = vgeneric.vcell(vgeneric.vcell(input,(n - 1) - j),j,expect);
 
-                Claim.eq(expect,output);
+                Claim.veq(expect,output);
             }
 
             CheckAction(check, CaseName(f));
@@ -104,7 +104,7 @@ namespace Z0
                 for(var j = 0; j < n; j++)
                     expect = vgeneric.vcell(vcell(input,(n - 1) - j),j,expect);
 
-                Claim.eq(expect,output);
+                Claim.veq(expect,output);
             }
 
             CheckAction(check, CaseName(f));

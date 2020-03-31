@@ -8,11 +8,12 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static root;
-    using static Nats;
+    using static Core;
 
-    public class t_bitstring : t_bitcore<t_bitstring>
+    public class t_bitstring : t_bitcore<t_bitstring,IBitStringCheck>
     {                
+        protected override IBitStringCheck Claim => IBitStringCheck.Checker;
+
         public void bs_seq_8u()
             => bs_seq_check<byte>();
 
@@ -155,10 +156,10 @@ namespace Z0
             var pairs = srcA.Zip(srcB);
 
             foreach(var aVal in srcA)
-                Claim.eq(aVal.ToBitString(), aVal.ToBitString());
+                BitStringCheck.eq(aVal.ToBitString(), aVal.ToBitString());
             
             foreach(var pair in pairs)
-                Claim.neq(pair.First.ToBitString(), pair.Second.ToBitString());
+                BitStringCheck.neq(pair.First.ToBitString(), pair.Second.ToBitString());
         }
 
         public void bs_truncate()
@@ -198,7 +199,7 @@ namespace Z0
             {
                 var w = words[i];
                 var value = w.TakeScalar<byte>();
-                Claim.numeq(i, value);
+                CheckNumeric.eq(i, value);
             }
         }    
 
@@ -259,7 +260,7 @@ namespace Z0
             
             var byx = BitConverter.GetBytes(x).ToSpan();
             var byy = Bytes.write(x);
-            Claim.numeq(byx,byy);
+            CheckNumeric.eq(byx,byy);
         }
 
         public void bs_assemble()
@@ -276,7 +277,7 @@ namespace Z0
                 var bsY = BitString.assemble(blocks.Select(x => x.Format()).ToArray());
                 Claim.eq(bsX, bsY);
                 
-                var bytes = alloc<byte>(8);
+                var bytes = Arrays.alloc<byte>(8);
                 for(var i=0; i<8; i++)         
                     bytes[i] = blocks[i].TakeScalar<byte>();
                 
@@ -337,7 +338,7 @@ namespace Z0
         }
 
         void TraceError(string description)
-            => trace(msg(description, AppMsgKind.Error));
+            => trace(AppMsg.Error(description));
 
         void bs_parse_range_check(int minlen, int maxlen)
         {
@@ -352,7 +353,7 @@ namespace Z0
                 for(var i=0; i< x.Length; i++)
                     Claim.eq(x[i], z[i]);
                 
-                Claim.yea(x.Equals(z, TraceError));
+                Claim.require(x.Equals(z, TraceError));
                 Claim.eq(x,z);
             }
         }
@@ -382,6 +383,5 @@ namespace Z0
                 Claim.eq(bc1,bc3);
             }
         }
-
     }
 }

@@ -28,6 +28,5 @@ namespace Z0
         public static T avg<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => avg(src,true);
-
     }
 }

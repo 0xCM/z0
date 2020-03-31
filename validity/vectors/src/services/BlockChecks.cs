@@ -10,9 +10,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Core;
-
-    public static class BlockChecks
+    public readonly struct BlockChecks : ICheckNumeric
     {
         /// <summary>
         /// Asserts content equality for two 128-bit blocks

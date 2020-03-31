@@ -32,6 +32,8 @@ namespace Z0.Mkl
             return exit;
         }
 
+        static ICheckRowVector Check => ICheckRowVector.Checker;
+
         /// <summary>
         /// Returns a reference to the location of the first span element
         /// </summary>
@@ -94,22 +96,16 @@ namespace Z0.Mkl
         static ref T head<N,T>(NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-            =>  ref MemoryMarshal.GetReference<T>(src.Data);
-
-
-        [MethodImpl(Inline)]   
-        static int length<S,T>(Span<S> lhs, Span<T> rhs, [CallerMemberName] string caller = null, 
-            [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where T : unmanaged
-            where S : unmanaged
-                => Checks.length(lhs,rhs);
+                =>  ref MemoryMarshal.GetReference<T>(src.Data);
 
         [MethodImpl(Inline)]   
-        static int length<S,T>(RowVector256<S> lhs, RowVector256<T> rhs, [CallerMemberName] string caller = null, 
-            [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
+        static int length<T>(Span<T> lhs, Span<T> rhs)
             where T : unmanaged
-            where S : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length 
-                    : throw AppErrors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+                => Check.length(lhs,rhs);
+
+        [MethodImpl(Inline)]   
+        static int length<T>(RowVector256<T> lhs, RowVector256<T> rhs) 
+            where T : unmanaged
+                => Check.length(lhs,rhs);
     }
 }

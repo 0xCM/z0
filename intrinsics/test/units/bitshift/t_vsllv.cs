@@ -10,7 +10,6 @@ namespace Z0
     
     using static Core;
     using static CastNumeric;
-    using static Literals;
 
     public class t_vsllv : t_vinx<t_vsllv>
     {

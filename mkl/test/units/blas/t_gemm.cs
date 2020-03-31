@@ -29,7 +29,7 @@ namespace Z0.Mkl.Test
         public static void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
-            for(var i = 0; i< Checks.length(lhs,rhs); i++)
+            for(var i = 0; i< Claim.length(lhs,rhs); i++)
                 if(!gmath.within(lhs[i],rhs[i],tolerance))
                     throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
@@ -239,7 +239,7 @@ namespace Z0.Mkl.Test
                 runtime += snapshot(sw);
                 
                 Mul(A, B, ref E);
-                Claim.yea(E == X);
+                Claim.require(E == X);
 
             }
 
@@ -272,7 +272,7 @@ namespace Z0.Mkl.Test
                 mkl.gemv(A,x, ref y);                
                 sw.Stop();
                 refmul(A,x,z);
-                Claim.yea(z == y);
+                Claim.require(z == y);
             }
 
             var label = $"gemv<{nati<M>()},{nati<N>()},{typeof(double).DisplayName()}>";
@@ -304,7 +304,7 @@ namespace Z0.Mkl.Test
         static float Dot(Span<float> x, Span<float> y)
         {
             var result = 0f;
-            for(var i=0; i< Checks.length(x,y); i++)
+            for(var i=0; i< Claim.length(x,y); i++)
             {
                 result += x[i]*y[i];
             }
@@ -314,7 +314,7 @@ namespace Z0.Mkl.Test
         static double Dot(Span<double> x, Span<double> y)
         {
             var result = 0d;
-            for(var i=0; i< Checks.length(x,y); i++)
+            for(var i=0; i< Claim.length(x,y); i++)
             {
                 result += x[i]*y[i];
             }

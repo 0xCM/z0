@@ -29,7 +29,7 @@ namespace Z0.Logix
             {
                 t.SetVars(c);
                 Claim.eq(bit.On,LogicEngine.eval(t));            
-                Claim.yea(LogicEngine.satisfied(t, c[0], c[1]));
+                Claim.require(LogicEngine.satisfied(t, c[0], c[1]));
                 
             }
         }
@@ -66,7 +66,7 @@ namespace Z0.Logix
             }
             clock.Stop();
             ReportBenchmark(opname, opcount,clock);
-            Claim.yea(sat);
+            Claim.require(sat);
         }
         
         void evaluator_bench()

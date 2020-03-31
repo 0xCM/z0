@@ -57,7 +57,7 @@ namespace Z0
             => Unsafe.As<bit,T>(ref src);                 
 
         [MethodImpl(Inline)]
-        public static bit ubit<T>(T src)
+        public static bit specific<T>(T src)
             => Unsafe.As<T,bit>(ref src);        
 
         public static bit Parse(string src)
@@ -669,14 +669,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void IfNone(this bit x, Action f)
+        public static void OnNone(this bit x, Action f)
         {
             if(!x)
                 f();
         }
 
         [MethodImpl(Inline)]
-        public static void IfSome(this bit x, Action f)
+        public static void OnSome(this bit x, Action f)
         {
             if(x)
                 f();

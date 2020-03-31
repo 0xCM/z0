@@ -45,7 +45,6 @@
     <Containers>$(TopDir)containers/src/z0.containers.csproj</Containers>
     <DVec>$(TopDir)vectorized/dvec/z0.vectorized.dvec.csproj</DVec>
     <FVec>$(TopDir)vectorized/fvec/z0.vectorized.fvec.csproj</FVec>
-
     <Dynamic>$(TopDir)dynamic/src/z0.dynamic.csproj</Dynamic>
     <GMath>$(TopDir)gmath/src/z0.gmath.csproj</GMath>
     <Identity>$(TopDir)identity/src/z0.identity.csproj</Identity>
@@ -58,6 +57,7 @@
     <MathSvc>$(TopDir)gmath/svc/z0.gmath.svc.csproj</MathSvc>
     <MklApi>$(TopDir)mkl/src/z0.mkl.csproj</MklApi>
     <Nats>$(TopDir)nats/src/z0.nats.csproj</Nats>
+    <Polyrand>$(TopDir)polyrand/z0.polyrand.csproj</Polyrand>
     <Root>$(TopDir)root/src/z0.root.csproj</Root>
     <Permute>$(TopDir)permute/src/z0.permute.csproj</Permute>
     <Stats>$(TopDir)stats/src/z0.stats.csproj</Stats>

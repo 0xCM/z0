@@ -25,11 +25,11 @@ namespace Z0
                 Claim.eq(table[i], (byte)i);
 
             var x = Data.vincrements<byte>(n);
-            Claim.eq(x,table.Data);   
+            Claim.veq(x,table.Data);   
 
             var items = gvec.vinc<byte>(n, 64);
             var selected = dvec.vshuf16x8(items, table);
-            Claim.eq(items,selected);
+            Claim.veq(items,selected);
         }
 
         public void lut32_rep_check()
@@ -45,11 +45,11 @@ namespace Z0
                 Claim.eq(table[i], (byte)i);
 
             var x = Data.vincrements<byte>(n);
-            Claim.eq(x,table.Data);   
+            Claim.veq(x,table.Data);   
 
             var items = gvec.vinc<byte>(n, 64);
             var selected = dvec.vshuf32x8(items, table);
-            Claim.eq(items,selected);
+            Claim.veq(items,selected);
 
         }
     }

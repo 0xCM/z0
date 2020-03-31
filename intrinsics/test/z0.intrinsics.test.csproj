@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
     <ProjectReference Include="$(ValidityVectors)" />
-
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitSpans)" />    
     <ProjectReference Include="$(Circuits)" />
@@ -20,6 +19,7 @@
     <ProjectReference Include="$(VBits)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(VData)" />
+    <!-- <ProjectReference Include="$(Numeric)" /> -->
 
   </ItemGroup>
 

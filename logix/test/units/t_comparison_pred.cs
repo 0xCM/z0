@@ -116,15 +116,15 @@ namespace Z0.Logix
                 
                 var ab = gmath.lt(a,b);
                 var abx = eval(x);
-                Claim.yea(same(ab, abx));
+                Claim.require(same(ab, abx));
                 
                 var bc = gmath.lt(b,c);
                 var bcy = eval(y);                
-                Claim.yea(same(bc, bcy));
+                Claim.require(same(bc, bcy));
 
                 var ca = gmath.lt(c,a);
                 var caz = eval(z);
-                Claim.yea(same(ca, caz));
+                Claim.require(same(ca, caz));
             }
 
         }

@@ -45,7 +45,7 @@ namespace Z0
                     vcell(v3,C), vcell(v3,D), vcell(v3,E), vcell(v3,F)
                     );
                 
-                Claim.eq(v4,v5);
+                Claim.veq(v4,v5);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Z0
             mask = vgbits.vmsb(n256, n8, n1, z8);
             gvec.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
-            Claim.eq(x,stored);
+            Claim.veq(x,stored);
 
             // Store odd components
             storage.Clear();

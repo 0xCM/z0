@@ -30,7 +30,7 @@ namespace Z0
             var z16 = dvec.vbyteswap(x16);
             var z16s = z16.ToSpan();
 
-            Claim.eq(y16,z16);            
+            Claim.veq(y16,z16);            
             for(var i=0; i<z16s.Length; i+= 2)
                 Claim.eq(Bits.byteswap(z16s[i]), z16s[i+1]);
 
@@ -44,7 +44,7 @@ namespace Z0
                 );
             
             var z32 = dvec.vbyteswap(x32);
-            Claim.eq(y32,z32);
+            Claim.veq(y32,z32);
         }
 
         public void vbyteswap_check()

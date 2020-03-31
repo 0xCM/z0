@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     
-    public class t_uint4 : t_bitcore<t_uint4>
+    public class t_uint4 : UnitTest<t_uint4>
     {
         public void add_4u_check()
         {

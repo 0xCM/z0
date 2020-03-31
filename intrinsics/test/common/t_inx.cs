@@ -15,5 +15,6 @@ namespace Z0
     public abstract class t_inx<X> : UnitTest<X>
         where X : t_inx<X>
     {
+        protected ICheckNumeric Claim => ICheckNumeric.Checker;
     }
 }

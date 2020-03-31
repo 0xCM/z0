@@ -33,7 +33,7 @@ namespace Z0
                 print($"actual := {actual}");
             }
 
-            Claim.yea(succeeded);            
+            Claim.require(succeeded);            
         }
 
         public void fixed_convert()

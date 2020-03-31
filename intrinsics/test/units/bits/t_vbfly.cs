@@ -83,7 +83,7 @@ namespace Z0
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
-                Claim.eq(z,y);
+                Claim.veq(z,y);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Z0
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
-                Claim.eq(z,y);
+                Claim.veq(z,y);
 
             }
         }
@@ -118,7 +118,7 @@ namespace Z0
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
-                Claim.eq(z,y);
+                Claim.veq(z,y);
             }
         }
 
@@ -137,7 +137,7 @@ namespace Z0
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(b,xs[j]);
                 var z = zs.LoadVector();
-                Claim.eq(z,y);
+                Claim.veq(z,y);
             }
         }
     }

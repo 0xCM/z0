@@ -19,7 +19,7 @@ namespace Z0.Mkl.Test
             
             var dst2 = lhs.Replicate();
             gspan.add(lhs,rhs, dst2.Unblocked);
-            Claim.yea(dst1 == dst2);
+            Claim.require(dst1 == dst2);
         }
 
         public void vaddF64()
@@ -31,7 +31,7 @@ namespace Z0.Mkl.Test
             
             var dst2 = lhs.Replicate();
             gspan.add(lhs, rhs, dst2.Unblocked);
-            Claim.yea(dst1 == dst2);
+            Claim.require(dst1 == dst2);
         }
 
 

@@ -20,7 +20,6 @@ namespace Z0
         {
             Check = new CheckExec(Config);
             Comparisons = Context.Decompostions();
-            //Comparisons = ComparisonContext.From(this);
         }
         
         protected ISVValidatorD Comparisons {get;}
@@ -48,7 +47,7 @@ namespace Z0
             void exec()
             {
                 var actual = f.Invoke();
-                Claim.eq(expect,actual);
+                Claim.veq(expect,actual);
             }
 
             CheckAction(exec, CaseName(f));            
@@ -68,7 +67,7 @@ namespace Z0
             void exec()
             {
                 var actual = f.Invoke();
-                Claim.eq(expect,actual);
+                Claim.veq(expect,actual);
             }
             
             CheckAction(exec, CaseName(f));            

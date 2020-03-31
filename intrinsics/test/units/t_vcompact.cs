@@ -24,7 +24,7 @@ namespace Z0
             var y = dvec.vsub(vsmax, gvec.vinc(w, (ushort)8));
             var actual = dvec.vcompact(x,y,n128,z8);
             
-            Claim.eq(expect,actual);            
+            Claim.veq(expect,actual);            
         }
 
         public void vcompact2_256x16x2_256x8_outline()
@@ -40,7 +40,7 @@ namespace Z0
             var y = dvec.vsub(vsmax, gvec.vinc(w, (ushort)16));
             var actual = dvec.vcompact(x,y,n256,z8);
             
-            Claim.eq(expect,actual);            
+            Claim.veq(expect,actual);            
         }
 
         public void vcompact2_2x128x32u_128x16u_outline()
@@ -56,7 +56,7 @@ namespace Z0
             var y = dvec.vsub(vsmax, gvec.vinc(w, 4u));
             var actual = dvec.vcompact(x,y,n128,z16);
             
-            Claim.eq(expect,actual);            
+            Claim.veq(expect,actual);            
         }
 
         public void vcompact2_2x256x32u_256x16u_outline()
@@ -71,7 +71,7 @@ namespace Z0
             var y = dvec.vsub(vsmax, gvec.vinc(w, 8u));
             var v = dvec.vcompact(x,y,n256,z16);
             var expect = dvec.vsub(vtmax, gvec.vinc(w,z16));
-            Claim.eq(expect,v);            
+            Claim.veq(expect,v);            
         }
 
         public void vcompact_2x128x64u_128x32u_outline()
@@ -81,7 +81,7 @@ namespace Z0
             var x1 = vgeneric.vparts(n, 75, 10);
             var dst = dvec.vcompact(x0,x1,n128,z32);
             var expect = vgeneric.vparts(n,25,50,75,10);
-            Claim.eq(expect,dst);
+            Claim.veq(expect,dst);
         }
 
         public void vinflate_128x8u_outline()
@@ -92,11 +92,11 @@ namespace Z0
             var hi = dvec.vhi(z);
             var loExpect = Data.vincrements<ushort>(n128);
             var hiExpect = gvec.vinc<ushort>(n128,8);
-            Claim.eq(loExpect, lo);
-            Claim.eq(hiExpect, hi);
+            Claim.veq(loExpect, lo);
+            Claim.veq(hiExpect, hi);
 
             var dst = dvec.vcompact(lo,hi,n128,z8);
-            Claim.eq(src,dst);
+            Claim.veq(src,dst);
         }
 
         public void vinflate_128x8u_128x16u_outline()
@@ -119,11 +119,11 @@ namespace Z0
             Vector512<uint> v512 = (a,b,c,d);
             var abActual = dvec.vcompact(a,b,n128,z16);
             var abExpect = Data.vincrements<ushort>(n);
-            Claim.eq(abExpect, abActual);
+            Claim.veq(abExpect, abActual);
 
             var abcdActual = dvec.vcompact(a,b,c,d, n128, z8);
             var abcdExpect = Data.vincrements<byte>(n);
-            Claim.eq(abcdExpect, abcdActual);
+            Claim.veq(abcdExpect, abcdActual);
             
         }
         
@@ -139,12 +139,12 @@ namespace Z0
             var compacted = dvec.vcompact(a0,b0,c0,d0, n256, z8);        
             var inflated = dvec.vinflate(compacted, n1024, z32);
 
-            Claim.eq(Data.vincrements<ushort>(n), dvec.vcompact(a0,b0,n256,z16));
-            Claim.eq(Data.vincrements<byte>(n), compacted);
-            Claim.eq(a0,inflated.A);
-            Claim.eq(b0,inflated.B);
-            Claim.eq(c0,inflated.C);
-            Claim.eq(d0,inflated.D);
+            Claim.veq(Data.vincrements<ushort>(n), dvec.vcompact(a0,b0,n256,z16));
+            Claim.veq(Data.vincrements<byte>(n), compacted);
+            Claim.veq(a0,inflated.A);
+            Claim.veq(b0,inflated.B);
+            Claim.veq(c0,inflated.C);
+            Claim.veq(d0,inflated.D);
         }
 
         public void vpackus_128x16x2_128x8_outline()
@@ -155,7 +155,7 @@ namespace Z0
                 var y = vgeneric.vparts(n128,8,9,10,11,12,13,14,15);
                 var z = dvec.vpackus(x,y);
                 var e = vgeneric.vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
-                Claim.eq(e,z);
+                Claim.veq(e,z);
             }
 
             void case2()

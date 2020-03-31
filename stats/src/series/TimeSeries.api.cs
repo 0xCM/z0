@@ -13,7 +13,6 @@ namespace Z0
     using System.Threading.Tasks;
 
     using static Core;    
-    using static Literals;
 
     public static class TimeSeries
     {

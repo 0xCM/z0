@@ -65,9 +65,8 @@ namespace Z0.Test
                 var path = DataDir + Matrix.filename<M,N,T>(i);                
                 var A = Write(path);
                 var B = Read(path);                                    
-                Claim.yea(A == B);
+                Claim.require(A == B);
             }
-
         }
     }
 }

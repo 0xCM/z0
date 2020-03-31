@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static Core;
-    using static Nats;
     using static CastNumeric;
    
     partial class Bits

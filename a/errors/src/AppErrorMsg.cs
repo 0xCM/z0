@@ -52,7 +52,7 @@ namespace Z0
             => AppMsg.Define($"Approximate equality failure: relerr({lhs},{rhs}) = {err} > {tolerance}", AppMsgKind.Error, caller, file, line) ;
 
         public static AppMsg Equal(object lhs, object rhs, string caller, string file, int? line)
-            => AppMsg.Define($"{lhs} == {rhs}", AppMsgKind.Error, caller, file, line) ;
+            => AppMsg.Define($"Non-equality failure: {lhs} == {rhs}", AppMsgKind.Error, caller, file, line) ;
 
         public static AppMsg NotLessThan(object lhs, object rhs, string caller, string file, int? line)
             => AppMsg.Define($"Not less than failure: !({lhs} < {rhs})", AppMsgKind.Error, caller, file, line) ;

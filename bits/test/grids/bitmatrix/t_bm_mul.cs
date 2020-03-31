@@ -93,7 +93,7 @@ namespace Z0
                 var m3 = Random.BitMatrix(n);
                 var m4 = m2 * m3;
                 var m5 = bmm(m1,m3);
-                Claim.yea(m4 == m5);
+                Claim.require(m4 == m5);
             }            
         }
 
@@ -107,7 +107,7 @@ namespace Z0
                 var m3 = Random.BitMatrix(n);
                 var m4 = m2 * m3;
                 var m5 = bmm(m1,m3);
-                Claim.yea(m4 == m5);
+                Claim.require(m4 == m5);
             }            
         }
 
@@ -121,7 +121,7 @@ namespace Z0
                 var m3 = Random.BitMatrix(n);
                 var m4 = m2 * m3;
                 var m5 = bmm(m1,m3);
-                Claim.yea(m4 == m5);
+                Claim.require(m4 == m5);
             }            
         }
     
@@ -135,7 +135,7 @@ namespace Z0
                 var m3 = Random.BitMatrix(n);
                 var m4 = m2 * m3;
                 var m5 = bmm(m1,m3);
-                Claim.yea(m4 == m5);
+                Claim.require(m4 == m5);
             }            
         }
     
@@ -153,7 +153,7 @@ namespace Z0
                     y[i] = r % x;
                 }
                 
-                Claim.yea(z == y);
+                Claim.require(z == y);
             }
         }
 
@@ -168,7 +168,7 @@ namespace Z0
                 for(var i = 0; i<m.Order; i++)           
                     z2[i] = m[i] % c;
                 
-                Claim.yea(z1 == z2);
+                Claim.require(z1 == z2);
             }
         }
 
@@ -186,7 +186,7 @@ namespace Z0
                     z2[i] = r % c;
                 }
                 
-                Claim.yea(z1 == z2);
+                Claim.require(z1 == z2);
             }
         }
 
@@ -204,7 +204,7 @@ namespace Z0
                     z2[i] = r % c;
                 }
                 
-                Claim.yea(z1 == z2);
+                Claim.require(z1 == z2);
             }
         }
  

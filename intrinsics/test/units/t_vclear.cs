@@ -76,7 +76,7 @@ namespace Z0
 
                 var xt = xs.LoadVector();
 
-                Claim.eq(xt,y);
+                Claim.veq(xt,y);
             }
         }
     }

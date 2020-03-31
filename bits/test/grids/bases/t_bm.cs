@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static root;
-    using static Nats;
+    using static Core;
+    using static CheckNumeric;
 
     public abstract class t_bm<X> : t_bitgrids_base<X>
         where X : t_bm<X>, new()
@@ -26,9 +26,9 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.and(A,B).Data;
                 var C2 = and(A.Data, B.Data);
-                Claim.eq(A.Order, natval<N>());
-                Claim.eq(B.Order, natval<N>());                
-                Claim.numeq(C1,C2);
+                eq(A.Order, nati<N>());
+                eq(B.Order, nati<N>());                
+                eq(C1,C2);
             }
         }
 
@@ -46,14 +46,14 @@ namespace Z0
                 var rbB = B.ToRowBits();
                 var rbC = rbA & rbB;
 
-                Claim.yea(BitMatrix.same(rbC.ToBitMatrix(),C));                                                                     
+                Claim.require(BitMatrix.same(rbC.ToBitMatrix(),C));                                                                     
             }
         }
 
         static Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
-            for(var i=0; i< Checks.length(lhs,rhs); i++)
+            for(var i=0; i< Claim.length(lhs,rhs); i++)
                 dst[i] = gmath.xor(lhs[i], rhs[i]);
            return dst;        
         }
@@ -72,9 +72,9 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.xor(A, B).Data;
                 var C2 = xor(A.Data, B.Data);
-                Claim.eq(A.Order, natval<N>());
-                Claim.eq(B.Order, natval<N>());                
-                Claim.numeq(C1,C2);
+                eq(A.Order, nati<N>());
+                eq(B.Order, nati<N>());                
+                eq(C1,C2);
             }
         }
 
@@ -95,7 +95,7 @@ namespace Z0
                     var z = Z[i];
 
                     var x = BitVector.xor(a,b);
-                    Claim.yea(x == z);
+                    require(x == z);
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace Z0
             {
                 var vector = src.ReadRow(row);
                 for(var col=0; col<vector.Width; col++)
-                    Claim.eq(vector[col], src[row,col]);
+                    eq(vector[col], src[row,col]);
             }
         }
 
@@ -124,7 +124,7 @@ namespace Z0
                 var B = A.Transpose();
                 for(var i=0; i<B.RowCount; i++)
                 for(var j=0; j<B.ColCount; j++)
-                    Claim.eq(B[i,j], A[j,i]);
+                    eq(B[i,j], A[j,i]);
             }
         }
 
@@ -148,8 +148,5 @@ namespace Z0
             var n = BitMatrix<T>.N;
             ReportBenchmark($"bmand_{n}x{n}g", OpCount, clock);
         }
-
-
-
     }
 }

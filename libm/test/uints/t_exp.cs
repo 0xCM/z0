@@ -21,7 +21,7 @@ namespace Z0
                 var y = libm.exp(x);
                 var z = fmath.exp(x);
                 var error = fmath.relerr(y,z).Round(10);
-                Claim.zero(error);
+                CheckNumeric.zero(error);
             }
         }
 

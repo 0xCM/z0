@@ -89,7 +89,7 @@ namespace Z0
                 {
                     var b1 = BitGrid.readbit(src.ColCount, in src.Head, row, col);
                     var b2 = BitGrid.readbit(in src.Head, bitpos);
-                    Claim.yea(b1 == b2);
+                    Claim.require(b1 == b2);
 
                     dstA[row,col] = b1;
                     dstB.SetBit(bitpos, b2);                    
@@ -175,7 +175,7 @@ namespace Z0
             BitGrid.and(gx,gy,gz);
             
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.eq(gvec.vand(gx[block], gy[block]), gz[block]);   
+                Claim.veq(gvec.vand(gx[block], gy[block]), gz[block]);   
 
         }
 
@@ -194,7 +194,7 @@ namespace Z0
             BitGrid.xor(gx,gy,gz);
             
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.eq(gvec.vxor(gx[block], gy[block]), gz[block]);   
+                Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);   
         }
 
         protected void bg_and_check<T>(int m, int n, T t = default)
@@ -210,7 +210,7 @@ namespace Z0
             BitGrid.and(gx,gy,gz);
             
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.eq(gvec.vand(gx[block], gy[block]), gz[block]);   
+                Claim.veq(gvec.vand(gx[block], gy[block]), gz[block]);   
 
         }
 
@@ -227,7 +227,7 @@ namespace Z0
             BitGrid.xor(gx,gy,gz);
             
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.eq(gvec.vxor(gx[block], gy[block]), gz[block]);   
+                Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);   
         }
     }
 }

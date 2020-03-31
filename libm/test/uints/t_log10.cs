@@ -16,7 +16,7 @@ namespace Z0
                 var y = libm.log10(x);
                 var z = fmath.log(x);
                 var error = fmath.relerr(y,z).Round(10);
-                Claim.zero(error);
+                CheckNumeric.zero(error);
             }
         }
 

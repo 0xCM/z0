@@ -20,7 +20,6 @@
     <ProjectReference Include="$(Texting)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Tuples)" />
-    <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Messages)" />
     <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Interval)" />

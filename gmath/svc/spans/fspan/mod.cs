@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static gfp;    
-    using static Checks;
         
     partial class fspan
     {                
@@ -16,7 +15,7 @@ namespace Z0
         public static Span<T> mod<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
-            var count = length(lhs,rhs);
+            var count = lhs.Length;
             for(var i = 0; i< count; i++)
                 dst[i] = gfp.mod(lhs[i], rhs[i]);
             return dst;

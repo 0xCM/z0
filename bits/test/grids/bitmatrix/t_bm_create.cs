@@ -46,7 +46,7 @@ namespace Z0
             Fixed.deposit(in head(data), ref src);
             var A = BitMatrix.primal(n16, Fixed.read(src));
             var B = BitMatrix.primal(n16, data);
-            Claim.yea(BitMatrix.same(A,B));
+            Claim.require(BitMatrix.same(A,B));
         }
 
         public void bm_load_8x8x8()
@@ -78,7 +78,7 @@ namespace Z0
             var fill = BitBlocks.init(n9, pattern);
             var matrix = BitMatrix.init(fill, n7);
             for(var i=0; i<matrix.RowCount; i++)
-                Claim.yea(fill == matrix[i]);
+                Claim.require(fill == matrix[i]);
         }
 
     }

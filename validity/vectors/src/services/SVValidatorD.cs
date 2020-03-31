@@ -11,6 +11,8 @@ namespace Z0
     
     public readonly struct SVValidatorD : ISVValidatorD
     {
+        ICheckNumeric Claim => ICheckNumeric.Checker;
+
         public IValidationContext Context {get;}
 
         public SVValidatorD(IValidationContext context)
@@ -82,7 +84,7 @@ namespace Z0
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        Checks.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -113,7 +115,7 @@ namespace Z0
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        Checks.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -148,7 +150,7 @@ namespace Z0
                     var y = right.LoadVector(block);
                     var actual = f.Invoke(x,y);
                     var expect = dst.LoadVector(block);
-                    Checks.eq(actual,expect);
+                    Z0.Claim.veq(actual, expect);
                 }
             }
             catch(Exception e)
@@ -183,7 +185,7 @@ namespace Z0
                     var y = right.LoadVector(block);
                     var actual = f.Invoke(x,y);
                     var expect = dst.LoadVector(block);
-                    Checks.eq(actual,expect);
+                    Z0.Claim.veq(actual, expect);
                 }
             }
             catch(Exception e)

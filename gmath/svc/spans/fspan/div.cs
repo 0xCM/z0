@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static gfp;    
-    using static Checks;
+    using static Core;
         
     partial class fspan
     {                
@@ -24,25 +23,31 @@ namespace Z0
         public static Span<T> div<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
-            var len = Checks.length(lhs,rhs);
-            for(var i = 0; i< len; i++)
-                lhs[i] = gfp.div(lhs[i], rhs[i]);
+            var count = math.min(lhs.Length, rhs.Length);
+            ref readonly var a = ref head(lhs);
+            ref readonly var b = ref head(rhs);
+            ref var c = ref head(lhs);
+            for(var i=0; i<count; i++)
+                seek(ref c, i) = gfp.div(skip(a, i), skip(b, i));
             return lhs;
         }
 
         /// <summary>
         /// Computes in-place the quotient of each source element in the left operand and the right operand
         /// </summary>
-        /// <param name="lhs">The left source span</param>
+        /// <param name="src">The left source span</param>
         /// <param name="rhs">The right source span</param>
         /// <typeparam name="T">The floating-point type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
-        public static Span<T> div<T>(Span<T> lhs, T rhs)
+        public static Span<T> div<T>(Span<T> src, T rhs)
             where T : unmanaged
         {
-            for(var i = 0; i< lhs.Length; i++)
-                lhs[i] = gfp.div(lhs[i], rhs);
-            return lhs;
+            var count = src.Length;
+            ref readonly var a = ref head(src);
+            ref var b = ref head(src);
+            for(var i =0; i<count; i++)
+                seek(ref b, i) = gfp.div(skip(a, i), rhs);
+            return src;
         }
 
         /// <summary>
@@ -57,9 +62,12 @@ namespace Z0
         public static Span<T> div<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
-            var len = length(lhs,rhs);
-            for(var i = 0; i< len; i++)
-                dst[i] = gfp.div(lhs[i], rhs[i]);
+            var count = math.min(lhs.Length, dst.Length);
+            ref readonly var a = ref head(lhs);
+            ref readonly var b = ref head(rhs);
+            ref var c = ref head(dst);
+            for(var i=0; i<count; i++)
+                seek(ref c, i) = gfp.div(skip(a, i), skip(b, i));
             return dst;
         }
     }

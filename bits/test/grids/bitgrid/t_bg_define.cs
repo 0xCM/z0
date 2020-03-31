@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Nats;
+    using static Core;
     
     public class t_bg_define : t_bg<t_bg_define>
     {        
@@ -117,7 +117,7 @@ namespace Z0
             
             var diagA = dvec.vgather(n, in g32src, vgeneric.vparts(n, 496, 501, 506, 511));
             var diagB = vgeneric.vparts(n, g32[496], g32[501], g32[506], g32[511]);
-            Claim.eq(diagA,diagB);
+            Claim.veq(diagA,diagB);
         }
     }
 }

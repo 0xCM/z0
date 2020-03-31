@@ -20,7 +20,7 @@ namespace Z0
             var zero = vgeneric.vzero<byte>(n);
             var ones = gvec.vones<byte>(n);
             var blend = vBits.vbitblend(zero,ones,mask);
-            Claim.eq(blend,mask);
+            Claim.veq(blend,mask);
 
         }
 

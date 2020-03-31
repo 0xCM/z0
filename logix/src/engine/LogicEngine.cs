@@ -179,7 +179,7 @@ namespace Z0.Logix
         [Op]
         public static bit equal(VariedLogicExpr a, VariedLogicExpr b)
         {                
-            var count = Checks.length(a.Vars, b.Vars);
+            var count = Claim.length(a.Vars, b.Vars);
             foreach(var vars in BitLogicSpec.bitcombo(count))
             {
                 a.SetVars(vars);

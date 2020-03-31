@@ -45,7 +45,7 @@ namespace Z0
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
                 var expect = xs.Concat(ys).LoadVector(n256);
-                Claim.eq(expect,z);
+                Claim.veq(expect,z);
             }
         }
 

@@ -114,7 +114,7 @@ namespace Z0
         static Span<T> sub<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
-            var count = Checks.length(lhs,rhs);
+            var count = Claim.length(lhs,rhs);
             for(var i = 0; i< count; i++)
                 lhs[i] = gmath.sub(lhs[i], rhs[i]);
             return lhs;
@@ -134,7 +134,7 @@ namespace Z0
 
                 var v3 = RowVector.blockload(sub(v1.Unsized,v2.Unsized), n);                
                 Linear.sub(v1, v2, ref v1);
-                Claim.yea(v3 == v1);
+                Claim.require(v3 == v1);
             } 
         }
 

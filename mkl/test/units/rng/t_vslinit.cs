@@ -24,7 +24,7 @@ namespace Z0.Mkl
 
             var pActual = sum / ((double)count);
             var radius = Interval.closed(pTarget - tolerance, pTarget + tolerance);
-            Claim.yea(radius.Contains(pActual));
+            Claim.require(radius.Contains(pActual));
         }
 
         public void CreateMt2203Generators()
@@ -46,14 +46,14 @@ namespace Z0.Mkl
                 sample.uniform(stream, ufRange, bufferF64);
                 Dataset.Load(bufferF64,1).Extrema();
                 var max = Dataset.Load(bufferF64,1).Max()[0];
-                Claim.lteq(max, ufRange.Right);
-                Claim.neq(max,0);
+                CheckNumeric.lteq(max, ufRange.Right);
+                CheckNumeric.neq(max,0);
 
                 sample.bits(stream, bufferU32);
 
                 sample.bernoulli(stream, .40, bufferI32);
                 for(var j=0; j<samplesize; j++)
-                    Claim.yea(bufferI32[j] == 0 || bufferI32[j] == 1);
+                    Claim.require(bufferI32[j] == 0 || bufferI32[j] == 1);
 
                 sample.gaussian(stream, .75, .75, bufferF64);
                 sample.laplace(stream, .5, .5, bufferF64);

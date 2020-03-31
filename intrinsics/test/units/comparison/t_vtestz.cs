@@ -71,7 +71,7 @@ namespace Z0
                 // since all mask-identified source bits are disabled
                 var mask = gvec.vcnonimpl(gvec.vones(w,t), x);                
                 
-                Claim.yea(gvec.vtestz(x,mask));
+                Claim.require(gvec.vtestz(x,mask));
             }
         }
 
@@ -88,7 +88,7 @@ namespace Z0
                 // since all mask-identified source bits are disabled
                 var mask = gvec.vcnonimpl(gvec.vones(w,t), x);                
                 
-                Claim.yea(gvec.vtestz(x,mask));
+                Claim.require(gvec.vtestz(x,mask));
             }
         }            
     }

@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static root;
-        
-        
+    using static Core;
+    using static Literals;
+                
     public class t_bitview : t_bitcore<t_bitview>
     {
         public void bitview_8()
@@ -36,8 +36,7 @@ namespace Z0
             
             var bs = BitString.scalar(src);
             for(var i=0; i< bytecount*8; i++)
-                Claim.yea(bs[i] == (i%2 == 0));
+                Claim.require(bs[i] == (i%2 == 0));
         }
-
     }
 }

@@ -33,7 +33,6 @@ namespace Z0
             NatClaim.nonzero(n12);
             NatClaim.nonzero(n4);
             NatClaim.nonzero(n1);
-
         }
 
         public static void sum()

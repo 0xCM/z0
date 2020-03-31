@@ -139,7 +139,7 @@ namespace Z0
 
         static OpIdentity constructed(MethodInfo src)
         {
-            src.RequireConstructed();
+            Claim.RequireConstructed(src);
 
             var id = string.Empty;
             
@@ -166,7 +166,7 @@ namespace Z0
 
         static OpIdentity nongeneric(MethodInfo src)
         {
-            src.RequireNonGeneric();
+            Claim.RequireNonGeneric(src);
             var id = string.Empty;
             
             id += name(src);

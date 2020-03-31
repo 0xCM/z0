@@ -49,7 +49,7 @@ namespace Z0
             for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],bit.On);
             
-            Claim.yea(m.Diagonal().AllOn);
+            Claim.require(m.Diagonal().AllOn);
 
             var lhs = BitMatrix8.Identity;
             var rhs = BitMatrix8.Identity;
@@ -65,7 +65,7 @@ namespace Z0
             var m = BitMatrix16.Identity;
             for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],bit.On);
-            Claim.yea(BitMatrix.diagonal(m).AllOn);
+            Claim.require(BitMatrix.diagonal(m).AllOn);
         }
 
         public void bm_identity_32x32u_check()
@@ -73,7 +73,7 @@ namespace Z0
             var m = BitMatrix32.Identity;
             for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],bit.On);
-            Claim.yea(BitMatrix.diagonal(m).TestC());
+            Claim.require(BitMatrix.diagonal(m).TestC());
         }
     
         public void bm_identity_64x64_check()
@@ -82,7 +82,7 @@ namespace Z0
             for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],bit.On);
             
-            Claim.yea(BitMatrix.diagonal(m).AllOn);
+            Claim.require(BitMatrix.diagonal(m).AllOn);
 
             var lhs = BitMatrix64.Identity;
             var rhs = BitMatrix64.Identity;
@@ -94,19 +94,19 @@ namespace Z0
 
         public void bm_iszero_check()
         {
-            Claim.yea(BitMatrix8.Zero.IsZero());
+            Claim.require(BitMatrix8.Zero.IsZero());
             Claim.nea(BitMatrix8.Identity.IsZero());
             Claim.nea(Random.BitMatrix(n8).IsZero());
 
-            Claim.yea(BitMatrix16.Zero.IsZero());
+            Claim.require(BitMatrix16.Zero.IsZero());
             Claim.nea(BitMatrix16.Identity.IsZero());
             Claim.nea(Random.BitMatrix(n16).IsZero());
 
-            Claim.yea(BitMatrix32.Zero.IsZero());
+            Claim.require(BitMatrix32.Zero.IsZero());
             Claim.nea(BitMatrix32.Identity.IsZero());
             Claim.nea(Random.BitMatrix(n32).IsZero());
 
-            Claim.yea(BitMatrix64.Zero.IsZero());
+            Claim.require(BitMatrix64.Zero.IsZero());
             Claim.nea(BitMatrix64.Identity.IsZero());
             Claim.nea(Random.BitMatrix(n64).IsZero());
         }

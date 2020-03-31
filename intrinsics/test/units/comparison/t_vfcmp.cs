@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
-    using static System.Runtime.Intrinsics.X86.Avx;
-    
+    using static System.Runtime.Intrinsics.X86.Avx;    
     using static Core;
+    
     
     public class t_vfcmp : t_vinx<t_vfcmp>
     {                    
@@ -120,9 +120,10 @@ namespace Z0
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
                 var actual = vcmpf(lhs, rhs, mode);
-                Claim.eq(expect,actual);
+                Z0.Claim.eq(expect, actual);
             }
         }
+
 
         protected void cmp_256xf32_check(FpCmpMode mode)
         {
@@ -139,7 +140,7 @@ namespace Z0
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
                 var actual = cmpf(x, y, mode);
-                Claim.eq(expect,actual);
+                Z0.Claim.eq(expect, actual);
             }
         }
 
@@ -158,7 +159,7 @@ namespace Z0
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
                 var actual = cmpf(x, y, mode);
-                Claim.eq(expect,actual);
+                Z0.Claim.eq(expect, actual);
             }
         }
 

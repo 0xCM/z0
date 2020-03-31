@@ -171,7 +171,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 Vector256<T> actual = LogicEngine.eval(expr);
                 Vector256<T> expect = VectorOpApi.eval(op,a,offset);
-                Claim.eq(actual,expect);                            
+                Claim.veq(actual,expect);                            
             }
         }
 
@@ -188,7 +188,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 Vector128<T> actual = LogicEngine.eval(expr);
                 Vector128<T> expect = VectorOpApi.eval(op,a,offset);
-                Claim.eq(actual,expect);                            
+                Claim.veq(actual,expect);                            
             }
         }
     }

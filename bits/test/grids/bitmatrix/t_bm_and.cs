@@ -74,7 +74,7 @@ namespace Z0
                     dst[j] = (byte)(A.Bytes[j] & B.Bytes[j]);
 
                 var D = BitMatrix.primal(n,dst);
-                Claim.yea(D == C);                
+                Claim.require(D == C);                
             }
         }
 
@@ -88,7 +88,7 @@ namespace Z0
                 var C = A & B;
 
                 var D = BitMatrix.from(n32,and(A.Bytes, B.Bytes));
-                Claim.yea(C == D);
+                Claim.require(C == D);
             }
         }
 
@@ -101,7 +101,7 @@ namespace Z0
                 var C = A & B;
 
                 var D = BitMatrix.primal(n64,and(A.Bytes, B.Bytes));
-                Claim.yea(C == D);
+                Claim.require(C == D);
             }
         }
     }

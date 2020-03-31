@@ -119,7 +119,7 @@ namespace Z0.Logix
                 var y = gmath.inc(x);
 
                 var y0 = gmath.eq(x,x);
-                Claim.yea(y0);
+                Claim.require(y0);
 
                 var y1 = S.equals(x,x);
                 Claim.eq(maxval<T>(), y1);
@@ -144,7 +144,7 @@ namespace Z0.Logix
             {                
                 expect = gvec.vlt(x,y);
                 actual = lt(x,y);
-                Claim.yea(same(expect,actual));
+                Claim.require(same(expect,actual));
 
                 var a =vgeneric.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -163,7 +163,7 @@ namespace Z0.Logix
             {                
                 expect = gvec.vlt(x,y);
                 actual = lt(x,y);
-                Claim.yea(same(expect,actual));
+                Claim.require(same(expect,actual));
 
                 var a =vgeneric.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -183,7 +183,7 @@ namespace Z0.Logix
             {                
                 expect = gvec.vgt(x,y);
                 actual = gt(x,y);
-                Claim.yea(same(expect,actual));
+                Claim.require(same(expect,actual));
 
                 var a =vgeneric.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -203,7 +203,7 @@ namespace Z0.Logix
             {                
                 expect = gvec.vgt(x,y);
                 actual = gt(x,y);
-                Claim.yea(same(expect,actual));
+                Claim.require(same(expect,actual));
 
                 var a =vgeneric.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);

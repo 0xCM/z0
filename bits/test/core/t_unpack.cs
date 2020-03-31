@@ -90,7 +90,7 @@ namespace Z0
             {
                 var expect = y2[i] ? root.one<T>() : root.zero<T>();
                 var actual = y1[i];
-                Claim.yea(gmath.eq(expect,actual));
+                Claim.require(gmath.eq(expect,actual));
             }
         }
 

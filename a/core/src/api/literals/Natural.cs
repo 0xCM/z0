@@ -85,5 +85,69 @@ namespace Z0
 
         public static N1024 n1024 => default;
 
+        
+        public static N33 n33 => default;
+
+        public static N34 n34 => default;
+
+        public static N35 n35 => default;
+
+        public static N36 n36 => default;
+
+        public static N37 n37 => default;
+
+        public static N38 n38 => default;
+
+        public static N39 n39 => default;
+
+        public static N40 n40 => default;
+
+        public static N41 N41 => default;
+
+        public static N42 n42 => default;
+
+        public static N43 n43 => default;
+
+        public static N44 n44 => default;
+
+        public static N45 n45 => default;
+
+        public static N46 n46 => default;
+
+        public static N47 n47 => default;
+
+        public static N48 n48 => default;
+
+        public static N49 n49 => default;
+
+        public static N50 n50 => default;
+
+        public static N50 n51 => default;
+
+        public static N52 n52 => default;
+
+        public static N53 n53 => default;
+
+        public static N54 n54 => default;
+
+        public static N55 n55 => default;
+
+        public static N56 n56 => default;
+
+        public static N57 n57 => default;
+
+        public static N58 n58 => default;
+
+        public static N59 n59 => default;
+
+        public static N60 n60 => default;
+
+        public static N61 n61 => default;
+
+        public static N62 n62 => default;
+
+        public static N63 n63 => default;
+
+
     }
 }

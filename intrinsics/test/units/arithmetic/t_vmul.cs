@@ -126,7 +126,7 @@ namespace Z0
                 var expect = vgeneric.vparts(wt, x0,x1,x2,x3);
                 var actual = dvec.vmul(x,y);
 
-                Claim.eq(expect,actual);
+                Claim.veq(expect,actual);
             }
         }
 

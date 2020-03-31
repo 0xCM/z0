@@ -51,7 +51,7 @@ namespace Z0.Mkl
             Span<int> pivots = new int[18];
             mkl.getrf(A, pivots, ref X);
             X.Apply(x => x.Round(1));
-            Claim.yea(X == DGETRF_Out);
+            Claim.require(X == DGETRF_Out);
         }
 
         void Getrf64<M,N>()

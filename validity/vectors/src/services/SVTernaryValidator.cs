@@ -37,7 +37,7 @@ namespace Z0
                     var z = Random.CpuVector(w,t);
                     var result = f.Invoke(x,y,z);
                     for(var j=0; j< cells; j++)
-                        Claim.numeq(f.InvokeScalar(vcell(x,j),vcell(y,j),vcell(z,j)), vcell(result,j));
+                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j),vcell(y,j),vcell(z,j)), vcell(result,j));
                 }
             }
             catch(Exception e)
@@ -81,7 +81,7 @@ namespace Z0
                     var z = Random.CpuVector(w,t);
                     var result = f.Invoke(x,y,z);
                     for(var j=0; j< cells; j++)
-                        Claim.numeq(f.InvokeScalar(vcell(x,j),vcell(y,j),vcell(z,j)), vcell(result,j));
+                        CheckNumeric.eq(f.InvokeScalar(vcell(x,j),vcell(y,j),vcell(z,j)), vcell(result,j));
                 }
             }
             catch(Exception e)

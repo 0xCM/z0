@@ -11,6 +11,8 @@ namespace Z0
 
     public sealed class t_microbuffers : UnitTest<t_microbuffers>
     {
+        static ICheckNumeric Claim = ICheckNumeric.Checker;
+
         public void stacked_basecase()
         {
             var stack = SpanBuffers.stack<uint>(3);
@@ -23,20 +25,20 @@ namespace Z0
             var x3 = stack.Pop();
             Claim.eq(x1,3);
             Claim.eq(x2,2);
-            Claim.eq(x3,1);           
+            Z0.Claim.eq(x3, 1u);           
         }
 
         public void bitstack_basecase()
         {
             var stack = BitStack.Create(0b101011);
-            Claim.yea(stack.Pop());
-            Claim.yea(stack.Pop());
+            Claim.require(stack.Pop());
+            Claim.require(stack.Pop());
             Claim.nea(stack.Pop());
-            Claim.yea(stack.Pop());
+            Claim.require(stack.Pop());
             Claim.nea(stack.Pop());
-            Claim.yea(stack.Pop());            
+            Claim.require(stack.Pop());            
             stack.Push(bit.On);
-            Claim.yea(stack.Pop());
+            Claim.require(stack.Pop());
         }
 
         // public void bitstack()

@@ -17,7 +17,7 @@ namespace Z0
             var opid = Identify.Op("vgeneric_g[8u](v512x8i~in)");
             var input = $"hex://fixed/Vector512?vgeneric#{opid}";
             var attempt = OpUri.Parse(input);
-            Claim.yea(attempt.Succeeded);
+            Claim.require(attempt.Succeeded);
             var uri = attempt.Value;
 
             Claim.eq(OpUriScheme.Hex, uri.Scheme);

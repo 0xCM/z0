@@ -23,7 +23,7 @@ namespace Z0
             var segment = uint8(0b1010).ToBitSpan();
             var expect = segment.Replicate(4);
             var actual = dst.Data.ToBitSpan();
-            Claim.yea(expect.Equals(actual));
+            Claim.require(expect.Equals(actual));
                         
         }
 

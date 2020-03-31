@@ -31,8 +31,8 @@ namespace Z0
                 Claim.eq(hi, b);
 
                 Math128.mul(z,MAX, out uint c, out uint d);
-                Claim.gt(c,0u);
-                Claim.gt(d,0u);
+                CheckNumeric.gt(c,0u);
+                CheckNumeric.gt(d,0u);
 
                 var c2 = (uint)(((ulong)z) * ((ulong)(MAX)));
                 Claim.eq(c2, c);
@@ -84,15 +84,15 @@ namespace Z0
                 var hi = Math128.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                Claim.nonzero(Math128.mulhi(z,MAX));
+                CheckNumeric.nonzero(Math128.mulhi(z,MAX));
 
                 Math128.mul(x,y, out ulong a, out ulong b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
                 Math128.mul(z,MAX, out ulong c, out ulong d);
-                Claim.gt(c,0ul);
-                Claim.gt(d,0ul);
+                CheckNumeric.gt(c,0ul);
+                CheckNumeric.gt(d,0ul);
             }
         }        
 

@@ -17,7 +17,7 @@ namespace Z0.Mkl.Test
             
             var dst2 = lhs.Replicate();
             gspan.mul(lhs,rhs, dst2.Unblocked);
-            Claim.yea(dst1 == dst2);
+            Claim.require(dst1 == dst2);
         }
 
         public void vMulF64()
@@ -29,7 +29,7 @@ namespace Z0.Mkl.Test
             
             var dst2 = lhs.Replicate();
             gspan.mul(lhs.Unsized,rhs.Unsized, dst2.Unsized);
-            Claim.yea(dst1 == dst2);
+            Claim.require(dst1 == dst2);
         }
 
         BenchMarkedPair vMulPerf(int samples, long cycles)

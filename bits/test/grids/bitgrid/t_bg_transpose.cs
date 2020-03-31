@@ -22,7 +22,7 @@ namespace Z0
             var g = BitGrid.broadcast(pattern, BitGrid.alloc(w,m,n,t));            
             var gT = BitGrid.transpose(g);            
             var bsT = g.ToBitString().Transpose(m,n).ToBitGrid(w,m,n,t);
-            Claim.yea(gT == bsT);
+            Claim.require(gT == bsT);
         }
 
         void nbg_transpose_8x8()

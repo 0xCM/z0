@@ -83,7 +83,7 @@ namespace Z0
         {
             var p1 = Random.Perm<N>();
             var p2 = p1 * NatPerm<N>.Identity;
-            Claim.yea(p1 == p2);
+            Claim.require(p1 == p2);
         }
 
        void perm_identity_check<N>(N n = default)
@@ -98,7 +98,7 @@ namespace Z0
             Claim.eq(length, terms.Length);
 
             var permB = Permute.natural(n, terms);
-            Claim.yea(permA == permB);
+            Claim.require(permA == permB);
         }
 
         void perm_invert_check<N>(N n = default)
@@ -109,7 +109,7 @@ namespace Z0
                 var p1 = Random.Perm(n);
                 var p2 = ~ p1;
                 var p3 = p1 * p2;                    
-                Claim.yea(p3 == NatPerm<N>.Identity);
+                Claim.require(p3 == NatPerm<N>.Identity);
             }
         }
     }

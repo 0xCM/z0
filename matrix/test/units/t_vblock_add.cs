@@ -76,7 +76,7 @@ namespace Z0
         public static Span<T> add<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged        
         {
-            for(var i=0; i< Checks.length(lhs,rhs); i++)
+            for(var i=0; i< Claim.length(lhs,rhs); i++)
                 lhs[i] = gmath.add(lhs[i], rhs[i]);
             return lhs;
         }
@@ -92,7 +92,7 @@ namespace Z0
                 var v2 = Random.VectorBlock<N,T>();
                 var v3 = RowVector.blockload(add(v1.Unsized,v2.Unsized), n);
                 Linear.add(ref v1, v2);
-                Claim.yea(v3 == v1);
+                Claim.require(v3 == v1);
             }
         }
 
@@ -115,5 +115,4 @@ namespace Z0
             ReportBenchmark(opname, opcount, sw.Elapsed);
         }
     }
-
 }

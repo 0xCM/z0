@@ -54,8 +54,8 @@ namespace Z0
                 gbits.storeseq(a,s0);
                 gbits.storeseq(a,s1);
                 s2 = gbits.storeseq(a);
-                Claim.numeq(s0, s1);
-                Claim.numeq(s1, s2);
+                CheckNumeric.eq(s0, s1);
+                CheckNumeric.eq(s1, s2);
             }
         }
     }

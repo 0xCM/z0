@@ -17,7 +17,7 @@ namespace Z0.Mkl
             var s1Range = Interval.closed(350.0, 1000.0);
             var s1 = Random.Array<double>(samplesize, s1Range);
             var s1Max = Dataset.Load(s1).Max()[0];
-            Claim.neq(s1Max,0.0);
+            CheckNumeric.neq(s1Max,0.0);
 
             var zeroCount = s1.Count(x => x == 0);
             Notify($"Found {zeroCount} zeroes");
@@ -28,7 +28,7 @@ namespace Z0.Mkl
             var src = Random.Stream<double>().Take(16000).ToArray();
             var expect = src.Sum().Round(4);
             var actual = Dataset.Load(src).Sum()[0].Round(4);
-            Claim.yea(gmath.within(expect,actual,.01));
+            Claim.require(gmath.within(expect,actual,.01));
         }
 
         public void mean_bench()

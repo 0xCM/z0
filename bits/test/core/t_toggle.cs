@@ -54,7 +54,7 @@ namespace Z0
                     var before = gbits.test(x, j);
                     x = gbits.toggle(x, j);
                     var after = gbits.test(x, j);
-                    Claim.neq(before, after);
+                    CheckNumeric.neq(before, after);
                     x = gbits.toggle(x, j);
                     Claim.eq(x, src[i]);
                 }
@@ -77,13 +77,13 @@ namespace Z0
 
         public void testbit_outline()
         {
-            Claim.yea(gbits.test(0b00000101, (byte)0));
+            Claim.require(gbits.test(0b00000101, (byte)0));
             Claim.nea(gbits.test(0b00000101, (byte)1));
-            Claim.yea(gbits.test(0b00000101, (byte)2));
+            Claim.require(gbits.test(0b00000101, (byte)2));
             
-            Claim.yea(gbits.test(0b00000111, (byte)0));
-            Claim.yea(gbits.test(0b00000111, (byte)1));
-            Claim.yea(gbits.test(0b00000111, (byte)2));
+            Claim.require(gbits.test(0b00000111, (byte)0));
+            Claim.require(gbits.test(0b00000111, (byte)1));
+            Claim.require(gbits.test(0b00000111, (byte)2));
         }
 
 

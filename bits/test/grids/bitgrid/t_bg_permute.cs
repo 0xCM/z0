@@ -27,7 +27,7 @@ namespace Z0
             var g1 = identity.ToBitGrid();
             var iperm = identity.ToNatural();            
             var g2 = iperm.ToBitGrid();
-            Claim.yea(g1 == g2);
+            Claim.require(g1 == g2);
         
         }
 
@@ -67,7 +67,7 @@ namespace Z0
             var v2F = v2.Format(3);
             Claim.eq(p2F, v2F);
 
-            Claim.yea(v2.ToSubGrid(n8,n3) == p2.ToSubGrid());
+            Claim.require(v2.ToSubGrid(n8,n3) == p2.ToSubGrid());
         }       
     }
 }

@@ -13,5 +13,21 @@ namespace Z0
         protected override int RepCount => Pow2.T04;
 
         protected override int CycleCount => Pow2.T03;       
+
+        protected ICheckNumeric Claim => ICheckNumeric.Checker;        
     }
+
+
+    public abstract class t_bitcore<X,V> : UnitTest<X>
+        where X : t_bitcore<X,V>, new()
+        where V : ICheck
+    {
+        protected override int RepCount => Pow2.T04;
+
+        protected override int CycleCount => Pow2.T03;       
+
+        protected abstract V Claim {get;}
+    }
+
+
 }

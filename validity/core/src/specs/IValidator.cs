@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
 
-    public interface IValidator : IService<IValidationContext>
+    public interface ISFValidator : IService<IValidationContext>
     {
 
     }
 
-    public interface IValidator<T> : IValidator
+    public interface ISFValidator<T> : ISFValidator
         where T : unmanaged
     {   
         

@@ -14,5 +14,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int size<T>()
             => Unsafe.SizeOf<T>();
+
+
+        [MethodImpl(Inline)]
+        public static int size<T>(T t)
+            => Unsafe.SizeOf<T>();
+
     }
 }

@@ -104,13 +104,13 @@ namespace Z0
             var pairswap = vgeneric.vparts(w,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
-            Claim.eq(reverse, y1);
+            Claim.veq(reverse, y1);
 
             var y2 = vshuf16x16(x,identity);
-            Claim.eq(identity,y2);
+            Claim.veq(identity,y2);
 
             var y3 = vshuf16x16(x,pairswap);
-            Claim.eq(pairswap,y3);
+            Claim.veq(pairswap,y3);
         }
 
         public void vshuf16x8_128x8u()
@@ -119,33 +119,33 @@ namespace Z0
             var x0 = Data.vincrements<byte>(n);
             var x0Spec = vgeneric.vload(n, in head(Pattern1));
             var x0Dst = dvec.vshuf16x8(x0,x0Spec);
-            Claim.eq(x0Spec,x0Dst);
+            Claim.veq(x0Spec,x0Dst);
 
             var x1 = Data.vincrements<byte>(n);
             var x1Spec = vgeneric.vload(n, in head(Pattern2));
             var x1Dst = dvec.vshuf16x8(x1,x1Spec);
-            Claim.eq(x1Spec,x1Dst);
+            Claim.veq(x1Spec,x1Dst);
 
             var x2 = Data.vincrements<byte>(n);
             var x2Spec = Data.rotl(n128, n8);
             var x2Dst = dvec.vshuf16x8(x2,x2Spec);
-            Claim.eq(x2Spec,x2Dst);
+            Claim.veq(x2Spec,x2Dst);
 
             var x3 = Data.vincrements<byte>(n);
             var x3Spec = Data.rotr(n128, n8);
             var x3Dst = dvec.vshuf16x8(x3,x3Spec);
-            Claim.eq(x3Spec,x3Dst);
+            Claim.veq(x3Spec,x3Dst);
 
             var x4 = Data.vincrements<byte>(n);
             var x4Spec1 = Data.rotl(n128, n8);
             var x4Spec2 = Data.rotr(n128, n8);
             var x4Dst = dvec.vshuf16x8(dvec.vshuf16x8(x4,x4Spec1), x4Spec2);
-            Claim.eq(x4,x4Dst);
+            Claim.veq(x4,x4Dst);
 
             var x5 = Random.CpuVector<byte>(n);
             var x5Spec = vgeneric.vbroadcast(n,(byte)0b10000000);
             var x5Dst = dvec.vshuf16x8(x5, x5Spec);
-            Claim.eq(x5Dst,vgeneric.vbroadcast(n,(byte)0));                        
+            Claim.veq(x5Dst,vgeneric.vbroadcast(n,(byte)0));                        
         }
 
 
@@ -159,21 +159,21 @@ namespace Z0
             var shufspec = perm.ToShuffleSpec();
             var dst = dvec.vshuf16x8(src,shufspec);
             var expect = Data.decrements<byte>(n128);
-            Claim.eq(expect, dst);
+            Claim.veq(expect, dst);
 
             var identity = ShuffleIdentityMask();
             for(var i=0; i<CycleCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
                 var y = dvec.vshuf16x8(x, identity);
-                Claim.eq(x,y);
+                Claim.veq(x,y);
             }
         }
 
         public void vperm4x16()
         {
             var id = vgeneric.vparts(n128,0,1,2,3,6,7,8,9);
-            Claim.eq(dvec.vperm4x16(vgeneric.vparts(n128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), vgeneric.vparts(n128,0,3,2,1,6,9,8,7));
+            Claim.veq(dvec.vperm4x16(vgeneric.vparts(n128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), vgeneric.vparts(n128,0,3,2,1,6,9,8,7));
         }
 
         public void vperm4x32_128x32u_example1()
@@ -206,7 +206,7 @@ namespace Z0
                 var v3 = vgeneric.vparts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
 
                 // Same?
-                Claim.eq(v3,v2);
+                Claim.veq(v3,v2);
 
                 if(trace)
                 {
@@ -224,20 +224,20 @@ namespace Z0
             var spec = Perm4L.ABCD;
             var y = vgeneric.vparts(n128,4,3,2,1);
             var x = dvec.vperm4x32(src, Perm4L.ABCD);
-            Claim.eq(x, src);
+            Claim.veq(x, src);
 
             y = vgeneric.vparts(n128,4,3,2,1);
             spec = Perm4L.DCBA;
             x = dvec.vperm4x32(src,spec);
-            Claim.eq(x, y); 
+            Claim.veq(x, y); 
 
             y = vgeneric.vparts(4u,3u,2u,1u);
             spec = Perm4L.DCBA;
             x = dvec.vperm4x32(src,spec);
-            Claim.eq(x, y); 
+            Claim.veq(x, y); 
 
-            Claim.eq(dvec.vperm4x32(vgeneric.vparts(0,1,2,3), Perm4L.ADCB), vgeneric.vparts(0,3,2,1));
-            Claim.eq(dvec.vperm4x32(vgeneric.vparts(0,1,2,3), Perm4L.DBCA), vgeneric.vparts(3,1,2,0));
+            Claim.veq(dvec.vperm4x32(vgeneric.vparts(0,1,2,3), Perm4L.ADCB), vgeneric.vparts(0,3,2,1));
+            Claim.veq(dvec.vperm4x32(vgeneric.vparts(0,1,2,3), Perm4L.DBCA), vgeneric.vparts(3,1,2,0));
         }
 
         static Vector256<byte> ShuffleIdentityMask()

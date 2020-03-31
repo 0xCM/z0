@@ -56,7 +56,7 @@ namespace Z0.Mkl
         /// <param name="Y">The right vector</param>
         [MethodImpl(Inline)]
         static float dot(Span<float> X, Span<float> Y)        
-            => CBLAS.cblas_sdot(length(X,Y), ref head(X), 1, ref head(Y), 1);
+            => CBLAS.cblas_sdot(Check.length(X,Y), ref head(X), 1, ref head(Y), 1);
 
         /// <summary>
         /// Computes the scalar product of the left and right operands

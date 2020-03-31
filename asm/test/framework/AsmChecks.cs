@@ -193,7 +193,7 @@ namespace Z0.Asm.Validation
                 {
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
-                    Claim.eq(f(x,y), g.Apply(x,y));
+                    Claim.veq(f(x,y), g.Apply(x,y));
                 }
             }            
 
@@ -214,7 +214,7 @@ namespace Z0.Asm.Validation
                 {
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
-                    Claim.eq(f(x,y), g.Apply(x,y));
+                    Claim.veq(f(x,y), g.Apply(x,y));
                 }
             }            
 
@@ -625,7 +625,7 @@ namespace Z0.Asm.Validation
             var d = dArchive.Read(dId).Single().ApiCode;
             var g = gArchive.Read(gId).Single().ApiCode;
 
-            Claim.yea(binop_match(buffers, w,d,g));                                     
+            Claim.require(binop_match(buffers, w,d,g));                                     
         }
 
         bit binop_match(in BufferSeq buffers, TypeWidth w, ApiCode a, ApiCode b)
@@ -796,7 +796,7 @@ namespace Z0.Asm.Validation
 
             var g = buffers.MainExec.EmitFixedBinaryOp<Fixed256>(asm.Code.ApiCode);
             var z3 = g(x,y).ToVector<ushort>();
-            Claim.eq(z1,z3);
+            Claim.veq(z1,z3);
         }
 
 
@@ -851,7 +851,7 @@ namespace Z0.Asm.Validation
 
             var f = buffers[Main].EmitFixedBinaryOp<Fixed128>(asm.Code.ApiCode);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
-            Claim.eq(z1,z2);
+            Claim.veq(z1,z2);
         }
 
         void CheckBinaryImm<T>(in OpExtractExchange exchange, BufferToken buffer, W256 w, string name, byte imm)
@@ -875,7 +875,7 @@ namespace Z0.Asm.Validation
 
             var f = buffer.EmitFixedBinaryOp<Fixed256>(asm.Code.ApiCode);
             var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
-            Claim.eq(z1,z2);
+            Claim.veq(z1,z2);
         }
 
         void CheckUnaryImm<T>(in BufferSeq buffers, in OpExtractExchange exchange, W256 w, string name, byte imm)
@@ -899,7 +899,7 @@ namespace Z0.Asm.Validation
 
             var f = buffers[Main].EmitFixedUnaryOp<Fixed256>(capture.Code.ApiCode);
             var z2 = f(x.ToFixed()).ToVector<T>();
-            Claim.eq(z1,z2);
+            Claim.veq(z1,z2);
         }
 
         public void vector_bitlogic_match(in BufferSeq buffers)
@@ -924,7 +924,7 @@ namespace Z0.Asm.Validation
             var d = Context.CodeArchive(catalog, nameof(dvec)).Read(idD).Single().ApiCode;
             var g = Context.CodeArchive(catalog, nameof(gvec)).Read(idG).Single().ApiCode;
 
-            Claim.yea(binop_match(buffers, w,d,g));
+            Claim.require(binop_match(buffers, w,d,g));
         }
 
         public void vadd_check(in BufferSeq buffers)
@@ -997,7 +997,7 @@ namespace Z0.Asm.Validation
                 {
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
-                    Claim.eq(f(x,y), g.Apply(x,y));
+                    Claim.veq(f(x,y), g.Apply(x,y));
                 }            
             }
 
@@ -1022,7 +1022,7 @@ namespace Z0.Asm.Validation
                 {
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
-                    Claim.eq(f(x,y), g.Apply(x,y));
+                    Claim.veq(f(x,y), g.Apply(x,y));
                 }
             }      
 

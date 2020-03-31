@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Core;    
-    using static Literals;
+    using static Core;        
 
     /// <summary>
     /// Represents a polynomial 

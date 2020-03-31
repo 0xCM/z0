@@ -80,7 +80,7 @@ namespace Z0
             var subject = Vector256.Create(2, 4, 6, 8, 10, 12, 14, 16);
             var swapped = vswap_ref(subject, 2, 3);
             var expect = Vector256.Create(2, 4, 8, 6, 10, 12, 14, 16);
-            Claim.eq(expect, swapped);
+            Claim.veq(expect, swapped);
         }
     }
 }

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     public class t_partition : t_gmath<t_partition>
     {        
 
@@ -54,7 +53,7 @@ namespace Z0
             var dst = Partition.measuredPoints(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            
-            Claim.numeq(Arrays.from(5,6,7,8,9,10,11,12).ToSpan(),dst);
+            CheckNumeric.eq(Arrays.from(5,6,7,8,9,10,11,12).ToSpan(),dst);
         }
 
         public void part1()
@@ -103,7 +102,7 @@ namespace Z0
             var src = Interval.closed(1,103);
             var dst = Partition.width(src,13);
             var fmt = dst.Map(x => x.Format()).Concat(" + ");  
-            Claim.yea(dst.Last().Closed);
+            Claim.require(dst.Last().Closed);
         }
 
         protected void points_check<T>(T min, T max, T width)
