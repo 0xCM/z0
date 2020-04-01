@@ -11,18 +11,80 @@ namespace Z0
 
     using static Core;
 
-    [SuppressUnmanagedCodeSecurity]
+    [ApiHost,SuppressUnmanagedCodeSecurity]
     public static unsafe class Buffers
     {
         const string Kernel32 = "kernel32.dll";
 
         /// <summary>
-        /// Allocates an execution buffer
+        /// Allocates a native buffer
         /// </summary>
         /// <param name="length">The buffer length in bytes</param>
         [MethodImpl(Inline)]
-        public static BufferAllocation alloc(int length)
+        public static BufferAllocation native(int length)
             => BufferAllocation.Own((liberate(Marshal.AllocHGlobal(length), length), length));        
+
+        /// <summary>
+        /// Allocates a span-predicated T-stack
+        /// </summary>
+        /// <param name="capacity">The T-cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static SpanStack<T> stack<T>(int capacity)
+            where T : unmanaged
+                => new SpanStack<T>(new T[capacity]);
+
+
+        /// <summary>
+        /// Covers a span with a stack buffer
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static SpanStack<T> stack<T>(Span<T> src)
+            where T : unmanaged
+                => new SpanStack<T>(src);
+
+        /// <summary>
+        /// Allocates a span-predicated T-ring buffer
+        /// </summary>
+        /// <param name="capacity">The T-cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static RingBuffer<T> ring<T>(int capacity)
+            where T : unmanaged
+                => new RingBuffer<T>(new T[capacity]);
+
+        /// <summary>
+        /// Covers a span with a ring buffer
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static RingBuffer<T> ring<T>(Span<T> src)
+            where T : unmanaged
+                => new RingBuffer<T>(src);
+
+        /// <summary>
+        /// Allocates a span-predicated S/T ring buffer
+        /// </summary>
+        /// <param name="capacity">The segment count</param>
+        /// <typeparam name="S">The segmented type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static PartRing<S,T> parts<S,T>(int capacity)
+            where S : unmanaged
+            where T : unmanaged
+                => new PartRing<S,T>(new S[capacity]);
+
+        /// <summary>
+        /// Covers an S-span with an S/T ring buffer
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="S">The segmented type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static PartRing<S,T> parts<S,T>(Span<S> src)
+            where S : unmanaged
+            where T : unmanaged
+                => new PartRing<S,T>(src);
 
         /// <summary>
         /// Deallocates a native allocation

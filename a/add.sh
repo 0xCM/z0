@@ -1,6 +1,10 @@
 export ProjectRoot="$(dirname "$0")"
 Cmd=$ZDev/.scripts/add-rooted.sh
 
+
+export ProjectId=seed
+bash $Cmd
+
 export ProjectId=apps
 bash $Cmd
 
@@ -8,9 +12,6 @@ export ProjectId=canonical
 bash $Cmd
 
 export ProjectId=collective
-bash $Cmd
-
-export ProjectId=components
 bash $Cmd
 
 export ProjectId=custom

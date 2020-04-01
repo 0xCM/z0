@@ -25,7 +25,7 @@
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Custom)" />
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Fixed)" />

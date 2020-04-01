@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Z)" />
   </ItemGroup>
 
 </Project>

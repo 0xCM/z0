@@ -1,7 +1,7 @@
 ﻿<Project>
 
   <ItemGroup>
-    <ProjectReference Include="$(Components)" />
+    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Canonical)" />

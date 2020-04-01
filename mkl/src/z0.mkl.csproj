@@ -8,7 +8,7 @@
   <Import Project="$(TopDir)gmath/z0.gmath.exports.props"/>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Z)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Matrix)" />     
 

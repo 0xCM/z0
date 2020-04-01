@@ -41,7 +41,7 @@ namespace Z0
             this.BufferCount = count;
             this.BufferSize = size;
             this.TotalSize = BufferCount*BufferSize;
-            this.Allocation = Buffers.alloc(TotalSize);
+            this.Allocation = Buffers.native(TotalSize);
             this.View = new Span<byte>(Allocation.Handle.ToPointer(), TotalSize);
             this.Tokens = BufferToken.Tokenize(Allocation.Handle, BufferSize, BufferCount);
         }

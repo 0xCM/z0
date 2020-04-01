@@ -34,7 +34,6 @@ namespace Z0.Asm.Check
                 P.Memories.Resolved, 
                 P.Numeric.Resolved,
                 P.Permute.Resolved,
-                P.Root.Resolved,
                 P.VSvc.Resolved, 
                 P.VBits.Resolved, 
                 P.Vectorized.Resolved, 
