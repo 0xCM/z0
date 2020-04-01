@@ -5,13 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static Memories;
-
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Determines whether any elements of a span satisfy a supplied predicate

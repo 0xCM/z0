@@ -81,14 +81,14 @@ namespace Z0.Asm
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
         public IEnumerable<AsmCode> Read(FilePath src)
-            => Read(src, HexLine.DefaultIdSep, HexLine.DefaultByteSep);
+            => Read(src, OpExtractSegment.DefaultIdSep, OpExtractSegment.DefaultByteSep);
 
         /// <summary>
         /// Reads a moniker-identified, default-formatted hex-line file
         /// </summary>
         /// <param name="id">The identifying moniker</param>
         public IEnumerable<AsmCode> Read(OpIdentity id)
-            => Read(RootFolder + FileName.Define(id, HexLine.FileExt));
+            => Read(RootFolder + FileName.Define(id, OpExtractSegment.FileExt));
 
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 

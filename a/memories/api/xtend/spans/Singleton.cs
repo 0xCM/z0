@@ -7,9 +7,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;    
 
-    using static Memories;
-    
-    partial class XMem
+    using static Seed;
+
+    partial class XTend
     {
         /// <summary>
         /// Renders a non-allocating mutable view over a source span segment that is presented as an individual target value

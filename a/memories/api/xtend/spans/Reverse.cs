@@ -9,9 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Memories;
+    using static Seed;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Produces a reversed span from a readonly span
@@ -25,5 +25,10 @@ namespace Z0
             dst.Reverse();
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        static Span<T> ToSpan<T>(this ReadOnlySpan<T> src)
+            => src.ToArray();
+
     }
 }

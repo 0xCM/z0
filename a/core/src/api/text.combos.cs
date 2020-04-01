@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="width">The with of the padded string</param>
         [MethodImpl(Inline)]   
         public static string zpad(object src, int width)
-            => $"{src}".PadLeft(width, AsciDigits.A0);
+            => $"{src}".PadLeft(width, AsciDigits.D0);
 
         /// <summary>
         /// Right-Pads the input string with an optionally-specified character.
@@ -230,17 +230,8 @@ namespace Z0
         /// <param name="right">The text on the right</param>
         [MethodImpl(Inline)]
         public static string enclose(object content, string left, string right)
-            => concat(left, $"{content}", right);
+            => string.Concat(left, $"{content}", right);
 
-        /// <summary>
-        /// Encloses text within (possibly distinct) left and right boundaries
-        /// </summary>
-        /// <param name="content">The text to be surrounded by the left and right delimiters</param>
-        /// <param name="left">The left delimiter</param>
-        /// <param name="right">The right delimiter</param>
-        [MethodImpl(Inline)]
-        public static string enclose(object content, char left, char right)
-            => concat(left, $"{content}", right);
 
         /// <summary>
         /// Encloses text within a bounding string
@@ -249,7 +240,7 @@ namespace Z0
         /// <param name="sep">The left and right boundary</param>
         [MethodImpl(Inline)]
         public static string enclose(object content, string sep)
-            => concat(sep,$"{content}",sep);
+            => string.Concat(sep,$"{content}",sep);
 
         /// <summary>
         /// Encloses a character within uniform left/right bounding string
@@ -258,7 +249,7 @@ namespace Z0
         /// <param name="sep">The boundary delimiter</param>
         [MethodImpl(Inline)]
         public static string enclose(char content, string sep)
-            => concat(sep,content,sep);
+            => string.Concat(sep,content,sep);
 
         /// <summary>
         /// Encloses a character within (possibly distinct) left and right boundaries
@@ -268,7 +259,7 @@ namespace Z0
         /// <param name="right">The text on the right</param>
         [MethodImpl(Inline)]
         public static string enclose(char content, string left, string right)
-            => concat(left,content,right);
+            => string.Concat(left,content,right);
 
         /// <summary>
         /// Encloses text between single quote (') characters
@@ -276,7 +267,7 @@ namespace Z0
         /// <param name="src">The text to enclose</param>
         [MethodImpl(Inline)]
         public static string squote(object src)
-            => enclose(src, Chars.SQuote.ToString());
+            => enclose(src, CharText.SQuote);
 
         /// <summary>
         /// Encloses content between '(' and ')' characters
@@ -284,7 +275,7 @@ namespace Z0
         /// <param name="content">The items to be enclosed</param>
         [MethodImpl(Inline)]
         public static string parenthetical(params object[] content)
-            => enclose(concat(content.Select(x => x.ToString())), lparen(), rparen());
+            => enclose(string.Concat(content.Select(x => x.ToString())), CharText.LParen, CharText.RParen);
 
         /// <summary>
         /// Encloses content between '(' and ')' where items are interspersed with a separator
@@ -300,7 +291,7 @@ namespace Z0
         /// <param name="content">The data to delimit and format</param>
         [MethodImpl(Inline)]
         public static string csv(object o1, object o2, params object[] content)
-            =>  string.Join(Chars.Comma, o1, o2) + string.Join(Chars.Comma, content);
+            => string.Join(Chars.Comma, o1, o2) + string.Join(Chars.Comma, content);
 
         /// <summary>
         /// Renders each item from a sequence as list of values, delimited by end-of-line
@@ -308,7 +299,17 @@ namespace Z0
         /// <param name="content">The content to enclose</param>
         [MethodImpl(Inline)]
         public static string eol(IEnumerable<object> content)
-            => string.Join(eol(), content);
+            => string.Join(Chars.Eol, content);
+
+        /// <summary>
+        /// Encloses text within (possibly distinct) left and right boundaries
+        /// </summary>
+        /// <param name="content">The text to be surrounded by the left and right delimiters</param>
+        /// <param name="left">The left delimiter</param>
+        /// <param name="right">The right delimiter</param>
+        [MethodImpl(Inline)]
+        public static string enclose(object content, char left, char right)
+            => string.Concat(left, $"{content}", right);
 
         /// <summary>
         /// Encloses text between '[' and ']' characters
@@ -316,7 +317,7 @@ namespace Z0
         /// <param name="content">The content to enclose</param>
         [MethodImpl(Inline)]
         public static string bracket(object content)
-            => enclose($"{content}", lbracket(), rbracket());
+            => enclose($"{content}", Chars.LBracket, Chars.RBracket);
 
         /// <summary>
         /// Encloses text between less than and greater than characters
@@ -324,7 +325,7 @@ namespace Z0
         /// <param name="content">The content to enclose</param>
         [MethodImpl(Inline)]
         public static string angled(string content)
-            => String.IsNullOrWhiteSpace(content) ? string.Empty : $"<{content}>";
+            => string.IsNullOrWhiteSpace(content) ? string.Empty : $"<{content}>";
 
         /// <summary>
         /// Trims leading characters when matched

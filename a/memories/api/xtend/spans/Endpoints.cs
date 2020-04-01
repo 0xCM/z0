@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Seed;
 
-    partial class XMem
+    partial class XTend
     {
         static void ThrowEmptySpanError()
             => throw new Exception($"The span is empty");

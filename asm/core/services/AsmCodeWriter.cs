@@ -37,7 +37,7 @@ namespace Z0.Asm
         }
         
         public void WriteHexLine(in CapturedOp src, int? idpad = null)
-            => StreamOut.WriteLine(HexLine.Define(src.Id, src.RawBits.Bytes).Format(idpad ?? 0));  //StreamOut.WriteHexLine(src.Id, src.RawBits.Bytes, idpad);
+            => StreamOut.WriteLine(OpExtractSegment.Define(src.Id, src.RawBits.Bytes).Format(idpad ?? 0));  //StreamOut.WriteHexLine(src.Id, src.RawBits.Bytes, idpad);
 
         public void Write(AsmCode[] src)
         {

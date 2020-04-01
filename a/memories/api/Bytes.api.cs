@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Core;
+    using static Memories;
+    using static refs;
     using static As;
 
     [ApiHost]

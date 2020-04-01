@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Identify;
+    using static Seed;
     using static IdentityShare;
     
     public readonly struct OpUri : IUri<OpUri>, INullary<OpUri>

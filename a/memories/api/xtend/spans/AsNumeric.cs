@@ -7,12 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static Memories;
+    using static Seed;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Reimagines a readonly span of generic values as a span of signed bytes

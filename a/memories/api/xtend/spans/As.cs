@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
-    using static Memories;
+    using static Seed;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Presents a span of one value-type as a span of another value-type

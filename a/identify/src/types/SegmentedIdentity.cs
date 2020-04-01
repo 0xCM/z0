@@ -8,9 +8,9 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Identify;
+    using static Seed;
     using static IdentityShare;
-    using static text;
+    //using static text;
 
     public readonly struct SegmentedIdentity : IIdentifiedType<SegmentedIdentity>
     {        
@@ -109,7 +109,7 @@ namespace Z0
                 }
             }
             
-            var parts = split(slice(src,startidx), IDI.SegSep);
+            var parts = text.split(text.slice(src,startidx), IDI.SegSep);
             if(parts.Length == 2)
             {
                 var part0 = parts[0];
@@ -117,14 +117,14 @@ namespace Z0
 
                 var segtext = part0[0] 
                     == IDI.Generic 
-                    ? slice(part0, 1, part0.Length - 1) 
+                    ? text.slice(part0, 1, part0.Length - 1) 
                     : part0;
 
                 if(uint.TryParse(segtext, out var n))
                 {
                     if(Enum.IsDefined(typeof(FixedWidth),n))
                     {
-                        var bytext = slice(part1,0, part1.Length - 1);                        
+                        var bytext = text.slice(part1,0, part1.Length - 1);                        
                         if(uint.TryParse(bytext, out var by))
                         {                                
                             if(Enum.IsDefined(typeof(FixedWidth), by))

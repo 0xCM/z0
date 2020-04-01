@@ -35,7 +35,7 @@ namespace Z0
 
         public static HexDoc parse(FilePath src)
         {
-            var dst = new List<HexLine>();
+            var dst = new List<OpExtractSegment>();
             foreach(var line in src.ReadLines())
                 HexParser.hexline(line).OnSome(dst.Add);            
             return new HexDoc(dst.ToArray());
@@ -77,14 +77,14 @@ namespace Z0
         /// <param name="formatted">The formatted text</param>
         /// <param name="idsep">A character that partitions the identifier and the code</param>
         /// <param name="bytesep">A character that partitions the code bytes</param>
-        public static Option<HexLine> hexline(string formatted, char idsep = HexLine.DefaultIdSep, char bytesep = HexLine.DefaultByteSep)
+        public static Option<OpExtractSegment> hexline(string formatted, char idsep = OpExtractSegment.DefaultIdSep, char bytesep = OpExtractSegment.DefaultByteSep)
         {
             try
             {
                 var id = Identify.Op(formatted.TakeBefore(idsep).Trim());
                 var bytes = formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(HexParser.parsebyte).ToArray();
                 var encoded = MemoryExtract.Define(bytes);
-                return HexLine.Define(id, encoded);                
+                return OpExtractSegment.Define(id, encoded);                
             }
             catch(Exception e)
             {

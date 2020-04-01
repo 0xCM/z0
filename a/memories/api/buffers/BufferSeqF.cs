@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Core;
+    using static Seed;
+    using static refs;
 
     public readonly ref struct BufferSeq<F>
         where F : unmanaged, IFixed    

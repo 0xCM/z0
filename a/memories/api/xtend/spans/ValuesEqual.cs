@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Seed;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Evaluates whether two spans have identical content
@@ -38,6 +38,5 @@ namespace Z0
         public static bool ValuesEqual<T>(this Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged, IEquatable<T>
                 => lhs.ReadOnly().ValuesEqual(rhs);        
-
     }
 }

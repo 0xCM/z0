@@ -104,7 +104,7 @@ namespace Z0
             {
                 var id = Identity.identify(p.ParameterType.EffectiveType());
                 if(!id.IsEmpty)
-                    return text.concat(id.Identifier, p.ClassifyVariance().Format());                
+                    return text.concat(id.Identifier, p.ReferenceKind().Format());                
             }
             return string.Empty;                        
         }

@@ -45,12 +45,4 @@ namespace Z0
         public MethodInfo DynamicMethod
             => Op.TargetMethod;
     }
-
-    partial class XTend
-    {
-        [MethodImpl(Inline)]
-        internal static unsafe T* ToPointer<T>(this IntPtr src)
-            where T : unmanaged
-                => (T*)src.ToPointer();
-    }
 }

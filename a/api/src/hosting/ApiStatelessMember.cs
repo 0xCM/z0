@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Api;
+    using static Seed;
 
     /// <summary>
     /// Identifies an operation declared by a static host type

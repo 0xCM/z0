@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Api;
+    using static Seed;
 
     /// <summary>
     /// Identifies and describes a hosted operation

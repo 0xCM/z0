@@ -9,13 +9,20 @@ namespace Z0
     using System.Collections;
     using System.Collections.Generic;
 
-    using static Identify;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
+    using static Seed;
 
     public readonly struct OpIndex<T> : IEnumerable<KeyedValue<OpIdentity, T>>, IOpIndex<T>
     {
         readonly Dictionary<OpIdentity, T> HashTable;
 
         readonly OpIdentity[] Duplicates;
+
+        internal static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new Exception(Core.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 
         internal OpIndex(IEnumerable<(OpIdentity,T)> src, bool deduplicate)
         {
@@ -30,7 +37,7 @@ namespace Z0
                 if(deduplicate)
                     HashTable = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
                 else
-                    throw DuplicateKeys(duplicates);
+                    throw DuplicateKeyException(duplicates);
             }
             else
                 HashTable = src.ToDictionary();

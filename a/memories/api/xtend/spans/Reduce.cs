@@ -7,9 +7,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;    
 
-    using static Memories;
-    
-    partial class XMem
+    using static Seed;
+
+    partial class XTend
     {            
         public static T Reduce<T>(this ReadOnlySpan<T> src, Func<T,T,T> f)
         {

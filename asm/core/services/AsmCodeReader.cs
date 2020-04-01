@@ -26,8 +26,8 @@ namespace Z0.Asm
         AsmCodeReader(IAsmContext context, char? idsep = null, char? bytesep = null)
         {
             this.Context = context;
-            this.IdSep = idsep ?? HexLine.DefaultIdSep;
-            this.ByteSep = bytesep ?? HexLine.DefaultByteSep;
+            this.IdSep = idsep ?? OpExtractSegment.DefaultIdSep;
+            this.ByteSep = bytesep ?? OpExtractSegment.DefaultByteSep;
         }
 
         public IEnumerable<AsmCode> Read(FilePath src)

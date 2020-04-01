@@ -26,7 +26,7 @@ namespace Z0
         /// Creates a new stringbuilder
         /// </summary>
         public static StringBuilder build()
-            => new StringBuilder();
+            => string.Empty.Build();
 
         /// <summary>
         /// The non-null empty string

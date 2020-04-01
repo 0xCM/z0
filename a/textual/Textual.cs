@@ -18,6 +18,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
+    using System.Collections.Generic;
 
     public static class Textual
     {
@@ -33,6 +34,15 @@ namespace Z0
         [MethodImpl(Inline)]   
         internal static Y apply<X,Y>(X x,Func<X,Y> f)
             => f(x);
+
+        /// <summary>
+        /// Constructs a enumerable from a parameter array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        internal static IEnumerable<T> seq<T>(params T[] src)
+            => src;
 
         [MethodImpl(Inline)]
         internal static T? unvalued<T>()

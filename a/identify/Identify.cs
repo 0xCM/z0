@@ -32,8 +32,6 @@ namespace Z0
         public static Option<TypeIdentity> ToOption(this TypeIdentity src)
             => src.IsEmpty ? none<TypeIdentity>() : some(src);
 
-        internal static Exception DuplicateKeys(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new Exception(concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 
     }
 
@@ -41,5 +39,11 @@ namespace Z0
     {
 
         
+    }
+
+
+    public static partial class XTend
+    {
+
     }
 }

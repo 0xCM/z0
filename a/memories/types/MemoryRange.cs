@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines an inclusive address range
     /// </summary>
-    public readonly struct MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>
+    public readonly struct MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>, IFormattable<MemoryRange>
     {
         public static MemoryRange Empty => default;
         
@@ -100,5 +100,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(MemoryRange other)
             => this == other ? 0 : this < other ? -1 : 1;
+
+        [MethodImpl(Inline)]
+        static string enclose(object content, char left, char right)
+            => string.Concat(left, $"{content}", right);
+
+        [MethodImpl(Inline)]
+        static string bracket(object content)
+            => enclose($"{content}", Chars.LBracket, Chars.RBracket);
+
+        public string Format()
+            => bracket(string.Concat(Start.Format(), Chars.Comma, Chars.Space, End.Format()));
+
     }
 }

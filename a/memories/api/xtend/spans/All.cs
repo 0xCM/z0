@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
-
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Determines whether all of the elements of a source span satisfy a supplied predicate

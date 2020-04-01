@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Seed;
     using static Spans;
     
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Projects a source span to target span via a supplied transformation

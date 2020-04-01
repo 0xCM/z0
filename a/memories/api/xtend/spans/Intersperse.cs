@@ -5,13 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    using static Memories;
-
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Creates a new span by interposing a specified element between each element of an existing span

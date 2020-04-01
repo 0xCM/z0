@@ -20,7 +20,7 @@ namespace Z0
         static NumericFormatter<F,T> get<F,T>()
             where F : struct, INumericFormatter<F,T>
             where T : unmanaged
-                => get_u<F,T>().Concretize();
+                => new NumericFormatter<F,T>(default(F));
 
         [MethodImpl(Inline)]
         static NumericFormatter<T> get_u<T>()

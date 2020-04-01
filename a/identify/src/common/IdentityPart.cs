@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Identify;
+    using static Seed;
     using static IdentityShare;
 
     public enum IdentityPartKind : ushort

@@ -31,6 +31,14 @@ namespace Z0
         internal static T[] array<T>(params T[] src)
             => src;
 
+        /// <summary>
+        /// Encloses text between less than and greater than characters
+        /// </summary>
+        /// <param name="content">The content to enclose</param>
+        [MethodImpl(Inline)]
+        internal static string angled(string content)
+            => String.IsNullOrWhiteSpace(content) ? string.Empty : $"<{content}>";
+
     }
 
     public static partial class XTend

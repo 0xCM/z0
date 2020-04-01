@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Core;
-
     partial class XTend
     {        
         /// <summary>
@@ -17,6 +15,6 @@ namespace Z0
         public static string Format(this OperatorTypeClass src)
             =>  src.IsNone 
                 ? string.Empty 
-                : "f:" + Identity.identify(src.OperandType).Format().Replicate(src.OperatorClass.ArityValue() + 1).Intersperse(ArrowSymbols.AsciArrow).Concat();
+                : "f:" + Identity.identify(src.OperandType).Format().Replicate(src.OperatorClass.ArityValue() + 1).Intersperse(CharText.AsciArrow).Concat();
     }
 }

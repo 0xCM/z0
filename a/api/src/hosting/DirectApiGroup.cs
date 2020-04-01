@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Identify;
+    using static Seed;
 
     /// <summary>
     /// Defines a grouping construct for relating non-generic operations

@@ -12,7 +12,6 @@ namespace Z0
     
     partial class Identify
     {
-
         /// <summary>
         /// Derives a signature from reflected method metadata
         /// </summary>

@@ -7,8 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
+    using static refs;
     
+    public static class BitFormatter
+    {
+        [MethodImpl(Inline)]
+        public static IFormatter<T,BitFormatConfig> Define<T>()
+            where T : struct
+                =>  default(BitFormatter<T>);
+    }
+
     /// <summary>
     /// Configurable bit data type formatter
     /// </summary>

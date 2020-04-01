@@ -116,10 +116,10 @@ namespace Z0
         }
 
         public string Format(int idpad)
-            => HexLine.Define(Id, Data).Format(idpad);
+            => OpExtractSegment.Define(Id, Data).Format(idpad);
 
         public string Format()
-            => HexLine.Define(Id, Data).Format();
+            => OpExtractSegment.Define(Id, Data).Format();
 
         public override string ToString()
             => Format();         

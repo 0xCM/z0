@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
-
+    using static Seed;
+    using static refs;
+    
     public ref struct RingBuffer<T>
         where T : unmanaged
     {        

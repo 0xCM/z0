@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
 
-    using static Memories;
-
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Fills an allocated span from a sequence

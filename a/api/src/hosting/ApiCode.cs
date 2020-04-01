@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Api;
+    using static Seed;
 
     /// <summary>
     /// Assocates an operation api identifier with executable code

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Api;
+    using static Seed;
         
     /// <summary>
     /// Identifies a host-defined operation and the memory address that leads the member's executable code

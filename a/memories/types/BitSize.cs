@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Memories;
 
     /// <summary>
     /// Specifies a memory size UOM in bits

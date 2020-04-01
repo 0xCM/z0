@@ -91,7 +91,7 @@ namespace Z0.Asm
         public ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base)
         {            
             static string LineLabel(ulong src)
-                => text.concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
+                => text.concat(src.FormatSmallHex(), HexSpecs.PostSpec, text.space());
             
             if(src.Count == 0)
                 return ReadOnlySpan<string>.Empty;
@@ -190,7 +190,7 @@ namespace Z0.Asm
             => $"{src.Definition}{fmt.FieldDelimiter}{src.OpCode}";
 
         static string FormatLineLabel(ulong src)
-            => text.concat(src.FormatSmallHex(), Hex.PostSpec, text.space());
+            => text.concat(src.FormatSmallHex(), HexSpecs.PostSpec, text.space());
 
         [MethodImpl(Inline)]
         static string FormatLabelAddress(string text, ulong baseaddress)

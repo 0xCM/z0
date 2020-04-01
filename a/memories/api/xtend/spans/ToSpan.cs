@@ -9,9 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Memories;
+    using static Seed;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Constructs a span of specified length from a sequence
@@ -63,6 +63,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this IEnumerable<T> src, int skip, int length)
             => src.ToSpan(skip,length);
+
+        /// <summary>
+        /// Constructs a span from a (presumeably finite) sequence selection
+        /// </summary>
+        /// <param name="src">The source sequence</param>
+        /// <param name="offset">The number of elements to skip from the head of the sequence</param>
+        /// <param name="length">The number of elements to take from the sequence</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        static Span<T> ToSpan<T>(this IEnumerable<T> src)            
+            => src.ToArray();
 
         /// <summary>
         /// Constructs a span from a (presumeably finite) sequence selection

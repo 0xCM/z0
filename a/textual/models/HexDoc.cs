@@ -12,12 +12,12 @@ namespace Z0
     public readonly struct HexDoc
     {        
         [MethodImpl(Inline)]
-        public HexDoc(HexLine[] lines)
+        public HexDoc(OpExtractSegment[] lines)
         {
             this.Lines = lines;
         }
                 
-        public HexLine[] Lines {get;}
+        public OpExtractSegment[] Lines {get;}
 
         public Option<FilePath> Save(FilePath dst)
         {

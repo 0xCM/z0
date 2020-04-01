@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
     
-    using static Core;
+    using static Seed;
 
     public static class HexFormatter 
     {
         [MethodImpl(Inline)]
         public static HexFormatter<T> Define<T>()
             where T : unmanaged
-                => new HexFormatter<T>(BaseHexFormatters.Create<T>());                   
+                => new HexFormatter<T>(SystemHexFormatters.Create<T>());                   
     }
     
     public readonly struct HexFormatter<T> : IHexFormatter<T>
@@ -47,9 +47,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string FormatItem(T src, in HexFormatConfig hex)
-            => concat(
+            => string.Concat(
                 hex.Specifier && hex.Specifier ? HexFormatConfig.PreSpecString : string.Empty, 
-                hex.ZPad ? BaseFormatter.Format(src, hex.FormatString).PadLeft(size<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatString),
+                hex.ZPad ? BaseFormatter.Format(src, hex.FormatString).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatString),
                 hex.Specifier && !hex.PreSpec ? HexFormatConfig.PostSpecString : string.Empty
                 );
 

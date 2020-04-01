@@ -43,7 +43,7 @@ namespace Z0
         
         public IEnumerable<NamedValue<E>> NamedValues
             => from i in indices
-                select NamedValue.Define(i.Name, i.Value);
+                select NamedValue.define(i.Name, i.Value);
 
         public IEnumerator<EnumLiteral<E>> GetEnumerator()
             => ((IEnumerable<EnumLiteral<E>>)indices).GetEnumerator();

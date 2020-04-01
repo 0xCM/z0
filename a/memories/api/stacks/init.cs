@@ -8,10 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Core;
-    using static As;
+    using static Seed;
     using static AsIn;
+    using static As;
     using static Stacked;
+    using static refs;
+
 
     partial class Stacks
     {
@@ -66,7 +68,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = alloc(w);
-            var cells = 64/size<T>();
+            var cells = 64/Unsafe.SizeOf<T>();
             Cells.copy(in src, ref head<T>(ref dst), cells);
             return dst;
         }

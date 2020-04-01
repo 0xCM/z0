@@ -10,7 +10,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Buffers;
 
-    using static Core;
+    using static Memories;
+    using static refs;
 
     [ApiHost]
     public static unsafe class memory

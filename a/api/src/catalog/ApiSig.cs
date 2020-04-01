@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Api;
+    using static Seed;
 
     public readonly struct ApiSig
     {
@@ -83,9 +83,9 @@ namespace Z0
             => default;
     }
 
-    public readonly struct ParameterSig : IParameterSig<ParameterSig, ParameterClass>
+    public readonly struct ParameterSig : IParameterSig<ParameterSig, MethodParamClass>
     {
-        public ParameterClass Class {get;}
+        public MethodParamClass Class {get;}
         
         public bool Equals(ParameterSig other)
             => default;
