@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-
     public enum AsmEmissionKind
     {
         None = 0,

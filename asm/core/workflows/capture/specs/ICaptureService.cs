@@ -47,7 +47,7 @@ namespace Z0.Asm
         CapturedOp Capture(in OpExtractExchange exchange, in OpIdentity id, Delegate src);
             
         /// <summary>
-        /// Captures encoded data from a caller-supplied source buffer
+        /// Captures encoded data from a caller-supplied source buffer.
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id"></param>

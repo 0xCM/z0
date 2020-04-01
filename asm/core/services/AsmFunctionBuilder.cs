@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Seed;
     using static AsmServiceMessages;
 
     public readonly struct AsmFunctionBuilder : IAsmFunctionBuilder

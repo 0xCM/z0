@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     /// <summary>
     /// Defines serivce contract for persting text-formatted x86 encoded assembly 
     /// </summary>

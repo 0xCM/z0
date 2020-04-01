@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
 
     /// <summary>
     /// Enumerates the kinds of files one finds in the asm archive

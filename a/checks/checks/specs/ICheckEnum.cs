@@ -18,6 +18,6 @@ namespace Z0
         [MethodImpl(Inline)]
         void eq<E>(E lhs, E rhs)
             where E : unmanaged, Enum
-                => Enums.u64(lhs).Equals(Enums.u64(rhs));
+                => Checks.u64(lhs).Equals(Checks.u64(rhs));
     }
 }

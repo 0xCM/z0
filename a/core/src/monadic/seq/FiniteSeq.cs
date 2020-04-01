@@ -11,7 +11,6 @@ namespace Z0
 
     using static Core;
 
-
     public readonly struct FiniteSeq<T> : IIndexedSeq<FiniteSeq<T>, T>
     {
         public static readonly FiniteSeq<T> Empty = default;

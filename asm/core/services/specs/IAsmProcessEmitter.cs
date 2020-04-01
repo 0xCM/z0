@@ -6,8 +6,5 @@ namespace Z0.Asm
 {        
     using System;
     
-    public interface IAsmProcessEmitter
-    {
-        void EmitFunctions(Type host);
-    }    
+
 }

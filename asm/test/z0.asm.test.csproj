@@ -9,8 +9,10 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
+    <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(AsmApp)" />
 
-    <ProjectReference Include="$(GMath)" />
+    <!-- <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(VSvc)" /> 
     <ProjectReference Include="$(BitGrids)" />
@@ -18,7 +20,7 @@
     <ProjectReference Include="$(Permute)" />
     <ProjectReference Include="$(Logix)" />
     <ProjectReference Include="$(LibM)" />
-    <ProjectReference Include="$(AsmApp)" />
+    <ProjectReference Include="$(AsmApp)" /> -->
   </ItemGroup>
 
 </Project>

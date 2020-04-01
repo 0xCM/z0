@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     public delegate R Analyzer<S,R>(in S src);
 
@@ -46,7 +46,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public Span<R> Analyze(ReadOnlySpan<S> src)
         {
-            var dst = alloc<R>(src.Length);
+            var dst = Spans.alloc<R>(src.Length);
             return Analyze(src,dst);
         }
     }

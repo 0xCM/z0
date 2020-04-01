@@ -8,8 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Errors)" />
-    <ProjectReference Include="$(Messages)" />
   </ItemGroup>
 
 </Project>

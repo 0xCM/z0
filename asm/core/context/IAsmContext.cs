@@ -2,10 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {        
-    using Asm;
-
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>

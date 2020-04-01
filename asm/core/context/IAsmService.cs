@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
 
     /// <summary>
     /// Characterizes a contextual asm service where caller-managed lifecyle is not needed

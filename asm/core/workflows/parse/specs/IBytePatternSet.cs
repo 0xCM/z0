@@ -16,7 +16,7 @@ namespace Z0.Asm
         int PartialPatternCount {get;}
     }
 
-   public interface IBytePatternSet<P> : IBytePatternSet
+    public interface IBytePatternSet<P> : IBytePatternSet
         where P : unmanaged, Enum
     {
         ReadOnlySpan<P> FullPatternKinds {get;}

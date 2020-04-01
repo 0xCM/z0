@@ -9,17 +9,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TestLib)" />
-    <ProjectReference Include="$(BitGrids)" />
-    <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Polyrand)" />
-
     <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(Permute)" />
-    <ProjectReference Include="$(Logix)" />
-    <ProjectReference Include="$(LibM)" />
-    <ProjectReference Include="$(Vectorized)" />
-    <ProjectReference Include="$(VSvc)" />
-    <ProjectReference Include="$(VBits)" />
+    <ProjectReference Include="$(Polyrand)" />    
   </ItemGroup>
 
 </Project>

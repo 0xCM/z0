@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -30,7 +29,7 @@ namespace Z0.Asm
                     $"The encoded instruction length does not match the reported instruction length:", 
                     $"address = {location}, datalen = {reported}, offset = {offset}, bytelen = {reported}"),
                         caller, file, line);
-
+                        
         public static AppMsg InstructionBlockSizeMismatch(MemoryRange origin, int actual, int reported,
             [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
                 => AppMsg.Error(text.concat(

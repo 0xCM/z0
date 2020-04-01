@@ -16,4 +16,9 @@ namespace Z0.Asm
     {
 
     }
+
+    public interface IAsmProcessEmitter
+    {
+        void EmitFunctions(Type host);
+    }    
 }

@@ -18,26 +18,27 @@ namespace Z0.Asm.Check
             => new IPart[]{
                 P.AsmCore.Resolved, 
                 P.BitCore.Resolved,
-                P.BitGrids.Resolved, 
-                P.BitSpan.Resolved, 
-                P.BitFields.Resolved,
-                P.BitVectors.Resolved, 
                 P.Blocks.Resolved, 
                 P.Components.Resolved,
                 P.Fixed.Resolved, 
                 P.GMath.Resolved, 
-                P.Intrinsics.Resolved,
-                P.LibM.Resolved, 
-                P.Logix.Resolved, 
                 P.Math.Resolved,
                 P.MathServices.Resolved, 
                 P.Memories.Resolved, 
                 P.Numeric.Resolved,
-                P.Permute.Resolved,
-                P.VSvc.Resolved, 
-                P.VBits.Resolved, 
-                P.Vectorized.Resolved, 
-                P.VData.Resolved
+
+                // P.BitGrids.Resolved, 
+                // P.BitSpan.Resolved, 
+                // P.BitFields.Resolved,
+                // P.BitVectors.Resolved, 
+                // P.Intrinsics.Resolved,
+                // P.LibM.Resolved, 
+                // P.Logix.Resolved, 
+                //P.Permute.Resolved,
+                // P.VSvc.Resolved, 
+                // P.VBits.Resolved, 
+                // P.Vectorized.Resolved, 
+                // P.VData.Resolved
                 };
 
         static IAppSettings LoadSettings()

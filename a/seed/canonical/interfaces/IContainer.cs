@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Collections;
     using System.Collections.Generic;
 
     /// <summary>
@@ -36,11 +37,16 @@ namespace Z0
         new T Count {get;}
     }
 
+    public interface IContainer 
+    {
+
+    }
+
     /// <summary>
     /// Characterizes a reified container
     /// </summary>
     /// <typeparam name="S">The container type</typeparam>
-    public interface IContainer<A>
+    public interface IContainer<A> : IContainer
     {
         A Content {get;}
     }
@@ -67,15 +73,42 @@ namespace Z0
            
     }
 
+    public interface IItemContainer<T> : IContainer<IEnumerable<T>>, IEnumerable<T>
+    {
+        IEnumerator IEnumerable.GetEnumerator()
+            => Content.GetEnumerator();
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+            => Content.ToList().GetEnumerator();
+    }
+
+
     /// <summary>
     /// Characterizes a container that comprises discrete content
     /// </summary>
     /// <typeparam name="S">The container type</typeparam>
     /// <typeparam name="T">The contained type</typeparam>
-    public interface IEnumerableContainer<C,T> : IContainer<C,IEnumerable<T>, T>
-        where C : IEnumerableContainer<C,T>, new()
+    public interface IItemContainer<C,T> :  IItemContainer<T>, IContainer<C,IEnumerable<T>, T>
+        where C : IItemContainer<C,T>, new()
     {
         
+    }
+
+    public interface IIndexContainer<T> : IContainer<T[]>, IEnumerable<T>
+    {
+        IEnumerator IEnumerable.GetEnumerator()
+            => Content.GetEnumerator();
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+            => Content.ToList().GetEnumerator();
+
+        int Length
+            => Content.Length;
+        
+        ref T this[int index]
+        {         
+            get => ref Content[index];
+        }
     }
 
     /// <summary>
@@ -105,7 +138,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The reification type</typeparam>
     /// <typeparam name="T">The member type</typeparam>
-    public interface IDiscreteSet<S,T> : IFormalSet, IEnumerableContainer<S,T>
+    public interface IDiscreteSet<S,T> : IFormalSet, IItemContainer<S,T>
         where S: IDiscreteSet<S,T>, new()
     {
 
@@ -264,7 +297,7 @@ namespace Z0
 
     }
 
-    public interface IFiniteEnumerable<S,T> : IEnumerableContainer<S,T>, ICounted<int>
+    public interface IFiniteEnumerable<S,T> : IItemContainer<S,T>, ICounted<int>
         where S : IFiniteEnumerable<S,T>, new()
     {
         int ICounted.Count => Count;
@@ -299,7 +332,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The container type</typeparam>
     /// <typeparam name="T">The contained type</typeparam>
-    public interface ISeq<S,T> : IEnumerableContainer<S,T>, IConcatenable<S,T>
+    public interface ISeq<S,T> : IItemContainer<S,T>, IConcatenable<S,T>
         where S : ISeq<S,T>, new()
     {
         
@@ -327,4 +360,38 @@ namespace Z0
     {
         
     }            
+
+    public interface ISeq<T> : IItemContainer<T>
+    {        
+
+    }
+
+    public interface IEquatableSeq<C,T> : ISeq<T>, IEquatable<C>
+        where C: IEquatableSeq<C,T>, new()         
+    {
+        
+        /// <summary>
+        /// It is not assumed that sequence is finite; in discrete computing
+        /// context, concrete evaluation (i.e. non-symbolic evaluation) of
+        /// infinite...anything...isn't possible. Equality evaluation of two (potentially) infinite 
+        /// sequences is not a well-defined operation and in the face of problem, the only
+        /// think that can be done to make it a well-defined operation is to simply define
+        /// the result to be false, which is what is done here
+        /// </summary>
+        /// <param name="src">The sequenct that will not be compared to this one</param>
+        bool IEquatable<C>.Equals(C src)
+            => false;
+    }
+
+    public interface IFiniteSeq<T> : IIndexContainer<T>
+    {
+
+    }
+
+    public interface IFiniteSeq<C,T> :  IFiniteSeq<T>, IEquatable<C>
+        where C : IFiniteSeq<C,T>, new()         
+    {        
+        bool IEquatable<C>.Equals(C src)
+            => Enumerable.SequenceEqual(this, src);
+    }
 }

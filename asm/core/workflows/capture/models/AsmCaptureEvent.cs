@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Seed;
 
     /// <summary>
     /// Joins the current capture state with the state buffer to form what is effectively a cpature event data package
@@ -37,7 +37,7 @@ namespace Z0.Asm
             this.CaptureState = state;
             this.StateBuffer = buffer;
             this.EventKind = CaptureEventKind.Step;
-            this.Captured = none<CapturedOp>();
+            this.Captured = Option.none<CapturedOp>();
         }
 
         /// <summary>

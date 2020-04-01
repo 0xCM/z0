@@ -41,6 +41,17 @@ namespace Z0.Asm
             return lines.ToArray();
         }
      
+        public static string Format(this AsmFunctionList src)
+        {
+            var dst = text.factory.Builder();
+            for(var i=0; i<src.Content.Length; i++)
+            {
+                dst.Append(src.Content[i].FormatAsmLines().Concat());
+                dst.AppendLine(text.pagebreak);
+            }
+            return dst.ToString();
+        }
+
         /// <summary>
         /// Formats the instructions in a function
         /// </summary>

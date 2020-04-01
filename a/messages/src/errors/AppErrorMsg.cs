@@ -16,7 +16,6 @@ namespace Z0
 
     public static class AppErrorMsg
     {
-
         public static AppMsg FeatureUnsupported(object feature, string caller, string file, int? line)
             => AppMsg.Define($"Unsupported: {feature}", AppMsgKind.Error, caller, file, line);
         

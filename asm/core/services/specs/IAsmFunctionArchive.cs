@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-
     /// <summary>
     /// Defines service contract for persisting asm functions which are derived from .net member functions
     /// </summary>

@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Custom)" />
 

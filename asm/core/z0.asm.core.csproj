@@ -7,16 +7,14 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />    
+    <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Graphs)" />
+
     <ProjectReference Include="$(AsmTypes)" />
     <ProjectReference Include="$(AsmModels)" />    
-    <ProjectReference Include="$(WorkflowCore)" />
-    <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Fixed)" />        
-    <ProjectReference Include="$(Blocks)" />        
-    <ProjectReference Include="$(Vectorized)" />            
+
     <ProjectReference Include="$(Identity)" />    
-    <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(Graphs)" />
+    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
 </Project>

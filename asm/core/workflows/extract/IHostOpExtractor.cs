@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
         
     /// <summary>
     /// Characterizes a service that extracts host-defined operations

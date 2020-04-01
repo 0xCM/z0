@@ -246,6 +246,8 @@ public enum PartId : ulong
 
     Typed = 846,
 
+    Checks = 848,
+
     Z = 1024,
 
     Svc = ushort.MaxValue + 1,

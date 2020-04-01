@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
+
     /// <summary>
     /// Delegate contract for capture event receipt
     /// </summary>

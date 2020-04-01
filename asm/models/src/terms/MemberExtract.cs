@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
  
-    using static root;
+    using static Seed;
 
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow

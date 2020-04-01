@@ -7,7 +7,6 @@
 namespace Z0.Parts
 {
     public sealed class AsmCore : Part<AsmCore>
-    {
-        
+    {        
     }
 }

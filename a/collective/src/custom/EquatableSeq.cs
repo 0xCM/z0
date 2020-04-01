@@ -10,36 +10,30 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
-    using static Core;
+    using static Seed;
 
-    public readonly struct AnySeq<T> : IAnySeq<AnySeq<T>,T>
+    public readonly struct EquatableSeq<T> : IEquatableSeq<EquatableSeq<T>,T>
     {    
         public IEnumerable<T> Content {get;}
 
         IEnumerable<T> Items 
         {
             [MethodImpl(Inline)]
-            get => Items ?? array<T>();
+            get => Items ?? new T[]{};
         }
 
         [MethodImpl(Inline)]
-        public static AnySeq<T> Define(IEnumerable<T> src)
-            => new AnySeq<T>(src);
+        public static EquatableSeq<T> Define(IEnumerable<T> src)
+            => new EquatableSeq<T>(src);
 
         [MethodImpl(Inline)]
-        public bool Equals(AnySeq<T> other)
+        public bool Equals(EquatableSeq<T> other)
             => false;
 
         [MethodImpl(Inline)]
-        public AnySeq(IEnumerable<T> src)
+        public EquatableSeq(IEnumerable<T> src)
         {
             this.Content = src;
-        }
-
-        public AnySeqFactory<T,AnySeq<T>> Factory
-             => Define; 
-        
-        string ICustomFormattable.Format()
-            => text.concat(Items.TakeAtMost(20), text.comma());
+        }        
     }
 }

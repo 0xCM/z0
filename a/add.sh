@@ -71,5 +71,8 @@ bash $Cmd
 export ProjectId=typed
 bash $Cmd
 
+export ProjectId=checks
+bash $Cmd
+
 export ProjectId=z
 bash $Cmd

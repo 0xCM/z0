@@ -5,9 +5,6 @@
 namespace Z0.Asm
 {        
     using System;
-    using System.Linq;
-
-    using Z0.Asm;
 
     public interface IAsmFunctionDecoder : IAsmService
     {        

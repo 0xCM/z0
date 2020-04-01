@@ -5,32 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Security;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Reflection.Emit;
+    using System.Runtime.CompilerServices;
 
     using static Core;
 
     public static class DynamicOps
     {
-        [MethodImpl(Inline)]
-        public static CilBody LoadCil(this DynamicMethod src)
-            => CilBody.Load(src);
-
-        [MethodImpl(Inline)]
-        public static CilBody LoadCil(this MethodInfo src)
-            => CilBody.Load(src);
-
-        [MethodImpl(Inline)]
-        public static CilBody LoadCil(this DynamicDelegate src)
-            => CilBody.Load(src);
-
-        [MethodImpl(Inline)]
-        public static CilBody LoadCil<D>(this DynamicDelegate<D> src)
-            where D : Delegate
-                => CilBody.Load(src); 
-
         /// <summary>
         /// Constructs the dynamic pointer determined by the source delegate
         /// </summary>
@@ -48,7 +30,6 @@ namespace Z0
         public static unsafe DynamicPointer GetDynamicPointer(this DynamicDelegate src)
             => DynamicPointer.Define(src, src.TargetMethod.GetNativePointer());
 
-
         /// <summary>
         /// Finds the magical function pointer for a dynamic method
         /// </summary>
@@ -59,5 +40,22 @@ namespace Z0
             var descriptor = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
             return ((RuntimeMethodHandle)descriptor.Invoke(method, null)).GetFunctionPointer();
         }
+
+        [MethodImpl(Inline)]
+        public static CilBody LoadCil(this DynamicMethod src)
+            => CilBody.Load(src);
+
+        [MethodImpl(Inline)]
+        public static CilBody LoadCil(this MethodInfo src)
+            => CilBody.Load(src);
+
+        [MethodImpl(Inline)]
+        public static CilBody LoadCil(this DynamicDelegate src)
+            => CilBody.Load(src);
+
+        [MethodImpl(Inline)]
+        public static CilBody LoadCil<D>(this DynamicDelegate<D> src)
+            where D : Delegate
+                => CilBody.Load(src); 
     }
 }

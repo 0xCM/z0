@@ -21,7 +21,7 @@ namespace Z0.Asm
             var lines = data.Bytes.FormatHexLines(null);
             dst.Append(lines.Concat(AsciEscape.Eol));
             dst.AppendLine(new string('_',80));
-            return dst.ToString();
+            return dst.ToString(); 
         }                         
     }
 }

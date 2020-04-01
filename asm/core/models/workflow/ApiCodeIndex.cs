@@ -23,7 +23,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         ApiCodeIndex(in OpIndex<ApiMemberCode> code)
         {
-            this.Hashtable = code.Enumerated.ToDictionary();
+            this.Hashtable = code.Enumerated.ToDictionary(); 
         }
 
         public ApiMemberCode this[OpIdentity id]

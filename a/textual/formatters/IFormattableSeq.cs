@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class Core
+    public interface IFormattableSeq<T> : ISeq<T>, ICustomFormattable
+        where T : ICustomFormattable
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
-        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
+        string ICustomFormattable.Format()
+            => Content.FormatList();        
     }
 }

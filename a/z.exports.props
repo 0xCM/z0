@@ -1,29 +1,22 @@
 ﻿<Project>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(Collective)" />
     <ProjectReference Include="$(Custom)" />
     <ProjectReference Include="$(Domain)" />
-    <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(Identify)" />  
     <ProjectReference Include="$(Kinds)" />  
-    <ProjectReference Include="$(Memories)" />    
     <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(SFuncs)" />    
-    <ProjectReference Include="$(Symbolic)" />        
-    <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Tuples)" />
-    <ProjectReference Include="$(Messages)" />
-    <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Interval)" />
     <ProjectReference Include="$(Typed)" />
+    <ProjectReference Include="$(Checks)" />
   </ItemGroup>
 
 </Project>

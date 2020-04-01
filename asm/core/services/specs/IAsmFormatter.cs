@@ -42,5 +42,3 @@ namespace Z0.Asm
         ReadOnlySpan<string> FormatLines(AsmInstructionList src);               
     }
 }
-
-

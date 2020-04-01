@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-    using System;
-
     /// <summary>
     /// Defines base interface for archival services that support persistence/lookup for x86 encoded asm
     /// </summary>

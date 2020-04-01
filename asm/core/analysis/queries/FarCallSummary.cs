@@ -7,8 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-
-    using static Core;
+    using static Seed;
 
     public readonly struct FarCallSummary
     {

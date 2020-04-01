@@ -17,7 +17,7 @@ namespace Z0.Asm
         
         Failed = 2,
         
-        Succeeded = 4,
+        Succeeded = 4, 
 
         Unmatched = 8,
 

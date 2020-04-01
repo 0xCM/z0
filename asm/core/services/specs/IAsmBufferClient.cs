@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
 
     /// <summary>
     /// Defines the signature of a buffer client delegate

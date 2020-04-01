@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     /// <summary>
     /// Characterizes a service that extracts encoded data from a given base address
     /// </summary>

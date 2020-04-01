@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 

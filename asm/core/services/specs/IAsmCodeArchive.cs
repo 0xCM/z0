@@ -11,7 +11,7 @@ namespace Z0.Asm
     {
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
-        /// from hex data contained in the assembly log archive
+        /// from hex data contained in the assembly log archive.
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="m">The identifying moniker</param>

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     public interface IMemoryCapture : IAsmService
     {
         Option<MemoryExtract> Extract(MemoryAddress src);        

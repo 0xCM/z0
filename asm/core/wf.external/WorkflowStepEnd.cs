@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
             
     public readonly struct StepEnd<T> : ITimeStamped, IAppEvent<StepEnd<T>, T>
     {        

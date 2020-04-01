@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Seed;
 
     /// <summary>
     /// Defines the state of the routine capture workflow at a given step

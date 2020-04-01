@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Seed;
     
     /// <summary>
     /// Describes the outcome of a native capture operation

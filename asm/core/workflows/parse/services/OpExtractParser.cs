@@ -6,12 +6,10 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
     
-    using static root;
+    using static Core;
     using static AsmWorkflowReports;
-    using static AsmServiceMessages;
 
     public readonly struct OpExtractParser : IOpExtractParser
     {
