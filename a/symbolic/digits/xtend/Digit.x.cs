@@ -7,90 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Symbolic;
+    using static Seed;
 
-    public static class DigitsX
+    partial class XTend
     {
-        /// <summary>
-        /// Returns the character corresponding to a digit
-        /// </summary>
-        /// <param name="src">The source digit</param>
         [MethodImpl(Inline)]   
         public static char ToChar(this BinaryDigit src)
-        {
-            if(src == BinaryDigit.Zed)
-                return AsciDigitSet.A0;
-            else if(src == BinaryDigit.One)
-                return AsciDigitSet.A1;
-            else
-                return MathSym.EmptySet;
-        }
+            => (char)Digits.symbol(src);
 
         [MethodImpl(Inline)]   
         public static char ToChar(this DeciDigit src)
-        {
-            if(src == DeciDigit.D0)
-                return AsciDigitSet.A0;
-            else if(src == DeciDigit.D1)
-                return AsciDigitSet.A1;
-            else if(src == DeciDigit.D2)
-                return AsciDigitSet.A2;
-            else if(src == DeciDigit.D3)
-                return AsciDigitSet.A3;
-            else if(src == DeciDigit.D4)
-                return AsciDigitSet.A4;
-            else if(src == DeciDigit.D5)
-                return AsciDigitSet.A5;
-            else if(src == DeciDigit.D6)
-                return AsciDigitSet.A6;
-            else if(src == DeciDigit.D7)
-                return AsciDigitSet.A7;
-            else if(src == DeciDigit.D8)
-                return AsciDigitSet.A8;
-            else if(src == DeciDigit.D9)
-                return AsciDigitSet.A9;
-            else 
-                return MathSym.EmptySet;
-        }
+            => (char)Digits.symbol(src);
 
         [MethodImpl(Inline)]   
         public static char ToChar(this HexDigit src)
-        {
-            if(src == HexDigit.X0)
-                return AsciDigitSet.A0;
-            else if(src == HexDigit.X1)
-                return AsciDigitSet.A1;
-            else if(src == HexDigit.X2)
-                return AsciDigitSet.A2;
-            else if(src == HexDigit.X3)
-                return AsciDigitSet.A3;
-            else if(src == HexDigit.X4)
-                return AsciDigitSet.A4;
-            else if(src == HexDigit.X5)
-                return AsciDigitSet.A5;
-            else if(src == HexDigit.X6)
-                return AsciDigitSet.A6;
-            else if(src == HexDigit.X7)
-                return AsciDigitSet.A7;
-            else if(src == HexDigit.X8)
-                return AsciDigitSet.A8;
-            else if(src == HexDigit.X9)
-                return AsciDigitSet.A9;
-            else if(src == HexDigit.XA)
-                return AsciLower.a;
-            else if(src == HexDigit.XB)
-                return AsciLower.b;
-            else if(src == HexDigit.XC)
-                return AsciLower.c;
-            else if(src == HexDigit.XD)
-                return AsciLower.d;
-            else if(src == HexDigit.XE)
-                return AsciLower.e;
-            else if(src == HexDigit.XF)
-                return AsciLower.f;
-            else 
-                return MathSym.EmptySet;
-        }
+            => (char)Digits.symbol(src);
 
         public static Span<DeciDigit> ToDeciDigits(this long src)
             => DeciDigits.Parse(src.ToString());

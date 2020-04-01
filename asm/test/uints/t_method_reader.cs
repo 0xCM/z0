@@ -49,6 +49,7 @@ namespace Z0.Asm
             var ops  = exchange.Operations;
 
             var types = NumericKind.All.DistinctTypes();
+            #if Dependencies
             var defintions = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
             foreach(var t in types)
             {
@@ -58,6 +59,8 @@ namespace Z0.Asm
                     writer.WriteMember(ops.Capture(in exchange,m.Identify(), m));
                 }
             }
+
+            #endif
         }
 
         public void capture_direct()
@@ -106,11 +109,11 @@ namespace Z0.Asm
             var dShift = shifter(4);
             target.WriteMember(ops.Capture(in exchange, dShift.Identify(), dShift));
 
-            var methods = typeof(gvec).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();
-            
+            #if Dependencies
+            var methods = typeof(gvec).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint))).ToArray();            
             foreach(var m in methods)
                 target.WriteMember(ops.Capture(in exchange, m.Identify(), m));
-            
+            #endif            
         }
 
         public void read_library()

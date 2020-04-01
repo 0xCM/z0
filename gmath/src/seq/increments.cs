@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static refs;
+    using static Core;
     using static CastNumeric;
 
     partial class gmath
@@ -31,13 +31,13 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Span<T> increments<T>(Span<T> dst)
             where T : unmanaged
         {
             var count = dst.Length;
             for(var i=0; i<count; i++)
-                refs.seek(dst,i) = convert<T>(i);
+                seek(dst,i) = convert<T>(i);
             return dst;
         }
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="count">The number of values to populate</param>
         /// <param name="dst">The target memory reference</param>
         /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static void increments<T>(T first, int count, ref T dst)
             where T : unmanaged
         {
@@ -62,14 +62,9 @@ namespace Z0
         /// <param name="first">The first value</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline)]
-        public static Span<T> increments<T>(T first, Span<T> dst)
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        public static void increments<T>(T first, Span<T> dst)
             where T : unmanaged
-        {
-            var count = dst.Length;
-            for(var i=0; i<count; i++)
-                refs.seek(dst,i) = gmath.add(first, convert<T>(i));
-            return dst;
-        }
+                => increments(first, dst.Length, ref head(dst));
     }
 }

@@ -11,7 +11,7 @@ namespace Z0.Asm.Check
     
     using C = OpClass;
     
-    using static root;    
+    using static Core;
 
     class AsmExecWorkflow : IAsmExecWorkflow
     {

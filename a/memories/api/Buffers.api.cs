@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static SpanStack<T> stack<T>(Span<T> src)
             where T : unmanaged
                 => new SpanStack<T>(src);
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static RingBuffer<T> ring<T>(Span<T> src)
             where T : unmanaged
                 => new RingBuffer<T>(src);

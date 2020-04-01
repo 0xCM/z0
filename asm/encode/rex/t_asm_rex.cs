@@ -8,7 +8,7 @@ namespace Z0.Asm
  
     using RFI = Z0.Asm.RexFieldIndex;
 
-    public class t_asm_rex : t_asm<t_asm_rex>
+    public class t_asm_rex : UnitTest<t_asm_rex>
     {
         public void rex_field_reader()
         {

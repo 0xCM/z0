@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {        
-
     /// <summary>
     /// Defines what is effectively an asm emitter at (! .net) assembly-level granularity
     /// </summary>

@@ -10,9 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static root;
-    using static Gone;
-
+    using static Core;
     public class t_embed_imm8 : UnitTest<t_embed_imm8>
     {    
         protected override bool TraceDetailEnabled

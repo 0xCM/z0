@@ -250,6 +250,6 @@ namespace Z0.Asm
         IAsmFunctionArchive Archive(string subject)
             => Context.FunctionArchive(Catalog.PartId, subject);
 
-        static byte[] ImmSelection => new byte[]{5,9,13};
+        static byte[] ImmSelection => new byte[]{5,9,13}; 
     }
 }

@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static root;
+    using static Core;
 
     using Svc = Z0.Asm;
 

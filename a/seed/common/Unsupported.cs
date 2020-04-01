@@ -27,6 +27,14 @@ namespace Z0
             => new NotSupportedException($"The type {typeof(T).Name} is not supported in the current context");
 
         /// <summary>
+        /// Populates a <see cref="NotSupportedException"/> complaining that a 
+        /// parametrically-identified type is not supported
+        /// </summary>
+        /// <typeparam name="T">The unsupported type</typeparam>
+        public static NotSupportedException define(Type t)
+            => new NotSupportedException($"The type {t} is not supported in the current context");
+
+        /// <summary>
         /// Populates a <see cref="NotSupportedException"/> complaining that a  value is not supported
         /// </summary>
         /// <typeparam name="T">The value type</typeparam>

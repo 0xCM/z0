@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Conversion provider for the bit data type
     /// </summary>
-    public readonly struct BitDataTypeConverter : IConversionProvider<BitDataTypeConverter, bit>, IBiconverter<bit>
+    readonly struct BitDataTypeConverter : IConversionProvider<BitDataTypeConverter, bit>, IBiconverter<bit>
     {
         public BitDataTypeConverter Converter => default;
 

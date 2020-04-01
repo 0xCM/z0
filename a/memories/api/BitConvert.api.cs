@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<byte> GetBytes<T>(in T src)
             where T : unmanaged
                 => Bytes.get(in src);
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <param name="count">The number of source elements to convert</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<byte> GetBytes<T>(ReadOnlySpan<T> src, int offset, int count)
             where T : unmanaged
                 => src.Slice(offset,count).AsBytes();
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void GetBytes<T>(in T src, Span<byte> dst)
             where T : unmanaged
                 => Bytes.to(in src, dst);

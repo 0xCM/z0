@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static BinaryDigit;
-    using static Symbolic;
+    using static Seed;
     
     public static class BinaryDigits
     {
@@ -19,22 +17,20 @@ namespace Z0
         /// </summary>
         /// <param name="c">The source character</param>
         [MethodImpl(Inline)]
-        public static BinaryDigit Parse(char c)
-            => c == '0' ? Zed : c == '1' ? One 
-                : throw new NotSupportedException($"{c}");
+        public static BinaryDigit parse(char c)
+            => c == '1' ? D1 : D0;
 
         /// <summary>
-        /// Parses valid decimail digits from the source string, ignoring characters
-        /// that aren't digits
+        /// Transforms a charcter span into a span of binary digits
         /// </summary>
         /// <param name="src">The source string</param>
-        public static Span<BinaryDigit> Parse(ReadOnlySpan<char> src)
+        public static Span<BinaryDigit> parse(ReadOnlySpan<char> src)
         {
             var offset = src.StartsWith("0b") ? 2 : 0;
             var len = src.Length - offset;
-            var dst = new BinaryDigit[len];
+            Span<BinaryDigit> dst = new BinaryDigit[len];
             for(var i = offset; i< len; i++)
-                dst[i] = Parse(src[i]);            
+                dst[i] = parse(src[i]);            
             return dst;
         }
     }

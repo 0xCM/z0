@@ -10,7 +10,7 @@ namespace Z0.Asm
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     using Iced = Iced.Intel;
 
@@ -72,7 +72,7 @@ namespace Z0.Asm
                 return default;
             
             var descriptions = src.DescribeInstructions();
-            var lines = alloc<string>(src.Length);
+            var lines = Spans.alloc<string>(src.Length);
             var @base = src[0].IP;
             for(var i=0; i< src.Length; i++)
                 lines[i] = FormatInstruction(@base, descriptions[i]);

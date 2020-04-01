@@ -16,11 +16,12 @@ namespace Z0.Asm
         
         public static IPart[] DefaultResolutions 
             => new IPart[]{
-                R.BitCore.Resolved,
-                R.BitFields.Resolved,
                 R.Blocks.Resolved, 
                 R.Math.Resolved,
-                R.Vectorized.Resolved}
+                R.Vectorized.Resolved,
+                R.GMath.Resolved,
+                R.Cast.Resolved
+                }
                 ;        
         public t_asm()
         {

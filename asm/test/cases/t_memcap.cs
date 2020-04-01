@@ -11,11 +11,10 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static root;
+    using static Core;
 
     public class t_asm_capture : t_asm<t_asm_capture>
     {
-
 
         // void host_workflow()
         // {                    

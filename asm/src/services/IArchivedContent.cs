@@ -8,14 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static root;
+    using static Core;
 
     public interface IArchivedContent
     {
         int Sequence {get;}
 
         object Content {get;}
-
     }
 
     public interface IArchivedContent<T> : IArchivedContent

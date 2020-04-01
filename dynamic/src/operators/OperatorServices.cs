@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static root;
+    using static Core;
     using static XPressive;
 
     readonly struct EmitterFactory<T> : IEmitterFactory<T>
@@ -26,7 +26,7 @@ namespace Z0
     {
         public Func<T,T> Manufacture(MethodInfo method, object instance)
         {
-            var args = items(paramX<T>("x1"));
+            var args = seq(paramX<T>("x1"));
             var callExpr = call(instance, method, args.ToArray());
             var f = lambda<T,T>(args, callExpr).Compile();
             return f;
@@ -37,7 +37,7 @@ namespace Z0
     {
         public Func<T,T,T> Manufacture(MethodInfo method, object instance)
         {
-            var args = items(paramX<T>("x1"), paramX<T>("x2"));
+            var args = seq(paramX<T>("x1"), paramX<T>("x2"));
             var callExpr = call(instance, method, args.ToArray());
             var f = lambda<T,T,T>(args, callExpr).Compile();
             return f;
@@ -48,7 +48,7 @@ namespace Z0
     {          
         public Func<T,T,T,T> Manufacture(MethodInfo method, object instance)
         {
-            var args = items(paramX<T>("x1"), paramX<T>("x2"), paramX<T>("x3"));
+            var args = seq(paramX<T>("x1"), paramX<T>("x2"), paramX<T>("x3"));
             var callExpr = call(instance, method, args.ToArray());
             var f = lambda<T, T, T, T>(args, callExpr).Compile();
             return f;

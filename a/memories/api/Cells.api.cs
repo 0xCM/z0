@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static T cell<T>(ReadOnlySpan<byte> src)
             where T : unmanaged        
                 => MemoryMarshal.Read<T>(src);
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="offset">The index at which span consumption should begin</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static T cell<T>(ReadOnlySpan<byte> src, int offset)
             where T : unmanaged        
                 => MemoryMarshal.Read<T>(src.Slice(offset));
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static T cell<T>(Span<byte> src)
             where T : unmanaged           
                 => MemoryMarshal.Read<T>(src);
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The source array offset</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
         public static T cell<T>(Span<byte> src, int offset)
             where T : unmanaged
                 => MemoryMarshal.Read<T>(src.Slice(offset));

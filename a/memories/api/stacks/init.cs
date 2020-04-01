@@ -11,9 +11,8 @@ namespace Z0
     using static Seed;
     using static AsIn;
     using static As;
-    using static Stacked;
     using static refs;
-
+    using static Stacked;
 
     partial class Stacks
     {

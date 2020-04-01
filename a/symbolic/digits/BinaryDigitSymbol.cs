@@ -9,17 +9,16 @@ namespace Z0
     /// <summary>
     /// Defines literals that correspond to base-2 digits
     /// </summary>
-    public enum BinaryDigit : byte
+    public enum BinaryDigitSymbol : ushort
     {
         /// <summary>
-        /// Specifies 0 base 2
+        /// Specifies 0 base 2, asci code 48
         /// </summary>
-        D0 = 0,
+        Zed = '0',
         
         /// <summary>
-        /// Specifies 1 base 2
+        /// Specifies 1 base 2, asci code 49
         /// </summary>
-        D1 = 1
+        One = '1'
     }
-
 }

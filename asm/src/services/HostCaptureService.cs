@@ -10,9 +10,9 @@ namespace Z0.Asm
     using System.Linq;
     using System.Reflection;
 
+    using static Core;
     using static AsmServiceMessages;
     using static AsmWorkflowReports;
-    using static root;
 
     readonly struct HostCaptureService : IHostCapture
     {

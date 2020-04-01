@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     readonly struct AsmFunctionWriter : IAsmFunctionWriter
     {        

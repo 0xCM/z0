@@ -14,23 +14,20 @@ namespace Z0
     /// </summary>
     public sealed class MethodSig
     {
-        public static MethodSig Define(MethodInfo method)
-        {            
-            var valparams = method.GetParameters().Select(p => new MethodParameter(TypeSig.FromParameter(p), p.ReferenceKind(), p.Name, p.Position)).ToArray();
-            var typeparams = TypeParameters(method);
-            return new MethodSig(
+        public static MethodSig Define(MethodInfo method)                    
+            => new MethodSig(
                 MethodId: method.MetadataToken,
                 DefiningAssembly: method.Module.Assembly.GetSimpleName(),
                 DefiningModule: method.Module.Name,
                 DeclaringType: TypeSig.FromType(method.DeclaringType),
                 MethodName: method.DisplayName(),
                 ReturnType: TypeSig.FromType(method.ReturnType),
-                ValueParams: valparams,
-                TypeParams: typeparams);
-        }
-
+                Args: method.GetParameters().Select(p => new MethodParameter(TypeSig.FromParameter(p), p.ReferenceKind(), p.Name, p.Position)).ToArray(),
+                TypeParams: TypeParameters(method));
+        
         MethodSig(int MethodId, string DefiningAssembly, string DefiningModule,
-            TypeSig DeclaringType, string MethodName, TypeSig ReturnType, MethodParameters ValueParams, TypeParameters TypeParams)
+            TypeSig DeclaringType, string MethodName, TypeSig ReturnType, 
+            MethodParameters Args, TypeParameters TypeParams)
         {
             this.MethodId = MethodId;
             this.DefiningAssembly = DefiningAssembly;
@@ -38,7 +35,7 @@ namespace Z0
             this.DeclaringType = DeclaringType;
             this.MethodName = MethodName;
             this.ReturnType = ReturnType;
-            this.ValueParams = ValueParams;
+            this.Args = Args;
             this.TypeParams = TypeParams;
         }
         
@@ -54,7 +51,7 @@ namespace Z0
 
         public TypeSig ReturnType {get; }
 
-        public MethodParameters ValueParams {get; }
+        public MethodParameters Args {get; }
 
         public TypeParameters TypeParams {get; }
                 
@@ -64,7 +61,7 @@ namespace Z0
             sigtext.Append(ReturnType.Format());
             sigtext.Append(Chars.Space);
             sigtext.Append(MethodName);
-            sigtext.Append(ValueParams.Format(true));
+            sigtext.Append(Args.Format());
             return sigtext.ToString();            
         }
 

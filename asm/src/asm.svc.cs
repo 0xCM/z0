@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static root;
+    using static Core;
 
     public static class AsmServices
     {                

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
     
-    using static root;
+    using static Core;
     using static AsmWorkflowReports;    
     using static HostCaptureWorkflow;
 

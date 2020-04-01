@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Symbolic;
+    using static Seed;
     using static DeciDigit;
 
     public static class DeciDigits
@@ -27,12 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The source character</param>
         public static DeciDigit Parse(char c)
-        {
-            if(Index.TryGetValue(c, out var digit))
-                return digit;
-            else
-                throw new Exception($"There is no decimal digit corresponding the the character '{c}'");
-        }
+            => Index.TryGetValue(c, out var digit) ? digit : throw Unsupported.value(c);
 
         /// <summary>
         /// Parses valid decimail digits from the source string

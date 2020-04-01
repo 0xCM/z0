@@ -3,12 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;    
 
-    public abstract class TypeClosuresAttribute : Attribute
+    public interface ICilContext : IContext
     {
-
-
+        CilFormatConfig CilFormat {get;}         
     }
 }

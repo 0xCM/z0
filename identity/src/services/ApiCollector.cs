@@ -12,7 +12,7 @@ namespace Z0
 
     using static Core;
     
-    readonly struct ApiOpCollector : IApiCollector
+    readonly struct ApiCollector : IApiCollector
     {
         public IEnumerable<DirectApiGroup> CollectDirect(Assembly src)
             => src.ApiHosts().SelectMany(CollectDirect);
@@ -37,10 +37,16 @@ namespace Z0
         static IEnumerable<MethodInfo> Tagged(ApiHost src)
             => src.DeclaredMethods.Tagged<OpAttribute>();
 
-        static NumericKind[] NumericClosures(MethodInfo m)
-            => m.Tag<NumericClosuresAttribute>()
-              .MapValueOrElse(a => a.NumericPrimitive.DistinctKinds(), 
-                () => seq<NumericKind>()).ToArray();
+        // static NumericKind[] NumericClosures(MethodInfo m)
+        //     => m.Tag<NumericClosuresAttribute>()
+        //       .MapValueOrElse(a => a.NumericPrimitive.DistinctKinds(), () => seq<NumericKind>()).ToArray();
+
+        public static NumericKind[] NumericClosures(MethodInfo m)
+            => (from tag in m.Tag<ClosuresAttribute>()
+                where tag.Kind == TypeClosureKind.Numeric
+                let spec = (NumericKind)tag.Spec
+                select spec.DistinctKinds().ToArray()).ValueOrElse(() => Arrays.empty<NumericKind>());
+              
 
     }
 }

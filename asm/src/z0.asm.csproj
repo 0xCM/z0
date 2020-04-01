@@ -11,8 +11,9 @@
     <ProjectReference Include="$(AsmTypes)" />
     <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(AsmEncode)" />
     <ProjectReference Include="$(AsmDecode)" />    
+    <ProjectReference Include="$(Math)" />    
+
   </ItemGroup>
 
   <ItemGroup>

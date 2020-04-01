@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Api;
+    using static Core;
 
     readonly struct MemberLocator : IMemberLocator
     {
@@ -42,7 +42,6 @@ namespace Z0
         public IEnumerable<ApiLocatedMember> Located(Assembly src)
               => src.ApiHosts().SelectMany(Located);
 
-
         public IEnumerable<ApiLocatedMember> Located(ApiHost src)
               => LocatedGeneric(src).Union(LocatedDirect(src)).OrderBy(x => x.Address);
 
@@ -53,20 +52,22 @@ namespace Z0
 
         static IEnumerable<ApiStatelessMember> HostedGeneric(ApiHost src)
               => from m in src.HostingType.DeclaredMethods().OpenGeneric(1)
-                 where m.Tagged<OpAttribute>() && m.Tagged<NumericClosuresAttribute>() && !m.AcceptsImmediate()
-                 let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
-                 where c != NumericKind.None
-                 from t in c.DistinctKinds().Select(x => x.SystemType().ToOption())
+                 where m.Tagged<OpAttribute>() && m.Tagged<ClosuresAttribute>() && !m.AcceptsImmediate()
+                 //let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
+                 //where c != NumericKind.None
+                 from t in ApiCollector.NumericClosures(m).Select(x => x.SystemType().ToOption())
+                 //from t in c.DistinctKinds().Select(x => x.SystemType().ToOption())
                  where t.IsSome()
                  let concrete = m.MakeGenericMethod(t.Value)
                  select ApiStatelessMember.Define(src.Path, concrete.Identify(), concrete);
 
         static IEnumerable<ApiLocatedMember> LocatedGeneric(ApiHost src)
               => from m in src.HostingType.DeclaredMethods().OpenGeneric(1)
-                 where m.Tagged<OpAttribute>() && m.Tagged<NumericClosuresAttribute>() && !m.AcceptsImmediate()
-                 let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
-                 where c != NumericKind.None
-                 from t in c.DistinctKinds().Select(x => x.SystemType().ToOption())
+                 where m.Tagged<OpAttribute>() && m.Tagged<ClosuresAttribute>() && !m.AcceptsImmediate()
+            //      let c = m.Tag<NumericClosuresAttribute>().MapValueOrDefault(a => a.NumericPrimitive, NumericKind.None)
+            //      where c != NumericKind.None
+            //      from t in c.DistinctKinds().Select(x => x.SystemType().ToOption())
+                 from t in ApiCollector.NumericClosures(m).Select(x => x.SystemType().ToOption())
                  where t.IsSome()
                  let concrete = m.MakeGenericMethod(t.Value)
                  let address = MemoryAddress.Define(Jit(concrete))

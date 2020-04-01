@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
+    using static Stacked;
 
-    partial class Stacked
+    partial class Stacks
     {
         /// <summary>
         /// Presents the leading source storage cell as reference to an unsigned 64-bit integer

@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack64 src, int index, T t = default)
             where T : unmanaged
                 => ref Unsafe.Add(ref head<T>(ref src), index);
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack128 src, int index, T t = default)
             where T : unmanaged
                 => ref Unsafe.Add(ref head<T>(ref src), index);
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack256 src, int index, T t = default)
             where T : unmanaged
                 => ref Unsafe.Add(ref head<T>(ref src), index);
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack512 src, int index, T t = default)
             where T : unmanaged
                 => ref Unsafe.Add(ref head<T>(ref src), index);
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref MemStack1024 src, int index, T t = default)
             where T : unmanaged
                 => ref Unsafe.Add(ref head<T>(ref src), index);

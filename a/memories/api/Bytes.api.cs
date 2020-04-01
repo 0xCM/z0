@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="offset">The 0-based/byte-relative offset</param>
         /// <typeparam name="T">The data type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static ref byte one<T>(ref T src, int offset)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref src), offset);
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Span<byte> from<T>(ref T src)
             where T : struct
                 => MemoryMarshal.CreateSpan(ref refs.byterefR(ref src), size<T>()); 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Span<byte> from<T>(T src)
             where T : struct
                 => MemoryMarshal.AsBytes(span(src));
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target array</param>
         /// <typeparam name="T">The soruce type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static void to<T>(in T src, Span<byte> dst)
             where T : unmanaged
                 => Unsafe.As<byte, T>(ref head(dst)) = src;
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="offset">The source span offset</param>
         /// <param name="dst">The target reference</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static ref T to<T>(Span<byte> src, int offset, ref T dst)
             where T : unmanaged
         {            
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         /// <param name="offset">The target span offset</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Span<byte> from<T>(in T src, Span<byte> dst, int offset)
             where T : unmanaged
         {
@@ -106,7 +106,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Span<byte> write<T>(in T src)
             where T : unmanaged
         {

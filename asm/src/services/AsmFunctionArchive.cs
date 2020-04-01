@@ -10,10 +10,8 @@ namespace Z0.Asm
     using System.IO;
     using System.Runtime.CompilerServices;
 
-
     using static AsmServiceMessages;
-
-    using static root;
+    using static Core;
 
     class AsmFunctionArchive : IAsmFunctionArchive
     {        

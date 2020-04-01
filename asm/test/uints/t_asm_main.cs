@@ -13,14 +13,7 @@ namespace Z0.Asm
     {
         protected override void OnExecute(in AsmBuffers buffers)
         {                    
-            buffer_client(Context);
-            // capture_shifter(buffers);
-            // capture_shuffler(buffers);
-            // capture_constants(buffers);
-            //binary_imm(buffers);
-            //bitlogic_match(buffers);
-            // archive_selected(buffers);        
-            // archive_context(buffers);            
+            //buffer_client(Context);
         }
 
         void archive_selected(in AsmBuffers buffers)
@@ -40,27 +33,7 @@ namespace Z0.Asm
                 archive.Archive(id);    
         }
 
-        static IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
-            return  context.CodeWriter(dstPath);
-        }
-
-        static IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Raw);    
-            return  context.CodeWriter(dstPath);
-        }
-
-        static IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
-            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Asm);    
-            var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.WithFormat(format).AsmWriter(dstPath);
-        }
+        #if Dependencies
 
         static void buffer_client(IAsmContext context)
         {
@@ -99,6 +72,31 @@ namespace Z0.Asm
             composition.Execute(buffers);
 
             var stateBytes = state.Select(s => s.Payload).ToArray();
+        }
+
+
+        #endif
+
+        static IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Hex);    
+            return  context.CodeWriter(dstPath);
+        }
+
+        static IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Raw);    
+            return  context.CodeWriter(dstPath);
+        }
+
+        static IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var dstDir = context.EmissionPaths().DataSubDir(FolderName.Define(typeof(t_asm_main).Name));            
+            var dstPath = dstDir + FileName.Define($"{test}", FileExtensions.Asm);    
+            var format = AsmFormatConfig.New.WithFunctionTimestamp();
+            return context.WithFormat(format).AsmWriter(dstPath);
         }
     }
 }

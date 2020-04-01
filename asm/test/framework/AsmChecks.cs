@@ -17,7 +17,6 @@ namespace Z0.Asm.Validation
     using static NumericKinds;
     using static BufferSeqId;
     
-
     public class AsmChecks : IAsmChecks
     {
         public IAsmContext Context {get;}
@@ -73,6 +72,7 @@ namespace Z0.Asm.Validation
         /// <param name="src">The source path</param>
         public ReadOnlySpan<AsmOpBits> LoadCode(FilePath src)
             => Context.HexReader().Read(src).ToArray();
+
 
         protected string Math
             => nameof(math);
@@ -428,7 +428,7 @@ namespace Z0.Asm.Validation
         protected TestCaseRecord[] megacheck(in BufferSeq buffers, string name, BinaryOp<sbyte> primal, BinaryOp<sbyte> generic, 
             NK<sbyte> kind)
         {
-            var results = root.list<TestCaseRecord>();
+            var results = list<TestCaseRecord>();
 
             var w = w8;
             var id = Identify.NumericOp(name, kind, false);
@@ -705,6 +705,8 @@ namespace Z0.Asm.Validation
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
 
+        #if Dependencies
+
         void capture_constants(in AsmBuffers buffers)
         {
             var src = typeof(gmath).Method(nameof(BitMask.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
@@ -720,27 +722,6 @@ namespace Z0.Asm.Validation
             hexout.WriteCode(data.Code);
             rawout.WriteHexLine(data);
             asmout.Write(decoder.DecodeFunction(data));
-        }
-
-        [MethodImpl(Inline)]
-        static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
-            => v => Avx2.ShiftLeftLogical(v,imm);
-
-        void capture_shifter(in AsmBuffers buffers)
-        {
-            var src = shifter(4);
-
-            using var rawout = HexWriter(Context);            
-            using var hexout = CodeWriter(Context);
-            using var asmout = FunctionWriter(Context);            
-
-            var capture = buffers.Capture;
-            var decoder = Context.AsmFunctionDecoder();
-            
-            var data = capture.Capture(buffers.Exchange, src.Identify(), src);
-            hexout.WriteCode(data.Code);
-            rawout.WriteHexLine(data);
-            asmout.Write(decoder.DecodeFunction(data));            
         }
 
         [MethodImpl(Inline)]
@@ -797,30 +778,6 @@ namespace Z0.Asm.Validation
             var g = buffers.MainExec.EmitFixedBinaryOp<Fixed256>(asm.Code.ApiCode);
             var z3 = g(x,y).ToVector<ushort>();
             Claim.veq(z1,z3);
-        }
-
-
-        AsmFormatConfig AsmFormat
-            => AsmFormatConfig.New.WithoutFunctionTimestamp();
-
-        IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Hex);
-            return  context.CodeWriter(dst);
-        }
-
-        protected IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
-        {            
-
-            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Raw);
-            return  context.CodeWriter(dst);
-        }
-
-        protected IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
-        {
-            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Asm);
-            var format = AsmFormatConfig.New.WithFunctionTimestamp();
-            return context.WithFormat(format).AsmWriter(dst);
         }
 
         void CheckImm(in BufferSeq buffers, in OpExtractExchange exchange)
@@ -900,19 +857,9 @@ namespace Z0.Asm.Validation
             var f = buffers[Main].EmitFixedUnaryOp<Fixed256>(capture.Code.ApiCode);
             var z2 = f(x.ToFixed()).ToVector<T>();
             Claim.veq(z1,z2);
-        }
 
-        public void vector_bitlogic_match(in BufferSeq buffers)
-        {
-            var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
-            var kinds = NumericKind.Integers.DistinctKinds();
-            var widths = array(TypeWidth.W128, TypeWidth.W256);
-            foreach(var n in names)
-            foreach(var w in widths)
-            foreach(var k in kinds)
-                vector_match(buffers, n, w, k);                        
-        }
 
+        }
 
         void vector_match(in BufferSeq buffers, string name, TypeWidth w, NumericKind kind)
         {
@@ -940,6 +887,91 @@ namespace Z0.Asm.Validation
             vadd_check<uint>(buffers, w256, ReadAsm(catalog, subject, name, w256,z32));
         }
 
+
+        public void vector_bitlogic_match(in BufferSeq buffers)
+        {
+            var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
+            var kinds = NumericKind.Integers.DistinctKinds();
+            var widths = array(TypeWidth.W128, TypeWidth.W256);
+            foreach(var n in names)
+            foreach(var w in widths)
+            foreach(var k in kinds)
+                vector_match(buffers, n, w, k);                        
+        }
+
+        void vadd_check<T>(in BufferSeq buffers, W128 w, ApiCode asm)
+            where T : unmanaged
+        {            
+            var f = buffers[Main].EmitFixedBinaryOp(w,asm);            
+            CheckMatch<T>(gvec.vadd, f, asm.Id);
+        }
+
+
+        void vadd_check<T>(in BufferSeq buffers, W256 w, ApiCode asm)
+            where T : unmanaged
+        {            
+            var f = buffers[Main].EmitFixedBinaryOp(w,asm);
+            CheckMatch<T>(gvec.vadd, f, asm.Id);
+        }
+
+        void datares_check(in BufferSeq buffers)
+        {
+            //Verifies that the "GetBytes" function doesn't return
+            //a copy of the data but rather a refererence to the
+            //data that exists in memory as a resource
+            foreach(var d in Data.Resources)
+                Claim.eq(d.Location, ptr(d.GetBytes()));
+        }
+
+        #endif
+
+        [MethodImpl(Inline)]
+        static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
+            => v => Avx2.ShiftLeftLogical(v,imm);
+
+        void capture_shifter(in AsmBuffers buffers)
+        {
+            var src = shifter(4);
+
+            using var rawout = HexWriter(Context);            
+            using var hexout = CodeWriter(Context);
+            using var asmout = FunctionWriter(Context);            
+
+            var capture = buffers.Capture;
+            var decoder = Context.AsmFunctionDecoder();
+            
+            var data = capture.Capture(buffers.Exchange, src.Identify(), src);
+            hexout.WriteCode(data.Code);
+            rawout.WriteHexLine(data);
+            asmout.Write(decoder.DecodeFunction(data));            
+        }
+
+
+
+        AsmFormatConfig AsmFormat
+            => AsmFormatConfig.New.WithoutFunctionTimestamp();
+
+        IAsmCodeWriter CodeWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Hex);
+            return  context.CodeWriter(dst);
+        }
+
+        protected IAsmCodeWriter HexWriter(IAsmContext context, [Caller] string test = null)
+        {            
+
+            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Raw);
+            return  context.CodeWriter(dst);
+        }
+
+        protected IAsmFunctionWriter FunctionWriter(IAsmContext context, [Caller] string test = null)
+        {
+            var dst = LogDir + FileName.Define($"{test}", FileExtensions.Asm);
+            var format = AsmFormatConfig.New.WithFunctionTimestamp();
+            return context.WithFormat(format).AsmWriter(dst);
+        }
+
+
         public void add_megacheck(in BufferSeq buffers)
         {
             var name = nameof(math.add);
@@ -963,23 +995,7 @@ namespace Z0.Asm.Validation
             }
         }
 
-        void vadd_check<T>(in BufferSeq buffers, W128 w, ApiCode asm)
-            where T : unmanaged
-        {            
-            var f = buffers[Main].EmitFixedBinaryOp(w,asm);            
-            CheckMatch<T>(gvec.vadd, f, asm.Id);
-        }
-
-
-        void vadd_check<T>(in BufferSeq buffers, W256 w, ApiCode asm)
-            where T : unmanaged
-        {            
-            var f = buffers[Main].EmitFixedBinaryOp(w,asm);
-            CheckMatch<T>(gvec.vadd, f, asm.Id);
-        }
-
-
-         /// <summary>
+        /// <summary>
         /// Verifies that two 128-bit vectorized binary operators agree over a random set of points
         /// </summary>
         /// <param name="f">The first operator, considered as a basline</param>
@@ -1048,14 +1064,6 @@ namespace Z0.Asm.Validation
         static unsafe ulong ptr(ReadOnlySpan<byte> src)
             => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
 
-        void datares_check(in BufferSeq buffers)
-        {
-            //Verifies that the "GetBytes" function doesn't return
-            //a copy of the data but rather a refererence to the
-            //data that exists in memory as a resource
-            foreach(var d in Data.Resources)
-                Claim.eq(d.Location, ptr(d.GetBytes()));
-        }
 
         void RunPipe()
         {
@@ -1123,10 +1131,7 @@ namespace Z0.Asm.Validation
 
             var points = stream.Take(RepCount);
             iter(points, x => Claim.eq(f(x), g(x)));            
-
         }
-
-
 
         public void sub_megacheck(in BufferSeq buffers)
         {

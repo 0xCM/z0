@@ -200,7 +200,7 @@ public enum PartId : ulong
 
     Feeders = 800,
 
-    Components = 802,
+    Seed = 802,
 
     Collective = 804,
 
@@ -281,7 +281,7 @@ public static class PartIdentity
 
     public sealed class Collective : PartId<Collective> { public override PartId Id => PartId.Collective;}
 
-    public sealed class Components : PartId<Components> { public override PartId Id => PartId.Components;}
+    public sealed class Components : PartId<Components> { public override PartId Id => PartId.Seed;}
 
     public sealed class Custom : PartId<Custom> { public override PartId Id => PartId.Custom;}
 

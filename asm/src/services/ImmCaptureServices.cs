@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static root;
+    using static Core;
 
     public static class ImmCaptureServices
     {
@@ -21,7 +21,7 @@ namespace Z0.Asm
                 ISVImm8UnaryResolver256Api<T> r => ImmV256UnaryCaptureService<T>.New(context,r),
                 ISVImm8BinaryResolver128Api<T> r => ImmV128BinaryCaptureService<T>.New(context,r),
                 ISVImm8BinaryResolver256Api<T> r => ImmV256BinaryCaptureService<T>.New(context,r),
-                _ => throw unsupported(resolver.GetType())
+                _ => throw Unsupported.define(resolver.GetType())
             };           
 
         /// <summary>
@@ -47,6 +47,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal static AsmFunction Decode(this IAsmContext context, IAsmFunctionDecoder decoder, in OpExtractExchange exchange, OpIdentity id, DynamicDelegate src)
             => decoder.DecodeFunction(context.Capture().Capture(in exchange, id, src));
-
     }
 }

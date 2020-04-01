@@ -9,13 +9,14 @@ namespace Z0
     /// <summary>
     /// Applies to a generic type/method to advertise the types over which type parameter(s) may be closed
     /// </summary>
-    public class NumericClosuresAttribute : TypeClosuresAttribute
+    public class NumericClosuresAttribute : ClosuresAttribute
     {
         public NumericClosuresAttribute(NumericKind nk)
+            : base(nk)
         {
-            this.NumericPrimitive = nk;
+            
         }
 
-        public NumericKind NumericPrimitive {get;}
+        public NumericKind NumericPrimitive => (NumericKind)Spec;
     }
 }

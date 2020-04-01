@@ -3,14 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
-    using System.Collections.Generic;
-    
-    using R = Z0.Parts;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;    
 
-    static class AsmCompostionRoot
+    using static Core;
+
+    public interface ICilService : IService<ICilContext>
     {
-
+        
     }
 }

@@ -5,13 +5,10 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.IO;
     using System.Runtime.CompilerServices;
     
-
-    using static root;
+    using static Core;
 
     readonly struct CilFunctionWriter : ICilFunctionWriter
     {

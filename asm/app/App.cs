@@ -17,28 +17,19 @@ namespace Z0.Asm.Check
         static IPart[] Dependencies
             => new IPart[]{
                 P.AsmCore.Resolved, 
-                P.BitCore.Resolved,
-                P.Blocks.Resolved, 
-                P.Components.Resolved,
+                P.Blocks.Resolved,
+                P.Cast.Resolved,
+                P.Core.Resolved,
+                P.Dynamic.Resolved,
                 P.Fixed.Resolved, 
                 P.GMath.Resolved, 
                 P.Math.Resolved,
                 P.MathServices.Resolved, 
                 P.Memories.Resolved, 
                 P.Numeric.Resolved,
-
-                // P.BitGrids.Resolved, 
-                // P.BitSpan.Resolved, 
-                // P.BitFields.Resolved,
-                // P.BitVectors.Resolved, 
-                // P.Intrinsics.Resolved,
-                // P.LibM.Resolved, 
-                // P.Logix.Resolved, 
-                //P.Permute.Resolved,
-                // P.VSvc.Resolved, 
-                // P.VBits.Resolved, 
-                // P.Vectorized.Resolved, 
-                // P.VData.Resolved
+                P.Seed.Resolved,
+                P.Symbolic.Resolved,
+                P.Vectorized.Resolved,
                 };
 
         static IAppSettings LoadSettings()

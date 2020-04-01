@@ -9,8 +9,9 @@ namespace Z0
 
     using static Seed;
     using static As;
+    using static Stacked;
 
-    partial class Stacked
+    partial class Stacks
     {
         /// <summary>
         /// Presents the leading source storage cell as a byte reference

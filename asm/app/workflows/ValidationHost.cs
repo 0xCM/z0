@@ -8,7 +8,7 @@ namespace Z0.Asm.Check
     using System.Collections.Generic;
     using System.Linq;
 
-    using static root;
+    using static Core;
     using static AsmWorkflowReports;
     using static HostCaptureWorkflow;
     using static AsmServiceMessages;

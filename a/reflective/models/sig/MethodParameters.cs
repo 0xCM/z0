@@ -10,18 +10,18 @@ namespace Z0
 
     public class MethodParameters : IFormattable<MethodParameters>
     {
+        public MethodParameter[] Index {get;}
+
         public static implicit operator MethodParameters(MethodParameter[] src)
             => new MethodParameters(src);
 
-        public MethodParameter[] Items {get;}
-
         public MethodParameters(IEnumerable<MethodParameter> refs)
-            => this.Items = refs.ToArray();
+            => this.Index = refs.ToArray();
 
         public string Format(bool fence)
         {
-            var content = string.Join(", ", Items.Select(x => x.Format()));
-            return fence ?  ('<' + content + '>') : content;
+            var content = string.Join(", ", Index.Select(x => x.Format()));
+            return fence ?  (Chars.LParen + content + Chars.RParen) : content;
         }
 
         public string Format()

@@ -7,88 +7,88 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Defines literals corresponding to base-16 digits
+    /// Defines literals that correspond to the base-16 digits
     /// </summary>
     public enum HexDigit : byte
     {
         /// <summary>
         /// Specifies 0 base 16
         /// </summary>
-        X0 = 0x0,
+        D0 = 0x0,
 
         /// <summary>
         /// Specifies 1 base 16
         /// </summary>
-        X1 = 0x1,
+        D1 = 0x1,
         
         /// <summary>
         /// Specifies 2 base 16
         /// </summary>
-        X2 = 0x2,
+        D2 = 0x2,
         
         /// <summary>
         /// Specifies 3 base 16
         /// </summary>
-        X3 = 0x3,
+        D3 = 0x3,
 
         /// <summary>
         /// Specifies 4 base 16
         /// </summary>
-        X4 = 0x4,
+        D4 = 0x4,
 
         /// <summary>
         /// Specifies 5 base 16
         /// </summary>
-        X5 = 0x5,
+        D5 = 0x5,
 
         /// <summary>
         /// Specifies 6 base 16
         /// </summary>
-        X6 = 0x6,
+        D6 = 0x6,
 
         /// <summary>
         /// Specifies 7 base 16
         /// </summary>
-        X7 = 0x7,
+        D7 = 0x7,
         
         /// <summary>
         /// Specifies 8 base 16
         /// </summary>
-        X8 = 0x8,
+        D8 = 0x8,
         
         /// <summary>
         /// Specifies 9 base 16
         /// </summary>
-        X9 = 0x9,
+        D9 = 0x9,
 
         /// <summary>
         /// Specifies 10 base 16
         /// </summary>
-        XA = 0xA,
+        A = 0xA,
 
         /// <summary>
         /// Specifies 11 base 16
         /// </summary>
-        XB = 0xB,
+        B = 0xB,
 
         /// <summary>
         /// Specifies 12 base 16
         /// </summary>
-        XC = 0xC,
+        C = 0xC,
 
         /// <summary>
         /// Specifies 13 base 16
         /// </summary>
-        XD = 0xD,
+        D = 0xD,
 
         /// <summary>
         /// Specifies 14 base 16
         /// </summary>
-        XE = 0xE,
+        E = 0xE,
 
         /// <summary>
         /// Specifies 15 base 16
         /// </summary>
-        XF = 0xF,
+        F = 0xF,
     }
 }

@@ -20,20 +20,20 @@ namespace Z0
         public readonly ulong Bits;
 
         /// <summary>
-        /// Computes the quotient q :=  a / bitsize[T]
+        /// Computes the quotient q :=  a / bitsize[T] of an operand a and parametric type T
         /// </summary>
-        /// <param name="a"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <param name="a">The operand</param>
+        /// <typeparam name="T">The parametric type from which a bit-width will be determined</typeparam>
         [MethodImpl(Inline)]
         public static int div<T>(int a, T t = default)
             where T : unmanaged
                 => a / bitsize<T>();
 
         /// <summary>
-        /// Computes the remainder r :=  a % bitsize[T]
+        /// Computes the remainder r :=  a % bitsize[T] of an operand a and parametric type T
         /// </summary>
-        /// <param name="a"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <param name="a">The operand</param>
+        /// <typeparam name="T">The parametric type from which a bit-width will be determined</typeparam>
         [MethodImpl(Inline)]
         public static int mod<T>(int a, T t = default)
             where T : unmanaged

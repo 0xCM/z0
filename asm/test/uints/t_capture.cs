@@ -9,6 +9,8 @@ namespace Z0.Asm
 
     public sealed class t_capture : t_asm<t_capture>
     {    
+        #if Dependencies
+
         public void capture_1()
         {
             void OnEvent(in AsmCaptureEvent data)
@@ -18,12 +20,13 @@ namespace Z0.Asm
             }
             
             var exchange = Context.ExtractExchange(OnEvent);
-            var control = exchange.Operations;
-            
+            var control = exchange.Operations;            
             
             var src = Intrinsics.Direct.Where(m => m.Name == nameof(dvec.vand)).First();
             control.Capture(exchange, src.Identify(), src);
 
         }
+
+        #endif
     }
 }

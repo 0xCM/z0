@@ -13,14 +13,4 @@ namespace Z0.Asm.Validation
         void Execute(in BufferSeq buffers, ApiMemberCode[] code);        
     }
 
-    public interface IAsmEvalDispatcher : IAsmService
-    {
-        bit EvalOperator(in BufferSeq buffers, ApiMemberCode api);        
-
-        bit EvalOperators(in BufferSeq buffers, ApiMemberCode[] api);
-
-        bit EvalFixedOperators(in BufferSeq buffers, ApiMemberCode[] api);
-
-        bit EvalFixedOperator(in BufferSeq buffers, in ApiMemberCode api);
-    }
 }

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.CompilerServices;
 
     class DirectMethodCases
     {
@@ -21,5 +19,4 @@ namespace Z0
         public static byte xor(byte a, byte b)
             => (byte)(a ^ b);
     }
-
 }

@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static root;
+
+    #if Dependencies
 
     static class VectorizedCases
     {
@@ -52,4 +53,6 @@ namespace Z0
             where T : unmanaged
                 => gvec.vxor(x,y);
     }
+
+    #endif
 }

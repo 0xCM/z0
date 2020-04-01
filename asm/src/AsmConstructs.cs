@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     [ApiHost("constructs")]
     public static class AsmConstructs
@@ -55,7 +55,7 @@ namespace Z0.Asm
                 BinaryBitLogicKind.LNot => math.not(a),
                 BinaryBitLogicKind.CImpl => math.cimpl(a,b),
                 BinaryBitLogicKind.Nand => math.nand(a,b),
-                BinaryBitLogicKind.True => ones<uint>(),
+                BinaryBitLogicKind.True => Literals.ones<uint>(),
                 _ => 0
             };
     }
