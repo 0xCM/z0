@@ -17,7 +17,7 @@
     <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(SFuncs)" />    
     <ProjectReference Include="$(Symbolic)" />        
-    <ProjectReference Include="$(Texting)" />
+    <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Messages)" />

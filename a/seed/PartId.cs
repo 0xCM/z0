@@ -65,15 +65,19 @@ public enum PartId : ulong
 
     Asm = 300,
 
+    AsmTypes = 302,
+
+    AsmModels = 304,
+
+    AsmCore = 310,
+
+    AsmEncoder = 312,
+    
+    AsmDecoder = 314,
+
     AsmTest = Asm | Test,
 
     AsmApp = Asm | App,
-    
-    AsmCore = 305,
-
-    AsmEncoder = 310,
-    
-    AsmDecoder = 315,
 
     Vectorized = 330,
 

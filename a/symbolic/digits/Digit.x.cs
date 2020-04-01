@@ -111,6 +111,7 @@ namespace Z0
             return new string(dst);
         }
 
+
         /// <summary>
         /// Formats a span of binary digits as a contiguous block
         /// </summary>

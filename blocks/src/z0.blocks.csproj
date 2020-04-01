@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(Numeric)" />  
+    <ProjectReference Include="$(Polyrand)" />  
 
   </ItemGroup>
 

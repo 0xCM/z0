@@ -22,8 +22,7 @@
     <Reflective>$(Feeders)reflective/z0.reflective.csproj</Reflective>
     <Symbolic>$(Feeders)symbolic/z0.symbolic.csproj</Symbolic>
     <SFuncs>$(Feeders)sfuncs/z0.sfuncs.csproj</SFuncs>
-    <Texting>$(Feeders)texting/z0.texting.csproj</Texting>
-    <Textual>$(Feeders)texting/z0.texting.csproj</Textual>
+    <Textual>$(Feeders)textual/z0.textual.csproj</Textual>
     <Time>$(Feeders)time/z0.time.csproj</Time>
     <Tuples>$(Feeders)tuples/z0.tuples.csproj</Tuples>
     <Typed>$(Feeders)typed/z0.typed.csproj</Typed>

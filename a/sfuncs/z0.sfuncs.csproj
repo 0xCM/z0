@@ -9,7 +9,7 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identify)" />
-    <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(Interval)" />
   </ItemGroup>
 
 </Project>

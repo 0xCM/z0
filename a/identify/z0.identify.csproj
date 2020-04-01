@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Tuples)" />

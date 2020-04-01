@@ -6,9 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Reflective)" />
   </ItemGroup>
 
 </Project>

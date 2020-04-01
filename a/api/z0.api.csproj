@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Canonical)" />
+    <!-- <ProjectReference Include="$(Canonical)" /> -->
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(SFuncs)" />

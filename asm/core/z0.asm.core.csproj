@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(AsmTypes)" />
+    <ProjectReference Include="$(AsmModels)" />
+    
     <ProjectReference Include="$(WorkflowCore)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Fixed)" />        

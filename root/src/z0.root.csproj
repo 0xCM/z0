@@ -20,26 +20,5 @@
     <ProjectReference Include="$(Z)" />
   </ItemGroup>
 
-  <!-- <ItemGroup>
-    <ProjectReference Include="$(Apps)" />  
-    <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Custom)" />
-    <ProjectReference Include="$(Domain)" />
-    <ProjectReference Include="$(Fixed)" />
-    <ProjectReference Include="$(Identify)" />  
-    <ProjectReference Include="$(Kinds)" />  
-    <ProjectReference Include="$(Monadic)" />
-    <ProjectReference Include="$(Memories)" />    
-    <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(Reflective)" />
-    <ProjectReference Include="$(SFuncs)" />    
-    <ProjectReference Include="$(Symbolic)" />        
-    <ProjectReference Include="$(Texting)" />
-    <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Tuples)" />
-  </ItemGroup> -->
 
 </Project>

@@ -8,6 +8,11 @@
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Typed)" />
+    <ProjectReference Include="$(Cast)" />
+    <ProjectReference Include="$(Collective)" />
+    <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Symbolic)" />
+
   </ItemGroup>
 
 </Project>

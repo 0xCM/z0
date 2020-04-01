@@ -2,17 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {        
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
-    using static root;
-
     /// <summary>
-    /// Defines a group of related assembly functions
+    /// Defines a group of assembly functions related by an operation identity
     /// </summary>
     public readonly struct AsmFunctionGroup
     {        

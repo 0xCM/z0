@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Collective)" />    
-    <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Numeric)" />

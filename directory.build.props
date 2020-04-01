@@ -27,11 +27,16 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AsmApp>$(TopDir)asm/app/z0.asm.app.csproj</AsmApp>
+    <AsmTypes>$(TopDir)asm/types/z0.asm.types.csproj</AsmTypes>
+    <AsmModels>$(TopDir)asm/models/z0.asm.models.csproj</AsmModels>
     <AsmCore>$(TopDir)asm/core/z0.asm.core.csproj</AsmCore>
+    <AsmApp>$(TopDir)asm/app/z0.asm.app.csproj</AsmApp>
     <AsmDecode>$(TopDir)asm/decode/z0.asm.decode.csproj</AsmDecode>
     <AsmEncode>$(TopDir)asm/encode/z0.asm.encode.csproj</AsmEncode>
     <AsmSuite>$(TopDir)asm/src/z0.asm.csproj</AsmSuite>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <BitCore>$(TopDir)bits/core/z0.bits.core.csproj</BitCore>
     <BitFields>$(TopDir)bits/fields/z0.bits.fields.csproj</BitFields>
     <BitGrids>$(TopDir)/bits/grids/z0.bits.grids.csproj</BitGrids>
@@ -39,6 +44,9 @@
     <BitSpans>$(TopDir)bits/spans/z0.bits.spans.csproj</BitSpans>
     <BitStrings>$(TopDir)bits/strings/z0.bits.strings.csproj</BitStrings>
     <BitVectors>$(TopDir)bits/vectors/z0.bits.vectors.csproj</BitVectors>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <Blocks>$(TopDir)blocks/src/z0.blocks.csproj</Blocks>
     <Cil>$(TopDir)cil/src/z0.cil.csproj</Cil>
     <Circuits>$(TopDir)vectorized/circuits/z0.vectorized.circuits.csproj</Circuits>
@@ -65,7 +73,6 @@
     <Validity>$(TopDir)validity/src/z0.validity.src.csproj</Validity>
     <ValidityCore>$(TopDir)validity/core/z0.validity.core.csproj</ValidityCore>
     <ValidityVectors>$(TopDir)validity/vectors/z0.validity.vectors.csproj</ValidityVectors>
-
     <VData>$(TopDir)vectorized/vdata/z0.vectorized.vdata.csproj</VData>
     <Vectorized>$(TopDir)vectorized/src/z0.vectorized.csproj</Vectorized>
     <VSvc>$(TopDir)vectorized/vsvc/z0.vectorized.vsvc.csproj</VSvc>

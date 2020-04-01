@@ -41,7 +41,7 @@ bash $Cmd
 export ProjectId=sfuncs
 bash $Cmd
 
-export ProjectId=texting
+export ProjectId=textual
 bash $Cmd
 
 export ProjectId=time
