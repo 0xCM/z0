@@ -25,10 +25,5 @@ namespace Z0
             dst.Reverse();
             return dst;
         }
-
-        [MethodImpl(Inline)]
-        static Span<T> ToSpan<T>(this ReadOnlySpan<T> src)
-            => src.ToArray();
-
     }
 }

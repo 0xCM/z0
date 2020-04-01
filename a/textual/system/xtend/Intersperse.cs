@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="c">The character to intersperse</param>
         public static string Intersperse(this string src, char c)
         {
-            var builder = build();
+            var builder = string.Empty.Build();
             foreach(var item in src)
             {
                 builder.Append(item);
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="sep">The value to intersperse</param>
         public static string Intersperse(this string src, string sep)
         {
-            var builder = build();
+            var builder = string.Empty.Build();
             foreach(var item in src)
             {
                 builder.Append(item);

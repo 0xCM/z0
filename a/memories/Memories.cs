@@ -30,9 +30,9 @@ namespace Z0
         internal static int size<T>()
             => Unsafe.SizeOf<T>();
         
-        [MethodImpl(Inline)]
-        internal static ReadOnlySpan<T> ReadOnly<T>(this Span<T> src)
-            => src;
+        // [MethodImpl(Inline)]
+        // internal static ReadOnlySpan<T> ReadOnly<T>(this Span<T> src)
+        //     => src;
 
 
     }

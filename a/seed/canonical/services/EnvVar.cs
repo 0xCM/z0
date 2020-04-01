@@ -55,7 +55,8 @@ namespace Z0
             => Format().GetHashCode();
 
         public bool Equals(EnvVar src)
-            => text.equals(Name,src.Name) && text.equals(Value, src.Value);
+            => string.Equals(Name,src.Name, StringComparison.InvariantCultureIgnoreCase) 
+            && string.Equals(Value, src.Value, StringComparison.InvariantCultureIgnoreCase);
         
         public override bool Equals(object src)
             => src is EnvVar v && Equals(v);
@@ -98,7 +99,8 @@ namespace Z0
             => Format().GetHashCode();
 
         public bool Equals(EnvVar<T> src)
-            => text.equals(Name,src.Name) && Object.Equals(Value, src.Value);
+            => string.Equals(Name,src.Name, StringComparison.InvariantCultureIgnoreCase) 
+            && Object.Equals(Value, src.Value);
         
         public override bool Equals(object src)
             => src is EnvVar<T> v && Equals(v);

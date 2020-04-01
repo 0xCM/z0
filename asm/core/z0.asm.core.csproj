@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
-    
+    <ProjectReference Include="$(Core)" />    
     <ProjectReference Include="$(AsmTypes)" />
     <ProjectReference Include="$(AsmModels)" />    
     <ProjectReference Include="$(WorkflowCore)" />

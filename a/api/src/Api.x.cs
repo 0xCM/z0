@@ -11,6 +11,7 @@ namespace Z0
 
     partial class XTend
     {
+
         /// <summary>
         /// Searches an assembly for api host types
         /// </summary>

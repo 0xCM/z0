@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Api;
+    using static Seed;
 
     public interface IBinaryCode<T> : IFormattable<BinaryCode>, INullary<BinaryCode>, IEquatable<BinaryCode>, ILengthwise, IByteSpanProvider<BinaryCode>
         where T : IBinaryCode<T>

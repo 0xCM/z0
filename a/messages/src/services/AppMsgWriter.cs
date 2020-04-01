@@ -6,23 +6,15 @@ namespace Z0
 {
     using System;
     using System.IO;
-
-    using static Core;
+    using System.Threading;
     
-    public static class AppServices
-    {
-        public static IAppMsgWriter OpenAppMsgLog(this IContext context, FilePath target, string devname = null, 
-            FileWriteMode mode = FileWriteMode.Overwrite, bool display = false)
-                => AppMsgWriter.Open(context, target, devname, mode, display);
-    }
-
-    public readonly struct AppMsgWriter : IAppMsgWriter
+    readonly struct AppMsgWriter : IAppMsgWriter
     {
         public static AppMsgWriter Open(IContext context, FilePath target, string name = null, 
             FileWriteMode mode = FileWriteMode.Overwrite, bool display = false, AppMsgColor? color = null)
         {
             var writer = target.CreateParentIfMissing().Writer(mode);
-            var devname = name ?? ("log" + increment(ref devid).ToString());
+            var devname = name ?? ("log" + Interlocked.Increment(ref devid).ToString());
             return new AppMsgWriter(context, writer, devname, display, color ?? AppMsgColor.Green);            
         }
 
@@ -34,7 +26,6 @@ namespace Z0
             this.Display = display;
             this.Color = color;
         }
-
 
         static int devid;        
 

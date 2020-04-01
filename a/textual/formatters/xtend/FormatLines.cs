@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Seed;
 
     partial class XTend
     {
@@ -17,7 +16,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         public static string FormatLines<T>(this ReadOnlySpan<T> src)
         {
-            var lines = text.build();
+            var lines = string.Empty.Build();
             for(var i=0; i<src.Length; i++)
                 lines.AppendLine(src[i].ToString());
             return lines.ToString();

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Linq;
 
     using static Seed;
@@ -17,7 +15,7 @@ namespace Z0
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = Chars.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
-            var builder = text.build();
+            var builder = string.Empty.Build();
             var pre = (specifier && prespec) ? "0x" : string.Empty;
             var post = (specifier && !prespec) ? "h" : string.Empty;
             var spec = HexFmtSpec(uppercase);
@@ -31,7 +29,7 @@ namespace Z0
                 var value = src[i].ToString(spec);
                 var padded = zpad ? value.PadLeft(2,AsciDigits.D0) : value;
 
-                builder.Append(text.concat(pre, padded, post));
+                builder.Append(string.Concat(pre, padded, post));
                 if(i != src.Length - 1)
                     builder.Append(sep);
                 

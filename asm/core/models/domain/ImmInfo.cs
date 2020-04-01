@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand

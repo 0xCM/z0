@@ -10,7 +10,6 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Core;
 
     public interface ICheckPrimalSeq : IValidator
     {

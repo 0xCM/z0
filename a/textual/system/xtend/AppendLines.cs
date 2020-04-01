@@ -8,10 +8,14 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Text;
+    using System.Linq;
     
     partial class XTend
     {
-        public static void AppendLines(this StringBuilder src, IEnumerable<string> lines)
-            => Streams.iter(lines, line => src.AppendLine(line));            
+        public static void AppendLines(this StringBuilder dst, IEnumerable<string> src)
+        {
+            foreach(var line in src)
+                dst.AppendLine(line);            
+        }
     }
 }

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static refs;
     using static As;
     using static HexSpecs;
 
@@ -58,7 +59,7 @@ namespace Z0
             where T : unmanaged
         {
             var spec = specifier ? HexSpecs.PreSpec : string.Empty;
-            return zpad ?  (spec + digits.PadLeft(size<T>() * 2, '0')) : (spec + digits);
+            return zpad ?  (spec + digits.PadLeft(Unsafe.SizeOf<T>() * 2, '0')) : (spec + digits);
         }
 
         /// <summary>

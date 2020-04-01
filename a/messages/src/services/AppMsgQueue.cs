@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
 
     /// <summary>
     /// A container of messages which isnt't realy a queue but is more-or-less thread-safe

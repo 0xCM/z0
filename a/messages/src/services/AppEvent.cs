@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     public readonly struct AppEvent : IFormattable<AppEvent>, IAppEvent<AppEvent,object>
     {
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         public string Format()
-            => text.concat(EventData, text.colon(), text.space(), EventData);
+            => string.Concat(EventData, CharText.Colon, CharText.Space, EventData);
 
         public override string ToString()
             => Format();
@@ -61,7 +61,7 @@ namespace Z0
         }
 
         public string Format()
-            => text.concat(EventData, text.colon(), text.space(), EventData);
+            => string.Concat(EventData, CharText.Colon, CharText.Space, EventData);
 
         public override string ToString()
             => Format();

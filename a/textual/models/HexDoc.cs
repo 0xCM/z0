@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     public readonly struct HexDoc
     {        
@@ -30,8 +30,8 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
-                return none<FilePath>();
+                Console.Error.WriteLine(e);
+                return Option.none<FilePath>();
             }
         }
     }

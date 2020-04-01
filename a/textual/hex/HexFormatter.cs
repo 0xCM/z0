@@ -63,7 +63,7 @@ namespace Z0
 
         public string Format(ReadOnlySpan<T> src, in HexSeqFormatConfig seq, in HexFormatConfig hex)
         {            
-            var result = text.build();
+            var result = string.Empty.Build();
 
             for(var i = 0; i<src.Length; i++)
             {
@@ -78,7 +78,7 @@ namespace Z0
 
         public string Format(ReadOnlySpan<T> src, in HexSeqFormatConfig seq)
         {
-            var result = text.build();
+            var result = string.Empty.Build();
             var config = seq.HexFormat;
 
             for(var i = 0; i<src.Length; i++)

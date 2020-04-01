@@ -20,6 +20,8 @@ namespace Z0
     using System.Text;
     using System.Collections.Generic;
 
+    using static Seed;
+
     public static class Textual
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
@@ -48,16 +50,15 @@ namespace Z0
         internal static T? unvalued<T>()
             where T : struct
                 => (T?)null;
+
     }
 
     public static partial class XText    
     {
-        internal static StringBuilder builder()
-            => new StringBuilder();
+
     }
 
     public static partial class XTend
     {
-
     }
 }

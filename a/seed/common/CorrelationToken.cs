@@ -7,13 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
     using static IdentityShare;
-
-    public interface ICorrelated
-    {
-        CorrelationToken Correlation => CorrelationToken.Empty;
-    }
     
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
@@ -53,7 +48,7 @@ namespace Z0
             this.Identifier = value;
         }
 
-        public bool IsEmpty => empty(Identifier);
+        public bool IsEmpty => string.IsNullOrWhiteSpace(Identifier);
          
         [MethodImpl(Inline)]
         public bool Equals(CorrelationToken src)

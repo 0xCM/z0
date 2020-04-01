@@ -10,7 +10,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Linq;
     
-    using static root;
+    using static Core;
                  
     /// <summary>
     /// Defines a contiguous instruction sequence

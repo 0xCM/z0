@@ -77,7 +77,7 @@ namespace Z0
                 line.Append(Chars.Space);
             }
             var last = line.ToString();
-            if(last.IsNotBlank())
+            if(!string.IsNullOrWhiteSpace(last))
                 lines.Add(last);   
 
             builder.AppendLine();

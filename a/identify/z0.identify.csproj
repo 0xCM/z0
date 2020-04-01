@@ -10,6 +10,8 @@
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Errors)" />
+
   </ItemGroup>
 
 </Project>

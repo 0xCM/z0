@@ -9,8 +9,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
+    using static Textual;
+    
     partial class XTend
     {
+
         /// <summary>
         /// Formats a scalar stream as a hex string
         /// </summary>

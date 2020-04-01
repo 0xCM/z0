@@ -16,17 +16,6 @@ namespace Z0
 
     public static class AppErrorMsg
     {
-        public static IEnumerable<AppMsg> emit(IAppEnv context, IEnumerable<AppMsg> src)
-        {                    
-            var errors = src.Where(m => m.Kind == AppMsgKind.Error).FormatLines().ToArray();
-            if(errors.Length != 0)
-                context.Paths.StandardErrorPath.Append(errors);
-                                
-            var standard = src.Where(m => m.Kind != AppMsgKind.Error).FormatLines().ToArray();
-            if(standard.Length != 0)
-                context.Paths.StandardOutPath.Append(standard);
-            return src;
-        }
 
         public static AppMsg FeatureUnsupported(object feature, string caller, string file, int? line)
             => AppMsg.Define($"Unsupported: {feature}", AppMsgKind.Error, caller, file, line);

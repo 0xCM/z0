@@ -7,9 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Collective)" />    
-    <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Errors)" />
     <ProjectReference Include="$(Numeric)" />
   </ItemGroup>

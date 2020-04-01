@@ -4,14 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IAppService : IService<IAppContext>
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public interface ICorrelated
     {
-         
-    }     
-
-
-    public interface IAppServiceAlloction : IAppService, IServiceAllocation<IAppContext>
-    {
-
+        CorrelationToken Correlation => CorrelationToken.Empty;
     }
 }

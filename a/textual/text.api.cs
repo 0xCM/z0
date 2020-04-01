@@ -12,7 +12,7 @@ namespace Z0
     using System.Text.RegularExpressions;
     using System.Text;
 
-    using static Core;
+    using static Seed;
 
     public static partial class text
     {

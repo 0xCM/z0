@@ -12,6 +12,24 @@ namespace Z0
     
     using static TestLib;    
     
+    public static class MessageEmission
+    {
+        public static IEnumerable<AppMsg> SaveMessages(this IAppEnv context, IEnumerable<AppMsg> src)
+        {                    
+            var errors = src.Where(m => m.Kind == AppMsgKind.Error).FormatLines().ToArray();
+            if(errors.Length != 0)
+                context.Paths.StandardErrorPath.Append(errors);
+                                
+            var standard = src.Where(m => m.Kind != AppMsgKind.Error).FormatLines().ToArray();
+            if(standard.Length != 0)
+                context.Paths.StandardOutPath.Append(standard);
+            return src;
+        }
+
+        internal static IEnumerable<AppMsg> Save(this IEnumerable<AppMsg> src, IAppEnv dst)
+            => SaveMessages(dst, src);                            
+    }
+
     /// <summary>
     /// Base type for test applications
     /// </summary>
@@ -302,7 +320,7 @@ namespace Z0
             }
             finally
             {            
-                AppErrorMsg.emit(Context, messages);
+                messages.Save(Context);
                 Streams.iter(messages.Where(m => !m.Displayed), term.print);
             }
 
@@ -346,7 +364,7 @@ namespace Z0
             }
             finally
             {     
-                AppErrorMsg.emit(Context, collected);
+                collected.Save(Context);
                 Streams.iter(collected.Where(m => !m.Displayed), term.print);       
                 //print(messages);
             }

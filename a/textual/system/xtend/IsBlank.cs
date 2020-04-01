@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     partial class XTend
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="s">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool IsBlank(this string s)
-            => empty(s);
+            => text.empty(s);
 
         /// <summary>
         /// Returns true if a string has at least one character that is not considered whitespace
@@ -25,6 +25,6 @@ namespace Z0
         /// <param name="s">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool IsNotBlank(this string s)
-            => nonempty(s);
+            => text.nonempty(s);
     }
 }

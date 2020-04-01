@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     /// <summary>
     /// Encapsulates a block of encoded assembly
@@ -95,13 +93,6 @@ namespace Z0
             get => ApiCode.Define(Id, Data.Bytes);
         }
 
-        /// <summary>
-        /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
-        /// </summary>
-        /// <param name="data">The encoded assembly</param>
-        /// <param name="id">The identity to confer</param>
-        public static AsmCode Parse(OpIdentity id, string data)
-            => Define(id, MemoryExtract.Define(HexParser.parsebytes(data).ToArray()));
                 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)

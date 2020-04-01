@@ -34,7 +34,7 @@ namespace Z0
 
             var rowlen = colcount;
             var cells = rowcount * colcount;            
-            var sb = text.factory.Builder();
+            var sb = string.Empty.Build();
             var lastIx = cells - 1;
             var nextrow = rowsep ?? lf;
             var nextcell = cellsep ?? pipe;

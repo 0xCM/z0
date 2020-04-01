@@ -6,14 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Collections.Generic;
-    using System.Security;
-
-    public interface IMessageSource<M> : ICallbackSouce<M>
-        where M : ICustomFormattable
-    
-    {
-
-    }
 
     public interface IMessageSink<M> : ISink<M>
         where  M : IAppMsg
@@ -37,23 +29,4 @@ namespace Z0
         void ISink<M>.Accept(in M src)
             => Notify(src);        
     }
-
-    public interface IMessageQueue<M> : IMessageSink<M>, ICallbackSouce<M>
-        where M : IAppMsg
-    {
-        IReadOnlyList<M> Dequeue();       
-
-        void Emit(FilePath dst);         
-    }
-
-    public interface IMessageLog<M> : IMessageSink<M>
-        where M : IAppMsg
-    {
-        void Write(IEnumerable<M> src);
-        
-        void Write(M src);
-
-        void ISink<M>.Accept(in M src)
-            => Write(src);
-    }        
 }

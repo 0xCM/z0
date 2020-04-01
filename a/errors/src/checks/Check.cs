@@ -15,7 +15,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Core;
+    using static Seed;
     using static AppErrorMsg;    
     
     public readonly struct Claim : ICheck<Claim>
@@ -334,7 +334,7 @@ namespace Z0
         {
             var count = Claim.length(lhs,rhs);
             for(var i=0; i<count; i++)
-                if(skip(lhs, i) != skip(rhs, i))
+                if(refs.skip(lhs, i) != refs.skip(rhs, i))
                     return false;
             return true;
         }      
