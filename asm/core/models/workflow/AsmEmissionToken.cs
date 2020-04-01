@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
+    using static Core;    
 
     public interface IAsmEmissionToken :  IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>, IFormattable<AsmEmissionToken>
     {

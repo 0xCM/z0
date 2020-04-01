@@ -29,7 +29,7 @@ namespace Z0.Asm
                 this.Context = context;
             }
 
-            BrokerAcceptance<E> AcceptSink<S,E>(S sink, E model)
+            BrokeredMessage<E> AcceptSink<S,E>(S sink, E model)
                 where E : IAppEvent
                 where S : IAppEventSink
             {
@@ -39,10 +39,10 @@ namespace Z0.Asm
                     return (false, AppMsg.Warn($"Key for {model} was previously specified added for {sink}"));
             }
             
-            BrokerAcceptance<E> IAppEventBroker.AcceptSink<S, E>(S sink, E model)
+            BrokeredMessage<E> IAppEventBroker.AcceptSink<S, E>(S sink, E model)
                 => AcceptSink(sink,model);
 
-            public BrokerAcceptance<E> AcceptReceiver<E>(Action<E> receiver, E model = default)
+            public BrokeredMessage<E> AcceptReceiver<E>(Action<E> receiver, E model = default)
                 where E : IAppEvent                 
             {
                 var sink = AppEventReceiverSink.From(receiver);

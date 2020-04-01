@@ -6,9 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    
+    using static Core;
 
-    using static root;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public static class WorkflowStep
     {

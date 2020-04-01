@@ -62,8 +62,7 @@ namespace Z0.Asm
             => src == OpKind.Immediate8to16  
             || src == OpKind.Immediate8to32  
             || src == OpKind.Immediate8to64  
-            || src == OpKind.Immediate32to64 
-             ;
+            || src == OpKind.Immediate32to64;
 
         /// <summary>
         /// Determines whether the classified operand is an 8-bit, 16-bit, 32-bit or 64-bit constant
@@ -75,8 +74,7 @@ namespace Z0.Asm
             => src == OpKind.Immediate8
             || src == OpKind.Immediate16
             || src == OpKind.Immediate32
-            || src == OpKind.Immediate64
-            ;
+            || src == OpKind.Immediate64;
 
         /// <summary>
         /// Determines whether the classified operand is an immediate of some sort
@@ -97,8 +95,7 @@ namespace Z0.Asm
             || src == OpKind.MemorySegESI
             || src == OpKind.MemorySegRDI
             || src == OpKind.MemorySegRSI
-            || src == OpKind.MemorySegSI
-            ;
+            || src == OpKind.MemorySegSI;
 
         /// <summary>
         /// Determines whether the classified operand is an ES ("extra") memory segment.

@@ -37,10 +37,6 @@ namespace Z0
         internal static int size<T>()
             => Unsafe.SizeOf<T>();
 
-        [MethodImpl(Inline)]
-        internal static NatVal natval<K>(K n = default)
-            where K : unmanaged, ITypeNat
-                => NatVal.From(default(K).NatValue);
     }
 
     public static partial class XTend

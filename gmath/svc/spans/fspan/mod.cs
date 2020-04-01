@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static gfp;    
+    using static Core;
         
     partial class fspan
     {                
@@ -15,9 +15,12 @@ namespace Z0
         public static Span<T> mod<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
-            var count = lhs.Length;
+            var count = math.min(lhs.Length, dst.Length);
+            ref readonly var a = ref head(lhs);
+            ref readonly var b = ref head(rhs);
+            ref var c = ref head(dst);
             for(var i = 0; i< count; i++)
-                dst[i] = gfp.mod(lhs[i], rhs[i]);
+                seek(ref c, i) = gfp.mod(skip(a, i), skip(b, i));
             return dst;
         }
     }

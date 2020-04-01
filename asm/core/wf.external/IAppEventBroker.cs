@@ -11,14 +11,13 @@ namespace Z0
 
     using static root;
 
-
     public interface IAppEventBroker
     {
-        BrokerAcceptance<E> AcceptSink<S,E>(S sink, E model = default)
+        BrokeredMessage<E> AcceptSink<S,E>(S sink, E model = default)
             where E : IAppEvent
             where S : IAppEventSink<E>;
 
-        BrokerAcceptance<E> AcceptReceiver<E>(Action<E> receiver, E model = default)
+        BrokeredMessage<E> AcceptReceiver<E>(Action<E> receiver, E model = default)
             where E : IAppEvent;        
     }
 

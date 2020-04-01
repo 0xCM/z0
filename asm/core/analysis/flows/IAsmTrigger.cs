@@ -18,6 +18,7 @@ namespace Z0.Asm
 
         void FireOnMatch(S src);
     }
+    
     public interface IAsmInstructionTrigger : IAsmTrigger<Instruction>
     {
 
@@ -29,12 +30,13 @@ namespace Z0.Asm
         
         void FireOnMatch(AsmFunction function);
     }
+
     public interface IAsmInstructionPipe
     {
         AsmInstructionList Flow(AsmInstructionList instruction);
     }
 
-    public interface IAsmInstructionFlow
+    public interface IAsmInstructionFlow : IAsmService
     {
         IEnumerable<AsmInstructionList> Flow(IAsmInstructionPipe pipe);
     }
@@ -44,9 +46,6 @@ namespace Z0.Asm
         
     }
 
-    public interface IAsmInstructionSource
-    {
-        IEnumerable<AsmInstructionList> Instructions {get;}
-    }
+
 }
 

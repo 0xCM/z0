@@ -39,5 +39,15 @@ namespace Z0
         [MethodImpl(Inline)]       
         public static NatSeq reflect(ulong value)        
             => seq(digits(value));        
+
+
+        [MethodImpl(Inline)]
+        internal static int bitsize<T>()            
+            => Unsafe.SizeOf<T>()*8;
+
+        [MethodImpl(Inline)]
+        internal static int size<T>()
+            => Unsafe.SizeOf<T>();
+
     }
 }

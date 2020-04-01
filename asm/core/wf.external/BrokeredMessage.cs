@@ -9,45 +9,45 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static root;
+    using static Core;
 
     public static class AppEventBrokerOps
     {
         [MethodImpl(Inline)]
-        public static BrokerAcceptance<E> Receive<E>(this E e, IAppEventBroker broker, Action<E> receiver)
+        public static BrokeredMessage<E> Receive<E>(this E e, IAppEventBroker broker, Action<E> receiver)
             where E : IAppEvent
                 => broker.AcceptReceiver(receiver);        
     }
 
-    public readonly struct BrokerAcceptance<E>
+    public readonly struct BrokeredMessage<E>
         where E : IAppEvent        
     {
         public readonly bool Accepted;
 
         public readonly AppMsg Message;
 
-        public static implicit operator BrokerAcceptance<E>(bool accepted)
-            => new BrokerAcceptance<E>(accepted);
+        public static implicit operator BrokeredMessage<E>(bool accepted)
+            => new BrokeredMessage<E>(accepted);
         
-        public static implicit operator BrokerAcceptance<E>((bool accepted, AppMsg msg) src)
-            => new BrokerAcceptance<E>(src.accepted, src.msg);
+        public static implicit operator BrokeredMessage<E>((bool accepted, AppMsg msg) src)
+            => new BrokeredMessage<E>(src.accepted, src.msg);
 
-        public static bool operator true(BrokerAcceptance<E> src)
+        public static bool operator true(BrokeredMessage<E> src)
             => src.Accepted == true;
 
-        public static bool operator false(BrokerAcceptance<E> src)
+        public static bool operator false(BrokeredMessage<E> src)
             => src.Accepted == false;
 
-        public static implicit operator bool(BrokerAcceptance<E> src)
+        public static implicit operator bool(BrokeredMessage<E> src)
             => src.Accepted;
 
-        BrokerAcceptance(bool accepted)
+        BrokeredMessage(bool accepted)
         {
             this.Accepted = accepted;
             this.Message = DefaultMsg(accepted);
         }
 
-        BrokerAcceptance(bool accepted, AppMsg msg)
+        BrokeredMessage(bool accepted, AppMsg msg)
         {
             this.Accepted = accepted;            
             this.Message = msg.IsEmpty ? DefaultMsg(accepted) : msg;

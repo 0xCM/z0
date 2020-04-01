@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
             
     public readonly struct StepEnd<T> : ITimeStamped, IAppEvent<StepEnd<T>, T>
     {        
@@ -41,6 +41,5 @@ namespace Z0
         
         public override string ToString()
             => Format();        
-
     }
 }

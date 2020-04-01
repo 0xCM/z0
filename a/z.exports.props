@@ -1,11 +1,11 @@
 ﻿<Project>
 
   <ItemGroup>
+    <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Components)" />
     <ProjectReference Include="$(Custom)" />
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Errors)" />
@@ -23,6 +23,7 @@
     <ProjectReference Include="$(Messages)" />
     <ProjectReference Include="$(Cast)" />
     <ProjectReference Include="$(Interval)" />
+    <ProjectReference Include="$(Typed)" />
   </ItemGroup>
 
 </Project>

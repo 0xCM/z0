@@ -26,6 +26,7 @@
     <Textual>$(Feeders)texting/z0.texting.csproj</Textual>
     <Time>$(Feeders)time/z0.time.csproj</Time>
     <Tuples>$(Feeders)tuples/z0.tuples.csproj</Tuples>
+    <Typed>$(Feeders)typed/z0.typed.csproj</Typed>
 
   </PropertyGroup>
 

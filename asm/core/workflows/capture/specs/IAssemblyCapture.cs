@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    
     using static AsmWorkflowReports;
     
     public interface IAssemblyCapture : IAsmService

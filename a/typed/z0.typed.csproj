@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Components)" />
-    <ProjectReference Include="$(Typed)" />
   </ItemGroup>
 
 </Project>

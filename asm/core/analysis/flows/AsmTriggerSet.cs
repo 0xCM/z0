@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;
 
     public readonly struct AsmTriggerSet : IAsmTriggerSet, INullary<AsmTriggerSet>
     {

@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    using static root;
+    using static Core;
 
     public class AsmContextData
     {
@@ -34,6 +34,5 @@ namespace Z0.Asm
         public IPolyrand Random {get;}
 
         public AsmFormatConfig AsmFormat {get;}
-
     }
 }

@@ -28,9 +28,6 @@ bash $Cmd
 export ProjectId=memories
 bash $Cmd
 
-export ProjectId=monadic
-bash $Cmd
-
 export ProjectId=numeric
 bash $Cmd
 
@@ -64,13 +61,13 @@ bash $Cmd
 export ProjectId=graphs
 bash $Cmd
 
-export ProjectId=polyrand
-bash $Cmd
-
 export ProjectId=messages
 bash $Cmd
 
 export ProjectId=interval
+bash $Cmd
+
+export ProjectId=typed
 bash $Cmd
 
 export ProjectId=z

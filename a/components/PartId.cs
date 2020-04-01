@@ -240,6 +240,8 @@ public enum PartId : ulong
 
     Interval = 844,
 
+    Typed = 846,
+
     Z = 1024,
 
     Svc = ushort.MaxValue + 1,
