@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Literals;   
+    using static Core;
 
     partial class gmath
     {
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), True, NumericClosures(NumericKind.Integers)]
         public static T @true<T>()
             where T:unmanaged
-                => ones<T>();
+                => Literals.ones<T>();
 
         [MethodImpl(Inline), True, NumericClosures(NumericKind.Integers)]
         public static T @true<T>(T a)

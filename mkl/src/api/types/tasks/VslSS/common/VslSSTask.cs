@@ -8,8 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
     
     using static Core;
-    using static Literals;
-    using static MklCommon;
 
     public interface IVslSSTask<T> : IMklTask<T>
         where T : unmanaged

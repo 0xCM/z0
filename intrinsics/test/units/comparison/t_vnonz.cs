@@ -8,7 +8,6 @@ namespace Z0
     
     using static Core;
     using static vgeneric;
-    using static Literals;
 
     public class t_vnonz : t_vinx<t_vnonz>
     {

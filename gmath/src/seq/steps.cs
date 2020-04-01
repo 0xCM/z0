@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static refs; 
-    using static CastNumeric;   
-
+    using static Core; 
+       
     partial class gmath
     {
         /// <summary>

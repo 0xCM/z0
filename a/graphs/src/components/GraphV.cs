@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Graphs;
-    using static CastNumeric;
+    using static Core;
 
     /// <summary>
     /// Defines a directed graph parameterized by the vertex index type

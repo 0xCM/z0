@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static CastNumeric;    
+                
+    using static Core;
 
     partial class gmath
     {
@@ -16,5 +16,4 @@ namespace Z0
             where T : unmanaged
                 => math.ispow2(convert<T,ulong>(src));
     }
-
 }

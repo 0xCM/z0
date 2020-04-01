@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
+    using static Core;
     using static As;
 
     partial class gmath

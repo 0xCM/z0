@@ -11,9 +11,8 @@ namespace Z0
     [ApiHost("api", ApiHostKind.Generic)]
     public static partial class gmath
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
-        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;        
+        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+          
     }
 
 }

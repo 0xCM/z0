@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static Core;
-    using static Literals;
                 
     public class t_bitview : t_bitcore<t_bitview>
     {

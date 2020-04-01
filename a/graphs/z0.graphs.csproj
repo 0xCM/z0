@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Collective)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Numeric)" />
   </ItemGroup>
 

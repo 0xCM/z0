@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
+    using static Core;
+
     partial class gmath
     {        
         /// <summary>

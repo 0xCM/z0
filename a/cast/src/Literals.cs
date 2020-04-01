@@ -208,7 +208,7 @@ namespace Z0
                 => ones_u<T>();
 
         /// <summary>
-        /// Returns the minimum value for a primal source type
+        /// Returns the minimum value supported by a parametrically-identified primal type
         /// </summary>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
@@ -235,7 +235,7 @@ namespace Z0
                 => minval<T>();
 
         /// <summary>
-        /// Returns the maximum value for a primal source type
+        /// Returns the maximim value supported by a parametrically-identified primal type
         /// </summary>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]

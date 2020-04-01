@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Seed;
-    using static As;
     using static CastNumeric;
-
+    using static As;
+    
     partial class Numeric
     {
         [MethodImpl(Inline)]

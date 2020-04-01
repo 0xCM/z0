@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static gmath;
     using static refs;
 
     public static class XGSpan
@@ -18,7 +17,7 @@ namespace Z0
         /// <param name="xs">The left span</param>
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bit Identical<T>(this Span<T> xs, Span<T> ys)  
             where T : unmanaged       
         {            
@@ -33,7 +32,7 @@ namespace Z0
         /// <param name="xs">The left span</param>
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bit Identical<T>(this ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)  
             where T : unmanaged       
         {

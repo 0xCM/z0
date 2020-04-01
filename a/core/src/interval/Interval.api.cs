@@ -9,7 +9,7 @@ namespace Z0
     
     using static Seed;
 
-    partial class Interval
+    public static class Interval
     {
         /// <summary>
         /// Defines an open interval (min,max)

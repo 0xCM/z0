@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Core;
-    using static CastNumeric;
+    
 
     public class Histogram
     {

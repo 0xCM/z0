@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Memories;
+    using static Seed;
     using static As;
 
     [ApiHost("as.numeric", ApiHostKind.Generic)]

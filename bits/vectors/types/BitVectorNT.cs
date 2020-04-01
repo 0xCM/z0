@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;        
-    using static CastNumeric;
+    
 
     /// <summary>
     /// Defines a natural bitvector over a primal cell

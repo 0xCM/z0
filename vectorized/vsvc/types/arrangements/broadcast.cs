@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Core;
-    using static CastNumeric;
+    
 
     partial class VSvcHosts
     {

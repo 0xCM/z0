@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
 	/// <summary>
 	/// Represents a complex value with signed 64-bit integer components

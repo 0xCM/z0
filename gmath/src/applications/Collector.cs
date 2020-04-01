@@ -9,9 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static gmath;
-    using static refs;
-    using static CastNumeric;
+    using static Core;    
     using static As;
 
     /// <summary>

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static CastNumeric;
+    
     using S = Surrogates;
 
     public class t_arithmetic : t_gmath<t_arithmetic>

@@ -21,8 +21,6 @@ namespace Z0
 
     public static partial class Graphs
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
-
         public const string Connector = " -> ";
     }
 

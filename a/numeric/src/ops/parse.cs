@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
     using static CastNumeric;
-
+    
     partial class Numeric
     {
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
@@ -22,19 +22,19 @@ namespace Z0
             where T : unmanaged
                 => parse(src, out T dst) ? dst : ParseError<T>(src);
 
-        /// <summary>
-        /// Attempts to parse the source text as a parametrically-identified type
-        /// </summary>
-        /// <param name="src">The source text</param>
-        [MethodImpl(Inline)]
-        public static ParseResult<T> TryParse<T>(string src)
-            where T : unmanaged
-        {
-            if(parse(src, out T dst))
-                return ParseResult.Success(src,dst);
-            else
-                return ParseResult.Fail<T>(src);
-        }
+        // /// <summary>
+        // /// Attempts to parse the source text as a parametrically-identified type
+        // /// </summary>
+        // /// <param name="src">The source text</param>
+        // [MethodImpl(Inline)]
+        // public static ParseResult<T> TryParse<T>(string src)
+        //     where T : unmanaged
+        // {
+        //     if(parse(src, out T dst))
+        //         return ParseResult.Success(src,dst);
+        //     else
+        //         return ParseResult.Fail<T>(src);
+        // }
 
         static T ParseError<T>(string src)
             where T : unmanaged

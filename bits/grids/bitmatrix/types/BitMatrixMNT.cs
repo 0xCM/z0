@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static Literals;
 
     /// <summary>
     /// Defines bitmatrix of natural dimensions over a primal type

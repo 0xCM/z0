@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Interval)" />
+
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Numeric)" />
   </ItemGroup>

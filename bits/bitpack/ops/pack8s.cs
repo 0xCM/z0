@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     
-    using static As;
-    using static CastNumeric;
+    using static As;    
     using static Core;
 
     partial class BitPack

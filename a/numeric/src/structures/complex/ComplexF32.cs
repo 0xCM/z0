@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
 	/// <summary>
 	/// Represents a 32-bit floating point complex number
@@ -16,7 +16,6 @@ namespace Z0
 	[StructLayout(LayoutKind.Sequential,CharSet=CharSet.Ansi)]
 	public struct ComplexF32 : IEquatable<ComplexF32>
 	{
-
 		/// <summary>
 		/// Loads a span of span of complext values from a source span where adjacent 
 		/// entries (i,i+j) are interpreted respectively as real and imaginary components

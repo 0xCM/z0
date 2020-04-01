@@ -18,12 +18,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static refs;
+    using static Core;
 
     public static partial class SFuncs
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
         [MethodImpl(Inline)]
         public static void iter<F>(F f, int count)
             where F : ISAction<int>
@@ -39,6 +37,5 @@ namespace Z0
             for(var i=0; i<count; i++)
                 seek(ref dst, i) = f.Invoke(skip(src, i));                
         }
-
     }
 }

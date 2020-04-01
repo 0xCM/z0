@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
+    using static Core;
+
     partial class BitCoreServices
     {
         public readonly struct BitSlice<T> : ISImm8x2UnaryOpApi<T>

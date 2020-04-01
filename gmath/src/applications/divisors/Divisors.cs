@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
 
-    using static gmath;
+    using static Core;
         
     public readonly struct Divisors<T> 
         where T : unmanaged

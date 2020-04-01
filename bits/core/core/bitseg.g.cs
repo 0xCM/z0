@@ -9,7 +9,6 @@ namespace Z0
 
     using static Core;
     using static As;
-    using static Literals;
     
     partial class gbits
     {    

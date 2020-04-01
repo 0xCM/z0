@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Literals;
     using static Core;
     using static vgeneric;
 

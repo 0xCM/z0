@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Security;
     
-    using static SFuncs;
+    using static Core;
 
     public static partial class Surrogates
     {

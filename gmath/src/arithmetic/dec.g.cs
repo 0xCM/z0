@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static CastNumeric;    
+        
     using static As;
-
+    using static Core;
+    
     partial class gmath
     {
         [MethodImpl(Inline), Dec, NumericClosures(NumericKind.Integers)]

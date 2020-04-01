@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
 
-    using static Core;
+    using static Seed;
 
     using prim = System.Int32;
     using analog = int32_t;

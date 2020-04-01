@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Core;
-    using static CastNumeric;
+    
 
     partial class XRng
     {        

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static Literals;
 
     partial class XRng
     {        

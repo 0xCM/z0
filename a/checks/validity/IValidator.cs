@@ -43,5 +43,4 @@ namespace Z0
     {
         void neq(T a, T b);
     }
-
 }

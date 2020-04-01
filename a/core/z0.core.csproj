@@ -14,5 +14,8 @@
     <ProjectReference Include="$(Textual)" />
     <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(Messages)" />
+    <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Checks)" />
+    <ProjectReference Include="$(Numeric)" />
   </ItemGroup>
 </Project>

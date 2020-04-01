@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static CastNumeric;    
+                
+    using static Core;
     using static As;
-    using static Literals;
 
     partial class gmath
     {

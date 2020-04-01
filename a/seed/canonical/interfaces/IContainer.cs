@@ -361,6 +361,26 @@ namespace Z0
         
     }            
 
+    /// <summary>
+    /// Characterizes a suject that is in correspondece with an index-identified sequence element
+    /// </summary>
+    public interface ISequential
+    {
+        /// <summary>
+        /// The sequence index
+        /// </summary>
+        int Index {get;}
+    }
+
+    /// <summary>
+    /// Characterizes a reified sequential
+    /// </summary>
+    public interface ISequential<T> : ISequential
+        where T: ISequential<T>, new()
+    {
+
+    }
+
     public interface ISeq<T> : IItemContainer<T>
     {        
 

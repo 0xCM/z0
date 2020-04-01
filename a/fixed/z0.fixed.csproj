@@ -6,16 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(Polyrand)" />
-    
-    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Interval)" />
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Kinds)" />
-    <ProjectReference Include="$(Textual)" />
   </ItemGroup>
 
 </Project>

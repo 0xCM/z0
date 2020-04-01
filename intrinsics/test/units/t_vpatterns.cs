@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
     
-    using static Literals;
     using static Core;
 
     public class t_vpatterns : t_vinx<t_vpatterns>
     {
-
         public void vunits_check()
         {
             vunits_check(n128);

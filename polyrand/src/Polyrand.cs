@@ -6,9 +6,7 @@ namespace Z0
 
     using static Core;
     using static As;
-    using static CastNumeric;
-    using static Literals;
-
+    
     /// <summary>
     /// Produces pseudorandom numeric points and streams predicated on a supplied generator
     /// </summary>

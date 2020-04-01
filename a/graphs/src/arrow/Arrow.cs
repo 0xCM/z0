@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
+    using static Core;
     using static Graphs;
 
     public interface IArrow<A> : ICustomFormattable, ILengthwise

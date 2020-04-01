@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static CastNumeric;
-
+    
     public class t_vgather : t_vinx<t_vgather>
     {
         const int BufferSize = 1024*8;

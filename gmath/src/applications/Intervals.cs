@@ -8,9 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
        
-    using static gmath;
-    using static CastNumeric;
-
+    using static Core;    
+    
     public static class IntervalOps
     {
         /// <summary>
