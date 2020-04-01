@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
         
-    using static Components;
+    using static Seed;
 
     [ApiHost]
     public static class refs

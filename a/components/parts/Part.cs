@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    using static Components;
+    using static Seed;
 
     public static class Part
     {

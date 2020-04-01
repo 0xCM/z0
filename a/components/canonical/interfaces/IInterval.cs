@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Components;
+    using static Seed;
 
     /// <summary>
     /// Characterizes a contiguous segment of homogenous values that lie within

@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
-    using static Components;
+    using static Seed;
     using static As;
     
     partial class ToNumeric

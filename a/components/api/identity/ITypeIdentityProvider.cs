@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static Components;
+    using static Seed;
 
     public interface ITypeIdentityProvider : IIdentityProvider<Type,TypeIdentity>
     {

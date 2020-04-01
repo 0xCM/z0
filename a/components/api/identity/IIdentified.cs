@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Components;
+    using static Seed;
 
     /// <summary>
     /// Enumerates the identifiable things

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Components;
+    using static Seed;
 
     public interface IClrTypeModel : IClrArtifact<Type>
     {

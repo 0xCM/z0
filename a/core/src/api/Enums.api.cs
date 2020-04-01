@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Linq;
 
-    using static Components;
+    using static Seed;
 
     public static partial class Enums
     {

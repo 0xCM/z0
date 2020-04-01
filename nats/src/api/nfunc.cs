@@ -6,7 +6,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 using Z0;
-using static Z0.Components;
+using static Z0.Seed;
 
 static class nfunc
 {

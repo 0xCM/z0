@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Components;
+    using static Seed;
 
     /// <summary>
     /// Represents a relative folder name

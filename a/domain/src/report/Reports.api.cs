@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Components;
+    using static Seed;
 
     public static class Reports
     {

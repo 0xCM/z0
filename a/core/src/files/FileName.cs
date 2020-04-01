@@ -8,7 +8,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Components;
+    using static Seed;
 
     /// <summary>
     /// Defines a file name along with the extension in isolation 

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Components;
+    using static Seed;
 
     /// <summary>
     /// Describes an embedded data resource

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Components;
+    using static Seed;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source

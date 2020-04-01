@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
 
     using static nfunc;
-    using static Components;    
+    using static Seed;    
 
     partial class NatClaim
     {

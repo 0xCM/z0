@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Components;
+    using static Seed;
 
     /// <summary>
     /// Encodes a natural number k := b^e

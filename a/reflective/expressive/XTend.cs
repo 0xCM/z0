@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Components;
+    using static Seed;
 
     using XPR = System.Linq.Expressions.Expression;
 

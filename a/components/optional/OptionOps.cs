@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Components;
+    using static Seed;
     using static Option;
 
     partial class XTend

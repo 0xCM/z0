@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static As;
-    using static Components;
+    using static Seed;
 
     partial class Numeric
     {

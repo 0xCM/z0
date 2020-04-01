@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     
-    using static Components;
+    using static Seed;
     
     /// <summary>
     /// Defines power-of-2 literals raning from 2^0 - 2^63

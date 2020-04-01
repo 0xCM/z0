@@ -10,7 +10,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Components;
+    using static Seed;
 
     partial class Core
     {

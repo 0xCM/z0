@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Components;
+    using static Seed;
 
     partial class NatClaim
     {    

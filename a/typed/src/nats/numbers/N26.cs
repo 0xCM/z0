@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Components;    
+    using static Seed;    
 
     public readonly struct N26 : INatSeq<N26,N2,N6>
     {

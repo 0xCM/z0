@@ -13,7 +13,7 @@ namespace Z0
     using NI = NumericIndicator;
     using FW = FixedWidth;
 
-    using static Components;
+    using static Seed;
 
     public static class NumericTypes
     {            

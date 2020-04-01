@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Collections;
 
-    using static Components;
+    using static Seed;
 
     public readonly struct EnumLiterals<E> : IEnumerable<EnumLiteral<E>>
         where E : unmanaged, Enum        

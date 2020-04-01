@@ -11,7 +11,7 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Runtime.InteropServices;
 
-    using static Components;
+    using static Seed;
 
     partial class Core
     {

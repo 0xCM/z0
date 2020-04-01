@@ -10,7 +10,7 @@ namespace Z0
     using System.Text;
     using System.Linq;
 
-    using static Components;
+    using static Seed;
 
     partial class XTend
     {

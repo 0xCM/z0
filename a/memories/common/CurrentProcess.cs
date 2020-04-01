@@ -12,7 +12,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Security;
 
-    using static Components;
+    using static Seed;
 
     /// <summary>
     /// Surfaces information about the currently executing process
