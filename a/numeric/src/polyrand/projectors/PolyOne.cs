@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    partial class XRng
+    public static class PolyOne
     {        
         /// <summary>
         /// Produces a single random value

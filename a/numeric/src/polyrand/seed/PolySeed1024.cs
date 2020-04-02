@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Security.Cryptography;
 
-    public static class Seed1024
+    public static class PolySeed1024
     {
         static Guid[] FixedGuids = new Guid[]        
         {   

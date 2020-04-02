@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static Literals;
 
-    partial class XRng
+    public static class PolyZero
     {        
         /// <summary>
         /// Produces a stream of nonzero uniformly random values

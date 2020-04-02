@@ -34,7 +34,7 @@ namespace Z0
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
         {
             this.Context = this;            
-            this.Random = random ?? Polyrand.WyHash64(Seed64.Seed00);
+            this.Random = random ?? Polyrand.WyHash64(PolySeed64.Seed00);
             this.Config = config ?? TestConfigDefaults.Default();
             this.Next += BlackHole;
             this.Queue = AppMsgContext.Create();            

@@ -8,7 +8,7 @@ namespace Z0
         
     using static Interval;
     
-    public readonly struct RngDefaults : 
+    readonly struct SampleDefaults : 
         ISampleDefaults<sbyte>,
         ISampleDefaults<byte>,
         ISampleDefaults<short>,
@@ -20,7 +20,7 @@ namespace Z0
         ISampleDefaults<float>,
         ISampleDefaults<double>
     {
-        static readonly RngDefaults TheOnly = default;
+        static readonly SampleDefaults TheOnly = default;
 
         public static ISampleDefaults<T> get<T>()
             where T : unmanaged

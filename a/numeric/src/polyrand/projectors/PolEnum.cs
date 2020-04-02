@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    partial class XRng
-    {        
+    public static class PolEnum
+    {
         /// <summary>
         /// Produces a stream of values sampled from an enum
         /// </summary>
@@ -63,6 +63,7 @@ namespace Z0
             }
 
             return PolyStream.create(produce(), random.RngKind);
-        }
+        } 
     }
+
 }

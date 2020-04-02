@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    partial class XRng
+    public static class PolyRanged
     {        
         /// <summary>
         /// Produces a random closed interval [a,b] where a >= min and b < max

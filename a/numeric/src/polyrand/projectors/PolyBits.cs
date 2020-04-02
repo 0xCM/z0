@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial class XRng
+    public static class PolyBits
     {
         /// <summary>
         /// Produces an interminable stream of random bits
@@ -23,6 +23,14 @@ namespace Z0
                     yield return bit.test(data,i);
             }
         }
+
+        /// <summary>
+        /// Produces an interminable stream of random bits from a value sequence of parametric type
+        /// </summary>
+        /// <param name="random">The random source</param>
+        public static IEnumerable<bit> BitStream<T>(this IPolyrand random)
+            where T : unmanaged
+                => Z0.BitStream.from(random.Stream<T>());      
 
     }
 }

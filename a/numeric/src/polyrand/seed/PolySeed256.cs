@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Facilities deterministic/repeatable executions of pseudorandom processes
     /// </summary>
-    public static class Seed256
+    public static class PolySeed256
     {        
         static Guid[] guids = new Guid[]        
         {   

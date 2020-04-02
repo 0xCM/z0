@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="seed">The inital rng state</param>
         /// <param name="index">The stream index, if any</param>
         public static IRngNav<uint> Nav32(ulong? seed = null, ulong? index = null)
-            => Z0.Pcg32.Define(seed ?? Seed64.Seed00, index);        
+            => Z0.Pcg32.Define(seed ?? PolySeed64.Seed00, index);        
 
         /// <summary>
         /// Creates a 64-bit Pcg RNG suite predicated on an array of seed and stream indices

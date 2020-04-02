@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a permanent/immutable seed store to support pseudorandom reproducibility
     /// </summary>
-    public static class RngSeed
+    public static class PolySeed
     {
         /// <summary>
         /// Produces a non-deterministic seed

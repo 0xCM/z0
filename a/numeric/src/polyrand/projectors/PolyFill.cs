@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    partial class XRng
+    public static class PolyFill
     {
         /// <summary>
         /// Fills a caller-allocated target with a specified number of values from the source

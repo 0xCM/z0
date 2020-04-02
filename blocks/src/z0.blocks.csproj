@@ -7,8 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(Numeric)" />  
     <ProjectReference Include="$(Polyrand)" />  
 
   </ItemGroup>

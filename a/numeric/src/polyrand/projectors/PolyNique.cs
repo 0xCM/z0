@@ -12,7 +12,7 @@ namespace Z0
     using static Seed;
     using static CastNumeric;    
 
-    partial class XRng
+    public static class PolyNique
     {        
         /// <summary>
         /// Samples the source values without replacement

@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    partial class XRng
+    public static class PolyBytes
     {
         /// <summary>
         /// Produces an interminable stream of random bytes

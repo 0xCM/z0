@@ -99,7 +99,7 @@ namespace Z0
         {
             var sw = time.stopwatch();
             var variations = from i in Numeric.range(count) 
-                    let seed = Seed1024.Entropic
+                    let seed = PolySeed1024.Entropic
                     let evolve = TimeSeries.Evolve(seed, domain, steps)
                     let status = evolve.ContinueWith(t => receiver(t.Result))
                     select evolve;

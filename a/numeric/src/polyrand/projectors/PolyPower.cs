@@ -10,7 +10,7 @@ namespace Z0
     using static Seed;
     using static CastNumeric;
     
-    partial class XRng
+    public static class PolyPower
     {
         /// <summary>
         /// Produces a random power of 2 within the primal type domain

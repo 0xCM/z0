@@ -9,6 +9,7 @@ namespace Z0
 
     using static Seed;
 
+
     partial class XTend
     {
         /// <summary>
@@ -33,8 +34,5 @@ namespace Z0
                     return Numeric.gt(point, src.Left) && Numeric.lteq(point, src.Right);
             }
         }
-
-
-
     }
 }

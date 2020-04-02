@@ -9,7 +9,7 @@ namespace Z0
 
     using static Seed;
 
-    public static class Seed64
+    public static class PolySeed64
     {            
         static int Count => RawBytes.Length >> 3;
 

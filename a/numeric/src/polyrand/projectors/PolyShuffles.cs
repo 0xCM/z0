@@ -10,9 +10,8 @@ namespace Z0
     using static Seed;
     using static refs;
 
-    partial class XRng
+    public static class PolyShuffles
     {
-
         /// <summary>
         /// Shuffles span content in-place
         /// </summary>

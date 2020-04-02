@@ -11,30 +11,19 @@ namespace Z0
 
     using static Seed;
 
-    partial class XRng
-    {        
-        /// <summary>
-        /// Converts a polyrand to the pitiful System.Random
-        /// </summary>
-        /// <param name="random">The random source</param>
-        [MethodImpl(Inline)]
-        public static System.Random ToSysRand(this IPolyrand random)
-            => SysRand.From(random);
-    }
-
     /// <summary>
     /// Adapter for client code that expects to interface with the System.Random class
     /// </summary>
-    public class SysRand : System.Random
+    public class PolySystem : System.Random
     {
         /// <summary>
         /// Derives the system random rng from polyrand
         /// </summary>
         /// <param name="random">The source rng</param>
         public static System.Random From(IPolyrand random)
-            => new SysRand(random);
+            => new PolySystem(random);
 
-        public SysRand(IPolyrand random)
+        public PolySystem(IPolyrand random)
             => this.Random = random;
 
         readonly IPolyrand Random;

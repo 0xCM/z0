@@ -9,6 +9,8 @@
     <ProjectReference Include="$(Seed)" />
     <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Checks)" />
+    <ProjectReference Include="$(Tuples)" />
+
   </ItemGroup>
 
 </Project>
