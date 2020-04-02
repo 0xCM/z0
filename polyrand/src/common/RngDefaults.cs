@@ -5,8 +5,7 @@
 namespace Z0
 {
     using System;
-    
-    
+        
     using static Interval;
     
     public readonly struct RngDefaults : 

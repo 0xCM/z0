@@ -7,8 +7,7 @@ namespace Z0.Logix
 {
     using System;
     
-    using static root;
-    using static Gone;
+    using static Core;
 
     using static BitLogicSpec;
 

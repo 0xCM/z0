@@ -250,6 +250,8 @@ public enum PartId : ulong
     
     Flow = 850,
 
+    Enums = 852,
+
     Z = 1024,
 
     Svc = ushort.MaxValue + 1,

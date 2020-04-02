@@ -1,8 +1,9 @@
 ﻿<Project>
 
-  <ItemGroup>
+  <ItemGroup>    
     <ProjectReference Include="$(Core)" />
-
+    
+    <ProjectReference Include="$(Enums)" />  
     <ProjectReference Include="$(Apps)" />  
     <ProjectReference Include="$(Api)" />        
     <ProjectReference Include="$(Canonical)" />

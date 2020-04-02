@@ -73,5 +73,8 @@ bash $Cmd
 export ProjectId=reports
 bash $Cmd
 
+export ProjectId=enums
+bash $Cmd
+
 export ProjectId=z
 bash $Cmd

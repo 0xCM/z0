@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
 
     /// <summary>
     /// Defines pseudorandom number generator
@@ -24,7 +24,7 @@ namespace Z0
 
         public XOrShift128(ReadOnlySpan<uint> state)
         {
-            require(state.Length >= 4);
+            Control.require(state.Length >= 4);
             this.a = state[0];
             this.b = state[1];            
             this.c = state[2];

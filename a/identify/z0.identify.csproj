@@ -13,7 +13,6 @@
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Typed)" />
-
   </ItemGroup>
 
 </Project>

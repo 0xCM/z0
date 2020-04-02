@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Core;
+    using static Seed;
 
     public class AsmContextData
     {
@@ -19,10 +19,10 @@ namespace Z0.Asm
             this.AsmFormat = format;
             this.Settings = settings ?? AppSettings.Empty;
             
-            require(exchange != null);
+            Control.require(exchange != null);
             this.Messaging = exchange;
             
-            require(random != null);
+            Control.require(random != null);
             this.Random = random;
         }
 

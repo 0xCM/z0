@@ -19,9 +19,7 @@ namespace Z0
         /// <param name="f">The receiver</param>
         /// <typeparam name="T">The item type</typeparam>
         public static void iter<T>(IEnumerable<T> items, Action<T> action, bool pll = false)
-            => Streams.iter(items,action, pll);
-
-
+            => Control.iter(items,action, pll);
 
     }
 }

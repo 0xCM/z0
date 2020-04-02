@@ -11,6 +11,14 @@ namespace Z0
 
     public static partial class TypeNats
     {        
+        public static void require<N>(ulong src)
+            where N : unmanaged, ITypeNat
+                => Control.require(value<N>() == src, $"The source value {src} does not match the required natural value {value<N>()}");        
+
+        public static void require<N>(int src)
+            where N : unmanaged, ITypeNat
+                => require<N>((ulong)src);
+
         /// <summary>
         /// Defines a digit relative to a natural base
         /// </summary>

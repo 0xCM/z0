@@ -99,7 +99,6 @@ namespace Z0
         public static bool All(params IOption[] options)
             => options.All(o => o.IsSome);
 
-
         /// <summary>
         /// Invokes an action when all supplied options have value
         /// </summary>

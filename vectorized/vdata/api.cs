@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Collections.Generic;
     
-    using static root;    
+    using static Core;    
  
     [ApiHost("api")]
     public static partial class Data

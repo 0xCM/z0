@@ -15,6 +15,14 @@ namespace Z0
     public readonly struct BitSize
     {
         /// <summary>
+        /// Computes the bit-size of a parametric type
+        /// </summary>
+        /// <typeparam name="T">The type to measure</typeparam>
+        [MethodImpl(Inline)]
+        public static int measure<T>()
+            => Unsafe.SizeOf<T>()*8;
+
+        /// <summary>
         /// Specifies a bit count
         /// </summary>
         public readonly ulong Bits;

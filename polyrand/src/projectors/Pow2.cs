@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static CastNumeric;
     
     partial class XRng
     {
@@ -48,6 +49,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Pow2Exp<T>(this IPolyrand random, T t = default)
             where T : unmanaged
-                => random.Single(0, bitsize<T>());
+                => random.Single(0,  BitSize.measure<T>());
     }
 }

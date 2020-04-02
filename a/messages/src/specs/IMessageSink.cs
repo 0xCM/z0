@@ -13,7 +13,7 @@ namespace Z0
         void Notify(M msg);        
         
         void Notify(IEnumerable<M> msg)
-            => Streams.iter(msg,Notify);        
+            => Control.iter(msg,Notify);        
 
         void NotifyConsole(M msg, AppMsgColor color)
         {

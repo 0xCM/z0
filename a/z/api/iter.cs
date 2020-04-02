@@ -12,15 +12,6 @@ namespace Z0
     partial class root
     {            
         /// <summary>
-        /// Iterates over the supplied items, invoking a receiver for each
-        /// </summary>
-        /// <param name="src">The source items</param>
-        /// <param name="f">The receiver</param>
-        /// <typeparam name="T">The item type</typeparam>
-        public static void iter<T>(IEnumerable<T> items, Action<T> action, bool pll = false)
-            => Streams.iter(items,action, pll);
-
-        /// <summary>
         /// Inovkes an action for each pair of elements in source spans of equal length
         /// </summary>
         /// <param name="src">The source span</param>

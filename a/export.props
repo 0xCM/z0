@@ -16,6 +16,7 @@
     <Flow>$(Feeders)flow/z0.flow.csproj</Flow>
     <WorkflowCore>$(Feeders)flow/z0.flow.csproj</WorkflowCore>
 
+    <Enums>$(Feeders)enums/z0.enums.csproj</Enums>
     <Graphs>$(Feeders)graphs/z0.graphs.csproj</Graphs>
     <Identify>$(Feeders)identify/z0.identify.csproj</Identify>
     <Kinds>$(Feeders)kinds/z0.kinds.csproj</Kinds>

@@ -5,20 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Gone;
-
+    using static Core;
 
     public class t_cell_type : UnitTest<t_cell_type>
     {    
         public void check_cell_types()
         {
-            Streams.iter(VectorType.Types128, t => check_cell_type(t,n128));
-            Streams.iter(VectorType.Types256, t => check_cell_type(t,n256));
+            iter(VectorType.Types128, t => check_cell_type(t,n128));
+            iter(VectorType.Types256, t => check_cell_type(t,n256));
             
         }
         

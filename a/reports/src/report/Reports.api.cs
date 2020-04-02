@@ -93,7 +93,7 @@ namespace Z0
 
                 if(emitHeader)
                     writer.WriteLine(string.Join(delimiter, records[0].HeaderNames));            
-                Streams.iter(records, r => writer.WriteLine(r.DelimitedText(delimiter)));
+                Control.iter(records, r => writer.WriteLine(r.DelimitedText(delimiter)));
                 
                 return dst;
             }

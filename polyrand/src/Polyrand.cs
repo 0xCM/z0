@@ -4,8 +4,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Core;
-    
+    using static Seed;
+    using static As;
+    using static CastNumeric;
+    using static Literals;
+
     /// <summary>
     /// Produces pseudorandom numeric points and streams predicated on a supplied generator
     /// </summary>

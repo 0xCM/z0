@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Core;
-    
+    using static Seed;
+    using static CastNumeric;    
 
     /// <summary>
     /// Defines a permanent/immutable seed store to support pseudorandom reproducibility

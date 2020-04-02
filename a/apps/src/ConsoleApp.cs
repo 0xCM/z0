@@ -28,6 +28,6 @@ namespace Z0
             => MsgQueue.Accept(msg);
 
         public override void OnFatalError(Exception e)
-            => Streams.iter(MsgQueue.Flush(e), term.print);
+            => Control.iter(MsgQueue.Flush(e), term.print);
     }
 }

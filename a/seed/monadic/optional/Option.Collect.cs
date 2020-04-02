@@ -51,7 +51,6 @@ namespace Z0
                 : (subject.TryGetValue(key, out V value)
                 ? some(value) : none<V>());        
 
-
         /// <summary>
         /// Removes an element from the queue if one exists
         /// </summary>
@@ -59,7 +58,6 @@ namespace Z0
         /// <param name="q">the queue</param>
         public static Option<T> TryDequeue<T>(this ConcurrentQueue<T> q)
             => q.TryDequeue(out T next) ? some(next) : none<T>();
-
 
         /// <summary>
         /// Removes the key-identified value if possible

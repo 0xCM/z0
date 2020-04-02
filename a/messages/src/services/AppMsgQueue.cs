@@ -68,7 +68,7 @@ namespace Z0
         public void Emit(FilePath dst)
         {
             using var writer = dst.Writer();
-            Streams.iter(Dequeue(), msg => writer.WriteLine(msg.Format()));
+            Control.iter(Dequeue(), msg => writer.WriteLine(msg.Format()));
         }
 
         public void Notify(string msg, AppMsgKind? severity = null)

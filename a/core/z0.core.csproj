@@ -24,5 +24,8 @@
     <ProjectReference Include="$(Flow)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Graphs)" />
+    <ProjectReference Include="$(Enums)" />
+    <ProjectReference Include="$(Reports)" />
+
   </ItemGroup>
 </Project>

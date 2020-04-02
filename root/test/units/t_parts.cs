@@ -15,7 +15,7 @@ namespace Z0
     {
         public void list_parts()
         {
-            iter(Part.Known, Resolved);
+            iter(Part.index(), Resolved);
         }
 
         void Show(ExternId src)

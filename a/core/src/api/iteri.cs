@@ -19,7 +19,6 @@ namespace Z0
         /// <param name="f">The receiver</param>
         /// <typeparam name="T">The item type</typeparam>
         public static void iteri<T>(IEnumerable<T> items, Action<int,T> action)
-            => Streams.iteri(items,action);
-
+            => Control.iteri(items,action);
     }
 }

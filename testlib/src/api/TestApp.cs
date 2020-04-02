@@ -124,7 +124,7 @@ namespace Z0
                     ExecExplicit(et, host.Name,results);
                 else
                 {
-                    Streams.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));                                    
+                    Control.iter(Tests(host), t =>  execTime += ExecCase(unit, t, results));                                    
                     PostBenchResult(control.TakeBenchmarks().ToArray());
                 }                
                 clock.Stop();
@@ -251,7 +251,7 @@ namespace Z0
         }
 
         void Run(bool concurrent, params string[] filters)
-            => Streams.iter(Hosts(), h =>  Run(h,filters), concurrent);
+            => Control.iter(Hosts(), h =>  Run(h,filters), concurrent);
         
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
@@ -321,7 +321,7 @@ namespace Z0
             finally
             {            
                 messages.Save(Context);
-                Streams.iter(messages.Where(m => !m.Displayed), term.print);
+                Control.iter(messages.Where(m => !m.Displayed), term.print);
             }
 
             return clock;
@@ -365,8 +365,7 @@ namespace Z0
             finally
             {     
                 collected.Save(Context);
-                Streams.iter(collected.Where(m => !m.Displayed), term.print);       
-                //print(messages);
+                Control.iter(collected.Where(m => !m.Displayed), term.print);       
             }
             return exectime;
         }            
