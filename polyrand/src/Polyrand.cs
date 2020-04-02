@@ -5,7 +5,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Core;
-    using static As;
     
     /// <summary>
     /// Produces pseudorandom numeric points and streams predicated on a supplied generator

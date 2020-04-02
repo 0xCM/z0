@@ -10,7 +10,6 @@ namespace Z0
     using Z0.Mkl;
 
     using static Core;
-    using static As;
 
     public static class VectorOps
     {             

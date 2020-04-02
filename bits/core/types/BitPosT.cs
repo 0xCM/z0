@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static Core;
-	using static As;
 	using static BitPos;
 
 	/// <summary>

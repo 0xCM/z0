@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
-    using static As;
+        
     using static Core;    
     using static VCore;
 
@@ -26,13 +25,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dvec.vxorsl(v8u(x), count));
+                return generic<T>(dvec.vxorsl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dvec.vxorsl(v16u(x), count));
+                return generic<T>(dvec.vxorsl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dvec.vxorsl(v32u(x), count));
+                return generic<T>(dvec.vxorsl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dvec.vxorsl(v64u(x), count));
+                return generic<T>(dvec.vxorsl(v64u(x), count));
             else
                 throw Unsupported.define<T>();
         }
@@ -48,13 +47,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dvec.vxorsl(v8u(x), count));
+                return generic<T>(dvec.vxorsl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dvec.vxorsl(v16u(x), count));
+                return generic<T>(dvec.vxorsl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dvec.vxorsl(v32u(x), count));
+                return generic<T>(dvec.vxorsl(v32u(x), count));
             else if(typeof(T) == typeof(ulong)) 
-                return vgeneric<T>(dvec.vxorsl(v64u(x), count));
+                return generic<T>(dvec.vxorsl(v64u(x), count));
             else
                 throw Unsupported.define<T>();
         }

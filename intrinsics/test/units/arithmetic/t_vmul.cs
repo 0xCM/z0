@@ -9,8 +9,7 @@ namespace Z0
     
     using static Core;
     using static VCore;
-    using static As;
-
+    
     public class tv_mul : t_vinx<tv_mul>
     {
 

@@ -5,12 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
 
-    using static root;
-
+    using static Core;    
     using static OpHelpers;
 
     //[ApiHost("predicate.api", ApiHostKind.Generic)]

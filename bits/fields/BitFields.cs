@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.BitPack)]
+[assembly: PartId(PartId.BitFields)]
 
 namespace Z0.Parts
 {        
-    public sealed class BitPack : Part<BitPack>
+    public sealed class BitFields : Part<BitFields>
     {
         
     }
@@ -19,11 +19,15 @@ namespace Z0.Parts
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
+    using System.Collections.Concurrent;
 
-    [ApiHost]
-    public static partial class BitPack
+    using static Core;
+
+    public static partial class BitField
     {
-        
+
+
     }
+
 }

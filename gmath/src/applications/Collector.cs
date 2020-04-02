@@ -9,8 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static Core;    
-    using static As;
+    using static Core;
 
     /// <summary>
     /// A basic statistical accumulator that accrues information over an arbitrary number of input sequences

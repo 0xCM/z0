@@ -9,7 +9,6 @@ namespace Z0
 
     using static Core;
     
-
     partial class BitMask
     {           
         /// <summary>

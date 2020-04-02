@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Eqz, NumericClosures(NumericKind.Integers)]
         public static T eqz<T>(T a, T b)
             where T : unmanaged
-                => gmath.mul(convert<T>((uint)gmath.eq(a,b)),ones<T>());
+                => gmath.mul(convert<T>((uint)gmath.eq(a,b)),ones<T>()); 
     }
 }

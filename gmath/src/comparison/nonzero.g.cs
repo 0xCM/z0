@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static bit nonz<T>(T a)
             where T : unmanaged
-                => Numeric.nonz(a);
+                => Numeric.nonz(a); 
     }
 }

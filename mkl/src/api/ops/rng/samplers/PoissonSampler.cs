@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static As;
+    using static Core;
 
     sealed class PoissonSampler<T> : Sampler<T, PoissonSpec<T>>
         where T : unmanaged

@@ -21,10 +21,6 @@ namespace Z0
             => ref Unsafe.AsRef(in src);
 
         [MethodImpl(Inline)]
-        public static ref T generic<S,T>(in S src)
-            => ref Unsafe.As<S,T>(ref edit(in src));
-
-        [MethodImpl(Inline)]
         public static T generic<T>(char src)
             => Unsafe.As<char,T>(ref src);                 
 

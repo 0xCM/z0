@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost(ApiHostKind.Generic)]
     public static partial class gfp
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        //public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 
 }

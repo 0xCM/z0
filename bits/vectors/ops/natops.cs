@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Core;
-    
+    using static Core;    
     using static VCore;
 
     using P = parity;

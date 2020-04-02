@@ -36,10 +36,6 @@ namespace Z0
             => Unsafe.As<T,uint>(ref src);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
-        public static ref uint uint32<T>(ref T src)
-            => ref Unsafe.As<T,uint>(ref src);
-
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static long int64<T>(T src)
             => Unsafe.As<T,long>(ref src);
 
@@ -76,6 +72,10 @@ namespace Z0
             => ref Unsafe.As<T,int>(ref src);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static ref uint uint32<T>(ref T src)
+            => ref Unsafe.As<T,uint>(ref src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref long int64<T>(ref T src)
             => ref Unsafe.As<T,long>(ref src);
 
@@ -95,6 +95,11 @@ namespace Z0
         public static sbyte? int8<T>(T? src)
             where T : unmanaged
                 => Unsafe.As<T?, sbyte?>(ref src);
+
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
+        public static byte? uint8<T>(T? src)
+            where T : unmanaged
+                => Unsafe.As<T?, byte?>(ref src);
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static short? int16<T>(T? src)

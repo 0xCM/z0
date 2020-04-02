@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static Core;
-    using static As;
     using D = vdirect;
 
     partial class VCore
@@ -261,7 +260,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                D.vstore(vcast8i(src), ref As.int8(ref dst));
+                D.vstore(vcast8i(src), ref int8(ref dst));
             else if(typeof(T) == typeof(short))
                 D.vstore(vcast16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))
@@ -287,7 +286,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                D.vstore(vcast8u(src), ref As.uint8(ref dst));
+                D.vstore(vcast8u(src), ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
                 D.vstore(vcast16u(src), ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
@@ -301,7 +300,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                D.vstore(vcast8i(src), ref As.int8(ref dst));
+                D.vstore(vcast8i(src), ref int8(ref dst));
             else if(typeof(T) == typeof(short))
                 D.vstore(vcast16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))

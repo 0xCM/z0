@@ -7,8 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;    
-    using static As;
+    using static Core;    
 
     [ApiHost("numeric.ops", ApiHostKind.Generic)]
     public static class NumericOps

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static root;    
+    using static Core;    
 
     /// <summary>
     /// Represents a base-2 polynomial of degree N. The represented polynomial is of the form

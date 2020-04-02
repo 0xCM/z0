@@ -8,7 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Core;
-    using static As;
 
     sealed class GammaSampler<T> : Sampler<T, GammaSpec<T>>
         where T : unmanaged

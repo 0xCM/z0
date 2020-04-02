@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static As;
+    using static Core;
 
     sealed class UniformSampler<T> : Sampler<T, UniformSpec<T>>
         where T : unmanaged

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Core;
 
-    public static class BitField
+    public static partial class BitField
     {
         /// <summary>
         /// Defines a bitfield predicated on explicitly-specified segments

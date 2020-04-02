@@ -11,7 +11,7 @@ namespace Z0
 
     using static Core;
     using static VCore;
-    using static As;
+    
     
     partial class gvec
     {
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vmakemask<T>(ushort src)
             where T : unmanaged
-                => vgeneric<T>(v8u(dvec.vmakemask(src)));
+                => generic<T>(v8u(dvec.vmakemask(src)));
 
         /// <summary>
         /// Distributes each bit of the source to a specified bit of each byte in a 128-bit target vector
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vmakemask<T>(ushort src, byte index)
             where T : unmanaged
-                => vgeneric<T>(v8u(dvec.vmakemask(src, index)));
+                => generic<T>(v8u(dvec.vmakemask(src, index)));
 
         /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vmakemask<T>(uint src)
             where T : unmanaged
-                => vgeneric<T>(v8u(dvec.vmakemask(src)));
+                => generic<T>(v8u(dvec.vmakemask(src)));
 
         /// <summary>
         /// Distributes each bit of the source to a specified bit of each byte in a 256-bit target vector
@@ -51,6 +51,6 @@ namespace Z0
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vmakemask<T>(uint src, byte index)
             where T : unmanaged
-                => vgeneric<T>(v8u(dvec.vmakemask(src,index)));
+                => generic<T>(v8u(dvec.vmakemask(src,index)));
     }
 }

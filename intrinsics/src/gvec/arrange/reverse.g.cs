@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
+    using System.Runtime.Intrinsics.X86;    
     
-    using static As;
     using static Core;
     using static VCore;
 
@@ -40,13 +39,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dvec.vreverse(v8u(x)));
+                return generic<T>(dvec.vreverse(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dvec.vreverse(v16u(x)));
+                return generic<T>(dvec.vreverse(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dvec.vreverse(v32u(x)));
+                return generic<T>(dvec.vreverse(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dvec.vreverse(v64u(x)));
+                return generic<T>(dvec.vreverse(v64u(x)));
             else
                 return vreverse_i(x);
         }
@@ -56,13 +55,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dvec.vreverse(v8i(x)));
+                return generic<T>(dvec.vreverse(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dvec.vreverse(v16i(x)));
+                return generic<T>(dvec.vreverse(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dvec.vreverse(v32i(x)));
+                return generic<T>(dvec.vreverse(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dvec.vreverse(v64i(x)));
+                return generic<T>(dvec.vreverse(v64i(x)));
             else
                 throw Unsupported.define<T>();
         }
@@ -72,13 +71,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dvec.vreverse(v8u(x)));
+                return generic<T>(dvec.vreverse(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dvec.vreverse(v16u(x)));
+                return generic<T>(dvec.vreverse(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dvec.vreverse(v32u(x)));
+                return generic<T>(dvec.vreverse(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dvec.vreverse(v64u(x)));
+                return generic<T>(dvec.vreverse(v64u(x)));
             else
                 return vreverse_i(x);
         }
@@ -88,13 +87,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dvec.vreverse(v8i(x)));
+                return generic<T>(dvec.vreverse(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dvec.vreverse(v16i(x)));
+                return generic<T>(dvec.vreverse(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dvec.vreverse(v32i(x)));
+                return generic<T>(dvec.vreverse(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dvec.vreverse(v64i(x)));
+                return generic<T>(dvec.vreverse(v64i(x)));
             else
                 throw Unsupported.define<T>();
         }

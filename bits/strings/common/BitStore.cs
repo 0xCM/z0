@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static root;
-    using static As;     
-
+    using static Core;
+    using static AsIn;
+         
     public static class BitStore
     {
         /// <summary>

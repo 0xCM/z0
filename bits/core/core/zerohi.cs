@@ -8,12 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
 
-    using static System.Runtime.Intrinsics.X86.Bmi1;
-    using static System.Runtime.Intrinsics.X86.Bmi1.X64;
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
-    using static root;
+    using static Core;
 
     partial class Bits
     {                

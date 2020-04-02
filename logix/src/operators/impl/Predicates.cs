@@ -6,7 +6,6 @@ namespace Z0.Logix
 {
     using System;
     using System.Security;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Defines the canonical shape of a bitwise shift function

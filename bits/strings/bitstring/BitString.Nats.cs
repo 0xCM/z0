@@ -5,12 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-
-    using static root;
-
+    
     public static class BitStringNatX
     {
        /// <summary>

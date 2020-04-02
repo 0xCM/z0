@@ -270,7 +270,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval<U> As<U>()
             where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new Interval<U>(Z0.As.generic<T,U>(in Left), Z0.As.generic<T,U>(in Right), Kind);
+                => new Interval<U>(Z0.AsIn.generic<T,U>(in Left), Z0.AsIn.generic<T,U>(in Right), Kind);
 
         public string Format()
             => string.Concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);

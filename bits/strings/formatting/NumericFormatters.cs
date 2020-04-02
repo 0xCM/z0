@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static root;         
+    using static Core;         
 
     public static class NumericFormatters
     {
@@ -110,7 +110,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<F64Formatter,F>(default(F64Formatter));
             else
-                throw unsupported<F>();
+                throw Unsupported.define<F>();
         }
                      
         readonly struct U8Formatter : INumericFormatter<U8Formatter, byte>

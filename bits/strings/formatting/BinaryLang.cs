@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
     public sealed class BinaryLanguage : Language<BinaryLanguage, BinaryAlphabet, BitString>

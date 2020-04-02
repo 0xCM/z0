@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Core;    
 
     readonly struct NumericBitOps<T>
         where T : unmanaged
