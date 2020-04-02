@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Represents a method (value, not type) parameter 
     /// </summary>
-    public class MethodParameter : ClrArtifact
+    public class MethodParameter : SigArtifact
     {        
         public MethodParameter(TypeSig Type, ParamRefKind Variance, string ParamName, int Position)
             : base(ParamName)            

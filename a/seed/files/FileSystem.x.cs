@@ -150,6 +150,15 @@ namespace Z0
         public static IEnumerable<FilePath> WithExtensions(this IEnumerable<FilePath> src, params FileExtension[] extensions)
             => src.Where(path => extensions.Any(e => e == path.Extension));
 
+        public static bool Matches(this FilePath src, params string[] substrings)
+            => substrings.Any(s => src.FullPath.Contains(s,StringComparison.InvariantCultureIgnoreCase));
+
+        public static IEnumerable<FilePath> Include(this IEnumerable<FilePath> src, params string[] substrings)
+            => src.Where(path => path.Matches(substrings));
+
+        public static IEnumerable<FilePath> Exclude(this IEnumerable<FilePath> src, params string[] substrings)
+            => src.Where(path => !path.Matches(substrings));
+
         public static FilePath CreateParentIfMissing(this FilePath src)
         {
             src.FolderPath.CreateIfMissing();

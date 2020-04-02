@@ -56,6 +56,9 @@ namespace Z0
                 return dst + BaseSuffix;
         }
 
+        [MethodImpl(Inline)]
+        public static string Format(this ExternId id)
+            => id.ToString().ToLower();        
 
         [MethodImpl(Inline)]
         public static bool IsTest(this PartId a)

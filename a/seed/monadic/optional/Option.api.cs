@@ -13,9 +13,32 @@ namespace Z0
     public static class Option
     {
         /// <summary>
+        /// Creates an option from a reference type instance, returning a valued option if the
+        /// refernce is not null; otherwise, returns none
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static Option<T> from<T>(T src)
+            where T : class
+                => src != null ? some(src) : none<T>();
+
+        /// <summary>
+        /// Creates an option from a value type, returning a valued option if the
+        /// refernce is not null; otherwise, returns none
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static Option<T> from<T>(T? src)
+            where T : struct
+                => src.HasValue ? some(src.Value) : none<T>();
+
+        /// <summary>
         /// Defines a non-valued option
         /// </summary>
         /// <typeparam name="T">The value type, if the value existed</typeparam>
+        [MethodImpl(Inline)]
         public static Option<T> none<T>()
             => Option<T>.None();
 
@@ -24,6 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The value</param>
         /// <typeparam name="T">The type of the extant value</typeparam>
+        [MethodImpl(Inline)]
         public static Option<T> some<T>(T value)
             => Option<T>.Some(value);
 
@@ -32,6 +56,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type of value</typeparam>
         /// <param name="value">The value to lift into option-space</param>
+        [MethodImpl(Inline)]
         public static Option<T> eval<T>(T value)
             where T : class
                 => value is null ? none<T>()  : some(value);
@@ -41,6 +66,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type of value</typeparam>
         /// <param name="value">The value to lift into option-space</param>
+        [MethodImpl(Inline)]
         public static Option<T> eval<T>(T? value)
             where T : struct
                 => value.HasValue ? some(value.Value) : none<T>();
@@ -149,8 +175,7 @@ namespace Z0
         /// <typeparam name="Y">The output type</typeparam>
         /// <param name="x">The input value</param>
         /// <param name="f">The function to evaluate</param>
-        [MethodImpl(Inline)]   
-        public static Option<Y> Try<X, Y>(X x, Func<X, Y> f, Action<Exception> handler = null)
+        public static Option<Y> Try<X, Y>(X x, Func<X, Y> f, Action<X,Exception> handler = null)
         {
             try
             {
@@ -158,7 +183,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                Handle(e,handler);
+                Handle(e,x,handler);
                 return none<Y>();
             }
         }
@@ -174,8 +199,21 @@ namespace Z0
 
         static void Handle(Exception e, Action<Exception> handler)
         {
-            if(handler != null) handler.Invoke(e); else Console.Error.WriteLine(e);
+            if(handler != null) 
+                handler.Invoke(e); 
+            else 
+                Console.Error.WriteLine(e);
         }
 
+        static void Handle<X>(Exception e, X x, Action<X,Exception> handler)
+        {
+            if(handler != null) 
+                handler.Invoke(x,e); 
+            else 
+            {
+                var msg = $"Exeption raised during {x} evaluation: {e}";
+                Console.WriteLine(msg);
+            }            
+        }
     }
 }

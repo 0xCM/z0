@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IArtifactModel
-    {
-        string Name {get;}
+    public interface IClrArtifact : IArtifactModel
+    {        
+        
     }
 
-    public interface IArtifactModel<T> : IArtifactModel
+    public interface IClrArtifact<T> : IClrArtifact
     {
-
+        T Subject {get;}    
     }
 }

@@ -520,7 +520,7 @@ namespace Z0
         const string M1FieldFilter = "m1";
 
         public static IEnumerable<(int i, ulong vallue)> M1Values
-            => typeof(Pow2).LiteralValues<ulong>(M1FieldFilter);
+            => typeof(Pow2).LiteralValueIndex<ulong>(M1FieldFilter);
 
         [MethodImpl(Inline)]
         public static IEnumerable<(int i, T value)> m1Values<T>()
@@ -532,13 +532,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))                
-                return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 8);
+                return typeof(Pow2).LiteralValueIndex<T>(M1FieldFilter, 8);
             else if(typeof(T) == typeof(ushort))                
-                return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 16);
+                return typeof(Pow2).LiteralValueIndex<T>(M1FieldFilter, 16);
             else if(typeof(T) == typeof(uint))                
-                return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 33);
+                return typeof(Pow2).LiteralValueIndex<T>(M1FieldFilter, 33);
             else if(typeof(T) == typeof(ulong))
-                return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 64);
+                return typeof(Pow2).LiteralValueIndex<T>(M1FieldFilter, 64);
             else
                 return values_m1_i<T>();
         }
@@ -548,13 +548,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))                
-                return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 7);
+                return typeof(Pow2).LiteralValueIndex<T>(M1FieldFilter, 7);
             else if(typeof(T) == typeof(short))                
-                return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 15);
+                return typeof(Pow2).LiteralValueIndex<T>(M1FieldFilter, 15);
             else if(typeof(T) == typeof(int))                
-                return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 32);
+                return typeof(Pow2).LiteralValueIndex<T>(M1FieldFilter, 32);
             else if(typeof(T) == typeof(long))                
-                return typeof(Pow2).LiteralValues<T>(M1FieldFilter, 63);
+                return typeof(Pow2).LiteralValueIndex<T>(M1FieldFilter, 63);
             else
                 throw new Exception("");
         }

@@ -12,6 +12,10 @@ namespace Z0
 
         public static FileExtension Asm =>  FileExtension.Define("asm");
 
+        public static FileExtension Dll =>  FileExtension.Define("dll");
+
+        public static FileExtension Exe =>  FileExtension.Define("exe");
+
         public static FileExtension Il =>  FileExtension.Define("il");
 
         public static FileExtension Hex =>  FileExtension.Define("hex");

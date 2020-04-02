@@ -9,9 +9,9 @@ namespace Z0
     /// <summary>
     /// Defines a root abstraction for types that define succinct representatives of .Net artifacts
     /// </summary>
-    public abstract class ClrArtifact
+    public abstract class SigArtifact
     {
-        protected ClrArtifact(string Name, int? Id = null)
+        protected SigArtifact(string Name, int? Id = null)
         {
             this.Name = Name;
             this.Id = Id ?? 0;

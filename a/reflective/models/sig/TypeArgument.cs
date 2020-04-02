@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public class TypeArgument : ClrArtifact
+    public class TypeArgument : SigArtifact
     {
         public static TypeArgument Define(Type target, TypeParameter param, Type arg)
             => new TypeArgument(target, param, arg);

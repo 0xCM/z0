@@ -5,12 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
-    public interface IMemberArtifact : IArtifactModel
+    using static Seed;
+
+    partial class Core
     {
-        MemberFacets Facets {get;}
+        [MethodImpl(Inline)]
+        public static ClrType<T> type<T>()
+            => ClrType.From<T>();
     }
-
 }

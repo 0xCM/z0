@@ -29,6 +29,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static HashSet<T> set<T>(params T[] src)
             => new HashSet<T>(src);
-
     }
 }

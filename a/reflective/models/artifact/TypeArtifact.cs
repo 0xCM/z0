@@ -29,8 +29,6 @@ namespace Z0
         
         public string Namespace {get;}
 
-        TypeFacets ITypeArtifact.Facets 
-            => (TypeFacets)(object)Facets;
 
         public IEnumerable<IMemberArtifact> Members 
             => members;

@@ -47,6 +47,9 @@ namespace Z0
         internal static int size<T>()
             => Unsafe.SizeOf<T>();
 
+        [MethodImpl(Inline)]
+        internal static Type type<T>()
+            => typeof(T);    
     }
 
     public static partial class XTend

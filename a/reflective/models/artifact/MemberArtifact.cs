@@ -17,8 +17,5 @@ namespace Z0
         {
 
         }
-
-        MemberFacets IMemberArtifact.Facets 
-            => (MemberFacets)(object)Facets;
     }
 }

@@ -3,8 +3,6 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
 [AttributeUsage(AttributeTargets.Assembly)]
 public class PartIdAttribute : Attribute

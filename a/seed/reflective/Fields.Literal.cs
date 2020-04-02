@@ -17,5 +17,6 @@ namespace Z0
         /// <param name="src">The source stream</param>
         public static IEnumerable<FieldInfo> Literal(this IEnumerable<FieldInfo> src)
             => src.Where(x => x.IsLiteral);
+
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static root;
+    using static Core;
 
     public class t_opuri : UnitTest<t_opuri>
     {

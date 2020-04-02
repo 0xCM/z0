@@ -25,43 +25,6 @@ namespace Z0
         Internal = Pow2.T13,
     }
 
-    [Flags]
-    public enum TypeFacets : ulong
-    {
-        None = CodeFacets.None,
-
-        Const = CodeFacets.Const,
-
-        Static = CodeFacets.Static,
-
-        Public = CodeFacets.Public,
-
-        Private = CodeFacets.Private,
-
-        Protected = CodeFacets.Protected,
-
-        Internal = CodeFacets.Internal,
-
-    }
-
-    [Flags]
-    public enum MemberFacets : ulong
-    {
-        None = CodeFacets.None,
-
-        Const = CodeFacets.Const,
-
-        Static = CodeFacets.Static,
-
-        Public = CodeFacets.Public,
-
-        Private = CodeFacets.Private,
-
-        Protected = CodeFacets.Protected,
-
-        Internal = CodeFacets.Internal,
-
-    }
 
     [Flags]
     public enum FieldFacets : ulong
