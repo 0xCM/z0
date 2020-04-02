@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     
-    using static Kinds;
+    using static Seed;
 
     public readonly struct Vec128Kind : IVectorType
     {     

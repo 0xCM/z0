@@ -10,7 +10,6 @@ namespace Z0
     using System.Globalization;
     using System.Linq;
 
-
     using static Seed;
 
     public static class HexParser

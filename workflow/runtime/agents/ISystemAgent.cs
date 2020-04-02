@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Threading.Tasks;
-    using System.Collections.Generic;
 
-    using static root;
+    using static Core;
 
     /// <summary>
     /// Characterizes a thread of control with independent volition

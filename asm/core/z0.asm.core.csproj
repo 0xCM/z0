@@ -7,14 +7,12 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />    
-    <ProjectReference Include="$(Domain)" />
-    <ProjectReference Include="$(Graphs)" />
+    <ProjectReference Include="$(Reports)" />
 
     <ProjectReference Include="$(AsmTypes)" />
     <ProjectReference Include="$(AsmModels)" />    
 
     <ProjectReference Include="$(Identity)" />    
-    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
 </Project>

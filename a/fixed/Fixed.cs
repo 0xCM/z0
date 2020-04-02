@@ -19,10 +19,16 @@ namespace Z0
 
         
     }
-    // public static class Fixed
-    // {
-    //     public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
-    // }
+    public static partial class XRng
+    {
+
+    }
+
+    public static partial class XTend
+    {
+
+        
+    }
 
 }

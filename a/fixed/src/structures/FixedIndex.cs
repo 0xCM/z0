@@ -8,7 +8,9 @@ namespace Z0
     using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Core;
+    using static Seed;
+    using static refs;
+    using static Fixed;
 
     public static class FixedIndexes
     {

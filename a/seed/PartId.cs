@@ -230,7 +230,7 @@ public enum PartId : ulong
     
     Numeric = 830,
 
-    Domain = 832,
+    Reports = 832,
 
     Errors = 834,    
 
@@ -247,6 +247,8 @@ public enum PartId : ulong
     Typed = 846,
 
     Checks = 848,
+    
+    Flow = 850,
 
     Z = 1024,
 

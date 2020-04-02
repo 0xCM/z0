@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Kinds;
+    using static Seed;
     using static Widths;
 
     public static class VectorType

@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static BlockedKind;
     using static BlockedTypeKinds;
     using static Kinds;
+
     using TW = TypeWidth;
 
     /// <summary>

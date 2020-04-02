@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Reports)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 </Project>

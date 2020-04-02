@@ -29,7 +29,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Owner.IsNone()  && text.empty(Name);
+            get => Owner == 0  && text.empty(Name);
         }
 
         ApiHostUri INullary<ApiHostUri>.Zero => Empty;

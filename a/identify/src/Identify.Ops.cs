@@ -9,7 +9,9 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Reflection;
-    
+
+    using static Seed;
+        
     partial class Identify
     {
         /// <summary>

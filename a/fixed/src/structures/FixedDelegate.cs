@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Emit;
 
-    using static Fixed;
+    using static Seed;
 
     public readonly struct FixedDelegate
     {

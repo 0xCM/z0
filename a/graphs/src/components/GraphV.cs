@@ -9,7 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
+    using static CastNumeric;
 
     /// <summary>
     /// Defines a directed graph parameterized by the vertex index type

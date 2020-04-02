@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Numeric)" />  
+    <ProjectReference Include="$(Core)" />  
     <ProjectReference Include="$(Math)" />
-    <ProjectReference Include="$(Interval)" />  
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Fixed;
+    using static Seed;
 
     [StructLayout(LayoutKind.Sequential)]
     [Fixed(FixedWidth.W512, false, FixedWidth.NumericWidths)]

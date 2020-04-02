@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Tuples)" />
+
   </ItemGroup>
 
 </Project>

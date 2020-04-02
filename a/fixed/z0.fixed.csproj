@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Interval)" />
-    <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Memories)" />
     <ProjectReference Include="$(Tuples)" />
     <ProjectReference Include="$(Kinds)" />
   </ItemGroup>

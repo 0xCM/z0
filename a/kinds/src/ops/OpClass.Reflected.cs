@@ -11,7 +11,6 @@ namespace Z0
     using System.Reflection;
 
     using GS = GenericStateKind;
-    using static Seed;
 
     public static partial class ReflectedClass
     {

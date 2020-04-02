@@ -32,9 +32,9 @@ namespace Z0
 
         AssemblyUri INullary<AssemblyUri>.Zero => Empty;        
         
-        [MethodImpl(Inline)]
-        public static ParseResult<AssemblyUri> Parse(string text)
-            => from id in Enums.parse<PartId>(text) select AssemblyUri.Define(id);
+        // [MethodImpl(Inline)]
+        // public static ParseResult<AssemblyUri> Parse(string text)
+        //     => from id in Enums.parse<PartId>(text) select AssemblyUri.Define(id);
                 
         [MethodImpl(Inline)]
         public static AssemblyUri Define(PartId id)

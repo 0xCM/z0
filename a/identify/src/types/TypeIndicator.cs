@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Identify;
+    using static Seed;
 
     /// <summary>
     /// Along with the associated kind, partitions numberic types into three parts: signed, unsigned and float

@@ -7,9 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Identify)" />
-    <ProjectReference Include="$(Interval)" />
   </ItemGroup>
 
 </Project>

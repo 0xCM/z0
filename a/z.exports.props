@@ -2,21 +2,13 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
+
     <ProjectReference Include="$(Apps)" />  
-    <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Api)" />        
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Custom)" />
-    <ProjectReference Include="$(Domain)" />
-    <ProjectReference Include="$(Fixed)" />
-    <ProjectReference Include="$(Identify)" />  
-    <ProjectReference Include="$(Kinds)" />  
-    <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Reports)" />
     <ProjectReference Include="$(SFuncs)" />    
-    <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Tuples)" />
-    <ProjectReference Include="$(Interval)" />
-    <ProjectReference Include="$(Typed)" />
-    <ProjectReference Include="$(Checks)" />
   </ItemGroup>
 
 </Project>

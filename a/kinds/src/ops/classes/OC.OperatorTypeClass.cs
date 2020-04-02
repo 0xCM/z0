@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Kinds;
-
     public readonly struct OperatorTypeClass
     {
         public static OperatorTypeClass None => Define(typeof(void), OperatorClass.None);

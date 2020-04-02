@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Fixed;
+    using static Seed;
 
     [Fixed(FixedWidth.W32,false, FixedWidth.NumericWidths)]
     public struct Fixed64 : IFixedNumeric<Fixed64,ulong>, IEquatable<Fixed64>

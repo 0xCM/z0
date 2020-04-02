@@ -20,7 +20,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Core;
+    using static Seed;
 
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -28,11 +28,6 @@ namespace Z0
 
     public static partial class Identify
     {
-        public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
-        [MethodImpl(Inline)]
-        public static Option<TypeIdentity> ToOption(this TypeIdentity src)
-            => src.IsEmpty ? none<TypeIdentity>() : some(src);
 
 
     }

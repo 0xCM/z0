@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
-    using static Core;
+    using static Seed;
     using static Graphs;
 
     public readonly struct ArrowPath<A,B> : IMixedPath<A,B>, IFormattable<ArrowPath<A,B>>, IEquatable<ArrowPath<A,B>>

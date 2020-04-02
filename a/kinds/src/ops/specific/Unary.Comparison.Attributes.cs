@@ -10,7 +10,6 @@ namespace Z0
 
     using A = OpKindAttribute;
 
-
     public sealed class NegativeAttribute : A { public NegativeAttribute() : base(Negative) {} }
 
     public sealed class PositiveAttribute : A { public PositiveAttribute() : base(Positive) {} }

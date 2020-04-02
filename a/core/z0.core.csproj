@@ -7,15 +7,22 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Typed)" />
-    <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Collective)" />
-    <ProjectReference Include="$(Reflective)" />
-    <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(Messages)" />
-    <ProjectReference Include="$(Tuples)" />
+
     <ProjectReference Include="$(Checks)" />
+    <ProjectReference Include="$(Collective)" />
+    <ProjectReference Include="$(Memories)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Messages)" />
     <ProjectReference Include="$(Numeric)" />
+    <ProjectReference Include="$(Reflective)" />
+    <ProjectReference Include="$(Symbolic)" />
+    <ProjectReference Include="$(Typed)" />
+    <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Textual)" />
+    <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Graphs)" />
   </ItemGroup>
 </Project>

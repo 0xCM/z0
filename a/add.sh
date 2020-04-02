@@ -52,9 +52,6 @@ bash $Cmd
 export ProjectId=domain
 bash $Cmd
 
-export ProjectId=errors
-bash $Cmd
-
 export ProjectId=core
 bash $Cmd
 
@@ -64,13 +61,16 @@ bash $Cmd
 export ProjectId=messages
 bash $Cmd
 
-export ProjectId=interval
-bash $Cmd
-
 export ProjectId=typed
 bash $Cmd
 
 export ProjectId=checks
+bash $Cmd
+
+export ProjectId=flow
+bash $Cmd
+
+export ProjectId=reports
 bash $Cmd
 
 export ProjectId=z

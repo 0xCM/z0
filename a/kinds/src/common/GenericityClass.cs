@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Kinds;
-
     using T = GenericTargetKind;
     using S = GenericStateKind;
 

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     
+    using static Seed;
     using static Graphs;
 
     public static class Arrows

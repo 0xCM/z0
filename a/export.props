@@ -10,11 +10,14 @@
     <Collective>$(Feeders)collective/z0.collective.csproj</Collective>
     <Core>$(Feeders)core/z0.core.csproj</Core>
     <Custom>$(Feeders)custom/z0.custom.csproj</Custom>
-    <Domain>$(Feeders)domain/z0.domain.csproj</Domain>
+    <Reports>$(Feeders)reports/z0.reports.csproj</Reports>
     <Fixed>$(Feeders)fixed/z0.fixed.csproj</Fixed>
+
+    <Flow>$(Feeders)flow/z0.flow.csproj</Flow>
+    <WorkflowCore>$(Feeders)flow/z0.flow.csproj</WorkflowCore>
+
     <Graphs>$(Feeders)graphs/z0.graphs.csproj</Graphs>
     <Identify>$(Feeders)identify/z0.identify.csproj</Identify>
-    <Interval>$(Feeders)interval/z0.interval.csproj</Interval>
     <Kinds>$(Feeders)kinds/z0.kinds.csproj</Kinds>
     <Memories>$(Feeders)memories/z0.memories.csproj</Memories>
     <Messages>$(Feeders)messages/z0.messages.csproj</Messages>
@@ -26,7 +29,6 @@
     <Time>$(Feeders)time/z0.time.csproj</Time>
     <Tuples>$(Feeders)tuples/z0.tuples.csproj</Tuples>
     <Typed>$(Feeders)typed/z0.typed.csproj</Typed>
-
   </PropertyGroup>
 
 </Project>

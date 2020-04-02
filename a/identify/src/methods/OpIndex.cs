@@ -22,7 +22,7 @@ namespace Z0
         readonly OpIdentity[] Duplicates;
 
         internal static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new Exception(Core.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
+            => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 
         internal OpIndex(IEnumerable<(OpIdentity,T)> src, bool deduplicate)
         {

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Fixed;
+    using static Seed;
 
     [StructLayout(LayoutKind.Sequential)]
     [Fixed(FixedWidth.W128,false,FixedWidth.NumericWidths)]

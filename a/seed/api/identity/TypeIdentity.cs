@@ -61,5 +61,10 @@ namespace Z0
 
         public override string ToString()
             => Identified.Format();        
+
+        [MethodImpl(Inline)]
+        public Option<TypeIdentity> ToOption()
+            => IsEmpty ? Option.none<TypeIdentity>() : Option.some(this);
+
     }
 }

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static OpClass;
-
     using C = OpClass;
 
     partial class OpClasses

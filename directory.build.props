@@ -82,7 +82,6 @@
     <ValidityCore>$(TopDir)validity/core/z0.validity.core.csproj</ValidityCore>
     <ValidityVectors>$(TopDir)validity/vectors/z0.validity.vectors.csproj</ValidityVectors>
     <VBits>$(TopDir)bits/vbits/z0.bits.vbits.csproj</VBits>
-    <WorkflowCore>$(TopDir)workflow/core/z0.workflow.core.csproj</WorkflowCore>
     <WorkflowRuntime>$(TopDir)workflow/runtime/z0.workflow.runtime.csproj</WorkflowRuntime>
     <Feeders>$(TopDir)a/</Feeders>
     <Z>$(TopDir)a/z/z0.z.csproj</Z>

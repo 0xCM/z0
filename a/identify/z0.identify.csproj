@@ -6,10 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Textual)" />
-    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Reflective)" />
     <ProjectReference Include="$(Tuples)" />
+    <ProjectReference Include="$(Kinds)" />
+    <ProjectReference Include="$(Typed)" />
 
   </ItemGroup>
 

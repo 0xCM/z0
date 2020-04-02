@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Kinds;
+    using static Seed;
 
     /// <summary>
     /// A parametric type that, when closed, reifies a  numeric width classification

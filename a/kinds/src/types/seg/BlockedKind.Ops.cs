@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Kinds;
+    using static Seed;
 
     public static class BlockedKindOps
     {

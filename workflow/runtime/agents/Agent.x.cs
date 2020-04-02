@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static root;
+    using static Core;
 
     public static class AgentX
     {

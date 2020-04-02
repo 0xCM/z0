@@ -10,6 +10,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Concurrent;
 
+    using static Seed;
+    
     using NK = NumericKind;
     using ID = NumericTypeId;
 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Fixed;
+    using static Seed;
 
     [Fixed(FixedWidth.W8,false,FixedWidth.W8)]
     public struct Fixed8 : IFixedNumeric<Fixed8, byte>, IEquatable<Fixed8>

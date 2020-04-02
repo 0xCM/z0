@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Kinds;
+    using static Seed;
     using static BlockedKind;
 
     public readonly struct BlockedTypeKind : ITypeKind<BlockedTypeKind>

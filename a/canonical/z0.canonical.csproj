@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <!-- <ProjectReference Include="$(Core)" /> -->
   </ItemGroup>
 
 </Project>

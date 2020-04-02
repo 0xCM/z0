@@ -21,14 +21,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Time;
+    using static Seed;
 
     public static class Time 
-    {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
-        internal const string Kernel32 = "kernel32.dll";
-        
+    {        
+        [MethodImpl(Inline)]
         internal static T[] array<T>(params T[] src)
             => src;
     }

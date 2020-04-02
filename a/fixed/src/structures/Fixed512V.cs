@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Core;
+    using static Seed;
 
     [StructLayout(LayoutKind.Sequential)]
     [Fixed(FixedWidth.W512, false, FixedWidth.NumericWidths)]
@@ -32,7 +32,7 @@ namespace Z0
             => new Fixed512V(x.x0,x.x1);
 
         public string Format() 
-            => array(X0,X1).FormatDataList();
+            => Arrays.from(X0,X1).FormatDataList();
 
         [MethodImpl(Inline)]
         public bool Equals(Fixed512V src)

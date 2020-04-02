@@ -15,7 +15,6 @@ namespace Z0
     public static partial class OpKinds
     {
 
-
     }
 
     public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(Identity) {} }
